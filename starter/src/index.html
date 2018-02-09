@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= htmlWebpackPlugin.options.starkAppMetadata.description %>">
+  <!-- base url -->
+  <!-- all relative URLs will use this as base URL: https://developer.mozilla.org/en/docs/Web/HTML/Element/base -->
+  <!-- necessary for HTML5 History API which adds support for pretty URLs (see app.ts) -->
+  <base href="<%= htmlWebpackPlugin.options.starkAppConfig.baseUrl %>">
+  <!--TODO uncomment this when HtmlElementsPlugin is enabled -->
+  <!--< % if (webpackConfig.htmlElements.headTags) { % >-->
+  <!-- Configured Head Tags  -->
+  <!--< % = webpackConfig.htmlElements.headTags % >-->
+  <!--< % } % >-->
+
+
+  <!--< &= htmlWebpackPlugin.files.webpackManifest & >-->
+
+  <title><%= htmlWebpackPlugin.options.starkAppMetadata.name %></title>
+
+  <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+  <!-- Webpack Dev Server reload -->
+  <script src="/webpack-dev-server.js"></script>
+  <% } %>
+
+  <!-- CSS will be injected by webpack here -->
+  <!-- Preload link tags will be injected by webpack here -->
+
+</head>
+
+<body>
+
+<app>
+  Loading...
+</app>
+
+<!-- Scripts will be injected by webpack here -->
+</body>
+</html>

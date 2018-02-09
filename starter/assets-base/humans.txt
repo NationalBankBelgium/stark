@@ -1,0 +1,26 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+  National Bank of Belgium - https://www.nbb.be
+
+# THANKS
+
+  We need great developers! Check out https://jobs.nbb.be
+
+# TECHNOLOGY COLOPHON
+
+  HTML5
+  CSS3
+  Material Design
+  Angular Material
+  Angular
+  TypeScript
+  ES2015
+  Redux
+  RxJS
+  NodeJS
+  NPM
+  Webpack
+
