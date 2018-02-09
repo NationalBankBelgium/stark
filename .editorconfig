@@ -19,3 +19,12 @@ end_of_line = crlf
 [{package.json,.travis.yml}]
 indent_style = space
 indent_size = 2
+
+[**.{css, pcss, scss}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
+

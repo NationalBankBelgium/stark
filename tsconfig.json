@@ -59,11 +59,7 @@
   },
   "exclude": [
 	"node_modules",
-	"dist",
-	"core-module.ts",
-	"ui-module.ts",
-	"testing-e2e.ts",
-	"testing-unit.ts"
+	"dist"
   ],
   "awesomeTypescriptLoaderOptions": {
 	"forkChecker": true,

@@ -2,6 +2,8 @@
  * @author: @AngularClass
  */
 
+const helpers = require('./helpers');
+
 module.exports = function (config) {
   var testWebpackConfig = require('./webpack.test.js')();
 
@@ -34,7 +36,7 @@ module.exports = function (config) {
      * we are building the test environment in ./spec-bundle.js
      */
     files: [
-      { pattern: './config/spec-bundle.js', watched: false },
+      { pattern: helpers.rootStark('./config/spec-bundle.js'), watched: false },
       { pattern: './src/assets/**/*', watched: false, included: false, served: true, nocache: false }
     ],
 
@@ -49,7 +51,8 @@ module.exports = function (config) {
      * Preprocess matching files before serving them to the browser
      * available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
      */
-    preprocessors: { './config/spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
+    // TODO Change this absolute path to a relative one (with helpers ?)
+    preprocessors: { './node_modules/@nationalbankbelgium/stark-build/config/spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
 
     /**
      * Webpack Config at ./webpack.test.js

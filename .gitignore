@@ -1,31 +1,37 @@
-.DS_STORE
-
+# Build
 /dist/
-bazel-*
-e2e_test.*
-node_modules
-bower_components
-tools/gulp-tasks/cldr/cldr-data/
+!dist/
 
-# Include when developing application packages.
-pubspec.lock
-.c9
+# Reports directory
+reports/
+
+# NPM
+package-lock.json
+
+# Logs
+./logs/
+*.log
+
+# Node
+node_modules/
+
+# OS generated files #
+Desktop.ini
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Icon?
+
+# JetBrains IDEs
+*.iml
 .idea/
-.settings/
-*.swo
-modules/.settings
-.vscode
-modules/.vscode
+.webstorm/
+*.swp
 
-# Don't check in secret files
-*secret.js
+# Sublime text
+.sublime-gulp.cache
 
-# Ignore npm/yarn debug log
-npm-debug.log
-yarn-error.log
-
-# build-analytics
-.build-analytics
-
-# rollup-test output
-/modules/rollup-test/dist/
+# Runtime data
+pids
+*.pid
+*.seed

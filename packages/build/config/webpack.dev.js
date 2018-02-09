@@ -18,7 +18,7 @@ const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin');
 const WriteFilePlugin = require("write-file-webpack-plugin");
 
 // Dev custom config
-const webpackCustomConfig = require(helpers.root("app-config/webpack-custom-config.dev.json"));
+const webpackCustomConfig = require(helpers.root("config/webpack-custom-config.dev.json"));
 
 /**
  * Webpack configuration
