@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /*
@@ -36,7 +36,7 @@ type StoreType = {
 };
 
 /**
- * `AppModule` is the main entry point into Angular2's bootstraping process
+ * `AppModule` is the main entry point into Angular2's bootstrapping process
  */
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -56,8 +56,7 @@ type StoreType = {
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {
-      useHash: Boolean(history.pushState) === false,
-      preloadingStrategy: PreloadAllModules
+      useHash: Boolean(history.pushState) === false
     }),
 
     /**
