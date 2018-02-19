@@ -55,7 +55,7 @@ module.exports = function () {
     "object-src 'self'",
     "plugin-types application/pdf",  // valid mime-types for plugins invoked via <object> and <embed>
     // "script-src 'self'", // FIXME: enable as soon as the issue is fixed in Angular (https://github.com/angular/angular-cli/issues/6872 )
-    // "style-src 'self' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
+    // "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
   ];
 
   return webpackMerge(commonConfig({ENV: ENV, metadata: METADATA}), {
