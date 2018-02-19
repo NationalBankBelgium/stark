@@ -1,4 +1,5 @@
 import { UIRouter, Category, StateDeclaration } from '@uirouter/core';
+import { Visualizer } from '@uirouter/visualizer';
 
 function logRegisteredStates(registeredstates: StateDeclaration[]) {
     let message: string = '=============  Registered Ui-Router states: ==============\n';
@@ -17,6 +18,7 @@ function logRegisteredStates(registeredstates: StateDeclaration[]) {
 
 export function routerConfigFn(router: UIRouter) {
     router.trace.enable(Category.TRANSITION);
+    router.plugin(Visualizer);
 
     logRegisteredStates(router.stateService.get());
 }
