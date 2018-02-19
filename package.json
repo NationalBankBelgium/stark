@@ -44,8 +44,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/nationalbankbelgium/stark.git"
-  },
-  "dependencies": {
-    "typescript": "2.6.2"
   }
 }

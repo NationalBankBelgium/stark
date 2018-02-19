@@ -16,6 +16,7 @@ const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin');
 
 const WriteFilePlugin = require("write-file-webpack-plugin");
+const StylelintPlugin = require("stylelint-webpack-plugin");
 
 // Dev custom config
 const webpackCustomConfig = require(helpers.root("config/webpack-custom-config.dev.json"));
@@ -229,6 +230,17 @@ module.exports = function () {
        * See: https://www.npmjs.com/package/write-file-webpack-plugin
        */
       new WriteFilePlugin(),
+
+      /**
+       * Plugin: Stylelint
+       * Description: Lints the stylesheets loaded in the app (pcss, scss, css, sass)
+       * See: https://github.com/JaKXz/stylelint-webpack-plugin
+       */
+      new StylelintPlugin({
+        configFile: ".stylelintrc",
+        emitErrors: false,
+        files: ["src/**/*.?(pc|sc|c|sa)ss"]  // pcss|scss|css|sass
+      })
     ],
 
     /**
@@ -277,7 +289,7 @@ module.exports = function () {
        *
        * See: https://webpack.github.io/docs/webpack-dev-server.html
        */
-      setup: function (app) {
+      before: function (app) {
         // For example, to define custom handlers for some paths:
         // app.get('/some/path', function(req, res) {
         //   res.json({ custom: 'response' });
