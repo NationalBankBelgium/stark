@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { UIRouterModule } from '@uirouter/angular';
 
-import { routes } from './child-detail.routes';
+import { CHILD_DETAIL_STATES } from './child-detail.routes';
 import { ChildDetailComponent } from './child-detail.component';
+import { routerChildConfigFn } from '../../router.config';
 
 console.log('`ChildDetail` bundle loaded asynchronously');
 
@@ -18,9 +19,12 @@ console.log('`ChildDetail` bundle loaded asynchronously');
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(routes),
+    UIRouterModule.forChild({
+      states: CHILD_DETAIL_STATES,
+      config: routerChildConfigFn
+    }),
   ],
 })
 export class ChildDetailModule {
-  public static routes = routes;
+  public static routes = CHILD_DETAIL_STATES;
 }

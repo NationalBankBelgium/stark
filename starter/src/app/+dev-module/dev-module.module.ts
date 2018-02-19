@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { UIRouterModule } from '@uirouter/angular';
 
-import { routes } from './dev-module.routes';
+import { DEV_MODULE_STATES } from './dev-module.routes';
 import { DevModuleComponent } from './dev-module.component';
+import { routerChildConfigFn } from '../router.config';
 
 /*
       Don't leave side-effects outside of classes so this will tree-shake nicely on prod
@@ -13,11 +14,14 @@ import { DevModuleComponent } from './dev-module.component';
   declarations: [ DevModuleComponent ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    UIRouterModule.forChild({
+      states: DEV_MODULE_STATES,
+      config: routerChildConfigFn
+    }),
   ],
 })
 export class DevModuleModule {
-  public static routes = routes;
+  public static routes = DEV_MODULE_STATES;
   constructor() {
     console.log('`DevModuleModule` module initialized');
   }
