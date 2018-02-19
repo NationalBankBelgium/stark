@@ -46,6 +46,7 @@
     "github-deploy:prod": "npm run webpack -- --config node_modules/@nationalbankbelgium/stark-build/config/webpack.github-deploy.js --progress --profile --env.githubProd",
     "github-deploy": "npm run github-deploy:dev",
     "lint": "npm run tslint \"src/**/*.ts\"",
+    "lint-css": "stylelint \"./src/**/*.?(pc|sc|c|sa)ss\" --formatter \"string\"",
     "node": "node",
     "postinstall": "npm run webdriver:update",
     "postversion": "git push && git push --tags",
