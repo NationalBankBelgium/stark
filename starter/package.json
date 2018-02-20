@@ -98,10 +98,12 @@
     "@uirouter/angular": "1.0.1",
     "@uirouter/visualizer": "6.0.0",
     "core-js": "2.5.3",
+    "eligrey-classlist-js-polyfill": "1.2.20180112",
+    "event-source-polyfill": "0.0.12",
     "http-server": "^0.10.0",
-    "ie-shim": "^0.1.0",
-    "reflect-metadata": "^0.1.10",
+    "reflect-metadata": "0.1.12",
     "rxjs": "5.5.6",
+    "web-animations-js": "2.3.1",
     "zone.js": "0.8.20"
   },
   "devDependencies": {
