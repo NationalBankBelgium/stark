@@ -15,11 +15,11 @@ console.log('`Barrel` component loaded asynchronously');
   template: `
     <h1>Hello from Barrel</h1>
     <span>
-      <a [routerLink]=" ['./child-barrel'] ">
+      <a uiSref="childBarrel">
         Child Barrel
       </a>
     </span>
-    <router-outlet></router-outlet>
+    <ui-view></ui-view>
   `,
 })
 export class BarrelComponent implements OnInit {

@@ -17,34 +17,34 @@ import { AppState } from './app.service';
   ],
   template: `
     <nav>
-      <a [routerLink]=" ['./'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <a uiSref="index"
+        uiSrefActive="active">
         Index
       </a>
-      <a [routerLink]=" ['./home'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <a uiSref="home"
+        uiSrefActive="active">
         Home
       </a>
-      <a [routerLink]=" ['./detail'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <a uiSref="detail"
+        uiSrefActive="active">
         Detail
       </a>
-      <a [routerLink]=" ['./barrel'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <a uiSref="barrel"
+        uiSrefActive="active">
         Barrel
       </a>
-      <a [routerLink]=" ['./about'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <a uiSref="about" [uiParams]="{ paramData: 'data passed via params' }"
+        uiSrefActive="active">
         About
       </a>
-      <a *ngIf="showDevModule" [routerLink]=" ['./dev-module'] "
-         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <a *ngIf="showDevModule" uiSref="devModuleDefault"
+         uiSrefActive="active">
         DevModule
       </a>
     </nav>
 
     <main>
-      <router-outlet></router-outlet>
+      <ui-view></ui-view>
     </main>
 
     <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>

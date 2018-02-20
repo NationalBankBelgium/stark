@@ -1,8 +1,10 @@
 import {
   Component,
+  Input,
   OnInit
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+// import { Transition } from '@uirouter/angular';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'about',
@@ -24,20 +26,42 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AboutComponent implements OnInit {
 
+  @Input() public resolvedData: Observable<any>;
+  @Input() public paramData: any;
+
   public localState: any;
   constructor(
-    public route: ActivatedRoute
-  ) {}
+    // public transition: Transition   // the last transition could be injected if needed
+  ) { /* empty */ }
 
   public ngOnInit() {
-    this.route
-      .data
-      .subscribe((data: any) => {
-        /**
-         * Your resolved data from route.
-         */
-        this.localState = data.yourData;
-      });
+    /**
+     * Getting the params values
+     */
+    this.localState = {...this.localState, paramData: this.paramData};
+    // OR get params values from the transition itself
+    // this.localState = {...this.localState, paramData: this.transition.params().paramData};
+
+    /**
+     * Getting the resolves values
+     */
+    // if the resolve is an observable, we need to subscribe to it to get the value
+    this.resolvedData.subscribe((data: any) => {
+        console.warn('data resolved');
+        this.localState = {...this.localState, ...data};
+    });
+
+    // if the resolve is a promise and the resolve policy is WAIT
+    // the value is already available
+    // this.localState = {...this.localState, ...this.resolvedData};
+
+    // OR get resolved values from the transition itself
+    // this.localState = {...this.localState, ...this.transition.injector().get('resolvedData')};
+
+    // if the resolve is a promise and the resolve policy is NOWAIT
+    // the promise MUST be accessed via the transition itself
+    // let resolvePromise: Promise<any> = this.transition.injector().get('resolvedData');
+    // resolvePromise.then((data: any) => this.localState = {...this.localState, ...data});
 
     console.log('hello `About` component');
     /**
@@ -59,7 +83,7 @@ export class AboutComponent implements OnInit {
       System.import('../../assets/mock-data/mock-data.json')
         .then((json) => {
           console.log('async mockData', json);
-          this.localState = json;
+          this.localState = {...this.localState, asyncData: json};
         });
 
     });

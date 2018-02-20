@@ -50,12 +50,12 @@ module.exports = function () {
     "form-action 'self' " + webpackCustomConfig["cspFormAction"],
     "frame-src 'self'",   // deprecated. Use child-src instead. Used here because child-src is not yet supported by Firefox. Remove as soon as it is fully supported
     "frame-ancestors 'none'",  // the app will not be allowed to be embedded in an iframe (roughly equivalent to X-Frame-Options: DENY)
-    "img-src 'self'",
+    "img-src 'self' data: image/png", // data: image/png is due to ui-router visualizer loading PNG images
     "media-src 'self'",
     "object-src 'self'",
     "plugin-types application/pdf",  // valid mime-types for plugins invoked via <object> and <embed>
     // "script-src 'self'", // FIXME: enable as soon as the issue is fixed in Angular (https://github.com/angular/angular-cli/issues/6872 )
-    // "style-src 'self' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
+    // "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
   ];
 
   return webpackMerge(commonConfig({ENV: ENV, metadata: METADATA}), {

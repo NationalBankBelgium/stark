@@ -15,11 +15,11 @@ console.log('`Detail` component loaded asynchronously');
   template: `
     <h1>Hello from Detail</h1>
     <span>
-      <a [routerLink]=" ['./child-detail'] ">
+      <a uiSref="childDetail">
         Child Detail
       </a>
     </span>
-    <router-outlet></router-outlet>
+    <ui-view></ui-view>
   `,
 })
 export class DetailComponent implements OnInit {

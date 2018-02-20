@@ -1,5 +1,6 @@
 import { ChildBarrelComponent } from './child-barrel.component';
+import { Ng2StateDeclaration } from '@uirouter/angular';
 
-export const routes = [
-  { path: '', component: ChildBarrelComponent,  pathMatch: 'full' },
+export const CHILD_BARREL_STATES: Ng2StateDeclaration[] = [
+  { name: 'childBarrel', url: '/child-barrel', parent: 'barrel', component: ChildBarrelComponent },
 ];
