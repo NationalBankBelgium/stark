@@ -11,30 +11,50 @@
  * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
  * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
  *
- * Learn more in https://angular.io/docs/ts/latest/guide/browser-support.html
+ * Learn more in https://angular.io/guide/browser-support
  */
 
 /***************************************************************************************************
  * BROWSER POLYFILLS
+ * 
+ * See: https://angular.io/guide/browser-support#optional-browser-features-to-polyfill
  */
 
-// Internet Explorer 9 support
-// import 'ie-shim';
-
-// IE9, IE10 and IE11 requires all of the following polyfills.
+/**
+ * IE11 requires all of the following polyfills.
+ * 
+ * Polyfill: https://github.com/zloirock/core-js
+  */ 
 import 'core-js/es6';
 import 'core-js/es7/reflect';
 import 'core-js/stage/4';
 
-/** IE10 and IE11 requires the following for NgClass support on SVG elements */
-// import 'classlist.js';  // Run `npm install --save classlist.js`.
+/**
+ * IE11 and Edge require this to support Server-sent events
+ * https://caniuse.com/#feat=eventsource
+ * 
+ * Polyfill: https://github.com/Yaffle/EventSource
+ */
+import 'event-source-polyfill';
 
 /**
- * Required to support Web Animations `@angular/animation`.
- * Needed for: All but Chrome, Firefox and Opera. http://caniuse.com/#feat=web-animation
+ * IE11 requires Element.classList for NgClass support on SVG elements
+ * See: https://caniuse.com/#feat=classlist
+ * 
+ * https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+ * https://angular.io/guide/browser-support#classlist
+ * Polyfill: https://github.com/eligrey/classList.js
  */
+import 'eligrey-classlist-js-polyfill';
 
-// import 'web-animations-js';  // Run `npm install --save web-animations-js`.
+/**
+ * All but Chrome, Firefox and Opera require this to support Web Animations from
+ * `@angular/animations` and `@angular/platform-browser/animations`.
+ * See: http://caniuse.com/#feat=web-animation
+ * 
+ * Polyfill: https://github.com/web-animations/web-animations-js
+ */
+import 'web-animations-js';
 
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
@@ -48,15 +68,6 @@ import 'zone.js/dist/zone';
  * APPLICATION IMPORTS
  */
 
-/**
- * Date, currency, decimal and percent pipes.
- * Needed for: All but Chrome, Firefox, Edge, IE11 and Safari 10
- */
-// import 'intl';  // Run `npm install --save intl`.
-/**
- * Need to import at least one locale-data with intl.
- */
-// import 'intl/locale-data/jsonp/en';
 if ('production' === ENV) {
   // Production
 
