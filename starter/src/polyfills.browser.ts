@@ -16,15 +16,15 @@
 
 /***************************************************************************************************
  * BROWSER POLYFILLS
- * 
+ *
  * See: https://angular.io/guide/browser-support#optional-browser-features-to-polyfill
  */
 
 /**
  * IE11 requires all of the following polyfills.
- * 
+ *
  * Polyfill: https://github.com/zloirock/core-js
-  */ 
+ */
 import 'core-js/es6';
 import 'core-js/es7/reflect';
 import 'core-js/stage/4';
@@ -32,7 +32,7 @@ import 'core-js/stage/4';
 /**
  * IE11 and Edge require this to support Server-sent events
  * https://caniuse.com/#feat=eventsource
- * 
+ *
  * Polyfill: https://github.com/Yaffle/EventSource
  */
 import 'event-source-polyfill';
@@ -40,7 +40,7 @@ import 'event-source-polyfill';
 /**
  * IE11 requires Element.classList for NgClass support on SVG elements
  * See: https://caniuse.com/#feat=classlist
- * 
+ *
  * https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
  * https://angular.io/guide/browser-support#classlist
  * Polyfill: https://github.com/eligrey/classList.js
@@ -51,7 +51,7 @@ import 'eligrey-classlist-js-polyfill';
  * All but Chrome, Firefox and Opera require this to support Web Animations from
  * `@angular/animations` and `@angular/platform-browser/animations`.
  * See: http://caniuse.com/#feat=web-animation
- * 
+ *
  * Polyfill: https://github.com/web-animations/web-animations-js
  */
 import 'web-animations-js';
