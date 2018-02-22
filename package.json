@@ -60,20 +60,6 @@
 		"tslint": "tslint",
 		"tslint-check": "tslint-config-prettier-check ./tslint.json"
 	},
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 	"lint-staged": {
 		"*.{css,js,json,pcss,scss,ts}": ["prettier --write", "git add"]
 	}
