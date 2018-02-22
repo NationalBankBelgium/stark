@@ -142,8 +142,5 @@
 	"engines": {
 		"node": ">= 4.2.1",
 		"npm": ">= 3"
-	},
-	"lint-staged": {
-		"*.{css,js,json,pcss,scss,ts}": ["prettier --write", "git add"]
 	}
 }
