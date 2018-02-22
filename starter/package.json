@@ -121,6 +121,7 @@
   
   
   
+  
 	"devDependencies": {
 		"@compodoc/compodoc": "1.0.7",
 		"@types/hammerjs": "2.0.35",
