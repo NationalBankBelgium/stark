@@ -1,48 +1,66 @@
 {
-  "name": "stark-srcs",
-  "version": "10.0.0-alpha.0",
-  "private": false,
-  "author": {
-    "name": "Alexis Georges",
-    "email": "alexis.georges@nbb.be",
-    "url": "https://nbb.be"
-  },
-  "contributors": [
-    {
-      "name": "Dubois Sebastien",
-      "email": "sebastien.dubois@nbb.be",
-      "url": "https://www.nbb.be"
-    },
-    {
-      "name": "Cedric Namotte",
-      "email": "cedric.namotte@nbb.be",
-      "url": "https://www.nbb.be"
-    },
-    {
-      "name": "Alexis Georges",
-      "email": "alexis.georges@nbb.be",
-      "url": "https://www.nbb.be"
-    },
-    {
-      "name": "Christopher Cortes",
-      "email": "christopher.cortes@nbb.be",
-      "url": "https://www.nbb.be"
-    },
-    {
-      "name": "Robby De Laet",
-      "email": "robby.delaet@nbb.be",
-      "url": "https://www.nbb.be"
-    }
-  ],
-  "license": "MIT",
-  "engines": {
-    "node": ">=6.11.0",
-    "npm": ">=5.3.0"
-  },
-  "bugs": "https://github.com/nationalbankbelgium/stark/issues",
-  "homepage": "https://github.com/nationalbankbelgium/stark",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nationalbankbelgium/stark.git"
-  }
+	"name": "stark-srcs",
+	"version": "10.0.0-alpha.0",
+	"private": false,
+	"author": {
+		"name": "Alexis Georges",
+		"email": "alexis.georges@nbb.be",
+		"url": "https://nbb.be"
+	},
+	"contributors": [
+		{
+			"name": "Dubois Sebastien",
+			"email": "sebastien.dubois@nbb.be",
+			"url": "https://www.nbb.be"
+		},
+		{
+			"name": "Cedric Namotte",
+			"email": "cedric.namotte@nbb.be",
+			"url": "https://www.nbb.be"
+		},
+		{
+			"name": "Alexis Georges",
+			"email": "alexis.georges@nbb.be",
+			"url": "https://www.nbb.be"
+		},
+		{
+			"name": "Christopher Cortes",
+			"email": "christopher.cortes@nbb.be",
+			"url": "https://www.nbb.be"
+		},
+		{
+			"name": "Robby De Laet",
+			"email": "robby.delaet@nbb.be",
+			"url": "https://www.nbb.be"
+		}
+	],
+	"license": "MIT",
+	"engines": {
+		"node": ">=6.11.0",
+
+		"npm": ">=5.3.0"
+	},
+	"bugs": "https://github.com/nationalbankbelgium/stark/issues",
+	"homepage": "https://github.com/nationalbankbelgium/stark",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nationalbankbelgium/stark.git"
+	},
+	"devDependencies": {
+		"lint-staged": "7.0.0",
+		"husky": "0.14.3",
+		"prettier": "1.10.2",
+		"tslint": "5.8.0",
+		"tslint-config-prettier": "1.8.0",
+		"typescript": "2.6.2"
+	},
+	"scripts": {
+		"precommit": "lint-staged",
+		"prettier-check": "prettier **/*.{css,js,json,pcss,scss,ts} --write",
+		"tslint": "tslint",
+		"tslint-check": "tslint-config-prettier-check ./tslint.json"
+	},
+	"lint-staged": {
+		"*.{css,js,json,pcss,scss,ts}": ["prettier --write", "git add"]
+	}
 }
