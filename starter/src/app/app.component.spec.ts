@@ -57,6 +57,7 @@ describe(`App`, () => {
 	
 	
 	
+	
 	it("should log ngOnInit", () => {
 		spyOn(console, "log");
 		expect(console.log).not.toHaveBeenCalled();
