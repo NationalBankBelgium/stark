@@ -1,321 +1,321 @@
 {
-	"extends": ["tslint:latest", "tslint-config-prettier"],
-	"defaultSeverity": "error",
-	"rules": {
-		"member-access": [true, "check-accessor", "check-constructor", "check-parameter-property"],
-		"member-ordering": [
-			false,
-			{
-				"order": "fields-first"
-			}
-		],
-		"no-any": false,
-		"no-empty-interface": false,
-		"no-inferrable-types": false,
-		"no-internal-module": true,
-		"no-namespace": [true, "allow-declarations"],
-		"no-reference": true,
-		"no-var-requires": false,
-		"typedef": [
-			true,
-			"call-signature",
-			// "arrow-call-signature",
-			"parameter",
-			"arrow-parameter",
-			"property-declaration",
-			"variable-declaration",
-			"member-variable-declaration",
-			"object-destructuring",
-			"array-destructuring"
-		],
-		"typedef-whitespace": [
-			false,
-			{
-				"call-signature": "nospace",
-				"index-signature": "nospace",
-				"parameter": "nospace",
-				"property-declaration": "nospace",
-				"variable-declaration": "nospace"
-			},
-			{
-				"call-signature": "nospace",
-				"index-signature": "nospace",
-				"parameter": "nospace",
-				"property-declaration": "nospace",
-				"variable-declaration": "nospace"
-			}
-		],
-		"unified-signatures": true,
-		"ban": [
-			true,
-			"window",
-			"eval",
-			{ "name": ["angular", "bind"], "message": "Use Function bind() method" },
-			{
-				"name": ["angular", "copy"],
-				"message": "Use Lodash cloneDeep() or Object/Array spread syntax"
-			},
-			{
-				"name": ["angular", "equals"],
-				"message": "Use strict equality comparison (===)"
-			},
-			{
-				"name": ["angular", "extend"],
-				"message": "Use Lodash merge() or Object spread syntax"
-			},
-			{
-				"name": ["angular", "forEach"],
-				"message": "Use for...of loop, for...in loop or Array forEach()"
-			},
-			{ "name": ["angular", "fromJson"], "message": "Use JSON.parse()" },
-			{
-				"name": ["angular", "isArray"],
-				"message": "Use Array.isArray() function"
-			},
-			{
-				"name": ["angular", "isDate"],
-				"message": "Use moment.isDate() function"
-			},
-			{
-				"name": ["angular", "isDefined"],
-				"message": "Use typeof operator (type guard)"
-			},
-			{
-				"name": ["angular", "isFunction"],
-				"message": "Use typeof operator (type guard) or Lodash isFunction()"
-			},
-			{
-				"name": ["angular", "isNumber"],
-				"message": "Use typeof operator (type guard) or Lodash isNumber()"
-			},
-			{
-				"name": ["angular", "isString"],
-				"message": "Use typeof operator (type guard) or Lodash isString()"
-			},
-			{
-				"name": ["angular", "isUndefined"],
-				"message": "Use typeof operator (type guard) or Lodash isUndefined()"
-			},
-			{
-				"name": ["angular", "merge"],
-				"message": "Use Lodash merge() or cloneDeep()"
-			},
-			{ "name": ["angular", "noop"], "message": "Use Lodash noop()" },
-			{ "name": ["angular", "toJson"], "message": "Use JSON.stringify()" }
-		],
-		"curly": true,
-		"forin": true,
-		"label-position": true,
-		"no-arg": true,
-		"no-bitwise": true,
-		"no-conditional-assignment": true,
-		"no-console": [false, "debug", "info", "time", "timeEnd", "trace"],
-		"no-construct": true,
-		"no-debugger": true,
-		"no-duplicate-variable": true,
-		"no-empty": [true, "allow-empty-catch"],
-		"no-eval": true,
-		"no-implicit-dependencies": false,
-		"no-invalid-template-strings": true,
-		"no-invalid-this": true,
-		"no-null-keyword": true,
-		"no-object-literal-type-assertion": true,
-		"no-return-await": true,
-		"no-shadowed-variable": true,
-		"no-sparse-arrays": true,
-		"no-string-literal": false,
-		"no-string-throw": false,
-		"no-submodule-imports": [false, "@nationalbankbelgium", "rxjs", "lodash", "core-js", "valdr", "angular-material"],
-		"no-switch-case-fall-through": true,
-		"no-this-assignment": false,
-		"no-unnecessary-class": ["allow-static-only"],
-		"no-unsafe-finally": true,
-		"no-unused-expression": true,
-		"no-var-keyword": true,
-		"prefer-conditional-expression": false,
-		"prefer-object-spread": true,
-		"prefer-template": false,
-		"radix": true,
-		"switch-default": true,
-		"triple-equals": true,
-		"typeof-compare": true,
-		"use-isnan": true,
-		"cyclomatic-complexity": [true, 20],
-		"no-default-export": true,
-		"no-duplicate-imports": true,
-		"no-mergeable-namespace": true,
-		"no-require-imports": false,
-		"object-literal-sort-keys": false,
-		"align": [false, "arguments", "statements", "parameters", "members", "elements"],
-		"callable-types": true,
-		"class-name": true,
-		"comment-format": [false, "check-space"],
-		"encoding": false,
-		"interface-name": [false, "never-prefix"],
-		"interface-over-type-literal": true,
-		"jsdoc-format": false,
-		"no-angle-bracket-type-assertion": false,
-		"no-parameter-properties": true,
-		"no-redundant-jsdoc": false,
-		"no-reference-import": true,
-		"no-unnecessary-callback-wrapper": false,
-		"object-literal-shorthand": false,
-		"one-variable-per-declaration": true,
-		"switch-final-break": false,
-		"type-literal-delimiter": true,
-		"variable-name": [true, "check-format", "allow-leading-underscore", "allow-trailing-underscore", "ban-keywords"],
-		"whitespace": [
-			false,
-			"check-branch",
-			"check-decl",
-			"check-operator",
-			"check-module",
-			"check-separator",
-			"check-rest-spread",
-			"check-type",
-			"check-typecast",
-			"check-type-operator",
-			"check-pre-block"
-		],
-		"prefer-const": [
-			true,
-			{
-				"destructuring": "all"
-			}
-		],
-		"no-magic-numbers": false,
-		"import-blacklist": true,
-		"ordered-imports": false,
-		"max-classes-per-file": false, // [true, 1],
-		"prefer-for-of": true,
-		"array-type": false, // [true, "array"]
-		"arrow-return-shorthand": true,
-		"binary-expression-operand-order": false,
-		"no-unnecessary-initializer": true,
-		"no-misused-new": true,
-		"prefer-method-signature": false,
-		"prefer-switch": [
-			true,
-			{
-				"min-cases": 3
-			}
-		],
-		"prefer-function-over-method": false,
-		"no-import-side-effect": [
-			true,
-			{
-				"ignore-module": "(rxjs|reflect-metadata|core-js|ngrx-store|angular|polyfills|vendor|typings|\\.css|\\.pcss)"
-			}
-		],
-		"no-non-null-assertion": true,
-		"no-parameter-reassignment": false,
-		"adjacent-overload-signatures": true,
-		"ban-comma-operator": false,
-		"ban-types": false,
-		"no-duplicate-super": true,
-		"no-duplicate-switch-case": true,
-		"newline-before-return": false
-	}
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "defaultSeverity": "error",
+  "rules": {
+    "member-access": [true, "check-accessor", "check-constructor", "check-parameter-property"],
+    "member-ordering": [
+      false,
+      {
+        "order": "fields-first"
+      }
+    ],
+    "no-any": false,
+    "no-empty-interface": false,
+    "no-inferrable-types": false,
+    "no-internal-module": true,
+    "no-namespace": [true, "allow-declarations"],
+    "no-reference": true,
+    "no-var-requires": false,
+    "typedef": [
+      true,
+      "call-signature",
+      // "arrow-call-signature",
+      "parameter",
+      "arrow-parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
+    ],
+    "typedef-whitespace": [
+      false,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "unified-signatures": true,
+    "ban": [
+      true,
+      "window",
+      "eval",
+      { "name": ["angular", "bind"], "message": "Use Function bind() method" },
+      {
+        "name": ["angular", "copy"],
+        "message": "Use Lodash cloneDeep() or Object/Array spread syntax"
+      },
+      {
+        "name": ["angular", "equals"],
+        "message": "Use strict equality comparison (===)"
+      },
+      {
+        "name": ["angular", "extend"],
+        "message": "Use Lodash merge() or Object spread syntax"
+      },
+      {
+        "name": ["angular", "forEach"],
+        "message": "Use for...of loop, for...in loop or Array forEach()"
+      },
+      { "name": ["angular", "fromJson"], "message": "Use JSON.parse()" },
+      {
+        "name": ["angular", "isArray"],
+        "message": "Use Array.isArray() function"
+      },
+      {
+        "name": ["angular", "isDate"],
+        "message": "Use moment.isDate() function"
+      },
+      {
+        "name": ["angular", "isDefined"],
+        "message": "Use typeof operator (type guard)"
+      },
+      {
+        "name": ["angular", "isFunction"],
+        "message": "Use typeof operator (type guard) or Lodash isFunction()"
+      },
+      {
+        "name": ["angular", "isNumber"],
+        "message": "Use typeof operator (type guard) or Lodash isNumber()"
+      },
+      {
+        "name": ["angular", "isString"],
+        "message": "Use typeof operator (type guard) or Lodash isString()"
+      },
+      {
+        "name": ["angular", "isUndefined"],
+        "message": "Use typeof operator (type guard) or Lodash isUndefined()"
+      },
+      {
+        "name": ["angular", "merge"],
+        "message": "Use Lodash merge() or cloneDeep()"
+      },
+      { "name": ["angular", "noop"], "message": "Use Lodash noop()" },
+      { "name": ["angular", "toJson"], "message": "Use JSON.stringify()" }
+    ],
+    "curly": true,
+    "forin": true,
+    "label-position": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-conditional-assignment": true,
+    "no-console": [false, "debug", "info", "time", "timeEnd", "trace"],
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-variable": true,
+    "no-empty": [true, "allow-empty-catch"],
+    "no-eval": true,
+    "no-implicit-dependencies": false,
+    "no-invalid-template-strings": true,
+    "no-invalid-this": true,
+    "no-null-keyword": true,
+    "no-object-literal-type-assertion": true,
+    "no-return-await": true,
+    "no-shadowed-variable": true,
+    "no-sparse-arrays": true,
+    "no-string-literal": false,
+    "no-string-throw": false,
+    "no-submodule-imports": [false, "@nationalbankbelgium", "rxjs", "lodash", "core-js", "valdr", "angular-material"],
+    "no-switch-case-fall-through": true,
+    "no-this-assignment": false,
+    "no-unnecessary-class": ["allow-static-only"],
+    "no-unsafe-finally": true,
+    "no-unused-expression": true,
+    "no-var-keyword": true,
+    "prefer-conditional-expression": false,
+    "prefer-object-spread": true,
+    "prefer-template": false,
+    "radix": true,
+    "switch-default": true,
+    "triple-equals": true,
+    "typeof-compare": true,
+    "use-isnan": true,
+    "cyclomatic-complexity": [true, 20],
+    "no-default-export": true,
+    "no-duplicate-imports": true,
+    "no-mergeable-namespace": true,
+    "no-require-imports": false,
+    "object-literal-sort-keys": false,
+    "align": [false, "arguments", "statements", "parameters", "members", "elements"],
+    "callable-types": true,
+    "class-name": true,
+    "comment-format": [false, "check-space"],
+    "encoding": false,
+    "interface-name": [false, "never-prefix"],
+    "interface-over-type-literal": true,
+    "jsdoc-format": false,
+    "no-angle-bracket-type-assertion": false,
+    "no-parameter-properties": true,
+    "no-redundant-jsdoc": false,
+    "no-reference-import": true,
+    "no-unnecessary-callback-wrapper": false,
+    "object-literal-shorthand": false,
+    "one-variable-per-declaration": true,
+    "switch-final-break": false,
+    "type-literal-delimiter": true,
+    "variable-name": [true, "check-format", "allow-leading-underscore", "allow-trailing-underscore", "ban-keywords"],
+    "whitespace": [
+      false,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-separator",
+      "check-rest-spread",
+      "check-type",
+      "check-typecast",
+      "check-type-operator",
+      "check-pre-block"
+    ],
+    "prefer-const": [
+      true,
+      {
+        "destructuring": "all"
+      }
+    ],
+    "no-magic-numbers": false,
+    "import-blacklist": true,
+    "ordered-imports": false,
+    "max-classes-per-file": false, // [true, 1],
+    "prefer-for-of": true,
+    "array-type": false, // [true, "array"]
+    "arrow-return-shorthand": true,
+    "binary-expression-operand-order": false,
+    "no-unnecessary-initializer": true,
+    "no-misused-new": true,
+    "prefer-method-signature": false,
+    "prefer-switch": [
+      true,
+      {
+        "min-cases": 3
+      }
+    ],
+    "prefer-function-over-method": false,
+    "no-import-side-effect": [
+      true,
+      {
+        "ignore-module": "(rxjs|reflect-metadata|core-js|ngrx-store|angular|polyfills|vendor|typings|\\.css|\\.pcss)"
+      }
+    ],
+    "no-non-null-assertion": true,
+    "no-parameter-reassignment": false,
+    "adjacent-overload-signatures": true,
+    "ban-comma-operator": false,
+    "ban-types": false,
+    "no-duplicate-super": true,
+    "no-duplicate-switch-case": true,
+    "newline-before-return": false
+  }
 
-	//These rules require type info to run
-	//	"strict-boolean-expressions": true,
-	//	"promise-function-async": true,
-	//	"no-inferred-empty-object-type": true,
-	//  "no-void-expression": true,
-	//	"completed-docs": true,
-	//  "no-unbound-method": true,
-	//  "no-boolean-literal-compare": true,
-	//  "no-unsafe-any": true,
-	//  "no-unnecessary-qualifier": true,
-	//  "no-unnecessary-type-assertion": true,
-	//  "no-use-before-declare": true,
-	//  "await-promise": true,
-	//  "no-floating-promises": true,
-	//  "strict-type-predicates": true,
-	//  "match-default-export-name": true,
-	//  "return-undefined": true,
-	//  "deprecation": true,
-	//  "use-default-type-parameter": true,
-	//
-	//These rules are handled by Prettier
-	//	"eofline": true,
-	//	"import-spacing": true,
-	//	"indent": [
-	//	  false,
-	//	  "tabs",
-	//	  2
-	//	],
-	//	"max-line-length": [
-	//	  true,
-	//	  140
-	//	],
-	//	"no-trailing-whitespace": false,
-	//	"one-line": [
-	//	  true,
-	//	  "check-catch",
-	//	  "check-finally",
-	//	  "check-else",
-	//	  "check-open-brace",
-	//	  "check-whitespace"
-	//	],
-	//	"quotemark": [
-	//	  true,
-	//	  "double",
-	//	  "avoid-escape"
-	//	],
-	//	"semicolon": [
-	//	  true,
-	//	  "always"
-	//	],
-	//Cases searched manually
-	//	"trailing-comma": [
-	//	  false,
-	//	  {
-	//		"multiline": {
-	//		  "objects": "always",
-	//		  "arrays": "always",
-	//		  "functions": "always",
-	//		  "imports": "always",
-	//		  "exports": "always",
-	//		  "typeLiterals": "ignore"
-	//		},
-	//		"singleline": {
-	//		  "objects": "never",
-	//		  "arrays": "never",
-	//		  "functions": "never",
-	//		  "imports": "never",
-	//		  "exports": "never",
-	//		  "typeLiterals": "ignore"
-	//		},
-	//		"esSpecCompliant": true
-	//	  }
-	//	],
-	//	"space-before-function-paren": [
-	//	  true,
-	//	  {
-	//		"anonymous": "always",
-	//		"named": "never",
-	//		"asyncArrow": "never",
-	//		"method": "never",
-	//		"constructor": "never"
-	//	  }
-	//	],
-	//	"space-within-parens": 0,
-	//	"no-irregular-whitespace": true,
-	//	"no-consecutive-blank-lines": [
-	//	  true,
-	//	  1
-	//	],
-	//Signaled by tslint-check script
-	//	"arrow-parens": true,
-	//	"linebreak-style": [
-	//	true,
-	//	"LF"
-	//	],
-	//	"new-parens": true,
-	//	"number-literal-format": true,
-	//	"object-literal-key-quotes": [
-	//	true,
-	//	"as-needed"
-	//	],
+  //These rules require type info to run
+  //	"strict-boolean-expressions": true,
+  //	"promise-function-async": true,
+  //	"no-inferred-empty-object-type": true,
+  //  "no-void-expression": true,
+  //	"completed-docs": true,
+  //  "no-unbound-method": true,
+  //  "no-boolean-literal-compare": true,
+  //  "no-unsafe-any": true,
+  //  "no-unnecessary-qualifier": true,
+  //  "no-unnecessary-type-assertion": true,
+  //  "no-use-before-declare": true,
+  //  "await-promise": true,
+  //  "no-floating-promises": true,
+  //  "strict-type-predicates": true,
+  //  "match-default-export-name": true,
+  //  "return-undefined": true,
+  //  "deprecation": true,
+  //  "use-default-type-parameter": true,
+  //
+  //These rules are handled by Prettier
+  //	"eofline": true,
+  //	"import-spacing": true,
+  //	"indent": [
+  //	  false,
+  //	  "tabs",
+  //	  2
+  //	],
+  //	"max-line-length": [
+  //	  true,
+  //	  140
+  //	],
+  //	"no-trailing-whitespace": false,
+  //	"one-line": [
+  //	  true,
+  //	  "check-catch",
+  //	  "check-finally",
+  //	  "check-else",
+  //	  "check-open-brace",
+  //	  "check-whitespace"
+  //	],
+  //	"quotemark": [
+  //	  true,
+  //	  "double",
+  //	  "avoid-escape"
+  //	],
+  //	"semicolon": [
+  //	  true,
+  //	  "always"
+  //	],
+  //Cases searched manually
+  //	"trailing-comma": [
+  //	  false,
+  //	  {
+  //		"multiline": {
+  //		  "objects": "always",
+  //		  "arrays": "always",
+  //		  "functions": "always",
+  //		  "imports": "always",
+  //		  "exports": "always",
+  //		  "typeLiterals": "ignore"
+  //		},
+  //		"singleline": {
+  //		  "objects": "never",
+  //		  "arrays": "never",
+  //		  "functions": "never",
+  //		  "imports": "never",
+  //		  "exports": "never",
+  //		  "typeLiterals": "ignore"
+  //		},
+  //		"esSpecCompliant": true
+  //	  }
+  //	],
+  //	"space-before-function-paren": [
+  //	  true,
+  //	  {
+  //		"anonymous": "always",
+  //		"named": "never",
+  //		"asyncArrow": "never",
+  //		"method": "never",
+  //		"constructor": "never"
+  //	  }
+  //	],
+  //	"space-within-parens": 0,
+  //	"no-irregular-whitespace": true,
+  //	"no-consecutive-blank-lines": [
+  //	  true,
+  //	  1
+  //	],
+  //Signaled by tslint-check script
+  //	"arrow-parens": true,
+  //	"linebreak-style": [
+  //	true,
+  //	"LF"
+  //	],
+  //	"new-parens": true,
+  //	"number-literal-format": true,
+  //	"object-literal-key-quotes": [
+  //	true,
+  //	"as-needed"
+  //	],
 }
