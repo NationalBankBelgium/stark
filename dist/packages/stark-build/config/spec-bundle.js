@@ -13,29 +13,26 @@
  */
 Error.stackTraceLimit = Infinity;
 
-require('core-js/es6');
-require('core-js/es7/reflect');
+require("core-js/es6");
+require("core-js/es7/reflect");
 
-require('zone.js/dist/zone');
-require('zone.js/dist/long-stack-trace-zone');
-require('zone.js/dist/proxy'); // since zone.js 0.6.15
-require('zone.js/dist/sync-test');
-require('zone.js/dist/jasmine-patch'); // put here since zone.js 0.6.14
-require('zone.js/dist/async-test');
-require('zone.js/dist/fake-async-test');
+require("zone.js/dist/zone");
+require("zone.js/dist/long-stack-trace-zone");
+require("zone.js/dist/proxy"); // since zone.js 0.6.15
+require("zone.js/dist/sync-test");
+require("zone.js/dist/jasmine-patch"); // put here since zone.js 0.6.14
+require("zone.js/dist/async-test");
+require("zone.js/dist/fake-async-test");
 
 /**
  * RxJS
  */
-require('rxjs/Rx');
+require("rxjs/Rx");
 
-var testing = require('@angular/core/testing');
-var browser = require('@angular/platform-browser-dynamic/testing');
+var testing = require("@angular/core/testing");
+var browser = require("@angular/platform-browser-dynamic/testing");
 
-testing.TestBed.initTestEnvironment(
-  browser.BrowserDynamicTestingModule,
-  browser.platformBrowserDynamicTesting()
-);
+testing.TestBed.initTestEnvironment(browser.BrowserDynamicTestingModule, browser.platformBrowserDynamicTesting());
 
 /**
  * Ok, this is kinda crazy. We can use the context method on
@@ -47,7 +44,7 @@ testing.TestBed.initTestEnvironment(
  * we say do this recursively
  */
 // TODO Use helpers for getting the path :)
-var testContext = require.context('../../../../src', true, /\.spec\.ts/);
+var testContext = require.context("../../../../src", true, /\.spec\.ts/);
 
 /**
  * Get all the files, for each file, call the context function
@@ -55,7 +52,7 @@ var testContext = require.context('../../../../src', true, /\.spec\.ts/);
  * loop and require those spec files here
  */
 function requireAll(requireContext) {
-  return requireContext.keys().map(requireContext);
+	return requireContext.keys().map(requireContext);
 }
 
 /**

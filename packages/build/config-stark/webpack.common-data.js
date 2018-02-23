@@ -84,11 +84,7 @@ module.exports = {
 		dev: {
 			removeAttributeQuotes: false,
 			caseSensitive: true,
-			customAttrSurround: [
-				[/#/, /(?:)/],
-				[/\*/, /(?:)/],
-				[/\[?\(?/, /(?:)/]
-			],
+			customAttrSurround: [[/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/]],
 			customAttrAssign: [/\)?\]?=/]
 		},
 
@@ -96,30 +92,22 @@ module.exports = {
 			minimize: true,
 			removeAttributeQuotes: false,
 			caseSensitive: true,
-			customAttrSurround: [
-				[/#/, /(?:)/],
-				[/\*/, /(?:)/],
-				[/\[?\(?/, /(?:)/]
-			],
+			customAttrSurround: [[/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/]],
 			customAttrAssign: [/\)?\]?=/]
 		}
 	},
 
 	babel: {
 		presets: [
-			["env", {
-				"targets": {
-					"browsers": [
-						"last 2 versions",
-						"ie >= 11",
-						"Chrome >= 56",
-						"Firefox >= 48",
-						"Safari >= 7"
-					]
-				},
-				"modules": false
-			}]
+			[
+				"env",
+				{
+					targets: {
+						browsers: ["last 2 versions", "ie >= 11", "Chrome >= 56", "Firefox >= 48", "Safari >= 7"]
+					},
+					modules: false
+				}
+			]
 		]
 	}
 };
-

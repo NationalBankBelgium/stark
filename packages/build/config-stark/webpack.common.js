@@ -92,13 +92,8 @@ module.exports = {
 			{
 				enforce: "pre",
 				test: /\.ts$/,
-				use: [
-					"tslint-loader"
-				],
-				exclude: [
-					helpers.root("node_modules"),
-					helpers.rootStark("node_modules")
-				]
+				use: ["tslint-loader"],
+				exclude: [helpers.root("node_modules"), helpers.rootStark("node_modules")]
 			},
 
 			// Source map loader support for *.js files
@@ -107,13 +102,8 @@ module.exports = {
 			{
 				enforce: "pre",
 				test: /\.js$/,
-				use: [
-					"source-map-loader"
-				],
-				exclude: [
-					helpers.rootStark("node_modules/rxjs"),
-					helpers.root("node_modules/rxjs")
-				]
+				use: ["source-map-loader"],
+				exclude: [helpers.rootStark("node_modules/rxjs"), helpers.root("node_modules/rxjs")]
 			},
 
 			// Support for CSS as raw text
@@ -175,12 +165,8 @@ module.exports = {
 			// Support for .html
 			{
 				test: /\.html$/,
-				use: [
-					"html-loader"
-				],
-				exclude: [
-					helpers.root("src/index.html")
-				]
+				use: ["html-loader"],
+				exclude: [helpers.root("src/index.html")]
 			}
 		]
 	},

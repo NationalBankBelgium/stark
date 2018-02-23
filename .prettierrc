@@ -1,0 +1,29 @@
+{
+"printWidth":140,
+"tabWidth":4,
+"useTabs":true,
+"trailingComma":"none",
+"overrides": [
+        {
+            "files": "*.{pcss,scss,css}",
+            "options": {
+                "tabWidth": 2,
+                "useTabs":false
+            }
+        },
+        {
+                	"files": "*.json",
+        			"options": {
+        				"tabWidth": 2,
+        				"useTabs":false
+        			}
+        },
+        {
+        	"files": "{package.json,.travis.yml}",
+			"options": {
+				"tabWidth": 2,
+				"useTabs":false
+			}
+		}
+    ]
+}

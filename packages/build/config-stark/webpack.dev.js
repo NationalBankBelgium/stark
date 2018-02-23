@@ -20,14 +20,14 @@ const WriteFilePlugin = require("write-file-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
-const CircularDependencyPlugin = require('circular-dependency-plugin');
+const CircularDependencyPlugin = require("circular-dependency-plugin");
 // const UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
 
 // Metadata
 const METADATA = {
 	HOST: process.env.HOST || "localhost",
 	PORT: parseInt(process.env.PORT, 10) || 3000,
-	ENV: process.env.ENV = process.env.NODE_ENV = "development",
+	ENV: (process.env.ENV = process.env.NODE_ENV = "development"),
 	HMR: helpers.hasProcessFlag("hot"),
 	PRODUCTION: false,
 	DEVELOPMENT: true
@@ -41,12 +41,12 @@ const cspDirectives = [
 	"connect-src 'self' ws://" + METADATA.HOST + ":" + METADATA.PORT + " " + webpackCustomConfig["cspConnectSrc"], // ws://HOST:PORT" is due to Webpack
 	"font-src 'self'",
 	"form-action 'self' " + webpackCustomConfig["cspFormAction"],
-	"frame-src 'self'",   // deprecated. Use child-src instead. Used here because child-src is not yet supported by Firefox. Remove as soon as it is fully supported
-	"frame-ancestors 'none'",  // the app will not be allowed to be embedded in an iframe (roughly equivalent to X-Frame-Options: DENY)
-	"img-src 'self' data: image/png",  // data: image/png" is due to Angular Material loading PNG images in base64 encoding
+	"frame-src 'self'", // deprecated. Use child-src instead. Used here because child-src is not yet supported by Firefox. Remove as soon as it is fully supported
+	"frame-ancestors 'none'", // the app will not be allowed to be embedded in an iframe (roughly equivalent to X-Frame-Options: DENY)
+	"img-src 'self' data: image/png", // data: image/png" is due to Angular Material loading PNG images in base64 encoding
 	"media-src 'self'",
 	"object-src 'self'",
-	"plugin-types application/pdf",  // valid mime-types for plugins invoked via <object> and <embed>
+	"plugin-types application/pdf", // valid mime-types for plugins invoked via <object> and <embed>
 	"script-src 'self' 'nonce-cefb24121ec5443c8819cc7c5e33c4a2'",
 	"style-src 'self' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // We define the same nonce value via the $mdThemingProvider (https://material.angularjs.org/HEAD/api/service/$mdThemingProvider)
 ];
@@ -66,11 +66,11 @@ module.exports = webpackMerge(commonConfig, {
 	// reference: https://webpack.js.org/configuration/entry-context/#entry
 	entry: {
 		// main entries
-		"polyfills": helpers.root("src/polyfills.ts"),
+		polyfills: helpers.root("src/polyfills.ts"),
 		"vendor-styles": helpers.root("src/vendor-styles.ts"),
 		"main-styles": helpers.root("src/main-styles.ts"), // our angular app's styles. Useful only changing the styles bundle while working on styling
-		"vendor": helpers.root("src/vendor.ts"),
-		"main": helpers.root("src/main.ts") // our angular app
+		vendor: helpers.root("src/vendor.ts"),
+		main: helpers.root("src/main.ts") // our angular app
 	},
 
 	// Options affecting the normal modules.
@@ -113,17 +113,17 @@ module.exports = webpackMerge(commonConfig, {
 		// reference: https://webpack.js.org/plugins/define-plugin
 		// NOTE: when adding more properties make sure you include them in custom-typings.d.ts
 		new DefinePlugin({
-			"ENV": JSON.stringify(METADATA.ENV),
-			"NODE_ENV": JSON.stringify(METADATA.ENV),
-			"HMR": METADATA.HMR,
-			"PRODUCTION": METADATA.PRODUCTION,
-			"DEVELOPMENT": METADATA.DEVELOPMENT,
+			ENV: JSON.stringify(METADATA.ENV),
+			NODE_ENV: JSON.stringify(METADATA.ENV),
+			HMR: METADATA.HMR,
+			PRODUCTION: METADATA.PRODUCTION,
+			DEVELOPMENT: METADATA.DEVELOPMENT,
 			"process.env": {
-				"ENV": JSON.stringify(METADATA.ENV),
-				"NODE_ENV": JSON.stringify(METADATA.ENV),
-				"HMR": METADATA.HMR,
-				"PRODUCTION": METADATA.PRODUCTION,
-				"DEVELOPMENT": METADATA.DEVELOPMENT
+				ENV: JSON.stringify(METADATA.ENV),
+				NODE_ENV: JSON.stringify(METADATA.ENV),
+				HMR: METADATA.HMR,
+				PRODUCTION: METADATA.PRODUCTION,
+				DEVELOPMENT: METADATA.DEVELOPMENT
 			}
 		}),
 
@@ -133,13 +133,7 @@ module.exports = webpackMerge(commonConfig, {
 		// reference: https://webpack.js.org/plugins/commons-chunk-plugin
 		// reference: https://github.com/webpack/docs/wiki/optimization#multi-page-app
 		new CommonsChunkPlugin({
-			name: helpers.reverse([
-				"polyfills",
-				"vendor",
-				"main",
-				"vendor-styles",
-				"main-styles"
-			]),
+			name: helpers.reverse(["polyfills", "vendor", "main", "vendor-styles", "main-styles"]),
 			// the filename configured in the output section is reused
 			//filename: "[name].[hash].bundle.js",
 			chunks: Infinity
@@ -190,13 +184,7 @@ module.exports = webpackMerge(commonConfig, {
 		// reference: https://github.com/jantimon/html-webpack-plugin
 		new HtmlWebpackPlugin({
 			template: helpers.root("src/index.html"),
-			chunksSortMode: helpers.packageSort([
-				"polyfills",
-				"vendor",
-				"main",
-				"vendor-styles",
-				"main-styles"
-			]),
+			chunksSortMode: helpers.packageSort(["polyfills", "vendor", "main", "vendor-styles", "main-styles"]),
 			metadata: METADATA,
 			inject: "body", //  true (default) or  "body" are the same
 			starkAppMetadata: commonData.starkAppMetadata,
@@ -233,7 +221,7 @@ module.exports = webpackMerge(commonConfig, {
 		new StylelintPlugin({
 			configFile: ".stylelintrc",
 			emitErrors: false,
-			files: ["src/**/*.?(pc|sc|c|sa)ss"]  // pcss|scss|css|sass
+			files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
 		}),
 
 		new CircularDependencyPlugin({
@@ -306,7 +294,6 @@ module.exports = webpackMerge(commonConfig, {
 		}
 	}
 });
-
 
 //FIXME review for Webpack 2: might not be needed. We might have to switch back to HMR by default..
 // Configure live reloading

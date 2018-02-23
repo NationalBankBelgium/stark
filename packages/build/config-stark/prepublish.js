@@ -1,10 +1,9 @@
-'use strict';
-const spawnSync = require('child_process').spawnSync;
+"use strict";
+const spawnSync = require("child_process").spawnSync;
 
 console.log("Login to publishConfig registry for publishing...");
 
-spawnSync('npm', ['login', '--registry=http://nexus.prd.nbb:81/repository/nbb-npm-internal/'],
-	{stdio: 'inherit', shell: true});
+spawnSync("npm", ["login", "--registry=http://nexus.prd.nbb:81/repository/nbb-npm-internal/"], { stdio: "inherit", shell: true });
 
 console.log("Starting to publish...");
 
@@ -17,7 +16,3 @@ console.log("Starting to publish...");
  email=pr-deployment
 
 */
-
-
-
-

@@ -22,7 +22,7 @@ const UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
 const METADATA = {
 	host: process.env.HOST || "localhost",
 	port: parseInt(process.env.PORT, 10) || 8080,
-	ENV: process.env.NODE_ENV = process.env.ENV = "production",
+	ENV: (process.env.NODE_ENV = process.env.ENV = "production"),
 	PRODUCTION: true,
 	DEVELOPMENT: false
 };
@@ -41,9 +41,9 @@ module.exports = webpackMerge(commonConfig, {
 	// the entry point for the bundles
 	// reference: https://webpack.js.org/configuration/entry-context/#entry
 	entry: {
-		"polyfills": helpers.root("src/polyfills.ts"),
-		"vendor": helpers.root("src/vendor.ts"),
-		"main": helpers.root("src/main.ts") // our angular app
+		polyfills: helpers.root("src/polyfills.ts"),
+		vendor: helpers.root("src/vendor.ts"),
+		main: helpers.root("src/main.ts") // our angular app
 	},
 
 	// Options affecting the normal modules.
@@ -86,17 +86,17 @@ module.exports = webpackMerge(commonConfig, {
 		// reference: https://webpack.js.org/plugins/define-plugin
 		// NOTE: when adding more properties make sure you include them in custom-typings.d.ts
 		new DefinePlugin({
-			"ENV": JSON.stringify(METADATA.ENV),
-			"NODE_ENV": JSON.stringify(METADATA.ENV),
-			"HMR": false,
-			"PRODUCTION": METADATA.PRODUCTION,
-			"DEVELOPMENT": METADATA.DEVELOPMENT,
+			ENV: JSON.stringify(METADATA.ENV),
+			NODE_ENV: JSON.stringify(METADATA.ENV),
+			HMR: false,
+			PRODUCTION: METADATA.PRODUCTION,
+			DEVELOPMENT: METADATA.DEVELOPMENT,
 			"process.env": {
-				"ENV": JSON.stringify(METADATA.ENV),
-				"NODE_ENV": JSON.stringify(METADATA.ENV),
-				"HMR": false,
-				"PRODUCTION": METADATA.PRODUCTION,
-				"DEVELOPMENT": METADATA.DEVELOPMENT
+				ENV: JSON.stringify(METADATA.ENV),
+				NODE_ENV: JSON.stringify(METADATA.ENV),
+				HMR: false,
+				PRODUCTION: METADATA.PRODUCTION,
+				DEVELOPMENT: METADATA.DEVELOPMENT
 			}
 		}),
 
@@ -106,11 +106,7 @@ module.exports = webpackMerge(commonConfig, {
 		// reference: https://webpack.js.org/plugins/commons-chunk-plugin
 		// reference: https://github.com/webpack/docs/wiki/optimization#multi-page-app
 		new CommonsChunkPlugin({
-			name: helpers.reverse([
-				"polyfills",
-				"vendor",
-				"main"
-			]),
+			name: helpers.reverse(["polyfills", "vendor", "main"]),
 			// the filename configured in the output section is reused
 			//filename: "[name].[hash].bundle.js",
 			chunks: Infinity
@@ -123,14 +119,16 @@ module.exports = webpackMerge(commonConfig, {
 			beautify: false, // set to true for debugging
 			//dead_code: false, // uncomment for debugging
 			//unused: false, // uncomment for debugging
-			mangle: { // reference: https://github.com/mishoo/UglifyJS2#mangle-options
+			mangle: {
+				// reference: https://github.com/mishoo/UglifyJS2#mangle-options
 				screw_ie8: true,
 				keep_fnames: true,
 				except: [
 					// list strings that should not be mangled here
 				]
 			},
-			compress: { // reference: https://github.com/mishoo/UglifyJS2#compress-options
+			compress: {
+				// reference: https://github.com/mishoo/UglifyJS2#compress-options
 				screw_ie8: true,
 				warnings: false
 				// uncomment for debugging
@@ -168,11 +166,7 @@ module.exports = webpackMerge(commonConfig, {
 		// reference: https://github.com/jantimon/html-webpack-plugin
 		new HtmlWebpackPlugin({
 			template: helpers.root("src/index.html"),
-			chunksSortMode: helpers.packageSort([
-				"polyfills",
-				"vendor",
-				"main"
-			]),
+			chunksSortMode: helpers.packageSort(["polyfills", "vendor", "main"]),
 			metadata: METADATA,
 			inject: "body", //  true (default) or  "body" are the same
 			starkAppMetadata: commonData.starkAppMetadata,

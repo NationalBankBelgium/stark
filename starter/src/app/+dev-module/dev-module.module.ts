@@ -1,28 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UIRouterModule } from '@uirouter/angular';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { UIRouterModule } from "@uirouter/angular";
 
-import { DEV_MODULE_STATES } from './dev-module.routes';
-import { DevModuleComponent } from './dev-module.component';
-import { routerChildConfigFn } from '../router.config';
+import { DEV_MODULE_STATES } from "./dev-module.routes";
+import { DevModuleComponent } from "./dev-module.component";
+import { routerChildConfigFn } from "../router.config";
 
 /*
       Don't leave side-effects outside of classes so this will tree-shake nicely on prod
       e.g. `console.log('something')` is a side effect.
 */
 @NgModule({
-  declarations: [ DevModuleComponent ],
-  imports: [
-    CommonModule,
-    UIRouterModule.forChild({
-      states: DEV_MODULE_STATES,
-      config: routerChildConfigFn
-    }),
-  ],
+	declarations: [DevModuleComponent],
+	imports: [
+		CommonModule,
+		UIRouterModule.forChild({
+			states: DEV_MODULE_STATES,
+			config: routerChildConfigFn
+		})
+	]
 })
 export class DevModuleModule {
-  public static routes = DEV_MODULE_STATES;
-  constructor() {
-    console.log('`DevModuleModule` module initialized');
-  }
+	public static routes = DEV_MODULE_STATES;
+	constructor() {
+		console.log("`DevModuleModule` module initialized");
+	}
 }

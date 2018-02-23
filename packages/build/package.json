@@ -3,9 +3,7 @@
   "version": "0.0.0-PLACEHOLDER",
   "description": "Stark - the build",
   "author": "nationalbankbelgium-PLACEHOLDER",
-  "contributors": [
-    "nationalbankbelgium-PLACEHOLDER"
-  ],
+  "contributors": ["nationalbankbelgium-PLACEHOLDER"],
   "license": "MIT",
   "repository": {
     "type": "git",

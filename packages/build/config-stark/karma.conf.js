@@ -5,18 +5,15 @@ const helpers = require("./helpers");
 
 // Karma configuration
 // reference: http://karma-runner.github.io/0.13/config/configuration-file.html
-module.exports = (config) => {
+module.exports = config => {
 	const testWebpackConfig = require("./webpack.test.js");
 	config.set({
-
 		// base path that will be used to resolve all patterns (e.g. files, exclude)
 		basePath: "",
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: [
-			"jasmine"
-		],
+		frameworks: ["jasmine"],
 
 		// list of files to exclude
 		exclude: [],
@@ -24,10 +21,12 @@ module.exports = (config) => {
 		// client configuration
 		client: {
 			// can be used to pass arguments to tests (see spec-bundle.ts)
-			args: [{
-				// path to the subset of the tests to consider (used to filter the unit tests to execute (see spec-bundle.ts)
-				testPath: helpers.getTestPath(process.argv)
-			}],
+			args: [
+				{
+					// path to the subset of the tests to consider (used to filter the unit tests to execute (see spec-bundle.ts)
+					testPath: helpers.getTestPath(process.argv)
+				}
+			],
 
 			// other client-side config
 			captureConsole: true
@@ -55,10 +54,7 @@ module.exports = (config) => {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			"node_modules/@nationalbankbelgium/stark/config/spec-bundle.ts": [
-				"webpack",
-				"sourcemap"
-			]
+			"node_modules/@nationalbankbelgium/stark/config/spec-bundle.ts": ["webpack", "sourcemap"]
 		},
 
 		// Webpack Config
@@ -74,19 +70,15 @@ module.exports = (config) => {
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
 		// https://www.npmjs.com/package/karma-junit-reporter
 		// https://www.npmjs.com/package/karma-spec-reporter
-		reporters: [
-			"mocha",
-			"progress",
-			"bamboo"
-		],
+		reporters: ["mocha", "progress", "bamboo"],
 
-		bambooReporter:{
-			filename: 'reports/util.mocha.json' //optional, defaults to "mocha.json"
+		bambooReporter: {
+			filename: "reports/util.mocha.json" //optional, defaults to "mocha.json"
 		},
 
 		// Give a type to files, otherwise it will not work with Chrome > 55
 		mime: {
-			"text/x-typescript": ["ts","tsx"]
+			"text/x-typescript": ["ts", "tsx"]
 		},
 
 		// web server port
@@ -122,4 +114,4 @@ module.exports = (config) => {
 		// How many browsers should be started simultaneously
 		//concurrency: Infinity,
 	});
-}
+};

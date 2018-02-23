@@ -18,7 +18,7 @@
   "STARK.APP_DATA.MENU": "Toepassingsgegevens",
 
   "STARK.APP_MENU.SLIDING.BACK": "Vorige",
-    
+
   "STARK.APP_FOOTER.COPYRIGHT": "Nationale Bank van België. Alle rechten voorbehouden",
   "STARK.APP_FOOTER.COPYRIGHT_YEAR": "2016",
   "STARK.APP_FOOTER.LEGAL_INFO": "Juridische informatie",
@@ -28,7 +28,7 @@
 
   "STARK.DROPDOWN.SELECTED": "{{count}} geselecteerd",
   "STARK.DROPDOWN.SELECTED_PLURAL": "{{count}} geselecteerd",
-  
+
   "STARK.TABLE.NB_SELECTED_ROWS": "Geselecteerd",
   "STARK.TABLE.TOGGLE_SELECTION": "Selectie omkeren",
   "STARK.TABLE.SELECT_ALL": "Alles selectioneren",
@@ -55,10 +55,10 @@
   "STARK.MULTI_COLUMN_SORTING.THEN_BY": "Dan op",
   "STARK.MULTI_COLUMN_SORTING.CANCEL": "Annuleer",
   "STARK.MULTI_COLUMN_SORTING.SAVE": "Opslaan",
-  
+
   "STARK.SORTING.ASC": "Oplopend",
   "STARK.SORTING.DESC": "Aflopend",
-  
+
   "STARK.FILE_UPLOAD.NAME": "Naam",
   "STARK.FILE_UPLOAD.SIZE": "Groote",
   "STARK.FILE_UPLOAD.TYPE": "Type",
@@ -75,7 +75,7 @@
   "STARK.ICONS.MENU": "Menu",
   "STARK.ICONS.TOGGLE_MODE": "Schakel naar compacte mode",
   "STARK.ICONS.APP_DATA": "Toepassingsgegevens",
-  
+
   "STARK.ICONS.ADD_ITEM": "Toevoegen",
   "STARK.ICONS.EDIT_ITEM": "Wijzig",
   "STARK.ICONS.DELETE_ITEM": "Verwijder",
@@ -89,7 +89,7 @@
   "STARK.ICONS.SEARCH": "Zoeken",
   "STARK.ICONS.NEW_ITEM": "Nieuw",
   "STARK.ICONS.SAVE_AND_NEXT": "Bewaar en volgende",
-  
+
   "STARK.VALIDATION.REQUIRED": "Dit veld is verplicht",
   "STARK.VALIDATION.SIZE": "Dit veld moet tussen {{min}} en {{max}} karakters bevatten",
   "STARK.VALIDATION.EMAIL": "Het e-mail adres is niet in het juiste formaat",
@@ -101,15 +101,15 @@
   "STARK.LOGIN.LOGIN_BUTTON": "Aanmelden",
   "STARK.LOGIN.USERS_LIST": "Beschikbare gebruikers",
   "STARK.LOGIN.NO_PROFILE": "Geen profiel beschikbaar",
-  
-  "STARK.CONFIRMATION.UNSAVED_CHANGES.TITLE" : "Wijzigingen niet bewaard",
+
+  "STARK.CONFIRMATION.UNSAVED_CHANGES.TITLE": "Wijzigingen niet bewaard",
   "STARK.CONFIRMATION.UNSAVED_CHANGES.TEXT": "Wil je echt verdergaan zonder de gegevens te bewaren?",
   "STARK.CONFIRMATION.UNSAVED_CHANGES.ARIA_LABEL": "bevestiging van niet bewaarde gegevens",
   "STARK.CONFIRMATION.UNSAVED_CHANGES.CONFIRM": "Bevestig",
   "STARK.CONFIRMATION.UNSAVED_CHANGES.CANCEL": "Niet verdergaan",
 
-  "STARK.SESSION_EXPIRED.TITLE" : "sessie verlopen",
-  "STARK.SESSION_EXPIRED.RELOAD" : "Herladen",
+  "STARK.SESSION_EXPIRED.TITLE": "sessie verlopen",
+  "STARK.SESSION_EXPIRED.RELOAD": "Herladen",
 
   "STARK.SESSION.TIMEOUT.WARNING.TITLE": "Sessie verlopen",
   "STARK.SESSION.TIMEOUT.WARNING.WILL_EXPIRE_IN": "Uw sessie zal vervallen in",
@@ -117,8 +117,8 @@
   "STARK.SESSION.TIMEOUT.WARNING.DO_YOU_WISH_TO_STAY_CONNECTED": "Wilt u om verbonden te blijven?",
   "STARK.SESSION.TIMEOUT.WARNING.STAY_CONNECTED": "Blijf verbonden",
 
-  "STARK.SESSION_LOGOUT.TITLE" : "Afgemeld",
-  "STARK.SESSION_LOGOUT.LOGON" : "Opnieuw aanmelden",
+  "STARK.SESSION_LOGOUT.TITLE": "Afgemeld",
+  "STARK.SESSION_LOGOUT.LOGON": "Opnieuw aanmelden",
 
   "STARK.MESSAGE_PANE.ERROR_MESSAGES": "Foutmeldingen",
   "STARK.MESSAGE_PANE.WARNING_MESSAGES": "Waarschuwingsberichten",

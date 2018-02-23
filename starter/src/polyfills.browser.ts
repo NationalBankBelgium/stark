@@ -25,9 +25,9 @@
  *
  * Polyfill: https://github.com/zloirock/core-js
  */
-import 'core-js/es6';
-import 'core-js/es7/reflect';
-import 'core-js/stage/4';
+import "core-js/es6";
+import "core-js/es7/reflect";
+import "core-js/stage/4";
 
 /**
  * IE11 and Edge require this to support Server-sent events
@@ -35,7 +35,7 @@ import 'core-js/stage/4';
  *
  * Polyfill: https://github.com/Yaffle/EventSource
  */
-import 'event-source-polyfill';
+import "event-source-polyfill";
 
 /**
  * IE11 requires Element.classList for NgClass support on SVG elements
@@ -45,7 +45,7 @@ import 'event-source-polyfill';
  * https://angular.io/guide/browser-support#classlist
  * Polyfill: https://github.com/eligrey/classList.js
  */
-import 'eligrey-classlist-js-polyfill';
+import "eligrey-classlist-js-polyfill";
 
 /**
  * All but Chrome, Firefox and Opera require this to support Web Animations from
@@ -54,24 +54,22 @@ import 'eligrey-classlist-js-polyfill';
  *
  * Polyfill: https://github.com/web-animations/web-animations-js
  */
-import 'web-animations-js';
+import "web-animations-js";
 
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
  */
 // workaround for IE11 before loading zone.ks (see: https://github.com/angular/zone.js/issues/933)
 (window as any).__Zone_enable_cross_context_check = true;
-import 'zone.js/dist/zone';
+import "zone.js/dist/zone";
 // import 'zone.js/dist/long-stack-trace-zone' // async stack traces with zone.js included for dev
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
 
-if ('production' === ENV) {
-  // Production
-
+if ("production" === ENV) {
+	// Production
 } else {
-
-  // Development
+	// Development
 }

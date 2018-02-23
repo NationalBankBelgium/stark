@@ -1,1 +1,1 @@
-export { DevModuleModule } from './dev-module.module';
+export { DevModuleModule } from "./dev-module.module";

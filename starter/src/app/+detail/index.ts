@@ -1,1 +1,1 @@
-export { DetailModule } from './detail.module';
+export { DetailModule } from "./detail.module";

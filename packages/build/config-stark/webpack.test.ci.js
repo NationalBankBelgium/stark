@@ -17,7 +17,7 @@ const helpers = require("./helpers");
 
 // Metadata
 const METADATA = {
-	ENV: process.env.ENV = process.env.NODE_ENV = "test",
+	ENV: (process.env.ENV = process.env.NODE_ENV = "test"),
 	PRODUCTION: false,
 	DEVELOPMENT: true
 };
@@ -76,13 +76,9 @@ module.exports = {
 				include: helpers.root("src"),
 				use: {
 					loader: "istanbul-instrumenter-loader",
-					options: {esModules: true}
+					options: { esModules: true }
 				},
-				exclude: [
-					/\.e2e-spec\.ts$/,
-					/\.spec\.ts$/,
-					"node_modules"
-				]
+				exclude: [/\.e2e-spec\.ts$/, /\.spec\.ts$/, "node_modules"]
 			}
 		])
 	},
@@ -97,17 +93,17 @@ module.exports = {
 		// reference: https://webpack.js.org/plugins/define-plugin
 		// NOTE: when adding more properties make sure you include them in custom-typings.d.ts
 		new DefinePlugin({
-			"ENV": JSON.stringify(METADATA.ENV),
-			"NODE_ENV": JSON.stringify(METADATA.ENV),
-			"HMR": false,
-			"PRODUCTION": METADATA.PRODUCTION,
-			"DEVELOPMENT": METADATA.DEVELOPMENT,
+			ENV: JSON.stringify(METADATA.ENV),
+			NODE_ENV: JSON.stringify(METADATA.ENV),
+			HMR: false,
+			PRODUCTION: METADATA.PRODUCTION,
+			DEVELOPMENT: METADATA.DEVELOPMENT,
 			"process.env": {
-				"ENV": JSON.stringify(METADATA.ENV),
-				"NODE_ENV": JSON.stringify(METADATA.ENV),
-				"HMR": false,
-				"PRODUCTION": METADATA.PRODUCTION,
-				"DEVELOPMENT": METADATA.DEVELOPMENT
+				ENV: JSON.stringify(METADATA.ENV),
+				NODE_ENV: JSON.stringify(METADATA.ENV),
+				HMR: false,
+				PRODUCTION: METADATA.PRODUCTION,
+				DEVELOPMENT: METADATA.DEVELOPMENT
 			}
 		}),
 
@@ -126,11 +122,7 @@ module.exports = {
 		// reference: https://github.com/jantimon/html-webpack-plugin
 		new HtmlWebpackPlugin({
 			template: helpers.root("src/index.html"),
-			chunksSortMode: helpers.packageSort([
-				"polyfills",
-				"vendor",
-				"main"
-			]),
+			chunksSortMode: helpers.packageSort(["polyfills", "vendor", "main"]),
 			metadata: METADATA,
 			inject: "body", //  true (default) or  "body" are the same
 			starkAppMetadata: {},
