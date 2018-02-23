@@ -14,6 +14,7 @@ describe(`App`, () => {
 	/**
 	 * async beforeEach
 	 */
+
 	beforeEach(
 		async(() => {
 			TestBed.configureTestingModule({
