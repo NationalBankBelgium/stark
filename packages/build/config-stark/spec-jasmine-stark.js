@@ -22,21 +22,26 @@ const helpers = require("./helpers");
 const projectTsConfig = require(helpers.root("./tsconfig.json"));
 // first we need to get all the compilerOptions (including those inherited from Stark) and just change the module type to CommonJS
 let starkTsConfig;
-let compilerOptionsToOverwrite = {module: "commonjs"}; // change the module type generation to CommonJS
+let compilerOptionsToOverwrite = { module: "commonjs" }; // change the module type generation to CommonJS
 let tsNodeIgnoredFiles = [/node_modules/]; // the default in ts-node
 try {
 	// the current project IS NOT Stark, it is an application project, then the Stark tsConfig is read
 	starkTsConfig = require(helpers.rootStark("./tsconfig.json"));
 	// IMPORTANT: in this case also the "allowJs" option should be enabled so that the compiled JS code from Stark is transpiled as well
 	// otherwise if the .spec.ts files import something from Stark, ts-node will fail to load those files due to "Unexpected token 'import'..."
-	compilerOptionsToOverwrite = Object.assign({}, compilerOptionsToOverwrite, {allowJs: true});
+	compilerOptionsToOverwrite = Object.assign({}, compilerOptionsToOverwrite, { allowJs: true });
 	// AND of course the code from Stark SHOULD be transpiled, so the node_modules should be ignored EXCEPT those in @nationalbankbelgium
 	tsNodeIgnoredFiles = [/node_modules(?!\/@nationalbankbelgium)/];
 } catch (e) {
 	// then the current project IS Stark, so the projectTsConfig variable already has the tsConfig from Stark
-	starkTsConfig = {compilerOptions: {}};
+	starkTsConfig = { compilerOptions: {} };
 }
-const compilerOptionsWithCommonJs = Object.assign({}, starkTsConfig.compilerOptions, projectTsConfig.compilerOptions, compilerOptionsToOverwrite);
+const compilerOptionsWithCommonJs = Object.assign(
+	{},
+	starkTsConfig.compilerOptions,
+	projectTsConfig.compilerOptions,
+	compilerOptionsToOverwrite
+);
 require("ts-node").register({
 	compilerOptions: compilerOptionsWithCommonJs,
 	ignore: tsNodeIgnoredFiles
@@ -65,9 +70,7 @@ const jasmineExec = new jasmine({
 
 jasmineExec.loadConfig({
 	spec_dir: "src",
-	spec_files: [
-		specFiles
-	]
+	spec_files: [specFiles]
 });
 
 // TODO configure reporters

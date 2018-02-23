@@ -1,1 +1,1 @@
-export { BarrelModule } from './barrel.module';
+export { BarrelModule } from "./barrel.module";

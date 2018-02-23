@@ -1,1 +1,1 @@
-export * from './x-large.directive';
+export * from "./x-large.directive";

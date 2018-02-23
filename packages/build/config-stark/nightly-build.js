@@ -1,7 +1,7 @@
 "use strict";
 
 const helpers = require("./helpers");
-const fs = require('fs');
+const fs = require("fs");
 const packageJSONPath = helpers.root("/package.json");
 
 console.log("Preparation of the package.json for the nighly build...");
@@ -24,7 +24,10 @@ function getNightlyVersionString(versionString) {
 	// but we'd prefer to just remove separators and limit ourselves to YYYYMMDD.
 	// UTC time will always be implicit here.
 	const now = new Date();
-	const timeStr = now.toISOString().replace(/:|T|\.|-/g, "").slice(0, 8);
+	const timeStr = now
+		.toISOString()
+		.replace(/:|T|\.|-/g, "")
+		.slice(0, 8);
 
 	return `${versionString}-dev.${timeStr}`;
 }
