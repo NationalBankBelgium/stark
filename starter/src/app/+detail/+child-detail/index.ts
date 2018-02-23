@@ -1,1 +1,1 @@
-export { ChildDetailModule } from './child-detail.module';
+export { ChildDetailModule } from "./child-detail.module";

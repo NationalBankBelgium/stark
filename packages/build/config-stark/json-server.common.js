@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-const jsonServer = require('json-server');
-const bodyParser = require('body-parser');
-const pluralize = require('pluralize');
-const _uniqueId = require('lodash/uniqueId');
+const jsonServer = require("json-server");
+const bodyParser = require("body-parser");
+const pluralize = require("pluralize");
+const _uniqueId = require("lodash/uniqueId");
 
 module.exports = {
 	getJSONServer: getJSONServer,
@@ -20,25 +20,25 @@ const starkHttpHeader = {
 
 // Stark valid query parameters
 const starkQueryParam = {
-	LIMIT: 'limit',
-	OFFSET: 'offset',
-	SORT: 'sort',
-	MOCK_COLLECTION_REQUEST: 'mockCollectionRequest'
+	LIMIT: "limit",
+	OFFSET: "offset",
+	SORT: "sort",
+	MOCK_COLLECTION_REQUEST: "mockCollectionRequest"
 };
 
 // Stark pagination metadata properties
 const starkMetadata = {
 	PAGINATION: {
-		LIMIT: 'limit',
-		OFFSET: 'offset',
-		TOTAL_COUNT: 'totalCount',
-		CURRENT_PAGE: 'currentPage',
-		PREVIOUS_OFFSET: 'previousOffset',
-		NEXT_OFFSET: 'nextOffset',
-		PAGE_COUNT: 'pageCount'
+		LIMIT: "limit",
+		OFFSET: "offset",
+		TOTAL_COUNT: "totalCount",
+		CURRENT_PAGE: "currentPage",
+		PREVIOUS_OFFSET: "previousOffset",
+		NEXT_OFFSET: "nextOffset",
+		PAGE_COUNT: "pageCount"
 	},
-	ETAGS: 'etags',
-	SORTED_BY: 'sortedBy'
+	ETAGS: "etags",
+	SORTED_BY: "sortedBy"
 };
 
 /**
@@ -52,13 +52,13 @@ const starkMetadata = {
 function getJSONServer(data, middlewares, routes, uploadEndpoints) {
 	var server = jsonServer.create();
 	var router = jsonServer.router(data);
-	var defaultMiddlewares = jsonServer.defaults({bodyParser: false}); // disable default bodyParser usage since it causes some issues
+	var defaultMiddlewares = jsonServer.defaults({ bodyParser: false }); // disable default bodyParser usage since it causes some issues
 
 	// set ExpressJS App settings
 	// http://expressjs.com/en/api.html#app.settings.table
-	server.set('etag', false);  // disable default etag generation
+	server.set("etag", false); // disable default etag generation
 
-	router.db._.id = 'uuid'; // use "uuid" as resource id
+	router.db._.id = "uuid"; // use "uuid" as resource id
 
 	routes = routes || {};
 	var starkRoutes = {};
@@ -69,8 +69,8 @@ function getJSONServer(data, middlewares, routes, uploadEndpoints) {
 	server.use(jsonServer.rewriter(starkRoutes));
 	server.use(defaultMiddlewares);
 	// use bodyParser separately passing the same options as in json-server defaults
-	server.use(bodyParser.json({limit: '10mb', extended: false}));
-	server.use(bodyParser.urlencoded({extended: false}));
+	server.use(bodyParser.json({ limit: "10mb", extended: false }));
+	server.use(bodyParser.urlencoded({ extended: false }));
 	server.use(transformRequests);
 
 	if (uploadEndpoints && uploadEndpoints instanceof Array) {
@@ -91,35 +91,35 @@ function getJSONServer(data, middlewares, routes, uploadEndpoints) {
 }
 
 function addUploadEndpoints(server, endPoints) {
-	const multer = require('multer');
+	const multer = require("multer");
 
 	// multer disk storage settings
 	var storage = multer.diskStorage({
-		destination: function (req, file, callback) {
-			callback(null, './uploads/');
+		destination: function(req, file, callback) {
+			callback(null, "./uploads/");
 		},
-		filename: function (req, file, callback) {
+		filename: function(req, file, callback) {
 			var timestamp = Date.now();
-			var fileNamePartials = file.originalname.split('.');
+			var fileNamePartials = file.originalname.split(".");
 			var fileExtension = fileNamePartials.pop();
-			var fileName = fileNamePartials.join('');
+			var fileName = fileNamePartials.join("");
 
-			callback(null, fileName + '-' + timestamp + '.' + fileExtension);
+			callback(null, fileName + "-" + timestamp + "." + fileExtension);
 		}
 	});
 
-	endPoints.forEach(function (endPoint) {
+	endPoints.forEach(function(endPoint) {
 		// multer settings
-		var upload = multer({storage: storage}).single('file');
+		var upload = multer({ storage: storage }).single("file");
 
 		// API path that will upload the files
-		server.post(endPoint.path, function (req, res) {
-			upload(req, res, function (err) {
+		server.post(endPoint.path, function(req, res) {
+			upload(req, res, function(err) {
 				if (err) {
-					res.jsonp({error_code: 1, error_dec: err});
+					res.jsonp({ error_code: 1, error_dec: err });
 					return;
 				}
-				res.jsonp('File uploaded successfully!');
+				res.jsonp("File uploaded successfully!");
 			});
 		});
 	});
@@ -132,16 +132,16 @@ function addUploadEndpoints(server, endPoints) {
  */
 function initializeServer(server, backends) {
 	var usedPorts = [];
-	const listenPort = function (server, name, port) {
-		server.listen(port, function () {
-			console.log('JSON Server is running mock backend ' + name + ' in port ' + port)
+	const listenPort = function(server, name, port) {
+		server.listen(port, function() {
+			console.log("JSON Server is running mock backend " + name + " in port " + port);
 		});
 	};
 
-	Object.keys(backends).forEach(function (key) {
+	Object.keys(backends).forEach(function(key) {
 		var backend = backends[key];
-		if (backend.mock === 'json-server') {
-			var port = backend.url.split(':').slice(-1)[0];
+		if (backend.mock === "json-server") {
+			var port = backend.url.split(":").slice(-1)[0];
 			if (usedPorts.indexOf(port) < 0) {
 				usedPorts.push(port);
 				listenPort(server, backend.name, port);
@@ -157,7 +157,7 @@ function initializeServer(server, backends) {
  * @param next {Function} Function to call next middleware (should always be called at the end of the current middleware)
  */
 function transformRequests(req, res, next) {
-	console.log('transformRequests Stark middleware');
+	console.log("transformRequests Stark middleware");
 
 	transformPaginationParams(req);
 	transformSortingParams(req);
@@ -180,8 +180,7 @@ function transformRequests(req, res, next) {
  * @returns {Function}
  */
 function composeTransformResponses(transformFn) {
-
-	return function (req, res) {
+	return function(req, res) {
 		var collectionMetadata = {};
 
 		transformResponses(req, res, collectionMetadata);
@@ -194,12 +193,12 @@ function composeTransformResponses(transformFn) {
 		// See: http://expressjs.com/es/api.html#res.headersSent
 		if (!res.headersSent) {
 			if (isGetCollectionRequest(req)) {
-				res.jsonp({items: res.locals.data, metadata: collectionMetadata});
+				res.jsonp({ items: res.locals.data, metadata: collectionMetadata });
 			} else {
 				res.jsonp(res.locals.data);
 			}
 		}
-	}
+	};
 }
 
 /**
@@ -209,18 +208,18 @@ function composeTransformResponses(transformFn) {
  * @param collectionMetadata {object} Metadata object constructed by the Stark middleware (only for Collection responses)
  */
 function transformResponses(req, res, collectionMetadata) {
-	console.log('transformResponses Stark middleware');
+	console.log("transformResponses Stark middleware");
 
 	if (isGetCollectionRequest(req)) {
 		// Add "metadata" and "etags" to all responses of GetCollection requests
 		addPaginationMetadata(req, res, collectionMetadata);
 		addSortingMetadata(req, collectionMetadata);
 		addEtagInfo(res, collectionMetadata);
-		console.log('response transformed for getCollection request => %s', req.url);
-	} else if (req.method !== 'DELETE') {
+		console.log("response transformed for getCollection request => %s", req.url);
+	} else if (req.method !== "DELETE") {
 		// Add "etag" to all responses of SingleItem requests except DELETE
 		addEtagInfo(res);
-		console.log('response transformed for single item request => %s', req.url);
+		console.log("response transformed for single item request => %s", req.url);
 	}
 
 	if (isNestedResourceQuery(req)) {
@@ -231,7 +230,7 @@ function transformResponses(req, res, collectionMetadata) {
 		// the nested resource is returned in an array since the query most likely doesn't have a nested resource uuid defined
 		// so an array is expected to be returned
 		res.locals.data = [Object.assign({}, data[nestedResourceName])];
-		console.log('response transformed for nested resource request => %s', req.url);
+		console.log("response transformed for nested resource request => %s", req.url);
 	}
 }
 
@@ -245,12 +244,12 @@ function transformResponses(req, res, collectionMetadata) {
 function extractUrlParams(url) {
 	var queryParams = {};
 
-	if (typeof url !== 'undefined') {
-		var params = url.substring(url.indexOf('?') + 1).split('&');
+	if (typeof url !== "undefined") {
+		var params = url.substring(url.indexOf("?") + 1).split("&");
 
 		for (var queryParam of params) {
 			if (queryParam) {
-				var param = queryParam.split('=');
+				var param = queryParam.split("=");
 				queryParams[param[0]] = param[1];
 			}
 		}
@@ -265,13 +264,13 @@ function extractUrlParams(url) {
  */
 function transformPaginationParams(req) {
 	const limit = parseInt(req.query[starkQueryParam.LIMIT], 10) || 10; // defaults to 10
-	const offset = parseInt(req.query[starkQueryParam.OFFSET], 10) || 0;  // defaults to 0
+	const offset = parseInt(req.query[starkQueryParam.OFFSET], 10) || 0; // defaults to 0
 	const page = Math.floor(offset / limit) + 1;
 
-	req.query['_limit'] = limit;
+	req.query["_limit"] = limit;
 	delete req.query[starkQueryParam.LIMIT];
 
-	req.query['_page'] = page;
+	req.query["_page"] = page;
 	delete req.query[starkQueryParam.OFFSET];
 }
 
@@ -288,13 +287,13 @@ function transformSortingParams(req) {
 		var fields = [];
 		var order = [];
 
-		sortingParams.forEach(function (sortingParam) {
-			fields.push(sortingParam.split('+')[0]);
-			order.push(sortingParam.split('+')[1].toLowerCase());
+		sortingParams.forEach(function(sortingParam) {
+			fields.push(sortingParam.split("+")[0]);
+			order.push(sortingParam.split("+")[1].toLowerCase());
 		});
 
-		req.query['_sort'] = fields.join(',');
-		req.query['_order'] = order.join(',');
+		req.query["_sort"] = fields.join(",");
+		req.query["_order"] = order.join(",");
 
 		delete req.query[starkQueryParam.SORT];
 	}
@@ -305,8 +304,8 @@ function transformSortingParams(req) {
  * @param req {*} The current request
  */
 function convertUpdateRequestMethod(req) {
-	if (req.method === 'POST' && req.body && req.body.uuid) {
-		req.method = 'PATCH';
+	if (req.method === "POST" && req.body && req.body.uuid) {
+		req.method = "PATCH";
 	}
 }
 
@@ -318,19 +317,24 @@ function convertUpdateRequestMethod(req) {
  * @param collectionMetadata {object} Metadata object constructed by the Stark middleware (only for Collection responses)
  */
 function addPaginationMetadata(req, res, collectionMetadata) {
-	var pagination = collectionMetadata['pagination'] = {};
+	var pagination = (collectionMetadata["pagination"] = {});
 	var params = extractUrlParams(req.originalUrl);
 
 	// setting default values in case they are not defined
 	pagination[starkMetadata.PAGINATION.LIMIT] = parseInt(params[starkQueryParam.LIMIT]) || 10;
 	pagination[starkMetadata.PAGINATION.OFFSET] = parseInt(params[starkQueryParam.OFFSET]) || 0;
-	pagination[starkMetadata.PAGINATION.TOTAL_COUNT] = res.get('X-Total-Count') || 1000; // 'X-Total-Count' is added by json-server
-	pagination[starkMetadata.PAGINATION.PAGE_COUNT] = Math.ceil(pagination[starkMetadata.PAGINATION.TOTAL_COUNT] / pagination[starkMetadata.PAGINATION.LIMIT]);
-	pagination[starkMetadata.PAGINATION.CURRENT_PAGE] = Math.floor((pagination[starkMetadata.PAGINATION.OFFSET]) / pagination[starkMetadata.PAGINATION.LIMIT]) + 1;
+	pagination[starkMetadata.PAGINATION.TOTAL_COUNT] = res.get("X-Total-Count") || 1000; // 'X-Total-Count' is added by json-server
+	pagination[starkMetadata.PAGINATION.PAGE_COUNT] = Math.ceil(
+		pagination[starkMetadata.PAGINATION.TOTAL_COUNT] / pagination[starkMetadata.PAGINATION.LIMIT]
+	);
+	pagination[starkMetadata.PAGINATION.CURRENT_PAGE] =
+		Math.floor(pagination[starkMetadata.PAGINATION.OFFSET] / pagination[starkMetadata.PAGINATION.LIMIT]) + 1;
 	pagination[starkMetadata.PAGINATION.PREVIOUS_OFFSET] = null;
 	pagination[starkMetadata.PAGINATION.NEXT_OFFSET] = null;
 
-	var calculatedOffset = Math.floor(pagination[starkMetadata.PAGINATION.OFFSET] / pagination[starkMetadata.PAGINATION.LIMIT]) * pagination[starkMetadata.PAGINATION.LIMIT];
+	var calculatedOffset =
+		Math.floor(pagination[starkMetadata.PAGINATION.OFFSET] / pagination[starkMetadata.PAGINATION.LIMIT]) *
+		pagination[starkMetadata.PAGINATION.LIMIT];
 
 	if (calculatedOffset - pagination[starkMetadata.PAGINATION.LIMIT] >= 0) {
 		pagination[starkMetadata.PAGINATION.PREVIOUS_OFFSET] = calculatedOffset - pagination[starkMetadata.PAGINATION.LIMIT];
@@ -351,7 +355,7 @@ function addEtagInfo(res, collectionMetadata) {
 	const data = res.locals.data;
 
 	if (collectionMetadata) {
-		var etags = collectionMetadata[starkMetadata.ETAGS] = {};
+		var etags = (collectionMetadata[starkMetadata.ETAGS] = {});
 
 		if (data instanceof Array) {
 			for (var dataItem of data) {
@@ -360,7 +364,7 @@ function addEtagInfo(res, collectionMetadata) {
 				}
 			}
 		}
-	} else if (!(data instanceof Array) && typeof data === 'object') {
+	} else if (!(data instanceof Array) && typeof data === "object") {
 		res.header(starkHttpHeader.ETAG, generateEtagValue(data));
 	}
 }
@@ -381,10 +385,10 @@ function addSortingMetadata(req, collectionMetadata) {
 
 		const sortingParams = sortingParam.match(sortingRegex);
 
-		sortingParams.forEach(function (sortingParam) {
+		sortingParams.forEach(function(sortingParam) {
 			sortedBy.push({
-				field: sortingParam.split('+')[0],
-				order: sortingParam.split('+')[1]
+				field: sortingParam.split("+")[0],
+				order: sortingParam.split("+")[1]
 			});
 		});
 
@@ -401,7 +405,7 @@ function addSortingMetadata(req, collectionMetadata) {
  */
 function isGetCollectionRequest(req) {
 	var params = extractUrlParams(req.originalUrl);
-	return (req.method === 'GET' && params[starkQueryParam.MOCK_COLLECTION_REQUEST] === 'true');
+	return req.method === "GET" && params[starkQueryParam.MOCK_COLLECTION_REQUEST] === "true";
 }
 
 /**
@@ -411,7 +415,7 @@ function isGetCollectionRequest(req) {
  * @returns {boolean}
  */
 function isNestedResourceQuery(req) {
-	return (req.method === 'GET' && typeof req.query['_expand'] !== 'undefined');
+	return req.method === "GET" && typeof req.query["_expand"] !== "undefined";
 }
 
 /**
@@ -421,7 +425,7 @@ function isNestedResourceQuery(req) {
  * @returns {string|undefined}
  */
 function getNestedResourceName(req) {
-	return req.query['_expand'];
+	return req.query["_expand"];
 }
 
 /**
@@ -430,7 +434,13 @@ function getNestedResourceName(req) {
  * @returns {string}
  */
 function generateEtagValue(item) {
-	return _uniqueId(item.uuid + Math.random().toFixed(8).toString().replace('0.', ''));
+	return _uniqueId(
+		item.uuid +
+			Math.random()
+				.toFixed(8)
+				.toString()
+				.replace("0.", "")
+	);
 }
 
 /**
@@ -444,13 +454,13 @@ function deepReplaceProperty(item, property, newProperty) {
 		for (var childItem of item) {
 			deepReplaceProperty(childItem, property, newProperty);
 		}
-	} else if (typeof item === 'object') {
+	} else if (typeof item === "object") {
 		if (item.hasOwnProperty(property)) {
 			item[newProperty] = item[property];
 			delete item[property];
 		}
 
-		Object.keys(item).forEach(function (subItem) {
+		Object.keys(item).forEach(function(subItem) {
 			deepReplaceProperty(item[subItem], property, newProperty);
 		});
 	}
@@ -464,12 +474,12 @@ function deepReplaceProperty(item, property, newProperty) {
  */
 function expandRewrittenRoutes(routes) {
 	const nestedResourceRegex = /^\/(\w+)\/:(\w+)\/(\w+)$/;
-	const optionalQueryParamsString = '(\\?[\\w\\W]+)?';
+	const optionalQueryParamsString = "(\\?[\\w\\W]+)?";
 
 	var expandedRoutes = {};
 	var keysToDelete = [];
 
-	Object.keys(routes).forEach(function (key) {
+	Object.keys(routes).forEach(function(key) {
 		if (key.match(nestedResourceRegex)) {
 			let expandedKey = key + optionalQueryParamsString;
 			expandedRoutes[expandedKey] = routes[key]; // add new key with the expanded route
@@ -479,7 +489,7 @@ function expandRewrittenRoutes(routes) {
 
 	if (keysToDelete.length) {
 		// deleting routes that were expanded
-		keysToDelete.forEach(function (key) {
+		keysToDelete.forEach(function(key) {
 			delete routes[key];
 		});
 

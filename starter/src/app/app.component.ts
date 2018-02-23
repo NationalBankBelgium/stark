@@ -1,21 +1,19 @@
 /**
  * Angular 2 decorators and services
  */
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { environment } from 'environments/environment';
-import { AppState } from './app.service';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { environment } from "environments/environment";
+import { AppState } from "./app.service";
 
 /**
  * App Component
  * Top Level Component
  */
 @Component({
-  selector: 'app',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: [
-    './app.component.css'
-  ],
-  template: `
+	selector: "app",
+	encapsulation: ViewEncapsulation.None,
+	styleUrls: ["./app.component.css"],
+	template: `
     <nav>
       <a uiSref="index"
         uiSrefActive="active">
@@ -60,20 +58,17 @@ import { AppState } from './app.service';
   `
 })
 export class AppComponent implements OnInit {
-  public name = 'Angular Starter';
-  public tipe = 'assets/img/tipe.png';
-  public twitter = 'https://twitter.com/gdi2290';
-  public url = 'https://tipe.io';
-  public showDevModule: boolean = environment.showDevModule;
+	public name = "Angular Starter";
+	public tipe = "assets/img/tipe.png";
+	public twitter = "https://twitter.com/gdi2290";
+	public url = "https://tipe.io";
+	public showDevModule: boolean = environment.showDevModule;
 
-  constructor(
-    public appState: AppState
-  ) {}
+	constructor(public appState: AppState) {}
 
-  public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
-  }
-
+	public ngOnInit() {
+		console.log("Initial App State", this.appState.state);
+	}
 }
 
 /**

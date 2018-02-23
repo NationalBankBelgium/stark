@@ -10,29 +10,16 @@
     "noEmitHelpers": true,
     "importHelpers": true,
     "strictNullChecks": false,
-    "lib": [
-      "es2015",
-      "dom"
-    ],
+    "lib": ["es2015", "dom"],
     "baseUrl": "./src",
     "paths": {
       "@angular/*": ["node_modules/@angular/*"],
-	  "@nationalbankbelgium/stark-build/*": ["dist/packages/stark-build/*"]
+      "@nationalbankbelgium/stark-build/*": ["dist/packages/stark-build/*"]
     },
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "types": [
-      "hammerjs",
-      "node"
-    ]
+    "typeRoots": ["node_modules/@types"],
+    "types": ["hammerjs", "node"]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/**/*.spec.ts",
-    "src/**/*.e2e.ts"
-  ],
+  "exclude": ["node_modules", "dist", "src/**/*.spec.ts", "src/**/*.e2e.ts"],
   "angularCompilerOptions": {
     "skipMetadataEmit": true
   },

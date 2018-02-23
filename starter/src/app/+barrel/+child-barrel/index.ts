@@ -1,1 +1,1 @@
-export { ChildBarrelModule } from './child-barrel.module';
+export { ChildBarrelModule } from "./child-barrel.module";
