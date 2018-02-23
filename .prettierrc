@@ -10,6 +10,13 @@
                 "tabWidth": 2,
                 "useTabs":false
             }
-        }
+        },
+        {
+        	"files": "{package.json,.travis.yml}",
+			"options": {
+				"tabWidth": 2,
+				"useTabs":false
+			}
+		}
     ]
 }

@@ -1,4 +1,5 @@
 {
+	"extends": ["tslint:latest", "tslint-config-prettier"],
 	"defaultSeverity": "error",
 	"rules": {
 		"member-access": [true, "check-accessor", "check-constructor", "check-parameter-property"],
@@ -213,8 +214,7 @@
 		"ban-types": false,
 		"no-duplicate-super": true,
 		"no-duplicate-switch-case": true,
-		"newline-before-return": false,
-		"extends": ["tslint:latest", "tslint-config-prettier"]
+		"newline-before-return": false
 	}
 
 	//These rules require type info to run

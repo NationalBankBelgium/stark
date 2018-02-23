@@ -1,4 +1,7 @@
 {
+  "extends": [
+	"stylelint-config-prettier"
+  ],
   "defaultSeverity": "error",
   "rules": {
 	"color-hex-case": [
