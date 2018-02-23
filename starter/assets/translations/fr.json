@@ -18,7 +18,7 @@
   "STARK.APP_DATA.MENU": "Données d'application",
 
   "STARK.APP_MENU.SLIDING.BACK": "Retour",
-  
+
   "STARK.APP_FOOTER.COPYRIGHT": "Banque Nationale de Belgique. Tous droits réservés",
   "STARK.APP_FOOTER.COPYRIGHT_YEAR": "2016",
   "STARK.APP_FOOTER.LEGAL_INFO": "Informations légales",
@@ -55,10 +55,10 @@
   "STARK.MULTI_COLUMN_SORTING.THEN_BY": "Puis par",
   "STARK.MULTI_COLUMN_SORTING.CANCEL": "Annuler",
   "STARK.MULTI_COLUMN_SORTING.SAVE": "Enregistrer",
-  
+
   "STARK.SORTING.ASC": "Ascendant",
   "STARK.SORTING.DESC": "Descendant",
-    
+
   "STARK.FILE_UPLOAD.NAME": "Nom",
   "STARK.FILE_UPLOAD.SIZE": "Taille",
   "STARK.FILE_UPLOAD.TYPE": "Type",
@@ -89,7 +89,7 @@
   "STARK.ICONS.SEARCH": "Chercher",
   "STARK.ICONS.NEW_ITEM": "Nouveau",
   "STARK.ICONS.SAVE_AND_NEXT": "Sauver et Suivant",
-  
+
   "STARK.VALIDATION.REQUIRED": "Ce champ est obligatoire",
   "STARK.VALIDATION.SIZE": "Ce champ doit être compris entre {{min}} et {{max}} caractères",
   "STARK.VALIDATION.EMAIL": "Cette adresse e-mail n'est pas dans le bon format",
@@ -102,14 +102,14 @@
   "STARK.LOGIN.USERS_LIST": "Utilisateurs disponibles",
   "STARK.LOGIN.NO_PROFILE": "Aucun profil utilisateur disponible",
 
-  "STARK.CONFIRMATION.UNSAVED_CHANGES.TITLE" : "Modifications non enregistrées",
+  "STARK.CONFIRMATION.UNSAVED_CHANGES.TITLE": "Modifications non enregistrées",
   "STARK.CONFIRMATION.UNSAVED_CHANGES.TEXT": "Voulez-vous vraiment quitter sans enregistrer les modifications?",
   "STARK.CONFIRMATION.UNSAVED_CHANGES.ARIA_LABEL": "confirmation des modifications non enregistrées",
   "STARK.CONFIRMATION.UNSAVED_CHANGES.CONFIRM": "Confirmer",
   "STARK.CONFIRMATION.UNSAVED_CHANGES.CANCEL": "Ne quittez pas",
 
-  "STARK.SESSION_EXPIRED.TITLE" : "La session a expiré",
-  "STARK.SESSION_EXPIRED.RELOAD" : "recharger",
+  "STARK.SESSION_EXPIRED.TITLE": "La session a expiré",
+  "STARK.SESSION_EXPIRED.RELOAD": "recharger",
 
   "STARK.SESSION.TIMEOUT.WARNING.TITLE": "Session à venir",
   "STARK.SESSION.TIMEOUT.WARNING.WILL_EXPIRE_IN": "Votre session expirera en",
@@ -117,8 +117,8 @@
   "STARK.SESSION.TIMEOUT.WARNING.DO_YOU_WISH_TO_STAY_CONNECTED": "Voulez-vous rester connecté?",
   "STARK.SESSION.TIMEOUT.WARNING.STAY_CONNECTED": "Rester connecté",
 
-  "STARK.SESSION_LOGOUT.TITLE" : "Déconnecté",
-  "STARK.SESSION_LOGOUT.LOGON" : "Connexion",
+  "STARK.SESSION_LOGOUT.TITLE": "Déconnecté",
+  "STARK.SESSION_LOGOUT.LOGON": "Connexion",
 
   "STARK.MESSAGE_PANE.ERROR_MESSAGES": "Messages d'erreur",
   "STARK.MESSAGE_PANE.WARNING_MESSAGES": "Messages d'avertissement",

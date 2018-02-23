@@ -17,7 +17,9 @@ for (let i in seleniumFiles) {
 	}
 }
 if (seleniumJarFile === null || seleniumJarFile === "") {
-	throw new Error("The Selenium jar file could not be located in [" + seleniumFolder + "]. Please make sure that Protractor is correctly installed!");
+	throw new Error(
+		"The Selenium jar file could not be located in [" + seleniumFolder + "]. Please make sure that Protractor is correctly installed!"
+	);
 }
 
 seleniumJarFile = path.join(seleniumFolder, seleniumJarFile);
@@ -64,7 +66,6 @@ exports.config = {
 	// 5. directConnect - to connect directly to the browser Drivers.
 	//    This option is only available for Firefox and Chrome.
 
-
 	// the version below MUST be aligned with the version specified in package.json in the pre-e2e script
 	// the version below MUST also be available on the server specified using the alternate_cdn option in the pre-e2e script in package.json
 	// ChromeDriver location is used to help find the chromedriver binary.
@@ -81,9 +82,10 @@ exports.config = {
 	seleniumServerJar: seleniumJarFile,
 	//seleniumPort: 4444 // default
 
-	seleniumArgs: [ // options (-help for details)
+	seleniumArgs: [
+		// options (-help for details)
 		// the version below MUST be aligned with the version defined in the npm script
-		"-Dwebdriver.ie.driver=node_modules/protractor/node_modules/webdriver-manager/selenium/IEDriverServer_Win32_2.53.1.exe",
+		"-Dwebdriver.ie.driver=node_modules/protractor/node_modules/webdriver-manager/selenium/IEDriverServer_Win32_2.53.1.exe"
 	],
 
 	// Can be an object which will be passed to the SeleniumServer class as args.
@@ -143,7 +145,6 @@ exports.config = {
 	// and Firefox are supported for direct connect.
 	// directConnect: false,
 
-
 	// Path to the firefox application binary. If null, will attempt to find
 	// firefox in the default locations.
 	//firefoxPath: null,
@@ -161,10 +162,7 @@ exports.config = {
 	//noGlobals: false,
 
 	// Spec patterns are relative to the location of this config.
-	specs: [
-		helpers.root("src") + "/**/**.e2e-spec.ts",
-		helpers.root("src") + "/**/*.e2e-spec.ts",
-	],
+	specs: [helpers.root("src") + "/**/**.e2e-spec.ts", helpers.root("src") + "/**/*.e2e-spec.ts"],
 
 	// Patterns to exclude.
 	exclude: [],
@@ -201,16 +199,16 @@ exports.config = {
 	// If this is specified, capabilities will be ignored.
 	multiCapabilities: [
 		{
-			"browserName": "internet explorer",
-			"platform": "ANY",
-			"version": "11",
-			logName: "Internet Explorer ", // the space is necessary because the version is added directly after
+			browserName: "internet explorer",
+			platform: "ANY",
+			version: "11",
+			logName: "Internet Explorer " // the space is necessary because the version is added directly after
 		},
 
 		// the configuration below works if a Firefox version is available locally
 		{
-			"browserName": "firefox",
-			logName: "Mozilla Firefox",
+			browserName: "firefox",
+			logName: "Mozilla Firefox"
 		},
 
 		//{
@@ -224,14 +222,14 @@ exports.config = {
 		//},
 
 		{
-			"browserName": "chrome",
+			browserName: "chrome",
 
-			"chromeOptions": {
-				"args": [
+			chromeOptions: {
+				args: [
 					"show-fps-counter=true",
 					// needed if your machine policy does not allow for Chrome extensions to be installed
 					// needed at the NBB
-					"disable-extensions",
+					"disable-extensions"
 				]
 			},
 
@@ -242,7 +240,7 @@ exports.config = {
 
 			// User defined name for the capability that will display in the results log
 			// Defaults to the browser name
-			logName: "Google Chrome",
+			logName: "Google Chrome"
 
 			// Number of times to run this set of capabilities (in parallel, unless
 			// limited by maxSessions). Default is 1.
@@ -271,7 +269,7 @@ exports.config = {
 			// specified here.
 			// For a list of BrowserStack specific capabilities, visit
 			// https://www.browserstack.com/automate/capabilities
-		},
+		}
 	],
 
 	// If you need to resolve multiCapabilities asynchronously (i.e. wait for
@@ -313,7 +311,7 @@ exports.config = {
 	// setup. This will only run once, and before onPrepare.
 	// You can specify a file containing code to run by setting beforeLaunch to
 	// the filename string.
-	beforeLaunch: function () {
+	beforeLaunch: function() {
 		// At this point, global variable "protractor" object will NOT be set up,
 		// and globals from the test framework will NOT be available. The main
 		// purpose of this function should be to bring up test dependencies.
@@ -330,7 +328,7 @@ exports.config = {
 	// any asynchronous calls, e.g. interacting with the browser. Otherwise
 	// Protractor cannot guarantee order of execution and may start the tests
 	// before preparation finishes.
-	onPrepare: function () {
+	onPrepare: function() {
 		// At this point, global variable "protractor" object will be set up, and
 		// globals from the test framework will be available. For example, if you
 		// are using Jasmine, you can add a reporter with:
@@ -350,7 +348,7 @@ exports.config = {
 	// A callback function called once tests are finished.
 	// onComplete can optionally return a promise, which Protractor will wait for
 	// before shutting down webdriver.
-	onComplete: function () {
+	onComplete: function() {
 		// At this point, tests will be done but global objects will still be
 		// available.
 	},
@@ -358,7 +356,7 @@ exports.config = {
 	// A callback function called once the tests have finished running and
 	// the WebDriver instance has been shut down. It is passed the exit code
 	// (0 if the tests passed). This is called once per capability.
-	onCleanUp: function (exitCode) {
+	onCleanUp: function(exitCode) {
 		// ...
 	},
 
@@ -367,8 +365,7 @@ exports.config = {
 	// (0 if the tests passed). afterLaunch must return a promise if you want
 	// asynchronous code to be executed before the program exits.
 	// This is called only once before the program exits (after onCleanUp).
-	afterLaunch: function (exitCode) {
-	},
+	afterLaunch: function(exitCode) {},
 
 	// The params object will be passed directly to the Protractor instance,
 	// and can be accessed from your test as browser.params. It is an arbitrary
@@ -434,9 +431,9 @@ exports.config = {
 		defaultTimeoutInterval: 600000,
 
 		// Function called to print jasmine results.
-		print: function () {
+		print: function() {
 			// ...
-		},
+		}
 
 		// If set, only execute specs whose names match the pattern, which is
 		// internally compiled to a RegExp.

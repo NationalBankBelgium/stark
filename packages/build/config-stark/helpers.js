@@ -12,7 +12,7 @@ function hasProcessFlag(flag) {
 	return process.argv.join("").indexOf(flag) > -1;
 }
 
-function rootStark(args){
+function rootStark(args) {
 	args = Array.prototype.slice.call(arguments, 0);
 	//console.log("dirname "+ __dirname);
 	//console.log("process.cwd " + process.cwd());
@@ -35,12 +35,20 @@ function rootNode(args) {
 
 function prependExt(extensions, args) {
 	args = args || [];
-	if (!Array.isArray(args)) { args = [args] }
-	return extensions.reduce((memo, val) => {
-		return memo.concat(val, args.map((prefix) => {
-			return prefix + val;
-		}));
-	}, [""]);
+	if (!Array.isArray(args)) {
+		args = [args];
+	}
+	return extensions.reduce(
+		(memo, val) => {
+			return memo.concat(
+				val,
+				args.map(prefix => {
+					return prefix + val;
+				})
+			);
+		},
+		[""]
+	);
 }
 
 function packageSort(packages) {
@@ -64,7 +72,7 @@ function packageSort(packages) {
 		}
 		// a must be equal to b
 		return 0;
-	}
+	};
 }
 
 function reverse(arr) {
@@ -75,8 +83,8 @@ function reverse(arr) {
  * Method for removing object properties
  */
 const removeObjectProperties = (obj, props) => {
-	for(let i = 0; i < props.length; i++) {
-		if(obj.hasOwnProperty(props[i])) {
+	for (let i = 0; i < props.length; i++) {
+		if (obj.hasOwnProperty(props[i])) {
 			delete obj[props[i]];
 		}
 	}
@@ -90,8 +98,8 @@ const removeObjectProperties = (obj, props) => {
 function getTestPath(args) {
 	for (let i = 0; i < args.length; ++i) {
 		if (args[i] === "--path--") {
-			let providedPath = args[i+1] || "";
-			if(!providedPath.toLocaleLowerCase().startsWith("src/")){
+			let providedPath = args[i + 1] || "";
+			if (!providedPath.toLocaleLowerCase().startsWith("src/")) {
 				throw new Error("If you want to execute a subset of the unit tests, then the path you provide MUST start with 'src/'");
 			}
 			//return path.relative(__dirname, providedPath);
