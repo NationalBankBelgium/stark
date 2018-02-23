@@ -52,12 +52,6 @@ describe(`App`, () => {
 		expect(comp.name).toEqual("Angular Starter");
 	});
 
-	
-	
-	
-	
-	
-	
 	it("should log ngOnInit", () => {
 		spyOn(console, "log");
 		expect(console.log).not.toHaveBeenCalled();
