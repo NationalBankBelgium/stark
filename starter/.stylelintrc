@@ -31,6 +31,12 @@
 		"message": "Avoid duplicate information."
 	  }
 	],
+	"font-family-no-missing-generic-family-keyword": [
+	  true,
+	  {
+		"message": "Always put at least one generic font family."
+	  }
+	],
 	"function-comma-space-after": [
 	  "always",
 	  {
@@ -49,7 +55,12 @@
 		"message": "Avoid empty lines in functions to improve readability."
 	  }
 	],
-	"function-name-case": "lower",
+	"function-name-case": [
+	  "lower",
+	  {
+		"message": "Function names should be in lowercase following the CSS specification."
+	  }
+	],
 	"number-leading-zero": [
 	  "never",
 	  {
@@ -276,6 +287,19 @@
 	  }
 	],
 	"selector-pseudo-class-no-unknown": true,
+	"selector-pseudo-element-case": [
+	  "lower",
+	  {
+		"message": "Always use lowercase for pseudo-element selectors for consistency and to improve readability."
+	  }
+	],
+	"selector-pseudo-element-colon-notation": [
+	  "double",
+	  {
+		"message": "Double colons (::) should be used instead of a single colon to distinguish pseudo-elements from pseudo-classes."
+	  }
+	],
+	"selector-pseudo-element-no-unknown": true,
 	"selector-type-case": [
 	  "lower",
 	  {
@@ -346,8 +370,13 @@
 	"at-rule-empty-line-before": [
 	  "always",
 	  {
-		"ignore": [ "after-comment" ],
-		"ignoreAtRules": [ "import" ],
+		"ignore": [
+		  "after-comment",
+		  "blockless-after-same-name-blockless"
+		],
+		"ignoreAtRules": [
+		  "import"
+		],
 		"message": "Always put an empty line before each @ rule, except after a comment or for @import."
 	  }
 	],
@@ -376,6 +405,12 @@
 		"message": "Never put a newline after the ending @ rule semicolon to avoid unnecessary whitespace."
 	  }
 	],
+	"no-duplicate-at-import-rules": [
+	  true,
+	  {
+		"message": "Avoid duplicate @import rule within the same stylesheet."
+	  }
+	],
 	"no-extra-semicolons": [
 	  true,
 	  {
@@ -385,13 +420,13 @@
 	"no-invalid-double-slash-comments": [
 	  true,
 	  {
-		"message": "In CSS, double slashes do not indicate a single line remark. Use /*  */ instead."
+		"message": "In CSS, double slashes do not indicate a single line comment. Use /*  */ instead."
 	  }
 	],
 	"no-unknown-animations": [
 	  true,
 	  {
-		"message": "Check your code. The animation name \"${animationName}\" is not been found."
+		"message": "Check your code. The animation name \"${animationName}\" is not defined."
 	  }
 	]
   }
