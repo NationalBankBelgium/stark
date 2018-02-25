@@ -93,7 +93,7 @@ If you want to modify the build:
 * run the build to generate the contents in the dist folder: `npm run build`
 * pack the newly built build
   * go to the dist/packages/stark-build folder: `cd dist/packages/stark-build`
-  * pack the contents: `npm pack`
+  * pack the contents: `npm pack ./`
 * now you can test with the starter
 
 Start hacking :)
