@@ -12,6 +12,10 @@ Stark provides main building blocks for accelerating front-end development:
 * a starter inspired by [Angular Starter](https://github.com/gdi2290/angular-starter) by [AngularClass](https://angularclass.com) and Google's [Web Starterk Kit](https://github.com/google/web-starter-kit)
 * core modules providing reusable APIs (e.g., reactive client for RESTful APIs based on [NBB's RESTful API Design Guide](https://github.com/NationalBankBelgium/REST-API-Design-Guide/wiki), routing, logging, log shipping, ...)
 * UI modules providing reusable UI components (e.g., data table, message pane, ...) and themes
+* a demo application containing
+  * our [living style guide](https://www.smashingmagazine.com/2016/05/creating-a-living-style-guide-case-study/)
+	* a showcase of all components/services along with their API
+	* our developer guide
 
 Stark modules are like LEGO blocks: add what you need, no less, no more. If you don't like our defaults then you may replace/override/ignore anything you fancy.  
 
@@ -27,7 +31,7 @@ Stark's reusable build integrates support for:
 * [Tree shaking](https://webpack.js.org/guides/tree-shaking/) to automatically remove unused code from your production bundle
 * [Hot Module Replacement](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html) with [@angularclass/hmr](https://github.com/angularclass/angular-hmr) and [@angularclass/hmr-loader](https://github.com/angularclass/angular-hmr-loader)
 * Minification & uglyfication
-* Cache busting
+* Cache busting with [file hashes](https://www.npmjs.com/package/webpack-sha-hash)
 * [Tests](https://angular.io/docs/ts/latest/guide/testing.html): [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), with source maps support, possibility to execute subsets of the tests, ...
 * Tests code coverage with [Istanbul](https://github.com/gotwarlost/istanbul)
 * Environments definition (development | production)
@@ -39,15 +43,10 @@ Stark's reusable build integrates support for:
 TODO list stark modules and point to docs
 
 ## Developer guide
-
-### Quick start
-TODO write quick start guide
-
-### Links
 TODO add links to developer guide sections
 
 ### Contributing
-Please follow our contribution guidelines: [/CONTRIBUTING.md]
+Please follow our [contribution guidelines](/CONTRIBUTING.md)
 
 ## Authors
 
