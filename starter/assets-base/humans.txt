@@ -17,7 +17,7 @@
   Angular Material
   Angular
   TypeScript
-  ES2015
+  ES20xy
   Redux
   RxJS
   NodeJS
