@@ -1,6 +1,5 @@
 [![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
 [![Dependency Status](https://david-dm.org/nationalbankbelgium/stark.svg)](https://david-dm.org/nationalbankbelgium/stark)
-[![NPM version](https://img.shields.io/npm/v/generator-modern-web-dev.svg)](https://www.npmjs.com/package/generator-modern-web-dev)
 [![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE)
 
 # Stark
@@ -48,7 +47,7 @@ TODO write quick start guide
 TODO add links to developer guide sections
 
 ### Contributing
-Please follow our contribution guidelines: [CONTRIBUTING.md]
+Please follow our contribution guidelines: [/CONTRIBUTING.md]
 
 ## Authors
 
