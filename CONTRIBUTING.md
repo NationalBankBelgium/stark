@@ -75,13 +75,28 @@ Once done, you may submit a new Pull Request (PR): https://github.com/NationalBa
 TODO add project structure details
 
 ## Building from source
-If you want to build Stark from source, you need to:
+If you want to build Stark from source, you need to jump through some hoops (for now).
+
+In all cases:
 * install NodeJS (6.0.0+) and npm (5.3.0+)
 * clone this git repository
-* ...
-* start hacking :)
+* install dependencies at root level: `npm install`
 
-TODO: review/complete; see #30
+If you want to modify the starter:
+* go to the starter's folder: `cd starter`
+* install dependencies for the starter: `npm install`
+
+If you want to modify the build:
+* go to the build package folder: `cd packages/build`
+* install dependencies for the build: `npm install`
+* make your changes
+* run the build to generate the contents in the dist folder: `npm run build`
+* pack the newly built build
+  * go to the dist/packages/stark-build folder: `cd dist/packages/stark-build`
+  * pack the contents: `npm pack`
+* now you can test with the starter
+
+Start hacking :)
 
 ## Releasing a version
 * commit all changes to include in the release

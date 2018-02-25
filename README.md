@@ -38,6 +38,7 @@ Stark's reusable build integrates support for:
 * Assets copying
 * Security with a DEV mode [Content Security Policy (CSP)](https://content-security-policy.com/) enabled
 * Local testing with fake back-ends using [json-server](https://github.com/typicode/json-server)
+* Router visualization with [UI-Router Visualizer](https://github.com/ui-router/visualizer)
 
 ## Stark modules
 TODO list stark modules and point to docs

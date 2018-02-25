@@ -288,7 +288,7 @@ docker run -e VIRTUAL_HOST=stark-starter.your-domain.com --name stark-starter st
 * If you're in China
   * check out https://github.com/cnpm/cnpm
 * node-pre-gyp ERR in npm install (Windows)
-  * install Python x86 version between 2.5 and 3.0 on windows see issue [#626](https://github.com/AngularClass/stark-starter/issues/626)
+  * install Python x86 version between 2.5 and 3.0 on windows
   * or try `--no-optional`
   
 ## Support, Questions, or Feedback
