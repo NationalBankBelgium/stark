@@ -1,15 +1,21 @@
 {
   "name": "@nationalbankbelgium/stark-build",
-  "version": "0.0.0-PLACEHOLDER",
-  "description": "Stark - the build",
-  "author": "nationalbankbelgium-PLACEHOLDER",
+  "version": "0.0.0-PLACEHOLDER-VERSION",
+  "description": "Stark - Build",
+  "author": "Stark Team",
   "contributors": [
-    "nationalbankbelgium-PLACEHOLDER"
+    "PLACEHOLDER-CONTRIBUTORS"
   ],
   "license": "MIT",
+  "bugs": "https://github.com/nationalbankbelgium/stark/issues",
+  "homepage": "https://github.com/nationalbankbelgium/stark",
   "repository": {
     "type": "git",
     "url": "https://github.com/NationalBankBelgium/stark.git"
+  },
+  "engines": {
+    "node": ">=6.11.0",
+    "npm": ">=5.3.0"
   },
   "dependencies": {
     "@angular/cli": "1.6.8",
@@ -70,13 +76,7 @@
     "write-file-webpack-plugin": "4.2.0"
   },
   "devDependencies": {
-    "cpx": "1.5.0",
-    "rimraf": "2.6.2"
   },
   "scripts": {
-    "build": "npm run build:config && npm run build:package",
-    "build:config": "cpx ./config/* ../../dist/packages/stark-build/config/",
-    "build:package": "cpx ./package.json ../../dist/packages/stark-build/",
-    "prebuild": "rimraf ../../dist/packages/stark-build"
   }
 }

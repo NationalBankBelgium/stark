@@ -1,6 +1,5 @@
 # Build
 /dist/
-!dist/
 
 # Reports directory
 reports/
@@ -11,6 +10,9 @@ package-lock.json
 # Logs
 ./logs/
 *.log
+
+# Bak
+*.bak
 
 # Node
 node_modules/
@@ -35,3 +37,6 @@ Icon?
 pids
 *.pid
 *.seed
+
+# Patch files
+*.patch

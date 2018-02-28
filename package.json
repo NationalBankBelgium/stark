@@ -1,67 +1,56 @@
 {
   "name": "stark-srcs",
   "version": "10.0.0-alpha.0",
-  "private": false,
-  "author": {
-    "name": "Alexis Georges",
-    "email": "alexis.georges@nbb.be",
-    "url": "https://nbb.be"
-  },
+  "private": true,
+  "author": "Stark Team <sebastien.dubois@nbb.be>",
   "contributors": [
-    {
-      "name": "Dubois Sebastien",
-      "email": "sebastien.dubois@nbb.be",
-      "url": "https://www.nbb.be"
-    },
-    {
-      "name": "Cedric Namotte",
-      "email": "cedric.namotte@nbb.be",
-      "url": "https://www.nbb.be"
-    },
-    {
-      "name": "Alexis Georges",
-      "email": "alexis.georges@nbb.be",
-      "url": "https://www.nbb.be"
-    },
-    {
-      "name": "Christopher Cortes",
-      "email": "christopher.cortes@nbb.be",
-      "url": "https://www.nbb.be"
-    },
-    {
-      "name": "Robby De Laet",
-      "email": "robby.delaet@nbb.be",
-      "url": "https://www.nbb.be"
-    }
+    "PLACEHOLDER-CONTRIBUTORS"
   ],
   "license": "MIT",
-  "engines": {
-    "node": ">=6.11.0",
-    "npm": ">=5.3.0"
-  },
   "bugs": "https://github.com/nationalbankbelgium/stark/issues",
   "homepage": "https://github.com/nationalbankbelgium/stark",
   "repository": {
     "type": "git",
     "url": "https://github.com/nationalbankbelgium/stark.git"
   },
+  "engines": {
+    "node": ">=6.11.0",
+    "npm": ">=5.3.0"
+  },
   "devDependencies": {
+    "@angular/compiler": "5.2.6",
+    "@angular/compiler-cli": "5.2.6",
     "husky": "0.14.3",
     "lint-staged": "7.0.0",
     "prettier": "1.10.2",
+    "rollup": "0.56.3",
+    "rollup-plugin-commonjs": "8.3.0",
+    "rollup-plugin-node-resolve": "3.0.3",
+    "rollup-plugin-sourcemaps": "0.4.2",
     "stylelint": "9.1.1",
     "stylelint-config-prettier": "2.1.0",
     "tslint": "5.9.1",
     "tslint-config-prettier": "1.8.0",
-    "typescript": "2.6.2"
+    "typescript": "2.6.2",
+    "uglify-js": "3.3.12"
   },
   "scripts": {
     "precommit": "lint-staged",
     "prettier-check": "prettier **/*.{css,js,json,pcss,scss,ts} --write",
     "tslint": "tslint",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json"
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "tsc": "tsc",
+    "ngc": "ngc",
+    "postinstall": "npm run postinstall:build && npm run postinstall:core && npm run build && npm run postinstall:starter",
+    "postinstall:build": "cd packages/stark-build && npm install && cd ../..",
+    "postinstall:core": "cd packages/stark-core && npm install && cd ../..",
+    "postinstall:starter": "cd starter && npm install && cd ..",
+    "build": "sh ./build.sh"
   },
   "lint-staged": {
-    "*.{css,js,json,pcss,scss,ts}": ["prettier --write", "git add"]
+    "*.{css,js,json,pcss,scss,ts}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
