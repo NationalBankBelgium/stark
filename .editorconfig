@@ -20,7 +20,7 @@ end_of_line = crlf
 indent_style = space
 indent_size = 2
 
-[**.{css, pcss, scss,json}]
+[**.{css, pcss, scss,json,sh}]
 indent_style = space
 indent_size = 2
 

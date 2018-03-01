@@ -75,26 +75,50 @@ Once done, you may submit a new Pull Request (PR): https://github.com/NationalBa
 TODO add project structure details
 
 ## Building from source
-If you want to build Stark from source, you need to jump through some hoops (for now).
-
-In all cases:
+If you want to build Stark from source, you need to...
 * install NodeJS (6.0.0+) and npm (5.3.0+)
-* clone this git repository
-* install dependencies at root level: `npm install`
+* clone this git repository: `git clone https://github.com/NationalBankBelgium/stark.git`
+* run `npm install` from the root directory of Stark 
 
+Executing `npm install` at the root will also install and build all Stark packages.
+
+### Executing Stark's main build script
+Anytime you make modifications to a Stark package (e.g., stark-build, stark-core, ...), you'll need to
+* execute `npm run build` from the root directory of Stark
+* execute `npm install` again on the starter to get those changes
+
+Stark's main build script is a fun Bash shell script heavily inspired by Angular's that
+* typechecks all Stark packages
+* transpiles all Stark packages
+* generates umd, esm5, ... bundles
+* minifies the bundles
+* generates sourcemaps
+* generates releasable versions of each package
+* adds license banners to the generated code
+* generates temporary tar.gz files for local testing
+* adapts the starter's dependencies to point to the local tar.gz files
+* ...
+
+### Hacking the starter
 If you want to modify the starter:
 * go to the starter's folder: `cd starter`
-* install dependencies for the starter: `npm install`
-
-If you want to modify the build:
-* go to the build package folder: `cd packages/build`
-* install dependencies for the build: `npm install`
+* install dependencies: `npm install`
+* run it: `npm start`
+* open up your browser at http://localhost:3000
 * make your changes
-* run the build to generate the contents in the dist folder: `npm run build`
-* pack the newly built build
-  * go to the dist/packages/stark-build folder: `cd dist/packages/stark-build`
-  * pack the contents: `npm pack ./`
-* now you can test with the starter
+
+If you make modifications, they'll be applied automatically after a Webpack rebuild.
+
+By default the starter depends on published Stark packages over at npm.
+But once the main build script at Stark's root (cfr previous section) is executed (e.g., using `npm install` or `npm run build` at the root), then the starter will depend on the contents of the dist folder.
+
+### Hacking the Stark packages
+If you want to modify Stark packages (e.g., stark-build, stark-core, ...):
+* go to the package folder. `cd packages/<name>`
+* install its dependencies: `npm install`
+* make your changes
+* execute `npm run build` at Stark's root 
+* update the Starter and test in it
 
 Start hacking :)
 

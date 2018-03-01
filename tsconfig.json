@@ -34,7 +34,7 @@
     "strict": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "stripInternal": false,
+    "stripInternal": true,
     "skipLibCheck": true,
     "suppressImplicitAnyIndexErrors": true,
     "suppressExcessPropertyErrors": false,
@@ -46,7 +46,9 @@
     "typeRoots": ["./node_modules/@types"],
     "paths": {}
   },
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["node_modules", "dist",
+    "packages/stark-build/config-stark"
+  ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
     "useWebpackText": true,
