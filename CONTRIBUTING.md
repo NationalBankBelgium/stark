@@ -34,7 +34,7 @@ You can _request_ a new feature by submitting an issue to our repository. If you
 ### Submitting an issue
 Before you submit an issue, please search the issue tracker, maybe an issue for your problem already exists and the discussion might inform you of workarounds readily available.
 
-We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. In order to reproduce bugs, we will systematically ask you to provide a minimal reproduction scenarion using [Plunker](https://plnkr.co).
+We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. In order to reproduce bugs, we will systematically ask you to provide a minimal reproduction scenario using [Plunker](https://plnkr.co).
 Having a live, reproductible scenario gives us a wealth of important information without going back & forth to you with additional questions like:
 * version of Stark & Angular used
 * 3rd party libraries and their versions

@@ -57,5 +57,9 @@ Please follow our [contribution guidelines](/CONTRIBUTING.md)
 * [@Blog](https://www.dsebastien.net)
 * [@GitHub](https://github.com/dSebastien)
 
+### Alexis Georges
+* [@Twitter](https://twitter.com/SuperITMan_BE)
+* [@GitHub](https://github.com/SuperITMan)
+
 ## License
 This project and all associated source code is licensed under the terms of the [MIT License](/LICENSE).
