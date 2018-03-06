@@ -229,7 +229,7 @@ module.exports = function() {
 			 * See: https://github.com/JaKXz/stylelint-webpack-plugin
 			 */
 			new StylelintPlugin({
-				configFile: ".stylelintrc",
+				configFile: "stylelint.config.js",
 				emitErrors: false,
 				files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
 			})

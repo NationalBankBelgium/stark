@@ -219,7 +219,7 @@ module.exports = webpackMerge(commonConfig, {
 		// Description: Lints the stylesheets loaded in the app (pcss, scss, css, sass)
 		// reference https://github.com/JaKXz/stylelint-webpack-plugin
 		new StylelintPlugin({
-			configFile: ".stylelintrc",
+			configFile: "stylelint.config.js",
 			emitErrors: false,
 			files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
 		}),
