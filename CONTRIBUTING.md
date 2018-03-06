@@ -137,5 +137,130 @@ TODO: review/complete; see #31
 
 ## <a name="commit"></a> Commit Message Guidelines
 We have precise rules over how our git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**.
+We also use the git commit messages to generate our changelog.
 
-TODO document commit message guidelines: #28
+We're using Angular's commit message format: `type(scope): subject`
+
+#### Type
+Must be one of the following:
+
+* **feat**: A new feature
+* **fix**: A bug fix
+* **docs**: Documentation only changes
+* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+* **refactor**: A code change that neither fixes a bug nor adds a feature
+* **perf**: A code change that improves performance
+* **test**: Adding missing tests
+* **chore**: Changes to the build process or auxiliary tools and libraries such as documentation generation
+
+#### Scope
+The scope can be anything specifying place of the commit change. For example `stark-core`, `table`, `theme`, `sidenav`, etc. If you make multiple commits for the same component, please keep the naming of this component consistent. For example, if you make a change to navigation and the first commit is `fix(sidenav)`, you should continue to use `sidenav` for any more commits related to navigation.
+
+#### Subject
+The subject contains succinct description of the change:
+
+* use the imperative, present tense: "change" not "changed" nor "changes"
+* do not capitalize first letter
+* do not place a period `.` at the end
+* entire length of the commit message must not go over 50 characters
+* describe what the commit does, not what issue it relates to or fixes
+* **be brief, yet descriptive** - we should have a good understanding of what the commit does by reading the subject
+
+### Body
+Just as in the **subject**, use the imperative, present tense: "change" not "changed" nor "changes".
+The body should include the motivation for the change and contrast this with previous behavior.
+
+### Footer
+The footer should contain any information about **Breaking Changes** and is also the place to
+[reference GitHub issues that this commit closes](https://help.github.com/articles/closing-issues-via-commit-messages/).
+
+**Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines.
+The rest of the commit message is then used for this.
+
+## Examples
+Here are some commit examples:
+
+```
+feat($browser): onUrlChange event (popstate/hashchange/polling)
+
+Added new event to $browser:
+- forward popstate event if available
+- forward hashchange event if popstate not available
+- do polling when neither popstate nor hashchange available
+
+Breaks $browser.onHashChange, which was removed (use onUrlChange instead)
+```
+
+```
+fix($compile): couple of unit tests for IE9
+
+Older IEs serialize html uppercased, but IE9 does not...
+Would be better to expect case insensitive, unfortunately jasmine does
+not allow to user regexps for throw expectations.
+
+Closes #392
+Breaks foo.bar api, foo.baz should be used instead
+```
+
+```
+feat(directive): ng:disabled, ng:checked, ng:multiple, ng:readonly, ng:selected
+
+New directives for proper binding these attributes in older browsers (IE).
+Added coresponding description, live examples and e2e tests.
+
+Closes #351
+```
+
+```
+style($location): add couple of missing semi colons
+```
+
+```
+docs(guide): updated fixed docs from Google Docs
+
+Couple of typos fixed:
+- indentation
+- batchLogbatchLog -> batchLog
+- start periodic checking
+- missing brace
+```
+
+```
+feat($compile): simplify isolate scope bindings
+
+Changed the isolate scope binding options to:
+  - @attr - attribute binding (including interpolation)
+  - =model - by-directional model binding
+  - &expr - expression execution binding
+
+This change simplifies the terminology as well as
+number of choices available to the developer. It
+also supports local name aliasing from the parent.
+
+BREAKING CHANGE: isolate scope bindings definition has changed and
+the inject option for the directive controller injection was removed.
+
+To migrate the code follow the example below:
+
+Before:
+
+scope: {
+  myAttr: 'attribute',
+  myBind: 'bind',
+  myExpression: 'expression',
+  myEval: 'evaluate',
+  myAccessor: 'accessor'
+}
+
+After:
+
+scope: {
+  myAttr: '@',
+  myBind: '@',
+  myExpression: '&',
+  // myEval - usually not useful, but in cases where the expression is assignable, you can use '='
+  myAccessor: '=' // in directive's template change myAccessor() to myAccessor
+}
+
+The removed `inject` wasn't generaly useful for directives so there should be no code using it.
+```
