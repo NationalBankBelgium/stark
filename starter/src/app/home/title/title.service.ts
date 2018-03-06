@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class Title {
@@ -7,7 +8,7 @@ export class Title {
 
 	constructor(public http: HttpClient) {}
 
-	public getData() {
+	public getData(): Observable<any> {
 		console.log("Title#getData(): Get Data");
 		return this.http.get("/assets/data.json");
 	}

@@ -1,6 +1,6 @@
 {
   // this config is only used by build.sh
-  "extends": "../tsconfig.json",
+  "extends": "./stark-build/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
@@ -9,7 +9,6 @@
       "rxjs/*": ["../node_modules/rxjs/*"],
       "@nationalbankbelgium/stark-*": ["./*"]
     },
-    "skipLibCheck": true,
     "skipDefaultLibCheck": true
   },
   "exclude": [
