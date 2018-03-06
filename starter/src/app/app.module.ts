@@ -13,7 +13,7 @@ import { environment } from "environments/environment";
 import { APP_STATES } from "./app.routes";
 // App is our top level component
 import { AppComponent } from "./app.component";
-import { AppState, InternalStateType } from "./app.service";
+import { AppState } from "./app.service";
 import { HomeComponent } from "./home";
 import { AboutComponent } from "./about";
 import { NoContentComponent } from "./no-content";
@@ -22,22 +22,17 @@ import { DevModuleModule } from "./+dev-module";
 
 import "../styles/styles.scss";
 import "../styles/headings.css";
+import { MyAwesomeComponentComponent } from './src/app/about/my-awesome-component/my-awesome-component.component';
 
 // Application wide providers
 const APP_PROVIDERS = [AppState];
-
-type StoreType = {
-	state: InternalStateType;
-	restoreInputValues: () => void;
-	disposeOldHosts: () => void;
-};
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstrapping process
  */
 @NgModule({
 	bootstrap: [AppComponent],
-	declarations: [AppComponent, AboutComponent, HomeComponent, NoContentComponent, XLargeDirective],
+	declarations: [AppComponent, AboutComponent, HomeComponent, NoContentComponent, XLargeDirective, MyAwesomeComponentComponent],
 	/**
 	 * Import Angular's modules.
 	 */
