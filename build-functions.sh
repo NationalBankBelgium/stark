@@ -60,7 +60,8 @@ syncFiles() {
   logDebug "Syncing files from $1 to $2" 1
   cd $1; # we go to the folder to execute it with relative paths
   mkdir -p $2
-  local REL_PATH_TO_DESTINATION=$(realpath --relative-to="." "$2");
+  local REL_PATH_TO_DESTINATION=$(perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' $2 $1)
+  # local REL_PATH_TO_DESTINATION=$(realpath --relative-to="." "$2");
   shift 2; # those 2 parameters are not needed anymore
 	
   logTrace "Syncing files using: rsync" 2
@@ -232,14 +233,15 @@ minify() {
 #   param1 - Source directory
 #   param2 - Out dir
 #   param3 - Package Name
+#   param4 - Tsc Packages
 # Returns:
 #   None
 #######################################
 compilePackage() {
   logTrace "Executing function: ${FUNCNAME[0]}" 1
   logDebug "Compiling package [$3] located in: $1" 1
-  # For TSC_PACKAGES items
-  if containsElement "${3}" "${TSC_PACKAGES[@]}"; then
+
+  if containsElement "${3}" "${4:-}"; then
     logTrace "[$3]: Compiling: $TSC -p $1/tsconfig.json" 2
     $TSC -p ${1}/tsconfig.json
   else
@@ -262,7 +264,7 @@ N="
     BASE_DIR=$(basename "${DIR}")
     # Skip over directories that are not nested entry points
     [[ -e ${DIR}/tsconfig.json && "${BASE_DIR}" != "integrationtest" ]] || continue
-    compilePackage ${DIR} ${2}/${BASE_DIR} ${3}
+    compilePackage ${DIR} ${2}/${BASE_DIR} ${3} ${4}
   done
 }
 
@@ -272,6 +274,7 @@ N="
 #   param1 - Source directory
 #   param2 - Out dir
 #   param3 - Package Name
+#   param4 - Tsc Packages
 # Returns:
 #   None
 #######################################
@@ -279,7 +282,7 @@ compilePackageES5() {
   logTrace "Executing function: ${FUNCNAME[0]}" 1
   logDebug "Compiling package located in : $1 to ES5" 1 
 
-  if containsElement "${3}" "${TSC_PACKAGES[@]}"; then
+  if containsElement "${3}" "${4:-}"; then
     logTrace "${FUNCNAME[0]}: [${3}]: Compiling: ${TSC} -p ${1}/tsconfig.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap" 2
     local package_name=$(basename "${2}")
     $TSC -p ${1}/tsconfig.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap

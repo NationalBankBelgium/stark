@@ -37,6 +37,8 @@ VERSION_SUFFIX="-$(git log --oneline -1 | awk '{print $1}')" # last commit id
 COMPILE_SOURCE=true
 TYPECHECK_ALL=true
 
+TRAVIS=${TRAVIS:-}
+
 VERBOSE=false
 TRACE=false
 
@@ -230,7 +232,7 @@ do
           rm -f ${ROOT_OUT_DIR}/${PACKAGE}.js
     
           logInfo "Compile package $PACKAGE"
-          compilePackage ${SRC_DIR} ${OUT_DIR} ${PACKAGE}
+          compilePackage ${SRC_DIR} ${OUT_DIR} ${PACKAGE} ${TSC_PACKAGES[@]+"${TSC_PACKAGES[@]}"}
         fi
   
         if [[ ${BUNDLE} == true ]]; then
@@ -240,7 +242,7 @@ do
           rm -rf ${NPM_DIR} && mkdir -p ${NPM_DIR}
 
           logInfo "Copy $PACKAGE typings from $OUT_DIR to $NPM_DIR"
-          syncOptions=(-a --exclude="*.js" --exclude="*.js.map")   
+          syncOptions=(-a --exclude="*.js" --exclude="*.js.map")
           syncFiles $OUT_DIR $NPM_DIR "${syncOptions[@]}"
        
           #cd $SRC_DIR > /dev/null
