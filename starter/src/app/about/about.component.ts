@@ -44,10 +44,12 @@ export class AboutComponent implements OnInit {
 		 * Getting the resolves values
 		 */
 		// if the resolve is an observable, we need to subscribe to it to get the value
-		this.resolvedData.subscribe((data: any) => {
-			console.warn("data resolved");
-			this.localState = { ...this.localState, ...data };
-		});
+		if (this.resolvedData) {
+			this.resolvedData.subscribe((data: any) => {
+				console.warn("data resolved");
+				this.localState = { ...this.localState, ...data };
+			});
+		}
 
 		// if the resolve is a promise and the resolve policy is WAIT
 		// the value is already available

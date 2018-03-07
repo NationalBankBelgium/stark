@@ -22,7 +22,6 @@ import { DevModuleModule } from "./+dev-module";
 
 import "../styles/styles.scss";
 import "../styles/headings.css";
-import { MyAwesomeComponentComponent } from './src/app/about/my-awesome-component/my-awesome-component.component';
 
 // Application wide providers
 const APP_PROVIDERS = [AppState];
@@ -32,7 +31,7 @@ const APP_PROVIDERS = [AppState];
  */
 @NgModule({
 	bootstrap: [AppComponent],
-	declarations: [AppComponent, AboutComponent, HomeComponent, NoContentComponent, XLargeDirective, MyAwesomeComponentComponent],
+	declarations: [AppComponent, AboutComponent, HomeComponent, NoContentComponent, XLargeDirective],
 	/**
 	 * Import Angular's modules.
 	 */

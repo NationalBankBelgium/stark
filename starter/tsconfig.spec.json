@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    // TODO Check why this is needed ?
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "es6"],
+    "types": ["hammerjs", "jasmine", "node", "source-map", "uglify-js", "webpack"],
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "@nationalbankbelgium/stark-build/*": ["node_modules/@nationalbankbelgium/stark-build/*"],
+      "@nationalbankbelgium/stark-core/*": ["node_modules/@nationalbankbelgium/stark-core/*"]
+    },
+    "typeRoots": ["./node_modules/@types"]
+  },
+
+  "angularCompilerOptions": {
+    // TODO Check why this is needed ?
+    "skipMetadataEmit": true
+  }
+}

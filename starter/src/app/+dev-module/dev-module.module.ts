@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import {Ng2StateDeclaration, UIRouterModule} from "@uirouter/angular";
+import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
 
 import { DEV_MODULE_STATES } from "./dev-module.routes";
 import { DevModuleComponent } from "./dev-module.component";
@@ -21,7 +21,7 @@ import { routerChildConfigFn } from "../router.config";
 	]
 })
 export class DevModuleModule {
-	public static routes: Ng2StateDeclaration = DEV_MODULE_STATES;
+	public static routes: Ng2StateDeclaration[] = DEV_MODULE_STATES;
 	constructor() {
 		console.log("`DevModuleModule` module initialized");
 	}

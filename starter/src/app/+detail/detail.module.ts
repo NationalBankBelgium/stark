@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
-import {Ng2StateDeclaration, UIRouterModule} from "@uirouter/angular";
+import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
 
 import { DETAIL_STATES } from "./detail.routes";
 import { DetailComponent } from "./detail.component";
@@ -26,5 +26,5 @@ console.log("`Detail` bundle loaded asynchronously");
 	]
 })
 export class DetailModule {
-	public static routes: Ng2StateDeclaration = DETAIL_STATES;
+	public static routes: Ng2StateDeclaration[] = DETAIL_STATES;
 }
