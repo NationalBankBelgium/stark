@@ -4,7 +4,7 @@
   "module": "./esm5/stark-core.js",
   "es2015": "./es2015/stark-core.js",
   "main": "bundles/stark-core.umd.js",
-  "typings":"stark-core.d.ts",
+  "types": "stark-core.d.ts",
   "description": "Stark - Core",
   "author": "Stark Team",
   "contributors": [
