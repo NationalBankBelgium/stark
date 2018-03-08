@@ -2,20 +2,18 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    // TODO Check why this is needed ?
-    "allowSyntheticDefaultImports": true,
-    "lib": ["dom", "es6"],
-    "types": ["hammerjs", "jasmine", "node", "source-map", "uglify-js", "webpack"],
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
       "@angular/*": ["node_modules/@angular/*"],
       "@nationalbankbelgium/stark-build/*": ["node_modules/@nationalbankbelgium/stark-build/*"],
       "@nationalbankbelgium/stark-core/*": ["node_modules/@nationalbankbelgium/stark-core/*"]
-    },
-    "typeRoots": ["./node_modules/@types"]
+    }
   },
 
   "angularCompilerOptions": {
-    // TODO Check why this is needed ?
-    "skipMetadataEmit": true
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": false,
+    "skipTemplateCodegen": true
   }
 }

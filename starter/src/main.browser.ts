@@ -2,7 +2,7 @@
  * Angular bootstrapping
  */
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-import { environment } from "environments/environment";
+import { environment } from "./environments/environment";
 
 /**
  * App Module
