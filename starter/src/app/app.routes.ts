@@ -4,9 +4,9 @@ import { NoContentComponent } from "./no-content";
 import { Ng2StateDeclaration, Transition } from "@uirouter/angular";
 import { of } from "rxjs/observable/of";
 import "rxjs/add/operator/delay";
-import {Observable} from "rxjs/Observable";
+import { Observable } from "rxjs/Observable";
 
-export function getResolvedData(): Observable {
+export function getResolvedData(): Observable<any> {
 	console.warn("resolve data being fetched... please wait...");
 	// could return an observable but then the component should subscribe to it
 	// if resolve policy = 'WAIT' or 'NOWAIT' the component WILL BE LOADED WITHOUT

@@ -1,13 +1,10 @@
-/**
- * @author: @AngularClass
- */
-
+// Helpers
 const helpers = require("./helpers");
 
 module.exports = function(config) {
-	var testWebpackConfig = require("./webpack.test.js")();
+	const testWebpackConfig = require("./webpack.test.js")();
 
-	var configuration = {
+	const configuration = {
 		/**
 		 * Base path that will be used to resolve all patterns (e.g. files, exclude).
 		 */
@@ -25,8 +22,18 @@ module.exports = function(config) {
 		 */
 		exclude: [],
 
+		// client configuration
 		client: {
-			captureConsole: false
+			// can be used to pass arguments to tests (see spec-bundle.ts)
+			args: [
+				{
+					// path to the subset of the tests to consider (used to filter the unit tests to execute (see spec-bundle.ts)
+					testPath: helpers.getTestPath(process.argv)
+				}
+			],
+
+			// other client-side config
+			captureConsole: true
 		},
 
 		/**
@@ -35,12 +42,24 @@ module.exports = function(config) {
 		 * we are building the test environment in ./spec-bundle.js
 		 */
 		files: [
-			{ pattern: helpers.rootStark("./config/spec-bundle.js"), watched: false },
-			{ pattern: "./src/assets/**/*", watched: false, included: false, served: true, nocache: false }
+			{
+				pattern: helpers.rootStark("./config/spec-bundle.js"),
+				watched: false
+			},
+			// paths to support debugging with source maps in dev tools
+			{
+				pattern: "./src/assets/**/*",
+				watched: false,
+				included: false,
+				served: true,
+				nocache: false
+			}
 		],
 
 		/**
 		 * By default all assets are served at http://localhost:[PORT]/base/
+		 * can be used to map paths served by the Karma web server to /base/ content
+		 * knowing that /base corresponds to the project root folder (i.e., where this config file is located)
 		 */
 		proxies: {
 			"/assets/": "/base/src/assets/"
@@ -51,7 +70,9 @@ module.exports = function(config) {
 		 * available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		 */
 		// TODO Change this absolute path to a relative one (with helpers ?)
-		preprocessors: { "./node_modules/@nationalbankbelgium/stark-build/config/spec-bundle.js": ["coverage", "webpack", "sourcemap"] },
+		preprocessors: {
+			"./node_modules/@nationalbankbelgium/stark-build/config/spec-bundle.js": ["coverage", "webpack", "sourcemap"]
+		},
 
 		/**
 		 * Webpack Config at ./webpack.test.js
@@ -94,7 +115,12 @@ module.exports = function(config) {
 		 * possible values: 'dots', 'progress'
 		 * available reporters: https://npmjs.org/browse/keyword/karma-reporter
 		 */
-		reporters: ["mocha", "coverage", "remap-coverage"],
+		reporters: ["mocha", "coverage", "progress", "remap-coverage"],
+
+		// Give a type to files, otherwise it will not work with Chrome > 55
+		mime: {
+			"text/x-typescript": ["ts", "tsx"]
+		},
 
 		/**
 		 * Web server port.
@@ -115,13 +141,17 @@ module.exports = function(config) {
 		/**
 		 * enable / disable watching file and executing tests whenever any file changes
 		 */
-		autoWatch: false,
+		autoWatch: true,
 
 		/**
 		 * start these browsers
 		 * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
 		 */
-		browsers: ["Chrome"],
+		browsers: [
+			"Chrome"
+			//"Firefox",
+			//"IE",
+		],
 
 		customLaunchers: {
 			ChromeTravisCi: {
@@ -134,7 +164,12 @@ module.exports = function(config) {
 		 * Continuous Integration mode
 		 * if true, Karma captures browsers, runs the tests and exits
 		 */
-		singleRun: true
+		singleRun: false,
+
+		// Timeout settings
+		browserNoActivityTimeout: 30000,
+		browserDisconnectTolerance: 1,
+		browserDisconnectTimeout: 30000
 	};
 
 	if (process.env.TRAVIS) {

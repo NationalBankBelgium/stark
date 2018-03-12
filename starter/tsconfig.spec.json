@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "es2017"],
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "@nationalbankbelgium/stark-build/*": ["node_modules/@nationalbankbelgium/stark-build/*"],
+      "@nationalbankbelgium/stark-core/*": ["node_modules/@nationalbankbelgium/stark-core/*"]
+    }
+  },
+
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": false,
+    "skipTemplateCodegen": true
+  }
+}

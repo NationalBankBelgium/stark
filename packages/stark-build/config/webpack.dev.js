@@ -17,6 +17,7 @@ const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
 
 const WriteFilePlugin = require("write-file-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
+const CircularDependencyPlugin = require("circular-dependency-plugin");
 
 // Dev custom config
 const webpackCustomConfig = require(helpers.root("config/webpack-custom-config.dev.json"));
@@ -59,14 +60,6 @@ module.exports = function() {
 	];
 
 	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
-		stats: {
-			colors: true,
-			reasons: true,
-			errorDetails: true // display error details. Same as the --show-error-details flag
-			// maxModules: Infinity, // examine all modules (ModuleConcatenationPlugin debugging)
-			// optimizationBailout: true  // display bailout reasons (ModuleConcatenationPlugin debugging)
-		},
-
 		/**
 		 * Tell webpack which environment the application is targeting.
 		 * reference: https://webpack.js.org/configuration/target/
@@ -206,16 +199,6 @@ module.exports = function() {
 			new NamedModulesPlugin(),
 
 			/**
-			 * Plugin LoaderOptionsPlugin (experimental)
-			 *
-			 * See: https://gist.github.com/sokra/27b24881210b56bbaff7
-			 */
-			new LoaderOptionsPlugin({
-				debug: true,
-				options: {}
-			}),
-
-			/**
 			 * Plugin: WriteFilePlugin
 			 * Description: This plugin makes sure that bundles and assets are written to disk
 			 * this is necessary so that assets are available in dev mode
@@ -232,6 +215,13 @@ module.exports = function() {
 				configFile: "stylelint.config.js",
 				emitErrors: false,
 				files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
+			}),
+
+			new CircularDependencyPlugin({
+				// exclude detection of files based on a RegExp
+				exclude: /node_modules/,
+				// log warnings to webpack
+				failOnError: false
 			})
 		],
 

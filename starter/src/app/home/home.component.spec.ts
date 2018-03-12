@@ -1,7 +1,6 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { inject, async, TestBed, ComponentFixture, getTestBed } from "@angular/core/testing";
-import { Component } from "@angular/core";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { async, TestBed, ComponentFixture } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 /**
  * Load the implementations that should be tested.
@@ -13,9 +12,6 @@ import { Title } from "./title";
 describe(`Home`, () => {
 	let comp: HomeComponent;
 	let fixture: ComponentFixture<HomeComponent>;
-	let injector: TestBed;
-	let service: AppState;
-	let httpMock: HttpTestingController;
 
 	/**
 	 * async beforeEach.
@@ -33,9 +29,6 @@ describe(`Home`, () => {
 				 * Compile template and css.
 				 */
 				.compileComponents();
-			injector = getTestBed();
-			service = injector.get(AppState);
-			httpMock = injector.get(HttpTestingController);
 		})
 	);
 
