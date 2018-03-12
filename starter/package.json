@@ -47,6 +47,8 @@
     "postinstall": "npm run webdriver:update",
     "postversion": "git push && git push --tags",
     "preclean:install": "npm run clean",
+    "precommit": "lint-staged",
+    "prettier-check": "prettier **/*.{css,js,json,pcss,scss,ts} --write",
     "preversion": "npm test",
     "protractor": "protractor",
     "protractor:delay": "sleep 3 && npm run protractor",
@@ -80,6 +82,12 @@
     "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
   },
+  "lint-staged": {
+    "*.{css,js,json,pcss,scss,ts}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@angular/animations": "5.2.6",
     "@angular/common": "5.2.6",
@@ -91,8 +99,8 @@
     "@angular/platform-server": "5.2.6",
     "@angular/router": "5.2.6",
     "@nationalbankbelgium/angular-mdi-svg": "1.6.0",
-    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-bca13b5.tgz",
-    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.0-bca13b5.tgz",
+    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-dacb040.tgz",
+    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.0-dacb040.tgz",
     "@uirouter/angular": "1.0.1",
     "@uirouter/visualizer": "6.0.0",
     "core-js": "2.5.3",
@@ -112,7 +120,6 @@
     "@types/node": "6.0.101",
     "@types/source-map": "0.5.2",
     "@types/uglify-js": "2.6.30",
-    "codelyzer": "4.1.0",
     "cross-env": "^5.0.0",
     "find-root": "^1.0.0",
     "gh-pages": "^1.0.0",
@@ -132,7 +139,6 @@
     "rimraf": "2.6.2",
     "ts-node": "3.3.0",
     "tslib": "1.8.1",
-    "tslint": "5.8.0",
     "typedoc": "0.9.0",
     "typescript": "2.6.2"
   },
