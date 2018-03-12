@@ -16,16 +16,18 @@ const globals = {
 };
 
 module.exports = {
-//export default {
+	//export default {
 	input: "../../dist/packages-dist/stark-core/esm5/stark-core.js",
-	output: [{
-		file: "../../dist/packages-dist/stark-core/bundles/stark-core.umd.js",
-		globals: globals,
-		format: "umd",
-		exports: "named",
-		name: "stark.http",
-		sourcemap: true
-	}],
+	output: [
+		{
+			file: "../../dist/packages-dist/stark-core/bundles/stark-core.umd.js",
+			globals: globals,
+			format: "umd",
+			exports: "named",
+			name: "stark.http",
+			sourcemap: true
+		}
+	],
 	amd: {
 		id: "@nationalbankbelgium/stark-core"
 	},
@@ -34,5 +36,5 @@ module.exports = {
 		commonjs(), // converts date-fns to ES modules
 		sourcemaps()
 	],
-	external: Object.keys(globals),
+	external: Object.keys(globals)
 };
