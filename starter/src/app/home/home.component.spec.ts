@@ -18,7 +18,7 @@ describe(`Home`, () => {
 	 */
 	beforeEach(
 		async(() => {
-			TestBed.configureTestingModule({
+			return TestBed.configureTestingModule({
 				declarations: [HomeComponent],
 				schemas: [NO_ERRORS_SCHEMA],
 				imports: [HttpClientTestingModule],
