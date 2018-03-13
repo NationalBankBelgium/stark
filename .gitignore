@@ -1,5 +1,9 @@
 # Build
-/dist/
+dist/
+.awcache/
+dist/
+.tmp/
+/.tmp/
 
 # Reports directory
 reports/
@@ -8,14 +12,24 @@ reports/
 package-lock.json
 
 # Logs
-./logs/
+logs/
 *.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Coverage directory used by tools like istanbul
+coverage
 
 # Bak
 *.bak
 
 # Node
 node_modules/
+npm-debug.log
+/npm-debug.log.*
 
 # OS generated files #
 Desktop.ini
@@ -40,3 +54,9 @@ pids
 
 # Patch files
 *.patch
+
+# Angular #
+*.ngfactory.ts
+*.css.shim.ts
+*.ngsummary.json
+*.shim.ngstyle.ts

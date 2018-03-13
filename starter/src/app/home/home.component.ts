@@ -21,7 +21,7 @@ import { Title } from "./title";
 	/**
 	 * Every Angular template is first compiled by the browser before Angular runs it's compiler.
 	 */
-	templateUrl: "./home.component.html"
+	template: require("./home.component.html")
 })
 export class HomeComponent implements OnInit {
 	/**

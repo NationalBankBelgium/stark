@@ -7,7 +7,6 @@ const helpers = require("./helpers");
 /**
  * Webpack Plugins
  */
-const ProvidePlugin = require("webpack/lib/ProvidePlugin");
 const DefinePlugin = require("webpack/lib/DefinePlugin");
 const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
 const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
@@ -95,7 +94,8 @@ module.exports = function() {
 									 * below by DefinePlugin
 									 */
 									removeComments: true
-								}
+								},
+								configFileName: "tsconfig.spec.json"
 							}
 						},
 						"angular2-template-loader"
@@ -262,7 +262,7 @@ module.exports = function() {
 				/**
 				 * The (\\|\/) piece accounts for path separators in *nix and Windows
 				 */
-				/angular(\\|\/)core(\\|\/)@angular/,
+				/angular[\\\/]core([\\\/])@angular/,
 				helpers.root("src"), // location of your src
 				{
 					/**

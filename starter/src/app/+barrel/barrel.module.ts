@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
-import {Ng2StateDeclaration, UIRouterModule} from "@uirouter/angular";
+import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
 
 import { BARREL_STATES } from "./barrel.routes";
 import { BarrelComponent } from "./barrel.component";
@@ -26,5 +26,5 @@ console.log("`Barrel` bundle loaded asynchronously");
 	]
 })
 export class BarrelModule {
-	public static routes: Ng2StateDeclaration = BARREL_STATES;
+	public static routes: Ng2StateDeclaration[] = BARREL_STATES;
 }

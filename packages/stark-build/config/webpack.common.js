@@ -10,13 +10,12 @@ const commonData = require("./webpack.common-data.js"); // common configuration 
  *
  * problem with copy-webpack-plugin
  */
-const DefinePlugin = require("webpack/lib/DefinePlugin");
+// const DefinePlugin = require("webpack/lib/DefinePlugin");
 const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
-const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
-const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+// const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
+// const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const { AngularCompilerPlugin } = require("@ngtools/webpack");
 const { NamedLazyChunksWebpackPlugin } = require("@angular/cli/plugins/webpack");
 const NoEmitOnErrorsPlugin = require("webpack/lib/NoEmitOnErrorsPlugin");
@@ -51,6 +50,21 @@ module.exports = function(options) {
 	};
 
 	return {
+		stats: {
+			colors: true,
+			reasons: true,
+			errorDetails: true // display error details. Same as the --show-error-details flag
+			// maxModules: Infinity, // examine all modules (ModuleConcatenationPlugin debugging)
+			// optimizationBailout: true  // display bailout reasons (ModuleConcatenationPlugin debugging)
+		},
+
+		/**
+		 * Tell webpack which environment the application is targeting.
+		 * reference: https://webpack.js.org/configuration/target/
+		 * reference: https://webpack.js.org/concepts/targets/
+		 */
+		target: "web", // <== can be omitted as default is "web"
+
 		/**
 		 * The entry point for the bundle
 		 * Our Angular.js app
@@ -72,7 +86,7 @@ module.exports = function(options) {
 			 *
 			 * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
 			 */
-			extensions: [".ts", ".js", ".json"],
+			extensions: [".ts", ".js", ".json", ".css", ".pcss", ".html"],
 
 			/**
 			 * An array of directory names to be resolved to the current directory
@@ -131,10 +145,7 @@ module.exports = function(options) {
 					enforce: "pre",
 					test: /\.ts$/,
 					use: ["tslint-loader"],
-					exclude: [
-						helpers.root("node_modules")
-						// helpers.rootStark("node_modules")
-					]
+					exclude: [helpers.root("node_modules")]
 				},
 
 				// Source map loader support for *.js files
@@ -144,11 +155,7 @@ module.exports = function(options) {
 					enforce: "pre",
 					test: /\.js$/,
 					use: ["source-map-loader"],
-					exclude: [
-						// helpers.rootStark("node_modules/rxjs"),
-						helpers.root("node_modules/rxjs"),
-						helpers.root("node_modules/@angular")
-					]
+					exclude: [helpers.root("node_modules/rxjs"), helpers.root("node_modules/@angular")]
 				},
 
 				/**
@@ -230,7 +237,7 @@ module.exports = function(options) {
 				 *  File loader for supporting fonts, for example, in CSS files.
 				 */
 				{
-					test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+					test: /\.(eot|woff2?|svg|ttf)([?]?.*)$/,
 					use: "file-loader"
 				}
 			]
@@ -376,12 +383,12 @@ module.exports = function(options) {
 					//   from: helpers.rootStark("assets/translations"),
 					//   to: "assets/translations/stark"
 					// },
-
-					// Application assets
-					{
-						from: helpers.root("assets/translations"),
-						to: "assets/translations/app"
-					}
+					//
+					// // Application assets
+					// {
+					// 	from: helpers.root("assets/translations"),
+					// 	to: "assets/translations/app"
+					// }
 				],
 				{}
 			),
@@ -448,18 +455,31 @@ module.exports = function(options) {
 			// }),
 
 			new AngularCompilerPlugin({
+				// Optional params
+				sourceMap: true, // TODO: apply based on tsConfig value?
 				mainPath: entry.main,
-				platform: 0, // 0 = browser, 1 = server
-				// entryModule: 'path/to/app.module#AppModule', // TODO not used, probably already defined in the main.browser.ts?
+				skipCodeGeneration: !METADATA.AOT,
 				hostReplacementPaths: {
 					[helpers.root("src/environments/environment.ts")]: environment
 				},
-				sourceMap: true, // TODO: apply based on tsConfig value?
-				tsConfigPath: METADATA.tsConfigPath,
-				skipCodeGeneration: !METADATA.AOT,
+				platform: 0, // 0 = browser, 1 = server
 				compilerOptions: {
 					module: !isProd && METADATA.WATCH ? "commonjs" : "es2015" // TODO is it needed in our case? => Force commonjs module format for TS on dev watch builds.
-				}
+				},
+				// forkTypeChecker?: boolean;
+				// basePath: METADATA.tsConfigPath
+				// entryModule: 'path/to/app.module#AppModule', // TODO not used, probably already defined in the main.browser.ts?
+				// i18nInFile?: string;
+				// i18nInFormat?: string;
+				// i18nOutFile?: string;
+				// i18nOutFormat?: string;
+				// locale?: string;
+				// missingTranslation?: string;
+				// nameLazyFiles?: boolean;
+				// additionalLazyModules?: { [module: string]: string };
+
+				// Required params
+				tsConfigPath: METADATA.tsConfigPath
 			})
 
 			/**
