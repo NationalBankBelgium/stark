@@ -16,7 +16,7 @@ import { Observable } from "rxjs/Observable";
     </div>
     <div>
       <h3>
-        patrick@tipe.io
+		  https://github.com/NationalBankBelgium/stark
       </h3>
     </div>
     <pre>this.localState = {{ localState | json }}</pre>
@@ -72,11 +72,17 @@ export class AboutComponent implements OnInit {
 		 */
 		this.asyncDataWithWebpack();
 	}
-	private asyncDataWithWebpack() {
+	private asyncDataWithWebpack():void {
 		/**
 		 * you can also async load mock data with 'es6-promise-loader'
 		 * you would do this if you don't want the mock-data bundled
 		 * remember that 'es6-promise-loader' is a promise
 		 */
+		// setTimeout(() => {
+		// 	System.import("../../assets/mock-data/mock-data.json").then(json => {
+		// 		console.log("async mockData", json);
+		// 		this.localState = { ...this.localState, asyncData: json };
+		// 	});
+		// });
 	}
 }
