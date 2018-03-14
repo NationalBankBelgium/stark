@@ -1,22 +1,8 @@
 {
   "extends": "./node_modules/@nationalbankbelgium/stark-build/tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "allowSyntheticDefaultImports": true,
-    "lib": ["dom", "es6"],
-    "paths": {
-      "@angular/*": ["node_modules/@angular/*"],
-      "@nationalbankbelgium/stark-build/*": ["node_modules/@nationalbankbelgium/stark-build/*"]
-    },
-    "types": ["hammerjs", "jasmine", "node", "source-map", "uglify-js", "webpack"]
+    "types": ["hammerjs", "jasmine", "node", "source-map", "uglify-js", "webpack"],
+    "typeRoots": ["./node_modules/@types"]
   },
-  "exclude": ["node_modules", "dist"],
-  "angularCompilerOptions": {
-    "skipMetadataEmit": true
-  },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  "exclude": ["node_modules", "dist"]
 }

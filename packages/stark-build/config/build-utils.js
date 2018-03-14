@@ -4,14 +4,14 @@ const fs = require("fs");
 const helpers = require("./helpers");
 
 const DEFAULT_METADATA = {
-	title: "Angular Starter by @gdi2290 from @TipeIO",
+	title: "Stark Application by @NationalBankBelgium",
 	baseUrl: "/",
 	isDevServer: helpers.isWebpackDevServer(),
 	HMR: helpers.hasProcessFlag("hot"),
 	AOT: process.env.BUILD_AOT || helpers.hasNpmFlag("aot"),
 	E2E: !!process.env.BUILD_E2E,
 	WATCH: helpers.hasProcessFlag("watch"),
-	tsConfigPath: "tsconfig.webpack.json",
+	tsConfigPath: "tsconfig.app.json",
 
 	/**
 	 * This suffix is added to the environment.ts file, if not set the default environment file is loaded (development)

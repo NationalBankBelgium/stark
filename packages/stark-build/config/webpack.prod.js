@@ -41,7 +41,8 @@ function getUglifyOptions(supportES2015) {
 		output: {
 			ascii_only: true,
 			comments: false
-		}
+		},
+		beautify: false // set to true for debugging
 	};
 }
 

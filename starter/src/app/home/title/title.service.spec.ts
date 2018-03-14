@@ -1,6 +1,5 @@
-import { inject, async, TestBed, ComponentFixture, getTestBed } from "@angular/core/testing";
-import { Component } from "@angular/core";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { inject, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { Title } from "./title.service";
 
 describe("Title", () => {
