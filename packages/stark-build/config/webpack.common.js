@@ -1,6 +1,4 @@
-/**
- * @author: @AngularClass
- */
+"use strict";
 
 const helpers = require("./helpers");
 const commonData = require("./webpack.common-data.js"); // common configuration between environments

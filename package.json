@@ -48,7 +48,9 @@
     "postinstall:build": "cd packages/stark-build && npm install && cd ../..",
     "postinstall:core": "cd packages/stark-core && npm install && cd ../..",
     "postinstall:starter": "cd starter && npm install && cd ..",
-    "build": "sh ./build.sh"
+    "build": "sh ./build.sh",
+    "update-starter": "cd starter && npm install && cd ..",
+    "starter": "cd starter && npm start && cd .."
   },
   "lint-staged": {
     "*.{css,js,json,pcss,scss,ts}": [
