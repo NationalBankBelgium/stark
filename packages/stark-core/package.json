@@ -22,9 +22,33 @@
     "npm": ">=5.3.0"
   },
   "dependencies": {
+    "@angular/common": "5.2.6",
     "@angular/core": "5.2.6",
-    "rxjs": "5.5.6"
+    "@angular/platform-browser": "5.2.6",
+    "@angular/platform-browser-dynamic": "5.2.6",
+    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-a75807f.tgz",
+    "@types/core-js": "0.9.46",
+    "@types/jasmine": "2.5.36",
+    "@types/node": "6.0.101",
+    "cerialize": "0.1.18",
+    "class-validator": "0.7.3",
+    "core-js": "2.5.3",
+    "deep-freeze-strict": "1.1.1",
+    "jasmine-core": "2.99.1",
+    "karma": "2.0.0",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-jasmine": "1.1.1",
+    "karma-mocha-reporter": "2.2.5",
+    "karma-sourcemap-loader": "0.3.7",
+    "karma-spec-reporter": "0.0.32",
+    "karma-typescript": "3.0.12",
+    "karma-typescript-angular2-transform": "1.0.2",
+    "rxjs": "5.5.6",
+    "zone.js": "0.8.20"
   },
   "devDependencies": {},
-  "scripts": {}
+  "scripts": {
+    "test-fast": "karma start karma.conf.typescript.js",
+    "tsc": "tsc -p tsconfig.json"
+  }
 }
