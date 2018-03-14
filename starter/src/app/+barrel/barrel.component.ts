@@ -9,15 +9,7 @@ console.log("`Barrel` component loaded asynchronously");
 
 @Component({
 	selector: "barrel",
-	template: `
-    <h1>Hello from Barrel</h1>
-    <span>
-      <a uiSref="childBarrel">
-        Child Barrel
-      </a>
-    </span>
-    <ui-view></ui-view>
-  `
+	templateUrl: "./barrel.component.html"
 })
 export class BarrelComponent implements OnInit {
 	public ngOnInit() {
