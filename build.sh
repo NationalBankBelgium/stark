@@ -53,8 +53,60 @@ for ARG in "$@"; do
       TYPECHECK_ALL=false
       ;;
     --packages=*)
+      # asked to build a subset of the packages
+      BUILD_ALL=false
+      
+      # parse to identify the packages to build
       PACKAGES_STR=${ARG#--packages=}
-      PACKAGES=( ${PACKAGES_STR//,/ } )
+      PACKAGES_STR=${ARG#--packages=}
+      PACKAGES_STR="${PACKAGES_STR//,/ }" # replace , by ' '
+      PACKAGES_STR="${PACKAGES_STR//;/ }" # replace ; by ' '
+      PACKAGES_STR="${PACKAGES_STR// /_}" # replace all spaces by '_'
+      PACKAGES_STR=`eval echo ${PACKAGES_STR} | sed -r 's/[_]+/_/g'` # replace all '_' by ''
+      PACKAGES_STR=`eval echo ${PACKAGES_STR} | sed -r 's/_$//g'` # replace last '_' if still there
+      # at this point PACKAGES_STR is (finally) clean :)
+      # it only contains '_' as delimiter
+      
+      # Convert the string to an array
+      PACKAGES_TO_BUILD=()
+
+      OLD_IFS=$IFS # save old IFS value
+      IFS='_ ' # use '_' as character to split
+      read -r -a PACKAGES_TO_BUILD <<< ${PACKAGES_STR}
+      IFS=$OLD_IFS # restore IFS
+      
+      unset PACKAGES_STR # not needed anymore
+      #echo "Packages to build: ${PACKAGES_TO_BUILD[*]}"
+      
+      # Filtering package lists to only keep those that need to be built
+      FILTERED_PACKAGES=()
+      FILTERED_TSC_PACKAGES=()
+      FILTERED_NODE_PACKAGES=()
+      FILTERED_ALL_PACKAGES=()
+      
+      for target in "${PACKAGES_TO_BUILD[@]}"; do
+        if containsElement "${target}" "${PACKAGES[@]}"; then
+          FILTERED_PACKAGES+=(${target})
+        fi
+        if containsElement "${target}" "${TSC_PACKAGES[@]}"; then
+          FILTERED_TSC_PACKAGES+=(${target})
+        fi
+        if containsElement "${target}" "${NODE_PACKAGES[@]}"; then
+          FILTERED_NODE_PACKAGES+=(${target})
+        fi
+        if containsElement "${target}" "${ALL_PACKAGES[@]}"; then
+          FILTERED_ALL_PACKAGES+=(${target})
+        fi
+      done
+      PACKAGES=("${FILTERED_PACKAGES[@]}")
+      TSC_PACKAGES=("${FILTERED_TSC_PACKAGES[@]}")
+      NODE_PACKAGES=("${FILTERED_NODE_PACKAGES[@]}")
+      ALL_PACKAGES=("${FILTERED_ALL_PACKAGES[@]}")
+      
+      # if ALL_PACKAGES is empty then the input was incorrect
+      if [ ${#ALL_PACKAGES[@]} -eq 0 ]; then
+        die "No matching packages. Can't build anything :("
+      fi
       ;;
     --bundle=*)
       BUNDLE=( "${ARG#--bundle=}" )
@@ -89,6 +141,13 @@ VERSION="${VERSION_PREFIX}${VERSION_SUFFIX}"
 
 logInfo "============================================="
 logInfo "Building Stark version ${VERSION}"
+logInfo "============================================="
+
+if [[ ${BUILD_ALL} == true ]]; then
+  logInfo "> FULL build: ${ALL_PACKAGES[*]}"
+else
+  logInfo "> PARTIAL build: ${PACKAGES_TO_BUILD[*]}"
+fi
 logInfo "============================================="
 
 TSC=`pwd`/node_modules/.bin/tsc

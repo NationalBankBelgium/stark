@@ -49,6 +49,8 @@
     "postinstall:core": "cd packages/stark-core && npm install && cd ../..",
     "postinstall:starter": "cd starter && npm install && cd ..",
     "build": "sh ./build.sh",
+    "build:stark-build": "sh ./build.sh --packages=stark-build",
+    "build:stark-core": "sh ./build.sh --packages=stark-core",
     "update-starter": "cd starter && npm install && cd ..",
     "starter": "cd starter && npm start && cd .."
   },
