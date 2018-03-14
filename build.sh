@@ -69,9 +69,13 @@ for ARG in "$@"; do
       TYPECHECK_ALL=${ARG#--typecheck=}
       ;;
     --verbose)
+      logInfo "============================================="
+      logInfo "Verbose mode enabled!"
       VERBOSE=true
       ;;
     --trace)
+      logInfo "============================================="
+      logInfo "Trace mode enabled!"
       TRACE=true
       ;;
     *)
@@ -82,13 +86,15 @@ for ARG in "$@"; do
 done
 
 VERSION="${VERSION_PREFIX}${VERSION_SUFFIX}"
+
+logInfo "============================================="
 logInfo "Building Stark version ${VERSION}"
 logInfo "============================================="
 
 TSC=`pwd`/node_modules/.bin/tsc
 logTrace "TSC Path: $TSC"
 NGC="node --max-old-space-size=3000 `pwd`/node_modules/@angular/compiler-cli/src/main"
-UGLIFYJS=`pwd`/node_modules/.bin/uglifyjs
+UGLIFY=`pwd`/node_modules/.bin/uglifyjs
 TSCONFIG=./tools/tsconfig.json
 ROLLUP=`pwd`/node_modules/.bin/rollup
 
@@ -169,7 +175,7 @@ do
           logDebug "Run rollup conversions on $PACKAGE" 1
           runRollup ${SRC_DIR}
           addBanners ${BUNDLES_DIR}
-          minify ${BUNDLES_DIR}
+          minify ${UGLIFY} ${BUNDLES_DIR}
         fi
         
         logInfo "Copy $PACKAGE package.json to $NPM_DIR"

@@ -34,7 +34,7 @@
     "tslint": "5.9.1",
     "tslint-config-prettier": "1.8.0",
     "typescript": "2.6.2",
-    "uglify-js": "3.3.12"
+    "uglify-es": "3.3.9"
   },
   "scripts": {
     "precommit": "lint-staged",

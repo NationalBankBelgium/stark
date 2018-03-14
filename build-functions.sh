@@ -181,6 +181,7 @@ addBanners() {
   for file in ${1}/*; do
     if [[ -f ${file} && "${file##*.}" != "map" ]]; then
       # TODO pass LICENSE_BANNER as a param
+      logTrace "Adding banner to : ${file}"
       cat ${LICENSE_BANNER} > ${file}.tmp
       cat ${file} >> ${file}.tmp
       mv ${file}.tmp ${file}
@@ -191,17 +192,20 @@ addBanners() {
 #######################################
 # Minifies files in a directory
 # Arguments:
-#   param1 - Directory to minify
+#   param1 - Path to uglify
+#   param2 - Directory to minify
 # Returns:
 #   None
 #######################################
 minify() {
   logTrace "Executing function: ${FUNCNAME[0]}" 1
-  logDebug "Minifying JS files in: $1" 1
+  logDebug "Minifying JS files in: $2" 1
+  
+  local UGLIFY_PATH="$1"
   
   # Iterate over the files in this directory, rolling up each into ${2} directory
   regex="(.+).js"
-  files=(${1}/*)
+  files=(${2}/*)
   logTrace "Identified files to minify: [$files]" 2
   for file in "${files[@]}"; do
     logTrace "Minifying $file" 2
@@ -209,7 +213,7 @@ minify() {
     if [[ "${base_file}" =~ $regex && "${base_file##*.}" != "map" ]]; then
       local out_file=$(dirname "${file}")/${BASH_REMATCH[1]}.min.js
       logTrace "Running Uglify"
-      local UGLIFY_RESULTS=$($UGLIFYJS ${file} -c --comments --output ${out_file} --source-map "base=relative includeSources=true filename=${out_file}.map" 2>&1)
+      local UGLIFY_RESULTS=$(${UGLIFY_PATH} ${file} -c --comments --output ${out_file} --source-map "includeSources=true content=\"${file}.map\" filename=\"${out_file}.map\"" ${file} 2>&1)
       logTrace "Uglify completed. Execution output: $UGLIFY_RESULTS" 2
     fi
   done
