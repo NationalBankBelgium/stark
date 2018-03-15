@@ -122,6 +122,17 @@ If you want to modify Stark packages (e.g., stark-build, stark-core, ...):
 
 Start hacking :)
 
+If you want to test/validate your changes against the starter, then you can use the following scripts from the root:
+* rebuild: `npm run build`
+* update the starter: `npm run update-starter`
+* run the starter: `npm run starter`
+
+If you only want to build a subset of stark then you can
+* execute one of the `build:stark-<name>` npm scripts; for example: `npm run build:stark-core` or `npm run build:stark-build`
+* execute the `build` script through npm with the list of packages to build: `npm run build -- --packages=stark-core`
+* execute the build script from the command line: `bash ./build.sh --packages=stark-core`
+
+
 ## Releasing a version
 * commit all changes to include in the release
 * edit the version in package.json
