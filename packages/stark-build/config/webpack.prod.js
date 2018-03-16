@@ -1,6 +1,5 @@
-/**
- * @author: @AngularClass
- */
+"use strict";
+
 const helpers = require("./helpers");
 const buildUtils = require("./build-utils");
 
@@ -192,6 +191,7 @@ module.exports = function() {
 			 */
 			new ExtractTextPlugin("[name].[contenthash].css"),
 
+			// TODO remove since it's probably useless here (defined in webpack.common.js)
 			new PurifyPlugin() /* buildOptimizer */,
 
 			/**
