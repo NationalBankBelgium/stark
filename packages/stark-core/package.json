@@ -48,14 +48,14 @@
     "@angular/core": "5.2.6",
     "@angular/platform-browser": "5.2.6",
     "@angular/platform-browser-dynamic": "5.2.6",
-    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-6f8101e.tgz"
+    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-892d9b8.tgz"
   },
   "peerDependencies": {
     "@angular/common": "5.x",
     "@angular/core": "5.x",
     "@angular/platform-browser": "5.x",
     "@angular/platform-browser-dynamic": "5.x",
-    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-6f8101e.tgz"
+    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-892d9b8.tgz"
   },
   "scripts": {
     "test-fast": "karma start karma.conf.typescript.js",
