@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Three-Fingered Claw technique :)
+# Reference: https://stackoverflow.com/questions/1378274/in-a-bash-script-how-can-i-exit-the-entire-script-if-a-certain-condition-occurs
+yell() { echo "$0: $*" >&2; }
+die() { yell "$*"; exit 111; }
+try() { "$@" || die "cannot $*"; }
+
 #######################################
 # Echo the passed message if verbose mode is enabled
 # Arguments:
@@ -181,6 +187,7 @@ addBanners() {
   for file in ${1}/*; do
     if [[ -f ${file} && "${file##*.}" != "map" ]]; then
       # TODO pass LICENSE_BANNER as a param
+      logTrace "Adding banner to : ${file}"
       cat ${LICENSE_BANNER} > ${file}.tmp
       cat ${file} >> ${file}.tmp
       mv ${file}.tmp ${file}
@@ -191,17 +198,20 @@ addBanners() {
 #######################################
 # Minifies files in a directory
 # Arguments:
-#   param1 - Directory to minify
+#   param1 - Path to uglify
+#   param2 - Directory to minify
 # Returns:
 #   None
 #######################################
 minify() {
   logTrace "Executing function: ${FUNCNAME[0]}" 1
-  logDebug "Minifying JS files in: $1" 1
+  logDebug "Minifying JS files in: $2" 1
+  
+  local UGLIFY_PATH="$1"
   
   # Iterate over the files in this directory, rolling up each into ${2} directory
   regex="(.+).js"
-  files=(${1}/*)
+  files=(${2}/*)
   logTrace "Identified files to minify: [$files]" 2
   for file in "${files[@]}"; do
     logTrace "Minifying $file" 2
@@ -209,7 +219,7 @@ minify() {
     if [[ "${base_file}" =~ $regex && "${base_file##*.}" != "map" ]]; then
       local out_file=$(dirname "${file}")/${BASH_REMATCH[1]}.min.js
       logTrace "Running Uglify"
-      local UGLIFY_RESULTS=$($UGLIFYJS ${file} -c --comments --output ${out_file} --source-map "base=relative includeSources=true filename=${out_file}.map" 2>&1)
+      local UGLIFY_RESULTS=$(${UGLIFY_PATH} ${file} -c --comments --output ${out_file} --source-map "includeSources=true content=\"${file}.map\" filename=\"${out_file}.map\"" ${file} 2>&1)
       logTrace "Uglify completed. Execution output: $UGLIFY_RESULTS" 2
     fi
   done
@@ -383,6 +393,7 @@ generateNpmPackage() {
 #   param1 - name of the stark package
 #   param2 - version of stark to set
 #   param3 - path to the package.json file to adapt
+#   param4 - sub level of the package to adapt
 # Returns:
 #   None
 #######################################
@@ -392,13 +403,25 @@ adaptNpmPackageDependencies() {
   local PACKAGE="$1"
   local VERSION="$2"
   local PACKAGE_JSON_FILE="$3"
+  local SUB_LEVEL=$(($4))
   
-  local TGZ_PATH="file:..\/dist\/packages-dist\/$PACKAGE\/nationalbankbelgium-$PACKAGE-$VERSION.tgz"
+  local PATH_PARENT=""
+  
+  index=1
+  while [[ $index -le $SUB_LEVEL ]]
+  do 
+    PATH_PARENT="..\/$PATH_PARENT"
+    index=$index+1
+  done
+  
+  local TGZ_PATH="file:${PATH_PARENT}dist\/packages-dist\/$PACKAGE\/nationalbankbelgium-$PACKAGE-$VERSION.tgz"
   logTrace "TGZ path: $TGZ_PATH"
   
   local NEWVALUE="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\\"$TGZ_PATH\\\""
   
-  perl -p -i -e "s/\"\@nationalbankbelgium\/$PACKAGE\"\s*\:\s*\".*\"/$NEWVALUE/g" $PACKAGE_JSON_FILE 2> /dev/null
+  # Packages will have dependencies between them. They will so have "devDependencies" and "peerDependencies" with different values.
+  # We should only replace the value of the devDependency for make it work.
+  perl -p -i -e "s/\"\@nationalbankbelgium\/$PACKAGE\"\s*\:\s*\".*\"/$NEWVALUE/" $PACKAGE_JSON_FILE 2> /dev/null
 }
 
 #######################################

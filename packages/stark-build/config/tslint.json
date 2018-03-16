@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:latest","tslint-config-prettier", "codelyzer"],
+  "extends": ["tslint:latest", "tslint-config-prettier", "codelyzer"],
   "defaultSeverity": "error",
   "rules": {
     // Codelyzer recommended rules
@@ -19,7 +19,7 @@
     "no-output-named-after-standard-event": true,
     "component-class-suffix": [true, "Component"],
     "directive-class-suffix": [true, "Directive"],
-    
+
     // Codelyzer rules
     "banana-in-box": true,
     "contextual-life-cycle": true,

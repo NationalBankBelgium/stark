@@ -4,6 +4,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
       "rxjs/*": ["../../node_modules/rxjs/*"],
       "@nationalbankbelgium/stark-core": ["."]

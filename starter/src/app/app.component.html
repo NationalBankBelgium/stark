@@ -1,0 +1,41 @@
+<nav>
+	<a uiSref="index"
+	   uiSrefActive="active">
+		Index
+	</a>
+	<a uiSref="home"
+	   uiSrefActive="active">
+		Home
+	</a>
+	<a uiSref="detail"
+	   uiSrefActive="active">
+		Detail
+	</a>
+	<a uiSref="barrel"
+	   uiSrefActive="active">
+		Barrel
+	</a>
+	<a uiSref="about" [uiParams]="{ paramData: 'data passed via params' }"
+	   uiSrefActive="active">
+		About
+	</a>
+	<a *ngIf="showDevModule" uiSref="devModuleDefault"
+	   uiSrefActive="active">
+		DevModule
+	</a>
+</nav>
+
+<main>
+	<ui-view></ui-view>
+</main>
+
+<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
+
+<footer>
+	<span>Angular Starter by <a [href]="twitter">@gdi2290</a></span>
+	<div>
+		<a [href]="url">
+			<img [src]="tipe" width="25%">
+		</a>
+	</div>
+</footer>

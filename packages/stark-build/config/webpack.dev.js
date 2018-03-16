@@ -1,6 +1,4 @@
-/**
- * @author: @AngularClass
- */
+"use strict";
 
 const helpers = require("./helpers");
 const buildUtils = require("./build-utils");
@@ -11,7 +9,6 @@ const commonData = require("./webpack.common-data.js"); // the settings that are
 /**
  * Webpack Plugins
  */
-const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
 const NamedModulesPlugin = require("webpack/lib/NamedModulesPlugin");
 const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
 
@@ -212,7 +209,7 @@ module.exports = function() {
 			 * See: https://github.com/JaKXz/stylelint-webpack-plugin
 			 */
 			new StylelintPlugin({
-				configFile: "stylelint.config.js",
+				configFile: ".stylelintrc",
 				emitErrors: false,
 				files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
 			}),
