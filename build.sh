@@ -23,7 +23,7 @@ cd ${currentDir}
 PACKAGES=(stark-core)
 
 # Packages that should not be compiled by NGC but just with TSC
-TSC_PACKAGES=()
+TSC_PACKAGES=(stark-core)
 
 # Packages that should not be compiled at all
 NODE_PACKAGES=(stark-build)
