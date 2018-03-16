@@ -13,21 +13,21 @@ export const starkHttpServiceName: string = "StarkHttpService";
 export interface StarkHttpService<T extends StarkResource> {
 	/**
 	 * Gets the core Angular HTTP API (HttpClient)
-	 * @returns {HttpClient} Angular Http client
+	 * @returns Angular Http client
 	 */
 	readonly rawHttpClient: HttpClient;
 
 	/**
 	 * Executes requests to fetch a single resource
-	 * @param request
-	 * @returns {Observable} Observable that will emit the single item response wrapper
+	 * @param request - The HTTP request to be executed
+	 * @returns Observable that will emit the single item response wrapper
 	 */
 	executeSingleItemRequest(request: StarkHttpRequest): Observable<StarkSingleItemResponseWrapper<T>>;
 
 	/**
 	 * Executes requests to fetch an array of resources
-	 * @param request
-	 * @returns {Observable} Observable that will emit the collection response wrapper
+	 * @param request - The HTTP request to be executed
+	 * @returns Observable that will emit the collection response wrapper
 	 */
 	executeCollectionRequest(request: StarkHttpRequest): Observable<StarkCollectionResponseWrapper<T>>;
 }

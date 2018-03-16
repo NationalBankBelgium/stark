@@ -17,7 +17,7 @@ export class StarkHttpSerializerImpl<T extends StarkResource> implements StarkHt
 	protected _type: StarkSerializable | undefined;
 
 	/**
-	 * @param {StarkSerializable} type Default Type Serializable
+	 * @param type - Default Type Serializable
 	 */
 	public constructor(type?: StarkSerializable) {
 		this._type = type;

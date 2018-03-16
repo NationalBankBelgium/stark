@@ -3,9 +3,12 @@ import {StarkResource} from "../resource.entity.intf";
 import {StarkHttpStatusCodes} from "../../enumerators";
 
 export class StarkSingleItemResponseWrapperImpl<T extends StarkResource> implements StarkSingleItemResponseWrapper<T> {
+	/** @internal */
 	private _starkHttpStatusCode: StarkHttpStatusCodes;
 	// TODO: return the Angular HttpHeaders or still return our own Map?
+	/** @internal */
 	private _starkHttpHeaders: Map<string, string>;
+	/** @internal */
 	private _data: T;
 
 	public constructor(starkHttpStatusCode: StarkHttpStatusCodes,

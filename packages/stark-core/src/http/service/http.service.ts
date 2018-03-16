@@ -142,8 +142,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	/**
 	 * NG-1361: remove the etag before executing the request
 	 * We have to remove it otherwise it'll be serialized and cause issues on the back-end
-	 * @param request the request object to modify
-	 * @returns {StarkHttpRequest} the modified request object
+	 * @param request - The request object to modify
+	 * @returns The modified request object
 	 */
 	public removeETagFromRequestItem(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
 		let requestCopy: StarkHttpRequest<P> = request;
@@ -160,8 +160,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 	/**
 	 * NG-1346: add NBB-specific headers necessary for faking pre-authentication in non-production environments
-	 * @param request the request object to modify
-	 * @returns {StarkHttpRequest} the modified request object
+	 * @param request - The request object to modify
+	 * @returns The modified request object
 	 */
 	public addFakePreAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
 		this.logger.debug(starkHttpServiceName + ": Adding fake pre-authentication headers");
@@ -178,8 +178,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 	/**
 	 * NG-117: add NBB-specific header for activity correlation
-	 * @param request the request object to modify
-	 * @returns {StarkHttpRequest} the modified request object
+	 * @param request - The request object to modify
+	 * @returns The modified request object
 	 */
 	public addCorrelationIdentifierHeader(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
 		this.logger.debug(starkHttpServiceName + ": Adding correlation identifier header");
@@ -398,14 +398,18 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 	private addRetryLogic<R>(httpResponse$: Observable<HttpResponse<R>>,
 							 retryCount: number): Observable<HttpResponse<R>> {
+		console.log("CCR==========> retryCount", retryCount);
 		return httpResponse$
 			.retryWhen((errors: Observable<any>) => {
 				let retries: number = 0;
 				return errors.mergeMap((error: HttpResponse<P>) => {
+					console.log("CCR==========> error in Retry", error);
 					if (retries < retryCount) {
+						console.log("CCR==========> retries", retries);
 						retries++;
 						return Observable.timer(this.retryDelay);
 					} else {
+						console.log("CCR==========> error", error);
 						return Observable.throw(error);
 					}
 				});

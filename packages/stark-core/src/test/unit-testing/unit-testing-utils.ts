@@ -13,10 +13,9 @@ import {StarkHttpHeaders, StarkHttpService, starkHttpServiceName} from "../../ht
 export class UnitTestingUtils {
 
 	/**
-	 * It returns a new instance of a mocked StarkLoggingService. It should always return a new instance otherwise all the tests
+	 * Returns a new instance of a mocked StarkLoggingService. It should always return a new instance otherwise all the tests
 	 * would share the same instance including all the customizations made to such instance, causing an unexpected behaviour
 	 * and many tests to fail
-	 * @returns {StarkLoggingService}
 	 */
 	public static getMockedLoggingService(correlationId: string = "dummyCorrelationId"): StarkLoggingService {
 		const mockLoggingService: any = jasmine.createSpyObj<StarkLoggingService>(starkLoggingServiceName, [
@@ -32,10 +31,9 @@ export class UnitTestingUtils {
 	}
 
 	/**
-	 * It returns a new instance of a mocked StarkHttpService. It should always return a new instance otherwise all the tests
+	 * Returns a new instance of a mocked StarkHttpService. It should always return a new instance otherwise all the tests
 	 * would share the same instance including all the customizations made to such instance, causing an unexpected behaviour
 	 * and many tests to fail
-	 * @returns {StarkHttpService}
 	 */
 	public static getMockedHttpService(): StarkHttpService<any> {
 		return jasmine.createSpyObj<StarkHttpService<any>>(starkHttpServiceName, [
@@ -45,10 +43,9 @@ export class UnitTestingUtils {
 	}
 
 	/**
-	 * It returns a new instance of a mocked StarkSessionService. It should always return a new instance otherwise all the tests
+	 * Returns a new instance of a mocked StarkSessionService. It should always return a new instance otherwise all the tests
 	 * would share the same instance including all the customizations made to such instance, causing an unexpected behaviour
 	 * and many tests to fail
-	 * @returns {StarkSessionService}
 	 */
 	public static getMockedSessionService(fakePreAuthenticationHeaders?: Map<string, string>): StarkSessionService {
 		let mockPreAuthenticationHeaders: Map<string, string>;

@@ -46,10 +46,9 @@ export class StarkApplicationMetadataImpl implements StarkApplicationMetadata {
 
 	/**
 	 * Callback method provided by cerialize in order to post-process the de-serialized json object
-	 * @param instance {StarkApplicationMetadataImpl} instantiated object with its properties already
+	 * @param instance - Instantiated object with its properties already
 	 * set as defined via the serializer annotations
-	 * @param json {Object} raw json object loaded from file
-	 * @constructor
+	 * @param json - Raw json object loaded from file
 	 */
 	public static OnDeserialized(instance: StarkApplicationMetadataImpl, json: any): void {
 		const supportedLanguages: string[] = json["supportedLanguages"];

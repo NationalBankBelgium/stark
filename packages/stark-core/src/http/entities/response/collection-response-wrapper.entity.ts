@@ -6,10 +6,14 @@ import {StarkCollectionMetadata} from "../metadata";
 import {StarkHttpStatusCodes} from "../../enumerators";
 
 export class StarkCollectionResponseWrapperImpl<T extends StarkResource> implements StarkCollectionResponseWrapper<T> {
+	/** @internal */
 	private _starkHttpStatusCode: StarkHttpStatusCodes;
 	// TODO: return the Angular HttpHeaders or still return our own Map?
+	/** @internal */
 	private _starkHttpHeaders: Map<string, string>;
+	/** @internal */
 	private _data: T[];
+	/** @internal */
 	private _metadata: StarkCollectionMetadata;
 
 	public constructor(starkHttpStatusCode: StarkHttpStatusCodes,
