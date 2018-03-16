@@ -393,6 +393,7 @@ generateNpmPackage() {
 #   param1 - name of the stark package
 #   param2 - version of stark to set
 #   param3 - path to the package.json file to adapt
+#   param4 - sub level of the package to adapt
 # Returns:
 #   None
 #######################################
@@ -402,13 +403,25 @@ adaptNpmPackageDependencies() {
   local PACKAGE="$1"
   local VERSION="$2"
   local PACKAGE_JSON_FILE="$3"
+  local SUB_LEVEL=$(($4))
   
-  local TGZ_PATH="file:..\/dist\/packages-dist\/$PACKAGE\/nationalbankbelgium-$PACKAGE-$VERSION.tgz"
+  local PATH_PARENT=""
+  
+  index=1
+  while [[ $index -le $SUB_LEVEL ]]
+  do 
+    PATH_PARENT="..\/$PATH_PARENT"
+    index=$index+1
+  done
+  
+  local TGZ_PATH="file:${PATH_PARENT}dist\/packages-dist\/$PACKAGE\/nationalbankbelgium-$PACKAGE-$VERSION.tgz"
   logTrace "TGZ path: $TGZ_PATH"
   
   local NEWVALUE="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\\"$TGZ_PATH\\\""
   
-  perl -p -i -e "s/\"\@nationalbankbelgium\/$PACKAGE\"\s*\:\s*\".*\"/$NEWVALUE/g" $PACKAGE_JSON_FILE 2> /dev/null
+  # Packages will have dependencies between them. They will so have "devDependencies" and "peerDependencies" with different values.
+  # We should only replace the value of the devDependency for make it work.
+  perl -p -i -e "s/\"\@nationalbankbelgium\/$PACKAGE\"\s*\:\s*\".*\"/$NEWVALUE/" $PACKAGE_JSON_FILE 2> /dev/null
 }
 
 #######################################
