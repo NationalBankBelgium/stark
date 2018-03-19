@@ -1,17 +1,17 @@
 // Config from https://github.com/angular/angular-cli/wiki/stories-configure-hmr
 // Maybe we should use this: https://github.com/gdi2290/angular-hmr
 
-import { NgModuleRef, ApplicationRef } from "@angular/core";
+import { NgModuleRef, ApplicationRef, ComponentRef } from "@angular/core";
 import { createNewHosts } from "@angularclass/hmr";
 
-export const hmrBootstrap = (module: any, bootstrap: () => Promise<NgModuleRef<any>>) => {
+export const hmrBootstrap: any = (module: any, bootstrap: () => Promise<NgModuleRef<any>>) => {
 	let ngModule: NgModuleRef<any>;
 	module.hot.accept();
-	bootstrap().then(mod => (ngModule = mod));
+	bootstrap().then((mod: NgModuleRef<any>) => (ngModule = mod));
 	module.hot.dispose(() => {
 		const appRef: ApplicationRef = ngModule.injector.get(ApplicationRef);
-		const elements = appRef.components.map(c => c.location.nativeElement);
-		const makeVisible = createNewHosts(elements);
+		const elements: ComponentRef<any>[] = appRef.components.map((c: ComponentRef<any>) => c.location.nativeElement);
+		const makeVisible: () => void = createNewHosts(elements);
 		ngModule.destroy();
 		makeVisible();
 	});

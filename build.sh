@@ -23,12 +23,12 @@ cd ${currentDir}
 PACKAGES=(stark-core)
 
 # Packages that should not be compiled by NGC but just with TSC
-TSC_PACKAGES=()
+TSC_PACKAGES=(stark-core)
 
 # Packages that should not be compiled at all
 NODE_PACKAGES=(stark-build)
 
-ALL_PACKAGES=(stark-core stark-build)
+ALL_PACKAGES=(stark-build stark-core)
 
 BUILD_ALL=true
 BUNDLE=true
@@ -180,6 +180,26 @@ if [[ ${BUILD_ALL} == true ]]; then
   mkdir -p ./dist/packages-dist
 fi
 
+if [[ ${BUILD_ALL} == false ]]; then
+  for PACKAGE in ${ALL_PACKAGES[@]}
+  do
+    travisFoldStart "clean dist for ${PACKAGE}" "no-xtrace"
+    rm -rf ./dist/packages/$PACKAGE
+    if [[ ${BUNDLE} == true ]]; then
+      rm -rf ./dist/packages-dist/$PACKAGE
+    fi
+    
+    if [[ ! -d "./dist/packages" ]]; then
+      mkdir -p ./dist/packages
+    fi
+    
+    if [[ ! -d "./dist/packages-dist" ]]; then
+      mkdir -p ./dist/packages-dist
+    fi
+  done
+  travisFoldEnd "clean dist for ${PACKAGE}"
+fi
+
 for PACKAGE in ${ALL_PACKAGES[@]}
 do
   travisFoldStart "global build: ${PACKAGE}" "no-xtrace"
@@ -279,7 +299,12 @@ do
         generateNpmPackage ${NPM_DIR}
         
         logInfo "Adapt starter dependencies"
-        adaptNpmPackageDependencies $PACKAGE $VERSION "./starter/package.json"
+        adaptNpmPackageDependencies $PACKAGE $VERSION "./starter/package.json" 1
+
+        # TODO Fix this with a proper solution
+        if [[ $PACKAGE == "stark-build" ]]; then
+          adaptNpmPackageDependencies $PACKAGE $VERSION "./packages/stark-core/package.json" 2
+        fi
       fi
     travisFoldEnd "general tasks: ${PACKAGE}"
   

@@ -18,17 +18,19 @@ describe(`Home`, () => {
 	 */
 	beforeEach(
 		async(() => {
-			return TestBed.configureTestingModule({
-				declarations: [HomeComponent],
-				schemas: [NO_ERRORS_SCHEMA],
-				imports: [HttpClientTestingModule],
-				providers: [AppState, Title]
-			})
+			return (
+				TestBed.configureTestingModule({
+					declarations: [HomeComponent],
+					schemas: [NO_ERRORS_SCHEMA],
+					imports: [HttpClientTestingModule],
+					providers: [AppState, Title]
+				})
 
-				/**
-				 * Compile template and css.
-				 */
-				.compileComponents();
+					/**
+					 * Compile template and css.
+					 */
+					.compileComponents()
+			);
 		})
 	);
 
