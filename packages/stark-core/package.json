@@ -22,6 +22,8 @@
     "npm": ">=5.3.0"
   },
   "dependencies": {
+    "@ng-idle/core": "^2.0.0-beta.13",
+    "@ng-idle/keepalive": "^2.0.0-beta.13",
     "@types/core-js": "0.9.46",
     "@types/jasmine": "2.5.36",
     "@types/node": "6.0.101",
@@ -48,14 +50,14 @@
     "@angular/core": "5.2.6",
     "@angular/platform-browser": "5.2.6",
     "@angular/platform-browser-dynamic": "5.2.6",
-    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-892d9b8.tgz"
+    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-e655a25.tgz"
   },
   "peerDependencies": {
     "@angular/common": "5.x",
     "@angular/core": "5.x",
     "@angular/platform-browser": "5.x",
     "@angular/platform-browser-dynamic": "5.x",
-    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-892d9b8.tgz"
+    "@nationalbankbelgium/stark-build": "file:../../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-e655a25.tgz"
   },
   "scripts": {
     "test-fast": "karma start karma.conf.typescript.js",
