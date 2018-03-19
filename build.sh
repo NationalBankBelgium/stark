@@ -180,6 +180,26 @@ if [[ ${BUILD_ALL} == true ]]; then
   mkdir -p ./dist/packages-dist
 fi
 
+if [[ ${BUILD_ALL} == false ]]; then
+  for PACKAGE in ${ALL_PACKAGES[@]}
+  do
+    travisFoldStart "clean dist for ${PACKAGE}" "no-xtrace"
+    rm -rf ./dist/packages/$PACKAGE
+    if [[ ${BUNDLE} == true ]]; then
+      rm -rf ./dist/packages-dist/$PACKAGE
+    fi
+    
+    if [[ ! -d "./dist/packages" ]]; then
+      mkdir -p ./dist/packages
+    fi
+    
+    if [[ ! -d "./dist/packages-dist" ]]; then
+      mkdir -p ./dist/packages-dist
+    fi
+  done
+  travisFoldEnd "clean dist for ${PACKAGE}"
+fi
+
 for PACKAGE in ${ALL_PACKAGES[@]}
 do
   travisFoldStart "global build: ${PACKAGE}" "no-xtrace"
