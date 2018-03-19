@@ -9,7 +9,12 @@
       "rxjs/*": ["../node_modules/rxjs/*"],
       "@nationalbankbelgium/stark-*": ["./*"]
     },
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "typeRoots": [
+      "./stark-build/node_modules/@types",
+      "./stark-core/node_modules/@types",
+      "./stark-ui/node_modules/@types"
+    ]
   },
   "exclude": ["stark-build/config-stark"]
 }
