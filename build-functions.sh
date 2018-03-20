@@ -59,6 +59,7 @@ syncFiles() {
   logTrace "${FUNCNAME[0]}" 1
   logDebug "Syncing files from $1 to $2" 1
   cd $1; # we go to the folder to execute it with relative paths
+  mkdir -p $2
   local REL_PATH_TO_DESTINATION=$(realpath --relative-to="." "$2");
   shift 2; # those 2 parameters are not needed anymore
 	

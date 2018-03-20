@@ -1,16 +1,30 @@
 {
   "name": "stark-starter",
   "version": "0.0.1",
+  "private": true,
   "description": "Stark - Starter",
   "keywords": [
     "angular",
     "angular5",
     "webpack",
-    "typescript"
+    "typescript",
+    "redux",
+    "ngrx",
+    "ui-router"
   ],
   "author": "Stark Team <sebastien.dubois@nbb.be>",
-  "homepage": "https://github.com/nationalbankbelgium/stark",
+  "contributors": [],
   "license": "MIT",
+  "bugs": "https://github.com/nationalbankbelgium/stark/issues",
+  "homepage": "https://github.com/nationalbankbelgium/stark",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nationalbankbelgium/stark.git"
+  },
+  "engines": {
+    "node": ">=6.11.0",
+    "npm": ">=5.3.0"
+  },
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 npm run webpack -- --config node_modules/@nationalbankbelgium/stark-build/config/webpack.prod.js  --progress --profile --bail",
     "build:aot": "npm run build:aot:prod",
@@ -19,6 +33,7 @@
     "build:docker": "npm run build:prod && docker build -t angular2-webpack-start:latest .",
     "build:prod": "npm run clean:dist && npm run build:aot:prod",
     "build": "npm run build:dev",
+    "check-deps": "npx npm-check-u",
     "ci:aot": "cross-env BUILD_E2E=1 npm run lint && npm run test && npm run build:aot && npm run e2e",
     "ci:jit": "cross-env BUILD_E2E=1 npm run lint && npm run test && npm run build:prod && npm run e2e",
     "ci:nobuild": "npm run lint && npm test && npm run e2e",
@@ -29,20 +44,19 @@
     "clean:aot": "npm run rimraf -- compiled",
     "clean:dist": "npm run rimraf -- dist",
     "clean:install": "npm set progress=false && npm install",
-    "clean": "npm cache clean --force && npm run rimraf -- node_modules doc coverage dist compiled dll",
+    "clean": "npm cache clean --force && npm run rimraf -- node_modules doc coverage reports dist compiled dll",
     "docker": "docker",
     "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./src/",
-    "docs:compodoc": "compodoc -p tsconfig.json",
-    "docs:compodoc:serve": "compodoc -p tsconfig.json -s",
-    "docs:compodoc:serve:watch": "compodoc -p tsconfig.json -s -w",
     "e2e:live": "npm-run-all -p -r server:prod:ci protractor:live",
     "e2e:travis": "npm-run-all -p -r server:prod:ci protractor:delay",
     "e2e": "npm-run-all -p -r server:prod:ci protractor",
     "github-deploy:dev": "npm run webpack -- --config node_modules/@nationalbankbelgium/stark-build/config/webpack.github-deploy.js --progress --profile --env.githubDev",
     "github-deploy:prod": "npm run webpack -- --config node_modules/@nationalbankbelgium/stark-build/config/webpack.github-deploy.js --progress --profile --env.githubProd",
     "github-deploy": "npm run github-deploy:dev",
-    "lint": "npm run tslint \"src/**/*.ts\"",
+    "karma": "karma",
+    "lint": "tslint --config tslint.json --project ./tsconfig.json --format CodeFrame",
     "lint-css": "stylelint \"./src/**/*.?(pc|sc|c|sa)ss\" --formatter \"string\"",
+    "ngc": "ngc",
     "node": "node",
     "postinstall": "npm run webdriver:update",
     "postversion": "git push && git push --tags",
@@ -101,8 +115,8 @@
     "@angular/platform-server": "5.2.6",
     "@angular/router": "5.2.6",
     "@nationalbankbelgium/angular-mdi-svg": "1.6.0",
-    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-892d9b8.tgz",
-    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.0-892d9b8.tgz",
+    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-e655a25.tgz",
+    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.0-e655a25.tgz",
     "@uirouter/angular": "1.0.1",
     "@uirouter/visualizer": "6.0.0",
     "core-js": "2.5.3",
@@ -115,7 +129,6 @@
     "zone.js": "0.8.20"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "1.0.7",
     "@types/core-js": "0.9.46",
     "@types/hammerjs": "2.0.35",
     "@types/jasmine": "2.8.6",
@@ -143,16 +156,5 @@
     "tslib": "1.8.1",
     "typedoc": "0.9.0",
     "typescript": "2.6.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gdi2290/angular-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/gdi2290/angular-starter/issues"
-  },
-  "engines": {
-    "node": ">= 4.2.1",
-    "npm": ">= 3"
   }
 }
