@@ -11,20 +11,26 @@ import { AppState } from "./app.service";
  */
 @Component({
 	selector: "app",
+	/* tslint:disable */
 	encapsulation: ViewEncapsulation.None,
+	/* tslint:enable */
 	styleUrls: ["./app.component.css"],
 	templateUrl: "./app.component.html"
 })
 export class AppComponent implements OnInit {
-	public name = "Angular Starter";
-	public tipe = "assets/img/tipe.png";
-	public twitter = "https://twitter.com/gdi2290";
-	public url = "https://tipe.io";
+	public name: string = "Angular Starter";
+	public tipe: string = "assets/img/tipe.png";
+	public twitter: string = "https://twitter.com/gdi2290";
+	public url: string = "https://tipe.io";
 	public showDevModule: boolean = environment.showDevModule;
 
-	constructor(public appState: AppState) {}
+	public appState: AppState;
 
-	public ngOnInit() {
+	public constructor(appState: AppState) {
+		this.appState = appState;
+	}
+
+	public ngOnInit(): void {
 		console.log("Initial App State", this.appState.state);
 	}
 }

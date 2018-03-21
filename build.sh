@@ -23,7 +23,7 @@ cd ${currentDir}
 PACKAGES=(stark-core)
 
 # Packages that should not be compiled by NGC but just with TSC
-TSC_PACKAGES=(stark-core)
+TSC_PACKAGES=()
 
 # Packages that should not be compiled at all
 NODE_PACKAGES=(stark-build)
@@ -262,7 +262,6 @@ do
         travisFoldStart "copy package.json for: ${PACKAGE}" "no-xtrace"
         syncOptions=(-am --include="package.json" --exclude="node_modules/" --exclude="rollup.config.js" --exclude="*.ts" --exclude="*/*.ts" --include="*" --exclude="*")
         syncFiles $SRC_DIR $NPM_DIR "${syncOptions[@]}"
-        #cp $SRC_DIR/package.json $NPM_DIR/
         travisFoldEnd "copy package.json for: ${PACKAGE}"
       travisFoldEnd "build package: ${PACKAGE}"
     fi

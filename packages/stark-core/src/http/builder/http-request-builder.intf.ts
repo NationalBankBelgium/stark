@@ -23,42 +23,42 @@ import {StarkResource} from "../entities/resource.entity.intf";
 export interface StarkHttpRequestBuilder<T extends StarkResource> {
 	/**
 	 * Gets an instance of a suitable builder to perform a Create request
-	 * @param item {object} Item to be sent in the Create request
-	 * @param params {StarkHttpCreateRequestParams}
-	 * @returns {StarkHttpCreateRequestBuilder}
+	 * @param item - Item to be sent in the Create request
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpCreateRequestBuilder instance
 	 */
 	create(item: T, params?: StarkHttpCreateRequestParams): StarkHttpCreateRequestBuilder<T>;
 
 	/**
 	 * Gets an instance of a suitable builder to perform an Update request
-	 * @param item {object} Item to be sent in the Update request
-	 * @param params {StarkHttpUpdateRequestParams}
-	 * @returns {StarkHttpUpdateRequestBuilder}
+	 * @param item - Item to be sent in the Update request
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpUpdateRequestBuilder instance
 	 */
 	update(item: T, params?: StarkHttpUpdateRequestParams): StarkHttpUpdateRequestBuilder<T>;
 
 	/**
 	 * Gets an instance of a suitable builder to perform a Delete request
-	 * @param item {object} Item to be sent in the Delete request
-	 * @param params {StarkHttpDeleteRequestParams}
-	 * @returns {StarkHttpDeleteRequestBuilder}
+	 * @param item - Item to be sent in the Delete request
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpDeleteRequestBuilder instance
 	 */
 	delete(item: T, params?: StarkHttpDeleteRequestParams): StarkHttpDeleteRequestBuilder<T>;
 
 	/**
 	 * Gets an instance of a suitable builder to perform a Get request
-	 * @param uuid {string} UUID of the item to be fetched by the Get request
-	 * @param params {StarkHttpGetRequestParams}
-	 * @returns {StarkHttpGetRequestBuilder}
+	 * @param uuid - UUID of the item to be fetched by the Get request
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpGetRequestBuilder instance
 	 */
 	get(uuid: string, params?: StarkHttpGetRequestParams): StarkHttpGetRequestBuilder<T>;
 
 	/**
 	 * Gets an instance of a suitable builder to perform a GetCollection request
-	 * @param limit {number} Maximum number of items to return
-	 * @param offset {number} Index at which to begin the extraction of the collection to be returned
-	 * @param params {StarkHttpGetCollectionRequestParams}
-	 * @returns {StarkHttpGetCollectionRequestBuilder}
+	 * @param limit - Maximum number of items to return
+	 * @param offset - Index at which to begin the extraction of the collection to be returned
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpGetCollectionRequestBuilder instance
 	 */
 	getCollection(limit: number,
 				  offset: number,
@@ -67,11 +67,11 @@ export interface StarkHttpRequestBuilder<T extends StarkResource> {
 	/**
 	 * Gets an instance of a suitable builder to perform a Search request. Similar to a GetCollection request but the search
 	 * parameters are sent in the request body payload whereas in the GetCollection request they are sent as URL query parameters
-	 * @param criteria {object} Object containing the search criteria to be sent in the request body payload
-	 * @param limit {number} Maximum number of items to return
-	 * @param offset {number} Index at which to begin the extraction of the collection to be returned
-	 * @param params {StarkHttpSearchRequestParams}
-	 * @returns {StarkHttpSearchRequestBuilder}
+	 * @param criteria - Object containing the search criteria to be sent in the request body payload
+	 * @param limit - Maximum number of items to return
+	 * @param offset - Index at which to begin the extraction of the collection to be returned
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpSearchRequestBuilder instance
 	 */
 	search(criteria: { [param: string]: string } | object,
 		   limit: number,

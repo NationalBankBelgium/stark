@@ -22,7 +22,7 @@ import { routerChildConfigFn } from "../router.config";
 })
 export class DevModuleModule {
 	public static routes: Ng2StateDeclaration[] = DEV_MODULE_STATES;
-	constructor() {
+	public constructor() {
 		console.log("`DevModuleModule` module initialized");
 	}
 }

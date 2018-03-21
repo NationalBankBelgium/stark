@@ -1,3 +1,4 @@
+/* tslint: disable */
 /**
  * Angular bootstrapping
  */
@@ -19,7 +20,7 @@ export function main(): Promise<any> {
 	return platformBrowserDynamic()
 		.bootstrapModule(AppModule)
 		.then(environment.decorateModuleRef)
-		.catch(err => console.error(err));
+		.catch((err: any) => console.error(err));
 }
 
 /**
@@ -44,7 +45,7 @@ switch (document.readyState) {
 		}
 }
 
-function _domReadyHandler() {
+function _domReadyHandler(): void {
 	document.removeEventListener("DOMContentLoaded", _domReadyHandler, false);
 	if (environment.hmr) {
 		if (module["hot"]) {
@@ -56,3 +57,5 @@ function _domReadyHandler() {
 		main();
 	}
 }
+
+/* tslint: enable */

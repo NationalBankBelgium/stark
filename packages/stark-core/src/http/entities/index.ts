@@ -1,9 +1,9 @@
 "use strict";
 
-export * from "./backend";
-export * from "./error";
+export * from "./backend/index";
+export * from "./error/index";
 export * from "./http-request.entity.intf";
 export * from "./http-request-type.entity";
-export * from "./metadata";
+export * from "./metadata/index";
 export * from "./resource.entity.intf";
-export * from "./response";
+export * from "./response/index";

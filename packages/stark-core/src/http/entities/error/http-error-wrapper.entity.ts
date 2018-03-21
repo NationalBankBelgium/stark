@@ -2,13 +2,16 @@
 
 import {StarkHttpError} from "./http-error.entity.intf";
 import {StarkHttpErrorWrapper} from "./http-error-wrapper.entity.intf";
-import {StarkHttpStatusCodes} from "../../enumerators";
+import {StarkHttpStatusCodes} from "../../enumerators/index";
 
 export class StarkHttpErrorWrapperImpl implements StarkHttpErrorWrapper {
 
+	/** @internal */
 	private _starkHttpStatusCode: StarkHttpStatusCodes;
 	// TODO: return the Angular HttpHeaders or still return our own Map?
+	/** @internal */
 	private _starkHttpHeaders: Map<string, string>;
+	/** @internal */
 	private _httpError: StarkHttpError;
 
 	public constructor(starkHttpStatusCode: StarkHttpStatusCodes,

@@ -7,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
   `
 })
 export class DevModuleComponent implements OnInit {
-	public ngOnInit() {
+	public ngOnInit(): void {
 		console.log("hello `DevModule` component");
 	}
 }

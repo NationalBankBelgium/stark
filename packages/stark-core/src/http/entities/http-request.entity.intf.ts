@@ -1,7 +1,7 @@
 "use strict";
 
 import {StarkBackend} from "../entities/backend";
-import {StarkSortItem} from "./metadata";
+import {StarkSortItem} from "./metadata/index";
 import {StarkHttpRequestType} from "./http-request-type.entity";
 import {StarkResource} from "./resource.entity.intf";
 import {StarkHttpSerializer} from "../serializer";

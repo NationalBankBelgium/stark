@@ -1,3 +1,3 @@
 "use strict";
 
-export * from "./entities";
+export * from "./entities/index";

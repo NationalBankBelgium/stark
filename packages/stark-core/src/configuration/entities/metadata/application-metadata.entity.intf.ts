@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkLanguage} from "../language";
+import {StarkLanguage} from "../language/index";
 
 /**
  * Metadata that describes the current application build
@@ -9,43 +9,36 @@ import {StarkLanguage} from "../language";
 export interface StarkApplicationMetadata {
 	/**
 	 * Application name
-	 * @type string
 	 */
 	name: string;
 
 	/**
 	 * Description
-	 * @type string
 	 */
 	description: string;
 
 	/**
 	 * Application version
-	 * @type string
 	 */
 	version: string;
 
 	/**
 	 * Target environment of the current build: Production, Development, ...
-	 * @type string
 	 */
 	environment: string;
 
 	/**
 	 * Timestamp when the current build was generated
-	 * @type string
 	 */
 	buildTimestamp: string;
 
 	/**
 	 * Timestamp when the current build was deployed
-	 * @type string
 	 */
 	deploymentTimestamp: string;
 
 	/**
 	 * Array of languages to be supported in the application
-	 * @type Array<StarkLanguage>
 	 */
 	supportedLanguages: StarkLanguage[];
 }

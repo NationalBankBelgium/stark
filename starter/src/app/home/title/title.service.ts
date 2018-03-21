@@ -4,9 +4,12 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class Title {
-	public value = "Angular 2";
+	public value: string = "Angular 2";
+	public http: HttpClient;
 
-	constructor(public http: HttpClient) {}
+	public constructor(http: HttpClient) {
+		this.http = http;
+	}
 
 	public getData(): Observable<any> {
 		console.log("Title#getData(): Get Data");

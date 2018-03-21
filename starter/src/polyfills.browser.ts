@@ -25,6 +25,7 @@
  *
  * Polyfill: https://github.com/zloirock/core-js
  */
+/* tslint:disable:no-import-side-effect */
 import "core-js/es6";
 import "core-js/es7/reflect";
 import "core-js/stage/4";
@@ -63,6 +64,7 @@ import "web-animations-js";
 (window as any).__Zone_enable_cross_context_check = true;
 import "zone.js/dist/zone";
 // import 'zone.js/dist/long-stack-trace-zone' // async stack traces with zone.js included for dev
+/* tslint:enable */
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

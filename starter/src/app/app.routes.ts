@@ -22,7 +22,7 @@ export function getResolvedData(): Observable<any> {
 	// return of({ resolve: 'I am data from the resolve'}).delay(5000).toPromise();
 }
 
-export function getParamData($transition$: Transition) {
+export function getParamData($transition$: Transition): any {
 	return $transition$.params().paramData;
 }
 

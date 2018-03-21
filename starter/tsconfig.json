@@ -1,8 +1,14 @@
 {
   "extends": "./node_modules/@nationalbankbelgium/stark-build/tsconfig.json",
   "compilerOptions": {
-    "types": ["hammerjs", "jasmine", "node", "source-map", "uglify-js", "webpack"],
-    "typeRoots": ["./node_modules/@types"]
+    "baseUrl": "./src",
+    "declaration": false,
+    "lib": ["es2015", "dom"],
+    "typeRoots": ["./node_modules/@types"],
+    "paths": {
+      "@angular/*": ["../node_modules/@angular/*"],
+      "@nationalbankbelgium/*": ["../node_modules/@nationalbankbelgium/*"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }

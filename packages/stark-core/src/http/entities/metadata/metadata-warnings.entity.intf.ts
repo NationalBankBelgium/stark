@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkHttpErrorDetail} from "../error";
+import {StarkHttpErrorDetail} from "../error/index";
 
 export interface StarkWarnings {
 	/**

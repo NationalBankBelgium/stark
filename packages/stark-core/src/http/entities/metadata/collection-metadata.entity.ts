@@ -7,7 +7,7 @@ import {StarkSortItem} from "./metadata-sort-item.entity.intf";
 import {StarkSortItemImpl} from "./metadata-sort-item.entity";
 import {StarkPaginationMetadata} from "./metadata-pagination.entity.intf";
 import {StarkPaginationMetadataImpl} from "./metadata-pagination.entity";
-import {StarkHttpErrorDetail, StarkHttpErrorDetailImpl} from "../error";
+import {StarkHttpErrorDetail, StarkHttpErrorDetailImpl} from "../error/index";
 
 export class StarkCollectionMetadataImpl implements StarkCollectionMetadata {
 	@deserializeAs(StarkSortItemImpl)

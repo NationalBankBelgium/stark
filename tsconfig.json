@@ -1,3 +1,10 @@
 {
-  "extends": "./packages/stark-build/tsconfig.json"
+  "extends": "./packages/stark-build/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "./packages/stark-build/node_modules/@types",
+      "./packages/stark-core/node_modules/@types",
+      "./starter/node_modules/@types"
+    ]
+  }
 }

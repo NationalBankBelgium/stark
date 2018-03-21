@@ -11,32 +11,32 @@ export class AppState {
 	/**
 	 * Already return a clone of the current state.
 	 */
-	public get state() {
+	public get state(): any {
 		return (this._state = this._clone(this._state));
 	}
 	/**
 	 * Never allow mutation
 	 */
-	public set state(value) {
+	public set state(value: any) {
 		throw new Error("do not mutate the `.state` directly" + value);
 	}
 
-	public get(prop?: any) {
+	public get(prop?: any): any {
 		/**
 		 * Use our state getter for the clone.
 		 */
-		const state = this.state;
+		const state: any = this.state;
 		return state.hasOwnProperty(prop) ? state[prop] : state;
 	}
 
-	public set(prop: string, value: any) {
+	public set(prop: string, value: any): any {
 		/**
 		 * Internally mutate our state.
 		 */
 		return (this._state[prop] = value);
 	}
 
-	private _clone(object: InternalStateType) {
+	private _clone(object: InternalStateType): any {
 		/**
 		 * Simple object clone.
 		 */

@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { browser, by, element } from "protractor";
 import "tslib";
 
@@ -21,3 +22,5 @@ describe("Home", () => {
 		expect(subject).toEqual(result);
 	});
 });
+
+/* tslint:enable */
