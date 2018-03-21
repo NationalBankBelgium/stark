@@ -83,59 +83,7 @@
     "ban": [
       true,
       "window",
-      "eval",
-      { "name": ["angular", "bind"], "message": "Use Function bind() method" },
-      {
-        "name": ["angular", "copy"],
-        "message": "Use Lodash cloneDeep() or Object/Array spread syntax"
-      },
-      {
-        "name": ["angular", "equals"],
-        "message": "Use strict equality comparison (===)"
-      },
-      {
-        "name": ["angular", "extend"],
-        "message": "Use Lodash merge() or Object spread syntax"
-      },
-      {
-        "name": ["angular", "forEach"],
-        "message": "Use for...of loop, for...in loop or Array forEach()"
-      },
-      { "name": ["angular", "fromJson"], "message": "Use JSON.parse()" },
-      {
-        "name": ["angular", "isArray"],
-        "message": "Use Array.isArray() function"
-      },
-      {
-        "name": ["angular", "isDate"],
-        "message": "Use moment.isDate() function"
-      },
-      {
-        "name": ["angular", "isDefined"],
-        "message": "Use typeof operator (type guard)"
-      },
-      {
-        "name": ["angular", "isFunction"],
-        "message": "Use typeof operator (type guard) or Lodash isFunction()"
-      },
-      {
-        "name": ["angular", "isNumber"],
-        "message": "Use typeof operator (type guard) or Lodash isNumber()"
-      },
-      {
-        "name": ["angular", "isString"],
-        "message": "Use typeof operator (type guard) or Lodash isString()"
-      },
-      {
-        "name": ["angular", "isUndefined"],
-        "message": "Use typeof operator (type guard) or Lodash isUndefined()"
-      },
-      {
-        "name": ["angular", "merge"],
-        "message": "Use Lodash merge() or cloneDeep()"
-      },
-      { "name": ["angular", "noop"], "message": "Use Lodash noop()" },
-      { "name": ["angular", "toJson"], "message": "Use JSON.stringify()" }
+      "eval"
     ],
     "curly": true,
     "forin": true,
@@ -147,6 +95,7 @@
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-variable": true,
+    "no-dynamic-delete": false,
     "no-empty": [true, "allow-empty-catch"],
     "no-eval": true,
     "no-implicit-dependencies": false,
@@ -158,7 +107,7 @@
     "no-shadowed-variable": true,
     "no-sparse-arrays": true,
     "no-string-literal": false,
-    "no-string-throw": false,
+    "no-string-throw": true,
     "no-submodule-imports": [false, "@nationalbankbelgium", "rxjs", "lodash", "core-js", "valdr", "angular-material"],
     "no-switch-case-fall-through": true,
     "no-this-assignment": false,
@@ -183,6 +132,7 @@
     "callable-types": true,
     "class-name": true,
     "comment-format": [false, "check-space"],
+    "file-header": false,
     "encoding": false,
     "interface-name": [false, "never-prefix"],
     "interface-over-type-literal": true,
@@ -247,7 +197,8 @@
     "ban-types": false,
     "no-duplicate-super": true,
     "no-duplicate-switch-case": true,
-    "newline-before-return": false
+    "newline-before-return": false,
+    "newline-per-chained-call": false
   }
 
   //These rules require type info to run
@@ -269,6 +220,7 @@
   //  "return-undefined": true,
   //  "deprecation": true,
   //  "use-default-type-parameter": true,
+  //  "prefer-readonly": true,
   //
   //These rules are handled by Prettier
   //	"eofline": true,
