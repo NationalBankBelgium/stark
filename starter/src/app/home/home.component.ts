@@ -1,7 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
+import {
+	StarkBackend,
+	StarkBackendAuthenticationTypes,
+	StarkHttpRequestType,
+	StarkHttpSerializer,
+	StarkHttpSerializerImpl,
+	StarkHttpService,
+	starkHttpServiceName
+} from "@nationalbankbelgium/stark-core";
 
-import { AppState } from "../app.service";
-import { Title } from "./title";
+import {AppState} from "../app.service";
+import {Title} from "./title";
+import {Request} from "./request.entity";
 
 @Component({
 	/**
@@ -27,22 +37,50 @@ export class HomeComponent implements OnInit {
 	/**
 	 * Set our default values
 	 */
-	public localState = { value: "" };
+	public localState: any = {value: ""};
+
 	/**
 	 * TypeScript public modifiers
 	 */
-	constructor(public appState: AppState, public title: Title) {}
+	public constructor(public appState: AppState,
+					   public title: Title,
+					   @Inject(starkHttpServiceName) public httpService: StarkHttpService<any>) {
+	}
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 		console.log("hello `Home` component");
 		/**
 		 * this.title.getData().subscribe(data => this.data = data);
 		 */
 	}
 
-	public submitState(value: string) {
+	public submitState(value: string): void {
 		console.log("submitState", value);
 		this.appState.set("value", value);
 		this.localState.value = "";
+	}
+
+	public triggerHttpCall(): void {
+		const serializer: StarkHttpSerializer<Request> = new StarkHttpSerializerImpl<any>(Request);
+		const backend: StarkBackend = {
+			name: "someBackend",
+			url: "http://localhost:5000",
+			authenticationType: StarkBackendAuthenticationTypes.PUBLIC,
+			fakePreAuthenticationEnabled: false,
+			fakePreAuthenticationRolePrefix: ""
+		};
+
+		this.httpService.executeCollectionRequest({
+			backend: backend,
+			resourcePath: "requests",
+			headers: new Map<string, string>(),
+			queryParameters: new Map<string, string | string[] | undefined>(),
+			requestType: StarkHttpRequestType.GET_COLLECTION,
+			serializer: serializer
+		}).subscribe(
+			() => console.log("---------- SUCCESS"),
+			() => console.log("---------- ERROR"),
+			() => console.log("---------- COMPLETE")
+		)
 	}
 }

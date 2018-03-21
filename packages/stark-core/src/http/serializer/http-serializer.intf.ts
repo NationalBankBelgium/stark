@@ -1,7 +1,7 @@
 "use strict";
 
 import {HttpResponse} from "@angular/common/http";
-import {StarkHttpRawCollectionResponseData, StarkHttpRequest, StarkResource} from "../entities";
+import {StarkHttpRawCollectionResponseData, StarkHttpRequest, StarkResource} from "../entities/index";
 
 /**
  * @whatItDoes This is the base interface for entities' serializers used mainly by the HTTP Service.

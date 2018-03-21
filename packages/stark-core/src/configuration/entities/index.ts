@@ -1,4 +1,4 @@
 "use strict";
 
-export * from "./language";
-export * from "./metadata";
+export * from "./language/index";
+export * from "./metadata/index";

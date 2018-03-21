@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkLanguage} from "../language";
+import {StarkLanguage} from "../language/index";
 
 /**
  * Metadata that describes the current application build

@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkHttpRequest, StarkResource} from "../entities";
+import {StarkHttpRequest, StarkResource} from "../entities/index";
 import {StarkHttpBaseRequestBuilder} from "./http-abstract-base-request-builder.intf";
 import {StarkUrlUtil} from "../../util/url-util";
 

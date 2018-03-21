@@ -1,9 +1,10 @@
 "use strict";
 
-export * from "./builder";
-export * from "./constants";
-export * from "./entities";
-export * from "./enumerators";
-export * from "./repository";
-export * from "./serializer";
-export * from "./service";
+export * from "./builder/index";
+export * from "./constants/index";
+export * from "./entities/index";
+export * from "./enumerators/index";
+export * from "./repository/index";
+export * from "./serializer/index";
+export * from "./service/index";
+export * from "./http.module";

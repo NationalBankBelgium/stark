@@ -3,8 +3,9 @@
 import {autoserialize} from "cerialize";
 import {StarkUserProfile} from "./user-profile.entity.intf";
 import {StarkUserSecurityProfile} from "./user-security-profile.entity.intf";
-import {StarkResource} from "../../http";
-import {IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf} from "class-validator";
+import {StarkResource} from "../../http/index";
+// import {IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf} from "class-validator";
+import {IsArray, IsBoolean, IsDefined, IsEmail, IsString} from "class-validator";
 
 export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, StarkResource {
 	@IsDefined()
@@ -27,27 +28,27 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public lastName: string;
 
-	@ValidateIf((user: StarkUser) => typeof user.email !== "undefined" && user.email !== null)
+	// @ValidateIf((user: StarkUser) => typeof user.email !== "undefined" && user.email !== null)
 	@IsEmail()
 	@autoserialize
 	public email?: string;
 
-	@ValidateIf((user: StarkUser) => typeof user.phone !== "undefined" && user.phone !== null)
+	// @ValidateIf((user: StarkUser) => typeof user.phone !== "undefined" && user.phone !== null)
 	@IsString()
 	@autoserialize
 	public phone?: string;
 
-	@ValidateIf((user: StarkUser) => typeof user.language !== "undefined" && user.language !== null)
+	// @ValidateIf((user: StarkUser) => typeof user.language !== "undefined" && user.language !== null)
 	@IsString()
 	@autoserialize
 	public language: string;
 
-	@ValidateIf((user: StarkUser) => typeof user.selectedLanguage !== "undefined" && user.selectedLanguage !== null)
+	// @ValidateIf((user: StarkUser) => typeof user.selectedLanguage !== "undefined" && user.selectedLanguage !== null)
 	@IsString()
 	@autoserialize
 	public selectedLanguage?: string;
 
-	@ValidateIf((user: StarkUser) => typeof user.referenceNumber !== "undefined" && user.referenceNumber !== null)
+	// @ValidateIf((user: StarkUser) => typeof user.referenceNumber !== "undefined" && user.referenceNumber !== null)
 	@IsString()
 	@autoserialize
 	public referenceNumber?: string;
@@ -57,12 +58,12 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public roles: string[] = [];
 
-	@ValidateIf((user: StarkUser) => typeof user.workpost !== "undefined" && user.workpost !== null)
+	// @ValidateIf((user: StarkUser) => typeof user.workpost !== "undefined" && user.workpost !== null)
 	@IsString()
 	@autoserialize
 	public workpost?: string;
 
-	@ValidateIf((user: StarkUser) => typeof user.isAnonymous !== "undefined" && user.isAnonymous !== null)
+	// @ValidateIf((user: StarkUser) => typeof user.isAnonymous !== "undefined" && user.isAnonymous !== null)
 	@IsBoolean()
 	@autoserialize
 	public isAnonymous?: boolean;

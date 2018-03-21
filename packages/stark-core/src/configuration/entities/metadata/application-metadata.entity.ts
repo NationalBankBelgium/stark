@@ -4,7 +4,7 @@ import {ArrayNotEmpty, IsDefined, IsNotEmpty, IsString, ValidateNested} from "cl
 import {autoserialize} from "cerialize";
 
 import {StarkApplicationMetadata} from "./application-metadata.entity.intf";
-import {StarkLanguageImpl} from "../language";
+import {StarkLanguageImpl} from "../language/index";
 import {StarkLanguage} from "../language/language.entity.intf";
 import {StarkLanguages} from "../language/language.constants";
 

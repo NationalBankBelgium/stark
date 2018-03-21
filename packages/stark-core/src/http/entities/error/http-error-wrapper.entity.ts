@@ -2,7 +2,7 @@
 
 import {StarkHttpError} from "./http-error.entity.intf";
 import {StarkHttpErrorWrapper} from "./http-error-wrapper.entity.intf";
-import {StarkHttpStatusCodes} from "../../enumerators";
+import {StarkHttpStatusCodes} from "../../enumerators/index";
 
 export class StarkHttpErrorWrapperImpl implements StarkHttpErrorWrapper {
 

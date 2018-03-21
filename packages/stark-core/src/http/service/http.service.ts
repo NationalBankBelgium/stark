@@ -10,12 +10,12 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/retryWhen";
 import "rxjs/add/operator/mergeMap";
-import {Inject, Injectable} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 import {StarkHttpService, starkHttpServiceName} from "./http.service.intf";
 
-import {StarkHttpHeaders} from "../constants";
+import {StarkHttpHeaders} from "../constants/index";
 import {
 	StarkCollectionMetadataImpl,
 	StarkCollectionResponseWrapper,
@@ -29,9 +29,9 @@ import {
 	StarkResource,
 	StarkSingleItemResponseWrapper,
 	StarkSingleItemResponseWrapperImpl
-} from "../entities";
-import {StarkLoggingService, starkLoggingServiceName} from "../../logging";
-import {StarkSessionService, starkSessionServiceName} from "../../session";
+} from "../entities/index";
+import {StarkLoggingService} from "../../logging/index";
+import {StarkSessionService} from "../../session/index";
 
 /**
  * @ngdoc service
@@ -50,11 +50,14 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	private sessionService: StarkSessionService;
 	private httpClient: HttpClient;
 
-	public constructor(@Inject(starkLoggingServiceName) logger: StarkLoggingService,
-					   @Inject(starkSessionServiceName) sessionService: StarkSessionService,
-					   @Inject("HttpClient") httpClient: HttpClient) {
-		this.logger = logger;
-		this.sessionService = sessionService;
+	// FIXME: uncomment these lines once LoggingService and SessionService are implemented
+	public constructor(/*@Inject(starkLoggingServiceName) logger: StarkLoggingService,
+					   @Inject(starkSessionServiceName) sessionService: StarkSessionService,*/
+					   httpClient: HttpClient) {
+		this.logger = <any>console; //logger;
+		this.sessionService = <any>{
+			fakePreAuthenticationHeaders: new Map<string, string>()
+		};
 		this.httpClient = httpClient;
 	}
 
@@ -186,7 +189,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 		const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
 
-		requestCopy.headers.set(StarkHttpHeaders.NBB_CORRELATION_ID, this.logger.correlationId);
+		// requestCopy.headers.set(StarkHttpHeaders.NBB_CORRELATION_ID, console.correlationId);
 
 		return requestCopy;
 	}

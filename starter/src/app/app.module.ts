@@ -1,9 +1,9 @@
 import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
 import { UIRouterModule } from "@uirouter/angular";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { StarkHttpModule } from "@nationalbankbelgium/stark-core";
 import { routerConfigFn } from "./router.config";
 
 /*
@@ -24,7 +24,7 @@ import "../styles/styles.scss";
 import "../styles/headings.css";
 
 // Application wide providers
-const APP_PROVIDERS = [AppState];
+const APP_PROVIDERS: any[] = [AppState];
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstrapping process
@@ -39,7 +39,7 @@ const APP_PROVIDERS = [AppState];
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
-		HttpClientModule,
+		StarkHttpModule,
 		UIRouterModule.forRoot({
 			states: APP_STATES,
 			useHash: Boolean(history.pushState) === false,

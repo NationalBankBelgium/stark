@@ -2407,8 +2407,9 @@ class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P>
 
 	public retryDelay: number;
 
-	public constructor(logger: StarkLoggingService, sessionService: StarkSessionService, $http: HttpClient) {
-		super(logger, sessionService, $http);
+	// FIXME: add the Logging and Session services once implemented
+	public constructor(_logger: StarkLoggingService, _sessionService: StarkSessionService, $http: HttpClient) {
+		super(/*logger, sessionService, */$http);
 	}
 
 	public addFakePreAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {

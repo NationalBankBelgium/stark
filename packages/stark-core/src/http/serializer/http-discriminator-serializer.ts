@@ -1,8 +1,8 @@
 "use strict";
 
 import {StarkHttpSerializerImpl} from "./http-serializer";
-import {StarkResource} from "../entities";
-import {StarkSerializable} from "../../serialization";
+import {StarkResource} from "../entities/index";
+import {StarkSerializable} from "../../serialization/index";
 
 /**
  * Implementation of {@link StarkHttpSerializer}.
