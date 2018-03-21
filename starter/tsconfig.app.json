@@ -1,15 +1,5 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "module": "es2015",
-    "lib": ["es2015", "dom"],
-    "types": ["hammerjs", "jasmine", "node", "source-map", "uglify-js", "webpack"],
-    "paths": {
-      "@angular/*": ["node_modules/@angular/*"],
-      "@nationalbankbelgium/stark-build/*": ["node_modules/@nationalbankbelgium/stark-build/*"],
-      "@nationalbankbelgium/stark-core/*": ["node_modules/@nationalbankbelgium/stark-core/*"]
-    },
-    "typeRoots": ["./node_modules/@types"]
-  },
+  "compilerOptions": {},
   "exclude": ["node_modules", "dist", "src/**/*.spec.ts", "src/**/*.e2e.ts"]
 }
