@@ -457,7 +457,6 @@ module.exports = function (options) {
 			// }),
 
 			new AngularCompilerPlugin({
-				// Optional params
 				sourceMap: true, // TODO: apply based on tsConfig value?
 				mainPath: entry.main,
 				skipCodeGeneration: !METADATA.AOT,
@@ -466,21 +465,21 @@ module.exports = function (options) {
 				},
 				platform: 0, // 0 = browser, 1 = server
 				compilerOptions: {
+					// FIXME Those options force AngularCompilerOptions. Cannot be overwritten by angularCompilerOptions defined in tsconfig.json
+					generateCodeForLibraries: true,
+					skipMetadataEmit: false,
+					strictMetadataEmit: false,
+					skipTemplateCodegen: false,
+					strictInjectionParameters: true,
+					fullTemplateTypeCheck: true,
+					annotateForClosureCompiler: false,
+					annotationsAs: "static fields",
+					enableLegacyTemplate: false,
+					preserveWhitespaces: false,
+					allowEmptyCodegenFiles: false,
+
 					module: !isProd && METADATA.WATCH ? "commonjs" : "es2015" // TODO is it needed in our case? => Force commonjs module format for TS on dev watch builds.
 				},
-				// forkTypeChecker?: boolean;
-				// basePath: METADATA.tsConfigPath
-				// entryModule: 'path/to/app.module#AppModule', // TODO not used, probably already defined in the main.browser.ts?
-				// i18nInFile?: string;
-				// i18nInFormat?: string;
-				// i18nOutFile?: string;
-				// i18nOutFormat?: string;
-				// locale?: string;
-				// missingTranslation?: string;
-				// nameLazyFiles?: boolean;
-				// additionalLazyModules?: { [module: string]: string };
-
-				// Required params
 				tsConfigPath: METADATA.tsConfigPath
 			}),
 
