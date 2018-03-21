@@ -12,7 +12,7 @@ console.log("`Barrel` component loaded asynchronously");
 	templateUrl: "./barrel.component.html"
 })
 export class BarrelComponent implements OnInit {
-	public ngOnInit() {
+	public ngOnInit(): void {
 		console.log("hello `Barrel` component");
 	}
 }

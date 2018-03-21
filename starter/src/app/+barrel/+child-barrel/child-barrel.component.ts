@@ -14,7 +14,7 @@ console.log("`ChildBarrel` component loaded asynchronously");
   `
 })
 export class ChildBarrelComponent implements OnInit {
-	public ngOnInit() {
+	public ngOnInit(): void {
 		console.log("hello `ChildBarrel` component");
 	}
 }

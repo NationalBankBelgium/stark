@@ -14,8 +14,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
-const { AngularCompilerPlugin } = require("@ngtools/webpack");
-const { NamedLazyChunksWebpackPlugin } = require("@angular/cli/plugins/webpack");
+const {AngularCompilerPlugin} = require("@ngtools/webpack");
+const {NamedLazyChunksWebpackPlugin} = require("@angular/cli/plugins/webpack");
 const NoEmitOnErrorsPlugin = require("webpack/lib/NoEmitOnErrorsPlugin");
 const WebpackSHAHash = require("webpack-sha-hash");
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
@@ -28,7 +28,7 @@ const buildUtils = require("./build-utils");
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function(options) {
+module.exports = function (options) {
 	const isProd = options.ENV === "production";
 	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
 	const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
@@ -130,11 +130,11 @@ module.exports = function(options) {
 
 				...(METADATA.AOT
 					? [
-							{
-								test: /\.js$/,
-								use: [buildOptimizerLoader]
-							}
-						]
+						{
+							test: /\.js$/,
+							use: [buildOptimizerLoader]
+						}
+					]
 					: []),
 
 				// TsLint loader support for *.ts files
@@ -149,12 +149,16 @@ module.exports = function(options) {
 				// Source map loader support for *.js files
 				// Extracts SourceMaps for source files that as added as sourceMappingURL comment.
 				// reference: https://github.com/webpack/source-map-loader
-				{
-					enforce: "pre",
-					test: /\.js$/,
-					use: ["source-map-loader"],
-					exclude: [helpers.root("node_modules/rxjs"), helpers.root("node_modules/@angular")]
-				},
+				...(!METADATA.AOT
+					? [
+						{
+							enforce: "pre",
+							test: /\.js$/,
+							use: ["source-map-loader"],
+							exclude: [helpers.root("node_modules/rxjs"), helpers.root("node_modules/@angular")]
+						}
+					]
+					: []),
 
 				/**
 				 * To string and css loader support for *.css files (from Angular components)
@@ -258,12 +262,12 @@ module.exports = function(options) {
 			//  */
 			// // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
 			// new DefinePlugin({
-			//   'ENV': JSON.stringify(METADATA.ENV),
-			//   'HMR': METADATA.HMR,
-			//   'AOT': METADATA.AOT,
-			//   'process.env.ENV': JSON.stringify(METADATA.ENV),
-			//   'process.env.NODE_ENV': JSON.stringify(METADATA.ENV),
-			//   'process.env.HMR': METADATA.HMR
+			// 	'ENV': JSON.stringify(METADATA.ENV),
+			// 	'HMR': METADATA.HMR,
+			// 	'AOT': METADATA.AOT,
+			// 	'process.env.ENV': JSON.stringify(METADATA.ENV),
+			// 	'process.env.NODE_ENV': JSON.stringify(METADATA.ENV),
+			// 	'process.env.HMR': METADATA.HMR
 			// }),
 
 			/**
@@ -419,7 +423,7 @@ module.exports = function(options) {
 			new HtmlWebpackPlugin({
 				template: "src/index.html",
 				title: METADATA.title,
-				chunksSortMode: function(a, b) {
+				chunksSortMode: function (a, b) {
 					const entryPoints = ["inline", "polyfills", "sw-register", "styles", "vendor", "main"];
 					return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
 				},
@@ -430,10 +434,10 @@ module.exports = function(options) {
 				// xhtml: true, // TODO: why XHTML?
 				minify: isProd
 					? {
-							caseSensitive: true,
-							collapseWhitespace: true,
-							keepClosingSlash: true
-						}
+						caseSensitive: true,
+						collapseWhitespace: true,
+						keepClosingSlash: true
+					}
 					: false
 			}),
 
@@ -446,10 +450,10 @@ module.exports = function(options) {
 			 */
 			// TODO evaluate this
 			// new ScriptExtHtmlWebpackPlugin({
-			//   sync: /inline|polyfills|vendor/,
-			//   defaultAttribute: 'async',
-			//   preload: [/polyfills|vendor|main/],
-			//   prefetch: [/chunk/]
+			// 	sync: /inline|polyfills|vendor/,
+			// 	defaultAttribute: 'async',
+			// 	preload: [/polyfills|vendor|main/],
+			// 	prefetch: [/chunk/]
 			// }),
 
 			new AngularCompilerPlugin({
@@ -478,7 +482,7 @@ module.exports = function(options) {
 
 				// Required params
 				tsConfigPath: METADATA.tsConfigPath
-			})
+			}),
 
 			/**
 			 * Plugin: InlineManifestWebpackPlugin
@@ -502,7 +506,10 @@ module.exports = function(options) {
 			crypto: "empty",
 			module: false,
 			clearImmediate: false,
-			setImmediate: false
+			setImmediate: false,
+			fs: "empty",
+			tls: "empty",
+			net: "empty"
 		}
 	};
 };

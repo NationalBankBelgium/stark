@@ -27,12 +27,12 @@ export class AboutComponent implements OnInit {
 	@Input() public paramData: any;
 
 	public localState: any;
-	constructor() // public transition: Transition   // the last transition could be injected if needed
+	public constructor() // public transition: Transition   // the last transition could be injected if needed
 	{
 		/* empty */
 	}
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 		/**
 		 * Getting the params values
 		 */

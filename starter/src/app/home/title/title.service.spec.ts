@@ -25,7 +25,7 @@ describe("Title", () => {
 
 			title.getData();
 			expect(console.log).toHaveBeenCalled();
-			title.getData().subscribe(result => {
+			title.getData().subscribe((result: any) => {
 				expect(result).toEqual({ value: "AngularClass" });
 			});
 		})

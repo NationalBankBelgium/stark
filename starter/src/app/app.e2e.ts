@@ -1,4 +1,5 @@
 import { browser, by, element } from "protractor";
+/* tslint:disable */
 import "tslib";
 
 describe("App", () => {
@@ -30,3 +31,5 @@ describe("App", () => {
 		expect(subject).toEqual(result);
 	});
 });
+
+/* tslint:enable */

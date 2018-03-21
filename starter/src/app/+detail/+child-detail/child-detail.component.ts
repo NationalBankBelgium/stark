@@ -14,7 +14,7 @@ console.log("`ChildDetail` component loaded asynchronously");
   `
 })
 export class ChildDetailComponent implements OnInit {
-	public ngOnInit() {
+	public ngOnInit(): void {
 		console.log("hello `ChildDetail` component");
 	}
 }

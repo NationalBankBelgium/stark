@@ -26,10 +26,10 @@ describe("x-large directive", () => {
 		"should sent font-size to x-large",
 		fakeAsync(() => {
 			TestBed.compileComponents().then(() => {
-				const fixture = TestBed.createComponent(TestComponent);
+				const fixture: any = TestBed.createComponent(TestComponent);
 				fixture.detectChanges();
 				tick();
-				const element = fixture.debugElement.query(By.css("div"));
+				const element: any = fixture.debugElement.query(By.css("div"));
 
 				expect(element.nativeElement.style.fontSize).toBe("x-large");
 			});

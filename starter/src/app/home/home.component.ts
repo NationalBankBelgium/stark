@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import {
 	StarkBackend,
 	StarkBackendAuthenticationTypes,
@@ -9,9 +9,9 @@ import {
 	starkHttpServiceName
 } from "@nationalbankbelgium/stark-core";
 
-import {AppState} from "../app.service";
-import {Title} from "./title";
-import {Request} from "./request.entity";
+import { AppState } from "../app.service";
+import { Title } from "./title";
+import { Request } from "./request.entity";
 
 @Component({
 	/**
@@ -37,15 +37,16 @@ export class HomeComponent implements OnInit {
 	/**
 	 * Set our default values
 	 */
-	public localState: any = {value: ""};
+	public localState: any = { value: " " };
 
 	/**
 	 * TypeScript public modifiers
 	 */
-	public constructor(public appState: AppState,
-					   public title: Title,
-					   @Inject(starkHttpServiceName) public httpService: StarkHttpService<any>) {
-	}
+	public constructor(
+		public appState: AppState,
+		public title: Title,
+		@Inject(starkHttpServiceName) public httpService: StarkHttpService<any>
+	) {}
 
 	public ngOnInit(): void {
 		console.log("hello `Home` component");
@@ -70,17 +71,19 @@ export class HomeComponent implements OnInit {
 			fakePreAuthenticationRolePrefix: ""
 		};
 
-		this.httpService.executeCollectionRequest({
-			backend: backend,
-			resourcePath: "requests",
-			headers: new Map<string, string>(),
-			queryParameters: new Map<string, string | string[] | undefined>(),
-			requestType: StarkHttpRequestType.GET_COLLECTION,
-			serializer: serializer
-		}).subscribe(
-			() => console.log("---------- SUCCESS"),
-			() => console.log("---------- ERROR"),
-			() => console.log("---------- COMPLETE")
-		)
+		this.httpService
+			.executeCollectionRequest({
+				backend: backend,
+				resourcePath: "requests",
+				headers: new Map<string, string>(),
+				queryParameters: new Map<string, string | string[] | undefined>(),
+				requestType: StarkHttpRequestType.GET_COLLECTION,
+				serializer: serializer
+			})
+			.subscribe(
+				() => console.log("---------- SUCCESS"),
+				() => console.log("---------- ERROR"),
+				() => console.log("---------- COMPLETE")
+			);
 	}
 }

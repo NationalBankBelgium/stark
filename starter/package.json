@@ -114,7 +114,7 @@
     "@angular/platform-browser-dynamic": "5.2.9",
     "@angular/platform-server": "5.2.9",
     "@angular/router": "5.2.9",
-    "@nationalbankbelgium/angular-mdi-svg": "1.6.0",
+    "@nationalbankbelgium/angular-mdi-svg": "1.7.0",
     "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-86ed26c.tgz",
     "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.0-86ed26c.tgz",
     "@uirouter/angular": "1.0.1",
@@ -154,7 +154,6 @@
     "rimraf": "2.6.2",
     "ts-node": "3.3.0",
     "tslib": "1.8.1",
-    "typedoc": "0.9.0",
     "typescript": "2.6.2"
   }
 }
