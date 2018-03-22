@@ -1,11 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "paths": {
-      "@angular/*": ["node_modules/@angular/*"],
-      "@nationalbankbelgium/stark-build/*": ["node_modules/@nationalbankbelgium/stark-build/*"]
-    }
+    "module": "commonjs"
   },
   "files": null,
   "include": ["**/*.ts"],

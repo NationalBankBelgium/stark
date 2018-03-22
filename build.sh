@@ -26,9 +26,9 @@ PACKAGES=(stark-core)
 TSC_PACKAGES=()
 
 # Packages that should not be compiled at all
-NODE_PACKAGES=(stark-build)
+NODE_PACKAGES=(stark-build stark-testing)
 
-ALL_PACKAGES=(stark-build stark-core)
+ALL_PACKAGES=(stark-build stark-testing stark-core)
 
 BUILD_ALL=true
 BUNDLE=true

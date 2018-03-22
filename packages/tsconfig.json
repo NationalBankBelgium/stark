@@ -13,6 +13,7 @@
     "typeRoots": [
       "./stark-build/node_modules/@types",
       "./stark-core/node_modules/@types",
+      "./stark-testing/node_modules/@types",
       "./stark-ui/node_modules/@types"
     ]
   },
