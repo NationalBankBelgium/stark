@@ -345,7 +345,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
+						expect(httpMock.get).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
 						done();
 					}
 				);
@@ -374,11 +374,9 @@ describe("Service: StarkHttpService", () => {
 					body: undefined,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.delete).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.delete).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
@@ -391,12 +389,15 @@ describe("Service: StarkHttpService", () => {
 						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
 
 						expect(httpMock.delete).toHaveBeenCalledTimes(1);
-						expect(httpMock.delete).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
+						expect(httpMock.delete).toHaveBeenCalledWith(
+							"www.awesomeapi.com/mock",
+							{
+								params: convertMapIntoObject(request.queryParameters),
+								headers: convertMapIntoObject(headersMap),
+								observe: "response",
+								responseType: "json"
+							}
+						);
 					},
 					() => {
 						fail("The 'error' function should not be called in case of success");
@@ -410,11 +411,9 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.delete).and.returnValue(Observable.throw(httpResponse));
+				(<Spy> httpMock.delete).and.returnValue(Observable.throw(httpResponse));
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -449,12 +448,15 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
 
 						expect(httpMock.delete).toHaveBeenCalledTimes(1);
-						expect(httpMock.delete).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
+						expect(httpMock.delete).toHaveBeenCalledWith(
+							"www.awesomeapi.com/mock",
+							{
+								params: convertMapIntoObject(request.queryParameters),
+								headers: convertMapIntoObject(headersMap),
+								observe: "response",
+								responseType: "json"
+							}
+						);
 					}
 				);
 			});
@@ -476,9 +478,7 @@ describe("Service: StarkHttpService", () => {
 
 				request.retryCount = 2;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -490,7 +490,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
+						expect(httpMock.delete).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
 						done();
 					}
 				);
@@ -519,13 +519,11 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe((result: StarkSingleItemResponseWrapper<MockResource>) => {
 					expect(result).toBeDefined();
@@ -549,13 +547,11 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
@@ -596,13 +592,11 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithMetadata,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
@@ -646,13 +640,11 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.put).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.put).and.returnValue(Observable.of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
@@ -693,13 +685,11 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithMetadata,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.put).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.put).and.returnValue(Observable.of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
@@ -743,13 +733,11 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.throw(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -816,9 +804,7 @@ describe("Service: StarkHttpService", () => {
 				request.requestType = StarkHttpRequestType.UPDATE;
 				request.retryCount = 2;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -830,7 +816,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
+						expect(httpMock.post).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
 						done();
 					}
 				);
@@ -842,13 +828,11 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.put).and.returnValue(Observable.throw(httpResponse));
+				(<Spy> httpMock.put).and.returnValue(Observable.throw(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -915,9 +899,7 @@ describe("Service: StarkHttpService", () => {
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 				request.retryCount = 2;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -929,7 +911,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
+						expect(httpMock.put).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
 						done();
 					}
 				);
@@ -958,11 +940,9 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe((result: StarkSingleItemResponseWrapper<MockResource>) => {
 					expect(result).toBeDefined();
@@ -986,11 +966,9 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
@@ -1030,11 +1008,9 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithMetadata,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
@@ -1078,11 +1054,9 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.throw(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse));
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -1147,9 +1121,7 @@ describe("Service: StarkHttpService", () => {
 
 				request.retryCount = 2;
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -1161,7 +1133,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
+						expect(httpMock.post).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
 						done();
 					}
 				);
@@ -1191,7 +1163,16 @@ describe("Service: StarkHttpService", () => {
 			prop1: 1234,
 			prop2: "whatever",
 			prop3: "2016-03-18T18:25:43.511Z",
-			prop4: ["some value", "false", "null", "", true, false, 0, { name: "Christopher", surname: "Cortes" }]
+			prop4: [
+				"some value",
+				"false",
+				"null",
+				"",
+				true,
+				false,
+				0,
+				{name: "Christopher", surname: "Cortes"}
+			]
 		};
 
 		describe("with a GetCollection request", () => {
@@ -1217,7 +1198,9 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: {
 							sortedBy: [
 								{
@@ -1240,11 +1223,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -1293,12 +1274,15 @@ describe("Service: StarkHttpService", () => {
 						expect(loggerMock.warn).not.toHaveBeenCalled();
 
 						expect(httpMock.get).toHaveBeenCalledTimes(1);
-						expect(httpMock.get).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
+						expect(httpMock.get).toHaveBeenCalledWith(
+							"www.awesomeapi.com/mock",
+							{
+								params: convertMapIntoObject(request.queryParameters),
+								headers: convertMapIntoObject(headersMap),
+								observe: "response",
+								responseType: "json"
+							}
+						);
 					},
 					() => {
 						fail("The 'error' function should not be called in case of success");
@@ -1310,7 +1294,9 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: {
 							sortedBy: [],
 							pagination: {
@@ -1327,11 +1313,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -1363,7 +1347,9 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: {
 							sortedBy: [],
 							pagination: {
@@ -1380,11 +1366,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -1436,17 +1420,15 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property
+						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property 
 						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
 						expect(result.metadata.sortedBy.length).toBe(0);
 						expect(result.metadata.pagination).toBeDefined();
@@ -1467,8 +1449,7 @@ describe("Service: StarkHttpService", () => {
 				const etags: { [uuid: string]: string } = {};
 				etags[mockUuid] = mockEtag;
 
-				const items: any[] = [
-					// non-object item in "items" array
+				const items: any[] = [ // non-object item in "items" array
 					"some value"
 				];
 
@@ -1492,11 +1473,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<any>) => {
@@ -1526,13 +1505,15 @@ describe("Service: StarkHttpService", () => {
 				const etags: { [uuid: string]: string } = {};
 				etags[mockUuid] = mockEtag;
 
-				const mockResourceWithoutUuid: MockResource = { ...mockResourceWithEtag };
+				const mockResourceWithoutUuid: MockResource = {...mockResourceWithEtag};
 				delete mockResourceWithoutUuid.uuid;
 
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutUuid],
+						items: [
+							mockResourceWithoutUuid
+						],
 						metadata: {
 							sortedBy: [],
 							pagination: {
@@ -1549,11 +1530,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -1589,7 +1568,9 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: {
 							sortedBy: [],
 							pagination: {
@@ -1607,11 +1588,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -1643,16 +1622,16 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: <any>undefined
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -1679,11 +1658,9 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(Observable.throw(httpResponse));
+				(<Spy> httpMock.get).and.returnValue(Observable.throw(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -1718,12 +1695,15 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
 
 						expect(httpMock.get).toHaveBeenCalledTimes(1);
-						expect(httpMock.get).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
+						expect(httpMock.get).toHaveBeenCalledWith(
+							"www.awesomeapi.com/mock",
+							{
+								params: convertMapIntoObject(request.queryParameters),
+								headers: convertMapIntoObject(headersMap),
+								observe: "response",
+								responseType: "json"
+							}
+						);
 					}
 				);
 			});
@@ -1745,9 +1725,7 @@ describe("Service: StarkHttpService", () => {
 
 				request.retryCount = 2;
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -1759,7 +1737,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
+						expect(httpMock.get).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
 						done();
 					}
 				);
@@ -1768,7 +1746,7 @@ describe("Service: StarkHttpService", () => {
 
 		describe("with a Search request", () => {
 			let request: StarkHttpRequest<MockResource>;
-			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
+			const mockCriteria: { [key: string]: any } = {field1: "anything", field2: "whatever"};
 
 			beforeEach(() => {
 				request = {
@@ -1790,7 +1768,9 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: {
 							sortedBy: [
 								{
@@ -1813,11 +1793,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -1887,7 +1865,9 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: {
 							sortedBy: [],
 							pagination: {
@@ -1904,11 +1884,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -1940,7 +1918,9 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: {
 							sortedBy: [],
 							pagination: {
@@ -1957,11 +1937,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -2013,17 +1991,15 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property
+						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property 
 						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
 						expect(result.metadata.sortedBy.length).toBe(0);
 						expect(result.metadata.pagination).toBeDefined();
@@ -2044,8 +2020,7 @@ describe("Service: StarkHttpService", () => {
 				const etags: { [uuid: string]: string } = {};
 				etags[mockUuid] = mockEtag;
 
-				const items: any[] = [
-					// non-object item in "items" array
+				const items: any[] = [ // non-object item in "items" array
 					"some value"
 				];
 
@@ -2069,11 +2044,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<any>) => {
@@ -2103,13 +2076,15 @@ describe("Service: StarkHttpService", () => {
 				const etags: { [uuid: string]: string } = {};
 				etags[mockUuid] = mockEtag;
 
-				const mockResourceWithoutUuid: MockResource = { ...mockResourceWithEtag };
+				const mockResourceWithoutUuid: MockResource = {...mockResourceWithEtag};
 				delete mockResourceWithoutUuid.uuid;
 
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutUuid],
+						items: [
+							mockResourceWithoutUuid
+						],
 						metadata: {
 							sortedBy: [],
 							pagination: {
@@ -2126,11 +2101,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -2166,7 +2139,9 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: {
 							sortedBy: [],
 							pagination: {
@@ -2184,11 +2159,9 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -2220,16 +2193,16 @@ describe("Service: StarkHttpService", () => {
 				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 					status: StarkHttpStatusCodes.HTTP_200_OK,
 					body: {
-						items: [mockResourceWithoutEtag],
+						items: [
+							mockResourceWithoutEtag
+						],
 						metadata: <any>undefined
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.of(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.of(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
@@ -2256,11 +2229,9 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(Observable.throw(httpResponse));
+				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse));
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -2326,9 +2297,7 @@ describe("Service: StarkHttpService", () => {
 
 				request.retryCount = 2;
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(request);
 
 				resultObs.subscribe(
 					() => {
@@ -2340,7 +2309,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
+						expect(httpMock.post).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
 						done();
 					}
 				);
@@ -2429,19 +2398,25 @@ describe("Service: StarkHttpService", () => {
 
 @inheritSerialization(StarkSingleItemMetadataImpl)
 class MockResourceMetadata extends StarkSingleItemMetadataImpl {
-	@autoserialize public someValue?: string;
+	@autoserialize
+	public someValue?: string;
 }
 
 class MockResource implements StarkResource {
-	@autoserialize public uuid: string;
+	@autoserialize
+	public uuid: string;
 
-	@autoserialize public etag: string;
+	@autoserialize
+	public etag: string;
 
-	@autoserializeAs(MockResourceMetadata) public metadata: MockResourceMetadata;
+	@autoserializeAs(MockResourceMetadata)
+	public metadata: MockResourceMetadata;
 
-	@autoserialize public property1: string;
+	@autoserialize
+	public property1: string;
 
-	@autoserialize public property2: string;
+	@autoserialize
+	public property2: string;
 
 	public constructor(uuid: string) {
 		this.uuid = uuid;
@@ -2465,6 +2440,7 @@ function convertMapIntoObject(map: Map<string, any>): object {
 }
 
 class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P> {
+
 	public retryDelay: number;
 
 	public constructor(logger: StarkLoggingService, sessionService: StarkSessionService, $http: HttpClient) {

@@ -8,14 +8,9 @@ export const starkLoggingServiceName: string = "StarkLoggingService";
  */
 export interface StarkLoggingService {
 	readonly correlationId: string;
-
 	generateNewCorrelationId(): string;
-
 	debug(...args: any[]): void;
-
 	info(...args: any[]): void;
-
 	warn(...args: any[]): void;
-
 	error(message: string, error?: Error): void;
 }
