@@ -132,7 +132,7 @@
   "devDependencies": {
     "@types/core-js": "0.9.46",
     "@types/hammerjs": "2.0.35",
-    "@types/node": "6.0.101",
+    "@types/node": "6.0.102",
     "@types/source-map": "0.5.2",
     "@types/uglify-js": "2.6.30",
     "cross-env": "^5.0.0",
