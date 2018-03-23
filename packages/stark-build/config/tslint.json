@@ -138,7 +138,7 @@
     "interface-over-type-literal": true,
     "jsdoc-format": false,
     "no-angle-bracket-type-assertion": false,
-    "no-parameter-properties": true,
+    "no-parameter-properties": false,
     "no-redundant-jsdoc": false,
     "no-reference-import": true,
     "no-unnecessary-callback-wrapper": false,
