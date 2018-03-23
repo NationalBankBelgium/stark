@@ -4,6 +4,7 @@
     "typeRoots": [
       "./packages/stark-build/node_modules/@types",
       "./packages/stark-core/node_modules/@types",
+      "./packages/stark-testing/node_modules/@types",
       "./starter/node_modules/@types"
     ]
   }
