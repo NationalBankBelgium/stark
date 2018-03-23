@@ -65,5 +65,18 @@
     "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
     "placeOpenBraceOnNewLineForFunctions": false,
     "placeOpenBraceOnNewLineForControlBlocks": false
+  },
+  "angularCompilerOptions": {
+    "generateCodeForLibraries": true,
+    "skipMetadataEmit": false,
+    "strictMetadataEmit": false,
+    "skipTemplateCodegen": false,
+    "strictInjectionParameters": true,
+    "fullTemplateTypeCheck": true,
+    "annotateForClosureCompiler": false,
+    "annotationsAs": "static fields",
+    "enableLegacyTemplate": false,
+    "preserveWhitespaces": false,
+    "allowEmptyCodegenFiles": false
   }
 }
