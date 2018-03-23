@@ -1,6 +1,8 @@
 # private variable to track folds within this script
 travisFoldStack=()
 
+TRAVIS=${TRAVIS:-}
+
 function travisFoldStart() {
   local foldName="${0#./}  ${1}"
   # get current time as nanoseconds since the beginning of the epoch

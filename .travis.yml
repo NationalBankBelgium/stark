@@ -1,0 +1,38 @@
+language: node_js
+node_js:
+  - "6"
+  - "8"
+dist: trusty
+sudo: required
+
+before_install:
+  - TRAVIS=1
+
+install:
+  # Create file & folder for Travis logs
+  - mkdir -p $LOGS_DIR
+  - touch $LOGS_DIR/build-perf.log
+  - npm i -g npm@5.7.1 # this should be deleted once 5.7.X is out of "pre-release"
+  # Enable this when we have package-lock.json
+  # - npm ci
+  - npm install
+
+env:
+  global:
+    - LOGS_DIR=/tmp/stark/logs
+    - LOGS_FILE=/tmp/stark/logs/build-perf.log
+
+branches:
+  only:
+  - master
+
+cache:
+  directories:
+    - $HOME/.npm
+
+addons:
+  chrome: stable
+
+script:
+  - npm run lint:starter
+  - npm run test:ci:all
