@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "declaration": false,
-    "lib": ["es2015", "dom"],
+    "lib": ["dom", "dom.iterable", "es2017"],
     "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@angular/*": ["../node_modules/@angular/*"],

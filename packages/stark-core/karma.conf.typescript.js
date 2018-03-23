@@ -1,4 +1,4 @@
 /**
- * Look in ./config for karma.conf.js
+ * Look in stark-testing for karma.conf.typescript.js
  */
-module.exports = require("./node_modules/@nationalbankbelgium/stark-build/config/karma.conf.typescript.js");
+module.exports = require("./node_modules/@nationalbankbelgium/stark-testing/karma.conf.typescript.js");
