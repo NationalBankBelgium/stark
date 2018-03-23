@@ -2,16 +2,15 @@
 
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
-import {autoserialize, autoserializeAs, inheritSerialization, Serialize} from "cerialize";
-import {Observable} from "rxjs/Observable";
-// import { Subscription } from "rxjs/Subscription";
-// import { Subject } from "rxjs/Subject";
+import { autoserialize, autoserializeAs, inheritSerialization, Serialize } from "cerialize";
+import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/of";
 import "rxjs/add/observable/throw";
-import {ErrorObservable} from "rxjs/observable/ErrorObservable";
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import "rxjs/add/operator/catch";
+import { ErrorObservable } from "rxjs/observable/ErrorObservable";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 
-import {StarkHttpServiceImpl} from "./http.service";
+import { StarkHttpServiceImpl } from "./http.service";
 import {
 	StarkBackend,
 	StarkBackendImpl,
@@ -31,12 +30,12 @@ import {
 	StarkSortItemImpl
 } from "../entities/index";
 
-import {StarkHttpHeaders, StarkSortOrder} from "../constants/index";
-import {StarkHttpStatusCodes} from "../enumerators/index";
-import {StarkLoggingService} from "../../logging/index";
-import {UnitTestingUtils} from "../../test/unit-testing/index";
-import {StarkHttpSerializer, StarkHttpSerializerImpl} from "../serializer/index";
-import {StarkSessionService} from "../../session/index";
+import { StarkHttpHeaders, StarkSortOrder } from "../constants/index";
+import { StarkHttpStatusCodes } from "../enumerators/index";
+import { StarkLoggingService } from "../../logging/index";
+import { UnitTestingUtils } from "../../test/unit-testing/index";
+import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
+import { StarkSessionService } from "../../session/index";
 
 describe("Service: StarkHttpService", () => {
 	let loggerMock: StarkLoggingService;
@@ -189,7 +188,6 @@ describe("Service: StarkHttpService", () => {
 
 				resultObs.subscribe(
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						console.log("CCR==========> result", result);
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
 						expect(result.starkHttpHeaders.size).toBe(3);
@@ -329,7 +327,13 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy> httpMock.get).and.returnValue(Observable.throw(httpResponse));
+				let errorCounter: number = 0;
+				(<Spy> httpMock.get).and.returnValue(Observable.throw(httpResponse)
+					.catch((err: any) => {
+						errorCounter++;
+						return Observable.throw(err);
+					})
+				);
 
 				request.retryCount = 2;
 
@@ -345,7 +349,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(httpMock.get).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
+						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
 				);
@@ -468,7 +472,13 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy> httpMock.delete).and.returnValue(Observable.throw(httpResponse));
+				let errorCounter: number = 0;
+				(<Spy> httpMock.delete).and.returnValue(Observable.throw(httpResponse)
+					.catch((err: any) => {
+						errorCounter++;
+						return Observable.throw(err);
+					})
+				);
 
 				request.retryCount = 2;
 
@@ -484,7 +494,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(httpMock.delete).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
+						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
 				);
@@ -787,7 +797,13 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse));
+				let errorCounter: number = 0;
+				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse)
+					.catch((err: any) => {
+						errorCounter++;
+						return Observable.throw(err);
+					})
+				);
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 				request.retryCount = 2;
@@ -804,7 +820,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(httpMock.post).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
+						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
 				);
@@ -876,7 +892,13 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy> httpMock.put).and.returnValue(Observable.throw(httpResponse));
+				let errorCounter: number = 0;
+				(<Spy> httpMock.put).and.returnValue(Observable.throw(httpResponse)
+					.catch((err: any) => {
+						errorCounter++;
+						return Observable.throw(err);
+					})
+				);
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 				request.retryCount = 2;
@@ -893,7 +915,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(httpMock.put).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
+						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
 				);
@@ -1093,7 +1115,13 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse));
+				let errorCounter: number = 0;
+				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse)
+					.catch((err: any) => {
+						errorCounter++;
+						return Observable.throw(err);
+					})
+				);
 
 				request.retryCount = 2;
 
@@ -1109,7 +1137,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(httpMock.post).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
+						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
 				);
@@ -1691,7 +1719,13 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy> httpMock.get).and.returnValue(Observable.throw(httpResponse));
+				let errorCounter: number = 0;
+				(<Spy> httpMock.get).and.returnValue(Observable.throw(httpResponse)
+					.catch((err: any) => {
+						errorCounter++;
+						return Observable.throw(err);
+					})
+				);
 
 				request.retryCount = 2;
 
@@ -1707,7 +1741,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(httpMock.get).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
+						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
 				);
@@ -2257,7 +2291,13 @@ describe("Service: StarkHttpService", () => {
 					body: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse));
+				let errorCounter: number = 0;
+				(<Spy> httpMock.post).and.returnValue(Observable.throw(httpResponse)
+					.catch((err: any) => {
+						errorCounter++;
+						return Observable.throw(err);
+					})
+				);
 
 				request.retryCount = 2;
 
@@ -2273,7 +2313,7 @@ describe("Service: StarkHttpService", () => {
 						expect(errorWrapper.httpError.errors).toBeDefined();
 						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
 						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(httpMock.post).toHaveBeenCalledTimes(1 + <number>request.retryCount); // original request + number of retries
+						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
 				);
@@ -2407,9 +2447,8 @@ class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P>
 
 	public retryDelay: number;
 
-	// FIXME: add the Logging and Session services once implemented
-	public constructor(_logger: StarkLoggingService, _sessionService: StarkSessionService, $http: HttpClient) {
-		super(/*logger, sessionService, */$http);
+	public constructor(logger: StarkLoggingService, sessionService: StarkSessionService, $http: HttpClient) {
+		super(logger, sessionService, $http);
 	}
 
 	public addFakePreAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {

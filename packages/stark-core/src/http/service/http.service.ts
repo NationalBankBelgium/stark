@@ -1,21 +1,20 @@
 "use strict";
 
 const _cloneDeep: Function = require("lodash/cloneDeep");
-import {Deserialize, Serialize} from "cerialize";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/defer";
+import { Deserialize, Serialize } from "cerialize";
+import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/timer";
 import "rxjs/add/observable/throw";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/retryWhen";
 import "rxjs/add/operator/mergeMap";
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 
-import {StarkHttpService, starkHttpServiceName} from "./http.service.intf";
+import { StarkHttpService, starkHttpServiceName } from "./http.service.intf";
 
-import {StarkHttpHeaders} from "../constants/index";
+import { StarkHttpHeaders } from "../constants/index";
 import {
 	StarkCollectionMetadataImpl,
 	StarkCollectionResponseWrapper,
@@ -30,8 +29,8 @@ import {
 	StarkSingleItemResponseWrapper,
 	StarkSingleItemResponseWrapperImpl
 } from "../entities/index";
-import {StarkLoggingService} from "../../logging/index";
-import {StarkSessionService} from "../../session/index";
+import { StarkLoggingService } from "../../logging/index";
+import { StarkSessionService } from "../../session/index";
 
 /**
  * @ngdoc service
@@ -51,13 +50,11 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	private httpClient: HttpClient;
 
 	// FIXME: uncomment these lines once LoggingService and SessionService are implemented
-	public constructor(/*@Inject(starkLoggingServiceName) logger: StarkLoggingService,
-					   @Inject(starkSessionServiceName) sessionService: StarkSessionService,*/
+	public constructor(/*@Inject(starkLoggingServiceName)*/ logger: StarkLoggingService,
+					   /*@Inject(starkSessionServiceName)*/ sessionService: StarkSessionService,
 					   httpClient: HttpClient) {
-		this.logger = <any>console; //logger;
-		this.sessionService = <any>{
-			fakePreAuthenticationHeaders: new Map<string, string>()
-		};
+		this.logger = logger;
+		this.sessionService = sessionService;
 		this.httpClient = httpClient;
 	}
 
@@ -74,8 +71,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		// NG-117: add correlation identifier
 		request = this.addCorrelationIdentifierHeader(request);
 
-		// IMPORTANT: The HTTP Promise is wrapped in a DeferObservable so it creates a new Promise every time an Observer subscribes
-		// this is the same behaviour as the Angular2+ HTTP service (subscribing multiple times will actually do multiple requests)
+		// IMPORTANT: In Angular2+ HTTP service subscribing multiple times will actually do multiple requests
 		// see https://angular.io/guide/http#always-subscribe
 		let httpResponse$: Observable<HttpResponse<P>> | undefined;
 
@@ -117,17 +113,16 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		// NG-117: add correlation identifier
 		request = this.addCorrelationIdentifierHeader(request);
 
-		// IMPORTANT: The HTTP Promise is wrapped in a DeferObservable so it creates a new Promise every time an Observer subscribes
-		// this is the same behaviour as the Angular2+ HTTP service (subscribing multiple times will actually do multiple requests)
+		// IMPORTANT: In Angular2+ HTTP service subscribing multiple times will actually do multiple requests
 		// see https://angular.io/guide/http#always-subscribe
 		let httpResponse$: Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>> | undefined;
 
 		switch (request.requestType) {
 			case StarkHttpRequestType.GET_COLLECTION:
-				httpResponse$ = Observable.defer(() => this.performGetCollectionRequest(request));
+				httpResponse$ = this.performGetCollectionRequest(request);
 				break;
 			case StarkHttpRequestType.SEARCH:
-				httpResponse$ = Observable.defer(() => this.performSearchRequest(request));
+				httpResponse$ = this.performSearchRequest(request);
 				break;
 			default:
 				httpResponse$ = undefined;
@@ -189,7 +184,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 		const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
 
-		// requestCopy.headers.set(StarkHttpHeaders.NBB_CORRELATION_ID, console.correlationId);
+		requestCopy.headers.set(StarkHttpHeaders.NBB_CORRELATION_ID, this.logger.correlationId);
 
 		return requestCopy;
 	}
@@ -259,7 +254,6 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	}
 
 	private performGetCollectionRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>> {
-
 		return this.httpClient.get<StarkHttpRawCollectionResponseData<P>>(
 			request.backend.url + "/" + request.resourcePath,
 			{
@@ -401,18 +395,14 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 	private addRetryLogic<R>(httpResponse$: Observable<HttpResponse<R>>,
 							 retryCount: number): Observable<HttpResponse<R>> {
-		console.log("CCR==========> retryCount", retryCount);
 		return httpResponse$
 			.retryWhen((errors: Observable<any>) => {
 				let retries: number = 0;
 				return errors.mergeMap((error: HttpResponse<P>) => {
-					console.log("CCR==========> error in Retry", error);
 					if (retries < retryCount) {
-						console.log("CCR==========> retries", retries);
 						retries++;
 						return Observable.timer(this.retryDelay);
 					} else {
-						console.log("CCR==========> error", error);
 						return Observable.throw(error);
 					}
 				});

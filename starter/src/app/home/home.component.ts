@@ -2,12 +2,16 @@ import { Component, Inject, OnInit } from "@angular/core";
 import {
 	StarkBackend,
 	StarkBackendAuthenticationTypes,
+	StarkCollectionResponseWrapper,
+	StarkHttpErrorWrapper,
 	StarkHttpRequestType,
 	StarkHttpSerializer,
 	StarkHttpSerializerImpl,
 	StarkHttpService,
-	starkHttpServiceName
+	starkHttpServiceName,
+	StarkSingleItemResponseWrapper
 } from "@nationalbankbelgium/stark-core";
+import { Observable } from "rxjs/Observable"
 
 import { AppState } from "../app.service";
 import { Title } from "./title";
@@ -37,16 +41,15 @@ export class HomeComponent implements OnInit {
 	/**
 	 * Set our default values
 	 */
-	public localState: any = { value: " " };
+	public localState: any = {value: " "};
 
 	/**
 	 * TypeScript public modifiers
 	 */
-	public constructor(
-		public appState: AppState,
-		public title: Title,
-		@Inject(starkHttpServiceName) public httpService: StarkHttpService<any>
-	) {}
+	public constructor(public appState: AppState,
+					   public title: Title,
+					   @Inject(starkHttpServiceName) public httpService: StarkHttpService<any>) {
+	}
 
 	public ngOnInit(): void {
 		console.log("hello `Home` component");
@@ -61,29 +64,46 @@ export class HomeComponent implements OnInit {
 		this.localState.value = "";
 	}
 
-	public triggerHttpCall(): void {
+	public triggerHttpCall(type: "collection" | "singleItem"): void {
 		const serializer: StarkHttpSerializer<Request> = new StarkHttpSerializerImpl<any>(Request);
 		const backend: StarkBackend = {
 			name: "someBackend",
 			url: "http://localhost:5000",
 			authenticationType: StarkBackendAuthenticationTypes.PUBLIC,
-			fakePreAuthenticationEnabled: false,
+			fakePreAuthenticationEnabled: true,
 			fakePreAuthenticationRolePrefix: ""
 		};
 
-		this.httpService
-			.executeCollectionRequest({
-				backend: backend,
-				resourcePath: "requests",
-				headers: new Map<string, string>(),
-				queryParameters: new Map<string, string | string[] | undefined>(),
-				requestType: StarkHttpRequestType.GET_COLLECTION,
-				serializer: serializer
-			})
-			.subscribe(
-				() => console.log("---------- SUCCESS"),
-				() => console.log("---------- ERROR"),
-				() => console.log("---------- COMPLETE")
-			);
+		let httpRequest$: Observable<StarkSingleItemResponseWrapper<Request> | StarkCollectionResponseWrapper<Request>>;
+
+		if (type === "singleItem") {
+			httpRequest$ = this.httpService
+				.executeSingleItemRequest({
+					backend: backend,
+					resourcePath: "requests/11",
+					headers: new Map<string, string>(),
+					queryParameters: new Map<string, string | string[] | undefined>(),
+					requestType: StarkHttpRequestType.GET,
+					serializer: serializer,
+					retryCount: 4
+				})
+		} else {
+			httpRequest$ = this.httpService
+				.executeCollectionRequest({
+					backend: backend,
+					resourcePath: "requests",
+					headers: new Map<string, string>(),
+					queryParameters: new Map<string, string | string[] | undefined>(),
+					requestType: StarkHttpRequestType.GET_COLLECTION,
+					serializer: serializer,
+					retryCount: 4
+				})
+		}
+
+		httpRequest$.subscribe(
+			(response: any) => console.log("---------- SUCCESS", response),
+			(error: StarkHttpErrorWrapper) => console.log("---------- ERROR", error),
+			() => console.log("---------- COMPLETE")
+		);
 	}
 }
