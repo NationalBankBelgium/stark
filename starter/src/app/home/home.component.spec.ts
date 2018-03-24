@@ -8,6 +8,7 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { AppState } from "../app.service";
 import { HomeComponent } from "./home.component";
 import { Title } from "./title";
+import { StarkHttpModule } from "@nationalbankbelgium/stark-core";
 
 describe(`Home`, () => {
 	let comp: HomeComponent;
@@ -22,7 +23,10 @@ describe(`Home`, () => {
 				TestBed.configureTestingModule({
 					declarations: [HomeComponent],
 					schemas: [NO_ERRORS_SCHEMA],
-					imports: [HttpClientTestingModule],
+					imports: [
+						HttpClientTestingModule,
+						StarkHttpModule
+					],
 					providers: [AppState, Title]
 				})
 
@@ -48,7 +52,7 @@ describe(`Home`, () => {
 	});
 
 	it("should have default data", () => {
-		expect(comp.localState).toEqual({ value: "" });
+		expect(comp.localState).toEqual({ value: " " });
 	});
 
 	it("should have a title", () => {

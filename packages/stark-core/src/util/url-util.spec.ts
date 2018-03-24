@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkUrlUtil} from "./url-util";
+import { StarkUrlUtil } from "./url-util";
 
 describe("Util: UrlUtil", () => {
 	describe("parseUrlParams", () => {

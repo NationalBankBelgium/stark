@@ -3,13 +3,14 @@ node_js:
   - "6"
   - "8"
 dist: trusty
-sudo: required
+sudo: false # better for performance
 
 before_install:
-  - TRAVIS=1
+  - TRAVIS=1 # used by build.sh
 
 install:
   # Create file & folder for Travis logs
+  # cfr scripts/_travis-fold.sh
   - mkdir -p $LOGS_DIR
   - touch $LOGS_DIR/build-perf.log
   - npm i -g npm@5.7.1 # this should be deleted once 5.7.X is out of "pre-release"
@@ -30,9 +31,11 @@ cache:
   directories:
     - $HOME/.npm
 
-addons:
-  chrome: stable
+# Not needed since we use Puppeteer in karma.conf.typescript.ci.js
+# It downloads Chrome itself and works with or without Travis
+#addons:
+#  chrome: stable
 
 script:
-  - npm run lint:starter
+  - npm run lint:all
   - npm run test:ci:all

@@ -19,6 +19,7 @@
     "npm": ">=5.3.0"
   },
   "devDependencies": {
+    "@angular/core": "5.2.9",
     "@angular/compiler": "5.2.9",
     "@angular/compiler-cli": "5.2.9",
     "codelyzer": "4.2.1",
@@ -39,15 +40,9 @@
   "scripts": {
     "precommit": "lint-staged",
     "prettier-check": "prettier **/*.{css,js,json,pcss,scss,ts} --write",
-    "tslint": "tslint",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "stylelint-check": "stylelint-config-prettier-check",
     "tsc": "tsc",
     "ngc": "ngc",
-    "postinstall": "npm run postinstall:stark-build && npm run postinstall:stark-testing && npm run postinstall:stark-core && npm run build && npm run update:starter",
-    "postinstall:stark-build": "cd packages/stark-build && npm install && cd ../..",
-    "postinstall:stark-core": "cd packages/stark-core && npm install && cd ../..",
-    "postinstall:stark-testing": "cd packages/stark-testing && npm install && cd ../..",
     "build": "bash ./build.sh",
     "build:stark-build": "npm run build -- --packages=stark-build",
     "build:stark-core": "npm run build -- --packages=stark-core",
@@ -59,12 +54,22 @@
     "clean:stark-core": "cd packages/stark-core && rimraf ./node_modules/@nationalbankbelgium/stark-build && cd ../..",
     "clean:starter": "cd starter && rimraf ./dist && rimraf ./node_modules/@nationalbankbelgium && cd ..",
     "clean:all": "npm run clean && npm run clean:stark-core && npm run clean:starter",
+    "lint": "tslint --config tslint.json --project ./tsconfig.json --format codeFrame",
+    "lint:stark-core": "cd packages/stark-core && npm run lint && cd ../..",
+    "lint:starter": "cd starter && npm run lint && cd ..",
+    "lint:all": "npm run lint:stark-core && npm run lint:starter",
+    "postinstall": "npm run postinstall:stark-build && npm run postinstall:stark-testing && npm run postinstall:stark-core && npm run build && npm run update:starter",
+    "postinstall:stark-build": "cd packages/stark-build && npm install && cd ../..",
+    "postinstall:stark-core": "cd packages/stark-core && npm install && cd ../..",
+    "postinstall:stark-testing": "cd packages/stark-testing && npm install && cd ../..",
     "test:stark-core": "cd packages/stark-core && npm run test-fast && cd ../..",
     "test:starter": "cd starter && npm run test-fast && cd ../..",
     "test:all": "npm run test:stark-core && npm run test:starter",
-    "test:ci:stater": "cd starter && npm run test-fast:ci && cd ../..",
-    "test:ci:all": "npm run test:ci:stater",
-    "lint:starter": "cd starter && npm run lint && cd .."
+    "test:ci:stark-core": "cd packages/stark-core && npm run test-fast:ci && cd ../..",
+    "test:ci:starter": "cd starter && npm run test-fast:ci && cd ../..",
+    "test:ci:all": "npm run test:ci:stark-core && npm run test:ci:starter",
+    "tslint": "tslint",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "lint-staged": {
     "*.{css,js,json,pcss,scss,ts}": [

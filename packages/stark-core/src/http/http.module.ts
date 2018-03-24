@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { StarkHttpServiceImpl, starkHttpServiceName } from "./service/index";
 
 // FIXME: remove this factory once LoggingService and SessionService are implemented
-const starkHttpServiceFactory = (httpClient: HttpClient) => {
+const starkHttpServiceFactory:any = (httpClient: HttpClient) => {
 	const logger: any = {
 		debug: console.debug,
 		warn: console.warn,
