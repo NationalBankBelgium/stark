@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkSingleItemMetadata} from "./metadata";
+import { StarkSingleItemMetadata } from "./metadata";
 
 export interface StarkResource {
 	uuid: string;

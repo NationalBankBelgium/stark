@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkHttpErrorBase} from "./http-error-base.entity.intf";
+import { StarkHttpErrorBase } from "./http-error-base.entity.intf";
 
 export interface StarkHttpErrorDetail extends StarkHttpErrorBase {
 	detail: string;

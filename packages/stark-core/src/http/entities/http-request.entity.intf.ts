@@ -1,10 +1,10 @@
 "use strict";
 
-import {StarkBackend} from "../entities/backend";
-import {StarkSortItem} from "./metadata/index";
-import {StarkHttpRequestType} from "./http-request-type.entity";
-import {StarkResource} from "./resource.entity.intf";
-import {StarkHttpSerializer} from "../serializer";
+import { StarkBackend } from "../entities/backend";
+import { StarkSortItem } from "./metadata/index";
+import { StarkHttpRequestType } from "./http-request-type.entity";
+import { StarkResource } from "./resource.entity.intf";
+import { StarkHttpSerializer } from "../serializer";
 
 export interface StarkHttpRequest<P extends StarkResource = StarkResource> {
 	backend: StarkBackend;

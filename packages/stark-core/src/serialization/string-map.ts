@@ -5,7 +5,7 @@
 // See https://github.com/weichx/cerialize/issues/32
 // See https://github.com/weichx/cerialize/issues/33
 
-import {Deserialize, ISerializable, Serialize} from "cerialize";
+import { Deserialize, ISerializable, Serialize } from "cerialize";
 
 export const stringMap: Function = (targetType: any): ISerializable => {
 	return {

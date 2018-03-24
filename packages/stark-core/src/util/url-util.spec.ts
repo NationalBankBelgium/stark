@@ -61,12 +61,13 @@ describe("Util: UrlUtil", () => {
 		});
 
 		it("should throw an error if a param is passed but there is no placeholder for it in the resourcePath", () => {
-			expect(() => StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
-				somethingId: "1",
-				elseId: "5",
-				unknownId: "3"
-			}))
-				.toThrowError(/unknownId/);
+			expect(() =>
+				StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
+					somethingId: "1",
+					elseId: "5",
+					unknownId: "3"
+				})
+			).toThrowError(/unknownId/);
 		});
 
 		it("should NOT throw an error if a param with undefined value is passed and there is no placeholder for it in the resourcePath", () => {
@@ -80,18 +81,20 @@ describe("Util: UrlUtil", () => {
 		});
 
 		it("should throw an error if a parameter from the url is missing in the given params object", () => {
-			expect(() => StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
-				somethingId: "1"
-			}))
-				.toThrowError(/Not every value was replaced/);
+			expect(() =>
+				StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
+					somethingId: "1"
+				})
+			).toThrowError(/Not every value was replaced/);
 		});
 
 		it("should throw an error if a parameter from the url exists in the params object but it has undefined value", () => {
-			expect(() => StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
-				somethingId: "1",
-				elseId: <any>undefined
-			}))
-				.toThrowError(/Not every value was replaced/);
+			expect(() =>
+				StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
+					somethingId: "1",
+					elseId: <any>undefined
+				})
+			).toThrowError(/Not every value was replaced/);
 		});
 	});
 });

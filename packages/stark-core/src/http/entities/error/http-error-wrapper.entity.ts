@@ -1,11 +1,10 @@
 "use strict";
 
-import {StarkHttpError} from "./http-error.entity.intf";
-import {StarkHttpErrorWrapper} from "./http-error-wrapper.entity.intf";
-import {StarkHttpStatusCodes} from "../../enumerators/index";
+import { StarkHttpError } from "./http-error.entity.intf";
+import { StarkHttpErrorWrapper } from "./http-error-wrapper.entity.intf";
+import { StarkHttpStatusCodes } from "../../enumerators/index";
 
 export class StarkHttpErrorWrapperImpl implements StarkHttpErrorWrapper {
-
 	/** @internal */
 	private _starkHttpStatusCode: StarkHttpStatusCodes;
 	// TODO: return the Angular HttpHeaders or still return our own Map?
@@ -14,9 +13,7 @@ export class StarkHttpErrorWrapperImpl implements StarkHttpErrorWrapper {
 	/** @internal */
 	private _httpError: StarkHttpError;
 
-	public constructor(starkHttpStatusCode: StarkHttpStatusCodes,
-					   starkHttpHeaders: Map<string, string>,
-					   httpError: StarkHttpError) {
+	public constructor(starkHttpStatusCode: StarkHttpStatusCodes, starkHttpHeaders: Map<string, string>, httpError: StarkHttpError) {
 		this._starkHttpStatusCode = starkHttpStatusCode;
 		this._starkHttpHeaders = starkHttpHeaders;
 		this._httpError = httpError;

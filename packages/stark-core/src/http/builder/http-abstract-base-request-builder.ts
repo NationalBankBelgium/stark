@@ -1,11 +1,10 @@
 "use strict";
 
-import {StarkHttpRequest, StarkResource} from "../entities/index";
-import {StarkHttpBaseRequestBuilder} from "./http-abstract-base-request-builder.intf";
-import {StarkUrlUtil} from "../../util/url-util";
+import { StarkHttpRequest, StarkResource } from "../entities/index";
+import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
+import { StarkUrlUtil } from "../../util/url-util";
 
 export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResource> implements StarkHttpBaseRequestBuilder<T> {
-
 	protected request: StarkHttpRequest<T>;
 
 	public constructor(request: StarkHttpRequest<T>) {
@@ -19,16 +18,23 @@ export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResourc
 		return this;
 	}
 
-	public addQueryParameter(name: string, value: string | string[] | undefined,
-							 allowUndefined: boolean = false, allowEmpty: boolean = false): this {
+	public addQueryParameter(
+		name: string,
+		value: string | string[] | undefined,
+		allowUndefined: boolean = false,
+		allowEmpty: boolean = false
+	): this {
 		if ((typeof value !== "undefined" || allowUndefined) && (value !== "" || allowEmpty)) {
 			this.request.queryParameters.set(name, value);
 		}
 		return this;
 	}
 
-	public addQueryParameters(params: { [param: string]: string | string[] | undefined },
-							  allowUndefined: boolean = false, allowEmpty: boolean = false): this {
+	public addQueryParameters(
+		params: { [param: string]: string | string[] | undefined },
+		allowUndefined: boolean = false,
+		allowEmpty: boolean = false
+	): this {
 		if (params) {
 			for (const key of Object.keys(params)) {
 				this.addQueryParameter(key, params[key], allowUndefined, allowEmpty);
@@ -37,8 +43,11 @@ export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResourc
 		return this;
 	}
 
-	public setQueryParameters(params: { [param: string]: string | string[] | undefined },
-							  allowUndefined: boolean = false, allowEmpty: boolean = false): this {
+	public setQueryParameters(
+		params: { [param: string]: string | string[] | undefined },
+		allowUndefined: boolean = false,
+		allowEmpty: boolean = false
+	): this {
 		if (params) {
 			this.request.queryParameters = new Map<string, string>();
 			this.addQueryParameters(params, allowUndefined, allowEmpty);

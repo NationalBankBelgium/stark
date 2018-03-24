@@ -1,6 +1,5 @@
 "use strict";
 
-import {StarkWarnings} from "./metadata-warnings.entity.intf";
+import { StarkWarnings } from "./metadata-warnings.entity.intf";
 
-export interface StarkSingleItemMetadata extends StarkWarnings {
-} 
+export interface StarkSingleItemMetadata extends StarkWarnings {}

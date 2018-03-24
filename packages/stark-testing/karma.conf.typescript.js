@@ -3,7 +3,7 @@ const helpers = require("./helpers");
 
 // Karma configuration
 // reference: http://karma-runner.github.io/2.0/config/configuration-file.html
-module.exports = function (config) {
+module.exports = function(config) {
 	config.set({
 		// base path that will be used to resolve all patterns (e.g. files, exclude)
 		basePath: "",
@@ -21,7 +21,7 @@ module.exports = function (config) {
 
 		// list of files to exclude
 		exclude: [
-			"src/index.html" // not needed for unit testing 
+			"src/index.html" // not needed for unit testing
 		],
 
 		// preprocess matching files before serving them to the browser

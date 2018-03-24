@@ -1,15 +1,13 @@
 "use strict";
 
-import {StarkHttpDiscriminatorSerializer} from "./http-discriminator-serializer";
-import {autoserialize, inheritSerialization} from "cerialize";
-import {StarkSerializable} from "../../serialization/index";
+import { StarkHttpDiscriminatorSerializer } from "./http-discriminator-serializer";
+import { autoserialize, inheritSerialization } from "cerialize";
+import { StarkSerializable } from "../../serialization/index";
 
 class Shape {
-	@autoserialize
-	public uuid: string = "mock-uuid";
+	@autoserialize public uuid: string = "mock-uuid";
 
-	@autoserialize
-	public type: string;
+	@autoserialize public type: string;
 
 	public constructor(type: string) {
 		this.type = type;
@@ -18,11 +16,9 @@ class Shape {
 
 @inheritSerialization(Shape)
 class Rectangle extends Shape {
-	@autoserialize
-	public width: number;
+	@autoserialize public width: number;
 
-	@autoserialize
-	public height: number;
+	@autoserialize public height: number;
 
 	public constructor(w: number, h: number) {
 		super("rectangle");
@@ -33,8 +29,7 @@ class Rectangle extends Shape {
 
 @inheritSerialization(Shape)
 class Circle extends Shape {
-	@autoserialize
-	public radius: number;
+	@autoserialize public radius: number;
 
 	public constructor(r: number) {
 		super("circle");

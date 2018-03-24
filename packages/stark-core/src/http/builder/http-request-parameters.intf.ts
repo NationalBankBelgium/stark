@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkSerializable} from "../../serialization";
+import { StarkSerializable } from "../../serialization";
 
 export interface StarkHttpRequestParams {
 	/**
@@ -34,11 +34,9 @@ export interface StarkHttpRequestParams {
 	serializationType?: StarkSerializable;
 }
 
-export interface StarkHttpCreateRequestParams extends StarkHttpRequestParams {
-}
+export interface StarkHttpCreateRequestParams extends StarkHttpRequestParams {}
 
-export interface StarkHttpGetRequestParams extends StarkHttpRequestParams {
-}
+export interface StarkHttpGetRequestParams extends StarkHttpRequestParams {}
 
 export interface StarkHttpUpdateRequestParams extends StarkHttpRequestParams {
 	/**
@@ -56,8 +54,7 @@ export interface StarkHttpDeleteRequestParams extends StarkHttpRequestParams {
 	force?: boolean;
 }
 
-export interface StarkHttpGetCollectionRequestParams extends StarkHttpRequestParams {
-}
+export interface StarkHttpGetCollectionRequestParams extends StarkHttpRequestParams {}
 
 export interface StarkHttpSearchRequestParams extends StarkHttpRequestParams {
 	/**

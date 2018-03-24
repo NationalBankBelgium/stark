@@ -1,9 +1,9 @@
 "use strict";
 
-import {Deserialize, Serialize} from "cerialize";
-import {StarkHttpSerializer} from "./http-serializer.intf";
-import {StarkResource} from "../entities/index";
-import {StarkSerializable} from "../../serialization/index";
+import { Deserialize, Serialize } from "cerialize";
+import { StarkHttpSerializer } from "./http-serializer.intf";
+import { StarkResource } from "../entities/index";
+import { StarkSerializable } from "../../serialization/index";
 
 /**
  * Implementation of {@link StarkHttpSerializer} which uses the cerialize library behind the hoods.
@@ -12,7 +12,6 @@ import {StarkSerializable} from "../../serialization/index";
  * The class takes optionally a type Serializable in its constructor..
  */
 export class StarkHttpSerializerImpl<T extends StarkResource> implements StarkHttpSerializer<T> {
-
 	/** @internal */
 	protected _type: StarkSerializable | undefined;
 
@@ -35,6 +34,6 @@ export class StarkHttpSerializerImpl<T extends StarkResource> implements StarkHt
 	 * The Serializable type to use for deserialization/serialization.
 	 */
 	protected getType(_rawOrResource?: T | object | string): StarkSerializable | undefined {
-		return (this._type) ? this._type : undefined;
+		return this._type ? this._type : undefined;
 	}
 }

@@ -1,15 +1,13 @@
 "use strict";
 
-import {deserialize} from "cerialize";
+import { deserialize } from "cerialize";
 
-import {StarkSortItem} from "./metadata-sort-item.entity.intf";
+import { StarkSortItem } from "./metadata-sort-item.entity.intf";
 
 export class StarkSortItemImpl implements StarkSortItem {
-	@deserialize
-	public field: string;
+	@deserialize public field: string;
 
-	@deserialize
-	public order: string;
+	@deserialize public order: string;
 
 	public constructor(field: string, order: string) {
 		this.field = field;

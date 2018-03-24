@@ -14,8 +14,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
-const {AngularCompilerPlugin} = require("@ngtools/webpack");
-const {NamedLazyChunksWebpackPlugin} = require("@angular/cli/plugins/webpack");
+const { AngularCompilerPlugin } = require("@ngtools/webpack");
+const { NamedLazyChunksWebpackPlugin } = require("@angular/cli/plugins/webpack");
 const NoEmitOnErrorsPlugin = require("webpack/lib/NoEmitOnErrorsPlugin");
 const WebpackSHAHash = require("webpack-sha-hash");
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
@@ -28,7 +28,7 @@ const buildUtils = require("./build-utils");
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function (options) {
+module.exports = function(options) {
 	const isProd = options.ENV === "production";
 	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
 	const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
@@ -130,11 +130,11 @@ module.exports = function (options) {
 
 				...(METADATA.AOT
 					? [
-						{
-							test: /\.js$/,
-							use: [buildOptimizerLoader]
-						}
-					]
+							{
+								test: /\.js$/,
+								use: [buildOptimizerLoader]
+							}
+						]
 					: []),
 
 				// TsLint loader support for *.ts files
@@ -151,13 +151,13 @@ module.exports = function (options) {
 				// reference: https://github.com/webpack/source-map-loader
 				...(!METADATA.AOT
 					? [
-						{
-							enforce: "pre",
-							test: /\.js$/,
-							use: ["source-map-loader"],
-							exclude: [helpers.root("node_modules/rxjs"), helpers.root("node_modules/@angular")]
-						}
-					]
+							{
+								enforce: "pre",
+								test: /\.js$/,
+								use: ["source-map-loader"],
+								exclude: [helpers.root("node_modules/rxjs"), helpers.root("node_modules/@angular")]
+							}
+						]
 					: []),
 
 				/**
@@ -423,7 +423,7 @@ module.exports = function (options) {
 			new HtmlWebpackPlugin({
 				template: "src/index.html",
 				title: METADATA.title,
-				chunksSortMode: function (a, b) {
+				chunksSortMode: function(a, b) {
 					const entryPoints = ["inline", "polyfills", "sw-register", "styles", "vendor", "main"];
 					return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
 				},
@@ -434,10 +434,10 @@ module.exports = function (options) {
 				// xhtml: true, // TODO: why XHTML?
 				minify: isProd
 					? {
-						caseSensitive: true,
-						collapseWhitespace: true,
-						keepClosingSlash: true
-					}
+							caseSensitive: true,
+							collapseWhitespace: true,
+							keepClosingSlash: true
+						}
 					: false
 			}),
 
@@ -481,7 +481,7 @@ module.exports = function (options) {
 					module: !isProd && METADATA.WATCH ? "commonjs" : "es2015" // TODO is it needed in our case? => Force commonjs module format for TS on dev watch builds.
 				},
 				tsConfigPath: METADATA.tsConfigPath
-			}),
+			})
 
 			/**
 			 * Plugin: InlineManifestWebpackPlugin

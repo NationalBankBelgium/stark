@@ -23,10 +23,7 @@ describe(`Home`, () => {
 				TestBed.configureTestingModule({
 					declarations: [HomeComponent],
 					schemas: [NO_ERRORS_SCHEMA],
-					imports: [
-						HttpClientTestingModule,
-						StarkHttpModule
-					],
+					imports: [HttpClientTestingModule, StarkHttpModule],
 					providers: [AppState, Title]
 				})
 

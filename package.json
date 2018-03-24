@@ -57,7 +57,7 @@
     "lint": "tslint --config tslint.json --project ./tsconfig.json --format codeFrame",
     "lint:stark-core": "cd packages/stark-core && npm run lint && cd ../..",
     "lint:starter": "cd starter && npm run lint && cd ..",
-    "lint:all": "npm run lint:stark-core && npm run lint:starter",
+    "lint:all": "npm run lint && npm run lint:stark-core && npm run lint:starter",
     "postinstall": "npm run postinstall:stark-build && npm run postinstall:stark-testing && npm run postinstall:stark-core && npm run build && npm run update:starter",
     "postinstall:stark-build": "cd packages/stark-build && npm install && cd ../..",
     "postinstall:stark-core": "cd packages/stark-core && npm install && cd ../..",

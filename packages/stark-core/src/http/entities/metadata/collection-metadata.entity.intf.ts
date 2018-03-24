@@ -1,9 +1,9 @@
 "use strict";
 
-import {StarkSortItem} from "./metadata-sort-item.entity.intf";
-import {StarkPaginationMetadata} from "./metadata-pagination.entity.intf";
-import {StarkETags} from "./metadata-etags.entity.intf";
-import {StarkWarnings} from "./metadata-warnings.entity.intf";
+import { StarkSortItem } from "./metadata-sort-item.entity.intf";
+import { StarkPaginationMetadata } from "./metadata-pagination.entity.intf";
+import { StarkETags } from "./metadata-etags.entity.intf";
+import { StarkWarnings } from "./metadata-warnings.entity.intf";
 
 export interface StarkCollectionMetadata extends StarkETags, StarkWarnings {
 	/**

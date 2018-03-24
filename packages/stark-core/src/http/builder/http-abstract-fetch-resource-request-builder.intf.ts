@@ -1,6 +1,6 @@
 "use strict";
-import {StarkLanguage} from "../../configuration/entities/language/index";
-import {StarkSortItem} from "../entities/index";
+import { StarkLanguage } from "../../configuration/entities/language/index";
+import { StarkSortItem } from "../entities/index";
 
 export interface StarkHttpFetchResourceRequestBuilder {
 	/**

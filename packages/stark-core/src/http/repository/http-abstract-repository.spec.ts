@@ -1,8 +1,8 @@
 "use strict";
 
-import {Observable} from "rxjs/Observable";
-import {AbstractStarkHttpRepository} from "./http-abstract-repository";
-import {StarkSerializable} from "../../serialization";
+import { Observable } from "rxjs/Observable";
+import { AbstractStarkHttpRepository } from "./http-abstract-repository";
+import { StarkSerializable } from "../../serialization";
 import {
 	StarkBackend,
 	StarkCollectionResponseWrapper,
@@ -11,11 +11,11 @@ import {
 	StarkResource,
 	StarkSingleItemResponseWrapper
 } from "../entities/index";
-import {StarkHttpService} from "../service/http.service.intf";
-import {StarkLoggingService} from "../../logging";
-import {UnitTestingUtils} from "../../test/unit-testing/index";
-import {StarkHttpRequestBuilderImpl} from "../builder/index";
-import {StarkHttpSerializer, StarkHttpSerializerImpl} from "../serializer/index";
+import { StarkHttpService } from "../service/http.service.intf";
+import { StarkLoggingService } from "../../logging";
+import { UnitTestingUtils } from "../../test/unit-testing/index";
+import { StarkHttpRequestBuilderImpl } from "../builder/index";
+import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 
@@ -37,32 +37,20 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 		mockResourcePath = "mock";
 		mockResource = new MockResource(resourceUuid);
 
-		repository = new AbstractHttpRepositoryTestHelper(
-			mockStarkHttpService,
-			mockLogger,
-			mockBackend,
-			mockResourcePath,
-			mockSerializer
-		);
+		repository = new AbstractHttpRepositoryTestHelper(mockStarkHttpService, mockLogger, mockBackend, mockResourcePath, mockSerializer);
 	});
 
 	describe("on initialization", () => {
 		it("should throw an error in case the backend config is missing", () => {
-			expect(() => new AbstractHttpRepositoryTestHelper(
-				mockStarkHttpService,
-				mockLogger,
-				<any>undefined,
-				mockResourcePath
-			)).toThrowError(/backend/);
+			expect(
+				() => new AbstractHttpRepositoryTestHelper(mockStarkHttpService, mockLogger, <any>undefined, mockResourcePath)
+			).toThrowError(/backend/);
 		});
 
 		it("should throw an error in case the resourcePath is missing", () => {
-			expect(() => new AbstractHttpRepositoryTestHelper(
-				mockStarkHttpService,
-				mockLogger,
-				mockBackend,
-				<any>undefined
-			)).toThrowError(/resourcePath/);
+			expect(() => new AbstractHttpRepositoryTestHelper(mockStarkHttpService, mockLogger, mockBackend, <any>undefined)).toThrowError(
+				/resourcePath/
+			);
 		});
 
 		it("should NOT set the serializer if no serializer is passed in its constructor", () => {
@@ -85,8 +73,8 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.create(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest =
-				(<StarkHttpRequest>(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent().args[0]);
+			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent()
+				.args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.CREATE);
 			expect(starkHttpRequest.item).toBe(mockResource);
 			expect(result).toBe(mockResponse);
@@ -101,8 +89,8 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.update(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest =
-				(<StarkHttpRequest>(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent().args[0]);
+			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent()
+				.args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.UPDATE);
 			expect(starkHttpRequest.item).toBe(mockResource);
 			expect(result).toBe(mockResponse);
@@ -117,8 +105,8 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.delete(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest =
-				(<StarkHttpRequest>(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent().args[0]);
+			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent()
+				.args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.DELETE);
 			expect(starkHttpRequest.item).toBe(mockResource);
 			expect(result).toBe(mockResponse);
@@ -133,8 +121,8 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.get(resourceUuid);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest =
-				(<StarkHttpRequest>(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent().args[0]);
+			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent()
+				.args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.GET);
 			expect(starkHttpRequest.item).toBeUndefined();
 			expect(result).toBe(mockResponse);
@@ -149,8 +137,8 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkCollectionResponseWrapper<MockResource>> = repository.getCollection(10, 0);
 
 			expect(mockStarkHttpService.executeCollectionRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest =
-				(<StarkHttpRequest>(<Spy>mockStarkHttpService.executeCollectionRequest).calls.mostRecent().args[0]);
+			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(<Spy>mockStarkHttpService.executeCollectionRequest).calls.mostRecent()
+				.args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
 			expect(starkHttpRequest.item).toBeUndefined();
 			expect(result).toBe(mockResponse);
@@ -161,13 +149,13 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 		it("should create a search request using the builder and send it to the starkHttpServiceName", () => {
 			const mockResponse: any = {};
 			(<Spy>mockStarkHttpService.executeCollectionRequest).and.returnValue(mockResponse);
-			const mockCriteria: { [key: string]: any } = {field1: "anything", field2: "whatever"};
+			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
 			const result: Observable<StarkCollectionResponseWrapper<MockResource>> = repository.search(mockCriteria, 10, 0);
 
 			expect(mockStarkHttpService.executeCollectionRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest =
-				(<StarkHttpRequest>(<Spy>mockStarkHttpService.executeCollectionRequest).calls.mostRecent().args[0]);
+			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(<Spy>mockStarkHttpService.executeCollectionRequest).calls.mostRecent()
+				.args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.SEARCH);
 			expect(starkHttpRequest.item).toEqual(mockCriteria);
 			expect(result).toBe(mockResponse);
@@ -180,26 +168,44 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const interpolatedResourcePath: string = mockResourcePath + "/" + resourceUuid;
 			expect(repository.getRequestBuilder() instanceof StarkHttpRequestBuilderImpl).toBe(true);
 
-			let request: StarkHttpRequest = repository.getRequestBuilder().create(mockResource).build();
+			let request: StarkHttpRequest = repository
+				.getRequestBuilder()
+				.create(mockResource)
+				.build();
 			// uuid placeholder is not added in a create request (no uuid needed)
 			expect(request.resourcePath).toBe(mockResourcePath);
 
-			request = repository.getRequestBuilder().update(mockResource).build();
+			request = repository
+				.getRequestBuilder()
+				.update(mockResource)
+				.build();
 			expect(request.resourcePath).toBe(interpolatedResourcePath);
 
-			request = repository.getRequestBuilder().delete(mockResource).build();
+			request = repository
+				.getRequestBuilder()
+				.delete(mockResource)
+				.build();
 			expect(request.resourcePath).toBe(interpolatedResourcePath);
 
-			request = repository.getRequestBuilder().get(resourceUuid).build();
+			request = repository
+				.getRequestBuilder()
+				.get(resourceUuid)
+				.build();
 			expect(request.resourcePath).toBe(interpolatedResourcePath);
 
-			request = repository.getRequestBuilder().getCollection(10, 0).build();
+			request = repository
+				.getRequestBuilder()
+				.getCollection(10, 0)
+				.build();
 			// uuid placeholder is not interpolated by default in a getCollection request (no uuid needed)
 			expect(request.resourcePath).toBe(mockResourcePath);
 
-			const mockCriteria: { [key: string]: any } = {field1: "anything", field2: "whatever"};
+			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
-			request = repository.getRequestBuilder().search(mockCriteria, 10, 0).build();
+			request = repository
+				.getRequestBuilder()
+				.search(mockCriteria, 10, 0)
+				.build();
 			// uuid placeholder is not interpolated by default in a search request (no uuid needed)
 			expect(request.resourcePath).toBe(mockResourcePath);
 		});
@@ -208,26 +214,44 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const customResourcePath: string = "/custom/path/:uuid";
 			const interpolatedCustomResourcePath: string = "/custom/path/" + resourceUuid;
 
-			let request: StarkHttpRequest = repository.getRequestBuilder(customResourcePath).create(mockResource).build();
+			let request: StarkHttpRequest = repository
+				.getRequestBuilder(customResourcePath)
+				.create(mockResource)
+				.build();
 			// uuid placeholder is not interpolated by default in a create request (no uuid needed)
 			expect(request.resourcePath).toBe(customResourcePath);
 
-			request = repository.getRequestBuilder(customResourcePath).update(mockResource).build();
+			request = repository
+				.getRequestBuilder(customResourcePath)
+				.update(mockResource)
+				.build();
 			expect(request.resourcePath).toBe(interpolatedCustomResourcePath);
 
-			request = repository.getRequestBuilder(customResourcePath).delete(mockResource).build();
+			request = repository
+				.getRequestBuilder(customResourcePath)
+				.delete(mockResource)
+				.build();
 			expect(request.resourcePath).toBe(interpolatedCustomResourcePath);
 
-			request = repository.getRequestBuilder(customResourcePath).get(resourceUuid).build();
+			request = repository
+				.getRequestBuilder(customResourcePath)
+				.get(resourceUuid)
+				.build();
 			expect(request.resourcePath).toBe(interpolatedCustomResourcePath);
 
-			request = repository.getRequestBuilder(customResourcePath).getCollection(10, 0).build();
+			request = repository
+				.getRequestBuilder(customResourcePath)
+				.getCollection(10, 0)
+				.build();
 			// uuid placeholder is not interpolated by default in a getCollection request (no uuid needed)
 			expect(request.resourcePath).toBe(customResourcePath);
 
-			const mockCriteria: { [key: string]: any } = {field1: "anything", field2: "whatever"};
+			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
-			request = repository.getRequestBuilder(customResourcePath).search(mockCriteria, 10, 0).build();
+			request = repository
+				.getRequestBuilder(customResourcePath)
+				.search(mockCriteria, 10, 0)
+				.build();
 			// uuid placeholder is not interpolated by default in a search request (no uuid needed)
 			expect(request.resourcePath).toBe(customResourcePath);
 		});
@@ -238,24 +262,42 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			expect(repository.serializer).toBe(mockSerializer);
 			expect(repository.type).toBe(MockResource);
 
-			let request: StarkHttpRequest = repository.getRequestBuilder().create(mockResource).build();
+			let request: StarkHttpRequest = repository
+				.getRequestBuilder()
+				.create(mockResource)
+				.build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			request = repository.getRequestBuilder().update(mockResource).build();
+			request = repository
+				.getRequestBuilder()
+				.update(mockResource)
+				.build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			request = repository.getRequestBuilder().delete(mockResource).build();
+			request = repository
+				.getRequestBuilder()
+				.delete(mockResource)
+				.build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			request = repository.getRequestBuilder().get(resourceUuid).build();
+			request = repository
+				.getRequestBuilder()
+				.get(resourceUuid)
+				.build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			request = repository.getRequestBuilder().getCollection(10, 0).build();
+			request = repository
+				.getRequestBuilder()
+				.getCollection(10, 0)
+				.build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			const mockCriteria: { [key: string]: any } = {field1: "anything", field2: "whatever"};
+			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
-			request = repository.getRequestBuilder().search(mockCriteria, 10, 0).build();
+			request = repository
+				.getRequestBuilder()
+				.search(mockCriteria, 10, 0)
+				.build();
 			expect(request.serializer).toBe(repository.serializer);
 		});
 	});
@@ -264,11 +306,13 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 class AbstractHttpRepositoryTestHelper extends AbstractStarkHttpRepository<MockResource> {
 	public serializer: StarkHttpSerializer<MockResource>;
 
-	public constructor(starkHttpService: StarkHttpService<MockResource>,
-					   logger: StarkLoggingService,
-					   backend: StarkBackend,
-					   path: string,
-					   serializer?: StarkHttpSerializer<MockResource>) {
+	public constructor(
+		starkHttpService: StarkHttpService<MockResource>,
+		logger: StarkLoggingService,
+		backend: StarkBackend,
+		path: string,
+		serializer?: StarkHttpSerializer<MockResource>
+	) {
 		super(starkHttpService, logger, backend, path, serializer);
 	}
 

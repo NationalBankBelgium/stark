@@ -3,15 +3,14 @@
 import "rxjs/add/observable/of";
 import "rxjs/add/operator/toPromise";
 
-import {StarkLoggingService, starkLoggingServiceName} from "../..//logging/index";
-import {StarkSessionService, starkSessionServiceName} from "../../session/index";
-import {StarkHttpHeaders, StarkHttpService, starkHttpServiceName} from "../../http/index";
+import { StarkLoggingService, starkLoggingServiceName } from "../..//logging/index";
+import { StarkSessionService, starkSessionServiceName } from "../../session/index";
+import { StarkHttpHeaders, StarkHttpService, starkHttpServiceName } from "../../http/index";
 
 /**
  * Start unit testing utilities.
  */
 export class UnitTestingUtils {
-
 	/**
 	 * Returns a new instance of a mocked StarkLoggingService. It should always return a new instance otherwise all the tests
 	 * would share the same instance including all the customizations made to such instance, causing an unexpected behaviour
@@ -36,10 +35,7 @@ export class UnitTestingUtils {
 	 * and many tests to fail
 	 */
 	public static getMockedHttpService(): StarkHttpService<any> {
-		return jasmine.createSpyObj<StarkHttpService<any>>(starkHttpServiceName, [
-			"executeSingleItemRequest",
-			"executeCollectionRequest"
-		]);
+		return jasmine.createSpyObj<StarkHttpService<any>>(starkHttpServiceName, ["executeSingleItemRequest", "executeCollectionRequest"]);
 	}
 
 	/**

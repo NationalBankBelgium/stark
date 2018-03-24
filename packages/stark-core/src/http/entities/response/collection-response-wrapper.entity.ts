@@ -1,9 +1,9 @@
 "use strict";
 
-import {StarkCollectionResponseWrapper} from "./collection-response-wrapper.entity.intf";
-import {StarkResource} from "../resource.entity.intf";
-import {StarkCollectionMetadata} from "../metadata";
-import {StarkHttpStatusCodes} from "../../enumerators/index";
+import { StarkCollectionResponseWrapper } from "./collection-response-wrapper.entity.intf";
+import { StarkResource } from "../resource.entity.intf";
+import { StarkCollectionMetadata } from "../metadata";
+import { StarkHttpStatusCodes } from "../../enumerators/index";
 
 export class StarkCollectionResponseWrapperImpl<T extends StarkResource> implements StarkCollectionResponseWrapper<T> {
 	/** @internal */
@@ -16,10 +16,12 @@ export class StarkCollectionResponseWrapperImpl<T extends StarkResource> impleme
 	/** @internal */
 	private _metadata: StarkCollectionMetadata;
 
-	public constructor(starkHttpStatusCode: StarkHttpStatusCodes,
-					   starkHttpHeaders: Map<string, string>,
-					   data: T[],
-					   metadata: StarkCollectionMetadata) {
+	public constructor(
+		starkHttpStatusCode: StarkHttpStatusCodes,
+		starkHttpHeaders: Map<string, string>,
+		data: T[],
+		metadata: StarkCollectionMetadata
+	) {
 		this._starkHttpStatusCode = starkHttpStatusCode;
 		this._starkHttpHeaders = starkHttpHeaders;
 		this._data = data;

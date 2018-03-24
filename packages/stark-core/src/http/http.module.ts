@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { StarkHttpServiceImpl, starkHttpServiceName } from "./service/index";
 
 // FIXME: remove this factory once LoggingService and SessionService are implemented
-const starkHttpServiceFactory:any = (httpClient: HttpClient) => {
+const starkHttpServiceFactory: any = (httpClient: HttpClient) => {
 	const logger: any = {
 		debug: console.debug,
 		warn: console.warn,
@@ -12,23 +12,17 @@ const starkHttpServiceFactory:any = (httpClient: HttpClient) => {
 	};
 
 	const sessionService: any = {
-		fakePreAuthenticationHeaders: new Map<string, string>([
-			["nbb-dummy-header", "some value"], ["nbb-another-header", "whatever"]
-		])
+		fakePreAuthenticationHeaders: new Map<string, string>([["nbb-dummy-header", "some value"], ["nbb-another-header", "whatever"]])
 	};
 
-	return new StarkHttpServiceImpl(logger, sessionService, httpClient)
+	return new StarkHttpServiceImpl(logger, sessionService, httpClient);
 };
 
 @NgModule({
-	imports: [
-		HttpClientModule
-	],
+	imports: [HttpClientModule],
 	providers: [
 		// FIXME: replace this Factory provider by a simple Class provider once LoggingService and SessionService are implemented
-		{provide: starkHttpServiceName, useFactory: starkHttpServiceFactory, deps: [HttpClient]},
+		{ provide: starkHttpServiceName, useFactory: starkHttpServiceFactory, deps: [HttpClient] }
 	]
 })
-export class StarkHttpModule {
-
-}
+export class StarkHttpModule {}
