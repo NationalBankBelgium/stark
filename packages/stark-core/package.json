@@ -38,7 +38,9 @@
     "@angular/core": "5.2.9",
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
-    "@nationalbankbelgium/stark-testing": "../stark-testing"
+    "@nationalbankbelgium/stark-build": "../stark-build",
+    "@nationalbankbelgium/stark-testing": "../stark-testing",
+    "tslint": "5.9.1"
   },
   "peerDependencies": {
     "@angular/common": "5.x",
@@ -47,7 +49,10 @@
     "@angular/platform-browser-dynamic": "5.x"
   },
   "scripts": {
+    "lint": "tslint --config tslint.json --project ./tsconfig.json --format codeFrame",
     "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start ./karma.conf.typescript.js",
-    "tsc": "tsc -p tsconfig.json"
+    "test-fast:ci": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start karma.conf.typescript.ci.js",
+    "tsc": "tsc -p tsconfig.json",
+    "tslint": "tslint"
   }
 }

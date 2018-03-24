@@ -1,9 +1,13 @@
 // Helpers
 const helpers = require("./helpers");
 
+// Puppeteer: https://github.com/GoogleChrome/puppeteer/
+// takes care of download Chrome and making it available (can do much more :p)
+process.env.CHROME_BIN = require("puppeteer").executablePath();
+
 // Karma configuration
 // reference: http://karma-runner.github.io/2.0/config/configuration-file.html
-module.exports = function (config) {
+module.exports = function(config) {
 	config.set({
 		// base path that will be used to resolve all patterns (e.g. files, exclude)
 		basePath: "",
@@ -21,7 +25,7 @@ module.exports = function (config) {
 
 		// list of files to exclude
 		exclude: [
-			"src/index.html" // not needed for unit testing 
+			"src/index.html" // not needed for unit testing
 		],
 
 		// preprocess matching files before serving them to the browser
@@ -68,19 +72,21 @@ module.exports = function (config) {
 
 		// start these browsers
 		// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-		browsers: ["ChromeHeadless", "ChromeHeadlessNoSandbox"],
+		browsers: ["ChromeHeadlessNoSandbox"],
 
 		// you can define custom flags
 		customLaunchers: {
 			ChromeHeadlessNoSandbox: {
 				base: "ChromeHeadless",
+				// necessary for travis: https://chromium.googlesource.com/chromium/src/+/master/docs/linux_suid_sandbox_development.md
+				// as it runs in a container-based environment
 				flags: ["--no-sandbox"]
 			}
 		},
 
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
-		singleRun: false,
+		singleRun: true,
 
 		// Timeout settings
 		browserNoActivityTimeout: 30000,

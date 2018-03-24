@@ -1,6 +1,6 @@
-import {StarkSingleItemResponseWrapper} from "./single-item-response-wrapper.entity.intf";
-import {StarkResource} from "../resource.entity.intf";
-import {StarkHttpStatusCodes} from "../../enumerators/index";
+import { StarkSingleItemResponseWrapper } from "./single-item-response-wrapper.entity.intf";
+import { StarkResource } from "../resource.entity.intf";
+import { StarkHttpStatusCodes } from "../../enumerators/index";
 
 export class StarkSingleItemResponseWrapperImpl<T extends StarkResource> implements StarkSingleItemResponseWrapper<T> {
 	/** @internal */
@@ -11,9 +11,7 @@ export class StarkSingleItemResponseWrapperImpl<T extends StarkResource> impleme
 	/** @internal */
 	private _data: T;
 
-	public constructor(starkHttpStatusCode: StarkHttpStatusCodes,
-					   starkHttpHeaders: Map<string, string>,
-					   data: T) {
+	public constructor(starkHttpStatusCode: StarkHttpStatusCodes, starkHttpHeaders: Map<string, string>, data: T) {
 		this._starkHttpStatusCode = starkHttpStatusCode;
 		this._starkHttpHeaders = starkHttpHeaders;
 		this._data = data;

@@ -2,8 +2,6 @@
 
 # TODO
 #===================
-# improve the --packages option
-# -> should update PACKAGES and ALL_PACKAGES -> limit scope of build
 # add banner to all relevant files
 # remove config-stark exclude once gone
 # make sure fonts and images are not touched by addBanners
@@ -11,9 +9,8 @@
 set -u -e -o pipefail
 
 readonly currentDir=$(cd $(dirname $0); pwd)
-# TODO review
-source ${currentDir}/scripts/ci/_travis-fold.sh
 
+source ${currentDir}/scripts/ci/_travis-fold.sh
 source ${currentDir}/build-functions.sh
 
 cd ${currentDir}

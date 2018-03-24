@@ -1,8 +1,8 @@
 "use strict";
 
-import {StarkHttpEchoType} from "../constants";
-import {StarkHttpBaseRequestBuilder} from "./http-abstract-base-request-builder.intf";
-import {StarkResource} from "../entities/resource.entity.intf";
+import { StarkHttpEchoType } from "../constants";
+import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
+import { StarkResource } from "../entities/resource.entity.intf";
 
 export interface StarkHttpCreateRequestBuilder<T extends StarkResource> extends StarkHttpBaseRequestBuilder<T> {
 	/**

@@ -1,7 +1,6 @@
 "use strict";
 
 export class StarkUrlUtil {
-
 	/**
 	 * Extracts all the expected parameters defined in the URL. These are defined by a placeholder like ":paramName".
 	 * @param url - The URL containing the placeholders for URL parameters.
@@ -30,10 +29,13 @@ export class StarkUrlUtil {
 	public static interpolateUrlWithParams(url: string, params: { [param: string]: string }): string {
 		const expectedParams: string[] = StarkUrlUtil.parseUrlParams(url);
 		for (const param of Object.keys(params)) {
-			if (params[param]) { // only if the value is not undefined/null
+			if (params[param]) {
+				// only if the value is not undefined/null
 				const expected: string | undefined = expectedParams.find((findExpected: string) => findExpected === param);
 				if (!expected) {
-					throw new Error("StarkUrlUtil: Passing a param ( " + param + ") that is not in the url (expected " + expectedParams + "} )");
+					throw new Error(
+						"StarkUrlUtil: Passing a param ( " + param + ") that is not in the url (expected " + expectedParams + "} )"
+					);
 				} else {
 					url = url.replace(":" + param, () => params[param]);
 					expectedParams.splice(expectedParams.indexOf(expected), 1);

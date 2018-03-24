@@ -1,11 +1,11 @@
 "use strict";
 
-import {StarkHttpCreateRequestBuilder} from "./http-create-request-builder.intf";
-import {StarkHttpDeleteRequestBuilder} from "./http-delete-request-builder.intf";
-import {StarkHttpGetRequestBuilder} from "./http-get-request-builder.intf";
-import {StarkHttpGetCollectionRequestBuilder} from "./http-get-collection-request-builder.intf";
-import {StarkHttpSearchRequestBuilder} from "./http-search-request-builder.intf";
-import {StarkHttpUpdateRequestBuilder} from "./http-update-request-builder.intf";
+import { StarkHttpCreateRequestBuilder } from "./http-create-request-builder.intf";
+import { StarkHttpDeleteRequestBuilder } from "./http-delete-request-builder.intf";
+import { StarkHttpGetRequestBuilder } from "./http-get-request-builder.intf";
+import { StarkHttpGetCollectionRequestBuilder } from "./http-get-collection-request-builder.intf";
+import { StarkHttpSearchRequestBuilder } from "./http-search-request-builder.intf";
+import { StarkHttpUpdateRequestBuilder } from "./http-update-request-builder.intf";
 import {
 	StarkHttpCreateRequestParams,
 	StarkHttpDeleteRequestParams,
@@ -14,7 +14,7 @@ import {
 	StarkHttpSearchRequestParams,
 	StarkHttpUpdateRequestParams
 } from "./http-request-parameters.intf";
-import {StarkResource} from "../entities/resource.entity.intf";
+import { StarkResource } from "../entities/resource.entity.intf";
 
 /**
  * Stark Http Request Builder
@@ -60,9 +60,7 @@ export interface StarkHttpRequestBuilder<T extends StarkResource> {
 	 * @param params - Object containing additional parameters to construct the request to be sent
 	 * @returns StarkHttpGetCollectionRequestBuilder instance
 	 */
-	getCollection(limit: number,
-				  offset: number,
-				  params?: StarkHttpGetCollectionRequestParams): StarkHttpGetCollectionRequestBuilder<T>;
+	getCollection(limit: number, offset: number, params?: StarkHttpGetCollectionRequestParams): StarkHttpGetCollectionRequestBuilder<T>;
 
 	/**
 	 * Gets an instance of a suitable builder to perform a Search request. Similar to a GetCollection request but the search
@@ -73,8 +71,10 @@ export interface StarkHttpRequestBuilder<T extends StarkResource> {
 	 * @param params - Object containing additional parameters to construct the request to be sent
 	 * @returns StarkHttpSearchRequestBuilder instance
 	 */
-	search(criteria: { [param: string]: string } | object,
-		   limit: number,
-		   offset: number,
-		   params?: StarkHttpSearchRequestParams): StarkHttpSearchRequestBuilder<T>;
+	search(
+		criteria: { [param: string]: string } | object,
+		limit: number,
+		offset: number,
+		params?: StarkHttpSearchRequestParams
+	): StarkHttpSearchRequestBuilder<T>;
 }

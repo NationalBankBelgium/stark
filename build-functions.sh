@@ -108,7 +108,7 @@ runRollup() {
   	logTrace "${FUNCNAME[0]}: Rollup configuration file found at $ROLLUP_CONFIG_PATH" 2
     cd ${1}
     logTrace "${FUNCNAME[0]}: Rollup command: $ROLLUP -c $ROLLUP_CONFIG_PATH" 2
-    local ROLLUP_RESULTS=$($ROLLUP -c rollup.config.js 2>&1) # >/dev/null 2>&1
+    local ROLLUP_RESULTS=$($ROLLUP -c rollup.config.js > /dev/null 2>&1)
     cd - > /dev/null
 	logTrace "${FUNCNAME[0]}: Rollup execution output: $ROLLUP_RESULTS" 2
 	logTrace "${FUNCNAME[0]}: Rollup completed" 2

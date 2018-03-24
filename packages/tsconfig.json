@@ -10,7 +10,7 @@
       "@nationalbankbelgium/stark-*": ["./*"]
     },
     "skipDefaultLibCheck": true,
-    "typeRoots": [
+    "typeRoots": [
       "./stark-build/node_modules/@types",
       "./stark-core/node_modules/@types",
       "./stark-testing/node_modules/@types",

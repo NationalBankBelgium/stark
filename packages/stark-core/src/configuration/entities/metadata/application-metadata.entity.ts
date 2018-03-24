@@ -1,12 +1,12 @@
 "use strict";
 
-import {ArrayNotEmpty, IsDefined, IsNotEmpty, IsString, ValidateNested} from "class-validator";
-import {autoserialize} from "cerialize";
+import { ArrayNotEmpty, IsDefined, IsNotEmpty, IsString, ValidateNested } from "class-validator";
+import { autoserialize } from "cerialize";
 
-import {StarkApplicationMetadata} from "./application-metadata.entity.intf";
-import {StarkLanguageImpl} from "../language/index";
-import {StarkLanguage} from "../language/language.entity.intf";
-import {StarkLanguages} from "../language/language.constants";
+import { StarkApplicationMetadata } from "./application-metadata.entity.intf";
+import { StarkLanguageImpl } from "../language/index";
+import { StarkLanguage } from "../language/language.entity.intf";
+import { StarkLanguages } from "../language/language.constants";
 
 export class StarkApplicationMetadataImpl implements StarkApplicationMetadata {
 	@IsNotEmpty()
@@ -41,7 +41,7 @@ export class StarkApplicationMetadataImpl implements StarkApplicationMetadata {
 
 	@IsDefined()
 	@ArrayNotEmpty()
-	@ValidateNested({each: true}) // validate each item of the array
+	@ValidateNested({ each: true }) // validate each item of the array
 	public supportedLanguages: StarkLanguageImpl[] = [];
 
 	/**

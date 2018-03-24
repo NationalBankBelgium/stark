@@ -80,11 +80,7 @@
       }
     ],
     "unified-signatures": true,
-    "ban": [
-      true,
-      "window",
-      "eval"
-    ],
+    "ban": [true, "window", "eval"],
     "curly": true,
     "forin": true,
     "label-position": true,

@@ -1,5 +1,5 @@
 "use strict";
-import {StarkLanguage} from "./language.entity.intf";
+import { StarkLanguage } from "./language.entity.intf";
 
 export class StarkLanguages {
 	public static EN_US: StarkLanguage = {

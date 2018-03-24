@@ -1,6 +1,6 @@
 "use strict";
 
-import {StarkBackendAuthenticationTypes} from "./backend-authentication-types";
+import { StarkBackendAuthenticationTypes } from "./backend-authentication-types";
 
 /**
  * Description of a back-end that the application interacts with.

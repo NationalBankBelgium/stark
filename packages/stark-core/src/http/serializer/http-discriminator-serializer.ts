@@ -1,8 +1,8 @@
 "use strict";
 
-import {StarkHttpSerializerImpl} from "./http-serializer";
-import {StarkResource} from "../entities/index";
-import {StarkSerializable} from "../../serialization/index";
+import { StarkHttpSerializerImpl } from "./http-serializer";
+import { StarkResource } from "../entities/index";
+import { StarkSerializable } from "../../serialization/index";
 
 /**
  * Implementation of {@link StarkHttpSerializer}.
@@ -18,8 +18,7 @@ export class StarkHttpDiscriminatorSerializer<T extends StarkResource> extends S
 	 * @param discriminatorProperty - The discriminator property
 	 * @param typesMap - Map of types based on the discriminator property value
 	 */
-	public constructor(discriminatorProperty: string,
-					   typesMap: Map<any, StarkSerializable>) {
+	public constructor(discriminatorProperty: string, typesMap: Map<any, StarkSerializable>) {
 		super();
 		this.discriminatorProperty = discriminatorProperty;
 		this.typesMap = typesMap;

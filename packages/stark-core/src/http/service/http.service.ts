@@ -50,9 +50,11 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	private httpClient: HttpClient;
 
 	// FIXME: uncomment these lines once LoggingService and SessionService are implemented
-	public constructor(/*@Inject(starkLoggingServiceName)*/ logger: StarkLoggingService,
-					   /*@Inject(starkSessionServiceName)*/ sessionService: StarkSessionService,
-					   httpClient: HttpClient) {
+	public constructor(
+		/*@Inject(starkLoggingServiceName)*/ logger: StarkLoggingService,
+		/*@Inject(starkSessionServiceName)*/ sessionService: StarkSessionService,
+		httpClient: HttpClient
+	) {
 		this.logger = logger;
 		this.sessionService = sessionService;
 		this.httpClient = httpClient;
@@ -98,8 +100,12 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		if (httpResponse$) {
 			return this.getSingleItemResponseWrapperObservable(httpResponse$, request);
 		} else {
-			return Observable.throw("Unknown request type encountered " + request.requestType + ". For collection requests, " +
-				"call the executeCollectionRequest method");
+			return Observable.throw(
+				"Unknown request type encountered " +
+					request.requestType +
+					". For collection requests, " +
+					"call the executeCollectionRequest method"
+			);
 		}
 	}
 
@@ -132,8 +138,12 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			return this.getCollectionResponseWrapperObservable(httpResponse$, request);
 		} else {
 			// we return directly here because otherwise compilation fails (can't assign the ErrorObservable type to Subject)
-			return Observable.throw("Unknown request type encountered " + request.requestType + ". For single requests (no " +
-				"collection), call the executeSingleItemRequest method");
+			return Observable.throw(
+				"Unknown request type encountered " +
+					request.requestType +
+					". For single requests (no " +
+					"collection), call the executeSingleItemRequest method"
+			);
 		}
 	}
 
@@ -230,39 +240,30 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	}
 
 	private performDeleteRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<P>> {
-		return this.httpClient.delete<P>(
-			request.backend.url + "/" + request.resourcePath,
-			{
-				params: this.convertMapIntoObject(request.queryParameters),
-				headers: this.convertMapIntoObject(request.headers),
-				observe: "response", // full response, not only the body
-				responseType: "json" // body as JSON
-			}
-		);
+		return this.httpClient.delete<P>(request.backend.url + "/" + request.resourcePath, {
+			params: this.convertMapIntoObject(request.queryParameters),
+			headers: this.convertMapIntoObject(request.headers),
+			observe: "response", // full response, not only the body
+			responseType: "json" // body as JSON
+		});
 	}
 
 	private performGetRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<P>> {
-		return this.httpClient.get<P>(
-			request.backend.url + "/" + request.resourcePath,
-			{
-				params: this.convertMapIntoObject(request.queryParameters),
-				headers: this.convertMapIntoObject(request.headers),
-				observe: "response", // full response, not only the body
-				responseType: "json" // body as JSON
-			}
-		);
+		return this.httpClient.get<P>(request.backend.url + "/" + request.resourcePath, {
+			params: this.convertMapIntoObject(request.queryParameters),
+			headers: this.convertMapIntoObject(request.headers),
+			observe: "response", // full response, not only the body
+			responseType: "json" // body as JSON
+		});
 	}
 
 	private performGetCollectionRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>> {
-		return this.httpClient.get<StarkHttpRawCollectionResponseData<P>>(
-			request.backend.url + "/" + request.resourcePath,
-			{
-				params: this.convertMapIntoObject(request.queryParameters),
-				headers: this.convertMapIntoObject(request.headers),
-				observe: "response", // full response, not only the body
-				responseType: "json" // body as JSON
-			}
-		);
+		return this.httpClient.get<StarkHttpRawCollectionResponseData<P>>(request.backend.url + "/" + request.resourcePath, {
+			params: this.convertMapIntoObject(request.queryParameters),
+			headers: this.convertMapIntoObject(request.headers),
+			observe: "response", // full response, not only the body
+			responseType: "json" // body as JSON
+		});
 	}
 
 	private performSearchRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>> {
@@ -299,8 +300,10 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		return httpResponseHeaders;
 	}
 
-	private getSingleItemResponseWrapperObservable(httpResponse$: Observable<HttpResponse<P>>,
-												   request: StarkHttpRequest<P>): Observable<StarkSingleItemResponseWrapper<P>> {
+	private getSingleItemResponseWrapperObservable(
+		httpResponse$: Observable<HttpResponse<P>>,
+		request: StarkHttpRequest<P>
+	): Observable<StarkSingleItemResponseWrapper<P>> {
 		const retryCount: number = request.retryCount || 0;
 
 		if (retryCount > 0) {
@@ -316,27 +319,20 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 					resource.etag = <any>result.headers.get(StarkHttpHeaders.ETAG);
 				}
 
-				return new StarkSingleItemResponseWrapperImpl<P>(
-					result.status,
-					httpResponseHeaders,
-					resource
-				);
+				return new StarkSingleItemResponseWrapperImpl<P>(result.status, httpResponseHeaders, resource);
 			})
 			.catch((result: HttpResponse<P>) => {
 				const httpError: StarkHttpError = Deserialize(result.body, StarkHttpErrorImpl);
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
 
-				return Observable.throw(new StarkHttpErrorWrapperImpl(
-					result.status,
-					httpResponseHeaders,
-					httpError
-				));
+				return Observable.throw(new StarkHttpErrorWrapperImpl(result.status, httpResponseHeaders, httpError));
 			});
 	}
 
-	private getCollectionResponseWrapperObservable(httpResponse$: Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>>,
-												   request: StarkHttpRequest<P>): Observable<StarkCollectionResponseWrapper<P>> {
-
+	private getCollectionResponseWrapperObservable(
+		httpResponse$: Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>>,
+		request: StarkHttpRequest<P>
+	): Observable<StarkCollectionResponseWrapper<P>> {
 		const retryCount: number = request.retryCount || 0;
 
 		if (retryCount > 0) {
@@ -353,7 +349,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 								if (typeof item === "object") {
 									if (item.uuid) {
 										if ((<object>(<StarkHttpRawCollectionResponseData<P>>result.body).metadata.etags)[item.uuid]) {
-											item.etag = (<object>(<StarkHttpRawCollectionResponseData<P>>result.body).metadata.etags)[item.uuid];
+											item.etag = (<object>(<StarkHttpRawCollectionResponseData<P>>result.body).metadata.etags)[
+												item.uuid
+											];
 										} else {
 											this.logger.warn(starkHttpServiceName + ": no etag found for resource with uuid ", item.uuid);
 										}
@@ -361,7 +359,12 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 										this.logger.warn(starkHttpServiceName + ": no 'uuid' property found in item ", item);
 									}
 								} else {
-									this.logger.warn(starkHttpServiceName + ": cannot set the etag property in the item '" + item + "' because it is not an object");
+									this.logger.warn(
+										starkHttpServiceName +
+											": cannot set the etag property in the item '" +
+											item +
+											"' because it is not an object"
+									);
 								}
 							}
 						} else {
@@ -385,37 +388,33 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 				const httpError: StarkHttpError = Deserialize(result.body, StarkHttpErrorImpl);
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
 
-				return Observable.throw(new StarkHttpErrorWrapperImpl(
-					result.status,
-					httpResponseHeaders,
-					httpError
-				));
+				return Observable.throw(new StarkHttpErrorWrapperImpl(result.status, httpResponseHeaders, httpError));
 			});
 	}
 
-	private addRetryLogic<R>(httpResponse$: Observable<HttpResponse<R>>,
-							 retryCount: number): Observable<HttpResponse<R>> {
-		return httpResponse$
-			.retryWhen((errors: Observable<any>) => {
-				let retries: number = 0;
-				return errors.mergeMap((error: HttpResponse<P>) => {
-					if (retries < retryCount) {
-						retries++;
-						return Observable.timer(this.retryDelay);
-					} else {
-						return Observable.throw(error);
-					}
-				});
+	private addRetryLogic<R>(httpResponse$: Observable<HttpResponse<R>>, retryCount: number): Observable<HttpResponse<R>> {
+		return httpResponse$.retryWhen((errors: Observable<any>) => {
+			let retries: number = 0;
+			return errors.mergeMap((error: HttpResponse<P>) => {
+				if (retries < retryCount) {
+					retries++;
+					return Observable.timer(this.retryDelay);
+				} else {
+					return Observable.throw(error);
+				}
 			});
+		});
 	}
 
 	private serialize(entity: P, request: StarkHttpRequest<P>): string | object {
 		return request.serializer.serialize(entity, request);
 	}
 
-	private deserialize(rawEntity: string | object,
-						request: StarkHttpRequest<P>,
-						response: HttpResponse<P | StarkHttpRawCollectionResponseData<P>>): P {
+	private deserialize(
+		rawEntity: string | object,
+		request: StarkHttpRequest<P>,
+		response: HttpResponse<P | StarkHttpRawCollectionResponseData<P>>
+	): P {
 		return request.serializer.deserialize(rawEntity, request, response);
 	}
 }

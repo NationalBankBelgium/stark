@@ -1,15 +1,14 @@
 "use strict";
 
-import {StarkLanguage} from "../../configuration/entities/language/index";
-import {StarkSortItem} from "../entities/metadata/index";
-import {StarkHttpHeaders, StarkHttpQueryParameters} from "../constants/index";
-import {StarkHttpFetchResourceRequestBuilder} from "./http-abstract-fetch-resource-request-builder.intf";
-import {StarkAbstractHttpBaseRequestBuilder} from "./http-abstract-base-request-builder";
-import {StarkResource} from "../entities/resource.entity.intf";
+import { StarkLanguage } from "../../configuration/entities/language/index";
+import { StarkSortItem } from "../entities/metadata/index";
+import { StarkHttpHeaders, StarkHttpQueryParameters } from "../constants/index";
+import { StarkHttpFetchResourceRequestBuilder } from "./http-abstract-fetch-resource-request-builder.intf";
+import { StarkAbstractHttpBaseRequestBuilder } from "./http-abstract-base-request-builder";
+import { StarkResource } from "../entities/resource.entity.intf";
 
 export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpFetchResourceRequestBuilder {
-
 	public addAcceptedLanguage(...languages: StarkLanguage[]): this {
 		let languageHeaders: string = "";
 		let queryParameters: string = "";
@@ -43,10 +42,11 @@ export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends Sta
 	}
 
 	public addFilterByInclude(...fields: string[]): this {
-		if (this.request.queryParameters && this.request.queryParameters.has(StarkHttpQueryParameters.FIELDS)
-		) {
-			this.addQueryParameter(StarkHttpQueryParameters.FIELDS,
-				this.request.queryParameters.get(StarkHttpQueryParameters.FIELDS) + "," + fields.join(","));
+		if (this.request.queryParameters && this.request.queryParameters.has(StarkHttpQueryParameters.FIELDS)) {
+			this.addQueryParameter(
+				StarkHttpQueryParameters.FIELDS,
+				this.request.queryParameters.get(StarkHttpQueryParameters.FIELDS) + "," + fields.join(",")
+			);
 		} else {
 			this.addQueryParameter(StarkHttpQueryParameters.FIELDS, fields.join(","));
 		}
@@ -59,14 +59,15 @@ export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends Sta
 	}
 
 	public addSortBy(...sortItems: StarkSortItem[]): this {
-		if (this.request.queryParameters && this.request.queryParameters.has(StarkHttpQueryParameters.SORT)
-		) {
-			this.addQueryParameter(StarkHttpQueryParameters.SORT,
-				this.request.queryParameters.get(StarkHttpQueryParameters.SORT) + "," +
-				sortItems.map((sortBy: StarkSortItem) => sortBy.sortValue).join(","));
+		if (this.request.queryParameters && this.request.queryParameters.has(StarkHttpQueryParameters.SORT)) {
+			this.addQueryParameter(
+				StarkHttpQueryParameters.SORT,
+				this.request.queryParameters.get(StarkHttpQueryParameters.SORT) +
+					"," +
+					sortItems.map((sortBy: StarkSortItem) => sortBy.sortValue).join(",")
+			);
 		} else {
-			this.addQueryParameter(StarkHttpQueryParameters.SORT,
-				sortItems.map((sortBy: StarkSortItem) => sortBy.sortValue).join(","));
+			this.addQueryParameter(StarkHttpQueryParameters.SORT, sortItems.map((sortBy: StarkSortItem) => sortBy.sortValue).join(","));
 		}
 		return this;
 	}
