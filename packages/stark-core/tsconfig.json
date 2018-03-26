@@ -29,7 +29,7 @@
     "allowEmptyCodegenFiles": false,
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
-    //    "flatModuleOutFile": "stark-core.js",
+    "flatModuleOutFile": "stark-core.js",
     "flatModuleId": "@nationalbankbelgium/stark-core"
   }
 }

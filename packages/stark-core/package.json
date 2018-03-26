@@ -26,10 +26,11 @@
     "npm": ">=5.3.0"
   },
   "dependencies": {
+    "@ngrx/store": "5.2.0",
     "@types/core-js": "0.9.46",
+    "@types/jasmine": "2.8.6",
     "@types/node": "6.0.102",
     "@types/uuid": "3.4.3",
-    "@ngrx/store": "5.2.0",
     "cerialize": "0.1.18",
     "class-validator": "0.7.3",
     "core-js": "2.5.3",
@@ -57,6 +58,7 @@
     "@angular/platform-browser-dynamic": "5.x"
   },
   "scripts": {
+    "ngc": "ngc",
     "lint": "tslint --config tslint.json --project ./tsconfig.json --format codeFrame",
     "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start ./karma.conf.typescript.js",
     "test-fast:ci": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start karma.conf.typescript.ci.js",

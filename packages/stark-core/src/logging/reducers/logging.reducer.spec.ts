@@ -25,15 +25,6 @@ describe("Reducer: LoggingReducer", () => {
 			expect(initialState.messages.length).toBe(2);
 
 			deepFreeze(initialState); //Enforce immutability
-			// const payload: any = { message: new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", "") };
-			// deepFreeze(payload); //Enforce immutability
-			//
-			// // Send the LOG_MESSAGE action to the loggingReducer
-			// const changedState: StarkLogging = loggingReducer(initialState, {
-			// 	type: StarkLoggingActions.LOG_MESSAGE,
-			// 	payload
-			// });
-
 			const changedState: StarkLogging = loggingReducer(
 				initialState,
 				new LogMessage(new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", ""))
@@ -46,14 +37,6 @@ describe("Reducer: LoggingReducer", () => {
 		});
 
 		it("should add the given messages to the array even if the state is not defined", () => {
-			// const payload: any = { message: new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", "") };
-			// deepFreeze(payload); //Enforce immutability
-			//
-			// // Send the LOG_MESSAGE action to the loggingReducer
-			// const changedState: StarkLogging = loggingReducer(<any>undefined, {
-			// 	type: StarkLoggingActions.LOG_MESSAGE,
-			// 	payload
-			// });
 			const changedState: StarkLogging = loggingReducer(
 				<any>undefined,
 				new LogMessage(new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", ""))
@@ -79,14 +62,6 @@ describe("Reducer: LoggingReducer", () => {
 			expect(initialState.messages.length).toBe(5);
 
 			deepFreeze(initialState); //Enforce immutability
-			// const payload: any = { numberOfMessagesToFlush: 3 };
-			// deepFreeze(payload); //Enforce immutability
-			//
-			// // Send the FLUSH_LOG action to the loggingReducer
-			// const changedState: StarkLogging = loggingReducer(initialState, {
-			// 	type: StarkLoggingActions.FLUSH_LOG,
-			// 	payload
-			// });
 			const changedState: StarkLogging = loggingReducer(initialState, new FlushLogMessages(3));
 
 			expect(changedState.messages.length).toBe(2);
@@ -102,46 +77,14 @@ describe("Reducer: LoggingReducer", () => {
 			initialState.applicationId = "whatever";
 
 			deepFreeze(initialState); //Enforce immutability
-			// const payload: any = { applicationId: "new appID" };
-			// deepFreeze(payload); //Enforce immutability
-
-			// Send the LOGGING_SET_APPLICATION_ID action to the loggingReducer
-			// const changedState: StarkLogging = loggingReducer(initialState, {
-			// 	type: StarkLoggingActions.LOGGING_SET_APPLICATION_ID,
-			// 	payload
-			// });
 			const changedState: StarkLogging = loggingReducer(initialState, new SetApplicationId("new appID"));
 
 			expect(changedState.applicationId).toBe("new appID");
 		});
 		it("should set the application id even if the state is not defined", () => {
-			// const payload: any = { applicationId: "new appID" };
-			// deepFreeze(payload); //Enforce immutability
-			//
-			// // Send the LOGGING_SET_APPLICATION_ID action to the loggingReducer
-			// const changedState: StarkLogging = loggingReducer(<any>undefined, {
-			// 	type: StarkLoggingActions.LOGGING_SET_APPLICATION_ID,
-			// 	payload
-			// });
 			const changedState: StarkLogging = loggingReducer(<any>undefined, new SetApplicationId("new appID"));
 
 			expect(changedState.applicationId).toBe("new appID");
 		});
 	});
-
-	// describe("on any other Action", () => {
-	// 	it("should invoke the default state", () => {
-	// 		const initialState: StarkLogging = starkLogging;
-	// 		deepFreeze(initialState); //Enforce immutability
-	//
-	// 		// Send the MOCK_ACTION action to the loggingReducer
-	// 		const changedState: StarkLogging = loggingReducer(initialState, {
-	// 			type: "MOCK_ACTION"
-	// 		});
-	//
-	// 		loggingReducer
-	//
-	// 		expect(changedState).toBe(initialState);
-	// 	});
-	// });
 });

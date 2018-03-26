@@ -1,6 +1,6 @@
 "use strict";
 
-import * as moment from "moment";
+import moment from "moment";
 import { autoserialize, autoserializeAs } from "cerialize";
 import { StarkLogMessageType } from "./log-message-type.entity";
 import { StarkLogMessage } from "./log-message.entity.intf";
