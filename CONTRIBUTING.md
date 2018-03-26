@@ -78,9 +78,8 @@ TODO add project structure details
 If you want to build Stark from source, you need to...
 * install NodeJS (6.0.0+) and npm (5.3.0+)
 * clone this git repository: `git clone https://github.com/NationalBankBelgium/stark.git`
-* run `npm install` from the root directory of Stark 
-
-Executing `npm install` at the root will also install and build all Stark packages.
+* run `npm install` from the root directory of Stark
+* run `npm run install:all` from the root directory of Stark (this command will also install and build all Stark packages)
 
 ### Executing Stark's main build script
 Anytime you make modifications to a Stark package (e.g., stark-build, stark-core, ...), you'll need to

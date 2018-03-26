@@ -85,8 +85,8 @@ module.exports = function(config) {
 
 		remapCoverageReporter: {
 			"text-summary": null,
-			json: "./coverage/coverage.json",
-			html: "./coverage/html"
+			json: "./reports/coverage/coverage.json",
+			html: "./reports/coverage/html"
 		},
 
 		/**

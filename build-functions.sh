@@ -81,13 +81,13 @@ syncFiles() {
 #   Boolean
 #######################################
 isIgnoredDirectory() {
-  logTrace "${FUNCNAME[0]}: Checking for ${1}" 1
+  #logTrace "${FUNCNAME[0]}: Checking for ${1}" 1
   name=$(basename ${1})
-  if [[ -f "${1}" || "${name}" == "src" || "${name}" == "test" || "${name}" == "integrationtest" ]]; then
-    logTrace "No" 1
+  if [[ -f "${1}" || "${name}" == "src" || "${name}" == "test" || "${name}" == "integrationtest" || "${name}" == "reports" ]]; then
+    #logTrace "No" 1
     return 0
   else
-    logTrace "Yes" 1
+    #logTrace "Yes" 1
     return 1
   fi
 }
@@ -108,7 +108,7 @@ runRollup() {
   	logTrace "${FUNCNAME[0]}: Rollup configuration file found at $ROLLUP_CONFIG_PATH" 2
     cd ${1}
     logTrace "${FUNCNAME[0]}: Rollup command: $ROLLUP -c $ROLLUP_CONFIG_PATH" 2
-    local ROLLUP_RESULTS=$($ROLLUP -c rollup.config.js > /dev/null 2>&1)
+    local ROLLUP_RESULTS=`$ROLLUP -c $ROLLUP_CONFIG_PATH 2>&1`
     cd - > /dev/null
 	logTrace "${FUNCNAME[0]}: Rollup execution output: $ROLLUP_RESULTS" 2
 	logTrace "${FUNCNAME[0]}: Rollup completed" 2
@@ -143,26 +143,36 @@ containsElement () {
 #   param1 - Base source folder
 #   param2 - Destination directory
 #   param3 - Package name
-#   param4 - Is sub directory
+#   param4 - Rollup default config location
+#   param5 - Is sub directory (optional)
+
 # Returns:
 #   None
 #######################################
 rollupIndex() {
   logTrace "${FUNCNAME[0]}" 1
-  logDebug "Rolling up index files recursively. Base source folder: $1. Destination directory: $2. Package name: $3. Is sub dir? ${4:-NO}" 1
+  logDebug "Rolling up index files recursively" 1
+  logTrace "Base source folder: $1. Destination directory: $2. Package name: $3. Is sub dir? ${5:-NO}" 1
   # Iterate over the files in this directory, rolling up each into ${2} directory
   in_file="${1}/${3}.js"
-  if [ ${4:-} ]; then
+  if [ ${5:-} ]; then
     out_file="$(dropLast ${2})/${3}.js"
   else
     out_file="${2}/${3}.js"
   fi
+  local ROLLUP_CONFIG_PATH=$4
   
-  # TODO pass LICENSE_BANNER as a param
+  # TODO pass LICENSE_BANNER as a param to the function
   BANNER_TEXT=`cat ${LICENSE_BANNER}`
   if [[ -f ${in_file} ]]; then
-    logTrace "Executing rollup with $ROLLUP -i ${in_file} -o ${out_file} --sourcemap -f es --banner \"$BANNER_TEXT\" >/dev/null 2>&1" 2
-    $ROLLUP -i ${in_file} -o ${out_file} --sourcemap -f es --banner "$BANNER_TEXT" >/dev/null 2>&1
+    logTrace "Executing rollup with $ROLLUP -c ${ROLLUP_CONFIG_PATH} -i ${in_file} -o ${out_file} --banner \"$BANNER_TEXT\" 2>&1" 2
+    
+    # If this execution of rollup ends up with warnings like "(!) Unresolved dependencies..."
+    # Then adapt rollup.config.common-data.js in order to include the missing globals!
+    # Note that this execution of rollup MUST NOT include globals/external libs like rxjs, angular, ...
+    # For this usage scenario, the client app is supposed to import those dependencies on their own (e.g., script tag above on the page)
+    local ROLLUP_RESULTS=`$ROLLUP -c ${ROLLUP_CONFIG_PATH} -i ${in_file} -o ${out_file} --banner "$BANNER_TEXT" 2>&1`
+    logTrace "${FUNCNAME[0]}: Rollup execution output (do not mind the unresolved dependencies!): $ROLLUP_RESULTS" 2
   fi
 
   # Recurse for sub directories
@@ -171,7 +181,7 @@ rollupIndex() {
     isIgnoredDirectory ${DIR} && continue
     local regex=".+/(.+)/${sub_package}.js"
     if [[ "${DIR}/${sub_package}.js" =~ $regex ]]; then
-      rollupIndex ${DIR} ${2}/${BASH_REMATCH[1]} ${sub_package} true
+      rollupIndex ${DIR} ${2}/${BASH_REMATCH[1]} ${sub_package} ${ROLLUP_CONFIG_PATH} true
     fi
   done
 }
@@ -337,7 +347,9 @@ updateVersionReferences() {
   local NPM_DIR="$2"
   (
     cd ${NPM_DIR}
-    perl -p -i -e "s/0\.0\.0\-PLACEHOLDER\-VERSION/$1/g" $(grep -ril 0\.0\.0\-PLACEHOLDER\-VERSION .) < /dev/null 2> /dev/null
+    
+    local PATTERN="0\.0\.0\-PLACEHOLDER\-VERSION"
+    perl -p -i -e "s/$PATTERN/$1/g" ./package.json
   )
 }
 
@@ -354,7 +366,9 @@ updatePackageNameReferences() {
   local NPM_DIR="$2"
   (
     cd ${NPM_DIR}
-    perl -p -i -e "s/PLACEHOLDER\-PACKAGE\-NAME/${1}/g" $(grep -ril PLACEHOLDER\-PACKAGE\-NAME .) < /dev/null 2> /dev/null
+    
+    local PATTERN="PLACEHOLDER\-PACKAGE\-NAME"
+    perl -p -i -e "s/$PATTERN/$1/g" ./package.json
   )
 }
 
@@ -421,11 +435,63 @@ adaptNpmPackageDependencies() {
   local TGZ_PATH="file:${PATH_PARENT}dist\/packages-dist\/$PACKAGE\/nationalbankbelgium-$PACKAGE-$VERSION.tgz"
   logTrace "TGZ path: $TGZ_PATH"
   
-  local NEWVALUE="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\\"$TGZ_PATH\\\""
+  local PATTERN="\"\@nationalbankbelgium\/$PACKAGE\"\s*\:\s*\".*\""
+  local REPLACEMENT="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\\"$TGZ_PATH\\\""
   
   # Packages will have dependencies between them. They will so have "devDependencies" and "peerDependencies" with different values.
   # We should only replace the value of the devDependency for make it work.
-  perl -p -i -e "s/\"\@nationalbankbelgium\/$PACKAGE\"\s*\:\s*\".*\"/$NEWVALUE/" $PACKAGE_JSON_FILE 2> /dev/null
+
+  perl -p -i -e "s/$PATTERN/$REPLACEMENT/" $PACKAGE_JSON_FILE
+}
+
+#######################################
+# Update a package-lock.json file's dependencies version for the given stark package
+# Arguments:
+#   param1 - name of the stark package
+#   param2 - version of stark to set
+#   param3 - path to the package-lock.json file to adapt
+#   param4 - sub level of the package to adapt
+# Returns:
+#   None
+#######################################
+adaptNpmPackageLockDependencies() {
+logTrace "Executing function: ${FUNCNAME[0]}" 1
+  
+  local PACKAGE="$1"
+  local VERSION="$2"
+  local PACKAGE_JSON_FILE="$3"
+  local SUB_LEVEL=$(($4))
+  
+  local PATH_PARENT=""
+  
+  index=1
+  while [[ $index -le $SUB_LEVEL ]]
+  do 
+    PATH_PARENT="..\/$PATH_PARENT"
+    index=$index+1
+  done
+  
+  local TGZ_REALPATH="dist/packages-dist/$PACKAGE/nationalbankbelgium-$PACKAGE-$VERSION.tgz"
+  local TGZ_PATH="file:${PATH_PARENT}dist\/packages-dist\/$PACKAGE\/nationalbankbelgium-$PACKAGE-$VERSION.tgz"
+  logTrace "TGZ path: $TGZ_PATH"
+  
+  SHA="$(openssl dgst -sha512 -binary ./$TGZ_REALPATH  | openssl enc -A -base64)"
+  ESCAPED_SHA=${SHA//\//\\/}
+  
+  logTrace "SHA-512: $SHA"
+  logTrace "SHA-512 escaped: $ESCAPED_SHA"
+  
+  local PATTERN="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\{(\s*)\\\"version\\\": \\\"(\S*)\\\",(\s*)\\\"integrity\\\": \\\"sha512-(.*)\\\","
+  local REPLACEMENT='"\@nationalbankbelgium\/'$PACKAGE'": {$1"version": "'$TGZ_PATH'",$3"integrity": "sha512-'$ESCAPED_SHA'",'
+  
+  logTrace "PATTERN: $PATTERN"
+  logTrace "REPLACEMENT: $REPLACEMENT"
+  logTrace "Package JSON file: $PACKAGE_JSON_FILE"
+  
+  # Packages will have dependencies between them. They will so have "devDependencies" and "peerDependencies" with different values.
+  # We should only replace the value of the devDependency for make it work.
+  
+  perl -p -i -0 -e "s/$PATTERN/$REPLACEMENT/m" $PACKAGE_JSON_FILE
 }
 
 #######################################
