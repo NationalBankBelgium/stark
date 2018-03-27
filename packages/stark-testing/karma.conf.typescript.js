@@ -1,3 +1,5 @@
+"use strict";
+
 // Helpers
 const helpers = require("./helpers");
 

@@ -18,25 +18,6 @@ module.exports = function(config) {
 		frameworks: ["jasmine"],
 
 		/**
-		 * List of files to exclude.
-		 */
-		exclude: [],
-
-		// client configuration
-		client: {
-			// can be used to pass arguments to tests (see spec-bundle.ts)
-			args: [
-				{
-					// path to the subset of the tests to consider (used to filter the unit tests to execute (see spec-bundle.ts)
-					testPath: helpers.getTestPath(process.argv)
-				}
-			],
-
-			// other client-side config
-			captureConsole: true
-		},
-
-		/**
 		 * List of files / patterns to load in the browser
 		 *
 		 * we are building the test environment in ./spec-bundle.js
@@ -57,13 +38,9 @@ module.exports = function(config) {
 		],
 
 		/**
-		 * By default all assets are served at http://localhost:[PORT]/base/
-		 * can be used to map paths served by the Karma web server to /base/ content
-		 * knowing that /base corresponds to the project root folder (i.e., where this config file is located)
+		 * List of files to exclude.
 		 */
-		proxies: {
-			"/assets/": "/base/src/assets/"
-		},
+		exclude: [],
 
 		/**
 		 * Preprocess matching files before serving them to the browser
@@ -72,6 +49,29 @@ module.exports = function(config) {
 		// TODO Change this absolute path to a relative one (with helpers ?)
 		preprocessors: {
 			"./node_modules/@nationalbankbelgium/stark-build/config/spec-bundle.js": ["coverage", "webpack", "sourcemap"]
+		},
+
+		// client configuration
+		client: {
+			// can be used to pass arguments to tests (see spec-bundle.ts)
+			args: [
+				{
+					// path to the subset of the tests to consider (used to filter the unit tests to execute (see spec-bundle.ts)
+					testPath: helpers.getTestPath(process.argv)
+				}
+			],
+
+			// other client-side config
+			captureConsole: true
+		},
+
+		/**
+		 * By default all assets are served at http://localhost:[PORT]/base/
+		 * can be used to map paths served by the Karma web server to /base/ content
+		 * knowing that /base corresponds to the project root folder (i.e., where this config file is located)
+		 */
+		proxies: {
+			"/assets/": "/base/src/assets/"
 		},
 
 		/**
@@ -148,14 +148,17 @@ module.exports = function(config) {
 		 * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
 		 */
 		browsers: [
-			"Chrome"
+			"ChromeHeadlessNoSandbox"
+			//"Chrome"
 			//"Firefox",
 			//"IE",
 		],
 
 		customLaunchers: {
-			ChromeTravisCi: {
-				base: "Chrome",
+			ChromeHeadlessNoSandbox: {
+				base: "ChromeHeadless",
+				// necessary for travis: https://chromium.googlesource.com/chromium/src/+/master/docs/linux_suid_sandbox_development.md
+				// as it runs in a container-based environment
 				flags: ["--no-sandbox"]
 			}
 		},
@@ -171,10 +174,6 @@ module.exports = function(config) {
 		browserDisconnectTolerance: 1,
 		browserDisconnectTimeout: 30000
 	};
-
-	if (process.env.TRAVIS) {
-		configuration.browsers = ["ChromeTravisCi"];
-	}
 
 	config.set(configuration);
 };
