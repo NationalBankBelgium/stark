@@ -18,9 +18,9 @@ export enum StarkLoggingActionTypes {
  * @returns The created action object
  */
 export class SetApplicationId implements Action {
-	readonly type = StarkLoggingActionTypes.LOGGING_SET_APPLICATION_ID;
-
-	constructor(public applicationId: string) {}
+	public readonly type:string = StarkLoggingActionTypes.LOGGING_SET_APPLICATION_ID;
+	public constructor(public applicationId: string) {
+	}
 }
 
 /**
@@ -29,9 +29,9 @@ export class SetApplicationId implements Action {
  * @returns The created action object
  */
 export class LogMessage implements Action {
-	readonly type = StarkLoggingActionTypes.LOG_MESSAGE;
-
-	constructor(public message: StarkLogMessage) {}
+	public readonly type:string = StarkLoggingActionTypes.LOG_MESSAGE;
+	public constructor(public message: StarkLogMessage) {
+	}
 }
 
 /**
@@ -39,8 +39,8 @@ export class LogMessage implements Action {
  * @returns The created action object
  */
 export class FlushLogMessages implements Action {
-	readonly type = StarkLoggingActionTypes.FLUSH_LOG;
+	public readonly type:string = StarkLoggingActionTypes.FLUSH_LOG;
 
-	constructor(public numberOfMessagesToFlush: number) {}
+	public constructor(public numberOfMessagesToFlush: number) {}
 }
 export type StarkLoggingActions = SetApplicationId | LogMessage | FlushLogMessages;
