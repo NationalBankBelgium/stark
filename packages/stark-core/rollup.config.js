@@ -1,40 +1,22 @@
 "use strict";
 
-const resolve = require("rollup-plugin-node-resolve");
-const commonjs = require("rollup-plugin-commonjs");
-const sourcemaps = require("rollup-plugin-sourcemaps");
-
-const globals = {
-	// FIXME use for other modules than core
-	// '@nationalbankbelgium/core': 'stark.core',
-	// 'rxjs/Observable': 'Rx',
-	// 'rxjs/Subject': 'Rx',
-	// 'rxjs/Observer': 'Rx',
-	// 'rxjs/Subscription': 'Rx',
-	// 'rxjs/observable/merge': 'Rx.Observable',
-	// 'rxjs/operator/share': 'Rx.Observable.prototype'
-};
+const commonData = require("../rollup.config.common-data.js"); // common configuration between environments
 
 module.exports = {
-	//export default {
-	input: "../../dist/packages-dist/stark-core/esm5/stark-core.js",
+	input: "../../dist/packages-dist/stark-core/fesm5/stark-core.js",
+	external: commonData.external,
+	plugins: commonData.plugins,
 	output: [
 		{
 			file: "../../dist/packages-dist/stark-core/bundles/stark-core.umd.js",
-			globals: globals,
-			format: "umd",
-			exports: "named",
-			name: "stark.http",
-			sourcemap: true
+			globals: commonData.output.globals,
+			format: commonData.output.format,
+			exports: commonData.output.exports,
+			name: "stark.core",
+			sourcemap: commonData.output.sourcemap,
+			amd: {
+				id: "@nationalbankbelgium/stark-core"
+			}
 		}
-	],
-	amd: {
-		id: "@nationalbankbelgium/stark-core"
-	},
-	plugins: [
-		resolve(),
-		commonjs(), // converts date-fns to ES modules
-		sourcemaps()
-	],
-	external: Object.keys(globals)
+	]
 };

@@ -10,6 +10,8 @@ set -u -e -o pipefail
 
 readonly currentDir=$(cd $(dirname $0); pwd)
 
+export NODE_PATH=${NODE_PATH:-}:${currentDir}/node_modules
+
 source ${currentDir}/scripts/ci/_travis-fold.sh
 source ${currentDir}/build-functions.sh
 
@@ -40,10 +42,11 @@ VERBOSE=false
 TRACE=false
 
 PROJECT_ROOT_DIR=`pwd`
+logTrace "PROJECT_ROOT_DIR: ${PROJECT_ROOT_DIR}" 1
 ROOT_DIR=${PROJECT_ROOT_DIR}/packages
-logTrace "Root dir: $ROOT_DIR"
-
-export NODE_PATH=${NODE_PATH:-}:${currentDir}/node_modules
+logTrace "ROOT_DIR: ${ROOT_DIR}" 1
+ROOT_OUT_DIR=${PROJECT_ROOT_DIR}/dist/packages
+logTrace "ROOT_OUT_DIR: ${ROOT_OUT_DIR}" 1
 
 for ARG in "$@"; do
   case "$ARG" in
@@ -199,13 +202,16 @@ if [[ ${BUILD_ALL} == false ]]; then
   travisFoldEnd "clean dist for ${PACKAGE}"
 fi
 
+mkdir -p ${ROOT_OUT_DIR}
+
+ROLLUP_DEFAULT_CONFIG_PATH=${ROOT_DIR}/rollup.config.js
+logTrace "ROLLUP_DEFAULT_CONFIG_PATH: ${ROLLUP_DEFAULT_CONFIG_PATH}" 1
+
 for PACKAGE in ${ALL_PACKAGES[@]}
 do
   travisFoldStart "global build: ${PACKAGE}" "no-xtrace"
     SRC_DIR=${ROOT_DIR}/${PACKAGE}
     logTrace "SRC_DIR: $SRC_DIR" 1
-    ROOT_OUT_DIR=${PROJECT_ROOT_DIR}/dist/packages
-    logTrace "ROOT_OUT_DIR: $SRC_DIR" 1
     OUT_DIR=${ROOT_OUT_DIR}/${PACKAGE}
     logTrace "OUT_DIR: $OUT_DIR" 1
     NPM_DIR=${PROJECT_ROOT_DIR}/dist/packages-dist/${PACKAGE}
@@ -219,8 +225,12 @@ do
         logTrace "OUT_DIR_ESM5: $OUT_DIR_ESM5" 1
         ESM2015_DIR=${NPM_DIR}/esm2015
         logTrace "ESM2015_DIR: $ESM2015_DIR" 1
+        FESM2015_DIR=${NPM_DIR}/fesm2015
+        logTrace "FESM2015_DIR: $FESM2015_DIR" 1
         ESM5_DIR=${NPM_DIR}/esm5
         logTrace "ESM5_DIR: $ESM5_DIR" 1
+        FESM5_DIR=${NPM_DIR}/fesm5
+        logTrace "FESM5_DIR: $FESM5_DIR" 1
         BUNDLES_DIR=${NPM_DIR}/bundles
         logTrace "BUNDLES_DIR: $BUNDLES_DIR" 1
 
@@ -238,17 +248,26 @@ do
           logDebug "Clean up ${NPM_DIR}" 1
           rm -rf ${NPM_DIR} && mkdir -p ${NPM_DIR}
 
-          logInfo "Copy $PACKAGE typings from $OUT_DIR to $NPM_DIR"
+          logInfo "Copy ${PACKAGE} typings from ${OUT_DIR} to ${NPM_DIR}"
           syncOptions=(-a --exclude="*.js" --exclude="*.js.map")
           syncFiles $OUT_DIR $NPM_DIR "${syncOptions[@]}"
+          unset syncOptions
+          
+          logInfo "Copy ESM2015 for ${PACKAGE}"
+          syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json")
+          syncFiles $OUT_DIR $ESM2015_DIR "${syncOptions[@]}"
+          unset syncOptions
        
-          #cd $SRC_DIR > /dev/null
           logDebug "Rollup $PACKAGE" 1
-          rollupIndex ${OUT_DIR} ${ESM2015_DIR} ${PACKAGE}
+          rollupIndex ${OUT_DIR} ${ESM2015_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
+          rollupIndex ${OUT_DIR} ${FESM2015_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
 
           logDebug "Produce ESM5 version" 1
           compilePackageES5 ${SRC_DIR} ${OUT_DIR_ESM5} ${PACKAGE}
-          rollupIndex ${OUT_DIR_ESM5} ${ESM5_DIR} ${PACKAGE}
+          syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json")
+          syncFiles $OUT_DIR_ESM5 $ESM5_DIR "${syncOptions[@]}"
+          unset syncOptions
+          rollupIndex ${OUT_DIR_ESM5} ${FESM5_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
 
           logDebug "Run rollup conversions on $PACKAGE" 1
           runRollup ${SRC_DIR}
@@ -259,8 +278,10 @@ do
         logInfo "Copy $PACKAGE package.json to $NPM_DIR"
         # FIXME exclude node modules!
         travisFoldStart "copy package.json for: ${PACKAGE}" "no-xtrace"
-        syncOptions=(-am --include="package.json" --exclude="node_modules/" --exclude="rollup.config.js" --exclude="*.ts" --exclude="*/*.ts" --include="*" --exclude="*")
+        # TODO check if  --exclude="package-lock.json" is correctly working
+        syncOptions=(-am --include="package.json" --exclude="package-lock.json" --exclude="node_modules/" --exclude="rollup.config.js" --exclude="*.ts" --exclude="*/*.ts" --include="*" --exclude="*")
         syncFiles $SRC_DIR $NPM_DIR "${syncOptions[@]}"
+        unset syncOptions
         travisFoldEnd "copy package.json for: ${PACKAGE}"
       travisFoldEnd "build package: ${PACKAGE}"
     fi
@@ -272,6 +293,7 @@ do
       logInfo "Copy ${PACKAGE} to ${OUT_DIR}"
       syncOptions=(-a --include="package-lock.json" --exclude="node_modules/" --exclude="config-stark/")
       syncFiles $SRC_DIR $OUT_DIR "${syncOptions[@]}"
+      unset syncOptions
   
       logInfo "Copy $PACKAGE contents"
       syncFiles $OUT_DIR $NPM_DIR "-a"
@@ -298,11 +320,7 @@ do
         
         logInfo "Adapt starter dependencies"
         adaptNpmPackageDependencies $PACKAGE $VERSION "./starter/package.json" 1
-
-        # TODO Fix this with a proper solution
-        if [[ $PACKAGE == "stark-build" ]]; then
-          adaptNpmPackageDependencies $PACKAGE $VERSION "./packages/stark-core/package.json" 2
-        fi
+        adaptNpmPackageLockDependencies $PACKAGE $VERSION "./starter/package-lock.json" 1
       fi
     travisFoldEnd "general tasks: ${PACKAGE}"
   

@@ -5,9 +5,6 @@ dist/
 # Reports directory
 reports/
 
-# NPM
-package-lock.json
-
 # Logs
 logs/
 *.log

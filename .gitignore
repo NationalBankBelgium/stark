@@ -8,9 +8,6 @@ dist/
 # Reports directory
 reports/
 
-# NPM
-package-lock.json
-
 # Logs
 logs/
 *.log
@@ -54,6 +51,9 @@ pids
 
 # Patch files
 *.patch
+
+# Bash
+bash.exe.stackdump
 
 # Angular #
 *.ngfactory.ts
