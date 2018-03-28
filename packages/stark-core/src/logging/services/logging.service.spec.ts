@@ -77,7 +77,7 @@ describe("Service: StarkLoggingService", () => {
 			appConfig.loggingFlushDisabled = false;
 			appConfig.backends.delete("logging");
 
-			expect(() => new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/)).toThrowError(/backend/);
+			expect(() => new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/)).toThrowError("Backend logging is undefined.");
 		});
 
 		it("should throw an error in case the logging flushing is enabled but the loggingFlushPersistSize option is not greater than 0", () => {

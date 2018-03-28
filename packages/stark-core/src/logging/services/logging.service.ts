@@ -14,7 +14,7 @@ import { Inject, Injectable } from "@angular/core";
 import { StarkLoggingService, starkLoggingServiceName } from "./logging.service.intf";
 import { StarkApplicationConfig, starkAppConfigConstantName } from "../../configuration/entities/index";
 import { StarkBackend } from "../../http/entities/backend/index";
-import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
+import { StarkCoreApplicationState, StarkLoggingApplicationState } from "../../common/store/starkCoreApplicationState";
 import { StarkHttpStatusCodes } from "../../http/enumerators/index";
 import { StarkHttpHeaders } from "../../http/constants/index";
 // import {StarkXSRFService, starkXSRFServiceName} from "../../xsrf";
@@ -71,15 +71,13 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 				starkLoggingServiceName + ": " + starkAppConfigConstantName + " constant is not valid."
 			);
 
-			if (!(this.backend = this.appConfig.getBackend("logging"))) {
-				throw new Error(starkLoggingServiceName + ': no configuration found for "logging" backend.');
-			}
+			this.backend = this.appConfig.getBackend("logging");
 
-			this.logPersistSize = this.appConfig.loggingFlushPersistSize;
+			this.logPersistSize = <number>this.appConfig.loggingFlushPersistSize;
 			this.logUrl = this.backend.url + "/" + this.appConfig.loggingFlushResourceName;
 			this.generateNewCorrelationId();
 
-			this.store.select<StarkLogging>(state => state.starkLogging).subscribe((starkLogging: StarkLogging) => {
+			this.store.select<StarkLogging>((state:StarkLoggingApplicationState) => state.starkLogging).subscribe((starkLogging: StarkLogging) => {
 				this.starkLogging = starkLogging;
 				this.persistLogMessages();
 			});

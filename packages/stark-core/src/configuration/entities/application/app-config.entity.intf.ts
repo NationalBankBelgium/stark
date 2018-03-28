@@ -45,18 +45,18 @@ export interface StarkApplicationConfig {
 	 * the log messages are sent to the back-end and removed from the redux store.
 	 * Default: 15
 	 */
-	loggingFlushPersistSize: number;
+	loggingFlushPersistSize?: number;
 
 	/**
 	 * The loggingFlushApplicationId uniquely identifies the application.
 	 * It makes that the back-end can recognize your application.
 	 */
-	loggingFlushApplicationId: string;
+	loggingFlushApplicationId?: string;
 
 	/**
 	 * The loggingFlushResourceName defines the name of the logging resource on the back-end. Default: "logging"
 	 */
-	loggingFlushResourceName: string;
+	loggingFlushResourceName?: string;
 
 	/**
 	 * Enable router logging
@@ -77,12 +77,12 @@ export interface StarkApplicationConfig {
 	/**
 	 * Interval in seconds between every "keepalive" ping. Default: 15
 	 */
-	keepAliveInterval: number;
+	keepAliveInterval?: number;
 
 	/**
 	 * Url where the "keepalive" pings should be sent to
 	 */
-	keepAliveUrl: string;
+	keepAliveUrl?: string;
 
 	/**
 	 * Url to be navigated to logout the user
