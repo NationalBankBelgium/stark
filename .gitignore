@@ -28,6 +28,9 @@ node_modules/
 npm-debug.log
 /npm-debug.log.*
 
+# NPM
+package-lock.json
+
 # OS generated files #
 Desktop.ini
 Thumbs.db
