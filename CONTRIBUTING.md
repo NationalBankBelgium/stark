@@ -51,25 +51,136 @@ You can file new issues by filling out our [new issue form](https://github.com/N
 ### Forking
 Stark development is done using a forking model with Pull Requests (PRs), so the very first thing you should do is create your fork: https://help.github.com/articles/fork-a-repo/
 
+We heavily recommend using the "GitFlow" workflow (see workflow section below) with feature branches.
+
 ### Integrating changes to your fork
 Once you're found what you want to contribute to Stark, then:
 * Create a feature branch in your fork: `git checkout -b my-new-branch master`
-* Configure the upstream: https://help.github.com/articles/configuring-a-remote-for-a-fork/
+* Configure the upstream
+  * `git remote add upstream https://github.com/NationalBankBelgium/stark.git`
+  * reference: https://help.github.com/articles/configuring-a-remote-for-a-fork/
 
 From then on, you may work on your feature at your own rhythm and commit/push to your fork.
 
-Meanwhile, don't forget to keep your fork up to date: https://help.github.com/articles/syncing-a-fork/
-Certainly so before creating a Pull Request (PR). If you don't do it then we'll request it anyways.
-
 Don't forget to write test cases (or adapt existing ones) for your changes! 
 
-### Proposing your changes by submitting a Pull Request (PR)
-Before you propose your changes, make sure that your fork is up to date with the upstream and that the whole test suite passes.
-Also, try and rebase / squash your commits in order to keep the history clean.
+### Keeping in sync
+While you're busy developing your feature and before you propose them, make sure that your fork is up to date with the upstream.
 
-Make sure to commit your changes using a descriptive commit message that follows our [commit message conventions](#commit).
+First, download the latest commits:
+* `git fetch upstream`
+* or `git remote update -p`
+
+Then, integrate those changes to your fork (whatever branch you're working on).
+
+First try a fast-forward merge: `git merge --ff-only @{u}`
+  * that command tells git to merge the upstream branch ONLY if you local branch can be "fast forwarded" to the upstream branch (i.e., if it hasn't diverged)
+
+If the fast-forward merge fails, then you'll have to rebase with the upstream (i.e., align): `git rebase -p @{u}`
+  * the `-p` options tells git to preserve merges. This prevents git from linearizing the commits being rebased
+
+Once done, make sure the history looks like what you expect: `git log --graph --oneline --decorate --date-order --color --boundary @{u}`
+
+Certainly so before creating a Pull Request (PR). If you don't do it then we'll request it anyways.
+
+References
+  * https://stackoverflow.com/questions/6406762/why-am-i-merging-remote-tracking-branch-origin-develop-into-develop
+  * https://help.github.com/articles/syncing-a-fork/
+
+### Proposing your changes by submitting a Pull Request (PR)
+Before you propose your changes, make sure that your fork is up to date with the upstream (see previous section) and that the whole test suite passes.
+
+At this point, you'll probably want to do a rebase in order to squash your commits and align with our [commit message conventions](#commit) (you can always fix those during the rebase or using `git commit --amend ...`).
+
+The idea there is to let you make as many commits as you want with or without respecting our commit message conventions, as long as you clean those when you're ready to send us a PR.
 
 Once done, you may submit a new Pull Request (PR): https://github.com/NationalBankBelgium/stark/pull/new/master
+
+Note that if you didn't follow this, we'll probably ask for a cleanup/rebase before we merge your changes.
+
+### Workflow
+As mentioned above, we recommend using the GitFlow inspired workflow. That workflow was initially proposed here: https://datasift.github.io/gitflow/IntroducingGitFlow.html
+There a great introduction tutorial by Atlassian: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+
+More recently, git flow was integrated through git extensions: https://github.com/nvie/gitflow
+Now, `git flow` commands are integrated at least in the Windows client and allow for easy usage.
+
+First, here's a very useful cheatsheet about the git flow commands: https://danielkummer.github.io/git-flow-cheatsheet/ 
+
+Here's a summary of the workflow we recommend to contribute to Stark along with the commands to use. Note that this only uses a subset of what git flow has to offer.
+
+You'll notice that we sometimes give a `git flow ...` command and alternative commands without git flow.
+
+Workflow and commands:
+* fork: through GitHub
+* clone: `git clone https://github.com/<username>/stark`
+* add upstream: `git remote add upstream https://github.com/NationalBankBelgium/stark`
+  * that way you can fetch new commits that have been integrated into Stark's main repository
+* initialize git flow: `git flow init -d`
+  * you now have a develop branch
+  * -d for default branch names (develop, master, feature/, release/, hotfix/)
+* push your local develop branch to your fork
+  * `git checkout develop`
+  * `git push -u origin develop`
+  * that you can integrate anything you like on your fork's develop branch (e.g., for integration checks)
+* create a feature branch for whatever you want to work on
+  * `git flow feature start <name>`
+  * alternative: `git checkout -b feature/<name>`
+  * you may include a specific issue number in the branch name (e.g., 24-awesome-feature)
+* publish the feature branch on your fork
+  * `git flow feature publish <name>`
+  * alternative: `git push -u origin feature/<name>`  
+* work on your feature branch
+  * checkout the branch: `git checkout feature/<name>`
+  * make changes: `git add ...` then `git commit -m '...'`
+  * regularly commit the changes: `git commit -a -m 'refactor(core): made it great again'`
+* push the changes to your fork's corresponding feature branch: `git push`
+* update your fork/feature branch with upstream changes
+  * first fetch the changes: `git fetch upstream`
+    * alternative: `git remote update -p`
+  * then merge or rebase
+    * try fast-forward merge: `git merge --ff-only @{u}`
+    * rebase if fast-forward failed: `git rebase -p @{u}` 
+  * see "Keeping in sync" section for details!
+* create your Pull Request (PR); see "Proposing your changes by submitting a Pull Request (PR)" for details
+
+Sometimes you might want to work with others on some feature.
+
+If you're the one others will collaborate with, then make sure to publish your feature branch on your fork:
+* create a feature branch to work on changes for that feature: `git flow feature start <name>`
+* publish the feature branch on your fork: `git flow feature publish <name>`
+* make changes: `git add ...` then `git commit -m '...'` 
+* push the changes to your fork's corresponding feature branch: `git push`
+
+If you're helping another developer implement a feature, then, assuming he has published his feature branch on his fork:
+* add the other developer's fork as a remote: `git remote add <username> https://github.com/<username>/stark`
+* fetch their changes: `git fetch <username>`
+* create your own corresponding feature branch; assuming he has created `<username>/feature/<name>` then
+  * `git checkout -b <name> feature/<name>`
+* publish your version of the feature branch on your fork
+  * `git flow feature publish <name>`
+  * alternative: `git push -u origin feature/<name>`  
+* make changes
+* push the changes to your fork's corresponding feature branch
+* create PRs towards the other developer's repository for him to integrate your changes
+* once they merge your PR, you should remove your feature branch and forget about it: `git branch -d feature/<name>`
+
+An alternative to the above is for the other developer to give you write access to his fork; there the issue is if he does a rebase on his fork; in that case you'll have issues.
+If you go that way then you have to:
+* clone the repository of the other developer or just checkout the other developer's feature branch to work on it: `git checkout -b workflow <username>/feature/<name>`
+* make changes
+* push the changes
+* sync your local repo with the main repository of Stark
+* create PRs against the main repository of Stark (or let the other developer do it)
+
+In any case, after PRs are merged into Stark, you can normally forget about the feature branches and delete those to keep your fork clean
+* `git branch -d feature/<name>`
+
+*It's important to keep in mind that anytime you want to continue working on an ongoing feature branch or start a new one, you'll need to fetch from upstream and merge (fast-forward) or rebase. Without this, you'll quickly fall out of sync and end up with nightmarish merges...*
+
+Also, consider your fork to be transient. If you get lost at some point, then you can always rebase and accept everything from the upstream. If you still get lost with that and can't go back to a clean state, then just shelve your changes or create a patch file, then delete your fork/local repo and start over :)
+
+Rinse and repeat :)
 
 ## Main project's structure
 TODO add project structure details
