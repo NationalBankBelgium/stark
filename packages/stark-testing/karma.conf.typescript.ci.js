@@ -37,6 +37,11 @@ module.exports = function(config) {
 		karmaTypescriptConfig: {
 			bundlerOptions: {
 				entrypoints: /\.spec\.ts$/,
+				resolve: {
+					alias: {
+						"@nationalbankbelgium/stark-core": "./node_modules/@nationalbankbelgium/stark-core/fesm5/stark-core.js"
+					}
+				},
 				exclude: [
 					"coffee-script", // FIXME: https://github.com/monounity/karma-typescript/issues/209
 					"saucelabs", // gives an error
@@ -44,7 +49,8 @@ module.exports = function(config) {
 					"selenium-webdriver" // not needed for unit testing
 				],
 				transforms: [
-					require("karma-typescript-angular2-transform") // see https://github.com/monounity/karma-typescript-angular2-transform
+					require("karma-typescript-angular2-transform"), // see https://github.com/monounity/karma-typescript-angular2-transform
+					require("karma-typescript-es6-transform")()
 				]
 			},
 			tsconfig: "tsconfig.spec.json"

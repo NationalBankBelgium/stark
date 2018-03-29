@@ -11,7 +11,7 @@ import {
 	StarkResource,
 	StarkSingleItemResponseWrapper
 } from "../entities/index";
-import { StarkHttpService } from "../service/http.service.intf";
+import { StarkHttpService } from "../services/http.service.intf";
 import { StarkLoggingService } from "../../logging";
 import { UnitTestingUtils } from "../../test/unit-testing/index";
 import { StarkHttpRequestBuilderImpl } from "../builder/index";

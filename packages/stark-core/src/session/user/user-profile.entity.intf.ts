@@ -6,7 +6,7 @@ export interface StarkUserProfile {
 	lastName: string;
 	email?: string;
 	phone?: string;
-	language: string;
+	language?: string;
 	referenceNumber?: string;
 	isAnonymous?: boolean;
 
