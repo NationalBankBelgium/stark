@@ -1,6 +1,6 @@
 "use strict";
 
-import * as uuid from "uuid";
+import uuid from "uuid";
 
 import { Serialize } from "cerialize";
 import { validateSync } from "class-validator";
