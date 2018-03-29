@@ -73,13 +73,13 @@ First, download the latest commits:
 
 Then, integrate those changes to your fork (whatever branch you're working on).
 
-First try a fast-forward merge: `git merge --ff-only @{u}`
+First try a fast-forward merge: `git merge --ff-only upstream/master`
   * that command tells git to merge the upstream branch ONLY if you local branch can be "fast forwarded" to the upstream branch (i.e., if it hasn't diverged)
 
-If the fast-forward merge fails, then you'll have to rebase with the upstream (i.e., align): `git rebase -p @{u}`
+If the fast-forward merge fails, then you'll have to rebase with the upstream (i.e., align): `git rebase -p upstream/master`
   * the `-p` options tells git to preserve merges. This prevents git from linearizing the commits being rebased
 
-Once done, make sure the history looks like what you expect: `git log --graph --oneline --decorate --date-order --color --boundary @{u}`
+Once done, make sure the history looks like what you expect: `git log --graph --oneline --decorate --date-order --color --boundary upstream/master`
 
 Certainly so before creating a Pull Request (PR). If you don't do it then we'll request it anyways.
 
@@ -139,8 +139,8 @@ Workflow and commands:
   * first fetch the changes: `git fetch upstream`
     * alternative: `git remote update -p`
   * then merge or rebase
-    * try fast-forward merge: `git merge --ff-only @{u}`
-    * rebase if fast-forward failed: `git rebase -p @{u}` 
+    * try fast-forward merge: `git merge --ff-only upstream/master`
+    * rebase if fast-forward failed: `git rebase -p upstream/master` 
   * see "Keeping in sync" section for details!
 * create your Pull Request (PR); see "Proposing your changes by submitting a Pull Request (PR)" for details
 
