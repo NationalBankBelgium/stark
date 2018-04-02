@@ -52,7 +52,7 @@
     "update:starter": "cd starter && npm install && cd ..",
     "starter": "cd starter && npm start && cd ..",
     "clean": "rimraf ./dist",
-    "clean:stark-core": "cd packages/stark-core && rimraf ./node_modules/@nationalbankbelgium/stark-build && cd ../..",
+    "clean:stark-core": "cd packages/stark-core && rimraf ./node_modules/@nationalbankbelgium/stark-testing && cd ../..",
     "clean:starter": "cd starter && rimraf ./dist && rimraf ./node_modules/@nationalbankbelgium && cd ..",
     "clean:all": "npm run clean && npm run clean:stark-core && npm run clean:starter",
     "lint": "tslint --config tslint.json --project ./tsconfig.json --format codeFrame",

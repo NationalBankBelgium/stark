@@ -4,12 +4,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "outDir": "../dist/all/@nationalbankbelgium/stark",
+    "outDir": "../dist/all/@nationalbankbelgium",
+    "module": "commonjs",
+    "importHelpers": false,
     "paths": {
       "rxjs/*": ["../node_modules/rxjs/*"],
       "@nationalbankbelgium/stark-*": ["./*"]
     },
     "skipDefaultLibCheck": true,
+    "inlineSourceMap": true,
+    "sourceMap": false,
     "typeRoots": [
       "./stark-build/node_modules/@types",
       "./stark-core/node_modules/@types",
