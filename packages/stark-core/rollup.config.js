@@ -2,13 +2,15 @@
 
 const commonData = require("../rollup.config.common-data.js"); // common configuration between environments
 
-const globals = {
-	...commonData.output.globals,
-	"@ngrx/store": "@ngrx/store",
-	crypto: "crypto",
-	moment: "moment",
-	uuid: "uuid"
-};
+const globals = Object.assign(
+	{},
+	commonData.output.globals,
+	{
+		"@ngrx/store": "@ngrx/store",
+		moment: "moment",
+		uuid: "uuid"
+	}
+);
 
 const external = Object.keys(globals);
 
