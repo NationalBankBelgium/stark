@@ -68,6 +68,7 @@
     "install:ci:stark-core": "cd packages/stark-core && npm ci && cd ../..",
     "install:ci:stark-testing": "cd packages/stark-testing && npm ci && cd ../..",
     "install:ci:starter": "cd starter && npm ci && cd ..",
+    "install:travis:all": "npm run install:stark-build && npm run install:stark-testing && npm run install:stark-core && npm run build:trace && npm run update:starter",
     "test:stark-core": "cd packages/stark-core && npm run test-fast && cd ../..",
     "test:starter": "cd starter && npm run test-fast && cd ../..",
     "test:all": "npm run test:stark-core && npm run test:starter",

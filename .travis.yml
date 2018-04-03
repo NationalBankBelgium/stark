@@ -15,7 +15,7 @@ install:
   - mkdir -p $LOGS_DIR
   - touch $LOGS_DIR/build-perf.log
   - npm install
-  - npm run install:all
+  - npm run install:travis:all
     # TODO uncomment this when npmjs registry fixed
     # - npm ci
     # - npm run install:ci:all
