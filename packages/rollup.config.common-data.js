@@ -11,8 +11,11 @@ const globals = {
 	cerialize: "cerialize",
 	"@angular/core": "ng.core",
 	"@angular/common/http": "angular.common.http",
-	tslib: "tslib",
 	rxjs: "rxjs",
+
+	"@ngrx/store": "@ngrx/store",
+	moment: "moment",
+	uuid: "uuid",
 
 	// this should be the preferred way to import RxJS operators: https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md
 	// we should only use that in our code base
@@ -29,9 +32,9 @@ const globals = {
 	"rxjs/Observable": "Rx",
 	"rxjs/add/observable/of": "Rx.Observable.prototype",
 	"rxjs/add/observable/throw": "Rx.Observable.prototype",
-	"rxjs/add/observable/timer": "Rx.Observable.prototype"
+	"rxjs/add/observable/timer": "Rx.Observable.prototype",
 
-	//"rxjs/Subject": "Rx",
+	"rxjs/Subject": "Rx",
 	//"rxjs/Subscription": "Rx",
 
 	// TODO add lines such as the one below to make sure that stark modules that depend on other stark modules can find those
