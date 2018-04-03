@@ -39,7 +39,26 @@ module.exports = function(options) {
 	};
 
 	const tsConfigApp = buildUtils.readTsConfig(helpers.root(METADATA.tsConfigPath));
-	const appNgcOptions = tsConfigApp.raw.angularCompilerOptions || {};
+	
+	const defaultNgcOptions = {
+		generateCodeForLibraries: true,
+		skipMetadataEmit: false,
+		strictMetadataEmit: false,
+		skipTemplateCodegen: false,
+		strictInjectionParameters: true,
+		fullTemplateTypeCheck: true,
+		annotateForClosureCompiler: false,
+		annotationsAs: "static fields",
+		enableLegacyTemplate: false,
+		preserveWhitespaces: false,
+		allowEmptyCodegenFiles: false,
+		module: !isProd && METADATA.WATCH ? "commonjs" : "es2015" // TODO is it needed in our case? => Force commonjs module format for TS on dev watch builds.
+	};
+
+	const appNgcOptions = {
+		...defaultNgcOptions,
+		...tsConfigApp.raw.angularCompilerOptions
+	};
 
 	const environment = buildUtils.getEnvFile(METADATA.envFileSuffix);
 
@@ -467,21 +486,7 @@ module.exports = function(options) {
 					[helpers.root("src/environments/environment.ts")]: environment
 				},
 				platform: 0, // 0 = browser, 1 = server
-				compilerOptions: {
-					generateCodeForLibraries: typeof appNgcOptions.generateCodeForLibraries === "undefined" ? true : appNgcOptions.generateCodeForLibraries,
-					skipMetadataEmit: typeof appNgcOptions.skipMetadataEmit === "undefined" ? false : appNgcOptions.skipMetadataEmit,
-					strictMetadataEmit: typeof appNgcOptions.strictMetadataEmit === "undefined" ? false : appNgcOptions.strictMetadataEmit,
-					skipTemplateCodegen: typeof appNgcOptions.skipTemplateCodegen === "undefined" ? false : appNgcOptions.skipTemplateCodegen,
-					strictInjectionParameters: typeof appNgcOptions.strictInjectionParameters === "undefined" ? true : appNgcOptions.strictInjectionParameters,
-					fullTemplateTypeCheck: typeof appNgcOptions.fullTemplateTypeCheck === "undefined" ? true : appNgcOptions.fullTemplateTypeCheck,
-					annotateForClosureCompiler: typeof appNgcOptions.annotateForClosureCompiler === "undefined" ? false : appNgcOptions.annotateForClosureCompiler,
-					annotationsAs: typeof appNgcOptions.annotationsAs === "undefined" ? "static fields" : appNgcOptions.annotationsAs,
-					enableLegacyTemplate: typeof appNgcOptions.enableLegacyTemplate === "undefined" ? false : appNgcOptions.enableLegacyTemplate,
-					preserveWhitespaces: typeof appNgcOptions.preserveWhitespaces === "undefined" ? false :  appNgcOptions.preserveWhitespaces,
-					allowEmptyCodegenFiles: typeof appNgcOptions.allowEmptyCodegenFiles === "undefined" ? false : appNgcOptions.allowEmptyCodegenFiles,
-
-					module: !isProd && METADATA.WATCH ? "commonjs" : "es2015" // TODO is it needed in our case? => Force commonjs module format for TS on dev watch builds.
-				},
+				compilerOptions: appNgcOptions,
 				tsConfigPath: METADATA.tsConfigPath
 			})
 
