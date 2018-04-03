@@ -11,8 +11,11 @@ const globals = {
 	cerialize: "cerialize",
 	"@angular/core": "ng.core",
 	"@angular/common/http": "angular.common.http",
-	tslib: "tslib",
 	rxjs: "rxjs",
+
+	"@ngrx/store": "@ngrx/store",
+	moment: "moment",
+	uuid: "uuid",
 
 	// this should be the preferred way to import RxJS operators: https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md
 	// we should only use that in our code base
