@@ -38,6 +38,28 @@ module.exports = function(options) {
 		main: "./src/main.browser.ts"
 	};
 
+	const tsConfigApp = buildUtils.readTsConfig(helpers.root(METADATA.tsConfigPath));
+	
+	const defaultNgcOptions = {
+		generateCodeForLibraries: true,
+		skipMetadataEmit: false,
+		strictMetadataEmit: false,
+		skipTemplateCodegen: false,
+		strictInjectionParameters: true,
+		fullTemplateTypeCheck: true,
+		annotateForClosureCompiler: false,
+		annotationsAs: "static fields",
+		enableLegacyTemplate: false,
+		preserveWhitespaces: false,
+		allowEmptyCodegenFiles: false,
+		module: !isProd && METADATA.WATCH ? "commonjs" : "es2015" // TODO is it needed in our case? => Force commonjs module format for TS on dev watch builds.
+	};
+
+	const appNgcOptions = {
+		...defaultNgcOptions,
+		...tsConfigApp.raw.angularCompilerOptions
+	};
+
 	const environment = buildUtils.getEnvFile(METADATA.envFileSuffix);
 
 	const buildOptimizerLoader = {
@@ -464,22 +486,7 @@ module.exports = function(options) {
 					[helpers.root("src/environments/environment.ts")]: environment
 				},
 				platform: 0, // 0 = browser, 1 = server
-				compilerOptions: {
-					// FIXME Those options force AngularCompilerOptions. Cannot be overwritten by angularCompilerOptions defined in tsconfig.json
-					generateCodeForLibraries: true,
-					skipMetadataEmit: false,
-					strictMetadataEmit: false,
-					skipTemplateCodegen: false,
-					strictInjectionParameters: true,
-					fullTemplateTypeCheck: true,
-					annotateForClosureCompiler: false,
-					annotationsAs: "static fields",
-					enableLegacyTemplate: false,
-					preserveWhitespaces: false,
-					allowEmptyCodegenFiles: false,
-
-					module: !isProd && METADATA.WATCH ? "commonjs" : "es2015" // TODO is it needed in our case? => Force commonjs module format for TS on dev watch builds.
-				},
+				compilerOptions: appNgcOptions,
 				tsConfigPath: METADATA.tsConfigPath
 			})
 
