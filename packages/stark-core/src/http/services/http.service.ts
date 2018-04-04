@@ -3,12 +3,15 @@
 const _cloneDeep: Function = require("lodash/cloneDeep");
 import { Deserialize, Serialize } from "cerialize";
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/timer";
-import "rxjs/add/observable/throw";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/retryWhen";
-import "rxjs/add/operator/mergeMap";
+import { timer } from "rxjs/observable/timer";
+import { _throw as observableThrow } from "rxjs/observable/throw";
+// FIXME: importing from single entry "rxjs/operators" together with webpack's scope hoisting prevents dead code removal  
+// see https://github.com/ReactiveX/rxjs/issues/2981
+// import { catchError, map, mergeMap, retryWhen } from "rxjs/operators";
+import { catchError } from "rxjs/operators/catchError";
+import { map } from "rxjs/operators/map";
+import { retryWhen } from "rxjs/operators/retryWhen";
+import { mergeMap } from "rxjs/operators/mergeMap";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 
@@ -50,11 +53,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	private httpClient: HttpClient;
 
 	// FIXME: uncomment these lines once LoggingService and SessionService are implemented
-	public constructor(
-		/*@Inject(starkLoggingServiceName)*/ logger: StarkLoggingService,
-		/*@Inject(starkSessionServiceName)*/ sessionService: StarkSessionService,
-		httpClient: HttpClient
-	) {
+	public constructor(/*@Inject(starkLoggingServiceName)*/ logger: StarkLoggingService,
+					   /*@Inject(starkSessionServiceName)*/ sessionService: StarkSessionService,
+					   httpClient: HttpClient) {
 		this.logger = logger;
 		this.sessionService = sessionService;
 		this.httpClient = httpClient;
@@ -100,11 +101,11 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		if (httpResponse$) {
 			return this.getSingleItemResponseWrapperObservable(httpResponse$, request);
 		} else {
-			return Observable.throw(
+			return observableThrow(
 				"Unknown request type encountered " +
-					request.requestType +
-					". For collection requests, " +
-					"call the executeCollectionRequest method"
+				request.requestType +
+				". For collection requests, " +
+				"call the executeCollectionRequest method"
 			);
 		}
 	}
@@ -138,11 +139,11 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			return this.getCollectionResponseWrapperObservable(httpResponse$, request);
 		} else {
 			// we return directly here because otherwise compilation fails (can't assign the ErrorObservable type to Subject)
-			return Observable.throw(
+			return observableThrow(
 				"Unknown request type encountered " +
-					request.requestType +
-					". For single requests (no " +
-					"collection), call the executeSingleItemRequest method"
+				request.requestType +
+				". For single requests (no " +
+				"collection), call the executeSingleItemRequest method"
 			);
 		}
 	}
@@ -280,10 +281,10 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		);
 	}
 
-	private convertMapIntoObject(map: Map<string, any>): { [param: string]: any } {
+	private convertMapIntoObject(mapObj: Map<string, any>): { [param: string]: any } {
 		const resultObj: { [param: string]: any } = {};
 
-		map.forEach((value: any, key: string) => {
+		mapObj.forEach((value: any, key: string) => {
 			resultObj[key] = value;
 		});
 
@@ -310,8 +311,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			httpResponse$ = this.addRetryLogic(httpResponse$, retryCount);
 		}
 
-		return httpResponse$
-			.map((result: HttpResponse<P>) => {
+		return httpResponse$.pipe(
+			map((result: HttpResponse<P>) => {
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
 				const resource: P = this.deserialize(<any>result.body, request, result);
 
@@ -320,13 +321,14 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 				}
 
 				return new StarkSingleItemResponseWrapperImpl<P>(result.status, httpResponseHeaders, resource);
-			})
-			.catch((result: HttpResponse<P>) => {
+			}),
+			catchError((result: HttpResponse<P>) => {
 				const httpError: StarkHttpError = Deserialize(result.body, StarkHttpErrorImpl);
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
 
-				return Observable.throw(new StarkHttpErrorWrapperImpl(result.status, httpResponseHeaders, httpError));
-			});
+				return observableThrow(new StarkHttpErrorWrapperImpl(result.status, httpResponseHeaders, httpError));
+			})
+		);
 	}
 
 	private getCollectionResponseWrapperObservable(
@@ -339,8 +341,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			httpResponse$ = this.addRetryLogic(httpResponse$, retryCount);
 		}
 
-		return httpResponse$
-			.map((result: HttpResponse<StarkHttpRawCollectionResponseData<P>>) => {
+		return httpResponse$.pipe(
+			map((result: HttpResponse<StarkHttpRawCollectionResponseData<P>>) => {
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
 				if ((<StarkHttpRawCollectionResponseData<P>>result.body).items instanceof Array) {
 					if ((<StarkHttpRawCollectionResponseData<P>>result.body).metadata) {
@@ -351,7 +353,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 										if ((<object>(<StarkHttpRawCollectionResponseData<P>>result.body).metadata.etags)[item.uuid]) {
 											item.etag = (<object>(<StarkHttpRawCollectionResponseData<P>>result.body).metadata.etags)[
 												item.uuid
-											];
+												];
 										} else {
 											this.logger.warn(starkHttpServiceName + ": no etag found for resource with uuid ", item.uuid);
 										}
@@ -361,9 +363,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 								} else {
 									this.logger.warn(
 										starkHttpServiceName +
-											": cannot set the etag property in the item '" +
-											item +
-											"' because it is not an object"
+										": cannot set the etag property in the item '" +
+										item +
+										"' because it is not an object"
 									);
 								}
 							}
@@ -383,27 +385,32 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 					items instanceof Array ? items.map((item: object) => this.deserialize(item, request, result)) : items,
 					Deserialize((<StarkHttpRawCollectionResponseData<P>>result.body).metadata, StarkCollectionMetadataImpl)
 				);
-			})
-			.catch((result: HttpResponse<P>) => {
+			}),
+			catchError((result: HttpResponse<P>) => {
 				const httpError: StarkHttpError = Deserialize(result.body, StarkHttpErrorImpl);
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
 
-				return Observable.throw(new StarkHttpErrorWrapperImpl(result.status, httpResponseHeaders, httpError));
-			});
+				return observableThrow(new StarkHttpErrorWrapperImpl(result.status, httpResponseHeaders, httpError));
+			})
+		);
 	}
 
 	private addRetryLogic<R>(httpResponse$: Observable<HttpResponse<R>>, retryCount: number): Observable<HttpResponse<R>> {
-		return httpResponse$.retryWhen((errors: Observable<any>) => {
-			let retries: number = 0;
-			return errors.mergeMap((error: HttpResponse<P>) => {
-				if (retries < retryCount) {
-					retries++;
-					return Observable.timer(this.retryDelay);
-				} else {
-					return Observable.throw(error);
-				}
-			});
-		});
+		return httpResponse$.pipe(
+			retryWhen((errors: Observable<any>) => {
+				let retries: number = 0;
+				return errors.pipe(
+					mergeMap((error: HttpResponse<P>) => {
+						if (retries < retryCount) {
+							retries++;
+							return timer(this.retryDelay);
+						} else {
+							return observableThrow(error);
+						}
+					})
+				);
+			})
+		)
 	}
 
 	private serialize(entity: P, request: StarkHttpRequest<P>): string | object {
@@ -411,7 +418,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	}
 
 	private deserialize(
-		rawEntity: string | object,
+		rawEntity: string | object, 
 		request: StarkHttpRequest<P>,
 		response: HttpResponse<P | StarkHttpRawCollectionResponseData<P>>
 	): P {

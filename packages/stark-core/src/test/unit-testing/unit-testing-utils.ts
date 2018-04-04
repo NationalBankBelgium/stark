@@ -1,8 +1,5 @@
 "use strict";
 
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/toPromise";
-
 import { StarkLoggingService, starkLoggingServiceName } from "../..//logging/index";
 import { StarkSessionService, starkSessionServiceName } from "../../session/index";
 import { StarkHttpHeaders, StarkHttpService, starkHttpServiceName } from "../../http/index";

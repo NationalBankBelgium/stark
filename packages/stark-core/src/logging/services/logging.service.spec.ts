@@ -3,8 +3,8 @@
 import Spy = jasmine.Spy;
 import { Action, Store } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/of";
-import "rxjs/add/observable/throw";
+import { of } from "rxjs/observable/of";
+import { _throw as observableThrow } from "rxjs/observable/throw";
 import { Serialize } from "cerialize";
 
 import { StarkLoggingActionTypes, FlushLogMessages } from "../../logging/actions/index";
@@ -66,7 +66,7 @@ describe("Service: StarkLoggingService", () => {
 			applicationId: "dummy app id",
 			messages: []
 		};
-		(<Spy>mockStore.select).and.returnValue(Observable.of(mockStarkLogging));
+		(<Spy>mockStore.select).and.returnValue(of(mockStarkLogging));
 		loggingService = new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/);
 		// reset the calls counter because there is a log in the constructor
 		(<Spy>mockStore.dispatch).calls.reset();
@@ -248,7 +248,7 @@ describe("Service: StarkLoggingService", () => {
 		it("should persist messages to the back-end when the persist size exceeds", () => {
 			expect(mockStarkLogging.messages.length).toBe(loggingFlushPersistSize);
 
-			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.callFake(() => Observable.of("ok"));
+			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.callFake(() => of("ok"));
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
 			(<LoggingServiceHelper>loggingService).persistLogMessagesHelper();
 			expect(sendRequestSpy).toHaveBeenCalledTimes(1);
@@ -263,7 +263,7 @@ describe("Service: StarkLoggingService", () => {
 		it("should fail to persist messages when the back-end fails", () => {
 			expect(mockStarkLogging.messages.length).toBe(loggingFlushPersistSize);
 
-			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.callFake(() => Observable.throw("ko"));
+			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.callFake(() => observableThrow("ko"));
 			const errorSpy: Spy = spyOn(loggingService, "error");
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
 			(<LoggingServiceHelper>loggingService).persistLogMessagesHelper();
@@ -292,7 +292,7 @@ class LoggingServiceHelper extends StarkLoggingServiceImpl {
 	// override parent's implementation to prevent actual HTTP request to be sent!
 	public sendRequest(): Observable<void> {
 		/* dummy function to be mocked */
-		return Observable.of(undefined);
+		return of(undefined);
 	}
 
 	// override parent's implementation to prevent logging to the console

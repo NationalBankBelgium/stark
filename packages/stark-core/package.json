@@ -59,7 +59,7 @@
   },
   "scripts": {
     "ngc": "ngc",
-    "lint": "tslint --config tslint.json --project ./tsconfig.json --format codeFrame",
+    "lint": "tslint --config tslint.json --project ./tsconfig.spec.json --format codeFrame",
     "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start ./karma.conf.typescript.js",
     "test-fast:ci": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start karma.conf.typescript.ci.js",
     "tsc": "tsc -p tsconfig.json",
