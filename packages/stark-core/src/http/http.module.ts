@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { StarkHttpServiceImpl, starkHttpServiceName } from "./services/index";
 
 // FIXME: remove this factory once LoggingService and SessionService are implemented
-const starkHttpServiceFactory = (httpClient: HttpClient) => {
+export function starkHttpServiceFactory(httpClient: HttpClient): StarkHttpServiceImpl<any> {
 	const logger: any = {
 		debug: console.debug,
 		warn: console.warn,
@@ -18,7 +18,7 @@ const starkHttpServiceFactory = (httpClient: HttpClient) => {
 	};
 
 	return new StarkHttpServiceImpl(logger, sessionService, httpClient)
-};
+}
 
 @NgModule({
 	imports: [
