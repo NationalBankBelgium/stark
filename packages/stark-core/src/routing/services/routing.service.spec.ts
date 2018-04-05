@@ -1,24 +1,23 @@
 "use strict";
 
-import "rxjs/add/operator/do";
-import {Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader} from "@angular/core";
-import {TestBed, fakeAsync, tick, inject} from "@angular/core/testing";
-import {Ng2StateDeclaration, UIRouterModule} from "@uirouter/angular";
-import {StateDeclaration, StateObject, StateService, TransitionService, UIRouter} from "@uirouter/core";
-import {switchMap} from "rxjs/operators/switchMap";
-import {catchError} from "rxjs/operators/catchError";
-import {tap} from "rxjs/operators/tap";
+import { Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
+import { TestBed, fakeAsync, tick, inject } from "@angular/core/testing";
+import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
+import { StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
+import { switchMap } from "rxjs/operators/switchMap";
+import { catchError } from "rxjs/operators/catchError";
+import { tap } from "rxjs/operators/tap";
 import { _throw as observableThrow } from "rxjs/observable/throw";
-import {Store} from "@ngrx/store";
-import {StarkRoutingServiceImpl} from "./routing.service";
-import {StarkLoggingService} from "../../logging/services";
-import {StarkApplicationConfig} from "../../configuration/entities/application";
-import {StarkStateConfigWithParams} from "./state-config-with-params.intf";
-import {StarkRoutingTransitionHook} from "./routing-transition-hook.constants";
+import { Store } from "@ngrx/store";
+import { StarkRoutingServiceImpl } from "./routing.service";
+import { StarkLoggingService } from "../../logging/services/index";
+import { StarkApplicationConfig } from "../../configuration/entities/application/index";
+import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
+import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
 import CallInfo = jasmine.CallInfo;
-import {StarkRoutingActionTypes} from "../actions/index";
+import { StarkRoutingActionTypes } from "../actions/index";
 import Spy = jasmine.Spy;
-import {MockStarkLoggingService} from "../../logging/testing/logging.mock";
+import { MockStarkLoggingService } from "../../logging/testing/logging.mock";
 
 @Component({selector: 'test-home', template: 'HOME'})
 export class HomeComponent {

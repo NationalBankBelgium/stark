@@ -6,16 +6,16 @@ import "rxjs/add/observable/fromPromise";
 import "rxjs/add/observable/empty";
 import { Inject, Injectable } from "@angular/core";
 
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
+import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services/index";
 import { StarkRoutingService, starkRoutingServiceName } from "./routing.service.intf";
 import {
 	Navigate, NavigateFailure, NavigateRejection,
 	NavigateSuccess, NavigationHistoryLimitReached, Reload, ReloadSuccess, ReloadFailure
-} from "../actions/";
-import { StarkApplicationConfig, starkAppConfigConstantName } from "../../configuration/entities";
+} from "../actions/index";
+import { StarkApplicationConfig, starkAppConfigConstantName } from "../../configuration/entities/index";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
-import { StarkCoreApplicationState } from "../../common/store";
+import { StarkCoreApplicationState } from "../../common/store/index";
 import {
 	HookFn,
 	HookMatchCriteria,

@@ -10,6 +10,7 @@ const globals = {
 	"@angular/core": "ng.core",
 	"@angular/common/http": "angular.common.http",
 	"@ngrx/store": "@ngrx/store",
+	"@uirouter/core": "@uirouter/core",
 	"class-validator": "class-validator",
 	cerialize: "cerialize",
 	moment: "moment",
