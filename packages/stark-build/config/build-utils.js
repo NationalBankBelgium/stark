@@ -56,15 +56,16 @@ function getEnvFile(suffix) {
 /**
  * Read the tsconfig to determine if we should prefer ES2015 modules.
  * Load rxjs path aliases.
- * https://github.com/ReactiveX/rxjs/blob/master/doc/lettable-operators.md#build-and-treeshaking
+ * https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md#build-and-treeshaking
  * @param supportES2015 Set to true when the output of typescript is >= ES6
  */
 function rxjsAlias(supportES2015) {
 	try {
 		const rxjsPathMappingImport = supportES2015 ? "rxjs/_esm2015/path-mapping" : "rxjs/_esm5/path-mapping";
 		const rxPaths = require(rxjsPathMappingImport);
-		return rxPaths(helpers.root("node_modules"));
+		return rxPaths();
 	} catch (e) {
+		console.warn(e);
 		return {};
 	}
 }

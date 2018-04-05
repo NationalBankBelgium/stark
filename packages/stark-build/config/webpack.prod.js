@@ -60,6 +60,18 @@ module.exports = function() {
 
 	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
+		 * Stats lets you precisely control what bundle information gets displayed
+		 * reference: https://webpack.js.org/configuration/stats/
+		 */
+		stats: {
+			chunkModules: true,
+			chunkOrigins: true,
+			reasons: true,
+			maxModules: Infinity, // examine all modules (ModuleConcatenationPlugin debugging)
+			optimizationBailout: true  // display bailout reasons (ModuleConcatenationPlugin debugging)
+		},
+		
+		/**
 		 * Options affecting the output of the compilation.
 		 *
 		 * See: http://webpack.github.io/docs/configuration.html#output

@@ -7,33 +7,21 @@ const commonjs = require("rollup-plugin-commonjs");
 const sourcemaps = require("rollup-plugin-sourcemaps");
 
 const globals = {
-	"class-validator": "class-validator",
-	cerialize: "cerialize",
 	"@angular/core": "ng.core",
 	"@angular/common/http": "angular.common.http",
-	rxjs: "rxjs",
-
 	"@ngrx/store": "@ngrx/store",
+	"class-validator": "class-validator",
+	cerialize: "cerialize",
 	moment: "moment",
 	uuid: "uuid",
+
+	rxjs: "rxjs",
 
 	// this should be the preferred way to import RxJS operators: https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md
 	// we should only use that in our code base
 	"rxjs/operators": "rxjs.operators",
 
-	// so that we can get rid of those: https://github.com/NationalBankBelgium/stark/issues/232
-	"rxjs/add/operator/catch": "Rx.Observable.prototype",
-	"rxjs/add/operator/map": "Rx.Observable.prototype",
-	"rxjs/add/operator/mergeMap": "Rx.Observable.prototype",
-	"rxjs/add/operator/retryWhen": "Rx.Observable.prototype",
-	"rxjs/add/operator/toPromise": "Rx.Observable.prototype",
-
-	// TODO could we also get rid of those?
 	"rxjs/Observable": "Rx",
-	"rxjs/add/observable/of": "Rx.Observable.prototype",
-	"rxjs/add/observable/throw": "Rx.Observable.prototype",
-	"rxjs/add/observable/timer": "Rx.Observable.prototype",
-
 	"rxjs/Subject": "Rx",
 	//"rxjs/Subscription": "Rx",
 

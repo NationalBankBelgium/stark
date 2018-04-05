@@ -3,7 +3,7 @@ import { AboutComponent } from "./about";
 import { NoContentComponent } from "./no-content";
 import { Ng2StateDeclaration, Transition } from "@uirouter/angular";
 import { of } from "rxjs/observable/of";
-import "rxjs/add/operator/delay";
+import { delay } from "rxjs/operators/delay";
 import { Observable } from "rxjs/Observable";
 
 export function getResolvedData(): Observable<any> {
@@ -12,14 +12,14 @@ export function getResolvedData(): Observable<any> {
 	// if resolve policy = 'WAIT' or 'NOWAIT' the component WILL BE LOADED WITHOUT
 	// WAITING FOR THE OBSERVABLE TO EMIT
 	// if resolve policy = 'RXWAIT', the component WILL BE LOADED UNTIL THE OBSERVABLE EMITS
-	return of({ resolve: "I am data from the resolve" }).delay(5000);
+	return of({ resolve: "I am data from the resolve" }).pipe(delay(5000));
 
 	// could return a promise
 	// when resolve policy is 'WAIT', the component WILL BE LOADED UNTIL THE PROMISE
 	// IS RESOLVED and the value will be already unwrapped
 	// when resolve policy is 'NOWAIT', the component WILL BE LOADED WITHOUT
 	// WAITING FOR IT but the component should unwrap the promise
-	// return of({ resolve: 'I am data from the resolve'}).delay(5000).toPromise();
+	// return of({ resolve: 'I am data from the resolve'}).pipe(delay(5000)).toPromise();
 }
 
 export function getParamData($transition$: Transition): any {
