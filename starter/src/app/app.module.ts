@@ -3,8 +3,15 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { StarkHttpModule } from "@nationalbankbelgium/stark-core";
+import {
+	StarkHttpModule,
+	StarkLoggingModule,
+	STARK_APP_CONFIG,
+	StarkApplicationConfig,
+	StarkApplicationConfigImpl
+} from "@nationalbankbelgium/stark-core";
 import { routerConfigFn } from "./router.config";
+import { Deserialize } from "cerialize";
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -28,6 +35,23 @@ import "../styles/headings.css";
 // Application wide providers
 const APP_PROVIDERS: any[] = [AppState];
 
+// TODO: where to put this factory function?
+export function starkAppConfigFactory(): StarkApplicationConfig {
+	const config: any = require("../stark-app-config.json");
+
+	const applicationConfig: StarkApplicationConfig = Deserialize(config, StarkApplicationConfigImpl);
+	// FIXME: Make sure the correct values are used below
+	applicationConfig.rootStateUrl = "home";
+	applicationConfig.rootStateName = "";
+	applicationConfig.homeStateName = "home";
+	applicationConfig.errorStateName = "";
+	applicationConfig.angularDebugInfoEnabled = true; //DEVELOPMENT;
+	applicationConfig.debugLoggingEnabled = true; //DEVELOPMENT;
+	applicationConfig.routerLoggingEnabled = true; //DEVELOPMENT;
+
+	return applicationConfig;
+}
+
 /**
  * `AppModule` is the main entry point into Angular2's bootstrapping process
  */
@@ -42,6 +66,7 @@ const APP_PROVIDERS: any[] = [AppState];
 		BrowserAnimationsModule,
 		FormsModule,
 		StarkHttpModule,
+		StarkLoggingModule,
 		UIRouterModule.forRoot({
 			states: APP_STATES,
 			useHash: Boolean(history.pushState) === false,
@@ -62,7 +87,8 @@ const APP_PROVIDERS: any[] = [AppState];
 	providers: [
 		environment.ENV_PROVIDERS,
 		APP_PROVIDERS,
-		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader } // needed for ui-router
+		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
+		{ provide: STARK_APP_CONFIG, useFactory: starkAppConfigFactory }
 	]
 })
 export class AppModule {}

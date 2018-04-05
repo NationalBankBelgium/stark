@@ -12,7 +12,7 @@ import { Subject } from "rxjs/Subject";
 import { Inject, Injectable } from "@angular/core";
 
 import { StarkLoggingService, starkLoggingServiceName } from "./logging.service.intf";
-import { StarkApplicationConfig, starkAppConfigConstantName } from "../../configuration/entities/index";
+import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/index";
 import { StarkBackend } from "../../http/entities/backend/index";
 import { StarkCoreApplicationState, StarkLoggingApplicationState } from "../../common/store/starkCoreApplicationState";
 import { StarkHttpStatusCodes } from "../../http/enumerators/index";
@@ -52,8 +52,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	// FIXME: uncomment these lines once XSRF Service is implemented
 	public constructor(
 		private store: Store<StarkCoreApplicationState>,
-		@Inject(starkAppConfigConstantName)
-		private appConfig: StarkApplicationConfig /*,
+		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig /*,
 					   @Inject(starkXSRFServiceName) private xsrfService: StarkXSRFService*/
 	) {
 		this.isPersisting = false;
@@ -68,7 +67,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			// ensuring that the app config is valid before configuring the automatic logging flush
 			StarkValidationErrorsUtil.throwOnError(
 				validateSync(this.appConfig),
-				starkLoggingServiceName + ": " + starkAppConfigConstantName + " constant is not valid."
+				starkLoggingServiceName + ": " + STARK_APP_CONFIG.toString() + " constant is not valid."
 			);
 
 			this.backend = this.appConfig.getBackend("logging");

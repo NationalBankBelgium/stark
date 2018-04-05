@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Inject, Input, OnInit } from "@angular/core";
 // import { Transition } from '@uirouter/angular';
 import { Observable } from "rxjs/Observable";
+import { StarkLoggingService, starkLoggingServiceName } from "@nationalbankbelgium/stark-core";
 
 @Component({
 	selector: "about",
@@ -27,10 +28,10 @@ export class AboutComponent implements OnInit {
 	@Input() public paramData: any;
 
 	public localState: any;
-	public constructor() // public transition: Transition   // the last transition could be injected if needed
-	{
-		/* empty */
-	}
+	public constructor(
+		// public transition: Transition   // the last transition could be injected if needed
+		@Inject(starkLoggingServiceName) public loggingService: StarkLoggingService
+	) {}
 
 	public ngOnInit(): void {
 		/**
@@ -46,7 +47,7 @@ export class AboutComponent implements OnInit {
 		// if the resolve is an observable, we need to subscribe to it to get the value
 		if (this.resolvedData) {
 			this.resolvedData.subscribe((data: any) => {
-				console.warn("data resolved");
+				this.loggingService.warn("data resolved");
 				this.localState = { ...this.localState, ...data };
 			});
 		}
@@ -63,11 +64,12 @@ export class AboutComponent implements OnInit {
 		// let resolvePromise: Promise<any> = this.transition.injector().get('resolvedData');
 		// resolvePromise.then((data: any) => this.localState = {...this.localState, ...data});
 
-		console.log("hello `About` component");
+		this.loggingService.debug("hello from `About` component");
+
 		/**
 		 * static data that is bundled
 		 * var mockData = require('assets/mock-data/mock-data.json');
-		 * console.log('mockData', mockData);
+		 * this.loggingService.debug('mockData', mockData);
 		 * if you're working with mock data you can also use http.get('assets/mock-data/mock-data.json')
 		 */
 		this.asyncDataWithWebpack();
@@ -80,7 +82,7 @@ export class AboutComponent implements OnInit {
 		 */
 		// setTimeout(() => {
 		// 	System.import("../../assets/mock-data/mock-data.json").then(json => {
-		// 		console.log("async mockData", json);
+		// 		this.loggingService.debug("async mockData", json);
 		// 		this.localState = { ...this.localState, asyncData: json };
 		// 	});
 		// });

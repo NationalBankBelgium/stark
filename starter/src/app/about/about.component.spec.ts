@@ -5,13 +5,37 @@ import { inject, TestBed } from "@angular/core/testing";
  * Load the implementations that should be tested.
  */
 import { AboutComponent } from "./about.component";
+import {
+	StarkLoggingModule,
+	STARK_APP_CONFIG,
+	StarkBackend,
+	StarkApplicationConfig,
+	StarkBackendAuthenticationTypes,
+	StarkLoggingService,
+	starkLoggingServiceName
+} from "@nationalbankbelgium/stark-core";
 
 describe("About", () => {
 	/**
 	 * Provide our implementations or mocks to the dependency injector
 	 */
+	let logger: StarkLoggingService;
+
+	const mockBackend: Partial<StarkBackend> = {
+		authenticationType: StarkBackendAuthenticationTypes.PUBLIC,
+		name: "logging",
+		url: "dummy/url"
+	};
+
+	const mockStarkAppConfig: Partial<StarkApplicationConfig> = {
+		angularDebugInfoEnabled: true,
+		debugLoggingEnabled: true,
+		getBackend: jasmine.createSpy("getBackendSpy").and.returnValue(mockBackend)
+	};
+
 	beforeEach(() =>
 		TestBed.configureTestingModule({
+			imports: [StarkLoggingModule],
 			providers: [
 				/**
 				 * Provide a better mock.
@@ -27,7 +51,8 @@ describe("About", () => {
 						}
 					}
 				},
-				AboutComponent
+				AboutComponent,
+				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
 			]
 		})
 	);
@@ -35,11 +60,13 @@ describe("About", () => {
 	it(
 		"should log ngOnInit",
 		inject([AboutComponent], (about: AboutComponent) => {
-			spyOn(console, "log");
-			expect(console.log).not.toHaveBeenCalled();
+			logger = TestBed.get(starkLoggingServiceName);
+
+			spyOn(logger, "debug");
+			expect(logger.debug).not.toHaveBeenCalled();
 
 			about.ngOnInit();
-			expect(console.log).toHaveBeenCalled();
+			expect(logger.debug).toHaveBeenCalled();
 		})
 	);
 });

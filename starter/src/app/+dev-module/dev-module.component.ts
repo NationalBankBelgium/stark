@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
+import { StarkLoggingService, starkLoggingServiceName } from "@nationalbankbelgium/stark-core";
 
 @Component({
 	selector: "dev-module",
@@ -7,7 +8,9 @@ import { Component, OnInit } from "@angular/core";
   `
 })
 export class DevModuleComponent implements OnInit {
+	public constructor(@Inject(starkLoggingServiceName) public loggingService: StarkLoggingService) {}
+
 	public ngOnInit(): void {
-		console.log("hello `DevModule` component");
+		this.loggingService.debug("hello from `DevModule` component");
 	}
 }
