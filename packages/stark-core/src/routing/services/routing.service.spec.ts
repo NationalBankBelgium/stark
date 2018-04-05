@@ -1,20 +1,22 @@
 "use strict";
 
 import "rxjs/add/operator/do";
-import { Component,	NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
-import { TestBed, fakeAsync, tick, inject } from "@angular/core/testing";
-import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
-import { StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/switchMap";
-import { Store } from "@ngrx/store";
-import { StarkRoutingServiceImpl } from "./routing.service";
-import { StarkLoggingService } from "../../logging/services";
-import { StarkApplicationConfig } from "../../configuration/entities/application";
-import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
-import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
+import {Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader} from "@angular/core";
+import {TestBed, fakeAsync, tick, inject} from "@angular/core/testing";
+import {Ng2StateDeclaration, UIRouterModule} from "@uirouter/angular";
+import {StateDeclaration, StateObject, StateService, TransitionService, UIRouter} from "@uirouter/core";
+import {switchMap} from "rxjs/operators/switchMap";
+import {catchError} from "rxjs/operators/catchError";
+import {tap} from "rxjs/operators/tap";
+import { _throw as observableThrow } from "rxjs/observable/throw";
+import {Store} from "@ngrx/store";
+import {StarkRoutingServiceImpl} from "./routing.service";
+import {StarkLoggingService} from "../../logging/services";
+import {StarkApplicationConfig} from "../../configuration/entities/application";
+import {StarkStateConfigWithParams} from "./state-config-with-params.intf";
+import {StarkRoutingTransitionHook} from "./routing-transition-hook.constants";
 import CallInfo = jasmine.CallInfo;
-import { StarkRoutingActionTypes } from "../actions/index";
+import {StarkRoutingActionTypes} from "../actions/index";
 import Spy = jasmine.Spy;
 import {MockStarkLoggingService} from "../../logging/testing/logging.mock";
 
@@ -32,7 +34,7 @@ describe("Service: StarkRoutingService", () => {
 
 	let routingService: StarkRoutingServiceImpl;
 	let mockLogger: StarkLoggingService;
-	const mockStore:Store<any> = jasmine.createSpyObj("storeSpy", ["dispatch"]);
+	const mockStore: Store<any> = jasmine.createSpyObj("storeSpy", ["dispatch"]);
 	const appConfig: Partial<StarkApplicationConfig> = {
 		sessionTimeout: 123,
 		sessionTimeoutWarningPeriod: 13,
@@ -392,9 +394,9 @@ describe("Service: StarkRoutingService", () => {
 		states: mockStates
 	});
 
-	const starkRoutingServiceFactory: any = (state: StateService, transitions:TransitionService) => {
+	const starkRoutingServiceFactory: any = (state: StateService, transitions: TransitionService) => {
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
-		
+
 		return new StarkRoutingServiceImpl(mockLogger, mockStore, <any>appConfig, state, transitions);
 	};
 
@@ -420,7 +422,7 @@ describe("Service: StarkRoutingService", () => {
 	});
 
 	// Inject module dependencies
-	beforeEach(inject([UIRouter, StarkRoutingServiceImpl], (_router: UIRouter, _routingService:StarkRoutingServiceImpl) => {
+	beforeEach(inject([UIRouter, StarkRoutingServiceImpl], (_router: UIRouter, _routingService: StarkRoutingServiceImpl) => {
 		router = _router;
 		$state = router.stateService;
 		routingService = _routingService;
@@ -447,17 +449,19 @@ describe("Service: StarkRoutingService", () => {
 			let currentState: StateObject = routingService.getCurrentState();
 			expect(currentState.name).toBe("");
 			routingService.navigateTo("page-01")
-				.do((enteredState: StateObject) => {
-					expect(enteredState).toBeDefined();
-					expect(enteredState.name).toBe("page-01");
+				.pipe(
+					tap((enteredState: StateObject) => {
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("page-01");
 
-					currentState = routingService.getCurrentState();
-					expect(currentState.name).toBe(enteredState.name);
-					expect($state.go).toHaveBeenCalledTimes(1);
-				})
-				.catch((error: any) => {
-					return Observable.throw("getCurrentState " + error);
-				})
+						currentState = routingService.getCurrentState();
+						expect(currentState.name).toBe(enteredState.name);
+						expect($state.go).toHaveBeenCalledTimes(1);
+					}),
+					catchError((error: any) => {
+						return observableThrow("getCurrentState " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -468,16 +472,18 @@ describe("Service: StarkRoutingService", () => {
 	describe("getCurrentStateName", () => {
 		it("should return the name of the current State instance where the router has navigated to", (done: DoneFn) => {
 			routingService.navigateTo("page-01")
-				.do((enteredState: StateObject) => {
-					const currentState: StateObject = routingService.getCurrentState();
-					const currentStateName: string = routingService.getCurrentStateName();
+				.pipe(
+					tap((enteredState: StateObject) => {
+						const currentState: StateObject = routingService.getCurrentState();
+						const currentStateName: string = routingService.getCurrentStateName();
 
-					expect(currentStateName).toBe(enteredState.name);
-					expect(currentStateName).toBe(currentState.name);
-				})
-				.catch((error: any) => {
-					return Observable.throw("getCurrentStateName " + error);
-				})
+						expect(currentStateName).toBe(enteredState.name);
+						expect(currentStateName).toBe(currentState.name);
+					}),
+					catchError((error: any) => {
+						return observableThrow("getCurrentStateName " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -490,15 +496,17 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "go").and.callThrough();
 
 			routingService.navigateTo("page-01")
-				.do((enteredState: StateObject) => {
-					expect(enteredState).toBeDefined();
-					const currentStateConfig: StateDeclaration = routingService.getCurrentStateConfig();
-					expect(currentStateConfig.name).toBe(enteredState.name);
-					expect(currentStateConfig.url).toBe("/page-01");
-				})
-				.catch((error: any) => {
-					return Observable.throw("getCurrentStateConfig " + error);
-				})
+				.pipe(
+					tap((enteredState: StateObject) => {
+						expect(enteredState).toBeDefined();
+						const currentStateConfig: StateDeclaration = routingService.getCurrentStateConfig();
+						expect(currentStateConfig.name).toBe(enteredState.name);
+						expect(currentStateConfig.url).toBe("/page-01");
+					}),
+					catchError((error: any) => {
+						return observableThrow("getCurrentStateConfig " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -559,22 +567,24 @@ describe("Service: StarkRoutingService", () => {
 			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
 			routingService.navigateTo("page-01", {requestId: requestId, onBehalfView: true})
-				.do(() => {
-					expect($state.go).toHaveBeenCalledTimes(1);
-					expect($state.go).toHaveBeenCalledWith("page-01", {
-						requestId: requestId,
-						onBehalfView: true
-					}, undefined);
+				.pipe(
+					tap(() => {
+						expect($state.go).toHaveBeenCalledTimes(1);
+						expect($state.go).toHaveBeenCalledWith("page-01", {
+							requestId: requestId,
+							onBehalfView: true
+						}, undefined);
 
-					const currentStateParams: any = routingService.getCurrentStateParams();
-					expect(currentStateParams.requestId).toBeDefined();
-					expect(currentStateParams.requestId).toBe(requestId);
-					expect(currentStateParams.onBehalfView).toBeDefined();
-					expect(currentStateParams.onBehalfView).toBe(true);
-				})
-				.catch((error: any) => {
-					return Observable.throw("navigateTo " + error);
-				})
+						const currentStateParams: any = routingService.getCurrentStateParams();
+						expect(currentStateParams.requestId).toBeDefined();
+						expect(currentStateParams.requestId).toBe(requestId);
+						expect(currentStateParams.onBehalfView).toBeDefined();
+						expect(currentStateParams.onBehalfView).toBe(true);
+					}),
+					catchError((error: any) => {
+						return observableThrow("navigateTo " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -588,16 +598,18 @@ describe("Service: StarkRoutingService", () => {
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
 			routingService.navigateTo("page-01")
-				.do(() => {
-					let isCurrentUIState: boolean = routingService.isCurrentUiState("page-01");
-					expect(isCurrentUIState).toBe(true);
+				.pipe(
+					tap(() => {
+						let isCurrentUIState: boolean = routingService.isCurrentUiState("page-01");
+						expect(isCurrentUIState).toBe(true);
 
-					isCurrentUIState = routingService.isCurrentUiState("otherState");
-					expect(isCurrentUIState).toBe(false);
-				})
-				.catch((error: any) => {
-					return Observable.throw("isCurrentUiState " + error);
-				})
+						isCurrentUIState = routingService.isCurrentUiState("otherState");
+						expect(isCurrentUIState).toBe(false);
+					}),
+					catchError((error: any) => {
+						return observableThrow("isCurrentUiState " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -611,28 +623,30 @@ describe("Service: StarkRoutingService", () => {
 			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
 			routingService.navigateTo("page-01", {requestId: requestId, onBehalfView: true})
-				.do(() => {
-					let isCurrentUIState: boolean = routingService.isCurrentUiState("page-01", {
-						requestId: requestId,
-						onBehalfView: true
-					});
-					expect(isCurrentUIState).toBe(true);
+				.pipe(
+					tap(() => {
+						let isCurrentUIState: boolean = routingService.isCurrentUiState("page-01", {
+							requestId: requestId,
+							onBehalfView: true
+						});
+						expect(isCurrentUIState).toBe(true);
 
-					isCurrentUIState = routingService.isCurrentUiState("otherState", {
-						requestId: requestId,
-						onBehalfView: true
-					});
-					expect(isCurrentUIState).toBe(false);
+						isCurrentUIState = routingService.isCurrentUiState("otherState", {
+							requestId: requestId,
+							onBehalfView: true
+						});
+						expect(isCurrentUIState).toBe(false);
 
-					isCurrentUIState = routingService.isCurrentUiState("page-01", {
-						requestId: requestId,
-						onBehalfView: false
-					});
-					expect(isCurrentUIState).toBe(false);
-				})
-				.catch((error: any) => {
-					return Observable.throw("isCurrentUiState " + error);
-				})
+						isCurrentUIState = routingService.isCurrentUiState("page-01", {
+							requestId: requestId,
+							onBehalfView: false
+						});
+						expect(isCurrentUIState).toBe(false);
+					}),
+					catchError((error: any) => {
+						return observableThrow("isCurrentUiState " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -648,15 +662,17 @@ describe("Service: StarkRoutingService", () => {
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
 			routingService.navigateTo("page-01")
-				.do((enteredState: StateObject) => {
-					expect(enteredState).toBeDefined();
-					expect(enteredState.name).toBe("page-01");
-					expect($state.go).toHaveBeenCalledTimes(1);
-					expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
-				})
-				.catch((error: any) => {
-					return Observable.throw("navigateTo " + error);
-				})
+				.pipe(
+					tap((enteredState: StateObject) => {
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("page-01");
+						expect($state.go).toHaveBeenCalledTimes(1);
+						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
+					}),
+					catchError((error: any) => {
+						return observableThrow("navigateTo " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error),
@@ -667,13 +683,15 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "go").and.callThrough();
 
 			routingService.navigateTo("page-01", undefined, {reload: true})
-				.do(() => {
-					expect($state.go).toHaveBeenCalledTimes(1);
-					expect($state.go).toHaveBeenCalledWith("page-01", undefined, {reload: true});
-				})
-				.catch((error: any) => {
-					return Observable.throw("navigateTo " + error);
-				})
+				.pipe(
+					tap(() => {
+						expect($state.go).toHaveBeenCalledTimes(1);
+						expect($state.go).toHaveBeenCalledWith("page-01", undefined, {reload: true});
+					}),
+					catchError((error: any) => {
+						return observableThrow("navigateTo " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -681,15 +699,17 @@ describe("Service: StarkRoutingService", () => {
 		});
 
 		it("should navigate to a non-existing page", (done: DoneFn) => {
-			spyOn($state, "go").and.returnValue(Observable.throw("uh-oh").toPromise());
+			spyOn($state, "go").and.returnValue(observableThrow("uh-oh").toPromise());
 
 			routingService.navigateTo("whatever")
-				.do(() => {
-					fail("whatever");
-				})
-				.catch((error: any) => {
-					return Observable.throw(error);
-				})
+				.pipe(
+					tap(() => {
+						fail("whatever");
+					}),
+					catchError((error: any) => {
+						return observableThrow(error);
+					})
+				)
 				.subscribe(
 					() => fail("it should not execute this code"),
 					(error: any) => {
@@ -708,15 +728,17 @@ describe("Service: StarkRoutingService", () => {
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
 			routingService.navigateToHome()
-				.do((enteredState: StateObject) => {
-					expect(enteredState).toBeDefined();
-					expect(enteredState.name).toBe("homepage");
-					expect($state.go).toHaveBeenCalledTimes(1);
-					expect($state.go).toHaveBeenCalledWith("homepage", undefined, undefined);
-				})
-				.catch((error: any) => {
-					return Observable.throw("navigateToHome " + error);
-				})
+				.pipe(
+					tap((enteredState: StateObject) => {
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("homepage");
+						expect($state.go).toHaveBeenCalledTimes(1);
+						expect($state.go).toHaveBeenCalledWith("homepage", undefined, undefined);
+					}),
+					catchError((error: any) => {
+						return observableThrow("navigateToHome " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -729,22 +751,24 @@ describe("Service: StarkRoutingService", () => {
 			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
 			routingService.navigateTo("homepage", {requestId: requestId, onBehalfView: true})
-				.do(() => {
-					expect($state.go).toHaveBeenCalledTimes(1);
-					expect($state.go).toHaveBeenCalledWith("homepage", {
-						requestId: requestId,
-						onBehalfView: true
-					}, undefined);
+				.pipe(
+					tap(() => {
+						expect($state.go).toHaveBeenCalledTimes(1);
+						expect($state.go).toHaveBeenCalledWith("homepage", {
+							requestId: requestId,
+							onBehalfView: true
+						}, undefined);
 
-					const currentStateParams: any = routingService.getCurrentStateParams();
-					expect(currentStateParams.requestId).toBeDefined();
-					expect(currentStateParams.requestId).toBe(requestId);
-					expect(currentStateParams.onBehalfView).toBeDefined();
-					expect(currentStateParams.onBehalfView).toBe(true);
-				})
-				.catch((error: any) => {
-					return Observable.throw("navigateToHome " + error);
-				})
+						const currentStateParams: any = routingService.getCurrentStateParams();
+						expect(currentStateParams.requestId).toBeDefined();
+						expect(currentStateParams.requestId).toBe(requestId);
+						expect(currentStateParams.onBehalfView).toBeDefined();
+						expect(currentStateParams.onBehalfView).toBe(true);
+					}),
+					catchError((error: any) => {
+						return observableThrow("navigateToHome " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -757,27 +781,29 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "go").and.callThrough();
 
 			routingService.navigateTo("homepage")
-				.catch((error: any) => {
-					return Observable.throw("navigateTo homepage " + error);
-				})
-				.switchMap(() => routingService.navigateTo("page-01"))
-				.catch((error: any) => {
-					return Observable.throw("navigateTo page-01 " + error);
-				})
-				.switchMap(() => routingService.navigateTo("page-01-01"))
-				.catch((error: any) => {
-					return Observable.throw("navigateTo page-01-01 " + error);
-				})
-				.switchMap(() => routingService.navigateToPrevious())
-				.do((enteredState: StateObject) => {
-					expect(enteredState).toBeDefined();
-					expect(enteredState.name).toBe("page-01");
-					expect($state.go).toHaveBeenCalledTimes(4);
-					expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
-				})
-				.catch((error: any) => {
-					return Observable.throw("navigateToPrevious " + error);
-				})
+				.pipe(
+					catchError((error: any) => {
+						return observableThrow("navigateTo homepage " + error);
+					}),
+					switchMap(() => routingService.navigateTo("page-01")),
+					catchError((error: any) => {
+						return observableThrow("navigateTo page-01 " + error);
+					}),
+					switchMap(() => routingService.navigateTo("page-01-01")),
+					catchError((error: any) => {
+						return observableThrow("navigateTo page-01-01 " + error);
+					}),
+					switchMap(() => routingService.navigateToPrevious()),
+					tap((enteredState: StateObject) => {
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("page-01");
+						expect($state.go).toHaveBeenCalledTimes(4);
+						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
+					}),
+					catchError((error: any) => {
+						return observableThrow("navigateToPrevious " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -793,18 +819,20 @@ describe("Service: StarkRoutingService", () => {
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
 			routingService.navigateTo("page-01")
-				.catch((error: any) => {
-					return Observable.throw("navigateTo homepage " + error);
-				})
-				.switchMap(() => routingService.reload())
-				.do((enteredState: StateObject) => {
-					expect($state.transitionTo).toHaveBeenCalledTimes(2);
-					expect(enteredState).toBeDefined();
-					expect(enteredState.name).toBe("page-01");
-				})
-				.catch((error: any) => {
-					return Observable.throw("reload " + error);
-				})
+				.pipe(
+					catchError((error: any) => {
+						return observableThrow("navigateTo homepage " + error);
+					}),
+					switchMap(() => routingService.reload()),
+					tap((enteredState: StateObject) => {
+						expect($state.transitionTo).toHaveBeenCalledTimes(2);
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("page-01");
+					}),
+					catchError((error: any) => {
+						return observableThrow("reload " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -812,20 +840,22 @@ describe("Service: StarkRoutingService", () => {
 		});
 
 		it("should reload the current page", (done: DoneFn) => {
-			spyOn($state, "reload").and.returnValue(Observable.throw("Reload has failed").toPromise());
+			spyOn($state, "reload").and.returnValue(observableThrow("Reload has failed").toPromise());
 
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
 			routingService.navigateTo("page-01")
-				.catch((error: any) => {
-					return Observable.throw("navigateTo homepage " + error);
-				})
-				.switchMap(() => routingService.reload())
-				.catch((error: any) => {
-					expect(error).toBe("Reload has failed");
-					return Observable.throw("reload " + error);
-				})
+				.pipe(
+					catchError((error: any) => {
+						return observableThrow("navigateTo homepage " + error);
+					}),
+					switchMap(() => routingService.reload()),
+					catchError((error: any) => {
+						expect(error).toBe("Reload has failed");
+						return observableThrow("reload " + error);
+					})
+				)
 				.subscribe(
 					() => () => fail("the test should not enter the next block"),
 					() => done()
@@ -838,26 +868,28 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "go").and.callThrough();
 
 			routingService.navigateTo("page-01")
-				.catch((error: any) => {
-					return Observable.throw("navigateTo page-01 " + error);
-				})
-				.switchMap(() => routingService.navigateTo("page-01"))
-				.catch((error: any) => {
-					return Observable.throw("navigateTo page-01 " + error);
-				})
-				.do((enteredState: StateObject) => {
-					expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-					const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
-					expect(message).toMatch(/Route transition ignored/);
+				.pipe(
+					catchError((error: any) => {
+						return observableThrow("navigateTo page-01 " + error);
+					}),
+					switchMap(() => routingService.navigateTo("page-01")),
+					catchError((error: any) => {
+						return observableThrow("navigateTo page-01 " + error);
+					}),
+					tap((enteredState: StateObject) => {
+						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
+						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+						expect(message).toMatch(/Route transition ignored/);
 
-					expect(enteredState).toBeDefined();
-					expect(enteredState.name).toBe("page-01");
-					expect($state.go).toHaveBeenCalledTimes(2);
-					expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
-				})
-				.catch((error: any) => {
-					return Observable.throw("navigationErrorHandler " + error);
-				})
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("page-01");
+						expect($state.go).toHaveBeenCalledTimes(2);
+						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
+					}),
+					catchError((error: any) => {
+						return observableThrow("navigationErrorHandler " + error);
+					})
+				)
 				.subscribe(
 					() => done(),
 					(error: any) => fail(error)
@@ -871,22 +903,24 @@ describe("Service: StarkRoutingService", () => {
 				routingService.navigateTo("page-01");
 
 				routingService.navigateTo("page-01-01")
-					.catch((error: any) => {
-						return Observable.throw("navigateTo page-01-01 " + error);
-					})
-					.do((enteredState: StateObject) => {
-						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
-						expect(message).toMatch(/Route transition superseded/);
+					.pipe(
+						catchError((error: any) => {
+							return observableThrow("navigateTo page-01-01 " + error);
+						}),
+						tap((enteredState: StateObject) => {
+							expect(mockLogger.warn).toHaveBeenCalledTimes(1);
+							const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+							expect(message).toMatch(/Route transition superseded/);
 
-						expect(enteredState).toBeDefined();
-						expect(enteredState.name).toBe("page-01-01");
-						expect($state.go).toHaveBeenCalledTimes(2);
-						expect($state.go).toHaveBeenCalledWith("page-01-01", undefined, undefined);
-					})
-					.catch((error: any) => {
-						return Observable.throw("navigationErrorHandler " + error);
-					})
+							expect(enteredState).toBeDefined();
+							expect(enteredState.name).toBe("page-01-01");
+							expect($state.go).toHaveBeenCalledTimes(2);
+							expect($state.go).toHaveBeenCalledWith("page-01-01", undefined, undefined);
+						}),
+						catchError((error: any) => {
+							return observableThrow("navigationErrorHandler " + error);
+						})
+					)
 					.subscribe(
 						() => done(),
 						(error: any) => fail(error)
@@ -901,12 +935,14 @@ describe("Service: StarkRoutingService", () => {
 			routingService.addKnownNavigationRejectionCause("transition rejection");
 
 			routingService.navigateTo("page-01")
-				.catch((error: any) => {
-					expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-					const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
-					expect(message).toMatch(/Route transition rejected/);
-					return Observable.throw("navigationErrorHandler " + error);
-				})
+				.pipe(
+					catchError((error: any) => {
+						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
+						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+						expect(message).toMatch(/Route transition rejected/);
+						return observableThrow("navigationErrorHandler " + error);
+					})
+				)
 				.subscribe(
 					() => fail("this block should not be executed"),
 					() => done()
@@ -919,12 +955,14 @@ describe("Service: StarkRoutingService", () => {
 			});
 
 			routingService.navigateTo("page-01")
-				.catch((error: any) => {
-					expect(mockLogger.error).toHaveBeenCalledTimes(2);
-					const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
-					expect(message).toMatch(/Error during route transition/);
-					return Observable.throw("navigationErrorHandler " + error);
-				})
+				.pipe(
+					catchError((error: any) => {
+						expect(mockLogger.error).toHaveBeenCalledTimes(2);
+						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
+						expect(message).toMatch(/Error during route transition/);
+						return observableThrow("navigationErrorHandler " + error);
+					})
+				)
 				.subscribe(
 					() => fail("this block should not be executed"),
 					() => done()
@@ -937,12 +975,14 @@ describe("Service: StarkRoutingService", () => {
 			});
 
 			routingService.navigateTo("page-01")
-				.catch((error: any) => {
-					expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-					const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
-					expect(message).toMatch(/transition aborted/);
-					return Observable.throw("navigationErrorHandler " + error);
-				})
+				.pipe(
+					catchError((error: any) => {
+						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
+						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+						expect(message).toMatch(/transition aborted/);
+						return observableThrow("navigationErrorHandler " + error);
+					})
+				)
 				.subscribe(
 					() => fail("this block should not be executed"),
 					() => done()
@@ -955,12 +995,14 @@ describe("Service: StarkRoutingService", () => {
 			});
 
 			routingService.navigateTo("page-01")
-				.catch((error: any) => {
-					expect(mockLogger.error).toHaveBeenCalledTimes(2);
-					const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
-					expect(message).toMatch(/An error occurred with a resolve in the new state/);
-					return Observable.throw("navigationErrorHandler " + error);
-				})
+				.pipe(
+					catchError((error: any) => {
+						expect(mockLogger.error).toHaveBeenCalledTimes(2);
+						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
+						expect(message).toMatch(/An error occurred with a resolve in the new state/);
+						return observableThrow("navigationErrorHandler " + error);
+					})
+				)
 				.subscribe(
 					() => fail("this block should not be executed"),
 					() => done()
@@ -969,13 +1011,15 @@ describe("Service: StarkRoutingService", () => {
 
 		it("should log an error if the state does not exist", (done: DoneFn) => {
 			routingService.navigateTo("non-existing-page")
-				.catch((error: any) => {
+				.pipe(
+					catchError((error: any) => {
 
-					expect(mockLogger.error).toHaveBeenCalledTimes(1);
-					const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
-					expect(message).toMatch(/The target state does NOT exist/);
-					return Observable.throw("navigationErrorHandler " + error);
-				})
+						expect(mockLogger.error).toHaveBeenCalledTimes(1);
+						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
+						expect(message).toMatch(/The target state does NOT exist/);
+						return observableThrow("navigationErrorHandler " + error);
+					})
+				)
 				.subscribe(
 					() => fail("this block should not be executed"),
 					() => done()
