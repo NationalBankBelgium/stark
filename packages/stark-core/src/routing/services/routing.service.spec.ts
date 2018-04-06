@@ -1,6 +1,9 @@
 "use strict";
 
-import { Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
+import {
+	Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA,
+	SystemJsNgModuleLoader
+} from "@angular/core";
 import { TestBed, fakeAsync, tick, inject } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
 import { StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
@@ -390,7 +393,8 @@ describe("Service: StarkRoutingService", () => {
 
 	const routerModule: UIRouterModule = UIRouterModule.forRoot({
 		useHash: true,
-		states: mockStates
+		states: mockStates,
+		deferIntercept: true // FIXME: this option shouldn't be used but is needed for Chrome and HeadlessChrome otherwise it doesn't work. Why?
 	});
 
 	const starkRoutingServiceFactory: any = (state: StateService, transitions: TransitionService) => {

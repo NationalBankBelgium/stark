@@ -2,17 +2,23 @@
 
 import { Action, Store } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/fromPromise";
-import "rxjs/add/observable/empty";
+import { fromPromise } from "rxjs/observable/fromPromise";
+import { empty } from "rxjs/observable/empty";
 import { Inject, Injectable } from "@angular/core";
 
 import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services/index";
 import { StarkRoutingService, starkRoutingServiceName } from "./routing.service.intf";
 import {
-	Navigate, NavigateFailure, NavigateRejection,
-	NavigateSuccess, NavigationHistoryLimitReached, Reload, ReloadSuccess, ReloadFailure
+	Navigate,
+	NavigateFailure,
+	NavigateRejection,
+	NavigateSuccess,
+	NavigationHistoryLimitReached,
+	Reload,
+	ReloadSuccess,
+	ReloadFailure
 } from "../actions/index";
-import { StarkApplicationConfig, starkAppConfigConstantName } from "../../configuration/entities/index";
+import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/index";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkCoreApplicationState } from "../../common/store/index";
@@ -66,12 +72,13 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	/** @internal */
 	private _starkStateHistory: StarkState[];
 
-	public constructor(@Inject(starkLoggingServiceName) private logger: StarkLoggingService,
-					   private store: Store<StarkCoreApplicationState>,
-					   @Inject(starkAppConfigConstantName) private  appConfig: StarkApplicationConfig,
-					   @Inject("$state") private $state: StateService,
-					   @Inject("$transitions") private $transitions: TransitionService) {
-
+	public constructor(
+		@Inject(starkLoggingServiceName) private logger: StarkLoggingService,
+		private store: Store<StarkCoreApplicationState>,
+		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
+		@Inject("$state") private $state: StateService,
+		@Inject("$transitions") private $transitions: TransitionService
+	) {
 		this.appConfig = appConfig;
 
 		this.knownRejectionCauses = [];
@@ -86,7 +93,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 	public navigateTo(newState: string, params?: RawParams, options?: TransitionOptions): Observable<any> {
 		this.store.dispatch(new Navigate(this.getCurrentStateName(), newState, params, options));
-		const transitionObservable: Observable<any> = Observable.fromPromise(this.$state.go(newState, params, options));
+		const transitionObservable: Observable<any> = fromPromise(this.$state.go(newState, params, options));
 		return transitionObservable;
 	}
 
@@ -101,8 +108,10 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			const previousState: StarkState = this._starkStateHistory[this._starkStateHistory.length - 2];
 			this._starkStateHistory = this._starkStateHistory.slice(0, this._starkStateHistory.length - 2);
 
-			if ((this._starkStateHistory.length === 1 && this._starkStateHistory[0].name.match(/(starkAppInit|starkAppExit)/)) ||
-				this._starkStateHistory.length === 0) {
+			if (
+				(this._starkStateHistory.length === 1 && this._starkStateHistory[0].name.match(/(starkAppInit|starkAppExit)/)) ||
+				this._starkStateHistory.length === 0
+			) {
 				this.store.dispatch(new NavigationHistoryLimitReached());
 			}
 
@@ -113,12 +122,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 		this.store.dispatch(new NavigationHistoryLimitReached());
 		this.logger.warn(starkRoutingServiceName + ": navigateToPrevious - " + reason);
-		return Observable.empty();
+		return empty();
 	}
 
 	public reload(): Observable<any> {
 		this.store.dispatch(new Reload(this.getCurrentStateName()));
-		const reload$: Observable<any> = Observable.fromPromise(this.$state.reload());
+		const reload$: Observable<any> = fromPromise(this.$state.reload());
 		// dispatch corresponding success action when transition is completed
 		reload$.subscribe(
 			() => this.store.dispatch(new ReloadSuccess(this.getCurrentStateName(), this.getCurrentStateParams())),
@@ -182,7 +191,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 		const currentParams: StateParams = this.$state.params;
 		const currentStateParams: RawParams = {};
-		const stateParams: Param[] = this.$state.$current.parameters({inherit: includeInherited});
+		const stateParams: Param[] = this.$state.$current.parameters({ inherit: includeInherited });
 
 		// extract the values from the stateOwnParams (no other way to do this :S)
 		for (const param of stateParams) {
@@ -221,7 +230,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		this.knownRejectionCausesRegex = new RegExp(this.knownRejectionCauses.join("|"));
 	}
 
-	public addTransitionHook(lifecycleHook: string, matchCriteria: HookMatchCriteria, callback: HookFn, options?: HookRegOptions): Function {
+	public addTransitionHook(
+		lifecycleHook: string,
+		matchCriteria: HookMatchCriteria,
+		callback: HookFn,
+		options?: HookRegOptions
+	): Function {
 		switch (lifecycleHook) {
 			case StarkRoutingTransitionHook.ON_BEFORE:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onbefore
@@ -259,23 +273,30 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	private addNavigationErrorHandlers(): void {
 		this.logger.debug(starkRoutingServiceName + ": adding navigation error handlers");
 
-		const hookMatchCriteria: HookMatchCriteria = {/* empty criteria */};
+		const hookMatchCriteria: HookMatchCriteria = {
+			/* empty criteria */
+		};
 
 		// Whenever an error occurs during a router transition
-		this.addTransitionHook(StarkRoutingTransitionHook.ON_ERROR, hookMatchCriteria,
+		this.addTransitionHook(
+			StarkRoutingTransitionHook.ON_ERROR,
+			hookMatchCriteria,
 			(transition: Transition): HookResult => {
-
 				const fromState: StateDeclaration = transition.from();
 				const targetState: TargetState = transition.targetState();
 				const rejection: Rejection = transition.error();
 				const rejectionString: string = rejection.toString();
 				let message: string = starkRoutingServiceName + ": ";
-				
+
 				if (this.knownRejectionCausesRegex.test(rejectionString)) {
-					const rejectionAction: Action = new NavigateRejection(<string>fromState.name,
-						targetState.name().toString(), targetState.params(), rejectionString);
-					message += "Route transition rejected: \"";
-					message += targetState.name() + "\" navigated from \"" + fromState.name + "\"";
+					const rejectionAction: Action = new NavigateRejection(
+						<string>fromState.name,
+						targetState.name().toString(),
+						targetState.params(),
+						rejectionString
+					);
+					message += 'Route transition rejected: "';
+					message += targetState.name() + '" navigated from "' + fromState.name + '"';
 					message += ". Parameters that were passed: " + JSON.stringify(targetState.params()) + " Rejection: " + rejectionString;
 
 					// dispatch corresponding action to allow the user to trigger his own effects if needed
@@ -284,22 +305,28 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				} else {
 					switch (rejection.type) {
 						case RejectType.IGNORED:
-							message += "Route transition ignored: \"";
-							message += targetState.name() + "\" navigated from \"" + fromState.name + "\"";
-							message += ". Parameters that were passed: " + JSON.stringify(targetState.params()) + " Rejection: " + rejectionString;
+							message += 'Route transition ignored: "';
+							message += targetState.name() + '" navigated from "' + fromState.name + '"';
+							message +=
+								". Parameters that were passed: " + JSON.stringify(targetState.params()) + " Rejection: " + rejectionString;
 
 							this.logger.warn(message);
 							break;
 						case RejectType.SUPERSEDED:
-							message += "Route transition superseded: \"";
-							message += targetState.name() + "\" navigated from \"" + fromState.name + "\"";
-							message += ". Parameters that were passed: " + JSON.stringify(targetState.params()) + " Rejection: " + rejectionString;
+							message += 'Route transition superseded: "';
+							message += targetState.name() + '" navigated from "' + fromState.name + '"';
+							message +=
+								". Parameters that were passed: " + JSON.stringify(targetState.params()) + " Rejection: " + rejectionString;
 
 							this.logger.warn(message);
 							break;
 						default:
-							const failureAction: Action = new NavigateFailure(<string>fromState.name,
-								targetState.name().toString(), targetState.params(), rejectionString);
+							const failureAction: Action = new NavigateFailure(
+								<string>fromState.name,
+								targetState.name().toString(),
+								targetState.params(),
+								rejectionString
+							);
 
 							// dispatch corresponding action to allow the user to trigger his own effects if needed
 							this.store.dispatch(failureAction);
@@ -308,10 +335,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 							if (rejectionString.match(/transition superseded|transition prevented|transition aborted|transition failed/)) {
 								this.logger.warn(starkRoutingServiceName + ": " + rejectionString);
 							} else if (rejectionString.match(/resolve error/)) {
-								this.logger.error(starkRoutingServiceName + ": An error occurred with a resolve in the new state. " + rejectionString);
+								this.logger.error(
+									starkRoutingServiceName + ": An error occurred with a resolve in the new state. " + rejectionString
+								);
 							} else {
-								message += "Error during route transition: \"";
-								message += targetState.name() + "\" navigated from \"" + fromState.name + "\"";
+								message += 'Error during route transition: "';
+								message += targetState.name() + '" navigated from "' + fromState.name + '"';
 								message += ". Parameters that were passed: " + JSON.stringify(targetState.params());
 								this.logger.error(message, transition.error());
 							}
@@ -324,17 +353,22 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				// boolean | TargetState | void | Promise<boolean | TargetState | void>
 				return false;
 			},
-			{priority: 1000} // very high priority (this hook should be the first one to be called to dispatch actions immediately)
+			{ priority: 1000 } // very high priority (this hook should be the first one to be called to dispatch actions immediately)
 		);
 
 		// declare the onInvalid handler
 		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#oninvalid
 		this.$state.onInvalid((toState?: TargetState, fromState?: TargetState): HookResult => {
 			const errorType: string = "Invalid state change";
-			const failureAction: Action = new NavigateFailure((<TargetState>fromState).name(),
-				(<TargetState>toState).name(), (<TargetState>toState).params(), errorType);
-			let message: string = starkRoutingServiceName + ": Error while trying to navigate from \"" + (<TargetState>fromState).name() + "\"";
-			message += " to \"" + (<TargetState>toState).name() + "\"";
+			const failureAction: Action = new NavigateFailure(
+				(<TargetState>fromState).name(),
+				(<TargetState>toState).name(),
+				(<TargetState>toState).params(),
+				errorType
+			);
+			let message: string =
+				starkRoutingServiceName + ': Error while trying to navigate from "' + (<TargetState>fromState).name() + '"';
+			message += ' to "' + (<TargetState>toState).name() + '"';
 
 			if (toState && !toState.exists()) {
 				message = message + ". The target state does NOT exist";
@@ -368,10 +402,14 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	private addNavigationSuccessHandlers(): void {
 		this.logger.debug(starkRoutingServiceName + ": adding navigation success handlers");
 
-		const hookMatchCriteria: HookMatchCriteria = {/* empty criteria */};
+		const hookMatchCriteria: HookMatchCriteria = {
+			/* empty criteria */
+		};
 
 		// Whenever a router transition successfully completes
-		this.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, hookMatchCriteria,
+		this.addTransitionHook(
+			StarkRoutingTransitionHook.ON_SUCCESS,
+			hookMatchCriteria,
 			(transition: Transition): HookResult => {
 				this.lastTransition = transition;
 				// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
@@ -383,11 +421,11 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				this.store.dispatch(new NavigateSuccess(previousStateName, currentState.name(), currentState.params()));
 
 				// Add the params of the current state to the _stateTreeParams array
-				this._starkStateHistory.push({name: currentState.name(), params: currentState.params()});
+				this._starkStateHistory.push({ name: currentState.name(), params: currentState.params() });
 
 				return true; // the transition will resume
 			},
-			{priority: 1000} // very high priority (this hook should be the first one to be called to keep the lastTransition up to date)
+			{ priority: 1000 } // very high priority (this hook should be the first one to be called to keep the lastTransition up to date)
 		);
 	}
 
@@ -403,7 +441,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		for (index; index >= 0; index--) {
 			const pathNode: PathNode = pathNodes[index];
 
-			// skipping abstract states and the root state 					
+			// skipping abstract states and the root state
 			if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
 				let stateParams: RawParams | undefined;
 
@@ -424,7 +462,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public getStateTreeResolves(): Map<string, any> {
 		const stateTreeResolves: Map<string, any> = new Map<string, any>();
 
-		// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes 
+		// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
 		const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
 
 		// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
@@ -450,7 +488,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public getStateTreeData(): Map<string, any> {
 		const stateTreeData: Map<string, any> = new Map<string, any>();
 
-		// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states) 
+		// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states)
 		const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
 
 		// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
@@ -493,7 +531,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		const resolvablesData: { [key: string]: any } = {};
 
 		for (const resolvable of resolvables) {
-			// exclude the 'Core Resolvables' added by angular-ui-router 
+			// exclude the 'Core Resolvables' added by angular-ui-router
 			// see: https://github.com/ui-router/core/commit/a06948b
 			if (resolvable.token !== "$state$" && resolvable.token !== "$transition$" && resolvable.token !== "$stateParams") {
 				resolvablesData[resolvable.token] = resolvable.data;
