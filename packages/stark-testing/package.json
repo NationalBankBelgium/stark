@@ -22,8 +22,8 @@
   "dependencies": {
     "@types/jasmine": "2.8.6",
     "@types/node": "6.0.102",
-    "istanbul-instrumenter-loader": "3.0.0",
-    "jasmine-core": "2.99.1",
+    "istanbul-instrumenter-loader": "3.0.1",
+    "jasmine-core": "3.1.0",
     "karma": "2.0.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage": "1.1.1",
