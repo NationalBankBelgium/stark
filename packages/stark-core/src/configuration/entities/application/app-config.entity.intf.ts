@@ -1,8 +1,10 @@
 "use strict";
 
 import { StarkBackend } from "../../../http/entities/backend";
+import { InjectionToken } from '@angular/core';
 
-export const starkAppConfigConstantName: string = "StarkAppConfig";
+export const STARK_APP_CONFIG: InjectionToken<StarkApplicationConfig> = new InjectionToken<StarkApplicationConfig>('STARK_APP_CONFIG');
+
 /**
  * Minimal set of configuration options for Stark applications.
  * An implementation should be instantiated and be available under the name defined in the constants.

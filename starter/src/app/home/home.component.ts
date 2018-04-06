@@ -9,6 +9,8 @@ import {
 	StarkHttpSerializerImpl,
 	StarkHttpService,
 	starkHttpServiceName,
+	StarkLoggingService,
+	starkLoggingServiceName,
 	StarkSingleItemResponseWrapper
 } from "@nationalbankbelgium/stark-core";
 import { Observable } from "rxjs/Observable";
@@ -41,25 +43,27 @@ export class HomeComponent implements OnInit {
 	/**
 	 * Set our default values
 	 */
-	public localState: any = {value: " "};
+	public localState: any = { value: " " };
 
 	/**
 	 * TypeScript public modifiers
 	 */
-	public constructor(public appState: AppState,
-					   public title: Title,
-					   @Inject(starkHttpServiceName) public httpService: StarkHttpService<any>) {
-	}
+	public constructor(
+		public appState: AppState,
+		public title: Title,
+		@Inject(starkHttpServiceName) public httpService: StarkHttpService<any>,
+		@Inject(starkLoggingServiceName) public loggingService: StarkLoggingService
+	) {}
 
 	public ngOnInit(): void {
-		console.log("hello `Home` component");
+		this.loggingService.debug("hello from `Home` component");
 		/**
 		 * this.title.getData().subscribe(data => this.data = data);
 		 */
 	}
 
 	public submitState(value: string): void {
-		console.log("submitState", value);
+		this.loggingService.debug("submitState", value);
 		this.appState.set("value", value);
 		this.localState.value = "";
 	}
@@ -77,33 +81,31 @@ export class HomeComponent implements OnInit {
 		let httpRequest$: Observable<StarkSingleItemResponseWrapper<Request> | StarkCollectionResponseWrapper<Request>>;
 
 		if (type === "singleItem") {
-			httpRequest$ = this.httpService
-				.executeSingleItemRequest({
-					backend: backend,
-					resourcePath: "requests/11",
-					headers: new Map<string, string>(),
-					queryParameters: new Map<string, string | string[] | undefined>(),
-					requestType: StarkHttpRequestType.GET,
-					serializer: serializer,
-					retryCount: 4
-				})
+			httpRequest$ = this.httpService.executeSingleItemRequest({
+				backend: backend,
+				resourcePath: "requests/11",
+				headers: new Map<string, string>(),
+				queryParameters: new Map<string, string | string[] | undefined>(),
+				requestType: StarkHttpRequestType.GET,
+				serializer: serializer,
+				retryCount: 4
+			});
 		} else {
-			httpRequest$ = this.httpService
-				.executeCollectionRequest({
-					backend: backend,
-					resourcePath: "requests",
-					headers: new Map<string, string>(),
-					queryParameters: new Map<string, string | string[] | undefined>(),
-					requestType: StarkHttpRequestType.GET_COLLECTION,
-					serializer: serializer,
-					retryCount: 4
-				})
+			httpRequest$ = this.httpService.executeCollectionRequest({
+				backend: backend,
+				resourcePath: "requests",
+				headers: new Map<string, string>(),
+				queryParameters: new Map<string, string | string[] | undefined>(),
+				requestType: StarkHttpRequestType.GET_COLLECTION,
+				serializer: serializer,
+				retryCount: 4
+			});
 		}
 
 		httpRequest$.subscribe(
 			(response: any) => console.log("---------- SUCCESS", response),
-			(error: StarkHttpErrorWrapper) => console.log("---------- ERROR", error),
-			() => console.log("---------- COMPLETE")
+			(error: StarkHttpErrorWrapper) => this.loggingService.error("---------- ERROR", <any>error),
+			() => this.loggingService.debug("---------- COMPLETE")
 		);
 	}
 }

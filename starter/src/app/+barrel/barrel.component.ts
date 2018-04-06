@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
+import { StarkLoggingService, starkLoggingServiceName } from "@nationalbankbelgium/stark-core";
 /**
  * We're loading this component asynchronously
  * We are using some magic with es6-promise-loader that will wrap the module with a Promise
@@ -12,7 +13,9 @@ console.log("`Barrel` component loaded asynchronously");
 	templateUrl: "./barrel.component.html"
 })
 export class BarrelComponent implements OnInit {
+	public constructor(@Inject(starkLoggingServiceName) public loggingService: StarkLoggingService) {}
+
 	public ngOnInit(): void {
-		console.log("hello `Barrel` component");
+		this.loggingService.debug("hello from `Barrel` component");
 	}
 }

@@ -1,15 +1,10 @@
 import { NgModule } from "@angular/core";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { StarkHttpServiceImpl, starkHttpServiceName } from "./services/index";
+import { StarkLoggingService, starkLoggingServiceName } from '../logging/index';
 
 // FIXME: remove this factory once LoggingService and SessionService are implemented
-export function starkHttpServiceFactory(httpClient: HttpClient): StarkHttpServiceImpl<any> {
-	const logger: any = {
-		debug: console.debug,
-		warn: console.warn,
-		error: console.error,
-		correlationId: "dummy-correlation-id"
-	};
+export function starkHttpServiceFactory(httpClient: HttpClient, starkLoggingService: StarkLoggingService): StarkHttpServiceImpl<any> {
 
 	const sessionService: any = {
 		fakePreAuthenticationHeaders: new Map<string, string>([
@@ -17,7 +12,7 @@ export function starkHttpServiceFactory(httpClient: HttpClient): StarkHttpServic
 		])
 	};
 
-	return new StarkHttpServiceImpl(logger, sessionService, httpClient)
+	return new StarkHttpServiceImpl(starkLoggingService, sessionService, httpClient);
 }
 
 @NgModule({
@@ -26,9 +21,9 @@ export function starkHttpServiceFactory(httpClient: HttpClient): StarkHttpServic
 	],
 	providers: [
 		// FIXME: replace this Factory provider by a simple Class provider once LoggingService and SessionService are implemented
-		{provide: starkHttpServiceName, useFactory: starkHttpServiceFactory, deps: [HttpClient]},
+		{ provide: starkHttpServiceName, useFactory: starkHttpServiceFactory, deps: [HttpClient, starkLoggingServiceName] }
 	]
 })
-export class StarkHttpModule {
 
+export class StarkHttpModule {
 }
