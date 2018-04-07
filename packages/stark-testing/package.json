@@ -35,5 +35,10 @@
     "karma-typescript": "3.0.12",
     "karma-typescript-angular2-transform": "1.0.2",
     "puppeteer": "1.2.0"
+  },
+  "scripts": {
+    "clean": "npx rimraf dist",
+    "clean:modules": "npx rimraf ./node_modules package-lock.json",
+    "clean:all": "npm run clean && npm run clean:modules"
   }
 }

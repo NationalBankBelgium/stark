@@ -53,11 +53,16 @@
   },
   "peerDependencies": {
     "@angular/common": "5.x",
+    "@angular/compiler": "5.x",
+    "@angular/compiler-cli": "5.x",
     "@angular/core": "5.x",
     "@angular/platform-browser": "5.x",
     "@angular/platform-browser-dynamic": "5.x"
   },
   "scripts": {
+    "clean": "npx rimraf dist",
+    "clean:modules": "npx rimraf ./node_modules package-lock.json",
+    "clean:all": "npm run clean && npm run clean:modules",
     "ngc": "ngc",
     "lint": "tslint --config tslint.json --project ./tsconfig.spec.json --format codeFrame",
     "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start ./karma.conf.typescript.js",

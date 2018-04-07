@@ -242,6 +242,18 @@ If you only want to build a subset of stark then you can
 * execute the `build` script through npm with the list of packages to build: `npm run build -- --packages=stark-core`
 * execute the build script from the command line: `bash ./build.sh --packages=stark-core`
 
+## Cleaning up the project / packages
+### Cleaning up dist folders
+If you want to clean up the generated dist folders, you can
+* execute one of the `clean:stark-<name>` npm scripts; for example: `npm run clean:stark-core` or `npm run clean:stark-build`
+* navigate to the package folder and run the `clean` npm script; for example: `npm run clean`
+* execute the `clean:all` npm script to clean up every dist folder in your project; for example: `npm run clean:all`
+
+### Cleaning up node_modules folder and package-lock.json
+If you want to clean up completely the installed node_modules and reinstall later on from scratch (without the package-lock.json file), you can
+* execute one of the `clean:modules:stark-<name>` npm scripts; for example: `npm run clean:modules:stark-core` or `npm run clean:modules:stark-build`
+* navigate to the package folder and run the `clean:modules` npm script; for example: `npm run clean:modules`
+* execute the `clean:modules:all` npm script to clean up every modules files in your project; for example: `npm run clean:modules:all`
 
 ## Releasing a version
 * commit all changes to include in the release
