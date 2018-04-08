@@ -43,6 +43,7 @@
     "clean:dll": "npm run rimraf -- dll",
     "clean:aot": "npm run rimraf -- compiled",
     "clean:dist": "npm run rimraf -- dist",
+    "clean:modules": "npm run rimraf -- node_modules package-lock.json",
     "clean:install": "npm set progress=false && npm install",
     "clean": "npm cache clean --force && npm run rimraf -- node_modules doc coverage reports dist compiled dll",
     "docker": "docker",
@@ -116,7 +117,7 @@
     "@angular/platform-server": "5.2.9",
     "@angular/router": "5.2.9",
     "@nationalbankbelgium/angular-mdi-svg": "1.7.0",
-    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.0-abad17c.tgz",
+    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.0-0a972b1.tgz",
     "@uirouter/angular": "1.0.1",
     "@uirouter/visualizer": "6.0.0",
     "core-js": "2.5.3",
@@ -128,8 +129,8 @@
     "web-animations-js": "2.3.1"
   },
   "devDependencies": {
-    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-abad17c.tgz",
-    "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.0.0-alpha.0-abad17c.tgz",
+    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-0a972b1.tgz",
+    "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.0.0-alpha.0-0a972b1.tgz",
     "@types/core-js": "0.9.46",
     "@types/hammerjs": "2.0.35",
     "@types/node": "6.0.102",
