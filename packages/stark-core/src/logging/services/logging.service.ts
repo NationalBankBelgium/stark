@@ -231,7 +231,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			httpRequest$.error(e);
 		}
 
-		return httpRequest$;
+		return httpRequest$.asObservable();
 	}
 
 	private parseArg(arg: any): string {
