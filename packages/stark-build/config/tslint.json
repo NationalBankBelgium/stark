@@ -31,7 +31,7 @@
     "trackBy-function": true,
     "import-destructuring-spacing": true,
     "no-unused-css": true,
-    "i18n": [true, "check-id", "check-text"],
+    "i18n": false,
     "template-cyclomatic-complexity": [true, 5],
     "template-conditional-complexity": [true, 4],
 
