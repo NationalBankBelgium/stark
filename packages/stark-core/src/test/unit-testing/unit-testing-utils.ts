@@ -1,6 +1,6 @@
 "use strict";
 
-import { StarkLoggingService, starkLoggingServiceName } from "../..//logging/index";
+import { StarkRoutingService, starkRoutingServiceName } from "../../routing/index";
 import { StarkSessionService, starkSessionServiceName } from "../../session/index";
 import { StarkHttpHeaders, StarkHttpService, starkHttpServiceName } from "../../http/index";
 
@@ -9,23 +9,32 @@ import { StarkHttpHeaders, StarkHttpService, starkHttpServiceName } from "../../
  */
 export class UnitTestingUtils {
 	/**
-	 * Returns a new instance of a mocked StarkLoggingService. It should always return a new instance otherwise all the tests
+	 * Returns a new instance of a mocked StarkRoutingService. It should always return a new instance otherwise all the tests
 	 * would share the same instance including all the customizations made to such instance, causing an unexpected behaviour
 	 * and many tests to fail
 	 */
-	public static getMockedLoggingService(correlationId: string = "dummyCorrelationId"): StarkLoggingService {
-		const mockLoggingService: any = jasmine.createSpyObj<StarkLoggingService>(starkLoggingServiceName, [
-			"debug",
-			"info",
-			"warn",
-			"error",
-			"generateNewCorrelationId"
+	public static getMockedRoutingService(): StarkRoutingService {
+		return jasmine.createSpyObj<StarkRoutingService>(starkRoutingServiceName, [
+			"getCurrentState",
+			"getCurrentStateName",
+			"navigateTo",
+			"navigateToHome",
+			"navigateToPrevious",
+			"reload",
+			"getStatesConfig",
+			"getCurrentStateConfig",
+			"getCurrentStateParams",
+			"isCurrentUiState",
+			"getStateTreeParams",
+			"getStateTreeResolves",
+			"getStateTreeData",
+			"addKnownNavigationRejectionCause",
+			"addTransitionHook",
+			"getTranslationKeyFromState",
+			"getStateDeclarationByStateName"
 		]);
-		mockLoggingService.correlationId = correlationId;
-
-		return mockLoggingService;
 	}
-
+	
 	/**
 	 * Returns a new instance of a mocked StarkHttpService. It should always return a new instance otherwise all the tests
 	 * would share the same instance including all the customizations made to such instance, causing an unexpected behaviour

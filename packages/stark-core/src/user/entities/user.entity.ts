@@ -5,6 +5,7 @@ import { StarkUserProfile } from "./user-profile.entity.intf";
 import { StarkUserSecurityProfile } from "./user-security-profile.entity.intf";
 import { StarkResource } from "../../http/entities/index";
 import { IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf } from "class-validator";
+import { StarkValidationMethodsUtil } from "../../util/validation-methods.util";
 
 export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, StarkResource {
 	@IsDefined()
@@ -27,27 +28,27 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public lastName: string;
 
-	// @ValidateIf((user: StarkUser) => typeof user.email !== "undefined" && user.email !== null)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsEmail()
 	@autoserialize
 	public email?: string;
 
-	// @ValidateIf((user: StarkUser) => typeof user.phone !== "undefined" && user.phone !== null)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsString()
 	@autoserialize
 	public phone?: string;
 
-	// @ValidateIf((user: StarkUser) => typeof user.language !== "undefined" && user.language !== null)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsString()
 	@autoserialize
 	public language: string;
 
-	// @ValidateIf((user: StarkUser) => typeof user.selectedLanguage !== "undefined" && user.selectedLanguage !== null)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsString()
 	@autoserialize
 	public selectedLanguage?: string;
 
-	// @ValidateIf((user: StarkUser) => typeof user.referenceNumber !== "undefined" && user.referenceNumber !== null)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsString()
 	@autoserialize
 	public referenceNumber?: string;
@@ -57,12 +58,12 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public roles: string[] = [];
 
-	@ValidateIf((user: StarkUser) => typeof user.workpost !== "undefined" && user.workpost !== null)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsString()
 	@autoserialize
 	public workpost?: string;
 
-	@ValidateIf((user: StarkUser) => typeof user.isAnonymous !== "undefined" && user.isAnonymous !== null)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsBoolean()
 	@autoserialize
 	public isAnonymous?: boolean;

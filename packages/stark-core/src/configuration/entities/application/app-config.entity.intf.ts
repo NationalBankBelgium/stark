@@ -61,9 +61,21 @@ export interface StarkApplicationConfig {
 	loggingFlushResourceName?: string;
 
 	/**
+	 * Option to disable the logging flush if it not needed for the application.
+	 * Default: false
+	 */
+	loggingFlushDisabled?: boolean;
+
+	/**
 	 * Enable router logging
 	 */
 	routerLoggingEnabled: boolean;
+
+	/**
+	 * Enable router visualizer. Only in DEV (the router visualizer is not available in PROD)
+	 * Default: false
+	 */
+	routerVisualizerEnabled: boolean;
 
 	/**
 	 * Timeout period before the session is ended if no user interaction occurs
@@ -87,6 +99,12 @@ export interface StarkApplicationConfig {
 	keepAliveUrl?: string;
 
 	/**
+	 * Option to disable the keepAlive if it not needed for the application.
+	 * Default: false
+	 */
+	keepAliveDisabled?: boolean;
+
+	/**
 	 * Url to be navigated to logout the user
 	 */
 	logoutUrl: string;
@@ -107,18 +125,6 @@ export interface StarkApplicationConfig {
 	 * Public applications don't require authentication and usually provide read-only access to information
 	 */
 	publicApp: boolean;
-
-	/**
-	 * Option to disable the logging flush if it not needed for the application.
-	 * default: false
-	 */
-	loggingFlushDisabled?: boolean;
-
-	/**
-	 * Option to disable the keepAlive if it not needed for the application.
-	 * default: false
-	 */
-	keepAliveDisabled?: boolean;
 
 	/**
 	 * Backends that the application will interact to.

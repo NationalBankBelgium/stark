@@ -1,12 +1,13 @@
 "use strict";
 
-import { IsBoolean, IsDefined, IsNotEmpty, IsNumber, IsString, IsUrl, Matches, Min,  ValidateIf, validateSync } from "class-validator";
+import { IsBoolean, IsDefined, IsNotEmpty, IsPositive, IsString, IsUrl, Matches, Min, ValidateIf, validateSync } from "class-validator";
 import { autoserialize, autoserializeAs } from "cerialize";
 import { StarkApplicationConfig } from "./app-config.entity.intf";
 import { StarkBackend, StarkBackendImpl } from "../../../http/entities/backend/index";
 import { stringMap } from "../../../serialization/index";
 import { StarkValidationErrorsUtil } from "../../../util/index";
 import { StarkValidationMethodsUtil } from "../../../util/validation-methods.util";
+// FIXME Implement the following decorators as before
 // import {StarkMapIsValid, StarkMapNotEmpty} from "../../../validation/decorators";
 
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
@@ -41,8 +42,8 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	public debugLoggingEnabled: boolean;
 
 	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled)
-	@IsNumber()
-	@Min(1)
+	@IsPositive()
+	@Min(2)
 	@autoserialize
 	public loggingFlushPersistSize?: number;
 
@@ -58,10 +59,19 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@autoserialize
 	public loggingFlushResourceName?: string;
 
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@IsBoolean()
+	@autoserialize
+	public loggingFlushDisabled?: boolean;
+
 	@IsDefined()
 	@IsBoolean()
 	@autoserialize
 	public routerLoggingEnabled: boolean;
+
+	@IsBoolean()
+	@autoserialize
+	public routerVisualizerEnabled: boolean;
 
 	@IsNotEmpty()
 	@IsString()
@@ -70,16 +80,16 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	public defaultLanguage: string;
 
 	@IsDefined()
-	@IsNumber()
+	@IsPositive()
 	@autoserialize
 	public sessionTimeout: number;
 
-	@IsNumber()
+	@IsPositive()
 	@autoserialize
 	public sessionTimeoutWarningPeriod: number;
 
 	@ValidateIf(StarkApplicationConfigImpl.validateIfKeepAliveEnabled)
-	@IsNumber()
+	@IsPositive()
 	@autoserialize
 	public keepAliveInterval?: number;
 
@@ -87,6 +97,11 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@IsUrl()
 	@autoserialize
 	public keepAliveUrl?: string;
+
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@IsBoolean()
+	@autoserialize
+	public keepAliveDisabled?: boolean;
 
 	@IsDefined()
 	@IsUrl()
@@ -103,15 +118,6 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@autoserialize
 	public publicApp: boolean;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
-	@IsBoolean()
-	@autoserialize
-	public loggingFlushDisabled?: boolean;
-
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
-	@IsBoolean()
-	@autoserialize
-	public keepAliveDisabled?: boolean;
 	//FIXME Import StarkMapIsValid & StarkMapNotEmpty  from validation/decorators
 	// @StarkMapNotEmpty()
 	// @StarkMapIsValid()
@@ -127,9 +133,13 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 		this.loggingFlushPersistSize = 15;
 		// }
 
+		this.loggingFlushDisabled = false;
 		this.loggingFlushResourceName = "logging";
+		this.sessionTimeout = 900; // default timeout of the F5
 		this.sessionTimeoutWarningPeriod = 15;
+		this.keepAliveDisabled = false;
 		this.keepAliveInterval = 15;
+		this.routerVisualizerEnabled = false;
 	}
 
 	public addBackend(backend: StarkBackend): void {
