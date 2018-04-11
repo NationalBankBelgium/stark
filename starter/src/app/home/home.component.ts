@@ -11,7 +11,8 @@ import {
 	starkHttpServiceName,
 	StarkLoggingService,
 	starkLoggingServiceName,
-	StarkSingleItemResponseWrapper
+	StarkSingleItemResponseWrapper,
+	StarkErrorImpl
 } from "@nationalbankbelgium/stark-core";
 import { Observable } from "rxjs/Observable";
 
@@ -68,7 +69,23 @@ export class HomeComponent implements OnInit {
 		this.localState.value = "";
 	}
 
-	public triggerHttpCall(type: "collection" | "singleItem"): void {
+	public logError(): void {
+		try {
+			throw new Error("Invoked error");
+		} catch (error) {
+			this.loggingService.error("Logging the Error", error);
+		}
+	}
+
+	public logStarkError(): void {
+		try {
+			throw new Error("Invoked error");
+		} catch (error) {
+			this.loggingService.error("Logging the StarkError", new StarkErrorImpl(error));
+		}
+	}
+
+	public triggerHttpCall(type: "collection" | "singleItem" | "singleNonExistingItem"): void {
 		const serializer: StarkHttpSerializer<Request> = new StarkHttpSerializerImpl<any>(Request);
 		const backend: StarkBackend = {
 			name: "someBackend",
@@ -90,6 +107,16 @@ export class HomeComponent implements OnInit {
 				serializer: serializer,
 				retryCount: 4
 			});
+		} else if (type === "singleNonExistingItem") {
+			httpRequest$ = this.httpService.executeSingleItemRequest({
+				backend: backend,
+				resourcePath: "requests/55",
+				headers: new Map<string, string>(),
+				queryParameters: new Map<string, string | string[] | undefined>(),
+				requestType: StarkHttpRequestType.GET,
+				serializer: serializer,
+				retryCount: 0
+			});
 		} else {
 			httpRequest$ = this.httpService.executeCollectionRequest({
 				backend: backend,
@@ -104,7 +131,7 @@ export class HomeComponent implements OnInit {
 
 		httpRequest$.subscribe(
 			(response: any) => console.log("---------- SUCCESS", response),
-			(error: StarkHttpErrorWrapper) => this.loggingService.error("---------- ERROR", <any>error),
+			(error: StarkHttpErrorWrapper) => this.loggingService.error("Error while executing the http call.", error.httpError),
 			() => this.loggingService.debug("---------- COMPLETE")
 		);
 	}

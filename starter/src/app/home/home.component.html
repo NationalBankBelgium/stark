@@ -24,6 +24,9 @@
       <button>Submit Value</button>
       <button (click)="triggerHttpCall('collection')">Http collection test</button>
       <button (click)="triggerHttpCall('singleItem')">Http single item test</button>
+      <button (click)="triggerHttpCall('singleNonExistingItem')">Http single non existing item test</button>
+      <button (click)="logError()">Log an Error</button>
+      <button (click)="logStarkError()">Log a StarkError</button>
     </form>
     <!--
         <input type="text" [value]="localState.value" (input)="localState.value = $event.target.value" autofocus>

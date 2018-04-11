@@ -22,6 +22,7 @@ import { StarkValidationErrorsUtil } from "../../util/validation-errors.util";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities/index";
 import { LogMessage, FlushLogMessages } from "../actions/index";
 import { selectStarkLogging } from "../reducers/index";
+import { StarkError, StarkErrorImpl } from "../../common/index";
 
 const _noop: Function = require("lodash/noop");
 
@@ -46,7 +47,6 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	private consoleInfo: Function;
 	private consoleWarn: Function;
 	private consoleError: Function;
-	private consoleTrace: Function;
 	private starkLogging: StarkLogging;
 	/** @internal */
 	private _correlationId: string;
@@ -63,7 +63,6 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		this.consoleInfo = this.getConsole("info");
 		this.consoleWarn = this.getConsole("warn");
 		this.consoleError = this.getConsole("error");
-		this.consoleTrace = this.getConsole("trace");
 
 		if (!this.appConfig.loggingFlushDisabled) {
 			// ensuring that the app config is valid before configuring the automatic logging flush
@@ -73,7 +72,6 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			);
 
 			this.backend = this.appConfig.getBackend("logging");
-
 			this.logPersistSize = <number>this.appConfig.loggingFlushPersistSize;
 			this.logUrl = this.backend.url + "/" + this.appConfig.loggingFlushResourceName;
 			this.generateNewCorrelationId();
@@ -122,15 +120,18 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		this.consoleWarn(...args);
 	}
 
-	public error(message: string, error?: Error): void {
-		const errorMessage: StarkLogMessage = this.constructLogMessage(StarkLogMessageType.ERROR, message, error);
-		this.store.dispatch(new LogMessage(errorMessage));
-		// also log the message to the console
-		this.consoleError(message, error);
-		// IE Errors don't have an "stack" property so we log it manually via console.trace()
-		if (error && !error.stack) {
-			this.consoleTrace(message, error);
+	public error(message: string, error?: StarkError | Error): void {
+		if (!error) {
+			error = new StarkErrorImpl();
 		}
+
+		if (error instanceof Error) {
+			error = new StarkErrorImpl(error);
+		}
+
+		const errorMessage: StarkLogMessage = this.constructErrorLogMessage(message, error);
+		this.store.dispatch(new LogMessage(errorMessage));
+		this.consoleError(message, error); // also log the message to the console
 	}
 
 	public get correlationId(): string {
@@ -143,21 +144,13 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	}
 
 	protected constructLogMessage(messageType: StarkLogMessageType, ...args: any[]): StarkLogMessage {
-		let parsedMessage: string;
-		let parsedError: string | undefined;
+		const parsedArgs: string[] = args.map((arg: any) => this.parseArg(arg));
+		const parsedMessage: string = parsedArgs.join(" | ");
+		return new StarkLogMessageImpl(messageType, parsedMessage, this._correlationId, undefined);
+	}
 
-		if (messageType !== StarkLogMessageType.ERROR) {
-			const parsedArgs: string[] = args.map((arg: any) => this.parseArg(arg));
-			parsedMessage = parsedArgs.join(" | ");
-		} else {
-			const error: Error = <Error>args[1];
-			parsedMessage = args[0];
-			if (error) {
-				parsedError = this.formatError(error);
-			}
-		}
-
-		return new StarkLogMessageImpl(messageType, parsedMessage, this._correlationId, parsedError);
+	protected constructErrorLogMessage(message: string, error: StarkError): StarkLogMessage {
+		return new StarkLogMessageImpl(StarkLogMessageType.ERROR, message, this._correlationId, error);
 	}
 
 	protected persistLogMessages(isForced: boolean = false): void {
@@ -170,7 +163,6 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		if ((numberOfMessages >= this.logPersistSize && !this.isPersisting) || isForced) {
 			if (this.retryCounter < 5) {
 				this.isPersisting = true;
-
 				const data: string = JSON.stringify(Serialize(this.starkLogging, StarkLoggingImpl));
 
 				this.sendRequest(this.logUrl, data, true).subscribe(
@@ -237,9 +229,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	}
 
 	private parseArg(arg: any): string {
-		if (arg instanceof Error) {
-			return this.formatError(arg);
-		} else if (typeof arg === "string") {
+		if (typeof arg === "string") {
 			return arg;
 		} else {
 			// catch potential "circular reference" error
@@ -248,18 +238,6 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			} catch (e) {
 				return arg; // return the arg "as is" in case of error
 			}
-		}
-	}
-
-	private formatError(error: Error): string {
-		if (error.stack && error.message && error.stack.indexOf(error.message) === -1) {
-			return "Error: " + error.message + "\n" + error.stack;
-		} else if (error.stack) {
-			return error.stack;
-		} else if (error["sourceURL"]) {
-			return error.message + "\n" + error["sourceURL"] + ":" + error["line"];
-		} else {
-			return error.message;
 		}
 	}
 
@@ -276,7 +254,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			const consoleArgs: any[] = [];
 			for (const arg of args) {
 				if (arg instanceof Error) {
-					consoleArgs.push(this.formatError(arg));
+					consoleArgs.push(this.parseArg(arg));
 				} else {
 					consoleArgs.push(arg);
 				}

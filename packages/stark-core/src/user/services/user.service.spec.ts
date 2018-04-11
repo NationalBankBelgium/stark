@@ -34,6 +34,8 @@ import {
 } from "../../http/entities";
 import { StarkHttpStatusCodes } from "../../http/enumerators/index";
 import { StarkSessionService } from "../../session/services/index";
+import { HttpErrorResponse } from "@angular/common/http";
+import { StarkHttpErrorImpl } from "../../http";
 
 interface StarkUserWithCustomData extends Pick<StarkUser, "uuid" | "username" | "roles"> {
 	[prop: string]: any;
@@ -255,17 +257,23 @@ describe("Service: StarkUserService", () => {
 		});
 
 		it("on FAILURE, should call userRepository and then dispatch the failure action", () => {
-			const mockHttpError: StarkHttpError = {
-				type: "some type",
-				title: "a title",
-				titleKey: "a key",
-				errors: []
-			};
+			const dummyError: Error = new Error("dummy error message");
+
+			const mockHttpError: StarkHttpError = new StarkHttpErrorImpl(dummyError);
+			mockHttpError.type = "some type";
+			mockHttpError.title = "a title";
+			mockHttpError.titleKey = "a key";
+			mockHttpError.errors = [];
+
+			const mockHttpErrorResponse: HttpErrorResponse = new HttpErrorResponse({
+				error: mockHttpError,
+				status: StarkHttpStatusCodes.HTTP_404_NOT_FOUND
+			});
 
 			const mockErrorResponseWrapper: StarkHttpErrorWrapper = new StarkHttpErrorWrapperImpl(
-				StarkHttpStatusCodes.HTTP_404_NOT_FOUND,
+				mockHttpErrorResponse,
 				new Map<string, string>(),
-				mockHttpError
+				dummyError
 			);
 
 			(<Spy>mockUserRepository.getUser).and.returnValue(observableThrow(mockErrorResponseWrapper));
@@ -277,9 +285,12 @@ describe("Service: StarkUserService", () => {
 			expect(mockObserver.complete).not.toHaveBeenCalled();
 
 			const errorWrapper: StarkHttpErrorWrapper = (<Spy>mockObserver.error).calls.argsFor(0)[0];
-			expect(errorWrapper).toBeDefined();
-			expect(errorWrapper.httpError).toBe(mockHttpError);
 
+			expect(errorWrapper).toBeDefined();
+			expect(errorWrapper.httpError.type).toBe(mockHttpError.type);
+			expect(errorWrapper.httpError.title).toBe(mockHttpError.title);
+			expect(errorWrapper.httpError.titleKey).toBe(mockHttpError.titleKey);
+			expect(errorWrapper.httpError.errors.length).toBe(mockHttpError.errors.length);
 			expect(mockUserRepository.getUser).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
