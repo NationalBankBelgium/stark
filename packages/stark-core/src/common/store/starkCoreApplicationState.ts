@@ -7,8 +7,6 @@ import { StarkSessionState } from "../../session/reducers/index";
 
 export interface StarkCoreApplicationState extends StarkLoggingState, StarkSessionState /*, StarkSettingsState*/ {
 	// starkApplicationMetadata: StarkApplicationMetadata;
-	// starkLogging: StarkLogging;
-	// starkSession: StarkSession;
 	// starkSettings: StarkSettings;
 	// starkUser: StarkUser;  // not stored in Redux
 }
