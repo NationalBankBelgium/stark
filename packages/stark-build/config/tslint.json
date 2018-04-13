@@ -29,7 +29,6 @@
     "use-pipe-decorator": true,
     "use-view-encapsulation": true,
     "trackBy-function": true,
-    "import-destructuring-spacing": true,
     "no-unused-css": true,
     "i18n": false,
     "template-cyclomatic-complexity": [true, 5],
@@ -297,4 +296,6 @@
   //	true,
   //	"as-needed"
   //	],
+//  "import-destructuring-spacing": true,
+
 }
