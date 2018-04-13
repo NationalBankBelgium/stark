@@ -279,7 +279,7 @@ do
         # FIXME exclude node modules!
         travisFoldStart "copy package.json for: ${PACKAGE}" "no-xtrace"
         # TODO check if  --exclude="package-lock.json" is correctly working
-        syncOptions=(-am --include="package.json" --exclude="package-lock.json" --exclude="node_modules/" --exclude="rollup.config.js" --exclude="*.ts" --exclude="*/*.ts" --include="*" --exclude="*")
+        syncOptions=(-am --include="package.json" --exclude="package-lock.json" --exclude="coverage/" --exclude="node_modules/" --exclude="rollup.config.js" --exclude="*.ts" --exclude="*/*.ts" --include="*" --exclude="*")
         syncFiles $SRC_DIR $NPM_DIR "${syncOptions[@]}"
         unset syncOptions
         travisFoldEnd "copy package.json for: ${PACKAGE}"
