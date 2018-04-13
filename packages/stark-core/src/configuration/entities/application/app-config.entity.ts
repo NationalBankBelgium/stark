@@ -6,7 +6,6 @@ import { StarkApplicationConfig } from "./app-config.entity.intf";
 import { StarkBackend, StarkBackendImpl } from "../../../http/entities/backend/index";
 import { stringMap } from "../../../serialization/index";
 import { StarkValidationErrorsUtil } from "../../../util/index";
-import { StarkValidationMethodsUtil } from "../../../util/validation-methods.util";
 // FIXME Implement the following decorators as before
 // import {StarkMapIsValid, StarkMapNotEmpty} from "../../../validation/decorators";
 
@@ -59,7 +58,6 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@autoserialize
 	public loggingFlushResourceName?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsBoolean()
 	@autoserialize
 	public loggingFlushDisabled?: boolean;
@@ -98,7 +96,6 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@autoserialize
 	public keepAliveUrl?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
 	@IsBoolean()
 	@autoserialize
 	public keepAliveDisabled?: boolean;

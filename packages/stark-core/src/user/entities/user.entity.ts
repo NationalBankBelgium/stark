@@ -28,27 +28,27 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public lastName: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
 	@IsEmail()
 	@autoserialize
 	public email?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public phone?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
-	public language: string;
+	public language?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public selectedLanguage?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public referenceNumber?: string;
@@ -58,12 +58,12 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public roles: string[] = [];
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public workpost?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefined)
+	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
 	@IsBoolean()
 	@autoserialize
 	public isAnonymous?: boolean;

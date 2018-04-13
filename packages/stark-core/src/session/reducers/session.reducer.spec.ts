@@ -23,13 +23,13 @@ describe("Reducer: SessionReducer", () => {
 			const initialState: StarkSession = session;
 			deepFreeze(initialState); //Enforce immutability
 
-			// // Send the CHANGE_LANGUAGE_SUCCESS action to the sessionReducer
+			// Send the CHANGE_LANGUAGE_SUCCESS action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(initialState, new ChangeLanguageSuccess("NL"));
 			expect(changedState.currentLanguage).toBe("NL");
 		});
 
 		it("should set the session language even if the state is not defined", () => {
-			// // Send the CHANGE_LANGUAGE_SUCCESS action to the sessionReducer
+			// Send the CHANGE_LANGUAGE_SUCCESS action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(<any>undefined, new ChangeLanguageSuccess("NL"));
 			expect(changedState).toBeDefined();
 			expect(changedState.currentLanguage).toBe("NL");
@@ -43,13 +43,13 @@ describe("Reducer: SessionReducer", () => {
 			const initialState: StarkSession = session;
 			deepFreeze(initialState); //Enforce immutability
 			
-			// // Send the INITIALIZE_SESSION action to the sessionReducer
+			// Send the INITIALIZE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(initialState, new InitializeSession(user));
 			expect(changedState.user).toBe(<StarkUser>user);
 		});
 
 		it("should set the session user even if the state is not defined", () => {
-			// // Send the INITIALIZE_SESSION action to the sessionReducer
+			// Send the INITIALIZE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(<any>undefined, new InitializeSession(user));
 			expect(changedState).toBeDefined();
 			expect(changedState.user).toBe(<StarkUser>user);
@@ -63,13 +63,13 @@ describe("Reducer: SessionReducer", () => {
 			const initialState: StarkSession = {currentLanguage: "FR", user: <StarkUser>user};
 			deepFreeze(initialState); //Enforce immutability
 			
-			// // Send the EXPIRE_SESSION action to the sessionReducer
+			// Send the EXPIRE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(initialState, new DestroySession());
 			expect(changedState.user).toBeUndefined();
 		});
 
 		it("should set the user as undefined even if the state is not defined", () => {
-			// // Send the EXPIRE_SESSION action to the sessionReducer
+			// Send the EXPIRE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(<any>undefined, new DestroySession());
 			expect(changedState).toBeDefined();
 			expect(changedState.user).toBeUndefined();

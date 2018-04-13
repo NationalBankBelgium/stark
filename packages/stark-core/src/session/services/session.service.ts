@@ -79,7 +79,6 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 					   // @Inject(starkXSRFServiceName) public xsrfService: StarkXSRFService,
 					   public idle: Idle,
 					   injector: Injector,
-					   // @Inject("$translate") $translate: any) {
 					   public translateService: TranslateService) {
 
 		if (this.idle.getKeepaliveEnabled() && !this.appConfig.keepAliveDisabled) {
@@ -223,8 +222,6 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		// IE "Access is denied" error: https://stackoverflow.com/questions/22098259/access-denied-in-ie-10-and-11-when-ajax-target-is-localhost
 		try {
 			xhr.open("GET", url, async);
-			// FIXME Uncomment when XSRF Service is implemented
-			// this.xsrfService.configureXHR(xhr);
 			xhr.setRequestHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
 			xhr.send(serializedData);
 		} catch (e) {
@@ -312,15 +309,11 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 				pingRequestHeaders = pingRequestHeaders.set(key, value);
 			});
 		// }
-		
-		if (typeof this.appConfig.keepAliveUrl !== "string") {
-			throw new Error("KeepAliveUrl must be defined when KeepAlive is enabled.")
-		}
 
 		// FIXME Should we create an interface instead of using any ?
 		const pingRequest: HttpRequest<any> = new HttpRequest(
 			"GET",
-			this.appConfig.keepAliveUrl,
+			<string>this.appConfig.keepAliveUrl,
 			{
 				headers: pingRequestHeaders
 			}
