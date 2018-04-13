@@ -109,7 +109,21 @@ runRollup() {
     cd ${1}
     logTrace "${FUNCNAME[0]}: Rollup command: $ROLLUP -c $ROLLUP_CONFIG_PATH" 2
     local ROLLUP_RESULTS=`$ROLLUP -c $ROLLUP_CONFIG_PATH 2>&1`
+    
+    if [[ $ROLLUP_RESULTS =~ ^.*\[\!\].* ]]; then
+      logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
+      exit 1
+    elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
+      if [[ $ROLLUP_RESULTS =~ "^.*\(\!\) Unresolved dependencies.*" ]]; then
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected." 2
+      elif [[ $ROLLUP_RESULTS =~ "^.*\(\!\) Missing global variable name.*" ]]; then
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name." 2
+      else
+        logInfo "${FUNCNAME[0]}: Warning appeared during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
+      fi
+    fi
     cd - > /dev/null
+
 	logTrace "${FUNCNAME[0]}: Rollup execution output: $ROLLUP_RESULTS" 2
 	logTrace "${FUNCNAME[0]}: Rollup completed" 2
 	
@@ -172,6 +186,20 @@ rollupIndex() {
     # Note that this execution of rollup MUST NOT include globals/external libs like rxjs, angular, ...
     # For this usage scenario, the client app is supposed to import those dependencies on their own (e.g., script tag above on the page)
     local ROLLUP_RESULTS=`$ROLLUP -c ${ROLLUP_CONFIG_PATH} -i ${in_file} -o ${out_file} --banner "$BANNER_TEXT" 2>&1`
+    
+    if [[ $ROLLUP_RESULTS =~ ^.*\[\!\].* ]]; then
+      logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
+      exit 1
+    elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
+      if [[ $ROLLUP_RESULTS =~ "^.*\(\!\) Unresolved dependencies.*" ]]; then
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected." 2
+      elif [[ $ROLLUP_RESULTS =~ "^.*\(\!\) Missing global variable name.*" ]]; then
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name." 2
+      else
+        logInfo "${FUNCNAME[0]}: Warning appeared during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
+      fi
+    fi
+
     logTrace "${FUNCNAME[0]}: Rollup execution output (do not mind the unresolved dependencies!): $ROLLUP_RESULTS" 2
   fi
 
