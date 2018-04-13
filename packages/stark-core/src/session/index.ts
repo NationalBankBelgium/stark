@@ -1,3 +1,3 @@
 "use strict";
 
-export * from "./service/index";
+export * from "./services/index";

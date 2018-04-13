@@ -1,7 +1,7 @@
 "use strict";
 
 import { Observable } from "rxjs/Observable";
-import { StarkUser } from "../user/index";
+import { StarkUser } from "../../user/entities/index";
 
 export const starkSessionServiceName: string = "StarkSessionService";
 

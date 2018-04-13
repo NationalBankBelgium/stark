@@ -35,7 +35,7 @@ import {
 
 import { StarkHttpHeaders, StarkSortOrder } from "../constants/index";
 import { StarkHttpStatusCodes } from "../enumerators/index";
-import { StarkLoggingService } from "../../logging/index";
+import { StarkLoggingService, MockStarkLoggingService } from "../../logging/index";
 import { UnitTestingUtils } from "../../test/unit-testing/index";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
 import { StarkSessionService } from "../../session/index";
@@ -150,7 +150,7 @@ describe("Service: StarkHttpService", () => {
 			metadata: mockResourceMetadata
 		};
 		// Make sure that a correlation identifier is defined correctly on the logger
-		loggerMock = UnitTestingUtils.getMockedLoggingService(mockCorrelationId);
+		loggerMock = new MockStarkLoggingService(mockCorrelationId);
 		mockSessionService = UnitTestingUtils.getMockedSessionService();
 		httpMock = createSpyObj("HttpClient", ["get", "put", "post", "delete"]);
 

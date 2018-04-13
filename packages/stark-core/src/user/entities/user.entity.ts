@@ -3,7 +3,7 @@
 import { autoserialize } from "cerialize";
 import { StarkUserProfile } from "./user-profile.entity.intf";
 import { StarkUserSecurityProfile } from "./user-security-profile.entity.intf";
-import { StarkResource } from "../../http/index";
+import { StarkResource } from "../../http/entities/index";
 import { IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf } from "class-validator";
 import { StarkValidationMethodsUtil } from "../../util/validation-methods.util";
 
@@ -68,7 +68,8 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public isAnonymous?: boolean;
 
-	@autoserialize public custom?: object;
+	@autoserialize
+	public custom?: object;
 
 	/**
 	 * Extract the properties coming in the "details" object.

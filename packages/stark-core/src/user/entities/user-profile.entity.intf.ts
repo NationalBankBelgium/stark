@@ -9,7 +9,7 @@ export interface StarkUserProfile {
 	language?: string;
 	referenceNumber?: string;
 	isAnonymous?: boolean;
-
+	
 	/**
 	 * This property will contain any additional details for the user profile returned by the backend
 	 */

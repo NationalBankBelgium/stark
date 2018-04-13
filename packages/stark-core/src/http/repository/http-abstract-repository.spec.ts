@@ -12,7 +12,7 @@ import {
 	StarkSingleItemResponseWrapper
 } from "../entities/index";
 import { StarkHttpService } from "../services/http.service.intf";
-import { StarkLoggingService } from "../../logging";
+import { StarkLoggingService, MockStarkLoggingService } from "../../logging/index";
 import { UnitTestingUtils } from "../../test/unit-testing/index";
 import { StarkHttpRequestBuilderImpl } from "../builder/index";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
@@ -32,7 +32,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 
 	beforeEach(() => {
 		mockStarkHttpService = UnitTestingUtils.getMockedHttpService();
-		mockLogger = UnitTestingUtils.getMockedLoggingService();
+		mockLogger = new MockStarkLoggingService();
 		mockBackend = createSpyObj("backend", ["url"]);
 		mockResourcePath = "mock";
 		mockResource = new MockResource(resourceUuid);
