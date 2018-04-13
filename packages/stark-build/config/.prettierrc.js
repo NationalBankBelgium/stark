@@ -3,6 +3,7 @@ module.exports = {
 	tabWidth: 4,
 	useTabs: true,
 	trailingComma: "none",
+	bracketSpacing: true,
 	overrides: [
 		{
 			files: "*.{pcss,scss,css,json}",
