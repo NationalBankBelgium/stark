@@ -39,7 +39,7 @@ describe("Service: StarkLoggingService", () => {
 	const loggingFlushPersistSize: number = 11;
 
 	beforeEach(() => {
-		mockStore = jasmine.createSpyObj("store", ["dispatch", "select"]);
+		mockStore = jasmine.createSpyObj("store", ["dispatch", "pipe"]);
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.debugLoggingEnabled = true;
 		appConfig.loggingFlushDisabled = false;
@@ -66,7 +66,7 @@ describe("Service: StarkLoggingService", () => {
 			applicationId: "dummy app id",
 			messages: []
 		};
-		(<Spy>mockStore.select).and.returnValue(of(mockStarkLogging));
+		(<Spy>mockStore.pipe).and.returnValue(of(mockStarkLogging));
 		loggingService = new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/);
 		// reset the calls counter because there is a log in the constructor
 		(<Spy>mockStore.dispatch).calls.reset();

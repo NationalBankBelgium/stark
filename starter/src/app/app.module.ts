@@ -2,6 +2,9 @@ import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angula
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
+import { StoreModule, MetaReducer, ActionReducerMap, ActionReducer } from "@ngrx/store";
+import { storeFreeze } from "ngrx-store-freeze";
+import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
 	StarkHttpModule,
@@ -52,6 +55,22 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 	return applicationConfig;
 }
 
+// Application Redux State
+export interface State {
+	// reducer interfaces
+}
+
+export const reducers: ActionReducerMap<State> = {
+	// reducers
+};
+
+export function logger(reducer: ActionReducer<State>): any {
+	// default, no options
+	return storeLogger()(reducer);
+}
+
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger, storeFreeze] : [];
+
 /**
  * `AppModule` is the main entry point into Angular2's bootstrapping process
  */
@@ -67,6 +86,9 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 		FormsModule,
 		StarkHttpModule,
 		StarkLoggingModule,
+		StoreModule.forRoot(reducers, {
+			metaReducers
+		}),
 		UIRouterModule.forRoot({
 			states: APP_STATES,
 			useHash: Boolean(history.pushState) === false,

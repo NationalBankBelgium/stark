@@ -63,8 +63,8 @@ describe("Service: StarkSessionService", () => {
 	beforeEach(() => {
 		mockUser = { uuid: "1", firstName: "Christopher", lastName: "Cortes" };
 		mockSession = { currentLanguage: "NL", user: <StarkUser>mockUser };
-		mockStore = jasmine.createSpyObj("store", ["dispatch", "select"]);
-		(<Spy>mockStore.select).and.returnValue(of(mockSession));
+		mockStore = jasmine.createSpyObj("store", ["dispatch", "pipe"]);
+		(<Spy>mockStore.pipe).and.returnValue(of(mockSession));
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.sessionTimeout = 123;
 		appConfig.sessionTimeoutWarningPeriod = 13;

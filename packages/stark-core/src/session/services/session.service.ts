@@ -5,7 +5,7 @@ import { Inject, Injectable, Injector } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle } from "@ng-idle/core";
 import { Keepalive } from "@ng-idle/keepalive";
 import { TranslateService } from "@ngx-translate/core";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
@@ -39,7 +39,8 @@ import { StarkHttpStatusCodes } from "../../http/enumerators/index";
 import { StarkHttpHeaders } from "../../http/constants/index";
 import { StarkValidationErrorsUtil } from "../../util/index";
 import { starkSessionExpiredStateName } from "../../common/routes/index";
-import { StarkCoreApplicationState, StarkSessionApplicationState } from "../../common/store/starkCoreApplicationState";
+import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
+import { selectStarkSession } from "../reducers/index";
 // import { StarkXSRFService, starkXSRFServiceName } from "../../xsrf/";
 
 export const starkUnauthenticatedUserError: string = "StarkSessionService => user not authenticated";
@@ -100,9 +101,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		this.configureIdleService();
 		this.configureKeepaliveService();
 
-		this.session$ = this.store.select<StarkSession>((state: StarkSessionApplicationState) => state.starkSession);
-
-		// this.session$ = this.store.select<StarkCoreApplicationState, StarkSession>(starkSessionStoreKey,"test");
+		this.session$ = this.store.pipe(select(selectStarkSession));
 
 		// FIXME Where does DEVELOPMENT Variable come from ???
 		// if (DEVELOPMENT) {

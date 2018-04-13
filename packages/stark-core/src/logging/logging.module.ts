@@ -1,17 +1,16 @@
 import { NgModule } from "@angular/core";
 import { ActionReducerMap, StoreModule } from "@ngrx/store";
 
-import { loggingReducer } from "./reducers/index";
+import { loggingReducer, StarkLoggingState } from "./reducers/index";
 import { StarkLoggingActions } from "./actions/index";
 import { StarkLoggingServiceImpl, starkLoggingServiceName } from "./services/index";
-import { StarkLoggingApplicationState } from "../common/store/starkCoreApplicationState";
 
-const reducers: ActionReducerMap<StarkLoggingApplicationState, StarkLoggingActions> = {
-	starkLogging: loggingReducer
+const reducers: ActionReducerMap<StarkLoggingState, StarkLoggingActions> = {
+	logging: loggingReducer
 };
 
 @NgModule({
-	imports: [StoreModule.forRoot(reducers)],
+	imports: [StoreModule.forFeature("StarkLogging", reducers)],
 	declarations: [],
 	providers: [{ provide: starkLoggingServiceName, useClass: StarkLoggingServiceImpl }]
 })

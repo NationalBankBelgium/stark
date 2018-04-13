@@ -5,7 +5,7 @@ import uuid from "uuid";
 import { Serialize } from "cerialize";
 import { validateSync } from "class-validator";
 
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 
@@ -14,13 +14,14 @@ import { Inject, Injectable } from "@angular/core";
 import { StarkLoggingService, starkLoggingServiceName } from "./logging.service.intf";
 import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/index";
 import { StarkBackend } from "../../http/entities/backend/index";
-import { StarkCoreApplicationState, StarkLoggingApplicationState } from "../../common/store/starkCoreApplicationState";
+import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
 import { StarkHttpStatusCodes } from "../../http/enumerators/index";
 import { StarkHttpHeaders } from "../../http/constants/index";
 // import {StarkXSRFService, starkXSRFServiceName} from "../../xsrf";
 import { StarkValidationErrorsUtil } from "../../util/validation-errors.util";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities/index";
 import { LogMessage, FlushLogMessages } from "../actions/index";
+import { selectStarkLogging } from "../reducers/index";
 
 const _noop: Function = require("lodash/noop");
 
@@ -77,12 +78,10 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			this.logUrl = this.backend.url + "/" + this.appConfig.loggingFlushResourceName;
 			this.generateNewCorrelationId();
 
-			this.store
-				.select<StarkLogging>((state: StarkLoggingApplicationState) => state.starkLogging)
-				.subscribe((starkLogging: StarkLogging) => {
-					this.starkLogging = starkLogging;
-					this.persistLogMessages();
-				});
+			this.store.pipe(select(selectStarkLogging)).subscribe((starkLogging: StarkLogging) => {
+				this.starkLogging = starkLogging;
+				this.persistLogMessages();
+			});
 
 			if (window) {
 				window.addEventListener("beforeunload", () => {
