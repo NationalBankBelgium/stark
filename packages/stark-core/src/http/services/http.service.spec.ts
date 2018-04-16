@@ -8,7 +8,6 @@ import { of } from "rxjs/observable/of";
 import { _throw as observableThrow } from "rxjs/observable/throw";
 // FIXME: importing from single entry "rxjs/operators" together with webpack's scope hoisting prevents dead code removal
 // see https://github.com/ReactiveX/rxjs/issues/2981
-// import { catchError } from "rxjs/operators";
 import { catchError } from "rxjs/operators/catchError";
 import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
@@ -36,7 +35,7 @@ import {
 import { StarkHttpHeaders, StarkSortOrder } from "../constants/index";
 import { StarkHttpStatusCodes } from "../enumerators/index";
 import { StarkLoggingService, MockStarkLoggingService } from "../../logging/index";
-import { UnitTestingUtils } from "../../test/unit-testing/index";
+import { MockStarkSessionService } from "../../session/testing/index";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
 import { StarkSessionService } from "../../session/index";
 
@@ -145,7 +144,7 @@ describe("Service: StarkHttpService", () => {
 		};
 		// Make sure that a correlation identifier is defined correctly on the logger
 		loggerMock = new MockStarkLoggingService(mockCorrelationId);
-		mockSessionService = UnitTestingUtils.getMockedSessionService();
+		mockSessionService = new MockStarkSessionService();
 		httpMock = createSpyObj("HttpClient", ["get", "put", "post", "delete"]);
 
 		starkHttpService = new HttpServiceHelper<MockResource>(loggerMock, mockSessionService, httpMock);

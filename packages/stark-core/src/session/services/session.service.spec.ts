@@ -38,7 +38,7 @@ import { StarkUser } from "../../user/entities/index";
 import { StarkLoggingService } from "../../logging/services/index";
 import { MockStarkLoggingService } from "../../logging/testing/index";
 import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services/index";
-import { UnitTestingUtils } from "../../test/index";
+import { MockStarkRoutingService } from "../../routing/testing/index";
 import { StarkHttpHeaders } from "../../http/constants/index";
 // import { StarkXSRFService } from "../../xsrf";
 import Spy = jasmine.Spy;
@@ -93,7 +93,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
-		mockRoutingService = UnitTestingUtils.getMockedRoutingService();
+		mockRoutingService = new MockStarkRoutingService();
 		// mockXSRFService = UnitTestingUtils.getMockedXSRFService();
 		mockIdleService = jasmine.createSpyObj("idleService,", [
 			"setIdle",

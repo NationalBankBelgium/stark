@@ -12,8 +12,8 @@ import {
 	StarkSingleItemResponseWrapper
 } from "../entities/index";
 import { StarkHttpService } from "../services/http.service.intf";
+import { MockStarkHttpService } from "../testing/index";
 import { StarkLoggingService, MockStarkLoggingService } from "../../logging/index";
-import { UnitTestingUtils } from "../../test/unit-testing/index";
 import { StarkHttpRequestBuilderImpl } from "../builder/index";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
 import createSpyObj = jasmine.createSpyObj;
@@ -31,7 +31,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	let repository: AbstractHttpRepositoryTestHelper;
 
 	beforeEach(() => {
-		mockStarkHttpService = UnitTestingUtils.getMockedHttpService();
+		mockStarkHttpService = new MockStarkHttpService();
 		mockLogger = new MockStarkLoggingService();
 		mockBackend = createSpyObj("backend", ["url"]);
 		mockResourcePath = "mock";
