@@ -132,8 +132,8 @@
     "web-animations-js": "2.3.1"
   },
   "devDependencies": {
-    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-b30d7d0.tgz",
-    "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.0.0-alpha.0-b30d7d0.tgz",
+    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.0-a727bb9.tgz",
+    "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.0.0-alpha.0-a727bb9.tgz",
     "@types/core-js": "0.9.46",
     "@types/hammerjs": "2.0.35",
     "@types/node": "6.0.102",
