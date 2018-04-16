@@ -1,23 +1,23 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, TestBed, ComponentFixture } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-
+import { StoreModule } from "@ngrx/store";
+import {
+	STARK_APP_CONFIG,
+	StarkApplicationConfig,
+	StarkBackend,
+	StarkBackendAuthenticationTypes,
+	StarkHttpModule,
+	StarkLoggingModule,
+	StarkLoggingService,
+	starkLoggingServiceName
+} from "@nationalbankbelgium/stark-core";
 /**
  * Load the implementations that should be tested.
  */
 import { AppState } from "../app.service";
 import { HomeComponent } from "./home.component";
 import { Title } from "./title";
-import {
-	StarkHttpModule,
-	StarkLoggingModule,
-	STARK_APP_CONFIG,
-	StarkApplicationConfig,
-	StarkBackend,
-	StarkBackendAuthenticationTypes,
-	StarkLoggingService,
-	starkLoggingServiceName
-} from "@nationalbankbelgium/stark-core";
 
 describe(`Home`, () => {
 	let comp: HomeComponent;
@@ -45,7 +45,7 @@ describe(`Home`, () => {
 				TestBed.configureTestingModule({
 					declarations: [HomeComponent],
 					schemas: [NO_ERRORS_SCHEMA],
-					imports: [HttpClientTestingModule, StarkHttpModule, StarkLoggingModule],
+					imports: [StoreModule.forRoot({}), HttpClientTestingModule, StarkHttpModule, StarkLoggingModule],
 					providers: [AppState, Title, { provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }]
 				})
 

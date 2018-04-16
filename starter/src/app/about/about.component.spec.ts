@@ -1,19 +1,20 @@
 import { ActivatedRoute, Data } from "@angular/router";
 import { inject, TestBed } from "@angular/core/testing";
+import { StoreModule } from "@ngrx/store";
+import {
+	STARK_APP_CONFIG,
+	StarkApplicationConfig,
+	StarkBackend,
+	StarkBackendAuthenticationTypes,
+	StarkLoggingModule,
+	StarkLoggingService,
+	starkLoggingServiceName
+} from "@nationalbankbelgium/stark-core";
 
 /**
  * Load the implementations that should be tested.
  */
 import { AboutComponent } from "./about.component";
-import {
-	StarkLoggingModule,
-	STARK_APP_CONFIG,
-	StarkBackend,
-	StarkApplicationConfig,
-	StarkBackendAuthenticationTypes,
-	StarkLoggingService,
-	starkLoggingServiceName
-} from "@nationalbankbelgium/stark-core";
 
 describe("About", () => {
 	/**
@@ -35,7 +36,7 @@ describe("About", () => {
 
 	beforeEach(() =>
 		TestBed.configureTestingModule({
-			imports: [StarkLoggingModule],
+			imports: [StoreModule.forRoot({}), StarkLoggingModule],
 			providers: [
 				/**
 				 * Provide a better mock.

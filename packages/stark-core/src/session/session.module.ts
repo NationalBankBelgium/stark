@@ -1,17 +1,16 @@
 import { NgModule } from "@angular/core";
 import { ActionReducerMap, StoreModule } from "@ngrx/store";
 
-import { sessionReducer } from "./reducers/index";
+import { sessionReducer, StarkSessionState } from "./reducers/index";
 import { StarkSessionActions } from "./actions/index";
 import { StarkSessionServiceImpl, starkSessionServiceName } from "./services/index";
-import { StarkSessionApplicationState } from "../common/store/starkCoreApplicationState";
 
-const reducers: ActionReducerMap<StarkSessionApplicationState, StarkSessionActions> = {
-	starkSession: sessionReducer
+const reducers: ActionReducerMap<StarkSessionState, StarkSessionActions> = {
+	session: sessionReducer
 };
 
 @NgModule({
-	imports: [StoreModule.forRoot(reducers)],
+	imports: [StoreModule.forFeature("StarkSession", reducers)],
 	declarations: [],
 	providers: [{ provide: starkSessionServiceName, useClass: StarkSessionServiceImpl }]
 })
