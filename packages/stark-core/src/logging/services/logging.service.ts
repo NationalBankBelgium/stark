@@ -52,7 +52,8 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	// FIXME: uncomment these lines once XSRF Service is implemented
 	public constructor(
 		private store: Store<StarkCoreApplicationState>,
-		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig /*,
+		@Inject(STARK_APP_CONFIG)
+		private appConfig: StarkApplicationConfig /*,
 					   @Inject(starkXSRFServiceName) private xsrfService: StarkXSRFService*/
 	) {
 		this.isPersisting = false;
@@ -76,10 +77,12 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			this.logUrl = this.backend.url + "/" + this.appConfig.loggingFlushResourceName;
 			this.generateNewCorrelationId();
 
-			this.store.select<StarkLogging>((state:StarkLoggingApplicationState) => state.starkLogging).subscribe((starkLogging: StarkLogging) => {
-				this.starkLogging = starkLogging;
-				this.persistLogMessages();
-			});
+			this.store
+				.select<StarkLogging>((state: StarkLoggingApplicationState) => state.starkLogging)
+				.subscribe((starkLogging: StarkLogging) => {
+					this.starkLogging = starkLogging;
+					this.persistLogMessages();
+				});
 
 			if (window) {
 				window.addEventListener("beforeunload", () => {

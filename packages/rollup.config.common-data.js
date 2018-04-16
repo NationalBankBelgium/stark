@@ -29,7 +29,7 @@ const globals = {
 	"rxjs/operators/mergeMap": "rxjs.operators.mergeMap",
 	"rxjs/operators/retryWhen": "rxjs.operators.retryWhen",
 	"rxjs/operators/take": "rxjs.operators.take",
-	
+
 	"rxjs/observable/defer": "rxjs/observable/defer",
 	"rxjs/observable/empty": "rxjs.observable.empty",
 	"rxjs/observable/timer": "rxjs.observable.time",
@@ -37,7 +37,7 @@ const globals = {
 	"rxjs/observable/throw": "rxjs.observable.throw",
 
 	"rxjs/Observable": "Rx",
-	"rxjs/Subject": "Rx",
+	"rxjs/Subject": "Rx"
 	//"rxjs/Subscription": "Rx",
 
 	// TODO add lines such as the one below to make sure that stark modules that depend on other stark modules can find those

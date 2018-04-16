@@ -8,7 +8,7 @@ export class MockStarkLoggingService implements StarkLoggingService {
 	public warn: () => void = jasmine.createSpy("warn");
 	public error: () => void = jasmine.createSpy("error");
 	public generateNewCorrelationId: () => string = jasmine.createSpy("generateNewCorrelationId");
-	
+
 	public constructor(correlationId: string = "dummyCorrelationId") {
 		this.correlationId = correlationId;
 	}

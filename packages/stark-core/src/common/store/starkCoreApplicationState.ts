@@ -6,7 +6,8 @@ import { StarkSession } from "../../session/entities";
 // import {StarkSettings} from "../../settings/entities";
 
 export interface StarkCoreApplicationState
-	extends StarkLoggingApplicationState , StarkSessionApplicationState/*, StarkSettingsApplicationState*/ {
+	extends StarkLoggingApplicationState,
+		StarkSessionApplicationState /*, StarkSettingsApplicationState*/ {
 	// starkApplicationMetadata: StarkApplicationMetadata;
 	// starkLogging: StarkLogging;
 	// starkSession: StarkSession;

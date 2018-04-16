@@ -26,34 +26,44 @@ export const starkCoreRouteConfig: StatesModule = <any>{
 			name: starkAppInitStateName, // parent state for any initialization state (used to show/hide the main app component)
 			abstract: true,
 			resolve: {
-				targetRoute: ["$location", starkRoutingServiceName, ($location: Location, routingService: StarkRoutingService) => {
-					// get the path of the current URL in the browser's navigation bar 
-					const targetUrlPath: string = $location.path();
-					const targetRoute: StarkStateConfigWithParams | undefined = routingService.getStateConfigByUrlPath(targetUrlPath);
+				targetRoute: [
+					"$location",
+					starkRoutingServiceName,
+					($location: Location, routingService: StarkRoutingService) => {
+						// get the path of the current URL in the browser's navigation bar
+						const targetUrlPath: string = $location.path();
+						const targetRoute: StarkStateConfigWithParams | undefined = routingService.getStateConfigByUrlPath(targetUrlPath);
 
-					// skip any init/exit state
-					const initOrExitStateRegex: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+						// skip any init/exit state
+						const initOrExitStateRegex: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 
-					if (targetRoute) {
-						if ((<Function>targetRoute.state.$$state)().parent) {
-							if (!(<Function>targetRoute.state.$$state)().parent.name.match(initOrExitStateRegex)) {
-								return targetRoute;
+						if (targetRoute) {
+							if ((<Function>targetRoute.state.$$state)().parent) {
+								if (!(<Function>targetRoute.state.$$state)().parent.name.match(initOrExitStateRegex)) {
+									return targetRoute;
+								} else {
+									return undefined;
+								}
 							} else {
-								return undefined;
+								return targetRoute;
 							}
 						} else {
-							return targetRoute;
+							return undefined;
 						}
-					} else {
-						return undefined;
 					}
-				}],
-				targetState: ["targetRoute", (targetRoute: StarkStateConfigWithParams) => {
-					return (typeof targetRoute !== "undefined") ? targetRoute.state.name : undefined;
-				}],
-				targetStateParams: ["targetRoute", (targetRoute: StarkStateConfigWithParams) => {
-					return (typeof targetRoute !== "undefined") ? targetRoute.paramValues : undefined;
-				}]
+				],
+				targetState: [
+					"targetRoute",
+					(targetRoute: StarkStateConfigWithParams) => {
+						return typeof targetRoute !== "undefined" ? targetRoute.state.name : undefined;
+					}
+				],
+				targetStateParams: [
+					"targetRoute",
+					(targetRoute: StarkStateConfigWithParams) => {
+						return typeof targetRoute !== "undefined" ? targetRoute.paramValues : undefined;
+					}
+				]
 			}
 		},
 		{

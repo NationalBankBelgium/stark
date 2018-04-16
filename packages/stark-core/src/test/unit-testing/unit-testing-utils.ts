@@ -34,7 +34,7 @@ export class UnitTestingUtils {
 			"getStateDeclarationByStateName"
 		]);
 	}
-	
+
 	/**
 	 * Returns a new instance of a mocked StarkHttpService. It should always return a new instance otherwise all the tests
 	 * would share the same instance including all the customizations made to such instance, causing an unexpected behaviour

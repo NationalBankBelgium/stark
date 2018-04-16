@@ -3,21 +3,20 @@
 import { StarkSession } from "../entities/index";
 import { StarkUser } from "../../user/entities/index";
 import { sessionReducer } from "./session.reducer";
-import { ChangeLanguageSuccess,DestroySession, InitializeSession } from "../actions/index";
+import { ChangeLanguageSuccess, DestroySession, InitializeSession } from "../actions/index";
 
-const deepFreeze:Function = require("deep-freeze-strict");
+const deepFreeze: Function = require("deep-freeze-strict");
 
 describe("Reducer: SessionReducer", () => {
 	let session: StarkSession;
 	let user: StarkUser;
 
 	beforeEach(() => {
-		user = {uuid: "694", username: "sgonzales", firstName: "s", lastName: "gonzales", language:"FR", roles:[]};
-		session = {currentLanguage: "FR", user: <StarkUser>user};
+		user = { uuid: "694", username: "sgonzales", firstName: "s", lastName: "gonzales", language: "FR", roles: [] };
+		session = { currentLanguage: "FR", user: <StarkUser>user };
 	});
 
 	describe("on CHANGE_LANGUAGE_SUCCESS", () => {
-
 		it("should set the session language when state given", () => {
 			// create the initial state object
 			const initialState: StarkSession = session;
@@ -37,12 +36,11 @@ describe("Reducer: SessionReducer", () => {
 	});
 
 	describe("on INITIALIZE_SESSION", () => {
-
 		it("should set the session user when state given", () => {
 			// create the initial state object
 			const initialState: StarkSession = session;
 			deepFreeze(initialState); //Enforce immutability
-			
+
 			// Send the INITIALIZE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(initialState, new InitializeSession(user));
 			expect(changedState.user).toBe(<StarkUser>user);
@@ -57,12 +55,11 @@ describe("Reducer: SessionReducer", () => {
 	});
 
 	describe("on DESTROY_SESSION", () => {
-
 		it("should remove the session user when state given", () => {
 			// create the initial state object
-			const initialState: StarkSession = {currentLanguage: "FR", user: <StarkUser>user};
+			const initialState: StarkSession = { currentLanguage: "FR", user: <StarkUser>user };
 			deepFreeze(initialState); //Enforce immutability
-			
+
 			// Send the EXPIRE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(initialState, new DestroySession());
 			expect(changedState.user).toBeUndefined();
