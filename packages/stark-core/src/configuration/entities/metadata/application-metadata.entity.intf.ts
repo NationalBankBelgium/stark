@@ -1,6 +1,11 @@
 "use strict";
 
 import { StarkLanguage } from "../language/index";
+import { InjectionToken } from "@angular/core";
+
+export const STARK_APP_METADATA: InjectionToken<StarkApplicationMetadata> = new InjectionToken<StarkApplicationMetadata>(
+	"STARK_APP_METADATA"
+);
 
 /**
  * Metadata that describes the current application build

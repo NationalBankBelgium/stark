@@ -34,7 +34,8 @@ import {
 
 import { StarkHttpHeaders, StarkSortOrder } from "../constants/index";
 import { StarkHttpStatusCodes } from "../enumerators/index";
-import { StarkLoggingService, MockStarkLoggingService } from "../../logging/index";
+import { StarkLoggingService } from "../../logging/index";
+import { MockStarkLoggingService } from "../../logging/testing/index";
 import { MockStarkSessionService } from "../../session/testing/index";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
 import { StarkSessionService } from "../../session/index";

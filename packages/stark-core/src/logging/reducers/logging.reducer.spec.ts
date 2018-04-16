@@ -87,4 +87,18 @@ describe("Reducer: LoggingReducer", () => {
 			expect(changedState.applicationId).toBe("new appID");
 		});
 	});
+
+	describe("on any other Action", () => {
+		it("should invoke the default state", () => {
+			const initialState: StarkLogging = starkLogging;
+			deepFreeze(initialState); //Enforce immutability
+
+			// Send the MOCK_ACTION action to the loggingReducer
+			const changedState: StarkLogging = loggingReducer(initialState, <any>{
+				type: "MOCK_ACTION"
+			});
+
+			expect(changedState).toBe(initialState);
+		});
+	});
 });

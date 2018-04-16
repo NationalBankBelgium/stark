@@ -72,4 +72,18 @@ describe("Reducer: SessionReducer", () => {
 			expect(changedState.user).toBeUndefined();
 		});
 	});
+
+	describe("on any other Action", () => {
+		it("should invoke the default state", () => {
+			const initialState: StarkSession = session;
+			deepFreeze(initialState); //Enforce immutability
+
+			// Send the MOCK_ACTION action to the sessionReducer
+			const changedState: StarkSession = sessionReducer(initialState, <any>{
+				type: "MOCK_ACTION"
+			});
+
+			expect(changedState).toBe(initialState);
+		});
+	});
 });
