@@ -55,11 +55,7 @@ module.exports = function(options) {
 		module: !isProd && METADATA.WATCH ? "commonjs" : "es2015" // TODO is it needed in our case? => Force commonjs module format for TS on dev watch builds.
 	};
 
-	const appNgcOptions = Object.assign(
-		{},
-		defaultNgcOptions,
-		tsConfigApp.raw.angularCompilerOptions
-	);
+	const appNgcOptions = Object.assign({}, defaultNgcOptions, tsConfigApp.raw.angularCompilerOptions);
 
 	const environment = buildUtils.getEnvFile(METADATA.envFileSuffix);
 

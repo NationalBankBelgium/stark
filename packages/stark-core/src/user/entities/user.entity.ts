@@ -68,8 +68,7 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public isAnonymous?: boolean;
 
-	@autoserialize
-	public custom?: object;
+	@autoserialize public custom?: object;
 
 	/**
 	 * Extract the properties coming in the "details" object.

@@ -68,9 +68,9 @@ module.exports = function() {
 			chunkOrigins: true,
 			reasons: true,
 			maxModules: Infinity, // examine all modules (ModuleConcatenationPlugin debugging)
-			optimizationBailout: true  // display bailout reasons (ModuleConcatenationPlugin debugging)
+			optimizationBailout: true // display bailout reasons (ModuleConcatenationPlugin debugging)
 		},
-		
+
 		/**
 		 * Options affecting the output of the compilation.
 		 *

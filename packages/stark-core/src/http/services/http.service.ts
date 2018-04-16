@@ -5,7 +5,7 @@ import { Deserialize, Serialize } from "cerialize";
 import { Observable } from "rxjs/Observable";
 import { timer } from "rxjs/observable/timer";
 import { _throw as observableThrow } from "rxjs/observable/throw";
-// FIXME: importing from single entry "rxjs/operators" together with webpack's scope hoisting prevents dead code removal  
+// FIXME: importing from single entry "rxjs/operators" together with webpack's scope hoisting prevents dead code removal
 // see https://github.com/ReactiveX/rxjs/issues/2981
 // import { catchError, map, mergeMap, retryWhen } from "rxjs/operators";
 import { catchError } from "rxjs/operators/catchError";
@@ -53,9 +53,11 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	private httpClient: HttpClient;
 
 	// FIXME: uncomment these lines once LoggingService and SessionService are implemented
-	public constructor(/*@Inject(starkLoggingServiceName)*/ logger: StarkLoggingService,
-					   /*@Inject(starkSessionServiceName)*/ sessionService: StarkSessionService,
-					   httpClient: HttpClient) {
+	public constructor(
+		/*@Inject(starkLoggingServiceName)*/ logger: StarkLoggingService,
+		/*@Inject(starkSessionServiceName)*/ sessionService: StarkSessionService,
+		httpClient: HttpClient
+	) {
 		this.logger = logger;
 		this.sessionService = sessionService;
 		this.httpClient = httpClient;
@@ -103,9 +105,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		} else {
 			return observableThrow(
 				"Unknown request type encountered " +
-				request.requestType +
-				". For collection requests, " +
-				"call the executeCollectionRequest method"
+					request.requestType +
+					". For collection requests, " +
+					"call the executeCollectionRequest method"
 			);
 		}
 	}
@@ -141,9 +143,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			// we return directly here because otherwise compilation fails (can't assign the ErrorObservable type to Subject)
 			return observableThrow(
 				"Unknown request type encountered " +
-				request.requestType +
-				". For single requests (no " +
-				"collection), call the executeSingleItemRequest method"
+					request.requestType +
+					". For single requests (no " +
+					"collection), call the executeSingleItemRequest method"
 			);
 		}
 	}
@@ -353,7 +355,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 										if ((<object>(<StarkHttpRawCollectionResponseData<P>>result.body).metadata.etags)[item.uuid]) {
 											item.etag = (<object>(<StarkHttpRawCollectionResponseData<P>>result.body).metadata.etags)[
 												item.uuid
-												];
+											];
 										} else {
 											this.logger.warn(starkHttpServiceName + ": no etag found for resource with uuid ", item.uuid);
 										}
@@ -363,9 +365,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 								} else {
 									this.logger.warn(
 										starkHttpServiceName +
-										": cannot set the etag property in the item '" +
-										item +
-										"' because it is not an object"
+											": cannot set the etag property in the item '" +
+											item +
+											"' because it is not an object"
 									);
 								}
 							}
@@ -410,7 +412,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 					})
 				);
 			})
-		)
+		);
 	}
 
 	private serialize(entity: P, request: StarkHttpRequest<P>): string | object {
@@ -418,7 +420,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	}
 
 	private deserialize(
-		rawEntity: string | object, 
+		rawEntity: string | object,
 		request: StarkHttpRequest<P>,
 		response: HttpResponse<P | StarkHttpRawCollectionResponseData<P>>
 	): P {

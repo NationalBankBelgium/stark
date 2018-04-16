@@ -1,9 +1,6 @@
 "use strict";
 
-import {
-	Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA,
-	SystemJsNgModuleLoader
-} from "@angular/core";
+import { Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
 import { TestBed, fakeAsync, tick, inject } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
 import { StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
@@ -22,13 +19,11 @@ import { StarkRoutingActionTypes } from "../actions/index";
 import Spy = jasmine.Spy;
 import { MockStarkLoggingService } from "../../logging/testing/logging.mock";
 
-@Component({selector: 'test-home', template: 'HOME'})
-export class HomeComponent {
-}
+@Component({ selector: "test-home", template: "HOME" })
+export class HomeComponent {}
 
-@Component({selector: 'logout-page', template: 'LOGOUT_PAGE_COMPONENT'})
-export class LogoutPageComponent {
-}
+@Component({ selector: "logout-page", template: "LOGOUT_PAGE_COMPONENT" })
+export class LogoutPageComponent {}
 
 describe("Service: StarkRoutingService", () => {
 	let $state: StateService;
@@ -416,25 +411,25 @@ describe("Service: StarkRoutingService", () => {
 					useFactory: starkRoutingServiceFactory,
 					deps: [StateService, TransitionService]
 				},
-				{provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader} // needed for ui-router
+				{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader } // needed for ui-router
 			],
-			imports: [
-				routerModule
-			],
+			imports: [routerModule]
 		});
 	});
 
 	// Inject module dependencies
-	beforeEach(inject([UIRouter, StarkRoutingServiceImpl], (_router: UIRouter, _routingService: StarkRoutingServiceImpl) => {
-		router = _router;
-		$state = router.stateService;
-		routingService = _routingService;
+	beforeEach(
+		inject([UIRouter, StarkRoutingServiceImpl], (_router: UIRouter, _routingService: StarkRoutingServiceImpl) => {
+			router = _router;
+			$state = router.stateService;
+			routingService = _routingService;
 
-		(<Spy>mockLogger.warn).calls.reset();
-		(<Spy>mockLogger.debug).calls.reset();
-		(<Spy>mockLogger.error).calls.reset();
-		(<Spy>mockStore.dispatch).calls.reset();
-	}));
+			(<Spy>mockLogger.warn).calls.reset();
+			(<Spy>mockLogger.debug).calls.reset();
+			(<Spy>mockLogger.error).calls.reset();
+			(<Spy>mockStore.dispatch).calls.reset();
+		})
+	);
 
 	afterEach(() => {
 		// IMPORTANT: reset the url after each test,
@@ -451,7 +446,8 @@ describe("Service: StarkRoutingService", () => {
 
 			let currentState: StateObject = routingService.getCurrentState();
 			expect(currentState.name).toBe("");
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					tap((enteredState: StateObject) => {
 						expect(enteredState).toBeDefined();
@@ -465,16 +461,14 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("getCurrentState " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 	});
 
 	describe("getCurrentStateName", () => {
 		it("should return the name of the current State instance where the router has navigated to", (done: DoneFn) => {
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					tap((enteredState: StateObject) => {
 						const currentState: StateObject = routingService.getCurrentState();
@@ -487,10 +481,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("getCurrentStateName " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 	});
 
@@ -498,7 +489,8 @@ describe("Service: StarkRoutingService", () => {
 		it("should return the current StateConfig instance where the router has navigated to", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					tap((enteredState: StateObject) => {
 						expect(enteredState).toBeDefined();
@@ -510,10 +502,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("getCurrentStateConfig " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 	});
 
@@ -569,14 +558,19 @@ describe("Service: StarkRoutingService", () => {
 
 			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
-			routingService.navigateTo("page-01", {requestId: requestId, onBehalfView: true})
+			routingService
+				.navigateTo("page-01", { requestId: requestId, onBehalfView: true })
 				.pipe(
 					tap(() => {
 						expect($state.go).toHaveBeenCalledTimes(1);
-						expect($state.go).toHaveBeenCalledWith("page-01", {
-							requestId: requestId,
-							onBehalfView: true
-						}, undefined);
+						expect($state.go).toHaveBeenCalledWith(
+							"page-01",
+							{
+								requestId: requestId,
+								onBehalfView: true
+							},
+							undefined
+						);
 
 						const currentStateParams: any = routingService.getCurrentStateParams();
 						expect(currentStateParams.requestId).toBeDefined();
@@ -588,10 +582,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigateTo " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 	});
 
@@ -600,7 +591,8 @@ describe("Service: StarkRoutingService", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					tap(() => {
 						let isCurrentUIState: boolean = routingService.isCurrentUiState("page-01");
@@ -613,10 +605,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("isCurrentUiState " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 
 		it("should return whether or not the current state is equal a specific state name and parameters combination", (done: DoneFn) => {
@@ -625,7 +614,8 @@ describe("Service: StarkRoutingService", () => {
 
 			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
-			routingService.navigateTo("page-01", {requestId: requestId, onBehalfView: true})
+			routingService
+				.navigateTo("page-01", { requestId: requestId, onBehalfView: true })
 				.pipe(
 					tap(() => {
 						let isCurrentUIState: boolean = routingService.isCurrentUiState("page-01", {
@@ -650,10 +640,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("isCurrentUiState " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 	});
 
@@ -664,7 +651,8 @@ describe("Service: StarkRoutingService", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					tap((enteredState: StateObject) => {
 						expect(enteredState).toBeDefined();
@@ -676,35 +664,31 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigateTo " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error),
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 
 		it("should contain the options, when provided", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 
-			routingService.navigateTo("page-01", undefined, {reload: true})
+			routingService
+				.navigateTo("page-01", undefined, { reload: true })
 				.pipe(
 					tap(() => {
 						expect($state.go).toHaveBeenCalledTimes(1);
-						expect($state.go).toHaveBeenCalledWith("page-01", undefined, {reload: true});
+						expect($state.go).toHaveBeenCalledWith("page-01", undefined, { reload: true });
 					}),
 					catchError((error: any) => {
 						return observableThrow("navigateTo " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 
 		it("should navigate to a non-existing page", (done: DoneFn) => {
 			spyOn($state, "go").and.returnValue(observableThrow("uh-oh").toPromise());
 
-			routingService.navigateTo("whatever")
+			routingService
+				.navigateTo("whatever")
 				.pipe(
 					tap(() => {
 						fail("whatever");
@@ -730,7 +714,8 @@ describe("Service: StarkRoutingService", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
-			routingService.navigateToHome()
+			routingService
+				.navigateToHome()
 				.pipe(
 					tap((enteredState: StateObject) => {
 						expect(enteredState).toBeDefined();
@@ -742,10 +727,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigateToHome " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 
 		it("should contain the params, when provided", (done: DoneFn) => {
@@ -753,14 +735,19 @@ describe("Service: StarkRoutingService", () => {
 
 			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
-			routingService.navigateTo("homepage", {requestId: requestId, onBehalfView: true})
+			routingService
+				.navigateTo("homepage", { requestId: requestId, onBehalfView: true })
 				.pipe(
 					tap(() => {
 						expect($state.go).toHaveBeenCalledTimes(1);
-						expect($state.go).toHaveBeenCalledWith("homepage", {
-							requestId: requestId,
-							onBehalfView: true
-						}, undefined);
+						expect($state.go).toHaveBeenCalledWith(
+							"homepage",
+							{
+								requestId: requestId,
+								onBehalfView: true
+							},
+							undefined
+						);
 
 						const currentStateParams: any = routingService.getCurrentStateParams();
 						expect(currentStateParams.requestId).toBeDefined();
@@ -772,10 +759,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigateToHome " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 	});
 
@@ -783,7 +767,8 @@ describe("Service: StarkRoutingService", () => {
 		it("should navigate to the previous page", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 
-			routingService.navigateTo("homepage")
+			routingService
+				.navigateTo("homepage")
 				.pipe(
 					catchError((error: any) => {
 						return observableThrow("navigateTo homepage " + error);
@@ -807,10 +792,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigateToPrevious " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 	});
 
@@ -821,7 +803,8 @@ describe("Service: StarkRoutingService", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
 						return observableThrow("navigateTo homepage " + error);
@@ -836,10 +819,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("reload " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 
 		it("should reload the current page", (done: DoneFn) => {
@@ -848,7 +828,8 @@ describe("Service: StarkRoutingService", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
 						return observableThrow("navigateTo homepage " + error);
@@ -859,10 +840,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("reload " + error);
 					})
 				)
-				.subscribe(
-					() => () => fail("the test should not enter the next block"),
-					() => done()
-				);
+				.subscribe(() => () => fail("the test should not enter the next block"), () => done());
 		});
 	});
 
@@ -870,7 +848,8 @@ describe("Service: StarkRoutingService", () => {
 		it("should not navigate to a page when that page is already the current page", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
 						return observableThrow("navigateTo page-01 " + error);
@@ -893,42 +872,36 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigationErrorHandler " + error);
 					})
 				)
-				.subscribe(
-					() => done(),
-					(error: any) => fail(error)
-				);
+				.subscribe(() => done(), (error: any) => fail(error));
 		});
 
-		it("should cancel a navigation when another navigation is triggered before the first was completed",
-			(done: DoneFn) => {
-				spyOn($state, "go").and.callThrough();
+		it("should cancel a navigation when another navigation is triggered before the first was completed", (done: DoneFn) => {
+			spyOn($state, "go").and.callThrough();
 
-				routingService.navigateTo("page-01");
+			routingService.navigateTo("page-01");
 
-				routingService.navigateTo("page-01-01")
-					.pipe(
-						catchError((error: any) => {
-							return observableThrow("navigateTo page-01-01 " + error);
-						}),
-						tap((enteredState: StateObject) => {
-							expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-							const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
-							expect(message).toMatch(/Route transition superseded/);
+			routingService
+				.navigateTo("page-01-01")
+				.pipe(
+					catchError((error: any) => {
+						return observableThrow("navigateTo page-01-01 " + error);
+					}),
+					tap((enteredState: StateObject) => {
+						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
+						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+						expect(message).toMatch(/Route transition superseded/);
 
-							expect(enteredState).toBeDefined();
-							expect(enteredState.name).toBe("page-01-01");
-							expect($state.go).toHaveBeenCalledTimes(2);
-							expect($state.go).toHaveBeenCalledWith("page-01-01", undefined, undefined);
-						}),
-						catchError((error: any) => {
-							return observableThrow("navigationErrorHandler " + error);
-						})
-					)
-					.subscribe(
-						() => done(),
-						(error: any) => fail(error)
-					);
-			});
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("page-01-01");
+						expect($state.go).toHaveBeenCalledTimes(2);
+						expect($state.go).toHaveBeenCalledWith("page-01-01", undefined, undefined);
+					}),
+					catchError((error: any) => {
+						return observableThrow("navigationErrorHandler " + error);
+					})
+				)
+				.subscribe(() => done(), (error: any) => fail(error));
+		});
 
 		it("should not throw an error for a known navigation rejection cause", (done: DoneFn) => {
 			routingService.addTransitionHook(StarkRoutingTransitionHook.ON_START, {}, () => {
@@ -937,7 +910,8 @@ describe("Service: StarkRoutingService", () => {
 
 			routingService.addKnownNavigationRejectionCause("transition rejection");
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
@@ -946,10 +920,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigationErrorHandler " + error);
 					})
 				)
-				.subscribe(
-					() => fail("this block should not be executed"),
-					() => done()
-				);
+				.subscribe(() => fail("this block should not be executed"), () => done());
 		});
 
 		it("should not log a known navigation rejection cause", (done: DoneFn) => {
@@ -957,7 +928,8 @@ describe("Service: StarkRoutingService", () => {
 				throw new Error("transition rejection");
 			});
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(2);
@@ -966,10 +938,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigationErrorHandler " + error);
 					})
 				)
-				.subscribe(
-					() => fail("this block should not be executed"),
-					() => done()
-				);
+				.subscribe(() => fail("this block should not be executed"), () => done());
 		});
 
 		it("should log an warning if it is not a known navigation rejection cause", (done: DoneFn) => {
@@ -977,7 +946,8 @@ describe("Service: StarkRoutingService", () => {
 				throw new Error("transition aborted");
 			});
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
@@ -986,10 +956,7 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigationErrorHandler " + error);
 					})
 				)
-				.subscribe(
-					() => fail("this block should not be executed"),
-					() => done()
-				);
+				.subscribe(() => fail("this block should not be executed"), () => done());
 		});
 
 		it("should log an error if it is not a known navigation rejection cause", (done: DoneFn) => {
@@ -997,7 +964,8 @@ describe("Service: StarkRoutingService", () => {
 				throw new Error("resolve error");
 			});
 
-			routingService.navigateTo("page-01")
+			routingService
+				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(2);
@@ -1006,27 +974,21 @@ describe("Service: StarkRoutingService", () => {
 						return observableThrow("navigationErrorHandler " + error);
 					})
 				)
-				.subscribe(
-					() => fail("this block should not be executed"),
-					() => done()
-				);
+				.subscribe(() => fail("this block should not be executed"), () => done());
 		});
 
 		it("should log an error if the state does not exist", (done: DoneFn) => {
-			routingService.navigateTo("non-existing-page")
+			routingService
+				.navigateTo("non-existing-page")
 				.pipe(
 					catchError((error: any) => {
-
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/The target state does NOT exist/);
 						return observableThrow("navigationErrorHandler " + error);
 					})
 				)
-				.subscribe(
-					() => fail("this block should not be executed"),
-					() => done()
-				);
+				.subscribe(() => fail("this block should not be executed"), () => done());
 		});
 	});
 
@@ -1043,42 +1005,48 @@ describe("Service: StarkRoutingService", () => {
 	});
 
 	describe("addTransitionHook", () => {
-		it("should call the ON_SUCCESS hook once upon successful navigation", fakeAsync(() => {
-			const transitionHookSpy: any = jasmine.createSpy("successTest");
-			routingService.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, {}, transitionHookSpy);
-			routingService.navigateTo("homepage");
+		it(
+			"should call the ON_SUCCESS hook once upon successful navigation",
+			fakeAsync(() => {
+				const transitionHookSpy: any = jasmine.createSpy("successTest");
+				routingService.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, {}, transitionHookSpy);
+				routingService.navigateTo("homepage");
 
-			// simulating the scope life cycle (so the angular watchers and bindings are triggered by the observable's values)
-			tick();
+				// simulating the scope life cycle (so the angular watchers and bindings are triggered by the observable's values)
+				tick();
 
-			expect(transitionHookSpy).toHaveBeenCalledTimes(1);
-		}));
+				expect(transitionHookSpy).toHaveBeenCalledTimes(1);
+			})
+		);
 
-		it("should call the ON_ERROR hook when a routing transition is forced to fail", fakeAsync(() => {
-			routingService.addTransitionHook(StarkRoutingTransitionHook.ON_START, {}, () => {
-				// force the routing transition to fail
-				return false;
-			});
+		it(
+			"should call the ON_ERROR hook when a routing transition is forced to fail",
+			fakeAsync(() => {
+				routingService.addTransitionHook(StarkRoutingTransitionHook.ON_START, {}, () => {
+					// force the routing transition to fail
+					return false;
+				});
 
-			const transitionErrorHookSpy: any = jasmine.createSpy("errorTest");
-			routingService.addTransitionHook(StarkRoutingTransitionHook.ON_ERROR, {}, transitionErrorHookSpy);
-			routingService.navigateTo("homepage");
+				const transitionErrorHookSpy: any = jasmine.createSpy("errorTest");
+				routingService.addTransitionHook(StarkRoutingTransitionHook.ON_ERROR, {}, transitionErrorHookSpy);
+				routingService.navigateTo("homepage");
 
-			// simulating the scope life cycle (so the angular watchers and bindings are triggered by the observable's values)
-			tick();
+				// simulating the scope life cycle (so the angular watchers and bindings are triggered by the observable's values)
+				tick();
 
-			// TODO we should investigate why the error hook is only called for valid navigation
-			//
-			// navigating to an existing page results in 2 dispatch calls
-			//   dispatch calls: navigateTo + transitionObservable.next (also in navigateTo)
-			//
-			// navigating to a non-existing page results in 2 dispatch calls, but the error
-			//   dispatch calls: navigateTo + this.$state.onInvalid
-			//   any transaction is not called
+				// TODO we should investigate why the error hook is only called for valid navigation
+				//
+				// navigating to an existing page results in 2 dispatch calls
+				//   dispatch calls: navigateTo + transitionObservable.next (also in navigateTo)
+				//
+				// navigating to a non-existing page results in 2 dispatch calls, but the error
+				//   dispatch calls: navigateTo + this.$state.onInvalid
+				//   any transaction is not called
 
-			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect(transitionErrorHookSpy).toHaveBeenCalledTimes(1);
-		}));
+				expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
+				expect(transitionErrorHookSpy).toHaveBeenCalledTimes(1);
+			})
+		);
 
 		it("should throw an error when an non-existing hook is used", () => {
 			const transitionHookSpy: any = jasmine.createSpy("DoWhatever");
@@ -1119,1153 +1087,1222 @@ describe("Service: StarkRoutingService", () => {
 	});
 
 	describe("getStateTreeParams with NavigateTo", () => {
-		it("should return the state tree parameters for each visited page", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the state tree parameters for each visited page",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 
-		it("should return the state tree parameters when changing branch within Page-01 node", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the state tree parameters when changing branch within Page-01 node",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: true}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: true }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 
-		it("should return the state tree parameters when changing to Page-02 branch", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-02-01",
-					stateParams: {requestId: "Request-05", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the state tree parameters when changing to Page-02 branch",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-02-01",
+						stateParams: { requestId: "Request-05", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-02-01",
-					stateParams: {requestId: "Request-05", onBehalfView: true}
-				},
-				{
-					stateName: "page-02",
-					stateParams: undefined
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-02-01",
+						stateParams: { requestId: "Request-05", onBehalfView: true }
+					},
+					{
+						stateName: "page-02",
+						stateParams: undefined
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 	});
 
 	describe("getStateTreeParams with NavigateToPrevious", () => {
-		it("should return the state tree parameters for each visited page in same branch except the last one", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the state tree parameters for each visited page in same branch except the last one",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
+			})
+		);
 
-		it("should return the state tree parameters when changing branch within Page-01 node except the last one", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the state tree parameters when changing branch within Page-01 node except the last one",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
+			})
+		);
 
-		it("should return the correct state tree names and parameters when switching branches except the last one", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the correct state tree names and parameters when switching branches except the last one",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: undefined
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: undefined
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
+			})
+		);
 
-		it("should return the correct state tree names and parameters when switching branches except the last two", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the correct state tree names and parameters when switching branches except the last two",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 2);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 2);
+			})
+		);
 
-		it("should return the correct state tree names and parameters when switching branches except the last one", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-06", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the correct state tree names and parameters when switching branches except the last one",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-06", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
+			})
+		);
 
-		it("should return the correct state tree names and parameters when switching branches except the last two", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-06", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the correct state tree names and parameters when switching branches except the last two",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-06", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: undefined
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: undefined
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 2);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 2);
+			})
+		);
 
-		it("should return the correct state tree names and parameters when switching branches except the last four", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-06", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the correct state tree names and parameters when switching branches except the last four",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-06", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 4);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 4);
+			})
+		);
 
-		it("should return the correct state tree names and parameters when switching branches except the last four", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: true}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-06", onBehalfView: true}
-				}
-			];
+		it(
+			"should return the correct state tree names and parameters when switching branches except the last four",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: true }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-06", onBehalfView: true }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 5);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 5);
+			})
+		);
 	});
 
 	describe("Navigation History", () => {
+		it(
+			"should dispatch NAVIGATION_HISTORY_LIMIT_REACHED action, when the navigation history limit is reached",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-01",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-02",
+						stateParams: { requestId: "Request-06", onBehalfView: false }
+					},
+					{
+						stateName: "page-02",
+						stateParams: { requestId: "Request-07", onBehalfView: false }
+					},
+					{
+						stateName: "page-02-01",
+						stateParams: { requestId: "Request-08", onBehalfView: false }
+					}
+				];
 
-		it("should dispatch NAVIGATION_HISTORY_LIMIT_REACHED action, when the navigation history limit is reached", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-01",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-02",
-					stateParams: {requestId: "Request-06", onBehalfView: false}
-				},
-				{
-					stateName: "page-02",
-					stateParams: {requestId: "Request-07", onBehalfView: false}
-				},
-				{
-					stateName: "page-02-01",
-					stateParams: {requestId: "Request-08", onBehalfView: false}
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
+
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 8);
+
+				// expectedCalls
+				// ==> 2 actions per navigation ("NAVIGATE" + "NAVIGATE_SUCCESS")
+				// 8 successful navigations To => 8 x 2 = 16
+				// 6 successful navigations ToPrevious => 6 x 2 = 12
+				// 1 successful navigation ToPrevious with a warning => 3 ("NAVIGATION_HISTORY_LIMIT_REACHED" + "NAVIGATE" + "NAVIGATE_SUCCESS")
+				// 1 unsuccessful navigations ToPrevious => 1 ("NAVIGATION_HISTORY_LIMIT_REACHED")
+
+				const expectedCalls: number = 16 + 12 + 3 + 1;
+				expect(mockStore.dispatch).toHaveBeenCalledTimes(expectedCalls);
+
+				const actions: CallInfo[] = (<Spy>mockStore.dispatch).calls.all();
+				const actionIndex: number = 16 + 12;
+
+				for (let i: number = 0; i < actions.length; i++) {
+					const action: CallInfo = actions[i];
+
+					if (i === actionIndex) {
+						expect(action.args[0].type).toBe(StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED);
+					} else if (i <= actionIndex + 2) {
+						expect(action.args[0].type).toContain(StarkRoutingActionTypes.NAVIGATE);
+					} else {
+						expect(action.args[0].type).toBe(StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED);
+					}
 				}
-			];
-
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
-
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams, 8);
-
-			// expectedCalls
-			// ==> 2 actions per navigation ("NAVIGATE" + "NAVIGATE_SUCCESS")
-			// 8 successful navigations To => 8 x 2 = 16
-			// 6 successful navigations ToPrevious => 6 x 2 = 12
-			// 1 successful navigation ToPrevious with a warning => 3 ("NAVIGATION_HISTORY_LIMIT_REACHED" + "NAVIGATE" + "NAVIGATE_SUCCESS") 
-			// 1 unsuccessful navigations ToPrevious => 1 ("NAVIGATION_HISTORY_LIMIT_REACHED") 
-
-			const expectedCalls: number = 16 + 12 + 3 + 1;
-			expect(mockStore.dispatch).toHaveBeenCalledTimes(expectedCalls);
-
-			const actions: CallInfo[] = (<Spy>mockStore.dispatch).calls.all();
-			const actionIndex: number = 16 + 12;
-
-			for (let i: number = 0; i < actions.length; i++) {
-				const action: CallInfo = actions[i];
-
-				if (i === actionIndex) {
-					expect(action.args[0].type).toBe(StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED);
-				} else if (i <= actionIndex + 2) {
-					expect(action.args[0].type).toContain(StarkRoutingActionTypes.NAVIGATE);
-				} else {
-					expect(action.args[0].type).toBe(StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED);
-				}
-			}
-		}));
+			})
+		);
 	});
 
 	describe("getStateTreeParams", () => {
-		it("should return the name and parameters of each node in the state tree when navigating through the same branch (scenario 1)", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the name and parameters of each node in the state tree when navigating through the same branch (scenario 1)",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 
-		it("should return the name and parameters of each node in the state tree" +
-			" when navigating to a sub branch (scenario 2)", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-02",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the name and parameters of each node in the state tree" + " when navigating to a sub branch (scenario 2)",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-02",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-02",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-02",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 
-		it("should return the name and parameters of each node in the state tree" +
-			" after navigating the same path but with other params (scenario 3)", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: undefined
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-06", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-07", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the name and parameters of each node in the state tree" +
+				" after navigating the same path but with other params (scenario 3)",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: undefined
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-06", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-07", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-07", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-06", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-07", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-06", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: {}
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 
-		it("should return the name and parameters of each node in the state tree" +
-			" after switching branches (scenario 4)", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-02",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-02-01",
-					stateParams: {requestId: "Request-06", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-07", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the name and parameters of each node in the state tree" + " after switching branches (scenario 4)",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-02",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-02-01",
+						stateParams: { requestId: "Request-06", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-07", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-07", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-07", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 
-		it("should return the name and parameters of each node in the state tree" +
-			" after switching branches (scenario 5)", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "page-02-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the name and parameters of each node in the state tree" + " after switching branches (scenario 5)",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "page-02-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-02-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				},
-				{
-					stateName: "page-02",
-					stateParams: undefined
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-02-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					},
+					{
+						stateName: "page-02",
+						stateParams: undefined
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 	});
 
 	describe("getStateTreeParams in combination with NavigateToHome", () => {
-		it("should return the state tree name and parameters of the homepage", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
+		it(
+			"should return the state tree name and parameters of the homepage",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					}
+				];
+
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "homepage",
+						stateParams: {}
+					}
+				];
+
+				for (const navigationStep of navigationSteps) {
+					routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
+					tick();
 				}
-			];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "homepage",
-					stateParams: {}
-				}
-			];
-
-			for (const navigationStep of navigationSteps) {
-				routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
-				tick();
-			}
-
-			navigationSteps.push(
-				{
+				navigationSteps.push({
 					stateName: "homepage",
 					stateParams: undefined
-				}
-			);
+				});
 
-			routingService.navigateToHome();
-			tick();
+				routingService.navigateToHome();
+				tick();
 
-			const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
+				const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
 
-			expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
+				expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
 
-			let index: number = 0;
-			stateTreeParams.forEach((stateParams: any, stateName: string) => {
-				expect(stateName).toBe(expectedStateTreeParams[index].stateName);
-				expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
-				index++;
-			});
-		}));
+				let index: number = 0;
+				stateTreeParams.forEach((stateParams: any, stateName: string) => {
+					expect(stateName).toBe(expectedStateTreeParams[index].stateName);
+					expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
+					index++;
+				});
+			})
+		);
 	});
 
 	describe("getStateTreeParams in combination with NavigateToPrevious", () => {
-		it("should return the state tree name and parameters of each node in the state tree", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "page-02-01",
-					stateParams: {requestId: "Request-05", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the state tree name and parameters of each node in the state tree",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "page-02-01",
+						stateParams: { requestId: "Request-05", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			for (const navigationStep of navigationSteps) {
-				routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
+				for (const navigationStep of navigationSteps) {
+					routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
+					tick();
+				}
+
+				routingService.navigateToPrevious();
 				tick();
-			}
 
-			routingService.navigateToPrevious();
-			tick();
+				const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
 
-			const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
+				expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
 
-			expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
-
-			let index: number = 0;
-			stateTreeParams.forEach((stateParams: any, stateName: string) => {
-				expect(stateName).toBe(expectedStateTreeParams[index].stateName);
-				expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
-				index++;
-			});
-		}));
+				let index: number = 0;
+				stateTreeParams.forEach((stateParams: any, stateName: string) => {
+					expect(stateName).toBe(expectedStateTreeParams[index].stateName);
+					expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
+					index++;
+				});
+			})
+		);
 	});
 
 	describe("getStateTreeParams in combination with NagivateToHome and NavigateToPrevious", () => {
-		it("should return the state tree name and parameters of each node in the state tree", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the state tree name and parameters of each node in the state tree",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			for (const navigationStep of navigationSteps) {
-				routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
+				for (const navigationStep of navigationSteps) {
+					routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
+					tick();
+				}
+
+				routingService.navigateToHome();
 				tick();
-			}
 
-			routingService.navigateToHome();
-			tick();
+				routingService.navigateToPrevious();
+				tick();
 
-			routingService.navigateToPrevious();
-			tick();
+				const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
 
-			const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
+				expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
 
-			expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
-
-			let index: number = 0;
-			stateTreeParams.forEach((stateParams: any, stateName: string) => {
-				expect(stateName).toBe(expectedStateTreeParams[index].stateName);
-				expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
-				index++;
-			});
-		}));
+				let index: number = 0;
+				stateTreeParams.forEach((stateParams: any, stateName: string) => {
+					expect(stateName).toBe(expectedStateTreeParams[index].stateName);
+					expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
+					index++;
+				});
+			})
+		);
 	});
 
 	describe("getStateTreeParams with abstract pages", () => {
-		it("should not navigate to an abstract page", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-03",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				}
-			];
+		it(
+			"should not navigate to an abstract page",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-03",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeParams: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+				const expectedStateTreeParams: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			TestStateTreeParams(navigationSteps, expectedStateTreeParams);
-		}));
+				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+			})
+		);
 	});
 
 	describe("getStateTreeResolves", () => {
-		it("should return the name, parameters and parent of each node in the state tree", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the name, parameters and parent of each node in the state tree",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeResolves: any = [
-				{
-					name: "page-01-02-01",
-					resolvableData: undefined
-				},
-				{
-					name: "page-01-02",
-					resolvableData: undefined
-				},
-				{
-					name: "page-01",
-					resolvableData: {translationKey: "PAGE.01.FROM.RESOLVE"}
-				},
-				{
-					name: "homepage",
-					resolvableData: {availableHolidays: 22}
-				}
-			];
+				const expectedStateTreeResolves: any = [
+					{
+						name: "page-01-02-01",
+						resolvableData: undefined
+					},
+					{
+						name: "page-01-02",
+						resolvableData: undefined
+					},
+					{
+						name: "page-01",
+						resolvableData: { translationKey: "PAGE.01.FROM.RESOLVE" }
+					},
+					{
+						name: "homepage",
+						resolvableData: { availableHolidays: 22 }
+					}
+				];
 
-			TestStateTreeResolves(navigationSteps, expectedStateTreeResolves);
-		}));
+				TestStateTreeResolves(navigationSteps, expectedStateTreeResolves);
+			})
+		);
 
-		it("should return the name, parameters and parent of each node in the state tree", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the name, parameters and parent of each node in the state tree",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeResolves: any = [
-				{
-					name: "homepage",
-					resolvableData: {availableHolidays: 22}
-				}
-			];
+				const expectedStateTreeResolves: any = [
+					{
+						name: "homepage",
+						resolvableData: { availableHolidays: 22 }
+					}
+				];
 
-			TestStateTreeResolves(navigationSteps, expectedStateTreeResolves);
-		}));
+				TestStateTreeResolves(navigationSteps, expectedStateTreeResolves);
+			})
+		);
 	});
 
 	describe("getStateTreeData", () => {
-		it("should return the name, parameters and parent of each node in the state tree", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the name, parameters and parent of each node in the state tree",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					}
+				];
 
-			const expectedStateTreeResolves: any = [
-				{
-					name: "page-01-02-01",
-					data: undefined
-				},
-				{
-					name: "page-01-02",
-					data: {translationKey: "PAGE.01.02", pageTitleColor: "black", pageTitleFontSize: 14}
-				},
-				{
-					name: "page-01",
-					data: {translationKey: "PAGE.01", pageTitleColor: "dark blue", pageTitleFontSize: 16}
-				},
-				{
-					name: "homepage",
-					data: {translationKey: "HOME", pageTitleColor: "blue", pageTitleFontSize: 20}
-				}
-			];
+				const expectedStateTreeResolves: any = [
+					{
+						name: "page-01-02-01",
+						data: undefined
+					},
+					{
+						name: "page-01-02",
+						data: { translationKey: "PAGE.01.02", pageTitleColor: "black", pageTitleFontSize: 14 }
+					},
+					{
+						name: "page-01",
+						data: { translationKey: "PAGE.01", pageTitleColor: "dark blue", pageTitleFontSize: 16 }
+					},
+					{
+						name: "homepage",
+						data: { translationKey: "HOME", pageTitleColor: "blue", pageTitleFontSize: 20 }
+					}
+				];
 
-			TestStateTreeData(navigationSteps, expectedStateTreeResolves);
-		}));
+				TestStateTreeData(navigationSteps, expectedStateTreeResolves);
+			})
+		);
 	});
 
 	describe("getTranslationKeyFromState", () => {
-		it("should return the translationKey from the data of each node in the state tree", fakeAsync(() => {
-			const navigationSteps: any = [
-				{
-					stateName: "homepage",
-					stateParams: {requestId: "Request-01", onBehalfView: false}
-				},
-				{
-					stateName: "page-01",
-					stateParams: {requestId: "Request-02", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: {requestId: "Request-03", onBehalfView: false}
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: {requestId: "Request-04", onBehalfView: false}
-				}
-			];
+		it(
+			"should return the translationKey from the data of each node in the state tree",
+			fakeAsync(() => {
+				const navigationSteps: any = [
+					{
+						stateName: "homepage",
+						stateParams: { requestId: "Request-01", onBehalfView: false }
+					},
+					{
+						stateName: "page-01",
+						stateParams: { requestId: "Request-02", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02",
+						stateParams: { requestId: "Request-03", onBehalfView: false }
+					},
+					{
+						stateName: "page-01-02-01",
+						stateParams: { requestId: "Request-04", onBehalfView: false }
+					}
+				];
 
-			const expectedTranslationKeys: any = [
-				{
-					name: "page-01-02-01",
-					translationKey: "page-01-02-01"
-				},
-				{
-					name: "page-01-02",
-					translationKey: "PAGE.01.02"
-				},
-				{
-					name: "page-01",
-					translationKey: "PAGE.01.FROM.RESOLVE"
-				},
-				{
-					name: "homepage",
-					translationKey: "HOME"
-				}
-			];
+				const expectedTranslationKeys: any = [
+					{
+						name: "page-01-02-01",
+						translationKey: "page-01-02-01"
+					},
+					{
+						name: "page-01-02",
+						translationKey: "PAGE.01.02"
+					},
+					{
+						name: "page-01",
+						translationKey: "PAGE.01.FROM.RESOLVE"
+					},
+					{
+						name: "homepage",
+						translationKey: "HOME"
+					}
+				];
 
-			TestTranslationKey(navigationSteps, expectedTranslationKeys);
-		}));
+				TestTranslationKey(navigationSteps, expectedTranslationKeys);
+			})
+		);
 	});
 });

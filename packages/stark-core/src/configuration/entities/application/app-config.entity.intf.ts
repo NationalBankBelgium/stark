@@ -1,9 +1,9 @@
 "use strict";
 
 import { StarkBackend } from "../../../http/entities/backend";
-import { InjectionToken } from '@angular/core';
+import { InjectionToken } from "@angular/core";
 
-export const STARK_APP_CONFIG: InjectionToken<StarkApplicationConfig> = new InjectionToken<StarkApplicationConfig>('STARK_APP_CONFIG');
+export const STARK_APP_CONFIG: InjectionToken<StarkApplicationConfig> = new InjectionToken<StarkApplicationConfig>("STARK_APP_CONFIG");
 
 /**
  * Minimal set of configuration options for Stark applications.

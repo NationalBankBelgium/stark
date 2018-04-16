@@ -4,10 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/@nationalbankbelgium/stark-testing/node_modules/@types"
-    ],
+    "typeRoots": ["./node_modules/@types", "./node_modules/@nationalbankbelgium/stark-testing/node_modules/@types"],
     "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
       "rxjs/*": ["../../node_modules/rxjs/*"],

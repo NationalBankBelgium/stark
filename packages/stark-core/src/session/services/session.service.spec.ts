@@ -14,15 +14,22 @@ import { Subscriber } from "rxjs/Subscriber";
 import { defer } from "rxjs/observable/defer";
 import { of } from "rxjs/observable/of";
 import { take } from "rxjs/operators/take";
-import {  _throw as observableThrow } from "rxjs/observable/throw";
+import { _throw as observableThrow } from "rxjs/observable/throw";
 
 import {
-	SessionTimeoutCountdownFinish, ChangeLanguage, ChangeLanguageFailure,
+	SessionTimeoutCountdownFinish,
+	ChangeLanguage,
+	ChangeLanguageFailure,
 	ChangeLanguageSuccess,
-	DestroySession, DestroySessionSuccess, InitializeSession, InitializeSessionSuccess,
+	DestroySession,
+	DestroySessionSuccess,
+	InitializeSession,
+	InitializeSessionSuccess,
 	SessionLogout,
 	SessionTimeoutCountdownStart,
-	SessionTimeoutCountdownStop, UserActivityTrackingPause, UserActivityTrackingResume
+	SessionTimeoutCountdownStop,
+	UserActivityTrackingPause,
+	UserActivityTrackingResume
 } from "../actions/index";
 import { StarkSessionServiceImpl, starkUnauthenticatedUserError } from "./session.service";
 import { StarkPreAuthentication, StarkSession } from "../entities/index";
@@ -39,7 +46,6 @@ import { starkSessionExpiredStateName } from "../../common/routes/index";
 import { StarkCoreApplicationState } from "../../common/store/index";
 
 describe("Service: StarkSessionService", () => {
-
 	let mockStore: Store<any>;
 	let appConfig: StarkApplicationConfig;
 	let mockSession: StarkSession;
@@ -55,8 +61,8 @@ describe("Service: StarkSessionService", () => {
 
 	// Inject module dependencies
 	beforeEach(() => {
-		mockUser = {uuid: "1", firstName: "Christopher", lastName: "Cortes"};
-		mockSession = {currentLanguage: "NL", user: <StarkUser>mockUser};
+		mockUser = { uuid: "1", firstName: "Christopher", lastName: "Cortes" };
+		mockSession = { currentLanguage: "NL", user: <StarkUser>mockUser };
 		mockStore = jasmine.createSpyObj("store", ["dispatch", "select"]);
 		(<Spy>mockStore.select).and.returnValue(of(mockSession));
 		appConfig = new StarkApplicationConfigImpl();
@@ -89,17 +95,32 @@ describe("Service: StarkSessionService", () => {
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
 		mockRoutingService = UnitTestingUtils.getMockedRoutingService();
 		// mockXSRFService = UnitTestingUtils.getMockedXSRFService();
-		mockIdleService = jasmine.createSpyObj("idleService,",
-			["setIdle", "setTimeout", "getTimeout", "setInterrupts", "clearInterrupts", "getKeepaliveEnabled", "watch", "stop", "clearInterrupts"]
-		);
+		mockIdleService = jasmine.createSpyObj("idleService,", [
+			"setIdle",
+			"setTimeout",
+			"getTimeout",
+			"setInterrupts",
+			"clearInterrupts",
+			"getKeepaliveEnabled",
+			"watch",
+			"stop",
+			"clearInterrupts"
+		]);
 		mockIdleService.onIdleStart = new EventEmitter<any>();
 		mockIdleService.onIdleEnd = new EventEmitter<any>();
 		mockIdleService.onTimeout = new EventEmitter<number>();
 		mockIdleService.onTimeoutWarning = new EventEmitter<number>();
 		mockInjectorService = jasmine.createSpyObj("injector,", ["get"]);
 		mockTranslateService = jasmine.createSpyObj("translateService,", ["use"]);
-		sessionService = new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-			appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService);
+		sessionService = new SessionServiceHelper(
+			mockStore,
+			mockLogger,
+			mockRoutingService,
+			appConfig,
+			/*mockXSRFService,*/ mockIdleService,
+			mockInjectorService,
+			mockTranslateService
+		);
 		(<Spy>mockIdleService.setIdle).calls.reset();
 		(<Spy>mockIdleService.setTimeout).calls.reset();
 		(<Spy>mockIdleService.setInterrupts).calls.reset();
@@ -111,24 +132,64 @@ describe("Service: StarkSessionService", () => {
 		it("should throw an error in case the session timeout or the warning period in the app config are invalid", () => {
 			appConfig.sessionTimeout = <any>undefined;
 			appConfig.sessionTimeoutWarningPeriod = 13;
-			expect(() => new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-				appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService)).toThrowError(/sessionTimeout/);
+			expect(
+				() =>
+					new SessionServiceHelper(
+						mockStore,
+						mockLogger,
+						mockRoutingService,
+						appConfig,
+						/*mockXSRFService,*/ mockIdleService,
+						mockInjectorService,
+						mockTranslateService
+					)
+			).toThrowError(/sessionTimeout/);
 
 			appConfig.sessionTimeout = 123;
 			appConfig.sessionTimeoutWarningPeriod = <any>undefined;
-			expect(() => new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-				appConfig,/* mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService)).toThrowError(/sessionTimeoutWarning/);
+			expect(
+				() =>
+					new SessionServiceHelper(
+						mockStore,
+						mockLogger,
+						mockRoutingService,
+						appConfig,
+						/* mockXSRFService,*/ mockIdleService,
+						mockInjectorService,
+						mockTranslateService
+					)
+			).toThrowError(/sessionTimeoutWarning/);
 
 			appConfig.sessionTimeout = -1;
 			appConfig.sessionTimeoutWarningPeriod = 13;
-			expect(() => new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-				appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService)).toThrowError(/sessionTimeout/);
-            
+			expect(
+				() =>
+					new SessionServiceHelper(
+						mockStore,
+						mockLogger,
+						mockRoutingService,
+						appConfig,
+						/*mockXSRFService,*/ mockIdleService,
+						mockInjectorService,
+						mockTranslateService
+					)
+			).toThrowError(/sessionTimeout/);
+
 			// FIXME problem with this expect ONLY (Solved ? Ask if the fix is OK)
 			appConfig.sessionTimeout = 123;
 			appConfig.sessionTimeoutWarningPeriod = -1;
-			expect(() => new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-				appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService)).toThrowError(/sessionTimeoutWarning/);
+			expect(
+				() =>
+					new SessionServiceHelper(
+						mockStore,
+						mockLogger,
+						mockRoutingService,
+						appConfig,
+						/*mockXSRFService,*/ mockIdleService,
+						mockInjectorService,
+						mockTranslateService
+					)
+			).toThrowError(/sessionTimeoutWarning/);
 		});
 	});
 
@@ -145,19 +206,19 @@ describe("Service: StarkSessionService", () => {
 
 			const matchingFn: Predicate<any> = <Predicate<any>>hookMatchCriteria.entering;
 			const nonMatchingStates: object[] = [
-				{name: "starkAppInit.state1"},
-				{name: "starkAppInit.state2"},
-				{name: "starkAppInit.stateX"},
-				{name: "starkAppExit.state1"},
-				{name: "starkAppExit.state2"},
-				{name: "starkAppExit.stateX"},
-				{abstract: true, name: ""} // root state
+				{ name: "starkAppInit.state1" },
+				{ name: "starkAppInit.state2" },
+				{ name: "starkAppInit.stateX" },
+				{ name: "starkAppExit.state1" },
+				{ name: "starkAppExit.state2" },
+				{ name: "starkAppExit.stateX" },
+				{ abstract: true, name: "" } // root state
 			];
 			const matchingStates: object[] = [
-				{name: "whatever.state1"},
-				{name: "other.state2"},
-				{name: "stateX"},
-				{name: <any>undefined}
+				{ name: "whatever.state1" },
+				{ name: "other.state2" },
+				{ name: "stateX" },
+				{ name: <any>undefined }
 			];
 
 			for (const state of matchingStates) {
@@ -169,7 +230,7 @@ describe("Service: StarkSessionService", () => {
 			}
 
 			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[2]).toBeDefined();
-			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[3]).toEqual({priority: 1000});
+			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[3]).toEqual({ priority: 1000 });
 		});
 
 		it("should resolve the promise when the onBefore hook is triggered and there IS user in the session", () => {
@@ -192,7 +253,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		it("should reject the promise with an error when the onBefore hook is triggered and there is NO user in the session", () => {
-			const sessionWithoutUser: StarkSession = {...mockSession, user: undefined};
+			const sessionWithoutUser: StarkSession = { ...mockSession, user: undefined };
 			sessionService.session$ = of(sessionWithoutUser);
 
 			sessionService.registerTransitionHook();
@@ -366,7 +427,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(mockIdleService.onIdleStart.observers.length).toBe(1);
 
-				const onIdleStartSubscriber: Subscriber<any> = <Subscriber<any>>(mockIdleService.onIdleStart.observers[0]);
+				const onIdleStartSubscriber: Subscriber<any> = <Subscriber<any>>mockIdleService.onIdleStart.observers[0];
 				spyOn(onIdleStartSubscriber, "next");
 				spyOn(onIdleStartSubscriber, "error");
 
@@ -389,7 +450,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(mockIdleService.onIdleEnd.observers.length).toBe(1);
 
-				const onIdleEndSubscriber: Subscriber<any> = <Subscriber<any>>(mockIdleService.onIdleEnd.observers[0]);
+				const onIdleEndSubscriber: Subscriber<any> = <Subscriber<any>>mockIdleService.onIdleEnd.observers[0];
 				spyOn(onIdleEndSubscriber, "next");
 				spyOn(onIdleEndSubscriber, "error");
 
@@ -434,7 +495,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(mockIdleService.onTimeout.observers.length).toBe(1);
 
-				const onTimeoutSubscriber: Subscriber<any> = <Subscriber<any>>(mockIdleService.onTimeout.observers[0]);
+				const onTimeoutSubscriber: Subscriber<any> = <Subscriber<any>>mockIdleService.onTimeout.observers[0];
 				spyOn(onTimeoutSubscriber, "next");
 				spyOn(onTimeoutSubscriber, "error");
 
@@ -476,7 +537,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(mockIdleService.onTimeoutWarning.observers.length).toBe(1);
 
-				const onTimeoutWarningSubscriber: Subscriber<any> = <Subscriber<any>>(mockIdleService.onTimeoutWarning.observers[0]);
+				const onTimeoutWarningSubscriber: Subscriber<any> = <Subscriber<any>>mockIdleService.onTimeoutWarning.observers[0];
 				spyOn(onTimeoutWarningSubscriber, "next");
 				spyOn(onTimeoutWarningSubscriber, "error");
 
@@ -518,17 +579,22 @@ describe("Service: StarkSessionService", () => {
 		let mockKeepaliveService: Keepalive;
 
 		beforeEach(() => {
-			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,",
-				["interval", "request", "ping", "stop"]
-			);
+			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,", ["interval", "request", "ping", "stop"]);
 			mockKeepaliveService.onPing = new EventEmitter<any>();
 			(<Spy>mockInjectorService.get).and.returnValue(mockKeepaliveService);
 			(<Spy>mockIdleService.getKeepaliveEnabled).and.returnValue(true);
 		});
 
 		it("should set the necessary options and headers of the keepalive service if it is ENABLED", () => {
-			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-				appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService);
+			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(
+				mockStore,
+				mockLogger,
+				mockRoutingService,
+				appConfig,
+				/*mockXSRFService,*/ mockIdleService,
+				mockInjectorService,
+				mockTranslateService
+			);
 
 			expect(sessionServiceHelper.keepalive).toBeDefined();
 			(<Spy>mockKeepaliveService.interval).calls.reset();
@@ -547,7 +613,7 @@ describe("Service: StarkSessionService", () => {
 			};
 
 			const preAuthDefaults: StarkPreAuthentication = sessionServiceHelper.getFakePreAuthenticationDefaults();
-			
+
 			/*
 			* headers: HttpHeaders({ normalizedNames: Map(  ), lazyUpdate: null, headers: Map(  ) }), params: , urlWithParams: 'http://my.backend/keepalive' })*/
 
@@ -557,8 +623,8 @@ describe("Service: StarkSessionService", () => {
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LAST_NAME] = dummyUser.lastName;
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_MAIL] = dummyUser.email;
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = dummyUser.language;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] = dummyUser.referenceNumber +
-				preAuthDefaults.descriptionSeparator + dummyUser.workpost;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] =
+				dummyUser.referenceNumber + preAuthDefaults.descriptionSeparator + dummyUser.workpost;
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = (<string[]>dummyUser.roles).join(preAuthDefaults.roleSeparator);
 
 			sessionServiceHelper.setFakePreAuthenticationHeaders(<StarkUser>dummyUser);
@@ -576,15 +642,23 @@ describe("Service: StarkSessionService", () => {
 				mockHeadersObj = mockHeadersObj.set(key, expectedPreAuthHeaders[key]);
 			}
 
-			expect(mockKeepaliveService.request).toHaveBeenCalledWith(new HttpRequest("GET",<string>appConfig
-				.keepAliveUrl,{ headers: mockHeadersObj}));
+			expect(mockKeepaliveService.request).toHaveBeenCalledWith(
+				new HttpRequest("GET", <string>appConfig.keepAliveUrl, { headers: mockHeadersObj })
+			);
 		});
 
 		it("should not set any option of the keepalive service if it is DISABLED", () => {
 			(<Spy>mockIdleService.getKeepaliveEnabled).and.returnValue(false);
 
-			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-				appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService);
+			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(
+				mockStore,
+				mockLogger,
+				mockRoutingService,
+				appConfig,
+				/*mockXSRFService,*/ mockIdleService,
+				mockInjectorService,
+				mockTranslateService
+			);
 
 			expect(sessionServiceHelper.keepalive).toBeUndefined();
 			(<Spy>mockKeepaliveService.interval).calls.reset();
@@ -598,8 +672,15 @@ describe("Service: StarkSessionService", () => {
 
 		describe("onPing notifications", () => {
 			it("should be listened by subscribing to the observable from the idle service", () => {
-				const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-					appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService);
+				const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(
+					mockStore,
+					mockLogger,
+					mockRoutingService,
+					appConfig,
+					/*mockXSRFService,*/ mockIdleService,
+					mockInjectorService,
+					mockTranslateService
+				);
 
 				mockKeepaliveService.onPing = new EventEmitter<any>();
 				expect(mockKeepaliveService.onPing.observers.length).toBe(0);
@@ -608,7 +689,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(mockKeepaliveService.onPing.observers.length).toBe(1);
 
-				const onPingSubscriber: Subscriber<any> = <Subscriber<any>>(mockKeepaliveService.onPing.observers[0]);
+				const onPingSubscriber: Subscriber<any> = <Subscriber<any>>mockKeepaliveService.onPing.observers[0];
 				spyOn(onPingSubscriber, "next");
 				spyOn(onPingSubscriber, "error");
 
@@ -642,9 +723,7 @@ describe("Service: StarkSessionService", () => {
 		let mockKeepaliveService: Keepalive;
 
 		beforeEach(() => {
-			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,",
-				["interval", "request", "ping", "stop"]
-			);
+			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,", ["interval", "request", "ping", "stop"]);
 
 			mockKeepaliveService.onPing = new EventEmitter<any>();
 		});
@@ -653,8 +732,15 @@ describe("Service: StarkSessionService", () => {
 			(<Spy>mockInjectorService.get).and.returnValue(mockKeepaliveService);
 			(<Spy>mockIdleService.getKeepaliveEnabled).and.returnValue(true);
 
-			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-				appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService);
+			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(
+				mockStore,
+				mockLogger,
+				mockRoutingService,
+				appConfig,
+				/*mockXSRFService,*/ mockIdleService,
+				mockInjectorService,
+				mockTranslateService
+			);
 
 			sessionServiceHelper.startKeepaliveService();
 
@@ -674,9 +760,7 @@ describe("Service: StarkSessionService", () => {
 		let mockKeepaliveService: Keepalive;
 
 		beforeEach(() => {
-			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,",
-				["interval", "request", "ping", "stop"]
-			);
+			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,", ["interval", "request", "ping", "stop"]);
 
 			mockKeepaliveService.onPing = new EventEmitter<any>();
 		});
@@ -685,8 +769,15 @@ describe("Service: StarkSessionService", () => {
 			(<Spy>mockInjectorService.get).and.returnValue(mockKeepaliveService);
 			(<Spy>mockIdleService.getKeepaliveEnabled).and.returnValue(true);
 
-			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(mockStore, mockLogger, mockRoutingService,
-				appConfig, /*mockXSRFService,*/ mockIdleService, mockInjectorService, mockTranslateService);
+			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(
+				mockStore,
+				mockLogger,
+				mockRoutingService,
+				appConfig,
+				/*mockXSRFService,*/ mockIdleService,
+				mockInjectorService,
+				mockTranslateService
+			);
 
 			sessionServiceHelper.stopKeepaliveService();
 
@@ -704,11 +795,12 @@ describe("Service: StarkSessionService", () => {
 
 	describe("getCurrentLanguage", () => {
 		it("should get the current language in an observable", () => {
-			sessionService.getCurrentLanguage().pipe(
-				take(1)
-			).subscribe((language: string) => {
-				expect(language).toBe("NL");
-			});
+			sessionService
+				.getCurrentLanguage()
+				.pipe(take(1))
+				.subscribe((language: string) => {
+					expect(language).toBe("NL");
+				});
 		});
 	});
 
@@ -760,8 +852,8 @@ describe("Service: StarkSessionService", () => {
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LAST_NAME] = dummyUser.lastName;
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_MAIL] = dummyUser.email;
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = dummyUser.language;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] = dummyUser.referenceNumber +
-				preAuthDefaults.descriptionSeparator + dummyUser.workpost;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] =
+				dummyUser.referenceNumber + preAuthDefaults.descriptionSeparator + dummyUser.workpost;
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = (<string[]>dummyUser.roles).join(preAuthDefaults.roleSeparator);
 
 			sessionService.setFakePreAuthenticationHeaders(<StarkUser>dummyUser);
@@ -828,9 +920,15 @@ describe("Service: StarkSessionService", () => {
 });
 
 class SessionServiceHelper extends StarkSessionServiceImpl {
-	public constructor(store: Store<StarkCoreApplicationState>, logger: StarkLoggingService, routingService: StarkRoutingService,
-					   appConfig: StarkApplicationConfig, /*xsrfService: StarkXSRFService,*/ idle: Idle, injector: Injector,
-					   translateService: TranslateService) {
+	public constructor(
+		store: Store<StarkCoreApplicationState>,
+		logger: StarkLoggingService,
+		routingService: StarkRoutingService,
+		appConfig: StarkApplicationConfig,
+		/*xsrfService: StarkXSRFService,*/ idle: Idle,
+		injector: Injector,
+		translateService: TranslateService
+	) {
 		super(store, logger, routingService, appConfig, /*xsrfService,*/ idle, injector, translateService);
 	}
 
@@ -881,6 +979,6 @@ class SessionServiceHelper extends StarkSessionServiceImpl {
 	}
 
 	public setInternalFakePreAuthenticationHeaders(headers?: Map<string, string>): Map<string, string> {
-		return this._fakePreAuthenticationHeaders = <any>headers;
+		return (this._fakePreAuthenticationHeaders = <any>headers);
 	}
 }

@@ -296,6 +296,5 @@
   //	true,
   //	"as-needed"
   //	],
-//  "import-destructuring-spacing": true,
-
+  //  "import-destructuring-spacing": true,
 }
