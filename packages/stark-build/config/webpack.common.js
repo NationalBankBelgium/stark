@@ -370,7 +370,7 @@ module.exports = function(options) {
 
 					// Mdi svg file
 					{
-						from: "node_modules/@nationalbankbelgium/angular-mdi-svg/mdi.svg",
+						from: "node_modules/@mdi/angular-material/mdi.svg",
 						to: "assets/icons/mdi.svg"
 					},
 
