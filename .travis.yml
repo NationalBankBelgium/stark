@@ -6,6 +6,7 @@ dist: trusty
 sudo: false # better for performance
 
 before_install:
+  - export TZ=Europe/Brussels
   - TRAVIS=1 # used by build.sh
   - npm i -g npm@5.8.0
 
