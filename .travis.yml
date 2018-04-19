@@ -42,3 +42,5 @@ cache:
 script:
   - npm run lint:all
   - npm run test:ci:all
+after_success:
+  - npm run test:ci:coveralls:stark-core

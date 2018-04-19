@@ -83,6 +83,7 @@
     "test:ci:stark-core": "cd packages/stark-core && npm run test-fast:ci && cd ../..",
     "test:ci:starter": "cd starter && npm run test-fast:ci && cd ../..",
     "test:ci:all": "npm run test:ci:stark-core && npm run test:ci:starter",
+    "test:ci:coveralls:stark-core": "cd packages/stark-core && cat ./reports/coverage/packages/lcov.info | ../stark-testing/node_modules/coveralls/bin/coveralls.js",
     "tslint": "tslint",
     "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
