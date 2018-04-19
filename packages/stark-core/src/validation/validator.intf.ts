@@ -1,5 +1,3 @@
-"use strict";
-
 import { Validator } from "class-validator";
 
 export interface StarkValidator extends Validator {

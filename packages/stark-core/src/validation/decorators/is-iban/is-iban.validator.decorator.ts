@@ -4,7 +4,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, r
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkIsIBANValidatorName } from "../../validators/is-iban";
+import { starkIsIBANValidatorName } from "../../validators/is-iban/index";
 
 /**
  * StarkIsIBAN validator constraint

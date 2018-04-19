@@ -1,6 +1,6 @@
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsCompanyNumber } from "./is-company-number.validator.decorator";
-import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-number";
+import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-number/index";
 
 class MyClass {
 	@StarkIsCompanyNumber() public name: string;

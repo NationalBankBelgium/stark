@@ -1,6 +1,6 @@
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsBIC } from "./is-bic.validator.decorator";
-import { starkIsBICValidatorName } from "../../validators/is-bic";
+import { starkIsBICValidatorName } from "../../validators/is-bic/index";
 
 class MyClass {
 	@StarkIsBIC() public name: string;

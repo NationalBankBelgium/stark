@@ -4,7 +4,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, r
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkIsKBOValidatorName } from "../../validators/is-kbo";
+import { starkIsKBOValidatorName } from "../../validators/is-kbo/index";
 
 /**
  * StarkIsBban validator constraint

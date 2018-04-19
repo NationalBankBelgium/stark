@@ -1,6 +1,6 @@
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsIBAN } from "./is-iban.validator.decorator";
-import { starkIsIBANValidatorName } from "../../validators/is-iban";
+import { starkIsIBANValidatorName } from "../../validators/is-iban/index";
 
 class MyClass {
 	@StarkIsIBAN() public name: string;
@@ -44,7 +44,7 @@ describe("ValidatorDecorator: StarkIsIBAN", () => {
 	});
 
 	it("should NOT fail if iban is correct", () => {
-		myClass.name = "BE68539007547034";
+		myClass.name = "BE68 5390 0754 7034";
 		const errors: ValidationError[] = validateSync(myClass);
 
 		expect(errors.length).toBe(0);

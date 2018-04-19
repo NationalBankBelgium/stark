@@ -4,7 +4,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, r
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkIsEstablishmentUnitNumberValidatorName } from "../../validators/is-establishment-unit-number";
+import { starkIsEstablishmentUnitNumberValidatorName } from "../../validators/is-establishment-unit-number/index";
 
 /**
  * StarkIsBban validator constraint

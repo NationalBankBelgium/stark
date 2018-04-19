@@ -1,6 +1,6 @@
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsISIN } from "./is-isin.validator.decorator";
-import { starkIsISINValidatorName } from "../../validators/is-isin";
+import { starkIsISINValidatorName } from "../../validators/is-isin/index";
 
 class MyClass {
 	@StarkIsISIN() public name: string;

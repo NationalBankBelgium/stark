@@ -1,6 +1,6 @@
 import { validateSync, ValidationError } from "class-validator";
 import { StarkMapNotEmpty } from "./map-not-empty.validator.decorator";
-import { starkMapNotEmptyValidatorName } from "../../validators/map-not-empty";
+import { starkMapNotEmptyValidatorName } from "../../validators/map-not-empty/index";
 
 class MyClass {
 	@StarkMapNotEmpty() public dummyMap: Map<string, string> = new Map<string, string>();

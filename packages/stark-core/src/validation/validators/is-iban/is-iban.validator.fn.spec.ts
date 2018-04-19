@@ -16,7 +16,7 @@ describe("Validator Function: StarkIsIBAN", () => {
 	});
 
 	it("should NOT fail if iban is correct", () => {
-		iban = "BE68539007547034";
+		iban = "BE68 5390 0754 7034";
 		const result: boolean = starkIsIBAN(iban);
 		expect(result).toBe(true);
 	});

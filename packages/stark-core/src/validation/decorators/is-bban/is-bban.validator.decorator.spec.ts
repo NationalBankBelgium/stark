@@ -1,6 +1,6 @@
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsBBAN } from "./is-bban.validator.decorator";
-import { starkIsBBANValidatorName } from "../../validators/is-bban";
+import { starkIsBBANValidatorName } from "../../validators/is-bban/index";
 
 class MyClass {
 	@StarkIsBBAN("countryCode") public name: string;

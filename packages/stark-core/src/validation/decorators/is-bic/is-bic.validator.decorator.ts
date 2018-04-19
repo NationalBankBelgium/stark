@@ -4,7 +4,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, r
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkIsBICValidatorName } from "../../validators/is-bic";
+import { starkIsBICValidatorName } from "../../validators/is-bic/index";
 
 /**
  * StarkIsBIC validator constraint

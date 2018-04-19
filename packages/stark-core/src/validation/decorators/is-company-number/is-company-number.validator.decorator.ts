@@ -4,7 +4,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, r
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-number";
+import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-number/index";
 
 /**
  * StarkIsCompanyNumber validator constraint
