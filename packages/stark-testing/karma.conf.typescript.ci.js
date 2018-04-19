@@ -1,3 +1,5 @@
+"use strict";
+
 // Helpers
 const helpers = require("./helpers");
 
@@ -8,7 +10,7 @@ process.env.CHROME_BIN = require("puppeteer").executablePath();
 // Karma configuration
 // reference: http://karma-runner.github.io/2.0/config/configuration-file.html
 module.exports = function(config) {
-	config.set({
+	const configuration = {
 		// base path that will be used to resolve all patterns (e.g. files, exclude)
 		basePath: "",
 
@@ -31,7 +33,11 @@ module.exports = function(config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			"**/*.ts": ["karma-typescript", "sourcemap"]
+			"**/*.ts": [
+				//"coverage", throws errors for imports
+				"karma-typescript",
+				"sourcemap"
+			]
 		},
 
 		karmaTypescriptConfig: {
@@ -50,12 +56,23 @@ module.exports = function(config) {
 			tsconfig: "tsconfig.spec.json"
 		},
 
+		coverageReporter: {
+			type: "in-memory"
+		},
+
+		remapCoverageReporter: {
+			"text-summary": null,
+			"text-lcov": "./reports/coverage/coverage.lcov",
+			json: "./reports/coverage/coverage.json",
+			html: "./reports/coverage/html"
+		},
+
 		// test results reporter to use
 		// possible values: "dots", "progress", "spec", "junit", "mocha", "coverage" (others if you import reporters)
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
 		// https://www.npmjs.com/package/karma-junit-reporter
 		// https://www.npmjs.com/package/karma-spec-reporter
-		reporters: ["mocha", "progress", "karma-typescript"],
+		reporters: ["mocha", "coverage", "progress", "karma-typescript", "remap-coverage", "coveralls"],
 
 		// web server port
 		port: 9876,
@@ -92,5 +109,13 @@ module.exports = function(config) {
 		browserNoActivityTimeout: 30000,
 		browserDisconnectTolerance: 1,
 		browserDisconnectTimeout: 30000
-	});
+	};
+
+	// Interesting idea to avoid having multiple config files
+	// if (process.env.TRAVIS || process.env.CIRCLECI) {
+	// 	config.browsers = ['ChromeHeadlessNoSandbox'];
+	// 	config.singleRun = true;
+	// }
+
+	config.set(configuration);
 };

@@ -1,17 +1,15 @@
+[![npm version](https://badge.fury.io/js/%40NationalBankBelgium%2Fstark.svg)](https://www.npmjs.com/@NationalBankBelgium/stark)
+[![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
+[![Dependency Status](https://david-dm.org/NationalBankBelgium/stark.svg)](https://david-dm.org/NationalBankBelgium/stark)
+[![devDependency Status](https://david-dm.org/NationalBankBelgium/stark/dev-status.svg)](https://david-dm.org/NationalBankBelgium/stark#info=devDependencies)
+[![Coverage Status](https://coveralls.io/repos/github/NationalBankBelgium/stark/badge.svg?branch=master)](https://coveralls.io/github/NationalBankBelgium/stark?branch=master)
 [![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
-[![Dependency Status](https://david-dm.org/nationalbankbelgium/stark.svg)](https://david-dm.org/nationalbankbelgium/stark)
 [![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE)
 
 # Stark
 
 > An Angular 5+ based front-end framework built on top of [Angular](https://angular.io)
 > Stark features... An awesome reusable build using [Webpack](https://webpack.js.org/), built-in support for state of the art front-end tech  
-
-[![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
-[![npm version](https://badge.fury.io/js/%40NationalBankBelgium%2Fstark.svg)](https://www.npmjs.com/@NationalBankBelgium/stark)
-[![Dependency Status](https://david-dm.org/NationalBankBelgium/stark.svg)](https://david-dm.org/NationalBankBelgium/stark) 
-[![devDependency Status](https://david-dm.org/NationalBankBelgium/stark/dev-status.svg)](https://david-dm.org/NationalBankBelgium/stark#info=devDependencies)
-[![Coverage Status](https://coveralls.io/repos/github/NationalBankBelgium/stark/badge.svg?branch=master)](https://coveralls.io/github/NationalBankBelgium/stark?branch=master)
 
 Stark provides main building blocks for accelerating front-end development:
 * a solid reusable build based on Webpack  
