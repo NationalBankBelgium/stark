@@ -59,7 +59,7 @@
     "tslint": "5.9.1",
     "tslint-config-prettier": "1.8.0",
     "tslint-loader": "3.6.0",
-    "uglifyjs-webpack-plugin": "1.2.4",
+    "uglifyjs-webpack-plugin": "1.2.5",
     "url-loader": "1.0.1",
     "webpack": "3.11.0",
     "webpack-dev-middleware": "2.0.6",
