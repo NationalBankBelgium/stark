@@ -11,7 +11,7 @@ import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-n
  * Validates that the Company Number number provided is valid
  */
 @ValidatorConstraint({ name: starkIsCompanyNumberValidatorName, async: false })
-export class StarkIsCompanyNumberConstraint implements ValidatorConstraintInterface {
+class StarkIsCompanyNumberConstraint implements ValidatorConstraintInterface {
 	public validate(companyNumber: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
 		return validator.starkIsCompanyNumber(companyNumber);
@@ -26,7 +26,6 @@ export class StarkIsCompanyNumberConstraint implements ValidatorConstraintInterf
  * Validator decorator that uses the StarkIsCompanyNumber validator constraint
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsCompanyNumber(validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

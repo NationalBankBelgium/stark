@@ -1192,9 +1192,9 @@ describe("Service: StarkHttpService", () => {
 					item: mockResourceWithoutEtag,
 					serializer: mockResourceSerializer
 				};
-				const result: Observable<any> = starkHttpService.executeSingleItemRequest(request);
+				const result: ErrorObservable = <ErrorObservable>starkHttpService.executeSingleItemRequest(request);
 				expect(result instanceof ErrorObservable).toBe(true);
-				expect((<ErrorObservable>result).error).toContain("Unknown request type");
+				expect(result.error).toContain("Unknown request type");
 			});
 		});
 	});
@@ -2376,9 +2376,9 @@ describe("Service: StarkHttpService", () => {
 					item: undefined,
 					serializer: mockResourceSerializer
 				};
-				const result: Observable<any> = starkHttpService.executeCollectionRequest(request);
+				const result: ErrorObservable = <ErrorObservable>starkHttpService.executeCollectionRequest(request);
 				expect(result instanceof ErrorObservable).toBe(true);
-				expect((<ErrorObservable>result).error).toContain("Unknown request type");
+				expect(result.error).toContain("Unknown request type");
 			});
 		});
 	});

@@ -27,7 +27,6 @@ class StarkIsEstablishmentUnitNumberConstraint implements ValidatorConstraintInt
  * Validator decorator that uses the StarkIsIsEstablishmentUnitNumber validator constraint
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsEstablishmentUnitNumber(validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

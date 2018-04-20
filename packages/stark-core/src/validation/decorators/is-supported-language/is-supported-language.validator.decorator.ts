@@ -26,7 +26,6 @@ class StarkIsSupportedLanguageConstraint implements ValidatorConstraintInterface
  * Validator decorator that uses the StarkIsSupportedLanguage validator constraint
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsSupportedLanguage(validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

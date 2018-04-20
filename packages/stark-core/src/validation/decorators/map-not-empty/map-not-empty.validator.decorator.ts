@@ -4,7 +4,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, r
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkMapNotEmptyValidatorName } from "../../validators/map-not-empty";
+import { starkMapNotEmptyValidatorName } from "../../validators/map-not-empty/index";
 
 /**
  * StarkMapNotEmpty validator constraint
@@ -26,7 +26,6 @@ class StarkMapNotEmptyConstraint implements ValidatorConstraintInterface {
  * Validator decorator that uses the StarkMapNotEmpty validator constraint
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkMapNotEmpty(validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

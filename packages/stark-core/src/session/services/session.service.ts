@@ -310,8 +310,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		});
 		// }
 
-		// FIXME Should we create an interface instead of using any ?
-		const pingRequest: HttpRequest<any> = new HttpRequest("GET", <string>this.appConfig.keepAliveUrl, {
+		const pingRequest: HttpRequest<void> = new HttpRequest("GET", <string>this.appConfig.keepAliveUrl, {
 			headers: pingRequestHeaders
 		});
 

@@ -18,6 +18,7 @@ import CallInfo = jasmine.CallInfo;
 import { StarkRoutingActionTypes } from "../actions/index";
 import Spy = jasmine.Spy;
 import { MockStarkLoggingService } from "../../logging/testing/logging.mock";
+import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
 
 @Component({ selector: "test-home", template: "HOME" })
 export class HomeComponent {}
@@ -31,7 +32,7 @@ describe("Service: StarkRoutingService", () => {
 
 	let routingService: StarkRoutingServiceImpl;
 	let mockLogger: StarkLoggingService;
-	const mockStore: Store<any> = jasmine.createSpyObj("storeSpy", ["dispatch"]);
+	const mockStore: Store<StarkCoreApplicationState> = jasmine.createSpyObj("storeSpy", ["dispatch"]);
 	const appConfig: Partial<StarkApplicationConfig> = {
 		sessionTimeout: 123,
 		sessionTimeoutWarningPeriod: 13,

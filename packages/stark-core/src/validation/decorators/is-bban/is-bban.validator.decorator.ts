@@ -36,7 +36,6 @@ class StarkIsBBANConstraint implements ValidatorConstraintInterface {
  * @param property
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsBBAN(property: string, validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

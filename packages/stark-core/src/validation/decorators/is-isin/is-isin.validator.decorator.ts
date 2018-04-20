@@ -27,7 +27,6 @@ class StarkIsISINConstraint implements ValidatorConstraintInterface {
  * Validator decorator that uses the StarkIsISIN validator constraint
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsISIN(validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

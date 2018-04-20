@@ -6,8 +6,10 @@ import { StarkApplicationConfig } from "./app-config.entity.intf";
 import { StarkBackend, StarkBackendImpl } from "../../../http/entities/backend/index";
 import { stringMap } from "../../../serialization/index";
 import { StarkValidationErrorsUtil } from "../../../util/index";
-// FIXME Implement the following decorators as before
-// import {StarkMapIsValid, StarkMapNotEmpty} from "../../../validation/decorators";
+// FIXME: cannot import both validation decorators from the barrel due to an issue with angular-compiler
+// see: https://github.com/angular/angular/issues/20931
+import { StarkMapIsValid } from "../../../validation/decorators/map-is-valid/map-is-valid.validator.decorator";
+import { StarkMapNotEmpty } from "../../../validation/decorators/map-not-empty/map-not-empty.validator.decorator";
 
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@IsDefined()
@@ -115,9 +117,8 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@autoserialize
 	public publicApp: boolean;
 
-	//FIXME Import StarkMapIsValid & StarkMapNotEmpty  from validation/decorators
-	// @StarkMapNotEmpty()
-	// @StarkMapIsValid()
+	@StarkMapNotEmpty()
+	@StarkMapIsValid()
 	@autoserializeAs(stringMap(StarkBackendImpl)) // using custom serialization type (stringMap) to handle ES6 Maps
 	public backends: Map<string, StarkBackend> = new Map<string, StarkBackend>();
 
