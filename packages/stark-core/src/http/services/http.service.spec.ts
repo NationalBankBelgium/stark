@@ -10,7 +10,7 @@ import { _throw as observableThrow } from "rxjs/observable/throw";
 // see https://github.com/ReactiveX/rxjs/issues/2981
 import { catchError } from "rxjs/operators/catchError";
 import { ErrorObservable } from "rxjs/observable/ErrorObservable";
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from "@angular/common/http";
 
 import { StarkHttpServiceImpl } from "./http.service";
 import {
@@ -263,12 +263,12 @@ describe("Service: StarkHttpService", () => {
 			});
 
 			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(observableThrow(httpResponse));
+				(<Spy>httpMock.get).and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -319,14 +319,14 @@ describe("Service: StarkHttpService", () => {
 
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
 				(<Spy>httpMock.get).and.returnValue(
-					observableThrow(httpResponse).pipe(
+					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
 							return observableThrow(err);
@@ -410,12 +410,12 @@ describe("Service: StarkHttpService", () => {
 			});
 
 			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.delete).and.returnValue(observableThrow(httpResponse));
+				(<Spy>httpMock.delete).and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -466,14 +466,14 @@ describe("Service: StarkHttpService", () => {
 
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
 				(<Spy>httpMock.delete).and.returnValue(
-					observableThrow(httpResponse).pipe(
+					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
 							return observableThrow(err);
@@ -745,12 +745,12 @@ describe("Service: StarkHttpService", () => {
 			});
 
 			it("on POST FAILURE ('UPDATE'), should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(observableThrow(httpResponse));
+				(<Spy>httpMock.post).and.returnValue(observableThrow(httpErrorResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
@@ -807,14 +807,14 @@ describe("Service: StarkHttpService", () => {
 
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it("on POST FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
 				(<Spy>httpMock.post).and.returnValue(
-					observableThrow(httpResponse).pipe(
+					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
 							return observableThrow(err);
@@ -846,12 +846,12 @@ describe("Service: StarkHttpService", () => {
 			});
 
 			it("on PUT FAILURE ('UPDATE_IDEMPOTENT'), should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.put).and.returnValue(observableThrow(httpResponse));
+				(<Spy>httpMock.put).and.returnValue(observableThrow(httpErrorResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 
@@ -908,14 +908,14 @@ describe("Service: StarkHttpService", () => {
 
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it("on PUT FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
 				(<Spy>httpMock.put).and.returnValue(
-					observableThrow(httpResponse).pipe(
+					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
 							return observableThrow(err);
@@ -1084,12 +1084,12 @@ describe("Service: StarkHttpService", () => {
 			});
 
 			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(observableThrow(httpResponse));
+				(<Spy>httpMock.post).and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -1143,14 +1143,14 @@ describe("Service: StarkHttpService", () => {
 
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
 				(<Spy>httpMock.post).and.returnValue(
-					observableThrow(httpResponse).pipe(
+					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
 							return observableThrow(err);
@@ -1687,12 +1687,13 @@ describe("Service: StarkHttpService", () => {
 			});
 
 			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(observableThrow(httpResponse));
+
+				(<Spy>httpMock.get).and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1743,14 +1744,14 @@ describe("Service: StarkHttpService", () => {
 
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
 				(<Spy>httpMock.get).and.returnValue(
-					observableThrow(httpResponse).pipe(
+					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
 							return observableThrow(err);
@@ -2266,12 +2267,12 @@ describe("Service: StarkHttpService", () => {
 			});
 
 			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(observableThrow(httpResponse));
+				(<Spy>httpMock.post).and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -2326,14 +2327,14 @@ describe("Service: StarkHttpService", () => {
 
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpResponse: Partial<HttpResponse<StarkHttpError>> = {
+				const httpErrorResponse: Partial<HttpErrorResponse> = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					body: mockHttpError,
+					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
 				(<Spy>httpMock.post).and.returnValue(
-					observableThrow(httpResponse).pipe(
+					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
 							return observableThrow(err);

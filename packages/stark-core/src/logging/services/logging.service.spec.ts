@@ -13,6 +13,7 @@ import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../config
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../../logging/entities/index";
 import { StarkBackend } from "../../http/entities/backend";
 import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
+import { StarkError, StarkErrorImpl } from "../../common/index";
 // import {StarkXSRFService} from "../../xsrf";
 // import {UnitTestingUtils} from "../../test/unit-testing";
 
@@ -181,7 +182,32 @@ describe("Service: StarkLoggingService", () => {
 			expect((<StarkLogMessage>message).message).toContain("end of message");
 			expect((<StarkLogMessage>message).timestamp).toBeDefined();
 			expect((<StarkLogMessage>message).error).toBeDefined();
-			expect((<StarkLogMessage>message).error).toContain("this is the error");
+
+			const error: StarkError = (<StarkError>(<StarkLogMessage>message).error);
+			expect(error).toBeDefined(); // so the test will fail in case it is undefined
+			expect(<string>error.message).toContain("this is the error");
+		});
+
+		it("should dispatch LOG_MESSAGE action when no Error object is provided", () => {
+			const errorMsg: string = "dummy error message";
+			loggingService.error(errorMsg); // pass only a message
+			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
+			const dispatchedAction: Action = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
+			const { message }: any = dispatchedAction;
+			expect(message instanceof StarkLogMessageImpl).toBe(true);
+			expect((<StarkLogMessage>message).type).toBe(StarkLogMessageType.ERROR);
+			expect((<StarkLogMessage>message).message).toContain("dummy error message");
+			expect((<StarkLogMessage>message).timestamp).toBeDefined();
+			expect((<StarkLogMessage>message).error).toBeDefined();
+
+			const error: StarkError = (<StarkError>(<StarkLogMessage>message).error);
+			expect(error).toBeDefined(); // so the test will fail in case it is undefined
+			expect(<string>error.name).toBe("STARK_ERROR");
+			expect(<string>error.timestamp).toBeDefined();
+			expect(<string>error.correlationId).toBeDefined();
+			expect(<string>error.stack).toBeDefined();
+			expect(<string>error.message).toBe("");
 		});
 	});
 
@@ -219,18 +245,21 @@ describe("Service: StarkLoggingService", () => {
 		describe("Error messages ", () => {
 			it("should return an StarkLogMessage instance of the type ERROR containing a message and the error string", () => {
 				let message: StarkLogMessage;
-				const error: Error = new Error("this is the error");
-				message = (<LoggingServiceHelper>loggingService).constructLogMessageHelper(
-					StarkLogMessageType.ERROR,
-					"dummy error message",
-					error
-				);
+				const error: StarkError = new StarkErrorImpl("this is the error");
+				message = (<LoggingServiceHelper>loggingService).constructErrorLogMessageHelper("dummy error message", error);
 
 				expect(message.type).toBe(StarkLogMessageType.ERROR);
 				expect(message.message).toContain("dummy error message");
 				expect(message.timestamp).toBeDefined();
 				expect(message.error).toBeDefined();
-				expect(message.error).toContain("this is the error");
+
+				const starkError: StarkError = (<StarkError>(<StarkLogMessage>message).error);
+				expect(error).toBeDefined(); // so the test will fail in case it is undefined
+				expect(<string>starkError.name).toBe("STARK_ERROR");
+				expect(<string>starkError.timestamp).toBeDefined();
+				expect(<string>starkError.correlationId).toBeDefined();
+				expect(<string>starkError.stack).toBeDefined();
+				expect(<string>starkError.message).toContain("this is the error");
 			});
 		});
 	});
@@ -285,6 +314,10 @@ class LoggingServiceHelper extends StarkLoggingServiceImpl {
 	}
 	public constructLogMessageHelper(messageType: StarkLogMessageType, ...args: any[]): StarkLogMessage {
 		return this.constructLogMessage(messageType, ...args);
+	}
+
+	public constructErrorLogMessageHelper(message: string, error: StarkError): StarkLogMessage {
+		return this.constructErrorLogMessage(message, error);
 	}
 
 	public persistLogMessagesHelper(isForced: boolean = false): void {

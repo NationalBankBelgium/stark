@@ -1,5 +1,7 @@
 "use strict";
 
+import { StarkError } from "../../common";
+
 export const starkLoggingServiceName: string = "StarkLoggingService";
 
 /**
@@ -12,5 +14,5 @@ export interface StarkLoggingService {
 	debug(...args: any[]): void;
 	info(...args: any[]): void;
 	warn(...args: any[]): void;
-	error(message: string, error?: Error): void;
+	error(message: string, error?: StarkError | Error): void;
 }

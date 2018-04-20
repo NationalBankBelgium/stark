@@ -1,20 +1,20 @@
 "use strict";
 
-import { deserialize, inheritSerialization } from "cerialize";
+import { autoserialize, inheritSerialization } from "cerialize";
 import { StarkHttpErrorBaseImpl } from "./http-error-base.entity";
 import { StarkHttpErrorDetail } from "./http-error-detail.entity.intf";
 
 @inheritSerialization(StarkHttpErrorBaseImpl)
 export class StarkHttpErrorDetailImpl extends StarkHttpErrorBaseImpl implements StarkHttpErrorDetail {
-	@deserialize public detail: string;
+	@autoserialize public detail: string;
 
-	@deserialize public detailKey: string;
+	@autoserialize public detailKey: string;
 
-	@deserialize public detailKeyParameters: string[];
+	@autoserialize public detailKeyParameters: string[];
 
-	@deserialize public fields: string[];
+	@autoserialize public fields: string[];
 
-	@deserialize public status: string;
+	@autoserialize public status: string;
 
-	@deserialize public index: number;
+	@autoserialize public index: number;
 }

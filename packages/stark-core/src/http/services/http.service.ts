@@ -13,7 +13,7 @@ import { map } from "rxjs/operators/map";
 import { retryWhen } from "rxjs/operators/retryWhen";
 import { mergeMap } from "rxjs/operators/mergeMap";
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from "@angular/common/http";
 
 import { StarkHttpService, starkHttpServiceName } from "./http.service.intf";
 
@@ -22,8 +22,6 @@ import {
 	StarkCollectionMetadataImpl,
 	StarkCollectionResponseWrapper,
 	StarkCollectionResponseWrapperImpl,
-	StarkHttpError,
-	StarkHttpErrorImpl,
 	StarkHttpErrorWrapperImpl,
 	StarkHttpRawCollectionResponseData,
 	StarkHttpRequest,
@@ -313,6 +311,21 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			httpResponse$ = this.addRetryLogic(httpResponse$, retryCount);
 		}
 
+		// The stack information in the Http Error (catchError) contains the execution statements of the http call.
+		// That information is not useful for the developer.
+		// To get a meaningful stack, a dummyError is created before the subscription to the webservice.
+		// This dummyError is send to the StarkHttpErrorWrapperImpl and contains all statements up to this method.
+		let dummyError: Error = new Error(starkHttpServiceName + ": Error getting a SingleItemResponse");
+		if (!dummyError.stack) {
+			// IE 11 won't generate a stack unless the error is thrown
+			// https://docs.microsoft.com/en-us/scripting/javascript/reference/stack-property-error-javascript#remarks
+			try {
+				throw dummyError;
+			} catch (error) {
+				dummyError = error;
+			}
+		}
+
 		return httpResponse$.pipe(
 			map((result: HttpResponse<P>) => {
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
@@ -324,11 +337,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 				return new StarkSingleItemResponseWrapperImpl<P>(result.status, httpResponseHeaders, resource);
 			}),
-			catchError((result: HttpResponse<P>) => {
-				const httpError: StarkHttpError = Deserialize(result.body, StarkHttpErrorImpl);
+			catchError((result: HttpErrorResponse) => {
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
-
-				return observableThrow(new StarkHttpErrorWrapperImpl(result.status, httpResponseHeaders, httpError));
+				return observableThrow(new StarkHttpErrorWrapperImpl(result, httpResponseHeaders, dummyError));
 			})
 		);
 	}
@@ -341,6 +352,21 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 		if (retryCount > 0) {
 			httpResponse$ = this.addRetryLogic(httpResponse$, retryCount);
+		}
+
+		// The stack information in the Http Error (catchError) contains the execution statements of the http call.
+		// That information is not useful for the developer.
+		// To get a meaningful stack, a dummyError is created before the subscription to the webservice.
+		// This dummyError is send to the StarkHttpErrorWrapperImpl and contains all statements up to this method.
+		let dummyError: Error = new Error(starkHttpServiceName + ": Error getting a CollectionResponse");
+		if (!dummyError.stack) {
+			// IE 11 won't generate a stack unless the error is thrown
+			// https://docs.microsoft.com/en-us/scripting/javascript/reference/stack-property-error-javascript#remarks
+			try {
+				throw dummyError;
+			} catch (error) {
+				dummyError = error;
+			}
 		}
 
 		return httpResponse$.pipe(
@@ -388,11 +414,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 					Deserialize((<StarkHttpRawCollectionResponseData<P>>result.body).metadata, StarkCollectionMetadataImpl)
 				);
 			}),
-			catchError((result: HttpResponse<P>) => {
-				const httpError: StarkHttpError = Deserialize(result.body, StarkHttpErrorImpl);
+			catchError((result: HttpErrorResponse) => {
 				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
-
-				return observableThrow(new StarkHttpErrorWrapperImpl(result.status, httpResponseHeaders, httpError));
+				return observableThrow(new StarkHttpErrorWrapperImpl(result, httpResponseHeaders, dummyError));
 			})
 		);
 	}
