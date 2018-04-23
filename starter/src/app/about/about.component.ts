@@ -5,23 +5,8 @@ import { StarkLoggingService, starkLoggingServiceName } from "@nationalbankbelgi
 
 @Component({
 	selector: "about",
-	styles: [
-		`
-  `
-	],
-	template: `
-    <h1>About</h1>
-    <div>
-      For hot module reloading run
-      <pre>npm run start:hmr</pre>
-    </div>
-    <div>
-      <h3>
-		  https://github.com/NationalBankBelgium/stark
-      </h3>
-    </div>
-    <pre>this.localState = {{ localState | json }}</pre>
-  `
+	styles: [``],
+	templateUrl: "./about.component.html"
 })
 export class AboutComponent implements OnInit {
 	@Input() public resolvedData: Observable<any>;

@@ -17,6 +17,10 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "no-output-named-after-standard-event": true,
+    "max-inline-declarations": true,
+//    "no-life-cycle-call": true, // FIXME: throws an exception (Codelyzer v4.3.0). Enable this rule when solved
+    "no-conflicting-life-cycle-hooks": true,
+    "enforce-component-selector": true,
     "component-class-suffix": [true, "Component"],
     "directive-class-suffix": [true, "Directive"],
 
@@ -30,7 +34,6 @@
     "use-view-encapsulation": true,
     "trackBy-function": true,
     "no-unused-css": true,
-    "i18n": false,
     "template-cyclomatic-complexity": [true, 5],
     "template-conditional-complexity": [true, 4],
 

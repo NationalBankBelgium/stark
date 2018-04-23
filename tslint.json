@@ -1,7 +1,6 @@
 {
   "extends": ["./packages/stark-build/config/tslint.json"],
   "rules": {
-    "i18n": false,
     "component-selector": false
   }
 }

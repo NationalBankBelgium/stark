@@ -169,7 +169,7 @@ module.exports = function(options) {
 								test: /\.js$/,
 								use: [buildOptimizerLoader]
 							}
-						]
+					  ]
 					: []),
 
 				// TsLint loader support for *.ts files
@@ -192,7 +192,7 @@ module.exports = function(options) {
 								use: ["source-map-loader"],
 								exclude: [helpers.root("node_modules/rxjs"), helpers.root("node_modules/@angular")]
 							}
-						]
+					  ]
 					: []),
 
 				/**
@@ -472,7 +472,7 @@ module.exports = function(options) {
 							caseSensitive: true,
 							collapseWhitespace: true,
 							keepClosingSlash: true
-						}
+					  }
 					: false
 			}),
 
