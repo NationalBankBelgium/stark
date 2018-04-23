@@ -3,5 +3,8 @@
 .idea/
 .vscode/
 dist/
+coverage/
+reports/
 node_modules/
 package.json
+package-lock.json
