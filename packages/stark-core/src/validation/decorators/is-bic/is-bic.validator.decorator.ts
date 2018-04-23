@@ -26,7 +26,6 @@ class StarkIsBICConstraint implements ValidatorConstraintInterface {
  * Validator decorator that uses the StarkIsBIC validator constraint
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsBIC(validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

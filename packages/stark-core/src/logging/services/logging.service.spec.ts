@@ -19,7 +19,7 @@ import { StarkError, StarkErrorImpl } from "../../common/index";
 
 describe("Service: StarkLoggingService", () => {
 	let appConfig: StarkApplicationConfig;
-	let mockStore: Store<any>;
+	let mockStore: Store<StarkCoreApplicationState>;
 	// let mockXSRFService: StarkXSRFService;
 	let loggingService: LoggingServiceHelper;
 	const loggingBackend: StarkBackend = {
@@ -78,9 +78,7 @@ describe("Service: StarkLoggingService", () => {
 			appConfig.loggingFlushDisabled = false;
 			appConfig.backends.delete("logging");
 
-			expect(() => new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/)).toThrowError(
-				"Backend logging is undefined."
-			);
+			expect(() => new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/)).toThrowError(/backend/);
 		});
 
 		it("should throw an error in case the logging flushing is enabled but the loggingFlushPersistSize option is not greater than 0", () => {

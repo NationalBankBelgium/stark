@@ -36,6 +36,8 @@ import { StarkHttpStatusCodes } from "../../http/enumerators/index";
 import { StarkSessionService } from "../../session/services/index";
 import { HttpErrorResponse } from "@angular/common/http";
 import { StarkHttpErrorImpl } from "../../http";
+import { StarkMockData } from "../../configuration/entities/mock-data/index";
+import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
 
 interface StarkUserWithCustomData extends Pick<StarkUser, "uuid" | "username" | "roles"> {
 	[prop: string]: any;
@@ -43,12 +45,12 @@ interface StarkUserWithCustomData extends Pick<StarkUser, "uuid" | "username" | 
 
 describe("Service: StarkUserService", () => {
 	let userService: StarkUserService;
-	let mockStore: Store<any>;
+	let mockStore: Store<StarkCoreApplicationState>;
 	let mockUserRepository: StarkUserRepository;
 	let mockLogger: StarkLoggingService;
 	let mockSessionService: StarkSessionService;
 
-	let mockData: any;
+	let mockData: StarkMockData;
 	let mockUsers: StarkUserWithCustomData[];
 	let mockUserCustomData: { [prop: string]: any };
 	let mockUserCustomData2: { [prop: string]: any };

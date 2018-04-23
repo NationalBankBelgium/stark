@@ -36,7 +36,6 @@ class StarkIsNINConstraint implements ValidatorConstraintInterface {
  * @param property
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsNIN(property: string, validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

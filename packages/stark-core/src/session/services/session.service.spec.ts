@@ -46,7 +46,7 @@ import { starkSessionExpiredStateName } from "../../common/routes/index";
 import { StarkCoreApplicationState } from "../../common/store/index";
 
 describe("Service: StarkSessionService", () => {
-	let mockStore: Store<any>;
+	let mockStore: Store<StarkCoreApplicationState>;
 	let appConfig: StarkApplicationConfig;
 	let mockSession: StarkSession;
 	let mockUser: Partial<StarkUser>;
@@ -336,7 +336,7 @@ describe("Service: StarkSessionService", () => {
 
 		it("should call the destroySession() method only when the logout HTTP request has returned a response (either success or error)", () => {
 			spyOn(sessionService, "destroySession");
-			const logoutHttpResponse$: Subject<any> = new Subject();
+			const logoutHttpResponse$: Subject<string> = new Subject();
 			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(logoutHttpResponse$);
 
 			sessionService.logout();

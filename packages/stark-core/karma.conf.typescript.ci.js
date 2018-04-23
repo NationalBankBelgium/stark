@@ -22,12 +22,9 @@ defaultKarmaCIConfig(configExtractor);
 let starkCoreSpecificConfiguration = loadedConfiguration;
 
 // change the path of the report so that Coveralls takes the right path to the source files
-starkCoreSpecificConfiguration.coverageIstanbulReporter = Object.assign(
-	starkCoreSpecificConfiguration.coverageIstanbulReporter,
-	{
-		dir: helpers.root("reports/coverage/packages"),
-	}
-);
+starkCoreSpecificConfiguration.coverageIstanbulReporter = Object.assign(starkCoreSpecificConfiguration.coverageIstanbulReporter, {
+	dir: helpers.root("reports/coverage/packages")
+});
 
 // export the configuration function that karma expects and simply return the stark configuration
 module.exports = config => {

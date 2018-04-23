@@ -26,7 +26,6 @@ class StarkIsIBANConstraint implements ValidatorConstraintInterface {
  * Validator decorator that uses the StarkIsIBAN validator constraint
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsIBAN(validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

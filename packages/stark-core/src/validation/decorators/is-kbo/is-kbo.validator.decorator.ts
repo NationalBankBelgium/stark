@@ -27,7 +27,6 @@ class StarkIsKBOConstraint implements ValidatorConstraintInterface {
  * Validator decorator that uses the StarkIsKBO validator constraint
  * @param validationOptions
  * @returns Function
- * @constructor
  */
 export function StarkIsKBO(validationOptions?: ValidationOptions): Function {
 	return (object: object, propertyName: string): void => {

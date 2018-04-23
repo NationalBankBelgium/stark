@@ -3,14 +3,15 @@
 import { IsNotEmpty, IsString, Matches } from "class-validator";
 import { autoserialize } from "cerialize";
 import { StarkLanguage } from "./language.entity.intf";
-
-// import {StarkIsSupportedLanguage} from "../../validation/decorators/is-supported-language";
+// FIXME: cannot import both validation decorator from the barrel due to an issue with angular-compiler
+// see: https://github.com/angular/angular/issues/20931
+import { StarkIsSupportedLanguage } from "../../../validation/decorators/is-supported-language/is-supported-language.validator.decorator";
 
 export class StarkLanguageImpl implements StarkLanguage {
 	@IsNotEmpty()
 	@IsString()
 	@Matches(/^[a-z]{2}-[A-Z]{2}$/)
-	// @StarkIsSupportedLanguage()  // FIXME: add Stark validator decorators
+	@StarkIsSupportedLanguage()
 	@autoserialize
 	public isoCode: string;
 

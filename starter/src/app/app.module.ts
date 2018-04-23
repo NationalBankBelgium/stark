@@ -2,16 +2,22 @@ import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angula
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
-import { StoreModule, MetaReducer, ActionReducerMap, ActionReducer } from "@ngrx/store";
+import { validateSync } from "class-validator";
+import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 import {
+	STARK_APP_CONFIG,
+	STARK_APP_METADATA,
+	StarkApplicationConfig,
+	StarkApplicationConfigImpl,
+	StarkApplicationMetadata,
+	StarkApplicationMetadataImpl,
 	StarkHttpModule,
 	StarkLoggingModule,
-	STARK_APP_CONFIG,
-	StarkApplicationConfig,
-	StarkApplicationConfigImpl
+	StarkValidationErrorsUtil
 } from "@nationalbankbelgium/stark-core";
 import { routerConfigFn } from "./router.config";
 import { Deserialize } from "cerialize";
@@ -52,7 +58,20 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 	applicationConfig.debugLoggingEnabled = true; //DEVELOPMENT;
 	applicationConfig.routerLoggingEnabled = true; //DEVELOPMENT;
 
+	StarkValidationErrorsUtil.throwOnError(validateSync(applicationConfig), STARK_APP_CONFIG + " constant is not valid.");
+
 	return applicationConfig;
+}
+
+// TODO: where to put this factory function?
+export function starkAppMetadataFactory(): StarkApplicationMetadata {
+	const metadata: any = require("../stark-app-metadata.json");
+
+	const applicationMetadata: StarkApplicationMetadata = Deserialize(metadata, StarkApplicationMetadataImpl);
+
+	StarkValidationErrorsUtil.throwOnError(validateSync(applicationMetadata), STARK_APP_METADATA + " constant is not valid.");
+
+	return applicationMetadata;
 }
 
 // Application Redux State
@@ -110,7 +129,8 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		environment.ENV_PROVIDERS,
 		APP_PROVIDERS,
 		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
-		{ provide: STARK_APP_CONFIG, useFactory: starkAppConfigFactory }
+		{ provide: STARK_APP_CONFIG, useFactory: starkAppConfigFactory },
+		{ provide: STARK_APP_METADATA, useFactory: starkAppMetadataFactory }
 	]
 })
 export class AppModule {}
