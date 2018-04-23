@@ -10,7 +10,8 @@ import {
 	StarkHttpModule,
 	StarkLoggingModule,
 	StarkLoggingService,
-	starkLoggingServiceName
+	starkLoggingServiceName,
+	StarkSessionModule
 } from "@nationalbankbelgium/stark-core";
 /**
  * Load the implementations that should be tested.
@@ -45,7 +46,7 @@ describe(`Home`, () => {
 				TestBed.configureTestingModule({
 					declarations: [HomeComponent],
 					schemas: [NO_ERRORS_SCHEMA],
-					imports: [StoreModule.forRoot({}), HttpClientTestingModule, StarkHttpModule, StarkLoggingModule],
+					imports: [StoreModule.forRoot({}), HttpClientTestingModule, StarkHttpModule, StarkLoggingModule, StarkSessionModule],
 					providers: [AppState, Title, { provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }]
 				})
 
