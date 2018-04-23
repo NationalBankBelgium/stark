@@ -181,7 +181,7 @@ describe("Service: StarkLoggingService", () => {
 			expect((<StarkLogMessage>message).timestamp).toBeDefined();
 			expect((<StarkLogMessage>message).error).toBeDefined();
 
-			const error: StarkError = (<StarkError>(<StarkLogMessage>message).error);
+			const error: StarkError = <StarkError>(<StarkLogMessage>message).error;
 			expect(error).toBeDefined(); // so the test will fail in case it is undefined
 			expect(<string>error.message).toContain("this is the error");
 		});
@@ -199,7 +199,7 @@ describe("Service: StarkLoggingService", () => {
 			expect((<StarkLogMessage>message).timestamp).toBeDefined();
 			expect((<StarkLogMessage>message).error).toBeDefined();
 
-			const error: StarkError = (<StarkError>(<StarkLogMessage>message).error);
+			const error: StarkError = <StarkError>(<StarkLogMessage>message).error;
 			expect(error).toBeDefined(); // so the test will fail in case it is undefined
 			expect(<string>error.name).toBe("STARK_ERROR");
 			expect(<string>error.timestamp).toBeDefined();
@@ -251,7 +251,7 @@ describe("Service: StarkLoggingService", () => {
 				expect(message.timestamp).toBeDefined();
 				expect(message.error).toBeDefined();
 
-				const starkError: StarkError = (<StarkError>(<StarkLogMessage>message).error);
+				const starkError: StarkError = <StarkError>(<StarkLogMessage>message).error;
 				expect(error).toBeDefined(); // so the test will fail in case it is undefined
 				expect(<string>starkError.name).toBe("STARK_ERROR");
 				expect(<string>starkError.timestamp).toBeDefined();

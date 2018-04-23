@@ -109,6 +109,8 @@ module.exports = {
 			}
 		],
 		"selector-pseudo-element-no-unknown": true,
+		// FIXME: cannot simply leave this rule commented for now (stylelint-config-prettier v3.2.0) otherwise it is still recognized as conflict
+		"selector-descendant-combinator-no-non-space": null,
 		"selector-type-case": [
 			"lower",
 			{
@@ -126,14 +128,6 @@ module.exports = {
 			"never",
 			{
 				message: "Never put spaces inside media feature parentheses to avoid unnecessary whitespace."
-			}
-		],
-		"at-rule-empty-line-before": [
-			"always",
-			{
-				ignore: ["after-comment", "blockless-after-same-name-blockless"],
-				ignoreAtRules: ["import"],
-				message: "Always put an empty line before each @ rule, except after a comment or for @import."
 			}
 		],
 		"at-rule-no-unknown": true,
@@ -344,6 +338,14 @@ module.exports = {
     {
     "message": "Never put spaces inside media feature parentheses to avoid unnecessary whitespace."
     }
+  ],
+  "at-rule-empty-line-before": [
+	"always",
+	{
+		ignore: ["after-comment", "blockless-after-same-name-blockless"],
+		ignoreAtRules: ["import"],
+		message: "Always put an empty line before each @ rule, except after a comment or for @import."
+	}
   ],
   "at-rule-name-space-after": [
     "always",

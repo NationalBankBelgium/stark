@@ -11,7 +11,7 @@ import { AppState } from "./app.service";
  */
 @Component({
 	selector: "app",
-	/* tslint:disable */
+	/* tslint:disable:use-view-encapsulation */
 	encapsulation: ViewEncapsulation.None,
 	/* tslint:enable */
 	styleUrls: ["./app.component.css"],
