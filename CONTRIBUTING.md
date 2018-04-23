@@ -256,17 +256,7 @@ If you want to clean up completely the installed node_modules and reinstall late
 * execute the `clean:modules:all` npm script to clean up every modules files in your project; for example: `npm run clean:modules:all`
 
 ## Releasing a version
-* commit all changes to include in the release
-* edit the version in package.json
-  * respect semver
-* update CHANGELOG.MD
-* commit
-* git tag <version>
-* git push --tags
-* draft the release on GitHub (add description, etc)
-* npm publish
-
-TODO: review/complete; see #31
+See [this page](/RELEASE.md)
 
 ## <a name="commit"></a> Commit Message Guidelines
 We have precise rules over how our git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**.

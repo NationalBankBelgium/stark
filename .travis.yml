@@ -1,14 +1,18 @@
 language: node_js
 node_js:
-  - "6"
   - "8"
+  - "6"
+
 dist: trusty
 sudo: false # better for performance
 
 before_install:
   - export TZ=Europe/Brussels
+  # TODO remove this variable as it's probably not needed (defined by travis by default?): https://docs.travis-ci.com/user/environment-variables/
   - TRAVIS=1 # used by build.sh
   - npm i -g npm@5.8.0
+  # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
+  - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
 
 install:
   # Create file & folder for Travis logs
@@ -42,5 +46,8 @@ cache:
 script:
   - npm run lint:all
   - npm run test:ci:all
+  - npm run release:publish
+  - bash ./scripts/ci/print-logs.sh
+
 after_success:
   - npm run test:ci:coveralls:stark-core

@@ -53,6 +53,9 @@ TODO add links to developer guide sections
 ### Contributing
 Please follow our [contribution guidelines](/CONTRIBUTING.md)
 
+### Releasing Stark
+See [this page](/RELEASE.md)
+
 ## Authors
 
 ### Sebastien Dubois
