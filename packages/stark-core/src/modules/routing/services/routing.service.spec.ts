@@ -636,6 +636,31 @@ describe("Service: StarkRoutingService", () => {
 		});
 	});
 
+	describe("isCurrentUiStateIncludedIn", () => {
+		it("should return whether or not the state is included in the current state", (done: DoneFn) => {
+			spyOn($state, "go").and.callThrough();
+			const statesConfig: StateDeclaration[] = $state.get();
+			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+
+			routingService
+				.navigateTo("page-01")
+				.pipe(
+					tap((enteredState: StateObject) => {
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("page-01");
+						expect($state.go).toHaveBeenCalledTimes(1);
+						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
+						expect(routingService.isCurrentUiStateIncludedIn("page-01")).toBe(true);
+						expect(routingService.isCurrentUiStateIncludedIn("otherState")).toBe(false);
+					}),
+					catchError((error: any) => {
+						return throwError("navigateTo " + error);
+					})
+				)
+				.subscribe(() => done(), (error: any) => fail(error));
+		});
+	});
+
 	describe("navigateTo", () => {
 		it("should navigate to the requested page", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();

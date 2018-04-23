@@ -3,22 +3,12 @@
  */
 export const translationsFr: object = {
 	STARK: {
-		DATE_RANGE_PICKER: {
-			FROM: "De",
-			TO: "A"
-		},
 		APP_LOGOUT: {
 			TITLE: "Déconnecter"
 		},
-		LANGUAGES: {
-			EN: "English",
-			FR: "Français",
-			NL: "Nederlands",
-			DE: "Deutsch"
-		},
-		SORTING: {
-			ASC: "Ascendant",
-			DESC: "Descendant"
+		DATE_RANGE_PICKER: {
+			FROM: "De",
+			TO: "A"
 		},
 		ICONS: {
 			ADD_ITEM: "Ajouter",
@@ -36,6 +26,16 @@ export const translationsFr: object = {
 			NEW_ITEM: "Nouveau",
 			SAVE_AND_NEXT: "Sauver et Suivant"
 		},
+		LANGUAGES: {
+			EN: "English",
+			FR: "Français",
+			NL: "Nederlands",
+			DE: "Deutsch"
+		},
+		LOGIN: {
+			TITLE: "Connexion",
+			NO_PROFILE: "Aucun profil utilisateur disponible"
+		},
 		MULTI_COLUMN_SORTING: {
 			TITLE: "Tri multi-colonnes",
 			ADD_SORTING_LEVEL: "Ajouter le niveau de tri",
@@ -44,6 +44,26 @@ export const translationsFr: object = {
 			THEN_BY: "Puis par",
 			CANCEL: "Annuler",
 			SAVE: "Enregistrer"
+		},
+		PRELOADING: {
+			FETCHING_USER_PROFILE: "Initialisation...",
+			FETCHING_USER_PROFILE_FAILURE: "Échec de l'initialisation: impossible de récupérer le profil de l'utilisateur.",
+			CONTACT_IT_SUPPORT: "Veuillez contacter votre service d'assistance informatique.",
+			CORRELATION_ID: "ID de corrélation",
+			RELOAD: "Recharger"
+		},
+		SESSION_EXPIRED: {
+			TITLE: "La session a expiré",
+			MESSAGE: "",
+			RELOAD: "Recharger"
+		},
+		SESSION_LOGOUT: {
+			TITLE: "Déconnecté",
+			LOGIN: "Connexion"
+		},
+		SORTING: {
+			ASC: "Ascendant",
+			DESC: "Descendant"
 		},
 		TABLE: {
 			NB_SELECTED_ROWS: "Sélectionné",

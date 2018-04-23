@@ -26,17 +26,17 @@ import {
 	StarkUserActivityTrackingResume
 } from "../actions";
 import { StarkSessionServiceImpl, starkUnauthenticatedUserError } from "./session.service";
-import { StarkSession } from "../entities";
+import { StarkSession, StarkSessionConfig } from "../entities";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkUser } from "../../user/entities";
 import { StarkLoggingService } from "../../logging/services";
 import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
 import { MockStarkRoutingService } from "../../routing/testing";
-import { starkSessionExpiredStateName } from "../../../common/routes";
 import { StarkCoreApplicationState } from "../../../common/store";
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
+import { starkSessionExpiredStateName } from "../routes";
 
 // tslint:disable-next-line:no-big-function
 describe("Service: StarkSessionService", () => {
@@ -62,6 +62,9 @@ describe("Service: StarkSessionService", () => {
 		workpost: "dummy workpost",
 		referenceNumber: "dummy ref number",
 		roles: ["a role", "another role", "yet another role"]
+	};
+	const mockSessionConfig: StarkSessionConfig = {
+		sessionExpiredStateName: "mock-session-state-name"
 	};
 
 	// Inject module dependencies
@@ -105,7 +108,8 @@ describe("Service: StarkSessionService", () => {
 			appConfig,
 			mockIdleService,
 			mockInjectorService,
-			mockTranslateService
+			mockTranslateService,
+			mockSessionConfig
 		);
 		mockIdleService.setIdle.calls.reset();
 		mockIdleService.setTimeout.calls.reset();
@@ -131,7 +135,8 @@ describe("Service: StarkSessionService", () => {
 							appConfig,
 							mockIdleService,
 							mockInjectorService,
-							mockTranslateService
+							mockTranslateService,
+							mockSessionConfig
 						)
 				).toThrowError(/sessionTimeout/);
 			}
@@ -153,7 +158,8 @@ describe("Service: StarkSessionService", () => {
 							appConfig,
 							mockIdleService,
 							mockInjectorService,
-							mockTranslateService
+							mockTranslateService,
+							mockSessionConfig
 						)
 				).toThrowError(/sessionTimeoutWarning/);
 			}
@@ -369,6 +375,8 @@ describe("Service: StarkSessionService", () => {
 		});
 	});
 
+	// FIXME rewrite those tests to reduce function
+	/* tslint:disable-next-line:no-big-function */
 	describe("configureIdleService", () => {
 		it("should set the necessary options of the idle service", () => {
 			const interruptsToBeSet: InterruptSource[] = DEFAULT_INTERRUPTSOURCES;
@@ -488,7 +496,17 @@ describe("Service: StarkSessionService", () => {
 				mockIdleService.onTimeout.complete();
 			});
 
-			it("should dispatch the COUNTDOWN_FINISH action, trigger the logout and navigate to the SessionExpired state", () => {
+			it("should dispatch the COUNTDOWN_FINISH action, trigger the logout and navigate to the starkSessionExpired state", () => {
+				sessionService = new SessionServiceHelper(
+					mockStore,
+					mockLogger,
+					mockRoutingService,
+					appConfig,
+					mockIdleService,
+					mockInjectorService,
+					mockTranslateService
+				);
+
 				spyOn(sessionService, "logout");
 
 				(<EventEmitter<number>>mockIdleService.onTimeout) = new EventEmitter<number>();
@@ -503,6 +521,25 @@ describe("Service: StarkSessionService", () => {
 				expect(sessionService.logout).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledWith(starkSessionExpiredStateName);
+
+				mockIdleService.onTimeout.complete();
+			});
+
+			it("should dispatch the COUNTDOWN_FINISH action, trigger the logout and navigate to the SessionExpired state set in the injected sessionConfig", () => {
+				spyOn(sessionService, "logout");
+
+				(<EventEmitter<number>>mockIdleService.onTimeout) = new EventEmitter<number>();
+				expect(mockIdleService.onTimeout.observers.length).toBe(0);
+
+				sessionService.configureIdleService();
+
+				mockIdleService.onTimeout.next(321);
+
+				expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
+				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownFinish());
+				expect(sessionService.logout).toHaveBeenCalledTimes(1);
+				expect(mockRoutingService.navigateTo).toHaveBeenCalledTimes(1);
+				expect(mockRoutingService.navigateTo).toHaveBeenCalledWith(mockSessionConfig.sessionExpiredStateName);
 
 				mockIdleService.onTimeout.complete();
 			});
@@ -570,7 +607,8 @@ describe("Service: StarkSessionService", () => {
 				appConfig,
 				mockIdleService,
 				mockInjectorService,
-				mockTranslateService
+				mockTranslateService,
+				mockSessionConfig
 			);
 
 			expect(sessionServiceHelper.keepalive).toBeDefined();
@@ -609,7 +647,8 @@ describe("Service: StarkSessionService", () => {
 				appConfig,
 				mockIdleService,
 				mockInjectorService,
-				mockTranslateService
+				mockTranslateService,
+				mockSessionConfig
 			);
 
 			expect(sessionServiceHelper.keepalive).toBeUndefined();
@@ -631,7 +670,8 @@ describe("Service: StarkSessionService", () => {
 					appConfig,
 					mockIdleService,
 					mockInjectorService,
-					mockTranslateService
+					mockTranslateService,
+					mockSessionConfig
 				);
 
 				(<EventEmitter<any>>mockKeepaliveService.onPing) = new EventEmitter<any>();
@@ -684,7 +724,8 @@ describe("Service: StarkSessionService", () => {
 				appConfig,
 				mockIdleService,
 				mockInjectorService,
-				mockTranslateService
+				mockTranslateService,
+				mockSessionConfig
 			);
 
 			sessionServiceHelper.startKeepaliveService();
@@ -714,7 +755,8 @@ describe("Service: StarkSessionService", () => {
 				appConfig,
 				mockIdleService,
 				mockInjectorService,
-				mockTranslateService
+				mockTranslateService,
+				mockSessionConfig
 			);
 
 			sessionServiceHelper.stopKeepaliveService();
@@ -833,16 +875,19 @@ describe("Service: StarkSessionService", () => {
 });
 
 class SessionServiceHelper extends StarkSessionServiceImpl {
+	// TODO Check if we can simplify this service
+	/* tslint:disable-next-line:parameters-max-number */
 	public constructor(
 		store: Store<StarkCoreApplicationState>,
 		logger: StarkLoggingService,
 		routingService: StarkRoutingService,
 		appConfig: StarkApplicationConfig,
-		/*xsrfService: StarkXSRFService,*/ idle: Idle,
+		idle: Idle,
 		injector: Injector,
-		translateService: TranslateService
+		translateService: TranslateService,
+		sessionConfig?: StarkSessionConfig
 	) {
-		super(store, logger, routingService, appConfig, /*xsrfService,*/ idle, injector, translateService);
+		super(store, logger, routingService, appConfig, idle, injector, translateService, sessionConfig);
 	}
 
 	public registerTransitionHook(): void {

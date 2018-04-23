@@ -8,13 +8,13 @@ import { select, Store } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
 import { validateSync } from "class-validator";
 import { defer, Observable, Subject } from "rxjs";
-import { map, take, distinctUntilChanged } from "rxjs/operators";
+import { distinctUntilChanged, map, take } from "rxjs/operators";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { StarkSessionService, starkSessionServiceName } from "./session.service.intf";
 import { STARK_ROUTING_SERVICE, StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
 import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
-import { StarkSession } from "../entities";
+import { STARK_SESSION_CONFIG, StarkSession, StarkSessionConfig } from "../entities";
 import { StarkUser } from "../../user/entities";
 import {
 	StarkChangeLanguage,
@@ -33,11 +33,11 @@ import {
 } from "../actions";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
-import { starkSessionExpiredStateName } from "../../../common/routes";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { selectStarkSession } from "../reducers";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 import { StarkValidationErrorsUtil } from "../../../util";
+import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../routes";
 
 /**
  * @ignore
@@ -56,6 +56,8 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	protected _devAuthenticationHeaders: Map<string, string>;
 	public countdownStarted: boolean;
 
+	// TODO Check if we can simplify this service
+	/* tslint:disable-next-line:parameters-max-number */
 	public constructor(
 		public store: Store<StarkCoreApplicationState>,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -63,7 +65,8 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
 		public idle: Idle,
 		injector: Injector,
-		public translateService: TranslateService
+		public translateService: TranslateService,
+		@Inject(STARK_SESSION_CONFIG) private sessionConfig?: StarkSessionConfig
 	) {
 		// ensuring that the app config is valid before doing anything
 		StarkConfigurationUtil.validateConfig(this.appConfig, ["session"], starkSessionServiceName);
@@ -106,7 +109,8 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 				// match any state except the ones that are children of starkAppInit/starkAppExit or the Ui-Router's root state
 				entering: (state?: StateObject) => {
 					if (state && typeof state.name !== "undefined") {
-						return !state.name.match(/(starkAppInit|starkAppExit)/) && !(state.abstract && state.name === "");
+						const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+						return !state.name.match(regexInitExitStateName) && !(state.abstract && state.name === "");
 					} else {
 						return true; // always match
 					}
@@ -253,7 +257,18 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 			// dispatch action so an effect can run any logic if needed
 			this.store.dispatch(new StarkSessionTimeoutCountdownFinish());
 			this.logout();
-			this.routingService.navigateTo(starkSessionExpiredStateName);
+
+			let sessionExpiredStateName: string;
+			if (
+				typeof this.sessionConfig !== "undefined" &&
+				typeof this.sessionConfig.sessionExpiredStateName !== "undefined" &&
+				this.sessionConfig.sessionExpiredStateName !== ""
+			) {
+				sessionExpiredStateName = this.sessionConfig.sessionExpiredStateName;
+			} else {
+				sessionExpiredStateName = starkSessionExpiredStateName;
+			}
+			this.routingService.navigateTo(sessionExpiredStateName);
 		});
 		this.idle.onTimeoutWarning.subscribe((countdown: number) => {
 			if (countdown === this.idle.getTimeout()) {

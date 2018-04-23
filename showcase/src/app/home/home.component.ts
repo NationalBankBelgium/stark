@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkErrorImpl, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { AppState } from "../app.service";
 
 @Component({
 	selector: "home", // <home></home>
@@ -8,7 +7,7 @@ import { AppState } from "../app.service";
 	templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
-	public constructor(public appState: AppState, @Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService) {}
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService) {}
 
 	public ngOnInit(): void {
 		this.loggingService.debug("hello from `Home` component");
