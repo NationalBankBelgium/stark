@@ -5,8 +5,8 @@ import { StarkUser } from "../entities";
 import { StarkHttpRequest, StarkSingleItemResponseWrapper } from "../../http/entities";
 import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/application";
 import { StarkUserRepository } from "./user.repository.intf";
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services/logging.service.intf";
-import { StarkHttpService, starkHttpServiceName } from "../../http/services";
+import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services/logging.service.intf";
+import { StarkHttpService, STARK_HTTP_SERVICE } from "../../http/services";
 import { AbstractStarkHttpRepository } from "../../http/repository";
 
 /**
@@ -21,8 +21,8 @@ import { AbstractStarkHttpRepository } from "../../http/repository";
 @Injectable()
 export class StarkUserRepositoryImpl extends AbstractStarkHttpRepository<StarkUser> implements StarkUserRepository {
 	public constructor(
-		@Inject(starkHttpServiceName) starkHttpService: StarkHttpService<StarkUser>,
-		@Inject(starkLoggingServiceName) logger: StarkLoggingService,
+		@Inject(STARK_HTTP_SERVICE) starkHttpService: StarkHttpService<StarkUser>,
+		@Inject(STARK_LOGGING_SERVICE) logger: StarkLoggingService,
 		@Inject(STARK_APP_CONFIG) appConfig: StarkApplicationConfig
 	) {
 		super(starkHttpService, logger, appConfig.getBackend("userProfile"), "security/userprofile");

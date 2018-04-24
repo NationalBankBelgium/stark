@@ -6,9 +6,8 @@ import {
 	StarkApplicationConfig,
 	StarkBackend,
 	StarkBackendAuthenticationTypes,
-	StarkLoggingModule,
 	StarkLoggingService,
-	starkLoggingServiceName
+	STARK_LOGGING_SERVICE
 } from "@nationalbankbelgium/stark-core";
 
 /**
@@ -36,7 +35,7 @@ describe("About", () => {
 
 	beforeEach(() =>
 		TestBed.configureTestingModule({
-			imports: [StoreModule.forRoot({}), StarkLoggingModule],
+			imports: [StoreModule.forRoot({})],
 			providers: [
 				/**
 				 * Provide a better mock.
@@ -53,17 +52,16 @@ describe("About", () => {
 					}
 				},
 				AboutComponent,
-				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
+				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
+				{ provide: STARK_LOGGING_SERVICE, useValue: jasmine.createSpyObj("StarkLoggingService", ["debug", "warn"]) }
 			]
-		})
-	);
+		}));
 
 	it(
 		"should log ngOnInit",
 		inject([AboutComponent], (about: AboutComponent) => {
-			logger = TestBed.get(starkLoggingServiceName);
+			logger = TestBed.get(STARK_LOGGING_SERVICE);
 
-			spyOn(logger, "debug");
 			expect(logger.debug).not.toHaveBeenCalled();
 
 			about.ngOnInit();

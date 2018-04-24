@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
 // import { Transition } from '@uirouter/angular';
 import { Observable } from "rxjs/Observable";
-import { StarkLoggingService, starkLoggingServiceName } from "@nationalbankbelgium/stark-core";
+import { StarkLoggingService, STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 
 @Component({
 	selector: "about",
@@ -15,7 +15,7 @@ export class AboutComponent implements OnInit {
 	public localState: any;
 	public constructor(
 		// public transition: Transition   // the last transition could be injected if needed
-		@Inject(starkLoggingServiceName) public loggingService: StarkLoggingService
+		@Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService
 	) {}
 
 	public ngOnInit(): void {

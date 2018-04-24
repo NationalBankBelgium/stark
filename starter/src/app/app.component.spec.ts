@@ -14,19 +14,17 @@ describe(`App`, () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		async(() => {
-			TestBed.configureTestingModule({
-				declarations: [AppComponent],
-				schemas: [NO_ERRORS_SCHEMA],
-				providers: [AppState]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents();
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [AppComponent],
+			schemas: [NO_ERRORS_SCHEMA],
+			providers: [AppState]
 		})
-	);
+			/**
+			 * Compile template and css
+			 */
+			.compileComponents();
+	}));
 
 	/**
 	 * Synchronous beforeEach

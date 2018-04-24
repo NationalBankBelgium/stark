@@ -18,7 +18,7 @@
     "use-pipe-transform-interface": true,
     "no-output-named-after-standard-event": true,
     "max-inline-declarations": true,
-//    "no-life-cycle-call": true, // FIXME: throws an exception (Codelyzer v4.3.0). Enable this rule when solved
+    //    "no-life-cycle-call": true, // FIXME: throws an exception (Codelyzer v4.3.0). Enable this rule when solved
     "no-conflicting-life-cycle-hooks": true,
     "enforce-component-selector": true,
     "component-class-suffix": [true, "Component"],
