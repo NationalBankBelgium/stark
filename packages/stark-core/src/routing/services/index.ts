@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./routing.service";
 export * from "./routing.service.intf";
 export * from "./routing-transition-hook.constants";

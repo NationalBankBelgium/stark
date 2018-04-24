@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./is-bban/index";
 export * from "./is-bic/index";
 export * from "./is-company-number/index";

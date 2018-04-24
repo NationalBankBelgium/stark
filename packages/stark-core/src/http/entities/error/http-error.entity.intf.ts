@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkHttpErrorBase } from "./http-error-base.entity.intf";
 import { StarkHttpErrorDetail } from "./http-error-detail.entity.intf";
 

@@ -1,5 +1,3 @@
-"use strict";
-
 import { getFromContainer } from "class-validator";
 import { StarkValidator } from "../../validator.intf";
 import { StarkValidatorImpl } from "../../validator";

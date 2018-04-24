@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkHttpDiscriminatorSerializer } from "./http-discriminator-serializer";
 import { autoserialize, inheritSerialization } from "cerialize";
 import { StarkSerializable } from "../../serialization/index";

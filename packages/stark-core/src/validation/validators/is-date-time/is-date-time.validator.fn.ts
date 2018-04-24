@@ -1,5 +1,3 @@
-"use strict";
-
 import moment from "moment";
 
 export const starkIsDateTimeValidatorName: string = "starkIsDateTime";

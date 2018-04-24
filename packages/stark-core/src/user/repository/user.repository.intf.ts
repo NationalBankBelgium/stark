@@ -1,5 +1,3 @@
-"use strict";
-
 import { Observable } from "rxjs/Observable";
 import { StarkUser } from "../entities/index";
 import { StarkSingleItemResponseWrapper } from "../../http/entities/index";

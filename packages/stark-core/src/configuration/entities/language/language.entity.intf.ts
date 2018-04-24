@@ -1,5 +1,3 @@
-"use strict";
-
 export interface StarkLanguage {
 	isoCode: string;
 	code: string;

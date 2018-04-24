@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./collection-metadata.entity.intf";
 export * from "./collection-metadata.entity";
 export * from "./metadata-pagination.entity.intf";

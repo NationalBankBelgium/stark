@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkSessionActionTypes, StarkSessionActions } from "../actions/index";
 import { StarkSession, StarkSessionImpl } from "../entities/index";
 

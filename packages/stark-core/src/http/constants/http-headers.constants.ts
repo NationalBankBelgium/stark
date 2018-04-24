@@ -1,5 +1,3 @@
-"use strict";
-
 export class StarkHttpHeaders {
 	public static ACCEPT_LANGUAGE: string = "Accept-Language";
 	public static ETAG: string = "etag";

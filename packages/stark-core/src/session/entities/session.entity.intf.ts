@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkUser } from "../../user/entities/index";
 
 export interface StarkSession {

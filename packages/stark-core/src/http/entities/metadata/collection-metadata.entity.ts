@@ -1,5 +1,3 @@
-"use strict";
-
 import { deserialize, deserializeAs } from "cerialize";
 
 import { StarkCollectionMetadata } from "./collection-metadata.entity.intf";

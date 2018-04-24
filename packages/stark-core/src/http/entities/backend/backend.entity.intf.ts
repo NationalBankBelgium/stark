@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkBackendAuthenticationTypes } from "./backend-authentication-types";
 
 /**

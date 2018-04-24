@@ -1,5 +1,3 @@
-"use strict";
-
 import { autoserialize } from "cerialize";
 import { StarkUserProfile } from "./user-profile.entity.intf";
 import { StarkUserSecurityProfile } from "./user-security-profile.entity.intf";

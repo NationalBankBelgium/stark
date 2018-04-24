@@ -1,5 +1,3 @@
-"use strict";
-
 import { Observable } from "rxjs/Observable";
 import { HookFn, HookMatchCriteria, HookRegOptions, RawParams, StateDeclaration, StateObject, TransitionOptions } from "@uirouter/core";
 

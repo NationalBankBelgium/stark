@@ -1,5 +1,3 @@
-"use strict";
-
 export interface StarkUserProfile {
 	username: string;
 	firstName: string;

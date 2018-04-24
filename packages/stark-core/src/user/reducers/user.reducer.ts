@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkUserActions, StarkUserActionTypes } from "../actions/index";
 import { StarkUser } from "../entities/index";
 

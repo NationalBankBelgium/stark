@@ -1,5 +1,3 @@
-"use strict";
-
 export class StarkHttpRequestType {
 	public static CREATE: string = "CREATE";
 	public static CREATE_BULK: string = "CREATE_BULK";

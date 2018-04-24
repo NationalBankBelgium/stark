@@ -1,5 +1,3 @@
-"use strict";
-
 import { autoserialize, inheritSerialization } from "cerialize";
 
 import { StarkErrorImpl } from "../../../common/index";

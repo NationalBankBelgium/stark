@@ -1,5 +1,3 @@
-"use strict";
-
 export class StarkHttpQueryParameters {
 	public static FIELDS: string = "fields";
 	public static LANG: string = "lang";

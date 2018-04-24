@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./builder/index";
 export * from "./constants/index";
 export * from "./entities/index";

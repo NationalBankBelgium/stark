@@ -1,5 +1,3 @@
-"use strict";
-
 export const starkIsBICValidatorName: string = "starkIsBIC";
 
 /**

@@ -1,5 +1,3 @@
-"use strict";
-
 import { HttpHeaders, HttpRequest } from "@angular/common/http";
 import { EventEmitter, Injector } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle, InterruptSource } from "@ng-idle/core";

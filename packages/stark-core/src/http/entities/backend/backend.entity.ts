@@ -1,5 +1,3 @@
-"use strict";
-
 import { IsDefined, IsNotEmpty, IsString, IsUrl } from "class-validator";
 import { autoserialize, autoserializeAs } from "cerialize";
 import { StarkBackend } from "./backend.entity.intf";

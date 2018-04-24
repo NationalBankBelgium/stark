@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./array-size-range/index";
 export * from "./is-bban/index";
 export * from "./is-bic/index";

@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkLoggingActions, StarkLoggingActionTypes } from "../actions/index";
 import { StarkLogging, StarkLogMessage } from "../entities/index";
 

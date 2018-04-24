@@ -1,5 +1,3 @@
-"use strict";
-
 import moment from "moment";
 import { serialize, serializeAs } from "cerialize";
 import { StarkLogMessageType } from "./log-message-type.entity";

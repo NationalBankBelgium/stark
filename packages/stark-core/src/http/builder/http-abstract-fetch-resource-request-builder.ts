@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkLanguage } from "../../configuration/entities/language/index";
 import { StarkSortItem } from "../entities/metadata/index";
 import { StarkHttpHeaders, StarkHttpQueryParameters } from "../constants/index";

@@ -1,5 +1,3 @@
-"use strict";
-
 import { StateDeclaration, RawParams } from "@uirouter/core";
 
 export interface StarkStateConfigWithParams {

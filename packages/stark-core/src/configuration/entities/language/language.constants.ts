@@ -1,4 +1,3 @@
-"use strict";
 import { StarkLanguage } from "./language.entity.intf";
 
 export class StarkLanguages {

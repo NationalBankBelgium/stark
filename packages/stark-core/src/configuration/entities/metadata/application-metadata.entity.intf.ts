@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkLanguage } from "../language/index";
 import { InjectionToken } from "@angular/core";
 

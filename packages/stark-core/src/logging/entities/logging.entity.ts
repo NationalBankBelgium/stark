@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkLogMessage } from "./log-message.entity.intf";
 import { StarkLogging } from "./logging.entity.intf";
 import { serialize, serializeAs } from "cerialize";

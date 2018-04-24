@@ -1,5 +1,3 @@
-"use strict";
-
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 import { autoserialize, autoserializeAs, inheritSerialization, Serialize } from "cerialize";

@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./backend/index";
 export * from "./error/index";
 export * from "./http-request.entity.intf";

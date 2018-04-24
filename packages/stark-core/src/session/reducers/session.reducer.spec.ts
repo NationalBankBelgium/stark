@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkSession } from "../entities/index";
 import { StarkUser } from "../../user/entities/index";
 import { sessionReducer } from "./session.reducer";

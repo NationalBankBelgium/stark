@@ -1,5 +1,3 @@
-"use strict";
-
 import { IEnum, INewable, ISerializable } from "cerialize";
 
 // alias for all serializable types to be used with the serialization library

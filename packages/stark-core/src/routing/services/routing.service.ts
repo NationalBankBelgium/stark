@@ -1,5 +1,3 @@
-"use strict";
-
 import { Action, Store } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
 import { fromPromise } from "rxjs/observable/fromPromise";

@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkError } from "../../common";
 
 export const starkLoggingServiceName: string = "StarkLoggingService";

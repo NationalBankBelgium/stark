@@ -1,5 +1,3 @@
-"use strict";
-
 import { DeserializeInto } from "cerialize";
 import { HttpErrorResponse } from "@angular/common/http";
 import { StarkHttpError } from "./http-error.entity.intf";

@@ -1,5 +1,3 @@
-"use strict";
-
 import { Location } from "@angular/common";
 import { StarkRoutingService, starkRoutingServiceName, StarkStateConfigWithParams } from "../../routing/services/index";
 import { StatesModule } from "@uirouter/angular";

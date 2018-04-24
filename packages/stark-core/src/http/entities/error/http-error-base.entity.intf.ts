@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkError } from "../../../common/index";
 
 export interface StarkHttpErrorBase extends StarkError {

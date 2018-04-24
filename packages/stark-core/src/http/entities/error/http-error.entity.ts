@@ -1,5 +1,3 @@
-"use strict";
-
 import { autoserializeAs, inheritSerialization } from "cerialize";
 import { StarkHttpErrorBaseImpl } from "./http-error-base.entity";
 import { StarkHttpError } from "./http-error.entity.intf";

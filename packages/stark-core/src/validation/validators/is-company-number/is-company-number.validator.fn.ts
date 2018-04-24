@@ -1,5 +1,3 @@
-"use strict";
-
 export const starkIsCompanyNumberValidatorName: string = "starkIsCompanyNumber";
 
 export function starkIsCompanyNumber(companyNumber: string): boolean {

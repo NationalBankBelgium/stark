@@ -1,5 +1,3 @@
-"use strict";
-
 import { GetAllUsersSuccess } from "../actions/index";
 import { StarkUser } from "../entities/index";
 import { userReducer } from "./user.reducer";
