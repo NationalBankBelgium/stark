@@ -1,5 +1,3 @@
-"use strict";
-
 import { Serialize } from "cerialize";
 import { StarkBackend, StarkHttpRequestType, StarkResource } from "../entities/index";
 import { StarkSerializable } from "../../serialization/index";

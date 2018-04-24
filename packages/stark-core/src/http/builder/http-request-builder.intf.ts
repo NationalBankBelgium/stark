@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkHttpCreateRequestBuilder } from "./http-create-request-builder.intf";
 import { StarkHttpDeleteRequestBuilder } from "./http-delete-request-builder.intf";
 import { StarkHttpGetRequestBuilder } from "./http-get-request-builder.intf";

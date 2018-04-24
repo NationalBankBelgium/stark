@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./http-error.entity.intf";
 export * from "./http-error.entity";
 export * from "./http-error-base.entity.intf";

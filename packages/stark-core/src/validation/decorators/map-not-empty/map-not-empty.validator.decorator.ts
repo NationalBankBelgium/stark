@@ -1,5 +1,3 @@
-"use strict";
-
 import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, registerDecorator, getFromContainer } from "class-validator";
 
 import { StarkValidatorImpl } from "../../validator";

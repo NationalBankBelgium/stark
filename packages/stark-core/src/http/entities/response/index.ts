@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./collection-response-wrapper.entity.intf";
 export * from "./collection-response-wrapper.entity";
 export * from "./http-raw-collection-response-data.intf";

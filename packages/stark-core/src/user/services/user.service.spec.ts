@@ -1,5 +1,3 @@
-"use strict";
-
 import Spy = jasmine.Spy;
 import createSpyObj = jasmine.createSpyObj;
 import { Store } from "@ngrx/store";

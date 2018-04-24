@@ -1,5 +1,3 @@
-"use strict";
-
 import uuid from "uuid";
 
 import { Serialize } from "cerialize";

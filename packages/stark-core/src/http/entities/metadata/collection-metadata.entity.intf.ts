@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkSortItem } from "./metadata-sort-item.entity.intf";
 import { StarkPaginationMetadata } from "./metadata-pagination.entity.intf";
 import { StarkETags } from "./metadata-etags.entity.intf";

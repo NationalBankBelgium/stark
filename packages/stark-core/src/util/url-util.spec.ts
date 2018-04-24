@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkUrlUtil } from "./url-util";
 
 describe("Util: UrlUtil", () => {

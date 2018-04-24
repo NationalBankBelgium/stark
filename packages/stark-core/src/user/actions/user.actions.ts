@@ -1,5 +1,3 @@
-"use strict";
-
 import { Action } from "@ngrx/store";
 import { StarkUser } from "../entities/index";
 import { StarkHttpErrorWrapper } from "../../http/entities/error/index";

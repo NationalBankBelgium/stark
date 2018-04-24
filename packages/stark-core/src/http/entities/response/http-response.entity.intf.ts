@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkHttpStatusCodes } from "../../enumerators/index";
 
 export interface StarkHttpResponse {

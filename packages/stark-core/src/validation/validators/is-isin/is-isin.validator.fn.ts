@@ -1,4 +1,3 @@
-"use strict";
 const _floor: Function = require("lodash/floor");
 
 export const starkIsISINValidatorName: string = "starkIsISIN";

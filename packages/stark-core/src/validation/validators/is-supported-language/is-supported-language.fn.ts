@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkLanguage } from "../../../configuration/entities/language/language.entity.intf";
 import { StarkLanguages } from "../../../configuration/entities/language/language.constants";
 

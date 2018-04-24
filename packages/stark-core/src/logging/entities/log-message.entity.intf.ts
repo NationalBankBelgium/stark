@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkLogMessageType } from "./log-message-type.entity";
 import { StarkError } from "../../common/index";
 

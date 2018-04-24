@@ -1,5 +1,3 @@
-"use strict";
-
 import { HttpResponse } from "@angular/common/http";
 import { StarkHttpRawCollectionResponseData, StarkHttpRequest, StarkResource } from "../entities/index";
 

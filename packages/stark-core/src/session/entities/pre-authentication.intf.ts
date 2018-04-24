@@ -1,5 +1,3 @@
-"use strict";
-
 export interface StarkPreAuthentication {
 	roleSeparator: string;
 	descriptionSeparator: string;

@@ -1,4 +1,3 @@
-"use strict";
 import { StarkLanguage } from "../../configuration/entities/language/index";
 import { StarkSortItem } from "../entities/index";
 

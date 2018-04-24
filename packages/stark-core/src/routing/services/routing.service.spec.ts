@@ -1,5 +1,3 @@
-"use strict";
-
 import { Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
 import { TestBed, fakeAsync, tick, inject } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";

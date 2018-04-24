@@ -1,5 +1,3 @@
-"use strict";
-
 import { createSelector, createFeatureSelector, MemoizedSelector } from "@ngrx/store";
 import { StarkSession } from "../entities/index";
 

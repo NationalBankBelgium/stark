@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkSerializable } from "../../serialization";
 
 export interface StarkHttpRequestParams {

@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkBackend } from "../../../http/entities/backend";
 import { InjectionToken } from "@angular/core";
 

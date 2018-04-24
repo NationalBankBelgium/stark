@@ -1,5 +1,3 @@
-"use strict";
-
 // solution proposed by @weichx for Maps having string keys
 // in this way the custom behavior for handling ES6 Maps is defined once instead of doing it every time a Map is used
 // See https://github.com/weichx/cerialize/issues/32

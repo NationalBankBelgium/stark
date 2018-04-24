@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Contains all the metadata related to the collection of items in a Collection response.
  */

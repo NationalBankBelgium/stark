@@ -1,5 +1,3 @@
-"use strict";
-
 import { IsNotEmpty, IsString, Matches } from "class-validator";
 import { autoserialize } from "cerialize";
 import { StarkLanguage } from "./language.entity.intf";

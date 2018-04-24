@@ -1,5 +1,3 @@
-"use strict";
-
 import { ArrayNotEmpty, IsDefined, IsNotEmpty, IsString, ValidateNested } from "class-validator";
 import { autoserialize } from "cerialize";
 

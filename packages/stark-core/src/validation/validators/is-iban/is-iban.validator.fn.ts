@@ -1,5 +1,3 @@
-"use strict";
-
 import { isValidIBAN, electronicFormatIBAN } from "ibantools";
 
 export const starkIsIBANValidatorName: string = "starkIsIBAN";

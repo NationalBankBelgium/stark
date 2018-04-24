@@ -1,5 +1,3 @@
-"use strict";
-
 import { deserialize } from "cerialize";
 import { StarkPaginationMetadata } from "./metadata-pagination.entity.intf";
 

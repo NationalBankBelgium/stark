@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Transition lifecycle hooks available in the router implementation
  * @link https://ui-router.github.io/ng1/docs/latest/interfaces/transition.ihookregistry.html

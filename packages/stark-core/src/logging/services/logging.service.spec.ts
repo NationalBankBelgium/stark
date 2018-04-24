@@ -1,5 +1,3 @@
-"use strict";
-
 import Spy = jasmine.Spy;
 import { Action, Store } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";

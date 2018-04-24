@@ -1,5 +1,3 @@
-"use strict";
-
 export interface StarkETags {
 	/**
 	 * For collection responses only.

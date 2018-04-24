@@ -1,5 +1,3 @@
-"use strict";
-
 export class StarkLogMessageType {
 	public static DEBUG: string = "DEBUG";
 	public static INFO: string = "INFO";

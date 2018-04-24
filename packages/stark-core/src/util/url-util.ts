@@ -1,5 +1,3 @@
-"use strict";
-
 export class StarkUrlUtil {
 	/**
 	 * Extracts all the expected parameters defined in the URL. These are defined by a placeholder like ":paramName".

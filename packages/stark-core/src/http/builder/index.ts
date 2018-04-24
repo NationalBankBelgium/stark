@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./http-abstract-base-request-builder.intf";
 export * from "./http-abstract-base-request-builder";
 export * from "./http-abstract-fetch-resource-request-builder.intf";

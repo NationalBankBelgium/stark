@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkHttpRequest, StarkResource } from "../entities/index";
 
 export interface StarkHttpBaseRequestBuilder<T extends StarkResource> {

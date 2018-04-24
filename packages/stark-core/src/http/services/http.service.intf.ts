@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkCollectionResponseWrapper, StarkHttpRequest, StarkResource, StarkSingleItemResponseWrapper } from "../entities";
 import { Observable } from "rxjs/Observable";
 import { HttpClient } from "@angular/common/http";

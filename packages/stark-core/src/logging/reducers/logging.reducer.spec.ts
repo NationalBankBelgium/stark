@@ -1,5 +1,3 @@
-"use strict";
-
 import { StarkLogging, StarkLogMessageImpl, StarkLogMessageType } from "../entities/index";
 import { loggingReducer } from "./logging.reducer";
 import { SetApplicationId, LogMessage, FlushLogMessages } from "../actions/index";

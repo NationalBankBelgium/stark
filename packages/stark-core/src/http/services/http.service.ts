@@ -1,5 +1,3 @@
-"use strict";
-
 const _cloneDeep: Function = require("lodash/cloneDeep");
 import { Deserialize, Serialize } from "cerialize";
 import { Observable } from "rxjs/Observable";

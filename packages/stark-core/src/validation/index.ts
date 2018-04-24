@@ -1,5 +1,3 @@
-"use strict";
-
 export * from "./decorators/index";
 export * from "./validators/index";
 
