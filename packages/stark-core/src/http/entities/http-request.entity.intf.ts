@@ -1,5 +1,5 @@
 import { StarkBackend } from "../entities/backend";
-import { StarkSortItem } from "./metadata/index";
+import { StarkSortItem } from "./metadata";
 import { StarkHttpRequestType } from "./http-request-type.entity";
 import { StarkResource } from "./resource.entity.intf";
 import { StarkHttpSerializer } from "../serializer";

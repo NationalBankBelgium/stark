@@ -1,4 +1,4 @@
-import { StarkRoutingService, StarkStateConfigWithParams } from "../services/index";
+import { StarkRoutingService, StarkStateConfigWithParams } from "../services";
 import { Observable } from "rxjs/Observable";
 import { HookFn, HookMatchCriteria, HookRegOptions, RawParams, StateDeclaration, StateObject, TransitionOptions } from "@uirouter/core";
 

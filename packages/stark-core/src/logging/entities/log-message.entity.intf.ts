@@ -1,5 +1,5 @@
 import { StarkLogMessageType } from "./log-message-type.entity";
-import { StarkError } from "../../common/index";
+import { StarkError } from "../../common";
 
 export interface StarkLogMessage {
 	timestamp: string;

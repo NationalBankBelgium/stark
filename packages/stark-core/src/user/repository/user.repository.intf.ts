@@ -1,6 +1,6 @@
 import { Observable } from "rxjs/Observable";
-import { StarkUser } from "../entities/index";
-import { StarkSingleItemResponseWrapper } from "../../http/entities/index";
+import { StarkUser } from "../entities";
+import { StarkSingleItemResponseWrapper } from "../../http/entities";
 
 export const starkUserRepositoryName: string = "StarkUserRepository";
 

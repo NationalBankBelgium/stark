@@ -2,7 +2,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, r
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkMapNotEmptyValidatorName } from "../../validators/map-not-empty/index";
+import { starkMapNotEmptyValidatorName } from "../../validators/map-not-empty";
 
 /**
  * StarkMapNotEmpty validator constraint

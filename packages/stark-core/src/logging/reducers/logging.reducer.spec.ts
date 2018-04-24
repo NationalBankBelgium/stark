@@ -1,6 +1,6 @@
-import { StarkLogging, StarkLogMessageImpl, StarkLogMessageType } from "../entities/index";
+import { StarkLogging, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
 import { loggingReducer } from "./logging.reducer";
-import { SetApplicationId, LogMessage, FlushLogMessages } from "../actions/index";
+import { SetApplicationId, LogMessage, FlushLogMessages } from "../actions";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 

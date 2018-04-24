@@ -1,5 +1,5 @@
 import { Observable } from "rxjs/Observable";
-import { StarkUser } from "../../user/entities/index";
+import { StarkUser } from "../../user/entities";
 
 export const starkSessionServiceName: string = "StarkSessionService";
 

@@ -28,20 +28,20 @@ import {
 	SessionTimeoutCountdownStop,
 	UserActivityTrackingPause,
 	UserActivityTrackingResume
-} from "../actions/index";
+} from "../actions";
 import { StarkSessionServiceImpl, starkUnauthenticatedUserError } from "./session.service";
-import { StarkPreAuthentication, StarkSession } from "../entities/index";
-import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../configuration/entities/application/index";
-import { StarkUser } from "../../user/entities/index";
-import { StarkLoggingService } from "../../logging/services/index";
-import { MockStarkLoggingService } from "../../logging/testing/index";
-import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services/index";
-import { MockStarkRoutingService } from "../../routing/testing/index";
-import { StarkHttpHeaders } from "../../http/constants/index";
+import { StarkPreAuthentication, StarkSession } from "../entities";
+import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../configuration/entities/application";
+import { StarkUser } from "../../user/entities";
+import { StarkLoggingService } from "../../logging/services";
+import { MockStarkLoggingService } from "../../logging/testing";
+import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
+import { MockStarkRoutingService } from "../../routing/testing";
+import { StarkHttpHeaders } from "../../http/constants";
 // import { StarkXSRFService } from "../../xsrf";
 import Spy = jasmine.Spy;
-import { starkSessionExpiredStateName } from "../../common/routes/index";
-import { StarkCoreApplicationState } from "../../common/store/index";
+import { starkSessionExpiredStateName } from "../../common/routes";
+import { StarkCoreApplicationState } from "../../common/store";
 
 describe("Service: StarkSessionService", () => {
 	let mockStore: Store<StarkCoreApplicationState>;

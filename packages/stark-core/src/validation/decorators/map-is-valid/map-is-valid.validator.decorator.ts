@@ -6,7 +6,7 @@ import {
 	ValidationError,
 	validateSync
 } from "class-validator";
-import { StarkValidationErrorsUtil } from "../../../util/index";
+import { StarkValidationErrorsUtil } from "../../../util";
 
 export const starkMapIsValidValidatorName: string = "starkMapIsValid";
 

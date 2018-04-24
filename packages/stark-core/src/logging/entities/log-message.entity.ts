@@ -2,7 +2,7 @@ import moment from "moment";
 import { serialize, serializeAs } from "cerialize";
 import { StarkLogMessageType } from "./log-message-type.entity";
 import { StarkLogMessage } from "./log-message.entity.intf";
-import { StarkError, StarkErrorImpl } from "../../common/index";
+import { StarkError, StarkErrorImpl } from "../../common";
 
 export class StarkLogMessageImpl implements StarkLogMessage {
 	@serialize public timestamp: string;

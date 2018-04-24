@@ -1,1 +1,0 @@
-export { StarkCoreApplicationState } from "./starkCoreApplicationState";

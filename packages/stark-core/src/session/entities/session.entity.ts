@@ -1,4 +1,4 @@
-import { StarkUser } from "../../user/entities/index";
+import { StarkUser } from "../../user/entities";
 import { StarkSession } from "./session.entity.intf";
 
 export class StarkSessionImpl implements StarkSession {

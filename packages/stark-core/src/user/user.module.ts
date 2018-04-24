@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { StarkUserServiceImpl, starkUserServiceName } from "./services/index";
+import { StarkUserServiceImpl, starkUserServiceName } from "./services";
 
 @NgModule({
 	imports: [],

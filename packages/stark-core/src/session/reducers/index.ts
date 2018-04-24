@@ -1,7 +1,5 @@
 import { createSelector, createFeatureSelector, MemoizedSelector } from "@ngrx/store";
-import { StarkSession } from "../entities/index";
-
-export { sessionReducer, starkSessionStoreKey } from "./session.reducer";
+import { StarkSession } from "../entities";
 
 export interface StarkSessionState {
 	session: StarkSession;

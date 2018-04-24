@@ -1,4 +1,4 @@
-import { StarkHttpErrorDetail } from "../error/index";
+import { StarkHttpErrorDetail } from "../error";
 
 export interface StarkWarnings {
 	/**

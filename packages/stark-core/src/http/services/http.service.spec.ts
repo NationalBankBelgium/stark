@@ -28,15 +28,15 @@ import {
 	StarkSingleItemMetadataImpl,
 	StarkSingleItemResponseWrapper,
 	StarkSortItemImpl
-} from "../entities/index";
+} from "../entities";
 
-import { StarkHttpHeaders, StarkSortOrder } from "../constants/index";
-import { StarkHttpStatusCodes } from "../enumerators/index";
-import { StarkLoggingService } from "../../logging/index";
-import { MockStarkLoggingService } from "../../logging/testing/index";
-import { MockStarkSessionService } from "../../session/testing/index";
-import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
-import { StarkSessionService } from "../../session/index";
+import { StarkHttpHeaders, StarkSortOrder } from "../constants";
+import { StarkHttpStatusCodes } from "../enumerators";
+import { StarkLoggingService } from "../../logging";
+import { MockStarkLoggingService } from "../../logging/testing";
+import { MockStarkSessionService } from "../../session/testing";
+import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
+import { StarkSessionService } from "../../session";
 
 describe("Service: StarkHttpService", () => {
 	let loggerMock: StarkLoggingService;

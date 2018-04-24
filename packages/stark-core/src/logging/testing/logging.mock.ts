@@ -1,4 +1,4 @@
-import { StarkLoggingService } from "../";
+import { StarkLoggingService } from "../services";
 
 export class MockStarkLoggingService implements StarkLoggingService {
 	public correlationId: string;

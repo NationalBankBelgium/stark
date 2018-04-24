@@ -1,5 +1,5 @@
-import { StarkSessionActionTypes, StarkSessionActions } from "../actions/index";
-import { StarkSession, StarkSessionImpl } from "../entities/index";
+import { StarkSessionActionTypes, StarkSessionActions } from "../actions";
+import { StarkSession, StarkSessionImpl } from "../entities";
 
 export const starkSessionStoreKey: string = "starkSession";
 

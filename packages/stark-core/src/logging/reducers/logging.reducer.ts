@@ -1,5 +1,5 @@
-import { StarkLoggingActions, StarkLoggingActionTypes } from "../actions/index";
-import { StarkLogging, StarkLogMessage } from "../entities/index";
+import { StarkLoggingActions, StarkLoggingActionTypes } from "../actions";
+import { StarkLogging, StarkLogMessage } from "../entities";
 
 export const starkLoggingStoreKey: string = "starkLogging";
 

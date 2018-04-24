@@ -3,7 +3,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { StarkHttpError } from "./http-error.entity.intf";
 import { StarkHttpErrorImpl } from "./http-error.entity";
 import { StarkHttpErrorWrapper } from "./http-error-wrapper.entity.intf";
-import { StarkHttpStatusCodes } from "../../enumerators/index";
+import { StarkHttpStatusCodes } from "../../enumerators";
 
 export class StarkHttpErrorWrapperImpl implements StarkHttpErrorWrapper {
 	/** @internal */

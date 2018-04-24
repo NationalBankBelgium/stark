@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
-import { StarkHttpServiceImpl, starkHttpServiceName } from "./services/index";
-import { StarkLoggingService, starkLoggingServiceName } from "../logging/index";
+import { StarkHttpServiceImpl, starkHttpServiceName } from "./services";
+import { StarkLoggingService, starkLoggingServiceName } from "../logging";
 
 // FIXME: remove this factory once LoggingService and SessionService are implemented
 export function starkHttpServiceFactory(httpClient: HttpClient, starkLoggingService: StarkLoggingService): StarkHttpServiceImpl<any> {

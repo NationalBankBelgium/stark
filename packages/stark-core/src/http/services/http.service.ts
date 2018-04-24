@@ -15,7 +15,7 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from "@angul
 
 import { StarkHttpService, starkHttpServiceName } from "./http.service.intf";
 
-import { StarkHttpHeaders } from "../constants/index";
+import { StarkHttpHeaders } from "../constants";
 import {
 	StarkCollectionMetadataImpl,
 	StarkCollectionResponseWrapper,
@@ -27,9 +27,9 @@ import {
 	StarkResource,
 	StarkSingleItemResponseWrapper,
 	StarkSingleItemResponseWrapperImpl
-} from "../entities/index";
-import { StarkLoggingService } from "../../logging/index";
-import { StarkSessionService } from "../../session/index";
+} from "../entities";
+import { StarkLoggingService } from "../../logging";
+import { StarkSessionService } from "../../session";
 
 /**
  * @ngdoc service

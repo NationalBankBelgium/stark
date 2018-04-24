@@ -1,5 +1,5 @@
-import { StarkLanguage } from "../../configuration/entities/language/index";
-import { StarkSortItem } from "../entities/index";
+import { StarkLanguage } from "../../configuration/entities/language";
+import { StarkSortItem } from "../entities";
 
 export interface StarkHttpFetchResourceRequestBuilder {
 	/**

@@ -22,11 +22,11 @@ import {
 	StarkHttpRequestType,
 	StarkResource,
 	StarkSortItemImpl
-} from "../entities/index";
-import { StarkLanguages } from "../../configuration/entities/index";
-import { stringMap } from "../../serialization/index";
-import { StarkHttpEchoType, StarkHttpHeaders, StarkHttpQueryParameters, StarkSortOrder } from "../constants/index";
-import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
+} from "../entities";
+import { StarkLanguages } from "../../configuration/entities";
+import { stringMap } from "../../serialization";
+import { StarkHttpEchoType, StarkHttpHeaders, StarkHttpQueryParameters, StarkSortOrder } from "../constants";
+import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import { StarkHttpRequestParams } from "./http-request-parameters.intf";
 
 const deepFreeze: Function = require("deep-freeze-strict");

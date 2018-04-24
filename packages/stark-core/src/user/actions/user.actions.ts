@@ -1,6 +1,6 @@
 import { Action } from "@ngrx/store";
-import { StarkUser } from "../entities/index";
-import { StarkHttpErrorWrapper } from "../../http/entities/error/index";
+import { StarkUser } from "../entities";
+import { StarkHttpErrorWrapper } from "../../http/entities/error";
 
 export enum StarkUserActionTypes {
 	FETCH_USER_PROFILE = "GET_USER",

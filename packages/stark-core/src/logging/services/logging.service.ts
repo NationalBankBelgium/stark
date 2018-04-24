@@ -10,17 +10,17 @@ import { Subject } from "rxjs/Subject";
 import { Inject, Injectable } from "@angular/core";
 
 import { StarkLoggingService, starkLoggingServiceName } from "./logging.service.intf";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/index";
-import { StarkBackend } from "../../http/entities/backend/index";
-import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
-import { StarkHttpStatusCodes } from "../../http/enumerators/index";
-import { StarkHttpHeaders } from "../../http/constants/index";
+import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities";
+import { StarkBackend } from "../../http/entities/backend";
+import { StarkCoreApplicationState } from "../../common/store/stark-core-application-state";
+import { StarkHttpStatusCodes } from "../../http/enumerators";
+import { StarkHttpHeaders } from "../../http/constants";
 // import {StarkXSRFService, starkXSRFServiceName} from "../../xsrf";
 import { StarkValidationErrorsUtil } from "../../util/validation-errors.util";
-import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities/index";
-import { LogMessage, FlushLogMessages } from "../actions/index";
-import { selectStarkLogging } from "../reducers/index";
-import { StarkError, StarkErrorImpl } from "../../common/index";
+import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
+import { LogMessage, FlushLogMessages } from "../actions";
+import { selectStarkLogging } from "../reducers";
+import { StarkError, StarkErrorImpl } from "../../common";
 
 const _noop: Function = require("lodash/noop");
 

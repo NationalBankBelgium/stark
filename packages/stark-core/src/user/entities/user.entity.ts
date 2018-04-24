@@ -1,9 +1,9 @@
 import { autoserialize } from "cerialize";
 import { StarkUserProfile } from "./user-profile.entity.intf";
 import { StarkUserSecurityProfile } from "./user-security-profile.entity.intf";
-import { StarkResource } from "../../http/entities/index";
+import { StarkResource } from "../../http/entities";
 import { IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf } from "class-validator";
-import { StarkValidationMethodsUtil } from "../../util/validation-methods.util";
+import { StarkValidationMethodsUtil } from "../../util";
 
 export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, StarkResource {
 	@IsDefined()

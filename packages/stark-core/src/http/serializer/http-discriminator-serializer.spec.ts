@@ -1,6 +1,6 @@
 import { StarkHttpDiscriminatorSerializer } from "./http-discriminator-serializer";
 import { autoserialize, inheritSerialization } from "cerialize";
-import { StarkSerializable } from "../../serialization/index";
+import { StarkSerializable } from "../../serialization";
 
 class Shape {
 	@autoserialize public uuid: string = "mock-uuid";

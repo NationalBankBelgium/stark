@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { StarkLogMessage } from "../entities/index";
+import { StarkLogMessage } from "../entities";
 
 /**
  * Actions related to stark logging service
