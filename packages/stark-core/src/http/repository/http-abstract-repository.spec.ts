@@ -8,13 +8,13 @@ import {
 	StarkHttpRequestType,
 	StarkResource,
 	StarkSingleItemResponseWrapper
-} from "../entities/index";
+} from "../entities";
 import { StarkHttpService } from "../services/http.service.intf";
-import { MockStarkHttpService } from "../testing/index";
-import { MockStarkLoggingService } from "../../logging/testing/index";
-import { StarkLoggingService } from "../../logging/index";
-import { StarkHttpRequestBuilderImpl } from "../builder/index";
-import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
+import { MockStarkHttpService } from "../testing";
+import { MockStarkLoggingService } from "../../logging/testing";
+import { StarkLoggingService } from "../../logging";
+import { StarkHttpRequestBuilderImpl } from "../builder";
+import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 

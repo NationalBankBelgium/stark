@@ -12,12 +12,12 @@ import { map } from "rxjs/operators/map";
 import { defer } from "rxjs/observable/defer";
 import { validateSync } from "class-validator";
 
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services/index";
+import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
 import { StarkSessionService, starkSessionServiceName } from "./session.service.intf";
-import { StarkRoutingService, starkRoutingServiceName, StarkRoutingTransitionHook } from "../../routing/services/index";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/index";
-import { StarkPreAuthentication, StarkSession } from "../entities/index";
-import { StarkUser } from "../../user/entities/index";
+import { StarkRoutingService, starkRoutingServiceName, StarkRoutingTransitionHook } from "../../routing/services";
+import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities";
+import { StarkPreAuthentication, StarkSession } from "../entities";
+import { StarkUser } from "../../user/entities";
 import {
 	DestroySession,
 	InitializeSession,
@@ -32,13 +32,13 @@ import {
 	UserActivityTrackingResume,
 	SessionLogout,
 	SessionTimeoutCountdownStart
-} from "../actions/index";
-import { StarkHttpStatusCodes } from "../../http/enumerators/index";
-import { StarkHttpHeaders } from "../../http/constants/index";
-import { StarkValidationErrorsUtil } from "../../util/index";
-import { starkSessionExpiredStateName } from "../../common/routes/index";
-import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
-import { selectStarkSession } from "../reducers/index";
+} from "../actions";
+import { StarkHttpStatusCodes } from "../../http/enumerators";
+import { StarkHttpHeaders } from "../../http/constants";
+import { StarkValidationErrorsUtil } from "../../util";
+import { starkSessionExpiredStateName } from "../../common/routes";
+import { StarkCoreApplicationState } from "../../common/store/stark-core-application-state";
+import { selectStarkSession } from "../reducers";
 // import { StarkXSRFService, starkXSRFServiceName } from "../../xsrf/";
 
 export const starkUnauthenticatedUserError: string = "StarkSessionService => user not authenticated";

@@ -15,14 +15,14 @@ import {
 	FetchUserProfileSuccess,
 	FetchUserProfileFailure,
 	SetUser
-} from "../actions/index";
-import { StarkUser } from "../entities/index";
+} from "../actions";
+import { StarkUser } from "../entities";
 import { StarkUserService } from "./user.service.intf";
 import { StarkUserServiceImpl } from "./user.service";
 import { StarkLoggingService } from "../../logging/services/logging.service.intf";
-import { MockStarkLoggingService } from "../../logging/testing/index";
-import { MockStarkSessionService } from "../../session/testing/index";
-import { StarkUserRepository } from "../repository/index";
+import { MockStarkLoggingService } from "../../logging/testing";
+import { MockStarkSessionService } from "../../session/testing";
+import { StarkUserRepository } from "../repository";
 import {
 	StarkHttpError,
 	StarkHttpErrorWrapper,
@@ -30,12 +30,12 @@ import {
 	StarkSingleItemResponseWrapper,
 	StarkSingleItemResponseWrapperImpl
 } from "../../http/entities";
-import { StarkHttpStatusCodes } from "../../http/enumerators/index";
-import { StarkSessionService } from "../../session/services/index";
+import { StarkHttpStatusCodes } from "../../http/enumerators";
+import { StarkSessionService } from "../../session/services";
 import { HttpErrorResponse } from "@angular/common/http";
 import { StarkHttpErrorImpl } from "../../http";
-import { StarkMockData } from "../../configuration/entities/mock-data/index";
-import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
+import { StarkMockData } from "../../configuration/entities/mock-data";
+import { StarkCoreApplicationState } from "../../common/store/stark-core-application-state";
 
 interface StarkUserWithCustomData extends Pick<StarkUser, "uuid" | "username" | "roles"> {
 	[prop: string]: any;

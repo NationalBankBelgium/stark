@@ -1,7 +1,7 @@
-import { StarkSession } from "../entities/index";
-import { StarkUser } from "../../user/entities/index";
+import { StarkSession } from "../entities";
+import { StarkUser } from "../../user/entities";
 import { sessionReducer } from "./session.reducer";
-import { ChangeLanguageSuccess, DestroySession, InitializeSession } from "../actions/index";
+import { ChangeLanguageSuccess, DestroySession, InitializeSession } from "../actions";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 

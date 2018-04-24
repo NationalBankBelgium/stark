@@ -9,7 +9,7 @@ import {
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkIsNINValidatorName } from "../../validators/is-nin/index";
+import { starkIsNINValidatorName } from "../../validators/is-nin";
 
 /**
  * StarkIsNIN validator constraint

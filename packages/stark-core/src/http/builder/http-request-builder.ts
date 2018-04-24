@@ -1,7 +1,7 @@
 import { Serialize } from "cerialize";
-import { StarkBackend, StarkHttpRequestType, StarkResource } from "../entities/index";
-import { StarkSerializable } from "../../serialization/index";
-import { StarkHttpEchoType, StarkHttpHeaders } from "../constants/index";
+import { StarkBackend, StarkHttpRequestType, StarkResource } from "../entities";
+import { StarkSerializable } from "../../serialization";
+import { StarkHttpEchoType, StarkHttpHeaders } from "../constants";
 import { StarkHttpRequestBuilder } from "./http-request-builder.intf";
 import { StarkHttpCreateRequestBuilder } from "./http-create-request-builder.intf";
 import { StarkHttpDeleteRequestBuilder } from "./http-delete-request-builder.intf";
@@ -19,7 +19,7 @@ import {
 	StarkHttpUpdateRequestParams
 } from "./http-request-parameters.intf";
 import { StarkUrlUtil } from "../../util/url-util";
-import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
+import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
 import { StarkAbstractHttpBaseRequestBuilder } from "./http-abstract-base-request-builder";
 import { StarkAbstractHttpFetchResourceRequestBuilder } from "./http-abstract-fetch-resource-request-builder";

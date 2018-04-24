@@ -1,5 +1,5 @@
-import { StarkUserActions, StarkUserActionTypes } from "../actions/index";
-import { StarkUser } from "../entities/index";
+import { StarkUserActions, StarkUserActionTypes } from "../actions";
+import { StarkUser } from "../entities";
 
 export const starkUserStoreKey: string = "starkUser";
 

@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { StarkUser } from "../../user/entities/index";
+import { StarkUser } from "../../user/entities";
 
 export enum StarkSessionActionTypes {
 	CHANGE_LANGUAGE = "CHANGE_LANGUAGE",

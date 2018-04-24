@@ -1,4 +1,4 @@
-import { StarkUser } from "../../user/entities/index";
+import { StarkUser } from "../../user/entities";
 
 export interface StarkSession {
 	/**

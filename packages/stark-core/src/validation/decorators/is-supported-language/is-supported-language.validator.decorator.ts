@@ -2,7 +2,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationOptions, r
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkIsSupportedLanguageValidatorName } from "../../validators/is-supported-language/index";
+import { starkIsSupportedLanguageValidatorName } from "../../validators/is-supported-language";
 
 /**
  * StarkIsSupportedLanguage validator constraint

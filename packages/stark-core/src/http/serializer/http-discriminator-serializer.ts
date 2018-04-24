@@ -1,6 +1,6 @@
 import { StarkHttpSerializerImpl } from "./http-serializer";
-import { StarkResource } from "../entities/index";
-import { StarkSerializable } from "../../serialization/index";
+import { StarkResource } from "../entities";
+import { StarkSerializable } from "../../serialization";
 
 /**
  * Implementation of {@link StarkHttpSerializer}.

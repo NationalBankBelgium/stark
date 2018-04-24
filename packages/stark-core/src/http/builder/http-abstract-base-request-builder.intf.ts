@@ -1,4 +1,4 @@
-import { StarkHttpRequest, StarkResource } from "../entities/index";
+import { StarkHttpRequest, StarkResource } from "../entities";
 
 export interface StarkHttpBaseRequestBuilder<T extends StarkResource> {
 	/**

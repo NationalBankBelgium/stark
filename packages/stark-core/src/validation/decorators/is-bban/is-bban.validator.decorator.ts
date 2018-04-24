@@ -9,7 +9,7 @@ import {
 
 import { StarkValidatorImpl } from "../../validator";
 import { StarkValidator } from "../../validator.intf";
-import { starkIsBBANValidatorName } from "../../validators/is-bban/index";
+import { starkIsBBANValidatorName } from "../../validators/is-bban";
 
 /**
  * StarkIsBBAN validator constraint

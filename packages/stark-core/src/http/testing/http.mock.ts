@@ -1,5 +1,5 @@
-import { StarkHttpService } from "../services/index";
-import { StarkHttpRequest, StarkSingleItemResponseWrapper, StarkCollectionResponseWrapper } from "../entities/index";
+import { StarkHttpService } from "../services";
+import { StarkHttpRequest, StarkSingleItemResponseWrapper, StarkCollectionResponseWrapper } from "../entities";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 

@@ -5,13 +5,13 @@ import { of } from "rxjs/observable/of";
 import { _throw as observableThrow } from "rxjs/observable/throw";
 import { Serialize } from "cerialize";
 
-import { StarkLoggingActionTypes, FlushLogMessages } from "../../logging/actions/index";
+import { StarkLoggingActionTypes, FlushLogMessages } from "../../logging/actions";
 import { StarkLoggingServiceImpl } from "./logging.service";
-import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../configuration/entities/index";
-import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../../logging/entities/index";
+import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../configuration/entities";
+import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../../logging/entities";
 import { StarkBackend } from "../../http/entities/backend";
-import { StarkCoreApplicationState } from "../../common/store/starkCoreApplicationState";
-import { StarkError, StarkErrorImpl } from "../../common/index";
+import { StarkCoreApplicationState } from "../../common/store/stark-core-application-state";
+import { StarkError, StarkErrorImpl } from "../../common";
 // import {StarkXSRFService} from "../../xsrf";
 // import {UnitTestingUtils} from "../../test/unit-testing";
 

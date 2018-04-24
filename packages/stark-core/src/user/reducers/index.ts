@@ -1,7 +1,6 @@
 import { createSelector, createFeatureSelector, MemoizedSelector } from "@ngrx/store";
-import { StarkUser } from "../../user/entities/index";
-import { StarkSessionState } from "../../session/reducers/index";
-export * from "./user.reducer";
+import { StarkUser } from "../../user/entities";
+import { StarkSessionState } from "../../session/reducers";
 
 export const selectStarkUser: MemoizedSelector<object, StarkUser | undefined> = createSelector(
 	createFeatureSelector<StarkSessionState>("StarkUser"),

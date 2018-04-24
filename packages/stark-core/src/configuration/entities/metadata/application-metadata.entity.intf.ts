@@ -1,4 +1,4 @@
-import { StarkLanguage } from "../language/index";
+import { StarkLanguage } from "../language";
 import { InjectionToken } from "@angular/core";
 
 export const STARK_APP_METADATA: InjectionToken<StarkApplicationMetadata> = new InjectionToken<StarkApplicationMetadata>(

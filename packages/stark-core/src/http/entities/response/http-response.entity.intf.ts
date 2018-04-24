@@ -1,4 +1,4 @@
-import { StarkHttpStatusCodes } from "../../enumerators/index";
+import { StarkHttpStatusCodes } from "../../enumerators";
 
 export interface StarkHttpResponse {
 	starkHttpStatusCode: StarkHttpStatusCodes;

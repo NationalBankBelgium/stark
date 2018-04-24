@@ -1,7 +1,5 @@
 import { createSelector, createFeatureSelector, MemoizedSelector } from "@ngrx/store";
-import { StarkLogging } from "../entities/index";
-
-export { loggingReducer, starkLoggingStoreKey } from "./logging.reducer";
+import { StarkLogging } from "../entities";
 
 export interface StarkLoggingState {
 	logging: StarkLogging;

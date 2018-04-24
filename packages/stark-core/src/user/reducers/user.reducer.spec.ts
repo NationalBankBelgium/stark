@@ -1,5 +1,5 @@
-import { GetAllUsersSuccess } from "../actions/index";
-import { StarkUser } from "../entities/index";
+import { GetAllUsersSuccess } from "../actions";
+import { StarkUser } from "../entities";
 import { userReducer } from "./user.reducer";
 
 const deepFreeze: Function = require("deep-freeze-strict");

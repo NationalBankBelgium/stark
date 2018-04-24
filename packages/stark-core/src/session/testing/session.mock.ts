@@ -1,5 +1,5 @@
-import { StarkHttpHeaders } from "../../http/index";
-import { StarkSessionService } from "../services/index";
+import { StarkHttpHeaders } from "../../http";
+import { StarkSessionService } from "../services";
 import { Observable } from "rxjs/Observable";
 
 export class MockStarkSessionService implements StarkSessionService {

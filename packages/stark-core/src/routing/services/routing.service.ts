@@ -4,7 +4,7 @@ import { fromPromise } from "rxjs/observable/fromPromise";
 import { empty } from "rxjs/observable/empty";
 import { Inject, Injectable } from "@angular/core";
 
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services/index";
+import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
 import { StarkRoutingService, starkRoutingServiceName } from "./routing.service.intf";
 import {
 	Navigate,
@@ -15,11 +15,11 @@ import {
 	Reload,
 	ReloadSuccess,
 	ReloadFailure
-} from "../actions/index";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/index";
+} from "../actions";
+import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
-import { StarkCoreApplicationState } from "../../common/store/index";
+import { StarkCoreApplicationState } from "../../common/store";
 import {
 	HookFn,
 	HookMatchCriteria,

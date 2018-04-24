@@ -6,8 +6,8 @@ import { map } from "rxjs/operators/map";
 import { catchError } from "rxjs/operators/catchError";
 import { _throw as observableThrow } from "rxjs/observable/throw";
 
-import { StarkHttpErrorWrapper, StarkSingleItemResponseWrapper } from "../../http/entities/index";
-import { StarkUser } from "../../user/entities/index";
+import { StarkHttpErrorWrapper, StarkSingleItemResponseWrapper } from "../../http/entities";
+import { StarkUser } from "../../user/entities";
 import {
 	FetchUserProfile,
 	FetchUserProfileSuccess,
@@ -16,15 +16,15 @@ import {
 	GetAllUsers,
 	GetAllUsersSuccess,
 	GetAllUsersFailure
-} from "../actions/index";
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services/index";
-import { StarkSessionService, starkSessionServiceName } from "../../session/services/index";
+} from "../actions";
+import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
+import { StarkSessionService, starkSessionServiceName } from "../../session/services";
 import { StarkUserService, starkUserServiceName } from "./user.service.intf";
-import { StarkUserRepository, starkUserRepositoryName } from "../repository/index";
-import { STARK_MOCK_DATA, StarkMockData } from "../../configuration/entities/mock-data/index";
-import { StarkCoreApplicationState } from "../../common/store/index";
-import { StarkValidationErrorsUtil } from "../../util/index";
-import { selectStarkUser } from "../reducers/index";
+import { StarkUserRepository, starkUserRepositoryName } from "../repository";
+import { STARK_MOCK_DATA, StarkMockData } from "../../configuration/entities/mock-data";
+import { StarkCoreApplicationState } from "../../common/store";
+import { StarkValidationErrorsUtil } from "../../util";
+import { selectStarkUser } from "../reducers";
 
 const userErrorMessagePrefix: string = starkUserServiceName + ": User defined is incorrect.";
 

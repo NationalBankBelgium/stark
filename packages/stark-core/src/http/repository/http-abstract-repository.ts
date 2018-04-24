@@ -1,6 +1,6 @@
 import { Observable } from "rxjs/Observable";
 import { StarkBackend } from "../entities/backend";
-import { StarkCollectionResponseWrapper, StarkResource, StarkSingleItemResponseWrapper } from "../entities/index";
+import { StarkCollectionResponseWrapper, StarkResource, StarkSingleItemResponseWrapper } from "../entities";
 import {
 	StarkHttpCreateRequestParams,
 	StarkHttpDeleteRequestParams,
@@ -10,11 +10,11 @@ import {
 	StarkHttpRequestBuilderImpl,
 	StarkHttpSearchRequestParams,
 	StarkHttpUpdateRequestParams
-} from "../builder/index";
+} from "../builder";
 import { StarkHttpService } from "../services/http.service.intf";
-import { StarkLoggingService } from "../../logging/index";
-import { StarkSerializable } from "../../serialization/index";
-import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer/index";
+import { StarkLoggingService } from "../../logging";
+import { StarkSerializable } from "../../serialization";
+import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 
 export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 	protected starkHttpService: StarkHttpService<T>;

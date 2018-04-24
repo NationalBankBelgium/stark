@@ -1,4 +1,4 @@
-import { StarkError } from "../../../common/index";
+import { StarkError } from "../../../common";
 
 export interface StarkHttpErrorBase extends StarkError {
 	type: string;

@@ -1,6 +1,6 @@
-import { StarkLanguage } from "../../configuration/entities/language/index";
-import { StarkSortItem } from "../entities/metadata/index";
-import { StarkHttpHeaders, StarkHttpQueryParameters } from "../constants/index";
+import { StarkLanguage } from "../../configuration/entities/language";
+import { StarkSortItem } from "../entities/metadata";
+import { StarkHttpHeaders, StarkHttpQueryParameters } from "../constants";
 import { StarkHttpFetchResourceRequestBuilder } from "./http-abstract-fetch-resource-request-builder.intf";
 import { StarkAbstractHttpBaseRequestBuilder } from "./http-abstract-base-request-builder";
 import { StarkResource } from "../entities/resource.entity.intf";

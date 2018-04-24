@@ -1,4 +1,4 @@
-import { StarkHttpRequest, StarkResource } from "../entities/index";
+import { StarkHttpRequest, StarkResource } from "../entities";
 import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
 import { StarkUrlUtil } from "../../util/url-util";
 

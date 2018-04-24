@@ -1,7 +1,7 @@
 import { Deserialize, Serialize } from "cerialize";
 import { StarkHttpSerializer } from "./http-serializer.intf";
-import { StarkResource } from "../entities/index";
-import { StarkSerializable } from "../../serialization/index";
+import { StarkResource } from "../entities";
+import { StarkSerializable } from "../../serialization";
 
 /**
  * Implementation of {@link StarkHttpSerializer} which uses the cerialize library behind the hoods.

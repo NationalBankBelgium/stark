@@ -1,13 +1,13 @@
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { StarkSerializable } from "../../serialization/index";
-import { StarkUser } from "../entities/index";
-import { StarkHttpRequest, StarkSingleItemResponseWrapper } from "../../http/entities/index";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/application/index";
+import { StarkSerializable } from "../../serialization";
+import { StarkUser } from "../entities";
+import { StarkHttpRequest, StarkSingleItemResponseWrapper } from "../../http/entities";
+import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/application";
 import { StarkUserRepository } from "./user.repository.intf";
 import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services/logging.service.intf";
-import { StarkHttpService, starkHttpServiceName } from "../../http/services/index";
-import { AbstractStarkHttpRepository } from "../../http/repository/index";
+import { StarkHttpService, starkHttpServiceName } from "../../http/services";
+import { AbstractStarkHttpRepository } from "../../http/repository";
 
 /**
  * @ngdoc service
