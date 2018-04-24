@@ -2,8 +2,10 @@ import { Observable } from "rxjs/Observable";
 import { HookFn, HookMatchCriteria, HookRegOptions, RawParams, StateDeclaration, StateObject, TransitionOptions } from "@uirouter/core";
 
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
+import { InjectionToken } from "@angular/core";
 
 export const starkRoutingServiceName: string = "StarkRoutingService";
+export const STARK_ROUTING_SERVICE: InjectionToken<StarkRoutingService> = new InjectionToken<StarkRoutingService>(starkRoutingServiceName);
 
 /**
  * Stark Routing Service.

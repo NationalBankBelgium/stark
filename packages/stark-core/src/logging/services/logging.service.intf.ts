@@ -1,6 +1,8 @@
+import { InjectionToken } from "@angular/core";
 import { StarkError } from "../../common";
 
 export const starkLoggingServiceName: string = "StarkLoggingService";
+export const STARK_LOGGING_SERVICE: InjectionToken<StarkLoggingService> = new InjectionToken<StarkLoggingService>(starkLoggingServiceName);
 
 /**
  * Stark Logging Service.

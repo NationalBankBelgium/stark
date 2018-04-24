@@ -1,1 +1,1 @@
-export * from "./configuration/entities"
+export * from "./configuration/entities";

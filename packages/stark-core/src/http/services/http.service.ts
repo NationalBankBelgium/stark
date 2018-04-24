@@ -10,7 +10,7 @@ import { catchError } from "rxjs/operators/catchError";
 import { map } from "rxjs/operators/map";
 import { retryWhen } from "rxjs/operators/retryWhen";
 import { mergeMap } from "rxjs/operators/mergeMap";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from "@angular/common/http";
 
 import { StarkHttpService, starkHttpServiceName } from "./http.service.intf";
@@ -28,8 +28,8 @@ import {
 	StarkSingleItemResponseWrapper,
 	StarkSingleItemResponseWrapperImpl
 } from "../entities";
-import { StarkLoggingService } from "../../logging";
-import { StarkSessionService } from "../../session";
+import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging";
+import { StarkSessionService, STARK_SESSION_SERVICE } from "../../session";
 
 /**
  * @ngdoc service
@@ -44,15 +44,11 @@ import { StarkSessionService } from "../../session";
 export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpService<P> {
 	protected retryDelay: number = 1000;
 
-	private logger: StarkLoggingService;
-	private sessionService: StarkSessionService;
-	private httpClient: HttpClient;
-
 	// FIXME: uncomment these lines once LoggingService and SessionService are implemented
 	public constructor(
-		/*@Inject(starkLoggingServiceName)*/ logger: StarkLoggingService,
-		/*@Inject(starkSessionServiceName)*/ sessionService: StarkSessionService,
-		httpClient: HttpClient
+		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
+		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
+		private httpClient: HttpClient
 	) {
 		this.logger = logger;
 		this.sessionService = sessionService;

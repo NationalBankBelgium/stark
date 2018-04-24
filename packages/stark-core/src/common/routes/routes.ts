@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { StarkRoutingService, starkRoutingServiceName, StarkStateConfigWithParams } from "../../routing/services";
+import { StarkRoutingService, STARK_ROUTING_SERVICE, StarkStateConfigWithParams } from "../../routing/services";
 import { StatesModule } from "@uirouter/angular";
 
 export const starkAppInitStateName: string = "starkAppInit";
@@ -26,7 +26,7 @@ export const starkCoreRouteConfig: StatesModule = <any>{
 			resolve: {
 				targetRoute: [
 					"$location",
-					starkRoutingServiceName,
+					STARK_ROUTING_SERVICE,
 					($location: Location, routingService: StarkRoutingService) => {
 						// get the path of the current URL in the browser's navigation bar
 						const targetUrlPath: string = $location.path();

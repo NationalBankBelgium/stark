@@ -17,8 +17,8 @@ import {
 	GetAllUsersSuccess,
 	GetAllUsersFailure
 } from "../actions";
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
-import { StarkSessionService, starkSessionServiceName } from "../../session/services";
+import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";
+import { StarkSessionService, STARK_SESSION_SERVICE } from "../../session/services";
 import { StarkUserService, starkUserServiceName } from "./user.service.intf";
 import { StarkUserRepository, starkUserRepositoryName } from "../repository";
 import { STARK_MOCK_DATA, StarkMockData } from "../../configuration/entities/mock-data";
@@ -43,12 +43,11 @@ const userErrorMessagePrefix: string = starkUserServiceName + ": User defined is
 @Injectable()
 export class StarkUserServiceImpl implements StarkUserService {
 	public user$: Observable<StarkUser | undefined>;
-	private sessionService: StarkSessionService;
 	public userProfiles: StarkUser[];
 
 	public constructor(
-		@Inject(starkLoggingServiceName) public logger: StarkLoggingService,
-		@Inject(starkSessionServiceName) sessionService: StarkSessionService,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
 		public store: Store<StarkCoreApplicationState>,
 		@Inject(starkUserRepositoryName) public userRepository: StarkUserRepository,
 		// FIXME Use starkMockData

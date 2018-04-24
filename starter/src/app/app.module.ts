@@ -2,6 +2,8 @@ import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angula
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
+import { NgIdleModule } from "@ng-idle/core";
+import { TranslateModule } from "@ngx-translate/core";
 import { validateSync } from "class-validator";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { storeFreeze } from "ngrx-store-freeze";
@@ -17,11 +19,12 @@ import {
 	StarkApplicationMetadataImpl,
 	StarkHttpModule,
 	StarkLoggingModule,
+	StarkRoutingModule,
+	StarkSessionModule,
 	StarkValidationErrorsUtil
 } from "@nationalbankbelgium/stark-core";
 import { routerConfigFn } from "./router.config";
 import { Deserialize } from "cerialize";
-
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -35,7 +38,6 @@ import { AboutComponent } from "./about";
 import { NoContentComponent } from "./no-content";
 import { XLargeDirective } from "./home/x-large";
 import { DevModuleModule } from "./+dev-module";
-
 /* tslint:disable:no-import-side-effect */
 import "../styles/styles.scss";
 /* tslint:enable */
@@ -103,8 +105,6 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
-		StarkHttpModule,
-		StarkLoggingModule,
 		StoreModule.forRoot(reducers, {
 			metaReducers
 		}),
@@ -114,6 +114,12 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 			otherwise: { state: "otherwise" },
 			config: routerConfigFn
 		}),
+		TranslateModule.forRoot(),
+		NgIdleModule.forRoot(),
+		StarkHttpModule.forRoot(),
+		StarkLoggingModule.forRoot(),
+		StarkSessionModule.forRoot(),
+		StarkRoutingModule.forRoot(),
 
 		/**
 		 * This section will import the `DevModuleModule` only in certain build types.

@@ -12,9 +12,9 @@ import { map } from "rxjs/operators/map";
 import { defer } from "rxjs/observable/defer";
 import { validateSync } from "class-validator";
 
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
+import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";
 import { StarkSessionService, starkSessionServiceName } from "./session.service.intf";
-import { StarkRoutingService, starkRoutingServiceName, StarkRoutingTransitionHook } from "../../routing/services";
+import { StarkRoutingService, STARK_ROUTING_SERVICE, StarkRoutingTransitionHook } from "../../routing/services";
 import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities";
 import { StarkPreAuthentication, StarkSession } from "../entities";
 import { StarkUser } from "../../user/entities";
@@ -76,8 +76,8 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 
 	public constructor(
 		public store: Store<StarkCoreApplicationState>,
-		@Inject(starkLoggingServiceName) public logger: StarkLoggingService,
-		@Inject(starkRoutingServiceName) public routingService: StarkRoutingService,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
 		// FIXME Uncomment when XSRF Service is implemented
 		// @Inject(starkXSRFServiceName) public xsrfService: StarkXSRFService,

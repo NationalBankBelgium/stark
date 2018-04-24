@@ -1,22 +1,30 @@
-import { NgModule } from "@angular/core";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
-import { StarkHttpServiceImpl, starkHttpServiceName } from "./services";
-import { StarkLoggingService, starkLoggingServiceName } from "../logging";
-
-// FIXME: remove this factory once LoggingService and SessionService are implemented
-export function starkHttpServiceFactory(httpClient: HttpClient, starkLoggingService: StarkLoggingService): StarkHttpServiceImpl<any> {
-	const sessionService: any = {
-		fakePreAuthenticationHeaders: new Map<string, string>([["nbb-dummy-header", "some value"], ["nbb-another-header", "whatever"]])
-	};
-
-	return new StarkHttpServiceImpl(starkLoggingService, sessionService, httpClient);
-}
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
+import { STARK_HTTP_SERVICE, StarkHttpServiceImpl } from "./services";
 
 @NgModule({
-	imports: [HttpClientModule],
-	providers: [
-		// FIXME: replace this Factory provider by a simple Class provider once LoggingService and SessionService are implemented
-		{ provide: starkHttpServiceName, useFactory: starkHttpServiceFactory, deps: [HttpClient, starkLoggingServiceName] }
-	]
+	imports: [HttpClientModule]
 })
-export class StarkHttpModule {}
+export class StarkHttpModule {
+	// instantiate the services only once since they should be singletons
+	// so the forRoot() should be called only by the AppModule
+	// see https://angular.io/guide/singleton-services#forroot
+	public static forRoot(): ModuleWithProviders {
+		return {
+			ngModule: StarkHttpModule,
+			providers: [{ provide: STARK_HTTP_SERVICE, useClass: StarkHttpServiceImpl }]
+		};
+	}
+
+	// prevent this module from being re-imported
+	// see https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
+	public constructor(
+		@Optional()
+		@SkipSelf()
+		parentModule: StarkHttpModule
+	) {
+		if (parentModule) {
+			throw new Error("StarkHttpModule is already loaded. Import it in the AppModule only");
+		}
+	}
+}

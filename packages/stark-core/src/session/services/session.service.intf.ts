@@ -1,7 +1,9 @@
+import { InjectionToken } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { StarkUser } from "../../user/entities";
 
 export const starkSessionServiceName: string = "StarkSessionService";
+export const STARK_SESSION_SERVICE: InjectionToken<StarkSessionService> = new InjectionToken<StarkSessionService>(starkSessionServiceName);
 
 /**
  * Stark Session Service.

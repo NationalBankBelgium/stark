@@ -7,10 +7,10 @@ import {
 	StarkApplicationConfig,
 	StarkBackend,
 	StarkBackendAuthenticationTypes,
-	StarkHttpModule,
-	StarkLoggingModule,
 	StarkLoggingService,
-	starkLoggingServiceName
+	STARK_LOGGING_SERVICE,
+	STARK_HTTP_SERVICE,
+	STARK_SESSION_SERVICE
 } from "@nationalbankbelgium/stark-core";
 /**
  * Load the implementations that should be tested.
@@ -18,11 +18,12 @@ import {
 import { AppState } from "../app.service";
 import { HomeComponent } from "./home.component";
 import { Title } from "./title";
+import SpyObj = jasmine.SpyObj;
 
 describe(`Home`, () => {
 	let comp: HomeComponent;
 	let fixture: ComponentFixture<HomeComponent>;
-	let logger: StarkLoggingService;
+	let logger: SpyObj<StarkLoggingService>;
 
 	const mockBackend: Partial<StarkBackend> = {
 		authenticationType: StarkBackendAuthenticationTypes.PUBLIC,
@@ -39,29 +40,37 @@ describe(`Home`, () => {
 	/**
 	 * async beforeEach.
 	 */
-	beforeEach(
-		async(() => {
-			return (
-				TestBed.configureTestingModule({
-					declarations: [HomeComponent],
-					schemas: [NO_ERRORS_SCHEMA],
-					imports: [StoreModule.forRoot({}), HttpClientTestingModule, StarkHttpModule, StarkLoggingModule],
-					providers: [AppState, Title, { provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }]
-				})
+	beforeEach(async(() => {
+		return (
+			TestBed.configureTestingModule({
+				declarations: [HomeComponent],
+				schemas: [NO_ERRORS_SCHEMA],
+				imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+				providers: [
+					AppState,
+					Title,
+					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
+					{
+						provide: STARK_HTTP_SERVICE,
+						useValue: jasmine.createSpyObj("StarkHttpService", ["executeSingleItemRequest", "executeCollectionRequest"])
+					},
+					{ provide: STARK_LOGGING_SERVICE, useValue: jasmine.createSpyObj("StarkLoggingService", ["debug", "error"]) },
+					{ provide: STARK_SESSION_SERVICE, useValue: jasmine.createSpyObj("StarkSessionService", ["login"]) }
+				]
+			})
 
-					/**
-					 * Compile template and css.
-					 */
-					.compileComponents()
-			);
-		})
-	);
+				/**
+				 * Compile template and css.
+				 */
+				.compileComponents()
+		);
+	}));
 
 	/**
 	 * Synchronous beforeEach.
 	 */
 	beforeEach(() => {
-		logger = TestBed.get(starkLoggingServiceName);
+		logger = TestBed.get(STARK_LOGGING_SERVICE);
 
 		fixture = TestBed.createComponent(HomeComponent);
 		comp = fixture.componentInstance;
@@ -70,6 +79,7 @@ describe(`Home`, () => {
 		 * Trigger initial data binding.
 		 */
 		fixture.detectChanges();
+		logger.debug.calls.reset();
 	});
 
 	it("should have default data", () => {
@@ -81,7 +91,6 @@ describe(`Home`, () => {
 	});
 
 	it("should log ngOnInit", () => {
-		spyOn(logger, "debug");
 		expect(logger.debug).not.toHaveBeenCalled();
 
 		comp.ngOnInit();

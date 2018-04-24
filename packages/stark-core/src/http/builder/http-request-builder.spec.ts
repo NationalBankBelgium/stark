@@ -15,14 +15,7 @@ import { StarkHttpGetRequestBuilder } from "./http-get-request-builder.intf";
 import { StarkHttpGetCollectionRequestBuilder } from "./http-get-collection-request-builder.intf";
 import { StarkHttpSearchRequestBuilder } from "./http-search-request-builder.intf";
 import { StarkHttpUpdateRequestBuilder } from "./http-update-request-builder.intf";
-import {
-	StarkBackend,
-	StarkBackendImpl,
-	StarkHttpRequest,
-	StarkHttpRequestType,
-	StarkResource,
-	StarkSortItemImpl
-} from "../entities";
+import { StarkBackend, StarkBackendImpl, StarkHttpRequest, StarkHttpRequestType, StarkResource, StarkSortItemImpl } from "../entities";
 import { StarkLanguages } from "../../configuration/entities";
 import { stringMap } from "../../serialization";
 import { StarkHttpEchoType, StarkHttpHeaders, StarkHttpQueryParameters, StarkSortOrder } from "../constants";

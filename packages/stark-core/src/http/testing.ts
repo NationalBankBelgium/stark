@@ -1,1 +1,1 @@
-export * from "./testing/http.mock"
+export * from "./testing/http.mock";

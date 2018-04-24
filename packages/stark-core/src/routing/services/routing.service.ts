@@ -4,7 +4,7 @@ import { fromPromise } from "rxjs/observable/fromPromise";
 import { empty } from "rxjs/observable/empty";
 import { Inject, Injectable } from "@angular/core";
 
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
+import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";
 import { StarkRoutingService, starkRoutingServiceName } from "./routing.service.intf";
 import {
 	Navigate,
@@ -71,11 +71,11 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	private _starkStateHistory: StarkState[];
 
 	public constructor(
-		@Inject(starkLoggingServiceName) private logger: StarkLoggingService,
+		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
 		private store: Store<StarkCoreApplicationState>,
 		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
-		@Inject("$state") private $state: StateService,
-		@Inject("$transitions") private $transitions: TransitionService
+		private $state: StateService,
+		private $transitions: TransitionService
 	) {
 		this.appConfig = appConfig;
 
