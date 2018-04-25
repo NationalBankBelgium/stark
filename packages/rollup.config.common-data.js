@@ -16,6 +16,7 @@ const globals = {
 	"@uirouter/core": "@uirouter/core",
 	"class-validator": "class-validator",
 	cerialize: "cerialize",
+	ibantools: "ibantools",
 	moment: "moment",
 	uuid: "uuid",
 
