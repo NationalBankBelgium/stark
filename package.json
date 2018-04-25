@@ -1,6 +1,6 @@
 {
   "name": "stark-srcs",
-  "version": "10.0.0-alpha.1",
+  "version": "10.0.0-alpha.2",
   "private": true,
   "description": "Stark - a framework for Angular apps",
   "author": "Stark Team <sebastien.dubois@nbb.be>",
