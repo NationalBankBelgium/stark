@@ -173,7 +173,6 @@ describe("Service: StarkSessionService", () => {
 					)
 			).toThrowError(/sessionTimeout/);
 
-			// FIXME problem with this expect ONLY (Solved ? Ask if the fix is OK)
 			appConfig.sessionTimeout = 123;
 			appConfig.sessionTimeoutWarningPeriod = -1;
 			expect(

@@ -29,6 +29,7 @@
     "@ng-idle/core": "2.0.0-beta.15",
     "@ng-idle/keepalive": "2.0.0-beta.15",
     "@ngx-translate/core": "9.1.1",
+    "@ngrx/effects": "5.2.0",
     "@ngrx/store": "5.2.0",
     "@types/core-js": "0.9.46",
     "@types/jasmine": "2.8.6",
