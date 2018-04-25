@@ -1,15 +1,15 @@
 import { Store } from "@ngrx/store";
 
-import { StarkLoggingService } from "../../logging/services/index";
-import { MockStarkLoggingService } from "../../logging/testing/index";
-import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../configuration/entities/application/index";
-import { StarkApplicationMetadata, StarkApplicationMetadataImpl } from "../../configuration/entities/metadata/index";
-import { StarkLanguages } from "../../configuration/entities/language/index";
+import { StarkLoggingService } from "../../logging/services";
+import { MockStarkLoggingService } from "../../logging/testing";
+import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../configuration/entities/application";
+import { StarkApplicationMetadata, StarkApplicationMetadataImpl } from "../../configuration/entities/metadata";
+import { StarkLanguages } from "../../configuration/entities/language";
 import Spy = jasmine.Spy;
-import { StarkCoreApplicationState } from "../../common/store/index";
+import { StarkCoreApplicationState } from "../../common/store";
 import { StarkSettingsServiceImpl } from "./settings.service";
-import { SetPreferredLanguage } from "../actions/index";
-import { StarkUser } from "../../user/index";
+import { SetPreferredLanguage } from "../actions";
+import { StarkUser } from "../../user";
 import { of } from "rxjs/observable/of";
 
 describe("Service: StarkSettingsService", () => {
@@ -17,46 +17,16 @@ describe("Service: StarkSettingsService", () => {
 	let mockLogger: StarkLoggingService;
 	let appConfig: StarkApplicationConfig;
 	let appMetadata: StarkApplicationMetadata;
-	let settingsService: SettingsServiceHelper;
+	let settingsService: StarkSettingsServiceImpl;
 	let mockUser: StarkUser;
 	let browserLanguageCode: string;
 
 	beforeEach(() => {
 		mockLogger = new MockStarkLoggingService();
-		mockStore = jasmine.createSpyObj("store", ["dispatch", "pipe", "select"]);
+		mockStore = jasmine.createSpyObj("store", ["dispatch", "pipe"]);
 		appConfig = new StarkApplicationConfigImpl();
-		appConfig.sessionTimeout = 123;
-		appConfig.sessionTimeoutWarningPeriod = 13;
-		appConfig.keepAliveInterval = 45;
-		appConfig.keepAliveUrl = "http://my.backend/keepalive";
-		appConfig.logoutUrl = "http://localhost:5000/logout";
-		appConfig.rootStateUrl = "";
-		appConfig.rootStateName = "";
-		appConfig.homeStateName = "";
-		appConfig.errorStateName = "";
-		appConfig.angularDebugInfoEnabled = false;
-		appConfig.debugLoggingEnabled = false;
-		appConfig.loggingFlushDisabled = true;
 		appConfig.defaultLanguage = "en";
-		appConfig.baseUrl = "/";
-		appConfig.publicApp = false;
-		appConfig.routerLoggingEnabled = false;
-		appConfig.addBackend({
-			name: "logging",
-			url: "http://localhost:5000",
-			authenticationType: 1,
-			fakePreAuthenticationEnabled: true,
-			fakePreAuthenticationRolePrefix: "",
-			loginResource: "logging",
-			token: ""
-		});
 		appMetadata = new StarkApplicationMetadataImpl();
-		appMetadata.name = "metadataTest";
-		appMetadata.description = "App Metadata used for settings module tests";
-		appMetadata.version = "";
-		appMetadata.environment = "";
-		appMetadata.buildTimestamp = "";
-		appMetadata.deploymentTimestamp = "";
 		appMetadata.supportedLanguages = [StarkLanguages.FR_BE, StarkLanguages.EN_US];
 
 		mockUser = {
@@ -70,9 +40,9 @@ describe("Service: StarkSettingsService", () => {
 			referenceNumber: "1234"
 		};
 
-		(<Spy>mockStore.select).and.returnValue(of(mockUser));
+		(<Spy>mockStore.pipe).and.returnValue(of(mockUser));
 
-		settingsService = new SettingsServiceHelper(mockLogger, mockStore, appMetadata, appConfig);
+		settingsService = new StarkSettingsServiceImpl(mockLogger, mockStore, appMetadata, appConfig);
 		// reset the calls counter because there is a log in the constructor
 		(<Spy>mockStore.dispatch).calls.reset();
 	});
@@ -88,10 +58,6 @@ describe("Service: StarkSettingsService", () => {
 				get: () => "fr-be"
 			});
 			browserLanguageCode = "fr";
-
-			spyOn(settingsService, "setPreferredLanguage").and.callFake((language: string) => {
-				settingsService.preferredLanguage = language;
-			});
 		});
 
 		it("should set user language as preferred language", () => {
@@ -103,19 +69,19 @@ describe("Service: StarkSettingsService", () => {
 			/* tslint:disable:no-null-keyword */
 			mockUser.language = <any>null;
 			/* tslint:enable */
-			(<Spy>mockStore.select).and.returnValue(of(mockUser));
+			(<Spy>mockStore.pipe).and.returnValue(of(mockUser));
 			settingsService.initializeSettings();
 			expect(settingsService.preferredLanguage).toEqual(browserLanguageCode);
 
 			mockUser.language = undefined;
-			(<Spy>mockStore.select).and.returnValue(of(mockUser));
+			(<Spy>mockStore.pipe).and.returnValue(of(mockUser));
 			settingsService.initializeSettings();
 			expect(settingsService.preferredLanguage).toEqual(browserLanguageCode);
 		});
 
 		it("should set browser language as preferred language if user language is NOT in supported languages", () => {
 			mockUser.language = "NL";
-			(<Spy>mockStore.select).and.returnValue(of(mockUser));
+			(<Spy>mockStore.pipe).and.returnValue(of(mockUser));
 			settingsService.initializeSettings();
 			expect(settingsService.preferredLanguage).toEqual(browserLanguageCode);
 		});
@@ -140,33 +106,7 @@ describe("Service: StarkSettingsService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new SetPreferredLanguage("NL"));
+			expect(settingsService.preferredLanguage).toEqual("NL");
 		});
 	});
 });
-
-class SettingsServiceHelper extends StarkSettingsServiceImpl {
-	public constructor(
-		logger: StarkLoggingService,
-		store: Store<StarkCoreApplicationState>,
-		appMetadata: StarkApplicationMetadata,
-		appConfig: StarkApplicationConfig
-	) {
-		super(logger, store, appMetadata, appConfig);
-	}
-
-	public initializeSettings(): void {
-		super.initializeSettings();
-	}
-
-	public persistPreferredLanguage(): void {
-		super.persistPreferredLanguage();
-	}
-
-	public getPreferredLanguage(): string {
-		return super.getPreferredLanguage();
-	}
-
-	public setPreferredLanguage(language: string): void {
-		super.setPreferredLanguage(language);
-	}
-}

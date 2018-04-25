@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { ActionReducerMap, StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 
 import { settingsReducer, StarkSettingsState } from "./reducers";
 import { StarkSettingsActions } from "./actions";
 import { StarkSettingsServiceImpl, starkSettingsServiceName } from "./services";
-import { EffectsModule } from "@ngrx/effects";
-import { StarkSettingsEffects } from "./effects/index";
+import { StarkSettingsEffects } from "./effects";
 
 const reducers: ActionReducerMap<StarkSettingsState, StarkSettingsActions> = {
 	settings: settingsReducer

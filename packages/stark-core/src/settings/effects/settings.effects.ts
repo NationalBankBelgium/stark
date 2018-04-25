@@ -1,15 +1,11 @@
-"use strict";
-
 import { Inject, Injectable } from "@angular/core";
-import { Actions, Effect, ofType /*toPayload */ } from "@ngrx/effects";
-import { Action } from "@ngrx/store";
+import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable } from "rxjs/Observable";
 import { map } from "rxjs/operators/map";
 
-import { StarkSettingsActionTypes, SetPreferredLanguage } from "../actions/index";
-import { StarkSessionService, starkSessionServiceName } from "../../session/services/index";
+import { StarkSettingsActionTypes, SetPreferredLanguage } from "../actions";
+import { StarkSessionService, starkSessionServiceName } from "../../session/services";
 
-//FIXME StateUpdates
 @Injectable()
 export class StarkSettingsEffects {
 	public sessionService: StarkSessionService;
@@ -21,8 +17,8 @@ export class StarkSettingsEffects {
 	@Effect()
 	public setPreferredLanguage$(): Observable<void> {
 		return this.actions$.pipe(
-			ofType(StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE),
-			map((action: Action) => this.sessionService.setCurrentLanguage((<SetPreferredLanguage>action).language))
+			ofType<SetPreferredLanguage>(StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE),
+			map((action: SetPreferredLanguage) =>this.sessionService.setCurrentLanguage(action.language))
 		);
 	}
 }

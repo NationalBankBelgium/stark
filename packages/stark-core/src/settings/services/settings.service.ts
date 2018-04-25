@@ -1,17 +1,16 @@
-"use strict";
-
-import { Store } from "@ngrx/store";
 import { Inject, Injectable } from "@angular/core";
-import { StarkSessionState } from "../../session/reducers/index";
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services/index";
-import { StarkSettingsService, starkSettingsServiceName } from "./settings.service.intf";
-import { SetPreferredLanguage } from "../actions/index";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities/index";
-import { StarkUser } from "../../user/entities/index";
-import { StarkCoreApplicationState } from "../../common/store/index";
-import { StarkApplicationMetadata, STARK_APP_METADATA } from "../../configuration/entities/metadata/index";
-import { StarkLanguage } from "../../configuration/entities/language/index";
+import { Store, select } from "@ngrx/store";
 import { filter } from "rxjs/operators/filter";
+
+import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
+import { StarkSettingsService, starkSettingsServiceName } from "./settings.service.intf";
+import { SetPreferredLanguage } from "../actions";
+import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../configuration/entities";
+import { StarkUser } from "../../user/entities";
+import { StarkCoreApplicationState } from "../../common/store";
+import { StarkApplicationMetadata, STARK_APP_METADATA } from "../../configuration/entities/metadata";
+import { StarkLanguage } from "../../configuration/entities/language";
+import { selectStarkUser } from "../../user";
 
 /**
  * @ngdoc service
@@ -39,8 +38,9 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 
 	public initializeSettings(): void {
 		this.store
-			.select((state: StarkSessionState) => state.session.user)
-			.pipe(filter((user?: StarkUser) => typeof user !== "undefined" && typeof user.language !== "undefined"))
+			.pipe(
+				select(selectStarkUser),
+				filter((user?: StarkUser) => typeof user !== "undefined" && typeof user.language !== "undefined"))
 			.subscribe((user?: StarkUser) => {
 				if (
 					(<StarkUser>user).language !== null &&

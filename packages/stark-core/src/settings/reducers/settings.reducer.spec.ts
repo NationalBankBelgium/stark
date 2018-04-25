@@ -1,7 +1,5 @@
-"use strict";
-
-import { SetPreferredLanguage } from "../actions/index";
-import { StarkSettings } from "../entities/index";
+import { SetPreferredLanguage } from "../actions";
+import { StarkSettings } from "../entities";
 import { settingsReducer } from "./settings.reducer";
 
 const deepFreeze: Function = require("deep-freeze-strict");

@@ -1,5 +1,3 @@
-"use strict";
-
 import { Action } from "@ngrx/store";
 
 export enum StarkSettingsActionTypes {

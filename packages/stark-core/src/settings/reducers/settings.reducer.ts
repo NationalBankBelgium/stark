@@ -1,7 +1,5 @@
-"use strict";
-
-import { StarkSettingsActions, StarkSettingsActionTypes } from "../actions/index";
-import { StarkSettings } from "../entities/index";
+import { StarkSettingsActions, StarkSettingsActionTypes } from "../actions";
+import { StarkSettings } from "../entities";
 
 export const starkSettingsStoreKey: string = "starkSettings";
 

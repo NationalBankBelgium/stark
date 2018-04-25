@@ -5,6 +5,7 @@ export * from "./logging";
 export * from "./routing";
 export * from "./serialization";
 export * from "./session";
+export * from "./settings";
 export * from "./user";
 export * from "./util";
 export * from "./validation";

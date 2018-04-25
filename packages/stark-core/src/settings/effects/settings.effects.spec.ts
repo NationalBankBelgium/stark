@@ -1,13 +1,11 @@
-"use strict";
-
 import Spy = jasmine.Spy;
 import createSpyObj = jasmine.createSpyObj;
 import { Observer } from "rxjs/Observer";
 
 import { StarkSettingsEffects } from "./settings.effects";
-import { SetPreferredLanguage } from "../actions/index";
-import { StarkSessionService, starkSessionServiceName } from "../../session/services/index";
-import { MockStarkSessionService } from "../../session/testing/index";
+import { SetPreferredLanguage } from "../actions";
+import { StarkSessionService, starkSessionServiceName } from "../../session/services";
+import { MockStarkSessionService } from "../../session/testing";
 import { TestBed } from "@angular/core/testing";
 import { Observable } from "rxjs/Observable";
 import { provideMockActions } from "@ngrx/effects/testing";
