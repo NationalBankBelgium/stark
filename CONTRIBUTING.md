@@ -98,6 +98,14 @@ Once done, you may submit a new Pull Request (PR): https://github.com/NationalBa
 
 Note that if you didn't follow this, we'll probably ask for a cleanup/rebase before we merge your changes.
 
+### Committing with Commitizen
+
+To help you respect our [commit message conventions](#commit), you can use [Commitizen](https://github.com/commitizen/cz-cli).
+Instead of running `git commit`, use `npm run commit`. 
+You'll be prompted to fill in any required fields and your commit message will be formatted according to our guidelines.
+
+You can still use `git commit`, but be sure to follow the guidelines, otherwise [Commitlint](https://github.com/marionebl/commitlint) will throw an error during your commit.
+
 ### Workflow
 As mentioned above, we recommend using the GitFlow inspired workflow. That workflow was initially proposed here: https://datasift.github.io/gitflow/IntroducingGitFlow.html
 There a great introduction tutorial by Atlassian: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
