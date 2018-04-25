@@ -1,0 +1,47 @@
+{
+	"non-interactive": false,
+	"dry-run": false,
+	"verbose": false,
+	"force": false,
+	"pkgFiles": ["package.json"],
+	"increment": "patch",
+	"buildCommand": false,
+	"safeBump": true,
+	"beforeChangelogCommand": false,
+	"requireCleanWorkingDir": true,
+	"requireUpstream": true,
+	"src": {
+		"commit": true,
+		"commitMessage": "chore(release): release %s",
+		"commitArgs": "",
+		"tag": true,
+		"tagName": "%s",
+		"tagAnnotation": "%s",
+		"push": true,
+		"pushArgs": "",
+		"pushRepo": null,
+		"beforeStartCommand": false,
+		"afterReleaseCommand": false
+	},
+	"npm": {
+		"publish": false
+	},
+	"github": {
+		"release": true,
+		"releaseName": "Release %s",
+		"draft": false,
+		"tokenRef": "GITHUB_TOKEN",
+		"assets": null,
+		"host": null
+	},
+	"prompt": {
+		"src": {
+			"status": false,
+			"commit": true,
+			"tag": true,
+			"push": true,
+			"release": true,
+			"publish": true
+		}
+	}
+}

@@ -13,6 +13,7 @@ readonly currentDir=$(cd $(dirname $0); pwd)
 export NODE_PATH=${NODE_PATH:-}:${currentDir}/node_modules
 
 source ${currentDir}/scripts/ci/_travis-fold.sh
+source ${currentDir}/util-functions.sh
 source ${currentDir}/build-functions.sh
 
 cd ${currentDir}
@@ -27,12 +28,15 @@ TSC_PACKAGES=()
 # Packages that should not be compiled at all
 NODE_PACKAGES=(stark-build stark-testing)
 
-ALL_PACKAGES=(stark-build stark-testing stark-core)
+# We read from a file because the list is also shared with release-publish.sh
+# Not using readarray because it does not handle \r\n
+OLD_IFS=$IFS # save old IFS value
+IFS=$'\r\n' GLOBIGNORE='*' command eval 'ALL_PACKAGES=($(cat ./modules.txt))'
+IFS=$OLD_IFS # restore IFS
 
 BUILD_ALL=true
 BUNDLE=true
 VERSION_PREFIX=$(node -p "require('./package.json').version")
-VERSION_SUFFIX="-$(git log --oneline -1 | awk '{print $1}')" # last commit id
 COMPILE_SOURCE=true
 TYPECHECK_ALL=true
 
@@ -40,13 +44,6 @@ TRAVIS=${TRAVIS:-}
 
 VERBOSE=false
 TRACE=false
-
-PROJECT_ROOT_DIR=`pwd`
-logTrace "PROJECT_ROOT_DIR: ${PROJECT_ROOT_DIR}" 1
-ROOT_DIR=${PROJECT_ROOT_DIR}/packages
-logTrace "ROOT_DIR: ${ROOT_DIR}" 1
-ROOT_OUT_DIR=${PROJECT_ROOT_DIR}/dist/packages
-logTrace "ROOT_OUT_DIR: ${ROOT_OUT_DIR}" 1
 
 for ARG in "$@"; do
   case "$ARG" in
@@ -59,7 +56,6 @@ for ARG in "$@"; do
       BUILD_ALL=false
       
       # parse to identify the packages to build
-      PACKAGES_STR=${ARG#--packages=}
       PACKAGES_STR=${ARG#--packages=}
       PACKAGES_STR="${PACKAGES_STR//,/ }" # replace , by ' '
       PACKAGES_STR="${PACKAGES_STR//;/ }" # replace ; by ' '
@@ -113,9 +109,6 @@ for ARG in "$@"; do
     --bundle=*)
       BUNDLE=( "${ARG#--bundle=}" )
       ;;
-    --publish)
-      VERSION_SUFFIX=""
-      ;;
     --compile=*)
       COMPILE_SOURCE=${ARG#--compile=}
       ;;
@@ -138,6 +131,26 @@ for ARG in "$@"; do
       ;;
   esac
 done
+
+PROJECT_ROOT_DIR=`pwd`
+logTrace "PROJECT_ROOT_DIR: ${PROJECT_ROOT_DIR}" 1
+ROOT_DIR=${PROJECT_ROOT_DIR}/packages
+logTrace "ROOT_DIR: ${ROOT_DIR}" 1
+ROOT_OUT_DIR=${PROJECT_ROOT_DIR}/dist/packages
+logTrace "ROOT_OUT_DIR: ${ROOT_OUT_DIR}" 1
+
+# Making sure the variable exists
+if [[ -z ${TRAVIS_TAG+x} ]]; then
+  TRAVIS_TAG=""
+fi
+
+if [[ ${TRAVIS_TAG} == "" ]]; then
+  logTrace "Setting the version suffix to the latest commit hash" 1
+  VERSION_SUFFIX="-$(git log --oneline -1 | awk '{print $1}')" # last commit id
+else
+  logTrace "Build executed for a tag. Not using a version suffix!" 1
+  VERSION_SUFFIX="" # last commit id
+fi
 
 VERSION="${VERSION_PREFIX}${VERSION_SUFFIX}"
 

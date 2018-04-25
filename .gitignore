@@ -4,6 +4,8 @@ dist/
 dist/
 .tmp/
 /.tmp/
+tmp/
+
 
 # Reports directory
 reports/
