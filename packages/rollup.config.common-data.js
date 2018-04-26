@@ -14,6 +14,7 @@ const globals = {
 	"@ng-idle/keepalive": "@ng-idle/keepalive",
 	"@ngx-translate/core": "@ngx-translate/core",
 	"@uirouter/core": "@uirouter/core",
+	"@uirouter/angular": "@uirouter/angular",
 	"class-validator": "class-validator",
 	cerialize: "cerialize",
 	ibantools: "ibantools",
