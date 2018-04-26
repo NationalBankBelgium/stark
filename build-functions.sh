@@ -66,11 +66,20 @@ runRollup() {
       logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
       exit 1
     elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
-      if [[ $ROLLUP_RESULTS =~ ^.*\(\!\)\ Unresolved\ dependencies.* ]]; then
+      local DISPLAYED_TRACE=false
+      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Unresolved\ dependencies.* ]]; then
+        DISPLAYED_TRACE=true
         logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected." 2
-      elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\)\ Missing\ global\ variable\ name.* ]]; then
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name." 2
-      else
+      fi
+      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Missing\ global\ variable\ name.* ]]; then
+        DISPLAYED_TRACE=true
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name detected." 2
+      fi
+      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Circular\ dependency.* ]]; then
+        DISPLAYED_TRACE=true
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Circular dependency detected." 2
+      fi
+      if ! $DISPLAYED_TRACE ; then
         logInfo "${FUNCNAME[0]}: Warning appeared during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
       fi
     fi
@@ -143,11 +152,20 @@ rollupIndex() {
       logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
       exit 1
     elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
-      if [[ $ROLLUP_RESULTS =~ ^.*\(\!\)\ Unresolved\ dependencies.* ]]; then
+      local DISPLAYED_TRACE=false
+      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Unresolved\ dependencies.* ]]; then
+        DISPLAYED_TRACE=true
         logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected." 2
-      elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\)\ Missing\ global\ variable\ name.* ]]; then
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name." 2
-      else
+      fi
+      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Missing\ global\ variable\ name.* ]]; then
+        DISPLAYED_TRACE=true
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name detected." 2
+      fi
+      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Circular\ dependency.* ]]; then
+        DISPLAYED_TRACE=true
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Circular dependency detected." 2
+      fi
+      if ! $DISPLAYED_TRACE ; then
         logInfo "${FUNCNAME[0]}: Warning appeared during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
       fi
     fi

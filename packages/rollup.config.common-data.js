@@ -10,6 +10,7 @@ const globals = {
 	"@angular/core": "ng.core",
 	"@angular/common/http": "angular.common.http",
 	"@ngrx/store": "@ngrx/store",
+	"@ngrx/effects": "@ngrx/effects",
 	"@ng-idle/core": "@ng-idle/core",
 	"@ng-idle/keepalive": "@ng-idle/keepalive",
 	"@ngx-translate/core": "@ngx-translate/core",
@@ -27,6 +28,7 @@ const globals = {
 	// we should only use that in our code base
 	"rxjs/operators": "rxjs.operators",
 	"rxjs/operators/catchError": "rxjs.operators.catchError",
+	"rxjs/operators/filter": "rxjs.operators.filter",
 	"rxjs/operators/map": "rxjs.operators.map",
 	"rxjs/operators/mergeMap": "rxjs.operators.mergeMap",
 	"rxjs/operators/retryWhen": "rxjs.operators.retryWhen",
