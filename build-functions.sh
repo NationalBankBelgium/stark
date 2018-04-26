@@ -66,9 +66,9 @@ runRollup() {
       logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
       exit 1
     elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
-      if [[ $ROLLUP_RESULTS =~ "^.*\(\!\) Unresolved dependencies.*" ]]; then
+      if [[ $ROLLUP_RESULTS =~ ^.*\(\!\)\ Unresolved\ dependencies.* ]]; then
         logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected." 2
-      elif [[ $ROLLUP_RESULTS =~ "^.*\(\!\) Missing global variable name.*" ]]; then
+      elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\)\ Missing\ global\ variable\ name.* ]]; then
         logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name." 2
       else
         logInfo "${FUNCNAME[0]}: Warning appeared during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
@@ -143,9 +143,9 @@ rollupIndex() {
       logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
       exit 1
     elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
-      if [[ $ROLLUP_RESULTS =~ "^.*\(\!\) Unresolved dependencies.*" ]]; then
+      if [[ $ROLLUP_RESULTS =~ ^.*\(\!\)\ Unresolved\ dependencies.* ]]; then
         logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected." 2
-      elif [[ $ROLLUP_RESULTS =~ "^.*\(\!\) Missing global variable name.*" ]]; then
+      elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\)\ Missing\ global\ variable\ name.* ]]; then
         logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name." 2
       else
         logInfo "${FUNCNAME[0]}: Warning appeared during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
