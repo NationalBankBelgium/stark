@@ -57,7 +57,7 @@ module.exports = function(options) {
 
 	const appNgcOptions = Object.assign({}, defaultNgcOptions, tsConfigApp.raw.angularCompilerOptions);
 
-	const environment = buildUtils.getEnvFile(METADATA.envFileSuffix);
+	const environment = buildUtils.getEnvironmentFile(METADATA.environment);
 
 	const buildOptimizerLoader = {
 		loader: "@angular-devkit/build-optimizer/webpack-loader",
@@ -65,6 +65,8 @@ module.exports = function(options) {
 			sourceMap: true // TODO: apply based on tsConfig value?
 		}
 	};
+	
+	const rootDir = buildUtils.getAngularCliAppConfig().root;
 
 	return {
 		/**
@@ -124,7 +126,7 @@ module.exports = function(options) {
 			/**
 			 * An array of directory names to be resolved to the current directory
 			 */
-			modules: [helpers.root("src"), helpers.root("node_modules")],
+			modules: [helpers.root(rootDir), helpers.root("node_modules")],
 
 			/**
 			 * Add support for pipeable operators.
@@ -203,7 +205,7 @@ module.exports = function(options) {
 				{
 					test: /\.css$/,
 					use: ["to-string-loader", "css-loader"],
-					exclude: [helpers.root("src", "styles")]
+					exclude: [helpers.root(rootDir, "styles")]
 				},
 
 				/**
@@ -215,7 +217,7 @@ module.exports = function(options) {
 				{
 					test: /\.scss$/,
 					use: ["to-string-loader", "css-loader", "sass-loader"],
-					exclude: [helpers.root("src", "styles")]
+					exclude: [helpers.root(rootDir, "styles")]
 				},
 
 				/**
@@ -247,7 +249,7 @@ module.exports = function(options) {
 							}
 						}
 					],
-					exclude: [helpers.root("src", "styles")]
+					exclude: [helpers.root(rootDir, "styles")]
 				},
 
 				/**
@@ -356,6 +358,9 @@ module.exports = function(options) {
 			 */
 			new CopyWebpackPlugin(
 				[
+					...buildUtils.getNbbAssetsConfig(),
+					
+					...buildUtils.getApplicationAssetsConfig(),
 					// TODO uncomment this when is part of Stark
 					// // Stark assets
 					// {
@@ -367,25 +372,6 @@ module.exports = function(options) {
 					//   from: helpers.rootStark("assets-base"),
 					//   to: ""
 					// },
-
-					// Mdi svg file
-					{
-						from: "node_modules/@mdi/angular-material/mdi.svg",
-						to: "assets/icons/mdi.svg"
-					},
-
-					// Application assets
-					{
-						from: helpers.root("assets"),
-						to: "assets",
-						force: "true" // overwrite files already copied from Stark
-					},
-					// those assets are copied to the root of the target folder
-					{
-						from: helpers.root("assets-base"),
-						to: "",
-						force: "true" // overwrite files already copied from Stark
-					}
 				],
 				{
 					ignore: [

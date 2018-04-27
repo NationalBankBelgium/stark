@@ -34,7 +34,7 @@ module.exports = function() {
 		PORT: PORT,
 		ENV: ENV,
 		HMR: helpers.hasProcessFlag("hot"),
-		envFileSuffix: helpers.hasProcessFlag("hot") ? "hmr" : ""
+		environment: helpers.hasProcessFlag("hot") ? "hmr" : "dev"
 		// PUBLIC: process.env.PUBLIC_DEV || HOST + ':' + PORT  // TODO check if needed/useful in our case?
 	});
 
@@ -56,6 +56,8 @@ module.exports = function() {
 		// "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
 	];
 
+	const rootDir = buildUtils.getAngularCliAppConfig().root;
+
 	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
 		 * Tell webpack which environment the application is targeting.
@@ -75,7 +77,7 @@ module.exports = function() {
 			 *
 			 * See: http://webpack.github.io/docs/configuration.html#output-path
 			 */
-			path: helpers.root("dist"),
+			path: helpers.root(buildUtils.getAngularCliAppConfig().outDir),
 
 			/**
 			 * Specifies the name of each output file on disk.
@@ -114,7 +116,7 @@ module.exports = function() {
 				{
 					test: /\.css$/,
 					use: [{ loader: "style-loader", options: { attrs: { nonce: "cef324d21ec5483c8819cc7a5e33c4a2" } } }, "css-loader"],
-					include: [helpers.root("src", "styles")]
+					include: [helpers.root(rootDir, "styles")]
 				},
 
 				/**
@@ -129,7 +131,7 @@ module.exports = function() {
 						"css-loader",
 						"sass-loader"
 					],
-					include: [helpers.root("src", "styles")]
+					include: [helpers.root(rootDir, "styles")]
 				},
 
 				/**
@@ -161,7 +163,7 @@ module.exports = function() {
 							}
 						}
 					],
-					include: [helpers.root("src", "styles")]
+					include: [helpers.root(rootDir, "styles")]
 				}
 			]
 		},
@@ -261,7 +263,7 @@ module.exports = function() {
 				// ignored: /node_modules/ // node_modules should also be watched for any changes in @nationalbankbelgium
 			},
 			// TODO: to enable this we should make Webpack to write dist files to disk
-			// contentBase: helpers.root("dist"), // necessary so that all the content is available (e.g., app assets, stark assets, ...)
+			// contentBase: helpers.root(buildUtils.getApplicationAssetsConfig().outDir), // necessary so that all the content is available (e.g., app assets, stark assets, ...)
 
 			/**
 			 * Here you can access the Express app object and add your own custom middleware to it.

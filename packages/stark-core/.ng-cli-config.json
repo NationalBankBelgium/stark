@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"project": {
+		"name": "stark-core"
+	},
+	"apps": [
+		{
+			"root": "src",
+			"outDir": "dist",
+			"assets": [],
+			"test": "base.spec.ts",
+			"tsconfig": "tsconfig.json",
+			"testTsconfig": "tsconfig.spec.json"
+		}
+	]
+}

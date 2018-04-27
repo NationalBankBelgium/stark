@@ -59,7 +59,7 @@ module.exports = function(config) {
 
 		// list of files / patterns to load in the browser
 		files: [
-			{ pattern: helpers.root("base.spec.ts") },
+			{ pattern: helpers.root(helpers.getAngularCliAppConfig().test) },
 			{ pattern: helpers.root("src/**/*.ts") },
 			{ pattern: helpers.root("src/**/*.html") }
 		],
@@ -88,7 +88,7 @@ module.exports = function(config) {
 					require("karma-typescript-angular2-transform") // see https://github.com/monounity/karma-typescript-angular2-transform
 				]
 			},
-			tsconfig: "tsconfig.spec.json"
+			tsconfig: helpers.getAngularCliAppConfig().testTsconfig
 		},
 
 		// IMPORTANT: define the custom instrumenter here to support the latest Istanbul API

@@ -55,8 +55,9 @@ module.exports = function() {
 		HMR: false
 	});
 
-	// set environment suffix so these environments are loaded.
-	METADATA.envFileSuffix = METADATA.E2E ? "e2e.prod" : "prod";
+	const rootDir = buildUtils.getAngularCliAppConfig().root;
+
+	METADATA.environment = METADATA.E2E ? "e2e.prod" : "prod";
 
 	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
@@ -82,7 +83,7 @@ module.exports = function() {
 			 *
 			 * See: http://webpack.github.io/docs/configuration.html#output-path
 			 */
-			path: helpers.root("dist"),
+			path: helpers.root(buildUtils.getAngularCliAppConfig().outDir),
 
 			/**
 			 * Specifies the name of each output file on disk.
@@ -120,7 +121,7 @@ module.exports = function() {
 						fallback: "style-loader",
 						use: "css-loader"
 					}),
-					include: [helpers.root("src", "styles")]
+					include: [helpers.root(rootDir, "styles")]
 				},
 
 				/**
@@ -132,7 +133,7 @@ module.exports = function() {
 						fallback: "style-loader",
 						use: "css-loader!sass-loader"
 					}),
-					include: [helpers.root("src", "styles")]
+					include: [helpers.root(rootDir, "styles")]
 				},
 
 				/**
@@ -164,7 +165,7 @@ module.exports = function() {
 							}
 						]
 					}),
-					include: [helpers.root("src", "styles")]
+					include: [helpers.root(rootDir, "styles")]
 				}
 			]
 		},
