@@ -20,7 +20,7 @@ cd ${currentDir}
 
 # List of all packages, separated by a space
 # Packages will be transpiled using NGC (unless if also part of NODE_PACKAGES like the build package)
-PACKAGES=(stark-core)
+PACKAGES=(stark-core stark-ui)
 
 # Packages that should not be compiled by NGC but just with TSC
 TSC_PACKAGES=()
@@ -253,6 +253,11 @@ do
     
           logInfo "Compile package $PACKAGE"
           compilePackage ${SRC_DIR} ${OUT_DIR} ${PACKAGE} ${TSC_PACKAGES[@]+"${TSC_PACKAGES[@]}"}
+
+          logInfo "Copy assets folders for package $PACKAGE"
+          syncOptions=(-a --include="**/assets/" --exclude="*.js" --exclude="*.js.map" --exclude="*.ts" --include="*.json" --exclude="node_modules/")
+          syncFiles $SRC_DIR $OUT_DIR "${syncOptions[@]}"
+          unset syncOptions
         fi
   
         if [[ ${BUNDLE} == true ]]; then
@@ -262,22 +267,23 @@ do
           rm -rf ${NPM_DIR} && mkdir -p ${NPM_DIR}
 
           logInfo "Copy ${PACKAGE} typings from ${OUT_DIR} to ${NPM_DIR}"
-          syncOptions=(-a --exclude="*.js" --exclude="*.js.map")
+          syncOptions=(-a --exclude="*.js" --exclude="*.js.map" --exclude="**/assets/" --exclude="node_modules/")
           syncFiles $OUT_DIR $NPM_DIR "${syncOptions[@]}"
           unset syncOptions
           
           logInfo "Copy ESM2015 for ${PACKAGE}"
-          syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json")
+          syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json" --exclude="**/assets/" --exclude="node_modules/")
           syncFiles $OUT_DIR $ESM2015_DIR "${syncOptions[@]}"
           unset syncOptions
        
-          logDebug "Rollup $PACKAGE" 1
+          logDebug "Rollup $PACKAGE to ESM2015 folder" 1
           rollupIndex ${OUT_DIR} ${ESM2015_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
+          logDebug "Rollup $PACKAGE to FESM2015 folder" 1
           rollupIndex ${OUT_DIR} ${FESM2015_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
 
           logDebug "Produce ESM5 version" 1
           compilePackageES5 ${SRC_DIR} ${OUT_DIR_ESM5} ${PACKAGE}
-          syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json")
+          syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json" --exclude="node_modules/")
           syncFiles $OUT_DIR_ESM5 $ESM5_DIR "${syncOptions[@]}"
           unset syncOptions
           rollupIndex ${OUT_DIR_ESM5} ${FESM5_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}

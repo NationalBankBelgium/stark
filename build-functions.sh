@@ -35,7 +35,7 @@ syncFiles() {
 isIgnoredDirectory() {
   #logTrace "${FUNCNAME[0]}: Checking for ${1}" 1
   name=$(basename ${1})
-  if [[ -f "${1}" || "${name}" == "src" || "${name}" == "test" || "${name}" == "integrationtest" || "${name}" == "reports" ]]; then
+  if [[ -f "${1}" || "${name}" == "src" || "${name}" == "test" || "${name}" == "integrationtest" || "${name}" == "reports" || "${name}" == "assets" || "${name}" == "node_modules" ]]; then
     #logTrace "No" 1
     return 0
   else
@@ -174,7 +174,7 @@ rollupIndex() {
   fi
 
   # Recurse for sub directories
-  for DIR in ${1}/* ; do
+  for DIR in ${1}/*; do
     local sub_package=$(basename "${DIR}")
     isIgnoredDirectory ${DIR} && continue
     local regex=".+/(.+)/${sub_package}.js"

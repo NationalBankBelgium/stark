@@ -10,7 +10,7 @@
     "paths": {
       "rxjs/*": ["../node_modules/rxjs/*"],
       "@angular/*": ["../node_modules/@angular/*"],
-      "@nationalbankbelgium/stark-*": ["./*"]
+      "@nationalbankbelgium/stark-*": ["./stark-*"]
     },
     "skipDefaultLibCheck": true,
     "inlineSourceMap": true,

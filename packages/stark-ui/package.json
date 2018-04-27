@@ -1,0 +1,66 @@
+{
+  "name": "@nationalbankbelgium/stark-ui",
+  "version": "0.0.0-PLACEHOLDER-VERSION",
+  "module": "./fesm5/stark-ui.js",
+  "es2015": "./fesm2015/stark-ui.js",
+  "esm5": "./esm5/stark-ui.js",
+  "esm2015": "./esm2015/stark-ui.js",
+  "fesm5": "./fesm5/stark-ui.js",
+  "fesm2015": "fesm2015/stark-ui.js",
+  "main": "bundles/stark-ui.umd.js",
+  "types": "stark-ui.d.ts",
+  "description": "Stark - UI",
+  "author": "Stark Team",
+  "contributors": [
+    "PLACEHOLDER-CONTRIBUTORS"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/nationalbankbelgium/stark/issues",
+  "homepage": "https://github.com/nationalbankbelgium/stark",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NationalBankBelgium/stark.git"
+  },
+  "engines": {
+    "node": ">=6.11.0",
+    "npm": ">=5.3.0"
+  },
+  "dependencies": {
+    "core-js": "2.5.5",
+    "rxjs": "5.6.0-forward-compat.4",
+    "typescript": "2.6.2",
+    "zone.js": "0.8.26"
+  },
+  "devDependencies": {
+    "@angular/common": "5.2.10",
+    "@angular/compiler": "5.2.10",
+    "@angular/compiler-cli": "5.2.10",
+    "@angular/core": "5.2.10",
+    "@angular/material": "5.2.5",
+    "@angular/platform-browser": "5.2.10",
+    "@angular/platform-browser-dynamic": "5.2.10",
+    "@angular/router": "5.2.10",
+    "@nationalbankbelgium/stark-testing": "../stark-testing",
+    "tslint": "5.9.1"
+  },
+  "peerDependencies": {
+    "@angular/common": "5.x",
+    "@angular/compiler": "5.x",
+    "@angular/core": "5.x",
+    "@angular/platform-browser": "5.x",
+    "@angular/platform-browser-dynamic": "5.x",
+    "@angular/router": "5.x",
+    "@nationalbankbelgium/stark-core": "0.0.0-PLACEHOLDER-VERSION"
+  },
+  "scripts": {
+    "clean": "npx rimraf dist",
+    "clean:modules": "npx rimraf ./node_modules package-lock.json",
+    "clean:all": "npm run clean && npm run clean:modules",
+    "ngc": "ngc -p tsconfig-build.json",
+    "lint": "tslint --config tslint.json --project ./tsconfig.spec.json --format codeFrame",
+    "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start ./karma.conf.typescript.js",
+    "test-fast:ci": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start karma.conf.typescript.ci.js",
+    "tsc": "tsc -p tsconfig-build.json",
+    "tslint": "tslint"
+  }
+}

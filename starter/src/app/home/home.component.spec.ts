@@ -9,8 +9,7 @@ import {
 	StarkBackendAuthenticationTypes,
 	StarkLoggingService,
 	STARK_LOGGING_SERVICE,
-	STARK_HTTP_SERVICE,
-	STARK_SESSION_SERVICE
+	STARK_HTTP_SERVICE
 } from "@nationalbankbelgium/stark-core";
 /**
  * Load the implementations that should be tested.
@@ -54,8 +53,7 @@ describe(`Home`, () => {
 						provide: STARK_HTTP_SERVICE,
 						useValue: jasmine.createSpyObj("StarkHttpService", ["executeSingleItemRequest", "executeCollectionRequest"])
 					},
-					{ provide: STARK_LOGGING_SERVICE, useValue: jasmine.createSpyObj("StarkLoggingService", ["debug", "error"]) },
-					{ provide: STARK_SESSION_SERVICE, useValue: jasmine.createSpyObj("StarkSessionService", ["login"]) }
+					{ provide: STARK_LOGGING_SERVICE, useValue: jasmine.createSpyObj("StarkLoggingService", ["debug", "error"]) }
 				]
 			})
 

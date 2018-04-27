@@ -1,0 +1,87 @@
+/**********  VARIABLES **********/
+/* stark: src/ui/css/_variables.pcss */
+
+/* Custom media */
+/* 
+	does NOT accept variables in the rules
+	 Example use: 
+	@media (--tablet-only) {}
+*/
+
+/* stylelint-disable at-rule-empty-line-before */
+@custom-media --tablet (width >= 600px);
+@custom-media --desktop (width >= 960px);
+@custom-media --mobile-only (width < 600px);
+@custom-media --tablet-only (width >= 600px) and (width < 960px);
+/* stylelint-enable */
+
+/* Elevations
+ 
+	Use: 
+  24 Dialog, Picker
+  16 Nav drawer , Right drawer, Modal bottom Sheet
+  12 Floating action button (FAB - pressed)
+  9  Sub menu (+1dp for each sub menu)
+  8  Bottom navigation bar, Menu, Card (when picked up), Raised button (pressed state)
+  6  Floating action button (FAB - resting elevation), Snackbar
+  4  App Bar
+  3  Refresh indicator, Quick entry / Search bar (scrolled state)
+  2  Card (resting elevation) *, Raised button (resting elevation)*, Quick entry / Search bar (resting elevation)
+  1  Switch
+*/
+:root {
+  --elevation-1: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  --elevation-2: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
+  --elevation-3: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12);
+  --elevation-4: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  --elevation-6: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  --elevation-8: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  --elevation-9: 0 5px 6px -3px rgba(0, 0, 0, 0.2), 0 9px 12px 1px rgba(0, 0, 0, 0.14), 0 3px 16px 2px rgba(0, 0, 0, 0.12);
+  --elevation-12: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 12px 17px 2px rgba(0, 0, 0, 0.14), 0 5px 22px 4px rgba(0, 0, 0, 0.12);
+  --elevation-16: 0 8px 10px -5px rgba(0, 0, 0, 0.2), 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12);
+  --elevation-24: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+:root {
+  /* x-form-compact labels */
+  --compact-label-width: 130px;
+  --compact-label-spacing: 140px;
+
+  /* page layout: used by app, header, sidebar, content blocks */
+  --stark-header-size: 100px;
+  --stark-header-size-desktop: 128px;
+  --stark-header-actions-top: 78px;
+  --stark-header-actions-top-desktop: 106px;
+  --stark-max-content-width: 1200px;
+}
+
+/**********  COLORS **********/
+:root {
+  /*  Text on light background */
+  --primary-dark-text-color: #000;
+  --secondary-dark-text-color: rgba(0, 0, 0, 0.7);
+  --tertiary-dark-text-color: rgba(0, 0, 0, 0.45);
+  --disabled-color: rgba(0, 0, 0, 0.38);
+  --divider-color: rgba(0, 0, 0, 0.12);
+  --placeholder-color: var(--secondary-dark-text-color);
+
+  /*  Text on dark background */
+  --primary-light-text-color: rgba(255, 255, 255, 0.7);
+  --secondary-light-text-color: rgba(255, 255, 255, 0.95);
+
+  --offwhite: #f6f9fa;
+
+  /* messages */
+  --message-info: #0076c8;
+  --message-info-700: #0063bb;
+  --message-warning: #ff9800;
+  --message-warning-700: #f57c00;
+  --message-alert: #d32f2f;
+  --message-alert-700: #b71c1c;
+  --message-success: #4caf50;
+  --message-success-700: #388e3c;
+  --message-neutral: #bfbfbf;
+  --message-neutral-700: #999;
+}
+
+/* END stark: src/ui/css/_variables.pcss */
