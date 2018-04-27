@@ -2,6 +2,7 @@ const ts = require("typescript");
 const path = require("path");
 const fs = require("fs");
 const helpers = require("./helpers");
+const ngCliUtils = require("./ng-cli-utils");
 
 const DEFAULT_METADATA = {
 	title: "Stark Application by @NationalBankBelgium",
@@ -60,15 +61,6 @@ function rxjsAlias(supportES2015) {
 	}
 }
 
-function isDirectory(path) {
-	try {
-		return fs.statSync(path).isDirectory();
-	}
-	catch (_) {
-		return false;
-	}
-}
-
 /**
  * Foreach installed NationalBankBelgium packages, read assets.json file in the root of the module.
  * Based on assets.json file, fill an array with the needed assets for the module.
@@ -77,24 +69,19 @@ function isDirectory(path) {
 function getNbbAssetsConfig() {
 	let customAssets = [];
 
-	const getDirectories = source =>
-		fs.readdirSync(source).filter((name) => isDirectory(path.join(source, name)));
-
 	const NBB_MODULES_PATH = "node_modules/@nationalbankbelgium";
-	const nbbPackages = getDirectories(helpers.root(NBB_MODULES_PATH));
+	const nbbPackages = ngCliUtils.getDirectoriesNames(helpers.root(NBB_MODULES_PATH));
 
 	for (const nbbPackage of nbbPackages) {
-		
 		const ngCliConfigPath = helpers.root(NBB_MODULES_PATH + "/" + nbbPackage + "/" + ".ng-cli-config.json");
 
 		if (fs.existsSync(ngCliConfigPath)) {
 			const packageCliConfig = require(ngCliConfigPath);
-
-			if (packageCliConfig["apps"] && packageCliConfig["apps"][0]
-				&& packageCliConfig["apps"][0].assets instanceof Array) {
-				customAssets = [...customAssets, ...getCopyWebpackPluginConfig(packageCliConfig["apps"][0].assets)];
-			} else {
-				throw new Error("Ng-Cli config from " + nbbPackage + " has no assets defined. Please provide assets array or empty array.");
+			const cliConfig = ngCliUtils.validateAngularCLIConfig(packageCliConfig);
+			if (cliConfig) {
+				if (cliConfig["apps"] && cliConfig["apps"][0] && cliConfig["apps"][0].assets) {
+					customAssets = [...customAssets, ...getCopyWebpackPluginConfig(cliConfig["apps"][0].assets)];
+				}
 			}
 		}
 	}
@@ -108,7 +95,7 @@ function getNbbAssetsConfig() {
 function getApplicationAssetsConfig() {
 	const appConfig = getAngularCliAppConfig();
 
-	if (appConfig.assets && appConfig.assets instanceof Array) {
+	if (appConfig.assets) {
 		return getCopyWebpackPluginConfig(appConfig.assets);
 	}
 
@@ -119,10 +106,15 @@ function getAngularCliAppConfig() {
 	const applicationAngularCliConfigPath = helpers.root(".angular-cli.json");
 	if (fs.existsSync(applicationAngularCliConfigPath)) {
 		const angularCliConfig = require(applicationAngularCliConfigPath);
-		if (angularCliConfig["apps"] && angularCliConfig["apps"][0]) {
-			return angularCliConfig["apps"][0];
+		const cliConfig = ngCliUtils.validateAngularCLIConfig(angularCliConfig);
+		if (cliConfig) {
+			if (cliConfig["apps"] && cliConfig["apps"][0]) {
+				return cliConfig["apps"][0];
+			} else {
+				throw new Error("Angular-cli config apps is wrong. Please adapt it to follow Angular CLI way.");
+			}
 		} else {
-			throw new Error("Angular-cli config apps is wrong. Please adapt it to follow Angular CLI way.");
+			throw new Error("Parsing " + applicationAngularCliConfigPath + " failed. Ensure the file is valid JSON.");
 		}
 	} else {
 		throw new Error(".angular-cli.json is not present. Please add this at the root your project because stark-build needs this.");
@@ -140,14 +132,14 @@ function getCopyWebpackPluginConfig(assets) {
 	const projectRoot = helpers.root("");
 	const appRoot = helpers.root(appConfig.root);
 
-	return assets.map((asset) => {
+	return assets.map(asset => {
 		// Convert all string assets to object notation.
-		asset = typeof asset === 'string' ? {glob: asset} : asset;
+		asset = typeof asset === "string" ? { glob: asset } : asset;
 		// Add defaults.
 		// Input is always resolved relative to the appRoot.
-		asset.input = path.resolve(appRoot, asset.input || '').replace(/\\/g, '/');
-		asset.output = asset.output || '';
-		asset.glob = asset.glob || '';
+		asset.input = path.resolve(appRoot, asset.input || "").replace(/\\/g, "/");
+		asset.output = asset.output || "";
+		asset.glob = asset.glob || "";
 		// Prevent asset configurations from writing outside of the output path, except if the user
 		// specify a configuration flag.
 		// Also prevent writing outside the project path. That is not overridable.
@@ -155,32 +147,33 @@ function getCopyWebpackPluginConfig(assets) {
 		const absoluteOutputPath = path.resolve(projectRoot, appConfig.outDir);
 		const absoluteAssetOutput = path.resolve(absoluteOutputPath, asset.output);
 		const outputRelativeOutput = path.relative(absoluteOutputPath, absoluteAssetOutput);
-		if (outputRelativeOutput.startsWith('..') || path.isAbsolute(outputRelativeOutput)) {
+		if (outputRelativeOutput.startsWith("..") || path.isAbsolute(outputRelativeOutput)) {
 			const projectRelativeOutput = path.relative(projectRoot, absoluteAssetOutput);
-			if (projectRelativeOutput.startsWith('..') || path.isAbsolute(projectRelativeOutput)) {
-				const message = 'An asset cannot be written to a location outside the project.';
+			if (projectRelativeOutput.startsWith("..") || path.isAbsolute(projectRelativeOutput)) {
+				const message = "An asset cannot be written to a location outside the project.";
 				throw new Error(message);
 			}
 			if (!asset.allowOutsideOutDir) {
-				const message = 'An asset cannot be written to a location outside of the output path. '
-					+ 'You can override this message by setting the `allowOutsideOutDir` '
-					+ 'property on the asset to true in the CLI configuration.';
+				const message =
+					"An asset cannot be written to a location outside of the output path. " +
+					"You can override this message by setting the `allowOutsideOutDir` " +
+					"property on the asset to true in the CLI configuration.";
 				throw new Error(message);
 			}
 		}
 		// Prevent asset configurations from reading files outside of the project.
 		const projectRelativeInput = path.relative(projectRoot, asset.input);
-		if (projectRelativeInput.startsWith('..') || path.isAbsolute(projectRelativeInput)) {
-			const message = 'An asset cannot be read from a location outside the project.';
+		if (projectRelativeInput.startsWith("..") || path.isAbsolute(projectRelativeInput)) {
+			const message = "An asset cannot be read from a location outside the project.";
 			throw new Error(message);
 		}
 		// Ensure trailing slash.
-		if (isDirectory(path.resolve(asset.input))) {
-			asset.input += '/';
+		if (ngCliUtils.isDirectory(path.resolve(asset.input))) {
+			asset.input += "/";
 		}
 		// Convert dir patterns to globs.
-		if (isDirectory(path.resolve(asset.input, asset.glob))) {
-			asset.glob = asset.glob + '/**/*';
+		if (ngCliUtils.isDirectory(path.resolve(asset.input, asset.glob))) {
+			asset.glob = asset.glob + "/**/*";
 		}
 		return {
 			context: asset.input,
