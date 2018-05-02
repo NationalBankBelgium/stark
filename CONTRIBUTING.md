@@ -282,10 +282,34 @@ Must be one of the following:
 * **refactor**: A code change that neither fixes a bug nor adds a feature
 * **perf**: A code change that improves performance
 * **test**: Adding missing tests
+* **build**:  Changes that affect the build system or external dependencies
+* **ci**: Changes to our CI configuration files and scripts
 * **chore**: Changes to the build process or auxiliary tools and libraries such as documentation generation
+* **revert**: Reverts a previous commit
 
 #### Scope
-The scope can be anything specifying place of the commit change. For example `stark-core`, `table`, `theme`, `sidenav`, etc. If you make multiple commits for the same component, please keep the naming of this component consistent. For example, if you make a change to navigation and the first commit is `fix(sidenav)`, you should continue to use `sidenav` for any more commits related to navigation.
+Must be one of the following:
+
+* **core**
+* **ui**
+* **test**
+* **build**
+* **accessibility**
+* **build-main**
+* **developer-guide**
+* **docs**
+* **qa**
+* **stark-all**
+* **stark-build**
+* **stark-core**
+* **stark-demo**
+* **stark-starter**
+* **stark-rbac**
+* **stark-ui**
+* **testing**
+
+If the scope you want to specify is not in the list, you can ask to add it or add it in the commitlint
+configuration file (`commitlint.config.js`) in the root.
 
 #### Subject
 The subject contains succinct description of the change:
