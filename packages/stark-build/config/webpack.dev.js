@@ -19,6 +19,8 @@ const CircularDependencyPlugin = require("circular-dependency-plugin");
 // Dev custom config
 const webpackCustomConfig = require(helpers.root("config/webpack-custom-config.dev.json"));
 
+const WebpackMonitor = require("webpack-monitor");
+
 /**
  * Webpack configuration
  *
@@ -221,6 +223,19 @@ module.exports = function() {
 				exclude: /node_modules/,
 				// log warnings to webpack
 				failOnError: false
+			}),
+
+			/**
+			 * Plugin: WebpackMonitor
+			 * Description: This plugins give us information about the bundle size
+			 * See: https://github.com/webpackmonitor/webpackmonitor
+			 */
+			new WebpackMonitor({
+				capture: true, // -> default 'true'
+				target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
+				launch: true, // -> default 'false'
+				port: 3030, // default -> 8081
+				excludeSourceMaps: true // default 'true'
 			})
 		],
 
