@@ -50,7 +50,7 @@
     "build:stark-build": "npm run build -- --packages=stark-build",
     "build:stark-core": "npm run build -- --packages=stark-core",
     "build:stark-testing": "npm run build -- --packages=stark-testing",
-    "clean": "rimraf ./dist",
+    "clean": "npx rimraf ./dist",
     "clean:all": "npm run clean && npm run clean:stark-build && npm run clean:stark-core && npm run clean:stark-testing && npm run clean:starter",
     "clean:stark-build": "cd packages/stark-build && npm run clean && cd ../..",
     "clean:stark-core": "cd packages/stark-core && npm run clean && cd ../..",

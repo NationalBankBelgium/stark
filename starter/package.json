@@ -68,7 +68,7 @@
     "protractor": "protractor",
     "protractor:delay": "sleep 3 && npm run protractor",
     "protractor:live": "protractor --elementExplorer",
-    "rimraf": "rimraf",
+    "rimraf": "npx rimraf",
     "server:dev:hmr": "npm run server:dev -- --hot",
     "server:aot:dev": "cross-env BUILD_AOT=1 npm run server:dev",
     "server:dev": "npm run clean:dist && npm run webpack-dev-server -- --config node_modules/@nationalbankbelgium/stark-build/config/webpack.dev.js --open --progress --profile --watch --content-base src/",
@@ -117,7 +117,7 @@
     "@angular/platform-server": "5.2.10",
     "@angular/router": "5.2.10",
     "@mdi/angular-material": "2.2.43",
-    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.2-02de8a5.tgz",
+    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.2-5a4445e.tgz",
     "@ngrx/store": "5.2.0",
     "@uirouter/angular": "1.0.1",
     "@uirouter/visualizer": "6.0.0",
@@ -132,8 +132,8 @@
     "web-animations-js": "2.3.1"
   },
   "devDependencies": {
-    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.2-02de8a5.tgz",
-    "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.0.0-alpha.2-02de8a5.tgz",
+    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.2-5a4445e.tgz",
+    "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.0.0-alpha.2-5a4445e.tgz",
     "@types/core-js": "0.9.46",
     "@types/hammerjs": "2.0.35",
     "@types/node": "6.0.106",
