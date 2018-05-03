@@ -3,7 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
 import { NgIdleModule } from "@ng-idle/core";
-import { TranslateModule } from "@ngx-translate/core";
 import { validateSync } from "class-validator";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { storeFreeze } from "ngrx-store-freeze";
@@ -25,6 +24,15 @@ import {
 } from "@nationalbankbelgium/stark-core";
 import { routerConfigFn } from "./router.config";
 import { Deserialize } from "cerialize";
+
+/*
+ * Translations
+ */
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+const translationsEn: object = require("../../assets/translations/en.json");
+const translationsFr: object = require("../../assets/translations/fr.json");
+const translationsNl: object = require("../../assets/translations/nl.json");
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -139,4 +147,13 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		{ provide: STARK_APP_METADATA, useFactory: starkAppMetadataFactory }
 	]
 })
-export class AppModule {}
+export class AppModule {
+	public constructor(private translateService: TranslateService) {
+		this.translateService.addLangs(["en", "fr", "nl"]);
+		this.translateService.setTranslation("en", translationsEn, true);
+		this.translateService.setTranslation("fr", translationsFr, true);
+		this.translateService.setTranslation("nl", translationsNl, true);
+		this.translateService.setDefaultLang("en");
+		this.translateService.use("nl");
+	}
+}

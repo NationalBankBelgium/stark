@@ -65,7 +65,7 @@ module.exports = function(options) {
 			sourceMap: true // TODO: apply based on tsConfig value?
 		}
 	};
-	
+
 	const rootDir = buildUtils.getAngularCliAppConfig().root;
 
 	return {
@@ -359,8 +359,8 @@ module.exports = function(options) {
 			new CopyWebpackPlugin(
 				[
 					...buildUtils.getNbbAssetsConfig(),
-					
-					...buildUtils.getApplicationAssetsConfig(),
+
+					...buildUtils.getApplicationAssetsConfig()
 					// TODO uncomment this when is part of Stark
 					// // Stark assets
 					// {

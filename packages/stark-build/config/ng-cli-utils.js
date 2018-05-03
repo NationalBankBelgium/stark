@@ -29,7 +29,7 @@ function validateAngularCLIConfig(jsonConfig) {
 	try {
 		const serializedConfig = JSON.parse(config.$$serialize("application/json"));
 		return serializedConfig;
-	} catch(error) {
+	} catch (error) {
 		return false;
 	}
 }
