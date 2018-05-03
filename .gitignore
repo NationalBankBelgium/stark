@@ -1,0 +1,33 @@
+# Build
+.tmp/
+/.tmp/
+tmp/
+
+# Bak
+*.bak
+
+# OS generated files #
+Desktop.ini
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Icon?
+
+# JetBrains IDEs
+*.iml
+.idea/
+.webstorm/
+*.swp
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Patch files
+*.patch
+
+# Bash
+bash.exe.stackdump
