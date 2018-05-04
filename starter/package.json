@@ -76,6 +76,7 @@
     "server:prod:ci": "http-server dist -p 3000 -c-1 --cors",
     "server": "npm run server:dev",
     "start:hmr": "npm run server:dev:hmr",
+    "start:monitor": "npx mkdirp reports && npm run start -- --env.monitor",
     "start": "npm run server:dev",
     "start:aot": "npm run server:aot:dev",
     "test": "npm run lint && karma start",
@@ -117,7 +118,7 @@
     "@angular/platform-server": "5.2.10",
     "@angular/router": "5.2.10",
     "@mdi/angular-material": "2.2.43",
-    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.2-5a4445e.tgz",
+    "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-alpha.2-a922e4a.tgz",
     "@ngrx/store": "5.2.0",
     "@uirouter/angular": "1.0.1",
     "@uirouter/visualizer": "6.0.0",
@@ -132,8 +133,8 @@
     "web-animations-js": "2.3.1"
   },
   "devDependencies": {
-    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.2-5a4445e.tgz",
-    "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.0.0-alpha.2-5a4445e.tgz",
+    "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.0.0-alpha.2-a922e4a.tgz",
+    "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.0.0-alpha.2-a922e4a.tgz",
     "@types/core-js": "0.9.46",
     "@types/hammerjs": "2.0.35",
     "@types/node": "6.0.106",
