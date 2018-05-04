@@ -11,17 +11,17 @@ describe("Reducer: SessionReducer", () => {
 
 	beforeEach(() => {
 		user = { uuid: "694", username: "sgonzales", firstName: "s", lastName: "gonzales", language: "FR", roles: [] };
-		session = { currentLanguage: "FR", user: <StarkUser>user };
+		session = { currentLanguage: "FR", user: user };
 	});
 
 	describe("on CHANGE_LANGUAGE_SUCCESS", () => {
 		it("should set the session language when state given", () => {
 			// create the initial state object
-			const initialState: StarkSession = session;
+			const initialState: Partial<StarkSession> = {};
 			deepFreeze(initialState); //Enforce immutability
 
 			// Send the CHANGE_LANGUAGE_SUCCESS action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(initialState, new ChangeLanguageSuccess("NL"));
+			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new ChangeLanguageSuccess("NL"));
 			expect(changedState.currentLanguage).toBe("NL");
 		});
 
@@ -36,30 +36,30 @@ describe("Reducer: SessionReducer", () => {
 	describe("on INITIALIZE_SESSION", () => {
 		it("should set the session user when state given", () => {
 			// create the initial state object
-			const initialState: StarkSession = session;
+			const initialState: Partial<StarkSession> = {};
 			deepFreeze(initialState); //Enforce immutability
 
 			// Send the INITIALIZE_SESSION action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(initialState, new InitializeSession(user));
-			expect(changedState.user).toBe(<StarkUser>user);
+			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new InitializeSession(user));
+			expect(changedState.user).toBe(user);
 		});
 
 		it("should set the session user even if the state is not defined", () => {
 			// Send the INITIALIZE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(<any>undefined, new InitializeSession(user));
 			expect(changedState).toBeDefined();
-			expect(changedState.user).toBe(<StarkUser>user);
+			expect(changedState.user).toBe(user);
 		});
 	});
 
 	describe("on DESTROY_SESSION", () => {
 		it("should remove the session user when state given", () => {
 			// create the initial state object
-			const initialState: StarkSession = { currentLanguage: "FR", user: <StarkUser>user };
+			const initialState: Partial<StarkSession> = { user: user };
 			deepFreeze(initialState); //Enforce immutability
 
 			// Send the EXPIRE_SESSION action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(initialState, new DestroySession());
+			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new DestroySession());
 			expect(changedState.user).toBeUndefined();
 		});
 

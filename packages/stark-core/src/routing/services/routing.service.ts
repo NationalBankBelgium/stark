@@ -91,8 +91,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 	public navigateTo(newState: string, params?: RawParams, options?: TransitionOptions): Observable<any> {
 		this.store.dispatch(new Navigate(this.getCurrentStateName(), newState, params, options));
-		const transitionObservable: Observable<any> = fromPromise(this.$state.go(newState, params, options));
-		return transitionObservable;
+		return fromPromise(this.$state.go(newState, params, options));
 	}
 
 	public navigateToHome(params?: RawParams): Observable<any> {

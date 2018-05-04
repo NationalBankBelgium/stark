@@ -21,6 +21,7 @@ import { stringMap } from "../../serialization";
 import { StarkHttpEchoType, StarkHttpHeaders, StarkHttpQueryParameters, StarkSortOrder } from "../constants";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import { StarkHttpRequestParams } from "./http-request-parameters.intf";
+import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 
@@ -30,6 +31,491 @@ const mockDate: Date = new Date();
 const mockFrozenPathParamsWithoutUUID: StarkHttpRequestParams = deepFreeze({
 	pathParameters: { someId: "1234" }
 });
+
+type StarkHttpFetchResourceRequestBuilder<ResourceType extends StarkResource> =
+	| StarkHttpGetCollectionRequestBuilder<ResourceType>
+	| StarkHttpGetRequestBuilder<ResourceType>
+	| StarkHttpSearchRequestBuilder<ResourceType>;
+
+interface StarkHttpRequestBuilderSpecVariables<RequestBuilderType = StarkHttpBaseRequestBuilder<MockResource>> {
+	mockBackend: StarkBackend;
+	mockResource: StarkResource;
+	mockRequest: StarkHttpRequest;
+	requestBuilder: RequestBuilderType;
+}
+
+function assertHeaders(requestHeaders: Map<string, string>, expectedHeaders: Map<string, string | undefined>): void {
+	expect(requestHeaders).toBeDefined();
+	expect(requestHeaders.size).toBe(expectedHeaders.size);
+
+	expectedHeaders.forEach((value?: string, header?: string) => {
+		expect(header).toBeDefined();
+		expect((<string>header).length).not.toBe(0);
+		expect(requestHeaders.has(<string>header)).toBe(true);
+		if (typeof value !== "undefined") {
+			expect(requestHeaders.get(<string>header)).toBe(value);
+		} else {
+			expect(requestHeaders.get(<string>header)).toBeUndefined();
+		}
+	});
+}
+
+function assertQueryParameters(
+	requestQueryParams: Map<string, string | string[] | undefined>,
+	expectedQueryParams: Map<string, string | string[] | undefined>
+): void {
+	expect(requestQueryParams).toBeDefined();
+	expect(requestQueryParams.size).toBe(expectedQueryParams.size);
+
+	expectedQueryParams.forEach((value?: string | string[], queryParam?: string) => {
+		expect(queryParam).toBeDefined();
+		expect((<string>queryParam).length).not.toBe(0);
+		expect(requestQueryParams.has(<string>queryParam)).toBe(true);
+		if (typeof value !== "undefined") {
+			expect(requestQueryParams.get(<string>queryParam)).toEqual(value);
+		} else {
+			expect(requestQueryParams.get(<string>queryParam)).toBeUndefined();
+		}
+	});
+}
+
+function testEcho(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<StarkHttpCreateRequestBuilder<MockResource>>): void {
+	describe("on echo", () => {
+		let builder: StarkHttpCreateRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should set the query parameter echo with the value passed", () => {
+			builder.echo(StarkHttpEchoType.NONE);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.NONE]]));
+		});
+
+		it("should set the query parameter echo with the value passed and override the previous one", () => {
+			builder.echo(StarkHttpEchoType.NONE);
+			builder.echo(StarkHttpEchoType.ID);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
+		});
+	});
+}
+
+function testSetHeader(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
+	describe("on setHeader", () => {
+		let builder: StarkHttpBaseRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should add the header name/value only if the value is defined", () => {
+			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
+			builder.setHeader("invalidHeader", <any>undefined);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.CONTENT_TYPE, "application/json"]]));
+		});
+
+		it("should add the header name/value and add it to existing ones", () => {
+			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
+			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertHeaders(
+				request.headers,
+				new Map([
+					[StarkHttpHeaders.CONTENT_TYPE, "application/json"],
+					[StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode]
+				])
+			);
+		});
+	});
+}
+
+function testAddQueryParameter(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
+	describe("on addQueryParameter", () => {
+		let builder: StarkHttpBaseRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should add the query parameter name/value except those with undefined or empty value (default)", () => {
+			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
+			builder.addQueryParameter("invalidParam1", undefined);
+			builder.addQueryParameter("invalidParam2", "");
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
+		});
+
+		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
+			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
+			builder.addQueryParameter("forceValidParam", undefined, true);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", undefined]]));
+		});
+
+		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
+			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
+			builder.addQueryParameter("forceValidParam", "", undefined, true);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", ""]]));
+		});
+
+		it("should add the query parameter name/value and add it to existing ones", () => {
+			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
+			builder.addQueryParameter("include", "name");
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["include", "name"]]));
+		});
+	});
+}
+
+function testAddQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
+	describe("on addQueryParameters", () => {
+		let builder: StarkHttpBaseRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
+			builder.addQueryParameters({ echo: StarkHttpEchoType.ID, invalidParam1: undefined, invalidParam2: "" });
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
+		});
+
+		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
+			builder.addQueryParameters({ echo: StarkHttpEchoType.ID, forceValidParam: undefined }, true);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", undefined]]));
+		});
+
+		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
+			builder.addQueryParameters({ echo: StarkHttpEchoType.ID, forceValidParam: "" }, undefined, true);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", ""]]));
+		});
+
+		it("should add the query parameters name/value WITHOUT removing the existing ones", () => {
+			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
+
+			let request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
+
+			builder.addQueryParameters({ param1: "one", param2: "two" });
+
+			request = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["param1", "one"], ["param2", "two"]]));
+		});
+	});
+}
+
+function testSetQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
+	describe("on setQueryParameters", () => {
+		let builder: StarkHttpBaseRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
+			builder.setQueryParameters({ echo: StarkHttpEchoType.ID, invalidParam1: undefined, invalidParam2: "" });
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
+		});
+
+		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
+			builder.setQueryParameters({ echo: StarkHttpEchoType.ID, forceValidParam: undefined }, true);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", undefined]]));
+		});
+
+		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
+			builder.setQueryParameters({ echo: StarkHttpEchoType.ID, forceValidParam: "" }, undefined, true);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", ""]]));
+		});
+
+		it("should add the query parameters name/value and remove the existing ones", () => {
+			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
+
+			let request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
+
+			builder.setQueryParameters({ param1: "one", param2: "two" });
+
+			request = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["param2", "two"]]));
+		});
+	});
+}
+
+function testSetPathParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
+	describe("on setPathParameters", () => {
+		let builder: StarkHttpBaseRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should interpolate the resourcePath with the params provided", () => {
+			builder.setPathParameters({ somethingId: "1", elseId: "5" });
+
+			const request: StarkHttpRequest = builder.build();
+			expect(request.resourcePath).toEqual("/something/1/else/5/next");
+		});
+	});
+}
+
+function testRetry(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
+	describe("on retry", () => {
+		let builder: StarkHttpBaseRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should add the retryCount option to the request", () => {
+			builder.retry(4);
+
+			const request: StarkHttpRequest = builder.build();
+			expect(request.retryCount).toBe(4);
+		});
+	});
+}
+
+function testBuild(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
+	describe("on build", () => {
+		let builder: StarkHttpBaseRequestBuilder<MockResource>;
+		let mockBackend: StarkBackend;
+		let mockResource: StarkResource;
+
+		beforeEach(() => {
+			({ requestBuilder: builder, mockBackend: mockBackend, mockResource: mockResource } = beforeEachFn());
+		});
+
+		it("should return the created StarkHttpRequest", () => {
+			const request: StarkHttpRequest = builder.build();
+
+			expect(request.backend).toBe(mockBackend);
+			expect(request.resourcePath).toBe(resourcePath);
+			expect(request.headers).toBeDefined();
+			expect(request.queryParameters).toBeDefined();
+
+			if (builder instanceof StarkHttpCreateRequestBuilderImpl) {
+				expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
+				expect(request.item).toBe(mockResource);
+			} else if (builder instanceof StarkHttpDeleteRequestBuilderImpl) {
+				expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
+				expect(request.item).toBe(mockResource);
+			} else if (builder instanceof StarkHttpUpdateRequestBuilderImpl) {
+				expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
+				expect(request.item).toBe(mockResource);
+			} else if (builder instanceof StarkHttpGetRequestBuilderImpl) {
+				expect(request.requestType).toBe(StarkHttpRequestType.GET);
+				expect(request.item).toEqual({ uuid: resourceUuid });
+			} else if (builder instanceof StarkHttpGetCollectionRequestBuilderImpl) {
+				expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
+				expect(request.item).toEqual({ uuid: resourceUuid });
+			} else if (builder instanceof StarkHttpSearchRequestBuilderImpl) {
+				expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
+				expect(request.item).toBe(mockResource); // with a SEARCH request, the search criteria comes in the request item
+			}
+		});
+	});
+}
+
+function testAddAcceptedLanguage(
+	beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<StarkHttpFetchResourceRequestBuilder<MockResource>>
+): void {
+	describe("on addAcceptedLanguage", () => {
+		let builder: StarkHttpFetchResourceRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should add the accepted language to the headers and the lang param to the query parameters", () => {
+			builder.addAcceptedLanguage(StarkLanguages.EN_US);
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode]]));
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.LANG, StarkLanguages.EN_US.isoCode]]));
+		});
+
+		it("should add the accepted languages to the headers and the lang param to the query parameters", () => {
+			builder.addAcceptedLanguage(StarkLanguages.EN_US, StarkLanguages.FR_BE, StarkLanguages.NL_BE);
+
+			const expectedLanguages: string = [
+				StarkLanguages.EN_US.isoCode,
+				StarkLanguages.FR_BE.isoCode,
+				StarkLanguages.NL_BE.isoCode
+			].join(",");
+			const request: StarkHttpRequest = builder.build();
+
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.ACCEPT_LANGUAGE, expectedLanguages]]));
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.LANG, expectedLanguages]]));
+		});
+
+		it("should add the accepted languages to the ones that already exist and the lang param to the query parameters", () => {
+			builder.addAcceptedLanguage(StarkLanguages.NL_BE);
+
+			let request: StarkHttpRequest = builder.build();
+
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.NL_BE.isoCode]]));
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.LANG, StarkLanguages.NL_BE.isoCode]]));
+
+			const expectedLanguages: string = [
+				StarkLanguages.NL_BE.isoCode,
+				StarkLanguages.EN_US.isoCode,
+				StarkLanguages.FR_BE.isoCode
+			].join(",");
+
+			builder.addAcceptedLanguage(StarkLanguages.EN_US, StarkLanguages.FR_BE);
+			request = builder.build();
+
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.ACCEPT_LANGUAGE, expectedLanguages]]));
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.LANG, expectedLanguages]]));
+		});
+	});
+}
+
+function testAddFilterByInclude(
+	beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<StarkHttpFetchResourceRequestBuilder<MockResource>>
+): void {
+	describe("on addFilterByInclude", () => {
+		let builder: StarkHttpFetchResourceRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should add an entry in the fields query parameter", () => {
+			builder.addFilterByInclude("name");
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.FIELDS, "name"]]));
+		});
+
+		it("should add an entry in the fields query parameter for every field in the array", () => {
+			builder.addFilterByInclude("name", "postalCode");
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.FIELDS, "name,postalCode"]]));
+		});
+
+		it("should add an entry in the fields query parameter without removing the current ones", () => {
+			builder.addFilterByInclude("name");
+			builder.addFilterByInclude("postalCode");
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.FIELDS, "name,postalCode"]]));
+		});
+	});
+}
+
+function testAddFilterByStyle(
+	beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<StarkHttpFetchResourceRequestBuilder<MockResource>>
+): void {
+	describe("on addFilterByStyle", () => {
+		let builder: StarkHttpFetchResourceRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should set the style query parameter", () => {
+			builder.addFilterByStyle("COMPACT");
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.STYLE, "COMPACT"]]));
+		});
+
+		it("should set the style query parameter overriding previous values", () => {
+			builder.addFilterByStyle("FULL");
+			builder.addFilterByStyle("COMPACT");
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.STYLE, "COMPACT"]]));
+		});
+	});
+}
+
+function testAddSortBy(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<StarkHttpFetchResourceRequestBuilder<MockResource>>): void {
+	describe("on addSortBy", () => {
+		let builder: StarkHttpFetchResourceRequestBuilder<MockResource>;
+
+		beforeEach(() => {
+			({ requestBuilder: builder } = beforeEachFn());
+		});
+
+		it("should add a sort query parameter", () => {
+			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC));
+
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.SORT, "name+" + StarkSortOrder.ASC]]));
+		});
+
+		it("should add a sort query parameter with all the values", () => {
+			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC), new StarkSortItemImpl("postalCode", StarkSortOrder.DESC));
+
+			const expectedSort: string = "name+" + StarkSortOrder.ASC + ",postalCode+" + StarkSortOrder.DESC;
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.SORT, expectedSort]]));
+		});
+
+		it("should add a sort query parameter without removing previous values", () => {
+			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC));
+			builder.addSortBy(new StarkSortItemImpl("postalCode", StarkSortOrder.DESC));
+
+			const expectedSort: string = "name+" + StarkSortOrder.ASC + ",postalCode+" + StarkSortOrder.DESC;
+			const request: StarkHttpRequest = builder.build();
+
+			assertQueryParameters(request.queryParameters, new Map([[StarkHttpQueryParameters.SORT, expectedSort]]));
+		});
+	});
+}
 
 describe("Builder: StarkHttpRequestBuilder", () => {
 	const resourceEtag: string = "123456789";
@@ -66,12 +552,11 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = createRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("duplicateParam")).toEqual(["dup1", "dup2", "dup3"]);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBe(5);
@@ -90,10 +575,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = createRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", undefined]]));
 		});
 
 		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
@@ -108,10 +590,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = createRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", ""]]));
 		});
 
 		it("should use a new serializer with the custom type provided in 'serializationType' param when no custom serializer is defined", () => {
@@ -129,10 +608,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = createRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -154,10 +631,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = createRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -180,10 +655,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = createRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -214,13 +687,11 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = updateRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("duplicateParam")).toEqual(["dup1", "dup2", "dup3"]);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBe(5);
@@ -250,10 +721,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", undefined]]));
 		});
 
 		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
@@ -268,10 +736,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", ""]]));
 		});
 
 		it("should add the resource uuid to the end of the resourcePath if there are no placeholders for pathParams defined", () => {
@@ -341,11 +806,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = updateRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -367,11 +829,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = updateRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -394,11 +853,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = updateRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -429,12 +885,11 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("duplicateParam")).toEqual(["dup1", "dup2", "dup3"]);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBe(5);
@@ -449,7 +904,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 				deepFreeze({ force: true })
 			);
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBeUndefined();
+			assertHeaders(request.headers, new Map());
 		});
 
 		it("should set the If-Match header if the force parameter is not set", () => {
@@ -457,7 +912,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 
 			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(mockResource);
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
 		});
 
 		it("should set the If-Match header if the force parameter is set to FALSE", () => {
@@ -468,7 +923,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 				deepFreeze({ force: false })
 			);
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
 		});
 
 		it("should set the query parameters including those with undefined value (allowUndefinedQueryParams = true)", () => {
@@ -483,10 +938,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", undefined]]));
 		});
 
 		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
@@ -501,10 +953,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", ""]]));
 		});
 
 		it("should add the resource uuid to the end of the resourcePath if there are no placeholders for pathParams defined", () => {
@@ -574,11 +1023,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -600,11 +1046,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -627,11 +1070,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.IF_MATCH)).toBe(resourceEtag);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
 			expect(request.item).toBe(mockResource);
 			expect(request.retryCount).toBeUndefined();
@@ -661,12 +1101,11 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = getRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("duplicateParam")).toEqual(["dup1", "dup2", "dup3"]);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.GET);
 			expect(request.item).toBeUndefined();
 			expect(request.retryCount).toBe(5);
@@ -686,10 +1125,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", undefined]]));
 		});
 
 		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
@@ -705,10 +1141,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
+			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", ""]]));
 		});
 
 		it("should add the resource uuid to the end of the resourcePath if there are no placeholders for pathParams defined", () => {
@@ -776,10 +1209,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = getRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.GET);
 			expect(request.item).toBeUndefined();
 			expect(request.retryCount).toBeUndefined();
@@ -801,10 +1232,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = getRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.GET);
 			expect(request.item).toBeUndefined();
 			expect(request.retryCount).toBeUndefined();
@@ -827,10 +1256,8 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = getRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(0);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(request.queryParameters, new Map());
 			expect(request.requestType).toBe(StarkHttpRequestType.GET);
 			expect(request.item).toBeUndefined();
 			expect(request.retryCount).toBeUndefined();
@@ -862,15 +1289,17 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(5);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("duplicateParam")).toEqual(["dup1", "dup2", "dup3"]);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map<string, string | string[]>([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"], // added only in DEV
+					["param1", "one"],
+					["duplicateParam", ["dup1", "dup2", "dup3"]]
+				])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
 			expect(request.item).toBeUndefined();
 			expect(request.retryCount).toBe(5);
@@ -890,13 +1319,16 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(5);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"], // added only in DEV
+					["param1", "one"],
+					["forceValidParam", undefined]
+				])
+			);
 		});
 
 		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
@@ -912,13 +1344,16 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(5);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"], // added only in DEV
+					["param1", "one"],
+					["forceValidParam", ""]
+				])
+			);
 		});
 
 		it("should use a new serializer with the custom type provided in 'serializationType' param when no custom serializer is defined", () => {
@@ -937,13 +1372,15 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"] // added only in DEV
+				])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
 			expect(request.item).toBeUndefined();
 			expect(request.retryCount).toBeUndefined();
@@ -966,13 +1403,15 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"] // added only in DEV
+				])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
 			expect(request.item).toBeUndefined();
 			expect(request.retryCount).toBeUndefined();
@@ -996,13 +1435,15 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"] // added only in DEV
+				])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
 			expect(request.item).toBeUndefined();
 			expect(request.retryCount).toBeUndefined();
@@ -1058,16 +1499,17 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(5);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("duplicateParam")).toEqual(["dup1", "dup2", "dup3"]);
-			expect(request.queryParameters.has("invalidParam")).toBe(false);
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map<string, string | string[]>([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"], // added only in DEV
+					["param1", "one"],
+					["duplicateParam", ["dup1", "dup2", "dup3"]]
+				])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).not.toBe(mockCriteria);
@@ -1100,13 +1542,16 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = searchRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(5);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"], // added only in DEV
+					["param1", "one"],
+					["forceValidParam", undefined]
+				])
+			);
 		});
 
 		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
@@ -1123,13 +1568,16 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			);
 
 			const request: StarkHttpRequest = searchRequestBuilder.build();
-			expect(request.queryParameters.size).toBe(5);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"], // added only in DEV
+					["param1", "one"],
+					["forceValidParam", ""]
+				])
+			);
 		});
 
 		it("should filter out those criteria with empty value (default allowEmptyCriteria = false)", () => {
@@ -1270,13 +1718,15 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"] // added only in DEV
+				])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).not.toBe(mockCriteria);
@@ -1312,13 +1762,15 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"] // added only in DEV
+				])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).not.toBe(mockCriteria);
@@ -1355,13 +1807,15 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
 			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(0);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("limit")).toBe("3");
-			expect(request.queryParameters.get("offset")).toBe("5");
-			expect(request.queryParameters.get("mockCollectionRequest")).toBe("true"); // added only in DEV
+			assertHeaders(request.headers, new Map());
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["limit", "3"],
+					["offset", "5"],
+					["mockCollectionRequest", "true"] // added only in DEV
+				])
+			);
 			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).not.toBe(mockCriteria);
@@ -1384,15 +1838,10 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 });
 
 describe("Builder: StarkHttpCreateRequestBuilder", () => {
-	let builder: StarkHttpCreateRequestBuilder<MockResource>;
-	let mockBackend: StarkBackend;
-	let mockResource: StarkResource;
-	let mockRequest: StarkHttpRequest;
-
-	beforeEach(() => {
-		mockBackend = new StarkBackendImpl();
-		mockResource = new MockResource(resourceUuid);
-		mockRequest = {
+	function beforeEachFn(): StarkHttpRequestBuilderSpecVariables<StarkHttpCreateRequestBuilder<MockResource>> {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		const mockResource: StarkResource = new MockResource(resourceUuid);
+		const mockRequest: StarkHttpRequest = {
 			backend: mockBackend,
 			resourcePath: resourcePath,
 			headers: new Map<string, string>(),
@@ -1402,257 +1851,36 @@ describe("Builder: StarkHttpCreateRequestBuilder", () => {
 			serializer: defaultSerializer
 		};
 
-		builder = new StarkHttpCreateRequestBuilderImpl(mockRequest);
-	});
+		return {
+			mockBackend: mockBackend,
+			mockResource: mockResource,
+			mockRequest: mockRequest,
+			requestBuilder: new StarkHttpCreateRequestBuilderImpl(mockRequest)
+		};
+	}
 
-	describe("on echo", () => {
-		it("should set the query parameter echo with the value passed", () => {
-			builder.echo(StarkHttpEchoType.NONE);
+	testEcho(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testSetHeader(beforeEachFn);
 
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("NONE");
-		});
+	testAddQueryParameter(beforeEachFn);
 
-		it("should set the query parameter echo with the value passed and override the previous one", () => {
-			builder.echo(StarkHttpEchoType.NONE);
-			builder.echo(StarkHttpEchoType.ID);
+	testAddQueryParameters(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testSetQueryParameters(beforeEachFn);
 
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-	});
+	testSetPathParameters(beforeEachFn);
 
-	describe("on setHeader", () => {
-		it("should add the header name/value only if the value is defined", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader("invalidHeader", <any>undefined);
+	testRetry(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-		});
-
-		it("should add the header name/value and add it to existing ones", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(2);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-	});
-
-	describe("on addQueryParameter", () => {
-		it("should add the query parameter name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("invalidParam1", undefined);
-			builder.addQueryParameter("invalidParam2", "");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", "", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameter name/value and add it to existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("include", "name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("include")).toBe("name");
-		});
-	});
-
-	describe("on addQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value WITHOUT removing the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.addQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.setQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value and remove the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.setQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setPathParameters", () => {
-		it("should interpolate the resourcePath with the params provided", () => {
-			builder.setPathParameters({ somethingId: "1", elseId: "5" });
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.resourcePath).toEqual("/something/1/else/5/next");
-		});
-	});
-
-	describe("on retry", () => {
-		it("should add the retryCount option to the request", () => {
-			builder.retry(4);
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.retryCount).toBe(4);
-		});
-	});
-
-	describe("on build", () => {
-		it("should return the created StarkHttpRequest", () => {
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe(resourcePath);
-			expect(request.headers).toBeDefined();
-			expect(request.queryParameters).toBeDefined();
-			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
-			expect(request.item).toBe(mockResource);
-		});
-	});
+	testBuild(beforeEachFn);
 });
 
 describe("Builder: StarkHttpDeleteRequestBuilder", () => {
-	let builder: StarkHttpDeleteRequestBuilder<MockResource>;
-	let mockBackend: StarkBackend;
-	let mockResource: StarkResource;
-	let mockRequest: StarkHttpRequest;
-
-	beforeEach(() => {
-		mockBackend = new StarkBackendImpl();
-		mockResource = new MockResource(resourceUuid);
-		mockRequest = {
+	function beforeEachFn(): StarkHttpRequestBuilderSpecVariables<StarkHttpDeleteRequestBuilder<MockResource>> {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		const mockResource: StarkResource = new MockResource(resourceUuid);
+		const mockRequest: StarkHttpRequest = {
 			backend: mockBackend,
 			resourcePath: resourcePath,
 			headers: new Map<string, string>(),
@@ -1662,234 +1890,34 @@ describe("Builder: StarkHttpDeleteRequestBuilder", () => {
 			serializer: defaultSerializer
 		};
 
-		builder = new StarkHttpDeleteRequestBuilderImpl(mockRequest);
-	});
+		return {
+			mockBackend: mockBackend,
+			mockResource: mockResource,
+			mockRequest: mockRequest,
+			requestBuilder: new StarkHttpDeleteRequestBuilderImpl(mockRequest)
+		};
+	}
 
-	describe("on setHeader", () => {
-		it("should add the header name/value only if the value is defined", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader("invalidHeader", <any>undefined);
+	testSetHeader(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddQueryParameter(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-		});
+	testAddQueryParameters(beforeEachFn);
 
-		it("should add the header name/value and add it to existing ones", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
+	testSetQueryParameters(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testSetPathParameters(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(2);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-	});
+	testRetry(beforeEachFn);
 
-	describe("on addQueryParameter", () => {
-		it("should add the query parameter name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("invalidParam1", undefined);
-			builder.addQueryParameter("invalidParam2", "");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", "", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameter name/value and add it to existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("include", "name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("include")).toBe("name");
-		});
-	});
-
-	describe("on addQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value WITHOUT removing the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.addQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.setQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value and remove the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.setQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setPathParameters", () => {
-		it("should interpolate the resourcePath with the params provided", () => {
-			builder.setPathParameters({ somethingId: "1", elseId: "5" });
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.resourcePath).toEqual("/something/1/else/5/next");
-		});
-	});
-
-	describe("on retry", () => {
-		it("should add the retryCount option to the request", () => {
-			builder.retry(4);
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.retryCount).toBe(4);
-		});
-	});
-
-	describe("on build", () => {
-		it("should return the created StarkHttpRequest", () => {
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe(resourcePath);
-			expect(request.headers).toBeDefined();
-			expect(request.queryParameters).toBeDefined();
-			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
-			expect(request.item).toBe(mockResource);
-		});
-	});
+	testBuild(beforeEachFn);
 });
 
 describe("Builder: StarkHttpUpdateRequestBuilder", () => {
-	let builder: StarkHttpUpdateRequestBuilder<MockResource>;
-	let mockBackend: StarkBackend;
-	let mockResource: StarkResource;
-	let mockRequest: StarkHttpRequest;
-
-	beforeEach(() => {
-		mockBackend = new StarkBackendImpl();
-		mockResource = new MockResource(resourceUuid);
-		mockRequest = {
+	function beforeEachFn(): StarkHttpRequestBuilderSpecVariables<StarkHttpUpdateRequestBuilder<MockResource>> {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		const mockResource: StarkResource = new MockResource(resourceUuid);
+		const mockRequest: StarkHttpRequest = {
 			backend: mockBackend,
 			resourcePath: resourcePath,
 			headers: new Map<string, string>(),
@@ -1899,232 +1927,33 @@ describe("Builder: StarkHttpUpdateRequestBuilder", () => {
 			serializer: defaultSerializer
 		};
 
-		builder = new StarkHttpUpdateRequestBuilderImpl(mockRequest);
-	});
+		return {
+			mockBackend: mockBackend,
+			mockResource: mockResource,
+			mockRequest: mockRequest,
+			requestBuilder: new StarkHttpUpdateRequestBuilderImpl(mockRequest)
+		};
+	}
 
-	describe("on setHeader", () => {
-		it("should add the header name/value only if the value is defined", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader("invalidHeader", <any>undefined);
+	testSetHeader(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddQueryParameter(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-		});
+	testAddQueryParameters(beforeEachFn);
 
-		it("should add the header name/value and add it to existing ones", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
+	testSetQueryParameters(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testSetPathParameters(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(2);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-	});
+	testRetry(beforeEachFn);
 
-	describe("on addQueryParameter", () => {
-		it("should add the query parameter name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("invalidParam1", undefined);
-			builder.addQueryParameter("invalidParam2", "");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", "", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameter name/value and add it to existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("include", "name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("include")).toBe("name");
-		});
-	});
-
-	describe("on addQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value WITHOUT removing the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.addQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.setQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value and remove the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.setQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setPathParameters", () => {
-		it("should interpolate the resourcePath with the params provided", () => {
-			builder.setPathParameters({ somethingId: "1", elseId: "5" });
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.resourcePath).toEqual("/something/1/else/5/next");
-		});
-	});
-
-	describe("on retry", () => {
-		it("should add the retryCount option to the request", () => {
-			builder.retry(4);
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.retryCount).toBe(4);
-		});
-	});
-
-	describe("on build", () => {
-		it("should return the created StarkHttpRequest", () => {
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe(resourcePath);
-			expect(request.headers).toBeDefined();
-			expect(request.queryParameters).toBeDefined();
-			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
-			expect(request.item).toBe(mockResource);
-		});
-	});
+	testBuild(beforeEachFn);
 });
 
 describe("Builder: StarkHttpGetRequestBuilder", () => {
-	let builder: StarkHttpGetRequestBuilderImpl<MockResource>;
-	let mockBackend: StarkBackend;
-	let mockRequest: StarkHttpRequest;
-
-	beforeEach(() => {
-		mockBackend = new StarkBackendImpl();
-		mockRequest = {
+	function beforeEachFn(): StarkHttpRequestBuilderSpecVariables<StarkHttpGetRequestBuilder<MockResource>> {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		const mockRequest: StarkHttpRequest = {
 			backend: mockBackend,
 			resourcePath: resourcePath,
 			headers: new Map<string, string>(),
@@ -2134,384 +1963,41 @@ describe("Builder: StarkHttpGetRequestBuilder", () => {
 			serializer: defaultSerializer
 		};
 
-		builder = new StarkHttpGetRequestBuilderImpl(mockRequest);
-	});
+		return {
+			mockBackend: mockBackend,
+			mockResource: <any>undefined,
+			mockRequest: mockRequest,
+			requestBuilder: new StarkHttpGetRequestBuilderImpl(mockRequest)
+		};
+	}
 
-	describe("on setHeader", () => {
-		it("should add the header name/value only if the value is defined", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader("invalidHeader", <any>undefined);
+	testSetHeader(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddQueryParameter(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-		});
+	testAddQueryParameters(beforeEachFn);
 
-		it("should add the header name/value and add it to existing ones", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
+	testSetQueryParameters(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddAcceptedLanguage(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(2);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-	});
+	testAddFilterByInclude(beforeEachFn);
 
-	describe("on addQueryParameter", () => {
-		it("should add the query parameter name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("invalidParam1", undefined);
-			builder.addQueryParameter("invalidParam2", "");
+	testAddFilterByStyle(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddSortBy(beforeEachFn);
 
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
+	testSetPathParameters(beforeEachFn);
 
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", undefined, true);
+	testRetry(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", "", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameter name/value and add it to existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("include", "name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("include")).toBe("name");
-		});
-	});
-
-	describe("on addQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value WITHOUT removing the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.addQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.setQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value and remove the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.setQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on addAcceptedLanguage", () => {
-		it("should add the accepted language to the headers and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.EN_US);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-
-		it("should add the accepted languages to the headers and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.EN_US, StarkLanguages.FR_BE, StarkLanguages.NL_BE);
-
-			const expectedLanguages: string = [
-				StarkLanguages.EN_US.isoCode,
-				StarkLanguages.FR_BE.isoCode,
-				StarkLanguages.NL_BE.isoCode
-			].join(",");
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(expectedLanguages);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(expectedLanguages);
-		});
-
-		it("should add the accepted languages to the ones that already exist and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.NL_BE);
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.NL_BE.isoCode);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(StarkLanguages.NL_BE.isoCode);
-
-			const expectedLanguages: string = [
-				StarkLanguages.NL_BE.isoCode,
-				StarkLanguages.EN_US.isoCode,
-				StarkLanguages.FR_BE.isoCode
-			].join(",");
-
-			builder.addAcceptedLanguage(StarkLanguages.EN_US, StarkLanguages.FR_BE);
-			request = builder.build();
-
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(expectedLanguages);
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(expectedLanguages);
-		});
-	});
-
-	describe("on addFilterByInclude", () => {
-		it("should add an entry in the fields query parameter", () => {
-			builder.addFilterByInclude("name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name");
-		});
-
-		it("should add an entry in the fields query parameter for every field in the array", () => {
-			builder.addFilterByInclude("name", "postalCode");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name,postalCode");
-		});
-
-		it("should add an entry in the fields query parameter without removing the current ones", () => {
-			builder.addFilterByInclude("name");
-			builder.addFilterByInclude("postalCode");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name,postalCode");
-		});
-	});
-
-	describe("on addFilterByStyle", () => {
-		it("should set the style query parameter", () => {
-			builder.addFilterByStyle("COMPACT");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.STYLE)).toBe("COMPACT");
-		});
-
-		it("should set the style query parameter overriding previous values", () => {
-			builder.addFilterByStyle("FULL");
-			builder.addFilterByStyle("COMPACT");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.STYLE)).toBe("COMPACT");
-		});
-	});
-
-	describe("on addSortBy", () => {
-		it("should add a sort query parameter", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC));
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe("name+" + StarkSortOrder.ASC);
-		});
-
-		it("should add a sort query parameter with all the values", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC), new StarkSortItemImpl("postalCode", StarkSortOrder.DESC));
-
-			const expectedSort: string = "name+" + StarkSortOrder.ASC + ",postalCode+" + StarkSortOrder.DESC;
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe(expectedSort);
-		});
-
-		it("should add a sort query parameter without removing previous values", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC));
-			builder.addSortBy(new StarkSortItemImpl("postalCode", StarkSortOrder.DESC));
-
-			const expectedSort: string = "name+" + StarkSortOrder.ASC + ",postalCode+" + StarkSortOrder.DESC;
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe(expectedSort);
-		});
-	});
-
-	describe("on setPathParameters", () => {
-		it("should interpolate the resourcePath with the params provided", () => {
-			builder.setPathParameters({ somethingId: "1", elseId: "5" });
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.resourcePath).toEqual("/something/1/else/5/next");
-		});
-	});
-
-	describe("on retry", () => {
-		it("should add the retryCount option to the request", () => {
-			builder.retry(4);
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.retryCount).toBe(4);
-		});
-	});
-
-	describe("on build", () => {
-		it("should return the created StarkHttpRequest", () => {
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe(resourcePath);
-			expect(request.headers).toBeDefined();
-			expect(request.queryParameters).toBeDefined();
-			expect(request.requestType).toBe(StarkHttpRequestType.GET);
-			expect(request.item).toBeDefined();
-			expect((<StarkResource>request.item).uuid).toBe(resourceUuid);
-		});
-	});
+	testBuild(beforeEachFn);
 });
 
 describe("Builder: StarkHttpGetCollectionRequestBuilder", () => {
-	let builder: StarkHttpGetCollectionRequestBuilder<MockResource>;
-	let mockBackend: StarkBackend;
-	let mockRequest: StarkHttpRequest;
-
-	beforeEach(() => {
-		mockBackend = new StarkBackendImpl();
-		mockRequest = {
+	function beforeEachFn(): StarkHttpRequestBuilderSpecVariables<StarkHttpGetCollectionRequestBuilder<MockResource>> {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		const mockRequest: StarkHttpRequest = {
 			backend: mockBackend,
 			resourcePath: resourcePath,
 			headers: new Map<string, string>(),
@@ -2521,385 +2007,42 @@ describe("Builder: StarkHttpGetCollectionRequestBuilder", () => {
 			serializer: defaultSerializer
 		};
 
-		builder = new StarkHttpGetCollectionRequestBuilderImpl(mockRequest);
-	});
+		return {
+			mockBackend: mockBackend,
+			mockResource: <any>undefined,
+			mockRequest: mockRequest,
+			requestBuilder: new StarkHttpGetCollectionRequestBuilderImpl(mockRequest)
+		};
+	}
 
-	describe("on setHeader", () => {
-		it("should add the header name/value only if the value is defined", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader("invalidHeader", <any>undefined);
+	testSetHeader(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddQueryParameter(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-		});
+	testAddQueryParameters(beforeEachFn);
 
-		it("should add the header name/value and add it to existing ones", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
+	testSetQueryParameters(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddAcceptedLanguage(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(2);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-	});
+	testAddFilterByInclude(beforeEachFn);
 
-	describe("on addQueryParameter", () => {
-		it("should add the query parameter name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("invalidParam1", undefined);
-			builder.addQueryParameter("invalidParam2", "");
+	testAddFilterByStyle(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddSortBy(beforeEachFn);
 
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
+	testSetPathParameters(beforeEachFn);
 
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", undefined, true);
+	testRetry(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", "", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameter name/value and add it to existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("include", "name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("include")).toBe("name");
-		});
-	});
-
-	describe("on addQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value WITHOUT removing the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.addQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.setQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value and remove the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.setQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on addAcceptedLanguage", () => {
-		it("should add the accepted language to the headers and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.EN_US);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-
-		it("should add the accepted languages to the headers and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.EN_US, StarkLanguages.FR_BE, StarkLanguages.NL_BE);
-
-			const expectedLanguages: string = [
-				StarkLanguages.EN_US.isoCode,
-				StarkLanguages.FR_BE.isoCode,
-				StarkLanguages.NL_BE.isoCode
-			].join(",");
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(expectedLanguages);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(expectedLanguages);
-		});
-
-		it("should add the accepted languages to the ones that already exist and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.NL_BE);
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.NL_BE.isoCode);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(StarkLanguages.NL_BE.isoCode);
-
-			const expectedLanguages: string = [
-				StarkLanguages.NL_BE.isoCode,
-				StarkLanguages.EN_US.isoCode,
-				StarkLanguages.FR_BE.isoCode
-			].join(",");
-
-			builder.addAcceptedLanguage(StarkLanguages.EN_US, StarkLanguages.FR_BE);
-			request = builder.build();
-
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(expectedLanguages);
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(expectedLanguages);
-		});
-	});
-
-	describe("on addFilterByInclude", () => {
-		it("should add an entry in the fields query parameter", () => {
-			builder.addFilterByInclude("name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name");
-		});
-
-		it("should add an entry in the fields query parameter for every field in the array", () => {
-			builder.addFilterByInclude("name", "postalCode");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name,postalCode");
-		});
-
-		it("should add an entry in the fields query parameter without removing the current ones", () => {
-			builder.addFilterByInclude("name");
-			builder.addFilterByInclude("postalCode");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name,postalCode");
-		});
-	});
-
-	describe("on addFilterByStyle", () => {
-		it("should set the style query parameter", () => {
-			builder.addFilterByStyle("COMPACT");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.STYLE)).toBe("COMPACT");
-		});
-
-		it("should set the style query parameter overriding previous values", () => {
-			builder.addFilterByStyle("FULL");
-			builder.addFilterByStyle("COMPACT");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.STYLE)).toBe("COMPACT");
-		});
-	});
-
-	describe("on addSortBy", () => {
-		it("should add a sort query parameter", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC));
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe("name+" + StarkSortOrder.ASC);
-		});
-
-		it("should add a sort query parameter with all the values", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC), new StarkSortItemImpl("postalCode", StarkSortOrder.DESC));
-
-			const expectedSort: string = "name+" + StarkSortOrder.ASC + ",postalCode+" + StarkSortOrder.DESC;
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe(expectedSort);
-		});
-
-		it("should add a sort query parameter without removing previous values", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC));
-			builder.addSortBy(new StarkSortItemImpl("postalCode", StarkSortOrder.DESC));
-
-			const expectedSort: string = "name+" + StarkSortOrder.ASC + ",postalCode+" + StarkSortOrder.DESC;
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe(expectedSort);
-		});
-	});
-
-	describe("on setPathParameters", () => {
-		it("should interpolate the resourcePath with the params provided", () => {
-			builder.setPathParameters({ somethingId: "1", elseId: "5" });
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.resourcePath).toEqual("/something/1/else/5/next");
-		});
-	});
-
-	describe("on retry", () => {
-		it("should add the retryCount option to the request", () => {
-			builder.retry(4);
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.retryCount).toBe(4);
-		});
-	});
-
-	describe("on build", () => {
-		it("should return the created StarkHttpRequest", () => {
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe(resourcePath);
-			expect(request.headers).toBeDefined();
-			expect(request.queryParameters).toBeDefined();
-			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
-			expect(request.item).toBeDefined();
-			expect((<StarkResource>request.item).uuid).toBe(resourceUuid);
-		});
-	});
+	testBuild(beforeEachFn);
 });
 
 describe("Builder: StarkHttpSearchRequestBuilder", () => {
-	let builder: StarkHttpSearchRequestBuilder<MockResource>;
-	let mockBackend: StarkBackend;
-	let mockRequest: StarkHttpRequest;
-	const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
-
-	beforeEach(() => {
-		mockBackend = new StarkBackendImpl();
-		mockRequest = {
+	function beforeEachFn(): StarkHttpRequestBuilderSpecVariables<StarkHttpSearchRequestBuilder<MockResource>> {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
+		const mockRequest: StarkHttpRequest = {
 			backend: mockBackend,
 			resourcePath: resourcePath,
 			headers: new Map<string, string>(),
@@ -2909,373 +2052,35 @@ describe("Builder: StarkHttpSearchRequestBuilder", () => {
 			serializer: defaultSerializer
 		};
 
-		builder = new StarkHttpSearchRequestBuilderImpl(mockRequest);
-	});
+		return {
+			mockBackend: mockBackend,
+			mockResource: <any>mockCriteria,
+			mockRequest: mockRequest,
+			requestBuilder: new StarkHttpSearchRequestBuilderImpl(mockRequest)
+		};
+	}
 
-	describe("on setHeader", () => {
-		it("should add the header name/value only if the value is defined", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader("invalidHeader", <any>undefined);
+	testSetHeader(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddQueryParameter(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-		});
+	testAddQueryParameters(beforeEachFn);
 
-		it("should add the header name/value and add it to existing ones", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
-			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
+	testSetQueryParameters(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddAcceptedLanguage(beforeEachFn);
 
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(2);
-			expect(request.headers.get(StarkHttpHeaders.CONTENT_TYPE)).toBe("application/json");
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-	});
+	testAddFilterByInclude(beforeEachFn);
 
-	describe("on addQueryParameter", () => {
-		it("should add the query parameter name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("invalidParam1", undefined);
-			builder.addQueryParameter("invalidParam2", "");
+	testAddFilterByStyle(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
+	testAddSortBy(beforeEachFn);
 
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
+	testSetPathParameters(beforeEachFn);
 
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", undefined, true);
+	testRetry(beforeEachFn);
 
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("forceValidParam", "", undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameter name/value and add it to existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-			builder.addQueryParameter("include", "name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("include")).toBe("name");
-		});
-	});
-
-	describe("on addQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.addQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.addQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value WITHOUT removing the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.addQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(3);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on setQueryParameters", () => {
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
-			builder.setQueryParameters({ echo: "ID", invalidParam1: undefined, invalidParam2: "" });
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-		});
-
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: undefined }, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBeUndefined();
-		});
-
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
-			builder.setQueryParameters({ echo: "ID", forceValidParam: "" }, undefined, true);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-			expect(request.queryParameters.has("forceValidParam")).toBe(true);
-			expect(request.queryParameters.get("forceValidParam")).toBe("");
-		});
-
-		it("should add the query parameters name/value and remove the existing ones", () => {
-			builder.addQueryParameter("echo", "ID");
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get("echo")).toBe("ID");
-
-			builder.setQueryParameters({ param1: "one", param2: "two" });
-
-			request = builder.build();
-
-			expect(request.queryParameters.size).toBe(2);
-			expect(request.queryParameters.get("param1")).toBe("one");
-			expect(request.queryParameters.get("param2")).toBe("two");
-		});
-	});
-
-	describe("on addAcceptedLanguage", () => {
-		it("should add the accepted language to the headers and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.EN_US);
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.EN_US.isoCode);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(StarkLanguages.EN_US.isoCode);
-		});
-
-		it("should add the accepted languages to the headers and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.EN_US, StarkLanguages.FR_BE, StarkLanguages.NL_BE);
-
-			const expectedLanguages: string = [
-				StarkLanguages.EN_US.isoCode,
-				StarkLanguages.FR_BE.isoCode,
-				StarkLanguages.NL_BE.isoCode
-			].join(",");
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(expectedLanguages);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(expectedLanguages);
-		});
-
-		it("should add the accepted languages to the ones that already exist and the lang param to the query parameters", () => {
-			builder.addAcceptedLanguage(StarkLanguages.NL_BE);
-
-			let request: StarkHttpRequest = builder.build();
-
-			expect(request.headers).toBeDefined();
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(StarkLanguages.NL_BE.isoCode);
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(StarkLanguages.NL_BE.isoCode);
-
-			const expectedLanguages: string = [
-				StarkLanguages.NL_BE.isoCode,
-				StarkLanguages.EN_US.isoCode,
-				StarkLanguages.FR_BE.isoCode
-			].join(",");
-
-			builder.addAcceptedLanguage(StarkLanguages.EN_US, StarkLanguages.FR_BE);
-			request = builder.build();
-
-			expect(request.headers.size).toBe(1);
-			expect(request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE)).toBe(expectedLanguages);
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.LANG)).toBe(expectedLanguages);
-		});
-	});
-
-	describe("on addFilterByInclude", () => {
-		it("should add an entry in the fields query parameter", () => {
-			builder.addFilterByInclude("name");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name");
-		});
-
-		it("should add an entry in the fields query parameter for every field in the array", () => {
-			builder.addFilterByInclude("name", "postalCode");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name,postalCode");
-		});
-
-		it("should add an entry in the fields query parameter without removing the current ones", () => {
-			builder.addFilterByInclude("name");
-			builder.addFilterByInclude("postalCode");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.FIELDS)).toBe("name,postalCode");
-		});
-	});
-
-	describe("on addFilterByStyle", () => {
-		it("should set the style query parameter", () => {
-			builder.addFilterByStyle("COMPACT");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.STYLE)).toBe("COMPACT");
-		});
-
-		it("should set the style query parameter overriding previous values", () => {
-			builder.addFilterByStyle("FULL");
-			builder.addFilterByStyle("COMPACT");
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.STYLE)).toBe("COMPACT");
-		});
-	});
-
-	describe("on addSortBy", () => {
-		it("should add a sort query parameter", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC));
-
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe("name+" + StarkSortOrder.ASC);
-		});
-
-		it("should add a sort query parameter with all the values", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC), new StarkSortItemImpl("postalCode", StarkSortOrder.DESC));
-
-			const expectedSort: string = "name+" + StarkSortOrder.ASC + ",postalCode+" + StarkSortOrder.DESC;
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe(expectedSort);
-		});
-
-		it("should add a sort query parameter without removing previous values", () => {
-			builder.addSortBy(new StarkSortItemImpl("name", StarkSortOrder.ASC));
-			builder.addSortBy(new StarkSortItemImpl("postalCode", StarkSortOrder.DESC));
-
-			const expectedSort: string = "name+" + StarkSortOrder.ASC + ",postalCode+" + StarkSortOrder.DESC;
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.queryParameters).toBeDefined();
-			expect(request.queryParameters.size).toBe(1);
-			expect(request.queryParameters.get(StarkHttpQueryParameters.SORT)).toBe(expectedSort);
-		});
-	});
-
-	describe("on setPathParameters", () => {
-		it("should interpolate the resourcePath with the params provided", () => {
-			builder.setPathParameters({ somethingId: "1", elseId: "5" });
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.resourcePath).toEqual("/something/1/else/5/next");
-		});
-	});
-
-	describe("on retry", () => {
-		it("should add the retryCount option to the request", () => {
-			builder.retry(4);
-
-			const request: StarkHttpRequest = builder.build();
-			expect(request.retryCount).toBe(4);
-		});
-	});
-
-	describe("on build", () => {
-		it("should return the created StarkHttpRequest", () => {
-			const request: StarkHttpRequest = builder.build();
-
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe(resourcePath);
-			expect(request.headers).toBeDefined();
-			expect(request.queryParameters).toBeDefined();
-			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
-			expect(request.item).toBe(mockCriteria); // the search criteria comes in the request item
-		});
-	});
+	testBuild(beforeEachFn);
 });
 
 class MockResource implements StarkResource {

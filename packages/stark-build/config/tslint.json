@@ -1,7 +1,13 @@
 {
-  "extends": ["tslint:latest", "tslint-config-prettier", "codelyzer"],
+  // FIXME: presets moved to packages/stark-core/tslint.json temporarily due to this issue: https://github.com/palantir/tslint/issues/3874
   "defaultSeverity": "error",
   "rules": {
+    // sonarts rules
+    "cognitive-complexity": false,
+    "no-duplicate-string": false,
+    "no-big-function": false,
+    "no-commented-code": false,
+
     // Codelyzer recommended rules
     "directive-selector": [true, "attribute", "", "kebab-case"],
     "component-selector": [true, "element", "", "kebab-case"],
@@ -182,6 +188,7 @@
       }
     ],
     "prefer-function-over-method": false,
+    "prefer-while": true,
     "no-import-side-effect": [
       true,
       {

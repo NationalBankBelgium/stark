@@ -39,7 +39,6 @@ import { StarkValidationErrorsUtil } from "../../util";
 import { starkSessionExpiredStateName } from "../../common/routes";
 import { StarkCoreApplicationState } from "../../common/store/stark-core-application-state";
 import { selectStarkSession } from "../reducers";
-// import { StarkXSRFService, starkXSRFServiceName } from "../../xsrf/";
 
 export const starkUnauthenticatedUserError: string = "StarkSessionService => user not authenticated";
 
@@ -52,10 +51,9 @@ export const starkUnauthenticatedUserError: string = "StarkSessionService => use
  * @requires StarkLoggingService
  * @requires StarkRoutingService
  * @requires StarkApplicationConfig
- * @requires StarkXSRFService
  * @requires ng-idle-core.Idle
  * @requires $injector
- * @requires $translate
+ * @requires TranslateService
  */
 @Injectable()
 export class StarkSessionServiceImpl implements StarkSessionService {
@@ -79,8 +77,6 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
-		// FIXME Uncomment when XSRF Service is implemented
-		// @Inject(starkXSRFServiceName) public xsrfService: StarkXSRFService,
 		public idle: Idle,
 		injector: Injector,
 		public translateService: TranslateService

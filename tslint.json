@@ -1,5 +1,5 @@
 {
-  "extends": ["./packages/stark-build/config/tslint.json"],
+  "extends": ["tslint:latest", "tslint-sonarts", "codelyzer", "tslint-config-prettier", "./packages/stark-build/config/tslint.json"],
   "rules": {
     "component-selector": false
   }

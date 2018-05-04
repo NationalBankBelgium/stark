@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@nationalbankbelgium/stark-testing": "../stark-testing",
-    "tslint": "5.9.1"
+    "tslint": "5.10.0"
   },
   "peerDependencies": {
     "@angular/common": "5.x",

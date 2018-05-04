@@ -10,6 +10,7 @@ export function userReducer(
 	action: StarkUserActions
 ): Readonly<StarkUser[]> | undefined {
 	// the new state will be calculated from the data coming in the actions
+	/* tslint:disable:no-small-switch */
 	switch (action.type) {
 		case StarkUserActionTypes.GET_ALL_USERS_SUCCESS:
 			return action.users;
@@ -17,4 +18,5 @@ export function userReducer(
 		default:
 			return state;
 	}
+	/* tslint:enable */
 }

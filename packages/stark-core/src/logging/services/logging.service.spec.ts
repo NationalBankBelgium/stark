@@ -211,25 +211,21 @@ describe("Service: StarkLoggingService", () => {
 		describe("Debug / Info / Warning messages ", () => {
 			it("should return an StarkLogMessage instance of the type specified and the message containing the arguments", () => {
 				let message: StarkLogMessage;
-				message = (<LoggingServiceHelper>loggingService).constructLogMessageHelper(StarkLogMessageType.INFO, "arg1", dummyObject);
+				message = loggingService.constructLogMessageHelper(StarkLogMessageType.INFO, "arg1", dummyObject);
 
 				expect(message.type).toBe(StarkLogMessageType.INFO);
 				expect(message.message).toContain("arg1 | " + JSON.stringify(dummyObject));
 				expect(message.timestamp).toBeDefined();
 				expect(message.error).toBeUndefined();
 
-				message = (<LoggingServiceHelper>loggingService).constructLogMessageHelper(StarkLogMessageType.DEBUG, "arg3", dummyObject);
+				message = loggingService.constructLogMessageHelper(StarkLogMessageType.DEBUG, "arg3", dummyObject);
 
 				expect(message.type).toBe(StarkLogMessageType.DEBUG);
 				expect(message.message).toContain("arg3 | " + JSON.stringify(dummyObject));
 				expect(message.timestamp).toBeDefined();
 				expect(message.error).toBeUndefined();
 
-				message = (<LoggingServiceHelper>loggingService).constructLogMessageHelper(
-					StarkLogMessageType.WARNING,
-					"arg5",
-					dummyObject
-				);
+				message = loggingService.constructLogMessageHelper(StarkLogMessageType.WARNING, "arg5", dummyObject);
 
 				expect(message.type).toBe(StarkLogMessageType.WARNING);
 				expect(message.message).toContain("arg5 | " + JSON.stringify(dummyObject));
@@ -242,14 +238,14 @@ describe("Service: StarkLoggingService", () => {
 			it("should return an StarkLogMessage instance of the type ERROR containing a message and the error string", () => {
 				let message: StarkLogMessage;
 				const error: StarkError = new StarkErrorImpl("this is the error");
-				message = (<LoggingServiceHelper>loggingService).constructErrorLogMessageHelper("dummy error message", error);
+				message = loggingService.constructErrorLogMessageHelper("dummy error message", error);
 
 				expect(message.type).toBe(StarkLogMessageType.ERROR);
 				expect(message.message).toContain("dummy error message");
 				expect(message.timestamp).toBeDefined();
 				expect(message.error).toBeDefined();
 
-				const starkError: StarkError = <StarkError>(<StarkLogMessage>message).error;
+				const starkError: StarkError = <StarkError>message.error;
 				expect(error).toBeDefined(); // so the test will fail in case it is undefined
 				expect(<string>starkError.name).toBe("STARK_ERROR");
 				expect(<string>starkError.timestamp).toBeDefined();
@@ -263,7 +259,7 @@ describe("Service: StarkLoggingService", () => {
 	describe("persistLogMessages", () => {
 		beforeEach(() => {
 			for (let i: number = 1; i <= loggingFlushPersistSize; i++) {
-				const message: StarkLogMessage = (<LoggingServiceHelper>loggingService).constructLogMessageHelper(
+				const message: StarkLogMessage = loggingService.constructLogMessageHelper(
 					StarkLogMessageType.INFO,
 					"Message " + i,
 					dummyObject
@@ -277,7 +273,7 @@ describe("Service: StarkLoggingService", () => {
 
 			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.callFake(() => of("ok"));
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
-			(<LoggingServiceHelper>loggingService).persistLogMessagesHelper();
+			loggingService.persistLogMessagesHelper();
 			expect(sendRequestSpy).toHaveBeenCalledTimes(1);
 			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(loggingBackend.url + "/" + loggingBackend.loginResource);
 			expect(sendRequestSpy.calls.mostRecent().args[1]).toBe(data);
@@ -293,7 +289,7 @@ describe("Service: StarkLoggingService", () => {
 			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.callFake(() => observableThrow("ko"));
 			const errorSpy: Spy = spyOn(loggingService, "error");
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
-			(<LoggingServiceHelper>loggingService).persistLogMessagesHelper();
+			loggingService.persistLogMessagesHelper();
 			expect(sendRequestSpy).toHaveBeenCalledTimes(1);
 			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(loggingBackend.url + "/" + loggingBackend.loginResource);
 			expect(sendRequestSpy.calls.mostRecent().args[1]).toBe(data);

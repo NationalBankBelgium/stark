@@ -44,8 +44,9 @@
     "rxjs": "5.6.0-forward-compat.4",
     "stylelint": "9.2.0",
     "stylelint-config-prettier": "3.2.0",
-    "tslint": "5.9.1",
+    "tslint": "5.10.0",
     "tslint-config-prettier": "1.12.0",
+    "tslint-sonarts": "1.6.0",
     "typescript": "2.6.2",
     "uglify-es": "3.3.9"
   },

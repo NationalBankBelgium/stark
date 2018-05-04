@@ -115,13 +115,13 @@ describe("Service: StarkUserService", () => {
 			const result: StarkUser = (<Spy>mockObserver.next).calls.argsFor(0)[0];
 			expect(result).toBeDefined();
 			expect(result instanceof StarkUser).toBe(true);
-			expect((<StarkUser>result).uuid).toBe(mockUsers[0].uuid);
-			expect((<StarkUser>result).firstName).toBe(mockUsers[0].details.firstName);
-			expect((<StarkUser>result).lastName).toBe(mockUsers[0].details.lastName);
-			expect((<StarkUser>result).language).toBe(mockUsers[0].details.language);
-			expect((<StarkUser>result).email).toBe(mockUsers[0].details.mail);
-			expect((<StarkUser>result).referenceNumber).toBe(mockUsers[0].details.referenceNumber);
-			expect((<StarkUser>result).custom).toEqual(mockUsers[0].custom);
+			expect(result.uuid).toBe(mockUsers[0].uuid);
+			expect(result.firstName).toBe(mockUsers[0].details.firstName);
+			expect(result.lastName).toBe(mockUsers[0].details.lastName);
+			expect(result.language).toBe(mockUsers[0].details.language);
+			expect(result.email).toBe(mockUsers[0].details.mail);
+			expect(result.referenceNumber).toBe(mockUsers[0].details.referenceNumber);
+			expect(result.custom).toEqual(mockUsers[0].custom);
 
 			expect(mockObserver.error).not.toHaveBeenCalled();
 			expect(mockObserver.complete).toHaveBeenCalledTimes(1); // it completes because of the Store mock observable

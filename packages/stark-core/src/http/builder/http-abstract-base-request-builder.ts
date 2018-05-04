@@ -1,4 +1,4 @@
-import { StarkHttpRequest, StarkResource } from "../entities";
+import { StarkHttpRequest, StarkQueryParam, StarkResource } from "../entities";
 import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
 import { StarkUrlUtil } from "../../util/url-util";
 
@@ -16,12 +16,7 @@ export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResourc
 		return this;
 	}
 
-	public addQueryParameter(
-		name: string,
-		value: string | string[] | undefined,
-		allowUndefined: boolean = false,
-		allowEmpty: boolean = false
-	): this {
+	public addQueryParameter(name: string, value: StarkQueryParam, allowUndefined: boolean = false, allowEmpty: boolean = false): this {
 		if ((typeof value !== "undefined" || allowUndefined) && (value !== "" || allowEmpty)) {
 			this.request.queryParameters.set(name, value);
 		}
@@ -29,7 +24,7 @@ export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResourc
 	}
 
 	public addQueryParameters(
-		params: { [param: string]: string | string[] | undefined },
+		params: { [param: string]: StarkQueryParam },
 		allowUndefined: boolean = false,
 		allowEmpty: boolean = false
 	): this {
@@ -42,7 +37,7 @@ export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResourc
 	}
 
 	public setQueryParameters(
-		params: { [param: string]: string | string[] | undefined },
+		params: { [param: string]: StarkQueryParam },
 		allowUndefined: boolean = false,
 		allowEmpty: boolean = false
 	): this {
