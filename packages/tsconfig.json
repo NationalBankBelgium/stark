@@ -9,6 +9,7 @@
     "importHelpers": false,
     "paths": {
       "rxjs/*": ["../node_modules/rxjs/*"],
+      "@angular/*": ["../node_modules/@angular/*"],
       "@nationalbankbelgium/stark-*": ["./*"]
     },
     "skipDefaultLibCheck": true,
