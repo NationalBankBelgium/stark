@@ -1,5 +1,4 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
-// import { Transition } from '@uirouter/angular';
 import { Observable } from "rxjs/Observable";
 import { StarkLoggingService, STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 

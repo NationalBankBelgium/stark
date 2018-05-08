@@ -1,5 +1,11 @@
 {
-  "extends": ["./node_modules/@nationalbankbelgium/stark-build/config/tslint.json"],
+  "extends": [
+    "tslint:latest",
+    "tslint-sonarts",
+    "codelyzer",
+    "tslint-config-prettier",
+    "./node_modules/@nationalbankbelgium/stark-build/config/tslint.json"
+  ],
   "rules": {
     "component-selector": false
   }

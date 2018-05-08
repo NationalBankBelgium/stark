@@ -38,7 +38,6 @@ import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
 import { MockStarkRoutingService } from "../../routing/testing";
 import { StarkHttpHeaders } from "../../http/constants";
-// import { StarkXSRFService } from "../../xsrf";
 import Spy = jasmine.Spy;
 import { starkSessionExpiredStateName } from "../../common/routes";
 import { StarkCoreApplicationState } from "../../common/store";
@@ -50,8 +49,8 @@ describe("Service: StarkSessionService", () => {
 	let mockUser: Partial<StarkUser>;
 	let mockLogger: StarkLoggingService;
 	let mockRoutingService: StarkRoutingService;
-	// let mockXSRFService: StarkXSRFService;
 	let mockIdleService: Idle;
+	let mockKeepaliveService: Keepalive;
 	let mockInjectorService: Injector;
 	let mockTranslateService: TranslateService;
 	let sessionService: SessionServiceHelper;
@@ -92,7 +91,6 @@ describe("Service: StarkSessionService", () => {
 
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
 		mockRoutingService = new MockStarkRoutingService();
-		// mockXSRFService = UnitTestingUtils.getMockedXSRFService();
 		mockIdleService = jasmine.createSpyObj("idleService,", [
 			"setIdle",
 			"setTimeout",
@@ -108,6 +106,8 @@ describe("Service: StarkSessionService", () => {
 		mockIdleService.onIdleEnd = new EventEmitter<any>();
 		mockIdleService.onTimeout = new EventEmitter<number>();
 		mockIdleService.onTimeoutWarning = new EventEmitter<number>();
+		mockKeepaliveService = jasmine.createSpyObj("keepaliveService,", ["interval", "request", "ping", "stop"]);
+		mockKeepaliveService.onPing = new EventEmitter<any>();
 		mockInjectorService = jasmine.createSpyObj("injector,", ["get"]);
 		mockTranslateService = jasmine.createSpyObj("translateService,", ["use"]);
 		sessionService = new SessionServiceHelper(
@@ -115,7 +115,7 @@ describe("Service: StarkSessionService", () => {
 			mockLogger,
 			mockRoutingService,
 			appConfig,
-			/*mockXSRFService,*/ mockIdleService,
+			mockIdleService,
 			mockInjectorService,
 			mockTranslateService
 		);
@@ -137,7 +137,7 @@ describe("Service: StarkSessionService", () => {
 						mockLogger,
 						mockRoutingService,
 						appConfig,
-						/*mockXSRFService,*/ mockIdleService,
+						mockIdleService,
 						mockInjectorService,
 						mockTranslateService
 					)
@@ -152,7 +152,7 @@ describe("Service: StarkSessionService", () => {
 						mockLogger,
 						mockRoutingService,
 						appConfig,
-						/* mockXSRFService,*/ mockIdleService,
+						mockIdleService,
 						mockInjectorService,
 						mockTranslateService
 					)
@@ -167,7 +167,7 @@ describe("Service: StarkSessionService", () => {
 						mockLogger,
 						mockRoutingService,
 						appConfig,
-						/*mockXSRFService,*/ mockIdleService,
+						mockIdleService,
 						mockInjectorService,
 						mockTranslateService
 					)
@@ -182,7 +182,7 @@ describe("Service: StarkSessionService", () => {
 						mockLogger,
 						mockRoutingService,
 						appConfig,
-						/*mockXSRFService,*/ mockIdleService,
+						mockIdleService,
 						mockInjectorService,
 						mockTranslateService
 					)
@@ -573,11 +573,7 @@ describe("Service: StarkSessionService", () => {
 	});
 
 	describe("configureKeepaliveService", () => {
-		let mockKeepaliveService: Keepalive;
-
 		beforeEach(() => {
-			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,", ["interval", "request", "ping", "stop"]);
-			mockKeepaliveService.onPing = new EventEmitter<any>();
 			(<Spy>mockInjectorService.get).and.returnValue(mockKeepaliveService);
 			(<Spy>mockIdleService.getKeepaliveEnabled).and.returnValue(true);
 		});
@@ -588,7 +584,7 @@ describe("Service: StarkSessionService", () => {
 				mockLogger,
 				mockRoutingService,
 				appConfig,
-				/*mockXSRFService,*/ mockIdleService,
+				mockIdleService,
 				mockInjectorService,
 				mockTranslateService
 			);
@@ -652,7 +648,7 @@ describe("Service: StarkSessionService", () => {
 				mockLogger,
 				mockRoutingService,
 				appConfig,
-				/*mockXSRFService,*/ mockIdleService,
+				mockIdleService,
 				mockInjectorService,
 				mockTranslateService
 			);
@@ -674,7 +670,7 @@ describe("Service: StarkSessionService", () => {
 					mockLogger,
 					mockRoutingService,
 					appConfig,
-					/*mockXSRFService,*/ mockIdleService,
+					mockIdleService,
 					mockInjectorService,
 					mockTranslateService
 				);
@@ -717,14 +713,6 @@ describe("Service: StarkSessionService", () => {
 	});
 
 	describe("startKeepaliveService", () => {
-		let mockKeepaliveService: Keepalive;
-
-		beforeEach(() => {
-			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,", ["interval", "request", "ping", "stop"]);
-
-			mockKeepaliveService.onPing = new EventEmitter<any>();
-		});
-
 		it("should trigger a ping using the Keepalive service", () => {
 			(<Spy>mockInjectorService.get).and.returnValue(mockKeepaliveService);
 			(<Spy>mockIdleService.getKeepaliveEnabled).and.returnValue(true);
@@ -734,7 +722,7 @@ describe("Service: StarkSessionService", () => {
 				mockLogger,
 				mockRoutingService,
 				appConfig,
-				/*mockXSRFService,*/ mockIdleService,
+				mockIdleService,
 				mockInjectorService,
 				mockTranslateService
 			);
@@ -754,14 +742,6 @@ describe("Service: StarkSessionService", () => {
 	});
 
 	describe("stopKeepaliveService", () => {
-		let mockKeepaliveService: Keepalive;
-
-		beforeEach(() => {
-			mockKeepaliveService = jasmine.createSpyObj("keepaliveService,", ["interval", "request", "ping", "stop"]);
-
-			mockKeepaliveService.onPing = new EventEmitter<any>();
-		});
-
 		it("should call the stop() method from the Keepalive service to stop the keepalive ping requests", () => {
 			(<Spy>mockInjectorService.get).and.returnValue(mockKeepaliveService);
 			(<Spy>mockIdleService.getKeepaliveEnabled).and.returnValue(true);
@@ -771,7 +751,7 @@ describe("Service: StarkSessionService", () => {
 				mockLogger,
 				mockRoutingService,
 				appConfig,
-				/*mockXSRFService,*/ mockIdleService,
+				mockIdleService,
 				mockInjectorService,
 				mockTranslateService
 			);
@@ -824,7 +804,7 @@ describe("Service: StarkSessionService", () => {
 			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new ChangeLanguage("FR"));
 			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new ChangeLanguageFailure("dummy error"));
 
-			// expect(mockTranslateService.use).toHaveBeenCalledTimes(1);
+			expect(mockTranslateService.use).toHaveBeenCalledTimes(1);
 			expect(mockTranslateService.use).toHaveBeenCalledWith("FR");
 		});
 	});

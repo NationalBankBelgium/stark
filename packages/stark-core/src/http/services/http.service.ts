@@ -1,6 +1,7 @@
 const _cloneDeep: Function = require("lodash/cloneDeep");
 import { Deserialize, Serialize } from "cerialize";
 import { Observable } from "rxjs/Observable";
+import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { timer } from "rxjs/observable/timer";
 import { _throw as observableThrow } from "rxjs/observable/throw";
 // FIXME: importing from single entry "rxjs/operators" together with webpack's scope hoisting prevents dead code removal
@@ -11,7 +12,7 @@ import { map } from "rxjs/operators/map";
 import { retryWhen } from "rxjs/operators/retryWhen";
 import { mergeMap } from "rxjs/operators/mergeMap";
 import { Inject, Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
 
 import { StarkHttpService, starkHttpServiceName } from "./http.service.intf";
 
@@ -28,8 +29,8 @@ import {
 	StarkSingleItemResponseWrapper,
 	StarkSingleItemResponseWrapperImpl
 } from "../entities";
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging";
-import { StarkSessionService, STARK_SESSION_SERVICE } from "../../session";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging";
+import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session";
 
 /**
  * @ngdoc service
@@ -307,16 +308,16 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 		// The stack information in the Http Error (catchError) contains the execution statements of the http call.
 		// That information is not useful for the developer.
-		// To get a meaningful stack, a dummyError is created before the subscription to the webservice.
-		// This dummyError is send to the StarkHttpErrorWrapperImpl and contains all statements up to this method.
-		let dummyError: Error = new Error(starkHttpServiceName + ": Error getting a SingleItemResponse");
-		if (!dummyError.stack) {
+		// To get a meaningful stack, a dummy meaningful error is created before the subscription to the webservice.
+		// This meaningfulError is sent to the StarkHttpErrorWrapperImpl and contains all statements up to this method.
+		let meaningfulError: Error = new Error(starkHttpServiceName + ": Error getting a SingleItemResponse");
+		if (!meaningfulError.stack) {
 			// IE 11 won't generate a stack unless the error is thrown
 			// https://docs.microsoft.com/en-us/scripting/javascript/reference/stack-property-error-javascript#remarks
 			try {
-				throw dummyError;
+				throw meaningfulError;
 			} catch (error) {
-				dummyError = error;
+				meaningfulError = error;
 			}
 		}
 
@@ -332,8 +333,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 				return new StarkSingleItemResponseWrapperImpl<P>(result.status, httpResponseHeaders, resource);
 			}),
 			catchError((result: HttpErrorResponse) => {
-				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
-				return observableThrow(new StarkHttpErrorWrapperImpl(result, httpResponseHeaders, dummyError));
+				return this.createHttpErrorWrapper(result, meaningfulError);
 			})
 		);
 	}
@@ -350,16 +350,16 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 		// The stack information in the Http Error (catchError) contains the execution statements of the http call.
 		// That information is not useful for the developer.
-		// To get a meaningful stack, a dummyError is created before the subscription to the webservice.
-		// This dummyError is send to the StarkHttpErrorWrapperImpl and contains all statements up to this method.
-		let dummyError: Error = new Error(starkHttpServiceName + ": Error getting a CollectionResponse");
-		if (!dummyError.stack) {
+		// To get a meaningful stack, a dummy meaningful error is created before the subscription to the webservice.
+		// This meaningfulError is sent to the StarkHttpErrorWrapperImpl and contains all statements up to this method.
+		let meaningfulError: Error = new Error(starkHttpServiceName + ": Error getting a CollectionResponse");
+		if (!meaningfulError.stack) {
 			// IE 11 won't generate a stack unless the error is thrown
 			// https://docs.microsoft.com/en-us/scripting/javascript/reference/stack-property-error-javascript#remarks
 			try {
-				throw dummyError;
+				throw meaningfulError;
 			} catch (error) {
-				dummyError = error;
+				meaningfulError = error;
 			}
 		}
 
@@ -409,8 +409,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 				);
 			}),
 			catchError((result: HttpErrorResponse) => {
-				const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(result.headers);
-				return observableThrow(new StarkHttpErrorWrapperImpl(result, httpResponseHeaders, dummyError));
+				return this.createHttpErrorWrapper(result, meaningfulError);
 			})
 		);
 	}
@@ -431,6 +430,11 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 				);
 			})
 		);
+	}
+
+	private createHttpErrorWrapper(httpErrorResponse: HttpErrorResponse, meaningfulError: Error): ErrorObservable {
+		const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(httpErrorResponse.headers);
+		return observableThrow(new StarkHttpErrorWrapperImpl(httpErrorResponse, httpResponseHeaders, meaningfulError));
 	}
 
 	private serialize(entity: P, request: StarkHttpRequest<P>): string | object {

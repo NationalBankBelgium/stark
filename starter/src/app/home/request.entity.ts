@@ -1,5 +1,5 @@
 import { autoserialize, autoserializeAs } from "cerialize";
-import { StarkResource } from "@nationalbankbelgium/stark-core";
+import { StarkResource, StarkDateUtil } from "@nationalbankbelgium/stark-core";
 
 export interface IRequest {}
 
@@ -39,8 +39,8 @@ export class Request implements IRequest, StarkResource {
 	 * @constructor
 	 */
 	public static OnDeserialized(instance: Request, json: any): void {
-		// instance.startDate = <Date>StarkDateUtil.parseDateWithFormat(json.startDate, "YYYY-MM-DD HH:mm:ss");
-		// instance.endDate = <Date>StarkDateUtil.parseDateWithFormat(json.endDate, "YYYY-MM-DD HH:mm:ss");
+		instance.startDate = <Date>StarkDateUtil.parseDateWithFormat(json.startDate, "YYYY-MM-DD HH:mm:ss");
+		instance.endDate = <Date>StarkDateUtil.parseDateWithFormat(json.endDate, "YYYY-MM-DD HH:mm:ss");
 		instance.typeId = json.requestTypeId;
 	}
 }

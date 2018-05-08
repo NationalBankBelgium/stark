@@ -1,4 +1,4 @@
-import { StarkHttpRequest, StarkResource } from "../entities";
+import { StarkHttpRequest, StarkQueryParam, StarkResource } from "../entities";
 
 export interface StarkHttpBaseRequestBuilder<T extends StarkResource> {
 	/**
@@ -17,7 +17,7 @@ export interface StarkHttpBaseRequestBuilder<T extends StarkResource> {
 	 * @param allowEmpty - (Optional) Whether to include the query parameter even if it is an empty string. Default: false.
 	 * @returns The current builder
 	 */
-	addQueryParameter(name: string, value: string | string[] | undefined, allowUndefined?: boolean, allowEmpty?: boolean): this;
+	addQueryParameter(name: string, value: StarkQueryParam, allowUndefined?: boolean, allowEmpty?: boolean): this;
 
 	/**
 	 * Adds query parameters to the request (adds them to the existing query parameters)
@@ -26,7 +26,7 @@ export interface StarkHttpBaseRequestBuilder<T extends StarkResource> {
 	 * @param allowEmpty - (Optional) Whether to include the query parameter even if it is an empty string. Default: false.
 	 * @returns The current builder
 	 */
-	addQueryParameters(params: { [param: string]: string | string[] | undefined }, allowUndefined?: boolean, allowEmpty?: boolean): this;
+	addQueryParameters(params: { [param: string]: StarkQueryParam }, allowUndefined?: boolean, allowEmpty?: boolean): this;
 
 	/**
 	 * Sets query parameters to the request (all existing query parameters will be lost)
@@ -35,7 +35,7 @@ export interface StarkHttpBaseRequestBuilder<T extends StarkResource> {
 	 * @param allowEmpty - (Optional) Whether to include the query parameter even if it is an empty string. Default: false.
 	 * @returns The current builder
 	 */
-	setQueryParameters(params: { [param: string]: string | string[] | undefined }, allowUndefined?: boolean, allowEmpty?: boolean): this;
+	setQueryParameters(params: { [param: string]: StarkQueryParam }, allowUndefined?: boolean, allowEmpty?: boolean): this;
 
 	/**
 	 * Interpolates the parameters in the resource path with actual values

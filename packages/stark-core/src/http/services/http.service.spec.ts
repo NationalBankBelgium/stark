@@ -1,5 +1,6 @@
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
 import { autoserialize, autoserializeAs, inheritSerialization, Serialize } from "cerialize";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
@@ -14,6 +15,7 @@ import { StarkHttpServiceImpl } from "./http.service";
 import {
 	StarkBackend,
 	StarkBackendImpl,
+	StarkCollectionMetadata,
 	StarkCollectionMetadataImpl,
 	StarkCollectionResponseWrapper,
 	StarkHttpError,
@@ -24,9 +26,11 @@ import {
 	StarkHttpRawCollectionResponseData,
 	StarkHttpRequest,
 	StarkHttpRequestType,
+	StarkPaginationMetadata,
 	StarkResource,
 	StarkSingleItemMetadataImpl,
 	StarkSingleItemResponseWrapper,
+	StarkSortItem,
 	StarkSortItemImpl
 } from "../entities";
 
@@ -38,10 +42,12 @@ import { MockStarkSessionService } from "../../session/testing";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import { StarkSessionService } from "../../session";
 
+// FIXME: re-enable this TSLINT rule and refactor these tests to try to reduce the duplication of function as much as possible
+/* tslint:disable:no-identical-functions */
 describe("Service: StarkHttpService", () => {
 	let loggerMock: StarkLoggingService;
 	let mockSessionService: StarkSessionService;
-	let httpMock: HttpClient;
+	let httpMock: SpyObj<HttpClient>;
 	let starkHttpService: HttpServiceHelper<MockResource>;
 	let mockBackend: StarkBackend;
 	let mockResourcePath: string;
@@ -74,12 +80,10 @@ describe("Service: StarkHttpService", () => {
 	const mockHttpErrorType: string = "https://api.demo.nbb.be/v1/errors/validation";
 	const mockHttpErrorTitle: string = "Validation errors";
 	const mockHttpErrorInstance: string = "4f4b3e6b-0707-4451-922f-53982ef83fdf";
-	const mockHttpErrorsCount: number = 3;
 	const mockHttpDetailErrorType: string = "https://api.demo.nbb.be/v1/errors/user-invalid";
 	const mockHttpDetailErrorTitle: string = "Invalid user information";
 	const mockHttpErrorDetail1: string = "The username is already in use";
 	const mockHttpErrorDetail2: string = "The user's name is missing";
-	const mockHttpErrorDetailFieldCount: number = 2;
 	const mockHttpErrorDetailField1: string = "firstname";
 	const mockHttpErrorDetailField2: string = "lastname";
 	const mockHttpErrorDetail3: string = "The e-mail is invalid";
@@ -127,6 +131,162 @@ describe("Service: StarkHttpService", () => {
 		warnings: mockWarnings,
 		someValue: "whatever"
 	};
+	const mockPaginationMetadata: StarkPaginationMetadata = {
+		limit: 25,
+		offset: 50,
+		previousOffset: 25,
+		nextOffset: 75,
+		currentPage: 3,
+		pageCount: 40,
+		totalCount: 1000
+	};
+
+	interface HttpRequestOptions {
+		params: {
+			[param: string]: string | string[];
+		};
+		headers: {
+			[header: string]: string | string[];
+		};
+		observe: "response";
+		responseType: "json";
+	}
+
+	function assertHttpError(httpError: StarkHttpError, expectedError: StarkHttpError): void {
+		expect(httpError instanceof StarkHttpErrorImpl).toBe(true);
+		expect(httpError.errors).toBeDefined();
+		expect(httpError.errors.length).toBe(expectedError.errors.length);
+
+		httpError.errors.forEach((error: StarkHttpErrorDetail, index: number) => {
+			expect(error instanceof StarkHttpErrorDetailImpl).toBe(true);
+			expect(error.type).toBe(expectedError.errors[index].type);
+			expect(error.title).toBe(expectedError.errors[index].title);
+			expect(error.titleKey).toBe(expectedError.errors[index].titleKey);
+			expect(error.titleKeyParameters).toEqual(expectedError.errors[index].titleKeyParameters);
+			expect(error.instance).toBe(expectedError.errors[index].instance);
+			if (typeof expectedError.errors[index].timestamp !== "undefined") {
+				expect(error.timestamp).toBe(expectedError.errors[index].timestamp);
+			} else {
+				// the timestamp is auto generated in the constructor of the StarkErrorImpl class
+				expect(error.timestamp).toBeDefined();
+			}
+			expect(error.metadata).toEqual(expectedError.errors[index].metadata);
+			expect(error.detail).toBe(expectedError.errors[index].detail);
+			expect(error.detailKey).toBe(expectedError.errors[index].detailKey);
+			expect(error.detailKeyParameters).toEqual(expectedError.errors[index].detailKeyParameters);
+			expect(error.fields).toEqual(expectedError.errors[index].fields);
+			expect(error.status).toBe(expectedError.errors[index].status);
+			expect(error.index).toBe(expectedError.errors[index].index);
+		});
+	}
+
+	function assertResponseHeaders(responseHeaders: Map<string, string>, expectedHeaders: { [header: string]: string }): void {
+		expect(responseHeaders.size).toBe(Object.keys(expectedHeaders).length);
+
+		for (const header of Object.keys(expectedHeaders)) {
+			expect(expectedHeaders[header]).toBeDefined();
+			expect(responseHeaders.get(header)).toBe(expectedHeaders[header]);
+		}
+	}
+
+	function assertCollectionMetadata(collectionMetadata: StarkCollectionMetadata, expectedMetadata: StarkCollectionMetadata): void {
+		expect(collectionMetadata instanceof StarkCollectionMetadataImpl).toBe(true);
+
+		if (expectedMetadata.sortedBy) {
+			assertMetadataSorting(collectionMetadata.sortedBy, expectedMetadata.sortedBy);
+		} else {
+			expect(collectionMetadata.sortedBy).toBeUndefined();
+		}
+		if (expectedMetadata.pagination) {
+			assertMetadataPagination(collectionMetadata.pagination, expectedMetadata.pagination);
+		} else {
+			expect(collectionMetadata.pagination).toBeUndefined();
+		}
+		if (expectedMetadata.warnings) {
+			assertMetadataWarnings(<StarkHttpErrorDetail[]>collectionMetadata.warnings, expectedMetadata.warnings);
+		} else {
+			expect(collectionMetadata.warnings).toBeUndefined();
+		}
+		if (expectedMetadata.etags) {
+			expect(collectionMetadata.etags).toEqual(expectedMetadata.etags);
+		} else {
+			expect(collectionMetadata.etags).toBeUndefined();
+		}
+		if (expectedMetadata.custom) {
+			expect(collectionMetadata.custom).toEqual(expectedMetadata.custom);
+		} else {
+			expect(collectionMetadata.custom).toBeUndefined();
+		}
+	}
+
+	function assertMetadataWarnings(metadataWarnings: StarkHttpErrorDetail[], expectedWarnings: StarkHttpErrorDetail[]): void {
+		expect(metadataWarnings.length).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings).length);
+
+		metadataWarnings.forEach((warning: StarkHttpErrorDetail, index: number) => {
+			expect(warning.type).toBe(expectedWarnings[index].type);
+			expect(warning.title).toBe(expectedWarnings[index].title);
+			expect(warning.titleKey).toBe(expectedWarnings[index].titleKey);
+			expect(warning.detail).toBe(expectedWarnings[index].detail);
+			expect(warning.detailKey).toBe(expectedWarnings[index].detailKey);
+			expect(warning.fields).toEqual(expectedWarnings[index].fields);
+			expect(warning.instance).toBe(expectedWarnings[index].instance);
+		});
+	}
+
+	function assertMetadataPagination(metadataPagination: StarkPaginationMetadata, expectedPagination: StarkPaginationMetadata): void {
+		expect(metadataPagination.currentPage).toBe(expectedPagination.currentPage);
+		expect(metadataPagination.limit).toBe(expectedPagination.limit);
+		expect(metadataPagination.offset).toBe(expectedPagination.offset);
+		expect(metadataPagination.previousOffset).toBe(expectedPagination.previousOffset);
+		expect(metadataPagination.nextOffset).toBe(expectedPagination.nextOffset);
+		expect(metadataPagination.pageCount).toBe(expectedPagination.pageCount);
+		expect(metadataPagination.totalCount).toBe(expectedPagination.totalCount);
+	}
+
+	function assertMetadataSorting(metadataSorting: StarkSortItem[], expectedSorting: StarkSortItem[]): void {
+		expect(metadataSorting.length).toBe(expectedSorting.length);
+
+		metadataSorting.forEach((sortItem: StarkSortItem, index: number) => {
+			expect(sortItem instanceof StarkSortItemImpl).toBe(true);
+			expect(sortItem.field).toBe(expectedSorting[index].field);
+			expect(sortItem.order).toBe(expectedSorting[index].order);
+			expect(sortItem.sortValue).toBe(expectedSorting[index].sortValue);
+		});
+	}
+
+	function assertResponseData(responseData: MockResource[], expectedResponseData: MockResource[]): void {
+		expect(responseData).toBeDefined();
+		expect(responseData.length).toBe(expectedResponseData.length);
+
+		responseData.forEach((collectionItem: MockResource, index: number) => {
+			expect(collectionItem instanceof MockResource).toBe(true);
+			expect(collectionItem.uuid).toBe(expectedResponseData[index].uuid);
+			expect(collectionItem.property1).toBe(expectedResponseData[index].property1);
+			expect(collectionItem.property2).toBe(expectedResponseData[index].property2);
+			expect(collectionItem.etag).toBe(expectedResponseData[index].etag);
+		});
+	}
+
+	function assertHttpFailure(errorWrapper: StarkHttpErrorWrapper): void {
+		expect(errorWrapper).toBeDefined();
+		assertHttpError(errorWrapper.httpError, mockHttpError);
+		assertResponseHeaders(errorWrapper.starkHttpHeaders, httpHeaders);
+	}
+
+	function assertHttpCall(
+		httpMethod: Spy,
+		targetUrl: string,
+		httpRequestConfig: HttpRequestOptions,
+		serializedData?: string | object,
+		attempts: number = 1
+	): void {
+		expect(httpMethod).toHaveBeenCalledTimes(attempts);
+		if (serializedData) {
+			expect(httpMethod).toHaveBeenCalledWith(targetUrl, serializedData, httpRequestConfig);
+		} else {
+			expect(httpMethod).toHaveBeenCalledWith(targetUrl, httpRequestConfig);
+		}
+	}
 
 	beforeEach(() => {
 		mockBackend = new StarkBackendImpl();
@@ -144,7 +304,7 @@ describe("Service: StarkHttpService", () => {
 		// Make sure that a correlation identifier is defined correctly on the logger
 		loggerMock = new MockStarkLoggingService(mockCorrelationId);
 		mockSessionService = new MockStarkSessionService();
-		httpMock = createSpyObj("HttpClient", ["get", "put", "post", "delete"]);
+		httpMock = createSpyObj<HttpClient>("HttpClient", ["get", "put", "post", "delete"]);
 
 		starkHttpService = new HttpServiceHelper<MockResource>(loggerMock, mockSessionService, httpMock);
 		starkHttpService.retryDelay = 10; // override retry delay to make unit tests faster
@@ -177,7 +337,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -187,19 +347,11 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-						expect(result.data instanceof MockResource).toBe(true);
-						expect(result.data.uuid).toBe(mockUuid);
-						expect(result.data.etag).toBe(mockEtag);
-						expect(result.data.property1).toBe(mockProperty1);
-						expect(result.data.property2).toBe(mockProperty2);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+						assertResponseData([result.data], [mockResourceWithEtag]);
 						expect(result.data.metadata).toBeUndefined();
 
-						expect(httpMock.get).toHaveBeenCalledTimes(1);
-						expect(httpMock.get).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
+						assertHttpCall(httpMock.get, "www.awesomeapi.com/mock", {
 							params: convertMapIntoObject(request.queryParameters),
 							headers: convertMapIntoObject(headersMap),
 							observe: "response",
@@ -218,7 +370,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithMetadata,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -228,29 +380,11 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-						expect(result.data instanceof MockResource).toBe(true);
-						expect(result.data.uuid).toBe(mockUuid);
-						expect(result.data.etag).toBe(mockEtag);
-						expect(result.data.property1).toBe(mockProperty1);
-						expect(result.data.property2).toBe(mockProperty2);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+						assertResponseData([result.data], [mockResourceWithEtag]);
 						expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
 
-						const metadataWarnings: StarkHttpErrorDetail[] = <StarkHttpErrorDetail[]>result.data.metadata.warnings;
-						expect(metadataWarnings.length).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings).length);
-
-						metadataWarnings.forEach((warning: StarkHttpErrorDetail, index: number) => {
-							expect(warning.type).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].type);
-							expect(warning.title).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].title);
-							expect(warning.titleKey).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].titleKey);
-							expect(warning.detail).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].detail);
-							expect(warning.detailKey).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].detailKey);
-							expect(warning.fields).toEqual((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].fields);
-							expect(warning.instance).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].instance);
-						});
+						assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
 
 						expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
 					},
@@ -266,7 +400,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.get.and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -277,35 +411,8 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.type).toBe(mockHttpErrorType);
-						expect(errorWrapper.httpError.title).toBe(mockHttpErrorTitle);
-						expect(errorWrapper.httpError.instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.httpError.errors[0] instanceof StarkHttpErrorDetailImpl).toBe(true);
-						expect(errorWrapper.httpError.errors[0].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[0].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[0].detail).toBe(mockHttpErrorDetail1);
-						expect(errorWrapper.httpError.errors[0].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[1].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[1].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[1].detail).toBe(mockHttpErrorDetail2);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields).length).toBe(mockHttpErrorDetailFieldCount);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[0]).toBe(mockHttpErrorDetailField1);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[1]).toBe(mockHttpErrorDetailField2);
-						expect(errorWrapper.httpError.errors[1].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[2].detail).toBe(mockHttpErrorDetail3);
-						expect(errorWrapper.httpError.errors[2].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorWrapper.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(errorWrapper.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-
-						expect(httpMock.get).toHaveBeenCalledTimes(1);
-						expect(httpMock.get).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
+						assertHttpFailure(errorWrapper);
+						assertHttpCall(httpMock.get, "www.awesomeapi.com/mock", {
 							params: convertMapIntoObject(request.queryParameters),
 							headers: convertMapIntoObject(headersMap),
 							observe: "response",
@@ -323,7 +430,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
-				(<Spy>httpMock.get).and.returnValue(
+				httpMock.get.and.returnValue(
 					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
@@ -343,11 +450,7 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
+						assertHttpFailure(errorWrapper);
 						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
@@ -377,7 +480,7 @@ describe("Service: StarkHttpService", () => {
 					body: undefined,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.delete).and.returnValue(of(httpResponse));
+				httpMock.delete.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -388,13 +491,9 @@ describe("Service: StarkHttpService", () => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
 						expect(result.data).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 
-						expect(httpMock.delete).toHaveBeenCalledTimes(1);
-						expect(httpMock.delete).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
+						assertHttpCall(httpMock.delete, "www.awesomeapi.com/mock", {
 							params: convertMapIntoObject(request.queryParameters),
 							headers: convertMapIntoObject(headersMap),
 							observe: "response",
@@ -413,7 +512,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.delete).and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.delete.and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -424,35 +523,8 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.type).toBe(mockHttpErrorType);
-						expect(errorWrapper.httpError.title).toBe(mockHttpErrorTitle);
-						expect(errorWrapper.httpError.instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.httpError.errors[0] instanceof StarkHttpErrorDetailImpl).toBe(true);
-						expect(errorWrapper.httpError.errors[0].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[0].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[0].detail).toBe(mockHttpErrorDetail1);
-						expect(errorWrapper.httpError.errors[0].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[1].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[1].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[1].detail).toBe(mockHttpErrorDetail2);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields).length).toBe(mockHttpErrorDetailFieldCount);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[0]).toBe(mockHttpErrorDetailField1);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[1]).toBe(mockHttpErrorDetailField2);
-						expect(errorWrapper.httpError.errors[1].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[2].detail).toBe(mockHttpErrorDetail3);
-						expect(errorWrapper.httpError.errors[2].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorWrapper.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(errorWrapper.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-
-						expect(httpMock.delete).toHaveBeenCalledTimes(1);
-						expect(httpMock.delete).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
+						assertHttpFailure(errorWrapper);
+						assertHttpCall(httpMock.delete, "www.awesomeapi.com/mock", {
 							params: convertMapIntoObject(request.queryParameters),
 							headers: convertMapIntoObject(headersMap),
 							observe: "response",
@@ -470,7 +542,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
-				(<Spy>httpMock.delete).and.returnValue(
+				httpMock.delete.and.returnValue(
 					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
@@ -490,11 +562,7 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
+						assertHttpFailure(errorWrapper);
 						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
@@ -524,7 +592,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
@@ -536,15 +604,16 @@ describe("Service: StarkHttpService", () => {
 					expect(result).toBeDefined();
 				});
 
-				expect(httpMock.post).toHaveBeenCalledWith(
+				assertHttpCall(
+					httpMock.post,
 					"www.awesomeapi.com/mock",
-					request.serializer.serialize(mockResourceWithoutEtag), // etag is removed from the item sent due to NG-1361
 					{
 						params: convertMapIntoObject(request.queryParameters),
 						headers: convertMapIntoObject(headersMap),
 						observe: "response",
 						responseType: "json"
-					}
+					},
+					request.serializer.serialize(mockResourceWithoutEtag) // etag is removed from the item sent due to NG-1361
 				);
 			});
 
@@ -554,7 +623,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
@@ -566,27 +635,20 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						expect(result.data instanceof MockResource).toBe(true);
-						expect(result.data.uuid).toBe(mockUuid);
-						expect(result.data.etag).toBe(mockEtag);
-						expect(result.data.property1).toBe(mockProperty1);
-						expect(result.data.property2).toBe(mockProperty2);
+						assertResponseData([result.data], [mockResourceWithEtag]);
 						expect(result.data.metadata).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 
-						expect(httpMock.post).toHaveBeenCalledTimes(1);
-						expect(httpMock.post).toHaveBeenCalledWith(
+						assertHttpCall(
+							httpMock.post,
 							"www.awesomeapi.com/mock",
-							request.serializer.serialize(mockResourceWithoutEtag),
 							{
 								params: convertMapIntoObject(request.queryParameters),
 								headers: convertMapIntoObject(headersMap),
 								observe: "response",
 								responseType: "json"
-							}
+							},
+							request.serializer.serialize(mockResourceWithoutEtag)
 						);
 					},
 					() => {
@@ -601,7 +663,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithMetadata,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
@@ -613,29 +675,11 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-						expect(result.data instanceof MockResource).toBe(true);
-						expect(result.data.uuid).toBe(mockUuid);
-						expect(result.data.etag).toBe(mockEtag);
-						expect(result.data.property1).toBe(mockProperty1);
-						expect(result.data.property2).toBe(mockProperty2);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+						assertResponseData([result.data], [mockResourceWithEtag]);
 						expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
 
-						const metadataWarnings: StarkHttpErrorDetail[] = <StarkHttpErrorDetail[]>result.data.metadata.warnings;
-						expect(metadataWarnings.length).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings).length);
-
-						metadataWarnings.forEach((warning: StarkHttpErrorDetail, index: number) => {
-							expect(warning.type).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].type);
-							expect(warning.title).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].title);
-							expect(warning.titleKey).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].titleKey);
-							expect(warning.detail).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].detail);
-							expect(warning.detailKey).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].detailKey);
-							expect(warning.fields).toEqual((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].fields);
-							expect(warning.instance).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].instance);
-						});
+						assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
 
 						expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
 					},
@@ -651,7 +695,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.put).and.returnValue(of(httpResponse));
+				httpMock.put.and.returnValue(of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 
@@ -663,27 +707,20 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						expect(result.data instanceof MockResource).toBe(true);
-						expect(result.data.uuid).toBe(mockUuid);
-						expect(result.data.etag).toBe(mockEtag);
-						expect(result.data.property1).toBe(mockProperty1);
-						expect(result.data.property2).toBe(mockProperty2);
+						assertResponseData([result.data], [mockResourceWithEtag]);
 						expect(result.data.metadata).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 
-						expect(httpMock.put).toHaveBeenCalledTimes(1);
-						expect(httpMock.put).toHaveBeenCalledWith(
+						assertHttpCall(
+							httpMock.put,
 							"www.awesomeapi.com/mock",
-							request.serializer.serialize(mockResourceWithoutEtag),
 							{
 								params: convertMapIntoObject(request.queryParameters),
 								headers: convertMapIntoObject(headersMap),
 								observe: "response",
 								responseType: "json"
-							}
+							},
+							request.serializer.serialize(mockResourceWithoutEtag)
 						);
 					},
 					() => {
@@ -698,7 +735,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithMetadata,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.put).and.returnValue(of(httpResponse));
+				httpMock.put.and.returnValue(of(httpResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 
@@ -710,29 +747,11 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-						expect(result.data instanceof MockResource).toBe(true);
-						expect(result.data.uuid).toBe(mockUuid);
-						expect(result.data.etag).toBe(mockEtag);
-						expect(result.data.property1).toBe(mockProperty1);
-						expect(result.data.property2).toBe(mockProperty2);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+						assertResponseData([result.data], [mockResourceWithEtag]);
 						expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
 
-						const metadataWarnings: StarkHttpErrorDetail[] = <StarkHttpErrorDetail[]>result.data.metadata.warnings;
-						expect(metadataWarnings.length).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings).length);
-
-						metadataWarnings.forEach((warning: StarkHttpErrorDetail, index: number) => {
-							expect(warning.type).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].type);
-							expect(warning.title).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].title);
-							expect(warning.titleKey).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].titleKey);
-							expect(warning.detail).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].detail);
-							expect(warning.detailKey).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].detailKey);
-							expect(warning.fields).toEqual((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].fields);
-							expect(warning.instance).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].instance);
-						});
+						assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
 
 						expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
 					},
@@ -748,7 +767,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.post.and.returnValue(observableThrow(httpErrorResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
@@ -761,43 +780,17 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.type).toBe(mockHttpErrorType);
-						expect(errorWrapper.httpError.title).toBe(mockHttpErrorTitle);
-						expect(errorWrapper.httpError.instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.httpError.errors[0] instanceof StarkHttpErrorDetailImpl).toBe(true);
-						expect(errorWrapper.httpError.errors[0].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[0].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[0].detail).toBe(mockHttpErrorDetail1);
-						expect(errorWrapper.httpError.errors[0].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[1].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[1].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[1].detail).toBe(mockHttpErrorDetail2);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields).length).toBe(mockHttpErrorDetailFieldCount);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[0]).toBe(mockHttpErrorDetailField1);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[1]).toBe(mockHttpErrorDetailField2);
-						expect(errorWrapper.httpError.errors[1].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[2].detail).toBe(mockHttpErrorDetail3);
-						expect(errorWrapper.httpError.errors[2].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorWrapper.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(errorWrapper.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-
-						expect(httpMock.post).toHaveBeenCalledTimes(1);
-						expect(httpMock.post).toHaveBeenCalledWith(
+						assertHttpFailure(errorWrapper);
+						assertHttpCall(
+							httpMock.post,
 							"www.awesomeapi.com/mock",
-							request.serializer.serialize(mockResourceWithoutEtag),
 							{
 								params: convertMapIntoObject(request.queryParameters),
 								headers: convertMapIntoObject(headersMap),
 								observe: "response",
 								responseType: "json"
-							}
+							},
+							request.serializer.serialize(mockResourceWithoutEtag)
 						);
 					}
 				);
@@ -811,7 +804,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
-				(<Spy>httpMock.post).and.returnValue(
+				httpMock.post.and.returnValue(
 					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
@@ -832,11 +825,7 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
+						assertHttpFailure(errorWrapper);
 						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
@@ -849,7 +838,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.put).and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.put.and.returnValue(observableThrow(httpErrorResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 
@@ -862,43 +851,17 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.type).toBe(mockHttpErrorType);
-						expect(errorWrapper.httpError.title).toBe(mockHttpErrorTitle);
-						expect(errorWrapper.httpError.instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.httpError.errors[0] instanceof StarkHttpErrorDetailImpl).toBe(true);
-						expect(errorWrapper.httpError.errors[0].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[0].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[0].detail).toBe(mockHttpErrorDetail1);
-						expect(errorWrapper.httpError.errors[0].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[1].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[1].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[1].detail).toBe(mockHttpErrorDetail2);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields).length).toBe(mockHttpErrorDetailFieldCount);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[0]).toBe(mockHttpErrorDetailField1);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[1]).toBe(mockHttpErrorDetailField2);
-						expect(errorWrapper.httpError.errors[1].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[2].detail).toBe(mockHttpErrorDetail3);
-						expect(errorWrapper.httpError.errors[2].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorWrapper.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(errorWrapper.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-
-						expect(httpMock.put).toHaveBeenCalledTimes(1);
-						expect(httpMock.put).toHaveBeenCalledWith(
+						assertHttpFailure(errorWrapper);
+						assertHttpCall(
+							httpMock.put,
 							"www.awesomeapi.com/mock",
-							request.serializer.serialize(mockResourceWithoutEtag),
 							{
 								params: convertMapIntoObject(request.queryParameters),
 								headers: convertMapIntoObject(headersMap),
 								observe: "response",
 								responseType: "json"
-							}
+							},
+							request.serializer.serialize(mockResourceWithoutEtag)
 						);
 					}
 				);
@@ -912,7 +875,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
-				(<Spy>httpMock.put).and.returnValue(
+				httpMock.put.and.returnValue(
 					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
@@ -933,11 +896,7 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
+						assertHttpFailure(errorWrapper);
 						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
@@ -967,7 +926,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -977,15 +936,16 @@ describe("Service: StarkHttpService", () => {
 					expect(result).toBeDefined();
 				});
 
-				expect(httpMock.post).toHaveBeenCalledWith(
+				assertHttpCall(
+					httpMock.post,
 					"www.awesomeapi.com/mock",
-					request.serializer.serialize(mockResourceWithoutEtag), // etag is removed from the item sent due to NG-1361
 					{
 						params: convertMapIntoObject(request.queryParameters),
 						headers: convertMapIntoObject(headersMap),
 						observe: "response",
 						responseType: "json"
-					}
+					},
+					request.serializer.serialize(mockResourceWithoutEtag) // etag is removed from the item sent due to NG-1361
 				);
 			});
 
@@ -995,7 +955,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithEtag,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -1005,31 +965,25 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data instanceof MockResource).toBe(true);
-						expect(result.data.uuid).toBeDefined();
-						expect(result.data.etag).toBeDefined();
-						expect(result.data.property1).toBe(mockProperty1);
-						expect(result.data.property2).toBe(mockProperty2);
+						assertResponseData([result.data], [mockResourceWithEtag]);
 						expect(result.data.metadata).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 					},
 					() => {
 						fail("The 'error' function should not be called in case of success");
 					}
 				);
 
-				expect(httpMock.post).toHaveBeenCalledWith(
+				assertHttpCall(
+					httpMock.post,
 					"www.awesomeapi.com/mock",
-					request.serializer.serialize(mockResourceWithoutEtag),
 					{
 						params: convertMapIntoObject(request.queryParameters),
 						headers: convertMapIntoObject(headersMap),
 						observe: "response",
 						responseType: "json"
-					}
+					},
+					request.serializer.serialize(mockResourceWithoutEtag)
 				);
 			});
 
@@ -1039,7 +993,7 @@ describe("Service: StarkHttpService", () => {
 					body: mockResourceWithMetadata,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -1049,29 +1003,11 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkSingleItemResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-						expect(result.data instanceof MockResource).toBe(true);
-						expect(result.data.uuid).toBeDefined();
-						expect(result.data.etag).toBeDefined();
-						expect(result.data.property1).toBe(mockProperty1);
-						expect(result.data.property2).toBe(mockProperty2);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+						assertResponseData([result.data], [mockResourceWithEtag]);
 						expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
 
-						const metadataWarnings: StarkHttpErrorDetail[] = <StarkHttpErrorDetail[]>result.data.metadata.warnings;
-						expect(metadataWarnings.length).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings).length);
-
-						metadataWarnings.forEach((warning: StarkHttpErrorDetail, index: number) => {
-							expect(warning.type).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].type);
-							expect(warning.title).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].title);
-							expect(warning.titleKey).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].titleKey);
-							expect(warning.detail).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].detail);
-							expect(warning.detailKey).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].detailKey);
-							expect(warning.fields).toEqual((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].fields);
-							expect(warning.instance).toBe((<StarkHttpErrorDetail[]>mockResourceMetadata.warnings)[index].instance);
-						});
+						assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
 
 						expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
 					},
@@ -1087,7 +1023,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.post.and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -1098,44 +1034,20 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.type).toBe(mockHttpErrorType);
-						expect(errorWrapper.httpError.title).toBe(mockHttpErrorTitle);
-						expect(errorWrapper.httpError.instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.httpError.errors[0] instanceof StarkHttpErrorDetailImpl).toBe(true);
-						expect(errorWrapper.httpError.errors[0].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[0].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[0].detail).toBe(mockHttpErrorDetail1);
-						expect(errorWrapper.httpError.errors[0].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[1].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[1].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[1].detail).toBe(mockHttpErrorDetail2);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields).length).toBe(mockHttpErrorDetailFieldCount);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[0]).toBe(mockHttpErrorDetailField1);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[1]).toBe(mockHttpErrorDetailField2);
-						expect(errorWrapper.httpError.errors[1].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[2].detail).toBe(mockHttpErrorDetail3);
-						expect(errorWrapper.httpError.errors[2].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorWrapper.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(errorWrapper.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
+						assertHttpFailure(errorWrapper);
 					}
 				);
 
-				expect(httpMock.post).toHaveBeenCalledWith(
+				assertHttpCall(
+					httpMock.post,
 					"www.awesomeapi.com/mock",
-					request.serializer.serialize(mockResourceWithoutEtag),
 					{
 						params: convertMapIntoObject(request.queryParameters),
 						headers: convertMapIntoObject(headersMap),
 						observe: "response",
 						responseType: "json"
-					}
+					},
+					request.serializer.serialize(mockResourceWithoutEtag)
 				);
 			});
 
@@ -1147,7 +1059,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
-				(<Spy>httpMock.post).and.returnValue(
+				httpMock.post.and.returnValue(
 					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
@@ -1167,11 +1079,7 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
+						assertHttpFailure(errorWrapper);
 						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
@@ -1236,22 +1144,14 @@ describe("Service: StarkHttpService", () => {
 									order: StarkSortOrder.DESC
 								}
 							],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags,
 							warnings: mockWarnings
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1261,50 +1161,24 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBe(mockUuid);
-						expect(result.data[0].property1).toBe(mockProperty1);
-						expect(result.data[0].property2).toBe(mockProperty2);
-						expect(result.data[0].etag).toBe(mockEtag);
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(1);
-						expect(result.metadata.sortedBy[0] instanceof StarkSortItemImpl).toBe(true);
-						expect(result.metadata.sortedBy[0].field).toBe("name");
-						expect(result.metadata.sortedBy[0].order).toBe(StarkSortOrder.DESC);
-						expect(result.metadata.sortedBy[0].sortValue).toBe("name" + "+" + StarkSortOrder.DESC);
-						expect(result.metadata.pagination.currentPage).toBe(3);
-						expect(result.metadata.pagination.limit).toBe(25);
-						expect(result.metadata.pagination.offset).toBe(50);
-						expect(result.metadata.pagination.previousOffset).toBe(25);
-						expect(result.metadata.pagination.nextOffset).toBe(75);
-						expect(result.metadata.pagination.pageCount).toBe(40);
-						expect(result.metadata.pagination.totalCount).toBe(1000);
-						expect(result.metadata.etags).toEqual(etags);
-
-						const metadataWarnings: StarkHttpErrorDetail[] = <StarkHttpErrorDetail[]>result.metadata.warnings;
-						expect(metadataWarnings.length).toBe(mockWarnings.length);
-
-						metadataWarnings.forEach((warning: StarkHttpErrorDetail, index: number) => {
-							expect(warning.type).toBe(mockWarnings[index].type);
-							expect(warning.title).toBe(mockWarnings[index].title);
-							expect(warning.titleKey).toBe(mockWarnings[index].titleKey);
-							expect(warning.detail).toBe(mockWarnings[index].detail);
-							expect(warning.detailKey).toBe(mockWarnings[index].detailKey);
-							expect(warning.fields).toEqual(mockWarnings[index].fields);
-							expect(warning.instance).toBe(mockWarnings[index].instance);
+						assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [
+								{
+									field: "name",
+									order: StarkSortOrder.DESC,
+									sortValue: "name" + "+" + StarkSortOrder.DESC
+								}
+							],
+							pagination: mockPaginationMetadata,
+							warnings: mockWarnings,
+							etags: etags
 						});
 
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).not.toHaveBeenCalled();
 
-						expect(httpMock.get).toHaveBeenCalledTimes(1);
-						expect(httpMock.get).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
+						assertHttpCall(httpMock.get, "www.awesomeapi.com/mock", {
 							params: convertMapIntoObject(request.queryParameters),
 							headers: convertMapIntoObject(headersMap),
 							observe: "response",
@@ -1324,21 +1198,13 @@ describe("Service: StarkHttpService", () => {
 						items: [mockResourceWithoutEtag],
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: <any>undefined
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1348,17 +1214,12 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBeDefined();
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeUndefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseData(result.data, [mockResourceWithoutEtag]);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'etags'");
 					},
@@ -1377,21 +1238,13 @@ describe("Service: StarkHttpService", () => {
 						items: [mockResourceWithoutEtag],
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1401,17 +1254,13 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBeDefined();
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseData(result.data, [mockResourceWithoutEtag]);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no etag");
 					},
@@ -1433,21 +1282,13 @@ describe("Service: StarkHttpService", () => {
 						items: items,
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1458,13 +1299,12 @@ describe("Service: StarkHttpService", () => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
 						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'items'");
 					},
@@ -1489,21 +1329,13 @@ describe("Service: StarkHttpService", () => {
 						items: items,
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1517,13 +1349,12 @@ describe("Service: StarkHttpService", () => {
 						expect(result.data.length).toBe(1);
 						expect(result.data[0] instanceof MockResource).toBe(false);
 						expect(result.data[0]).toBe(items[0]);
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("it is not an object");
 					},
@@ -1546,21 +1377,13 @@ describe("Service: StarkHttpService", () => {
 						items: [mockResourceWithoutUuid],
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1570,20 +1393,13 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBeUndefined();
-						expect(result.data[0].property1).toBe(mockProperty1);
-						expect(result.data[0].property2).toBe(mockProperty2);
-						expect(result.data[0].etag).toBe(mockEtag);
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseData(result.data, [mockResourceWithoutUuid]); // should contain the etag now
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'uuid' property found in item");
 					},
@@ -1603,22 +1419,14 @@ describe("Service: StarkHttpService", () => {
 						items: [mockResourceWithoutEtag],
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags,
 							custom: mockCustomMetadata
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1628,20 +1436,14 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBe(mockUuid);
-						expect(result.data[0].property1).toBe(mockProperty1);
-						expect(result.data[0].property2).toBe(mockProperty2);
-						expect(result.data[0].etag).toBe(mockEtag);
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toEqual(mockCustomMetadata);
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags,
+							custom: mockCustomMetadata
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).not.toHaveBeenCalled();
 					},
 					() => {
@@ -1659,7 +1461,7 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.get).and.returnValue(of(httpResponse));
+				httpMock.get.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1669,12 +1471,9 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBeDefined();
+						assertResponseData(result.data, [mockResourceWithoutEtag]);
 						expect(result.metadata).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'metadata'");
 					},
@@ -1691,7 +1490,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 
-				(<Spy>httpMock.get).and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.get.and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1702,35 +1501,8 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.type).toBe(mockHttpErrorType);
-						expect(errorWrapper.httpError.title).toBe(mockHttpErrorTitle);
-						expect(errorWrapper.httpError.instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.httpError.errors[0] instanceof StarkHttpErrorDetailImpl).toBe(true);
-						expect(errorWrapper.httpError.errors[0].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[0].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[0].detail).toBe(mockHttpErrorDetail1);
-						expect(errorWrapper.httpError.errors[0].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[1].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[1].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[1].detail).toBe(mockHttpErrorDetail2);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields).length).toBe(mockHttpErrorDetailFieldCount);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[0]).toBe(mockHttpErrorDetailField1);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[1]).toBe(mockHttpErrorDetailField2);
-						expect(errorWrapper.httpError.errors[1].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[2].detail).toBe(mockHttpErrorDetail3);
-						expect(errorWrapper.httpError.errors[2].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorWrapper.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(errorWrapper.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-
-						expect(httpMock.get).toHaveBeenCalledTimes(1);
-						expect(httpMock.get).toHaveBeenCalledWith("www.awesomeapi.com/mock", {
+						assertHttpFailure(errorWrapper);
+						assertHttpCall(httpMock.get, "www.awesomeapi.com/mock", {
 							params: convertMapIntoObject(request.queryParameters),
 							headers: convertMapIntoObject(headersMap),
 							observe: "response",
@@ -1748,7 +1520,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
-				(<Spy>httpMock.get).and.returnValue(
+				httpMock.get.and.returnValue(
 					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
@@ -1768,11 +1540,7 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
+						assertHttpFailure(errorWrapper);
 						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
@@ -1812,22 +1580,14 @@ describe("Service: StarkHttpService", () => {
 									order: StarkSortOrder.DESC
 								}
 							],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags,
 							warnings: mockWarnings
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1837,58 +1597,32 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBe(mockUuid);
-						expect(result.data[0].property1).toBe(mockProperty1);
-						expect(result.data[0].property2).toBe(mockProperty2);
-						expect(result.data[0].etag).toBe(mockEtag);
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(1);
-						expect(result.metadata.sortedBy[0] instanceof StarkSortItemImpl).toBe(true);
-						expect(result.metadata.sortedBy[0].field).toBe("name");
-						expect(result.metadata.sortedBy[0].order).toBe(StarkSortOrder.DESC);
-						expect(result.metadata.sortedBy[0].sortValue).toBe("name" + "+" + StarkSortOrder.DESC);
-						expect(result.metadata.pagination.currentPage).toBe(3);
-						expect(result.metadata.pagination.limit).toBe(25);
-						expect(result.metadata.pagination.offset).toBe(50);
-						expect(result.metadata.pagination.previousOffset).toBe(25);
-						expect(result.metadata.pagination.nextOffset).toBe(75);
-						expect(result.metadata.pagination.pageCount).toBe(40);
-						expect(result.metadata.pagination.totalCount).toBe(1000);
-						expect(result.metadata.etags).toEqual(etags);
-
-						const metadataWarnings: StarkHttpErrorDetail[] = <StarkHttpErrorDetail[]>result.metadata.warnings;
-						expect(metadataWarnings.length).toBe(mockWarnings.length);
-
-						metadataWarnings.forEach((warning: StarkHttpErrorDetail, index: number) => {
-							expect(warning.type).toBe(mockWarnings[index].type);
-							expect(warning.title).toBe(mockWarnings[index].title);
-							expect(warning.titleKey).toBe(mockWarnings[index].titleKey);
-							expect(warning.detail).toBe(mockWarnings[index].detail);
-							expect(warning.detailKey).toBe(mockWarnings[index].detailKey);
-							expect(warning.fields).toEqual(mockWarnings[index].fields);
-							expect(warning.instance).toBe(mockWarnings[index].instance);
+						assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [
+								{
+									field: "name",
+									order: StarkSortOrder.DESC,
+									sortValue: "name" + "+" + StarkSortOrder.DESC
+								}
+							],
+							pagination: mockPaginationMetadata,
+							warnings: mockWarnings,
+							etags: etags
 						});
-
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
-						expect(result.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(result.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(result.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).not.toHaveBeenCalled();
 
-						expect(httpMock.post).toHaveBeenCalledTimes(1);
-						expect(httpMock.post).toHaveBeenCalledWith(
+						assertHttpCall(
+							httpMock.post,
 							"www.awesomeapi.com/mock",
-							Serialize(mockCriteria), // the search criteria is sent in the request body payload
 							{
 								params: convertMapIntoObject(request.queryParameters),
 								headers: convertMapIntoObject(headersMap),
 								observe: "response",
 								responseType: "json"
-							}
+							},
+							Serialize(mockCriteria) // the search criteria is sent in the request body payload
 						);
 					},
 					() => {
@@ -1904,21 +1638,13 @@ describe("Service: StarkHttpService", () => {
 						items: [mockResourceWithoutEtag],
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: <any>undefined
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1928,17 +1654,12 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBeDefined();
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeUndefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseData(result.data, [mockResourceWithoutEtag]);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'etags'");
 					},
@@ -1957,21 +1678,13 @@ describe("Service: StarkHttpService", () => {
 						items: [mockResourceWithoutEtag],
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1981,17 +1694,13 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBeDefined();
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseData(result.data, [mockResourceWithoutEtag]);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no etag");
 					},
@@ -2013,21 +1722,13 @@ describe("Service: StarkHttpService", () => {
 						items: items,
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -2038,13 +1739,12 @@ describe("Service: StarkHttpService", () => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
 						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'items'");
 					},
@@ -2069,21 +1769,13 @@ describe("Service: StarkHttpService", () => {
 						items: items,
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -2097,13 +1789,12 @@ describe("Service: StarkHttpService", () => {
 						expect(result.data.length).toBe(1);
 						expect(result.data[0] instanceof MockResource).toBe(false);
 						expect(result.data[0]).toBe(items[0]);
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("it is not an object");
 					},
@@ -2126,21 +1817,13 @@ describe("Service: StarkHttpService", () => {
 						items: [mockResourceWithoutUuid],
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -2150,20 +1833,13 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBeUndefined();
-						expect(result.data[0].property1).toBe(mockProperty1);
-						expect(result.data[0].property2).toBe(mockProperty2);
-						expect(result.data[0].etag).toBe(mockEtag);
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseData(result.data, [mockResourceWithoutUuid]); // should contain the etag now
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'uuid' property found in item");
 					},
@@ -2183,22 +1859,14 @@ describe("Service: StarkHttpService", () => {
 						items: [mockResourceWithoutEtag],
 						metadata: {
 							sortedBy: [],
-							pagination: {
-								limit: 25,
-								offset: 50,
-								previousOffset: 25,
-								nextOffset: 75,
-								currentPage: 3,
-								pageCount: 40,
-								totalCount: 1000
-							},
+							pagination: mockPaginationMetadata,
 							etags: etags,
 							custom: mockCustomMetadata
 						}
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -2208,20 +1876,14 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBe(mockUuid);
-						expect(result.data[0].property1).toBe(mockProperty1);
-						expect(result.data[0].property2).toBe(mockProperty2);
-						expect(result.data[0].etag).toBe(mockEtag);
-						expect(result.metadata instanceof StarkCollectionMetadataImpl).toBe(true);
-						expect(result.metadata.sortedBy.length).toBe(0);
-						expect(result.metadata.pagination).toBeDefined();
-						expect(result.metadata.etags).toBeDefined();
-						expect(result.metadata.warnings).toBeUndefined();
-						expect(result.metadata.custom).toEqual(mockCustomMetadata);
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: etags,
+							custom: mockCustomMetadata
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).not.toHaveBeenCalled();
 					},
 					() => {
@@ -2239,7 +1901,7 @@ describe("Service: StarkHttpService", () => {
 					},
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(of(httpResponse));
+				httpMock.post.and.returnValue(of(httpResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -2249,12 +1911,9 @@ describe("Service: StarkHttpService", () => {
 					(result: StarkCollectionResponseWrapper<MockResource>) => {
 						expect(result).toBeDefined();
 						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(true);
-						expect(result.data[0].uuid).toBeDefined();
+						assertResponseData(result.data, [mockResourceWithoutEtag]);
 						expect(result.metadata).toBeUndefined();
-						expect(result.starkHttpHeaders.size).toBe(3);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
 						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'metadata'");
 					},
@@ -2270,7 +1929,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				(<Spy>httpMock.post).and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.post.and.returnValue(observableThrow(httpErrorResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -2281,43 +1940,17 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.type).toBe(mockHttpErrorType);
-						expect(errorWrapper.httpError.title).toBe(mockHttpErrorTitle);
-						expect(errorWrapper.httpError.instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.httpError.errors[0] instanceof StarkHttpErrorDetailImpl).toBe(true);
-						expect(errorWrapper.httpError.errors[0].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[0].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[0].detail).toBe(mockHttpErrorDetail1);
-						expect(errorWrapper.httpError.errors[0].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[1].type).toBe(mockHttpDetailErrorType);
-						expect(errorWrapper.httpError.errors[1].title).toBe(mockHttpDetailErrorTitle);
-						expect(errorWrapper.httpError.errors[1].detail).toBe(mockHttpErrorDetail2);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields).length).toBe(mockHttpErrorDetailFieldCount);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[0]).toBe(mockHttpErrorDetailField1);
-						expect((<string[]>errorWrapper.httpError.errors[1].fields)[1]).toBe(mockHttpErrorDetailField2);
-						expect(errorWrapper.httpError.errors[1].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.httpError.errors[2].detail).toBe(mockHttpErrorDetail3);
-						expect(errorWrapper.httpError.errors[2].instance).toBe(mockHttpErrorInstance);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
-						expect(errorWrapper.starkHttpHeaders.get(contentTypeKey)).toBe(contentTypeValue);
-						expect(errorWrapper.starkHttpHeaders.get(contentLengthKey)).toBe(contentLengthValue);
-						expect(errorWrapper.starkHttpHeaders.get(expiresKey)).toBe(expiresValue);
-
-						expect(httpMock.post).toHaveBeenCalledTimes(1);
-						expect(httpMock.post).toHaveBeenCalledWith(
+						assertHttpFailure(errorWrapper);
+						assertHttpCall(
+							httpMock.post,
 							"www.awesomeapi.com/mock",
-							Serialize(mockCriteria), // the search criteria is sent in the request body payload
 							{
 								params: convertMapIntoObject(request.queryParameters),
 								headers: convertMapIntoObject(headersMap),
 								observe: "response",
 								responseType: "json"
-							}
+							},
+							Serialize(mockCriteria) // the search criteria is sent in the request body payload
 						);
 					}
 				);
@@ -2331,7 +1964,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 				let errorCounter: number = 0;
-				(<Spy>httpMock.post).and.returnValue(
+				httpMock.post.and.returnValue(
 					observableThrow(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
@@ -2351,11 +1984,7 @@ describe("Service: StarkHttpService", () => {
 						fail("The 'next' function should not be called in case of an http error");
 					},
 					(errorWrapper: StarkHttpErrorWrapper) => {
-						expect(errorWrapper).toBeDefined();
-						expect(errorWrapper.httpError instanceof StarkHttpErrorImpl).toBe(true);
-						expect(errorWrapper.httpError.errors).toBeDefined();
-						expect(errorWrapper.httpError.errors.length).toBe(mockHttpErrorsCount);
-						expect(errorWrapper.starkHttpHeaders.size).toBe(3);
+						assertHttpFailure(errorWrapper);
 						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
 						done();
 					}
@@ -2470,7 +2099,7 @@ function httpHeadersGetter(inputHeaders: { [name: string]: string }): HttpHeader
 	return new HttpHeaders(inputHeaders);
 }
 
-function convertMapIntoObject(map: Map<string, any>): object {
+function convertMapIntoObject(map: Map<string, any>): { [param: string]: any } {
 	const resultObj: object = {};
 
 	map.forEach((value: any, key: string) => {
@@ -2495,3 +2124,4 @@ class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P>
 		return super.addCorrelationIdentifierHeader(request);
 	}
 }
+/* tslint:enable */

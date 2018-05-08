@@ -313,7 +313,7 @@ describe("Service: StarkRoutingService", () => {
 		}
 	];
 
-	function TestStateTreeParams(navigationSteps: any, expectedStateTreeParams: any, previousNavigations?: number): void {
+	function performNavigations(navigationSteps: any[], previousNavigations?: number): void {
 		for (const navigationStep of navigationSteps) {
 			routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
 			tick();
@@ -325,7 +325,9 @@ describe("Service: StarkRoutingService", () => {
 				tick();
 			}
 		}
+	}
 
+	function assertStateTreeParams(expectedStateTreeParams: any[]): void {
 		const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
 
 		expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
@@ -337,12 +339,7 @@ describe("Service: StarkRoutingService", () => {
 		});
 	}
 
-	function TestStateTreeResolves(navigationSteps: any, expectedStateTreeResolves: any): void {
-		for (const navigationStep of navigationSteps) {
-			routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
-			tick();
-		}
-
+	function assertStateTreeResolves(expectedStateTreeResolves: any[]): void {
 		const stateTreeResolves: Map<string, any> = routingService.getStateTreeResolves();
 
 		expect(stateTreeResolves.size).toBe(expectedStateTreeResolves.length);
@@ -355,12 +352,7 @@ describe("Service: StarkRoutingService", () => {
 		});
 	}
 
-	function TestStateTreeData(navigationSteps: any, expectedStateTreeData: any): void {
-		for (const navigationStep of navigationSteps) {
-			routingService.navigateTo(navigationStep.stateName);
-			tick();
-		}
-
+	function assertStateTreeData(expectedStateTreeData: any[]): void {
 		const stateTreeData: Map<string, any> = routingService.getStateTreeData();
 
 		expect(stateTreeData.size).toBe(expectedStateTreeData.length);
@@ -373,12 +365,7 @@ describe("Service: StarkRoutingService", () => {
 		});
 	}
 
-	function TestTranslationKey(navigationSteps: any, expectedTranslationKeys: any): void {
-		for (const navigationStep of navigationSteps) {
-			routingService.navigateTo(navigationStep.stateName);
-			tick();
-		}
-
+	function assertTranslationKey(expectedTranslationKeys: any[]): void {
 		for (const expectedTranslationKey of expectedTranslationKeys) {
 			const translationKey: string = routingService.getTranslationKeyFromState(expectedTranslationKey.name);
 			expect(translationKey).toBe(expectedTranslationKey.translationKey);
@@ -1089,7 +1076,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the state tree parameters for each visited page",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1108,7 +1095,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-01",
 						stateParams: { requestId: "Request-04", onBehalfView: true }
@@ -1127,14 +1114,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the state tree parameters when changing branch within Page-01 node",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1157,7 +1145,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-01",
 						stateParams: { requestId: "Request-05", onBehalfView: true }
@@ -1172,14 +1160,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the state tree parameters when changing to Page-02 branch",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1202,7 +1191,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-02-01",
 						stateParams: { requestId: "Request-05", onBehalfView: true }
@@ -1217,7 +1206,8 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 	});
@@ -1226,7 +1216,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the state tree parameters for each visited page in same branch except the last one",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1245,7 +1235,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02",
 						stateParams: { requestId: "Request-03", onBehalfView: true }
@@ -1260,14 +1250,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
+				performNavigations(navigationSteps, 1);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the state tree parameters when changing branch within Page-01 node except the last one",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1286,7 +1277,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-01",
 						stateParams: { requestId: "Request-03", onBehalfView: true }
@@ -1301,14 +1292,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
+				performNavigations(navigationSteps, 1);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the correct state tree names and parameters when switching branches except the last one",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1331,7 +1323,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-01",
 						stateParams: { requestId: "Request-04", onBehalfView: true }
@@ -1350,14 +1342,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
+				performNavigations(navigationSteps, 1);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the correct state tree names and parameters when switching branches except the last two",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1380,7 +1373,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-01",
 						stateParams: { requestId: "Request-03", onBehalfView: true }
@@ -1395,14 +1388,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 2);
+				performNavigations(navigationSteps, 2);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the correct state tree names and parameters when switching branches except the last one",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1429,7 +1423,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-01",
 						stateParams: { requestId: "Request-05", onBehalfView: false }
@@ -1444,14 +1438,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 1);
+				performNavigations(navigationSteps, 1);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the correct state tree names and parameters when switching branches except the last two",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1478,7 +1473,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-01",
 						stateParams: { requestId: "Request-04", onBehalfView: true }
@@ -1497,14 +1492,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 2);
+				performNavigations(navigationSteps, 2);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the correct state tree names and parameters when switching branches except the last four",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1531,7 +1527,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01",
 						stateParams: { requestId: "Request-02", onBehalfView: false }
@@ -1542,14 +1538,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 4);
+				performNavigations(navigationSteps, 4);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the correct state tree names and parameters when switching branches except the last four",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1576,14 +1573,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 5);
+				performNavigations(navigationSteps, 5);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 	});
@@ -1592,7 +1590,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should dispatch NAVIGATION_HISTORY_LIMIT_REACHED action, when the navigation history limit is reached",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1627,14 +1625,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams, 8);
+				performNavigations(navigationSteps, 8);
+				assertStateTreeParams(expectedStateTreeParams);
 
 				// expectedCalls
 				// ==> 2 actions per navigation ("NAVIGATE" + "NAVIGATE_SUCCESS")
@@ -1668,7 +1667,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the name and parameters of each node in the state tree when navigating through the same branch (scenario 1)",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1687,7 +1686,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-01",
 						stateParams: { requestId: "Request-04", onBehalfView: false }
@@ -1706,14 +1705,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the name and parameters of each node in the state tree" + " when navigating to a sub branch (scenario 2)",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1736,7 +1736,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-02",
 						stateParams: { requestId: "Request-05", onBehalfView: false }
@@ -1755,7 +1755,8 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
@@ -1763,7 +1764,7 @@ describe("Service: StarkRoutingService", () => {
 			"should return the name and parameters of each node in the state tree" +
 				" after navigating the same path but with other params (scenario 3)",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1798,7 +1799,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-01",
 						stateParams: { requestId: "Request-07", onBehalfView: false }
@@ -1817,14 +1818,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the name and parameters of each node in the state tree" + " after switching branches (scenario 4)",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1855,7 +1857,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-01",
 						stateParams: { requestId: "Request-07", onBehalfView: false }
@@ -1874,14 +1876,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 
 		it(
 			"should return the name and parameters of each node in the state tree" + " after switching branches (scenario 5)",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1904,7 +1907,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-02-01",
 						stateParams: { requestId: "Request-05", onBehalfView: false }
@@ -1919,7 +1922,8 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 	});
@@ -1928,7 +1932,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the state tree name and parameters of the homepage",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -1947,36 +1951,19 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: {}
 					}
 				];
 
-				for (const navigationStep of navigationSteps) {
-					routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
-					tick();
-				}
-
-				navigationSteps.push({
-					stateName: "homepage",
-					stateParams: undefined
-				});
+				performNavigations(navigationSteps);
 
 				routingService.navigateToHome();
 				tick();
 
-				const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
-
-				expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
-
-				let index: number = 0;
-				stateTreeParams.forEach((stateParams: any, stateName: string) => {
-					expect(stateName).toBe(expectedStateTreeParams[index].stateName);
-					expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
-					index++;
-				});
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 	});
@@ -1985,7 +1972,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the state tree name and parameters of each node in the state tree",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -2008,7 +1995,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-01",
 						stateParams: { requestId: "Request-04", onBehalfView: false }
@@ -2027,24 +2014,12 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				for (const navigationStep of navigationSteps) {
-					routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
-					tick();
-				}
+				performNavigations(navigationSteps);
 
 				routingService.navigateToPrevious();
 				tick();
 
-				const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
-
-				expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
-
-				let index: number = 0;
-				stateTreeParams.forEach((stateParams: any, stateName: string) => {
-					expect(stateName).toBe(expectedStateTreeParams[index].stateName);
-					expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
-					index++;
-				});
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 	});
@@ -2053,7 +2028,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the state tree name and parameters of each node in the state tree",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -2072,7 +2047,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "page-01-02-01",
 						stateParams: { requestId: "Request-04", onBehalfView: false }
@@ -2091,10 +2066,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				for (const navigationStep of navigationSteps) {
-					routingService.navigateTo(navigationStep.stateName, navigationStep.stateParams);
-					tick();
-				}
+				performNavigations(navigationSteps);
 
 				routingService.navigateToHome();
 				tick();
@@ -2102,16 +2074,7 @@ describe("Service: StarkRoutingService", () => {
 				routingService.navigateToPrevious();
 				tick();
 
-				const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
-
-				expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
-
-				let index: number = 0;
-				stateTreeParams.forEach((stateParams: any, stateName: string) => {
-					expect(stateName).toBe(expectedStateTreeParams[index].stateName);
-					expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
-					index++;
-				});
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 	});
@@ -2120,7 +2083,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should not navigate to an abstract page",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -2131,14 +2094,15 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeParams: any = [
+				const expectedStateTreeParams: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
 					}
 				];
 
-				TestStateTreeParams(navigationSteps, expectedStateTreeParams);
+				performNavigations(navigationSteps);
+				assertStateTreeParams(expectedStateTreeParams);
 			})
 		);
 	});
@@ -2147,7 +2111,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the name, parameters and parent of each node in the state tree",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -2166,7 +2130,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeResolves: any = [
+				const expectedStateTreeResolves: any[] = [
 					{
 						name: "page-01-02-01",
 						resolvableData: undefined
@@ -2185,28 +2149,30 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeResolves(navigationSteps, expectedStateTreeResolves);
+				performNavigations(navigationSteps);
+				assertStateTreeResolves(expectedStateTreeResolves);
 			})
 		);
 
 		it(
 			"should return the name, parameters and parent of each node in the state tree",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
 					}
 				];
 
-				const expectedStateTreeResolves: any = [
+				const expectedStateTreeResolves: any[] = [
 					{
 						name: "homepage",
 						resolvableData: { availableHolidays: 22 }
 					}
 				];
 
-				TestStateTreeResolves(navigationSteps, expectedStateTreeResolves);
+				performNavigations(navigationSteps);
+				assertStateTreeResolves(expectedStateTreeResolves);
 			})
 		);
 	});
@@ -2215,7 +2181,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the name, parameters and parent of each node in the state tree",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -2234,7 +2200,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedStateTreeResolves: any = [
+				const expectedStateTreeData: any[] = [
 					{
 						name: "page-01-02-01",
 						data: undefined
@@ -2253,7 +2219,8 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestStateTreeData(navigationSteps, expectedStateTreeResolves);
+				performNavigations(navigationSteps);
+				assertStateTreeData(expectedStateTreeData);
 			})
 		);
 	});
@@ -2262,7 +2229,7 @@ describe("Service: StarkRoutingService", () => {
 		it(
 			"should return the translationKey from the data of each node in the state tree",
 			fakeAsync(() => {
-				const navigationSteps: any = [
+				const navigationSteps: any[] = [
 					{
 						stateName: "homepage",
 						stateParams: { requestId: "Request-01", onBehalfView: false }
@@ -2281,7 +2248,7 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				const expectedTranslationKeys: any = [
+				const expectedTranslationKeys: any[] = [
 					{
 						name: "page-01-02-01",
 						translationKey: "page-01-02-01"
@@ -2300,7 +2267,8 @@ describe("Service: StarkRoutingService", () => {
 					}
 				];
 
-				TestTranslationKey(navigationSteps, expectedTranslationKeys);
+				performNavigations(navigationSteps);
+				assertTranslationKey(expectedTranslationKeys);
 			})
 		);
 	});

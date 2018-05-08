@@ -267,11 +267,9 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 		// stringify the pre-stringified json object returned by Serialize
 		const stringifiedCriteria: string = JSON.stringify(Serialize(criteria));
 		// then JSON.parse the stringified criteria passing a reviver function to omit the empty values ("")
-		const filteredCriteria: { [param: string]: string } = JSON.parse(stringifiedCriteria, (_key: string, value: any) => {
+		return JSON.parse(stringifiedCriteria, (_key: string, value: any) => {
 			return value === "" ? undefined : value; // filter out empty strings
 		});
-
-		return filteredCriteria;
 	}
 }
 

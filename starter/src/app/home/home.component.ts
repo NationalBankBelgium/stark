@@ -13,6 +13,7 @@ import {
 	StarkHttpSerializerImpl,
 	StarkHttpService,
 	StarkLoggingService,
+	StarkQueryParam,
 	StarkSessionService,
 	StarkSingleItemResponseWrapper,
 	StarkUser
@@ -118,7 +119,7 @@ export class HomeComponent implements OnInit {
 				backend: backend,
 				resourcePath: "requests/11",
 				headers: new Map<string, string>(),
-				queryParameters: new Map<string, string | string[] | undefined>(),
+				queryParameters: new Map<string, StarkQueryParam>(),
 				requestType: StarkHttpRequestType.GET,
 				serializer: serializer,
 				retryCount: 4
@@ -128,7 +129,7 @@ export class HomeComponent implements OnInit {
 				backend: backend,
 				resourcePath: "requests/55",
 				headers: new Map<string, string>(),
-				queryParameters: new Map<string, string | string[] | undefined>(),
+				queryParameters: new Map<string, StarkQueryParam>(),
 				requestType: StarkHttpRequestType.GET,
 				serializer: serializer,
 				retryCount: 0
@@ -138,7 +139,7 @@ export class HomeComponent implements OnInit {
 				backend: backend,
 				resourcePath: "requests",
 				headers: new Map<string, string>(),
-				queryParameters: new Map<string, string | string[] | undefined>(),
+				queryParameters: new Map<string, StarkQueryParam>(),
 				requestType: StarkHttpRequestType.GET_COLLECTION,
 				serializer: serializer,
 				retryCount: 4
