@@ -40,7 +40,8 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 		this.store
 			.pipe(
 				select(selectStarkUser),
-				filter((user?: StarkUser) => typeof user !== "undefined" && typeof user.language !== "undefined"))
+				filter((user?: StarkUser) => typeof user !== "undefined" && typeof user.language !== "undefined")
+			)
 			.subscribe((user?: StarkUser) => {
 				if (
 					(<StarkUser>user).language !== null &&

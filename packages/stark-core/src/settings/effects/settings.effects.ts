@@ -18,7 +18,7 @@ export class StarkSettingsEffects {
 	public setPreferredLanguage$(): Observable<void> {
 		return this.actions$.pipe(
 			ofType<SetPreferredLanguage>(StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE),
-			map((action: SetPreferredLanguage) =>this.sessionService.setCurrentLanguage(action.language))
+			map((action: SetPreferredLanguage) => this.sessionService.setCurrentLanguage(action.language))
 		);
 	}
 }
