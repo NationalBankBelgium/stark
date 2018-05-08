@@ -1,6 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
-
+  "extends": "../stark-build/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
@@ -8,7 +7,9 @@
     "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
       "rxjs/*": ["../../node_modules/rxjs/*"],
-      "@angular/*": ["node_modules/@angular/*"],
+      "@angular/common": ["../../node_modules/@angular/common"],
+      "@angular/core": ["../../node_modules/@angular/core"],
+      "@angular/router": ["../../node_modules/@angular/router"],
       "@nationalbankbelgium/stark-core": ["."]
     },
     "outDir": "../../dist/packages/stark-core"

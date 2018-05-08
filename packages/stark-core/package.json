@@ -42,39 +42,29 @@
     "deep-freeze-strict": "1.1.1",
     "ibantools": "2.0.0",
     "moment": "2.22.1",
-    "rxjs": "5.6.0-forward-compat.4",
     "typescript": "2.6.2",
     "uuid": "3.2.1",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@angular/common": "5.2.10",
-    "@angular/compiler": "5.2.10",
-    "@angular/compiler-cli": "5.2.10",
-    "@angular/core": "5.2.10",
-    "@angular/router": "5.2.10",
-    "@angular/platform-browser": "5.2.10",
-    "@angular/platform-browser-dynamic": "5.2.10",
     "@nationalbankbelgium/stark-testing": "../stark-testing",
     "tslint": "5.9.1"
   },
   "peerDependencies": {
     "@angular/common": "5.x",
-    "@angular/compiler": "5.x",
-    "@angular/compiler-cli": "5.x",
     "@angular/core": "5.x",
-    "@angular/platform-browser": "5.x",
-    "@angular/platform-browser-dynamic": "5.x"
+    "@angular/router": "5.x",
+    "rxjs": "5.x"
   },
   "scripts": {
     "clean": "npx rimraf dist",
     "clean:modules": "npx rimraf ./node_modules package-lock.json",
     "clean:all": "npm run clean && npm run clean:modules",
-    "ngc": "ngc",
+    "ngc": "ngc -p tsconfig-build.json",
     "lint": "tslint --config tslint.json --project ./tsconfig.spec.json --format codeFrame",
     "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start ./karma.conf.typescript.js",
     "test-fast:ci": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start karma.conf.typescript.ci.js",
-    "tsc": "tsc -p tsconfig.json",
+    "tsc": "tsc -p tsconfig-build.json",
     "tslint": "tslint"
   }
 }

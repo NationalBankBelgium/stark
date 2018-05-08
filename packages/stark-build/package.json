@@ -78,7 +78,9 @@
   "peerDependencies": {
     "@angular/cli": "1.x",
     "@angular/compiler": "5.x",
-    "@angular/compiler-cli": "5.x"
+    "@angular/compiler-cli": "5.x",
+    "@angular/platform-browser": "5.x",
+    "@angular/platform-browser-dynamic": "5.x"
   },
   "scripts": {
     "clean": "npx rimraf dist",

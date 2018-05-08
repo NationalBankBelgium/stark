@@ -250,19 +250,20 @@ compilePackage() {
   logDebug "Compiling package [$3] located in: $1" 1
 
   if containsElement "${3}" "${4:-}"; then
-    logTrace "[$3]: Compiling: $TSC -p $1/tsconfig.json" 2
-    $TSC -p ${1}/tsconfig.json
+    logTrace "[$3]: Compiling: $TSC -p $1/tsconfig-build.json" 2
+    $TSC -p ${1}/tsconfig-build.json
   else
-    logTrace "[$3]: Compiling: $NGC -p $1/tsconfig.json" 2
+    logTrace "[$3]: Compiling: $NGC -p $1/tsconfig-build.json" 2
     local package_name=$(basename "${2}")
-    $NGC -p ${1}/tsconfig.json
+    $NGC -p ${1}/tsconfig-build.json
     logTrace "[$3]: Create ${package_name}.d.ts re-export file for tsickle" 2
     
     # this is not a typo!
 N="
 "
 
-    echo "$(cat ${LICENSE_BANNER}) ${N} export * from \"./src/${package_name}\"" > ${2}/${package_name}.d.ts
+    # Generate the package's d.ts file at the root of dist/packages (e.g., dist/packages/stark-core.d.ts)
+    echo "$(cat ${LICENSE_BANNER}) ${N} export * from './${package_name}/${package_name}'" > ${2}/../${package_name}.d.ts
     echo "{\"__symbolic\":\"module\",\"version\":3,\"metadata\":{},\"exports\":[{\"from\":\"./${package_name}/${package_name}\"}],\"flatModuleIndexRedirect\":true}" > ${2}/../${package_name}.metadata.json
   fi
 
@@ -271,7 +272,7 @@ N="
     [ -d "${DIR}" ] || continue
     BASE_DIR=$(basename "${DIR}")
     # Skip over directories that are not nested entry points
-    [[ -e ${DIR}/tsconfig.json && "${BASE_DIR}" != "integrationtest" ]] || continue
+    [[ -e ${DIR}/tsconfig-build.json && "${BASE_DIR}" != "integrationtest" ]] || continue
     compilePackage ${DIR} ${2}/${BASE_DIR} ${3} ${4}
   done
 }
@@ -291,13 +292,13 @@ compilePackageES5() {
   logDebug "Compiling package located in : $1 to ES5" 1 
 
   if containsElement "${3}" "${4:-}"; then
-    logTrace "${FUNCNAME[0]}: [${3}]: Compiling: ${TSC} -p ${1}/tsconfig.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap" 2
+    logTrace "${FUNCNAME[0]}: [${3}]: Compiling: ${TSC} -p ${1}/tsconfig-build.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap" 2
     local package_name=$(basename "${2}")
-    $TSC -p ${1}/tsconfig.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap
+    $TSC -p ${1}/tsconfig-build.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap
   else
-    logTrace "${FUNCNAME[0]}: [${3}]: Compiling: ${NGC} -p ${1}/tsconfig.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap" 2
+    logTrace "${FUNCNAME[0]}: [${3}]: Compiling: ${NGC} -p ${1}/tsconfig-build.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap" 2
     local package_name=$(basename "${2}")
-    $NGC -p ${1}/tsconfig.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap
+    $NGC -p ${1}/tsconfig-build.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap
   fi
 
   logTrace "Building sub-packages" 2
@@ -305,7 +306,7 @@ compilePackageES5() {
     [ -d "${DIR}" ] || continue
     BASE_DIR=$(basename "${DIR}")
     # Skip over directories that are not nested entry points
-    [[ -e ${DIR}/tsconfig.json && "${BASE_DIR}" != "integrationtest" ]] || continue
+    [[ -e ${DIR}/tsconfig-build.json && "${BASE_DIR}" != "integrationtest" ]] || continue
     compilePackageES5 ${DIR} ${2} ${3}
   done
 }
