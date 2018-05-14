@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { StoreModule } from "@ngrx/store";
 import {
+	MockStarkHttpService,
+	MockStarkLoggingService,
 	STARK_APP_CONFIG,
 	StarkApplicationConfig,
 	StarkBackend,
@@ -49,11 +51,8 @@ describe(`Home`, () => {
 					AppState,
 					Title,
 					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
-					{
-						provide: STARK_HTTP_SERVICE,
-						useValue: jasmine.createSpyObj("StarkHttpService", ["executeSingleItemRequest", "executeCollectionRequest"])
-					},
-					{ provide: STARK_LOGGING_SERVICE, useValue: jasmine.createSpyObj("StarkLoggingService", ["debug", "error"]) }
+					{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }
 				]
 			})
 

@@ -2,6 +2,7 @@ import { ActivatedRoute, Data } from "@angular/router";
 import { inject, TestBed } from "@angular/core/testing";
 import { StoreModule } from "@ngrx/store";
 import {
+	MockStarkLoggingService,
 	STARK_APP_CONFIG,
 	StarkApplicationConfig,
 	StarkBackend,
@@ -53,7 +54,7 @@ describe("About", () => {
 				},
 				AboutComponent,
 				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
-				{ provide: STARK_LOGGING_SERVICE, useValue: jasmine.createSpyObj("StarkLoggingService", ["debug", "warn"]) }
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }
 			]
 		}));
 
