@@ -1,37 +1,10 @@
 /**
  * Look in stark-testing for karma.conf.typescript.js
  */
+const defaultKarmaCIConfig = require("./node_modules/@nationalbankbelgium/stark-testing/karma.conf.typescript.js").rawKarmaConfig;
 
-const helpers = require("./node_modules/@nationalbankbelgium/stark-testing/helpers");
-
-let loadedConfiguration = null;
-
-// this object is just useful to retrieve the karma configuration object returned by our default Karma config
-// we need this since the karma configuration returns a function and not an object
-let configExtractor = {
-	set: configuration => {
-		loadedConfiguration = configuration;
-	}
-};
-
-/**
- * Look in stark-testing for karma.conf.typescript.ci.js
- */
-let defaultKarmaCIConfig = require("./node_modules/@nationalbankbelgium/stark-testing/karma.conf.typescript.js");
-
-// get the configuration object out
-defaultKarmaCIConfig(configExtractor);
-
-// start customizing the KarmaCI configuration from stark-testing
-let starkUiSpecificConfiguration = loadedConfiguration;
-
-if (!starkUiSpecificConfiguration.karmaTypescriptConfig.bundlerOptions.resolve) {
-	starkUiSpecificConfiguration.karmaTypescriptConfig.bundlerOptions.resolve = {};
-}
-
-// change the module resolution for the KarmaTypescript bundler
-starkUiSpecificConfiguration.karmaTypescriptConfig.bundlerOptions.resolve = Object.assign(starkUiSpecificConfiguration.karmaTypescriptConfig.bundlerOptions.resolve,
-	{
+const karmaTypescriptBundlerAliasResolution = {
+	resolve: {
 		alias: {
 			// adapt the resolution of the stark-core module to the UMD module
 			"@nationalbankbelgium/stark-core": "../../dist/packages-dist/stark-core/bundles/stark-core.umd.js",
@@ -50,9 +23,30 @@ starkUiSpecificConfiguration.karmaTypescriptConfig.bundlerOptions.resolve = Obje
 			"ibantools": "../stark-core/node_modules/ibantools/build/ibantools.js"
 		}
 	}
+};
+
+// start customizing the KarmaCI configuration from stark-testing
+const starkUiSpecificConfiguration = Object.assign(
+	{},
+	defaultKarmaCIConfig,
+	{
+		// change the module resolution for the KarmaTypescript bundler
+		karmaTypescriptConfig: Object.assign(
+			defaultKarmaCIConfig.karmaTypescriptConfig,
+			{
+				bundlerOptions: Object.assign(
+					defaultKarmaCIConfig.karmaTypescriptConfig.bundlerOptions,
+					karmaTypescriptBundlerAliasResolution
+				)
+			}
+		)
+	}
 );
 
 // export the configuration function that karma expects and simply return the stark configuration
-module.exports = config => {
-	return config.set(starkUiSpecificConfiguration);
+module.exports = {
+	default: function (config) {
+		return config.set(starkUiSpecificConfiguration);
+	},
+	karmaTypescriptBundlerAliasResolution: karmaTypescriptBundlerAliasResolution
 };
