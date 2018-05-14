@@ -1,4 +1,4 @@
-import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
+import { Inject, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
 	STARK_APP_CONFIG,
 	STARK_APP_METADATA,
+	STARK_SESSION_SERVICE,
 	StarkApplicationConfig,
 	StarkApplicationConfigImpl,
 	StarkApplicationMetadata,
@@ -20,8 +21,12 @@ import {
 	StarkLoggingModule,
 	StarkRoutingModule,
 	StarkSessionModule,
+	StarkSessionService,
+	StarkUser,
 	StarkValidationErrorsUtil
 } from "@nationalbankbelgium/stark-core";
+
+import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { Deserialize } from "cerialize";
 
@@ -47,6 +52,9 @@ import { NoContentComponent } from "./no-content";
 import { XLargeDirective } from "./home/x-large";
 import { DevModuleModule } from "./+dev-module";
 /* tslint:disable:no-import-side-effect */
+// load PCSS styles
+import "../styles/styles.pcss";
+// load SASS styles
 import "../styles/styles.scss";
 /* tslint:enable */
 import "../styles/headings.css";
@@ -128,6 +136,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot(),
 		StarkRoutingModule.forRoot(),
+		StarkAppLogoModule,
 
 		/**
 		 * This section will import the `DevModuleModule` only in certain build types.
@@ -148,12 +157,24 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 	]
 })
 export class AppModule {
-	public constructor(private translateService: TranslateService) {
+	public constructor(
+		private translateService: TranslateService,
+		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService
+	) {
 		this.translateService.addLangs(["en", "fr", "nl"]);
 		this.translateService.setTranslation("en", translationsEn, true);
 		this.translateService.setTranslation("fr", translationsFr, true);
 		this.translateService.setTranslation("nl", translationsNl, true);
 		this.translateService.setDefaultLang("en");
 		this.translateService.use("nl");
+
+		const user: StarkUser = {
+			uuid: "abc123",
+			username: "John",
+			firstName: "Doe",
+			lastName: "Smith",
+			roles: ["dummy role"]
+		};
+		this.sessionService.login(user);
 	}
 }

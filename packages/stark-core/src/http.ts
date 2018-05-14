@@ -5,4 +5,5 @@ export * from "./http/enumerators";
 export * from "./http/repository";
 export * from "./http/serializer";
 export * from "./http/services";
+export * from "./http/testing";
 export * from "./http/http.module";

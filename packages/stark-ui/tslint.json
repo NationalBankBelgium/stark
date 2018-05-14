@@ -1,0 +1,3 @@
+{
+  "extends": ["../stark-build/config/tslint.json"]
+}

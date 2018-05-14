@@ -9,6 +9,8 @@ const sourcemaps = require("rollup-plugin-sourcemaps");
 const globals = {
 	"@angular/core": "ng.core",
 	"@angular/common/http": "angular.common.http",
+	"@nationalbankbelgium/stark-core": "stark.core",
+	"@nationalbankbelgium/stark-ui": "stark.ui",
 	"@ngrx/store": "@ngrx/store",
 	"@ngrx/effects": "@ngrx/effects",
 	"@ng-idle/core": "@ng-idle/core",
