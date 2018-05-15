@@ -9,7 +9,6 @@ const commonData = require("./webpack.common-data.js"); // the settings that are
 /**
  * Webpack Plugins
  */
-const NamedModulesPlugin = require("webpack/lib/NamedModulesPlugin");
 const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
 
 const WriteFilePlugin = require("write-file-webpack-plugin");
@@ -64,7 +63,7 @@ module.exports = function(env) {
 	];
 
 	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-	const rootDir = angularCliAppConfig.root;
+	const rootDir = angularCliAppConfig.sourceRoot;
 
 	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
@@ -73,6 +72,12 @@ module.exports = function(env) {
 		 * reference: https://webpack.js.org/concepts/targets/
 		 */
 		target: "web", // <== can be omitted as default is "web"
+
+		mode: "development",
+
+		optimization: {
+			namedModules: true
+		},
 
 		/**
 		 * Options affecting the output of the compilation.
@@ -85,7 +90,7 @@ module.exports = function(env) {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-path
 			 */
-			path: helpers.root(angularCliAppConfig.outDir),
+			path: helpers.root(angularCliAppConfig.architect.build.options.outputPath),
 
 			/**
 			 * This option specifies the public URL of the output directory when referenced in a browser.
@@ -94,7 +99,7 @@ module.exports = function(env) {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-publicpath
 			 */
-			publicPath: angularCliAppConfig.deployUrl,
+			publicPath: angularCliAppConfig.architect.build.options.deployUrl,
 
 			/**
 			 * Specifies the name of each output file on disk.
@@ -211,14 +216,6 @@ module.exports = function(env) {
 				columns: false, // Default: true. False = less accurate source maps but will also improve compilation performance significantly
 				sourceRoot: "webpack:///"
 			}),
-
-			/**
-			 * Plugin: NamedModulesPlugin (experimental)
-			 * Description: Uses file names as module name.
-			 *
-			 * See: https://github.com/webpack/webpack/commit/a04ffb928365b19feb75087c63f13cadfc08e1eb
-			 */
-			new NamedModulesPlugin(),
 
 			/**
 			 * Plugin: WriteFilePlugin

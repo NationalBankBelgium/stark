@@ -1,15 +1,13 @@
 import Spy = jasmine.Spy;
 import createSpyObj = jasmine.createSpyObj;
-import { Observer } from "rxjs/Observer";
 
 import { StarkSettingsEffects } from "./settings.effects";
 import { SetPreferredLanguage } from "../actions";
 import { StarkSessionService, starkSessionServiceName } from "../../session/services";
 import { MockStarkSessionService } from "../../session/testing";
 import { TestBed } from "@angular/core/testing";
-import { Observable } from "rxjs/Observable";
+import { Observable, Observer, ReplaySubject } from "rxjs";
 import { provideMockActions } from "@ngrx/effects/testing";
-import { ReplaySubject } from "rxjs/ReplaySubject";
 
 describe("Effect: StarkSettingsEffects", () => {
 	let settingsEffects: StarkSettingsEffects;

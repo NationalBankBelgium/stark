@@ -19,7 +19,7 @@ const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin")
 const ENV = (process.env.ENV = process.env.NODE_ENV = "test");
 
 const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-const rootDir = angularCliAppConfig.root;
+const rootDir = angularCliAppConfig.sourceRoot;
 
 /**
  * Webpack configuration

@@ -1,7 +1,7 @@
 import { StarkHttpService } from "../services";
 import { StarkHttpRequest, StarkSingleItemResponseWrapper, StarkCollectionResponseWrapper } from "../entities";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 export class MockStarkHttpService implements StarkHttpService<any> {
 	public readonly rawHttpClient: HttpClient;

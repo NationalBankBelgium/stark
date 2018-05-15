@@ -45,7 +45,9 @@
     "rootDirs": ["./src", "./config"],
     "lib": ["dom", "dom.iterable", "es2017"],
     "typeRoots": ["./node_modules/@types"],
-    "paths": {}
+    "paths": {},
+    // FIXME set this to true asap we have a newer version of IntelliJ
+    "strictPropertyInitialization": false
   },
   "exclude": ["node_modules", "dist", "packages/stark-build/config-stark"],
   "awesomeTypescriptLoaderOptions": {

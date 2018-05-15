@@ -12,24 +12,15 @@ const starkUiSpecificConfiguration = Object.assign(
 	defaultKarmaCIConfig,
 	{
 		// change the module resolution for the KarmaTypescript bundler
-		karmaTypescriptConfig: Object.assign(
-			defaultKarmaCIConfig.karmaTypescriptConfig,
-			{
-				bundlerOptions: Object.assign(
-					defaultKarmaCIConfig.karmaTypescriptConfig.bundlerOptions,
-					karmaTypescriptBundlerAliasResolution
-				)
-			}
-		)
+		karmaTypescriptConfig: Object.assign(defaultKarmaCIConfig.karmaTypescriptConfig, {
+			bundlerOptions: Object.assign(defaultKarmaCIConfig.karmaTypescriptConfig.bundlerOptions, karmaTypescriptBundlerAliasResolution)
+		})
 	},
 	{
 		// change the path of the report so that Coveralls takes the right path to the source files
-		coverageIstanbulReporter: Object.assign(
-			defaultKarmaCIConfig.coverageIstanbulReporter,
-			{
-				dir: helpers.root("reports/coverage/packages")
-			}
-		)
+		coverageIstanbulReporter: Object.assign(defaultKarmaCIConfig.coverageIstanbulReporter, {
+			dir: helpers.root("reports/coverage/packages")
+		})
 	}
 );
 

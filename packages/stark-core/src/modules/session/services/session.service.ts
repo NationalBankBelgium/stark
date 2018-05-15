@@ -5,11 +5,8 @@ import { Keepalive } from "@ng-idle/keepalive";
 import { TranslateService } from "@ngx-translate/core";
 import { Store, select } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
-import { take } from "rxjs/operators/take";
-import { map } from "rxjs/operators/map";
-import { defer } from "rxjs/observable/defer";
+import { Observable, Subject, defer } from "rxjs";
+import { map, take } from "rxjs/operators";
 import { validateSync } from "class-validator";
 
 import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";

@@ -6,13 +6,8 @@ import { Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
 import { HookMatchCriteria, Predicate } from "@uirouter/core";
 
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
-import { Subscriber } from "rxjs/Subscriber";
-import { defer } from "rxjs/observable/defer";
-import { of } from "rxjs/observable/of";
-import { take } from "rxjs/operators/take";
-import { _throw as observableThrow } from "rxjs/observable/throw";
+import { Observable, Subject, Subscriber, defer, of, throwError } from "rxjs";
+import { take } from "rxjs/operators";
 
 import {
 	SessionTimeoutCountdownFinish,
@@ -796,7 +791,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		it("should not change the language in case of failure and dispatch the FAILURE action", () => {
-			(<Spy>mockTranslateService.use).and.returnValue(observableThrow("dummy error"));
+			(<Spy>mockTranslateService.use).and.returnValue(throwError("dummy error"));
 
 			sessionService.setCurrentLanguage("FR");
 

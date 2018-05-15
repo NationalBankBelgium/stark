@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { StarkSerializable } from "../../../serialization";
 import { StarkUser } from "../entities";
 import { StarkHttpRequest, StarkSingleItemResponseWrapper } from "../../http/entities";

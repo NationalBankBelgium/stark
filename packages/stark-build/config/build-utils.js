@@ -12,7 +12,7 @@ const DEFAULT_METADATA = {
 	AOT: process.env.BUILD_AOT || helpers.hasNpmFlag("aot"),
 	E2E: !!process.env.BUILD_E2E,
 	WATCH: helpers.hasProcessFlag("watch"),
-	tsConfigPath: getAngularCliAppConfig().tsconfig,
+	tsConfigPath: getAngularCliAppConfig()["architect"]["build"]["options"].tsConfig,
 	environment: ""
 };
 
@@ -31,13 +31,20 @@ function readTsConfig(tsConfigPath) {
 
 function getEnvironmentFile(environment) {
 	if (typeof environment === "string") {
-		let fileName = helpers.root("src/" + getAngularCliAppConfig().environments[environment]);
+		let fileName = helpers.root("src/environments/environment.ts");
+		let fileNameAlt;
+		let angularCliEnvConfig = getAngularCliAppConfig()["architect"]["build"]["configurations"][environment];
+
+		if (angularCliEnvConfig && angularCliEnvConfig.fileReplacements) {
+			fileName = helpers.root(angularCliEnvConfig.fileReplacements.with);
+			fileNameAlt = helpers.root(angularCliEnvConfig.fileReplacements.replace);
+		}
 
 		if (fs.existsSync(fileName)) {
 			return fileName;
-		} else if (fs.existsSync((fileName = helpers.root("src/" + getAngularCliAppConfig().environmentSource)))) {
+		} else if (fs.existsSync(fileNameAlt)) {
 			console.warn(`Could not find environment file for ${environment}, loading default environment file`);
-			return fileName;
+			return fileNameAlt;
 		} else {
 			throw new Error("Environment file not found.");
 		}
@@ -62,8 +69,8 @@ function rxjsAlias(supportES2015) {
 }
 
 /**
- * Foreach installed NationalBankBelgium packages, read assets.json file in the root of the module.
- * Based on assets.json file, fill an array with the needed assets for the module.
+ * Foreach installed NationalBankBelgium packages, read angular.json file in the root of the module.
+ * Based on angular.json file, fill an array with the needed assets for the module.
  * Then return those to be read by CopyWebpackPlugin.
  */
 function getNbbAssetsConfig() {
@@ -73,14 +80,18 @@ function getNbbAssetsConfig() {
 	const nbbPackages = ngCliUtils.getDirectoriesNames(helpers.root(NBB_MODULES_PATH));
 
 	for (const nbbPackage of nbbPackages) {
-		const ngCliConfigPath = helpers.root(NBB_MODULES_PATH + "/" + nbbPackage + "/" + ".ng-cli-config.json");
+		const ngCliConfigPath = helpers.root(NBB_MODULES_PATH + "/" + nbbPackage + "/" + "angular.json");
 
 		if (fs.existsSync(ngCliConfigPath)) {
 			const packageCliConfig = require(ngCliConfigPath);
 			const cliConfig = ngCliUtils.validateAngularCLIConfig(packageCliConfig);
 			if (cliConfig) {
-				if (cliConfig["apps"] && cliConfig["apps"][0] && cliConfig["apps"][0].assets) {
-					customAssets = [...customAssets, ...getCopyWebpackPluginConfig(cliConfig["apps"][0].assets)];
+				let cliProjectConfig;
+				if (cliConfig["defaultProject"] && (cliProjectConfig = cliConfig["projects"][cliConfig["defaultProject"]])) {
+					customAssets = [
+						...customAssets,
+						...getCopyWebpackPluginConfig(cliProjectConfig["architect"]["build"]["options"].assets)
+					];
 				}
 			}
 		}
@@ -90,26 +101,31 @@ function getNbbAssetsConfig() {
 }
 
 /**
- * Returns assets set in .angular-cli.json file of the project.
+ * Returns assets set in angular.json file of the project.
  */
 function getApplicationAssetsConfig() {
 	const appConfig = getAngularCliAppConfig();
 
-	if (appConfig.assets) {
-		return getCopyWebpackPluginConfig(appConfig.assets);
+	if (
+		appConfig["architect"] &&
+		appConfig["architect"]["build"] &&
+		appConfig["architect"]["build"]["options"] &&
+		appConfig["architect"]["build"]["options"]["assets"]
+	) {
+		return getCopyWebpackPluginConfig(appConfig["architect"]["build"]["options"]["assets"]);
 	}
 
 	return [];
 }
 
 function getAngularCliAppConfig() {
-	const applicationAngularCliConfigPath = helpers.root(".angular-cli.json");
+	const applicationAngularCliConfigPath = helpers.root("angular.json");
 	if (fs.existsSync(applicationAngularCliConfigPath)) {
 		const angularCliConfig = require(applicationAngularCliConfigPath);
 		const cliConfig = ngCliUtils.validateAngularCLIConfig(angularCliConfig);
 		if (cliConfig) {
-			if (cliConfig["apps"] && cliConfig["apps"][0]) {
-				return cliConfig["apps"][0];
+			if (cliConfig["defaultProject"] && cliConfig["projects"][cliConfig["defaultProject"]]) {
+				return cliConfig["projects"][cliConfig["defaultProject"]];
 			} else {
 				throw new Error("Angular-cli config apps is wrong. Please adapt it to follow Angular CLI way.");
 			}
@@ -117,7 +133,7 @@ function getAngularCliAppConfig() {
 			throw new Error("Parsing " + applicationAngularCliConfigPath + " failed. Ensure the file is valid JSON.");
 		}
 	} else {
-		throw new Error(".angular-cli.json is not present. Please add this at the root your project because stark-build needs this.");
+		throw new Error("angular.json is not present. Please add this at the root your project because stark-build needs this.");
 	}
 }
 
@@ -129,8 +145,8 @@ function getAngularCliAppConfig() {
 function getCopyWebpackPluginConfig(assets) {
 	const appConfig = getAngularCliAppConfig();
 
-	const projectRoot = helpers.root("");
-	const appRoot = helpers.root(appConfig.root);
+	const projectRoot = helpers.root(appConfig.root);
+	const appRoot = helpers.root(appConfig.sourceRoot);
 
 	return assets.map(asset => {
 		// Convert all string assets to object notation.
@@ -144,7 +160,7 @@ function getCopyWebpackPluginConfig(assets) {
 		// specify a configuration flag.
 		// Also prevent writing outside the project path. That is not overridable.
 		// For info: Comparing to implementation of Angular, "buildOptions.outputPath" has been replaced by "appConfig.outDir"
-		const absoluteOutputPath = path.resolve(projectRoot, appConfig.outDir);
+		const absoluteOutputPath = path.resolve(projectRoot, appConfig["architect"]["build"]["options"]["outputPath"]);
 		const absoluteAssetOutput = path.resolve(absoluteOutputPath, asset.output);
 		const outputRelativeOutput = path.relative(absoluteOutputPath, absoluteAssetOutput);
 		if (outputRelativeOutput.startsWith("..") || path.isAbsolute(outputRelativeOutput)) {

@@ -13,7 +13,7 @@ import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkSettingsServiceImpl } from "./settings.service";
 import { SetPreferredLanguage } from "../actions";
 import { StarkUser } from "../../user";
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import Spy = jasmine.Spy;
 
 describe("Service: StarkSettingsService", () => {

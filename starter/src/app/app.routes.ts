@@ -2,9 +2,8 @@ import { HomeComponent } from "./home";
 import { AboutComponent } from "./about";
 import { NoContentComponent } from "./no-content";
 import { Ng2StateDeclaration, Transition } from "@uirouter/angular";
-import { of } from "rxjs/observable/of";
-import { delay } from "rxjs/operators/delay";
-import { Observable } from "rxjs/Observable";
+import { Observable, of } from "rxjs";
+import { delay } from "rxjs/operators";
 
 export function getResolvedData(): Observable<any> {
 	console.warn("resolve data being fetched... please wait...");

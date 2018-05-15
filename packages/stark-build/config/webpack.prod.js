@@ -17,10 +17,10 @@ const commonData = require("./webpack.common-data.js");
  * Webpack Plugins
  */
 const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HashedModuleIdsPlugin = require("webpack/lib/HashedModuleIdsPlugin");
 const PurifyPlugin = require("@angular-devkit/build-optimizer").PurifyPlugin;
-const ModuleConcatenationPlugin = require("webpack/lib/optimize/ModuleConcatenationPlugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 function getUglifyOptions(supportES2015) {
@@ -56,7 +56,7 @@ module.exports = function() {
 	});
 
 	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-	const rootDir = angularCliAppConfig.root;
+	const rootDir = angularCliAppConfig.sourceRoot;
 
 	METADATA.environment = METADATA.E2E ? "e2e.prod" : "prod";
 
@@ -73,6 +73,29 @@ module.exports = function() {
 			optimizationBailout: true // display bailout reasons (ModuleConcatenationPlugin debugging)
 		},
 
+		mode: "production",
+
+		optimization: {
+			minimizer: [
+				/**
+				 * Plugin: UglifyJsPlugin
+				 * Description: Minimize all JavaScript output of chunks.
+				 * Loaders are switched into minimizing mode.
+				 *
+				 * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
+				 *
+				 * NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
+				 */
+				new UglifyJsPlugin({
+					sourceMap: true,
+					uglifyOptions: getUglifyOptions(supportES2015)
+				}),
+
+				new OptimizeCSSAssetsPlugin({})
+			],
+			concatenateModules: true
+		},
+
 		/**
 		 * Options affecting the output of the compilation.
 		 *
@@ -84,7 +107,7 @@ module.exports = function() {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-path
 			 */
-			path: helpers.root(angularCliAppConfig.outDir),
+			path: helpers.root(angularCliAppConfig.architect.build.options.outputPath),
 
 			/**
 			 * This option specifies the public URL of the output directory when referenced in a browser.
@@ -93,7 +116,7 @@ module.exports = function() {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-publicpath
 			 */
-			publicPath: angularCliAppConfig.deployUrl,
+			publicPath: angularCliAppConfig.architect.build.options.deployUrl,
 
 			/**
 			 * Specifies the name of each output file on disk.
@@ -127,10 +150,7 @@ module.exports = function() {
 				 */
 				{
 					test: /\.css$/,
-					loader: ExtractTextPlugin.extract({
-						fallback: "style-loader",
-						use: "css-loader"
-					}),
+					use: [MiniCssExtractPlugin.loader, "css-loader"],
 					include: [helpers.root(rootDir, "styles")]
 				},
 
@@ -139,10 +159,7 @@ module.exports = function() {
 				 */
 				{
 					test: /\.scss$/,
-					loader: ExtractTextPlugin.extract({
-						fallback: "style-loader",
-						use: "css-loader!sass-loader"
-					}),
+					use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
 					include: [helpers.root(rootDir, "styles")]
 				},
 
@@ -151,30 +168,28 @@ module.exports = function() {
 				 */
 				{
 					test: /\.pcss$/,
-					loader: ExtractTextPlugin.extract({
-						fallback: "style-loader",
-						use: [
-							{
-								loader: "css-loader",
-								options: {
-									//modules: true, // to check if needed
-									//minimize: true,
-									// even if disabled, sourceMaps gets generated
-									sourceMap: false, // true
-									autoprefixer: false,
-									// see https://github.com/webpack-contrib/css-loader#importloaders)
-									importLoaders: 1 // 1 => postcss-loader
-								}
-							},
-							{
-								loader: "postcss-loader",
-								options: {
-									sourceMap: true,
-									plugins: commonData.postcssPlugins
-								}
+					use: [
+						MiniCssExtractPlugin.loader,
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 1 // 1 => postcss-loader
 							}
-						]
-					}),
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						}
+					],
 					include: [helpers.root(rootDir, "styles")]
 				}
 			]
@@ -207,12 +222,15 @@ module.exports = function() {
 			}),
 
 			/**
-			 * Plugin: ExtractTextPlugin
+			 * Plugin: MiniCssExtractPlugin
 			 * Description: Extracts imported CSS files into external stylesheet
 			 *
-			 * See: https://github.com/webpack/extract-text-webpack-plugin
+			 * See: https://github.com/webpack-contrib/mini-css-extract-plugin
 			 */
-			new ExtractTextPlugin("[name].[contenthash].css"),
+			new MiniCssExtractPlugin({
+				filename: "[name].[contenthash].css",
+				chunkFilename: "[id].[contenthash].css"
+			}),
 
 			// TODO remove since it's probably useless here (defined in webpack.common.js)
 			new PurifyPlugin() /* buildOptimizer */,
@@ -220,22 +238,7 @@ module.exports = function() {
 			/**
 			 * See: https://webpack.js.org/plugins/hashed-module-ids-plugin/
 			 */
-			new HashedModuleIdsPlugin(),
-			new ModuleConcatenationPlugin(),
-
-			/**
-			 * Plugin: UglifyJsPlugin
-			 * Description: Minimize all JavaScript output of chunks.
-			 * Loaders are switched into minimizing mode.
-			 *
-			 * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-			 *
-			 * NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
-			 */
-			new UglifyJsPlugin({
-				sourceMap: true,
-				uglifyOptions: getUglifyOptions(supportES2015)
-			})
+			new HashedModuleIdsPlugin()
 		]
 	});
 };

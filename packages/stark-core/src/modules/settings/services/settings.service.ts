@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
-import { filter } from "rxjs/operators/filter";
+import { filter } from "rxjs/operators";
 
 import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
 import { StarkSettingsService, starkSettingsServiceName } from "./settings.service.intf";

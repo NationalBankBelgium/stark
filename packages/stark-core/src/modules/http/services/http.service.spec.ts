@@ -2,13 +2,8 @@ import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import { autoserialize, autoserializeAs, inheritSerialization, Serialize } from "cerialize";
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
-import { _throw as observableThrow } from "rxjs/observable/throw";
-// FIXME: importing from single entry "rxjs/operators" together with webpack's scope hoisting prevents dead code removal
-// see https://github.com/ReactiveX/rxjs/issues/2981
-import { catchError } from "rxjs/operators/catchError";
-import { ErrorObservable } from "rxjs/observable/ErrorObservable";
+import { Observable, of, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from "@angular/common/http";
 
 import { StarkHttpServiceImpl } from "./http.service";
@@ -400,7 +395,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				httpMock.get.and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.get.and.returnValue(throwError(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -431,10 +426,10 @@ describe("Service: StarkHttpService", () => {
 				};
 				let errorCounter: number = 0;
 				httpMock.get.and.returnValue(
-					observableThrow(httpErrorResponse).pipe(
+					throwError(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
-							return observableThrow(err);
+							return throwError(err);
 						})
 					)
 				);
@@ -512,7 +507,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				httpMock.delete.and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.delete.and.returnValue(throwError(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -543,10 +538,10 @@ describe("Service: StarkHttpService", () => {
 				};
 				let errorCounter: number = 0;
 				httpMock.delete.and.returnValue(
-					observableThrow(httpErrorResponse).pipe(
+					throwError(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
-							return observableThrow(err);
+							return throwError(err);
 						})
 					)
 				);
@@ -767,7 +762,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				httpMock.post.and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.post.and.returnValue(throwError(httpErrorResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE;
 
@@ -805,10 +800,10 @@ describe("Service: StarkHttpService", () => {
 				};
 				let errorCounter: number = 0;
 				httpMock.post.and.returnValue(
-					observableThrow(httpErrorResponse).pipe(
+					throwError(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
-							return observableThrow(err);
+							return throwError(err);
 						})
 					)
 				);
@@ -838,7 +833,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				httpMock.put.and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.put.and.returnValue(throwError(httpErrorResponse));
 
 				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
 
@@ -876,10 +871,10 @@ describe("Service: StarkHttpService", () => {
 				};
 				let errorCounter: number = 0;
 				httpMock.put.and.returnValue(
-					observableThrow(httpErrorResponse).pipe(
+					throwError(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
-							return observableThrow(err);
+							return throwError(err);
 						})
 					)
 				);
@@ -1023,7 +1018,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				httpMock.post.and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.post.and.returnValue(throwError(httpErrorResponse));
 
 				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
 					request
@@ -1060,10 +1055,10 @@ describe("Service: StarkHttpService", () => {
 				};
 				let errorCounter: number = 0;
 				httpMock.post.and.returnValue(
-					observableThrow(httpErrorResponse).pipe(
+					throwError(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
-							return observableThrow(err);
+							return throwError(err);
 						})
 					)
 				);
@@ -1098,9 +1093,18 @@ describe("Service: StarkHttpService", () => {
 					item: mockResourceWithoutEtag,
 					serializer: mockResourceSerializer
 				};
-				const result: ErrorObservable = <ErrorObservable>starkHttpService.executeSingleItemRequest(request);
-				expect(result instanceof ErrorObservable).toBe(true);
-				expect(result.error).toContain("Unknown request type");
+
+				starkHttpService.executeSingleItemRequest(request).subscribe(
+					() => {
+						fail("The 'next' function should not be called in case of error");
+					},
+					(error: any) => {
+						expect(error).toContain("Unknown request type");
+					},
+					() => {
+						fail("The 'complete' function should not be called in case of error");
+					}
+				);
 			});
 		});
 	});
@@ -1490,7 +1494,7 @@ describe("Service: StarkHttpService", () => {
 					headers: httpHeadersGetter(httpHeaders)
 				};
 
-				httpMock.get.and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.get.and.returnValue(throwError(httpErrorResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1521,10 +1525,10 @@ describe("Service: StarkHttpService", () => {
 				};
 				let errorCounter: number = 0;
 				httpMock.get.and.returnValue(
-					observableThrow(httpErrorResponse).pipe(
+					throwError(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
-							return observableThrow(err);
+							return throwError(err);
 						})
 					)
 				);
@@ -1929,7 +1933,7 @@ describe("Service: StarkHttpService", () => {
 					error: mockHttpError,
 					headers: httpHeadersGetter(httpHeaders)
 				};
-				httpMock.post.and.returnValue(observableThrow(httpErrorResponse));
+				httpMock.post.and.returnValue(throwError(httpErrorResponse));
 
 				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
 					request
@@ -1965,10 +1969,10 @@ describe("Service: StarkHttpService", () => {
 				};
 				let errorCounter: number = 0;
 				httpMock.post.and.returnValue(
-					observableThrow(httpErrorResponse).pipe(
+					throwError(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
-							return observableThrow(err);
+							return throwError(err);
 						})
 					)
 				);
@@ -2003,9 +2007,18 @@ describe("Service: StarkHttpService", () => {
 					item: undefined,
 					serializer: mockResourceSerializer
 				};
-				const result: ErrorObservable = <ErrorObservable>starkHttpService.executeCollectionRequest(request);
-				expect(result instanceof ErrorObservable).toBe(true);
-				expect(result.error).toContain("Unknown request type");
+
+				starkHttpService.executeSingleItemRequest(request).subscribe(
+					() => {
+						fail("The 'next' function should not be called in case of error");
+					},
+					(error: any) => {
+						expect(error).toContain("Unknown request type");
+					},
+					() => {
+						fail("The 'complete' function should not be called in case of error");
+					}
+				);
 			});
 		});
 	});

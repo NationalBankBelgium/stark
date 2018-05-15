@@ -33,15 +33,16 @@
     "@nationalbankbelgium/stark-testing": "../stark-testing"
   },
   "peerDependencies": {
-    "@angular/common": "5.x",
-    "@angular/compiler": "5.x",
-    "@angular/core": "5.x",
-    "@angular/material": "5.x",
-    "@angular/platform-browser": "5.x",
-    "@angular/platform-browser-dynamic": "5.x",
-    "@angular/router": "5.x",
+    "@angular/common": "6.x",
+    "@angular/compiler": "6.x",
+    "@angular/core": "6.x",
+    "@angular/material": "6.x",
+    "@angular/platform-browser": "6.x",
+    "@angular/platform-browser-dynamic": "6.x",
+    "@angular/router": "6.x",
     "@nationalbankbelgium/stark-core": "0.0.0-PLACEHOLDER-VERSION",
-    "typescript": ">=2.6.0 && <2.7.0"
+    "rxjs": "6.x",
+    "typescript": ">=2.7.2 && <2.8.0"
   },
   "scripts": {
     "clean": "npx rimraf dist",

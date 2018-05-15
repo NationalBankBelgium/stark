@@ -1,9 +1,7 @@
 import Spy = jasmine.Spy;
 import createSpyObj = jasmine.createSpyObj;
 import { Store } from "@ngrx/store";
-import { Observer } from "rxjs/Observer";
-import { of } from "rxjs/observable/of";
-import { _throw as observableThrow } from "rxjs/observable/throw";
+import { Observer, of, throwError } from "rxjs";
 import { Deserialize } from "cerialize";
 
 import {
@@ -276,7 +274,7 @@ describe("Service: StarkUserService", () => {
 				dummyError
 			);
 
-			(<Spy>mockUserRepository.getUser).and.returnValue(observableThrow(mockErrorResponseWrapper));
+			(<Spy>mockUserRepository.getUser).and.returnValue(throwError(mockErrorResponseWrapper));
 
 			userService.fetchUserProfile().subscribe(mockObserver);
 

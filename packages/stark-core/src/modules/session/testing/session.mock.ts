@@ -1,6 +1,6 @@
 import { StarkHttpHeaders } from "../../http";
 import { StarkSessionService } from "../services";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 export class MockStarkSessionService implements StarkSessionService {
 	public fakePreAuthenticationHeaders: Map<string, string>;

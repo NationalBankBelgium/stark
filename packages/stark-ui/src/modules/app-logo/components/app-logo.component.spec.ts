@@ -5,7 +5,7 @@ import {
 	MockStarkRoutingService,
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE
-} from "@nationalbankbelgium/stark-core"
+} from "@nationalbankbelgium/stark-core";
 import { StarkAppLogoComponent } from "./app-logo.component";
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
@@ -22,14 +22,14 @@ describe("AppLogoComponent", () => {
 		TestBed.configureTestingModule({
 			declarations: [StarkAppLogoComponent],
 			providers: [
-				{provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService()},
-				{provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService}
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
 			],
 			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes
 		})
-		/**
-		 * Compile template and css
-		 */
+			/**
+			 * Compile template and css
+			 */
 			.compileComponents();
 	}));
 
@@ -44,11 +44,10 @@ describe("AppLogoComponent", () => {
 	});
 
 	describe("on initialization", () => {
-
 		it("should set internal component properties", () => {
 			expect(fixture).toBeDefined();
 			expect(comp).toBeDefined();
-			
+
 			expect(comp.logger).not.toBeNull();
 			expect(comp.logger).toBeDefined();
 			expect(comp.routingService).not.toBeNull();
@@ -62,8 +61,8 @@ describe("AppLogoComponent", () => {
 
 	describe("logoClickHandler()", () => {
 		it("should navigate to Home", () => {
-			const dummyClickEvent:SpyObj<Event> = createSpyObj("dummyClickEvent", ["preventDefault"]);
-			
+			const dummyClickEvent: SpyObj<Event> = createSpyObj("dummyClickEvent", ["preventDefault"]);
+
 			comp.homeStateParams = {
 				someParam: "dummy param"
 			};

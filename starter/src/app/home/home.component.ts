@@ -15,7 +15,7 @@ import {
 	StarkQueryParam,
 	StarkSingleItemResponseWrapper
 } from "@nationalbankbelgium/stark-core";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 import { AppState } from "../app.service";
 import { Title } from "./title";

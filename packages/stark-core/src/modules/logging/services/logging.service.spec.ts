@@ -1,8 +1,6 @@
 import Spy = jasmine.Spy;
 import { Action, Store } from "@ngrx/store";
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
-import { _throw as observableThrow } from "rxjs/observable/throw";
+import { Observable, of, throwError } from "rxjs";
 import { Serialize } from "cerialize";
 
 import { StarkLoggingActionTypes, FlushLogMessages } from "../../logging/actions";
@@ -286,7 +284,7 @@ describe("Service: StarkLoggingService", () => {
 		it("should fail to persist messages when the back-end fails", () => {
 			expect(mockStarkLogging.messages.length).toBe(loggingFlushPersistSize);
 
-			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.callFake(() => observableThrow("ko"));
+			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.callFake(() => throwError("ko"));
 			const errorSpy: Spy = spyOn(loggingService, "error");
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
 			loggingService.persistLogMessagesHelper();

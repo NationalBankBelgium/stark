@@ -1,7 +1,7 @@
 import { Action, Store } from "@ngrx/store";
-import { Observable } from "rxjs/Observable";
-import { fromPromise } from "rxjs/observable/fromPromise";
-import { empty } from "rxjs/observable/empty";
+import { Observable, empty } from "rxjs";
+// FIXME Is fromPromise still valid ?
+import { fromPromise } from "rxjs/internal/observable/fromPromise";
 import { Inject, Injectable } from "@angular/core";
 
 import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";

@@ -25,26 +25,7 @@ const globals = {
 	uuid: "uuid",
 
 	rxjs: "rxjs",
-
-	// this should be the preferred way to import RxJS operators: https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md
-	// we should only use that in our code base
-	"rxjs/operators": "rxjs.operators",
-	"rxjs/operators/catchError": "rxjs.operators.catchError",
-	"rxjs/operators/filter": "rxjs.operators.filter",
-	"rxjs/operators/map": "rxjs.operators.map",
-	"rxjs/operators/mergeMap": "rxjs.operators.mergeMap",
-	"rxjs/operators/retryWhen": "rxjs.operators.retryWhen",
-	"rxjs/operators/take": "rxjs.operators.take",
-
-	"rxjs/observable/defer": "rxjs/observable/defer",
-	"rxjs/observable/empty": "rxjs.observable.empty",
-	"rxjs/observable/timer": "rxjs.observable.time",
-	"rxjs/observable/fromPromise": "rxjs.observable.fromPromise",
-	"rxjs/observable/throw": "rxjs.observable.throw",
-
-	"rxjs/Observable": "Rx",
-	"rxjs/Subject": "Rx"
-	//"rxjs/Subscription": "Rx",
+	"rxjs/operators": "rxjs.operators"
 
 	// TODO add lines such as the one below to make sure that stark modules that depend on other stark modules can find those
 	// '@nationalbankbelgium/core': 'stark.core',

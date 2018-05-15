@@ -4,8 +4,7 @@ import { Serialize } from "cerialize";
 import { validateSync } from "class-validator";
 
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
+import { Observable, Subject } from "rxjs";
 
 import { Inject, Injectable } from "@angular/core";
 
