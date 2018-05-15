@@ -36,6 +36,7 @@
     "@types/node": "6.0.106",
     "@types/uuid": "3.4.3",
     "@uirouter/angular": "1.0.1",
+    "belgium-zip-city": "0.1.0",
     "cerialize": "0.1.18",
     "class-validator": "0.7.3",
     "core-js": "2.5.5",
