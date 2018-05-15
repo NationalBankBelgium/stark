@@ -186,16 +186,13 @@ module.exports = function(options) {
 				// Source map loader support for *.js files
 				// Extracts SourceMaps for source files that as added as sourceMappingURL comment.
 				// reference: https://github.com/webpack/source-map-loader
-				...(!METADATA.AOT
-					? [
-							{
-								enforce: "pre",
-								test: /\.js$/,
-								use: ["source-map-loader"],
-								exclude: [helpers.root("node_modules/rxjs"), helpers.root("node_modules/@angular")]
-							}
-					  ]
-					: []),
+				// See: https://github.com/webpack-contrib/source-map-loader/issues/60
+				{
+					enforce: "pre",
+					test: /\.js$/,
+					use: ["source-map-loader"],
+					exclude: [/\.ngfactory\.js$/, /\.ngstyle\.js$/, helpers.root("node_modules/@ng-idle")]
+				},
 
 				/**
 				 * To string and css loader support for *.css files (from Angular components)
