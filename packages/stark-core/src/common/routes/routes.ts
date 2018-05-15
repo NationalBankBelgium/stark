@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { StarkRoutingService, STARK_ROUTING_SERVICE, StarkStateConfigWithParams } from "../../routing/services";
+import { StarkRoutingService, STARK_ROUTING_SERVICE, StarkStateConfigWithParams } from "../../modules/routing/services";
 import { StatesModule } from "@uirouter/angular";
 
 export const starkAppInitStateName: string = "starkAppInit";
