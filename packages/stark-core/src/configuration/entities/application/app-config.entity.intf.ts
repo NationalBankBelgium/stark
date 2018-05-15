@@ -1,4 +1,4 @@
-import { StarkBackend } from "../../../http/entities/backend";
+import { StarkBackend } from "../../../modules/http/entities/backend";
 import { InjectionToken } from "@angular/core";
 
 export const STARK_APP_CONFIG: InjectionToken<StarkApplicationConfig> = new InjectionToken<StarkApplicationConfig>("STARK_APP_CONFIG");

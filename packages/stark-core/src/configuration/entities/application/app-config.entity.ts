@@ -1,7 +1,7 @@
 import { IsBoolean, IsDefined, IsNotEmpty, IsPositive, IsString, IsUrl, Matches, Min, ValidateIf, validateSync } from "class-validator";
 import { autoserialize, autoserializeAs } from "cerialize";
 import { StarkApplicationConfig } from "./app-config.entity.intf";
-import { StarkBackend, StarkBackendImpl } from "../../../http/entities/backend";
+import { StarkBackend, StarkBackendImpl } from "../../../modules/http/entities/backend";
 import { stringMap } from "../../../serialization";
 import { StarkValidationErrorsUtil } from "../../../util";
 // FIXME: cannot import both validation decorators from the barrel due to an issue with angular-compiler
