@@ -17,11 +17,7 @@ const componentName: string = "stark-app-logo";
 /* tslint:disable:enforce-component-selector max-inline-declarations use-view-encapsulation use-host-property-decorator */
 @Component({
 	selector: componentName,
-	// FIXME: move the inline template to the component.html file and use templateUrl instead once we migrate to NG6
-	template: `
-		<a (click)="logoClickHandler($event)" href="#">
-			<i></i>
-		</a>`,
+	templateUrl: "./app-logo.component.html",
 	encapsulation: ViewEncapsulation.None,
 	host: { class: "stark-app-logo" }
 })

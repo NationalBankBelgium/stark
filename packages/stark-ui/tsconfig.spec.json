@@ -18,6 +18,7 @@
     "preserveWhitespaces": false,
     "allowEmptyCodegenFiles": false,
     "annotateForClosureCompiler": true,
-    "skipTemplateCodegen": true
+    "skipTemplateCodegen": true,
+    "enableResourceInlining": true
   }
 }
