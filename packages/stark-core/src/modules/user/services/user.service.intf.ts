@@ -1,5 +1,5 @@
 import { InjectionToken } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { StarkUser } from "../entities";
 
 export const starkUserServiceName: string = "StarkUserService";

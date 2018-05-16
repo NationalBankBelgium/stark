@@ -11,9 +11,9 @@ const rawKarmaConfig = {
 
 	// list of files / patterns to load in the browser
 	files: [
-		{pattern: helpers.root(helpers.getAngularCliAppConfig().test)},
-		{pattern: helpers.root("src/**/*.ts")},
-		{pattern: helpers.root("src/**/*.html")}
+		{ pattern: helpers.root(helpers.getAngularCliAppConfig().architect.test.options.main) },
+		{ pattern: helpers.root("src/**/*.ts") },
+		{ pattern: helpers.root("src/**/*.html") }
 	],
 
 	// list of files to exclude
@@ -41,7 +41,7 @@ const rawKarmaConfig = {
 				require("karma-typescript-angular2-transform") // see https://github.com/monounity/karma-typescript-angular2-transform
 			]
 		},
-		tsconfig: helpers.getAngularCliAppConfig().testTsconfig
+		tsconfig: helpers.getAngularCliAppConfig().architect.test.options.tsConfig
 	},
 
 	// test results reporter to use
@@ -59,7 +59,7 @@ const rawKarmaConfig = {
 
 	// level of logging
 	// see: http://karma-runner.github.io/2.0/config/configuration-file.html
-	// possible values: 
+	// possible values:
 	// 		"OFF" = config.LOG_DISABLE
 	// 		"ERROR" = config.LOG_ERROR
 	// 		"WARN" = config.LOG_WARN
@@ -88,8 +88,8 @@ const rawKarmaConfig = {
 module.exports = {
 	// Karma configuration
 	// reference: http://karma-runner.github.io/2.0/config/configuration-file.html
-	default: function (config) {
+	default: function(config) {
 		config.set(rawKarmaConfig);
 	},
 	rawKarmaConfig: rawKarmaConfig
-}; 
+};

@@ -1,4 +1,4 @@
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { StarkBackend } from "../entities/backend";
 import { StarkCollectionResponseWrapper, StarkResource, StarkSingleItemResponseWrapper } from "../entities";
 import {

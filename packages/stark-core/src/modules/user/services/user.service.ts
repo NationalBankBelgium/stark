@@ -1,10 +1,8 @@
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { validateSync } from "class-validator";
-import { Observable } from "rxjs/Observable";
-import { map } from "rxjs/operators/map";
-import { catchError } from "rxjs/operators/catchError";
-import { _throw as observableThrow } from "rxjs/observable/throw";
+import { Observable, throwError } from "rxjs";
+import { map, catchError } from "rxjs/operators";
 
 import { StarkHttpErrorWrapper, StarkSingleItemResponseWrapper } from "../../http/entities";
 import { StarkUser } from "../../user/entities";
@@ -87,7 +85,7 @@ export class StarkUserServiceImpl implements StarkUserService {
 			catchError((error: StarkHttpErrorWrapper | Error) => {
 				this.store.dispatch(new FetchUserProfileFailure(error));
 
-				return observableThrow(error);
+				return throwError(error);
 			})
 		);
 	}

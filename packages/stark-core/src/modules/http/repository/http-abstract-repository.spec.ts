@@ -1,4 +1,4 @@
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { AbstractStarkHttpRepository } from "./http-abstract-repository";
 import { StarkSerializable } from "../../../serialization";
 import {

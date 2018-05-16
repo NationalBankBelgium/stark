@@ -1,16 +1,8 @@
 const _cloneDeep: Function = require("lodash/cloneDeep");
 import { Deserialize, Serialize } from "cerialize";
-import { Observable } from "rxjs/Observable";
-import { ErrorObservable } from "rxjs/observable/ErrorObservable";
-import { timer } from "rxjs/observable/timer";
-import { _throw as observableThrow } from "rxjs/observable/throw";
-// FIXME: importing from single entry "rxjs/operators" together with webpack's scope hoisting prevents dead code removal
-// see https://github.com/ReactiveX/rxjs/issues/2981
-// import { catchError, map, mergeMap, retryWhen } from "rxjs/operators";
-import { catchError } from "rxjs/operators/catchError";
-import { map } from "rxjs/operators/map";
-import { retryWhen } from "rxjs/operators/retryWhen";
-import { mergeMap } from "rxjs/operators/mergeMap";
+import { Observable, timer, throwError } from "rxjs";
+// FIXME Adapt mergeMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
+import { catchError, map, mergeMap, retryWhen } from "rxjs/operators";
 import { Inject, Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
 
@@ -96,7 +88,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		if (httpResponse$) {
 			return this.getSingleItemResponseWrapperObservable(httpResponse$, request);
 		} else {
-			return observableThrow(
+			return throwError(
 				"Unknown request type encountered " +
 					request.requestType +
 					". For collection requests, " +
@@ -134,7 +126,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			return this.getCollectionResponseWrapperObservable(httpResponse$, request);
 		} else {
 			// we return directly here because otherwise compilation fails (can't assign the ErrorObservable type to Subject)
-			return observableThrow(
+			return throwError(
 				"Unknown request type encountered " +
 					request.requestType +
 					". For single requests (no " +
@@ -424,7 +416,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 							retries++;
 							return timer(this.retryDelay);
 						} else {
-							return observableThrow(error);
+							return throwError(error);
 						}
 					})
 				);
@@ -432,9 +424,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		);
 	}
 
-	private createHttpErrorWrapper(httpErrorResponse: HttpErrorResponse, meaningfulError: Error): ErrorObservable {
+	private createHttpErrorWrapper(httpErrorResponse: HttpErrorResponse, meaningfulError: Error): Observable<never> {
 		const httpResponseHeaders: Map<string, string> = this.getResponseHeaders(httpErrorResponse.headers);
-		return observableThrow(new StarkHttpErrorWrapperImpl(httpErrorResponse, httpResponseHeaders, meaningfulError));
+		return throwError(new StarkHttpErrorWrapperImpl(httpErrorResponse, httpResponseHeaders, meaningfulError));
 	}
 
 	private serialize(entity: P, request: StarkHttpRequest<P>): string | object {

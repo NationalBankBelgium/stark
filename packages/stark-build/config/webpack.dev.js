@@ -9,7 +9,6 @@ const commonData = require("./webpack.common-data.js"); // the settings that are
 /**
  * Webpack Plugins
  */
-const NamedModulesPlugin = require("webpack/lib/NamedModulesPlugin");
 const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
 
 const WriteFilePlugin = require("write-file-webpack-plugin");
@@ -63,9 +62,6 @@ module.exports = function(env) {
 		// "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
 	];
 
-	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-	const rootDir = angularCliAppConfig.root;
-
 	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
 		 * Tell webpack which environment the application is targeting.
@@ -73,6 +69,12 @@ module.exports = function(env) {
 		 * reference: https://webpack.js.org/concepts/targets/
 		 */
 		target: "web", // <== can be omitted as default is "web"
+
+		mode: "development",
+
+		optimization: {
+			namedModules: true
+		},
 
 		/**
 		 * Options affecting the output of the compilation.
@@ -85,7 +87,7 @@ module.exports = function(env) {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-path
 			 */
-			path: helpers.root(angularCliAppConfig.outDir),
+			path: helpers.root(buildUtils.ANGULAR_APP_CONFIG.outputPath),
 
 			/**
 			 * This option specifies the public URL of the output directory when referenced in a browser.
@@ -94,7 +96,7 @@ module.exports = function(env) {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-publicpath
 			 */
-			publicPath: angularCliAppConfig.deployUrl,
+			publicPath: buildUtils.ANGULAR_APP_CONFIG.deployUrl,
 
 			/**
 			 * Specifies the name of each output file on disk.
@@ -139,7 +141,7 @@ module.exports = function(env) {
 						},
 						"css-loader"
 					],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -154,7 +156,7 @@ module.exports = function(env) {
 						"css-loader",
 						"sass-loader"
 					],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -186,7 +188,7 @@ module.exports = function(env) {
 							}
 						}
 					],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				}
 			]
 		},
@@ -211,14 +213,6 @@ module.exports = function(env) {
 				columns: false, // Default: true. False = less accurate source maps but will also improve compilation performance significantly
 				sourceRoot: "webpack:///"
 			}),
-
-			/**
-			 * Plugin: NamedModulesPlugin (experimental)
-			 * Description: Uses file names as module name.
-			 *
-			 * See: https://github.com/webpack/webpack/commit/a04ffb928365b19feb75087c63f13cadfc08e1eb
-			 */
-			new NamedModulesPlugin(),
 
 			/**
 			 * Plugin: WriteFilePlugin

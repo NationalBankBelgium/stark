@@ -1,5 +1,7 @@
 const path = require("path");
 const fs = require("fs");
+const cliUtilConfig = require("@angular/cli/utilities/config");
+const { formatDiagnostics } = require("@angular/compiler-cli/ngtools2");
 
 function isDirectory(path) {
 	try {
@@ -22,18 +24,26 @@ function getDirectoriesNames(source) {
  * @returns {*}
  */
 function validateAngularCLIConfig(jsonConfig) {
-	const SchemaClassFactory = require("@ngtools/json-schema").SchemaClassFactory;
-	const schema = require("@angular/cli/lib/config/schema.json");
+	// FIXME Adapt usage for Angular CLI 6
+	return jsonConfig;
 
-	const config = new (SchemaClassFactory(schema))(jsonConfig);
-	try {
-		const serializedConfig = JSON.parse(config.$$serialize("application/json"));
-		return serializedConfig;
-	} catch (error) {
-		return false;
-	}
+	// const SchemaClassFactory = require("@ngtools/json-schema").SchemaClassFactory;
+	// const schema = require("@angular/cli/lib/config/schema.json");
+	//
+	// const config = new (SchemaClassFactory(schema))(jsonConfig);
+	// try {
+	// 	const serializedConfig = JSON.parse(config.$$serialize("application/json"));
+	// 	return serializedConfig;
+	// } catch (error) {
+	// 	return false;
+	// }
+}
+
+function getWorkspace() {
+	return cliUtilConfig.getWorkspace();
 }
 
 exports.getDirectoriesNames = getDirectoriesNames;
 exports.isDirectory = isDirectory;
 exports.validateAngularCLIConfig = validateAngularCLIConfig;
+exports.getWorkspace = getWorkspace;

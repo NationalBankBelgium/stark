@@ -1,10 +1,5 @@
 import { Component, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
-import {
-	STARK_LOGGING_SERVICE,
-	STARK_ROUTING_SERVICE,
-	StarkLoggingService,
-	StarkRoutingService
-} from "@nationalbankbelgium/stark-core";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
 
 const componentName: string = "stark-app-logo";
 

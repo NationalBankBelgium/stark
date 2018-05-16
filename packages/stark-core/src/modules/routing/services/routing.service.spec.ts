@@ -2,10 +2,9 @@ import { Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoa
 import { TestBed, fakeAsync, tick, inject } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
 import { StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
-import { switchMap } from "rxjs/operators/switchMap";
-import { catchError } from "rxjs/operators/catchError";
-import { tap } from "rxjs/operators/tap";
-import { _throw as observableThrow } from "rxjs/observable/throw";
+// FIXME Adapt switchMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
+import { catchError, switchMap, tap } from "rxjs/operators";
+import { throwError } from "rxjs";
 import { Store } from "@ngrx/store";
 import { StarkRoutingServiceImpl } from "./routing.service";
 import { StarkLoggingService } from "../../logging/services";
@@ -444,7 +443,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledTimes(1);
 					}),
 					catchError((error: any) => {
-						return observableThrow("getCurrentState " + error);
+						return throwError("getCurrentState " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -464,7 +463,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateName).toBe(currentState.name);
 					}),
 					catchError((error: any) => {
-						return observableThrow("getCurrentStateName " + error);
+						return throwError("getCurrentStateName " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -485,7 +484,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateConfig.url).toBe("/page-01");
 					}),
 					catchError((error: any) => {
-						return observableThrow("getCurrentStateConfig " + error);
+						return throwError("getCurrentStateConfig " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -565,7 +564,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateParams.onBehalfView).toBe(true);
 					}),
 					catchError((error: any) => {
-						return observableThrow("navigateTo " + error);
+						return throwError("navigateTo " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -588,7 +587,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(isCurrentUIState).toBe(false);
 					}),
 					catchError((error: any) => {
-						return observableThrow("isCurrentUiState " + error);
+						return throwError("isCurrentUiState " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -623,7 +622,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(isCurrentUIState).toBe(false);
 					}),
 					catchError((error: any) => {
-						return observableThrow("isCurrentUiState " + error);
+						return throwError("isCurrentUiState " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -647,7 +646,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return observableThrow("navigateTo " + error);
+						return throwError("navigateTo " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -664,14 +663,14 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, { reload: true });
 					}),
 					catchError((error: any) => {
-						return observableThrow("navigateTo " + error);
+						return throwError("navigateTo " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
 		});
 
 		it("should navigate to a non-existing page", (done: DoneFn) => {
-			spyOn($state, "go").and.returnValue(observableThrow("uh-oh").toPromise());
+			spyOn($state, "go").and.returnValue(throwError("uh-oh").toPromise());
 
 			routingService
 				.navigateTo("whatever")
@@ -680,7 +679,7 @@ describe("Service: StarkRoutingService", () => {
 						fail("whatever");
 					}),
 					catchError((error: any) => {
-						return observableThrow(error);
+						return throwError(error);
 					})
 				)
 				.subscribe(
@@ -710,7 +709,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("homepage", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return observableThrow("navigateToHome " + error);
+						return throwError("navigateToHome " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -742,7 +741,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateParams.onBehalfView).toBe(true);
 					}),
 					catchError((error: any) => {
-						return observableThrow("navigateToHome " + error);
+						return throwError("navigateToHome " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -757,15 +756,15 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("homepage")
 				.pipe(
 					catchError((error: any) => {
-						return observableThrow("navigateTo homepage " + error);
+						return throwError("navigateTo homepage " + error);
 					}),
 					switchMap(() => routingService.navigateTo("page-01")),
 					catchError((error: any) => {
-						return observableThrow("navigateTo page-01 " + error);
+						return throwError("navigateTo page-01 " + error);
 					}),
 					switchMap(() => routingService.navigateTo("page-01-01")),
 					catchError((error: any) => {
-						return observableThrow("navigateTo page-01-01 " + error);
+						return throwError("navigateTo page-01-01 " + error);
 					}),
 					switchMap(() => routingService.navigateToPrevious()),
 					tap((enteredState: StateObject) => {
@@ -775,7 +774,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return observableThrow("navigateToPrevious " + error);
+						return throwError("navigateToPrevious " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -793,7 +792,7 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
-						return observableThrow("navigateTo homepage " + error);
+						return throwError("navigateTo homepage " + error);
 					}),
 					switchMap(() => routingService.reload()),
 					tap((enteredState: StateObject) => {
@@ -802,14 +801,14 @@ describe("Service: StarkRoutingService", () => {
 						expect(enteredState.name).toBe("page-01");
 					}),
 					catchError((error: any) => {
-						return observableThrow("reload " + error);
+						return throwError("reload " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
 		});
 
 		it("should reload the current page", (done: DoneFn) => {
-			spyOn($state, "reload").and.returnValue(observableThrow("Reload has failed").toPromise());
+			spyOn($state, "reload").and.returnValue(throwError("Reload has failed").toPromise());
 
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
@@ -818,12 +817,12 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
-						return observableThrow("navigateTo homepage " + error);
+						return throwError("navigateTo homepage " + error);
 					}),
 					switchMap(() => routingService.reload()),
 					catchError((error: any) => {
 						expect(error).toBe("Reload has failed");
-						return observableThrow("reload " + error);
+						return throwError("reload " + error);
 					})
 				)
 				.subscribe(() => () => fail("the test should not enter the next block"), () => done());
@@ -838,11 +837,11 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
-						return observableThrow("navigateTo page-01 " + error);
+						return throwError("navigateTo page-01 " + error);
 					}),
 					switchMap(() => routingService.navigateTo("page-01")),
 					catchError((error: any) => {
-						return observableThrow("navigateTo page-01 " + error);
+						return throwError("navigateTo page-01 " + error);
 					}),
 					tap((enteredState: StateObject) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
@@ -855,7 +854,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return observableThrow("navigationErrorHandler " + error);
+						return throwError("navigationErrorHandler " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -870,7 +869,7 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01-01")
 				.pipe(
 					catchError((error: any) => {
-						return observableThrow("navigateTo page-01-01 " + error);
+						return throwError("navigateTo page-01-01 " + error);
 					}),
 					tap((enteredState: StateObject) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
@@ -883,7 +882,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return observableThrow("navigationErrorHandler " + error);
+						return throwError("navigationErrorHandler " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -903,7 +902,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
 						expect(message).toMatch(/Route transition rejected/);
-						return observableThrow("navigationErrorHandler " + error);
+						return throwError("navigationErrorHandler " + error);
 					})
 				)
 				.subscribe(() => fail("this block should not be executed"), () => done());
@@ -921,7 +920,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(2);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/Error during route transition/);
-						return observableThrow("navigationErrorHandler " + error);
+						return throwError("navigationErrorHandler " + error);
 					})
 				)
 				.subscribe(() => fail("this block should not be executed"), () => done());
@@ -939,7 +938,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
 						expect(message).toMatch(/transition aborted/);
-						return observableThrow("navigationErrorHandler " + error);
+						return throwError("navigationErrorHandler " + error);
 					})
 				)
 				.subscribe(() => fail("this block should not be executed"), () => done());
@@ -957,7 +956,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(2);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/An error occurred with a resolve in the new state/);
-						return observableThrow("navigationErrorHandler " + error);
+						return throwError("navigationErrorHandler " + error);
 					})
 				)
 				.subscribe(() => fail("this block should not be executed"), () => done());
@@ -971,7 +970,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/The target state does NOT exist/);
-						return observableThrow("navigationErrorHandler " + error);
+						return throwError("navigationErrorHandler " + error);
 					})
 				)
 				.subscribe(() => fail("this block should not be executed"), () => done());

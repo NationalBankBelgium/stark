@@ -28,14 +28,13 @@
   "dependencies": {
     "@ng-idle/core": "2.0.0-beta.15",
     "@ng-idle/keepalive": "2.0.0-beta.15",
-    "@ngx-translate/core": "9.1.1",
     "@ngrx/effects": "5.2.0",
     "@ngrx/store": "5.2.0",
+    "@ngx-translate/core": "10.0.1",
     "@types/core-js": "0.9.46",
-    "@types/jasmine": "2.8.6",
     "@types/node": "6.0.106",
     "@types/uuid": "3.4.3",
-    "@uirouter/angular": "1.0.1",
+    "@uirouter/angular": "2.0.0",
     "cerialize": "0.1.18",
     "class-validator": "0.7.3",
     "core-js": "2.5.5",
@@ -49,11 +48,12 @@
     "@nationalbankbelgium/stark-testing": "../stark-testing"
   },
   "peerDependencies": {
-    "@angular/common": "5.x",
-    "@angular/core": "5.x",
-    "@angular/router": "5.x",
-    "rxjs": "5.x",
-    "typescript": ">=2.6.0 && <2.7.0"
+    "@angular/common": "6.x",
+    "@angular/core": "6.x",
+    "@angular/router": "6.x",
+    "rxjs": "6.x",
+    "rxjs-compat": "6.x",
+    "typescript": ">=2.7.2 && <2.8.0"
   },
   "scripts": {
     "clean": "npx rimraf dist",

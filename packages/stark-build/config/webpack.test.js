@@ -18,9 +18,6 @@ const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin")
  */
 const ENV = (process.env.ENV = process.env.NODE_ENV = "test");
 
-const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-const rootDir = angularCliAppConfig.root;
-
 /**
  * Webpack configuration
  *
@@ -44,7 +41,7 @@ module.exports = function() {
 			/**
 			 * Make sure root is src
 			 */
-			modules: [helpers.root(rootDir), "node_modules"]
+			modules: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot), "node_modules"]
 		},
 
 		/**
@@ -159,7 +156,7 @@ module.exports = function() {
 							}
 						}
 					],
-					exclude: [helpers.root(rootDir, "styles")]
+					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -184,7 +181,7 @@ module.exports = function() {
 					enforce: "post",
 					test: /\.(js|ts)$/,
 					loader: "istanbul-instrumenter-loader",
-					include: helpers.root(rootDir),
+					include: helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot),
 					exclude: [/\.(e2e|spec)\.ts$/, /node_modules/]
 				}
 			]
@@ -252,7 +249,7 @@ module.exports = function() {
 				 * The (\\|\/) piece accounts for path separators in *nix and Windows
 				 */
 				/angular[\\\/]core([\\\/])@angular/,
-				helpers.root(rootDir), // location of your src
+				helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot), // location of your src
 				{
 					/**
 					 * your Angular Async Route paths relative to this root directory

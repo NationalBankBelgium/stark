@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { StarkCollectionResponseWrapper, StarkHttpRequest, StarkResource, StarkSingleItemResponseWrapper } from "../entities";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 export const starkHttpServiceName: string = "StarkHttpService";
 export const STARK_HTTP_SERVICE: InjectionToken<StarkHttpService<any>> = new InjectionToken<StarkHttpService<any>>(starkHttpServiceName);

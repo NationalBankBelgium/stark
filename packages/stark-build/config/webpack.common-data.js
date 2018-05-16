@@ -4,7 +4,7 @@ const path = require("path");
 
 // The goal of this module is only to export common configuration data that the different Webpack configuration files use
 
-const { PostcssCliResources } = require("@angular/cli/plugins/webpack");
+const { PostcssCliResources } = require("@angular-devkit/build-angular/src/angular-cli-files/plugins/webpack");
 
 // Helpers
 const helpers = require("./helpers");
@@ -15,9 +15,8 @@ const starkAppMetadata = require(helpers.root("src/stark-app-metadata.json"));
 const starkAppConfig = require(helpers.root("src/stark-app-config.json"));
 
 // Angular CLI config
-const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-const deployUrl = angularCliAppConfig.deployUrl;
-const baseHref = angularCliAppConfig.baseHref;
+const deployUrl = buildUtils.ANGULAR_APP_CONFIG.deployUrl;
+const baseHref = buildUtils.ANGULAR_APP_CONFIG.baseHref;
 // Maximum resource size to inline (KiB) (as defined in node_modules/@angular/cli/models/webpack-configs/styles.js)
 const maximumInlineSize = 10;
 
