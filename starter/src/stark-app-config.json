@@ -10,6 +10,7 @@
   "sessionTimeoutWarningPeriod": 20,
   "keepAliveUrl": "http://localhost:5000/keepalive",
   "keepAliveInterval": 20,
+  "keepAliveDisabled": true,
   "angularDebugInfoEnabled": null,
   "debugLoggingEnabled": null,
   "loggingFlushPersistSize": 50,
