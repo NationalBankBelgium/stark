@@ -1,6 +1,9 @@
 "use strict";
 
 const helpers = require("./helpers");
+const buildUtils = require("./build-utils");
+
+const commonData = require("./webpack.common-data.js");
 
 /**
  * Webpack Plugins
@@ -15,25 +18,26 @@ const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin")
  */
 const ENV = (process.env.ENV = process.env.NODE_ENV = "test");
 
-const rootDir = buildUtils.getAngularCliAppConfig().root;
+const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
+const rootDir = angularCliAppConfig.root;
 
 /**
  * Webpack configuration
  *
- * See: http://webpack.github.io/docs/configuration.html#cli
+ * See: https://webpack.js.org/configuration/
  */
 module.exports = function() {
 	return {
 		/**
 		 * Options affecting the resolving of modules.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#resolve
+		 * See: https://webpack.js.org/configuration/resolve/
 		 */
 		resolve: {
 			/**
 			 * An array of extensions that should be used to resolve modules.
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
+			 * See: https://webpack.js.org/configuration/resolve/#resolve-extensions
 			 */
 			extensions: [".ts", ".js"],
 
@@ -46,7 +50,7 @@ module.exports = function() {
 		/**
 		 * Options affecting the normal modules.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#module
+		 * See: https://webpack.js.org/configuration/module/
 		 *
 		 * 'use:' revered back to 'loader:' as a temp. workaround for #1188
 		 * See: https://github.com/AngularClass/angular-starter/issues/1188#issuecomment-262872034
@@ -151,22 +155,7 @@ module.exports = function() {
 							loader: "postcss-loader",
 							options: {
 								sourceMap: true,
-								plugins: [
-									// reference: https://github.com/postcss/postcss-import
-									// https://github.com/postcss/postcss-import/issues/244
-									require("postcss-import")(),
-
-									// plugin to rebase, inline or copy on url().
-									// https://github.com/postcss/postcss-url
-									require("postcss-url")(),
-
-									require("postcss-nesting")(),
-									require("postcss-simple-extend")(),
-									require("postcss-cssnext")({
-										// see https://github.com/MoOx/postcss-cssnext/issues/268 for example
-										browsers: ["last 3 versions", "Chrome >= 45"]
-									})
-								]
+								plugins: commonData.postcssPlugins
 							}
 						}
 					],
@@ -204,7 +193,7 @@ module.exports = function() {
 		/**
 		 * Add additional plugins to the compiler.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#plugins
+		 * See: https://webpack.js.org/configuration/plugins/
 		 */
 		plugins: [
 			/**

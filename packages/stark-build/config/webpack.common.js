@@ -12,6 +12,7 @@ const commonData = require("./webpack.common-data.js"); // common configuration 
 const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BaseHrefWebpackPlugin = require("base-href-webpack-plugin").BaseHrefWebpackPlugin;
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const { AngularCompilerPlugin } = require("@ngtools/webpack");
@@ -66,7 +67,8 @@ module.exports = function(options) {
 		}
 	};
 
-	const rootDir = buildUtils.getAngularCliAppConfig().root;
+	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
+	const rootDir = angularCliAppConfig.root;
 
 	return {
 		/**
@@ -448,7 +450,7 @@ module.exports = function(options) {
 				metadata: METADATA,
 				inject: "body", //  true (default) or  "body" are the same
 				starkAppMetadata: commonData.starkAppMetadata,
-				starkAppConfig: commonData.starkAppConfig,
+				starkAppConfig: commonData.starkAppConfig, // TODO: shall we remove it?
 				// xhtml: true, // TODO: why XHTML?
 				minify: isProd
 					? {
@@ -458,6 +460,15 @@ module.exports = function(options) {
 					  }
 					: false
 			}),
+
+			/**
+			 * Plugin: BaseHrefWebpackPlugin
+			 * Description: Extension for html-webpack-plugin to programmatically insert or update <base href="" /> tag.
+			 * Therefore, HtmlWebpackPlugin should also be installed
+			 *
+			 * See: https://github.com/dzonatan/base-href-webpack-plugin
+			 */
+			new BaseHrefWebpackPlugin({ baseHref: angularCliAppConfig.baseHref }),
 
 			/**
 			 * Plugin: ScriptExtHtmlWebpackPlugin

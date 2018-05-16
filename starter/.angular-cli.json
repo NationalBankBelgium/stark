@@ -30,6 +30,8 @@
 					"output": "./"
 				}
 			],
+			"deployUrl": "",
+			"baseHref": "/",
 			"index": "index.html",
 			"main": "main.browser.ts",
 			"polyfills": "polyfills.browser.ts",

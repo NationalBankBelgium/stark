@@ -24,9 +24,9 @@ const WebpackMonitor = require("webpack-monitor");
 /**
  * Webpack configuration
  *
- * See: http://webpack.github.io/docs/configuration.html#cli
+ * See: https://webpack.js.org/configuration/
  */
-module.exports = function (env) {
+module.exports = function(env) {
 	// for the content of the env parameter see here :  https://webpack.js.org/api/cli/#environment-options
 	const ENV = (process.env.ENV = process.env.NODE_ENV = "development");
 	const HOST = process.env.HOST || "localhost";
@@ -45,7 +45,7 @@ module.exports = function (env) {
 		// PUBLIC: process.env.PUBLIC_DEV || HOST + ':' + PORT  // TODO check if needed/useful in our case?
 	});
 
-// Directives to be used in CSP header
+	// Directives to be used in CSP header
 	const cspDirectives = [
 		"base-uri 'self'",
 		// "default-src 'self'", // FIXME: enable as soon as the issue is fixed in Angular (https://github.com/angular/angular-cli/issues/6872 )
@@ -63,9 +63,10 @@ module.exports = function (env) {
 		// "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
 	];
 
-	const rootDir = buildUtils.getAngularCliAppConfig().root;
+	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
+	const rootDir = angularCliAppConfig.root;
 
-	return webpackMerge(commonConfig({ENV: ENV, metadata: METADATA}), {
+	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
 		 * Tell webpack which environment the application is targeting.
 		 * reference: https://webpack.js.org/configuration/target/
@@ -76,21 +77,30 @@ module.exports = function (env) {
 		/**
 		 * Options affecting the output of the compilation.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#output
+		 * See: https://webpack.js.org/configuration/output/
 		 */
 		output: {
 			/**
 			 * The output directory as absolute path (required).
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#output-path
+			 * See: https://webpack.js.org/configuration/output/#output-path
 			 */
-			path: helpers.root(buildUtils.getAngularCliAppConfig().outDir),
+			path: helpers.root(angularCliAppConfig.outDir),
+
+			/**
+			 * This option specifies the public URL of the output directory when referenced in a browser.
+			 * The value of the option is prefixed to every URL created by the runtime or loaders.
+			 * Because of this the value of this option ends with / in most cases.
+			 *
+			 * See: https://webpack.js.org/configuration/output/#output-publicpath
+			 */
+			publicPath: angularCliAppConfig.deployUrl,
 
 			/**
 			 * Specifies the name of each output file on disk.
 			 * IMPORTANT: You must not specify an absolute path here!
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#output-filename
+			 * See: https://webpack.js.org/configuration/output/#output-filename
 			 */
 			filename: "[name].[hash].bundle.js",
 
@@ -98,14 +108,14 @@ module.exports = function (env) {
 			 * The filename of the SourceMaps for the JavaScript files.
 			 * They are inside the output.path directory.
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
+			 * See: https://webpack.js.org/configuration/output/#output-sourcemapfilename
 			 */
 			sourceMapFilename: "[file].[hash].map",
 
 			/** The filename of non-entry chunks as relative path
 			 * inside the output.path directory.
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
+			 * See: https://webpack.js.org/configuration/output/#output-chunkfilename
 			 */
 			chunkFilename: "[id].[hash].chunk.js",
 
@@ -122,10 +132,13 @@ module.exports = function (env) {
 				 */
 				{
 					test: /\.css$/,
-					use: [{
-						loader: "style-loader",
-						options: {attrs: {nonce: "cef324d21ec5483c8819cc7a5e33c4a2"}}
-					}, "css-loader"],
+					use: [
+						{
+							loader: "style-loader",
+							options: { attrs: { nonce: "cef324d21ec5483c8819cc7a5e33c4a2" } }
+						},
+						"css-loader"
+					],
 					include: [helpers.root(rootDir, "styles")]
 				},
 
@@ -137,7 +150,7 @@ module.exports = function (env) {
 				{
 					test: /\.scss$/,
 					use: [
-						{loader: "style-loader", options: {attrs: {nonce: "cef324d21ec5483c8819cc7a5e33c4a2"}}},
+						{ loader: "style-loader", options: { attrs: { nonce: "cef324d21ec5483c8819cc7a5e33c4a2" } } },
 						"css-loader",
 						"sass-loader"
 					],
@@ -152,7 +165,7 @@ module.exports = function (env) {
 				{
 					test: /\.pcss$/,
 					use: [
-						{loader: "style-loader", options: {attrs: {nonce: "cef324d21ec5483c8819cc7a5e33c4a2"}}},
+						{ loader: "style-loader", options: { attrs: { nonce: "cef324d21ec5483c8819cc7a5e33c4a2" } } },
 						{
 							loader: "css-loader",
 							options: {
@@ -240,14 +253,14 @@ module.exports = function (env) {
 			 */
 			...(MONITOR
 				? [
-					new WebpackMonitor({
-						capture: true, // -> default 'true'
-						target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
-						launch: true, // -> default 'false'
-						port: 3030, // default -> 8081
-						excludeSourceMaps: true // default 'true'
-					})
-				]
+						new WebpackMonitor({
+							capture: true, // -> default 'true'
+							target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
+							launch: true, // -> default 'false'
+							port: 3030, // default -> 8081
+							excludeSourceMaps: true // default 'true'
+						})
+				  ]
 				: [])
 		],
 
@@ -297,7 +310,7 @@ module.exports = function (env) {
 			 *
 			 * See: https://webpack.github.io/docs/webpack-dev-server.html
 			 */
-			before: function (app) {
+			before: function(app) {
 				// For example, to define custom handlers for some paths:
 				// app.get('/some/path', function(req, res) {
 				//   res.json({ custom: 'response' });
@@ -331,5 +344,4 @@ module.exports = function (env) {
 			}
 		}
 	});
-}
-;
+};
