@@ -3,6 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
 import { NgIdleModule } from "@ng-idle/core";
+import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { validateSync } from "class-validator";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { storeFreeze } from "ngrx-store-freeze";
@@ -132,6 +133,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		}),
 		TranslateModule.forRoot(),
 		NgIdleModule.forRoot(),
+		NgIdleKeepaliveModule.forRoot(), // FIXME: disabled in stark-app-config.json for now until json-server is integrated
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot(),
