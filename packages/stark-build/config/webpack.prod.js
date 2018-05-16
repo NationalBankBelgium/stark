@@ -55,7 +55,8 @@ module.exports = function() {
 		HMR: false
 	});
 
-	const rootDir = buildUtils.getAngularCliAppConfig().root;
+	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
+	const rootDir = angularCliAppConfig.root;
 
 	METADATA.environment = METADATA.E2E ? "e2e.prod" : "prod";
 
@@ -75,21 +76,30 @@ module.exports = function() {
 		/**
 		 * Options affecting the output of the compilation.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#output
+		 * See: https://webpack.js.org/configuration/output/
 		 */
 		output: {
 			/**
 			 * The output directory as absolute path (required).
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#output-path
+			 * See: https://webpack.js.org/configuration/output/#output-path
 			 */
-			path: helpers.root(buildUtils.getAngularCliAppConfig().outDir),
+			path: helpers.root(angularCliAppConfig.outDir),
+
+			/**
+			 * This option specifies the public URL of the output directory when referenced in a browser.
+			 * The value of the option is prefixed to every URL created by the runtime or loaders.
+			 * Because of this the value of this option ends with / in most cases.
+			 *
+			 * See: https://webpack.js.org/configuration/output/#output-publicpath
+			 */
+			publicPath: angularCliAppConfig.deployUrl,
 
 			/**
 			 * Specifies the name of each output file on disk.
 			 * IMPORTANT: You must not specify an absolute path here!
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#output-filename
+			 * See: https://webpack.js.org/configuration/output/#output-filename
 			 */
 			filename: "[name].[chunkhash].bundle.js",
 
@@ -97,7 +107,7 @@ module.exports = function() {
 			 * The filename of the SourceMaps for the JavaScript files.
 			 * They are inside the output.path directory.
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
+			 * See: https://webpack.js.org/configuration/output/#output-sourcemapfilename
 			 */
 			sourceMapFilename: "[file].map",
 
@@ -105,7 +115,7 @@ module.exports = function() {
 			 * The filename of non-entry chunks as relative path
 			 * inside the output.path directory.
 			 *
-			 * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
+			 * See: https://webpack.js.org/configuration/output/#output-chunkfilename
 			 */
 			chunkFilename: "[name].[chunkhash].chunk.js"
 		},
@@ -173,7 +183,7 @@ module.exports = function() {
 		/**
 		 * Add additional plugins to the compiler.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#plugins
+		 * See: https://webpack.js.org/configuration/plugins/
 		 */
 		plugins: [
 			/**

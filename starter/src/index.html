@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- the base url is added by BaseHrefWebpackPlugin -->
+	<!-- all relative URLs will use that one as base URL: https://developer.mozilla.org/en/docs/Web/HTML/Element/base -->
+	<!-- necessary for HTML5 History API which adds support for pretty URLs (see app.module.ts) -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="<%= htmlWebpackPlugin.options.starkAppMetadata.description %>">
-  <!-- base url -->
-  <!-- all relative URLs will use this as base URL: https://developer.mozilla.org/en/docs/Web/HTML/Element/base -->
-  <!-- necessary for HTML5 History API which adds support for pretty URLs (see app.ts) -->
-  <base href="<%= htmlWebpackPlugin.options.starkAppConfig.baseUrl %>">
   <!--TODO uncomment this when HtmlElementsPlugin is enabled -->
   <!--< % if (webpackConfig.htmlElements.headTags) { % >-->
   <!-- Configured Head Tags  -->
