@@ -1,7 +1,5 @@
 import { Action, Store } from "@ngrx/store";
-import { Observable, empty } from "rxjs";
-// FIXME Is fromPromise still valid ?
-import { fromPromise } from "rxjs/internal/observable/fromPromise";
+import { Observable, empty, from } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
 
 import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";
@@ -91,7 +89,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 	public navigateTo(newState: string, params?: RawParams, options?: TransitionOptions): Observable<any> {
 		this.store.dispatch(new Navigate(this.getCurrentStateName(), newState, params, options));
-		return fromPromise(this.$state.go(newState, params, options));
+		return from(this.$state.go(newState, params, options));
 	}
 
 	public navigateToHome(params?: RawParams): Observable<any> {
@@ -124,7 +122,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 	public reload(): Observable<any> {
 		this.store.dispatch(new Reload(this.getCurrentStateName()));
-		const reload$: Observable<any> = fromPromise(this.$state.reload());
+		const reload$: Observable<any> = from(this.$state.reload());
 		// dispatch corresponding success action when transition is completed
 		reload$.subscribe(
 			() => this.store.dispatch(new ReloadSuccess(this.getCurrentStateName(), this.getCurrentStateParams())),

@@ -16,7 +16,7 @@ const rawKarmaConfig = {
 
 	// list of files / patterns to load in the browser
 	files: [
-		{ pattern: helpers.root(helpers.getAngularCliAppConfig()["architect"]["test"]["options"].main) },
+		{ pattern: helpers.root(helpers.getAngularCliAppConfig().architect.test.options.main) },
 		{ pattern: helpers.root("src/**/*.ts") },
 		{ pattern: helpers.root("src/**/*.html") }
 	],
@@ -46,7 +46,7 @@ const rawKarmaConfig = {
 				require("karma-typescript-angular2-transform") // see https://github.com/monounity/karma-typescript-angular2-transform
 			]
 		},
-		tsconfig: helpers.getAngularCliAppConfig()["architect"]["test"]["options"].tsConfig
+		tsconfig: helpers.getAngularCliAppConfig().architect.test.options.tsConfig
 	},
 
 	// IMPORTANT: define the custom instrumenter here to support the latest Istanbul API

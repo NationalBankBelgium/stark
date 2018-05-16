@@ -17,7 +17,6 @@ const commonData = require("./webpack.common-data.js");
  * Webpack Plugins
  */
 const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
-const HashedModuleIdsPlugin = require("webpack/lib/HashedModuleIdsPlugin");
 const PurifyPlugin = require("@angular-devkit/build-optimizer").PurifyPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -55,9 +54,6 @@ module.exports = function() {
 		HMR: false
 	});
 
-	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-	const rootDir = angularCliAppConfig.sourceRoot;
-
 	METADATA.environment = METADATA.E2E ? "e2e.prod" : "prod";
 
 	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
@@ -76,6 +72,7 @@ module.exports = function() {
 		mode: "production",
 
 		optimization: {
+			concatenateModules: true,
 			minimizer: [
 				/**
 				 * Plugin: UglifyJsPlugin
@@ -93,7 +90,14 @@ module.exports = function() {
 
 				new OptimizeCSSAssetsPlugin({})
 			],
-			concatenateModules: true
+			cacheGroups: {
+				styles: {
+					name: 'styles',
+					test: /\.css$/,
+					chunks: 'all',
+					enforce: true
+				}
+			}
 		},
 
 		/**
@@ -107,7 +111,7 @@ module.exports = function() {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-path
 			 */
-			path: helpers.root(angularCliAppConfig.architect.build.options.outputPath),
+			path: helpers.root(buildUtils.ANGULAR_APP_CONFIG.outputPath),
 
 			/**
 			 * This option specifies the public URL of the output directory when referenced in a browser.
@@ -116,7 +120,7 @@ module.exports = function() {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-publicpath
 			 */
-			publicPath: angularCliAppConfig.architect.build.options.deployUrl,
+			publicPath: buildUtils.ANGULAR_APP_CONFIG.deployUrl,
 
 			/**
 			 * Specifies the name of each output file on disk.
@@ -151,7 +155,7 @@ module.exports = function() {
 				{
 					test: /\.css$/,
 					use: [MiniCssExtractPlugin.loader, "css-loader"],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -160,7 +164,7 @@ module.exports = function() {
 				{
 					test: /\.scss$/,
 					use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -190,7 +194,7 @@ module.exports = function() {
 							}
 						}
 					],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				}
 			]
 		},
@@ -226,6 +230,7 @@ module.exports = function() {
 			 * Description: Extracts imported CSS files into external stylesheet
 			 *
 			 * See: https://github.com/webpack-contrib/mini-css-extract-plugin
+			 * See: https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/731
 			 */
 			new MiniCssExtractPlugin({
 				filename: "[name].[contenthash].css",

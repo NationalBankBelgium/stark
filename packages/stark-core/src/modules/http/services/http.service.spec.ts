@@ -1098,7 +1098,7 @@ describe("Service: StarkHttpService", () => {
 					() => {
 						fail("The 'next' function should not be called in case of error");
 					},
-					(error: any) => {
+					(error: string) => {
 						expect(error).toContain("Unknown request type");
 					},
 					() => {
@@ -2012,7 +2012,7 @@ describe("Service: StarkHttpService", () => {
 					() => {
 						fail("The 'next' function should not be called in case of error");
 					},
-					(error: any) => {
+					(error: string) => {
 						expect(error).toContain("Unknown request type");
 					},
 					() => {

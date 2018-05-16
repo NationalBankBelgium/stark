@@ -17,12 +17,12 @@ function getAngularCliAppConfig() {
 	if (fs.existsSync(applicationAngularCliConfigPath)) {
 		angularCliConfigPath = applicationAngularCliConfigPath;
 	} else {
-		throw new Error(".angular-cli.json is not present. Please add this at the root your project because stark-build needs this.");
+		throw new Error("angular.json is not present. Please add this at the root your project because stark-build needs this.");
 	}
 
 	const angularCliConfig = require(angularCliConfigPath);
-	if (angularCliConfig["defaultProject"] && angularCliConfig["projects"][angularCliConfig["defaultProject"]]) {
-		return angularCliConfig["projects"][angularCliConfig["defaultProject"]];
+	if (angularCliConfig.defaultProject && angularCliConfig.projects[angularCliConfig.defaultProject]) {
+		return angularCliConfig.projects[angularCliConfig.defaultProject];
 	} else {
 		throw new Error("Angular-cli config apps is wrong. Please adapt it to follow Angular CLI way.");
 	}

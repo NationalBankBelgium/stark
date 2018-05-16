@@ -62,9 +62,6 @@ module.exports = function(env) {
 		// "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
 	];
 
-	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-	const rootDir = angularCliAppConfig.sourceRoot;
-
 	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
 		 * Tell webpack which environment the application is targeting.
@@ -90,7 +87,7 @@ module.exports = function(env) {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-path
 			 */
-			path: helpers.root(angularCliAppConfig.architect.build.options.outputPath),
+			path: helpers.root(buildUtils.ANGULAR_APP_CONFIG.outputPath),
 
 			/**
 			 * This option specifies the public URL of the output directory when referenced in a browser.
@@ -99,7 +96,7 @@ module.exports = function(env) {
 			 *
 			 * See: https://webpack.js.org/configuration/output/#output-publicpath
 			 */
-			publicPath: angularCliAppConfig.architect.build.options.deployUrl,
+			publicPath: buildUtils.ANGULAR_APP_CONFIG.deployUrl,
 
 			/**
 			 * Specifies the name of each output file on disk.
@@ -144,7 +141,7 @@ module.exports = function(env) {
 						},
 						"css-loader"
 					],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -159,7 +156,7 @@ module.exports = function(env) {
 						"css-loader",
 						"sass-loader"
 					],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -191,7 +188,7 @@ module.exports = function(env) {
 							}
 						}
 					],
-					include: [helpers.root(rootDir, "styles")]
+					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				}
 			]
 		},

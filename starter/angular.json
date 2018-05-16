@@ -39,7 +39,9 @@
               }
             ],
             "styles": ["src/styles.css"],
-            "scripts": []
+            "scripts": [],
+            "deployUrl": "",
+            "baseHref": "/"
           },
           "configurations": {
             "hmr": {

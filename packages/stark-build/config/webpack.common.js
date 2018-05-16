@@ -13,11 +13,11 @@ const SplitChunksPlugin = require("webpack/lib/optimize/SplitChunksPlugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BaseHrefWebpackPlugin = require("base-href-webpack-plugin").BaseHrefWebpackPlugin;
+const HashedModuleIdsPlugin = require("webpack/lib/HashedModuleIdsPlugin");
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const { AngularCompilerPlugin } = require("@ngtools/webpack");
 const AngularNamedLazyChunksWebpackPlugin = require("angular-named-lazy-chunks-webpack-plugin");
-const WebpackSHAHash = require("webpack-sha-hash");
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const PurifyPlugin = require("@angular-devkit/build-optimizer").PurifyPlugin;
 
@@ -65,9 +65,6 @@ module.exports = function(options) {
 			sourceMap: true // TODO: apply based on tsConfig value?
 		}
 	};
-
-	const angularCliAppConfig = buildUtils.getAngularCliAppConfig();
-	const rootDir = angularCliAppConfig.sourceRoot;
 
 	return {
 		/**
@@ -127,7 +124,7 @@ module.exports = function(options) {
 			/**
 			 * An array of directory names to be resolved to the current directory
 			 */
-			modules: [helpers.root(rootDir), helpers.root("node_modules")],
+			modules: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot), helpers.root("node_modules")],
 
 			/**
 			 * Add support for pipeable operators.
@@ -212,7 +209,7 @@ module.exports = function(options) {
 				{
 					test: /\.css$/,
 					use: ["to-string-loader", "css-loader"],
-					exclude: [helpers.root(rootDir, "styles")]
+					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -224,7 +221,7 @@ module.exports = function(options) {
 				{
 					test: /\.scss$/,
 					use: ["to-string-loader", "css-loader", "sass-loader"],
-					exclude: [helpers.root(rootDir, "styles")]
+					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -256,7 +253,7 @@ module.exports = function(options) {
 							}
 						}
 					],
-					exclude: [helpers.root(rootDir, "styles")]
+					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
 				/**
@@ -419,11 +416,16 @@ module.exports = function(options) {
 			),
 
 			/**
-			 * Plugin: WebpackSHAHash
-			 * Description: Generate SHA content hashes
-			 * See: https://www.npmjs.com/package/webpack-sha-hash
+			 * Plugin: HashedModuleIdsPlugin
+			 * Description: This plugin will cause hashes to be based on the relative path of the module, 
+			 * generating a four character string as the module id
+			 * See: https://webpack.js.org/plugins/hashed-module-ids-plugin/
 			 */
-			new WebpackSHAHash(),
+			new HashedModuleIdsPlugin({
+				hashFunction: 'sha256',
+				hashDigest: 'hex',
+				hashDigestLength: 20
+			}),
 
 			/**
 			 * Plugin: ContextReplacementPlugin
@@ -471,7 +473,7 @@ module.exports = function(options) {
 			 *
 			 * See: https://github.com/dzonatan/base-href-webpack-plugin
 			 */
-			new BaseHrefWebpackPlugin({ baseHref: angularCliAppConfig.baseHref }),
+			new BaseHrefWebpackPlugin({ baseHref: buildUtils.ANGULAR_APP_CONFIG.baseHref }),
 
 			/**
 			 * Plugin: ScriptExtHtmlWebpackPlugin

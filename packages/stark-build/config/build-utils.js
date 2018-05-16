@@ -4,6 +4,15 @@ const fs = require("fs");
 const helpers = require("./helpers");
 const ngCliUtils = require("./ng-cli-utils");
 
+const _getAngularCliAppConfig = getAngularCliAppConfig();
+const ANGULAR_APP_CONFIG = {
+	config: _getAngularCliAppConfig,
+	deployUrl: _getAngularCliAppConfig.architect.build.options.deployUrl || "",
+	baseHref: _getAngularCliAppConfig.architect.build.options.baseHref || "/",
+	sourceRoot: _getAngularCliAppConfig.sourceRoot,
+	outputPath: _getAngularCliAppConfig.architect.build.options.outputPath
+};
+
 const DEFAULT_METADATA = {
 	title: "Stark Application by @NationalBankBelgium",
 	baseUrl: "/",
@@ -12,7 +21,7 @@ const DEFAULT_METADATA = {
 	AOT: process.env.BUILD_AOT || helpers.hasNpmFlag("aot"),
 	E2E: !!process.env.BUILD_E2E,
 	WATCH: helpers.hasProcessFlag("watch"),
-	tsConfigPath: getAngularCliAppConfig()["architect"]["build"]["options"].tsConfig,
+	tsConfigPath: ANGULAR_APP_CONFIG.config.architect.build.options.tsConfig,
 	environment: ""
 };
 
@@ -29,11 +38,20 @@ function readTsConfig(tsConfigPath) {
 	return ts.parseJsonConfigFileContent(configResult.config, ts.sys, path.dirname(tsConfigPath), undefined, tsConfigPath);
 }
 
+/**
+ * Method which returns the path of the environment file of the received environment.
+ * The method reads the content of angular.json for getting the path (read with value or replace in "fileReplacements" of environment.
+ * 
+ * See: https://github.com/angular/angular-cli/wiki/angular-workspace
+ * 
+ * @param environment
+ * @returns {*}
+ */
 function getEnvironmentFile(environment) {
 	if (typeof environment === "string") {
 		let fileName = helpers.root("src/environments/environment.ts");
 		let fileNameAlt;
-		let angularCliEnvConfig = getAngularCliAppConfig()["architect"]["build"]["configurations"][environment];
+		let angularCliEnvConfig = ANGULAR_APP_CONFIG.config.architect.build.configurations.environment;
 
 		if (angularCliEnvConfig && angularCliEnvConfig.fileReplacements) {
 			fileName = helpers.root(angularCliEnvConfig.fileReplacements.with);
@@ -86,12 +104,23 @@ function getNbbAssetsConfig() {
 			const packageCliConfig = require(ngCliConfigPath);
 			const cliConfig = ngCliUtils.validateAngularCLIConfig(packageCliConfig);
 			if (cliConfig) {
-				let cliProjectConfig;
-				if (cliConfig["defaultProject"] && (cliProjectConfig = cliConfig["projects"][cliConfig["defaultProject"]])) {
-					customAssets = [
-						...customAssets,
-						...getCopyWebpackPluginConfig(cliProjectConfig["architect"]["build"]["options"].assets)
-					];
+				if (cliConfig.defaultProject) {
+					// Because of angular.json architecture, we have to get the defaultProject value for reading, inside
+					// "projects" object the content of the project.
+					// ie: {
+					//       "defaultProject": "stark-ui",
+					//       "projects": {
+					//         "stark-ui": { ... }
+					//       }
+					//     }
+					let cliProjectConfig = cliConfig.projects[cliConfig.defaultProject];
+					
+					if (cliProjectConfig) {
+						customAssets = [
+							...customAssets,
+							...getCopyWebpackPluginConfig(cliProjectConfig.architect.build.options.assets)
+						];
+					}
 				}
 			}
 		}
@@ -102,17 +131,18 @@ function getNbbAssetsConfig() {
 
 /**
  * Returns assets set in angular.json file of the project.
+ * See: https://github.com/angular/angular-cli/wiki/angular-workspace
  */
 function getApplicationAssetsConfig() {
-	const appConfig = getAngularCliAppConfig();
+	const appConfig = ANGULAR_APP_CONFIG.config;
 
 	if (
-		appConfig["architect"] &&
-		appConfig["architect"]["build"] &&
-		appConfig["architect"]["build"]["options"] &&
-		appConfig["architect"]["build"]["options"]["assets"]
+		appConfig.architect &&
+		appConfig.architect.build &&
+		appConfig.architect.build.options &&
+		appConfig.architect.build.options.assets
 	) {
-		return getCopyWebpackPluginConfig(appConfig["architect"]["build"]["options"]["assets"]);
+		return getCopyWebpackPluginConfig(appConfig.architect.build.options.assets);
 	}
 
 	return [];
@@ -124,8 +154,8 @@ function getAngularCliAppConfig() {
 		const angularCliConfig = require(applicationAngularCliConfigPath);
 		const cliConfig = ngCliUtils.validateAngularCLIConfig(angularCliConfig);
 		if (cliConfig) {
-			if (cliConfig["defaultProject"] && cliConfig["projects"][cliConfig["defaultProject"]]) {
-				return cliConfig["projects"][cliConfig["defaultProject"]];
+			if (cliConfig.defaultProject && cliConfig.projects[cliConfig.defaultProject]) {
+				return cliConfig.projects[cliConfig.defaultProject];
 			} else {
 				throw new Error("Angular-cli config apps is wrong. Please adapt it to follow Angular CLI way.");
 			}
@@ -143,7 +173,7 @@ function getAngularCliAppConfig() {
  * This code is coming from @angular/cli/models/webpack-configs/common.js
  */
 function getCopyWebpackPluginConfig(assets) {
-	const appConfig = getAngularCliAppConfig();
+	const appConfig = ANGULAR_APP_CONFIG.config;
 
 	const projectRoot = helpers.root(appConfig.root);
 	const appRoot = helpers.root(appConfig.sourceRoot);
@@ -160,7 +190,7 @@ function getCopyWebpackPluginConfig(assets) {
 		// specify a configuration flag.
 		// Also prevent writing outside the project path. That is not overridable.
 		// For info: Comparing to implementation of Angular, "buildOptions.outputPath" has been replaced by "appConfig.outDir"
-		const absoluteOutputPath = path.resolve(projectRoot, appConfig["architect"]["build"]["options"]["outputPath"]);
+		const absoluteOutputPath = path.resolve(projectRoot, appConfig.architect.build.options.outputPath);
 		const absoluteAssetOutput = path.resolve(absoluteOutputPath, asset.output);
 		const outputRelativeOutput = path.relative(absoluteOutputPath, absoluteAssetOutput);
 		if (outputRelativeOutput.startsWith("..") || path.isAbsolute(outputRelativeOutput)) {
@@ -202,6 +232,7 @@ function getCopyWebpackPluginConfig(assets) {
 	});
 }
 
+exports.ANGULAR_APP_CONFIG = ANGULAR_APP_CONFIG;
 exports.DEFAULT_METADATA = DEFAULT_METADATA;
 exports.supportES2015 = supportES2015;
 exports.readTsConfig = readTsConfig;
@@ -209,4 +240,3 @@ exports.getEnvironmentFile = getEnvironmentFile;
 exports.rxjsAlias = rxjsAlias;
 exports.getNbbAssetsConfig = getNbbAssetsConfig;
 exports.getApplicationAssetsConfig = getApplicationAssetsConfig;
-exports.getAngularCliAppConfig = getAngularCliAppConfig;
