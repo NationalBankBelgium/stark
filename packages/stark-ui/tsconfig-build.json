@@ -43,6 +43,7 @@
     "allowEmptyCodegenFiles": false,
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
+    "enableResourceInlining": true,
     "flatModuleOutFile": "stark-ui.js",
     "flatModuleId": "@nationalbankbelgium/stark-ui"
   }
