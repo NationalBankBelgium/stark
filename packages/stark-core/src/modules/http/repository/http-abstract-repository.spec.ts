@@ -12,7 +12,7 @@ import {
 import { StarkHttpService } from "../services/http.service.intf";
 import { MockStarkHttpService } from "../testing";
 import { MockStarkLoggingService } from "../../logging/testing";
-import { StarkLoggingService } from "../../logging";
+import { StarkLoggingService } from "../../logging/services";
 import { StarkHttpRequestBuilderImpl } from "../builder";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import createSpyObj = jasmine.createSpyObj;

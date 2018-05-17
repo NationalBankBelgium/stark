@@ -21,8 +21,8 @@ import {
 	StarkSingleItemResponseWrapper,
 	StarkSingleItemResponseWrapperImpl
 } from "../entities";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging";
-import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
+import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 
 /**
  * @ngdoc service

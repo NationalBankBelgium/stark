@@ -31,11 +31,11 @@ import {
 
 import { StarkHttpHeaders, StarkSortOrder } from "../constants";
 import { StarkHttpStatusCodes } from "../enumerators";
-import { StarkLoggingService } from "../../logging";
+import { StarkLoggingService } from "../../logging/services";
+import { StarkSessionService } from "../../session/services";
 import { MockStarkLoggingService } from "../../logging/testing";
 import { MockStarkSessionService } from "../../session/testing";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
-import { StarkSessionService } from "../../session";
 
 // FIXME: re-enable this TSLINT rule and refactor these tests to try to reduce the duplication of function as much as possible
 /* tslint:disable:no-identical-functions */

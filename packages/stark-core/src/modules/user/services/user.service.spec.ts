@@ -23,6 +23,7 @@ import { MockStarkSessionService } from "../../session/testing";
 import { StarkUserRepository } from "../repository";
 import {
 	StarkHttpError,
+	StarkHttpErrorImpl,
 	StarkHttpErrorWrapper,
 	StarkHttpErrorWrapperImpl,
 	StarkSingleItemResponseWrapper,
@@ -31,7 +32,6 @@ import {
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkSessionService } from "../../session/services";
 import { HttpErrorResponse } from "@angular/common/http";
-import { StarkHttpErrorImpl } from "../../http";
 import { StarkMockData } from "../../../configuration/entities/mock-data";
 import { StarkCoreApplicationState } from "../../../common/store";
 

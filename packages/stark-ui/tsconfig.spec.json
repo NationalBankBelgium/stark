@@ -1,24 +1,12 @@
 {
   "extends": "./tsconfig-build.json",
   "compilerOptions": {
-    "module": "commonjs"
+    "module": "commonjs",
+    "paths": {
+      "@nationalbankbelgium/stark-core/testing": ["../../dist/packages/stark-core/testing"],
+      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"]
+    }
   },
   "files": null,
-  "include": ["**/*.ts"],
-
-  // Unfortunately, all those options have to be written in every tsconfig file
-  "angularCompilerOptions": {
-    "generateCodeForLibraries": true,
-    "skipMetadataEmit": false,
-    "strictMetadataEmit": false,
-    "strictInjectionParameters": true,
-    "fullTemplateTypeCheck": true,
-    "annotationsAs": "static fields",
-    "enableLegacyTemplate": false,
-    "preserveWhitespaces": false,
-    "allowEmptyCodegenFiles": false,
-    "annotateForClosureCompiler": true,
-    "skipTemplateCodegen": true,
-    "enableResourceInlining": true
-  }
+  "include": ["**/*.ts"]
 }

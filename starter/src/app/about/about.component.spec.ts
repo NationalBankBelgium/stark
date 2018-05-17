@@ -2,7 +2,6 @@ import { ActivatedRoute, Data } from "@angular/router";
 import { inject, TestBed } from "@angular/core/testing";
 import { StoreModule } from "@ngrx/store";
 import {
-	MockStarkLoggingService,
 	STARK_APP_CONFIG,
 	StarkApplicationConfig,
 	StarkBackend,
@@ -10,6 +9,7 @@ import {
 	StarkLoggingService,
 	STARK_LOGGING_SERVICE
 } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 
 /**
  * Load the implementations that should be tested.

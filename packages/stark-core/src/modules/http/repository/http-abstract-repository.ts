@@ -12,7 +12,7 @@ import {
 	StarkHttpUpdateRequestParams
 } from "../builder";
 import { StarkHttpService } from "../services/http.service.intf";
-import { StarkLoggingService } from "../../logging";
+import { StarkLoggingService } from "../../logging/services";
 import { StarkSerializable } from "../../../serialization";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 

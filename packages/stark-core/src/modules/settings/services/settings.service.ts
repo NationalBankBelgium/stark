@@ -14,7 +14,7 @@ import {
 } from "../../../configuration/entities";
 import { StarkUser } from "../../user/entities";
 import { StarkCoreApplicationState } from "../../../common/store";
-import { selectStarkUser } from "../../user";
+import { selectStarkUser } from "../../user/reducers";
 
 /**
  * @ngdoc service
