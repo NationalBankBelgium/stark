@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stark-start-monitor
+spec:
+  selector:
+    app: stark-start-monitor
+    tier: backend
+  ports:
+  - protocol: "TCP"
+    name : site
+    port: 3000
+    targetPort: 3000
+  - protocol: "TCP"
+    name : webpack
+    port: 3030
+    targetPort: 3030
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stark-start-monitor
+spec:
+  selector:
+    matchLabels:
+      app: stark-start-monitor
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stark-start-monitor
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: stark-start-monitor
+          image: 'bourrierf/stark-start-monitor'
+          ports:
+            - name: site
+              containerPort: 3000
+            - name: webpack
+              containerPort: 3030

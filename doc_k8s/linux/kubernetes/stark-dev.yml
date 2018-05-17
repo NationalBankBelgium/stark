@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: start-dev
+spec:
+  selector:
+    app: stark-dev
+    tier: backend
+  ports:
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stark-dev
+spec:
+  selector:
+    matchLabels:
+      app: stark-dev
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stark-dev
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: stark-dev
+          image: 'bourrierf/stark-dev'
+          ports:
+            - name: http
+              containerPort: 8080

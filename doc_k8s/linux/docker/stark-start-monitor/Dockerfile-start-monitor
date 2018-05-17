@@ -1,0 +1,26 @@
+FROM node:latest AS build-stage
+
+MAINTAINER NationalBankBelgium - BOURRIER Francois
+
+WORKDIR /usr/projet/
+
+RUN apt-get update -y -q && apt-get install git-sh rsync -y && apt-get upgrade -y -q
+
+RUN git clone https://github.com/NationalBankBelgium/stark.git .
+
+RUN npm install
+
+RUN npm run install:all
+###########
+# STAGE 2 #
+###########
+
+FROM node:latest AS start-stage
+
+WORKDIR /usr/projet/
+
+COPY --from=build-stage /usr/projet/starter .
+
+ENV HOST=0.0.0.0
+
+CMD ["npm","run", "start:monitor"]

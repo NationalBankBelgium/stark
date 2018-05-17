@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: stark-dev-monitor
+spec:
+  scaleTargetRef:
+    kind: ReplicaSet
+    name: stark-dev-monitor
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 25
+  # 25% correspond à 0.500 d'utilisation du CPU car 2 CPU = 100%
+  # 10% correspond à 0.200 de CPU
