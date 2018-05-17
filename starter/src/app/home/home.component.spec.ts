@@ -3,8 +3,6 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { StoreModule } from "@ngrx/store";
 import {
-	MockStarkHttpService,
-	MockStarkLoggingService,
 	STARK_APP_CONFIG,
 	StarkApplicationConfig,
 	StarkBackend,
@@ -13,6 +11,7 @@ import {
 	STARK_LOGGING_SERVICE,
 	STARK_HTTP_SERVICE
 } from "@nationalbankbelgium/stark-core";
+import { MockStarkHttpService, MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 /**
  * Load the implementations that should be tested.
  */

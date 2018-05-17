@@ -12,7 +12,7 @@ import {
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkSettingsServiceImpl } from "./settings.service";
 import { SetPreferredLanguage } from "../actions";
-import { StarkUser } from "../../user";
+import { StarkUser } from "../../user/entities";
 import { of } from "rxjs";
 import Spy = jasmine.Spy;
 

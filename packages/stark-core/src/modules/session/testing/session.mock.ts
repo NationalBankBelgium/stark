@@ -1,4 +1,4 @@
-import { StarkHttpHeaders } from "../../http";
+import { StarkHttpHeaders } from "../../http/constants";
 import { StarkSessionService } from "../services";
 import { Observable } from "rxjs";
 

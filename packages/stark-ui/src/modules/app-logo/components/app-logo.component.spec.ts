@@ -1,11 +1,7 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import {
-	MockStarkLoggingService,
-	MockStarkRoutingService,
-	STARK_LOGGING_SERVICE,
-	STARK_ROUTING_SERVICE
-} from "@nationalbankbelgium/stark-core";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppLogoComponent } from "./app-logo.component";
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;

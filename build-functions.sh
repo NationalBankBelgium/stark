@@ -273,7 +273,7 @@ N="
     BASE_DIR=$(basename "${DIR}")
     # Skip over directories that are not nested entry points
     [[ -e ${DIR}/tsconfig-build.json && "${BASE_DIR}" != "integrationtest" ]] || continue
-    compilePackage ${DIR} ${2}/${BASE_DIR} ${3} ${4}
+    compilePackage ${DIR} ${2}/${BASE_DIR} ${3} ${4:-}
   done
 }
 
