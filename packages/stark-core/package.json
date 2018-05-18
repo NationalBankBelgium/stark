@@ -31,29 +31,29 @@
     "@ngrx/effects": "5.2.0",
     "@ngrx/store": "5.2.0",
     "@ngx-translate/core": "10.0.1",
-    "@types/core-js": "0.9.46",
-    "@types/node": "6.0.106",
+    "@types/node": "8.10.15",
     "@types/uuid": "3.4.3",
     "@uirouter/angular": "2.0.0",
     "cerialize": "0.1.18",
     "class-validator": "0.7.3",
-    "core-js": "2.5.5",
     "deep-freeze-strict": "1.1.1",
     "ibantools": "2.0.0",
     "moment": "2.22.1",
-    "uuid": "3.2.1",
-    "zone.js": "0.8.26"
+    "uuid": "3.2.1"
   },
   "devDependencies": {
     "@nationalbankbelgium/stark-testing": "../stark-testing"
   },
   "peerDependencies": {
     "@angular/common": "6.x",
+    "@angular/compiler": "6.x",
     "@angular/core": "6.x",
     "@angular/router": "6.x",
     "rxjs": "6.x",
     "rxjs-compat": "6.x",
-    "typescript": ">=2.7.2 && <2.8.0"
+    "tslib": "~1.9.1",
+    "typescript": ">=2.7.2 && <2.8.0",
+    "zone.js": "~0.8.26"
   },
   "scripts": {
     "clean": "npx rimraf dist",
