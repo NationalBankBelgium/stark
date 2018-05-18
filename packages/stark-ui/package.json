@@ -45,6 +45,7 @@
     "clean": "npx rimraf dist",
     "clean:modules": "npx rimraf ./node_modules package-lock.json",
     "clean:all": "npm run clean && npm run clean:modules",
+    "docs": "node ../../node_modules/@compodoc/compodoc/bin/index-cli src --theme material --tsconfig ../tsconfig.json --output ../../reports/api-docs/stark-ui",
     "ngc": "node ./../node_modules/@angular/compiler-cli/src/main.js -p tsconfig-build.json",
     "lint": "node ../../node_modules/tslint/bin/tslint --config tslint.json --project ./tsconfig.spec.json --format codeFrame",
     "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start ./karma.conf.typescript.js",
