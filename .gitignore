@@ -1,7 +1,15 @@
+starter/
+
 # Build
 .tmp/
 /.tmp/
 tmp/
+dist/
+packages/
+
+# npm
+node_modules/
+package-lock.json
 
 # Bak
 *.bak
