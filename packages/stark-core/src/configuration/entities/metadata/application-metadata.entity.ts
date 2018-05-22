@@ -7,39 +7,41 @@ import { StarkLanguage } from "../language/language.entity.intf";
 import { StarkLanguages } from "../language/language.constants";
 
 export class StarkApplicationMetadataImpl implements StarkApplicationMetadata {
-	@IsNotEmpty()
-	@IsString()
+	// FIXME: properties of the group "temp" are not used yet. Will they still be used?
+
+	@IsNotEmpty({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public name: string;
 
-	@IsNotEmpty()
-	@IsString()
+	@IsNotEmpty({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public description: string;
 
-	@IsNotEmpty()
-	@IsString()
+	@IsNotEmpty({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public version: string;
 
-	@IsNotEmpty()
-	@IsString()
+	@IsNotEmpty({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public environment: string;
 
-	@IsNotEmpty()
-	@IsString()
+	@IsNotEmpty({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public buildTimestamp: string;
 
-	@IsNotEmpty()
-	@IsString()
+	@IsNotEmpty({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public deploymentTimestamp: string;
 
-	@IsDefined()
-	@ArrayNotEmpty()
-	@ValidateNested({ each: true }) // validate each item of the array
+	@IsDefined({ groups: ["settings"] })
+	@ArrayNotEmpty({ groups: ["settings"] })
+	@ValidateNested({ groups: ["settings"], each: true }) // validate each item of the array
 	public supportedLanguages: StarkLanguageImpl[] = [];
 
 	/**

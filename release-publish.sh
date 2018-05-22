@@ -120,12 +120,15 @@ if [[ ${TRAVIS:-} ]]; then
     TRAVIS_TAG=""
   fi
   
-  if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
+  if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
+    logTrace "Not publishing because this is a build triggered for a pull request" 1
+    exit 0;
+  elif [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
     logTrace "Nightly build initiated by Travis cron job" 1
     NIGHTLY_BUILD=true
   elif [[ ${TRAVIS_TAG} == "" ]]; then
-      logTrace "Not publishing because this is not a build triggered for a tag" 1
-      exit 0;
+    logTrace "Not publishing because this is not a build triggered for a tag" 1
+    exit 0;
   else
     logInfo "This build has been triggered for a tag" 
   fi

@@ -1,25 +1,24 @@
 import uuid from "uuid";
 
 import { Serialize } from "cerialize";
-import { validateSync } from "class-validator";
 
-import { Store, select } from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 
 import { Inject, Injectable } from "@angular/core";
 
 import { StarkLoggingService, starkLoggingServiceName } from "./logging.service.intf";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../../configuration/entities/application";
+import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
 import { StarkBackend } from "../../http/entities/backend";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
 // import {StarkXSRFService, starkXSRFServiceName} from "../../xsrf";
-import { StarkValidationErrorsUtil } from "../../../util/validation-errors.util";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
-import { LogMessage, FlushLogMessages } from "../actions";
+import { FlushLogMessages, LogMessage } from "../actions";
 import { selectStarkLogging } from "../reducers";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
+import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
 const _noop: Function = require("lodash/noop");
 
@@ -47,6 +46,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	private starkLogging: StarkLogging;
 	/** @internal */
 	private _correlationId: string;
+
 	// FIXME: uncomment these lines once XSRF Service is implemented
 	public constructor(
 		private store: Store<StarkCoreApplicationState>,
@@ -54,6 +54,9 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		private appConfig: StarkApplicationConfig /*,
 					   @Inject(starkXSRFServiceName) private xsrfService: StarkXSRFService*/
 	) {
+		// ensuring that the app config is valid before doing anything
+		StarkConfigurationUtil.validateConfig(this.appConfig, ["logging", "http"], starkLoggingServiceName);
+
 		this.isPersisting = false;
 		this.retryCounter = 0;
 		this.consoleDebug = this.getConsole("debug");
@@ -62,12 +65,6 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		this.consoleError = this.getConsole("error");
 
 		if (!this.appConfig.loggingFlushDisabled) {
-			// ensuring that the app config is valid before configuring the automatic logging flush
-			StarkValidationErrorsUtil.throwOnError(
-				validateSync(this.appConfig),
-				starkLoggingServiceName + ": " + STARK_APP_CONFIG.toString() + " constant is not valid."
-			);
-
 			this.backend = this.appConfig.getBackend("logging");
 			this.logPersistSize = <number>this.appConfig.loggingFlushPersistSize;
 			this.logUrl = this.backend.url + "/" + this.appConfig.loggingFlushResourceName;

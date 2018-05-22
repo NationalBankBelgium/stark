@@ -6,11 +6,10 @@ import { Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
 import { HookMatchCriteria, Predicate } from "@uirouter/core";
 
-import { Observable, Subject, Subscriber, defer, of, throwError } from "rxjs";
+import { defer, Observable, of, Subject, Subscriber, throwError } from "rxjs";
 import { take } from "rxjs/operators";
 
 import {
-	SessionTimeoutCountdownFinish,
 	ChangeLanguage,
 	ChangeLanguageFailure,
 	ChangeLanguageSuccess,
@@ -19,6 +18,7 @@ import {
 	InitializeSession,
 	InitializeSessionSuccess,
 	SessionLogout,
+	SessionTimeoutCountdownFinish,
 	SessionTimeoutCountdownStart,
 	SessionTimeoutCountdownStop,
 	UserActivityTrackingPause,
@@ -33,9 +33,9 @@ import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
 import { MockStarkRoutingService } from "../../routing/testing";
 import { StarkHttpHeaders } from "../../http/constants";
-import Spy = jasmine.Spy;
 import { starkSessionExpiredStateName } from "../../../common/routes";
 import { StarkCoreApplicationState } from "../../../common/store";
+import Spy = jasmine.Spy;
 
 describe("Service: StarkSessionService", () => {
 	let mockStore: Store<StarkCoreApplicationState>;
@@ -63,26 +63,7 @@ describe("Service: StarkSessionService", () => {
 		appConfig.keepAliveInterval = 45;
 		appConfig.keepAliveUrl = "http://my.backend/keepalive";
 		appConfig.logoutUrl = "http://localhost:5000/logout";
-		appConfig.rootStateUrl = "";
-		appConfig.rootStateName = "";
-		appConfig.homeStateName = "";
-		appConfig.errorStateName = "";
-		appConfig.angularDebugInfoEnabled = false;
-		appConfig.debugLoggingEnabled = false;
-		appConfig.loggingFlushDisabled = true;
-		appConfig.defaultLanguage = "fr";
-		appConfig.baseUrl = "/";
 		appConfig.publicApp = false;
-		appConfig.routerLoggingEnabled = false;
-		appConfig.addBackend({
-			name: "logging",
-			url: "http://localhost:5000",
-			authenticationType: 1,
-			fakePreAuthenticationEnabled: true,
-			fakePreAuthenticationRolePrefix: "",
-			loginResource: "logging",
-			token: ""
-		});
 
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
 		mockRoutingService = new MockStarkRoutingService();
@@ -122,66 +103,48 @@ describe("Service: StarkSessionService", () => {
 	});
 
 	describe("on initialization", () => {
-		it("should throw an error in case the session timeout or the warning period in the app config are invalid", () => {
-			appConfig.sessionTimeout = <any>undefined;
-			appConfig.sessionTimeoutWarningPeriod = 13;
-			expect(
-				() =>
-					new SessionServiceHelper(
-						mockStore,
-						mockLogger,
-						mockRoutingService,
-						appConfig,
-						mockIdleService,
-						mockInjectorService,
-						mockTranslateService
-					)
-			).toThrowError(/sessionTimeout/);
+		it("should throw an error in case the session timeout in the app config is invalid", () => {
+			const invalidSessionTimeoutValues: number[] = [<any>undefined, -1];
 
-			appConfig.sessionTimeout = 123;
-			appConfig.sessionTimeoutWarningPeriod = <any>undefined;
-			expect(
-				() =>
-					new SessionServiceHelper(
-						mockStore,
-						mockLogger,
-						mockRoutingService,
-						appConfig,
-						mockIdleService,
-						mockInjectorService,
-						mockTranslateService
-					)
-			).toThrowError(/sessionTimeoutWarning/);
+			for (const invalidSessionTimeout of invalidSessionTimeoutValues) {
+				appConfig.sessionTimeout = invalidSessionTimeout;
+				appConfig.sessionTimeoutWarningPeriod = 13;
 
-			appConfig.sessionTimeout = -1;
-			appConfig.sessionTimeoutWarningPeriod = 13;
-			expect(
-				() =>
-					new SessionServiceHelper(
-						mockStore,
-						mockLogger,
-						mockRoutingService,
-						appConfig,
-						mockIdleService,
-						mockInjectorService,
-						mockTranslateService
-					)
-			).toThrowError(/sessionTimeout/);
+				expect(
+					() =>
+						new SessionServiceHelper(
+							mockStore,
+							mockLogger,
+							mockRoutingService,
+							appConfig,
+							mockIdleService,
+							mockInjectorService,
+							mockTranslateService
+						)
+				).toThrowError(/sessionTimeout/);
+			}
+		});
 
-			appConfig.sessionTimeout = 123;
-			appConfig.sessionTimeoutWarningPeriod = -1;
-			expect(
-				() =>
-					new SessionServiceHelper(
-						mockStore,
-						mockLogger,
-						mockRoutingService,
-						appConfig,
-						mockIdleService,
-						mockInjectorService,
-						mockTranslateService
-					)
-			).toThrowError(/sessionTimeoutWarning/);
+		it("should throw an error in case the warning period in the app config is invalid", () => {
+			const invalidSessionTimeoutWarningPeriodValues: number[] = [<any>undefined, -1];
+
+			for (const invalidSessionTimeoutWarningPeriod of invalidSessionTimeoutWarningPeriodValues) {
+				appConfig.sessionTimeout = 123;
+				appConfig.sessionTimeoutWarningPeriod = invalidSessionTimeoutWarningPeriod;
+
+				expect(
+					() =>
+						new SessionServiceHelper(
+							mockStore,
+							mockLogger,
+							mockRoutingService,
+							appConfig,
+							mockIdleService,
+							mockInjectorService,
+							mockTranslateService
+						)
+				).toThrowError(/sessionTimeoutWarning/);
+			}
 		});
 	});
 

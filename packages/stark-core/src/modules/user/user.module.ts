@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
-import { StarkUserServiceImpl, STARK_USER_SERVICE } from "./services";
+import { STARK_USER_SERVICE, StarkUserServiceImpl } from "./services";
+import { STARK_USER_REPOSITORY, StarkUserRepositoryImpl } from "./repository";
 
 @NgModule({})
 export class StarkUserModule {
@@ -9,7 +10,10 @@ export class StarkUserModule {
 	public static forRoot(): ModuleWithProviders {
 		return {
 			ngModule: StarkUserModule,
-			providers: [{ provide: STARK_USER_SERVICE, useClass: StarkUserServiceImpl }]
+			providers: [
+				{ provide: STARK_USER_SERVICE, useClass: StarkUserServiceImpl },
+				{ provide: STARK_USER_REPOSITORY, useClass: StarkUserRepositoryImpl }
+			]
 		};
 	}
 

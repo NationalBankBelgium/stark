@@ -125,32 +125,32 @@ export interface StarkApplicationConfig {
 	publicApp: boolean;
 
 	/**
-	 * Backends that the application will interact to.
+	 * Map containing the different back-ends that the application will interact with.
 	 */
 	backends: Map<string, StarkBackend>;
 
 	/**
 	 * Get a back-end by name
-	 * @param name name of the back-end object to get
-	 * @returns StarkBackend The requested backend
+	 * @param name - Name of the back-end object to get
+	 * @returns The requested backend object
 	 */
 	getBackend(name: string): StarkBackend;
 
 	/**
 	 * Add a back-end
-	 * @param backend back-end object to add
+	 * @param backend - Back-end object to add
 	 */
 	addBackend(backend: StarkBackend): void;
 
 	/**
 	 * Define all back-ends
-	 * @param backends the array of back-end objects
+	 * @param backends - Array of back-end objects to add
 	 */
 	setBackends(backends: StarkBackend[]): void;
 
 	/***
 	 * Get all currently defined back-end objects
-	 * @returns Map<string,StarkBackend> A Map containing the different backends
+	 * @returns A Map containing the different back-end objects
 	 */
 	getBackends(): Map<string, StarkBackend>;
 }

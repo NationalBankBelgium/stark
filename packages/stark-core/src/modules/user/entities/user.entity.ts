@@ -3,7 +3,7 @@ import { StarkUserProfile } from "./user-profile.entity.intf";
 import { StarkUserSecurityProfile } from "./user-security-profile.entity.intf";
 import { StarkResource } from "../../http/entities";
 import { IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf } from "class-validator";
-import { StarkValidationMethodsUtil } from "../../../util";
+import { StarkClassValidationUtil } from "../../../util";
 
 export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, StarkResource {
 	@IsDefined()
@@ -26,27 +26,27 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public lastName: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
+	@ValidateIf(StarkClassValidationUtil.validateIfDefinedAndNotNull)
 	@IsEmail()
 	@autoserialize
 	public email?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
+	@ValidateIf(StarkClassValidationUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public phone?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
+	@ValidateIf(StarkClassValidationUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public language?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
+	@ValidateIf(StarkClassValidationUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public selectedLanguage?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
+	@ValidateIf(StarkClassValidationUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public referenceNumber?: string;
@@ -56,12 +56,12 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	@autoserialize
 	public roles: string[] = [];
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
+	@ValidateIf(StarkClassValidationUtil.validateIfDefinedAndNotNull)
 	@IsString()
 	@autoserialize
 	public workpost?: string;
 
-	@ValidateIf(StarkValidationMethodsUtil.validateIfDefinedAndNotNull)
+	@ValidateIf(StarkClassValidationUtil.validateIfDefinedAndNotNull)
 	@IsBoolean()
 	@autoserialize
 	public isAnonymous?: boolean;

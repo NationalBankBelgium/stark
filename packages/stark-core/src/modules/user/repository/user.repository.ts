@@ -3,11 +3,12 @@ import { Observable } from "rxjs";
 import { StarkSerializable } from "../../../serialization";
 import { StarkUser } from "../entities";
 import { StarkHttpRequest, StarkSingleItemResponseWrapper } from "../../http/entities";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../../configuration/entities/application";
-import { StarkUserRepository } from "./user.repository.intf";
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services/logging.service.intf";
-import { StarkHttpService, STARK_HTTP_SERVICE } from "../../http/services";
+import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
+import { StarkUserRepository, starkUserRepositoryName } from "./user.repository.intf";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services/logging.service.intf";
+import { STARK_HTTP_SERVICE, StarkHttpService } from "../../http/services";
 import { AbstractStarkHttpRepository } from "../../http/repository";
+import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
 /**
  * @ngdoc service
@@ -25,7 +26,12 @@ export class StarkUserRepositoryImpl extends AbstractStarkHttpRepository<StarkUs
 		@Inject(STARK_LOGGING_SERVICE) logger: StarkLoggingService,
 		@Inject(STARK_APP_CONFIG) appConfig: StarkApplicationConfig
 	) {
+		// ensuring that the app config is valid before doing anything
+		StarkConfigurationUtil.validateConfig(appConfig, ["http"], starkUserRepositoryName);
+
 		super(starkHttpService, logger, appConfig.getBackend("userProfile"), "security/userprofile");
+
+		this.logger.debug(starkUserRepositoryName + " loaded");
 	}
 
 	public getUser(): Observable<StarkSingleItemResponseWrapper<StarkUser>> {

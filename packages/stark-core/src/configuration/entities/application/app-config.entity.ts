@@ -1,5 +1,5 @@
 import { IsBoolean, IsDefined, IsNotEmpty, IsPositive, IsString, IsUrl, Matches, Min, ValidateIf, validateSync } from "class-validator";
-import { autoserialize, autoserializeAs } from "cerialize";
+import { autoserialize, autoserializeAs, Deserialize } from "cerialize";
 import { StarkApplicationConfig } from "./app-config.entity.intf";
 import { StarkBackend, StarkBackendImpl } from "../../../modules/http/entities/backend";
 import { stringMap } from "../../../serialization";
@@ -10,113 +10,115 @@ import { StarkMapIsValid } from "../../../validation/decorators/map-is-valid/map
 import { StarkMapNotEmpty } from "../../../validation/decorators/map-not-empty/map-not-empty.validator.decorator";
 
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
-	@IsDefined()
-	@IsString()
+	// FIXME: properties of the group "temp" are not used yet. Will they still be used?
+
+	@IsDefined({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public rootStateUrl: string;
 
-	@IsDefined()
-	@IsString()
+	@IsDefined({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public rootStateName: string;
 
-	@IsDefined()
-	@IsString()
+	@IsDefined({ groups: ["routing"] })
+	@IsString({ groups: ["routing"] })
 	@autoserialize
 	public homeStateName: string;
 
-	@IsDefined()
-	@IsString()
+	@IsDefined({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public errorStateName: string;
 
-	@IsDefined()
-	@IsBoolean()
+	@IsDefined({ groups: ["temp"] })
+	@IsBoolean({ groups: ["temp"] })
 	@autoserialize
 	public angularDebugInfoEnabled: boolean;
 
-	@IsDefined()
-	@IsBoolean()
+	@IsDefined({ groups: ["logging"] })
+	@IsBoolean({ groups: ["logging"] })
 	@autoserialize
 	public debugLoggingEnabled: boolean;
 
-	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled)
-	@IsPositive()
-	@Min(2)
+	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled, { groups: ["logging"] })
+	@IsPositive({ groups: ["logging"] })
+	@Min(2, { groups: ["logging"] })
 	@autoserialize
 	public loggingFlushPersistSize?: number;
 
-	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled)
-	@IsDefined()
-	@IsString()
+	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled, { groups: ["logging"] })
+	@IsDefined({ groups: ["logging"] })
+	@IsString({ groups: ["logging"] })
 	@autoserialize
 	public loggingFlushApplicationId?: string;
 
-	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled)
-	@IsDefined()
-	@IsString()
+	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled, { groups: ["logging"] })
+	@IsDefined({ groups: ["logging"] })
+	@IsString({ groups: ["logging"] })
 	@autoserialize
 	public loggingFlushResourceName?: string;
 
-	@IsBoolean()
+	@IsBoolean({ groups: ["logging"] })
 	@autoserialize
 	public loggingFlushDisabled?: boolean;
 
-	@IsDefined()
-	@IsBoolean()
+	@IsDefined({ groups: ["temp"] })
+	@IsBoolean({ groups: ["temp"] })
 	@autoserialize
 	public routerLoggingEnabled: boolean;
 
-	@IsBoolean()
+	@IsBoolean({ groups: ["temp"] })
 	@autoserialize
 	public routerVisualizerEnabled: boolean;
 
-	@IsNotEmpty()
-	@IsString()
-	@Matches(/^[a-z]{2}$/)
+	@IsNotEmpty({ groups: ["settings"] })
+	@IsString({ groups: ["settings"] })
+	@Matches(/^[a-z]{2}$/, { groups: ["settings"] })
 	@autoserialize
 	public defaultLanguage: string;
 
-	@IsDefined()
-	@IsPositive()
+	@IsDefined({ groups: ["session"] })
+	@IsPositive({ groups: ["session"] })
 	@autoserialize
 	public sessionTimeout: number;
 
-	@IsPositive()
+	@IsPositive({ groups: ["session"] })
 	@autoserialize
 	public sessionTimeoutWarningPeriod: number;
 
-	@ValidateIf(StarkApplicationConfigImpl.validateIfKeepAliveEnabled)
-	@IsPositive()
+	@ValidateIf(StarkApplicationConfigImpl.validateIfKeepAliveEnabled, { groups: ["session"] })
+	@IsPositive({ groups: ["session"] })
 	@autoserialize
 	public keepAliveInterval?: number;
 
-	@ValidateIf(StarkApplicationConfigImpl.validateIfKeepAliveEnabled)
-	@IsUrl()
+	@ValidateIf(StarkApplicationConfigImpl.validateIfKeepAliveEnabled, { groups: ["session"] })
+	@IsUrl({}, { groups: ["session"] })
 	@autoserialize
 	public keepAliveUrl?: string;
 
-	@IsBoolean()
+	@IsBoolean({ groups: ["session"] })
 	@autoserialize
 	public keepAliveDisabled?: boolean;
 
-	@IsDefined()
-	@IsUrl()
+	@IsDefined({ groups: ["session"] })
+	@IsUrl({}, { groups: ["session"] })
 	@autoserialize
 	public logoutUrl: string;
 
-	@IsNotEmpty()
-	@IsString()
+	@IsNotEmpty({ groups: ["temp"] })
+	@IsString({ groups: ["temp"] })
 	@autoserialize
 	public baseUrl: string;
 
-	@IsDefined()
-	@IsBoolean()
+	@IsDefined({ groups: ["session"] })
+	@IsBoolean({ groups: ["session"] })
 	@autoserialize
 	public publicApp: boolean;
 
-	@StarkMapNotEmpty()
-	@StarkMapIsValid()
+	@StarkMapNotEmpty({ groups: ["http"] })
+	@StarkMapIsValid({ groups: ["http"] })
 	@autoserializeAs(stringMap(StarkBackendImpl)) // using custom serialization type (stringMap) to handle ES6 Maps
 	public backends: Map<string, StarkBackend> = new Map<string, StarkBackend>();
 
@@ -143,7 +145,9 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 			throw new Error("A backend instance must be provided");
 		}
 
-		StarkValidationErrorsUtil.throwOnError(validateSync(backend), "The backend instance provided is not valid.");
+		const backendInstance: StarkBackendImpl = backend instanceof StarkBackendImpl ? backend : Deserialize(backend, StarkBackendImpl);
+
+		StarkValidationErrorsUtil.throwOnError(validateSync(backendInstance), "The backend instance provided is not valid.");
 
 		this.backends.set(backend.name, backend);
 	}

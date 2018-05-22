@@ -7,6 +7,8 @@ import {
 	StarkApplicationConfigImpl,
 	StarkApplicationMetadata,
 	StarkApplicationMetadataImpl,
+	StarkLanguage,
+	StarkLanguageImpl,
 	StarkLanguages
 } from "../../../configuration/entities";
 import { StarkCoreApplicationState } from "../../../common/store";
@@ -46,11 +48,43 @@ describe("Service: StarkSettingsService", () => {
 
 		(<Spy>mockStore.pipe).and.returnValue(of(mockUser));
 
-		settingsService = new StarkSettingsServiceImpl(mockLogger, mockStore, appMetadata, appConfig);
+		settingsService = new StarkSettingsServiceImpl(mockLogger, appMetadata, appConfig, mockStore);
 		// reset the calls counter because there is a log in the constructor
 		(<Spy>mockStore.dispatch).calls.reset();
 	});
 	describe("on initialization", () => {
+		it("should throw an error in case the defaultLanguage in the app config is invalid", () => {
+			const invalidDefaultLanguageValues: string[] = [<any>undefined, "EN", "english"];
+
+			for (const invalidDefaultLanguage of invalidDefaultLanguageValues) {
+				appConfig.defaultLanguage = invalidDefaultLanguage;
+
+				expect(() => new StarkSettingsServiceImpl(mockLogger, appMetadata, appConfig, mockStore)).toThrowError(/defaultLanguage/);
+			}
+		});
+
+		it("should throw an error in case the supportedLanguages in the app metadata is invalid", () => {
+			const invalidSupportedLanguagesValues: StarkLanguage[][] = [
+				<any>undefined,
+				[],
+				[new StarkLanguageImpl(<any>undefined, "whatever")],
+				[new StarkLanguageImpl("", "whatever")],
+				[new StarkLanguageImpl("fr", "whatever")],
+				[new StarkLanguageImpl("fr-be", "whatever")],
+				[new StarkLanguageImpl("es-MX", "whatever")],
+				[new StarkLanguageImpl("whatever", <any>undefined)],
+				[new StarkLanguageImpl("whatever", "")]
+			];
+
+			for (const invalidSupportedLanguage of invalidSupportedLanguagesValues) {
+				appMetadata.supportedLanguages = invalidSupportedLanguage;
+
+				expect(() => new StarkSettingsServiceImpl(mockLogger, appMetadata, appConfig, mockStore)).toThrowError(
+					/supportedLanguages/
+				);
+			}
+		});
+
 		it("preferredLanguage should be undefined", () => {
 			expect(settingsService.preferredLanguage).toBe(appConfig.defaultLanguage);
 		});

@@ -4,17 +4,20 @@ import { StarkBackend } from "./backend.entity.intf";
 import { StarkBackendAuthenticationTypes } from "./backend-authentication-types";
 
 export class StarkBackendImpl implements StarkBackend {
-	@IsNotEmpty({ message: "each backend object MUST have a name" })
-	@IsString()
+	// validation must be performed always, regardless of validation groups used
+	@IsNotEmpty({ message: "each backend object MUST have a name", always: true })
+	@IsString({ always: true })
 	@autoserialize
 	public name: string;
 
-	@IsNotEmpty({ message: "each backend object MUST have an url" })
-	@IsUrl()
+	// validation must be performed always, regardless of validation groups used
+	@IsNotEmpty({ message: "each backend object MUST have an url", always: true })
+	@IsUrl({}, { always: true })
 	@autoserialize
 	public url: string;
 
-	@IsDefined({ message: "each backend object MUST have an authentication type defined" })
+	// validation must be performed always, regardless of validation groups used
+	@IsDefined({ message: "each backend object MUST have an authentication type defined", always: true })
 	@autoserializeAs(StarkBackendAuthenticationTypes)
 	public authenticationType: StarkBackendAuthenticationTypes;
 

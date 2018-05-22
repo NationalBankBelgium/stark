@@ -1,23 +1,6 @@
 import { Action, Store } from "@ngrx/store";
-import { Observable, empty, from } from "rxjs";
+import { empty, from, Observable } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
-
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";
-import { StarkRoutingService, starkRoutingServiceName } from "./routing.service.intf";
-import {
-	Navigate,
-	NavigateFailure,
-	NavigateRejection,
-	NavigateSuccess,
-	NavigationHistoryLimitReached,
-	Reload,
-	ReloadSuccess,
-	ReloadFailure
-} from "../actions";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../../configuration/entities/application";
-import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
-import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
-import { StarkCoreApplicationState } from "../../../common/store";
 import {
 	HookFn,
 	HookMatchCriteria,
@@ -40,6 +23,25 @@ import {
 	TransitionService,
 	TransitionStateHookFn
 } from "@uirouter/core";
+
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
+import { StarkRoutingService, starkRoutingServiceName } from "./routing.service.intf";
+import {
+	Navigate,
+	NavigateFailure,
+	NavigateRejection,
+	NavigateSuccess,
+	NavigationHistoryLimitReached,
+	Reload,
+	ReloadFailure,
+	ReloadSuccess
+} from "../actions";
+import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
+import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
+import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
+import { StarkCoreApplicationState } from "../../../common/store";
+import { StarkConfigurationUtil } from "../../../util/configuration.util";
+
 const _isEmpty: Function = require("lodash/isEmpty");
 
 interface StarkState {
@@ -70,12 +72,13 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
-		private store: Store<StarkCoreApplicationState>,
 		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
+		private store: Store<StarkCoreApplicationState>,
 		private $state: StateService,
 		private $transitions: TransitionService
 	) {
-		this.appConfig = appConfig;
+		// ensuring that the app config is valid before doing anything
+		StarkConfigurationUtil.validateConfig(this.appConfig, ["routing"], starkRoutingServiceName);
 
 		this.knownRejectionCauses = [];
 		this.knownRejectionCausesRegex = new RegExp(starkRoutingServiceName + ": initial value");

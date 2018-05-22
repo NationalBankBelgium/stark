@@ -1,5 +1,5 @@
 import { Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
-import { TestBed, fakeAsync, tick, inject } from "@angular/core/testing";
+import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
 import { StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
 // FIXME Adapt switchMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
@@ -8,14 +8,14 @@ import { throwError } from "rxjs";
 import { Store } from "@ngrx/store";
 import { StarkRoutingServiceImpl } from "./routing.service";
 import { StarkLoggingService } from "../../logging/services";
-import { StarkApplicationConfig } from "../../../configuration/entities/application";
+import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
-import CallInfo = jasmine.CallInfo;
 import { StarkRoutingActionTypes } from "../actions";
-import Spy = jasmine.Spy;
-import { MockStarkLoggingService } from "../../logging/testing/logging.mock";
+import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
+import CallInfo = jasmine.CallInfo;
+import Spy = jasmine.Spy;
 
 @Component({ selector: "test-home", template: "HOME" })
 export class HomeComponent {}
@@ -29,15 +29,8 @@ describe("Service: StarkRoutingService", () => {
 
 	let routingService: StarkRoutingServiceImpl;
 	let mockLogger: StarkLoggingService;
+	let appConfig: StarkApplicationConfig;
 	const mockStore: Store<StarkCoreApplicationState> = jasmine.createSpyObj("storeSpy", ["dispatch"]);
-	const appConfig: Partial<StarkApplicationConfig> = {
-		sessionTimeout: 123,
-		sessionTimeoutWarningPeriod: 13,
-		keepAliveInterval: 45,
-		keepAliveUrl: "http://my-backend/keepalive",
-		logoutUrl: "http://localhost:5000/logout",
-		homeStateName: "homepage"
-	};
 	const mockCorrelationId: string = "12345";
 
 	// mockStates Tree
@@ -377,10 +370,13 @@ describe("Service: StarkRoutingService", () => {
 		deferIntercept: true // FIXME: this option shouldn't be used but is needed for Chrome and HeadlessChrome otherwise it doesn't work. Why?
 	});
 
-	const starkRoutingServiceFactory: any = (state: StateService, transitions: TransitionService) => {
+	const starkRoutingServiceFactory: Function = (state: StateService, transitions: TransitionService) => {
+		appConfig = new StarkApplicationConfigImpl();
+		appConfig.homeStateName = "homepage";
+
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
 
-		return new StarkRoutingServiceImpl(mockLogger, mockStore, <any>appConfig, state, transitions);
+		return new StarkRoutingServiceImpl(mockLogger, appConfig, mockStore, state, transitions);
 	};
 
 	/**
@@ -420,6 +416,17 @@ describe("Service: StarkRoutingService", () => {
 		// IMPORTANT: reset the url after each test,
 		// otherwise UI-Router will try to find a match of the current url and navigate to it!!
 		router.urlService.url("");
+	});
+
+	describe("on initialization", () => {
+		it("should throw an error in case the homeStateName option in the app config is not defined", () => {
+			const modifiedAppConfig: StarkApplicationConfig = new StarkApplicationConfigImpl();
+			modifiedAppConfig.homeStateName = <any>undefined;
+
+			expect(() => new StarkRoutingServiceImpl(mockLogger, modifiedAppConfig, mockStore, <any>{}, <any>{})).toThrowError(
+				/homeStateName/
+			);
+		});
 	});
 
 	describe("getCurrentState", () => {
