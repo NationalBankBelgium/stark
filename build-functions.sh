@@ -348,7 +348,7 @@ updateVersionReferences() {
     cd ${NPM_DIR}
     
     local PATTERN="0\.0\.0\-PLACEHOLDER\-VERSION"
-    perl -p -i -e "s/$PATTERN/$1/g" ./package.json
+    perl -p -i.bak -e "s/$PATTERN/$1/g" ./package.json
   )
 }
 
@@ -367,7 +367,7 @@ updatePackageNameReferences() {
     cd ${NPM_DIR}
     
     local PATTERN="PLACEHOLDER\-PACKAGE\-NAME"
-    perl -p -i -e "s/$PATTERN/$1/g" ./package.json
+    perl -p -i.bak -e "s/$PATTERN/$1/g" ./package.json
   )
 }
 
@@ -440,7 +440,7 @@ adaptNpmPackageDependencies() {
   # Packages will have dependencies between them. They will so have "devDependencies" and "peerDependencies" with different values.
   # We should only replace the value of the devDependency for make it work.
 
-  perl -p -i -e "s/$PATTERN/$REPLACEMENT/" $PACKAGE_JSON_FILE
+  perl -p -i.bak -e "s/$PATTERN/$REPLACEMENT/" $PACKAGE_JSON_FILE
 }
 
 #######################################
@@ -490,7 +490,7 @@ logTrace "Executing function: ${FUNCNAME[0]}" 1
   # Packages will have dependencies between them. They will so have "devDependencies" and "peerDependencies" with different values.
   # We should only replace the value of the devDependency for make it work.
   
-  perl -p -i -0 -e "s/$PATTERN/$REPLACEMENT/m" $PACKAGE_JSON_FILE
+  perl -p -i.bak -0 -e "s/$PATTERN/$REPLACEMENT/m" $PACKAGE_JSON_FILE
 }
 
 #######################################
