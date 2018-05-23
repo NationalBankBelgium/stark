@@ -17,7 +17,8 @@ const starkAppConfig = require(helpers.root("src/stark-app-config.json"));
 // Angular CLI config
 const deployUrl = buildUtils.ANGULAR_APP_CONFIG.deployUrl;
 const baseHref = buildUtils.ANGULAR_APP_CONFIG.baseHref;
-// Maximum resource size to inline (KiB) (as defined in node_modules/@angular/cli/models/webpack-configs/styles.js)
+// Maximum resource size to inline (KiB)
+// (as defined in node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/styles.js)
 const maximumInlineSize = 10;
 
 // PostCSS Plugins
@@ -71,7 +72,7 @@ const postcssPlugins = loader => [
 	// plugin to rebase, inline or copy on url().
 	// https://github.com/postcss/postcss-url
 	require("postcss-url")(
-		// configuration taken as is from node_modules/@angular/cli/models/webpack-configs/styles.js
+		// configuration taken as is from node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/styles.js
 		{
 			filter: ({ url }) => url.startsWith("~"),
 			url: ({ url }) => {
@@ -81,7 +82,7 @@ const postcssPlugins = loader => [
 		}
 	),
 	require("postcss-url")(
-		// configuration taken as is from node_modules/@angular/cli/models/webpack-configs/styles.js
+		// configuration taken as is from node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/styles.js
 		[
 			{
 				// Only convert root relative URLs, which CSS-Loader won't process into require().
@@ -131,11 +132,11 @@ const postcssPlugins = loader => [
 		browsers: ["last 3 versions", "Chrome >= 56"]
 	}),
 
-	// configuration taken as is from node_modules/@angular/cli/models/webpack-configs/styles.js
-	// the hashing format is just [hash] instead of the ones defined in node_modules/@angular/cli/models/webpack-config.js:
+	// configuration taken as is from node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/styles.js
+	// the hashing format is just [hash] always instead of the 'outputHashing' value in the angular.json:
 	//
-	// import { getOutputHashFormat } from '@angular/cli/models/webpack-configs/utils';
-	// const hashFormat = getOutputHashFormat("all");  // "media" => development, "all" production
+	// const utils = require("@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/utils");
+	// const hashFormat = utils.getOutputHashFormat("all");  // "media" => development, "all" production
 	PostcssCliResources({
 		deployUrl: loader.loaders[loader.loaderIndex].options.ident === "extracted" ? "" : deployUrl,
 		loader,
