@@ -1,7 +1,19 @@
+/**
+ * @ignore
+ */
 const _floor: Function = require("lodash/floor");
 
+/**
+ * Name of the starkIsNIN validator
+ */
 export const starkIsNINValidatorName: string = "starkIsNIN";
 
+/**
+ * Validator function that checks if the given input is a valid national identification number (NIN)
+ * @param nin the NIN to check
+ * @param countryCode the country code
+ * @returns true if the given input is a valid NIN
+ */
 export function starkIsNIN(nin: string, countryCode: string): boolean {
 	let isValid: boolean = false;
 	if (typeof nin === "string" && typeof countryCode === "string" && nin !== "" && countryCode !== "") {

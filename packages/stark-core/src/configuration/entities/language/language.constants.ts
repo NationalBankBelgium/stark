@@ -1,5 +1,8 @@
 import { StarkLanguage } from "./language.entity.intf";
 
+/**
+ * Lists of languages currently supported by Stark.
+ */
 export class StarkLanguages {
 	public static EN_US: StarkLanguage = {
 		isoCode: "en-US",
