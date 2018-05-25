@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { filter } from "rxjs/operators";
 
-import { StarkLoggingService, starkLoggingServiceName } from "../../logging/services";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { StarkSettingsService, starkSettingsServiceName } from "./settings.service.intf";
 import { SetPreferredLanguage } from "../actions";
 import {
@@ -15,6 +15,7 @@ import {
 import { StarkUser } from "../../user/entities";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { selectStarkUser } from "../../user/reducers";
+import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
 /**
  * @ngdoc service
@@ -30,14 +31,18 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 	public preferredLanguage: string;
 
 	public constructor(
-		@Inject(starkLoggingServiceName) public logger: StarkLoggingService,
-		public store: Store<StarkCoreApplicationState>,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_APP_METADATA) private appMetadata: StarkApplicationMetadata,
-		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig
+		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
+		public store: Store<StarkCoreApplicationState>
 	) {
-		this.logger.debug(starkSettingsServiceName + " loaded");
+		// ensuring that the app config and metadata are valid before doing anything
+		StarkConfigurationUtil.validateConfig(this.appConfig, ["settings"], starkSettingsServiceName);
+		StarkConfigurationUtil.validateMetadata(this.appMetadata, ["settings"], starkSettingsServiceName);
 
 		this.preferredLanguage = this.appConfig.defaultLanguage;
+
+		this.logger.debug(starkSettingsServiceName + " loaded");
 	}
 
 	public initializeSettings(): void {

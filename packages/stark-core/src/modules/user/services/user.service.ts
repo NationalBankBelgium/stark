@@ -2,23 +2,23 @@ import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { validateSync } from "class-validator";
 import { Observable, throwError } from "rxjs";
-import { map, catchError } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 
 import { StarkHttpErrorWrapper, StarkSingleItemResponseWrapper } from "../../http/entities";
 import { StarkUser } from "../../user/entities";
 import {
 	FetchUserProfile,
-	FetchUserProfileSuccess,
 	FetchUserProfileFailure,
-	SetUser,
+	FetchUserProfileSuccess,
 	GetAllUsers,
+	GetAllUsersFailure,
 	GetAllUsersSuccess,
-	GetAllUsersFailure
+	SetUser
 } from "../actions";
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";
-import { StarkSessionService, STARK_SESSION_SERVICE } from "../../session/services";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
+import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 import { StarkUserService, starkUserServiceName } from "./user.service.intf";
-import { StarkUserRepository, starkUserRepositoryName } from "../repository";
+import { STARK_USER_REPOSITORY, StarkUserRepository } from "../repository";
 import { STARK_MOCK_DATA, StarkMockData } from "../../../configuration/entities/mock-data";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkValidationErrorsUtil } from "../../../util";
@@ -46,10 +46,10 @@ export class StarkUserServiceImpl implements StarkUserService {
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
-		public store: Store<StarkCoreApplicationState>,
-		@Inject(starkUserRepositoryName) public userRepository: StarkUserRepository,
+		@Inject(STARK_USER_REPOSITORY) public userRepository: StarkUserRepository,
 		// FIXME Use starkMockData
-		@Inject(STARK_MOCK_DATA) _starkMockData: StarkMockData
+		@Inject(STARK_MOCK_DATA) _starkMockData: StarkMockData,
+		public store: Store<StarkCoreApplicationState>
 	) {
 		this.sessionService = sessionService;
 		// the user is stored in the StarkSession

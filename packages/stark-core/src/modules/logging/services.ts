@@ -1,2 +1,2 @@
 export * from "./services/logging.service";
-export * from "./services/logging.service.intf";
+export { STARK_LOGGING_SERVICE, StarkLoggingService } from "./services/logging.service.intf";

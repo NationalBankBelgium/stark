@@ -1,9 +1,8 @@
 import Spy = jasmine.Spy;
 import createSpyObj = jasmine.createSpyObj;
-
 import { StarkSettingsEffects } from "./settings.effects";
 import { SetPreferredLanguage } from "../actions";
-import { StarkSessionService, starkSessionServiceName } from "../../session/services";
+import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 import { MockStarkSessionService } from "../../session/testing";
 import { TestBed } from "@angular/core/testing";
 import { Observable, Observer, ReplaySubject } from "rxjs";
@@ -23,7 +22,7 @@ describe("Effect: StarkSettingsEffects", () => {
 				StarkSettingsEffects,
 				provideMockActions(() => actions),
 				{
-					provide: starkSessionServiceName,
+					provide: STARK_SESSION_SERVICE,
 					useFactory: () => new MockStarkSessionService()
 				}
 			],
@@ -31,7 +30,7 @@ describe("Effect: StarkSettingsEffects", () => {
 		});
 
 		settingsEffects = TestBed.get(StarkSettingsEffects);
-		mockSessionService = TestBed.get(starkSessionServiceName);
+		mockSessionService = TestBed.get(STARK_SESSION_SERVICE);
 	});
 
 	describe("On setPreferredLanguage$", () => {

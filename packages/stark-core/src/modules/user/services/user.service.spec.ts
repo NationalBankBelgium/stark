@@ -5,14 +5,14 @@ import { Observer, of, throwError } from "rxjs";
 import { Deserialize } from "cerialize";
 
 import {
+	FetchUserProfile,
+	FetchUserProfileFailure,
+	FetchUserProfileSuccess,
 	GetAllUsers,
 	GetAllUsersFailure,
 	GetAllUsersSuccess,
-	StarkUserActionTypes,
-	FetchUserProfile,
-	FetchUserProfileSuccess,
-	FetchUserProfileFailure,
-	SetUser
+	SetUser,
+	StarkUserActionTypes
 } from "../actions";
 import { StarkUser } from "../entities";
 import { StarkUserService } from "./user.service.intf";
@@ -102,7 +102,7 @@ describe("Service: StarkUserService", () => {
 		(<Spy>mockStore.select).and.returnValue(of(mockUserInstances[0]));
 		mockSessionService = new MockStarkSessionService();
 
-		userService = new StarkUserServiceImpl(mockLogger, mockSessionService, mockStore, mockUserRepository, mockData);
+		userService = new StarkUserServiceImpl(mockLogger, mockSessionService, mockUserRepository, mockData, mockStore);
 	});
 
 	describe("getUser", () => {

@@ -3,39 +3,38 @@ import { Inject, Injectable, Injector } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle } from "@ng-idle/core";
 import { Keepalive } from "@ng-idle/keepalive";
 import { TranslateService } from "@ngx-translate/core";
-import { Store, select } from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
-import { Observable, Subject, defer } from "rxjs";
+import { defer, Observable, Subject } from "rxjs";
 import { map, take } from "rxjs/operators";
-import { validateSync } from "class-validator";
 
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { StarkSessionService, starkSessionServiceName } from "./session.service.intf";
-import { StarkRoutingService, STARK_ROUTING_SERVICE, StarkRoutingTransitionHook } from "../../routing/services";
-import { StarkApplicationConfig, STARK_APP_CONFIG } from "../../../configuration/entities/application";
+import { STARK_ROUTING_SERVICE, StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
+import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
 import { StarkPreAuthentication, StarkSession } from "../entities";
 import { StarkUser } from "../../user/entities";
 import {
+	ChangeLanguage,
+	ChangeLanguageFailure,
+	ChangeLanguageSuccess,
 	DestroySession,
+	DestroySessionSuccess,
 	InitializeSession,
 	InitializeSessionSuccess,
-	DestroySessionSuccess,
-	ChangeLanguageFailure,
-	ChangeLanguage,
-	ChangeLanguageSuccess,
-	SessionTimeoutCountdownStop,
-	SessionTimeoutCountdownFinish,
-	UserActivityTrackingPause,
-	UserActivityTrackingResume,
 	SessionLogout,
-	SessionTimeoutCountdownStart
+	SessionTimeoutCountdownFinish,
+	SessionTimeoutCountdownStart,
+	SessionTimeoutCountdownStop,
+	UserActivityTrackingPause,
+	UserActivityTrackingResume
 } from "../actions";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
-import { StarkValidationErrorsUtil } from "../../../util";
 import { starkSessionExpiredStateName } from "../../../common/routes";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { selectStarkSession } from "../reducers";
+import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
 export const starkUnauthenticatedUserError: string = "StarkSessionService => user not authenticated";
 
@@ -78,17 +77,15 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		injector: Injector,
 		public translateService: TranslateService
 	) {
+		// ensuring that the app config is valid before doing anything
+		StarkConfigurationUtil.validateConfig(this.appConfig, ["session"], starkSessionServiceName);
+
 		if (this.idle.getKeepaliveEnabled() && !this.appConfig.keepAliveDisabled) {
 			this.keepalive = injector.get<Keepalive>(Keepalive);
 		}
 
 		this.registerTransitionHook();
 
-		// ensuring that the app config is valid before configuring the Idle and Keepalive services
-		StarkValidationErrorsUtil.throwOnError(
-			validateSync(this.appConfig),
-			starkSessionServiceName + ": " + STARK_APP_CONFIG + " constant is not valid."
-		);
 		this.configureIdleService();
 		this.configureKeepaliveService();
 

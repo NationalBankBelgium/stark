@@ -4,7 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
 import { NgIdleModule } from "@ng-idle/core";
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
-import { validateSync } from "class-validator";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
@@ -13,6 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
 	STARK_APP_CONFIG,
 	STARK_APP_METADATA,
+	STARK_MOCK_DATA,
 	STARK_SESSION_SERVICE,
 	StarkApplicationConfig,
 	StarkApplicationConfigImpl,
@@ -20,25 +20,20 @@ import {
 	StarkApplicationMetadataImpl,
 	StarkHttpModule,
 	StarkLoggingModule,
+	StarkMockData,
 	StarkRoutingModule,
 	StarkSessionModule,
 	StarkSessionService,
-	StarkUser,
-	StarkValidationErrorsUtil
+	StarkUser
 } from "@nationalbankbelgium/stark-core";
 
 import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { Deserialize } from "cerialize";
-
 /*
  * Translations
  */
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-const translationsEn: object = require("../../assets/translations/en.json");
-const translationsFr: object = require("../../assets/translations/fr.json");
-const translationsNl: object = require("../../assets/translations/nl.json");
-
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -60,6 +55,10 @@ import "../styles/styles.scss";
 /* tslint:enable */
 import "../styles/headings.css";
 
+const translationsEn: object = require("../../assets/translations/en.json");
+const translationsFr: object = require("../../assets/translations/fr.json");
+const translationsNl: object = require("../../assets/translations/nl.json");
+
 // Application wide providers
 const APP_PROVIDERS: any[] = [AppState];
 
@@ -68,7 +67,7 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 	const config: any = require("../stark-app-config.json");
 
 	const applicationConfig: StarkApplicationConfig = Deserialize(config, StarkApplicationConfigImpl);
-	// FIXME: Make sure the correct values are used below
+
 	applicationConfig.rootStateUrl = "home";
 	applicationConfig.rootStateName = "";
 	applicationConfig.homeStateName = "home";
@@ -77,8 +76,6 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 	applicationConfig.debugLoggingEnabled = true; //DEVELOPMENT;
 	applicationConfig.routerLoggingEnabled = true; //DEVELOPMENT;
 
-	StarkValidationErrorsUtil.throwOnError(validateSync(applicationConfig), STARK_APP_CONFIG + " constant is not valid.");
-
 	return applicationConfig;
 }
 
@@ -86,11 +83,15 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 export function starkAppMetadataFactory(): StarkApplicationMetadata {
 	const metadata: any = require("../stark-app-metadata.json");
 
-	const applicationMetadata: StarkApplicationMetadata = Deserialize(metadata, StarkApplicationMetadataImpl);
+	return Deserialize(metadata, StarkApplicationMetadataImpl);
+}
 
-	StarkValidationErrorsUtil.throwOnError(validateSync(applicationMetadata), STARK_APP_METADATA + " constant is not valid.");
-
-	return applicationMetadata;
+// TODO: where to put this factory function?
+export function starkMockDataFactory(): StarkMockData {
+	return {
+		whatever: "dummy prop",
+		profiles: []
+	};
 }
 
 // Application Redux State
@@ -155,7 +156,8 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		APP_PROVIDERS,
 		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
 		{ provide: STARK_APP_CONFIG, useFactory: starkAppConfigFactory },
-		{ provide: STARK_APP_METADATA, useFactory: starkAppMetadataFactory }
+		{ provide: STARK_APP_METADATA, useFactory: starkAppMetadataFactory },
+		{ provide: STARK_MOCK_DATA, useFactory: starkMockDataFactory }
 	]
 })
 export class AppModule {

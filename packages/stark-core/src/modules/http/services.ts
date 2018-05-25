@@ -1,2 +1,2 @@
 export * from "./services/http.service";
-export * from "./services/http.service.intf";
+export { STARK_HTTP_SERVICE, StarkHttpService } from "./services/http.service.intf";

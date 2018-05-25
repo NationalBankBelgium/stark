@@ -6,15 +6,15 @@ import { StarkLanguage } from "./language.entity.intf";
 import { StarkIsSupportedLanguage } from "../../../validation/decorators/is-supported-language/is-supported-language.validator.decorator";
 
 export class StarkLanguageImpl implements StarkLanguage {
-	@IsNotEmpty()
-	@IsString()
-	@Matches(/^[a-z]{2}-[A-Z]{2}$/)
-	@StarkIsSupportedLanguage()
+	@IsNotEmpty({ always: true }) // validation must be performed always, regardless of validation groups used.
+	@IsString({ always: true })
+	@Matches(/^[a-z]{2}-[A-Z]{2}$/, { always: true })
+	@StarkIsSupportedLanguage({ always: true })
 	@autoserialize
 	public isoCode: string;
 
-	@IsNotEmpty()
-	@IsString()
+	@IsNotEmpty({ always: true }) // validation must be performed always, regardless of validation groups used.
+	@IsString({ always: true })
 	@autoserialize
 	public translationKey: string;
 
