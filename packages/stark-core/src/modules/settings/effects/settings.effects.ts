@@ -3,14 +3,14 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { StarkSettingsActionTypes, SetPreferredLanguage } from "../actions";
-import { StarkSessionService, starkSessionServiceName } from "../../session/services";
+import { SetPreferredLanguage, StarkSettingsActionTypes } from "../actions";
+import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 
 @Injectable()
 export class StarkSettingsEffects {
 	public sessionService: StarkSessionService;
 
-	public constructor(private actions$: Actions, @Inject(starkSessionServiceName) sessionService: StarkSessionService) {
+	public constructor(private actions$: Actions, @Inject(STARK_SESSION_SERVICE) sessionService: StarkSessionService) {
 		this.sessionService = sessionService;
 	}
 
