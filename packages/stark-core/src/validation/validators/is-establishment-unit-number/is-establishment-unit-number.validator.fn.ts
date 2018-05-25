@@ -1,3 +1,6 @@
+/**
+ * @ignore
+ */
 const _floor: Function = require("lodash/floor");
 
 export const starkIsEstablishmentUnitNumberValidatorName: string = "starkIsEstablishmentUnitNumber";

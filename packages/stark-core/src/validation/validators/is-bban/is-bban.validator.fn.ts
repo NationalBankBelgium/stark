@@ -1,3 +1,6 @@
+/**
+ * @ignore
+ */
 const _floor: Function = require("lodash/floor");
 
 import { isValidBBAN } from "ibantools";
