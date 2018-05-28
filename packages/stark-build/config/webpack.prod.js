@@ -92,9 +92,9 @@ module.exports = function() {
 			],
 			cacheGroups: {
 				styles: {
-					name: 'styles',
+					name: "styles",
 					test: /\.css$/,
-					chunks: 'all',
+					chunks: "all",
 					enforce: true
 				}
 			}

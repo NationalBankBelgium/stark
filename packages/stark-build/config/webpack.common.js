@@ -417,13 +417,13 @@ module.exports = function(options) {
 
 			/**
 			 * Plugin: HashedModuleIdsPlugin
-			 * Description: This plugin will cause hashes to be based on the relative path of the module, 
+			 * Description: This plugin will cause hashes to be based on the relative path of the module,
 			 * generating a four character string as the module id
 			 * See: https://webpack.js.org/plugins/hashed-module-ids-plugin/
 			 */
 			new HashedModuleIdsPlugin({
-				hashFunction: 'sha256',
-				hashDigest: 'hex',
+				hashFunction: "sha256",
+				hashDigest: "hex",
 				hashDigestLength: 20
 			}),
 

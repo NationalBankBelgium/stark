@@ -1,9 +1,7 @@
 import { IsNotEmpty, IsString, Matches } from "class-validator";
 import { autoserialize } from "cerialize";
 import { StarkLanguage } from "./language.entity.intf";
-// FIXME: cannot import both validation decorator from the barrel due to an issue with angular-compiler
-// see: https://github.com/angular/angular/issues/20931
-import { StarkIsSupportedLanguage } from "../../../validation/decorators/is-supported-language/is-supported-language.validator.decorator";
+import { StarkIsSupportedLanguage } from "../../../validation/decorators/is-supported-language";
 
 export class StarkLanguageImpl implements StarkLanguage {
 	@IsNotEmpty({ always: true }) // validation must be performed always, regardless of validation groups used.

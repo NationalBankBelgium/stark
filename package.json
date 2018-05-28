@@ -100,7 +100,7 @@
     "lint:stark-core": "cd packages/stark-core && npm run lint && cd ../..",
     "lint:stark-ui": "cd packages/stark-ui && npm run lint && cd ../..",
     "lint:starter": "cd starter && npm run lint && cd ..",
-    "lint:all": "npm run lint && npm run lint:stark-core && npm run lint:starter",
+    "lint:all": "npm run lint && npm run lint:stark-core && npm run lint:stark-ui && npm run lint:starter",
     "install:all": "npm run install:stark-build && npm run install:stark-testing && npm run install:stark-core && npm run install:stark-ui && npm run build && npm run update:starter",
     "install:stark-build": "cd packages/stark-build && npm install && cd ../..",
     "install:stark-core": "cd packages/stark-core && npm install && cd ../..",

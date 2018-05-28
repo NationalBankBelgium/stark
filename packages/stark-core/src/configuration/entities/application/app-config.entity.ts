@@ -4,10 +4,7 @@ import { StarkApplicationConfig } from "./app-config.entity.intf";
 import { StarkBackend, StarkBackendImpl } from "../../../modules/http/entities/backend";
 import { stringMap } from "../../../serialization";
 import { StarkValidationErrorsUtil } from "../../../util";
-// FIXME: cannot import both validation decorators from the barrel due to an issue with angular-compiler
-// see: https://github.com/angular/angular/issues/20931
-import { StarkMapIsValid } from "../../../validation/decorators/map-is-valid/map-is-valid.validator.decorator";
-import { StarkMapNotEmpty } from "../../../validation/decorators/map-not-empty/map-not-empty.validator.decorator";
+import { StarkMapNotEmpty, StarkMapIsValid } from "../../../validation/decorators";
 
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	// FIXME: properties of the group "temp" are not used yet. Will they still be used?
