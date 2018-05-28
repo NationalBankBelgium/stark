@@ -11,7 +11,6 @@ import { provideMockActions } from "@ngrx/effects/testing";
 describe("Effect: StarkSettingsEffects", () => {
 	let settingsEffects: StarkSettingsEffects;
 
-	//FIXME StateUpdates
 	let mockSessionService: StarkSessionService;
 	let actions: Observable<any>;
 

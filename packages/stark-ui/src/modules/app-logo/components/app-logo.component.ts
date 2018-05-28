@@ -14,7 +14,7 @@ const componentName: string = "stark-app-logo";
  * @input {object} homeStateParams (optional) Params object to be passed to the UI router state defined as homeState.
  */
 // FIXME: tslint rules temporarily disabled. Enable them once we decide the final implementation of component styles
-/* tslint:disable:enforce-component-selector max-inline-declarations use-view-encapsulation use-host-property-decorator */
+/* tslint:disable:enforce-component-selector use-view-encapsulation use-host-property-decorator */
 @Component({
 	selector: componentName,
 	templateUrl: "./app-logo.component.html",

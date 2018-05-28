@@ -41,9 +41,9 @@ function readTsConfig(tsConfigPath) {
 /**
  * Method which returns the path of the environment file of the received environment.
  * The method reads the content of angular.json for getting the path (read with value or replace in "fileReplacements" of environment.
- * 
+ *
  * See: https://github.com/angular/angular-cli/wiki/angular-workspace
- * 
+ *
  * @param environment
  * @returns {*}
  */
@@ -114,12 +114,9 @@ function getNbbAssetsConfig() {
 					//       }
 					//     }
 					let cliProjectConfig = cliConfig.projects[cliConfig.defaultProject];
-					
+
 					if (cliProjectConfig) {
-						customAssets = [
-							...customAssets,
-							...getCopyWebpackPluginConfig(cliProjectConfig.architect.build.options.assets)
-						];
+						customAssets = [...customAssets, ...getCopyWebpackPluginConfig(cliProjectConfig.architect.build.options.assets)];
 					}
 				}
 			}
@@ -136,12 +133,7 @@ function getNbbAssetsConfig() {
 function getApplicationAssetsConfig() {
 	const appConfig = ANGULAR_APP_CONFIG.config;
 
-	if (
-		appConfig.architect &&
-		appConfig.architect.build &&
-		appConfig.architect.build.options &&
-		appConfig.architect.build.options.assets
-	) {
+	if (appConfig.architect && appConfig.architect.build && appConfig.architect.build.options && appConfig.architect.build.options.assets) {
 		return getCopyWebpackPluginConfig(appConfig.architect.build.options.assets);
 	}
 

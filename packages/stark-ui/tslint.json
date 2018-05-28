@@ -1,3 +1,3 @@
 {
-  "extends": ["../stark-build/config/tslint.json"]
+  "extends": ["tslint:latest", "tslint-sonarts", "codelyzer", "tslint-config-prettier", "../stark-build/config/tslint.json"]
 }

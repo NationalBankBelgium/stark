@@ -1,6 +1,6 @@
 const _cloneDeep: Function = require("lodash/cloneDeep");
 import { Deserialize, Serialize } from "cerialize";
-import { Observable, timer, throwError } from "rxjs";
+import { Observable, throwError, timer } from "rxjs";
 // FIXME Adapt mergeMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
 import { catchError, map, mergeMap, retryWhen } from "rxjs/operators";
 import { Inject, Injectable } from "@angular/core";
@@ -37,7 +37,6 @@ import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/servic
 export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpService<P> {
 	protected retryDelay: number = 1000;
 
-	// FIXME: uncomment these lines once LoggingService and SessionService are implemented
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
