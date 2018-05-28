@@ -10,19 +10,19 @@ import { defer, Observable, of, Subject, Subscriber, throwError } from "rxjs";
 import { take } from "rxjs/operators";
 
 import {
-	ChangeLanguage,
-	ChangeLanguageFailure,
-	ChangeLanguageSuccess,
-	DestroySession,
-	DestroySessionSuccess,
-	InitializeSession,
-	InitializeSessionSuccess,
-	SessionLogout,
-	SessionTimeoutCountdownFinish,
-	SessionTimeoutCountdownStart,
-	SessionTimeoutCountdownStop,
-	UserActivityTrackingPause,
-	UserActivityTrackingResume
+	StarkChangeLanguage,
+	StarkChangeLanguageFailure,
+	StarkChangeLanguageSuccess,
+	StarkDestroySession,
+	StarkDestroySessionSuccess,
+	StarkInitializeSession,
+	StarkInitializeSessionSuccess,
+	StarkSessionLogout,
+	StarkSessionTimeoutCountdownFinish,
+	StarkSessionTimeoutCountdownStart,
+	StarkSessionTimeoutCountdownStop,
+	StarkUserActivityTrackingPause,
+	StarkUserActivityTrackingResume
 } from "../actions";
 import { StarkSessionServiceImpl, starkUnauthenticatedUserError } from "./session.service";
 import { StarkPreAuthentication, StarkSession } from "../entities";
@@ -239,8 +239,8 @@ describe("Service: StarkSessionService", () => {
 			expect(sessionService.startKeepaliveService).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new InitializeSession(<StarkUser>mockUser));
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new InitializeSessionSuccess());
+			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkInitializeSession(<StarkUser>mockUser));
+			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new StarkInitializeSessionSuccess());
 		});
 	});
 
@@ -255,8 +255,8 @@ describe("Service: StarkSessionService", () => {
 			expect(sessionService.stopKeepaliveService).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new DestroySession());
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new DestroySessionSuccess());
+			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkDestroySession());
+			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new StarkDestroySessionSuccess());
 		});
 	});
 
@@ -269,6 +269,16 @@ describe("Service: StarkSessionService", () => {
 			expect(sessionService.initializeSession).toHaveBeenCalledTimes(1);
 			expect(sessionService.initializeSession).toHaveBeenCalledWith(<StarkUser>mockUser);
 		});
+
+		it("should THROW an error and NOT call the initializeSession() method when the given user is invalid", () => {
+			const invalidUser: StarkUser = new StarkUser();
+			invalidUser.firstName = "Christopher";
+			spyOn(sessionService, "initializeSession");
+
+			expect(() => sessionService.login(invalidUser)).toThrowError(/invalid user/);
+
+			expect(sessionService.initializeSession).not.toHaveBeenCalled();
+		});
 	});
 
 	describe("logout", () => {
@@ -279,7 +289,7 @@ describe("Service: StarkSessionService", () => {
 			sessionService.logout();
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect((<Spy>mockStore.dispatch).calls.mostRecent().args[0]).toEqual(new SessionLogout());
+			expect((<Spy>mockStore.dispatch).calls.mostRecent().args[0]).toEqual(new StarkSessionLogout());
 
 			expect(sendLogoutRequestSpy).toHaveBeenCalledTimes(1);
 			expect(sendLogoutRequestSpy.calls.mostRecent().args[0]).toBe(appConfig.logoutUrl);
@@ -322,7 +332,7 @@ describe("Service: StarkSessionService", () => {
 
 			expect(mockIdleService.clearInterrupts).toHaveBeenCalledTimes(1);
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new UserActivityTrackingPause());
+			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkUserActivityTrackingPause());
 		});
 	});
 
@@ -341,7 +351,7 @@ describe("Service: StarkSessionService", () => {
 			expect(sessionService.startKeepaliveService).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new UserActivityTrackingResume());
+			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkUserActivityTrackingResume());
 		});
 	});
 
@@ -435,7 +445,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(sessionService.countdownStarted).toBe(false);
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new SessionTimeoutCountdownStop());
+				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownStop());
 
 				mockIdleService.onIdleEnd.complete();
 			});
@@ -474,7 +484,7 @@ describe("Service: StarkSessionService", () => {
 				mockIdleService.onTimeout.next(321);
 
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new SessionTimeoutCountdownFinish());
+				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownFinish());
 				expect(sessionService.logout).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledWith(starkSessionExpiredStateName);
@@ -523,7 +533,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(sessionService.countdownStarted).toBe(true);
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new SessionTimeoutCountdownStart(countdownStartValue));
+				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownStart(countdownStartValue));
 
 				mockIdleService.onTimeoutWarning.complete();
 			});
@@ -728,6 +738,17 @@ describe("Service: StarkSessionService", () => {
 		});
 	});
 
+	describe("getCurrentUser", () => {
+		it("should get the current user in an observable", () => {
+			sessionService
+				.getCurrentUser()
+				.pipe(take(1))
+				.subscribe((user?: StarkUser) => {
+					expect(<Partial<StarkUser>>user).toBe(mockUser);
+				});
+		});
+	});
+
 	describe("getCurrentLanguage", () => {
 		it("should get the current language in an observable", () => {
 			sessionService
@@ -746,8 +767,8 @@ describe("Service: StarkSessionService", () => {
 			sessionService.setCurrentLanguage("FR");
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new ChangeLanguage("FR"));
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new ChangeLanguageSuccess("FR"));
+			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkChangeLanguage("FR"));
+			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new StarkChangeLanguageSuccess("FR"));
 
 			expect(mockTranslateService.use).toHaveBeenCalledTimes(1);
 			expect(mockTranslateService.use).toHaveBeenCalledWith("FR");
@@ -759,8 +780,8 @@ describe("Service: StarkSessionService", () => {
 			sessionService.setCurrentLanguage("FR");
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new ChangeLanguage("FR"));
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new ChangeLanguageFailure("dummy error"));
+			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkChangeLanguage("FR"));
+			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new StarkChangeLanguageFailure("dummy error"));
 
 			expect(mockTranslateService.use).toHaveBeenCalledTimes(1);
 			expect(mockTranslateService.use).toHaveBeenCalledWith("FR");

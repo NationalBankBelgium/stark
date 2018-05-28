@@ -1,10 +1,11 @@
 import { Inject, Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { filter } from "rxjs/operators";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
+import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 import { StarkSettingsService, starkSettingsServiceName } from "./settings.service.intf";
-import { SetPreferredLanguage } from "../actions";
+import { StarkSetPreferredLanguage } from "../actions";
 import {
 	STARK_APP_CONFIG,
 	STARK_APP_METADATA,
@@ -14,7 +15,6 @@ import {
 } from "../../../configuration/entities";
 import { StarkUser } from "../../user/entities";
 import { StarkCoreApplicationState } from "../../../common/store";
-import { selectStarkUser } from "../../user/reducers";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
 /**
@@ -23,8 +23,10 @@ import { StarkConfigurationUtil } from "../../../util/configuration.util";
  * @description Service that allows the manipulation of application settings, some of which can be persisted.
  *
  * @requires StarkLoggingService
- * @requires ngrx-store.Store
+ * @requires StarkSessionService
+ * @requires StarkApplicationMetadata
  * @requires StarkApplicationConfig
+ * @requires ngrx-store.Store
  */
 @Injectable()
 export class StarkSettingsServiceImpl implements StarkSettingsService {
@@ -32,6 +34,7 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
 		@Inject(STARK_APP_METADATA) private appMetadata: StarkApplicationMetadata,
 		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
 		public store: Store<StarkCoreApplicationState>
@@ -46,11 +49,9 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 	}
 
 	public initializeSettings(): void {
-		this.store
-			.pipe(
-				select(selectStarkUser),
-				filter((user?: StarkUser) => typeof user !== "undefined" && typeof user.language !== "undefined")
-			)
+		this.sessionService
+			.getCurrentUser()
+			.pipe(filter((user?: StarkUser) => typeof user !== "undefined" && typeof user.language !== "undefined"))
 			.subscribe((user?: StarkUser) => {
 				if (
 					(<StarkUser>user).language !== null &&
@@ -94,6 +95,6 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 
 	public setPreferredLanguage(language: string): void {
 		this.preferredLanguage = language;
-		this.store.dispatch(new SetPreferredLanguage(language));
+		this.store.dispatch(new StarkSetPreferredLanguage(language));
 	}
 }

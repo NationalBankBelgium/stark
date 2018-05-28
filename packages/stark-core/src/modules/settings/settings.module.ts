@@ -1,18 +1,12 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
-import { ActionReducerMap, StoreModule } from "@ngrx/store";
+import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-
-import { settingsReducer, StarkSettingsState } from "./reducers";
-import { StarkSettingsActions } from "./actions";
+import { starkSettingsReducers } from "./reducers";
 import { STARK_SETTINGS_SERVICE, StarkSettingsServiceImpl } from "./services";
 import { StarkSettingsEffects } from "./effects";
 
-const reducers: ActionReducerMap<StarkSettingsState, StarkSettingsActions> = {
-	settings: settingsReducer
-};
-
 @NgModule({
-	imports: [StoreModule.forFeature("StarkSettings", reducers), EffectsModule.forFeature([StarkSettingsEffects])]
+	imports: [StoreModule.forFeature("StarkSettings", starkSettingsReducers), EffectsModule.forFeature([StarkSettingsEffects])]
 })
 export class StarkSettingsModule {
 	// instantiate the services only once since they should be singletons

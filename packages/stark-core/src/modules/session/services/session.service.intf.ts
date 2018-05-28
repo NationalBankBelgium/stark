@@ -17,6 +17,13 @@ export interface StarkSessionService {
 	readonly fakePreAuthenticationHeaders: Map<string, string>;
 
 	/**
+	 * Returns the session's current user
+	 *
+	 * @returns Observable that will emit the current user and the latest value whenever it changes
+	 */
+	getCurrentUser(): Observable<StarkUser | undefined>;
+
+	/**
 	 * Gets the session's current language (language Id)
 	 *
 	 * @returns Observable that will emit the currentLanguage and the latest value whenever it changes

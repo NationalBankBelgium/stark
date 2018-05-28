@@ -5,6 +5,7 @@ import { Keepalive } from "@ng-idle/keepalive";
 import { TranslateService } from "@ngx-translate/core";
 import { select, Store } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
+import { validateSync } from "class-validator";
 import { defer, Observable, Subject } from "rxjs";
 import { map, take } from "rxjs/operators";
 
@@ -15,19 +16,19 @@ import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration
 import { StarkPreAuthentication, StarkSession } from "../entities";
 import { StarkUser } from "../../user/entities";
 import {
-	ChangeLanguage,
-	ChangeLanguageFailure,
-	ChangeLanguageSuccess,
-	DestroySession,
-	DestroySessionSuccess,
-	InitializeSession,
-	InitializeSessionSuccess,
-	SessionLogout,
-	SessionTimeoutCountdownFinish,
-	SessionTimeoutCountdownStart,
-	SessionTimeoutCountdownStop,
-	UserActivityTrackingPause,
-	UserActivityTrackingResume
+	StarkChangeLanguage,
+	StarkChangeLanguageFailure,
+	StarkChangeLanguageSuccess,
+	StarkDestroySession,
+	StarkDestroySessionSuccess,
+	StarkInitializeSession,
+	StarkInitializeSessionSuccess,
+	StarkSessionLogout,
+	StarkSessionTimeoutCountdownFinish,
+	StarkSessionTimeoutCountdownStart,
+	StarkSessionTimeoutCountdownStop,
+	StarkUserActivityTrackingPause,
+	StarkUserActivityTrackingResume
 } from "../actions";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
@@ -35,6 +36,7 @@ import { starkSessionExpiredStateName } from "../../../common/routes";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { selectStarkSession } from "../reducers";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
+import { StarkValidationErrorsUtil } from "../../../util";
 
 export const starkUnauthenticatedUserError: string = "StarkSessionService => user not authenticated";
 
@@ -107,7 +109,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 				// because the browser has to wait for the HTTP call to complete.
 
 				// dispatch action so an effect can run any logic if needed
-				this.store.dispatch(new SessionLogout());
+				this.store.dispatch(new StarkSessionLogout());
 				this.sendLogoutRequest(this.appConfig.logoutUrl, "", false);
 				// in this case, since the HTTP call is synchronous, the session can be destroy immediately
 				this.destroySession();
@@ -157,10 +159,10 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	 * @param user - The user used to initialize the session.
 	 */
 	protected initializeSession(user: StarkUser): void {
-		this.store.dispatch(new InitializeSession(user));
+		this.store.dispatch(new StarkInitializeSession(user));
 		this.startIdleService();
 		this.startKeepaliveService();
-		this.store.dispatch(new InitializeSessionSuccess());
+		this.store.dispatch(new StarkInitializeSessionSuccess());
 	}
 
 	/**
@@ -168,19 +170,22 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	 * It dispatches a DESTROY_SESSION action to the NGRX-Store
 	 */
 	protected destroySession(): void {
-		this.store.dispatch(new DestroySession());
+		this.store.dispatch(new StarkDestroySession());
 		this.stopIdleService();
 		this.stopKeepaliveService();
-		this.store.dispatch(new DestroySessionSuccess());
+		this.store.dispatch(new StarkDestroySessionSuccess());
 	}
 
 	public login(user: StarkUser): void {
+		// use class-validator to validate the object based on the entity StarkUser
+		StarkValidationErrorsUtil.throwOnError(validateSync(user), starkSessionServiceName + ": invalid user profile.");
+
 		this.initializeSession(user);
 	}
 
 	public logout(): void {
 		// dispatch action so an effect can run any logic if needed
-		this.store.dispatch(new SessionLogout());
+		this.store.dispatch(new StarkSessionLogout());
 		// the session will always be destroyed right after the response of the logout HTTP call (regardless of its result)
 		this.sendLogoutRequest(this.appConfig.logoutUrl, "", true).subscribe(() => this.destroySession(), () => this.destroySession());
 	}
@@ -224,12 +229,12 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	}
 
 	public pauseUserActivityTracking(): void {
-		this.store.dispatch(new UserActivityTrackingPause());
+		this.store.dispatch(new StarkUserActivityTrackingPause());
 		this.idle.clearInterrupts();
 	}
 
 	public resumeUserActivityTracking(): void {
-		this.store.dispatch(new UserActivityTrackingResume());
+		this.store.dispatch(new StarkUserActivityTrackingResume());
 		this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 		this.startIdleService();
 		this.startKeepaliveService();
@@ -261,14 +266,14 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 			if (this.countdownStarted) {
 				this.countdownStarted = false;
 				// dispatch action so an effect can run any logic if needed
-				this.store.dispatch(new SessionTimeoutCountdownStop());
+				this.store.dispatch(new StarkSessionTimeoutCountdownStop());
 			}
 		});
 
 		this.idle.onTimeout.subscribe(() => {
 			this.logger.warn(starkSessionServiceName + ": the user session has timed out!");
 			// dispatch action so an effect can run any logic if needed
-			this.store.dispatch(new SessionTimeoutCountdownFinish());
+			this.store.dispatch(new StarkSessionTimeoutCountdownFinish());
 			this.logout();
 			this.routingService.navigateTo(starkSessionExpiredStateName);
 		});
@@ -276,7 +281,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 			if (countdown === this.idle.getTimeout()) {
 				this.countdownStarted = true;
 				// dispatch action so an effect can run any logic if needed (i.e. displaying a timeout countdown dialog)
-				this.store.dispatch(new SessionTimeoutCountdownStart(countdown));
+				this.store.dispatch(new StarkSessionTimeoutCountdownStart(countdown));
 			}
 		});
 	}
@@ -366,17 +371,21 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		}
 	}
 
+	public getCurrentUser(): Observable<StarkUser | undefined> {
+		return this.session$.pipe(map((session: StarkSession) => session.user));
+	}
+
 	public getCurrentLanguage(): Observable<string> {
 		return this.session$.pipe(map((session: StarkSession) => session.currentLanguage));
 	}
 
 	public setCurrentLanguage(newLanguage: string): void {
 		// dispatch corresponding action to allow the user to trigger his own effects if needed
-		this.store.dispatch(new ChangeLanguage(newLanguage));
+		this.store.dispatch(new StarkChangeLanguage(newLanguage));
 
 		defer(() => this.translateService.use(newLanguage)).subscribe(
-			(languageId: string) => this.store.dispatch(new ChangeLanguageSuccess(languageId)),
-			(error: any) => this.store.dispatch(new ChangeLanguageFailure(error))
+			(languageId: string) => this.store.dispatch(new StarkChangeLanguageSuccess(languageId)),
+			(error: any) => this.store.dispatch(new StarkChangeLanguageFailure(error))
 		);
 	}
 }
