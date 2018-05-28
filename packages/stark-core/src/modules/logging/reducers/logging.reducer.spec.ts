@@ -1,6 +1,6 @@
 import { StarkLogging, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
 import { loggingReducer } from "./logging.reducer";
-import { SetApplicationId, LogMessage, FlushLogMessages } from "../actions";
+import { StarkSetLoggingApplicationId, StarkLogMessageAction, StarkFlushLogMessages } from "../actions";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 
@@ -25,7 +25,7 @@ describe("Reducer: LoggingReducer", () => {
 			deepFreeze(initialState); //Enforce immutability
 			const changedState: StarkLogging = loggingReducer(
 				initialState,
-				new LogMessage(new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", ""))
+				new StarkLogMessageAction(new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", ""))
 			);
 
 			expect(changedState.messages.length).toBe(3);
@@ -37,7 +37,7 @@ describe("Reducer: LoggingReducer", () => {
 		it("should add the given messages to the array even if the state is not defined", () => {
 			const changedState: StarkLogging = loggingReducer(
 				<any>undefined,
-				new LogMessage(new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", ""))
+				new StarkLogMessageAction(new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", ""))
 			);
 
 			expect(changedState.messages.length).toBe(1);
@@ -60,7 +60,7 @@ describe("Reducer: LoggingReducer", () => {
 			expect(initialState.messages.length).toBe(5);
 
 			deepFreeze(initialState); //Enforce immutability
-			const changedState: StarkLogging = loggingReducer(initialState, new FlushLogMessages(3));
+			const changedState: StarkLogging = loggingReducer(initialState, new StarkFlushLogMessages(3));
 
 			expect(changedState.messages.length).toBe(2);
 			expect(changedState.messages[0].message).toBe("Message 4");
@@ -75,12 +75,12 @@ describe("Reducer: LoggingReducer", () => {
 			initialState.applicationId = "whatever";
 
 			deepFreeze(initialState); //Enforce immutability
-			const changedState: StarkLogging = loggingReducer(initialState, new SetApplicationId("new appID"));
+			const changedState: StarkLogging = loggingReducer(initialState, new StarkSetLoggingApplicationId("new appID"));
 
 			expect(changedState.applicationId).toBe("new appID");
 		});
 		it("should set the application id even if the state is not defined", () => {
-			const changedState: StarkLogging = loggingReducer(<any>undefined, new SetApplicationId("new appID"));
+			const changedState: StarkLogging = loggingReducer(<any>undefined, new StarkSetLoggingApplicationId("new appID"));
 
 			expect(changedState.applicationId).toBe("new appID");
 		});

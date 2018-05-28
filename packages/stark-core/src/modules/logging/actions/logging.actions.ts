@@ -6,17 +6,18 @@ import { StarkLogMessage } from "../entities";
  */
 
 export enum StarkLoggingActionTypes {
-	LOGGING_SET_APPLICATION_ID = "LOGGING_SET_APPLICATION_ID",
-	LOG_MESSAGE = "LOG_MESSAGE",
-	FLUSH_LOG = "FLUSH_LOG"
+	SET_LOGGING_APPLICATION_ID = "[StarkLogging] Set Logging Application Id",
+	LOG_MESSAGE = "[StarkLogging] Log Message",
+	FLUSH_LOG = "[StarkLogging] Flush Log"
 }
 
 /**
  * Add the Application Name to the logging object
  * @returns The created action object
  */
-export class SetApplicationId implements Action {
-	public readonly type: "LOGGING_SET_APPLICATION_ID" = StarkLoggingActionTypes.LOGGING_SET_APPLICATION_ID;
+export class StarkSetLoggingApplicationId implements Action {
+	public readonly type: StarkLoggingActionTypes.SET_LOGGING_APPLICATION_ID = StarkLoggingActionTypes.SET_LOGGING_APPLICATION_ID;
+
 	public constructor(public applicationId: string) {}
 }
 
@@ -25,8 +26,9 @@ export class SetApplicationId implements Action {
  * @param message - The message to log
  * @returns The created action object
  */
-export class LogMessage implements Action {
-	public readonly type: "LOG_MESSAGE" = StarkLoggingActionTypes.LOG_MESSAGE;
+export class StarkLogMessageAction implements Action {
+	public readonly type: StarkLoggingActionTypes.LOG_MESSAGE = StarkLoggingActionTypes.LOG_MESSAGE;
+
 	public constructor(public message: StarkLogMessage) {}
 }
 
@@ -34,9 +36,10 @@ export class LogMessage implements Action {
  * Persists the log messages in the redux store to the back-end
  * @returns The created action object
  */
-export class FlushLogMessages implements Action {
-	public readonly type: "FLUSH_LOG" = StarkLoggingActionTypes.FLUSH_LOG;
+export class StarkFlushLogMessages implements Action {
+	public readonly type: StarkLoggingActionTypes.FLUSH_LOG = StarkLoggingActionTypes.FLUSH_LOG;
 
 	public constructor(public numberOfMessagesToFlush: number) {}
 }
-export type StarkLoggingActions = SetApplicationId | LogMessage | FlushLogMessages;
+
+export type StarkLoggingActions = StarkSetLoggingApplicationId | StarkLogMessageAction | StarkFlushLogMessages;

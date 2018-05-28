@@ -1,15 +1,10 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
-import { ActionReducerMap, StoreModule } from "@ngrx/store";
-import { sessionReducer, StarkSessionState } from "./reducers";
-import { StarkSessionActions } from "./actions";
-import { StarkSessionServiceImpl, STARK_SESSION_SERVICE } from "./services";
-
-const reducers: ActionReducerMap<StarkSessionState, StarkSessionActions> = {
-	session: sessionReducer
-};
+import { StoreModule } from "@ngrx/store";
+import { starkSessionReducers } from "./reducers";
+import { STARK_SESSION_SERVICE, StarkSessionServiceImpl } from "./services";
 
 @NgModule({
-	imports: [StoreModule.forFeature("StarkSession", reducers)]
+	imports: [StoreModule.forFeature("StarkSession", starkSessionReducers)]
 })
 export class StarkSessionModule {
 	// instantiate the services only once since they should be singletons

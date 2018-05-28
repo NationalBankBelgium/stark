@@ -12,25 +12,11 @@ export const STARK_USER_SERVICE: InjectionToken<StarkUserService> = new Injectio
  */
 export interface StarkUserService {
 	/**
-	 * Returns the current user from the StarkSession object in the NGRX store
-	 *
-	 * @returns Observable that will emit the latest user available in the StarkSession
-	 */
-	getUser(): Observable<StarkUser | undefined>;
-
-	/**
 	 * Triggers an HTTP call to the REST API to fetch the user profile
 	 *
 	 * @returns Observable that will emit the user profile fetched from the REST API
 	 */
 	fetchUserProfile(): Observable<StarkUser>;
-
-	/**
-	 * Sets the current session's user profile (to be used only in development).
-	 *
-	 * @param user - The User profile to be set
-	 */
-	setUser(user: StarkUser): void;
 
 	/**
 	 * Gets all user profiles defined in the mock data (to be used only in development).

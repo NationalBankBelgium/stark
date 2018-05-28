@@ -1,16 +1,10 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
-import { ActionReducerMap, StoreModule } from "@ngrx/store";
-
-import { loggingReducer, StarkLoggingState } from "./reducers";
-import { StarkLoggingActions } from "./actions";
-import { StarkLoggingServiceImpl, STARK_LOGGING_SERVICE } from "./services";
-
-const reducers: ActionReducerMap<StarkLoggingState, StarkLoggingActions> = {
-	logging: loggingReducer
-};
+import { StoreModule } from "@ngrx/store";
+import { starkLoggingReducers } from "./reducers";
+import { STARK_LOGGING_SERVICE, StarkLoggingServiceImpl } from "./services";
 
 @NgModule({
-	imports: [StoreModule.forFeature("StarkLogging", reducers)]
+	imports: [StoreModule.forFeature("StarkLogging", starkLoggingReducers)]
 })
 export class StarkLoggingModule {
 	// instantiate the services only once since they should be singletons

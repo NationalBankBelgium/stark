@@ -1,7 +1,7 @@
 import Spy = jasmine.Spy;
 import createSpyObj = jasmine.createSpyObj;
 import { StarkSettingsEffects } from "./settings.effects";
-import { SetPreferredLanguage } from "../actions";
+import { StarkSetPreferredLanguage } from "../actions";
 import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 import { MockStarkSessionService } from "../../session/testing";
 import { TestBed } from "@angular/core/testing";
@@ -43,7 +43,7 @@ describe("Effect: StarkSettingsEffects", () => {
 
 			settingsEffects.setPreferredLanguage$().subscribe(mockObserver);
 
-			subject.next(new SetPreferredLanguage("NL"));
+			subject.next(new StarkSetPreferredLanguage("NL"));
 
 			expect(mockSessionService.setCurrentLanguage).toHaveBeenCalledWith("NL");
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);

@@ -26,7 +26,7 @@ export function loggingReducer(
 
 			return { ...state, messages: [...messages] };
 
-		case StarkLoggingActionTypes.LOGGING_SET_APPLICATION_ID:
+		case StarkLoggingActionTypes.SET_LOGGING_APPLICATION_ID:
 			return { ...state, applicationId: action.applicationId };
 
 		default:

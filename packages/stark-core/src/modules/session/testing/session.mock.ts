@@ -5,12 +5,13 @@ import { Observable } from "rxjs";
 export class MockStarkSessionService implements StarkSessionService {
 	public fakePreAuthenticationHeaders: Map<string, string>;
 
+	public getCurrentUser: () => Observable<any> = jasmine.createSpy("getCurrentLanguage");
 	public getCurrentLanguage: () => Observable<string> = jasmine.createSpy("getCurrentLanguage");
-	public setCurrentLanguage: () => Observable<string> = jasmine.createSpy("setCurrentLanguage");
-	public login: () => Observable<string> = jasmine.createSpy("login");
-	public logout: () => Observable<string> = jasmine.createSpy("logout");
-	public pauseUserActivityTracking: () => Observable<string> = jasmine.createSpy("pauseUserActivityTracking");
-	public resumeUserActivityTracking: () => Observable<string> = jasmine.createSpy("resumeUserActivityTracking");
+	public setCurrentLanguage: () => void = jasmine.createSpy("setCurrentLanguage");
+	public login: () => void = jasmine.createSpy("login");
+	public logout: () => void = jasmine.createSpy("logout");
+	public pauseUserActivityTracking: () => void = jasmine.createSpy("pauseUserActivityTracking");
+	public resumeUserActivityTracking: () => void = jasmine.createSpy("resumeUserActivityTracking");
 
 	public constructor(fakePreAuthenticationHeaders?: Map<string, string>) {
 		if (!fakePreAuthenticationHeaders) {

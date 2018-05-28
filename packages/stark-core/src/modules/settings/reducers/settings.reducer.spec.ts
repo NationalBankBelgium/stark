@@ -1,4 +1,4 @@
-import { SetPreferredLanguage } from "../actions";
+import { StarkSetPreferredLanguage } from "../actions";
 import { StarkSettings } from "../entities";
 import { settingsReducer } from "./settings.reducer";
 
@@ -18,12 +18,12 @@ describe("Reducer: SettingsReducer", () => {
 			deepFreeze(initialState); //Enforce immutability
 
 			// Send the SET_PREFERRED_LANGUAGE action to the settingsReducer
-			const changedState: StarkSettings = settingsReducer(<StarkSettings>initialState, new SetPreferredLanguage("NL"));
+			const changedState: StarkSettings = settingsReducer(<StarkSettings>initialState, new StarkSetPreferredLanguage("NL"));
 			expect(changedState.preferredLanguage).toBe("NL");
 		});
 		it("should set the preferred language when state not defined", () => {
 			// Send the SET_PREFERRED_LANGUAGE action to the settingsReducer
-			const changedState: StarkSettings = settingsReducer(<any>undefined, new SetPreferredLanguage("NL"));
+			const changedState: StarkSettings = settingsReducer(<any>undefined, new StarkSetPreferredLanguage("NL"));
 			expect(changedState.preferredLanguage).toBe("NL");
 		});
 	});
