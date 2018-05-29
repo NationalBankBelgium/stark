@@ -34,7 +34,7 @@ describe("Validator Function: StarkArraySizeRange", () => {
 			const invalidArrays: number[][] = [getTestArray(0)];
 
 			for (const arr of invalidArrays) {
-				expect(starkArraySizeRange(arr, 1, <any>undefined)).toBe(false);
+				expect(starkArraySizeRange(arr, 1, undefined)).toBe(false);
 			}
 		});
 
@@ -42,7 +42,7 @@ describe("Validator Function: StarkArraySizeRange", () => {
 			const validArrays: number[][] = [getTestArray(1), getTestArray(2), getTestArray(3), getTestArray(4)];
 
 			for (const arr of validArrays) {
-				expect(starkArraySizeRange(arr, 1, <any>undefined)).toBe(true);
+				expect(starkArraySizeRange(arr, 1, undefined)).toBe(true);
 			}
 		});
 	});
@@ -52,7 +52,7 @@ describe("Validator Function: StarkArraySizeRange", () => {
 			const invalidArrays: number[][] = [getTestArray(3), getTestArray(4)];
 
 			for (const arr of invalidArrays) {
-				expect(starkArraySizeRange(arr, <any>undefined, 2)).toBe(false);
+				expect(starkArraySizeRange(arr, undefined, 2)).toBe(false);
 			}
 		});
 
@@ -60,7 +60,7 @@ describe("Validator Function: StarkArraySizeRange", () => {
 			const validArrays: number[][] = [getTestArray(0), getTestArray(1), getTestArray(2)];
 
 			for (const arr of validArrays) {
-				expect(starkArraySizeRange(arr, <any>undefined, 2)).toBe(true);
+				expect(starkArraySizeRange(arr, undefined, 2)).toBe(true);
 			}
 		});
 	});
@@ -70,7 +70,7 @@ describe("Validator Function: StarkArraySizeRange", () => {
 			const validArrays: number[][] = [getTestArray(0), getTestArray(1), getTestArray(2), getTestArray(3), getTestArray(4)];
 
 			for (const arr of validArrays) {
-				expect(starkArraySizeRange(arr, <any>undefined, <any>undefined)).toBe(true);
+				expect(starkArraySizeRange(arr, undefined, undefined)).toBe(true);
 			}
 		});
 	});

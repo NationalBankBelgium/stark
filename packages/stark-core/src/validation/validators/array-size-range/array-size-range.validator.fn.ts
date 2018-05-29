@@ -4,7 +4,7 @@ import { StarkValidatorImpl } from "../../validator";
 
 export const starkArraySizeRangeValidatorName: string = "starkArraySizeRange";
 
-export function starkArraySizeRange(array: any[], minSize: number, maxSize: number): boolean {
+export function starkArraySizeRange(array: any[], minSize?: number, maxSize?: number): boolean {
 	const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
 	let isValid: boolean = true;
 

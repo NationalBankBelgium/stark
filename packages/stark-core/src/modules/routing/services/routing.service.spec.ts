@@ -16,6 +16,7 @@ import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
 import CallInfo = jasmine.CallInfo;
 import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
 
 @Component({ selector: "test-home", template: "HOME" })
 export class HomeComponent {}
@@ -30,7 +31,9 @@ describe("Service: StarkRoutingService", () => {
 	let routingService: StarkRoutingServiceImpl;
 	let mockLogger: StarkLoggingService;
 	let appConfig: StarkApplicationConfig;
-	const mockStore: Store<StarkCoreApplicationState> = jasmine.createSpyObj("storeSpy", ["dispatch"]);
+	const mockStore: SpyObj<Store<StarkCoreApplicationState>> = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("storeSpy", [
+		"dispatch"
+	]);
 	const mockCorrelationId: string = "12345";
 
 	// mockStates Tree
@@ -408,7 +411,7 @@ describe("Service: StarkRoutingService", () => {
 			(<Spy>mockLogger.warn).calls.reset();
 			(<Spy>mockLogger.debug).calls.reset();
 			(<Spy>mockLogger.error).calls.reset();
-			(<Spy>mockStore.dispatch).calls.reset();
+			mockStore.dispatch.calls.reset();
 		})
 	);
 
@@ -1651,7 +1654,7 @@ describe("Service: StarkRoutingService", () => {
 				const expectedCalls: number = 16 + 12 + 3 + 1;
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(expectedCalls);
 
-				const actions: CallInfo[] = (<Spy>mockStore.dispatch).calls.all();
+				const actions: CallInfo[] = mockStore.dispatch.calls.all();
 				const actionIndex: number = 16 + 12;
 
 				for (let i: number = 0; i < actions.length; i++) {

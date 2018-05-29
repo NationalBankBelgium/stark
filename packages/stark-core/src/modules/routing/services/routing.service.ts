@@ -1,5 +1,5 @@
 import { Action, Store } from "@ngrx/store";
-import { empty, from, Observable } from "rxjs";
+import { EMPTY, from, Observable } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
 import {
 	HookFn,
@@ -120,7 +120,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 		this.store.dispatch(new StarkNavigationHistoryLimitReached());
 		this.logger.warn(starkRoutingServiceName + ": navigateToPrevious - " + reason);
-		return empty();
+		return EMPTY;
 	}
 
 	public reload(): Observable<any> {
@@ -234,6 +234,8 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		callback: HookFn,
 		options?: HookRegOptions
 	): Function {
+		// FIXME: this tslint disable flag is needed due to a bug in the no-useless-cast rule (TsLint v5.10.0). Remove it once it is solved
+		/* tslint:disable:no-useless-cast */
 		switch (lifecycleHook) {
 			case StarkRoutingTransitionHook.ON_BEFORE:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onbefore
@@ -262,6 +264,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			default:
 				throw new Error(starkRoutingServiceName + ": lifecycle hook unknown => " + lifecycleHook);
 		}
+		/* tslint:enable */
 	}
 
 	/**

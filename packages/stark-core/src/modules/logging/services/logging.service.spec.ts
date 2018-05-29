@@ -1,4 +1,5 @@
 import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
 import { Store } from "@ngrx/store";
 import { Observable, of, throwError } from "rxjs";
 import { Serialize } from "cerialize";
@@ -14,7 +15,7 @@ import { StarkError, StarkErrorImpl } from "../../../common";
 
 describe("Service: StarkLoggingService", () => {
 	let appConfig: StarkApplicationConfig;
-	let mockStore: Store<StarkCoreApplicationState>;
+	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
 	// let mockXSRFService: StarkXSRFService;
 	let loggingService: LoggingServiceHelper;
 	const loggingBackend: StarkBackend = {
@@ -35,7 +36,7 @@ describe("Service: StarkLoggingService", () => {
 	const loggingFlushPersistSize: number = 11;
 
 	beforeEach(() => {
-		mockStore = jasmine.createSpyObj("store", ["dispatch", "pipe"]);
+		mockStore = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("store", ["dispatch", "pipe"]);
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.debugLoggingEnabled = true;
 		appConfig.loggingFlushDisabled = false;
@@ -49,10 +50,10 @@ describe("Service: StarkLoggingService", () => {
 			applicationId: "dummy app id",
 			messages: []
 		};
-		(<Spy>mockStore.pipe).and.returnValue(of(mockStarkLogging));
+		mockStore.pipe.and.returnValue(of(mockStarkLogging));
 		loggingService = new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/);
 		// reset the calls counter because there is a log in the constructor
-		(<Spy>mockStore.dispatch).calls.reset();
+		mockStore.dispatch.calls.reset();
 	});
 
 	describe("on initialization", () => {
@@ -86,7 +87,7 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			const dispatchedAction: StarkLogMessageAction = mockStore.dispatch.calls.mostRecent().args[0];
 			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
 
 			const { message }: StarkLogMessageAction = dispatchedAction;
@@ -113,7 +114,7 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			const dispatchedAction: StarkLogMessageAction = mockStore.dispatch.calls.mostRecent().args[0];
 			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
 
 			const { message }: StarkLogMessageAction = dispatchedAction;
@@ -133,7 +134,7 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			const dispatchedAction: StarkLogMessageAction = mockStore.dispatch.calls.mostRecent().args[0];
 			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
 
 			const { message }: StarkLogMessageAction = dispatchedAction;
@@ -154,7 +155,7 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			const dispatchedAction: StarkLogMessageAction = mockStore.dispatch.calls.mostRecent().args[0];
 			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
 
 			const { message }: StarkLogMessageAction = dispatchedAction;
@@ -177,7 +178,7 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			const dispatchedAction: StarkLogMessageAction = mockStore.dispatch.calls.mostRecent().args[0];
 			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
 
 			const { message }: StarkLogMessageAction = dispatchedAction;

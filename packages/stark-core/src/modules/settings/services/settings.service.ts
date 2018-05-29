@@ -51,36 +51,28 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 	public initializeSettings(): void {
 		this.sessionService
 			.getCurrentUser()
-			.pipe(filter((user?: StarkUser) => typeof user !== "undefined" && typeof user.language !== "undefined"))
-			.subscribe((user?: StarkUser) => {
-				if (
-					(<StarkUser>user).language !== null &&
-					typeof (<StarkUser>user).language === "string" &&
-					this.appMetadata.supportedLanguages.findIndex((language: StarkLanguage) => {
-						return language.code.toLowerCase() === (<string>(<StarkUser>user).language).toLowerCase();
-					}) > -1
-				) {
-					this.setPreferredLanguage(<string>(<StarkUser>user).language);
-				} else {
-					const browserLanguage: string = navigator.language || navigator["userLanguage"];
-					if (typeof browserLanguage === "string") {
-						let languageIndex: number = this.appMetadata.supportedLanguages.findIndex((language: StarkLanguage) => {
-							return language.isoCode === browserLanguage;
-						});
-						if (languageIndex < 0) {
-							const browserLanguageCode: string = browserLanguage.split("-")[0];
-							languageIndex = this.appMetadata.supportedLanguages.findIndex((language: StarkLanguage) => {
-								return language.code === browserLanguageCode;
-							});
-						}
-						if (languageIndex > -1) {
-							this.setPreferredLanguage(this.appMetadata.supportedLanguages[languageIndex].code);
-						} else {
-							this.setPreferredLanguage(this.appConfig.defaultLanguage);
-						}
-					} else {
-						this.setPreferredLanguage(this.appConfig.defaultLanguage);
+			.pipe(filter((user?: StarkUser): user is StarkUser => typeof user !== "undefined"))
+			.subscribe((user: StarkUser) => {
+				let supportedLanguageIndex: number = -1;
+				const browserLanguage: string = navigator.language || navigator["userLanguage"] || "";
+
+				if (user.language) {
+					supportedLanguageIndex = this.findMatchingSupportedLanguage(user.language);
+				}
+
+				if (supportedLanguageIndex === -1) {
+					supportedLanguageIndex = this.findMatchingSupportedLanguage(browserLanguage);
+
+					if (supportedLanguageIndex === -1) {
+						const browserLanguageCode: string = browserLanguage.split("-")[0];
+						supportedLanguageIndex = this.findMatchingSupportedLanguage(browserLanguageCode);
 					}
+				}
+
+				if (supportedLanguageIndex !== -1) {
+					this.setPreferredLanguage(this.appMetadata.supportedLanguages[supportedLanguageIndex].code);
+				} else {
+					this.setPreferredLanguage(this.appConfig.defaultLanguage);
 				}
 			});
 	}
@@ -96,5 +88,14 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 	public setPreferredLanguage(language: string): void {
 		this.preferredLanguage = language;
 		this.store.dispatch(new StarkSetPreferredLanguage(language));
+	}
+
+	public findMatchingSupportedLanguage(language: string): number {
+		return this.appMetadata.supportedLanguages.findIndex((supportedLanguage: StarkLanguage) => {
+			return (
+				supportedLanguage.isoCode.toLowerCase() === language.toLowerCase() ||
+				supportedLanguage.code.toLowerCase() === language.toLowerCase()
+			);
+		});
 	}
 }
