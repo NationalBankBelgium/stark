@@ -139,7 +139,25 @@ module.exports = function(env) {
 							loader: "style-loader",
 							options: { attrs: { nonce: "cef324d21ec5483c8819cc7a5e33c4a2" } }
 						},
-						"css-loader"
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 1 // 1 => postcss-loader
+							}
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						}
 					],
 					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
@@ -152,8 +170,29 @@ module.exports = function(env) {
 				{
 					test: /\.scss$/,
 					use: [
-						{ loader: "style-loader", options: { attrs: { nonce: "cef324d21ec5483c8819cc7a5e33c4a2" } } },
-						"css-loader",
+						{
+							loader: "style-loader",
+							options: { attrs: { nonce: "cef324d21ec5483c8819cc7a5e33c4a2" } }
+						},
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 2 // 2 => postcss-loader + sass-loader
+							}
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						},
 						"sass-loader"
 					],
 					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
