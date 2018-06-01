@@ -38,7 +38,7 @@ cache:
   directories:
     - $HOME/.npm
 
-# Not needed since we use Puppeteer in karma.conf.typescript.ci.js
+# Not needed since we use Puppeteer in karma.conf.ci.js
 # It downloads Chrome itself and works with or without Travis
 #addons:
 #  chrome: stable

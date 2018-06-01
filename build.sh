@@ -337,9 +337,14 @@ do
         logInfo "Generate npm package (tgz file)"
         generateNpmPackage ${NPM_DIR}
         
+        logInfo "Adapt showcase dependencies"
+        adaptNpmPackageDependencies $PACKAGE $VERSION "./showcase/package.json" 1
+        adaptNpmPackageLockDependencies $PACKAGE $VERSION "./showcase/package-lock.json" 1
+        
         logInfo "Adapt starter dependencies"
         adaptNpmPackageDependencies $PACKAGE $VERSION "./starter/package.json" 1
         adaptNpmPackageLockDependencies $PACKAGE $VERSION "./starter/package-lock.json" 1
+
       fi
     travisFoldEnd "general tasks: ${PACKAGE}"
   

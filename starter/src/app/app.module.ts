@@ -45,8 +45,7 @@ import { AppState } from "./app.service";
 import { HomeComponent } from "./home";
 import { AboutComponent } from "./about";
 import { NoContentComponent } from "./no-content";
-import { XLargeDirective } from "./home/x-large";
-import { DevModuleModule } from "./+dev-module";
+
 /* tslint:disable:no-import-side-effect */
 // load PCSS styles
 import "../styles/styles.pcss";
@@ -115,7 +114,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
  */
 @NgModule({
 	bootstrap: [AppComponent],
-	declarations: [AppComponent, AboutComponent, HomeComponent, NoContentComponent, XLargeDirective],
+	declarations: [AppComponent, AboutComponent, HomeComponent, NoContentComponent],
 	/**
 	 * Import Angular's modules.
 	 */
@@ -139,14 +138,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot(),
 		StarkRoutingModule.forRoot(),
-		StarkAppLogoModule,
-
-		/**
-		 * This section will import the `DevModuleModule` only in certain build types.
-		 * When the module is not imported it will get tree shaked.
-		 * This is a simple example, a big app should probably implement some logic
-		 */
-		...(environment.showDevModule ? [DevModuleModule] : [])
+		StarkAppLogoModule
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.
@@ -165,6 +157,7 @@ export class AppModule {
 		private translateService: TranslateService,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService
 	) {
+		// TODO should use StarkLanguages, StarkLanguage, etc
 		this.translateService.addLangs(["en", "fr", "nl"]);
 		this.translateService.setTranslation("en", translationsEn, true);
 		this.translateService.setTranslation("fr", translationsFr, true);

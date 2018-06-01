@@ -16,13 +16,13 @@
 
 Stark provides main building blocks for accelerating front-end development:
 * a solid reusable build based on Webpack  
-* a starter inspired by [Angular Starter](https://github.com/gdi2290/angular-starter) by [AngularClass](https://angularclass.com) and Google's [Web Starterk Kit](https://github.com/google/web-starter-kit)
+* a starter project inspired by [Angular Starter](https://github.com/gdi2290/angular-starter) by [AngularClass](https://angularclass.com) and Google's [Web Starterk Kit](https://github.com/google/web-starter-kit)
 * core modules providing reusable APIs (e.g., reactive client for RESTful APIs based on [NBB's RESTful API Design Guide](https://github.com/NationalBankBelgium/REST-API-Design-Guide/wiki), routing, logging, log shipping, ...)
 * UI modules providing reusable UI components (e.g., data table, message pane, ...) and themes
-* a demo application containing
+* a showcase application containing
   * our [living style guide](https://www.smashingmagazine.com/2016/05/creating-a-living-style-guide-case-study/)
-	* a showcase of all components/services along with their API
-	* our developer guide
+  * a showcase of all components/services along with their API
+  * our developer guide
 
 Stark modules are like LEGO blocks: add what you need, no less, no more. If you don't like our defaults then you may replace/override/ignore anything you fancy.  
 

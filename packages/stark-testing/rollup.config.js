@@ -3,7 +3,7 @@
 const commonData = require("../rollup.config.common-data.js"); // common configuration between environments
 
 module.exports = {
-	input: "../../dist/packages-dist/stark-testing/karma.conf.typescript.js",
+	input: "../../dist/packages-dist/stark-testing/karma.conf.js",
 	external: commonData.external,
 	plugins: commonData.plugins,
 	output: [

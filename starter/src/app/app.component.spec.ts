@@ -46,12 +46,6 @@ describe(`App`, () => {
 		expect(comp).toBeDefined();
 	});
 
-	it(`should be @TipeIO`, () => {
-		expect(comp.twitter).toEqual("https://twitter.com/gdi2290");
-		expect(comp.tipe).toEqual("assets/img/tipe.png");
-		expect(comp.name).toEqual("Angular Starter");
-	});
-
 	it("should log ngOnInit", () => {
 		spyOn(console, "log");
 		expect(console.log).not.toHaveBeenCalled();

@@ -3,15 +3,22 @@
 
 # TEAM
 
-  <name> -- <role> -- <twitter>
+  National Bank of Belgium - https://www.nbb.be
 
 # THANKS
 
-  <name>
-  PatrickJS -- @gdi2290
-  AngularClass -- @AngularClass
+  We need great developers! Check out https://jobs.nbb.be
 
 # TECHNOLOGY COLOPHON
-
-  HTML5, CSS3
-  Angular2, TypeScript, Webpack
+  Angular
+  TypeScript  
+  RxJS
+  Redux
+  Material Design
+  Angular Material
+  ES20xy
+  HTML5
+  CSS3
+  Webpack  
+  NodeJS
+  NPM

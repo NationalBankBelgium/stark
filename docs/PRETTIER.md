@@ -10,7 +10,7 @@ $ npm run prettier-check
 ``` 
 ## Prettier configuration
 The main Prettier configuration file is located in `stark-build`.
-The one located in `starter` and the other one located in the root just reference the `stark-build` configuration file
+The ones located in `starter`, `showcase` and the other one located in the root just reference the `stark-build` configuration file
 ## Conflicts with TSLint and Stylelint
 The configurations of `TSLint` and `Stylelint` can conflict with `Prettier`.
 It's why we use [tslint-config-prettier](https://github.com/alexjoverm/tslint-config-prettier) and 

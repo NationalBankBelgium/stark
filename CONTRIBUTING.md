@@ -203,6 +203,7 @@ If you want to build Stark from source, you need to...
 ### Executing Stark's main build script
 Anytime you make modifications to a Stark package (e.g., stark-build, stark-core, ...), you'll need to
 * execute `npm run build` from the root directory of Stark
+* execute `npm install` again on the showcase to get those changes
 * execute `npm install` again on the starter to get those changes
 
 Stark's main build script is a fun Bash shell script heavily inspired by Angular's that
@@ -214,8 +215,22 @@ Stark's main build script is a fun Bash shell script heavily inspired by Angular
 * generates releasable versions of each package
 * adds license banners to the generated code
 * generates temporary tar.gz files for local testing
+* adapts the showcase's dependencies to point to the local tar.gz files
 * adapts the starter's dependencies to point to the local tar.gz files
 * ...
+
+### Hacking the showcase
+If you want to modify the showcase:
+* go to the showcase's folder: `cd showcase`
+* install dependencies: `npm install`
+* run it: `npm start`
+* open up your browser at http://localhost:3000
+* make your changes
+
+If you make modifications, they'll be applied automatically after a Webpack rebuild.
+
+By default the showcase depends on published Stark packages over at npm.
+But once the main build script at Stark's root (cfr previous section) is executed (e.g., using `npm install` or `npm run build` at the root), then the showcase will depend on the contents of the dist folder.
 
 ### Hacking the starter
 If you want to modify the starter:
@@ -236,7 +251,7 @@ If you want to modify Stark packages (e.g., stark-build, stark-core, ...):
 * install its dependencies: `npm install`
 * make your changes
 * execute `npm run build` at Stark's root 
-* update the Starter and test in it
+* update the Showcase and add examples to it / adapt existing code if needed
 
 Start hacking :)
 
@@ -245,10 +260,19 @@ If you want to test/validate your changes against the starter, then you can use 
 * update the starter: `npm run update-starter`
 * run the starter: `npm run starter`
 
+If you want to integrate examples or update code in the showcase and validate your changes, then you can use the following scripts from the root:
+* rebuild: `npm run build`
+* update the showcase: `npm run update-showcase`
+* run the showcase: `npm run showcase`
+
 If you only want to build a subset of stark then you can
 * execute one of the `build:stark-<name>` npm scripts; for example: `npm run build:stark-core` or `npm run build:stark-build`
 * execute the `build` script through npm with the list of packages to build: `npm run build -- --packages=stark-core`
 * execute the build script from the command line: `bash ./build.sh --packages=stark-core`
+
+## Executing test suites
+Anytime you integrate or modify features, you need to make sure the relevant test suites still pass.
+You can execute the tests for all Stark parts using the following command at the root: `npm test`
 
 ## Cleaning up the project / packages
 ### Cleaning up dist folders
@@ -321,6 +345,7 @@ Must be one of the following:
 * **stark-build**
 * **stark-core**
 * **stark-demo**
+* **stark-showcase**
 * **stark-starter**
 * **stark-rbac**
 * **stark-ui**

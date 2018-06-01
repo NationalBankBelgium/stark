@@ -18,7 +18,6 @@ import {
 import { Observable } from "rxjs";
 
 import { AppState } from "../app.service";
-import { Title } from "./title";
 import { Request } from "./request.entity";
 
 @Component({
@@ -31,7 +30,7 @@ import { Request } from "./request.entity";
 	/**
 	 * We need to tell Angular's Dependency Injection which providers are in our app.
 	 */
-	providers: [Title],
+	providers: [],
 	/**
 	 * Our list of styles in our component. We may add more to compose many styles together.
 	 */
@@ -52,16 +51,12 @@ export class HomeComponent implements OnInit {
 	 */
 	public constructor(
 		public appState: AppState,
-		public title: Title,
 		@Inject(STARK_HTTP_SERVICE) public httpService: StarkHttpService<any>,
 		@Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService
 	) {}
 
 	public ngOnInit(): void {
 		this.loggingService.debug("hello from `Home` component");
-		/**
-		 * this.title.getData().subscribe(data => this.data = data);
-		 */
 	}
 
 	public submitState(value: string): void {
