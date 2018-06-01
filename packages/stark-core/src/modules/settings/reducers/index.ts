@@ -11,7 +11,11 @@ export const starkSettingsReducers: ActionReducerMap<StarkSettingsState, StarkSe
 	settings: settingsReducer
 };
 
+export const selectStarkSettingsFeature: MemoizedSelector<object, StarkSettingsState> = createFeatureSelector<StarkSettingsState>(
+	"StarkSettings"
+);
+
 export const selectStarkSettings: MemoizedSelector<object, StarkSettings> = createSelector(
-	createFeatureSelector<StarkSettingsState>("StarkSettings"),
+	selectStarkSettingsFeature,
 	(state: StarkSettingsState) => state.settings
 );

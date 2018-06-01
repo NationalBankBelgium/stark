@@ -3,10 +3,9 @@
  */
 import { StarkLoggingState } from "../../modules/logging/reducers";
 import { StarkSessionState } from "../../modules/session/reducers";
-// import {StarkSettingsState} from "../../settings/reducers";
+import { StarkSettingsState } from "../../modules/settings/reducers";
 
-export interface StarkCoreApplicationState extends StarkLoggingState, StarkSessionState /*, StarkSettingsState*/ {
+export interface StarkCoreApplicationState extends StarkLoggingState, StarkSessionState, StarkSettingsState {
+	// FIXME: still needed?
 	// starkApplicationMetadata: StarkApplicationMetadata;
-	// starkSettings: StarkSettings;
-	// starkUser: StarkUser;  // not stored in Redux
 }

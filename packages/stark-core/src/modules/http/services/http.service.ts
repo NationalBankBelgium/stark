@@ -329,6 +329,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		);
 	}
 
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
 	private getCollectionResponseWrapperObservable(
 		httpResponse$: Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>>,
 		request: StarkHttpRequest<P>

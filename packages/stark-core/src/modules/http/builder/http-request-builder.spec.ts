@@ -22,15 +22,25 @@ import { StarkHttpEchoType, StarkHttpHeaders, StarkHttpQueryParameters, StarkSor
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import { StarkHttpRequestParams } from "./http-request-parameters.intf";
 import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
+import { StarkQueryParam } from "../entities/http-request.entity.intf";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 
 const resourcePath: string = "/something/:somethingId/else/:elseId/next";
 const resourceUuid: string = "dummyUUID";
+const resourceEtag: string = "123456789";
 const mockDate: Date = new Date();
 const mockFrozenPathParamsWithoutUUID: StarkHttpRequestParams = deepFreeze({
 	pathParameters: { someId: "1234" }
 });
+
+type StarkHttpRequestBuilderVariants<ResourceType extends StarkResource> =
+	| StarkHttpCreateRequestBuilder<ResourceType>
+	| StarkHttpDeleteRequestBuilder<ResourceType>
+	| StarkHttpGetRequestBuilder<ResourceType>
+	| StarkHttpGetCollectionRequestBuilder<ResourceType>
+	| StarkHttpSearchRequestBuilder<ResourceType>
+	| StarkHttpUpdateRequestBuilder<ResourceType>;
 
 type StarkHttpFetchResourceRequestBuilder<ResourceType extends StarkResource> =
 	| StarkHttpGetCollectionRequestBuilder<ResourceType>
@@ -60,10 +70,7 @@ function assertHeaders(requestHeaders: Map<string, string>, expectedHeaders: Map
 	});
 }
 
-function assertQueryParameters(
-	requestQueryParams: Map<string, string | string[] | undefined>,
-	expectedQueryParams: Map<string, string | string[] | undefined>
-): void {
+function assertQueryParameters(requestQueryParams: Map<string, StarkQueryParam>, expectedQueryParams: Map<string, StarkQueryParam>): void {
 	expect(requestQueryParams).toBeDefined();
 	expect(requestQueryParams.size).toBe(expectedQueryParams.size);
 
@@ -109,22 +116,23 @@ function testEcho(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<Stark
 function testSetHeader(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
 	describe("on setHeader", () => {
 		let builder: StarkHttpBaseRequestBuilder<MockResource>;
+		const contentTypeJSON: string = "application/json";
 
 		beforeEach(() => {
 			({ requestBuilder: builder } = beforeEachFn());
 		});
 
 		it("should add the header name/value only if the value is defined", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
+			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON);
 			builder.setHeader("invalidHeader", <any>undefined);
 
 			const request: StarkHttpRequest = builder.build();
 
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.CONTENT_TYPE, "application/json"]]));
+			assertHeaders(request.headers, new Map([[StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON]]));
 		});
 
 		it("should add the header name/value and add it to existing ones", () => {
-			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
+			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON);
 			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
 
 			const request: StarkHttpRequest = builder.build();
@@ -132,7 +140,7 @@ function testSetHeader(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables)
 			assertHeaders(
 				request.headers,
 				new Map([
-					[StarkHttpHeaders.CONTENT_TYPE, "application/json"],
+					[StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON],
 					[StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode]
 				])
 			);
@@ -158,7 +166,7 @@ function testAddQueryParameter(beforeEachFn: () => StarkHttpRequestBuilderSpecVa
 			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
 		});
 
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
+		it("should add the query parameters name/value including those with undefined value (allowUndefined = true)", () => {
 			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
 			builder.addQueryParameter("forceValidParam", undefined, true);
 
@@ -167,7 +175,7 @@ function testAddQueryParameter(beforeEachFn: () => StarkHttpRequestBuilderSpecVa
 			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", undefined]]));
 		});
 
-		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
+		it("should add the query parameters including those with empty value (allowEmpty = true)", () => {
 			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
 			builder.addQueryParameter("forceValidParam", "", undefined, true);
 
@@ -176,7 +184,7 @@ function testAddQueryParameter(beforeEachFn: () => StarkHttpRequestBuilderSpecVa
 			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", ""]]));
 		});
 
-		it("should add the query parameter name/value and add it to existing ones", () => {
+		it("should add the query parameters name/value and add it to existing ones", () => {
 			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
 			builder.addQueryParameter("include", "name");
 
@@ -203,7 +211,7 @@ function testAddQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
 		});
 
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
+		it("should add the query parameters name/value including those with undefined value (allowUndefined = true)", () => {
 			builder.addQueryParameters({ echo: StarkHttpEchoType.ID, forceValidParam: undefined }, true);
 
 			const request: StarkHttpRequest = builder.build();
@@ -243,7 +251,7 @@ function testSetQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 			({ requestBuilder: builder } = beforeEachFn());
 		});
 
-		it("should add the query parameters name/value except those with undefined or empty value (default)", () => {
+		it("should set the query parameters name/value except those with undefined or empty value (default)", () => {
 			builder.setQueryParameters({ echo: StarkHttpEchoType.ID, invalidParam1: undefined, invalidParam2: "" });
 
 			const request: StarkHttpRequest = builder.build();
@@ -251,7 +259,7 @@ function testSetQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID]]));
 		});
 
-		it("should add the query parameter name/value including those with undefined value (allowUndefined = true)", () => {
+		it("should set the query parameters name/value including those with undefined value (allowUndefined = true)", () => {
 			builder.setQueryParameters({ echo: StarkHttpEchoType.ID, forceValidParam: undefined }, true);
 
 			const request: StarkHttpRequest = builder.build();
@@ -267,7 +275,7 @@ function testSetQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", ""]]));
 		});
 
-		it("should add the query parameters name/value and remove the existing ones", () => {
+		it("should set the query parameters name/value and remove the existing ones", () => {
 			builder.addQueryParameter("echo", StarkHttpEchoType.ID);
 
 			let request: StarkHttpRequest = builder.build();
@@ -517,186 +525,931 @@ function testAddSortBy(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<
 	});
 }
 
-describe("Builder: StarkHttpRequestBuilder", () => {
-	const resourceEtag: string = "123456789";
+/* tslint:disable:no-duplicate-string no-null-keyword no-big-function */
+function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle" | "getCollection" | "search" | "update"): void {
+	describe("common functionality", () => {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		let requestBuilder: StarkHttpRequestBuilder<MockResource>;
+		let variantRequestBuilder: StarkHttpRequestBuilderVariants<MockResource>;
+		let expectedQueryParams: Map<string, StarkQueryParam>;
+		let mockResource: StarkResource;
 
-	let mockBackend: StarkBackend;
-	let requestBuilder: StarkHttpRequestBuilder<MockResource>;
-	let mockResource: StarkResource;
+		let mockCriteria: { [key: string]: any };
 
-	beforeEach(() => {
-		mockBackend = new StarkBackendImpl();
-		mockResource = new MockResource(resourceUuid);
-		mockResource.etag = resourceEtag;
-	});
+		beforeEach(() => {
+			mockResource = new MockResource(resourceUuid);
+			mockResource.etag = resourceEtag;
 
-	describe("on create", () => {
-		it("should return an instance of the StarkHttpCreateRequestBuilder", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
-
-			const createRequestBuilder: StarkHttpCreateRequestBuilder<MockResource> = requestBuilder.create(
-				mockResource,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3", invalidParam: <any>undefined },
-					queryParameters: {
-						param1: "one",
-						duplicateParam: ["dup1", "dup2", "dup3"],
-						invalidQueryParam1: "",
-						invalidQueryParam2: undefined
+			mockCriteria = {
+				field1: "anything",
+				field2: {
+					childField1: mockDate,
+					childField2: {
+						grandChildField1: ["someData", 123],
+						anotherUndefinedField: undefined,
+						anotherEmptyField: ""
 					},
-					retryCount: 5
-				})
-			);
-			expect(createRequestBuilder instanceof StarkHttpCreateRequestBuilderImpl).toBe(true);
+					someUndefinedField: undefined,
+					someEmptyField: ""
+				},
+				undefinedField: undefined,
+				emptyField: ""
+			};
+		});
 
-			const request: StarkHttpRequest = createRequestBuilder.build();
+		it("should return an instance of the request builder variant: " + typeOfBuilder, () => {
+			let expectedRequestType: string;
+			let expectedHeaders: Map<string, string> = new Map();
+			let expectedResource: StarkResource | undefined;
+			let expectedResourcePath: string = "/something/1/else/3/next";
+
+			expectedQueryParams = new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]]);
+
+			switch (typeOfBuilder) {
+				case "getSingle":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
+					variantRequestBuilder = requestBuilder.get(
+						resourceUuid,
+						deepFreeze({
+							pathParameters: { elseId: "3", invalidParam: <any>undefined },
+							queryParameters: {
+								param1: "one",
+								duplicateParam: ["dup1", "dup2", "dup3"],
+								invalidQueryParam1: "",
+								invalidQueryParam2: undefined
+							},
+							retryCount: 5
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.GET;
+					expectedResourcePath = "/something/" + resourceUuid + "/else/3/next";
+					expect(variantRequestBuilder instanceof StarkHttpGetRequestBuilderImpl).toBe(true);
+					break;
+				case "getCollection":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+					variantRequestBuilder = requestBuilder.getCollection(
+						3,
+						5,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3", invalidParam: <any>undefined },
+							queryParameters: {
+								param1: "one",
+								duplicateParam: ["dup1", "dup2", "dup3"],
+								invalidQueryParam1: "",
+								invalidQueryParam2: undefined
+							},
+							retryCount: 5
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.GET_COLLECTION;
+					expectedQueryParams = new Map<string, string | string[]>([
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"], // added only in DEV
+						["param1", "one"],
+						["duplicateParam", ["dup1", "dup2", "dup3"]]
+					]);
+					expect(variantRequestBuilder instanceof StarkHttpGetCollectionRequestBuilderImpl).toBe(true);
+					break;
+				case "search":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+					variantRequestBuilder = requestBuilder.search(
+						mockCriteria,
+						3,
+						5,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3", invalidParam: <any>undefined },
+							queryParameters: {
+								param1: "one",
+								duplicateParam: ["dup1", "dup2", "dup3"],
+								invalidQueryParam1: "",
+								invalidQueryParam2: undefined
+							},
+							retryCount: 5
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.SEARCH;
+					(<{ [key: string]: any }>expectedResource) = {
+						field1: "anything",
+						field2: {
+							childField1: mockDate.toISOString(),
+							childField2: {
+								grandChildField1: ["someData", 123],
+								anotherUndefinedField: null
+								// anotherEmptyField: undefined
+							},
+							someUndefinedField: null
+							// someEmptyField: undefined
+						},
+						undefinedField: null
+						// emptyField: undefined
+					};
+					expectedQueryParams = new Map<string, string | string[]>([
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"], // added only in DEV
+						["param1", "one"],
+						["duplicateParam", ["dup1", "dup2", "dup3"]]
+					]);
+					expect(variantRequestBuilder instanceof StarkHttpSearchRequestBuilderImpl).toBe(true);
+					expect(variantRequestBuilder.build().item).not.toBe(mockCriteria);
+					break;
+				case "update":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
+					variantRequestBuilder = requestBuilder.update(
+						mockResource,
+						deepFreeze({
+							pathParameters: { elseId: "3", invalidParam: <any>undefined },
+							queryParameters: {
+								param1: "one",
+								duplicateParam: ["dup1", "dup2", "dup3"],
+								invalidQueryParam1: "",
+								invalidQueryParam2: undefined
+							},
+							retryCount: 5
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.UPDATE;
+					expectedResource = mockResource;
+					expectedResourcePath = "/something/" + mockResource.uuid + "/else/3/next";
+					expectedHeaders = new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]);
+					expect(variantRequestBuilder instanceof StarkHttpUpdateRequestBuilderImpl).toBe(true);
+					break;
+				case "delete":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.delete(
+						mockResource,
+						deepFreeze({
+							pathParameters: { elseId: "3", invalidParam: <any>undefined },
+							queryParameters: {
+								param1: "one",
+								duplicateParam: ["dup1", "dup2", "dup3"],
+								invalidQueryParam1: "",
+								invalidQueryParam2: undefined
+							},
+							retryCount: 5
+						})
+					);
+					expect(variantRequestBuilder instanceof StarkHttpDeleteRequestBuilderImpl).toBe(true);
+					expectedRequestType = StarkHttpRequestType.DELETE;
+					expectedResource = mockResource;
+					expectedResourcePath = "/something/" + mockResource.uuid + "/else/3/next";
+					expectedHeaders = new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]);
+					break;
+				default:
+					// CREATE
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+					variantRequestBuilder = requestBuilder.create(
+						mockResource,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3", invalidParam: <any>undefined },
+							queryParameters: {
+								param1: "one",
+								duplicateParam: ["dup1", "dup2", "dup3"],
+								invalidQueryParam1: "",
+								invalidQueryParam2: undefined
+							},
+							retryCount: 5
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.CREATE;
+					expectedResource = mockResource;
+					expect(variantRequestBuilder instanceof StarkHttpCreateRequestBuilderImpl).toBe(true);
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
-			expect(request.item).toBe(mockResource);
+			expect(request.resourcePath).toBe(expectedResourcePath);
+			assertHeaders(request.headers, expectedHeaders);
+			assertQueryParameters(request.queryParameters, expectedQueryParams);
+			expect(request.requestType).toBe(expectedRequestType);
+			if (typeOfBuilder === "search") {
+				expect(request.item).toEqual(expectedResource); // the resource is generated based on the criteria
+			} else {
+				expect(request.item).toBe(expectedResource);
+			}
 			expect(request.retryCount).toBe(5);
 			expect(request.serializer).toBe(defaultSerializer);
 		});
 
 		it("should set the query parameters including those with undefined value (allowUndefinedQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+			const mockRequestParams: StarkHttpRequestParams = {
+				queryParameters: { param1: "one", invalidQueryParam: "", forceValidParam: undefined },
+				allowUndefinedQueryParams: true
+			};
+			const expectedBaseQueryParams: (string | undefined)[][] = [["param1", "one"], ["forceValidParam", undefined]];
 
-			const createRequestBuilder: StarkHttpCreateRequestBuilder<MockResource> = requestBuilder.create(
-				mockResource,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidQueryParam: "", forceValidParam: undefined },
-					allowUndefinedQueryParams: true
-				})
-			);
+			expectedQueryParams = new Map(<any>expectedBaseQueryParams);
 
-			const request: StarkHttpRequest = createRequestBuilder.build();
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", undefined]]));
+			switch (typeOfBuilder) {
+				case "update":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.update(mockResource, deepFreeze(mockRequestParams));
+					break;
+				case "delete":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.delete(mockResource, deepFreeze(mockRequestParams));
+					break;
+				case "getSingle":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.get(
+						resourceUuid,
+						deepFreeze({
+							pathParameters: { elseId: "3" },
+							...mockRequestParams
+						})
+					);
+					break;
+				case "getCollection":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.getCollection(3, 5, deepFreeze(mockRequestParams));
+					expectedQueryParams = new Map(<any>[
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"], // added only in DEV
+						...expectedBaseQueryParams
+					]);
+					break;
+				case "search":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.search(mockCriteria, 3, 5, deepFreeze(mockRequestParams));
+					expectedQueryParams = new Map(<any>[
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"], // added only in DEV
+						...expectedBaseQueryParams
+					]);
+					break;
+				default:
+					// CREATE
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.create(mockResource, deepFreeze(mockRequestParams));
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
+			assertQueryParameters(request.queryParameters, expectedQueryParams);
 		});
 
 		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+			const mockRequestParams: StarkHttpRequestParams = {
+				queryParameters: { param1: "one", invalidQueryParam: undefined, forceValidParam: "" },
+				allowEmptyQueryParams: true
+			};
+			const expectedBaseQueryParams: string[][] = [["param1", "one"], ["forceValidParam", ""]];
 
-			const createRequestBuilder: StarkHttpCreateRequestBuilder<MockResource> = requestBuilder.create(
-				mockResource,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidQueryParam: undefined, forceValidParam: "" },
-					allowEmptyQueryParams: true
-				})
-			);
+			expectedQueryParams = new Map(<any>expectedBaseQueryParams);
 
-			const request: StarkHttpRequest = createRequestBuilder.build();
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", ""]]));
+			switch (typeOfBuilder) {
+				case "update":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.update(mockResource, deepFreeze(mockRequestParams));
+					break;
+				case "delete":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.delete(mockResource, deepFreeze(mockRequestParams));
+					break;
+				case "getSingle":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.get(
+						resourceUuid,
+						deepFreeze({
+							pathParameters: { elseId: "3" },
+							...mockRequestParams
+						})
+					);
+					break;
+				case "getCollection":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.getCollection(3, 5, deepFreeze(mockRequestParams));
+
+					expectedQueryParams = new Map(<any>[
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"], // added only in DEV
+						...expectedBaseQueryParams
+					]);
+					break;
+				case "search":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.search(mockCriteria, 3, 5, deepFreeze(mockRequestParams));
+					expectedQueryParams = new Map(<any>[
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"], // added only in DEV
+						...expectedBaseQueryParams
+					]);
+					break;
+				default:
+					// CREATE
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.create(mockResource, deepFreeze(mockRequestParams));
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
+			assertQueryParameters(request.queryParameters, expectedQueryParams);
+		});
+	});
+}
+
+// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+// tslint:disable-next-line:cognitive-complexity
+function testCustomSerialization(typeOfBuilder: "create" | "delete" | "getSingle" | "getCollection" | "search" | "update"): void {
+	describe("custom serialization", () => {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		let requestBuilder: StarkHttpRequestBuilder<MockResource>;
+		let variantRequestBuilder: StarkHttpRequestBuilderVariants<MockResource>;
+		let expectedQueryParams: Map<string, StarkQueryParam>;
+		let expectedHeaders: Map<string, string>;
+		let mockResource: StarkResource;
+		let expectedResource: StarkResource | undefined;
+		let expectedRequestType: string;
+
+		let mockCriteria: { [key: string]: any };
+		let expectedResourcePath: string;
+
+		beforeEach(() => {
+			mockResource = new MockResource(resourceUuid);
+			mockResource.etag = resourceEtag;
+
+			mockCriteria = {
+				field1: "anything",
+				field2: {
+					childField1: mockDate,
+					childField2: {
+						grandChildField1: ["someData", 123],
+						anotherUndefinedField: undefined,
+						anotherEmptyField: ""
+					},
+					someUndefinedField: undefined,
+					someEmptyField: ""
+				},
+				undefinedField: undefined,
+				emptyField: ""
+			};
+
+			expectedQueryParams = new Map();
+			expectedHeaders = new Map();
+			expectedResourcePath = "/something/1/else/3/next";
 		});
 
 		it("should use a new serializer with the custom type provided in 'serializationType' param when no custom serializer is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+			switch (typeOfBuilder) {
+				case "update":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
 
-			const createRequestBuilder: StarkHttpCreateRequestBuilder<MockResource> = requestBuilder.create(
-				mockResource,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(createRequestBuilder instanceof StarkHttpCreateRequestBuilderImpl).toBe(true);
+					variantRequestBuilder = requestBuilder.update(
+						mockResource,
+						deepFreeze({
+							pathParameters: { elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.UPDATE;
+					expectedResource = mockResource;
+					expectedResourcePath = "/something/" + mockResource.uuid + "/else/3/next";
+					expectedHeaders = new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]);
+					expect(variantRequestBuilder instanceof StarkHttpUpdateRequestBuilderImpl).toBe(true);
+					break;
+				case "delete":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
 
-			const request: StarkHttpRequest = createRequestBuilder.build();
+					variantRequestBuilder = requestBuilder.delete(
+						mockResource,
+						deepFreeze({
+							pathParameters: { elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.DELETE;
+					expectedResource = mockResource;
+					expectedResourcePath = "/something/" + mockResource.uuid + "/else/3/next";
+					expectedHeaders = new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]);
+					expect(variantRequestBuilder instanceof StarkHttpDeleteRequestBuilderImpl).toBe(true);
+					break;
+				case "getSingle":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.get(
+						resourceUuid,
+						deepFreeze({
+							pathParameters: { elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.GET;
+					expectedResourcePath = "/something/" + resourceUuid + "/else/3/next";
+					expect(variantRequestBuilder instanceof StarkHttpGetRequestBuilderImpl).toBe(true);
+					break;
+				case "getCollection":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.getCollection(
+						3,
+						5,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.GET_COLLECTION;
+					expectedQueryParams = new Map([
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"] // added only in DEV
+					]);
+					expect(variantRequestBuilder instanceof StarkHttpGetCollectionRequestBuilderImpl).toBe(true);
+					break;
+				case "search":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.search(
+						mockCriteria,
+						3,
+						5,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.SEARCH;
+					(<{ [key: string]: any }>expectedResource) = {
+						field1: "anything",
+						field2: {
+							childField1: mockDate.toISOString(),
+							childField2: {
+								grandChildField1: ["someData", 123],
+								anotherUndefinedField: null
+								// anotherEmptyField: undefined
+							},
+							someUndefinedField: null
+							// someEmptyField: undefined
+						},
+						undefinedField: null
+						// emptyField: undefined
+					};
+					expectedQueryParams = new Map([
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"] // added only in DEV
+					]);
+					expect(variantRequestBuilder instanceof StarkHttpSearchRequestBuilderImpl).toBe(true);
+					expect(variantRequestBuilder.build().item).not.toBe(mockCriteria);
+					break;
+				default:
+					// CREATE
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+
+					variantRequestBuilder = requestBuilder.create(
+						mockResource,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.CREATE;
+					expectedResource = mockResource;
+					expect(variantRequestBuilder instanceof StarkHttpCreateRequestBuilderImpl).toBe(true);
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
-			expect(request.item).toBe(mockResource);
+			expect(request.resourcePath).toBe(expectedResourcePath);
+			assertHeaders(request.headers, expectedHeaders);
+			assertQueryParameters(request.queryParameters, expectedQueryParams);
+			expect(request.requestType).toBe(expectedRequestType);
+			if (typeOfBuilder === "search") {
+				expect(request.item).toEqual(expectedResource); // the resource is generated based on the criteria
+			} else {
+				expect(request.item).toBe(expectedResource);
+			}
 			expect(request.retryCount).toBeUndefined();
 			expect(request.serializer).not.toBe(defaultSerializer);
 			expect(request.serializer).toEqual(new StarkHttpSerializerImpl(MockCustomResource));
 		});
 
 		it("should use the custom serializer if it is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
+			switch (typeOfBuilder) {
+				case "update":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
 
-			const createRequestBuilder: StarkHttpCreateRequestBuilder<MockResource> = requestBuilder.create(
-				mockResource,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" }
-				})
-			);
-			expect(createRequestBuilder instanceof StarkHttpCreateRequestBuilderImpl).toBe(true);
+					variantRequestBuilder = requestBuilder.update(
+						mockResource,
+						deepFreeze({
+							pathParameters: { elseId: "3" }
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.UPDATE;
+					expectedResource = mockResource;
+					expectedResourcePath = "/something/" + mockResource.uuid + "/else/3/next";
+					expectedHeaders = new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]);
+					expect(variantRequestBuilder instanceof StarkHttpUpdateRequestBuilderImpl).toBe(true);
+					break;
+				case "delete":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
 
-			const request: StarkHttpRequest = createRequestBuilder.build();
+					variantRequestBuilder = requestBuilder.delete(
+						mockResource,
+						deepFreeze({
+							pathParameters: { elseId: "3" }
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.DELETE;
+					expectedResource = mockResource;
+					expectedResourcePath = "/something/" + mockResource.uuid + "/else/3/next";
+					expectedHeaders = new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]);
+					expect(variantRequestBuilder instanceof StarkHttpDeleteRequestBuilderImpl).toBe(true);
+					break;
+				case "getSingle":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
+
+					variantRequestBuilder = requestBuilder.get(
+						resourceUuid,
+						deepFreeze({
+							pathParameters: { elseId: "3" }
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.GET;
+					expectedResourcePath = "/something/" + resourceUuid + "/else/3/next";
+					expect(variantRequestBuilder instanceof StarkHttpGetRequestBuilderImpl).toBe(true);
+					break;
+				case "getCollection":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
+
+					variantRequestBuilder = requestBuilder.getCollection(
+						3,
+						5,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" }
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.GET_COLLECTION;
+					expectedQueryParams = new Map([
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"] // added only in DEV
+					]);
+					expect(variantRequestBuilder instanceof StarkHttpGetCollectionRequestBuilderImpl).toBe(true);
+					break;
+				case "search":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
+
+					variantRequestBuilder = requestBuilder.search(
+						mockCriteria,
+						3,
+						5,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" }
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.SEARCH;
+					(<{ [key: string]: any }>expectedResource) = {
+						field1: "anything",
+						field2: {
+							childField1: mockDate.toISOString(),
+							childField2: {
+								grandChildField1: ["someData", 123],
+								anotherUndefinedField: null
+								// anotherEmptyField: undefined
+							},
+							someUndefinedField: null
+							// someEmptyField: undefined
+						},
+						undefinedField: null
+						// emptyField: undefined
+					};
+					expectedQueryParams = new Map([
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"] // added only in DEV
+					]);
+					expect(variantRequestBuilder instanceof StarkHttpSearchRequestBuilderImpl).toBe(true);
+					expect(variantRequestBuilder.build().item).not.toBe(mockCriteria);
+					break;
+				default:
+					// CREATE
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
+
+					variantRequestBuilder = requestBuilder.create(
+						mockResource,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" }
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.CREATE;
+					expectedResource = mockResource;
+					expect(variantRequestBuilder instanceof StarkHttpCreateRequestBuilderImpl).toBe(true);
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
-			expect(request.item).toBe(mockResource);
+			expect(request.resourcePath).toBe(expectedResourcePath);
+			assertHeaders(request.headers, expectedHeaders);
+			assertQueryParameters(request.queryParameters, expectedQueryParams);
+			expect(request.requestType).toBe(expectedRequestType);
+			if (typeOfBuilder === "search") {
+				expect(request.item).toEqual(expectedResource); // the resource is generated based on the criteria
+			} else {
+				expect(request.item).toBe(expectedResource);
+			}
 			expect(request.retryCount).toBeUndefined();
 			expect(request.serializer).not.toBe(defaultSerializer);
 			expect(request.serializer).toBe(customSerializer);
 		});
 
 		it("should use the custom serializer if it is defined regardless of the custom type set in 'serializationType' param", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
+			switch (typeOfBuilder) {
+				case "update":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
 
-			const createRequestBuilder: StarkHttpCreateRequestBuilder<MockResource> = requestBuilder.create(
-				mockResource,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(createRequestBuilder instanceof StarkHttpCreateRequestBuilderImpl).toBe(true);
+					variantRequestBuilder = requestBuilder.update(
+						mockResource,
+						deepFreeze({
+							pathParameters: { elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.UPDATE;
+					expectedResource = mockResource;
+					expectedResourcePath = "/something/" + mockResource.uuid + "/else/3/next";
+					expectedHeaders = new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]);
+					expect(variantRequestBuilder instanceof StarkHttpUpdateRequestBuilderImpl).toBe(true);
+					break;
+				case "delete":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
 
-			const request: StarkHttpRequest = createRequestBuilder.build();
+					variantRequestBuilder = requestBuilder.delete(
+						mockResource,
+						deepFreeze({
+							pathParameters: { elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.DELETE;
+					expectedResource = mockResource;
+					expectedResourcePath = "/something/" + mockResource.uuid + "/else/3/next";
+					expectedHeaders = new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]);
+					expect(variantRequestBuilder instanceof StarkHttpDeleteRequestBuilderImpl).toBe(true);
+					break;
+				case "getSingle":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
+
+					variantRequestBuilder = requestBuilder.get(
+						resourceUuid,
+						deepFreeze({
+							pathParameters: { elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.GET;
+					expectedResourcePath = "/something/" + resourceUuid + "/else/3/next";
+					expect(variantRequestBuilder instanceof StarkHttpGetRequestBuilderImpl).toBe(true);
+					break;
+				case "getCollection":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
+
+					variantRequestBuilder = requestBuilder.getCollection(
+						3,
+						5,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.GET_COLLECTION;
+					expectedQueryParams = new Map([
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"] // added only in DEV
+					]);
+					expect(variantRequestBuilder instanceof StarkHttpGetCollectionRequestBuilderImpl).toBe(true);
+					break;
+				case "search":
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
+
+					variantRequestBuilder = requestBuilder.search(
+						mockCriteria,
+						3,
+						5,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.SEARCH;
+					(<{ [key: string]: any }>expectedResource) = {
+						field1: "anything",
+						field2: {
+							childField1: mockDate.toISOString(),
+							childField2: {
+								grandChildField1: ["someData", 123],
+								anotherUndefinedField: null
+								// anotherEmptyField: undefined
+							},
+							someUndefinedField: null
+							// someEmptyField: undefined
+						},
+						undefinedField: null
+						// emptyField: undefined
+					};
+					expectedQueryParams = new Map([
+						["limit", "3"],
+						["offset", "5"],
+						["mockCollectionRequest", "true"] // added only in DEV
+					]);
+					expect(variantRequestBuilder instanceof StarkHttpSearchRequestBuilderImpl).toBe(true);
+					expect(variantRequestBuilder.build().item).not.toBe(mockCriteria);
+					break;
+				default:
+					// CREATE
+					requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
+
+					variantRequestBuilder = requestBuilder.create(
+						mockResource,
+						deepFreeze({
+							pathParameters: { somethingId: "1", elseId: "3" },
+							serializationType: MockCustomResource
+						})
+					);
+					expectedRequestType = StarkHttpRequestType.CREATE;
+					expectedResource = mockResource;
+					expect(variantRequestBuilder instanceof StarkHttpCreateRequestBuilderImpl).toBe(true);
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
 			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.CREATE);
-			expect(request.item).toBe(mockResource);
+			expect(request.resourcePath).toBe(expectedResourcePath);
+			assertHeaders(request.headers, expectedHeaders);
+			assertQueryParameters(request.queryParameters, expectedQueryParams);
+			expect(request.requestType).toBe(expectedRequestType);
+			if (typeOfBuilder === "search") {
+				expect(request.item).toEqual(expectedResource); // the resource is generated based on the criteria
+			} else {
+				expect(request.item).toBe(expectedResource);
+			}
 			expect(request.retryCount).toBeUndefined();
 			expect(request.serializer).not.toBe(defaultSerializer);
 			expect(request.serializer).toBe(customSerializer);
 		});
 	});
+}
+/* tslint:enable */
+
+function testUUIDPathParamNormalization(typeOfBuilder: "delete" | "getSingle" | "update"): void {
+	describe("UUID path parameter normalization", () => {
+		const mockBackend: StarkBackend = new StarkBackendImpl();
+		let requestBuilder: StarkHttpRequestBuilder<MockResource>;
+		let variantRequestBuilder: StarkHttpRequestBuilderVariants<MockResource>;
+		let mockResource: StarkResource;
+
+		beforeEach(() => {
+			mockResource = new MockResource(resourceUuid);
+			mockResource.etag = resourceEtag;
+		});
+
+		it("should add the resource uuid to the end of the resourcePath if there are no placeholders for pathParams defined", () => {
+			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something", defaultSerializer);
+
+			switch (typeOfBuilder) {
+				case "update":
+					variantRequestBuilder = requestBuilder.update(mockResource);
+					break;
+				case "delete":
+					variantRequestBuilder = requestBuilder.delete(mockResource);
+					break;
+				default:
+					variantRequestBuilder = requestBuilder.get(mockResource.uuid);
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
+			expect(request.resourcePath).toBe("/something/" + mockResource.uuid);
+		});
+
+		it("should set the resource uuid in the right place if it is defined and the resourcePath contains a placeholder for it", () => {
+			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else", defaultSerializer);
+
+			switch (typeOfBuilder) {
+				case "update":
+					variantRequestBuilder = requestBuilder.update(mockResource);
+					break;
+				case "delete":
+					variantRequestBuilder = requestBuilder.delete(mockResource);
+					break;
+				default:
+					variantRequestBuilder = requestBuilder.get(mockResource.uuid);
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
+			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else");
+		});
+
+		it("should add the resource uuid if it is defined but there is no placeholder for it in the resourcePath", () => {
+			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else", defaultSerializer);
+
+			switch (typeOfBuilder) {
+				case "update":
+					variantRequestBuilder = requestBuilder.update(mockResource, mockFrozenPathParamsWithoutUUID);
+					break;
+				case "delete":
+					variantRequestBuilder = requestBuilder.delete(mockResource, mockFrozenPathParamsWithoutUUID);
+					break;
+				default:
+					variantRequestBuilder = requestBuilder.get(mockResource.uuid, mockFrozenPathParamsWithoutUUID);
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
+			expect(request.resourcePath).toBe("/something/1234/else/" + mockResource.uuid);
+		});
+
+		it("should not add the resource uuid if it is undefined and there is no placeholder for it in the resourcePath", () => {
+			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else", defaultSerializer);
+			mockResource.uuid = <any>undefined;
+
+			switch (typeOfBuilder) {
+				case "update":
+					variantRequestBuilder = requestBuilder.update(mockResource, mockFrozenPathParamsWithoutUUID);
+					break;
+				case "delete":
+					variantRequestBuilder = requestBuilder.delete(mockResource, mockFrozenPathParamsWithoutUUID);
+					break;
+				default:
+					variantRequestBuilder = requestBuilder.get(<any>undefined, mockFrozenPathParamsWithoutUUID);
+					break;
+			}
+
+			const request: StarkHttpRequest = variantRequestBuilder.build();
+			expect(request.resourcePath).toBe("/something/1234/else");
+		});
+
+		it("should throw an error if the resourcePath contains a placeholder for the resource uuid but this is undefined", () => {
+			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else/:uuid", defaultSerializer);
+			mockResource.uuid = <any>undefined;
+
+			switch (typeOfBuilder) {
+				case "update":
+					expect(() => requestBuilder.update(mockResource, mockFrozenPathParamsWithoutUUID)).toThrowError(
+						/resource uuid value is undefined/
+					);
+					break;
+				case "delete":
+					expect(() => requestBuilder.delete(mockResource, mockFrozenPathParamsWithoutUUID)).toThrowError(
+						/resource uuid value is undefined/
+					);
+					break;
+				default:
+					expect(() => requestBuilder.get(<any>undefined, mockFrozenPathParamsWithoutUUID)).toThrowError(
+						/resource uuid value is undefined/
+					);
+					break;
+			}
+		});
+	});
+}
+
+// tslint:disable-next-line:no-big-function
+describe("Builder: StarkHttpRequestBuilder", () => {
+	const mockBackend: StarkBackend = new StarkBackendImpl();
+	let requestBuilder: StarkHttpRequestBuilder<MockResource>;
+	let mockResource: StarkResource;
+
+	beforeEach(() => {
+		mockResource = new MockResource(resourceUuid);
+		mockResource.etag = resourceEtag;
+	});
+
+	describe("on create", () => {
+		testCommonFunctionality("create");
+
+		testCustomSerialization("create");
+	});
 
 	describe("on update", () => {
-		it("should return an instance of the StarkHttpUpdateRequestBuilder", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
+		testCommonFunctionality("update");
 
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(
-				mockResource,
-				deepFreeze({
-					pathParameters: { elseId: "3", invalidParam: <any>undefined },
-					queryParameters: {
-						param1: "one",
-						duplicateParam: ["dup1", "dup2", "dup3"],
-						invalidQueryParam1: "",
-						invalidQueryParam2: undefined
-					},
-					retryCount: 5
-				})
-			);
-			expect(updateRequestBuilder instanceof StarkHttpUpdateRequestBuilderImpl).toBe(true);
+		testCustomSerialization("update");
 
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
-			assertQueryParameters(
-				request.queryParameters,
-				new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
-			expect(request.item).toBe(mockResource);
-			expect(request.retryCount).toBe(5);
-			expect(request.serializer).toBe(defaultSerializer);
-		});
+		testUUIDPathParamNormalization("update");
 
 		it("should have requestType 'UPDATE_IDEMPOTENT' if isIdempotent param is set to TRUE", () => {
 			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
@@ -708,193 +1461,14 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = updateRequestBuilder.build();
 			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE_IDEMPOTENT);
 		});
-
-		it("should set the query parameters including those with undefined value (allowUndefinedQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(
-				mockResource,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidQueryParam: "", forceValidParam: undefined },
-					allowUndefinedQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", undefined]]));
-		});
-
-		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(
-				mockResource,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidQueryParam: undefined, forceValidParam: "" },
-					allowEmptyQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", ""]]));
-		});
-
-		it("should add the resource uuid to the end of the resourcePath if there are no placeholders for pathParams defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something", defaultSerializer);
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(mockResource);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid);
-		});
-
-		it("should set the resource uuid in the right place if it is defined and the resourcePath contains a placeholder for it", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else", defaultSerializer);
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(mockResource);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else");
-		});
-
-		it("should add the resource uuid if it is defined but there is no placeholder for it in the resourcePath", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else", defaultSerializer);
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(
-				mockResource,
-				mockFrozenPathParamsWithoutUUID
-			);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/1234/else/" + mockResource.uuid);
-		});
-
-		it("should not add the resource uuid if it is undefined and there is no placeholder for it in the resourcePath", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else", defaultSerializer);
-			mockResource.uuid = <any>undefined;
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(
-				mockResource,
-				mockFrozenPathParamsWithoutUUID
-			);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/1234/else");
-		});
-
-		it("should throw an error if the resourcePath contains a placeholder for the resource uuid but this is undefined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else/:uuid", defaultSerializer);
-			mockResource.uuid = <any>undefined;
-
-			expect(() => requestBuilder.update(mockResource, mockFrozenPathParamsWithoutUUID)).toThrowError(
-				/resource uuid value is undefined/
-			);
-		});
-
-		it("should use a new serializer with the custom type provided in 'serializationType' param when no custom serializer is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(
-				mockResource,
-				deepFreeze({
-					pathParameters: { elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(updateRequestBuilder instanceof StarkHttpUpdateRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
-			expect(request.item).toBe(mockResource);
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toEqual(new StarkHttpSerializerImpl(MockCustomResource));
-		});
-
-		it("should use the custom serializer if it is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(
-				mockResource,
-				deepFreeze({
-					pathParameters: { elseId: "3" }
-				})
-			);
-			expect(updateRequestBuilder instanceof StarkHttpUpdateRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
-			expect(request.item).toBe(mockResource);
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
-
-		it("should use the custom serializer if it is defined regardless of the custom type set in 'serializationType' param", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
-
-			const updateRequestBuilder: StarkHttpUpdateRequestBuilder<MockResource> = requestBuilder.update(
-				mockResource,
-				deepFreeze({
-					pathParameters: { elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(updateRequestBuilder instanceof StarkHttpUpdateRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = updateRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.UPDATE);
-			expect(request.item).toBe(mockResource);
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
 	});
 
 	describe("on delete", () => {
-		it("should return an instance of the StarkHttpDeleteRequestBuilder", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
+		testCommonFunctionality("delete");
 
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(
-				mockResource,
-				deepFreeze({
-					pathParameters: { elseId: "3", invalidParam: <any>undefined },
-					queryParameters: {
-						param1: "one",
-						duplicateParam: ["dup1", "dup2", "dup3"],
-						invalidQueryParam1: "",
-						invalidQueryParam2: undefined
-					},
-					retryCount: 5
-				})
-			);
-			expect(deleteRequestBuilder instanceof StarkHttpDeleteRequestBuilderImpl).toBe(true);
+		testCustomSerialization("delete");
 
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
-			assertQueryParameters(
-				request.queryParameters,
-				new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
-			expect(request.item).toBe(mockResource);
-			expect(request.retryCount).toBe(5);
-			expect(request.serializer).toBe(defaultSerializer);
-		});
+		testUUIDPathParamNormalization("delete");
 
 		it("should not set the If-Match header if the force parameter is set to TRUE", () => {
 			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
@@ -925,531 +1499,20 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = deleteRequestBuilder.build();
 			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
 		});
-
-		it("should set the query parameters including those with undefined value (allowUndefinedQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(
-				mockResource,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidQueryParam: "", forceValidParam: undefined },
-					allowUndefinedQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", undefined]]));
-		});
-
-		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid", defaultSerializer);
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(
-				mockResource,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidParam: undefined, forceValidParam: "" },
-					allowEmptyQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", ""]]));
-		});
-
-		it("should add the resource uuid to the end of the resourcePath if there are no placeholders for pathParams defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something", defaultSerializer);
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(mockResource);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid);
-		});
-
-		it("should set the resource uuid in the right place if it is defined and the resourcePath contains a placeholder for it", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else", defaultSerializer);
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(mockResource);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else");
-		});
-
-		it("should add the resource uuid if it is defined but there is no placeholder for it in the resourcePath", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else", defaultSerializer);
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(
-				mockResource,
-				mockFrozenPathParamsWithoutUUID
-			);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/1234/else/" + mockResource.uuid);
-		});
-
-		it("should not add the resource uuid if it is undefined and there is no placeholder for it in the resourcePath", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else", defaultSerializer);
-			mockResource.uuid = <any>undefined;
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(
-				mockResource,
-				mockFrozenPathParamsWithoutUUID
-			);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/1234/else");
-		});
-
-		it("should throw an error if the resourcePath contains a placeholder for the resource uuid but this is undefined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else/:uuid", defaultSerializer);
-			mockResource.uuid = <any>undefined;
-
-			expect(() => requestBuilder.delete(mockResource, mockFrozenPathParamsWithoutUUID)).toThrowError(
-				/resource uuid value is undefined/
-			);
-		});
-
-		it("should use a new serializer with the custom type provided in 'serializationType' param when no custom serializer is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(
-				mockResource,
-				deepFreeze({
-					pathParameters: { elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(deleteRequestBuilder instanceof StarkHttpDeleteRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
-			expect(request.item).toBe(mockResource);
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toEqual(new StarkHttpSerializerImpl(MockCustomResource));
-		});
-
-		it("should use the custom serializer if it is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(
-				mockResource,
-				deepFreeze({
-					pathParameters: { elseId: "3" }
-				})
-			);
-			expect(deleteRequestBuilder instanceof StarkHttpDeleteRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
-			expect(request.item).toBe(mockResource);
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
-
-		it("should use the custom serializer if it is defined regardless of the custom type set in 'serializationType' param", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
-
-			const deleteRequestBuilder: StarkHttpDeleteRequestBuilder<MockResource> = requestBuilder.delete(
-				mockResource,
-				deepFreeze({
-					pathParameters: { elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(deleteRequestBuilder instanceof StarkHttpDeleteRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = deleteRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + mockResource.uuid + "/else/3/next");
-			assertHeaders(request.headers, new Map([[StarkHttpHeaders.IF_MATCH, resourceEtag]]));
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.DELETE);
-			expect(request.item).toBe(mockResource);
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
 	});
 
 	describe("on get", () => {
-		it("should return an instance of the StarkHttpGetRequestBuilder", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(
-				resourceUuid,
-				deepFreeze({
-					pathParameters: { elseId: "3", invalidParam: <any>undefined },
-					queryParameters: {
-						param1: "one",
-						duplicateParam: ["dup1", "dup2", "dup3"],
-						invalidQueryParam1: "",
-						invalidQueryParam2: undefined
-					},
-					retryCount: 5
-				})
-			);
-			expect(getRequestBuilder instanceof StarkHttpGetRequestBuilderImpl).toBe(true);
+		testCommonFunctionality("getSingle");
 
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.GET);
-			expect(request.item).toBeUndefined();
-			expect(request.retryCount).toBe(5);
-			expect(request.serializer).toBe(defaultSerializer);
-		});
+		testCustomSerialization("getSingle");
 
-		it("should set the query parameters including those with undefined value (allowUndefinedQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(
-				resourceUuid,
-				deepFreeze({
-					pathParameters: { elseId: "3" },
-					queryParameters: { param1: "one", invalidQueryParam: "", forceValidParam: undefined },
-					allowUndefinedQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", undefined]]));
-		});
-
-		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(
-				resourceUuid,
-				deepFreeze({
-					pathParameters: { elseId: "3" },
-					queryParameters: { param1: "one", invalidQueryParam: undefined, forceValidParam: "" },
-					allowEmptyQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["forceValidParam", ""]]));
-		});
-
-		it("should add the resource uuid to the end of the resourcePath if there are no placeholders for pathParams defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something", defaultSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(resourceUuid);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/" + resourceUuid);
-		});
-
-		it("should set the resource uuid in the right place if it is defined and the resourcePath contains a placeholder for it", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else", defaultSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(resourceUuid);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else");
-		});
-
-		it("should add the resource uuid if it is defined but there is no placeholder for it in the resourcePath", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else", defaultSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(
-				resourceUuid,
-				mockFrozenPathParamsWithoutUUID
-			);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/1234/else/" + resourceUuid);
-		});
-
-		it("should not add the resource uuid if it is undefined and there is no placeholder for it in the resourcePath", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else", defaultSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(
-				<any>undefined,
-				mockFrozenPathParamsWithoutUUID
-			);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.resourcePath).toBe("/something/1234/else");
-		});
-
-		it("should throw an error if the resourcePath contains a placeholder for the resource uuid but this is undefined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:someId/else/:uuid", defaultSerializer);
-
-			expect(() => requestBuilder.get(<any>undefined, mockFrozenPathParamsWithoutUUID)).toThrowError(
-				/resource uuid value is undefined/
-			);
-		});
-
-		it("should use a new serializer with the custom type provided in 'serializationType' param when no custom serializer is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", defaultSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(
-				resourceUuid,
-				deepFreeze({
-					pathParameters: { elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(getRequestBuilder instanceof StarkHttpGetRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.GET);
-			expect(request.item).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toEqual(new StarkHttpSerializerImpl(MockCustomResource));
-		});
-
-		it("should use the custom serializer if it is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(
-				resourceUuid,
-				deepFreeze({
-					pathParameters: { elseId: "3" }
-				})
-			);
-			expect(getRequestBuilder instanceof StarkHttpGetRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.GET);
-			expect(request.item).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
-
-		it("should use the custom serializer if it is defined regardless of the custom type set in 'serializationType' param", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, "/something/:uuid/else/:elseId/next", customSerializer);
-
-			const getRequestBuilder: StarkHttpGetRequestBuilder<MockResource> = requestBuilder.get(
-				resourceUuid,
-				deepFreeze({
-					pathParameters: { elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(getRequestBuilder instanceof StarkHttpGetRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = getRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/" + resourceUuid + "/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(request.queryParameters, new Map());
-			expect(request.requestType).toBe(StarkHttpRequestType.GET);
-			expect(request.item).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
+		testUUIDPathParamNormalization("getSingle");
 	});
 
 	describe("on get collection", () => {
-		it("should return an instance of the StarkHttpGetCollectionRequestBuilder", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+		testCommonFunctionality("getCollection");
 
-			const getCollectionRequestBuilder: StarkHttpGetCollectionRequestBuilder<MockResource> = requestBuilder.getCollection(
-				3,
-				5,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3", invalidParam: <any>undefined },
-					queryParameters: {
-						param1: "one",
-						duplicateParam: ["dup1", "dup2", "dup3"],
-						invalidQueryParam1: "",
-						invalidQueryParam2: undefined
-					},
-					retryCount: 5
-				})
-			);
-			expect(getCollectionRequestBuilder instanceof StarkHttpGetCollectionRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map<string, string | string[]>([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"], // added only in DEV
-					["param1", "one"],
-					["duplicateParam", ["dup1", "dup2", "dup3"]]
-				])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
-			expect(request.item).toBeUndefined();
-			expect(request.retryCount).toBe(5);
-			expect(request.serializer).toBe(defaultSerializer);
-		});
-
-		it("should set the query parameters including those with undefined value (allowUndefinedQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
-
-			const getCollectionRequestBuilder: StarkHttpGetCollectionRequestBuilder<MockResource> = requestBuilder.getCollection(
-				3,
-				5,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidQueryParam: "", forceValidParam: undefined },
-					allowUndefinedQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"], // added only in DEV
-					["param1", "one"],
-					["forceValidParam", undefined]
-				])
-			);
-		});
-
-		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
-
-			const getCollectionRequestBuilder: StarkHttpGetCollectionRequestBuilder<MockResource> = requestBuilder.getCollection(
-				3,
-				5,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidParam: undefined, forceValidParam: "" },
-					allowEmptyQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"], // added only in DEV
-					["param1", "one"],
-					["forceValidParam", ""]
-				])
-			);
-		});
-
-		it("should use a new serializer with the custom type provided in 'serializationType' param when no custom serializer is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
-
-			const getCollectionRequestBuilder: StarkHttpGetCollectionRequestBuilder<MockResource> = requestBuilder.getCollection(
-				3,
-				5,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(getCollectionRequestBuilder instanceof StarkHttpGetCollectionRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"] // added only in DEV
-				])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
-			expect(request.item).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toEqual(new StarkHttpSerializerImpl(MockCustomResource));
-		});
-
-		it("should use the custom serializer if it is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
-
-			const getCollectionRequestBuilder: StarkHttpGetCollectionRequestBuilder<MockResource> = requestBuilder.getCollection(
-				3,
-				5,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" }
-				})
-			);
-			expect(getCollectionRequestBuilder instanceof StarkHttpGetCollectionRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"] // added only in DEV
-				])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
-			expect(request.item).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
-
-		it("should use the custom serializer if it is defined regardless of the custom type set in 'serializationType' param", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
-
-			const getCollectionRequestBuilder: StarkHttpGetCollectionRequestBuilder<MockResource> = requestBuilder.getCollection(
-				3,
-				5,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(getCollectionRequestBuilder instanceof StarkHttpGetCollectionRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = getCollectionRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"] // added only in DEV
-				])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
-			expect(request.item).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
+		testCustomSerialization("getCollection");
 	});
 
 	describe("on search", () => {
@@ -1471,114 +1534,13 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 				undefinedField: undefined,
 				emptyField: ""
 			};
-			mockBackend = new StarkBackendImpl();
 			mockResource = new MockResource(resourceUuid);
 			mockResource.etag = resourceEtag;
 		});
 
-		it("should return an instance of the StarkHttpSearchRequestBuilder", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
+		testCommonFunctionality("search");
 
-			const searchRequestBuilder: StarkHttpSearchRequestBuilder<MockResource> = requestBuilder.search(
-				mockCriteria,
-				3,
-				5,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3", invalidParam: <any>undefined },
-					queryParameters: {
-						param1: "one",
-						duplicateParam: ["dup1", "dup2", "dup3"],
-						invalidQueryParam1: "",
-						invalidQueryParam2: undefined
-					},
-					retryCount: 5
-				})
-			);
-			expect(searchRequestBuilder instanceof StarkHttpSearchRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = searchRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map<string, string | string[]>([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"], // added only in DEV
-					["param1", "one"],
-					["duplicateParam", ["dup1", "dup2", "dup3"]]
-				])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
-			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
-			expect(requestCriteria).not.toBe(mockCriteria);
-			expect(requestCriteria.field1).toBe("anything");
-			expect(requestCriteria.field2).toBeDefined();
-			expect(requestCriteria.field2.childField1).toBe(mockDate.toISOString());
-			expect(requestCriteria.field2.childField2).toBeDefined();
-			expect(requestCriteria.field2.childField2.grandChildField1).toEqual(["someData", 123]);
-			expect(requestCriteria.field2.childField2.anotherUndefinedField).toBeNull();
-			expect(requestCriteria.field2.childField2.anotherEmptyField).toBeUndefined();
-			expect(requestCriteria.field2.someUndefinedField).toBeNull();
-			expect(requestCriteria.field2.someEmptyField).toBeUndefined();
-			expect(requestCriteria.undefinedField).toBeNull();
-			expect(requestCriteria.emptyField).toBeUndefined();
-			expect(request.retryCount).toBe(5);
-			expect(request.serializer).toBe(defaultSerializer);
-		});
-
-		it("should set the query parameters including those with undefined value (allowUndefinedQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
-
-			const searchRequestBuilder: StarkHttpSearchRequestBuilder<MockResource> = requestBuilder.search(
-				mockCriteria,
-				3,
-				5,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidQueryParam: "", forceValidParam: undefined },
-					allowUndefinedQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = searchRequestBuilder.build();
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"], // added only in DEV
-					["param1", "one"],
-					["forceValidParam", undefined]
-				])
-			);
-		});
-
-		it("should set the query parameters including those with empty value (allowEmptyQueryParams = true)", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
-
-			const searchRequestBuilder: StarkHttpSearchRequestBuilder<MockResource> = requestBuilder.search(
-				mockCriteria,
-				3,
-				5,
-				deepFreeze({
-					queryParameters: { param1: "one", invalidQueryParam: undefined, forceValidParam: "" },
-					allowEmptyQueryParams: true
-				})
-			);
-
-			const request: StarkHttpRequest = searchRequestBuilder.build();
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"], // added only in DEV
-					["param1", "one"],
-					["forceValidParam", ""]
-				])
-			);
-		});
+		testCustomSerialization("search");
 
 		it("should filter out those criteria with empty value (default allowEmptyCriteria = false)", () => {
 			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
@@ -1588,20 +1550,23 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).not.toBe(mockCriteria);
-			expect(requestCriteria.field1).toBe("anything");
-			expect(requestCriteria.field2).toBeDefined();
-			expect(requestCriteria.field2.childField1).toBe(mockDate.toISOString());
-			expect(requestCriteria.field2.childField2).toBeDefined();
-			expect(requestCriteria.field2.childField2.grandChildField1).toEqual(["someData", 123]);
-			expect(requestCriteria.field2.childField2.hasOwnProperty("anotherUndefinedField")).toBe(true);
-			expect(requestCriteria.field2.childField2.anotherUndefinedField).toBeNull(); // due to Serialize => with undefined returns null
-			expect(requestCriteria.field2.childField2.hasOwnProperty("anotherEmptyField")).toBe(false); // empty values are omitted
-			expect(requestCriteria.field2.hasOwnProperty("someUndefinedField")).toBe(true);
-			expect(requestCriteria.field2.someUndefinedField).toBeNull(); // due to Serialize => with undefined returns null
-			expect(requestCriteria.field2.hasOwnProperty("someEmptyField")).toBe(false); // empty values are omitted
-			expect(requestCriteria.hasOwnProperty("undefinedField")).toBe(true);
-			expect(requestCriteria.undefinedField).toBeNull(); // due to Serialize => with undefined returns null
-			expect(requestCriteria.hasOwnProperty("emptyField")).toBe(false); // empty values are omitted
+			/* tslint:disable:no-null-keyword */
+			expect(requestCriteria).toEqual({
+				field1: "anything",
+				field2: {
+					childField1: mockDate.toISOString(),
+					childField2: {
+						grandChildField1: ["someData", 123],
+						anotherUndefinedField: null // due to Serialize => with undefined returns null
+						// anotherEmptyField: undefined   // empty values are omitted
+					},
+					someUndefinedField: null // due to Serialize => with undefined returns null
+					// someEmptyField: undefined   // empty values are omitted
+				},
+				undefinedField: null // due to Serialize => with undefined returns null
+				// emptyField: undefined   // empty values are omitted
+			});
+			/* tslint:enable */
 		});
 
 		it("should leave the criteria 'as is', even those with empty value (allowEmptyCriteria = true)", () => {
@@ -1619,20 +1584,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).toBe(mockCriteria); // the criteria object remains unchanged
-			expect(requestCriteria.field1).toBe("anything");
-			expect(requestCriteria.field2).toBeDefined();
-			expect(requestCriteria.field2.childField1).toBe(mockDate);
-			expect(requestCriteria.field2.childField2).toBeDefined();
-			expect(requestCriteria.field2.childField2.grandChildField1).toEqual(["someData", 123]);
-			expect(requestCriteria.field2.childField2.hasOwnProperty("anotherUndefinedField")).toBe(true); // undefined values remain unchanged
-			expect(requestCriteria.field2.childField2.anotherUndefinedField).toBeUndefined();
-			expect(requestCriteria.field2.childField2.anotherEmptyField).toBe("");
-			expect(requestCriteria.field2.hasOwnProperty("someUndefinedField")).toBe(true); // undefined values remain unchanged
-			expect(requestCriteria.field2.someUndefinedField).toBeUndefined();
-			expect(requestCriteria.field2.someEmptyField).toBe("");
-			expect(requestCriteria.hasOwnProperty("undefinedField")).toBe(true); // undefined values remain unchanged
-			expect(requestCriteria.undefinedField).toBeUndefined();
-			expect(requestCriteria.emptyField).toBe("");
+			expect(requestCriteria).toEqual(mockCriteria);
 		});
 
 		it("should serialize the criteria instance and filter out those criteria with empty value (default allowEmptyCriteria = false)", () => {
@@ -1699,140 +1651,6 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			expect(requestCriteria.hasOwnProperty("undefinedField")).toBe(true); // undefined values remain unchanged
 			expect(requestCriteria.undefinedField).toBeUndefined();
 			expect(requestCriteria.emptyField).toBe("");
-		});
-
-		it("should use a new serializer with the custom type provided in 'serializationType' param when no custom serializer is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, defaultSerializer);
-
-			const searchRequestBuilder: StarkHttpSearchRequestBuilder<MockResource> = requestBuilder.search(
-				mockCriteria,
-				3,
-				5,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(searchRequestBuilder instanceof StarkHttpSearchRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = searchRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"] // added only in DEV
-				])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
-			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
-			expect(requestCriteria).not.toBe(mockCriteria);
-			expect(requestCriteria.field1).toBe("anything");
-			expect(requestCriteria.field2).toBeDefined();
-			expect(requestCriteria.field2.childField1).toBe(mockDate.toISOString());
-			expect(requestCriteria.field2.childField2).toBeDefined();
-			expect(requestCriteria.field2.childField2.grandChildField1).toEqual(["someData", 123]);
-			expect(requestCriteria.field2.childField2.anotherUndefinedField).toBeNull();
-			expect(requestCriteria.field2.childField2.anotherEmptyField).toBeUndefined();
-			expect(requestCriteria.field2.someUndefinedField).toBeNull();
-			expect(requestCriteria.field2.someEmptyField).toBeUndefined();
-			expect(requestCriteria.undefinedField).toBeNull();
-			expect(requestCriteria.emptyField).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toEqual(new StarkHttpSerializerImpl(MockCustomResource));
-		});
-
-		it("should use the custom serializer if it is defined", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
-
-			const searchRequestBuilder: StarkHttpSearchRequestBuilder<MockResource> = requestBuilder.search(
-				mockCriteria,
-				3,
-				5,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" }
-				})
-			);
-			expect(searchRequestBuilder instanceof StarkHttpSearchRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = searchRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"] // added only in DEV
-				])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
-			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
-			expect(requestCriteria).not.toBe(mockCriteria);
-			expect(requestCriteria.field1).toBe("anything");
-			expect(requestCriteria.field2).toBeDefined();
-			expect(requestCriteria.field2.childField1).toBe(mockDate.toISOString());
-			expect(requestCriteria.field2.childField2).toBeDefined();
-			expect(requestCriteria.field2.childField2.grandChildField1).toEqual(["someData", 123]);
-			expect(requestCriteria.field2.childField2.anotherUndefinedField).toBeNull();
-			expect(requestCriteria.field2.childField2.anotherEmptyField).toBeUndefined();
-			expect(requestCriteria.field2.someUndefinedField).toBeNull();
-			expect(requestCriteria.field2.someEmptyField).toBeUndefined();
-			expect(requestCriteria.undefinedField).toBeNull();
-			expect(requestCriteria.emptyField).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
-		});
-
-		it("should use the custom serializer if it is defined regardless of the custom type set in 'serializationType' param", () => {
-			requestBuilder = new StarkHttpRequestBuilderImpl(mockBackend, resourcePath, customSerializer);
-
-			const searchRequestBuilder: StarkHttpSearchRequestBuilder<MockResource> = requestBuilder.search(
-				mockCriteria,
-				3,
-				5,
-				deepFreeze({
-					pathParameters: { somethingId: "1", elseId: "3" },
-					serializationType: MockCustomResource
-				})
-			);
-			expect(searchRequestBuilder instanceof StarkHttpSearchRequestBuilderImpl).toBe(true);
-
-			const request: StarkHttpRequest = searchRequestBuilder.build();
-			expect(request.backend).toBe(mockBackend);
-			expect(request.resourcePath).toBe("/something/1/else/3/next");
-			assertHeaders(request.headers, new Map());
-			assertQueryParameters(
-				request.queryParameters,
-				new Map([
-					["limit", "3"],
-					["offset", "5"],
-					["mockCollectionRequest", "true"] // added only in DEV
-				])
-			);
-			expect(request.requestType).toBe(StarkHttpRequestType.SEARCH);
-			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
-			expect(requestCriteria).not.toBe(mockCriteria);
-			expect(requestCriteria.field1).toBe("anything");
-			expect(requestCriteria.field2).toBeDefined();
-			expect(requestCriteria.field2.childField1).toBe(mockDate.toISOString());
-			expect(requestCriteria.field2.childField2).toBeDefined();
-			expect(requestCriteria.field2.childField2.grandChildField1).toEqual(["someData", 123]);
-			expect(requestCriteria.field2.childField2.anotherUndefinedField).toBeNull();
-			expect(requestCriteria.field2.childField2.anotherEmptyField).toBeUndefined();
-			expect(requestCriteria.field2.someUndefinedField).toBeNull();
-			expect(requestCriteria.field2.someEmptyField).toBeUndefined();
-			expect(requestCriteria.undefinedField).toBeNull();
-			expect(requestCriteria.emptyField).toBeUndefined();
-			expect(request.retryCount).toBeUndefined();
-			expect(request.serializer).not.toBe(defaultSerializer);
-			expect(request.serializer).toBe(customSerializer);
 		});
 	});
 });

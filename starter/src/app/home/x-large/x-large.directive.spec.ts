@@ -1,5 +1,5 @@
 import { By } from "@angular/platform-browser";
-import { fakeAsync, tick, TestBed } from "@angular/core/testing";
+import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { Component } from "@angular/core";
 
 /**
@@ -26,14 +26,17 @@ describe("x-large directive", () => {
 	it(
 		"should sent font-size to x-large",
 		fakeAsync(() => {
-			TestBed.compileComponents().then(() => {
-				const fixture: any = TestBed.createComponent(TestComponent);
-				fixture.detectChanges();
-				tick();
-				const element: any = fixture.debugElement.query(By.css("div"));
+			TestBed.compileComponents().then(
+				() => {
+					const fixture: any = TestBed.createComponent(TestComponent);
+					fixture.detectChanges();
+					tick();
+					const element: any = fixture.debugElement.query(By.css("div"));
 
-				expect(element.nativeElement.style.fontSize).toBe("x-large");
-			});
+					expect(element.nativeElement.style.fontSize).toBe("x-large");
+				},
+				(reason: any) => fail(reason)
+			);
 		})
 	);
 });

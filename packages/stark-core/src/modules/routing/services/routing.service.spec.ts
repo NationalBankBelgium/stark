@@ -24,6 +24,7 @@ export class HomeComponent {}
 @Component({ selector: "logout-page", template: "LOGOUT_PAGE_COMPONENT" })
 export class LogoutPageComponent {}
 
+/* tslint:disable:no-duplicate-string no-big-function */
 describe("Service: StarkRoutingService", () => {
 	let $state: StateService;
 	let router: UIRouter;
@@ -35,6 +36,7 @@ describe("Service: StarkRoutingService", () => {
 		"dispatch"
 	]);
 	const mockCorrelationId: string = "12345";
+	const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
 	// mockStates Tree
 	//                                homepage
@@ -551,8 +553,6 @@ describe("Service: StarkRoutingService", () => {
 		it("should contain the params, when provided", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 
-			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
-
 			routingService
 				.navigateTo("page-01", { requestId: requestId, onBehalfView: true })
 				.pipe(
@@ -574,7 +574,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateParams.onBehalfView).toBe(true);
 					}),
 					catchError((error: any) => {
-						return throwError("navigateTo " + error);
+						return throwError("getCurrentStateParams " + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -606,8 +606,6 @@ describe("Service: StarkRoutingService", () => {
 		it("should return whether or not the current state is equal a specific state name and parameters combination", (done: DoneFn) => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
-
-			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
 			routingService
 				.navigateTo("page-01", { requestId: requestId, onBehalfView: true })
@@ -728,8 +726,6 @@ describe("Service: StarkRoutingService", () => {
 		it("should contain the params, when provided", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 
-			const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
-
 			routingService
 				.navigateTo("homepage", { requestId: requestId, onBehalfView: true })
 				.pipe(
@@ -840,6 +836,9 @@ describe("Service: StarkRoutingService", () => {
 	});
 
 	describe("navigationErrorHandler", () => {
+		const nextShouldNotBeCalled: string = "the 'next' function should not be called in case the navigation failed";
+		const errorPrefix: string = "navigationErrorHandler: ";
+
 		it("should not navigate to a page when that page is already the current page", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 
@@ -864,7 +863,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return throwError("navigationErrorHandler " + error);
+						return throwError(errorPrefix + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -892,7 +891,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return throwError("navigationErrorHandler " + error);
+						return throwError(errorPrefix + error);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -900,10 +899,10 @@ describe("Service: StarkRoutingService", () => {
 
 		it("should not throw an error for a known navigation rejection cause", (done: DoneFn) => {
 			routingService.addTransitionHook(StarkRoutingTransitionHook.ON_START, {}, () => {
-				throw new Error("transition rejection");
+				throw new Error("known transition rejection");
 			});
 
-			routingService.addKnownNavigationRejectionCause("transition rejection");
+			routingService.addKnownNavigationRejectionCause("known transition rejection");
 
 			routingService
 				.navigateTo("page-01")
@@ -912,10 +911,10 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
 						expect(message).toMatch(/Route transition rejected/);
-						return throwError("navigationErrorHandler " + error);
+						return throwError(errorPrefix + error);
 					})
 				)
-				.subscribe(() => fail("this block should not be executed"), () => done());
+				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
 		});
 
 		it("should not log a known navigation rejection cause", (done: DoneFn) => {
@@ -930,13 +929,13 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(2);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/Error during route transition/);
-						return throwError("navigationErrorHandler " + error);
+						return throwError(errorPrefix + error);
 					})
 				)
-				.subscribe(() => fail("this block should not be executed"), () => done());
+				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
 		});
 
-		it("should log an warning if it is not a known navigation rejection cause", (done: DoneFn) => {
+		it("should log a warning if it is not a known navigation rejection cause", (done: DoneFn) => {
 			routingService.addTransitionHook(StarkRoutingTransitionHook.ON_START, {}, () => {
 				throw new Error("transition aborted");
 			});
@@ -948,10 +947,10 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
 						expect(message).toMatch(/transition aborted/);
-						return throwError("navigationErrorHandler " + error);
+						return throwError(errorPrefix + error);
 					})
 				)
-				.subscribe(() => fail("this block should not be executed"), () => done());
+				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
 		});
 
 		it("should log an error if it is not a known navigation rejection cause", (done: DoneFn) => {
@@ -966,10 +965,10 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(2);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/An error occurred with a resolve in the new state/);
-						return throwError("navigationErrorHandler " + error);
+						return throwError(errorPrefix + error);
 					})
 				)
-				.subscribe(() => fail("this block should not be executed"), () => done());
+				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
 		});
 
 		it("should log an error if the state does not exist", (done: DoneFn) => {
@@ -980,10 +979,10 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/The target state does NOT exist/);
-						return throwError("navigationErrorHandler " + error);
+						return throwError(errorPrefix + error);
 					})
 				)
-				.subscribe(() => fail("this block should not be executed"), () => done());
+				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
 		});
 	});
 
@@ -1674,7 +1673,7 @@ describe("Service: StarkRoutingService", () => {
 
 	describe("getStateTreeParams", () => {
 		it(
-			"should return the name and parameters of each node in the state tree when navigating through the same branch (scenario 1)",
+			"should return the parameters of each state in the state tree when navigating through the same branch (scenario 1)",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -1720,7 +1719,7 @@ describe("Service: StarkRoutingService", () => {
 		);
 
 		it(
-			"should return the name and parameters of each node in the state tree" + " when navigating to a sub branch (scenario 2)",
+			"should return the parameters of each state in the state tree when navigating to a sub branch (scenario 2)",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -1770,8 +1769,7 @@ describe("Service: StarkRoutingService", () => {
 		);
 
 		it(
-			"should return the name and parameters of each node in the state tree" +
-				" after navigating the same path but with other params (scenario 3)",
+			"should return the parameters of each state in the state tree after navigating the same path but with other params (scenario 3)",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -1833,7 +1831,7 @@ describe("Service: StarkRoutingService", () => {
 		);
 
 		it(
-			"should return the name and parameters of each node in the state tree" + " after switching branches (scenario 4)",
+			"should return the parameters of each state in the state tree after switching branches (scenario 4)",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -1891,7 +1889,7 @@ describe("Service: StarkRoutingService", () => {
 		);
 
 		it(
-			"should return the name and parameters of each node in the state tree" + " after switching branches (scenario 5)",
+			"should return the parameters of each state in the state tree after switching branches (scenario 5)",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -1979,7 +1977,7 @@ describe("Service: StarkRoutingService", () => {
 
 	describe("getStateTreeParams in combination with NavigateToPrevious", () => {
 		it(
-			"should return the state tree name and parameters of each node in the state tree",
+			"should return the parameters of each state in the state tree",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -2033,9 +2031,9 @@ describe("Service: StarkRoutingService", () => {
 		);
 	});
 
-	describe("getStateTreeParams in combination with NagivateToHome and NavigateToPrevious", () => {
+	describe("getStateTreeParams in combination with NavigateToHome and NavigateToPrevious", () => {
 		it(
-			"should return the state tree name and parameters of each node in the state tree",
+			"should return the parameters of each state in the state tree",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -2118,7 +2116,7 @@ describe("Service: StarkRoutingService", () => {
 
 	describe("getStateTreeResolves", () => {
 		it(
-			"should return the name, parameters and parent of each node in the state tree",
+			"should return the resolves of each state in the state tree in case those states have resolves defined",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -2164,7 +2162,7 @@ describe("Service: StarkRoutingService", () => {
 		);
 
 		it(
-			"should return the name, parameters and parent of each node in the state tree",
+			"should return the resolves of each state in the state tree",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -2188,7 +2186,7 @@ describe("Service: StarkRoutingService", () => {
 
 	describe("getStateTreeData", () => {
 		it(
-			"should return the name, parameters and parent of each node in the state tree",
+			"should return the custom data of each state in the state tree",
 			fakeAsync(() => {
 				const navigationSteps: any[] = [
 					{
@@ -2282,3 +2280,4 @@ describe("Service: StarkRoutingService", () => {
 		);
 	});
 });
+/* tslint:enable */

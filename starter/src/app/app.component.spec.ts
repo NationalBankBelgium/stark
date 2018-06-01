@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, TestBed, ComponentFixture } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 /**
  * Load the implementations that should be tested
@@ -15,15 +15,17 @@ describe(`App`, () => {
 	 * async beforeEach
 	 */
 	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			declarations: [AppComponent],
-			schemas: [NO_ERRORS_SCHEMA],
-			providers: [AppState]
-		})
-			/**
-			 * Compile template and css
-			 */
-			.compileComponents();
+		return (
+			TestBed.configureTestingModule({
+				declarations: [AppComponent],
+				schemas: [NO_ERRORS_SCHEMA],
+				providers: [AppState]
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		);
 	}));
 
 	/**

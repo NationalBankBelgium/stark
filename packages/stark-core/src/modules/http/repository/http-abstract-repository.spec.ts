@@ -19,6 +19,7 @@ import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 
+// tslint:disable-next-line:no-big-function
 describe("Repository: AbstractStarkHttpRepository", () => {
 	let mockStarkHttpService: StarkHttpService<MockResource>;
 	let mockLogger: StarkLoggingService;

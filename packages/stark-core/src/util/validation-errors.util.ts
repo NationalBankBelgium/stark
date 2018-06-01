@@ -21,6 +21,8 @@ export class StarkValidationErrorsUtil {
 	 * @param validationErrors - Array containing validation results
 	 * @param errorMessagePrefix - (Optional) A prefix to be added to the generated string
 	 */
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
 	public static toString(validationErrors: ValidationError[], errorMessagePrefix?: string): string {
 		let validationMessage: string = errorMessagePrefix ? errorMessagePrefix + "\n" : "";
 

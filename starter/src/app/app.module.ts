@@ -128,7 +128,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		}),
 		UIRouterModule.forRoot({
 			states: APP_STATES,
-			useHash: Boolean(history.pushState) === false,
+			useHash: !Boolean(history.pushState),
 			otherwise: { state: "otherwise" },
 			config: routerConfigFn
 		}),

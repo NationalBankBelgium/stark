@@ -36,6 +36,7 @@ interface StarkUserWithCustomData extends Pick<StarkUser, "uuid" | "username" | 
 	[prop: string]: any;
 }
 
+// tslint:disable-next-line:no-big-function
 describe("Service: StarkUserService", () => {
 	let userService: StarkUserService;
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;

@@ -4,7 +4,7 @@ import SpyObj = jasmine.SpyObj;
 import { autoserialize, autoserializeAs, inheritSerialization, Serialize } from "cerialize";
 import { Observable, of, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
 
 import { StarkHttpServiceImpl } from "./http.service";
 import {
@@ -37,18 +37,25 @@ import { MockStarkLoggingService } from "../../logging/testing";
 import { MockStarkSessionService } from "../../session/testing";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 
-// FIXME: re-enable this TSLINT rule and refactor these tests to try to reduce the duplication of function as much as possible
-/* tslint:disable:no-identical-functions */
+/* tslint:disable:no-big-function no-duplicate-string */
 describe("Service: StarkHttpService", () => {
 	let loggerMock: StarkLoggingService;
 	let mockSessionService: StarkSessionService;
 	let httpMock: SpyObj<HttpClient>;
 	let starkHttpService: HttpServiceHelper<MockResource>;
 	let mockBackend: StarkBackend;
-	let mockResourcePath: string;
 	let mockResourceWithEtag: MockResource;
 	let mockResourceWithoutEtag: MockResource;
 	let mockResourceWithMetadata: MockResource;
+	const nextShouldNotBeCalled: string = "The 'next' function should not be called in case of an http error";
+	const errorShouldNotBeCalled: string = "The 'error' function should not be called in case the http call succeeded";
+
+	interface StarkHttpServiceSpecVariables {
+		starkHttpService: HttpServiceHelper<MockResource>;
+		httpMock: SpyObj<HttpClient>;
+		loggerMock: StarkLoggingService;
+		httpRequest: StarkHttpRequest<MockResource>;
+	}
 
 	/* MockResource */
 	const mockUuid: string = "dfd45d31-1c78-4075-914e-9dd570f3eb31";
@@ -65,6 +72,7 @@ describe("Service: StarkHttpService", () => {
 	const expiresValue: string = "-1";
 
 	const mockCorrelationId: string = "fooBarCorrelationIdentifier";
+	const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
 	const httpHeaders: { [name: string]: string } = {};
 	httpHeaders[contentTypeKey] = contentTypeValue;
@@ -84,6 +92,9 @@ describe("Service: StarkHttpService", () => {
 	const mockHttpErrorDetail3: string = "The e-mail is invalid";
 
 	let headersMap: Map<string, string>;
+	const dummyBackendUrl: string = "www.awesomeapi.com";
+	const mockResourcePath: string = "mock";
+	const mockResourceFullUrl: string = dummyBackendUrl + "/" + mockResourcePath;
 
 	const mockHttpError: StarkHttpError = {
 		type: mockHttpErrorType,
@@ -283,10 +294,843 @@ describe("Service: StarkHttpService", () => {
 		}
 	}
 
+	function testHttpSuccess(
+		requestType: "create" | "delete" | "getSingle" | "getCollection" | "search" | "update" | "updateIdempotent",
+		beforeEachFn: () => StarkHttpServiceSpecVariables
+	): void {
+		describe("http success", () => {
+			let request: StarkHttpRequest<MockResource>;
+			let httpResponse: Partial<HttpResponse<StarkResource | StarkHttpRawCollectionResponseData<MockResource>>>;
+			let httpClientMock: SpyObj<HttpClient>;
+			let loggingServiceMock: StarkLoggingService;
+			let httpService: HttpServiceHelper<MockResource>;
+			let expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+
+			beforeEach(() => {
+				({
+					starkHttpService: httpService,
+					httpMock: httpClientMock,
+					loggerMock: loggingServiceMock,
+					httpRequest: request
+				} = beforeEachFn());
+
+				httpResponse = {
+					status: expectedStatusCode,
+					body: mockResourceWithEtag,
+					headers: httpHeadersGetter(httpHeaders)
+				};
+			});
+
+			it("on SUCCESS ('" + requestType + "'), should wrap the returned data in an observable", () => {
+				let resultObs: Observable<StarkSingleItemResponseWrapper<MockResource> | StarkCollectionResponseWrapper<MockResource>>;
+				let httpMockMethod: Spy;
+				let expectedSerializedData: string | object | undefined;
+				let expectedEtags: { [uuid: string]: string };
+
+				switch (requestType) {
+					case "getSingle":
+						httpMockMethod = httpClientMock.get;
+						httpMockMethod.and.returnValue(of(httpResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+					case "delete":
+						expectedStatusCode = StarkHttpStatusCodes.HTTP_204_NO_CONTENT;
+						httpResponse = {
+							status: expectedStatusCode,
+							body: undefined,
+							headers: httpHeadersGetter(httpHeaders)
+						};
+						httpMockMethod = httpClientMock.delete;
+						httpMockMethod.and.returnValue(of(httpResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+					case "update":
+						expectedStatusCode = StarkHttpStatusCodes.HTTP_204_NO_CONTENT;
+						expectedSerializedData = request.serializer.serialize(mockResourceWithoutEtag);
+						httpResponse = {
+							status: expectedStatusCode,
+							body: mockResourceWithEtag,
+							headers: httpHeadersGetter(httpHeaders)
+						};
+						httpMockMethod = httpClientMock.post;
+						httpMockMethod.and.returnValue(of(httpResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+					case "updateIdempotent":
+						expectedStatusCode = StarkHttpStatusCodes.HTTP_204_NO_CONTENT;
+						expectedSerializedData = request.serializer.serialize(mockResourceWithoutEtag);
+						httpResponse = {
+							status: expectedStatusCode,
+							body: mockResourceWithEtag,
+							headers: httpHeadersGetter(httpHeaders)
+						};
+						httpMockMethod = httpClientMock.put;
+						httpMockMethod.and.returnValue(of(httpResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+					case "getCollection":
+						expectedEtags = {};
+						expectedEtags[mockUuid] = mockEtag;
+
+						httpResponse = {
+							status: expectedStatusCode,
+							body: {
+								items: [mockResourceWithoutEtag],
+								metadata: {
+									sortedBy: [
+										{
+											field: "name",
+											order: StarkSortOrder.DESC
+										}
+									],
+									pagination: mockPaginationMetadata,
+									etags: expectedEtags,
+									warnings: mockWarnings
+								}
+							},
+							headers: httpHeadersGetter(httpHeaders)
+						};
+						httpMockMethod = httpClientMock.get;
+						httpMockMethod.and.returnValue(of(httpResponse));
+
+						resultObs = httpService.executeCollectionRequest(request);
+						break;
+					case "search":
+						expectedSerializedData = Serialize(mockCriteria); // the search criteria is sent in the request body payload
+						expectedEtags = {};
+						expectedEtags[mockUuid] = mockEtag;
+
+						httpResponse = {
+							status: expectedStatusCode,
+							body: {
+								items: [mockResourceWithoutEtag],
+								metadata: {
+									sortedBy: [
+										{
+											field: "name",
+											order: StarkSortOrder.DESC
+										}
+									],
+									pagination: mockPaginationMetadata,
+									etags: expectedEtags,
+									warnings: mockWarnings
+								}
+							},
+							headers: httpHeadersGetter(httpHeaders)
+						};
+						httpMockMethod = httpClientMock.post;
+						httpMockMethod.and.returnValue(of(httpResponse));
+
+						resultObs = httpService.executeCollectionRequest(request);
+						break;
+					default:
+						// CREATE
+						expectedSerializedData = request.serializer.serialize(mockResourceWithoutEtag);
+						httpMockMethod = httpClientMock.post;
+						httpMockMethod.and.returnValue(of(httpResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+				}
+
+				resultObs.subscribe(
+					(result: StarkSingleItemResponseWrapper<MockResource> | StarkCollectionResponseWrapper<MockResource>) => {
+						expect(result).toBeDefined();
+						expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+
+						// tslint:disable-next-line:prefer-switch
+						if (requestType === "getCollection" || requestType === "search") {
+							assertResponseData((<StarkCollectionResponseWrapper<MockResource>>result).data, [mockResourceWithEtag]);
+							assertCollectionMetadata((<StarkCollectionResponseWrapper<MockResource>>result).metadata, {
+								sortedBy: [
+									{
+										field: "name",
+										order: StarkSortOrder.DESC,
+										sortValue: "name" + "+" + StarkSortOrder.DESC
+									}
+								],
+								pagination: mockPaginationMetadata,
+								warnings: mockWarnings,
+								etags: expectedEtags
+							});
+							expect(loggingServiceMock.warn).not.toHaveBeenCalled();
+						} else if (requestType === "delete") {
+							expect(result.data).toBeUndefined();
+						} else {
+							assertResponseData([(<StarkSingleItemResponseWrapper<MockResource>>result).data], [mockResourceWithEtag]);
+							expect((<StarkSingleItemResponseWrapper<MockResource>>result).data.metadata).toBeUndefined();
+						}
+
+						assertHttpCall(
+							httpMockMethod,
+							mockResourceFullUrl,
+							{
+								params: convertMapIntoObject(request.queryParameters),
+								headers: convertMapIntoObject(headersMap),
+								observe: "response",
+								responseType: "json"
+							},
+							expectedSerializedData
+						);
+					},
+					() => {
+						fail(errorShouldNotBeCalled);
+					}
+				);
+			});
+		});
+	}
+
+	function testHttpFailure(
+		requestType: "create" | "delete" | "getSingle" | "getCollection" | "search" | "update" | "updateIdempotent",
+		beforeEachFn: () => StarkHttpServiceSpecVariables
+	): void {
+		describe("http failure", () => {
+			let request: StarkHttpRequest<MockResource>;
+			let httpClientMock: SpyObj<HttpClient>;
+			let loggingServiceMock: StarkLoggingService;
+			let httpService: HttpServiceHelper<MockResource>;
+			let resultObs: Observable<StarkSingleItemResponseWrapper<MockResource> | StarkCollectionResponseWrapper<MockResource>>;
+			let httpErrorResponse: Partial<HttpErrorResponse>;
+
+			beforeEach(() => {
+				({
+					starkHttpService: httpService,
+					httpMock: httpClientMock,
+					loggerMock: loggingServiceMock,
+					httpRequest: request
+				} = beforeEachFn());
+
+				httpErrorResponse = {
+					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
+					error: mockHttpError,
+					headers: httpHeadersGetter(httpHeaders)
+				};
+			});
+
+			it("on FAILURE ('" + requestType + "'), should wrap the returned data in an observable", () => {
+				let httpMockMethod: Spy;
+				let expectedSerializedData: string | object | undefined;
+
+				switch (requestType) {
+					case "getSingle":
+						httpMockMethod = httpClientMock.get;
+						httpMockMethod.and.returnValue(throwError(httpErrorResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+					case "delete":
+						httpMockMethod = httpClientMock.delete;
+						httpMockMethod.and.returnValue(throwError(httpErrorResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+					case "updateIdempotent":
+						expectedSerializedData = request.serializer.serialize(mockResourceWithoutEtag);
+						httpMockMethod = httpClientMock.put;
+						httpMockMethod.and.returnValue(throwError(httpErrorResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+					case "getCollection":
+						httpMockMethod = httpClientMock.get;
+						httpMockMethod.and.returnValue(throwError(httpErrorResponse));
+
+						resultObs = httpService.executeCollectionRequest(request);
+						break;
+					case "search":
+						expectedSerializedData = Serialize(mockCriteria); // the search criteria is sent in the request body payload
+						httpMockMethod = httpClientMock.post;
+						httpMockMethod.and.returnValue(throwError(httpErrorResponse));
+
+						resultObs = httpService.executeCollectionRequest(request);
+						break;
+					default:
+						// CREATE | UPDATE
+						expectedSerializedData = request.serializer.serialize(mockResourceWithoutEtag);
+						httpMockMethod = httpClientMock.post;
+						httpMockMethod.and.returnValue(throwError(httpErrorResponse));
+
+						resultObs = httpService.executeSingleItemRequest(request);
+						break;
+				}
+
+				resultObs.subscribe(
+					() => {
+						fail(nextShouldNotBeCalled);
+					},
+					(errorWrapper: StarkHttpErrorWrapper) => {
+						assertHttpFailure(errorWrapper);
+						assertHttpCall(
+							httpMockMethod,
+							mockResourceFullUrl,
+							{
+								params: convertMapIntoObject(request.queryParameters),
+								headers: convertMapIntoObject(headersMap),
+								observe: "response",
+								responseType: "json"
+							},
+							expectedSerializedData
+						);
+					}
+				);
+			});
+
+			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
+			it(
+				"on FAILURE ('" +
+					requestType +
+					"'), should retry the request before emitting the failure if the request retryCount option is set",
+				(done: DoneFn) => {
+					request.retryCount = 2;
+					let errorCounter: number = 0;
+					const httpErrorResponse$: Observable<never> = throwError(httpErrorResponse).pipe(
+						catchError((err: any) => {
+							errorCounter++;
+							return throwError(err);
+						})
+					);
+
+					switch (requestType) {
+						case "getSingle":
+							httpClientMock.get.and.returnValue(httpErrorResponse$);
+
+							resultObs = httpService.executeSingleItemRequest(request);
+							break;
+						case "delete":
+							httpClientMock.delete.and.returnValue(httpErrorResponse$);
+
+							resultObs = httpService.executeSingleItemRequest(request);
+							break;
+						case "updateIdempotent":
+							httpClientMock.put.and.returnValue(httpErrorResponse$);
+
+							resultObs = httpService.executeSingleItemRequest(request);
+							break;
+						case "getCollection":
+							httpClientMock.get.and.returnValue(httpErrorResponse$);
+
+							resultObs = httpService.executeCollectionRequest(request);
+							break;
+						case "search":
+							httpClientMock.post.and.returnValue(httpErrorResponse$);
+
+							resultObs = httpService.executeCollectionRequest(request);
+							break;
+						default:
+							// CREATE | UPDATE
+							httpClientMock.post.and.returnValue(httpErrorResponse$);
+
+							resultObs = httpService.executeSingleItemRequest(request);
+							break;
+					}
+
+					resultObs.subscribe(
+						() => {
+							fail(nextShouldNotBeCalled);
+						},
+						(errorWrapper: StarkHttpErrorWrapper) => {
+							assertHttpFailure(errorWrapper);
+							expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
+							done();
+						}
+					);
+				}
+			);
+		});
+	}
+
+	function testSingleItemResponseMetadata(
+		requestType: "create" | "getSingle" | "update" | "updateIdempotent",
+		beforeEachFn: () => StarkHttpServiceSpecVariables
+	): void {
+		describe("single item response metadata", () => {
+			let request: StarkHttpRequest<MockResource>;
+			let httpResponse: Partial<HttpResponse<StarkResource>>;
+			let httpClientMock: SpyObj<HttpClient>;
+			let loggingServiceMock: StarkLoggingService;
+			let httpService: HttpServiceHelper<MockResource>;
+
+			beforeEach(() => {
+				({
+					starkHttpService: httpService,
+					httpMock: httpClientMock,
+					loggerMock: loggingServiceMock,
+					httpRequest: request
+				} = beforeEachFn());
+			});
+
+			it(
+				"on SUCCESS ('" + requestType + "'), should return the data including metadata (if any) and wrap it in an observable",
+				() => {
+					let expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+
+					switch (requestType) {
+						case "getSingle":
+							httpResponse = {
+								status: expectedStatusCode,
+								body: mockResourceWithMetadata,
+								headers: httpHeadersGetter(httpHeaders)
+							};
+							httpClientMock.get.and.returnValue(of(httpResponse));
+							break;
+						case "update":
+							expectedStatusCode = StarkHttpStatusCodes.HTTP_204_NO_CONTENT;
+							httpResponse = {
+								status: expectedStatusCode,
+								body: mockResourceWithMetadata,
+								headers: httpHeadersGetter(httpHeaders)
+							};
+							httpClientMock.post.and.returnValue(of(httpResponse));
+							break;
+						case "updateIdempotent":
+							expectedStatusCode = StarkHttpStatusCodes.HTTP_204_NO_CONTENT;
+							httpResponse = {
+								status: expectedStatusCode,
+								body: mockResourceWithMetadata,
+								headers: httpHeadersGetter(httpHeaders)
+							};
+							httpClientMock.put.and.returnValue(of(httpResponse));
+							break;
+						default:
+							// CREATE
+							httpResponse = {
+								status: expectedStatusCode,
+								body: mockResourceWithMetadata,
+								headers: httpHeadersGetter(httpHeaders)
+							};
+							httpClientMock.post.and.returnValue(of(httpResponse));
+							break;
+					}
+
+					const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = httpService.executeSingleItemRequest(
+						request
+					);
+
+					resultObs.subscribe(
+						(result: StarkSingleItemResponseWrapper<MockResource>) => {
+							expect(result).toBeDefined();
+							expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+							assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+							assertResponseData([result.data], [mockResourceWithEtag]);
+							expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
+							assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
+							expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
+						},
+						() => {
+							fail(errorShouldNotBeCalled);
+						}
+					);
+				}
+			);
+		});
+	}
+
+	function testCollectionResponseValidations(
+		requestType: "getCollection" | "search",
+		beforeEachFn: () => StarkHttpServiceSpecVariables
+	): void {
+		describe("collection response validations", () => {
+			let request: StarkHttpRequest<MockResource>;
+			let httpClientMock: SpyObj<HttpClient>;
+			let httpMockMethod: Spy;
+			let loggingServiceMock: StarkLoggingService;
+			let httpService: HttpServiceHelper<MockResource>;
+			let resultObs: Observable<StarkCollectionResponseWrapper<MockResource>>;
+			const mockCustomMetadata: object = {
+				prop1: 1234,
+				prop2: "whatever",
+				prop3: "2016-03-18T18:25:43.511Z",
+				prop4: ["some custom value", "false", "null", "", true, false, 0, { name: "Christopher", surname: "Cortes" }]
+			};
+
+			beforeEach(() => {
+				({
+					starkHttpService: httpService,
+					httpMock: httpClientMock,
+					loggerMock: loggingServiceMock,
+					httpRequest: request
+				} = beforeEachFn());
+
+				if (requestType === "getCollection") {
+					httpMockMethod = httpClientMock.get;
+				} else {
+					// SEARCH
+					httpMockMethod = httpClientMock.post;
+				}
+			});
+
+			it("on SUCCESS ('" + requestType + "'), should log a warning in case the response metadata contains no 'etags' object", () => {
+				const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+
+				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
+					status: expectedStatusCode,
+					body: {
+						items: [mockResourceWithoutEtag],
+						metadata: {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: <any>undefined
+						}
+					},
+					headers: httpHeadersGetter(httpHeaders)
+				};
+
+				httpMockMethod.and.returnValue(of(httpResponse));
+
+				resultObs = httpService.executeCollectionRequest(request);
+
+				resultObs.subscribe(
+					(result: StarkCollectionResponseWrapper<MockResource>) => {
+						expect(result).toBeDefined();
+						expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+						assertResponseData(result.data, [mockResourceWithoutEtag]);
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata
+						});
+						expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
+						expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no 'etags'");
+					},
+					() => {
+						fail(errorShouldNotBeCalled);
+					}
+				);
+			});
+
+			it(
+				"on SUCCESS ('" +
+					requestType +
+					"'), should log a warning in case there is no etag for a certain resource in the response metadata",
+				() => {
+					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+					const expectedEtags: { [uuid: string]: string } = {};
+
+					const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
+						status: expectedStatusCode,
+						body: {
+							items: [mockResourceWithoutEtag],
+							metadata: {
+								sortedBy: [],
+								pagination: mockPaginationMetadata,
+								etags: expectedEtags
+							}
+						},
+						headers: httpHeadersGetter(httpHeaders)
+					};
+
+					httpMockMethod.and.returnValue(of(httpResponse));
+
+					resultObs = httpService.executeCollectionRequest(request);
+
+					resultObs.subscribe(
+						(result: StarkCollectionResponseWrapper<MockResource>) => {
+							expect(result).toBeDefined();
+							expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+							assertResponseData(result.data, [mockResourceWithoutEtag]);
+							assertCollectionMetadata(result.metadata, {
+								sortedBy: [],
+								pagination: mockPaginationMetadata,
+								etags: expectedEtags
+							});
+							assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+							expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
+							expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no etag");
+						},
+						() => {
+							fail(errorShouldNotBeCalled);
+						}
+					);
+				}
+			);
+
+			it("on SUCCESS ('" + requestType + "'), should log a warning in case the response contains an invalid items array", () => {
+				const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+				const expectedEtags: { [uuid: string]: string } = {};
+				expectedEtags[mockUuid] = mockEtag;
+
+				const items: any = {}; // invalid "items" array
+
+				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
+					status: expectedStatusCode,
+					body: {
+						items: items,
+						metadata: {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: expectedEtags
+						}
+					},
+					headers: httpHeadersGetter(httpHeaders)
+				};
+
+				httpMockMethod.and.returnValue(of(httpResponse));
+
+				resultObs = httpService.executeCollectionRequest(request);
+
+				resultObs.subscribe(
+					(result: StarkCollectionResponseWrapper<MockResource>) => {
+						expect(result).toBeDefined();
+						expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property
+						assertCollectionMetadata(result.metadata, {
+							sortedBy: [],
+							pagination: mockPaginationMetadata,
+							etags: expectedEtags
+						});
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+						expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
+						expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no 'items'");
+					},
+					() => {
+						fail(errorShouldNotBeCalled);
+					}
+				);
+			});
+
+			it(
+				"on SUCCESS ('" +
+					requestType +
+					"'), should log a warning in case an item in the items array is not an object so the etag property cannot be set",
+				() => {
+					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+					const expectedEtags: { [uuid: string]: string } = {};
+					expectedEtags[mockUuid] = mockEtag;
+
+					const items: any[] = [
+						// non-object item in "items" array
+						"non-object value"
+					];
+
+					const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
+						status: expectedStatusCode,
+						body: {
+							items: items,
+							metadata: {
+								sortedBy: [],
+								pagination: mockPaginationMetadata,
+								etags: expectedEtags
+							}
+						},
+						headers: httpHeadersGetter(httpHeaders)
+					};
+
+					httpMockMethod.and.returnValue(of(httpResponse));
+
+					resultObs = httpService.executeCollectionRequest(request);
+
+					resultObs.subscribe(
+						(result: StarkCollectionResponseWrapper<any>) => {
+							expect(result).toBeDefined();
+							expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+							expect(result.data).toBeDefined();
+							expect(result.data.length).toBe(1);
+							expect(result.data[0] instanceof MockResource).toBe(false);
+							expect(result.data[0]).toBe(items[0]);
+							assertCollectionMetadata(result.metadata, {
+								sortedBy: [],
+								pagination: mockPaginationMetadata,
+								etags: expectedEtags
+							});
+							assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+							expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
+							expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("it is not an object");
+						},
+						() => {
+							fail(errorShouldNotBeCalled);
+						}
+					);
+				}
+			);
+
+			it(
+				"on SUCCESS ('" +
+					requestType +
+					"'), should log a warning in case an item in the items array has no uuid so it cannot search the correct etag for it",
+				() => {
+					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+					const expectedEtags: { [uuid: string]: string } = {};
+					expectedEtags[mockUuid] = mockEtag;
+
+					const mockResourceWithoutUuid: MockResource = { ...mockResourceWithEtag };
+					delete mockResourceWithoutUuid.uuid;
+
+					const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
+						status: expectedStatusCode,
+						body: {
+							items: [mockResourceWithoutUuid],
+							metadata: {
+								sortedBy: [],
+								pagination: mockPaginationMetadata,
+								etags: expectedEtags
+							}
+						},
+						headers: httpHeadersGetter(httpHeaders)
+					};
+
+					httpMockMethod.and.returnValue(of(httpResponse));
+
+					resultObs = httpService.executeCollectionRequest(request);
+
+					resultObs.subscribe(
+						(result: StarkCollectionResponseWrapper<MockResource>) => {
+							expect(result).toBeDefined();
+							expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+							assertResponseData(result.data, [mockResourceWithoutUuid]); // should contain the etag now
+							assertCollectionMetadata(result.metadata, {
+								sortedBy: [],
+								pagination: mockPaginationMetadata,
+								etags: expectedEtags
+							});
+							assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+							expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
+							expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no 'uuid' property found in item");
+						},
+						() => {
+							fail(errorShouldNotBeCalled);
+						}
+					);
+				}
+			);
+
+			it("on SUCCESS ('" + requestType + "'), should log a warning in case the response contains no metadata object", () => {
+				const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+
+				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
+					status: expectedStatusCode,
+					body: {
+						items: [mockResourceWithoutEtag],
+						metadata: <any>undefined
+					},
+					headers: httpHeadersGetter(httpHeaders)
+				};
+
+				httpMockMethod.and.returnValue(of(httpResponse));
+
+				resultObs = httpService.executeCollectionRequest(request);
+
+				resultObs.subscribe(
+					(result: StarkCollectionResponseWrapper<MockResource>) => {
+						expect(result).toBeDefined();
+						expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+						assertResponseData(result.data, [mockResourceWithoutEtag]);
+						expect(result.metadata).toBeUndefined();
+						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+						expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
+						expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no 'metadata'");
+					},
+					() => {
+						fail(errorShouldNotBeCalled);
+					}
+				);
+			});
+
+			it(
+				"on SUCCESS ('" +
+					requestType +
+					"'), should deserialize 'as is' the custom metadata if any is returned in the response metadata",
+				() => {
+					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
+					const expectedEtags: { [uuid: string]: string } = {};
+					expectedEtags[mockUuid] = mockEtag;
+
+					const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
+						status: expectedStatusCode,
+						body: {
+							items: [mockResourceWithoutEtag],
+							metadata: {
+								sortedBy: [],
+								pagination: mockPaginationMetadata,
+								etags: expectedEtags,
+								custom: mockCustomMetadata
+							}
+						},
+						headers: httpHeadersGetter(httpHeaders)
+					};
+
+					httpMockMethod.and.returnValue(of(httpResponse));
+
+					resultObs = httpService.executeCollectionRequest(request);
+
+					resultObs.subscribe(
+						(result: StarkCollectionResponseWrapper<MockResource>) => {
+							expect(result).toBeDefined();
+							expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
+							assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
+							assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
+							assertCollectionMetadata(result.metadata, {
+								sortedBy: [],
+								pagination: mockPaginationMetadata,
+								etags: expectedEtags,
+								custom: mockCustomMetadata
+							});
+							expect(loggingServiceMock.warn).not.toHaveBeenCalled();
+						},
+						() => {
+							fail(errorShouldNotBeCalled);
+						}
+					);
+				}
+			);
+		});
+	}
+
+	function testEtagRemoval(_requestType: "create" | "update", beforeEachFn: () => StarkHttpServiceSpecVariables): void {
+		describe("on etag removal", () => {
+			let request: StarkHttpRequest<MockResource>;
+			let httpClientMock: SpyObj<HttpClient>;
+			let loggingServiceMock: StarkLoggingService;
+			let httpService: HttpServiceHelper<MockResource>;
+			let httpResponse: Partial<HttpResponse<StarkResource>>;
+
+			beforeEach(() => {
+				({
+					starkHttpService: httpService,
+					httpMock: httpClientMock,
+					loggerMock: loggingServiceMock,
+					httpRequest: request
+				} = beforeEachFn());
+
+				httpResponse = {
+					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
+					body: mockResourceWithEtag,
+					headers: httpHeadersGetter(httpHeaders)
+				};
+			});
+
+			it("should remove the etag from the entity before serializing it", () => {
+				httpClientMock.post.and.returnValue(of(httpResponse));
+
+				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = httpService.executeSingleItemRequest(request);
+
+				resultObs.subscribe((result: StarkSingleItemResponseWrapper<MockResource>) => {
+					expect(result).toBeDefined();
+				});
+
+				assertHttpCall(
+					httpClientMock.post,
+					mockResourceFullUrl,
+					{
+						params: convertMapIntoObject(request.queryParameters),
+						headers: convertMapIntoObject(headersMap),
+						observe: "response",
+						responseType: "json"
+					},
+					request.serializer.serialize(mockResourceWithoutEtag) // etag is removed from the item sent due to NG-1361
+				);
+			});
+		});
+	}
+
 	beforeEach(() => {
 		mockBackend = new StarkBackendImpl();
-		mockBackend.url = "www.awesomeapi.com";
-		mockResourcePath = "mock";
+		mockBackend.url = dummyBackendUrl;
 		mockResourceWithoutEtag = new MockResource(mockUuid);
 		mockResourceWithoutEtag.property1 = mockProperty1;
 		mockResourceWithoutEtag.property2 = mockProperty2;
@@ -311,10 +1155,8 @@ describe("Service: StarkHttpService", () => {
 
 	describe("executeSingleItemRequest", () => {
 		describe("with a Get request", () => {
-			let request: StarkHttpRequest<MockResource>;
-
-			beforeEach(() => {
-				request = {
+			function beforeEachFn(): StarkHttpServiceSpecVariables {
+				const request: StarkHttpRequest<MockResource> = {
 					backend: mockBackend,
 					resourcePath: mockResourcePath,
 					headers: new Map<string, string>(),
@@ -324,140 +1166,25 @@ describe("Service: StarkHttpService", () => {
 					serializer: mockResourceSerializer
 				};
 				request.queryParameters.set("duplicatedParam", ["paramValue1", "paramValue2"]);
-			});
 
-			it("on SUCCESS, should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: mockResourceWithEtag,
-					headers: httpHeadersGetter(httpHeaders)
+				return {
+					loggerMock: loggerMock,
+					httpMock: httpMock,
+					starkHttpService: starkHttpService,
+					httpRequest: request
 				};
-				httpMock.get.and.returnValue(of(httpResponse));
+			}
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+			testHttpSuccess("getSingle", beforeEachFn);
 
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						assertResponseData([result.data], [mockResourceWithEtag]);
-						expect(result.data.metadata).toBeUndefined();
+			testHttpFailure("getSingle", beforeEachFn);
 
-						assertHttpCall(httpMock.get, "www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should return the data including metadata (if any) and wrap it in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: mockResourceWithMetadata,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						assertResponseData([result.data], [mockResourceWithEtag]);
-						expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
-
-						assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
-
-						expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(throwError(httpErrorResponse));
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						assertHttpCall(httpMock.get, "www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
-					}
-				);
-			});
-
-			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
-			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				let errorCounter: number = 0;
-				httpMock.get.and.returnValue(
-					throwError(httpErrorResponse).pipe(
-						catchError((err: any) => {
-							errorCounter++;
-							return throwError(err);
-						})
-					)
-				);
-
-				request.retryCount = 2;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
-						done();
-					}
-				);
-			});
+			testSingleItemResponseMetadata("getSingle", beforeEachFn);
 		});
 
 		describe("with a Delete request", () => {
-			let request: StarkHttpRequest<MockResource>;
-
-			beforeEach(() => {
-				request = {
+			function beforeEachFn(): StarkHttpServiceSpecVariables {
+				const request: StarkHttpRequest<MockResource> = {
 					backend: mockBackend,
 					resourcePath: mockResourcePath,
 					headers: new Map<string, string>(),
@@ -467,109 +1194,23 @@ describe("Service: StarkHttpService", () => {
 					serializer: mockResourceSerializer
 				};
 				request.queryParameters.set("duplicatedParam", ["paramValue1", "paramValue2"]);
-			});
 
-			it("on SUCCESS, should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<undefined>> = {
-					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
-					body: undefined,
-					headers: httpHeadersGetter(httpHeaders)
+				return {
+					loggerMock: loggerMock,
+					httpMock: httpMock,
+					starkHttpService: starkHttpService,
+					httpRequest: request
 				};
-				httpMock.delete.and.returnValue(of(httpResponse));
+			}
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+			testHttpSuccess("delete", beforeEachFn);
 
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						expect(result.data).toBeUndefined();
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-
-						assertHttpCall(httpMock.delete, "www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.delete.and.returnValue(throwError(httpErrorResponse));
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						assertHttpCall(httpMock.delete, "www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
-					}
-				);
-			});
-
-			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
-			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				let errorCounter: number = 0;
-				httpMock.delete.and.returnValue(
-					throwError(httpErrorResponse).pipe(
-						catchError((err: any) => {
-							errorCounter++;
-							return throwError(err);
-						})
-					)
-				);
-
-				request.retryCount = 2;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
-						done();
-					}
-				);
-			});
+			testHttpFailure("delete", beforeEachFn);
 		});
 
 		describe("with an Update request", () => {
-			let request: StarkHttpRequest<MockResource>;
-
-			beforeEach(() => {
-				request = {
+			function beforeEachFn(): StarkHttpServiceSpecVariables {
+				const request: StarkHttpRequest<MockResource> = {
 					backend: mockBackend,
 					resourcePath: mockResourcePath,
 					headers: new Map<string, string>(),
@@ -579,331 +1220,55 @@ describe("Service: StarkHttpService", () => {
 					serializer: mockResourceSerializer
 				};
 				request.queryParameters.set("duplicatedParam", ["paramValue1", "paramValue2"]);
-			});
 
-			it("should remove the etag from the entity before serializing it", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
-					body: mockResourceWithEtag,
-					headers: httpHeadersGetter(httpHeaders)
+				return {
+					loggerMock: loggerMock,
+					httpMock: httpMock,
+					starkHttpService: starkHttpService,
+					httpRequest: request
 				};
-				httpMock.post.and.returnValue(of(httpResponse));
+			}
 
-				request.requestType = StarkHttpRequestType.UPDATE;
+			testHttpSuccess("update", beforeEachFn);
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+			testHttpFailure("update", beforeEachFn);
 
-				resultObs.subscribe((result: StarkSingleItemResponseWrapper<MockResource>) => {
-					expect(result).toBeDefined();
-				});
+			testEtagRemoval("update", beforeEachFn);
 
-				assertHttpCall(
-					httpMock.post,
-					"www.awesomeapi.com/mock",
-					{
-						params: convertMapIntoObject(request.queryParameters),
-						headers: convertMapIntoObject(headersMap),
-						observe: "response",
-						responseType: "json"
-					},
-					request.serializer.serialize(mockResourceWithoutEtag) // etag is removed from the item sent due to NG-1361
-				);
-			});
+			testSingleItemResponseMetadata("update", beforeEachFn);
+		});
 
-			it("on POST SUCCESS ('UPDATE'), should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
-					body: mockResourceWithEtag,
-					headers: httpHeadersGetter(httpHeaders)
+		describe("with an Update Idempotent request", () => {
+			function beforeEachFn(): StarkHttpServiceSpecVariables {
+				const request: StarkHttpRequest<MockResource> = {
+					backend: mockBackend,
+					resourcePath: mockResourcePath,
+					headers: new Map<string, string>(),
+					queryParameters: new Map<string, string>(),
+					requestType: StarkHttpRequestType.UPDATE_IDEMPOTENT,
+					item: mockResourceWithEtag,
+					serializer: mockResourceSerializer
 				};
-				httpMock.post.and.returnValue(of(httpResponse));
+				request.queryParameters.set("duplicatedParam", ["paramValue1", "paramValue2"]);
 
-				request.requestType = StarkHttpRequestType.UPDATE;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						assertResponseData([result.data], [mockResourceWithEtag]);
-						expect(result.data.metadata).toBeUndefined();
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-
-						assertHttpCall(
-							httpMock.post,
-							"www.awesomeapi.com/mock",
-							{
-								params: convertMapIntoObject(request.queryParameters),
-								headers: convertMapIntoObject(headersMap),
-								observe: "response",
-								responseType: "json"
-							},
-							request.serializer.serialize(mockResourceWithoutEtag)
-						);
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on POST SUCCESS ('UPDATE'), should return the data including metadata (if any) and wrap it in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
-					body: mockResourceWithMetadata,
-					headers: httpHeadersGetter(httpHeaders)
+				return {
+					loggerMock: loggerMock,
+					httpMock: httpMock,
+					starkHttpService: starkHttpService,
+					httpRequest: request
 				};
-				httpMock.post.and.returnValue(of(httpResponse));
+			}
 
-				request.requestType = StarkHttpRequestType.UPDATE;
+			testHttpSuccess("updateIdempotent", beforeEachFn);
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+			testHttpFailure("updateIdempotent", beforeEachFn);
 
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						assertResponseData([result.data], [mockResourceWithEtag]);
-						expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
-
-						assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
-
-						expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on PUT SUCCESS ('UPDATE_IDEMPOTENT'), should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
-					body: mockResourceWithEtag,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.put.and.returnValue(of(httpResponse));
-
-				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						assertResponseData([result.data], [mockResourceWithEtag]);
-						expect(result.data.metadata).toBeUndefined();
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-
-						assertHttpCall(
-							httpMock.put,
-							"www.awesomeapi.com/mock",
-							{
-								params: convertMapIntoObject(request.queryParameters),
-								headers: convertMapIntoObject(headersMap),
-								observe: "response",
-								responseType: "json"
-							},
-							request.serializer.serialize(mockResourceWithoutEtag)
-						);
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on PUT SUCCESS ('UPDATE_IDEMPOTENT'), should return the data including metadata (if any) and wrap it in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
-					body: mockResourceWithMetadata,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.put.and.returnValue(of(httpResponse));
-
-				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_204_NO_CONTENT);
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						assertResponseData([result.data], [mockResourceWithEtag]);
-						expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
-
-						assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
-
-						expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on POST FAILURE ('UPDATE'), should wrap the returned data in an observable", () => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(throwError(httpErrorResponse));
-
-				request.requestType = StarkHttpRequestType.UPDATE;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						assertHttpCall(
-							httpMock.post,
-							"www.awesomeapi.com/mock",
-							{
-								params: convertMapIntoObject(request.queryParameters),
-								headers: convertMapIntoObject(headersMap),
-								observe: "response",
-								responseType: "json"
-							},
-							request.serializer.serialize(mockResourceWithoutEtag)
-						);
-					}
-				);
-			});
-
-			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
-			it("on POST FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				let errorCounter: number = 0;
-				httpMock.post.and.returnValue(
-					throwError(httpErrorResponse).pipe(
-						catchError((err: any) => {
-							errorCounter++;
-							return throwError(err);
-						})
-					)
-				);
-
-				request.requestType = StarkHttpRequestType.UPDATE;
-				request.retryCount = 2;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
-						done();
-					}
-				);
-			});
-
-			it("on PUT FAILURE ('UPDATE_IDEMPOTENT'), should wrap the returned data in an observable", () => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.put.and.returnValue(throwError(httpErrorResponse));
-
-				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						assertHttpCall(
-							httpMock.put,
-							"www.awesomeapi.com/mock",
-							{
-								params: convertMapIntoObject(request.queryParameters),
-								headers: convertMapIntoObject(headersMap),
-								observe: "response",
-								responseType: "json"
-							},
-							request.serializer.serialize(mockResourceWithoutEtag)
-						);
-					}
-				);
-			});
-
-			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
-			it("on PUT FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				let errorCounter: number = 0;
-				httpMock.put.and.returnValue(
-					throwError(httpErrorResponse).pipe(
-						catchError((err: any) => {
-							errorCounter++;
-							return throwError(err);
-						})
-					)
-				);
-
-				request.requestType = StarkHttpRequestType.UPDATE_IDEMPOTENT;
-				request.retryCount = 2;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
-						done();
-					}
-				);
-			});
+			testSingleItemResponseMetadata("updateIdempotent", beforeEachFn);
 		});
 
 		describe("with a Create request", () => {
-			let request: StarkHttpRequest<MockResource>;
-
-			beforeEach(() => {
-				request = {
+			function beforeEachFn(): StarkHttpServiceSpecVariables {
+				const request: StarkHttpRequest<MockResource> = {
 					backend: mockBackend,
 					resourcePath: mockResourcePath,
 					headers: new Map<string, string>(),
@@ -913,173 +1278,22 @@ describe("Service: StarkHttpService", () => {
 					serializer: mockResourceSerializer
 				};
 				request.queryParameters.set("duplicatedParam", ["paramValue1", "paramValue2"]);
-			});
 
-			it("should remove the etag from the entity before serializing it", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
-					body: mockResourceWithEtag,
-					headers: httpHeadersGetter(httpHeaders)
+				return {
+					loggerMock: loggerMock,
+					httpMock: httpMock,
+					starkHttpService: starkHttpService,
+					httpRequest: request
 				};
-				httpMock.post.and.returnValue(of(httpResponse));
+			}
 
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
+			testHttpSuccess("create", beforeEachFn);
 
-				resultObs.subscribe((result: StarkSingleItemResponseWrapper<MockResource>) => {
-					expect(result).toBeDefined();
-				});
+			testHttpFailure("create", beforeEachFn);
 
-				assertHttpCall(
-					httpMock.post,
-					"www.awesomeapi.com/mock",
-					{
-						params: convertMapIntoObject(request.queryParameters),
-						headers: convertMapIntoObject(headersMap),
-						observe: "response",
-						responseType: "json"
-					},
-					request.serializer.serialize(mockResourceWithoutEtag) // etag is removed from the item sent due to NG-1361
-				);
-			});
+			testEtagRemoval("create", beforeEachFn);
 
-			it("on SUCCESS, should wrap the returned data in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: mockResourceWithEtag,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData([result.data], [mockResourceWithEtag]);
-						expect(result.data.metadata).toBeUndefined();
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-
-				assertHttpCall(
-					httpMock.post,
-					"www.awesomeapi.com/mock",
-					{
-						params: convertMapIntoObject(request.queryParameters),
-						headers: convertMapIntoObject(headersMap),
-						observe: "response",
-						responseType: "json"
-					},
-					request.serializer.serialize(mockResourceWithoutEtag)
-				);
-			});
-
-			it("on SUCCESS, should return the data including metadata (if any) and wrap it in an observable", () => {
-				const httpResponse: Partial<HttpResponse<StarkResource>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: mockResourceWithMetadata,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkSingleItemResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						assertResponseData([result.data], [mockResourceWithEtag]);
-						expect(result.data.metadata instanceof MockResourceMetadata).toBe(true);
-
-						assertMetadataWarnings(<StarkHttpErrorDetail[]>result.data.metadata.warnings, mockWarnings);
-
-						expect(result.data.metadata.someValue).toBe(mockResourceMetadata.someValue);
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(throwError(httpErrorResponse));
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-					}
-				);
-
-				assertHttpCall(
-					httpMock.post,
-					"www.awesomeapi.com/mock",
-					{
-						params: convertMapIntoObject(request.queryParameters),
-						headers: convertMapIntoObject(headersMap),
-						observe: "response",
-						responseType: "json"
-					},
-					request.serializer.serialize(mockResourceWithoutEtag)
-				);
-			});
-
-			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
-			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				let errorCounter: number = 0;
-				httpMock.post.and.returnValue(
-					throwError(httpErrorResponse).pipe(
-						catchError((err: any) => {
-							errorCounter++;
-							return throwError(err);
-						})
-					)
-				);
-
-				request.retryCount = 2;
-
-				const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = starkHttpService.executeSingleItemRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
-						done();
-					}
-				);
-			});
+			testSingleItemResponseMetadata("create", beforeEachFn);
 		});
 
 		describe("with an unknown request type", () => {
@@ -1110,18 +1324,9 @@ describe("Service: StarkHttpService", () => {
 	});
 
 	describe("executeCollectionRequest", () => {
-		const mockCustomMetadata: object = {
-			prop1: 1234,
-			prop2: "whatever",
-			prop3: "2016-03-18T18:25:43.511Z",
-			prop4: ["some value", "false", "null", "", true, false, 0, { name: "Christopher", surname: "Cortes" }]
-		};
-
 		describe("with a GetCollection request", () => {
-			let request: StarkHttpRequest<MockResource>;
-
-			beforeEach(() => {
-				request = {
+			function beforeEachFn(): StarkHttpServiceSpecVariables {
+				const request: StarkHttpRequest<MockResource> = {
 					backend: mockBackend,
 					resourcePath: mockResourcePath,
 					headers: new Map<string, string>(),
@@ -1131,433 +1336,25 @@ describe("Service: StarkHttpService", () => {
 					serializer: mockResourceSerializer
 				};
 				request.queryParameters.set("duplicatedParam", ["paramValue1", "paramValue2"]);
-			});
 
-			it("on SUCCESS, should wrap the returned data in an observable", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: {
-							sortedBy: [
-								{
-									field: "name",
-									order: StarkSortOrder.DESC
-								}
-							],
-							pagination: mockPaginationMetadata,
-							etags: etags,
-							warnings: mockWarnings
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
+				return {
+					loggerMock: loggerMock,
+					httpMock: httpMock,
+					starkHttpService: starkHttpService,
+					httpRequest: request
 				};
-				httpMock.get.and.returnValue(of(httpResponse));
+			}
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+			testHttpSuccess("getCollection", beforeEachFn);
 
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [
-								{
-									field: "name",
-									order: StarkSortOrder.DESC,
-									sortValue: "name" + "+" + StarkSortOrder.DESC
-								}
-							],
-							pagination: mockPaginationMetadata,
-							warnings: mockWarnings,
-							etags: etags
-						});
+			testHttpFailure("getCollection", beforeEachFn);
 
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).not.toHaveBeenCalled();
-
-						assertHttpCall(httpMock.get, "www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case the response metadata contains no 'etags' object", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: <any>undefined
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithoutEtag]);
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'etags'");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case there is no etag for a certain resource in the response metadata", () => {
-				const etags: { [uuid: string]: string } = {};
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithoutEtag]);
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no etag");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case the response contains an invalid items array", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const items: any = {}; // invalid "items" array
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: items,
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'items'");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case an item in the items array is not an object so the etag property cannot be set", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const items: any[] = [
-					// non-object item in "items" array
-					"some value"
-				];
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: items,
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<any>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(false);
-						expect(result.data[0]).toBe(items[0]);
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("it is not an object");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case an item in the items array has no uuid so it cannot search the correct etag for it", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const mockResourceWithoutUuid: MockResource = { ...mockResourceWithEtag };
-				delete mockResourceWithoutUuid.uuid;
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutUuid],
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithoutUuid]); // should contain the etag now
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'uuid' property found in item");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should deserialize 'as is' the custom metadata if any is returned in the response metadata", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags,
-							custom: mockCustomMetadata
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags,
-							custom: mockCustomMetadata
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).not.toHaveBeenCalled();
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case the response contains no metadata object", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: <any>undefined
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.get.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithoutEtag]);
-						expect(result.metadata).toBeUndefined();
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'metadata'");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-
-				httpMock.get.and.returnValue(throwError(httpErrorResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						assertHttpCall(httpMock.get, "www.awesomeapi.com/mock", {
-							params: convertMapIntoObject(request.queryParameters),
-							headers: convertMapIntoObject(headersMap),
-							observe: "response",
-							responseType: "json"
-						});
-					}
-				);
-			});
-
-			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
-			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				let errorCounter: number = 0;
-				httpMock.get.and.returnValue(
-					throwError(httpErrorResponse).pipe(
-						catchError((err: any) => {
-							errorCounter++;
-							return throwError(err);
-						})
-					)
-				);
-
-				request.retryCount = 2;
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
-						done();
-					}
-				);
-			});
+			testCollectionResponseValidations("getCollection", beforeEachFn);
 		});
 
 		describe("with a Search request", () => {
-			let request: StarkHttpRequest<MockResource>;
-			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
-
-			beforeEach(() => {
-				request = {
+			function beforeEachFn(): StarkHttpServiceSpecVariables {
+				const request: StarkHttpRequest<MockResource> = {
 					backend: mockBackend,
 					resourcePath: mockResourcePath,
 					headers: new Map<string, string>(),
@@ -1567,433 +1364,20 @@ describe("Service: StarkHttpService", () => {
 					serializer: mockResourceSerializer
 				};
 				request.queryParameters.set("duplicatedParam", ["paramValue1", "paramValue2"]);
-			});
 
-			it("on SUCCESS, should wrap the returned data in an observable", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: {
-							sortedBy: [
-								{
-									field: "name",
-									order: StarkSortOrder.DESC
-								}
-							],
-							pagination: mockPaginationMetadata,
-							etags: etags,
-							warnings: mockWarnings
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
+				return {
+					loggerMock: loggerMock,
+					httpMock: httpMock,
+					starkHttpService: starkHttpService,
+					httpRequest: request
 				};
-				httpMock.post.and.returnValue(of(httpResponse));
+			}
 
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
+			testHttpSuccess("search", beforeEachFn);
 
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [
-								{
-									field: "name",
-									order: StarkSortOrder.DESC,
-									sortValue: "name" + "+" + StarkSortOrder.DESC
-								}
-							],
-							pagination: mockPaginationMetadata,
-							warnings: mockWarnings,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).not.toHaveBeenCalled();
+			testHttpFailure("search", beforeEachFn);
 
-						assertHttpCall(
-							httpMock.post,
-							"www.awesomeapi.com/mock",
-							{
-								params: convertMapIntoObject(request.queryParameters),
-								headers: convertMapIntoObject(headersMap),
-								observe: "response",
-								responseType: "json"
-							},
-							Serialize(mockCriteria) // the search criteria is sent in the request body payload
-						);
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case the response metadata contains no 'etags' object", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: <any>undefined
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithoutEtag]);
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'etags'");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case there is no etag for a certain resource in the response metadata", () => {
-				const etags: { [uuid: string]: string } = {};
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithoutEtag]);
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no etag");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case the response contains an invalid items array", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const items: any = {}; // invalid "items" array
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: items,
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined(); // the data is whatever it comes in the "items" property
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'items'");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case an item in the items array is not an object so the etag property cannot be set", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const items: any[] = [
-					// non-object item in "items" array
-					"some value"
-				];
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: items,
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<any>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						expect(result.data).toBeDefined();
-						expect(result.data.length).toBe(1);
-						expect(result.data[0] instanceof MockResource).toBe(false);
-						expect(result.data[0]).toBe(items[0]);
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("it is not an object");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case an item in the items array has no uuid so it cannot search the correct etag for it", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const mockResourceWithoutUuid: MockResource = { ...mockResourceWithEtag };
-				delete mockResourceWithoutUuid.uuid;
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutUuid],
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithoutUuid]); // should contain the etag now
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'uuid' property found in item");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should deserialize 'as is' the custom metadata if any is returned in the response metadata", () => {
-				const etags: { [uuid: string]: string } = {};
-				etags[mockUuid] = mockEtag;
-
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags,
-							custom: mockCustomMetadata
-						}
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithEtag]); // should contain the etag now
-						assertCollectionMetadata(result.metadata, {
-							sortedBy: [],
-							pagination: mockPaginationMetadata,
-							etags: etags,
-							custom: mockCustomMetadata
-						});
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).not.toHaveBeenCalled();
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on SUCCESS, should log a warning in case the response contains no metadata object", () => {
-				const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
-					status: StarkHttpStatusCodes.HTTP_200_OK,
-					body: {
-						items: [mockResourceWithoutEtag],
-						metadata: <any>undefined
-					},
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(of(httpResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					(result: StarkCollectionResponseWrapper<MockResource>) => {
-						expect(result).toBeDefined();
-						expect(result.starkHttpStatusCode).toBe(StarkHttpStatusCodes.HTTP_200_OK);
-						assertResponseData(result.data, [mockResourceWithoutEtag]);
-						expect(result.metadata).toBeUndefined();
-						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
-						expect(loggerMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggerMock.warn).calls.argsFor(0)[0]).toContain("no 'metadata'");
-					},
-					() => {
-						fail("The 'error' function should not be called in case of success");
-					}
-				);
-			});
-
-			it("on FAILURE, should wrap the returned data in an observable", () => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				httpMock.post.and.returnValue(throwError(httpErrorResponse));
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						assertHttpCall(
-							httpMock.post,
-							"www.awesomeapi.com/mock",
-							{
-								params: convertMapIntoObject(request.queryParameters),
-								headers: convertMapIntoObject(headersMap),
-								observe: "response",
-								responseType: "json"
-							},
-							Serialize(mockCriteria) // the search criteria is sent in the request body payload
-						);
-					}
-				);
-			});
-
-			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
-			it("on FAILURE, should retry the request before emitting the failure if the request retryCount option is set", (done: DoneFn) => {
-				const httpErrorResponse: Partial<HttpErrorResponse> = {
-					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
-					error: mockHttpError,
-					headers: httpHeadersGetter(httpHeaders)
-				};
-				let errorCounter: number = 0;
-				httpMock.post.and.returnValue(
-					throwError(httpErrorResponse).pipe(
-						catchError((err: any) => {
-							errorCounter++;
-							return throwError(err);
-						})
-					)
-				);
-
-				request.retryCount = 2;
-
-				const resultObs: Observable<StarkCollectionResponseWrapper<MockResource>> = starkHttpService.executeCollectionRequest(
-					request
-				);
-
-				resultObs.subscribe(
-					() => {
-						fail("The 'next' function should not be called in case of an http error");
-					},
-					(errorWrapper: StarkHttpErrorWrapper) => {
-						assertHttpFailure(errorWrapper);
-						expect(errorCounter).toBe(1 + <number>request.retryCount); // error in original request + number of retries
-						done();
-					}
-				);
-			});
+			testCollectionResponseValidations("search", beforeEachFn);
 		});
 
 		describe("with an unknown request type", () => {
@@ -2031,6 +1415,8 @@ describe("Service: StarkHttpService", () => {
 
 	describe("addFakePreAuthenticationHeaders", () => {
 		it("should get the authentication headers from the Session service and add them to the current request headers", () => {
+			const dummyHeaderName: string = "some header";
+			const dummyHeaderValue: string = "some value";
 			const request: StarkHttpRequest<MockResource> = {
 				backend: mockBackend,
 				resourcePath: mockResourcePath,
@@ -2040,7 +1426,7 @@ describe("Service: StarkHttpService", () => {
 				item: mockResourceWithEtag,
 				serializer: mockResourceSerializer
 			};
-			request.headers.set("some header", "some value");
+			request.headers.set(dummyHeaderName, dummyHeaderValue);
 
 			const fakePreAuthenticationHeaders: Map<string, string> = mockSessionService.fakePreAuthenticationHeaders;
 			expect(fakePreAuthenticationHeaders.size).not.toBe(0);
@@ -2048,8 +1434,8 @@ describe("Service: StarkHttpService", () => {
 			const requestWithPreAuthHeaders: StarkHttpRequest = starkHttpService.addFakePreAuthenticationHeaders(request);
 
 			expect(requestWithPreAuthHeaders.headers.size).toBe(fakePreAuthenticationHeaders.size + 1); // plus the custom header
-			expect(requestWithPreAuthHeaders.headers.has("some header")).toBe(true);
-			expect(requestWithPreAuthHeaders.headers.get("some header")).toBe("some value");
+			expect(requestWithPreAuthHeaders.headers.has(dummyHeaderName)).toBe(true);
+			expect(requestWithPreAuthHeaders.headers.get(dummyHeaderName)).toBe(dummyHeaderValue);
 
 			fakePreAuthenticationHeaders.forEach((headerValue: string, header: string) => {
 				expect(requestWithPreAuthHeaders.headers.has(header)).toBe(true);
@@ -2060,6 +1446,8 @@ describe("Service: StarkHttpService", () => {
 
 	describe("addCorrelationIdentifierHeader", () => {
 		it("should get the correlationId from the Logging service and add it as a header to the current request headers", () => {
+			const dummyHeaderName: string = "some header";
+			const dummyHeaderValue: string = "some value";
 			const request: StarkHttpRequest<MockResource> = {
 				backend: mockBackend,
 				resourcePath: mockResourcePath,
@@ -2069,7 +1457,7 @@ describe("Service: StarkHttpService", () => {
 				item: mockResourceWithEtag,
 				serializer: mockResourceSerializer
 			};
-			request.headers.set("some header", "some value");
+			request.headers.set(dummyHeaderName, dummyHeaderValue);
 
 			const correlationId: string = loggerMock.correlationId;
 			expect(correlationId).toBe(mockCorrelationId);
@@ -2077,8 +1465,8 @@ describe("Service: StarkHttpService", () => {
 			const requestWithCorrelationIdHeader: StarkHttpRequest = starkHttpService.addCorrelationIdentifierHeader(request);
 
 			expect(requestWithCorrelationIdHeader.headers.size).toBe(2); // plus the custom header
-			expect(requestWithCorrelationIdHeader.headers.has("some header")).toBe(true);
-			expect(requestWithCorrelationIdHeader.headers.get("some header")).toBe("some value");
+			expect(requestWithCorrelationIdHeader.headers.has(dummyHeaderName)).toBe(true);
+			expect(requestWithCorrelationIdHeader.headers.get(dummyHeaderName)).toBe(dummyHeaderValue);
 			expect(requestWithCorrelationIdHeader.headers.has(StarkHttpHeaders.NBB_CORRELATION_ID)).toBe(true);
 			expect(requestWithCorrelationIdHeader.headers.get(StarkHttpHeaders.NBB_CORRELATION_ID)).toBe(correlationId);
 		});
@@ -2137,4 +1525,5 @@ class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P>
 		return super.addCorrelationIdentifierHeader(request);
 	}
 }
+
 /* tslint:enable */

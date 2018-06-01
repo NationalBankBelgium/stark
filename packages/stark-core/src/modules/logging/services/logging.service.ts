@@ -13,7 +13,6 @@ import { StarkBackend } from "../../http/entities/backend";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
-// import {StarkXSRFService, starkXSRFServiceName} from "../../xsrf";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
 import { StarkFlushLogMessages, StarkLogMessageAction } from "../actions";
 import { selectStarkLogging } from "../reducers";
@@ -212,6 +211,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		// IE "Access is denied" error: https://stackoverflow.com/questions/22098259/access-denied-in-ie-10-and-11-when-ajax-target-is-localhost
 		try {
 			xhr.open("POST", url, async);
+			// FIXME: uncomment when XSRF service is implemented
 			// this.xsrfService.configureXHR(xhr);
 			xhr.setRequestHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
 			xhr.send(serializedData);

@@ -38,11 +38,11 @@ import { StarkCoreApplicationState } from "../../../common/store";
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 
+// tslint:disable-next-line:no-big-function
 describe("Service: StarkSessionService", () => {
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
 	let appConfig: StarkApplicationConfig;
 	let mockSession: StarkSession;
-	let mockUser: Partial<StarkUser>;
 	let mockLogger: StarkLoggingService;
 	let mockRoutingService: StarkRoutingService;
 	let mockIdleService: SpyObj<Idle>;
@@ -51,11 +51,21 @@ describe("Service: StarkSessionService", () => {
 	let mockTranslateService: SpyObj<TranslateService>;
 	let sessionService: SessionServiceHelper;
 	const mockCorrelationId: string = "12345";
+	const mockUser: StarkUser = {
+		uuid: "1",
+		username: "jdoe",
+		firstName: "john",
+		lastName: "doe",
+		email: "jdoe@email.com",
+		language: "es",
+		workpost: "dummy workpost",
+		referenceNumber: "dummy ref number",
+		roles: ["a role", "another role", "yet another role"]
+	};
 
 	// Inject module dependencies
 	beforeEach(() => {
-		mockUser = { uuid: "1", firstName: "Christopher", lastName: "Cortes" };
-		mockSession = { currentLanguage: "NL", user: <StarkUser>mockUser };
+		mockSession = { currentLanguage: "NL", user: mockUser };
 		mockStore = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("store", ["dispatch", "pipe"]);
 		mockStore.pipe.and.returnValue(of(mockSession));
 		appConfig = new StarkApplicationConfigImpl();
@@ -160,7 +170,7 @@ describe("Service: StarkSessionService", () => {
 
 			expect(hookMatchCriteria.entering).toBeDefined();
 
-			// FIXME: this tslint disable flag is needed due to a bug in the no-useless-cast rule (TsLint v5.10.0). Remove it once it is solved
+			// FIXME: this tslint disable flag is due to a bug in 'no-useless-cast' rule (https://github.com/SonarSource/SonarTS/issues/650). Remove it once it is solved
 			// tslint:disable-next-line:no-useless-cast
 			const matchingFn: Predicate<StateObject> = <Predicate<StateObject>>hookMatchCriteria.entering;
 			const nonMatchingStates: Partial<StateObject>[] = [
@@ -236,13 +246,13 @@ describe("Service: StarkSessionService", () => {
 			spyOn(sessionService, "startIdleService");
 			spyOn(sessionService, "startKeepaliveService");
 
-			sessionService.initializeSession(<StarkUser>mockUser);
+			sessionService.initializeSession(mockUser);
 
 			expect(sessionService.startIdleService).toHaveBeenCalledTimes(1);
 			expect(sessionService.startKeepaliveService).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkInitializeSession(<StarkUser>mockUser));
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkInitializeSession(mockUser));
 			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(new StarkInitializeSessionSuccess());
 		});
 	});
@@ -267,10 +277,10 @@ describe("Service: StarkSessionService", () => {
 		it("should call the initializeSession() method passing the given user", () => {
 			spyOn(sessionService, "initializeSession");
 
-			sessionService.login(<StarkUser>mockUser);
+			sessionService.login(mockUser);
 
 			expect(sessionService.initializeSession).toHaveBeenCalledTimes(1);
-			expect(sessionService.initializeSession).toHaveBeenCalledWith(<StarkUser>mockUser);
+			expect(sessionService.initializeSession).toHaveBeenCalledWith(mockUser);
 		});
 
 		it("should THROW an error and NOT call the initializeSession() method when the given user is invalid", () => {
@@ -387,7 +397,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		describe("onIdleStart notifications", () => {
-			it("should be listened by subscribing to the observable from the idle service", () => {
+			it("should be received by subscribing to the onIdleStart observable from the idle service", () => {
 				(<EventEmitter<any>>mockIdleService.onIdleStart) = new EventEmitter<any>();
 				expect(mockIdleService.onIdleStart.observers.length).toBe(0);
 
@@ -410,7 +420,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		describe("onIdleEnd notifications", () => {
-			it("should be listened by subscribing to the observable from the idle service", () => {
+			it("should be received by subscribing to the onIdleEnd observable from the idle service", () => {
 				(<EventEmitter<any>>mockIdleService.onIdleEnd) = new EventEmitter<any>();
 				expect(mockIdleService.onIdleEnd.observers.length).toBe(0);
 
@@ -418,14 +428,15 @@ describe("Service: StarkSessionService", () => {
 
 				expect(mockIdleService.onIdleEnd.observers.length).toBe(1);
 
+				const mockIdleEndValue: string = "some end value";
 				const onIdleEndSubscriber: Subscriber<any> = <Subscriber<any>>mockIdleService.onIdleEnd.observers[0];
 				spyOn(onIdleEndSubscriber, "next");
 				spyOn(onIdleEndSubscriber, "error");
 
-				mockIdleService.onIdleEnd.next("some end value");
+				mockIdleService.onIdleEnd.next(mockIdleEndValue);
 
 				expect(onIdleEndSubscriber.next).toHaveBeenCalledTimes(1);
-				expect(onIdleEndSubscriber.next).toHaveBeenCalledWith("some end value");
+				expect(onIdleEndSubscriber.next).toHaveBeenCalledWith(mockIdleEndValue);
 				expect(onIdleEndSubscriber.error).not.toHaveBeenCalled();
 
 				mockIdleService.onIdleEnd.complete();
@@ -455,7 +466,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		describe("onTimeout notifications", () => {
-			it("should be listened by subscribing to the observable from the idle service", () => {
+			it("should be received by subscribing to the onTimeout observable from the idle service", () => {
 				(<EventEmitter<number>>mockIdleService.onTimeout) = new EventEmitter<number>();
 				expect(mockIdleService.onTimeout.observers.length).toBe(0);
 
@@ -497,7 +508,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		describe("onTimeoutWarning notifications", () => {
-			it("should be listened by subscribing to the observable from the idle service", () => {
+			it("should be received by subscribing to the onTimeoutWarning observable from the idle service", () => {
 				(<EventEmitter<number>>mockIdleService.onTimeoutWarning) = new EventEmitter<number>();
 				expect(mockIdleService.onTimeoutWarning.observers.length).toBe(0);
 
@@ -566,33 +577,19 @@ describe("Service: StarkSessionService", () => {
 			mockKeepaliveService.request.calls.reset();
 
 			// make sure the fake pre-auth info is set correctly
-			const dummyUser: Partial<StarkUser> = {
-				username: "jdoe",
-				firstName: "john",
-				lastName: "doe",
-				email: "jdoe@email.com",
-				language: "es",
-				workpost: "dummy workpost",
-				referenceNumber: "dummy ref number",
-				roles: ["a role", "another role", "yet another role"]
-			};
-
 			const preAuthDefaults: StarkPreAuthentication = sessionServiceHelper.getFakePreAuthenticationDefaults();
 
-			/*
-			* headers: HttpHeaders({ normalizedNames: Map(  ), lazyUpdate: null, headers: Map(  ) }), params: , urlWithParams: 'http://my.backend/keepalive' })*/
-
 			const expectedPreAuthHeaders: object = {};
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_USER_NAME] = dummyUser.username;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_FIRST_NAME] = dummyUser.firstName;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LAST_NAME] = dummyUser.lastName;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_MAIL] = dummyUser.email;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = dummyUser.language;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_USER_NAME] = mockUser.username;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_FIRST_NAME] = mockUser.firstName;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LAST_NAME] = mockUser.lastName;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_MAIL] = mockUser.email;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = mockUser.language;
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] =
-				dummyUser.referenceNumber + preAuthDefaults.descriptionSeparator + dummyUser.workpost;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = (<string[]>dummyUser.roles).join(preAuthDefaults.roleSeparator);
+				mockUser.referenceNumber + preAuthDefaults.descriptionSeparator + mockUser.workpost;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = mockUser.roles.join(preAuthDefaults.roleSeparator);
 
-			sessionServiceHelper.setFakePreAuthenticationHeaders(<StarkUser>dummyUser);
+			sessionServiceHelper.setFakePreAuthenticationHeaders(mockUser);
 
 			sessionServiceHelper.configureKeepaliveService();
 
@@ -636,7 +633,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		describe("onPing notifications", () => {
-			it("should be listened by subscribing to the observable from the idle service", () => {
+			it("should be listened by subscribing to the observable from the Keepalive service", () => {
 				const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(
 					mockStore,
 					mockLogger,
@@ -750,7 +747,7 @@ describe("Service: StarkSessionService", () => {
 				.getCurrentUser()
 				.pipe(take(1))
 				.subscribe((user?: StarkUser) => {
-					expect(<Partial<StarkUser>>user).toBe(mockUser);
+					expect(user).toBe(mockUser);
 				});
 		});
 	});
@@ -796,29 +793,19 @@ describe("Service: StarkSessionService", () => {
 
 	describe("setFakePreAuthenticationHeaders", () => {
 		it("should construct the pre-authentication headers based on the user that is passed", () => {
-			const dummyUser: Partial<StarkUser> = {
-				username: "jdoe",
-				firstName: "john",
-				lastName: "doe",
-				email: "jdoe@email.com",
-				language: "es",
-				workpost: "dummy workpost",
-				referenceNumber: "dummy ref number",
-				roles: ["a role", "another role", "yet another role"]
-			};
 			const preAuthDefaults: StarkPreAuthentication = sessionService.getFakePreAuthenticationDefaults();
 
 			const expectedPreAuthHeaders: object = {};
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_USER_NAME] = dummyUser.username;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_FIRST_NAME] = dummyUser.firstName;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LAST_NAME] = dummyUser.lastName;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_MAIL] = dummyUser.email;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = dummyUser.language;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_USER_NAME] = mockUser.username;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_FIRST_NAME] = mockUser.firstName;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LAST_NAME] = mockUser.lastName;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_MAIL] = mockUser.email;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = mockUser.language;
 			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] =
-				dummyUser.referenceNumber + preAuthDefaults.descriptionSeparator + dummyUser.workpost;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = (<string[]>dummyUser.roles).join(preAuthDefaults.roleSeparator);
+				mockUser.referenceNumber + preAuthDefaults.descriptionSeparator + mockUser.workpost;
+			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = mockUser.roles.join(preAuthDefaults.roleSeparator);
 
-			sessionService.setFakePreAuthenticationHeaders(<StarkUser>dummyUser);
+			sessionService.setFakePreAuthenticationHeaders(mockUser);
 
 			expect(sessionService.fakePreAuthenticationHeaders.size).toBe(7);
 
