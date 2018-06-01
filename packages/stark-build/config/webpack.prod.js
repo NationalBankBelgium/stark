@@ -154,7 +154,28 @@ module.exports = function() {
 				 */
 				{
 					test: /\.css$/,
-					use: [MiniCssExtractPlugin.loader, "css-loader"],
+					use: [
+						MiniCssExtractPlugin.loader,
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 1 // 1 => postcss-loader
+							}
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						}
+					],
 					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
@@ -163,7 +184,29 @@ module.exports = function() {
 				 */
 				{
 					test: /\.scss$/,
-					use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+					use: [
+						MiniCssExtractPlugin.loader,
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 2 // 2 => postcss-loader + sass-loader
+							}
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						},
+						"sass-loader"
+					],
 					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 

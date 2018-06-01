@@ -208,7 +208,28 @@ module.exports = function(options) {
 				 */
 				{
 					test: /\.css$/,
-					use: ["to-string-loader", "css-loader"],
+					use: [
+						"to-string-loader",
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 1 // 1 => postcss-loader
+							}
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						}
+					],
 					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 
@@ -217,10 +238,31 @@ module.exports = function(options) {
 				 * Returns compiled css content as string
 				 *
 				 */
-				// TODO Check if this loader is needed for Angular Material components
 				{
 					test: /\.scss$/,
-					use: ["to-string-loader", "css-loader", "sass-loader"],
+					use: [
+						"to-string-loader",
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 2 // 2 => postcss-loader + sass-loader
+							}
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						},
+						"sass-loader"
+					],
 					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
 				},
 

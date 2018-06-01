@@ -112,7 +112,28 @@ module.exports = function() {
 				 */
 				{
 					test: /\.css$/,
-					loader: ["to-string-loader", "css-loader"],
+					loader: [
+						"to-string-loader",
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 1 // 1 => postcss-loader
+							}
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						}
+					],
 					exclude: [helpers.root("src/index.html")]
 				},
 
@@ -123,7 +144,29 @@ module.exports = function() {
 				 */
 				{
 					test: /\.scss$/,
-					loader: ["raw-loader", "sass-loader"],
+					loader: [
+						"raw-loader",
+						{
+							loader: "css-loader",
+							options: {
+								//modules: true, // to check if needed
+								//minimize: true,
+								// even if disabled, sourceMaps gets generated
+								sourceMap: false, // true
+								autoprefixer: false,
+								// see https://github.com/webpack-contrib/css-loader#importloaders)
+								importLoaders: 2 // 2 => postcss-loader + sass-loader
+							}
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								plugins: commonData.postcssPlugins
+							}
+						},
+						"sass-loader"
+					],
 					exclude: [helpers.root("src/index.html")]
 				},
 
