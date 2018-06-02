@@ -20,15 +20,15 @@
     "npm": ">=5.3.0"
   },
   "dependencies": {
-    "@types/jasmine": "2.8.7",
-    "@types/node": "8.10.15",
+    "@types/jasmine": "2.8.8",
+    "@types/node": "10.3.0",
     "coveralls": "3.0.1",
     "istanbul-lib-instrument": "1.10.1",
     "jasmine-core": "3.1.0",
     "karma": "2.0.2",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage": "1.1.2",
-    "karma-coverage-istanbul-reporter": "1.4.2",
+    "karma-coverage-istanbul-reporter": "2.0.1",
     "karma-jasmine": "1.1.2",
     "karma-mocha-reporter": "2.2.5",
     "karma-sourcemap-loader": "0.3.7",
