@@ -28,17 +28,17 @@
   "dependencies": {
     "@ng-idle/core": "2.0.0-beta.15",
     "@ng-idle/keepalive": "2.0.0-beta.15",
-    "@ngrx/effects": "5.2.0",
-    "@ngrx/store": "5.2.0",
-    "@ngx-translate/core": "10.0.1",
-    "@types/node": "8.10.15",
+    "@ngrx/effects": "6.0.1",
+    "@ngrx/store": "6.0.1",
+    "@ngx-translate/core": "10.0.2",
+    "@types/node": "10.3.0",
     "@types/uuid": "3.4.3",
     "@uirouter/angular": "2.0.0",
     "cerialize": "0.1.18",
-    "class-validator": "0.7.3",
+    "class-validator": "0.8.5",
     "deep-freeze-strict": "1.1.1",
     "ibantools": "2.0.0",
-    "moment": "2.22.1",
+    "moment": "2.22.2",
     "uuid": "3.2.1"
   },
   "devDependencies": {
