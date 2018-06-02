@@ -9,8 +9,10 @@
         "packages/stark-testing/package.json",
         "packages/stark-ui/package.json",
         "packages/stark-ui/testing/package.json",
+        "showcase/package.json",
         "starter/package.json"
       ]
     }
-  }
+  },
+  "ignore": ["@types/node", "class-validator", "typescript", "tslint-sonarts"]
 }

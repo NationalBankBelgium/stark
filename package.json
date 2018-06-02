@@ -53,8 +53,8 @@
     "stylelint-config-prettier": "3.2.0",
     "tslint": "5.10.0",
     "tslint-config-prettier": "1.13.0",
-    "tslint-sonarts": "1.7.0",
-    "typescript": "2.9.1",
+    "tslint-sonarts": "1.6.0",
+    "typescript": "2.7.2",
     "uglify-es": "3.3.9",
     "zone.js": "0.8.26"
   },
