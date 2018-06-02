@@ -9,16 +9,15 @@ const commonData = require("./webpack.common-data.js"); // common configuration 
  * problem with copy-webpack-plugin
  */
 // const DefinePlugin = require("webpack/lib/DefinePlugin");
-const SplitChunksPlugin = require("webpack/lib/optimize/SplitChunksPlugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BaseHrefWebpackPlugin = require("base-href-webpack-plugin").BaseHrefWebpackPlugin;
-const HashedModuleIdsPlugin = require("webpack/lib/HashedModuleIdsPlugin");
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const { AngularCompilerPlugin } = require("@ngtools/webpack");
 const AngularNamedLazyChunksWebpackPlugin = require("angular-named-lazy-chunks-webpack-plugin");
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
+const CircularDependencyPlugin = require("circular-dependency-plugin");
 const PurifyPlugin = require("@angular-devkit/build-optimizer").PurifyPlugin;
 
 const buildUtils = require("./build-utils");
@@ -28,7 +27,7 @@ const buildUtils = require("./build-utils");
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function(options) {
+module.exports = (options) => {
 	const isProd = options.ENV === "production";
 	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
 	const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
@@ -178,11 +177,16 @@ module.exports = function(options) {
 
 				// TsLint loader support for *.ts files
 				// reference: https://github.com/wbuchwalter/tslint-loader
+				// FIXME: given the warnings we have with build:prod (see https://github.com/NationalBankBelgium/stark/issues/397)
+				// this probably doesn't load the tslint configuration we think?
 				{
 					enforce: "pre",
 					test: /\.ts$/,
 					use: ["tslint-loader"],
-					exclude: [helpers.root("node_modules")]
+					exclude: [helpers.root("node_modules")],
+					options: {
+						typeCheck: false, // FIXME remove this line once the type checking issues are gone (cfr FIXME above)
+					}
 				},
 
 				// Source map loader support for *.js files
@@ -365,31 +369,13 @@ module.exports = function(options) {
 
 			new PurifyPlugin(),
 
-			/**
-			 * Plugin: CommonsChunkPlugin
-			 * Description: Shares common code between the pages.
-			 * It identifies common modules and put them into a commons chunk.
-			 *
-			 * See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
-			 * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
-			 */
-			// FIXME Configure splitChunks
-			// new CommonsChunkPlugin({
-			// 	name: "polyfills",
-			// 	chunks: ["polyfills"]
-			// }),
-			//
-			// new CommonsChunkPlugin({
-			// 	minChunks: Infinity,
-			// 	name: "inline"
-			// }),
-			// new CommonsChunkPlugin({
-			// 	name: "main",
-			// 	async: "common",
-			// 	children: true,
-			// 	minChunks: 2
-			// }),
-
+			new CircularDependencyPlugin({
+				// exclude detection of files based on a RegExp
+				exclude: /node_modules/,
+				// log warnings to webpack
+				failOnError: false
+			}),
+			
 			/**
 			 * Plugin: CopyWebpackPlugin
 			 * Description: Copy files and directories in webpack.
@@ -456,18 +442,6 @@ module.exports = function(options) {
 				],
 				{}
 			),
-
-			/**
-			 * Plugin: HashedModuleIdsPlugin
-			 * Description: This plugin will cause hashes to be based on the relative path of the module,
-			 * generating a four character string as the module id
-			 * See: https://webpack.js.org/plugins/hashed-module-ids-plugin/
-			 */
-			new HashedModuleIdsPlugin({
-				hashFunction: "sha256",
-				hashDigest: "hex",
-				hashDigestLength: 20
-			}),
 
 			/**
 			 * Plugin: ContextReplacementPlugin

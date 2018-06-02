@@ -53,7 +53,7 @@
     "stylelint-config-prettier": "3.2.0",
     "tslint": "5.10.0",
     "tslint-config-prettier": "1.12.0",
-    "tslint-sonarts": "1.6.0",
+    "tslint-sonarts": "1.7.0",
     "typescript": "2.7.2",
     "uglify-es": "3.3.9",
     "zone.js": "0.8.26"
@@ -96,7 +96,7 @@
     "docs:starter:serve": "cd starter && npm run docs:serve && cd ..",
     "generate:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "generate:changelog-recent": "conventional-changelog -p angular | tail -n +3",
-    "lint": "tslint --config tslint.json --project ./packages/tsconfig.json --format codeFrame",
+    "lint": "tslint --config ./tslint.json --project ./packages/tsconfig.json --format codeFrame",
     "lint:stark-core": "cd packages/stark-core && npm run lint && cd ../..",
     "lint:stark-ui": "cd packages/stark-ui && npm run lint && cd ../..",
     "lint:starter": "cd starter && npm run lint && cd ..",

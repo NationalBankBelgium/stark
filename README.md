@@ -38,7 +38,7 @@ Stark's reusable build integrates support for:
 * [Tree shaking](https://webpack.js.org/guides/tree-shaking/) to automatically remove unused code from your production bundle
 * [Hot Module Replacement](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html) with [@angularclass/hmr](https://github.com/angularclass/angular-hmr) and [@angularclass/hmr-loader](https://github.com/angularclass/angular-hmr-loader)
 * Minification & uglyfication
-* Cache busting with [file hashes](https://www.npmjs.com/package/webpack-sha-hash)
+* Cache busting with file hashes
 * [Tests](https://angular.io/docs/ts/latest/guide/testing.html): [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), with source maps support, possibility to execute subsets of the tests, ...
 * Tests code coverage with [Istanbul](https://github.com/gotwarlost/istanbul)
 * Environments definition (development | production)
@@ -47,17 +47,20 @@ Stark's reusable build integrates support for:
 * Local testing with fake back-ends using [json-server](https://github.com/typicode/json-server)
 * Router visualization with [UI-Router Visualizer](https://github.com/ui-router/visualizer)
 
-## Stark modules
-TODO list stark modules and point to docs
-
 ## Developer guide
 TODO add links to developer guide sections
 
-### Contributing
-Please follow our [contribution guidelines](/CONTRIBUTING.md)
+### Releases
+Stark releases are available on npm: https://www.npmjs.com/settings/nationalbankbelgium/packages
 
-### Releasing Stark
-See [this page](/RELEASE.md)
+### Contributing
+Please follow our [contribution guidelines](/CONTRIBUTING.md).
+
+To know how to release Stark, refer to [this page](/RELEASE.md).
+
+### Snapshot builds
+Each and every day, a new snapshot of Stark is built, tested and published on npm: https://www.npmjs.com/settings/nationalbankbelgium/packages
+See [this page](/SNAPSHOTS.md) for more information about the process behind this.
 
 ## Authors
 

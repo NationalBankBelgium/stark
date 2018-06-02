@@ -13,7 +13,6 @@ const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
 
 const WriteFilePlugin = require("write-file-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
-const CircularDependencyPlugin = require("circular-dependency-plugin");
 
 // Dev custom config
 const webpackCustomConfig = require(helpers.root("config/webpack-custom-config.dev.json"));
@@ -270,13 +269,6 @@ module.exports = function(env) {
 				configFile: ".stylelintrc",
 				emitErrors: false,
 				files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
-			}),
-
-			new CircularDependencyPlugin({
-				// exclude detection of files based on a RegExp
-				exclude: /node_modules/,
-				// log warnings to webpack
-				failOnError: false
 			}),
 
 			/**
