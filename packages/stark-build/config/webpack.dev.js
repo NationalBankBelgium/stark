@@ -69,6 +69,8 @@ module.exports = function(env) {
 		 */
 		target: "web", // <== can be omitted as default is "web"
 
+		devtool: "cheap-module-source-map",
+
 		mode: "development",
 
 		optimization: {
@@ -243,14 +245,15 @@ module.exports = function(env) {
 			 *
 			 * IMPORTANT: this should be used instead of EvalSourceMapDevToolPlugin to avoid using eval() which violates CSP
 			 */
-			new SourceMapDevToolPlugin({
-				filename: "[file].map[query]",
-				moduleFilenameTemplate: "[resource-path]",
-				fallbackModuleFilenameTemplate: "[resource-path]?[hash]",
-				module: true, // default: true
-				columns: false, // Default: true. False = less accurate source maps but will also improve compilation performance significantly
-				sourceRoot: "webpack:///"
-			}),
+			// FIXME Fix this configuration and disable devtool
+			// new SourceMapDevToolPlugin({
+			// 	filename: "[file].map[query]",
+			// 	moduleFilenameTemplate: "[resource-path]",
+			// 	fallbackModuleFilenameTemplate: "[resource-path]?[hash]",
+			// 	module: true, // default: true
+			// 	columns: false, // Default: true. False = less accurate source maps but will also improve compilation performance significantly
+			// 	sourceRoot: "webpack:///"
+			// }),
 
 			/**
 			 * Plugin: WriteFilePlugin

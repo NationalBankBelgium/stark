@@ -27,7 +27,7 @@ const buildUtils = require("./build-utils");
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = (options) => {
+module.exports = options => {
 	const isProd = options.ENV === "production";
 	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
 	const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
@@ -182,11 +182,15 @@ module.exports = (options) => {
 				{
 					enforce: "pre",
 					test: /\.ts$/,
-					use: ["tslint-loader"],
-					exclude: [helpers.root("node_modules")],
-					options: {
-						typeCheck: false, // FIXME remove this line once the type checking issues are gone (cfr FIXME above)
-					}
+					use: [
+						{
+							loader: "tslint-loader",
+							options: {
+								typeCheck: false // FIXME remove this line once the type checking issues are gone (cfr FIXME above)
+							}
+						}
+					],
+					exclude: [helpers.root("node_modules")]
 				},
 
 				// Source map loader support for *.js files
@@ -375,7 +379,7 @@ module.exports = (options) => {
 				// log warnings to webpack
 				failOnError: false
 			}),
-			
+
 			/**
 			 * Plugin: CopyWebpackPlugin
 			 * Description: Copy files and directories in webpack.
