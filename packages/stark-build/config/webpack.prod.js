@@ -72,6 +72,8 @@ module.exports = function() {
 
 		mode: "production",
 
+		devtool: "source-map",
+
 		// reference: https://medium.com/webpack/webpack-4-mode-and-optimization-5423a6bc597a
 		optimization: {
 			removeAvailableModules: true,
@@ -85,7 +87,8 @@ module.exports = function() {
 			concatenateModules: true,
 			runtimeChunk: true,
 			noEmitOnErrors: true,
-			minimizer: [ // minimization libraries to use
+			minimizer: [
+				// minimization libraries to use
 				/**
 				 * Plugin: UglifyJsPlugin
 				 * Description: Minimize all JavaScript output of chunks.
@@ -103,9 +106,11 @@ module.exports = function() {
 
 				new OptimizeCSSAssetsPlugin({})
 			],
-			splitChunks: { // reference: https://webpack.js.org/plugins/split-chunks-plugin/
+			splitChunks: {
+				// reference: https://webpack.js.org/plugins/split-chunks-plugin/
 				chunks: "all", // include all types of chunks (async or not)
-				cacheGroups: { // assign modules to cache groups
+				cacheGroups: {
+					// assign modules to cache groups
 					// cache group for all modules from node_modules that are duplicated in at least 2 chunks
 					vendors: {
 						test: /[\\/]node_modules[\\/]/,
@@ -130,7 +135,7 @@ module.exports = function() {
 						reuseExistingChunk: true
 					}
 				}
-			},
+			}
 		},
 
 		/**
@@ -292,14 +297,15 @@ module.exports = function() {
 			 *
 			 * IMPORTANT: this should be used instead of EvalSourceMapDevToolPlugin to avoid using eval() which violates CSP
 			 */
-			new SourceMapDevToolPlugin({
-				filename: "[file].map[query]",
-				moduleFilenameTemplate: "[resource-path]",
-				fallbackModuleFilenameTemplate: "[resource-path]?[hash]",
-				module: true, // default: true
-				columns: true, // default: true
-				sourceRoot: "webpack:///"
-			}),
+			// FIXME Fix this configuration and disable devtool
+			// new SourceMapDevToolPlugin({
+			// 	filename: "[file].map[query]",
+			// 	moduleFilenameTemplate: "[resource-path]",
+			// 	fallbackModuleFilenameTemplate: "[resource-path]?[hash]",
+			// 	module: true, // default: true
+			// 	columns: true, // default: true
+			// 	sourceRoot: "webpack:///"
+			// }),
 
 			/**
 			 * Plugin: MiniCssExtractPlugin
@@ -326,7 +332,7 @@ module.exports = function() {
 				hashFunction: "sha256",
 				hashDigest: "hex",
 				hashDigestLength: 20
-			}),
+			})
 		]
 	});
 };
