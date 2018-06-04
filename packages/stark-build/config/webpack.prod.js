@@ -21,6 +21,7 @@ const PurifyPlugin = require("@angular-devkit/build-optimizer").PurifyPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const HashedModuleIdsPlugin = require("webpack/lib/HashedModuleIdsPlugin");
 
 function getUglifyOptions(supportES2015) {
 	const uglifyCompressOptions = {
@@ -71,9 +72,20 @@ module.exports = function() {
 
 		mode: "production",
 
+		// reference: https://medium.com/webpack/webpack-4-mode-and-optimization-5423a6bc597a
 		optimization: {
+			removeAvailableModules: true,
+			removeEmptyChunks: true,
+			mergeDuplicateChunks: true,
+			flagIncludedChunks: true,
+			occurrenceOrder: true,
+			providedExports: true,
+			usedExports: true,
+			sideEffects: true,
 			concatenateModules: true,
-			minimizer: [
+			runtimeChunk: true,
+			noEmitOnErrors: true,
+			minimizer: [ // minimization libraries to use
 				/**
 				 * Plugin: UglifyJsPlugin
 				 * Description: Minimize all JavaScript output of chunks.
@@ -84,20 +96,41 @@ module.exports = function() {
 				 * NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
 				 */
 				new UglifyJsPlugin({
-					sourceMap: true,
+					sourceMap: true, // useful to still be able to debug in production
 					uglifyOptions: getUglifyOptions(supportES2015)
 				}),
+				// other options than Uglify: BabelifyMinifyWebpackPlugin or ClosureCompilerPlugin
 
 				new OptimizeCSSAssetsPlugin({})
 			],
-			cacheGroups: {
-				styles: {
-					name: "styles",
-					test: /\.css$/,
-					chunks: "all",
-					enforce: true
+			splitChunks: { // reference: https://webpack.js.org/plugins/split-chunks-plugin/
+				chunks: "all", // include all types of chunks (async or not)
+				cacheGroups: { // assign modules to cache groups
+					// cache group for all modules from node_modules that are duplicated in at least 2 chunks
+					vendors: {
+						test: /[\\/]node_modules[\\/]/,
+						name: "vendor",
+						chunks: "all",
+						priority: -10
+					},
+					styles: {
+						name: "styles",
+						test: /\.css$/,
+						chunks: "all",
+						enforce: true
+					},
+					// FIXME check if needed
+					// polyfills: {
+					// 	name: "polyfills",
+					// 	chunks: ["polyfills"]
+					// },
+					default: {
+						minChunks: 2,
+						priority: -20,
+						reuseExistingChunk: true
+					}
 				}
-			}
+			},
 		},
 
 		/**
@@ -284,9 +317,16 @@ module.exports = function() {
 			new PurifyPlugin() /* buildOptimizer */,
 
 			/**
+			 * Plugin: HashedModuleIdsPlugin
+			 * Description: This plugin will cause hashes to be based on the relative path of the module,
+			 * generating a four character string as the module id
 			 * See: https://webpack.js.org/plugins/hashed-module-ids-plugin/
 			 */
-			new HashedModuleIdsPlugin()
+			new HashedModuleIdsPlugin({
+				hashFunction: "sha256",
+				hashDigest: "hex",
+				hashDigestLength: 20
+			}),
 		]
 	});
 };
