@@ -1,8 +1,11 @@
+/* tslint:disable:completed-docs*/
 import moment from "moment";
 import { autoserialize } from "cerialize";
 
 import { StarkError } from "./error.intf";
-
+/**
+ * @ignore
+ */
 export class StarkErrorImpl implements StarkError {
 	@autoserialize public message?: string;
 	@autoserialize public name?: string;

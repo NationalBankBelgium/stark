@@ -1,6 +1,8 @@
 import { deserialize } from "cerialize";
 import { StarkPaginationMetadata } from "./metadata-pagination.entity.intf";
-
+/**
+ * @ignore
+ */
 export class StarkPaginationMetadataImpl implements StarkPaginationMetadata {
 	@deserialize public offset: number;
 

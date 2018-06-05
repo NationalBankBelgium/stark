@@ -6,6 +6,9 @@ import { STARK_APP_METADATA, StarkApplicationMetadata } from "../configuration/e
 export type StarkConfigValidationGroups = "logging" | "routing" | "session" | "settings" | "http";
 export type StarkMetadataValidationGroups = "settings";
 
+/**
+ * Util class used to validate AppConfig and AppMetadata instances
+ */
 export class StarkConfigurationUtil {
 	/**
 	 * Validates the given AppConfig instance and throws an error in case it is not valid

@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { Observable } from "rxjs";
 import { AbstractStarkHttpRepository } from "./http-abstract-repository";
 import { StarkSerializable } from "../../../serialization";

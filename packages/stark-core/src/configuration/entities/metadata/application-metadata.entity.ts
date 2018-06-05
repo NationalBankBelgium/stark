@@ -6,6 +6,9 @@ import { StarkLanguageImpl } from "../language";
 import { StarkLanguage } from "../language/language.entity.intf";
 import { StarkLanguages } from "../language/language.constants";
 
+/**
+ * @ignore
+ */
 export class StarkApplicationMetadataImpl implements StarkApplicationMetadata {
 	// FIXME: properties of the group "temp" are not used yet. Will they still be used?
 

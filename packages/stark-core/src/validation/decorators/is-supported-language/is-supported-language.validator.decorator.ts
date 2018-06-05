@@ -10,11 +10,20 @@ import { starkIsSupportedLanguageValidatorName } from "../../validators/is-suppo
  */
 @ValidatorConstraint({ name: starkIsSupportedLanguageValidatorName, async: false })
 class StarkIsSupportedLanguageConstraint implements ValidatorConstraintInterface {
+	/**
+	 * Validates that the language is supported
+	 * @param isoCode - the iseCode to validate
+	 * @returns boolean - true if the isoCode is valid
+	 */
 	public validate(isoCode: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
 		return validator.starkIsSupportedLanguage(isoCode);
 	}
 
+	/**
+	 * Default message displayed if the language is not supported
+	 * @returns a default message
+	 */
 	public defaultMessage(): string {
 		return "The language ISO code '$value' is not supported by the Stark framework.";
 	}
@@ -22,7 +31,7 @@ class StarkIsSupportedLanguageConstraint implements ValidatorConstraintInterface
 
 /**
  * Validator decorator that uses the StarkIsSupportedLanguage validator constraint
- * @param validationOptions
+ * @param validationOptions - ensures that the language is supported or not
  * @returns Function
  */
 export function StarkIsSupportedLanguage(validationOptions?: ValidationOptions): Function {

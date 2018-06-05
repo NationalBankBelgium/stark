@@ -57,13 +57,25 @@ import "../styles/styles.scss";
 /* tslint:enable */
 import "../styles/headings.css";
 
-// Application wide providers
+/**
+ * Application wide providers
+ */
 const APP_PROVIDERS: any[] = [AppState];
 
 // TODO: where to put this factory function?
+/**
+ * This method will create, configure and return a new StarkApplicationConfig instance
+ * @returns the Stark Application config
+ */
 export function starkAppConfigFactory(): StarkApplicationConfig {
+	/**
+	 * The needed configuration for the application config
+	 */
 	const config: any = require("../stark-app-config.json");
 
+	/**
+	 * This instance will contain data added by the developer but also data retrieved from the configuration file
+	 */
 	const applicationConfig: StarkApplicationConfig = Deserialize(config, StarkApplicationConfigImpl);
 
 	applicationConfig.rootStateUrl = "home";
@@ -78,13 +90,24 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 }
 
 // TODO: where to put this factory function?
+/**
+ * This method will create, configure and return a new StarkApplicationMetadata instance
+ * @returns the Stark Application Metadata
+ */
 export function starkAppMetadataFactory(): StarkApplicationMetadata {
+	/**
+	 * The needed configuration for the metadata
+	 */
 	const metadata: any = require("../stark-app-metadata.json");
 
 	return Deserialize(metadata, StarkApplicationMetadataImpl);
 }
 
 // TODO: where to put this factory function?
+/**
+ *  This method can be used to create and retrieve mock data
+ *  @returns StarkMockData
+ */
 export function starkMockDataFactory(): StarkMockData {
 	return {
 		whatever: "dummy prop",
@@ -92,20 +115,31 @@ export function starkMockDataFactory(): StarkMockData {
 	};
 }
 
-// Application Redux State
+/**
+ * Application Redux State
+ */
 export interface State {
 	// reducer interfaces
 }
 
+/**
+ * Reducers configured for a Map of Actions
+ */
 export const reducers: ActionReducerMap<State> = {
 	// reducers
 };
 
+/**
+ * Logging function from @ngrx/store applications
+ */
 export function logger(reducer: ActionReducer<State>): any {
 	// default, no options
 	return storeLogger()(reducer);
 }
 
+/**
+ * Set of meta-reducer, higher order reducer (i.e., functions)
+ */
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger, storeFreeze] : [];
 
 /**
@@ -151,6 +185,9 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 		{ provide: STARK_MOCK_DATA, useFactory: starkMockDataFactory }
 	]
 })
+/**
+ * @ignore
+ */
 export class AppModule {
 	public constructor(
 		private translateService: TranslateService,

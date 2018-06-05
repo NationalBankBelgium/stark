@@ -16,6 +16,7 @@ export interface StarkBackend {
 
 	/**
 	 * Authentication type for that back-end.
+	 * @link StarkBackendAuthenticationTypes
 	 */
 	authenticationType: StarkBackendAuthenticationTypes;
 

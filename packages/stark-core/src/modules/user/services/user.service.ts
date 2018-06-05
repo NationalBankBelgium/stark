@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs*/
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { validateSync } from "class-validator";
@@ -21,18 +22,16 @@ import { STARK_MOCK_DATA, StarkMockData } from "../../../configuration/entities/
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkValidationErrorsUtil } from "../../../util";
 
+/**
+ * @ignore
+ */
 const userErrorMessagePrefix: string = starkUserServiceName + ": invalid user profile.";
 
 /**
+ * @ignore
  * @ngdoc service
- * @name stark-core.service:StarkUserService
  * @description Service to fetch the user profile from the REST API. In Development, it can also be used to
  * set the user profile manually and to retrieve a list of profiles from a mock data file.
- *
- * @requires StarkLoggingService
- * @requires StarkUserRepository
- * @requires starkMockData the mock data to retrieve the profiles from
- * @requires ngrx-store.Store
  */
 @Injectable()
 export class StarkUserServiceImpl implements StarkUserService {

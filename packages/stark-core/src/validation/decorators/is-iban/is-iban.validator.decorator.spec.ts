@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsIBAN } from "./is-iban.validator.decorator";
 import { starkIsIBANValidatorName } from "../../validators/is-iban";

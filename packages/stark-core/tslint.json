@@ -1,3 +1,7 @@
 {
-  "extends": ["tslint:latest", "tslint-sonarts", "codelyzer", "tslint-config-prettier", "../stark-build/config/tslint.json"]
+  "extends": ["tslint:latest", "tslint-sonarts", "codelyzer", "tslint-config-prettier", "../stark-build/config/tslint.json"],
+  "rules": {
+    "jsdoc-format": [true, "check-multiline-start"],
+    "no-redundant-jsdoc": true
+  }
 }

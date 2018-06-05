@@ -1,11 +1,19 @@
 import { Injectable } from "@angular/core";
-
+/**
+ * @ignore
+ */
 export interface InternalStateType {
 	[key: string]: any;
 }
 
 @Injectable()
+/**
+ * @ignore
+ */
 export class AppState {
+	/**
+	 * @ignore
+	 */
 	public _state: InternalStateType = {};
 
 	/**
@@ -21,6 +29,9 @@ export class AppState {
 		throw new Error("do not mutate the `.state` directly" + value);
 	}
 
+	/**
+	 * @ignore
+	 */
 	public get(prop?: any): any {
 		/**
 		 * Use our state getter for the clone.
@@ -29,6 +40,9 @@ export class AppState {
 		return state.hasOwnProperty(prop) ? state[prop] : state;
 	}
 
+	/**
+	 * @ignore
+	 */
 	public set(prop: string, value: any): any {
 		/**
 		 * Internally mutate our state.
@@ -36,6 +50,9 @@ export class AppState {
 		return (this._state[prop] = value);
 	}
 
+	/**
+	 * @ignore
+	 */
 	private _clone(object: InternalStateType): any {
 		/**
 		 * Simple object clone.

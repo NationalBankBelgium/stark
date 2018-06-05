@@ -2,7 +2,9 @@ import { IsNotEmpty, IsString, Matches } from "class-validator";
 import { autoserialize } from "cerialize";
 import { StarkLanguage } from "./language.entity.intf";
 import { StarkIsSupportedLanguage } from "../../../validation/decorators/is-supported-language";
-
+/**
+ * @ignore
+ */
 export class StarkLanguageImpl implements StarkLanguage {
 	@IsNotEmpty({ always: true }) // validation must be performed always, regardless of validation groups used.
 	@IsString({ always: true })

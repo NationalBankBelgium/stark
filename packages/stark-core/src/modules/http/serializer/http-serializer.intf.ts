@@ -2,7 +2,7 @@ import { HttpResponse } from "@angular/common/http";
 import { StarkHttpRawCollectionResponseData, StarkHttpRequest, StarkResource } from "../entities";
 
 /**
- * @whatItDoes This is the base interface for entities' serializers used mainly by the HTTP Service.
+ * This is the base interface for entities' serializers used mainly by the HTTP Service.
  *
  * ResourceType type that this serializer handles.
  * RequestType, defaults to StarkHttpRequest

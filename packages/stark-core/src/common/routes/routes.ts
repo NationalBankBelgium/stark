@@ -2,23 +2,52 @@ import { Location } from "@angular/common";
 import { STARK_ROUTING_SERVICE, StarkRoutingService, StarkStateConfigWithParams } from "../../modules/routing/services";
 import { StatesModule } from "@uirouter/angular";
 
+/**
+ * Name of the initialization states of the application
+ */
 export const starkAppInitStateName: string = "starkAppInit";
+/**
+ * Name of the exit states of the application
+ */
 export const starkAppExitStateName: string = "starkAppExit";
-
+/**
+ * Name of the login state of the application
+ */
 export const starkLoginStateName: string = "starkAppInit.starkLogin";
+/**
+ * URL of the login state of the application
+ */
 export const starkLoginStateUrl: string = "/starkLogin";
-
+/**
+ * Name of the preloading state of the application
+ */
 export const starkPreloadingStateName: string = "starkAppInit.starkPreloading";
+/**
+ * URL of the preloading state of the application
+ */
 export const starkPreloadingStateUrl: string = "/starkPreloading";
-
+/**
+ * Name of the SessionExpired state of the application
+ */
 export const starkSessionExpiredStateName: string = "starkAppExit.starkSessionExpired";
+/**
+ * URL of the SessionExpired state of the application
+ */
 export const starkSessionExpiredStateUrl: string = "/starkSessionExpired";
-
+/**
+ * Name of the SessionLogout state of the application
+ */
 export const starkSessionLogoutStateName: string = "starkAppExit.starkSessionLogout";
+/**
+ * URL of the SessionLogout state of the application
+ */
 export const starkSessionLogoutStateUrl: string = "/starkSessionLogout";
 
 // FIXME Fix states declaration
 /* tslint:disable:no-duplicate-string */
+/**
+ * Configuration of the route state of the application
+ */
 export const starkCoreRouteConfig: StatesModule = <any>{
 	states: [
 		{

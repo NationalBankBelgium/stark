@@ -2,7 +2,9 @@ import { IsDefined, IsNotEmpty, IsString, IsUrl } from "class-validator";
 import { autoserialize, autoserializeAs } from "cerialize";
 import { StarkBackend } from "./backend.entity.intf";
 import { StarkBackendAuthenticationTypes } from "./backend-authentication-types";
-
+/**
+ * @ignore
+ */
 export class StarkBackendImpl implements StarkBackend {
 	// validation must be performed always, regardless of validation groups used
 	@IsNotEmpty({ message: "each backend object MUST have a name", always: true })

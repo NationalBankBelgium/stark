@@ -3,8 +3,17 @@
  */
 const _floor: Function = require("lodash/floor");
 
+/**
+ * @ignore
+ * Name of the validator, in case injection is needed
+ */
 export const starkIsEstablishmentUnitNumberValidatorName: string = "starkIsEstablishmentUnitNumber";
 
+/**
+ * @ignore
+ * Validates that the given string is a valid establishment unit number (Belgium).
+ * @param establishmentNumber - the establishmentNumber to validate
+ */
 export function starkIsEstablishmentUnitNumber(establishmentNumber: string): boolean {
 	const controlNumberBeginIndex: number = 8;
 	const controlNumberEndIndex: number = 10;

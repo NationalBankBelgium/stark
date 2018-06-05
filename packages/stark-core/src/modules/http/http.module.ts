@@ -6,9 +6,12 @@ import { STARK_HTTP_SERVICE, StarkHttpServiceImpl } from "./services";
 	imports: [HttpClientModule]
 })
 export class StarkHttpModule {
-	// instantiate the services only once since they should be singletons
-	// so the forRoot() should be called only by the AppModule
-	// see https://angular.io/guide/singleton-services#forroot
+	/**
+	 * Instantiates the services only once since they should be singletons
+	 * so the forRoot() should be called only by the AppModule
+	 * @link https://angular.io/guide/singleton-services#forroot
+	 * @returns a module with providers
+	 */
 	public static forRoot(): ModuleWithProviders {
 		return {
 			ngModule: StarkHttpModule,
@@ -16,8 +19,11 @@ export class StarkHttpModule {
 		};
 	}
 
-	// prevent this module from being re-imported
-	// see https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
+	/**
+	 * prevent this module from being re-imported
+	 * @link https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
+	 * @param the parent module
+	 */
 	public constructor(
 		@Optional()
 		@SkipSelf()

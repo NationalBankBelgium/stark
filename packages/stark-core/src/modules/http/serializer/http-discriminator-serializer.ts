@@ -8,11 +8,17 @@ import { StarkSerializable } from "../../../serialization";
  *
  */
 export class StarkHttpDiscriminatorSerializer<T extends StarkResource> extends StarkHttpSerializerImpl<T> {
+	/**
+	 * The discriminator property to decide what class to use for serialization
+	 */
 	private discriminatorProperty: string;
+	/**
+	 * Map of types based on the discriminator property value
+	 */
 	private typesMap: Map<any, StarkSerializable>;
 
 	/**
-	 *
+	 * Constructor for StarkHttpDiscriminatorSerializer
 	 * @param discriminatorProperty - The discriminator property
 	 * @param typesMap - Map of types based on the discriminator property value
 	 */
@@ -22,6 +28,10 @@ export class StarkHttpDiscriminatorSerializer<T extends StarkResource> extends S
 		this.typesMap = typesMap;
 	}
 
+	/**
+	 * Get the serializable class to use for deserialization/serialization.
+	 * @param rawOrResource: the string or object which type we want to retrieve
+	 */
 	public getType(rawOrResource: T | object | string): StarkSerializable | undefined {
 		let obj: object;
 		if (typeof rawOrResource === "string") {

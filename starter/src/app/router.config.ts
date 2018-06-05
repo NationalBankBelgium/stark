@@ -1,6 +1,10 @@
 import { UIRouter, Category, StateDeclaration } from "@uirouter/core";
 import { Visualizer } from "@uirouter/visualizer";
 
+/**
+ * This method will log all registered states of the application
+ * @param registeredstates: a set of registered states
+ */
 function logRegisteredStates(registeredstates: StateDeclaration[]): void {
 	let message: string = "=============  Registered Ui-Router states: ==============\n";
 
@@ -16,6 +20,10 @@ function logRegisteredStates(registeredstates: StateDeclaration[]): void {
 	console.log(message);
 }
 
+/**
+ * @ignore
+ * @param router - the router to configure
+ */
 export function routerConfigFn(router: UIRouter): void {
 	router.trace.enable(Category.TRANSITION);
 
@@ -25,6 +33,9 @@ export function routerConfigFn(router: UIRouter): void {
 	logRegisteredStates(router.stateService.get());
 }
 
+/**
+ * @ignore
+ */
 export function routerChildConfigFn(router: UIRouter): void {
 	logRegisteredStates(router.stateService.get());
 }

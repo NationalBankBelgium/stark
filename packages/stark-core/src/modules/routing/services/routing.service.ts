@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs */
 import { Action, Store } from "@ngrx/store";
 import { EMPTY, from, Observable } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
@@ -42,23 +43,23 @@ import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
+/**
+ * @ignore
+ */
 const _isEmpty: Function = require("lodash/isEmpty");
 
+/**
+ * @ignore
+ */
 interface StarkState {
 	name: string;
 	params: RawParams | undefined;
 }
 
 /**
+ * @ignore
  * @ngdoc service
- * @name stark-core.service:StarkRoutingService
  * @description Service that can be used to interact with the router implementation.
- *
- * @requires StarkLoggingService
- * @requires ngrx-store.Store
- * @requires StarkApplicationConfig
- * @requires $state
- * @requires $transitions
  */
 @Injectable()
 export class StarkRoutingServiceImpl implements StarkRoutingService {
@@ -264,7 +265,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			default:
 				throw new Error(starkRoutingServiceName + ": lifecycle hook unknown => " + lifecycleHook);
 		}
-		/* tslint:enable */
+		/* tslint:enable:no-useless-cast */
 	}
 
 	/**
@@ -272,7 +273,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	 * It logs an error and dispatches a NAVIGATE_FAILURE action to the NGRX Store
 	 */
 	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
+	// tslint:disable-next-line cognitive-complexity
 	private addNavigationErrorHandlers(): void {
 		this.logger.debug(starkRoutingServiceName + ": adding navigation error handlers");
 
@@ -531,6 +532,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		}
 	}
 
+	// tslint:disable-next-line completed-docs
 	private extractResolvablesData(resolvables: Resolvable[]): { [key: string]: any } {
 		const resolvablesData: { [key: string]: any } = {};
 
@@ -567,3 +569,4 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return stateTranslationKey;
 	}
 }
+// tslint:enable completed-docs

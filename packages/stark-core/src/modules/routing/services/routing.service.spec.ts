@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";

@@ -1,5 +1,8 @@
 import { StarkSerializable } from "../../../serialization";
 
+/**
+ * This interface defines the structure to follow when providing additional parameters to the StarkHttpRequestBuilder.
+ */
 export interface StarkHttpRequestParams {
 	/**
 	 * Whether to allow query parameters with undefined value or not. Default: false.
@@ -32,10 +35,19 @@ export interface StarkHttpRequestParams {
 	serializationType?: StarkSerializable;
 }
 
+/**
+ * Extra parameters to customize the create Http request to be sent.
+ */
 export interface StarkHttpCreateRequestParams extends StarkHttpRequestParams {}
 
+/**
+ * Extra parameters to customize the get Http request to be sent.
+ */
 export interface StarkHttpGetRequestParams extends StarkHttpRequestParams {}
 
+/**
+ * Extra parameters to customize the update Http request to be sent.
+ */
 export interface StarkHttpUpdateRequestParams extends StarkHttpRequestParams {
 	/**
 	 * When true, the request-type uses HTTP PUT else it uses HTTP POST. Default: false
@@ -43,6 +55,9 @@ export interface StarkHttpUpdateRequestParams extends StarkHttpRequestParams {
 	isIdempotent?: boolean;
 }
 
+/**
+ * Extra parameters to customize the delete Http request to be sent.
+ */
 export interface StarkHttpDeleteRequestParams extends StarkHttpRequestParams {
 	/**
 	 * Whether the delete should be enforced or not. Default: false
@@ -52,8 +67,14 @@ export interface StarkHttpDeleteRequestParams extends StarkHttpRequestParams {
 	force?: boolean;
 }
 
+/**
+ * Extra parameters to customize the get collection Http request to be sent.
+ */
 export interface StarkHttpGetCollectionRequestParams extends StarkHttpRequestParams {}
 
+/**
+ * Extra parameters to customize the search Http request to be sent.
+ */
 export interface StarkHttpSearchRequestParams extends StarkHttpRequestParams {
 	/**
 	 * Whether to allow criteria with empty value ('') or not. Default: false.

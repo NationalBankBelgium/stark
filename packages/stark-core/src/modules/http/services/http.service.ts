@@ -1,3 +1,7 @@
+/* tslint:disable:completed-docs*/
+/**
+ *  @ignore
+ */
 const _cloneDeep: Function = require("lodash/cloneDeep");
 import { Deserialize, Serialize } from "cerialize";
 import { Observable, throwError, timer } from "rxjs";
@@ -25,13 +29,8 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/servic
 import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 
 /**
- * @ngdoc service
- * @name stark-core.service:StarkHttpService
- * @description Service to make HTTP calls in compliance with the guidelines from the NBB REST API Design Guide.
- *
- * @requires StarkLoggingService
- * @requires StarkSessionService
- * @requires HttpClient
+ * @ignore
+ * Service to make HTTP calls in compliance with the guidelines from the NBB REST API Design Guide.
  */
 @Injectable()
 export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpService<P> {

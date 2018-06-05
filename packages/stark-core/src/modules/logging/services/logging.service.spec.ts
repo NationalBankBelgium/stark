@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import { Store } from "@ngrx/store";

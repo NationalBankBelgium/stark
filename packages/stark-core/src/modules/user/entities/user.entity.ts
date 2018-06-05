@@ -5,6 +5,9 @@ import { StarkResource } from "../../http/entities";
 import { IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf } from "class-validator";
 import { StarkClassValidationUtil } from "../../../util";
 
+/**
+ * @ignore
+ */
 export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, StarkResource {
 	@IsDefined()
 	@IsString()

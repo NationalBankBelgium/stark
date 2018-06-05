@@ -1,3 +1,6 @@
+/**
+ * All status code for Http Request supported by Stark
+ */
 export enum StarkHttpStatusCodes {
 	HTTP_200_OK = 200,
 	HTTP_201_CREATED = 201,

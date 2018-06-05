@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs*/
 import uuid from "uuid";
 
 import { Serialize } from "cerialize";
@@ -18,18 +19,16 @@ import { StarkFlushLogMessages, StarkLogMessageAction } from "../actions";
 import { selectStarkLogging } from "../reducers";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
-
+/**
+ *  @ignore
+ */
 const _noop: Function = require("lodash/noop");
 
 /**
+ *  @ignore
  * @ngdoc service
- * @name stark-core.service:StarkLoggingService
  * @description Basic logging service implementation.
  * Integrates logging with the Redux store
- *
- * @requires ngrx-store.Store
- * @requires StarkApplicationConfig
- * @requires StarkXSRFService
  */
 @Injectable()
 export class StarkLoggingServiceImpl implements StarkLoggingService {

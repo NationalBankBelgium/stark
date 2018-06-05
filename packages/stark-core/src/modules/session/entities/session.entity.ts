@@ -1,6 +1,8 @@
 import { StarkUser } from "../../user/entities";
 import { StarkSession } from "./session.entity.intf";
-
+/**
+ * @ignore
+ */
 export class StarkSessionImpl implements StarkSession {
 	public currentLanguage: string;
 

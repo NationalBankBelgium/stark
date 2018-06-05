@@ -60,8 +60,8 @@ This is the project template for Stark applications.
 |   |   |   |   en.json                 # English
 |   |   |   |   fr.json                 # French
 |   |   |   \   nl.json                 # Dutch
-|   |   |   
-|   |   \   README.md                   # 
+|   |   |
+|   |   \   README.md                   #
 |   |
 |   +---assets-base                     # static assets that will be copied to the root of the application
 |   |   |                               #
@@ -70,12 +70,12 @@ This is the project template for Stark applications.
 |   |   |   favicon.ico                 # icon for bookmarks bar
 |   |   |   humans.txt                  # contains information about the website (http://humanstxt.org/)
 |   |   |   manifest.json               # application icons for Android mobile devices
-|   |   |   README.md                   # 
+|   |   |   README.md                   #
 |   |   |   robots.txt                  # the robots exclusion protocol (http://www.robotstxt.org/)
-|   |   \   service-worker.js           # support for building Progressive Web Applications (PWA) with Service Workers 
+|   |   \   service-worker.js           # support for building Progressive Web Applications (PWA) with Service Workers
 |   |
 |   +---environments                    # configuration variables for each environment
-|   |   |                               # 
+|   |   |                               #
 |   |   |   environment.e2e.prod.ts     # e2e tests configuration
 |   |   |   environment.hmr.ts          # development with HMR (Hot Module Replacement) configuration
 |   |   |   environment.prod.ts         # production configuration
@@ -92,7 +92,7 @@ This is the project template for Stark applications.
 |   |   polyfills.browser.ts            # this file includes polyfills needed by Angular and should be loaded before the app
 |   |   stark-app-config.json           # Stark configuration
 |   \   stark-app-metadata.json         # Application metadata like: name, description, version...
-|   
+|
 |   .dockerignore                       # files and directories to be excluded by the Docker build
 |   .gitignore                          # files and directories to be excluded by git
 |   .prettierignore                     # files and directories to be excluded by prettier
@@ -104,7 +104,7 @@ This is the project template for Stark applications.
 |   Dockerfile                          # the commands that will be executed by the Docker Build command
 |   karma.conf.ci.js                    # Karma configuration file for Continuous Integration
 |   karma.conf.js                       # Karma configuration file
-|   package.json                        # 
+|   package.json                        #
 |   protractor.conf.js                  # protractor configuration file
 |   README.md                           # this document
 |   tsconfig.app.json                   # typescript configuration for the application, extends tsconfig.json

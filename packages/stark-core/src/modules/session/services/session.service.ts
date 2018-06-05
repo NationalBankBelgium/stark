@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs*/
 import { HttpHeaders, HttpRequest } from "@angular/common/http";
 import { Inject, Injectable, Injector } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle } from "@ng-idle/core";
@@ -38,20 +39,15 @@ import { selectStarkSession } from "../reducers";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 import { StarkValidationErrorsUtil } from "../../../util";
 
+/**
+ * @ignore
+ */
 export const starkUnauthenticatedUserError: string = "StarkSessionService => user not authenticated";
 
 /**
+ * @ignore
  * @ngdoc service
- * @name stark-core.service:StarkSessionService
  * @description Service to get/set session settings (language, ...).
- *
- * @requires ngrx-store.Store
- * @requires StarkLoggingService
- * @requires StarkRoutingService
- * @requires StarkApplicationConfig
- * @requires ng-idle-core.Idle
- * @requires $injector
- * @requires TranslateService
  */
 @Injectable()
 export class StarkSessionServiceImpl implements StarkSessionService {

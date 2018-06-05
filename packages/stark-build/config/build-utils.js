@@ -39,13 +39,12 @@ function readTsConfig(tsConfigPath) {
 }
 
 /**
- * Method which returns the path of the environment file of the received environment.
  * The method reads the content of angular.json for getting the path (read with value or replace in "fileReplacements" of environment.
  *
  * See: https://github.com/angular/angular-cli/wiki/angular-workspace
  *
  * @param environment
- * @returns {*}
+ * @returns {*} - the path of the environment file of the received environment.
  */
 function getEnvironmentFile(environment) {
 	if (typeof environment === "string") {

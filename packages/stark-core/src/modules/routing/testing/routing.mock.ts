@@ -1,7 +1,9 @@
 import { StarkRoutingService, StarkStateConfigWithParams } from "../services";
 import { Observable } from "rxjs";
 import { HookFn, HookMatchCriteria, HookRegOptions, RawParams, StateDeclaration, StateObject, TransitionOptions } from "@uirouter/core";
-
+/**
+ * @ignore
+ */
 export class MockStarkRoutingService implements StarkRoutingService {
 	public navigateTo: (newState: string, params?: RawParams, options?: TransitionOptions) => Observable<any> = jasmine.createSpy(
 		"navigateTo"

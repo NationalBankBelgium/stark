@@ -4,15 +4,17 @@
 const _floor: Function = require("lodash/floor");
 
 /**
+ * @ignore
  * Name of the starkIsNIN validator
  */
 export const starkIsNINValidatorName: string = "starkIsNIN";
 
 /**
+ * @ignore
  * Validator function that checks if the given input is a valid national identification number (NIN)
- * @param nin the NIN to check
- * @param countryCode the country code
- * @returns true if the given input is a valid NIN
+ * @param nin - the NIN to check
+ * @param countryCode - the country code
+ * @returns boolean - true if the given input is a valid NIN
  */
 export function starkIsNIN(nin: string, countryCode: string): boolean {
 	let isValid: boolean = false;
@@ -27,6 +29,7 @@ export function starkIsNIN(nin: string, countryCode: string): boolean {
 }
 
 /**
+ * @ignore
  * Validates that a given String is a valid National Register Number. <br/>
  * <br/>
  * The National Registration Number in Belgium is composed of 11 digits: <br/>

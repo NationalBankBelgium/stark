@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsBIC } from "./is-bic.validator.decorator";
 import { starkIsBICValidatorName } from "../../validators/is-bic";

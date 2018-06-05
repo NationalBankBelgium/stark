@@ -1,7 +1,10 @@
+/* tslint:disable:completed-docs*/
 import { StarkHttpRequest, StarkQueryParam, StarkResource } from "../entities";
 import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
 import { StarkUrlUtil } from "../../../util/url-util";
-
+/**
+ * @ignore
+ */
 export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResource> implements StarkHttpBaseRequestBuilder<T> {
 	protected request: StarkHttpRequest<T>;
 
