@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { StarkRoutingService, STARK_ROUTING_SERVICE, StarkStateConfigWithParams } from "../../modules/routing/services";
+import { STARK_ROUTING_SERVICE, StarkRoutingService, StarkStateConfigWithParams } from "../../modules/routing/services";
 import { StatesModule } from "@uirouter/angular";
 
 export const starkAppInitStateName: string = "starkAppInit";
@@ -18,6 +18,7 @@ export const starkSessionLogoutStateName: string = "starkAppExit.starkSessionLog
 export const starkSessionLogoutStateUrl: string = "/starkSessionLogout";
 
 // FIXME Fix states declaration
+/* tslint:disable:no-duplicate-string */
 export const starkCoreRouteConfig: StatesModule = <any>{
 	states: [
 		{
@@ -99,3 +100,4 @@ export const starkCoreRouteConfig: StatesModule = <any>{
 		}
 	]
 };
+/* tslint:enable */

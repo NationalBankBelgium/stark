@@ -1,5 +1,5 @@
 import { Action, Store } from "@ngrx/store";
-import { empty, from, Observable } from "rxjs";
+import { EMPTY, from, Observable } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
 import {
 	HookFn,
@@ -120,7 +120,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 		this.store.dispatch(new StarkNavigationHistoryLimitReached());
 		this.logger.warn(starkRoutingServiceName + ": navigateToPrevious - " + reason);
-		return empty();
+		return EMPTY;
 	}
 
 	public reload(): Observable<any> {
@@ -234,6 +234,8 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		callback: HookFn,
 		options?: HookRegOptions
 	): Function {
+		// FIXME: this tslint disable flag is due to a bug in 'no-useless-cast' rule (https://github.com/SonarSource/SonarTS/issues/650). Remove it once it is solved
+		/* tslint:disable:no-useless-cast */
 		switch (lifecycleHook) {
 			case StarkRoutingTransitionHook.ON_BEFORE:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onbefore
@@ -262,12 +264,15 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			default:
 				throw new Error(starkRoutingServiceName + ": lifecycle hook unknown => " + lifecycleHook);
 		}
+		/* tslint:enable */
 	}
 
 	/**
 	 * Adds Angular UI-Router specific handlers for errors..
 	 * It logs an error and dispatches a NAVIGATE_FAILURE action to the NGRX Store
 	 */
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
 	private addNavigationErrorHandlers(): void {
 		this.logger.debug(starkRoutingServiceName + ": adding navigation error handlers");
 
@@ -285,6 +290,13 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				const rejection: Rejection = transition.error();
 				const rejectionString: string = rejection.toString();
 				let message: string = starkRoutingServiceName + ": ";
+				const complementaryInfo: string =
+					targetState.name() +
+					'" navigated from "' +
+					fromState.name +
+					'"' +
+					". Parameters that were passed: " +
+					JSON.stringify(targetState.params());
 
 				if (this.knownRejectionCausesRegex.test(rejectionString)) {
 					const rejectionAction: Action = new StarkNavigateRejection(
@@ -293,9 +305,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 						targetState.params(),
 						rejectionString
 					);
-					message += 'Route transition rejected: "';
-					message += targetState.name() + '" navigated from "' + fromState.name + '"';
-					message += ". Parameters that were passed: " + JSON.stringify(targetState.params()) + " Rejection: " + rejectionString;
+					message += 'Route transition rejected: "' + complementaryInfo + " Known rejection: " + rejectionString;
 
 					// dispatch corresponding action to allow the user to trigger his own effects if needed
 					this.store.dispatch(rejectionAction);
@@ -303,18 +313,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				} else {
 					switch (rejection.type) {
 						case RejectType.IGNORED:
-							message += 'Route transition ignored: "';
-							message += targetState.name() + '" navigated from "' + fromState.name + '"';
-							message +=
-								". Parameters that were passed: " + JSON.stringify(targetState.params()) + " Rejection: " + rejectionString;
+							message += 'Route transition ignored: "' + complementaryInfo + " Rejection: " + rejectionString;
 
 							this.logger.warn(message);
 							break;
 						case RejectType.SUPERSEDED:
-							message += 'Route transition superseded: "';
-							message += targetState.name() + '" navigated from "' + fromState.name + '"';
-							message +=
-								". Parameters that were passed: " + JSON.stringify(targetState.params()) + " Rejection: " + rejectionString;
+							message += 'Route transition superseded: "' + complementaryInfo + " Rejection: " + rejectionString;
 
 							this.logger.warn(message);
 							break;
@@ -337,9 +341,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 									starkRoutingServiceName + ": An error occurred with a resolve in the new state. " + rejectionString
 								);
 							} else {
-								message += 'Error during route transition: "';
-								message += targetState.name() + '" navigated from "' + fromState.name + '"';
-								message += ". Parameters that were passed: " + JSON.stringify(targetState.params());
+								message += 'Error during route transition: "' + complementaryInfo;
 								this.logger.error(message, transition.error());
 							}
 

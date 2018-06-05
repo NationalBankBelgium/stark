@@ -41,7 +41,7 @@ switch (document.readyState) {
 				console.error("HMR is not enabled for webpack-dev-server!");
 			}
 		} else {
-			main();
+			main().catch((err: any) => console.error(err));
 		}
 }
 
@@ -54,7 +54,7 @@ function _domReadyHandler(): void {
 			console.error("HMR is not enabled for webpack-dev-server!");
 		}
 	} else {
-		main();
+		main().catch((err: any) => console.error(err));
 	}
 }
 

@@ -1,4 +1,4 @@
-import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 import { Store } from "@ngrx/store";
 import { Observer, of, throwError } from "rxjs";
@@ -36,10 +36,11 @@ interface StarkUserWithCustomData extends Pick<StarkUser, "uuid" | "username" | 
 	[prop: string]: any;
 }
 
+// tslint:disable-next-line:no-big-function
 describe("Service: StarkUserService", () => {
 	let userService: StarkUserService;
-	let mockStore: Store<StarkCoreApplicationState>;
-	let mockUserRepository: StarkUserRepository;
+	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
+	let mockUserRepository: SpyObj<StarkUserRepository>;
 	let mockLogger: StarkLoggingService;
 
 	let mockData: StarkMockData;
@@ -47,12 +48,12 @@ describe("Service: StarkUserService", () => {
 	let mockUserCustomData: { [prop: string]: any };
 	let mockUserCustomData2: { [prop: string]: any };
 	let mockUserInstances: StarkUser[];
-	let mockObserver: Observer<any>;
+	let mockObserver: SpyObj<Observer<any>>;
 
 	beforeEach(() => {
 		mockLogger = new MockStarkLoggingService();
-		mockUserRepository = jasmine.createSpyObj("starkUserRepository", ["getUser"]);
-		mockStore = jasmine.createSpyObj("store", ["dispatch"]);
+		mockUserRepository = jasmine.createSpyObj<StarkUserRepository>("starkUserRepository", ["getUser"]);
+		mockStore = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("store", ["dispatch"]);
 		mockData = { profiles: [] };
 		mockUserCustomData = {
 			prop1: 1234,
@@ -119,8 +120,8 @@ describe("Service: StarkUserService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
 
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkGetAllUsers());
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new StarkGetAllUsersSuccess(result));
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkGetAllUsers());
+			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(new StarkGetAllUsersSuccess(result));
 		});
 
 		it("should dispatch the failure action in case the mock data has no users defined", () => {
@@ -132,11 +133,9 @@ describe("Service: StarkUserService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
 
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkGetAllUsers());
-			expect((<StarkGetAllUsersFailure>(<Spy>mockStore.dispatch).calls.argsFor(1)[0]).type).toBe(
-				StarkUserActionTypes.GET_ALL_USERS_FAILURE
-			);
-			expect((<StarkGetAllUsersFailure>(<Spy>mockStore.dispatch).calls.argsFor(1)[0]).message).toContain("No user profiles found");
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkGetAllUsers());
+			expect((<StarkGetAllUsersFailure>mockStore.dispatch.calls.argsFor(1)[0]).type).toBe(StarkUserActionTypes.GET_ALL_USERS_FAILURE);
+			expect((<StarkGetAllUsersFailure>mockStore.dispatch.calls.argsFor(1)[0]).message).toContain("No user profiles found");
 		});
 
 		it("should throw an error in case any of the users defined in the mock data is not valid", () => {
@@ -149,7 +148,7 @@ describe("Service: StarkUserService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkGetAllUsers());
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkGetAllUsers());
 		});
 	});
 
@@ -161,12 +160,12 @@ describe("Service: StarkUserService", () => {
 				mockUserInstances[0]
 			);
 
-			(<Spy>mockUserRepository.getUser).and.returnValue(of(mockResponseWrapper));
+			mockUserRepository.getUser.and.returnValue(of(mockResponseWrapper));
 
 			userService.fetchUserProfile().subscribe(mockObserver);
 
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);
-			const result: StarkUser = (<Spy>mockObserver.next).calls.argsFor(0)[0];
+			const result: StarkUser = mockObserver.next.calls.argsFor(0)[0];
 			expect(result).toBeDefined();
 			expect(result instanceof StarkUser).toBe(true);
 			expect(result.uuid).toBe(mockUsers[0].uuid);
@@ -184,8 +183,8 @@ describe("Service: StarkUserService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
 
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkFetchUserProfile());
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new StarkFetchUserProfileSuccess(mockUserInstances[0]));
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkFetchUserProfile());
+			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(new StarkFetchUserProfileSuccess(mockUserInstances[0]));
 		});
 
 		it("on SUCCESS, should throw an error in case the user profile fetched is not valid and then dispatch the failure action", () => {
@@ -197,7 +196,7 @@ describe("Service: StarkUserService", () => {
 				mockUserInstances[0]
 			);
 
-			(<Spy>mockUserRepository.getUser).and.returnValue(of(mockResponseWrapper));
+			mockUserRepository.getUser.and.returnValue(of(mockResponseWrapper));
 
 			userService.fetchUserProfile().subscribe(mockObserver);
 
@@ -205,18 +204,18 @@ describe("Service: StarkUserService", () => {
 			expect(mockObserver.error).toHaveBeenCalledTimes(1);
 			expect(mockObserver.complete).not.toHaveBeenCalled();
 
-			const error: Error = (<Spy>mockObserver.error).calls.argsFor(0)[0];
+			const error: Error = mockObserver.error.calls.argsFor(0)[0];
 			expect(error.message).toContain("invalid user profile");
 
 			expect(mockUserRepository.getUser).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
 
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkFetchUserProfile());
-			expect((<StarkFetchUserProfileFailure>(<Spy>mockStore.dispatch).calls.argsFor(1)[0]).type).toBe(
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkFetchUserProfile());
+			expect((<StarkFetchUserProfileFailure>mockStore.dispatch.calls.argsFor(1)[0]).type).toBe(
 				StarkUserActionTypes.FETCH_USER_PROFILE_FAILURE
 			);
-			expect((<Error>(<StarkFetchUserProfileFailure>(<Spy>mockStore.dispatch).calls.argsFor(1)[0]).error).message).toContain(
+			expect((<Error>(<StarkFetchUserProfileFailure>mockStore.dispatch.calls.argsFor(1)[0]).error).message).toContain(
 				"invalid user profile"
 			);
 		});
@@ -241,7 +240,7 @@ describe("Service: StarkUserService", () => {
 				dummyError
 			);
 
-			(<Spy>mockUserRepository.getUser).and.returnValue(throwError(mockErrorResponseWrapper));
+			mockUserRepository.getUser.and.returnValue(throwError(mockErrorResponseWrapper));
 
 			userService.fetchUserProfile().subscribe(mockObserver);
 
@@ -249,7 +248,7 @@ describe("Service: StarkUserService", () => {
 			expect(mockObserver.error).toHaveBeenCalledTimes(1);
 			expect(mockObserver.complete).not.toHaveBeenCalled();
 
-			const errorWrapper: StarkHttpErrorWrapper = (<Spy>mockObserver.error).calls.argsFor(0)[0];
+			const errorWrapper: StarkHttpErrorWrapper = mockObserver.error.calls.argsFor(0)[0];
 
 			expect(errorWrapper).toBeDefined();
 			expect(errorWrapper.httpError.type).toBe(mockHttpError.type);
@@ -260,8 +259,8 @@ describe("Service: StarkUserService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
 
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0]).toEqual(new StarkFetchUserProfile());
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0]).toEqual(new StarkFetchUserProfileFailure(mockErrorResponseWrapper));
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkFetchUserProfile());
+			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(new StarkFetchUserProfileFailure(mockErrorResponseWrapper));
 		});
 	});
 });

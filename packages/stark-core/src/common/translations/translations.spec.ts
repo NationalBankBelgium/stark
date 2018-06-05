@@ -3,6 +3,7 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { mergeTranslations } from "./translations";
 import { StarkLocale } from "./locale.intf";
 
+/* tslint:disable:no-duplicate-string */
 describe("Translations: mergeTranslations", () => {
 	const translateModule: TranslateModule = TranslateModule.forRoot();
 	let translateService: TranslateService;
@@ -65,9 +66,9 @@ describe("Translations: mergeTranslations", () => {
 			const text3: string = translateService.instant("STARK.TEST.TEXT3");
 			const ascending: string = translateService.instant("STARK.SORTING.ASC");
 
-			expect(text1).toBe("Text1 from module");
-			expect(text2).toBe("Text2 from app"); // the app has the upper hand
-			expect(text3).toBe("Text3 from app");
+			expect(text1).toBe(moduleTranslationsEn.STARK.TEST.TEXT1);
+			expect(text2).toBe(appTranslationsEn.STARK.TEST.TEXT2); // the app has the upper hand
+			expect(text3).toBe(appTranslationsEn.STARK.TEST.TEXT3);
 			expect(ascending).toBe("Ascending"); // Common translations
 		});
 
@@ -85,9 +86,9 @@ describe("Translations: mergeTranslations", () => {
 			const text3: string = translateService.instant("STARK.TEST.TEXT3");
 			const ascending: string = translateService.instant("STARK.SORTING.ASC");
 
-			expect(text1).toBe("Text1 from module");
-			expect(text2).toBe("Text2 from app"); // the app has the upper hand
-			expect(text3).toBe("Text3 from app");
+			expect(text1).toBe(moduleTranslationsEn.STARK.TEST.TEXT1);
+			expect(text2).toBe(appTranslationsEn.STARK.TEST.TEXT2); // the app has the upper hand
+			expect(text3).toBe(appTranslationsEn.STARK.TEST.TEXT3);
 			expect(ascending).toBe("Ascending"); // Common translations
 		});
 
@@ -111,3 +112,4 @@ describe("Translations: mergeTranslations", () => {
 		});
 	});
 });
+/* tslint:enable */

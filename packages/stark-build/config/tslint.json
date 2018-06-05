@@ -2,12 +2,6 @@
   // FIXME: presets moved to packages/stark-core/tslint.json temporarily due to this issue: https://github.com/palantir/tslint/issues/3874
   "defaultSeverity": "error",
   "rules": {
-    // sonarts rules
-    "cognitive-complexity": false,
-    "no-duplicate-string": false,
-    "no-big-function": false,
-    "no-commented-code": false,
-
     // Codelyzer recommended rules
     "directive-selector": [true, "attribute", "", "kebab-case"],
     "component-selector": [true, "element", "", "kebab-case"],
@@ -203,29 +197,33 @@
     "no-duplicate-super": true,
     "no-duplicate-switch-case": true,
     "newline-before-return": false,
-    "newline-per-chained-call": false
+    "newline-per-chained-call": false,
+
+    // TSlint rules that require type info
+    "no-inferred-empty-object-type": true,
+    "no-void-expression": [true, "ignore-arrow-function-shorthand"],
+    "no-boolean-literal-compare": true,
+    "no-unnecessary-qualifier": true,
+    "no-floating-promises": true,
+    "match-default-export-name": true,
+    "return-undefined": true,
+    "deprecation": true,
+    "use-default-type-parameter": true,
+    "await-promise": true,
+    "no-for-in-array": true,
+    "no-unused-variable": true
+    //  "strict-boolean-expressions": true,
+    //	"promise-function-async": true,
+    //	"completed-docs": true,
+    //  "no-unbound-method": true,
+    //  "no-unsafe-any": true,
+    //  "no-unnecessary-type-assertion": true,
+    //  "no-use-before-declare": true,
+    //  "restrict-plus-operands": true,
+    //  "strict-type-predicates": true,
+    //  "prefer-readonly": true,
   }
 
-  //These rules require type info to run
-  //	"strict-boolean-expressions": true,
-  //	"promise-function-async": true,
-  //	"no-inferred-empty-object-type": true,
-  //  "no-void-expression": true,
-  //	"completed-docs": true,
-  //  "no-unbound-method": true,
-  //  "no-boolean-literal-compare": true,
-  //  "no-unsafe-any": true,
-  //  "no-unnecessary-qualifier": true,
-  //  "no-unnecessary-type-assertion": true,
-  //  "no-use-before-declare": true,
-  //  "await-promise": true,
-  //  "no-floating-promises": true,
-  //  "strict-type-predicates": true,
-  //  "match-default-export-name": true,
-  //  "return-undefined": true,
-  //  "deprecation": true,
-  //  "use-default-type-parameter": true,
-  //  "prefer-readonly": true,
   //
   //These rules are handled by Prettier
   //	"eofline": true,

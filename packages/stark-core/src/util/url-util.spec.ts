@@ -1,9 +1,11 @@
 import { StarkUrlUtil } from "./url-util";
 
 describe("Util: UrlUtil", () => {
+	const fullTestUrl: string = "/something/:somethingId/else/:elseId";
+
 	describe("parseUrlParams", () => {
 		it("should return the words after the colon till the next slash", () => {
-			let result: string[] = StarkUrlUtil.parseUrlParams("/something/:somethingId/else/:elseId");
+			let result: string[] = StarkUrlUtil.parseUrlParams(fullTestUrl);
 			expect(result).toEqual(["somethingId", "elseId"]);
 
 			result = StarkUrlUtil.parseUrlParams("/:id/whatever/:anotherId/:extraParam/");
@@ -33,7 +35,7 @@ describe("Util: UrlUtil", () => {
 
 	describe("interpolateUrlWithParams", () => {
 		it("should return an url where the placeholders are replaced with the params", () => {
-			let result: string = StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
+			let result: string = StarkUrlUtil.interpolateUrlWithParams(fullTestUrl, {
 				somethingId: "1",
 				elseId: "5"
 			});
@@ -60,7 +62,7 @@ describe("Util: UrlUtil", () => {
 
 		it("should throw an error if a param is passed but there is no placeholder for it in the resourcePath", () => {
 			expect(() =>
-				StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
+				StarkUrlUtil.interpolateUrlWithParams(fullTestUrl, {
 					somethingId: "1",
 					elseId: "5",
 					unknownId: "3"
@@ -69,7 +71,7 @@ describe("Util: UrlUtil", () => {
 		});
 
 		it("should NOT throw an error if a param with undefined value is passed and there is no placeholder for it in the resourcePath", () => {
-			const result: string = StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
+			const result: string = StarkUrlUtil.interpolateUrlWithParams(fullTestUrl, {
 				somethingId: "1",
 				elseId: "5",
 				unknownId: <any>undefined
@@ -80,7 +82,7 @@ describe("Util: UrlUtil", () => {
 
 		it("should throw an error if a parameter from the url is missing in the given params object", () => {
 			expect(() =>
-				StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
+				StarkUrlUtil.interpolateUrlWithParams(fullTestUrl, {
 					somethingId: "1"
 				})
 			).toThrowError(/Not every value was replaced/);
@@ -88,7 +90,7 @@ describe("Util: UrlUtil", () => {
 
 		it("should throw an error if a parameter from the url exists in the params object but it has undefined value", () => {
 			expect(() =>
-				StarkUrlUtil.interpolateUrlWithParams("/something/:somethingId/else/:elseId", {
+				StarkUrlUtil.interpolateUrlWithParams(fullTestUrl, {
 					somethingId: "1",
 					elseId: <any>undefined
 				})

@@ -15,18 +15,20 @@ describe("AppLogoComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			declarations: [StarkAppLogoComponent],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-			],
-			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes
-		})
-			/**
-			 * Compile template and css
-			 */
-			.compileComponents();
+		return (
+			TestBed.configureTestingModule({
+				declarations: [StarkAppLogoComponent],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
+				],
+				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		);
 	}));
 
 	/**

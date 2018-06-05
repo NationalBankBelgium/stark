@@ -17,11 +17,13 @@ import { StarkHttpRequestBuilderImpl } from "../builder";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
 
+// tslint:disable-next-line:no-big-function
 describe("Repository: AbstractStarkHttpRepository", () => {
 	let mockStarkHttpService: StarkHttpService<MockResource>;
 	let mockLogger: StarkLoggingService;
-	let mockBackend: StarkBackend;
+	let mockBackend: SpyObj<StarkBackend>;
 	let mockResourcePath: string;
 	let mockResource: MockResource;
 	const resourceUuid: string = "dummyUUID";
@@ -32,7 +34,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	beforeEach(() => {
 		mockStarkHttpService = new MockStarkHttpService();
 		mockLogger = new MockStarkLoggingService();
-		mockBackend = createSpyObj("backend", ["url"]);
+		mockBackend = createSpyObj<StarkBackend>("backend", ["url"]);
 		mockResourcePath = "mock";
 		mockResource = new MockResource(resourceUuid);
 
