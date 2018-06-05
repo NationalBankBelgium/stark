@@ -51,8 +51,10 @@
     "docs:serve": "npm run docs -- --watch --serve --port 4321",
     "ngc": "node ./../node_modules/@angular/compiler-cli/src/main.js -p tsconfig-build.json",
     "lint": "node ../../node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.spec.json --format codeFrame",
-    "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start ./karma.conf.typescript.js",
-    "test-fast:ci": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start karma.conf.typescript.ci.js",
+    "test": "npm run lint && npm run test-fast",
+    "test:ci": "npm run lint && npm run test-fast:ci",
+    "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start",
+    "test-fast:ci": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start karma.conf.ci.js",
     "tsc": "node ../../node_modules/typescript/bin/tsc -p tsconfig-build.json",
     "tslint": "node ../../node_modules/tslint/bin/tslint"
   }

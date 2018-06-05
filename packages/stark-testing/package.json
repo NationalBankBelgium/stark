@@ -1,7 +1,7 @@
 {
   "name": "@nationalbankbelgium/stark-testing",
   "version": "0.0.0-PLACEHOLDER-VERSION",
-  "main": "karma.conf.typescript.js",
+  "main": "karma.conf.js",
   "types": "stark-testing.d.ts",
   "description": "Stark - Testing",
   "author": "Stark Team",

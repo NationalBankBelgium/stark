@@ -2,7 +2,6 @@
  * Angular 2 decorators and services
  */
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { environment } from "../environments/environment";
 import { AppState } from "./app.service";
 
 /**
@@ -19,10 +18,7 @@ import { AppState } from "./app.service";
 })
 export class AppComponent implements OnInit {
 	public name: string = "Angular Starter";
-	public tipe: string = "assets/img/tipe.png";
-	public twitter: string = "https://twitter.com/gdi2290";
-	public url: string = "https://tipe.io";
-	public showDevModule: boolean = environment.showDevModule;
+	public url: string = "https://github.com/NationalBankBelgium/stark";
 
 	public appState: AppState;
 

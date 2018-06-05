@@ -17,7 +17,6 @@ import { MockStarkHttpService, MockStarkLoggingService } from "@nationalbankbelg
  */
 import { AppState } from "../app.service";
 import { HomeComponent } from "./home.component";
-import { Title } from "./title";
 import SpyObj = jasmine.SpyObj;
 
 describe(`Home`, () => {
@@ -48,7 +47,6 @@ describe(`Home`, () => {
 				imports: [StoreModule.forRoot({}), HttpClientTestingModule],
 				providers: [
 					AppState,
-					Title,
 					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
 					{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }
@@ -80,10 +78,6 @@ describe(`Home`, () => {
 
 	it("should have default data", () => {
 		expect(comp.localState).toEqual({ value: " " });
-	});
-
-	it("should have a title", () => {
-		expect(!!comp.title).toEqual(true);
 	});
 
 	it("should log ngOnInit", () => {

@@ -93,13 +93,6 @@ if [[ ${TRAVIS:-} ]]; then
   logInfo "Publishing from Travis";
   logInfo "============================================="
   
-  # If the previous commands in the `script` section of .travis.yaml failed, then abort.
-  # The variable is not set in early stages of the build, so we default to 0 there.
-  # https://docs.travis-ci.com/user/environment-variables/
-  if [[ ${TRAVIS_TEST_RESULT=0} == 1 ]]; then
-    exit 1;
-  fi
-  
   # Don't even try if not running against the official repo
   # We don't want release to run outside of our own little world
   if [[ ${TRAVIS_REPO_SLUG} != ${EXPECTED_REPO_SLUG} ]]; then
@@ -140,6 +133,14 @@ if [[ ${TRAVIS:-} ]]; then
 
   if [[ ${NPM_TOKEN} == "" ]]; then
     logTrace "Not publishing because the NPM_TOKEN environment variable is is not defined correctly" 1
+    exit 0;
+  fi
+  
+  # If any of the previous commands in the `script` section of .travis.yaml failed, then abort.
+  # The variable is not set in early stages of the build, so we default to 0 there.
+  # https://docs.travis-ci.com/user/environment-variables/
+  if [[ ${TRAVIS_TEST_RESULT=0} == 1 ]]; then
+    logInfo "Skipping release because a previous script in the Travis build has failed";
     exit 0;
   fi
 fi

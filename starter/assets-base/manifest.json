@@ -1,6 +1,6 @@
 {
-  "name": "NBB Stark",
-  "short_name": "Stark",
+  "name": "NBB Stark Starter",
+  "short_name": "Stark Starter",
   "start_url": "/",
   "display": "standalone",
   "icons": [

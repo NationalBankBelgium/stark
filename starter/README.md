@@ -8,14 +8,14 @@ TODO doc; see #32
 
 ## Configuration
 Most of the configuration files at the root of the starter either fully reuse or extend Stark's configuration files.
-Most of the time you won't need to change these.
+Most of the time you won't need to change these, but they allow you to customize things when needed.
 
 ## Getting Started
 
 ### System configuration
 What you need to run this app:
 * `node` and `npm`
-* Ensure you're running the latest versions Node `v6.x.x`+ (or `v7.x.x` or `v8.x.x`) and NPM `5.6.x`+
+* Ensure you're running the latest versions Node `v8.x.x`+ and NPM `5.8.x`+
 
 > If you have `nvm` installed, which is highly recommended you can do a `nvm install --lts && nvm use` in `$` to run with the latest Node LTS. You can also have this `zsh` done for you [automatically](https://github.com/creationix/nvm#calling-nvm-use-automatically-in-a-directory-with-a-nvmrc-file)
 
@@ -290,6 +290,3 @@ docker run -e VIRTUAL_HOST=stark-starter.your-domain.com --name stark-starter st
 * node-pre-gyp ERR in npm install (Windows)
   * install Python x86 version between 2.5 and 3.0 on windows
   * or try `--no-optional`
-  
-## Support, Questions, or Feedback
-> Contact us anytime for anything about this repo or Angular
