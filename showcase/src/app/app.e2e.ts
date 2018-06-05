@@ -1,5 +1,5 @@
 import { browser, by, element } from "protractor";
-/* tslint:disable */
+// tslint:disable-next-line:no-import-side-effect
 import "tslib";
 
 describe("App", () => {
@@ -8,28 +8,26 @@ describe("App", () => {
 	});
 
 	it("should have a title", async () => {
-		const subject = await browser.getTitle();
-		const result = "Stark Showcase";
+		const subject: string = await browser.getTitle();
+		const result: string = "Stark Showcase";
 		expect(subject).toEqual(result);
 	});
 
 	it("should have header", async () => {
-		const subject = await element(by.css("h1")).isPresent();
-		const result = true;
+		const subject: boolean = await element(by.css("h1")).isPresent();
+		const result: boolean = true;
 		expect(subject).toEqual(result);
 	});
 
 	it("should have <home>", async () => {
-		const subject = await element(by.css("app home")).isPresent();
-		const result = true;
+		const subject: boolean = await element(by.css("app home")).isPresent();
+		const result: boolean = true;
 		expect(subject).toEqual(result);
 	});
 
 	it("should have buttons", async () => {
-		const subject = await element(by.css("button")).getText();
-		const result = "Submit Value";
+		const subject: string = await element(by.css("button")).getText();
+		const result: string = "Submit Value";
 		expect(subject).toEqual(result);
 	});
 });
-
-/* tslint:enable */

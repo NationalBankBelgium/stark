@@ -10,9 +10,8 @@ import { AppState } from "./app.service";
  */
 @Component({
 	selector: "app",
-	/* tslint:disable:use-view-encapsulation */
+	// tslint:disable-next-line:use-view-encapsulation
 	encapsulation: ViewEncapsulation.None,
-	/* tslint:enable */
 	styleUrls: ["./app.component.css"],
 	templateUrl: "./app.component.html"
 })
