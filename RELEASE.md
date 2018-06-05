@@ -55,10 +55,56 @@ Refer to the "Adapting tags of published packages" section below.
 
 After this, the release is tagged and visible on github
 
-### publish
+### documentation publish
 
-Once the tag is pushed to GitHub, Travis picks it up and initiates a build.
-Travis executes builds, tests, then executes `npm run release:publish`.
+#### What
+Once the tag is pushed to GitHub, Travis picks it up and initiates a build. 
+
+Travis executes builds, tests, then executes `npm run docs:publish`.
+
+That script makes some checks then, if all succeed it publishes the API docs of the different packages as well as the production build output of the showcase to Github pages.
+
+#### How
+Checks that are performed:
+- node version: should be "8"
+- TRAVIS_REPO_SLUG should be "NationalBankBelgium/stark"
+- TRAVIS_PULL_REQUEST should be false
+- TRAVIS_EVENT_TYPE should be "cron" (i.e., not a nightly build or manual build)
+- encrypted_... environment should be available (those have been created by encrypting our SSH key; cfr below!)
+
+More details here: https://github.com/NationalBankBelgium/stark/issues/282
+
+#### Security
+The docs publication uses an SSH key that has write access to the Stark repository.
+That key is available in the source code in encrypted form in the `stark-ssh` file.
+That file actually corresponds to the private key of an SSH key-pair encrypted using the Travis CLI (details below).
+
+#### Replacing the GitHub credentials (SSH key)
+To replace the keys used by the docs publish script:
+* create a new SSH key pair: `ssh-keygen -t rsa -b 4096 -C "..."`
+  * call it `stark-ssh` for safety: that name is in the .gitignore list
+* associate the public key with the Stark repository as a "Deploy Key": https://developer.github.com/v3/guides/managing-deploy-keys/
+* encrypt the private key with the Travis CLI: `travis encrypt-file ./stark-ssh -r NationalBankBelgium/stark`
+  * that command will generate an encrypted version of the key
+  * make sure you're logged in (see next section)
+* save the encrypted file as `stark-ssh.enc` and get rid of the non-encrypted key directly
+
+The command will also
+  * store the (randomly generated) encryption key and initialization vector as (secure) Travis environment variables
+  * provide the openssl command to use in the scripts to decrypt the stark-ssh.enc file; for example: `openssl aes-256-cbc -K $encrypted_e546efaa49e5_key -iv $encrypted_e546efaa49e5_iv -in stark-ssh.enc -out ./stark-ssh -d`.
+
+The name of those variables will change each time it is used, therefore the `gh-deploy.sh` MUST also be adapted afterwards.
+
+#### Installing the Travis CLI
+Steps:
+* Install Ruby to get the `gem` command
+* Install Travis CLI with gem install travis
+* Login to Travis using GH credentials: travis login --org --github-token foo
+  * `Successfully logged in as ...`
+* Have fun!
+
+### npm packages publish
+Finally, Travis executes `npm run release:publish`.
 
 That script makes some checks then, if all succeed it publishes the different packages on npm.
 Checks that are performed:

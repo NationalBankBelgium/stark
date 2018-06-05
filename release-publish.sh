@@ -3,6 +3,7 @@
 # TODO
 #===================
 # provide a clean way to define/check the "current" version of node (i.e., the one we should execute the publish under/for)
+## ideally we should read it from .nvmrc
 # provide support for publishing only a subset of the packages (same --packages logic as in build.sh)
 # provide support for publishing locally in addition to travis
 
@@ -90,7 +91,7 @@ logTrace "ROOT_PACKAGES_DIR: ${ROOT_PACKAGES_DIR}" 1
 travisFoldStart "publish checks" "no-xtrace"
 
 if [[ ${TRAVIS:-} ]]; then
-  logInfo "Publishing from Travis";
+  logInfo "Publishing to npm";
   logInfo "============================================="
   
   # Don't even try if not running against the official repo
@@ -114,13 +115,13 @@ if [[ ${TRAVIS:-} ]]; then
   fi
   
   if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
-    logTrace "Not publishing because this is a build triggered for a pull request" 1
+    logInfo "Not publishing because this is a build triggered for a pull request" 1
     exit 0;
   elif [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
-    logTrace "Nightly build initiated by Travis cron job" 1
+    logInfo "Nightly build initiated by Travis cron job" 1
     NIGHTLY_BUILD=true
   elif [[ ${TRAVIS_TAG} == "" ]]; then
-    logTrace "Not publishing because this is not a build triggered for a tag" 1
+    logInfo "Not publishing because this is not a build triggered for a tag" 1
     exit 0;
   else
     logInfo "This build has been triggered for a tag" 
@@ -132,7 +133,7 @@ if [[ ${TRAVIS:-} ]]; then
   fi
 
   if [[ ${NPM_TOKEN} == "" ]]; then
-    logTrace "Not publishing because the NPM_TOKEN environment variable is is not defined correctly" 1
+    logInfo "Not publishing because the NPM_TOKEN environment variable is is not defined correctly" 1
     exit 0;
   fi
   
