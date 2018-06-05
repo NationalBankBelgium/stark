@@ -1,4 +1,3 @@
-/* tslint:disable */
 import { enableProdMode, NgModuleRef } from "@angular/core";
 import { disableDebugTools } from "@angular/platform-browser";
 import { Environment } from "./model";
@@ -14,7 +13,7 @@ export const environment: Environment = {
 	 * @param modRef
 	 *
 	 */
-	decorateModuleRef(modRef: NgModuleRef<any>) {
+	decorateModuleRef(modRef: NgModuleRef<any>): NgModuleRef<any> {
 		disableDebugTools();
 		return modRef;
 	},

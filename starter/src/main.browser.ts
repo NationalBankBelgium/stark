@@ -1,10 +1,8 @@
-/* tslint: disable */
 /**
  * Angular bootstrapping
  */
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { environment } from "./environments/environment";
-
 /**
  * App Module
  * our top level module that holds all of our components
@@ -57,5 +55,3 @@ function _domReadyHandler(): void {
 		main().catch((err: any) => console.error(err));
 	}
 }
-
-/* tslint: enable */
