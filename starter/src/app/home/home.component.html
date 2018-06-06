@@ -1,35 +1,3 @@
 <div>
   <h1 translate>STARTER.HOME.TITLE</h1>
-
-  <hr>
-
-  <div>
-    <h4>Local State</h4>
-
-    <form (ngSubmit)="submitState(localState.value)" autocomplete="off">
-
-      <input
-        [value]="localState.value"
-        (input)="localState.value = $event.target.value"
-        placeholder="Submit Local State to App State"
-        autofocus>
-
-      <button>Submit Value</button>
-      <button (click)="triggerHttpCall('collection')">Http collection test</button>
-      <button (click)="triggerHttpCall('singleItem')">Http single item test</button>
-      <button (click)="triggerHttpCall('singleNonExistingItem')">Http single non existing item test</button>
-      <button (click)="logError()">Log an Error</button>
-      <button (click)="logStarkError()">Log a StarkError</button>
-    </form>
-    <!--
-        <input type="text" [value]="localState.value" (input)="localState.value = $event.target.value" autofocus>
-        Rather than wiring up two-way data-binding ourselves with [value] and (input)
-        we can use Angular's [(ngModel)] syntax
-        <input type="text" name="textInput" [(ngModel)]="localState.value" autofocus>
-      -->
-
-    <pre>this.localState = {{ localState | json }}</pre>
-
-  </div>
-
 </div>

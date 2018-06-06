@@ -76,10 +76,6 @@ describe(`Home`, () => {
 		logger.debug.calls.reset();
 	});
 
-	it("should have default data", () => {
-		expect(comp.localState).toEqual({ value: " " });
-	});
-
 	it("should log ngOnInit", () => {
 		expect(logger.debug).not.toHaveBeenCalled();
 

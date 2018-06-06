@@ -18,6 +18,8 @@ function logRegisteredStates(registeredstates: StateDeclaration[]): void {
 
 export function routerConfigFn(router: UIRouter): void {
 	router.trace.enable(Category.TRANSITION);
+
+	// TODO switch on/off depending on environment (DEVELOPMENT = ON)
 	router.plugin(Visualizer);
 
 	logRegisteredStates(router.stateService.get());

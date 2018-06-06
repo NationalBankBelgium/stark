@@ -1,39 +1,26 @@
-<nav>
-	<a uiSref="index"
-	   uiSrefActive="active">
-		Index
-	</a>
-	<a uiSref="home"
-	   uiSrefActive="active">
-		Home
-	</a>
-	<a uiSref="detail"
-	   uiSrefActive="active">
-		Detail
-	</a>
-	<a uiSref="barrel"
-	   uiSrefActive="active">
-		Barrel
-	</a>
-	<a uiSref="about" [uiParams]="{ paramData: 'data passed via params' }"
-	   uiSrefActive="active">
-		About
-	</a>
-</nav>
-
-<stark-app-logo></stark-app-logo>
+<header> 
+	<nav>
+		<a uiSref="home"
+		   uiSrefActive="active"
+		   translate>
+			STARTER.MENU.HOME
+		</a>
+		<a uiSref="about" [uiParams]="{ paramData: 'data passed via params' }"
+		   uiSrefActive="active"
+		   translate>
+			STARTER.MENU.ABOUT
+		</a>
+	</nav>
+</header>
 
 <main>
 	<ui-view></ui-view>
 </main>
 
-<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-
 <footer>
-	<span>Stark Starter</span>
 	<div>
 		<a [href]="url">
-			Stark
+			<img src="../assets/images/GitHub-Mark-32px.png"> Stark on GitHub
 		</a>
 	</div>
 </footer>

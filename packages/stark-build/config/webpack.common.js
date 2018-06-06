@@ -406,7 +406,6 @@ module.exports = options => {
 				],
 				{
 					ignore: [
-						"translations/*", // skip translation since they will be copied in the next round (see block below)
 						"*.md",
 						//See https://github.com/kevlened/copy-webpack-plugin/issues/54#issuecomment-223205388
 						{
@@ -420,31 +419,6 @@ module.exports = options => {
 					// Setting this to true copies all files
 					// copyUnmodified: true
 				}
-			),
-
-			/**
-			 * Plugin: CopyWebpackPlugin
-			 * Description: Copy files and directories in webpack.
-			 * Copies project static assets.
-			 *
-			 * See: https://www.npmjs.com/package/copy-webpack-plugin
-			 */
-			new CopyWebpackPlugin(
-				[
-					// TODO uncomment this when is part of Stark
-					// // Stark assets
-					// {
-					//   from: helpers.rootStark("assets/translations"),
-					//   to: "assets/translations/stark"
-					// },
-					//
-					// // Application assets
-					// {
-					// 	from: helpers.root("assets/translations"),
-					// 	to: "assets/translations/app"
-					// }
-				],
-				{}
 			),
 
 			/**
