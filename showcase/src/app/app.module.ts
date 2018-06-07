@@ -1,5 +1,5 @@
 import { Inject, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouterModule } from "@uirouter/angular";
 import { NgIdleModule } from "@ng-idle/core";
@@ -8,6 +8,7 @@ import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatIconRegistry } from "@angular/material";
 
 import {
 	STARK_APP_CONFIG,
@@ -29,6 +30,7 @@ import {
 
 import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
+import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
 /*
  * Translations
@@ -153,8 +155,12 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [log
 export class AppModule {
 	public constructor(
 		private translateService: TranslateService,
-		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService
+		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
+		matIconRegistry: MatIconRegistry,
+		domSanitizer: DomSanitizer
 	) {
+		registerMaterialIconSet(matIconRegistry, domSanitizer);
+
 		// TODO should use StarkLanguages, StarkLanguage, etc
 		this.translateService.addLangs(["en", "fr", "nl"]);
 		this.translateService.setTranslation("en", translationsEn, true);
