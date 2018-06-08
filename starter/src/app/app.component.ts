@@ -16,7 +16,7 @@ import { AppState } from "./app.service";
 	templateUrl: "./app.component.html"
 })
 export class AppComponent implements OnInit {
-	public name: string = "Angular Starter";
+	public name: string = "Stark Starter";
 	public url: string = "https://github.com/NationalBankBelgium/stark";
 
 	public appState: AppState;

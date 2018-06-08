@@ -9,7 +9,7 @@ describe("App", () => {
 
 	it("should have a title", async () => {
 		const subject: string = await browser.getTitle();
-		const result: string = "Stark Showcase";
+		const result: string = "Stark Starter";
 		expect(subject).toEqual(result);
 	});
 
@@ -22,12 +22,6 @@ describe("App", () => {
 	it("should have <home>", async () => {
 		const subject: boolean = await element(by.css("app home")).isPresent();
 		const result: boolean = true;
-		expect(subject).toEqual(result);
-	});
-
-	it("should have buttons", async () => {
-		const subject: string = await element(by.css("button")).getText();
-		const result: string = "Submit Value";
 		expect(subject).toEqual(result);
 	});
 });

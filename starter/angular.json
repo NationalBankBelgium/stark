@@ -19,13 +19,8 @@
             "assets": [
               {
                 "glob": "mdi.svg",
-                "input": "node_modules/@mdi/angular-material",
-                "output": "./assets/icons"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets/img",
-                "output": "./assets/img"
+                "input": "../node_modules/@mdi/angular-material",
+                "output": "./assets/material-icons"
               },
               {
                 "glob": "**/*",

@@ -34,6 +34,7 @@ import { Deserialize } from "cerialize";
  * Translations
  */
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { initializeTranslation } from "./translation.config";
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -45,7 +46,6 @@ import { AppState } from "./app.service";
 import { HomeComponent } from "./home";
 import { AboutComponent } from "./about";
 import { NoContentComponent } from "./no-content";
-
 /* tslint:disable:no-import-side-effect */
 // load PCSS styles
 import "../styles/styles.pcss";
@@ -53,10 +53,6 @@ import "../styles/styles.pcss";
 import "../styles/styles.scss";
 /* tslint:enable */
 import "../styles/headings.css";
-
-const translationsEn: object = require("../../assets/translations/en.json");
-const translationsFr: object = require("../../assets/translations/fr.json");
-const translationsNl: object = require("../../assets/translations/nl.json");
 
 // Application wide providers
 const APP_PROVIDERS: any[] = [AppState];
@@ -157,13 +153,7 @@ export class AppModule {
 		private translateService: TranslateService,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService
 	) {
-		// TODO should use StarkLanguages, StarkLanguage, etc
-		this.translateService.addLangs(["en", "fr", "nl"]);
-		this.translateService.setTranslation("en", translationsEn, true);
-		this.translateService.setTranslation("fr", translationsFr, true);
-		this.translateService.setTranslation("nl", translationsNl, true);
-		this.translateService.setDefaultLang("en");
-		this.translateService.use("nl");
+		initializeTranslation(this.translateService);
 
 		const user: StarkUser = {
 			uuid: "abc123",

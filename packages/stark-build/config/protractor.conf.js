@@ -1,9 +1,8 @@
-/**
- * @author: @AngularClass
- */
+require("ts-node").register({
+	project: "tsconfig.e2e.json"
+});
 
-require("ts-node/register");
-var helpers = require("./helpers");
+const helpers = require("./helpers");
 
 exports.config = {
 	baseUrl: "http://localhost:3000/",
@@ -28,7 +27,7 @@ exports.config = {
 	directConnect: true,
 
 	capabilities: {
-		browserName: "chrome",
+		browserName: "firefox",
 		chromeOptions: {
 			// TODO make sure we run in headless & no-sandbox modes! (important for Travis CI)
 			//'args': ["--headless", "--disable-gpu", "--window-size=1280x800",  "--no-sandbox"]
