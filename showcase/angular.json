@@ -19,8 +19,8 @@
             "assets": [
               {
                 "glob": "mdi.svg",
-                "input": "node_modules/@mdi/angular-material",
-                "output": "./assets/icons"
+                "input": "../node_modules/@mdi/angular-material",
+                "output": "./assets/material-icons"
               },
               {
                 "glob": "**/*",

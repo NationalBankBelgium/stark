@@ -25,11 +25,15 @@
     "node": ">=6.11.0",
     "npm": ">=5.3.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@mdi/angular-material": "2.4.85"
+  },
   "devDependencies": {
     "@nationalbankbelgium/stark-testing": "../stark-testing"
   },
   "peerDependencies": {
+    "@angular/animations": "6.x",
+    "@angular/cdk": "6.x",
     "@angular/common": "6.x",
     "@angular/compiler": "6.x",
     "@angular/core": "6.x",
