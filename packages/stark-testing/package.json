@@ -34,7 +34,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-typescript": "3.0.12",
     "karma-typescript-angular2-transform": "1.0.2",
-    "puppeteer": "1.4.0"
+    "puppeteer": "1.5.0"
   },
   "scripts": {
     "clean": "npx rimraf dist",
