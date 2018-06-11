@@ -42,7 +42,8 @@ export class StarkNavigateRejection implements Action {
 }
 
 export class StarkNavigationHistoryLimitReached implements Action {
-	public readonly type: StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED = StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED;
+	public readonly type: StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED =
+		StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED;
 }
 
 export class StarkReload implements Action {

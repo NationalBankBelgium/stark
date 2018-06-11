@@ -23,7 +23,8 @@ export class StarkPersistPreferredLanguage implements Action {
  * @returns The created action object
  */
 export class StarkPersistPreferredLanguageSuccess implements Action {
-	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_SUCCESS = StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_SUCCESS;
+	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_SUCCESS =
+		StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_SUCCESS;
 }
 
 /**
@@ -32,7 +33,8 @@ export class StarkPersistPreferredLanguageSuccess implements Action {
  * @returns The created action object
  */
 export class StarkPersistPreferredLanguageFailureimplements implements Action {
-	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_FAILURE = StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_FAILURE;
+	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_FAILURE =
+		StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_FAILURE;
 
 	public constructor(public error: any) {}
 }

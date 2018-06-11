@@ -58,15 +58,12 @@ describe("About", () => {
 			]
 		}));
 
-	it(
-		"should log ngOnInit",
-		inject([AboutComponent], (about: AboutComponent) => {
-			logger = TestBed.get(STARK_LOGGING_SERVICE);
+	it("should log ngOnInit", inject([AboutComponent], (about: AboutComponent) => {
+		logger = TestBed.get(STARK_LOGGING_SERVICE);
 
-			expect(logger.debug).not.toHaveBeenCalled();
+		expect(logger.debug).not.toHaveBeenCalled();
 
-			about.ngOnInit();
-			expect(logger.debug).toHaveBeenCalled();
-		})
-	);
+		about.ngOnInit();
+		expect(logger.debug).toHaveBeenCalled();
+	}));
 });

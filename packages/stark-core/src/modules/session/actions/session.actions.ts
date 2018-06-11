@@ -64,7 +64,8 @@ export class StarkSessionTimeoutCountdownStop implements Action {
 }
 
 export class StarkSessionTimeoutCountdownFinish implements Action {
-	public readonly type: StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_FINISH = StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_FINISH;
+	public readonly type: StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_FINISH =
+		StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_FINISH;
 }
 
 export class StarkSessionLogout implements Action {
