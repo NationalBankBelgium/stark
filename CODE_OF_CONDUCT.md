@@ -1,4 +1,5 @@
 # Contributor Code of Conduct
+
 As contributors and maintainers of the Stark, we pledge to respect everyone who contributes by posting issues, updating documentation, submitting pull requests, providing feedback in comments, and any other activities.
 
 Communication through any of Stark's channels (GitHub, Twitter ,Slack, etc.) must be constructive and never resort to personal attacks, trolling, public or private harassment, insults, or other unprofessional conduct.

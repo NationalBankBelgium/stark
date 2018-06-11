@@ -12,7 +12,7 @@ export function starkIsCompanyNumber(companyNumber: string): boolean {
 			const numberToCheck: number = parseInt(enterpriseNumber.substring(0, enterpriseNumber.length - 2), 10);
 			const controlNumber: number = parseInt(enterpriseNumber.substring(enterpriseNumber.length - 2), 10);
 
-			valid = 97 - numberToCheck % 97 === controlNumber;
+			valid = 97 - (numberToCheck % 97) === controlNumber;
 		}
 	}
 

@@ -4,18 +4,24 @@ During the development we are often in front of some errors and sometimes we do 
 That's why referenced those common errors here for sharing our solutions.
 
 > Table of contents
-* [NGC](#ngcErrors)
-  * [TypeError: Cannot read property 'module' of undefined](#ngcErrorModuleUndefined)
-  * [TypeError: Cannot read property 'kind' of undefined](#ngcErrorKindUndefined)
-* [Rollup](#rollupErrors)
-  * [(!) Unresolved dependencies detected](#rollupErrorUnresolvedDeps)
-  
+
+-   [NGC](#ngcErrors)
+    -   [TypeError: Cannot read property 'module' of undefined](#ngcErrorModuleUndefined)
+    -   [TypeError: Cannot read property 'kind' of undefined](#ngcErrorKindUndefined)
+-   [Rollup](#rollupErrors)
+
+    -   [(!) Unresolved dependencies detected](#rollupErrorUnresolvedDeps)
+
 ## <a id="ngcErrors"></a>NGC errors
-#### <a id="ngcErrorModuleUndefined"></a>TypeError: Cannot read property 'module' of undefined 
+
+#### <a id="ngcErrorModuleUndefined"></a>TypeError: Cannot read property 'module' of undefined
+
 In the cases we already saw, it was linked to an unexisting export in TypeScript.
+
 ```typescript
-export * from "invalid path"; 
+export * from "invalid path";
 ```
+
 ```bash
 > ngc
 
@@ -37,35 +43,38 @@ npm ERR! @nationalbankbelgium/stark-core@0.0.0-PLACEHOLDER-VERSION ngc: `ngc`
 npm ERR! Exit status 2
 ```
 
-#### <a id="ngcErrorKindUndefined"></a>TypeError: Cannot read property 'kind' of undefined 
+#### <a id="ngcErrorKindUndefined"></a>TypeError: Cannot read property 'kind' of undefined
+
 In the cases we already saw, it was linked to the class-validator decorator 'ValidateIf'.
 
 Our mistake was we declared a function inside the decorate which triggered an error in NGC.
+
 ```typescript
 // The following code is not working
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
-    @ValidateIf((appConfig: StarkApplicationConfig) => appConfig.loggingFlushDisabled !== true)
-    @IsDefined()
-    @IsString()
-    @autoserialize
-    public loggingFlushApplicationId?: string;
+	@ValidateIf((appConfig: StarkApplicationConfig) => appConfig.loggingFlushDisabled !== true)
+	@IsDefined()
+	@IsString()
+	@autoserialize
+	public loggingFlushApplicationId?: string;
 }
- 
+
 // The following code is working
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
-    @ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled)
-    @IsDefined()
-    @IsString()
-    @autoserialize
-    public loggingFlushApplicationId?: string;
-	
-    // ...
-	
-    public static validateIfLoggingFlushEnabled(instance: StarkApplicationConfig): boolean {
-        return instance.loggingFlushDisabled !== true;
-    }
+	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled)
+	@IsDefined()
+	@IsString()
+	@autoserialize
+	public loggingFlushApplicationId?: string;
+
+	// ...
+
+	public static validateIfLoggingFlushEnabled(instance: StarkApplicationConfig): boolean {
+		return instance.loggingFlushDisabled !== true;
+	}
 }
 ```
+
 ```bash
 > ngc
 
@@ -99,11 +108,11 @@ You can simply add the missing dependencies as following:
 // ...
 
 const globals = {
-    // ...
-    "rxjs/observable/timer": "rxjs.observable.timer",
-    "rxjs/observable/throw": "rxjs.observable.throw"
-    // ...
-}
+	// ...
+	"rxjs/observable/timer": "rxjs.observable.timer",
+	"rxjs/observable/throw": "rxjs.observable.throw"
+	// ...
+};
 ```
 
 Please ignore tslib unresolved dependency.

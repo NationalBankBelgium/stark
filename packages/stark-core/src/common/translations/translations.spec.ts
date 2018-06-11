@@ -43,13 +43,11 @@ describe("Translations: mergeTranslations", () => {
 	});
 
 	// Inject module dependencies
-	beforeEach(
-		inject([TranslateService], (_translateService: TranslateService) => {
-			translateService = _translateService;
-			translateService.addLangs(["en", "fr", "nl", "de"]);
-			translateService.setDefaultLang("en");
-		})
-	);
+	beforeEach(inject([TranslateService], (_translateService: TranslateService) => {
+		translateService = _translateService;
+		translateService.addLangs(["en", "fr", "nl", "de"]);
+		translateService.setDefaultLang("en");
+	}));
 
 	describe("mergeTranslations", () => {
 		it("should return the merged translations from common, module and app", () => {

@@ -404,18 +404,16 @@ describe("Service: StarkRoutingService", () => {
 	});
 
 	// Inject module dependencies
-	beforeEach(
-		inject([UIRouter, StarkRoutingServiceImpl], (_router: UIRouter, _routingService: StarkRoutingServiceImpl) => {
-			router = _router;
-			$state = router.stateService;
-			routingService = _routingService;
+	beforeEach(inject([UIRouter, StarkRoutingServiceImpl], (_router: UIRouter, _routingService: StarkRoutingServiceImpl) => {
+		router = _router;
+		$state = router.stateService;
+		routingService = _routingService;
 
-			(<Spy>mockLogger.warn).calls.reset();
-			(<Spy>mockLogger.debug).calls.reset();
-			(<Spy>mockLogger.error).calls.reset();
-			mockStore.dispatch.calls.reset();
-		})
-	);
+		(<Spy>mockLogger.warn).calls.reset();
+		(<Spy>mockLogger.debug).calls.reset();
+		(<Spy>mockLogger.error).calls.reset();
+		mockStore.dispatch.calls.reset();
+	}));
 
 	afterEach(() => {
 		// IMPORTANT: reset the url after each test,

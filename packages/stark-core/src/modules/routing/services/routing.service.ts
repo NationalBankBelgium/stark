@@ -358,41 +358,45 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 		// declare the onInvalid handler
 		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#oninvalid
-		this.$state.onInvalid((toState?: TargetState, fromState?: TargetState): HookResult => {
-			const errorType: string = "Invalid state change";
-			const failureAction: Action = new StarkNavigateFailure(
-				(<TargetState>fromState).name(),
-				(<TargetState>toState).name(),
-				(<TargetState>toState).params(),
-				errorType
-			);
-			let message: string =
-				starkRoutingServiceName + ': Error while trying to navigate from "' + (<TargetState>fromState).name() + '"';
-			message += ' to "' + (<TargetState>toState).name() + '"';
+		this.$state.onInvalid(
+			(toState?: TargetState, fromState?: TargetState): HookResult => {
+				const errorType: string = "Invalid state change";
+				const failureAction: Action = new StarkNavigateFailure(
+					(<TargetState>fromState).name(),
+					(<TargetState>toState).name(),
+					(<TargetState>toState).params(),
+					errorType
+				);
+				let message: string =
+					starkRoutingServiceName + ': Error while trying to navigate from "' + (<TargetState>fromState).name() + '"';
+				message += ' to "' + (<TargetState>toState).name() + '"';
 
-			if (toState && !toState.exists()) {
-				message = message + ". The target state does NOT exist";
+				if (toState && !toState.exists()) {
+					message = message + ". The target state does NOT exist";
+				}
+
+				// dispatch corresponding action to allow the user to trigger his own effects if needed
+				this.store.dispatch(failureAction);
+				this.logger.error(message, new Error("Parameters that were passed: " + JSON.stringify((<TargetState>toState).params())));
+
+				// TODO redirect to the generic error page once implemented: https://jira.prd.nbb/browse/NG-847
+				// should probably be done via an effect reacting to the StarkRoutingActions.navigateFailure action
+
+				// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
+				// boolean | TargetState | void | Promise<boolean | TargetState | void>
+				return false;
 			}
-
-			// dispatch corresponding action to allow the user to trigger his own effects if needed
-			this.store.dispatch(failureAction);
-			this.logger.error(message, new Error("Parameters that were passed: " + JSON.stringify((<TargetState>toState).params())));
-
-			// TODO redirect to the generic error page once implemented: https://jira.prd.nbb/browse/NG-847
-			// should probably be done via an effect reacting to the StarkRoutingActions.navigateFailure action
-
-			// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
-			// boolean | TargetState | void | Promise<boolean | TargetState | void>
-			return false;
-		});
+		);
 
 		// provide custom default error handler
 		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#defaulterrorhandler
-		this.$state.defaultErrorHandler((error: any): void => {
-			if (!this.knownRejectionCausesRegex.test(String(error))) {
-				this.logger.error(starkRoutingServiceName + ": defaultErrorHandler => ", error);
+		this.$state.defaultErrorHandler(
+			(error: any): void => {
+				if (!this.knownRejectionCausesRegex.test(String(error))) {
+					this.logger.error(starkRoutingServiceName + ": defaultErrorHandler => ", error);
+				}
 			}
-		});
+		);
 	}
 
 	/**

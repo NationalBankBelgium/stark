@@ -123,7 +123,7 @@
     "install:travis:all": "npm run install:stark-build && npm run install:stark-testing && npm run install:stark-core && npm run install:stark-ui && npm run build:trace && npm run update:starter && npm run update:showcase",
     "ngc": "ngc",
     "precommit": "lint-staged",
-    "prettier-check": "prettier **/*.{css,js,json,pcss,scss,ts} --write",
+    "prettier-check": "prettier **/*.{css,js,json,md,pcss,scss,ts} --write",
     "preupdate:showcase": "npm run clean:showcase",
     "preupdate:starter": "npm run clean:starter",
     "release": "release-it",
