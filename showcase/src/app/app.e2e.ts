@@ -24,10 +24,4 @@ describe("App", () => {
 		const result: boolean = true;
 		expect(subject).toEqual(result);
 	});
-
-	it("should have buttons", async () => {
-		const subject: string = await element(by.css("button")).getText();
-		const result: string = "Submit Value";
-		expect(subject).toEqual(result);
-	});
 });
