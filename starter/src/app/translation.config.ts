@@ -1,6 +1,5 @@
 import { TranslateService } from "@ngx-translate/core";
-import { mergeTranslations } from "../../../packages/stark-core/src/common/translations/translations";
-import { StarkLocale } from "../../../packages/stark-core/src/common/translations/locale.intf";
+import { mergeTranslations, StarkLocale } from "@nationalbankbelgium/stark-core";
 
 const translationsEn: object = require("../assets/translations/en.json");
 const translationsFr: object = require("../assets/translations/fr.json");
