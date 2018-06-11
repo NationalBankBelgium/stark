@@ -36,6 +36,7 @@ import { Deserialize } from "cerialize";
  * Translations
  */
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { initializeTranslation } from "./translation.config";
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -53,10 +54,6 @@ import "../styles/styles.pcss";
 // load SASS styles
 import "../styles/styles.scss";
 /* tslint:enable */
-
-const translationsEn: object = require("../../assets/translations/en.json");
-const translationsFr: object = require("../../assets/translations/fr.json");
-const translationsNl: object = require("../../assets/translations/nl.json");
 
 // Application wide providers
 const APP_PROVIDERS: any[] = [AppState];
@@ -159,15 +156,8 @@ export class AppModule {
 		matIconRegistry: MatIconRegistry,
 		domSanitizer: DomSanitizer
 	) {
+		initializeTranslation(this.translateService);
 		registerMaterialIconSet(matIconRegistry, domSanitizer);
-
-		// TODO should use StarkLanguages, StarkLanguage, etc
-		this.translateService.addLangs(["en", "fr", "nl"]);
-		this.translateService.setTranslation("en", translationsEn, true);
-		this.translateService.setTranslation("fr", translationsFr, true);
-		this.translateService.setTranslation("nl", translationsNl, true);
-		this.translateService.setDefaultLang("en");
-		this.translateService.use("en");
 
 		const user: StarkUser = {
 			uuid: "abc123",
