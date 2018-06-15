@@ -164,8 +164,16 @@ do
           logTrace "Publishing the release (with tag latest)" 2
           npm publish ${file} --access public
         else
-          logTrace "Publishing the nightly release (with tag next)" 2
-          npm publish ${file} --access public --tag next
+          logTrace "Check if nightly build is not already published."
+          LATEST_NPM_VERSION=`npm view @nationalbankbelgium/${PACKAGE} dist-tags.next`
+          FILENAME_LATEST_NPM_PACKAGE="./nationalbankbelgium-${PACKAGE}-${LATEST_NPM_VERSION}.tgz"
+        
+          if [[ ${file} != ${FILENAME_LATEST_NPM_PACKAGE} ]]; then
+            logTrace "Publishing the nightly release (with tag next)" 2
+            npm publish ${file} --access public --tag next
+          else
+            logTrace "Package cannot be published because it is already published." 2
+          fi
         fi
       else
         logTrace "DRY RUN, skipping npm publish!" 2
