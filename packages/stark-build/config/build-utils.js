@@ -51,11 +51,15 @@ function getEnvironmentFile(environment) {
 	if (typeof environment === "string") {
 		let fileName = helpers.root("src/environments/environment.ts");
 		let fileNameAlt;
-		let angularCliEnvConfig = ANGULAR_APP_CONFIG.config.architect.build.configurations.environment;
+		let angularCliEnvConfig = ANGULAR_APP_CONFIG.config.architect.build.configurations[environment];
 
-		if (angularCliEnvConfig && angularCliEnvConfig.fileReplacements) {
-			fileName = helpers.root(angularCliEnvConfig.fileReplacements.with);
-			fileNameAlt = helpers.root(angularCliEnvConfig.fileReplacements.replace);
+		if (angularCliEnvConfig && angularCliEnvConfig.fileReplacements instanceof Array) {
+			for (let fileReplacement of angularCliEnvConfig.fileReplacements) {
+				if (fileReplacement.replace.match(/environment/)) {
+					fileName = helpers.root(angularCliEnvConfig.fileReplacements[0].with);
+					fileNameAlt = helpers.root(angularCliEnvConfig.fileReplacements[0].replace);
+				}
+			}
 		}
 
 		if (fs.existsSync(fileName)) {
