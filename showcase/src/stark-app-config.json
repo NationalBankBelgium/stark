@@ -16,6 +16,7 @@
   "loggingFlushPersistSize": 50,
   "loggingFlushApplicationId": "STARK",
   "loggingFlushResourceName": "logging",
+  "loggingCorrelationIdHttpHeaderName": "correlation-id",
   "routerLoggingEnabled": null,
   "publicApp": false,
   "backends": {
@@ -24,8 +25,8 @@
       "name": "default",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "fakePreAuthenticationEnabled": true,
-      "fakePreAuthenticationRolePrefix": "",
+      "devAuthenticationEnabled": true,
+      "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""
     },
@@ -34,8 +35,8 @@
       "name": "userProfile",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "fakePreAuthenticationEnabled": false,
-      "fakePreAuthenticationRolePrefix": "",
+      "devaAuthenticationEnabled": false,
+      "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""
     },
@@ -44,8 +45,8 @@
       "name": "logging",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "fakePreAuthenticationEnabled": false,
-      "fakePreAuthenticationRolePrefix": "",
+      "devAuthenticationEnabled": false,
+      "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""
     },
@@ -54,8 +55,8 @@
       "name": "rbac",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "fakePreAuthenticationEnabled": false,
-      "fakePreAuthenticationRolePrefix": "",
+      "devAuthenticationEnabled": false,
+      "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""
     }

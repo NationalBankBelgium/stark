@@ -26,14 +26,13 @@ import {
 	StarkUserActivityTrackingResume
 } from "../actions";
 import { StarkSessionServiceImpl, starkUnauthenticatedUserError } from "./session.service";
-import { StarkPreAuthentication, StarkSession } from "../entities";
+import { StarkSession } from "../entities";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkUser } from "../../user/entities";
 import { StarkLoggingService } from "../../logging/services";
 import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
 import { MockStarkRoutingService } from "../../routing/testing";
-import { StarkHttpHeaders } from "../../http/constants";
 import { starkSessionExpiredStateName } from "../../../common/routes";
 import { StarkCoreApplicationState } from "../../../common/store";
 import Spy = jasmine.Spy;
@@ -52,6 +51,7 @@ describe("Service: StarkSessionService", () => {
 	let mockTranslateService: SpyObj<TranslateService>;
 	let sessionService: SessionServiceHelper;
 	const mockCorrelationId: string = "12345";
+	const mockCorrelationIdHeaderName: string = "The-Correlation-Id";
 	const mockUser: StarkUser = {
 		uuid: "1",
 		username: "jdoe",
@@ -77,7 +77,7 @@ describe("Service: StarkSessionService", () => {
 		appConfig.logoutUrl = "http://localhost:5000/logout";
 		appConfig.publicApp = false;
 
-		mockLogger = new MockStarkLoggingService(mockCorrelationId);
+		mockLogger = new MockStarkLoggingService(mockCorrelationId, mockCorrelationIdHeaderName);
 		mockRoutingService = new MockStarkRoutingService();
 		mockIdleService = jasmine.createSpyObj<Idle>("idleService,", [
 			"setIdle",
@@ -577,21 +577,14 @@ describe("Service: StarkSessionService", () => {
 			mockKeepaliveService.interval.calls.reset();
 			mockKeepaliveService.request.calls.reset();
 
-			// make sure the fake pre-auth info is set correctly
-			const preAuthDefaults: StarkPreAuthentication = sessionServiceHelper.getFakePreAuthenticationDefaults();
+			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
+			expectedDevAuthHeaders.set(mockCorrelationIdHeaderName, mockCorrelationId);
+			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
+			expectedDevAuthHeaders.set("firstnameTestHeader", mockUser.firstName);
+			expectedDevAuthHeaders.set("lastnameTestHeader", mockUser.lastName);
+			expectedDevAuthHeaders.set("emailTestHeader", <string>mockUser.email);
 
-			const expectedPreAuthHeaders: object = {};
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_USER_NAME] = mockUser.username;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_FIRST_NAME] = mockUser.firstName;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LAST_NAME] = mockUser.lastName;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_MAIL] = mockUser.email;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = mockUser.language;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] =
-				mockUser.referenceNumber + preAuthDefaults.descriptionSeparator + mockUser.workpost;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = mockUser.roles.join(preAuthDefaults.roleSeparator);
-
-			sessionServiceHelper.setFakePreAuthenticationHeaders(mockUser);
-
+			sessionServiceHelper.setDevAuthenticationHeaders(expectedDevAuthHeaders);
 			sessionServiceHelper.configureKeepaliveService();
 
 			expect(mockKeepaliveService.interval).toHaveBeenCalledTimes(1);
@@ -599,11 +592,7 @@ describe("Service: StarkSessionService", () => {
 			expect(mockKeepaliveService.request).toHaveBeenCalledTimes(1);
 
 			let mockHeadersObj: HttpHeaders = new HttpHeaders();
-			mockHeadersObj = mockHeadersObj.set(StarkHttpHeaders.NBB_CORRELATION_ID, mockCorrelationId);
-
-			for (const key of Object.keys(expectedPreAuthHeaders)) {
-				mockHeadersObj = mockHeadersObj.set(key, expectedPreAuthHeaders[key]);
-			}
+			expectedDevAuthHeaders.forEach((value: string, key: string) => (mockHeadersObj = mockHeadersObj.set(key, value)));
 
 			expect(mockKeepaliveService.request).toHaveBeenCalledWith(
 				new HttpRequest<void>("GET", <string>appConfig.keepAliveUrl, { headers: mockHeadersObj })
@@ -792,79 +781,53 @@ describe("Service: StarkSessionService", () => {
 		});
 	});
 
-	describe("setFakePreAuthenticationHeaders", () => {
-		it("should construct the pre-authentication headers based on the user that is passed", () => {
-			const preAuthDefaults: StarkPreAuthentication = sessionService.getFakePreAuthenticationDefaults();
+	describe("setDevAuthenticationHeaders", () => {
+		it("should construct the authentication headers based on the http headers that are passed", () => {
+			expect(sessionService["_devAuthenticationHeaders"]).toBe(<any>undefined);
 
-			const expectedPreAuthHeaders: object = {};
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_USER_NAME] = mockUser.username;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_FIRST_NAME] = mockUser.firstName;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LAST_NAME] = mockUser.lastName;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_MAIL] = mockUser.email;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = mockUser.language;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] =
-				mockUser.referenceNumber + preAuthDefaults.descriptionSeparator + mockUser.workpost;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = mockUser.roles.join(preAuthDefaults.roleSeparator);
+			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
+			expectedDevAuthHeaders.set(mockCorrelationIdHeaderName, mockCorrelationId);
+			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
+			expectedDevAuthHeaders.set("firstnameTestHeader", mockUser.firstName);
+			expectedDevAuthHeaders.set("lastnameTestHeader", mockUser.lastName);
+			expectedDevAuthHeaders.set("emailTestHeader", <string>mockUser.email);
 
-			sessionService.setFakePreAuthenticationHeaders(mockUser);
+			sessionService.setDevAuthenticationHeaders(expectedDevAuthHeaders);
+			expect(sessionService["_devAuthenticationHeaders"]).toBeDefined();
+			expect(sessionService.devAuthenticationHeaders.size).toBe(5);
 
-			expect(sessionService.fakePreAuthenticationHeaders.size).toBe(7);
-
-			for (const header of Object.keys(expectedPreAuthHeaders)) {
-				expect(sessionService.fakePreAuthenticationHeaders.has(header)).toBe(true);
-				expect(sessionService.fakePreAuthenticationHeaders.get(header)).toBe(expectedPreAuthHeaders[header]);
-			}
-		});
-
-		it("should construct only certain pre-authentication headers and with default values in case no user is passed", () => {
-			const preAuthDefaults: StarkPreAuthentication = sessionService.getFakePreAuthenticationDefaults();
-
-			const expectedPreAuthHeaders: object = {};
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_LANGUAGE] = preAuthDefaults.defaults.language;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_DESCRIPTION] =
-				preAuthDefaults.defaults.referenceNumber + preAuthDefaults.descriptionSeparator + preAuthDefaults.defaults.workpost;
-			expectedPreAuthHeaders[StarkHttpHeaders.NBB_ROLES] = "";
-
-			sessionService.setFakePreAuthenticationHeaders();
-
-			expect(sessionService.fakePreAuthenticationHeaders.size).toBe(3);
-
-			for (const header of Object.keys(expectedPreAuthHeaders)) {
-				expect(sessionService.fakePreAuthenticationHeaders.has(header)).toBe(true);
-				expect(sessionService.fakePreAuthenticationHeaders.get(header)).toBe(expectedPreAuthHeaders[header]);
-			}
+			expectedDevAuthHeaders.forEach((_value: string, key: string) => {
+				expect(sessionService.devAuthenticationHeaders.has(key)).toBe(true);
+				expect(sessionService.devAuthenticationHeaders.get(key)).toBe(_value);
+			});
 		});
 	});
 
-	describe("fakePreAuthenticationHeaders", () => {
+	describe("devAuthenticationHeaders", () => {
 		it("should return the pre-authentication headers if they were constructed", () => {
-			const expectedPreAuthHeaders: Map<string, string> = new Map<string, string>();
-			expectedPreAuthHeaders.set(StarkHttpHeaders.NBB_USER_NAME, "jdoe");
-			expectedPreAuthHeaders.set(StarkHttpHeaders.NBB_FIRST_NAME, "john");
-			expectedPreAuthHeaders.set(StarkHttpHeaders.NBB_LAST_NAME, "doe");
-			expectedPreAuthHeaders.set(StarkHttpHeaders.NBB_MAIL, "jdoe@email.com");
-			expectedPreAuthHeaders.set(StarkHttpHeaders.NBB_LANGUAGE, "es");
-			expectedPreAuthHeaders.set(StarkHttpHeaders.NBB_DESCRIPTION, "dummy description");
-			expectedPreAuthHeaders.set(StarkHttpHeaders.NBB_ROLES, "dummy roles");
+			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
+			expectedDevAuthHeaders.set("usernameTestHeader", "doej");
+			expectedDevAuthHeaders.set("firstnameTestHeader", "john");
+			expectedDevAuthHeaders.set("lastTestHeader", "doe");
 
-			sessionService.setInternalFakePreAuthenticationHeaders(expectedPreAuthHeaders);
+			sessionService.setInternalDevAuthenticationHeaders(expectedDevAuthHeaders);
 
-			const fakePreAuthenticationHeaders: Map<string, string> = sessionService.fakePreAuthenticationHeaders;
+			const devAuthenticationHeaders: Map<string, string> = sessionService.devAuthenticationHeaders;
 
-			expect(fakePreAuthenticationHeaders.size).toBe(expectedPreAuthHeaders.size);
+			expect(devAuthenticationHeaders.size).toBe(expectedDevAuthHeaders.size);
 
-			expectedPreAuthHeaders.forEach((value: string, header: string) => {
-				expect(fakePreAuthenticationHeaders.has(header)).toBe(true);
-				expect(fakePreAuthenticationHeaders.get(header)).toBe(value);
+			expectedDevAuthHeaders.forEach((value: string, header: string) => {
+				expect(expectedDevAuthHeaders.has(header)).toBe(true);
+				expect(expectedDevAuthHeaders.get(header)).toBe(value);
 			});
 		});
 
 		it("should return an empty map if the pre-authentication headers were not constructed", () => {
-			sessionService.setInternalFakePreAuthenticationHeaders(undefined);
+			sessionService.setInternalDevAuthenticationHeaders(undefined);
 
-			const fakePreAuthenticationHeaders: Map<string, string> = sessionService.fakePreAuthenticationHeaders;
+			const devAuthenticationHeaders: Map<string, string> = sessionService.devAuthenticationHeaders;
 
-			expect(fakePreAuthenticationHeaders.size).toBe(0);
+			expect(devAuthenticationHeaders.size).toBe(0);
 		});
 	});
 });
@@ -914,8 +877,8 @@ class SessionServiceHelper extends StarkSessionServiceImpl {
 		super.stopKeepaliveService();
 	}
 
-	public setFakePreAuthenticationHeaders(user?: StarkUser): void {
-		super.setFakePreAuthenticationHeaders(user);
+	public setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string>): void {
+		super.setDevAuthenticationHeaders(devAuthenticationHeaders);
 	}
 
 	// override parent's implementation to prevent actual HTTP request to be sent!
@@ -924,11 +887,7 @@ class SessionServiceHelper extends StarkSessionServiceImpl {
 		return of(undefined);
 	}
 
-	public getFakePreAuthenticationDefaults(): StarkPreAuthentication {
-		return this.fakePreAuthentication;
-	}
-
-	public setInternalFakePreAuthenticationHeaders(headers?: Map<string, string>): Map<string, string> {
-		return (this._fakePreAuthenticationHeaders = <any>headers);
+	public setInternalDevAuthenticationHeaders(headers?: Map<string, string>): void {
+		this._devAuthenticationHeaders = <any>headers;
 	}
 }

@@ -23,9 +23,9 @@ export class StarkBackendImpl implements StarkBackend {
 	@autoserializeAs(StarkBackendAuthenticationTypes)
 	public authenticationType: StarkBackendAuthenticationTypes;
 
-	@autoserialize public fakePreAuthenticationEnabled: boolean; // optional (only needed if pre-authentication is required)
+	@autoserialize public devAuthenticationEnabled: boolean; // optional (only needed if pre-authentication is required)
 
-	@autoserialize public fakePreAuthenticationRolePrefix: string; // optional: only needed if pre-authentication is enabled
+	@autoserialize public devAuthenticationRolePrefix: string; // optional: only needed if pre-authentication is enabled
 
 	@autoserialize public loginResource: string; // optional (only needed if authentication is required)
 

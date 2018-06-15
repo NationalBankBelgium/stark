@@ -17,10 +17,10 @@ export const STARK_SESSION_SERVICE: InjectionToken<StarkSessionService> = new In
  */
 export interface StarkSessionService {
 	/**
-	 * NBB-specific headers necessary for faking pre-authentication in non-production environments
-	 * @returns A Map containing the fake pre-authentication headers
+	 * Authentication headers necessary for non-production environments
+	 * @returns A Map containing the development authentication headers
 	 */
-	readonly fakePreAuthenticationHeaders: Map<string, string>;
+	readonly devAuthenticationHeaders: Map<string, string>;
 
 	/**
 	 * Returns the session's current user
@@ -69,4 +69,10 @@ export interface StarkSessionService {
 	 * It dispatches a USER_ACTIVITY_TRACKING_RESUME action to the NGRX-Store
 	 */
 	resumeUserActivityTracking(): void;
+
+	/**
+	 * Add authentication headers to the session
+	 * They are use by the http service to authenticate the user
+	 */
+	setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string>): void;
 }

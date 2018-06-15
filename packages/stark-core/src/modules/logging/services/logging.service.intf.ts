@@ -22,6 +22,11 @@ export interface StarkLoggingService {
 	readonly correlationId: string;
 
 	/**
+	 * The name that will be used to add the CorrelationId to the http headers
+	 */
+	readonly correlationIdHttpHeaderName: string;
+
+	/**
 	 * Generates a new correlationId. This method can be used at the start of a new action, for instance when the user clicks a button to save data.
 	 */
 	generateNewCorrelationId(): string;

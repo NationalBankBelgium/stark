@@ -46,6 +46,10 @@ import { Deserialize } from "cerialize";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { initializeTranslation } from "./translation.config";
 /*
+ * DEV Authentication
+ */
+import { getAuthenticationHeaders } from "./authentication.config";
+/*
  * Platform and Environment providers/directives/pipes
  */
 import { environment } from "../environments/environment";
@@ -177,14 +181,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 	]
 })
 export class AppModule {
-	private user: StarkUser = {
-		uuid: "abc123",
-		username: "John",
-		firstName: "Doe",
-		lastName: "Smith",
-		roles: ["dummy role"]
-	};
-
 	public constructor(
 		private translateService: TranslateService,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
@@ -194,6 +190,16 @@ export class AppModule {
 		initializeTranslation(this.translateService);
 		registerMaterialIconSet(matIconRegistry, domSanitizer);
 
-		this.sessionService.login(this.user);
+		const user: StarkUser = {
+			uuid: "abc123",
+			username: "John",
+			firstName: "Doe",
+			lastName: "Smith",
+			roles: ["dummy role"]
+		};
+
+		const devAuthenticationHeaders: Map<string, string> = getAuthenticationHeaders(user);
+		this.sessionService.setDevAuthenticationHeaders(devAuthenticationHeaders);
+		this.sessionService.login(user);
 	}
 }

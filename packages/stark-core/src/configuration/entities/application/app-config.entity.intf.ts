@@ -70,6 +70,11 @@ export interface StarkApplicationConfig {
 	loggingFlushDisabled?: boolean;
 
 	/**
+	 * This name will be used as the http header field that passes the correlationId to a backend.
+	 */
+	loggingCorrelationIdHttpHeaderName: string;
+
+	/**
 	 * Enable router logging
 	 */
 	routerLoggingEnabled: boolean;

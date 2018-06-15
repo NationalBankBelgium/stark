@@ -130,6 +130,10 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		return this._correlationId;
 	}
 
+	public get correlationIdHttpHeaderName(): string {
+		return this.appConfig.loggingCorrelationIdHttpHeaderName;
+	}
+
 	public generateNewCorrelationId(): string {
 		this._correlationId = uuid.v4();
 		return this._correlationId;

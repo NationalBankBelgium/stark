@@ -22,40 +22,4 @@ export class StarkHttpHeaders {
 	 * Used to prevent Cross Site Request Forgery
 	 */
 	public static XSRF_TOKEN: string = "X-XSRF-TOKEN";
-
-	// NBB HTTP headers
-	/**
-	 * The correlation id between front-end and back-end.
-	 * It is generated in the front-end and is sent on every request to the backend.
-	 */
-	public static NBB_CORRELATION_ID: string = "nbb-correlation-id";
-	// authentication
-	/**
-	 * The user's username
-	 */
-	public static NBB_USER_NAME: string = "nbbuser";
-	/**
-	 * The user's firstname
-	 */
-	public static NBB_FIRST_NAME: string = "nbbfirstname";
-	/**
-	 * The user's lastname
-	 */
-	public static NBB_LAST_NAME: string = "nbblastname";
-	/**
-	 * The user's email adress
-	 */
-	public static NBB_MAIL: string = "nbbmail";
-	/**
-	 * The user's language
-	 */
-	public static NBB_LANGUAGE: string = "nbblanguage";
-	/**
-	 * Used to describe the user (team, workspace, ...)
-	 */
-	public static NBB_DESCRIPTION: string = "nbbdescription";
-	/**
-	 * The user's groups (ADMIN, ...)
-	 */
-	public static NBB_ROLES: string = "nbbgroups";
 }

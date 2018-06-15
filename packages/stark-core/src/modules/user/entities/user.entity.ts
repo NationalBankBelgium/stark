@@ -76,7 +76,6 @@ export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, St
 	 * This is a callback method provided by cerialize in order to post-process the de-serialized json object.
 	 * @param instance - Instantiated object with its properties already set as defined via the serializer annotations
 	 * @param json - Raw json object retrieved from the http call
-	 * @link https://confluence.prd.nbb/display/jag/REST+-+How-to+configure+the+user+profile+resource
 	 */
 	public static OnDeserialized(instance: StarkUser, json: any): void {
 		if (json.details) {

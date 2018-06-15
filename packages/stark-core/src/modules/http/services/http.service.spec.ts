@@ -42,6 +42,7 @@ import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 describe("Service: StarkHttpService", () => {
 	let loggerMock: StarkLoggingService;
 	let mockSessionService: StarkSessionService;
+	let mockDevAuthHeaders: Map<string, string>;
 	let httpMock: SpyObj<HttpClient>;
 	let starkHttpService: HttpServiceHelper<MockResource>;
 	let mockBackend: StarkBackend;
@@ -73,6 +74,7 @@ describe("Service: StarkHttpService", () => {
 	const expiresValue: string = "-1";
 
 	const mockCorrelationId: string = "fooBarCorrelationIdentifier";
+	const mockCorrelationIdHeaderName: string = "The-Correlation-Id";
 	const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
 	const httpHeaders: { [name: string]: string } = {};
@@ -747,7 +749,19 @@ describe("Service: StarkHttpService", () => {
 				prop1: 1234,
 				prop2: "whatever",
 				prop3: "2016-03-18T18:25:43.511Z",
-				prop4: ["some custom value", "false", "null", "", true, false, 0, { name: "Christopher", surname: "Cortes" }]
+				prop4: [
+					"some custom value",
+					"false",
+					"null",
+					"",
+					true,
+					false,
+					0,
+					{
+						name: "Christopher",
+						surname: "Cortes"
+					}
+				]
 			};
 
 			beforeEach(() => {
@@ -1142,16 +1156,23 @@ describe("Service: StarkHttpService", () => {
 			metadata: mockResourceMetadata
 		};
 		// Make sure that a correlation identifier is defined correctly on the logger
-		loggerMock = new MockStarkLoggingService(mockCorrelationId);
-		mockSessionService = new MockStarkSessionService();
+		loggerMock = new MockStarkLoggingService(mockCorrelationId, mockCorrelationIdHeaderName);
+
+		mockDevAuthHeaders = new Map<string, string>();
+		mockDevAuthHeaders.set(mockCorrelationIdHeaderName, mockCorrelationId);
+		mockDevAuthHeaders.set("username", "DOEJOHN");
+		mockDevAuthHeaders.set("firstname", "John");
+		mockDevAuthHeaders.set("lastname", "Doe");
+		mockSessionService = new MockStarkSessionService(mockDevAuthHeaders);
+
 		httpMock = createSpyObj<HttpClient>("HttpClient", ["get", "put", "post", "delete"]);
 
 		starkHttpService = new HttpServiceHelper<MockResource>(loggerMock, mockSessionService, httpMock);
 		starkHttpService.retryDelay = 10; // override retry delay to make unit tests faster
 
 		headersMap = new Map<string, string>();
-		// Assume that the nbb-correlation-id header will always be set
-		headersMap.set(StarkHttpHeaders.NBB_CORRELATION_ID, mockCorrelationId);
+		// Assume that the correlation-id header will always be set
+		headersMap.set(mockCorrelationIdHeaderName, mockCorrelationId);
 	});
 
 	describe("executeSingleItemRequest", () => {
@@ -1414,7 +1435,7 @@ describe("Service: StarkHttpService", () => {
 		});
 	});
 
-	describe("addFakePreAuthenticationHeaders", () => {
+	describe("addDevAuthenticationHeaders", () => {
 		it("should get the authentication headers from the Session service and add them to the current request headers", () => {
 			const dummyHeaderName: string = "some header";
 			const dummyHeaderValue: string = "some value";
@@ -1429,18 +1450,18 @@ describe("Service: StarkHttpService", () => {
 			};
 			request.headers.set(dummyHeaderName, dummyHeaderValue);
 
-			const fakePreAuthenticationHeaders: Map<string, string> = mockSessionService.fakePreAuthenticationHeaders;
-			expect(fakePreAuthenticationHeaders.size).not.toBe(0);
+			const devAuthenticationHeaders: Map<string, string> = mockSessionService.devAuthenticationHeaders;
+			expect(devAuthenticationHeaders.size).toBe(mockDevAuthHeaders.size);
 
-			const requestWithPreAuthHeaders: StarkHttpRequest = starkHttpService.addFakePreAuthenticationHeaders(request);
+			const requestWithDevAuthHeaders: StarkHttpRequest = starkHttpService.addDevAuthenticationHeaders(request);
 
-			expect(requestWithPreAuthHeaders.headers.size).toBe(fakePreAuthenticationHeaders.size + 1); // plus the custom header
-			expect(requestWithPreAuthHeaders.headers.has(dummyHeaderName)).toBe(true);
-			expect(requestWithPreAuthHeaders.headers.get(dummyHeaderName)).toBe(dummyHeaderValue);
+			expect(requestWithDevAuthHeaders.headers.size).toBe(devAuthenticationHeaders.size + 1); // plus the custom header
+			expect(requestWithDevAuthHeaders.headers.has(dummyHeaderName)).toBe(true);
+			expect(requestWithDevAuthHeaders.headers.get(dummyHeaderName)).toBe(dummyHeaderValue);
 
-			fakePreAuthenticationHeaders.forEach((headerValue: string, header: string) => {
-				expect(requestWithPreAuthHeaders.headers.has(header)).toBe(true);
-				expect(requestWithPreAuthHeaders.headers.get(header)).toBe(headerValue);
+			devAuthenticationHeaders.forEach((headerValue: string, header: string) => {
+				expect(requestWithDevAuthHeaders.headers.has(header)).toBe(true);
+				expect(requestWithDevAuthHeaders.headers.get(header)).toBe(headerValue);
 			});
 		});
 	});
@@ -1463,13 +1484,13 @@ describe("Service: StarkHttpService", () => {
 			const correlationId: string = loggerMock.correlationId;
 			expect(correlationId).toBe(mockCorrelationId);
 
-			const requestWithCorrelationIdHeader: StarkHttpRequest = starkHttpService.addCorrelationIdentifierHeader(request);
+			const requestWithCorrelationIdHeader: StarkHttpRequest<MockResource> = starkHttpService.addCorrelationIdentifierHeader(request);
 
 			expect(requestWithCorrelationIdHeader.headers.size).toBe(2); // plus the custom header
 			expect(requestWithCorrelationIdHeader.headers.has(dummyHeaderName)).toBe(true);
 			expect(requestWithCorrelationIdHeader.headers.get(dummyHeaderName)).toBe(dummyHeaderValue);
-			expect(requestWithCorrelationIdHeader.headers.has(StarkHttpHeaders.NBB_CORRELATION_ID)).toBe(true);
-			expect(requestWithCorrelationIdHeader.headers.get(StarkHttpHeaders.NBB_CORRELATION_ID)).toBe(correlationId);
+			expect(requestWithCorrelationIdHeader.headers.has(loggerMock.correlationIdHttpHeaderName)).toBe(true);
+			expect(requestWithCorrelationIdHeader.headers.get(loggerMock.correlationIdHttpHeaderName)).toBe(correlationId);
 		});
 	});
 });
@@ -1518,8 +1539,8 @@ class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P>
 		super(logger, sessionService, $http);
 	}
 
-	public addFakePreAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
-		return super.addFakePreAuthenticationHeaders(request);
+	public addDevAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
+		return super.addDevAuthenticationHeaders(request);
 	}
 
 	public addCorrelationIdentifierHeader(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
