@@ -47,3 +47,28 @@ logInfo() {
   printf -v spacing '%*s' "$numSpaces"
   printf "${spacing}%s\n" "$message"
 }
+
+#######################################
+# Verifies a directory isn't in the ignored list
+# Arguments:
+#   param1 - Source folder
+#   param2 - Destination folder
+#   param3 - Options {Array}
+#######################################
+syncFiles() {
+  logTrace "${FUNCNAME[0]}" 1
+  logDebug "Syncing files from $1 to $2" 1
+  cd $1; # we go to the folder to execute it with relative paths
+  mkdir -p $2
+  local REL_PATH_TO_DESTINATION=$(perl -e 'use File::Spec; print File::Spec->abs2rel(@ARGV) . "\n"' $2 $1)
+  # local REL_PATH_TO_DESTINATION=$(realpath --relative-to="." "$2");
+  shift 2; # those 2 parameters are not needed anymore
+	
+  logTrace "Syncing files using: rsync" 2
+  if [[ ${TRACE} == true ]]; then
+    rsync "${@}" ./ $REL_PATH_TO_DESTINATION/ -v
+  else
+    rsync "${@}" ./ $REL_PATH_TO_DESTINATION/
+  fi
+  cd - > /dev/null; # go back to the previous folder without any output
+}

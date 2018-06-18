@@ -6,13 +6,15 @@ dist/
 /.tmp/
 tmp/
 
-
 # Reports directory
 reports/
 
 # Logs
 logs/
 *.log
+
+# Sec
+stark-ssh
 
 # Runtime data
 pids
