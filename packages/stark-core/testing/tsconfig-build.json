@@ -3,7 +3,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "../",
-    "typeRoots": ["../node_modules/@types", "../node_modules/@nationalbankbelgium/stark-testing/node_modules/@types"],
+    "typeRoots": [
+      "../node_modules/@types",
+      "../node_modules/@nationalbankbelgium/stark-testing/node_modules/@types",
+      "../../stark-build/typings"
+    ],
+    "paths": {
+      "environments/environment": ["../src/common/environment"],
+      "@nationalbankbelgium/stark-core": ["../"]
+    },
     "outDir": "../../../dist/packages/stark-core"
   },
 

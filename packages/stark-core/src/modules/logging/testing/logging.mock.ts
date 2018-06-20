@@ -1,4 +1,4 @@
-import { StarkLoggingService } from "../services";
+import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
  * Mock class of the StarkLoggingService interface.

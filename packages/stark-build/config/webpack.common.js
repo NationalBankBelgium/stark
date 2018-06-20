@@ -12,6 +12,7 @@ const commonData = require("./webpack.common-data.js"); // common configuration 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BaseHrefWebpackPlugin = require("base-href-webpack-plugin").BaseHrefWebpackPlugin;
+const DefinePlugin = require("webpack/lib/DefinePlugin");
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const { AngularCompilerPlugin } = require("@ngtools/webpack");
@@ -30,14 +31,14 @@ const buildUtils = require("./build-utils");
 module.exports = options => {
 	const isProd = options.ENV === "production";
 	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
-	const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
+	const supportES2015 = buildUtils.supportES2015(METADATA.TS_CONFIG_PATH);
 
 	const entry = {
 		polyfills: "./src/polyfills.browser.ts",
 		main: "./src/main.browser.ts"
 	};
 
-	const tsConfigApp = buildUtils.readTsConfig(helpers.root(METADATA.tsConfigPath));
+	const tsConfigApp = buildUtils.readTsConfig(helpers.root(METADATA.TS_CONFIG_PATH));
 
 	const defaultNgcOptions = {
 		generateCodeForLibraries: true,
@@ -342,24 +343,26 @@ module.exports = options => {
 		 * See: http://webpack.github.io/docs/configuration.html#plugins
 		 */
 		plugins: [
-			// /**
-			//  * Plugin: DefinePlugin
-			//  * Description: Define free variables.
-			//  * Useful for having development builds with debug logging or adding global constants.
-			//  *
-			//  * Environment helpers
-			//  *
-			//  * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-			//  */
-			// // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
-			// new DefinePlugin({
-			// 	'ENV': JSON.stringify(METADATA.ENV),
-			// 	'HMR': METADATA.HMR,
-			// 	'AOT': METADATA.AOT,
-			// 	'process.env.ENV': JSON.stringify(METADATA.ENV),
-			// 	'process.env.NODE_ENV': JSON.stringify(METADATA.ENV),
-			// 	'process.env.HMR': METADATA.HMR
-			// }),
+			/**
+			 * Plugin: DefinePlugin
+			 * Description: Define free variables.
+			 * Useful for having development builds with debug logging or adding global constants.
+			 *
+			 * Environment helpers
+			 * IMPORTANT: when adding more properties make sure you include them in typings/environment.d.ts
+			 *
+			 * See: https://webpack.js.org/plugins/define-plugin
+			 */
+			new DefinePlugin({
+				ENV: JSON.stringify(METADATA.ENV),
+				HMR: METADATA.HMR,
+				AOT: METADATA.AOT, // TODO: is this needed?
+				"process.env": {
+					ENV: JSON.stringify(METADATA.ENV),
+					NODE_ENV: JSON.stringify(METADATA.ENV),
+					HMR: METADATA.HMR
+				}
+			}),
 
 			/**
 			 * Plugin: AngularNamedLazyChunksWebpackPlugin
@@ -441,7 +444,7 @@ module.exports = options => {
 			 */
 			new HtmlWebpackPlugin({
 				template: "src/index.html",
-				title: METADATA.title,
+				title: METADATA.TITLE,
 				chunksSortMode: function(a, b) {
 					const entryPoints = ["inline", "polyfills", "sw-register", "styles", "vendor", "main"];
 					return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
@@ -493,7 +496,7 @@ module.exports = options => {
 				},
 				platform: 0, // 0 = browser, 1 = server
 				compilerOptions: appNgcOptions,
-				tsConfigPath: METADATA.tsConfigPath
+				tsConfigPath: METADATA.TS_CONFIG_PATH
 			})
 
 			/**

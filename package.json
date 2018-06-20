@@ -152,7 +152,7 @@
     "update:starter": "npm run clean:starter && npm run install:starter"
   },
   "lint-staged": {
-    "*.{css,js,json,pcss,scss,ts}": [
+    "*.{css,js,json,md,pcss,scss,ts}": [
       "prettier --write",
       "git add"
     ]

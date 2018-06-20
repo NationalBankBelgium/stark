@@ -10,6 +10,7 @@
     "paths": {
       "rxjs/*": ["../node_modules/rxjs/*"],
       "@angular/*": ["../node_modules/@angular/*"],
+      "environments/environment": ["./stark-core/src/common/environment"],
       "@nationalbankbelgium/stark-*": ["./stark-*"]
     },
     "skipDefaultLibCheck": true,
@@ -17,6 +18,7 @@
     "sourceMap": false,
     "typeRoots": [
       "./stark-build/node_modules/@types",
+      "./stark-build/typings",
       "./stark-core/node_modules/@types",
       "./stark-testing/node_modules/@types",
       "./stark-ui/node_modules/@types"

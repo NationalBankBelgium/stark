@@ -4,24 +4,24 @@ const fs = require("fs");
 const helpers = require("./helpers");
 const ngCliUtils = require("./ng-cli-utils");
 
-const _getAngularCliAppConfig = getAngularCliAppConfig();
+const angularCliAppConfig = ngCliUtils.getAngularCliAppConfig(helpers.root("angular.json"));
 const ANGULAR_APP_CONFIG = {
-	config: _getAngularCliAppConfig,
-	deployUrl: _getAngularCliAppConfig.architect.build.options.deployUrl || "",
-	baseHref: _getAngularCliAppConfig.architect.build.options.baseHref || "/",
-	sourceRoot: _getAngularCliAppConfig.sourceRoot,
-	outputPath: _getAngularCliAppConfig.architect.build.options.outputPath
+	config: angularCliAppConfig,
+	deployUrl: angularCliAppConfig.architect.build.options.deployUrl || "",
+	baseHref: angularCliAppConfig.architect.build.options.baseHref || "/",
+	sourceRoot: angularCliAppConfig.sourceRoot,
+	outputPath: angularCliAppConfig.architect.build.options.outputPath
 };
 
 const DEFAULT_METADATA = {
-	title: "Stark Application by @NationalBankBelgium",
-	baseUrl: "/",
-	isDevServer: helpers.isWebpackDevServer(),
+	TITLE: "Stark Application by @NationalBankBelgium",
+	BASE_URL: "/",
+	IS_DEV_SERVER: helpers.isWebpackDevServer(),
 	HMR: helpers.hasProcessFlag("hot"),
 	AOT: process.env.BUILD_AOT || helpers.hasNpmFlag("aot"),
 	E2E: !!process.env.BUILD_E2E,
 	WATCH: helpers.hasProcessFlag("watch"),
-	tsConfigPath: ANGULAR_APP_CONFIG.config.architect.build.options.tsConfig,
+	TS_CONFIG_PATH: ANGULAR_APP_CONFIG.config.architect.build.options.tsConfig,
 	environment: ""
 };
 
@@ -76,11 +76,11 @@ function getEnvironmentFile(environment) {
  * Read the tsconfig to determine if we should prefer ES2015 modules.
  * Load rxjs path aliases.
  * https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md#build-and-treeshaking
- * @param supportES2015 Set to true when the output of typescript is >= ES6
+ * @param shouldSupportES2015 Set to true when the output of typescript is >= ES6
  */
-function rxjsAlias(supportES2015) {
+function rxjsAlias(shouldSupportES2015) {
 	try {
-		const rxjsPathMappingImport = supportES2015 ? "rxjs/_esm2015/path-mapping" : "rxjs/_esm5/path-mapping";
+		const rxjsPathMappingImport = shouldSupportES2015 ? "rxjs/_esm2015/path-mapping" : "rxjs/_esm5/path-mapping";
 		const rxPaths = require(rxjsPathMappingImport);
 		return rxPaths();
 	} catch (e) {
@@ -141,25 +141,6 @@ function getApplicationAssetsConfig() {
 	}
 
 	return [];
-}
-
-function getAngularCliAppConfig() {
-	const applicationAngularCliConfigPath = helpers.root("angular.json");
-	if (fs.existsSync(applicationAngularCliConfigPath)) {
-		const angularCliConfig = require(applicationAngularCliConfigPath);
-		const cliConfig = ngCliUtils.validateAngularCLIConfig(angularCliConfig);
-		if (cliConfig) {
-			if (cliConfig.defaultProject && cliConfig.projects[cliConfig.defaultProject]) {
-				return cliConfig.projects[cliConfig.defaultProject];
-			} else {
-				throw new Error("Angular-cli config apps is wrong. Please adapt it to follow Angular CLI way.");
-			}
-		} else {
-			throw new Error("Parsing " + applicationAngularCliConfigPath + " failed. Ensure the file is valid JSON.");
-		}
-	} else {
-		throw new Error("angular.json is not present. Please add this at the root your project because stark-build needs this.");
-	}
 }
 
 /**

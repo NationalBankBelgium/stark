@@ -162,10 +162,9 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 
 		// Add custom QueryParameter so json-server can add collection metadata to the mock response
 		// See: https://jira.prd.nbb/browse/NG-1335
-		// FIXME: DEVELOPMENT env variable?
-		// if (DEVELOPMENT) {
-		builder.addQueryParameter("mockCollectionRequest", "true");
-		// }
+		if (ENV === "development") {
+			builder.addQueryParameter("mockCollectionRequest", "true");
+		}
 
 		return builder;
 	}
@@ -200,10 +199,9 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 
 		// Add custom QueryParameter so json-server can add collection metadata to the mock response
 		// See: https://jira.prd.nbb/browse/NG-1335
-		// FIXME: DEVELOPMENT env variable?
-		// if (DEVELOPMENT) {
-		builder.addQueryParameter("mockCollectionRequest", "true");
-		// }
+		if (ENV === "development") {
+			builder.addQueryParameter("mockCollectionRequest", "true");
+		}
 
 		return builder;
 	}

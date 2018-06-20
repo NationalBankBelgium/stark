@@ -1,5 +1,4 @@
-import { StarkHttpHeaders } from "../../http/constants";
-import { StarkSessionService } from "../services";
+import { StarkHttpHeaders, StarkSessionService } from "@nationalbankbelgium/stark-core";
 import { Observable } from "rxjs";
 /**
  * @ignore

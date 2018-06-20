@@ -1,4 +1,4 @@
-import { StarkRoutingService, StarkStateConfigWithParams } from "../services";
+import { StarkRoutingService, StarkStateConfigWithParams } from "@nationalbankbelgium/stark-core";
 import { Observable } from "rxjs";
 import { HookFn, HookMatchCriteria, HookRegOptions, RawParams, StateDeclaration, StateObject, TransitionOptions } from "@uirouter/core";
 /**

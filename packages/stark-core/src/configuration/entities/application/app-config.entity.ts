@@ -124,12 +124,11 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 
 	public constructor() {
 		// Default values
-		// FIXME: DEVELOPMENT env variable?
-		/*if (DEVELOPMENT) {
+		if (ENV === "development") {
 			this.loggingFlushPersistSize = 500;
-		} else {*/
-		this.loggingFlushPersistSize = 15;
-		// }
+		} else {
+			this.loggingFlushPersistSize = 15;
+		}
 
 		this.loggingFlushDisabled = false;
 		this.loggingFlushResourceName = "logging";

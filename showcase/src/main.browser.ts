@@ -32,7 +32,7 @@ switch (document.readyState) {
 	case "interactive":
 	case "complete":
 	default:
-		if (environment.hmr) {
+		if (HMR) {
 			if (module["hot"]) {
 				hmrBootstrap(module, main);
 			} else {
@@ -45,7 +45,7 @@ switch (document.readyState) {
 
 function _domReadyHandler(): void {
 	document.removeEventListener("DOMContentLoaded", _domReadyHandler, false);
-	if (environment.hmr) {
+	if (HMR) {
 		if (module["hot"]) {
 			hmrBootstrap(module, main);
 		} else {

@@ -140,7 +140,7 @@ export function logger(reducer: ActionReducer<State>): any {
 /**
  * Set of meta-reducer, higher order reducer (i.e., functions)
  */
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger, storeFreeze] : [];
+export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger, storeFreeze] : [];
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstrapping process
