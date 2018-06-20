@@ -1,0 +1,5 @@
+@mixin stark-card-theme($theme) {
+  mat-card.mat-card {
+    border-radius: map-get($theme, border-radius);
+  }
+}
