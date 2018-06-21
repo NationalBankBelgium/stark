@@ -273,7 +273,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	 * It logs an error and dispatches a NAVIGATE_FAILURE action to the NGRX Store
 	 */
 	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line cognitive-complexity
+	// tslint:disable-next-line:cognitive-complexity
 	private addNavigationErrorHandlers(): void {
 		this.logger.debug(starkRoutingServiceName + ": adding navigation error handlers");
 
@@ -532,7 +532,6 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		}
 	}
 
-	// tslint:disable-next-line completed-docs
 	private extractResolvablesData(resolvables: Resolvable[]): { [key: string]: any } {
 		const resolvablesData: { [key: string]: any } = {};
 
@@ -569,4 +568,4 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return stateTranslationKey;
 	}
 }
-// tslint:enable completed-docs
+/* tslint:enable */
