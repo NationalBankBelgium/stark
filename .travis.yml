@@ -48,6 +48,7 @@ cache:
 script:
   - npm run lint:all
   - npm run test:ci:all
+  - npm run docs:coverage
   - npm run build:showcase
   - npm run docs:publish
   - npm run release:publish

@@ -1,6 +1,4 @@
 /**
- * @module
- * @description
  * Entry point for all public APIs of this package.
  */
 // FIXME: replace this dummy mock by the actual mocks once implemented => export * from "../src/modules/<module>/testing";

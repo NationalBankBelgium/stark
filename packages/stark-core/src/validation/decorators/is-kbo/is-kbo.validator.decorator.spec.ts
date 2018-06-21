@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsKBO } from "./is-kbo.validator.decorator";
 import { starkIsKBOValidatorName } from "../../validators/is-kbo";

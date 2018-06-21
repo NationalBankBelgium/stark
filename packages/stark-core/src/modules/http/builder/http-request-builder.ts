@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs*/
 import { Serialize } from "cerialize";
 import { StarkBackend, StarkHttpRequestType, StarkResource } from "../entities";
 import { StarkSerializable } from "../../../serialization";
@@ -23,7 +24,9 @@ import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
 import { StarkAbstractHttpBaseRequestBuilder } from "./http-abstract-base-request-builder";
 import { StarkAbstractHttpFetchResourceRequestBuilder } from "./http-abstract-fetch-resource-request-builder";
-
+/**
+ * @ignore
+ */
 export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements StarkHttpRequestBuilder<T> {
 	private resourcePath: string;
 	private backend: StarkBackend;
@@ -272,7 +275,9 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 		});
 	}
 }
-
+/**
+ * @ignore
+ */
 export class StarkHttpCreateRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpCreateRequestBuilder<T> {
 	public echo(echo: StarkHttpEchoType): this {
@@ -280,18 +285,28 @@ export class StarkHttpCreateRequestBuilderImpl<T extends StarkResource> extends 
 		return this;
 	}
 }
-
+/**
+ * @ignore
+ */
 export class StarkHttpUpdateRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpUpdateRequestBuilder<T> {}
-
+/**
+ * @ignore
+ */
 export class StarkHttpDeleteRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpDeleteRequestBuilder<T> {}
-
+/**
+ * @ignore
+ */
 export class StarkHttpGetRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpFetchResourceRequestBuilder<T>
 	implements StarkHttpGetRequestBuilder<T> {}
-
+/**
+ * @ignore
+ */
 export class StarkHttpGetCollectionRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpFetchResourceRequestBuilder<T>
 	implements StarkHttpGetCollectionRequestBuilder<T> {}
-
+/**
+ * @ignore
+ */
 export class StarkHttpSearchRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpFetchResourceRequestBuilder<T>
 	implements StarkHttpSearchRequestBuilder<T> {}

@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { ActivatedRoute, Data } from "@angular/router";
 import { inject, TestBed } from "@angular/core/testing";
 import { StoreModule } from "@ngrx/store";

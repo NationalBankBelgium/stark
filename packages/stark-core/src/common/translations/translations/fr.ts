@@ -1,3 +1,6 @@
+/**
+ * @ignore
+ */
 export const translationsFr: object = {
 	STARK: {
 		LANGUAGES: {

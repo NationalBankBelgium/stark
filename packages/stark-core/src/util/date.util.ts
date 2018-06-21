@@ -1,5 +1,8 @@
 import moment from "moment";
 
+/**
+ * Util class used to parse and format Date objects.
+ */
 export class StarkDateUtil {
 	/**
 	 * Returns a Date object when the specified dateString is a valid date according to the specified format,

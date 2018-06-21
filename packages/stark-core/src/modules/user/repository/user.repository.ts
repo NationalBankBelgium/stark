@@ -11,13 +11,9 @@ import { AbstractStarkHttpRepository } from "../../http/repository";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
 /**
+ * @ignore
  * @ngdoc service
- * @name stark-core.repository:StarkUserRepository
  * @description Repository to fetch user profile from the backend.
- *
- * @requires StarkHttpService
- * @requires StarkLoggingService
- * @requires StarkApplicationConfig
  */
 @Injectable()
 export class StarkUserRepositoryImpl extends AbstractStarkHttpRepository<StarkUser> implements StarkUserRepository {

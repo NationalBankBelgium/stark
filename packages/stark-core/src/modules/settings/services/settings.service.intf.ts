@@ -1,6 +1,13 @@
 import { InjectionToken } from "@angular/core";
 
+/**
+ * Name of the Settings service, in case injection is needed
+ */
 export const starkSettingsServiceName: string = "StarkSettingsService";
+/**
+ * Injection Token version of the service name
+ * @link InjectionToken
+ */
 export const STARK_SETTINGS_SERVICE: InjectionToken<StarkSettingsService> = new InjectionToken<StarkSettingsService>(
 	starkSettingsServiceName
 );

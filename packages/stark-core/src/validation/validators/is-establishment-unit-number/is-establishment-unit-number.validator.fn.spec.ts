@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { starkIsEstablishmentUnitNumber } from "./is-establishment-unit-number.validator.fn";
 
 describe("Validator Function: StarkIsEstablishmentUnitNumber", () => {

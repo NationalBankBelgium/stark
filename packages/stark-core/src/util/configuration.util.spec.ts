@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { StarkConfigurationUtil, StarkConfigValidationGroups, StarkMetadataValidationGroups } from "./configuration.util";
 import {
 	STARK_APP_CONFIG,

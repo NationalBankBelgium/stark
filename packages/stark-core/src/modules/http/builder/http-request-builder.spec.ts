@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { serialize, serializeAs } from "cerialize";
 import {
 	StarkHttpCreateRequestBuilderImpl,
@@ -525,7 +526,7 @@ function testAddSortBy(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<
 	});
 }
 
-/* tslint:disable:no-duplicate-string no-null-keyword no-big-function */
+/* tslint:disable:no-duplicate-string no-null-keyword no-big-function completed-docs*/
 function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle" | "getCollection" | "search" | "update"): void {
 	describe("common functionality", () => {
 		const mockBackend: StarkBackend = new StarkBackendImpl();
@@ -868,7 +869,7 @@ function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle
 }
 
 // FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-// tslint:disable-next-line:cognitive-complexity
+// tslint:disable-next-line:cognitive-complexity completed-docs
 function testCustomSerialization(typeOfBuilder: "create" | "delete" | "getSingle" | "getCollection" | "search" | "update"): void {
 	describe("custom serialization", () => {
 		const mockBackend: StarkBackend = new StarkBackendImpl();
@@ -1311,8 +1312,6 @@ function testCustomSerialization(typeOfBuilder: "create" | "delete" | "getSingle
 		});
 	});
 }
-/* tslint:enable */
-
 function testUUIDPathParamNormalization(typeOfBuilder: "delete" | "getSingle" | "update"): void {
 	describe("UUID path parameter normalization", () => {
 		const mockBackend: StarkBackend = new StarkBackendImpl();
@@ -1427,7 +1426,7 @@ function testUUIDPathParamNormalization(typeOfBuilder: "delete" | "getSingle" | 
 	});
 }
 
-// tslint:disable-next-line:no-big-function
+// tslint:disable-next-line:no-big-function completed-docs*/
 describe("Builder: StarkHttpRequestBuilder", () => {
 	const mockBackend: StarkBackend = new StarkBackendImpl();
 	let requestBuilder: StarkHttpRequestBuilder<MockResource>;
@@ -1550,7 +1549,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).not.toBe(mockCriteria);
-			/* tslint:disable:no-null-keyword */
+			/* tslint:disable:no-null-keyword completed-docs */
 			expect(requestCriteria).toEqual({
 				field1: "anything",
 				field2: {
@@ -1566,7 +1565,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 				undefinedField: null // due to Serialize => with undefined returns null
 				// emptyField: undefined   // empty values are omitted
 			});
-			/* tslint:enable */
+			/*tslint:disable:completed-docs*/
 		});
 
 		it("should leave the criteria 'as is', even those with empty value (allowEmptyCriteria = true)", () => {

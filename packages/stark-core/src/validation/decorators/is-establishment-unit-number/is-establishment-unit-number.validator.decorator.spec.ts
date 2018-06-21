@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsEstablishmentUnitNumber } from "./is-establishment-unit-number.validator.decorator";
 import { starkIsEstablishmentUnitNumberValidatorName } from "../../validators/is-establishment-unit-number";

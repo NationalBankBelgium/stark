@@ -3,9 +3,14 @@
  */
 const _floor: Function = require("lodash/floor");
 
+/**
+ * @ignore
+ * Name of the validator, in case injection is needed.
+ */
 export const starkIsISINValidatorName: string = "starkIsISIN";
 
 /**
+ * @ignore
  * An International Securities Identification Number (ISIN) uniquely identifies a security. Its structure is defined in ISO 6166.
  * Securities for which ISINs are issued include bonds, commercial paper, equities and warrants. The ISIN code is a 12-character
  * alpha-numerical code that does not contain information characterizing financial instruments but serves for uniform identification

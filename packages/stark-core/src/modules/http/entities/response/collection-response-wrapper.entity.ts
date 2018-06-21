@@ -2,7 +2,9 @@ import { StarkCollectionResponseWrapper } from "./collection-response-wrapper.en
 import { StarkResource } from "../resource.entity.intf";
 import { StarkCollectionMetadata } from "../metadata";
 import { StarkHttpStatusCodes } from "../../enumerators";
-
+/**
+ * @ignore
+ */
 export class StarkCollectionResponseWrapperImpl<T extends StarkResource> implements StarkCollectionResponseWrapper<T> {
 	/** @internal */
 	private _starkHttpStatusCode: StarkHttpStatusCodes;

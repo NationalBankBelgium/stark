@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { starkIsSupportedLanguage } from "./is-supported-language.fn";
 
 describe("Validator Function: StarkIsSupportedLanguage", () => {

@@ -51,7 +51,7 @@
     "docker": "docker",
     "docs": "npm run docs:clean && compodoc src --theme material --tsconfig ./tsconfig.json --output ./reports/api-docs",
     "docs:clean": "npx rimraf reports/api-docs",
-    "docs:coverage": "npm run docs -- --coverageTest --coverageThresholdFail true",
+    "docs:coverage": "npm run docs -- --coverageTest 85 --coverageThresholdFail true",
     "docs:serve": "npm run docs -- --watch --serve --port 4321",
     "e2e:live": "npm-run-all -p -r server:prod:ci protractor:live",
     "e2e:travis": "npm-run-all -p -r server:prod:ci protractor:delay",

@@ -8,6 +8,8 @@
   ],
   "rules": {
     "component-selector": false,
-    "no-unused-variable": false // FIXME: disabled due to false positives in imports. Re-enable once these are solved in a newer version of TSLint
+    "no-unused-variable": false, // FIXME: disabled due to false positives in imports. Re-enable once these are solved in a newer version of TSLint
+    "jsdoc-format": [true, "check-multiline-start"],
+    "no-redundant-jsdoc": true
   }
 }

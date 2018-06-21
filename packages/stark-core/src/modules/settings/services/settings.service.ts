@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs*/
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { filter } from "rxjs/operators";
@@ -18,15 +19,9 @@ import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
 /**
+ * @ignore
  * @ngdoc service
- * @name stark-core.service:StarkSettingsService
  * @description Service that allows the manipulation of application settings, some of which can be persisted.
- *
- * @requires StarkLoggingService
- * @requires StarkSessionService
- * @requires StarkApplicationMetadata
- * @requires StarkApplicationConfig
- * @requires ngrx-store.Store
  */
 @Injectable()
 export class StarkSettingsServiceImpl implements StarkSettingsService {

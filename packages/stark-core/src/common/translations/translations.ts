@@ -1,4 +1,7 @@
 import { TranslateService } from "@ngx-translate/core";
+/**
+ *  @ignore
+ */
 const _cloneDeep: Function = require("lodash/cloneDeep");
 
 import { StarkLocale } from "./locale.intf";

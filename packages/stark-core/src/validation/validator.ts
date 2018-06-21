@@ -14,7 +14,9 @@ import {
 	starkIsSupportedLanguage,
 	starkMapNotEmpty
 } from "./validators";
-
+/**
+ * @ignore
+ */
 export class StarkValidatorImpl extends Validator implements StarkValidator {
 	public constructor() {
 		super();

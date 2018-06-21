@@ -43,6 +43,9 @@ switch (document.readyState) {
 		}
 }
 
+/**
+ * @ignore
+ */
 function _domReadyHandler(): void {
 	document.removeEventListener("DOMContentLoaded", _domReadyHandler, false);
 	if (environment.hmr) {

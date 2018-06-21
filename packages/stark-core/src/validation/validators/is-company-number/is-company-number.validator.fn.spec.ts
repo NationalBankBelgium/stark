@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { starkIsCompanyNumber } from "./is-company-number.validator.fn";
 
 describe("Validator Function: StarkIsCompanyNumber", () => {

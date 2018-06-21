@@ -8,6 +8,9 @@ import {
 } from "class-validator";
 import { StarkValidationErrorsUtil } from "../../../util";
 
+/**
+ * Name of the validator, in case injection is needed.
+ */
 export const starkMapIsValidValidatorName: string = "starkMapIsValid";
 
 /**
@@ -16,9 +19,20 @@ export const starkMapIsValidValidatorName: string = "starkMapIsValid";
  */
 @ValidatorConstraint({ name: starkMapIsValidValidatorName, async: false })
 class StarkMapIsValidConstraint implements ValidatorConstraintInterface {
+	/**
+	 * an Array of validation errors' keys
+	 */
 	public keysValidationErrors: ValidationError[];
+	/**
+	 * an Array of validation errors' values
+	 */
 	public valuesValidationErrors: ValidationError[];
 
+	/**
+	 * Validates that a give Map is valid
+	 * @param map: the map to validate
+	 * @returns boolean - true if the map is valid
+	 */
 	public validate(map: Map<any, any>): boolean {
 		if (!(map instanceof Map) || !map.size) {
 			return false;
@@ -40,6 +54,10 @@ class StarkMapIsValidConstraint implements ValidatorConstraintInterface {
 		return this.keysValidationErrors.length === 0 && this.valuesValidationErrors.length === 0;
 	}
 
+	/**
+	 * Default message displayed when the map contains invalid entries
+	 * @returns a default message
+	 */
 	public defaultMessage(): string {
 		let keysValidationMessage: string = StarkValidationErrorsUtil.toString(this.keysValidationErrors);
 		let valuesValidationMessage: string = StarkValidationErrorsUtil.toString(this.valuesValidationErrors);
@@ -57,7 +75,7 @@ class StarkMapIsValidConstraint implements ValidatorConstraintInterface {
 
 /**
  * Validator decorator that uses the StarkMapIsValid validator constraint
- * @param validationOptions
+ * @param validationOptions, options to determine if the map is valid
  * @returns Function
  */
 export function StarkMapIsValid(validationOptions?: ValidationOptions): Function {

@@ -24,7 +24,7 @@ function isWebpackDevServer() {
 /**
  * Retrieve the relative path from the config directory to the path argument value (if provided). That path argument can be passed to only execute a subset of the unit tests (see spec-bundle.ts)
  * @param args the arguments to look into
- * @returns {*} The relative path from this directory (config) to the location pointed at by the path argument value (if provided), an empty string otherwise
+ * @returns The relative path from this directory (config) to the location pointed at by the path argument value (if provided), an empty string otherwise
  */
 function getTestPath(args) {
 	for (let i = 0; i < args.length; ++i) {

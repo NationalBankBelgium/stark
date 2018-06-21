@@ -3,7 +3,9 @@ import { serialize, serializeAs } from "cerialize";
 import { StarkLogMessageType } from "./log-message-type.entity";
 import { StarkLogMessage } from "./log-message.entity.intf";
 import { StarkError, StarkErrorImpl } from "../../../common";
-
+/**
+ * @ignore
+ */
 export class StarkLogMessageImpl implements StarkLogMessage {
 	@serialize public timestamp: string;
 	@serialize public message: string;

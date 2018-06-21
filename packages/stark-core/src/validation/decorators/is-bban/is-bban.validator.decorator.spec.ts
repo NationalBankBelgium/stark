@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsBBAN } from "./is-bban.validator.decorator";
 import { starkIsBBANValidatorName } from "../../validators/is-bban";

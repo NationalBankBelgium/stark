@@ -10,11 +10,20 @@ import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-n
  */
 @ValidatorConstraint({ name: starkIsCompanyNumberValidatorName, async: false })
 class StarkIsCompanyNumberConstraint implements ValidatorConstraintInterface {
+	/**
+	 * Validates that a given Company number is valid
+	 * @param companyNumber - the number to validate
+	 * @returns boolean - true if the company number is valid or not
+	 */
 	public validate(companyNumber: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
 		return validator.starkIsCompanyNumber(companyNumber);
 	}
 
+	/**
+	 * Default message displayed if the Company number is not valid
+	 * @returns a default message
+	 */
 	public defaultMessage(): string {
 		return "$property value is not a valid company number";
 	}
@@ -22,7 +31,7 @@ class StarkIsCompanyNumberConstraint implements ValidatorConstraintInterface {
 
 /**
  * Validator decorator that uses the StarkIsCompanyNumber validator constraint
- * @param validationOptions
+ * @param validationOptions, that ensure that the company number is valid
  * @returns Function
  */
 export function StarkIsCompanyNumber(validationOptions?: ValidationOptions): Function {

@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsSupportedLanguage } from "./is-supported-language.validator.decorator";
 import { starkIsSupportedLanguageValidatorName } from "../../validators/is-supported-language";

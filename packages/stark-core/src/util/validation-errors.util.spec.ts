@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { ArrayNotEmpty, IsNotEmpty, Matches, ValidateNested, validateSync, ValidationError } from "class-validator";
 import { StarkValidationErrorsUtil } from "./validation-errors.util";
 

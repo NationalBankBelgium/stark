@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { StarkSetPreferredLanguage } from "../actions";
 import { StarkSettings } from "../entities";
 import { settingsReducer } from "./settings.reducer";

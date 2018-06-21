@@ -1,3 +1,6 @@
+/**
+ * Interface that describes the etags array to be included in a GetCollection response
+ */
 export interface StarkETags {
 	/**
 	 * For collection responses only.

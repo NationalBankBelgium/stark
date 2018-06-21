@@ -1,5 +1,8 @@
 import { Action } from "@ngrx/store";
 
+/**
+ * All the Settings action types
+ */
 export enum StarkSettingsActionTypes {
 	PERSIST_PREFERRED_LANGUAGE = "[StarkSettings] Persist Preferred Language",
 	PERSIST_PREFERRED_LANGUAGE_SUCCESS = "[StarkSettings] Persist Preferred Language Success",
@@ -9,12 +12,19 @@ export enum StarkSettingsActionTypes {
 
 /**
  * Action that requires to persist the given language locally so that the language remains the same when the user comes back
- * @param language the language to persist
  * @returns The created action object
  */
 export class StarkPersistPreferredLanguage implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSettingsActionTypes
+	 */
 	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE = StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE;
 
+	/**
+	 * Class constructor
+	 * @param language - the language to persist
+	 */
 	public constructor(public language: string) {}
 }
 
@@ -23,30 +33,45 @@ export class StarkPersistPreferredLanguage implements Action {
  * @returns The created action object
  */
 export class StarkPersistPreferredLanguageSuccess implements Action {
+	/**
+	 * The type of action
+	 */
 	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_SUCCESS =
 		StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_SUCCESS;
 }
 
 /**
  * Action that notifies the application that the preferred language could not be persisted.
- * @param error the reason why the preferred language could not be persisted
  * @returns The created action object
  */
 export class StarkPersistPreferredLanguageFailureimplements implements Action {
+	/**
+	 * The type of action
+	 */
 	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_FAILURE =
 		StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_FAILURE;
 
+	/**
+	 * Class constructor
+	 * @param error - the reason why the preferred language could not be persisted
+	 */
 	public constructor(public error: any) {}
 }
 
 /**
  * Action that notifies the application that the preferred language should be changed.
- * @param language the new preferred language
  * @returns The created action object
  */
 export class StarkSetPreferredLanguage implements Action {
+	/**
+	 * The type of action
+	 */
 	public readonly type: StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE = StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE;
 
+	/**
+	 * Class constructor
+	 * @param language - the new preferred language
+	 */
 	public constructor(public language: string) {}
 }
 

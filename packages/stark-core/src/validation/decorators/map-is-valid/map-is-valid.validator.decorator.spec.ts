@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { IsNotEmpty, MaxLength, validateSync, ValidationError } from "class-validator";
 import { StarkMapIsValid, starkMapIsValidValidatorName } from "./map-is-valid.validator.decorator";
 

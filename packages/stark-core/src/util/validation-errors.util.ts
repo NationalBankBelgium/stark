@@ -1,5 +1,8 @@
 import { ValidationError } from "class-validator";
 
+/**
+ * Class used to format the validation errors in a readable way.
+ */
 export class StarkValidationErrorsUtil {
 	/**
 	 * Throws an error in case there are  validation errors. The error contains the description of the different errors.

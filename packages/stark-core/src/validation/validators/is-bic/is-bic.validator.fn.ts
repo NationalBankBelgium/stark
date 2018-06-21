@@ -1,6 +1,11 @@
+/**
+ * @ignore
+ * Name of the validator, in case injection is needed.
+ */
 export const starkIsBICValidatorName: string = "starkIsBIC";
 
 /**
+ * @ignore
  * ISO 9362 (also known as SWIFT-BIC, BIC code, SWIFT ID or SWIFT code) is a standard format of Business Identifier Codes approved
  * by the International Organization for Standardization (ISO). It is a unique identification code for both financial and
  * non-financial institutions.[1] (When assigned to a non-financial institution, a code may also be known as a Business Entity

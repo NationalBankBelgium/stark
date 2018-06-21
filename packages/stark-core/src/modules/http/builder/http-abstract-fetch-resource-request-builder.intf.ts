@@ -1,9 +1,14 @@
 import { StarkLanguage } from "../../../configuration/entities/language";
 import { StarkSortItem } from "../entities";
 
+/**
+ * This StarkHttpFetchResourceRequestBuilder interface describes the different operations supported by Http request builders for resource-fetching requests
+ */
 export interface StarkHttpFetchResourceRequestBuilder {
 	/**
 	 * Adds language codes to the "Accept-Language" header
+	 *
+	 * @link StarkLanguage
 	 * @param languages - Language(s) in which the response should be returned
 	 * @returns The current builder
 	 */
@@ -25,6 +30,8 @@ export interface StarkHttpFetchResourceRequestBuilder {
 
 	/**
 	 * Adds a "sort" query parameter to the request
+	 *
+	 * @link StarkSortItem
 	 * @param sortItems - Sort parameters to define the order in which the items will be returned
 	 * @returns The current builder
 	 */

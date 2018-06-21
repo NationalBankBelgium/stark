@@ -5,17 +5,26 @@ import { StarkValidator } from "../../validator.intf";
 import { starkIsKBOValidatorName } from "../../validators/is-kbo";
 
 /**
- * StarkIsBban validator constraint
+ * StarkIsKbo validator constraint
  * Validates that the KBO number provided is valid
  */
 @ValidatorConstraint({ name: starkIsKBOValidatorName, async: false })
 class StarkIsKBOConstraint implements ValidatorConstraintInterface {
+	/**
+	 * Validates that the given KBO number is valid
+	 * @param kbo - the kbo to validate
+	 * @returns boolean - true if the kbo has been validated
+	 */
 	public validate(kbo: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
 
 		return validator.starkIsKBO(kbo);
 	}
 
+	/**
+	 * Default message displayed if the KBO number is not valid
+	 * @returns a default message
+	 */
 	public defaultMessage(): string {
 		return "$property value is not a valid KBO number";
 	}
@@ -23,7 +32,7 @@ class StarkIsKBOConstraint implements ValidatorConstraintInterface {
 
 /**
  * Validator decorator that uses the StarkIsKBO validator constraint
- * @param validationOptions
+ * @param validationOptions - the options that will define the validity of the kbo number
  * @returns Function
  */
 export function StarkIsKBO(validationOptions?: ValidationOptions): Function {

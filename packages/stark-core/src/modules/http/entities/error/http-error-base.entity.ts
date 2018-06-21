@@ -2,7 +2,9 @@ import { autoserialize, inheritSerialization } from "cerialize";
 
 import { StarkErrorImpl } from "../../../../common";
 import { StarkHttpErrorBase } from "./http-error-base.entity.intf";
-
+/**
+ * @ignore
+ */
 @inheritSerialization(StarkErrorImpl)
 export class StarkHttpErrorBaseImpl extends StarkErrorImpl implements StarkHttpErrorBase {
 	public constructor(error: Error) {

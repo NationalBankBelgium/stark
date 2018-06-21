@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsISIN } from "./is-isin.validator.decorator";
 import { starkIsISINValidatorName } from "../../validators/is-isin";

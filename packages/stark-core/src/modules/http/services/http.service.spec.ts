@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;

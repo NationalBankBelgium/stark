@@ -1,14 +1,26 @@
 import { StarkLoggingActions, StarkLoggingActionTypes } from "../actions";
 import { StarkLogging, StarkLogMessage } from "../entities";
 
+/**
+ * The store key will allow the application to find the reducer in the store
+ */
 export const starkLoggingStoreKey: string = "starkLogging";
 
+/**
+ * Defines the initial state of the reducer
+ * @link StarkLogging
+ */
 const INITIAL_STATE: Readonly<StarkLogging> = {
 	uuid: "",
 	applicationId: "",
 	messages: []
 };
 
+/**
+ * Definition of the logging reducer.
+ * @param state - the state of the reducer
+ * @param action - the action to perform
+ */
 export function loggingReducer(
 	state: Readonly<StarkLogging> = INITIAL_STATE,
 	action: Readonly<StarkLoggingActions>

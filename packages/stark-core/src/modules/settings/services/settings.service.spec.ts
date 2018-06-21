@@ -1,3 +1,4 @@
+/*tslint:disable:completed-docs*/
 import { Store } from "@ngrx/store";
 import { StarkLoggingService } from "../../logging/services";
 import { MockStarkLoggingService } from "../../logging/testing";

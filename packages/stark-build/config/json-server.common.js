@@ -47,7 +47,7 @@ const starkMetadata = {
  * @param middlewares {object} Middlewares to be applied just after the default Stark middlewares
  * @param routes {object} (Optional) Routes to be rewritten (in order to support nested resources)
  * @param uploadEndpoints {object} (Optional) Endpoints for file uploads
- * @returns {server} ExpressJS server definition
+ * @returns ExpressJS server definition
  */
 function getJSONServer(data, middlewares, routes, uploadEndpoints) {
 	var server = jsonServer.create();
@@ -176,8 +176,6 @@ function transformRequests(req, res, next) {
  * - Request: the current request
  * - Response: the current response (containing the default changes made by Stark middleware)
  * - StarkMetadata: metadata object constructed by the Stark middleware (only for Collection responses)
- *
- * @returns {Function}
  */
 function composeTransformResponses(transformFn) {
 	return function(req, res) {
@@ -205,7 +203,7 @@ function composeTransformResponses(transformFn) {
  * Default Stark response transformations: metadata and etags
  * @param req {*} The current request (already changed by Stark default middleware)
  * @param res {*} The current response (already changed by Stark default middleware)
- * @param collectionMetadata {object} Metadata object constructed by the Stark middleware (only for Collection responses)
+ * @param collectionMetadata : Metadata object constructed by the Stark middleware (only for Collection responses)
  */
 function transformResponses(req, res, collectionMetadata) {
 	console.log("transformResponses Stark middleware");
@@ -238,8 +236,8 @@ function transformResponses(req, res, collectionMetadata) {
 
 /**
  * Extract the query parameters from the request url
- * @param url {string} Request url
- * @returns {object} Object containing the different query parameters
+ * @param url: Request url
+ * @returns Object containing the different query parameters
  */
 function extractUrlParams(url) {
 	var queryParams = {};
@@ -260,7 +258,7 @@ function extractUrlParams(url) {
 
 /**
  * Replace Stark pagination params by JSON-server pagination params
- * @param req {*} The current request
+ * @param req : The current request
  */
 function transformPaginationParams(req) {
 	const limit = parseInt(req.query[starkQueryParam.LIMIT], 10) || 10; // defaults to 10
@@ -276,7 +274,7 @@ function transformPaginationParams(req) {
 
 /**
  * Replace Stark sorting params by JSON-server sorting params
- * @param req {*} The current request
+ * @param req : The current request
  */
 function transformSortingParams(req) {
 	const sortingRegex = /(\w+)\+(ASC|DESC)/g; // perform a global search to match all the sort items
@@ -301,7 +299,7 @@ function transformSortingParams(req) {
 
 /**
  * Change POST requests to PATCH for an existing resource (when the uuid is defined)
- * @param req {*} The current request
+ * @param req : The current request
  */
 function convertUpdateRequestMethod(req) {
 	if (req.method === "POST" && req.body && req.body.uuid) {
@@ -312,9 +310,9 @@ function convertUpdateRequestMethod(req) {
 /**
  * Add "pagination" object to metadata for Collection responses
  * See https://github.com/NationalBankBelgium/REST-API-Design-Guide/wiki/Pagination-Rules-and-metadata
- * @param req {*} The current request
- * @param res {*} The current response
- * @param collectionMetadata {object} Metadata object constructed by the Stark middleware (only for Collection responses)
+ * @param req : The current request
+ * @param res : The current response
+ * @param collectionMetadata : Metadata object constructed by the Stark middleware (only for Collection responses)
  */
 function addPaginationMetadata(req, res, collectionMetadata) {
 	var pagination = (collectionMetadata["pagination"] = {});
@@ -348,8 +346,8 @@ function addPaginationMetadata(req, res, collectionMetadata) {
 /**
  * In case the metadata object is passed, the "etags" object is added to it (Collection responses)
  * Otherwise the "etag" header is added to the response (single item responses)
- * @param res {*} The current request
- * @param collectionMetadata {object} Metadata object constructed by the Stark middleware (only for Collection responses)
+ * @param res : The current request
+ * @param collectionMetadata : Metadata object constructed by the Stark middleware (only for Collection responses)
  */
 function addEtagInfo(res, collectionMetadata) {
 	const data = res.locals.data;
@@ -400,8 +398,7 @@ function addSortingMetadata(req, collectionMetadata) {
  * Check whether the request is a GetCollection request.
  * GetCollection requests are the ones with a "mockCollectionRequest" query param.
  * See: https://jira.prd.nbb/browse/NG-1335
- * @param req {*} The current request
- * @returns {boolean}
+ * @param req : The current request
  */
 function isGetCollectionRequest(req) {
 	var params = extractUrlParams(req.originalUrl);
@@ -411,8 +408,7 @@ function isGetCollectionRequest(req) {
 /**
  * Check whether the request is aimed to get a nested resource (from a many-to-one relationship).
  * Such requests have a '_expand' query parameter
- * @param req {*} The current request
- * @returns {boolean}
+ * @param req : The current request
  */
 function isNestedResourceQuery(req) {
 	return req.method === "GET" && typeof req.query["_expand"] !== "undefined";
@@ -421,8 +417,7 @@ function isNestedResourceQuery(req) {
 /**
  * Get the name of the nested resource to be fetched in the request (from a many-to-one relationship).
  * Such resource is the one passed in the '_expand' query parameter.
- * @param req {*} The current request
- * @returns {string|undefined}
+ * @param req : The current request
  */
 function getNestedResourceName(req) {
 	return req.query["_expand"];
@@ -431,7 +426,6 @@ function getNestedResourceName(req) {
 /**
  * Generate an Etag random value
  * @param item
- * @returns {string}
  */
 function generateEtagValue(item) {
 	return _uniqueId(
@@ -469,8 +463,7 @@ function deepReplaceProperty(item, property, newProperty) {
 /**
  * Add to the original routes for nested resources (those that will be rewritten with a '_expand' query parameter)
  * with an optional query param regex so that the route can match regardless of whether it has or not query params
- * @param routes {object} Routes to be rewritten (in order to support nested resources)
- * @returns {object}
+ * @param routes : Routes to be rewritten (in order to support nested resources)
  */
 function expandRewrittenRoutes(routes) {
 	const nestedResourceRegex = /^\/(\w+)\/:(\w+)\/(\w+)$/;

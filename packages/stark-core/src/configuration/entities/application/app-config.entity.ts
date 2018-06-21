@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs*/
 import { IsBoolean, IsDefined, IsNotEmpty, IsPositive, IsString, IsUrl, Matches, Min, ValidateIf, validateSync } from "class-validator";
 import { autoserialize, autoserializeAs, Deserialize } from "cerialize";
 import { StarkApplicationConfig } from "./app-config.entity.intf";
@@ -5,7 +6,9 @@ import { StarkBackend, StarkBackendImpl } from "../../../modules/http/entities/b
 import { stringMap } from "../../../serialization";
 import { StarkValidationErrorsUtil } from "../../../util";
 import { StarkMapNotEmpty, StarkMapIsValid } from "../../../validation/decorators";
-
+/**
+ * @ignore
+ */
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	// FIXME: properties of the group "temp" are not used yet. Will they still be used?
 
@@ -169,10 +172,22 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 		return this.backends;
 	}
 
+	/**
+	 * Check whether the keepAlive option in the StarkApplicationConfig is disabled
+	 *
+	 * @param instance - the instance of the stark application configuration
+	 * @returns boolean - if keepAlive is in use, the value of keepAliveDisabled is set to false
+	 */
 	public static validateIfKeepAliveEnabled(instance: StarkApplicationConfig): boolean {
 		return instance.keepAliveDisabled !== true;
 	}
 
+	/**
+	 * Check whether the loggingFlush option in the StarkApplicationConfig is disabled
+	 *
+	 * @param instance - the instance of the stark application configuration
+	 * @returns boolean - if loggingFlush is in use, the value of loggingFlushDisabled is set to false
+	 */
 	public static validateIfLoggingFlushEnabled(instance: StarkApplicationConfig): boolean {
 		return instance.loggingFlushDisabled !== true;
 	}

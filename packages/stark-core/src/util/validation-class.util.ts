@@ -1,3 +1,6 @@
+/**
+ * Class containing utils to be used for class validation decorators of the 'class-validator' library
+ */
 export class StarkClassValidationUtil {
 	/**
 	 * Returns true if the given value is NOT undefined.
