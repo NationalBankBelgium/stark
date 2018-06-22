@@ -31,7 +31,7 @@
     "pipe-impure": true,
     "templates-no-negated-async": true,
     "use-pipe-decorator": true,
-    "use-view-encapsulation": true,
+    "use-view-encapsulation": false,
     "trackBy-function": true,
     "no-unused-css": true,
     "template-cyclomatic-complexity": [true, 5],
