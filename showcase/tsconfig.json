@@ -8,6 +8,7 @@
     "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@angular/*": ["../node_modules/@angular/*"],
+      "@nationalbankbelgium/stark-ui": ["../../packages/stark-ui/index.ts"],
       "@nationalbankbelgium/*": ["../node_modules/@nationalbankbelgium/*"]
     }
   },
