@@ -1,0 +1,33 @@
+@mixin stark-message-pane-color($color) {
+  .stark-message-pane-item {
+    color: rgba($color: $color, $alpha: 0.87);
+  }
+
+  .mat-icon {
+    fill: rgba($color: $color, $alpha: 0.87);
+  }
+}
+
+.stark-message-pane {
+  @include stark-message-pane-color(mat-color($grey-palette, 800));
+
+  .inner {
+    background-color: mat-color($mat-light-theme-background, background);
+  }
+
+  .errors > mat-icon {
+    fill: mat-color($alert-palette, 500);
+  }
+  .warnings > mat-icon {
+    fill: mat-color($warning-palette, 500);
+  }
+  .infos > mat-icon {
+    fill: mat-color($primary-palette, 500);
+  }
+}
+
+.stark-message-pane {
+  &.stark-white {
+    @include stark-message-pane-color(mat-color($grey-palette, A100));
+  }
+}

@@ -31,6 +31,7 @@ import { DemoKeyboardDirectivesComponent } from "./keyboard-directives/demo-keyb
 import { DemoLanguageSelectorComponent } from "./language-selector/demo-language-selector.component";
 import { DemoLogoutComponent } from "./logout/demo-logout.component";
 import { DemoMenuComponent } from "./menu/demo-menu.component";
+import { DemoMessagePaneComponent } from "./message-pane/demo-message-pane.component";
 import { DemoPaginationComponent } from "./pagination/demo-pagination.component";
 import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
 import { DemoSliderComponent } from "./slider/demo-slider.component";
@@ -43,18 +44,19 @@ import {
 	StarkActionBarModule,
 	StarkAppLogoutModule,
 	StarkBreadcrumbModule,
+	StarkCollapsibleModule,
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
 	StarkDropdownModule,
 	StarkKeyboardDirectivesModule,
 	StarkLanguageSelectorModule,
 	StarkAppMenuModule,
+	StarkMessagePaneModule,
 	StarkPaginationModule,
 	StarkPrettyPrintModule,
 	StarkSliderModule,
 	StarkSvgViewBoxModule,
-	StarkTableModule,
-	StarkCollapsibleModule
+	StarkTableModule
 } from "@nationalbankbelgium/stark-ui";
 
 @NgModule({
@@ -84,6 +86,7 @@ import {
 		StarkDropdownModule,
 		StarkKeyboardDirectivesModule,
 		StarkLanguageSelectorModule,
+		StarkMessagePaneModule,
 		StarkPaginationModule,
 		StarkPrettyPrintModule,
 		StarkSliderModule,
@@ -107,6 +110,7 @@ import {
 		DemoLanguageSelectorComponent,
 		DemoLogoutComponent,
 		DemoMenuComponent,
+		DemoMessagePaneComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
 		DemoSidebarComponent,
@@ -132,6 +136,7 @@ import {
 		DemoLanguageSelectorComponent,
 		DemoLogoutComponent,
 		DemoMenuComponent,
+		DemoMessagePaneComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
 		DemoSliderComponent,

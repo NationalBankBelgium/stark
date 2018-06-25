@@ -14,6 +14,7 @@ export * from "./keyboard-directives";
 export * from "./language-selector";
 export * from "./logout";
 export * from "./menu";
+export * from "./message-pane";
 export * from "./pagination";
 export * from "./pretty-print";
 export * from "./sidebar";

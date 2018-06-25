@@ -154,6 +154,44 @@
         "SECTIONS": "Menu avec sections",
         "TITLE": "Stark menu"
       },
+      "MESSAGE_PANE": {
+        "BUTTONS": {
+          "CENTER": "Centre",
+          "CHANGE_THEME": "Change le Thème",
+          "CLEAR_AND_SHOW_NEW_MESSAGES": "Effacer & Afficher les Nouveaux Messagess",
+          "CLEAR_MESSAGES": "Effacer les messages",
+          "LEFT": "Gauche",
+          "RIGHT": "Droite",
+          "SHOW_MESSAGES": "Afficher les Messages"
+        },
+        "DESCRIPTION": "La fenêtre de messages reste sur la page jusqu'à sa fermeture, mais les interactions de page ne sont pas bloquées (comme dans le cas d'une boîte de dialogue). Elle peut être utilisée pour afficher les erreurs de validation du formulaire si votre application à besoin de les conserver jusqu'à ce qu'elles soient rejetées.",
+        "MESSAGES": {
+          "ERRORS": {
+            "ERROR_1": "Erreur 1: Trop de doigts sur le clavier - priorité 500",
+            "ERROR_2": "Erreur 2: priorité 10",
+            "ERROR_3": "Erreur 3: priorité 200",
+            "NEW_ERROR_1": "Nouvelle erreur 1",
+            "NEW_ERROR_2": "Nouvelle erreur 2"
+          },
+          "WARNINGS": {
+            "WARNING_1": "Avertissement 1: priorité 1",
+            "WARNING_2": "Avertissement 2: priorité indéfini",
+            "NEW_WARNING_1": "Nouvel avertissement 1"
+          },
+          "INFOS": {
+            "INFO_1": "Info 1: priorité indéfini",
+            "INFO_2": "Info 2: priorité 998",
+            "NEW_INFO_1": "Nouvelle info 1",
+            "NEW_INFO_2": "Nouvelle info 2"
+          }
+        },
+        "TITLE": "Stark Message Pane Example",
+        "TITLES": {
+          "DEMO": "Demo",
+          "DISPLAY_ALIGNMENT": "Alignement d'affichage",
+          "DISPLAY_STYLE": "Style d'affichage"
+        }
+      },
       "PAGINATION": {
         "ADVANCED_CONFIGURATION": "Pagination avec configuration avancée",
         "COMPACT_CONFIGURATION": "Pagination en mode compact",

@@ -1,0 +1,111 @@
+<div class="inner">
+	<div class="summary">
+		<button class="errors tab may-collapse"
+				[ngClass]="{'active': currentNavItem === 'errors'}"
+				*ngIf="messageCollection.errorMessages.length > 0"
+				(click)="toggleActive('errors')"
+				[matTooltip]="'STARK.MESSAGE_PANE.ERROR_MESSAGES'| translate"
+				[attr.aria-label]="'STARK.MESSAGE_PANE.ERROR_MESSAGES' | translate"
+				type="button">
+			<mat-icon svgIcon="alert-circle"></mat-icon>
+			<b>{{ messageCollection.errorMessages.length }}</b>
+		</button>
+
+		<button class="warnings tab may-collapse"
+				[ngClass]="{'active': currentNavItem === 'warnings'}"
+				*ngIf="messageCollection.warningMessages.length > 0"
+				(click)="toggleActive('warnings')"
+				[matTooltip]="'STARK.MESSAGE_PANE.WARNING_MESSAGES' | translate"
+				[attr.aria-label]="'STARK.MESSAGE_PANE.WARNING_MESSAGES' | translate"
+				type="button">
+			<mat-icon svgIcon="alert"></mat-icon>
+			<b>{{ messageCollection.warningMessages.length }}</b>
+		</button>
+
+		<button class="infos tab may-collapse"
+				[ngClass]="{'active': currentNavItem === 'infos'}"
+				*ngIf="messageCollection.infoMessages.length > 0"
+				(click)="toggleActive('infos')"
+				[matTooltip]="'STARK.MESSAGE_PANE.INFO_MESSAGES' | translate"
+				[attr.aria-label]="'STARK.MESSAGE_PANE.INFO_MESSAGES' | translate"
+				type="button">
+			<mat-icon svgIcon="information"></mat-icon>
+			<b>{{ messageCollection.infoMessages.length }}</b>
+		</button>
+
+		<button class="stark-message-pane-total"
+				[ngClass]="maxLevel"
+				(click)="expandMessages()"
+				[matTooltip]=" 'STARK.MESSAGE_PANE.EXPAND' | translate"
+				[attr.aria-label]="'STARK.MESSAGE_PANE.EXPAND' | translate"
+				type="button">
+			<mat-icon svgIcon="information" *ngIf="maxLevel === 'infos'"></mat-icon>
+			<mat-icon svgIcon="alert" *ngIf="maxLevel === 'warnings'"></mat-icon>
+			<mat-icon svgIcon="alert-circle" *ngIf="maxLevel === 'errors'"></mat-icon>
+			<b>{{ totalMessages }}</b>
+		</button>
+
+		<button mat-icon-button
+				class="may-collapse clear-all-messages"
+				(click)="clearAllMessages()"
+				[matTooltip]=" 'STARK.MESSAGE_PANE.DISMISS_ALL' | translate"
+				[attr.aria-label]="'STARK.MESSAGE_PANE.DISMISS_ALL' | translate"
+				type="button">
+			<mat-icon svgIcon="close"></mat-icon>
+		</button>
+
+		<button mat-icon-button
+				class="collapse-pane"
+				(click)="collapseMessages()"
+				[matTooltip]=" 'STARK.MESSAGE_PANE.COLLAPSE' | translate"
+				[attr.aria-label]="'STARK.MESSAGE_PANE.COLLAPSE' | translate"
+				type="button">
+			<mat-icon svgIcon="adjust"></mat-icon>
+		</button>
+	</div>
+
+	<div class="stark-message-pane-content">
+		<ng-container *ngIf="currentNavItem === 'errors'">
+			<div class="stark-message-pane-item stark-message-pane-item-error errors"
+				 *ngFor="let message of (errorMessages$ | async); trackBy: trackItemFn">
+				<mat-icon starkSvgViewBox svgIcon="alert-circle"></mat-icon>
+				<div translate="{{message.key}}" translate-values="message.interpolateValues"></div>
+				<button mat-icon-button
+						class="mat-no-ink mat-icon-button"
+						[matTooltip]="'STARK.MESSAGE_PANE.CLOSE_MESSAGE' | translate"
+						(click)="removeMessage(message)"
+						[attr.aria-label]="'STARK.MESSAGE_PANE.CLOSE_MESSAGE' | translate">
+					<mat-icon svgIcon="close"></mat-icon>
+				</button>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="currentNavItem === 'warnings'">
+			<div class="stark-message-pane-item stark-message-pane-item-warning warnings"
+				 *ngFor="let message of (warningMessages$ | async); trackBy: trackItemFn">
+				<mat-icon starkSvgViewBox svgIcon="alert"></mat-icon>
+				<div translate="{{message.key}}" translate-values="message.interpolateValues"></div>
+				<button mat-icon-button
+						class="md-no-ink mat-icon-button"
+						[matTooltip]="'STARK.MESSAGE_PANE.CLOSE_MESSAGE' | translate"
+						(click)="removeMessage(message)"
+						[attr.aria-label]="'STARK.MESSAGE_PANE.CLOSE_MESSAGE' | translate">
+					<mat-icon svgIcon="close"></mat-icon>
+				</button>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="currentNavItem === 'infos'">
+			<div class="stark-message-pane-item stark-message-pane-item-info infos"
+				 *ngFor="let message of (infoMessages$ | async); trackBy: trackItemFn">
+				<mat-icon starkSvgViewBox svgIcon="information"></mat-icon>
+				<div translate="{{message.key}}" translate-values="message.interpolateValues"></div>
+				<button mat-icon-button
+						class="md-no-ink mat-icon-button"
+						[matTooltip]="'STARK.MESSAGE_PANE.CLOSE_MESSAGE' | translate"
+						(click)="removeMessage(message)"
+						[attr.aria-label]="'STARK.MESSAGE_PANE.CLOSE_MESSAGE' | translate">
+					<mat-icon svgIcon="close"></mat-icon>
+				</button>
+			</div>
+		</ng-container>
+	</div>
+</div>

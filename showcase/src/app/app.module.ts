@@ -57,6 +57,7 @@ import {
 	StarkBreadcrumbModule,
 	StarkDatePickerModule,
 	StarkLanguageSelectorModule,
+	StarkMessagePaneModule,
 	StarkSessionUiModule,
 	StarkSvgViewBoxModule,
 	StarkToastNotificationModule
@@ -207,6 +208,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		NgIdleKeepaliveModule.forRoot(), // FIXME: disabled in stark-app-config.json for now until json-server is integrated
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
+		StarkMessagePaneModule.forRoot(),
 		StarkSessionModule.forRoot(),
 		StarkSettingsModule.forRoot(),
 		StarkRoutingModule.forRoot(),
@@ -229,6 +231,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
 		StarkBreadcrumbModule,
+		StarkMessagePaneModule,
 		StarkToastNotificationModule.forRoot({
 			delay: 5000,
 			position: "top right",

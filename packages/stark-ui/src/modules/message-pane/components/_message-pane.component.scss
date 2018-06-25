@@ -1,0 +1,186 @@
+/* ============================================================================== */
+/*  S t a r k   M e s s a g e	P a n e                                           */
+/* ============================================================================== */
+/* stark-ui: src/modules/message-pane/components/message-pane.component.scss */
+$mes-pane-dark-bg: #323232;
+$mes-pane-light-bg: #fafafa;
+
+.stark-message-pane {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  left: 16px;
+  z-index: 80;
+  text-align: right;
+  display: none;
+  overflow: visible;
+  height: 0;
+  &.align-left {
+    text-align: left;
+  }
+  &.align-center {
+    text-align: center;
+  }
+  &.align-right {
+    text-align: right;
+  }
+}
+
+.stark-app-header .stark-message-pane {
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: 24px;
+  left: 0;
+}
+
+.stark-message-pane {
+  padding: 0 16px;
+  &.displayed {
+    display: block;
+  }
+  & .inner {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    color: $mes-pane-light-bg;
+    box-shadow: $elevation-2;
+    opacity: 0;
+    border-radius: 20px;
+    will-change: opacity, border-radius;
+    transition: all 0.4s;
+  }
+  &.display-animated .inner {
+    opacity: 1;
+    border-radius: 2px;
+  }
+
+  /* summary pane */
+  & .summary {
+    display: flex;
+    & button {
+      display: block;
+      box-sizing: border-box;
+      position: relative;
+      margin: 0;
+      background: none;
+      border: none;
+      padding: 8px;
+      &:focus {
+        outline: none;
+      }
+      &.active::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        background-color: $md-accent;
+      }
+      & b {
+        position: absolute;
+        background: #fff;
+        color: #212121;
+        font-size: 12px;
+        top: 4px;
+        right: 0;
+        padding: 0 2px;
+        border-radius: 2px;
+        font-weight: normal;
+        line-height: 14px;
+        width: 16px;
+        height: 14px;
+        box-shadow: $elevation-1;
+      }
+    }
+    & .may-collapse {
+      overflow: hidden;
+      width: 0;
+      padding: 8px 0;
+      will-change: width, padding;
+      transition: all 0.4s;
+      &.ng-animate {
+        transition: none !important;
+      }
+    }
+    & .stark-message-pane-total {
+      box-sizing: border-box;
+      overflow: hidden;
+      width: 0;
+      padding: 0;
+      will-change: width, padding;
+      transition: all 0.4s;
+      margin-right: auto;
+    }
+    & .collapse-pane {
+      overflow: hidden;
+      will-change: width, padding;
+      transition: all 0.4s;
+    }
+  }
+  &.display-animated .inner .may-collapse {
+    width: 48px;
+    padding: 8px;
+  }
+  &.collapsed {
+    & .inner {
+      border-radius: 20px;
+      & .may-collapse,
+      & .collapse-pane {
+        width: 0;
+        padding: 0;
+      }
+      & .stark-message-pane-total {
+        width: 48px;
+        padding: 8px;
+      }
+      & .stark-message-pane-content {
+        display: none;
+      }
+    }
+  }
+
+  /* content pane */
+  & .stark-message-pane-content {
+    /* stylelint-disable-next-line unit-no-unknown */
+    //max-height: calc(100vh-170px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  & .stark-message-pane-item {
+    width: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px 8px 16px;
+    border-top: solid 1px #b2b2b2;
+    word-wrap: break-word;
+    & > mat-icon {
+      margin-right: 8px;
+    }
+    & > div {
+      flex: 1;
+    }
+    & .md-button {
+      margin: 0 0 0 16px;
+      padding: 0;
+      &:not([disabled]) mat-icon {
+        color: #fff;
+      }
+    }
+  }
+  & mat-icon {
+    transition: all 0.4s;
+  }
+  /*& .errors > mat-icon {
+    fill: $message-alert !important;
+  }
+  & .warnings > mat-icon {
+    fill: $message-warning !important;
+  }
+  & .infos > mat-icon {
+    fill: $message-info !important;
+  }*/
+}
+/* END stark-ui: src/modules/message-pane/components/message-pane.component.scss */

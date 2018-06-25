@@ -141,6 +141,13 @@ export class AppComponent implements OnInit {
 									targetState: "demo-menu"
 								},
 								{
+									id: "menu-stark-ui-components-message-pane",
+									label: "Message pane",
+									isVisible: true,
+									isEnabled: true,
+									targetState: "demo-message-pane"
+								},
+								{
 									id: "menu-stark-ui-components-pagination",
 									label: "Pagination",
 									isVisible: true,
