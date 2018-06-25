@@ -40,6 +40,7 @@
     "class-validator": "0.7.3",
     "deep-freeze-strict": "1.1.1",
     "ibantools": "2.0.0",
+    "lodash": "4.17.10",
     "moment": "2.22.2",
     "uuid": "3.3.2"
   },

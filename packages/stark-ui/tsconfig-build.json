@@ -25,6 +25,7 @@
       "class-validator": ["../stark-core/node_modules/class-validator"],
       "moment": ["../stark-core/node_modules/moment"],
       "ibantools": ["../stark-core/node_modules/ibantools"],
+      "lodash": ["../stark-core/node_modules/lodash"],
       "rxjs/*": ["../../node_modules/rxjs/*"],
       "environments/environment": ["../../dist/packages/stark-core/src/common/environment"],
       "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
