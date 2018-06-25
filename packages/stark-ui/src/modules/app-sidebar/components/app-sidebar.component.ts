@@ -1,9 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
-import { from, Subscription } from "rxjs";
 import { MatSidenav, MatSidenavContainer, MatDrawerToggleResult } from "@angular/material/sidenav";
+import { from, Subscription } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAppSidebarOpenEvent, StarkAppSidebarService, STARK_APP_SIDEBAR_SERVICE } from "../services";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 export type StarkAppSidebarLeftMode = "regular" | "menu" | undefined;
 
@@ -24,7 +25,7 @@ const componentName: string = "stark-app-sidebar";
 		class: componentName
 	}
 })
-export class StarkAppSidebarComponent implements OnDestroy, OnInit {
+export class StarkAppSidebarComponent extends AbstractStarkUiComponent implements OnDestroy, OnInit {
 	/**
 	 * Reference to the MatSidenavContainer embedded in this component
 	 */
@@ -87,25 +88,30 @@ export class StarkAppSidebarComponent implements OnDestroy, OnInit {
 
 	/**
 	 * Class constructor
+	 * @param logger - The sidebar service of the application
 	 * @param sidebarService - The sidebar service of the application
+	 * @param breakpointObserver - Utility for checking the matching state of @media queries
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
-		public breakpointObserver: BreakpointObserver
-	) {}
+		public breakpointObserver: BreakpointObserver,
+		renderer: Renderer2,
+		elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle OnInit hook
 	 */
 	public ngOnInit(): void {
+		super.ngOnInit();
 		this.logger.debug(componentName + ": component initialized");
 
-		if (this.breakpointObserver.isMatched([this.mediaQueryGtLg])) {
-			this.sidenavLeftOpened = true;
-		} else {
-			this.sidenavLeftOpened = false;
-		}
+		this.sidenavLeftOpened = this.breakpointObserver.isMatched([this.mediaQueryGtLg]);
 
 		this.openSidebarSubscription = this.sidebarService.openSidebar$.subscribe((event: StarkAppSidebarOpenEvent) => {
 			this.onOpenSidenav(event);
@@ -126,34 +132,36 @@ export class StarkAppSidebarComponent implements OnDestroy, OnInit {
 
 	/**
 	 * Component lifecycle OnDestroy hook
-	 * Prevent memory leak when component destroyed
 	 */
 	public ngOnDestroy(): void {
 		this.openSidebarSubscription.unsubscribe();
 		this.closeSidebarSubscription.unsubscribe();
+		this.toggleSidebarSubscription.unsubscribe();
+		this.breakpointObserver.ngOnDestroy();
 	}
 
 	/**
 	 * Close one of the sidenavs
 	 * @param sidenav - The sidebar to close
+	 * @param successHandler - Handler function to be called when the sidenav closes
 	 */
 	public closeSidenav(sidenav: MatSidenav, successHandler: ((value: MatDrawerToggleResult) => void)): void {
-		from(sidenav.close()).subscribe(successHandler, this.displayErrorFallback);
+		from(sidenav.close()).subscribe(successHandler, this.displayErrorCallback);
 	}
 
 	/**
-	 * Fallback function when the sidenav has opened with success
+	 * Callback function to be called when the sidenav opens
 	 * @param result: MatDrawerToggleResult
 	 */
-	private displaySuccessFallback: ((value: MatDrawerToggleResult) => void) = (result: MatDrawerToggleResult) => {
+	private displaySuccessCallback: ((value: MatDrawerToggleResult) => void) = (result: MatDrawerToggleResult) => {
 		this.logger.debug(componentName + result);
 	};
 
 	/**
-	 * Fallback function when the sidenav opening raise an error
+	 * Callback function to be called when the sidenav failed to open
 	 * * @param error: Error
 	 */
-	private displayErrorFallback: ((error: Error) => void) = (error: Error) => {
+	private displayErrorCallback: ((error: Error) => void) = (error: Error) => {
 		this.logger.warn(componentName + ": ", error);
 	};
 
@@ -171,7 +179,7 @@ export class StarkAppSidebarComponent implements OnDestroy, OnInit {
 		switch (event.sidebar) {
 			case "left":
 				if (this.sidenavLeftType !== event.type && this.appSidenavLeft.opened) {
-					this.closeSidenav(this.appSidenavLeft, this.shiftLeftSidenavFallback);
+					this.closeSidenav(this.appSidenavLeft, this.shiftLeftSidenavCallback);
 				} else if (!this.appSidenavLeft.opened) {
 					this.sidenavLeftType = event.type;
 					this.setComponentBehaviour();
@@ -225,14 +233,14 @@ export class StarkAppSidebarComponent implements OnDestroy, OnInit {
 			case "left":
 				this.sidenavLeftType = event.type;
 				if (this.appSidenavLeft.opened) {
-					this.closeSidenav(this.appSidenavLeft, this.displaySuccessFallback);
+					this.closeSidenav(this.appSidenavLeft, this.displaySuccessCallback);
 				} else {
 					this.setComponentBehaviour();
 					this.openSidenav(this.appSidenavLeft);
 				}
 				break;
 			case "right":
-				from(this.appSidenavRight.toggle()).subscribe(this.displaySuccessFallback, this.displayErrorFallback);
+				from(this.appSidenavRight.toggle()).subscribe(this.displaySuccessCallback, this.displayErrorCallback);
 				break;
 			default:
 				break;
@@ -242,9 +250,40 @@ export class StarkAppSidebarComponent implements OnDestroy, OnInit {
 	/**
 	 * Open one of the sidenavs
 	 * @param sidenav - The sidebar to open
+	 * @param successHandler - Handler function to be called when the sidenav closes
 	 */
-	public openSidenav(sidenav: MatSidenav, successHandler: ((value: MatDrawerToggleResult) => void) = this.displaySuccessFallback): void {
-		from(sidenav.open()).subscribe(successHandler, this.displayErrorFallback);
+	public openSidenav(sidenav: MatSidenav, successHandler: ((value: MatDrawerToggleResult) => void) = this.displaySuccessCallback): void {
+		from(sidenav.open()).subscribe(successHandler, this.displayErrorCallback);
+	}
+
+	/**
+	 * Toggle the different classes when the sidenav is open or closed
+	 * @param isOpen - Whether the sidebar is open
+	 */
+	public toggleClassesOnOpen(isOpen: boolean): void {
+		if (isOpen) {
+			this.renderer.addClass(this.elementRef.nativeElement, "sidebar-open");
+			this.renderer.removeClass(this.elementRef.nativeElement, "sidebar-open-start");
+			this.renderer.removeClass(this.elementRef.nativeElement, "sidebar-close");
+		} else {
+			this.renderer.addClass(this.elementRef.nativeElement, "sidebar-close");
+			this.renderer.removeClass(this.elementRef.nativeElement, "sidebar-close-start");
+			this.renderer.removeClass(this.elementRef.nativeElement, "sidebar-open");
+		}
+	}
+
+	/**
+	 * Set the corresponding class when the sidenav starts to open
+	 */
+	public setClassOnOpenStart(): void {
+		this.renderer.addClass(this.elementRef.nativeElement, "sidebar-open-start");
+	}
+
+	/**
+	 * Set the corresponding class when the sidenav starts to close
+	 */
+	public setClassOnCloseStart(): void {
+		this.renderer.addClass(this.elementRef.nativeElement, "sidebar-close-start");
 	}
 
 	/**
@@ -263,10 +302,10 @@ export class StarkAppSidebarComponent implements OnDestroy, OnInit {
 	}
 
 	/**
-	 * Fallback function when the left sidenav needs to shift type
+	 * Callback function when the left sidenav needs to shift type
 	 * @param result: MatDrawerToggleResult
 	 */
-	public shiftLeftSidenavFallback: ((value: MatDrawerToggleResult) => void) = (result: MatDrawerToggleResult) => {
+	public shiftLeftSidenavCallback: ((value: MatDrawerToggleResult) => void) = (result: MatDrawerToggleResult) => {
 		this.logger.debug(componentName + ": sidenav " + result);
 		this.sidenavLeftType = this.sidenavLeftType === "menu" ? "regular" : "menu";
 		this.setComponentBehaviour();

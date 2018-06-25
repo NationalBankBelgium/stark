@@ -1,0 +1,46 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO.MESSAGE_PANE.TITLE</h1>
+<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+<section class="stark-section">
+<example-viewer [extensions]="['HTML', 'TS', 'SCSS']" filesPath="message-pane/message-pane"
+				[exampleTitle]="'SHOWCASE.DEMO.MESSAGE_PANE.EXAMPLE' | translate">
+	<p translate>SHOWCASE.DEMO.MESSAGE_PANE.DESCRIPTION</p>
+	<div class="message-pane-demo-actions">
+		<fieldset>
+			<legend>{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTON_GROUPS.DEMO" | translate }}</legend>
+			<button mat-raised-button color="primary"
+					(click)="notifyMessages()">{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTONS.SHOW_MESSAGES" | translate }}
+			</button>
+			<button mat-raised-button color="primary"
+					(click)="clearMessages()">{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTONS.CLEAR_MESSAGES" | translate }}
+			</button>
+			<button mat-raised-button color="primary"
+					(click)="clearAndNotifyMessages()">{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTONS.CLEAR_AND_SHOW_NEW_MESSAGES" | translate }}
+			</button>
+		</fieldset>
+
+		<fieldset>
+			<legend>{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTON_GROUPS.DISPLAY_ALIGNMENT" | translate }}</legend>
+			<div class="button-group set-msg-position">
+				<button [ngClass]="{'active': messagePanePosition==='left'}"
+						(click)="changeMessagePanePosition('left')">{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTONS.LEFT" | translate }}
+				</button>
+				<button [ngClass]="{'active': messagePanePosition==='center'}"
+						(click)="changeMessagePanePosition('center')">{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTONS.CENTER" | translate }}
+				</button>
+				<button [ngClass]="{'active': messagePanePosition==='right'}"
+						(click)="changeMessagePanePosition('right')">{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTONS.RIGHT" | translate }}
+				</button>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend>{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTON_GROUPS.DISPLAY_STYLE" | translate }}</legend>
+			<button mat-raised-button color="primary"
+					(click)="changeMessagePaneTheme()">{{ "SHOWCASE.DEMO.MESSAGE_PANE.BUTTONS.CHANGE_THEME" | translate }}
+			</button>
+		</fieldset>
+	</div>
+</example-viewer>
+</section>
+
+<stark-reference-block [links]="referenceList"></stark-reference-block>

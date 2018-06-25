@@ -154,6 +154,45 @@
         "SECTIONS": "Menu with sections",
         "TITLE": "Stark app menu"
       },
+      "MESSAGE_PANE": {
+        "BUTTONS": {
+          "CENTER": "Center",
+          "CHANGE_THEME": "Change theme",
+          "CLEAR_AND_SHOW_NEW_MESSAGES": "Clear & Show new messages",
+          "CLEAR_MESSAGES": "Clear messages",
+          "LEFT": "Left",
+          "RIGHT": "Right",
+          "SHOW_MESSAGES": "Show messages"
+        },
+        "DESCRIPTION": "The Message Pane will persist on the page until dismissed, but will not stop page interactions (like dialogs do). It can be used, for instance, to show validation errors of the form in case your app needs to keep them until dismissed.",
+        "MESSAGES": {
+          "ERRORS": {
+            "ERROR_1": "Error 1: Too many fingers on the keyboard - priority 500",
+            "ERROR_2": "Error 2: priority 10",
+            "ERROR_3": "Error 3: priority 200",
+            "NEW_ERROR_1": "New Error 1",
+            "NEW_ERROR_2": "New Error 2"
+          },
+          "WARNINGS": {
+            "WARNING_1": "Warning 1: priority 1",
+            "WARNING_2": "Warning 2: priority undefined",
+            "NEW_WARNING_1": "New warning 1"
+          },
+          "INFOS": {
+            "INFO_1": "Info 1: priority undefined",
+            "INFO_2": "Info 2: priority 998",
+            "NEW_INFO_1": "New info 1",
+            "NEW_INFO_2": "New info 2"
+          }
+        },
+        "TITLE": "Stark message pane",
+        "EXAMPLE": "Example",
+        "BUTTON_GROUPS": {
+          "DEMO": "Demo",
+          "DISPLAY_ALIGNMENT": "Display alignment",
+          "DISPLAY_STYLE": "Display style"
+        }
+      },
       "MINIMAP": {
         "TITLE": "Stark Minimap",
         "FULL": "Minimap (classic version)",

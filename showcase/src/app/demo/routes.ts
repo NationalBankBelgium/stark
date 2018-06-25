@@ -15,6 +15,8 @@ import { DemoKeyboardDirectivesComponent } from "./keyboard-directives";
 import { DemoLanguageSelectorComponent } from "./language-selector";
 import { DemoLogoutComponent } from "./logout";
 import { DemoMenuComponent } from "./menu";
+import { DemoMessagePaneComponent } from "./message-pane";
+import { DemoMinimapComponent } from "./minimap";
 import { DemoPaginationComponent } from "./pagination";
 import { DemoPrettyPrintComponent } from "./pretty-print";
 import { DemoSliderComponent } from "./slider";
@@ -22,7 +24,6 @@ import { DemoSidebarComponent } from "./sidebar";
 import { DemoTableComponent } from "./table";
 import { DemoToastComponent } from "./toast";
 import { DemoTypographyComponent } from "./typography";
-import { DemoMinimapComponent } from "./minimap";
 
 export const DEMO_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo", url: "^/demo", abstract: true, parent: "app" },
@@ -105,6 +106,11 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 		name: "demo.menu",
 		url: "/menu",
 		views: { "@": { component: DemoMenuComponent } }
+	},
+	{
+		name: "demo.message-pane",
+		url: "/demo/message-pane",
+		views: { "@": { component: DemoMessagePaneComponent } }
 	},
 	{
 		name: "demo.minimap",

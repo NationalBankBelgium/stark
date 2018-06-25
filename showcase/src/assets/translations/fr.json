@@ -154,6 +154,45 @@
         "SECTIONS": "Menu avec sections",
         "TITLE": "Stark app menu"
       },
+      "MESSAGE_PANE": {
+        "BUTTONS": {
+          "CENTER": "Centre",
+          "CHANGE_THEME": "Changer le thème",
+          "CLEAR_AND_SHOW_NEW_MESSAGES": "Effacer & Afficher les nouveaux messages",
+          "CLEAR_MESSAGES": "Effacer les messages",
+          "LEFT": "Gauche",
+          "RIGHT": "Droite",
+          "SHOW_MESSAGES": "Afficher les messages"
+        },
+        "DESCRIPTION": "Le volet de messages reste sur la page jusqu'à ce qu'il soit fermé. Néanmoins il ne bloque pas les interactions au sein de la page (contrairement aux boîtes de dialogue). Il peut, par exemple, être utilisé pour afficher les erreurs de validation d'un formulaire dans le cas où votre application nécessite de les conserver jusqu'à ce qu'elles soient fermées.",
+        "MESSAGES": {
+          "ERRORS": {
+            "ERROR_1": "Erreur 1: Trop de doigts sur le clavier - priorité 500",
+            "ERROR_2": "Erreur 2: priorité 10",
+            "ERROR_3": "Erreur 3: priorité 200",
+            "NEW_ERROR_1": "Nouvelle erreur 1",
+            "NEW_ERROR_2": "Nouvelle erreur 2"
+          },
+          "WARNINGS": {
+            "WARNING_1": "Avertissement 1: priorité 1",
+            "WARNING_2": "Avertissement 2: priorité non définie",
+            "NEW_WARNING_1": "Nouvel avertissement 1"
+          },
+          "INFOS": {
+            "INFO_1": "Info 1: priorité non définie",
+            "INFO_2": "Info 2: priorité 998",
+            "NEW_INFO_1": "Nouvelle info 1",
+            "NEW_INFO_2": "Nouvelle info 2"
+          }
+        },
+        "TITLE": "Stark Message Pane",
+        "EXAMPLE": "Example",
+        "BUTTON_GROUPS": {
+          "DEMO": "Demo",
+          "DISPLAY_ALIGNMENT": "Alignement d'affichage",
+          "DISPLAY_STYLE": "Style d'affichage"
+        }
+      },
       "MINIMAP": {
         "TITLE": "Stark Minimap",
         "FULL": "Minimap (version classic)",

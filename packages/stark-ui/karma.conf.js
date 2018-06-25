@@ -26,6 +26,7 @@ const karmaTypescriptBundlerAliasResolution = {
 			"@uirouter/rx": "../stark-core/node_modules/@uirouter/rx/lib/index.js",
 			cerialize: "../stark-core/node_modules/cerialize/index.js",
 			"class-validator": "../stark-core/node_modules/class-validator/index.js",
+			"deep-freeze-strict": "../stark-core/node_modules/deep-freeze-strict/index.js",
 			moment: "../stark-core/node_modules/moment/moment.js",
 			ibantools: "../stark-core/node_modules/ibantools/build/ibantools.js"
 		}
