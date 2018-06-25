@@ -7,7 +7,7 @@ import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, Star
 const componentName: string = "stark-app-logo";
 
 // FIXME: tslint rules temporarily disabled. Enable them once we decide the final implementation of component styles
-/* tslint:disable:enforce-component-selector use-view-encapsulation use-host-property-decorator */
+/* tslint:disable:enforce-component-selector use-host-property-decorator */
 @Component({
 	selector: componentName,
 	templateUrl: "./app-logo.component.html",
@@ -26,8 +26,8 @@ export class StarkAppLogoComponent implements OnInit {
 
 	/**
 	 * Class constructor
-	 * @param logger : the logger of the application
-	 * @param routingService : the routing service of the application
+	 * @param logger - The logger of the application
+	 * @param routingService - The routing service of the application
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -45,7 +45,7 @@ export class StarkAppLogoComponent implements OnInit {
 
 	/**
 	 * Handles the event when a click is made on the logo
-	 * @param $event: the handled event
+	 * @param $event - The handled event
 	 */
 	public logoClickHandler($event: Event): void {
 		// cancel the event otherwise Angular triggers a full page reload :(
