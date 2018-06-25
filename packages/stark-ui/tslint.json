@@ -25,6 +25,7 @@
       }
     ],
     "jsdoc-format": [true, "check-multiline-start"],
-    "no-redundant-jsdoc": true
+    "no-redundant-jsdoc": true,
+    "use-host-property-decorator": false
   }
 }

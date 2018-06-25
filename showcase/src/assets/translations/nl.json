@@ -42,7 +42,8 @@
         "SELECT_NUMBER": "Selecteer uw geluksnummer",
         "SELECT_SERVICES": "Selecteer een of meer diensten",
         "SELECT_ONE_SERVICE": "Selecteer ten minsten een dienst",
-        "SELECT_DISABLED": "Sorry, ditdés dropdown is niet geactiveerd"
+        "SELECT_DISABLED": "Sorry, deze dropdown is niet geactiveerd",
+        "WHITE": "Witte dropdown met zwarte achtergrond (maximum breedte)"
       },
       "HEADER": {
         "TITLE": "Stark App Header Guidelines",

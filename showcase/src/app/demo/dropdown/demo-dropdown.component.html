@@ -1,5 +1,5 @@
 <example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/single-required-selection" [exampleTitle]="'SHOWCASE.DEMO.DROPDOWNS.REQUIRED' | translate">
-	<stark-dropdown
+	<stark-dropdown 
 			dropdownId="serviceDropdown"
 			[options]="serviceDropdownOptions"
 			[value]="selectedService"
@@ -9,6 +9,7 @@
 			(dropdownSelectionChanged)="serviceDropdownOnChange($event)"
 			required>
 	</stark-dropdown>
+	
 	<div *ngIf="selectedService"> {{ 'SHOWCASE.DEMO.DROPDOWNS.SELECTED_VALUE' | translate }}: {{ selectedService }}</div>
 </example-viewer>
 
@@ -67,3 +68,19 @@
 	</stark-dropdown>
 </example-viewer>
 
+<example-viewer class="dark" [extensions]="['HTML', 'TS', 'CSS']" filesPath="dropdown/white" [exampleTitle]="'SHOWCASE.DEMO.DROPDOWNS.WHITE' | translate">
+	<stark-dropdown
+					class="stark-full-width"
+					color="white"
+					dropdownId="serviceWhiteDropdown"
+					[options]="serviceDropdownOptions"
+					[value]="selectedServiceWhiteDropdown"
+					placeholder="SHOWCASE.DEMO.DROPDOWNS.SELECT_SERVICE"
+					optionIdProperty="id"
+					optionLabelProperty="value"
+					(dropdownSelectionChanged)="whiteDropdownOnChange($event)"
+					required>
+	</stark-dropdown>
+
+	<div class="result-display" *ngIf="selectedServiceWhiteDropdown"> {{ 'SHOWCASE.DEMO.DROPDOWNS.SELECTED_VALUE' | translate }}: {{ selectedServiceWhiteDropdown }}</div>
+</example-viewer>

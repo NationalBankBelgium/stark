@@ -1,15 +1,4 @@
-import {
-	Component,
-	EventEmitter,
-	HostBinding,
-	Inject,
-	Input,
-	OnChanges,
-	OnInit,
-	Output,
-	SimpleChanges,
-	ViewEncapsulation
-} from "@angular/core";
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
@@ -24,15 +13,13 @@ const componentName: string = "stark-dropdown";
 @Component({
 	selector: "stark-dropdown",
 	templateUrl: "./dropdown.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
 export class StarkDropdownComponent implements OnInit, OnChanges, OnInit {
-	/**
-	 * Adds class="stark-dropdown" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
 	/**
 	 * If the dropdown will contain a default blank (optional)
 	 */

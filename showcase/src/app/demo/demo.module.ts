@@ -19,7 +19,7 @@ import { ButtonComponent } from "./button/button.component";
 import { DatePickerComponent } from "./date-picker/date-picker.component";
 import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
 import { DemoSidebarComponent } from "./sidebar/demo-sidebar.component";
-import { DropdownComponent } from "./dropdown/dropdown.component";
+import { DemoDropdownComponent } from "./dropdown/demo-dropdown.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { HeaderComponent } from "./header/header.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
@@ -77,7 +77,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		ButtonComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,
-		DropdownComponent,
+		DemoDropdownComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
 		KeyboardDirectivesComponent,
@@ -97,7 +97,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		ButtonComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,
-		DropdownComponent,
+		DemoDropdownComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
 		KeyboardDirectivesComponent,
