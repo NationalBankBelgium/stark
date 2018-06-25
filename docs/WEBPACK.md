@@ -83,3 +83,61 @@ if (ENV === "development") {
 	/* the code inside this block will be executed only in development */
 }
 ```
+
+
+#### [HtmlElementWebpackPlugin](https://github.com/fulls1z3/html-elements-webpack-plugin "HtmlElementWebpackPlugin")
+
+This webpack plugin appends head elements during the creation of index.html. 
+
+To use it, you'll have to create the `index-head-config.js` file to specify the `<link>` and `<meta>` you want to include in the `<head>` section of your index.html. 
+
+Create your file at the following location: 
+
+```txt
+|
++---yourApp
+|  	+---config
+|	|	index-head-config.js
+|   ...
+```
+
+Then, declare your file as follows: 
+
+````
+module.exports = {
+	link: [
+		{ rel: "manifest", href: "manifest.json" },
+		{ rel: "shortcut icon", type: "image/x-icon", href: "favicon.ico" },
+		{ rel: "apple-touch-icon", sizes: "120x120", href: "assets/images/app-icons/apple-icon-120x120.png" },
+		{ rel: "icon", type: "image/png", sizes: "32x32", href: "assets/images/app-icons/favicon-32x32.png" },
+		...
+	],
+	meta: [
+		...
+		{ name: "apple-mobile-web-app-capable", content: "yes" },
+		{ name: "apple-mobile-web-app-status-bar-style", content: "black" },
+		{ name: "apple-mobile-web-app-title", content: "template" },
+		{ name: "msapplication-config", content: "none" },
+		...
+	]
+}
+````
+
+Finally, to indicate to your index.html file that you want to use this new file, 
+you will have to add the following lines in your `<head>` section: 
+
+````
+<head>
+...
+	<% if (webpackConfig.htmlElements.headTags) { %>
+	<%= webpackConfig.htmlElements.headTags %>
+	<% } %>
+...
+</head>
+````
+
+_If you do not intend to use this way of working, simply don't create this file and
+ don't include the check for `webpackConfig.htmlElements.headTags` in the `<head>` section of index.html._  
+
+
+

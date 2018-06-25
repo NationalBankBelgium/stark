@@ -1,6 +1,7 @@
 "use strict";
 
 const helpers = require("./helpers");
+const fs = require("fs");
 const commonData = require("./webpack.common-data.js"); // common configuration between environments
 
 /**
@@ -16,6 +17,7 @@ const DefinePlugin = require("webpack/lib/DefinePlugin");
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const { AngularCompilerPlugin } = require("@ngtools/webpack");
+const HtmlElementsWebpackPlugin = require("html-elements-webpack-plugin");
 const AngularNamedLazyChunksWebpackPlugin = require("angular-named-lazy-chunks-webpack-plugin");
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const CircularDependencyPlugin = require("circular-dependency-plugin");
@@ -497,7 +499,7 @@ module.exports = options => {
 				platform: 0, // 0 = browser, 1 = server
 				compilerOptions: appNgcOptions,
 				tsConfigPath: METADATA.TS_CONFIG_PATH
-			})
+			}),
 
 			/**
 			 * Plugin: InlineManifestWebpackPlugin
@@ -507,6 +509,36 @@ module.exports = options => {
 			 */
 			// TODO evaluate this
 			// new InlineManifestWebpackPlugin(),
+
+			/**
+			 * Generate html tags based on javascript maps.
+			 *
+			 * If a publicPath is set in the webpack output configuration, it will be automatically added to
+			 * href attributes, you can disable that by adding a "=href": false property.
+			 * You can also enable it to other attribute by settings "=attName": true.
+			 *
+			 * The configuration supplied is map between a location (key) and an element definition object (value)
+			 * The location (key) is then exported to the template under then htmlElements property in webpack configuration.
+			 *
+			 * Example:
+			 *  Adding this plugin configuration
+			 *  new HtmlElementsWebpackPlugin({
+			 *  headTags: { ... }
+			 *  })
+			 *
+			 * Means we can use it in the template like this:
+			 * <%= webpackConfig.htmlElements.headTags %>
+			 *
+			 * @link : https://github.com/fulls1z3/html-elements-webpack-plugin
+			 *
+			 */
+			...(fs.existsSync(helpers.root("config/index-head-config.js"))
+				? [
+						new HtmlElementsWebpackPlugin({
+							headTags: require(helpers.root("config/index-head-config"))
+						})
+				  ]
+				: [])
 		],
 
 		/**
