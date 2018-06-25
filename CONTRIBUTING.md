@@ -264,6 +264,53 @@ If you make modifications, they'll be applied automatically after a Webpack rebu
 By default the showcase depends on published Stark packages over at npm.
 But once the main build script at Stark's root (cfr previous section) is executed (e.g., using `npm install` or `npm run build` at the root), then the showcase will depend on the contents of the dist folder.
 
+#### Modifying the news html file in the showcase
+
+To display news about **new releases of Stark**, a static html file, `new.component.html` can be modified.
+That file can be found at the following location:
+
+```txt
++---showcase
+|   +---src
+|   |   +---app
+|   |   |   +---news
+|   |   |   |   +---news.component.html
+...
+```
+
+To add a news, just do as follows:
+
+```
+<news-item [release]="'x.x.x'" [newsDate]="'xx/xx/xxxx'">
+	<div class="news-item-title">Write your news title here</div>
+	<div class="news-item-content">
+		Your contente will be written here<br>
+		This div is used to write text only<br>
+	</div>
+	<div class="news-item-image">
+		<img class="my-news-image">
+		If your news is going to contain an image,
+		you can add it here and indicates it's source in the `news.component.scss` file as below.
+	</div>
+</news-item>
+```
+
+Make sure to adapt the image's size for the screen that will display the news. For example, to set the size for a tablet screen, define
+your image size as follows in the `news.component.scss` file: 
+
+````
+@media #{$tablet-only-query}{
+ .my-news-image {
+    background-image: url("/assets/images/screenshots/my-example.png");
+    background-size: cover;
+    width: xxx;
+    height: xxx;
+  }
+}
+````
+
+Don't forget to indicate the correct class to use for your elements in the html file, otherwise they won't be displayed.
+
 ### Hacking the starter
 
 If you want to modify the starter:
