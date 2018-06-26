@@ -10,6 +10,12 @@ const karmaTypescriptFiles = [{ pattern: helpers.root("index.ts") }, { pattern: 
 
 // start customizing the Karma configuration from stark-testing
 const starkCoreSpecificConfiguration = Object.assign({}, defaultKarmaConfig, {
+	// list of files to exclude from unit tests for Stark-Core
+	exclude: [
+		"src/modules/*.ts", // contain only export statements
+		"src/**/*.module.ts" // module definition files don't need unit testing
+	],
+
 	// add missing files due to "@nationalbankbelgium/stark-core" imports used in mock files of the testing sub-package
 	files: [...defaultKarmaConfig.files, ...karmaTypescriptFiles]
 });

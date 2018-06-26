@@ -37,6 +37,13 @@ const starkUiSpecificConfiguration = Object.assign({}, defaultKarmaConfig, {
 	karmaTypescriptConfig: Object.assign(defaultKarmaConfig.karmaTypescriptConfig, {
 		bundlerOptions: Object.assign(defaultKarmaConfig.karmaTypescriptConfig.bundlerOptions, karmaTypescriptBundlerAliasResolution)
 	}),
+
+	// list of files to exclude from unit tests for Stark-Core
+	exclude: [
+		"src/modules/*.ts", // contain only export statements
+		"src/**/*.module.ts" // module definition files don't need unit testing
+	],
+
 	// add missing files due to "@nationalbankbelgium/stark-ui" imports used in mock files of the testing sub-package
 	files: [...defaultKarmaConfig.files, ...karmaTypescriptFiles]
 });
