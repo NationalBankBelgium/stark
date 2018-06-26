@@ -44,8 +44,8 @@ LATEST_DIR_NAME="latest"
 #TRAVIS_COMMIT=${COMMIT_HASH}
 #TRAVIS_REPO_SLUG="NationalBankBelgium/stark" # yes we're always on the correct repo
 #ENFORCE_SHOWCASE_VERSION_CHECK=false # allows not have consistency between tag version and showcase version
-#encrypted_e546efaa49e5_iv="foo" # variable needed for the decryption of the SSH private key
-#encrypted_e546efaa49e5_key="bar" # variable needed for the decryption of the SSH private key
+#encrypted_4290e9054abd_iv="foo" # variable needed for the decryption of the SSH private key
+#encrypted_4290e9054abd_key="bar" # variable needed for the decryption of the SSH private key
 
 # Point to a fork or any other repo
 #TARGET_REPO="git@github.com:dsebastien/stark.git"
@@ -178,27 +178,27 @@ if [[ ${TRAVIS:-} ]]; then
   # Those keys are needed to decrypt the ${SSH_KEY_ENCRYPTED} file, which contains the SSH private key
   # that we'll use to push to GitHub pages!
   logInfo "Verifying that the necessary decryption keys are available"
-  if [[ -z ${encrypted_e546efaa49e5_iv+x} ]]; then
-    encrypted_e546efaa49e5_iv=""
+  if [[ -z ${encrypted_4290e9054abd_iv+x} ]]; then
+    encrypted_4290e9054abd_iv=""
   fi
-  if [[ -z ${encrypted_e546efaa49e5_key+x} ]]; then
-    encrypted_e546efaa49e5_key=""
+  if [[ -z ${encrypted_4290e9054abd_key+x} ]]; then
+    encrypted_4290e9054abd_key=""
   fi
   
-  if [[ ${encrypted_e546efaa49e5_iv} == "" ]]; then
+  if [[ ${encrypted_4290e9054abd_iv} == "" ]]; then
     logInfo "Not publishing because the SSH key decryption IV is not available as environment variable" 1
     exit 0;
   else
     logTrace "SSH key decryption IV is available" 2
-    ENCRYPTED_IV=${encrypted_e546efaa49e5_iv}
+    ENCRYPTED_IV=${encrypted_4290e9054abd_iv}
   fi
   
-  if [[ ${encrypted_e546efaa49e5_key} == "" ]]; then
+  if [[ ${encrypted_4290e9054abd_key} == "" ]]; then
     logInfo "Not publishing because the SSH key decryption key is not available as environment variable" 1
     exit 0;
   else
     logTrace "SSH key decryption key is available" 2
-    ENCRYPTED_KEY=${encrypted_e546efaa49e5_key}
+    ENCRYPTED_KEY=${encrypted_4290e9054abd_key}
   fi
   
   # If any of the previous commands in the `script` section of .travis.yaml failed, then abort.
