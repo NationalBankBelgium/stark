@@ -9,7 +9,6 @@
 	"changelogCommand": "npm run generate:changelog-recent",
 	"buildCommand": false,
 	"safeBump": false,
-	"beforeChangelogCommand": false,
 	"requireCleanWorkingDir": true,
 	"requireUpstream": true,
 	"src": {
