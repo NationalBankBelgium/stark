@@ -1,0 +1,53 @@
+@import "~@angular/material/theming";
+
+//Vars
+$border-radius: 2px;
+
+//Colors
+$stark-color-theme: mat-light-theme(mat-palette($mat-blue), mat-palette($mat-green), mat-palette($mat-red)) !default;
+@include angular-material-theme($stark-color-theme);
+
+//Button
+@import "button-theme";
+$button-theme: (
+  border-radius: $border-radius,
+  font-size: 14px,
+  font-weight: 500,
+  line-height: 36px,
+  padding: 0 16px,
+  small-font-size: 12px,
+  small-font-weight: 500,
+  small-line-height: 26px,
+  small-min-width: 50px,
+  small-padding: 0 5px,
+  large-font-size: 30px,
+  large-font-weight: 500,
+  large-line-height: 52px,
+  large-min-width: 88px,
+  large-padding: 0 20px
+);
+@if variable-exists(stark-button-theme) {
+  $button-theme: map-merge($button-theme, $stark-button-theme);
+}
+@include stark-button-theme($button-theme);
+
+//Card
+@import 'card-theme';
+$card-theme: (
+  border-radius: $border-radius
+);
+@include stark-card-theme($card-theme);
+
+//Table
+@import "table-theme";
+$table-theme: (
+  border-radius: $border-radius
+);
+@if variable-exists(stark-table-theme) {
+  $table-theme: map-merge($table-theme, $stark-table-theme);
+}
+@include stark-table-theme($table-theme);
+
+//Fonts
+@import "typography-theme";
+@include mat-core($typography-config);

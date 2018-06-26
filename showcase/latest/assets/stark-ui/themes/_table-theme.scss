@@ -1,0 +1,5 @@
+@mixin stark-table-theme($theme) {
+  .stark-table table {
+    border-radius: map-get($theme, border-radius);
+  }
+}

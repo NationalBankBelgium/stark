@@ -1,0 +1,26 @@
+@mixin stark-button-theme($theme) {
+  button[mat-raised-button],
+  a[mat-raised-button] {
+    border-radius: map-get($theme, border-radius);
+    /*padding: map-get($theme, padding);
+    line-height: map-get($theme, line-height);*/
+  }
+
+  button[mat-raised-button].stark-small-button,
+  a[mat-raised-button].stark-small-button {
+    font-size: map-get($theme, small-font-size);
+    font-weight: map-get($theme, small-font-weight);
+    line-height: map-get($theme, small-line-height);
+    min-width: map-get($theme, small-min-width);
+    padding: map-get($theme, small-padding);
+  }
+
+  button[mat-raised-button].stark-large-button,
+  a[mat-raised-button].stark-large-button {
+    font-size: map-get($theme, large-font-size);
+    font-weight: map-get($theme, large-font-weight);
+    line-height: map-get($theme, large-line-height);
+    min-width: map-get($theme, large-min-width);
+    padding: map-get($theme, large-padding);
+  }
+}
