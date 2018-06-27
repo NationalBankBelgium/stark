@@ -1,7 +1,12 @@
+const helpers = require("./node_modules/@nationalbankbelgium/stark-testing/helpers");
+
 /**
  * Load karma config from Stark
  */
-const defaultKarmaCIConfig = require("./node_modules/@nationalbankbelgium/stark-testing/karma.conf.js").rawKarmaConfig;
+const defaultKarmaConfig = require("./node_modules/@nationalbankbelgium/stark-testing/karma.conf.js").rawKarmaConfig;
+
+// entry files of the "@nationalbankbelgium/stark-ui" module imported in mock files
+const karmaTypescriptFiles = [{ pattern: helpers.root("index.ts") }, { pattern: helpers.root("public_api.ts") }];
 
 const karmaTypescriptBundlerAliasResolution = {
 	resolve: {
@@ -27,11 +32,13 @@ const karmaTypescriptBundlerAliasResolution = {
 };
 
 // start customizing the KarmaCI configuration from stark-testing
-const starkUiSpecificConfiguration = Object.assign({}, defaultKarmaCIConfig, {
+const starkUiSpecificConfiguration = Object.assign({}, defaultKarmaConfig, {
 	// change the module resolution for the KarmaTypescript bundler
-	karmaTypescriptConfig: Object.assign(defaultKarmaCIConfig.karmaTypescriptConfig, {
-		bundlerOptions: Object.assign(defaultKarmaCIConfig.karmaTypescriptConfig.bundlerOptions, karmaTypescriptBundlerAliasResolution)
-	})
+	karmaTypescriptConfig: Object.assign(defaultKarmaConfig.karmaTypescriptConfig, {
+		bundlerOptions: Object.assign(defaultKarmaConfig.karmaTypescriptConfig.bundlerOptions, karmaTypescriptBundlerAliasResolution)
+	}),
+	// add missing files due to "@nationalbankbelgium/stark-ui" imports used in mock files of the testing sub-package
+	files: [...defaultKarmaConfig.files, ...karmaTypescriptFiles]
 });
 
 // export the configuration function that karma expects and simply return the stark configuration
@@ -39,5 +46,6 @@ module.exports = {
 	default: function(config) {
 		return config.set(starkUiSpecificConfiguration);
 	},
-	karmaTypescriptBundlerAliasResolution: karmaTypescriptBundlerAliasResolution
+	karmaTypescriptBundlerAliasResolution: karmaTypescriptBundlerAliasResolution,
+	karmaTypescriptFiles: karmaTypescriptFiles
 };

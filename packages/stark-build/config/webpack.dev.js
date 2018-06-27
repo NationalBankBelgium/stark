@@ -25,18 +25,16 @@ const WebpackMonitor = require("webpack-monitor");
  * See: https://webpack.js.org/configuration/
  */
 module.exports = function(env) {
-	// for the content of the env parameter see here :  https://webpack.js.org/api/cli/#environment-options
 	const ENV = (process.env.ENV = process.env.NODE_ENV = "development");
-	const HOST = process.env.HOST || "localhost";
-	const PORT = process.env.PORT || 3000;
 	let MONITOR = false;
+	// for the content of the env parameter see here :  https://webpack.js.org/api/cli/#environment-options
 	if (env && typeof env.monitor !== "undefined") {
 		MONITOR = env.monitor;
 	}
 
 	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {
-		HOST: HOST,
-		PORT: PORT,
+		HOST: process.env.HOST || "localhost",
+		PORT: process.env.PORT || 3000,
 		ENV: ENV,
 		HMR: helpers.hasProcessFlag("hot"),
 		environment: helpers.hasProcessFlag("hot") ? "hmr" : "dev"

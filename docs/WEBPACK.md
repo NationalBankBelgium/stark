@@ -1,6 +1,6 @@
 # Webpack Customizations
 
-Stark-Build uses several Webpack plugins as well as some utils in order to leverage lots of functionality and customizations to your builds (DEV and PROD).
+The stark-build package uses several Webpack plugins as well as some utils in order to leverage lots of functionality and customizations to your builds (DEV and PROD).
 
 This is the list of utils and plugins used by the stark-build package:
 
@@ -41,7 +41,7 @@ The only thing you need to do is to configure the **baseHref** and **deployUrl**
 
 Allows to customize the base url in the _index.html_ via the webpack config.
 
-In Stark-Build, the custom base url provided to this plugin is the one you define in the **baseHref** option of your project's _angular.json_ file:
+In stark-build, the custom base url provided to this plugin is the one you define in the **baseHref** option of your project's _angular.json_ file:
 
 ```json
 {
@@ -64,3 +64,22 @@ In Stark-Build, the custom base url provided to this plugin is the one you defin
 ```
 
 This plugin will automatically add the base tag `<base href="<custom-base-url>">` to the _index.html_ so you don't need to add it manually yourself.
+
+#### [DefinePlugin](https://webpack.js.org/plugins/define-plugin)
+
+Allows to define global variables that will be available during the compilation and building of the application bundles.
+
+In this case, stark-build provides some global variables that are available at compilation time, which means that you can implement some checks in your code and this will be analyzed when your application bundle is being built by Webpack.
+
+The global variables available at compilation time are the following:
+
+-   `ENV` which indicates the current environment: `"development"` or `"production"`
+-   `HMR` which indicates whether the Hot Module Replacement support is enabled (true/false).
+
+Since the Define plugin defines those variables as global, you can use them everywhere in your code like this:
+
+```typescript
+if (ENV === "development") {
+	/* the code inside this block will be executed only in development */
+}
+```

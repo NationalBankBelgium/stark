@@ -3,9 +3,9 @@ const fs = require("fs");
 const cliUtilConfig = require("@angular/cli/utilities/config");
 const { formatDiagnostics } = require("@angular/compiler-cli/ngtools2");
 
-function isDirectory(path) {
+function isDirectory(pathToCheck) {
 	try {
-		return fs.statSync(path).isDirectory();
+		return fs.statSync(pathToCheck).isDirectory();
 	} catch (_) {
 		return false;
 	}
@@ -13,6 +13,26 @@ function isDirectory(path) {
 
 function getDirectoriesNames(source) {
 	return fs.readdirSync(source).filter(name => isDirectory(path.join(source, name)));
+}
+
+function getAngularCliAppConfig(angularCliAppConfigPath) {
+	if (fs.existsSync(angularCliAppConfigPath)) {
+		const angularCliConfig = require(angularCliAppConfigPath);
+		const cliConfig = validateAngularCLIConfig(angularCliConfig);
+		if (cliConfig) {
+			if (cliConfig.defaultProject && cliConfig.projects[cliConfig.defaultProject]) {
+				return cliConfig.projects[cliConfig.defaultProject];
+			} else {
+				throw new Error(
+					"The configuration of the default project in angular.json is wrong. Please adapt it to follow Angular CLI guidelines."
+				);
+			}
+		} else {
+			throw new Error("Parsing " + angularCliAppConfigPath + " failed. Please make sure that the file is valid JSON.");
+		}
+	} else {
+		throw new Error("angular.json is not present. Please add this at the root your project because stark-build needs this.");
+	}
 }
 
 /**
@@ -43,7 +63,8 @@ function getWorkspace() {
 	return cliUtilConfig.getWorkspace();
 }
 
+exports.getAngularCliAppConfig = getAngularCliAppConfig;
 exports.getDirectoriesNames = getDirectoriesNames;
+exports.getWorkspace = getWorkspace;
 exports.isDirectory = isDirectory;
 exports.validateAngularCLIConfig = validateAngularCLIConfig;
-exports.getWorkspace = getWorkspace;

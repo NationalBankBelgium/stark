@@ -2,6 +2,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { validateSync } from "class-validator";
+import { Deserialize } from "cerialize";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 
@@ -41,17 +42,15 @@ export class StarkUserServiceImpl implements StarkUserService {
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_USER_REPOSITORY) public userRepository: StarkUserRepository,
-		// FIXME Use starkMockData
-		@Inject(STARK_MOCK_DATA) _starkMockData: StarkMockData,
+		@Inject(STARK_MOCK_DATA) starkMockData: StarkMockData,
 		public store: Store<StarkCoreApplicationState>
 	) {
 		this.logger.debug(starkUserServiceName + " loaded");
 
-		// FIXME Where does DEVELOPMENT Variable come from ???
-		// if (DEVELOPMENT) {
-		// 	this.logger.debug(starkUserServiceName + ": Retrieving the user profiles from the mock data");
-		// 	this.userProfiles = Deserialize(starkMockData.profiles, StarkUser);
-		// }
+		if (ENV === "development") {
+			this.logger.debug(starkUserServiceName + ": Retrieving the user profiles from the mock data");
+			this.userProfiles = Deserialize(starkMockData.profiles, StarkUser);
+		}
 	}
 
 	public fetchUserProfile(): Observable<StarkUser> {

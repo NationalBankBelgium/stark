@@ -4,7 +4,8 @@
     "module": "commonjs",
     "paths": {
       "@nationalbankbelgium/stark-core/testing": ["../../dist/packages/stark-core/testing"],
-      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"]
+      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
+      "@nationalbankbelgium/stark-ui": ["."]
     }
   },
   "files": null,

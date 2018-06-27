@@ -51,8 +51,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		request = this.removeETagFromRequestItem(request);
 
 		// NG-1346: fake pre-authentication support
-		// FIXME: DEVELOPMENT env variable?
-		if (/*DEVELOPMENT &&*/ request.backend.fakePreAuthenticationEnabled) {
+		if (ENV === "development" && request.backend.fakePreAuthenticationEnabled) {
 			request = this.addFakePreAuthenticationHeaders(request);
 		}
 
@@ -97,8 +96,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 	public executeCollectionRequest(request: StarkHttpRequest<P>): Observable<StarkCollectionResponseWrapper<P>> {
 		// NG-1346: fake pre-authentication support
-		// FIXME: DEVELOPMENT env variable?
-		if (/*DEVELOPMENT &&*/ request.backend.fakePreAuthenticationEnabled) {
+		if (ENV === "development" && request.backend.fakePreAuthenticationEnabled) {
 			request = this.addFakePreAuthenticationHeaders(request);
 		}
 

@@ -17,6 +17,7 @@
     "node": ">=6.11.0",
     "npm": ">=5.3.0"
   },
+  "types": "typings/index.d.ts",
   "dependencies": {
     "@angular-devkit/build-angular": "0.6.8",
     "@angular-devkit/build-optimizer": "0.6.8",

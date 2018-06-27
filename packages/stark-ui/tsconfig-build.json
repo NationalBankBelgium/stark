@@ -3,7 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "typeRoots": ["./node_modules/@types", "./node_modules/@nationalbankbelgium/stark-testing/node_modules/@types"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@nationalbankbelgium/stark-testing/node_modules/@types",
+      "../stark-build/typings"
+    ],
     "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
       "@angular/animations": ["../../node_modules/@angular/animations"],
@@ -21,7 +25,9 @@
       "moment": ["../stark-core/node_modules/moment"],
       "ibantools": ["../stark-core/node_modules/ibantools"],
       "rxjs/*": ["../../node_modules/rxjs/*"],
-      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"]
+      "environments/environment": ["../../dist/packages/stark-core/src/common/environment"],
+      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
+      "@nationalbankbelgium/stark-ui": ["."]
     },
     "outDir": "../../dist/packages/stark-ui"
   },

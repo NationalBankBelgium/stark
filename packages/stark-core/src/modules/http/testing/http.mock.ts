@@ -1,5 +1,9 @@
-import { StarkHttpService } from "../services";
-import { StarkHttpRequest, StarkSingleItemResponseWrapper, StarkCollectionResponseWrapper } from "../entities";
+import {
+	StarkHttpService,
+	StarkHttpRequest,
+	StarkSingleItemResponseWrapper,
+	StarkCollectionResponseWrapper
+} from "@nationalbankbelgium/stark-core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 /**

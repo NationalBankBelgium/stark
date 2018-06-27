@@ -8,7 +8,7 @@ import { select, Store } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
 import { validateSync } from "class-validator";
 import { defer, Observable, Subject } from "rxjs";
-import { map, take } from "rxjs/operators";
+import { map, take, filter, tap } from "rxjs/operators";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { StarkSessionService, starkSessionServiceName } from "./session.service.intf";
@@ -89,13 +89,14 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 
 		this.session$ = this.store.pipe(select(selectStarkSession));
 
-		// FIXME Where does DEVELOPMENT Variable come from ???
-		// if (DEVELOPMENT) {
-		// 	this.session$.pipe(
-		// 		filter((session: StarkSession) => session.hasOwnProperty("user")),
-		// 		tap((session: StarkSession) => this.setFakePreAuthenticationHeaders(session.user))
-		// 	).subscribe();
-		// }
+		if (ENV === "development") {
+			this.session$
+				.pipe(
+					filter((session: StarkSession) => session.hasOwnProperty("user")),
+					tap((session: StarkSession) => this.setFakePreAuthenticationHeaders(session.user))
+				)
+				.subscribe();
+		}
 
 		if (window) {
 			window.addEventListener("beforeunload", () => {
@@ -292,12 +293,11 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		let pingRequestHeaders: HttpHeaders = new HttpHeaders();
 		pingRequestHeaders = pingRequestHeaders.set(StarkHttpHeaders.NBB_CORRELATION_ID, this.logger.correlationId);
 
-		// FIXME Where does DEVELOPMENT Variable come from ???
-		// if (DEVELOPMENT) {
-		this.fakePreAuthenticationHeaders.forEach((value: string, key: string) => {
-			pingRequestHeaders = pingRequestHeaders.set(key, value);
-		});
-		// }
+		if (ENV === "development") {
+			this.fakePreAuthenticationHeaders.forEach((value: string, key: string) => {
+				pingRequestHeaders = pingRequestHeaders.set(key, value);
+			});
+		}
 
 		const pingRequest: HttpRequest<void> = new HttpRequest("GET", <string>this.appConfig.keepAliveUrl, {
 			headers: pingRequestHeaders

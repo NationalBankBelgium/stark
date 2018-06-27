@@ -3,7 +3,21 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "../",
-    "typeRoots": ["../node_modules/@types", "../node_modules/@nationalbankbelgium/stark-testing/node_modules/@types"],
+    "typeRoots": [
+      "../node_modules/@types",
+      "../node_modules/@nationalbankbelgium/stark-testing/node_modules/@types",
+      "../../stark-build/typings"
+    ],
+    "paths": {
+      "cerialize": ["../../stark-core/node_modules/cerialize"],
+      "@ng-idle/*": ["../../stark-core/node_modules/@ng-idle/*"],
+      "@ngrx/*": ["../../stark-core/node_modules/@ngrx/*"],
+      "@ngx-translate/*": ["../../stark-core/node_modules/@ngx-translate/*"],
+      "@uirouter/*": ["../../stark-core/node_modules/@uirouter/*"],
+      "environments/environment": ["../../../dist/packages/stark-core/src/common/environment"],
+      "@nationalbankbelgium/stark-core": ["../../../dist/packages/stark-core"],
+      "@nationalbankbelgium/stark-ui": ["../"]
+    },
     "outDir": "../../../dist/packages/stark-ui"
   },
 
