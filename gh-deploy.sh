@@ -133,48 +133,48 @@ travisFoldStart "docs publication checks" "no-xtrace"
 if [[ ${TRAVIS:-} ]]; then
   logInfo "Publishing docs to GH pages";
   logInfo "============================================="
-  
+
   # Don't even try if not running against the official repo
   # We don't want docs publish to run outside of our own little world
   if [[ ${TRAVIS_REPO_SLUG} != ${EXPECTED_REPO_SLUG} ]]; then
     logInfo "Skipping release because this is not the main repository.";
     exit 0;
   fi
-  
+
   # Ensuring that this is the execution for Node x
   # Without this check, we would publish a release for each node version we test under! :)
   if [[ ${TRAVIS_NODE_VERSION} != ${EXPECTED_NODE_VERSION} ]]; then
     logInfo "Skipping release because this is not the expected version of node: ${TRAVIS_NODE_VERSION}"
     exit 0;
   fi
-  
+
   logInfo "Verifying if this build has been triggered for a tag" 
   # Making sure the variables exist..
   if [[ -z ${TRAVIS_TAG+x} ]]; then
     TRAVIS_TAG=""
   fi
-  
+
   if [[ -z ${TRAVIS_PULL_REQUEST+x} ]]; then
     TRAVIS_PULL_REQUEST=""
   fi
-  
+
   if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
     logInfo "Not publishing because this is a build triggered for a pull request" 1
     exit 0;
   fi
-  
+
   if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
     logInfo "Not publishing because this is a build triggered for a nightly build" 1
     exit 0;
   fi
-  
+
   if [[ ${TRAVIS_TAG} == "" ]]; then
     logInfo "Not publishing because this is not a build triggered for a tag" 1
     exit 0;
   else
     logInfo "OK, this build has been triggered for a tag"
   fi
-  
+
   # Those keys are needed to decrypt the ${SSH_KEY_ENCRYPTED} file, which contains the SSH private key
   # that we'll use to push to GitHub pages!
   logInfo "Verifying that the necessary decryption keys are available"
@@ -184,7 +184,7 @@ if [[ ${TRAVIS:-} ]]; then
   if [[ -z ${encrypted_4290e9054abd_key+x} ]]; then
     encrypted_4290e9054abd_key=""
   fi
-  
+
   if [[ ${encrypted_4290e9054abd_iv} == "" ]]; then
     logInfo "Not publishing because the SSH key decryption IV is not available as environment variable" 1
     exit 0;
@@ -192,7 +192,7 @@ if [[ ${TRAVIS:-} ]]; then
     logTrace "SSH key decryption IV is available" 2
     ENCRYPTED_IV=${encrypted_4290e9054abd_iv}
   fi
-  
+
   if [[ ${encrypted_4290e9054abd_key} == "" ]]; then
     logInfo "Not publishing because the SSH key decryption key is not available as environment variable" 1
     exit 0;
@@ -200,7 +200,7 @@ if [[ ${TRAVIS:-} ]]; then
     logTrace "SSH key decryption key is available" 2
     ENCRYPTED_KEY=${encrypted_4290e9054abd_key}
   fi
-  
+
   # If any of the previous commands in the `script` section of .travis.yaml failed, then abort.
   # The variable is not set in early stages of the build, so we default to 0 there.
   # https://docs.travis-ci.com/user/environment-variables/
@@ -259,11 +259,11 @@ if [[ ${DRY_RUN} == false ]]; then
     openssl aes-256-cbc -K ${ENCRYPTED_KEY} -iv ${ENCRYPTED_IV} -in ./${SSH_KEY_ENCRYPTED} -out ./${SSH_KEY_CLEARTEXT_FILE} -d
     chmod 600 ./${SSH_KEY_CLEARTEXT_FILE}
     logTrace "Decrypted the SSH private key"
-    
+
     # to test the connection with GitHub using the decrypted key 
     # logTrace "Hi github.com!"
     # ssh -T git@github.com -i ./${SSH_KEY_CLEARTEXT_FILE}
-    
+
     # we use our decrypted private SSH key
     logTrace "Setting SSH config"
     mv -f ./${SSH_KEY_CLEARTEXT_FILE} ~/.ssh
@@ -303,8 +303,12 @@ syncFiles ${API_DOCS_SOURCE_DIR}/${STARK_UI} ${API_DOCS_TARGET_DIR_STARK_UI_LATE
 
 logTrace "Copying ${SHOWCASE}"
 
-syncFiles ${SHOWCASE_SOURCE_DIR} ${SHOWCASE_TARGET_DIR} "${syncOptions[@]}"
+NODE_REPLACE_URLS="node ${PROJECT_ROOT_DIR}/${SHOWCASE}/ghpages-adapt-bundle-urls.js"
+
+$NODE_REPLACE_URLS "${LATEST_DIR_NAME}"
 syncFiles ${SHOWCASE_SOURCE_DIR} ${SHOWCASE_TARGET_DIR_LATEST} "${syncOptions[@]}"
+$NODE_REPLACE_URLS "${DOCS_VERSION}" "${LATEST_DIR_NAME}"
+syncFiles ${SHOWCASE_SOURCE_DIR} ${SHOWCASE_TARGET_DIR} "${syncOptions[@]}"
 
 unset syncOptions
 

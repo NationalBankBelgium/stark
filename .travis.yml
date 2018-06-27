@@ -49,7 +49,7 @@ script:
   - npm run lint:all
   - npm run test:ci:all
   - npm run docs:coverage
-  - npm run build:showcase
+  - npm run build:showcase:ghpages
   - npm run docs:publish
   - npm run release:publish
   - bash ./scripts/ci/print-logs.sh
