@@ -5,10 +5,13 @@ const helpers = require("./helpers");
 const ngCliUtils = require("./ng-cli-utils");
 
 const angularCliAppConfig = ngCliUtils.getAngularCliAppConfig(helpers.root("angular.json"));
+
+// default values for baseHref and deployUrl are taken from
+// node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/styles.js
 const ANGULAR_APP_CONFIG = {
 	config: angularCliAppConfig,
 	deployUrl: angularCliAppConfig.architect.build.options.deployUrl || "",
-	baseHref: angularCliAppConfig.architect.build.options.baseHref || "/",
+	baseHref: angularCliAppConfig.architect.build.options.baseHref || "",
 	sourceRoot: angularCliAppConfig.sourceRoot,
 	outputPath: angularCliAppConfig.architect.build.options.outputPath
 };
@@ -39,17 +42,26 @@ function readTsConfig(tsConfigPath) {
 }
 
 /**
- * The method reads the content of angular.json for getting the path (read with value or replace in "fileReplacements" of environment.
+ * Read the content of angular.json to get the path of the environment file.
+ * It returns the path of the replacement file defined in "fileReplacements" of the environment or the default file
+ * in case the replacement file does not exist.
  *
  * See: https://github.com/angular/angular-cli/wiki/angular-workspace
  *
  * @param environment
- * @returns {*} - the path of the environment file of the received environment.
+ * @returns {string} - The path of the environment file of the given environment.
  */
 function getEnvironmentFile(environment) {
 	if (typeof environment === "string") {
 		let fileName = helpers.root("src/environments/environment.ts");
 		let fileNameAlt;
+
+		// the production config is under "production" section instead of "prod" in angular.json
+		// see https://github.com/angular/angular-cli/wiki/stories-application-environments
+		if (environment === "prod") {
+			environment = "production";
+		}
+
 		let angularCliEnvConfig = ANGULAR_APP_CONFIG.config.architect.build.configurations[environment];
 
 		if (angularCliEnvConfig && angularCliEnvConfig.fileReplacements instanceof Array) {
@@ -59,12 +71,19 @@ function getEnvironmentFile(environment) {
 					fileNameAlt = helpers.root(angularCliEnvConfig.fileReplacements[0].replace);
 				}
 			}
+		} else {
+			// for "dev" environment the default environment.ts file is used
+			if (environment !== "dev") {
+				throw new Error(
+					`Configuration for '${environment}' not found in angular.json or it contains invalid fileReplacements section.`
+				);
+			}
 		}
 
 		if (fs.existsSync(fileName)) {
 			return fileName;
 		} else if (fs.existsSync(fileNameAlt)) {
-			console.warn(`Could not find environment file for ${environment}, loading default environment file`);
+			console.warn(`Could not find environment file for '${environment}', loading default environment file`);
 			return fileNameAlt;
 		} else {
 			throw new Error("Environment file not found.");
@@ -76,7 +95,7 @@ function getEnvironmentFile(environment) {
  * Read the tsconfig to determine if we should prefer ES2015 modules.
  * Load rxjs path aliases.
  * https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md#build-and-treeshaking
- * @param shouldSupportES2015 Set to true when the output of typescript is >= ES6
+ * @param shouldSupportES2015 - Set to true when the output of typescript is >= ES6
  */
 function rxjsAlias(shouldSupportES2015) {
 	try {
@@ -90,9 +109,9 @@ function rxjsAlias(shouldSupportES2015) {
 }
 
 /**
- * Foreach installed NationalBankBelgium packages, read angular.json file in the root of the module.
- * Based on angular.json file, fill an array with the needed assets for the module.
- * Then return those to be read by CopyWebpackPlugin.
+ * Read the assets array in the angular.json file of each NationalBankBelgium package installed in node_modules and concatenate
+ * them into one single array that will be provided to the CopyWebpackPlugin.
+ * @returns {Array} An array containing the assets to be copied by CopyWebpackPlugin.
  */
 function getNbbAssetsConfig() {
 	let customAssets = [];
