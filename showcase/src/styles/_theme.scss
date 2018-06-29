@@ -1,43 +1,8 @@
 @import "~@angular/material/theming";
-
-//use stark prefix
-/*$color-primary: mat-palette($mat-pink, 500, 900, 50);
-$color-accent: mat-palette($mat-pink, 400);
-$color-warn: mat-palette($mat-red, 900);
-$stark-color-theme: mat-light-theme($color-primary, $color-accent, $color-warn);*/
-
-//Theme shared components
-$border-radius: 2px;
-
-//font-size, line-height, font-weight
-/*$stark-typography-theme: (
-  font-family: '"Oswald", sans-serif',
-  headline: (90px, 48px, 400),
-  body-1: (14px, 20px, 400),
-  body-2: (14px, 24px, 500),
-  caption: (12px, 20px, 400)
-);*/
-
-$stark-button-theme: (
-  border-radius: $border-radius,
-  font-size: 14px,
-  font-weight: 500,
-  line-height: 36px,
-  padding: 0 16px,
-  small-font-size: 12px,
-  small-font-weight: 500,
-  small-line-height: 26px,
-  small-min-width: 50px,
-  small-padding: 0 5px,
-  large-font-size: 30px,
-  large-font-weight: 500,
-  large-line-height: 52px,
-  large-min-width: 88px,
-  large-padding: 0 20px
-);
-
-$stark-table-theme: (
-  border-radius: $border-radius
-);
+@import "variables";
 
 @import "~@nationalbankbelgium/stark-ui/assets/themes/theming";
+@import "~@nationalbankbelgium/stark-ui/assets/themes/button-theme";
+@import "~@nationalbankbelgium/stark-ui/assets/themes/card-theme";
+@import "~@nationalbankbelgium/stark-ui/assets/themes/table-theme";
+@import "~@nationalbankbelgium/stark-ui/assets/themes/app-header-theme";
