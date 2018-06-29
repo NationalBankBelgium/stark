@@ -1,52 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	
 	<!-- The base href is defined through the Webpack configuration and can be customized through the angular.json file -->
 	<!-- necessary for HTML5 History API which adds support for pretty URLs (see app.ts) -->
 	<meta charset="utf-8">
-	<meta name="description" content="<%= htmlWebpackPlugin.options.starkAppMetadata.description %>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Disable tap highlight on IE -->
-	<meta name="msapplication-tap-highlight" content="no">
-	<!-- Add to homescreen -->
-	<link rel="manifest" href="manifest.json">
-	<!-- Fallback to homescreen for Chrome <39 on Android -->
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="application-name" content="Stark Starter">
-	<!-- Add to homescreen for Safari on iOS -->
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="apple-mobile-web-app-title" content="template">
-
-	<!-- Reference: https://msdn.microsoft.com/library/dn320426(v=vs.85).aspx -->
-	<meta name="msapplication-config" content="none">
-
-	<meta name="HandheldFriendly" content="true">
-
-	<!-- Define the toolbar color (Android): http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android -->
-	<!-- You can customize the default -->
-	<meta name="theme-color" content="#0076c8">
-
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-
-	<link rel="apple-touch-icon" sizes="57x57" href="assets/images/app-icons/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="assets/images/app-icons/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="assets/images/app-icons/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/images/app-icons/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="assets/images/app-icons/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="assets/images/app-icons/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="assets/images/app-icons/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="assets/images/app-icons/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="assets/images/app-icons/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192" href="assets/images/app-icons/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="assets/images/app-icons/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/images/app-icons/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="assets/images/app-icons/favicon-16x16.png">
-	<meta name="msapplication-TileColor" content="#0076c8"><!-- Tile icon for Win8 (144x144 + tile color) -->
-	<meta name="msapplication-TileImage" content="assets/images/app-icons/ms-icon-144x144.png">
-
 	<title><%= htmlWebpackPlugin.options.starkAppMetadata.name %></title>
-
+	<% if (webpackConfig.htmlElements.headTags) { %>
+	<!--Configured Head Tags  -->
+	<%= webpackConfig.htmlElements.headTags %>
+	<% } %>
+	
 	<!-- Stylesheets -->
 	<!-- Generated CSS stylesheets will be added by webpack: extract-text-webpack-plugin -->
 
@@ -55,20 +19,15 @@
 	<!-- Webpack Dev Server reload -->
 	<script src="/webpack-dev-server.js"></script>
 	<% } %>
-
+	
 	<!-- add this block at the end of the <head> section -->
 	<% if (htmlWebpackPlugin.options.dllFiles) { %>  <!-- dllFiles will be filled in by the Dll plugin -->
 	<!-- Webpack DLL CSS files -->
+	<!-- necessary for HTML5 History API which adds support for pretty URLs (see app.ts) -->
 	<% for (let i = 0; i < htmlWebpackPlugin.options.dllFiles.css.length; ++i) { %>
 	<link href="<%= htmlWebpackPlugin.options.dllFiles.css[i] %>" rel="stylesheet">
 	<% } %>
 	<% } %>
-
-	<!--TODO uncomment this when HtmlElementsPlugin is enabled -->
-	<!--< % if (webpackConfig.htmlElements.headTags) { % >-->
-	<!-- Configured Head Tags  -->
-	<!--< % = webpackConfig.htmlElements.headTags % >-->
-	<!--< % } % >-->
 </head>
 
 <body class="">
@@ -141,5 +100,6 @@
 <!-- CSS will be injected by webpack here -->
 <!-- Preload link tags will be injected by webpack here -->
 <!-- Generated bundle scripts will be injected by webpack here: html-webpack-plugin -->
+
 </body>
 </html>
