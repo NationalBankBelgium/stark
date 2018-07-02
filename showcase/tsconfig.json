@@ -8,7 +8,6 @@
     "typeRoots": ["./node_modules/@types", "./node_modules/@nationalbankbelgium/stark-build/typings"],
     "paths": {
       "@angular/*": ["../node_modules/@angular/*"],
-      "@nationalbankbelgium/stark-ui": ["../../packages/stark-ui/index.ts"],
       "@nationalbankbelgium/*": ["../node_modules/@nationalbankbelgium/*"]
     }
   },

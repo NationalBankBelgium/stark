@@ -1,0 +1,237 @@
+$border-radius: 2px;
+
+$primary-palette: (
+  50: #e3f2fd,
+  100: #bbdefb,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
+  500: #0076c8,
+  600: #006ab4,
+  700: #005ea0,
+  800: #1565c0,
+  900: #143e74,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
+  )
+);
+
+$accent-palette: (
+  50: #ff99c2,
+  100: #ff4d94,
+  200: #f48fb1,
+  300: #f06292,
+  400: #ec407a,
+  500: #8f0039,
+  600: #70002d,
+  700: #c2185b,
+  800: #ad1457,
+  900: #880e4f,
+  A100: #ff80ab,
+  A200: #ff4081,
+  A400: #f50057,
+  A700: #c51162,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
+  )
+);
+
+$warning-palette: (
+  50: #ffccbc,
+  100: #ffcdd2,
+  200: #ef9a9a,
+  300: #e57373,
+  400: #ef5350,
+  500: #f44336,
+  600: #e53935,
+  700: #d32f2f,
+  800: #c62828,
+  900: #b71c1c,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
+  )
+);
+
+$backgrounds: (
+  status-bar: map_get($mat-grey, 300),
+  app-bar: map_get($mat-grey, 100),
+  background: #f6f9fa,
+  hover: rgba(black, 0.04),
+  card: #ffffff,
+  dialog: #ffffff,
+  disabled-button: rgba(black, 0.12),
+  raised-button: #ffffff,
+  focused-button: $dark-focused,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+  unselected-chip: map_get($mat-grey, 300),
+  disabled-list-option: map_get($mat-grey, 200)
+);
+
+$foregrounds: (
+  base: black,
+  divider: $dark-dividers,
+  dividers: $dark-dividers,
+  disabled: $dark-disabled-text,
+  disabled-button: rgba(black, 0.26),
+  disabled-text: $dark-disabled-text,
+  hint-text: $dark-disabled-text,
+  secondary-text: $dark-secondary-text,
+  icon: rgba(black, 0.54),
+  icons: rgba(black, 0.54),
+  text: rgba(black, 0.87),
+  slider-min: rgba(black, 0.87),
+  slider-off: rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38)
+);
+
+$base-theme: (
+  primary-palette: mat-palette($primary-palette),
+  accent-palette: mat-palette($accent-palette),
+  warn-palette: mat-palette($mat-red)
+);
+
+$button-theme: (
+  border-radius: $border-radius,
+  font-size: 14px,
+  font-weight: 500,
+  line-height: 36px,
+  padding: 0 16px,
+  small-font-size: 12px,
+  small-font-weight: 500,
+  small-line-height: 26px,
+  small-min-width: 50px,
+  small-padding: 0 5px,
+  large-font-size: 30px,
+  large-font-weight: 500,
+  large-line-height: 52px,
+  large-min-width: 88px,
+  large-padding: 0 20px
+);
+
+$card-theme: (
+  border-radius: $border-radius
+);
+
+$table-theme: (
+  border-radius: $border-radius
+);
+
+//font-size, line-height, font-weight
+$typography-theme: (
+  font-family: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+  display-4: (
+    112px,
+    112px,
+    300
+  ),
+  display-3: (
+    56px,
+    56px,
+    400
+  ),
+  display-2: (
+    45px,
+    48px,
+    400
+  ),
+  display-1: (
+    34px,
+    40px,
+    400
+  ),
+  headline: (
+    24px,
+    32px,
+    400
+  ),
+  title: (
+    20px,
+    32px,
+    500
+  ),
+  subheading-2: (
+    16px,
+    28px,
+    400
+  ),
+  subheading-1: (
+    15px,
+    24px,
+    400
+  ),
+  body-2: (
+    14px,
+    24px,
+    500
+  ),
+  body-1: (
+    14px,
+    20px,
+    400
+  ),
+  caption: (
+    12px,
+    20px,
+    400
+  ),
+  button: (
+    map-get($button-theme, font-size),
+    map-get($button-theme, line-height),
+    map-get($button-theme, font-weight)
+  ),
+  /* Line-height must be unit-less fraction of the font-size.*/ input:
+    (
+      inherit,
+      1.125,
+      400
+    )
+);

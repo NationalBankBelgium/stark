@@ -1,0 +1,165 @@
+.stark-app {
+  visibility: visible;
+  &.stark-init,
+  &.stark-exit {
+    visibility: hidden;
+    display: none;
+  }
+  /* class added by translate-cloak directive while loading translations */
+  &.translate-cloak {
+    visibility: hidden;
+  }
+}
+
+.stark-login-container {
+  display: none;
+  &.stark-init,
+  &.stark-exit {
+    display: block;
+  }
+}
+
+.stark-container {
+  max-width: $stark-max-content-width;
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+}
+
+@media screen {
+  html,
+  body {
+    overflow: hidden;
+  }
+
+  .stark-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    &:not(.stark-init) {
+      overflow-y: hidden;
+    }
+    & .content-wrapper {
+      flex: 1;
+      display: flex;
+      overflow-y: hidden;
+      position: relative;
+    }
+    & .stark-app-menu {
+      display: flex;
+      flex-direction: column;
+    }
+    & main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      & > ui-view {
+        flex: 1 0 auto;
+        padding: 16px;
+      }
+    }
+  }
+}
+
+/********** TYPOGRAPHY **********/
+body {
+  /* system sans-serif font stack */
+  font-family: mat-font-family($typography-config);
+  font-size: mat-font-size($typography-config, body-1);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 34px;
+  line-height: 40px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: $secondary-dark-text-color;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+h3 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+@media #{$desktop-query} {
+  body:not(.full-curtain) {
+    & h1,
+    & h2,
+    & h3 {
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    & h1 {
+      font-size: 24px;
+      font-weight: 500;
+    }
+    & h2 {
+      font-size: 16px;
+    }
+    & h3 {
+      font-size: 14px;
+    }
+  }
+}
+
+/********** COLORS **********/
+body {
+  background-color: $offwhite;
+  color: $primary-dark-text-color;
+}
+
+a {
+  color: $md-primary-700;
+}
+
+
+/* utility class to fill to max. size in flex systems */
+.flex-fill {
+  flex: 1;
+}
+
+td {
+  background: #fff;
+  border-bottom: solid 1px #fafafa;
+}
+
+.stark-container {
+  max-width: $stark-max-content-width;
+  margin: auto;
+  position: relative;
+}
+
+
+@media screen and (max-width: 1230px) {
+  .stark-header-extra,
+  .stark-page-header-actions {
+    margin-right: 15px;
+  }
+
+  .stark-container,
+  .stark-fixed-header-container .stark-generic-search .stark-generic-search-container .stark-container,
+  .stark-table-action-bar-container {
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
