@@ -1,6 +1,5 @@
 import { ApplicationRef, ComponentRef, NgModuleRef } from "@angular/core";
 import { enableDebugTools } from "@angular/platform-browser";
-import { APP_BASE_HREF } from "@angular/common";
 import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 
 // Ensure that we get detailed stack tracks during development (useful with node & Webpack)
@@ -27,7 +26,5 @@ export const environment: StarkEnvironment = {
 		(<any>window).ng.coreTokens = _ng.coreTokens;
 		return modRef;
 	},
-	ENV_PROVIDERS: [
-		{ provide: APP_BASE_HREF, useValue: "/" } // the baseHref is defined via the Angular provider instead of the angular.json file
-	]
+	ENV_PROVIDERS: []
 };
