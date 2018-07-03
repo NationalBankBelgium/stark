@@ -1,0 +1,68 @@
+<div class="header">
+	<h3>Table title</h3>
+	<div class="actions">
+		<button *ngIf="isMultiSortEnabled" (click)="openMultiSortDialog()" mat-icon-button>
+			<mat-icon svgIcon="sort" matTooltip="Multi-Column Sorting"></mat-icon>
+		</button>
+		<div *ngIf="filter.globalFilterPresent">
+			<button mat-icon-button [matMenuTriggerFor]="globalFilter">
+				<mat-icon svgIcon="filter" matTooltip="Show global filter"></mat-icon>
+			</button>
+
+			<mat-menu class="mat-table-filter" #globalFilter="matMenu" xPosition="before" [overlapTrigger]="false">
+				<div>
+					<mat-form-field class="" (click)="$event.stopPropagation()" (keyup)="$event.stopPropagation()"
+									(keydown)="$event.stopPropagation()">
+						<input matInput placeholder="Global Filter" name="filter" value=""
+							   [(ngModel)]="filter.globalFilterValue" (keyup)="applyFilter()">
+					</mat-form-field>
+					<button mat-icon-button (click)="onClearFilter()">
+						<mat-icon svgIcon="close" matTooltip="Clear filter"></mat-icon>
+					</button>
+				</div>
+			</mat-menu>
+		</div>
+	</div>
+</div>
+<table #matTable mat-table [dataSource]="dataSource" [ngClass]="{'multi-sorting': isMultiSorting}">
+	<ng-container *ngIf="multiselect" matColumnDef="select">
+		<th mat-header-cell *matHeaderCellDef>
+			<mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+						  [indeterminate]="selection.hasValue() && !isAllSelected()" matTooltip="Toggle selection in all rows"></mat-checkbox>
+		</th>
+		<td mat-cell *matCellDef="let row">
+			<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+						  [checked]="selection.isSelected(row)" matTooltip="Toggle selection"></mat-checkbox>
+		</td>
+	</ng-container>
+
+	<stark-table-column *ngFor="let col of columnProperties; trackBy: trackColumnFn"
+						[name]="col.name"
+						[headerLabel]="col.label"
+						[sortable]="col.isSortable"
+						[sortDirection]="getColumnSortingDirection(col.name)"
+						[sortPriority]="getColumnSortingPriority(col.name)"
+						[filterable]="col.isFilterable" [filterValue]="getColumnFilterValue(col.name)"
+						[compareFn]="col.compareFn" [cellFormatter]="col.cellFormatter">
+		<ng-template let-context>
+			<span>{{ context.displayedValue }}</span>
+		</ng-template>
+	</stark-table-column>
+
+	<ng-content select=".stark-table-columns"></ng-content>
+
+	<stark-table-column *ngIf="tableRowsActionBarConfig && tableRowsActionBarConfig.actions" name="actions">
+		<ng-template let-context>
+			<button *ngFor="let action of tableRowsActionBarConfig.actions; trackBy: trackActionFn"
+					[matTooltip]="action.label" mat-icon-button
+					color="primary" (click)="action.actionCall($event, context.rowData)">
+				<mat-icon [svgIcon]="action.icon"></mat-icon>
+			</button>
+		</ng-template>
+	</stark-table-column>
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

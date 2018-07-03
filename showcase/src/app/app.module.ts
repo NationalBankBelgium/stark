@@ -12,8 +12,6 @@ import { MatIconRegistry } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
-import { MatSortModule } from "@angular/material/sort";
-import { MatTableModule } from "@angular/material/table";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { SharedModule } from "./shared/shared.module";
@@ -29,14 +27,15 @@ import {
 	StarkApplicationMetadataImpl,
 	StarkHttpModule,
 	StarkLoggingModule,
+	StarkLoggingActionTypes,
 	StarkMockData,
 	StarkRoutingModule,
 	StarkSessionModule,
 	StarkSessionService,
 	StarkUser
 } from "@nationalbankbelgium/stark-core";
+import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui";
 
-import { StarkActionBarModule, StarkAppLogoModule, StarkSliderModule } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
@@ -55,7 +54,7 @@ import { AppComponent } from "./app.component";
 import { AppState } from "./app.service";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
-import { ActionBarComponent, ExampleViewerComponent } from "./demo";
+import { DemoModule } from "./demo";
 
 /* tslint:disable:no-import-side-effect */
 // load PostCSS styles
@@ -110,7 +109,11 @@ export const reducers: ActionReducerMap<State> = {
 
 export function logger(reducer: ActionReducer<State>): any {
 	// default, no options
-	return storeLogger()(reducer);
+	return storeLogger({
+		filter: {
+			blacklist: [StarkLoggingActionTypes.LOG_MESSAGE]
+		}
+	})(reducer);
 }
 
 export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger, storeFreeze] : [];
@@ -120,7 +123,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
  */
 @NgModule({
 	bootstrap: [AppComponent],
-	declarations: [AppComponent, HomeComponent, NoContentComponent, ActionBarComponent, ExampleViewerComponent],
+	declarations: [AppComponent, HomeComponent, NoContentComponent],
 	/**
 	 * Import Angular's modules.
 	 */
@@ -131,8 +134,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		MatButtonModule,
 		MatCardModule,
 		MatIconModule,
-		MatSortModule,
-		MatTableModule,
 		MatListModule,
 		MatSidenavModule,
 		StoreModule.forRoot(reducers, {
@@ -147,14 +148,12 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		TranslateModule.forRoot(),
 		NgIdleModule.forRoot(),
 		NgIdleKeepaliveModule.forRoot(), // FIXME: disabled in stark-app-config.json for now until json-server is integrated
-		SharedModule,
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot(),
 		StarkRoutingModule.forRoot(),
-		StarkAppLogoModule,
-		StarkSliderModule,
-		StarkActionBarModule,
+		SharedModule,
+		DemoModule,
 		StarkAppLogoModule
 	],
 	/**

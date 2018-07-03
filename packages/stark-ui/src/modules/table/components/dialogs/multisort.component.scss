@@ -1,0 +1,33 @@
+$stark-table-multifilters-side-padding: 10px;
+
+.stark-table-dialog-multisort-panel-class {
+  width: 500px;
+}
+
+.stark-table-dialog-multisort .header {
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+}
+
+.stark-table-dialog-multisort .rules .rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stark-table-dialog-multisort .rules .rule > * {
+  padding-right: $stark-table-multifilters-side-padding;
+}
+
+.stark-table-dialog-multisort .rules .rule > *:last-child {
+  padding-right: 0;
+}
+
+.stark-table-dialog-multisort .rules .rule .form-field-name {
+  flex-grow: 1;
+}
+
+.stark-table-dialog-multisort .rules .rule .form-field-order .mat-form-field-infix {
+  width: 80px;
+}

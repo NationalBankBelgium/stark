@@ -1,0 +1,104 @@
+//TODO: MatIcon size
+/*@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+}
+
+.mat-icon{
+  @include md-icon-size(16px);
+  font-weight: inherit;
+  margin-left: 5px;
+}*/
+
+.stark-table {
+  .header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    .actions {
+      align-items: center;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      .priority {
+        display: none;
+      }
+
+      &.mat-column-select {
+        width: 1%;
+        white-space: nowrap;
+      }
+
+      &.mat-header-cell {
+        padding-right: 24px;
+
+        .header-cell-content {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: start;
+
+          .sort-header {
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            flex: 1 1 0%;
+            user-select: none;
+
+            &:hover {
+              .order-tip {
+                opacity: 0.3;
+              }
+            }
+          }
+
+          .mat-icon {
+            font-size: 1.4em;
+            font-weight: inherit;
+            margin-left: 5px;
+
+            &.order-tip {
+              opacity: 0;
+            }
+          }
+
+          .button-filter {
+            opacity: 0.3;
+          }
+        }
+      }
+    }
+
+    th.filtering {
+      &.mat-header-cell {
+        .header-cell-content {
+          .button-filter {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .header-cell-content.sortable {
+      cursor: pointer;
+    }
+  }
+
+  table.multi-sorting {
+    th .priority {
+      display: block;
+    }
+  }
+}
+
+.mat-table-filter {
+  padding: 0 10px;
+}
