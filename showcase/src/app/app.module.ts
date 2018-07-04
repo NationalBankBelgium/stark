@@ -36,7 +36,7 @@ import {
 	StarkUser
 } from "@nationalbankbelgium/stark-core";
 
-import { StarkAppLogoModule, StarkSliderModule } from "@nationalbankbelgium/stark-ui";
+import { StarkActionBarModule, StarkAppLogoModule, StarkSliderModule } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
@@ -55,12 +55,13 @@ import { AppComponent } from "./app.component";
 import { AppState } from "./app.service";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
+import { ActionBarComponent, ExampleViewerComponent } from "./demo";
+
 /* tslint:disable:no-import-side-effect */
 // load PostCSS styles
 import "../styles/styles.pcss";
 // load SASS styles
 import "../styles/styles.scss";
-import { DemoComponent } from "./demo/demo.component";
 /* tslint:enable */
 
 // Application wide providers
@@ -119,7 +120,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
  */
 @NgModule({
 	bootstrap: [AppComponent],
-	declarations: [AppComponent, HomeComponent, NoContentComponent, DemoComponent],
+	declarations: [AppComponent, HomeComponent, NoContentComponent, ActionBarComponent, ExampleViewerComponent],
 	/**
 	 * Import Angular's modules.
 	 */
@@ -152,7 +153,9 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkSessionModule.forRoot(),
 		StarkRoutingModule.forRoot(),
 		StarkAppLogoModule,
-		StarkSliderModule
+		StarkSliderModule,
+		StarkActionBarModule,
+		StarkAppLogoModule
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.

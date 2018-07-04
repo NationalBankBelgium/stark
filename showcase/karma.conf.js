@@ -9,7 +9,7 @@ const helpers = require("./node_modules/@nationalbankbelgium/stark-testing/helpe
 const defaultKarmaConfig = require("./node_modules/@nationalbankbelgium/stark-testing/karma.conf.js").rawKarmaConfig;
 
 // entry files of the "@nationalbankbelgium/stark-ui" module imported in mock files
-const karmaTypescriptExclusions = [...defaultKarmaConfig.exclude, "src/assets/examples/*"];
+const karmaTypescriptExclusions = [...defaultKarmaConfig.exclude, "src/assets/examples/**"];
 
 // start customizing the KarmaCI configuration from stark-testing
 const starkShowcaseSpecificConfiguration = Object.assign({}, defaultKarmaConfig, {

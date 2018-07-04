@@ -27,11 +27,6 @@
 }
 
 @media screen {
-  html,
-  body {
-    overflow: hidden;
-  }
-
   .stark-app {
     display: flex;
     flex-direction: column;
@@ -68,6 +63,7 @@ body {
   /* system sans-serif font stack */
   font-family: mat-font-family($typography-config);
   font-size: mat-font-size($typography-config, body-1);
+  line-height: mat-line-height($typography-config, body-1);
 }
 
 h1,

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "paths": {
+      "@ngx-translate/*": ["../stark-core/node_modules/@ngx-translate/*"],
       "@nationalbankbelgium/stark-core/testing": ["../../dist/packages/stark-core/testing"],
       "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
       "@nationalbankbelgium/stark-ui": ["."]

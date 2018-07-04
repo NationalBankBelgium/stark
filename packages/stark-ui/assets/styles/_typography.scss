@@ -15,7 +15,7 @@ $typography-config: mat-typography-config(
   $display-1: mat-typography-level-create(map-get($typography-theme, display-1)),
   $headline: mat-typography-level-create(map-get($typography-theme, headline)),
   $title: mat-typography-level-create(map-get($typography-theme, title)),
-  $subheading-2: mat-typography-level-create(map-get($typography-theme, subheading-2)),
+  $subheading-2: mat-typography-level-create(map-get($typography-theme, subheading-2)), /*Menu, List, Option*/
   $subheading-1: mat-typography-level-create(map-get($typography-theme, subheading-1)),
   $body-2: mat-typography-level-create(map-get($typography-theme, body-2)),
   $body-1: mat-typography-level-create(map-get($typography-theme, body-1)),

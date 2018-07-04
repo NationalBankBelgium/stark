@@ -34,7 +34,7 @@
     "use-view-encapsulation": false,
     "trackBy-function": true,
     "no-unused-css": true,
-    "template-cyclomatic-complexity": [true, 5],
+    "template-cyclomatic-complexity": [true, 10],
     "template-conditional-complexity": [true, 4],
 
     // TSlint rules
