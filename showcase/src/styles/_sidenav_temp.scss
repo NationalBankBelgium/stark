@@ -1,0 +1,22 @@
+mat-sidenav.mat-drawer {
+  background-color: #16385a;
+  width: 200px;
+}
+
+mat-sidenav.mat-drawer .mat-nav-list {
+  padding-top: 0;
+}
+
+mat-sidenav.mat-drawer .mat-nav-list .mat-list-item {
+  color: #fff;
+  font-size: 13px;
+}
+
+mat-sidenav.mat-drawer .mat-list-item:hover a {
+  background-color: rgba($color: #fff, $alpha: 0.3);
+}
+
+mat-sidenav.mat-drawer .mat-list-item-focus.active,
+mat-sidenav.mat-drawer a.active {
+  background-color: rgba($color: #fff, $alpha: 0.4);
+}

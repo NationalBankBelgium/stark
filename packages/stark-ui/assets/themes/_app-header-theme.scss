@@ -2,7 +2,7 @@
 .stark-app-header {
   background: #123b71 url(/assets/images/app-header.png) top right no-repeat;
   color: #fff;
-  & .md-button.md-icon-button {
+  & .mat-icon-button {
     min-width: 0;
     min-height: 0;
     line-height: 48px;
@@ -21,7 +21,6 @@
 .stark-header-extra {
   position: absolute;
   display: flex;
-  top: 0;
   right: 0;
 }
 .stark-header-mobile,
@@ -97,18 +96,6 @@
   line-height: 48px;
 }
 
-/* dense mode */
-.dense-mode {
-  & .stark-app-header .md-button.md-icon-button {
-    height: 40px;
-    line-height: 0;
-    & svg {
-      height: 20px;
-      width: 20px;
-    }
-  }
-}
-
 .stark-page-header {
   position: relative;
 }
@@ -144,15 +131,8 @@
 .stark-app-bar {
   display: flex;
   line-height: 48px;
-  & .md-button.md-icon-button {
-    margin: 0;
-    padding: 8px;
-    color: #fff;
-  }
-  & > .md-button.md-icon-button {
-    margin-top: 4px;
-  }
-  & .stark-app-logout .md-button {
+  padding-top: 4px;
+  & .stark-app-logout button {
     background-color: $message-alert;
     color: #fff;
     &:hover {

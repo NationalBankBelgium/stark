@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  padding: 20px 0;
+}
+
+.example-viewer-wrapper {
+  h3 {
+    margin-top: 10px;
+  }
+}
+
+.example-viewer-title {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 8px 20px;
+}
+
+.example-viewer-title-spacer {
+  flex: 1 1 auto;
+}
+
+.example-source-copy {
+  position: absolute;
+  top: 8px;
+  display: none;
+}
+
+.example-source-wrapper:hover {
+  .example-source-copy {
+    display: inline-block;
+  }
+}
+
+.example-source {
+  padding: 0 30px 10px 30px;
+  min-height: 150px;
+}
+
+.example-viewer-body {
+  padding: 30px;
+}

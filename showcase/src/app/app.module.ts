@@ -9,6 +9,14 @@ import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconRegistry } from "@angular/material";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatIconModule } from "@angular/material/icon";
+import { MatSortModule } from "@angular/material/sort";
+import { MatTableModule } from "@angular/material/table";
+import { MatListModule } from "@angular/material/list";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { SharedModule } from "./shared/shared.module";
 
 import {
 	STARK_APP_CONFIG,
@@ -53,6 +61,7 @@ import { NoContentComponent } from "./no-content";
 import "../styles/styles.pcss";
 // load SASS styles
 import "../styles/styles.scss";
+import { DemoComponent } from "./demo/demo.component";
 /* tslint:enable */
 
 // Application wide providers
@@ -111,7 +120,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
  */
 @NgModule({
 	bootstrap: [AppComponent],
-	declarations: [AppComponent, HomeComponent, NoContentComponent],
+	declarations: [AppComponent, HomeComponent, NoContentComponent, DemoComponent],
 	/**
 	 * Import Angular's modules.
 	 */
@@ -119,6 +128,13 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
+		MatButtonModule,
+		MatCardModule,
+		MatIconModule,
+		MatSortModule,
+		MatTableModule,
+		MatListModule,
+		MatSidenavModule,
 		StoreModule.forRoot(reducers, {
 			metaReducers
 		}),
@@ -131,6 +147,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		TranslateModule.forRoot(),
 		NgIdleModule.forRoot(),
 		NgIdleKeepaliveModule.forRoot(), // FIXME: disabled in stark-app-config.json for now until json-server is integrated
+		SharedModule,
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot(),
