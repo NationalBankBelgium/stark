@@ -55,9 +55,8 @@ import { AppComponent } from "./app.component";
 import { AppState } from "./app.service";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
-
 /* tslint:disable:no-import-side-effect */
-// load PCSS styles
+// load PostCSS styles
 import "../styles/styles.pcss";
 // load SASS styles
 import "../styles/styles.scss";
@@ -116,7 +115,7 @@ export function logger(reducer: ActionReducer<State>): any {
 export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger, storeFreeze] : [];
 
 /**
- * `AppModule` is the main entry point into Angular2's bootstrapping process
+ * `AppModule` is the main entry point into Angular's bootstrapping process
  */
 @NgModule({
 	bootstrap: [AppComponent],
@@ -167,6 +166,14 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 	]
 })
 export class AppModule {
+	private user: StarkUser = {
+		uuid: "abc123",
+		username: "John",
+		firstName: "Doe",
+		lastName: "Smith",
+		roles: ["dummy role"]
+	};
+
 	public constructor(
 		private translateService: TranslateService,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
@@ -176,13 +183,6 @@ export class AppModule {
 		initializeTranslation(this.translateService);
 		registerMaterialIconSet(matIconRegistry, domSanitizer);
 
-		const user: StarkUser = {
-			uuid: "abc123",
-			username: "John",
-			firstName: "Doe",
-			lastName: "Smith",
-			roles: ["dummy role"]
-		};
-		this.sessionService.login(user);
+		this.sessionService.login(this.user);
 	}
 }

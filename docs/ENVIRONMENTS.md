@@ -34,8 +34,9 @@ export interface StarkEnvironment {
 	/**
 	 * Function to modify/decorate the NgModule Instance created by Angular for a given platform.
 	 * Useful to enable/disable some Angular specifics such as the debug tools.
+	 * @param moduleRef - NgModule instance created by Angular for a given platform.
 	 */
-	decorateModuleRef(modRef: NgModuleRef<any>): NgModuleRef<any>;
+	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any>;
 }
 ```
 
@@ -63,7 +64,6 @@ Then in each file, an `environment` constant of type `StarkEnvironment` should b
 // environment.prod.ts
 
 import { NgModuleRef } from "@angular/core";
-import { disableDebugTools } from "@angular/platform-browser";
 import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 
 export const environment: StarkEnvironment = {
@@ -71,9 +71,10 @@ export const environment: StarkEnvironment = {
 	hmr: false,
 	ENV_PROVIDERS: [ProductionOnlyProvider],
 
-	decorateModuleRef(modRef: NgModuleRef<any>): NgModuleRef<any> {
-		disableDebugTools(); // disable debug tools in production
-		return modRef;
+	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
+		// perform any module customization needed for this specific environment here
+		// and make sure to invoke this function by passing it the NgModule created by Angular
+		return moduleRef;
 	}
 };
 ```
@@ -131,8 +132,10 @@ export const environment: StarkEnvironment = {
 	hmr: false,
 	ENV_PROVIDERS: [],
 
-	decorateModuleRef(modRef: NgModuleRef<any>): NgModuleRef<any> {
-		/* do something here */
+	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
+		// perform any module customization needed for this specific environment here
+		// and make sure to invoke this function by passing it the NgModule created by Angular
+		return moduleRef;
 	}
 };
 ```
@@ -178,8 +181,10 @@ export const environment: StarkEnvironment = {
 	ENV_PROVIDERS: [],
 	someProperty: "some value", // your new property
 
-	decorateModuleRef(modRef: NgModuleRef<any>): NgModuleRef<any> {
-		/* do something here */
+	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
+		// perform any module customization needed for this specific environment here
+		// and make sure to invoke this function by passing it the NgModule created by Angular
+		return moduleRef;
 	}
 };
 ```

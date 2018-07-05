@@ -20,10 +20,11 @@ export interface StarkEnvironment {
 	 */
 	ENV_PROVIDERS: any[];
 	/**
-	 * Function to modify/decorate the NgModule Instance created by Angular for a given platform.
+	 * Function to modify/decorate the module instance created by Angular for a given platform.
 	 * Useful to enable/disable some Angular specifics such as the debug tools.
+	 * @param moduleRef - NgModule instance created by Angular for a given platform.
 	 */
-	decorateModuleRef(modRef: NgModuleRef<any>): NgModuleRef<any>;
+	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any>;
 }
 
 /**
