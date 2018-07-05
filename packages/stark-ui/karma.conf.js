@@ -15,6 +15,7 @@ const karmaTypescriptBundlerAliasResolution = {
 			"@nationalbankbelgium/stark-core": "../../dist/packages-dist/stark-core/bundles/stark-core.umd.js",
 			"@nationalbankbelgium/stark-core/testing": "../../dist/packages-dist/stark-core/bundles/stark-core-testing.umd.js",
 			// adapt the resolution of the 3rd party modules used in stark-core
+			"@angularclass/hmr": "../stark-core/node_modules/@angularclass/hmr/dist/index.js",
 			"@ng-idle/core": "../stark-core/node_modules/@ng-idle/core/bundles/core.umd.js",
 			"@ng-idle/keepalive": "../stark-core/node_modules/@ng-idle/keepalive/bundles/keepalive.umd.js",
 			"@ngrx/store": "../stark-core/node_modules/@ngrx/store/bundles/store.umd.js",

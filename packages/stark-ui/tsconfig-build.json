@@ -10,6 +10,7 @@
     ],
     "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
+      "@angularclass/hmr": ["../stark-core/node_modules/@angularclass/hmr"],
       "@angular/animations": ["../../node_modules/@angular/animations"],
       "@angular/cdk": ["../../node_modules/@angular/cdk"],
       "@angular/common": ["../../node_modules/@angular/common"],

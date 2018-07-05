@@ -7,10 +7,12 @@ const commonjs = require("rollup-plugin-commonjs");
 const sourcemaps = require("rollup-plugin-sourcemaps");
 
 const globals = {
+	"@angularclass/hmr": "angularclass.hmr",
 	"@angular/cdk": "ng.cdk",
 	"@angular/core": "ng.core",
-	"@angular/common/http": "angular.common.http",
+	"@angular/common/http": "ng.common.http",
 	"@angular/material": "ng.material",
+	"@angular/platform-browser": "ng.platform.browser",
 	"@nationalbankbelgium/stark-core": "stark.core",
 	"@nationalbankbelgium/stark-ui": "stark.ui",
 	"@ngrx/store": "@ngrx/store",
