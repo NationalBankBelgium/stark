@@ -28,6 +28,9 @@ export abstract class AbstractStarkMain implements StarkMain {
 		this.initialize();
 	};
 
+	/**
+	 * Call the main() method and log an error in case of failure
+	 */
 	private invokeMain(): void {
 		// FIXME handle errors nicely (UX!)
 		this.main().catch((err: any) => console.error(err));
@@ -57,7 +60,7 @@ export abstract class AbstractStarkMain implements StarkMain {
 	};
 
 	/**
-	 * Calls the main function once the DOM has loaded
+	 * Call the main function once the DOM has loaded
 	 */
 	protected bootstrapDomReady = (): void => {
 		switch (document.readyState) {
@@ -127,7 +130,7 @@ We need great software developers like you! https://jobs.nbb.be
 
 	/**
 	 * Modify/decorate the NgModule instance created by Angular.
-	 * Adapts the configuration based on the current environment
+	 * Adapt the configuration based on the current environment
 	 * @param moduleRef - NgModule instance created by Angular for a given platform.
 	 */
 	public decorateModule = (moduleRef: NgModuleRef<any>): NgModuleRef<any> => {
