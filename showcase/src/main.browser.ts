@@ -1,57 +1,36 @@
 /**
- * Angular bootstrapping
- */
-import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-import { environment } from "./environments/environment";
-/**
  * App Module
  * our top level module that holds all of our components
  */
 import { AppModule } from "./app";
 
-import { hmrBootstrap } from "./hmr";
+import { AbstractStarkMain, StarkEnvironment } from "@nationalbankbelgium/stark-core";
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
-/**
- * Bootstrap our Angular app with a top level NgModule
+import { environment } from "environments/environment";
+
+/*
+ * Bootstrap our Angular app with a top level component `App` and inject
+ * our Services and Providers into Angular's dependency injection system
  */
-export function main(): Promise<any> {
-	return platformBrowserDynamic()
-		.bootstrapModule(AppModule)
-		.then(environment.decorateModuleRef)
-		.catch((err: any) => console.error(err));
-}
-
-/**
- * Needed for hmr
- * in prod this is replace for document ready
- */
-switch (document.readyState) {
-	case "loading":
-		document.addEventListener("DOMContentLoaded", _domReadyHandler, false);
-		break;
-	case "interactive":
-	case "complete":
-	default:
-		if (HMR) {
-			if (module["hot"]) {
-				hmrBootstrap(module, main);
-			} else {
-				console.error("HMR is not enabled for webpack-dev-server!");
-			}
-		} else {
-			main().catch((err: any) => console.error(err));
-		}
-}
-
-function _domReadyHandler(): void {
-	document.removeEventListener("DOMContentLoaded", _domReadyHandler, false);
-	if (HMR) {
-		if (module["hot"]) {
-			hmrBootstrap(module, main);
-		} else {
-			console.error("HMR is not enabled for webpack-dev-server!");
-		}
-	} else {
-		main().catch((err: any) => console.error(err));
+class Main extends AbstractStarkMain {
+	public constructor(env: StarkEnvironment) {
+		super(env);
 	}
+
+	public main = (): Promise<any> => {
+		console.log("Bootstrapping the App");
+
+		// Bootstrap our Angular app with a top level NgModule
+		return (
+			platformBrowserDynamic()
+				.bootstrapModule(AppModule)
+				// the line below adapts the module depending on the environment
+				// if you don't like what stark does by default, you can instead do your own customizations through the environment.* files
+				// and use environment.customizeAppModule instead
+				.then(this.decorateModule)
+		);
+	};
 }
+
+new Main(environment).bootstrap();
