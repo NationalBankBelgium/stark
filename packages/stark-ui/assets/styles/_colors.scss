@@ -7,5 +7,9 @@ $mat-light-theme-background: $backgrounds;
   }
 }
 
-$stark-color-theme: mat-light-theme(map-get($base-theme, primary-palette), map-get($base-theme, accent-palette), map-get($base-theme, warn-palette)) !default;
+$stark-color-theme: mat-light-theme(
+  map-get($base-theme, primary-palette),
+  map-get($base-theme, accent-palette),
+  map-get($base-theme, warn-palette)
+) !default;
 @include angular-material-theme($stark-color-theme);

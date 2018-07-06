@@ -1,28 +1,28 @@
 @if variable-exists(stark-button-theme) {
-	$button-theme: map-merge($button-theme, $stark-button-theme);
+  $button-theme: map-merge($button-theme, $stark-button-theme);
 }
 
 button[mat-raised-button],
 a[mat-raised-button] {
-	border-radius: map-get($button-theme, border-radius);
-	/*padding: map-get($button-theme, padding);
+  border-radius: map-get($button-theme, border-radius);
+  /*padding: map-get($button-theme, padding);
     line-height: map-get($button-theme, line-height);*/
 }
 
 button[mat-raised-button].stark-small-button,
 a[mat-raised-button].stark-small-button {
-	font-size: map-get($button-theme, small-font-size);
-	font-weight: map-get($button-theme, small-font-weight);
-	line-height: map-get($button-theme, small-line-height);
-	min-width: map-get($button-theme, small-min-width);
-	padding: map-get($button-theme, small-padding);
+  font-size: map-get($button-theme, small-font-size);
+  font-weight: map-get($button-theme, small-font-weight);
+  line-height: map-get($button-theme, small-line-height);
+  min-width: map-get($button-theme, small-min-width);
+  padding: map-get($button-theme, small-padding);
 }
 
 button[mat-raised-button].stark-large-button,
 a[mat-raised-button].stark-large-button {
-	font-size: map-get($button-theme, large-font-size);
-	font-weight: map-get($button-theme, large-font-weight);
-	line-height: map-get($button-theme, large-line-height);
-	min-width: map-get($button-theme, large-min-width);
-	padding: map-get($button-theme, large-padding);
+  font-size: map-get($button-theme, large-font-size);
+  font-weight: map-get($button-theme, large-font-weight);
+  line-height: map-get($button-theme, large-line-height);
+  min-width: map-get($button-theme, large-min-width);
+  padding: map-get($button-theme, large-padding);
 }
