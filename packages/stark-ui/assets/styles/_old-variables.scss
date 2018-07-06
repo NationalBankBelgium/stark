@@ -32,7 +32,6 @@ $primary-dark-text-color: map-get($mat-light-theme-foreground, base);
 $secondary-dark-text-color: rgba(0, 0, 0, 0.7);
 $tertiary-dark-text-color: rgba(0, 0, 0, 0.45);
 
-
 $disabled-color: map-get($mat-light-theme-foreground, disabled-text);
 $divider-color: map-get($mat-light-theme-foreground, divider);
 $placeholder-color: $secondary-dark-text-color;
@@ -77,7 +76,7 @@ $md-accent-alpha-87: rgba(143, 0, 57, 0.87);
 $md-warn-100: mat-color(map-get($base-theme, warn-palette), 100); /* rgb(255, 204, 188) */
 $md-warn: mat-color(map-get($base-theme, warn-palette)); /* rgb(255, 87, 34) */
 $md-warn-600: mat-color(map-get($base-theme, warn-palette), 600); /* rgb(244, 81, 30) */
-$md-warn-700: mat-color(map-get($base-theme, warn-palette), 700);; /* rgb(230, 74, 25) */
+$md-warn-700: mat-color(map-get($base-theme, warn-palette), 700); /* rgb(230, 74, 25) */
 $md-warn-a700: mat-color(map-get($base-theme, warn-palette), A700); /* rgb(221, 44, 0) */
 $md-warn-alpha-26: rgba(255, 87, 34, 0.26);
 $md-warn-alpha-50: rgba(255, 87, 34, 0.5);

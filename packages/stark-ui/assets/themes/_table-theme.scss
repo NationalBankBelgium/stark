@@ -1,7 +1,7 @@
 @if variable-exists(stark-table-theme) {
-	$table-theme: map-merge($table-theme, $stark-table-theme);
+  $table-theme: map-merge($table-theme, $stark-table-theme);
 }
 
 .stark-table table {
-	border-radius: map-get($table-theme, border-radius);
+  border-radius: map-get($table-theme, border-radius);
 }

@@ -165,9 +165,10 @@ $table-theme: (
   border-radius: $border-radius
 );
 
-//font-size, line-height, font-weight
+// font-size, line-height, font-weight
 $typography-theme: (
-  font-family: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+  font-family:
+    "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
   display-4: (
     112px,
     112px,

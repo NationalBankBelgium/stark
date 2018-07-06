@@ -84,14 +84,13 @@ if (ENV === "development") {
 }
 ```
 
-
 #### [HtmlElementWebpackPlugin](https://github.com/fulls1z3/html-elements-webpack-plugin "HtmlElementWebpackPlugin")
 
-This webpack plugin appends head elements during the creation of index.html. 
+This webpack plugin appends head elements during the creation of index.html.
 
-To use it, you'll have to create the `index-head-config.js` file to specify the `<link>` and `<meta>` you want to include in the `<head>` section of your index.html. 
+To use it, you'll have to create the `index-head-config.js` file to specify the `<link>` and `<meta>` you want to include in the `<head>` section of your index.html.
 
-Create your file at the following location: 
+Create your file at the following location:
 
 ```txt
 |
@@ -101,9 +100,9 @@ Create your file at the following location:
 |   ...
 ```
 
-Then, declare your file as follows: 
+Then, declare your file as follows:
 
-````
+```
 module.exports = {
 	link: [
 		{ rel: "manifest", href: "manifest.json" },
@@ -121,12 +120,12 @@ module.exports = {
 		...
 	]
 }
-````
+```
 
-Finally, to indicate to your index.html file that you want to use this new file, 
-you will have to add the following lines in your `<head>` section: 
+Finally, to indicate to your index.html file that you want to use this new file,
+you will have to add the following lines in your `<head>` section:
 
-````
+```
 <head>
 ...
 	<% if (webpackConfig.htmlElements.headTags) { %>
@@ -134,10 +133,7 @@ you will have to add the following lines in your `<head>` section:
 	<% } %>
 ...
 </head>
-````
+```
 
 _If you do not intend to use this way of working, simply don't create this file and
- don't include the check for `webpackConfig.htmlElements.headTags` in the `<head>` section of index.html._  
-
-
-
+don't include the check for `webpackConfig.htmlElements.headTags` in the `<head>` section of index.html._

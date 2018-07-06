@@ -38,8 +38,8 @@ The structure of this file is like the following:
 
 This file is used to build the packages where it is located.
 However, we have a special case in Stark, which is the fact that a tsconfig.json file
-is located in the `packages` folder. 
-This specific file is only used in the Stark build process. 
+is located in the `packages` folder.
+This specific file is only used in the Stark build process.
 
 ## tsconfig.app.json
 
@@ -53,14 +53,15 @@ The `tsconfig.app.json` file is located in the following folders:
 ...
 ```
 
-The structure of those files is the following: 
-````
+The structure of those files is the following:
+
+```
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {},
   "exclude": ["node_modules", "dist", "src/**/*.spec.ts", "src/**/*.e2e.ts"]
 }
-````
+```
 
 Those files are used for the build the application itself.
 
@@ -97,8 +98,8 @@ The structure of this files is as the following:
 }`
 ```
 
-Those files are used to build the testing bundles which contains the spec.ts files and all the files under test. 
-The code is compiled using CommonJs modules, as we use Karma-Typescript to create the bundles. 
+Those files are used to build the testing bundles which contains the spec.ts files and all the files under test.
+The code is compiled using CommonJs modules, as we use Karma-Typescript to create the bundles.
 
 ## tsconfig-build.json
 
@@ -143,10 +144,9 @@ The structure of this file is as the following:
 }
 ```
 
-This file is used in the build of the project. Stark uses it for packages compilation (stark-core, stark-ui,...) in 
+This file is used in the build of the project. Stark uses it for packages compilation (stark-core, stark-ui,...) in
 compliance with the configuration of the package.
-The file will then indicate where to find the library to use to build the project, the entry point to compile, ... 
-
+The file will then indicate where to find the library to use to build the project, the entry point to compile, ...
 
 ## tsconfig.e2e.json
 
@@ -161,4 +161,4 @@ The `tsconfig.e2e.json` file is located in the `stark/starter` folder and looks 
 }
 ```
 
-This files are used to build the testing bundles which contains the e2e.ts files and all the application source files. 
+This files are used to build the testing bundles which contains the e2e.ts files and all the application source files.

@@ -4,16 +4,16 @@ import { FileService } from "./file.service";
 
 @Component({
 	selector: "example-viewer",
-	templateUrl: "./example-viewer.html",
-	styleUrls: ["./example-viewer.scss"],
+	templateUrl: "./example-viewer.component.html",
+	styleUrls: ["./example-viewer.component.scss"],
 	providers: [FileService]
 })
 export class ExampleViewerComponent implements OnInit {
-	@Input() public extensions: Array<string> = ["HTML", "TS", "CSS"];
+	@Input() public extensions: string[] = ["HTML", "TS", "CSS"];
 	@Input() public filesPath: string;
 	@Input() public title: string;
 
-	public filesContent: Array<Object> = [];
+	public filesContent: object[] = [];
 	public showSource: boolean = false;
 
 	public constructor(private service: FileService) {}
@@ -33,7 +33,7 @@ export class ExampleViewerComponent implements OnInit {
 		});
 	}
 
-	public addFileContent(fileContent: Object): void {
+	public addFileContent(fileContent: object): void {
 		this.filesContent.push(fileContent);
 	}
 
