@@ -39,7 +39,7 @@
     "deep-freeze-strict": "1.1.1",
     "ibantools": "2.0.0",
     "moment": "2.22.2",
-    "uuid": "3.2.1"
+    "uuid": "3.3.2"
   },
   "devDependencies": {
     "@nationalbankbelgium/stark-testing": "../stark-testing"
