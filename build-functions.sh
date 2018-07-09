@@ -10,7 +10,7 @@
 isIgnoredDirectory() {
   #logTrace "${FUNCNAME[0]}: Checking for ${1}" 1
   name=$(basename ${1})
-  if [[ -f "${1}" || "${name}" == "src" || "${name}" == "test" || "${name}" == "integrationtest" || "${name}" == "reports" || "${name}" == "assets" || "${name}" == "node_modules" ]]; then
+  if [[ -f "${1}" || "${name}" == "src" || "${name}" == "test" || "${name}" == "integrationtest" || "${name}" == "reports" || "${name}" == "coverage" || "${name}" == "assets" || "${name}" == "node_modules" ]]; then
     #logTrace "No" 1
     return 0
   else
