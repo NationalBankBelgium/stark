@@ -8,6 +8,9 @@ import { HighlightJsModule, HIGHLIGHT_JS } from "angular-highlight-js";
 import { ExampleViewerComponent } from "./example-viewer.component";
 import { FileService } from "./file.service";
 import { throwError, of } from "rxjs";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import SpyObj = jasmine.SpyObj;
 
 export function highlightJsFactory(): any {
 	return hljs;
@@ -16,6 +19,7 @@ describe("ExampleViewerComponent", () => {
 	let component: ExampleViewerComponent;
 	let fileService: FileService;
 	let fixture: ComponentFixture<ExampleViewerComponent>;
+	let logger: SpyObj<StarkLoggingService>;
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
@@ -32,11 +36,16 @@ describe("ExampleViewerComponent", () => {
 				MatTabsModule,
 				MatTooltipModule
 			],
-			providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }, FileService]
+			providers: [
+				{ provide: ComponentFixtureAutoDetect, useValue: true },
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				FileService
+			]
 		}).compileComponents();
 	}));
 
 	beforeEach(() => {
+		logger = TestBed.get(STARK_LOGGING_SERVICE);
 		fixture = TestBed.createComponent(ExampleViewerComponent);
 		component = fixture.componentInstance;
 		fileService = fixture.debugElement.injector.get<FileService>(FileService as any);
@@ -64,11 +73,13 @@ describe("ExampleViewerComponent", () => {
 
 	describe("fetchFiles()", () => {
 		it("should not do anything when the file doesn't exist", () => {
+			logger.debug.calls.reset();
 			spyOn(component, "addFileContent");
 			spyOn(fileService, "fetchFile").and.returnValue(throwError("http failure"));
 			component.fetchFiles();
 			expect(component.addFileContent).not.toHaveBeenCalled();
 			expect(fileService.fetchFile).toHaveBeenCalledTimes(component.extensions.length);
+			expect(logger.error).toHaveBeenCalled();
 		});
 
 		it("should call the callback when the file exists", () => {

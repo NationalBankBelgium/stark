@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FileService } from "./file.service";
+import { STARK_LOGGING_SERVICE, StarkErrorImpl, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
 	selector: "example-viewer",
@@ -16,7 +17,7 @@ export class ExampleViewerComponent implements OnInit {
 	public filesContent: object[] = [];
 	public showSource: boolean = false;
 
-	public constructor(private service: FileService) {}
+	public constructor(private service: FileService, @Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService) {}
 
 	public ngOnInit(): void {
 		this.fetchFiles();
@@ -28,7 +29,7 @@ export class ExampleViewerComponent implements OnInit {
 				.fetchFile("/assets/examples/" + this.filesPath + "." + extension.toLowerCase())
 				.subscribe(
 					(data: string) => this.addFileContent({ extension: extension, file: data }),
-					(error: HttpErrorResponse) => console.log(error)
+					(error: HttpErrorResponse) => this.loggingService.error("Error while fetching files", new StarkErrorImpl(error))
 				);
 		});
 	}
