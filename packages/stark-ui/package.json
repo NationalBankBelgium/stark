@@ -26,7 +26,9 @@
     "npm": ">=5.3.0"
   },
   "dependencies": {
-    "@mdi/angular-material": "2.4.85"
+    "@mdi/angular-material": "2.4.85",
+    "@types/nouislider": "9.0.4",
+    "nouislider": "11.1.0"
   },
   "devDependencies": {
     "@nationalbankbelgium/stark-testing": "../stark-testing"
