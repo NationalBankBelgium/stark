@@ -308,6 +308,7 @@ If you only want to build a subset of stark then you can
 -   execute one of the `build:stark-<name>` npm scripts; for example: `npm run build:stark-core` or `npm run build:stark-build`
 -   execute the `build` script through npm with the list of packages to build: `npm run build -- --packages=stark-core`
 -   execute the build script from the command line: `bash ./build.sh --packages=stark-core`
+-   **IMPORTANT: on MAC OS you may get the error: `sed: illegal option -- r`. The solution is to install `gnu-sed` (see https://www.gnu.org/software/sed/) with the command `brew install gnu-sed --with-default-names` (see https://stackoverflow.com/a/34815955)**
 
 ## Executing test suites
 
