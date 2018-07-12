@@ -25,12 +25,15 @@ export class ExampleViewerComponent implements OnInit {
 
 	public fetchFiles(): void {
 		this.extensions.forEach((extension: string) => {
-			this.service
-				.fetchFile("/assets/examples/" + this.filesPath + "." + extension.toLowerCase())
-				.subscribe(
-					(data: string) => this.addFileContent({ extension: extension, file: data }),
-					(error: HttpErrorResponse) => this.loggingService.error("Error while fetching files", new StarkErrorImpl(error))
-				);
+			this.service.fetchFile("/assets/examples/" + this.filesPath + "." + extension.toLowerCase()).subscribe(
+				(data: string) =>
+					this.addFileContent({
+						extension: extension,
+						data: data,
+						format: this.translateExtentionToFormat(extension)
+					}),
+				(error: HttpErrorResponse) => this.loggingService.error("Error while fetching files", new StarkErrorImpl(error))
+			);
 		});
 	}
 
@@ -44,5 +47,18 @@ export class ExampleViewerComponent implements OnInit {
 
 	public trackFilesContent(_index: number, file: any): string {
 		return file.extension;
+	}
+
+	private translateExtentionToFormat(extension: string): string {
+		switch (extension.toLowerCase()) {
+			case "js":
+				return "javascript";
+
+			case "ts":
+				return "typescript";
+
+			default:
+				return extension;
+		}
 	}
 }
