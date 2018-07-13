@@ -49,13 +49,14 @@ import "event-source-polyfill";
 import "eligrey-classlist-js-polyfill";
 
 /**
- * All but Chrome, Firefox and Opera require this to support Web Animations from
- * `@angular/animations` and `@angular/platform-browser/animations`.
- * See: http://caniuse.com/#feat=web-animation
+ * Web Animations polyfill is no longer needed for standard animation support as of Angular 6
+ * IMPORTANT: It is only needed in case you use the AnimationBuilder from '@angular/animations' in the application
  *
+ * See: https://angular.io/guide/browser-support#optional-browser-features-to-polyfill
+ * See: http://caniuse.com/#feat=web-animation
  * Polyfill: https://github.com/web-animations/web-animations-js
  */
-import "web-animations-js";
+// import "web-animations-js";
 
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
