@@ -3,7 +3,7 @@ import { disableDebugTools, enableDebugTools } from "@angular/platform-browser";
 import { createNewHosts } from "@angularclass/hmr";
 
 import { StarkMain } from "./stark-main.intf";
-import {StarkEnvironment} from "../environment";
+import { StarkEnvironment } from "../environment";
 
 /**
  * Parent class for bootstrapping Stark applications.
@@ -99,6 +99,12 @@ NNNNNNNN         NNNNNNNBBBBBBBBBBBBBBBBB   BBBBBBBBBBBBBBBBB
 We need great software developers like you! https://jobs.nbb.be
 		`);
 
+		if (ENV === "production") {
+			// IMPORTANT: the production mode should be enabled before bootstrapping the app
+			// otherwise an error is thrown: "Cannot enable prod mode after platform setup."
+			enableProdMode();
+		}
+
 		this.bootstrapDomReady();
 	}
 
@@ -109,7 +115,7 @@ We need great software developers like you! https://jobs.nbb.be
 	 * @ignore
 	 */
 	protected bootstrapHmr: Function = (module: any, bootstrap: () => Promise<NgModuleRef<any>>) => {
-		if(ENV === "development") {
+		if (ENV === "development") {
 			console.log("Bootstrapping HMR");
 			let ngModule: NgModuleRef<any>;
 			module.hot.accept();
@@ -137,7 +143,6 @@ We need great software developers like you! https://jobs.nbb.be
 		// written like this because otherwise "this" will not be captured :)
 		if (this.environment.production) {
 			console.log("Customizing configuration for production!");
-			enableProdMode();
 			disableDebugTools();
 		} else {
 			console.log("Customizing configuration for development!");
