@@ -1,23 +1,25 @@
 <div class="example-viewer-wrapper mat-elevation-z2">
-  <div class="example-viewer-title">
-    <div class="example-viewer-title-spacer"><h2 translate>{{ title }}</h2></div>
-    
-    <button (click)="toggleSourceView()" matTooltip="View source" mat-icon-button>
-      <mat-icon svgIcon="code-tags"></mat-icon>
-    </button>
-</div>
+	<div class="example-viewer-title">
+		<div class="example-viewer-title-spacer"><h2 translate>{{ title }}</h2></div>
 
-  <div class="example-viewer-source" *ngIf="showSource">
-    <mat-tab-group>
-      <mat-tab *ngFor="let file of filesContent; trackBy: trackFilesContent" [label]="file.extension">
-        <div class="example-source-wrapper">
-          <pre class="example-source"><code mwlHighlightJs [source]="file.file" [language]="file.extension"></code></pre>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+		<button (click)="toggleSourceView()" matTooltip="View source" mat-icon-button>
+			<mat-icon svgIcon="code-tags"></mat-icon>
+		</button>
+	</div>
 
-  <div class="example-viewer-body">
-    <ng-content></ng-content>
-  </div>
+	<div class="example-viewer-source" *ngIf="showSource">
+		<mat-tab-group>
+			<mat-tab *ngFor="let file of filesContent; trackBy: trackFilesContent" [label]="file.extension">
+				<div class="example-source-wrapper">
+					<stark-pretty-print [data]="file.data"
+										[format]="file.format"
+										[enableHighlighting]="true"></stark-pretty-print>
+				</div>
+			</mat-tab>
+		</mat-tab-group>
+	</div>
+
+	<div class="example-viewer-body">
+		<ng-content></ng-content>
+	</div>
 </div>

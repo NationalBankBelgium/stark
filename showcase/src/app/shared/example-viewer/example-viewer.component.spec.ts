@@ -1,9 +1,7 @@
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { async, ComponentFixtureAutoDetect, ComponentFixture, TestBed } from "@angular/core/testing";
-import { MatButtonModule, MatIconModule, MatTabsModule, MatTooltipModule } from "@angular/material";
-import * as hljs from "highlight.js";
-import { HighlightJsModule, HIGHLIGHT_JS } from "angular-highlight-js";
+import { MatButtonModule, MatTabsModule, MatTooltipModule } from "@angular/material";
 
 import { ExampleViewerComponent } from "./example-viewer.component";
 import { FileService } from "./file.service";
@@ -11,10 +9,9 @@ import { throwError, of } from "rxjs";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import SpyObj = jasmine.SpyObj;
+import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
-export function highlightJsFactory(): any {
-	return hljs;
-}
 describe("ExampleViewerComponent", () => {
 	let component: ExampleViewerComponent;
 	let fileService: FileService;
@@ -24,23 +21,13 @@ describe("ExampleViewerComponent", () => {
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			declarations: [ExampleViewerComponent],
-			imports: [
-				BrowserAnimationsModule,
-				HttpClientModule,
-				HighlightJsModule.forRoot({
-					provide: HIGHLIGHT_JS,
-					useFactory: highlightJsFactory
-				}),
-				MatButtonModule,
-				MatIconModule,
-				MatTabsModule,
-				MatTooltipModule
-			],
+			imports: [BrowserAnimationsModule, HttpClientModule, MatButtonModule, MatTabsModule, MatTooltipModule, StarkPrettyPrintModule],
 			providers: [
 				{ provide: ComponentFixtureAutoDetect, useValue: true },
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				FileService
-			]
+			],
+			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon
 		}).compileComponents();
 	}));
 
