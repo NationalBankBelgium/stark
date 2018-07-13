@@ -1,13 +1,3 @@
-// Old Stark vars
-$tablet-query: "(min-width: 600px)";
-$tablet-screen-query: "screen and (min-width: 600px)";
-$desktop-query: "(min-width: 960px)";
-$desktop-screen-query: "screen and (min-width: 960px)";
-$mobile-only-query: "(max-width: 599px)";
-$mobile-only-screen-query: "screen and (max-width: 599px)";
-$tablet-only-query: "(min-width: 600px) and (max-width: 959px)";
-$tablet-only-screen-query: "screen and (min-width: 600px) and (max-width: 959px)";
-
 $elevation-1: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
 $elevation-2: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
 $elevation-3: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12);

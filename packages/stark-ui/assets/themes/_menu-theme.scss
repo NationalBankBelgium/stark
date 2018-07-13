@@ -1,0 +1,13 @@
+.mat-menu-content .mat-menu-item {
+  color: mat-color(map-get($base-theme, primary-palette));
+  .mat-icon {
+    color: inherit;
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+  &[disabled] {
+    color: map-get($mat-light-theme-foreground, disabled-button);
+  }
+}

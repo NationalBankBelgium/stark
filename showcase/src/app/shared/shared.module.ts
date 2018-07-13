@@ -5,6 +5,7 @@ import { HighlightJsModule, HIGHLIGHT_JS } from "angular-highlight-js";
 import { MatButtonModule, MatIconModule, MatTabsModule, MatTooltipModule, MatSnackBarModule } from "@angular/material";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { TranslateModule } from "@ngx-translate/core";
 
 export function highlightJsFactory(): any {
 	return hljs;
@@ -21,7 +22,8 @@ export function highlightJsFactory(): any {
 		MatTooltipModule,
 		MatSnackBarModule,
 		MatTabsModule,
-		CommonModule
+		CommonModule,
+		TranslateModule
 	],
 	providers: [FileService],
 	declarations: [ExampleViewerComponent],

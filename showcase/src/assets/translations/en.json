@@ -1,7 +1,11 @@
 {
   "SHOWCASE": {
-    "HOME": {
-      "TITLE": "Stark Showcase application"
+    "DEMO": {
+      "ACTION-BAR": {
+        "CLASSIC-FULL": "Action Bar Classic Full",
+        "CLASSIC-COMPACT": "Action Bar Classic Compact",
+        "ALT": "Action Bar Alternative"
+      }
     }
   }
 }
