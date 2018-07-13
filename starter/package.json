@@ -136,7 +136,6 @@
     "reflect-metadata": "0.1.12",
     "rxjs": "6.2.1",
     "rxjs-compat": "6.2.1",
-    "web-animations-js": "2.3.1",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
