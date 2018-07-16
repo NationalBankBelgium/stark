@@ -38,12 +38,6 @@ module.exports = {
 				message: "Function names should be in lowercase following the CSS specification."
 			}
 		],
-		"string-quotes": [
-			"double",
-			{
-				message: "Always use double quotes for consistency."
-			}
-		],
 		"length-zero-no-unit": [
 			true,
 			{
@@ -109,8 +103,6 @@ module.exports = {
 			}
 		],
 		"selector-pseudo-element-no-unknown": true,
-		// FIXME: cannot simply leave this rule commented for now (stylelint-config-prettier v3.2.0) otherwise it is still recognized as conflict
-		"selector-descendant-combinator-no-non-space": null,
 		"selector-type-case": [
 			"lower",
 			{
@@ -130,7 +122,12 @@ module.exports = {
 				message: "Never put spaces inside media feature parentheses to avoid unnecessary whitespace."
 			}
 		],
-		"at-rule-no-unknown": true,
+		"at-rule-no-unknown": [
+			true,
+			{
+				ignoreAtRules: ["each", "else", "for", "function", "if", "include", "mixin", "return"] /* SCSS-specific @-directives */
+			}
+		],
 		"no-duplicate-at-import-rules": [
 			true,
 			{
@@ -169,6 +166,12 @@ module.exports = {
     {
     "message": "Avoid empty lines in functions to improve readability."
     }
+  ],
+  "string-quotes": [
+	"double",
+	{
+		message: "Always use double quotes for consistency."
+	}
   ],
   "value-list-comma-newline-before": [
     "never-multi-line",
