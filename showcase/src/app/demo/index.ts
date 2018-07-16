@@ -1,2 +1,4 @@
-export * from "./action-bar/action-bar.component";
-export * from "./example-viewer/example-viewer.component";
+export * from "./action-bar";
+export * from "./example-viewer";
+export * from "./table";
+export * from "./demo.module";

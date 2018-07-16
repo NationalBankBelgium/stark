@@ -1,7 +1,7 @@
 import { StarkAction } from "./action.intf";
 
 /**
- * Stark Action interface
+ * Stark Action Bar Config interface
  */
 export interface StarkActionBarConfig {
 	/**
