@@ -67,6 +67,7 @@ $md-warn-100: mat-color(map-get($base-theme, warn-palette), 100); /* rgb(255, 20
 $md-warn: mat-color(map-get($base-theme, warn-palette)); /* rgb(255, 87, 34) */
 $md-warn-600: mat-color(map-get($base-theme, warn-palette), 600); /* rgb(244, 81, 30) */
 $md-warn-700: mat-color(map-get($base-theme, warn-palette), 700); /* rgb(230, 74, 25) */
+/* stylelint-disable-next-line value-keyword-case */
 $md-warn-a700: mat-color(map-get($base-theme, warn-palette), A700); /* rgb(221, 44, 0) */
 $md-warn-alpha-26: rgba(255, 87, 34, 0.26);
 $md-warn-alpha-50: rgba(255, 87, 34, 0.5);
