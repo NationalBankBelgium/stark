@@ -67,20 +67,20 @@ $accent-palette: (
 );
 
 $warning-palette: (
-  50: #ffccbc,
-  100: #ffcdd2,
-  200: #ef9a9a,
-  300: #e57373,
-  400: #ef5350,
-  500: #f44336,
-  600: #e53935,
-  700: #d32f2f,
-  800: #c62828,
-  900: #b71c1c,
-  A100: #ff8a80,
-  A200: #ff5252,
-  A400: #ff1744,
-  A700: #d50000,
+  50: #fff3e0,
+  100: #ffe0b2,
+  200: #ffcc80,
+  300: #ffb74d,
+  400: #ffa726,
+  500: #ff9800,
+  600: #fb8c00,
+  700: #f57c00,
+  800: #ef6c00,
+  900: #e65100,
+  A100: #ffd180,
+  A200: #ffab40,
+  A400: #ff9100,
+  A700: #ff6d00,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -93,9 +93,9 @@ $warning-palette: (
     800: $light-primary-text,
     900: $light-primary-text,
     A100: $dark-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: black
   )
 );
 
@@ -136,25 +136,26 @@ $foregrounds: (
 $base-theme: (
   primary-palette: mat-palette($primary-palette),
   accent-palette: mat-palette($accent-palette),
-  warn-palette: mat-palette($mat-red)
+  warn-palette: mat-palette($warning-palette)
 );
 
 $button-theme: (
-  border-radius: $border-radius,
-  font-size: 14px,
-  font-weight: 500,
-  line-height: 36px,
-  padding: 0 16px,
-  small-font-size: 12px,
-  small-font-weight: 500,
-  small-line-height: 26px,
-  small-min-width: 50px,
-  small-padding: 0 5px,
-  large-font-size: 30px,
-  large-font-weight: 500,
-  large-line-height: 52px,
-  large-min-width: 88px,
-  large-padding: 0 20px
+  alert: (
+    color: #d32f2f,
+    contrast: $light-primary-text
+  ),
+  alt: (
+    color: #323232,
+    contrast: $light-primary-text
+  ),
+  neutral: (
+    color: #bfbfbf,
+    contrast: $light-primary-text
+  ),
+  success: (
+    color: #4caf50,
+    contrast: $light-primary-text
+  )
 );
 
 $card-theme: (

@@ -3,10 +3,11 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { ActionBarComponent } from "./action-bar/action-bar.component";
+import { ButtonComponent } from "./button/button.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { TableComponent } from "./table/table.component";
 import { SharedModule } from "../shared/shared.module";
-import { StarkActionBarModule, StarkSliderModule, StarkTableModule } from "@nationalbankbelgium/stark-ui";
+import { StarkActionBarModule, StarkSliderModule, StarkTableModule, StarkSvgViewBoxModule } from "@nationalbankbelgium/stark-ui";
 
 @NgModule({
 	imports: [
@@ -20,9 +21,10 @@ import { StarkActionBarModule, StarkSliderModule, StarkTableModule } from "@nati
 		SharedModule,
 		StarkActionBarModule,
 		StarkSliderModule,
+		StarkSvgViewBoxModule,
 		StarkTableModule
 	],
-	declarations: [ActionBarComponent, ExampleViewerComponent, TableComponent],
-	exports: [ActionBarComponent, ExampleViewerComponent, TableComponent]
+	declarations: [ActionBarComponent, ButtonComponent, ExampleViewerComponent, TableComponent],
+	exports: [ActionBarComponent, ButtonComponent, ExampleViewerComponent, TableComponent]
 })
 export class DemoModule {}

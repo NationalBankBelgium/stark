@@ -1,27 +1,38 @@
 <header class="stark-header aah-stark">
 	<div class="stark-container">
 		<div class="stark-app-bar">
-			<button mat-icon-button><mat-icon svgIcon="home"></mat-icon></button>
-			<button (click)="sidenav.toggle()" mat-icon-button><mat-icon svgIcon="menu"></mat-icon></button>
-			<button mat-icon-button><mat-icon svgIcon="arrow-left"></mat-icon></button>
+			<button color="white" mat-icon-button>
+				<mat-icon starkSvgViewBox svgIcon="home"></mat-icon>
+			</button>
+			<button color="white" mat-icon-button (click)="sidenav.toggle()">
+				<mat-icon starkSvgViewBox svgIcon="menu"></mat-icon>
+			</button>
+			<button color="white" mat-icon-button>
+				<mat-icon starkSvgViewBox svgIcon="arrow-left"></mat-icon>
+			</button>
 
 			<stark-app-logo></stark-app-logo>
-			
+
 			<div class="stark-header-extra">
-				<button mat-mini-fab color="warn"><mat-icon svgIcon="power"></mat-icon></button>
+				<button color="alert" mat-mini-fab>
+					<mat-icon starkSvgViewBox svgIcon="power"></mat-icon>
+				</button>
 			</div>
 		</div>
 	</div>
 </header>
 
 <mat-sidenav-container class="stark-main-content">
-  <mat-sidenav #sidenav mode="side" [fixedInViewport]="true" [fixedTopGap]="128" [fixedBottomGap]="0" closed>
+	<mat-sidenav #sidenav mode="side" [fixedInViewport]="true" [fixedTopGap]="128" [fixedBottomGap]="0" closed>
 		<mat-nav-list class="nav-main">
 			<a mat-list-item uiSref="home" uiSrefActive="active">
 				<span matLine>Home</span>
 			</a>
 			<a mat-list-item uiSref="demo-action-bar" uiSrefActive="active">
 				<span matLine>Action Bar</span>
+			</a>
+			<a mat-list-item uiSref="demo-button" uiSrefActive="active">
+				<span matLine>Button</span>
 			</a>
 			<a mat-list-item uiSref="demo-example-viewer" uiSrefActive="active">
 				<span matLine>Example Viewer</span>
@@ -31,7 +42,7 @@
 			</a>
 		</mat-nav-list>
 	</mat-sidenav>
-  <mat-sidenav-content class="px4 py2">
+	<mat-sidenav-content class="px4 py2">
 		<main>
 			<ui-view></ui-view>
 		</main>

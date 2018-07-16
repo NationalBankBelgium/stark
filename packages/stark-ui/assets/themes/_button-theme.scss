@@ -1,10 +1,31 @@
-@mixin stark-button-color($color) {
-  color: $color;
-  .mat-button-focus-overlay {
-    background-color: rgba($color: $color, $alpha: 0.12);
+@mixin stark-button-color($color, $contrast) {
+  &.mat-button,
+  &.mat-icon-button,
+  &.mat-stroked-button {
+    color: $color;
+    .mat-button-focus-overlay {
+      background-color: rgba($color: $color, $alpha: 0.12);
+    }
+    .mat-ripple-element {
+      background-color: rgba($color: $color, $alpha: 0.1);
+    }
   }
-  .mat-ripple-element {
-    background-color: rgba($color: $color, $alpha: 0.1);
+
+  &.mat-flat-button,
+  &.mat-raised-button,
+  &.mat-fab,
+  &.mat-mini-fab {
+    color: $contrast;
+    background-color: $color;
+    .mat-ripple-element {
+      background-color: rgba($color: $contrast, $alpha: 0.1);
+    }
+  }
+
+  .mat-icon-button {
+    .mat-ripple-element {
+      background-color: rgba($color: $color, $alpha: 0.2);
+    }
   }
 }
 
@@ -12,27 +33,45 @@
   $button-theme: map-merge($button-theme, $stark-button-theme);
 }
 
-button[mat-raised-button],
-a[mat-raised-button] {
-  border-radius: map-get($button-theme, border-radius);
-  /*padding: map-get($button-theme, padding);
-    line-height: map-get($button-theme, line-height);*/
+.mat-success {
+  @include stark-button-color(map-get(map-get($button-theme, success), color), map-get(map-get($button-theme, success), contrast));
 }
 
-button[mat-raised-button].stark-small-button,
-a[mat-raised-button].stark-small-button {
-  font-size: map-get($button-theme, small-font-size);
-  font-weight: map-get($button-theme, small-font-weight);
-  line-height: map-get($button-theme, small-line-height);
-  min-width: map-get($button-theme, small-min-width);
-  padding: map-get($button-theme, small-padding);
+.mat-alert {
+  @include stark-button-color(map-get(map-get($button-theme, alert), color), map-get(map-get($button-theme, alert), contrast));
 }
 
-button[mat-raised-button].stark-large-button,
-a[mat-raised-button].stark-large-button {
-  font-size: map-get($button-theme, large-font-size);
-  font-weight: map-get($button-theme, large-font-weight);
-  line-height: map-get($button-theme, large-line-height);
-  min-width: map-get($button-theme, large-min-width);
-  padding: map-get($button-theme, large-padding);
+.mat-alt {
+  @include stark-button-color(map-get(map-get($button-theme, alt), color), map-get(map-get($button-theme, alt), contrast));
+}
+
+.mat-neutral {
+  @include stark-button-color(map-get(map-get($button-theme, neutral), color), map-get(map-get($button-theme, neutral), contrast));
+}
+
+.mat-white {
+  @include stark-button-color(#fff, $dark-primary-text);
+}
+
+.mat-icon-button .mat-icon,
+.mat-mini-fab .mat-icon {
+  &.stark-small-icon {
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    svg {
+      height: 18px;
+      width: 18px;
+    }
+  }
+}
+
+.mat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button,
+.mat-raised-button,
+.mat-fab,
+.mat-mini-fab {
+  text-transform: uppercase;
 }
