@@ -16,6 +16,7 @@ const globals = {
 	"@nationalbankbelgium/stark-core": "stark.core",
 	"@nationalbankbelgium/stark-ui": "stark.ui",
 	"@ngrx/store": "@ngrx/store",
+	"@ngrx/store-devtools": "@ngrx/store-devtools",
 	"@ngrx/effects": "@ngrx/effects",
 	"@ng-idle/core": "@ng-idle/core",
 	"@ng-idle/keepalive": "@ng-idle/keepalive",
