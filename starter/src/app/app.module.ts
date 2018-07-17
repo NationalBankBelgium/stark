@@ -5,6 +5,7 @@ import { UIRouterModule } from "@uirouter/angular";
 import { NgIdleModule } from "@ng-idle/core";
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -157,6 +158,12 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		FormsModule,
 		StoreModule.forRoot(reducers, {
 			metaReducers
+		}),
+		// store dev tools instrumentation must be imported AFTER StoreModule
+		StoreDevtoolsModule.instrument({
+			maxAge: 50, // retains last 50 states
+			name: "Stark Starter - NgRx Store DevTools", // shown in the monitor page
+			logOnly: environment.production // restrict extension to log-only mode (setting it to false enables all extension features)
 		}),
 		UIRouterModule.forRoot({
 			states: APP_STATES,
