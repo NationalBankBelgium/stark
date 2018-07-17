@@ -67,7 +67,7 @@
     "ngc": "node ../../node_modules/@angular/compiler-cli/src/main.js -p ./tsconfig-build.json",
     "lint": "npm run lint-ts && npm run lint-css",
     "lint-ts": "node ../../node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.spec.json --format codeFrame",
-    "lint-css": "node ../../node_modules/stylelint/bin/stylelint \"./**/*.?(pc|sc|c|sa)ss\" --formatter \"string\"",
+    "lint-css": "node ../../node_modules/stylelint/bin/stylelint \"./(src|assets)/**/*.?(pc|sc|c|sa)ss\" --formatter \"string\"",
     "test": "npm run lint && npm run test-fast",
     "test:ci": "npm run lint && npm run test-fast:ci",
     "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start",
