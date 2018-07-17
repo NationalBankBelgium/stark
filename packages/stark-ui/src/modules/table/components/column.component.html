@@ -5,14 +5,14 @@
 			<div [ngSwitch]="sortDirection" class="sort-header" (click)="onSortChange()">
 				<span>{{ getHeaderLabel() }}</span>
 				<ng-container *ngIf="sortable" [ngSwitch]="sortDirection">
-					<mat-icon *ngSwitchCase="'asc'" svgIcon="arrow-up"></mat-icon>
-					<mat-icon *ngSwitchCase="'desc'" svgIcon="arrow-down"></mat-icon>
-					<mat-icon class="order-tip" *ngSwitchDefault svgIcon="arrow-up"></mat-icon>
+					<mat-icon *ngSwitchCase="'asc'" starkSvgViewBox svgIcon="arrow-up" class="stark-small-icon"></mat-icon>
+					<mat-icon *ngSwitchCase="'desc'" starkSvgViewBox svgIcon="arrow-down" class="stark-small-icon"></mat-icon>
+					<mat-icon class="order-tip stark-small-icon" *ngSwitchDefault starkSvgViewBox svgIcon="arrow-up"></mat-icon>
 				</ng-container>
 				<span *ngIf="sortPriority < 1000 && sortDirection" class="priority">{{ sortPriority }}</span>
 			</div>
 			<button *ngIf="filterable" class="button-filter" [matMenuTriggerFor]="filterMenu" mat-icon-button>
-				<mat-icon svgIcon="filter" [matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate"></mat-icon>
+				<mat-icon class="stark-small-icon" starkSvgViewBox svgIcon="filter" [matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate"></mat-icon>
 			</button>
 		</div>
 		<mat-menu class="mat-table-filter" #filterMenu="matMenu" xPosition="before" [overlapTrigger]="false">

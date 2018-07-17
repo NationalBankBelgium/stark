@@ -1,4 +1,4 @@
-import { MatButtonModule, MatIconModule, MatTabsModule, MatTooltipModule, MatSnackBarModule } from "@angular/material";
+import { MatButtonModule, MatCardModule, MatIconModule, MatTabsModule, MatTooltipModule, MatSnackBarModule } from "@angular/material";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
@@ -12,6 +12,7 @@ import { StarkActionBarModule, StarkSliderModule, StarkTableModule, StarkSvgView
 @NgModule({
 	imports: [
 		MatButtonModule,
+		MatCardModule,
 		MatIconModule,
 		MatTooltipModule,
 		MatSnackBarModule,

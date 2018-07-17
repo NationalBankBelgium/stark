@@ -35,6 +35,11 @@ export class StarkActionBarComponent {
 	@Input() public alternativeActions: StarkAction[];
 
 	/**
+	 * Default color of the buttons
+	 */
+	@Input() public buttonColor: "primary" | "accent" | "warn" | "success" | "alert" | "alt" | "neutral" | "white" | string = "primary";
+
+	/**
 	 * Desired layout or flavour:
 	 *    - full: full featured action bar with labels, expanded view, etc...
 	 *    - compact: minimalistic layout with icons only.
