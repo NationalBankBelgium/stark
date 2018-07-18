@@ -1,7 +1,7 @@
 import { validateSync, ValidatorOptions } from "class-validator";
 import { StarkValidationErrorsUtil } from "./validation-errors.util";
-import { STARK_APP_CONFIG, StarkApplicationConfig } from "../configuration/entities/application";
-import { STARK_APP_METADATA, StarkApplicationMetadata } from "../configuration/entities/metadata";
+import { STARK_APP_CONFIG, StarkApplicationConfig } from "../configuration/entities/application/app-config.entity.intf";
+import { STARK_APP_METADATA, StarkApplicationMetadata } from "../configuration/entities/metadata/application-metadata.entity.intf";
 
 export type StarkConfigValidationGroups = "logging" | "routing" | "session" | "settings" | "http";
 export type StarkMetadataValidationGroups = "settings";

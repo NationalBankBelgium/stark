@@ -1,7 +1,7 @@
 import { ActionReducerMap, createFeatureSelector, createSelector, MemoizedSelector } from "@ngrx/store";
 import { StarkSession } from "../entities";
 import { StarkSessionActions } from "../actions";
-import { sessionReducer } from "../reducers";
+import { sessionReducer } from "./session.reducer";
 
 /**
  * We define part of the state assigned to the session module

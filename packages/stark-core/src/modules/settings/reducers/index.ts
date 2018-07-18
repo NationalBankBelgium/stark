@@ -1,7 +1,7 @@
 import { ActionReducerMap, createFeatureSelector, createSelector, MemoizedSelector } from "@ngrx/store";
 import { StarkSettings } from "../entities";
-import { settingsReducer } from "../reducers";
 import { StarkSettingsActions } from "../actions";
+import { settingsReducer } from "./settings.reducer";
 
 /**
  * We define part of the state assigned to the settings module
