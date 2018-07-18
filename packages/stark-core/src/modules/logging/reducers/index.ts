@@ -1,7 +1,7 @@
 import { ActionReducerMap, createFeatureSelector, createSelector, MemoizedSelector } from "@ngrx/store";
 import { StarkLogging } from "../entities";
-import { loggingReducer } from "../reducers";
 import { StarkLoggingActions } from "../actions";
+import { loggingReducer } from "./logging.reducer";
 
 /**
  * We define part of the state assigned to the logging module
