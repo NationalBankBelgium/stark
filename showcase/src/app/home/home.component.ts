@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkErrorImpl, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-
 import { AppState } from "../app.service";
 
 @Component({

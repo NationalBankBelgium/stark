@@ -35,8 +35,8 @@ import {
 	StarkSessionService,
 	StarkUser
 } from "@nationalbankbelgium/stark-core";
-import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui";
 
+import { StarkAppLogoModule, StarkSvgViewBoxModule } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
@@ -161,7 +161,8 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkRoutingModule.forRoot(),
 		SharedModule,
 		DemoModule,
-		StarkAppLogoModule
+		StarkAppLogoModule,
+		StarkSvgViewBoxModule
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.

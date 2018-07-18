@@ -3,42 +3,47 @@
  */
 export interface StarkActionBase {
 	/**
-	 * Path to SVG icon from iconSets to display inside the action button. Ex: "pencil" (optional)
+	 * Color of the button
+	 */
+	buttonColor?: "primary" | "accent" | "warn" | "success" | "alert" | "alt" | "neutral" | "white" | string;
+
+	/**
+	 * Path to SVG icon from iconSets to display inside the action button. Ex: "pencil"
 	 */
 	icon?: string;
 
 	/**
-	 * Text to be displayed as label of the action button (optional)
+	 * Text to be displayed as label of the action button
 	 */
 	label?: string;
 
 	/**
-	 * The second label if this action has two possible states: activated and deactivated (optional)
+	 * The second label if this action has two possible states: activated and deactivated
 	 */
 	labelActivated?: string;
 
 	/**
-	 * In case of two label states, this function will hide one of them or show another (optional)
+	 * In case of two label states, this function will hide one of them or show another
 	 */
 	labelSwitchFunction?: () => boolean;
 
 	/**
-	 * Whether the action button should be enabled for user interaction or not (optional)
+	 * Whether the action button should be enabled for user interaction or not
 	 */
 	isEnabled?: boolean;
 
 	/**
-	 * The second icon if this action has two possible states: activated and deactivated (optional)
+	 * The second icon if this action has two possible states: activated and deactivated
 	 */
 	iconActivated?: string;
 
 	/**
-	 * In case of two icon states, this function will hide one of them or show another (optional)
+	 * In case of two icon states, this function will hide one of them or show another
 	 */
 	iconSwitchFunction?: () => boolean;
 
 	/**
-	 * Custom CSS class to be set to the action button (optional)
+	 * Custom CSS class to be set to the action button
 	 */
 	className?: string;
 }
@@ -73,7 +78,7 @@ export interface StarkAction extends StarkActionBase {
 	isEnabled: boolean;
 
 	/**
-	 * Whether the action button will be visible or not (optional)
+	 * Whether the action button will be visible or not
 	 */
 	isVisible?: boolean;
 }
@@ -88,7 +93,7 @@ export interface StarkDefaultPredefinedAction extends StarkActionBase {}
  */
 export interface StarkCustomizablePredefinedAction extends StarkActionBase {
 	/**
-	 * Whether the action button will be visible or not (optional)
+	 * Whether the action button will be visible or not
 	 */
 	isVisible?: boolean;
 }

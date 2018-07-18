@@ -17,13 +17,14 @@ export class ActionBarComponent implements OnInit {
 		this.actions = [
 			{
 				id: "actionValidate",
+				buttonColor: "success",
 				label: "STARK.ICONS.APPROVE_ITEM",
 				icon: "check",
 				actionCall: ($event: Event, data: any): void => {
 					this.logger.debug($event);
 					this.logger.debug(data);
 				},
-				isEnabled: false,
+				isEnabled: true,
 				isVisible: true
 			},
 			{
@@ -69,6 +70,7 @@ export class ActionBarComponent implements OnInit {
 		this.alternativeActions = [
 			{
 				id: "actionAdd",
+				buttonColor: "warn",
 				label: "STARK.ICONS.ADD_ITEM",
 				icon: "account-plus",
 				actionCall: ($event: Event, data: any): void => {

@@ -1,0 +1,14 @@
+.button-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.button-row button {
+  margin-right: 10px;
+}
+
+.dark .example-viewer-body {
+  background: #333;
+}

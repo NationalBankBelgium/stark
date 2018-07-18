@@ -1,37 +1,47 @@
-.stark-action-bar {
-  .mat-icon-button {
-    @include stark-button-color(mat-color(map-get($base-theme, primary-palette)));
-  }
-  &.stark-action-bar-full {
-    background-color: rgba(0, 0, 0, 0.85);
-    color: rgba(255, 255, 255, 0.8);
-    .mat-icon-button {
-      @include stark-button-color(rgba($color: #fff, $alpha: 0.8));
-    }
+@media #{$tablet-query} {
+  .stark-action-bar {
     .action-label {
+      &.primary {
+        color: mat-color(map-get($base-theme, primary-palette));
+      }
+      &.warn {
+        color: mat-color(map-get($base-theme, warn-palette));
+      }
+      &.accent {
+        color: mat-color(map-get($base-theme, accent-palette));
+      }
+      &.success {
+        color: map-get(map-get($button-theme, success), color);
+      }
+      &.alert {
+        color: map-get(map-get($button-theme, alert), color);
+      }
+      &.alt {
+        color: map-get(map-get($button-theme, alt), color);
+      }
+      &.neutral {
+        color: map-get(map-get($button-theme, neutral), color);
+      }
+      &.white {
+        color: #fff;
+      }
       &.disabled {
-        color: rgba($color: #fff, $alpha: 0.25);
+        color: map-get($mat-light-theme-foreground, disabled-text);
       }
     }
   }
 }
 
-@media #{$tablet-query} {
-  .stark-action-bar {
-    color: $md-primary;
-    &.stark-action-bar-full {
-      background: none;
-      color: mat-color(map-get($base-theme, primary-palette));
-      .mat-icon-button:not([disabled]) {
-        @include stark-button-color(mat-color(map-get($base-theme, primary-palette)));
-      }
-      [disabled].mat-icon-button {
-        @include stark-button-color(map-get($mat-light-theme-foreground, disabled-button));
-      }
-      .action-label {
-        &.disabled {
-          color: map-get($mat-light-theme-foreground, disabled-button);
-        }
+@media #{$mobile-only-query} {
+  .stark-action-bar-full {
+    background-color: rgba(0, 0, 0, 0.85);
+    .mat-icon-button {
+      @include stark-button-color(rgba($color: #fff, $alpha: 0.8), $light-primary-text);
+    }
+    .action-label {
+      color: rgba(255, 255, 255, 0.8);
+      &.disabled {
+        color: rgba($color: #fff, $alpha: 0.25);
       }
     }
   }

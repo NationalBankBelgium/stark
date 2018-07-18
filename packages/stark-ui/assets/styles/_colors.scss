@@ -3,7 +3,7 @@ $mat-light-theme-foreground: $foregrounds;
 
 @if variable-exists(stark-base-theme) {
   $base-theme: map-merge($base-theme, $stark-base-theme);
-  
+
   @if map-has-key($stark-base-theme, backgrounds) {
     $mat-light-theme-background: map-merge($backgrounds, map-get($stark-base-theme, backgrounds));
   }
