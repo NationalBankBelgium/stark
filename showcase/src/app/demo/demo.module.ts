@@ -14,6 +14,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { ActionBarComponent } from "./action-bar/action-bar.component";
+import { DropdownComponent } from "./dropdown/dropdown.component";
 import { ButtonComponent } from "./button/button.component";
 import { DatePickerComponent } from "./date-picker/date-picker.component";
 import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
@@ -30,6 +31,7 @@ import {
 	StarkSliderModule,
 	StarkTableModule,
 	StarkSvgViewBoxModule,
+	StarkDropdownModule,
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
 	STARK_DATE_FORMATS
@@ -52,6 +54,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		TranslateModule,
 		SharedModule,
 		StarkActionBarModule,
+		StarkDropdownModule,
 		StarkKeyboardDirectivesModule,
 		StarkPrettyPrintModule,
 		StarkDatePickerModule,
@@ -62,6 +65,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 	],
 	declarations: [
 		ActionBarComponent,
+		DropdownComponent,
 		ButtonComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
@@ -75,6 +79,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 	],
 	exports: [
 		ActionBarComponent,
+		DropdownComponent,
 		ButtonComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,

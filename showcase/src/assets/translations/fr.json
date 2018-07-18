@@ -58,6 +58,23 @@
         "SQL": "Pretty-Print SQL",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
+      },
+      "DROPDOWNS": {
+        "PR": "Applications informatiques",
+        "IO": "Infrastructure et opérations informatiques",
+        "CS": "Services aux clients informatiques",
+        "REQUIRED": "Choix unique obligatoire",
+        "BLANK": "Option par défaut (blank)",
+        "MULTIPLE": "Choix multiple",
+        "MULTIPLE_REQUIRED": "Choix multiple obligatoire",
+        "DISABLED": "Dropdown désactivé",
+        "SELECTED_VALUE": "Valeur sélectionnée ",
+        "SELECTED_VALUES": "Valeurs sélectionnées ",
+        "SELECT_SERVICE": "Sélectionnez un service",
+        "SELECT_NUMBER": "Sélectionnez votre chiffre porte-bonheur",
+        "SELECT_SERVICES": "Sélectionnez un service ou plus",
+        "SELECT_ONE_SERVICE": "Sélectionnez au moins un service",
+        "SELECT_DISABLED": "Désolé, ce dropdown est désactivé"
       }
     },
     "STYLEGUIDE": {
