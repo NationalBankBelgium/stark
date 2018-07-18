@@ -3,9 +3,11 @@ import { Component, HostBinding, Inject, Input, OnChanges, OnInit, SimpleChanges
 /* tslint:disable:no-duplicate-imports no-import-side-effect */
 import * as Prism from "prismjs";
 import { LanguageDefinition } from "prismjs";
+// prism loads these languages by default: "css", "clike", "javascript" and "markup" (which includes "xml", "html", "mathml", "svg")
 import "prismjs/components/prism-typescript.min.js";
 import "prismjs/components/prism-sql.min.js";
 import "prismjs/components/prism-json.min.js";
+import "prismjs/components/prism-css-extras.min.js";
 import "prismjs/components/prism-scss.min.js";
 /* tslint:enable */
 
@@ -65,22 +67,19 @@ export class StarkPrettyPrintComponent implements OnChanges, OnInit {
 
 	/**
 	 * Class constructor
-	 * @param logger : the logger of the application
+	 * @param logger - The logger of the application
 	 */
-	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService
-	) {}
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
 	/**
-	 * Component lifecycle hook that is called after data-bound properties of a directive are initialized.
+	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": controller initialized");
 	}
 
 	/**
-	 * Component lifecycle hook that is called when any data-bound property of a directive changes.
-	 * @param Contains the changed properties
+	 * Component lifecycle hook
 	 */
 	public ngOnChanges(_onChangesObj: SimpleChanges): void {
 		if (!this.data || !this.format) {
