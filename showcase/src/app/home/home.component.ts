@@ -5,7 +5,6 @@ import { AppState } from "../app.service";
 
 @Component({
 	selector: "home", // <home></home>
-	providers: [],
 	styleUrls: ["./home.component.scss"],
 	templateUrl: "./home.component.html"
 })

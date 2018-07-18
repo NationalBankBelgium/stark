@@ -86,6 +86,16 @@ See [this page](/SNAPSHOTS.md) for more information about the process behind thi
 
 This project and all associated source code is licensed under the terms of the [MIT License](/LICENSE).
 
+## Showcase and Documentation 
+
+Stark showcase and documentation can be found at <a href="https://stark.nbb.be">the following location</a>.
+There, you'll find links about : 
+- the latest api-docs for stark-core
+- the previous api-docs for stark-core
+- the latest api-docs for stark-ui
+- the previous api-docs for stark-ui
+- the previous showcase versions
+
 ## Thank you notes :)
 
 We'd like to thank the following companies who support the open source community with great tools and platforms.
