@@ -19,7 +19,6 @@ import {
 	ViewEncapsulation
 } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { MatPaginator } from "@angular/material/paginator";
 import { MatColumnDef, MatTable, MatTableDataSource } from "@angular/material/table";
 import { SelectionModel } from "@angular/cdk/collections";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
@@ -31,6 +30,8 @@ import { StarkAction } from "../../action-bar/components/action.intf";
 import { StarkTableColumnProperties } from "./column-properties.intf";
 import { StarkTableFilter } from "./table-filter.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { StarkPaginationConfig, StarkPaginationComponent } from "../../pagination/components";
+import { StarkPaginateEvent } from "../../pagination/components/paginate-event.intf";
 
 /**
  * Name of the component
@@ -52,6 +53,12 @@ const componentName: string = "stark-table";
 })
 /* tslint:enable */
 export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges {
+	/**
+	 * HTML id of the table
+	 */
+	@Input()
+	public htmlId: string;
+
 	/**
 	 * Data that will be display inside your table.
 	 */
@@ -87,6 +94,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	@Input()
 	public paginate: boolean = false;
+
+	/**
+	 *
+	 */
+	@Input()
+	public paginationConfig: StarkPaginationConfig;
 
 	/**
 	 * Allows multiple row selection. Setting the attribute to "true" or empty will enable this feature.
@@ -125,6 +138,20 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public filterChanged: EventEmitter<string> = new EventEmitter<string>();
 
 	/**
+	 * Callback function to be called when the pagination changes. Two parameters
+	 * will be passed to the callback function:
+	 *        -- page (number)
+	 *        -- itemsPerPage (number)
+	 *
+	 * When you declare it in html tags you have to declare it like 'on-paginate="yourFunction(page,itemsPerPage)"'
+	 * If no callback function is passed, the data will be paginated automatically by the component.
+	 *
+	 * When set onPaginate, these attributes are required : totalItems
+	 */
+	@Output()
+	public paginationChanged: EventEmitter<StarkPaginateEvent> = new EventEmitter<StarkPaginateEvent>();
+
+	/**
 	 * Reference to the MatTable embedded in this component
 	 */
 	@ViewChild(MatTable)
@@ -133,8 +160,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Reference to the MatPaginator embedded in this component
 	 */
-	@ViewChild(MatPaginator)
-	public paginator: MatPaginator;
+	@ViewChild(StarkPaginationComponent)
+	public starkPaginator: StarkPaginationComponent;
 
 	/**
 	 * Columns added automatically by this component according to the columnProperties input
@@ -161,7 +188,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Array of StarkAction for regular mode
 	 */
-	public customTableRegularActions: Object = {};
+	public customTableRegularActions: StarkActionBarConfig;
 
 	/**
 	 * Angular CDK selection model used for the "master" selection of the table
@@ -217,8 +244,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		}
 
 		if (this.customTableActionsType === "regular") {
-			this.customTableRegularActions = { actions: this.customTableActions };
+			this.customTableRegularActions = { actions: this.customTableActions || [] };
 		} else {
+			this.customTableRegularActions = { actions: [] };
 			this.customTableAltActions = this.customTableActions;
 		}
 	}
@@ -293,7 +321,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		// using the internal prop from mat-table to get the custom column definitions (no other way for now)
 		const oldColumns: Set<MatColumnDef> = this.table["_customColumnDefs"];
 		oldColumns.forEach((oldColumn: MatColumnDef) => {
-			this.logger.debug("CCR==========> removing oldColumns value", oldColumn.name);
 			this.table.removeColumnDef(oldColumn);
 			// removing column also from the displayed columns (such array should match the dataSource!)
 			this.displayedColumns.splice(this.displayedColumns.findIndex((column: string) => column === oldColumn.name), 1);
@@ -346,7 +373,20 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	private initializeDataSource(): void {
 		this.dataSource = new MatTableDataSource(this.data);
-		this.dataSource.paginator = this.paginator;
+
+		// if there are observers subscribed to the StarkPagination event, it means that the developer will take care of the pagination
+		// so we just re-emit the event from the Stark Pagination component (online mode)
+		if (this.paginationChanged.observers.length > 0) {
+			this.starkPaginator.paginated.subscribe((paginateEvent: StarkPaginateEvent) => {
+				this.paginationChanged.emit(paginateEvent);
+			});
+		} else {
+			// if there are no observers, then the data will be paginated internally in the MatTable via the Stark paginator event (offline mode)
+			this.dataSource.paginator = this.starkPaginator;
+		}
+
+		this.starkPaginator.emitMatPaginationEvent();
+
 		this.dataSource.filterPredicate = (rowData: any, globalFilter: string) => {
 			const matchFilter: boolean[] = [];
 

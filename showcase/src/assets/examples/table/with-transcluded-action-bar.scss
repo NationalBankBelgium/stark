@@ -6,9 +6,8 @@
   justify-content: space-between;
 }
 
-.shadowed {
-  .header {
-    padding: 10px 15px;
-    @include mat-elevation(2);
+.header {
+  h1 {
+    margin-bottom: 0;
   }
 }

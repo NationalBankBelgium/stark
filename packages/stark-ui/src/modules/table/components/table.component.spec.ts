@@ -2,26 +2,27 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { StarkTableComponent } from "./table.component";
-import { StarkTableColumnComponent } from "./column.component";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
 import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.component";
 import { MatSelectModule } from "@angular/material/select";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { StarkTableColumnProperties } from "./column-properties.intf";
-import { StarkActionBarConfig } from "../../action-bar/components/action-bar-config.intf";
 import { MatInputModule } from "@angular/material/input";
-import { StarkTableFilter } from "./table-filter.intf";
-import { StarkTableColumnFilter } from "./table-column-filter.intf";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { StarkTableComponent } from "./table.component";
+import { StarkTableColumnComponent } from "./column.component";
+import { StarkPaginationComponent } from "../../pagination/components";
+import { StarkTableColumnProperties } from "./column-properties.intf";
+import { StarkActionBarConfig } from "../../action-bar/components/action-bar-config.intf";
+import { StarkTableFilter } from "./table-filter.intf";
+import { StarkTableColumnFilter } from "./table-column-filter.intf";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
 
@@ -77,7 +78,13 @@ describe("TableComponent", () => {
 				NoopAnimationsModule,
 				TranslateModule.forRoot()
 			],
-			declarations: [StarkTableComponent, StarkTableColumnComponent, StarkTableMultisortDialogComponent, TestHostComponent],
+			declarations: [
+				StarkPaginationComponent,
+				StarkTableComponent,
+				StarkTableColumnComponent,
+				StarkTableMultisortDialogComponent,
+				TestHostComponent
+			],
 			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
 		}).compileComponents();

@@ -15,8 +15,8 @@
         "CHILD": "Kind",
         "CONFIG_INPUT": "Breadcrumb demonstration (met breadcrumbConfig)",
         "GRANDPARENT": "Grootouder",
-        "PARENT": "Ouder",
         "NO_INPUT": "Breadcrumb demonstration (zonder parameters)",
+        "PARENT": "Ouder",
         "ROOT": "Voorouder",
         "TITLE": "Stark breadcrumb"
       },
@@ -109,9 +109,8 @@
         "COPY_PASTE": "Then you can copy/paste this HTML into your code",
         "EXPLAINED": "Introduction",
         "INTEGRATION": "Integration",
-        "INTEGRATION_DETAILS": "Stark provides you with usefull classes to implement your application header. You just need to include the header theme in your SCSS",
-        "INTRO": "Stark provides you useful classes to implement your application header. You just need to include the header theme in your SCSS",
-        "STARK_APP_HEADER": "The <code>stark-app-header</code> provide a background to the header",
+        "INTEGRATION_DETAILS": "Stark provides you with useful classes to implement your application header. You just need to include the header theme in your SCSS",
+        "STARK_APP_HEADER": "The <code>stark-app-header</code> provides a background to the header",
         "STARK_APP_BAR": "The <code>stark-app-bar</code> contains three content containers <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <code>stark-app-bar</code> also provides a <code>stark-app-bar-page-title</code> which is placed on the bottom left of the header.",
         "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contains <code>stark-actions</code> for the navigation actions.",
         "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo.",
@@ -121,11 +120,11 @@
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
-          "TITLE": "On Enter Key Directive",
           "DESCRIPTION": "Typ een waarde in de invulvelden en druk vervolgens op Enter om de callback functie te activeren",
           "INPUT_WITH_CONTEXT": "Met verbonden context",
           "INPUT_WITHOUT_CONTEXT": "Zonder verbonden context (verbonden waarden zijn niet toegankelijk)",
           "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Zonder verbonden context maar doorgegeven als parameter",
+          "TITLE": "On Enter Key Directive",
           "TYPE_AND_PRESS_ENTER": "Typ een waarde en druk Enter",
           "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Typ een waarde, druk Enter en controleer de console"
         },
@@ -149,6 +148,14 @@
         "LOGOUT_DEFAULT_ICON": "Logout-knop - Standaard pictogram",
         "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram",
         "TITLE": "Stark logout"
+      },
+      "PAGINATION": {
+        "ADVANCED_CONFIGURATION": "Pagination met geavanceerde configuratie",
+        "COMPACT_CONFIGURATION": "Pagination in compacte modus",
+        "EMITTED_PAGINATE_EVENT": "Verzonden Paginate event",
+        "EXTENDED_CONFIGURATION": "Pagination met uitgebreide paginakiezer",
+        "SIMPLE_CONFIGURATION": "Pagination met eenvoudige configuratie",
+        "TITLE": "Stark Pagination"
       },
       "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
@@ -186,6 +193,9 @@
         "TITLE": "Stark slider"
       },
       "TABLE": {
+        "REGULAR": "Normale tabel",
+        "WITH_ALTERNATIVE_ACTION_BAR": "Tabel met alternatieve Action Bar",
+        "WITH_TRANSCLUDED_ACTION_BAR": "Tabel met 'transcluded' Action Bar",
         "TITLE": "Stark table"
       },
       "TOAST": {

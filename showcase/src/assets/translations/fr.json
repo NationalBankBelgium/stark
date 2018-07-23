@@ -15,8 +15,8 @@
         "CHILD": "Enfant",
         "CONFIG_INPUT": "Démonstration du breadcrumb component (avec breadcrumbConfig)",
         "GRANDPARENT": "Grand-parent",
-        "PARENT": "Parent",
         "NO_INPUT": "Démonstration du breadcrumb component (sans paramètres)",
+        "PARENT": "Parent",
         "ROOT": "Ancêtre racine",
         "TITLE": "Stark breadcrumb"
       },
@@ -149,6 +149,14 @@
         "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom",
         "TITLE": "Stark logout"
       },
+      "PAGINATION": {
+        "ADVANCED_CONFIGURATION": "Pagination avec configuration avancée",
+        "COMPACT_CONFIGURATION": "Pagination en mode compact",
+        "EMITTED_PAGINATE_EVENT": "Paginate event émis",
+        "EXTENDED_CONFIGURATION": "Pagination avec sélecteur de page étendu",
+        "SIMPLE_CONFIGURATION": "Pagination avec configuration simple",
+        "TITLE": "Stark Pagination"
+      },
       "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
         "ENABLE_HIGHLIGHTING": "Mettre en surbrillance",
@@ -185,6 +193,9 @@
         "TITLE": "Stark slider"
       },
       "TABLE": {
+        "REGULAR": "Table régulière",
+        "WITH_ALTERNATIVE_ACTION_BAR": "Table avec Action Bar alternative",
+        "WITH_TRANSCLUDED_ACTION_BAR": "Table avec Action Bar 'transcluded'",
         "TITLE": "Stark table"
       },
       "TOAST": {

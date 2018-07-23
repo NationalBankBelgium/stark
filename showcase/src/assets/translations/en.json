@@ -109,8 +109,7 @@
         "COPY_PASTE": "Then you can copy/paste this HTML into your code",
         "EXPLAINED": "Introduction",
         "INTEGRATION": "Integration",
-        "INTEGRATION_DETAILS": "Stark provides you with usefull classes to implement your application header. You just need to include the header theme in your SCSS",
-        "INTRO": "Stark provide you useful classes to implement your application header. You just need to include the header theme in your SCSS",
+        "INTEGRATION_DETAILS": "Stark provides you with useful classes to implement your application header. You just need to include the header theme in your SCSS",
         "STARK_APP_HEADER": "The <code>stark-app-header</code> provides a background to the header",
         "STARK_APP_BAR": "The <code>stark-app-bar</code> contains three content containers <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <code>stark-app-bar</code> also provides a <code>stark-app-bar-page-title</code> which is placed on the bottom left of the header.",
         "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contains <code>stark-actions</code> for the navigation actions.",
@@ -150,6 +149,14 @@
         "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon",
         "TITLE": "Stark logout"
       },
+      "PAGINATION": {
+        "ADVANCED_CONFIGURATION": "Pagination with advanced configuration",
+        "COMPACT_CONFIGURATION": "Pagination in compact mode",
+        "EMITTED_PAGINATE_EVENT": "Emitted paginate event",
+        "EXTENDED_CONFIGURATION": "Pagination with extended page selector",
+        "SIMPLE_CONFIGURATION": "Pagination with simple configuration",
+        "TITLE": "Stark Pagination"
+      },
       "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
         "ENABLE_HIGHLIGHTING": "Enable highlighting",
@@ -186,6 +193,9 @@
         "TITLE": "Stark slider"
       },
       "TABLE": {
+        "REGULAR": "Regular Table",
+        "WITH_ALTERNATIVE_ACTION_BAR": "Table with alternative Action Bar",
+        "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
         "TITLE": "Stark table"
       },
       "TOAST": {
