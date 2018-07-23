@@ -4,7 +4,7 @@
 		<div *ngFor="let action of actionBarConfig.actions; trackBy: trackAction" [id]="actionBarId + '-' + action.id"
 		(click)="onClick(action, $event)" class="stark-action-bar--action">
 			<ng-container *ngIf="action.isVisible !== false">
-				<button [color]="action.buttonColor ? action.buttonColor:'primary'" [ngClass]="action.className" [matTooltip]="action.labelSwitchFunction ? action.labelActivated : action.label" [disabled]="!action.isEnabled" mat-icon-button>
+				<button [color]="action.buttonColor ? action.buttonColor:'primary'" [ngClass]="action.className" [matTooltip]="action.labelSwitchFunction ? (action.labelActivated | translate) : (action.label | translate)" [disabled]="!action.isEnabled" mat-icon-button>
 					<mat-icon starkSvgViewBox [svgIcon]="action.iconSwitchFunction ? action.iconActivated : action.icon" class="stark-small-icon"></mat-icon>
 				</button>
 				<label [class]="'action-label '+ (action.buttonColor?action.buttonColor:'primary')" [ngClass]="{'disabled': !action.isEnabled}" *ngIf="isExtended"> <span translate>{{ action.label }}</span></label>

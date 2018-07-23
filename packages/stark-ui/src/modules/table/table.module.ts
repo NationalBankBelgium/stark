@@ -15,6 +15,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { StarkTableComponent, StarkTableColumnComponent } from "./components";
 import { StarkTableMultisortDialogComponent } from "./components/dialogs/multisort.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
 	declarations: [StarkTableComponent, StarkTableMultisortDialogComponent, StarkTableColumnComponent],
@@ -34,7 +35,8 @@ import { StarkTableMultisortDialogComponent } from "./components/dialogs/multiso
 		MatSelectModule,
 		MatSortModule,
 		MatTableModule,
-		MatTooltipModule
+		MatTooltipModule,
+		TranslateModule
 	]
 })
 export class StarkTableModule {}

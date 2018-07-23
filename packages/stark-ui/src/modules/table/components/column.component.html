@@ -12,7 +12,7 @@
 				<span *ngIf="sortPriority < 1000 && sortDirection" class="priority">{{ sortPriority }}</span>
 			</div>
 			<button *ngIf="filterable" class="button-filter" [matMenuTriggerFor]="filterMenu" mat-icon-button>
-				<mat-icon svgIcon="filter" matTooltip="Show filter"></mat-icon>
+				<mat-icon svgIcon="filter" [matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate"></mat-icon>
 			</button>
 		</div>
 		<mat-menu class="mat-table-filter" #filterMenu="matMenu" xPosition="before" [overlapTrigger]="false">
@@ -23,7 +23,7 @@
 						   (keyup)="onFilterChange()">
 				</mat-form-field>
 				<button mat-icon-button (click)="onClearFilter()">
-					<mat-icon svgIcon="close" matTooltip="Clear filter"></mat-icon>
+					<mat-icon svgIcon="close" [matTooltip]="'STARK.TABLE.CLEAR_FILTER' | translate"></mat-icon>
 				</button>
 			</div>
 		</mat-menu>

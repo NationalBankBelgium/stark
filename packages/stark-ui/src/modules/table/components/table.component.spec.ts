@@ -21,6 +21,7 @@ import { StarkTableFilter } from "./table-filter.intf";
 import { StarkTableColumnFilter } from "./table-column-filter.intf";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
 
@@ -72,10 +73,11 @@ describe("TableComponent", () => {
 				MatSelectModule,
 				MatTableModule,
 				MatTooltipModule,
-				NoopAnimationsModule
+				NoopAnimationsModule,
+				TranslateModule.forRoot()
 			],
 			declarations: [StarkTableComponent, StarkTableColumnComponent, StarkTableMultisortDialogComponent, TestHostComponent],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
 		}).compileComponents();
 	}));
