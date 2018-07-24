@@ -5,6 +5,15 @@
         "CLASSIC-FULL": "Action Bar Classic Full",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "ALT": "Action Bar Alternative"
+      },
+      "KEYBOARD_DIRECTIVES": {
+        "ON_ENTER_KEY_DIRECTIVE": "On Enter Key Directive",
+        "DESCRIPTION": "Type some value in the inputs and then press Enter in any of them to trigger the callback function",
+        "INPUT_WITH_CONTEXT": "With bound context",
+        "INPUT_WITHOUT_CONTEXT": "Without bound context (bound values are not accessible)",
+        "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Without bound context but passed as parameter",
+        "TYPE_AND_PRESS_ENTER": "Type a value and press Enter",
+        "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Type a value, press Enter and check the console"
       }
     }
   }
