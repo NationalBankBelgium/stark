@@ -24,6 +24,20 @@ const componentName: string = "stark-pretty-print";
 const prismClassPrefix: string = "language-";
 
 /**
+ * A reference to the prettier library
+ */
+const prettier: any = require("prettier/standalone");
+
+/**
+ * A reference to the prettier plugins
+ */
+const prettierPlugins: any = [
+	require("prettier/parser-babylon"),
+	require("prettier/parser-postcss"),
+	require("prettier/parser-typescript")
+];
+
+/**
  * A reference to the prettyData library
  */
 const prettyData: any = require("pretty-data").pd;
@@ -95,65 +109,67 @@ export class StarkPrettyPrintComponent implements OnChanges, OnInit {
 			let prismGrammar: LanguageDefinition = <any>"";
 			let prismClass: string = "";
 
-			switch (this.format) {
-				case "xml":
-				case "html":
-					prismGrammar = Prism.languages.markup;
-					prismClass = prismClassPrefix + "markup";
-					this.prettyString = prettyData.xml(this.data);
-					break;
+			try {
+				switch (this.format) {
+					case "xml":
+					case "html":
+						prismGrammar = Prism.languages.markup;
+						prismClass = prismClassPrefix + "markup";
+						this.prettyString = prettyData.xml(this.data);
+						break;
 
-				case "json":
-					try {
+					case "json":
 						prismGrammar = Prism.languages.json;
 						prismClass = prismClassPrefix + this.format;
 						JSON.parse(this.data);
-						this.prettyString = prettyData.json(this.data);
-					} catch (e) {
-						this.logger.warn(componentName + ": Invalid JSON data");
-						// the json string might not be valid so it should be in a try-catch clause
-						// otherwise the pretty-data throws an error and it stops working :s
-						// in this case we just show the raw data
-						this.prettyString = this.data;
+						this.prettyString = prettier.format(this.data, { parser: "json", plugins: prettierPlugins });
+						break;
+
+					case "css":
+						prismGrammar = Prism.languages.css;
+						prismClass = prismClassPrefix + this.format;
+						this.prettyString = prettier.format(this.data, { parser: "css", plugins: prettierPlugins });
+						break;
+
+					case "scss":
+						prismGrammar = Prism.languages.scss;
+						prismClass = prismClassPrefix + this.format;
+						this.prettyString = prettier.format(this.data, { parser: "scss", plugins: prettierPlugins });
+						break;
+
+					case "sql":
+						prismGrammar = Prism.languages.sql;
+						prismClass = prismClassPrefix + this.format;
+						this.prettyString = prettyData.sql(this.data);
+						break;
+
+					case "javascript":
+						prismGrammar = Prism.languages.javascript;
+						prismClass = prismClassPrefix + this.format;
+						this.prettyString = prettier.format(this.data, { parser: "babylon", plugins: prettierPlugins });
+						break;
+
+					case "typescript":
+						prismGrammar = Prism.languages.typescript;
+						prismClass = prismClassPrefix + this.format;
+						this.prettyString = prettier.format(this.data, {
+							parser: "typescript",
+							plugins: prettierPlugins
+						});
+						break;
+
+					default:
+						this.logger.warn(componentName + ": Unknown format -> ", this.format);
 						this.highlightingEnabled = false;
-					}
-					break;
-
-				case "css":
-					prismGrammar = Prism.languages.css;
-					prismClass = prismClassPrefix + this.format;
-					this.prettyString = prettyData.css(this.data);
-					break;
-
-				case "scss":
-					prismGrammar = Prism.languages.scss;
-					prismClass = prismClassPrefix + this.format;
-					this.prettyString = prettyData.css(this.data);
-					break;
-
-				case "sql":
-					prismGrammar = Prism.languages.sql;
-					prismClass = prismClassPrefix + this.format;
-					this.prettyString = prettyData.sql(this.data);
-					break;
-
-				case "javascript":
-					prismGrammar = Prism.languages.javascript;
-					prismClass = prismClassPrefix + this.format;
-					this.prettyString = this.data;
-					break;
-
-				case "typescript":
-					prismGrammar = Prism.languages.typescript;
-					prismClass = prismClassPrefix + this.format;
-					this.prettyString = this.data;
-					break;
-
-				default:
-					this.logger.warn(componentName + ": Unknown format -> ", this.format);
-					this.highlightingEnabled = false;
-					this.prettyString = this.data;
-					break;
+						this.prettyString = this.data;
+						break;
+				}
+			} catch (e) {
+				this.logger.warn(componentName + ": Invalid " + this.format + " data");
+				// the data string might not be valid so it should be in a try-catch clause
+				// in this case we just show the raw data
+				this.prettyString = this.data;
+				this.highlightingEnabled = false;
 			}
 
 			if (this.highlightingEnabled) {
