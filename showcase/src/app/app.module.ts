@@ -16,6 +16,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { SharedModule } from "./shared/shared.module";
+import { DateAdapter } from "@angular/material/core";
 
 import {
 	STARK_APP_CONFIG,
@@ -36,7 +37,7 @@ import {
 	StarkUser
 } from "@nationalbankbelgium/stark-core";
 
-import { StarkAppLogoModule, StarkSvgViewBoxModule } from "@nationalbankbelgium/stark-ui";
+import { StarkAppLogoModule, StarkSvgViewBoxModule, StarkDatePickerModule } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
@@ -167,7 +168,8 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		DemoModule,
 		NewsModule,
 		StarkAppLogoModule,
-		StarkSvgViewBoxModule
+		StarkSvgViewBoxModule,
+		StarkDatePickerModule
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.
@@ -184,11 +186,12 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 export class AppModule {
 	public constructor(
 		private translateService: TranslateService,
+		private dateAdapter: DateAdapter<any>,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
 		matIconRegistry: MatIconRegistry,
 		domSanitizer: DomSanitizer
 	) {
-		initializeTranslation(this.translateService);
+		initializeTranslation(this.translateService, this.dateAdapter);
 		registerMaterialIconSet(matIconRegistry, domSanitizer);
 
 		const user: StarkUser = {

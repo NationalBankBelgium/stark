@@ -6,6 +6,12 @@
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "ALT": "Action Bar Alternative"
       },
+      "DATE_PICKER": {
+        "CUSTOM_FILTER": "Date Picker - Aangepaste filter",
+        "PLACEHOLDER": "Datum kiezen",
+        "ONLY_WEEKDAYS": "Date Picker - Alleen weekdagen",
+        "ONLY_WEEKENDS": "Date Picker - Alleen weekenden"
+      },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
           "TITLE": "On Enter Key Directive",
