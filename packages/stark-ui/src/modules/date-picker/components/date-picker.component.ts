@@ -1,6 +1,6 @@
 import { Component, EventEmitter, ViewEncapsulation, Input, Output, ViewChild } from "@angular/core";
 import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from "@angular/material";
-import * as moment from "moment";
+import moment from "moment";
 
 export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Date) => boolean) | undefined;
 
@@ -68,7 +68,7 @@ export class StarkDatePickerComponent {
 	 */
 	@Input()
 	public pickerId: string = "";
-	
+
 	/**
 	 * HTML "name" attribute of the element.
 	 */

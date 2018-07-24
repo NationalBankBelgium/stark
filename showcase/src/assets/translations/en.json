@@ -12,6 +12,9 @@
         "ONLY_WEEKDAYS": "Date Picker - Only weekdays",
         "ONLY_WEEKENDS": "Date Picker - Only weekends"
       },
+      "DATE_RANGE_PICKER": {
+        "FULL": "Date Range Picker"
+      },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
           "TITLE": "On Enter Key Directive",

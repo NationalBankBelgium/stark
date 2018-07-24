@@ -27,6 +27,7 @@ const globals = {
 	"@angular/material/sort": "ngMaterial.sort",
 	"@angular/material/table": "ngMaterial.table",
 	"@angular/material/tooltip": "ngMaterial.tooltip",
+	"@angular/material-moment-adapter": "ngMaterialMomentAdapter",
 	"@angular/platform-browser": "ng.platformBrowser",
 	"@angular/platform-browser/animations": "ng.platformBrowser.animations",
 	"@nationalbankbelgium/stark-core": "stark.core",
