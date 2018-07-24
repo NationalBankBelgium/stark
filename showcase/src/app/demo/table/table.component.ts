@@ -1,10 +1,12 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { StarkActionBarConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { StarkActionBarConfig, StarkTableColumnProperties, StarkTableFilter, StarkAction } from "@nationalbankbelgium/stark-ui";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
 	selector: "showcase-demo-table",
-	templateUrl: "./table.component.html"
+	styleUrls: ["./table.component.scss"],
+	templateUrl: "./table.component.html",
+	encapsulation: ViewEncapsulation.None //Here to add a shadow inside the table, we will fix that when we take care of #509
 })
 export class TableComponent implements OnInit {
 	public getTitle = (data: any): string => {
@@ -23,6 +25,7 @@ export class TableComponent implements OnInit {
 
 	public dummyData: any[];
 	public columnsProperties: StarkTableColumnProperties[];
+	public customTableActions: StarkAction[];
 	public tableRowsActionBarConfig: StarkActionBarConfig;
 	public columns: any[];
 	public orderProperties: string[];
@@ -90,6 +93,81 @@ export class TableComponent implements OnInit {
 			}
 		];
 
+		this.customTableActions = [
+			{
+				id: "edit-item",
+				label: "STARK.ICONS.EDIT_ITEM",
+				icon: "pencil",
+				actionCall: ($event: Event, data: any): void => {
+					this.logger.debug("this is edit item icon click");
+					this.logger.debug($event);
+					this.logger.debug(data);
+					this.logger.debug("selected rows ");
+				},
+				isEnabled: true
+			},
+			{
+				id: "reload",
+				label: "STARK.ICONS.RELOAD_PAGE",
+				icon: "autorenew",
+				actionCall: ($event: Event, data: any): void => {
+					this.logger.debug($event);
+					this.logger.debug(data);
+				},
+				isEnabled: true
+			},
+			{
+				id: "reload2",
+				label: "3D view",
+				icon: "rotate-3d",
+				actionCall: ($event: Event, data: any): void => {
+					this.logger.debug($event);
+					this.logger.debug(data);
+				},
+				isEnabled: false
+			},
+			{
+				id: "reload3",
+				label: "Change your settings",
+				icon: "wrench",
+				actionCall: ($event: Event, data: any): void => {
+					this.logger.debug($event);
+					this.logger.debug(data);
+				},
+				isEnabled: false
+			},
+			{
+				id: "reload4",
+				label: "Copy signs",
+				icon: "copyright",
+				actionCall: ($event: Event, data: any): void => {
+					this.logger.debug($event);
+					this.logger.debug(data);
+				},
+				isEnabled: false
+			},
+			{
+				id: "reload5",
+				label: "Upload to the cloud",
+				icon: "cloud-upload",
+				actionCall: ($event: Event, data: any): void => {
+					this.logger.debug($event);
+					this.logger.debug(data);
+				},
+				isEnabled: false
+			},
+			{
+				id: "reload6",
+				label: "Create new bookmark",
+				icon: "book",
+				actionCall: ($event: Event, data: any): void => {
+					this.logger.debug($event);
+					this.logger.debug(data);
+				},
+				isEnabled: false
+			}
+		];
+
 		this.orderProperties = ["title", "-description", "id"];
 
 		this.filter = {
@@ -101,7 +179,7 @@ export class TableComponent implements OnInit {
 			actions: [
 				{
 					id: "edit-item",
-					label: "Edit",
+					label: "STARK.ICONS.EDIT_ITEM",
 					icon: "pencil",
 					actionCall: (event: Event, data: any): void => {
 						this.logger.debug(event);
@@ -111,7 +189,7 @@ export class TableComponent implements OnInit {
 				},
 				{
 					id: "delete-item",
-					label: "Delete",
+					label: "STARK.ICONS.DELETE_ITEM",
 					icon: "delete",
 					actionCall: (event: Event, data: any): void => {
 						this.logger.debug(event);

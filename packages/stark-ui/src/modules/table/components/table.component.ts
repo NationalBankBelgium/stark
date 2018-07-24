@@ -59,6 +59,16 @@ export class StarkTableComponent implements OnInit, AfterContentInit, AfterViewI
 	@Input() public filter: StarkTableFilter;
 
 	/**
+	 * Array of StarkAction objects (see StarkAction docs).
+	 */
+	@Input() public customTableActions?: StarkAction[];
+
+	/**
+	 * Type of StarkAction objects
+	 */
+	@Input() public customTableActionsType: "regular" | "alt" = "regular";
+
+	/**
 	 * Allows sorting by multiple columns. Setting the attribute to "true" or empty will enable this feature.
 	 */
 	@Input() public multiSort?: string;
@@ -124,6 +134,16 @@ export class StarkTableComponent implements OnInit, AfterContentInit, AfterViewI
 	public columns: StarkTableColumnComponent[];
 
 	/**
+	 * Array of StarkAction for alt mode
+	 */
+	public customTableAltActions?: StarkAction[];
+
+	/**
+	 * Array of StarkAction for regular mode
+	 */
+	public customTableRegularActions: Object = {};
+
+	/**
 	 * Angular CDK selection model used for the "master" selection of the table
 	 */
 	public selection: SelectionModel<any> = new SelectionModel<any>(true, []);
@@ -168,6 +188,12 @@ export class StarkTableComponent implements OnInit, AfterContentInit, AfterViewI
 		this.displayedColumns = [];
 		if (this.multiselect) {
 			this.displayedColumns.unshift("select");
+		}
+
+		if (this.customTableActionsType === "regular") {
+			this.customTableRegularActions = { actions: this.customTableActions };
+		} else {
+			this.customTableAltActions = this.customTableActions;
 		}
 	}
 

@@ -1,0 +1,18 @@
+@import "~@angular/material/theming";
+
+h1 {
+  margin-bottom: 0;
+}
+
+.example-transcluded {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.shadowed {
+  .header {
+    padding: 10px 15px;
+    @include mat-elevation(2);
+  }
+}

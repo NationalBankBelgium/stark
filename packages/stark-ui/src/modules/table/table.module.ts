@@ -16,6 +16,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { StarkTableComponent, StarkTableColumnComponent } from "./components";
 import { StarkTableMultisortDialogComponent } from "./components/dialogs/multisort.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { StarkActionBarModule } from "../action-bar/action-bar.module";
+import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
 
 @NgModule({
 	declarations: [StarkTableComponent, StarkTableMultisortDialogComponent, StarkTableColumnComponent],
@@ -36,7 +38,9 @@ import { TranslateModule } from "@ngx-translate/core";
 		MatSortModule,
 		MatTableModule,
 		MatTooltipModule,
-		TranslateModule
+		TranslateModule,
+		StarkActionBarModule,
+		StarkSvgViewBoxModule
 	]
 })
 export class StarkTableModule {}

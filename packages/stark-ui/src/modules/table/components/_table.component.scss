@@ -1,26 +1,21 @@
-//TODO: MatIcon size
-/*@mixin md-icon-size($size: 24px) {
-  font-size: $size;
-  height: $size;
-  width: $size;
-}
-
-.mat-icon{
-  @include md-icon-size(16px);
-  font-weight: inherit;
-  margin-left: 5px;
-}*/
-
 .stark-table {
   .header {
     align-items: center;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
+
+    .transcluded {
+      flex-grow: 1;
+    }
 
     .actions {
       align-items: center;
       display: flex;
       justify-content: flex-end;
+      &.actions-alt {
+        flex-direction: row-reverse;
+      }
     }
   }
 
@@ -61,10 +56,6 @@
           }
 
           .mat-icon {
-            font-size: 1.4em;
-            font-weight: inherit;
-            margin-left: 5px;
-
             &.order-tip {
               opacity: 0;
             }
