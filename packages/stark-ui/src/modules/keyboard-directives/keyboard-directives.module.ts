@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
-import { StarkOnEnterKeyDirective } from "./directives";
+import { StarkOnEnterKeyDirective, StarkRestrictInputDirective } from "./directives";
 
 @NgModule({
-	declarations: [StarkOnEnterKeyDirective],
-	exports: [StarkOnEnterKeyDirective]
+	declarations: [StarkOnEnterKeyDirective, StarkRestrictInputDirective],
+	exports: [StarkOnEnterKeyDirective, StarkRestrictInputDirective]
 })
 export class StarkKeyboardDirectivesModule {}
