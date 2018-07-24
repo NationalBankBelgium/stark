@@ -5,9 +5,6 @@ import { AfterViewChecked, Directive, ElementRef, Input, Renderer2 } from "@angu
  */
 const directiveName: string = "[starkSvgViewBox]";
 
-@Directive({
-	selector: directiveName
-})
 /**
  * Directive to add the 'viewBox' attribute to an SVG element.
  * Specially useful to fix the issue with the Angular Material's MatIcon directive which prevents the icons from
@@ -15,6 +12,9 @@ const directiveName: string = "[starkSvgViewBox]";
  * @link https://github.com/angular/material2/issues/4422
  * @link https://github.com/angular/material2/issues/5488
  */
+@Directive({
+	selector: directiveName
+})
 export class StarkSvgViewBoxDirective implements AfterViewChecked {
 	/**
 	 * Width and height to be set to the 'viewBox' attribute of the SVG element.

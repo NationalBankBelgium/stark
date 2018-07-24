@@ -1,6 +1,6 @@
 /* angular imports */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { Component, ViewChild, NO_ERRORS_SCHEMA, EventEmitter } from "@angular/core";
+import { Component, ViewChild, EventEmitter } from "@angular/core";
 
 /* jasmine imports */
 import Spy = jasmine.Spy;
@@ -64,8 +64,7 @@ describe("SliderController", () => {
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-			],
-			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes
+			]
 		}).compileComponents();
 	}));
 
