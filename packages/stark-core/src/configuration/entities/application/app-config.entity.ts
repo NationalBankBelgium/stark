@@ -64,6 +64,11 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@autoserialize
 	public loggingFlushDisabled?: boolean;
 
+	@IsDefined({ groups: ["logging"] })
+	@IsString({ groups: ["logging"] })
+	@autoserialize
+	public loggingCorrelationIdHttpHeaderName: string;
+
 	@IsDefined({ groups: ["temp"] })
 	@IsBoolean({ groups: ["temp"] })
 	@autoserialize
@@ -132,6 +137,7 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 
 		this.loggingFlushDisabled = false;
 		this.loggingFlushResourceName = "logging";
+		this.loggingCorrelationIdHttpHeaderName = "correlation-id";
 		this.sessionTimeout = 900; // default timeout of the F5
 		this.sessionTimeoutWarningPeriod = 15;
 		this.keepAliveDisabled = false;

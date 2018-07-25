@@ -40,22 +40,18 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
 		private httpClient: HttpClient
-	) {
-		this.logger = logger;
-		this.sessionService = sessionService;
-		this.httpClient = httpClient;
-	}
+	) {}
 
 	public executeSingleItemRequest(request: StarkHttpRequest<P>): Observable<StarkSingleItemResponseWrapper<P>> {
-		// NG-1361: remove the etag before executing the request
+		// remove the etag before executing the request
 		request = this.removeETagFromRequestItem(request);
 
-		// NG-1346: fake pre-authentication support
-		if (ENV === "development" && request.backend.fakePreAuthenticationEnabled) {
-			request = this.addFakePreAuthenticationHeaders(request);
+		// dev-authentication support
+		if (ENV === "development" && request.backend.devAuthenticationEnabled) {
+			request = this.addDevAuthenticationHeaders(request);
 		}
 
-		// NG-117: add correlation identifier
+		// add correlation identifier
 		request = this.addCorrelationIdentifierHeader(request);
 
 		// IMPORTANT: In Angular2+ HTTP service subscribing multiple times will actually do multiple requests
@@ -95,12 +91,12 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	}
 
 	public executeCollectionRequest(request: StarkHttpRequest<P>): Observable<StarkCollectionResponseWrapper<P>> {
-		// NG-1346: fake pre-authentication support
-		if (ENV === "development" && request.backend.fakePreAuthenticationEnabled) {
-			request = this.addFakePreAuthenticationHeaders(request);
+		// dev-authentication support
+		if (ENV === "development" && request.backend.devAuthenticationEnabled) {
+			request = this.addDevAuthenticationHeaders(request);
 		}
 
-		// NG-117: add correlation identifier
+		// add correlation identifier
 		request = this.addCorrelationIdentifierHeader(request);
 
 		// IMPORTANT: In Angular2+ HTTP service subscribing multiple times will actually do multiple requests
@@ -132,7 +128,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	}
 
 	/**
-	 * NG-1361: remove the etag before executing the request
+	 * remove the etag before executing the request
 	 * We have to remove it otherwise it'll be serialized and cause issues on the back-end
 	 * @param request - The request object to modify
 	 * @returns The modified request object
@@ -151,17 +147,17 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	}
 
 	/**
-	 * NG-1346: add NBB-specific headers necessary for faking pre-authentication in non-production environments
+	 * add authentication headers necessary for non-production environments
 	 * @param request - The request object to modify
 	 * @returns The modified request object
 	 */
-	public addFakePreAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
-		this.logger.debug(starkHttpServiceName + ": Adding fake pre-authentication headers");
+	public addDevAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
+		this.logger.debug(starkHttpServiceName + ": Adding dev-authentication headers");
 
 		const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
 
 		// add the preAuthentication headers to the request headers
-		this.sessionService.fakePreAuthenticationHeaders.forEach((value: string, header: string) => {
+		this.sessionService.devAuthenticationHeaders.forEach((value: string, header: string) => {
 			requestCopy.headers.set(header, value);
 		});
 
@@ -169,18 +165,19 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	}
 
 	/**
-	 * NG-117: add NBB-specific header for activity correlation
+	 * add header for activity correlation
 	 * @param request - The request object to modify
 	 * @returns The modified request object
 	 */
 	public addCorrelationIdentifierHeader(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
-		this.logger.debug(starkHttpServiceName + ": Adding correlation identifier header");
+		if (this.logger.correlationIdHttpHeaderName && this.logger.correlationIdHttpHeaderName.length > 0) {
+			this.logger.debug(starkHttpServiceName + ": Adding correlation identifier header");
+			const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
+			requestCopy.headers.set(this.logger.correlationIdHttpHeaderName, this.logger.correlationId);
+			return requestCopy;
+		}
 
-		const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
-
-		requestCopy.headers.set(StarkHttpHeaders.NBB_CORRELATION_ID, this.logger.correlationId);
-
-		return requestCopy;
+		return request;
 	}
 
 	public get rawHttpClient(): HttpClient {

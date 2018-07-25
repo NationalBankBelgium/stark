@@ -24,8 +24,8 @@
       "name": "default",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "fakePreAuthenticationEnabled": true,
-      "fakePreAuthenticationRolePrefix": "",
+      "devAuthenticationEnabled": true,
+      "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""
     },
@@ -34,8 +34,8 @@
       "name": "userProfile",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "fakePreAuthenticationEnabled": false,
-      "fakePreAuthenticationRolePrefix": "",
+      "devAuthenticationEnabled": false,
+      "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""
     },
@@ -44,8 +44,8 @@
       "name": "logging",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "fakePreAuthenticationEnabled": false,
-      "fakePreAuthenticationRolePrefix": "",
+      "devAuthenticationEnabled": false,
+      "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""
     },
@@ -54,8 +54,8 @@
       "name": "rbac",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "fakePreAuthenticationEnabled": false,
-      "fakePreAuthenticationRolePrefix": "",
+      "devAuthenticationEnabled": false,
+      "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""
     }

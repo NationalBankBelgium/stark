@@ -8,13 +8,13 @@ import { select, Store } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
 import { validateSync } from "class-validator";
 import { defer, Observable, Subject } from "rxjs";
-import { map, take, filter, tap } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { StarkSessionService, starkSessionServiceName } from "./session.service.intf";
 import { STARK_ROUTING_SERVICE, StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
 import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
-import { StarkPreAuthentication, StarkSession } from "../entities";
+import { StarkSession } from "../entities";
 import { StarkUser } from "../../user/entities";
 import {
 	StarkChangeLanguage,
@@ -53,18 +53,8 @@ export const starkUnauthenticatedUserError: string = "StarkSessionService => use
 export class StarkSessionServiceImpl implements StarkSessionService {
 	public keepalive: Keepalive;
 	public session$: Observable<StarkSession>;
-	protected _fakePreAuthenticationHeaders: Map<string, string>;
+	protected _devAuthenticationHeaders: Map<string, string>;
 	public countdownStarted: boolean;
-
-	protected fakePreAuthentication: StarkPreAuthentication = {
-		roleSeparator: "^",
-		descriptionSeparator: "/",
-		defaults: {
-			language: "F",
-			workpost: "XXX",
-			referenceNumber: "00000"
-		}
-	};
 
 	public constructor(
 		public store: Store<StarkCoreApplicationState>,
@@ -88,15 +78,6 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		this.configureKeepaliveService();
 
 		this.session$ = this.store.pipe(select(selectStarkSession));
-
-		if (ENV === "development") {
-			this.session$
-				.pipe(
-					filter((session: StarkSession) => session.hasOwnProperty("user")),
-					tap((session: StarkSession) => this.setFakePreAuthenticationHeaders(session.user))
-				)
-				.subscribe();
-		}
 
 		if (window) {
 			window.addEventListener("beforeunload", () => {
@@ -291,10 +272,9 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		this.keepalive.interval(this.appConfig.keepAliveInterval); // ping interval in seconds
 
 		let pingRequestHeaders: HttpHeaders = new HttpHeaders();
-		pingRequestHeaders = pingRequestHeaders.set(StarkHttpHeaders.NBB_CORRELATION_ID, this.logger.correlationId);
 
 		if (ENV === "development") {
-			this.fakePreAuthenticationHeaders.forEach((value: string, key: string) => {
+			this.devAuthenticationHeaders.forEach((value: string, key: string) => {
 				pingRequestHeaders = pingRequestHeaders.set(key, value);
 			});
 		}
@@ -308,41 +288,17 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		this.keepalive.onPing.subscribe(() => this.logger.info(starkSessionServiceName + ": keepAlive ping sent"));
 	}
 
-	protected setFakePreAuthenticationHeaders(user?: StarkUser): void {
-		this.logger.debug(starkSessionServiceName + ": constructing fake pre-authentication headers");
-
-		// set a default language if not known
-		const languageHeaderValue: string = user && user.language ? user.language : this.fakePreAuthentication.defaults.language;
-		// set a default workpost if not known
-		const workpost: string = user && user.workpost ? user.workpost : this.fakePreAuthentication.defaults.workpost;
-		// set a default reference number if not known
-		const referenceNumber: string =
-			user && user.referenceNumber ? user.referenceNumber : this.fakePreAuthentication.defaults.referenceNumber;
-
-		const descriptionHeaderValue: string = referenceNumber + this.fakePreAuthentication.descriptionSeparator + workpost;
-
-		let rolesHeaderValue: string = "";
-		if (user && user.roles) {
-			rolesHeaderValue = user.roles.join(this.fakePreAuthentication.roleSeparator);
+	public setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string>): void {
+		this.logger.debug(starkSessionServiceName + ": constructing the authentication headers");
+		if (!this._devAuthenticationHeaders) {
+			this._devAuthenticationHeaders = new Map<string, string>();
 		}
 
-		this._fakePreAuthenticationHeaders = new Map<string, string>();
-
-		if (user) {
-			this._fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_USER_NAME, user.username);
-			this._fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_FIRST_NAME, user.firstName);
-			this._fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_LAST_NAME, user.lastName);
-			if (user.email) {
-				this._fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_MAIL, user.email);
-			}
-		}
-		this._fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_LANGUAGE, languageHeaderValue);
-		this._fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_DESCRIPTION, descriptionHeaderValue);
-		this._fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_ROLES, rolesHeaderValue);
+		devAuthenticationHeaders.forEach((value: string, key: string) => this._devAuthenticationHeaders.set(key, value));
 	}
 
-	public get fakePreAuthenticationHeaders(): Map<string, string> {
-		return this._fakePreAuthenticationHeaders || new Map<string, string>();
+	public get devAuthenticationHeaders(): Map<string, string> {
+		return this._devAuthenticationHeaders || new Map<string, string>();
 	}
 
 	protected startIdleService(): void {

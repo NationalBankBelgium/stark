@@ -22,19 +22,21 @@ export interface StarkBackend {
 
 	/**
 	 * Set this to true if fake pre-authentication should be enabled.
-	 * When enabled, Stark will add NBB-specific headers to each request
-	 * to provide the information expected by the back-end for pre-authentication.
+	 * When enabled AND running development mode, Stark will add the authentication headers,
+	 * that are provided by the client application, to each request.
+	 * The DEV-Authentication headers provide the information expected
+	 * by the back-end for authentication.
 	 * In real environments, infrastructure takes care of this.
 	 * This SHOULD NEVER be enabled for user acceptance or production environments!
 	 */
-	fakePreAuthenticationEnabled: boolean;
+	devAuthenticationEnabled: boolean;
 
 	/**
 	 * Prefix for roles. Added to each role when sent to the back-end.
 	 * MUST add the prefix that the back-end expects
 	 * This is necessary to mimic the behavior of the WAF
 	 */
-	fakePreAuthenticationRolePrefix: string;
+	devAuthenticationRolePrefix: string;
 
 	/**
 	 * Path of the login resource (optional).

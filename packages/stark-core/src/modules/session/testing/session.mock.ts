@@ -1,10 +1,10 @@
-import { StarkHttpHeaders, StarkSessionService } from "@nationalbankbelgium/stark-core";
+import { StarkSessionService } from "@nationalbankbelgium/stark-core";
 import { Observable } from "rxjs";
 /**
  * @ignore
  */
 export class MockStarkSessionService implements StarkSessionService {
-	public fakePreAuthenticationHeaders: Map<string, string>;
+	public devAuthenticationHeaders: Map<string, string>;
 
 	public getCurrentUser: () => Observable<any> = jasmine.createSpy("getCurrentLanguage");
 	public getCurrentLanguage: () => Observable<string> = jasmine.createSpy("getCurrentLanguage");
@@ -13,19 +13,13 @@ export class MockStarkSessionService implements StarkSessionService {
 	public logout: () => void = jasmine.createSpy("logout");
 	public pauseUserActivityTracking: () => void = jasmine.createSpy("pauseUserActivityTracking");
 	public resumeUserActivityTracking: () => void = jasmine.createSpy("resumeUserActivityTracking");
+	public setDevAuthenticationHeaders: () => void = jasmine.createSpy("setDevAuthenticationHeaders");
 
-	public constructor(fakePreAuthenticationHeaders?: Map<string, string>) {
-		if (!fakePreAuthenticationHeaders) {
-			this.fakePreAuthenticationHeaders = new Map<string, string>();
-			this.fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_USER_NAME, "dummy username");
-			this.fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_FIRST_NAME, "dummy firstName");
-			this.fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_LAST_NAME, "dummy lastName");
-			this.fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_MAIL, "dummy email");
-			this.fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_LANGUAGE, "dummy language");
-			this.fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_DESCRIPTION, "dummy description");
-			this.fakePreAuthenticationHeaders.set(StarkHttpHeaders.NBB_ROLES, "dummy roles");
+	public constructor(devAuthenticationHeaders?: Map<string, string>) {
+		if (!devAuthenticationHeaders) {
+			this.devAuthenticationHeaders = new Map<string, string>();
 		} else {
-			this.fakePreAuthenticationHeaders = fakePreAuthenticationHeaders;
+			this.devAuthenticationHeaders = devAuthenticationHeaders;
 		}
 	}
 }

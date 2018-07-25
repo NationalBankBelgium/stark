@@ -24,8 +24,8 @@ describe("Service: StarkLoggingService", () => {
 		name: "logging",
 		url: "http://localhost:5000",
 		authenticationType: 1,
-		fakePreAuthenticationEnabled: true,
-		fakePreAuthenticationRolePrefix: "",
+		devAuthenticationEnabled: true,
+		devAuthenticationRolePrefix: "",
 		loginResource: "logging",
 		token: ""
 	};

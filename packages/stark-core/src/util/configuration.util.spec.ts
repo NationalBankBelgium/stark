@@ -214,8 +214,8 @@ describe("Util: ConfigurationUtil", () => {
 					name: "dummy backend",
 					url: "http://localhost:5000/",
 					authenticationType: StarkBackendAuthenticationTypes.PUBLIC,
-					fakePreAuthenticationEnabled: true,
-					fakePreAuthenticationRolePrefix: "dummy prefix"
+					devAuthenticationEnabled: true,
+					devAuthenticationRolePrefix: "dummy prefix"
 				});
 			},
 			(appConfig: StarkApplicationConfig) => {

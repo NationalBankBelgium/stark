@@ -10,6 +10,7 @@ export class MockStarkLoggingService implements StarkLoggingService {
 	 * This value can be used while displaying a generic error message.
 	 */
 	public correlationId: string;
+	public correlationIdHttpHeaderName: string;
 
 	/**
 	 * Logs debug messages to be used only in development to track issues.
@@ -43,7 +44,11 @@ export class MockStarkLoggingService implements StarkLoggingService {
 	 */
 	public generateNewCorrelationId: () => string = jasmine.createSpy("generateNewCorrelationId");
 
-	public constructor(correlationId: string = "dummyCorrelationId") {
+	public constructor(
+		correlationId: string = "dummyCorrelationId",
+		mockCorrelationIdHeaderName: string = "Correlation-Id-HttpHeaderName"
+	) {
 		this.correlationId = correlationId;
+		this.correlationIdHttpHeaderName = mockCorrelationIdHeaderName;
 	}
 }
