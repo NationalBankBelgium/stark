@@ -82,19 +82,24 @@ See [this page](/SNAPSHOTS.md) for more information about the process behind thi
 -   [@Twitter](https://twitter.com/SuperITMan_BE)
 -   [@GitHub](https://github.com/SuperITMan)
 
+### Christopher Cortes
+
+-   [@GitHub](https://github.com/christophercr)
+
 ## License
 
 This project and all associated source code is licensed under the terms of the [MIT License](/LICENSE).
 
-## Showcase and Documentation 
+## Showcase and Documentation
 
 Stark showcase and documentation can be found at <a href="https://stark.nbb.be">the following location</a>.
-There, you'll find links about : 
-- the latest api-docs for stark-core
-- the previous api-docs for stark-core
-- the latest api-docs for stark-ui
-- the previous api-docs for stark-ui
-- the previous showcase versions
+There, you'll find links about :
+
+-   the latest api-docs for stark-core
+-   the previous api-docs for stark-core
+-   the latest api-docs for stark-ui
+-   the previous api-docs for stark-ui
+-   the previous showcase versions
 
 ## Thank you notes :)
 
