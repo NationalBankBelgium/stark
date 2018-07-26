@@ -93,11 +93,10 @@ module.exports = function() {
 				 * Description: Minimize all JavaScript output of chunks.
 				 * Loaders are switched into minimizing mode.
 				 *
-				 * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-				 *
-				 * NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
+				 * See: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 				 */
 				new UglifyJsPlugin({
+					parallel: true, // use multi-process parallel running to improve the build speed (default concurrent processes: os.cpus().length - 1)
 					sourceMap: true, // useful to still be able to debug in production
 					uglifyOptions: getUglifyOptions(supportES2015)
 				}),

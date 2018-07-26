@@ -19,7 +19,7 @@ install:
   # cfr scripts/_travis-fold.sh
   - mkdir -p $LOGS_DIR
   - touch $LOGS_DIR/build-perf.log
-  - npm install
+  - npm install --no-optional
   - npm run install:travis:all
     # TODO uncomment this when npmjs registry fixed
     # - npm ci
