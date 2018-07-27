@@ -5,6 +5,15 @@
         "CLASSIC-FULL": "Action Bar Classic Full",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "ALT": "Action Bar Alternative"
+      },
+      "KEYBOARD_DIRECTIVES": {
+        "ON_ENTER_KEY_DIRECTIVE": "On Enter Key Directive",
+        "DESCRIPTION": "Tapez une valeur dans les entrées, puis appuyez sur Entrée dans l'un d'eux pour déclencher la fonction callback",
+        "INPUT_WITH_CONTEXT": "Avec contexte lié",
+        "INPUT_WITHOUT_CONTEXT": "Sans contexte lié (les valeurs liées ne sont pas accessibles)",
+        "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Sans contexte lié mais passé en paramètre",
+        "TYPE_AND_PRESS_ENTER": "Tapez une valeur et appuyez sur Entrée",
+        "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Tapez une valeur, appuyez sur Entrée et vérifiez la console"
       }
     }
   }
