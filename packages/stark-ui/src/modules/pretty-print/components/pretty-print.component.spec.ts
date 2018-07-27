@@ -1,5 +1,4 @@
-/* tslint:disable:completed-docs no-big-function */
-
+/* tslint:disable:completed-docs no-big-function no-duplicate-string */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
 
@@ -60,16 +59,16 @@ describe("PrettyPrintComponent", () => {
 	].join("");
 
 	const formattedCssData: string = [
-		"body{",
-		"  background: #D2DA9C url(leftcolbg.jpg)repeat-y left top;",
-		"  color: #FFF;",
+		"body {",
+		"  background: #d2da9c url(leftcolbg.jpg) repeat-y left top;",
+		"  color: #fff;",
 		"}",
-		"p{",
-		"  margin-bottom:1em",
+		"p {",
+		"  margin-bottom: 1em;",
 		"}",
-		"ul{",
-		"  margin-left:20px;",
-		"  margin-bottom:1em",
+		"ul {",
+		"  margin-left: 20px;",
+		"  margin-bottom: 1em;",
 		"}\n" // an extra line break is added at the end
 	].join("\n"); // should contain line breaks
 
@@ -79,10 +78,10 @@ describe("PrettyPrintComponent", () => {
 
 	const formattedScssData: string = [
 		"$font-stack: Helvetica, sans-serif;",
-		" $primary-color: #333;",
-		" body {",
-		"   font: 100% $font-stack;",
-		"   color: $primary-color;",
+		"$primary-color: #333;",
+		"body {",
+		"  font: 100% $font-stack;",
+		"  color: $primary-color;",
 		"}\n" // an extra line break is added at the end
 	].join("\n"); // should contain line breaks
 
@@ -92,7 +91,6 @@ describe("PrettyPrintComponent", () => {
 		"AND pm.Name LIKE 'Long-Sleeve Logo Jersey%')"
 	].join("");
 
-	/* tslint:disable: no-duplicate-string */
 	const formattedSqlData: string = [
 		"SELECT DISTINCT Name",
 		"FROM Production.Product AS p",
@@ -102,8 +100,7 @@ describe("PrettyPrintComponent", () => {
 		"  WHERE p.ProductModelID = pm.ProductModelID",
 		"      AND pm.Name LIKE 'Long-Sleeve Logo Jersey%')"
 	].join("\n"); // should contain line breaks
-	/* tslint:enable: no-duplicate-string */
-	
+
 	const rawJsonData: string = [
 		'{"menu": { "id": "file", "value": "File",',
 		'"menuitem": [{"value": "New", "onclick": "CreateNewDoc()"},',
@@ -117,42 +114,53 @@ describe("PrettyPrintComponent", () => {
 		'    "id": "file",',
 		'    "value": "File",',
 		'    "menuitem": [',
-		"      {",
-		'        "value": "New",',
-		'        "onclick": "CreateNewDoc()"',
-		"      },",
-		"      {",
-		'        "value": "Open",',
-		'        "onclick": "OpenDoc()"',
-		"      },",
-		"      {",
-		'        "value": "Close",',
-		'        "onclick": "CloseDoc()"',
-		"      }",
+		'      { "value": "New", "onclick": "CreateNewDoc()" },',
+		'      { "value": "Open", "onclick": "OpenDoc()" },',
+		'      { "value": "Close", "onclick": "CloseDoc()" }',
 		"    ]",
 		"  }",
-		"}"
+		"}\n" // an extra line break is added at the end
 	].join("\n"); // should contain line breaks
 
-	const rawJavaScriptData: string = [
-		"function calculateData(seed, operationFn) {" +
-			"var data = operationFn(seed);" +
-			"if (!data){" +
-			"data = 'could not calculate data';" +
-			"}" +
-			"return data;" +
-			"}"
+	const rawJavascriptData: string = [
+		"function calculateData(seed, operationFn) {",
+		"var data = operationFn(seed);",
+		"if (!data){",
+		"data = 'could not calculate data';",
+		"}",
+		"return data;",
+		"}"
 	].join("");
 
-	const rawTypeScriptData: string = [
-		"function calculateData(seed:any, operationFn:Function):any {" +
-			"var data:any = operationFn(seed);" +
-			"if (!data){" +
-			"data = 'could not calculate data';" +
-			"}" +
-			"return data;" +
-			"}"
+	const formattedJavascriptData: string = [
+		"function calculateData(seed, operationFn) {",
+		"  var data = operationFn(seed);",
+		"  if (!data) {",
+		'    data = "could not calculate data";',
+		"  }",
+		"  return data;",
+		"}\n" // an extra line break is added at the end
+	].join("\n");
+
+	const rawTypescriptData: string = [
+		"function calculateData(seed:any, operationFn:Function):any {",
+		"var data:any = operationFn(seed);",
+		"if (!data){",
+		"data = 'could not calculate data';",
+		"}",
+		"return data;",
+		"}"
 	].join("");
+
+	const formattedTypescriptData: string = [
+		"function calculateData(seed: any, operationFn: Function): any {",
+		"  var data: any = operationFn(seed);",
+		"  if (!data) {",
+		'    data = "could not calculate data";',
+		"  }",
+		"  return data;",
+		"}\n" // an extra line break is added at the end
+	].join("\n");
 
 	/**
 	 * async beforeEach
@@ -160,9 +168,7 @@ describe("PrettyPrintComponent", () => {
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			declarations: [StarkPrettyPrintComponent, TestHostComponent],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-			]
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
 		}).compileComponents();
 	}));
 
@@ -248,8 +254,22 @@ describe("PrettyPrintComponent", () => {
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
 				expect(preElement.innerHTML).toContain("body");
-				expect(preElement.innerHTML).toContain("color: #FFF;");
-				expect(preElement.innerHTML).toContain("margin-left:20px;");
+				expect(preElement.innerHTML).toContain("color: #fff;");
+				expect(preElement.innerHTML).toContain("margin-left: 20px;");
+			});
+
+			it("should simply display the unformatted raw CSS data in case it is not valid CSS", () => {
+				const invalidRawCssData: string = rawCssData + "}";
+
+				hostComponent.data = invalidRawCssData;
+				hostComponent.format = "css";
+				hostFixture.detectChanges();
+
+				expect(component.prettyString).toBe(invalidRawCssData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).toContain("p{margin-bottom:1em}ul{margin-left:20px;margin-bottom:1em}");
 			});
 		});
 
@@ -275,6 +295,20 @@ describe("PrettyPrintComponent", () => {
 				expect(preElement.innerHTML).toContain("$primary-color: #333;");
 				expect(preElement.innerHTML).toContain("font: 100% $font-stack;");
 			});
+
+			it("should simply display the unformatted raw SCSS data in case it is not valid SCSS", () => {
+				const invalidRawScssData: string = rawScssData + "}";
+
+				hostComponent.data = invalidRawScssData;
+				hostComponent.format = "scss";
+				hostFixture.detectChanges();
+
+				expect(component.prettyString).toBe(invalidRawScssData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).toContain("$primary-color: #333; body { font: 100% $font-stack;");
+			});
 		});
 
 		describe("SQL", () => {
@@ -295,11 +329,9 @@ describe("PrettyPrintComponent", () => {
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
-				/* tslint:disable: no-duplicate-string */
 				expect(preElement.innerHTML).toContain("FROM Production.Product AS p");
 				expect(preElement.innerHTML).toContain("FROM Production.ProductModel AS pm");
 				expect(preElement.innerHTML).toContain("AND pm.Name LIKE 'Long-Sleeve Logo Jersey%'");
-				/* tslint:enable: no-duplicate-string */
 			});
 		});
 
@@ -342,102 +374,128 @@ describe("PrettyPrintComponent", () => {
 			});
 		});
 
-		describe("JavaScript", () => {
+		describe("Javascript", () => {
 			beforeEach(() => {
-				hostComponent.data = rawJavaScriptData;
+				hostComponent.data = rawJavascriptData;
 				hostComponent.format = "javascript";
 				hostFixture.detectChanges();
 			});
 
 			it(shouldHaveInputs, () => {
-				expect(component.data).toBe(rawJavaScriptData);
+				expect(component.data).toBe(rawJavascriptData);
 				expect(component.format).toBe("javascript");
 				expect(component.enableHighlighting).toBeUndefined();
 			});
 
-			it("should leave the raw JavaScript data unformatted (JS formatting not yet supported)", () => {
-				expect(component.prettyString).toBe(rawJavaScriptData);
+			it("should nicely format raw javascript data", () => {
+				expect(component.prettyString).toBe(formattedJavascriptData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
-				expect(preElement.innerHTML).toContain("function calculateData(seed, operationFn) {var data = operationFn(seed);");
+				expect(preElement.innerHTML).toContain("function calculateData(seed, operationFn) {");
+				expect(preElement.innerHTML).toContain("var data = operationFn(seed);");
+				expect(preElement.innerHTML).toContain("if (!data) {");
+			});
+
+			it("should simply display the unformatted raw javascript data in case it is not valid javascript", () => {
+				const invalidRawJavascriptData: string = rawJavascriptData + "}";
+
+				hostComponent.data = invalidRawJavascriptData;
+				hostComponent.format = "javascript";
+				hostFixture.detectChanges();
+
+				expect(component.prettyString).toBe(invalidRawJavascriptData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).toContain("if (!data){data = 'could not calculate data';}return data;");
 			});
 		});
 
-		describe("TypeScript", () => {
+		describe("Typescript", () => {
 			beforeEach(() => {
-				hostComponent.data = rawTypeScriptData;
+				hostComponent.data = rawTypescriptData;
 				hostComponent.format = "typescript";
 				hostFixture.detectChanges();
 			});
 
 			it(shouldHaveInputs, () => {
-				expect(component.data).toBe(rawTypeScriptData);
+				expect(component.data).toBe(rawTypescriptData);
 				expect(component.format).toBe("typescript");
 				expect(component.enableHighlighting).toBeUndefined();
 			});
 
-			it("should leave the raw TypeScript data unformatted (TS formatting not yet supported)", () => {
-				expect(component.prettyString).toBe(rawTypeScriptData);
+			it("should nicely format raw typescript data", () => {
+				expect(component.prettyString).toBe(formattedTypescriptData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
-				/* tslint:disable: no-duplicate-string */
-				expect(preElement.innerHTML).toContain("function calculateData(seed:any, operationFn:Function):any");
-				/* tslint:enable: no-duplicate-string */
+				expect(preElement.innerHTML).toContain("function calculateData(seed: any, operationFn: Function): any {");
+				expect(preElement.innerHTML).toContain("var data: any = operationFn(seed);");
+				expect(preElement.innerHTML).toContain("if (!data) {");
+			});
+
+			it("should simply display the unformatted raw typescript data in case it is not valid typescript", () => {
+				const invalidRawTypescriptData: string = rawTypescriptData + "}";
+
+				hostComponent.data = invalidRawTypescriptData;
+				hostComponent.format = "typescript";
+				hostFixture.detectChanges();
+
+				expect(component.prettyString).toBe(invalidRawTypescriptData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).toContain("if (!data){data = 'could not calculate data';}return data;");
 			});
 		});
 
 		describe("Undefined format", () => {
 			beforeEach(() => {
-				hostComponent.data = rawTypeScriptData;
+				hostComponent.data = rawTypescriptData;
 				hostComponent.format = <any>undefined;
 				hostFixture.detectChanges();
 			});
 
 			it(shouldHaveInputs, () => {
-				expect(component.data).toBe(rawTypeScriptData);
+				expect(component.data).toBe(rawTypescriptData);
 				expect(component.format).toBeUndefined();
 				expect(component.enableHighlighting).toBeUndefined();
 			});
 
-			/* tslint:disable: no-identical-functions */ // the same test is performed an unkowm format
+			// the same test is performed with an unknown format
+			// tslint:disable-next-line: no-identical-functions
 			it("should leave the raw data unformatted when the format is not defined", () => {
-				expect(component.prettyString).toBe(rawTypeScriptData);
+				expect(component.prettyString).toBe(rawTypescriptData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
-				/* tslint:disable: no-duplicate-string */
 				expect(preElement.innerHTML).toContain("function calculateData(seed:any, operationFn:Function):any");
-				/* tslint:enable: no-duplicate-string */
 			});
-			/* tslint:enable: no-identical-functions */
 		});
 
 		describe("Unknown Format string", () => {
 			beforeEach(() => {
-				hostComponent.data = rawTypeScriptData;
+				hostComponent.data = rawTypescriptData;
 				hostComponent.format = "UnknownFormat";
 				hostFixture.detectChanges();
 			});
 
 			it(shouldHaveInputs, () => {
-				expect(component.data).toBe(rawTypeScriptData);
+				expect(component.data).toBe(rawTypescriptData);
 				expect(component.format).toBe("unknownformat");
 				expect(component.enableHighlighting).toBeUndefined();
 			});
 
-			/* tslint:disable: no-identical-functions */ // the same test is performed an undefined format
+			// the same test is performed with an unknown format
+			// tslint:disable-next-line: no-identical-functions
 			it("should leave the raw data unformatted when the format is an unrecognised string", () => {
-				expect(component.prettyString).toBe(rawTypeScriptData);
+				expect(component.prettyString).toBe(rawTypescriptData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
-				/* tslint:disable: no-duplicate-string */
 				expect(preElement.innerHTML).toContain("function calculateData(seed:any, operationFn:Function):any");
-				/* tslint:enable: no-duplicate-string */
 			});
-			/* tslint:enable: no-identical-functions */
 		});
 	});
 
@@ -543,7 +601,7 @@ describe("PrettyPrintComponent", () => {
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
 				expect(preElement.innerHTML).toContain('<code class="language-css">');
-				expect(preElement.innerHTML).toContain('<span class="token selector">body</span>');
+				expect(preElement.innerHTML).toContain('<span class="token selector">body </span>');
 				expect(preElement.innerHTML).toContain('<span class="token punctuation">:</span>');
 			});
 
@@ -564,9 +622,9 @@ describe("PrettyPrintComponent", () => {
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
 				expect(preElement.innerHTML).not.toContain('<code class="language-css">');
-				expect(preElement.innerHTML).toContain("color: #FFF;");
-				expect(preElement.innerHTML).toContain("margin-bottom:1em");
-				expect(preElement.innerHTML).toContain("margin-left:20px;");
+				expect(preElement.innerHTML).toContain("color: #fff;");
+				expect(preElement.innerHTML).toContain("margin-bottom: 1em;");
+				expect(preElement.innerHTML).toContain("margin-left: 20px;");
 			});
 		});
 
@@ -672,11 +730,9 @@ describe("PrettyPrintComponent", () => {
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
-				/* tslint:disable: no-duplicate-string */
 				expect(preElement.innerHTML).not.toContain('<code class="language-sql">');
 				expect(preElement.innerHTML).toContain("SELECT DISTINCT Name");
 				expect(preElement.innerHTML).toContain("FROM Production.Product AS p");
-				/* tslint:enable: no-duplicate-string */
 			});
 		});
 
@@ -732,18 +788,42 @@ describe("PrettyPrintComponent", () => {
 				expect(preElement.innerHTML).toContain('"menuitem": [');
 				expect(preElement.innerHTML).toContain('"onclick": "CreateNewDoc()"');
 			});
+
+			it("should not highlight invalid JSON data", () => {
+				const invalidRawJsonData: string = rawJsonData.replace(":", "oops");
+
+				hostComponent.data = invalidRawJsonData;
+				hostComponent.format = "json";
+				hostComponent.enableHighlighting = true;
+				hostFixture.detectChanges();
+
+				const formattedData: string = component.prettyString;
+
+				expect(formattedData).not.toContain("class='language-json'");
+				expect(formattedData).not.toContain(classTokenProperty);
+				expect(formattedData).not.toContain("<span");
+				expect(formattedData).toContain("menu");
+				expect(formattedData).toContain("CreateNewDoc");
+				expect(formattedData).toContain("menuitem");
+				expect(formattedData).toBe(invalidRawJsonData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).not.toContain('<code class="language-json">');
+				expect(preElement.innerHTML).toContain('"menu"oops');
+			});
 		});
 
 		describe("JavaScript", () => {
 			beforeEach(() => {
-				hostComponent.data = rawJavaScriptData;
+				hostComponent.data = rawJavascriptData;
 				hostComponent.format = "javascript";
 				hostComponent.enableHighlighting = true;
 				hostFixture.detectChanges();
 			});
 
 			it(shouldHaveInputs, () => {
-				expect(component.data).toBe(rawJavaScriptData);
+				expect(component.data).toBe(rawJavascriptData);
 				expect(component.format).toBe("javascript");
 				expect(component.enableHighlighting).toBe(true);
 			});
@@ -760,7 +840,7 @@ describe("PrettyPrintComponent", () => {
 				expect(formattedData).toContain("operationFn");
 				expect(formattedData).toContain("seed");
 				expect(formattedData).toContain("return");
-				expect(formattedData).not.toBe(rawJavaScriptData);
+				expect(formattedData).not.toBe(rawJavascriptData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
@@ -784,7 +864,35 @@ describe("PrettyPrintComponent", () => {
 				expect(formattedData).toContain("operationFn");
 				expect(formattedData).toContain("seed");
 				expect(formattedData).toContain("return");
-				expect(formattedData).toBe(rawJavaScriptData);
+				expect(formattedData).toBe(formattedJavascriptData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).not.toContain('<code class="language-javascript">');
+				expect(preElement.innerHTML).toContain("function calculateData(seed, operationFn)");
+				expect(preElement.innerHTML).toContain("if (!data) {");
+			});
+
+			it("should not highlight invalid javascript data", () => {
+				const invalidRawJavascriptData: string = rawJavascriptData + "}";
+
+				hostComponent.data = invalidRawJavascriptData;
+				hostComponent.format = "javascript";
+				hostComponent.enableHighlighting = true;
+				hostFixture.detectChanges();
+
+				const formattedData: string = component.prettyString;
+
+				expect(formattedData).not.toContain("class='language-javascript'");
+				expect(formattedData).not.toContain(classTokenKeyword);
+				expect(formattedData).not.toContain("<span");
+				expect(formattedData).not.toContain(classTokenFunction);
+				expect(formattedData).toContain("calculateData");
+				expect(formattedData).toContain("var");
+				expect(formattedData).toContain("operationFn");
+				expect(formattedData).toContain("seed");
+				expect(formattedData).toContain("return");
+				expect(formattedData).toBe(invalidRawJavascriptData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
@@ -796,14 +904,14 @@ describe("PrettyPrintComponent", () => {
 
 		describe("TypeScript", () => {
 			beforeEach(() => {
-				hostComponent.data = rawTypeScriptData;
+				hostComponent.data = rawTypescriptData;
 				hostComponent.format = "typescript";
 				hostComponent.enableHighlighting = true;
 				hostFixture.detectChanges();
 			});
 
 			it(shouldHaveInputs, () => {
-				expect(component.data).toBe(rawTypeScriptData);
+				expect(component.data).toBe(rawTypescriptData);
 				expect(component.format).toBe("typescript");
 				expect(component.enableHighlighting).toBe(true);
 			});
@@ -820,7 +928,7 @@ describe("PrettyPrintComponent", () => {
 				expect(formattedData).toContain("operationFn");
 				expect(formattedData).toContain("seed");
 				expect(formattedData).toContain("return");
-				expect(formattedData).not.toBe(rawTypeScriptData);
+				expect(formattedData).not.toBe(rawTypescriptData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
@@ -844,15 +952,41 @@ describe("PrettyPrintComponent", () => {
 				expect(formattedData).toContain("operationFn");
 				expect(formattedData).toContain("seed");
 				expect(formattedData).toContain("return");
-				expect(formattedData).toBe(rawTypeScriptData);
+				expect(formattedData).toBe(formattedTypescriptData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
-				/* tslint:disable: no-duplicate-string */
+				expect(preElement.innerHTML).not.toContain('<code class="language-typescript">');
+				expect(preElement.innerHTML).toContain("function calculateData(seed: any, operationFn: Function): any");
+				expect(preElement.innerHTML).toContain('data = "could not calculate data";');
+			});
+
+			it("should not highlight invalid typescript data", () => {
+				const invalidRawTypescriptData: string = rawTypescriptData + "}";
+
+				hostComponent.data = invalidRawTypescriptData;
+				hostComponent.format = "typescript";
+				hostComponent.enableHighlighting = true;
+				hostFixture.detectChanges();
+
+				const formattedData: string = component.prettyString;
+
+				expect(formattedData).not.toContain("class='language-typescript'");
+				expect(formattedData).not.toContain(classTokenKeyword);
+				expect(formattedData).not.toContain("<span");
+				expect(formattedData).not.toContain(classTokenFunction);
+				expect(formattedData).toContain("calculateData");
+				expect(formattedData).toContain("var");
+				expect(formattedData).toContain("operationFn");
+				expect(formattedData).toContain("seed");
+				expect(formattedData).toContain("return");
+				expect(formattedData).toBe(invalidRawTypescriptData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
 				expect(preElement.innerHTML).not.toContain('<code class="language-typescript">');
 				expect(preElement.innerHTML).toContain("function calculateData(seed:any, operationFn:Function):any");
-				expect(preElement.innerHTML).toContain("{data = 'could not calculate data';}");
-				/* tslint:enable: no-duplicate-string */
+				expect(preElement.innerHTML).toContain("if (!data){data = 'could not calculate data';}");
 			});
 		});
 	});
