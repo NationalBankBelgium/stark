@@ -35,6 +35,8 @@ export class StarkAppSidebarServiceImpl implements StarkAppSidebarService {
 		});
 	}
 
+	// FIXME: this tslint disable flag is due to a bug in 'no-identical-functions' rule (https://github.com/SonarSource/SonarTS/issues/676). Remove it once it is solved
+	/*tslint:disable-next-line:no-identical-functions*/
 	public openLeft(): void {
 		this.openSidebarSource.next({
 			mode: "regular",

@@ -3,7 +3,6 @@ import { Action, Store } from "@ngrx/store";
 import { EMPTY, from, Observable } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
 import {
-	HookFn,
 	HookMatchCriteria,
 	HookRegOptions,
 	HookResult,
@@ -54,7 +53,7 @@ const _isEmpty: Function = require("lodash/isEmpty");
  */
 interface StarkState {
 	name: string;
-	params: RawParams | undefined;
+	params?: RawParams;
 }
 
 /**
@@ -214,11 +213,13 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 			// If there is a value in the stateParams that is different from the currentStateParams, then it is not the current state
 			for (const key in stateParams) {
-				if (stateParams.hasOwnProperty(key) && currentStateParams.hasOwnProperty(key)) {
-					if (stateParams[key] !== currentStateParams[key]) {
-						stateParamsMatchCurrent = false;
-						break;
-					}
+				if (
+					stateParams.hasOwnProperty(key) &&
+					currentStateParams.hasOwnProperty(key) &&
+					stateParams[key] !== currentStateParams[key]
+				) {
+					stateParamsMatchCurrent = false;
+					break;
 				}
 			}
 
@@ -242,11 +243,9 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public addTransitionHook(
 		lifecycleHook: string,
 		matchCriteria: HookMatchCriteria,
-		callback: HookFn,
+		callback: TransitionHookFn | TransitionStateHookFn,
 		options?: HookRegOptions
 	): Function {
-		// FIXME Check if we can remove the "useless" casts
-		/* tslint:disable:no-useless-cast */
 		switch (lifecycleHook) {
 			case StarkRoutingTransitionHook.ON_BEFORE:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onbefore
@@ -275,7 +274,6 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			default:
 				throw new Error(starkRoutingServiceName + ": lifecycle hook unknown => " + lifecycleHook);
 		}
-		/* tslint:enable:no-useless-cast */
 	}
 
 	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
@@ -330,13 +328,15 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				const pathNode: PathNode = pathNodes[index];
 
 				// skipping abstract states and the root state
-				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
-					// taking only the current state and parent/ancestor states
-					if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
-						const resolvablesData: { [key: string]: any } = this.extractResolvablesData(pathNode.resolvables);
-						const stateResolves: any = _isEmpty(resolvablesData) ? undefined : resolvablesData;
-						stateTreeResolves.set(pathNode.state.name, stateResolves);
-					}
+				// and taking only the current state and parent/ancestor states
+				if (
+					!pathNode.state.abstract &&
+					pathNode.state !== pathNode.state.root() &&
+					(pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state))
+				) {
+					const resolvablesData: { [key: string]: any } = this.extractResolvablesData(pathNode.resolvables);
+					const stateResolves: any = _isEmpty(resolvablesData) ? undefined : resolvablesData;
+					stateTreeResolves.set(pathNode.state.name, stateResolves);
 				}
 			}
 		} else {
@@ -362,12 +362,14 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				const pathNode: PathNode = pathNodes[index];
 
 				// skipping abstract states and the root state
-				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
-					// taking only the current state and parent/ancestor states
-					if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
-						const stateData: any = _isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
-						stateTreeData.set(pathNode.state.name, stateData);
-					}
+				// and taking only the current state and parent/ancestor states
+				if (
+					!pathNode.state.abstract &&
+					pathNode.state !== pathNode.state.root() &&
+					(pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state))
+				) {
+					const stateData: any = _isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
+					stateTreeData.set(pathNode.state.name, stateData);
 				}
 			}
 		} else {

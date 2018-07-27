@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-duplicate-string */
+/* tslint:disable:completed-docs no-big-function no-duplicate-string no-identical-functions */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
 

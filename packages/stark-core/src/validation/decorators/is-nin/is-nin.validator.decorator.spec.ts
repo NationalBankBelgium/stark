@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/*tslint:disable:completed-docs no-identical-functions*/
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsNIN } from "./is-nin.validator.decorator";
 import { starkIsNINValidatorName } from "../../validators/is-nin";

@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/*tslint:disable:completed-docs no-identical-functions*/
 import { starkIsISIN } from "./is-isin.validator.fn";
 
 describe("Validator Function: StarkIsISIN", () => {

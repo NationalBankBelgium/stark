@@ -13,5 +13,5 @@ export interface StarkSession {
 	 * The current user logged in the application (if there is one logged in), otherwise it will be undefined
 	 * @link StarkUser
 	 */
-	user: StarkUser | undefined;
+	user?: StarkUser;
 }

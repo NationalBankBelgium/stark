@@ -1,5 +1,14 @@
 import { Observable } from "rxjs";
-import { HookFn, HookMatchCriteria, HookRegOptions, RawParams, StateDeclaration, StateObject, TransitionOptions } from "@uirouter/core";
+import {
+	TransitionHookFn,
+	TransitionStateHookFn,
+	HookMatchCriteria,
+	HookRegOptions,
+	RawParams,
+	StateDeclaration,
+	StateObject,
+	TransitionOptions
+} from "@uirouter/core";
 
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { InjectionToken } from "@angular/core";
@@ -153,7 +162,12 @@ export interface StarkRoutingService {
 	 * @link https://ui-router.github.io/ng1/docs/latest/interfaces/transition.hookregoptions.html
 	 * @returns A function which deregisters the transition hook
 	 */
-	addTransitionHook(lifecycleHook: string, matchCriteria: HookMatchCriteria, callback: HookFn, options?: HookRegOptions): Function;
+	addTransitionHook(
+		lifecycleHook: string,
+		matchCriteria: HookMatchCriteria,
+		callback: TransitionHookFn | TransitionStateHookFn,
+		options?: HookRegOptions
+	): Function;
 
 	/**
 	 * Get the "translationKey" token from the state in this order:

@@ -284,18 +284,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Component lifecycle hook
 	 */
 	public ngOnChanges(changes: SimpleChanges): void {
-		if (changes["data"]) {
-			if (!changes["data"].isFirstChange()) {
-				if (this.resetFilterValueOnDataChange()) {
-					this.applyFilter();
-				}
-			}
+		if (changes["data"] && !changes["data"].isFirstChange() && this.resetFilterValueOnDataChange()) {
+			this.applyFilter();
 		}
 
-		if (changes["orderProperties"]) {
-			if (!changes["orderProperties"].isFirstChange()) {
-				this.sortData();
-			}
+		if (changes["orderProperties"] && !changes["orderProperties"].isFirstChange()) {
+			this.sortData();
 		}
 
 		if (changes["filter"]) {

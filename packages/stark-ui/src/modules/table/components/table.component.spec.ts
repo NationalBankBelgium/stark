@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations */
+/* tslint:disable:completed-docs max-inline-declarations no-identical-functions */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";

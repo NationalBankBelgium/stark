@@ -131,14 +131,12 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 
 	/**
 	 * Component lifecycle hook that is called when any data-bound property of a directive changes.
-	 * @param Contains the changed properties
+	 * @param onChangesObj - Contains the changed properties
 	 */
 	public ngOnChanges(onChangesObj: SimpleChanges): void {
-		if (onChangesObj["values"] && !onChangesObj["values"].isFirstChange()) {
-			// cannot compare using slider.get() method because it returns the current formatted values (we need to compare the unencoded values)
-			if (!_isEqual(this.latestUnencodedValues, this.values)) {
-				this.updateSliderInstanceValues();
-			}
+		// cannot compare using slider.get() method because it returns the current formatted values (we need to compare the unencoded values)
+		if (onChangesObj["values"] && !onChangesObj["values"].isFirstChange() && !_isEqual(this.latestUnencodedValues, this.values)) {
+			this.updateSliderInstanceValues();
 		}
 	}
 

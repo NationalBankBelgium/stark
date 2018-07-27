@@ -38,7 +38,7 @@ import { MockStarkLoggingService } from "../../logging/testing";
 import { MockStarkSessionService } from "../../session/testing";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 
-/* tslint:disable:no-big-function no-duplicate-string */
+/* tslint:disable:no-big-function no-duplicate-string max-union-size */
 describe("Service: StarkHttpService", () => {
 	let loggerMock: StarkLoggingService;
 	let mockSessionService: StarkSessionService;

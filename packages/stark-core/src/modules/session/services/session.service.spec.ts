@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/*tslint:disable:completed-docs no-undefined-argument*/
 import { HttpHeaders, HttpRequest } from "@angular/common/http";
 import { EventEmitter, Injector } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle, InterruptSource } from "@ng-idle/core";
@@ -177,7 +177,6 @@ describe("Service: StarkSessionService", () => {
 
 			expect(hookMatchCriteria.entering).toBeDefined();
 
-			// FIXME: this tslint disable flag is due to a bug in 'no-useless-cast' rule (https://github.com/SonarSource/SonarTS/issues/650). Remove it once it is solved
 			// tslint:disable-next-line:no-useless-cast
 			const matchingFn: Predicate<StateObject> = <Predicate<StateObject>>hookMatchCriteria.entering;
 			const nonMatchingStates: Partial<StateObject>[] = [

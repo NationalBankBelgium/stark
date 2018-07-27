@@ -1,3 +1,5 @@
+export type StarkActionBarButtonColor = "primary" | "accent" | "warn" | "success" | "alert" | "alt" | "neutral" | "white";
+
 /**
  * Stark Action Base interface
  */
@@ -5,7 +7,7 @@ export interface StarkActionBase {
 	/**
 	 * Color of the button
 	 */
-	buttonColor?: "primary" | "accent" | "warn" | "success" | "alert" | "alt" | "neutral" | "white" | string;
+	buttonColor?: StarkActionBarButtonColor | string;
 
 	/**
 	 * Path to SVG icon from iconSets to display inside the action button. Ex: "pencil"
