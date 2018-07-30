@@ -11,19 +11,17 @@ before_install:
   # TODO remove this variable as it's probably not needed (defined by travis by default?): https://docs.travis-ci.com/user/environment-variables/
   - TRAVIS=1 # used by build.sh
   - npm i -g npm@5.8.0
+  - if [[ $TRAVIS_BRANCH == greenkeeper* ]]; then npm i -g greenkeeper-lockfile; fi
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
-  - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+  - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
 install:
   # Create file & folder for Travis logs
   # cfr scripts/_travis-fold.sh
   - mkdir -p $LOGS_DIR
-  - touch $LOGS_DIR/build-perf.log
-  - npm install --no-optional
-  - npm run install:travis:all
-    # TODO uncomment this when npmjs registry fixed
-    # - npm ci
-    # - npm run install:ci:all
+  - touch $LOGS_DIR/build-perf.log  
+  - if [[ $TRAVIS_BRANCH == greenkeeper* ]]; then npm i --no-optional; else npm ci; fi
+  - if [[ $TRAVIS_BRANCH == greenkeeper* ]]; then npm run install:travis:all; else npm run install:ci:all; fi
 
 env:
   global:
@@ -39,6 +37,9 @@ branches:
 cache:
   directories:
     - $HOME/.npm
+
+before_script:
+  - if [[ $TRAVIS_BRANCH == greenkeeper* ]]; then greenkeeper-lockfile-update; fi
 
 # Not needed since we use Puppeteer in karma.conf.ci.js
 # It downloads Chrome itself and works with or without Travis
@@ -56,3 +57,4 @@ script:
 
 after_success:
   - npm run test:ci:coveralls:combined
+  - if [[ $TRAVIS_BRANCH == greenkeeper* ]]; then greenkeeper-lockfile-upload; fi
