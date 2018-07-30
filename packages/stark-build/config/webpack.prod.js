@@ -56,7 +56,7 @@ module.exports = function() {
 	});
 	const supportES2015 = buildUtils.supportES2015(METADATA.TS_CONFIG_PATH);
 
-	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
+	const webpackConfig = webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
 		 * Stats lets you precisely control what bundle information gets displayed
 		 * reference: https://webpack.js.org/configuration/stats/
@@ -70,8 +70,6 @@ module.exports = function() {
 		},
 
 		mode: "production",
-
-		devtool: "source-map",
 
 		// reference: https://medium.com/webpack/webpack-4-mode-and-optimization-5423a6bc597a
 		optimization: {
@@ -97,7 +95,7 @@ module.exports = function() {
 				 */
 				new UglifyJsPlugin({
 					parallel: true, // use multi-process parallel running to improve the build speed (default concurrent processes: os.cpus().length - 1)
-					sourceMap: true, // useful to still be able to debug in production
+					sourceMap: METADATA.SOURCEMAPS, // useful to still be able to debug in production
 					uglifyOptions: getUglifyOptions(supportES2015)
 				}),
 				// other options than Uglify: BabelifyMinifyWebpackPlugin or ClosureCompilerPlugin
@@ -333,4 +331,10 @@ module.exports = function() {
 			})
 		]
 	});
+
+	if (METADATA.SOURCEMAPS) {
+		webpackConfig.devtool = "source-map";
+	}
+	
+	return webpackConfig;
 };

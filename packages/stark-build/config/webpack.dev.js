@@ -59,15 +59,13 @@ module.exports = function(env) {
 		// "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
 	];
 
-	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
+	const webpackConfig = webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
 		 * Tell webpack which environment the application is targeting.
 		 * reference: https://webpack.js.org/configuration/target/
 		 * reference: https://webpack.js.org/concepts/targets/
 		 */
 		target: "web", // <== can be omitted as default is "web"
-
-		devtool: "cheap-module-source-map",
 
 		mode: "development",
 
@@ -370,4 +368,10 @@ module.exports = function(env) {
 			}
 		}
 	});
+
+	if (METADATA.SOURCEMAPS) {
+		webpackConfig.devtool = "cheap-module-source-map";
+	}
+
+	return webpackConfig;
 };
