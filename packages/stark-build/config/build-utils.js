@@ -25,7 +25,8 @@ const DEFAULT_METADATA = {
 	E2E: !!process.env.BUILD_E2E,
 	WATCH: helpers.hasProcessFlag("watch"),
 	TS_CONFIG_PATH: ANGULAR_APP_CONFIG.config.architect.build.options.tsConfig,
-	environment: ""
+	environment: "",
+	SOURCEMAPS: !helpers.hasProcessFlag("no-sourcemaps")
 };
 
 function supportES2015(tsConfigPath) {
