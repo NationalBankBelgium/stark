@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><base href="/showcase/10.0.0-alpha.4/"><!-- The base href is defined through the Webpack configuration and can be customized through the angular.json file --><!-- necessary for HTML5 History API which adds support for pretty URLs (see app.ts) --><meta charset="utf-8"><title>Stark Showcase</title><meta name="description" content="{%= htmlWebpackPlugin.options.starkAppMetadata.description %}"><!--Configured Head Tags  --><link rel="manifest" href="/showcase/10.0.0-alpha.4/manifest.json"><link rel="shortcut icon" type="image/x-icon" href="/showcase/10.0.0-alpha.4/favicon.ico"><link rel="apple-touch-icon" sizes="57x57" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/showcase/10.0.0-alpha.4/assets/images/app-icons/favicon-16x16.png"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="msapplication-tap-highlight" content="no"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Stark Starter"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="template"><meta name="msapplication-config" content="none"><meta name="HandheldFriendly" content="true"><meta name="theme-color" content="#0076c8"><meta name="msapplication-TileColor" content="#0076c8"><meta name="msapplication-TileImage" content="assets/images/app-icons/ms-icon-144x144.png"><!-- Stylesheets --><!-- Generated CSS stylesheets will be added by webpack: extract-text-webpack-plugin --><!-- move the block of webpack dev server to the <head> section and change the IF conditions --><!-- add this block at the end of the <head> section --><link href="/showcase/10.0.0-alpha.4/main.b8f6c9b46b369dc5a4bf.css" rel="stylesheet"></head><body class=""><!-- FIXME reimplement these functionalities --><!-- the 'stark-init'/'stark-exit' class is set when the current route state is a child of starkAppInit/starkAppExit --><!--
+<ui-view class="stark-login-container stark-init" name="initOrExit"
+		 ui-sref-active="{'stark-init': 'starkAppInit.**', 'stark-exit': 'starkAppExit.**'}">
+	<div class="stark-message stark-loading" role="alertdialog" aria-busy="true" aria-live="assertive">
+		<header><i></i></header>
+		<content>
+			<div class="stark-msg-loading">
+				<div class="stark-loading-icon"></div>
+				<h1>Loading...</h1>
+			</div>
+		</content>
+	</div>
+</ui-view>
+
+<div class="stark-message stark-js-error-messages" role="alertdialog" aria-busy="true" aria-live="assertive">
+	<header><i></i></header>
+	<content>
+		<div class="stark-msg-no-js">
+			<h1>No JavaScript</h1>
+			<p>You must have javascript enabled!</p>
+		</div>
+		<div class="stark-msg-outdated">
+			<h1>Browser not supported</h1>
+			<p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to
+				improve your experience.</p>
+		</div>
+	</content>
+</div>
+--><!-- the 'stark-init'/'stark-exit' class is set when the current route state is a child of starkAppInit/starkAppExit --><!--
+<app class="stark-app" ui-sref-active="{'stark-init': 'starkAppInit.**', 'stark-exit': 'starkAppExit.**'}"></app>
+--><!--
+<script nonce="cefb24121ec5443c8819cc7c5e33c4a2">
+	/* remove the no-js message and if compatible browser: display the app */
+	if ("querySelector" in document && "classList" in document.body && /*@cc_on!@*/false === false) {
+		document.body.classList.add("stark-browser-ok");
+	} else {
+		document.body.className += " stark-outdated-browser";
+		var starkApp = document.getElementsByClassName("stark-app")[0];
+		if (starkApp) {
+			document.body.removeChild(starkApp);
+		}
+		var starkInitView = document.getElementsByClassName("stark-login-container")[0];
+		if (starkInitView) {
+			document.body.removeChild(starkInitView);
+		}
+	}
+</script>
+--><app>Loading...</app><!-- CSS will be injected by webpack here --><!-- Preload link tags will be injected by webpack here --><!-- Generated bundle scripts will be injected by webpack here: html-webpack-plugin --><script type="text/javascript" src="/showcase/10.0.0-alpha.4/runtime~main.b8e526f19e12c57c83c8.bundle.js"></script><script type="text/javascript" src="/showcase/10.0.0-alpha.4/runtime~polyfills.66dc1a30582eae63c864.bundle.js"></script><script type="text/javascript" src="/showcase/10.0.0-alpha.4/polyfills.fe611d7bf402b3a691a7.chunk.js"></script><script type="text/javascript" src="/showcase/10.0.0-alpha.4/vendor.020e6710002a215984b6.chunk.js"></script><script type="text/javascript" src="/showcase/10.0.0-alpha.4/main.8708b8b45ae937553a35.chunk.js"></script></body></html>
