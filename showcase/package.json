@@ -27,6 +27,7 @@
   },
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 npm run webpack -- --config node_modules/@nationalbankbelgium/stark-build/config/webpack.prod.js  --progress --profile --bail",
+    "build:aot:prod:ci-test-env": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 npm run webpack -- --config node_modules/@nationalbankbelgium/stark-build/config/webpack.prod.js  --progress --profile --bail --ci-test-env",
     "build:aot": "npm run build:aot:prod",
     "build:aot:dev": "cross-env BUILD_AOT=1 npm run build:dev",
     "build:dev": "npm run clean:dist && npm run webpack -- --config node_modules/@nationalbankbelgium/stark-build/config/webpack.dev.js --progress --profile",
@@ -34,6 +35,7 @@
     "build:docker": "npm run build:prod && docker build -t angular2-webpack-start:latest .",
     "build:prod": "npm run clean:dist && npm run build:aot:prod",
     "build:prod:ghpages": "npm run clean:dist && node ./ghpages-adapt-angular-json.js && npm run build:aot:prod",
+    "build:prod:ghpages:ci-test-env": "npm run clean:dist && node ./ghpages-adapt-angular-json.js && npm run build:aot:prod:ci-test-env",
     "build": "npm run build:dev",
     "check-deps": "npx npm-check-u",
     "ci:aot": "cross-env BUILD_E2E=1 npm run lint && npm run test && npm run build:aot && npm run e2e",
