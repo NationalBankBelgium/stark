@@ -16,11 +16,13 @@ export class AboutComponent implements OnInit {
 	/**
 	 * @ignore
 	 */
-	@Input() public resolvedData: Observable<any>;
+	@Input()
+	public resolvedData: Observable<any>;
 	/**
 	 * @ignore
 	 */
-	@Input() public paramData: any;
+	@Input()
+	public paramData: any;
 
 	/**
 	 * @ignore

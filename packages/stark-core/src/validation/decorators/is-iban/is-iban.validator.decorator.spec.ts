@@ -4,11 +4,13 @@ import { StarkIsIBAN } from "./is-iban.validator.decorator";
 import { starkIsIBANValidatorName } from "../../validators/is-iban";
 
 class MyClass {
-	@StarkIsIBAN() public name: string;
+	@StarkIsIBAN()
+	public name: string;
 }
 
 class SimpleClass {
-	@StarkIsIBAN() public dummyObject: object;
+	@StarkIsIBAN()
+	public dummyObject: object;
 }
 
 describe("ValidatorDecorator: StarkIsIBAN", () => {

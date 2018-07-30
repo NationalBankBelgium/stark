@@ -10,9 +10,12 @@ import { STARK_LOGGING_SERVICE, StarkErrorImpl, StarkLoggingService } from "@nat
 	providers: [FileService]
 })
 export class ExampleViewerComponent implements OnInit {
-	@Input() public extensions: string[] = ["HTML", "TS", "CSS"];
-	@Input() public filesPath: string;
-	@Input() public title: string;
+	@Input()
+	public extensions: string[] = ["HTML", "TS", "CSS"];
+	@Input()
+	public filesPath: string;
+	@Input()
+	public title: string;
 
 	public filesContent: object[] = [];
 	public showSource: boolean = false;

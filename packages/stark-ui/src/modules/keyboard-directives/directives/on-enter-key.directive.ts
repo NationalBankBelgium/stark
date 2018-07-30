@@ -36,12 +36,14 @@ export class StarkOnEnterKeyDirective implements OnInit {
 	 * Callback function to be triggered on every Enter key press in the field
 	 */
 	/* tslint:disable:no-input-rename */
-	@Input("starkOnEnterKey") public onEnterKeyHandler: Function;
+	@Input("starkOnEnterKey")
+	public onEnterKeyHandler: Function;
 
 	/**
 	 * Parameters to be passed to the specified callback function
 	 */
-	@Input("starkOnEnterKeyParams") public onEnterKeyParams: any[];
+	@Input("starkOnEnterKeyParams")
+	public onEnterKeyParams: any[];
 
 	/**
 	 * Event handler to be invoked on a "keypress" event in the field

@@ -10,13 +10,18 @@ import { StarkHttpErrorDetail, StarkHttpErrorDetailImpl } from "../error";
  * @ignore
  */
 export class StarkCollectionMetadataImpl implements StarkCollectionMetadata {
-	@deserializeAs(StarkSortItemImpl) public sortedBy: StarkSortItem[];
+	@deserializeAs(StarkSortItemImpl)
+	public sortedBy: StarkSortItem[];
 
-	@deserializeAs(StarkPaginationMetadataImpl) public pagination: StarkPaginationMetadata;
+	@deserializeAs(StarkPaginationMetadataImpl)
+	public pagination: StarkPaginationMetadata;
 
-	@deserialize public etags: { [uuid: string]: string };
+	@deserialize
+	public etags: { [uuid: string]: string };
 
-	@deserializeAs(StarkHttpErrorDetailImpl) public warnings?: StarkHttpErrorDetail[];
+	@deserializeAs(StarkHttpErrorDetailImpl)
+	public warnings?: StarkHttpErrorDetail[];
 
-	@deserialize public custom?: object;
+	@deserialize
+	public custom?: object;
 }

@@ -46,87 +46,104 @@ export class StarkTableComponent implements OnInit, AfterContentInit, AfterViewI
 	/**
 	 * Adds class="stark-table" attribute on the host component
 	 */
-	@HostBinding("class") public class: string = "stark-table";
+	@HostBinding("class")
+	public class: string = "stark-table";
 
 	/**
 	 * Data that will be display inside your table.
 	 */
-	@Input() public data: any[];
+	@Input()
+	public data: any[];
 
 	/**
 	 * Object which contains filtering information for the table.
 	 */
-	@Input() public filter: StarkTableFilter;
+	@Input()
+	public filter: StarkTableFilter;
 
 	/**
 	 * Array of StarkAction objects (see StarkAction docs).
 	 */
-	@Input() public customTableActions?: StarkAction[];
+	@Input()
+	public customTableActions?: StarkAction[];
 
 	/**
 	 * Type of StarkAction objects
 	 */
-	@Input() public customTableActionsType: "regular" | "alt" = "regular";
+	@Input()
+	public customTableActionsType: "regular" | "alt" = "regular";
 
 	/**
 	 * Allows sorting by multiple columns. Setting the attribute to "true" or empty will enable this feature.
 	 */
-	@Input() public multiSort?: string;
+	@Input()
+	public multiSort?: string;
 
 	/**
 	 * Whether to display the pagination component
 	 */
-	@Input() public paginate: boolean = false;
+	@Input()
+	public paginate: boolean = false;
 
 	/**
 	 * Allows multiple row selection. Setting the attribute to "true" or empty will enable this feature.
 	 */
-	@Input() public multiselect: boolean = false;
+	@Input()
+	public multiselect: boolean = false;
 
 	/**
 	 * Columns to be sorted by default
 	 */
-	@Input() public orderProperties?: string[];
+	@Input()
+	public orderProperties?: string[];
 
 	/**
 	 * Array of StarkColumnProperties objects which define the columns of the data table.
 	 */
-	@Input() public columnProperties: StarkTableColumnProperties[] = [];
+	@Input()
+	public columnProperties: StarkTableColumnProperties[] = [];
 
 	/**
 	 * StarkActionBarConfig object (see StarkActionBarConfig docs).
 	 */
-	@Input() public tableRowsActionBarConfig: StarkActionBarConfig;
+	@Input()
+	public tableRowsActionBarConfig: StarkActionBarConfig;
 
 	/**
 	 * Output event emitter that will emit the array of columns selected (column id's).
 	 */
-	@Output() public selectChanged: EventEmitter<number[]> = new EventEmitter<number[]>();
+	@Output()
+	public selectChanged: EventEmitter<number[]> = new EventEmitter<number[]>();
 
 	/**
 	 * Output event emitter that will emit the latest global filter value whenever it changes.
 	 */
-	@Output() public filterChanged: EventEmitter<string> = new EventEmitter<string>();
+	@Output()
+	public filterChanged: EventEmitter<string> = new EventEmitter<string>();
 
 	/**
 	 * Reference to the MatTable embedded in this component
 	 */
-	@ViewChild(MatTable) public table: MatTable<any>;
+	@ViewChild(MatTable)
+	public table: MatTable<any>;
 
 	/**
 	 * Reference to the MatPaginator embedded in this component
 	 */
-	@ViewChild(MatPaginator) public paginator: MatPaginator;
+	@ViewChild(MatPaginator)
+	public paginator: MatPaginator;
 
 	/**
 	 * Columns added automatically by this component according to the columnProperties input
 	 */
-	@ViewChildren(StarkTableColumnComponent) public viewColumns: QueryList<StarkTableColumnComponent>;
+	@ViewChildren(StarkTableColumnComponent)
+	public viewColumns: QueryList<StarkTableColumnComponent>;
 
 	/**
 	 * Columns added by the user via transclusion inside an <div> element with class "stark-table-columns"
 	 */
-	@ContentChildren(StarkTableColumnComponent) public contentColumns: QueryList<StarkTableColumnComponent>;
+	@ContentChildren(StarkTableColumnComponent)
+	public contentColumns: QueryList<StarkTableColumnComponent>;
 
 	/**
 	 * Array of StarkTableColumnComponents defined in this table

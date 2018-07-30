@@ -296,9 +296,9 @@ To add a news, just do as follows:
 ```
 
 Make sure to adapt the image's size for the screen that will display the news. For example, to set the size for a tablet screen, define
-your image size as follows in the `news.component.scss` file: 
+your image size as follows in the `news.component.scss` file:
 
-````
+```
 @media #{$tablet-only-query}{
  .my-news-image {
     background-image: url("/assets/images/screenshots/my-example.png");
@@ -307,7 +307,7 @@ your image size as follows in the `news.component.scss` file:
     height: xxx;
   }
 }
-````
+```
 
 Don't forget to indicate the correct class to use for your elements in the html file, otherwise they won't be displayed.
 

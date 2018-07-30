@@ -19,7 +19,7 @@ install:
   # Create file & folder for Travis logs
   # cfr scripts/_travis-fold.sh
   - mkdir -p $LOGS_DIR
-  - touch $LOGS_DIR/build-perf.log  
+  - touch $LOGS_DIR/build-perf.log
   - if [[ $TRAVIS_BRANCH == greenkeeper* ]]; then npm i --no-optional; else npm ci; fi
   - if [[ $TRAVIS_BRANCH == greenkeeper* ]]; then npm run install:travis:all; else npm run install:ci:all; fi
 
@@ -30,9 +30,9 @@ env:
 
 branches:
   only:
-  - master
-  - /^greenkeeper/.*$/
-  - /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+)?$/
+    - master
+    - /^greenkeeper/.*$/
+    - /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+)?$/
 
 cache:
   directories:

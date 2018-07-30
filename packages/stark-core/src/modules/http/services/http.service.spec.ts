@@ -1497,19 +1497,25 @@ describe("Service: StarkHttpService", () => {
 
 @inheritSerialization(StarkSingleItemMetadataImpl)
 class MockResourceMetadata extends StarkSingleItemMetadataImpl {
-	@autoserialize public someValue?: string;
+	@autoserialize
+	public someValue?: string;
 }
 
 class MockResource implements StarkResource {
-	@autoserialize public uuid: string;
+	@autoserialize
+	public uuid: string;
 
-	@autoserialize public etag: string;
+	@autoserialize
+	public etag: string;
 
-	@autoserializeAs(MockResourceMetadata) public metadata: MockResourceMetadata;
+	@autoserializeAs(MockResourceMetadata)
+	public metadata: MockResourceMetadata;
 
-	@autoserialize public property1: string;
+	@autoserialize
+	public property1: string;
 
-	@autoserialize public property2: string;
+	@autoserialize
+	public property2: string;
 
 	public constructor(uuid: string) {
 		this.uuid = uuid;

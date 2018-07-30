@@ -7,11 +7,16 @@ import { StarkError } from "./error.intf";
  * @ignore
  */
 export class StarkErrorImpl implements StarkError {
-	@autoserialize public message?: string;
-	@autoserialize public name?: string;
-	@autoserialize public stack?: string;
-	@autoserialize public correlationId?: string;
-	@autoserialize public timestamp?: string;
+	@autoserialize
+	public message?: string;
+	@autoserialize
+	public name?: string;
+	@autoserialize
+	public stack?: string;
+	@autoserialize
+	public correlationId?: string;
+	@autoserialize
+	public timestamp?: string;
 
 	public constructor(error?: Error | string) {
 		let starkError: Error;

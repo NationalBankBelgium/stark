@@ -17,7 +17,8 @@ export class StarkRestrictInputDirective implements OnInit {
 	 * A valid regular expression that defines the allowed characters
 	 */
 	/* tslint:disable:no-input-rename */
-	@Input("starkRestrictInput") public inputRestriction: string;
+	@Input("starkRestrictInput")
+	public inputRestriction: string;
 
 	/**
 	 * Event handler to be invoked on a "keypress" event in the field

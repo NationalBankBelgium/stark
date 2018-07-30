@@ -4,19 +4,22 @@ import { StarkIsNIN } from "./is-nin.validator.decorator";
 import { starkIsNINValidatorName } from "../../validators/is-nin";
 
 class MyClass {
-	@StarkIsNIN("countryCode") public name: string;
+	@StarkIsNIN("countryCode")
+	public name: string;
 
 	public countryCode: string;
 }
 
 class ClassWithoutCountryCode {
-	@StarkIsNIN("countryCode") public name: string;
+	@StarkIsNIN("countryCode")
+	public name: string;
 
 	public countryName: string;
 }
 
 class SimpleClass {
-	@StarkIsNIN("countryCode") public dummyObject: object;
+	@StarkIsNIN("countryCode")
+	public dummyObject: object;
 
 	public countryCode: string;
 }

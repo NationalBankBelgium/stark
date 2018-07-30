@@ -6,5 +6,6 @@ import { StarkHttpErrorDetail, StarkHttpErrorDetailImpl } from "../error";
  * @ignore
  */
 export class StarkSingleItemMetadataImpl implements StarkSingleItemMetadata {
-	@deserializeAs(StarkHttpErrorDetailImpl) public warnings?: StarkHttpErrorDetail[];
+	@deserializeAs(StarkHttpErrorDetailImpl)
+	public warnings?: StarkHttpErrorDetail[];
 }

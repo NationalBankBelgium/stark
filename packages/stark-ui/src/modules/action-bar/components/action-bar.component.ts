@@ -16,35 +16,41 @@ export class StarkActionBarComponent {
 	/**
 	 * HTML id of action bar component.
 	 */
-	@Input() public actionBarId: string = "";
+	@Input()
+	public actionBarId: string = "";
 
 	/**
 	 * StarkActionBarConfig object.
 	 */
-	@Input() public actionBarConfig: StarkActionBarConfig;
+	@Input()
+	public actionBarConfig: StarkActionBarConfig;
 
 	/**
 	 * If provided, this object will be passed as parameter in every
 	 * action call defined
 	 */
-	@Input() public actionBarScope?: any;
+	@Input()
+	public actionBarScope?: any;
 
 	/**
 	 * Alternative actions
 	 */
-	@Input() public alternativeActions: StarkAction[];
+	@Input()
+	public alternativeActions: StarkAction[];
 
 	/**
 	 * Default color of the buttons
 	 */
-	@Input() public buttonColor: "primary" | "accent" | "warn" | "success" | "alert" | "alt" | "neutral" | "white" | string = "primary";
+	@Input()
+	public buttonColor: "primary" | "accent" | "warn" | "success" | "alert" | "alt" | "neutral" | "white" | string = "primary";
 
 	/**
 	 * Desired layout or flavour:
 	 *    - full: full featured action bar with labels, expanded view, etc...
 	 *    - compact: minimalistic layout with icons only.
 	 */
-	@Input() public mode: StarkActionBarComponentMode = "full";
+	@Input()
+	public mode: StarkActionBarComponentMode = "full";
 
 	/**
 	 * status of the extended action in full mode

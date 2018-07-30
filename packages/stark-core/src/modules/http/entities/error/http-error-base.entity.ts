@@ -12,11 +12,18 @@ export class StarkHttpErrorBaseImpl extends StarkErrorImpl implements StarkHttpE
 		this.name = "STARK_HTTP_ERROR";
 	}
 
-	@autoserialize public type: string;
-	@autoserialize public title: string;
-	@autoserialize public titleKey: string;
-	@autoserialize public titleKeyParameters: string[];
-	@autoserialize public instance: string;
-	@autoserialize public timestamp: string;
-	@autoserialize public metadata?: object;
+	@autoserialize
+	public type: string;
+	@autoserialize
+	public title: string;
+	@autoserialize
+	public titleKey: string;
+	@autoserialize
+	public titleKeyParameters: string[];
+	@autoserialize
+	public instance: string;
+	@autoserialize
+	public timestamp: string;
+	@autoserialize
+	public metadata?: object;
 }

@@ -3,7 +3,8 @@ import { IsNotEmpty, MaxLength, validateSync, ValidationError } from "class-vali
 import { StarkMapIsValid, starkMapIsValidValidatorName } from "./map-is-valid.validator.decorator";
 
 class KeyClass {
-	@IsNotEmpty() public id: string;
+	@IsNotEmpty()
+	public id: string;
 }
 
 class ValueClass {
@@ -12,11 +13,13 @@ class ValueClass {
 }
 
 class MyClass {
-	@StarkMapIsValid() public dummyMap: Map<KeyClass | string, ValueClass | string> = new Map<KeyClass | string, ValueClass | string>();
+	@StarkMapIsValid()
+	public dummyMap: Map<KeyClass | string, ValueClass | string> = new Map<KeyClass | string, ValueClass | string>();
 }
 
 class SimpleClass {
-	@StarkMapIsValid() public name: string;
+	@StarkMapIsValid()
+	public name: string;
 }
 
 describe("ValidatorDecorator: StarkMapIsValid", () => {

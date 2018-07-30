@@ -7,11 +7,16 @@ import { StarkError, StarkErrorImpl } from "../../../common/error";
  * @ignore
  */
 export class StarkLogMessageImpl implements StarkLogMessage {
-	@serialize public timestamp: string;
-	@serialize public message: string;
-	@serializeAs(StarkLogMessageType) public type: StarkLogMessageType;
-	@serialize public correlationId: string;
-	@serializeAs(StarkErrorImpl) public error?: StarkError;
+	@serialize
+	public timestamp: string;
+	@serialize
+	public message: string;
+	@serializeAs(StarkLogMessageType)
+	public type: StarkLogMessageType;
+	@serialize
+	public correlationId: string;
+	@serializeAs(StarkErrorImpl)
+	public error?: StarkError;
 
 	public constructor(type: StarkLogMessageType, message: string, correlationId: string, error?: StarkError) {
 		this.timestamp = moment().format(); // ISO-8601 format

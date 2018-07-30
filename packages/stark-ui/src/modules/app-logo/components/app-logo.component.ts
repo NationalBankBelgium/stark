@@ -22,7 +22,8 @@ export class StarkAppLogoComponent implements OnInit {
 	/**
 	 * Params object to be passed to the UI router state defined as homeState.
 	 */
-	@Input() public homeStateParams?: { [property: string]: any };
+	@Input()
+	public homeStateParams?: { [property: string]: any };
 
 	/**
 	 * Class constructor

@@ -4,11 +4,13 @@ import { StarkIsBIC } from "./is-bic.validator.decorator";
 import { starkIsBICValidatorName } from "../../validators/is-bic";
 
 class MyClass {
-	@StarkIsBIC() public name: string;
+	@StarkIsBIC()
+	public name: string;
 }
 
 class SimpleClass {
-	@StarkIsBIC() public dummyObject: object;
+	@StarkIsBIC()
+	public dummyObject: object;
 }
 
 describe("ValidatorDecorator: StarkIsBIC", () => {

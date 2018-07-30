@@ -33,7 +33,8 @@ export class StarkTableColumnComponent {
 	/**
 	 * Adds class="stark-table-column" attribute on the host component
 	 */
-	@HostBinding("class") public class: string = "stark-table-column";
+	@HostBinding("class")
+	public class: string = "stark-table-column";
 
 	/**
 	 * Name of the property that will be the source of the column.
@@ -57,12 +58,14 @@ export class StarkTableColumnComponent {
 	 * @param obj1 - First object in the comparison
 	 * @param obj2 - Second object in the comparison
 	 */
-	@Input() public compareFn?: ((obj1: any, obj2: any) => number);
+	@Input()
+	public compareFn?: ((obj1: any, obj2: any) => number);
 
 	/**
 	 * Function that returns the raw value of this column in case the access to such value can't be provided via the column name.
 	 */
-	@Input() public dataAccessor?: ((data: any, name: string) => string); // TODO: really needed?
+	@Input()
+	public dataAccessor?: ((data: any, name: string) => string); // TODO: really needed?
 
 	/**
 	 * Function that returns a formatted value (string) to be set in the cell. It can be used to set different formats
@@ -71,59 +74,70 @@ export class StarkTableColumnComponent {
 	 * @param row - The row object that contains the cell
 	 * @param columnName - The column that the cell belongs to
 	 */
-	@Input() public cellFormatter?: ((value: any, row?: any, columnName?: string) => string);
+	@Input()
+	public cellFormatter?: ((value: any, row?: any, columnName?: string) => string);
 
 	/**
 	 * Sorting direction of the column.
 	 */
-	@Input() public sortDirection: StarkTableColumnSortingDirection;
+	@Input()
+	public sortDirection: StarkTableColumnSortingDirection;
 
 	/**
 	 * Whether this column is filterable
 	 */
-	@Input() public filterable: boolean = false;
+	@Input()
+	public filterable: boolean = false;
 
 	/**
 	 * Value of the filter
 	 * Wildcards can be used: "*" to match any anything and "?" to match one character.
 	 * Use "\*" and "\?" to match exactly the characters "*" and "?"
 	 */
-	@Input() public filterValue: string;
+	@Input()
+	public filterValue: string;
 
 	/**
 	 * Label to be shown as the column's header. Default: the column's name
 	 */
-	@Input() public headerLabel: string;
+	@Input()
+	public headerLabel: string;
 
 	/**
 	 * Whether the column is sortable or not. Default: true
 	 */
-	@Input() public sortable: boolean = false;
+	@Input()
+	public sortable: boolean = false;
 
 	/**
 	 * Priority of the column. Default: PERSIST
 	 */
-	@Input() public sortPriority: number;
+	@Input()
+	public sortPriority: number;
 
 	/**
 	 * Output that will emit a specific column whenever its filter value has changed
 	 */
-	@Output() public filterChanged: EventEmitter<StarkTableColumnComponent> = new EventEmitter<StarkTableColumnComponent>();
+	@Output()
+	public filterChanged: EventEmitter<StarkTableColumnComponent> = new EventEmitter<StarkTableColumnComponent>();
 
 	/**
 	 * Output that will emit a specific column whenever its sorting direction has changed
 	 */
-	@Output() public sortChanged: EventEmitter<StarkTableColumnComponent> = new EventEmitter<StarkTableColumnComponent>();
+	@Output()
+	public sortChanged: EventEmitter<StarkTableColumnComponent> = new EventEmitter<StarkTableColumnComponent>();
 
 	/**
 	 * Reference to the MatColumnDef embedded in this component
 	 */
-	@ViewChild(MatColumnDef) public columnDef: MatColumnDef;
+	@ViewChild(MatColumnDef)
+	public columnDef: MatColumnDef;
 
 	/**
 	 * Reference to the transcluded template in this component via the ngTemplateOutlet
 	 */
-	@ContentChild(TemplateRef) public columnTemplate: TemplateRef<any>;
+	@ContentChild(TemplateRef)
+	public columnTemplate: TemplateRef<any>;
 
 	/**
 	 * Returns the header label of the column if it's specified. If not, simply returns the name of the column

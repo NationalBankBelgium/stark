@@ -8,9 +8,11 @@ const componentName: string = "news-item-component";
 	templateUrl: "./news-item.component.html"
 })
 export class NewsItemComponent implements OnInit {
-	@Input() public release: string;
+	@Input()
+	public release: string;
 
-	@Input() public newsDate: string;
+	@Input()
+	public newsDate: string;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService) {}
 

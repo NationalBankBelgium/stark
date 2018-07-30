@@ -4,19 +4,22 @@ import { StarkIsBBAN } from "./is-bban.validator.decorator";
 import { starkIsBBANValidatorName } from "../../validators/is-bban";
 
 class MyClass {
-	@StarkIsBBAN("countryCode") public name: string;
+	@StarkIsBBAN("countryCode")
+	public name: string;
 
 	public countryCode: string;
 }
 
 class ClassWithoutCountryCode {
-	@StarkIsBBAN("countryCode") public name: string;
+	@StarkIsBBAN("countryCode")
+	public name: string;
 
 	public countryName: string;
 }
 
 class SimpleClass {
-	@StarkIsBBAN("countryCode") public dummyObject: object;
+	@StarkIsBBAN("countryCode")
+	public dummyObject: object;
 
 	public countryCode: string;
 }
