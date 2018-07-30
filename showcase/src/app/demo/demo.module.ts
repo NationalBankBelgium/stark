@@ -16,18 +16,22 @@ import { ActionBarComponent } from "./action-bar/action-bar.component";
 import { ButtonComponent } from "./button/button.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
+import { PrettyPrintComponent } from "./pretty-print/pretty-print.component";
 import { TableComponent } from "./table/table.component";
 import { SharedModule } from "../shared/shared.module";
 import {
 	StarkActionBarModule,
+	StarkKeyboardDirectivesModule,
+	StarkPrettyPrintModule,
 	StarkSliderModule,
 	StarkTableModule,
-	StarkSvgViewBoxModule,
-	StarkKeyboardDirectivesModule
+	StarkSvgViewBoxModule
 } from "@nationalbankbelgium/stark-ui";
 
 @NgModule({
 	imports: [
+		CommonModule,
+		FormsModule,
 		MatButtonModule,
 		MatCardModule,
 		MatFormFieldModule,
@@ -36,17 +40,30 @@ import {
 		MatTooltipModule,
 		MatSnackBarModule,
 		MatTabsModule,
-		CommonModule,
-		FormsModule,
 		TranslateModule,
 		SharedModule,
 		StarkActionBarModule,
+		StarkKeyboardDirectivesModule,
+		StarkPrettyPrintModule,
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
-		StarkKeyboardDirectivesModule,
 		StarkTableModule
 	],
-	declarations: [ActionBarComponent, ButtonComponent, ExampleViewerComponent, KeyboardDirectivesComponent, TableComponent],
-	exports: [ActionBarComponent, ButtonComponent, ExampleViewerComponent, KeyboardDirectivesComponent, TableComponent]
+	declarations: [
+		ActionBarComponent,
+		ButtonComponent,
+		ExampleViewerComponent,
+		KeyboardDirectivesComponent,
+		PrettyPrintComponent,
+		TableComponent
+	],
+	exports: [
+		ActionBarComponent,
+		ButtonComponent,
+		ExampleViewerComponent,
+		KeyboardDirectivesComponent,
+		PrettyPrintComponent,
+		TableComponent
+	]
 })
 export class DemoModule {}
