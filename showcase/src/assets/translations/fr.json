@@ -1,10 +1,22 @@
 {
   "SHOWCASE": {
+    "COMMON": {
+      "ENABLED": "Activé",
+      "VALUE": "Valuer"
+    },
     "DEMO": {
       "ACTION-BAR": {
         "CLASSIC-FULL": "Action Bar Classic Full",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "ALT": "Action Bar Alternative"
+      },
+      "BREADCRUMB": {
+        "CONFIG_INPUT": "Démonstration du breadcrumb component (avec breadcrumbConfig)",
+        "NO_INPUT": "Démonstration du breadcrumb component (sans paramètres)",
+        "ROOT": "Ancêtre racine",
+        "GRANDPARENT": "Grand-parent",
+        "PARENT": "Parent",
+        "CHILD": "Enfant"
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Filtre sur mesure",
@@ -14,6 +26,23 @@
       },
       "DATE_RANGE_PICKER": {
         "FULL": "Date Range Picker"
+      },
+      "DROPDOWNS": {
+        "PR": "Applications informatiques",
+        "IO": "Infrastructure et opérations informatiques",
+        "CS": "Services aux clients informatiques",
+        "REQUIRED": "Choix unique obligatoire",
+        "BLANK": "Option par défaut (blank)",
+        "MULTIPLE": "Choix multiple",
+        "MULTIPLE_REQUIRED": "Choix multiple obligatoire",
+        "DISABLED": "Dropdown désactivé",
+        "SELECTED_VALUE": "Valeur sélectionnée ",
+        "SELECTED_VALUES": "Valeurs sélectionnées ",
+        "SELECT_SERVICE": "Sélectionnez un service",
+        "SELECT_NUMBER": "Sélectionnez votre chiffre porte-bonheur",
+        "SELECT_SERVICES": "Sélectionnez un service ou plus",
+        "SELECT_ONE_SERVICE": "Sélectionnez au moins un service",
+        "SELECT_DISABLED": "Désolé, ce dropdown est désactivé"
       },
       "HEADER": {
         "TITLE": "Stark App Header Guidelines",
@@ -25,6 +54,10 @@
         "STARK_APP_BAR_CONTENT_CENTER": "<b>stark-app-bar-content-center</b> contient le logo de l'application",
         "STARK_APP_BAR_CONTENT_RIGHT": "<b>stark-app-bar-content-right</b> contient 3 conteneurs, le premier pour le App Data component et le boutton de déconnection, le second pour le choix de langue et <b>stark-app-bar-content-right-actions-alt</b> qui contient des actions alternatives.",
         "STARK_APP_BAR_PAGE_TITLE": "<b>stark-app-bar-page-title</b> affiche le titre de la page visitée."
+      },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Bouton logout - Icône par défaut",
+        "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom"
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
@@ -59,34 +92,11 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
-      "BREADCRUMB": {
-        "CONFIG_INPUT": "Démonstration du breadcrumb component (avec breadcrumbConfig)",
-        "NO_INPUT": "Démonstration du breadcrumb component (sans paramètres)",
-        "ROOT": "Ancêtre racine",
-        "GRANDPARENT": "Grand-parent",
-        "PARENT": "Parent",
-        "CHILD": "Enfant"
-      },
-      "DROPDOWNS": {
-        "PR": "Applications informatiques",
-        "IO": "Infrastructure et opérations informatiques",
-        "CS": "Services aux clients informatiques",
-        "REQUIRED": "Choix unique obligatoire",
-        "BLANK": "Option par défaut (blank)",
-        "MULTIPLE": "Choix multiple",
-        "MULTIPLE_REQUIRED": "Choix multiple obligatoire",
-        "DISABLED": "Dropdown désactivé",
-        "SELECTED_VALUE": "Valeur sélectionnée ",
-        "SELECTED_VALUES": "Valeurs sélectionnées ",
-        "SELECT_SERVICE": "Sélectionnez un service",
-        "SELECT_NUMBER": "Sélectionnez votre chiffre porte-bonheur",
-        "SELECT_SERVICES": "Sélectionnez un service ou plus",
-        "SELECT_ONE_SERVICE": "Sélectionnez au moins un service",
-        "SELECT_DISABLED": "Désolé, ce dropdown est désactivé"
-      },
-      "LOGOUT": {
-        "LOGOUT_DEFAULT_ICON": "Bouton logout - Icône par défaut",
-        "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom"
+      "SLIDER": {
+        "HORIZONTAL_RANGE_SLIDER": "Curseur de plage",
+        "SIMPLE_HORIZONTAL_SLIDER": "Curseur simple",
+        "SIMPLE_VERTICAL_SLIDER": "Curseur simple",
+        "VERTICAL_RANGE_SLIDER": "Curseur de plage"
       }
     },
     "STYLEGUIDE": {
