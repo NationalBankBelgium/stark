@@ -7,13 +7,24 @@
         "ALT": "Action Bar Alternative"
       },
       "KEYBOARD_DIRECTIVES": {
-        "ON_ENTER_KEY_DIRECTIVE": "On Enter Key Directive",
-        "DESCRIPTION": "Typ een waarde in de invulvelden en druk vervolgens op Enter om de callback functie te activeren",
-        "INPUT_WITH_CONTEXT": "Met verbonden context",
-        "INPUT_WITHOUT_CONTEXT": "Zonder verbonden context (verbonden waarden zijn niet toegankelijk)",
-        "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Zonder verbonden context maar doorgegeven als parameter",
-        "TYPE_AND_PRESS_ENTER": "Typ een waarde en druk Enter",
-        "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Typ een waarde, druk Enter en controleer de console"
+        "ON_ENTER_KEY": {
+          "TITLE": "On Enter Key Directive",
+          "DESCRIPTION": "Typ een waarde in de invulvelden en druk vervolgens op Enter om de callback functie te activeren",
+          "INPUT_WITH_CONTEXT": "Met verbonden context",
+          "INPUT_WITHOUT_CONTEXT": "Zonder verbonden context (verbonden waarden zijn niet toegankelijk)",
+          "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Zonder verbonden context maar doorgegeven als parameter",
+          "TYPE_AND_PRESS_ENTER": "Typ een waarde en druk Enter",
+          "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Typ een waarde, druk Enter en controleer de console"
+        },
+        "RESTRICT_INPUT": {
+          "TITLE": "Restrict Input Directive",
+          "DESCRIPTION": "Typ een waarde in de input velden en sommige karakters zullen niet toegelaten worden door de restricties die op het veld werden gezet.",
+          "INPUT_ONLY_NUMBERS": "Aanvaard enkel cijfers",
+          "INPUT_ALPHANUMERICAL_CHARACTERS": "Aanvaard enkel alfanumerische karakters",
+          "INPUT_NO_SPECIAL_CHARACTERS": "Aanvaard alle karakters, behalve speciale karakters",
+          "INPUT_UPPERCASE_CHARACTERS": "Aanvaard enkel hoofdletters",
+          "TYPE_A_VALUE": "Geef een waarde in"
+        }
       }
     }
   }

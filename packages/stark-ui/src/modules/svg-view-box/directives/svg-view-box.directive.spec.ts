@@ -1,7 +1,7 @@
 /*tslint:disable:completed-docs*/
 import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { StarkSvgViewBoxDirective } from "./svg-view-box.directive";
-import { Component, DebugElement, NO_ERRORS_SCHEMA } from "@angular/core";
+import { Component, DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 describe("SvgViewBoxDirective", () => {
@@ -33,8 +33,7 @@ describe("SvgViewBoxDirective", () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [StarkSvgViewBoxDirective, TestComponent],
-			schemas: [NO_ERRORS_SCHEMA]
+			declarations: [StarkSvgViewBoxDirective, TestComponent]
 		});
 	});
 
