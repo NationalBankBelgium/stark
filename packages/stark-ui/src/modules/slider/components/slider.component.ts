@@ -42,34 +42,40 @@ export class StarkSliderComponent implements AfterViewInit, OnChanges, OnInit {
 	/**
 	 * Adds class="stark-slider" attribute on the host component
 	 */
-	@HostBinding("class") public class: string = componentName;
+	@HostBinding("class")
+	public class: string = componentName;
 
 	/**
 	 * Whether the slider is disabled. Default: false
 	 */
-	@Input() public isDisabled?: boolean;
+	@Input()
+	public isDisabled?: boolean;
 
 	/**
 	 * Configuration object for the slider instance to be created.
 	 */
-	@Input() public sliderConfig: StarkSliderConfig;
+	@Input()
+	public sliderConfig: StarkSliderConfig;
 
 	/**
 	 * HTML "id" attribute of the element.
 	 */
-	@Input() public sliderId: string;
+	@Input()
+	public sliderId: string;
 
 	/**
 	 * Array of numeric values to be set to the slider.
 	 * For simple sliders with just one handle, the array should contain only one value.
 	 * For range sliders, the array should contain two or more values.
 	 */
-	@Input() public values: number[];
+	@Input()
+	public values: number[];
 
 	/**
 	 * Event to be emitted when the slider's value(s) change.
 	 */
-	@Output() public changed?: EventEmitter<number[]> = new EventEmitter();
+	@Output()
+	public changed?: EventEmitter<number[]> = new EventEmitter();
 
 	/**
 	 * Stores the latest value, to be able to see if values have been changed

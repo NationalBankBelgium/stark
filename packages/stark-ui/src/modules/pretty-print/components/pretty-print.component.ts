@@ -60,21 +60,25 @@ export class StarkPrettyPrintComponent implements OnChanges, OnInit {
 	/**
 	 * Adds class="stark-pretty-print" attribute on the host component
 	 */
-	@HostBinding("class") public class: string = componentName;
+	@HostBinding("class")
+	public class: string = componentName;
 	/**
 	 * The text to be pretty printed
 	 */
-	@Input() public data: string;
+	@Input()
+	public data: string;
 
 	/**
 	 * The format to be used to pretty print the data string
 	 */
-	@Input() public format: StarkPrettyPrintFormat;
+	@Input()
+	public format: StarkPrettyPrintFormat;
 
 	/**
 	 * If true, also highlight the pretty printed string
 	 */
-	@Input() public enableHighlighting?: boolean;
+	@Input()
+	public enableHighlighting?: boolean;
 
 	public prettyString: string;
 	public highlightingEnabled: boolean;

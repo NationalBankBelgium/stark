@@ -23,7 +23,8 @@ import { StarkSliderConfig } from "./slider-config.intf";
 					  (changed)="onValuesChange($event)"></stark-slider>`
 })
 class TestHostComponent {
-	@ViewChild(StarkSliderComponent) public sliderComponent: StarkSliderComponent;
+	@ViewChild(StarkSliderComponent)
+	public sliderComponent: StarkSliderComponent;
 
 	public sliderId: string;
 	public sliderValues: number[];

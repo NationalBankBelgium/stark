@@ -12,5 +12,6 @@ export class StarkHttpErrorImpl extends StarkHttpErrorBaseImpl implements StarkH
 		super(error);
 	}
 
-	@autoserializeAs(StarkHttpErrorDetailImpl) public errors: StarkHttpErrorDetail[];
+	@autoserializeAs(StarkHttpErrorDetailImpl)
+	public errors: StarkHttpErrorDetail[];
 }

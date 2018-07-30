@@ -4,11 +4,13 @@ import { StarkIsEstablishmentUnitNumber } from "./is-establishment-unit-number.v
 import { starkIsEstablishmentUnitNumberValidatorName } from "../../validators/is-establishment-unit-number";
 
 class MyClass {
-	@StarkIsEstablishmentUnitNumber() public name: string;
+	@StarkIsEstablishmentUnitNumber()
+	public name: string;
 }
 
 class SimpleClass {
-	@StarkIsEstablishmentUnitNumber() public dummyObject: object;
+	@StarkIsEstablishmentUnitNumber()
+	public dummyObject: object;
 }
 
 describe("ValidatorDecorator: StarkIsEstablishmentUnitNumber", () => {

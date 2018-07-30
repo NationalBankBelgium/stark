@@ -4,11 +4,13 @@ import { StarkIsKBO } from "./is-kbo.validator.decorator";
 import { starkIsKBOValidatorName } from "../../validators/is-kbo";
 
 class MyClass {
-	@StarkIsKBO() public name: string;
+	@StarkIsKBO()
+	public name: string;
 }
 
 class SimpleClass {
-	@StarkIsKBO() public dummyObject: object;
+	@StarkIsKBO()
+	public dummyObject: object;
 }
 
 describe("ValidatorDecorator: StarkIsKBO", () => {

@@ -1933,9 +1933,12 @@ class CustomSerializer implements StarkHttpSerializer<any> {
 const customSerializer: StarkHttpSerializer<MockResource> = new CustomSerializer();
 
 class MockCriteriaChildDetail {
-	@serialize public grandChildField1: (string | number)[];
-	@serialize public anotherUndefinedField: undefined;
-	@serialize public anotherEmptyField: string;
+	@serialize
+	public grandChildField1: (string | number)[];
+	@serialize
+	public anotherUndefinedField: undefined;
+	@serialize
+	public anotherEmptyField: string;
 
 	public constructor() {
 		this.grandChildField1 = ["someData", 123];
@@ -1945,12 +1948,16 @@ class MockCriteriaChildDetail {
 }
 
 class MockCriteriaDetail {
-	@serialize public childField1: Date;
-	@serializeAs(MockCriteriaChildDetail) public childField2: MockCriteriaChildDetail;
+	@serialize
+	public childField1: Date;
+	@serializeAs(MockCriteriaChildDetail)
+	public childField2: MockCriteriaChildDetail;
 	@serializeAs(stringMap())
 	public childField3: Map<string, any>;
-	@serialize public someUndefinedField: undefined;
-	@serialize public someEmptyField: string;
+	@serialize
+	public someUndefinedField: undefined;
+	@serialize
+	public someEmptyField: string;
 
 	public constructor() {
 		this.childField1 = mockDate;
@@ -1965,10 +1972,14 @@ class MockCriteriaDetail {
 }
 
 class MockCriteria {
-	@serialize public field1: string;
-	@serializeAs(MockCriteriaDetail) public field2: MockCriteriaDetail;
-	@serialize public undefinedField: undefined;
-	@serialize public emptyField: string;
+	@serialize
+	public field1: string;
+	@serializeAs(MockCriteriaDetail)
+	public field2: MockCriteriaDetail;
+	@serialize
+	public undefinedField: undefined;
+	@serialize
+	public emptyField: string;
 
 	public constructor() {
 		this.field1 = "anything";

@@ -20,7 +20,8 @@ import { StarkPrettyPrintComponent } from "./pretty-print.component";
 							[enableHighlighting]="enableHighlighting"></stark-pretty-print>`
 })
 class TestHostComponent {
-	@ViewChild(StarkPrettyPrintComponent) public prettyPrintComponent: StarkPrettyPrintComponent;
+	@ViewChild(StarkPrettyPrintComponent)
+	public prettyPrintComponent: StarkPrettyPrintComponent;
 
 	public data: string;
 	public format: string;

@@ -42,7 +42,8 @@ export class StarkTableMultisortDialogComponent implements OnInit {
 	/**
 	 * Adds class="stark-table-dialog-multisort" attribute on the host component
 	 */
-	@HostBinding("class") public class: string = "stark-table-dialog-multisort";
+	@HostBinding("class")
+	public class: string = "stark-table-dialog-multisort";
 
 	/**
 	 * Array of sorting rules currently applied

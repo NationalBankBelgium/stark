@@ -20,7 +20,8 @@ export class StarkSvgViewBoxDirective implements AfterViewChecked {
 	 * Width and height to be set to the 'viewBox' attribute of the SVG element.
 	 */
 	/* tslint:disable:no-input-rename */
-	@Input("starkSvgViewBox") private viewBoxSize: number;
+	@Input("starkSvgViewBox")
+	private viewBoxSize: number;
 
 	/**
 	 * Default value for the width and height of the 'viewBox' attribute if it is not given as an input.

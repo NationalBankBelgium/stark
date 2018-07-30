@@ -4,11 +4,13 @@ import { StarkMapNotEmpty } from "./map-not-empty.validator.decorator";
 import { starkMapNotEmptyValidatorName } from "../../validators/map-not-empty";
 
 class MyClass {
-	@StarkMapNotEmpty() public dummyMap: Map<string, string> = new Map<string, string>();
+	@StarkMapNotEmpty()
+	public dummyMap: Map<string, string> = new Map<string, string>();
 }
 
 class SimpleClass {
-	@StarkMapNotEmpty() public name: string;
+	@StarkMapNotEmpty()
+	public name: string;
 }
 
 describe("ValidatorDecorator: StarkMapNotEmpty", () => {
