@@ -24,20 +24,20 @@
           "INPUT_NO_SPECIAL_CHARACTERS": "Aanvaard alle karakters, behalve speciale karakters",
           "INPUT_UPPERCASE_CHARACTERS": "Aanvaard enkel hoofdletters",
           "TYPE_A_VALUE": "Geef een waarde in"
-        },
-        "PRETTY-PRINT": {
-          "ORIGINAL_CODE": "Originele Code",
-          "PRETTY_PRINTED": "Geformatteerd",
-          "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Geformatteerd en gehighlight",
-          "CSS": "Pretty-Print CSS",
-          "HTML": "Pretty-Print HTML",
-          "JAVASCRIPT": "Pretty-Print JAVASCRIPT",
-          "JSON": "Pretty-Print JSON",
-          "SCSS": "Pretty-Print SCSS",
-          "SQL": "Pretty-Print SQL",
-          "TYPESCRIPT": "Pretty-Print TYPESCRIPT",
-          "XML": "Pretty-Print XML"
         }
+      },
+      "PRETTY-PRINT": {
+        "ORIGINAL_CODE": "Originele Code",
+        "PRETTY_PRINTED": "Geformatteerd",
+        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Geformatteerd en gehighlight",
+        "CSS": "Pretty-Print CSS",
+        "HTML": "Pretty-Print HTML",
+        "JAVASCRIPT": "Pretty-Print Javascript",
+        "JSON": "Pretty-Print JSON",
+        "SCSS": "Pretty-Print SCSS",
+        "SQL": "Pretty-Print SQL",
+        "TYPESCRIPT": "Pretty-Print Typescript",
+        "XML": "Pretty-Print XML"
       }
     }
   }
