@@ -24,20 +24,20 @@
           "INPUT_NO_SPECIAL_CHARACTERS": "Accepter tous les caractères sauf les caractères spéciaux",
           "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules",
           "TYPE_A_VALUE": "Taper une valeur"
-        },
-        "PRETTY-PRINT": {
-          "ORIGINAL_CODE": "Code original",
-          "PRETTY_PRINTED": "Formaté",
-          "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Formaté avec surbrillance",
-          "CSS": "Pretty-Print CSS",
-          "HTML": "Pretty-Print HTML",
-          "JAVASCRIPT": "Pretty-Print JAVASCRIPT",
-          "JSON": "Pretty-Print JSON",
-          "SCSS": "Pretty-Print SCSS",
-          "SQL": "Pretty-Print SQL",
-          "TYPESCRIPT": "Pretty-Print TYPESCRIPT",
-          "XML": "Pretty-Print XML"
         }
+      },
+      "PRETTY-PRINT": {
+        "ORIGINAL_CODE": "Code original",
+        "PRETTY_PRINTED": "Formaté",
+        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Formaté avec surbrillance",
+        "CSS": "Pretty-Print CSS",
+        "HTML": "Pretty-Print HTML",
+        "JAVASCRIPT": "Pretty-Print Javascript",
+        "JSON": "Pretty-Print JSON",
+        "SCSS": "Pretty-Print SCSS",
+        "SQL": "Pretty-Print SQL",
+        "TYPESCRIPT": "Pretty-Print Typescript",
+        "XML": "Pretty-Print XML"
       }
     }
   }
