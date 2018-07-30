@@ -60,7 +60,7 @@ import { AppState } from "./app.service";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
 import { DemoModule } from "./demo";
-
+import { NewsModule } from "./news";
 /* tslint:disable:no-import-side-effect */
 // load PostCSS styles
 import "../styles/styles.pcss";
@@ -165,6 +165,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkRoutingModule.forRoot(),
 		SharedModule,
 		DemoModule,
+		NewsModule,
 		StarkAppLogoModule,
 		StarkSvgViewBoxModule
 	],

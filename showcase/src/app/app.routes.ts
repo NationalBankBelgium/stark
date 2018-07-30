@@ -10,8 +10,10 @@ import {
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
 import { Ng2StateDeclaration } from "@uirouter/angular";
+import { NewsComponent } from "./news";
 
 export const APP_STATES: Ng2StateDeclaration[] = [
+	{ name: "news", url: "/news", component: NewsComponent },
 	{ name: "home", url: "/", component: HomeComponent },
 	{ name: "demo-action-bar", url: "/demo/action-bar", component: ActionBarComponent },
 	{ name: "demo-button", url: "/demo/button", component: ButtonComponent },

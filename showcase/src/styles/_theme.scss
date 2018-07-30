@@ -7,6 +7,9 @@
 @import "~@nationalbankbelgium/stark-ui/assets/themes/menu-theme";
 @import "~@nationalbankbelgium/stark-ui/assets/themes/app-header-theme";
 
+@import "~@nationalbankbelgium/stark-ui/src/modules/action-bar/components/action-bar-theme";
+@import "~@nationalbankbelgium/stark-ui/src/modules/action-bar/components/action-bar.component";
+@import "../app/news/news-component/news.component";
 @import "../app/shared/example-viewer/example-viewer-theme";
 
 /* Stark components */
@@ -15,6 +18,3 @@
 
 @import "~@nationalbankbelgium/stark-ui/src/modules/table/components/table.component";
 @import "~@nationalbankbelgium/stark-ui/src/modules/table/components/dialogs/multisort.component";
-
-@import "~@nationalbankbelgium/stark-ui/src/modules/action-bar/components/action-bar-theme";
-@import "~@nationalbankbelgium/stark-ui/src/modules/action-bar/components/action-bar.component";
