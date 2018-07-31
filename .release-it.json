@@ -3,7 +3,7 @@
 	"dry-run": false,
 	"verbose": false,
 	"force": false,
-	"pkgFiles": ["package.json"],
+	"pkgFiles": ["package.json", "package-lock.json"],
 	"increment": "conventional:angular",
 	"beforeChangelogCommand": "npm run generate:changelog",
 	"changelogCommand": "npm run generate:changelog-recent",
