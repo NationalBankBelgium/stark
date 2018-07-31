@@ -4,6 +4,8 @@ let path = require("path");
 const filesToChange = [
 	/index.html/,
 	/main.*\.css$/,
+	/main.*\.js$/,
+	/main.*\.js\.map$/,
 	/runtime~main.*\.js$/,
 	/runtime~main.*\.js\.map$/,
 	/runtime~polyfills.*\.js$/,
@@ -24,10 +26,10 @@ let urlWithTrailingSlash = deployDir.endsWith("/") ? deployDir : deployDir + "/"
 let urlWithoutTrailingSlash = deployDir.endsWith("/") ? deployDir.substring(0, deployDir.length - 1) : deployDir;
 
 let replacements = [
+	{ searchValue: `/${baseHrefPlaceholder}/${deployUrlPlaceholder}/`, replaceValue: urlWithTrailingSlash },
 	{ searchValue: `"${baseHrefPlaceholder}"`, replaceValue: `"${urlWithTrailingSlash}"` },
-	{ searchValue: `"${deployUrlPlaceholder}"`, replaceValue: `"${urlWithoutTrailingSlash}"` },
 	{ searchValue: `"${deployUrlPlaceholder}/`, replaceValue: `"${urlWithTrailingSlash}` },
-	{ searchValue: `/${baseHrefPlaceholder}/${deployUrlPlaceholder}/`, replaceValue: urlWithTrailingSlash }
+	{ searchValue: `${deployUrlPlaceholder}`, replaceValue: urlWithoutTrailingSlash }
 ];
 
 // if the 3rd param is given (oldDeployDir) then it will be appended to the "showcase" folder and replaced by the new deployDir
