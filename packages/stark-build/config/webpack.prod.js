@@ -23,12 +23,12 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const HashedModuleIdsPlugin = require("webpack/lib/HashedModuleIdsPlugin");
 
-function getUglifyOptions(supportES2015) {
+function getUglifyOptions(supportES2015, isTestCIEnv = false) {
 	const uglifyCompressOptions = {
 		pure_getters: true /* buildOptimizer */,
 		// PURE comments work best with 3 passes.
 		// See https://github.com/webpack/webpack/issues/2899#issuecomment-317425926.
-		passes: 3 /* buildOptimizer */
+		passes: isTestCIEnv ? 1 : 3 /* buildOptimizer */
 	};
 
 	return {
@@ -45,7 +45,7 @@ function getUglifyOptions(supportES2015) {
 	};
 }
 
-module.exports = function() {
+module.exports = function () {
 	const ENV = (process.env.NODE_ENV = process.env.ENV = "production");
 	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {
 		HOST: process.env.HOST || "localhost",
@@ -54,9 +54,10 @@ module.exports = function() {
 		HMR: false,
 		environment: buildUtils.DEFAULT_METADATA.E2E ? "e2e.prod" : "prod"
 	});
+	const isTestCIEnv = helpers.hasProcessFlag("test-ci-env");
 	const supportES2015 = buildUtils.supportES2015(METADATA.TS_CONFIG_PATH);
 
-	return webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
+	const webpackConfig = webpackMerge(commonConfig({ENV: ENV, metadata: METADATA}), {
 		/**
 		 * Stats lets you precisely control what bundle information gets displayed
 		 * reference: https://webpack.js.org/configuration/stats/
@@ -70,8 +71,6 @@ module.exports = function() {
 		},
 
 		mode: "production",
-
-		devtool: "source-map",
 
 		// reference: https://medium.com/webpack/webpack-4-mode-and-optimization-5423a6bc597a
 		optimization: {
@@ -97,8 +96,9 @@ module.exports = function() {
 				 */
 				new UglifyJsPlugin({
 					parallel: true, // use multi-process parallel running to improve the build speed (default concurrent processes: os.cpus().length - 1)
-					sourceMap: true, // useful to still be able to debug in production
-					uglifyOptions: getUglifyOptions(supportES2015)
+					sourceMap: !isTestCIEnv, // useful to still be able to debug in production
+					uglifyOptions: getUglifyOptions(supportES2015),
+					cache: true
 				}),
 				// other options than Uglify: BabelifyMinifyWebpackPlugin or ClosureCompilerPlugin
 
@@ -333,4 +333,10 @@ module.exports = function() {
 			})
 		]
 	});
+
+	if (!isTestCIEnv) {
+		webpackConfig.devtool = "source-map";
+	}
+
+	return webpackConfig;
 };

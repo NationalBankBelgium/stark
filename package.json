@@ -68,6 +68,7 @@
     "build:stark-ui": "npm run build -- --packages=stark-ui",
     "build:showcase": "cd showcase && npm run build:prod && cd ..",
     "build:showcase:ghpages": "cd showcase && npm run build:prod:ghpages && cd ..",
+    "build:showcase:ghpages:test-ci-env": "cd showcase && npm run build:prod:ghpages:test-ci-env && cd ..",
     "clean": "npx rimraf ./dist",
     "clean:all": "npm run clean && npm run clean:stark-build && npm run clean:stark-core && npm run clean:stark-ui && npm run clean:stark-testing && npm run clean:starter && npm run clean:showcase",
     "clean:stark-build": "cd packages/stark-build && npm run clean && cd ../..",
