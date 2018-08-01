@@ -1,7 +1,7 @@
 <example-viewer *ngFor="let fileType of fileTypes; trackBy: trackFileTypes"
 				[extensions]="['HTML', 'SCSS', 'TS']"
 				[filesPath]="fileType.path"
-				[title]="fileType.title">
+				[exampleTitle]="fileType.title">
 	<mat-tab-group>
 		<mat-tab label="{{ 'SHOWCASE.DEMO.PRETTY-PRINT.ORIGINAL_CODE'  | translate }}">
 			<div class="code-block">{{ fileType.rawData }}</div>

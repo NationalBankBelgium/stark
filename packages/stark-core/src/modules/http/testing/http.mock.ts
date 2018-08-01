@@ -6,6 +6,7 @@ import {
 } from "@nationalbankbelgium/stark-core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+
 /**
  * Mock class of the StarkHttpService interface.
  * @link StarkHttpService
@@ -15,7 +16,17 @@ export class MockStarkHttpService implements StarkHttpService<any> {
 	 * Gets the core Angular HTTP API (HttpClient)
 	 * @returns Angular Http client
 	 */
-	public readonly rawHttpClient: HttpClient;
+	public readonly rawHttpClient: HttpClient = jasmine.createSpyObj("rawHttpClient", [
+		"request",
+		"delete",
+		"get",
+		"head",
+		"jsonp",
+		"options",
+		"patch",
+		"post",
+		"put"
+	]);
 
 	/**
 	 * Executes requests to fetch a single resource
