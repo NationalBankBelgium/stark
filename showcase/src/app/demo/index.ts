@@ -9,6 +9,7 @@ export * from "./dropdown";
 export * from "./example-viewer";
 export * from "./header";
 export * from "./keyboard-directives";
+export * from "./language-selector";
 export * from "./pretty-print";
 export * from "./slider";
 export * from "./table";

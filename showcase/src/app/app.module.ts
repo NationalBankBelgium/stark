@@ -10,11 +10,11 @@ import { EffectsModule } from "@ngrx/effects";
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatIconRegistry } from "@angular/material";
+import { MatIconRegistry, MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -48,6 +48,7 @@ import {
 	StarkAppLogoutModule,
 	StarkAppSidebarModule,
 	StarkBreadcrumbModule,
+	StarkLanguageSelectorModule,
 	StarkSvgViewBoxModule,
 	StarkDatePickerModule
 } from "@nationalbankbelgium/stark-ui";
@@ -151,6 +152,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		BrowserAnimationsModule,
 		FormsModule,
 		MatButtonModule,
+		MatButtonToggleModule,
 		MatCardModule,
 		MatCheckboxModule,
 		MatIconModule,
@@ -187,6 +189,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkAppLogoModule,
 		StarkAppLogoutModule,
 		StarkAppSidebarModule.forRoot(),
+		StarkLanguageSelectorModule,
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
 		StarkBreadcrumbModule

@@ -89,6 +89,10 @@
           "TYPE_A_VALUE": "Type a value"
         }
       },
+      "LANGUAGE-SELECTOR": {
+        "DROPDOWN": "Language selector in 'dropdown' mode",
+        "TOOLBAR": "Language selector in 'toolbar' mode"
+      },
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
         "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon"

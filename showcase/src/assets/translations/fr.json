@@ -69,10 +69,6 @@
         "STARK_APP_BAR_CONTENT_RIGHT": "<b>stark-app-bar-content-right</b> contient 3 conteneurs, le premier pour le App Data component et le boutton de déconnection, le second pour le choix de langue et <b>stark-app-bar-content-right-actions-alt</b> qui contient des actions alternatives.",
         "STARK_APP_BAR_PAGE_TITLE": "<b>stark-app-bar-page-title</b> affiche le titre de la page visitée."
       },
-      "LOGOUT": {
-        "LOGOUT_DEFAULT_ICON": "Bouton logout - Icône par défaut",
-        "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom"
-      },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
           "TITLE": "On Enter Key Directive",
@@ -92,6 +88,14 @@
           "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules",
           "TYPE_A_VALUE": "Taper une valeur"
         }
+      },
+      "LANGUAGE-SELECTOR": {
+        "DROPDOWN": "Sélecteur de langue en mode 'dropdown'",
+        "TOOLBAR": "Sélecteur de langue en mode 'toolbar'"
+      },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Bouton logout - Icône par défaut",
+        "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom"
       },
       "PRETTY-PRINT": {
         "CSS": "Pretty-Print CSS",

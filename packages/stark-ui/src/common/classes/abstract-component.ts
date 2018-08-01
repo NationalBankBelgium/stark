@@ -8,7 +8,7 @@ export abstract class AbstractStarkUiComponent implements OnInit {
 	 * Color theme
 	 */
 	@Input()
-	protected color?: string;
+	public color?: string; // Needs to be public for Angular to be able to read this property inside the template.
 
 	protected constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {}
 

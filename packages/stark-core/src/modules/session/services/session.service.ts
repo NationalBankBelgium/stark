@@ -8,7 +8,7 @@ import { select, Store } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
 import { validateSync } from "class-validator";
 import { defer, Observable, Subject } from "rxjs";
-import { map, take, distinct } from "rxjs/operators";
+import { map, take, distinctUntilChanged } from "rxjs/operators";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { StarkSessionService, starkSessionServiceName } from "./session.service.intf";
@@ -326,14 +326,14 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	public getCurrentUser(): Observable<StarkUser | undefined> {
 		return this.session$.pipe(
 			map((session: StarkSession) => session.user),
-			distinct() // using distinct to make sure to only emit on unique values, to prevent infinite loops.
+			distinctUntilChanged() // using distinctUntilChanged to make sure to only emit on values different from the last one, to prevent infinite loops.
 		);
 	}
 
 	public getCurrentLanguage(): Observable<string> {
 		return this.session$.pipe(
 			map((session: StarkSession) => session.currentLanguage),
-			distinct() // using distinct to make sure to only emit on unique values, to prevent infinite loops.
+			distinctUntilChanged() // using distinctUntilChanged to make sure to only emit on values different from the last one, to prevent infinite loops.
 		);
 	}
 
@@ -342,7 +342,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		this.store.dispatch(new StarkChangeLanguage(newLanguage));
 
 		defer(() => this.translateService.use(newLanguage)).subscribe(
-			(languageId: string) => this.store.dispatch(new StarkChangeLanguageSuccess(languageId)),
+			(_translations: any) => this.store.dispatch(new StarkChangeLanguageSuccess(newLanguage)),
 			(error: any) => this.store.dispatch(new StarkChangeLanguageFailure(error))
 		);
 	}

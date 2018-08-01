@@ -16,6 +16,7 @@ const globals = {
 	"@angular/forms": "ng.forms",
 	"@angular/material": "ngMaterial",
 	"@angular/material/button": "ngMaterial.button",
+	"@angular/material/button-toggle": "ngMaterial.buttonToggle",
 	"@angular/material/checkbox": "ngMaterial.checkbox",
 	"@angular/material/core": "ngMaterial.core",
 	"@angular/material/dialog": "ngMaterial.dialog",
