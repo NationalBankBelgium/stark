@@ -7,6 +7,9 @@ export const translationsNl: object = {
 			FROM: "Van",
 			TO: "Tot"
 		},
+		APP_LOGOUT: {
+			TITLE: "Afmelden"
+		},
 		LANGUAGES: {
 			EN: "English",
 			FR: "Français",
@@ -19,6 +22,7 @@ export const translationsNl: object = {
 		},
 		ICONS: {
 			ADD_ITEM: "Toevoegen",
+			APP_DATA: "App data",
 			EDIT_ITEM: "Wijzig",
 			DELETE_ITEM: "Verwijder",
 			APPROVE_ITEM: "Goedkeuren",

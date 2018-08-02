@@ -15,6 +15,17 @@
       "DATE_RANGE_PICKER": {
         "FULL": "Date Range Picker"
       },
+      "HEADER": {
+        "TITLE": "Stark App Header Guidelines",
+        "INTRO": "Stark provides you usefull classes to implement your application header. You just need to include the header theme in your SCSS",
+        "COPY_PASTE": "Then you can copy/paste this HTML into your code",
+        "STARK_APP_HEADER": "The <b>stark-app-header</b> provide a background to the header",
+        "STARK_APP_BAR": "The <b>stark-app-bar</b> contains three content containers <b>stark-app-bar-content-left</b>, <b>stark-app-bar-content-center</b>, <b>stark-app-bar-content-right</b> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <b>stark-app-bar</b> also provides a <b>stark-app-bar-page-title</b> which is placed on the bottom left of the header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<b>stark-app-bar-content-left</b> contains <b>stark-actions</b> for the navigation actions.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<b>stark-app-bar-content-center</b> contains the app logo.",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<b>stark-app-bar-content-right</b> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <b>stark-app-bar-content-right-actions-alt</b> which contains some alternative actions.",
+        "STARK_APP_BAR_PAGE_TITLE": "<b>stark-app-bar-page-title</b> displays the current page title."
+      },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
           "TITLE": "On Enter Key Directive",
@@ -48,6 +59,9 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       }
+    },
+    "STYLEGUIDE": {
+      "TITLE": "Stijlgids"
     }
   }
 }

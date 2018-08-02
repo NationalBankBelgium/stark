@@ -15,6 +15,17 @@
       "DATE_RANGE_PICKER": {
         "FULL": "Date Range Picker"
       },
+      "HEADER": {
+        "TITLE": "Stark App Header Guidelines",
+        "INTRO": "Stark fournit des classes utiles pour implémenter le header de votre application. Il suffit d'inclure le theme du header dans votre SCSS",
+        "COPY_PASTE": "Ensuite il faut copier/coller ce bout de code HTML",
+        "STARK_APP_HEADER": "Le <b>stark-app-header</b> ajoute un fond au header",
+        "STARK_APP_BAR": "Le <b>stark-app-bar</b> est composé de 3 conteneurs de contenu <b>stark-app-bar-content-left</b>, <b>stark-app-bar-content-center</b>, <b>stark-app-bar-content-right</b> qui divisent le header en 3 parties. Tous les enfants directes de ces 3 conteneurs sont alignés dans une colonne. <b>stark-app-bar</b> contient aussi un <b>stark-app-bar-page-title</b> placé dans le coin gauche en bas du header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<b>stark-app-bar-content-left</b> contient <b>stark-actions</b> pour les actions concernant la navigation.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<b>stark-app-bar-content-center</b> contient le logo de l'application",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<b>stark-app-bar-content-right</b> contient 3 conteneurs, le premier pour le App Data component et le boutton de déconnection, le second pour le choix de langue et <b>stark-app-bar-content-right-actions-alt</b> qui contient des actions alternatives.",
+        "STARK_APP_BAR_PAGE_TITLE": "<b>stark-app-bar-page-title</b> affiche le titre de la page visitée."
+      },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
           "TITLE": "On Enter Key Directive",
@@ -48,6 +59,9 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       }
+    },
+    "STYLEGUIDE": {
+      "TITLE": "Guide de style"
     }
   }
 }

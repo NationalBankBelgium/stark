@@ -1,6 +1,7 @@
 /* tslint:disable:completed-docs*/
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, TestBed, ComponentFixture } from "@angular/core/testing";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 
 /**
  * Load the implementations that should be tested
@@ -19,8 +20,9 @@ describe(`App`, () => {
 		return (
 			TestBed.configureTestingModule({
 				declarations: [AppComponent],
+				imports: [TranslateModule.forRoot()],
 				schemas: [NO_ERRORS_SCHEMA],
-				providers: [AppState]
+				providers: [AppState, TranslateService]
 			})
 				/**
 				 * Compile template and css
