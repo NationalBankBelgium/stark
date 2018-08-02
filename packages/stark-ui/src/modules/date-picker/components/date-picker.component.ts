@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
-import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from "@angular/material";
+import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from "@angular/material/datepicker";
 import moment from "moment";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";

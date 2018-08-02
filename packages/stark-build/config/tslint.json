@@ -165,7 +165,7 @@
       }
     ],
     "no-magic-numbers": false,
-    "import-blacklist": true,
+    "import-blacklist": [true, "@angular/material", "lodash"],
     "ordered-imports": false,
     "max-classes-per-file": false, // [true, 1],
     "prefer-for-of": true,

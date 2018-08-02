@@ -126,28 +126,7 @@ module.exports = options => {
 			/**
 			 * An array of directory names to be resolved to the current directory
 			 */
-			modules: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot), helpers.root("node_modules")],
-
-			/**
-			 * Add support for pipeable operators.
-			 *
-			 * For existing codebase a refactor is required.
-			 * All rxjs operator imports (e.g. `import 'rxjs/add/operator/map'` or `import { map } from `rxjs/operator/map'`
-			 * must change to `import { map } from 'rxjs/operators'` (note that all operators are now under that import.
-			 * Additionally some operators have changed to to JS keyword constraints (do => tap, catch => catchError)
-			 *
-			 * Remember to use the `pipe()` method to chain operators, this functionally makes pipeable operators similar to
-			 * the old operators usage paradigm.
-			 *
-			 * For more details see:
-			 * https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md#build-and-treeshaking
-			 *
-			 * If you are not planning on refactoring your codebase (or not planning on using imports from `rxjs/operators`
-			 * comment out this line.
-			 *
-			 * BE AWARE that not using pipeable operators will probably result in significant payload added to your bundle.
-			 */
-			alias: buildUtils.rxjsAlias(supportES2015)
+			modules: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot), helpers.root("node_modules")]
 		},
 
 		optimization: {

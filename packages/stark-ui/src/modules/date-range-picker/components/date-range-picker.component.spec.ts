@@ -1,6 +1,8 @@
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { EventEmitter } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
@@ -19,6 +21,9 @@ describe("DateRangePickerComponent", () => {
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
+				{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
+				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
 				TranslateService
 			]
 		}).compileComponents();

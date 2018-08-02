@@ -1,12 +1,14 @@
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { EventEmitter } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { MatDatepickerModule, MatInputModule } from "@angular/material";
-import { MatMomentDateModule } from "@angular/material-moment-adapter";
-import { StarkDatePickerComponent } from "./date-picker.component";
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatInputModule } from "@angular/material/input";
+import { MatMomentDateModule, MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from "@angular/material-moment-adapter";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { EventEmitter } from "@angular/core";
+import { StarkDatePickerComponent } from "./date-picker.component";
 
 describe("DatePickerComponent", () => {
 	let fixture: ComponentFixture<StarkDatePickerComponent>;
@@ -15,10 +17,13 @@ describe("DatePickerComponent", () => {
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			declarations: [StarkDatePickerComponent],
-			imports: [BrowserAnimationsModule, MatDatepickerModule, MatInputModule, MatMomentDateModule, TranslateModule.forRoot()],
+			imports: [NoopAnimationsModule, MatDatepickerModule, MatInputModule, MatMomentDateModule, TranslateModule.forRoot()],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
+				{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
+				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
 				TranslateService
 			]
 		}).compileComponents();

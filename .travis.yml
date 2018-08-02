@@ -16,7 +16,6 @@ before_install:
   - echo $AUTHOR_NAME
   - export TZ=Europe/Brussels
   - npm i -g npm@5.8.0
-  - npm i -g greenkeeper-lockfile@2.4.0
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
   - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
@@ -44,9 +43,6 @@ cache:
   directories:
     - $HOME/.npm
 
-before_script:
-  - greenkeeper-lockfile-update
-
 # Not needed since we use Puppeteer in karma.conf.ci.js
 # It downloads Chrome itself and works with or without Travis
 #addons:
@@ -63,4 +59,3 @@ script:
 
 after_success:
   - npm run test:ci:coveralls:combined
-  - greenkeeper-lockfile-upload
