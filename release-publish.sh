@@ -29,7 +29,7 @@ EXPECTED_NODE_VERSION="8"
 #mkdir -p ${LOGS_DIR}
 #touch ${LOGS_DIR}/build-perf.log
 #NPM_TOKEN="dummy"
-#TRAVIS=1
+#TRAVIS=true
 #TRAVIS_REPO_SLUG="NationalBankBelgium/stark"
 #TRAVIS_NODE_VERSION="8"
 
@@ -90,7 +90,7 @@ logTrace "ROOT_PACKAGES_DIR: ${ROOT_PACKAGES_DIR}" 1
 
 travisFoldStart "publish checks" "no-xtrace"
 
-if [[ ${TRAVIS:-} ]]; then
+if [[ ${TRAVIS} == true ]]; then
   logInfo "Publishing to npm";
   logInfo "============================================="
   
