@@ -15,7 +15,7 @@ function travisFoldStart() {
   travisFoldStack+=("${sanitizedFoldName}|${foldStartTime}")
 
   echo ""
-  if [[ ${TRAVIS:-} ]]; then
+  if [[ ${TRAVIS} == true ]]; then
     echo "travis_fold:start:${sanitizedFoldName}"
     echo "travis_time:start:${sanitizedFoldName}"
   fi
@@ -44,7 +44,7 @@ function travisFoldEnd() {
   local lastFoldArray=(${lastFoldString//\|/ })
   local lastSanitizedFoldName=${lastFoldArray[0]}
 
-  if [[ ${TRAVIS:-} ]]; then
+  if [[ ${TRAVIS} == true ]]; then
     local lastFoldStartTime=${lastFoldArray[1]}
     local foldFinishTime=$(date +%s%N)
     local foldDuration=$(expr ${foldFinishTime} - ${lastFoldStartTime})
@@ -67,7 +67,7 @@ function travisFoldEnd() {
   # keep all messages consistently wide 80chars regardless of the foldName
   echo ${returnArrow:0:100}
   echo ""
-  if [[ ${TRAVIS:-} ]]; then
+  if [[ ${TRAVIS} == true ]]; then
     echo "travis_time:end:${sanitizedFoldName}:start=${lastFoldStartTime},finish=${foldFinishTime},duration=${foldDuration}"
     echo "travis_fold:end:${sanitizedFoldName}"
   fi

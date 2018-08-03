@@ -8,8 +8,6 @@ sudo: false # better for performance
 
 before_install:
   - export TZ=Europe/Brussels
-  # TODO remove this variable as it's probably not needed (defined by travis by default?): https://docs.travis-ci.com/user/environment-variables/
-  - TRAVIS=1 # used by build.sh
   - npm i -g npm@5.8.0
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ ]]; then npm i -g greenkeeper-lockfile; fi
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project

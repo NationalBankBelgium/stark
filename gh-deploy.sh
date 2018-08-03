@@ -39,7 +39,7 @@ LATEST_DIR_NAME="latest"
 #mkdir -p ${LOGS_DIR}
 #touch ${LOGS_DIR}/build-perf.log
 #DRY_RUN=true
-#TRAVIS=1
+#TRAVIS=true
 #TRAVIS_NODE_VERSION="8"
 #TRAVIS_COMMIT=${COMMIT_HASH}
 #TRAVIS_REPO_SLUG="NationalBankBelgium/stark" # yes we're always on the correct repo
@@ -130,7 +130,7 @@ mkdir -p ${DOCS_WORK_DIR}
 
 travisFoldStart "docs publication checks" "no-xtrace"
 
-if [[ ${TRAVIS:-} ]]; then
+if [[ ${TRAVIS} == true ]]; then
   logInfo "Publishing docs to GH pages";
   logInfo "============================================="
 
@@ -246,7 +246,7 @@ fi
 
 logTrace "Version for which we are producing docs: ${DOCS_VERSION}"
 
-if [[ ${TRAVIS:-} ]]; then
+if [[ ${TRAVIS} == true ]]; then
     logTrace "Configuring Git for Travis"
     git config user.name ${COMMIT_AUTHOR_USERNAME}
     git config user.email ${COMMIT_AUTHOR_EMAIL}
