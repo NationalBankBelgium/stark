@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { STARK_HTTP_SERVICE, StarkHttpService } from "@nationalbankbelgium/stark-core";
 
 @Injectable()
 export class FileService {
-	public constructor(private http: HttpClient) {}
+	public constructor(@Inject(STARK_HTTP_SERVICE) private httpService: StarkHttpService<any>) {}
 
 	public fetchFile(path: string): Observable<string> {
-		return this.http.get(path, { responseType: "text" });
+		return this.httpService.rawHttpClient.get(path, { responseType: "text" });
 	}
 }
