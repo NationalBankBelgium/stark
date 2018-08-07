@@ -15,8 +15,8 @@ before_install:
   - AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
   - echo $AUTHOR_NAME
   - export TZ=Europe/Brussels
-  - npm i -g npm@5.8.0
-  - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm i -g greenkeeper-lockfile; fi
+  - npm i -g npm@6.3.0
+  - npm i -g greenkeeper-lockfile
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
   - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
@@ -44,7 +44,7 @@ cache:
     - $HOME/.npm
 
 before_script:
-  - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then greenkeeper-lockfile-update; fi
+  - greenkeeper-lockfile-update
 
 # Not needed since we use Puppeteer in karma.conf.ci.js
 # It downloads Chrome itself and works with or without Travis
@@ -62,4 +62,5 @@ script:
 
 after_success:
   - npm run test:ci:coveralls:combined
-  - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then greenkeeper-lockfile-upload; fi
+  - greenkeeper-lockfile-upload
+
