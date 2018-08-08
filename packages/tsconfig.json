@@ -11,6 +11,7 @@
       "rxjs/*": ["../node_modules/rxjs/*"],
       "@angular/*": ["../node_modules/@angular/*"],
       "@ngx-translate/*": ["./stark-core/node_modules/@ngx-translate/*"],
+      "moment": ["./stark-core/node_modules/moment"],
       "environments/environment": ["./stark-core/src/common/environment"],
       "@nationalbankbelgium/stark-*": ["./stark-*"]
     },

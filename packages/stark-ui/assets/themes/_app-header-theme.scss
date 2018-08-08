@@ -120,6 +120,11 @@
   background: mat-color(map-get($base-theme, primary-palette), 900) url(/assets/images/app-header.png) top right no-repeat;
   color: #fff;
   height: $stark-header-size;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
   & .stark-container {
     position: relative;
     height: 100%;
@@ -154,7 +159,7 @@
     top: $stark-header-actions-top-desktop;
     bottom: -20px;
   }
-  .stark-page-content {
+  .mat-sidenav-content {
     margin-top: $stark-header-size-desktop;
   }
   .stark-home-button {

@@ -186,7 +186,7 @@
     "no-import-side-effect": [
       true,
       {
-        "ignore-module": "(reflect-metadata|core-js|ngrx-store|angular|polyfills|vendor|typings|\\.css|\\.pcss)"
+        "ignore-module": "(reflect-metadata|core-js|ngrx-store|angular|moment|polyfills|vendor|typings|\\.css|\\.pcss)"
       }
     ],
     "no-non-null-assertion": true,

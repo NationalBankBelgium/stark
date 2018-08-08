@@ -26,6 +26,7 @@
     "npm": ">=5.3.0"
   },
   "dependencies": {
+    "@angular/material-moment-adapter": "6.4.1",
     "@mdi/angular-material": "2.5.94",
     "@types/nouislider": "9.0.4",
     "@types/prismjs": "1.9.0",

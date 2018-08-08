@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { ActionBarComponent } from "./action-bar/action-bar.component";
 import { ButtonComponent } from "./button/button.component";
+import { DatePickerComponent } from "./date-picker/date-picker.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
 import { PrettyPrintComponent } from "./pretty-print/pretty-print.component";
@@ -25,8 +26,11 @@ import {
 	StarkPrettyPrintModule,
 	StarkSliderModule,
 	StarkTableModule,
-	StarkSvgViewBoxModule
+	StarkSvgViewBoxModule,
+	StarkDatePickerModule,
+	STARK_DATE_FORMATS
 } from "@nationalbankbelgium/stark-ui";
+import { MAT_DATE_FORMATS } from "@angular/material/core";
 
 @NgModule({
 	imports: [
@@ -45,6 +49,7 @@ import {
 		StarkActionBarModule,
 		StarkKeyboardDirectivesModule,
 		StarkPrettyPrintModule,
+		StarkDatePickerModule,
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
 		StarkTableModule
@@ -53,17 +58,21 @@ import {
 		ActionBarComponent,
 		ButtonComponent,
 		ExampleViewerComponent,
-		KeyboardDirectivesComponent,
 		PrettyPrintComponent,
+		DatePickerComponent,
+		ExampleViewerComponent,
+		KeyboardDirectivesComponent,
 		TableComponent
 	],
 	exports: [
 		ActionBarComponent,
 		ButtonComponent,
+		DatePickerComponent,
 		ExampleViewerComponent,
 		KeyboardDirectivesComponent,
 		PrettyPrintComponent,
 		TableComponent
-	]
+	],
+	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]
 })
 export class DemoModule {}
