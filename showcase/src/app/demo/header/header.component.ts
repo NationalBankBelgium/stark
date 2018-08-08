@@ -46,9 +46,7 @@ export class HeaderComponent implements OnInit {
 							<button class="app-data-alt" color="white" mat-icon-button [matTooltip]="'STARK.ICONS.APP_DATA' | translate">
 									<mat-icon starkSvgViewBox svgIcon="dots-vertical"></mat-icon>
 							</button>
-							<button color="alert" mat-mini-fab>
-								<mat-icon starkSvgViewBox svgIcon="power" [matTooltip]="'STARK.APP_LOGOUT.TITLE' | translate"></mat-icon>
-							</button>
+							<stark-app-logout></stark-app-logout>
 						</div>
 						<div>
 							<div class="dropdown-lang">App Lang</div>

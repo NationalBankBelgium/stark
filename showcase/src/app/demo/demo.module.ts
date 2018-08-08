@@ -18,6 +18,7 @@ import { DropdownComponent } from "./dropdown/dropdown.component";
 import { ButtonComponent } from "./button/button.component";
 import { DatePickerComponent } from "./date-picker/date-picker.component";
 import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
+import { LogoutComponent } from "./logout/logout.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { HeaderComponent } from "./header/header.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
@@ -30,11 +31,12 @@ import {
 	StarkPrettyPrintModule,
 	StarkSliderModule,
 	StarkTableModule,
-	StarkSvgViewBoxModule,
 	StarkDropdownModule,
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
-	STARK_DATE_FORMATS
+	STARK_DATE_FORMATS,
+	StarkSvgViewBoxModule,
+	StarkAppLogoutModule
 } from "@nationalbankbelgium/stark-ui";
 import { MAT_DATE_FORMATS } from "@angular/material/core";
 
@@ -61,12 +63,14 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		StarkDateRangePickerModule,
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
-		StarkTableModule
+		StarkTableModule,
+		StarkAppLogoutModule
 	],
 	declarations: [
 		ActionBarComponent,
 		DropdownComponent,
 		ButtonComponent,
+		LogoutComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
 		KeyboardDirectivesComponent,
@@ -83,6 +87,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		ButtonComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,
+		LogoutComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
 		KeyboardDirectivesComponent,

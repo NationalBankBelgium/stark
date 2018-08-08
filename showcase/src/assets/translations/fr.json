@@ -75,6 +75,10 @@
         "SELECT_SERVICES": "Sélectionnez un service ou plus",
         "SELECT_ONE_SERVICE": "Sélectionnez au moins un service",
         "SELECT_DISABLED": "Désolé, ce dropdown est désactivé"
+      },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Bouton logout - Icône par défaut",
+        "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom"
       }
     },
     "STYLEGUIDE": {

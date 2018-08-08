@@ -1,5 +1,6 @@
 export * from "./modules/action-bar";
 export * from "./modules/app-logo";
+export * from "./modules/app-logout";
 export * from "./modules/keyboard-directives";
 export * from "./modules/date-picker";
 export * from "./modules/date-range-picker";

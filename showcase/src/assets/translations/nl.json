@@ -75,6 +75,10 @@
         "SELECT_SERVICES": "Selecteer een of meer diensten",
         "SELECT_ONE_SERVICE": "Selecteer ten minsten een dienst",
         "SELECT_DISABLED": "Sorry, ditdés dropdown is niet geactiveerd"
+      },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Logout-knop - Standaard pictogram",
+        "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram"
       }
     },
     "STYLEGUIDE": {

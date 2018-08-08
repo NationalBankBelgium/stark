@@ -8,7 +8,8 @@ import {
 	HeaderComponent,
 	KeyboardDirectivesComponent,
 	PrettyPrintComponent,
-	TableComponent
+	TableComponent,
+	LogoutComponent
 } from "./demo";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
@@ -25,6 +26,7 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{ name: "stark-header", url: "/demo/stark-header", component: HeaderComponent },
 	{ name: "demo-example-viewer", url: "/demo/example-viewer", component: ExampleViewerComponent },
 	{ name: "demo-keyboard-directives", url: "/demo/keyboard-directives", component: KeyboardDirectivesComponent },
+	{ name: "demo-logout", url: "/demo/logout", component: LogoutComponent },
 	{ name: "demo-pretty-print", url: "/demo/pretty-print", component: PrettyPrintComponent },
 	{ name: "demo-table", url: "/demo/table", component: TableComponent },
 	{ name: "demo-dropdown", url: "/demo/dropdown", component: DropdownComponent },
