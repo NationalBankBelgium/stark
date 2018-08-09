@@ -19,11 +19,14 @@
   }
 }
 
-.stark-container {
-  max-width: $stark-max-content-width;
-  margin: 0 auto;
-  display: block;
-  width: 100%;
+.stark-header-container {
+  padding: 0 15px;
+}
+
+.stark-main-container {
+  align-self: stretch;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 @media screen {
@@ -113,6 +116,16 @@ h3 {
       font-size: 14px;
     }
   }
+
+  .stark-main-container {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+
+  .stark-main-container {
+    align-self: center;
+    width: $stark-max-content-width;
+  }
 }
 
 /********** COLORS **********/
@@ -135,20 +148,14 @@ td {
   border-bottom: solid 1px #fafafa;
 }
 
-.stark-container {
-  max-width: $stark-max-content-width;
-  margin: auto;
-  position: relative;
-}
-
 @media screen and (max-width: 1230px) {
   .stark-header-extra,
   .stark-page-header-actions {
     margin-right: 15px;
   }
 
-  .stark-container,
-  .stark-fixed-header-container .stark-generic-search .stark-generic-search-container .stark-container,
+  .stark-header-container,
+  .stark-fixed-header-container .stark-generic-search .stark-generic-search-container .stark-header-container,
   .stark-table-action-bar-container {
     box-sizing: border-box;
     padding-left: 15px;

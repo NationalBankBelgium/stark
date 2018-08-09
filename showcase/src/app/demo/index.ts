@@ -3,6 +3,7 @@ export * from "./breadcrumb";
 export * from "./button";
 export * from "./date-picker";
 export * from "./date-range-picker";
+export * from "./sidebar";
 export * from "./dropdown";
 export * from "./example-viewer";
 export * from "./header";

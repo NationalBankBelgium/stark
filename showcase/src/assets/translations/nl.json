@@ -96,6 +96,13 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
+      "SIDEBAR": {
+        "INTRO": "De preview van deze code is de eigenlijke zijbalk van de showcase",
+        "OPEN_LEFT": "Open de linker sidebar",
+        "OPEN_MENU": "Open de menu",
+        "OPEN_RIGHT": "Open de rechter sidebar",
+        "TITLE": "App Sidebar"
+      },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Horizontale schuifregelaar met bereik",
         "SIMPLE_HORIZONTAL_SLIDER": "Eenvoudige horizontale schuifregelaar",

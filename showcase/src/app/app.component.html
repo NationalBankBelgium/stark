@@ -1,66 +1,5 @@
-<header class="stark-app-header">
-	<div class="stark-container">
-		<div class="stark-app-bar">
-			<div class="stark-app-bar-content-left">
-				<div class="stark-actions">
-					<button class="stark-home-button" color="white" mat-icon-button>
-						<mat-icon starkSvgViewBox svgIcon="home"></mat-icon>
-					</button>
-					<button color="white" mat-icon-button (click)="sidenav.toggle()">
-						<mat-icon starkSvgViewBox svgIcon="menu"></mat-icon>
-					</button>
-					<button color="white" mat-icon-button>
-						<mat-icon starkSvgViewBox svgIcon="arrow-left"></mat-icon>
-					</button>
-				</div>
-			</div>
-
-			<div class="stark-app-bar-content-center">
-				<div class="app-logo">
-					<stark-app-logo></stark-app-logo>
-				</div>
-			</div>
-
-			<div class="stark-app-bar-content-right">
-				<div>
-					<div class="app-data">
-						<p>App Data</p>
-					</div>
-					<button class="app-data-alt" color="white" mat-icon-button [matTooltip]="'STARK.ICONS.APP_DATA' | translate">
-						<mat-icon starkSvgViewBox svgIcon="dots-vertical"></mat-icon>
-					</button>
-					<stark-app-logout></stark-app-logout>
-				</div>
-				<div>
-					<div class="dropdown-lang">App Lang</div>
-					<button color="white" mat-icon-button>
-						<mat-icon starkSvgViewBox svgIcon="skip-next"></mat-icon>
-					</button>
-					<button color="white" mat-icon-button>
-						<mat-icon starkSvgViewBox svgIcon="skip-previous"></mat-icon>
-					</button>
-				</div>
-				<div class="stark-app-bar-content-right-actions-alt">
-					<button mat-mini-fab [matTooltip]="'SHOWCASE.STYLEGUIDE.TITLE' | translate">
-						<mat-icon starkSvgViewBox svgIcon="television-guide"></mat-icon>
-					</button>
-					<button mat-mini-fab color="success" [matTooltip]="'STARK.ICONS.ADD_ITEM' | translate">
-						<mat-icon starkSvgViewBox svgIcon="plus"></mat-icon>
-					</button>
-					<button mat-mini-fab color="primary" [matTooltip]="'STARK.ICONS.SEARCH' | translate">
-						<mat-icon starkSvgViewBox svgIcon="magnify"></mat-icon>
-					</button>
-				</div>
-			</div>
-			<div class="stark-app-bar-page-title">
-				<h1>STARK</h1>
-			</div>
-		</div>
-	</div>
-</header>
-
-<mat-sidenav-container class="stark-main-content">
-	<mat-sidenav #sidenav mode="side" [fixedInViewport]="true" [fixedBottomGap]="0" closed>
+<stark-app-sidebar>
+	<ng-container stark-app-sidenav-menu>
 		<mat-nav-list class="nav-main">
 			<a mat-list-item uiSref="home" uiSrefActive="active">
 				<span matLine>Home</span>
@@ -98,6 +37,9 @@
 			<a mat-list-item uiSref="demo-pretty-print" uiSrefActive="active">
 				<span matLine>Pretty Print</span>
 			</a>
+			<a mat-list-item uiSref="demo-sidebar" uiSrefActive="active">
+				<span matLine>Sidebar</span>
+			</a>
 			<a mat-list-item uiSref="demo-slider" uiSrefActive="active">
 				<span matLine>Slider</span>
 			</a>
@@ -107,14 +49,99 @@
 			<a mat-list-item uiSref="stark-header" uiSrefActive="active">
 				<span matLine>Stark header</span>
 			</a>
+			<a mat-list-item uiSref="demo-table" uiSrefActive="active">
+				<span matLine>Table</span>
+			</a>
 		</mat-nav-list>
-	</mat-sidenav>
-	<mat-sidenav-content class="py2">
-		<div class="stark-container">
+	</ng-container>
+	<ng-container stark-app-sidenav-left>
+		<div class="stark-app-sidenav-top m1 center">
+			Top content
+		</div>
+		<div class="stark-app-sidenav-middle m1 center">
+			Middle content
+		</div>
+		<div class="stark-app-sidenav-bottom m1 center">
+			Bottom content
+		</div>
+	</ng-container>
+	<ng-container stark-app-sidenav-right>
+		<div class="stark-app-sidenav-top m1 center">
+			Top content
+		</div>
+		<div class="stark-app-sidenav-middle m1 center">
+			Middle content
+		</div>
+		<div class="stark-app-sidenav-bottom m1 center">
+			Bottom content
+		</div>
+	</ng-container>
+	<div stark-app-sidenav-content>
+		<header class="stark-app-header">
+			<div class="stark-header-container">
+				<div class="stark-app-bar">
+					<div class="stark-app-bar-content-left">
+						<div class="stark-actions">
+							<button class="stark-home-button" color="white" mat-icon-button>
+								<mat-icon starkSvgViewBox svgIcon="home"></mat-icon>
+							</button>
+							<button color="white" mat-icon-button (click)="openMenu()">
+								<mat-icon starkSvgViewBox svgIcon="menu"></mat-icon>
+							</button>
+							<button color="white" mat-icon-button>
+								<mat-icon starkSvgViewBox svgIcon="arrow-left"></mat-icon>
+							</button>
+						</div>
+					</div>
+					<div class="stark-app-bar-content-center">
+						<div class="app-logo">
+							<p>App Logo</p>
+						</div>
+					</div>
+					<div class="stark-app-bar-content-right">
+						<div>
+							<div class="app-data">
+								<p>App Data</p>
+							</div>
+							<button class="app-data-alt" color="white" mat-icon-button [matTooltip]="'STARK.ICONS.APP_DATA' | translate">
+								<mat-icon starkSvgViewBox svgIcon="dots-vertical"></mat-icon>
+							</button>
+							<button color="alert" mat-mini-fab>
+								<mat-icon starkSvgViewBox svgIcon="power" [matTooltip]="'STARK.APP_LOGOUT.TITLE' | translate"></mat-icon>
+							</button>
+						</div>
+						<div>
+							<div class="dropdown-lang">App Lang</div>
+							<button color="white" (click)="openLeftSidebar()" mat-icon-button>
+								<mat-icon starkSvgViewBox svgIcon="skip-next"></mat-icon>
+							</button>
+							<button color="white" (click)="openRightSidebar()" mat-icon-button>
+								<mat-icon starkSvgViewBox svgIcon="skip-previous"></mat-icon>
+							</button>
+						</div>
+						<div class="stark-app-bar-content-right-actions-alt">
+							<button mat-mini-fab [matTooltip]="'SHOWCASE.STYLEGUIDE.TITLE' | translate">
+								<mat-icon starkSvgViewBox svgIcon="television-guide"></mat-icon>
+							</button>
+							<button mat-mini-fab color="success" [matTooltip]="'STARK.ICONS.ADD_ITEM' | translate">
+								<mat-icon starkSvgViewBox svgIcon="plus"></mat-icon>
+							</button>
+							<button mat-mini-fab color="primary" [matTooltip]="'STARK.ICONS.SEARCH' | translate">
+								<mat-icon starkSvgViewBox svgIcon="magnify"></mat-icon>
+							</button>
+						</div>
+					</div>
+
+					<div class="stark-app-bar-page-title">
+						<h1>STARK</h1>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="stark-main-container py2">
 			<main>
 				<ui-view></ui-view>
 			</main>
 		</div>
-
-	</mat-sidenav-content>
-</mat-sidenav-container>
+	</div>
+</stark-app-sidebar>

@@ -15,6 +15,7 @@
       "@ngx-translate/*": ["../../stark-core/node_modules/@ngx-translate/*"],
       "@uirouter/*": ["../../stark-core/node_modules/@uirouter/*"],
       "environments/environment": ["../../../dist/packages/stark-core/src/common/environment"],
+      "moment": ["../../stark-core/node_modules/moment"],
       "@nationalbankbelgium/stark-core": ["../../../dist/packages/stark-core"],
       "@nationalbankbelgium/stark-ui": ["../"]
     },
@@ -36,6 +37,7 @@
     "allowEmptyCodegenFiles": false,
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
+    "enableResourceInlining": true,
     "flatModuleOutFile": "testing.js",
     "flatModuleId": "@nationalbankbelgium/stark-ui/testing"
   }

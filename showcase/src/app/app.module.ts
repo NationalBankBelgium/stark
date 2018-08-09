@@ -46,9 +46,10 @@ import {
 import {
 	StarkAppLogoModule,
 	StarkAppLogoutModule,
+	StarkAppSidebarModule,
+	StarkBreadcrumbModule,
 	StarkSvgViewBoxModule,
-	StarkDatePickerModule,
-	StarkBreadcrumbModule
+	StarkDatePickerModule
 } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
@@ -185,6 +186,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		NewsModule,
 		StarkAppLogoModule,
 		StarkAppLogoutModule,
+		StarkAppSidebarModule.forRoot(),
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
 		StarkBreadcrumbModule

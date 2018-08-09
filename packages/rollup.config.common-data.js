@@ -25,6 +25,7 @@ const globals = {
 	"@angular/material/menu": "ngMaterial.menu",
 	"@angular/material/paginator": "ngMaterial.paginator",
 	"@angular/material/select": "ngMaterial.select",
+	"@angular/material/sidenav": "ngMaterial.sidenav",
 	"@angular/material/sort": "ngMaterial.sort",
 	"@angular/material/table": "ngMaterial.table",
 	"@angular/material/tooltip": "ngMaterial.tooltip",
