@@ -16,7 +16,7 @@ before_install:
   - echo $AUTHOR_NAME
   - export TZ=Europe/Brussels
   - npm i -g npm@5.8.0
-  - npm i -g greenkeeper-lockfile
+  - npm i -g greenkeeper-lockfile@2.4.0
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
   - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
