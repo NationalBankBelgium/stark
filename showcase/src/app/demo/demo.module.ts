@@ -1,6 +1,7 @@
 import {
 	MatButtonModule,
 	MatCardModule,
+	MatCheckboxModule,
 	MatIconModule,
 	MatTabsModule,
 	MatTooltipModule,
@@ -15,6 +16,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { ActionBarComponent } from "./action-bar/action-bar.component";
 import { ButtonComponent } from "./button/button.component";
 import { DatePickerComponent } from "./date-picker/date-picker.component";
+import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
 import { PrettyPrintComponent } from "./pretty-print/pretty-print.component";
@@ -28,6 +30,7 @@ import {
 	StarkTableModule,
 	StarkSvgViewBoxModule,
 	StarkDatePickerModule,
+	StarkDateRangePickerModule,
 	STARK_DATE_FORMATS
 } from "@nationalbankbelgium/stark-ui";
 import { MAT_DATE_FORMATS } from "@angular/material/core";
@@ -38,6 +41,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		FormsModule,
 		MatButtonModule,
 		MatCardModule,
+		MatCheckboxModule,
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,
@@ -50,6 +54,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		StarkKeyboardDirectivesModule,
 		StarkPrettyPrintModule,
 		StarkDatePickerModule,
+		StarkDateRangePickerModule,
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
 		StarkTableModule
@@ -60,6 +65,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		ExampleViewerComponent,
 		PrettyPrintComponent,
 		DatePickerComponent,
+		DateRangePickerComponent,
 		ExampleViewerComponent,
 		KeyboardDirectivesComponent,
 		TableComponent
@@ -68,6 +74,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		ActionBarComponent,
 		ButtonComponent,
 		DatePickerComponent,
+		DateRangePickerComponent,
 		ExampleViewerComponent,
 		KeyboardDirectivesComponent,
 		PrettyPrintComponent,

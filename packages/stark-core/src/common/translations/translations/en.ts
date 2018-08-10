@@ -3,6 +3,10 @@
  */
 export const translationsEn: object = {
 	STARK: {
+		DATE_RANGE_PICKER: {
+			FROM: "From",
+			TO: "To"
+		},
 		LANGUAGES: {
 			EN: "English",
 			FR: "Français",
