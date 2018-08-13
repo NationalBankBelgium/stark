@@ -1,1 +1,1 @@
-export * from "./date-range-picker.component";
+export * from "./demo-date-range-picker.component";

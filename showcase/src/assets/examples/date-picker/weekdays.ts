@@ -2,10 +2,10 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
-	selector: "showcase-demo-date-picker",
-	templateUrl: "./date-picker.component.html"
+	selector: "demo-date-picker",
+	templateUrl: "./demo-date-picker.component.html"
 })
-export class DatePickerComponent implements OnInit {
+export class DemoDatePickerComponent implements OnInit {
 	public currentDate: Date;
 	public minDate: Date;
 	public maxDate: Date;

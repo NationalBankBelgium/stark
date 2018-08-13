@@ -13,7 +13,7 @@ import { FileService } from "./file.service";
 import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;
 
-describe("ExampleViewerComponent", () => {
+describe("DemoExampleViewerComponent", () => {
 	let component: ExampleViewerComponent;
 	let fileService: SpyObj<FileService>;
 	let fixture: ComponentFixture<ExampleViewerComponent>;

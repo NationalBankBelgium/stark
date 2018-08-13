@@ -13,16 +13,16 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
-import { ActionBarComponent } from "./action-bar/action-bar.component";
-import { DropdownComponent } from "./dropdown/dropdown.component";
-import { ButtonComponent } from "./button/button.component";
-import { DatePickerComponent } from "./date-picker/date-picker.component";
-import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
-import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
-import { HeaderComponent } from "./header/header.component";
-import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
-import { PrettyPrintComponent } from "./pretty-print/pretty-print.component";
-import { TableComponent } from "./table/table.component";
+import { DemoActionBarComponent } from "./action-bar/demo-action-bar.component";
+import { DemoDropdownComponent } from "./dropdown/demo-dropdown.component";
+import { DemoButtonComponent } from "./button/demo-button.component";
+import { DemoDatePickerComponent } from "./date-picker/demo-date-picker.component";
+import { DemoDateRangePickerComponent } from "./date-range-picker/demo-date-range-picker.component";
+import { DemoExampleViewerComponent } from "./example-viewer/demo-example-viewer.component";
+import { DemoHeaderComponent } from "./header/demo-header.component";
+import { DemoKeyboardDirectivesComponent } from "./keyboard-directives/demo-keyboard-directives.component";
+import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
+import { DemoTableComponent } from "./table/demo-table.component";
 import { SharedModule } from "../shared/shared.module";
 import {
 	StarkActionBarModule,
@@ -64,30 +64,30 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		StarkTableModule
 	],
 	declarations: [
-		ActionBarComponent,
-		DropdownComponent,
-		ButtonComponent,
-		ExampleViewerComponent,
-		HeaderComponent,
-		KeyboardDirectivesComponent,
-		PrettyPrintComponent,
-		DatePickerComponent,
-		DateRangePickerComponent,
-		ExampleViewerComponent,
-		KeyboardDirectivesComponent,
-		TableComponent
+		DemoActionBarComponent,
+		DemoDropdownComponent,
+		DemoButtonComponent,
+		DemoExampleViewerComponent,
+		DemoHeaderComponent,
+		DemoKeyboardDirectivesComponent,
+		DemoPrettyPrintComponent,
+		DemoDatePickerComponent,
+		DemoDateRangePickerComponent,
+		DemoExampleViewerComponent,
+		DemoKeyboardDirectivesComponent,
+		DemoTableComponent
 	],
 	exports: [
-		ActionBarComponent,
-		DropdownComponent,
-		ButtonComponent,
-		DatePickerComponent,
-		DateRangePickerComponent,
-		ExampleViewerComponent,
-		HeaderComponent,
-		KeyboardDirectivesComponent,
-		PrettyPrintComponent,
-		TableComponent
+		DemoActionBarComponent,
+		DemoDropdownComponent,
+		DemoButtonComponent,
+		DemoDatePickerComponent,
+		DemoDateRangePickerComponent,
+		DemoExampleViewerComponent,
+		DemoHeaderComponent,
+		DemoKeyboardDirectivesComponent,
+		DemoPrettyPrintComponent,
+		DemoTableComponent
 	],
 	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]
 })

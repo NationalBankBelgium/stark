@@ -1,1 +1,1 @@
-export * from "./pretty-print.component";
+export * from "./demo-pretty-print.component";

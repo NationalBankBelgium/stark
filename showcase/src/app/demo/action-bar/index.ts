@@ -1,1 +1,1 @@
-export * from "./action-bar.component";
+export * from "./demo-action-bar.component";

@@ -3,12 +3,12 @@ import { StarkActionBarConfig, StarkTableColumnProperties, StarkTableFilter, Sta
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
-	selector: "showcase-demo-table",
-	styleUrls: ["./table.component.scss"],
-	templateUrl: "./table.component.html",
+	selector: "demo-table",
+	styleUrls: ["./demo-table.component.scss"],
+	templateUrl: "./demo-table.component.html",
 	encapsulation: ViewEncapsulation.None //Here to add a shadow inside the table, we will fix that when we take care of #509
 })
-export class TableComponent implements OnInit {
+export class DemoTableComponent implements OnInit {
 	public getTitle = (data: any): string => {
 		return "~" + data.title.label;
 	};

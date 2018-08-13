@@ -3,10 +3,10 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkDatePickerFilter } from "@nationalbankbelgium/stark-ui";
 
 @Component({
-	selector: "showcase-demo-date-range-picker",
-	templateUrl: "./date-range-picker.component.html"
+	selector: "demo-date-range-picker",
+	templateUrl: "./demo-date-range-picker.component.html"
 })
-export class DateRangePickerComponent implements OnInit {
+export class DemoDateRangePickerComponent implements OnInit {
 	public startDate: Date;
 	public endDate: Date;
 	public minDate: Date;
