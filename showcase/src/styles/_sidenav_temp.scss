@@ -1,3 +1,8 @@
+.mat-sidenav-content,
+.mat-sidenav {
+  margin-top: $stark-header-size;
+}
+
 mat-sidenav.mat-drawer {
   background-color: #16385a;
   width: 200px;
@@ -19,4 +24,11 @@ mat-sidenav.mat-drawer .mat-list-item:hover a {
 mat-sidenav.mat-drawer .mat-list-item-focus.active,
 mat-sidenav.mat-drawer a.active {
   background-color: rgba($color: #fff, $alpha: 0.4);
+}
+
+@media #{$tablet-query} {
+  .mat-sidenav-content,
+  .mat-sidenav {
+    margin-top: $stark-header-size-desktop;
+  }
 }

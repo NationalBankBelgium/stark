@@ -1,0 +1,16 @@
+<mat-card>
+	<h1 translate>SHOWCASE.DEMO.HEADER.TITLE</h1>
+	<p translate>SHOWCASE.DEMO.HEADER.INTRO</p>
+	<stark-pretty-print [data]="importSCSS" format="css" [enableHighlighting]="true"></stark-pretty-print>
+	<p translate>SHOWCASE.DEMO.HEADER.COPY_PASTE</p>
+	<stark-pretty-print [data]="headerHtml" format="html" [enableHighlighting]="true"></stark-pretty-print>
+	<p [innerHTML]="'SHOWCASE.DEMO.HEADER.STARK_APP_HEADER'|translate"></p>
+	<p [innerHTML]="'SHOWCASE.DEMO.HEADER.STARK_APP_BAR'|translate"></p>
+
+	<ul>
+		<li [innerHTML]="'SHOWCASE.DEMO.HEADER.STARK_APP_BAR_CONTENT_LEFT'|translate"></li>
+		<li [innerHTML]="'SHOWCASE.DEMO.HEADER.STARK_APP_BAR_CONTENT_CENTER'|translate"></li>
+		<li [innerHTML]="'SHOWCASE.DEMO.HEADER.STARK_APP_BAR_CONTENT_RIGHT'|translate"></li>
+		<li [innerHTML]="'SHOWCASE.DEMO.HEADER.STARK_APP_BAR_PAGE_TITLE'|translate"></li>
+	</ul>
+</mat-card>

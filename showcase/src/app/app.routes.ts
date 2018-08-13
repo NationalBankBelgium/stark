@@ -4,6 +4,7 @@ import {
 	DatePickerComponent,
 	DateRangePickerComponent,
 	ExampleViewerComponent,
+	HeaderComponent,
 	KeyboardDirectivesComponent,
 	PrettyPrintComponent,
 	TableComponent
@@ -20,6 +21,7 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo-button", url: "/demo/button", component: ButtonComponent },
 	{ name: "demo-date-picker", url: "/demo/date-picker", component: DatePickerComponent },
 	{ name: "demo-date-range-picker", url: "/demo/date-range-picker", component: DateRangePickerComponent },
+	{ name: "stark-header", url: "/demo/stark-header", component: HeaderComponent },
 	{ name: "demo-example-viewer", url: "/demo/example-viewer", component: ExampleViewerComponent },
 	{ name: "demo-keyboard-directives", url: "/demo/keyboard-directives", component: KeyboardDirectivesComponent },
 	{ name: "demo-pretty-print", url: "/demo/pretty-print", component: PrettyPrintComponent },

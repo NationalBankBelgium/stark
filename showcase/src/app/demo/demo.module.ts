@@ -18,6 +18,7 @@ import { ButtonComponent } from "./button/button.component";
 import { DatePickerComponent } from "./date-picker/date-picker.component";
 import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
+import { HeaderComponent } from "./header/header.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
 import { PrettyPrintComponent } from "./pretty-print/pretty-print.component";
 import { TableComponent } from "./table/table.component";
@@ -63,6 +64,8 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		ActionBarComponent,
 		ButtonComponent,
 		ExampleViewerComponent,
+		HeaderComponent,
+		KeyboardDirectivesComponent,
 		PrettyPrintComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,
@@ -76,6 +79,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		DatePickerComponent,
 		DateRangePickerComponent,
 		ExampleViewerComponent,
+		HeaderComponent,
 		KeyboardDirectivesComponent,
 		PrettyPrintComponent,
 		TableComponent

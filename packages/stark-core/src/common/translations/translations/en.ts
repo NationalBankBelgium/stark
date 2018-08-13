@@ -7,6 +7,9 @@ export const translationsEn: object = {
 			FROM: "From",
 			TO: "To"
 		},
+		APP_LOGOUT: {
+			TITLE: "Log out"
+		},
 		LANGUAGES: {
 			EN: "English",
 			FR: "Français",
@@ -19,6 +22,7 @@ export const translationsEn: object = {
 		},
 		ICONS: {
 			ADD_ITEM: "Add",
+			APP_DATA: "App data",
 			EDIT_ITEM: "Edit",
 			DELETE_ITEM: "Delete",
 			APPROVE_ITEM: "Approve",

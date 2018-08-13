@@ -15,6 +15,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { SharedModule } from "./shared/shared.module";
 import { DateAdapter } from "@angular/material/core";
 
@@ -142,6 +143,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		MatIconModule,
 		MatListModule,
 		MatSidenavModule,
+		MatTooltipModule,
 		StoreModule.forRoot(reducers, {
 			metaReducers
 		}),
