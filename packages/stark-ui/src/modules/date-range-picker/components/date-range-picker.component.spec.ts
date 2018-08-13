@@ -1,10 +1,11 @@
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { StarkDatePickerModule } from "./../../date-picker";
-import { StarkDateRangePickerComponent } from "./date-range-picker.component";
+import { StarkDateRangePickerComponent, StarkDateRangePickerEvent } from "./date-range-picker.component";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { EventEmitter } from "@angular/core";
 
 describe("DateRangePickerComponent", () => {
 	let fixture: ComponentFixture<StarkDateRangePickerComponent>;
@@ -26,6 +27,37 @@ describe("DateRangePickerComponent", () => {
 		fixture = TestBed.createComponent(StarkDateRangePickerComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
+	});
+
+	describe("on initialization", () => {
+		it("should set internal component properties", () => {
+			expect(fixture).toBeDefined();
+			expect(component).toBeDefined();
+
+			expect(component.logger).not.toBeNull();
+			expect(component.logger).toBeDefined();
+		});
+
+		it("should NOT have any inputs set", () => {
+			expect(component.dateFilter).toBeUndefined();
+			expect(component.endDate).toBeUndefined();
+			expect(component.endDateLabel).toBeDefined();
+			expect(component.endDateLabel).toEqual("STARK.DATE_RANGE_PICKER.TO");
+			expect(component.endMaxDate).toBeUndefined();
+			expect(component.endMinDate).toBeUndefined();
+			expect(component.isDisabled).toBeUndefined();
+			expect(component.rangePickerId).toBeDefined();
+			expect(component.rangePickerId).toEqual("");
+			expect(component.rangePickerName).toBeDefined();
+			expect(component.rangePickerName).toEqual("");
+			expect(component.startDate).toBeUndefined();
+			expect(component.startDateLabel).toBeDefined();
+			expect(component.startDateLabel).toEqual("STARK.DATE_RANGE_PICKER.FROM");
+			expect(component.startMaxDate).toBeUndefined();
+			expect(component.startMinDate).toBeUndefined();
+			expect(component.dateRangeChanged).toBeDefined();
+			expect(component.dateRangeChanged).toEqual(new EventEmitter<StarkDateRangePickerEvent>());
+		});
 	});
 
 	describe("datepickers properties binding", () => {

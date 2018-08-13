@@ -115,7 +115,7 @@ export class StarkSliderComponent implements AfterViewInit, OnChanges, OnInit {
 	 * Component lifecycle hook that is called after data-bound properties of a directive are initialized.
 	 */
 	public ngOnInit(): void {
-		this.logger.debug(componentName + ": controller initialized");
+		this.logger.debug(componentName + ": component initialized");
 		this.isHorizontal = this.sliderConfig.orientation !== "vertical";
 	}
 

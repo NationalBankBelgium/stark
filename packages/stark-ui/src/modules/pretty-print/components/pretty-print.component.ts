@@ -62,6 +62,7 @@ export class StarkPrettyPrintComponent implements OnChanges, OnInit {
 	 */
 	@HostBinding("class")
 	public class: string = componentName;
+
 	/**
 	 * The text to be pretty printed
 	 */
@@ -93,7 +94,7 @@ export class StarkPrettyPrintComponent implements OnChanges, OnInit {
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
-		this.logger.debug(componentName + ": controller initialized");
+		this.logger.debug(componentName + ": component initialized");
 	}
 
 	/**

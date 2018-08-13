@@ -1,5 +1,7 @@
 /*tslint:disable:completed-docs*/
 import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
+import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSvgViewBoxDirective } from "./svg-view-box.directive";
 import { Component, DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
@@ -33,17 +35,16 @@ describe("SvgViewBoxDirective", () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [StarkSvgViewBoxDirective, TestComponent]
+			declarations: [StarkSvgViewBoxDirective, TestComponent],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
 		});
 	});
 
 	describe("when viewBox value is not defined", () => {
-		beforeEach(
-			fakeAsync(() => {
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+		beforeEach(fakeAsync(() => {
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -64,16 +65,14 @@ describe("SvgViewBoxDirective", () => {
 		const viewBoxValue: number = 48;
 
 		// overriding the components's template
-		beforeEach(
-			fakeAsync(() => {
-				const newTemplate: string = getTemplate("starkSvgViewBox='" + viewBoxValue + "'");
+		beforeEach(fakeAsync(() => {
+			const newTemplate: string = getTemplate("starkSvgViewBox='" + viewBoxValue + "'");
 
-				TestBed.overrideTemplate(TestComponent, newTemplate);
+			TestBed.overrideTemplate(TestComponent, newTemplate);
 
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -94,16 +93,14 @@ describe("SvgViewBoxDirective", () => {
 		const viewBoxAttribute: string = "0 0 12 12";
 
 		// overriding the components's template
-		beforeEach(
-			fakeAsync(() => {
-				const newTemplate: string = getTemplate("starkSvgViewBox", "viewBox='" + viewBoxAttribute + "'");
+		beforeEach(fakeAsync(() => {
+			const newTemplate: string = getTemplate("starkSvgViewBox", "viewBox='" + viewBoxAttribute + "'");
 
-				TestBed.overrideTemplate(TestComponent, newTemplate);
+			TestBed.overrideTemplate(TestComponent, newTemplate);
 
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();

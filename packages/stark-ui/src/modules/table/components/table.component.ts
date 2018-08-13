@@ -201,7 +201,7 @@ export class StarkTableComponent implements OnInit, AfterContentInit, AfterViewI
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
-		this.logger.debug(componentName + ": controller initialized");
+		this.logger.debug(componentName + ": component initialized");
 		this.displayedColumns = [];
 		if (this.multiselect) {
 			this.displayedColumns.unshift("select");

@@ -1,31 +1,26 @@
-/********* DROPDOWN *********/
-/* stark: src/modules/dropdown/components/dropdown.component.scss */
+/* ============================================================================== */
+/*  S t a r k   D r o p d o w n                                                   */
+/* ============================================================================== */
+/* stark-ui: src/modules/dropdown/components/dropdown/_dropdown.component.scss */
 .stark-dropdown {
-  & mat-select {
-	margin: 0;
+  mat-select {
+    margin: 0;
   }
   width: 150px;
 }
-  
+
 @media #{$tablet-only-query} {
-  .stark-dropdown{
-	width: 300px;
+  .stark-dropdown {
+    width: 300px;
   }
 }
 
 /* compact */
 
 @media #{$desktop-query} {
-  .stark-dropdown{
-	width: 350px;
+  .stark-dropdown {
+    width: 350px;
   }
 }
 
-/********** FIXED LABELS FORM  **********/
-.x-form-fixed-labels {
-  & mat-form-field:not([mat-no-float]) .stark-dropdown .mat-select-placeholder span:first-child {
-	visibility: hidden;
-  }
-}
-
-/* END stark: src/modules/dropdown/components/dropdown.component.scss*/
+/* END stark-ui: src/modules/dropdown/components/dropdown/_dropdown.component.scss */

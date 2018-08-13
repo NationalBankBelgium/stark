@@ -49,12 +49,10 @@ describe("RestrictInputDirective", () => {
 	});
 
 	describe("when input restriction is not defined", () => {
-		beforeEach(
-			fakeAsync(() => {
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+		beforeEach(fakeAsync(() => {
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -77,17 +75,15 @@ describe("RestrictInputDirective", () => {
 
 	describe("when input restriction is given", () => {
 		// overriding the components's template
-		beforeEach(
-			fakeAsync(() => {
-				// the directive should not be used with square brackets "[]" because the input is an string literal!
-				const newTemplate: string = getTemplate("starkRestrictInput='\\d'");
+		beforeEach(fakeAsync(() => {
+			// the directive should not be used with square brackets "[]" because the input is an string literal!
+			const newTemplate: string = getTemplate("starkRestrictInput='\\d'");
 
-				TestBed.overrideTemplate(TestComponent, newTemplate);
+			TestBed.overrideTemplate(TestComponent, newTemplate);
 
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();

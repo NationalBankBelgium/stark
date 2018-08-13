@@ -1,38 +1,40 @@
-/* Slider component css */
-/* stark: src/ui/components/slider/slider.component.scss */
+/* ============================================================================== */
+/*  S t a r k   S l i d e r  -  T h e m e                                         */
+/* ============================================================================== */
+/* stark-ui: src/modules/slider/components/slider/_slider-theme.scss */
 
 @import "~nouislider/distribute/nouislider.css";
 
 .stark-slider {
   font-size: 12px;
-  & .noUi-horizontal,
-  & .noUi-vertical {
+  .noUi-horizontal,
+  .noUi-vertical {
     background-color: #d8e0f3;
     border: 0;
     box-shadow: none;
     border-radius: 0;
   }
-  & .noUi-horizontal {
+  .noUi-horizontal {
     height: 5px;
-    & .noUi-origin {
+    .noUi-origin {
       top: -15px;
     }
-    & .noUi-tooltip {
+    .noUi-tooltip {
       padding: 2px 5px;
       bottom: 40px;
       border: solid 1px $divider-color;
     }
-    & .noUi-pips-horizontal {
+    .noUi-pips-horizontal {
       padding: 0;
     }
-    & .noUi-value {
+    .noUi-value {
       padding-top: 4px;
     }
   }
-  & .noUi-connect {
+  .noUi-connect {
     background-color: $md-primary;
   }
-  & .noUi-handle {
+  .noUi-handle {
     top: 0;
     border: 0;
     width: 36px;
@@ -61,40 +63,40 @@
       border-radius: 50%;
     }
   }
-  &.horizontal {
+  .horizontal {
     padding: 42px 32px 30px 16px;
     margin-bottom: 16px;
-    & .noUi-pips-horizontal {
+    .noUi-pips-horizontal {
       height: 30px;
     }
   }
-  &.vertical {
+  .vertical {
     padding: 18px 60px 20px 80px;
   }
-  & .noUi-vertical {
+  .noUi-vertical {
     /* setting default height: without a height, the vertical slider will not work */
     height: 300px;
     width: 5px;
-    & .noUi-handle {
+    .noUi-handle {
       transform: translate(-10px, -50%);
     }
-    & .noUi-tooltip {
+    .noUi-tooltip {
       right: 40px;
     }
-    & .noUi-value {
+    .noUi-value {
       transform: translate(0, -50%);
     }
   }
-  & .noUi-pips-vertical {
+  .noUi-pips-vertical {
     padding: 0;
   }
 
   /* disabled state */
-  & [disabled] {
+  [disabled] {
     &.noUi-target {
       cursor: default;
     }
-    & .noUi-handle {
+    .noUi-handle {
       background-color: #ccc;
       box-shadow: none;
       cursor: default;
@@ -102,4 +104,4 @@
   }
 }
 
-/* END stark: src/ui/components/slider/slider.component.pcss */
+/* END stark-ui: src/modules/slider/components/slider/_slider-theme.scss */

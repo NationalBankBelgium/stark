@@ -23,13 +23,14 @@ example-viewer {
   .example-viewer-body {
     background-color: mat-color($mat-light-theme-background, card);
   }
-  .example-source code {
-    font-family: mat-font-family($typography-config);
-    font-size: 15px;
-    line-height: 24px;
-  }
   .example-source {
     border-bottom: 1px solid mat-color($mat-light-theme-foreground, divider);
     overflow-x: scroll;
+
+    code {
+      font-family: mat-font-family($typography-config);
+      font-size: 15px;
+      line-height: 24px;
+    }
   }
 }

@@ -1,3 +1,8 @@
+/* ============================================================================== */
+/*  S t a r k   T a b l e                                                         */
+/* ============================================================================== */
+/* stark-ui: src/modules/table/components/table/_table.component.scss */
+
 .stark-table {
   .header {
     align-items: center;
@@ -25,6 +30,16 @@
     th {
       .priority {
         display: none;
+      }
+
+      &.filtering {
+        &.mat-header-cell {
+          .header-cell-content {
+            .button-filter {
+              opacity: 1;
+            }
+          }
+        }
       }
 
       &.mat-column-select {
@@ -68,28 +83,20 @@
       }
     }
 
-    th.filtering {
-      &.mat-header-cell {
-        .header-cell-content {
-          .button-filter {
-            opacity: 1;
-          }
-        }
-      }
-    }
-
     .header-cell-content.sortable {
       cursor: pointer;
     }
-  }
 
-  table.multi-sorting {
-    th .priority {
-      display: block;
+    &.multi-sorting {
+      th .priority {
+        display: block;
+      }
     }
   }
+
+  .mat-table-filter {
+    padding: 0 10px;
+  }
 }
 
-.mat-table-filter {
-  padding: 0 10px;
-}
+/* END stark-ui: src/modules/table/components/table/_table.component.scss */

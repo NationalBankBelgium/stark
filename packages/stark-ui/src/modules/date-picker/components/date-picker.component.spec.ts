@@ -6,6 +6,7 @@ import { StarkDatePickerComponent } from "./date-picker.component";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { EventEmitter } from "@angular/core";
 
 describe("DatePickerComponent", () => {
 	let fixture: ComponentFixture<StarkDatePickerComponent>;
@@ -28,6 +29,32 @@ describe("DatePickerComponent", () => {
 		component = fixture.componentInstance;
 
 		fixture.detectChanges();
+	});
+
+	describe("on initialization", () => {
+		it("should set internal component properties", () => {
+			expect(fixture).toBeDefined();
+			expect(component).toBeDefined();
+
+			expect(component.logger).not.toBeNull();
+			expect(component.logger).toBeDefined();
+		});
+
+		it("should NOT have any inputs set", () => {
+			expect(component.date).toBeUndefined();
+			expect(component.dateFilter).toBeUndefined();
+			expect(component.isDisabled).toBeUndefined();
+			expect(component.label).toBeUndefined();
+			expect(component.maxDate).toBeUndefined();
+			expect(component.minDate).toBeUndefined();
+			expect(component.minDate).toBeUndefined();
+			expect(component.pickerId).toBeDefined();
+			expect(component.pickerId).toEqual("");
+			expect(component.pickerName).toBeDefined();
+			expect(component.pickerName).toEqual("");
+			expect(component.dateChanged).toBeDefined();
+			expect(component.dateChanged).toEqual(new EventEmitter<Date>());
+		});
 	});
 
 	describe("mat-datepicker properties binding", () => {

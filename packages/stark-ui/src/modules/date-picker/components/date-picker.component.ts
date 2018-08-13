@@ -1,8 +1,14 @@
-import { Component, EventEmitter, ViewEncapsulation, Input, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, HostBinding, Inject, Input, OnInit, Output, ViewChild, ViewEncapsulation } from "@angular/core";
 import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from "@angular/material";
 import moment from "moment";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Date) => boolean) | undefined;
+
+/**
+ * Name of the component
+ */
+const componentName: string = "stark-date-picker";
 
 /**
  * Component to display the stark date-picker
@@ -12,7 +18,13 @@ export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Da
 	templateUrl: "./date-picker.component.html",
 	encapsulation: ViewEncapsulation.None
 })
-export class StarkDatePickerComponent {
+export class StarkDatePickerComponent implements OnInit {
+	/**
+	 * Adds class="stark-date-picker" attribute on the host component
+	 */
+	@HostBinding("class")
+	public class: string = componentName;
+
 	/**
 	 * Source Date to be bound to the datepicker model
 	 */
@@ -27,6 +39,7 @@ export class StarkDatePickerComponent {
 	public get dateFilter(): StarkDatePickerFilter {
 		return this._dateFilter;
 	}
+
 	public set dateFilter(value: StarkDatePickerFilter) {
 		this._dateFilter = value;
 		if (this._dateFilter === "OnlyWeekends") {
@@ -35,6 +48,7 @@ export class StarkDatePickerComponent {
 			this._dateFilter = this.filterOnlyWeekdays;
 		}
 	}
+
 	private _dateFilter?: StarkDatePickerFilter;
 
 	/**
@@ -92,6 +106,19 @@ export class StarkDatePickerComponent {
 	 */
 	@ViewChild(MatDatepickerInput)
 	public pickerInput: MatDatepickerInput<any>;
+
+	/**
+	 * Class constructor
+	 * @param logger - The logger of the application
+	 */
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnInit(): void {
+		this.logger.debug(componentName + ": component initialized");
+	}
 
 	/**
 	 * Wrap the dateFilter function

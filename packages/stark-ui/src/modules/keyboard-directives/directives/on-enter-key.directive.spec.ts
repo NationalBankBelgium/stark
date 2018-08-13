@@ -46,12 +46,10 @@ describe("OnEnterKeyDirective", () => {
 	});
 
 	describe("when onEnterKeyHandler is not defined", () => {
-		beforeEach(
-			fakeAsync(() => {
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+		beforeEach(fakeAsync(() => {
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -70,18 +68,14 @@ describe("OnEnterKeyDirective", () => {
 
 	describe("when onEnterKeyHandler is given", () => {
 		// overriding the components's template
-		beforeEach(
-			fakeAsync(() => {
-				const newTemplate: string = getTemplate(
-					"[starkOnEnterKey]='onEnterKeyHandler' [starkOnEnterKeyParams]='[onEnterKeyParam]'"
-				);
+		beforeEach(fakeAsync(() => {
+			const newTemplate: string = getTemplate("[starkOnEnterKey]='onEnterKeyHandler' [starkOnEnterKeyParams]='[onEnterKeyParam]'");
 
-				TestBed.overrideTemplate(TestComponent, newTemplate);
+			TestBed.overrideTemplate(TestComponent, newTemplate);
 
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();
