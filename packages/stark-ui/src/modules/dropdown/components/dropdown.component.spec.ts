@@ -47,7 +47,7 @@ describe("DropdownComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			imports: [CommonModule, MatSelectModule, MatOptionModule, FormsModule, TranslateModule.forRoot(),NoopAnimationsModule],
+			imports: [CommonModule, MatSelectModule, MatOptionModule, FormsModule, TranslateModule.forRoot(), NoopAnimationsModule],
 			declarations: [StarkDropdownComponent, TestHostComponent],
 			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService],
 			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (selectionChange)
@@ -135,20 +135,20 @@ describe("DropdownComponent", () => {
 	// 	});
 	// });
 
-	//TODO reenable if label still needed 
+	//TODO reenable if label still needed
 	// describe("label", () => {
 	// 	it("should be displayed when label is defined", () => {
 	// 		const labelElement: DebugElement = hostFixture.debugElement.query(By.css("label"));
 	// 		expect(labelElement).not.toBeNull();
 	// 	});
-    //
+	//
 	// 	it("should be hidden when label is undefined", () => {
 	// 		hostComponent.label = undefined;
 	// 		hostFixture.detectChanges();
 	// 		const labelElement: DebugElement = hostFixture.debugElement.query(By.css("label"));
 	// 		expect(labelElement).toBeNull();
 	// 	});
-    //
+	//
 	// 	it("should be hidden when label is an empty string", () => {
 	// 		hostComponent.label = "";
 	// 		hostFixture.detectChanges();

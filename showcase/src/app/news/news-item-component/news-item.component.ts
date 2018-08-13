@@ -3,7 +3,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 const componentName: string = "news-item-component";
 
 @Component({
-	selector: "news-item", // <news-item></news-item>
+	selector: "news-item",
 	styleUrls: ["./_news-item.component.scss"],
 	templateUrl: "./news-item.component.html"
 })

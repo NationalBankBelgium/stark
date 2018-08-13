@@ -174,9 +174,7 @@ module.exports = options => {
 							{
 								test: /\.js$/,
 								use: [buildOptimizerLoader],
-								exclude: [
-									helpers.root("node_modules/prettier/parser-typescript.js")
-								]
+								exclude: [helpers.root("node_modules/prettier/parser-typescript.js")]
 							}
 					  ]
 					: []),

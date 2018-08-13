@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, HostBinding, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
 
 /**
@@ -6,19 +6,21 @@ import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, Star
  */
 const componentName: string = "stark-app-logo";
 
-// FIXME: tslint rules temporarily disabled. Enable them once we decide the final implementation of component styles
-/* tslint:disable:enforce-component-selector use-host-property-decorator */
-@Component({
-	selector: componentName,
-	templateUrl: "./app-logo.component.html",
-	encapsulation: ViewEncapsulation.None,
-	host: { class: "stark-app-logo" }
-})
-/* tslint:enable */
 /**
  * Component to display the application's logo
  */
+@Component({
+	selector: "stark-app-logo",
+	templateUrl: "./app-logo.component.html",
+	encapsulation: ViewEncapsulation.None
+})
 export class StarkAppLogoComponent implements OnInit {
+	/**
+	 * Adds class="stark-app-logo" attribute on the host component
+	 */
+	@HostBinding("class")
+	public class: string = componentName;
+
 	/**
 	 * Params object to be passed to the UI router state defined as homeState.
 	 */
@@ -41,7 +43,7 @@ export class StarkAppLogoComponent implements OnInit {
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
-		this.logger.debug(componentName + ": controller initialized");
+		this.logger.debug(componentName + ": component initialized");
 	}
 
 	/**

@@ -1,4 +1,5 @@
-import { AfterViewChecked, Directive, ElementRef, Input, Renderer2 } from "@angular/core";
+import { AfterViewChecked, Directive, ElementRef, Inject, Input, OnInit, Renderer2 } from "@angular/core";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
  * Name of the directive
@@ -15,7 +16,7 @@ const directiveName: string = "[starkSvgViewBox]";
 @Directive({
 	selector: directiveName
 })
-export class StarkSvgViewBoxDirective implements AfterViewChecked {
+export class StarkSvgViewBoxDirective implements AfterViewChecked, OnInit {
 	/**
 	 * Width and height to be set to the 'viewBox' attribute of the SVG element.
 	 */
@@ -35,10 +36,22 @@ export class StarkSvgViewBoxDirective implements AfterViewChecked {
 
 	/**
 	 * Class constructor
+	 * @param logger - The logger of the application
 	 * @param element - Reference to the DOM element where this directive is applied to.
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 */
-	public constructor(public element: ElementRef<HTMLElement>, public renderer: Renderer2) {}
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
+		public element: ElementRef<HTMLElement>,
+		public renderer: Renderer2
+	) {}
+
+	/**
+	 * Directive lifecycle hook
+	 */
+	public ngOnInit(): void {
+		this.logger.debug(directiveName + ": directive initialized");
+	}
 
 	/**
 	 * Directive lifecycle hook

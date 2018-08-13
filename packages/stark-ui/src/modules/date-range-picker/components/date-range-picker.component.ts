@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, EventEmitter, HostBinding, Inject, Input, OnInit, Output, ViewChild, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkDatePickerFilter, StarkDatePickerComponent } from "./../../date-picker/components/date-picker.component";
 import moment from "moment";
@@ -12,6 +12,11 @@ export interface StarkDateRangePickerEvent {
 }
 
 /**
+ * Name of the component
+ */
+const componentName: string = "stark-date-range-picker";
+
+/**
  * Component to display the stark date-range-picker
  */
 @Component({
@@ -19,7 +24,13 @@ export interface StarkDateRangePickerEvent {
 	templateUrl: "./date-range-picker.component.html",
 	encapsulation: ViewEncapsulation.None
 })
-export class StarkDateRangePickerComponent {
+export class StarkDateRangePickerComponent implements OnInit {
+	/**
+	 * Adds class="stark-date-range-picker" attribute on the host component
+	 */
+	@HostBinding("class")
+	public class: string = componentName;
+
 	/**
 	 * Filter function or a string
 	 * Will be applied to both date-picker
@@ -116,8 +127,13 @@ export class StarkDateRangePickerComponent {
 	 * Class constructor
 	 * @param logger - The logger of the application
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
-		// empty constructor
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnInit(): void {
+		this.logger.debug(componentName + ": component initialized");
 	}
 
 	/**

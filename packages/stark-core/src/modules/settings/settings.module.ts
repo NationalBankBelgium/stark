@@ -10,7 +10,7 @@ import { StarkSettingsEffects } from "./effects";
 })
 export class StarkSettingsModule {
 	/**
-	 * instantiates the services only once since they should be singletons
+	 * Instantiates the services only once since they should be singletons
 	 * so the forRoot() should be called only by the AppModule
 	 * @link https://angular.io/guide/singleton-services#forroot
 	 * @returns a module with providers
@@ -23,9 +23,9 @@ export class StarkSettingsModule {
 	}
 
 	/**
-	 * prevent this module from being re-imported
+	 * Prevents this module from being re-imported
 	 * @link https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
-	 * @param parentModule - thee parents module
+	 * @param parentModule - the parent module
 	 */
 	public constructor(
 		@Optional()

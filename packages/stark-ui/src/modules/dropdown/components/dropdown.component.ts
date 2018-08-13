@@ -1,6 +1,10 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, EventEmitter, HostBinding, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+
+/**
+ * Name of the component
+ */
+const componentName: string = "stark-dropdown";
 
 /**
  * Component to display dropdown list based on the options passed as parameters. The dropdown component is based
@@ -10,7 +14,13 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 	selector: "stark-dropdown",
 	templateUrl: "./dropdown.component.html"
 })
-export class StarkDropdownComponent implements OnInit, OnChanges {
+export class StarkDropdownComponent implements OnInit, OnChanges, OnInit {
+	/**
+	 * Adds class="stark-dropdown" attribute on the host component
+	 */
+	@HostBinding("class")
+	public class: string = componentName;
+
 	/**
 	 * If the dropdown will contain a default blank (optional)
 	 */
@@ -86,16 +96,16 @@ export class StarkDropdownComponent implements OnInit, OnChanges {
 	public placeholder: string;
 
 	/**
-	 * Source object to be bound to the dropdown ngModel.
-	 */
-	@Input()
-	public value: any | any[];
-
-	/**
 	 * If the dropdown is required or not. by default, the dropdown is not required
 	 */
 	@Input()
 	public required: boolean = false;
+
+	/**
+	 * Source object to be bound to the dropdown ngModel.
+	 */
+	@Input()
+	public value: any | any[];
 
 	/**
 	 * This will emit the newly selected value.
@@ -105,12 +115,13 @@ export class StarkDropdownComponent implements OnInit, OnChanges {
 
 	public optionsAreSimpleTypes: boolean;
 
-	public constructor(public translateService: TranslateService, @Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
 	/**
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
+		this.logger.debug(componentName + ": component initialized");
 		this.optionsAreSimpleTypes = this.areSimpleTypes();
 		this.setDefaultBlank();
 	}
@@ -136,15 +147,12 @@ export class StarkDropdownComponent implements OnInit, OnChanges {
 	 * In case none of the optionId and optionLabel parameters are provided, then a simple data types array is assumed
 	 */
 	public areSimpleTypes(): boolean {
-		if (
+		return !(
 			typeof this.optionIdProperty !== "undefined" &&
 			this.optionIdProperty !== "" &&
 			typeof this.optionLabelProperty !== "undefined" &&
 			this.optionLabelProperty !== ""
-		) {
-			return false;
-		}
-		return true;
+		);
 	}
 
 	/**

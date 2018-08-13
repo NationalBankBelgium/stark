@@ -1,14 +1,14 @@
 /* ============================================================================== */
 /*  S t a r k   P r e t t y   P r i n t                                           */
 /* ============================================================================== */
-/* stark: src/modules/pretty-print/components/_pretty-print-theme.scss */
+/* stark-ui: src/modules/pretty-print/components/_pretty-print.component.scss */
 
 .stark-pretty-print {
-  & pre,
-  & pre[class*="language-"] > code {
+  pre,
+  pre[class*="language-"] > code {
     white-space: pre-wrap;
     word-wrap: break-word;
   }
 }
 
-/* end stark: src/modules/pretty-print/components/_pretty-print-theme.scss */
+/* end stark: src/modules/pretty-print/components/_pretty-print.component.scss */

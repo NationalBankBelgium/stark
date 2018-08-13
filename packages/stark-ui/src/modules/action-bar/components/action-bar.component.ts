@@ -1,8 +1,14 @@
-import { Component, ViewEncapsulation, Input } from "@angular/core";
+import { Component, Inject, Input, HostBinding, OnInit, ViewEncapsulation } from "@angular/core";
 import { StarkActionBarConfig } from "./action-bar-config.intf";
 import { StarkAction } from "./action.intf";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 export type StarkActionBarComponentMode = "full" | "compact";
+
+/**
+ * Name of the component
+ */
+const componentName: string = "stark-action-bar";
 
 /**
  * Component to display the application's action bars
@@ -12,7 +18,13 @@ export type StarkActionBarComponentMode = "full" | "compact";
 	templateUrl: "./action-bar.component.html",
 	encapsulation: ViewEncapsulation.None
 })
-export class StarkActionBarComponent {
+export class StarkActionBarComponent implements OnInit {
+	/**
+	 * Adds class="stark-action-bar" attribute on the host component
+	 */
+	@HostBinding("class")
+	public class: string = componentName;
+
 	/**
 	 * HTML id of action bar component.
 	 */
@@ -56,6 +68,19 @@ export class StarkActionBarComponent {
 	 * status of the extended action in full mode
 	 */
 	public isExtended: boolean = false;
+
+	/**
+	 * Class constructor
+	 * @param logger - The logger of the application
+	 */
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnInit(): void {
+		this.logger.debug(componentName + ": component initialized");
+	}
 
 	/**
 	 * toggle the extended action in full mode

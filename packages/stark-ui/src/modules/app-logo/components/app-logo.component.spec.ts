@@ -8,7 +8,7 @@ import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
 describe("AppLogoComponent", () => {
-	let comp: StarkAppLogoComponent;
+	let component: StarkAppLogoComponent;
 	let fixture: ComponentFixture<StarkAppLogoComponent>;
 
 	/**
@@ -35,7 +35,7 @@ describe("AppLogoComponent", () => {
 	 */
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkAppLogoComponent);
-		comp = fixture.componentInstance;
+		component = fixture.componentInstance;
 
 		fixture.detectChanges(); // trigger initial data binding
 	});
@@ -43,16 +43,16 @@ describe("AppLogoComponent", () => {
 	describe("on initialization", () => {
 		it("should set internal component properties", () => {
 			expect(fixture).toBeDefined();
-			expect(comp).toBeDefined();
+			expect(component).toBeDefined();
 
-			expect(comp.logger).not.toBeNull();
-			expect(comp.logger).toBeDefined();
-			expect(comp.routingService).not.toBeNull();
-			expect(comp.routingService).toBeDefined();
+			expect(component.logger).not.toBeNull();
+			expect(component.logger).toBeDefined();
+			expect(component.routingService).not.toBeNull();
+			expect(component.routingService).toBeDefined();
 		});
 
 		it("should NOT have any inputs set", () => {
-			expect(comp.homeStateParams).toBeUndefined();
+			expect(component.homeStateParams).toBeUndefined();
 		});
 	});
 
@@ -60,16 +60,16 @@ describe("AppLogoComponent", () => {
 		it("should navigate to Home", () => {
 			const dummyClickEvent: SpyObj<Event> = createSpyObj("dummyClickEvent", ["preventDefault"]);
 
-			comp.homeStateParams = {
+			component.homeStateParams = {
 				someParam: "dummy param"
 			};
 			fixture.detectChanges();
 
 			// routingService.navigateToHome is already an Spy
-			(<Spy>comp.routingService.navigateToHome).calls.reset();
-			comp.logoClickHandler(dummyClickEvent);
-			expect(comp.routingService.navigateToHome).toHaveBeenCalledTimes(1);
-			expect(comp.routingService.navigateToHome).toHaveBeenCalledWith(comp.homeStateParams);
+			(<Spy>component.routingService.navigateToHome).calls.reset();
+			component.logoClickHandler(dummyClickEvent);
+			expect(component.routingService.navigateToHome).toHaveBeenCalledTimes(1);
+			expect(component.routingService.navigateToHome).toHaveBeenCalledWith(component.homeStateParams);
 		});
 	});
 });
