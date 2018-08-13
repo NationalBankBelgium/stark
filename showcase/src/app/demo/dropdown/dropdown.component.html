@@ -1,0 +1,69 @@
+<example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/single-required-selection" [exampleTitle]="'SHOWCASE.DEMO.DROPDOWNS.REQUIRED' | translate">
+	<stark-dropdown
+			dropdownId="serviceDropdown"
+			[options]="serviceDropdownOptions"
+			[value]="selectedService"
+			placeholder="SHOWCASE.DEMO.DROPDOWNS.SELECT_SERVICE"
+			optionIdProperty="id"
+			optionLabelProperty="value"
+			(dropdownSelectionChanged)="serviceDropdownOnChange($event)"
+			required>
+	</stark-dropdown>
+	<div *ngIf="selectedService"> {{ 'SHOWCASE.DEMO.DROPDOWNS.SELECTED_VALUE' | translate }}: {{ selectedService }}</div>
+</example-viewer>
+
+<example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/single-blank-selection"
+				[exampleTitle]="'SHOWCASE.DEMO.DROPDOWNS.BLANK' | translate">
+	<stark-dropdown
+			dropdownId="numberDropdown"
+			[options]="[1,2,3,4,5,6,7]"
+			[value]="selectedNumber"
+			placeholder="SHOWCASE.DEMO.DROPDOWNS.SELECT_NUMBER"
+			(dropdownSelectionChanged)="numberDropdownOnChange($event)"
+			[defaultBlank]="true">
+	</stark-dropdown>
+	<div *ngIf="selectedNumber"> {{ 'SHOWCASE.DEMO.DROPDOWNS.SELECTED_VALUE' | translate }}: {{ selectedNumber }}</div>
+</example-viewer>
+
+<example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/multiple-selection"
+				[exampleTitle]="'SHOWCASE.DEMO.DROPDOWNS.MULTIPLE' | translate">
+	<stark-dropdown
+			dropdownId="multipleServiceDropdown"
+			[options]="serviceDropdownOptions"
+			[value]="selectedServices"
+			optionIdProperty="id"
+			optionLabelProperty="value"
+			placeholder="SHOWCASE.DEMO.DROPDOWNS.SELECT_SERVICES"
+			(dropdownSelectionChanged)="multipleServicesDropdownOnChange($event)"
+			multipleSelect="true">
+	</stark-dropdown>
+	<div *ngIf="selectedServices">{{ 'SHOWCASE.DEMO.DROPDOWNS.SELECTED_VALUES' | translate }}: {{ selectedServices }}</div>
+</example-viewer>
+
+<example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/multiple-required-selection"
+				[exampleTitle]="'SHOWCASE.DEMO.DROPDOWNS.MULTIPLE_REQUIRED' | translate">
+	<stark-dropdown
+			dropdownId="multipleServicesRequiredDropdown"
+			[options]="serviceDropdownOptions"
+			[value]="selectedRequiredServices"
+			optionIdProperty="id"
+			optionLabelProperty="value"
+			placeholder="SHOWCASE.DEMO.DROPDOWNS.SELECT_ONE_SERVICE"
+			(dropdownSelectionChanged)="multipleServicesRequiredDropdownOnChange($event)"
+			multipleSelect="true"
+			required>
+	</stark-dropdown>
+	<div *ngIf="selectedRequiredServices">{{ 'SHOWCASE.DEMO.DROPDOWNS.SELECTED_VALUES' | translate }}: {{ selectedRequiredServices }}</div>
+</example-viewer>
+
+<example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/disabled-dropdown"
+				[exampleTitle]="'SHOWCASE.DEMO.DROPDOWNS.DISABLED' | translate">
+	<stark-dropdown
+			dropdownId="disabledDropdown"
+			[options]="[1,2,3,4,5,6,7]"
+			placeholder="SHOWCASE.DEMO.DROPDOWNS.SELECT_DISABLED"
+			[isDisabled]="true"
+			multipleSelect="true">
+	</stark-dropdown>
+</example-viewer>
+

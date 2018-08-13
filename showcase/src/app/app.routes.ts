@@ -3,6 +3,7 @@ import {
 	ButtonComponent,
 	DatePickerComponent,
 	DateRangePickerComponent,
+	DropdownComponent,
 	ExampleViewerComponent,
 	HeaderComponent,
 	KeyboardDirectivesComponent,
@@ -26,5 +27,6 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo-keyboard-directives", url: "/demo/keyboard-directives", component: KeyboardDirectivesComponent },
 	{ name: "demo-pretty-print", url: "/demo/pretty-print", component: PrettyPrintComponent },
 	{ name: "demo-table", url: "/demo/table", component: TableComponent },
+	{ name: "demo-dropdown", url: "/demo/dropdown", component: DropdownComponent },
 	{ name: "otherwise", url: "/otherwise", component: NoContentComponent }
 ];
