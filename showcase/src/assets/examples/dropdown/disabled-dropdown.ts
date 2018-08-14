@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-	selector: "showcase-demo-dropdown",
-	templateUrl: "./disabled-dropdown.html"
+	selector: "demo-dropdown",
+	templateUrl: "./demo-disabled-dropdown.html"
 })
-export class DropdownDisabledComponent implements OnInit {}
+export class DemoDropdownDisabledComponent implements OnInit {}

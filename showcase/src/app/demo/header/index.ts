@@ -1,1 +1,1 @@
-export * from "./header.component";
+export * from "./demo-header.component";

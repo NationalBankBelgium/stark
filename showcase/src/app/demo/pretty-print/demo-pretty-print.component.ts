@@ -10,11 +10,11 @@ export interface FileType {
 }
 
 @Component({
-	selector: "showcase-demo-pretty-print",
-	templateUrl: "./pretty-print.component.html",
-	styleUrls: ["./pretty-print.component.scss"]
+	selector: "demo-pretty-print",
+	templateUrl: "./demo-pretty-print.component.html",
+	styleUrls: ["./demo-pretty-print.component.scss"]
 })
-export class PrettyPrintComponent implements OnInit {
+export class DemoPrettyPrintComponent implements OnInit {
 	public fileTypes: FileType[] = [];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}

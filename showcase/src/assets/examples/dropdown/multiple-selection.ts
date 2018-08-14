@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-	selector: "showcase-demo-dropdown",
-	templateUrl: "./multiple-selection.html"
+	selector: "demo-dropdown",
+	templateUrl: "./demo-multiple-selection.html"
 })
 export class DropdownMultipleSelectionComponent implements OnInit {
 	public selectedServices: string[];
