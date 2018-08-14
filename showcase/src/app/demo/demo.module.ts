@@ -34,6 +34,7 @@ import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.compo
 import { SliderComponent } from "./slider/slider.component";
 import { TableComponent } from "./table/table.component";
 import { DemoTypographyComponent } from "./typography/demo-typography.component";
+import { DemoToastComponent } from "./toast/demo-toast-notification.component";
 import { SharedModule } from "../shared/shared.module";
 import {
 	STARK_DATE_FORMATS,
@@ -102,6 +103,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		LogoutComponent,
 		DemoPrettyPrintComponent,
 		SliderComponent,
+		DemoToastComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,
 		DemoSidebarComponent,
@@ -127,7 +129,8 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		LogoutComponent,
 		DemoPrettyPrintComponent,
 		SliderComponent,
-		TableComponent
+		TableComponent,
+		DemoToastComponent
 	],
 	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]
 })
