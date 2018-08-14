@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
 	selector: "showcase-demo-dropdown",
 	templateUrl: "./single-blank-selection.html"
 })
-export class DropdownSingleBlankSelectionComponent implements OnInit {
+export class DropdownSingleBlankSelectionComponent {
 	public selectedNumber: string;
 
 	public numberDropdownOnChange(selectedValue: string): void {

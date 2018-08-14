@@ -1,4 +1,4 @@
-import {Component, HostBinding, Inject, Input, OnInit, ViewEncapsulation} from "@angular/core";
+import { Component, HostBinding, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
 
 import {
 	STARK_LOGGING_SERVICE,
@@ -30,7 +30,7 @@ export class StarkAppLogoutComponent implements OnInit {
 	 */
 	@HostBinding("class")
 	public class: string = componentName;
-	
+
 	/**
 	 * Desired icon of the logout button
 	 */

@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs */
+/* tslint:disable:completed-docs*/
 import { Action, Store } from "@ngrx/store";
 import { EMPTY, from, Observable } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
@@ -66,6 +66,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public lastTransition: Transition;
 	public knownRejectionCausesRegex: RegExp;
 	public knownRejectionCauses: string[];
+	public errorLastTransition: string = "lastTransition needs to be defined";
 
 	// To store the state history
 	/** @internal */
@@ -434,82 +435,100 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		);
 	}
 
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
 	public getStateTreeParams(): Map<string, any> {
 		const stateTreeParams: Map<string, any> = new Map<string, any>();
 
-		// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
-		const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
+		if (typeof this.lastTransition !== "undefined") {
+			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
+			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
 
-		// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
-		let index: number = pathNodes.length - 1;
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number = pathNodes.length - 1;
 
-		for (index; index >= 0; index--) {
-			const pathNode: PathNode = pathNodes[index];
+			for (index; index >= 0; index--) {
+				const pathNode: PathNode = pathNodes[index];
 
-			// skipping abstract states and the root state
-			if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
-				let stateParams: RawParams | undefined;
+				// skipping abstract states and the root state
+				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
+					let stateParams: RawParams | undefined;
 
-				for (let i: number = this._starkStateHistory.length - 1; i >= 0; i--) {
-					if (this._starkStateHistory[i].name === pathNode.state.name) {
-						stateParams = this._starkStateHistory[i].params;
-						break;
+					for (let i: number = this._starkStateHistory.length - 1; i >= 0; i--) {
+						if (this._starkStateHistory[i].name === pathNode.state.name) {
+							stateParams = this._starkStateHistory[i].params;
+							break;
+						}
 					}
-				}
 
-				stateTreeParams.set(pathNode.state.name, stateParams);
+					stateTreeParams.set(pathNode.state.name, stateParams);
+				}
 			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
 		}
 
 		return stateTreeParams;
 	}
 
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
 	public getStateTreeResolves(): Map<string, any> {
 		const stateTreeResolves: Map<string, any> = new Map<string, any>();
 
-		// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
-		const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
+		if (typeof this.lastTransition !== "undefined") {
+			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
+			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
 
-		// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
-		let index: number = pathNodes.length - 1;
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number = pathNodes.length - 1;
 
-		for (index; index >= 0; index--) {
-			const pathNode: PathNode = pathNodes[index];
+			for (index; index >= 0; index--) {
+				const pathNode: PathNode = pathNodes[index];
 
-			// skipping abstract states and the root state
-			if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
-				// taking only the current state and parent/ancestor states
-				if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
-					const resolvablesData: { [key: string]: any } = this.extractResolvablesData(pathNode.resolvables);
-					const stateResolves: any = _isEmpty(resolvablesData) ? undefined : resolvablesData;
-					stateTreeResolves.set(pathNode.state.name, stateResolves);
+				// skipping abstract states and the root state
+				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
+					// taking only the current state and parent/ancestor states
+					if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
+						const resolvablesData: { [key: string]: any } = this.extractResolvablesData(pathNode.resolvables);
+						const stateResolves: any = _isEmpty(resolvablesData) ? undefined : resolvablesData;
+						stateTreeResolves.set(pathNode.state.name, stateResolves);
+					}
 				}
 			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
 		}
 
 		return stateTreeResolves;
 	}
 
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
 	public getStateTreeData(): Map<string, any> {
 		const stateTreeData: Map<string, any> = new Map<string, any>();
 
-		// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states)
-		const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
+		if (typeof this.lastTransition !== "undefined") {
+			// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states)
+			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
 
-		// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
-		let index: number = pathNodes.length - 1;
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number = pathNodes.length - 1;
 
-		for (index; index >= 0; index--) {
-			const pathNode: PathNode = pathNodes[index];
+			for (index; index >= 0; index--) {
+				const pathNode: PathNode = pathNodes[index];
 
-			// skipping abstract states and the root state
-			if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
-				// taking only the current state and parent/ancestor states
-				if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
-					const stateData: any = _isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
-					stateTreeData.set(pathNode.state.name, stateData);
+				// skipping abstract states and the root state
+				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
+					// taking only the current state and parent/ancestor states
+					if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
+						const stateData: any = _isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
+						stateTreeData.set(pathNode.state.name, stateData);
+					}
 				}
 			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
 		}
 
 		return stateTreeData;

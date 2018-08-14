@@ -59,6 +59,14 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
+      "BREADCRUMB": {
+        "CONFIG_INPUT": "Breadcrumb demonstration (met breadcrumbConfig)",
+        "NO_INPUT": "Breadcrumb demonstration (zonder parameters)",
+        "ROOT": "Voorouder",
+        "GRANDPARENT": "Grootouder",
+        "PARENT": "Ouder",
+        "CHILD": "Kind"
+      },
       "DROPDOWNS": {
         "PR": "Informaticatoepassingen",
         "IO": "Informatica-infrastructuur en operaties",

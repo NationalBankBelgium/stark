@@ -1,8 +1,9 @@
 /**
  * Angular 2 decorators and services
  */
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import { AppState } from "./app.service";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
  * App Component
@@ -18,12 +19,12 @@ import { AppState } from "./app.service";
 export class AppComponent implements OnInit {
 	public appState: AppState;
 
-	public constructor(appState: AppState) {
+	public constructor(appState: AppState, @Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
 		this.appState = appState;
 	}
 
 	public ngOnInit(): void {
-		console.log("Initial App State", this.appState.state);
+		this.logger.debug("Initial App State", this.appState.state);
 	}
 }
 
