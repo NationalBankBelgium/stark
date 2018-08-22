@@ -75,6 +75,10 @@
         "SELECT_SERVICES": "Select one or more services",
         "SELECT_ONE_SERVICE": "Select at least one service",
         "SELECT_DISABLED": "Sorry, it's disabled"
+      },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
+        "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon"
       }
     },
     "STYLEGUIDE": {

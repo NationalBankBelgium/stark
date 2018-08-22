@@ -9,3 +9,4 @@ export * from "./keyboard-directives";
 export * from "./pretty-print";
 export * from "./table";
 export * from "./demo.module";
+export * from "./logout";

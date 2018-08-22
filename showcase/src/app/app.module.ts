@@ -38,7 +38,7 @@ import {
 	StarkUser
 } from "@nationalbankbelgium/stark-core";
 
-import { StarkAppLogoModule, StarkSvgViewBoxModule, StarkDatePickerModule } from "@nationalbankbelgium/stark-ui";
+import { StarkAppLogoModule, StarkAppLogoutModule, StarkSvgViewBoxModule, StarkDatePickerModule } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
@@ -170,6 +170,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		DemoModule,
 		NewsModule,
 		StarkAppLogoModule,
+		StarkAppLogoutModule,
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule
 	],
