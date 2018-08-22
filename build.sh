@@ -255,7 +255,7 @@ do
           compilePackage ${SRC_DIR} ${OUT_DIR} ${PACKAGE} ${TSC_PACKAGES[@]+"${TSC_PACKAGES[@]}"}
 
           logInfo "Copy assets folders for package $PACKAGE"
-          syncOptions=(-a --include="**/assets/" --exclude="*.js" --exclude="*.js.map" --exclude="*.ts" --include="*.json" --exclude="node_modules/")
+          syncOptions=(-a --include="**/assets/" --exclude="*.js" --exclude="*.js.map" --exclude="*.ts" --include="*.json" --exclude="node_modules/" --exclude="coverage/" --exclude="reports/")
           syncFiles $SRC_DIR $OUT_DIR "${syncOptions[@]}"
           unset syncOptions
         fi

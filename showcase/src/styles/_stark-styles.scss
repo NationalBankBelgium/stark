@@ -1,0 +1,18 @@
+/*
+IMPORTANT: Stark styles are provided as SCSS styles so they should be imported in a SCSS file!
+*/
+/* Stark styles */
+@import "~@nationalbankbelgium/stark-ui/assets/styles/header";
+
+/* Stark components */
+@import "~@nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo-theme";
+@import "~@nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/action-bar/components/action-bar-theme";
+@import "~@nationalbankbelgium/stark-ui/src/modules/action-bar/components/action-bar.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/breadcrumb/components/breadcrumb.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/date-range-picker/components/date-range-picker.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/slider/components/slider-theme";
+@import "~@nationalbankbelgium/stark-ui/src/modules/pretty-print/components/pretty-print.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/table/components/table.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/table/components/dialogs/multisort.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/dropdown/components/dropdown.component";
