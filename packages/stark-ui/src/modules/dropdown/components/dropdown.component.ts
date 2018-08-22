@@ -1,4 +1,15 @@
-import { Component, EventEmitter, HostBinding, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import {
+	Component,
+	EventEmitter,
+	HostBinding,
+	Inject,
+	Input,
+	OnChanges,
+	OnInit,
+	Output,
+	SimpleChanges,
+	ViewEncapsulation
+} from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
@@ -12,7 +23,8 @@ const componentName: string = "stark-dropdown";
  */
 @Component({
 	selector: "stark-dropdown",
-	templateUrl: "./dropdown.component.html"
+	templateUrl: "./dropdown.component.html",
+	encapsulation: ViewEncapsulation.None
 })
 export class StarkDropdownComponent implements OnInit, OnChanges, OnInit {
 	/**
