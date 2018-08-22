@@ -22,6 +22,7 @@ import { DemoColorsComponent } from "./colors/demo-colors.component";
 import { ButtonComponent } from "./button/button.component";
 import { DatePickerComponent } from "./date-picker/date-picker.component";
 import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
+import { DemoCollapsibleComponent } from "./collapsible/demo-collapsible.component";
 import { DemoSidebarComponent } from "./sidebar/demo-sidebar.component";
 import { DemoDropdownComponent } from "./dropdown/demo-dropdown.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
@@ -47,7 +48,8 @@ import {
 	StarkPrettyPrintModule,
 	StarkSliderModule,
 	StarkSvgViewBoxModule,
-	StarkTableModule
+	StarkTableModule,
+	StarkCollapsibleModule
 } from "@nationalbankbelgium/stark-ui";
 import { MAT_DATE_FORMATS } from "@angular/material/core";
 
@@ -79,12 +81,14 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
 		StarkTableModule,
+		StarkCollapsibleModule,
 		StarkAppLogoutModule
 	],
 	declarations: [
 		ActionBarComponent,
 		DemoBreadcrumbComponent,
 		ButtonComponent,
+		DemoCollapsibleComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,
 		DemoCardComponent,
@@ -114,6 +118,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		DatePickerComponent,
 		DateRangePickerComponent,
 		DemoDropdownComponent,
+		DemoCollapsibleComponent,
 		DemoTypographyComponent,
 		ExampleViewerComponent,
 		HeaderComponent,

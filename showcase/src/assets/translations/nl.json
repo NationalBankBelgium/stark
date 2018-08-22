@@ -30,6 +30,16 @@
         "CODE": "Hier is de code om een kaart te tonen:",
         "TITLE": "Stark Kaarten"
       },
+      "COLLAPSIBLE": {
+        "CLOSED": "Gesloten",
+        "CUSTOM_ICON": "Aangepast icon",
+        "DEFAULT_ICON": "Standaard pictogram",
+        "HTML_CONTENT": "Alle HTML-inhoud",
+        "OPEN": "Open",
+        "TITLE_0": "Standaard icon collapsible titel",
+        "TITLE_1": "Aangepast icon collapsible titel",
+        "TOGGLE_COLLAPSIBLE": "Collapsible omschakelen"
+      },
       "COLORS": {
         "ADVANCED": {
           "DETAILS": "Angular Material gebruikt drie kleurenpaletten: een primair palet, een accentpalet en een waarschuwingspalet. Stark biedt je de mogelijkheid om deze paletten te definiëren aan de hand van een SCSS map met de naam $stark-base-theme. Deze map bevat 3 eigenschappen, één voor elk Angular Material palet. Je moet de SCSS functie met de naam mat-palette() gebruiken om de Angular Material thematisering op correcte wijze te instantiëren. Merk op dat je het thema van Angular Materiaal moet importeren voordat je de functie mat-palette() gebruikt.",

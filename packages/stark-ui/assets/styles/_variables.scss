@@ -11,6 +11,10 @@ $color-theme: (
     color: #323232,
     contrast: $light-primary-text
   ),
+  black-opaque: (
+    color: #000,
+    contrast: $light-primary-text
+  ),
   neutral: (
     color: #bfbfbf,
     contrast: $light-primary-text
@@ -32,11 +36,9 @@ $color-theme: (
     contrast: $dark-primary-text
   )
 );
-
 @if variable-exists(stark-color-theme) {
   $color-theme: map-merge($color-theme, $stark-color-theme);
 }
-
 $primary-palette: (
   50: #e3f2fd,
   100: #bbdefb,
@@ -137,6 +139,7 @@ $backgrounds: (
   status-bar: map_get($mat-grey, 300),
   app-bar: map_get($mat-grey, 100),
   background: #f6f9fa,
+  background-light: rgba(#000, 0.02),
   hover: rgba(black, 0.04),
   card: #fff,
   dialog: #fff,
@@ -170,7 +173,6 @@ $base-theme: (
   accent-palette: mat-palette($accent-palette),
   warn-palette: mat-palette($warning-palette)
 );
-
 // font-size, line-height, font-weight
 // https://material.angular.io/guide/typography
 $typography-theme: (

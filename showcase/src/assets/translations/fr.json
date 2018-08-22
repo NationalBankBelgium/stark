@@ -30,6 +30,16 @@
         "CODE": "Voici le code correspondant à cette carte:",
         "TITLE": "Stark Cartes"
       },
+      "COLLAPSIBLE": {
+        "CLOSED": "Fermé",
+        "CUSTOM_ICON": "Icône custom",
+        "DEFAULT_ICON": "Icône par défaut",
+        "HTML_CONTENT": "N'impoerte quel contenu HTML",
+        "OPEN": "Ouvert",
+        "TITLE_0": "Titre du collapsible avec icône par défaut",
+        "TITLE_1": "Titre du collapsible avec icône custom",
+        "TOGGLE_COLLAPSIBLE": "Ouvrir/fermer le collapsible"
+      },
       "COLORS": {
         "ADVANCED": {
           "DETAILS": "Angular Material utilise trois palettes de couleurs: primary, accent et warn. Stark donne la possibilité de définir ces palettes de couleur via une map SCSS nommée <code>$stark-base-theme</code>. Cette map contient 3 propriétés, une pour chaque palette d'Angular Material et la fonction <code>mat-palette()</code> doit être utilisée pour configurer correctement Stark et Angular Material. A noter que cette fonction est définit par Angular Material donc le theme de Angular Material doit être importer au préalable.",

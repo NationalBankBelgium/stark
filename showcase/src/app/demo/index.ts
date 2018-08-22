@@ -1,6 +1,7 @@
 export * from "./action-bar";
 export * from "./breadcrumb";
 export * from "./button";
+export * from "./collapsible";
 export * from "./colors";
 export * from "./card";
 export * from "./date-picker";

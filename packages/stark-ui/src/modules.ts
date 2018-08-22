@@ -2,6 +2,7 @@ export * from "./modules/action-bar";
 export * from "./modules/app-logo";
 export * from "./modules/app-logout";
 export * from "./modules/breadcrumb";
+export * from "./modules/collapsible";
 export * from "./modules/app-sidebar";
 export * from "./modules/keyboard-directives";
 export * from "./modules/date-picker";
