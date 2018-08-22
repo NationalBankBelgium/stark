@@ -8,9 +8,12 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
  */
 import { AppComponent } from "./app.component";
 import { AppState } from "./app.service";
+import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import Spy = jasmine.Spy;
 
 describe(`App`, () => {
-	let comp: AppComponent;
+	let component: AppComponent;
 	let fixture: ComponentFixture<AppComponent>;
 
 	/**
@@ -22,7 +25,7 @@ describe(`App`, () => {
 				declarations: [AppComponent],
 				imports: [TranslateModule.forRoot()],
 				schemas: [NO_ERRORS_SCHEMA],
-				providers: [AppState, TranslateService]
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, AppState, TranslateService]
 			})
 				/**
 				 * Compile template and css
@@ -36,7 +39,7 @@ describe(`App`, () => {
 	 */
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AppComponent);
-		comp = fixture.componentInstance;
+		component = fixture.componentInstance;
 
 		/**
 		 * Trigger initial data binding
@@ -46,14 +49,14 @@ describe(`App`, () => {
 
 	it(`should be readly initialized`, () => {
 		expect(fixture).toBeDefined();
-		expect(comp).toBeDefined();
+		expect(component).toBeDefined();
 	});
 
 	it("should log ngOnInit", () => {
-		spyOn(console, "log");
-		expect(console.log).not.toHaveBeenCalled();
+		(<Spy>component.logger.debug).calls.reset();
+		expect(component.logger.debug).not.toHaveBeenCalled();
 
-		comp.ngOnInit();
-		expect(console.log).toHaveBeenCalled();
+		component.ngOnInit();
+		expect(component.logger.debug).toHaveBeenCalled();
 	});
 });

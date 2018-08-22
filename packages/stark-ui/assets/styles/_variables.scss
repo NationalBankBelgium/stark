@@ -32,7 +32,6 @@ $primary-palette: (
     A700: $light-primary-text
   )
 );
-
 $accent-palette: (
   50: #ff99c2,
   100: #ff4d94,
@@ -65,7 +64,6 @@ $accent-palette: (
     A700: $light-primary-text
   )
 );
-
 $warning-palette: (
   50: #fff3e0,
   100: #ffe0b2,
@@ -98,7 +96,6 @@ $warning-palette: (
     A700: black
   )
 );
-
 $backgrounds: (
   status-bar: map_get($mat-grey, 300),
   app-bar: map_get($mat-grey, 100),
@@ -115,7 +112,6 @@ $backgrounds: (
   unselected-chip: map_get($mat-grey, 300),
   disabled-list-option: map_get($mat-grey, 200)
 );
-
 $foregrounds: (
   base: black,
   divider: $dark-dividers,
@@ -132,13 +128,11 @@ $foregrounds: (
   slider-off: rgba(black, 0.26),
   slider-off-active: rgba(black, 0.38)
 );
-
 $base-theme: (
   primary-palette: mat-palette($primary-palette),
   accent-palette: mat-palette($accent-palette),
   warn-palette: mat-palette($warning-palette)
 );
-
 $button-theme: (
   alert: (
     color: #d32f2f,
@@ -157,15 +151,12 @@ $button-theme: (
     contrast: $light-primary-text
   )
 );
-
 $card-theme: (
   border-radius: $border-radius
 );
-
 $table-theme: (
   border-radius: $border-radius
 );
-
 // font-size, line-height, font-weight
 $typography-theme: (
   font-family:

@@ -59,6 +59,14 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
+      "BREADCRUMB": {
+        "CONFIG_INPUT": "Démonstration du breadcrumb component (avec breadcrumbConfig)",
+        "NO_INPUT": "Démonstration du breadcrumb component (sans paramètres)",
+        "ROOT": "Ancêtre racine",
+        "GRANDPARENT": "Grand-parent",
+        "PARENT": "Parent",
+        "CHILD": "Enfant"
+      },
       "DROPDOWNS": {
         "PR": "Applications informatiques",
         "IO": "Infrastructure et opérations informatiques",
