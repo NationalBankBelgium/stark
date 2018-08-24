@@ -6,7 +6,7 @@ import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/c
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkRoutingTransitionHook } from "@nationalbankbelgium/stark-core";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
 import { MockStarkRoutingService, MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { By } from "@angular/platform-browser";
 import Spy = jasmine.Spy;
@@ -82,8 +82,7 @@ describe("DemoBreadcrumbComponent", () => {
 			declarations: [StarkBreadcrumbComponent, TestHostComponent],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-				TranslateService
+				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
 			],
 			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (selectionChange)
 		}).compileComponents();

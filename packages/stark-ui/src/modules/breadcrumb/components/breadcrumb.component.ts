@@ -9,7 +9,6 @@ import {
 	StarkLoggingService,
 	StarkRoutingTransitionHook
 } from "@nationalbankbelgium/stark-core";
-import { TranslateService } from "@ngx-translate/core";
 
 /**
  * Name of the component
@@ -51,8 +50,7 @@ export class StarkBreadcrumbComponent implements OnInit, OnDestroy {
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
-		public translateService: TranslateService
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
 	) {}
 
 	/**
