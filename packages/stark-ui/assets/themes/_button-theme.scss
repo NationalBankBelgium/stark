@@ -1,3 +1,5 @@
+$icon-size: 18px;
+
 @mixin stark-button-color($color, $contrast) {
   &.mat-button,
   &.mat-icon-button,
@@ -52,12 +54,12 @@
 }
 
 .mat-icon.stark-small-icon {
-  line-height: 18px;
-  height: 18px;
-  width: 18px;
+  line-height: $icon-size;
+  height: $icon-size;
+  width: $icon-size;
   svg {
-    height: 18px;
-    width: 18px;
+    height: $icon-size;
+    width: $icon-size;
   }
 }
 
@@ -69,4 +71,14 @@
 .mat-fab,
 .mat-mini-fab {
   text-transform: uppercase;
+}
+
+button {
+  &.mat-mini-fab,
+  &.mat-fab {
+    line-height: $icon-size;
+    .mat-button-wrapper {
+      line-height: $icon-size;
+    }
+  }
 }
