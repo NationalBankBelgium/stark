@@ -80,15 +80,19 @@
         "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram"
       },
       "PRETTY-PRINT": {
-        "ORIGINAL_CODE": "Originele Code",
-        "PRETTY_PRINTED": "Geformatteerd",
-        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Geformatteerd en gehighlight",
         "CSS": "Pretty-Print CSS",
+        "ENABLE_HIGHLIGHTING": "Highlighting activeren",
+        "ENTER_DATA": "Typ of kopieer/plak ongeformatteerde code",
         "HTML": "Pretty-Print HTML",
         "JAVASCRIPT": "Pretty-Print Javascript",
         "JSON": "Pretty-Print JSON",
+        "ORIGINAL_CODE": "Originele Code",
+        "PRETTY_PRINTED": "Geformatteerd",
+        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Geformatteerd en gehighlight",
         "SCSS": "Pretty-Print SCSS",
+        "SELECT_DATAFORMAT": "Selecteer een formaat",
         "SQL": "Pretty-Print SQL",
+        "TRY_IT_YOURSELF": "Probeer het zelf",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },

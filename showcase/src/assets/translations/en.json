@@ -80,15 +80,19 @@
         "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon"
       },
       "PRETTY-PRINT": {
-        "ORIGINAL_CODE": "Original Code",
-        "PRETTY_PRINTED": "Formatted",
-        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Formatted with highlighting",
         "CSS": "Pretty-Print CSS",
+        "ENABLE_HIGHLIGHTING": "Enable highlighting",
+        "ENTER_DATA": "Type or copy/paste unformatted code",
         "HTML": "Pretty-Print HTML",
         "JAVASCRIPT": "Pretty-Print Javascript",
         "JSON": "Pretty-Print JSON",
+        "ORIGINAL_CODE": "Original Code",
+        "PRETTY_PRINTED": "Formatted",
+        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Formatted with highlighting",
         "SCSS": "Pretty-Print SCSS",
+        "SELECT_DATAFORMAT": "Select a format",
         "SQL": "Pretty-Print SQL",
+        "TRY_IT_YOURSELF": "Try it yourself",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },

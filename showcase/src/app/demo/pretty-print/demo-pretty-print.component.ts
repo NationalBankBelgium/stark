@@ -10,12 +10,17 @@ export interface FileType {
 }
 
 @Component({
-	selector: "showcase-demo-pretty-print",
-	templateUrl: "./pretty-print.component.html",
-	styleUrls: ["./pretty-print.component.scss"]
+	selector: "demo-pretty-print",
+	templateUrl: "./demo-pretty-print.component.html",
+	styleUrls: ["./demo-pretty-print.component.scss"]
 })
-export class PrettyPrintComponent implements OnInit {
+export class DemoPrettyPrintComponent implements OnInit {
 	public fileTypes: FileType[] = [];
+
+	public dataFormats: StarkPrettyPrintFormat[] = [];
+	public selectedDataFormat: string;
+	public highlightingEnabled: boolean;
+	public unformattedData: string;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
@@ -28,6 +33,19 @@ export class PrettyPrintComponent implements OnInit {
 		this.addJson();
 		this.addXml();
 		this.addSql();
+
+		this.unformattedData = "";
+		this.selectedDataFormat = "";
+		this.highlightingEnabled = false;
+		this.dataFormats = this.fileTypes.map((fileType: FileType) => fileType.format);
+	}
+
+	public dataFormatDropdownOnChange(selectedValue: string): void {
+		this.selectedDataFormat = selectedValue;
+	}
+
+	public toggleHighlightingEnabled(): void {
+		this.highlightingEnabled = !this.highlightingEnabled;
 	}
 
 	public trackFileTypes(_index: number, fileType: any): string {
@@ -64,10 +82,9 @@ export class PrettyPrintComponent implements OnInit {
 			format: "html",
 			title: "SHOWCASE.DEMO.PRETTY-PRINT.HTML",
 			path: "pretty-print/html",
-			rawData: [
-				"<!DOCTYPE html><html><head><style>body {background-color: powderblue;}h1{color: blue;}p{color: red;}",
-				"</style></head><body><h1>This is a heading</h1><p>This is a paragraph.</p></body></html>"
-			].join("")
+			rawData: `<!DOCTYPE html><html><head><style>body {background-color: powderblue;}h1{color: blue;}
+				flashy{color: red;}</style></head><body><h1>This is a heading</h1><p class="flashy">
+				This is a flashy paragraph.</p></body></html>`
 		};
 		this.fileTypes.push(fileType);
 	}
@@ -128,11 +145,9 @@ export class PrettyPrintComponent implements OnInit {
 			format: "xml",
 			title: "SHOWCASE.DEMO.PRETTY-PRINT.XML",
 			path: "pretty-print/xml",
-			rawData: [
-				'<menu id="file" value="File"><menuitem value="New" onclick="CreateNewDoc()" />',
-				'<menuitem value="Open" onclick="OpenDoc()" />',
-				'<menuitem value="Close" onclick="CloseDoc()" /></menu>'
-			].join("")
+			rawData: `<menu id="file" value="File"><menuitem value="New" onclick="CreateNewDoc()" />
+				<menuitem value="Open" onclick="OpenDoc()" />
+				<menuitem value="Close" onclick="CloseDoc()" /></menu>`
 		};
 		this.fileTypes.push(fileType);
 	}
