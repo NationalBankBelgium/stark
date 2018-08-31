@@ -19,26 +19,27 @@ import { ButtonComponent } from "./button/button.component";
 import { DatePickerComponent } from "./date-picker/date-picker.component";
 import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
 import { DropdownComponent } from "./dropdown/dropdown.component";
-import { LogoutComponent } from "./logout/logout.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { HeaderComponent } from "./header/header.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
+import { LogoutComponent } from "./logout/logout.component";
 import { PrettyPrintComponent } from "./pretty-print/pretty-print.component";
+import { SliderComponent } from "./slider/slider.component";
 import { TableComponent } from "./table/table.component";
 import { SharedModule } from "../shared/shared.module";
 import {
-	StarkActionBarModule,
-	StarkBreadcrumbModule,
 	STARK_DATE_FORMATS,
+	StarkActionBarModule,
+	StarkAppLogoutModule,
+	StarkBreadcrumbModule,
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
 	StarkDropdownModule,
 	StarkKeyboardDirectivesModule,
 	StarkPrettyPrintModule,
 	StarkSliderModule,
-	StarkTableModule,
 	StarkSvgViewBoxModule,
-	StarkAppLogoutModule
+	StarkTableModule
 } from "@nationalbankbelgium/stark-ui";
 import { MAT_DATE_FORMATS } from "@angular/material/core";
 
@@ -73,16 +74,15 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		ActionBarComponent,
 		DemoBreadcrumbComponent,
 		ButtonComponent,
+		DatePickerComponent,
+		DateRangePickerComponent,
 		DropdownComponent,
-		LogoutComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
 		KeyboardDirectivesComponent,
+		LogoutComponent,
 		PrettyPrintComponent,
-		DatePickerComponent,
-		DateRangePickerComponent,
-		ExampleViewerComponent,
-		KeyboardDirectivesComponent,
+		SliderComponent,
 		TableComponent
 	],
 	exports: [
@@ -92,11 +92,12 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		DatePickerComponent,
 		DateRangePickerComponent,
 		DropdownComponent,
-		LogoutComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
 		KeyboardDirectivesComponent,
+		LogoutComponent,
 		PrettyPrintComponent,
+		SliderComponent,
 		TableComponent
 	],
 	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]

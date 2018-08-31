@@ -8,6 +8,7 @@ export * from "./example-viewer";
 export * from "./header";
 export * from "./keyboard-directives";
 export * from "./pretty-print";
+export * from "./slider";
 export * from "./table";
 export * from "./demo.module";
 export * from "./logout";

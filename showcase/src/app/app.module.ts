@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconRegistry } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -146,6 +147,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		FormsModule,
 		MatButtonModule,
 		MatCardModule,
+		MatCheckboxModule,
 		MatIconModule,
 		MatListModule,
 		MatSidenavModule,

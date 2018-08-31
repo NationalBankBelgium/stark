@@ -1,10 +1,22 @@
 {
   "SHOWCASE": {
+    "COMMON": {
+      "ENABLED": "Enabled",
+      "VALUE": "Value"
+    },
     "DEMO": {
       "ACTION-BAR": {
         "CLASSIC-FULL": "Action Bar Classic Full",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "ALT": "Action Bar Alternative"
+      },
+      "BREADCRUMB": {
+        "CONFIG_INPUT": "Breadcrumb demonstration (with breadcrumbConfig)",
+        "NO_INPUT": "Breadcrumb demonstration (without parameters)",
+        "ROOT": "Root ancestor",
+        "GRANDPARENT": "Grand parent",
+        "PARENT": "Parent",
+        "CHILD": "Child"
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Custom Filter",
@@ -14,6 +26,23 @@
       },
       "DATE_RANGE_PICKER": {
         "FULL": "Date Range Picker"
+      },
+      "DROPDOWNS": {
+        "PR": "IT applications",
+        "IO": "Informatics infrastructure and operations",
+        "CS": "IT customer services",
+        "REQUIRED": "Single required selection",
+        "BLANK": "Single selection with default blank",
+        "MULTIPLE": "Multiple selection",
+        "MULTIPLE_REQUIRED": "Required multiple selection",
+        "DISABLED": "Disabled dropdown",
+        "SELECTED_VALUE": "Selected value ",
+        "SELECTED_VALUES": "Selected values ",
+        "SELECT_SERVICE": "Select Service",
+        "SELECT_NUMBER": "Select your lucky number",
+        "SELECT_SERVICES": "Select one or more services",
+        "SELECT_ONE_SERVICE": "Select at least one service",
+        "SELECT_DISABLED": "Sorry, it's disabled"
       },
       "HEADER": {
         "TITLE": "Stark App Header Guidelines",
@@ -46,6 +75,10 @@
           "TYPE_A_VALUE": "Type a value"
         }
       },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
+        "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon"
+      },
       "PRETTY-PRINT": {
         "ORIGINAL_CODE": "Original Code",
         "PRETTY_PRINTED": "Formatted",
@@ -59,34 +92,11 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
-      "BREADCRUMB": {
-        "CONFIG_INPUT": "Breadcrumb demonstration (with breadcrumbConfig)",
-        "NO_INPUT": "Breadcrumb demonstration (without parameters)",
-        "ROOT": "Root ancestor",
-        "GRANDPARENT": "Grand parent",
-        "PARENT": "Parent",
-        "CHILD": "Child"
-      },
-      "DROPDOWNS": {
-        "PR": "IT applications",
-        "IO": "Informatics infrastructure and operations",
-        "CS": "IT customer services",
-        "REQUIRED": "Single required selection",
-        "BLANK": "Single selection with default blank",
-        "MULTIPLE": "Multiple selection",
-        "MULTIPLE_REQUIRED": "Required multiple selection",
-        "DISABLED": "Disabled dropdown",
-        "SELECTED_VALUE": "Selected value ",
-        "SELECTED_VALUES": "Selected values ",
-        "SELECT_SERVICE": "Select Service",
-        "SELECT_NUMBER": "Select your lucky number",
-        "SELECT_SERVICES": "Select one or more services",
-        "SELECT_ONE_SERVICE": "Select at least one service",
-        "SELECT_DISABLED": "Sorry, it's disabled"
-      },
-      "LOGOUT": {
-        "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
-        "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon"
+      "SLIDER": {
+        "HORIZONTAL_RANGE_SLIDER": "Horizontal Range Slider",
+        "SIMPLE_HORIZONTAL_SLIDER": "Simple Horizontal Slider",
+        "SIMPLE_VERTICAL_SLIDER": "Simple Vertical Slider",
+        "VERTICAL_RANGE_SLIDER": "Vertical Range Slider"
       }
     },
     "STYLEGUIDE": {
