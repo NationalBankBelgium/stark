@@ -80,15 +80,19 @@
         }
       },
       "PRETTY-PRINT": {
-        "ORIGINAL_CODE": "Code original",
-        "PRETTY_PRINTED": "Formaté",
-        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Formaté avec surbrillance",
         "CSS": "Pretty-Print CSS",
+        "ENABLE_HIGHLIGHTING": "Mettre en surbrillance",
+        "ENTER_DATA": "Tapez ou copiez/collez du code non formaté",
         "HTML": "Pretty-Print HTML",
         "JAVASCRIPT": "Pretty-Print Javascript",
         "JSON": "Pretty-Print JSON",
+        "ORIGINAL_CODE": "Code original",
+        "PRETTY_PRINTED": "Formaté",
+        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Formaté avec surbrillance",
         "SCSS": "Pretty-Print SCSS",
+        "SELECT_DATAFORMAT": "Sélectionner un format",
         "SQL": "Pretty-Print SQL",
+        "TRY_IT_YOURSELF": "Essayez vous-même",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },

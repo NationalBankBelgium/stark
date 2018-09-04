@@ -23,7 +23,7 @@ import { ExampleViewerComponent } from "./example-viewer/example-viewer.componen
 import { HeaderComponent } from "./header/header.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
 import { LogoutComponent } from "./logout/logout.component";
-import { PrettyPrintComponent } from "./pretty-print/pretty-print.component";
+import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
 import { SliderComponent } from "./slider/slider.component";
 import { TableComponent } from "./table/table.component";
 import { SharedModule } from "../shared/shared.module";
@@ -81,7 +81,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		HeaderComponent,
 		KeyboardDirectivesComponent,
 		LogoutComponent,
-		PrettyPrintComponent,
+		DemoPrettyPrintComponent,
 		SliderComponent,
 		TableComponent
 	],
@@ -96,7 +96,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		HeaderComponent,
 		KeyboardDirectivesComponent,
 		LogoutComponent,
-		PrettyPrintComponent,
+		DemoPrettyPrintComponent,
 		SliderComponent,
 		TableComponent
 	],
