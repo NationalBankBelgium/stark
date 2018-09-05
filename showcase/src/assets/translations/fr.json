@@ -97,6 +97,14 @@
       "EXAMPLE_VIEWER": {
         "TITLE": "Stark example viewer"
       },
+      "FOOTER": {
+        "TITLE": "Stark App Footer Guidelines",
+        "INTRO": "Stark fournit un pied de page personalisé pour votre application. Il s'agit d'un composant standard que vous pouvez utiliser en copiant ce HTML dans votre code",
+        "INFO": "Ce composant prend trois éléments en entrée :",
+        "INPUT1": "<b>legalInfoUrl</b> contient l'url de la page d'information légale.",
+        "INPUT2": "<b>helpPageUrl</b> contient l'url de la page d'aide.",
+        "INPUT3": "Les éléments HTML inclus seront copiés dans le pied de page et affichés à gauche des autres éléments."
+      },
       "HEADER": {
         "COPY_PASTE": "Ensuite il faut copier/coller ce bout de code HTML",
         "EXPLAINED": "Introduction",

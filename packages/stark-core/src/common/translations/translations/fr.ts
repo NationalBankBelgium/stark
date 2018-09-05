@@ -6,6 +6,12 @@ export const translationsFr: object = {
 		APP_LOGOUT: {
 			TITLE: "Déconnecter"
 		},
+		APP_FOOTER: {
+			COPYRIGHT: "Banque Nationale de Belgique. Tous droits réservés",
+			COPYRIGHT_YEAR: "2016",
+			HELP: "Aide",
+			LEGAL_INFO: "Informations légales"
+		},
 		DATE_RANGE_PICKER: {
 			FROM: "De",
 			TO: "A"

@@ -7,6 +7,8 @@ IMPORTANT: Stark styles are provided as SCSS styles so they should be imported i
 /* Stark components */
 @import "~@nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo-theme";
 @import "~@nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/app-footer/components/app-footer.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/app-footer/components/app-footer-theme";
 @import "~@nationalbankbelgium/stark-ui/src/modules/action-bar/components/action-bar-theme";
 @import "~@nationalbankbelgium/stark-ui/src/modules/action-bar/components/action-bar.component";
 @import "~@nationalbankbelgium/stark-ui/src/modules/app-sidebar/components/app-sidebar-theme";

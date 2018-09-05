@@ -1,4 +1,5 @@
 export * from "./modules/action-bar";
+export * from "./modules/app-footer";
 export * from "./modules/app-logo";
 export * from "./modules/app-logout";
 export * from "./modules/breadcrumb";

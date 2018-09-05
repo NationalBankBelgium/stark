@@ -30,7 +30,6 @@ $accent-palette: (
     A700: $light-primary-text
   )
 );
-
 $alert-palette: (
   50: #fae6e6,
   100: #f2c1c1,
@@ -63,7 +62,6 @@ $alert-palette: (
     A700: $dark-primary-text
   )
 );
-
 $grey-palette: (
   50: #fafafa,
   100: #f5f5f5,
@@ -96,7 +94,6 @@ $grey-palette: (
     A700: $light-primary-text
   )
 );
-
 $primary-palette: (
   50: #e0eff8,
   100: #b3d6ef,
@@ -129,7 +126,6 @@ $primary-palette: (
     A700: $dark-primary-text
   )
 );
-
 $success-palette: (
   50: #eaf5ea,
   100: #c9e7cb,
@@ -162,7 +158,6 @@ $success-palette: (
     A700: $dark-primary-text
   )
 );
-
 $warning-palette: (
   50: #fff3e0,
   100: #ffe0b3,
@@ -195,7 +190,6 @@ $warning-palette: (
     A700: $dark-primary-text
   )
 );
-
 $backgrounds: (
   status-bar: map_get($mat-grey, 300),
   app-bar: map_get($mat-grey, 100),
@@ -229,7 +223,6 @@ $foregrounds: (
   slider-off: rgba(black, 0.26),
   slider-off-active: rgba(black, 0.38)
 );
-
 // https://material.angular.io/guide/typography
 $typography-theme: (
   font-family:

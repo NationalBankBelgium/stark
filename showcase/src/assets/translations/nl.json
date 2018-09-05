@@ -97,6 +97,14 @@
       "EXAMPLE_VIEWER": {
         "TITLE": "Stark example viewer"
       },
+      "FOOTER": {
+        "TITLE": "Stark App Footer Guidelines",
+        "INTRO": "Stark provides you a custom footer for your application. It's a standard component you can use by copying this HTML into your code",
+        "INFO": "This component takes 3 elements as input :",
+        "INPUT1": "<b>legalInfoUrl</b> contains the url to the legal information page.",
+        "INPUT2": "<b>helpPageUrl</b> contains the url to the help page.",
+        "INPUT3": "The included HTML elements will be copied inside the footer as the leftmost element."
+      },
       "HEADER": {
         "COPY_PASTE": "Then you can copy/paste this HTML into your code",
         "EXPLAINED": "Introduction",

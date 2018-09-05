@@ -6,6 +6,12 @@ export const translationsEn: object = {
 		APP_LOGOUT: {
 			TITLE: "Log out"
 		},
+		APP_FOOTER: {
+			COPYRIGHT: "National Bank of Belgium. All rights reserved",
+			COPYRIGHT_YEAR: "2016",
+			HELP: "Help",
+			LEGAL_INFO: "Legal information"
+		},
 		DATE_RANGE_PICKER: {
 			FROM: "From",
 			TO: "To"
