@@ -153,3 +153,25 @@
     width: 100px;
   }
 }
+
+.stark-app-header {
+  h1 {
+    font-size: 34px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  @media #{$desktop-query} {
+    body:not(.full-curtain) {
+      & h1 {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.2;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

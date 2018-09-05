@@ -2,6 +2,7 @@ import {
 	MatButtonModule,
 	MatCardModule,
 	MatCheckboxModule,
+	MatDividerModule,
 	MatIconModule,
 	MatTabsModule,
 	MatTooltipModule,
@@ -27,6 +28,7 @@ import { LogoutComponent } from "./logout/logout.component";
 import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
 import { SliderComponent } from "./slider/slider.component";
 import { TableComponent } from "./table/table.component";
+import { DemoTypographyComponent } from "./typography/demo-typography.component";
 import { SharedModule } from "../shared/shared.module";
 import {
 	STARK_DATE_FORMATS,
@@ -51,6 +53,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		MatButtonModule,
 		MatCardModule,
 		MatCheckboxModule,
+		MatDividerModule,
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,
@@ -78,6 +81,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		DatePickerComponent,
 		DateRangePickerComponent,
 		DemoDropdownComponent,
+		DemoTypographyComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
 		KeyboardDirectivesComponent,
@@ -98,6 +102,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		DatePickerComponent,
 		DateRangePickerComponent,
 		DemoDropdownComponent,
+		DemoTypographyComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
 		KeyboardDirectivesComponent,
