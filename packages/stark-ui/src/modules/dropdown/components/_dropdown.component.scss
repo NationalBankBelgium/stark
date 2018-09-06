@@ -6,12 +6,23 @@
   mat-select {
     margin: 0;
   }
-  width: 150px;
+
+  .mat-form-field-infix {
+    width: 150px;
+  }
+
+  &[width="full"] {
+    .mat-form-field-infix {
+      width: 100%;
+    }
+  }
 }
 
 @media #{$tablet-only-query} {
   .stark-dropdown {
-    width: 300px;
+    .mat-form-field-infix {
+      width: 300px;
+    }
   }
 }
 
@@ -19,7 +30,9 @@
 
 @media #{$desktop-query} {
   .stark-dropdown {
-    width: 350px;
+    .mat-form-field-infix {
+      width: 350px;
+    }
   }
 }
 

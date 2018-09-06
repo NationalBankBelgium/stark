@@ -42,7 +42,8 @@
         "SELECT_NUMBER": "Sélectionnez votre chiffre porte-bonheur",
         "SELECT_SERVICES": "Sélectionnez un service ou plus",
         "SELECT_ONE_SERVICE": "Sélectionnez au moins un service",
-        "SELECT_DISABLED": "Désolé, ce dropdown est désactivé"
+        "SELECT_DISABLED": "Désolé, ce dropdown est désactivé",
+        "WHITE": "Dropdown blanc sur fond noir (largeur maximale)"
       },
       "HEADER": {
         "TITLE": "Stark App Header Guidelines",
