@@ -8,10 +8,13 @@ const directiveName: string = "[starkSvgViewBox]";
 
 /**
  * Directive to add the 'viewBox' attribute to an SVG element.
+ *
  * Specially useful to fix the issue with the Angular Material's MatIcon directive which prevents the icons from
  * being re-sized via CSS due to the 'viewBox' property not being added to the SVG element.
- * @link https://github.com/angular/material2/issues/4422
- * @link https://github.com/angular/material2/issues/5488
+ *
+ *  - {@link https://github.com/angular/material2/issues/4422|Angular Material issue #4422}
+ *
+ *  - {@link https://github.com/angular/material2/issues/5488|Angular Material issue #5488}
  */
 @Directive({
 	selector: directiveName
