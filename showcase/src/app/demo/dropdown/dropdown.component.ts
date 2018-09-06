@@ -1,17 +1,20 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 @Component({
 	selector: "showcase-demo-dropdown",
 	styleUrls: ["./dropdown.component.scss"],
-	templateUrl: "./dropdown.component.html"
+	templateUrl: "./dropdown.component.html",
+	encapsulation: ViewEncapsulation.None
 })
 export class DropdownComponent implements OnInit {
 	public selectedService: string;
+	public selectedServiceWhiteDropdown: string;
 	public selectedServices: string[];
 	public selectedRequiredServices: string[];
 	public selectedNumber: string;
 
 	public serviceDropdownOptions: any[];
+
 	/**
 	 * Component lifecycle hook
 	 */
@@ -37,5 +40,9 @@ export class DropdownComponent implements OnInit {
 
 	public multipleServicesRequiredDropdownOnChange(selectedValues: string[]): void {
 		this.selectedRequiredServices = selectedValues;
+	}
+
+	public whiteDropdownOnChange(selectedValue: string): void {
+		this.selectedServiceWhiteDropdown = selectedValue;
 	}
 }
