@@ -96,6 +96,13 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
+      "SIDEBAR": {
+        "INTRO": "The preview of this code is the actual sidebar of the showcase",
+        "OPEN_LEFT": "Open the left sidebar",
+        "OPEN_MENU": "Open the menu",
+        "OPEN_RIGHT": "Open the right sidebar",
+        "TITLE": "App Sidebar"
+      },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Horizontal Range Slider",
         "SIMPLE_HORIZONTAL_SLIDER": "Simple Horizontal Slider",

@@ -2,8 +2,9 @@
  * Angular 2 decorators and services
  */
 import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
+import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
 import { AppState } from "./app.service";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
  * App Component
@@ -19,12 +20,32 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 export class AppComponent implements OnInit {
 	public appState: AppState;
 
-	public constructor(appState: AppState, @Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
+	public constructor(
+		appState: AppState,
+		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
+	) {
 		this.appState = appState;
 	}
 
 	public ngOnInit(): void {
 		this.logger.debug("Initial App State", this.appState.state);
+		this.routingService.addTransitionHook("ON_SUCCESS", {}, () => {
+			this.sidebarService.close();
+		});
+	}
+
+	public openMenu(): void {
+		this.sidebarService.openMenu();
+	}
+
+	public openLeftSidebar(): void {
+		this.sidebarService.openLeft();
+	}
+
+	public openRightSidebar(): void {
+		this.sidebarService.openRight();
 	}
 }
 

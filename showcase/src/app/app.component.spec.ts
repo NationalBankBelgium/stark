@@ -2,14 +2,16 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, TestBed, ComponentFixture } from "@angular/core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { STARK_APP_SIDEBAR_SERVICE } from "@nationalbankbelgium/stark-ui";
+import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
 
 /**
  * Load the implementations that should be tested
  */
 import { AppComponent } from "./app.component";
 import { AppState } from "./app.service";
-import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import Spy = jasmine.Spy;
 
 describe(`App`, () => {
@@ -25,7 +27,13 @@ describe(`App`, () => {
 				declarations: [AppComponent],
 				imports: [TranslateModule.forRoot()],
 				schemas: [NO_ERRORS_SCHEMA],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, AppState, TranslateService]
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
+					{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockAppSidebarService() },
+					AppState,
+					TranslateService
+				]
 			})
 				/**
 				 * Compile template and css
