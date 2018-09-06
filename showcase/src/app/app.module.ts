@@ -6,6 +6,7 @@ import { NgIdleModule } from "@ng-idle/core";
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { EffectsModule } from "@ngrx/effects";
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -25,6 +26,7 @@ import {
 	STARK_APP_METADATA,
 	STARK_MOCK_DATA,
 	STARK_SESSION_SERVICE,
+	STARK_SETTINGS_SERVICE,
 	StarkApplicationConfig,
 	StarkApplicationConfigImpl,
 	StarkApplicationMetadata,
@@ -36,6 +38,8 @@ import {
 	StarkRoutingModule,
 	StarkSessionModule,
 	StarkSessionService,
+	StarkSettingsModule,
+	StarkSettingsService,
 	StarkUser
 } from "@nationalbankbelgium/stark-core";
 
@@ -161,6 +165,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			name: "Stark Showcase - NgRx Store DevTools", // shown in the monitor page
 			logOnly: environment.production // restrict extension to log-only mode (setting it to false enables all extension features)
 		}),
+		EffectsModule.forRoot([]), // needed to set up the providers required for effects
 		UIRouterModule.forRoot({
 			states: APP_STATES,
 			useHash: !Boolean(history.pushState),
@@ -173,6 +178,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot(),
+		StarkSettingsModule.forRoot(),
 		StarkRoutingModule.forRoot(),
 		SharedModule,
 		DemoModule,
@@ -200,11 +206,14 @@ export class AppModule {
 		private translateService: TranslateService,
 		private dateAdapter: DateAdapter<any>,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
+		@Inject(STARK_SETTINGS_SERVICE) private settingsService: StarkSettingsService,
 		matIconRegistry: MatIconRegistry,
 		domSanitizer: DomSanitizer
 	) {
 		initializeTranslation(this.translateService, this.dateAdapter);
 		registerMaterialIconSet(matIconRegistry, domSanitizer);
+
+		this.settingsService.initializeSettings();
 
 		const user: StarkUser = {
 			uuid: "abc123",

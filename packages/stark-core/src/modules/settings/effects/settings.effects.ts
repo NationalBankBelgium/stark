@@ -27,9 +27,10 @@ export class StarkSettingsEffects {
 	}
 
 	/**
-	 * The Set preffered language action will be used to change the language of the current session
+	 * The Set preferred language action will be used to change the language of the current session
+	 * dispatch: false => because this effect does not dispatch an action
 	 */
-	@Effect()
+	@Effect({ dispatch: false })
 	public setPreferredLanguage$(): Observable<void> {
 		return this.actions$.pipe(
 			ofType<StarkSetPreferredLanguage>(StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE),

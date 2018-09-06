@@ -8,7 +8,7 @@ import { select, Store } from "@ngrx/store";
 import { StateObject } from "@uirouter/core";
 import { validateSync } from "class-validator";
 import { defer, Observable, Subject } from "rxjs";
-import { map, take } from "rxjs/operators";
+import { map, take, distinct } from "rxjs/operators";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { StarkSessionService, starkSessionServiceName } from "./session.service.intf";
@@ -324,11 +324,17 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	}
 
 	public getCurrentUser(): Observable<StarkUser | undefined> {
-		return this.session$.pipe(map((session: StarkSession) => session.user));
+		return this.session$.pipe(
+			map((session: StarkSession) => session.user),
+			distinct() // using distinct to make sure to only emit on unique values, to prevent infinite loops.
+		);
 	}
 
 	public getCurrentLanguage(): Observable<string> {
-		return this.session$.pipe(map((session: StarkSession) => session.currentLanguage));
+		return this.session$.pipe(
+			map((session: StarkSession) => session.currentLanguage),
+			distinct() // using distinct to make sure to only emit on unique values, to prevent infinite loops.
+		);
 	}
 
 	public setCurrentLanguage(newLanguage: string): void {
