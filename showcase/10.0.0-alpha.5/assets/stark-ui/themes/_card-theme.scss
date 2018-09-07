@@ -1,0 +1,7 @@
+mat-card.mat-card {
+  border-radius: map-get($card-theme, border-radius);
+}
+
+$card-theme: (
+  border-radius: $border-radius
+);

@@ -1,0 +1,27 @@
+@function mat-typography-level-create($list) {
+  @return mat-typography-level(nth($list, 1), nth($list, 2), nth($list, 3));
+}
+
+@if variable-exists(stark-typography-theme) {
+  $typography-theme: map-merge($typography-theme, $stark-typography-theme);
+}
+
+//TO DO: Document correspondance with html tags
+$typography-config: mat-typography-config(
+  $font-family: map-get($typography-theme, font-family),
+  $display-4: mat-typography-level-create(map-get($typography-theme, display-4)),
+  $display-3: mat-typography-level-create(map-get($typography-theme, display-3)),
+  $display-2: mat-typography-level-create(map-get($typography-theme, display-2)),
+  $display-1: mat-typography-level-create(map-get($typography-theme, display-1)),
+  $headline: mat-typography-level-create(map-get($typography-theme, headline)),
+  $title: mat-typography-level-create(map-get($typography-theme, title)),
+  $subheading-2: mat-typography-level-create(map-get($typography-theme, subheading-2)),
+  /*Menu, List, Option*/ $subheading-1: mat-typography-level-create(map-get($typography-theme, subheading-1)),
+  $body-2: mat-typography-level-create(map-get($typography-theme, body-2)),
+  $body-1: mat-typography-level-create(map-get($typography-theme, body-1)),
+  $caption: mat-typography-level-create(map-get($typography-theme, caption)),
+  $button: mat-typography-level-create(map-get($typography-theme, button)),
+  /* Line-height must be unit-less fraction of the font-size.*/ $input: mat-typography-level-create(map-get($typography-theme, input))
+);
+
+@include mat-core($typography-config);
