@@ -151,6 +151,11 @@ $button-theme: (
     contrast: $light-primary-text
   )
 );
+$dropdown-theme: (
+  white-transp: (
+    color: rgba(255, 255, 255, 0.87)
+  )
+);
 $card-theme: (
   border-radius: $border-radius
 );

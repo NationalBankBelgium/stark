@@ -42,7 +42,8 @@
         "SELECT_NUMBER": "Select your lucky number",
         "SELECT_SERVICES": "Select one or more services",
         "SELECT_ONE_SERVICE": "Select at least one service",
-        "SELECT_DISABLED": "Sorry, it's disabled"
+        "SELECT_DISABLED": "Sorry, it's disabled",
+        "WHITE": "White dropdown on black background (full width)"
       },
       "HEADER": {
         "TITLE": "Stark App Header Guidelines",

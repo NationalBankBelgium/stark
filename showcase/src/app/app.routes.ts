@@ -5,7 +5,7 @@ import {
 	DateRangePickerComponent,
 	DemoBreadcrumbComponent,
 	DemoSidebarComponent,
-	DropdownComponent,
+	DemoDropdownComponent,
 	ExampleViewerComponent,
 	HeaderComponent,
 	KeyboardDirectivesComponent,
@@ -35,6 +35,6 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo-slider", url: "/demo/slider", component: SliderComponent },
 	{ name: "demo-sidebar", url: "/demo/sidebar", component: DemoSidebarComponent },
 	{ name: "demo-table", url: "/demo/table", component: TableComponent },
-	{ name: "demo-dropdown", url: "/demo/dropdown", component: DropdownComponent },
+	{ name: "demo-dropdown", url: "/demo/dropdown", component: DemoDropdownComponent },
 	{ name: "otherwise", url: "/otherwise", component: NoContentComponent }
 ];
