@@ -1,3 +1,43 @@
+<a name="10.0.0-alpha.5"></a>
+# [10.0.0-alpha.5](https://github.com/nationalbankbelgium/stark/compare/10.0.0-alpha.4...10.0.0-alpha.5) (2018-09-07)
+
+
+### Bug Fixes
+
+* **build:** add an argument for build prod when it is a Test CI. Adapt travis.yml to use it ([b954903](https://github.com/nationalbankbelgium/stark/commit/b954903)), closes [#572](https://github.com/nationalbankbelgium/stark/issues/572) [#566](https://github.com/nationalbankbelgium/stark/issues/566)
+* **build-main:** fix version of greenkeeper-lockfile which is installed during travis build ([1970b71](https://github.com/nationalbankbelgium/stark/commit/1970b71))
+* **build-main:** remove custom value for TRAVIS variable ([f00d63a](https://github.com/nationalbankbelgium/stark/commit/f00d63a)), closes [#605](https://github.com/nationalbankbelgium/stark/issues/605)
+* **greenkeeper:** fix greenkeeper for updating package-lock ([000a4a5](https://github.com/nationalbankbelgium/stark/commit/000a4a5))
+* **greenkeeper:** fix greenkeeper-lockfile ([865fee0](https://github.com/nationalbankbelgium/stark/commit/865fee0))
+* **release:** add "package-lock.json" to the set of files to be updated by release-it ([ac7c85c](https://github.com/nationalbankbelgium/stark/commit/ac7c85c)), closes [#574](https://github.com/nationalbankbelgium/stark/issues/574)
+* **release:** fix wrong pushRepo option in release-it according to the latest version ([5992603](https://github.com/nationalbankbelgium/stark/commit/5992603)), closes [#669](https://github.com/nationalbankbelgium/stark/issues/669)
+* **stark-all:** change BrowserModule for CommonModule. Rearrange styles in showcase. Improve build script ([83cf5c9](https://github.com/nationalbankbelgium/stark/commit/83cf5c9))
+* **stark-all:** upgrade lint-staged to 7.2.2 to fix weird validation warning ([62b0b4a](https://github.com/nationalbankbelgium/stark/commit/62b0b4a)), closes [#666](https://github.com/nationalbankbelgium/stark/issues/666)
+* **stark-core:** added lodash dependency ([649ce6e](https://github.com/nationalbankbelgium/stark/commit/649ce6e)), closes [#630](https://github.com/nationalbankbelgium/stark/issues/630)
+* **stark-demo:** adapt ExampleViewer to fetch example fiiles targeting the right url. Rename title input to prevent weird tooltip. ([491fd99](https://github.com/nationalbankbelgium/stark/commit/491fd99)), closes [#575](https://github.com/nationalbankbelgium/stark/issues/575) [#580](https://github.com/nationalbankbelgium/stark/issues/580)
+* **stark-demo:** add AppLogo back in the header after being accidentally removed ([4a13249](https://github.com/nationalbankbelgium/stark/commit/4a13249))
+* **stark-demo:** add missing files and regex to the showcase url auto-replace script ([3db3270](https://github.com/nationalbankbelgium/stark/commit/3db3270)), closes [#571](https://github.com/nationalbankbelgium/stark/issues/571)
+* **stark-demo:** hTML highlighting and 'Try it yourself' ([f5114f7](https://github.com/nationalbankbelgium/stark/commit/f5114f7)), closes [#601](https://github.com/nationalbankbelgium/stark/issues/601)
+* **stark-ui:** button - align icon vertically ([f9015fb](https://github.com/nationalbankbelgium/stark/commit/f9015fb)), closes [#619](https://github.com/nationalbankbelgium/stark/issues/619)
+* **stark-ui:** modify CSS and add App-Logo to Showcase ([90e2e05](https://github.com/nationalbankbelgium/stark/commit/90e2e05)), closes [#583](https://github.com/nationalbankbelgium/stark/issues/583)
+* **stark-ui:** removed TranslateService from breadcrumb component ([f40027f](https://github.com/nationalbankbelgium/stark/commit/f40027f))
+
+
+### Features
+
+* **stark-core:** use the browser language as the default language ([561d288](https://github.com/nationalbankbelgium/stark/commit/561d288)), closes [#578](https://github.com/nationalbankbelgium/stark/issues/578)
+* **stark-demo:** add Slider component to the Showcase Demo ([0c75595](https://github.com/nationalbankbelgium/stark/commit/0c75595)), closes [#561](https://github.com/nationalbankbelgium/stark/issues/561)
+* **stark-demo:** style header in the showcase ([1804ca3](https://github.com/nationalbankbelgium/stark/commit/1804ca3)), closes [#570](https://github.com/nationalbankbelgium/stark/issues/570)
+* **stark-ui:** added white theme and full width for dropdown component ([c8c998e](https://github.com/nationalbankbelgium/stark/commit/c8c998e)), closes [#642](https://github.com/nationalbankbelgium/stark/issues/642) [#640](https://github.com/nationalbankbelgium/stark/issues/640)
+* **stark-ui:** date Picker Component ([705358c](https://github.com/nationalbankbelgium/stark/commit/705358c)), closes [#542](https://github.com/nationalbankbelgium/stark/issues/542)
+* **stark-ui:** implement date range picker ([ab06b73](https://github.com/nationalbankbelgium/stark/commit/ab06b73)), closes [#586](https://github.com/nationalbankbelgium/stark/issues/586)
+* **stark-ui:** implement the logout domponent/module ([74c2bba](https://github.com/nationalbankbelgium/stark/commit/74c2bba)), closes [#588](https://github.com/nationalbankbelgium/stark/issues/588)
+* **stark-ui:** implementation of breadcrumb component ([8f2f129](https://github.com/nationalbankbelgium/stark/commit/8f2f129)), closes [#591](https://github.com/nationalbankbelgium/stark/issues/591)
+* **stark-ui:** implementation of stark dropdown component ([40adf24](https://github.com/nationalbankbelgium/stark/commit/40adf24)), closes [#447](https://github.com/nationalbankbelgium/stark/issues/447)
+* **stark-ui:** implementation of the app sidebar ([09eeeea](https://github.com/nationalbankbelgium/stark/commit/09eeeea)), closes [#592](https://github.com/nationalbankbelgium/stark/issues/592)
+
+
+
 <a name="10.0.0-alpha.4"></a>
 # [10.0.0-alpha.4](https://github.com/nationalbankbelgium/stark/compare/10.0.0-alpha.3...10.0.0-alpha.4) (2018-07-30)
 
