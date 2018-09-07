@@ -20,7 +20,7 @@
 		"tagAnnotation": "%s",
 		"push": true,
 		"pushArgs": "",
-		"pushRepo": null,
+		"pushRepo": "origin",
 		"beforeStartCommand": false,
 		"afterReleaseCommand": false
 	},
