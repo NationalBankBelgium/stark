@@ -13,9 +13,9 @@ $mat-light-theme-foreground: $foregrounds;
   }
 }
 
-$stark-color-theme: mat-light-theme(
+$theme: mat-light-theme(
   map-get($base-theme, primary-palette),
   map-get($base-theme, accent-palette),
   map-get($base-theme, warn-palette)
 ) !default;
-@include angular-material-theme($stark-color-theme);
+@include angular-material-theme($theme);

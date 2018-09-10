@@ -1,5 +1,18 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import {
+	Component,
+	EventEmitter,
+	Inject,
+	Input,
+	OnChanges,
+	OnInit,
+	Output,
+	SimpleChanges,
+	ViewEncapsulation,
+	ElementRef,
+	Renderer2
+} from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "./../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -19,7 +32,7 @@ const componentName: string = "stark-dropdown";
 		class: componentName
 	}
 })
-export class StarkDropdownComponent implements OnInit, OnChanges, OnInit {
+export class StarkDropdownComponent extends AbstractStarkUiComponent implements OnInit, OnChanges, OnInit {
 	/**
 	 * If the dropdown will contain a default blank (optional)
 	 */
@@ -114,7 +127,13 @@ export class StarkDropdownComponent implements OnInit, OnChanges, OnInit {
 
 	public optionsAreSimpleTypes: boolean;
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle hook
@@ -123,6 +142,7 @@ export class StarkDropdownComponent implements OnInit, OnChanges, OnInit {
 		this.logger.debug(componentName + ": component initialized");
 		this.optionsAreSimpleTypes = this.areSimpleTypes();
 		this.setDefaultBlank();
+		super.ngOnInit();
 	}
 
 	/**

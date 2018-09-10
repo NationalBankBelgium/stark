@@ -1,4 +1,41 @@
-$border-radius: 2px;
+$color-theme: (
+  accent: (
+    color: #8f0039,
+    contrast: $light-primary-text
+  ),
+  alert: (
+    color: #d32f2f,
+    contrast: $light-primary-text
+  ),
+  alt: (
+    color: #323232,
+    contrast: $light-primary-text
+  ),
+  neutral: (
+    color: #bfbfbf,
+    contrast: $light-primary-text
+  ),
+  primary: (
+    color: #0076c8,
+    contrast: $light-primary-text
+  ),
+  success: (
+    color: #4caf50,
+    contrast: $light-primary-text
+  ),
+  warning: (
+    color: #ff9800,
+    contrast: $light-primary-text
+  ),
+  white-transp: (
+    color: rgba(255, 255, 255, 0.87),
+    contrast: $dark-primary-text
+  )
+);
+
+@if variable-exists(stark-color-theme) {
+  $color-theme: map-merge($color-theme, $stark-color-theme);
+}
 
 $primary-palette: (
   50: #e3f2fd,
@@ -6,7 +43,7 @@ $primary-palette: (
   200: #90caf9,
   300: #64b5f6,
   400: #42a5f5,
-  500: #0076c8,
+  500: map-get(map-get($color-theme, primary), color),
   600: #006ab4,
   700: #005ea0,
   800: #1565c0,
@@ -38,7 +75,7 @@ $accent-palette: (
   200: #f48fb1,
   300: #f06292,
   400: #ec407a,
-  500: #8f0039,
+  500: map-get(map-get($color-theme, accent), color),
   600: #70002d,
   700: #c2185b,
   800: #ad1457,
@@ -70,7 +107,7 @@ $warning-palette: (
   200: #ffcc80,
   300: #ffb74d,
   400: #ffa726,
-  500: #ff9800,
+  500: map-get(map-get($color-theme, warning), color),
   600: #fb8c00,
   700: #f57c00,
   800: #ef6c00,
@@ -132,35 +169,6 @@ $base-theme: (
   primary-palette: mat-palette($primary-palette),
   accent-palette: mat-palette($accent-palette),
   warn-palette: mat-palette($warning-palette)
-);
-$button-theme: (
-  alert: (
-    color: #d32f2f,
-    contrast: $light-primary-text
-  ),
-  alt: (
-    color: #323232,
-    contrast: $light-primary-text
-  ),
-  neutral: (
-    color: #bfbfbf,
-    contrast: $light-primary-text
-  ),
-  success: (
-    color: #4caf50,
-    contrast: $light-primary-text
-  )
-);
-$dropdown-theme: (
-  white-transp: (
-    color: rgba(255, 255, 255, 0.87)
-  )
-);
-$card-theme: (
-  border-radius: $border-radius
-);
-$table-theme: (
-  border-radius: $border-radius
 );
 
 // font-size, line-height, font-weight

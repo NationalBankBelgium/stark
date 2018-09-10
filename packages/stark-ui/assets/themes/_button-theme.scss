@@ -29,24 +29,20 @@ $icon-size: 18px;
   }
 }
 
-@if variable-exists(stark-button-theme) {
-  $button-theme: map-merge($button-theme, $stark-button-theme);
-}
-
 .mat-success {
-  @include stark-button-color(map-get(map-get($button-theme, success), color), map-get(map-get($button-theme, success), contrast));
+  @include stark-button-color(map-get(map-get($color-theme, success), color), map-get(map-get($color-theme, success), contrast));
 }
 
 .mat-alert {
-  @include stark-button-color(map-get(map-get($button-theme, alert), color), map-get(map-get($button-theme, alert), contrast));
+  @include stark-button-color(map-get(map-get($color-theme, alert), color), map-get(map-get($color-theme, alert), contrast));
 }
 
 .mat-alt {
-  @include stark-button-color(map-get(map-get($button-theme, alt), color), map-get(map-get($button-theme, alt), contrast));
+  @include stark-button-color(map-get(map-get($color-theme, alt), color), map-get(map-get($color-theme, alt), contrast));
 }
 
 .mat-neutral {
-  @include stark-button-color(map-get(map-get($button-theme, neutral), color), map-get(map-get($button-theme, neutral), contrast));
+  @include stark-button-color(map-get(map-get($color-theme, neutral), color), map-get(map-get($color-theme, neutral), contrast));
 }
 
 .mat-white {

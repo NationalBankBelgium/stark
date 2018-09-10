@@ -22,7 +22,7 @@
 }
 
 .stark-dropdown {
-  &[color="white"] {
-    @include stark-dropdown-color(map-get(map-get($dropdown-theme, white-transp), color));
+  &.stark-white {
+    @include stark-dropdown-color(map-get(map-get($color-theme, white-transp), color));
   }
 }
