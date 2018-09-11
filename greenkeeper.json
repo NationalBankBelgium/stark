@@ -12,5 +12,10 @@
       ]
     }
   },
-  "ignore": ["@types/node", "class-validator", "typescript", "tslint-sonarts"]
+  "ignore": [
+    "@types/node",
+    "class-validator",
+    "typescript",
+    "tslint-sonarts"
+  ]
 }
