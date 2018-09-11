@@ -50,6 +50,17 @@ export type StarkPrettyPrintFormat = "css" | "scss" | "html" | "xml" | "json" | 
 /**
  * Component to format and highlight code like HTML, CSS, Typescript...
  * Can be used to display code examples
+ *
+ * To be able to highlight the pretty-printed code, a CSS file from the PrismJS library is needed.
+ * The CSS file of your choice needs to be imported in your client application that uses stark-ui as follows:
+ *
+ * ```css
+ * .@import "~prismjs/themes/prism-okaidia.css";
+ * ```
+ *
+ * The different themes are shown on the PrismJS website
+ *   - {@link https://prismjs.com/|PrismJS website}
+ *   - {@link https://github.com/PrismJS/prism/tree/master/themes|PrismJS theme files}
  */
 @Component({
 	selector: "stark-pretty-print",
