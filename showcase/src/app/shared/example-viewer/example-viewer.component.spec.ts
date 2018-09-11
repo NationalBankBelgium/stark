@@ -46,10 +46,10 @@ describe("ExampleViewerComponent", () => {
 
 	describe("@Input() exampleTitle", () => {
 		it("should change the exampleTitle according to the @Input", () => {
-			const h2: HTMLHeadingElement = fixture.nativeElement.querySelector(".example-viewer-title-spacer h2");
+			const h3: HTMLHeadingElement = fixture.nativeElement.querySelector(".example-viewer-title-spacer h3");
 			component.exampleTitle = "Test title";
 			fixture.detectChanges();
-			expect(h2.textContent).toContain(component.exampleTitle);
+			expect(h3.textContent).toContain(component.exampleTitle);
 		});
 	});
 

@@ -12,7 +12,8 @@ import {
 	LogoutComponent,
 	DemoPrettyPrintComponent,
 	SliderComponent,
-	TableComponent
+	TableComponent,
+	DemoTypographyComponent
 } from "./demo";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
@@ -36,5 +37,6 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo-sidebar", url: "/demo/sidebar", component: DemoSidebarComponent },
 	{ name: "demo-table", url: "/demo/table", component: TableComponent },
 	{ name: "demo-dropdown", url: "/demo/dropdown", component: DemoDropdownComponent },
+	{ name: "demo-typography", url: "/demo/typography", component: DemoTypographyComponent },
 	{ name: "otherwise", url: "/otherwise", component: NoContentComponent }
 ];

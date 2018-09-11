@@ -162,7 +162,9 @@ $card-theme: (
 $table-theme: (
   border-radius: $border-radius
 );
+
 // font-size, line-height, font-weight
+// https://material.angular.io/guide/typography
 $typography-theme: (
   font-family:
     "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
@@ -197,9 +199,9 @@ $typography-theme: (
     500
   ),
   subheading-2: (
-    13px,
     16px,
-    500
+    28px,
+    400
   ),
   subheading-1: (
     15px,
@@ -207,13 +209,13 @@ $typography-theme: (
     400
   ),
   body-2: (
-    14px,
-    24px,
+    16px,
+    30px,
     500
   ),
   body-1: (
-    14px,
-    20px,
+    16px,
+    26px,
     400
   ),
   caption: (
@@ -222,14 +224,13 @@ $typography-theme: (
     400
   ),
   button: (
-    map-get($button-theme, font-size),
-    map-get($button-theme, line-height),
-    map-get($button-theme, font-weight)
+    14px,
+    14px,
+    500
   ),
-  /* Line-height must be unit-less fraction of the font-size.*/ input:
-    (
-      inherit,
-      1.125,
-      400
-    )
+  input: (
+    inherit,
+    1.125,
+    400
+  )
 );

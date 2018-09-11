@@ -11,5 +11,6 @@ export * from "./keyboard-directives";
 export * from "./pretty-print";
 export * from "./slider";
 export * from "./table";
+export * from "./typography";
 export * from "./demo.module";
 export * from "./logout";

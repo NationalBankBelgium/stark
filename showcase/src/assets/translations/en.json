@@ -109,6 +109,26 @@
         "SIMPLE_HORIZONTAL_SLIDER": "Simple Horizontal Slider",
         "SIMPLE_VERTICAL_SLIDER": "Simple Vertical Slider",
         "VERTICAL_RANGE_SLIDER": "Vertical Range Slider"
+      },
+      "TYPOGRAPHY": {
+        "CLASSES_AND_TAGS": {
+          "TITLE": "Available classes & tags"
+        },
+        "CUSTOMIZATION": {
+          "DETAILS": "Stark allows you to customize simultaneously the typography settings of Angular Material and Stark easily by adding a simple SCSS map declaration. <br>First, declare the SCSS map and then you need to import the Stark's theme. On this example, a full version of the map is shown but you can also use it partially.",
+          "MAP_EXPLAINED": "Here are the corresponding classes and tags:",
+          "TITLE": "Customization"
+        },
+        "FONT_FAMILY": {
+          "DETAILS_1": "Material Design does not require to use a specific font, but it suggests Roboto, the sans-serif font available on Android mobile devices. We have chosen to let the system decide the most readable font it has to offer. This has the added advantage that no font will be embedded, reducing the first page load time.",
+          "DETAILS_2": "The font stack used to get the optimal sans-serif font the system provides:",
+          "TITLE": "Font family"
+        },
+        "MATERIAL_BASED": {
+          "DETAILS": "We try to keep consistency with Angular Material. For more details checkout: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
+          "TITLE": "Based on Angular Material"
+        },
+        "TITLE": "Stark Typography"
       }
     },
     "STYLEGUIDE": {

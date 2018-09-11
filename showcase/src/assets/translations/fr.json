@@ -109,6 +109,26 @@
         "SIMPLE_HORIZONTAL_SLIDER": "Curseur simple",
         "SIMPLE_VERTICAL_SLIDER": "Curseur simple",
         "VERTICAL_RANGE_SLIDER": "Curseur de plage"
+      },
+      "TYPOGRAPHY": {
+        "CLASSES_AND_TAGS": {
+          "TITLE": "Classes & tags disponibles"
+        },
+        "CUSTOMIZATION": {
+          "DETAILS": "Stark vous permet de personnaliser les polices de caractères à la fois des composants Stark et des composants Angular Material en déclarant une simple map SCSS.<br>Déclarer d'abord la map SCSS puis importer le theme de Stark. Cet example montr une version complète de la map mais vous pouvez aussi l'utiliser partiellement.",
+          "MAP_EXPLAINED": "Voici la liste de classes et tags correspondant:",
+          "TITLE": "Personnalisation"
+        },
+        "FONT_FAMILY": {
+          "DETAILS_1": "Material Design suggère d'utiliser Roboto, la police sans-serif disponible sur Android. Nous avons choisi de laisser le système décider de la police qui lui parait la plus adaptée. Grâce à cela aucune police n'est embeddé, ce qui réduit la temps de chargement de la page.",
+          "DETAILS_2": "Voici la liste de police fournit que le système va se charger d'interpréter:",
+          "TITLE": "Familles de police de caractère"
+        },
+        "MATERIAL_BASED": {
+          "DETAILS": "Nous avons garder un maximum de compatibilité avec Angular Material. Pour plus de détails sur la philosophie derrière Angular Material, consulter cetee page: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
+          "TITLE": "Basé sur Angular Material"
+        },
+        "TITLE": "Stark Typography"
       }
     },
     "STYLEGUIDE": {
