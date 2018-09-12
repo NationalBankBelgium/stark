@@ -18,6 +18,19 @@
         "PARENT": "Parent",
         "CHILD": "Child"
       },
+      "COLORS": {
+        "ADVANCED": {
+          "DETAILS": "Angular Material uses three color palettes: a primary palette, an accent palette and a warn palette. Stark gives you the ability to define those palettes through a SCSS map called <code>$stark-base-theme</code>. This map contains 3 properties, one for each Angular Material's palette and you need to use a SCSS function called <code>mat-palette()</code> in order to instantiate Angular Material theming the right way. Note that you need to import Angular Material's theming before using the <code>mat-palette()</code> function.",
+          "LINKS": "For more details on how Angular Material deals with theming, check out <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a><br>You can find the Material Design color palettes here: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a><br>If you want to create your own palette, this tool can help you: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>",
+          "TITLE": "Advanced usage with color palettes"
+        },
+        "BASIC": {
+          "DETAILS": "All colors used in Stark can be set through a SCSS map called <code>$stark-color-theme</code>. Each color has a contrast property, which is needed to define the text color on top of this color. Once this map has been set, you need to import the Stark global theme to apply it.",
+          "EXAMPLE": "Here, a full version of the map is shown but you can also use it partially:",
+          "TITLE": "Basic usage"
+        },
+        "TITLE": "Stark Colors"
+      },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Custom Filter",
         "PLACEHOLDER": "Choose a date",

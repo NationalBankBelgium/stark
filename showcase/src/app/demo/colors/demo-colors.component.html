@@ -1,0 +1,13 @@
+<h1 class="mat-display-2" translate>SHOWCASE.DEMO.COLORS.TITLE</h1>
+<section class="stark-section">
+    <h1 translate>SHOWCASE.DEMO.COLORS.BASIC.TITLE</h1>
+    <p [innerHTML]="'SHOWCASE.DEMO.COLORS.BASIC.DETAILS' | translate"></p>
+    <p translate>SHOWCASE.DEMO.COLORS.BASIC.EXAMPLE</p>
+    <stark-pretty-print [data]="simpleMap" format="scss" [enableHighlighting]="true"></stark-pretty-print>
+</section>
+<section class="stark-section">
+    <h1 translate>SHOWCASE.DEMO.COLORS.ADVANCED.TITLE</h1>
+    <p [innerHTML]="'SHOWCASE.DEMO.COLORS.ADVANCED.DETAILS' | translate"></p>
+    <p [innerHTML]="'SHOWCASE.DEMO.COLORS.ADVANCED.LINKS' | translate"></p>
+    <stark-pretty-print [data]="advancedMap" format="scss" [enableHighlighting]="true"></stark-pretty-print>
+</section>

@@ -16,6 +16,7 @@ import { FormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { ActionBarComponent } from "./action-bar/action-bar.component";
 import { DemoBreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
+import { DemoColorsComponent } from "./colors/demo-colors.component";
 import { ButtonComponent } from "./button/button.component";
 import { DatePickerComponent } from "./date-picker/date-picker.component";
 import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
@@ -80,6 +81,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		ButtonComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,
+		DemoColorsComponent,
 		DemoDropdownComponent,
 		DemoTypographyComponent,
 		ExampleViewerComponent,
@@ -98,6 +100,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 	exports: [
 		ActionBarComponent,
 		DemoBreadcrumbComponent,
+		DemoColorsComponent,
 		ButtonComponent,
 		DatePickerComponent,
 		DateRangePickerComponent,
