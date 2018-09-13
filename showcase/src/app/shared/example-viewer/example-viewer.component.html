@@ -1,24 +1,24 @@
-<div class="example-viewer-wrapper mat-elevation-z2">
-	<div class="example-viewer-title">
-		<div class="example-viewer-title-spacer"><h3 translate>{{ exampleTitle }}</h3></div>
-
+<mat-card class="stark-card">
+	<mat-card-header>
+		<mat-card-title>
+			<h3 translate>{{ exampleTitle }}</h3>
+		</mat-card-title>
 		<button color="white" mat-icon-button (click)="toggleSourceView()" matTooltip="View source">
 			<mat-icon svgIcon="code-tags"></mat-icon>
 		</button>
-	</div>
-
-	<div class="example-viewer-source" *ngIf="showSource">
-		<mat-tab-group>
-			<mat-tab *ngFor="let file of exampleFiles; trackBy: trackExampleFile" [label]="file.extension">
-				<div class="example-source-wrapper">
-					<stark-pretty-print [data]="file.data"
-										[format]="file.format"
-										[enableHighlighting]="true"></stark-pretty-print>
-				</div>
-			</mat-tab>
-		</mat-tab-group>
-	</div>
-	<div class="example-viewer-body">
+	</mat-card-header>
+	<mat-card-content>
+		<div class="stark-full-width example-source-wrapper" *ngIf="showSource">
+				<mat-tab-group>
+				<mat-tab *ngFor="let file of exampleFiles; trackBy: trackExampleFile" [label]="file.extension">
+					<div>
+						<stark-pretty-print [data]="file.data"
+											[format]="file.format"
+											[enableHighlighting]="true"></stark-pretty-print>
+					</div>
+				</mat-tab>
+				</mat-tab-group>
+		</div>
 		<ng-content></ng-content>
-	</div>
-</div>
+	</mat-card-content>
+</mat-card>

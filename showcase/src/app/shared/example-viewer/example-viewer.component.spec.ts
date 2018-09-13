@@ -46,7 +46,7 @@ describe("ExampleViewerComponent", () => {
 
 	describe("@Input() exampleTitle", () => {
 		it("should change the exampleTitle according to the @Input", () => {
-			const h3: HTMLHeadingElement = fixture.nativeElement.querySelector(".example-viewer-title-spacer h3");
+			const h3: HTMLHeadingElement = fixture.nativeElement.querySelector("mat-card-header h3");
 			component.exampleTitle = "Test title";
 			fixture.detectChanges();
 			expect(h3.textContent).toContain(component.exampleTitle);
@@ -59,7 +59,7 @@ describe("ExampleViewerComponent", () => {
 			component.extensions = ["CSS", "JS", "HTML", "SCSS", "TS"];
 			fixture.detectChanges();
 
-			let button: HTMLButtonElement = fixture.nativeElement.querySelector(".example-viewer-title button");
+			let button: HTMLButtonElement = fixture.nativeElement.querySelector("mat-card-header button");
 			button.click();
 			let tabs: any[] = fixture.nativeElement.querySelectorAll(".mat-tab-labels .mat-tab-label");
 			expect(tabs.length).toBe(0);
@@ -78,7 +78,7 @@ describe("ExampleViewerComponent", () => {
 			allFilesFetched.subscribe(() => {
 				fixture.detectChanges();
 
-				button = fixture.nativeElement.querySelector(".example-viewer-title button");
+				button = fixture.nativeElement.querySelector("mat-card-header button");
 				button.click();
 				tabs = fixture.nativeElement.querySelectorAll(".mat-tab-labels .mat-tab-label");
 				expect(tabs.length).toBe(component.extensions.length);

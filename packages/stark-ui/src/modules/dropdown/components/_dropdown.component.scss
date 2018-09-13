@@ -7,12 +7,12 @@
     margin: 0;
   }
 
-  .mat-form-field-infix {
+  .mat-form-field {
     width: 150px;
   }
 
   &.stark-full-width {
-    .mat-form-field-infix {
+    .mat-form-field {
       width: 100%;
     }
   }
@@ -20,7 +20,7 @@
 
 @media #{$tablet-only-query} {
   .stark-dropdown {
-    .mat-form-field-infix {
+    .mat-form-field {
       width: 300px;
     }
   }
@@ -30,7 +30,7 @@
 
 @media #{$desktop-query} {
   .stark-dropdown {
-    .mat-form-field-infix {
+    .mat-form-field {
       width: 350px;
     }
   }

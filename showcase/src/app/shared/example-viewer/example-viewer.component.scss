@@ -2,24 +2,17 @@
   display: block;
 }
 
-.example-viewer-wrapper {
-  h3 {
-    margin-bottom: 0;
+.stark-card {
+  .example-source-wrapper {
+    margin-bottom: 16px;
+    margin-top: -16px;
   }
 }
 
-.example-viewer-title {
-  align-content: center;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  padding: 8px 20px;
-}
-
-.example-viewer-title-spacer {
-  flex: 1 1 auto;
-}
-
-.example-viewer-body {
-  padding: 30px;
+@media (min-width: 600px) {
+  .stark-card {
+    .example-source-wrapper {
+      margin-top: -24px;
+    }
+  }
 }

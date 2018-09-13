@@ -18,6 +18,18 @@
         "PARENT": "Ouder",
         "CHILD": "Kind"
       },
+      "CARD": {
+        "ADVANCED": {
+          "DETAILS": "Stark kan ook complexere kaarten aan. Hier is een voorbeeld met een ondertitel en acties. Er is ook de mogelijkheid om elementen de volledige breedte te laten gebruiken dankzij de <code>.stark-full-width</code> klasse die toegevoegd is aan de <code>mat-card-content</code> html-tag.",
+          "TITLE": "Geavanceerde kaart"
+        },
+        "BASIC": {
+          "DETAILS": "Stark biedt een alternatieve opmaak aan voor kaarten. Je kan de html structuur behouden en de klas <code>.stark-card</code> aan de Angular Material kaart toevoegen. We raden aan om het <code>h3</code> label te gebruiken binnen een <code>mat-card-title</code>.<br>Meer informatie over de kaarten van Angular Material, kan je terugvinden via deze link: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "TITLE": "Basiskaart"
+        },
+        "CODE": "Hier is de code om een kaart te tonen:",
+        "TITLE": "Stark Kaarten"
+      },
       "COLORS": {
         "ADVANCED": {
           "DETAILS": "Angular Material gebruikt drie kleurenpaletten: een primair palet, een accentpalet en een waarschuwingspalet. Stark biedt je de mogelijkheid om deze paletten te definiëren aan de hand van een SCSS map met de naam $stark-base-theme. Deze map bevat 3 eigenschappen, één voor elk Angular Material palet. Je moet de SCSS functie met de naam mat-palette() gebruiken om de Angular Material thematisering op correcte wijze te instantiëren. Merk op dat je het thema van Angular Materiaal moet importeren voordat je de functie mat-palette() gebruikt.",
