@@ -16,16 +16,16 @@
         color: mat-color(map-get($base-theme, accent-palette));
       }
       &.success {
-        color: map-get(map-get($button-theme, success), color);
+        color: map-get(map-get($color-theme, success), color);
       }
       &.alert {
-        color: map-get(map-get($button-theme, alert), color);
+        color: map-get(map-get($color-theme, alert), color);
       }
       &.alt {
-        color: map-get(map-get($button-theme, alt), color);
+        color: map-get(map-get($color-theme, alt), color);
       }
       &.neutral {
-        color: map-get(map-get($button-theme, neutral), color);
+        color: map-get(map-get($color-theme, neutral), color);
       }
       &.white {
         color: #fff;
