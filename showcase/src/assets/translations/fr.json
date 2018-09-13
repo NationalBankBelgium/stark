@@ -18,6 +18,19 @@
         "PARENT": "Parent",
         "CHILD": "Enfant"
       },
+      "COLORS": {
+        "ADVANCED": {
+          "DETAILS": "Angular Material utilise trois palettes de couleurs: primary, accent et warn. Stark donne la possibilité de définir ces palettes de couleur via une map SCSS nommée <code>$stark-base-theme</code>. Cette map contient 3 propriétés, une pour chaque palette d'Angular Material et la fonction <code>mat-palette()</code> doit être utilisée pour configurer correctement Stark et Angular Material. A noter que cette fonction est définit par Angular Material donc le theme de Angular Material doit être importer au préalable.",
+          "LINKS": "Pour plus de détails sur la gestion du theme par ANgular Material, veuillez consulter <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a><br>Voici les palettes mises à dispostion par Material Design: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a><br>Si vous souhaitez créer vos propores palettes, cet outil peut vous aider: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>",
+          "TITLE": "Utilisation avancé avec les palettes de couleurs"
+        },
+        "BASIC": {
+          "DETAILS": "Toutes les couleurs utilisées dans Stark sont customisables via une map SCSS appelée <code>$stark-color-theme</code>. Chaque couleur possède une propriété <code>contrast</code> qui est nécessaire pour définir la couleur des textes se trouvant sur un background de la couleur en question. Une fois la map définit, vous devez importer le thème global de Stark pour l'appliquer.",
+          "EXAMPLE": "Voici la version complète de la map SCSS mais vous pouvez aussi définir une map plus partielle:",
+          "TITLE": "Utilisation basique"
+        },
+        "TITLE": "Stark Colors"
+      },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Filtre sur mesure",
         "PLACEHOLDER": "Choisir une date",
