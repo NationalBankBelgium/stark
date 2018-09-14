@@ -1,12 +1,9 @@
 /* tslint:disable:completed-docs*/
 import uuid from "uuid";
-
 import { Serialize } from "cerialize";
-
 import { select, Store } from "@ngrx/store";
+import { Inject, Injectable, Injector } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-
-import { Inject, Injectable } from "@angular/core";
 
 import { StarkLoggingService, starkLoggingServiceName } from "./logging.service.intf";
 import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
@@ -14,6 +11,7 @@ import { StarkBackend } from "../../http/entities/backend";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
+import { STARK_XSRF_SERVICE, StarkXSRFService } from "../../xsrf/services/xsrf.service.intf";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
 import { StarkFlushLogMessages, StarkLogMessageAction } from "../actions";
 import { selectStarkLogging } from "../reducers";
@@ -23,6 +21,8 @@ import { StarkConfigurationUtil } from "../../../util/configuration.util";
  *  @ignore
  */
 const _noop: Function = require("lodash/noop");
+
+const xsrfServiceNotFound: "not provided" = "not provided";
 
 /**
  *  @ignore
@@ -43,14 +43,14 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	private consoleError: Function;
 	private starkLogging: StarkLogging;
 	/** @internal */
+	private _xsrfService?: StarkXSRFService | typeof xsrfServiceNotFound;
+	/** @internal */
 	private _correlationId: string;
 
-	// FIXME: uncomment these lines once XSRF Service is implemented
 	public constructor(
 		private store: Store<StarkCoreApplicationState>,
-		@Inject(STARK_APP_CONFIG)
-		private appConfig: StarkApplicationConfig /*,
-					   @Inject(starkXSRFServiceName) private xsrfService: StarkXSRFService*/
+		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
+		private injector: Injector
 	) {
 		// ensuring that the app config is valid before doing anything
 		StarkConfigurationUtil.validateConfig(this.appConfig, ["logging", "http"], starkLoggingServiceName);
@@ -214,8 +214,9 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		// IE "Access is denied" error: https://stackoverflow.com/questions/22098259/access-denied-in-ie-10-and-11-when-ajax-target-is-localhost
 		try {
 			xhr.open("POST", url, async);
-			// FIXME: uncomment when XSRF service is implemented
-			// this.xsrfService.configureXHR(xhr);
+			if (this.xsrfService) {
+				this.xsrfService.configureXHR(xhr);
+			}
 			xhr.setRequestHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
 			xhr.send(serializedData);
 		} catch (e) {
@@ -258,5 +259,24 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			}
 			return logFn.apply(console, consoleArgs);
 		};
+	}
+
+	/**
+	 * Gets the StarkXSRFService from the Injector (this is tried only once).
+	 * It returns 'undefined' if the service is not found (the XSRF module is not imported in the app).
+	 */
+	private get xsrfService(): StarkXSRFService | undefined {
+		if (typeof this._xsrfService === "undefined") {
+			// The StarkXSRFService should be resolved at runtime to prevent the Angular DI circular dependency errors
+			try {
+				this._xsrfService = this.injector.get<StarkXSRFService>(STARK_XSRF_SERVICE);
+				return this._xsrfService;
+			} catch (exception) {
+				this._xsrfService = xsrfServiceNotFound;
+				return undefined;
+			}
+		}
+
+		return this._xsrfService !== xsrfServiceNotFound ? this._xsrfService : undefined;
 	}
 }

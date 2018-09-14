@@ -18,9 +18,10 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { SharedModule } from "./shared/shared.module";
 import { DateAdapter } from "@angular/material/core";
-import { filter } from "rxjs/operators";
+import { SharedModule } from "./shared/shared.module";
+import { Observable, of } from "rxjs";
+import { filter, map } from "rxjs/operators";
 
 import {
 	STARK_APP_CONFIG,
@@ -42,7 +43,8 @@ import {
 	StarkSettingsModule,
 	StarkSettingsService,
 	StarkUser,
-	StarkUserModule
+	StarkUserModule,
+	StarkXSRFModule
 } from "@nationalbankbelgium/stark-core";
 
 import {
@@ -127,6 +129,22 @@ export function initRouterLog(router: UIRouter): Function {
 	return () => logRegisteredStates(router.stateService.get());
 }
 
+export function getXsrfWaitBeforePinging(sessionService: StarkSessionService): Observable<any> {
+	let waitFor$: Observable<any> = of("production"); // no need to wait on production
+
+	if (ENV !== "production") {
+		// wait for the user to be logged in (useful when targeting a live backend on DEV)
+		waitFor$ = sessionService.getCurrentUser().pipe(
+			filter((user?: StarkUser) => typeof user !== "undefined"),
+			map(() => {
+				return "dev login";
+			})
+		);
+	}
+
+	return waitFor$;
+}
+
 // Application Redux State
 export interface State {
 	// reducer interfaces
@@ -193,6 +211,12 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkSettingsModule.forRoot(),
 		StarkRoutingModule.forRoot(),
 		StarkUserModule.forRoot(),
+		StarkXSRFModule.forRoot({
+			waitBeforePinging: {
+				waitBeforePingingFn: getXsrfWaitBeforePinging,
+				deps: [STARK_SESSION_SERVICE]
+			}
+		}),
 		SharedModule,
 		DemoModule,
 		NewsModule,

@@ -1,6 +1,7 @@
 /*tslint:disable:completed-docs*/
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
+import { Injector } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, of, throwError } from "rxjs";
 import { Serialize } from "cerialize";
@@ -10,15 +11,17 @@ import { StarkLoggingServiceImpl } from "./logging.service";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../../logging/entities";
 import { StarkBackend } from "../../http/entities/backend";
+import { StarkXSRFService } from "../../xsrf/services";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
+import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
 
 // tslint:disable-next-line:no-big-function
 describe("Service: StarkLoggingService", () => {
 	let appConfig: StarkApplicationConfig;
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
-	// FIXME: uncomment when XSRF service is implemented
-	// let mockXSRFService: StarkXSRFService;
+	let mockInjectorService: SpyObj<Injector>;
+	let mockXSRFService: StarkXSRFService;
 	let loggingService: LoggingServiceHelper;
 	const loggingBackend: StarkBackend = {
 		name: "logging",
@@ -39,6 +42,7 @@ describe("Service: StarkLoggingService", () => {
 
 	beforeEach(() => {
 		mockStore = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("store", ["dispatch", "pipe"]);
+		mockInjectorService = jasmine.createSpyObj<Injector>("injector,", ["get"]);
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.debugLoggingEnabled = true;
 		appConfig.loggingFlushDisabled = false;
@@ -46,15 +50,16 @@ describe("Service: StarkLoggingService", () => {
 		appConfig.loggingFlushPersistSize = loggingFlushPersistSize;
 		appConfig.addBackend(loggingBackend);
 
-		// FIXME: uncomment when XSRF service is implemented
-		// mockXSRFService = UnitTestingUtils.getMockedXSRFService();
+		mockXSRFService = new MockStarkXsrfService();
 		mockStarkLogging = {
 			uuid: "dummy uuid",
 			applicationId: "dummy app id",
 			messages: []
 		};
 		mockStore.pipe.and.returnValue(of(mockStarkLogging));
-		loggingService = new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/);
+		/* tslint:disable-next-line:deprecation */
+		(<Spy>mockInjectorService.get).and.returnValue(mockXSRFService);
+		loggingService = new LoggingServiceHelper(mockStore, appConfig, mockInjectorService);
 		// reset the calls counter because there is a log in the constructor
 		mockStore.dispatch.calls.reset();
 	});
@@ -66,7 +71,7 @@ describe("Service: StarkLoggingService", () => {
 			for (const invalidValue of invalidValues) {
 				appConfig.loggingFlushPersistSize = invalidValue;
 
-				expect(() => new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/)).toThrowError(/loggingFlushPersistSize/);
+				expect(() => new LoggingServiceHelper(mockStore, appConfig, mockInjectorService)).toThrowError(/loggingFlushPersistSize/);
 			}
 		});
 
@@ -74,7 +79,7 @@ describe("Service: StarkLoggingService", () => {
 			appConfig.loggingFlushDisabled = false;
 			appConfig.backends.delete("logging");
 
-			expect(() => new LoggingServiceHelper(mockStore, appConfig /*, mockXSRFService*/)).toThrowError(/backend/);
+			expect(() => new LoggingServiceHelper(mockStore, appConfig, mockInjectorService)).toThrowError(/backend/);
 		});
 
 		it("should generate a new correlation id", () => {
@@ -308,8 +313,8 @@ describe("Service: StarkLoggingService", () => {
 });
 
 class LoggingServiceHelper extends StarkLoggingServiceImpl {
-	public constructor(store: Store<StarkCoreApplicationState>, appConfig: StarkApplicationConfig /*, xsrfService: StarkXSRFService*/) {
-		super(store, appConfig /*, xsrfService*/);
+	public constructor(store: Store<StarkCoreApplicationState>, appConfig: StarkApplicationConfig, injector: Injector) {
+		super(store, appConfig, injector);
 	}
 
 	public constructLogMessageHelper(messageType: StarkLogMessageType, ...args: any[]): StarkLogMessage {
