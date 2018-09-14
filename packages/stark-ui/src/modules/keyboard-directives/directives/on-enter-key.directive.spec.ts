@@ -31,10 +31,10 @@ describe("OnEnterKeyDirective", () => {
 		fixture.detectChanges();
 	}
 
-	function triggerKeyPressEvent(inputElement: DebugElement, keyCode: number): void {
+	function triggerKeyPressEvent(inputElement: DebugElement, key: string): void {
 		const keypressEvent: Event = document.createEvent("Event");
 		keypressEvent.initEvent("keypress", true, true);
-		keypressEvent["which"] = keyCode;
+		keypressEvent["key"] = key;
 		inputElement.triggerEventHandler("keypress", keypressEvent);
 	}
 
@@ -60,7 +60,7 @@ describe("OnEnterKeyDirective", () => {
 			const hostComponent: TestComponent = fixture.componentInstance;
 
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
-			triggerKeyPressEvent(inputElement, 13);
+			triggerKeyPressEvent(inputElement, "Enter");
 
 			expect(hostComponent.onEnterKeyHandler).not.toHaveBeenCalled();
 		});
@@ -85,7 +85,7 @@ describe("OnEnterKeyDirective", () => {
 			const hostComponent: TestComponent = fixture.componentInstance;
 
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
-			triggerKeyPressEvent(inputElement, 13);
+			triggerKeyPressEvent(inputElement, "Enter");
 
 			expect(hostComponent.onEnterKeyHandler).toHaveBeenCalledTimes(1);
 			expect(hostComponent.onEnterKeyHandler).toHaveBeenCalledWith(hostComponent.onEnterKeyParam);
@@ -95,7 +95,7 @@ describe("OnEnterKeyDirective", () => {
 			const hostComponent: TestComponent = fixture.componentInstance;
 
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
-			triggerKeyPressEvent(inputElement, 1);
+			triggerKeyPressEvent(inputElement, "a");
 
 			expect(hostComponent.onEnterKeyHandler).not.toHaveBeenCalled();
 		});

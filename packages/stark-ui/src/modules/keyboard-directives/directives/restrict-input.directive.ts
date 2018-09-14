@@ -28,7 +28,10 @@ export class StarkRestrictInputDirective implements OnInit {
 		const regularExpression: string = this.inputRestriction || "";
 
 		if (regularExpression) {
-			const key: string = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+			// some browsers return the special key value (i.e. keys in the numeric keypad), in such cases we use the 'char'
+			// see: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
+			/* tslint:disable-next-line:deprecation */
+			const key: string = event.key.length > 1 ? event.char : event.key;
 			const regex: RegExp = new RegExp(regularExpression);
 
 			if (!regex.test(key)) {

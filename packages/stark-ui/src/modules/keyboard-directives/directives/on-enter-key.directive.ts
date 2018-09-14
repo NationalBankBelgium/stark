@@ -50,7 +50,7 @@ export class StarkOnEnterKeyDirective implements OnInit {
 	 */
 	@HostListener("keypress", ["$event"])
 	public eventHandler(event: KeyboardEvent): void {
-		if (this.onEnterKeyHandler && event.which === 13) {
+		if (this.onEnterKeyHandler && event.key === "Enter") {
 			this.onEnterKeyHandler(...this.onEnterKeyParams);
 			event.preventDefault();
 		}

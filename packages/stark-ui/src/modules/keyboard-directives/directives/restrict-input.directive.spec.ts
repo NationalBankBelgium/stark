@@ -35,7 +35,7 @@ describe("RestrictInputDirective", () => {
 		const keypressEvent: Event = document.createEvent("Event");
 		keypressEvent.initEvent("keypress", true, true);
 		keypressEvent["char"] = value;
-		keypressEvent["charCode"] = value.charCodeAt(0);
+		keypressEvent["key"] = value;
 		inputElement.triggerEventHandler("keypress", keypressEvent);
 
 		return <KeyboardEvent>keypressEvent;
