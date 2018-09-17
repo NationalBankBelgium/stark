@@ -41,7 +41,13 @@
       display: flex;
       flex-direction: row-reverse;
       width: 50%;
+
+      .stark-language-selector {
+        width: 45px;
+      }
+
       > div {
+        align-items: center;
         display: flex;
         justify-content: flex-end;
         margin-bottom: 5px;
@@ -98,8 +104,17 @@
       .stark-app-bar-content-right {
         flex-direction: column;
         width: 33%;
+
+        .stark-language-selector {
+          width: 100px;
+        }
+
         > div {
+          &.stark-app-bar-content-right-center {
+            margin-top: -10px;
+          }
           &.stark-app-bar-content-right-actions-alt {
+            margin-top: -10px;
             position: inherit;
           }
         }
@@ -139,19 +154,7 @@
   width: 290px;
 }
 
-.dropdown-lang {
-  background-color: rgba($color: #000, $alpha: 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 46px;
-  width: 45px;
-}
-
 @media #{$tablet-query} {
-  .dropdown-lang {
-    width: 100px;
-  }
 }
 
 .stark-app-header {

@@ -34,6 +34,9 @@
 			<a mat-list-item uiSref="demo-keyboard-directives" uiSrefActive="active">
 				<span matLine>Keyboard Directives</span>
 			</a>
+			<a mat-list-item uiSref="demo-language-selector" uiSrefActive="active">
+				<span matLine>Language Selector</span>
+			</a>
 			<a mat-list-item uiSref="demo-logout" uiSrefActive="active">
 				<span matLine>Logout</span>
 			</a>
@@ -113,8 +116,8 @@
 								<mat-icon starkSvgViewBox svgIcon="power" [matTooltip]="'STARK.APP_LOGOUT.TITLE' | translate"></mat-icon>
 							</button>
 						</div>
-						<div>
-							<div class="dropdown-lang">App Lang</div>
+						<div class="stark-app-bar-content-right-center">
+							<stark-language-selector color="white" class="stark-full-width" mode="dropdown"></stark-language-selector>
 							<button color="white" (click)="openLeftSidebar()" mat-icon-button>
 								<mat-icon starkSvgViewBox svgIcon="skip-next"></mat-icon>
 							</button>

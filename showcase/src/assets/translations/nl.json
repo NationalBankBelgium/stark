@@ -89,6 +89,10 @@
           "TYPE_A_VALUE": "Geef een waarde in"
         }
       },
+      "LANGUAGE-SELECTOR": {
+        "DROPDOWN": "Taal selector in 'dropdown' mode",
+        "TOOLBAR": "Taal selector in 'toolbar' mode"
+      },
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Logout-knop - Standaard pictogram",
         "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram"
