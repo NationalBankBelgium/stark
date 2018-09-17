@@ -18,6 +18,18 @@
         "PARENT": "Parent",
         "CHILD": "Child"
       },
+      "CARD": {
+        "ADVANCED": {
+          "DETAILS": "Stark handles more complex cards also, here is an example with subtitle, actions and also the option to have full width elements thanks to the <code>.stark-full-width</code> class added to the <code>mat-card-content</code> tag.",
+          "TITLE": "Advanced card"
+        },
+        "BASIC": {
+          "DETAILS": "Stark provides an alternative layout for cards. You can keep the same html structure and add the <code>.stark-card</code> class to the Angular Material card. We also recommend to use <code>h3</code> tag inside the <code>mat-card-title</code>.<br>For more information on Angular Material's card, check out this link: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "TITLE": "Basic card"
+        },
+        "CODE": "Here, the code to display this card:",
+        "TITLE": "Stark Cards"
+      },
       "COLORS": {
         "ADVANCED": {
           "DETAILS": "Angular Material uses three color palettes: a primary palette, an accent palette and a warn palette. Stark gives you the ability to define those palettes through a SCSS map called <code>$stark-base-theme</code>. This map contains 3 properties, one for each Angular Material's palette and you need to use a SCSS function called <code>mat-palette()</code> in order to instantiate Angular Material theming the right way. Note that you need to import Angular Material's theming before using the <code>mat-palette()</code> function.",
