@@ -95,6 +95,15 @@
         "TOGGLE": "Toggle search"
       },
       "DIRECTIVES": {
+        "INPUT_MASK": {
+          "TEXT_MASK": {
+            "TITLE": "Text Mask directive",
+            "CREDIT_CARD_MASK": "Credit Card",
+            "STRUCTURED_MESSAGE_MASK": "Structured Communication Message",
+            "CUSTOM_MASK": "Custom Mask"
+          },
+          "TITLE": "Input Mask directives"
+        },
         "KEYBOARD": {
           "TITLE": "Keyboard directives",
           "ON_ENTER_KEY": {

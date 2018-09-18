@@ -1,0 +1,58 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TITLE</h1>
+<section class="stark-section">
+	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+	<example-viewer
+		[extensions]="['HTML', 'TS']"
+		filesPath="input-mask-directives/text-mask-directive"
+		[exampleTitle]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TEXT_MASK.TITLE' | translate"
+	>
+		<!-- TODO: fxLayoutAlign is not really needed here but it should be added otherwise an error is thrown in (@angular/flex-layout 7.0.0-beta.22) -->
+		<!-- this issue is already solved in @angular/flex-layout 7.0.0-beta.23, remove fxLayoutAlign from here once we upgrade to that version -->
+		<!-- see https://github.com/angular/flex-layout/issues/951 and https://github.com/angular/flex-layout/issues/947-->
+		<div
+			fxLayout="column"
+			fxLayoutAlign="space-between"
+			fxLayout.gt-sm="row wrap"
+			fxLayoutAlign.gt-sm="space-between end"
+			fxLayoutGap="20px"
+		>
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TEXT_MASK.CREDIT_CARD_MASK</mat-label>
+				<input
+					matInput
+					id="credit-card-input-mask"
+					type="text"
+					(input)="logChange($event)"
+					placeholder="####-####-####-####"
+					[starkTextMask]="creditCardMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TEXT_MASK.STRUCTURED_MESSAGE_MASK</mat-label>
+				<input
+					matInput
+					id="structured-message-input-mask"
+					type="text"
+					[(ngModel)]="structuredMessage"
+					(input)="logModelChange()"
+					placeholder="+++###/####/#####/+++"
+					[starkTextMask]="structuredMessageMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TEXT_MASK.CUSTOM_MASK</mat-label>
+				<input
+					matInput
+					id="custom-input-mask"
+					type="text"
+					[formControl]="phoneNumberField"
+					placeholder="(+32) ### ## ## ##"
+					[starkTextMask]="customMaskConfig"
+				/>
+			</mat-form-field>
+		</div>
+	</example-viewer>
+</section>
+<stark-reference-block [links]="referenceList"></stark-reference-block>

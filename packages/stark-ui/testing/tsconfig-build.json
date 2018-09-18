@@ -6,7 +6,8 @@
     "typeRoots": [
       "../node_modules/@types",
       "../node_modules/@nationalbankbelgium/stark-testing/node_modules/@types",
-      "../../stark-build/typings"
+      "../../stark-build/typings",
+      "../typings"
     ],
     "paths": {
       "cerialize": ["../../stark-core/node_modules/cerialize"],

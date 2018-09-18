@@ -7,7 +7,7 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 			menuGroups: [
 				{
 					id: "menu-home",
-					label: "Home",
+					label: "SHOWCASE.HOMEPAGE.TITLE",
 					isVisible: true,
 					isEnabled: true,
 					targetState: "home",
@@ -15,14 +15,14 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 				},
 				{
 					id: "menu-getting-started",
-					label: "Getting started",
+					label: "SHOWCASE.GETTING_STARTED.TITLE",
 					isVisible: true,
 					isEnabled: true,
 					targetState: "getting-started"
 				},
 				{
 					id: "menu-news",
-					label: "News",
+					label: "SHOWCASE.NEWS.TITLE",
 					isVisible: true,
 					isEnabled: true,
 					targetState: "news"
@@ -40,147 +40,147 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					entries: [
 						{
 							id: "menu-stark-ui-components-action-bar",
-							label: "Action bar",
+							label: "SHOWCASE.DEMO.ACTION_BAR.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.action-bar"
 						},
 						{
 							id: "menu-stark-ui-components-app-data",
-							label: "App Data",
+							label: "SHOWCASE.DEMO.APP_DATA.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.app-data"
 						},
 						{
 							id: "menu-stark-ui-components-logout",
-							label: "App logout",
+							label: "SHOWCASE.DEMO.LOGOUT.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.logout"
 						},
 						{
 							id: "menu-stark-ui-components-menu",
-							label: "App menu",
+							label: "SHOWCASE.DEMO.MENU.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.menu"
 						},
 						{
 							id: "menu-stark-ui-components-sidebar",
-							label: "App sidebar",
+							label: "SHOWCASE.DEMO.SIDEBAR.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.sidebar"
 						},
 						{
 							id: "menu-stark-ui-components-breadcrumb",
-							label: "Breadcrumb",
+							label: "SHOWCASE.DEMO.BREADCRUMB.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.breadcrumb"
 						},
 						{
 							id: "menu-stark-ui-components-collapsible",
-							label: "Collapsible",
+							label: "SHOWCASE.DEMO.COLLAPSIBLE.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.collapsible"
 						},
 						{
 							id: "menu-stark-ui-components-date-picker",
-							label: "Date picker",
+							label: "SHOWCASE.DEMO.DATE_PICKER.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.date-picker"
 						},
 						{
 							id: "menu-stark-ui-components-date-range-picker",
-							label: "Date range picker",
+							label: "SHOWCASE.DEMO.DATE_RANGE_PICKER.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.date-range-picker"
 						},
 						{
 							id: "menu-stark-ui-components-dropdown",
-							label: "Dropdown",
+							label: "SHOWCASE.DEMO.DROPDOWN.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.dropdown"
 						},
 						{
 							id: "menu-style-footer",
-							label: "Footer",
+							label: "SHOWCASE.DEMO.FOOTER.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.stark-footer"
 						},
 						{
 							id: "menu-style-generic-search",
-							label: "Generic Search",
+							label: "SHOWCASE.DEMO.GENERIC_SEARCH.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.generic-search"
 						},
 						{
 							id: "menu-stark-ui-components-language-selector",
-							label: "Language selector",
+							label: "SHOWCASE.DEMO.LANGUAGE_SELECTOR.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.language-selector"
 						},
 						{
 							id: "menu-stark-ui-components-message-pane",
-							label: "Message pane",
+							label: "SHOWCASE.DEMO.MESSAGE_PANE.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.message-pane"
 						},
 						{
 							id: "menu-stark-ui-components-minimap",
-							label: "Minimap",
+							label: "SHOWCASE.DEMO.MINIMAP.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.minimap"
 						},
 						{
 							id: "menu-stark-ui-components-pagination",
-							label: "Pagination",
+							label: "SHOWCASE.DEMO.PAGINATION.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.pagination"
 						},
 						{
 							id: "menu-stark-ui-components-pretty-print",
-							label: "Pretty print",
+							label: "SHOWCASE.DEMO.PRETTY_PRINT.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.pretty-print"
 						},
 						{
 							id: "menu-stark-ui-components-slider",
-							label: "Slider",
+							label: "SHOWCASE.DEMO.SLIDER.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.slider"
 						},
 						{
 							id: "menu-stark-ui-components-route-search",
-							label: "Route Search",
+							label: "SHOWCASE.DEMO.ROUTE_SEARCH.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.route-search"
 						},
 						{
 							id: "menu-stark-ui-components-table",
-							label: "Table",
+							label: "SHOWCASE.DEMO.TABLE.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.table"
 						},
 						{
 							id: "menu-stark-ui-components-toast",
-							label: "Toast notification",
+							label: "SHOWCASE.DEMO.TOAST.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.toast"
@@ -194,22 +194,29 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					isEnabled: true,
 					entries: [
 						{
+							id: "menu-stark-ui-directives-mask",
+							label: "SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TITLE",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-ui.input-mask-directives"
+						},
+						{
 							id: "menu-stark-ui-directives-keyboard",
-							label: "Keyboard directives",
+							label: "SHOWCASE.DEMO.DIRECTIVES.KEYBOARD.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.keyboard-directives"
 						},
 						{
 							id: "menu-stark-ui-transform-input",
-							label: "Transform input directive",
+							label: "SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.transform-input-directive"
 						},
 						{
 							id: "menu-stark-ui-directives-progress-indicator",
-							label: "Progress indicator",
+							label: "SHOWCASE.DEMO.PROGRESS_INDICATOR.TITLE",
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.progress-indicator"

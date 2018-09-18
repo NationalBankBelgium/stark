@@ -30,11 +30,14 @@
     "@mdi/angular-material": "^3.3.92",
     "@types/nouislider": "^9.0.4",
     "@types/prismjs": "^1.9.0",
+    "angular2-text-mask": "^9.0.0",
     "normalize.css": "^8.0.1",
     "nouislider": "^12.1.0",
     "prettier": "^1.16.1",
     "pretty-data": "^0.40.0",
-    "prismjs": "^1.15.0"
+    "prismjs": "^1.15.0",
+    "text-mask-addons": "^3.8.0",
+    "text-mask-core": "^5.1.2"
   },
   "devDependencies": {
     "@nationalbankbelgium/stark-testing": "../stark-testing"
