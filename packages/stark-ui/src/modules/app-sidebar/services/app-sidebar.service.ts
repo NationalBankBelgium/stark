@@ -24,13 +24,24 @@ export class StarkAppSidebarServiceImpl implements StarkAppSidebarService {
 
 	public closeSidebar$: Observable<void> = this.closeSidebarSource.asObservable();
 
+	/**
+	 * Subject emitting sidebar toggle events
+	 */
+	private toggleSidebarSource: Subject<StarkAppSidebarOpenEvent> = new Subject<StarkAppSidebarOpenEvent>();
+
+	public toggleSidebar$: Observable<StarkAppSidebarOpenEvent> = this.toggleSidebarSource.asObservable();
+
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
 		this.logger.debug(starkAppSidebarServiceName + " loaded");
 	}
 
+	public close(): void {
+		this.closeSidebarSource.next();
+	}
+
 	public openMenu(): void {
 		this.openSidebarSource.next({
-			mode: "menu",
+			type: "menu",
 			sidebar: "left"
 		});
 	}
@@ -39,7 +50,7 @@ export class StarkAppSidebarServiceImpl implements StarkAppSidebarService {
 	/*tslint:disable-next-line:no-identical-functions*/
 	public openLeft(): void {
 		this.openSidebarSource.next({
-			mode: "regular",
+			type: "regular",
 			sidebar: "left"
 		});
 	}
@@ -50,7 +61,10 @@ export class StarkAppSidebarServiceImpl implements StarkAppSidebarService {
 		});
 	}
 
-	public close(): void {
-		this.closeSidebarSource.next();
+	public toggleMenu(): void {
+		this.toggleSidebarSource.next({
+			type: "menu",
+			sidebar: "left"
+		});
 	}
 }

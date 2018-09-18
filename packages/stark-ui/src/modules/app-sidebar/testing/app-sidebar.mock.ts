@@ -32,14 +32,24 @@ import { StarkAppSidebarOpenEvent, StarkAppSidebarService } from "@nationalbankb
  */
 export class MockAppSidebarService implements StarkAppSidebarService {
 	/**
+	 * Observable subscribed by components to catch close events
+	 */
+	public closeSidebar$: Subject<void> = new Subject<void>();
+
+	/**
 	 * Observable subscribed by components to catch open events
 	 */
 	public openSidebar$: Subject<StarkAppSidebarOpenEvent> = new Subject<StarkAppSidebarOpenEvent>();
 
 	/**
-	 * Observable subscribed by components to catch close events
+	 * Observable subscribed by components to catch toggle events
 	 */
-	public closeSidebar$: Subject<void> = new Subject<void>();
+	public toggleSidebar$: Subject<StarkAppSidebarOpenEvent> = new Subject<StarkAppSidebarOpenEvent>();
+
+	/**
+	 * Close all sidebars
+	 */
+	public close: () => void = jasmine.createSpy("close");
 
 	/**
 	 * Open sidebar's menu
@@ -57,7 +67,7 @@ export class MockAppSidebarService implements StarkAppSidebarService {
 	public openRight: () => void = jasmine.createSpy("openRight");
 
 	/**
-	 * Close all sidebars
+	 * Toggle the menu
 	 */
-	public close: () => void = jasmine.createSpy("close");
+	public toggleMenu: () => void = jasmine.createSpy("toggleMenu");
 }

@@ -149,6 +149,11 @@
         "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom",
         "TITLE": "Stark logout"
       },
+      "MENU": {
+        "SIMPLE": "Simple menu",
+        "SECTIONS": "Menu avec sections",
+        "TITLE": "Stark menu"
+      },
       "PAGINATION": {
         "ADVANCED_CONFIGURATION": "Pagination avec configuration avancée",
         "COMPACT_CONFIGURATION": "Pagination en mode compact",

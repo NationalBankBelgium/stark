@@ -30,6 +30,7 @@ import { DemoFooterComponent } from "./footer/demo-footer.component";
 import { DemoKeyboardDirectivesComponent } from "./keyboard-directives/demo-keyboard-directives.component";
 import { DemoLanguageSelectorComponent } from "./language-selector/demo-language-selector.component";
 import { DemoLogoutComponent } from "./logout/demo-logout.component";
+import { DemoMenuComponent } from "./menu/demo-menu.component";
 import { DemoPaginationComponent } from "./pagination/demo-pagination.component";
 import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
 import { DemoSliderComponent } from "./slider/demo-slider.component";
@@ -47,6 +48,7 @@ import {
 	StarkDropdownModule,
 	StarkKeyboardDirectivesModule,
 	StarkLanguageSelectorModule,
+	StarkAppMenuModule,
 	StarkPaginationModule,
 	StarkPrettyPrintModule,
 	StarkSliderModule,
@@ -74,6 +76,7 @@ import {
 		SharedModule,
 		StarkActionBarModule,
 		StarkAppLogoutModule,
+		StarkAppMenuModule,
 		StarkBreadcrumbModule,
 		StarkCollapsibleModule,
 		StarkDatePickerModule,
@@ -103,6 +106,7 @@ import {
 		DemoKeyboardDirectivesComponent,
 		DemoLanguageSelectorComponent,
 		DemoLogoutComponent,
+		DemoMenuComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
 		DemoSidebarComponent,
@@ -127,6 +131,7 @@ import {
 		DemoKeyboardDirectivesComponent,
 		DemoLanguageSelectorComponent,
 		DemoLogoutComponent,
+		DemoMenuComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
 		DemoSliderComponent,

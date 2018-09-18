@@ -1,14 +1,14 @@
 /**
- * Event to be emitted by the Stark App Sidebar service interface when it opens a sidebar
+ * StarkAppSidebarOpenEvent interface
  */
 export interface StarkAppSidebarOpenEvent {
 	/**
-	 * Mode of the open sidebar
+	 * The left sidebar type
 	 */
-	mode?: "regular" | "menu";
+	type?: "regular" | "menu";
 
 	/**
-	 * Type of the open sidebar
+	 * The targeted sidenav
 	 */
 	sidebar: "left" | "right";
 }

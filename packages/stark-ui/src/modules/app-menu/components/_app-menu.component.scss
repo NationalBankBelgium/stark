@@ -1,0 +1,47 @@
+/* ============================================================================== */
+/*  S t a r k   A p p   M e n u                                                */
+/* ============================================================================== */
+/* stark-ui: src/modules/app-menu/components/app-menu/_app-menu.component.scss */
+
+.stark-app-menu {
+  section {
+    border-bottom: 1px solid #ddd;
+    padding: 40px 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .mat-nav-list {
+    .mat-list-item {
+      font-size: mat-font-size($typography-config, button);
+      font-weight: mat-font-weight($typography-config, button);
+      height: 42px;
+      line-height: mat-line-height($typography-config, button);
+
+      &.active {
+        .mat-list-text > * {
+          font-weight: bold;
+          color: mat-color($primary-palette, 500);
+        }
+      }
+
+      @for $i from 2 through 3 {
+        &.stark-app-menu-item-level-#{$i} .mat-list-text {
+          padding-left: #{$i * 20 - 20}px;
+        }
+      }
+    }
+  }
+
+  .mat-nav-list {
+    padding-top: 0;
+  }
+
+  .stark-section-title {
+    padding: 0 16px;
+  }
+}
+
+/* END stark-ui: src/modules/dropdown/components/dropdown/_dropdown.component.scss */

@@ -1,10 +1,10 @@
 <mat-sidenav-container #appSidenavContainer>
-	<mat-sidenav #appSidenavLeft class="stark-app-sidenav-left" [ngClass]="{'stark-app-sidenav-menu': sidenavLeftMode==='menu'}" mode="over" [fixedInViewport]="true"
-	[fixedBottomGap]="0">
-		<ng-container *ngIf="sidenavLeftMode==='regular'">
+	<mat-sidenav #appSidenavLeft class="stark-app-sidenav-left" [ngClass]="{'stark-app-sidenav-menu': sidenavLeftType==='menu', 'stark-app-sidenav-menu-shifting': isShiftingToSmaller}" [mode]="sidenavLeftMode" [fixedInViewport]="true"
+	[fixedBottomGap]="0" [opened]="sidenavLeftOpened">
+		<ng-container *ngIf="sidenavLeftType==='regular'">
 			<ng-content class="regular" select="[stark-app-sidenav-left]"></ng-content>
 		</ng-container>
-		<ng-container class="menu" *ngIf="sidenavLeftMode==='menu'">
+		<ng-container class="menu" *ngIf="sidenavLeftType==='menu'">
 			<ng-content select="[stark-app-sidenav-menu]"></ng-content>
 		</ng-container>
 	</mat-sidenav>
