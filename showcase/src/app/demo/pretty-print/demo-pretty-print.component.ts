@@ -55,7 +55,7 @@ export class DemoPrettyPrintComponent implements OnInit {
 	private addCss(): void {
 		const fileType: FileType = {
 			format: "css",
-			title: "SHOWCASE.DEMO.PRETTY-PRINT.CSS",
+			title: "SHOWCASE.DEMO.PRETTY_PRINT.CSS",
 			path: "pretty-print/css",
 			rawData: [
 				"body{background: #D2DA9C url(leftcolbg.jpg)repeat-y left top;color: #FFF;}",
@@ -68,7 +68,7 @@ export class DemoPrettyPrintComponent implements OnInit {
 	private addScss(): void {
 		const fileType: FileType = {
 			format: "scss",
-			title: "SHOWCASE.DEMO.PRETTY-PRINT.SCSS",
+			title: "SHOWCASE.DEMO.PRETTY_PRINT.SCSS",
 			path: "pretty-print/scss",
 			rawData: [
 				"$font-stack: Helvetica, sans-serif; $primary-color: #333; body { font: 100% $font-stack; color: $primary-color; }"
@@ -80,7 +80,7 @@ export class DemoPrettyPrintComponent implements OnInit {
 	private addHtml(): void {
 		const fileType: FileType = {
 			format: "html",
-			title: "SHOWCASE.DEMO.PRETTY-PRINT.HTML",
+			title: "SHOWCASE.DEMO.PRETTY_PRINT.HTML",
 			path: "pretty-print/html",
 			rawData: `<!DOCTYPE html><html><head><style>body {background-color: powderblue;}h1{color: blue;}
 				flashy{color: red;}</style></head><body><h1>This is a heading</h1><p class="flashy">
@@ -92,7 +92,7 @@ export class DemoPrettyPrintComponent implements OnInit {
 	private addJavascript(): void {
 		const fileType: FileType = {
 			format: "javascript",
-			title: "SHOWCASE.DEMO.PRETTY-PRINT.JAVASCRIPT",
+			title: "SHOWCASE.DEMO.PRETTY_PRINT.JAVASCRIPT",
 			path: "pretty-print/javascript",
 			rawData: [
 				"function calculateData(seed, operationFn) {",
@@ -110,7 +110,7 @@ export class DemoPrettyPrintComponent implements OnInit {
 	private addTypescript(): void {
 		const fileType: FileType = {
 			format: "typescript",
-			title: "SHOWCASE.DEMO.PRETTY-PRINT.TYPESCRIPT",
+			title: "SHOWCASE.DEMO.PRETTY_PRINT.TYPESCRIPT",
 			path: "pretty-print/typescript",
 			rawData: [
 				"function calculateData(seed:any, operationFn:Function):any {",
@@ -128,7 +128,7 @@ export class DemoPrettyPrintComponent implements OnInit {
 	private addJson(): void {
 		const fileType: FileType = {
 			format: "json",
-			title: "SHOWCASE.DEMO.PRETTY-PRINT.JSON",
+			title: "SHOWCASE.DEMO.PRETTY_PRINT.JSON",
 			path: "pretty-print/json",
 			rawData: [
 				'{"menu": { "id": "file", "value": "File",',
@@ -143,7 +143,7 @@ export class DemoPrettyPrintComponent implements OnInit {
 	private addXml(): void {
 		const fileType: FileType = {
 			format: "xml",
-			title: "SHOWCASE.DEMO.PRETTY-PRINT.XML",
+			title: "SHOWCASE.DEMO.PRETTY_PRINT.XML",
 			path: "pretty-print/xml",
 			rawData: `<menu id="file" value="File"><menuitem value="New" onclick="CreateNewDoc()" />
 				<menuitem value="Open" onclick="OpenDoc()" />
@@ -155,7 +155,7 @@ export class DemoPrettyPrintComponent implements OnInit {
 	private addSql(): void {
 		const fileType: FileType = {
 			format: "sql",
-			title: "SHOWCASE.DEMO.PRETTY-PRINT.SQL",
+			title: "SHOWCASE.DEMO.PRETTY_PRINT.SQL",
 			path: "pretty-print/sql",
 			rawData: [
 				"SELECT DISTINCT Name FROM Production.Product AS p WHERE EXISTS (SELECT * ",

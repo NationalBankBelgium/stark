@@ -5,18 +5,23 @@
       "VALUE": "Waarde"
     },
     "DEMO": {
-      "ACTION-BAR": {
-        "CLASSIC-FULL": "Action Bar Classic Full",
+      "ACTION_BAR": {
+        "ALT": "Action Bar Alternative",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
-        "ALT": "Action Bar Alternative"
+        "CLASSIC-FULL": "Action Bar Classic Full",
+        "TITLE": "Stark action bar"
       },
       "BREADCRUMB": {
+        "CHILD": "Kind",
         "CONFIG_INPUT": "Breadcrumb demonstration (met breadcrumbConfig)",
-        "NO_INPUT": "Breadcrumb demonstration (zonder parameters)",
-        "ROOT": "Voorouder",
         "GRANDPARENT": "Grootouder",
         "PARENT": "Ouder",
-        "CHILD": "Kind"
+        "NO_INPUT": "Breadcrumb demonstration (zonder parameters)",
+        "ROOT": "Voorouder",
+        "TITLE": "Stark breadcrumb"
+      },
+      "BUTTON": {
+        "TITLE": "Stark buttons"
       },
       "CARD": {
         "ADVANCED": {
@@ -36,6 +41,7 @@
         "DEFAULT_ICON": "Standaard pictogram",
         "HTML_CONTENT": "Alle HTML-inhoud",
         "OPEN": "Open",
+        "TITLE": "Stark collapsible",
         "TITLE_0": "Standaard icon collapsible titel",
         "TITLE_1": "Aangepast icon collapsible titel",
         "TOGGLE_COLLAPSIBLE": "Collapsible omschakelen"
@@ -55,22 +61,23 @@
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Aangepaste filter",
-        "PLACEHOLDER": "Datum kiezen",
         "ONLY_WEEKDAYS": "Date Picker - Alleen weekdagen",
-        "ONLY_WEEKENDS": "Date Picker - Alleen weekenden"
+        "ONLY_WEEKENDS": "Date Picker - Alleen weekenden",
+        "PLACEHOLDER": "Datum kiezen",
+        "TITLE": "Stark date picker"
       },
       "DATE_RANGE_PICKER": {
-        "FULL": "Date Range Picker"
+        "TITLE": "Stark date range picker"
       },
-      "DROPDOWNS": {
+      "DROPDOWN": {
         "PR": "Informaticatoepassingen",
-        "IO": "Informatica-infrastructuur en operaties",
-        "CS": "IT-klantendiensten",
-        "REQUIRED": "Dropdown met gewenste keuze",
         "BLANK": "Bij verstek keus (blank)",
+        "CS": "IT-klantendiensten",
+        "DISABLED": "Niet geactiveerd dropdown",
+        "IO": "Informatica-infrastructuur en operaties",
         "MULTIPLE": "Meerdere selectie",
         "MULTIPLE_REQUIRED": "Gewenste meerdere selectie",
-        "DISABLED": "Niet geactiveerd dropdown",
+        "REQUIRED": "Dropdown met gewenste keuze",
         "SELECTED_VALUE": "Geselecteerde waarde ",
         "SELECTED_VALUES": "Geselecteerde waarden ",
         "SELECT_SERVICE": "Selecteer een dienst",
@@ -78,18 +85,24 @@
         "SELECT_SERVICES": "Selecteer een of meer diensten",
         "SELECT_ONE_SERVICE": "Selecteer ten minsten een dienst",
         "SELECT_DISABLED": "Sorry, deze dropdown is niet geactiveerd",
+        "TITLE": "Stark dropdown",
         "WHITE": "Witte dropdown met zwarte achtergrond (maximum breedte)"
       },
+      "EXAMPLE_VIEWER": {
+        "TITLE": "Stark example viewer"
+      },
       "HEADER": {
-        "TITLE": "Stark App Header Guidelines",
-        "INTRO": "Stark provides you usefull classes to implement your application header. You just need to include the header theme in your SCSS",
         "COPY_PASTE": "Then you can copy/paste this HTML into your code",
-        "STARK_APP_HEADER": "The <b>stark-app-header</b> provide a background to the header",
-        "STARK_APP_BAR": "The <b>stark-app-bar</b> contains three content containers <b>stark-app-bar-content-left</b>, <b>stark-app-bar-content-center</b>, <b>stark-app-bar-content-right</b> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <b>stark-app-bar</b> also provides a <b>stark-app-bar-page-title</b> which is placed on the bottom left of the header.",
-        "STARK_APP_BAR_CONTENT_LEFT": "<b>stark-app-bar-content-left</b> contains <b>stark-actions</b> for the navigation actions.",
-        "STARK_APP_BAR_CONTENT_CENTER": "<b>stark-app-bar-content-center</b> contains the app logo.",
-        "STARK_APP_BAR_CONTENT_RIGHT": "<b>stark-app-bar-content-right</b> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <b>stark-app-bar-content-right-actions-alt</b> which contains some alternative actions.",
-        "STARK_APP_BAR_PAGE_TITLE": "<b>stark-app-bar-page-title</b> displays the current page title."
+        "EXPLAINED": "Introduction",
+        "INTEGRATION": "Integration",
+        "INTEGRATION_DETAILS": "Stark provides you with usefull classes to implement your application header. You just need to include the header theme in your SCSS",
+        "STARK_APP_HEADER": "The <code>stark-app-header</code> provide a background to the header",
+        "STARK_APP_BAR": "The <code>stark-app-bar</code> contains three content containers <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <code>stark-app-bar</code> also provides a <code>stark-app-bar-page-title</code> which is placed on the bottom left of the header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contains <code>stark-actions</code> for the navigation actions.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo.",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <code>stark-app-bar-content-right-actions-alt</code> which contains some alternative actions.",
+        "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> displays the current page title.",
+        "TITLE": "Stark header guidelines"
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
@@ -109,17 +122,20 @@
           "INPUT_NO_SPECIAL_CHARACTERS": "Aanvaard alle karakters, behalve speciale karakters",
           "INPUT_UPPERCASE_CHARACTERS": "Aanvaard enkel hoofdletters",
           "TYPE_A_VALUE": "Geef een waarde in"
-        }
+        },
+        "TITLE": "Stark keyboard directive"
       },
-      "LANGUAGE-SELECTOR": {
+      "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Taal selector in 'dropdown' mode",
+        "TITLE": "Stark language selector",
         "TOOLBAR": "Taal selector in 'toolbar' mode"
       },
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Logout-knop - Standaard pictogram",
-        "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram"
+        "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram",
+        "TITLE": "Stark logout"
       },
-      "PRETTY-PRINT": {
+      "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
         "ENABLE_HIGHLIGHTING": "Highlighting activeren",
         "ENTER_DATA": "Typ of kopieer/plak ongeformatteerde code",
@@ -132,22 +148,30 @@
         "SCSS": "Pretty-Print SCSS",
         "SELECT_DATAFORMAT": "Selecteer een formaat",
         "SQL": "Pretty-Print SQL",
+        "TITLE": "Stark pretty print",
         "TRY_IT_YOURSELF": "Probeer het zelf",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
+      },
+      "SHARED": {
+        "EXAMPLE_VIEWER_LIST": "Examples and code samples"
       },
       "SIDEBAR": {
         "INTRO": "De preview van deze code is de eigenlijke zijbalk van de showcase",
         "OPEN_LEFT": "Open de linker sidebar",
         "OPEN_MENU": "Open de menu",
         "OPEN_RIGHT": "Open de rechter sidebar",
-        "TITLE": "App Sidebar"
+        "TITLE": "Stark sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Horizontale schuifregelaar met bereik",
         "SIMPLE_HORIZONTAL_SLIDER": "Eenvoudige horizontale schuifregelaar",
         "SIMPLE_VERTICAL_SLIDER": "Eenvoudige verticale schuifregelaar",
-        "VERTICAL_RANGE_SLIDER": "Verticale schuifregelaar met bereik"
+        "VERTICAL_RANGE_SLIDER": "Verticale schuifregelaar met bereik",
+        "TITLE": "Stark slider"
+      },
+      "TABLE": {
+        "TITLE": "Stark table"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {

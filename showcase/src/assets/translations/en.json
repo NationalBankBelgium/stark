@@ -5,18 +5,23 @@
       "VALUE": "Value"
     },
     "DEMO": {
-      "ACTION-BAR": {
-        "CLASSIC-FULL": "Action Bar Classic Full",
+      "ACTION_BAR": {
+        "ALT": "Action Bar Alternative",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
-        "ALT": "Action Bar Alternative"
+        "CLASSIC-FULL": "Action Bar Classic Full",
+        "TITLE": "Stark action bar"
       },
       "BREADCRUMB": {
+        "CHILD": "Child",
         "CONFIG_INPUT": "Breadcrumb demonstration (with breadcrumbConfig)",
-        "NO_INPUT": "Breadcrumb demonstration (without parameters)",
-        "ROOT": "Root ancestor",
         "GRANDPARENT": "Grand parent",
+        "NO_INPUT": "Breadcrumb demonstration (without parameters)",
         "PARENT": "Parent",
-        "CHILD": "Child"
+        "ROOT": "Root ancestor",
+        "TITLE": "Stark breadcrumb"
+      },
+      "BUTTON": {
+        "TITLE": "Stark buttons"
       },
       "CARD": {
         "ADVANCED": {
@@ -36,6 +41,7 @@
         "DEFAULT_ICON": "Default icon",
         "HTML_CONTENT": "Any HTML content",
         "OPEN": "Open",
+        "TITLE": "Stark collapsible",
         "TITLE_0": "Default icon collapsible title",
         "TITLE_1": "Custom icon collapsible title",
         "TOGGLE_COLLAPSIBLE": "Toggle collapsible"
@@ -55,22 +61,23 @@
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Custom Filter",
-        "PLACEHOLDER": "Choose a date",
         "ONLY_WEEKDAYS": "Date Picker - Only weekdays",
-        "ONLY_WEEKENDS": "Date Picker - Only weekends"
+        "ONLY_WEEKENDS": "Date Picker - Only weekends",
+        "PLACEHOLDER": "Choose a date",
+        "TITLE": "Stark date picker"
       },
       "DATE_RANGE_PICKER": {
-        "FULL": "Date Range Picker"
+        "TITLE": "Stark date range picker"
       },
-      "DROPDOWNS": {
+      "DROPDOWN": {
         "PR": "IT applications",
-        "IO": "Informatics infrastructure and operations",
-        "CS": "IT customer services",
-        "REQUIRED": "Single required selection",
         "BLANK": "Single selection with default blank",
+        "CS": "IT customer services",
+        "DISABLED": "Disabled dropdown",
+        "IO": "Informatics infrastructure and operations",
         "MULTIPLE": "Multiple selection",
         "MULTIPLE_REQUIRED": "Required multiple selection",
-        "DISABLED": "Disabled dropdown",
+        "REQUIRED": "Single required selection",
         "SELECTED_VALUE": "Selected value ",
         "SELECTED_VALUES": "Selected values ",
         "SELECT_SERVICE": "Select Service",
@@ -78,26 +85,32 @@
         "SELECT_SERVICES": "Select one or more services",
         "SELECT_ONE_SERVICE": "Select at least one service",
         "SELECT_DISABLED": "Sorry, it's disabled",
+        "TITLE": "Stark dropdown",
         "WHITE": "White dropdown on black background (full width)"
       },
+      "EXAMPLE_VIEWER": {
+        "TITLE": "Stark example viewer"
+      },
       "HEADER": {
-        "TITLE": "Stark App Header Guidelines",
-        "INTRO": "Stark provide you usefull classes to implement your application header. You just need to include the header theme in your SCSS",
         "COPY_PASTE": "Then you can copy/paste this HTML into your code",
-        "STARK_APP_HEADER": "The <b>stark-app-header</b> provides a background to the header",
-        "STARK_APP_BAR": "The <b>stark-app-bar</b> contains three content containers <b>stark-app-bar-content-left</b>, <b>stark-app-bar-content-center</b>, <b>stark-app-bar-content-right</b> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <b>stark-app-bar</b> also provides a <b>stark-app-bar-page-title</b> which is placed on the bottom left of the header.",
-        "STARK_APP_BAR_CONTENT_LEFT": "<b>stark-app-bar-content-left</b> contains <b>stark-actions</b> for the navigation actions.",
-        "STARK_APP_BAR_CONTENT_CENTER": "<b>stark-app-bar-content-center</b> contains the app logo",
-        "STARK_APP_BAR_CONTENT_RIGHT": "<b>stark-app-bar-content-right</b> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <b>stark-app-bar-content-right-actions-alt</b> which contains some alternative actions.",
-        "STARK_APP_BAR_PAGE_TITLE": "<b>stark-app-bar-page-title</b> displays the current page title."
+        "EXPLAINED": "Introduction",
+        "INTEGRATION": "Integration",
+        "INTEGRATION_DETAILS": "Stark provides you with usefull classes to implement your application header. You just need to include the header theme in your SCSS",
+        "STARK_APP_HEADER": "The <code>stark-app-header</code> provides a background to the header",
+        "STARK_APP_BAR": "The <code>stark-app-bar</code> contains three content containers <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <code>stark-app-bar</code> also provides a <code>stark-app-bar-page-title</code> which is placed on the bottom left of the header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contains <code>stark-actions</code> for the navigation actions.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <code>stark-app-bar-content-right-actions-alt</code> which contains some alternative actions.",
+        "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> displays the current page title.",
+        "TITLE": "Stark header guidelines"
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
-          "TITLE": "On Enter Key Directive",
           "DESCRIPTION": "Type some value in the inputs and then press Enter in any of them to trigger the callback function",
           "INPUT_WITH_CONTEXT": "With bound context",
           "INPUT_WITHOUT_CONTEXT": "Without bound context (bound values are not accessible)",
           "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Without bound context but passed as parameter",
+          "TITLE": "On Enter Key Directive",
           "TYPE_AND_PRESS_ENTER": "Type a value and press Enter",
           "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Type a value, press Enter and check the console"
         },
@@ -109,17 +122,20 @@
           "INPUT_NO_SPECIAL_CHARACTERS": "Accept all except special characters",
           "INPUT_UPPERCASE_CHARACTERS": "Accept only uppercase characters",
           "TYPE_A_VALUE": "Type a value"
-        }
+        },
+        "TITLE": "Stark keyboard directive"
       },
-      "LANGUAGE-SELECTOR": {
+      "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Language selector in 'dropdown' mode",
+        "TITLE": "Stark language selector",
         "TOOLBAR": "Language selector in 'toolbar' mode"
       },
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
-        "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon"
+        "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon",
+        "TITLE": "Stark logout"
       },
-      "PRETTY-PRINT": {
+      "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
         "ENABLE_HIGHLIGHTING": "Enable highlighting",
         "ENTER_DATA": "Type or copy/paste unformatted code",
@@ -132,22 +148,30 @@
         "SCSS": "Pretty-Print SCSS",
         "SELECT_DATAFORMAT": "Select a format",
         "SQL": "Pretty-Print SQL",
+        "TITLE": "Stark pretty print",
         "TRY_IT_YOURSELF": "Try it yourself",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
+      },
+      "SHARED": {
+        "EXAMPLE_VIEWER_LIST": "Examples and code samples"
       },
       "SIDEBAR": {
         "INTRO": "The preview of this code is the actual sidebar of the showcase",
         "OPEN_LEFT": "Open the left sidebar",
         "OPEN_MENU": "Open the menu",
         "OPEN_RIGHT": "Open the right sidebar",
-        "TITLE": "App Sidebar"
+        "TITLE": "Stark sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Horizontal Range Slider",
         "SIMPLE_HORIZONTAL_SLIDER": "Simple Horizontal Slider",
         "SIMPLE_VERTICAL_SLIDER": "Simple Vertical Slider",
-        "VERTICAL_RANGE_SLIDER": "Vertical Range Slider"
+        "VERTICAL_RANGE_SLIDER": "Vertical Range Slider",
+        "TITLE": "Stark slider"
+      },
+      "TABLE": {
+        "TITLE": "Stark table"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
