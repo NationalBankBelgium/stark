@@ -20,6 +20,7 @@ const globals = {
 	"@angular/material/checkbox": "ngMaterial.checkbox",
 	"@angular/material/core": "ngMaterial.core",
 	"@angular/material/dialog": "ngMaterial.dialog",
+	"@angular/material/expansion": "ngMaterial.expansion",
 	"@angular/material/icon": "ngMaterial.icon",
 	"@angular/material/input": "ngMaterial.input",
 	"@angular/material/list": "ngMaterial.list",

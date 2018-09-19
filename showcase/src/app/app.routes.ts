@@ -14,8 +14,9 @@ import {
 	DemoLanguageSelectorComponent,
 	LogoutComponent,
 	DemoPrettyPrintComponent,
-	SliderComponent,
 	TableComponent,
+	SliderComponent,
+	DemoCollapsibleComponent,
 	DemoTypographyComponent
 } from "./demo";
 import { HomeComponent } from "./home";
@@ -30,6 +31,7 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo-breadcrumb", url: "/demo/breadcrumb", component: DemoBreadcrumbComponent },
 	{ name: "demo-button", url: "/demo/button", component: ButtonComponent },
 	{ name: "demo-card", url: "/demo/card", component: DemoCardComponent },
+	{ name: "demo-collapsible", url: "/demo/collapsible", component: DemoCollapsibleComponent },
 	{ name: "demo-colors", url: "/demo/colors", component: DemoColorsComponent },
 	{ name: "demo-date-picker", url: "/demo/date-picker", component: DatePickerComponent },
 	{ name: "demo-date-range-picker", url: "/demo/date-range-picker", component: DateRangePickerComponent },

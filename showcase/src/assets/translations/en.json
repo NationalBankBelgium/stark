@@ -30,6 +30,16 @@
         "CODE": "Here, the code to display this card:",
         "TITLE": "Stark Cards"
       },
+      "COLLAPSIBLE": {
+        "CLOSED": "Closed",
+        "CUSTOM_ICON": "Custom icon",
+        "DEFAULT_ICON": "Default icon",
+        "HTML_CONTENT": "Any HTML content",
+        "OPEN": "Open",
+        "TITLE_0": "Default icon collapsible title",
+        "TITLE_1": "Custom icon collapsible title",
+        "TOGGLE_COLLAPSIBLE": "Toggle collapsible"
+      },
       "COLORS": {
         "ADVANCED": {
           "DETAILS": "Angular Material uses three color palettes: a primary palette, an accent palette and a warn palette. Stark gives you the ability to define those palettes through a SCSS map called <code>$stark-base-theme</code>. This map contains 3 properties, one for each Angular Material's palette and you need to use a SCSS function called <code>mat-palette()</code> in order to instantiate Angular Material theming the right way. Note that you need to import Angular Material's theming before using the <code>mat-palette()</code> function.",
