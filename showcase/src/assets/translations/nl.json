@@ -47,17 +47,23 @@
         "TOGGLE_COLLAPSIBLE": "Collapsible omschakelen"
       },
       "COLORS": {
-        "ADVANCED": {
-          "DETAILS": "Angular Material gebruikt drie kleurenpaletten: een primair palet, een accentpalet en een waarschuwingspalet. Stark biedt je de mogelijkheid om deze paletten te definiëren aan de hand van een SCSS map met de naam $stark-base-theme. Deze map bevat 3 eigenschappen, één voor elk Angular Material palet. Je moet de SCSS functie met de naam mat-palette() gebruiken om de Angular Material thematisering op correcte wijze te instantiëren. Merk op dat je het thema van Angular Materiaal moet importeren voordat je de functie mat-palette() gebruikt.",
-          "LINKS": "Meer details over hoe Angular Material thematisering gebruikt, kan je terugvinden via volgende link <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming<br>Je kan de Material Design kleurenpaletten hier bekijken: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors<br>Indien je je eigen palet wil ontwerpen, kan deze tool je hierbij helpen: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/",
-          "TITLE": "Geavanceerd gebruik van kleurenpaletten"
+        "ALT": {
+          "DETAILS": "In addition to the 3 basic palettes, Stark provides 3 alternative palettes: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
+          "TITLE": "Alternative palettes"
         },
         "BASIC": {
-          "DETAILS": "Alle kleuren die in Stark worden gebruikt, kunnen bepaald worden door het gebruik van een SCSS map met de naam $stark-color-theme. Elke kleur heeft een contrasteigenschap die nodig is om de tekstkleur bovenop deze kleur te definiëren. Nadat deze SCSS map is ingesteld, moet je het globaal thema van Stark importeren om het toe te passen.",
-          "EXAMPLE": "Hier wordt een volledige versie van de SCSS map getoond, maar je kan die ook gedeeltelijk gebruiken:",
-          "TITLE": "Basisgebruik"
+          "DETAILS": "Stark provides an alternative layout for cards. You can keep the same html structure and add the <code>.stark-card</code> class to the Angular Material card. We also recommend to use <code>h3</code> tag inside the <code>mat-card-title</code>.<br><br><br>For more information on Angular Material's card, check out this link: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "TITLE": "Basic palettes"
         },
-        "TITLE": "Stark Kleuren"
+        "CUSTOM": {
+          "DETAILS": "If you want to customize those palettes, you first need to create a palette and this tool is really useful: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Just define your main color and it will generate the full palette, then you just need to copy the SCSS code and associate it to the palette you want to modify. Don't forget to import stark theming after the maps declaration. <br>Here, an example with default values on how to achieve this:",
+          "TITLE": "Customize palettes"
+        },
+        "LINKS": {
+          "DETAILS": "You can find the Material Design color palettes here: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
+          "TITLE": "Useful links"
+        },
+        "TITLE": "Stark Colors"
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Aangepaste filter",
@@ -96,13 +102,14 @@
         "EXPLAINED": "Introduction",
         "INTEGRATION": "Integration",
         "INTEGRATION_DETAILS": "Stark provides you with usefull classes to implement your application header. You just need to include the header theme in your SCSS",
+        "INTRO": "Stark provides you useful classes to implement your application header. You just need to include the header theme in your SCSS",
         "STARK_APP_HEADER": "The <code>stark-app-header</code> provide a background to the header",
         "STARK_APP_BAR": "The <code>stark-app-bar</code> contains three content containers <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <code>stark-app-bar</code> also provides a <code>stark-app-bar-page-title</code> which is placed on the bottom left of the header.",
         "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contains <code>stark-actions</code> for the navigation actions.",
         "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo.",
         "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <code>stark-app-bar-content-right-actions-alt</code> which contains some alternative actions.",
         "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> displays the current page title.",
-        "TITLE": "Stark header guidelines"
+        "TITLE": "Stark App Header Guidelines"
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {

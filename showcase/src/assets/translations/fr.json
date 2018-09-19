@@ -25,11 +25,11 @@
       },
       "CARD": {
         "ADVANCED": {
-          "DETAILS": "Stark gère aussi les cartes plus complexes, comme par exemple avec un sous-titre, des actions et permet aussi d'intégrer des éléments prenant la largeur totale de la carte à l'aide de la classe <code>.stark-full-width</code> à ajouter au tag <code>mat-card-content</code>.",
+          "DETAILS": "Stark gère aussi les cartes plus complexes, comme par exemple avec un sous-titre, des actions et permet aussi d'intégrer des éléments prenant la largeur totale de la carte à l'aide de la classe <code>.stark-full-width</code> à ajouter à l'intérieur du tag <code>mat-card-content</code>.",
           "TITLE": "Carte avancée"
         },
         "BASIC": {
-          "DETAILS": "Stark propose un layout alternatif concernant les cartes. VOus pouvez utiliser les cartes d'Angular Material et ajouter la classe <code>.stark-card</code> aux composants. Nous suggérons aussi d'utiliser le tag <code>h3</code> à l'intérieur du <code>mat-card-title</code>.<br>Pour plus d'information sur les cards d'Angular Material, rendez vous sur cette page: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "DETAILS": "Stark propose un layout alternatif concernant les cartes. Vous pouvez utiliser les cartes d'Angular Material et ajouter la classe <code>.stark-card</code> aux composants. Nous suggérons aussi d'utiliser le tag <code>h3</code> à l'intérieur du <code>mat-card-title</code>.<br>Pour plus d'information sur les cards d'Angular Material, rendez vous sur cette page: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
           "TITLE": "Carte basique"
         },
         "CODE": "Voici le code correspondant à cette carte:",
@@ -47,15 +47,21 @@
         "TOGGLE_COLLAPSIBLE": "Ouvrir/fermer le collapsible"
       },
       "COLORS": {
-        "ADVANCED": {
-          "DETAILS": "Angular Material utilise trois palettes de couleurs: primary, accent et warn. Stark donne la possibilité de définir ces palettes de couleur via une map SCSS nommée <code>$stark-base-theme</code>. Cette map contient 3 propriétés, une pour chaque palette d'Angular Material et la fonction <code>mat-palette()</code> doit être utilisée pour configurer correctement Stark et Angular Material. A noter que cette fonction est définit par Angular Material donc le theme de Angular Material doit être importer au préalable.",
-          "LINKS": "Pour plus de détails sur la gestion du theme par ANgular Material, veuillez consulter <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a><br>Voici les palettes mises à dispostion par Material Design: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a><br>Si vous souhaitez créer vos propores palettes, cet outil peut vous aider: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>",
-          "TITLE": "Utilisation avancé avec les palettes de couleurs"
+        "ALT": {
+          "DETAILS": "En plus de ces trois palettes, Stark ajoute 3 palettes alternatives: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
+          "TITLE": "Palettes alternatives"
         },
         "BASIC": {
-          "DETAILS": "Toutes les couleurs utilisées dans Stark sont customisables via une map SCSS appelée <code>$stark-color-theme</code>. Chaque couleur possède une propriété <code>contrast</code> qui est nécessaire pour définir la couleur des textes se trouvant sur un background de la couleur en question. Une fois la map définit, vous devez importer le thème global de Stark pour l'appliquer.",
-          "EXAMPLE": "Voici la version complète de la map SCSS mais vous pouvez aussi définir une map plus partielle:",
-          "TITLE": "Utilisation basique"
+          "DETAILS": "Angular Material utilise trois palettes de couleurs: primary, accent et warn. Stark donne la possibilité de définir ces palettes de couleur via 3 maps SCSS: <code>$stark-primary-palette</code>, <code>$stark-accent-palette</code> and <code>$stark-warn-palette</code>.<br><br><br>Pour plus de détails sur la gestion du theme par Angular Material, veuillez consulter <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a>",
+          "TITLE": "Palettes basiques"
+        },
+        "CUSTOM": {
+          "DETAILS": "Afin de personnaliser ces palettes, il faut d'abord créer une palette à l'aide de cet outil: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Selectionner la couleur de votre choix, l'outil génère le code SCSS pour vous, puis il suffit d'assigner la map à la palette que vous souhaitez modifier. Ne pas oublier d'importer le theming Stark après la déclaration des maps. <br>Voici un example:",
+          "TITLE": "Customize palettes"
+        },
+        "LINKS": {
+          "DETAILS": "Voici les palettes mises à dispostion par Material Design: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
+          "TITLE": "Liens utiles"
         },
         "TITLE": "Stark Colors"
       },

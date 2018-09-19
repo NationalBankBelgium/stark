@@ -23,6 +23,6 @@
 
 .stark-dropdown {
   &.stark-white {
-    @include stark-dropdown-color(map-get(map-get($color-theme, white-transp), color));
+    @include stark-dropdown-color(mat-color($grey-palette, A100));
   }
 }
