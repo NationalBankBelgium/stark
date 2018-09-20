@@ -30,10 +30,7 @@
 }
 
 .stark-collapsible {
-  @include stark-collapsible-color(
-    map-get(map-get($color-theme, white-transp), color),
-    map-get(map-get($color-theme, black-opaque), color)
-  );
+  @include stark-collapsible-color(mat-color($grey-palette, A100), mat-color($grey-palette, 900));
 
   .mat-expansion-panel-header-description {
     color: mat-color(map-get($base-theme, primary-palette), 900);

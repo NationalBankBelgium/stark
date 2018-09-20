@@ -13,19 +13,19 @@
         color: mat-color(map-get($base-theme, warn-palette));
       }
       &.accent {
-        color: mat-color(map-get($base-theme, accent-palette));
+        color: mat-color($accent-palette, 500);
       }
       &.success {
-        color: map-get(map-get($color-theme, success), color);
+        color: mat-color($success-palette, 500);
       }
       &.alert {
-        color: map-get(map-get($color-theme, alert), color);
+        color: mat-color($alert-palette, 500);
       }
       &.alt {
-        color: map-get(map-get($color-theme, alt), color);
+        color: mat-color($grey-palette, 900);
       }
       &.neutral {
-        color: map-get(map-get($color-theme, neutral), color);
+        color: mat-color($grey-palette, 400);
       }
       &.white {
         color: #fff;

@@ -12,15 +12,11 @@ example-viewer {
       border-bottom: 1px solid #555;
     }
   }
-  .example-viewer-title {
-    color: #fff;
-    background-color: mat-color(map-get($base-theme, primary-palette), 700);
+  .mat-tab-header {
+    background-color: mat-color($mat-light-theme-background, card);
   }
   .mat-tab-body {
     background-color: #272822;
-  }
-  .example-viewer-body {
-    background-color: mat-color($mat-light-theme-background, card);
   }
   .example-source {
     border-bottom: 1px solid mat-color($mat-light-theme-foreground, divider);

@@ -8,7 +8,7 @@
 		</button>
 	</mat-card-header>
 	<mat-card-content>
-		<div class="stark-full-width example-source-wrapper" *ngIf="showSource">
+		<div class="example-source-wrapper stark-full-width" *ngIf="showSource">
 				<mat-tab-group>
 				<mat-tab *ngFor="let file of exampleFiles; trackBy: trackExampleFile" [label]="file.extension">
 					<div>

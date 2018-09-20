@@ -44,9 +44,9 @@ export class DemoCardComponent implements OnInit {
 				</mat-card-header>
 				<mat-card-content>
 					<p>...</p>
-				</mat-card-content>
-				<mat-card-content class="stark-full-width">
-					<h1>FULL WIDTH CONTAINER</h1>
+					<div class="stark-full-width">	
+						<h1>FULL WIDTH CONTAINER</h1>
+					</div>
 				</mat-card-content>
 				<div class="stark-full-width"></div>
 				<mat-card-actions>
