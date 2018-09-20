@@ -1,7 +1,7 @@
 /**
  * Angular 2 decorators and services
  */
-import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
 import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
 import { AppState } from "./app.service";
@@ -12,8 +12,6 @@ import { AppState } from "./app.service";
  */
 @Component({
 	selector: "app",
-	// tslint:disable-next-line:use-view-encapsulation
-	encapsulation: ViewEncapsulation.None,
 	styleUrls: ["./app.component.css"],
 	templateUrl: "./app.component.html"
 })
@@ -46,6 +44,10 @@ export class AppComponent implements OnInit {
 
 	public openRightSidebar(): void {
 		this.sidebarService.openRight();
+	}
+
+	public goHome(): void {
+		this.routingService.navigateToHome();
 	}
 }
 

@@ -13,9 +13,9 @@ const translationsNl: object = require("../assets/translations/nl.json");
 export function initializeTranslation(translateService: TranslateService, dateAdapter: DateAdapter<any>): void {
 	translateService.addLangs(["en", "fr", "nl"]);
 	translateService.setDefaultLang("en");
-	translateService.use("nl");
+	translateService.use("en");
 
-	dateAdapter.setLocale("nl-be");
+	dateAdapter.setLocale("en-us");
 
 	const english: StarkLocale = { languageCode: "en", translations: translationsEn };
 	const french: StarkLocale = { languageCode: "fr", translations: translationsFr };
