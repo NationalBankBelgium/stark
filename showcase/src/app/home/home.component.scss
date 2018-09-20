@@ -1,5 +1,11 @@
-h1 {
-  font-size: 20px;
+.mat-card {
+  .mat-card-content {
+    text-align: center;
+    width: 128px;
+    img {
+      height: 100px;
+    }
+  }
 }
 
 .documentation-links {

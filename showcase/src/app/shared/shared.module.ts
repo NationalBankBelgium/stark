@@ -10,9 +10,11 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 import { TranslateModule } from "@ngx-translate/core";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
 	imports: [
+		FlexLayoutModule,
 		MatButtonModule,
 		MatCardModule,
 		MatIconModule,
@@ -26,6 +28,6 @@ import { TranslateModule } from "@ngx-translate/core";
 	providers: [FileService],
 	declarations: [ExampleViewerComponent],
 	entryComponents: [ExampleViewerComponent],
-	exports: [ExampleViewerComponent]
+	exports: [ExampleViewerComponent, FlexLayoutModule]
 })
 export class SharedModule {}

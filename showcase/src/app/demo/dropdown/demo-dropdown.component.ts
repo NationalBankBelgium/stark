@@ -20,9 +20,9 @@ export class DemoDropdownComponent implements OnInit {
 	 */
 	public ngOnInit(): void {
 		this.serviceDropdownOptions = [
-			{ id: "PR", value: "SHOWCASE.DEMO.DROPDOWNS.PR" },
-			{ id: "IO", value: "SHOWCASE.DEMO.DROPDOWNS.IO" },
-			{ id: "CS", value: "SHOWCASE.DEMO.DROPDOWNS.CS" }
+			{ id: "PR", value: "SHOWCASE.DEMO.DROPDOWN.PR" },
+			{ id: "IO", value: "SHOWCASE.DEMO.DROPDOWN.IO" },
+			{ id: "CS", value: "SHOWCASE.DEMO.DROPDOWN.CS" }
 		];
 	}
 

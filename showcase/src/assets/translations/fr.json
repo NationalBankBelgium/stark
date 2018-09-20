@@ -5,18 +5,23 @@
       "VALUE": "Valuer"
     },
     "DEMO": {
-      "ACTION-BAR": {
-        "CLASSIC-FULL": "Action Bar Classic Full",
+      "ACTION_BAR": {
+        "ALT": "Action Bar Alternative",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
-        "ALT": "Action Bar Alternative"
+        "CLASSIC-FULL": "Action Bar Classic Full",
+        "TITLE": "Stark action bar"
       },
       "BREADCRUMB": {
+        "CHILD": "Enfant",
         "CONFIG_INPUT": "Démonstration du breadcrumb component (avec breadcrumbConfig)",
-        "NO_INPUT": "Démonstration du breadcrumb component (sans paramètres)",
-        "ROOT": "Ancêtre racine",
         "GRANDPARENT": "Grand-parent",
         "PARENT": "Parent",
-        "CHILD": "Enfant"
+        "NO_INPUT": "Démonstration du breadcrumb component (sans paramètres)",
+        "ROOT": "Ancêtre racine",
+        "TITLE": "Stark breadcrumb"
+      },
+      "BUTTON": {
+        "TITLE": "Stark buttons"
       },
       "CARD": {
         "ADVANCED": {
@@ -36,6 +41,7 @@
         "DEFAULT_ICON": "Icône par défaut",
         "HTML_CONTENT": "N'impoerte quel contenu HTML",
         "OPEN": "Ouvert",
+        "TITLE": "Stark collapsible",
         "TITLE_0": "Titre du collapsible avec icône par défaut",
         "TITLE_1": "Titre du collapsible avec icône custom",
         "TOGGLE_COLLAPSIBLE": "Ouvrir/fermer le collapsible"
@@ -55,22 +61,23 @@
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Filtre sur mesure",
-        "PLACEHOLDER": "Choisir une date",
         "ONLY_WEEKDAYS": "Date Picker - Seulement les jours de semaine",
-        "ONLY_WEEKENDS": "Date Picker - Seulement les jours de weekend"
+        "ONLY_WEEKENDS": "Date Picker - Seulement les jours de weekend",
+        "PLACEHOLDER": "Choisir une date",
+        "TITLE": "Stark date picker"
       },
       "DATE_RANGE_PICKER": {
-        "FULL": "Date Range Picker"
+        "TITLE": "Stark date range picker"
       },
-      "DROPDOWNS": {
+      "DROPDOWN": {
         "PR": "Applications informatiques",
-        "IO": "Infrastructure et opérations informatiques",
-        "CS": "Services aux clients informatiques",
-        "REQUIRED": "Choix unique obligatoire",
         "BLANK": "Option par défaut (blank)",
+        "CS": "Services aux clients informatiques",
+        "DISABLED": "Dropdown désactivé",
+        "IO": "Infrastructure et opérations informatiques",
         "MULTIPLE": "Choix multiple",
         "MULTIPLE_REQUIRED": "Choix multiple obligatoire",
-        "DISABLED": "Dropdown désactivé",
+        "REQUIRED": "Choix unique obligatoire",
         "SELECTED_VALUE": "Valeur sélectionnée ",
         "SELECTED_VALUES": "Valeurs sélectionnées ",
         "SELECT_SERVICE": "Sélectionnez un service",
@@ -78,26 +85,32 @@
         "SELECT_SERVICES": "Sélectionnez un service ou plus",
         "SELECT_ONE_SERVICE": "Sélectionnez au moins un service",
         "SELECT_DISABLED": "Désolé, ce dropdown est désactivé",
+        "TITLE": "Stark dropdown",
         "WHITE": "Dropdown blanc sur fond noir (largeur maximale)"
       },
+      "EXAMPLE_VIEWER": {
+        "TITLE": "Stark example viewer"
+      },
       "HEADER": {
-        "TITLE": "Stark App Header Guidelines",
-        "INTRO": "Stark fournit des classes utiles pour implémenter le header de votre application. Il suffit d'inclure le theme du header dans votre SCSS",
         "COPY_PASTE": "Ensuite il faut copier/coller ce bout de code HTML",
-        "STARK_APP_HEADER": "Le <b>stark-app-header</b> ajoute un fond au header",
-        "STARK_APP_BAR": "Le <b>stark-app-bar</b> est composé de 3 conteneurs de contenu <b>stark-app-bar-content-left</b>, <b>stark-app-bar-content-center</b>, <b>stark-app-bar-content-right</b> qui divisent le header en 3 parties. Tous les enfants directes de ces 3 conteneurs sont alignés dans une colonne. <b>stark-app-bar</b> contient aussi un <b>stark-app-bar-page-title</b> placé dans le coin gauche en bas du header.",
-        "STARK_APP_BAR_CONTENT_LEFT": "<b>stark-app-bar-content-left</b> contient <b>stark-actions</b> pour les actions concernant la navigation.",
-        "STARK_APP_BAR_CONTENT_CENTER": "<b>stark-app-bar-content-center</b> contient le logo de l'application",
-        "STARK_APP_BAR_CONTENT_RIGHT": "<b>stark-app-bar-content-right</b> contient 3 conteneurs, le premier pour le App Data component et le boutton de déconnection, le second pour le choix de langue et <b>stark-app-bar-content-right-actions-alt</b> qui contient des actions alternatives.",
-        "STARK_APP_BAR_PAGE_TITLE": "<b>stark-app-bar-page-title</b> affiche le titre de la page visitée."
+        "EXPLAINED": "Introduction",
+        "INTEGRATION": "Integration",
+        "INTEGRATION_DETAILS": "Stark fournit des classes utiles pour implémenter le header de votre application. Il suffit d'inclure le theme du header dans votre SCSS",
+        "STARK_APP_HEADER": "Le <code>stark-app-header</code> ajoute un fond au header",
+        "STARK_APP_BAR": "Le <code>stark-app-bar</code> est composé de 3 conteneurs de contenu <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> qui divisent le header en 3 parties. Tous les enfants directes de ces 3 conteneurs sont alignés dans une colonne. <code>stark-app-bar</code> contient aussi un <code>stark-app-bar-page-title</code> placé dans le coin gauche en bas du header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contient <code>stark-actions</code> pour les actions concernant la navigation.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contient le logo de l'application",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contient 3 conteneurs, le premier pour le App Data component et le boutton de déconnection, le second pour le choix de langue et <code>stark-app-bar-content-right-actions-alt</code> qui contient des actions alternatives.",
+        "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> affiche le titre de la page visitée.",
+        "TITLE": "Stark header guidelines"
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
-          "TITLE": "On Enter Key Directive",
           "DESCRIPTION": "Tapez une valeur dans les entrées, puis appuyez sur Entrée dans l'un d'eux pour déclencher la fonction callback",
           "INPUT_WITH_CONTEXT": "Avec contexte lié",
           "INPUT_WITHOUT_CONTEXT": "Sans contexte lié (les valeurs liées ne sont pas accessibles)",
           "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Sans contexte lié mais passé en paramètre",
+          "TITLE": "On Enter Key Directive",
           "TYPE_AND_PRESS_ENTER": "Tapez une valeur et appuyez sur Entrée",
           "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Tapez une valeur, appuyez sur Entrée et vérifiez la console"
         },
@@ -109,17 +122,20 @@
           "INPUT_NO_SPECIAL_CHARACTERS": "Accepter tous les caractères sauf les caractères spéciaux",
           "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules",
           "TYPE_A_VALUE": "Taper une valeur"
-        }
+        },
+        "TITLE": "Stark keyboard directive"
       },
-      "LANGUAGE-SELECTOR": {
+      "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Sélecteur de langue en mode 'dropdown'",
+        "TITLE": "Stark language selector",
         "TOOLBAR": "Sélecteur de langue en mode 'toolbar'"
       },
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Bouton logout - Icône par défaut",
-        "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom"
+        "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom",
+        "TITLE": "Stark logout"
       },
-      "PRETTY-PRINT": {
+      "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
         "ENABLE_HIGHLIGHTING": "Mettre en surbrillance",
         "ENTER_DATA": "Tapez ou copiez/collez du code non formaté",
@@ -132,22 +148,30 @@
         "SCSS": "Pretty-Print SCSS",
         "SELECT_DATAFORMAT": "Sélectionner un format",
         "SQL": "Pretty-Print SQL",
+        "TITLE": "Stark pretty print",
         "TRY_IT_YOURSELF": "Essayez vous-même",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
+      },
+      "SHARED": {
+        "EXAMPLE_VIEWER_LIST": "Exemples et codes"
       },
       "SIDEBAR": {
         "INTRO": "La sidebar du showcase illustre ce code.",
         "OPEN_LEFT": "Ouvrir la sidebar de gauche",
         "OPEN_MENU": "Ouvrir le menu",
         "OPEN_RIGHT": "Ouvrir la sidebar de droite",
-        "TITLE": "App Sidebar"
+        "TITLE": "Stark sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Curseur de plage",
         "SIMPLE_HORIZONTAL_SLIDER": "Curseur simple",
         "SIMPLE_VERTICAL_SLIDER": "Curseur simple",
-        "VERTICAL_RANGE_SLIDER": "Curseur de plage"
+        "VERTICAL_RANGE_SLIDER": "Curseur de plage",
+        "TITLE": "Stark slider"
+      },
+      "TABLE": {
+        "TITLE": "Stark table"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
