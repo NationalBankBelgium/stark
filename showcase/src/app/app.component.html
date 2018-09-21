@@ -94,14 +94,11 @@
 				<div class="stark-app-bar">
 					<div class="stark-app-bar-content-left">
 						<div class="stark-actions">
-							<button class="stark-home-button" color="white" mat-icon-button>
+							<button class="stark-home-button" (click)="goHome()" color="white" mat-icon-button>
 								<mat-icon starkSvgViewBox svgIcon="home"></mat-icon>
 							</button>
 							<button color="white" mat-icon-button (click)="openMenu()">
 								<mat-icon starkSvgViewBox svgIcon="menu"></mat-icon>
-							</button>
-							<button color="white" mat-icon-button>
-								<mat-icon starkSvgViewBox svgIcon="arrow-left"></mat-icon>
 							</button>
 						</div>
 					</div>
@@ -145,7 +142,7 @@
 					</div>
 
 					<div class="stark-app-bar-page-title">
-						<h1>STARK</h1>
+						<h1>Stark</h1>
 					</div>
 				</div>
 			</div>
