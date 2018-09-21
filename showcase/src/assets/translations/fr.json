@@ -179,6 +179,23 @@
       "TABLE": {
         "TITLE": "Stark table"
       },
+      "TOAST": {
+        "BUTTON_INFO": "Info",
+        "BUTTON_ALERT": "Erreur",
+        "BUTTON_WARNING": "Attention",
+        "BUTTON_ACTION": "Action",
+        "BUTTON_DELAY_LONG": "Long délai",
+        "BUTTON_DELAY_SHORT": "Court délai",
+        "BUTTON_HIDE": "Cacher le toast",
+        "EXAMPLE": "Exemple",
+        "MESSAGE_CLOSED_ON_DELAY_TIMEOUT": "Toast fermé automatiquement après un timeout.",
+        "MESSAGE_ACTION_CLICKED": "Vous avez cliqué sur le bouton 'DISMISS' !",
+        "MESSAGE_HIDDEN": "Vous avez fermé le toast!",
+        "MESSAGE_OPENED": "Toast ouvert.",
+        "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast fermé automatiquement avant qu'un nouveau toast n'apparaisse.",
+        "MESSAGE_INTRO": "Cliquez sur un bouton pout tester les notification toast",
+        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}"
+      },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
           "TITLE": "Classes & tags disponibles"

@@ -180,6 +180,23 @@
       "TABLE": {
         "TITLE": "Stark table"
       },
+      "TOAST": {
+        "BUTTON_INFO": "Info",
+        "BUTTON_ALERT": "Fout",
+        "BUTTON_WARNING": "Waarschuwing",
+        "BUTTON_ACTION": "Actie",
+        "BUTTON_DELAY_LONG": "Lange vertraging",
+        "BUTTON_DELAY_SHORT": "Korte vertraging",
+        "BUTTON_HIDE": "Verberg de toast",
+        "EXAMPLE": "Voorbeeld",
+        "MESSAGE_CLOSED_ON_DELAY_TIMEOUT": "Toast wordt automatisch gesloten na een time-out voor vertraging.",
+        "MESSAGE_ACTION_CLICKED": "Je hebt op de actie 'DISMISS' geklikt!",
+        "MESSAGE_HIDDEN": "Je sloot de toast!",
+        "MESSAGE_OPENED": "Toast geopend.",
+        "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast automatisch gesloten voordat een nieuwe wordt weergegeven.",
+        "MESSAGE_INTRO": "Klik op een knop om de toastmelding te testen.",
+        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}"
+      },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
           "TITLE": "Available classes & tags"

@@ -14,8 +14,9 @@ import {
 	DemoLanguageSelectorComponent,
 	LogoutComponent,
 	DemoPrettyPrintComponent,
-	TableComponent,
 	SliderComponent,
+	DemoToastComponent,
+	TableComponent,
 	DemoCollapsibleComponent,
 	DemoTypographyComponent
 } from "./demo";
@@ -44,6 +45,7 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo-slider", url: "/demo/slider", component: SliderComponent },
 	{ name: "demo-sidebar", url: "/demo/sidebar", component: DemoSidebarComponent },
 	{ name: "demo-table", url: "/demo/table", component: TableComponent },
+	{ name: "demo-toast", url: "/demo/toast", component: DemoToastComponent },
 	{ name: "demo-dropdown", url: "/demo/dropdown", component: DemoDropdownComponent },
 	{ name: "demo-typography", url: "/demo/typography", component: DemoTypographyComponent },
 	{ name: "otherwise", url: "/otherwise", component: NoContentComponent }

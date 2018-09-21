@@ -50,7 +50,8 @@ import {
 	StarkBreadcrumbModule,
 	StarkLanguageSelectorModule,
 	StarkSvgViewBoxModule,
-	StarkDatePickerModule
+	StarkDatePickerModule,
+	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";
 import { routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
@@ -192,7 +193,12 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkLanguageSelectorModule,
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
-		StarkBreadcrumbModule
+		StarkBreadcrumbModule,
+		StarkToastNotificationModule.forRoot({
+			delay: 5000,
+			position: "top right",
+			actionClasses: []
+		})
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.
