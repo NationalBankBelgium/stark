@@ -11,7 +11,7 @@ import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../con
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../../logging/entities";
 import { StarkBackend } from "../../http/entities/backend";
 import { StarkCoreApplicationState } from "../../../common/store";
-import { StarkError, StarkErrorImpl } from "../../../common";
+import { StarkError, StarkErrorImpl } from "../../../common/error";
 
 // tslint:disable-next-line:no-big-function
 describe("Service: StarkLoggingService", () => {

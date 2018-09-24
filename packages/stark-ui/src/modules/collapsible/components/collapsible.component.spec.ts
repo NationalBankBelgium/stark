@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkCollapsibleComponent } from "../components";
+import { StarkCollapsibleComponent } from "./collapsible.component";
 
 describe("CollapsibleComponent", () => {
 	let component: StarkCollapsibleComponent;

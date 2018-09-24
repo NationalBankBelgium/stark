@@ -4,9 +4,10 @@ import SpyObj = jasmine.SpyObj;
 import { ApplicationRef } from "@angular/core";
 import { async, fakeAsync, tick } from "@angular/core/testing";
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarDismiss, MatSnackBarRef } from "@angular/material/snack-bar";
-import { StarkMessageType } from "../../../common";
+import { StarkMessageType } from "../../../common/message";
 import { StarkToastMessage, StarkToastNotificationComponent } from "../components";
-import { StarkToastNotificationServiceImpl, StarkToastNotificationResult } from "../services";
+import { StarkToastNotificationResult } from "./toast-notification-result.intf";
+import { StarkToastNotificationServiceImpl } from "./toast-notification.service";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { Observable, Observer } from "rxjs";
 
@@ -33,8 +34,8 @@ describe("Service: StarkToastNotificationService", () => {
 		const mockSnackBar: SpyObj<MatSnackBar> = createSpyObj<MatSnackBar>("MatSnackBar", {
 			openFromComponent: createSpyObj<MatSnackBarRef<StarkToastNotificationComponent>>("MatSnackBarRef", {
 				afterDismissed: afterDismissedObs,
-				dismissWithAction: jasmine.createSpy('dismissWithAction'),
-				dismiss: jasmine.createSpy('dismiss')
+				dismissWithAction: jasmine.createSpy("dismissWithAction"),
+				dismiss: jasmine.createSpy("dismiss")
 			}),
 			dismiss: undefined
 		});
@@ -114,7 +115,7 @@ describe("Service: StarkToastNotificationService", () => {
 			expect(showObs).toBeDefined();
 
 			expect(service.currentToastResult$).not.toBeDefined();
-			
+
 			expect(service.snackBar.openFromComponent).toHaveBeenCalledTimes(1);
 
 			showObs.subscribe((ret: StarkToastNotificationResult) => {
@@ -138,7 +139,7 @@ describe("Service: StarkToastNotificationService", () => {
 		}));
 	});
 
-	describe("on hide", () => {		
+	describe("on hide", () => {
 		it("should hide the snackbar", fakeAsync(() => {
 			service.show(message).subscribe((ret: StarkToastNotificationResult) => {
 				expect(ret).toBe(StarkToastNotificationResult.HIDDEN);

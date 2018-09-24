@@ -2,7 +2,7 @@ import { Component, HostBinding, Inject, OnInit, ViewEncapsulation } from "@angu
 import { MAT_SNACK_BAR_DATA, MatSnackBar } from "@angular/material/snack-bar";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkMessageType } from "../../../common/message";
-import { StarkToastMessage } from "../components";
+import { StarkToastMessage } from "./toast-message.intf";
 
 /**
  * Name of the component
@@ -56,7 +56,9 @@ export class StarkToastNotificationComponent implements OnInit {
 	 */
 	public closeToast(): void {
 		// get the reference to the current open toast (this one) from the MatSnackBar service and dismiss it
-		if (this.snackBar._openedSnackBarRef) { this.snackBar._openedSnackBarRef.dismissWithAction() }
+		if (this.snackBar._openedSnackBarRef) {
+			this.snackBar._openedSnackBarRef.dismissWithAction();
+		}
 	}
 
 	/**

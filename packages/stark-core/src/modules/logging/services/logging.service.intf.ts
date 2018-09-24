@@ -1,5 +1,5 @@
 import { InjectionToken } from "@angular/core";
-import { StarkError } from "../../../common";
+import { StarkError } from "../../../common/error";
 
 /**
  * The name of the service in case an injection is needed
