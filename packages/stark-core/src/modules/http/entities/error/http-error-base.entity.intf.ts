@@ -1,4 +1,4 @@
-import { StarkError } from "../../../../common";
+import { StarkError } from "../../../../common/error";
 
 /**
  * The StarkHttpErrorBase class contains all the basic information about the error(s) that are part of the Http

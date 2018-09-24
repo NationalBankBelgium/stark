@@ -1,4 +1,4 @@
-import { StarkMessage } from "../../../common";
+import { StarkMessage } from "../../../common/message";
 
 /**
  * Stark Toast Notification Message Interface

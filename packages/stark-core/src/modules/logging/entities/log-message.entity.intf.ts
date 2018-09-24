@@ -1,5 +1,5 @@
 import { StarkLogMessageType } from "./log-message-type.entity";
-import { StarkError } from "../../../common";
+import { StarkError } from "../../../common/error";
 
 /**
  * Log message for Stark Application

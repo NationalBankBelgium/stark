@@ -7,8 +7,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkMessageType } from "../../../common";
-import { StarkToastNotificationComponent } from "../components";
+import { StarkMessageType } from "../../../common/message";
+import { StarkToastNotificationComponent } from "./toast-notification.component";
 import { StarkSvgViewBoxModule } from "../../svg-view-box";
 
 @Component({
@@ -30,9 +30,9 @@ describe("ToastNotificationComponent", () => {
 		actionLabel: "action",
 		actionClasses: []
 	};
-	
+
 	const mockSnackBarRef: Partial<MatSnackBarRef<any>> = {
-		dismissWithAction: jasmine.createSpy('dismissWithAction')
+		dismissWithAction: jasmine.createSpy("dismissWithAction")
 	};
 
 	const mockSnackBar: Partial<MatSnackBar> = {
@@ -96,7 +96,9 @@ describe("ToastNotificationComponent", () => {
 	describe("on closeToast() call", () => {
 		it("should call hide service method", () => {
 			component.closeToast();
-			if (mockSnackBar._openedSnackBarRef) { expect(mockSnackBar._openedSnackBarRef.dismissWithAction).toHaveBeenCalled(); }
+			if (mockSnackBar._openedSnackBarRef) {
+				expect(mockSnackBar._openedSnackBarRef.dismissWithAction).toHaveBeenCalled();
+			}
 		});
 	});
 
