@@ -1,15 +1,17 @@
 import {
 	Component,
 	ContentChild,
+	ElementRef,
 	EventEmitter,
-	HostBinding,
 	Input,
 	Output,
+	Renderer2,
 	TemplateRef,
 	ViewChild,
 	ViewEncapsulation
 } from "@angular/core";
 import { MatColumnDef } from "@angular/material/table";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * @ignore
@@ -27,15 +29,13 @@ export type StarkTableColumnSortingDirection = "asc" | "desc" | "";
 @Component({
 	selector: "stark-table-column",
 	templateUrl: "./column.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: "stark-table-column"
+	}
 })
-export class StarkTableColumnComponent {
-	/**
-	 * Adds class="stark-table-column" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = "stark-table-column";
-
+export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	/**
 	 * Name of the property that will be the source of the column.
 	 */
@@ -47,6 +47,11 @@ export class StarkTableColumnComponent {
 		this._name = name;
 		this.columnDef.name = name;
 	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	private _name: string;
 
 	/**
@@ -138,6 +143,15 @@ export class StarkTableColumnComponent {
 	 */
 	@ContentChild(TemplateRef)
 	public columnTemplate: TemplateRef<any>;
+
+	/**
+	 * Class constructor
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
+	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Returns the header label of the column if it's specified. If not, simply returns the name of the column

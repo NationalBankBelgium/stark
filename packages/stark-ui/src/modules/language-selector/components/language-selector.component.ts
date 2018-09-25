@@ -27,6 +27,7 @@ export type StarkLanguageSelectorMode = "dropdown" | "toolbar";
 	selector: "stark-language-selector",
 	templateUrl: "./language-selector.component.html",
 	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
 	}
@@ -61,6 +62,8 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 	 * @param logger - The logger of the application
 	 * @param sessionService - The session service of the application
 	 * @param dateAdapter - Needed to change the locale of the DateAdapter
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_APP_METADATA) public appMetadata: StarkApplicationMetadata,

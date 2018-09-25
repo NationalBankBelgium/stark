@@ -1,5 +1,6 @@
-import { Component, HostBinding, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -12,15 +13,13 @@ const componentName: string = "stark-app-logo";
 @Component({
 	selector: "stark-app-logo",
 	templateUrl: "./app-logo.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkAppLogoComponent implements OnInit {
-	/**
-	 * Adds class="stark-app-logo" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkAppLogoComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * Params object to be passed to the UI router state defined as homeState.
 	 */
@@ -31,12 +30,16 @@ export class StarkAppLogoComponent implements OnInit {
 	 * Class constructor
 	 * @param logger - The logger of the application
 	 * @param routingService - The routing service of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
 	) {
-		// empty constructor
+		super(renderer, elementRef);
 	}
 
 	/**

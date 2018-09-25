@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewEncapsulation } from "@angular/core";
 
 /* tslint:disable:no-duplicate-imports no-import-side-effect */
 import * as Prism from "prismjs";
@@ -12,6 +12,7 @@ import "prismjs/components/prism-scss.min.js";
 /* tslint:enable */
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -65,15 +66,13 @@ export type StarkPrettyPrintFormat = "css" | "scss" | "html" | "xml" | "json" | 
 @Component({
 	selector: "stark-pretty-print",
 	templateUrl: "./pretty-print.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkPrettyPrintComponent implements OnChanges, OnInit {
-	/**
-	 * Adds class="stark-pretty-print" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implements OnChanges, OnInit {
 	/**
 	 * The text to be pretty printed
 	 */
@@ -92,14 +91,29 @@ export class StarkPrettyPrintComponent implements OnChanges, OnInit {
 	@Input()
 	public enableHighlighting?: boolean;
 
+	/**
+	 * The final prettified string
+	 */
 	public prettyString: string;
+
+	/**
+	 * Whether the prettified string should be highlighted as well
+	 */
 	public highlightingEnabled: boolean;
 
 	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle hook

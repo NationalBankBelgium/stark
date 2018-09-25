@@ -1,8 +1,9 @@
-import { Component, HostBinding, Inject, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { from, Subscription } from "rxjs";
 import { MatSidenav, MatSidenavContainer, MatDrawerToggleResult } from "@angular/material/sidenav";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAppSidebarOpenEvent, StarkAppSidebarService, STARK_APP_SIDEBAR_SERVICE } from "../services";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 export type StarkAppSidebarLeftMode = "regular" | "menu";
 
@@ -18,15 +19,13 @@ const componentName: string = "stark-app-sidebar";
 @Component({
 	selector: "stark-app-sidebar",
 	templateUrl: "./app-sidebar.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkAppSidebarComponent implements OnDestroy, OnInit {
-	/**
-	 * Adds class="stark-app-sidebar" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkAppSidebarComponent extends AbstractStarkUiComponent implements OnDestroy, OnInit {
 	/**
 	 * Mode for the left sidebar: either the menu is shown or the regular sidebar
 	 */
@@ -63,12 +62,19 @@ export class StarkAppSidebarComponent implements OnDestroy, OnInit {
 
 	/**
 	 * Class constructor
+	 * @param logger - The logger of the application
 	 * @param sidebarService - The sidebar service of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService
-	) {}
+		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle OnInit hook

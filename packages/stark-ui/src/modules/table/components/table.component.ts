@@ -4,14 +4,15 @@ import {
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
+	ElementRef,
 	EventEmitter,
-	HostBinding,
 	Inject,
 	Input,
 	OnChanges,
 	OnInit,
 	Output,
 	QueryList,
+	Renderer2,
 	SimpleChanges,
 	ViewChild,
 	ViewChildren,
@@ -21,6 +22,7 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatColumnDef, MatTable, MatTableDataSource } from "@angular/material/table";
 import { SelectionModel } from "@angular/cdk/collections";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 import { StarkTableColumnComponent, StarkTableColumnSortingDirection } from "./column.component";
 import { StarkSortingRule, StarkTableMultisortDialogComponent, StarkTableMultisortDialogData } from "./dialogs/multisort.component";
@@ -28,7 +30,7 @@ import { StarkActionBarConfig } from "../../action-bar/components/action-bar-con
 import { StarkAction } from "../../action-bar/components/action.intf";
 import { StarkTableColumnProperties } from "./column-properties.intf";
 import { StarkTableFilter } from "./table-filter.intf";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -36,19 +38,20 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 const componentName: string = "stark-table";
 
 /* tslint:disable:enforce-component-selector */
+/**
+ * Component to display array data in a table layout.
+ */
 @Component({
 	selector: componentName,
 	templateUrl: "./table.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
 /* tslint:enable */
-export class StarkTableComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges {
-	/**
-	 * Adds class="stark-table" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = "stark-table";
-
+export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges {
 	/**
 	 * Data that will be display inside your table.
 	 */
@@ -187,15 +190,21 @@ export class StarkTableComponent implements OnInit, AfterContentInit, AfterViewI
 
 	/**
 	 * Class constructor
+	 * @param logger - The logging service of the application
 	 * @param dialogService - Angular Material service to open Material Design modal dialogs.
 	 * @param cdRef - Reference to the change detector attached to this component
-	 * @param logger - The logging service of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		public dialogService: MatDialog,
 		private cdRef: ChangeDetectorRef,
-		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService
-	) {}
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle hook

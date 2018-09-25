@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit, ViewEncapsulation, HostBinding } from "@angular/core";
+import { Component, Inject, OnInit, ViewEncapsulation, Renderer2, ElementRef } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { StarkTableColumnComponent, StarkTableColumnSortingDirection } from "../column.component";
+import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
 
 /**
  * Content of the data to be passed to the StarkTableMultisortDialogComponent
@@ -36,15 +37,13 @@ export interface StarkSortingRule {
 @Component({
 	selector: "stark-table-dialog-multisort",
 	templateUrl: "multisort.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: "stark-table-dialog-multisort"
+	}
 })
-export class StarkTableMultisortDialogComponent implements OnInit {
-	/**
-	 * Adds class="stark-table-dialog-multisort" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = "stark-table-dialog-multisort";
-
+export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * Array of sorting rules currently applied
 	 */
@@ -63,11 +62,17 @@ export class StarkTableMultisortDialogComponent implements OnInit {
 	 * Class constructor
 	 * @param dialogRef - Reference to this dialog opened via the MatDialog service
 	 * @param data - The data to be passed to this dialog component
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		public dialogRef: MatDialogRef<StarkTableMultisortDialogComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: StarkTableMultisortDialogData
-	) {}
+		@Inject(MAT_DIALOG_DATA) public data: StarkTableMultisortDialogData,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle hook

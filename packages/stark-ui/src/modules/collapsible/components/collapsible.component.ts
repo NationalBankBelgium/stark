@@ -1,5 +1,6 @@
-import { Component, EventEmitter, HostBinding, Inject, Input, OnInit, Output } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -11,15 +12,14 @@ const componentName: string = "stark-collapsible";
  */
 @Component({
 	selector: "stark-collapsible",
-	templateUrl: "./collapsible.component.html"
+	templateUrl: "./collapsible.component.html",
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkCollapsibleComponent implements OnInit {
-	/**
-	 * Adds class="stark-app-logo" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkCollapsibleComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * ID to set to the collapsible
 	 */
@@ -61,9 +61,15 @@ export class StarkCollapsibleComponent implements OnInit {
 	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
-		// empty constructor
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
 	}
 
 	/**

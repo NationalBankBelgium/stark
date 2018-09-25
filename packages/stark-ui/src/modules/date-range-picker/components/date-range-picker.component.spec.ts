@@ -1,11 +1,12 @@
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { StarkDatePickerModule } from "./../../date-picker";
-import { StarkDateRangePickerComponent, StarkDateRangePickerEvent } from "./date-range-picker.component";
+import { EventEmitter } from "@angular/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { EventEmitter } from "@angular/core";
+import { StarkDatePickerModule } from "./../../date-picker";
+import { StarkDateRangePickerComponent } from "./date-range-picker.component";
+import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 
 describe("DateRangePickerComponent", () => {
 	let fixture: ComponentFixture<StarkDateRangePickerComponent>;

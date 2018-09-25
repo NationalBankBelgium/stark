@@ -1,8 +1,9 @@
-import { Component, HostBinding, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { MAT_SNACK_BAR_DATA, MatSnackBar } from "@angular/material/snack-bar";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkMessageType } from "../../../common/message";
 import { StarkToastMessage } from "./toast-message.intf";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -15,15 +16,13 @@ const componentName: string = "stark-toast-notification";
 @Component({
 	selector: "stark-toast-notification",
 	templateUrl: "./toast-notification.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkToastNotificationComponent implements OnInit {
-	/**
-	 * Adds class="stark-toast-notification" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkToastNotificationComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * The message data linked to the toast notification.
 	 */
@@ -34,12 +33,17 @@ export class StarkToastNotificationComponent implements OnInit {
 	 * @param logger - The logger of the application
 	 * @param snackBar - Tha snackBar used to display the toast
 	 * @param data - the data linked to the toast notification
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		public snackBar: MatSnackBar,
-		@Inject(MAT_SNACK_BAR_DATA) public data: StarkToastMessage
+		@Inject(MAT_SNACK_BAR_DATA) public data: StarkToastMessage,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
 	) {
+		super(renderer, elementRef);
 		this.message = data;
 		this.logger.debug(componentName + ": data received : %o", this.message);
 	}
