@@ -27,6 +27,7 @@ import { DemoSidebarComponent } from "./sidebar/demo-sidebar.component";
 import { DemoDropdownComponent } from "./dropdown/demo-dropdown.component";
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { HeaderComponent } from "./header/header.component";
+import { DemoFooterComponent } from "./footer/demo-footer.component";
 import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
 import { DemoLanguageSelectorComponent } from "./language-selector/demo-language-selector.component";
 import { LogoutComponent } from "./logout/logout.component";
@@ -98,6 +99,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		DemoTypographyComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
+		DemoFooterComponent,
 		KeyboardDirectivesComponent,
 		DemoLanguageSelectorComponent,
 		LogoutComponent,
@@ -124,6 +126,7 @@ import { MAT_DATE_FORMATS } from "@angular/material/core";
 		DemoTypographyComponent,
 		ExampleViewerComponent,
 		HeaderComponent,
+		DemoFooterComponent,
 		KeyboardDirectivesComponent,
 		DemoLanguageSelectorComponent,
 		LogoutComponent,

@@ -9,6 +9,7 @@ export * from "./date-range-picker";
 export * from "./sidebar";
 export * from "./dropdown";
 export * from "./example-viewer";
+export * from "./footer";
 export * from "./header";
 export * from "./keyboard-directives";
 export * from "./language-selector";

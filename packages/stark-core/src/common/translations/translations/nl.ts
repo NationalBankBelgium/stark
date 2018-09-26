@@ -6,6 +6,12 @@ export const translationsNl: object = {
 		APP_LOGOUT: {
 			TITLE: "Afmelden"
 		},
+		APP_FOOTER: {
+			COPYRIGHT: "Nationale Bank van België. Alle rechten voorbehouden",
+			COPYRIGHT_YEAR: "2016",
+			HELP: "Help",
+			LEGAL_INFO: "Juridische informatie"
+		},
 		DATE_RANGE_PICKER: {
 			FROM: "Van",
 			TO: "Tot"
