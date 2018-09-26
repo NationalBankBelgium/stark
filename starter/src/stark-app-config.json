@@ -14,8 +14,9 @@
   "angularDebugInfoEnabled": null,
   "debugLoggingEnabled": null,
   "loggingFlushPersistSize": 50,
-  "loggingFlushApplicationId": "STARK",
+  "loggingFlushApplicationId": "STARTER",
   "loggingFlushResourceName": "logging",
+  "loggingCorrelationIdHttpHeaderName": "correlation-id",
   "routerLoggingEnabled": null,
   "publicApp": false,
   "backends": {

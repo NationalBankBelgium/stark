@@ -35,7 +35,7 @@
       "name": "userProfile",
       "url": "http://localhost:5000",
       "authenticationType": 1,
-      "devaAuthenticationEnabled": false,
+      "devAuthenticationEnabled": false,
       "devAuthenticationRolePrefix": "",
       "loginResource": "",
       "token": ""

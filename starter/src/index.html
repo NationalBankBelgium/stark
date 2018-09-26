@@ -33,62 +33,6 @@
 
 <body class="">
 
-<!-- FIXME reimplement these functionalities -->
-<!-- the 'stark-init'/'stark-exit' class is set when the current route state is a child of starkAppInit/starkAppExit -->
-<!--
-<ui-view class="stark-login-container stark-init" name="initOrExit"
-		 ui-sref-active="{'stark-init': 'starkAppInit.**', 'stark-exit': 'starkAppExit.**'}">
-	<div class="stark-message stark-loading" role="alertdialog" aria-busy="true" aria-live="assertive">
-		<header><i></i></header>
-		<content>
-			<div class="stark-msg-loading">
-				<div class="stark-loading-icon"></div>
-				<h1>Loading...</h1>
-			</div>
-		</content>
-	</div>
-</ui-view>
-
-<div class="stark-message stark-js-error-messages" role="alertdialog" aria-busy="true" aria-live="assertive">
-	<header><i></i></header>
-	<content>
-		<div class="stark-msg-no-js">
-			<h1>No JavaScript</h1>
-			<p>You must have javascript enabled!</p>
-		</div>
-		<div class="stark-msg-outdated">
-			<h1>Browser not supported</h1>
-			<p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to
-				improve your experience.</p>
-		</div>
-	</content>
-</div>
--->
-
-<!-- the 'stark-init'/'stark-exit' class is set when the current route state is a child of starkAppInit/starkAppExit -->
-<!--
-<app class="stark-app" ui-sref-active="{'stark-init': 'starkAppInit.**', 'stark-exit': 'starkAppExit.**'}"></app>
--->
-
-<!--
-<script nonce="cefb24121ec5443c8819cc7c5e33c4a2">
-	/* remove the no-js message and if compatible browser: display the app */
-	if ("querySelector" in document && "classList" in document.body && /*@cc_on!@*/false === false) {
-		document.body.classList.add("stark-browser-ok");
-	} else {
-		document.body.className += " stark-outdated-browser";
-		var starkApp = document.getElementsByClassName("stark-app")[0];
-		if (starkApp) {
-			document.body.removeChild(starkApp);
-		}
-		var starkInitView = document.getElementsByClassName("stark-login-container")[0];
-		if (starkInitView) {
-			document.body.removeChild(starkInitView);
-		}
-	}
-</script>
--->
-
 <app>Loading...</app>
 
 <% if (htmlWebpackPlugin.options.dllFiles) { %>  <!-- dllFiles will be filled in by the Dll plugin -->
