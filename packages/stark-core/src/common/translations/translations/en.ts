@@ -3,22 +3,12 @@
  */
 export const translationsEn: object = {
 	STARK: {
-		DATE_RANGE_PICKER: {
-			FROM: "From",
-			TO: "To"
-		},
 		APP_LOGOUT: {
 			TITLE: "Log out"
 		},
-		LANGUAGES: {
-			EN: "English",
-			FR: "Français",
-			NL: "Nederlands",
-			DE: "Deutsch"
-		},
-		SORTING: {
-			ASC: "Ascending",
-			DESC: "Descending"
+		DATE_RANGE_PICKER: {
+			FROM: "From",
+			TO: "To"
 		},
 		ICONS: {
 			ADD_ITEM: "Add",
@@ -36,6 +26,16 @@ export const translationsEn: object = {
 			NEW_ITEM: "New",
 			SAVE_AND_NEXT: "Save And Next"
 		},
+		LANGUAGES: {
+			EN: "English",
+			FR: "Français",
+			NL: "Nederlands",
+			DE: "Deutsch"
+		},
+		LOGIN: {
+			TITLE: "Login",
+			NO_PROFILE: "No profile available"
+		},
 		MULTI_COLUMN_SORTING: {
 			TITLE: "Multi-Column Sorting",
 			ADD_SORTING_LEVEL: "Add sorting level",
@@ -44,6 +44,26 @@ export const translationsEn: object = {
 			THEN_BY: "Then by",
 			CANCEL: "Cancel",
 			SAVE: "Save"
+		},
+		PRELOADING: {
+			FETCHING_USER_PROFILE: "Initializing...",
+			FETCHING_USER_PROFILE_FAILURE: "Initialization failed: could not fetch user profile.",
+			CONTACT_IT_SUPPORT: "Please contact your IT support department.",
+			CORRELATION_ID: "Correlation ID",
+			RELOAD: "Reload"
+		},
+		SESSION_EXPIRED: {
+			TITLE: "Session expired",
+			MESSAGE: "",
+			RELOAD: "Reload"
+		},
+		SESSION_LOGOUT: {
+			TITLE: "Logged out",
+			LOGIN: "Log in again"
+		},
+		SORTING: {
+			ASC: "Ascending",
+			DESC: "Descending"
 		},
 		TABLE: {
 			NB_SELECTED_ROWS: "Selected",

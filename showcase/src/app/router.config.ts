@@ -1,6 +1,6 @@
 import { UIRouter, Category, StateDeclaration } from "@uirouter/core";
 
-function logRegisteredStates(registeredStates: StateDeclaration[]): void {
+export function logRegisteredStates(registeredStates: StateDeclaration[]): void {
 	let message: string = "=============  Registered Ui-Router states: ==============\n";
 
 	for (const state of registeredStates) {
@@ -21,7 +21,6 @@ export function routerConfigFn(router: UIRouter): void {
 	// if (ENV === "development") {
 	// 	router.plugin(Visualizer);  // Visualizer should be imported from "@uirouter/visualizer"
 	// }
-	logRegisteredStates(router.stateService.get());
 }
 
 export function routerChildConfigFn(router: UIRouter): void {

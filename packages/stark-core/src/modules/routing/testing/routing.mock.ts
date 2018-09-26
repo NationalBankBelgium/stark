@@ -26,6 +26,7 @@ export class MockStarkRoutingService implements StarkRoutingService {
 	public getStateTreeResolves: () => Map<string, any> = jasmine.createSpy("getStateTreeResolves");
 	public getStateTreeData: () => Map<string, any> = jasmine.createSpy("getStateTreeData");
 	public isCurrentUiState: (stateName: string, stateParams?: RawParams) => boolean = jasmine.createSpy("isCurrentUiState");
+	public isCurrentUiStateIncludedIn: (stateName: string, stateParams?: RawParams) => boolean = jasmine.createSpy("includesState");
 	public addKnownNavigationRejectionCause: (rejectionCause: string) => void = jasmine.createSpy("addKnownNavigationRejectionCause");
 	public addTransitionHook: (
 		lifecycleHook: string,

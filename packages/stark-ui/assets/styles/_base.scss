@@ -5,11 +5,6 @@ body {
 
 .stark-app {
   visibility: visible;
-  &.stark-init,
-  &.stark-exit {
-    visibility: hidden;
-    display: none;
-  }
   /* class added by translate-cloak directive while loading translations */
   &.translate-cloak {
     visibility: hidden;
@@ -18,14 +13,6 @@ body {
 
 .stark-section {
   margin-bottom: 64px;
-}
-
-.stark-login-container {
-  display: none;
-  &.stark-init,
-  &.stark-exit {
-    display: block;
-  }
 }
 
 .stark-header-container {
@@ -137,5 +124,66 @@ td {
     box-sizing: border-box;
     padding-left: 15px;
     padding-right: 15px;
+  }
+}
+
+/* stark session ui pages */
+.stark-session-ui-page {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 500px;
+  overflow: hidden;
+  border: solid 1px $divider-color;
+  box-shadow: $elevation-2;
+  & header {
+    padding: 16px;
+    background: mat-color(map-get($base-theme, primary-palette), 900) url(/assets/images/app-header.png) top right no-repeat;
+    border-radius: 2px 2px 0 0;
+    & i {
+      margin: auto;
+      display: block;
+      width: 220px;
+      height: 77px;
+      background: url("/assets/images/logo/logo-nbb-en.gif") no-repeat;
+    }
+  }
+  & content {
+    display: block;
+    padding: 16px;
+    background: #fff;
+  }
+}
+
+.stark-loading {
+  margin: 16px auto;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stark-loading-icon {
+  margin: 0 auto 8px auto;
+  display: block;
+  width: 64px;
+  height: 64px;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUwIDUwIj48cGF0aCBmaWxsPSIjN2ZiYWUzIiBkPSJNMjUuMjUxLDYuNDYxYy0xMC4zMTgsMC0xOC42ODMsOC4zNjUtMTguNjgzLDE4LjY4M2g0LjA2OGMwLTguMDcxLDYuNTQzLTE0LjYxNSwxNC42MTUtMTQuNjE1VjYuNDYxeiI+PC9wYXRoPjwvc3ZnPg==");
+  /*	Base64 created from SVG on this site: http://www.opinionatedgeek.com/DotNet/Tools/Base64Encode/	and from this source:
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" x="0" y="0" viewBox="0 0 50 50"><path fill="#7fbae3" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"></path></svg>
+    */
+  fill: currentColor;
+  transform-origin: 50% 50%;
+  animation: spin 0.8s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }

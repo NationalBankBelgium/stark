@@ -16,16 +16,12 @@ import { AppState } from "./app.service";
 	templateUrl: "./app.component.html"
 })
 export class AppComponent implements OnInit {
-	public appState: AppState;
-
 	public constructor(
-		appState: AppState,
+		public appState: AppState,
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
-	) {
-		this.appState = appState;
-	}
+	) {}
 
 	public ngOnInit(): void {
 		this.logger.debug("Initial App State", this.appState.state);

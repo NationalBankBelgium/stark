@@ -128,6 +128,13 @@ export interface StarkRoutingService {
 	isCurrentUiState(stateName: string, stateParams?: RawParams): boolean;
 
 	/**
+	 * Check whether the stateName passed as parameter is included in the current state.
+	 * @param stateName -  Partial name, relative name, glob pattern, or state object to be searched for within the current state name.
+	 * @param stateParams - Param object, e.g. {sectionId: section.id}, to test against the current active state.
+	 */
+	isCurrentUiStateIncludedIn(stateName: string, stateParams?: RawParams): boolean;
+
+	/**
 	 * Adds a navigation rejection cause to the rejections causes known by the routing service. These known rejection causes
 	 * will be treated differently than any other navigation error (a Rejection action will be dispatched instead of a Failure action).
 	 * @param rejectionCause - String that will be compared to the rejection reason provided by the router implementation

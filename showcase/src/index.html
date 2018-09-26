@@ -37,19 +37,6 @@
 <!-- FIXME reimplement these functionalities -->
 <!-- the 'stark-init'/'stark-exit' class is set when the current route state is a child of starkAppInit/starkAppExit -->
 <!--
-<ui-view class="stark-login-container stark-init" name="initOrExit"
-		 ui-sref-active="{'stark-init': 'starkAppInit.**', 'stark-exit': 'starkAppExit.**'}">
-	<div class="stark-message stark-loading" role="alertdialog" aria-busy="true" aria-live="assertive">
-		<header><i></i></header>
-		<content>
-			<div class="stark-msg-loading">
-				<div class="stark-loading-icon"></div>
-				<h1>Loading...</h1>
-			</div>
-		</content>
-	</div>
-</ui-view>
-
 <div class="stark-message stark-js-error-messages" role="alertdialog" aria-busy="true" aria-live="assertive">
 	<header><i></i></header>
 	<content>
@@ -90,6 +77,17 @@
 </script>
 -->
 
+<!-- <app>
+	<div class="stark-message stark-loading" role="alertdialog" aria-busy="true" aria-live="assertive">
+		<header><i></i></header>
+		<content>
+			<div class="stark-msg-loading">
+				<div class="stark-loading-icon"></div>
+				<h1>Loading...</h1>
+			</div>
+		</content>
+	</div>
+</app> -->
 <app>Loading...</app>
 
 <% if (htmlWebpackPlugin.options.dllFiles) { %>  <!-- dllFiles will be filled in by the Dll plugin -->

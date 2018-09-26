@@ -10,7 +10,9 @@
     "paths": {
       "rxjs/*": ["../node_modules/rxjs/*"],
       "@angular/*": ["../node_modules/@angular/*"],
+      "@ngrx/*": ["./stark-core/node_modules/@ngrx/*"],
       "@ngx-translate/*": ["./stark-core/node_modules/@ngx-translate/*"],
+      "@uirouter/*": ["./stark-core/node_modules/@uirouter/*"],
       "moment": ["./stark-core/node_modules/moment"],
       "environments/environment": ["./stark-core/src/common/environment"],
       "@nationalbankbelgium/stark-*": ["./stark-*"]

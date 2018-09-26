@@ -11,6 +11,7 @@ export * from "./modules/dropdown";
 export * from "./modules/keyboard-directives";
 export * from "./modules/language-selector";
 export * from "./modules/pretty-print";
+export * from "./modules/session-ui";
 export * from "./modules/slider";
 export * from "./modules/svg-view-box";
 export * from "./modules/table";

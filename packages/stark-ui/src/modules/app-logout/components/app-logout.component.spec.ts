@@ -4,9 +4,10 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
+	STARK_SESSION_CONFIG,
 	STARK_SESSION_SERVICE,
-	STARK_APP_CONFIG,
-	StarkApplicationConfig
+	StarkSessionConfig,
+	starkSessionLogoutStateName
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppLogoutComponent } from "./app-logout.component";
@@ -20,8 +21,8 @@ describe("AppLogoutComponent", () => {
 	let component: StarkAppLogoutComponent;
 	let fixture: ComponentFixture<StarkAppLogoutComponent>;
 
-	const mockStarkAppConfig: Partial<StarkApplicationConfig> = {
-		homeStateName: "home"
+	const mockStarkSessionConfig: Partial<StarkSessionConfig> = {
+		sessionLogoutStateName: "logout-state"
 	};
 
 	/**
@@ -36,7 +37,7 @@ describe("AppLogoutComponent", () => {
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
 					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
+					{ provide: STARK_SESSION_CONFIG, useValue: mockStarkSessionConfig }
 				],
 				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
 			})
@@ -68,11 +69,11 @@ describe("AppLogoutComponent", () => {
 			expect(component.routingService).toBeDefined();
 			expect(component.sessionService).not.toBeNull();
 			expect(component.sessionService).toBeDefined();
-			expect(component.appConfig).not.toBeNull();
-			expect(component.appConfig).toBeDefined();
+			expect(component.sessionConfig).not.toBeNull();
+			expect(component.sessionConfig).toBeDefined();
 		});
 
-		it("should have its imput property filled", () => {
+		it("should have its input property filled", () => {
 			expect(component.icon).not.toBeNull();
 			expect(component.icon).toBeDefined();
 			expect(component.icon).toBe("power");
@@ -80,13 +81,22 @@ describe("AppLogoutComponent", () => {
 	});
 
 	describe("logout()", () => {
-		it("should log out the user", () => {
-			// routingService.navigateTo is already a Spy
+		it("should log out the user and navigate to sessionLogoutStateName defined in sessionConfig", () => {
 			(<Spy>component.routingService.navigateTo).calls.reset();
 			component.logout();
 			expect(component.sessionService.logout).toHaveBeenCalledTimes(1);
 			expect(component.routingService.navigateTo).toHaveBeenCalledTimes(1);
-			expect(component.routingService.navigateTo).toHaveBeenCalledWith(component.appConfig.homeStateName);
+			expect(component.routingService.navigateTo).toHaveBeenCalledWith(mockStarkSessionConfig.sessionLogoutStateName);
+		});
+
+		it("should log out the user and navigate to starkSessionLogoutStateName", () => {
+			component.sessionConfig.sessionLogoutStateName = undefined;
+
+			(<Spy>component.routingService.navigateTo).calls.reset();
+			component.logout();
+			expect(component.sessionService.logout).toHaveBeenCalledTimes(1);
+			expect(component.routingService.navigateTo).toHaveBeenCalledTimes(1);
+			expect(component.routingService.navigateTo).toHaveBeenCalledWith(starkSessionLogoutStateName);
 		});
 	});
 });

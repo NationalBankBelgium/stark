@@ -3,22 +3,12 @@
  */
 export const translationsNl: object = {
 	STARK: {
-		DATE_RANGE_PICKER: {
-			FROM: "Van",
-			TO: "Tot"
-		},
 		APP_LOGOUT: {
 			TITLE: "Afmelden"
 		},
-		LANGUAGES: {
-			EN: "English",
-			FR: "Français",
-			NL: "Nederlands",
-			DE: "Deutsch"
-		},
-		SORTING: {
-			ASC: "Oplopend",
-			DESC: "Aflopend"
+		DATE_RANGE_PICKER: {
+			FROM: "Van",
+			TO: "Tot"
 		},
 		ICONS: {
 			ADD_ITEM: "Toevoegen",
@@ -36,6 +26,16 @@ export const translationsNl: object = {
 			NEW_ITEM: "Nieuw",
 			SAVE_AND_NEXT: "Bewaar en volgende"
 		},
+		LANGUAGES: {
+			EN: "English",
+			FR: "Français",
+			NL: "Nederlands",
+			DE: "Deutsch"
+		},
+		LOGIN: {
+			TITLE: "Aanmelden",
+			NO_PROFILE: "Geen profiel beschikbaar"
+		},
 		MULTI_COLUMN_SORTING: {
 			TITLE: "Sorteren van meerdere kolommen",
 			ADD_SORTING_LEVEL: "Voeg sorteringsniveau toe",
@@ -44,6 +44,26 @@ export const translationsNl: object = {
 			THEN_BY: "Dan op",
 			CANCEL: "Annuleer",
 			SAVE: "Opslaan"
+		},
+		PRELOADING: {
+			FETCHING_USER_PROFILE: "Initialiseren...",
+			FETCHING_USER_PROFILE_FAILURE: "Initialisatie mislukt: het gebruikersprofiel kon niet worden opgehaald.",
+			CONTACT_IT_SUPPORT: "Neem contact op met uw IT-support afdeling.",
+			CORRELATION_ID: "Correlatie ID",
+			RELOAD: "Herladen"
+		},
+		SESSION_EXPIRED: {
+			TITLE: "Sessie verlopen",
+			MESSAGE: "",
+			RELOAD: "Herladen"
+		},
+		SESSION_LOGOUT: {
+			TITLE: "Afgemeld",
+			LOGIN: "Opnieuw aanmelden"
+		},
+		SORTING: {
+			ASC: "Oplopend",
+			DESC: "Aflopend"
 		},
 		TABLE: {
 			NB_SELECTED_ROWS: "Geselecteerd",

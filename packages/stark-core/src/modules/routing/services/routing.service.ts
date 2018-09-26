@@ -42,6 +42,7 @@ import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants"
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
+import { starkAppExitStateName, starkAppInitStateName } from "../../session/routes";
 
 /**
  * @ignore
@@ -108,14 +109,16 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			const previousState: StarkState = this._starkStateHistory[this._starkStateHistory.length - 2];
 			this._starkStateHistory = this._starkStateHistory.slice(0, this._starkStateHistory.length - 2);
 
+			const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+
 			if (
-				(this._starkStateHistory.length === 1 && this._starkStateHistory[0].name.match(/(starkAppInit|starkAppExit)/)) ||
+				(this._starkStateHistory.length === 1 && this._starkStateHistory[0].name.match(regexInitExitStateName)) ||
 				this._starkStateHistory.length === 0
 			) {
 				this.store.dispatch(new StarkNavigationHistoryLimitReached());
 			}
 
-			if (previousState && !previousState.name.match(/(starkAppInit|starkAppExit)/) && previousState.name !== "") {
+			if (previousState && !previousState.name.match(regexInitExitStateName) && previousState.name !== "") {
 				return this.navigateTo(previousState.name, previousState.params);
 			}
 		}
@@ -225,6 +228,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return stateName === this.getCurrentStateName();
 	}
 
+	public isCurrentUiStateIncludedIn(stateName: string, stateParams?: RawParams): boolean {
+		// === true is necessary here because includes method returns TRUE, FALSE or undefined
+		// tslint:disable-next-line:no-boolean-literal-compare
+		return this.$state.includes(stateName, stateParams) === true;
+	}
+
 	public addKnownNavigationRejectionCause(rejectionCause: string): void {
 		this.knownRejectionCauses.push(rejectionCause);
 		this.knownRejectionCausesRegex = new RegExp(this.knownRejectionCauses.join("|"));
@@ -236,7 +245,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		callback: HookFn,
 		options?: HookRegOptions
 	): Function {
-		// FIXME: this tslint disable flag is due to a bug in 'no-useless-cast' rule (https://github.com/SonarSource/SonarTS/issues/650). Remove it once it is solved
+		// FIXME Check if we can remove the "useless" casts
 		/* tslint:disable:no-useless-cast */
 		switch (lifecycleHook) {
 			case StarkRoutingTransitionHook.ON_BEFORE:
@@ -267,6 +276,127 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				throw new Error(starkRoutingServiceName + ": lifecycle hook unknown => " + lifecycleHook);
 		}
 		/* tslint:enable:no-useless-cast */
+	}
+
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
+	public getStateTreeParams(): Map<string, any> {
+		const stateTreeParams: Map<string, any> = new Map<string, any>();
+
+		if (typeof this.lastTransition !== "undefined") {
+			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
+			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
+
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number = pathNodes.length - 1;
+
+			for (index; index >= 0; index--) {
+				const pathNode: PathNode = pathNodes[index];
+
+				// skipping abstract states and the root state
+				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
+					let stateParams: RawParams | undefined;
+
+					for (let i: number = this._starkStateHistory.length - 1; i >= 0; i--) {
+						if (this._starkStateHistory[i].name === pathNode.state.name) {
+							stateParams = this._starkStateHistory[i].params;
+							break;
+						}
+					}
+
+					stateTreeParams.set(pathNode.state.name, stateParams);
+				}
+			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
+		}
+
+		return stateTreeParams;
+	}
+
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
+	public getStateTreeResolves(): Map<string, any> {
+		const stateTreeResolves: Map<string, any> = new Map<string, any>();
+
+		if (typeof this.lastTransition !== "undefined") {
+			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
+			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
+
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number = pathNodes.length - 1;
+
+			for (index; index >= 0; index--) {
+				const pathNode: PathNode = pathNodes[index];
+
+				// skipping abstract states and the root state
+				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
+					// taking only the current state and parent/ancestor states
+					if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
+						const resolvablesData: { [key: string]: any } = this.extractResolvablesData(pathNode.resolvables);
+						const stateResolves: any = _isEmpty(resolvablesData) ? undefined : resolvablesData;
+						stateTreeResolves.set(pathNode.state.name, stateResolves);
+					}
+				}
+			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
+		}
+
+		return stateTreeResolves;
+	}
+
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
+	public getStateTreeData(): Map<string, any> {
+		const stateTreeData: Map<string, any> = new Map<string, any>();
+
+		if (typeof this.lastTransition !== "undefined") {
+			// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states)
+			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
+
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number = pathNodes.length - 1;
+
+			for (index; index >= 0; index--) {
+				const pathNode: PathNode = pathNodes[index];
+
+				// skipping abstract states and the root state
+				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
+					// taking only the current state and parent/ancestor states
+					if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
+						const stateData: any = _isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
+						stateTreeData.set(pathNode.state.name, stateData);
+					}
+				}
+			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
+		}
+
+		return stateTreeData;
+	}
+
+	public getTranslationKeyFromState(stateName: string): string {
+		const stateTreeResolves: Map<string, any> = this.getStateTreeResolves();
+		const stateTreeData: Map<string, any> = this.getStateTreeData();
+
+		let stateTranslationKey: string | undefined;
+		// get the translationKey in case it is defined as a resolve in the state definition
+		if (stateTreeResolves.get(stateName)) {
+			stateTranslationKey = stateTreeResolves.get(stateName)["translationKey"];
+		}
+		// if not found in the resolves then check the state's data object
+		if (!stateTranslationKey && stateTreeData.get(stateName)) {
+			stateTranslationKey = stateTreeData.get(stateName)["translationKey"];
+		}
+		// if no translationKey so far, then the state name is used
+		if (!stateTranslationKey) {
+			this.logger.warn(starkRoutingServiceName + ": translation key not found for state " + stateName);
+			stateTranslationKey = stateName;
+		}
+
+		return stateTranslationKey;
 	}
 
 	/**
@@ -394,8 +524,15 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#defaulterrorhandler
 		this.$state.defaultErrorHandler(
 			(error: any): void => {
-				if (!this.knownRejectionCausesRegex.test(String(error))) {
-					this.logger.error(starkRoutingServiceName + ": defaultErrorHandler => ", error);
+				let stringError: string;
+				if (error instanceof Rejection) {
+					stringError = error.toString();
+				} else {
+					stringError = String(error);
+				}
+
+				if (!this.knownRejectionCausesRegex.test(stringError)) {
+					this.logger.error(starkRoutingServiceName + ": defaultErrorHandler => ", new Error(stringError));
 				}
 			}
 		);
@@ -435,105 +572,6 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		);
 	}
 
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
-	public getStateTreeParams(): Map<string, any> {
-		const stateTreeParams: Map<string, any> = new Map<string, any>();
-
-		if (typeof this.lastTransition !== "undefined") {
-			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
-			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
-
-			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
-			let index: number = pathNodes.length - 1;
-
-			for (index; index >= 0; index--) {
-				const pathNode: PathNode = pathNodes[index];
-
-				// skipping abstract states and the root state
-				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
-					let stateParams: RawParams | undefined;
-
-					for (let i: number = this._starkStateHistory.length - 1; i >= 0; i--) {
-						if (this._starkStateHistory[i].name === pathNode.state.name) {
-							stateParams = this._starkStateHistory[i].params;
-							break;
-						}
-					}
-
-					stateTreeParams.set(pathNode.state.name, stateParams);
-				}
-			}
-		} else {
-			this.logger.debug(this.errorLastTransition);
-		}
-
-		return stateTreeParams;
-	}
-
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
-	public getStateTreeResolves(): Map<string, any> {
-		const stateTreeResolves: Map<string, any> = new Map<string, any>();
-
-		if (typeof this.lastTransition !== "undefined") {
-			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
-			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
-
-			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
-			let index: number = pathNodes.length - 1;
-
-			for (index; index >= 0; index--) {
-				const pathNode: PathNode = pathNodes[index];
-
-				// skipping abstract states and the root state
-				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
-					// taking only the current state and parent/ancestor states
-					if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
-						const resolvablesData: { [key: string]: any } = this.extractResolvablesData(pathNode.resolvables);
-						const stateResolves: any = _isEmpty(resolvablesData) ? undefined : resolvablesData;
-						stateTreeResolves.set(pathNode.state.name, stateResolves);
-					}
-				}
-			}
-		} else {
-			this.logger.debug(this.errorLastTransition);
-		}
-
-		return stateTreeResolves;
-	}
-
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
-	public getStateTreeData(): Map<string, any> {
-		const stateTreeData: Map<string, any> = new Map<string, any>();
-
-		if (typeof this.lastTransition !== "undefined") {
-			// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states)
-			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
-
-			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
-			let index: number = pathNodes.length - 1;
-
-			for (index; index >= 0; index--) {
-				const pathNode: PathNode = pathNodes[index];
-
-				// skipping abstract states and the root state
-				if (!pathNode.state.abstract && pathNode.state !== pathNode.state.root()) {
-					// taking only the current state and parent/ancestor states
-					if (pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state)) {
-						const stateData: any = _isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
-						stateTreeData.set(pathNode.state.name, stateData);
-					}
-				}
-			}
-		} else {
-			this.logger.debug(this.errorLastTransition);
-		}
-
-		return stateTreeData;
-	}
-
 	/**
 	 * Check whether the given state is a parent/ancestor of the given currentState
 	 * @param state - The state that will be checked whether is a parent of the currentState
@@ -564,27 +602,6 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 		return resolvablesData;
 	}
-
-	public getTranslationKeyFromState(stateName: string): string {
-		const stateTreeResolves: Map<string, any> = this.getStateTreeResolves();
-		const stateTreeData: Map<string, any> = this.getStateTreeData();
-
-		let stateTranslationKey: string | undefined;
-		// get the translationKey in case it is defined as a resolve in the state definition
-		if (stateTreeResolves.get(stateName)) {
-			stateTranslationKey = stateTreeResolves.get(stateName)["translationKey"];
-		}
-		// if not found in the resolves then check the state's data object
-		if (!stateTranslationKey && stateTreeData.get(stateName)) {
-			stateTranslationKey = stateTreeData.get(stateName)["translationKey"];
-		}
-		// if no translationKey so far, then the state name is used
-		if (!stateTranslationKey) {
-			this.logger.warn(starkRoutingServiceName + ": translation key not found for state " + stateName);
-			stateTranslationKey = stateName;
-		}
-
-		return stateTranslationKey;
-	}
 }
+
 /* tslint:enable */

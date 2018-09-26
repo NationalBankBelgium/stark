@@ -1,7 +1,7 @@
-import { Inject, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
+import { APP_INITIALIZER, Inject, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
 import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
-import { UIRouterModule } from "@uirouter/angular";
+import { UIRouter, UIRouterModule } from "@uirouter/angular";
 import { NgIdleModule } from "@ng-idle/core";
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
@@ -10,7 +10,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatIconRegistry, MatIconModule } from "@angular/material/icon";
+import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCardModule } from "@angular/material/card";
@@ -20,6 +20,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { SharedModule } from "./shared/shared.module";
 import { DateAdapter } from "@angular/material/core";
+import { filter } from "rxjs/operators";
 
 import {
 	STARK_APP_CONFIG,
@@ -32,15 +33,16 @@ import {
 	StarkApplicationMetadata,
 	StarkApplicationMetadataImpl,
 	StarkHttpModule,
-	StarkLoggingModule,
 	StarkLoggingActionTypes,
+	StarkLoggingModule,
 	StarkMockData,
 	StarkRoutingModule,
 	StarkSessionModule,
 	StarkSessionService,
 	StarkSettingsModule,
 	StarkSettingsService,
-	StarkUser
+	StarkUser,
+	StarkUserModule
 } from "@nationalbankbelgium/stark-core";
 
 import {
@@ -48,12 +50,13 @@ import {
 	StarkAppLogoutModule,
 	StarkAppSidebarModule,
 	StarkBreadcrumbModule,
-	StarkLanguageSelectorModule,
-	StarkSvgViewBoxModule,
 	StarkDatePickerModule,
+	StarkLanguageSelectorModule,
+	StarkSessionUiModule,
+	StarkSvgViewBoxModule,
 	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";
-import { routerConfigFn } from "./router.config";
+import { logRegisteredStates, routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
 /*
@@ -93,10 +96,10 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 
 	const applicationConfig: StarkApplicationConfig = Deserialize(config, StarkApplicationConfigImpl);
 
-	applicationConfig.rootStateUrl = "home";
+	applicationConfig.rootStateUrl = "/";
 	applicationConfig.rootStateName = "";
 	applicationConfig.homeStateName = "home";
-	applicationConfig.errorStateName = "";
+	applicationConfig.errorStateName = "otherwise";
 	applicationConfig.angularDebugInfoEnabled = true; //DEVELOPMENT;
 	applicationConfig.debugLoggingEnabled = true; //DEVELOPMENT;
 	applicationConfig.routerLoggingEnabled = true; //DEVELOPMENT;
@@ -113,10 +116,15 @@ export function starkAppMetadataFactory(): StarkApplicationMetadata {
 
 // TODO: where to put this factory function?
 export function starkMockDataFactory(): StarkMockData {
-	return {
-		whatever: "dummy prop",
-		profiles: []
-	};
+	if (ENV === "development") {
+		return require("../../config/json-server/data.json");
+	} else {
+		return {};
+	}
+}
+
+export function initRouterLog(router: UIRouter): Function {
+	return () => logRegisteredStates(router.stateService.get());
 }
 
 // Application Redux State
@@ -173,7 +181,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		UIRouterModule.forRoot({
 			states: APP_STATES,
 			useHash: !Boolean(history.pushState),
-			otherwise: { state: "otherwise" },
+			otherwise: "otherwise",
 			config: routerConfigFn
 		}),
 		TranslateModule.forRoot(),
@@ -184,6 +192,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkSessionModule.forRoot(),
 		StarkSettingsModule.forRoot(),
 		StarkRoutingModule.forRoot(),
+		StarkUserModule.forRoot(),
 		SharedModule,
 		DemoModule,
 		NewsModule,
@@ -198,7 +207,8 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			delay: 5000,
 			position: "top right",
 			actionClasses: []
-		})
+		}),
+		StarkSessionUiModule.forRoot()
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.
@@ -209,7 +219,8 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
 		{ provide: STARK_APP_CONFIG, useFactory: starkAppConfigFactory },
 		{ provide: STARK_APP_METADATA, useFactory: starkAppMetadataFactory },
-		{ provide: STARK_MOCK_DATA, useFactory: starkMockDataFactory }
+		{ provide: STARK_MOCK_DATA, useFactory: starkMockDataFactory },
+		{ provide: APP_INITIALIZER, useFactory: initRouterLog, multi: true, deps: [UIRouter] }
 	]
 })
 export class AppModule {
@@ -226,16 +237,12 @@ export class AppModule {
 
 		this.settingsService.initializeSettings();
 
-		const user: StarkUser = {
-			uuid: "abc123",
-			username: "John",
-			firstName: "Doe",
-			lastName: "Smith",
-			roles: ["dummy role"]
-		};
-
-		const devAuthenticationHeaders: Map<string, string> = getAuthenticationHeaders(user);
-		this.sessionService.setDevAuthenticationHeaders(devAuthenticationHeaders);
-		this.sessionService.login(user);
+		sessionService
+			.getCurrentUser()
+			.pipe(filter((user?: StarkUser): user is StarkUser => typeof user !== "undefined"))
+			.subscribe((user: StarkUser) => {
+				const devAuthenticationHeaders: Map<string, string> = getAuthenticationHeaders(user);
+				this.sessionService.setDevAuthenticationHeaders(devAuthenticationHeaders);
+			});
 	}
 }
