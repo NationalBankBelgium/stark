@@ -6,17 +6,16 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
-import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { TranslateModule } from "@ngx-translate/core";
 import { StarkTableComponent, StarkTableColumnComponent } from "./components";
 import { StarkTableMultisortDialogComponent } from "./components/dialogs/multisort.component";
-import { TranslateModule } from "@ngx-translate/core";
 import { StarkActionBarModule } from "../action-bar/action-bar.module";
+import { StarkPaginationModule } from "../pagination/pagination.module";
 import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
 
 @NgModule({
@@ -31,15 +30,14 @@ import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
 		MatDialogModule,
 		MatIconModule,
 		MatInputModule,
-		MatListModule,
 		MatMenuModule,
-		MatPaginatorModule,
 		MatSelectModule,
 		MatSortModule,
 		MatTableModule,
 		MatTooltipModule,
 		TranslateModule,
 		StarkActionBarModule,
+		StarkPaginationModule,
 		StarkSvgViewBoxModule
 	]
 })

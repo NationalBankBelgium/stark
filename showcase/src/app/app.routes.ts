@@ -6,6 +6,7 @@ import {
 	DemoBreadcrumbComponent,
 	DemoCardComponent,
 	DemoColorsComponent,
+	DemoCollapsibleComponent,
 	DemoSidebarComponent,
 	DemoDropdownComponent,
 	ExampleViewerComponent,
@@ -14,11 +15,11 @@ import {
 	KeyboardDirectivesComponent,
 	DemoLanguageSelectorComponent,
 	LogoutComponent,
+	DemoPaginationComponent,
 	DemoPrettyPrintComponent,
 	SliderComponent,
+	DemoTableComponent,
 	DemoToastComponent,
-	TableComponent,
-	DemoCollapsibleComponent,
 	DemoTypographyComponent
 } from "./demo";
 import { HomeComponent } from "./home";
@@ -37,18 +38,19 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo-colors", url: "/demo/colors", component: DemoColorsComponent },
 	{ name: "demo-date-picker", url: "/demo/date-picker", component: DatePickerComponent },
 	{ name: "demo-date-range-picker", url: "/demo/date-range-picker", component: DateRangePickerComponent },
+	{ name: "demo-dropdown", url: "/demo/dropdown", component: DemoDropdownComponent },
 	{ name: "demo-stark-footer", url: "/demo/stark-footer", component: DemoFooterComponent },
 	{ name: "stark-header", url: "/demo/stark-header", component: HeaderComponent },
 	{ name: "demo-example-viewer", url: "/demo/example-viewer", component: ExampleViewerComponent },
 	{ name: "demo-keyboard-directives", url: "/demo/keyboard-directives", component: KeyboardDirectivesComponent },
 	{ name: "demo-language-selector", url: "/demo/language-selector", component: DemoLanguageSelectorComponent },
 	{ name: "demo-logout", url: "/demo/logout", component: LogoutComponent },
+	{ name: "demo-pagination", url: "/demo/pagination", component: DemoPaginationComponent },
 	{ name: "demo-pretty-print", url: "/demo/pretty-print", component: DemoPrettyPrintComponent },
 	{ name: "demo-slider", url: "/demo/slider", component: SliderComponent },
 	{ name: "demo-sidebar", url: "/demo/sidebar", component: DemoSidebarComponent },
-	{ name: "demo-table", url: "/demo/table", component: TableComponent },
+	{ name: "demo-table", url: "/demo/table", component: DemoTableComponent },
 	{ name: "demo-toast", url: "/demo/toast", component: DemoToastComponent },
-	{ name: "demo-dropdown", url: "/demo/dropdown", component: DemoDropdownComponent },
 	{ name: "demo-typography", url: "/demo/typography", component: DemoTypographyComponent },
 	{ name: "otherwise", url: "/otherwise", component: NoContentComponent }
 ];

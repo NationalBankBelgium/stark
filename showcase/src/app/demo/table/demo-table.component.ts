@@ -1,14 +1,20 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
-import { StarkActionBarConfig, StarkTableColumnProperties, StarkTableFilter, StarkAction } from "@nationalbankbelgium/stark-ui";
+import {
+	StarkActionBarConfig,
+	StarkPaginationConfig,
+	StarkTableColumnProperties,
+	StarkTableFilter,
+	StarkAction
+} from "@nationalbankbelgium/stark-ui";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
-	selector: "showcase-demo-table",
-	styleUrls: ["./table.component.scss"],
-	templateUrl: "./table.component.html",
+	selector: "demo-table",
+	styleUrls: ["./demo-table.component.scss"],
+	templateUrl: "./demo-table.component.html",
 	encapsulation: ViewEncapsulation.None //Here to add a shadow inside the table, we will fix that when we take care of #509
 })
-export class TableComponent implements OnInit {
+export class DemoTableComponent implements OnInit {
 	public getTitle = (data: any): string => {
 		return "~" + data.title.label;
 	};
@@ -27,6 +33,9 @@ export class TableComponent implements OnInit {
 	public columnsProperties: StarkTableColumnProperties[];
 	public customTableActions: StarkAction[];
 	public tableRowsActionBarConfig: StarkActionBarConfig;
+	public paginationConfig1: StarkPaginationConfig;
+	public paginationConfig2: StarkPaginationConfig;
+	public paginationConfig3: StarkPaginationConfig;
 	public columns: any[];
 	public orderProperties: string[];
 	public filter: StarkTableFilter;
@@ -174,6 +183,15 @@ export class TableComponent implements OnInit {
 			globalFilterPresent: true,
 			columns: []
 		};
+
+		this.paginationConfig1 = {
+			totalItems: this.dummyData.length,
+			page: 1,
+			itemsPerPage: 10,
+			itemsPerPageOptions: [10, 12, 15, 18, 20, 25, 50, 100]
+		};
+		this.paginationConfig2 = { ...this.paginationConfig1, itemsPerPage: 4, itemsPerPageOptions: [2, 4, 6, 8, 10] };
+		this.paginationConfig3 = { ...this.paginationConfig1, itemsPerPage: 2, itemsPerPageOptions: [2, 4, 6, 8, 10], isExtended: true };
 
 		this.tableRowsActionBarConfig = {
 			actions: [
