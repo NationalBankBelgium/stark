@@ -10,6 +10,11 @@ export abstract class AbstractStarkUiComponent implements OnInit {
 	@Input()
 	public color?: string; // Needs to be public for Angular to be able to read this property inside the template.
 
+	/**
+	 * Abstract class constructor
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
 	protected constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {}
 
 	/**

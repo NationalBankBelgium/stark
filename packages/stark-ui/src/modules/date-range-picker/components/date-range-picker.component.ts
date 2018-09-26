@@ -1,15 +1,9 @@
-import { Component, EventEmitter, HostBinding, Inject, Input, OnInit, Output, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkDatePickerFilter, StarkDatePickerComponent } from "./../../date-picker/components/date-picker.component";
 import moment from "moment";
-
-/**
- * StarkDateRangePickerEvent interface
- */
-export interface StarkDateRangePickerEvent {
-	startDate?: Date;
-	endDate?: Date;
-}
+import { StarkDatePickerFilter, StarkDatePickerComponent } from "./../../date-picker/components/date-picker.component";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 
 /**
  * Name of the component
@@ -22,15 +16,13 @@ const componentName: string = "stark-date-range-picker";
 @Component({
 	selector: "stark-date-range-picker",
 	templateUrl: "./date-range-picker.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkDateRangePickerComponent implements OnInit {
-	/**
-	 * Adds class="stark-date-range-picker" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkDateRangePickerComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * Filter function or a string
 	 * Will be applied to both date-picker
@@ -126,8 +118,16 @@ export class StarkDateRangePickerComponent implements OnInit {
 	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle hook

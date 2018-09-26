@@ -1,7 +1,8 @@
-import { Component, Inject, Input, HostBinding, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Inject, Input, OnInit, ViewEncapsulation, Renderer2, ElementRef } from "@angular/core";
 import { StarkActionBarConfig } from "./action-bar-config.intf";
 import { StarkAction } from "./action.intf";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 export type StarkActionBarComponentMode = "full" | "compact";
 
@@ -16,15 +17,13 @@ const componentName: string = "stark-action-bar";
 @Component({
 	selector: "stark-action-bar",
 	templateUrl: "./action-bar.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkActionBarComponent implements OnInit {
-	/**
-	 * Adds class="stark-action-bar" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkActionBarComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * HTML id of action bar component.
 	 */
@@ -72,8 +71,16 @@ export class StarkActionBarComponent implements OnInit {
 	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle hook

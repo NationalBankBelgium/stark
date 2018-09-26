@@ -12,7 +12,7 @@ import {
 	Renderer2
 } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { AbstractStarkUiComponent } from "./../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -125,8 +125,18 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	@Output()
 	public dropdownSelectionChanged: EventEmitter<any> = new EventEmitter<any>();
 
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	public optionsAreSimpleTypes: boolean;
 
+	/**
+	 * Class constructor
+	 * @param logger - The logger of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		protected renderer: Renderer2,

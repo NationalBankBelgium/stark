@@ -1,7 +1,8 @@
-import { Component, EventEmitter, HostBinding, Inject, Input, OnInit, Output, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from "@angular/material";
 import moment from "moment";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Date) => boolean) | undefined;
 
@@ -16,15 +17,13 @@ const componentName: string = "stark-date-picker";
 @Component({
 	selector: "stark-date-picker",
 	templateUrl: "./date-picker.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkDatePickerComponent implements OnInit {
-	/**
-	 * Adds class="stark-date-picker" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkDatePickerComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * Source Date to be bound to the datepicker model
 	 */
@@ -49,6 +48,10 @@ export class StarkDatePickerComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	private _dateFilter?: StarkDatePickerFilter;
 
 	/**
@@ -110,8 +113,16 @@ export class StarkDatePickerComponent implements OnInit {
 	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle hook
@@ -156,7 +167,7 @@ export class StarkDatePickerComponent implements OnInit {
 
 	/**
 	 * Handle the date changed on mat-datepicker and emit the dateChanged event
-	 * @param MatDatepickerInputEvent<Date> - the mat-datepicker event
+	 * @param event - The MatDatepickerInputEvent to re-emit
 	 */
 	public onDateChange(event: MatDatepickerInputEvent<moment.Moment>): void {
 		if (event.value) {

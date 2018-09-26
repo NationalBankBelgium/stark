@@ -3,12 +3,12 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
-	HostBinding,
 	Inject,
 	Input,
 	OnChanges,
 	OnInit,
 	Output,
+	Renderer2,
 	SimpleChanges,
 	ViewEncapsulation
 } from "@angular/core";
@@ -19,6 +19,7 @@ import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, Star
 
 import { StarkDOMUtil } from "../../../util/dom.util";
 import { StarkSliderConfig } from "./slider-config.intf";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * @ignore
@@ -36,15 +37,13 @@ const componentName: string = "stark-slider";
 @Component({
 	selector: "stark-slider",
 	templateUrl: "./slider.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkSliderComponent implements AfterViewInit, OnChanges, OnInit {
-	/**
-	 * Adds class="stark-slider" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkSliderComponent extends AbstractStarkUiComponent implements AfterViewInit, OnChanges, OnInit {
 	/**
 	 * Whether the slider is disabled. Default: false
 	 */
@@ -99,15 +98,18 @@ export class StarkSliderComponent implements AfterViewInit, OnChanges, OnInit {
 
 	/**
 	 * Class constructor
-	 * @param logger : the logger of the application
-	 * @param routingService : the routing service of the application
-	 * @param elementRef: provides direct access to the DOM
+	 * @param logger - The logger of the application
+	 * @param routingService - The routing service of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
-		private elementRef: ElementRef
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
 	) {
+		super(renderer, elementRef);
 		this.noUiSliderLibrary = noUiSliderLibrary;
 	}
 

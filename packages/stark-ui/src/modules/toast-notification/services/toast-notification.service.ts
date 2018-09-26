@@ -1,4 +1,4 @@
-import { ApplicationRef, Inject } from "@angular/core";
+import { ApplicationRef, Inject, Injectable } from "@angular/core";
 import {
 	MatSnackBar,
 	MatSnackBarConfig,
@@ -16,8 +16,10 @@ import { STARK_TOAST_NOTIFICATION_OPTIONS, StarkToastNotificationOptions } from 
 import { StarkToastNotificationComponent, StarkToastMessage } from "../components";
 
 /**
+ * @ignore
  * Service to display different types of messages in a toast (info, warning or error).
  */
+@Injectable()
 export class StarkToastNotificationServiceImpl implements StarkToastNotificationService {
 	/**
 	 * Observer linked to the currently displayed toast notification
@@ -56,11 +58,6 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 		this.logger.debug(starkToastNotificationServiceName + " loaded");
 	}
 
-	/**
-	 * Returns an observable that will emit one of the possible StarkToastNotificationResult after the toast is closed
-	 * @param message - Message to be shown in the toast.
-	 * @returns Observable that will emit the result value as soon as the toast is closed.
-	 */
 	public show(message: StarkToastMessage): Observable<StarkToastNotificationResult> {
 		if (this.currentToastResult$ && !this.currentToastResult$.closed) {
 			this.currentToastResult$.next(StarkToastNotificationResult.CLOSED_BY_NEW_TOAST);
@@ -92,9 +89,6 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 		});
 	}
 
-	/**
-	 * Hides the current toast and emits the corresponding result in the observable returned by the show() method
-	 */
 	public hide(): void {
 		if (this.currentToastResult$ && !this.currentToastResult$.closed) {
 			this.currentToastResult$.next(StarkToastNotificationResult.HIDDEN);

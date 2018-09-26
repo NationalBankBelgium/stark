@@ -28,22 +28,22 @@ export interface StarkAppSidebarService {
 	closeSidebar$: Observable<void>;
 
 	/**
-	 * open sidebar's menu
+	 * Open sidebar's menu
 	 */
 	openMenu(): void;
 
 	/**
-	 * open the left sidebar
+	 * Open the left sidebar
 	 */
 	openLeft(): void;
 
 	/**
-	 * open the right sidebar
+	 * Open the right sidebar
 	 */
 	openRight(): void;
 
 	/**
-	 * close all sidebars
+	 * Close all sidebars
 	 */
 	close(): void;
 }

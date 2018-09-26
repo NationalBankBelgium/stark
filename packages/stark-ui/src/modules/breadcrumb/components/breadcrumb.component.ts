@@ -1,7 +1,7 @@
 /*tslint:disable:trackBy-function*/
 import { StarkBreadcrumbPath } from "./breadcrumb-path.intf";
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
-import { Component, HostBinding, Inject, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import {
 	STARK_ROUTING_SERVICE,
 	StarkRoutingService,
@@ -9,6 +9,7 @@ import {
 	StarkLoggingService,
 	StarkRoutingTransitionHook
 } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -20,38 +21,45 @@ const componentName: string = "stark-breadcrumb";
  */
 @Component({
 	selector: "stark-breadcrumb",
-	templateUrl: "./breadcrumb.component.html"
+	templateUrl: "./breadcrumb.component.html",
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkBreadcrumbComponent implements OnInit, OnDestroy {
+export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implements OnInit, OnDestroy {
 	/**
-	 * Adds class="stark-breadcrumb" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
-	/**
-	 * object containing an array of StarkBreadcrumbPath objects with the following data:
-	 *
-	 *  - path: the URL defined for the state
-	 *  - state: the name of the state that will be navigated to
-	 *  - stateParams: the params needed for the state
-	 *  - translationKey: the key used to translate the label of the specific path. If empty, the path will be taken instead
+	 * Object containing an array of StarkBreadcrumbPath objects.
 	 *
 	 * If omitted, then the StarkBreadcrumbConfig object will calculated processing recursively the UI router state tree from the
 	 * current state to its ancestors to extract the different paths. In this case, the translationKey will be taken from the
 	 * "data" object of the state definition.
-	 *
-	 * The breadcrumbConfig parameter is a one-way binding (one-directional, optional)
 	 */
 	@Input()
 	public breadcrumbConfig?: StarkBreadcrumbConfig;
 
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	public transitionHookDeregisterFn: Function;
 
+	/**
+	 * Class constructor
+	 * @param logger - The logger of the application
+	 * @param routingService - The routing service of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
-	) {}
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
 
 	/**
 	 * Component lifecycle hook
@@ -103,7 +111,7 @@ export class StarkBreadcrumbComponent implements OnInit, OnDestroy {
 
 	/**
 	 * Method used to handle the click on a link in the breadcrumb component
-	 * @param StarkBreadcrumbPath - breadcrumbPath on which the click was performed
+	 * @param breadcrumbPath - StarkBreadcrumbPath on which the click was performed
 	 */
 	public breadcrumbClickHandler(breadcrumbPath: StarkBreadcrumbPath): void {
 		this.routingService.navigateTo(breadcrumbPath.state, breadcrumbPath.stateParams);

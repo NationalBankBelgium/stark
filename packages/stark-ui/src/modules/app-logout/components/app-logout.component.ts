@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 
 import {
 	STARK_LOGGING_SERVICE,
@@ -10,6 +10,7 @@ import {
 	STARK_SESSION_SERVICE,
 	StarkSessionService
 } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
  * Name of the component
@@ -22,15 +23,13 @@ const componentName: string = "stark-app-logout";
 @Component({
 	selector: "stark-app-logout",
 	templateUrl: "./app-logout.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
 })
-export class StarkAppLogoutComponent implements OnInit {
-	/**
-	 * Adds class="stark-app-logout" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
+export class StarkAppLogoutComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * Desired icon of the logout button
 	 */
@@ -43,14 +42,18 @@ export class StarkAppLogoutComponent implements OnInit {
 	 * @param routingService - The routing service of the application
 	 * @param sessionService - The session service of the application
 	 * @param appConfig - The configuration of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
-		@Inject(STARK_APP_CONFIG) public appConfig: StarkApplicationConfig
+		@Inject(STARK_APP_CONFIG) public appConfig: StarkApplicationConfig,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
 	) {
-		// empty constructor
+		super(renderer, elementRef);
 	}
 
 	/**
