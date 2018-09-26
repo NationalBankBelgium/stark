@@ -1,8 +1,9 @@
 @import "theme";
 @import "stark-styles.scss";
 
-@import "../app/news/news-component/news.component";
-
 @import "~basscss/css/basscss.css";
 @import "~normalize.css/normalize.css";
 @import "~prismjs/themes/prism-okaidia.css";
+
+@import "../app/news/news-component/news.component";
+@import "../app/news/news-item-component/news-item.component";

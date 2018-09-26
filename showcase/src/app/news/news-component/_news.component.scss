@@ -1,49 +1,28 @@
-:root {
-  --my-color: #00f;
+.first-news-image {
+  background: url("/assets/images/screenshots/showcase-screenshot.png") no-repeat center center;
+  width: 250px;
+  height: 60px;
+  display: inline-block;
+  background-size: contain;
 }
 
-div {
-  .mat-card-title {
-    color: #000;
-    size: 120%;
-  }
-}
-
-.news-page-header {
-  margin-bottom: 15px;
-}
-
-.mat-header-image {
-  background-image: url("/assets/images/app-icons/favicon-32x32.png");
-  background-size: cover;
+.second-news-image {
+  background: url("/assets-base/stark_logo_white.png") no-repeat center center;
+  width: 250px;
+  height: 60px;
+  background-size: contain;
 }
 
 @media #{$desktop-query} {
   .first-news-image {
-    background-image: url("/assets/images/screenshots/showcase-screenshot.png");
-    margin: 8px;
-    background-size: cover;
-    width: 700px;
-    height: 370px;
+    width: 750px;
+    height: 200px;
   }
 }
 
 @media #{$tablet-only-query} {
   .first-news-image {
-    background-image: url("/assets/images/screenshots/showcase-screenshot.png");
-    margin: 8px;
-    background-size: cover;
-    width: 400px;
-    height: 280px;
-  }
-}
-
-@media #{$mobile-only-query} {
-  .first-news-image {
-    background-image: url("/assets/images/screenshots/showcase-screenshot.png");
-    margin: 3px;
-    background-size: cover;
-    width: 200px;
-    height: 150px;
+    width: 500px;
+    height: 100px;
   }
 }
