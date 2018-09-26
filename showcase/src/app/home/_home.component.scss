@@ -1,0 +1,67 @@
+//custom title for the header. Keep in mind that we define the font-size and color here because it is an exceptional case.
+//Should this style be reused elsewhere, it would be better to create a new style in stark-ui
+.about-title {
+  font-size: 30px;
+  margin-left: 15px;
+  color: mat-color($grey-palette, 100);
+}
+
+//set the header image
+.about-background {
+  background: url("/assets/images/banner/angular-banner.png") no-repeat center center;
+  background-size: cover;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.light-font {
+  font-weight: normal;
+}
+
+.bottom-margin {
+  margin-bottom: 20px;
+}
+
+//icon with a link to github
+.github-link {
+  background-size: 100%;
+  height: 50px;
+  width: 50px;
+  float: right;
+}
+
+.information-title {
+  font-size: 21px;
+  color: mat-color($grey-palette, 900);
+  padding-bottom: 0;
+  display: inline-flex;
+  vertical-align: middle;
+  margin: 10px 0 10px 0;
+}
+
+@media #{$desktop-query} {
+  .about-title {
+    font-size: 55px;
+    margin-left: 25px;
+  }
+
+  .information-title {
+    font-size: 30px;
+  }
+
+  .about-background {
+    height: 250px;
+  }
+}
+
+@media #{$tablet-only-query} {
+  .list {
+    font-size: 17px;
+  }
+
+  .about-background {
+    height: 230px;
+  }
+}
