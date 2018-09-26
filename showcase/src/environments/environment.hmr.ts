@@ -1,5 +1,5 @@
-import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 import { NgModuleRef } from "@angular/core";
+import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 
 export const environment: StarkEnvironment = {
 	production: false,

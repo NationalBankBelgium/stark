@@ -9,7 +9,6 @@ import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
  * Load the implementations that should be tested
  */
 import { AppComponent } from "./app.component";
-import { AppState } from "./app.service";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import Spy = jasmine.Spy;
@@ -31,7 +30,6 @@ describe(`App`, () => {
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
 					{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockAppSidebarService() },
-					AppState,
 					TranslateService
 				]
 			})
