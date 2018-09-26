@@ -4,7 +4,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
 import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
-import { AppState } from "./app.service";
 
 /**
  * App Component
@@ -17,14 +16,13 @@ import { AppState } from "./app.service";
 })
 export class AppComponent implements OnInit {
 	public constructor(
-		public appState: AppState,
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
 	) {}
 
 	public ngOnInit(): void {
-		this.logger.debug("Initial App State", this.appState.state);
+		this.logger.debug("app: component loaded");
 		this.routingService.addTransitionHook("ON_SUCCESS", {}, () => {
 			this.sidebarService.close();
 		});

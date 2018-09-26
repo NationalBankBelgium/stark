@@ -15,7 +15,6 @@ import { MockStarkHttpService, MockStarkLoggingService } from "@nationalbankbelg
 /**
  * Load the implementations that should be tested.
  */
-import { AppState } from "../app.service";
 import { HomeComponent } from "./home.component";
 import SpyObj = jasmine.SpyObj;
 
@@ -46,7 +45,6 @@ describe(`Home`, () => {
 				schemas: [NO_ERRORS_SCHEMA],
 				imports: [StoreModule.forRoot({}), HttpClientTestingModule],
 				providers: [
-					AppState,
 					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
 					{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }

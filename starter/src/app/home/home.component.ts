@@ -4,8 +4,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
  * @ignore
  */
 @Component({
-	selector: "home", // <home></home>
-	providers: [],
+	selector: "home",
 	styleUrls: ["./home.component.scss"],
 	templateUrl: "./home.component.html"
 })
