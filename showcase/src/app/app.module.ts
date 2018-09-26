@@ -77,7 +77,6 @@ import { environment } from "../environments/environment";
 import { APP_STATES } from "./app.routes";
 // App is our top level component
 import { AppComponent } from "./app.component";
-import { AppState } from "./app.service";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
 import { DemoModule } from "./demo";
@@ -88,9 +87,6 @@ import "../styles/styles.pcss";
 // load SASS styles
 import "../styles/styles.scss";
 /* tslint:enable */
-
-// Application wide providers
-const APP_PROVIDERS: any[] = [AppState];
 
 // TODO: where to put this factory function?
 export function starkAppConfigFactory(): StarkApplicationConfig {
@@ -239,7 +235,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 	 */
 	providers: [
 		environment.ENV_PROVIDERS,
-		APP_PROVIDERS,
 		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
 		{ provide: STARK_APP_CONFIG, useFactory: starkAppConfigFactory },
 		{ provide: STARK_APP_METADATA, useFactory: starkAppMetadataFactory },

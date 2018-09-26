@@ -1,8 +1,9 @@
 /**
  * Angular 2 decorators and services
  */
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { AppState } from "./app.service";
+import { Component, Inject, OnInit } from "@angular/core";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
+import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
 
 /**
  * App Component
@@ -10,9 +11,6 @@ import { AppState } from "./app.service";
  */
 @Component({
 	selector: "app",
-	// tslint:disable-next-line:use-view-encapsulation
-	encapsulation: ViewEncapsulation.None,
-	styleUrls: ["./app.component.css"],
 	templateUrl: "./app.component.html"
 })
 /**
@@ -23,24 +21,29 @@ export class AppComponent implements OnInit {
 	 * Name of the project
 	 */
 	public name: string = "Stark Starter";
-	/**
-	 * Url of the project
-	 */
-	public url: string = "https://github.com/NationalBankBelgium/stark";
 
-	/**
-	 * The application state
-	 */
-	public appState: AppState;
-
-	public constructor(appState: AppState) {
-		this.appState = appState;
+	public constructor(
+		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
+		) {
+		this.routingService.addTransitionHook("ON_SUCCESS", {}, () => {
+			this.sidebarService.close();
+		});
 	}
 
 	/**
 	 * Triggered on the component's initialization
 	 */
 	public ngOnInit(): void {
-		console.log("Initial App State", this.appState.state);
+		this.logger.debug("app: component loaded");
+	}
+
+	public openMenu(): void {
+		this.sidebarService.openMenu();
+	}
+
+	public goHome(): void {
+		this.routingService.navigateToHome();
 	}
 }

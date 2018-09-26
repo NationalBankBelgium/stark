@@ -1,9 +1,6 @@
 import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 import { NgModuleRef } from "@angular/core";
 
-/**
- * @ignore
- */
 export const environment: StarkEnvironment = {
 	production: false,
 	hmr: false,
