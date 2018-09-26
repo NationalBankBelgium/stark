@@ -1,8 +1,4 @@
 /* tslint:disable:completed-docs*/
-/**
- *  @ignore
- */
-const _cloneDeep: Function = require("lodash/cloneDeep");
 import { Deserialize, Serialize } from "cerialize";
 import { Observable, throwError, timer } from "rxjs";
 // FIXME Adapt mergeMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
@@ -29,6 +25,11 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/servic
 import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 
 /**
+ *  @ignore
+ */
+const _cloneDeep: Function = require("lodash/cloneDeep");
+
+/**
  * @ignore
  * Service to make HTTP calls in compliance with the guidelines from the NBB REST API Design Guide.
  */
@@ -40,7 +41,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
 		private httpClient: HttpClient
-	) {}
+	) {
+		this.logger.debug(starkHttpServiceName + " loaded");
+	}
 
 	public executeSingleItemRequest(request: StarkHttpRequest<P>): Observable<StarkSingleItemResponseWrapper<P>> {
 		// remove the etag before executing the request
