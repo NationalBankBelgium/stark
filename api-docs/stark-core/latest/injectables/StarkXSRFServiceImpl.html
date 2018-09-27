@@ -1,0 +1,1294 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>StarkXSRFServiceImpl</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/xsrf/services/xsrf.service.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service to get/store the XSRF token to be used with the different backends.
+It also adds the XSRF configuration to XHR objects for those HTTP requests not performed using StarkHttpService or Angular&#39;s HttpClient.</p>
+
+            </p>
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#appConfig">appConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#configOptions">configOptions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#currentToken">currentToken</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#document">document</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger">logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#xsrfCookieName">xsrfCookieName</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#configureHttpRequest">configureHttpRequest</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#configureXHR">configureXHR</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getCookieRegExp">getCookieRegExp</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getWaitBeforePingingObs">getWaitBeforePingingObs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getXSRFCookie">getXSRFCookie</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getXSRFToken">getXSRFToken</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pingBackends">pingBackends</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#setXSRFCookie">setXSRFCookie</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#storeXSRFToken">storeXSRFToken</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(appConfig: <a href="../interfaces/StarkApplicationConfig.html">StarkApplicationConfig</a>, logger: <a href="../interfaces/StarkLoggingService.html">StarkLoggingService</a>, httpClient: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, document: Document, injector: <a href="https://angular.io/api/core/Injector" target="_blank">Injector</a>, configOptions?: <a href="../interfaces/StarkXSRFConfig.html">StarkXSRFConfig</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:23</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>appConfig</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkApplicationConfig.html" target="_self" >StarkApplicationConfig</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkLoggingService.html" target="_self" >StarkLoggingService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>httpClient</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>document</td>
+                                                  
+                                                        <td>
+                                                                    <code>Document</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>injector</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Injector" target="_blank" >Injector</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configOptions</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkXSRFConfig.html" target="_self" >StarkXSRFConfig</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="configureHttpRequest"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            configureHttpRequest
+                            </b>
+                            <a href="#configureHttpRequest"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>configureHttpRequest(request: HttpRequest<any>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:62</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>request</td>
+                                                        <td>
+                                                                    <code>HttpRequest&lt;any&gt;</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>HttpRequest&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="configureXHR"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            configureXHR
+                            </b>
+                            <a href="#configureXHR"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>configureXHR(xhr: XMLHttpRequest)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>xhr</td>
+                                                        <td>
+                                                                    <code>XMLHttpRequest</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCookieRegExp"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            getCookieRegExp
+                            </b>
+                            <a href="#getCookieRegExp"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getCookieRegExp(cookieName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:205</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cookieName</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>RegExp</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getWaitBeforePingingObs"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            getWaitBeforePingingObs
+                            </b>
+                            <a href="#getWaitBeforePingingObs"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getWaitBeforePingingObs()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:161</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Extracts the Promise/Observable that the service should wait for before pinging all the backends.
+Such Promise/Observable is extracted from the configuration object (if any) passed to the StarkXSRFModule.forRoot()</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getXSRFCookie"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            getXSRFCookie
+                            </b>
+                            <a href="#getXSRFCookie"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getXSRFCookie()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="194" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:194</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>string | undefined</code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getXSRFToken"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getXSRFToken
+                            </b>
+                            <a href="#getXSRFToken"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getXSRFToken()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:86</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>string | undefined</code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pingBackends"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            pingBackends
+                            </b>
+                            <a href="#pingBackends"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>pingBackends()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:118</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setXSRFCookie"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            setXSRFCookie
+                            </b>
+                            <a href="#setXSRFCookie"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setXSRFCookie(xsrfToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:182</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>xsrfToken</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storeXSRFToken"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            storeXSRFToken
+                            </b>
+                            <a href="#storeXSRFToken"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>storeXSRFToken()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:107</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            appConfig
+                            </b>
+                            <a href="#appConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>appConfig:     <code><a href="../interfaces/StarkApplicationConfig.html" target="_self" >StarkApplicationConfig</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkApplicationConfig.html" target="_self" >StarkApplicationConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>Inject</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="configOptions"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                                <span class="modifier">Optional</span>
+                            configOptions
+                            </b>
+                            <a href="#configOptions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>configOptions:     <code><a href="../interfaces/StarkXSRFConfig.html" target="_self" >StarkXSRFConfig</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkXSRFConfig.html" target="_self" >StarkXSRFConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>Inject</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentToken"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            currentToken
+                            </b>
+                            <a href="#currentToken"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>currentToken:     <code>string | undefined</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string | undefined</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="document"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            document
+                            </b>
+                            <a href="#document"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>document:     <code>Document</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Document</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>Inject</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logger"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            logger
+                            </b>
+                            <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>logger:     <code><a href="../interfaces/StarkLoggingService.html" target="_self" >StarkLoggingService</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkLoggingService.html" target="_self" >StarkLoggingService</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>Inject</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="xsrfCookieName"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            xsrfCookieName
+                            </b>
+                            <a href="#xsrfCookieName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>xsrfCookieName:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;XSRF-TOKEN&quot;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/modules/xsrf/services/xsrf.service.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable, Injector } from &quot;@angular/core&quot;;
+import { DOCUMENT } from &quot;@angular/common&quot;;
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest } from &quot;@angular/common/http&quot;;
+import moment from &quot;moment&quot;;
+import { Observable, of, from } from &quot;rxjs&quot;;
+import { take } from &quot;rxjs/operators&quot;;
+import { StarkXSRFService, starkXSRFServiceName } from &quot;./xsrf.service.intf&quot;;
+import { STARK_XSRF_CONFIG, StarkXSRFConfig } from &quot;./xsrf-config.intf&quot;;
+import { StarkHttpHeaders } from &quot;../../http/constants&quot;;
+import { StarkHttpStatusCodes } from &quot;../../http/enumerators&quot;;
+import { STARK_APP_CONFIG, StarkApplicationConfig } from &quot;../../../configuration/entities&quot;;
+import { StarkBackend, StarkHttpErrorWrapper, StarkHttpErrorWrapperImpl } from &quot;../../http/entities&quot;;
+import { StarkLoggingService, STARK_LOGGING_SERVICE } from &quot;../../logging/services/logging.service.intf&quot;;
+
+/**
+ * Service to get/store the XSRF token to be used with the different backends.
+ * It also adds the XSRF configuration to XHR objects for those HTTP requests not performed using StarkHttpService or Angular&#x27;s HttpClient.
+ */
+@Injectable()
+export class StarkXSRFServiceImpl implements StarkXSRFService {
+	protected xsrfCookieName: string &#x3D; &quot;XSRF-TOKEN&quot;;
+	protected currentToken: string | undefined;
+
+	public constructor(
+		@Inject(STARK_APP_CONFIG) public appConfig: StarkApplicationConfig,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		private httpClient: HttpClient,
+		@Inject(DOCUMENT) public document: Document,
+		private injector: Injector,
+		@Inject(STARK_XSRF_CONFIG) public configOptions?: StarkXSRFConfig
+	) {
+		this.logger.debug(starkXSRFServiceName + &quot; loaded&quot;);
+	}
+
+	public configureXHR(xhr: XMLHttpRequest): void {
+		// in order to be able to configure the XHR object, we should call the setRequestHeader to add the XSRF header
+		// however the open() method should be called first, so we throw an error if that is not case
+		// see: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+		if (xhr.readyState &#x3D;&#x3D;&#x3D; XMLHttpRequest.OPENED) {
+			const xsrfToken: string | undefined &#x3D; this.getXSRFToken();
+
+			if (typeof xsrfToken !&#x3D;&#x3D; &quot;undefined&quot;) {
+				// Enforce the &#x27;withCredentials&#x27; property flag on every XHR object.
+				// We leverage &quot;credentialed&quot; requests that are aware of HTTP cookies (necessary for XSRF to work with multiple backends)
+				// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
+				xhr.withCredentials &#x3D; true;
+
+				xhr.setRequestHeader(StarkHttpHeaders.XSRF_TOKEN, xsrfToken);
+			}
+		} else {
+			throw new Error(
+				starkXSRFServiceName +
+					&quot;: cannot set headers to XHR object because its open() method has not been invoked.\n&quot; +
+					&quot;Make sure that the XHR open() method is called first before calling &quot; +
+					starkXSRFServiceName +
+					&quot; configureXHR()&quot;
+			);
+		}
+	}
+
+	public configureHttpRequest(request: HttpRequest&lt;any&gt;): HttpRequest&lt;any&gt; {
+		if (request.method.match(/POST|PUT|PATCH|DELETE/)) {
+			const xsrfToken: string | undefined &#x3D; this.getXSRFToken();
+
+			if (typeof xsrfToken !&#x3D;&#x3D; &quot;undefined&quot;) {
+				const newHeaders: HttpHeaders &#x3D; request.headers.set(StarkHttpHeaders.XSRF_TOKEN, xsrfToken);
+
+				return request.clone({
+					headers: newHeaders,
+					// Enforce the &#x27;withCredentials&#x27; property flag on every XHR object created by Angular $http.
+					// We leverage &quot;credentialed&quot; requests that are aware of HTTP cookies (necessary for XSRF to work with multiple backends)
+					// https://angular.io/api/common/http/HttpRequest#withCredentials
+					// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
+					withCredentials: true
+				});
+			}
+		}
+
+		// in any case the &quot;withCredentials: true&quot; should be added to ALL requests, otherwise the browser won&#x27;t accept the XSRF cookie from the backend!
+		// see: https://angular.io/api/common/http/HttpRequest#withCredentials
+		// see: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
+		return request.clone({ withCredentials: true });
+	}
+
+	public getXSRFToken(): string | undefined {
+		const xsrfToken: string | undefined &#x3D; this.currentToken;
+
+		if (typeof xsrfToken &#x3D;&#x3D;&#x3D; &quot;undefined&quot;) {
+			const errorMsg: string &#x3D;
+				starkXSRFServiceName +
+				&quot;: no XSRF token found. This could be due to:\n&quot; +
+				&quot;- the backend has not sent the XSRF token properly, either the cookie was not sent or it has a different name\n&quot; +
+				&quot;- the application did not store the XSRF token correctly, either it has a different name or it comes from a different origin&quot;;
+
+			this.logger.warn(errorMsg);
+			// could throw an error: throw new Error(errorMsg);
+		} else {
+			// overwrite the cookie with the current token to ensure that we always send the same token
+			// regardless of the new tokens sent by the backend(s) in every response
+			this.setXSRFCookie(xsrfToken);
+		}
+
+		return xsrfToken;
+	}
+
+	public storeXSRFToken(): void {
+		if (this.currentToken) {
+			// overwrite the cookie with the token we stored (we don&#x27;t care about the rest of tokens but just the one we stored)
+			this.setXSRFCookie(this.currentToken);
+		} else {
+			// store the token only if it is not stored yet
+			const xsrfCookie: string | undefined &#x3D; this.getXSRFCookie();
+			this.currentToken &#x3D; xsrfCookie &amp;&amp; xsrfCookie !&#x3D;&#x3D; &quot;&quot; ? xsrfCookie : undefined;
+		}
+	}
+
+	public pingBackends(): void {
+		const backendsMap: Map&lt;string, StarkBackend&gt; &#x3D; this.appConfig.getBackends();
+
+		const waitFor$: Observable&lt;string&gt; &#x3D; this.getWaitBeforePingingObs();
+
+		waitFor$.pipe(take(1)).subscribe(() &#x3D;&gt; {
+			backendsMap.forEach((backendConfig: StarkBackend) &#x3D;&gt; {
+				// here the Angular HttpClient is used instead of the StarkHttpService because the response can be anything
+				// and the StarkHttpService expects only JSON responses causing it to throw an exception
+				this.httpClient
+					.get(backendConfig.url, {
+						observe: &quot;response&quot;, // full response, not only the body
+						responseType: &quot;text&quot; // body as text to allow any kind of response and avoid having weird exceptions as with the StarkHttpService
+					})
+					.subscribe({
+						// error: (errorWrapper: StarkHttpErrorWrapper) &#x3D;&gt; {
+						error: (errorResponse: HttpErrorResponse) &#x3D;&gt; {
+							// the backend might return 404 Not Found, but it will still send the cookie
+							if (errorResponse.status !&#x3D;&#x3D; StarkHttpStatusCodes.HTTP_404_NOT_FOUND) {
+								const httpResponseHeaders: Map&lt;string, string&gt; &#x3D; new Map&lt;string, string&gt;();
+								for (const headerName of errorResponse.headers.keys()) {
+									httpResponseHeaders.set(headerName, &lt;string&gt;errorResponse.headers.get(headerName));
+								}
+								const errorWrapper: StarkHttpErrorWrapper &#x3D; new StarkHttpErrorWrapperImpl(
+									errorResponse,
+									httpResponseHeaders,
+									errorResponse.error
+								);
+
+								const errorMsg: string &#x3D;
+									starkXSRFServiceName + &quot;: ping sent to backend &#x27;&quot; + backendConfig.name + &quot;&#x27; failed.&quot;;
+								this.logger.error(errorMsg, &lt;any&gt;errorWrapper);
+							}
+						}
+					});
+			});
+		});
+	}
+
+	/**
+	 * Extracts the Promise/Observable that the service should wait for before pinging all the backends.
+	 * Such Promise/Observable is extracted from the configuration object (if any) passed to the StarkXSRFModule.forRoot()
+	 */
+	protected getWaitBeforePingingObs(): Observable&lt;any&gt; {
+		if (this.configOptions &amp;&amp; this.configOptions.waitBeforePinging) {
+			let waitBeforePingingFn: Function;
+			let waitBeforePingingDeps: any[] &#x3D; [];
+
+			if (typeof this.configOptions.waitBeforePinging &#x3D;&#x3D;&#x3D; &quot;object&quot;) {
+				waitBeforePingingFn &#x3D; this.configOptions.waitBeforePinging.waitBeforePingingFn;
+				// for a StarkXSRFWaitBeforePingingLiteral we should get all the DI dependencies via the Angular Injector
+				waitBeforePingingDeps &#x3D; this.configOptions.waitBeforePinging.deps.map((diDependency: any) &#x3D;&gt; {
+					return this.injector.get&lt;any&gt;(diDependency);
+				});
+			} else {
+				waitBeforePingingFn &#x3D; this.configOptions.waitBeforePinging;
+			}
+
+			return from(waitBeforePingingFn(...waitBeforePingingDeps) || [&quot;no wait&quot;]);
+		}
+
+		return of(&quot;no wait&quot;);
+	}
+
+	protected setXSRFCookie(xsrfToken: string): void {
+		const cookieExpiration: string &#x3D; moment()
+			.add(40, &quot;m&quot;)
+			.toDate()
+			.toUTCString(); // 40 minutes from now
+
+		const cookieAttributes: string[] &#x3D; [&#x60;${this.xsrfCookieName}&#x3D;${xsrfToken}&#x60;, &#x60;path&#x3D;&#x27;/&#x27;&#x60;, &#x60;expires&#x3D;${cookieExpiration}&#x60;];
+
+		this.document.cookie &#x3D; cookieAttributes.join(&quot;;&quot;);
+	}
+
+	// code taken from ngx-cookie-service library (https://github.com/7leads/ngx-cookie-service/blob/master/lib/cookie-service/cookie.service.ts)
+	protected getXSRFCookie(): string | undefined {
+		const cookieRegExp: RegExp &#x3D; this.getCookieRegExp(encodeURIComponent(this.xsrfCookieName));
+		const result: RegExpExecArray | null &#x3D; cookieRegExp.exec(this.document.cookie);
+
+		if (result) {
+			return decodeURIComponent(result[1]);
+		} else {
+			return undefined;
+		}
+	}
+
+	private getCookieRegExp(cookieName: string): RegExp {
+		const escapedName: string &#x3D; cookieName.replace(/([\[\]\{\}\(\)\|\&#x3D;\;\+\?\,\.\*\^\$])/gi, &quot;\\$1&quot;);
+
+		return new RegExp(&quot;(?:^&quot; + escapedName + &quot;|;\\s*&quot; + escapedName + &quot;)&#x3D;(.*?)(?:;|$)&quot;, &quot;g&quot;);
+	}
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkXSRFServiceImpl.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

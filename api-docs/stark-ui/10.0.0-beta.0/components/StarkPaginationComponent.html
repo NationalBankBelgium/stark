@@ -1,0 +1,2652 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>StarkPaginationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/modules/pagination/components/pagination.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to display pagination bar to be used with a collection of items.
+It extends the MatPaginator class from Angular Material so it can be integrated as well with the MatTable.
+<a href="https://material.angular.io/components/paginator/api">MatPaginator</a></p>
+
+    </p>
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+            <code>MatPaginator</code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>stark-pagination</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./pagination.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#_paginationInput">_paginationInput</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#cdRef">cdRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#element">element</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger">logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pageNumbers">pageNumbers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#previousPageIndex">previousPageIndex</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#previousPaginationInput">previousPaginationInput</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#renderer">renderer</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#changePageOnEnter">changePageOnEnter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#emitMatPaginationEvent">emitMatPaginationEvent</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getPageInputMaxDigits">getPageInputMaxDigits</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getTotalPages">getTotalPages</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#goToFirst">goToFirst</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#goToLast">goToLast</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#goToNext">goToNext</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#goToPage">goToPage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#goToPrevious">goToPrevious</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hasNext">hasNext</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hasPrevious">hasPrevious</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isCompactMode">isCompactMode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isZero">isZero</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngAfterViewInit">ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#normalizePaginationConfig">normalizePaginationConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onChangeItemsPerPage">onChangeItemsPerPage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onChangePagination">onChangePagination</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setMatPaginatorProperties">setMatPaginatorProperties</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setPageNumbers">setPageNumbers</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#htmlSuffixId">htmlSuffixId</a>
+                            </li>
+                            <li>
+                                <a href="#mode">mode</a>
+                            </li>
+                            <li>
+                                <a href="#paginationConfig">paginationConfig</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#paginated">paginated</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostBindings</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#class">class</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#paginationInput">paginationInput</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: StarkLoggingService, element: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:97</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>element</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="htmlSuffixId"></a>
+                        <code>htmlSuffixId</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Suffix id given to items per page dropdown
+(items-per-page-<htmlSuffixId>) and pageSelector dropdown (page-selector-<htmlSuffixId>)
+Default: &quot;pagination&quot;</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:59</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="mode"></a>
+                        <code>mode</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Desired layout or flavour:</p>
+<ul>
+<li>compact: Displayed in a compact mode.</li>
+<li>default: basic implementation with everything</li>
+</ul>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="../components/StarkPaginationComponent.html" target="_self" >StarkPaginationComponentMode</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:67</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="paginationConfig"></a>
+                        <code>paginationConfig</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>StarkPaginationConfig object containing main information for the pagination.</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="../interfaces/StarkPaginationConfig.html" target="_self" >StarkPaginationConfig</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:73</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="paginated"></a>
+                        <code>paginated</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Output event emitter that will emit the paginate event when the pagination changed.</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code><a href="../interfaces/StarkPaginateEvent.html" target="_self" >EventEmitter&lt;StarkPaginateEvent&gt;</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:79</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3>HostBindings</h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="class"></a>
+                        <span class="name">
+                            <b>
+                            class
+                            </b>
+                            <a href="#class"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>class:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>componentName</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:51</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Adds class=&quot;stark-pagination&quot; attribute on the host component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changePageOnEnter"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            changePageOnEnter
+                            </b>
+                            <a href="#changePageOnEnter"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>changePageOnEnter()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="392" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:392</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Change the page when the Enter key is pressed in the page number input</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="emitMatPaginationEvent"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            emitMatPaginationEvent
+                            </b>
+                            <a href="#emitMatPaginationEvent"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>emitMatPaginationEvent()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="420" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:420</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Emit the PageEvent according to the MatPaginator API
+<a href="https://material.angular.io/components/paginator/api#PageEvent">MatPaginator PageEvent</a></p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getPageInputMaxDigits"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getPageInputMaxDigits
+                            </b>
+                            <a href="#getPageInputMaxDigits"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getPageInputMaxDigits()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="405" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:405</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Return the number of digits of the current total number of pages.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getTotalPages"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getTotalPages
+                            </b>
+                            <a href="#getTotalPages"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getTotalPages()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="294" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:294</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Get total number of pages available based on itemsPerPage and totalItems.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goToFirst"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            goToFirst
+                            </b>
+                            <a href="#goToFirst"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>goToFirst()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="235" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:235</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Change page to first one.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goToLast"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            goToLast
+                            </b>
+                            <a href="#goToLast"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>goToLast()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="262" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:262</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Change page to last one.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goToNext"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            goToNext
+                            </b>
+                            <a href="#goToNext"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>goToNext()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="253" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:253</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Change page to next one.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goToPage"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            goToPage
+                            </b>
+                            <a href="#goToPage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>goToPage(page: number | "...")</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="381" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:381</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Change to the given page if it is different than &quot;...&quot;. It calls onChangePagination afterwards.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>page</td>
+                                                        <td>
+                                                                    <code>number | &quot;...&quot;</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goToPrevious"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            goToPrevious
+                            </b>
+                            <a href="#goToPrevious"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>goToPrevious()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="244" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:244</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Change page to previous one.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hasNext"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hasNext
+                            </b>
+                            <a href="#hasNext"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>hasNext()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="221" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:221</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Check whether there is a page after the current one.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hasPrevious"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hasPrevious
+                            </b>
+                            <a href="#hasPrevious"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>hasPrevious()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="228" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:228</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Check whether there is a page before the current one.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isCompactMode"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            isCompactMode
+                            </b>
+                            <a href="#isCompactMode"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>isCompactMode()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="412" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:412</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Whether the component is to be rendered in the &quot;compact&quot; mode</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isZero"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            isZero
+                            </b>
+                            <a href="#isZero"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>isZero(numberToCheck: string | number)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="214" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:214</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Check whether the given value is equal to zero (as number 0 or as string &quot;0&quot;).</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>numberToCheck</td>
+                                                        <td>
+                                                                    <code>string | number</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngAfterViewInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngAfterViewInit
+                            </b>
+                            <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngAfterViewInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:129</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnChanges"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnChanges
+                            </b>
+                            <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnChanges(changesObj: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:138</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>changesObj</td>
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:113</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="normalizePaginationConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            normalizePaginationConfig
+                            </b>
+                            <a href="#normalizePaginationConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>normalizePaginationConfig(config: <a href="../interfaces/StarkPaginationConfig.html">StarkPaginationConfig | undefined</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:170</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates a normalized paginationConfig to be used by this component.
+If the given config is undefined it will set totalItems only, otherwise it sets default values for the missing properties</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>config</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkPaginationConfig.html" target="_self" >StarkPaginationConfig | undefined</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkPaginationConfig.html" target="_self" >StarkPaginationConfig</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onChangeItemsPerPage"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            onChangeItemsPerPage
+                            </b>
+                            <a href="#onChangeItemsPerPage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>onChangeItemsPerPage(itemsPerPage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="312" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:312</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Set page to first then call onChangePagination function.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>itemsPerPage</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onChangePagination"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            onChangePagination
+                            </b>
+                            <a href="#onChangePagination"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>onChangePagination()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="272" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:272</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Emit the stark paginate event and the MatPagination event.
+Then reload pageNumbers variable.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setMatPaginatorProperties"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setMatPaginatorProperties
+                            </b>
+                            <a href="#setMatPaginatorProperties"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setMatPaginatorProperties(config: <a href="../interfaces/StarkPaginationConfig.html">StarkPaginationConfig</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:200</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Set the properties needed for the MatPaginator base class based on the given pagination configuration
+<a href="https://material.angular.io/components/paginator/api#MatPaginator">MatPaginator API</a></p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>config</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkPaginationConfig.html" target="_self" >StarkPaginationConfig</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>The config object which be used to set the MatPaginator properties</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setPageNumbers"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setPageNumbers
+                            </b>
+                            <a href="#setPageNumbers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setPageNumbers()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="323" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:323</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Set pageNumbers variable.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_paginationInput"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            _paginationInput
+                            </b>
+                            <a href="#_paginationInput"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>_paginationInput:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:94</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="cdRef"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            cdRef
+                            </b>
+                            <a href="#cdRef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>cdRef:     <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:103</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="element"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            element
+                            </b>
+                            <a href="#element"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>element:     <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:101</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logger"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            logger
+                            </b>
+                            <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>logger:     <code>StarkLoggingService</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>StarkLoggingService</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>Inject</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:100</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pageNumbers"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            pageNumbers
+                            </b>
+                            <a href="#pageNumbers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>pageNumbers:     <code>(string | number)[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>(string | number)[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:97</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="previousPageIndex"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            previousPageIndex
+                            </b>
+                            <a href="#previousPageIndex"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>previousPageIndex:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:96</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="previousPaginationInput"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            previousPaginationInput
+                            </b>
+                            <a href="#previousPaginationInput"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>previousPaginationInput:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:95</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="renderer"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            renderer
+                            </b>
+                            <a href="#renderer"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>renderer:     <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:102</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paginationInput"></a>
+                        <span class="name"><b>paginationInput</b><a href="#paginationInput"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>paginationInput()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:81</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>paginationInput(newValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/modules/pagination/components/pagination.component.ts:85</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>newValue</td>
+                                                    
+                                                            <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+	AfterViewInit,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	HostBinding,
+	Inject,
+	Input,
+	OnChanges,
+	OnInit,
+	Output,
+	Renderer2,
+	SimpleChanges,
+	ViewEncapsulation
+} from &quot;@angular/core&quot;;
+import { MatPaginator, MatPaginatorIntl, PageEvent } from &quot;@angular/material/paginator&quot;;
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;@nationalbankbelgium/stark-core&quot;;
+import { StarkPaginationConfig } from &quot;./pagination-config.intf&quot;;
+import { StarkPaginateEvent } from &quot;./paginate-event.intf&quot;;
+
+/**
+ * @ignore
+ */
+const _isEqual: Function &#x3D; require(&quot;lodash/isEqual&quot;);
+
+/**
+ * Name of the component
+ */
+const componentName: string &#x3D; &quot;stark-pagination&quot;;
+
+export type StarkPaginationComponentMode &#x3D; &quot;compact&quot;;
+
+// FIXME: refactor the template of this component function to reduce its cyclomatic complexity
+/* tslint:disable:template-cyclomatic-complexity */
+/**
+ * Component to display pagination bar to be used with a collection of items.
+ * It extends the MatPaginator class from Angular Material so it can be integrated as well with the MatTable.
+ * {@link https://material.angular.io/components/paginator/api|MatPaginator}
+ */
+@Component({
+	selector: &quot;stark-pagination&quot;,
+	templateUrl: &quot;./pagination.component.html&quot;,
+	encapsulation: ViewEncapsulation.None
+})
+export class StarkPaginationComponent extends MatPaginator implements OnInit, OnChanges, AfterViewInit {
+	/**
+	 * Adds class&#x3D;&quot;stark-pagination&quot; attribute on the host component
+	 */
+	@HostBinding(&quot;class&quot;)
+	public class: string &#x3D; componentName;
+
+	/**
+	 * Suffix id given to items per page dropdown
+	 * (items-per-page-&lt;htmlSuffixId&gt;) and pageSelector dropdown (page-selector-&lt;htmlSuffixId&gt;)
+	 * Default: &quot;pagination&quot;
+	 */
+	@Input()
+	public htmlSuffixId?: string;
+
+	/**
+	 * Desired layout or flavour:
+	 * - compact: Displayed in a compact mode.
+	 * - default: basic implementation with everything
+	 */
+	@Input()
+	public mode?: StarkPaginationComponentMode;
+
+	/**
+	 * StarkPaginationConfig object containing main information for the pagination.
+	 */
+	@Input()
+	public paginationConfig: StarkPaginationConfig;
+
+	/**
+	 * Output event emitter that will emit the paginate event when the pagination changed.
+	 */
+	@Output()
+	public paginated: EventEmitter&lt;StarkPaginateEvent&gt; &#x3D; new EventEmitter&lt;StarkPaginateEvent&gt;();
+
+	public get paginationInput(): number {
+		return this._paginationInput;
+	}
+
+	public set paginationInput(newValue: number) {
+		// store the previous pagination input value in case the new one is not valid
+		// so it can be reverted to the previous value when that happens
+		if (this._paginationInput &amp;&amp; (newValue &gt; this.getTotalPages() || newValue &#x3D;&#x3D;&#x3D; 0)) {
+			this.previousPaginationInput &#x3D; this._paginationInput;
+		}
+		this._paginationInput &#x3D; newValue;
+	}
+
+	public _paginationInput: number;
+	public previousPaginationInput: number;
+	public previousPageIndex: number;
+	public pageNumbers: (string | number)[];
+
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		public element: ElementRef,
+		public renderer: Renderer2,
+		public cdRef: ChangeDetectorRef
+	) {
+		// we don&#x27;t use the MatPaginatorIntl service to translate the labels but it is needed for the MatPaginator base class
+		// see https://material.angular.io/components/paginator/api#services
+		super(new MatPaginatorIntl(), cdRef);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnInit(): void {
+		this.paginationConfig &#x3D; this.normalizePaginationConfig(this.paginationConfig);
+		this.setMatPaginatorProperties(this.paginationConfig);
+		this.previousPageIndex &#x3D; 0;
+
+		this.htmlSuffixId &#x3D; this.htmlSuffixId || &quot;pagination&quot;;
+
+		this.setPageNumbers();
+
+		super.ngOnInit();
+		this.logger.debug(componentName + &quot;: controller initialized&quot;);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngAfterViewInit(): void {
+		if (this.paginationConfig.isExtended) {
+			this.renderer.addClass(this.element.nativeElement, &quot;extended-pagination&quot;);
+		}
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnChanges(changesObj: SimpleChanges): void {
+		if (changesObj[&quot;paginationConfig&quot;]) {
+			// Set local variable to prevent shadow changes
+			const paginationConfigOriginalChange: StarkPaginationConfig &#x3D; { ...this.paginationConfig };
+			this.paginationConfig &#x3D; this.normalizePaginationConfig(this.paginationConfig);
+			this.logger.debug(componentName + &quot;: paginationConfig changed...&quot;, this.paginationConfig);
+
+			// If normalization has changed the page or itemsPerPage, that means the paginationConfig is not the same in the pagination controller
+			// and in the parent controller. So pagination hast to trigger onPaginate callback to pass the new values.
+			if (
+				typeof paginationConfigOriginalChange &#x3D;&#x3D;&#x3D; &quot;undefined&quot; ||
+				paginationConfigOriginalChange.page !&#x3D;&#x3D; this.paginationConfig.page ||
+				paginationConfigOriginalChange.itemsPerPage !&#x3D;&#x3D; this.paginationConfig.itemsPerPage
+			) {
+				this.onChangePagination();
+			} else if (
+				!_isEqual(paginationConfigOriginalChange, changesObj[&quot;paginationConfig&quot;].previousValue) ||
+				paginationConfigOriginalChange.totalItems !&#x3D;&#x3D; this.paginationConfig.totalItems ||
+				paginationConfigOriginalChange.itemsPerPageOptions !&#x3D;&#x3D; this.paginationConfig.itemsPerPageOptions
+			) {
+				this.setPageNumbers();
+			}
+			this.paginationInput &#x3D; &lt;number&gt;this.paginationConfig.page;
+		}
+	}
+
+	/**
+	 * Creates a normalized paginationConfig to be used by this component.
+	 * If the given config is undefined it will set totalItems only, otherwise it sets default values for the missing properties
+	 */
+	// FIXME: refactor this function to reduce its cognitive complexity
+	/* tslint:disable-next-line:cognitive-complexity */
+	public normalizePaginationConfig(config: StarkPaginationConfig | undefined): StarkPaginationConfig {
+		let normalizedConfig: StarkPaginationConfig;
+		if (!config) {
+			// initialize paginationConfig to prevent errors in other functions depending on this config
+			normalizedConfig &#x3D; {
+				totalItems: 0
+			};
+			this.logger.warn(componentName + &quot;: No configuration defined. TotalItems set to 0 by default&quot;);
+		} else {
+			normalizedConfig &#x3D; {
+				itemsPerPageOptions: config.itemsPerPageOptions || [5, 10, 15],
+				itemsPerPage: config.itemsPerPage || (config.itemsPerPageOptions ? config.itemsPerPageOptions[0] : 5),
+				page: config.page || 1,
+				isExtended: config.isExtended !&#x3D;&#x3D; undefined ? config.isExtended : false,
+				itemsPerPageIsPresent: config.itemsPerPageIsPresent !&#x3D;&#x3D; undefined ? config.itemsPerPageIsPresent : true,
+				pageNavIsPresent: config.pageNavIsPresent !&#x3D;&#x3D; undefined ? config.pageNavIsPresent : true,
+				pageInputIsPresent: config.pageInputIsPresent !&#x3D;&#x3D; undefined ? config.pageInputIsPresent : true,
+				totalItems: config.totalItems !&#x3D;&#x3D; undefined ? config.totalItems : 0
+			};
+			this.logger.debug(componentName + &quot;: normalized pagination config: &quot;, normalizedConfig);
+		}
+
+		return normalizedConfig;
+	}
+
+	/**
+	 * Set the properties needed for the MatPaginator base class based on the given pagination configuration
+	 * {@link https://material.angular.io/components/paginator/api#MatPaginator|MatPaginator API}
+	 * @param config - The config object which be used to set the MatPaginator properties
+	 */
+	public setMatPaginatorProperties(config: StarkPaginationConfig): void {
+		// The set of provided page size options to display to the user.
+		this.pageSizeOptions &#x3D; &lt;number[]&gt;config.itemsPerPageOptions;
+		// Number of items to display on a page. By default set to 50.
+		this.pageSize &#x3D; &lt;number&gt;config.itemsPerPage;
+		// The zero-based page index of the displayed list of items. Defaulted to 0.
+		this.pageIndex &#x3D; &lt;number&gt;config.page - 1; // zero-based
+		// The length of the total number of items that are being paginated. Defaulted to 0.
+		this.length &#x3D; &lt;number&gt;config.totalItems;
+	}
+
+	/**
+	 * Check whether the given value is equal to zero (as number 0 or as string &quot;0&quot;).
+	 */
+	public isZero(numberToCheck: string | number): boolean {
+		return numberToCheck &#x3D;&#x3D;&#x3D; 0 || numberToCheck &#x3D;&#x3D;&#x3D; &quot;0&quot;;
+	}
+
+	/**
+	 * Check whether there is a page after the current one.
+	 */
+	public hasNext(): boolean {
+		return this.paginationConfig &amp;&amp; &lt;number&gt;this.paginationConfig.page &lt; this.getTotalPages();
+	}
+
+	/**
+	 * Check whether there is a page before the current one.
+	 */
+	public hasPrevious(): boolean {
+		return this.paginationConfig &amp;&amp; &lt;number&gt;this.paginationConfig.page &gt; 1;
+	}
+
+	/**
+	 * Change page to first one.
+	 */
+	public goToFirst(): void {
+		if (this.hasPrevious()) {
+			this.goToPage(1);
+		}
+	}
+
+	/**
+	 * Change page to previous one.
+	 */
+	public goToPrevious(): void {
+		if (this.hasPrevious()) {
+			this.goToPage(&lt;number&gt;this.paginationConfig.page - 1);
+		}
+	}
+
+	/**
+	 * Change page to next one.
+	 */
+	public goToNext(): void {
+		if (this.hasNext()) {
+			this.goToPage(&lt;number&gt;this.paginationConfig.page + 1);
+		}
+	}
+
+	/**
+	 * Change page to last one.
+	 */
+	public goToLast(): void {
+		if (this.hasNext()) {
+			this.goToPage(this.getTotalPages());
+		}
+	}
+
+	/**
+	 * Emit the stark paginate event and the MatPagination event.
+	 * Then reload pageNumbers variable.
+	 */
+	public onChangePagination(): void {
+		if (
+			this.paginationConfig &amp;&amp;
+			// Check the types of page &amp; itemsPerPage to be sure they are not undefined
+			typeof this.paginationConfig.page &#x3D;&#x3D;&#x3D; &quot;number&quot; &amp;&amp;
+			typeof this.paginationConfig.itemsPerPage &#x3D;&#x3D;&#x3D; &quot;number&quot;
+		) {
+			this.paginated.emit({
+				page: this.paginationConfig.page,
+				itemsPerPage: this.paginationConfig.itemsPerPage
+			});
+
+			this.setMatPaginatorProperties(this.paginationConfig);
+			this.emitMatPaginationEvent();
+		}
+		this.setPageNumbers();
+		this.paginationInput &#x3D; &lt;number&gt;this.paginationConfig.page;
+	}
+
+	/**
+	 * Get total number of pages available based on itemsPerPage and totalItems.
+	 */
+	public getTotalPages(): number {
+		let calculatedTotalPages: number &#x3D; 0;
+		if (this.paginationConfig) {
+			const itemsPerPage: number &#x3D; this.isZero(&lt;number&gt;this.paginationConfig.itemsPerPage)
+				? 1
+				: &lt;number&gt;this.paginationConfig.itemsPerPage;
+			calculatedTotalPages &#x3D; Math.ceil(&lt;number&gt;this.paginationConfig.totalItems / itemsPerPage);
+		}
+
+		if (calculatedTotalPages &#x3D;&#x3D;&#x3D; 0) {
+			return 1;
+		}
+		return calculatedTotalPages;
+	}
+
+	/**
+	 * Set page to first then call onChangePagination function.
+	 */
+	public onChangeItemsPerPage(itemsPerPage: number): void {
+		this.paginationConfig.page &#x3D; 1;
+		this.paginationConfig.itemsPerPage &#x3D; itemsPerPage;
+		this.onChangePagination();
+	}
+
+	/**
+	 * Set pageNumbers variable.
+	 */
+	// FIXME: refactor this function to reduce its cognitive complexity
+	/* tslint:disable-next-line:cognitive-complexity */
+	public setPageNumbers(): void {
+		let min: number;
+		let max: number;
+		let i: number;
+		let j: number;
+
+		const input: (string | number)[] &#x3D; [];
+
+		if (this.isCompactMode()) {
+			min &#x3D; &lt;number&gt;this.paginationConfig.page &gt; 1 ? &lt;number&gt;this.paginationConfig.page - 1 : 1;
+			max &#x3D; min + 2;
+
+			for (j &#x3D; 0, i &#x3D; min; i &lt;&#x3D; max &amp;&amp; i &lt;&#x3D; this.getTotalPages(); i++, j++) {
+				input[j] &#x3D; i;
+			}
+		} else {
+			// default mode: stark
+			min &#x3D; 1;
+			max &#x3D; this.getTotalPages();
+
+			if (max &lt; 6) {
+				for (j &#x3D; 0, i &#x3D; min; i &lt;&#x3D; max; i++, j++) {
+					input[j] &#x3D; i;
+				}
+			} else {
+				input[0] &#x3D; min;
+				input[4] &#x3D; max;
+
+				if (this.paginationConfig.page &#x3D;&#x3D;&#x3D; min + 2 || this.paginationConfig.page &#x3D;&#x3D;&#x3D; min + 1) {
+					input[2] &#x3D; min + 2;
+				} else if (this.paginationConfig.page &#x3D;&#x3D;&#x3D; max - 2 || this.paginationConfig.page &#x3D;&#x3D;&#x3D; max - 1) {
+					input[2] &#x3D; max - 2;
+				} else if (this.paginationConfig.page &#x3D;&#x3D;&#x3D; max || this.paginationConfig.page &#x3D;&#x3D;&#x3D; min) {
+					input[2] &#x3D; Math.ceil(max / 2);
+				} else {
+					input[2] &#x3D; &lt;number&gt;this.paginationConfig.page;
+				}
+
+				if (&lt;number&gt;input[2] - 1 &#x3D;&#x3D;&#x3D; min + 1) {
+					input[1] &#x3D; min + 1;
+				} else {
+					input[1] &#x3D; &quot;...&quot;;
+				}
+
+				if (&lt;number&gt;input[2] + 1 &#x3D;&#x3D;&#x3D; max - 1) {
+					input[3] &#x3D; max - 1;
+				} else {
+					input[3] &#x3D; &quot;...&quot;;
+				}
+			}
+		}
+
+		this.pageNumbers &#x3D; input;
+	}
+
+	/**
+	 * Change to the given page if it is different than &quot;...&quot;. It calls onChangePagination afterwards.
+	 */
+	public goToPage(page: number | &quot;...&quot;): void {
+		if (page !&#x3D;&#x3D; &quot;...&quot;) {
+			this.previousPageIndex &#x3D; &lt;number&gt;this.paginationConfig.page;
+			this.paginationConfig.page &#x3D; page;
+			this.onChangePagination();
+		}
+	}
+
+	/**
+	 * Change the page when the Enter key is pressed in the page number input
+	 */
+	public changePageOnEnter(): void {
+		const newPage: number &#x3D; typeof this.paginationInput &#x3D;&#x3D;&#x3D; &quot;string&quot; ? parseInt(this.paginationInput, 10) : this.paginationInput;
+		if (newPage &lt;&#x3D; this.getTotalPages() &amp;&amp; newPage &gt; 0) {
+			this.goToPage(newPage);
+		} else {
+			this.logger.warn(componentName + &quot;: the page &quot;, newPage, &quot; does not exist&quot;);
+			this.paginationInput &#x3D; this.previousPaginationInput; // revert the pagination input value
+		}
+	}
+
+	/**
+	 * Return the number of digits of the current total number of pages.
+	 */
+	public getPageInputMaxDigits(): number {
+		return this.getTotalPages().toString().length;
+	}
+
+	/**
+	 * Whether the component is to be rendered in the &quot;compact&quot; mode
+	 */
+	public isCompactMode(): boolean {
+		return typeof this.mode !&#x3D;&#x3D; &quot;undefined&quot; &amp;&amp; this.mode &#x3D;&#x3D;&#x3D; &quot;compact&quot;;
+	}
+
+	/**
+	 * Emit the PageEvent according to the MatPaginator API
+	 * {@link https://material.angular.io/components/paginator/api#PageEvent|MatPaginator PageEvent}
+	 */
+	public emitMatPaginationEvent(): void {
+		const pageEvent: PageEvent &#x3D; {
+			pageIndex: this.pageIndex,
+			pageSize: this.pageSize,
+			length: this.length,
+			previousPageIndex: this.previousPageIndex
+		};
+		this.page.emit(pageEvent);
+	}
+
+	/**
+	 * @ignore
+	 */
+	public trackPageNumberFn(_index: number): number {
+		return _index;
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;mode !&#x3D;&#x3D; &#x27;compact&#x27;&quot;&gt;
+	&lt;ul *ngIf&#x3D;&quot;paginationConfig.pageNavIsPresent !&#x3D;&#x3D; false&quot;&gt;
+		&lt;li class&#x3D;&quot;first-page&quot; aria-label&#x3D;&quot;First page&quot; *ngIf&#x3D;&quot;!paginationConfig.isExtended&quot;&gt;
+
+			&lt;button mat-icon-button (click)&#x3D;&quot;goToFirst()&quot; [disabled]&#x3D;&quot;!hasPrevious()&quot; aria-label&#x3D;&quot;First page&quot;&gt;
+				&lt;mat-icon starkSvgViewBox svgIcon&#x3D;&quot;page-first&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+		&lt;li class&#x3D;&quot;previous&quot; aria-label&#x3D;&quot;Previous&quot;&gt;
+			&lt;button mat-icon-button (click)&#x3D;&quot;goToPrevious()&quot; [disabled]&#x3D;&quot;!hasPrevious()&quot; aria-label&#x3D;&quot;Previous&quot;&gt;
+				&lt;mat-icon starkSvgViewBox svgIcon&#x3D;&quot;chevron-left&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+		&lt;ng-container *ngIf&#x3D;&quot;paginationConfig.isExtended&quot;&gt;
+			&lt;!-- workaround to use ngIf together with ngFor --&gt;
+			&lt;li class&#x3D;&quot;page-numbers&quot; *ngFor&#x3D;&quot;let pageNumber of pageNumbers; trackBy: trackPageNumberFn&quot;
+				value&#x3D;&quot;{{ pageNumber }}&quot;
+				[ngClass]&#x3D;&quot;paginationConfig.page &#x3D;&#x3D;&#x3D; pageNumber ? &#x27;active&#x27; : &#x27;&#x27;&quot;&gt;
+				&lt;a *ngIf&#x3D;&quot;pageNumber !&#x3D;&#x3D; &#x27;...&#x27;&quot; (click)&#x3D;&quot;goToPage(pageNumber)&quot;&gt;{{ pageNumber }}&lt;/a&gt;
+				&lt;span *ngIf&#x3D;&quot;pageNumber &#x3D;&#x3D;&#x3D; &#x27;...&#x27;&quot;&gt;{{ pageNumber }}&lt;/span&gt;
+			&lt;/li&gt;
+		&lt;/ng-container&gt;
+		&lt;li class&#x3D;&quot;next&quot; aria-label&#x3D;&quot;Next&quot;&gt;
+			&lt;button mat-icon-button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;goToNext()&quot; [disabled]&#x3D;&quot;!hasNext()&quot;&gt;
+				&lt;mat-icon starkSvgViewBox svgIcon&#x3D;&quot;chevron-right&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+		&lt;li class&#x3D;&quot;last-page&quot; aria-label&#x3D;&quot;Last page&quot; *ngIf&#x3D;&quot;!paginationConfig.isExtended&quot;&gt;
+
+			&lt;button mat-icon-button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;goToLast()&quot; [disabled]&#x3D;&quot;!hasNext()&quot; aria-label&#x3D;&quot;Last page&quot;&gt;
+				&lt;mat-icon starkSvgViewBox svgIcon&#x3D;&quot;page-last&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;div class&#x3D;&quot;pagination-enter-page&quot; *ngIf&#x3D;&quot;paginationConfig.pageInputIsPresent !&#x3D;&#x3D; false&quot;&gt;
+		&lt;input [starkOnEnterKey]&#x3D;&quot;changePageOnEnter.bind(this)&quot; starkRestrictInput&#x3D;&quot;\d&quot;
+			   maxlength&#x3D;&quot;{{ getPageInputMaxDigits() }}&quot;
+			   id&#x3D;&quot;current-page-{{ htmlSuffixId }}&quot; [(ngModel)]&#x3D;&quot;paginationInput&quot;&gt;
+		&lt;span&gt; /&amp;nbsp;&lt;/span&gt;&lt;span class&#x3D;&quot;total-pages&quot;&gt;{{ getTotalPages() }}&lt;/span&gt;
+	&lt;/div&gt;
+	&lt;div class&#x3D;&quot;pagination-items-per-page&quot; *ngIf&#x3D;&quot;paginationConfig.itemsPerPageIsPresent !&#x3D;&#x3D; false&quot;&gt;
+		&lt;stark-dropdown [options]&#x3D;&quot;paginationConfig.itemsPerPageOptions&quot; [value]&#x3D;&quot;paginationConfig.itemsPerPage&quot;
+						placeholder&#x3D;&quot;&quot;
+						(dropdownSelectionChanged)&#x3D;&quot;onChangeItemsPerPage($event)&quot;
+						dropdownId&#x3D;&quot;items-per-page-{{ htmlSuffixId }}&quot;
+						dropdownName&#x3D;&quot;items-per-page-{{ htmlSuffixId }}&quot;&gt;&lt;/stark-dropdown&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div *ngIf&#x3D;&quot;mode &#x3D;&#x3D;&#x3D; &#x27;compact&#x27;&quot; class&#x3D;&quot;compact&quot;&gt;
+	&lt;ul *ngIf&#x3D;&quot;paginationConfig.pageNavIsPresent !&#x3D;&#x3D; false&quot;&gt;
+		&lt;li class&#x3D;&quot;first-page&quot; aria-label&#x3D;&quot;First page&quot;&gt;
+			&lt;button mat-icon-button (click)&#x3D;&quot;goToFirst()&quot; [disabled]&#x3D;&quot;!hasPrevious()&quot; aria-label&#x3D;&quot;First page&quot;&gt;
+				&lt;mat-icon starkSvgViewBox svgIcon&#x3D;&quot;page-first&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+		&lt;li class&#x3D;&quot;previous&quot; aria-label&#x3D;&quot;Previous&quot;&gt;
+			&lt;button mat-icon-button (click)&#x3D;&quot;goToPrevious()&quot; [disabled]&#x3D;&quot;!hasPrevious()&quot; aria-label&#x3D;&quot;Previous&quot;&gt;
+				&lt;mat-icon starkSvgViewBox svgIcon&#x3D;&quot;chevron-left&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+		&lt;div class&#x3D;&quot;pagination-enter-page&quot; *ngIf&#x3D;&quot;paginationConfig.pageInputIsPresent !&#x3D;&#x3D; false&quot;&gt;
+			&lt;input [starkOnEnterKey]&#x3D;&quot;changePageOnEnter.bind(this)&quot; starkRestrictInput&#x3D;&quot;\d&quot;
+				   maxlength&#x3D;&quot;{{ getPageInputMaxDigits() }}&quot;
+				   id&#x3D;&quot;current-page-{{ htmlSuffixId }}&quot; [(ngModel)]&#x3D;&quot;paginationInput&quot;&gt;
+			&lt;span&gt; /&amp;nbsp;&lt;/span&gt;&lt;span class&#x3D;&quot;total-pages&quot;&gt;{{ getTotalPages() }}&lt;/span&gt;
+		&lt;/div&gt;
+		&lt;li class&#x3D;&quot;next&quot; aria-label&#x3D;&quot;Next&quot;&gt;
+			&lt;button mat-icon-button (click)&#x3D;&quot;goToNext()&quot; [disabled]&#x3D;&quot;!hasNext()&quot;&gt;
+				&lt;mat-icon starkSvgViewBox svgIcon&#x3D;&quot;chevron-right&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+		&lt;li class&#x3D;&quot;last-page&quot; aria-label&#x3D;&quot;Last page&quot;&gt;
+			&lt;button mat-icon-button (click)&#x3D;&quot;goToLast()&quot; [disabled]&#x3D;&quot;!hasNext()&quot; aria-label&#x3D;&quot;Last page&quot;&gt;
+				&lt;mat-icon starkSvgViewBox svgIcon&#x3D;&quot;page-last&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="mode !== \'compact\'">	<ul *ngIf="paginationConfig.pageNavIsPresent !== false">		<li class="first-page" aria-label="First page" *ngIf="!paginationConfig.isExtended">			<button mat-icon-button (click)="goToFirst()" [disabled]="!hasPrevious()" aria-label="First page">				<mat-icon starkSvgViewBox svgIcon="page-first"></mat-icon>			</button>		</li>		<li class="previous" aria-label="Previous">			<button mat-icon-button (click)="goToPrevious()" [disabled]="!hasPrevious()" aria-label="Previous">				<mat-icon starkSvgViewBox svgIcon="chevron-left"></mat-icon>			</button>		</li>		<ng-container *ngIf="paginationConfig.isExtended">			<!-- workaround to use ngIf together with ngFor -->			<li class="page-numbers" *ngFor="let pageNumber of pageNumbers; trackBy: trackPageNumberFn"				value="{{ pageNumber }}"				[ngClass]="paginationConfig.page === pageNumber ? \'active\' : \'\'">				<a *ngIf="pageNumber !== \'...\'" (click)="goToPage(pageNumber)">{{ pageNumber }}</a>				<span *ngIf="pageNumber === \'...\'">{{ pageNumber }}</span>			</li>		</ng-container>		<li class="next" aria-label="Next">			<button mat-icon-button type="button" (click)="goToNext()" [disabled]="!hasNext()">				<mat-icon starkSvgViewBox svgIcon="chevron-right"></mat-icon>			</button>		</li>		<li class="last-page" aria-label="Last page" *ngIf="!paginationConfig.isExtended">			<button mat-icon-button type="button" (click)="goToLast()" [disabled]="!hasNext()" aria-label="Last page">				<mat-icon starkSvgViewBox svgIcon="page-last"></mat-icon>			</button>		</li>	</ul>	<div class="pagination-enter-page" *ngIf="paginationConfig.pageInputIsPresent !== false">		<input [starkOnEnterKey]="changePageOnEnter.bind(this)" starkRestrictInput="\d"			   maxlength="{{ getPageInputMaxDigits() }}"			   id="current-page-{{ htmlSuffixId }}" [(ngModel)]="paginationInput">		<span> /&nbsp;</span><span class="total-pages">{{ getTotalPages() }}</span>	</div>	<div class="pagination-items-per-page" *ngIf="paginationConfig.itemsPerPageIsPresent !== false">		<stark-dropdown [options]="paginationConfig.itemsPerPageOptions" [value]="paginationConfig.itemsPerPage"						placeholder=""						(dropdownSelectionChanged)="onChangeItemsPerPage($event)"						dropdownId="items-per-page-{{ htmlSuffixId }}"						dropdownName="items-per-page-{{ htmlSuffixId }}"></stark-dropdown>	</div></div><div *ngIf="mode === \'compact\'" class="compact">	<ul *ngIf="paginationConfig.pageNavIsPresent !== false">		<li class="first-page" aria-label="First page">			<button mat-icon-button (click)="goToFirst()" [disabled]="!hasPrevious()" aria-label="First page">				<mat-icon starkSvgViewBox svgIcon="page-first"></mat-icon>			</button>		</li>		<li class="previous" aria-label="Previous">			<button mat-icon-button (click)="goToPrevious()" [disabled]="!hasPrevious()" aria-label="Previous">				<mat-icon starkSvgViewBox svgIcon="chevron-left"></mat-icon>			</button>		</li>		<div class="pagination-enter-page" *ngIf="paginationConfig.pageInputIsPresent !== false">			<input [starkOnEnterKey]="changePageOnEnter.bind(this)" starkRestrictInput="\d"				   maxlength="{{ getPageInputMaxDigits() }}"				   id="current-page-{{ htmlSuffixId }}" [(ngModel)]="paginationInput">			<span> /&nbsp;</span><span class="total-pages">{{ getTotalPages() }}</span>		</div>		<li class="next" aria-label="Next">			<button mat-icon-button (click)="goToNext()" [disabled]="!hasNext()">				<mat-icon starkSvgViewBox svgIcon="chevron-right"></mat-icon>			</button>		</li>		<li class="last-page" aria-label="Last page">			<button mat-icon-button (click)="goToLast()" [disabled]="!hasNext()" aria-label="Last page">				<mat-icon starkSvgViewBox svgIcon="page-last"></mat-icon>			</button>		</li>	</ul></div></div>'
+    var COMPONENTS = [{'name': 'StarkActionBarComponent', 'selector': 'stark-action-bar'},{'name': 'StarkAppContainerComponent', 'selector': 'stark-app-container'},{'name': 'StarkAppFooterComponent', 'selector': 'stark-app-footer'},{'name': 'StarkAppLogoComponent', 'selector': 'stark-app-logo'},{'name': 'StarkAppLogoutComponent', 'selector': 'stark-app-logout'},{'name': 'StarkAppSidebarComponent', 'selector': 'stark-app-sidebar'},{'name': 'StarkBreadcrumbComponent', 'selector': 'stark-breadcrumb'},{'name': 'StarkCollapsibleComponent', 'selector': 'stark-collapsible'},{'name': 'StarkDatePickerComponent', 'selector': 'stark-date-picker'},{'name': 'StarkDateRangePickerComponent', 'selector': 'stark-date-range-picker'},{'name': 'StarkDropdownComponent', 'selector': 'stark-dropdown'},{'name': 'StarkLanguageSelectorComponent', 'selector': 'stark-language-selector'},{'name': 'StarkLoginPageComponent', 'selector': 'stark-login-page'},{'name': 'StarkPaginationComponent', 'selector': 'stark-pagination'},{'name': 'StarkPreloadingPageComponent', 'selector': 'stark-preloading-page'},{'name': 'StarkPrettyPrintComponent', 'selector': 'stark-pretty-print'},{'name': 'StarkSessionExpiredPageComponent', 'selector': 'stark-session-expired-page'},{'name': 'StarkSessionLogoutPageComponent', 'selector': 'stark-session-logout-page'},{'name': 'StarkSliderComponent', 'selector': 'stark-slider'},{'name': 'StarkTableColumnComponent', 'selector': 'stark-table-column'},{'name': 'StarkTableComponent', 'selector': 'componentName'},{'name': 'StarkTableMultisortDialogComponent', 'selector': 'stark-table-dialog-multisort'},{'name': 'StarkToastNotificationComponent', 'selector': 'stark-toast-notification'}];
+    var DIRECTIVES = [{'name': 'StarkOnEnterKeyDirective', 'selector': 'directiveName'},{'name': 'StarkRestrictInputDirective', 'selector': 'directiveName'},{'name': 'StarkSvgViewBoxDirective', 'selector': 'directiveName'}];
+    var ACTUAL_COMPONENT = {'name': 'StarkPaginationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkPaginationComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
