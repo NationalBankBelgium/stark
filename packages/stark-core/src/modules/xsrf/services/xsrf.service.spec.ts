@@ -321,6 +321,7 @@ describe("Service: StarkXSRFService", () => {
 		}));
 
 		it("should NOT trigger any HTTP call until the waitBeforePinging observable emits", () => {
+			httpMock.get.and.returnValue(of(new HttpResponse({ body: "ping OK" })));
 			const mockWaitBeforePinging$: Subject<any> = new Subject<any>();
 			spyOn(xsrfService, "getWaitBeforePingingObs").and.returnValue(mockWaitBeforePinging$);
 
