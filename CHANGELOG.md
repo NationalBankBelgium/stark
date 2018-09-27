@@ -1,3 +1,29 @@
+<a name="10.0.0-beta.0"></a>
+# [10.0.0-beta.0](https://github.com/nationalbankbelgium/stark/compare/10.0.0-alpha.5...10.0.0-beta.0) (2018-09-27)
+
+
+### Bug Fixes
+
+* **stark-core:** fix failing XSRF service test ([c3d2589](https://github.com/nationalbankbelgium/stark/commit/c3d2589))
+
+
+### Features
+
+* **all:** add session pages ([4d13687](https://github.com/nationalbankbelgium/stark/commit/4d13687)), closes [#407](https://github.com/nationalbankbelgium/stark/issues/407) [#408](https://github.com/nationalbankbelgium/stark/issues/408) [#409](https://github.com/nationalbankbelgium/stark/issues/409) [#410](https://github.com/nationalbankbelgium/stark/issues/410)
+* **showcase:** improve showcase and move styles from showcase to stark-ui _base ([be80748](https://github.com/nationalbankbelgium/stark/commit/be80748))
+* **stark-core:** implement Stark XSRF module ([e82ed0d](https://github.com/nationalbankbelgium/stark/commit/e82ed0d)), closes [#115](https://github.com/nationalbankbelgium/stark/issues/115)
+* **stark-ui:** cards standardization ([87da0ef](https://github.com/nationalbankbelgium/stark/commit/87da0ef)), closes [#646](https://github.com/nationalbankbelgium/stark/issues/646)
+* **stark-ui:** color settings ([fcd12d5](https://github.com/nationalbankbelgium/stark/commit/fcd12d5)), closes [#662](https://github.com/nationalbankbelgium/stark/issues/662)
+* **stark-ui:** implement collapsible feature ([44669a1](https://github.com/nationalbankbelgium/stark/commit/44669a1)), closes [#595](https://github.com/nationalbankbelgium/stark/issues/595)
+* **stark-ui:** implement Pagination component. Integrate pagination in Table component ([96ae7b2](https://github.com/nationalbankbelgium/stark/commit/96ae7b2)), closes [#539](https://github.com/nationalbankbelgium/stark/issues/539) [#514](https://github.com/nationalbankbelgium/stark/issues/514)
+* **stark-ui:** implement toast notification feature ([98390c2](https://github.com/nationalbankbelgium/stark/commit/98390c2))
+* **stark-ui:** implements footer component ([2fca5c8](https://github.com/nationalbankbelgium/stark/commit/2fca5c8))
+* **stark-ui:** language-selector: implement component/module ([38cbd68](https://github.com/nationalbankbelgium/stark/commit/38cbd68)), closes [#564](https://github.com/nationalbankbelgium/stark/issues/564)
+* **stark-ui:** typography + Spaces ([8a5675d](https://github.com/nationalbankbelgium/stark/commit/8a5675d)), closes [#475](https://github.com/nationalbankbelgium/stark/issues/475) [#671](https://github.com/nationalbankbelgium/stark/issues/671)
+* **starter:** update Starter to keep in sync with Showcase ([b0ffd95](https://github.com/nationalbankbelgium/stark/commit/b0ffd95))
+
+
+
 <a name="10.0.0-alpha.5"></a>
 # [10.0.0-alpha.5](https://github.com/nationalbankbelgium/stark/compare/10.0.0-alpha.4...10.0.0-alpha.5) (2018-09-07)
 
