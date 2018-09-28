@@ -19,6 +19,7 @@ const globals = {
 	"@angular/material/button-toggle": "ngMaterial.buttonToggle",
 	"@angular/material/checkbox": "ngMaterial.checkbox",
 	"@angular/material/core": "ngMaterial.core",
+	"@angular/material/datepicker": "ngMaterial.datepicker",
 	"@angular/material/dialog": "ngMaterial.dialog",
 	"@angular/material/expansion": "ngMaterial.expansion",
 	"@angular/material/icon": "ngMaterial.icon",

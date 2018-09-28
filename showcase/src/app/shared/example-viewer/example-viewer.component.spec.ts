@@ -1,7 +1,9 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { MatButtonModule, MatTabsModule, MatTooltipModule } from "@angular/material";
+import { MatButtonModule } from "@angular/material/button";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { throwError, of, Observable, Subject } from "rxjs";
 import { filter, delay } from "rxjs/operators";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";

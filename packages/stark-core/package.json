@@ -53,7 +53,6 @@
     "@angular/core": "6.x",
     "@angular/router": "6.x",
     "rxjs": "6.x",
-    "rxjs-compat": "6.x",
     "tslib": "~1.9.1",
     "typescript": ">=2.8.4 && <2.9.0",
     "zone.js": "~0.8.26"

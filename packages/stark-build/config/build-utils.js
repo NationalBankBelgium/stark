@@ -92,23 +92,6 @@ function getEnvironmentFile(environment) {
 }
 
 /**
- * Read the tsconfig to determine if we should prefer ES2015 modules.
- * Load rxjs path aliases.
- * https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md#build-and-treeshaking
- * @param shouldSupportES2015 - Set to true when the output of typescript is >= ES6
- */
-function rxjsAlias(shouldSupportES2015) {
-	try {
-		const rxjsPathMappingImport = shouldSupportES2015 ? "rxjs/_esm2015/path-mapping" : "rxjs/_esm5/path-mapping";
-		const rxPaths = require(rxjsPathMappingImport);
-		return rxPaths();
-	} catch (e) {
-		console.warn(e);
-		return {};
-	}
-}
-
-/**
  * Read the assets array in the angular.json file of each NationalBankBelgium package installed in node_modules and concatenate
  * them into one single array that will be provided to the CopyWebpackPlugin.
  * @returns {Array} An array containing the assets to be copied by CopyWebpackPlugin.
@@ -232,6 +215,5 @@ exports.DEFAULT_METADATA = DEFAULT_METADATA;
 exports.supportES2015 = supportES2015;
 exports.readTsConfig = readTsConfig;
 exports.getEnvironmentFile = getEnvironmentFile;
-exports.rxjsAlias = rxjsAlias;
 exports.getNbbAssetsConfig = getNbbAssetsConfig;
 exports.getApplicationAssetsConfig = getApplicationAssetsConfig;
