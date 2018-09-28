@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-keyboard-directives",
@@ -14,14 +15,30 @@ export class DemoKeyboardDirectivesComponent implements OnInit {
 
 	public logging: string;
 
+	public referenceList: ReferenceLink[];
+
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnInit(): void {
 		this.latestInputValue = "";
 		this.inputValue1 = "";
 		this.inputValue2 = "";
 		this.inputValue3 = "";
 		this.logging = "";
+
+		this.referenceList = [
+			{
+				label: "Stark On Enter Key directive",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/directives/StarkOnEnterKeyDirective.html"
+			},
+			{
+				label: "Stark Restrict Input directive",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/directives/StarkRestrictInputDirective.html"
+			}
+		];
 	}
 
 	public onEnterKeyCallback(...paramValues: any[]): void {

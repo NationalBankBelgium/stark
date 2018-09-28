@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-dropdown",
@@ -15,6 +16,8 @@ export class DemoDropdownComponent implements OnInit {
 
 	public serviceDropdownOptions: any[];
 
+	public referenceList: ReferenceLink[];
+
 	/**
 	 * Component lifecycle hook
 	 */
@@ -23,6 +26,13 @@ export class DemoDropdownComponent implements OnInit {
 			{ id: "PR", value: "SHOWCASE.DEMO.DROPDOWN.PR" },
 			{ id: "IO", value: "SHOWCASE.DEMO.DROPDOWN.IO" },
 			{ id: "CS", value: "SHOWCASE.DEMO.DROPDOWN.CS" }
+		];
+
+		this.referenceList = [
+			{
+				label: "Stark Dropdown component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkDropdownComponent.html"
+			}
 		];
 	}
 

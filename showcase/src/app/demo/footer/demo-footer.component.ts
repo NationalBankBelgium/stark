@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-footer",
@@ -7,8 +8,13 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 })
 export class DemoFooterComponent implements OnInit {
 	public footerHtml: string;
+	public referenceList: ReferenceLink[];
+
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnInit(): void {
 		this.footerHtml = `<stark-app-footer
 	legalInfoUrl="https://www.nbb.be/en/disclaimer-and-legal-information"
@@ -18,5 +24,12 @@ export class DemoFooterComponent implements OnInit {
 	<a htref="https://www.some-page.com/">Some link</a>
 
 </stark-app-footer>`;
+
+		this.referenceList = [
+			{
+				label: "Stark Footer component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkAppFooterComponent.html"
+			}
+		];
 	}
 }

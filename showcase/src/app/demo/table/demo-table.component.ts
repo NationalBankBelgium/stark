@@ -7,6 +7,7 @@ import {
 	StarkAction
 } from "@nationalbankbelgium/stark-ui";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-table",
@@ -15,6 +16,8 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 	encapsulation: ViewEncapsulation.None //Here to add a shadow inside the table, we will fix that when we take care of #509
 })
 export class DemoTableComponent implements OnInit {
+	public referenceList: ReferenceLink[];
+
 	public getTitle = (data: any): string => {
 		return "~" + data.title.label;
 	};
@@ -42,6 +45,9 @@ export class DemoTableComponent implements OnInit {
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnInit(): void {
 		this.dummyData = [
 			{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
@@ -217,5 +223,20 @@ export class DemoTableComponent implements OnInit {
 				}
 			]
 		};
+
+		this.referenceList = [
+			{
+				label: "Stark Table component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkTableComponent.html"
+			},
+			{
+				label: "Stark Table - Column component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkTableColumnComponent.html"
+			},
+			{
+				label: "Stark Table - Multisort Dialog component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkTableMultisortDialogComponent.html"
+			}
+		];
 	}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkDatePickerFilter } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-date-range-picker",
@@ -13,6 +14,7 @@ export class DemoDateRangePickerComponent implements OnInit {
 	public minDate: Date;
 	public maxDate: Date;
 	public customDateFilter: StarkDatePickerFilter;
+	public referenceList: ReferenceLink[];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
@@ -28,6 +30,13 @@ export class DemoDateRangePickerComponent implements OnInit {
 			const day: number = date.getDay();
 			return day !== 0;
 		};
+
+		this.referenceList = [
+			{
+				label: "Stark Date Range Picker component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkDateRangePickerComponent.html"
+			}
+		];
 	}
 
 	public onDateChanged(event: Object): void {

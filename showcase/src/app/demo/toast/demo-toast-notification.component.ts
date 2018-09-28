@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import {
 	STARK_TOAST_NOTIFICATION_SERVICE,
@@ -7,6 +7,7 @@ import {
 	StarkToastMessage,
 	StarkMessageType
 } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-toast-notification",
@@ -16,7 +17,9 @@ import {
 /**
  * Component to demo the toast notifications
  */
-export class DemoToastComponent {
+export class DemoToastComponent implements OnInit {
+	public referenceList: ReferenceLink[];
+
 	/**
 	 * Message, or ID of message displayed in the message in the message box (translations applies).
 	 */
@@ -115,5 +118,17 @@ export class DemoToastComponent {
 	 */
 	public hideToast(): void {
 		this.toastService.hide();
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnInit(): void {
+		this.referenceList = [
+			{
+				label: "Stark Toast Notification component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkToastNotificationComponent.html"
+			}
+		];
 	}
 }

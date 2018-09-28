@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginateEvent, StarkPaginationConfig } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-pagination",
@@ -16,9 +17,13 @@ export class DemoPaginationComponent implements OnInit {
 	public paginateEventExtended: string;
 	public paginateEventAdvanced: string;
 	public paginateEventCompact: string;
+	public referenceList: ReferenceLink[];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnInit(): void {
 		this.paginationSimpleConfig = {
 			totalItems: 20,
@@ -51,6 +56,13 @@ export class DemoPaginationComponent implements OnInit {
 			itemsPerPage: 4,
 			itemsPerPageOptions: [2, 4, 6, 8, 10, 20]
 		};
+
+		this.referenceList = [
+			{
+				label: "Stark Pagination component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkPaginationComponent.html"
+			}
+		];
 	}
 
 	public onPaginationChange(paginateEvent: StarkPaginateEvent, config: "simple" | "extended" | "advanced" | "compact"): void {
