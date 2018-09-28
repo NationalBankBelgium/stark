@@ -11,7 +11,7 @@ import { StarkToastNotificationServiceImpl } from "./toast-notification.service"
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { Observable, Observer } from "rxjs";
 
-describe("Service: StarkToastNotificationService", () => {
+describe("ToastNotificationService", () => {
 	const message: StarkToastMessage = {
 		key: "testMessage",
 		id: "1",

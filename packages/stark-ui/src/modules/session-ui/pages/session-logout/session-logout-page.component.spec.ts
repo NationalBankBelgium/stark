@@ -1,17 +1,12 @@
 /* tslint:disable:completed-docs */
-/* angular imports */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
-/* stark-core imports */
 import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig } from "@nationalbankbelgium/stark-core";
-
-import { TranslateModule } from "@ngx-translate/core";
-
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-/* stark-ui imports */
+import { TranslateModule } from "@ngx-translate/core";
 import { StarkSessionLogoutPageComponent } from "./session-logout-page.component";
 
-describe("StarkSessionLogoutPageComponent", () => {
+describe("SessionLogoutPageComponent", () => {
 	let component: StarkSessionLogoutPageComponent;
 	let fixture: ComponentFixture<StarkSessionLogoutPageComponent>;
 

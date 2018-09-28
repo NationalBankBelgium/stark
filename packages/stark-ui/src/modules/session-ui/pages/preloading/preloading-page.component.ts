@@ -6,9 +6,12 @@ import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
 	STARK_USER_SERVICE,
+	STARK_SESSION_SERVICE,
+	StarkSessionService,
 	StarkLoggingService,
 	StarkRoutingService,
-	StarkUserService
+	StarkUserService,
+	StarkUser
 } from "@nationalbankbelgium/stark-core";
 
 /**
@@ -35,10 +38,12 @@ export class StarkPreloadingPageComponent implements OnInit {
 
 	public userFetchingFailed: boolean;
 	public correlationId: string;
+	public loginDelay: number = 200;
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_USER_SERVICE) public userService: StarkUserService,
+		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
 	) {}
 
@@ -52,10 +57,11 @@ export class StarkPreloadingPageComponent implements OnInit {
 			.fetchUserProfile()
 			.pipe(
 				take(1), // this ensures that the observable will be automatically unsubscribed after emitting the value
-				delay(200)
+				delay(this.loginDelay)
 			)
 			.subscribe(
-				(/*user: StarkUser*/) => {
+				(user: StarkUser) => {
+					this.sessionService.login(user);
 					if (this.targetState) {
 						this.routingService.navigateTo(this.targetState, this.targetStateParams);
 					} else {

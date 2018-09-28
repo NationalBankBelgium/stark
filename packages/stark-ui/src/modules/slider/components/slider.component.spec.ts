@@ -40,7 +40,7 @@ class TestHostComponent {
 	}
 }
 
-describe("SliderController", () => {
+describe("SliderComponent", () => {
 	let component: StarkSliderComponent;
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;

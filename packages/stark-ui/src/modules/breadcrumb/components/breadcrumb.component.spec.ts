@@ -22,7 +22,7 @@ class TestHostComponent {
 	public breadcrumbConfig?: StarkBreadcrumbConfig;
 }
 
-describe("DemoBreadcrumbComponent", () => {
+describe("BreadcrumbComponent", () => {
 	let component: StarkBreadcrumbComponent;
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;

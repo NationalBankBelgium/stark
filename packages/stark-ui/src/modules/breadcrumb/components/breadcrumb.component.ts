@@ -71,7 +71,6 @@ export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implement
 			// then refresh the config after every successful transition
 			this.transitionHookDeregisterFn = this.routingService.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, {}, () => {
 				this.breadcrumbConfig = { breadcrumbPaths: this.getPathsFromStateTree() };
-				console.log("breadcrumb: this.breadcrumbConfig  ->  ", this.breadcrumbConfig);
 			});
 		}
 	}
