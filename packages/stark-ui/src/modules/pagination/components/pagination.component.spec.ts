@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs */
+/* tslint:disable:completed-docs no-identical-functions */
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
@@ -275,7 +275,6 @@ describe("PaginationComponent", () => {
 	});
 
 	describe("hasPrevious", () => {
-		/* tslint:disable-next-line:no-identical-functions */
 		beforeEach(() => {
 			component.paginationConfig = {
 				itemsPerPage: 4,
@@ -299,7 +298,6 @@ describe("PaginationComponent", () => {
 	});
 
 	describe("getTotalPages", () => {
-		/* tslint:disable-next-line:no-identical-functions */
 		beforeEach(() => {
 			component.paginationConfig = {
 				itemsPerPage: 4,
@@ -364,7 +362,6 @@ describe("PaginationComponent", () => {
 	});
 
 	describe("goToNext", () => {
-		/* tslint:disable-next-line:no-identical-functions */
 		beforeEach(() => {
 			component.paginationConfig = {
 				itemsPerPage: 4,
@@ -396,7 +393,6 @@ describe("PaginationComponent", () => {
 	});
 
 	describe("goToPrevious", () => {
-		/* tslint:disable-next-line:no-identical-functions */
 		beforeEach(() => {
 			component.paginationConfig = {
 				itemsPerPage: 4,
@@ -428,7 +424,6 @@ describe("PaginationComponent", () => {
 	});
 
 	describe("goToFirst", () => {
-		/* tslint:disable-next-line:no-identical-functions */
 		beforeEach(() => {
 			component.paginationConfig = {
 				itemsPerPage: 4,

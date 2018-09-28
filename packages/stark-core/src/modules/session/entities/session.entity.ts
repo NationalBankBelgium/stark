@@ -7,7 +7,7 @@ import { StarkSession } from "./session.entity.intf";
 export class StarkSessionImpl implements StarkSession {
 	public currentLanguage: string;
 
-	public user: StarkUser | undefined;
+	public user?: StarkUser;
 
 	//public condensedModeEnabled:boolean;
 	//public browser:string;

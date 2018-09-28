@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/*tslint:disable:completed-docs no-identical-functions*/
 import { starkIsIBAN } from "./is-iban.validator.fn";
 
 describe("Validator Function: StarkIsIBAN", () => {

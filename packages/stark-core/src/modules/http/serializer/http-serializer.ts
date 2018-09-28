@@ -14,7 +14,7 @@ export class StarkHttpSerializerImpl<T extends StarkResource> implements StarkHt
 	/**
 	 * Serializable class to be used for serialization.
 	 */
-	protected _type: StarkSerializable | undefined;
+	protected _type?: StarkSerializable;
 
 	/**
 	 * Class constructor

@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/*tslint:disable:completed-docs no-identical-functions*/
 import { starkIsBIC } from "./is-bic.validator.fn";
 
 describe("Validator Function: StarkIsBIC", () => {

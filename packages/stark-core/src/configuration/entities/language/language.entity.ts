@@ -31,6 +31,8 @@ export class StarkLanguageImpl implements StarkLanguage {
 		}
 	}
 
+	// FIXME: this tslint disable flag is due to a bug in 'no-identical-functions' rule (https://github.com/SonarSource/SonarTS/issues/676). Remove it once it is solved
+	/*tslint:disable-next-line:no-identical-functions*/
 	public get region(): string {
 		if (this.isoCode.length === 5) {
 			return this.isoCode.substr(3, 2);

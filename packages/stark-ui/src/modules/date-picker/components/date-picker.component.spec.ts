@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs no-identical-functions */
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { EventEmitter } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";

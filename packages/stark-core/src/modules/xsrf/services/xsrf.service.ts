@@ -20,7 +20,7 @@ import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/servic
 @Injectable()
 export class StarkXSRFServiceImpl implements StarkXSRFService {
 	protected xsrfCookieName: string = "XSRF-TOKEN";
-	protected currentToken: string | undefined;
+	protected currentToken?: string;
 
 	public constructor(
 		@Inject(STARK_APP_CONFIG) public appConfig: StarkApplicationConfig,

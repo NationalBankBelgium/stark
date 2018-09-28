@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit, ViewEncapsulation, Renderer2, ElementRef } from "@angular/core";
 import { StarkActionBarConfig } from "./action-bar-config.intf";
-import { StarkAction } from "./action.intf";
+import { StarkAction, StarkActionBarButtonColor } from "./action.intf";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -53,7 +53,7 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 * Default color of the buttons
 	 */
 	@Input()
-	public buttonColor: "primary" | "accent" | "warn" | "success" | "alert" | "alt" | "neutral" | "white" | string = "primary";
+	public buttonColor: StarkActionBarButtonColor | string = "primary";
 
 	/**
 	 * Desired layout or flavour:
