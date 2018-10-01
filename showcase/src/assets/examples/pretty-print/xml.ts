@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-	selector: "pretty-print-example",
-	templateUrl: "./pretty-print.component.html",
-	styleUrls: ["./pretty-print.component.scss"]
+	selector: "demo-pretty-print",
+	templateUrl: "./demo-pretty-print.component.html",
+	styleUrls: ["./demo-pretty-print.component.scss"]
 })
-export class PrettyPrintComponent implements OnInit {
+export class DemoPrettyPrintComponent implements OnInit {
 	public rawXmlData: string;
 
 	public ngOnInit(): void {

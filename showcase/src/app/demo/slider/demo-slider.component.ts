@@ -8,11 +8,11 @@ export enum SLIDER_HANDLES {
 }
 
 @Component({
-	selector: "showcase-demo-slider",
-	templateUrl: "./slider.component.html",
-	styleUrls: ["./slider.component.scss"]
+	selector: "demo-slider",
+	templateUrl: "./demo-slider.component.html",
+	styleUrls: ["./demo-slider.component.scss"]
 })
-export class SliderComponent implements OnInit {
+export class DemoSliderComponent implements OnInit {
 	public SLIDER_HANDLES: typeof SLIDER_HANDLES = SLIDER_HANDLES;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService) {}

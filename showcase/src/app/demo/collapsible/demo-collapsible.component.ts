@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-	selector: "showcase-demo-collapsible",
+	selector: "demo-collapsible",
 	styleUrls: ["./demo-collapsible.component.scss"],
 	templateUrl: "./demo-collapsible.component.html"
 })

@@ -2,8 +2,8 @@
 		dropdownId="numberDropdown"
 		[options]="[1,2,3,4,5,6,7]"
 		[value]="selectedNumber"
-		placeholder="SHOWCASE.DEMO.DROPDOWNS.SELECT_NUMBER"
+		placeholder="Select your lucky number"
 		(dropdownSelectionChanged)="numberDropdownOnChange($event)"
 		[defaultBlank]="true">
 </stark-dropdown>
-<div *ngIf="selectedNumber"> {{'SHOWCASE.DEMO.DROPDOWNS.SELECTED_VALUE' | translate }}: {{ selectedNumber }}</div>
+<div *ngIf="selectedNumber">Selected value: {{ selectedNumber }}</div>

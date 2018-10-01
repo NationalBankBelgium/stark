@@ -7,7 +7,7 @@ import { StarkPaginateEvent, StarkPaginationConfig } from "@nationalbankbelgium/
 	templateUrl: "./demo-pagination.component.html",
 	styleUrls: ["./demo-pagination.component.scss"]
 })
-export class PaginationExampleComponent implements OnInit {
+export class DemoPaginationComponent implements OnInit {
 	public paginationSimpleConfig: StarkPaginationConfig;
 	public paginateEvent: string;
 

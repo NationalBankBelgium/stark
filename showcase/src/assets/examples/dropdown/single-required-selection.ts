@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-	selector: "showcase-demo-dropdown",
-	templateUrl: "./single-required-selection.html"
+	selector: "demo-dropdown",
+	templateUrl: "./demo-dropdown.component.html"
 })
-export class DropdownSingleRequiredSelectionExample implements OnInit {
+export class DemoDropdownComponent implements OnInit {
 	public selectedService: string;
 
 	public serviceDropdownOptions: any[];

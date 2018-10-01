@@ -2,11 +2,11 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
-	selector: "showcase-demo-on-enter-key",
-	styleUrls: ["./on-enter-key.component.scss"],
-	templateUrl: "./on-enter-key.component.html"
+	selector: "demo-on-enter-key",
+	styleUrls: ["./demo-on-enter-key.component.scss"],
+	templateUrl: "./demo-on-enter-key.component.html"
 })
-export class OnEnterKeyComponent implements OnInit {
+export class DemoOnEnterKeyComponent implements OnInit {
 	public latestInputValue: string;
 	public inputValue1: string;
 	public inputValue2: string;

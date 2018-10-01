@@ -1,1 +1,1 @@
-export * from "./date-picker.component";
+export * from "./demo-date-picker.component";

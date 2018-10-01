@@ -2,7 +2,8 @@ import { Component, Inject } from "@angular/core";
 import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
 
 @Component({
-	selector: "showcase-demo-sidebar"
+	selector: "demo-sidebar",
+	templateUrl: "./demo-sidebar.component.html"
 })
 export class DemoSidebarComponent {
 	public constructor(@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService) {}

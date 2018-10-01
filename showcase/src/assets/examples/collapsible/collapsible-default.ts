@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 
 @Component({
-	selector: "showcase-demo-collapsible",
+	selector: "demo-collapsible",
 	templateUrl: "./demo-collapsible.component.html"
 })
-export class CollapsibleExample {
+export class DemoCollapsibleComponent {
 	public collapsed: boolean = false;
 
 	public constructor() {

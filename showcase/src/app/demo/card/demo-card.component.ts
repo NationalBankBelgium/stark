@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
-	selector: "showcase-demo-card",
+	selector: "demo-card",
 	styleUrls: ["./demo-card.component.scss"],
 	templateUrl: "./demo-card.component.html",
 	encapsulation: ViewEncapsulation.None //used here to be able to customize the stark-full-width background color

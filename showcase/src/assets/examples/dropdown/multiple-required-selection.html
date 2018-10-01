@@ -4,9 +4,9 @@
 		[value]="selectedRequiredServices"
 		optionIdProperty="id"
 		optionLabelProperty="value"
-		placeholder="SHOWCASE.DEMO.DROPDOWNS.SELECT_ONE_SERVICE"
+		placeholder="Select at least one service"
 		(dropdownSelectionChanged)="multipleServicesRequiredDropdownOnChange($event)"
 		multipleSelect="true"
 		required>
 </stark-dropdown>
-<div *ngIf="selectedRequiredServices">{{'SHOWCASE.DEMO.DROPDOWNS.SELECTED_VALUES' | translate }}: {{ selectedRequiredServices }}</div>
+<div *ngIf="selectedRequiredServices">Selected values: {{ selectedRequiredServices }}</div>

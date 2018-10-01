@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 
 @Component({
-	selector: "showcase-demo-dropdown",
-	templateUrl: "./single-blank-selection.html"
+	selector: "demo-dropdown",
+	templateUrl: "./demo-dropdown.component.html"
 })
-export class DropdownSingleBlankSelectionComponent {
+export class DemoDropdownComponent {
 	public selectedNumber: string;
 
 	public numberDropdownOnChange(selectedValue: string): void {

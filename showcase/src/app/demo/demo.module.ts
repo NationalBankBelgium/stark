@@ -14,25 +14,25 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { TranslateModule } from "@ngx-translate/core";
-import { ActionBarComponent } from "./action-bar/action-bar.component";
-import { DemoBreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
+import { DemoActionBarComponent } from "./action-bar/demo-action-bar.component";
+import { DemoBreadcrumbComponent } from "./breadcrumb/demo-breadcrumb.component";
 import { DemoCardComponent } from "./card/demo-card.component";
 import { DemoColorsComponent } from "./colors/demo-colors.component";
-import { ButtonComponent } from "./button/button.component";
-import { DatePickerComponent } from "./date-picker/date-picker.component";
-import { DateRangePickerComponent } from "./date-range-picker/date-range-picker.component";
+import { DemoButtonComponent } from "./button/demo-button.component";
+import { DemoDatePickerComponent } from "./date-picker/demo-date-picker.component";
+import { DemoDateRangePickerComponent } from "./date-range-picker/demo-date-range-picker.component";
 import { DemoCollapsibleComponent } from "./collapsible/demo-collapsible.component";
 import { DemoSidebarComponent } from "./sidebar/demo-sidebar.component";
 import { DemoDropdownComponent } from "./dropdown/demo-dropdown.component";
-import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
-import { HeaderComponent } from "./header/header.component";
+import { DemoExampleViewerComponent } from "./example-viewer/demo-example-viewer.component";
+import { DemoHeaderComponent } from "./header/demo-header.component";
 import { DemoFooterComponent } from "./footer/demo-footer.component";
-import { KeyboardDirectivesComponent } from "./keyboard-directives/keyboard-directives.component";
+import { DemoKeyboardDirectivesComponent } from "./keyboard-directives/demo-keyboard-directives.component";
 import { DemoLanguageSelectorComponent } from "./language-selector/demo-language-selector.component";
-import { LogoutComponent } from "./logout/logout.component";
+import { DemoLogoutComponent } from "./logout/demo-logout.component";
 import { DemoPaginationComponent } from "./pagination/demo-pagination.component";
 import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
-import { SliderComponent } from "./slider/slider.component";
+import { DemoSliderComponent } from "./slider/demo-slider.component";
 import { DemoTableComponent } from "./table/demo-table.component";
 import { DemoTypographyComponent } from "./typography/demo-typography.component";
 import { DemoToastComponent } from "./toast/demo-toast-notification.component";
@@ -73,70 +73,66 @@ import {
 		TranslateModule,
 		SharedModule,
 		StarkActionBarModule,
+		StarkAppLogoutModule,
 		StarkBreadcrumbModule,
+		StarkCollapsibleModule,
+		StarkDatePickerModule,
+		StarkDateRangePickerModule,
 		StarkDropdownModule,
 		StarkKeyboardDirectivesModule,
 		StarkLanguageSelectorModule,
 		StarkPaginationModule,
 		StarkPrettyPrintModule,
-		StarkDatePickerModule,
-		StarkDateRangePickerModule,
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
-		StarkTableModule,
-		StarkCollapsibleModule,
-		StarkAppLogoutModule
+		StarkTableModule
 	],
 	declarations: [
-		ActionBarComponent,
+		DemoActionBarComponent,
 		DemoBreadcrumbComponent,
-		ButtonComponent,
-		DemoCollapsibleComponent,
-		DatePickerComponent,
-		DateRangePickerComponent,
+		DemoButtonComponent,
 		DemoCardComponent,
+		DemoCollapsibleComponent,
 		DemoColorsComponent,
+		DemoDatePickerComponent,
+		DemoDateRangePickerComponent,
 		DemoDropdownComponent,
-		DemoTypographyComponent,
-		ExampleViewerComponent,
-		HeaderComponent,
+		DemoExampleViewerComponent,
+		DemoHeaderComponent,
 		DemoFooterComponent,
-		KeyboardDirectivesComponent,
+		DemoKeyboardDirectivesComponent,
 		DemoLanguageSelectorComponent,
-		LogoutComponent,
+		DemoLogoutComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
-		SliderComponent,
-		DemoToastComponent,
-		DatePickerComponent,
-		DateRangePickerComponent,
 		DemoSidebarComponent,
-		ExampleViewerComponent,
-		KeyboardDirectivesComponent,
-		DemoTableComponent
+		DemoSliderComponent,
+		DemoTableComponent,
+		DemoToastComponent,
+		DemoTypographyComponent
 	],
 	exports: [
-		ActionBarComponent,
+		DemoActionBarComponent,
 		DemoBreadcrumbComponent,
+		DemoButtonComponent,
 		DemoCardComponent,
-		DemoColorsComponent,
-		ButtonComponent,
-		DatePickerComponent,
-		DateRangePickerComponent,
-		DemoDropdownComponent,
 		DemoCollapsibleComponent,
-		DemoTypographyComponent,
-		ExampleViewerComponent,
-		HeaderComponent,
+		DemoColorsComponent,
+		DemoDatePickerComponent,
+		DemoDateRangePickerComponent,
+		DemoDropdownComponent,
+		DemoExampleViewerComponent,
+		DemoHeaderComponent,
 		DemoFooterComponent,
-		KeyboardDirectivesComponent,
+		DemoKeyboardDirectivesComponent,
 		DemoLanguageSelectorComponent,
-		LogoutComponent,
+		DemoLogoutComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
-		SliderComponent,
+		DemoSliderComponent,
 		DemoTableComponent,
-		DemoToastComponent
+		DemoToastComponent,
+		DemoTypographyComponent
 	],
 	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]
 })
