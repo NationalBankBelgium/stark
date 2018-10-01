@@ -1,27 +1,22 @@
 /* tslint:disable:completed-docs */
-/* angular imports */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
-/* stark-core imports */
 import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig } from "@nationalbankbelgium/stark-core";
-
-import { TranslateModule } from "@ngx-translate/core";
-
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-/* stark-ui imports */
-import { StarkSessionExpiredPageComponent } from "./session-expired-page.component";
 import { MatButtonModule } from "@angular/material/button";
+import { TranslateModule } from "@ngx-translate/core";
+import { StarkSessionExpiredPageComponent } from "./session-expired-page.component";
 
-describe("StarkSessionExpiredPageComponent", () => {
+describe("SessionExpiredPageComponent", () => {
 	let component: StarkSessionExpiredPageComponent;
 	let fixture: ComponentFixture<StarkSessionExpiredPageComponent>;
 
+	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 	const mockStarkAppConfig: Partial<StarkApplicationConfig> = {
 		baseUrl: "base-url"
 	};
 
 	beforeEach(async(() => {
-		const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 		return TestBed.configureTestingModule({
 			declarations: [StarkSessionExpiredPageComponent],
 			imports: [CommonModule, MatButtonModule, TranslateModule.forRoot()],

@@ -43,7 +43,7 @@ class TestHostComponent {
 	public mode: StarkLanguageSelectorMode;
 }
 
-describe("StarkLanguageSelectorComponent", () => {
+describe("LanguageSelectorComponent", () => {
 	let component: StarkLanguageSelectorComponent;
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;
