@@ -1,1 +1,1 @@
-export * from "./keyboard-directives.component";
+export * from "./demo-keyboard-directives.component";

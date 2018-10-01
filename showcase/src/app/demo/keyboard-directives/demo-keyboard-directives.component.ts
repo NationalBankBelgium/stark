@@ -2,11 +2,11 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
-	selector: "showcase-demo-on-enter-key",
-	styleUrls: ["./keyboard-directives.component.scss"],
-	templateUrl: "./keyboard-directives.component.html"
+	selector: "demo-keyboard-directives",
+	styleUrls: ["./demo-keyboard-directives.component.scss"],
+	templateUrl: "./demo-keyboard-directives.component.html"
 })
-export class KeyboardDirectivesComponent implements OnInit {
+export class DemoKeyboardDirectivesComponent implements OnInit {
 	public latestInputValue: string;
 	public inputValue1: string;
 	public inputValue2: string;
@@ -42,7 +42,7 @@ export class KeyboardDirectivesComponent implements OnInit {
 				if (paramValues.length === 5) {
 					// the context of the host component was passed in the last parameter
 					// so we can access all properties/methods from the component
-					const parentComponentContext: KeyboardDirectivesComponent = paramValues[4];
+					const parentComponentContext: DemoKeyboardDirectivesComponent = paramValues[4];
 					parentComponentContext.updateLogging(parentComponentContext.inputValue3, paramValues);
 				}
 				break;

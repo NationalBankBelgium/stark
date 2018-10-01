@@ -8,14 +8,14 @@ import {
 } from "@nationalbankbelgium/stark-ui";
 
 @Component({
-	selector: "toast-example",
-	styleUrls: ["./toast-example.component.scss"],
-	templateUrl: "./toast-example.component.html"
+	selector: "demo-toast",
+	styleUrls: ["./demo-toast.component.scss"],
+	templateUrl: "./demo-toast.component.html"
 })
 /**
  * Example component for the toast notifications
  */
-export class ToastExample {
+export class DemoToastComponent {
 	/**
 	 * Message, or ID of message you want to display in the toast (translations applies).
 	 */
@@ -103,6 +103,6 @@ export class ToastExample {
 	 * Hides the currently displayed toast
 	 */
 	public hideToast(): void {
-		this.toastService.hide(StarkToastNotificationResult.HIDDEN);
+		this.toastService.hide();
 	}
 }

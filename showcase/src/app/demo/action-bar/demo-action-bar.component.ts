@@ -3,10 +3,10 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkAction, StarkActionBarConfig } from "@nationalbankbelgium/stark-ui";
 
 @Component({
-	selector: "showcase-demo-action-bar",
-	templateUrl: "./action-bar.component.html"
+	selector: "demo-action-bar",
+	templateUrl: "./demo-action-bar.component.html"
 })
-export class ActionBarComponent implements OnInit {
+export class DemoActionBarComponent implements OnInit {
 	public actions: StarkAction[];
 	public actionBarConfig: StarkActionBarConfig;
 	public alternativeActions: StarkAction[];

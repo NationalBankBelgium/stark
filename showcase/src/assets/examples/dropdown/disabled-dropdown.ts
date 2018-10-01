@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-	selector: "showcase-demo-dropdown",
-	templateUrl: "./disabled-dropdown.html"
+	selector: "demo-dropdown",
+	templateUrl: "./demo-dropdown.component.html"
 })
-export class DropdownDisabledComponent {}
+export class DemoDropdownComponent {}

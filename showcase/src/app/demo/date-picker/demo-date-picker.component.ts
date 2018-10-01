@@ -3,13 +3,11 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkDatePickerFilter } from "@nationalbankbelgium/stark-ui";
 
 @Component({
-	selector: "showcase-demo-date-range-picker",
-	templateUrl: "./date-range-picker.component.html"
+	selector: "demo-date-picker",
+	templateUrl: "./demo-date-picker.component.html"
 })
-export class DateRangePickerComponent implements OnInit {
-	public isDisabled: boolean;
-	public startDate: Date;
-	public endDate: Date;
+export class DemoDatePickerComponent implements OnInit {
+	public currentDate: Date;
 	public minDate: Date;
 	public maxDate: Date;
 	public customDateFilter: StarkDatePickerFilter;
@@ -17,20 +15,18 @@ export class DateRangePickerComponent implements OnInit {
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
 	public ngOnInit(): void {
-		this.startDate = new Date();
-		this.endDate = new Date();
-		this.endDate.setMonth(this.endDate.getMonth() + 1);
+		this.currentDate = new Date();
 		this.minDate = new Date();
 		this.maxDate = new Date();
 		this.maxDate.setMonth(this.maxDate.getMonth() + 6);
 
 		this.customDateFilter = (date: Date): boolean => {
 			const day: number = date.getDay();
-			return day !== 0;
+			return day === 3;
 		};
 	}
 
-	public onDateChanged(event: Object): void {
-		this.logger.debug(event);
+	public onDateChanged(date: Date): void {
+		this.logger.debug(date);
 	}
 }

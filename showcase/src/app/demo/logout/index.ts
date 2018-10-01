@@ -1,1 +1,1 @@
-export * from "./logout.component";
+export * from "./demo-logout.component";

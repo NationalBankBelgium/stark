@@ -1,1 +1,1 @@
-export * from "./example-viewer.component";
+export * from "./demo-example-viewer.component";

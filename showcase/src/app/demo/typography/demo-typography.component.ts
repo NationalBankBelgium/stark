@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
-	selector: "showcase-demo-typography",
+	selector: "demo-typography",
 	templateUrl: "./demo-typography.component.html"
 })
 export class DemoTypographyComponent implements OnInit {

@@ -10,11 +10,11 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 
 @Component({
 	selector: "demo-table",
-	styleUrls: ["./demo-table-regular.component.scss"],
-	templateUrl: "./demo-table-regular.component.html",
+	styleUrls: ["./demo-table.component.scss"],
+	templateUrl: "./demo-table.component.html",
 	encapsulation: ViewEncapsulation.None
 })
-export class TableExample implements OnInit {
+export class DemoTableComponent implements OnInit {
 	public getTitle = (data: any): string => {
 		return "~" + data.title.label;
 	};

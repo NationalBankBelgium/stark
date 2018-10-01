@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 @Component({
-	selector: "showcase-demo-dropdown",
+	selector: "demo-dropdown",
 	styleUrls: ["./demo-dropdown.component.scss"],
 	templateUrl: "./demo-dropdown.component.html",
 	encapsulation: ViewEncapsulation.None //used here to be able to customize the example-viewer background color

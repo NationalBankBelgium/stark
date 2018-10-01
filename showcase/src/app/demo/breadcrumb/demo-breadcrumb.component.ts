@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkBreadcrumbConfig } from "@nationalbankbelgium/stark-ui";
+
 const componentName: string = "demo-breadcrumb";
 
 /**
@@ -8,7 +9,7 @@ const componentName: string = "demo-breadcrumb";
  */
 @Component({
 	selector: "demo-breadcrumb",
-	templateUrl: "./breadcrumb.component.html"
+	templateUrl: "./demo-breadcrumb.component.html"
 })
 export class DemoBreadcrumbComponent implements OnInit {
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}

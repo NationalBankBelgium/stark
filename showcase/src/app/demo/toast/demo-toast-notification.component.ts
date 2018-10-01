@@ -9,7 +9,7 @@ import {
 } from "@nationalbankbelgium/stark-ui";
 
 @Component({
-	selector: "showcase-demo-toast-notification",
+	selector: "demo-toast-notification",
 	styleUrls: ["./demo-toast-notification.component.scss"],
 	templateUrl: "./demo-toast-notification.component.html"
 })

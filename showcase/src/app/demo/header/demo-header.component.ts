@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
-	selector: "showcase-demo-header",
-	templateUrl: "./header.component.html"
+	selector: "demo-header",
+	templateUrl: "./demo-header.component.html"
 })
-export class HeaderComponent implements OnInit {
+export class DemoHeaderComponent implements OnInit {
 	public headerHtml: string;
 	public importSCSS: string;
 
