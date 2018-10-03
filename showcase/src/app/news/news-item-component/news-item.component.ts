@@ -4,7 +4,6 @@ const componentName: string = "news-item-component";
 
 @Component({
 	selector: "news-item",
-	styleUrls: ["./_news-item.component.scss"],
 	templateUrl: "./news-item.component.html"
 })
 export class NewsItemComponent implements OnInit {
