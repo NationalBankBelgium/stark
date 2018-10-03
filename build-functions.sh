@@ -42,15 +42,17 @@ runRollup() {
       exit 1
     elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
       local DISPLAYED_TRACE=false
-      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Unresolved\ dependencies.* ]]; then
+      if [[ $ROLLUP_RESULTS =~ .*Unresolved\ dependencies.* ]]; then
         DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected." 2
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected. Please adapt rollup.config.common-data.js to solve this $ROLLUP_RESULTS"
+        exit 1
       fi
-      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Missing\ global\ variable\ name.* ]]; then
+      if [[ $ROLLUP_RESULTS =~ .*Missing\ global\ variable\ name.* ]]; then
         DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name detected." 2
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name detected. Please adapt rollup.config.common-data.js to solve this $ROLLUP_RESULTS"
+        exit 1
       fi
-      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Circular\ dependency.* ]]; then
+      if [[ $ROLLUP_RESULTS =~ .*Circular\ dependency.* ]]; then
         DISPLAYED_TRACE=true
         logInfo "${FUNCNAME[0]}: Rollup - (!) Circular dependency detected." 2
       fi
@@ -117,26 +119,28 @@ rollupIndex() {
   if [[ -f ${in_file} ]]; then
     logTrace "Executing rollup with $ROLLUP -c ${ROLLUP_CONFIG_PATH} -i ${in_file} -o ${out_file} --banner \"$BANNER_TEXT\" 2>&1" 2
     
-    # If this execution of rollup ends up with warnings like "(!) Unresolved dependencies..."
-    # Then adapt rollup.config.common-data.js in order to include the missing globals!
-    # Note that this execution of rollup MUST NOT include globals/external libs like rxjs, angular, ...
-    # For this usage scenario, the client app is supposed to import those dependencies on their own (e.g., script tag above on the page)
     local ROLLUP_RESULTS=`$ROLLUP -c ${ROLLUP_CONFIG_PATH} -i ${in_file} -o ${out_file} --banner "$BANNER_TEXT" 2>&1`
     
     if [[ $ROLLUP_RESULTS =~ ^.*\[\!\].* ]]; then
       logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
       exit 1
     elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
+      # If this execution of rollup ends up with warnings like "(!) Unresolved dependencies..." or "(!) Missing global variable name..."
+      # Then adapt rollup.config.common-data.js in order to include the missing globals and/or externals!
+      # Note that this execution of rollup MUST NOT include globals/external libs like rxjs, angular, ...
+      # For this usage scenario, the client app is supposed to import those dependencies on their own (e.g., script tag above on the page)
       local DISPLAYED_TRACE=false
-      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Unresolved\ dependencies.* ]]; then
+      if [[ $ROLLUP_RESULTS =~ .*Unresolved\ dependencies.* ]]; then
         DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected." 2
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected. Please adapt rollup.config.common-data.js to solve this. $ROLLUP_RESULTS"
+        exit 1
       fi
-      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Missing\ global\ variable\ name.* ]]; then
+      if [[ $ROLLUP_RESULTS =~ .*Missing\ global\ variable\ name.* ]]; then
         DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name detected." 2
+        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name detected. Please adapt rollup.config.common-data.js to solve this. $ROLLUP_RESULTS"
+        exit 1
       fi
-      if [[ $ROLLUP_RESULTS =~ .*\(\!\)\ Circular\ dependency.* ]]; then
+      if [[ $ROLLUP_RESULTS =~ .*Circular\ dependency.* ]]; then
         DISPLAYED_TRACE=true
         logInfo "${FUNCNAME[0]}: Rollup - (!) Circular dependency detected." 2
       fi
@@ -145,7 +149,7 @@ rollupIndex() {
       fi
     fi
 
-    logTrace "${FUNCNAME[0]}: Rollup execution output (do not mind the unresolved dependencies!): $ROLLUP_RESULTS" 2
+    logTrace "${FUNCNAME[0]}: Rollup execution output: $ROLLUP_RESULTS" 2
   fi
 
   # Recurse for sub directories

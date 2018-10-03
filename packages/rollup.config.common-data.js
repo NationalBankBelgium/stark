@@ -10,6 +10,7 @@ const globals = {
 	"@angularclass/hmr": "angularclass.hmr",
 	"@angular/cdk": "ng.cdk",
 	"@angular/cdk/collections": "ng.cdk.collections",
+	"@angular/cdk/layout": "ng.cdk.layout",
 	"@angular/core": "ng.core",
 	"@angular/common": "ng.common",
 	"@angular/common/http": "ng.common.http",
@@ -21,6 +22,7 @@ const globals = {
 	"@angular/material/core": "ngMaterial.core",
 	"@angular/material/datepicker": "ngMaterial.datepicker",
 	"@angular/material/dialog": "ngMaterial.dialog",
+	"@angular/material/divider": "ngMaterial.divider",
 	"@angular/material/expansion": "ngMaterial.expansion",
 	"@angular/material/icon": "ngMaterial.icon",
 	"@angular/material/input": "ngMaterial.input",
@@ -72,7 +74,9 @@ const globals = {
 };
 
 const plugins = [
-	resolve(),
+	resolve({
+		only: ["tslib"] // "tslib" should be the ONLY ONE resolved, the rest should be marked as externals!
+	}),
 	commonjs(), // converts date-fns to ES modules
 	sourcemaps()
 ];
