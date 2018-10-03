@@ -149,6 +149,11 @@
         "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram",
         "TITLE": "Stark logout"
       },
+      "MENU": {
+        "SIMPLE": "Simple menu",
+        "SECTIONS": "Menu with sections",
+        "TITLE": "Stark menu"
+      },
       "PAGINATION": {
         "ADVANCED_CONFIGURATION": "Pagination met geavanceerde configuratie",
         "COMPACT_CONFIGURATION": "Pagination in compacte modus",

@@ -193,7 +193,7 @@ $warning-palette: (
 $backgrounds: (
   status-bar: map_get($mat-grey, 300),
   app-bar: map_get($mat-grey, 100),
-  background: #f6f9fa,
+  background: #fafafa,
   background-light: rgba(#000, 0.02),
   hover: rgba(black, 0.04),
   card: #fff,
@@ -284,7 +284,7 @@ $typography-theme: (
   ),
   button: (
     14px,
-    14px,
+    16px,
     500
   ),
   input: (

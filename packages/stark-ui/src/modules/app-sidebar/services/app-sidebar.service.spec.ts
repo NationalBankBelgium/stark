@@ -12,14 +12,14 @@ describe("AppSidebarService", () => {
 
 	it("openMenu() should raise the correct event", () => {
 		service.openSidebar$.subscribe((event: StarkAppSidebarOpenEvent) => {
-			expect(event).toEqual({ mode: "menu", sidebar: "left" });
+			expect(event).toEqual({ type: "menu", sidebar: "left" });
 		});
 		service.openMenu();
 	});
 
 	it("openLeft() should raise the correct event", () => {
 		service.openSidebar$.subscribe((event: StarkAppSidebarOpenEvent) => {
-			expect(event).toEqual({ mode: "regular", sidebar: "left" });
+			expect(event).toEqual({ type: "regular", sidebar: "left" });
 		});
 		service.openLeft();
 	});
@@ -38,5 +38,12 @@ describe("AppSidebarService", () => {
 		});
 		service.close();
 		expect(closeSidebars).toHaveBeenCalledTimes(1);
+	});
+
+	it("toggleMenu() should raise the correct event", () => {
+		service.toggleSidebar$.subscribe((event: StarkAppSidebarOpenEvent) => {
+			expect(event).toEqual({ type: "menu", sidebar: "left" });
+		});
+		service.toggleMenu();
 	});
 });

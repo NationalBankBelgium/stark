@@ -1,0 +1,27 @@
+/* ============================================================================== */
+/*  S t a r k   A p p   M e n u                                                  */
+/* ============================================================================== */
+/* stark-ui: src/modules/app-menu/components/_app-menu-theme.scss */
+
+.stark-app-menu {
+  .mat-expansion-panel:not([class*="mat-elevation-z"]) {
+    background: none;
+    box-shadow: none;
+    .mat-expansion-panel-body {
+      background: none;
+      padding: 0;
+    }
+  }
+
+  .mat-list-item {
+    &.stark-disabled {
+      opacity: 0.3;
+      cursor: default;
+      &:hover {
+        background: none;
+      }
+    }
+  }
+}
+
+/* END stark-ui: src/modules/app-menu/components/_app-menu-theme.scss */

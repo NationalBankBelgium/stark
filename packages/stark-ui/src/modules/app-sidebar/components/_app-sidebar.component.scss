@@ -22,6 +22,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    &.stark-app-sidenav-menu {
+      display: block;
+    }
+  }
+
+  .stark-app-sidenav-menu {
+    &.stark-app-sidenav-menu-shifting {
+      margin-top: $stark-header-size-desktop;
+    }
   }
 
   .stark-app-sidenav-left {
@@ -31,15 +40,21 @@
     width: 300px;
   }
   .stark-app-sidenav-menu {
-    margin-top: $stark-header-size;
-    width: 200px;
+    width: 280px;
   }
 }
 
 @media #{$tablet-query} {
   .stark-app-sidebar {
-    .stark-app-sidenav-menu,
     .mat-sidenav-content {
+      margin-top: $stark-header-size-desktop;
+    }
+  }
+}
+
+@media #{$desktop-lg-query} {
+  .stark-app-sidebar {
+    .stark-app-sidenav-menu {
       margin-top: $stark-header-size-desktop;
     }
   }

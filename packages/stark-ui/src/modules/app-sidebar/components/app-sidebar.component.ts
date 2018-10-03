@@ -1,11 +1,11 @@
-import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, Inject, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
+import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { from, Subscription } from "rxjs";
 import { MatSidenav, MatSidenavContainer, MatDrawerToggleResult } from "@angular/material/sidenav";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAppSidebarOpenEvent, StarkAppSidebarService, STARK_APP_SIDEBAR_SERVICE } from "../services";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
-export type StarkAppSidebarLeftMode = "regular" | "menu";
+export type StarkAppSidebarLeftMode = "regular" | "menu" | undefined;
 
 /**
  * Name of the component
@@ -20,18 +20,11 @@ const componentName: string = "stark-app-sidebar";
 	selector: "stark-app-sidebar",
 	templateUrl: "./app-sidebar.component.html",
 	encapsulation: ViewEncapsulation.None,
-	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
 	}
 })
-export class StarkAppSidebarComponent extends AbstractStarkUiComponent implements OnDestroy, OnInit {
-	/**
-	 * Mode for the left sidebar: either the menu is shown or the regular sidebar
-	 */
-	@Input()
-	public sidenavLeftMode: StarkAppSidebarLeftMode;
-
+export class StarkAppSidebarComponent implements OnDestroy, OnInit {
 	/**
 	 * Reference to the MatSidenavContainer embedded in this component
 	 */
@@ -51,42 +44,83 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	public appSidenavRight: MatSidenav;
 
 	/**
-	 * Subscription to the open sidebar Observable
-	 */
-	public openSidebarSubscription: Subscription;
-
-	/**
 	 * Subscription to the close sidebar Observable
 	 */
 	public closeSidebarSubscription: Subscription;
 
 	/**
+	 * Boolean that indicates if the left sidebar menu is currently shifting from larger to smaller desktop
+	 * In this case, it should wait that the transition is finished before applying the smaller screen styles
+	 */
+	public isShiftingToSmaller: boolean = false;
+
+	//TODO: move this media query to global variable that can be used through stark-ui
+	/**
+	 * Media query for big screens
+	 */
+	public mediaQueryGtLg: string = "(min-width: 1280px)";
+
+	/**
+	 * Subscription to the open sidebar Observable
+	 */
+	public openSidebarSubscription: Subscription;
+
+	/**
+	 * Dynamic mode for the menu, should always show on large desktop screen
+	 */
+	public sidenavLeftType?: "menu" | "regular" = "menu";
+
+	/**
+	 * Dynamic mode for the left sidebar
+	 */
+	public sidenavLeftMode: string;
+
+	/**
+	 * Either the left sidebar is opened or not
+	 */
+	public sidenavLeftOpened: boolean;
+
+	/**
+	 * Subscription to the close sidebar Observable
+	 */
+	public toggleSidebarSubscription: Subscription;
+
+	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
 	 * @param sidebarService - The sidebar service of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef
-	) {
-		super(renderer, elementRef);
-	}
+		public breakpointObserver: BreakpointObserver
+	) {}
 
 	/**
 	 * Component lifecycle OnInit hook
 	 */
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": component initialized");
+
+		if (this.breakpointObserver.isMatched([this.mediaQueryGtLg])) {
+			this.sidenavLeftOpened = true;
+		} else {
+			this.sidenavLeftOpened = false;
+		}
+
 		this.openSidebarSubscription = this.sidebarService.openSidebar$.subscribe((event: StarkAppSidebarOpenEvent) => {
-			this.onOpenSideNav(event);
+			this.onOpenSidenav(event);
 		});
 
 		this.closeSidebarSubscription = this.sidebarService.closeSidebar$.subscribe(() => {
-			this.onCloseSideNavs();
+			this.onCloseSidenavs();
+		});
+
+		this.toggleSidebarSubscription = this.sidebarService.toggleSidebar$.subscribe((event: StarkAppSidebarOpenEvent) => {
+			this.onToggleSidenav(event);
+		});
+
+		this.breakpointObserver.observe([this.mediaQueryGtLg]).subscribe((state: BreakpointState) => {
+			this.onObserveBreakpoints(state);
 		});
 	}
 
@@ -100,24 +134,54 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	}
 
 	/**
+	 * Close one of the sidenavs
+	 * @param sidenav - The sidebar to close
+	 */
+	public closeSidenav(sidenav: MatSidenav, successHandler: ((value: MatDrawerToggleResult) => void)): void {
+		from(sidenav.close()).subscribe(successHandler, this.displayErrorFallback);
+	}
+
+	/**
+	 * Fallback function when the sidenav has opened with success
+	 * @param result: MatDrawerToggleResult
+	 */
+	private displaySuccessFallback: ((value: MatDrawerToggleResult) => void) = (result: MatDrawerToggleResult) => {
+		this.logger.debug(componentName + result);
+	};
+
+	/**
+	 * Fallback function when the sidenav opening raise an error
+	 * * @param error: Error
+	 */
+	private displayErrorFallback: ((error: Error) => void) = (error: Error) => {
+		this.logger.warn(componentName + ": ", error);
+	};
+
+	/**
+	 * Close sidenav handler
+	 */
+	public onCloseSidenavs(): void {
+		this.appSidenavContainer.close();
+	}
+
+	/**
 	 * Open sidenav handler
 	 */
-	public onOpenSideNav(event: StarkAppSidebarOpenEvent): void {
-		if (event.mode) {
-			this.sidenavLeftMode = event.mode;
-		}
+	public onOpenSidenav(event: StarkAppSidebarOpenEvent): void {
 		switch (event.sidebar) {
 			case "left":
-				from(this.appSidenavLeft.open()).subscribe(
-					(result: MatDrawerToggleResult) => this.logger.debug(componentName + ": left sidenav " + result),
-					(error: Error) => this.logger.warn(componentName + ": ", error)
-				);
+				if (this.sidenavLeftType !== event.type && this.appSidenavLeft.opened) {
+					this.closeSidenav(this.appSidenavLeft, this.shiftLeftSidenavFallback);
+				} else if (!this.appSidenavLeft.opened) {
+					this.sidenavLeftType = event.type;
+					this.setComponentBehaviour();
+					this.openSidenav(this.appSidenavLeft);
+				}
 				break;
 			case "right":
-				from(this.appSidenavRight.open()).subscribe(
-					(result: MatDrawerToggleResult) => this.logger.debug(componentName + ": right sidebar " + result),
-					(error: Error) => this.logger.warn(componentName + ": ", error)
-				);
+				if (!this.appSidenavRight.opened) {
+					this.openSidenav(this.appSidenavRight);
+				}
 				break;
 			default:
 				break;
@@ -125,9 +189,87 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	}
 
 	/**
-	 * Close sidenav handler
+	 * Breakpoints change handler
 	 */
-	public onCloseSideNavs(): void {
-		this.appSidenavContainer.close();
+	public onObserveBreakpoints(state: BreakpointState): void {
+		//Enter large desktop screen
+		if (state.matches) {
+			if (this.sidenavLeftType === "menu") {
+				this.sidenavLeftMode = "side";
+				if (!this.appSidenavLeft.opened) {
+					this.openSidenav(this.appSidenavLeft);
+				}
+			}
+		}
+		//Enter smaller screens
+		else {
+			if (this.sidenavLeftType === "menu") {
+				if (this.appSidenavLeft.opened) {
+					this.isShiftingToSmaller = true;
+					this.closeSidenav(this.appSidenavLeft, (result: MatDrawerToggleResult) => {
+						this.logger.debug(componentName + ": sidenav " + result);
+						this.isShiftingToSmaller = false;
+					});
+				} else {
+					this.sidenavLeftMode = "over";
+				}
+			}
+		}
 	}
+
+	/**
+	 * Toggle sidenav handler
+	 */
+	public onToggleSidenav(event: StarkAppSidebarOpenEvent): void {
+		switch (event.sidebar) {
+			case "left":
+				this.sidenavLeftType = event.type;
+				if (this.appSidenavLeft.opened) {
+					this.closeSidenav(this.appSidenavLeft, this.displaySuccessFallback);
+				} else {
+					this.setComponentBehaviour();
+					this.openSidenav(this.appSidenavLeft);
+				}
+				break;
+			case "right":
+				from(this.appSidenavRight.toggle()).subscribe(this.displaySuccessFallback, this.displayErrorFallback);
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Open one of the sidenavs
+	 * @param sidenav - The sidebar to open
+	 */
+	public openSidenav(sidenav: MatSidenav, successHandler: ((value: MatDrawerToggleResult) => void) = this.displaySuccessFallback): void {
+		from(sidenav.open()).subscribe(successHandler, this.displayErrorFallback);
+	}
+
+	/**
+	 * Set the component with the right settings before opening
+	 */
+	public setComponentBehaviour(): void {
+		if (this.sidenavLeftType === "regular") {
+			this.sidenavLeftMode = "over";
+		} else {
+			if (this.breakpointObserver.isMatched([this.mediaQueryGtLg])) {
+				this.sidenavLeftMode = "side";
+			} else {
+				this.sidenavLeftMode = "over";
+			}
+		}
+	}
+
+	/**
+	 * Fallback function when the left sidenav needs to shift type
+	 * @param result: MatDrawerToggleResult
+	 */
+	public shiftLeftSidenavFallback: ((value: MatDrawerToggleResult) => void) = (result: MatDrawerToggleResult) => {
+		this.logger.debug(componentName + ": sidenav " + result);
+		this.sidenavLeftType = this.sidenavLeftType === "menu" ? "regular" : "menu";
+		this.setComponentBehaviour();
+		this.openSidenav(this.appSidenavLeft);
+	};
 }

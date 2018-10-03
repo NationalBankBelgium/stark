@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
-		) {
+	) {
 		this.routingService.addTransitionHook("ON_SUCCESS", {}, () => {
 			this.sidebarService.close();
 		});

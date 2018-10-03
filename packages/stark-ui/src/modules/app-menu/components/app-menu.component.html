@@ -1,0 +1,15 @@
+<nav>
+	<ng-container *ngIf="hasSections">
+		<section *ngFor="let section of parentMenuConfig.menuSections; trackBy: trackSection">
+			<h2 class="stark-section-title">{{ section.label }}</h2>
+			<mat-nav-list *ngFor="let menuGroup of section.menuGroups">
+				<stark-app-menu-item [level]="1" [menuGroup]="menuGroup"></stark-app-menu-item>
+			</mat-nav-list>
+		</section>
+	</ng-container>
+	<ng-container *ngIf="!hasSections">
+		<mat-nav-list *ngFor="let menuGroup of parentMenuConfig.menuGroups">
+			<stark-app-menu-item [level]="1" [menuGroup]="menuGroup"></stark-app-menu-item>
+		</mat-nav-list>
+	</ng-container>
+</nav>

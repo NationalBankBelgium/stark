@@ -1,4 +1,4 @@
-import {Component, HostBinding, Inject, OnInit, ViewEncapsulation} from "@angular/core";
+import { Component, HostBinding, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,

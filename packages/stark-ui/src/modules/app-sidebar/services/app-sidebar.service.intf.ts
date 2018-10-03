@@ -18,32 +18,42 @@ export const STARK_APP_SIDEBAR_SERVICE: InjectionToken<StarkAppSidebarService> =
  */
 export interface StarkAppSidebarService {
 	/**
-	 * Observable subscribed by components to catch open events
-	 */
-	openSidebar$: Observable<StarkAppSidebarOpenEvent>;
-
-	/**
 	 * Observable subscribed by components to catch close events
 	 */
 	closeSidebar$: Observable<void>;
 
 	/**
-	 * Open sidebar's menu
+	 * Observable subscribed by components to catch open events
+	 */
+	openSidebar$: Observable<StarkAppSidebarOpenEvent>;
+
+	/**
+	 * Observable subscribed by components to catch open events
+	 */
+	toggleSidebar$: Observable<StarkAppSidebarOpenEvent>;
+
+	/**
+	 * close all sidebars
+	 */
+	close(): void;
+
+	/**
+	 * open sidebar's menu
 	 */
 	openMenu(): void;
 
 	/**
-	 * Open the left sidebar
+	 * open the left sidebar
 	 */
 	openLeft(): void;
 
 	/**
-	 * Open the right sidebar
+	 * open the right sidebar
 	 */
 	openRight(): void;
 
 	/**
-	 * Close all sidebars
+	 * toggle sidebar's menu
 	 */
-	close(): void;
+	toggleMenu(): void;
 }

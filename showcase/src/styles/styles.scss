@@ -1,10 +1,9 @@
-@import "theme";
-@import "stark-styles.scss";
-
 @import "~basscss/css/basscss.css";
 @import "~prismjs/themes/prism-okaidia.css";
 
+@import "theme";
+@import "stark-styles.scss";
+@import "../app/app.component.scss";
 @import "../app/news/news-component/news.component";
 @import "../app/news/news-item-component/news-item.component";
-
 @import "../app/shared/reference-block/reference-block.component";
