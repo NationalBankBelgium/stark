@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkBreadcrumbConfig } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../shared/reference-block";
 
 const componentName: string = "demo-breadcrumb";
 
@@ -13,12 +14,20 @@ const componentName: string = "demo-breadcrumb";
 })
 export class DemoBreadcrumbComponent implements OnInit {
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+	public referenceList: ReferenceLink[];
 
 	/**
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": controller initialized");
+
+		this.referenceList = [
+			{
+				label: "Stark Breadcrumb component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkBreadcrumbComponent.html"
+			}
+		];
 	}
 
 	public breadcrumbConfig: StarkBreadcrumbConfig = {

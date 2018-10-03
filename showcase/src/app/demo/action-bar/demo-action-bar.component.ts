@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAction, StarkActionBarConfig } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-action-bar",
@@ -10,6 +11,7 @@ export class DemoActionBarComponent implements OnInit {
 	public actions: StarkAction[];
 	public actionBarConfig: StarkActionBarConfig;
 	public alternativeActions: StarkAction[];
+	public referenceList: ReferenceLink[];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
@@ -59,6 +61,13 @@ export class DemoActionBarComponent implements OnInit {
 				},
 				isEnabled: true,
 				isVisible: true
+			}
+		];
+
+		this.referenceList = [
+			{
+				label: "Stark Action Bar component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkActionBarComponent.html"
 			}
 		];
 

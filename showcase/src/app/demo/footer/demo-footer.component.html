@@ -1,4 +1,4 @@
-<mat-card>
+<section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.FOOTER.TITLE</h1>
 	<p translate>SHOWCASE.DEMO.FOOTER.INTRO</p>
 	<stark-pretty-print [data]="footerHtml" format="html" [enableHighlighting]="true"></stark-pretty-print>
@@ -9,4 +9,5 @@
 		<li [innerHTML]="'SHOWCASE.DEMO.FOOTER.INPUT2'|translate"></li>
 		<li [innerHTML]="'SHOWCASE.DEMO.FOOTER.INPUT3'|translate"></li>
 	</ul>
-</mat-card>
+</section>
+<stark-reference-block [links]="referenceList"></stark-reference-block>

@@ -1,0 +1,32 @@
+/* ============================================================================== */
+/*  S t a r k   R e f e r e n c e   B l o c k                                     */
+/* ============================================================================== */
+/* stark-ui: src/modules/reference-block/components/reference-block.component.scss */
+.stark-reference-block div {
+  background-color: #fff;
+  border: solid 1px color(mat-color($grey-palette, 400));
+  padding: 10px 10px 10px 50px;
+  border-radius: 5px;
+  box-shadow: color(mat-color($grey-palette, 300));
+  position: relative;
+
+  & mat-icon {
+    position: absolute;
+    left: 15px;
+    top: 14px;
+    color: color(mat-color($grey-palette, 700));
+  }
+  & ul {
+    padding: 0;
+  }
+
+  & a {
+    text-decoration: none;
+  }
+  & a:hover {
+    background-color: $offwhite;
+    color: $md-primary;
+  }
+}
+
+/* end src/modules/reference-block/components/reference-block.component.scss  */

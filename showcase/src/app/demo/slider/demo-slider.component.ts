@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkSliderConfig } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../shared/reference-block";
 
 export enum SLIDER_HANDLES {
 	lower = 0,
@@ -13,6 +14,8 @@ export enum SLIDER_HANDLES {
 	styleUrls: ["./demo-slider.component.scss"]
 })
 export class DemoSliderComponent implements OnInit {
+	public referenceList: ReferenceLink[];
+
 	public SLIDER_HANDLES: typeof SLIDER_HANDLES = SLIDER_HANDLES;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService) {}
@@ -105,12 +108,22 @@ export class DemoSliderComponent implements OnInit {
 		}
 	};
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnInit(): void {
 		this.loggingService.debug("Hello from the `Slider` component");
 		this.isSimpleHorizontalSliderEnabled = true;
 		this.isHorizontalRangeSliderEnabled = true;
 		this.isSimpleVerticalSliderEnabled = true;
 		this.isVerticalRangeSliderEnabled = true;
+
+		this.referenceList = [
+			{
+				label: "Stark Slider component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkSliderComponent.html"
+			}
+		];
 	}
 
 	/***

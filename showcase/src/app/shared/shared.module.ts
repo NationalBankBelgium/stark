@@ -1,5 +1,6 @@
 import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
 import { FileService } from "./example-viewer/file.service";
+import { ReferenceBlockComponent } from "./reference-block/reference-block.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
@@ -26,8 +27,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 		TranslateModule
 	],
 	providers: [FileService],
-	declarations: [ExampleViewerComponent],
-	entryComponents: [ExampleViewerComponent],
-	exports: [ExampleViewerComponent, FlexLayoutModule]
+	declarations: [ExampleViewerComponent, ReferenceBlockComponent],
+	entryComponents: [ExampleViewerComponent, ReferenceBlockComponent],
+	exports: [ExampleViewerComponent, ReferenceBlockComponent, FlexLayoutModule]
 })
 export class SharedModule {}

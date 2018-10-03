@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPrettyPrintFormat } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../shared/reference-block";
 
 export interface FileType {
 	format: StarkPrettyPrintFormat;
@@ -21,9 +22,13 @@ export class DemoPrettyPrintComponent implements OnInit {
 	public selectedDataFormat: string;
 	public highlightingEnabled: boolean;
 	public unformattedData: string;
+	public referenceList: ReferenceLink[];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnInit(): void {
 		this.addCss();
 		this.addScss();
@@ -38,6 +43,13 @@ export class DemoPrettyPrintComponent implements OnInit {
 		this.selectedDataFormat = "";
 		this.highlightingEnabled = false;
 		this.dataFormats = this.fileTypes.map((fileType: FileType) => fileType.format);
+
+		this.referenceList = [
+			{
+				label: "Stark Pretty Print component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkPrettyPrintComponent.html"
+			}
+		];
 	}
 
 	public dataFormatDropdownOnChange(selectedValue: string): void {
