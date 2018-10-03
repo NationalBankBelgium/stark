@@ -40,7 +40,8 @@ import {
 	StarkSettingsModule,
 	StarkSettingsService,
 	StarkUser,
-	StarkUserModule
+	StarkUserModule,
+	StarkErrorHandlingModule
 } from "@nationalbankbelgium/stark-core";
 
 import {
@@ -81,7 +82,6 @@ import { NoContentComponent } from "./no-content";
 // load SASS styles
 import "../styles/styles.scss";
 /* tslint:enable */
-
 // TODO: where to put this factory function?
 export function starkAppConfigFactory(): StarkApplicationConfig {
 	const config: any = require("../stark-app-config.json");
@@ -189,6 +189,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkAppLogoutModule,
 		StarkAppMenuModule,
 		StarkAppSidebarModule.forRoot(),
+		StarkErrorHandlingModule.forRoot(),
 		StarkLanguageSelectorModule,
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule,

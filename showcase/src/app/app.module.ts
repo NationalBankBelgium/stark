@@ -20,7 +20,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { DateAdapter } from "@angular/material/core";
-import { SharedModule } from "./shared/shared.module";
+import { SharedModule } from "./shared";
 import { Observable, of } from "rxjs";
 import { filter, map } from "rxjs/operators";
 
@@ -34,6 +34,7 @@ import {
 	StarkApplicationConfigImpl,
 	StarkApplicationMetadata,
 	StarkApplicationMetadataImpl,
+	StarkErrorHandlingModule,
 	StarkHttpModule,
 	StarkLoggingActionTypes,
 	StarkLoggingModule,
@@ -89,6 +90,7 @@ import { NewsModule } from "./news";
 import "../styles/styles.pcss";
 // load SASS styles
 import "../styles/styles.scss";
+import { StarkErrorHandlingEffects } from "./shared/effects/stark-error-handling.effects";
 /* tslint:enable */
 
 // TODO: where to put this factory function?
@@ -195,7 +197,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			name: "Stark Showcase - NgRx Store DevTools", // shown in the monitor page
 			logOnly: environment.production // restrict extension to log-only mode (setting it to false enables all extension features)
 		}),
-		EffectsModule.forRoot([]), // needed to set up the providers required for effects
+		EffectsModule.forRoot([StarkErrorHandlingEffects]), // needed to set up the providers required for effects
 		UIRouterModule.forRoot({
 			states: APP_STATES,
 			useHash: !Boolean(history.pushState),
@@ -208,6 +210,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot(),
+		StarkErrorHandlingModule.forRoot(),
 		StarkSettingsModule.forRoot(),
 		StarkRoutingModule.forRoot(),
 		StarkUserModule.forRoot(),

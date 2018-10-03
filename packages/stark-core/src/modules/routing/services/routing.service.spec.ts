@@ -1,5 +1,5 @@
 /*tslint:disable:completed-docs no-identical-functions*/
-import { Component, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
+import { Component, Injector, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
 import { StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
@@ -18,6 +18,9 @@ import { StarkCoreApplicationState } from "../../../common/store";
 import CallInfo = jasmine.CallInfo;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
+import { StarkErrorHandler } from "../../error-handling";
+import { StarkXSRFService } from "../../xsrf/services";
+import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
 
 @Component({ selector: "test-home", template: "HOME" })
 export class HomeComponent {}
@@ -29,7 +32,9 @@ export class LogoutPageComponent {}
 describe("Service: StarkRoutingService", () => {
 	let $state: StateService;
 	let router: UIRouter;
-
+	let mockInjectorService: SpyObj<Injector>;
+	let mockXSRFService: StarkXSRFService;
+	let errorHandler: StarkErrorHandler;
 	let routingService: StarkRoutingServiceImpl;
 	let mockLogger: StarkLoggingService;
 	let appConfig: StarkApplicationConfig;
@@ -376,13 +381,21 @@ describe("Service: StarkRoutingService", () => {
 		deferIntercept: true // FIXME: this option shouldn't be used but is needed for Chrome and HeadlessChrome otherwise it doesn't work. Why?
 	});
 
+	beforeEach(() => {
+		mockInjectorService = jasmine.createSpyObj<Injector>("injector,", ["get"]);
+		mockXSRFService = new MockStarkXsrfService();
+		/* tslint:disable-next-line:deprecation */
+		(<Spy>mockInjectorService.get).and.returnValue(mockXSRFService);
+	});
+
 	const starkRoutingServiceFactory: Function = (state: StateService, transitions: TransitionService) => {
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.homeStateName = "homepage";
 
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
+		errorHandler = new StarkErrorHandler(mockInjectorService);
 
-		return new StarkRoutingServiceImpl(mockLogger, appConfig, mockStore, state, transitions);
+		return new StarkRoutingServiceImpl(mockLogger, appConfig, errorHandler, mockStore, state, transitions);
 	};
 
 	/**
@@ -427,9 +440,9 @@ describe("Service: StarkRoutingService", () => {
 			const modifiedAppConfig: StarkApplicationConfig = new StarkApplicationConfigImpl();
 			modifiedAppConfig.homeStateName = <any>undefined;
 
-			expect(() => new StarkRoutingServiceImpl(mockLogger, modifiedAppConfig, mockStore, <any>{}, <any>{})).toThrowError(
-				/homeStateName/
-			);
+			expect(
+				() => new StarkRoutingServiceImpl(mockLogger, modifiedAppConfig, errorHandler, mockStore, <any>{}, <any>{})
+			).toThrowError(/homeStateName/);
 		});
 	});
 
@@ -950,7 +963,7 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
-						expect(mockLogger.error).toHaveBeenCalledTimes(2);
+						expect(mockLogger.error).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/Error during route transition/);
 						return throwError(errorPrefix + error);
@@ -986,7 +999,7 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
-						expect(mockLogger.error).toHaveBeenCalledTimes(2);
+						expect(mockLogger.error).toHaveBeenCalledTimes(1);
 						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
 						expect(message).toMatch(/An error occurred with a resolve in the new state/);
 						return throwError(errorPrefix + error);
