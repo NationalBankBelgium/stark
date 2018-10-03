@@ -5,10 +5,15 @@ IMPORTANT: Stark styles are provided as SCSS styles so they should be imported i
 @import "~@nationalbankbelgium/stark-ui/assets/styles/header";
 
 /* Stark components */
+@import "~@nationalbankbelgium/stark-ui/src/modules/app-footer/components/app-footer.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/app-footer/components/app-footer-theme";
 @import "~@nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo-theme";
 @import "~@nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/app-menu/components/app-menu-theme";
+@import "~@nationalbankbelgium/stark-ui/src/modules/app-menu/components/app-menu.component";
 @import "~@nationalbankbelgium/stark-ui/src/modules/app-sidebar/components/app-sidebar-theme";
 @import "~@nationalbankbelgium/stark-ui/src/modules/app-sidebar/components/app-sidebar.component";
+@import "~@nationalbankbelgium/stark-ui/src/modules/dropdown/components/dropdown-theme";
 @import "~@nationalbankbelgium/stark-ui/src/modules/language-selector/components/language-selector.component";
 @import "~@nationalbankbelgium/stark-ui/src/modules/toast-notification/components/toast-notification.component";
 @import "~@nationalbankbelgium/stark-ui/src/modules/toast-notification/components/toast-notification-theme";
