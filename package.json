@@ -37,7 +37,7 @@
     "@ngtools/json-schema": "1.1.0",
     "codelyzer": "4.4.4",
     "conventional-changelog-cli": "2.0.5",
-    "commitizen": "2.10.1",
+    "commitizen": "3.0.0",
     "cz-customizable": "5.2.0",
     "husky": "0.14.3",
     "lint-staged": "7.3.0",
