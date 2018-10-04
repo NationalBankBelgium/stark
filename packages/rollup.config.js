@@ -5,14 +5,9 @@
 
 const commonData = require("./rollup.config.common-data.js"); // common configuration
 
-const sourcemaps = require("rollup-plugin-sourcemaps");
-
 module.exports = {
 	external: commonData.external,
-	plugins: [
-		sourcemaps()
-		// NO MORE PLUGINS HERE: because we don't want the externals to be resolved!
-	],
+	plugins: commonData.plugins,
 	output: [
 		{
 			globals: commonData.output.globals,

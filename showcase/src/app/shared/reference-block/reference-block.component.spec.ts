@@ -48,7 +48,6 @@ describe("ReferenceBlockComponent", () => {
 		expect(pathLinks.length).toBe(3);
 
 		for (let i: number = 0; i < pathLinks.length; i++) {
-			console.log(fixture);
 			expect(pathLinks[i].nativeElement.innerHTML).toBe(referenceList[i].label);
 			expect(pathLinks[i].nativeElement.getAttribute("href")).toBe(referenceList[i].url);
 		}

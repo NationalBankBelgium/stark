@@ -2,6 +2,8 @@ import { browser, by, element } from "protractor";
 // tslint:disable-next-line:no-import-side-effect
 import "tslib";
 
+// FIXME: this tslint disable flag is due to a bug in 'no-identical-functions' rule (https://github.com/SonarSource/SonarTS/issues/676). Remove it once it is solved
+// tslint:disable:no-identical-functions
 describe("App", () => {
 	beforeEach(async () => {
 		await browser.get("/");
