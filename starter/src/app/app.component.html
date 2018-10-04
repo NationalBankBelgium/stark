@@ -1,14 +1,8 @@
 <stark-app-container>
 	<stark-app-sidebar>
 		<ng-container stark-app-sidenav-menu>
-			<mat-nav-list class="nav-main">
-				<a mat-list-item uiSref="home" uiSrefActive="active">
-					<span matLine translate>STARTER.MENU.HOME</span>
-				</a>
-				<a mat-list-item uiSref="about" [uiParams]="{ paramData: 'data passed via params' }" uiSrefActive="active">
-					<span matLine translate>STARTER.MENU.ABOUT</span>
-				</a>
-			</mat-nav-list>
+			<stark-app-logo></stark-app-logo>
+			<stark-app-menu [parentMenuConfig]="mainMenu"></stark-app-menu>
 		</ng-container>
 		<div stark-app-sidenav-content>
 			<header class="stark-app-header">
@@ -19,9 +13,8 @@
 								<button class="stark-home-button" (click)="goHome()" color="white" mat-icon-button>
 									<mat-icon starkSvgViewBox svgIcon="home"></mat-icon>
 								</button>
-								<button color="white" mat-icon-button (click)="openMenu()">
+								<button color="white" mat-icon-button (click)="toggleMenu()">
 									<mat-icon starkSvgViewBox svgIcon="menu"></mat-icon>
-
 								</button>
 							</div>
 						</div>
@@ -66,6 +59,9 @@
 					<ui-view></ui-view>
 				</main>
 			</div>
+			<stark-app-footer legalInfoUrl="https://www.nbb.be/en/disclaimer-and-legal-information"
+							  helpPageUrl="https://www.nbb.be/en/links">
+			</stark-app-footer>
 		</div>
 	</stark-app-sidebar>
 </stark-app-container>

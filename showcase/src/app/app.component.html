@@ -1,10 +1,8 @@
 <stark-app-container>
 	<stark-app-sidebar>
 		<ng-container stark-app-sidenav-menu>
-			<ng-container stark-app-sidenav-menu>
-				<stark-app-logo></stark-app-logo>
-				<stark-app-menu [parentMenuConfig]="mainMenu"></stark-app-menu>
-			</ng-container>
+			<stark-app-logo></stark-app-logo>
+			<stark-app-menu [parentMenuConfig]="mainMenu"></stark-app-menu>
 		</ng-container>
 		<ng-container stark-app-sidenav-left>
 			<div class="stark-app-sidenav-top m1 center">
@@ -39,7 +37,6 @@
 								</button>
 								<button color="white" mat-icon-button (click)="toggleMenu()">
 									<mat-icon starkSvgViewBox svgIcon="menu"></mat-icon>
-
 								</button>
 							</div>
 						</div>
@@ -53,13 +50,15 @@
 								<div class="app-data">
 									<p>App Data</p>
 								</div>
-								<button class="app-data-alt" color="white" mat-icon-button [matTooltip]="'STARK.ICONS.APP_DATA' | translate">
+								<button class="app-data-alt" color="white" mat-icon-button
+										[matTooltip]="'STARK.ICONS.APP_DATA' | translate">
 									<mat-icon starkSvgViewBox svgIcon="dots-vertical"></mat-icon>
 								</button>
 								<stark-app-logout></stark-app-logout>
 							</div>
 							<div class="stark-app-bar-content-right-center">
-								<stark-language-selector color="white" class="stark-full-width" mode="dropdown"></stark-language-selector>
+								<stark-language-selector color="white" class="stark-full-width"
+														 mode="dropdown"></stark-language-selector>
 								<button color="white" (click)="openLeftSidebar()" mat-icon-button>
 									<mat-icon starkSvgViewBox svgIcon="skip-next"></mat-icon>
 								</button>
@@ -91,8 +90,9 @@
 					<ui-view></ui-view>
 				</main>
 			</div>
+			<stark-app-footer legalInfoUrl="https://www.nbb.be/en/disclaimer-and-legal-information"
+							  helpPageUrl="https://www.nbb.be/en/links">
+			</stark-app-footer>
 		</div>
 	</stark-app-sidebar>
-	<stark-app-footer legalInfoUrl="https://www.nbb.be/en/disclaimer-and-legal-information" helpPageUrl="https://www.nbb.be/en/links">
-	</stark-app-footer>
 </stark-app-container>

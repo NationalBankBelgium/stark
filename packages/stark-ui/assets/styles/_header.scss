@@ -9,9 +9,10 @@
   background: mat-color(map-get($base-theme, primary-palette), 900) url(/assets/images/app-header.png) top right no-repeat;
   color: #fff;
   .stark-app-bar {
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    padding-top: 6px;
+    margin-top: -5px;
     position: relative;
 
     .stark-app-bar-content-left {
@@ -86,6 +87,8 @@
   .stark-app-header {
     height: $stark-header-size-desktop;
     .stark-app-bar {
+      align-items: flex-start;
+      margin-top: 6px;
       .stark-app-bar-content-left {
         width: 33%;
         > div {

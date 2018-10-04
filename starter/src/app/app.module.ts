@@ -44,8 +44,10 @@ import {
 } from "@nationalbankbelgium/stark-core";
 
 import {
+	StarkAppFooterModule,
 	StarkAppLogoModule,
 	StarkAppLogoutModule,
+	StarkAppMenuModule,
 	StarkAppSidebarModule,
 	StarkDatePickerModule,
 	StarkLanguageSelectorModule,
@@ -182,8 +184,10 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkSettingsModule.forRoot(),
 		StarkRoutingModule.forRoot(),
 		StarkUserModule.forRoot(),
+		StarkAppFooterModule,
 		StarkAppLogoModule,
 		StarkAppLogoutModule,
+		StarkAppMenuModule,
 		StarkAppSidebarModule.forRoot(),
 		StarkLanguageSelectorModule,
 		StarkSvgViewBoxModule,

@@ -1,0 +1,26 @@
+.stark-app-sidebar {
+  .stark-app-sidenav-menu {
+    .stark-app-logo {
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 20px;
+    }
+
+    &.stark-app-sidenav-menu-shifting {
+      .stark-app-logo {
+        display: none;
+      }
+    }
+  }
+}
+
+@media #{$desktop-lg-query} {
+  .stark-app-sidebar {
+    .stark-app-sidenav-menu {
+      .stark-app-logo {
+        display: none;
+      }
+    }
+  }
+}
