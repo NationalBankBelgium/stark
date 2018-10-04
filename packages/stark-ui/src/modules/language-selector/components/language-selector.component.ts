@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit, OnDestroy, ViewEncapsulation, Renderer2, ElementRef } from "@angular/core";
 import { DateAdapter } from "@angular/material/core";
-import { Subscription } from "rxjs/Rx";
+import { Subscription } from "rxjs";
 
 import {
 	STARK_APP_METADATA,
