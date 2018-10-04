@@ -46,7 +46,11 @@
 					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
 					 [paginationConfig]="paginationConfig3">
 			<header>
-				<div class="example-transcluded">
+				<!-- 
+					TODO: Action should also be part of the transclusion so this example can work
+					<div class="example-transcluded" fxLayout="column" fxLayout.gt-sm="row">
+				-->
+				<div class="example-transcluded" fxLayout="column" fxLayout.gt-sm="row">
 					<h1 translate>SHOWCASE.DEMO.TABLE.WITH_TRANSCLUDED_ACTION_BAR</h1>
 					<stark-action-bar [actionBarConfig]="{actions: customTableActions}"
 									  mode="compact"></stark-action-bar>
