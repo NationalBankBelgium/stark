@@ -43,7 +43,7 @@
     "lint-staged": "7.3.0",
     "prettier": "1.14.3",
     "release-it": "7.6.1",
-    "rollup": "0.66.2",
+    "rollup": "0.66.3",
     "rollup-plugin-commonjs": "9.1.8",
     "rollup-plugin-node-resolve": "3.4.0",
     "rollup-plugin-sourcemaps": "0.4.2",
