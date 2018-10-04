@@ -3,6 +3,8 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkPaginateEvent, StarkPaginationConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../shared/reference-block";
 
+type PaginationConfigType = "simple" | "extended" | "advanced" | "compact";
+
 @Component({
 	selector: "demo-pagination",
 	templateUrl: "./demo-pagination.component.html",
@@ -65,7 +67,7 @@ export class DemoPaginationComponent implements OnInit {
 		];
 	}
 
-	public onPaginationChange(paginateEvent: StarkPaginateEvent, config: "simple" | "extended" | "advanced" | "compact"): void {
+	public onPaginationChange(paginateEvent: StarkPaginateEvent, config: PaginationConfigType): void {
 		switch (config) {
 			case "extended":
 				this.paginateEventExtended = JSON.stringify(paginateEvent);
