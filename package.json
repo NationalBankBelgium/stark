@@ -48,7 +48,6 @@
     "rollup-plugin-node-resolve": "3.4.0",
     "rollup-plugin-sourcemaps": "0.4.2",
     "rxjs": "6.3.3",
-    "rxjs-compat": "6.3.3",
     "stream-concat": "0.3.0",
     "stylelint": "9.6.0",
     "stylelint-config-prettier": "4.0.0",
