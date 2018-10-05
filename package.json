@@ -36,8 +36,8 @@
     "@compodoc/compodoc": "1.1.5",
     "@ngtools/json-schema": "1.1.0",
     "codelyzer": "4.4.4",
-    "conventional-changelog-cli": "2.0.5",
     "commitizen": "3.0.2",
+    "conventional-changelog-cli": "2.0.5",
     "cz-customizable": "5.2.0",
     "husky": "1.1.0",
     "lint-staged": "7.3.0",
@@ -86,7 +86,6 @@
     "clean:modules:showcase": "cd showcase && npm run clean:modules && cd ..",
     "clean:modules:starter": "cd starter && npm run clean:modules && cd ..",
     "commit": "./node_modules/.bin/git-cz",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
     "docs": "npm run docs:clean && npm run docs:all",
     "docs:all": "npm run docs:stark-core:generate && npm run docs:stark-ui:generate && npm run docs:starter:generate",
     "docs:clean": "npx rimraf reports/api-docs",
@@ -125,7 +124,6 @@
     "install:ci:starter": "cd starter && npm ci && cd ..",
     "install:travis:all": "npm run install:stark-build && npm run install:stark-testing && npm run install:stark-core && npm run install:stark-ui && npm run build:trace && npm run update:starter && npm run update:showcase",
     "ngc": "ngc",
-    "precommit": "lint-staged && npm run docs:coverage",
     "prettier-check": "prettier \"**/*.{css,js,json,md,pcss,scss,ts,yml}\" --write",
     "preupdate:showcase": "npm run clean:showcase",
     "preupdate:starter": "npm run clean:starter",
@@ -151,6 +149,12 @@
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "update:showcase": "npm run clean:showcase && npm run install:showcase",
     "update:starter": "npm run clean:starter && npm run install:starter"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged && npm run docs:coverage"
+    }
   },
   "lint-staged": {
     "*.{css,js,json,md,pcss,scss,ts,yml}": [
