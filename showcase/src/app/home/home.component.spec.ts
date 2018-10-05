@@ -13,6 +13,7 @@ import {
 	STARK_HTTP_SERVICE
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkHttpService, MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { TranslateModule } from "@ngx-translate/core";
 /**
  * Load the implementations that should be tested.
  */
@@ -44,7 +45,7 @@ describe(`Home`, () => {
 			TestBed.configureTestingModule({
 				declarations: [HomeComponent],
 				schemas: [NO_ERRORS_SCHEMA],
-				imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+				imports: [StoreModule.forRoot({}), HttpClientTestingModule, TranslateModule.forRoot()],
 				providers: [
 					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
 					{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },

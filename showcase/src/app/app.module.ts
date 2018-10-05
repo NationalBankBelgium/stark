@@ -15,6 +15,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -180,6 +181,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		MatButtonToggleModule,
 		MatCardModule,
 		MatCheckboxModule,
+		MatExpansionModule,
 		MatIconModule,
 		MatListModule,
 		MatSidenavModule,

@@ -1,100 +1,44 @@
-<h1 class="mat-display-2" translate>Stark documentation</h1>
+<section class="stark-section about-background">
+	<h1 class="about-title" [innerHTML]= "'SHOWCASE.HOMEPAGE.MAIN_TITLE' | translate"></h1>
+</section>
+<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_BEFORE_DETAIL' | translate">
+</p>
+<p class="mat-h4" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_DETAIL' | translate"></p>
+<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_AFTER_DETAIL' | translate">
+</p>
 
-<div fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutAlign.gt-md="space-between center" fxLayoutAlign.md="space-around center"
- fxLayoutAlign.lt-md="center center" fxLayoutGap.lt-lg="20px">
-	<a href="https://stark.nbb.be/api-docs/stark-core/latest">
-		<mat-card class="stark-card">
-			<mat-card-header>
-				<mat-card-title fxLayout fxLayoutAlign="center">
-					<h4 translate>Stark Core - Latest</h4>
-				</mat-card-title>
-			</mat-card-header>
-			<mat-card-content>
-				<img src="/assets/images/logo/logo-blue.svg">
-			</mat-card-content>
-		</mat-card>
-	</a>
-	<a href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core">
-		<mat-card class="stark-card">
-			<mat-card-header>
-				<mat-card-title fxLayout fxLayoutAlign="center">
-					<h4 translate>Stark Core</h4>
-				</mat-card-title>
-			</mat-card-header>
-			<mat-card-content>
-				<img src="/assets/images/logo/core.png">
-			</mat-card-content>
-		</mat-card>
-	</a>
-	<a href="https://stark.nbb.be/api-docs/stark-ui/latest">
-		<mat-card class="stark-card">
-			<mat-card-header>
-				<mat-card-title fxLayout fxLayoutAlign="center">
-					<h4 translate>Stark UI - Latest</h4>
-				</mat-card-title>
-			</mat-card-header>
-			<mat-card-content>
-				<img src="/assets/images/logo/logo-blue.svg">
-			</mat-card-content>
-		</mat-card>
-	</a>
-	<a href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui">
-		<mat-card class="stark-card">
-			<mat-card-header>
-				<mat-card-title fxLayout fxLayoutAlign="center">
-					<h4 translate>Stark UI</h4>
-				</mat-card-title>
-			</mat-card-header>
-			<mat-card-content>
-				<img src="/assets/images/logo/logo-ui.png">
-			</mat-card-content>
-		</mat-card>
-	</a>
+<section class="stark-section bottom-margin">
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title class="information-title" [innerHTML]="'SHOWCASE.HOMEPAGE.NEWS_TITLE' | translate">
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+			<h2 [innerHTML]="'SHOWCASE.HOMEPAGE.NEWS_DESCRIPTION' | translate"></h2>
+			<div [innerHTML]="'SHOWCASE.HOMEPAGE.NEWS_CONTENT' | translate"></div>
+		</mat-expansion-panel>
+	</mat-accordion>
+</section>
+<section class="stark-section bottom-margin">
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title class="information-title" [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_MAIN_TITLE' | translate">
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+			<h2 [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_MAIN_DESC' | translate"></h2>
 
-	<a href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase">
-		<mat-card class="stark-card">
-			<mat-card-header>
-				<mat-card-title fxLayout fxLayoutAlign="center">
-					<h4 translate>Showcase</h4>
-				</mat-card-title>
-			</mat-card-header>
-			<mat-card-content>
-				<img src="/assets/images/logo/showcase.png">
-			</mat-card-content>
-		</mat-card>
-	</a>
-</div>
-
-
-<!--<div class="documentation-links">
-	<div>
-		<a href="https://stark.nbb.be/api-docs/stark-core/latest">
-			<img class="img-stark-core-latest">
-			<div>Stark Core - Latest</div>
-		</a>
-	</div>
-	<div>
-		<a href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core">
-			<img class="img-stark-core">
-			<div>Stark Core</div>
-		</a>
-	</div>
-	<div>
-		<a href="https://stark.nbb.be/api-docs/stark-ui/latest">
-			<img class="img-stark-ui-latest">
-			<div>Stark UI - Latest</div>
-		</a>
-	</div>
-	<div>
-		<a href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui">
-			<img class="img-stark-ui">
-			<div>Stark UI</div>
-		</a>
-	</div>
-	<div>
-		<a href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase">
-			<img class="img-stark-showcase">
-			<div>Showcase</div>
-		</a>
-	</div>
-</div>-->
+				<h2>Stark Core</h2>
+				<div [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_CORE_DESC' | translate">
+				</div>
+				<br>
+				<h2>Stark UI</h2>
+				<div [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_UI_DESC' | translate">
+				</div>
+				<br>
+				<h2>Showcase</h2>
+				<div [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_SHOWCASE_DESC' | translate">
+				</div>
+		</mat-expansion-panel>
+	</mat-accordion>
+</section>
