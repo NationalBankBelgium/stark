@@ -187,7 +187,6 @@ module.exports = options => {
 					exclude: [
 						/\.ngfactory\.js$/,
 						/\.ngstyle\.js$/,
-						helpers.root("node_modules/rxjs-compat"),
 						helpers.root("node_modules/@ng-idle"),
 						helpers.root("node_modules/prettier")
 					]
