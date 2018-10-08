@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs*/
 import { HttpHeaders, HttpRequest } from "@angular/common/http";
-import { Inject, Injectable, Injector } from "@angular/core";
+import { Inject, Injectable, Injector, Optional } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle } from "@ng-idle/core";
 import { Keepalive } from "@ng-idle/keepalive";
 import { TranslateService } from "@ngx-translate/core";
@@ -66,7 +66,9 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		public idle: Idle,
 		injector: Injector,
 		public translateService: TranslateService,
-		@Inject(STARK_SESSION_CONFIG) private sessionConfig?: StarkSessionConfig
+		@Optional()
+		@Inject(STARK_SESSION_CONFIG)
+		private sessionConfig?: StarkSessionConfig
 	) {
 		// ensuring that the app config is valid before doing anything
 		StarkConfigurationUtil.validateConfig(this.appConfig, ["session"], starkSessionServiceName);
@@ -258,18 +260,17 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 			this.store.dispatch(new StarkSessionTimeoutCountdownFinish());
 			this.logout();
 
-			let sessionExpiredStateName: string;
+			let sessionExpiredStateName: string = starkSessionExpiredStateName;
 			if (
-				typeof this.sessionConfig !== "undefined" &&
+				this.sessionConfig &&
 				typeof this.sessionConfig.sessionExpiredStateName !== "undefined" &&
 				this.sessionConfig.sessionExpiredStateName !== ""
 			) {
 				sessionExpiredStateName = this.sessionConfig.sessionExpiredStateName;
-			} else {
-				sessionExpiredStateName = starkSessionExpiredStateName;
 			}
 			this.routingService.navigateTo(sessionExpiredStateName);
 		});
+
 		this.idle.onTimeoutWarning.subscribe((countdown: number) => {
 			if (countdown === this.idle.getTimeout()) {
 				this.countdownStarted = true;

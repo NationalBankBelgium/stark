@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, ViewEncapsulation } from "@angular/core";
 
 import {
 	STARK_LOGGING_SERVICE,
@@ -50,9 +50,11 @@ export class StarkAppLogoutComponent extends AbstractStarkUiComponent implements
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
-		@Inject(STARK_SESSION_CONFIG) public sessionConfig: StarkSessionConfig,
 		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		protected elementRef: ElementRef,
+		@Optional()
+		@Inject(STARK_SESSION_CONFIG)
+		public sessionConfig?: StarkSessionConfig
 	) {
 		super(renderer, elementRef);
 	}
@@ -69,14 +71,15 @@ export class StarkAppLogoutComponent extends AbstractStarkUiComponent implements
 	 */
 	public logout(): void {
 		this.sessionService.logout();
+
+		let sessionLogoutStateName: string = starkSessionLogoutStateName;
 		if (
-			typeof this.sessionConfig !== "undefined" &&
+			this.sessionConfig &&
 			typeof this.sessionConfig.sessionLogoutStateName !== "undefined" &&
 			this.sessionConfig.sessionLogoutStateName !== ""
 		) {
-			this.routingService.navigateTo(this.sessionConfig.sessionLogoutStateName);
-		} else {
-			this.routingService.navigateTo(starkSessionLogoutStateName);
+			sessionLogoutStateName = this.sessionConfig.sessionLogoutStateName;
 		}
+		this.routingService.navigateTo(sessionLogoutStateName);
 	}
 }

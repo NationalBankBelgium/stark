@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
@@ -16,15 +16,12 @@ const componentName: string = "stark-app-container";
 @Component({
 	selector: "stark-app-container",
 	templateUrl: "./app-container.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: componentName
+	}
 })
 export class StarkAppContainerComponent implements OnInit {
-	/**
-	 * Adds class="stark-app-container" attribute on the host component
-	 */
-	@HostBinding("class")
-	public class: string = componentName;
-
 	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
@@ -45,7 +42,7 @@ export class StarkAppContainerComponent implements OnInit {
 	/**
 	 * Check if the current state is a "session-ui" state (with "starkAppInit" or "starkAppExit" as parent state name)
 	 */
-	public isSessionUIState(): boolean {
+	public isAppInitOrExitState(): boolean {
 		return (
 			this.routingService.isCurrentUiStateIncludedIn(starkAppInitStateName + ".**") ||
 			this.routingService.isCurrentUiStateIncludedIn(starkAppExitStateName + ".**")

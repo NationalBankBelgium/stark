@@ -5,7 +5,7 @@ import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing
 import { StarkAppFooterComponent } from "./app-footer.component";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 
-describe("AppLogoutComponent", () => {
+describe("AppFooterComponent", () => {
 	let component: StarkAppFooterComponent;
 	let fixture: ComponentFixture<StarkAppFooterComponent>;
 

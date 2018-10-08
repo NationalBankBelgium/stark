@@ -90,7 +90,7 @@ describe("AppLogoutComponent", () => {
 		});
 
 		it("should log out the user and navigate to starkSessionLogoutStateName", () => {
-			component.sessionConfig.sessionLogoutStateName = undefined;
+			(<StarkSessionConfig>component.sessionConfig).sessionLogoutStateName = undefined;
 
 			(<Spy>component.routingService.navigateTo).calls.reset();
 			component.logout();

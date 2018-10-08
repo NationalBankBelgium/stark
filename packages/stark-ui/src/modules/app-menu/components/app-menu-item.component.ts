@@ -93,12 +93,12 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Routing transition finish callback
 	 */
-	private routingTransitionFinishCallback: Function;
+	private routingTransitionFinishCallback?: Function;
 
 	/**
 	 * Routing transition success callback
 	 */
-	private routingTransitionSuccessCallback: Function;
+	private routingTransitionSuccessCallback?: Function;
 
 	/**
 	 * Class constructor
@@ -143,8 +143,12 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	 * Component OnDestroy lifecycle hook
 	 */
 	public ngOnDestroy(): void {
-		this.routingTransitionFinishCallback();
-		this.routingTransitionSuccessCallback();
+		if (this.routingTransitionFinishCallback) {
+			this.routingTransitionFinishCallback();
+		}
+		if (this.routingTransitionSuccessCallback) {
+			this.routingTransitionSuccessCallback();
+		}
 	}
 
 	/**
