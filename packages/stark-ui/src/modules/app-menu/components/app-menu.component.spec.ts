@@ -42,8 +42,8 @@ describe("StarkAppMenuComponent", () => {
 	});
 
 	describe("sections", () => {
-		it("should have a section when menuSections property of parentMenuConfig is set", () => {
-			component.parentMenuConfig = {
+		it("should have a section when menuSections property of menuConfig is set", () => {
+			component.menuConfig = {
 				menuSections: [
 					{
 						label: "Section",

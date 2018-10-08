@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import moment from "moment";
-import { StarkDatePickerFilter, StarkDatePickerComponent } from "./../../date-picker/components/date-picker.component";
+import { StarkDatePickerFilter, StarkDatePickerComponent } from "../../date-picker/components/date-picker.component";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 

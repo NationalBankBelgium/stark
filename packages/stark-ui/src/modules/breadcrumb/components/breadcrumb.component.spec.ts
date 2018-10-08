@@ -10,7 +10,8 @@ import { TranslateModule } from "@ngx-translate/core";
 import { MockStarkRoutingService, MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { By } from "@angular/platform-browser";
 import Spy = jasmine.Spy;
-import { StarkBreadcrumbPath } from "@nationalbankbelgium/stark-ui";
+import { StarkBreadcrumbPath } from "./breadcrumb-path.intf";
+
 @Component({
 	selector: `host-component`,
 	template: `<stark-breadcrumb
