@@ -1,8 +1,9 @@
 import { Component, Inject, Input, OnInit, ViewEncapsulation, ElementRef, Renderer2 } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
-import { AbstractStarkUiComponent } from "./../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkMenuSection } from "./app-menu-section.intf";
 import { StarkMenuConfig } from "./app-menu-config.intf";
+import { StarkMenuGroup } from "./app-menu-group.intf";
 
 /**
  * Name of the component
@@ -22,20 +23,21 @@ const componentName: string = "stark-app-menu";
 })
 export class StarkAppMenuComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
-	 * Configuration of the component
+	 * @internal
+	 * @ignore
 	 */
-	private _parentMenuConfig: StarkMenuConfig;
+	private _menuConfig: StarkMenuConfig;
+
+	/**
+	 * Configuration of the menu
+	 */
 	@Input()
-	public set parentMenuConfig(parentMenuConfig: StarkMenuConfig) {
-		this._parentMenuConfig = parentMenuConfig;
-		if (this._parentMenuConfig.hasOwnProperty("menuSections")) {
-			this.hasSections = true;
-		} else {
-			this.hasSections = false;
-		}
+	public set menuConfig(menuConfig: StarkMenuConfig) {
+		this._menuConfig = menuConfig;
+		this.hasSections = this._menuConfig.hasOwnProperty("menuSections");
 	}
-	public get parentMenuConfig(): StarkMenuConfig {
-		return this._parentMenuConfig;
+	public get menuConfig(): StarkMenuConfig {
+		return this._menuConfig;
 	}
 
 	/**
@@ -71,6 +73,13 @@ export class StarkAppMenuComponent extends AbstractStarkUiComponent implements O
 	 * @ignore
 	 */
 	public trackSection(index: number, _section: StarkMenuSection): number {
+		return index;
+	}
+
+	/**
+	 * @ignore
+	 */
+	public trackMenuGroup(index: number, _menuGroup: StarkMenuGroup): number {
 		return index;
 	}
 }

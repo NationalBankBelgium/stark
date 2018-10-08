@@ -1,9 +1,19 @@
-<mat-list-item *ngIf="menuGroup.isVisible" [id]="menuGroup.id" [ngClass]="'stark-app-menu-item-level-'+level.toString()" [class.active]="isActive" [class.stark-disabled]="!menuGroup.isEnabled" [disableRipple]="!menuGroup.isEnabled" (click)="onClick()">
-	<mat-icon *ngIf="menuGroup.icon" [color]="isActive?'primary':''" starkSvgViewBox [svgIcon]="menuGroup.icon" class="stark-small-icon"></mat-icon>
-	<span matLine>{{ menuGroup.label }}</span>
+<mat-list-item *ngIf="menuGroup.isVisible"
+			   [id]="menuGroup.id"
+			   [ngClass]="'stark-app-menu-item-level-'+level.toString()"
+			   [class.active]="isActive" [class.stark-disabled]="!menuGroup.isEnabled"
+			   [disableRipple]="!menuGroup.isEnabled" (click)="onClick()">
+	<mat-icon *ngIf="menuGroup.icon"
+			  [color]="isActive ? 'primary' : ''"
+			  starkSvgViewBox [svgIcon]="menuGroup.icon"
+			  class="stark-small-icon"></mat-icon>
+	<span matLine translate>{{ menuGroup.label }}</span>
 </mat-list-item>
 <mat-expansion-panel *ngIf="menuGroup.entries" #menuGroupsPanel>
 	<mat-nav-list>
-		<stark-app-menu-item *ngFor="let entry of menuGroup.entries; trackBy: trackMenuItem" [level]="level+1" [menuGroup]="entry" (activated)="onActivate()" (deactivated)="onDeactivate()"></stark-app-menu-item>
+		<stark-app-menu-item *ngFor="let entry of menuGroup.entries; trackBy: trackMenuItem"
+							 [level]="level+1"
+							 [menuGroup]="entry" (activated)="onActivate()"
+							 (deactivated)="onDeactivate()"></stark-app-menu-item>
 	</mat-nav-list>
 </mat-expansion-panel>

@@ -5,8 +5,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppSidebarComponent } from "./app-sidebar.component";
-import { MockAppSidebarService } from "./../testing/app-sidebar.mock";
-import { STARK_APP_SIDEBAR_SERVICE } from "./../services/app-sidebar.service.intf";
+import { MockAppSidebarService } from "../testing/app-sidebar.mock";
+import { STARK_APP_SIDEBAR_SERVICE } from "../services/app-sidebar.service.intf";
 import { BreakpointState } from "@angular/cdk/layout";
 
 describe("AppSidebarComponent", () => {

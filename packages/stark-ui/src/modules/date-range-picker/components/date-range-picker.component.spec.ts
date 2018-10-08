@@ -6,7 +6,7 @@ import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from "@angular/material-mo
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkDatePickerModule } from "./../../date-picker";
+import { StarkDatePickerModule } from "../../date-picker";
 import { StarkDateRangePickerComponent } from "./date-range-picker.component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 
