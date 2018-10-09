@@ -13,6 +13,7 @@ export * from "./header";
 export * from "./keyboard-directives";
 export * from "./language-selector";
 export * from "./logout";
+export * from "./minimap";
 export * from "./menu";
 export * from "./pagination";
 export * from "./pretty-print";

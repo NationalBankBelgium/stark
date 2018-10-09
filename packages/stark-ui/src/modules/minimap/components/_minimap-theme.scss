@@ -1,0 +1,118 @@
+/* ============================================================================== */
+/*  S t a r k   M i n i m a p                                                     */
+/* ============================================================================== */
+/* stark-ui: src/modules/minimap/components/minimap-theme.scss */
+
+.compact-minimap {
+  & .stark-minimap-dots {
+    & i {
+      background-color: $secondary-dark-text-color;
+      opacity: 0.2;
+    }
+    & li.selected i {
+      opacity: 1;
+    }
+  }
+  & .stark-minimap-dropdown-toggle {
+    & .stark-minimap-dropdown-toggle-menu {
+      box-shadow: $elevation-4;
+      & mat-checkbox.mat-checked .mat-icon {
+        background-color: $md-accent;
+      }
+    }
+    & .mat-button.mat-icon-button {
+      & svg {
+        fill: #000;
+      }
+      border: 1px solid mat-color($grey-palette, 300);
+      background-color: $md-primary-alpha-05;
+    }
+    & mat-icon {
+      fill: $md-primary;
+    }
+    & .stark-minimap-dropdown-toggle-menu {
+      border-color: mat-color($grey-palette, 500);
+      box-shadow: 0 1px 2px mat-color($grey-palette, 300);
+      background-color: #FFF;
+      & mat-checkbox {
+        &:hover {
+          background: $md-primary-alpha-05;
+        }
+        & ._mat-icon {
+          &::after {
+            border-color: mat-color($grey-palette, 50);
+          }
+        }
+        & .stark-minimap-dropdown {
+          & mat-checkbox.stark-minimap-column-checkbox {
+            &.mat-checked ._mat-icon {
+              background-color: $md-primary-200-alpha-38;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.full-minimap {
+  & .stark-minimap-dots {
+    & i {
+      background-color: $secondary-dark-text-color;
+      opacity: 0.2;
+    }
+    & li.selected i {
+      opacity: 1;
+    }
+  }
+  & .stark-minimap-dropdown-toggle {
+    & .stark-minimap-dropdown-toggle-menu {
+      box-shadow: $elevation-4;
+      & mat-checkbox.mat-checked .mat-icon {
+        background-color: $md-accent;
+      }
+    }
+    & .mat-button.mat-icon-button {
+      & svg {
+        fill: #000;
+      }
+      border: 1px solid mat-color($grey-palette, 300);
+      background-color: $md-primary-alpha-05;
+    }
+    & mat-icon {
+      fill: $md-primary;
+    }
+    & .stark-minimap-dropdown-toggle-menu {
+      border-color: mat-color($grey-palette, 500);
+      box-shadow: 0 1px 2px mat-color($grey-palette, 300);
+	  background-color: #FFF;
+      & mat-checkbox {
+        &:hover {
+          background: $md-primary-alpha-05;
+        }
+        & ._mat-icon {
+          &::after {
+            border-color: mat-color($grey-palette, 50);
+          }
+        }
+        & .stark-minimap-dropdown {
+          & mat-checkbox.stark-minimap-column-checkbox {
+            &.mat-checked ._mat-icon {
+              background-color: $md-primary-200-alpha-38;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.stark-table {
+  & .stark-minimap {
+    & .stark-minimap-dropdown-toggle .stark-minimap-dropdown-toggle-menu {
+      box-shadow: $elevation-2;
+    }
+  }
+}
+
+/* End stark-ui: src/modules/minimap/components/minimap-theme.scss */

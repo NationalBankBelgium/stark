@@ -57,6 +57,7 @@ import {
 	StarkAppMenuModule,
 	StarkAppSidebarModule,
 	StarkDatePickerModule,
+	StarkMinimapModule,
 	StarkLanguageSelectorModule,
 	StarkSessionUiModule,
 	StarkSvgViewBoxModule,
@@ -228,6 +229,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkLanguageSelectorModule,
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
+		StarkMinimapModule,
 		StarkToastNotificationModule.forRoot({
 			delay: 5000,
 			position: "top right",

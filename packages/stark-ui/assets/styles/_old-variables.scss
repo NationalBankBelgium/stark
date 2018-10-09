@@ -49,6 +49,7 @@ $md-primary-100: #b2d5ee; /* rgb(178, 213, 238) */
 $md-primary: mat-color(map-get($base-theme, primary-palette));
 $md-primary-600: mat-color(map-get($base-theme, primary-palette), 600); /* rgb(0, 106, 180) */
 $md-primary-700: mat-color(map-get($base-theme, primary-palette), 700); /* rgb(0, 94, 160) */
+$md-primary-alpha-05: rgba(0, 118, 200, 0.05);
 $md-primary-alpha-10: rgba(0, 118, 200, 0.1);
 $md-primary-alpha-26: rgba(0, 118, 200, 0.26);
 $md-primary-alpha-50: rgba(0, 118, 200, 0.5);
@@ -77,3 +78,5 @@ $md-warn-alpha-87: rgba(255, 87, 34, 0.87);
 $md-warn-200-alpha-38: rgba(255, 171, 145, 0.38);
 
 $cash2-offwhite: #f6f9fa;
+
+$checkbox-size: 15px;

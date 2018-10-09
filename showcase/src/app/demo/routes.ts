@@ -22,6 +22,7 @@ import { DemoSidebarComponent } from "./sidebar";
 import { DemoTableComponent } from "./table";
 import { DemoToastComponent } from "./toast";
 import { DemoTypographyComponent } from "./typography";
+import { DemoMinimapComponent } from "./minimap";
 
 export const DEMO_STATES: Ng2StateDeclaration[] = [
 	{ name: "demo", url: "^/demo", abstract: true, parent: "app" },
@@ -104,6 +105,11 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 		name: "demo.menu",
 		url: "/menu",
 		views: { "@": { component: DemoMenuComponent } }
+	},
+	{
+		name: "demo.minimap",
+		url: "/minimap",
+		views: { "@": { component: DemoMinimapComponent } }
 	},
 	{
 		name: "demo.pagination",
