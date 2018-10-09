@@ -149,6 +149,11 @@
         "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram",
         "TITLE": "Stark logout"
       },
+      "MINIMAP": {
+        "TITLE": "Stark Minimap",
+        "FULL": "Minimap (klassieke versie)",
+        "COMPACT": "Minimap (compacte version)"
+      },
       "MENU": {
         "SIMPLE": "Simple menu",
         "SECTIONS": "Menu with sections",

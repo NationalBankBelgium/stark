@@ -12,11 +12,5 @@
       ]
     }
   },
-  "ignore": [
-    "@angular/flex-layout",
-    "@types/node",
-    "class-validator",
-    "typescript",
-    "tslint-sonarts"
-  ]
+  "ignore": ["@angular/flex-layout", "@types/node", "class-validator", "typescript", "tslint-sonarts"]
 }

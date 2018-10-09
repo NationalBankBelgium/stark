@@ -141,6 +141,13 @@ export class AppComponent implements OnInit {
 									targetState: "demo-menu"
 								},
 								{
+									id: "menu-stark-ui-components-minimap",
+									label: "Minimap",
+									isVisible: true,
+									isEnabled: true,
+									targetState: "demo-minimap"
+								},
+								{
 									id: "menu-stark-ui-components-pagination",
 									label: "Pagination",
 									isVisible: true,

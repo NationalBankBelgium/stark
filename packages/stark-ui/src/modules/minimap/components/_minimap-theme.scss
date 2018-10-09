@@ -1,0 +1,196 @@
+/* ============================================================================== */
+/*  S t a r k   M i n i m a p                                                     */
+/* ============================================================================== */
+/* stark-ui: src/modules/minimap/components/minimap-theme.scss */
+
+.compact-minimap {
+  & .stark-minimap-dots {
+    & i {
+      background-color: $secondary-dark-text-color;
+      opacity: 0.2;
+    }
+    & li.selected i {
+      opacity: 1;
+    }
+  }
+  & .stark-minimap-dropdown-toggle {
+    & .stark-minimap-dropdown-toggle-menu {
+      box-shadow: $elevation-4;
+      & mat-checkbox.mat-checked .mat-icon {
+        background-color: $md-accent;
+      }
+    }
+    & .mat-button.mat-icon-button {
+      & svg {
+        fill: #000;
+      }
+      border: 1px solid mat-color($grey-palette, 300);
+      background-color: $md-primary-alpha-05;
+    }
+    & mat-icon {
+      fill: $md-primary;
+    }
+    & .stark-minimap-dropdown-toggle-menu {
+      border-color: mat-color($grey-palette, 500);
+      box-shadow: 0 1px 2px mat-color($grey-palette, 300);
+      background-color: mat-color($grey-palette, 50);
+      & mat-checkbox {
+        &:hover {
+          background: $md-primary-alpha-05;
+        }
+        & ._mat-icon {
+          &::after {
+            border-color: mat-color($grey-palette, 50);
+          }
+        }
+        & .stark-minimap-dropdown {
+          & mat-checkbox.stark-minimap-column-checkbox {
+            &.mat-checked ._mat-icon {
+              background-color: $md-primary-200-alpha-38;
+            }
+          }
+        }
+      }
+    }
+
+    @media #{$desktop-query} {
+      & .stark-minimap-dropdown-toggle-menu {
+        font-size: 16px;
+        & mat-checkbox {
+          padding: 3px 16px;
+          & ._mat-container {
+            width: $checkbox-size;
+            height: $checkbox-size;
+            top: 10px;
+            left: 16px;
+          }
+          & ._mat-icon {
+            width: $checkbox-size;
+            height: $checkbox-size;
+          }
+          & ._mat-label {
+            width: 100%;
+            padding: 0 0 0 26px;
+            font-size: 12px;
+            & span {
+              max-width: 400px;
+            }
+          }
+          &.mat-checked ._mat-icon::after {
+            width: 8px;
+            height: 10px;
+            top: 2px;
+            left: 4px;
+          }
+          &:first-child {
+            margin-top: 8px;
+          }
+          &:last-child {
+            margin-bottom: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.full-minimap {
+  & .stark-minimap-dots {
+    & i {
+      background-color: $secondary-dark-text-color;
+      opacity: 0.2;
+    }
+    & li.selected i {
+      opacity: 1;
+    }
+  }
+  & .stark-minimap-dropdown-toggle {
+    & .stark-minimap-dropdown-toggle-menu {
+      box-shadow: $elevation-4;
+      & mat-checkbox.mat-checked .mat-icon {
+        background-color: $md-accent;
+      }
+    }
+    & .mat-button.mat-icon-button {
+      & svg {
+        fill: #000;
+      }
+      border: 1px solid mat-color($grey-palette, 300);
+      background-color: $md-primary-alpha-05;
+    }
+    & mat-icon {
+      fill: $md-primary;
+    }
+    & .stark-minimap-dropdown-toggle-menu {
+      border-color: mat-color($grey-palette, 500);
+      box-shadow: 0 1px 2px mat-color($grey-palette, 300);
+      background-color: mat-color($grey-palette, 50);
+      & mat-checkbox {
+        &:hover {
+          background: $md-primary-alpha-05;
+        }
+        & ._mat-icon {
+          &::after {
+            border-color: mat-color($grey-palette, 50);
+          }
+        }
+        & .stark-minimap-dropdown {
+          & mat-checkbox.stark-minimap-column-checkbox {
+            &.mat-checked ._mat-icon {
+              background-color: $md-primary-200-alpha-38;
+            }
+          }
+        }
+      }
+    }
+
+    @media #{$desktop-query} {
+      & .stark-minimap-dropdown-toggle-menu {
+        font-size: 16px;
+        & mat-checkbox {
+          padding: 3px 16px;
+          & ._mat-container {
+            width: $checkbox-size;
+            height: $checkbox-size;
+            top: 10px;
+            left: 16px;
+          }
+          & ._mat-icon {
+            width: $checkbox-size;
+            height: $checkbox-size;
+          }
+          & ._mat-label {
+            width: 100%;
+            padding: 0 0 0 26px;
+            font-size: 12px;
+            & span {
+              max-width: 400px;
+            }
+          }
+          &.mat-checked ._mat-icon::after {
+            width: 8px;
+            height: 10px;
+            top: 2px;
+            left: 4px;
+          }
+          &:first-child {
+            margin-top: 8px;
+          }
+          &:last-child {
+            margin-bottom: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.stark-table {
+  & .stark-minimap {
+    & .stark-minimap-dropdown-toggle .stark-minimap-dropdown-toggle-menu {
+      box-shadow: $elevation-2;
+    }
+  }
+}
+
+/* End stark-ui: src/modules/minimap/components/minimap-theme.scss */

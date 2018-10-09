@@ -31,6 +31,7 @@ import { DemoKeyboardDirectivesComponent } from "./keyboard-directives/demo-keyb
 import { DemoLanguageSelectorComponent } from "./language-selector/demo-language-selector.component";
 import { DemoLogoutComponent } from "./logout/demo-logout.component";
 import { DemoMenuComponent } from "./menu/demo-menu.component";
+import { DemoMinimapComponent } from "./minimap/demo-minimap.component";
 import { DemoPaginationComponent } from "./pagination/demo-pagination.component";
 import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
 import { DemoSliderComponent } from "./slider/demo-slider.component";
@@ -46,6 +47,7 @@ import {
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
 	StarkDropdownModule,
+	StarkMinimapModule,
 	StarkKeyboardDirectivesModule,
 	StarkLanguageSelectorModule,
 	StarkAppMenuModule,
@@ -83,6 +85,7 @@ import {
 		StarkDateRangePickerModule,
 		StarkDropdownModule,
 		StarkKeyboardDirectivesModule,
+		StarkMinimapModule,
 		StarkLanguageSelectorModule,
 		StarkPaginationModule,
 		StarkPrettyPrintModule,
@@ -107,6 +110,7 @@ import {
 		DemoLanguageSelectorComponent,
 		DemoLogoutComponent,
 		DemoMenuComponent,
+		DemoMinimapComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
 		DemoSidebarComponent,
@@ -131,6 +135,7 @@ import {
 		DemoKeyboardDirectivesComponent,
 		DemoLanguageSelectorComponent,
 		DemoLogoutComponent,
+		DemoMinimapComponent,
 		DemoMenuComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,

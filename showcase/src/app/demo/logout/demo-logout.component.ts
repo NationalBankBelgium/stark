@@ -6,7 +6,7 @@ import { ReferenceLink } from "../../shared/reference-block";
 	selector: "demo-logout",
 	templateUrl: "./demo-logout.component.html"
 })
-export class DemoLogoutComponent implements OnInit{
+export class DemoLogoutComponent implements OnInit {
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
 	public referenceList: ReferenceLink[];

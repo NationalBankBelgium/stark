@@ -154,6 +154,11 @@
         "SECTIONS": "Menu with sections",
         "TITLE": "Stark menu"
       },
+      "MINIMAP": {
+        "TITLE": "Stark Minimap",
+        "FULL": "Minimap (classic version)",
+        "COMPACT": "Minimap (compact version)"
+      },
       "PAGINATION": {
         "ADVANCED_CONFIGURATION": "Pagination with advanced configuration",
         "COMPACT_CONFIGURATION": "Pagination in compact mode",
