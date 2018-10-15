@@ -21,7 +21,7 @@
   "dependencies": {
     "@angular-devkit/build-angular": "0.8.4",
     "@angular-devkit/build-optimizer": "0.8.4",
-    "@types/uglify-js": "3.0.3",
+    "@types/uglify-js": "3.0.4",
     "@types/webpack": "4.4.14",
     "add-asset-html-webpack-plugin": "3.0.1",
     "angular-named-lazy-chunks-webpack-plugin": "2.0.0",
