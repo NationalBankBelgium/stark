@@ -1,5 +1,6 @@
 export * from "./modules/http";
 export * from "./modules/logging";
+export * from "./modules/error-handling";
 export * from "./modules/routing";
 export * from "./modules/session";
 export * from "./modules/settings";

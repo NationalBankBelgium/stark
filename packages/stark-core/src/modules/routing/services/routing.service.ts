@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs*/
 import { Action, Store } from "@ngrx/store";
 import { EMPTY, from, Observable } from "rxjs";
-import { Inject, Injectable } from "@angular/core";
+import { ErrorHandler, Inject, Injectable } from "@angular/core";
 import {
 	HookMatchCriteria,
 	HookRegOptions,
@@ -75,6 +75,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
 		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
+		private defaultErrorHandler: ErrorHandler,
 		private store: Store<StarkCoreApplicationState>,
 		private $state: StateService,
 		private $transitions: TransitionService
@@ -534,7 +535,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				}
 
 				if (!this.knownRejectionCausesRegex.test(stringError)) {
-					this.logger.error(starkRoutingServiceName + ": defaultErrorHandler => ", new Error(stringError));
+					this.defaultErrorHandler.handleError(Error(stringError));
 				}
 			}
 		);
