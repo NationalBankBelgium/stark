@@ -10,24 +10,11 @@
 .stark-app-logo {
   & i {
     display: block;
-    width: 60px;
-    height: 64px;
-    margin-top: 4px;
-    background-image: url(/assets/stark-ui/app-logo/angular.png); /* FIXME: add image for tablet */
+    width: 200px;
+    height: 60px;
+    margin-top: 0;
+    background-image: url(/assets/stark-core/logo/stark_logo_transparent.svg);
     background-size: 100% 100%;
-  }
-}
-
-@media screen and #{$desktop-query} {
-  .stark-app-logo {
-    & i {
-      display: block;
-      width: 60px;
-      height: 64px;
-      margin-top: 0;
-      background-image: url(/assets/stark-ui/app-logo/angular.png); /* FIXME: add image for desktop */
-      background-size: 100% 100%;
-    }
   }
 }
 

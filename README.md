@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="packages/stark-core/assets/logo/stark_logo_black.png" alt="Stark : a powerful front-end framework" width="150" height="60">
+</p>
+
 [![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-core.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
 [![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-core.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
 [![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
@@ -85,6 +89,11 @@ See [this page](/SNAPSHOTS.md) for more information about the process behind thi
 ### Christopher Cortes
 
 -   [@GitHub](https://github.com/christophercr)
+
+### Olivia Tournois
+
+-   [@Twitter](https://twitter.com/mallikki)
+-   [@GitHub](https://github.com/Mallikki)
 
 ## License
 

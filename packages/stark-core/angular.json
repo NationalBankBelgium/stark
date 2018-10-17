@@ -12,7 +12,13 @@
           "options": {
             "outputPath": "dist",
             "tsConfig": "tsconfig-build.json",
-            "assets": []
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "../node_modules/@nationalbankbelgium/stark-core/assets",
+                "output": "./assets/stark-core/"
+              }
+            ]
           }
         },
         "test": {
