@@ -29,7 +29,7 @@
     "base-href-webpack-plugin": "2.0.0",
     "circular-dependency-plugin": "5.0.2",
     "codelyzer": "4.4.4",
-    "copy-webpack-plugin": "4.5.2",
+    "copy-webpack-plugin": "4.5.4",
     "css-loader": "1.0.0",
     "file-loader": "2.0.0",
     "html-elements-webpack-plugin": "2.0.0",
