@@ -16,7 +16,7 @@ example-viewer {
     background-color: mat-color($mat-light-theme-background, card);
   }
   .mat-tab-body {
-    background-color: #272822;
+    background-color: $custom-dark-background;
   }
   .example-source {
     border-bottom: 1px solid mat-color($mat-light-theme-foreground, divider);

@@ -2,6 +2,7 @@ import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
 import { Ng2StateDeclaration } from "@uirouter/angular";
 import { AppComponent } from "./app.component";
+import { GettingStartedComponent } from "./getting-started/getting-started-component";
 
 export const APP_STATES: Ng2StateDeclaration[] = [
 	{
@@ -13,6 +14,12 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 		name: "home",
 		url: "",
 		views: { "@": { component: HomeComponent } },
+		parent: "app"
+	},
+	{
+		name: "getting-started",
+		url: "^/getting-started",
+		views: { "@": { component: GettingStartedComponent } },
 		parent: "app"
 	},
 	{

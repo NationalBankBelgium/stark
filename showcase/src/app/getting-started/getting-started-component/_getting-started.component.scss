@@ -1,0 +1,59 @@
+.getting-started-content {
+  padding-right: 200px;
+}
+
+.file-structure-title {
+  font-size: 21px;
+  padding-bottom: 0;
+  display: inline-flex;
+  vertical-align: middle;
+  margin: 10px 0 10px 0;
+}
+
+.structure-description-margin {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.description {
+  align-self: center;
+}
+
+@media #{$mobile-only-query} {
+  .getting-started-content {
+    padding-right: 0;
+  }
+}
+
+.custom-title {
+  font-size: 27px;
+  display: block;
+  vertical-align: middle;
+  margin: 40px 0 10px 0;
+}
+
+.custom-subtitle {
+  font-size: 20px;
+  display: block;
+  vertical-align: middle;
+  margin: 15px 0 10px 0;
+}
+
+.custom-code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  border-radius: 3px;
+}
+
+.table-of-contents-level-h2 {
+  padding-left: 12px;
+}
+
+.custom-pretty-print {
+  & pre {
+    white-space: pre;
+    overflow-x: scroll;
+    font-size: 13px;
+  }
+}

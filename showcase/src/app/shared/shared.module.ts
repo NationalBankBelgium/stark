@@ -12,6 +12,7 @@ import { NgModule } from "@angular/core";
 import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 import { TranslateModule } from "@ngx-translate/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { TableOfContentsComponent } from "./table-of-contents/table-of-contents.component";
 
 @NgModule({
 	imports: [
@@ -27,8 +28,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 		TranslateModule
 	],
 	providers: [FileService],
-	declarations: [ExampleViewerComponent, ReferenceBlockComponent],
-	entryComponents: [ExampleViewerComponent, ReferenceBlockComponent],
-	exports: [ExampleViewerComponent, ReferenceBlockComponent, FlexLayoutModule]
+	declarations: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],
+	entryComponents: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],
+	exports: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent, FlexLayoutModule]
 })
 export class SharedModule {}

@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
 							label: "Getting started",
 							isVisible: true,
 							isEnabled: true,
-							targetState: "#"
+							targetState: "getting-started"
 						},
 						{
 							id: "menu-news",
