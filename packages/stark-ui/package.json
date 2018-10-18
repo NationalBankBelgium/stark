@@ -45,7 +45,7 @@
     "@angular/common": "6.x",
     "@angular/compiler": "6.x",
     "@angular/core": "6.x",
-    "@angular/material": "6.x",
+    "@angular/material": "^7.0.0",
     "@angular/router": "6.x",
     "@nationalbankbelgium/stark-core": "0.0.0-PLACEHOLDER-VERSION",
     "rxjs": "6.x",
