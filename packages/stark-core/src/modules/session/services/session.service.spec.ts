@@ -64,7 +64,7 @@ describe("Service: StarkSessionService", () => {
 		roles: ["a role", "another role", "yet another role"]
 	};
 	const mockSessionConfig: StarkSessionConfig = {
-		sessionExpiredStateName: "mock-session-state-name"
+		sessionExpiredStateName: "mock-session-expired-state-name"
 	};
 
 	// Inject module dependencies
@@ -503,7 +503,8 @@ describe("Service: StarkSessionService", () => {
 					appConfig,
 					mockIdleService,
 					mockInjectorService,
-					mockTranslateService
+					mockTranslateService,
+					{} // default empty session config
 				);
 
 				spyOn(sessionService, "logout");
@@ -884,7 +885,7 @@ class SessionServiceHelper extends StarkSessionServiceImpl {
 		idle: Idle,
 		injector: Injector,
 		translateService: TranslateService,
-		sessionConfig?: StarkSessionConfig
+		sessionConfig: StarkSessionConfig
 	) {
 		super(store, logger, routingService, appConfig, idle, injector, translateService, sessionConfig);
 	}
