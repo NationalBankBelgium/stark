@@ -1,8 +1,8 @@
-/*tslint:disable:completed-docs no-identical-functions*/
+/*tslint:disable:completed-docs no-identical-functions no-duplicate-string no-big-function*/
 import { Component, Injector, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
-import { StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
+import { RawParams, StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
 // FIXME Adapt switchMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
 import { catchError, switchMap, tap } from "rxjs/operators";
 import { throwError } from "rxjs";
@@ -28,7 +28,6 @@ export class HomeComponent {}
 @Component({ selector: "logout-page", template: "LOGOUT_PAGE_COMPONENT" })
 export class LogoutPageComponent {}
 
-/* tslint:disable:no-duplicate-string no-big-function */
 describe("Service: StarkRoutingService", () => {
 	let $state: StateService;
 	let router: UIRouter;
@@ -61,15 +60,13 @@ describe("Service: StarkRoutingService", () => {
 	//             |              |
 	//       page-01-02-01   page-01-02-02
 
-	const numberOfMockStates: number = 14;
+	const inheritedParams: { [param: string]: any } = { requestId: "default value", seniority: undefined, onBehalfView: false };
 	const mockStates: Ng2StateDeclaration[] = [
 		{
 			name: "homepage", // the parent is defined in the state's name (contains a dot)
 			url: "/homepage",
 			params: {
-				requestId: "default value",
-				seniority: undefined,
-				onBehalfView: false
+				...inheritedParams // ALL states will inherit these params
 			},
 			resolve: {
 				availableHolidays: () => {
@@ -91,10 +88,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-01", // the parent is defined in the state's name (contains a dot)
 			url: "/page-01",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.01",
 				pageTitleColor: "dark blue",
@@ -115,10 +109,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-01-01", // the parent is defined in the state's name (contains a dot)
 			url: "/page-01-01",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.01.01",
 				pageTitleColor: "black",
@@ -134,10 +125,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-01-02", // the parent is defined in the state's name (contains a dot)
 			url: "/page-01-02",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.01.02",
 				pageTitleColor: "black",
@@ -153,10 +141,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-01-02-01", // the parent is defined in the state's name (contains a dot)
 			url: "/page-01-02-01",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			parent: "page-01-02",
 			views: {
 				"initOrExit@": {
@@ -167,10 +152,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-01-02-02", // the parent is defined in the state's name (contains a dot)
 			url: "/page-01-02-02",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.01.02.02"
 			},
@@ -184,10 +166,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-01-03", // the parent is defined in the state's name (contains a dot)
 			url: "/page-01-03",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.01.03",
 				pageTitleColor: "black",
@@ -203,10 +182,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-02", // the parent is defined in the state's name (contains a dot)
 			url: "/page-02",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.02",
 				pageTitleColor: "dark blue",
@@ -222,10 +198,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-02-01", // the parent is defined in the state's name (contains a dot)
 			url: "/page-02-01",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.02.01",
 				pageTitleColor: "black",
@@ -241,10 +214,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-02-02", // the parent is defined in the state's name (contains a dot)
 			url: "/page-02-02",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.02.02",
 				pageTitleColor: "black",
@@ -279,10 +249,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-03-01", // the parent is defined in the state's name (contains a dot)
 			url: "/page-03-01",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.03.01",
 				pageTitleColor: "black",
@@ -298,10 +265,7 @@ describe("Service: StarkRoutingService", () => {
 		{
 			name: "page-03-02", // the parent is defined in the state's name (contains a dot)
 			url: "/page-03-02",
-			params: {
-				requestId: "default value",
-				onBehalfView: false
-			},
+			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
 				translationKey: "PAGE.03.02",
 				pageTitleColor: "black",
@@ -315,6 +279,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		}
 	];
+	const numberOfMockStates: number = mockStates.length + 1;
 
 	function performNavigations(navigationSteps: any[], previousNavigations?: number): void {
 		for (const navigationStep of navigationSteps) {
@@ -451,7 +416,7 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "go").and.callThrough();
 
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			let currentState: StateObject = routingService.getCurrentState();
 			expect(currentState.name).toBe("");
@@ -518,7 +483,7 @@ describe("Service: StarkRoutingService", () => {
 	describe("getStatesConfig", () => {
 		it("should return an array containing all the defined states", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			const stateDeclarations: StateDeclaration[] = routingService.getStatesConfig();
 			expect(stateDeclarations.length).toBe(numberOfMockStates);
@@ -532,7 +497,7 @@ describe("Service: StarkRoutingService", () => {
 	describe("getStateConfigByUrlPath", () => {
 		it("should return the state of the requested url", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 			const url: string = <string>statesConfig[1].url;
 
 			const stateDeclarations: StarkStateConfigWithParams = <StarkStateConfigWithParams>routingService.getStateConfigByUrlPath(url);
@@ -543,7 +508,7 @@ describe("Service: StarkRoutingService", () => {
 	describe("getStateDeclarationByStateName", () => {
 		it("should return the requested state", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			const stateName: string = "page-01";
 			const stateDeclaration: StateDeclaration = <StateDeclaration>routingService.getStateDeclarationByStateName(stateName);
@@ -553,7 +518,7 @@ describe("Service: StarkRoutingService", () => {
 
 		it("should return undefined when the state does not exist", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			const stateName: string = "unexisting state";
 			const stateDeclaration: StateDeclaration = <StateDeclaration>routingService.getStateDeclarationByStateName(stateName);
@@ -562,7 +527,37 @@ describe("Service: StarkRoutingService", () => {
 	});
 
 	describe("getCurrentStateParams", () => {
-		it("should contain the params, when provided", (done: DoneFn) => {
+		it("should contain the params, when provided, if they belong to the target state", (done: DoneFn) => {
+			spyOn($state, "go").and.callThrough();
+
+			routingService
+				.navigateTo("homepage", { requestId: requestId, onBehalfView: true })
+				.pipe(
+					tap(() => {
+						expect($state.go).toHaveBeenCalledTimes(1);
+						expect($state.go).toHaveBeenCalledWith(
+							"homepage",
+							{
+								requestId: requestId,
+								onBehalfView: true
+							},
+							undefined
+						);
+
+						const currentStateParams: RawParams = routingService.getCurrentStateParams();
+						expect(currentStateParams.requestId).toBeDefined();
+						expect(currentStateParams.requestId).toBe(requestId);
+						expect(currentStateParams.onBehalfView).toBeDefined();
+						expect(currentStateParams.onBehalfView).toBe(true);
+					}),
+					catchError((error: any) => {
+						return throwError("getCurrentStateParams " + error);
+					})
+				)
+				.subscribe(() => done(), (error: any) => fail(error));
+		});
+
+		it("should return NO params if the transition params don't belong to the target state but to its parent (inherited)", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 
 			routingService
@@ -579,7 +574,34 @@ describe("Service: StarkRoutingService", () => {
 							undefined
 						);
 
-						const currentStateParams: any = routingService.getCurrentStateParams();
+						const currentStateParams: RawParams = routingService.getCurrentStateParams();
+						expect(currentStateParams).toEqual({});
+					}),
+					catchError((error: any) => {
+						return throwError("getCurrentStateParams " + error);
+					})
+				)
+				.subscribe(() => done(), (error: any) => fail(error));
+		});
+
+		it("should return ALL params including the inherited ones from the parent when passing includeInherited = TRUE", (done: DoneFn) => {
+			spyOn($state, "go").and.callThrough();
+
+			routingService
+				.navigateTo("page-01", { requestId: requestId, onBehalfView: true })
+				.pipe(
+					tap(() => {
+						expect($state.go).toHaveBeenCalledTimes(1);
+						expect($state.go).toHaveBeenCalledWith(
+							"page-01",
+							{
+								requestId: requestId,
+								onBehalfView: true
+							},
+							undefined
+						);
+
+						const currentStateParams: RawParams = routingService.getCurrentStateParams(true);
 						expect(currentStateParams.requestId).toBeDefined();
 						expect(currentStateParams.requestId).toBe(requestId);
 						expect(currentStateParams.onBehalfView).toBeDefined();
@@ -596,7 +618,7 @@ describe("Service: StarkRoutingService", () => {
 	describe("isCurrentUiState", () => {
 		it("should return whether or not the current state is equal a specific state name", (done: DoneFn) => {
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			routingService
 				.navigateTo("page-01")
@@ -617,7 +639,7 @@ describe("Service: StarkRoutingService", () => {
 
 		it("should return whether or not the current state is equal a specific state name and parameters combination", (done: DoneFn) => {
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			routingService
 				.navigateTo("page-01", { requestId: requestId, onBehalfView: true })
@@ -653,7 +675,7 @@ describe("Service: StarkRoutingService", () => {
 		it("should return whether or not the state is included in the current state", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			routingService
 				.navigateTo("page-01")
@@ -679,7 +701,7 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "go").and.callThrough();
 
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			routingService
 				.navigateTo("page-01")
@@ -742,7 +764,7 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "go").and.callThrough();
 
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			routingService
 				.navigateToHome()
@@ -777,7 +799,7 @@ describe("Service: StarkRoutingService", () => {
 							undefined
 						);
 
-						const currentStateParams: any = routingService.getCurrentStateParams();
+						const currentStateParams: RawParams = routingService.getCurrentStateParams();
 						expect(currentStateParams.requestId).toBeDefined();
 						expect(currentStateParams.requestId).toBe(requestId);
 						expect(currentStateParams.onBehalfView).toBeDefined();
@@ -822,6 +844,51 @@ describe("Service: StarkRoutingService", () => {
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
 		});
+
+		it("should navigate to the previous page passing the right params including those inherited from the parent state", (done: DoneFn) => {
+			spyOn($state, "go").and.callThrough();
+
+			routingService
+				.navigateTo("homepage")
+				.pipe(
+					catchError((error: any) => {
+						return throwError("navigateTo homepage " + error);
+					}),
+					switchMap(() => routingService.navigateTo("page-01", { requestId: "999" })),
+					catchError((error: any) => {
+						return throwError("navigateTo page-01 " + error);
+					}),
+					switchMap(() => routingService.navigateTo("page-01-01")), // no params
+					catchError((error: any) => {
+						return throwError("navigateTo page-01-01 " + error);
+					}),
+					switchMap(() => routingService.navigateTo("page-02", { requestId: "111" })),
+					catchError((error: any) => {
+						return throwError("navigateTo page-02 " + error);
+					}),
+					switchMap(() => {
+						return routingService.navigateToPrevious();
+					}),
+					tap((enteredState: StateObject) => {
+						expect(enteredState).toBeDefined();
+						expect(enteredState.name).toBe("page-01-01");
+						expect($state.go).toHaveBeenCalledTimes(5);
+						expect((<Spy>$state.go).calls.argsFor(0)).toEqual(["homepage", undefined, undefined]);
+						expect((<Spy>$state.go).calls.argsFor(1)).toEqual(["page-01", { requestId: "999" }, undefined]);
+						expect((<Spy>$state.go).calls.argsFor(2)).toEqual(["page-01-01", undefined, undefined]);
+						expect((<Spy>$state.go).calls.argsFor(3)).toEqual(["page-02", { requestId: "111" }, undefined]);
+						expect((<Spy>$state.go).calls.argsFor(4)).toEqual([
+							"page-01-01",
+							{ ...inheritedParams, requestId: "999" },
+							undefined
+						]);
+					}),
+					catchError((error: any) => {
+						return throwError("navigateToPrevious " + error);
+					})
+				)
+				.subscribe(() => done(), (error: any) => fail(error));
+		});
 	});
 
 	describe("reload", () => {
@@ -829,7 +896,7 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "transitionTo").and.callThrough();
 
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			routingService
 				.navigateTo("page-01")
@@ -854,7 +921,7 @@ describe("Service: StarkRoutingService", () => {
 			spyOn($state, "reload").and.returnValue(throwError("Reload has failed").toPromise());
 
 			const statesConfig: StateDeclaration[] = $state.get();
-			expect(statesConfig.length).toBe(numberOfMockStates); // UI-Router's root state + defined states
+			expect(statesConfig.length).toBe(numberOfMockStates);
 
 			routingService
 				.navigateTo("page-01")
@@ -1135,19 +1202,19 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-04", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-04", onBehalfView: true }
 				},
 				{
 					stateName: "page-01-02",
-					stateParams: { requestId: "Request-03", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: true }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1182,15 +1249,15 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-01",
-					stateParams: { requestId: "Request-05", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-05", onBehalfView: true }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1225,15 +1292,15 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-02-01",
-					stateParams: { requestId: "Request-05", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-05", onBehalfView: true }
 				},
 				{
 					stateName: "page-02",
-					stateParams: undefined
+					stateParams: undefined // because it is an indirect navigation (parent of "page-02-01")
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1243,6 +1310,54 @@ describe("Service: StarkRoutingService", () => {
 	});
 
 	describe("getStateTreeParams with NavigateToPrevious", () => {
+		it("should return the parameters of each state in the state tree except the last one", fakeAsync(() => {
+			const navigationSteps: any[] = [
+				{
+					stateName: "homepage",
+					stateParams: { requestId: "Request-01", onBehalfView: false }
+				},
+				{
+					stateName: "page-01",
+					stateParams: { requestId: "Request-02", onBehalfView: false }
+				},
+				{
+					stateName: "page-01-02",
+					stateParams: { requestId: "Request-03", onBehalfView: false }
+				},
+				{
+					stateName: "page-01-02-01",
+					stateParams: { requestId: "Request-04", onBehalfView: false }
+				},
+				{
+					stateName: "page-02-01",
+					stateParams: { requestId: "Request-05", onBehalfView: false }
+				}
+			];
+
+			const expectedStateTreeParams: any[] = [
+				{
+					stateName: "page-01-02-01",
+					stateParams: { ...inheritedParams, requestId: "Request-04", onBehalfView: false }
+				},
+				{
+					stateName: "page-01-02",
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: false }
+				},
+				{
+					stateName: "page-01",
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
+				},
+				{
+					stateName: "homepage",
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
+				}
+			];
+
+			performNavigations(navigationSteps, 1);
+
+			assertStateTreeParams(expectedStateTreeParams);
+		}));
+
 		it("should return the state tree parameters for each visited page in same branch except the last one", fakeAsync(() => {
 			const navigationSteps: any[] = [
 				{
@@ -1266,15 +1381,15 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02",
-					stateParams: { requestId: "Request-03", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: true }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1305,15 +1420,15 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-01",
-					stateParams: { requestId: "Request-03", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: true }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1321,7 +1436,7 @@ describe("Service: StarkRoutingService", () => {
 			assertStateTreeParams(expectedStateTreeParams);
 		}));
 
-		it("should return the correct state tree names and parameters when switching branches except the last one", fakeAsync(() => {
+		it("should return the correct state tree names and parameters when navigating back to the branch parent except the last one", fakeAsync(() => {
 			const navigationSteps: any[] = [
 				{
 					stateName: "homepage",
@@ -1348,19 +1463,19 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-04", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-04", onBehalfView: true }
 				},
 				{
 					stateName: "page-01-02",
-					stateParams: undefined
+					stateParams: undefined // because it is an indirect navigation (parent of "page-01-02-01")
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1368,7 +1483,7 @@ describe("Service: StarkRoutingService", () => {
 			assertStateTreeParams(expectedStateTreeParams);
 		}));
 
-		it("should return the correct state tree names and parameters when switching branches except the last two", fakeAsync(() => {
+		it("should return the correct state tree names and parameters when navigating back to the branch parent except the last two", fakeAsync(() => {
 			const navigationSteps: any[] = [
 				{
 					stateName: "homepage",
@@ -1395,15 +1510,15 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-01",
-					stateParams: { requestId: "Request-03", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: true }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1411,7 +1526,7 @@ describe("Service: StarkRoutingService", () => {
 			assertStateTreeParams(expectedStateTreeParams);
 		}));
 
-		it("should return the correct state tree names and parameters when switching branches except the last one", fakeAsync(() => {
+		it("should return the correct state tree names and parameters when navigating the same branch twice except the last one", fakeAsync(() => {
 			const navigationSteps: any[] = [
 				{
 					stateName: "homepage",
@@ -1442,15 +1557,15 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-01",
-					stateParams: { requestId: "Request-05", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-05", onBehalfView: false }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1458,7 +1573,7 @@ describe("Service: StarkRoutingService", () => {
 			assertStateTreeParams(expectedStateTreeParams);
 		}));
 
-		it("should return the correct state tree names and parameters when switching branches except the last two", fakeAsync(() => {
+		it("should return the correct state tree names and parameters when navigating the same branch twice except the last two", fakeAsync(() => {
 			const navigationSteps: any[] = [
 				{
 					stateName: "homepage",
@@ -1489,19 +1604,19 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-04", onBehalfView: true }
+					stateParams: { ...inheritedParams, requestId: "Request-04", onBehalfView: true }
 				},
 				{
 					stateName: "page-01-02",
-					stateParams: undefined
+					stateParams: undefined // because it is an indirect navigation (parent of "page-01-02-01")
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1509,7 +1624,7 @@ describe("Service: StarkRoutingService", () => {
 			assertStateTreeParams(expectedStateTreeParams);
 		}));
 
-		it("should return the correct state tree names and parameters when switching branches except the last four", fakeAsync(() => {
+		it("should return the correct state tree names and parameters when navigating the same branch twice except the last four", fakeAsync(() => {
 			const navigationSteps: any[] = [
 				{
 					stateName: "homepage",
@@ -1540,11 +1655,11 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1552,7 +1667,7 @@ describe("Service: StarkRoutingService", () => {
 			assertStateTreeParams(expectedStateTreeParams);
 		}));
 
-		it("should return the correct state tree names and parameters when switching branches except the last four", fakeAsync(() => {
+		it("should return the correct state tree names and parameters when navigating the same branch twice except the last five", fakeAsync(() => {
 			const navigationSteps: any[] = [
 				{
 					stateName: "homepage",
@@ -1583,7 +1698,7 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1632,7 +1747,7 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1690,19 +1805,19 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-04", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-04", onBehalfView: false }
 				},
 				{
 					stateName: "page-01-02",
-					stateParams: { requestId: "Request-03", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: false }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1737,19 +1852,19 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02-02",
-					stateParams: { requestId: "Request-05", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-05", onBehalfView: false }
 				},
 				{
 					stateName: "page-01-02",
-					stateParams: { requestId: "Request-03", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: false }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1777,7 +1892,7 @@ describe("Service: StarkRoutingService", () => {
 				},
 				{
 					stateName: "homepage",
-					stateParams: undefined
+					stateParams: undefined // then the current requestId ("Request-04") will be kept as param since it is not overwritten here
 				},
 				{
 					stateName: "page-01",
@@ -1796,19 +1911,19 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-07", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-07", onBehalfView: false }
 				},
 				{
 					stateName: "page-01-02",
-					stateParams: { requestId: "Request-06", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-06", onBehalfView: false }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-05", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-05", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: {}
+					stateParams: { ...inheritedParams, requestId: "Request-04" } // latest requestId when the "homepage" was navigated for the last time
 				}
 			];
 
@@ -1851,19 +1966,19 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-07", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-07", onBehalfView: false }
 				},
 				{
 					stateName: "page-01-02",
-					stateParams: { requestId: "Request-03", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: false }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1898,15 +2013,15 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-02-01",
-					stateParams: { requestId: "Request-05", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-05", onBehalfView: false }
 				},
 				{
 					stateName: "page-02",
-					stateParams: undefined
+					stateParams: undefined // because it is an indirect navigation (parent of "page-02-01")
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -1939,66 +2054,13 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "homepage",
-					stateParams: {}
+					stateParams: { ...inheritedParams, requestId: "Request-04" } // latest requestId overwritten by the last navigated state
 				}
 			];
 
 			performNavigations(navigationSteps);
 
 			routingService.navigateToHome();
-			tick();
-
-			assertStateTreeParams(expectedStateTreeParams);
-		}));
-	});
-
-	describe("getStateTreeParams in combination with NavigateToPrevious", () => {
-		it("should return the parameters of each state in the state tree", fakeAsync(() => {
-			const navigationSteps: any[] = [
-				{
-					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
-				},
-				{
-					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: { requestId: "Request-03", onBehalfView: false }
-				},
-				{
-					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-04", onBehalfView: false }
-				},
-				{
-					stateName: "page-02-01",
-					stateParams: { requestId: "Request-05", onBehalfView: false }
-				}
-			];
-
-			const expectedStateTreeParams: any[] = [
-				{
-					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-04", onBehalfView: false }
-				},
-				{
-					stateName: "page-01-02",
-					stateParams: { requestId: "Request-03", onBehalfView: false }
-				},
-				{
-					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
-				},
-				{
-					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
-				}
-			];
-
-			performNavigations(navigationSteps);
-
-			routingService.navigateToPrevious();
 			tick();
 
 			assertStateTreeParams(expectedStateTreeParams);
@@ -2029,19 +2091,19 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "page-01-02-01",
-					stateParams: { requestId: "Request-04", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-04", onBehalfView: false }
 				},
 				{
 					stateName: "page-01-02",
-					stateParams: { requestId: "Request-03", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-03", onBehalfView: false }
 				},
 				{
 					stateName: "page-01",
-					stateParams: { requestId: "Request-02", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-02", onBehalfView: false }
 				},
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -2073,7 +2135,7 @@ describe("Service: StarkRoutingService", () => {
 			const expectedStateTreeParams: any[] = [
 				{
 					stateName: "homepage",
-					stateParams: { requestId: "Request-01", onBehalfView: false }
+					stateParams: { ...inheritedParams, requestId: "Request-01", onBehalfView: false }
 				}
 			];
 
@@ -2236,4 +2298,3 @@ describe("Service: StarkRoutingService", () => {
 		}));
 	});
 });
-/* tslint:enable */
