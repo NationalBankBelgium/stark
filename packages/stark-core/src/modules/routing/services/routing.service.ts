@@ -442,6 +442,11 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 				this.store.dispatch(new StarkNavigateSuccess(previousStateName, currentState.name(), currentStateParams));
 
+				if (transition.dynamic()) {
+					// for a dynamic transition, the last entry in the stateHistory should be re-created rather than being added again!
+					// so it should be removed first ;)
+					this._starkStateHistory.pop();
+				}
 				// Add the params of the current state to the _stateTreeParams array
 				this._starkStateHistory.push({ name: currentState.name(), params: currentStateParams });
 

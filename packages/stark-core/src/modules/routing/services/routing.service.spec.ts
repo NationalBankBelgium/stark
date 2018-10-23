@@ -63,7 +63,7 @@ describe("Service: StarkRoutingService", () => {
 	const inheritedParams: { [param: string]: any } = { requestId: "default value", seniority: undefined, onBehalfView: false };
 	const mockStates: Ng2StateDeclaration[] = [
 		{
-			name: "homepage", // the parent is defined in the state's name (contains a dot)
+			name: "homepage",
 			url: "/homepage",
 			params: {
 				...inheritedParams // ALL states will inherit these params
@@ -86,7 +86,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-01", // the parent is defined in the state's name (contains a dot)
+			name: "page-01",
 			url: "/page-01",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -107,7 +107,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-01-01", // the parent is defined in the state's name (contains a dot)
+			name: "page-01-01",
 			url: "/page-01-01",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -123,7 +123,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-01-02", // the parent is defined in the state's name (contains a dot)
+			name: "page-01-02",
 			url: "/page-01-02",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -139,7 +139,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-01-02-01", // the parent is defined in the state's name (contains a dot)
+			name: "page-01-02-01",
 			url: "/page-01-02-01",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			parent: "page-01-02",
@@ -150,7 +150,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-01-02-02", // the parent is defined in the state's name (contains a dot)
+			name: "page-01-02-02",
 			url: "/page-01-02-02",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -164,7 +164,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-01-03", // the parent is defined in the state's name (contains a dot)
+			name: "page-01-03",
 			url: "/page-01-03",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -180,7 +180,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-02", // the parent is defined in the state's name (contains a dot)
+			name: "page-02",
 			url: "/page-02",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -196,7 +196,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-02-01", // the parent is defined in the state's name (contains a dot)
+			name: "page-02-01",
 			url: "/page-02-01",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -212,7 +212,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-02-02", // the parent is defined in the state's name (contains a dot)
+			name: "page-02-02",
 			url: "/page-02-02",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -228,7 +228,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-03", // the parent is defined in the state's name (contains a dot)
+			name: "page-03",
 			url: "/page-03",
 			params: {
 				baseParameter: "inherited"
@@ -247,9 +247,15 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-03-01", // the parent is defined in the state's name (contains a dot)
+			name: "page-03-01",
 			url: "/page-03-01",
-			params: {}, // no params (inherits the ones from the parent/ancestor)
+			params: {
+				// also inherits the ones from the parent/ancestor
+				dummyParameter: {
+					// dynamic parameter
+					dynamic: true
+				}
+			},
 			data: {
 				translationKey: "PAGE.03.01",
 				pageTitleColor: "black",
@@ -263,7 +269,7 @@ describe("Service: StarkRoutingService", () => {
 			}
 		},
 		{
-			name: "page-03-02", // the parent is defined in the state's name (contains a dot)
+			name: "page-03-02",
 			url: "/page-03-02",
 			params: {}, // no params (inherits the ones from the parent/ancestor)
 			data: {
@@ -889,6 +895,51 @@ describe("Service: StarkRoutingService", () => {
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
 		});
+
+		it(
+			"should just be called ONCE in order to navigate to the previous state when the last navigation(s) were dynamic " +
+				"(same target state different params)",
+			(done: DoneFn) => {
+				spyOn($state, "go").and.callThrough();
+
+				routingService
+					.navigateTo("homepage")
+					.pipe(
+						catchError((error: any) => {
+							return throwError("navigateTo homepage " + error);
+						}),
+						switchMap(() => routingService.navigateTo("page-03-01", { dummyParameter: "abc" })),
+						catchError((error: any) => {
+							return throwError("navigateTo page-03-01 " + error);
+						}),
+						switchMap(() => routingService.navigateTo("page-03-01", { dummyParameter: "def" })), // dynamic transition
+						catchError((error: any) => {
+							return throwError("navigateTo page-03-01 " + error);
+						}),
+						switchMap(() => routingService.navigateTo("page-03-01", { dummyParameter: "xyz" })), // dynamic transition
+						catchError((error: any) => {
+							return throwError("navigateTo page-03-01 " + error);
+						}),
+						switchMap(() => {
+							return routingService.navigateToPrevious();
+						}),
+						tap((enteredState: StateObject) => {
+							expect(enteredState).toBeDefined();
+							expect(enteredState.name).toBe("homepage");
+							expect($state.go).toHaveBeenCalledTimes(5);
+							expect((<Spy>$state.go).calls.argsFor(0)).toEqual(["homepage", undefined, undefined]);
+							expect((<Spy>$state.go).calls.argsFor(1)).toEqual(["page-03-01", { dummyParameter: "abc" }, undefined]);
+							expect((<Spy>$state.go).calls.argsFor(2)).toEqual(["page-03-01", { dummyParameter: "def" }, undefined]);
+							expect((<Spy>$state.go).calls.argsFor(3)).toEqual(["page-03-01", { dummyParameter: "xyz" }, undefined]);
+							expect((<Spy>$state.go).calls.argsFor(4)).toEqual(["homepage", { ...inheritedParams }, undefined]);
+						}),
+						catchError((error: any) => {
+							return throwError("navigateToPrevious " + error);
+						})
+					)
+					.subscribe(() => done(), (error: any) => fail(error));
+			}
+		);
 	});
 
 	describe("reload", () => {
