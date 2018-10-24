@@ -1,3 +1,4 @@
+@import "basscss-missing-variables.pcss"; /* FIXME: Remove this import once the issue in basscss is solved (see: https://github.com/basscss/basscss/issues/257) */
 @import "~basscss/css/basscss.css";
 @import "~prismjs/themes/prism-okaidia.css";
 
