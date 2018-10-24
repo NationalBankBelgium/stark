@@ -130,7 +130,7 @@
     "basscss": "8.0.10",
     "core-js": "2.5.7",
     "eligrey-classlist-js-polyfill": "1.2.20180112",
-    "event-source-polyfill": "0.0.16",
+    "event-source-polyfill": "1.0.0",
     "http-server": "0.11.1",
     "ngrx-store-freeze": "0.2.4",
     "ngrx-store-logger": "0.2.2",
