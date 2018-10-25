@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs no-undefined-argument*/
+/*tslint:disable:completed-docs no-big-function*/
 import { HttpHeaders, HttpRequest } from "@angular/common/http";
 import { EventEmitter, Injector } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle, InterruptSource } from "@ng-idle/core";
@@ -36,9 +36,8 @@ import { MockStarkRoutingService } from "../../routing/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
-import { starkSessionExpiredStateName } from "../routes";
+import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../routes";
 
-// tslint:disable-next-line:no-big-function
 describe("Service: StarkSessionService", () => {
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
 	let appConfig: StarkApplicationConfig;
@@ -64,7 +63,7 @@ describe("Service: StarkSessionService", () => {
 		roles: ["a role", "another role", "yet another role"]
 	};
 	const mockSessionConfig: StarkSessionConfig = {
-		sessionExpiredStateName: "mock-session-expired-state-name"
+		sessionExpiredStateName: starkAppExitStateName + ".mock-session-expired-state-name"
 	};
 
 	// Inject module dependencies
@@ -139,6 +138,67 @@ describe("Service: StarkSessionService", () => {
 							mockSessionConfig
 						)
 				).toThrowError(/sessionTimeout/);
+			}
+		});
+
+		it("should throw an error in case the session config object contains invalid initial states", () => {
+			const invalidSessionConfigValues: StarkSessionConfig[] = [
+				{ loginStateName: "someLoginState" },
+				{ loginStateName: "" },
+				{ loginStateName: starkAppInitStateName },
+				{ loginStateName: starkAppInitStateName + "." },
+				{ loginStateName: starkAppExitStateName + ".someLoginState" },
+				{ preloadingStateName: "somePreloadingState" },
+				{ preloadingStateName: "" },
+				{ preloadingStateName: starkAppInitStateName },
+				{ preloadingStateName: starkAppInitStateName + "." },
+				{ preloadingStateName: starkAppExitStateName + ".somePreloadingState" }
+			];
+
+			for (const invalidSessionConfig of invalidSessionConfigValues) {
+				expect(() => {
+					return new SessionServiceHelper(
+						mockStore,
+						mockLogger,
+						mockRoutingService,
+						appConfig,
+						mockIdleService,
+						mockInjectorService,
+						mockTranslateService,
+						invalidSessionConfig
+					);
+				}).toThrowError(/invalid StarkSessionConfig(.*)initial state/);
+			}
+		});
+
+		it("should throw an error in case the session config object contains invalid exit states", () => {
+			const invalidSessionConfigValues: StarkSessionConfig[] = [
+				{ sessionExpiredStateName: "someSessionExpiredState" },
+				{ sessionExpiredStateName: "" },
+				{ sessionExpiredStateName: starkAppExitStateName },
+				{ sessionExpiredStateName: starkAppExitStateName + "." },
+				{ sessionExpiredStateName: starkAppInitStateName + ".someSessionExpiredState" },
+				{ sessionLogoutStateName: "someSessionExpiredState" },
+				{ sessionLogoutStateName: "" },
+				{ sessionLogoutStateName: starkAppExitStateName },
+				{ sessionLogoutStateName: starkAppExitStateName + "." },
+				{ sessionLogoutStateName: starkAppInitStateName + ".someSessionExpiredState" }
+			];
+
+			for (const invalidSessionConfig of invalidSessionConfigValues) {
+				expect(
+					() =>
+						new SessionServiceHelper(
+							mockStore,
+							mockLogger,
+							mockRoutingService,
+							appConfig,
+							mockIdleService,
+							mockInjectorService,
+							mockTranslateService,
+							invalidSessionConfig
+						)
+				).toThrowError(/invalid StarkSessionConfig(.*)exit state/);
 			}
 		});
 
@@ -374,8 +434,6 @@ describe("Service: StarkSessionService", () => {
 		});
 	});
 
-	// FIXME rewrite those tests to reduce function
-	/* tslint:disable-next-line:no-big-function */
 	describe("configureIdleService", () => {
 		it("should set the necessary options of the idle service", () => {
 			const interruptsToBeSet: InterruptSource[] = DEFAULT_INTERRUPTSOURCES;
@@ -865,6 +923,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		it("should return an empty map if the pre-authentication headers were not constructed", () => {
+			/* tslint:disable-next-line:no-undefined-argument */
 			sessionService.setInternalDevAuthenticationHeaders(undefined);
 
 			const devAuthenticationHeaders: Map<string, string> = sessionService.devAuthenticationHeaders;
