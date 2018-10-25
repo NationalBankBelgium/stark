@@ -73,6 +73,11 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		// ensuring that the app config is valid before doing anything
 		StarkConfigurationUtil.validateConfig(this.appConfig, ["session"], starkSessionServiceName);
 
+		// ensuring that the session config is valid before doing anything
+		if (this.sessionConfig) {
+			this.validateSessionConfig(this.sessionConfig);
+		}
+
 		if (this.idle.getKeepaliveEnabled() && !this.appConfig.keepAliveDisabled) {
 			this.keepalive = injector.get<Keepalive>(Keepalive);
 		}
@@ -100,6 +105,49 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		}
 
 		this.logger.debug(starkSessionServiceName + " loaded");
+	}
+
+	/**
+	 * Validates the StarkSessionConfig provided.
+	 * @param customConfig - Custom configuration object passed via the StarkSessionModule.forRoot() method
+	 * @throws In case the configuration object passed via the StarkSessionModule.forRoot() method is not valid
+	 */
+	protected validateSessionConfig(customConfig: StarkSessionConfig): void {
+		const invalidConfigErrorPrefix: string = starkSessionServiceName + ": invalid StarkSessionConfig object. ";
+		const invalidConfigErrorAppInitSuffix: string =
+			" should have the prefix '" + starkAppInitStateName + ".' in order to be configured correctly as an application initial state";
+		const invalidConfigErrorAppExitSuffix: string =
+			" should have the prefix '" + starkAppExitStateName + ".' in order to be configured correctly as an application exit state";
+
+		// validate config to ensure that the init/exit states have the correct StarkAppInit or StarkAppExit parent
+		if (
+			typeof customConfig.loginStateName !== "undefined" &&
+			(!customConfig.loginStateName.startsWith(starkAppInitStateName) ||
+				customConfig.loginStateName.replace(starkAppInitStateName, "").length < 2)
+		) {
+			throw new Error(invalidConfigErrorPrefix + "'loginStateName' value" + invalidConfigErrorAppInitSuffix);
+		}
+		if (
+			typeof customConfig.preloadingStateName !== "undefined" &&
+			(!customConfig.preloadingStateName.startsWith(starkAppInitStateName) ||
+				customConfig.preloadingStateName.replace(starkAppInitStateName, "").length < 2)
+		) {
+			throw new Error(invalidConfigErrorPrefix + "'preloadingStateName' value" + invalidConfigErrorAppInitSuffix);
+		}
+		if (
+			typeof customConfig.sessionExpiredStateName !== "undefined" &&
+			(!customConfig.sessionExpiredStateName.startsWith(starkAppExitStateName) ||
+				customConfig.sessionExpiredStateName.replace(starkAppExitStateName, "").length < 2)
+		) {
+			throw new Error(invalidConfigErrorPrefix + "'sessionExpiredStateName' value" + invalidConfigErrorAppExitSuffix);
+		}
+		if (
+			typeof customConfig.sessionLogoutStateName !== "undefined" &&
+			(!customConfig.sessionLogoutStateName.startsWith(starkAppExitStateName) ||
+				customConfig.sessionLogoutStateName.replace(starkAppExitStateName, "").length < 2)
+		) {
+			throw new Error(invalidConfigErrorPrefix + "'sessionLogoutStateName' value" + invalidConfigErrorAppExitSuffix);
+		}
 	}
 
 	protected registerTransitionHook(): void {
