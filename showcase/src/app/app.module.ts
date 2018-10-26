@@ -20,7 +20,8 @@ import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { DateAdapter } from "@angular/material/core";
-import { SharedModule } from "./shared";
+import { SharedModule } from "./shared/shared.module";
+import { InMemoryDataModule } from "./in-memory-data/in-memory-data.module";
 import { Observable, of } from "rxjs";
 import { filter, map } from "rxjs/operators";
 
@@ -39,6 +40,7 @@ import {
 	StarkLoggingActionTypes,
 	StarkLoggingModule,
 	StarkMockData,
+	starkPreloadingStateName,
 	StarkRoutingModule,
 	StarkSessionModule,
 	StarkSessionService,
@@ -206,10 +208,12 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		}),
 		TranslateModule.forRoot(),
 		NgIdleModule.forRoot(),
-		NgIdleKeepaliveModule.forRoot(), // FIXME: disabled in stark-app-config.json for now until json-server is integrated
+		NgIdleKeepaliveModule.forRoot(),
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
-		StarkSessionModule.forRoot(),
+		StarkSessionModule.forRoot({
+			loginStateName: starkPreloadingStateName // get rid of the Login page in the Showcase :-)
+		}),
 		StarkErrorHandlingModule.forRoot(),
 		StarkSettingsModule.forRoot(),
 		StarkRoutingModule.forRoot(),
@@ -237,7 +241,8 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			position: "top right",
 			actionClasses: []
 		}),
-		StarkSessionUiModule.forRoot()
+		StarkSessionUiModule.forRoot(),
+		InMemoryDataModule
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.
