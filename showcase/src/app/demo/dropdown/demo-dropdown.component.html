@@ -20,7 +20,7 @@
 	<example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/multiple-selection" [exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.MULTIPLE' | translate">
 		<stark-dropdown dropdownId="multipleServiceDropdown" [options]="serviceDropdownOptions" [value]="selectedServices"
 		 optionIdProperty="id" optionLabelProperty="value" placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICES"
-		 (dropdownSelectionChanged)="multipleServicesDropdownOnChange($event)" multipleSelect="true">
+		 (dropdownSelectionChanged)="multipleServicesDropdownOnChange($event)" multiSelect>
 		</stark-dropdown>
 		<div *ngIf="selectedServices">{{ 'SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUES' | translate }}: {{ selectedServices }}</div>
 	</example-viewer>
@@ -28,14 +28,14 @@
 	<example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/multiple-required-selection" [exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.MULTIPLE_REQUIRED' | translate">
 		<stark-dropdown dropdownId="multipleServicesRequiredDropdown" [options]="serviceDropdownOptions" [value]="selectedRequiredServices"
 		 optionIdProperty="id" optionLabelProperty="value" placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_ONE_SERVICE"
-		 (dropdownSelectionChanged)="multipleServicesRequiredDropdownOnChange($event)" multipleSelect="true" required>
+		 (dropdownSelectionChanged)="multipleServicesRequiredDropdownOnChange($event)" multiSelect required>
 		</stark-dropdown>
 		<div *ngIf="selectedRequiredServices">{{ 'SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUES' | translate }} : {{ selectedRequiredServices }}</div>
 	</example-viewer>
 
 	<example-viewer [extensions]="['HTML', 'TS']" filesPath="dropdown/disabled-dropdown" [exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.DISABLED' | translate">
 		<stark-dropdown dropdownId="disabledDropdown" [options]="[1,2,3,4,5,6,7]" placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_DISABLED"
-		 [isDisabled]="true" multipleSelect="true">
+		 [isDisabled]="true" multiSelect>
 		</stark-dropdown>
 	</example-viewer>
 

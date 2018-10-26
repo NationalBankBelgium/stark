@@ -1,1 +1,2 @@
-export * from "./util/dom.util";
+export * from "./util/component";
+export * from "./util/dom";

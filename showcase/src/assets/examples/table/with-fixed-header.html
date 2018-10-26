@@ -1,13 +1,13 @@
-<stark-table htmlId="table-with-alternative-action-bar"
+<stark-table htmlId="table-fixed-header"
 			 [columnProperties]="columnsProperties"
 			 [customTableActions]="customTableActions"
-			 customTableActionsType="alt"
 			 [data]="dummyData"
 			 [filter]="filter"
+			 fixedHeader
 			 multiSelect
 			 multiSort
 			 [orderProperties]="orderProperties"
 			 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
-			 [paginationConfig]="paginationConfig2">
-	<header><h1>Table with alternative action bar</h1></header>
+			 [paginationConfig]="paginationConfig">
+	<header><h1>Table with a fixed header</h1></header>
 </stark-table>

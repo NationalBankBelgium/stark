@@ -32,6 +32,7 @@ import { StarkTableFilter } from "./table-filter.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkPaginationConfig, StarkPaginationComponent } from "../../pagination/components";
 import { StarkPaginateEvent } from "../../pagination/components/paginate-event.intf";
+import { StarkComponentUtil } from "../../../util/component";
 
 /**
  * Name of the component
@@ -54,10 +55,22 @@ const componentName: string = "stark-table";
 /* tslint:enable */
 export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges {
 	/**
-	 * HTML id of the table
+	 * Array of {@link StarkColumnProperties} objects which define the columns of the data table.
 	 */
 	@Input()
-	public htmlId: string;
+	public columnProperties: StarkTableColumnProperties[] = [];
+
+	/**
+	 * Array of {@link StarkAction} objects.
+	 */
+	@Input()
+	public customTableActions?: StarkAction[];
+
+	/**
+	 * Mode in which the custom actions will be displayed in the table
+	 */
+	@Input()
+	public customTableActionsType: "regular" | "alt" = "regular";
 
 	/**
 	 * Data that will be display inside your table.
@@ -72,16 +85,29 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public filter: StarkTableFilter;
 
 	/**
-	 * Array of StarkAction objects (see StarkAction docs).
+	 * Allows to fix the header to the top of the scrolling viewport containing the table.
+	 * Setting the attribute to "true" or empty will enable this feature.
+	 *
+	 * The class "fixed-header" will be added under .stark-table which defines the following css properties:
+	 *     - overflow-y: auto;
+	 *     - height: 400px;
+	 *
+	 * If you desire to change the height, please redefine the value for .stark-table .fixed-header { height: 400px; }
 	 */
 	@Input()
-	public customTableActions?: StarkAction[];
+	public fixedHeader?: string;
 
 	/**
-	 * Type of StarkAction objects
+	 * HTML id of the table
 	 */
 	@Input()
-	public customTableActionsType: "regular" | "alt" = "regular";
+	public htmlId: string;
+
+	/**
+	 * Allows multiple row selection. Setting the attribute to "true" or empty will enable this feature.
+	 */
+	@Input()
+	public multiSelect?: string;
 
 	/**
 	 * Allows sorting by multiple columns. Setting the attribute to "true" or empty will enable this feature.
@@ -90,46 +116,28 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public multiSort?: string;
 
 	/**
-	 * Whether to display the pagination component
-	 */
-	@Input()
-	public paginate: boolean = false;
-
-	/**
-	 *
-	 */
-	@Input()
-	public paginationConfig: StarkPaginationConfig;
-
-	/**
-	 * Allows multiple row selection. Setting the attribute to "true" or empty will enable this feature.
-	 */
-	@Input()
-	public multiselect: boolean = false;
-
-	/**
 	 * Columns to be sorted by default
 	 */
 	@Input()
 	public orderProperties?: string[];
 
 	/**
-	 * Array of StarkColumnProperties objects which define the columns of the data table.
+	 * Whether to display the pagination component
 	 */
 	@Input()
-	public columnProperties: StarkTableColumnProperties[] = [];
+	public paginate: boolean = false;
 
 	/**
-	 * StarkActionBarConfig object (see StarkActionBarConfig docs).
+	 * {@link StarkPaginationConfig} configuration object for embedded pagination component
+	 */
+	@Input()
+	public paginationConfig: StarkPaginationConfig;
+
+	/**
+	 * {@link StarkActionBarConfig} object for the action bar component to be displayed in all the rows
 	 */
 	@Input()
 	public tableRowsActionBarConfig: StarkActionBarConfig;
-
-	/**
-	 * Output event emitter that will emit the array of columns selected (column id's).
-	 */
-	@Output()
-	public selectChanged: EventEmitter<number[]> = new EventEmitter<number[]>();
 
 	/**
 	 * Output event emitter that will emit the latest global filter value whenever it changes.
@@ -150,6 +158,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	@Output()
 	public paginationChanged: EventEmitter<StarkPaginateEvent> = new EventEmitter<StarkPaginateEvent>();
+
+	/**
+	 * Output event emitter that will emit the array of columns selected (column id's).
+	 */
+	@Output()
+	public selectChanged: EventEmitter<number[]> = new EventEmitter<number[]>();
 
 	/**
 	 * Reference to the MatTable embedded in this component
@@ -186,14 +200,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public customTableAltActions?: StarkAction[];
 
 	/**
-	 * Array of StarkAction for regular mode
+	 * {@link StarkActionBarConfig} object for the action bar component in regular mode
 	 */
 	public customTableRegularActions: StarkActionBarConfig;
-
-	/**
-	 * Angular CDK selection model used for the "master" selection of the table
-	 */
-	public selection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
 	/**
 	 * MatTableDataSource associated to the MatTable embedded in this component
@@ -206,6 +215,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public displayedColumns: string[];
 
 	/**
+	 * Whether the fixed header is enabled.
+	 */
+	public isFixedHeaderEnabled: boolean = false;
+
+	/**
 	 * Whether the current sorting is done on multiple columns
 	 */
 	public isMultiSorting: boolean = false;
@@ -214,6 +228,16 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Whether the sorting by multiple columns is enabled.
 	 */
 	public isMultiSortEnabled: boolean = false;
+
+	/**
+	 * Whether the multiple row selection is enabled.
+	 */
+	public isMultiSelectEnabled: boolean = false;
+
+	/**
+	 * Angular CDK selection model used for the "master" selection of the table
+	 */
+	public selection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
 	/**
 	 * Class constructor
@@ -239,9 +263,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": component initialized");
 		this.displayedColumns = [];
-		if (this.multiselect) {
-			this.displayedColumns.unshift("select");
-		}
 
 		if (this.customTableActionsType === "regular") {
 			this.customTableRegularActions = { actions: this.customTableActions || [] };
@@ -283,6 +304,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Component lifecycle hook
 	 */
+	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["data"] && !changes["data"].isFirstChange() && this.resetFilterValueOnDataChange()) {
 			this.applyFilter();
@@ -300,9 +322,20 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.filter = { ...defaultFilter, ...this.filter };
 		}
 
+		if (changes["fixedHeader"]) {
+			this.isFixedHeaderEnabled = StarkComponentUtil.isInputEnabled(this.fixedHeader);
+		}
+
 		if (changes["multiSort"]) {
-			this.isMultiSortEnabled =
-				typeof this.multiSort === "boolean" ? this.multiSort : this.multiSort === "true" || this.multiSort === "";
+			this.isMultiSortEnabled = StarkComponentUtil.isInputEnabled(this.multiSort);
+		}
+
+		if (changes["multiSelect"]) {
+			this.isMultiSelectEnabled = StarkComponentUtil.isInputEnabled(this.multiSelect);
+
+			if (this.isMultiSelectEnabled) {
+				this.displayedColumns.unshift("select");
+			}
 		}
 	}
 

@@ -6,7 +6,7 @@
 		optionLabelProperty="value"
 		placeholder="Select at least one service"
 		(dropdownSelectionChanged)="multipleServicesRequiredDropdownOnChange($event)"
-		multipleSelect="true"
+		multiSelect
 		required>
 </stark-dropdown>
 <div *ngIf="selectedRequiredServices">Selected values: {{ selectedRequiredServices }}</div>

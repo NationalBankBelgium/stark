@@ -36,9 +36,9 @@
 
 </div>
 
-<div>
+<div [ngClass]="{'fixed-header': isFixedHeaderEnabled}">
 	<table #matTable mat-table [dataSource]="dataSource" [ngClass]="{'multi-sorting': isMultiSorting}">
-		<ng-container *ngIf="multiselect" matColumnDef="select">
+		<ng-container *ngIf="isMultiSelectEnabled" matColumnDef="select">
 			<th mat-header-cell *matHeaderCellDef>
 				<mat-checkbox (change)="$event ? masterToggle() : null"
 							  [checked]="selection.hasValue() && isAllSelected()"
@@ -75,7 +75,7 @@
 			</ng-template>
 		</stark-table-column>
 
-		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: isFixedHeaderEnabled"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 	</table>
 </div>
