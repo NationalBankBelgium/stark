@@ -8,6 +8,7 @@ const sourcemaps = require("rollup-plugin-sourcemaps");
 
 const globals = {
 	"@angularclass/hmr": "angularclass.hmr",
+	"@angular/animations": "ng.animations",
 	"@angular/cdk": "ng.cdk",
 	"@angular/cdk/collections": "ng.cdk.collections",
 	"@angular/cdk/layout": "ng.cdk.layout",

@@ -10,6 +10,7 @@ export * from "./modules/collapsible";
 export * from "./modules/date-picker";
 export * from "./modules/date-range-picker";
 export * from "./modules/dropdown";
+export * from "./modules/generic-search";
 export * from "./modules/keyboard-directives";
 export * from "./modules/language-selector";
 export * from "./modules/message-pane";

@@ -116,6 +116,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							targetState: "demo-ui.stark-footer"
 						},
 						{
+							id: "menu-style-generic-search",
+							label: "Generic Search",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-ui.generic-search"
+						},
+						{
 							id: "menu-stark-ui-components-language-selector",
 							label: "Language selector",
 							isVisible: true,

@@ -3,7 +3,7 @@
 	<h2>Reference</h2>
 	<ul>
 		<li *ngFor="let link of links; trackBy: trackItemFn; let last = last">
-			<a [attr.href]="link.url" target="_blank" rel="noopener noreferrer">{{ link.label }}</a>
+			<a [attr.href]="link.url" target="_blank" rel="noopener noreferrer">{{ link.label | translate }}</a>
 			<span *ngIf="!last"></span>
 		</li>
 	</ul>

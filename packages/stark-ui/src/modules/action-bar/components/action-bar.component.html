@@ -18,6 +18,7 @@
 					[matTooltip]="action.labelSwitchFunction ? (action.labelActivated | translate) : (action.label | translate)"
 					[disabled]="!action.isEnabled"
 					mat-icon-button
+					type="button"
 				>
 					<mat-icon
 						starkSvgViewBox
@@ -30,17 +31,31 @@
 					[ngClass]="{ disabled: !action.isEnabled }"
 					*ngIf="isExtended"
 				>
-					<span translate>{{ action.label }}</span></label
-				>
+					{{ action.label | translate }}
+				</label>
 			</ng-container>
 		</div>
 	</div>
 
 	<div *ngIf="mode === 'full' || alternativeActions" class="alt-actions">
-		<button class="extend-action-bar" color="primary" mat-icon-button *ngIf="mode === 'full'" (click)="toggleExtendedActionBar()">
+		<button
+			class="extend-action-bar"
+			color="primary"
+			mat-icon-button
+			*ngIf="mode === 'full'"
+			(click)="toggleExtendedActionBar()"
+			type="button"
+		>
 			<mat-icon starkSvgViewBox svgIcon="dots-horizontal" class="stark-small-icon"></mat-icon>
 		</button>
-		<button class="open-alt-actions" color="primary" mat-icon-button *ngIf="alternativeActions" [matMenuTriggerFor]="menu">
+		<button
+			class="open-alt-actions"
+			color="primary"
+			mat-icon-button
+			*ngIf="alternativeActions"
+			[matMenuTriggerFor]="menu"
+			type="button"
+		>
 			<mat-icon starkSvgViewBox svgIcon="dots-vertical" class="stark-small-icon"></mat-icon>
 		</button>
 		<mat-menu #menu="matMenu" xPosition="before">

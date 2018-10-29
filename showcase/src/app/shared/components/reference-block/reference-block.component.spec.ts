@@ -2,6 +2,7 @@ import { DebugElement, NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { TranslateModule } from "@ngx-translate/core";
 
 import { ReferenceBlockComponent } from "./reference-block.component";
 import { ReferenceLink } from "./reference-link.intf";
@@ -28,7 +29,7 @@ describe("ReferenceBlockComponent", () => {
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			declarations: [ReferenceBlockComponent],
-			imports: [],
+			imports: [TranslateModule.forRoot()],
 			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
 			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon
 		}).compileComponents();

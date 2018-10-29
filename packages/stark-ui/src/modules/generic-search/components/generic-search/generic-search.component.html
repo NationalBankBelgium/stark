@@ -1,0 +1,85 @@
+<form
+	[formGroup]="genericForm"
+	*ngIf="genericForm"
+	novalidate
+	(ngSubmit)="triggerSearch()"
+	[attr.id]="formHtmlId"
+	class="stark-generic-search-container"
+	[@collapse]="isFormHidden ? 'closed' : 'open'"
+>
+	<stark-action-bar *ngIf="actionBarConfig.isPresent" mode="full" [actionBarConfig]="actionBarConfig" actionBarId="search-action-bar">
+	</stark-action-bar>
+
+	<ng-content></ng-content>
+
+	<div class="stark-form-actions">
+		<button
+			mat-button
+			[color]="normalizedFormButtonsConfig.new.buttonColor"
+			*ngIf="normalizedFormButtonsConfig.new.isVisible"
+			[disabled]="!normalizedFormButtonsConfig.new.isEnabled"
+			[ngClass]="normalizedFormButtonsConfig.new.className"
+			(click)="newTriggered.emit()"
+			type="button"
+		>
+			<mat-icon
+				*ngIf="normalizedFormButtonsConfig.new.icon"
+				[matTooltip]="normalizedFormButtonsConfig.new.label | translate"
+				starkSvgViewBox
+				[svgIcon]="normalizedFormButtonsConfig.new.icon"
+			></mat-icon>
+			<span translate>{{ normalizedFormButtonsConfig.new.label }}</span>
+		</button>
+		<button
+			mat-button
+			[color]="normalizedFormButtonsConfig.reset.buttonColor"
+			*ngIf="normalizedFormButtonsConfig.reset.isVisible"
+			[disabled]="!normalizedFormButtonsConfig.reset.isEnabled"
+			[ngClass]="normalizedFormButtonsConfig.reset.className"
+			(click)="resetTriggered.emit(genericForm)"
+			type="button"
+		>
+			<mat-icon
+				*ngIf="normalizedFormButtonsConfig.reset.icon"
+				[matTooltip]="normalizedFormButtonsConfig.reset.label | translate"
+				starkSvgViewBox
+				[svgIcon]="normalizedFormButtonsConfig.reset.icon"
+			></mat-icon>
+			<span translate>{{ normalizedFormButtonsConfig.reset.label }}</span>
+		</button>
+		<button
+			mat-button
+			[color]="normalizedFormButtonsConfig.search.buttonColor"
+			[disabled]="!normalizedFormButtonsConfig.search.isEnabled"
+			[ngClass]="normalizedFormButtonsConfig.search.className"
+			type="submit"
+		>
+			<mat-icon
+				*ngIf="normalizedFormButtonsConfig.search.icon"
+				[matTooltip]="normalizedFormButtonsConfig.search.label | translate"
+				starkSvgViewBox
+				[svgIcon]="normalizedFormButtonsConfig.search.icon"
+			></mat-icon>
+			<span translate>{{ normalizedFormButtonsConfig.search.label }}</span>
+		</button>
+		<ng-container *ngFor="let formButton of normalizedFormButtonsConfig.custom; trackBy: trackItemFn">
+			<button
+				mat-button
+				[color]="formButton.buttonColor"
+				*ngIf="formButton.isVisible"
+				[disabled]="!formButton.isEnabled"
+				[ngClass]="formButton.className"
+				(click)="formButton.onClick()"
+				type="button"
+			>
+				<mat-icon
+					*ngIf="formButton.icon"
+					[matTooltip]="formButton.label | translate"
+					starkSvgViewBox
+					[svgIcon]="formButton.icon"
+				></mat-icon>
+				<span>{{ formButton.label | translate }}</span>
+			</button>
+		</ng-container>
+	</div>
+</form>
