@@ -30,7 +30,7 @@
     "@ng-idle/core": "6.0.0-beta.3",
     "@ng-idle/keepalive": "6.0.0-beta.3",
     "@ngrx/effects": "6.1.0",
-    "@ngrx/store": "6.1.0",
+    "@ngrx/store": "6.1.1",
     "@ngrx/store-devtools": "6.1.0",
     "@ngx-translate/core": "10.0.2",
     "@types/node": "8.10.15",
