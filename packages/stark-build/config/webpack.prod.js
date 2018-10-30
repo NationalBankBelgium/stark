@@ -17,13 +17,12 @@ const commonData = require("./webpack.common-data.js");
  * Webpack Plugins
  */
 const SourceMapDevToolPlugin = require("webpack/lib/SourceMapDevToolPlugin");
-const PurifyPlugin = require("@angular-devkit/build-optimizer").PurifyPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const HashedModuleIdsPlugin = require("webpack/lib/HashedModuleIdsPlugin");
 
-function getUglifyOptions(supportES2015, isCITestEnv = false) {
+function getUglifyOptions(supportES2015, isCITestEnv) {
 	const uglifyCompressOptions = {
 		pure_getters: true /* buildOptimizer */,
 		// PURE comments work best with 3 passes.
@@ -72,6 +71,12 @@ module.exports = function() {
 
 		mode: "production",
 
+		devtool: isCITestEnv ? undefined : "source-map",
+
+		performance: {
+			hints: "warning"
+		},
+
 		// reference: https://medium.com/webpack/webpack-4-mode-and-optimization-5423a6bc597a
 		optimization: {
 			removeAvailableModules: true,
@@ -97,7 +102,11 @@ module.exports = function() {
 				new UglifyJsPlugin({
 					parallel: true, // use multi-process parallel running to improve the build speed (default concurrent processes: os.cpus().length - 1)
 					sourceMap: !isCITestEnv, // useful to still be able to debug in production
-					uglifyOptions: getUglifyOptions(supportES2015),
+					uglifyOptions: getUglifyOptions(supportES2015, isCITestEnv),
+					exclude: [
+						/\/prettier\/parser-.*/, // prettier parsers are the biggest chunks and are already minified :p
+						/\/prettier\/standalone\.js/ // also one of the prettier's biggest chunks
+					],
 					cache: true
 				}),
 				// other options than Uglify: BabelifyMinifyWebpackPlugin or ClosureCompilerPlugin
@@ -317,9 +326,6 @@ module.exports = function() {
 				chunkFilename: "[id].[contenthash].css"
 			}),
 
-			// TODO remove since it's probably useless here (defined in webpack.common.js)
-			new PurifyPlugin() /* buildOptimizer */,
-
 			/**
 			 * Plugin: HashedModuleIdsPlugin
 			 * Description: This plugin will cause hashes to be based on the relative path of the module,
@@ -333,10 +339,6 @@ module.exports = function() {
 			})
 		]
 	});
-
-	if (!isCITestEnv) {
-		webpackConfig.devtool = "source-map";
-	}
 
 	return webpackConfig;
 };
