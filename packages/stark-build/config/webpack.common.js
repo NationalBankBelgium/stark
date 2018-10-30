@@ -21,7 +21,6 @@ const HtmlElementsWebpackPlugin = require("html-elements-webpack-plugin");
 const AngularNamedLazyChunksWebpackPlugin = require("angular-named-lazy-chunks-webpack-plugin");
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const CircularDependencyPlugin = require("circular-dependency-plugin");
-const PurifyPlugin = require("@angular-devkit/build-optimizer").PurifyPlugin;
 
 const buildUtils = require("./build-utils");
 
@@ -355,8 +354,6 @@ module.exports = options => {
 			 * See: https://github.com/Independer/angular-named-lazy-chunks-webpack-plugin
 			 */
 			new AngularNamedLazyChunksWebpackPlugin(),
-
-			new PurifyPlugin(),
 
 			new CircularDependencyPlugin({
 				// exclude detection of files based on a RegExp
