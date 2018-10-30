@@ -12,7 +12,7 @@ import {
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 const _cloneDeep: Function = require("lodash/cloneDeep");
-const mockData: any = require("../../../../config/json-server/data.json");
+const mockData: object = require("../../../../config/json-server/data.json");
 
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {
@@ -29,10 +29,11 @@ export class InMemoryDataService implements InMemoryDbService {
 	 */
 	public createDb(_reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
 		// replace the "uuid" field defined in the mock data by the "id" field expected by the in-memory-db
-		this.deepReplaceProperty(mockData, "uuid", "id");
+		const normalizedMockData: object = _cloneDeep(mockData); // avoid modifying the original mock data
+		this.deepReplaceProperty(normalizedMockData, "uuid", "id");
 
 		// 	IMPORTANT: cannot mock "logging" and "logout" requests since they are performed via XHR and not via Angular
-		return mockData;
+		return normalizedMockData;
 	}
 
 	/**

@@ -1,13 +1,23 @@
 import { NgModule } from "@angular/core";
-import { NewsComponent } from "./news-component";
-import { NewsItemComponent } from "./news-item-component";
+import { CommonModule } from "@angular/common";
+import { UIRouterModule } from "@uirouter/angular";
 import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from "@angular/material/card";
-import { CommonModule } from "@angular/common";
+import { NewsComponent } from "./news-component";
+import { NewsItemComponent } from "./news-item-component";
 import { SharedModule } from "../shared";
+import { NEWS_STATES } from "./routes";
 
 @NgModule({
-	imports: [MatCardModule, MatIconModule, CommonModule, SharedModule],
+	imports: [
+		UIRouterModule.forChild({
+			states: NEWS_STATES
+		}),
+		CommonModule,
+		MatCardModule,
+		MatIconModule,
+		SharedModule
+	],
 	declarations: [NewsComponent, NewsItemComponent],
 	exports: [NewsComponent, NewsItemComponent]
 })

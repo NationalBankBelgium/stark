@@ -20,7 +20,10 @@ import {
 const componentName: string = "stark-preloading-page";
 
 /**
- * Preloading Page smart component
+ * Preloading Page smart component.
+ * 
+ * This page will be shown when the application starts and will fetch the user profile (via the {@link StarkUserService}) to perform the login of the user.
+ * It will redirect to the target page (via the {@link StarkRoutingService}) as soon as the user profile is loaded and logged in.
  */
 @Component({
 	selector: "stark-preloading-page",
@@ -31,15 +34,40 @@ const componentName: string = "stark-preloading-page";
 	}
 })
 export class StarkPreloadingPageComponent implements OnInit {
+	/**
+	 * Target page to navigate to after the user profile is loaded and automatically logged in.
+	 */
 	@Input()
 	public targetState: string;
+
+	/**
+	 * Params to pass to the target page (if any).
+	 */
 	@Input()
 	public targetStateParams: RawParams;
 
+	/**
+	 * Whether the fetching of the user profile failed
+	 */
 	public userFetchingFailed: boolean;
+
+	/**
+	 * The current correlation Id of the application (useful when troubleshooting errors).
+	 */
 	public correlationId: string;
+
+	/**
+	 * @ignore
+	 */
 	public loginDelay: number = 200;
 
+	/**
+	 * Class constructor
+	 * @param logger - The logger of the application
+	 * @param userService - The user service of the application
+	 * @param sessionService - The session service of the application
+	 * @param routingService - The routing service of the application
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_USER_SERVICE) public userService: StarkUserService,

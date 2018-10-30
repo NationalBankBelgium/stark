@@ -14,35 +14,13 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { TranslateModule } from "@ngx-translate/core";
-import { DemoActionBarComponent } from "./action-bar/demo-action-bar.component";
-import { DemoBreadcrumbComponent } from "./breadcrumb/demo-breadcrumb.component";
-import { DemoCardComponent } from "./card/demo-card.component";
-import { DemoColorsComponent } from "./colors/demo-colors.component";
-import { DemoButtonComponent } from "./button/demo-button.component";
-import { DemoDatePickerComponent } from "./date-picker/demo-date-picker.component";
-import { DemoDateRangePickerComponent } from "./date-range-picker/demo-date-range-picker.component";
-import { DemoCollapsibleComponent } from "./collapsible/demo-collapsible.component";
-import { DemoSidebarComponent } from "./sidebar/demo-sidebar.component";
-import { DemoDropdownComponent } from "./dropdown/demo-dropdown.component";
-import { DemoExampleViewerComponent } from "./example-viewer/demo-example-viewer.component";
-import { DemoHeaderComponent } from "./header/demo-header.component";
-import { DemoFooterComponent } from "./footer/demo-footer.component";
-import { DemoKeyboardDirectivesComponent } from "./keyboard-directives/demo-keyboard-directives.component";
-import { DemoLanguageSelectorComponent } from "./language-selector/demo-language-selector.component";
-import { DemoLogoutComponent } from "./logout/demo-logout.component";
-import { DemoMenuComponent } from "./menu/demo-menu.component";
-import { DemoPaginationComponent } from "./pagination/demo-pagination.component";
-import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
-import { DemoSliderComponent } from "./slider/demo-slider.component";
-import { DemoTableComponent } from "./table/demo-table.component";
-import { DemoTypographyComponent } from "./typography/demo-typography.component";
-import { DemoToastComponent } from "./toast/demo-toast-notification.component";
-import { SharedModule } from "../shared/shared.module";
+import { UIRouterModule } from "@uirouter/angular";
 import {
 	STARK_DATE_FORMATS,
 	StarkActionBarModule,
 	StarkAppLogoutModule,
 	StarkBreadcrumbModule,
+	StarkCollapsibleModule,
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
 	StarkDropdownModule,
@@ -53,12 +31,39 @@ import {
 	StarkPrettyPrintModule,
 	StarkSliderModule,
 	StarkSvgViewBoxModule,
-	StarkTableModule,
-	StarkCollapsibleModule
+	StarkTableModule
 } from "@nationalbankbelgium/stark-ui";
+import { DemoActionBarComponent } from "./action-bar/demo-action-bar.component";
+import { DemoBreadcrumbComponent } from "./breadcrumb/demo-breadcrumb.component";
+import { DemoButtonComponent } from "./button/demo-button.component";
+import { DemoCardComponent } from "./card/demo-card.component";
+import { DemoCollapsibleComponent } from "./collapsible/demo-collapsible.component";
+import { DemoColorsComponent } from "./colors/demo-colors.component";
+import { DemoDatePickerComponent } from "./date-picker/demo-date-picker.component";
+import { DemoDateRangePickerComponent } from "./date-range-picker/demo-date-range-picker.component";
+import { DemoDropdownComponent } from "./dropdown/demo-dropdown.component";
+import { DemoExampleViewerComponent } from "./example-viewer/demo-example-viewer.component";
+import { DemoHeaderComponent } from "./header/demo-header.component";
+import { DemoFooterComponent } from "./footer/demo-footer.component";
+import { DemoKeyboardDirectivesComponent } from "./keyboard-directives/demo-keyboard-directives.component";
+import { DemoLanguageSelectorComponent } from "./language-selector/demo-language-selector.component";
+import { DemoLogoutComponent } from "./logout/demo-logout.component";
+import { DemoMenuComponent } from "./menu/demo-menu.component";
+import { DemoPaginationComponent } from "./pagination/demo-pagination.component";
+import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
+import { DemoSidebarComponent } from "./sidebar/demo-sidebar.component";
+import { DemoSliderComponent } from "./slider/demo-slider.component";
+import { DemoTableComponent } from "./table/demo-table.component";
+import { DemoTypographyComponent } from "./typography/demo-typography.component";
+import { DemoToastComponent } from "./toast/demo-toast-notification.component";
+import { SharedModule } from "../shared/shared.module";
+import { DEMO_STATES } from "./routes";
 
 @NgModule({
 	imports: [
+		UIRouterModule.forChild({
+			states: DEMO_STATES
+		}),
 		CommonModule,
 		FormsModule,
 		MatButtonModule,

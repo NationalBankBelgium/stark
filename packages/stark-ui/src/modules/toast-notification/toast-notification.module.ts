@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { CommonModule } from "@angular/common";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -13,7 +13,7 @@ import {
 import { StarkToastNotificationComponent } from "./components";
 @NgModule({
 	declarations: [StarkToastNotificationComponent],
-	imports: [BrowserModule, MatButtonModule, MatIconModule, MatSnackBarModule, TranslateModule],
+	imports: [CommonModule, MatButtonModule, MatIconModule, MatSnackBarModule, TranslateModule],
 	exports: [StarkToastNotificationComponent],
 	entryComponents: [StarkToastNotificationComponent] // More infos about entryComponents : https://github.com/angular/material2/issues/3002
 })

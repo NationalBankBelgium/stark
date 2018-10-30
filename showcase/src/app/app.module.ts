@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, Inject, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
 import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 import { UIRouter, UIRouterModule } from "@uirouter/angular";
 import { NgIdleModule } from "@ng-idle/core";
@@ -9,7 +10,6 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
@@ -17,7 +17,6 @@ import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatListModule } from "@angular/material/list";
-import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { DateAdapter } from "@angular/material/core";
 import { SharedModule } from "./shared/shared.module";
@@ -57,7 +56,6 @@ import {
 	StarkAppLogoutModule,
 	StarkAppMenuModule,
 	StarkAppSidebarModule,
-	StarkBreadcrumbModule,
 	StarkDatePickerModule,
 	StarkLanguageSelectorModule,
 	StarkSessionUiModule,
@@ -85,8 +83,6 @@ import { APP_STATES } from "./app.routes";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
-import { DemoModule } from "./demo";
-import { NewsModule } from "./news";
 /* tslint:disable:no-import-side-effect */
 // load PostCSS styles
 import "../styles/styles.pcss";
@@ -188,7 +184,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		MatExpansionModule,
 		MatIconModule,
 		MatListModule,
-		MatSidenavModule,
 		MatTooltipModule,
 		StoreModule.forRoot(reducers, {
 			metaReducers
@@ -225,8 +220,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			}
 		}),
 		SharedModule,
-		DemoModule,
-		NewsModule,
 		StarkAppFooterModule,
 		StarkAppLogoModule,
 		StarkAppLogoutModule,
@@ -235,7 +228,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkLanguageSelectorModule,
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
-		StarkBreadcrumbModule,
 		StarkToastNotificationModule.forRoot({
 			delay: 5000,
 			position: "top right",

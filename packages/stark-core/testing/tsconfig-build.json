@@ -30,6 +30,7 @@
     "allowEmptyCodegenFiles": false,
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
+    "enableResourceInlining": true,
     "flatModuleOutFile": "testing.js",
     "flatModuleId": "@nationalbankbelgium/stark-core/testing"
   }

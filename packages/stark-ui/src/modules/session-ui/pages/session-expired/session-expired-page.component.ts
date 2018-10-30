@@ -8,7 +8,10 @@ import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig, StarkL
 const componentName: string = "stark-session-expired-page";
 
 /**
- * Session expired page smart component
+ * Session Expired Page smart component.
+ * 
+ * This page will be shown when there is no user activity in the application and the session expiration timer has timed out (see {@link StarKApplicationConfig}).
+ * In this page, the user has the ability to reload again the application clicking the Reload button.
  */
 @Component({
 	selector: "stark-session-expired-page",
@@ -19,6 +22,11 @@ const componentName: string = "stark-session-expired-page";
 	}
 })
 export class StarkSessionExpiredPageComponent implements OnInit {
+	/**
+	 * Class constructor
+	 * @param logger - The logger of the application
+	 * @param appConfig - The application configuration
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_APP_CONFIG) public appConfig: StarkApplicationConfig
