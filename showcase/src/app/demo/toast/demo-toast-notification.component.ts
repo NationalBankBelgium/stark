@@ -126,6 +126,22 @@ export class DemoToastComponent implements OnInit {
 	public ngOnInit(): void {
 		this.referenceList = [
 			{
+				label: "Stark Toast Notification service",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastNotificationService.html"
+			},
+			{
+				label: "Stark Mock Toast Notification service",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/classes/MockToastNotificationService.html"
+			},
+			{
+				label: "Stark Toast Notification options",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastNotificationOptions.html"
+			},
+			{
+				label: "Stark Toast Message",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastMessage.html"
+			},
+			{
 				label: "Stark Toast Notification component",
 				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkToastNotificationComponent.html"
 			}

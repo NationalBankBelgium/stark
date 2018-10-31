@@ -6,7 +6,7 @@ import { ReferenceLink } from "../../shared/reference-block";
 	selector: "demo-logout",
 	templateUrl: "./demo-logout.component.html"
 })
-export class DemoLogoutComponent implements OnInit{
+export class DemoLogoutComponent implements OnInit {
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
 	public referenceList: ReferenceLink[];
@@ -16,7 +16,7 @@ export class DemoLogoutComponent implements OnInit{
 	public ngOnInit(): void {
 		this.referenceList = [
 			{
-				label: "Stark Logout component",
+				label: "Stark AppLogout component",
 				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkAppLogoutComponent.html"
 			}
 		];
