@@ -30,7 +30,15 @@ export class DemoSidebarComponent implements OnInit {
 	public ngOnInit(): void {
 		this.referenceList = [
 			{
-				label: "Stark Sidebar component",
+				label: "Stark AppSidebar service",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkAppSidebarService.html"
+			},
+			{
+				label: "Stark Mock AppSidebar service",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/classes/MockAppSidebarService.html"
+			},
+			{
+				label: "Stark AppSidebar component",
 				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkAppSidebarComponent.html"
 			}
 		];

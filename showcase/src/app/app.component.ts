@@ -71,6 +71,27 @@ export class AppComponent implements OnInit {
 									targetState: "demo-action-bar"
 								},
 								{
+									id: "menu-stark-ui-components-logout",
+									label: "App logout",
+									isVisible: true,
+									isEnabled: true,
+									targetState: "demo-logout"
+								},
+								{
+									id: "menu-stark-ui-components-menu",
+									label: "App menu",
+									isVisible: true,
+									isEnabled: true,
+									targetState: "demo-menu"
+								},
+								{
+									id: "menu-stark-ui-components-sidebar",
+									label: "App sidebar",
+									isVisible: true,
+									isEnabled: true,
+									targetState: "demo-sidebar"
+								},
+								{
 									id: "menu-stark-ui-components-breadcrumb",
 									label: "Breadcrumb",
 									isVisible: true,
@@ -127,20 +148,6 @@ export class AppComponent implements OnInit {
 									targetState: "demo-language-selector"
 								},
 								{
-									id: "menu-stark-ui-components-logout",
-									label: "Logout",
-									isVisible: true,
-									isEnabled: true,
-									targetState: "demo-logout"
-								},
-								{
-									id: "menu-stark-ui-components-menu",
-									label: "Menu",
-									isVisible: true,
-									isEnabled: true,
-									targetState: "demo-menu"
-								},
-								{
 									id: "menu-stark-ui-components-pagination",
 									label: "Pagination",
 									isVisible: true,
@@ -153,13 +160,6 @@ export class AppComponent implements OnInit {
 									isVisible: true,
 									isEnabled: true,
 									targetState: "demo-pretty-print"
-								},
-								{
-									id: "menu-stark-ui-components-sidebar",
-									label: "Sidebar",
-									isVisible: true,
-									isEnabled: true,
-									targetState: "demo-sidebar"
 								},
 								{
 									id: "menu-stark-ui-components-slider",
@@ -177,7 +177,7 @@ export class AppComponent implements OnInit {
 								},
 								{
 									id: "menu-stark-ui-components-toast",
-									label: "Toast",
+									label: "Toast notification",
 									isVisible: true,
 									isEnabled: true,
 									targetState: "demo-toast"

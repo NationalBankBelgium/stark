@@ -147,12 +147,12 @@
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Logout-knop - Standaard pictogram",
         "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram",
-        "TITLE": "Stark logout"
+        "TITLE": "Stark app logout"
       },
       "MENU": {
         "SIMPLE": "Simple menu",
         "SECTIONS": "Menu with sections",
-        "TITLE": "Stark menu"
+        "TITLE": "Stark app menu"
       },
       "PAGINATION": {
         "ADVANCED_CONFIGURATION": "Pagination met geavanceerde configuratie",
@@ -188,7 +188,7 @@
         "OPEN_LEFT": "Open de linker sidebar",
         "OPEN_MENU": "Open de menu",
         "OPEN_RIGHT": "Open de rechter sidebar",
-        "TITLE": "Stark sidebar"
+        "TITLE": "Stark app sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Horizontale schuifregelaar met bereik",
@@ -218,7 +218,8 @@
         "MESSAGE_OPENED": "Toast geopend.",
         "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast automatisch gesloten voordat een nieuwe wordt weergegeven.",
         "MESSAGE_INTRO": "Klik op een knop om de toastmelding te testen.",
-        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}"
+        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
+        "TITLE": "Stark toast notification"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {

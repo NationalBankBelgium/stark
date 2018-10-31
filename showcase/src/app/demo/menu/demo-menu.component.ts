@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkMenuConfig } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-menu",
@@ -10,6 +11,8 @@ import { StarkMenuConfig } from "@nationalbankbelgium/stark-ui";
 export class DemoMenuComponent implements OnInit {
 	public menuWithSections: StarkMenuConfig;
 	public simpleMenu: StarkMenuConfig;
+
+	public referenceList: ReferenceLink[];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
@@ -188,5 +191,16 @@ export class DemoMenuComponent implements OnInit {
 				}
 			]
 		};
+
+		this.referenceList = [
+			{
+				label: "Stark AppMenu component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkAppMenuComponent.html"
+			},
+			{
+				label: "Stark AppMenu Item component",
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkAppMenuItemComponent.html"
+			}
+		];
 	}
 }

@@ -147,12 +147,12 @@
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
         "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon",
-        "TITLE": "Stark logout"
+        "TITLE": "Stark app logout"
       },
       "MENU": {
         "SIMPLE": "Simple menu",
         "SECTIONS": "Menu with sections",
-        "TITLE": "Stark menu"
+        "TITLE": "Stark app menu"
       },
       "PAGINATION": {
         "ADVANCED_CONFIGURATION": "Pagination with advanced configuration",
@@ -188,7 +188,7 @@
         "OPEN_LEFT": "Open the left sidebar",
         "OPEN_MENU": "Open the menu",
         "OPEN_RIGHT": "Open the right sidebar",
-        "TITLE": "Stark sidebar"
+        "TITLE": "Stark app sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Horizontal Range Slider",
@@ -218,7 +218,8 @@
         "MESSAGE_OPENED": "Toast opened.",
         "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast automatically closed before displaying a new one.",
         "MESSAGE_INTRO": "Click one button to test the toast notification.",
-        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}"
+        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
+        "TITLE": "Stark toast notification"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
