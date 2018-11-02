@@ -18,7 +18,11 @@ import {
 const componentName: string = "stark-login-page";
 
 /**
- * Login Page smart component
+ * Login Page smart component.
+ * **This page is to be used only in the development environment.**
+ *
+ * It shows a list of user profiles (provided by mock data or a back-end) that the user can choose and use it to impersonate himself as someone else.
+ * This makes it easy to run the application with different roles.
  */
 @Component({
 	selector: "stark-login-page",
@@ -29,13 +33,30 @@ const componentName: string = "stark-login-page";
 	}
 })
 export class StarkLoginPageComponent implements OnInit {
+	/**
+	 * Target page to navigate to after the user profile is loaded and automatically logged in.
+	 */
 	@Input()
 	public targetState: string;
+
+	/**
+	 * Params to pass to the target page (if any).
+	 */
 	@Input()
 	public targetStateParams: RawParams;
 
+	/**
+	 * User profiles to be displayed in the list where the user can choose from.
+	 */
 	public users: StarkUser[];
 
+	/**
+	 * Class constructor
+	 * @param logger - The logger of the application
+	 * @param userService - The user service of the application
+	 * @param sessionService - The session service of the application
+	 * @param routingService - The routing service of the application
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_USER_SERVICE) public userService: StarkUserService,

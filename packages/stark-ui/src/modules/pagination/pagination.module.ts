@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
@@ -15,7 +15,7 @@ import { StarkDropdownModule } from "../dropdown/dropdown.module";
 	declarations: [StarkPaginationComponent],
 	exports: [StarkPaginationComponent],
 	imports: [
-		BrowserAnimationsModule,
+		CommonModule,
 		FormsModule,
 		MatButtonModule,
 		MatIconModule,
