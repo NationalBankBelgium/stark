@@ -17,11 +17,6 @@
                 "glob": "**/*",
                 "input": "../node_modules/@nationalbankbelgium/stark-ui/assets",
                 "output": "./assets/stark-ui/"
-              },
-              {
-                "glob": "**/*",
-                "input": "../node_modules/@nationalbankbelgium/stark-ui/src/modules/app-logo/assets",
-                "output": "./assets/stark-ui/app-logo/"
               }
             ]
           }

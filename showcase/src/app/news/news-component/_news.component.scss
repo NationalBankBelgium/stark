@@ -7,10 +7,10 @@
 }
 
 .second-news-image {
-  background: url("/assets-base/stark_logo_white.png") no-repeat center center;
-  width: 250px;
-  height: 60px;
-  background-size: contain;
+  background: url("/assets/stark-core/logo/stark_logo_black.svg") no-repeat center center;
+  width: 180px;
+  height: 55px;
+  background-size: 100% 100%;
 }
 
 @media #{$desktop-query} {

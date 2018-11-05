@@ -149,9 +149,10 @@ td {
     & i {
       margin: auto;
       display: block;
-      width: 220px;
-      height: 77px;
-      background: url("/assets/images/logo/logo-nbb-en.gif") no-repeat;
+      width: 200px;
+      height: 60px;
+      background: url("/assets/stark-core/logo/stark_logo_transparent.svg") no-repeat;
+      background-size: 100% 100%;
     }
   }
   & content {
