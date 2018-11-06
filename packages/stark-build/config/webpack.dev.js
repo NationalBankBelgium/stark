@@ -47,7 +47,7 @@ module.exports = function(env) {
 		// "default-src 'self'", // FIXME: enable as soon as the issue is fixed in Angular (https://github.com/angular/angular-cli/issues/6872 )
 		"child-src 'self'",
 		"connect-src 'self' ws://" + METADATA.HOST + ":" + METADATA.PORT + " " + webpackCustomConfig["cspConnectSrc"], // ws://HOST:PORT" is due to Webpack
-		"font-src 'self' " + webpackCustomConfig["cspFontSrc"],
+		`font-src 'self' ${webpackCustomConfig["cspFontSrc"] || ''}`,
 		"form-action 'self' " + webpackCustomConfig["cspFormAction"],
 		"frame-src 'self'", // deprecated. Use child-src instead. Used here because child-src is not yet supported by Firefox. Remove as soon as it is fully supported
 		"frame-ancestors 'none'", // the app will not be allowed to be embedded in an iframe (roughly equivalent to X-Frame-Options: DENY)
@@ -279,14 +279,14 @@ module.exports = function(env) {
 			 */
 			...(MONITOR
 				? [
-						new WebpackMonitor({
-							capture: true, // -> default 'true'
-							target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
-							launch: true, // -> default 'false'
-							port: 3030, // default -> 8081
-							excludeSourceMaps: true // default 'true'
-						})
-				  ]
+					new WebpackMonitor({
+						capture: true, // -> default 'true'
+						target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
+						launch: true, // -> default 'false'
+						port: 3030, // default -> 8081
+						excludeSourceMaps: true // default 'true'
+					})
+				]
 				: [])
 		],
 

@@ -226,14 +226,17 @@
           "TITLE": "Classes & tags disponibles"
         },
         "CUSTOMIZATION": {
+          "TITLE": "Personnalisation",
           "DETAILS": "Stark vous permet de personnaliser les polices de caractères à la fois des composants Stark et des composants Angular Material en déclarant une simple map SCSS.<br>Déclarer d'abord la map SCSS puis importer le theme de Stark. Cet example montr une version complète de la map mais vous pouvez aussi l'utiliser partiellement.",
-          "MAP_EXPLAINED": "Voici la liste de classes et tags correspondant:",
-          "TITLE": "Personnalisation"
+          "MAP_EXPLAINED": "Voici la liste de classes et tags correspondant:"
         },
         "FONT_FAMILY": {
+          "TITLE": "Familles de police de caractère",
           "DETAILS_1": "Material Design suggère d'utiliser Roboto, la police sans-serif disponible sur Android. Nous avons choisi de laisser le système décider de la police qui lui parait la plus adaptée. Grâce à cela aucune police n'est embeddé, ce qui réduit la temps de chargement de la page.",
           "DETAILS_2": "Voici la liste de police fournit que le système va se charger d'interpréter:",
-          "TITLE": "Familles de police de caractère"
+          "CUSTOM_FONT_EXPLAINED": "Pour définir une police web (ex. Roboto), ajouter la police (ttf, woff, ...) aux \"assets\" de votre projet, ajouter la police comme une font-face a SCSS et le définir dans <code>stark-typography-theme</code>",
+          "IE_NOTE": "* Le format de police woff2 n'est pas pris en charge par IE. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face#Browser_compatibility\" target=\"_blank\" rel=\"noopener\">MDN</a>",
+          "CDN_FONT_EXPLAINED": "Pour définir une police web d'une source externe (CDN) vous devez indiquer à Webpack d'autoriser les polices à partir de sources externes. Dans le fichier <code>config/webpack-custom-config.dev.json</code> ajouter l'hôte/port a <code>cspFontSrc</code>. Pour plus d'informations, consultez <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src\" target=\"_blank\" rel=\"noopener\"> CSP: font-src </a>."
         },
         "MATERIAL_BASED": {
           "DETAILS": "Nous avons garder un maximum de compatibilité avec Angular Material. Pour plus de détails sur la philosophie derrière Angular Material, consulter cetee page: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
