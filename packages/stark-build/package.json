@@ -19,8 +19,8 @@
   },
   "types": "typings/index.d.ts",
   "dependencies": {
-    "@angular-devkit/build-angular": "0.8.4",
-    "@angular-devkit/build-optimizer": "0.8.4",
+    "@angular-devkit/build-angular": "0.8.7",
+    "@angular-devkit/build-optimizer": "0.8.7",
     "@types/uglify-js": "3.0.4",
     "@types/webpack": "4.4.17",
     "add-asset-html-webpack-plugin": "3.1.2",
@@ -68,9 +68,9 @@
     "write-file-webpack-plugin": "4.4.1"
   },
   "devDependencies": {
-    "@angular/cli": "6.2.4",
-    "@angular/compiler": "6.1.9",
-    "@angular/compiler-cli": "6.1.9"
+    "@angular/cli": "6.2.7",
+    "@angular/compiler": "6.1.10",
+    "@angular/compiler-cli": "6.1.10"
   },
   "peerDependencies": {
     "@angular/cli": "6.x",

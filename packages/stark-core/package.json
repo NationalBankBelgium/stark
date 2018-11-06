@@ -33,7 +33,7 @@
     "@ngrx/store": "6.1.2",
     "@ngrx/store-devtools": "6.1.2",
     "@ngx-translate/core": "10.0.2",
-    "@types/node": "8.10.15",
+    "@types/node": "8.10.37",
     "@types/uuid": "3.4.4",
     "@uirouter/angular": "2.0.2",
     "cerialize": "0.1.18",

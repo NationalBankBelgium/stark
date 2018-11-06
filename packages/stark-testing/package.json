@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@types/jasmine": "2.8.9",
-    "@types/node": "8.10.15",
+    "@types/node": "8.10.37",
     "coveralls": "3.0.2",
     "istanbul-lib-instrument": "2.3.2",
     "jasmine-core": "3.3.0",

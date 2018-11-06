@@ -13,9 +13,16 @@
     }
   },
   "ignore": [
+    "@angular/compiler-cli",
+    "@angular-devkit/build-angular",
+    "@angular-devkit/build-optimizer",
     "@angular/flex-layout",
+    "@ngx-translate/core",
     "@types/node",
+    "angular",
+    "angular2",
     "class-validator",
+    "lint-staged",
     "typescript",
     "tslint-sonarts"
   ]
