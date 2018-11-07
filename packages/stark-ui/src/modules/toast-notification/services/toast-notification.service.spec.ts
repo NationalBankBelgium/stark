@@ -34,8 +34,8 @@ describe("ToastNotificationService", () => {
 		const mockSnackBar: SpyObj<MatSnackBar> = createSpyObj<MatSnackBar>("MatSnackBar", {
 			openFromComponent: createSpyObj<MatSnackBarRef<StarkToastNotificationComponent>>("MatSnackBarRef", {
 				afterDismissed: afterDismissedObs,
-				dismissWithAction: jasmine.createSpy("dismissWithAction"),
-				dismiss: jasmine.createSpy("dismiss")
+				dismissWithAction: <any>jasmine.createSpy("dismissWithAction"),
+				dismiss: <any>jasmine.createSpy("dismiss")
 			}),
 			dismiss: undefined
 		});
