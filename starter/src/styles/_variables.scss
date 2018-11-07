@@ -1,9 +1,22 @@
-/* Define the custom maps for Stark styles if needed */
+/*
+// Define a font-face for a web font
+@font-face {
+  font-family: "font-name";
+  font-style: normal;
+  src: url("path-to-font") format("woff | woff2 | truetype | opentype | embedded-opentype | svg");
+}
 
-/*$stark-typography-theme: (
-  font-family: '"Oswald", sans-serif',
+// A separate css with the font-faces defined can also be added
+// If the fonts are hosted remotely (eg: https://fonts.gstatic.com)
+// the host and port should be added to "cspFontSrc" property in /config/webpack-custom-config.dev.json
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+// Define the custom maps for Stark styles if needed 
+$stark-typography-theme: (
+  font-family: "'font-name', sans-serif",
   headline: (90px, 48px, 400),
   body-1: (14px, 20px, 400),
   body-2: (14px, 24px, 500),
   caption: (12px, 20px, 400)
-);*/
+);
+*/

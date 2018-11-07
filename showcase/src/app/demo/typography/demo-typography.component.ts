@@ -6,15 +6,36 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 	templateUrl: "./demo-typography.component.html"
 })
 export class DemoTypographyComponent implements OnInit {
-	public customizeMap: string;
 	public fontFamilyCSS: string;
-	public importTheme: string;
+	public fontFaceExample: string;
+	public webpackExample: string;
+	public customizeMap: string;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
 	public ngOnInit(): void {
 		this.fontFamilyCSS = `
 			font-family: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif";
+		`;
+
+		this.fontFaceExample = `
+		@font-face {
+		  font-family: "Roboto";
+		  font-style: "Regular";
+		  src: url("/assets/fonts/Roboto-Regular.ttf") format("truetype")
+		}
+		
+		$stark-typography-theme: (
+		  font-family: "'Roboto',  sans-serif",
+		);
+	 	`;
+
+		this.webpackExample = `
+		{
+			"cspConnectSrc": "http://localhost:5000 http://localhost:5001 http://localhost:5002 http://localhost:4000 https://nationalbankbelgium.github.io",
+			"cspFormAction": "http://localhost:5000/myAwesomeUpload",
+			"cspFontSrc": "http://fonts.gstatic.com"
+		}
 		`;
 
 		this.customizeMap = `
@@ -35,6 +56,7 @@ export class DemoTypographyComponent implements OnInit {
 			input:(inherit, 1.125, 400)
 		  );
 
-		@import "~@nationalbankbelgium/stark-ui/assets/themes/theming";`;
+		@import "~@nationalbankbelgium/stark-ui/assets/themes/theming";
+		`;
 	}
 }

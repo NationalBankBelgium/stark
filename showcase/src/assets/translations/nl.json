@@ -231,14 +231,17 @@
           "TITLE": "Available classes & tags"
         },
         "CUSTOMIZATION": {
+          "TITLE": "Customization",
           "DETAILS": "Stark allows you to customize simultaneously the typography settings of Angular Material and Stark easily by adding a simple SCSS map declaration. <br>First, declare the SCSS map and then you need to import the Stark's theme. On this example, a full version of the map is shown but you can also use it partially.",
-          "MAP_EXPLAINED": "Here are the corresponding classes and tags:",
-          "TITLE": "Customization"
+          "MAP_EXPLAINED": "Here are the corresponding classes and tags:"
         },
         "FONT_FAMILY": {
+          "TITLE": "Font family",
           "DETAILS_1": "Material Design does not require to use a specific font, but it suggests Roboto, the sans-serif font available on Android mobile devices. We have chosen to let the system decide the most readable font it has to offer. This has the added advantage that no font will be embedded, reducing the first page load time.",
           "DETAILS_2": "The font stack used to get the optimal sans-serif font the system provides:",
-          "TITLE": "Font family"
+          "CUSTOM_FONT_EXPLAINED": "To set a web font (eg: Roboto) you must first add the font (ttf, woff, ...) to your projects assets, add it as a font-face in SCSS and set it trough the <code>$stark-typography-theme</code> (more about customization below).",
+          "IE_NOTE": "* The font format woff2 is not supported by IE. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face#Browser_compatibility\" target=\"_blank\" rel=\"noopener\">MDN</a>",
+          "CDN_FONT_EXPLAINED": "To set a web font from an external source (CDN) webpack needs to be told to allow fonts from external sources. To do this add a the host/port to cspFontSrc in <code>config/webpack-custom-config.dev.json</code>. For more details check out: <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src\" target=\"_blank\" rel=\"noopener\"> CSP: font-src </a>."
         },
         "MATERIAL_BASED": {
           "DETAILS": "We try to keep consistency with Angular Material. For more details checkout: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
