@@ -1,10 +1,10 @@
 import { inject, TestBed } from "@angular/core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { mergeTranslations } from "./translations";
-import { StarkLocale } from "./locale.intf";
+import { StarkLocale } from "@nationalbankbelgium/stark-core";
+import { mergeUiTranslations } from "./merge-translations";
 
 /* tslint:disable:no-duplicate-string */
-describe("Translations: mergeTranslations", () => {
+describe("Translations: mergeUiTranslations", () => {
 	const translateModule: TranslateModule = TranslateModule.forRoot();
 	let translateService: TranslateService;
 
@@ -49,11 +49,11 @@ describe("Translations: mergeTranslations", () => {
 		translateService.setDefaultLang("en");
 	}));
 
-	describe("mergeTranslations", () => {
-		it("should return the merged translations from common, module and app", () => {
+	describe("mergeUiTranslations", () => {
+		it("should return the merged translations from common Core, common Ui, module and app", () => {
 			// First the module is loaded
 			const english: StarkLocale = { languageCode: "en", translations: moduleTranslationsEn };
-			mergeTranslations(translateService, english);
+			mergeUiTranslations(translateService, english);
 
 			// then the app is loaded
 			translateService.setTranslation("en", appTranslationsEn, true);
@@ -62,32 +62,36 @@ describe("Translations: mergeTranslations", () => {
 			const text1: string = translateService.instant("STARK.TEST.TEXT1");
 			const text2: string = translateService.instant("STARK.TEST.TEXT2");
 			const text3: string = translateService.instant("STARK.TEST.TEXT3");
-			const ascending: string = translateService.instant("STARK.SORTING.ASC");
+			const languageFr: string = translateService.instant("STARK.LANGUAGES.FR");
+			const closeItem: string = translateService.instant("STARK.ICONS.CLOSE_ITEM");
 
 			expect(text1).toBe(moduleTranslationsEn.STARK.TEST.TEXT1);
 			expect(text2).toBe(appTranslationsEn.STARK.TEST.TEXT2); // the app has the upper hand
 			expect(text3).toBe(appTranslationsEn.STARK.TEST.TEXT3);
-			expect(ascending).toBe("Ascending"); // Common translations
+			expect(languageFr).toBe("Français"); // Common Core translations
+			expect(closeItem).toBe("Close"); // Common Ui translations
 		});
 
-		it("should return the merged translations from common, module and app when lazy loading modules", () => {
+		it("should return the merged translations from common Core, common Ui, module and app when lazy loading modules", () => {
 			// First the app is loaded
 			translateService.setTranslation("en", appTranslationsEn, true);
 			translateService.use("en");
 
 			// Then the module is lazy loaded
 			const english: StarkLocale = { languageCode: "en", translations: moduleTranslationsEn };
-			mergeTranslations(translateService, english);
+			mergeUiTranslations(translateService, english);
 
 			const text1: string = translateService.instant("STARK.TEST.TEXT1");
 			const text2: string = translateService.instant("STARK.TEST.TEXT2");
 			const text3: string = translateService.instant("STARK.TEST.TEXT3");
-			const ascending: string = translateService.instant("STARK.SORTING.ASC");
+			const languageFr: string = translateService.instant("STARK.LANGUAGES.FR");
+			const closeItem: string = translateService.instant("STARK.ICONS.CLOSE_ITEM");
 
 			expect(text1).toBe(moduleTranslationsEn.STARK.TEST.TEXT1);
 			expect(text2).toBe(appTranslationsEn.STARK.TEST.TEXT2); // the app has the upper hand
 			expect(text3).toBe(appTranslationsEn.STARK.TEST.TEXT3);
-			expect(ascending).toBe("Ascending"); // Common translations
+			expect(languageFr).toBe("Français"); // Common Core translations
+			expect(closeItem).toBe("Close"); // Common Ui translations
 		});
 
 		it("should return the merged translations, where the app has an extra language", () => {
@@ -96,18 +100,19 @@ describe("Translations: mergeTranslations", () => {
 			translateService.use("de");
 
 			const english: StarkLocale = { languageCode: "en", translations: moduleTranslationsEn };
-			mergeTranslations(translateService, english);
+			mergeUiTranslations(translateService, english);
 
 			const text1: string = translateService.instant("STARK.TEST.TEXT1");
 			const text2: string = translateService.instant("STARK.TEST.TEXT2");
 			const text3: string = translateService.instant("STARK.TEST.TEXT3");
-			const ascending: string = translateService.instant("STARK.SORTING.ASC");
+			const languageFr: string = translateService.instant("STARK.LANGUAGES.FR");
+			const closeItem: string = translateService.instant("STARK.ICONS.CLOSE_ITEM");
 
 			expect(text1).toBe("Text1 aus der app");
 			expect(text2).toBe("Text2 aus der app");
 			expect(text3).toBe("Text3 aus der app");
-			expect(ascending).toBe("Ascending"); // missing in the app => translated from the default language 'en'
+			expect(languageFr).toBe("Français"); // missing in the app => translated from the default language 'en'
+			expect(closeItem).toBe("Close"); // missing in the app => translated from the default language 'en'
 		});
 	});
 });
-/* tslint:enable */

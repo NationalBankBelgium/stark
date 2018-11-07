@@ -7,7 +7,7 @@ import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { mergeTranslations, StarkLocale } from "@nationalbankbelgium/stark-core";
+import { StarkLocale } from "@nationalbankbelgium/stark-core";
 
 import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
@@ -17,6 +17,7 @@ import { StarkMessagePaneComponent } from "./components";
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneServiceImpl } from "./services";
 import { starkMessagesReducers } from "./reducers";
 import { StarkMessagePaneEffects } from "./effects";
+import { mergeUiTranslations } from "../../common/translations";
 
 @NgModule({
 	declarations: [StarkMessagePaneComponent],
@@ -54,7 +55,7 @@ export class StarkMessagePaneModule {
 		@Optional()
 		@SkipSelf()
 		parentModule: StarkMessagePaneModule,
-		private translateService: TranslateService
+		translateService: TranslateService
 	) {
 		if (parentModule) {
 			throw new Error("StarkMessagePaneModule is already loaded. Import it in the AppModule only");
@@ -63,6 +64,6 @@ export class StarkMessagePaneModule {
 		const english: StarkLocale = { languageCode: "en", translations: translationsEn };
 		const french: StarkLocale = { languageCode: "fr", translations: translationsFr };
 		const dutch: StarkLocale = { languageCode: "nl", translations: translationsNl };
-		mergeTranslations(this.translateService, english, french, dutch);
+		mergeUiTranslations(translateService, english, french, dutch);
 	}
 }
