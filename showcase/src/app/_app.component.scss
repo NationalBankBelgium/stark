@@ -1,7 +1,6 @@
 .stark-app-sidebar {
   .stark-app-sidenav-menu {
     .stark-app-logo {
-      border-bottom: 1px solid #ddd;
       display: flex;
       justify-content: center;
       padding: 10px 0 20px;
@@ -39,5 +38,15 @@
         }
       }
     }
+  }
+}
+
+.stark-app-bar-content-right-actions-alt .mat-icon-button.github-icon {
+  .mat-button-wrapper {
+    padding: 0;
+  }
+  mat-icon {
+    height: 40px;
+    width: 40px;
   }
 }

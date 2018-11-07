@@ -67,15 +67,27 @@
 								</button>
 							</div>
 							<div class="stark-app-bar-content-right-actions-alt">
-								<button mat-mini-fab [matTooltip]="'SHOWCASE.STYLEGUIDE.TITLE' | translate">
-									<mat-icon starkSvgViewBox svgIcon="television-guide"></mat-icon>
+								<a href="https://stark.nbb.be/api-docs/stark-ui/latest/" target="_blank"> 
+								<button mat-mini-fab mat-icon-button color="success"
+										[matTooltip]="'SHOWCASE.ICONS.STARK_UI' | translate">
+									<mat-icon class="header-icon" svgIcon="television-guide" starkSvgViewBox>
+									</mat-icon>
 								</button>
-								<button mat-mini-fab color="success" [matTooltip]="'STARK.ICONS.ADD_ITEM' | translate">
-									<mat-icon starkSvgViewBox svgIcon="plus"></mat-icon>
-								</button>
-								<button mat-mini-fab color="primary" [matTooltip]="'STARK.ICONS.SEARCH' | translate">
-									<mat-icon starkSvgViewBox svgIcon="magnify"></mat-icon>
-								</button>
+								</a>
+								<a href="https://stark.nbb.be/api-docs/stark-core/latest/" target="_blank">
+									<button mat-mini-fab mat-icon-button color="primary"
+											[matTooltip]="'SHOWCASE.ICONS.STARK_CORE' | translate" starkSvgViewBox>
+										<mat-icon class="header-icon" svgIcon="atom">
+										</mat-icon>
+									</button>
+								</a>
+								<a href="https://github.com/NationalBankBelgium" target="_blank">
+									<button mat-mini-fab mat-icon-button class="github-icon"
+											[matTooltip]="'SHOWCASE.ICONS.GITHUB' | translate">
+										<mat-icon class="custom-icon" svgIcon="github-circle" starkSvgViewBox>
+										</mat-icon>
+									</button>
+								</a>
 							</div>
 						</div>
 						<div class="stark-app-bar-page-title">

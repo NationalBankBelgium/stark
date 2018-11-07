@@ -256,6 +256,11 @@
       "DOCUMENTATION_UI_DESC": "<p>Stark UI provides reusable UI components, for example data table, message pane, ... but also themes.</p><p>The latest API doc for that module can be found <a href=\"https://stark.nbb.be/api-docs/stark-ui/latest\" target=\"_blank\" rel=\"noopener noreferrer\" >here</a>.</p><p>Or check the API for previous releases right <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui \" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>",
       "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!</p><p> Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.</p>If you are interested in seeing the previous version of Stark showcase, have a look <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>"
     },
+    "ICONS": {
+      "GITHUB": "Github repo",
+      "STARK_UI": "Stark-UI documentation",
+      "STARK_CORE": "Stark-Core documentation"
+    },
     "STYLEGUIDE": {
       "TITLE": "Style guide"
     }
