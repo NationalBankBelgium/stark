@@ -1,0 +1,55 @@
+<section *ngIf="mode === 'compact'; else classic_minimap" class="compact-minimap">
+	<div class="stark-minimap-dropdown-toggle"
+		 [ngClass]="{'visible':isDisplayedMenu}">
+		<button mat-button class="mat-icon-button stark-minimap-dropdown-toggle-button"
+				(click)="toggleDropdownMenu()"
+				aria-label="Toggle columns"
+				[matTooltipPosition]="'below'"
+				[matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate">
+			<mat-icon class="custom-icon view-column" svgIcon="view-column"></mat-icon>
+		</button>
+		<div class="stark-minimap-dropdown-toggle-menu">
+			<div class="stark-minimap-dropdown">
+				<mat-checkbox class="stark-minimap-column-checkbox" *ngFor="let itemToHandle of items ; trackBy : trackItemFn"
+							  [checked]="isItemVisible(itemToHandle)"
+							  (change)="triggerShowHideItem(itemToHandle)">
+					<span class="item-label" translate>{{ getItemLabel(itemToHandle) }}</span>
+				</mat-checkbox>
+			</div>
+		</div>
+	</div>
+</section>
+<ng-template #classic_minimap>
+	<section class="full-minimap">
+		<div class="stark-minimap-dots">
+			<ul class="list">
+				<li class="list-element" *ngFor="let itemToHandle of items; trackBy: trackItemFn"
+					[ngClass]="{'selected':isItemVisible(itemToHandle)}">
+					<i></i>
+				</li>
+			</ul>
+		</div>
+		<div class="stark-minimap-dropdown-toggle"
+			 [ngClass]="{'visible':isDisplayedMenu}">
+			<button mat-button class="mat-icon-button stark-minimap-dropdown-toggle-button"
+					(click)="toggleDropdownMenu()"
+					aria-label="Toggle columns"
+					[matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate"
+					[matTooltipPosition]="'below'">
+				<mat-icon class="custom-icon down" svgIcon="menu-down"></mat-icon>
+				<mat-icon class="custom-icon up" svgIcon="menu-up"></mat-icon>
+			</button>
+			<div class="stark-minimap-dropdown-toggle-menu">
+				<div class="stark-minimap-dropdown">
+					<mat-checkbox class="stark-minimap-column-checkbox"
+								  *ngFor="let itemToHandle of items; trackBy : trackItemFn"
+								  [checked]="isItemVisible(itemToHandle)"
+								  (change)="triggerShowHideItem(itemToHandle)">
+						<span translate>{{ getItemLabel(itemToHandle) }}</span>
+					</mat-checkbox>
+				</div>
+			</div>
+		</div>
+	</section>
+</ng-template>
+

@@ -6,10 +6,7 @@ import { STARK_SETTINGS_SERVICE, StarkSettingsServiceImpl } from "./services";
 import { StarkSettingsEffects } from "./effects";
 
 @NgModule({
-    imports: [
-		StoreModule.forFeature("StarkSettings", starkSettingsReducers),
-		EffectsModule.forFeature([StarkSettingsEffects])
-	]
+	imports: [StoreModule.forFeature("StarkSettings", starkSettingsReducers), EffectsModule.forFeature([StarkSettingsEffects])]
 })
 export class StarkSettingsModule {
 	/**

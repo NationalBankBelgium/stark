@@ -11,6 +11,7 @@ export * from "./modules/date-range-picker";
 export * from "./modules/dropdown";
 export * from "./modules/keyboard-directives";
 export * from "./modules/language-selector";
+export * from "./modules/minimap";
 export * from "./modules/pagination";
 export * from "./modules/pretty-print";
 export * from "./modules/session-ui";
