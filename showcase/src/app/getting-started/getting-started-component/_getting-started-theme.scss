@@ -1,0 +1,30 @@
+.file-structure-title {
+  color: mat-color($grey-palette, 900);
+}
+
+.custom-title {
+  color: mat-color($grey-palette, 900);
+}
+
+.custom-subtitle {
+  color: mat-color($grey-palette, 800);
+}
+
+.custom-code {
+  font-family: monospace;
+  background-color: mat-color($grey-palette, 200);
+}
+
+.custom-section {
+  & a {
+    text-decoration: none;
+  }
+}
+
+.custom-pretty-print {
+  & pre {
+    background-color: $custom-dark-background;
+	border-radius: 0.3em;
+  }
+  color: mat-color($grey-palette, 100);
+}

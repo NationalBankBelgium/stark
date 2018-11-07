@@ -1,0 +1,7 @@
+.table-of-contents-container {
+  border-left: solid 4px mat-color($primary-palette, 800);
+}
+
+.table-of-contents-active-link {
+  color: mat-color($grey-palette, 900);
+}

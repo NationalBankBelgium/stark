@@ -84,6 +84,7 @@ import { APP_STATES } from "./app.routes";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
+import { GettingStartedModule } from "./getting-started";
 /* tslint:disable:no-import-side-effect */
 // load PostCSS styles
 import "../styles/styles.pcss";
@@ -221,6 +222,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			}
 		}),
 		SharedModule,
+		GettingStartedModule,
 		StarkAppFooterModule,
 		StarkAppLogoModule,
 		StarkAppLogoutModule,

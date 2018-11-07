@@ -23,6 +23,7 @@ $stark-footer-size: 24px;
 $primary-dark-text-color: map-get($mat-light-theme-foreground, base);
 $secondary-dark-text-color: rgba(0, 0, 0, 0.7);
 $tertiary-dark-text-color: rgba(0, 0, 0, 0.45);
+$custom-dark-background: rgba(39, 40, 34, 1);
 
 $disabled-color: map-get($mat-light-theme-foreground, disabled-text);
 $divider-color: map-get($mat-light-theme-foreground, divider);
