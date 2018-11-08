@@ -28,6 +28,7 @@
 /* tslint:disable:no-import-side-effect */
 import "core-js/es6";
 import "core-js/es7/reflect";
+import "core-js/es7/string";
 import "core-js/stage/4";
 
 /**
