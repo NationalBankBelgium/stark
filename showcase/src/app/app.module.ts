@@ -3,8 +3,6 @@ import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 import { UIRouter, UIRouterModule } from "@uirouter/angular";
-import { NgIdleModule } from "@ng-idle/core";
-import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
@@ -204,8 +202,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			config: routerConfigFn
 		}),
 		TranslateModule.forRoot(),
-		NgIdleModule.forRoot(),
-		NgIdleKeepaliveModule.forRoot(),
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot({
