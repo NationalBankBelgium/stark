@@ -2,7 +2,7 @@
 
 	<label *ngIf="label !== undefined && label !== ''" translate>{{ label }}</label>
 	<!-- single-selection view -->
-	<mat-select *ngIf="!isMultipleSelect()"
+	<mat-select *ngIf="!isMultiSelectEnabled"
 				[id]="dropdownId"
 				[(ngModel)]="value"
 				[placeholder]="placeholder | translate"
@@ -31,7 +31,7 @@
 	</mat-select>
 	
 	<!-- multiple-selection view -->
-	<mat-select *ngIf="isMultipleSelect()"
+	<mat-select *ngIf="isMultiSelectEnabled"
 				[id]="dropdownId"
 				[(ngModel)]="value"
 				[placeholder]="placeholder | translate"

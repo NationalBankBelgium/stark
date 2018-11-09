@@ -97,6 +97,11 @@
   .mat-table-filter {
     padding: 0 10px;
   }
+
+  .fixed-header {
+    height: 400px;
+    overflow-y: auto;
+  }
 }
 
 /* END stark-ui: src/modules/table/components/table/_table.component.scss */

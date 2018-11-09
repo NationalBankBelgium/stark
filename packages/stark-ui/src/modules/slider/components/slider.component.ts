@@ -17,7 +17,7 @@ import * as noUiSliderLibrary from "nouislider";
 
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
 
-import { StarkDOMUtil } from "../../../util/dom.util";
+import { StarkDOMUtil } from "../../../util/dom/dom.util";
 import { StarkSliderConfig } from "./slider-config.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 

@@ -8,7 +8,7 @@
 					 [customTableActions]="customTableActions"
 					 [data]="dummyData"
 					 [filter]="filter"
-					 [multiselect]="true"
+					 multiSelect
 					 multiSort
 					 [orderProperties]="orderProperties"
 					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
@@ -25,7 +25,7 @@
 					 customTableActionsType="alt"
 					 [data]="dummyData"
 					 [filter]="filter"
-					 [multiselect]="true"
+					 multiSelect
 					 multiSort
 					 [orderProperties]="orderProperties"
 					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
@@ -40,7 +40,7 @@
 					 [columnProperties]="columnsProperties"
 					 [data]="dummyData"
 					 [filter]="filter"
-					 [multiselect]="true"
+					 multiSelect
 					 multiSort
 					 [orderProperties]="orderProperties"
 					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
@@ -56,6 +56,23 @@
 									  mode="compact"></stark-action-bar>
 				</div>
 			</header>
+		</stark-table>
+	</example-viewer>
+
+	<example-viewer [extensions]="['HTML', 'TS']" filesPath="table/with-fixed-header"
+					exampleTitle="SHOWCASE.DEMO.TABLE.WITH_FIXED_HEADER">
+		<stark-table htmlId="table-fixed-header"
+					 [columnProperties]="columnsProperties"
+					 [customTableActions]="customTableActions"
+					 [data]="dummyData"
+					 [filter]="filter"
+					 fixedHeader
+					 multiSelect
+					 multiSort
+					 [orderProperties]="orderProperties"
+					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
+					 [paginationConfig]="paginationConfig4">
+			<header><h1 translate>SHOWCASE.DEMO.TABLE.WITH_FIXED_HEADER</h1></header>
 		</stark-table>
 	</example-viewer>
 </section>

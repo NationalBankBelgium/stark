@@ -33,7 +33,7 @@ import {
 	starkMessagePaneDisplayAnimatedClass
 } from "./message-pane.constants";
 import { StarkMessage, StarkMessageType } from "../../../common/message";
-import { StarkDOMUtil } from "../../../util/dom.util";
+import { StarkDOMUtil } from "../../../util/dom/dom.util";
 
 /***
  * To be able to test changes to the input fields, the message pane component is hosted inside the TestComponentHost class.

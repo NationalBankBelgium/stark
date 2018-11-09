@@ -6,6 +6,6 @@
 		optionLabelProperty="value"
 		placeholder="Select one or more services"
 		(dropdownSelectionChanged)="multipleServicesDropdownOnChange($event)"
-		multipleSelect="true">
+		multiSelect>
 </stark-dropdown>
 <div *ngIf="selectedServices">Selected values: {{ selectedServices }}</div>

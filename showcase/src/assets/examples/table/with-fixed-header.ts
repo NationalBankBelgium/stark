@@ -7,17 +7,14 @@ import {
 	StarkAction
 } from "@nationalbankbelgium/stark-ui";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { ReferenceLink } from "../../shared/reference-block";
 
 @Component({
 	selector: "demo-table",
 	styleUrls: ["./demo-table.component.scss"],
 	templateUrl: "./demo-table.component.html",
-	encapsulation: ViewEncapsulation.None //Here to add a shadow inside the table, we will fix that when we take care of #509
+	encapsulation: ViewEncapsulation.None
 })
 export class DemoTableComponent implements OnInit {
-	public referenceList: ReferenceLink[];
-
 	public getTitle = (data: any): string => {
 		return "~" + data.title.label;
 	};
@@ -36,19 +33,13 @@ export class DemoTableComponent implements OnInit {
 	public columnsProperties: StarkTableColumnProperties[];
 	public customTableActions: StarkAction[];
 	public tableRowsActionBarConfig: StarkActionBarConfig;
-	public paginationConfig1: StarkPaginationConfig;
-	public paginationConfig2: StarkPaginationConfig;
-	public paginationConfig3: StarkPaginationConfig;
-	public paginationConfig4: StarkPaginationConfig;
+	public paginationConfig: StarkPaginationConfig;
 	public columns: any[];
 	public orderProperties: string[];
 	public filter: StarkTableFilter;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
 
-	/**
-	 * Component lifecycle hook
-	 */
 	public ngOnInit(): void {
 		this.dummyData = [
 			{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
@@ -191,15 +182,12 @@ export class DemoTableComponent implements OnInit {
 			columns: []
 		};
 
-		this.paginationConfig1 = {
+		this.paginationConfig = {
 			totalItems: this.dummyData.length,
 			page: 1,
-			itemsPerPage: 10,
+			itemsPerPage: 20,
 			itemsPerPageOptions: [10, 12, 15, 18, 20, 25, 50, 100]
 		};
-		this.paginationConfig2 = { ...this.paginationConfig1, itemsPerPage: 4, itemsPerPageOptions: [2, 4, 6, 8, 10] };
-		this.paginationConfig3 = { ...this.paginationConfig1, itemsPerPage: 2, itemsPerPageOptions: [2, 4, 6, 8, 10], isExtended: true };
-		this.paginationConfig4 = { ...this.paginationConfig1, itemsPerPage: 20 };
 
 		this.tableRowsActionBarConfig = {
 			actions: [
@@ -225,20 +213,5 @@ export class DemoTableComponent implements OnInit {
 				}
 			]
 		};
-
-		this.referenceList = [
-			{
-				label: "Stark Table component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkTableComponent.html"
-			},
-			{
-				label: "Stark Table - Column component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkTableColumnComponent.html"
-			},
-			{
-				label: "Stark Table - Multisort Dialog component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkTableMultisortDialogComponent.html"
-			}
-		];
 	}
 }

@@ -1,7 +1,7 @@
-//tslint:disable:no-big-function no-commented-code completed-docs
-import { Component, DebugElement, ViewChild, NO_ERRORS_SCHEMA } from "@angular/core";
+/* tslint:disable:completed-docs max-inline-declarations no-commented-code no-big-function no-identical-functions */
+import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -11,19 +11,27 @@ import { By } from "@angular/platform-browser";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-dropdown [options]="options" [label]="label" [placeholder]="placeholder"
-						[value]="value" [selectionChange]="dropdownSelectionChanged"
-						[dropdownId]="dropdownId"></stark-dropdown>`
+		<stark-dropdown [dropdownId]="dropdownId"
+						[label]="label"
+						[multiSelect]="multiSelect"
+						[options]="options"
+						[placeholder]="placeholder"
+						[required]="required"
+						[selectionChange]="dropdownSelectionChanged"
+						[value]="value">
+		</stark-dropdown>`
 })
 class TestHostComponent {
 	@ViewChild(StarkDropdownComponent)
 	public dropdownComponent: StarkDropdownComponent;
 	public dropdownId: string;
-	public header?: string;
+	// public header?: string;
 	public label?: string;
+	public multiSelect?: string;
 	public options: any[];
 	public placeholder: string;
 	public value: any | any[];
@@ -77,6 +85,31 @@ describe("DropdownComponent", () => {
 			expect(component).toBeDefined();
 			expect(component.logger).not.toBeNull();
 			expect(component.logger).toBeDefined();
+		});
+
+		it("should NOT have any inputs set", () => {
+			expect(component.dropdownId).toBe(hostComponent.dropdownId);
+			expect(component.dropdownSelectionChanged).toBeDefined();
+			expect(component.label).toBe(hostComponent.label);
+			expect(component.multiSelect).toBe(hostComponent.multiSelect);
+			expect(component.options).toBe(hostComponent.options);
+			expect(component.placeholder).toBe(hostComponent.placeholder);
+			expect(component.required).toBe(<boolean>hostComponent.required);
+			expect(component.value).toBe(hostComponent.value);
+		});
+	});
+
+	describe("on change", () => {
+		it("should assign right value to isMultiSelectEnabled when multiSelect changes", () => {
+			hostComponent.multiSelect = "true";
+			hostComponent.value = [];
+			hostFixture.detectChanges();
+			expect(component.isMultiSelectEnabled).toBe(true);
+
+			hostComponent.multiSelect = "false";
+			hostComponent.value = undefined;
+			hostFixture.detectChanges();
+			expect(component.isMultiSelectEnabled).toBe(false);
 		});
 	});
 
@@ -255,28 +288,6 @@ describe("DropdownComponent", () => {
 			component.required = true;
 			component.setDefaultBlank();
 			expect(component.defaultBlank).toBe(false);
-		});
-	});
-
-	describe("isMultipleSelect", () => {
-		it("should return TRUE in case multipleSelect is set to 'true' or empty string", () => {
-			component.multipleSelect = "true";
-			let isMultipleSelect: boolean = component.isMultipleSelect();
-			expect(isMultipleSelect).toBe(true);
-
-			component.multipleSelect = "";
-			isMultipleSelect = component.isMultipleSelect();
-			expect(isMultipleSelect).toBe(true);
-		});
-
-		it("should return FALSE in case multipleSelect is set to any other value other than 'true' or empty string", () => {
-			component.multipleSelect = "whatever";
-			let isMultipleSelect: boolean = component.isMultipleSelect();
-			expect(isMultipleSelect).toBe(false);
-
-			component.multipleSelect = undefined;
-			isMultipleSelect = component.isMultipleSelect();
-			expect(isMultipleSelect).toBe(false);
 		});
 	});
 });

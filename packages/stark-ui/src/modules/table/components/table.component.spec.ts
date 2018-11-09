@@ -30,8 +30,10 @@ import createSpy = jasmine.createSpy;
 	selector: `host-component`,
 	template: `<stark-table [columnProperties]="columnProperties"
 							[data]="dummyData"
-							[multiselect]="true"
 							[filter]="tableFilter"
+							[fixedHeader]="fixedHeader"
+							[multiSort]="multiSort"
+							[multiSelect]="multiSelect"
 							[orderProperties]="orderProperties"
 							[tableRowsActionBarConfig]="tableRowsActionBarConfig">
 	</stark-table>`
@@ -42,6 +44,9 @@ class TestHostComponent {
 
 	public columnProperties: StarkTableColumnProperties[];
 	public dummyData: any[];
+	public fixedHeader?: string;
+	public multiSelect?: string;
+	public multiSort?: string;
 	public tableRowsActionBarConfig: StarkActionBarConfig;
 	public tableFilter: StarkTableFilter;
 	public orderProperties?: string[];
@@ -112,9 +117,92 @@ describe("TableComponent", () => {
 		it("should NOT have any inputs set", () => {
 			expect(component.columnProperties).toBe(hostComponent.columnProperties);
 			expect(component.data).toBe(hostComponent.dummyData);
-			expect(component.tableRowsActionBarConfig).toBe(hostComponent.tableRowsActionBarConfig);
-			expect(component.orderProperties).toBe(hostComponent.orderProperties);
 			expect(component.filter).toBeDefined(); // the default filter is set
+			expect(component.fixedHeader).toBe(hostComponent.fixedHeader);
+			expect(component.multiSelect).toBe(hostComponent.multiSelect);
+			expect(component.multiSort).toBe(hostComponent.multiSort);
+			expect(component.orderProperties).toBe(hostComponent.orderProperties);
+			expect(component.tableRowsActionBarConfig).toBe(hostComponent.tableRowsActionBarConfig);
+		});
+	});
+
+	describe("on change", () => {
+		it("should trigger resetFilterValueOnDataChange and applyFilter methods when data changes", () => {
+			spyOn(component, "resetFilterValueOnDataChange");
+			spyOn(component, "applyFilter");
+
+			(<Spy>component.resetFilterValueOnDataChange).and.returnValue(false);
+			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
+			hostComponent.dummyData = [{ name: "test-data" }];
+			hostFixture.detectChanges();
+
+			(<Spy>component.resetFilterValueOnDataChange).and.returnValue(false);
+			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
+			hostComponent.dummyData = [{ name: "test-data-2" }];
+			hostFixture.detectChanges();
+			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
+			expect(component.applyFilter).not.toHaveBeenCalled();
+
+			(<Spy>component.resetFilterValueOnDataChange).and.returnValue(true);
+			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
+			hostComponent.dummyData = [{ name: "test-data-1" }];
+			hostFixture.detectChanges();
+			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
+			expect(component.applyFilter).toHaveBeenCalledTimes(1);
+		});
+
+		it("should assign right value to isFixedHeaderEnabled when fixedHeader changes", () => {
+			hostComponent.fixedHeader = "true";
+			hostFixture.detectChanges();
+			expect(component.isFixedHeaderEnabled).toBe(true);
+
+			hostComponent.fixedHeader = "false";
+			hostFixture.detectChanges();
+			expect(component.isFixedHeaderEnabled).toBe(false);
+		});
+
+		it("should assign right value to isMultiSortEnabled when multiSort changes", () => {
+			hostComponent.multiSort = "true";
+			hostFixture.detectChanges();
+			expect(component.isMultiSortEnabled).toBe(true);
+
+			hostComponent.multiSort = "false";
+			hostFixture.detectChanges();
+			expect(component.isMultiSortEnabled).toBe(false);
+		});
+
+		it("should assign right value to isMultiSelectEnabled when multiSelect changes and adapt displayedColumns", () => {
+			spyOn(component.displayedColumns, "unshift");
+			hostComponent.multiSelect = "true";
+			hostFixture.detectChanges();
+			expect(component.isMultiSelectEnabled).toBe(true);
+			expect(component.displayedColumns.unshift).toHaveBeenCalledTimes(1);
+			expect(component.displayedColumns.unshift).toHaveBeenCalledWith("select");
+
+			(<Spy>component.displayedColumns.unshift).calls.reset();
+			hostComponent.multiSelect = "false";
+			hostFixture.detectChanges();
+			expect(component.isMultiSelectEnabled).toBe(false);
+			expect(component.displayedColumns.unshift).not.toHaveBeenCalled();
+		});
+
+		it("should assign the right value to filter", () => {
+			hostComponent.tableFilter = {
+				globalFilterValue: "test"
+			};
+			hostFixture.detectChanges();
+			expect(component.filter).toEqual({
+				globalFilterValue: "test",
+				globalFilterPresent: true
+			});
+		});
+
+		it("should trigger sortData method when orderProperties changes", () => {
+			spyOn(component, "sortData");
+			hostComponent.orderProperties = ["test"];
+			hostFixture.detectChanges();
+			expect(component.sortData).toHaveBeenCalledTimes(1);
+			expect(component.orderProperties).toEqual(["test"]);
 		});
 	});
 

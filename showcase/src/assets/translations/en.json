@@ -244,6 +244,7 @@
       "TABLE": {
         "REGULAR": "Regular Table",
         "WITH_ALTERNATIVE_ACTION_BAR": "Table with alternative Action Bar",
+        "WITH_FIXED_HEADER": "Table with a fixed header",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
         "TITLE": "Stark table"
       },

@@ -13,6 +13,7 @@ import {
 } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { StarkComponentUtil } from "../../../util/component";
 
 /**
  * Name of the component
@@ -76,7 +77,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	 * will enable this feature. (optional)
 	 */
 	@Input()
-	public multipleSelect?: string;
+	public multiSelect?: string;
 
 	/**
 	 * Array of options to be included in the dropdown list. This parameter is a one-way
@@ -126,6 +127,11 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	public dropdownSelectionChanged: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
+	 * Whether the multiple row selection is enabled.
+	 */
+	public isMultiSelectEnabled: boolean = false;
+
+	/**
 	 * @ignore
 	 * @internal
 	 */
@@ -158,9 +164,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnChanges(changesObj: SimpleChanges): void {
-		if (changesObj["optionIdProperty"] || changesObj["optionLabelProperty"]) {
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (changes["optionIdProperty"] || changes["optionLabelProperty"]) {
 			this.optionsAreSimpleTypes = this.areSimpleTypes();
+		}
+
+		if (changes["multiSelect"]) {
+			this.isMultiSelectEnabled = StarkComponentUtil.isInputEnabled(this.multiSelect);
 		}
 	}
 
@@ -196,14 +206,6 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 		if (this.required) {
 			this.defaultBlank = false;
 		}
-	}
-
-	/**
-	 * states if the dropdown can handle multiple selection or not.
-	 * @returns whether the mat-select attribute is multiple of not
-	 */
-	public isMultipleSelect(): boolean {
-		return this.multipleSelect === "true" || this.multipleSelect === "";
 	}
 
 	/**
