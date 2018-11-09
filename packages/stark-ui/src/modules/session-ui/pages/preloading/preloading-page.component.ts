@@ -21,7 +21,7 @@ const componentName: string = "stark-preloading-page";
 
 /**
  * Preloading Page smart component.
- * 
+ *
  * This page will be shown when the application starts and will fetch the user profile (via the {@link StarkUserService}) to perform the login of the user.
  * It will redirect to the target page (via the {@link StarkRoutingService}) as soon as the user profile is loaded and logged in.
  */

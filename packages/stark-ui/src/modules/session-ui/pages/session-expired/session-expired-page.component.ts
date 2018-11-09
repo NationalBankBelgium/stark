@@ -9,7 +9,7 @@ const componentName: string = "stark-session-expired-page";
 
 /**
  * Session Expired Page smart component.
- * 
+ *
  * This page will be shown when there is no user activity in the application and the session expiration timer has timed out (see {@link StarKApplicationConfig}).
  * In this page, the user has the ability to reload again the application clicking the Reload button.
  */
