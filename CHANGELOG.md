@@ -1,3 +1,71 @@
+<a name="10.0.0-beta.1"></a>
+# [10.0.0-beta.1](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.0...10.0.0-beta.1) (2018-11-09)
+
+
+### Bug Fixes
+
+* **package:** update [@mdi](https://github.com/mdi)/angular-material to version 3.0.39 ([457d2a5](https://github.com/nationalbankbelgium/stark/commit/457d2a5))
+* **package:** update [@ngrx](https://github.com/ngrx)/effects to version 6.1.1 ([1e7f887](https://github.com/nationalbankbelgium/stark/commit/1e7f887))
+* **package:** update [@ngrx](https://github.com/ngrx)/effects to version 6.1.2 ([1e898ac](https://github.com/nationalbankbelgium/stark/commit/1e898ac))
+* **package:** update [@ngrx](https://github.com/ngrx)/store to version 6.1.1 ([3ac98ab](https://github.com/nationalbankbelgium/stark/commit/3ac98ab))
+* **package:** update [@ngrx](https://github.com/ngrx)/store to version 6.1.2 ([529448b](https://github.com/nationalbankbelgium/stark/commit/529448b))
+* **package:** update [@ngrx](https://github.com/ngrx)/store-devtools to version 6.1.1 ([1e5758b](https://github.com/nationalbankbelgium/stark/commit/1e5758b))
+* **package:** update [@ngrx](https://github.com/ngrx)/store-devtools to version 6.1.2 ([146a636](https://github.com/nationalbankbelgium/stark/commit/146a636))
+* **package:** update [@types](https://github.com/types)/uglify-js to version 3.0.4 ([fce3a1d](https://github.com/nationalbankbelgium/stark/commit/fce3a1d))
+* **package:** update [@types](https://github.com/types)/webpack to version 4.4.17 ([24833c6](https://github.com/nationalbankbelgium/stark/commit/24833c6))
+* **package:** update [@types](https://github.com/types)/webpack to version 4.4.18 ([ec39709](https://github.com/nationalbankbelgium/stark/commit/ec39709))
+* **package:** update add-asset-html-webpack-plugin to version 3.1.2 ([727791f](https://github.com/nationalbankbelgium/stark/commit/727791f))
+* **package:** update angular-in-memory-web-api to version 0.7.0 ([44e800e](https://github.com/nationalbankbelgium/stark/commit/44e800e))
+* **package:** update copy-webpack-plugin to version 4.5.4 ([ab76952](https://github.com/nationalbankbelgium/stark/commit/ab76952))
+* **package:** update copy-webpack-plugin to version 4.6.0 ([a4aac38](https://github.com/nationalbankbelgium/stark/commit/a4aac38))
+* **package:** update css-loader to version 1.0.1 ([8bbc642](https://github.com/nationalbankbelgium/stark/commit/8bbc642))
+* **package:** update event-source-polyfill to version 1.0.0 ([32a0ec6](https://github.com/nationalbankbelgium/stark/commit/32a0ec6))
+* **package:** update event-source-polyfill to version 1.0.0 ([a62cf49](https://github.com/nationalbankbelgium/stark/commit/a62cf49))
+* **package:** update event-source-polyfill to version 1.0.3 ([2dffcb0](https://github.com/nationalbankbelgium/stark/commit/2dffcb0)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
+* **package:** update event-source-polyfill to version 1.0.3 ([ce41d15](https://github.com/nationalbankbelgium/stark/commit/ce41d15)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
+* **package:** update event-source-polyfill to version 1.0.4 ([aca911f](https://github.com/nationalbankbelgium/stark/commit/aca911f))
+* **package:** update event-source-polyfill to version 1.0.4 ([0df420c](https://github.com/nationalbankbelgium/stark/commit/0df420c))
+* **package:** update jasmine-core to version 3.3.0 ([7fec286](https://github.com/nationalbankbelgium/stark/commit/7fec286))
+* **package:** update karma to version 3.1.1 ([548103e](https://github.com/nationalbankbelgium/stark/commit/548103e))
+* **package:** update nouislider to version 12.1.0 ([6fd6337](https://github.com/nationalbankbelgium/stark/commit/6fd6337))
+* **package:** update stylelint to version 9.7.0 ([f13de52](https://github.com/nationalbankbelgium/stark/commit/f13de52))
+* **package:** update stylelint to version 9.7.1 ([8bd786d](https://github.com/nationalbankbelgium/stark/commit/8bd786d))
+* **package:** update webpack to version 4.21.0 ([6ac6104](https://github.com/nationalbankbelgium/stark/commit/6ac6104))
+* **package:** update webpack to version 4.22.0 ([cceb258](https://github.com/nationalbankbelgium/stark/commit/cceb258))
+* **package:** update webpack to version 4.23.1 ([3fb70e5](https://github.com/nationalbankbelgium/stark/commit/3fb70e5)), closes [#790](https://github.com/nationalbankbelgium/stark/issues/790)
+* **stark-build:** add cspFontSrc as configurable property to webpack dev server ([5367f69](https://github.com/nationalbankbelgium/stark/commit/5367f69))
+* **stark-core:** include inherited params from ancestor routing states in navigation history. Adapt Routing Service isCurrentUiState() to take into account inherited params. ([1131acf](https://github.com/nationalbankbelgium/stark/commit/1131acf)), closes [#769](https://github.com/nationalbankbelgium/stark/issues/769)
+* **stark-core:** re-create the last entry in the state history rather than add it again when a transition is dynamic. ([2af2657](https://github.com/nationalbankbelgium/stark/commit/2af2657)), closes [#773](https://github.com/nationalbankbelgium/stark/issues/773)
+* **stark-starter:** add polyfill for String.prototype.trimRight ([ef51f3c](https://github.com/nationalbankbelgium/stark/commit/ef51f3c)), closes [#213](https://github.com/nationalbankbelgium/stark/issues/213)
+* **stark-ui:** perform the session login in the Preloading page after fetching the user profile ([7cc9572](https://github.com/nationalbankbelgium/stark/commit/7cc9572)), closes [#726](https://github.com/nationalbankbelgium/stark/issues/726)
+* **stark-ui:** style fix: footer, header and table. Adapt Showcase and Starter. ([553f0f8](https://github.com/nationalbankbelgium/stark/commit/553f0f8)), closes [#696](https://github.com/nationalbankbelgium/stark/issues/696) [#715](https://github.com/nationalbankbelgium/stark/issues/715) [#723](https://github.com/nationalbankbelgium/stark/issues/723)
+
+
+### Features
+
+* **stark-core:** add support for deep state navigation for states from lazy loaded modules. Adapt Showcase to make DemoModule and NewsModule lazy loaded ([6589846](https://github.com/nationalbankbelgium/stark/commit/6589846)), closes [#810](https://github.com/nationalbankbelgium/stark/issues/810)
+* **stark-core:** allow customizing Login and Preloading states via the StarkSessionConfig ([f8112cb](https://github.com/nationalbankbelgium/stark/commit/f8112cb)), closes [#727](https://github.com/nationalbankbelgium/stark/issues/727)
+* **stark-core:** implementation of a custom error handler ([74d98d0](https://github.com/nationalbankbelgium/stark/commit/74d98d0))
+* **stark-demo:** creation of a getting started page ([8c98965](https://github.com/nationalbankbelgium/stark/commit/8c98965)), closes [#720](https://github.com/nationalbankbelgium/stark/issues/720)
+* **stark-demo:** improvement of the showcase ([76a7d67](https://github.com/nationalbankbelgium/stark/commit/76a7d67))
+* **stark-demo:** integrate "angular-in-memory-web-api" to mock backend (needed for GitHub pages) ([f698865](https://github.com/nationalbankbelgium/stark/commit/f698865))
+* **stark-demo:** reimplementation of the buttons in the header ([4df6fdf](https://github.com/nationalbankbelgium/stark/commit/4df6fdf))
+* **stark-ui:** add fixed header feature to table component ([73b4756](https://github.com/nationalbankbelgium/stark/commit/73b4756)), closes [#196](https://github.com/nationalbankbelgium/stark/issues/196)
+* **stark-ui:** app Menu Component ([5f662fa](https://github.com/nationalbankbelgium/stark/commit/5f662fa)), closes [#240](https://github.com/nationalbankbelgium/stark/issues/240) [#710](https://github.com/nationalbankbelgium/stark/issues/710)
+* **stark-ui:** implement Message Pane component ([33bf233](https://github.com/nationalbankbelgium/stark/commit/33bf233)), closes [#593](https://github.com/nationalbankbelgium/stark/issues/593)
+* **stark-ui:** implementation of minimap component ([4148d7d](https://github.com/nationalbankbelgium/stark/commit/4148d7d)), closes [#758](https://github.com/nationalbankbelgium/stark/issues/758)
+* **stark-ui:** implementation of reference-block component ([17e250f](https://github.com/nationalbankbelgium/stark/commit/17e250f)), closes [#622](https://github.com/nationalbankbelgium/stark/issues/622)
+* **stark-ui:** integrate translation support in AppMenu component ([42a6b73](https://github.com/nationalbankbelgium/stark/commit/42a6b73)), closes [#755](https://github.com/nationalbankbelgium/stark/issues/755)
+* **stark-ui:** split translations from UI components in the different modules they belong to. Split common Core and common UI translations. ([bd6fbb6](https://github.com/nationalbankbelgium/stark/commit/bd6fbb6)), closes [#511](https://github.com/nationalbankbelgium/stark/issues/511)
+* **stark-ui:** stark logo added to showcase and in app-logo component ([c680d2a](https://github.com/nationalbankbelgium/stark/commit/c680d2a)), closes [#738](https://github.com/nationalbankbelgium/stark/issues/738)
+
+
+### Performance Improvements
+
+* **stark-build:** remove deprecated Angular PurifyPlugin. Enhance UglifyJs options to improve performance. ([ff621c5](https://github.com/nationalbankbelgium/stark/commit/ff621c5)), closes [#623](https://github.com/nationalbankbelgium/stark/issues/623)
+
+
+
 <a name="10.0.0-beta.0"></a>
 # [10.0.0-beta.0](https://github.com/nationalbankbelgium/stark/compare/10.0.0-alpha.5...10.0.0-beta.0) (2018-09-27)
 
