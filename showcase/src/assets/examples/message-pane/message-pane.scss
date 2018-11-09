@@ -1,0 +1,20 @@
+/* creating a new dark theme color */
+.stark-message-pane {
+  &.dark {
+    @include stark-message-pane-color(mat-color($grey-palette, A100));
+
+    .inner {
+      background-color: mat-color($mat-dark-theme-background, background);
+    }
+
+    .errors > mat-icon {
+      fill: mat-color($alert-palette, 500);
+    }
+    .warnings > mat-icon {
+      fill: mat-color($warning-palette, 500);
+    }
+    .infos > mat-icon {
+      fill: mat-color($primary-palette, 500);
+    }
+  }
+}

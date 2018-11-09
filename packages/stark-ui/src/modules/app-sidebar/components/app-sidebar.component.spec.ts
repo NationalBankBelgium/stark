@@ -158,8 +158,8 @@ describe("AppSidebarComponent", () => {
 			});
 
 			it("left sidebar should close and then open when left sidebar is opened and sidenavLeftType is changed", () => {
-				spyOn(component, "shiftLeftSidenavFallback").and.callThrough();
-				spyOn(component, "closeSidenav").and.callFake(component.shiftLeftSidenavFallback);
+				spyOn(component, "shiftLeftSidenavCallback").and.callThrough();
+				spyOn(component, "closeSidenav").and.callFake(component.shiftLeftSidenavCallback);
 				component.sidenavLeftType = "menu";
 				component.appSidenavLeft.opened = true;
 				fixture.detectChanges();
@@ -168,7 +168,7 @@ describe("AppSidebarComponent", () => {
 					type: "regular"
 				});
 				expect(component.closeSidenav).toHaveBeenCalledTimes(1);
-				expect(component.shiftLeftSidenavFallback).toHaveBeenCalledTimes(1);
+				expect(component.shiftLeftSidenavCallback).toHaveBeenCalledTimes(1);
 				expect(component.sidenavLeftType).toBe("regular");
 			});
 		});

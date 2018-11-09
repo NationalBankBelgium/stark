@@ -1,0 +1,55 @@
+.message-pane-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  & [mat-raised-button] {
+    margin: 6px 8px;
+  }
+
+  & > * {
+    flex: 1;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 16px 30px 16px 0;
+  }
+}
+
+.button-group {
+  display: inline-flex;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
+  margin: 6px 8px;
+
+  & button {
+    padding: 8px 30px;
+    background-color: #ddd;
+    border: none;
+    &.active {
+      color: #fff;
+      background-color: mat-color($primary-palette, 500);
+    }
+  }
+}
+
+/* creating a new dark theme color */
+.stark-message-pane {
+  &.dark {
+    @include stark-message-pane-color(mat-color($grey-palette, A100));
+
+    .inner {
+      background-color: mat-color($mat-dark-theme-background, background);
+    }
+
+    .errors > mat-icon {
+      fill: mat-color($alert-palette, 500);
+    }
+    .warnings > mat-icon {
+      fill: mat-color($warning-palette, 500);
+    }
+    .infos > mat-icon {
+      fill: mat-color($primary-palette, 500);
+    }
+  }
+}

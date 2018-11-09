@@ -159,6 +159,45 @@
         "SECTIONS": "Menu with sections",
         "TITLE": "Stark app menu"
       },
+      "MESSAGE_PANE": {
+        "BUTTONS": {
+          "CENTER": "Gecentreerd",
+          "CHANGE_THEME": "Wijzig thema",
+          "CLEAR_AND_SHOW_NEW_MESSAGES": "Wis & Toon nieuwe berichten",
+          "CLEAR_MESSAGES": "Wis berichten",
+          "LEFT": "Links",
+          "RIGHT": "Rechts",
+          "SHOW_MESSAGES": "Toon berichten"
+        },
+        "DESCRIPTION": "Het berichtenvenster blijft op de pagina staan totdat het wordt gesloten, maar de pagina-interacties worden niet geblokkeerd (zoals dat het geval is met een dialoogvenster). Het kan worden gebruikt om validatiefouten van het formulier weer te geven, indien uw toepassing ze moet tonen tot ze worden verwijderd.",
+        "MESSAGES": {
+          "ERRORS": {
+            "ERROR_1": "Fout 1: Te veel vingers op het toetsenbord - prioriteit 500",
+            "ERROR_2": "Fout 2: prioriteit 10",
+            "ERROR_3": "Fout 3: prioriteit 200",
+            "NEW_ERROR_1": "Nieuwe fout 1",
+            "NEW_ERROR_2": "Nieuwe fout 2"
+          },
+          "WARNINGS": {
+            "WARNING_1": "Waarschuwing 1: prioriteit 1",
+            "WARNING_2": "Waarschuwing 2: prioriteit onbepaald",
+            "NEW_WARNING_1": "Nieuwe waarschuwing 1"
+          },
+          "INFOS": {
+            "INFO_1": "Informatie 1: prioriteit onbepaald",
+            "INFO_2": "Informatie 2: prioriteit 998",
+            "NEW_INFO_1": "Nieuwe informatie 1",
+            "NEW_INFO_2": "Nieuwe informatie 2"
+          }
+        },
+        "TITLE": "Stark message pane",
+        "EXAMPLE": "Voorbeeld",
+        "BUTTON_GROUPS": {
+          "DEMO": "Demonstratie",
+          "DISPLAY_ALIGNMENT": "Weergave uitlijning",
+          "DISPLAY_STYLE": "Weergave stijl"
+        }
+      },
       "PAGINATION": {
         "ADVANCED_CONFIGURATION": "Pagination met geavanceerde configuratie",
         "COMPACT_CONFIGURATION": "Pagination in compacte modus",

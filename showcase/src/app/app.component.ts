@@ -148,6 +148,13 @@ export class AppComponent implements OnInit {
 									targetState: "demo.language-selector"
 								},
 								{
+									id: "menu-stark-ui-components-message-pane",
+									label: "Message pane",
+									isVisible: true,
+									isEnabled: true,
+									targetState: "demo.message-pane"
+								},
+								{
 									id: "menu-stark-ui-components-minimap",
 									label: "Minimap",
 									isVisible: true,

@@ -19,6 +19,7 @@ import {
 	STARK_DATE_FORMATS,
 	StarkActionBarModule,
 	StarkAppLogoutModule,
+	StarkAppMenuModule,
 	StarkBreadcrumbModule,
 	StarkCollapsibleModule,
 	StarkDatePickerModule,
@@ -26,10 +27,9 @@ import {
 	StarkDropdownModule,
 	StarkKeyboardDirectivesModule,
 	StarkLanguageSelectorModule,
-	StarkAppMenuModule,
+	StarkMinimapModule,
 	StarkPaginationModule,
 	StarkPrettyPrintModule,
-	StarkMinimapModule,
 	StarkSliderModule,
 	StarkSvgViewBoxModule,
 	StarkTableModule
@@ -50,6 +50,7 @@ import { DemoKeyboardDirectivesComponent } from "./keyboard-directives/demo-keyb
 import { DemoLanguageSelectorComponent } from "./language-selector/demo-language-selector.component";
 import { DemoLogoutComponent } from "./logout/demo-logout.component";
 import { DemoMenuComponent } from "./menu/demo-menu.component";
+import { DemoMessagePaneComponent } from "./message-pane/demo-message-pane.component";
 import { DemoMinimapComponent } from "./minimap/demo-minimap.component";
 import { DemoPaginationComponent } from "./pagination/demo-pagination.component";
 import { DemoPrettyPrintComponent } from "./pretty-print/demo-pretty-print.component";
@@ -90,8 +91,8 @@ import { DEMO_STATES } from "./routes";
 		StarkDateRangePickerModule,
 		StarkDropdownModule,
 		StarkKeyboardDirectivesModule,
-		StarkMinimapModule,
 		StarkLanguageSelectorModule,
+		StarkMinimapModule,
 		StarkPaginationModule,
 		StarkPrettyPrintModule,
 		StarkSliderModule,
@@ -115,6 +116,7 @@ import { DEMO_STATES } from "./routes";
 		DemoLanguageSelectorComponent,
 		DemoLogoutComponent,
 		DemoMenuComponent,
+		DemoMessagePaneComponent,
 		DemoMinimapComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
@@ -140,8 +142,9 @@ import { DEMO_STATES } from "./routes";
 		DemoKeyboardDirectivesComponent,
 		DemoLanguageSelectorComponent,
 		DemoLogoutComponent,
-		DemoMinimapComponent,
 		DemoMenuComponent,
+		DemoMessagePaneComponent,
+		DemoMinimapComponent,
 		DemoPaginationComponent,
 		DemoPrettyPrintComponent,
 		DemoSliderComponent,
