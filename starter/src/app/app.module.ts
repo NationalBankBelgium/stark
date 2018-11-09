@@ -2,8 +2,6 @@ import { APP_INITIALIZER, Inject, NgModule, NgModuleFactoryLoader, SystemJsNgMod
 import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouter, UIRouterModule } from "@uirouter/angular";
-import { NgIdleModule } from "@ng-idle/core";
-import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
@@ -176,8 +174,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			config: routerConfigFn
 		}),
 		TranslateModule.forRoot(),
-		NgIdleModule.forRoot(),
-		NgIdleKeepaliveModule.forRoot(), // FIXME: disabled in stark-app-config.json for now until json-server is integrated
 		StarkHttpModule.forRoot(),
 		StarkLoggingModule.forRoot(),
 		StarkSessionModule.forRoot(),

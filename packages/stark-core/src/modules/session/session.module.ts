@@ -2,6 +2,8 @@ import { ApplicationInitStatus, Inject, ModuleWithProviders, NgModule, Optional,
 import { CommonModule, Location } from "@angular/common";
 import { StoreModule } from "@ngrx/store";
 import { UIRouterModule } from "@uirouter/angular";
+import { NgIdleModule } from "@ng-idle/core";
+import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { from } from "rxjs";
 import { starkSessionReducers } from "./reducers";
 import { StarkSessionConfig, STARK_SESSION_CONFIG } from "./entities";
@@ -13,6 +15,8 @@ import { StarkAppContainerComponent } from "./components";
 @NgModule({
 	imports: [
 		CommonModule,
+		NgIdleModule.forRoot(),
+		NgIdleKeepaliveModule.forRoot(),
 		StoreModule.forFeature("StarkSession", starkSessionReducers),
 		UIRouterModule.forChild({
 			states: SESSION_STATES
