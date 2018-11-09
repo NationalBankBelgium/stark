@@ -11,12 +11,17 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { StarkLocale } from "@nationalbankbelgium/stark-core";
 import { StarkTableComponent, StarkTableColumnComponent } from "./components";
 import { StarkTableMultisortDialogComponent } from "./components/dialogs/multisort.component";
 import { StarkActionBarModule } from "../action-bar/action-bar.module";
 import { StarkPaginationModule } from "../pagination/pagination.module";
 import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
+import { translationsEn } from "./assets/translations/en";
+import { translationsFr } from "./assets/translations/fr";
+import { translationsNl } from "./assets/translations/nl";
+import { mergeUiTranslations } from "../../common/translations";
 
 @NgModule({
 	declarations: [StarkTableComponent, StarkTableMultisortDialogComponent, StarkTableColumnComponent],
@@ -41,4 +46,15 @@ import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
 		StarkSvgViewBoxModule
 	]
 })
-export class StarkTableModule {}
+export class StarkTableModule {
+	/**
+	 * Class constructor
+	 * @param translateService - the translation service of the application
+	 */
+	public constructor(translateService: TranslateService) {
+		const english: StarkLocale = { languageCode: "en", translations: translationsEn };
+		const french: StarkLocale = { languageCode: "fr", translations: translationsFr };
+		const dutch: StarkLocale = { languageCode: "nl", translations: translationsNl };
+		mergeUiTranslations(translateService, english, french, dutch);
+	}
+}

@@ -1,13 +1,11 @@
 import { TranslateService } from "@ngx-translate/core";
+import { StarkLocale } from "./locale.intf";
+import { commonCoreTranslations } from "./common-translations";
+
 /**
  *  @ignore
  */
 const _cloneDeep: Function = require("lodash/cloneDeep");
-
-import { StarkLocale } from "./locale.intf";
-import { translationsEn } from "./translations/en";
-import { translationsFr } from "./translations/fr";
-import { translationsNl } from "./translations/nl";
 
 /**
  * This function can be used by Stark modules to merge their translations into existing translations,
@@ -31,26 +29,18 @@ import { translationsNl } from "./translations/nl";
  *   3. The 'module' translations are added in the translateService, replacing any existing translations
  *   4. The 'stored' translations are added in the translateService, replacing any existing translations
  *
- * @param translateService
- *   Description: a reference to the translateService instance
- * @param args
- *   Description: a list of StarkLocales that contain the translations for a specific language
+ * @param translateService - A reference to the translateService instance
+ * @param localesToMerge - A list of StarkLocales that contain the translations for a specific language
  *
  * @example:
  *   mergeTranslations(this.translateService, english, french, dutch);
  */
-export function mergeTranslations(translateService: TranslateService, ...args: StarkLocale[]): void {
-	const locales: StarkLocale[] = [...args];
-	const translations: object = _cloneDeep(translateService.translations);
+export function mergeTranslations(translateService: TranslateService, ...localesToMerge: StarkLocale[]): void {
+	const currentTranslations: object = _cloneDeep(translateService.translations);
 
-	const commonTranslations: any[] = [];
-	commonTranslations["en"] = translationsEn;
-	commonTranslations["fr"] = translationsFr;
-	commonTranslations["nl"] = translationsNl;
-
-	locales.forEach((starkLocale: StarkLocale) => {
-		translateService.setTranslation(starkLocale.languageCode, commonTranslations[starkLocale.languageCode], false);
-		translateService.setTranslation(starkLocale.languageCode, starkLocale.translations, true);
-		translateService.setTranslation(starkLocale.languageCode, translations[starkLocale.languageCode], true);
-	});
+	for (const locale of localesToMerge) {
+		translateService.setTranslation(locale.languageCode, commonCoreTranslations[locale.languageCode], false);
+		translateService.setTranslation(locale.languageCode, locale.translations, true);
+		translateService.setTranslation(locale.languageCode, currentTranslations[locale.languageCode], true);
+	}
 }
