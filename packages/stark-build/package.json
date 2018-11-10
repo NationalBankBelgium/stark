@@ -43,7 +43,7 @@
     "postcss-simple-extend": "1.0.0",
     "postcss-url": "8.0.0",
     "preload-webpack-plugin": "2.3.0",
-    "prettier": "1.14.3",
+    "prettier": "1.15.2",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "raw-loader": "0.5.1",
     "sass-loader": "7.1.0",
