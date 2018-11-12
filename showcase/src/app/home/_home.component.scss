@@ -17,11 +17,15 @@
 }
 
 //icon with a link to github
-.github-link {
-  background-size: 100%;
-  height: 50px;
-  width: 50px;
+.github-link .github-icon {
+  height: 60px;
+  width: 60px;
+  position: relative;
   float: right;
+
+  svg {
+    fill: #000;
+  }
 }
 
 .information-title {

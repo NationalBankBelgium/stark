@@ -1,10 +1,12 @@
 <span class="stark-section about-background">
 </span>
-<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_BEFORE_DETAIL' | translate">
-</p>
+<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_BEFORE_DETAIL' | translate"></p>
 <p class="mat-h4" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_DETAIL' | translate"></p>
-<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_AFTER_DETAIL' | translate">
-</p>
+<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_DETAIL_LEGO_BLOCKS' | translate"></p>
+<a class="github-link" href="https://github.com/NationalBankBelgium" target="_blank" rel="noopener noreferrer">
+	<mat-icon class="github-icon" svgIcon="github-circle" starkSvgViewBox></mat-icon>
+</a>
+<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_AFTER_DETAIL' | translate"></p>
 
 <section class="stark-section bottom-margin">
 	<mat-accordion>
@@ -22,7 +24,8 @@
 	<mat-accordion>
 		<mat-expansion-panel>
 			<mat-expansion-panel-header>
-				<mat-panel-title class="information-title" [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_MAIN_TITLE' | translate">
+				<mat-panel-title class="information-title"
+								 [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_MAIN_TITLE' | translate">
 				</mat-panel-title>
 			</mat-expansion-panel-header>
 			<h2 [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_MAIN_DESC' | translate"></h2>
