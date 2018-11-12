@@ -166,5 +166,11 @@
     "commitizen": {
       "path": "node_modules/cz-customizable"
     }
+  },
+  "greenkeeper": {
+    "commitMessages": {
+      "dependencyUpdate": "chore(package): update ${dependency} to version ${version}",
+      "devDependencyUpdate": "chore(package): update ${dependency} to version ${version}"
+    }
   }
 }
