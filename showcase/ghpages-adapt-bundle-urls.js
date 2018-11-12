@@ -29,7 +29,7 @@ let replacements = [
 	{ searchValue: `/${baseHrefPlaceholder}/${deployUrlPlaceholder}/`, replaceValue: urlWithTrailingSlash },
 	{ searchValue: `"${baseHrefPlaceholder}"`, replaceValue: `"${urlWithTrailingSlash}"` },
 	{ searchValue: `"${deployUrlPlaceholder}/`, replaceValue: `"${urlWithTrailingSlash}` },
-	{ searchValue: `${deployUrlPlaceholder}`, replaceValue: urlWithoutTrailingSlash }
+	{ searchValue: `${deployUrlPlaceholder}`, replaceValue: urlWithTrailingSlash } // these should also have a trailing slash, otherwise the URL of lazy loaded modules will be created incorrectly!
 ];
 
 // if the 3rd param is given (oldDeployDir) then it will be appended to the "showcase" folder and replaced by the new deployDir

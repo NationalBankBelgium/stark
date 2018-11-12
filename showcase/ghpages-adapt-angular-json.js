@@ -4,7 +4,7 @@ const deployUrlPlaceholder = "<stark-dummy-deploy-url>";
 const baseHrefPlaceholder = "<stark-dummy-base-href>";
 
 let replacements = [
-	{ searchValue: `"deployUrl": ""`, replaceValue: `"deployUrl": "${deployUrlPlaceholder}"` },
+	{ searchValue: `"deployUrl": "/"`, replaceValue: `"deployUrl": "${deployUrlPlaceholder}"` },
 	{ searchValue: `"baseHref": "/"`, replaceValue: `"baseHref": "${baseHrefPlaceholder}"` }
 ];
 
