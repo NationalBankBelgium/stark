@@ -53,9 +53,6 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    &:not(.stark-init) {
-      overflow-y: hidden;
-    }
     & .content-wrapper {
       flex: 1;
       display: flex;
