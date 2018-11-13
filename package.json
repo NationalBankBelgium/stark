@@ -52,7 +52,7 @@
     "stylelint": "9.8.0",
     "stylelint-config-prettier": "4.0.0",
     "tslint": "5.11.0",
-    "tslint-config-prettier": "1.15.0",
+    "tslint-config-prettier": "1.16.0",
     "tslint-sonarts": "1.8.0",
     "typescript": "2.8.4",
     "uglify-es": "3.3.9",
