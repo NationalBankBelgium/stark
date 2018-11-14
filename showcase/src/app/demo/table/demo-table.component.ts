@@ -32,8 +32,14 @@ export class DemoTableComponent implements OnInit {
 		return 0;
 	};
 
+	public getRowClassName = (_row: any, index: number): string => (index % 2 === 0 ? "even" : "odd");
+
+	public getTitleCellClassName = (title: { value: number }): string =>
+		title.value < 5 ? "danger" : title.value < 9 ? "warning" : "success";
+
 	public dummyData: any[];
 	public columnsProperties: StarkTableColumnProperties[];
+	public columnsPropertiesCustomStyling: StarkTableColumnProperties[];
 	public customTableActions: StarkAction[];
 	public tableRowsActionBarConfig: StarkActionBarConfig;
 	public paginationConfig1: StarkPaginationConfig;
@@ -89,23 +95,30 @@ export class DemoTableComponent implements OnInit {
 				isFilterable: true
 			}
 		];
-
-		this.columns = [
+		this.columnsPropertiesCustomStyling = [
 			{
 				name: "id",
-				sortable: true
+				label: "id",
+				headerClassName: "bold",
+				isSortable: true,
+				isFilterable: true
 			},
 			{
 				name: "title",
-				sortable: true,
-				dataAccessor: (data: any): string => {
-					return "~" + data.title.label;
+				label: "Title",
+				cellFormatter: (value: any): string => {
+					return "~" + value.label;
 				},
-				compareFn: this.compareTitle
+				isSortable: true,
+				isFilterable: true,
+				compareFn: this.compareTitle,
+				cellClassName: this.getTitleCellClassName
 			},
 			{
 				name: "description",
-				sortable: true
+				label: "Description",
+				isSortable: true,
+				isFilterable: true
 			}
 		];
 

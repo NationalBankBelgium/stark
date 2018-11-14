@@ -43,6 +43,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	public get name(): string {
 		return this._name;
 	}
+
 	public set name(name: string) {
 		this._name = name;
 		this.columnDef.name = name;
@@ -119,6 +120,19 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 */
 	@Input()
 	public sortPriority: number;
+
+	/**
+	 * A function to generate classNames for cells based on the value, its row and the name of the column.
+	 * Or a static string with the classNames.
+	 */
+	@Input()
+	public cellClassName?: ((value: any, row?: any, columnName?: string) => string) | string;
+
+	/**
+	 * A static className for the header
+	 */
+	@Input()
+	public headerClassName?: string;
 
 	/**
 	 * Output that will emit a specific column whenever its filter value has changed
@@ -223,5 +237,42 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 */
 	public onSortChange(): void {
 		this.sortChanged.emit(this);
+	}
+
+	/**
+	 * Gets a the classes for a specific cell, based on the cellClassName Input and the cellClassNameFn function if it was given.
+	 * @param row - The data object of the row the cell is in.
+	 * @returns The classes for the cell.
+	 */
+	public getCellClassNames(row: any): string {
+		if (!this.cellClassName) {
+			return "";
+		}
+		if (typeof this.cellClassName === "string") {
+			return this.cellClassName;
+		}
+
+		const value: any = this.getRawValue(row);
+		return this.cellClassName(value, row, this.name);
+	}
+
+	/**
+	 * Get the classes for a header
+	 * @returns The classes for the header
+	 */
+	public getHeaderClassNames(): string {
+		const classes: string[] = [];
+
+		if (this.sortable) {
+			classes.push("sortable");
+		}
+		if (this.filterValue) {
+			classes.push("filtering");
+		}
+		if (this.headerClassName) {
+			classes.push(this.headerClassName);
+		}
+
+		return classes.join(" ");
 	}
 }

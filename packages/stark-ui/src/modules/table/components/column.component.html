@@ -1,7 +1,7 @@
 <ng-container matColumnDef>
 	<!-- custom header that supports multi-column sorting -->
 	<!-- TODO: implement a MultiSort directive based on the Angular Material's MatSort once this is solved: https://github.com/angular/material2/issues/7226 -->
-	<th mat-header-cell *matHeaderCellDef [ngClass]="{'sortable': sortable, 'filtering': filterValue}">
+	<th mat-header-cell *matHeaderCellDef [ngClass]="getHeaderClassNames()">
 		<div class="header-cell-content">
 			<div [ngSwitch]="sortDirection" class="sort-header" (click)="onSortChange()">
 				<span>{{ getHeaderLabel() }}</span>
@@ -31,7 +31,7 @@
 	</th>
 	<!-- the column template defined by the user will be displayed here -->
 	<!-- and it will receive the right context containing the displayedValue and the row data-->
-	<td mat-cell *matCellDef="let rowItem">
+	<td mat-cell *matCellDef="let rowItem" [ngClass]="getCellClassNames(rowItem)">
 		<ng-container
 				*ngTemplateOutlet="columnTemplate; context:{ $implicit: { rowData: rowItem, displayedValue: getDisplayedValue(rowItem) } }"></ng-container>
 	</td>

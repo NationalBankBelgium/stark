@@ -28,15 +28,17 @@ import createSpy = jasmine.createSpy;
 
 @Component({
 	selector: `host-component`,
-	template: `<stark-table [columnProperties]="columnProperties"
-							[data]="dummyData"
-							[filter]="tableFilter"
-							[fixedHeader]="fixedHeader"
-							[multiSort]="multiSort"
-							[multiSelect]="multiSelect"
-							[orderProperties]="orderProperties"
-							[tableRowsActionBarConfig]="tableRowsActionBarConfig">
-	</stark-table>`
+	template: `
+		<stark-table [columnProperties]="columnProperties"
+					 [data]="dummyData"
+					 [filter]="tableFilter"
+					 [fixedHeader]="fixedHeader"
+					 [multiSort]="multiSort"
+					 [multiSelect]="multiSelect"
+					 [orderProperties]="orderProperties"
+					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
+					 [rowClassNameFn]="rowClassNameFn">
+		</stark-table>`
 })
 class TestHostComponent {
 	@ViewChild(StarkTableComponent)
@@ -50,7 +52,9 @@ class TestHostComponent {
 	public tableRowsActionBarConfig: StarkActionBarConfig;
 	public tableFilter: StarkTableFilter;
 	public orderProperties?: string[];
+	public rowClassNameFn?: (row: any, index: number) => string;
 }
+
 /* tslint:disable:no-big-function */
 describe("TableComponent", () => {
 	let component: StarkTableComponent;
@@ -891,6 +895,60 @@ describe("TableComponent", () => {
 			expect(filterHasBeenReset).toBe(false);
 			expect(component.filter.globalFilterValue).toBe(dummyGlobalFilterValue);
 			expect((<StarkTableColumnFilter[]>component.filter.columns)[0].filterValue).toBe(dummyColumnFilterValue);
+		});
+	});
+
+	describe("setStyling", () => {
+		const dummyData: any[] = [{ id: 1, description: "dummy 1" }, { id: 2, description: "dummy 2" }, { id: 3, description: "dummy 3" }];
+		const returnEvenAndOdd: (row: any, index: number) => string = (_row: any, index: number): string =>
+			(index + 1) % 2 === 0 ? "even" : "odd"; // offset index with 1
+
+		beforeEach(() => {
+			hostComponent.rowClassNameFn = returnEvenAndOdd;
+			hostComponent.columnProperties = [
+				{ name: "id", cellClassName: (value: any) => (value === 1 ? "one" : "") },
+				{ name: "description", cellClassName: "description-body-cell", headerClassName: "description-header-cell" }
+			];
+			hostComponent.dummyData = dummyData;
+
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+
+		describe("setRowClass", () => {
+			it("first row should have class 'odd", () => {
+				const tableElement: HTMLElement = hostFixture.nativeElement;
+				const firstRow: HTMLElement | null = tableElement.querySelectorAll<HTMLElement>("tbody tr").item(0);
+				expect(firstRow && firstRow.classList).toContain("odd");
+				expect(firstRow && firstRow.classList).not.toContain("even");
+			});
+
+			it("second row should have class 'even'", () => {
+				const tableElement: HTMLElement = hostFixture.nativeElement;
+				const secondRow: HTMLElement | null = tableElement.querySelectorAll<HTMLElement>("tbody tr").item(1);
+				expect(secondRow && secondRow.classList).toContain("even");
+				expect(secondRow && secondRow.classList).not.toContain("odd");
+			});
+		});
+
+		it("cell id should have class 'one'", () => {
+			const tableElement: HTMLElement = hostFixture.nativeElement;
+			const descriptionCell: HTMLElement | null = tableElement.querySelector("tbody tr:nth-child(1) td:nth-child(1)"); // select the id cells
+			expect(descriptionCell && descriptionCell.classList).toContain("one");
+		});
+
+		it("description header cell should have class 'description-header-cell'", () => {
+			const tableElement: HTMLElement = hostFixture.nativeElement;
+			const descriptionCell: HTMLElement | null = tableElement.querySelector("thead th:nth-child(2)"); // select the id cells
+			expect(descriptionCell && descriptionCell.classList).toContain("description-header-cell");
+		});
+
+		it("description body cells should have class 'description-body-cell'", () => {
+			const tableElement: HTMLElement = hostFixture.nativeElement;
+			const descriptionCells: NodeListOf<HTMLElement> = tableElement.querySelectorAll("tbody td:nth-child(2)"); // select the id cells
+			descriptionCells.forEach((descriptionCell: HTMLElement) =>
+				expect(descriptionCell && descriptionCell.classList).toContain("description-body-cell")
+			);
 		});
 	});
 });

@@ -246,6 +246,7 @@
         "WITH_ALTERNATIVE_ACTION_BAR": "Table with alternative Action Bar",
         "WITH_FIXED_HEADER": "Table with a fixed header",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
+        "WITH_CUSTOM_STYLING": "Table with custom styling",
         "TITLE": "Stark table"
       },
       "TOAST": {

@@ -75,6 +75,20 @@
 			<header><h1 translate>SHOWCASE.DEMO.TABLE.WITH_FIXED_HEADER</h1></header>
 		</stark-table>
 	</example-viewer>
+
+	<example-viewer [extensions]="['HTML','TS','SCSS']"
+					filesPath="table/with-custom-styling"
+					exampleTitle="SHOWCASE.DEMO.TABLE.WITH_CUSTOM_STYLING">
+		<stark-table htmlId="table-custom-row"
+					 [data]="dummyData"
+					 [filter]="filter"
+					 [paginationConfig]="paginationConfig1"
+					 [columnProperties]="columnsPropertiesCustomStyling"
+					 [rowClassNameFn]="getRowClassName"
+		>
+			<header><h1 translate>SHOWCASE.DEMO.TABLE.WITH_CUSTOM_STYLING</h1></header>
+		</stark-table>
+	</example-viewer>
 </section>
 <stark-reference-block [links]="referenceList"></stark-reference-block>
 

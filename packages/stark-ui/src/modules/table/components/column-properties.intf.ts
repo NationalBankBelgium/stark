@@ -5,18 +5,15 @@ import { StarkTableColumnPriority } from "./column-priority.intf";
  */
 export interface StarkTableColumnProperties {
 	/**
-	 * Class(es) to be set to every cell of the column.
-	 */
-	cellClassName?: string;
-
-	/**
 	 * Function that returns class(es) to be set to an specific cell. It can be used to set different classes
 	 * depending on the row, value and or columnName. This function is called with 3 parameters:
 	 * @param value - The value of the cell
 	 * @param row - The row object that contains the cell
 	 * @param columnName - The column that the cell belongs to
+	 *
+	 * This could also be a static string with class(es)
 	 */
-	cellClassNameFn?: (value: any, row?: any, columnName?: string) => string;
+	cellClassName?: ((value: any, row?: any, columnName?: string) => string) | string;
 
 	/**
 	 * Function that returns a formatted value (string) to be set in the cell. It can be used to set different formats
@@ -26,13 +23,6 @@ export interface StarkTableColumnProperties {
 	 * @param columnName - The column that the cell belongs to
 	 */
 	cellFormatter?: (value: any, row?: any, columnName?: string) => string;
-
-	/**
-	 * Class(es) to be set to the colgroup>col element of the column.
-	 * The CSS linked to the style can only be applied to 'border', 'background', 'width' and 'visibility' properties.
-	 * See http://www.w3.org/TR/CSS2/tables.html#columns
-	 */
-	className?: string;
 
 	/**
 	 * Function that returns
