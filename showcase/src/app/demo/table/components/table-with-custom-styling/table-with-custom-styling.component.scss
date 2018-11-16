@@ -1,7 +1,15 @@
+// Row class
 .even td {
   background-color: #d1e1ff;
 }
 
+// Id cell class
+.large {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+// Title cell classes
 .danger {
   color: #7c002c;
 }
@@ -12,8 +20,4 @@
 
 .success {
   color: #3c9f40;
-}
-
-.bold {
-  font-weight: bold;
 }

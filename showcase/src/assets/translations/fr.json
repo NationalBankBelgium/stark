@@ -243,8 +243,8 @@
       },
       "TABLE": {
         "REGULAR": "Table régulière",
-        "WITH_ALTERNATIVE_ACTION_BAR": "Table avec Action Bar alternative",
-        "WITH_FIXED_HEADER": "Table avec un en-tête fixe",
+        "WITH_CUSTOM_ACTIONS": "Table avec actions personalisé",
+        "WITH_FIXED_HEADER": "Table avec en-tête fixe",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table avec Action Bar 'transcluded'",
         "WITH_CUSTOM_STYLING": "Table avec mise en page personnalisé",
         "TITLE": "Stark table"
