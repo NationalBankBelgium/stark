@@ -65,7 +65,7 @@
     "webpack-dev-server": "3.1.10",
     "webpack-merge": "4.1.4",
     "webpack-monitor": "1.0.14",
-    "write-file-webpack-plugin": "4.4.1"
+    "write-file-webpack-plugin": "4.5.0"
   },
   "devDependencies": {
     "@angular/cli": "6.2.7",
