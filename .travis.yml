@@ -52,7 +52,7 @@ script:
   - npm run lint:all
   - npm run test:ci:all
   - npm run docs:coverage
-  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then travis_wait 25 npm run build:showcase:ghpages:ci-test-env; else travis_wait 25 npm run build:showcase:ghpages; fi
+  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then travis_wait 30 npm run build:showcase:ghpages:ci-test-env; else travis_wait 30 npm run build:showcase:ghpages; fi
   - npm run docs:publish
   - npm run release:publish
   - bash ./scripts/ci/print-logs.sh
