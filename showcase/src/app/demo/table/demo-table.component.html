@@ -1,79 +1,34 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.TABLE.TITLE</h1>
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
-	<example-viewer [extensions]="['HTML', 'TS', 'SCSS']" filesPath="table/regular" exampleTitle="SHOWCASE.DEMO.TABLE.REGULAR">
-		<stark-table htmlId="table-regular"
-					 class="shadowed"
-					 [columnProperties]="columnsProperties"
-					 [customTableActions]="customTableActions"
-					 [data]="dummyData"
-					 [filter]="filter"
-					 multiSelect
-					 multiSort
-					 [orderProperties]="orderProperties"
-					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
-					 [paginationConfig]="paginationConfig1">
-			<header><h1 translate>SHOWCASE.DEMO.TABLE.REGULAR</h1></header>
-		</stark-table>
+	<example-viewer exampleTitle="SHOWCASE.DEMO.TABLE.REGULAR"
+					filesPath="table/regular/table"
+					[extensions]="['HTML', 'TS', 'SCSS']">
+		<showcase-table-regular></showcase-table-regular>
 	</example-viewer>
 
-	<example-viewer [extensions]="['HTML', 'TS','SCSS']" filesPath="table/with-alternative-action-bar"
-					exampleTitle="SHOWCASE.DEMO.TABLE.WITH_ALTERNATIVE_ACTION_BAR">
-		<stark-table htmlId="table-with-alternative-action-bar"
-					 [columnProperties]="columnsProperties"
-					 [customTableActions]="customTableActions"
-					 customTableActionsType="alt"
-					 [data]="dummyData"
-					 [filter]="filter"
-					 multiSelect
-					 multiSort
-					 [orderProperties]="orderProperties"
-					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
-					 [paginationConfig]="paginationConfig2">
-			<header><h1 translate>SHOWCASE.DEMO.TABLE.WITH_ALTERNATIVE_ACTION_BAR</h1></header>
-		</stark-table>
+	<example-viewer exampleTitle="SHOWCASE.DEMO.TABLE.WITH_CUSTOM_ACTIONS"
+					filesPath="table/with-custom-actions/table"
+					[extensions]="['HTML', 'TS']">
+		<showcase-table-with-custom-actions></showcase-table-with-custom-actions>
 	</example-viewer>
 
-	<example-viewer [extensions]="['HTML', 'TS','SCSS']" filesPath="table/with-transcluded-action-bar"
-					exampleTitle="SHOWCASE.DEMO.TABLE.WITH_TRANSCLUDED_ACTION_BAR">
-		<stark-table htmlId="table-with-transcluded-action-bar"
-					 [columnProperties]="columnsProperties"
-					 [data]="dummyData"
-					 [filter]="filter"
-					 multiSelect
-					 multiSort
-					 [orderProperties]="orderProperties"
-					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
-					 [paginationConfig]="paginationConfig3">
-			<header>
-				<!-- 
-					TODO: Action should also be part of the transclusion so this example can work
-					<div class="example-transcluded" fxLayout="column" fxLayout.gt-sm="row">
-				-->
-				<div class="example-transcluded">
-					<h1 translate>SHOWCASE.DEMO.TABLE.WITH_TRANSCLUDED_ACTION_BAR</h1>
-					<stark-action-bar [actionBarConfig]="{actions: customTableActions}"
-									  mode="compact"></stark-action-bar>
-				</div>
-			</header>
-		</stark-table>
+	<example-viewer exampleTitle="SHOWCASE.DEMO.TABLE.WITH_TRANSCLUDED_ACTION_BAR"
+					filesPath="table/with-transcluded-action-bar/table"
+					[extensions]="['HTML', 'TS', 'SCSS']">
+		<showcase-table-with-transcluded-action-bar></showcase-table-with-transcluded-action-bar>
 	</example-viewer>
 
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="table/with-fixed-header"
-					exampleTitle="SHOWCASE.DEMO.TABLE.WITH_FIXED_HEADER">
-		<stark-table htmlId="table-fixed-header"
-					 [columnProperties]="columnsProperties"
-					 [customTableActions]="customTableActions"
-					 [data]="dummyData"
-					 [filter]="filter"
-					 fixedHeader
-					 multiSelect
-					 multiSort
-					 [orderProperties]="orderProperties"
-					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
-					 [paginationConfig]="paginationConfig4">
-			<header><h1 translate>SHOWCASE.DEMO.TABLE.WITH_FIXED_HEADER</h1></header>
-		</stark-table>
+	<example-viewer exampleTitle="SHOWCASE.DEMO.TABLE.WITH_FIXED_HEADER"
+					filesPath="table/with-fixed-header/table"
+					[extensions]="['HTML','TS']">
+		<showcase-table-with-fixed-header></showcase-table-with-fixed-header>
+	</example-viewer>
+
+	<example-viewer exampleTitle="SHOWCASE.DEMO.TABLE.WITH_CUSTOM_STYLING"
+					filesPath="table/with-custom-styling/table"
+					[extensions]="['HTML', 'TS', 'SCSS']">
+		<showcase-table-with-custom-styling></showcase-table-with-custom-styling>
 	</example-viewer>
 </section>
 <stark-reference-block [links]="referenceList"></stark-reference-block>
