@@ -1,0 +1,9 @@
+<stark-table [data]="data"
+			 [columnProperties]="columns"
+			 [filter]="filter"
+			 [paginationConfig]="pagination"
+			 [rowsSelectable]="true"
+			 (selectChanged)="handleRowSelected($event)"
+			 multiSelect>
+	<header><h1 class="mb0" translate>SHOWCASE.DEMO.TABLE.WITH_SELECTION</h1></header>
+</stark-table>

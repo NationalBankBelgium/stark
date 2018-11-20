@@ -65,13 +65,13 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * @param obj2 - Second object in the comparison
 	 */
 	@Input()
-	public compareFn?: ((obj1: any, obj2: any) => number);
+	public compareFn?: ((obj1: object, obj2: object) => number);
 
 	/**
 	 * Function that returns the raw value of this column in case the access to such value can't be provided via the column name.
 	 */
 	@Input()
-	public dataAccessor?: ((data: any, name: string) => string); // TODO: really needed?
+	public dataAccessor?: ((data: object, name: string) => string); // TODO: really needed?
 
 	/**
 	 * Function that returns a formatted value (string) to be set in the cell. It can be used to set different formats
@@ -81,7 +81,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * @param columnName - The column that the cell belongs to
 	 */
 	@Input()
-	public cellFormatter?: ((value: any, row?: any, columnName?: string) => string);
+	public cellFormatter?: ((value: any, row?: object, columnName?: string) => string);
 
 	/**
 	 * Sorting direction of the column.
@@ -126,7 +126,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Or a static string with the classNames.
 	 */
 	@Input()
-	public cellClassName?: ((value: any, row?: any, columnName?: string) => string) | string;
+	public cellClassName?: ((value: any, row?: object, columnName?: string) => string) | string;
 
 	/**
 	 * A static className for the header
@@ -156,7 +156,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Reference to the transcluded template in this component via the ngTemplateOutlet
 	 */
 	@ContentChild(TemplateRef)
-	public columnTemplate: TemplateRef<any>;
+	public columnTemplate: TemplateRef<object>;
 
 	/**
 	 * Class constructor
@@ -179,7 +179,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * @param row - The row item
 	 * @returns The raw value of the property from the given row item
 	 */
-	public getRawValue(row: any): any | undefined {
+	public getRawValue(row: object): any | undefined {
 		let rawValue: any | undefined = _get(row, this.name);
 
 		if (this.dataAccessor) {
@@ -196,7 +196,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * @returns The displayed value of the property from the given row item after applying the
 	 * formatter (if there was any defined in the column) and translating the value (in case the value is a translation key)
 	 */
-	public getDisplayedValue(row: any): string | number {
+	public getDisplayedValue(row: object): string | number {
 		let formattedValue: string = "";
 		const rawValue: any | undefined = this.getRawValue(row);
 
@@ -244,7 +244,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * @param row - The data object of the row the cell is in.
 	 * @returns The classes for the cell.
 	 */
-	public getCellClassNames(row: any): string {
+	public getCellClassNames(row: object): string {
 		if (!this.cellClassName) {
 			return "";
 		}

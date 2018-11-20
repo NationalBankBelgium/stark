@@ -243,6 +243,7 @@
       },
       "TABLE": {
         "REGULAR": "Regular Table",
+        "WITH_SELECTION": "Table with selection",
         "WITH_CUSTOM_ACTIONS": "Table with custom actions",
         "WITH_FIXED_HEADER": "Table with fixed header",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",

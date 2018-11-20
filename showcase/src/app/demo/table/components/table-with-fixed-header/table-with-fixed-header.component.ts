@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
-const DUMMY_DATA: any[] = [
+const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
 	{ id: 10, title: { label: "second title (value: 2)", value: 2 }, description: "second description" },
 	{ id: 12, title: { label: "third title (value: 3)", value: 3 }, description: "the third description" },
@@ -21,7 +21,7 @@ const DUMMY_DATA: any[] = [
 	templateUrl: "./table-with-fixed-header.component.html"
 })
 export class TableWithFixedHeaderComponent implements OnInit {
-	public data: any[];
+	public data: object[];
 
 	public columns: StarkTableColumnProperties[];
 
@@ -34,7 +34,7 @@ export class TableWithFixedHeaderComponent implements OnInit {
 
 		this.columns = [
 			{ name: "id", label: "Id" },
-			{ name: "title", label: "Title", cellFormatter: (value: any): string => "~" + value.label },
+			{ name: "title", label: "Title", cellFormatter: (value: { label: string }): string => "~" + value.label },
 			{ name: "description", label: "Description" }
 		];
 

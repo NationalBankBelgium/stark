@@ -100,6 +100,11 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 * Action onClick handler
 	 */
 	public onClick(action: StarkAction, $event: Event): void {
+		if ($event) {
+			// Prevents further propagation of the current event in the capturing and bubbling phases.
+			// This makes it so that the parent does not also trigger on the event.
+			$event.stopPropagation();
+		}
 		if (action.isEnabled) {
 			let scope: any = {};
 			if (this.actionBarScope) {

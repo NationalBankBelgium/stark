@@ -9,6 +9,7 @@ import {
 	Inject,
 	Input,
 	OnChanges,
+	OnDestroy,
 	OnInit,
 	Output,
 	QueryList,
@@ -20,8 +21,9 @@ import {
 } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatColumnDef, MatTable, MatTableDataSource } from "@angular/material/table";
-import { SelectionModel } from "@angular/cdk/collections";
+import { SelectionChange, SelectionModel } from "@angular/cdk/collections";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Subscription } from "rxjs";
 
 import { StarkTableColumnComponent, StarkTableColumnSortingDirection } from "./column.component";
 import { StarkSortingRule, StarkTableMultisortDialogComponent, StarkTableMultisortDialogData } from "./dialogs/multisort.component";
@@ -53,7 +55,7 @@ const componentName: string = "stark-table";
 	}
 })
 /* tslint:enable */
-export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges {
+export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
 	/**
 	 * Array of {@link StarkColumnProperties} objects which define the columns of the data table.
 	 */
@@ -76,7 +78,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Data that will be display inside your table.
 	 */
 	@Input()
-	public data: any[];
+	public data: object[];
 
 	/**
 	 * Object which contains filtering information for the table.
@@ -102,6 +104,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	@Input()
 	public htmlId: string;
+
+	/**
+	 * Determine if you can select the rows in the table
+	 */
+	@Input()
+	public rowsSelectable?: boolean;
 
 	/**
 	 * Allows multiple row selection. Setting the attribute to "true" or empty will enable this feature.
@@ -143,7 +151,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Function to generate classNames for rows
 	 */
 	@Input()
-	public rowClassNameFn?: (row: any, index: number) => string;
+	public rowClassNameFn?: (row: object, index: number) => string;
 
 	/**
 	 * Output event emitter that will emit the latest global filter value whenever it changes.
@@ -166,16 +174,23 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public paginationChanged: EventEmitter<StarkPaginateEvent> = new EventEmitter<StarkPaginateEvent>();
 
 	/**
-	 * Output event emitter that will emit the array of columns selected (column id's).
+	 * Output event emitter that will emit the array of selected rows.
 	 */
 	@Output()
-	public selectChanged: EventEmitter<number[]> = new EventEmitter<number[]>();
+	public selectChanged: EventEmitter<object[]> = new EventEmitter<object[]>();
+
+	/**
+	 * Output event emitter that will emit the data of a row when it is clicked.
+	 * If there are no observers it will not emit, but instead select the row.
+	 */
+	@Output()
+	public rowClicked: EventEmitter<object> = new EventEmitter<object>();
 
 	/**
 	 * Reference to the MatTable embedded in this component
 	 */
 	@ViewChild(MatTable)
-	public table: MatTable<any>;
+	public table: MatTable<object>;
 
 	/**
 	 * Reference to the MatPaginator embedded in this component
@@ -213,12 +228,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * MatTableDataSource associated to the MatTable embedded in this component
 	 */
-	public dataSource: MatTableDataSource<any>;
+	public dataSource: MatTableDataSource<object>;
 
 	/**
 	 * Array of columns (column id's) to be displayed in the table.
 	 */
-	public displayedColumns: string[];
+	public displayedColumns: string[] = [];
 
 	/**
 	 * Whether the fixed header is enabled.
@@ -238,12 +253,19 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Whether the multiple row selection is enabled.
 	 */
-	public isMultiSelectEnabled: boolean = false;
+	public get isMultiSelectEnabled(): boolean {
+		return StarkComponentUtil.isInputEnabled(this.multiSelect);
+	}
+
+	/**
+	 * @ignore
+	 */
+	private _selectionSub: Subscription;
 
 	/**
 	 * Angular CDK selection model used for the "master" selection of the table
 	 */
-	public selection: SelectionModel<any> = new SelectionModel<any>(true, []);
+	public selection: SelectionModel<object> = new SelectionModel<object>(true, []);
 
 	/**
 	 * Class constructor
@@ -268,7 +290,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": component initialized");
-		this.displayedColumns = [];
+
+		this._resetSelection();
 
 		if (this.customTableActionsType === "regular") {
 			this.customTableRegularActions = { actions: this.customTableActions || [] };
@@ -336,13 +359,27 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.isMultiSortEnabled = StarkComponentUtil.isInputEnabled(this.multiSort);
 		}
 
-		if (changes["multiSelect"]) {
-			this.isMultiSelectEnabled = StarkComponentUtil.isInputEnabled(this.multiSelect);
-
-			if (this.isMultiSelectEnabled && this.displayedColumns) {
-				this.displayedColumns.unshift("select");
+		if (changes["rowsSelectable"]) {
+			if (this.rowsSelectable) {
+				if (!this.displayedColumns.includes("select")) {
+					this.displayedColumns.unshift("select");
+				}
+			} else {
+				const i: number = this.displayedColumns.indexOf("select");
+				this.displayedColumns.splice(i);
 			}
 		}
+
+		if (changes["multiSelect"]) {
+			this._resetSelection();
+		}
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnDestroy(): void {
+		this._selectionSub.unsubscribe();
 	}
 
 	/**
@@ -420,7 +457,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 		this.starkPaginator.emitMatPaginationEvent();
 
-		this.dataSource.filterPredicate = (rowData: any, globalFilter: string) => {
+		this.dataSource.filterPredicate = (rowData: object, globalFilter: string) => {
 			const matchFilter: boolean[] = [];
 
 			if (globalFilter !== "%empty%") {
@@ -575,6 +612,22 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	/**
+	 * @ignore
+	 */
+	private _resetSelection(): void {
+		this.selection = new SelectionModel<object>(this.isMultiSelectEnabled, []);
+
+		// Emit event when selection changes
+		if (this._selectionSub) {
+			this._selectionSub.unsubscribe();
+		}
+		this._selectionSub = this.selection.changed.subscribe((change: SelectionChange<object>) => {
+			const selected: object[] = change.source.selected;
+			this.selectChanged.emit(selected);
+		});
+	}
+
+	/**
 	 * Sort the data according to the direction and priority (if any) defined for each column.
 	 * In case there is a compareFn defined for any of the columns then such method is called to perform the custom sorting.
 	 * FIXME: refactor this method to reduce its cognitive complexity
@@ -591,7 +644,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 		this.isMultiSorting = sortableColumns.length > 1;
 
-		this.data.sort((row1: any, row2: any) => {
+		this.data.sort((row1: object, row2: object) => {
 			for (const column of sortableColumns) {
 				const isAscendingDirection: boolean = column.sortDirection === "asc";
 				if (column.compareFn instanceof Function) {
@@ -725,13 +778,42 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	/**
-	 * Gets the class for a specific row if a rowClassNameFn function has been given as an Input
+	 * Gets the class for a specific row if a rowClassNameFn function has been given as an Input.
+	 * Also checks if the row is selected.
 	 * @param row - The data object passed to the row.
 	 * @param index - The index of the row.
-	 * @returns The className generated by the rowClassNameFn function
+	 * @returns The classNames generated by the rowClassNameFn function
 	 */
-	public getRowClasses(row: any, index: number): string {
-		return typeof this.rowClassNameFn === "function" ? this.rowClassNameFn(row, index) : "";
+	public getRowClasses(row: object, index: number): string {
+		const classes: string[] = [];
+
+		//Check if selected
+		if (this.selection && this.selection.isSelected(row)) {
+			classes.push("selected");
+		}
+		// Run rowClassNameFn
+		if (typeof this.rowClassNameFn === "function") {
+			classes.push(this.rowClassNameFn(row, index));
+		}
+
+		return classes.join(" ") || "";
+	}
+
+	/**
+	 * Handles if a row is clicked. If there are listeners on the rowClick event of the table these should handle the event.
+	 * If there are no listeners we fall back to the default behaviour, which is (de)selecting the row (if rowsSelectable is enabled)
+	 * @param row - The data object passed to the row
+	 */
+	public onRowClick(row: object): void {
+		if (this.rowClicked.observers.length > 0) {
+			// If there is an observer, emit an event
+			this.rowClicked.emit(row);
+		} else if (this.rowsSelectable) {
+			// If multi-select is enabled, (un)select the row
+			this.selection.toggle(row);
+		} else {
+			// Do nothing
+		}
 	}
 
 	/**

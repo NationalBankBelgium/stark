@@ -243,6 +243,7 @@
       },
       "TABLE": {
         "REGULAR": "Table régulière",
+        "WITH_SELECTION": "Table avec sélection",
         "WITH_CUSTOM_ACTIONS": "Table avec actions personalisé",
         "WITH_FIXED_HEADER": "Table avec en-tête fixe",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table avec Action Bar 'transcluded'",

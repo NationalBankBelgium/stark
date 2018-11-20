@@ -34,10 +34,12 @@ import createSpy = jasmine.createSpy;
 					 [filter]="tableFilter"
 					 [fixedHeader]="fixedHeader"
 					 [multiSort]="multiSort"
+					 [rowsSelectable]="rowsSelectable"
 					 [multiSelect]="multiSelect"
 					 [orderProperties]="orderProperties"
 					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
-					 [rowClassNameFn]="rowClassNameFn">
+					 [rowClassNameFn]="rowClassNameFn"
+					 (rowClicked)="rowClickHandler($event)">
 		</stark-table>`
 })
 class TestHostComponent {
@@ -45,14 +47,16 @@ class TestHostComponent {
 	public tableComponent: StarkTableComponent;
 
 	public columnProperties: StarkTableColumnProperties[];
-	public dummyData: any[];
+	public dummyData: object[];
 	public fixedHeader?: string;
+	public rowsSelectable?: boolean;
 	public multiSelect?: string;
 	public multiSort?: string;
 	public tableRowsActionBarConfig: StarkActionBarConfig;
 	public tableFilter: StarkTableFilter;
 	public orderProperties?: string[];
-	public rowClassNameFn?: (row: any, index: number) => string;
+	public rowClassNameFn?: (row: object, index: number) => string;
+	public rowClickHandler?: (row: object) => void;
 }
 
 /* tslint:disable:no-big-function */
@@ -177,6 +181,7 @@ describe("TableComponent", () => {
 
 		it("should assign right value to isMultiSelectEnabled when multiSelect changes and adapt displayedColumns", () => {
 			spyOn(component.displayedColumns, "unshift");
+			hostComponent.rowsSelectable = true;
 			hostComponent.multiSelect = "true";
 			hostFixture.detectChanges();
 			expect(component.isMultiSelectEnabled).toBe(true);
@@ -489,7 +494,7 @@ describe("TableComponent", () => {
 	});
 
 	describe("applyFilter", () => {
-		function assertFilteredData(tableComponent: StarkTableComponent, tableFilter: StarkTableFilter, expectedData: any[]): void {
+		function assertFilteredData(tableComponent: StarkTableComponent, tableFilter: StarkTableFilter, expectedData: object[]): void {
 			hostComponent.tableFilter = tableFilter;
 			hostFixture.detectChanges(); // trigger data binding
 			tableComponent.ngAfterViewInit();
@@ -712,7 +717,7 @@ describe("TableComponent", () => {
 	describe("getUnmetFilterCriteria", () => {
 		it("should return an empty criteria array when the item met ALL the filter criteria", () => {
 			const itemStr: string = "some dummy item string";
-			const itemObj: any = {
+			const itemObj: object = {
 				name: "some dummy name",
 				user: "item string"
 			};
@@ -726,7 +731,7 @@ describe("TableComponent", () => {
 
 		it("should return a non-empty criteria array when the item met SOME or NONE filter criteria", () => {
 			const itemStr: string = "some dummy item string";
-			const itemObj: any = {
+			const itemObj: object = {
 				name: "some dummy name",
 				user: "item string"
 			};
@@ -880,13 +885,7 @@ describe("TableComponent", () => {
 			hostComponent.tableFilter = {
 				globalFilterValue: dummyGlobalFilterValue,
 				resetGlobalFilterOnDataChange: false,
-				columns: [
-					{
-						columnName: "a",
-						filterValue: dummyColumnFilterValue,
-						resetFilterOnDataChange: false
-					}
-				]
+				columns: [{ columnName: "a", filterValue: dummyColumnFilterValue, resetFilterOnDataChange: false }]
 			};
 			hostFixture.detectChanges(); // trigger data binding
 			component.ngAfterViewInit();
@@ -899,8 +898,12 @@ describe("TableComponent", () => {
 	});
 
 	describe("setStyling", () => {
-		const dummyData: any[] = [{ id: 1, description: "dummy 1" }, { id: 2, description: "dummy 2" }, { id: 3, description: "dummy 3" }];
-		const returnEvenAndOdd: (row: any, index: number) => string = (_row: any, index: number): string =>
+		const dummyData: object[] = [
+			{ id: 1, description: "dummy 1" },
+			{ id: 2, description: "dummy 2" },
+			{ id: 3, description: "dummy 3" }
+		];
+		const returnEvenAndOdd: (row: object, index: number) => string = (_row: object, index: number): string =>
 			(index + 1) % 2 === 0 ? "even" : "odd"; // offset index with 1
 
 		beforeEach(() => {
@@ -949,6 +952,84 @@ describe("TableComponent", () => {
 			descriptionCells.forEach((descriptionCell: HTMLElement) =>
 				expect(descriptionCell && descriptionCell.classList).toContain("description-body-cell")
 			);
+		});
+	});
+
+	describe("rowClick", () => {
+		const dummyData: object[] = [
+			{ id: 1, description: "dummy 1" },
+			{ id: 2, description: "dummy 2" },
+			{
+				id: 3,
+				description: "dummy 3"
+			}
+		];
+
+		beforeEach(() => {
+			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+			hostComponent.dummyData = dummyData;
+
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+
+		it("should emit event when row is clicked", () => {
+			// set observer
+			hostComponent.rowClickHandler = () => undefined; // add empty function so spy can find it
+			spyOn(hostComponent, "rowClickHandler");
+			hostFixture.detectChanges();
+
+			// get a row
+			const rowElement: HTMLElement | null = hostFixture.nativeElement.querySelector("tbody tr");
+			if (!rowElement) {
+				fail("No row element found");
+				return;
+			}
+
+			// click on the row
+			rowElement.dispatchEvent(new Event("click"));
+			hostFixture.detectChanges();
+
+			// listener should be called with the data of the first row
+			expect(hostComponent.rowClickHandler).toHaveBeenCalled();
+			expect(hostComponent.rowClickHandler).toHaveBeenCalledWith(dummyData[0]);
+
+			// the row should not have been selected
+			expect(component.selection.isSelected(dummyData[0])).toBe(false);
+		});
+	});
+
+	describe("selection", () => {
+		const dummyData: object[] = [
+			{ id: 1, description: "dummy 1" },
+			{ id: 2, description: "dummy 2" },
+			{
+				id: 3,
+				description: "dummy 3"
+			}
+		];
+
+		beforeEach(() => {
+			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+			hostComponent.dummyData = dummyData;
+			hostComponent.rowsSelectable = true;
+
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+
+		it("should emit event when row is selected", () => {
+			spyOn(component.selectChanged, "emit");
+
+			const checkboxElement: HTMLElement | null = hostFixture.nativeElement.querySelector("table tbody tr input[type=checkbox]");
+			if (!checkboxElement) {
+				fail("Checkbox not found.");
+				return;
+			}
+			checkboxElement.dispatchEvent(new Event("click"));
+			hostFixture.detectChanges();
+
+			expect(component.selectChanged.emit).toHaveBeenCalledWith([dummyData[0]]);
 		});
 	});
 });
