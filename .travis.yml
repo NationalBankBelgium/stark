@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "8"
-  - "6"
+  - "10"
 
 dist: trusty
 sudo: false # better for performance
@@ -25,7 +25,7 @@ install:
   - mkdir -p $LOGS_DIR
   - touch $LOGS_DIR/build-perf.log
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run clean:modules:all; fi
-  - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm i --no-optional; else npm ci; fi
+  - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm i; else npm ci; fi
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run install:travis:all; else npm run install:ci:all; fi
 
 env:
@@ -52,7 +52,7 @@ script:
   - npm run lint:all
   - npm run test:ci:all
   - npm run docs:coverage
-  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then travis_wait 30 npm run build:showcase:ghpages:ci-test-env; else travis_wait 30 npm run build:showcase:ghpages; fi
+  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then npm run build:showcase:ghpages:ci-test-env; else npm run build:showcase:ghpages; fi
   - npm run docs:publish
   - npm run release:publish
   - bash ./scripts/ci/print-logs.sh

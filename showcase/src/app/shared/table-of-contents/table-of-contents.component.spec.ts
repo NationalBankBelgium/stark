@@ -40,7 +40,9 @@ describe("TableOfContents", () => {
 		spyOn(document, "querySelector").and.returnValue(document);
 
 		component.scrollToAnchor(myAnchor);
-		const pos: number = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+		const pos: number =
+			((<HTMLElement>document.documentElement).scrollTop || document.body.scrollTop) +
+			(<HTMLElement>document.documentElement).offsetHeight;
 		expect(pos).toBe(52);
 	});
 

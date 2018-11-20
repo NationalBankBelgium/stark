@@ -459,7 +459,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
 	// tslint:disable-next-line:cognitive-complexity
 	public getStateTreeParams(): Map<string, any> {
-		const stateTreeParams: Map<string, any> = new Map<string, any>();
+		const stateTreeParams: Map<string, any> = new Map<string, unknown>();
 
 		if (typeof this.lastTransition !== "undefined") {
 			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
@@ -495,7 +495,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
 	// tslint:disable-next-line:cognitive-complexity
 	public getStateTreeResolves(): Map<string, any> {
-		const stateTreeResolves: Map<string, any> = new Map<string, any>();
+		const stateTreeResolves: Map<string, any> = new Map<string, unknown>();
 
 		if (typeof this.lastTransition !== "undefined") {
 			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
@@ -529,7 +529,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
 	// tslint:disable-next-line:cognitive-complexity
 	public getStateTreeData(): Map<string, any> {
-		const stateTreeData: Map<string, any> = new Map<string, any>();
+		const stateTreeData: Map<string, any> = new Map<string, unknown>();
 
 		if (typeof this.lastTransition !== "undefined") {
 			// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states)

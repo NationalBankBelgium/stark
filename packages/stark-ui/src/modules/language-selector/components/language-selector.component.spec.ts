@@ -125,7 +125,6 @@ describe("LanguageSelectorComponent", () => {
 	/***
 	 * This function contains the component compilation code
 	 * Instead of repeating the code, it is placed in a separate function
-	 * @param mockSessionService
 	 */
 	function compileComponent(mockSessionService: StarkSessionService): Promise<any> {
 		return TestBed.configureTestingModule({

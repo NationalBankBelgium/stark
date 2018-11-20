@@ -496,7 +496,6 @@ describe("Service: StarkHttpService", () => {
 		describe("http failure", () => {
 			let request: StarkHttpRequest<MockResource>;
 			let httpClientMock: SpyObj<HttpClient>;
-			let loggingServiceMock: StarkLoggingService;
 			let httpService: HttpServiceHelper<MockResource>;
 			let resultObs: Observable<StarkSingleItemResponseWrapper<MockResource> | StarkCollectionResponseWrapper<MockResource>>;
 			let httpErrorResponse: Partial<HttpErrorResponse>;
@@ -505,7 +504,6 @@ describe("Service: StarkHttpService", () => {
 				({
 					starkHttpService: httpService,
 					httpMock: httpClientMock,
-					loggerMock: loggingServiceMock,
 					httpRequest: request
 				} = beforeEachFn());
 
@@ -656,14 +654,12 @@ describe("Service: StarkHttpService", () => {
 			let request: StarkHttpRequest<MockResource>;
 			let httpResponse: Partial<HttpResponse<StarkResource>>;
 			let httpClientMock: SpyObj<HttpClient>;
-			let loggingServiceMock: StarkLoggingService;
 			let httpService: HttpServiceHelper<MockResource>;
 
 			beforeEach(() => {
 				({
 					starkHttpService: httpService,
 					httpMock: httpClientMock,
-					loggerMock: loggingServiceMock,
 					httpRequest: request
 				} = beforeEachFn());
 			});
@@ -1100,7 +1096,6 @@ describe("Service: StarkHttpService", () => {
 		describe("on etag removal", () => {
 			let request: StarkHttpRequest<MockResource>;
 			let httpClientMock: SpyObj<HttpClient>;
-			let loggingServiceMock: StarkLoggingService;
 			let httpService: HttpServiceHelper<MockResource>;
 			let httpResponse: Partial<HttpResponse<StarkResource>>;
 
@@ -1108,7 +1103,6 @@ describe("Service: StarkHttpService", () => {
 				({
 					starkHttpService: httpService,
 					httpMock: httpClientMock,
-					loggerMock: loggingServiceMock,
 					httpRequest: request
 				} = beforeEachFn());
 

@@ -63,12 +63,12 @@ describe("BreadcrumbComponent", () => {
 		]
 	};
 
-	const mockStateTreeParams: Map<string, any> = new Map<string, any>();
+	const mockStateTreeParams: Map<string, any> = new Map<string, unknown>();
 	mockStateTreeParams.set(childConst, { param7: "param 7", param8: "param 8" });
 	mockStateTreeParams.set(parentConst, { param5: "param 5", param6: "param 6" });
 	mockStateTreeParams.set(grandParentConst, { param3: "param 3", param4: "param 4" });
 	mockStateTreeParams.set(rootAncesterConst, { param1: "param 1", param2: "param 2" });
-	const mockStateTreeData: Map<string, any> = new Map<string, any>();
+	const mockStateTreeData: Map<string, any> = new Map<string, unknown>();
 	mockStateTreeData.set(childConst, { translationKey: "CHILD" });
 	mockStateTreeData.set(parentConst, { translationKey: "PARENT" });
 	mockStateTreeData.set(grandParentConst, { translationKey: "GRANDPARENT" });
