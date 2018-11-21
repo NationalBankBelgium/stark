@@ -379,7 +379,7 @@ generateNpmPackage() {
   local NPM_DIR="$1"
   (
     cd $NPM_DIR > /dev/null
-    npm pack ./ > /dev/null
+    npm pack ./ --silent
   )
 }
 
