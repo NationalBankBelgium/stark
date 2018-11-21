@@ -42,7 +42,7 @@
     "husky": "1.2.0",
     "lint-staged": "7.3.0",
     "prettier": "1.14.3",
-    "release-it": "8.0.0",
+    "release-it": "8.0.1",
     "rollup": "0.67.3",
     "rollup-plugin-commonjs": "9.2.0",
     "rollup-plugin-node-resolve": "3.4.0",
