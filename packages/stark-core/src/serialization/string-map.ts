@@ -18,7 +18,7 @@ export const stringMap: Function = (targetType: any): ISerializable => {
 		},
 
 		Deserialize: (json: any): Map<string, any> => {
-			const map: Map<string, any> = new Map<string, any>();
+			const map: Map<string, any> = new Map<string, unknown>();
 			for (const key of Object.keys(json)) {
 				map.set(key, Deserialize(json[key], targetType));
 			}

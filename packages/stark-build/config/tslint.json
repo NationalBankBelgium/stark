@@ -210,8 +210,8 @@
     "deprecation": true,
     "use-default-type-parameter": true,
     "await-promise": true,
-    "no-for-in-array": true,
-    "no-unused-variable": true
+    "no-for-in-array": true
+    //  "no-unused-variable": true,
     //  "strict-boolean-expressions": true,
     //	"promise-function-async": true,
     //	"completed-docs": true,

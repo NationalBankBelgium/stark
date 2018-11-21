@@ -1962,7 +1962,7 @@ class MockCriteriaDetail {
 	public constructor() {
 		this.childField1 = mockDate;
 		this.childField2 = new MockCriteriaChildDetail();
-		this.childField3 = new Map<string, any>();
+		this.childField3 = new Map<string, unknown>();
 		this.childField3.set("grandChildField1", "whatever");
 		this.childField3.set("anotherUndefinedField", undefined);
 		this.childField3.set("anotherEmptyField", "");
