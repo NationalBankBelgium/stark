@@ -15,7 +15,7 @@ before_install:
   - AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
   - echo $AUTHOR_NAME
   - export TZ=Europe/Brussels
-  - npm i -g npm@5.8.0
+  - npm i -g npm@6.4.1
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
   - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
