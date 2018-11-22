@@ -501,11 +501,7 @@ describe("Service: StarkHttpService", () => {
 			let httpErrorResponse: Partial<HttpErrorResponse>;
 
 			beforeEach(() => {
-				({
-					starkHttpService: httpService,
-					httpMock: httpClientMock,
-					httpRequest: request
-				} = beforeEachFn());
+				({ starkHttpService: httpService, httpMock: httpClientMock, httpRequest: request } = beforeEachFn());
 
 				httpErrorResponse = {
 					status: StarkHttpStatusCodes.HTTP_400_BAD_REQUEST,
@@ -657,11 +653,7 @@ describe("Service: StarkHttpService", () => {
 			let httpService: HttpServiceHelper<MockResource>;
 
 			beforeEach(() => {
-				({
-					starkHttpService: httpService,
-					httpMock: httpClientMock,
-					httpRequest: request
-				} = beforeEachFn());
+				({ starkHttpService: httpService, httpMock: httpClientMock, httpRequest: request } = beforeEachFn());
 			});
 
 			it(
@@ -1100,11 +1092,7 @@ describe("Service: StarkHttpService", () => {
 			let httpResponse: Partial<HttpResponse<StarkResource>>;
 
 			beforeEach(() => {
-				({
-					starkHttpService: httpService,
-					httpMock: httpClientMock,
-					httpRequest: request
-				} = beforeEachFn());
+				({ starkHttpService: httpService, httpMock: httpClientMock, httpRequest: request } = beforeEachFn());
 
 				httpResponse = {
 					status: StarkHttpStatusCodes.HTTP_204_NO_CONTENT,
@@ -1444,7 +1432,7 @@ describe("Service: StarkHttpService", () => {
 			};
 			request.headers.set(dummyHeaderName, dummyHeaderValue);
 
-			const devAuthenticationHeaders: Map<string, string> = mockSessionService.devAuthenticationHeaders;
+			const devAuthenticationHeaders: Map<string, string | string[]> = mockSessionService.devAuthenticationHeaders;
 			expect(devAuthenticationHeaders.size).toBe(mockDevAuthHeaders.size);
 
 			const requestWithDevAuthHeaders: StarkHttpRequest = starkHttpService.addDevAuthenticationHeaders(request);
@@ -1453,7 +1441,7 @@ describe("Service: StarkHttpService", () => {
 			expect(requestWithDevAuthHeaders.headers.has(dummyHeaderName)).toBe(true);
 			expect(requestWithDevAuthHeaders.headers.get(dummyHeaderName)).toBe(dummyHeaderValue);
 
-			devAuthenticationHeaders.forEach((headerValue: string, header: string) => {
+			devAuthenticationHeaders.forEach((headerValue: string | string[], header: string) => {
 				expect(requestWithDevAuthHeaders.headers.has(header)).toBe(true);
 				expect(requestWithDevAuthHeaders.headers.get(header)).toBe(headerValue);
 			});
@@ -1461,20 +1449,20 @@ describe("Service: StarkHttpService", () => {
 	});
 
 	describe("addCorrelationIdentifierHeader", () => {
-		it("should get the correlationId from the Logging service and add it as a header to the current request headers", () => {
-			const dummyHeaderName: string = "some header";
-			const dummyHeaderValue: string = "some value";
-			const request: StarkHttpRequest<MockResource> = {
-				backend: mockBackend,
-				resourcePath: mockResourcePath,
-				headers: new Map<string, string>(),
-				queryParameters: new Map<string, string>(),
-				requestType: StarkHttpRequestType.DELETE,
-				item: mockResourceWithEtag,
-				serializer: mockResourceSerializer
-			};
-			request.headers.set(dummyHeaderName, dummyHeaderValue);
+		const dummyHeaderName: string = "some header";
+		const dummyHeaderValue: string = "some value";
+		const request: StarkHttpRequest<MockResource> = {
+			backend: mockBackend,
+			resourcePath: mockResourcePath,
+			headers: new Map<string, string>(),
+			queryParameters: new Map<string, string>(),
+			requestType: StarkHttpRequestType.DELETE,
+			item: mockResourceWithEtag,
+			serializer: mockResourceSerializer
+		};
+		request.headers.set(dummyHeaderName, dummyHeaderValue);
 
+		it("should get the correlationId from the Logging service and add it as a header to the current request headers", () => {
 			const correlationId: string = loggerMock.correlationId;
 			expect(correlationId).toBe(mockCorrelationId);
 
@@ -1485,6 +1473,17 @@ describe("Service: StarkHttpService", () => {
 			expect(requestWithCorrelationIdHeader.headers.get(dummyHeaderName)).toBe(dummyHeaderValue);
 			expect(requestWithCorrelationIdHeader.headers.has(loggerMock.correlationIdHttpHeaderName)).toBe(true);
 			expect(requestWithCorrelationIdHeader.headers.get(loggerMock.correlationIdHttpHeaderName)).toBe(correlationId);
+		});
+
+		it("should NOT add the correlationId header to the current request headers if the correlationId is not defined", () => {
+			(<any>loggerMock)["correlationId"] = undefined;
+
+			const requestWithCorrelationIdHeader: StarkHttpRequest<MockResource> = starkHttpService.addCorrelationIdentifierHeader(request);
+
+			expect(requestWithCorrelationIdHeader.headers.size).toBe(1); // just the custom header
+			expect(requestWithCorrelationIdHeader.headers.has(dummyHeaderName)).toBe(true);
+			expect(requestWithCorrelationIdHeader.headers.get(dummyHeaderName)).toBe(dummyHeaderValue);
+			expect(requestWithCorrelationIdHeader.headers.has(loggerMock.correlationIdHttpHeaderName)).toBe(false);
 		});
 	});
 });

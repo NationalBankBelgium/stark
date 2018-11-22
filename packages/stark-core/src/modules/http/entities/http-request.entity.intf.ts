@@ -29,9 +29,9 @@ export interface StarkHttpRequest<P extends StarkResource = StarkResource> {
 	 */
 	fieldsToInclude?: string[];
 	/**
-	 * Map containing the headers to be sent with the request.
+	 * Map containing the headers to be sent with the request. Multiple values for a header are supported.
 	 */
-	headers: Map<string, string>;
+	headers: Map<string, string | string[]>;
 	/**
 	 * Map containing the parameters that will be included as query parameters.
 	 * The query parameters might be undefined values in case the allowUndefinedQueryParams option is enabled and passed to the corresponding builder.

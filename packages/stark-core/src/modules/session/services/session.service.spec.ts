@@ -674,12 +674,50 @@ describe("Service: StarkSessionService", () => {
 			mockKeepaliveService.request.calls.reset();
 
 			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
-			expectedDevAuthHeaders.set(mockCorrelationIdHeaderName, mockCorrelationId);
 			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
 			expectedDevAuthHeaders.set("firstnameTestHeader", mockUser.firstName);
 			expectedDevAuthHeaders.set("lastnameTestHeader", mockUser.lastName);
 			expectedDevAuthHeaders.set("emailTestHeader", <string>mockUser.email);
 
+			sessionServiceHelper.setDevAuthenticationHeaders(expectedDevAuthHeaders);
+			sessionServiceHelper.configureKeepaliveService();
+
+			expect(mockKeepaliveService.interval).toHaveBeenCalledTimes(1);
+			expect(mockKeepaliveService.interval).toHaveBeenCalledWith(appConfig.keepAliveInterval);
+			expect(mockKeepaliveService.request).toHaveBeenCalledTimes(1);
+
+			let mockHeadersObj: HttpHeaders = new HttpHeaders();
+			expectedDevAuthHeaders.forEach((value: string, key: string) => (mockHeadersObj = mockHeadersObj.set(key, value)));
+			mockHeadersObj = mockHeadersObj.set(mockCorrelationIdHeaderName, mockCorrelationId);
+
+			expect(mockKeepaliveService.request).toHaveBeenCalledWith(
+				new HttpRequest<void>("GET", <string>appConfig.keepAliveUrl, { headers: mockHeadersObj })
+			);
+		});
+
+		it("should NOT set the correlationId headers to the keepalive Http request if the correlation id is undefined", () => {
+			const sessionServiceHelper: SessionServiceHelper = new SessionServiceHelper(
+				mockStore,
+				mockLogger,
+				mockRoutingService,
+				appConfig,
+				mockIdleService,
+				mockInjectorService,
+				mockTranslateService,
+				mockSessionConfig
+			);
+
+			expect(sessionServiceHelper.keepalive).toBeDefined();
+			mockKeepaliveService.interval.calls.reset();
+			mockKeepaliveService.request.calls.reset();
+
+			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
+			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
+			expectedDevAuthHeaders.set("firstnameTestHeader", mockUser.firstName);
+			expectedDevAuthHeaders.set("lastnameTestHeader", mockUser.lastName);
+			expectedDevAuthHeaders.set("emailTestHeader", <string>mockUser.email);
+
+			(<any>mockLogger)["correlationId"] = undefined;
 			sessionServiceHelper.setDevAuthenticationHeaders(expectedDevAuthHeaders);
 			sessionServiceHelper.configureKeepaliveService();
 
@@ -882,11 +920,10 @@ describe("Service: StarkSessionService", () => {
 	});
 
 	describe("setDevAuthenticationHeaders", () => {
-		it("should construct the authentication headers based on the http headers that are passed", () => {
+		it("should construct the dev authentication headers based on the http headers that are passed", () => {
 			expect(sessionService["_devAuthenticationHeaders"]).toBe(<any>undefined);
 
 			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
-			expectedDevAuthHeaders.set(mockCorrelationIdHeaderName, mockCorrelationId);
 			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
 			expectedDevAuthHeaders.set("firstnameTestHeader", mockUser.firstName);
 			expectedDevAuthHeaders.set("lastnameTestHeader", mockUser.lastName);
@@ -894,29 +931,57 @@ describe("Service: StarkSessionService", () => {
 
 			sessionService.setDevAuthenticationHeaders(expectedDevAuthHeaders);
 			expect(sessionService["_devAuthenticationHeaders"]).toBeDefined();
-			expect(sessionService.devAuthenticationHeaders.size).toBe(5);
+			expect(sessionService.devAuthenticationHeaders.size).toBe(4);
 
-			expectedDevAuthHeaders.forEach((_value: string, key: string) => {
+			expectedDevAuthHeaders.forEach((value: string, key: string) => {
 				expect(sessionService.devAuthenticationHeaders.has(key)).toBe(true);
-				expect(sessionService.devAuthenticationHeaders.get(key)).toBe(_value);
+				expect(sessionService.devAuthenticationHeaders.get(key)).toBe(value);
+			});
+		});
+
+		it("should construct the dev authentication headers excluding those http headers with undefined or null names or values", () => {
+			expect(sessionService["_devAuthenticationHeaders"]).toBe(<any>undefined);
+
+			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
+			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
+			expectedDevAuthHeaders.set("firstnameTestHeader", mockUser.firstName);
+			expectedDevAuthHeaders.set("lastnameTestHeader", <any>undefined);
+			// tslint:disable-next-line:no-null-keyword
+			expectedDevAuthHeaders.set("emailTestHeader", <any>null);
+			expectedDevAuthHeaders.set(<any>undefined, "dummy value");
+			// tslint:disable-next-line:no-null-keyword
+			expectedDevAuthHeaders.set(<any>null, "another dummy value");
+
+			sessionService.setDevAuthenticationHeaders(expectedDevAuthHeaders);
+			expect(sessionService["_devAuthenticationHeaders"]).toBeDefined();
+			expect(sessionService.devAuthenticationHeaders.size).toBe(2);
+
+			expectedDevAuthHeaders.forEach((value: string, key: string) => {
+				if (key === "usernameTestHeader" || key === "firstnameTestHeader") {
+					expect(sessionService.devAuthenticationHeaders.has(key)).toBe(true);
+					expect(sessionService.devAuthenticationHeaders.get(key)).toBe(value);
+				} else {
+					expect(sessionService.devAuthenticationHeaders.has(key)).toBe(false);
+				}
 			});
 		});
 	});
 
 	describe("devAuthenticationHeaders", () => {
 		it("should return the pre-authentication headers if they were constructed", () => {
-			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
+			const expectedDevAuthHeaders: Map<string, string | string[]> = new Map<string, string | string[]>();
 			expectedDevAuthHeaders.set("usernameTestHeader", "doej");
 			expectedDevAuthHeaders.set("firstnameTestHeader", "john");
 			expectedDevAuthHeaders.set("lastTestHeader", "doe");
+			expectedDevAuthHeaders.set("emailTestHeader", ["jdoe@mail.com", "john.d@email.com"]);
 
 			sessionService.setInternalDevAuthenticationHeaders(expectedDevAuthHeaders);
 
-			const devAuthenticationHeaders: Map<string, string> = sessionService.devAuthenticationHeaders;
+			const devAuthenticationHeaders: Map<string, string | string[]> = sessionService.devAuthenticationHeaders;
 
 			expect(devAuthenticationHeaders.size).toBe(expectedDevAuthHeaders.size);
 
-			expectedDevAuthHeaders.forEach((value: string, header: string) => {
+			expectedDevAuthHeaders.forEach((value: string | string[], header: string) => {
 				expect(expectedDevAuthHeaders.has(header)).toBe(true);
 				expect(expectedDevAuthHeaders.get(header)).toBe(value);
 			});
@@ -926,7 +991,7 @@ describe("Service: StarkSessionService", () => {
 			/* tslint:disable-next-line:no-undefined-argument */
 			sessionService.setInternalDevAuthenticationHeaders(undefined);
 
-			const devAuthenticationHeaders: Map<string, string> = sessionService.devAuthenticationHeaders;
+			const devAuthenticationHeaders: Map<string, string | string[]> = sessionService.devAuthenticationHeaders;
 
 			expect(devAuthenticationHeaders.size).toBe(0);
 		});
@@ -991,7 +1056,7 @@ class SessionServiceHelper extends StarkSessionServiceImpl {
 		return of(undefined);
 	}
 
-	public setInternalDevAuthenticationHeaders(headers?: Map<string, string>): void {
+	public setInternalDevAuthenticationHeaders(headers?: Map<string, string | string[]>): void {
 		this._devAuthenticationHeaders = <any>headers;
 	}
 }

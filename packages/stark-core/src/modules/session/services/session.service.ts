@@ -53,7 +53,7 @@ export const starkUnauthenticatedUserError: string = "StarkSessionService => use
 export class StarkSessionServiceImpl implements StarkSessionService {
 	public keepalive: Keepalive;
 	public session$: Observable<StarkSession>;
-	protected _devAuthenticationHeaders: Map<string, string>;
+	protected _devAuthenticationHeaders: Map<string, string | string[]>;
 	public countdownStarted: boolean;
 
 	// TODO Check if we can simplify this service
@@ -338,9 +338,13 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		let pingRequestHeaders: HttpHeaders = new HttpHeaders();
 
 		if (ENV === "development") {
-			this.devAuthenticationHeaders.forEach((value: string, key: string) => {
+			this.devAuthenticationHeaders.forEach((value: string | string[], key: string) => {
 				pingRequestHeaders = pingRequestHeaders.set(key, value);
 			});
+		}
+		// Add the correlation ID header to the ping requests
+		if (this.logger.correlationIdHttpHeaderName && this.logger.correlationIdHttpHeaderName.length > 0 && this.logger.correlationId) {
+			pingRequestHeaders = pingRequestHeaders.set(this.logger.correlationIdHttpHeaderName, this.logger.correlationId);
 		}
 
 		const pingRequest: HttpRequest<void> = new HttpRequest("GET", <string>this.appConfig.keepAliveUrl, {
@@ -352,17 +356,22 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		this.keepalive.onPing.subscribe(() => this.logger.info(starkSessionServiceName + ": keepAlive ping sent"));
 	}
 
-	public setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string>): void {
+	public setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string | string[]>): void {
 		this.logger.debug(starkSessionServiceName + ": constructing the authentication headers");
 		if (!this._devAuthenticationHeaders) {
 			this._devAuthenticationHeaders = new Map<string, string>();
 		}
 
-		devAuthenticationHeaders.forEach((value: string, key: string) => this._devAuthenticationHeaders.set(key, value));
+		devAuthenticationHeaders.forEach((value: string | string[], key: string) => {
+			// in Angular, a header value can only be string or string[], not null/undefined (https://github.com/angular/angular/issues/18743)
+			if (key && typeof value !== "undefined" && value !== null) {
+				this._devAuthenticationHeaders.set(key, value);
+			}
+		});
 	}
 
-	public get devAuthenticationHeaders(): Map<string, string> {
-		return this._devAuthenticationHeaders || new Map<string, string>();
+	public get devAuthenticationHeaders(): Map<string, string | string[]> {
+		return this._devAuthenticationHeaders || new Map<string, string | string[]>();
 	}
 
 	protected startIdleService(): void {
