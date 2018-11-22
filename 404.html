@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script>
+        sessionStorage.redirect = location.href;
+        const finalUrlRegex = /(\/showcase\/[\d\D][^\/]+(\/|\/$|$))/;
+        const trailingSlashRegex = /\/$/;
+        const matches = finalUrlRegex.exec(window.location.pathname);
+        let finalBaseHref = "";
+        if (matches && matches[1]) {
+            finalBaseHref = matches[1];
+        }
+        // add a trailing slash to the url in case it doesn't have any
+        if (!finalBaseHref.match(trailingSlashRegex)) {
+            finalBaseHref = finalBaseHref + "/";
+        }
+
+        window.open(finalBaseHref, "_self"); // redirection
+    </script>
+    <!-- We don't use the meta tag for the moment, to make the refresh more dynamic with every release of the showcase (alphas, betas, latest, ...)-->
+    <!--<meta http-equiv="refresh" content="0;URL='/showcase/latest'"></meta>-->
+</head>
+</html>
