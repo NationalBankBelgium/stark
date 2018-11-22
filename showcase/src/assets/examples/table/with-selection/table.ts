@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
 const DUMMY_DATA: object[] = [
@@ -17,10 +18,10 @@ const DUMMY_DATA: object[] = [
 ];
 
 @Component({
-	selector: "showcase-table-with-fixed-header",
-	templateUrl: "./table-with-fixed-header.component.html"
+	selector: "showcase-table-with-selection",
+	templateUrl: "./table-with-selection.component.html"
 })
-export class TableWithFixedHeaderComponent implements OnInit {
+export class TableWithSelectionComponent implements OnInit {
 	public data: object[];
 
 	public columns: StarkTableColumnProperties[];
@@ -29,17 +30,27 @@ export class TableWithFixedHeaderComponent implements OnInit {
 
 	public pagination: StarkPaginationConfig;
 
+	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
+
 	public ngOnInit(): void {
 		this.data = DUMMY_DATA;
 
 		this.columns = [
-			{ name: "id", label: "Id" },
-			{ name: "title", label: "Title", cellFormatter: (value: { label: string }): string => "~" + value.label },
+			{ name: "id", label: "Id", isFilterable: true, isSortable: true },
+			{
+				name: "title",
+				label: "Title",
+				cellFormatter: (value: { label: string }): string => "~" + value.label
+			},
 			{ name: "description", label: "Description" }
 		];
 
 		this.filter = { globalFilterPresent: false, columns: [] };
 
-		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: DUMMY_DATA.length };
+		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: 10 };
+	}
+
+	public handleRowSelected(data: object[]): void {
+		this.logger.debug("SELECTED ROW:", data);
 	}
 }

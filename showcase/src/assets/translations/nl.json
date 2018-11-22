@@ -243,6 +243,7 @@
       },
       "TABLE": {
         "REGULAR": "Normale tabel",
+        "WITH_SELECTION": "Tabel met selectie",
         "WITH_CUSTOM_ACTIONS": "Tabel met aangepaste acties",
         "WITH_FIXED_HEADER": "Tabel met vaste header",
         "WITH_TRANSCLUDED_ACTION_BAR": "Tabel met 'transcluded' Action Bar",

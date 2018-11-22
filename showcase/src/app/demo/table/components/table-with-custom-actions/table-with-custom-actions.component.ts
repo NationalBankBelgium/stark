@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAction, StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
-const DUMMY_DATA: any[] = [
+const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
 	{ id: 10, title: { label: "second title (value: 2)", value: 2 }, description: "second description" },
 	{ id: 12, title: { label: "third title (value: 3)", value: 3 }, description: "the third description" },
@@ -22,7 +22,7 @@ const DUMMY_DATA: any[] = [
 	templateUrl: "./table-with-custom-actions.component.html"
 })
 export class TableWithCustomActionsComponent implements OnInit {
-	public data: any[];
+	public data: object[];
 
 	public columns: StarkTableColumnProperties[];
 
@@ -39,7 +39,7 @@ export class TableWithCustomActionsComponent implements OnInit {
 
 		this.columns = [
 			{ name: "id", label: "Id" },
-			{ name: "title", label: "Title", cellFormatter: (value: any): string => "~" + value.label },
+			{ name: "title", label: "Title", cellFormatter: (value: { label: string }): string => "~" + value.label },
 			{ name: "description", label: "Description" }
 		];
 
@@ -48,8 +48,20 @@ export class TableWithCustomActionsComponent implements OnInit {
 		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: 10 };
 
 		this.tableActions = [
-			{ id: "edit-item", label: "STARK.ICONS.EDIT_ITEM", icon: "pencil", actionCall: this.logger.debug, isEnabled: false },
-			{ id: "reload", label: "STARK.ICONS.RELOAD_PAGE", icon: "autorenew", actionCall: this.logger.debug, isEnabled: true }
+			{
+				id: "edit-item",
+				label: "STARK.ICONS.EDIT_ITEM",
+				icon: "pencil",
+				actionCall: ($event: Event, data: object) => this.logger.debug("EDIT:", $event, data),
+				isEnabled: false
+			},
+			{
+				id: "reload",
+				label: "STARK.ICONS.RELOAD_PAGE",
+				icon: "autorenew",
+				actionCall: ($event: Event, data: object) => this.logger.debug("RELOAD:", $event, data),
+				isEnabled: true
+			}
 		];
 	}
 }

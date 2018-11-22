@@ -63,6 +63,7 @@ import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
 import {
 	TableRegularComponent,
+	TableWithSelectionComponent,
 	TableWithCustomActionsComponent,
 	TableWithTranscludedActionBarComponent,
 	TableWithFixedHeaderComponent,
@@ -131,6 +132,7 @@ import {
 		DemoSliderComponent,
 		DemoTableComponent,
 		TableRegularComponent,
+		TableWithSelectionComponent,
 		TableWithCustomActionsComponent,
 		TableWithTranscludedActionBarComponent,
 		TableWithFixedHeaderComponent,
@@ -162,8 +164,7 @@ import {
 		DemoSliderComponent,
 		DemoTableComponent,
 		DemoToastComponent,
-		DemoTypographyComponent,
-		DemoTableComponent
+		DemoTypographyComponent
 	],
 	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]
 })

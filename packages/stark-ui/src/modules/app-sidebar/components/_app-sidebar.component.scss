@@ -6,6 +6,7 @@
 .stark-app-sidebar {
   .mat-sidenav-content {
     margin-top: $stark-header-size;
+    overflow: initial; // fixes double scrollbar
     [stark-app-sidenav-content] {
       align-items: center;
       display: flex;

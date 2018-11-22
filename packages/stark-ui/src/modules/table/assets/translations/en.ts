@@ -21,7 +21,7 @@ export const translationsEn: object = {
 			TOGGLE_SELECTION: "Toggle selection",
 			SELECT_ALL: "Select all",
 			DESELECT_ALL: "Deselect all",
-			SELECT_DESELECT_ALL: "SELECT all/Deselect all",
+			SELECT_DESELECT_ALL: "Select all/Deselect all",
 			MORE: "More",
 			INDEX: "Index",
 			ACTIONS: "Actions",

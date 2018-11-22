@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
-const DUMMY_DATA: any[] = [
+const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
 	{ id: 10, title: { label: "second title (value: 2)", value: 2 }, description: "second description" },
 	{ id: 12, title: { label: "third title (value: 3)", value: 3 }, description: "the third description" },
@@ -23,7 +23,7 @@ const DUMMY_DATA: any[] = [
 	encapsulation: ViewEncapsulation.None // Important
 })
 export class TableWithCustomStylingComponent implements OnInit {
-	public data: any[];
+	public data: object[];
 
 	public columns: StarkTableColumnProperties[];
 
@@ -31,7 +31,7 @@ export class TableWithCustomStylingComponent implements OnInit {
 
 	public pagination: StarkPaginationConfig;
 
-	public getRowClassName: (_row: any, index: number) => string;
+	public getRowClassName: (_row: object, index: number) => string;
 
 	public ngOnInit(): void {
 		this.data = DUMMY_DATA;
@@ -41,7 +41,7 @@ export class TableWithCustomStylingComponent implements OnInit {
 			{
 				name: "title",
 				label: "Title",
-				cellFormatter: (value: any): string => "~" + value.label,
+				cellFormatter: (value: { label: string }): string => "~" + value.label,
 				cellClassName: (title: { value: number }) => (title.value < 5 ? "danger" : title.value < 9 ? "warning" : "success")
 			},
 			{ name: "description", label: "Description" }
@@ -51,6 +51,6 @@ export class TableWithCustomStylingComponent implements OnInit {
 
 		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: 10 };
 
-		this.getRowClassName = (_row: any, index: number) => (index % 2 === 0 ? "even" : "odd");
+		this.getRowClassName = (_row: object, index: number) => (index % 2 === 0 ? "even" : "odd");
 	}
 }

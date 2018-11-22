@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkActionBarConfig, StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
-const DUMMY_DATA: any[] = [
+const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
 	{ id: 10, title: { label: "second title (value: 2)", value: 2 }, description: "second description" },
 	{ id: 12, title: { label: "third title (value: 3)", value: 3 }, description: "the third description" },
@@ -24,7 +24,7 @@ const DUMMY_DATA: any[] = [
 	encapsulation: ViewEncapsulation.None // Important
 })
 export class TableRegularComponent implements OnInit {
-	public data: any[];
+	public data: object[];
 
 	public columns: StarkTableColumnProperties[];
 
@@ -46,10 +46,10 @@ export class TableRegularComponent implements OnInit {
 			{
 				name: "title",
 				label: "Title",
-				cellFormatter: (value: any): string => "~" + value.label,
+				cellFormatter: (value: { label: string }): string => "~" + value.label,
 				isFilterable: true,
 				isSortable: true,
-				compareFn: (n1: any, n2: any) => n1.value - n2.value
+				compareFn: (n1: { value: number }, n2: { value: number }) => n1.value - n2.value
 			},
 			{ name: "description", label: "Description", isFilterable: true, isSortable: true }
 		];
@@ -62,9 +62,25 @@ export class TableRegularComponent implements OnInit {
 
 		this.rowActionBarConfig = {
 			actions: [
-				{ id: "edit-item", label: "STARK.ICONS.EDIT_ITEM", icon: "pencil", actionCall: this.logger.debug, isEnabled: true },
-				{ id: "delete-item", label: "STARK.ICONS.DELETE_ITEM", icon: "delete", actionCall: this.logger.debug, isEnabled: false }
+				{
+					id: "edit-item",
+					label: "STARK.ICONS.EDIT_ITEM",
+					icon: "pencil",
+					actionCall: ($event: Event, data: object) => this.logger.debug("EDIT", $event, data),
+					isEnabled: true
+				},
+				{
+					id: "delete-item",
+					label: "STARK.ICONS.DELETE_ITEM",
+					icon: "delete",
+					actionCall: ($event: Event, data: object) => this.logger.debug("DELETE", $event, data),
+					isEnabled: false
+				}
 			]
 		};
+	}
+
+	public handleRowClicked(data: object): void {
+		this.logger.debug("ROW CLICKED:", data);
 	}
 }
