@@ -12,6 +12,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE) [![Greenkeeper badge](https://badges.greenkeeper.io/NationalBankBelgium/stark.svg)](https://greenkeeper.io/)
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=dXkxd0JnL0V6TlRuVkszSGs5TDJscWFPOXdNL2hrMFdZREtMeEQ0SXU5RT0tLTBLZVJOb1JPR3pnUVhVY1NNMUtvdVE9PQ==--32b9d322c064334a80a3409239111be75d3d6ddd)](https://www.browserstack.com/automate/public-build/dXkxd0JnL0V6TlRuVkszSGs5TDJscWFPOXdNL2hrMFdZREtMeEQ0SXU5RT0tLTBLZVJOb1JPR3pnUVhVY1NNMUtvdVE9PQ==--32b9d322c064334a80a3409239111be75d3d6ddd)
 
 # Stark
 
@@ -54,6 +55,30 @@ Stark's reusable build integrates support for:
 -   Router visualization with [UI-Router Visualizer](https://github.com/ui-router/visualizer)
 
 ## Developer guide
+
+### E2E tests on BrowserStack
+
+#### Prerequisits
+
+-   [BrowserStack](https://www.browserstack.com) account
+
+### Running tests
+
+This will run all the tests in `showcase/src/e2e-test`
+
+Start showcase
+
+```
+npm run showcase
+```
+
+Start the tests with protractor on BrowserStack, you can find your credentials on [https://automate.browserstack.com/](https://automate.browserstack.com/)
+
+```
+BROWSERSTACK_USERNAME=<your-username> BROWSERSTACK_ACCESS_KEY=<your-access-key> npm run test:showcase:browserstack
+```
+
+You can view additional logging / videos on [https://automate.browserstack.com/](https://automate.browserstack.com/)
 
 TODO add links to developer guide sections
 

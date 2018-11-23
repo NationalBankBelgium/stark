@@ -138,6 +138,7 @@
     "test:stark-core": "cd packages/stark-core && npm run test-fast && cd ../..",
     "test:stark-ui": "cd packages/stark-ui && npm run test-fast && cd ../..",
     "test:showcase": "cd showcase && npm run test-fast && cd ../..",
+    "test:showcase:browserstack": "cd showcase && npm run test:browserstack && cd ../..",
     "test:starter": "cd starter && npm run test-fast && cd ../..",
     "test:ci:all": "npm run test:ci:stark-core && npm run test:ci:stark-ui && npm run test:ci:starter && npm run test:ci:showcase",
     "test:ci:stark-core": "cd packages/stark-core && npm run test-fast:ci && cd ../..",

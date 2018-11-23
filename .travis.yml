@@ -16,6 +16,8 @@ before_install:
   - echo $AUTHOR_NAME
   - export TZ=Europe/Brussels
   - npm i -g npm@6.4.1
+  - NODE_VERSION="$(node -v)"
+  - echo $NODE_VERSION
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
   - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
@@ -27,6 +29,7 @@ install:
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run clean:modules:all; fi
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm i; else npm ci; fi
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run install:travis:all; else npm run install:ci:all; fi
+  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then npm run build:showcase:ghpages:ci-test-env; else npm run build:showcase:ghpages; fi
 
 env:
   global:
@@ -45,14 +48,19 @@ cache:
 
 # Not needed since we use Puppeteer in karma.conf.ci.js
 # It downloads Chrome itself and works with or without Travis
-#addons:
 #  chrome: stable
 
 script:
   - npm run lint:all
   - npm run test:ci:all
+  # Coverage tests only need to be run on 1 node version (v10)
+  # Serve site as background process
+  - if [[ ${NODE_VERSION} =~ ^v10.*$ ]]; then cd showcase && npm run server:prod:ci; fi &
+  # Run e2e tests
+  - if [[ ${NODE_VERSION} =~ ^v10.*$ ]]; then npm run test:showcase:browserstack; else echo "Skipping browserstack tests for this node version ($NODE_VERSION)"; fi
+  # Kill http-server
+  - pkill -f http-server
   - npm run docs:coverage
-  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then npm run build:showcase:ghpages:ci-test-env; else npm run build:showcase:ghpages; fi
   - npm run docs:publish
   - npm run release:publish
   - bash ./scripts/ci/print-logs.sh
