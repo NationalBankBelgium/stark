@@ -1,0 +1,20 @@
+<div class="stark-timeout-warning-dialog" role="alertdialog" aria-busy="true" aria-live="assertive">
+		<h1 mat-dialog-title translate>STARK.SESSION_TIMEOUT.TITLE</h1>
+	<div mat-dialog-content>
+		<p>
+			<span translate>STARK.SESSION_TIMEOUT.WILL_EXPIRE_IN</span><span> {{ countdown$|async }} </span>
+			<span translate>STARK.SESSION_TIMEOUT.SECONDS</span>
+		</p>
+		<p translate>STARK.SESSION_TIMEOUT.WISH_STAY_CONNECTED</p>
+	</div>
+	<div mat-dialog-actions>
+		<button mat-raised-button
+				color="primary"
+				(click)="keepSession()"
+				aria-label="Close Dialog">
+			<span translate>STARK.SESSION_TIMEOUT.STAY_CONNECTED</span>
+		</button>
+	</div>
+</div>
+
+	

@@ -22,6 +22,13 @@ export const translationsEn: object = {
 		SESSION_LOGOUT: {
 			TITLE: "Logged out",
 			LOGIN: "Log in again"
+		},
+		SESSION_TIMEOUT: {
+			SECONDS: " seconds.",
+			STAY_CONNECTED: "Stay connected",
+			TITLE: "Session about to expire",
+			WILL_EXPIRE_IN: "Your session will expire in ",
+			WISH_STAY_CONNECTED: "Do you wish to stay connected?"
 		}
 	}
 };

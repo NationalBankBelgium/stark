@@ -9,8 +9,8 @@ const componentName: string = "stark-session-logout-page";
 
 /**
  * Session Logout Page smart component.
- * 
- * This page will be shown when the user logs out from the application (i.e. clicking the {@AppLogoComponent} button). 
+ *
+ * This page will be shown when the user logs out from the application (i.e. clicking the {@AppLogoComponent} button).
  * In this page, the user has the ability to reload and log in again into the application by clicking the Login button.
  */
 @Component({

@@ -3,7 +3,6 @@ import { UIRouterModule } from "@uirouter/angular";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
-import { StarkLocale } from "@nationalbankbelgium/stark-core";
 import { SESSION_UI_STATES } from "./routes";
 import {
 	StarkLoginPageComponent,
@@ -16,22 +15,39 @@ import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "../../common/translations";
 
+import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "./entities";
+import { StarkSessionTimeoutWarningDialogComponent } from "./components/session-timeout-warning-dialog.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { StarkLocale } from "@nationalbankbelgium/stark-core";
+import { EffectsModule } from "@ngrx/effects";
+import { StarkSessionTimeoutWarningDialogEffects } from "./effects";
+
 @NgModule({
 	declarations: [
 		StarkLoginPageComponent,
 		StarkPreloadingPageComponent,
 		StarkSessionExpiredPageComponent,
-		StarkSessionLogoutPageComponent
+		StarkSessionLogoutPageComponent,
+		StarkSessionTimeoutWarningDialogComponent
 	],
-	exports: [StarkLoginPageComponent, StarkPreloadingPageComponent, StarkSessionExpiredPageComponent, StarkSessionLogoutPageComponent],
+	exports: [
+		StarkLoginPageComponent,
+		StarkPreloadingPageComponent,
+		StarkSessionExpiredPageComponent,
+		StarkSessionLogoutPageComponent,
+		StarkSessionTimeoutWarningDialogComponent
+	],
 	imports: [
 		CommonModule,
 		UIRouterModule.forChild({
 			states: SESSION_UI_STATES
 		}),
 		MatButtonModule,
-		TranslateModule
-	]
+		MatDialogModule,
+		TranslateModule,
+		EffectsModule.forFeature([StarkSessionTimeoutWarningDialogEffects])
+	],
+	entryComponents: [StarkSessionTimeoutWarningDialogComponent]
 })
 export class StarkSessionUiModule {
 	/**
@@ -40,9 +56,10 @@ export class StarkSessionUiModule {
 	 * @link https://angular.io/guide/singleton-services#forroot
 	 * @returns a module with providers
 	 */
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(starkSessionUiConfig?: StarkSessionUiConfig): ModuleWithProviders {
 		return {
-			ngModule: StarkSessionUiModule
+			ngModule: StarkSessionUiModule,
+			providers: [starkSessionUiConfig ? { provide: STARK_SESSION_UI_CONFIG, useValue: starkSessionUiConfig } : []]
 		};
 	}
 
