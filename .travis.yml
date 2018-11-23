@@ -16,6 +16,8 @@ before_install:
   - echo $AUTHOR_NAME
   - export TZ=Europe/Brussels
   - npm i -g npm@6.4.1
+  - NODE_VERSION="$(node -v)"
+  - echo $NODE_VERSION
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
   - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
@@ -27,6 +29,7 @@ install:
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run clean:modules:all; fi
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm i; else npm ci; fi
   - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run install:travis:all; else npm run install:ci:all; fi
+  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then npm run build:showcase:ghpages:ci-test-env; else npm run build:showcase:ghpages; fi
 
 env:
   global:
@@ -45,14 +48,15 @@ cache:
 
 # Not needed since we use Puppeteer in karma.conf.ci.js
 # It downloads Chrome itself and works with or without Travis
-#addons:
 #  chrome: stable
 
 script:
   - npm run lint:all
   - npm run test:ci:all
+  # E2E tests only need to be run on 1 node version (v10)
+  # and the secure environmentals BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY should be set. (only on secure builds)
+  - if [[ ${NODE_VERSION} =~ ^v10.*$ && -n "${BROWSERSTACK_USERNAME}" && -n "${BROWSERSTACK_ACCESS_KEY}"  ]]; then npm run test:showcase:e2e:browserstack; else echo "Skipping browserstack tests."; fi
   - npm run docs:coverage
-  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then npm run build:showcase:ghpages:ci-test-env; else npm run build:showcase:ghpages; fi
   - npm run docs:publish
   - npm run release:publish
   - bash ./scripts/ci/print-logs.sh

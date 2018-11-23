@@ -1,5 +1,5 @@
 require("ts-node").register({
-	project: "tsconfig.e2e.json"
+	project: "e2e/tsconfig.e2e.json"
 });
 
 const helpers = require("./helpers");
@@ -10,7 +10,7 @@ exports.config = {
 	/**
 	 * Use `npm run e2e`
 	 */
-	specs: [helpers.root("src/**/**.e2e.ts"), helpers.root("src/**/*.e2e.ts")],
+	specs: [helpers.root("./e2e/src/**/**.e2e-spec.ts"), helpers.root("e2e/src/**/*.e2e-spec.ts")],
 	exclude: [],
 
 	framework: "jasmine2",
