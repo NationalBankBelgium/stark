@@ -4,6 +4,17 @@
 	<!-- The base href is defined through the Webpack configuration and can be customized through the angular.json file -->
 	<!-- necessary for HTML5 History API which adds support for pretty URLs (see app.ts) -->
 	<meta charset="utf-8">
+	
+	<script>
+		(function(){
+			var redirect = sessionStorage.redirect;
+			delete sessionStorage.redirect;
+			if (redirect && redirect != location.href) {
+				history.replaceState(null, null, redirect);
+			}
+		})();
+	</script>
+	
 	<title><%= htmlWebpackPlugin.options.starkAppMetadata.name %></title>
 
 	<meta name="description" content="<%= htmlWebpackPlugin.options.starkAppMetadata.description %>">
