@@ -8,10 +8,10 @@ export interface StarkHttpBaseRequestBuilder<T extends StarkResource> {
 	/**
 	 * Adds a header to the request
 	 * @param name - Header name
-	 * @param value - Header value
+	 * @param value - Header value. In case of multiple values, they should be provided in an array.
 	 * @returns The current builder
 	 */
-	setHeader(name: string, value: string): this;
+	setHeader(name: string, value: string | string[]): this;
 
 	/**
 	 * Adds a query parameter to the request (if the parameter already exists it will be overwritten)

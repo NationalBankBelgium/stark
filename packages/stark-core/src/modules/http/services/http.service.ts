@@ -160,7 +160,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
 
 		// add the preAuthentication headers to the request headers
-		this.sessionService.devAuthenticationHeaders.forEach((value: string, header: string) => {
+		this.sessionService.devAuthenticationHeaders.forEach((value: string | string[], header: string) => {
 			requestCopy.headers.set(header, value);
 		});
 
@@ -173,7 +173,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	 * @returns The modified request object
 	 */
 	public addCorrelationIdentifierHeader(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
-		if (this.logger.correlationIdHttpHeaderName && this.logger.correlationIdHttpHeaderName.length > 0) {
+		if (this.logger.correlationIdHttpHeaderName && this.logger.correlationIdHttpHeaderName.length > 0 && this.logger.correlationId) {
 			this.logger.debug(starkHttpServiceName + ": Adding correlation identifier header");
 			const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
 			requestCopy.headers.set(this.logger.correlationIdHttpHeaderName, this.logger.correlationId);

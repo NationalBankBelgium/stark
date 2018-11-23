@@ -20,7 +20,7 @@ export interface StarkSessionService {
 	 * Authentication headers necessary for non-production environments
 	 * @returns A Map containing the development authentication headers
 	 */
-	readonly devAuthenticationHeaders: Map<string, string>;
+	readonly devAuthenticationHeaders: Map<string, string | string[]>;
 
 	/**
 	 * Returns the session's current user
@@ -74,5 +74,5 @@ export interface StarkSessionService {
 	 * Add authentication headers to the session
 	 * They are use by the http service to authenticate the user
 	 */
-	setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string>): void;
+	setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string | string[]>): void;
 }

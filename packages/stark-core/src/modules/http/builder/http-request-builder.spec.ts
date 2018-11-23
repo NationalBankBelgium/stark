@@ -55,16 +55,16 @@ interface StarkHttpRequestBuilderSpecVariables<RequestBuilderType = StarkHttpBas
 	requestBuilder: RequestBuilderType;
 }
 
-function assertHeaders(requestHeaders: Map<string, string>, expectedHeaders: Map<string, string | undefined>): void {
+function assertHeaders(requestHeaders: Map<string, string | string[]>, expectedHeaders: Map<string, string | string[] | undefined>): void {
 	expect(requestHeaders).toBeDefined();
 	expect(requestHeaders.size).toBe(expectedHeaders.size);
 
-	expectedHeaders.forEach((value?: string, header?: string) => {
+	expectedHeaders.forEach((value?: string | string[], header?: string) => {
 		expect(header).toBeDefined();
 		expect((<string>header).length).not.toBe(0);
 		expect(requestHeaders.has(<string>header)).toBe(true);
 		if (typeof value !== "undefined") {
-			expect(requestHeaders.get(<string>header)).toBe(value);
+			expect(requestHeaders.get(<string>header)).toEqual(value);
 		} else {
 			expect(requestHeaders.get(<string>header)).toBeUndefined();
 		}
@@ -123,9 +123,14 @@ function testSetHeader(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables)
 			({ requestBuilder: builder } = beforeEachFn());
 		});
 
-		it("should add the header name/value only if the value is defined", () => {
+		it("should add the header name/value only if the name and value are defined and not null", () => {
 			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON);
 			builder.setHeader("invalidHeader", <any>undefined);
+			// tslint:disable-next-line:no-null-keyword
+			builder.setHeader("anotherInvalidHeader", <any>null);
+			builder.setHeader(<any>undefined, "dummy value");
+			// tslint:disable-next-line:no-null-keyword
+			builder.setHeader(<any>null, "another dummy value");
 
 			const request: StarkHttpRequest = builder.build();
 
@@ -134,17 +139,22 @@ function testSetHeader(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables)
 
 		it("should add the header name/value and add it to existing ones", () => {
 			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON);
-			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode);
+			builder.setHeader(StarkHttpHeaders.ACCEPT_LANGUAGE, [
+				StarkLanguages.EN_US.isoCode,
+				StarkLanguages.FR_BE.isoCode,
+				StarkLanguages.NL_BE.isoCode
+			]);
 
 			const request: StarkHttpRequest = builder.build();
+			const expectedHeaders: Map<string, string | string[]> = new Map<string, string | string[]>();
+			expectedHeaders.set(StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON);
+			expectedHeaders.set(StarkHttpHeaders.ACCEPT_LANGUAGE, [
+				StarkLanguages.EN_US.isoCode,
+				StarkLanguages.FR_BE.isoCode,
+				StarkLanguages.NL_BE.isoCode
+			]);
 
-			assertHeaders(
-				request.headers,
-				new Map([
-					[StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON],
-					[StarkHttpHeaders.ACCEPT_LANGUAGE, StarkLanguages.EN_US.isoCode]
-				])
-			);
+			assertHeaders(request.headers, expectedHeaders);
 		});
 	});
 }

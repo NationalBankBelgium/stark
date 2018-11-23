@@ -12,8 +12,9 @@ export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResourc
 		this.request = request;
 	}
 
-	public setHeader(name: string, value: string): this {
-		if (typeof value !== "undefined") {
+	public setHeader(name: string, value: string | string[]): this {
+		// in Angular, a header value can only be string or string[], not null/undefined (https://github.com/angular/angular/issues/18743)
+		if (name && typeof value !== "undefined" && value !== null) {
 			this.request.headers.set(name, value);
 		}
 		return this;
