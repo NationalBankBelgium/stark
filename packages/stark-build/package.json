@@ -73,7 +73,7 @@
     "@angular/compiler-cli": "7.0.4"
   },
   "peerDependencies": {
-    "@angular/cli": "7.x",
+    "@angular/cli": "^7.0.7",
     "@angular/compiler": "7.x",
     "@angular/compiler-cli": "7.x",
     "@angular/platform-browser": "7.x",
