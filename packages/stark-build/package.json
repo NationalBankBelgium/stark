@@ -19,7 +19,7 @@
   },
   "types": "typings/index.d.ts",
   "dependencies": {
-    "@angular-devkit/build-angular": "0.10.6",
+    "@angular-devkit/build-angular": "0.10.7",
     "@angular-devkit/build-optimizer": "0.10.7",
     "@types/uglify-js": "3.0.4",
     "@types/webpack": "4.4.19",
