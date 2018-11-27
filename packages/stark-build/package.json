@@ -50,7 +50,7 @@
     "source-map-loader": "0.2.4",
     "string-replace-loader": "2.1.1",
     "style-loader": "0.23.1",
-    "stylelint": "9.8.0",
+    "stylelint": "9.9.0",
     "stylelint-config-prettier": "4.0.0",
     "stylelint-webpack-plugin": "0.10.5",
     "to-string-loader": "1.1.5",
