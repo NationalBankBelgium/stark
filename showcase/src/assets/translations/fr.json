@@ -9,7 +9,7 @@
         "ALT": "Action Bar Alternative",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "CLASSIC-FULL": "Action Bar Classic Full",
-        "TITLE": "Stark action bar"
+        "TITLE": "Action bar"
       },
       "APP_DATA": {
         "DROPDOWN": "Exemple dans un dropdown avec photo de profil de l'utilisateur",
@@ -28,22 +28,7 @@
         "NO_INPUT": "Démonstration du breadcrumb component (sans paramètres)",
         "PARENT": "Parent",
         "ROOT": "Ancêtre racine",
-        "TITLE": "Stark breadcrumb"
-      },
-      "BUTTON": {
-        "TITLE": "Stark buttons"
-      },
-      "CARD": {
-        "ADVANCED": {
-          "DETAILS": "Stark gère aussi les cartes plus complexes, comme par exemple avec un sous-titre, des actions et permet aussi d'intégrer des éléments prenant la largeur totale de la carte à l'aide de la classe <code>.stark-full-width</code> à ajouter à l'intérieur du tag <code>mat-card-content</code>.",
-          "TITLE": "Carte avancée"
-        },
-        "BASIC": {
-          "DETAILS": "Stark propose un layout alternatif concernant les cartes. Vous pouvez utiliser les cartes d'Angular Material et ajouter la classe <code>.stark-card</code> aux composants. Nous suggérons aussi d'utiliser le tag <code>h3</code> à l'intérieur du <code>mat-card-title</code>.<br>Pour plus d'information sur les cards d'Angular Material, rendez vous sur cette page: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
-          "TITLE": "Carte basique"
-        },
-        "CODE": "Voici le code correspondant à cette carte:",
-        "TITLE": "Stark Cartes"
+        "TITLE": "Breadcrumb"
       },
       "COLLAPSIBLE": {
         "CLOSED": "Fermé",
@@ -56,34 +41,15 @@
         "TITLE_1": "Titre du collapsible avec icône custom",
         "TOGGLE_COLLAPSIBLE": "Ouvrir/fermer le collapsible"
       },
-      "COLORS": {
-        "ALT": {
-          "DETAILS": "En plus de ces trois palettes, Stark ajoute 3 palettes alternatives: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
-          "TITLE": "Palettes alternatives"
-        },
-        "BASIC": {
-          "DETAILS": "Angular Material utilise trois palettes de couleurs: primary, accent et warn. Stark donne la possibilité de définir ces palettes de couleur via 3 maps SCSS: <code>$stark-primary-palette</code>, <code>$stark-accent-palette</code> and <code>$stark-warn-palette</code>.<br><br><br>Pour plus de détails sur la gestion du theme par Angular Material, veuillez consulter <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a>",
-          "TITLE": "Palettes basiques"
-        },
-        "CUSTOM": {
-          "DETAILS": "Afin de personnaliser ces palettes, il faut d'abord créer une palette à l'aide de cet outil: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Selectionner la couleur de votre choix, l'outil génère le code SCSS pour vous, puis il suffit d'assigner la map à la palette que vous souhaitez modifier. Ne pas oublier d'importer le theming Stark après la déclaration des maps. <br>Voici un example:",
-          "TITLE": "Customize palettes"
-        },
-        "LINKS": {
-          "DETAILS": "Voici les palettes mises à dispostion par Material Design: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
-          "TITLE": "Liens utiles"
-        },
-        "TITLE": "Stark Colors"
-      },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Filtre sur mesure",
         "ONLY_WEEKDAYS": "Date Picker - Seulement les jours de semaine",
         "ONLY_WEEKENDS": "Date Picker - Seulement les jours de weekend",
         "PLACEHOLDER": "Choisir une date",
-        "TITLE": "Stark date picker"
+        "TITLE": "Date picker"
       },
       "DATE_RANGE_PICKER": {
-        "TITLE": "Stark date range picker"
+        "TITLE": "Date range picker"
       },
       "DROPDOWN": {
         "PR": "Applications informatiques",
@@ -102,11 +68,11 @@
         "SELECT_SERVICES": "Sélectionnez un service ou plus",
         "SELECT_ONE_SERVICE": "Sélectionnez au moins un service",
         "SELECT_DISABLED": "Désolé, ce dropdown est désactivé",
-        "TITLE": "Stark dropdown",
+        "TITLE": "Dropdown",
         "WHITE": "Dropdown blanc sur fond noir (largeur maximale)"
       },
       "EXAMPLE_VIEWER": {
-        "TITLE": "Stark example viewer"
+        "TITLE": "Example viewer"
       },
       "FOOTER": {
         "TITLE": "Stark App Footer Guidelines",
@@ -115,19 +81,6 @@
         "INPUT1": "<b>legalInfoUrl</b> contient l'url de la page d'information légale.",
         "INPUT2": "<b>helpPageUrl</b> contient l'url de la page d'aide.",
         "INPUT3": "Les éléments HTML inclus seront copiés dans le pied de page et affichés à gauche des autres éléments."
-      },
-      "HEADER": {
-        "COPY_PASTE": "Ensuite il faut copier/coller ce bout de code HTML",
-        "EXPLAINED": "Introduction",
-        "INTEGRATION": "Integration",
-        "INTEGRATION_DETAILS": "Stark fournit des classes utiles pour implémenter le header de votre application. Il suffit d'inclure le theme du header dans votre SCSS",
-        "STARK_APP_HEADER": "Le <code>stark-app-header</code> ajoute un fond au header",
-        "STARK_APP_BAR": "Le <code>stark-app-bar</code> est composé de 3 conteneurs de contenu <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> qui divisent le header en 3 parties. Tous les enfants directes de ces 3 conteneurs sont alignés dans une colonne. <code>stark-app-bar</code> contient aussi un <code>stark-app-bar-page-title</code> placé dans le coin gauche en bas du header.",
-        "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contient <code>stark-actions</code> pour les actions concernant la navigation.",
-        "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contient le logo de l'application",
-        "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contient 3 conteneurs, le premier pour le App Data component et le boutton de déconnection, le second pour le choix de langue et <code>stark-app-bar-content-right-actions-alt</code> qui contient des actions alternatives.",
-        "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> affiche le titre de la page visitée.",
-        "TITLE": "Stark header guidelines"
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
@@ -148,7 +101,7 @@
           "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules",
           "TYPE_A_VALUE": "Taper une valeur"
         },
-        "TITLE": "Stark keyboard directive"
+        "TITLE": "Keyboard directive"
       },
       "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Sélecteur de langue en mode 'dropdown'",
@@ -158,12 +111,12 @@
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Bouton logout - Icône par défaut",
         "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom",
-        "TITLE": "Stark app logout"
+        "TITLE": "App logout"
       },
       "MENU": {
         "SIMPLE": "Simple menu",
         "SECTIONS": "Menu avec sections",
-        "TITLE": "Stark app menu"
+        "TITLE": "App menu"
       },
       "MESSAGE_PANE": {
         "BUTTONS": {
@@ -196,7 +149,7 @@
             "NEW_INFO_2": "Nouvelle info 2"
           }
         },
-        "TITLE": "Stark Message Pane",
+        "TITLE": "Message Pane",
         "EXAMPLE": "Example",
         "BUTTON_GROUPS": {
           "DEMO": "Demo",
@@ -205,7 +158,7 @@
         }
       },
       "MINIMAP": {
-        "TITLE": "Stark Minimap",
+        "TITLE": "Minimap",
         "FULL": "Minimap (version classic)",
         "COMPACT": "Minimap (version compacte)"
       },
@@ -215,7 +168,7 @@
         "EMITTED_PAGINATE_EVENT": "Paginate event émis",
         "EXTENDED_CONFIGURATION": "Pagination avec sélecteur de page étendu",
         "SIMPLE_CONFIGURATION": "Pagination avec configuration simple",
-        "TITLE": "Stark Pagination"
+        "TITLE": "Pagination"
       },
       "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
@@ -235,6 +188,14 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
+      "ROUTE_SEARCH": {
+        "DIRECTION_LEFT": "Route Search component orienté à gauche (direction 'left')",
+        "DIRECTION_RIGHT": "Route Search component orienté à droite (direction 'right')",
+        "MENU_CONFIG_REMARKS": "<b>IMPORTANT: </b> Le composant Route Search affichera tous les itinéraires disponibles dans 'menuConfig' entrée. Cette configuration peut également inclure des 'lazy loaded routes'.",
+        "ROUTER_CONFIG_REMARKS": "<b>IMPORTANT: </b> Le composant Route Search affiche uniquement les routes déjà enregistrées par le routeur. Les 'lazy loaded routes' qui n'ont pas encore été chargées n'apparaîtront pas dans le composant",
+        "TITLE": "Route Search",
+        "WITH_CUSTOM_COLOR_AND_MENU_CONFIG": "Route Search component avec 'menuConfig' et couleur personnalisée"
+      },
       "SHARED": {
         "EXAMPLE_VIEWER_LIST": "Exemples et codes"
       },
@@ -243,14 +204,14 @@
         "OPEN_LEFT": "Ouvrir la sidebar de gauche",
         "OPEN_MENU": "Ouvrir le menu",
         "OPEN_RIGHT": "Ouvrir la sidebar de droite",
-        "TITLE": "Stark app sidebar"
+        "TITLE": "App sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Curseur de plage",
         "SIMPLE_HORIZONTAL_SLIDER": "Curseur simple",
         "SIMPLE_VERTICAL_SLIDER": "Curseur simple",
         "VERTICAL_RANGE_SLIDER": "Curseur de plage",
-        "TITLE": "Stark slider"
+        "TITLE": "Slider"
       },
       "TABLE": {
         "LABELS": {
@@ -263,7 +224,7 @@
         "WITH_FIXED_HEADER": "Table avec en-tête fixe",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table avec Action Bar 'transcluded'",
         "WITH_CUSTOM_STYLING": "Table avec mise en page personnalisé",
-        "TITLE": "Stark table"
+        "TITLE": "Table"
       },
       "TOAST": {
         "BUTTON_INFO": "Info",
@@ -281,7 +242,87 @@
         "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast fermé automatiquement avant qu'un nouveau toast n'apparaisse.",
         "MESSAGE_INTRO": "Cliquez sur un bouton pout tester les notification toast",
         "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
-        "TITLE": "Stark toast notification"
+        "TITLE": "Toast notification"
+      }
+    },
+    "GETTING_STARTED": {
+      "TITLE": "Démarrer"
+    },
+    "HOMEPAGE": {
+      "MAIN_TITLE": "&Agrave; propos de Stark",
+      "DESCRIPTION_BEFORE_DETAIL": "<p>Stark est un framework front-end basé sur Angular 5 qui s'appuie sur les caractéristiques d'Angular Stark... Un outil génial qui utilise Webpack, une technologie front-end de pointe pour le support intégré.</p><p>Stark fournit les principaux outils pour accélérer le développement front-end:</p>",
+      "DESCRIPTION_DETAIL": "<ul><li>un build fiable et réutilisable basé sur Webpack</li><li>un projet Starter inspiré d'Angular Starter d'AngularClass et du Web Starter Kit de Google</li><li>des modules core qui fournissent des APIs très utiles</li><li>des modules UI, qui fournissent des composants visuels intéressants </li><li>une application Showcase qui contient:<ul><li> la démonstration en live de nos style guide</li><li>des exemples d'implémentation de nos composants</li><li>un guide du développeur</li></ul></li></ul>",
+      "DESCRIPTION_DETAIL_LEGO_BLOCKS": "<p>Les modules de Stark sont comme des LEGO: ajoutez ce dont vous avez besoin, ni plus, ni moins. Si vous n'aimez pas notre implémentation par défaut, vous pouvez remplacer/réimplémenter/ignorer ce qui ne vous plait pas comme bon vous semble.</p>",
+      "DESCRIPTION_AFTER_DETAIL": "<p>Et, encore mieux, le repository de Stark est disponible sur la page Github de la Banque Nationale de Belgique!</p><p>Allez donc jeter un oeil à nos projets open source!</p>",
+      "NEWS_TITLE": "Nouvelles",
+      "NEWS_DESCRIPTION": "Vous voulez tout savoir sur les dernières avancées de Stark?",
+      "NEWS_CONTENT": "Jetez un oeil à notre page de nouvelles <a href=\"news\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>!",
+      "DOCUMENTATION_MAIN_TITLE": "Documentation de Stark",
+      "DOCUMENTATION_MAIN_DESC": "Vous voulez plus d'infos sur Stark? Consultez nos liens de documentation ci-dessous!",
+      "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aussi appelé stark-core, est un module fournissant des APIs réutilisables, comme par exemple une API de routing, de logging, de log shipping,etc... </p><p>Vous trouverez la documentation la plus récente en cliquant <a href=\"https://stark.nbb.be/api-docs/stark-core/latest\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p><p>Ou allez jeter un oeil aux anciennes versions de l'API par <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core \" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p>",
+      "DOCUMENTATION_UI_DESC": "<p>Stark UI fournit des composants UI réutilisables: table de données, boite de dialogue, ... mais également des thèmes.</p><p>Pour consulter la dernière documentation de cette API, cliquez <a href=\"https://stark.nbb.be/api-docs/stark-ui/latest\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p><p> Ou allez jeter un oeil aux anciennes versions de l'API par <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui \" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p>",
+      "DOCUMENTATION_SHOWCASE_DESC": "<p>Le Showcase, vous vous y trouvez en ce moment même! </p><p>Amusez-vous à parcourir notre liste de composants visuels ainsi que leur documentation et à découvrir de vos propres yeux nos guidelines en matière de design. </p>Si vous le souhaitez, vous pouvez toujours consulter l'ancienne version de ce showcase en cliquant sur ce <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">lien</a>.</p>",
+      "TITLE": "Home"
+    },
+    "ICONS": {
+      "GITHUB": "Repo Github",
+      "STARK_UI": "Documentation Stark-UI",
+      "STARK_CORE": "Documentation Stark-Core"
+    },
+    "NEWS": {
+      "TITLE": "Nouvelles"
+    },
+    "OTHERWISE": {
+      "TITLE": "Autre"
+    },
+    "STYLEGUIDE": {
+      "TITLE": "Guide de style",
+      "BUTTON": {
+        "TITLE": "Buttons"
+      },
+      "CARD": {
+        "ADVANCED": {
+          "DETAILS": "Stark gère aussi les cartes plus complexes, comme par exemple avec un sous-titre, des actions et permet aussi d'intégrer des éléments prenant la largeur totale de la carte à l'aide de la classe <code>.stark-full-width</code> à ajouter à l'intérieur du tag <code>mat-card-content</code>.",
+          "TITLE": "Carte avancée"
+        },
+        "BASIC": {
+          "DETAILS": "Stark propose un layout alternatif concernant les cartes. Vous pouvez utiliser les cartes d'Angular Material et ajouter la classe <code>.stark-card</code> aux composants. Nous suggérons aussi d'utiliser le tag <code>h3</code> à l'intérieur du <code>mat-card-title</code>.<br>Pour plus d'information sur les cards d'Angular Material, rendez vous sur cette page: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "TITLE": "Carte basique"
+        },
+        "CODE": "Voici le code correspondant à cette carte:",
+        "TITLE": "Stark Cartes"
+      },
+      "COLORS": {
+        "ALT": {
+          "DETAILS": "En plus de ces trois palettes, Stark ajoute 3 palettes alternatives: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
+          "TITLE": "Palettes alternatives"
+        },
+        "BASIC": {
+          "DETAILS": "Angular Material utilise trois palettes de couleurs: primary, accent et warn. Stark donne la possibilité de définir ces palettes de couleur via 3 maps SCSS: <code>$stark-primary-palette</code>, <code>$stark-accent-palette</code> and <code>$stark-warn-palette</code>.<br><br><br>Pour plus de détails sur la gestion du theme par Angular Material, veuillez consulter <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a>",
+          "TITLE": "Palettes basiques"
+        },
+        "CUSTOM": {
+          "DETAILS": "Afin de personnaliser ces palettes, il faut d'abord créer une palette à l'aide de cet outil: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Selectionner la couleur de votre choix, l'outil génère le code SCSS pour vous, puis il suffit d'assigner la map à la palette que vous souhaitez modifier. Ne pas oublier d'importer le theming Stark après la déclaration des maps. <br>Voici un example:",
+          "TITLE": "Customize palettes"
+        },
+        "LINKS": {
+          "DETAILS": "Voici les palettes mises à dispostion par Material Design: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
+          "TITLE": "Liens utiles"
+        },
+        "TITLE": "Stark Colors"
+      },
+      "HEADER": {
+        "COPY_PASTE": "Ensuite il faut copier/coller ce bout de code HTML",
+        "EXPLAINED": "Introduction",
+        "INTEGRATION": "Integration",
+        "INTEGRATION_DETAILS": "Stark fournit des classes utiles pour implémenter le header de votre application. Il suffit d'inclure le theme du header dans votre SCSS",
+        "STARK_APP_HEADER": "Le <code>stark-app-header</code> ajoute un fond au header",
+        "STARK_APP_BAR": "Le <code>stark-app-bar</code> est composé de 3 conteneurs de contenu <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> qui divisent le header en 3 parties. Tous les enfants directes de ces 3 conteneurs sont alignés dans une colonne. <code>stark-app-bar</code> contient aussi un <code>stark-app-bar-page-title</code> placé dans le coin gauche en bas du header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contient <code>stark-actions</code> pour les actions concernant la navigation.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contient le logo de l'application",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contient 3 conteneurs, le premier pour le App Data component et le boutton de déconnection, le second pour le choix de langue et <code>stark-app-bar-content-right-actions-alt</code> qui contient des actions alternatives.",
+        "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> affiche le titre de la page visitée.",
+        "TITLE": "Stark header guidelines"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
@@ -304,31 +345,8 @@
           "DETAILS": "Nous avons garder un maximum de compatibilité avec Angular Material. Pour plus de détails sur la philosophie derrière Angular Material, consulter cetee page: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
           "TITLE": "Basé sur Angular Material"
         },
-        "TITLE": "Stark Typography"
+        "TITLE": "Typography"
       }
-    },
-    "HOMEPAGE": {
-      "MAIN_TITLE": "&Agrave; propos de Stark",
-      "DESCRIPTION_BEFORE_DETAIL": "<p>Stark est un framework front-end basé sur Angular 5 qui s'appuie sur les caractéristiques d'Angular Stark... Un outil génial qui utilise Webpack, une technologie front-end de pointe pour le support intégré.</p><p>Stark fournit les principaux outils pour accélérer le développement front-end:</p>",
-      "DESCRIPTION_DETAIL": "<ul><li>un build fiable et réutilisable basé sur Webpack</li><li>un projet Starter inspiré d'Angular Starter d'AngularClass et du Web Starter Kit de Google</li><li>des modules core qui fournissent des APIs très utiles</li><li>des modules UI, qui fournissent des composants visuels intéressants </li><li>une application Showcase qui contient:<ul><li> la démonstration en live de nos style guide</li><li>des exemples d'implémentation de nos composants</li><li>un guide du développeur</li></ul></li></ul>",
-      "DESCRIPTION_DETAIL_LEGO_BLOCKS": "<p>Les modules de Stark sont comme des LEGO: ajoutez ce dont vous avez besoin, ni plus, ni moins. Si vous n'aimez pas notre implémentation par défaut, vous pouvez remplacer/réimplémenter/ignorer ce qui ne vous plait pas comme bon vous semble.</p>",
-      "DESCRIPTION_AFTER_DETAIL": "<p>Et, encore mieux, le repository de Stark est disponible sur la page Github de la Banque Nationale de Belgique!</p><p>Allez donc jeter un oeil à nos projets open source!</p>",
-      "NEWS_TITLE": "Nouvelles",
-      "NEWS_DESCRIPTION": "Vous voulez tout savoir sur les dernières avancées de Stark?",
-      "NEWS_CONTENT": "Jetez un oeil à notre page de nouvelles <a href=\"news\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>!",
-      "DOCUMENTATION_MAIN_TITLE": "Documentation de Stark",
-      "DOCUMENTATION_MAIN_DESC": "Vous voulez plus d'infos sur Stark? Consultez nos liens de documentation ci-dessous!",
-      "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aussi appelé stark-core, est un module fournissant des APIs réutilisables, comme par exemple une API de routing, de logging, de log shipping,etc... </p><p>Vous trouverez la documentation la plus récente en cliquant <a href=\"https://stark.nbb.be/api-docs/stark-core/latest\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p><p>Ou allez jeter un oeil aux anciennes versions de l'API par <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core \" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p>",
-      "DOCUMENTATION_UI_DESC": "<p>Stark UI fournit des composants UI réutilisables: table de données, boite de dialogue, ... mais également des thèmes.</p><p>Pour consulter la dernière documentation de cette API, cliquez <a href=\"https://stark.nbb.be/api-docs/stark-ui/latest\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p><p> Ou allez jeter un oeil aux anciennes versions de l'API par <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui \" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p>",
-      "DOCUMENTATION_SHOWCASE_DESC": "<p>Le Showcase, vous vous y trouvez en ce moment même! </p><p>Amusez-vous à parcourir notre liste de composants visuels ainsi que leur documentation et à découvrir de vos propres yeux nos guidelines en matière de design. </p>Si vous le souhaitez, vous pouvez toujours consulter l'ancienne version de ce showcase en cliquant sur ce <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">lien</a>.</p>"
-    },
-    "ICONS": {
-      "GITHUB": "Repo Github",
-      "STARK_UI": "Documentation Stark-UI",
-      "STARK_CORE": "Documentation Stark-Core"
-    },
-    "STYLEGUIDE": {
-      "TITLE": "Guide de style"
     }
   }
 }

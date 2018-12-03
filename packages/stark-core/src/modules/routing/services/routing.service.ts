@@ -590,9 +590,10 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return resolvablesData;
 	}
 
+	//TODO How to fetch translationKey from the State resolves without navigating to that state?
 	public getTranslationKeyFromState(stateName: string): string {
 		const stateTreeResolves: Map<string, any> = this.getStateTreeResolves();
-		const stateTreeData: Map<string, any> = this.getStateTreeData();
+		const stateData: object = this.$state.get(stateName).data;
 
 		let stateTranslationKey: string | undefined;
 		// get the translationKey in case it is defined as a resolve in the state definition
@@ -600,8 +601,8 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			stateTranslationKey = stateTreeResolves.get(stateName)["translationKey"];
 		}
 		// if not found in the resolves then check the state's data object
-		if (!stateTranslationKey && stateTreeData.get(stateName)) {
-			stateTranslationKey = stateTreeData.get(stateName)["translationKey"];
+		if (stateData && !stateTranslationKey && stateData.hasOwnProperty("translationKey")) {
+			stateTranslationKey = stateData["translationKey"];
 		}
 		// if no translationKey so far, then the state name is used
 		if (!stateTranslationKey) {
