@@ -127,6 +127,29 @@ module.exports = function(env) {
 		module: {
 			rules: [
 				/**
+				 * Prevent any external library from breaking support for Internet Explorer 11 (see https://github.com/NationalBankBelgium/stark/issues/900)
+				 * Therefore, only certain libraries in 'node_modules' (except the biggest ones and the ones from NBB) are transpiled to ES5 with Babel
+				 * reference: https://github.com/babel/babel-loader
+				 */
+				{
+					test: /node_modules\\.*\.js$/,
+					exclude: /node_modules\\(@angular|@mdi|@ng-idle|@nationalbankbelgium|@ngrx|@ngx-translate|@uirouter|cerialize|class-validator|core-js|ibantools|lodash|prettier|rxjs)/,
+					use: {
+						loader: "babel-loader",
+						options: {
+							presets: [
+								[
+									"@babel/preset-env",
+									{
+										// Environments you support/target. See https://babeljs.io/docs/en/babel-preset-env#targets
+										targets: { ie: "11" }
+									}
+								]
+							]
+						}
+					}
+				},
+				/**
 				 * Css loader support for *.css files (styles directory only)
 				 * Loads external css styles into the DOM, supports HMR
 				 *
