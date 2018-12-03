@@ -20,7 +20,7 @@
   "types": "typings/index.d.ts",
   "dependencies": {
     "@angular-devkit/build-angular": "0.11.0",
-    "@angular-devkit/build-optimizer": "0.10.7",
+    "@angular-devkit/build-optimizer": "0.11.1",
     "@types/uglify-js": "3.0.4",
     "@types/webpack": "4.4.20",
     "add-asset-html-webpack-plugin": "3.1.2",
