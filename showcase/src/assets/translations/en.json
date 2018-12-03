@@ -9,7 +9,7 @@
         "ALT": "Action Bar Alternative",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "CLASSIC-FULL": "Action Bar Classic Full",
-        "TITLE": "Stark action bar"
+        "TITLE": "Action bar"
       },
       "APP_DATA": {
         "DROPDOWN": "Dropdown example with user image",
@@ -28,7 +28,7 @@
         "NO_INPUT": "Breadcrumb demonstration (without parameters)",
         "PARENT": "Parent",
         "ROOT": "Root ancestor",
-        "TITLE": "Stark breadcrumb"
+        "TITLE": "Breadcrumb"
       },
       "BUTTON": {
         "TITLE": "Stark buttons"
@@ -51,7 +51,7 @@
         "DEFAULT_ICON": "Default icon",
         "HTML_CONTENT": "Any HTML content",
         "OPEN": "Open",
-        "TITLE": "Stark collapsible",
+        "TITLE": "Collapsible",
         "TITLE_0": "Default icon collapsible title",
         "TITLE_1": "Custom icon collapsible title",
         "TOGGLE_COLLAPSIBLE": "Toggle collapsible"
@@ -80,10 +80,10 @@
         "ONLY_WEEKDAYS": "Date Picker - Only weekdays",
         "ONLY_WEEKENDS": "Date Picker - Only weekends",
         "PLACEHOLDER": "Choose a date",
-        "TITLE": "Stark date picker"
+        "TITLE": "Date picker"
       },
       "DATE_RANGE_PICKER": {
-        "TITLE": "Stark date range picker"
+        "TITLE": "Date range picker"
       },
       "DROPDOWN": {
         "PR": "IT applications",
@@ -102,14 +102,14 @@
         "SELECT_SERVICES": "Select one or more services",
         "SELECT_ONE_SERVICE": "Select at least one service",
         "SELECT_DISABLED": "Sorry, it's disabled",
-        "TITLE": "Stark dropdown",
+        "TITLE": "Dropdown",
         "WHITE": "White dropdown on black background (full width)"
       },
       "EXAMPLE_VIEWER": {
         "TITLE": "Stark example viewer"
       },
       "FOOTER": {
-        "TITLE": "Stark App Footer Guidelines",
+        "TITLE": "App Footer Guidelines",
         "INTRO": "Stark provides you a custom footer for your application. It's a standard component you can use by copying this HTML into your code",
         "INFO": "This component takes 3 elements as input :",
         "INPUT1": "<b>legalInfoUrl</b> contains the url to the legal information page.",
@@ -127,7 +127,7 @@
         "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo",
         "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <code>stark-app-bar-content-right-actions-alt</code> which contains some alternative actions.",
         "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> displays the current page title.",
-        "TITLE": "Stark App Header Guidelines"
+        "TITLE": "App Header Guidelines"
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
@@ -148,22 +148,22 @@
           "INPUT_UPPERCASE_CHARACTERS": "Accept only uppercase characters",
           "TYPE_A_VALUE": "Type a value"
         },
-        "TITLE": "Stark keyboard directive"
+        "TITLE": "Keyboard directive"
       },
       "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Language selector in 'dropdown' mode",
-        "TITLE": "Stark language selector",
+        "TITLE": "Language selector",
         "TOOLBAR": "Language selector in 'toolbar' mode"
       },
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
         "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon",
-        "TITLE": "Stark app logout"
+        "TITLE": "App logout"
       },
       "MENU": {
         "SIMPLE": "Simple menu",
         "SECTIONS": "Menu with sections",
-        "TITLE": "Stark app menu"
+        "TITLE": "App menu"
       },
       "MESSAGE_PANE": {
         "BUTTONS": {
@@ -196,7 +196,7 @@
             "NEW_INFO_2": "New info 2"
           }
         },
-        "TITLE": "Stark message pane",
+        "TITLE": "Message pane",
         "EXAMPLE": "Example",
         "BUTTON_GROUPS": {
           "DEMO": "Demo",
@@ -205,7 +205,7 @@
         }
       },
       "MINIMAP": {
-        "TITLE": "Stark Minimap",
+        "TITLE": "Minimap",
         "FULL": "Minimap (classic version)",
         "COMPACT": "Minimap (compact version)"
       },
@@ -215,7 +215,7 @@
         "EMITTED_PAGINATE_EVENT": "Emitted paginate event",
         "EXTENDED_CONFIGURATION": "Pagination with extended page selector",
         "SIMPLE_CONFIGURATION": "Pagination with simple configuration",
-        "TITLE": "Stark Pagination"
+        "TITLE": "Pagination"
       },
       "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
@@ -230,10 +230,15 @@
         "SCSS": "Pretty-Print SCSS",
         "SELECT_DATAFORMAT": "Select a format",
         "SQL": "Pretty-Print SQL",
-        "TITLE": "Stark pretty print",
+        "TITLE": "Pretty print",
         "TRY_IT_YOURSELF": "Try it yourself",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
+      },
+      "ROUTE_SEARCH": {
+        "EXAMPLE_NO_PARAM": "Example of Route Search component without parameters (direction right)",
+        "EXAMPLE_WITH_PARAM": "Example of Route Search component with parameter (direction left)",
+        "TITLE": "Route Search"
       },
       "SHARED": {
         "EXAMPLE_VIEWER_LIST": "Examples and code samples"
@@ -243,14 +248,14 @@
         "OPEN_LEFT": "Open the left sidebar",
         "OPEN_MENU": "Open the menu",
         "OPEN_RIGHT": "Open the right sidebar",
-        "TITLE": "Stark app sidebar"
+        "TITLE": "App sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Horizontal Range Slider",
         "SIMPLE_HORIZONTAL_SLIDER": "Simple Horizontal Slider",
         "SIMPLE_VERTICAL_SLIDER": "Simple Vertical Slider",
         "VERTICAL_RANGE_SLIDER": "Vertical Range Slider",
-        "TITLE": "Stark slider"
+        "TITLE": "Slider"
       },
       "TABLE": {
         "LABELS": {
@@ -263,7 +268,7 @@
         "WITH_FIXED_HEADER": "Table with fixed header",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
         "WITH_CUSTOM_STYLING": "Table with custom styling",
-        "TITLE": "Stark table"
+        "TITLE": "Table"
       },
       "TOAST": {
         "BUTTON_INFO": "Info",
@@ -281,7 +286,7 @@
         "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast automatically closed before displaying a new one.",
         "MESSAGE_INTRO": "Click one button to test the toast notification.",
         "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
-        "TITLE": "Stark toast notification"
+        "TITLE": "Toast notification"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
@@ -307,6 +312,9 @@
         "TITLE": "Stark Typography"
       }
     },
+    "GETTING_STARTED": {
+      "TITLE": "Getting Started"
+    },
     "HOMEPAGE": {
       "MAIN_TITLE": "About Stark",
       "DESCRIPTION_BEFORE_DETAIL": "<p>Stark is an Angular 5+ based front-end framework built on top of Angular Stark features... An awesome reusable build using Webpack, built-in support for state of the art front-end tech.</p> <p>Stark provides main building blocks for accelerating front-end development:</p>",
@@ -320,12 +328,19 @@
       "DOCUMENTATION_MAIN_DESC": "<p>Want some more info about Stark? Take a look at our links just below!</p>",
       "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aka stark-core, is a module providing reusable APIs, such as a routing, logging, log shipping, etc.</p><p>You can find the latest API documentation for stark-core <a href=\"https://stark.nbb.be/api-docs/stark-core/latest\" target=\"_blank\" rel=\"noopener noreferrer\" >here</a>.</p><p>Or check the API for previous releases right <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core \" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>",
       "DOCUMENTATION_UI_DESC": "<p>Stark UI provides reusable UI components, for example data table, message pane, ... but also themes.</p><p>The latest API doc for that module can be found <a href=\"https://stark.nbb.be/api-docs/stark-ui/latest\" target=\"_blank\" rel=\"noopener noreferrer\" >here</a>.</p><p>Or check the API for previous releases right <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui \" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>",
-      "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!</p><p> Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.</p>If you are interested in seeing the previous version of Stark showcase, have a look <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>"
+      "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!</p><p> Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.</p>If you are interested in seeing the previous version of Stark showcase, have a look <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>",
+      "TITLE": "Home"
     },
     "ICONS": {
       "GITHUB": "Github repo",
       "STARK_UI": "Stark-UI documentation",
       "STARK_CORE": "Stark-Core documentation"
+    },
+    "NEWS": {
+      "TITLE": "News"
+    },
+    "OTHERWISE": {
+      "TITLE": "Otherwise"
     },
     "STYLEGUIDE": {
       "TITLE": "Style guide"

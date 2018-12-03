@@ -494,10 +494,13 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
 	// tslint:disable-next-line:cognitive-complexity
-	public getStateTreeResolves(): Map<string, any> {
+	public getStateTreeResolves(state?: StateDeclaration): Map<string, any> {
 		const stateTreeResolves: Map<string, any> = new Map<string, unknown>();
 
-		if (typeof this.lastTransition !== "undefined") {
+		if (typeof state !== "undefined") {
+			//
+		}
+		else if (typeof this.lastTransition !== "undefined") {
 			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
 			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
 
@@ -528,10 +531,13 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
 	// tslint:disable-next-line:cognitive-complexity
-	public getStateTreeData(): Map<string, any> {
+	public getStateTreeData(state?:StateDeclaration): Map<string, any> {
 		const stateTreeData: Map<string, any> = new Map<string, unknown>();
 
-		if (typeof this.lastTransition !== "undefined") {
+		if (typeof state !== "undefined") {
+			// empty
+		} 
+		else if (typeof this.lastTransition !== "undefined") {
 			// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states)
 			const pathNodes: PathNode[] = this.lastTransition.treeChanges().to;
 
@@ -590,22 +596,28 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return resolvablesData;
 	}
 
+	//FIXME Dynamic translationKey finding not supported yet for route search, we should implement that use case
 	public getTranslationKeyFromState(stateName: string): string {
+		
 		const stateTreeResolves: Map<string, any> = this.getStateTreeResolves();
-		const stateTreeData: Map<string, any> = this.getStateTreeData();
+		/// const stateTreeData: Map<string, any> = this.getStateTreeData();
+		// console.log("-- state", stateName, this.$state.get(stateName));
+		const stateData: object = this.$state.get(stateName).data;
 
 		let stateTranslationKey: string | undefined;
 		// get the translationKey in case it is defined as a resolve in the state definition
 		if (stateTreeResolves.get(stateName)) {
+			console.log("--- stateTreeResolves");
 			stateTranslationKey = stateTreeResolves.get(stateName)["translationKey"];
 		}
 		// if not found in the resolves then check the state's data object
-		if (!stateTranslationKey && stateTreeData.get(stateName)) {
-			stateTranslationKey = stateTreeData.get(stateName)["translationKey"];
+		if (stateData && !stateTranslationKey && stateData.hasOwnProperty("translationKey")) {
+			console.log("--- stateData");
+			stateTranslationKey = stateData["translationKey"];
 		}
 		// if no translationKey so far, then the state name is used
 		if (!stateTranslationKey) {
-			this.logger.warn(starkRoutingServiceName + ": translation key not found for state " + stateName);
+			console.log(starkRoutingServiceName + ": translation key not found for state " + stateName);
 			stateTranslationKey = stateName;
 		}
 

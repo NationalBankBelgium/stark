@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
 	 */
 	public isMenuModeActive: boolean;
 
+	//tslint:disable:no-big-function
 	public constructor(
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -211,6 +212,13 @@ export class AppComponent implements OnInit {
 									targetState: "demo-ui.slider"
 								},
 								{
+									id: "menu-stark-ui-components-route-search",
+									label: "Route Search",
+									isVisible: true,
+									isEnabled: true,
+									targetState: "demo-ui.route-search"
+								},
+								{
 									id: "menu-stark-ui-components-table",
 									label: "Table",
 									isVisible: true,
@@ -325,6 +333,7 @@ export class AppComponent implements OnInit {
 			this.isMenuModeActive = state.matches;
 		});
 	}
+	/* tslint:enable */
 
 	public toggleMenu(): void {
 		this.sidebarService.toggleMenu();

@@ -4,6 +4,7 @@ import { async, TestBed, ComponentFixture } from "@angular/core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_APP_SIDEBAR_SERVICE } from "@nationalbankbelgium/stark-ui";
 import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
+import { UIRouterModule } from "@uirouter/angular";
 
 /**
  * Load the implementations that should be tested
@@ -55,7 +56,7 @@ describe(`App`, () => {
 		return (
 			TestBed.configureTestingModule({
 				declarations: [AppComponent],
-				imports: [TranslateModule.forRoot()],
+				imports: [TranslateModule.forRoot(), UIRouterModule.forRoot({ useHash: true })],
 				schemas: [NO_ERRORS_SCHEMA],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },

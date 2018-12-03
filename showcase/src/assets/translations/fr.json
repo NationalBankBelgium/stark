@@ -9,7 +9,7 @@
         "ALT": "Action Bar Alternative",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "CLASSIC-FULL": "Action Bar Classic Full",
-        "TITLE": "Stark action bar"
+        "TITLE": "Action bar"
       },
       "APP_DATA": {
         "DROPDOWN": "Exemple dans un dropdown avec photo de profil de l'utilisateur",
@@ -28,10 +28,10 @@
         "NO_INPUT": "Démonstration du breadcrumb component (sans paramètres)",
         "PARENT": "Parent",
         "ROOT": "Ancêtre racine",
-        "TITLE": "Stark breadcrumb"
+        "TITLE": "Breadcrumb"
       },
       "BUTTON": {
-        "TITLE": "Stark buttons"
+        "TITLE": "Buttons"
       },
       "CARD": {
         "ADVANCED": {
@@ -80,10 +80,10 @@
         "ONLY_WEEKDAYS": "Date Picker - Seulement les jours de semaine",
         "ONLY_WEEKENDS": "Date Picker - Seulement les jours de weekend",
         "PLACEHOLDER": "Choisir une date",
-        "TITLE": "Stark date picker"
+        "TITLE": "Date picker"
       },
       "DATE_RANGE_PICKER": {
-        "TITLE": "Stark date range picker"
+        "TITLE": "Date range picker"
       },
       "DROPDOWN": {
         "PR": "Applications informatiques",
@@ -102,11 +102,11 @@
         "SELECT_SERVICES": "Sélectionnez un service ou plus",
         "SELECT_ONE_SERVICE": "Sélectionnez au moins un service",
         "SELECT_DISABLED": "Désolé, ce dropdown est désactivé",
-        "TITLE": "Stark dropdown",
+        "TITLE": "Dropdown",
         "WHITE": "Dropdown blanc sur fond noir (largeur maximale)"
       },
       "EXAMPLE_VIEWER": {
-        "TITLE": "Stark example viewer"
+        "TITLE": "Example viewer"
       },
       "FOOTER": {
         "TITLE": "Stark App Footer Guidelines",
@@ -148,7 +148,7 @@
           "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules",
           "TYPE_A_VALUE": "Taper une valeur"
         },
-        "TITLE": "Stark keyboard directive"
+        "TITLE": "Keyboard directive"
       },
       "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Sélecteur de langue en mode 'dropdown'",
@@ -158,12 +158,12 @@
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Bouton logout - Icône par défaut",
         "LOGOUT_CUSTOM_ICON": "Bouton logout - Icône custom",
-        "TITLE": "Stark app logout"
+        "TITLE": "App logout"
       },
       "MENU": {
         "SIMPLE": "Simple menu",
         "SECTIONS": "Menu avec sections",
-        "TITLE": "Stark app menu"
+        "TITLE": "App menu"
       },
       "MESSAGE_PANE": {
         "BUTTONS": {
@@ -196,7 +196,7 @@
             "NEW_INFO_2": "Nouvelle info 2"
           }
         },
-        "TITLE": "Stark Message Pane",
+        "TITLE": "Message Pane",
         "EXAMPLE": "Example",
         "BUTTON_GROUPS": {
           "DEMO": "Demo",
@@ -205,7 +205,7 @@
         }
       },
       "MINIMAP": {
-        "TITLE": "Stark Minimap",
+        "TITLE": "Minimap",
         "FULL": "Minimap (version classic)",
         "COMPACT": "Minimap (version compacte)"
       },
@@ -215,7 +215,7 @@
         "EMITTED_PAGINATE_EVENT": "Paginate event émis",
         "EXTENDED_CONFIGURATION": "Pagination avec sélecteur de page étendu",
         "SIMPLE_CONFIGURATION": "Pagination avec configuration simple",
-        "TITLE": "Stark Pagination"
+        "TITLE": "Pagination"
       },
       "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
@@ -235,6 +235,10 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
+      "ROUTE_SEARCH": {
+        "EXAMPLE_NO_PARAM": "Exemple de Route Search component sans paramètres (orienté à droite)",
+        "EXAMPLE_WITH_PARAM": "Exemple de Route Search component avec paramètres (orienté à gauche)"
+      },
       "SHARED": {
         "EXAMPLE_VIEWER_LIST": "Exemples et codes"
       },
@@ -243,14 +247,14 @@
         "OPEN_LEFT": "Ouvrir la sidebar de gauche",
         "OPEN_MENU": "Ouvrir le menu",
         "OPEN_RIGHT": "Ouvrir la sidebar de droite",
-        "TITLE": "Stark app sidebar"
+        "TITLE": "App sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Curseur de plage",
         "SIMPLE_HORIZONTAL_SLIDER": "Curseur simple",
         "SIMPLE_VERTICAL_SLIDER": "Curseur simple",
         "VERTICAL_RANGE_SLIDER": "Curseur de plage",
-        "TITLE": "Stark slider"
+        "TITLE": "Slider"
       },
       "TABLE": {
         "LABELS": {
@@ -263,7 +267,7 @@
         "WITH_FIXED_HEADER": "Table avec en-tête fixe",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table avec Action Bar 'transcluded'",
         "WITH_CUSTOM_STYLING": "Table avec mise en page personnalisé",
-        "TITLE": "Stark table"
+        "TITLE": "Table"
       },
       "TOAST": {
         "BUTTON_INFO": "Info",
@@ -281,7 +285,7 @@
         "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast fermé automatiquement avant qu'un nouveau toast n'apparaisse.",
         "MESSAGE_INTRO": "Cliquez sur un bouton pout tester les notification toast",
         "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
-        "TITLE": "Stark toast notification"
+        "TITLE": "Toast notification"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
@@ -304,8 +308,11 @@
           "DETAILS": "Nous avons garder un maximum de compatibilité avec Angular Material. Pour plus de détails sur la philosophie derrière Angular Material, consulter cetee page: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
           "TITLE": "Basé sur Angular Material"
         },
-        "TITLE": "Stark Typography"
+        "TITLE": "Typography"
       }
+    },
+    "GETTING_STARTED": {
+      "TITLE": "Démarrer"
     },
     "HOMEPAGE": {
       "MAIN_TITLE": "&Agrave; propos de Stark",
@@ -320,12 +327,19 @@
       "DOCUMENTATION_MAIN_DESC": "Vous voulez plus d'infos sur Stark? Consultez nos liens de documentation ci-dessous!",
       "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aussi appelé stark-core, est un module fournissant des APIs réutilisables, comme par exemple une API de routing, de logging, de log shipping,etc... </p><p>Vous trouverez la documentation la plus récente en cliquant <a href=\"https://stark.nbb.be/api-docs/stark-core/latest\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p><p>Ou allez jeter un oeil aux anciennes versions de l'API par <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core \" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p>",
       "DOCUMENTATION_UI_DESC": "<p>Stark UI fournit des composants UI réutilisables: table de données, boite de dialogue, ... mais également des thèmes.</p><p>Pour consulter la dernière documentation de cette API, cliquez <a href=\"https://stark.nbb.be/api-docs/stark-ui/latest\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p><p> Ou allez jeter un oeil aux anciennes versions de l'API par <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui \" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.</p>",
-      "DOCUMENTATION_SHOWCASE_DESC": "<p>Le Showcase, vous vous y trouvez en ce moment même! </p><p>Amusez-vous à parcourir notre liste de composants visuels ainsi que leur documentation et à découvrir de vos propres yeux nos guidelines en matière de design. </p>Si vous le souhaitez, vous pouvez toujours consulter l'ancienne version de ce showcase en cliquant sur ce <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">lien</a>.</p>"
+      "DOCUMENTATION_SHOWCASE_DESC": "<p>Le Showcase, vous vous y trouvez en ce moment même! </p><p>Amusez-vous à parcourir notre liste de composants visuels ainsi que leur documentation et à découvrir de vos propres yeux nos guidelines en matière de design. </p>Si vous le souhaitez, vous pouvez toujours consulter l'ancienne version de ce showcase en cliquant sur ce <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">lien</a>.</p>",
+      "TITLE": "Home"
     },
     "ICONS": {
       "GITHUB": "Repo Github",
       "STARK_UI": "Documentation Stark-UI",
       "STARK_CORE": "Documentation Stark-Core"
+    },
+    "NEWS": {
+      "TITLE": "Nouvelles"
+    },
+    "OTHERWISE": {
+      "TITLE": "Autre"
     },
     "STYLEGUIDE": {
       "TITLE": "Guide de style"

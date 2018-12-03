@@ -31,6 +31,7 @@ import {
 	StarkMinimapModule,
 	StarkPaginationModule,
 	StarkPrettyPrintModule,
+	StarkRouteSearchModule,
 	StarkSliderModule,
 	StarkSvgViewBoxModule,
 	StarkTableModule
@@ -52,6 +53,7 @@ import {
 	DemoMinimapPageComponent,
 	DemoPaginationPageComponent,
 	DemoPrettyPrintPageComponent,
+	DemoRouteSearchPageComponent,
 	DemoSidebarPageComponent,
 	DemoSliderPageComponent,
 	DemoTablePageComponent,
@@ -102,6 +104,7 @@ import {
 		StarkMinimapModule,
 		StarkPaginationModule,
 		StarkPrettyPrintModule,
+		StarkRouteSearchModule,
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
 		StarkTableModule
@@ -123,6 +126,7 @@ import {
 		DemoMinimapPageComponent,
 		DemoPaginationPageComponent,
 		DemoPrettyPrintPageComponent,
+		DemoRouteSearchPageComponent,
 		DemoSidebarPageComponent,
 		DemoSliderPageComponent,
 		DemoTablePageComponent,
@@ -151,6 +155,7 @@ import {
 		DemoMinimapPageComponent,
 		DemoPaginationPageComponent,
 		DemoPrettyPrintPageComponent,
+		DemoRouteSearchPageComponent,
 		DemoSliderPageComponent,
 		DemoTablePageComponent,
 		DemoToastPageComponent

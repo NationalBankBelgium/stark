@@ -1,0 +1,22 @@
+/* ============================================================================== */
+/*  S t a r k   R o u t e 	 S e a r c h    T h e m e                              */
+/* ============================================================================== */
+/* stark-ui: src/modules/route-search/components/route-search-theme.css */
+.path-input-field {
+  .mat-form-field-wrapper {
+    border: 1px solid mat-color($grey-palette, 400);
+    background-color: #ffff;
+    color: mat-color($grey-palette, 900);
+  }
+}
+
+@media #{$mobile-only-query} {
+  .path-input-field {
+    .mat-form-field-wrapper {
+      border: 1px solid mat-color($grey-palette, 400);
+      background-color: #ffff;
+      color: mat-color($grey-palette, 900);
+    }
+  }
+}
+/* END stark-ui: src/modules/route-search/components/route-search-theme.scss */

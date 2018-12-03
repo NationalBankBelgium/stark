@@ -57,6 +57,7 @@ import {
 	StarkMinimapModule,
 	StarkLanguageSelectorModule,
 	StarkMessagePaneModule,
+	StarkRouteSearchModule,
 	StarkSessionUiModule,
 	StarkSvgViewBoxModule,
 	StarkToastNotificationModule
@@ -231,6 +232,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
 		StarkMinimapModule,
+		StarkRouteSearchModule,
 		StarkToastNotificationModule.forRoot({
 			delay: 5000,
 			position: "top right",

@@ -9,7 +9,7 @@
         "ALT": "Action Bar Alternative",
         "CLASSIC-COMPACT": "Action Bar Classic Compact",
         "CLASSIC-FULL": "Action Bar Classic Full",
-        "TITLE": "Stark action bar"
+        "TITLE": "Action bar"
       },
       "APP_DATA": {
         "DROPDOWN": "Voorbeeld in een dropdown met de profielfoto van de gebruiker",
@@ -28,10 +28,10 @@
         "NO_INPUT": "Breadcrumb demonstration (zonder parameters)",
         "PARENT": "Ouder",
         "ROOT": "Voorouder",
-        "TITLE": "Stark breadcrumb"
+        "TITLE": "Breadcrumb"
       },
       "BUTTON": {
-        "TITLE": "Stark buttons"
+        "TITLE": "Buttons"
       },
       "CARD": {
         "ADVANCED": {
@@ -80,10 +80,10 @@
         "ONLY_WEEKDAYS": "Date Picker - Alleen weekdagen",
         "ONLY_WEEKENDS": "Date Picker - Alleen weekenden",
         "PLACEHOLDER": "Datum kiezen",
-        "TITLE": "Stark date picker"
+        "TITLE": "Date picker"
       },
       "DATE_RANGE_PICKER": {
-        "TITLE": "Stark date range picker"
+        "TITLE": "Date range picker"
       },
       "DROPDOWN": {
         "PR": "Informaticatoepassingen",
@@ -106,7 +106,7 @@
         "WHITE": "Witte dropdown met zwarte achtergrond (maximum breedte)"
       },
       "EXAMPLE_VIEWER": {
-        "TITLE": "Stark example viewer"
+        "TITLE": "Example viewer"
       },
       "FOOTER": {
         "TITLE": "Stark App Footer Guidelines",
@@ -127,7 +127,7 @@
         "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo.",
         "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <code>stark-app-bar-content-right-actions-alt</code> which contains some alternative actions.",
         "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> displays the current page title.",
-        "TITLE": "Stark App Header Guidelines"
+        "TITLE": "App Header Guidelines"
       },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
@@ -148,7 +148,7 @@
           "INPUT_UPPERCASE_CHARACTERS": "Aanvaard enkel hoofdletters",
           "TYPE_A_VALUE": "Geef een waarde in"
         },
-        "TITLE": "Stark keyboard directive"
+        "TITLE": "Keyboard directive"
       },
       "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Taal selector in 'dropdown' mode",
@@ -158,17 +158,17 @@
       "LOGOUT": {
         "LOGOUT_DEFAULT_ICON": "Logout-knop - Standaard pictogram",
         "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram",
-        "TITLE": "Stark app logout"
+        "TITLE": "App logout"
       },
       "MINIMAP": {
-        "TITLE": "Stark Minimap",
+        "TITLE": "Minimap",
         "FULL": "Minimap (klassieke versie)",
         "COMPACT": "Minimap (compacte version)"
       },
       "MENU": {
         "SIMPLE": "Simple menu",
         "SECTIONS": "Menu with sections",
-        "TITLE": "Stark app menu"
+        "TITLE": "App menu"
       },
       "MESSAGE_PANE": {
         "BUTTONS": {
@@ -215,7 +215,7 @@
         "EMITTED_PAGINATE_EVENT": "Verzonden Paginate event",
         "EXTENDED_CONFIGURATION": "Pagination met uitgebreide paginakiezer",
         "SIMPLE_CONFIGURATION": "Pagination met eenvoudige configuratie",
-        "TITLE": "Stark Pagination"
+        "TITLE": "Pagination"
       },
       "PRETTY_PRINT": {
         "CSS": "Pretty-Print CSS",
@@ -235,6 +235,10 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
+      "ROUTE_SEARCH": {
+        "EXAMPLE_NO_PARAM": "Voorbeeld van Route Search component zonder instellingen (rechts)",
+        "EXAMPLE_WITH_PARAM": "Voorbeeld van Route Search component met instellingen (links)"
+      },
       "SHARED": {
         "EXAMPLE_VIEWER_LIST": "Examples and code samples"
       },
@@ -243,14 +247,14 @@
         "OPEN_LEFT": "Open de linker sidebar",
         "OPEN_MENU": "Open de menu",
         "OPEN_RIGHT": "Open de rechter sidebar",
-        "TITLE": "Stark app sidebar"
+        "TITLE": "App sidebar"
       },
       "SLIDER": {
         "HORIZONTAL_RANGE_SLIDER": "Horizontale schuifregelaar met bereik",
         "SIMPLE_HORIZONTAL_SLIDER": "Eenvoudige horizontale schuifregelaar",
         "SIMPLE_VERTICAL_SLIDER": "Eenvoudige verticale schuifregelaar",
         "VERTICAL_RANGE_SLIDER": "Verticale schuifregelaar met bereik",
-        "TITLE": "Stark slider"
+        "TITLE": "Slider"
       },
       "TABLE": {
         "LABELS": {
@@ -263,7 +267,7 @@
         "WITH_FIXED_HEADER": "Tabel met vaste header",
         "WITH_TRANSCLUDED_ACTION_BAR": "Tabel met 'transcluded' Action Bar",
         "WITH_CUSTOM_STYLING": "Tabel met aangepaste opmaak",
-        "TITLE": "Stark table"
+        "TITLE": "Table"
       },
       "TOAST": {
         "BUTTON_INFO": "Info",
@@ -281,7 +285,7 @@
         "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast automatisch gesloten voordat een nieuwe wordt weergegeven.",
         "MESSAGE_INTRO": "Klik op een knop om de toastmelding te testen.",
         "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
-        "TITLE": "Stark toast notification"
+        "TITLE": "Toast notification"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {
@@ -304,8 +308,11 @@
           "DETAILS": "We try to keep consistency with Angular Material. For more details checkout: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
           "TITLE": "Based on Angular Material"
         },
-        "TITLE": "Stark Typography"
+        "TITLE": "Typography"
       }
+    },
+    "GETTING_STARTED": {
+      "TITLE": "Begonnen"
     },
     "HOMEPAGE": {
       "MAIN_TITLE": "Over Stark",
@@ -320,12 +327,19 @@
       "DOCUMENTATION_MAIN_DESC": "Meer info over Stark zoeken? Raadpleeg onze documentatie weblinken hieronder!",
       "DOCUMENTATION_CORE_DESC": "<p>Stark Core, ook bekend als stark-core, is een module dat herbruikbare APIs verstrekt, zoals routing, logging, log shipping,enzovoort. </p><p>U zult de meest recente documentatie door <a href=\"https://stark.nbb.be/api-docs/stark-core/latest\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> te klikken.</p><p>U kunt de oude versies van dat API <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core \" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> vinden.</p>",
       "DOCUMENTATION_UI_DESC": "<p>Stark UI levert UI herbruikbare componenten : gegevenstabel, dialoogvenster, ... maar ook themas.</p><p>Om de meeste recente versie van de documentatie over dat API raadpleggen, klik op <a href=\"https://stark.nbb.be/api-docs/stark-ui/latest\" target=\"_blank\" rel=\"noopener noreferrer\">dat link</a>.</p><p>U kunt de oude versies van dat API <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui \" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> vinden.</p>",
-      "DOCUMENTATION_SHOWCASE_DESC": "<p>De Showcase, u zich hier bevindt! </p>Veel plezier met de ontdekking van onze componenten lijst !</p><p>Als u wilt kunt u de oude versie van deze toepassing zien door op <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">dat link</a> te klikken.</p>"
+      "DOCUMENTATION_SHOWCASE_DESC": "<p>De Showcase, u zich hier bevindt! </p>Veel plezier met de ontdekking van onze componenten lijst !</p><p>Als u wilt kunt u de oude versie van deze toepassing zien door op <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">dat link</a> te klikken.</p>",
+      "TITLE": "Home"
     },
     "ICONS": {
       "GITHUB": "Github repo",
       "STARK_UI": "Stark-UI documentatie",
       "STARK_CORE": "Stark-Core documentatie"
+    },
+    "NEWS": {
+      "TITLE": "Nieuws"
+    },
+    "OTHERWISE": {
+      "TITLE": "Andersom"
     },
     "STYLEGUIDE": {
       "TITLE": "Stijlgids"
