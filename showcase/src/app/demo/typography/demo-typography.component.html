@@ -2,25 +2,19 @@
 
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.TYPOGRAPHY.MATERIAL_BASED.TITLE</h1>
-	<p [innerHTML]="'SHOWCASE.DEMO.TYPOGRAPHY.MATERIAL_BASED.DETAILS' | translate"></p>
+	<p [innerHTML]="'SHOWCASE.DEMO.TYPOGRAPHY.MATERIAL_BASED.DETAILS' | translate"></p>
 </section>
 
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.TYPOGRAPHY.FONT_FAMILY.TITLE</h1>
 	<p translate>SHOWCASE.DEMO.TYPOGRAPHY.FONT_FAMILY.DETAILS_1</p>
 	<p translate>SHOWCASE.DEMO.TYPOGRAPHY.FONT_FAMILY.DETAILS_2</p>
-	<p>
-		<stark-pretty-print [data]="fontFamilyCSS" format="css" [enableHighlighting]="true"></stark-pretty-print>
-	</p>
+	<p><stark-pretty-print [data]="fontFamilyCSS" format="css" [enableHighlighting]="true"></stark-pretty-print></p>
 	<p class="mt3" [innerHTML]="'SHOWCASE.DEMO.TYPOGRAPHY.FONT_FAMILY.CUSTOM_FONT_EXPLAINED' | translate"></p>
-	<p>
-		<stark-pretty-print [data]="fontFaceExample" format="scss" [enableHighlighting]="true"></stark-pretty-print>
-	</p>
+	<p><stark-pretty-print [data]="fontFaceExample" format="scss" [enableHighlighting]="true"></stark-pretty-print></p>
 	<p class="mat-caption" translate [innerHTML]="'SHOWCASE.DEMO.TYPOGRAPHY.FONT_FAMILY.IE_NOTE' | translate"></p>
 	<p class="mt3" [innerHTML]="'SHOWCASE.DEMO.TYPOGRAPHY.FONT_FAMILY.CDN_FONT_EXPLAINED' | translate"></p>
-	<p>
-		<stark-pretty-print [data]="webpackExample" format="json" [enableHighlighting]="true"></stark-pretty-print>
-	</p>
+	<p><stark-pretty-print [data]="webpackExample" format="json" [enableHighlighting]="true"></stark-pretty-print></p>
 </section>
 
 <section class="stark-section">
@@ -43,7 +37,7 @@
 
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.TYPOGRAPHY.CUSTOMIZATION.TITLE</h1>
-	<p translate [innerHTML]="'SHOWCASE.DEMO.TYPOGRAPHY.CUSTOMIZATION.DETAILS' | translate"></p>
+	<p translate [innerHTML]="'SHOWCASE.DEMO.TYPOGRAPHY.CUSTOMIZATION.DETAILS' | translate"></p>
 	<stark-pretty-print [data]="customizeMap" format="scss" [enableHighlighting]="true"></stark-pretty-print>
 	<p class="mt3" translate>SHOWCASE.DEMO.TYPOGRAPHY.CUSTOMIZATION.MAP_EXPLAINED</p>
 	<table class="stark-basic-table">

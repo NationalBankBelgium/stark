@@ -1,10 +1,12 @@
 <div *ngIf="links.length > 0" class="table-of-contents-container">
 	<div class="table-of-contents-heading">Contents</div>
 	<nav>
-		<a (click)="scrollToAnchor('#' + link.id)"
-		   *ngFor="let link of links; trackBy : trackItem"
-		   class="table-of-contents-level-{{ link.type }} table-of-contents-link"
-		   [class.table-of-contents-active-link]="link.active">
+		<a
+			(click)="scrollToAnchor('#' + link.id)"
+			*ngFor="let link of links; trackBy: trackItem"
+			class="table-of-contents-level-{{ link.type }} table-of-contents-link"
+			[class.table-of-contents-active-link]="link.active"
+		>
 			{{ link.name }}
 		</a>
 	</nav>

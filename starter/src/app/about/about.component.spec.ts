@@ -57,7 +57,8 @@ describe("About", () => {
 				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }
 			]
-		}));
+		})
+	);
 
 	it("should log ngOnInit", inject([AboutComponent], (about: AboutComponent) => {
 		logger = TestBed.get(STARK_LOGGING_SERVICE);

@@ -15,9 +15,8 @@ import { StarkPrettyPrintComponent } from "./pretty-print.component";
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-pretty-print [data]="data"
-							[format]="format"
-							[enableHighlighting]="enableHighlighting"></stark-pretty-print>`
+		<stark-pretty-print [data]="data" [format]="format" [enableHighlighting]="enableHighlighting"></stark-pretty-print>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkPrettyPrintComponent)

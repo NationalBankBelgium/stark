@@ -1,17 +1,11 @@
-/* angular imports */
+/* tslint:disable:completed-docs max-inline-declarations */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, ViewChild, EventEmitter } from "@angular/core";
-
-/* jasmine imports */
-import Spy = jasmine.Spy;
-
-/* stark-core imports */
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-
-/* stark-ui imports */
 import { StarkSliderComponent } from "./slider.component";
 import { StarkSliderConfig } from "./slider-config.intf";
+import Spy = jasmine.Spy;
 
 /***
  * To be able to test changes to the input fields, the Slider component is hosted inside the TestComponentHost class.
@@ -19,8 +13,13 @@ import { StarkSliderConfig } from "./slider-config.intf";
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-slider [values]="sliderValues" sliderId="rangeSlider" [sliderConfig]="sliderConfig"
-					  (changed)="onValuesChange($event)"></stark-slider>`
+		<stark-slider
+			[values]="sliderValues"
+			sliderId="rangeSlider"
+			[sliderConfig]="sliderConfig"
+			(changed)="onValuesChange($event)"
+		></stark-slider>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkSliderComponent)

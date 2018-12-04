@@ -1,6 +1,2 @@
-<ui-view name="initOrExit"
-		 *ngIf="isAppInitOrExitState()">
-</ui-view>
-<ng-container *ngIf="!isAppInitOrExitState()">
-	<ng-content></ng-content>
-</ng-container>
+<ui-view name="initOrExit" *ngIf="isAppInitOrExitState()"></ui-view>
+<ng-container *ngIf="!isAppInitOrExitState()"><ng-content></ng-content></ng-container>

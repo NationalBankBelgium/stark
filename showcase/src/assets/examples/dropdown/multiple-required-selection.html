@@ -1,12 +1,13 @@
 <stark-dropdown
-		dropdownId="multipleServicesRequiredDropdown"
-		[options]="serviceDropdownOptions"
-		[value]="selectedRequiredServices"
-		optionIdProperty="id"
-		optionLabelProperty="value"
-		placeholder="Select at least one service"
-		(dropdownSelectionChanged)="multipleServicesRequiredDropdownOnChange($event)"
-		multiSelect
-		required>
+	dropdownId="multipleServicesRequiredDropdown"
+	[options]="serviceDropdownOptions"
+	[value]="selectedRequiredServices"
+	optionIdProperty="id"
+	optionLabelProperty="value"
+	placeholder="Select at least one service"
+	(dropdownSelectionChanged)="multipleServicesRequiredDropdownOnChange($event)"
+	multiSelect
+	required
+>
 </stark-dropdown>
 <div *ngIf="selectedRequiredServices">Selected values: {{ selectedRequiredServices }}</div>
