@@ -129,7 +129,7 @@
     "@uirouter/visualizer": "6.0.2",
     "angular-in-memory-web-api": "0.7.0",
     "basscss": "8.0.10",
-    "core-js": "2.5.7",
+    "core-js": "2.6.0",
     "eligrey-classlist-js-polyfill": "1.2.20180112",
     "event-source-polyfill": "1.0.4",
     "http-server": "0.11.1",
