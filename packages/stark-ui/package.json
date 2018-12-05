@@ -26,11 +26,11 @@
     "npm": ">=5.6.0"
   },
   "dependencies": {
-    "@angular/material-moment-adapter": "7.0.4",
-    "@mdi/angular-material": "3.0.39",
+    "@angular/material-moment-adapter": "7.1.1",
+    "@mdi/angular-material": "3.2.89",
     "@types/nouislider": "9.0.4",
     "@types/prismjs": "1.9.0",
-    "normalize.css": "8.0.0",
+    "normalize.css": "8.0.1",
     "nouislider": "12.1.0",
     "prettier": "1.15.3",
     "pretty-data": "0.40.0",
