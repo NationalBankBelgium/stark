@@ -132,8 +132,8 @@ module.exports = function(env) {
 				 * reference: https://github.com/babel/babel-loader
 				 */
 				{
-					test: /node_modules\\.*\.js$/,
-					exclude: /node_modules\\(@angular|@mdi|@ng-idle|@nationalbankbelgium|@ngrx|@ngx-translate|@uirouter|cerialize|class-validator|core-js|ibantools|lodash|prettier|rxjs)/,
+					test: /node_modules.*\.js$/,
+					exclude: /node_modules.*(@angular|@mdi|@ng-idle|@nationalbankbelgium|@ngrx|@ngx-translate|@uirouter|cerialize|class-validator|core-js|ibantools|lodash|prettier|rxjs)/,
 					use: {
 						loader: "babel-loader",
 						options: {
