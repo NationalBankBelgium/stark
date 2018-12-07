@@ -1,13 +1,14 @@
 <stark-dropdown
-		class="stark-full-width"
-		color="white"
-		dropdownId="serviceWhiteDropdown"
-		[options]="serviceDropdownOptions"
-		[value]="selectedServiceWhiteDropdown"
-		placeholder="Select Service"
-		optionIdProperty="id"
-		optionLabelProperty="value"
-		(dropdownSelectionChanged)="whiteDropdownOnChange($event)"
-		required>
+	class="stark-full-width"
+	color="white"
+	dropdownId="serviceWhiteDropdown"
+	[options]="serviceDropdownOptions"
+	[value]="selectedServiceWhiteDropdown"
+	placeholder="Select Service"
+	optionIdProperty="id"
+	optionLabelProperty="value"
+	(dropdownSelectionChanged)="whiteDropdownOnChange($event)"
+	required
+>
 </stark-dropdown>
 <div class="result-display" *ngIf="selectedServiceWhiteDropdown">Selected value: {{ selectedServiceWhiteDropdown }}</div>

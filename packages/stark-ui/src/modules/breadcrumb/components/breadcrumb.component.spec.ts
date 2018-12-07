@@ -14,8 +14,9 @@ import { StarkBreadcrumbPath } from "./breadcrumb-path.intf";
 
 @Component({
 	selector: `host-component`,
-	template: `<stark-breadcrumb
-			[breadcrumbConfig]="breadcrumbConfig"></stark-breadcrumb>`
+	template: `
+		<stark-breadcrumb [breadcrumbConfig]="breadcrumbConfig"></stark-breadcrumb>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkBreadcrumbComponent)

@@ -29,18 +29,21 @@ import createSpy = jasmine.createSpy;
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-table [columnProperties]="columnProperties"
-					 [data]="dummyData"
-					 [filter]="tableFilter"
-					 [fixedHeader]="fixedHeader"
-					 [multiSort]="multiSort"
-					 [rowsSelectable]="rowsSelectable"
-					 [multiSelect]="multiSelect"
-					 [orderProperties]="orderProperties"
-					 [tableRowsActionBarConfig]="tableRowsActionBarConfig"
-					 [rowClassNameFn]="rowClassNameFn"
-					 (rowClicked)="rowClickHandler($event)">
-		</stark-table>`
+		<stark-table
+			[columnProperties]="columnProperties"
+			[data]="dummyData"
+			[filter]="tableFilter"
+			[fixedHeader]="fixedHeader"
+			[multiSort]="multiSort"
+			[rowsSelectable]="rowsSelectable"
+			[multiSelect]="multiSelect"
+			[orderProperties]="orderProperties"
+			[tableRowsActionBarConfig]="tableRowsActionBarConfig"
+			[rowClassNameFn]="rowClassNameFn"
+			(rowClicked)="rowClickHandler($event)"
+		>
+		</stark-table>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkTableComponent)

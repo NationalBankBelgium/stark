@@ -1,11 +1,13 @@
-<stark-table class="shadowed"
-			 [data]="data"
-			 [columnProperties]="columns"
-			 [filter]="filter"
-			 [orderProperties]="order"
-			 [paginationConfig]="pagination"
-			 [tableRowsActionBarConfig]="rowActionBarConfig"
-			 multiSort
-			 (rowClicked)="handleRowClicked($event)">
+<stark-table
+	class="shadowed"
+	[data]="data"
+	[columnProperties]="columns"
+	[filter]="filter"
+	[orderProperties]="order"
+	[paginationConfig]="pagination"
+	[tableRowsActionBarConfig]="rowActionBarConfig"
+	multiSort
+	(rowClicked)="handleRowClicked($event)"
+>
 	<header><h1 class="mb0" translate>SHOWCASE.DEMO.TABLE.REGULAR</h1></header>
 </stark-table>

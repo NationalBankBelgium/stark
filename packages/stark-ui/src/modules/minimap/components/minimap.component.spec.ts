@@ -16,7 +16,9 @@ import { ItemVisibility } from "@nationalbankbelgium/stark-ui";
 
 @Component({
 	selector: `host-component`,
-	template: `<stark-minimap [visibleItems]="visibleItems" [items]="items"></stark-minimap>`
+	template: `
+		<stark-minimap [visibleItems]="visibleItems" [items]="items"></stark-minimap>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkMinimapComponent)

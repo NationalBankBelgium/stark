@@ -125,7 +125,7 @@
     "install:ci:starter": "cd starter && npm ci && cd ..",
     "install:travis:all": "npm run install:stark-build && npm run install:stark-testing && npm run install:stark-core && npm run install:stark-ui && npm run build:trace && npm run update:starter && npm run update:showcase",
     "ngc": "ngc",
-    "prettier-check": "prettier \"**/*.{css,js,json,md,pcss,scss,ts,yml}\" --write",
+    "prettier-check": "prettier \"**/*.{css,html,js,json,md,pcss,scss,ts,yml}\" --write --html-whitespace-sensitivity strict",
     "preupdate:showcase": "npm run clean:showcase",
     "preupdate:starter": "npm run clean:starter",
     "release": "release-it",
@@ -158,8 +158,8 @@
     }
   },
   "lint-staged": {
-    "*.{css,js,json,md,pcss,scss,ts,yml}": [
-      "prettier --write",
+    "*.{css,html,js,json,md,pcss,scss,ts,yml}": [
+      "prettier --write --html-whitespace-sensitivity strict",
       "git add"
     ]
   },

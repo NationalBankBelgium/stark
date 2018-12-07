@@ -34,7 +34,8 @@ import { throwError } from "rxjs/index";
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-language-selector mode="mode"></stark-language-selector>`
+		<stark-language-selector mode="mode"></stark-language-selector>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkLanguageSelectorComponent)

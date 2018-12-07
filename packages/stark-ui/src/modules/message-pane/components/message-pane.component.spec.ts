@@ -41,7 +41,8 @@ import { StarkDOMUtil } from "../../../util/dom/dom.util";
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-message-pane [clearOnNavigation]="clearOnNavigation" [align]="align"></stark-message-pane>`
+		<stark-message-pane [clearOnNavigation]="clearOnNavigation" [align]="align"></stark-message-pane>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkMessagePaneComponent)

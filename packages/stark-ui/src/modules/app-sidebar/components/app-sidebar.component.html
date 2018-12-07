@@ -1,23 +1,25 @@
 <mat-sidenav-container #appSidenavContainer>
-	<mat-sidenav #appSidenavLeft class="stark-app-sidenav-left"
-				 [ngClass]="{'stark-app-sidenav-menu': sidenavLeftType==='menu', 'stark-app-sidenav-menu-shifting': isShiftingToSmaller}"
-				 [mode]="sidenavLeftMode" [fixedInViewport]="true"
-				 [fixedBottomGap]="0" [opened]="sidenavLeftOpened"
-				 (openedChange)="toggleClassesOnOpen($event)"
-				 (openedStart)="setClassOnOpenStart()"
-				 (closedStart)="setClassOnCloseStart()">
-		<ng-container *ngIf="sidenavLeftType==='regular'">
+	<mat-sidenav
+		#appSidenavLeft
+		class="stark-app-sidenav-left"
+		[ngClass]="{ 'stark-app-sidenav-menu': sidenavLeftType === 'menu', 'stark-app-sidenav-menu-shifting': isShiftingToSmaller }"
+		[mode]="sidenavLeftMode"
+		[fixedInViewport]="true"
+		[fixedBottomGap]="0"
+		[opened]="sidenavLeftOpened"
+		(openedChange)="toggleClassesOnOpen($event)"
+		(openedStart)="setClassOnOpenStart()"
+		(closedStart)="setClassOnCloseStart()"
+	>
+		<ng-container *ngIf="sidenavLeftType === 'regular'">
 			<ng-content class="regular" select="[stark-app-sidenav-left]"></ng-content>
 		</ng-container>
-		<ng-container class="menu" *ngIf="sidenavLeftType==='menu'">
+		<ng-container class="menu" *ngIf="sidenavLeftType === 'menu'">
 			<ng-content select="[stark-app-sidenav-menu]"></ng-content>
 		</ng-container>
 	</mat-sidenav>
-	<mat-sidenav #appSidenavRight class="stark-app-sidenav-right" mode="over"
-				 position="end" [fixedInViewport]="true" [fixedBottomGap]="0">
+	<mat-sidenav #appSidenavRight class="stark-app-sidenav-right" mode="over" position="end" [fixedInViewport]="true" [fixedBottomGap]="0">
 		<ng-content select="[stark-app-sidenav-right]"></ng-content>
 	</mat-sidenav>
-	<mat-sidenav-content>
-		<ng-content select="[stark-app-sidenav-content]"></ng-content>
-	</mat-sidenav-content>
+	<mat-sidenav-content><ng-content select="[stark-app-sidenav-content]"></ng-content></mat-sidenav-content>
 </mat-sidenav-container>

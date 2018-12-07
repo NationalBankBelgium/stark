@@ -13,6 +13,12 @@ module.exports = {
 			}
 		},
 		{
+			files: "*.html",
+			options: {
+				parser: "angular"
+			}
+		},
+		{
 			files: ".travis.yml",
 			options: {
 				tabWidth: 2,

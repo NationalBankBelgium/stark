@@ -15,15 +15,18 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-dropdown [dropdownId]="dropdownId"
-						[label]="label"
-						[multiSelect]="multiSelect"
-						[options]="options"
-						[placeholder]="placeholder"
-						[required]="required"
-						[selectionChange]="dropdownSelectionChanged"
-						[value]="value">
-		</stark-dropdown>`
+		<stark-dropdown
+			[dropdownId]="dropdownId"
+			[label]="label"
+			[multiSelect]="multiSelect"
+			[options]="options"
+			[placeholder]="placeholder"
+			[required]="required"
+			[selectionChange]="dropdownSelectionChanged"
+			[value]="value"
+		>
+		</stark-dropdown>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkDropdownComponent)

@@ -13,7 +13,9 @@ import { StarkSvgViewBoxModule } from "../../svg-view-box";
 
 @Component({
 	selector: `host-component`,
-	template: `<stark-toast-notification></stark-toast-notification>`
+	template: `
+		<stark-toast-notification></stark-toast-notification>
+	`
 })
 class TestHostComponent {
 	@ViewChild(StarkToastNotificationComponent)

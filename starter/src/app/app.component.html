@@ -19,24 +19,23 @@
 							</div>
 						</div>
 						<div class="stark-app-bar-content-center">
-							<div class="app-logo">
-								<stark-app-logo></stark-app-logo>
-							</div>
+							<div class="app-logo"><stark-app-logo></stark-app-logo></div>
 						</div>
 						<div class="stark-app-bar-content-right">
 							<div>
-								<div class="app-data">
-									<p>App Data</p>
-								</div>
-								<button class="app-data-alt" color="white" mat-icon-button
-										[matTooltip]="'STARK.ICONS.APP_DATA' | translate">
+								<div class="app-data"><p>App Data</p></div>
+								<button
+									class="app-data-alt"
+									color="white"
+									mat-icon-button
+									[matTooltip]="'STARK.ICONS.APP_DATA' | translate"
+								>
 									<mat-icon starkSvgViewBox svgIcon="dots-vertical"></mat-icon>
 								</button>
 								<stark-app-logout></stark-app-logout>
 							</div>
 							<div class="stark-app-bar-content-right-center">
-								<stark-language-selector color="white" class="stark-full-width"
-														 mode="dropdown"></stark-language-selector>
+								<stark-language-selector color="white" class="stark-full-width" mode="dropdown"></stark-language-selector>
 							</div>
 							<div class="stark-app-bar-content-right-actions-alt">
 								<button mat-mini-fab color="success" [matTooltip]="'STARK.ICONS.ADD_ITEM' | translate">
@@ -55,12 +54,12 @@
 				</div>
 			</header>
 			<div class="stark-main-container">
-				<main>
-					<ui-view></ui-view>
-				</main>
+				<main><ui-view></ui-view></main>
 			</div>
-			<stark-app-footer legalInfoUrl="https://www.nbb.be/en/disclaimer-and-legal-information"
-							  helpPageUrl="https://www.nbb.be/en/links">
+			<stark-app-footer
+				legalInfoUrl="https://www.nbb.be/en/disclaimer-and-legal-information"
+				helpPageUrl="https://www.nbb.be/en/links"
+			>
 			</stark-app-footer>
 		</div>
 	</stark-app-sidebar>

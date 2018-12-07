@@ -116,7 +116,9 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	private onScroll(): void {
 		const linksCounter: number = this.links.length - 1;
 		const max: number = (<HTMLElement>document.documentElement).scrollHeight;
-		const pos: number = ((<HTMLElement>document.documentElement).scrollTop || document.body.scrollTop) + (<HTMLElement>document.documentElement).offsetHeight;
+		const pos: number =
+			((<HTMLElement>document.documentElement).scrollTop || document.body.scrollTop) +
+			(<HTMLElement>document.documentElement).offsetHeight;
 		if (pos === max) {
 			this.links[linksCounter].active = true;
 			for (let i: number = 0; i < linksCounter; i++) {
