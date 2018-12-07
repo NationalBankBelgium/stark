@@ -1,0 +1,7 @@
+// Fixes that need to be applied directly to the Angular Material css because of custom stark implementations or as workarounds
+
+// the line-height of the calendar needs to be reset, because of the line-height set in _typography.scss
+// (see: https://github.com/NationalBankBelgium/stark/issues/732)
+.mat-datepicker-content {
+  line-height: initial;
+}
