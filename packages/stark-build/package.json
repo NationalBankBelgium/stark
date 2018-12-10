@@ -48,7 +48,7 @@
     "postcss-url": "8.0.0",
     "preload-webpack-plugin": "2.3.0",
     "prettier": "1.15.3",
-    "raw-loader": "0.5.1",
+    "raw-loader": "1.0.0",
     "sass-loader": "7.1.0",
     "source-map-loader": "0.2.4",
     "string-replace-loader": "2.1.1",
