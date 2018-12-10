@@ -1,10 +1,9 @@
 import { Injectable, Injector, NgZone } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { map } from "rxjs/operators";
-
+import { Observable } from "rxjs";
 import { STARK_TOAST_NOTIFICATION_SERVICE, StarkMessageType, StarkToastNotificationService } from "@nationalbankbelgium/stark-ui";
 import { StarkErrorHandlingActionTypes, StarkUnhandledError } from "@nationalbankbelgium/stark-core";
-import { Observable } from "rxjs";
 
 /**
  * Unique Id of the displayed toaster

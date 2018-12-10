@@ -17,8 +17,6 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatListModule } from "@angular/material/list";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { DateAdapter } from "@angular/material/core";
-import { SharedModule } from "./shared/shared.module";
-import { InMemoryDataModule } from "./in-memory-data/in-memory-data.module";
 import { Observable, of } from "rxjs";
 import { filter, map } from "rxjs/operators";
 
@@ -62,9 +60,13 @@ import {
 	StarkSvgViewBoxModule,
 	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";
+import { SharedModule } from "./shared/shared.module";
+import { InMemoryDataModule } from "./in-memory-data/in-memory-data.module";
+import { WelcomeModule } from "./welcome/welcome.module";
 import { logRegisteredStates, routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
+import { StarkErrorHandlingEffects } from "./shared/effects";
 /*
  * Translations
  */
@@ -81,15 +83,12 @@ import { environment } from "../environments/environment";
 import { APP_STATES } from "./app.routes";
 // App is our top level component
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./home";
-import { NoContentComponent } from "./no-content";
-import { GettingStartedModule } from "./getting-started";
+
 /* tslint:disable:no-import-side-effect */
 // load PostCSS styles
 import "../styles/styles.pcss";
 // load SASS styles
 import "../styles/styles.scss";
-import { StarkErrorHandlingEffects } from "./shared/effects/stark-error-handling.effects";
 /* tslint:enable */
 
 // TODO: where to put this factory function?
@@ -170,7 +169,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
  */
 @NgModule({
 	bootstrap: [AppComponent],
-	declarations: [AppComponent, HomeComponent, NoContentComponent],
+	declarations: [AppComponent],
 	/**
 	 * Import Angular's modules.
 	 */
@@ -219,7 +218,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			}
 		}),
 		SharedModule,
-		GettingStartedModule,
+		WelcomeModule,
 		StarkAppFooterModule,
 		StarkAppLogoModule,
 		StarkAppLogoutModule,

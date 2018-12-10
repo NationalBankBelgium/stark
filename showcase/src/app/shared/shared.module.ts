@@ -1,6 +1,3 @@
-import { ExampleViewerComponent } from "./example-viewer/example-viewer.component";
-import { FileService } from "./example-viewer/file.service";
-import { ReferenceBlockComponent } from "./reference-block/reference-block.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
@@ -12,7 +9,8 @@ import { NgModule } from "@angular/core";
 import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 import { TranslateModule } from "@ngx-translate/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { TableOfContentsComponent } from "./table-of-contents/table-of-contents.component";
+import { ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent } from "./components";
+import { FileService } from "./services";
 
 @NgModule({
 	imports: [
@@ -29,7 +27,7 @@ import { TableOfContentsComponent } from "./table-of-contents/table-of-contents.
 	],
 	providers: [FileService],
 	declarations: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],
-	entryComponents: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],
+	entryComponents: [],
 	exports: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent, FlexLayoutModule]
 })
 export class SharedModule {}

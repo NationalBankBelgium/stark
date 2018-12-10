@@ -68,133 +68,126 @@ export class AppComponent implements OnInit {
 									label: "Action bar",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.action-bar"
+									targetState: "demo-ui.action-bar"
 								},
 								{
 									id: "menu-stark-ui-components-logout",
 									label: "App logout",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.logout"
+									targetState: "demo-ui.logout"
 								},
 								{
 									id: "menu-stark-ui-components-menu",
 									label: "App menu",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.menu"
+									targetState: "demo-ui.menu"
 								},
 								{
 									id: "menu-stark-ui-components-sidebar",
 									label: "App sidebar",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.sidebar"
+									targetState: "demo-ui.sidebar"
 								},
 								{
 									id: "menu-stark-ui-components-breadcrumb",
 									label: "Breadcrumb",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.breadcrumb"
-								},
-								{
-									id: "menu-stark-ui-components-button",
-									label: "Button",
-									isVisible: true,
-									isEnabled: true,
-									targetState: "demo.button"
+									targetState: "demo-ui.breadcrumb"
 								},
 								{
 									id: "menu-stark-ui-components-collapsible",
 									label: "Collapsible",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.collapsible"
+									targetState: "demo-ui.collapsible"
 								},
 								{
 									id: "menu-stark-ui-components-date-picker",
 									label: "Date picker",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.date-picker"
+									targetState: "demo-ui.date-picker"
 								},
 								{
 									id: "menu-stark-ui-components-date-range-picker",
 									label: "Date range picker",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.date-range-picker"
+									targetState: "demo-ui.date-range-picker"
 								},
 								{
 									id: "menu-stark-ui-components-dropdown",
 									label: "Dropdown",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.dropdown"
+									targetState: "demo-ui.dropdown"
 								},
 								{
-									id: "menu-stark-ui-components-example-viewer",
-									label: "Example viewer",
+									id: "menu-style-footer",
+									label: "Footer",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.example-viewer"
+									targetState: "demo-ui.stark-footer"
 								},
 								{
 									id: "menu-stark-ui-components-language-selector",
 									label: "Language selector",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.language-selector"
+									targetState: "demo-ui.language-selector"
 								},
 								{
 									id: "menu-stark-ui-components-message-pane",
 									label: "Message pane",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.message-pane"
+									targetState: "demo-ui.message-pane"
 								},
 								{
 									id: "menu-stark-ui-components-minimap",
 									label: "Minimap",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.minimap"
+									targetState: "demo-ui.minimap"
 								},
 								{
 									id: "menu-stark-ui-components-pagination",
 									label: "Pagination",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.pagination"
+									targetState: "demo-ui.pagination"
 								},
 								{
 									id: "menu-stark-ui-components-pretty-print",
 									label: "Pretty print",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.pretty-print"
+									targetState: "demo-ui.pretty-print"
 								},
 								{
 									id: "menu-stark-ui-components-slider",
 									label: "Slider",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.slider"
+									targetState: "demo-ui.slider"
 								},
 								{
 									id: "menu-stark-ui-components-table",
 									label: "Table",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.table"
+									targetState: "demo-ui.table"
 								},
 								{
 									id: "menu-stark-ui-components-toast",
 									label: "Toast notification",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.toast"
+									targetState: "demo-ui.toast"
 								}
 							]
 						},
@@ -209,7 +202,7 @@ export class AppComponent implements OnInit {
 									label: "Keyboard directives",
 									isVisible: true,
 									isEnabled: true,
-									targetState: "demo.keyboard-directives"
+									targetState: "demo-ui.keyboard-directives"
 								}
 							]
 						},
@@ -243,39 +236,39 @@ export class AppComponent implements OnInit {
 					label: "Style guide",
 					menuGroups: [
 						{
+							id: "menu-stark-ui-components-button",
+							label: "Button",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "styleguide.button"
+						},
+						{
 							id: "menu-style-card",
 							label: "Card",
 							isVisible: true,
 							isEnabled: true,
-							targetState: "demo.card"
+							targetState: "styleguide.card"
 						},
 						{
 							id: "menu-style-colors",
 							label: "Colors",
 							isVisible: true,
 							isEnabled: true,
-							targetState: "demo.colors"
-						},
-						{
-							id: "menu-style-footer",
-							label: "Footer",
-							isVisible: true,
-							isEnabled: true,
-							targetState: "demo.stark-footer"
+							targetState: "styleguide.colors"
 						},
 						{
 							id: "menu-style-header",
 							label: "Header",
 							isVisible: true,
 							isEnabled: true,
-							targetState: "demo.stark-header"
+							targetState: "styleguide.stark-header"
 						},
 						{
 							id: "menu-style-typography",
 							label: "Typography",
 							isVisible: true,
 							isEnabled: true,
-							targetState: "demo.typography"
+							targetState: "styleguide.typography"
 						}
 					]
 				}

@@ -1,4 +1,4 @@
-export * from "./example-viewer";
-export * from "./reference-block";
+export * from "./components";
+export * from "./effects";
+export * from "./services";
 export * from "./shared.module";
-export * from "./table-of-contents";

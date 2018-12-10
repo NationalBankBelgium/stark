@@ -54,6 +54,7 @@ import {
 	StarkSvgViewBoxModule,
 	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";
+import { HomeModule } from "./home/home.module";
 import { logRegisteredStates, routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
@@ -73,9 +74,6 @@ import { environment } from "../environments/environment";
 import { APP_STATES } from "./app.routes";
 // App is our top level component
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./home";
-import { AboutComponent } from "./about";
-import { NoContentComponent } from "./no-content";
 /* tslint:disable:no-import-side-effect */
 // load SASS styles
 import "../styles/styles.scss";
@@ -142,7 +140,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
  */
 @NgModule({
 	bootstrap: [AppComponent],
-	declarations: [AppComponent, AboutComponent, HomeComponent, NoContentComponent],
+	declarations: [AppComponent],
 	/**
 	 * Import Angular's modules.
 	 */
@@ -194,7 +192,8 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			position: "top right",
 			actionClasses: []
 		}),
-		StarkSessionUiModule.forRoot()
+		StarkSessionUiModule.forRoot(),
+		HomeModule
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.
