@@ -1,0 +1,31 @@
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { StarkAppDataComponent } from "./components";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { translationsFr } from "./assets/translations/fr";
+import { mergeUiTranslations } from "../../common/translations";
+import { translationsEn } from "./assets/translations/en";
+import { translationsNl } from "./assets/translations/nl";
+import { StarkLocale } from "@nationalbankbelgium/stark-core";
+import { StarkSvgViewBoxModule } from "../svg-view-box";
+
+@NgModule({
+	declarations: [StarkAppDataComponent],
+	imports: [CommonModule, StarkSvgViewBoxModule, MatButtonModule, MatIconModule, MatTooltipModule, TranslateModule],
+	exports: [StarkAppDataComponent]
+})
+export class StarkAppDataModule {
+	/**
+	 * Class constructor
+	 * @param translateService - the translation service of the application
+	 */
+	public constructor(translateService: TranslateService) {
+		const english: StarkLocale = { languageCode: "en", translations: translationsEn };
+		const french: StarkLocale = { languageCode: "fr", translations: translationsFr };
+		const dutch: StarkLocale = { languageCode: "nl", translations: translationsNl };
+		mergeUiTranslations(translateService, english, french, dutch);
+	}
+}

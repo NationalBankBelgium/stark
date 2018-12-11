@@ -2,9 +2,23 @@
  * Angular 2 decorators and services
  */
 import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
+import {
+	STARK_APP_METADATA,
+	STARK_LOGGING_SERVICE,
+	STARK_ROUTING_SERVICE,
+	STARK_SESSION_SERVICE,
+	STARK_USER_SERVICE,
+	StarkApplicationMetadata,
+	StarkLoggingService,
+	StarkRoutingService,
+	StarkSessionService,
+	StarkUser,
+	StarkUserService
+} from "@nationalbankbelgium/stark-core";
 import { StarkMenuConfig, STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
-
+import * as moment from "moment";
+import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
+import { filter } from "rxjs/operators";
 /**
  * App Component
  * Top Level Component
@@ -15,11 +29,25 @@ import { StarkMenuConfig, STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } fr
 })
 export class AppComponent implements OnInit {
 	public mainMenu: StarkMenuConfig;
+	public user?: StarkUser;
+	public time: string;
+	/**
+	 * Media query for mobile and tablet screens
+	 */
+	public mediaQueryMdSm: string = "(max-width: 960px)";
+	/**
+	 * If the app data menu mode is to be used instead of the dropdown mode
+	 */
+	public isMenuModeActive: boolean;
 
 	public constructor(
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
+		@Inject(STARK_USER_SERVICE) public userService: StarkUserService,
+		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
+		@Inject(STARK_APP_METADATA) public appMetadata: StarkApplicationMetadata,
+		public breakpointObserver: BreakpointObserver
 	) {}
 
 	/* tslint:disable */
@@ -69,6 +97,13 @@ export class AppComponent implements OnInit {
 									isVisible: true,
 									isEnabled: true,
 									targetState: "demo-ui.action-bar"
+								},
+								{
+									id: "menu-stark-ui-components-app-data",
+									label: "App Data",
+									isVisible: true,
+									isEnabled: true,
+									targetState: "demo-ui.app-data"
 								},
 								{
 									id: "menu-stark-ui-components-logout",
@@ -274,8 +309,22 @@ export class AppComponent implements OnInit {
 				}
 			]
 		};
+
+		this.userService
+			.fetchUserProfile()
+			.pipe(filter<StarkUser | undefined, StarkUser>((user?: StarkUser): user is StarkUser => typeof user !== "undefined"))
+			.subscribe((user: StarkUser) => {
+				this.user = user;
+			});
+
+		this.time = moment().format("lll");
+
+		this.isMenuModeActive = this.breakpointObserver.isMatched([this.mediaQueryMdSm]);
+
+		this.breakpointObserver.observe([this.mediaQueryMdSm]).subscribe((state: BreakpointState) => {
+			this.isMenuModeActive = state.matches;
+		});
 	}
-	/* tslint:enable */
 
 	public toggleMenu(): void {
 		this.sidebarService.toggleMenu();

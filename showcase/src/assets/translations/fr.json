@@ -11,6 +11,16 @@
         "CLASSIC-FULL": "Action Bar Classic Full",
         "TITLE": "Stark action bar"
       },
+      "APP_DATA": {
+        "DROPDOWN": "Exemple dans un dropdown avec photo de profil de l'utilisateur",
+        "DROPDOWN.NO_AVATAR": "Dropdown example sans photo de profil",
+        "MENU": "Exemple dans un menu",
+        "USER": "Utilisateur",
+        "LAST_ACCESS": "Dernier accès",
+        "VERSION": "Version",
+        "ENVIRONMENT": "Environnement",
+        "TITLE": "App data"
+      },
       "BREADCRUMB": {
         "CHILD": "Enfant",
         "CONFIG_INPUT": "Démonstration du breadcrumb component (avec breadcrumbConfig)",
