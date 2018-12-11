@@ -41,7 +41,7 @@ export class DemoOnEnterKeyComponent implements OnInit {
 		if (paramValues.length === 5) {
 			// the context of the host component was passed in the last parameter
 			// so we can change the component's property to update the logging section
-			const parentComponentContext: OnEnterKeyComponent = paramValues[4];
+			const parentComponentContext: DemoOnEnterKeyComponent = paramValues[4];
 			parentComponentContext.logging += callbackLogging;
 		}
 	}

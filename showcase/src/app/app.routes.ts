@@ -1,8 +1,5 @@
-import { HomeComponent } from "./home";
-import { NoContentComponent } from "./no-content";
 import { Ng2StateDeclaration } from "@uirouter/angular";
 import { AppComponent } from "./app.component";
-import { GettingStartedComponent } from "./getting-started/getting-started-component";
 
 export const APP_STATES: Ng2StateDeclaration[] = [
 	{
@@ -11,30 +8,13 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 		component: AppComponent
 	},
 	{
-		name: "home",
-		url: "",
-		views: { "@": { component: HomeComponent } },
-		parent: "app"
+		name: "demo-ui.**",
+		url: "^/demo-ui", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
+		loadChildren: "./demo-ui/demo-ui.module#DemoUiModule" // lazy loaded module
 	},
 	{
-		name: "getting-started",
-		url: "^/getting-started",
-		views: { "@": { component: GettingStartedComponent } },
-		parent: "app"
-	},
-	{
-		name: "news.**",
-		url: "^/news", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
-		loadChildren: "./news/news.module#NewsModule" // lazy loaded module
-	},
-	{
-		name: "demo.**",
-		url: "^/demo", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
-		loadChildren: "./demo/demo.module#DemoModule" // lazy loaded module
-	},
-	{
-		name: "otherwise",
-		url: "^/otherwise", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
-		component: NoContentComponent
+		name: "styleguide.**",
+		url: "^/styleguide", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
+		loadChildren: "./styleguide/styleguide.module#StyleguideModule" // lazy loaded module
 	}
 ];
