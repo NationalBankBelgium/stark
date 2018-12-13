@@ -20,7 +20,7 @@
   "types": "typings/index.d.ts",
   "dependencies": {
     "@angular-devkit/build-angular": "0.11.3",
-    "@angular-devkit/build-optimizer": "0.11.2",
+    "@angular-devkit/build-optimizer": "0.11.3",
     "@babel/core": "7.2.0",
     "@babel/preset-env": "7.2.0",
     "@types/uglify-js": "3.0.4",
