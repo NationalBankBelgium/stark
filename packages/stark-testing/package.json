@@ -34,6 +34,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-typescript": "3.0.13",
     "karma-typescript-angular2-transform": "1.0.2",
+    "protractor": "5.4.1",
     "puppeteer": "1.11.0"
   },
   "scripts": {
