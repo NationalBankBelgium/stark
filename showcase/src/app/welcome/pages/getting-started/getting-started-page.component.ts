@@ -1,6 +1,13 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { starterStructure, stylesheetImport, stylesCss, starkStylesCss } from "./starter-structure";
+import {
+	starterStructure,
+	stylesheetImport,
+	stylesCss,
+	starkStylesCss,
+	polyfillsAngularJsonAdaptation,
+	polyfillsBrowsersContent
+} from "./starter-structure";
 
 @Component({
 	selector: "getting-started",
@@ -13,6 +20,8 @@ export class GettingStartedPageComponent implements OnInit {
 	public structure: string = starterStructure;
 	public stylesCSS: string = stylesCss;
 	public starkStylesCSS: string = starkStylesCss;
+	public polyfillsBrowsersContent: string = polyfillsBrowsersContent;
+	public polyfillsAngularJsonAdaptation: string = polyfillsAngularJsonAdaptation;
 	public installingProject: string;
 	public runningHMR: string;
 	public runningProject: string;

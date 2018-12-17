@@ -118,6 +118,29 @@
 
 		<p>Be aware that you can execute both unit tests and E2E tests with the same command line:</p>
 		<stark-pretty-print [data]="continuousIntegrationTests" format="html" [enableHighlighting]="true"></stark-pretty-print>
+
+		<h2 id="polyfills_import" class="custom-subtitle">Polyfills</h2>
+		<p>
+			In the case you want your application to be compatible with non modern browsers (i.e. Internet Explorer) 
+			or browsers that don't support some of the latest standards, you might be interested in polyfills.
+			Stark doesn't use any polyfills by default, but in case you need them, you can follow the steps mentioned below.
+		</p>
+		<p>
+			An empty file called <span class="custom-code">polyfills.browser.ts</span> should be created at the following location:
+			<span class="custom-code"> src > polyfills.browser.ts</span>
+		</p>
+		<p>
+			The following polyfills are suitable for most of the cases, especially when targeting Internet Explorer:
+		</p>
+		<stark-pretty-print [data]="polyfillsBrowsersContent" format="typescript" [enableHighlighting]="true"></stark-pretty-print>
+		<p>
+			For more information about which polyfills are required to support the Angular feature you want to use, 
+			feel free to refer to Angular <a href="https://angular.io/guide/browser-support#mandatory-polyfills" target="_blank" rel="noopener noreferrer"> browser support guide.</a>
+		</p>
+		<p>
+			Adapt (if needed) the path of your <span class="custom-code">polyfills.browsers.ts</span> file in the <span class="custom-code">angular.json</span> file of your project: 
+		</p>
+		<stark-pretty-print class="custom-pretty-print" [data]="polyfillsAngularJsonAdaptation"></stark-pretty-print>
 	</section>
 
 	<section class="stark-section custom-section">
