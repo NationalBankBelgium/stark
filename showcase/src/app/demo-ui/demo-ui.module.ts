@@ -18,6 +18,7 @@ import { UIRouterModule } from "@uirouter/angular";
 import {
 	STARK_DATE_FORMATS,
 	StarkActionBarModule,
+	StarkAppDataModule,
 	StarkAppLogoutModule,
 	StarkAppMenuModule,
 	StarkBreadcrumbModule,
@@ -36,6 +37,7 @@ import {
 } from "@nationalbankbelgium/stark-ui";
 import {
 	DemoActionBarPageComponent,
+	DemoAppDataPageComponent,
 	DemoBreadcrumbPageComponent,
 	DemoCollapsiblePageComponent,
 	DemoDatePickerPageComponent,
@@ -88,6 +90,7 @@ import {
 		SharedModule,
 		StarkActionBarModule,
 		StarkAppLogoutModule,
+		StarkAppDataModule,
 		StarkAppMenuModule,
 		StarkBreadcrumbModule,
 		StarkCollapsibleModule,
@@ -105,6 +108,7 @@ import {
 	],
 	declarations: [
 		DemoActionBarPageComponent,
+		DemoAppDataPageComponent,
 		DemoBreadcrumbPageComponent,
 		DemoCollapsiblePageComponent,
 		DemoDatePickerPageComponent,
@@ -132,6 +136,7 @@ import {
 	],
 	exports: [
 		DemoActionBarPageComponent,
+		DemoAppDataPageComponent,
 		DemoBreadcrumbPageComponent,
 		DemoCollapsiblePageComponent,
 		DemoDatePickerPageComponent,

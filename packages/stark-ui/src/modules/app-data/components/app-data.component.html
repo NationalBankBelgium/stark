@@ -1,0 +1,35 @@
+<!-- the projected detail content should be put in an ng-template so that it can be rendered multiple times in this template -->
+<!-- solution taken from https://github.com/angular/angular/issues/22972#issuecomment-407358396 -->
+<ng-template #appDataDetail><ng-content select=".detail-slot"></ng-content></ng-template>
+
+<div *ngIf="mode === 'dropdown'" class="stark-app-data dropdown">
+	<div class="stark-app-data-summary"> <ng-content select=".summary-slot"></ng-content> </div>
+
+	<button
+		mat-icon-button
+		aria-label="Application Data"
+		(click)="toggleDetail()"
+		[ngClass]="{ 'is-open': !isDetailHidden }"
+		mat-button
+	>
+		<mat-icon svgIcon="menu-down" starkSvgViewBox></mat-icon>
+	</button>
+	<div class="stark-app-data-detail stark-fade-animation" *ngIf="!isDetailHidden">
+		<ng-container *ngTemplateOutlet="appDataDetail"></ng-container>
+	</div>
+</div>
+
+<div *ngIf="mode === 'menu'" class="stark-app-data menu">
+	<button
+		mat-icon-button
+		aria-label="Application Data"
+		(click)="toggleDetail()"
+		mat-button
+		[matTooltip]="'STARK.ICONS.APP_DATA' | translate"
+	>
+		<mat-icon svgIcon="dots-vertical" starkSvgViewBox></mat-icon>
+	</button>
+	<div class="stark-app-data-detail animate-show-hide" *ngIf="!isDetailHidden">
+		<ng-container *ngTemplateOutlet="appDataDetail"></ng-container>
+	</div>
+</div>

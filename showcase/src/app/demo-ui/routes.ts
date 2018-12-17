@@ -1,6 +1,7 @@
 import { Ng2StateDeclaration } from "@uirouter/angular";
 import {
 	DemoActionBarPageComponent,
+	DemoAppDataPageComponent,
 	DemoBreadcrumbPageComponent,
 	DemoCollapsiblePageComponent,
 	DemoDatePickerPageComponent,
@@ -27,6 +28,11 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 		name: "demo-ui.action-bar",
 		url: "/action-bar",
 		views: { "@": { component: DemoActionBarPageComponent } }
+	},
+	{
+		name: "demo-ui.app-data",
+		url: "/app-data",
+		views: { "@": { component: DemoAppDataPageComponent } }
 	},
 	{
 		name: "demo-ui.breadcrumb",

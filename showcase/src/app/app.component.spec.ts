@@ -9,14 +9,45 @@ import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
  * Load the implementations that should be tested
  */
 import { AppComponent } from "./app.component";
-import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
+import {
+	STARK_APP_METADATA,
+	STARK_LOGGING_SERVICE,
+	STARK_ROUTING_SERVICE,
+	STARK_SESSION_SERVICE,
+	STARK_USER_SERVICE,
+	StarkApplicationMetadata,
+	StarkApplicationMetadataImpl,
+	StarkLanguages,
+	StarkUser
+} from "@nationalbankbelgium/stark-core";
+import {
+	MockStarkLoggingService,
+	MockStarkRoutingService,
+	MockStarkSessionService,
+	MockStarkUserService
+} from "@nationalbankbelgium/stark-core/testing";
 import Spy = jasmine.Spy;
+import { of } from "rxjs";
 
 describe(`App`, () => {
 	let component: AppComponent;
 	let fixture: ComponentFixture<AppComponent>;
-
+	let appMetadata: StarkApplicationMetadata;
+	appMetadata = new StarkApplicationMetadataImpl();
+	appMetadata.supportedLanguages = [StarkLanguages.EN_US, StarkLanguages.FR_BE, StarkLanguages.NL_BE];
+	const mockUser: StarkUser = {
+		uuid: "1",
+		username: "username",
+		firstName: "firstName",
+		lastName: "lastName",
+		email: "email",
+		phone: "02/221.12.34",
+		language: "en",
+		selectedLanguage: "en",
+		referenceNumber: "12345",
+		roles: ["employee"],
+		isAnonymous: false
+	};
 	/**
 	 * async beforeEach
 	 */
@@ -30,6 +61,9 @@ describe(`App`, () => {
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
 					{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockAppSidebarService() },
+					{ provide: STARK_USER_SERVICE, useValue: new MockStarkUserService() },
+					{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
+					{ provide: STARK_APP_METADATA, useValue: appMetadata },
 					TranslateService
 				]
 			})
@@ -46,6 +80,9 @@ describe(`App`, () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AppComponent);
 		component = fixture.componentInstance;
+
+		(<Spy>component.userService.fetchUserProfile).calls.reset();
+		(<Spy>component.userService.fetchUserProfile).and.returnValue(of(mockUser));
 
 		/**
 		 * Trigger initial data binding

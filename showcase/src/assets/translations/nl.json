@@ -11,6 +11,16 @@
         "CLASSIC-FULL": "Action Bar Classic Full",
         "TITLE": "Stark action bar"
       },
+      "APP_DATA": {
+        "DROPDOWN": "Voorbeeld in een dropdown met de profielfoto van de gebruiker",
+        "DROPDOWN.NO_AVATAR": "Voorbeeld in een dropdown zonder profieldfoto",
+        "MENU": "Voorbeeld in een menu",
+        "USER": "Gebruiker",
+        "LAST_ACCESS": "Laatste toegang",
+        "VERSION": "Versie",
+        "ENVIRONMENT": "Omgeving",
+        "TITLE": "App data"
+      },
       "BREADCRUMB": {
         "CHILD": "Kind",
         "CONFIG_INPUT": "Breadcrumb demonstration (met breadcrumbConfig)",

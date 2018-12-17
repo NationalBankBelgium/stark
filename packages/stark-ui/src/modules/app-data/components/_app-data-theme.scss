@@ -1,0 +1,48 @@
+/* ============================================================================== */
+/*  S t a r k   A p p   D a t a  -  T h e m e                                     */
+/* ============================================================================== */
+/* stark-ui: src/modules/app-data/components/_app-data-theme.scss */
+
+.stark-app-data {
+  & .label {
+    color: mat-color($grey-palette, 700);
+  }
+
+  &.dropdown {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ------------------------------------------------ */
+/*             app data "dropdown" mode             */
+/* ------------------------------------------------ */
+.stark-app-data.dropdown {
+  & .stark-app-data-summary {
+    padding-top: 4px;
+    & .label {
+      color: $primary-light-text-color;
+    }
+    & .value {
+      color: #fff;
+    }
+  }
+  & .stark-app-data-detail {
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ------------------------------------------------ */
+/*               app data "menu" mode               */
+/* ------------------------------------------------ */
+.stark-app-data.menu {
+  & .stark-app-data-detail {
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* END stark-ui: src/modules/app-data/components/_app-data-theme.scss */
