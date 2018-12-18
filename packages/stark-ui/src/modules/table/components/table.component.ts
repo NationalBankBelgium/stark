@@ -41,12 +41,18 @@ import { StarkComponentUtil } from "../../../util/component";
  */
 const componentName: string = "stark-table";
 
-/* tslint:disable:enforce-component-selector */
+/**
+ * Default filter configuration
+ */
+const defaultFilter: StarkTableFilter = {
+	globalFilterPresent: true
+};
+
 /**
  * Component to display array data in a table layout.
  */
 @Component({
-	selector: componentName,
+	selector: "stark-table",
 	templateUrl: "./table.component.html",
 	encapsulation: ViewEncapsulation.None,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
@@ -84,7 +90,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Object which contains filtering information for the table.
 	 */
 	@Input()
-	public filter: StarkTableFilter;
+	public filter: StarkTableFilter = defaultFilter;
 
 	/**
 	 * Allows to fix the header to the top of the scrolling viewport containing the table.
@@ -344,10 +350,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		}
 
 		if (changes["filter"]) {
-			const defaultFilter: StarkTableFilter = {
-				globalFilterPresent: true
-			};
-
 			this.filter = { ...defaultFilter, ...this.filter };
 		}
 

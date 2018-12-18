@@ -39,10 +39,10 @@ export class TableWithSelectionComponent implements OnInit {
 			{ name: "id", label: "Id", isFilterable: true, isSortable: true },
 			{
 				name: "title",
-				label: "Title",
+				label: "SHOWCASE.DEMO.TABLE.LABELS.TITLE",
 				cellFormatter: (value: { label: string }): string => "~" + value.label
 			},
-			{ name: "description", label: "Description" }
+			{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION" }
 		];
 
 		this.filter = { globalFilterPresent: false, columns: [] };

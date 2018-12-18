@@ -252,6 +252,10 @@
         "TITLE": "Stark slider"
       },
       "TABLE": {
+        "LABELS": {
+          "TITLE": "Titre",
+          "DESCRIPTION": "Description"
+        },
         "REGULAR": "Table régulière",
         "WITH_SELECTION": "Table avec sélection",
         "WITH_CUSTOM_ACTIONS": "Table avec actions personalisé",

@@ -99,7 +99,7 @@
 
 		<ng-content select=".stark-table-columns"></ng-content>
 
-		<stark-table-column *ngIf="tableRowsActionBarConfig && tableRowsActionBarConfig.actions" name="actions">
+		<stark-table-column *ngIf="tableRowsActionBarConfig && tableRowsActionBarConfig.actions" name="STARK.TABLE.ACTIONS">
 			<ng-template let-context>
 				<stark-action-bar
 					[actionBarConfig]="tableRowsActionBarConfig"
