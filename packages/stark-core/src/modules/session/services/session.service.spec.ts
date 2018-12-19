@@ -92,12 +92,12 @@ describe("Service: StarkSessionService", () => {
 			"stop",
 			"clearInterrupts"
 		]);
-		(<EventEmitter<any>>mockIdleService.onIdleStart) = new EventEmitter<any>();
-		(<EventEmitter<any>>mockIdleService.onIdleEnd) = new EventEmitter<any>();
-		(<EventEmitter<number>>mockIdleService.onTimeout) = new EventEmitter<number>();
-		(<EventEmitter<number>>mockIdleService.onTimeoutWarning) = new EventEmitter<number>();
+		mockIdleService.onIdleStart = new EventEmitter<any>();
+		mockIdleService.onIdleEnd = new EventEmitter<any>();
+		mockIdleService.onTimeout = new EventEmitter<number>();
+		mockIdleService.onTimeoutWarning = new EventEmitter<number>();
 		mockKeepaliveService = jasmine.createSpyObj<Keepalive>("keepaliveService,", ["interval", "request", "ping", "stop"]);
-		(<EventEmitter<any>>mockKeepaliveService.onPing) = new EventEmitter<any>();
+		mockKeepaliveService.onPing = new EventEmitter<any>();
 		mockInjectorService = jasmine.createSpyObj<Injector>("injector,", ["get"]);
 		mockTranslateService = jasmine.createSpyObj<TranslateService>("translateService,", ["use"]);
 		sessionService = new SessionServiceHelper(
@@ -464,7 +464,7 @@ describe("Service: StarkSessionService", () => {
 
 		describe("onIdleStart notifications", () => {
 			it("should be received by subscribing to the onIdleStart observable from the idle service", () => {
-				(<EventEmitter<any>>mockIdleService.onIdleStart) = new EventEmitter<any>();
+				mockIdleService.onIdleStart = new EventEmitter<any>();
 				expect(mockIdleService.onIdleStart.observers.length).toBe(0);
 
 				sessionService.configureIdleService();
@@ -487,7 +487,7 @@ describe("Service: StarkSessionService", () => {
 
 		describe("onIdleEnd notifications", () => {
 			it("should be received by subscribing to the onIdleEnd observable from the idle service", () => {
-				(<EventEmitter<any>>mockIdleService.onIdleEnd) = new EventEmitter<any>();
+				mockIdleService.onIdleEnd = new EventEmitter<any>();
 				expect(mockIdleService.onIdleEnd.observers.length).toBe(0);
 
 				sessionService.configureIdleService();
@@ -509,7 +509,7 @@ describe("Service: StarkSessionService", () => {
 			});
 
 			it("should dispatch the COUNTDOWN_STOP action and only if the countdown was started", () => {
-				(<EventEmitter<any>>mockIdleService.onIdleEnd) = new EventEmitter<any>();
+				mockIdleService.onIdleEnd = new EventEmitter<any>();
 				expect(mockIdleService.onIdleEnd.observers.length).toBe(0);
 
 				sessionService.configureIdleService();
@@ -533,7 +533,7 @@ describe("Service: StarkSessionService", () => {
 
 		describe("onTimeout notifications", () => {
 			it("should be received by subscribing to the onTimeout observable from the idle service", () => {
-				(<EventEmitter<number>>mockIdleService.onTimeout) = new EventEmitter<number>();
+				mockIdleService.onTimeout = new EventEmitter<number>();
 				expect(mockIdleService.onTimeout.observers.length).toBe(0);
 
 				sessionService.configureIdleService();
@@ -567,7 +567,7 @@ describe("Service: StarkSessionService", () => {
 
 				spyOn(sessionService, "logout");
 
-				(<EventEmitter<number>>mockIdleService.onTimeout) = new EventEmitter<number>();
+				mockIdleService.onTimeout = new EventEmitter<number>();
 				expect(mockIdleService.onTimeout.observers.length).toBe(0);
 
 				sessionService.configureIdleService();
@@ -586,7 +586,7 @@ describe("Service: StarkSessionService", () => {
 			it("should dispatch the COUNTDOWN_FINISH action, trigger the logout and navigate to the SessionExpired state set in the injected sessionConfig", () => {
 				spyOn(sessionService, "logout");
 
-				(<EventEmitter<number>>mockIdleService.onTimeout) = new EventEmitter<number>();
+				mockIdleService.onTimeout = new EventEmitter<number>();
 				expect(mockIdleService.onTimeout.observers.length).toBe(0);
 
 				sessionService.configureIdleService();
@@ -605,7 +605,7 @@ describe("Service: StarkSessionService", () => {
 
 		describe("onTimeoutWarning notifications", () => {
 			it("should be received by subscribing to the onTimeoutWarning observable from the idle service", () => {
-				(<EventEmitter<number>>mockIdleService.onTimeoutWarning) = new EventEmitter<number>();
+				mockIdleService.onTimeoutWarning = new EventEmitter<number>();
 				expect(mockIdleService.onTimeoutWarning.observers.length).toBe(0);
 
 				sessionService.configureIdleService();
@@ -626,7 +626,7 @@ describe("Service: StarkSessionService", () => {
 			});
 
 			it("should dispatch the COUNTDOWN_START action only when the value emitted is the first one of the countdown", () => {
-				(<EventEmitter<number>>mockIdleService.onTimeoutWarning) = new EventEmitter<number>();
+				mockIdleService.onTimeoutWarning = new EventEmitter<number>();
 				expect(mockIdleService.onTimeoutWarning.observers.length).toBe(0);
 				const countdownStartValue: number = 22;
 				mockIdleService.getTimeout.and.returnValue(countdownStartValue);
@@ -770,7 +770,7 @@ describe("Service: StarkSessionService", () => {
 					mockSessionConfig
 				);
 
-				(<EventEmitter<any>>mockKeepaliveService.onPing) = new EventEmitter<any>();
+				mockKeepaliveService.onPing = new EventEmitter<any>();
 				expect(mockKeepaliveService.onPing.observers.length).toBe(0);
 
 				sessionServiceHelper.configureKeepaliveService();
@@ -1002,16 +1002,25 @@ class SessionServiceHelper extends StarkSessionServiceImpl {
 	// TODO Check if we can simplify this service
 	/* tslint:disable-next-line:parameters-max-number */
 	public constructor(
-		store: Store<StarkCoreApplicationState>,
+		store: SpyObj<Store<StarkCoreApplicationState>>,
 		logger: StarkLoggingService,
 		routingService: StarkRoutingService,
 		appConfig: StarkApplicationConfig,
-		idle: Idle,
+		idle: SpyObj<Idle>,
 		injector: Injector,
-		translateService: TranslateService,
+		translateService: SpyObj<TranslateService>,
 		sessionConfig: StarkSessionConfig
 	) {
-		super(store, logger, routingService, appConfig, idle, injector, translateService, sessionConfig);
+		super(
+			<Store<StarkCoreApplicationState>>(<unknown>store),
+			logger,
+			routingService,
+			appConfig,
+			<Idle>(<unknown>idle),
+			injector,
+			<TranslateService>(<unknown>translateService),
+			sessionConfig
+		);
 	}
 
 	public registerTransitionHook(): void {

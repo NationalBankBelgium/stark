@@ -1413,7 +1413,7 @@ describe("Service: StarkHttpService", () => {
 
 	describe("rawHttpClient", () => {
 		it("should return the Angular core http client", () => {
-			expect(starkHttpService.rawHttpClient).toBe(httpMock);
+			expect(starkHttpService.rawHttpClient).toBe(<HttpClient>(<unknown>httpMock));
 		});
 	});
 
@@ -1534,8 +1534,8 @@ function convertMapIntoObject(map: Map<string, any>): { [param: string]: any } {
 class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P> {
 	public retryDelay: number;
 
-	public constructor(logger: StarkLoggingService, sessionService: StarkSessionService, $http: HttpClient) {
-		super(logger, sessionService, $http);
+	public constructor(logger: StarkLoggingService, sessionService: StarkSessionService, httpClient: SpyObj<HttpClient>) {
+		super(logger, sessionService, <HttpClient>(<unknown>httpClient));
 	}
 
 	public addDevAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {

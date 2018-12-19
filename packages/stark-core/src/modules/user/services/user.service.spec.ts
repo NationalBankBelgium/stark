@@ -97,7 +97,9 @@ describe("Service: StarkUserService", () => {
 		mockUserInstances = [Deserialize(mockUsers[0], StarkUser), Deserialize(mockUsers[1], StarkUser)];
 		mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
-		userService = new StarkUserServiceImpl(mockLogger, mockUserRepository, mockData, mockStore);
+		userService = new StarkUserServiceImpl(mockLogger, mockUserRepository, mockData, <Store<StarkCoreApplicationState>>(
+			<unknown>mockStore
+		));
 	});
 
 	describe("getAllUsers", () => {
