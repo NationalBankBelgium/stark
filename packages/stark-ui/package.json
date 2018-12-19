@@ -41,7 +41,7 @@
   },
   "peerDependencies": {
     "@angular/animations": "7.x",
-    "@angular/cdk": "7.x",
+    "@angular/cdk": "^7.2.0",
     "@angular/common": "7.x",
     "@angular/compiler": "7.x",
     "@angular/core": "7.x",
