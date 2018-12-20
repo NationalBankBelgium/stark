@@ -1,10 +1,10 @@
+/* tslint:disable:completed-docs no-identical-functions */
 import { StarkFormControlState, StarkFormUtil } from "./form.util";
-import { FormControl, FormGroup /*, Validators*/ } from "@angular/forms";
-
-// import Spy = jasmine.Spy;
+import { FormControl, FormGroup } from "@angular/forms";
 
 const _startCase: Function = require("lodash/startCase");
 
+/* tslint:disable:no-big-function */
 describe("Util: FormUtil", () => {
 	const formItemStates: string[] = ["untouched", "touched", "pristine", "dirty"];
 
@@ -12,14 +12,14 @@ describe("Util: FormUtil", () => {
 	let mockFormControls: FormControl[];
 
 	function getMockFormControl(name: string): FormControl {
-		return jasmine.createSpyObj<FormControl>(name, [
+		return <FormControl>(<unknown>jasmine.createSpyObj<FormControl>(name, [
 			"value",
 			"setValue",
 			"markAsUntouched",
 			"markAsTouched",
 			"markAsPristine",
 			"markAsDirty"
-		]);
+		]));
 	}
 
 	function assertFormControl(formItem: FormControl, newState?: string): void {
@@ -178,13 +178,13 @@ describe("Util: FormUtil", () => {
 	});
 
 	describe("isFormGroup", () => {
-		it("should return TRUE if the form is an instance of an IFormController", () => {
+		it("should return TRUE if the form is an instance of an FormGroup", () => {
 			const result: boolean = StarkFormUtil.isFormGroup(mockFormGroup);
 
 			expect(result).toBe(true);
 		});
 
-		it("should return FALSE if the form is NOT an instance of an IFormController", () => {
+		it("should return FALSE if the form is NOT an instance of an FormGroup", () => {
 			const result: boolean = StarkFormUtil.isFormGroup("this is not a form");
 
 			expect(result).toBe(false);

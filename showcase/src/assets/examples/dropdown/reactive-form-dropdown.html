@@ -1,8 +1,11 @@
 <stark-dropdown
-	dropdownId="disabledDropdown"
-	[options]="[1, 2, 3, 4, 5, 6, 7]"
-	placeholder="Sorry, it's disabled"
-	[isDisabled]="true"
-	multiSelect
+	dropdownId="reactiveFormDropdown"
+	[options]="serviceDropdownOptions"
+	[dropdownFormControl]="serviceFormControl"
+	placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
+	optionIdProperty="id"
+	optionLabelProperty="value"
 >
 </stark-dropdown>
+<div *ngIf="selectedService">Selected value: {{ selectedService }}</div>
+<div><mat-checkbox (change)="toggleDisabling()" [(ngModel)]="isDisabled">isDisabled</mat-checkbox></div>

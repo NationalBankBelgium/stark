@@ -93,6 +93,7 @@
         "IO": "Informatics infrastructure and operations",
         "MULTIPLE": "Multiple selection",
         "MULTIPLE_REQUIRED": "Required multiple selection",
+        "REACTIVE_FORM": "Reactive form",
         "REQUIRED": "Single required selection",
         "SELECTED_VALUE": "Selected value ",
         "SELECTED_VALUES": "Selected values ",

@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { ReferenceLink } from "../../../shared/components";
+import { FormControl } from "@angular/forms";
+import { Subscription } from "rxjs";
 
 @Component({
 	selector: "demo-dropdown",
@@ -7,8 +9,12 @@ import { ReferenceLink } from "../../../shared/components";
 	templateUrl: "./demo-dropdown-page.component.html",
 	encapsulation: ViewEncapsulation.None //used here to be able to customize the example-viewer background color
 })
-export class DemoDropdownPageComponent implements OnInit {
+export class DemoDropdownPageComponent implements OnInit, OnDestroy {
+	public isDisabledServiceFormControl: boolean;
 	public selectedService: string;
+	public serviceFormControl: FormControl;
+	public serviceFormControlSubscription: Subscription;
+	public selectedServiceFormControl: string;
 	public selectedServiceWhiteDropdown: string;
 	public selectedServices: string[];
 	public selectedRequiredServices: string[];
@@ -34,6 +40,15 @@ export class DemoDropdownPageComponent implements OnInit {
 				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkDropdownComponent.html"
 			}
 		];
+
+		this.serviceFormControl = new FormControl();
+		this.serviceFormControlSubscription = this.serviceFormControl.valueChanges.subscribe(
+			(value: any) => this.selectedServiceFormControl = value
+		);
+	}
+
+	public ngOnDestroy(): void {
+		this.serviceFormControlSubscription.unsubscribe();
 	}
 
 	public serviceDropdownOnChange(selectedValue: string): void {
@@ -54,5 +69,13 @@ export class DemoDropdownPageComponent implements OnInit {
 
 	public whiteDropdownOnChange(selectedValue: string): void {
 		this.selectedServiceWhiteDropdown = selectedValue;
+	}
+
+	public toggleDisabledReactiveFormControl(): void {
+		if (this.isDisabledServiceFormControl) {
+			this.serviceFormControl.disable();
+		} else {
+			this.serviceFormControl.enable();
+		}
 	}
 }

@@ -3,6 +3,32 @@
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer
 		[extensions]="['HTML', 'TS']"
+		filesPath="dropdown/reactive-form-dropdown"
+		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.REACTIVE_FORM' | translate"
+	>
+		<stark-dropdown
+			dropdownId="reactiveFormDropdown"
+			[options]="serviceDropdownOptions"
+			[dropdownFormControl]="serviceFormControl"
+			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
+			optionIdProperty="id"
+			optionLabelProperty="value"
+			required
+		>
+		</stark-dropdown>
+
+		<div *ngIf="selectedServiceFormControl">
+			{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUE" | translate }}: {{ selectedServiceFormControl }}
+		</div>
+		<div>
+			<mat-checkbox (change)="toggleDisabledReactiveFormControl()" [(ngModel)]="isDisabledServiceFormControl">
+				isDisabled
+			</mat-checkbox>
+		</div>
+	</example-viewer>
+
+	<example-viewer
+		[extensions]="['HTML', 'TS']"
 		filesPath="dropdown/single-required-selection"
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.REQUIRED' | translate"
 	>
@@ -13,7 +39,7 @@
 			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
 			optionIdProperty="id"
 			optionLabelProperty="value"
-			(dropdownSelectionChanged)="serviceDropdownOnChange($event)"
+			(selectionChanged)="serviceDropdownOnChange($event)"
 			required
 		>
 		</stark-dropdown>
@@ -31,7 +57,7 @@
 			[options]="[1, 2, 3, 4, 5, 6, 7]"
 			[value]="selectedNumber"
 			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_NUMBER"
-			(dropdownSelectionChanged)="numberDropdownOnChange($event)"
+			(selectionChanged)="numberDropdownOnChange($event)"
 			[defaultBlank]="true"
 		>
 		</stark-dropdown>
@@ -50,7 +76,7 @@
 			optionIdProperty="id"
 			optionLabelProperty="value"
 			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICES"
-			(dropdownSelectionChanged)="multipleServicesDropdownOnChange($event)"
+			(selectionChanged)="multipleServicesDropdownOnChange($event)"
 			multiSelect
 		>
 		</stark-dropdown>
@@ -69,7 +95,7 @@
 			optionIdProperty="id"
 			optionLabelProperty="value"
 			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_ONE_SERVICE"
-			(dropdownSelectionChanged)="multipleServicesRequiredDropdownOnChange($event)"
+			(selectionChanged)="multipleServicesRequiredDropdownOnChange($event)"
 			multiSelect
 			required
 		>
@@ -109,7 +135,7 @@
 			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
 			optionIdProperty="id"
 			optionLabelProperty="value"
-			(dropdownSelectionChanged)="whiteDropdownOnChange($event)"
+			(selectionChanged)="whiteDropdownOnChange($event)"
 			required
 		>
 		</stark-dropdown>

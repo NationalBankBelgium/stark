@@ -10,10 +10,10 @@ export class StarkFormUtil {
 	 * @param statesToBeSet - States to be set to the different controls in the form
 	 */
 	public static setFormChildControlsState(formGroup: FormGroup, statesToBeSet: StarkFormControlState[]): void {
-		// Verifying it is indeed an Angular FormController
+		// Verifying it is indeed an Angular FormGroup
 		if (StarkFormUtil.isFormGroup(formGroup)) {
 			for (const key of Object.keys(formGroup.controls)) {
-				// filtering just the ngModel child objects of the form
+				// filtering just the FormControl objects of the form
 				const formControl: AbstractControl = formGroup.controls[key];
 				if (StarkFormUtil.isFormControl(formControl)) {
 					this.setFormControlState(formControl, statesToBeSet);
@@ -58,7 +58,7 @@ export class StarkFormUtil {
 	 * @param statesToBeSet - States to be set to the form
 	 */
 	public static setFormGroupState(formGroup: FormGroup, statesToBeSet: StarkFormState[]): void {
-		// Verifying it is indeed an Angular FormController
+		// Verifying it is indeed an Angular FormGroup
 		if (StarkFormUtil.isFormGroup(formGroup)) {
 			for (const formControlState of statesToBeSet) {
 				switch (formControlState) {

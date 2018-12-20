@@ -18,6 +18,9 @@ export const translationsEn: object = {
 			SEARCH: "Search",
 			NEW_ITEM: "New",
 			SAVE_AND_NEXT: "Save And Next"
+		},
+		VALIDATION: {
+			REQUIRED: "This field is required"
 		}
 	}
 };

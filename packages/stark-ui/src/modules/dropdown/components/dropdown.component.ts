@@ -1,24 +1,39 @@
 import {
 	Component,
+	ElementRef,
 	EventEmitter,
 	Inject,
 	Input,
 	OnChanges,
+	OnDestroy,
 	OnInit,
 	Output,
+	Renderer2,
 	SimpleChanges,
-	ViewEncapsulation,
-	ElementRef,
-	Renderer2
+	ViewEncapsulation
 } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { StarkComponentUtil } from "../../../util/component";
+import { StarkComponentUtil, StarkFormUtil } from "../../../util";
+import { FormControl, Validators } from "@angular/forms";
+import { distinctUntilChanged, filter } from "rxjs/operators";
+import { Subscription } from "rxjs";
+
+/**
+ * @ignore
+ */
+const _isEqual: Function = require("lodash/isEqual");
 
 /**
  * Name of the component
  */
 const componentName: string = "stark-dropdown";
+
+/**
+ * Warning message for reactive form issue
+ */
+const reactiveWarningMessage: string =
+	componentName + ': When dropdownFormControl is set, "value", "selectionChanged" and "isDisabled" should not be defined.';
 
 /**
  * Component to display dropdown list based on the options passed as parameters. The dropdown component is based
@@ -33,12 +48,18 @@ const componentName: string = "stark-dropdown";
 		class: componentName
 	}
 })
-export class StarkDropdownComponent extends AbstractStarkUiComponent implements OnInit, OnChanges, OnInit {
+export class StarkDropdownComponent extends AbstractStarkUiComponent implements OnInit, OnChanges, OnInit, OnDestroy {
 	/**
 	 * If the dropdown will contain a default blank (optional)
 	 */
 	@Input()
 	public defaultBlank?: boolean;
+
+	/**
+	 * FormControl object to be used in the dropdown.
+	 */
+	@Input()
+	public dropdownFormControl?: FormControl;
 
 	/**
 	 * HTML "id" attribute of the element.
@@ -64,13 +85,6 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	 */
 	@Input()
 	public isDisabled?: boolean = false;
-
-	/**
-	 * Text to be displayed as the dropdown's label (dynamically translated via the $translate service if
-	 * the provided text is defined in the translation keys).
-	 */
-	@Input()
-	public label?: string;
 
 	/**
 	 * Allows multiple option selection. Setting the attribute to "true" or empty
@@ -118,13 +132,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	 * Source object to be bound to the dropdown ngModel.
 	 */
 	@Input()
-	public value: any | any[];
+	public value?: any | any[];
 
 	/**
 	 * This will emit the newly selected value.
 	 */
 	@Output()
-	public dropdownSelectionChanged: EventEmitter<any> = new EventEmitter<any>();
+	public selectionChanged?: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
 	 * Whether the multiple row selection is enabled.
@@ -136,6 +150,17 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	 * @internal
 	 */
 	public optionsAreSimpleTypes: boolean;
+
+	/**
+	 * @ignore
+	 */
+	public formControl: FormControl;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private formControlSubscription: Subscription;
 
 	/**
 	 * Class constructor
@@ -157,6 +182,28 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": component initialized");
 		this.optionsAreSimpleTypes = this.areSimpleTypes();
+
+		if (StarkFormUtil.isFormControl(this.dropdownFormControl)) {
+			this.formControl = this.dropdownFormControl;
+		} else {
+			const isDisabled: boolean = this.isDisabled || false;
+			this.formControl = new FormControl(
+				{ value: this.value, disabled: isDisabled },
+				this.required ? [Validators.required] : []
+			);
+
+			this.formControlSubscription = this.formControl.valueChanges
+				.pipe(
+					filter((value: any) => value !== null),
+					distinctUntilChanged()
+				)
+				.subscribe((value: any) => {
+					if (this.selectionChanged) {
+						this.selectionChanged.emit(value);
+					}
+				});
+		}
+
 		this.setDefaultBlank();
 		super.ngOnInit();
 	}
@@ -164,6 +211,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	/**
 	 * Component lifecycle hook
 	 */
+	// tslint:disable-next-line:cognitive-complexity cyclomatic-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["optionIdProperty"] || changes["optionLabelProperty"]) {
 			this.optionsAreSimpleTypes = this.areSimpleTypes();
@@ -172,13 +220,62 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 		if (changes["multiSelect"]) {
 			this.isMultiSelectEnabled = StarkComponentUtil.isInputEnabled(this.multiSelect);
 		}
+
+		if (changes["isDisabled"]) {
+			if (StarkFormUtil.isFormControl(this.dropdownFormControl)) {
+				this.logger.warn(reactiveWarningMessage);
+			}
+
+			if (StarkFormUtil.isFormControl(this.formControl)) {
+				if (this.isDisabled) {
+					this.formControl.disable();
+				} else {
+					this.formControl.enable();
+				}
+			}
+		}
+
+		if (changes["required"]) {
+			this.setDefaultBlank();
+			if (
+				!changes["required"].firstChange &&
+				!StarkFormUtil.isFormControl(this.dropdownFormControl) &&
+				StarkFormUtil.isFormControl(this.formControl)
+			) {
+				if (this.required) {
+					this.formControl.setValidators([Validators.required]);
+				} else {
+					// If we want to remove only one validator, we can follow the implementation proposed on stackoverflow.
+					// See: https://stackoverflow.com/questions/46488078/angular-4-remove-required-validator-conditionally
+					this.formControl.clearValidators();
+				}
+
+				this.formControl.updateValueAndValidity();
+			}
+		}
+
+		if (changes["value"]) {
+			if (StarkFormUtil.isFormControl(this.dropdownFormControl)) {
+				this.logger.warn(reactiveWarningMessage);
+			}
+
+			if (
+				!changes["value"].firstChange &&
+				StarkFormUtil.isFormControl(this.formControl) &&
+				!_isEqual(this.formControl.value, this.value)
+			) {
+				this.formControl.setValue(this.value);
+			}
+		}
 	}
 
 	/**
-	 * Called whenever the selection of the dropdown changes
+	 * Component lifecycle hook
 	 */
-	public selectionChanged(): void {
-		this.dropdownSelectionChanged.emit(this.value);
+	public ngOnDestroy(): void {
+		if (typeof this.formControlSubscription !== "undefined") {
+			this.formControlSubscription.unsubscribe();
+		}
 	}
 
 	/**
