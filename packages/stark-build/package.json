@@ -22,7 +22,7 @@
     "@angular-devkit/build-angular": "0.11.3",
     "@angular-devkit/build-optimizer": "0.11.3",
     "@babel/core": "7.2.2",
-    "@babel/preset-env": "7.2.0",
+    "@babel/preset-env": "7.2.3",
     "@types/uglify-js": "3.0.4",
     "@types/webpack": "4.4.21",
     "add-asset-html-webpack-plugin": "3.1.2",
