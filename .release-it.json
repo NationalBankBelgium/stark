@@ -5,13 +5,16 @@
 	"force": false,
 	"pkgFiles": ["package.json", "package-lock.json"],
 	"increment": "conventional:angular",
-	"beforeChangelogCommand": "npm run generate:changelog",
-	"changelogCommand": "npm run generate:changelog-recent",
-	"buildCommand": false,
-	"safeBump": false,
-	"requireCleanWorkingDir": true,
-	"requireUpstream": true,
-	"src": {
+	"scripts": {
+		"afterBump": "npm run generate:changelog",
+		"afterRelease": false,
+		"beforeStage": false,
+		"beforeStart": false,
+		"changelog": "npm run generate:changelog-recent"
+	},
+	"git": {
+		"requireCleanWorkingDir": true,
+		"requireUpstream": true,
 		"commit": true,
 		"commitMessage": "chore(release): release %s",
 		"commitArgs": "",
@@ -20,9 +23,7 @@
 		"tagAnnotation": "%s",
 		"push": true,
 		"pushArgs": "",
-		"pushRepo": "origin",
-		"beforeStartCommand": false,
-		"afterReleaseCommand": false
+		"pushRepo": "origin"
 	},
 	"npm": {
 		"publish": false
@@ -36,13 +37,10 @@
 		"host": null
 	},
 	"prompt": {
-		"src": {
-			"status": false,
-			"commit": true,
-			"tag": true,
-			"push": true,
-			"release": true,
-			"publish": true
-		}
+		"commit": true,
+		"tag": true,
+		"push": true,
+		"release": true,
+		"publish": true
 	}
 }
