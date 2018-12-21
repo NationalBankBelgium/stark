@@ -340,12 +340,12 @@ describe("Service: StarkXSRFService", () => {
 		public constructor(
 			applicationConfig: StarkApplicationConfig,
 			logger: StarkLoggingService,
-			httpClient: HttpClient,
+			httpClient: SpyObj<HttpClient>,
 			document: Document,
 			injector: Injector,
 			config: StarkXSRFConfig
 		) {
-			super(applicationConfig, logger, httpClient, document, injector, config);
+			super(applicationConfig, logger, <HttpClient>(<unknown>httpClient), document, injector, config);
 		}
 
 		public getXSRFCookie(): string | undefined {

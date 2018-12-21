@@ -366,7 +366,14 @@ describe("Service: StarkRoutingService", () => {
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
 		errorHandler = new StarkErrorHandler(mockInjectorService);
 
-		return new StarkRoutingServiceImpl(mockLogger, appConfig, errorHandler, mockStore, state, transitions);
+		return new StarkRoutingServiceImpl(
+			mockLogger,
+			appConfig,
+			errorHandler,
+			<Store<StarkCoreApplicationState>>(<unknown>mockStore),
+			state,
+			transitions
+		);
 	};
 
 	/**
@@ -412,7 +419,15 @@ describe("Service: StarkRoutingService", () => {
 			modifiedAppConfig.homeStateName = <any>undefined;
 
 			expect(
-				() => new StarkRoutingServiceImpl(mockLogger, modifiedAppConfig, errorHandler, mockStore, <any>{}, <any>{})
+				() =>
+					new StarkRoutingServiceImpl(
+						mockLogger,
+						modifiedAppConfig,
+						errorHandler,
+						<Store<StarkCoreApplicationState>>(<unknown>mockStore),
+						<any>{},
+						<any>{}
+					)
 			).toThrowError(/homeStateName/);
 		});
 	});

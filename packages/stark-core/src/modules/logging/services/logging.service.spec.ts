@@ -313,8 +313,8 @@ describe("Service: StarkLoggingService", () => {
 });
 
 class LoggingServiceHelper extends StarkLoggingServiceImpl {
-	public constructor(store: Store<StarkCoreApplicationState>, appConfig: StarkApplicationConfig, injector: Injector) {
-		super(store, appConfig, injector);
+	public constructor(store: SpyObj<Store<StarkCoreApplicationState>>, appConfig: StarkApplicationConfig, injector: Injector) {
+		super(<Store<StarkCoreApplicationState>>(<unknown>store), appConfig, injector);
 	}
 
 	public constructLogMessageHelper(messageType: StarkLogMessageType, ...args: any[]): StarkLogMessage {

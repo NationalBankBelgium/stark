@@ -32,7 +32,7 @@ describe("ToastNotificationService", () => {
 			observer = o;
 		});
 		const mockSnackBar: SpyObj<MatSnackBar> = createSpyObj<MatSnackBar>("MatSnackBar", {
-			openFromComponent: createSpyObj<MatSnackBarRef<StarkToastNotificationComponent>>("MatSnackBarRef", {
+			openFromComponent: <any>createSpyObj<MatSnackBarRef<StarkToastNotificationComponent>>("MatSnackBarRef", {
 				afterDismissed: afterDismissedObs,
 				dismissWithAction: <any>jasmine.createSpy("dismissWithAction"),
 				dismiss: <any>jasmine.createSpy("dismiss")
@@ -42,11 +42,16 @@ describe("ToastNotificationService", () => {
 		const mockApplicationRef: SpyObj<ApplicationRef> = createSpyObj<ApplicationRef>("ApplicationRef", {
 			tick: undefined
 		});
-		service = new StarkToastNotificationServiceImpl(mockSnackBar, mockLogger, mockApplicationRef, {
-			delay: 3000,
-			position: "top right",
-			actionClasses: []
-		});
+		service = new StarkToastNotificationServiceImpl(
+			<MatSnackBar>(<unknown>mockSnackBar),
+			mockLogger,
+			<ApplicationRef>(<unknown>mockApplicationRef),
+			{
+				delay: 3000,
+				position: "top right",
+				actionClasses: []
+			}
+		);
 	}));
 
 	describe("on initialization", () => {

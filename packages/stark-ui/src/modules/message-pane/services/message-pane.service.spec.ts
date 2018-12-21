@@ -59,7 +59,7 @@ describe("MessagePaneService", () => {
 		appMessagesState$ = new BehaviorSubject(mockMessageCollection);
 		(<Spy>mockStore.pipe).and.returnValue(appMessagesState$);
 
-		messagePaneService = new MessagePaneServiceHelper(mockLogger, mockStore);
+		messagePaneService = new MessagePaneServiceHelper(mockLogger, <Store<StarkUIApplicationState>>(<unknown>mockStore));
 	});
 
 	afterEach(() => {
