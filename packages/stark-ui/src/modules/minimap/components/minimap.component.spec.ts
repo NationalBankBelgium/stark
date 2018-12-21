@@ -12,7 +12,7 @@ import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing
 import { Component, EventEmitter, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { ItemVisibility } from "@nationalbankbelgium/stark-ui";
+import { ItemVisibility } from "./item-visibility.intf";
 
 @Component({
 	selector: `host-component`,

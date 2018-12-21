@@ -12,7 +12,10 @@ import {
 	Renderer2,
 	ViewEncapsulation
 } from "@angular/core";
-import { ItemVisibility, StarkDOMUtil, StarkMinimapItemProperties } from "@nationalbankbelgium/stark-ui";
+
+import { ItemVisibility } from "./item-visibility.intf";
+import { StarkMinimapItemProperties } from "./item-properties.intf";
+import { StarkDOMUtil } from "../../../util/dom";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 export type StarkMinimapComponentMode = "compact";
