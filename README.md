@@ -2,6 +2,9 @@
   <img src="packages/stark-core/assets/logo/stark_logo_black.png" alt="Stark : a powerful front-end framework" width="150" height="60">
 </p>
 
+> An Angular 6+ based front-end framework built on top of [Angular](https://angular.io)...
+> Stark features an awesome reusable build using [Webpack](https://webpack.js.org/) and built-in support for state of the art front-end tech
+
 [![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-core.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
 [![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-core.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
 [![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
@@ -11,23 +14,19 @@
 [![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE) [![Greenkeeper badge](https://badges.greenkeeper.io/NationalBankBelgium/stark.svg)](https://greenkeeper.io/)
+[![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE)
+[![Greenkeeper badge](https://badges.greenkeeper.io/NationalBankBelgium/stark.svg)](https://greenkeeper.io/)
 [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=dXkxd0JnL0V6TlRuVkszSGs5TDJscWFPOXdNL2hrMFdZREtMeEQ0SXU5RT0tLTBLZVJOb1JPR3pnUVhVY1NNMUtvdVE9PQ==--32b9d322c064334a80a3409239111be75d3d6ddd)](https://www.browserstack.com/automate/public-build/dXkxd0JnL0V6TlRuVkszSGs5TDJscWFPOXdNL2hrMFdZREtMeEQ0SXU5RT0tLTBLZVJOb1JPR3pnUVhVY1NNMUtvdVE9PQ==--32b9d322c064334a80a3409239111be75d3d6ddd)
-
-# Stark
-
-> An Angular 5+ based front-end framework built on top of [Angular](https://angular.io)
-> Stark features... An awesome reusable build using [Webpack](https://webpack.js.org/), built-in support for state of the art front-end tech
 
 Stark provides main building blocks for accelerating front-end development:
 
 -   a solid reusable build based on Webpack
--   a starter project inspired by [Angular Starter](https://github.com/gdi2290/angular-starter) by [AngularClass](https://angularclass.com) and Google's [Web Starterk Kit](https://github.com/google/web-starter-kit)
--   core modules providing reusable APIs (e.g., reactive client for RESTful APIs based on [NBB's RESTful API Design Guide](https://github.com/NationalBankBelgium/REST-API-Design-Guide/wiki), routing, logging, log shipping, ...)
--   UI modules providing reusable UI components (e.g., data table, message pane, ...) and themes
--   a showcase application containing
+-   a [stater](/starter) project inspired by [Angular Starter](https://github.com/gdi2290/angular-starter) by [AngularClass](https://angularclass.com) and Google's [Web Starter Kit](https://github.com/google/web-starter-kit)
+-   [core modules](https://stark.nbb.be/api-docs/stark-core/latest/) providing reusable APIs (e.g., reactive client for RESTful APIs based on [NBB's RESTful API Design Guide](https://github.com/NationalBankBelgium/REST-API-Design-Guide/wiki), routing, logging, log shipping, ...)
+-   [UI modules](https://stark.nbb.be/api-docs/stark-ui/latest/) providing reusable UI components (e.g., data table, message pane, ...) and themes
+-   a [showcase](https://stark.nbb.be) application containing
+    -   demos of all components/services along with their API
     -   our [living style guide](https://www.smashingmagazine.com/2016/05/creating-a-living-style-guide-case-study/)
-    -   a showcase of all components/services along with their API
     -   our developer guide
 
 Stark modules are like LEGO blocks: add what you need, no less, no more. If you don't like our defaults then you may replace/override/ignore anything you fancy.
@@ -44,7 +43,7 @@ Stark's reusable build integrates support for:
 -   [Code splitting](https://robertknight.github.io/posts/webpack-dll-plugins/)
 -   [Tree shaking](https://webpack.js.org/guides/tree-shaking/) to automatically remove unused code from your production bundle
 -   [Hot Module Replacement](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html) with [@angularclass/hmr](https://github.com/angularclass/angular-hmr) and [@angularclass/hmr-loader](https://github.com/angularclass/angular-hmr-loader)
--   Minification & uglyfication
+-   Minification & uglification
 -   Cache busting with file hashes
 -   [Tests](https://angular.io/docs/ts/latest/guide/testing.html): [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), with source maps support, possibility to execute subsets of the tests, ...
 -   Tests code coverage with [Istanbul](https://github.com/gotwarlost/istanbul)
@@ -54,26 +53,38 @@ Stark's reusable build integrates support for:
 -   Local testing with fake back-ends using [json-server](https://github.com/typicode/json-server)
 -   Router visualization with [UI-Router Visualizer](https://github.com/ui-router/visualizer)
 
+## Stark packaging
+
+All the Stark packages are built following the [Angular Package Format](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/preview) so the following bundles are provided:
+
+-   FESM2015
+-   FESM5
+-   ESM2015
+-   ESM5
+-   UMD
+
+So they can be consumed by [Angular CLI](https://github.com/angular/angular-cli), [Webpack](https://github.com/webpack/webpack) or [SystemJS](https://github.com/systemjs/systemjs).
+
 ## Developer guide
 
 ### [End-to-End Testing](docs/E2ETESTING.md)
 
 TODO add links to developer guide sections
 
-### Releases
+## Releases
 
 Stark releases are available on npm: https://www.npmjs.com/settings/nationalbankbelgium/packages
-
-### Contributing
-
-Please follow our [contribution guidelines](/CONTRIBUTING.md).
-
-To know how to release Stark, refer to [this page](/RELEASE.md).
 
 ### Snapshot builds
 
 Each and every day, a new snapshot of Stark is built, tested and published on npm: https://www.npmjs.com/settings/nationalbankbelgium/packages
 See [this page](/SNAPSHOTS.md) for more information about the process behind this.
+
+## Contributing
+
+Please follow our [contribution guidelines](/CONTRIBUTING.md).
+
+To know how to release Stark, refer to [this page](/RELEASE.md).
 
 ## Authors
 
@@ -104,8 +115,8 @@ This project and all associated source code is licensed under the terms of the [
 
 ## Showcase and Documentation
 
-Stark showcase and documentation can be found at <a href="https://stark.nbb.be">the following location</a>.
-There, you'll find links about :
+The Stark showcase and the documentation can be found at [the following location](https://stark.nbb.be).
+There, you'll find links about:
 
 -   the latest api-docs for stark-core
 -   the previous api-docs for stark-core

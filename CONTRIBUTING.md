@@ -43,7 +43,7 @@ You can _request_ a new feature by submitting an issue to our repository. If you
 Before you submit an issue, please search the issue tracker, maybe an issue for your problem already exists and the discussion might inform you of workarounds readily available.
 
 We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. In order to reproduce bugs, we will systematically ask you to provide a minimal reproduction scenario using [Plunker](https://plnkr.co).
-Having a live, reproductible scenario gives us a wealth of important information without going back & forth to you with additional questions like:
+Having a live, reproducible scenario gives us a wealth of important information without going back & forth to you with additional questions like:
 
 -   version of Stark & Angular used
 -   3rd party libraries and their versions
@@ -184,7 +184,7 @@ If you're the one others will collaborate with, then make sure to publish your f
 If you're helping another developer implement a feature, then, assuming he has published his feature branch on his fork:
 
 -   add the other developer's fork as a remote: `git remote add <username> https://github.com/<username>/stark`
--   fetch their changes: `git fetch <username>`
+-   fetch his changes: `git fetch <username>`
 -   create your own corresponding feature branch; assuming he has created `<username>/feature/<name>` then
     -   `git checkout -b <name> feature/<name>`
 -   publish your version of the feature branch on your fork
@@ -341,13 +341,13 @@ Start hacking :)
 If you want to test/validate your changes against the starter, then you can use the following scripts from the root:
 
 -   rebuild: `npm run build`
--   update the starter: `npm run update-starter`
+-   update the starter: `npm run update:starter`
 -   run the starter: `npm run starter`
 
 If you want to integrate examples or update code in the showcase and validate your changes, then you can use the following scripts from the root:
 
 -   rebuild: `npm run build`
--   update the showcase: `npm run update-showcase`
+-   update the showcase: `npm run update:showcase`
 -   run the showcase: `npm run showcase`
 
 If you only want to build a subset of stark then you can
@@ -374,11 +374,11 @@ If you want to clean up the generated dist folders, you can
 
 ### Cleaning up node_modules folder and package-lock.json
 
-If you want to clean up completely the installed node_modules and reinstall later on from scratch (without the package-lock.json file), you can
+If you want to clean up completely the installed _node_modules_ and reinstall later on from scratch (without the package-lock.json file), you can
 
 -   execute one of the `clean:modules:stark-<name>` npm scripts; for example: `npm run clean:modules:stark-core` or `npm run clean:modules:stark-build`
 -   navigate to the package folder and run the `clean:modules` npm script; for example: `npm run clean:modules`
--   execute the `clean:modules:all` npm script to clean up every modules files in your project; for example: `npm run clean:modules:all`
+-   execute the `clean:modules:all` npm script to clean up every _node_modules_ folder in your project; for example: `npm run clean:modules:all`
 
 ## Documentation
 
@@ -422,7 +422,7 @@ Must be one of the following:
 -   **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 -   **refactor**: A code change that neither fixes a bug nor adds a feature
 -   **perf**: A code change that improves performance
--   **test**: Adding missing tests
+-   **test**: Adding missing tests or correcting existing tests
 -   **build**: Changes that affect the build system or external dependencies
 -   **ci**: Changes to our CI configuration files and scripts
 -   **chore**: Changes to the build process or auxiliary tools and libraries such as documentation generation
@@ -432,24 +432,21 @@ Must be one of the following:
 
 Must be one of the following:
 
--   **core**
--   **ui**
--   **test**
--   **build**
 -   **accessibility**
+-   **build**
 -   **build-main**
 -   **developer-guide**
 -   **docs**
 -   **qa**
+-   **release**
 -   **stark-all**
 -   **stark-build**
 -   **stark-core**
 -   **stark-demo**
--   **stark-showcase**
--   **stark-starter**
 -   **stark-rbac**
+-   **stark-starter**
+-   **stark-testing**
 -   **stark-ui**
--   **testing**
 
 If the scope you want to specify is not in the list, you can ask to add it or add it in the commitlint
 configuration file (`commitlint.config.js`) in the root.
@@ -508,7 +505,7 @@ Breaks foo.bar api, foo.baz should be used instead
 feat(directive): ng:disabled, ng:checked, ng:multiple, ng:readonly, ng:selected
 
 New directives for proper binding these attributes in older browsers (IE).
-Added coresponding description, live examples and e2e tests.
+Added corresponding description, live examples and e2e tests.
 
 Closes #351
 ```
