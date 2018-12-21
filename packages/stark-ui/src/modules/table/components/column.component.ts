@@ -11,6 +11,7 @@ import {
 	ViewEncapsulation
 } from "@angular/core";
 import { MatColumnDef } from "@angular/material/table";
+import { TranslateService } from "@ngx-translate/core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
@@ -162,8 +163,9 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Class constructor
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param translateService - the translation service of the application
 	 */
-	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
+	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef, private translateService: TranslateService) {
 		super(renderer, elementRef);
 	}
 
@@ -171,7 +173,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Returns the header label of the column if it's specified. If not, simply returns the name of the column
 	 */
 	public getHeaderLabel(): string {
-		return this.headerLabel ? this.headerLabel : this.name;
+		return this.translateService.instant(this.headerLabel ? this.headerLabel : this.name);
 	}
 
 	/**

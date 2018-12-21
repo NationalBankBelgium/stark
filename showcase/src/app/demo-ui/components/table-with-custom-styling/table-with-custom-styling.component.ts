@@ -40,11 +40,11 @@ export class TableWithCustomStylingComponent implements OnInit {
 			{ name: "id", label: "Id", headerClassName: "large", cellClassName: "large" },
 			{
 				name: "title",
-				label: "Title",
+				label: "SHOWCASE.DEMO.TABLE.LABELS.TITLE",
 				cellFormatter: (value: { label: string }): string => "~" + value.label,
 				cellClassName: (title: { value: number }) => (title.value < 5 ? "danger" : title.value < 9 ? "warning" : "success")
 			},
-			{ name: "description", label: "Description" }
+			{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION" }
 		];
 
 		this.filter = { globalFilterPresent: false, columns: [] };

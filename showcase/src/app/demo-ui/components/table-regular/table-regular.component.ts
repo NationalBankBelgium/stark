@@ -45,13 +45,13 @@ export class TableRegularComponent implements OnInit {
 			{ name: "id", label: "Id", isFilterable: true, isSortable: true },
 			{
 				name: "title",
-				label: "Title",
+				label: "SHOWCASE.DEMO.TABLE.LABELS.TITLE",
 				cellFormatter: (value: { label: string }): string => "~" + value.label,
 				isFilterable: true,
 				isSortable: true,
 				compareFn: (n1: { value: number }, n2: { value: number }) => n1.value - n2.value
 			},
-			{ name: "description", label: "Description", isFilterable: true, isSortable: true }
+			{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION", isFilterable: true, isSortable: true }
 		];
 
 		this.order = ["title", "-description", "id"];

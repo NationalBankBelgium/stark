@@ -252,6 +252,10 @@
         "TITLE": "Stark slider"
       },
       "TABLE": {
+        "LABELS": {
+          "TITLE": "Titel",
+          "DESCRIPTION": "Omschrijving"
+        },
         "REGULAR": "Normale tabel",
         "WITH_SELECTION": "Tabel met selectie",
         "WITH_CUSTOM_ACTIONS": "Tabel met aangepaste acties",
