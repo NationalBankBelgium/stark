@@ -48,7 +48,7 @@
 			[options]="paginationConfig.itemsPerPageOptions"
 			[value]="paginationConfig.itemsPerPage"
 			placeholder=""
-			(dropdownSelectionChanged)="onChangeItemsPerPage($event)"
+			(selectionChanged)="onChangeItemsPerPage($event)"
 			dropdownId="items-per-page-{{ htmlSuffixId }}"
 			dropdownName="items-per-page-{{ htmlSuffixId }}"
 		></stark-dropdown>

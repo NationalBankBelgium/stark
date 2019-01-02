@@ -93,6 +93,7 @@
         "IO": "Informatica-infrastructuur en operaties",
         "MULTIPLE": "Meerdere selectie",
         "MULTIPLE_REQUIRED": "Gewenste meerdere selectie",
+        "REACTIVE_FORM": "Reactive form",
         "REQUIRED": "Dropdown met gewenste keuze",
         "SELECTED_VALUE": "Geselecteerde waarde ",
         "SELECTED_VALUES": "Geselecteerde waarden ",

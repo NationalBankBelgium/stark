@@ -18,6 +18,9 @@ export const translationsFr: object = {
 			SEARCH: "Chercher",
 			NEW_ITEM: "Nouveau",
 			SAVE_AND_NEXT: "Sauver et Suivant"
+		},
+		VALIDATION: {
+			REQUIRED: "Ce champ est obligatoire"
 		}
 	}
 };

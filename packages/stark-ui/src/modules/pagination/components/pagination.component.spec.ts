@@ -650,16 +650,21 @@ describe("PaginationComponent", () => {
 			expect(component.paginationConfig.page).toBe(1);
 		});
 
-		it("should call setPageNumbers 1 time", () => {
-			spyOn(component, "setPageNumbers");
+		it("should change itempsPerPage to 8", () => {
 			component.onChangeItemsPerPage((<number[]>component.paginationConfig.itemsPerPageOptions)[1]);
-			expect(component.setPageNumbers).toHaveBeenCalledTimes(1);
+			expect(component.paginationConfig.itemsPerPage).toBe(8);
 		});
 
 		it("should call onChangePagination 1 time", () => {
 			spyOn(component, "onChangePagination");
 			component.onChangeItemsPerPage((<number[]>component.paginationConfig.itemsPerPageOptions)[1]);
 			expect(component.onChangePagination).toHaveBeenCalledTimes(1);
+		});
+
+		it("should NOT call onChangePagination if current 'itemsPerPage' value is the same than the new one", () => {
+			spyOn(component, "onChangePagination");
+			component.onChangeItemsPerPage((<number[]>paginationConfig.itemsPerPageOptions)[0]);
+			expect(component.paginationConfig.page).toBe(paginationConfig.page);
 		});
 	});
 

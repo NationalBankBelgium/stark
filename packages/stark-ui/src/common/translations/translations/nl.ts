@@ -18,6 +18,9 @@ export const translationsNl: object = {
 			SEARCH: "Zoeken",
 			NEW_ITEM: "Nieuw",
 			SAVE_AND_NEXT: "Bewaar en volgende"
+		},
+		VALIDATION: {
+			REQUIRED: "Dit veld is verplicht"
 		}
 	}
 };
