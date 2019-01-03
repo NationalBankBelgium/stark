@@ -1,13 +1,13 @@
-$icon-size: 18px;
-
 @mixin stark-button-color($color, $contrast) {
   &.mat-button,
   &.mat-icon-button,
   &.mat-stroked-button {
     color: $color;
+
     .mat-button-focus-overlay {
       background-color: rgba($color: $color, $alpha: 0.12);
     }
+
     .mat-ripple-element {
       background-color: rgba($color: $color, $alpha: 0.1);
     }
@@ -18,6 +18,7 @@ $icon-size: 18px;
   &.mat-mini-fab {
     color: $contrast;
     background-color: $color;
+
     .mat-ripple-element {
       background-color: rgba($color: $contrast, $alpha: 0.1);
     }
@@ -50,13 +51,7 @@ $icon-size: 18px;
 }
 
 .mat-icon.stark-small-icon {
-  line-height: $icon-size;
-  height: $icon-size;
-  width: $icon-size;
-  svg {
-    height: $icon-size;
-    width: $icon-size;
-  }
+  transform: scale(0.75);
 }
 
 .mat-button,
@@ -67,14 +62,4 @@ $icon-size: 18px;
 .mat-fab,
 .mat-mini-fab {
   text-transform: uppercase;
-}
-
-button {
-  &.mat-mini-fab,
-  &.mat-fab {
-    line-height: $icon-size;
-    .mat-button-wrapper {
-      line-height: $icon-size;
-    }
-  }
 }
