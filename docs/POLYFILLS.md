@@ -1,11 +1,11 @@
 # Polyfills
 
-In the case you want your application to be compatible with non modern browsers (i.e. Internet Explorer) or browsers that don't support some of the latest standards,  you might be interested in polyfills. 
-Stark doesn't use any polyfills by default, but in case you need them, you can follow the steps mentioned below. 
+In the case you want your application to be compatible with non modern browsers (i.e. Internet Explorer) or browsers that don't support some of the latest standards, you might be interested in polyfills.
+Stark doesn't use any polyfills by default, but in case you need them, you can follow the steps mentioned below.
 
 ## Creating the polyfills file
 
-An empty file called `polyfills.browser.ts` should be created at the following location: 
+An empty file called `polyfills.browser.ts` should be created at the following location:
 `src > polyfills.browser.ts`
 
 ## Importing all the polyfills needed
@@ -45,6 +45,12 @@ import "core-js/es6";
 import "core-js/es7/reflect";
 import "core-js/es7/string";
 import "core-js/stage/4";
+/**
+ * IE11 does not support iteration on certain DOM collections (NodeList).
+ * This polyfill is specifically needed for the animation on mat-menu used in stark-table.
+ * More info: https://github.com/angular/angular/issues/27887
+ */
+import "core-js/modules/web.dom.iterable";
 
 /**
  * IE11 and Edge require this to support Server-sent events
@@ -84,16 +90,16 @@ import "zone.js/dist/zone";
 // import 'zone.js/dist/long-stack-trace-zone'
 /* tslint:enable */
 ```
-For more information about which polyfills are required to support the Angular feature you want to use, 
-feel free to refer to [Angular browser support guide](https://angular.io/guide/browser-support#mandatory-polyfills). 
 
+For more information about which polyfills are required to support the Angular feature you want to use,
+feel free to refer to [Angular browser support guide](https://angular.io/guide/browser-support#mandatory-polyfills).
 
 ## Adding the polyfills file to the angular.json
 
 Adapt (if needed) the path of your `polyfills.browsers.ts` file in the `angular.json` file of your project.
- 
+
 ```
-{ 
+{
   "projects": {
     "starter": {
       ...
