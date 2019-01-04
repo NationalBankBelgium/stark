@@ -67,7 +67,7 @@ So they can be consumed by [Angular CLI](https://github.com/angular/angular-cli)
 
 ## Developer guide
 
-### [End-to-End Testing](docs/E2ETESTING.md)
+### [End-to-End Testing](docs/E2E_TESTING.md)
 
 TODO add links to developer guide sections
 
