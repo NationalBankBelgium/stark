@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { STARK_ROUTING_SERVICE, StarkRoutingService } from "../../routing/services";
-import { starkAppExitStateName, starkAppInitStateName } from "../routes";
+import { starkAppExitStateName, starkAppInitStateName } from "../constants";
 
 /**
  * Name of the component

@@ -341,8 +341,13 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
-		if (changes["data"] && !changes["data"].isFirstChange() && this.resetFilterValueOnDataChange()) {
-			this.applyFilter();
+		if (changes["data"] && !changes["data"].isFirstChange()) {
+			this.resetFilterValueOnDataChange();
+
+			// When data changes, we should sort it again in any case because:
+			//   * orderProperties could contain some sort rules
+			//   * every column could have a sort rule defined
+			this.sortData();
 		}
 
 		if (changes["orderProperties"] && !changes["orderProperties"].isFirstChange()) {
@@ -644,6 +649,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			.filter((columnToFilter: StarkTableColumnComponent) => columnToFilter.sortDirection)
 			.sort((column1: StarkTableColumnComponent, column2: StarkTableColumnComponent) => column1.sortPriority - column2.sortPriority);
 
+		// FIXME If "multiSort" is empty or equal to "true", isMultiSorting is true. Otherwise, "isMultisorting" should stay false.
+		// Should remove this condition ?
 		this.isMultiSorting = sortableColumns.length > 1;
 
 		this.data.sort((row1: object, row2: object) => {

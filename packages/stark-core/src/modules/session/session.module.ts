@@ -9,7 +9,8 @@ import { starkSessionReducers } from "./reducers";
 import { StarkSessionConfig, STARK_SESSION_CONFIG } from "./entities";
 import { STARK_SESSION_SERVICE, StarkSessionServiceImpl } from "./services";
 import { STARK_ROUTING_SERVICE, StarkRoutingService } from "../routing/services";
-import { SESSION_STATES, starkLoginStateName, starkPreloadingStateName } from "./routes";
+import { SESSION_STATES } from "./routes";
+import { starkLoginStateName, starkPreloadingStateName } from "./constants";
 import { StarkAppContainerComponent } from "./components";
 
 @NgModule({

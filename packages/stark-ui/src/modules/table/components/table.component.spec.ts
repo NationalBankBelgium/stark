@@ -138,28 +138,16 @@ describe("TableComponent", () => {
 	});
 
 	describe("on change", () => {
-		it("should trigger resetFilterValueOnDataChange and applyFilter methods when data changes", () => {
+		it("should trigger resetFilterValueOnDataChange and sortData methods when data changes", () => {
 			spyOn(component, "resetFilterValueOnDataChange");
-			spyOn(component, "applyFilter");
+			spyOn(component, "sortData");
 
-			(<Spy>component.resetFilterValueOnDataChange).and.returnValue(false);
 			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
+			(<Spy>component.sortData).calls.reset();
 			hostComponent.dummyData = [{ name: "test-data" }];
 			hostFixture.detectChanges();
-
-			(<Spy>component.resetFilterValueOnDataChange).and.returnValue(false);
-			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
-			hostComponent.dummyData = [{ name: "test-data-2" }];
-			hostFixture.detectChanges();
 			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
-			expect(component.applyFilter).not.toHaveBeenCalled();
-
-			(<Spy>component.resetFilterValueOnDataChange).and.returnValue(true);
-			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
-			hostComponent.dummyData = [{ name: "test-data-1" }];
-			hostFixture.detectChanges();
-			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
-			expect(component.applyFilter).toHaveBeenCalledTimes(1);
+			expect(component.sortData).toHaveBeenCalledTimes(1);
 		});
 
 		it("should assign right value to isFixedHeaderEnabled when fixedHeader changes", () => {
