@@ -37,7 +37,7 @@ import { StarkCoreApplicationState } from "../../../common/store";
 import { selectStarkSession } from "../reducers";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 import { StarkValidationErrorsUtil } from "../../../util";
-import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../routes";
+import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../constants";
 
 /**
  * @ignore

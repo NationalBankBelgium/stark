@@ -41,7 +41,7 @@ import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants"
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
-import { starkAppExitStateName, starkAppInitStateName } from "../../session/routes";
+import { starkAppExitStateName, starkAppInitStateName } from "../../session/constants";
 
 /**
  * @ignore
