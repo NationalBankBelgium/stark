@@ -142,9 +142,9 @@ module.exports = options => {
 					// Mark files inside `@angular/core` as using SystemJS style dynamic imports.
 					// Removing this will cause deprecation warnings to appear.
 					test: /[\/\\]@angular[\/\\]core[\/\\].+\.js$/,
-					parser: { system: true },
+					parser: { system: true }
 				},
-				
+
 				// TODO could we use BuildOptimizer in all environments?
 				// BuildOptimizer should only be used with AOT
 				// see https://github.com/angular/angular-cli/issues/8594
