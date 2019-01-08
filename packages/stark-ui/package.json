@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@angular/material-moment-adapter": "7.2.0",
-    "@mdi/angular-material": "3.2.89",
+    "@mdi/angular-material": "3.3.92",
     "@types/nouislider": "9.0.4",
     "@types/prismjs": "1.9.0",
     "normalize.css": "8.0.1",
