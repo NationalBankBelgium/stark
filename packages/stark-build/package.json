@@ -19,7 +19,7 @@
   },
   "types": "typings/index.d.ts",
   "dependencies": {
-    "@angular-devkit/build-angular": "0.11.4",
+    "@angular-devkit/build-angular": "0.12.1",
     "@angular-devkit/build-optimizer": "0.11.4",
     "@babel/core": "7.2.2",
     "@babel/preset-env": "7.2.3",
