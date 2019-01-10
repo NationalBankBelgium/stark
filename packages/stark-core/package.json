@@ -35,7 +35,7 @@
     "@ngx-translate/core": "11.0.1",
     "@types/node": "8.10.37",
     "@types/uuid": "3.4.4",
-    "@uirouter/angular": "2.0.2",
+    "@uirouter/angular": "2.0.3",
     "cerialize": "0.1.18",
     "class-validator": "0.7.3",
     "deep-freeze-strict": "1.1.1",
