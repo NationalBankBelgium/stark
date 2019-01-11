@@ -10,6 +10,7 @@
 		(openedChange)="toggleClassesOnOpen($event)"
 		(openedStart)="setClassOnOpenStart()"
 		(closedStart)="setClassOnCloseStart()"
+		[autoFocus]="false"
 	>
 		<ng-container *ngIf="sidenavLeftType === 'regular'">
 			<ng-content class="regular" select="[stark-app-sidenav-left]"></ng-content>

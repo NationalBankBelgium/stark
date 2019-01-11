@@ -1,8 +1,14 @@
-import { Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { MatSidenav, MatSidenavContainer, MatDrawerToggleResult } from "@angular/material/sidenav";
 import { from, Subscription } from "rxjs";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import {
+	STARK_LOGGING_SERVICE,
+	StarkLoggingService,
+	STARK_ROUTING_SERVICE,
+	StarkRoutingService,
+	StarkRoutingTransitionHook
+} from "@nationalbankbelgium/stark-core";
 import { StarkAppSidebarOpenEvent, StarkAppSidebarService, STARK_APP_SIDEBAR_SERVICE } from "../services";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -26,6 +32,14 @@ const componentName: string = "stark-app-sidebar";
 	}
 })
 export class StarkAppSidebarComponent extends AbstractStarkUiComponent implements OnDestroy, OnInit {
+	/**
+	 * When on smaller devices ( width < 1280px ) the sidebar is automatically closed after navigating.
+	 * Can be set to false to prevent this behaviour.
+	 * Default: true
+	 */
+	@Input()
+	public closeOnNavigate: boolean = true;
+
 	/**
 	 * Reference to the MatSidenavContainer embedded in this component
 	 */
@@ -87,6 +101,11 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	public toggleSidebarSubscription: Subscription;
 
 	/**
+	 * Function to deregister the routing transition hook
+	 */
+	public deregisterTransitionHook: Function;
+
+	/**
 	 * Class constructor
 	 * @param logger - The sidebar service of the application
 	 * @param sidebarService - The sidebar service of the application
@@ -97,6 +116,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		public breakpointObserver: BreakpointObserver,
 		renderer: Renderer2,
 		elementRef: ElementRef
@@ -128,6 +148,10 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 		this.breakpointObserver.observe([this.mediaQueryGtLg]).subscribe((state: BreakpointState) => {
 			this.onObserveBreakpoints(state);
 		});
+
+		this.deregisterTransitionHook = this.routingService.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, {}, () => {
+			this.onSuccessfulTransition();
+		});
 	}
 
 	/**
@@ -138,6 +162,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 		this.closeSidebarSubscription.unsubscribe();
 		this.toggleSidebarSubscription.unsubscribe();
 		this.breakpointObserver.ngOnDestroy();
+		this.deregisterTransitionHook();
 	}
 
 	/**
@@ -222,6 +247,15 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 					this.sidenavLeftMode = "over";
 				}
 			}
+		}
+	}
+
+	/**
+	 * Navigation handler
+	 */
+	public onSuccessfulTransition(): void {
+		if (this.closeOnNavigate && !this.breakpointObserver.isMatched(this.mediaQueryGtLg)) {
+			this.sidebarService.close();
 		}
 	}
 

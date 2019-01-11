@@ -1,26 +1,87 @@
+/* tslint:disable:completed-docs */
+import { Subject } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { BreakpointState, BreakpointObserver } from "@angular/cdk/layout";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { TransitionHookFn, TransitionStateHookFn, HookMatchCriteria } from "@uirouter/core";
+import {
+	STARK_LOGGING_SERVICE,
+	StarkLoggingService,
+	STARK_ROUTING_SERVICE,
+	StarkRoutingService,
+	StarkRoutingTransitionHook
+} from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppSidebarComponent } from "./app-sidebar.component";
+import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "../services/app-sidebar.service.intf";
 import { MockAppSidebarService } from "../testing/app-sidebar.mock";
-import { STARK_APP_SIDEBAR_SERVICE } from "../services/app-sidebar.service.intf";
-import { BreakpointState } from "@angular/cdk/layout";
+
+// Definitions
+/**
+ * Defines the breakpoint set by the app-sidebar component.
+ */
+const BREAKPOINT_STRING: string = "(min-width: 1280px)";
+let _fakeBreakPointObservable: Subject<BreakpointState>;
+
+/**
+ * Use this function to mock the screen resizing (breakpoint triggering)
+ * {@link BreakpointObserver}
+ */
+function simulateBreakPointStateChange(breakPointState: BreakpointState): void {
+	_fakeBreakPointObservable.next(breakPointState);
+}
+
+/**
+ * Placeholder for function set by the app-sidebar component through `mockStarkRoutingService.addTransitionHook` function.
+ * Use this to trigger the flow following a navigation.
+ */
+let mockNavigationTrigger: () => void;
+
+let fixture: ComponentFixture<StarkAppSidebarComponent>;
+let component: StarkAppSidebarComponent;
+
+// Mocked services
+let mockStarkLoggingService: jasmine.SpyObj<StarkLoggingService>;
+let mockStarkAppSideBarService: jasmine.SpyObj<StarkAppSidebarService>;
+let mockStarkRoutingService: jasmine.SpyObj<StarkRoutingService>;
+let mockBreakPointObserver: jasmine.SpyObj<BreakpointObserver>;
 
 describe("AppSidebarComponent", () => {
-	let fixture: ComponentFixture<StarkAppSidebarComponent>;
-	let component: StarkAppSidebarComponent;
+	beforeEach(() => {
+		mockStarkLoggingService = new MockStarkLoggingService() as jasmine.SpyObj<MockStarkLoggingService>;
+		mockStarkAppSideBarService = new MockAppSidebarService() as jasmine.SpyObj<MockAppSidebarService>;
+		mockStarkRoutingService = new MockStarkRoutingService() as jasmine.SpyObj<MockStarkRoutingService>;
+		// add functionality to the `addTransitionHook` Spy
+		mockStarkRoutingService.addTransitionHook.and.callFake(
+			(lifecycleHook: string, matchCriteria: HookMatchCriteria, callback: TransitionHookFn | TransitionStateHookFn): Function => {
+				expect(lifecycleHook).toBe(StarkRoutingTransitionHook.ON_SUCCESS);
+				expect(matchCriteria).toEqual({});
+				mockNavigationTrigger = <() => void>callback;
+				return () => {
+					/*Do Nothing*/
+				};
+			}
+		);
+
+		mockBreakPointObserver = jasmine.createSpyObj("BreakPointObserver", ["isMatched", "observe"]);
+		// add functionality to the `observe` Spy
+		mockBreakPointObserver.observe.and.callFake((value: string | string[]) => {
+			expect([[BREAKPOINT_STRING], BREAKPOINT_STRING]).toContain(value);
+			return _fakeBreakPointObservable;
+		});
+	});
 
 	beforeEach(async(() => {
-		const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 		return TestBed.configureTestingModule({
 			declarations: [StarkAppSidebarComponent],
 			imports: [CommonModule, MatSidenavModule, NoopAnimationsModule],
 			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-				{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockAppSidebarService() }
+				{ provide: STARK_LOGGING_SERVICE, useValue: mockStarkLoggingService },
+				{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: mockStarkAppSideBarService },
+				{ provide: STARK_ROUTING_SERVICE, useValue: mockStarkRoutingService },
+				{ provide: BreakpointObserver, useValue: mockBreakPointObserver }
 			]
 		}).compileComponents();
 	}));
@@ -28,169 +89,239 @@ describe("AppSidebarComponent", () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkAppSidebarComponent);
 		component = fixture.componentInstance;
+		_fakeBreakPointObservable = new Subject<BreakpointState>();
 		fixture.detectChanges();
 	});
 
-	describe("Screen size change handler", () => {
-		describe("From large desktop screen to smaller", () => {
-			const state: BreakpointState = {
-				matches: false,
-				breakpoints: {}
-			};
+	describe("App sidebar events handling", sidebarEventsHandlingTests);
 
-			it("left sidebar should be over mode", () => {
-				component.sidenavLeftMode = "side";
-				component.appSidenavLeft.opened = false;
-				fixture.detectChanges();
-				component.onObserveBreakpoints(state);
-				expect(component.sidenavLeftMode).toBe("over");
-			});
+	describe("Screen size change handler", screenSizeChangeHandlingTests);
 
-			it("left sidebar should close when is open with type menu", () => {
-				spyOn(component, "closeSidenav");
-				component.appSidenavLeft.opened = true;
-				component.sidenavLeftType = "menu";
-				fixture.detectChanges();
-				component.onObserveBreakpoints(state);
-				expect(component.closeSidenav).toHaveBeenCalledTimes(1);
-			});
-
-			it("left sidebar should not close when is open with type regular", () => {
-				component.appSidenavLeft.opened = true;
-				spyOn(component, "closeSidenav");
-				component.sidenavLeftType = "regular";
-				fixture.detectChanges();
-				component.onObserveBreakpoints(state);
-				expect(component.closeSidenav).toHaveBeenCalledTimes(0);
-			});
-		});
-
-		describe("From smaller screen to large desktop", () => {
-			const state: BreakpointState = {
-				matches: true,
-				breakpoints: {}
-			};
-
-			it("left sidebar should be side mode", () => {
-				component.sidenavLeftMode = "over";
-				fixture.detectChanges();
-				component.onObserveBreakpoints(state);
-				expect(component.sidenavLeftMode).toBe("side");
-			});
-
-			it("left sidebar should open with type menu when it is closed", () => {
-				spyOn(component, "openSidenav");
-				component.appSidenavLeft.opened = false;
-				component.sidenavLeftType = "menu";
-				fixture.detectChanges();
-				component.onObserveBreakpoints(state);
-				expect(component.openSidenav).toHaveBeenCalledTimes(1);
-			});
-
-			it("left sidebar should be displayed in side mode when already opened with type menu", () => {
-				component.appSidenavLeft.opened = true;
-				component.sidenavLeftType = "menu";
-				component.sidenavLeftMode = "over";
-				fixture.detectChanges();
-				component.onObserveBreakpoints(state);
-				expect(component.sidenavLeftMode).toBe("side");
-			});
-		});
-	});
-
-	describe("App sidebar events handling", () => {
-		describe("onCloseSidenavs should work as expected", () => {
-			it("sidenavs should close", () => {
-				component.appSidenavLeft.opened = true;
-				component.appSidenavRight.opened = true;
-				component.onCloseSidenavs();
-				expect(component.appSidenavLeft.opened).toBe(false);
-				expect(component.appSidenavRight.opened).toBe(false);
-			});
-		});
-
-		describe("onOpenSidenav should work as expected", () => {
-			it("sidenavs should not open when already opened", () => {
-				spyOn(component, "openSidenav");
-				component.appSidenavLeft.opened = true;
-				fixture.detectChanges();
-				component.onOpenSidenav({
-					sidebar: "left",
-					type: "regular"
-				});
-				expect(component.openSidenav).toHaveBeenCalledTimes(0);
-
-				component.appSidenavRight.opened = true;
-				fixture.detectChanges();
-				component.onOpenSidenav({
-					sidebar: "right"
-				});
-				expect(component.openSidenav).toHaveBeenCalledTimes(0);
-			});
-
-			it("sidenavs should open when closed", () => {
-				spyOn(component, "openSidenav");
-				component.appSidenavLeft.opened = false;
-				fixture.detectChanges();
-				component.onOpenSidenav({
-					sidebar: "left",
-					type: "regular"
-				});
-				expect(component.openSidenav).toHaveBeenCalledTimes(1);
-
-				component.appSidenavRight.opened = false;
-				fixture.detectChanges();
-				component.onOpenSidenav({
-					sidebar: "right"
-				});
-				expect(component.openSidenav).toHaveBeenCalledTimes(2);
-			});
-
-			it("left sidebar should display the menu correctly", () => {
-				component.appSidenavLeft.opened = false;
-				fixture.detectChanges();
-				component.onOpenSidenav({
-					sidebar: "left",
-					type: "menu"
-				});
-				const sidenav: HTMLElement = fixture.nativeElement.querySelector(".stark-app-sidenav-menu");
-				expect(sidenav).toBeDefined();
-			});
-
-			it("left sidebar should close and then open when left sidebar is opened and sidenavLeftType is changed", () => {
-				spyOn(component, "shiftLeftSidenavCallback").and.callThrough();
-				spyOn(component, "closeSidenav").and.callFake(component.shiftLeftSidenavCallback);
-				component.sidenavLeftType = "menu";
-				component.appSidenavLeft.opened = true;
-				fixture.detectChanges();
-				component.onOpenSidenav({
-					sidebar: "left",
-					type: "regular"
-				});
-				expect(component.closeSidenav).toHaveBeenCalledTimes(1);
-				expect(component.shiftLeftSidenavCallback).toHaveBeenCalledTimes(1);
-				expect(component.sidenavLeftType).toBe("regular");
-			});
-		});
-
-		describe("onToggleSidenav should work as expected", () => {
-			it("left sidenav should toggle", () => {
-				spyOn(component, "closeSidenav");
-				component.appSidenavLeft.opened = true;
-				fixture.detectChanges();
-				component.onToggleSidenav({
-					sidebar: "left"
-				});
-				expect(component.closeSidenav).toHaveBeenCalledTimes(1);
-
-				spyOn(component, "openSidenav");
-				component.appSidenavLeft.opened = false;
-				fixture.detectChanges();
-				component.onToggleSidenav({
-					sidebar: "left"
-				});
-				expect(component.openSidenav).toHaveBeenCalledTimes(1);
-			});
-		});
-	});
+	describe("Navigation handler", navigationHandlingTests);
 });
+
+function sidebarEventsHandlingTests(): void {
+	describe("onCloseSidenavs should work as expected", () => {
+		it("sidenavs should close", () => {
+			component.appSidenavLeft.opened = true;
+			component.appSidenavRight.opened = true;
+			component.onCloseSidenavs();
+			expect(component.appSidenavLeft.opened).toBe(false);
+			expect(component.appSidenavRight.opened).toBe(false);
+		});
+	});
+
+	describe("onOpenSidenav should work as expected", () => {
+		it("sidenavs should not open when already opened", () => {
+			spyOn(component, "openSidenav");
+			component.appSidenavLeft.opened = true;
+			fixture.detectChanges();
+			component.onOpenSidenav({
+				sidebar: "left",
+				type: "regular"
+			});
+			expect(component.openSidenav).toHaveBeenCalledTimes(0);
+
+			component.appSidenavRight.opened = true;
+			fixture.detectChanges();
+			component.onOpenSidenav({
+				sidebar: "right"
+			});
+			expect(component.openSidenav).toHaveBeenCalledTimes(0);
+		});
+
+		it("sidenavs should open when closed", () => {
+			spyOn(component, "openSidenav");
+			component.appSidenavLeft.opened = false;
+			fixture.detectChanges();
+			component.onOpenSidenav({
+				sidebar: "left",
+				type: "regular"
+			});
+			expect(component.openSidenav).toHaveBeenCalledTimes(1);
+
+			component.appSidenavRight.opened = false;
+			fixture.detectChanges();
+			component.onOpenSidenav({
+				sidebar: "right"
+			});
+			expect(component.openSidenav).toHaveBeenCalledTimes(2);
+		});
+
+		it("left sidebar should display the menu correctly", () => {
+			component.appSidenavLeft.opened = false;
+			fixture.detectChanges();
+			component.onOpenSidenav({
+				sidebar: "left",
+				type: "menu"
+			});
+			const sidenav: HTMLElement = fixture.nativeElement.querySelector(".stark-app-sidenav-menu");
+			expect(sidenav).toBeDefined();
+		});
+
+		it("left sidebar should close and then open when left sidebar is opened and sidenavLeftType is changed", () => {
+			spyOn(component, "shiftLeftSidenavCallback").and.callThrough();
+			spyOn(component, "closeSidenav").and.callFake(component.shiftLeftSidenavCallback);
+			component.sidenavLeftType = "menu";
+			component.appSidenavLeft.opened = true;
+			fixture.detectChanges();
+			component.onOpenSidenav({
+				sidebar: "left",
+				type: "regular"
+			});
+			expect(component.closeSidenav).toHaveBeenCalledTimes(1);
+			expect(component.shiftLeftSidenavCallback).toHaveBeenCalledTimes(1);
+			expect(component.sidenavLeftType).toBe("regular");
+		});
+	});
+
+	describe("onToggleSidenav should work as expected", () => {
+		it("left sidenav should toggle", () => {
+			spyOn(component, "closeSidenav");
+			component.appSidenavLeft.opened = true;
+			fixture.detectChanges();
+			component.onToggleSidenav({
+				sidebar: "left"
+			});
+			expect(component.closeSidenav).toHaveBeenCalledTimes(1);
+
+			spyOn(component, "openSidenav");
+			component.appSidenavLeft.opened = false;
+			fixture.detectChanges();
+			component.onToggleSidenav({
+				sidebar: "left"
+			});
+			expect(component.openSidenav).toHaveBeenCalledTimes(1);
+		});
+	});
+}
+
+function screenSizeChangeHandlingTests(): void {
+	describe("From large desktop screen to smaller", () => {
+		const state: BreakpointState = {
+			matches: false,
+			breakpoints: {}
+		};
+
+		it("left sidebar should be 'over' mode", () => {
+			component.sidenavLeftMode = "side";
+			component.appSidenavLeft.opened = false;
+			fixture.detectChanges();
+			simulateBreakPointStateChange(state);
+			expect(component.sidenavLeftMode).toBe("over");
+		});
+
+		it("left sidebar should close when open with type 'menu'", () => {
+			spyOn(component, "closeSidenav");
+			component.appSidenavLeft.opened = true;
+			component.sidenavLeftType = "menu";
+			fixture.detectChanges();
+			simulateBreakPointStateChange(state);
+			expect(component.closeSidenav).toHaveBeenCalledTimes(1);
+		});
+
+		// FIXME: this tslint disable flag is due to a bug in 'no-identical-functions' rule (https://github.com/SonarSource/SonarTS/issues/676). Remove it once it is solved
+		/*tslint:disable-next-line:no-identical-functions*/
+		it("left sidebar should not close when open with type 'regular'", () => {
+			spyOn(component, "closeSidenav");
+			component.appSidenavLeft.opened = true;
+			component.sidenavLeftType = "regular";
+			fixture.detectChanges();
+			simulateBreakPointStateChange(state);
+			expect(component.closeSidenav).toHaveBeenCalledTimes(0);
+		});
+	});
+
+	describe("From smaller screen to large desktop", () => {
+		const state: BreakpointState = {
+			matches: true,
+			breakpoints: {}
+		};
+
+		it("left sidebar should be side mode", () => {
+			component.sidenavLeftMode = "over";
+			fixture.detectChanges();
+			simulateBreakPointStateChange(state);
+			expect(component.sidenavLeftMode).toBe("side");
+		});
+
+		it("left sidebar should open with type menu when it is closed", () => {
+			spyOn(component, "openSidenav");
+			component.appSidenavLeft.opened = false;
+			component.sidenavLeftType = "menu";
+			fixture.detectChanges();
+			simulateBreakPointStateChange(state);
+			expect(component.openSidenav).toHaveBeenCalledTimes(1);
+		});
+
+		it("left sidebar should be displayed in side mode when already opened with type menu", () => {
+			component.appSidenavLeft.opened = true;
+			component.sidenavLeftType = "menu";
+			component.sidenavLeftMode = "over";
+			fixture.detectChanges();
+			simulateBreakPointStateChange(state);
+			expect(component.sidenavLeftMode).toBe("side");
+		});
+	});
+}
+
+function navigationHandlingTests(): void {
+	describe("Behaviour when automatic closing is enabled (/ default behaviour).", () => {
+		beforeEach(() => {
+			mockStarkAppSideBarService.close.calls.reset();
+			fixture.detectChanges();
+		});
+
+		it("left sidebar should stay open on larger screen", () => {
+			mockBreakPointObserver.isMatched.and.callFake((value: string | string[]) => {
+				expect([[BREAKPOINT_STRING], BREAKPOINT_STRING]).toContain(value);
+				return true; // screen is >= 1280px
+			});
+			mockNavigationTrigger();
+			fixture.detectChanges();
+			expect(mockStarkAppSideBarService.close).not.toHaveBeenCalled();
+		});
+
+		it("left sidebar should close on smaller screen", () => {
+			mockBreakPointObserver.isMatched.and.callFake((value: string | string[]) => {
+				expect([[BREAKPOINT_STRING], BREAKPOINT_STRING]).toContain(value);
+				return false; // screen is >= 1280px
+			});
+			mockNavigationTrigger();
+			fixture.detectChanges();
+
+			expect(mockStarkAppSideBarService.close).toHaveBeenCalled();
+		});
+	});
+
+	describe("Behaviour when automatic closing is disabled", () => {
+		beforeEach(() => {
+			mockStarkAppSideBarService.close.calls.reset();
+			component.closeOnNavigate = false;
+			fixture.detectChanges();
+		});
+
+		// Function is duplicate, but in a different context (component.closeOnNavigate = false;)
+		/*tslint:disable-next-line:no-identical-functions*/
+		it("left sidebar should stay open on larger screen", () => {
+			mockBreakPointObserver.isMatched.and.callFake((value: string | string[]) => {
+				expect([[BREAKPOINT_STRING], BREAKPOINT_STRING]).toContain(value);
+				return true; // screen is >= 1280px
+			});
+			mockNavigationTrigger();
+			fixture.detectChanges();
+			expect(mockStarkAppSideBarService.close).not.toHaveBeenCalled();
+		});
+
+		it("left sidebar should close on smaller screen", () => {
+			mockBreakPointObserver.isMatched.and.callFake((value: string | string[]) => {
+				expect([[BREAKPOINT_STRING], BREAKPOINT_STRING]).toContain(value);
+				return false; // screen is >= 1280px
+			});
+			mockNavigationTrigger();
+			fixture.detectChanges();
+
+			expect(mockStarkAppSideBarService.close).not.toHaveBeenCalled();
+		});
+	});
+}
