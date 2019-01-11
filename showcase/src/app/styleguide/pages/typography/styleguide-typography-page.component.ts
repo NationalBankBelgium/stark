@@ -15,7 +15,7 @@ export class StyleguideTypographyPageComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.fontFamilyCSS = `
-			font-family: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif";
+			  font-family: "BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif";
 		`;
 
 		this.fontFaceExample = `
@@ -40,7 +40,7 @@ export class StyleguideTypographyPageComponent implements OnInit {
 
 		this.customizeMap = `
 		$stark-typography-theme: (
-			font-family: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+			font-family: "BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
 			display-4: (112px, 112px, 300),
 			display-3: (56px, 56px, 400),
 			display-2: (45px, 48px, 400),

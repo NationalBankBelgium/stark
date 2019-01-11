@@ -24,7 +24,7 @@ import createSpyObj = jasmine.createSpyObj;
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-pagination [htmlSuffixId]="htmlSuffixId" [paginationConfig]="paginationConfig"> </stark-pagination>
+		<stark-pagination [htmlSuffixId]="htmlSuffixId" [paginationConfig]="paginationConfig"></stark-pagination>
 	`
 })
 class TestHostComponent {
@@ -60,7 +60,7 @@ describe("PaginationComponent", () => {
 		const pageNavOptionElements: DebugElement[] = pageNavElement.queryAll(By.css("li"));
 
 		for (const pageNavOption of pageNavOptionElements) {
-			if (pageNavOption.properties["value"] === selectedOption) {
+			if (pageNavOption.nativeElement.textContent === selectedOption) {
 				expect(pageNavOption.classes["active"]).toBe(true);
 			} else {
 				expect(pageNavOption.classes["active"]).toBeFalsy(); // can be undefined or false
@@ -197,9 +197,9 @@ describe("PaginationComponent", () => {
 			expect(pageNavElement.nativeElement.innerHTML).toContain('<li aria-label="Previous" class="previous"');
 			const numberElements: DebugElement[] = pageNavElement.queryAll(By.css(pageNumbersSelector));
 			expect(numberElements.length).toBe(3);
-			expect(numberElements[0].properties["value"]).toBe("1");
-			expect(numberElements[1].properties["value"]).toBe("2");
-			expect(numberElements[2].properties["value"]).toBe("3");
+			expect(numberElements[0].nativeElement.textContent).toBe("1");
+			expect(numberElements[1].nativeElement.textContent).toBe("2");
+			expect(numberElements[2].nativeElement.textContent).toBe("3");
 			assertPageNavSelection(hostFixture.debugElement.childNodes[0], "2");
 			expect(pageNavElement.nativeElement.innerHTML).toContain('<li aria-label="Next" class="next"');
 
@@ -1032,7 +1032,13 @@ describe("PaginationComponent", () => {
 			assertPageNavSelection(hostFixture.debugElement.childNodes[0], "2");
 			assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 
-			const pageTwoElement: DebugElement = hostFixture.debugElement.query(By.css("li[value='3'] a"));
+			const pageTwoElement: DebugElement | undefined = hostFixture.debugElement
+				.queryAll(By.css("li a"))
+				.find((el: DebugElement) => el.nativeElement.textContent === "3");
+			if (!pageTwoElement) {
+				fail("li a with innerHTML '3' not found.");
+				return;
+			}
 			pageTwoElement.triggerEventHandler("click", {});
 			hostFixture.detectChanges();
 			tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
@@ -1049,8 +1055,13 @@ describe("PaginationComponent", () => {
 			assertPageNavSelection(hostFixture.debugElement.childNodes[0], "1");
 			assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 
-			// Angular sets the 'value' attribute of <li> elements to "0" instead of "..."
-			const morePagesElement: DebugElement = hostFixture.debugElement.query(By.css("li[value='0']"));
+			const morePagesElement: DebugElement | undefined = hostFixture.debugElement
+				.queryAll(By.css("li"))
+				.find((el: DebugElement) => el.nativeElement.textContent === "...");
+			if (!morePagesElement) {
+				fail("No li element with textContent '...' found.");
+				return;
+			}
 			morePagesElement.triggerEventHandler("click", {});
 			hostFixture.detectChanges();
 			tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)

@@ -2,16 +2,24 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin: 0 -15px; // offset outer margins children
 
   & [mat-raised-button] {
     margin: 6px 8px;
   }
 
   & > * {
-    flex: 1;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 16px 30px 16px 0;
+    flex-grow: 1;
+    margin: 15px;
+
+    display: block;
+    text-align: center;
+    @media #{$mobile-only-query} {
+      button,
+      button > span {
+        font-size: 11px;
+      }
+    }
   }
 }
 
@@ -26,6 +34,7 @@
     padding: 8px 30px;
     background-color: #ddd;
     border: none;
+
     &.active {
       color: #fff;
       background-color: mat-color($primary-palette, 500);
@@ -45,9 +54,11 @@
     .errors > mat-icon {
       fill: mat-color($alert-palette, 500);
     }
+
     .warnings > mat-icon {
       fill: mat-color($warning-palette, 500);
     }
+
     .infos > mat-icon {
       fill: mat-color($primary-palette, 500);
     }

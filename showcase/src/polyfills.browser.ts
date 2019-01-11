@@ -30,6 +30,12 @@ import "core-js/es6";
 import "core-js/es7/reflect";
 import "core-js/es7/string";
 import "core-js/stage/4";
+/**
+ * IE11 does not support iteration on certain DOM collections (NodeList).
+ * This polyfill is specifically needed for the animation on mat-menu used in stark-table.
+ * More info: https://github.com/angular/angular/issues/27887
+ */
+import "core-js/modules/web.dom.iterable";
 
 /**
  * IE11 and Edge require this to support Server-sent events

@@ -11,96 +11,107 @@
   justify-content: flex-start;
   padding-top: 8px;
   margin: 0 15px;
-  & .stark-minimap-dots {
-    & ul {
+
+  .stark-minimap-dots {
+    ul {
       margin: 0 8px 0 0;
       padding: 0;
     }
-    & li {
+
+    li {
       display: inline-block;
       margin: 0;
       padding: 0 3px 0;
       line-height: 18px;
       vertical-align: top;
     }
-    & i {
+
+    i {
       display: inline-block;
       width: 4px;
       height: 4px;
       opacity: 0.2;
     }
-    & li.selected i {
+
+    li.selected i {
       opacity: 1;
     }
   }
-  & .stark-minimap-dropdown-toggle {
+
+  .stark-minimap-dropdown-toggle {
     position: relative;
     margin: 0;
     padding-top: 0;
-    & .stark-minimap-dropdown-toggle-menu {
-      font-size: 14px;
-      border: 0;
-      min-width: 180px;
-      & mat-checkbox .mat-label {
-        margin-left: 40px;
-        font-size: 12px;
+
+    &.visible {
+      .stark-minimap-dropdown-toggle-menu {
+        display: block;
+      }
+
+      .mat-icon-button .down {
+        display: none;
+      }
+
+      .mat-icon-button .up {
+        display: inline-block;
       }
     }
-    & .mat-button.mat-icon-button {
+
+    .mat-button.mat-icon-button {
       height: auto;
       margin: 0;
       transform: translateY(-8px);
     }
-    & .mat-icon-button .up {
+
+    .mat-icon-button .up {
       display: none;
     }
-    &.visible {
-      & .stark-minimap-dropdown-toggle-menu {
-        display: block;
-      }
-      & .down {
-        display: none;
-      }
-      & .up {
-        display: inline-block;
-      }
-    }
-    & .stark-minimap-dropdown-toggle-button {
+
+    .stark-minimap-dropdown-toggle-button {
       min-height: 0;
       margin: 0;
       padding: 0 2px 0 0;
     }
-    & .stark-minimap-dropdown-toggle-menu {
+
+    .stark-minimap-dropdown-toggle-menu {
       position: absolute;
+      min-width: 180px;
       z-index: 1;
       top: 27px;
-      right: 0;
+      right: auto;
       display: none;
       padding: 0;
+      border: 0;
       border-radius: 2px;
       font-size: 16px;
-      & mat-checkbox {
+
+      mat-checkbox {
         display: block;
         min-width: 0;
         min-height: 0;
         margin: 0;
         padding: 4px 8px 5px;
-        & ._mat-container {
+
+        ._mat-container {
           width: $checkbox-size;
           height: $checkbox-size;
           top: 13px;
           left: 8px;
         }
-        & ._mat-icon {
+
+        ._mat-icon {
           width: $checkbox-size;
           height: $checkbox-size;
           top: 5px;
         }
-        & ._mat-label {
+
+        ._mat-label {
+          font-size: 12px;
           width: 100%;
-          margin: 0;
+          margin: 0 0 0 40px;
           padding: 0 0 0 20px;
-          & span {
+
+          span {
             display: block;
             max-width: 260px;
             overflow: hidden;
@@ -108,25 +119,30 @@
             white-space: nowrap;
           }
         }
+
         &.mat-checked ._mat-icon::after {
           width: 6px;
           height: 8px;
           top: 3px;
           left: 4px;
         }
+
         &:first-child {
           margin-top: 4px;
         }
+
         &:last-child {
           margin-bottom: 4px;
         }
       }
-      & .stark-minimap-dropdown {
-        & .mat-container {
+
+      .stark-minimap-dropdown {
+        .mat-container {
           left: 16px;
         }
-        & mat-checkbox.stark-minimap-column-checkbox {
-          & ._mat-icon {
+
+        mat-checkbox.stark-minimap-column-checkbox {
+          ._mat-icon {
             border-width: 1px;
           }
         }
@@ -135,37 +151,45 @@
   }
 
   @media #{$desktop-query} {
-    & .stark-minimap-dropdown-toggle-menu {
+    .stark-minimap-dropdown-toggle-menu {
       font-size: 16px;
-      & mat-checkbox {
+
+      mat-checkbox {
         padding: 3px 16px;
-        & ._mat-container {
+
+        ._mat-container {
           width: $checkbox-size;
           height: $checkbox-size;
           top: 10px;
           left: 16px;
         }
-        & ._mat-icon {
+
+        ._mat-icon {
           width: $checkbox-size;
           height: $checkbox-size;
         }
-        & ._mat-label {
+
+        ._mat-label {
           width: 100%;
           padding: 0 0 0 26px;
           font-size: 12px;
-          & span {
+
+          span {
             max-width: 400px;
           }
         }
+
         &.mat-checked ._mat-icon::after {
           width: 8px;
           height: 10px;
           top: 2px;
           left: 4px;
         }
+
         &:first-child {
           margin-top: 8px;
         }
+
         &:last-child {
           margin-bottom: 8px;
         }
@@ -182,96 +206,107 @@
   justify-content: flex-start;
   padding-top: 8px;
   margin: 0 15px;
-  & .stark-minimap-dots {
-    & ul {
+
+  .stark-minimap-dots {
+    ul {
       margin: 0 8px 0 0;
       padding: 0;
     }
-    & li {
+
+    li {
       display: inline-block;
       margin: 0;
       padding: 0 3px 0;
       line-height: 18px;
       vertical-align: top;
     }
-    & i {
+
+    i {
       display: inline-block;
       width: 4px;
       height: 4px;
       opacity: 0.2;
     }
-    & li.selected i {
+
+    li.selected i {
       opacity: 1;
     }
   }
-  & .stark-minimap-dropdown-toggle {
+
+  .stark-minimap-dropdown-toggle {
     position: relative;
     margin: 0;
     padding-top: 0;
-    & .stark-minimap-dropdown-toggle-menu {
-      font-size: 14px;
-      border: 0;
-      min-width: 180px;
-      & mat-checkbox .mat-label {
-        margin-left: 40px;
-        font-size: 12px;
+
+    &.visible {
+      .stark-minimap-dropdown-toggle-menu {
+        display: block;
+      }
+
+      .mat-icon-button .down {
+        display: none;
+      }
+
+      .mat-icon-button .up {
+        display: inline-block;
       }
     }
-    & .mat-button.mat-icon-button {
+
+    .mat-button.mat-icon-button {
       height: auto;
       margin: 0;
       transform: translateY(-8px);
     }
-    & .mat-icon-button .up {
+
+    .mat-icon-button .up {
       display: none;
     }
-    &.visible {
-      & .stark-minimap-dropdown-toggle-menu {
-        display: block;
-      }
-      & .down {
-        display: none;
-      }
-      & .up {
-        display: inline-block;
-      }
-    }
-    & .stark-minimap-dropdown-toggle-button {
+
+    .stark-minimap-dropdown-toggle-button {
       min-height: 0;
       margin: 0;
       padding: 0 2px 0 0;
     }
-    & .stark-minimap-dropdown-toggle-menu {
+
+    .stark-minimap-dropdown-toggle-menu {
+      font-size: 16px;
       position: absolute;
+      min-width: 180px;
       z-index: 1;
       top: 27px;
-      right: 0;
+      right: auto;
       display: none;
       padding: 0;
+      border: 0;
       border-radius: 2px;
-      font-size: 16px;
-      & mat-checkbox {
+
+      mat-checkbox {
         display: block;
         min-width: 0;
         min-height: 0;
         margin: 0;
         padding: 4px 8px 5px;
-        & ._mat-container {
+
+        ._mat-container {
           width: $checkbox-size;
           height: $checkbox-size;
           top: 13px;
           left: 8px;
         }
-        & ._mat-icon {
+
+        ._mat-icon {
           width: $checkbox-size;
           height: $checkbox-size;
           top: 5px;
         }
-        & ._mat-label {
+
+        ._mat-label {
+          font-size: 12px;
           width: 100%;
-          margin: 0;
+          margin: 0 0 0 40px;
           padding: 0 0 0 20px;
-          & span {
+
+          span {
             display: block;
             max-width: 260px;
             overflow: hidden;
@@ -279,25 +314,30 @@
             white-space: nowrap;
           }
         }
+
         &.mat-checked ._mat-icon::after {
           width: 6px;
           height: 8px;
           top: 3px;
           left: 4px;
         }
+
         &:first-child {
           margin-top: 4px;
         }
+
         &:last-child {
           margin-bottom: 4px;
         }
       }
-      & .stark-minimap-dropdown {
-        & .mat-container {
+
+      .stark-minimap-dropdown {
+        .mat-container {
           left: 16px;
         }
-        & mat-checkbox.stark-minimap-column-checkbox {
-          & ._mat-icon {
+
+        mat-checkbox.stark-minimap-column-checkbox {
+          ._mat-icon {
             border-width: 1px;
           }
         }
@@ -306,37 +346,45 @@
   }
 
   @media #{$desktop-query} {
-    & .stark-minimap-dropdown-toggle-menu {
+    .stark-minimap-dropdown-toggle-menu {
       font-size: 16px;
-      & mat-checkbox {
+
+      mat-checkbox {
         padding: 3px 16px;
-        & ._mat-container {
+
+        ._mat-container {
           width: $checkbox-size;
           height: $checkbox-size;
           top: 10px;
           left: 16px;
         }
-        & ._mat-icon {
+
+        ._mat-icon {
           width: $checkbox-size;
           height: $checkbox-size;
         }
-        & ._mat-label {
+
+        ._mat-label {
           width: 100%;
           padding: 0 0 0 26px;
           font-size: 12px;
-          & span {
+
+          span {
             max-width: 400px;
           }
         }
+
         &.mat-checked ._mat-icon::after {
           width: 8px;
           height: 10px;
           top: 2px;
           left: 4px;
         }
+
         &:first-child {
           margin-top: 8px;
         }
+
         &:last-child {
           margin-bottom: 8px;
         }
@@ -346,23 +394,27 @@
 }
 
 .stark-table {
-  & .stark-minimap-dropdown-toggle-menu {
+  .stark-minimap-dropdown-toggle-menu {
     padding-right: 16px;
   }
-  & .stark-table-action-bar {
-    & .stark-minimap-dropdown-toggle-button {
-      & mat-icon {
+
+  .stark-table-action-bar {
+    .stark-minimap-dropdown-toggle-button {
+      mat-icon {
         width: 20px;
         height: 20px;
       }
     }
   }
-  & .stark-minimap {
+
+  .stark-minimap {
     padding-top: 0;
-    & .stark-minimap-dropdown-toggle .mat-button.mat-icon-button {
+
+    .stark-minimap-dropdown-toggle .mat-button.mat-icon-button {
       transform: none;
     }
-    & .stark-minimap-dropdown-toggle .stark-minimap-dropdown-toggle-menu {
+
+    .stark-minimap-dropdown-toggle .stark-minimap-dropdown-toggle-menu {
       font-size: 14px;
       border: 0;
       min-width: 180px;

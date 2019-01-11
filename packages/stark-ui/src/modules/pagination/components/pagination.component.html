@@ -15,7 +15,6 @@
 			<li
 				class="page-numbers"
 				*ngFor="let pageNumber of pageNumbers; trackBy: trackPageNumberFn"
-				value="{{ pageNumber }}"
 				[ngClass]="paginationConfig.page === pageNumber ? 'active' : ''"
 			>
 				<a *ngIf="pageNumber !== '...'" (click)="goToPage(pageNumber)">{{ pageNumber }}</a>
