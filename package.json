@@ -71,6 +71,7 @@
     "build:showcase:ghpages": "cd showcase && npm run build:prod:ghpages && cd ..",
     "build:showcase:ghpages:ci-test-env": "cd showcase && npm run build:prod:ghpages:ci-test-env && cd ..",
     "build:starter": "cd starter && npm run build && cd ..",
+    "check:starter:stark-versions": "node ./check-stark-versions.js ./starter/package.json latest",
     "clean": "npx rimraf ./dist",
     "clean:all": "npm run clean && npm run clean:stark-build && npm run clean:stark-core && npm run clean:stark-ui && npm run clean:stark-testing && npm run clean:starter && npm run clean:showcase",
     "clean:stark-build": "cd packages/stark-build && npm run clean && cd ../..",
