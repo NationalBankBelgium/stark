@@ -168,7 +168,6 @@ module.exports = function(env) {
 								//minimize: true,
 								// even if disabled, sourceMaps gets generated
 								sourceMap: false, // true
-								autoprefixer: false,
 								// see https://github.com/webpack-contrib/css-loader#importloaders)
 								importLoaders: 1 // 1 => postcss-loader
 							}
@@ -203,7 +202,6 @@ module.exports = function(env) {
 								//minimize: true,
 								// even if disabled, sourceMaps gets generated
 								sourceMap: false, // true
-								autoprefixer: false,
 								// see https://github.com/webpack-contrib/css-loader#importloaders)
 								importLoaders: 2 // 2 => postcss-loader + sass-loader
 							}
@@ -236,7 +234,6 @@ module.exports = function(env) {
 								//minimize: true,
 								// even if disabled, sourceMaps gets generated
 								sourceMap: false, // true
-								autoprefixer: false,
 								// see https://github.com/webpack-contrib/css-loader#importloaders)
 								importLoaders: 1 // 1 => postcss-loader
 							}
