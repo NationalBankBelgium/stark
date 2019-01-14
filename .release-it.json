@@ -9,7 +9,7 @@
 		"afterBump": "npm run generate:changelog",
 		"afterRelease": false,
 		"beforeStage": false,
-		"beforeStart": false,
+		"beforeStart": "npm run check:starter:stark-versions",
 		"changelog": "npm run generate:changelog-recent"
 	},
 	"git": {
