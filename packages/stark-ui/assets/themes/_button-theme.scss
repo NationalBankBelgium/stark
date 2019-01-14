@@ -1,3 +1,5 @@
+$small-icon-size: 18px;
+
 @mixin stark-button-color($color, $contrast) {
   &.mat-button,
   &.mat-icon-button,
@@ -49,9 +51,9 @@
 .mat-white {
   @include stark-button-color(#fff, $dark-primary-text);
 }
-
 .mat-icon.stark-small-icon {
-  transform: scale(0.75);
+  height: $small-icon-size;
+  width: $small-icon-size;
 }
 
 .mat-button,

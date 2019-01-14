@@ -58,7 +58,6 @@ import {
 	StarkLanguageSelectorModule,
 	StarkMessagePaneModule,
 	StarkSessionUiModule,
-	StarkSvgViewBoxModule,
 	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";
 import { SharedModule } from "./shared/shared.module";
@@ -228,7 +227,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkAppSidebarModule.forRoot(),
 		StarkLanguageSelectorModule,
 		StarkMessagePaneModule.forRoot(),
-		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
 		StarkMinimapModule,
 		StarkToastNotificationModule.forRoot({
