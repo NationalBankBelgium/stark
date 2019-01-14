@@ -1,3 +1,48 @@
+<a name="10.0.0-beta.2"></a>
+# [10.0.0-beta.2](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.1...10.0.0-beta.2) (2019-01-14)
+
+
+### Bug Fixes
+
+* **stark-all:** fix dependency issues in stark-ui + add hammerjs dep in stark root to fix warning during tests + improve stark-language-selector component ([47c2b4a](https://github.com/nationalbankbelgium/stark/commit/47c2b4a))
+* **stark-build:** enhance regex for 3rd party libs to be transpiled to ES5 in Linux, Mac and Windows ([c4a4c36](https://github.com/nationalbankbelgium/stark/commit/c4a4c36)), closes [#918](https://github.com/nationalbankbelgium/stark/issues/918)
+* **stark-build:** ignore 'System.import()' messages due to [@angular](https://github.com/angular)/core ([8ee3938](https://github.com/nationalbankbelgium/stark/commit/8ee3938))
+* **stark-build:** transpile certain third party libs to ES5 only in DEV to prevent breaking support for IE 11 ([c762f8d](https://github.com/nationalbankbelgium/stark/commit/c762f8d)), closes [#900](https://github.com/nationalbankbelgium/stark/issues/900)
+* **stark-core:** avoid circular dependencies by moving state names in a constants file ([abe7fe2](https://github.com/nationalbankbelgium/stark/commit/abe7fe2))
+* **stark-core:** refactor Http Request builder, Http service and Session service to prevent undefined and null header values to be added to Angular Http headers. ([c728f9c](https://github.com/nationalbankbelgium/stark/commit/c728f9c)), closes [#856](https://github.com/nationalbankbelgium/stark/issues/856)
+* **stark-demo:** add deployUrl to fix issue with lazy modules. Replace referenced icon asset in translations by <mat-icon> in HTML. ([d112acd](https://github.com/nationalbankbelgium/stark/commit/d112acd)), closes [#849](https://github.com/nationalbankbelgium/stark/issues/849)
+* **stark-demo:** add polyfill for `web.dom.iterable` ([f57c47b](https://github.com/nationalbankbelgium/stark/commit/f57c47b)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-demo:** fix overflow issue of message pane demo on mobile and IE11 ([904c919](https://github.com/nationalbankbelgium/stark/commit/904c919)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-demo:** fix the 404 error on github pages ([d96ac1f](https://github.com/nationalbankbelgium/stark/commit/d96ac1f)), closes [#859](https://github.com/nationalbankbelgium/stark/issues/859)
+* **stark-demo:** update usage of `stark-dropdown` component in pretty-print demo page ([e73766a](https://github.com/nationalbankbelgium/stark/commit/e73766a)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-ui:** add padding to table filter component ([7f73477](https://github.com/nationalbankbelgium/stark/commit/7f73477)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-ui:** change location of minimap to right ([2fb8a16](https://github.com/nationalbankbelgium/stark/commit/2fb8a16)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-ui:** fix circular dependencies due to wrong import in minimap ([9a712fa](https://github.com/nationalbankbelgium/stark/commit/9a712fa))
+* **stark-ui:** fix filter issue + not translated column header issue in ([746f675](https://github.com/nationalbankbelgium/stark/commit/746f675)), closes [#954](https://github.com/nationalbankbelgium/stark/issues/954) [#955](https://github.com/nationalbankbelgium/stark/issues/955)
+* **stark-ui:** fix overflow of calendar items ([4eb2acd](https://github.com/nationalbankbelgium/stark/commit/4eb2acd)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-ui:** fix table refresh issue when data changes. ([dd2eac0](https://github.com/nationalbankbelgium/stark/commit/dd2eac0)), closes [#1003](https://github.com/nationalbankbelgium/stark/issues/1003)
+* **stark-ui:** implement workaround for `mat-select` bug in IE11 ([f2887ad](https://github.com/nationalbankbelgium/stark/commit/f2887ad)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-ui:** keep scroll position after closing sidenav ([7d55a3e](https://github.com/nationalbankbelgium/stark/commit/7d55a3e)), closes [#750](https://github.com/nationalbankbelgium/stark/issues/750)
+* **stark-ui:** properly scale svg from mat-icon ([f6a6258](https://github.com/nationalbankbelgium/stark/commit/f6a6258)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-ui:** remove `-apple-system` from default font-family for correct rendering in IE11 ([71ca177](https://github.com/nationalbankbelgium/stark/commit/71ca177)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+* **stark-ui:** remove value property from li in pagination component ([15a4a17](https://github.com/nationalbankbelgium/stark/commit/15a4a17)), closes [#732](https://github.com/nationalbankbelgium/stark/issues/732)
+
+
+### Features
+
+* **stark-all:** update to Angular 7 + TypeScript 3.1 ([edd108d](https://github.com/nationalbankbelgium/stark/commit/edd108d)), closes [#871](https://github.com/nationalbankbelgium/stark/issues/871)
+* **stark-demo:** add browserstack test script ([5a490a3](https://github.com/nationalbankbelgium/stark/commit/5a490a3)), closes [#274](https://github.com/nationalbankbelgium/stark/issues/274)
+* **stark-starter:** add preloading screens ([844e0fe](https://github.com/nationalbankbelgium/stark/commit/844e0fe)), closes [#840](https://github.com/nationalbankbelgium/stark/issues/840) [#596](https://github.com/nationalbankbelgium/stark/issues/596) [#597](https://github.com/nationalbankbelgium/stark/issues/597)
+* **stark-ui:** add custom styling to stark table component ([dd91254](https://github.com/nationalbankbelgium/stark/commit/dd91254)), closes [#523](https://github.com/nationalbankbelgium/stark/issues/523)
+* **stark-ui:** add option to close sidebar after navigation ([431f1e0](https://github.com/nationalbankbelgium/stark/commit/431f1e0)), closes [#995](https://github.com/nationalbankbelgium/stark/issues/995)
+* **stark-ui:** add rowClick event emitter to table component ([0182344](https://github.com/nationalbankbelgium/stark/commit/0182344)), closes [#795](https://github.com/nationalbankbelgium/stark/issues/795)
+* **stark-ui:** add stark form util ([1f94d93](https://github.com/nationalbankbelgium/stark/commit/1f94d93))
+* **stark-ui:** implementation of a session timeout warning ([578b8a2](https://github.com/nationalbankbelgium/stark/commit/578b8a2))
+* **stark-ui:** implementation of app data component ([e87c30a](https://github.com/nationalbankbelgium/stark/commit/e87c30a))
+* **stark-ui:** make dropdown component working with reactive form ([b183e72](https://github.com/nationalbankbelgium/stark/commit/b183e72))
+
+
+
 <a name="10.0.0-beta.1"></a>
 # [10.0.0-beta.1](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.0...10.0.0-beta.1) (2018-11-09)
 
