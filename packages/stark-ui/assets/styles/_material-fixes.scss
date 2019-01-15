@@ -19,3 +19,9 @@
     display: block;
   }
 }
+
+// Needed since @angular/Material v7, the icons are slightly off center.
+// 2.5px was chosen as the offset that worked best across most popular browsers
+.mat-button-wrapper .mat-icon {
+  margin-top: -2.5px;
+}
