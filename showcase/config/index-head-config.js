@@ -36,22 +36,23 @@ module.exports = {
 	],
 	meta: [
 		{ name: "viewport", content: "width=device-width, initial-scale=1" },
-		// <!-- Disable tap highlight on IE -->
+		// Disable tap highlight on IE
 		{ name: "msapplication-tap-highlight", content: "no" },
-		// <!-- Fallback to homescreen for Chrome <39 on Android -->
+		// Fallback to homescreen for Chrome <39 on Android
 		{ name: "mobile-web-app-capable", content: "yes" },
 		{ name: "application-name", content: "Stark Starter" },
-		// <!-- Add to homescreen for Safari on iOS -->
+		// Add to homescreen for Safari on iOS
 		{ name: "apple-mobile-web-app-capable", content: "yes" },
 		{ name: "apple-mobile-web-app-status-bar-style", content: "black" },
 		{ name: "apple-mobile-web-app-title", content: "template" },
-		// <!-- Reference: https://msdn.microsoft.com/library/dn320426(v=vs.85).aspx -->
+		// Reference: https://msdn.microsoft.com/library/dn320426(v=vs.85).aspx
 		{ name: "msapplication-config", content: "none" },
 		{ name: "HandheldFriendly", content: "true" },
-		// // <!-- Define the toolbar color (Android): http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android -->
-		// <!-- You can customize the default -->
+		// Define the toolbar color (Android): http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android
+		// You can customize the default
 		{ name: "theme-color", content: "#0076c8" },
 		{ name: "msapplication-TileColor", content: "#0076c8" },
-		{ name: "msapplication-TileImage", content: "assets/images/app-icons/ms-icon-144x144.png" }
+		// ` "=content": true ` tells html-element-webpack-plugin to prepend the public path to `content`
+		{ name: "msapplication-TileImage", content: "assets/images/app-icons/ms-icon-144x144.png", "=content": true }
 	]
 };

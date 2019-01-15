@@ -24,9 +24,7 @@
 		<%= webpackConfig.htmlElements.headTags %> <% } %>
 
 		<!-- Stylesheets -->
-		<!-- The stylesheet should be loaded before angular is initialized -->
-		<link rel="stylesheet" href="/assets/stark-core/css/pre-load-style.css" />
-		<!-- Generated CSS stylesheets will be added by webpack: extract-text-webpack-plugin -->
+		<!-- Generated CSS stylesheets will be added by webpack: mini-css-extract-plugin -->
 
 		<!-- move the block of webpack dev server to the <head> section and change the IF conditions -->
 		<% if (htmlWebpackPlugin.options.metadata.IS_DEV_SERVER && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
@@ -45,11 +43,7 @@
 	<body class="">
 		<noscript>
 			<div class="stark-no-js-warning stark-preload" role="alertdialog" aria-busy="true" aria-live="assertive">
-				<header><i></i></header>
-				<div class="content">
-					<h1>No JavaScript</h1>
-					<p>You must have JavaScript enabled!</p>
-				</div>
+				<header><i></i></header> <div class="content"> <h1>No JavaScript</h1> <p>You must have JavaScript enabled!</p> </div>
 			</div>
 		</noscript>
 
@@ -67,11 +61,7 @@
 
 		<app class="stark-app">
 			<div class="stark-loading stark-preload" role="alertdialog" aria-busy="true" aria-live="assertive">
-				<header><i></i></header>
-				<div class="content">
-					<div class="stark-loading-icon"></div>
-					<h1>Loading...</h1>
-				</div>
+				<header><i></i></header> <div class="content"> <div class="stark-loading-icon"></div> <h1>Loading...</h1> </div>
 			</div>
 		</app>
 
