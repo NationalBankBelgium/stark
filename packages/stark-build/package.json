@@ -26,7 +26,7 @@
     "@types/uglify-js": "3.0.4",
     "@types/webpack": "4.4.22",
     "add-asset-html-webpack-plugin": "3.1.2",
-    "angular-named-lazy-chunks-webpack-plugin": "2.0.0",
+    "angular-named-lazy-chunks-webpack-plugin": "2.1.0",
     "assets-webpack-plugin": "3.9.7",
     "babel-loader": "8.0.5",
     "base-href-webpack-plugin": "2.0.0",
