@@ -416,6 +416,10 @@ adaptNpmPackageDependencies() {
   local PATTERN="\"\@nationalbankbelgium\/$PACKAGE\"\s*\:\s*\".*\""
   local REPLACEMENT="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\\"$TGZ_PATH\\\""
   
+  logTrace "PATTERN: $PATTERN"
+  logTrace "REPLACEMENT: $REPLACEMENT"
+  logTrace "Package JSON file: $PACKAGE_JSON_FILE"
+
   # Packages will have dependencies between them. They will so have "devDependencies" and "peerDependencies" with different values.
   # We should only replace the value of the devDependency for make it work.
 
@@ -459,8 +463,8 @@ logTrace "Executing function: ${FUNCNAME[0]}" 1
   logTrace "SHA-512: $SHA"
   logTrace "SHA-512 escaped: $ESCAPED_SHA"
   
-  local PATTERN="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\{(\s*)\\\"version\\\": \\\"(\S*)\\\",(\s*)\\\"integrity\\\": \\\"sha512-(.*)\\\","
-  local REPLACEMENT='"\@nationalbankbelgium\/'$PACKAGE'": {$1"version": "'$TGZ_PATH'",$3"integrity": "sha512-'$ESCAPED_SHA'",'
+  local PATTERN="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\{(\s*)\\\"version\\\": \\\"(\S*)\\\"(,(\s*)\\\"resolved\\\": \\\"(.*))?,(\s*)\\\"integrity\\\": \\\"sha512-(.*)\\\","
+  local REPLACEMENT='"\@nationalbankbelgium\/'$PACKAGE'": {$1"version": "'$TGZ_PATH'",$4"integrity": "sha512-'$ESCAPED_SHA'",'
   
   logTrace "PATTERN: $PATTERN"
   logTrace "REPLACEMENT: $REPLACEMENT"
