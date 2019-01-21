@@ -8,4 +8,4 @@ We promise to extend courtesy and respect to everyone involved in this project r
 
 If any member of the community violates this code of conduct, the maintainers of the Stark project may take action, removing issues, comments, and PRs or blocking accounts as deemed appropriate.
 
-If you are subject to or witness unacceptable behavior, or have any other concerns, please email us at [sebastien.dubois@nbb.be](mailto:sebastien.dubois@nbb.be).
+If you are subject to or witness unacceptable behavior, or have any other concerns, please email us at [alexis.georges@nbb.be](mailto:alexis.georges@nbb.be).

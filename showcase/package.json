@@ -12,7 +12,7 @@
     "ngrx",
     "ui-router"
   ],
-  "author": "Stark Team <sebastien.dubois@nbb.be>",
+  "author": "Stark Team <alexis.georges@nbb.be>",
   "contributors": [],
   "license": "MIT",
   "bugs": "https://github.com/nationalbankbelgium/stark/issues",
