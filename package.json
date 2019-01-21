@@ -50,7 +50,7 @@
     "rollup-plugin-sourcemaps": "0.4.2",
     "rxjs": "6.3.3",
     "stream-concat": "0.3.0",
-    "stylelint": "9.10.0",
+    "stylelint": "9.10.1",
     "stylelint-config-prettier": "4.0.0",
     "tsickle": "0.34.0",
     "tslint": "5.11.0",
