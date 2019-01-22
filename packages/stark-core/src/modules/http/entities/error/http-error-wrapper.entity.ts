@@ -4,6 +4,7 @@ import { StarkHttpError } from "./http-error.entity.intf";
 import { StarkHttpErrorImpl } from "./http-error.entity";
 import { StarkHttpErrorWrapper } from "./http-error-wrapper.entity.intf";
 import { StarkHttpStatusCodes } from "../../enumerators";
+
 /**
  * @ignore
  */

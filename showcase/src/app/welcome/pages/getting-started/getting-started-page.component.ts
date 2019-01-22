@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import {
-	starterStructure,
-	stylesheetImport,
-	stylesCss,
-	starkStylesCss,
 	polyfillsAngularJsonAdaptation,
-	polyfillsBrowsersContent
+	polyfillsBrowsersContent,
+	starkStylesCss,
+	starterStructure,
+	stylesCss,
+	stylesheetImport
 } from "./starter-structure";
 
 @Component({

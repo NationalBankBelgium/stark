@@ -15,10 +15,11 @@ import {
 	StarkUser,
 	StarkUserService
 } from "@nationalbankbelgium/stark-core";
-import { StarkMenuConfig, STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
+import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService, StarkMenuConfig } from "@nationalbankbelgium/stark-ui";
 import * as moment from "moment";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { filter } from "rxjs/operators";
+
 /**
  * App Component
  * Top Level Component

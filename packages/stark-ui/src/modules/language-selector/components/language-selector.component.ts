@@ -1,15 +1,15 @@
-import { Component, Inject, Input, OnInit, OnDestroy, ViewEncapsulation, Renderer2, ElementRef } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { DateAdapter } from "@angular/material/core";
 import { Subscription } from "rxjs";
 
 import {
 	STARK_APP_METADATA,
-	StarkApplicationMetadata,
 	STARK_LOGGING_SERVICE,
-	StarkLoggingService,
 	STARK_SESSION_SERVICE,
-	StarkSessionService,
-	StarkLanguage
+	StarkApplicationMetadata,
+	StarkLanguage,
+	StarkLoggingService,
+	StarkSessionService
 } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 

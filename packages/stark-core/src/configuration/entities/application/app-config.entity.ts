@@ -5,7 +5,8 @@ import { StarkApplicationConfig } from "./app-config.entity.intf";
 import { StarkBackend, StarkBackendImpl } from "../../../modules/http/entities/backend";
 import { stringMap } from "../../../serialization";
 import { StarkValidationErrorsUtil } from "../../../util";
-import { StarkMapNotEmpty, StarkMapIsValid } from "../../../validation/decorators";
+import { StarkMapIsValid, StarkMapNotEmpty } from "../../../validation/decorators";
+
 /**
  * @ignore
  */

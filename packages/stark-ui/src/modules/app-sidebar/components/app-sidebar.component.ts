@@ -1,15 +1,15 @@
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
-import { MatSidenav, MatSidenavContainer, MatDrawerToggleResult } from "@angular/material/sidenav";
+import { MatDrawerToggleResult, MatSidenav, MatSidenavContainer } from "@angular/material/sidenav";
 import { from, Subscription } from "rxjs";
 import {
 	STARK_LOGGING_SERVICE,
-	StarkLoggingService,
 	STARK_ROUTING_SERVICE,
+	StarkLoggingService,
 	StarkRoutingService,
 	StarkRoutingTransitionHook
 } from "@nationalbankbelgium/stark-core";
-import { StarkAppSidebarOpenEvent, StarkAppSidebarService, STARK_APP_SIDEBAR_SERVICE } from "../services";
+import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarOpenEvent, StarkAppSidebarService } from "../services";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 export type StarkAppSidebarLeftMode = "regular" | "menu" | undefined;
@@ -170,7 +170,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * @param sidenav - The sidebar to close
 	 * @param successHandler - Handler function to be called when the sidenav closes
 	 */
-	public closeSidenav(sidenav: MatSidenav, successHandler: ((value: MatDrawerToggleResult) => void)): void {
+	public closeSidenav(sidenav: MatSidenav, successHandler: (value: MatDrawerToggleResult) => void): void {
 		from(sidenav.close()).subscribe(successHandler, this.displayErrorCallback);
 	}
 
@@ -178,7 +178,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * Callback function to be called when the sidenav opens
 	 * @param result: MatDrawerToggleResult
 	 */
-	private displaySuccessCallback: ((value: MatDrawerToggleResult) => void) = (result: MatDrawerToggleResult) => {
+	private displaySuccessCallback: (value: MatDrawerToggleResult) => void = (result: MatDrawerToggleResult) => {
 		this.logger.debug(componentName + result);
 	};
 
@@ -186,7 +186,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * Callback function to be called when the sidenav failed to open
 	 * * @param error: Error
 	 */
-	private displayErrorCallback: ((error: Error) => void) = (error: Error) => {
+	private displayErrorCallback: (error: Error) => void = (error: Error) => {
 		this.logger.warn(componentName + ": ", error);
 	};
 
@@ -286,7 +286,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * @param sidenav - The sidebar to open
 	 * @param successHandler - Handler function to be called when the sidenav closes
 	 */
-	public openSidenav(sidenav: MatSidenav, successHandler: ((value: MatDrawerToggleResult) => void) = this.displaySuccessCallback): void {
+	public openSidenav(sidenav: MatSidenav, successHandler: (value: MatDrawerToggleResult) => void = this.displaySuccessCallback): void {
 		from(sidenav.open()).subscribe(successHandler, this.displayErrorCallback);
 	}
 
@@ -339,7 +339,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * Callback function when the left sidenav needs to shift type
 	 * @param result: MatDrawerToggleResult
 	 */
-	public shiftLeftSidenavCallback: ((value: MatDrawerToggleResult) => void) = (result: MatDrawerToggleResult) => {
+	public shiftLeftSidenavCallback: (value: MatDrawerToggleResult) => void = (result: MatDrawerToggleResult) => {
 		this.logger.debug(componentName + ": sidenav " + result);
 		this.sidenavLeftType = this.sidenavLeftType === "menu" ? "regular" : "menu";
 		this.setComponentBehaviour();

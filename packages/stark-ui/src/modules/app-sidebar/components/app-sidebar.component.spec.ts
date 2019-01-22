@@ -3,13 +3,13 @@ import { Subject } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { BreakpointState, BreakpointObserver } from "@angular/cdk/layout";
+import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { TransitionHookFn, TransitionStateHookFn, HookMatchCriteria } from "@uirouter/core";
+import { HookMatchCriteria, TransitionHookFn, TransitionStateHookFn } from "@uirouter/core";
 import {
 	STARK_LOGGING_SERVICE,
-	StarkLoggingService,
 	STARK_ROUTING_SERVICE,
+	StarkLoggingService,
 	StarkRoutingService,
 	StarkRoutingTransitionHook
 } from "@nationalbankbelgium/stark-core";

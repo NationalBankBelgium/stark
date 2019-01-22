@@ -17,6 +17,7 @@ import { StarkFlushLogMessages, StarkLogMessageAction } from "../actions";
 import { selectStarkLogging } from "../reducers";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
+
 /**
  *  @ignore
  */

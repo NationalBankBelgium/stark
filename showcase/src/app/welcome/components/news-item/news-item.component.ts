@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+
 const componentName: string = "news-item-component";
 
 @Component({

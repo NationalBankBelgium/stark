@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+
 /**
  * @ignore
  */

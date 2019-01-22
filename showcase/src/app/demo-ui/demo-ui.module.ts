@@ -61,11 +61,11 @@ import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
 import {
 	TableRegularComponent,
-	TableWithSelectionComponent,
 	TableWithCustomActionsComponent,
-	TableWithTranscludedActionBarComponent,
+	TableWithCustomStylingComponent,
 	TableWithFixedHeaderComponent,
-	TableWithCustomStylingComponent
+	TableWithSelectionComponent,
+	TableWithTranscludedActionBarComponent
 } from "./components";
 
 @NgModule({

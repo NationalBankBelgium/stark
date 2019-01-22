@@ -1,7 +1,7 @@
 /*tslint:disable:completed-docs*/
 import { StarkLogging, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
 import { loggingReducer } from "./logging.reducer";
-import { StarkSetLoggingApplicationId, StarkLogMessageAction, StarkFlushLogMessages } from "../actions";
+import { StarkFlushLogMessages, StarkLogMessageAction, StarkSetLoggingApplicationId } from "../actions";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 

@@ -1,6 +1,7 @@
 import { deserialize } from "cerialize";
 
 import { StarkSortItem } from "./metadata-sort-item.entity.intf";
+
 /**
  * @ignore
  */

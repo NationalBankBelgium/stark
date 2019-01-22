@@ -36,7 +36,6 @@ import "core-js/stage/4";
  * More info: https://github.com/angular/angular/issues/27887
  */
 import "core-js/modules/web.dom.iterable";
-
 /**
  * IE11 and Edge require this to support Server-sent events
  * https://caniuse.com/#feat=eventsource
@@ -44,7 +43,6 @@ import "core-js/modules/web.dom.iterable";
  * Polyfill: https://github.com/Yaffle/EventSource
  */
 import "event-source-polyfill";
-
 /**
  * IE11 requires Element.classList for NgClass support on SVG elements
  * See: https://caniuse.com/#feat=classlist
@@ -54,6 +52,7 @@ import "event-source-polyfill";
  * Polyfill: https://github.com/eligrey/classList.js
  */
 import "eligrey-classlist-js-polyfill";
+import "zone.js/dist/zone";
 
 /**
  * Web Animations polyfill is no longer needed for standard animation support as of Angular 6
@@ -70,7 +69,6 @@ import "eligrey-classlist-js-polyfill";
  */
 // workaround for IE11 before loading zone.ks (see: https://github.com/angular/zone.js/issues/933)
 (window as any).__Zone_enable_cross_context_check = true;
-import "zone.js/dist/zone";
 // async stack traces with zone.js included for dev
 // import 'zone.js/dist/long-stack-trace-zone'
 /* tslint:enable */

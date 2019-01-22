@@ -5,13 +5,13 @@ import { delay, take } from "rxjs/operators";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
-	STARK_USER_SERVICE,
 	STARK_SESSION_SERVICE,
-	StarkSessionService,
+	STARK_USER_SERVICE,
 	StarkLoggingService,
 	StarkRoutingService,
-	StarkUserService,
-	StarkUser
+	StarkSessionService,
+	StarkUser,
+	StarkUserService
 } from "@nationalbankbelgium/stark-core";
 
 /**

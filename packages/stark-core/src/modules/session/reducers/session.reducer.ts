@@ -1,4 +1,4 @@
-import { StarkSessionActionTypes, StarkSessionActions } from "../actions";
+import { StarkSessionActions, StarkSessionActionTypes } from "../actions";
 import { StarkSession, StarkSessionImpl } from "../entities";
 
 /**

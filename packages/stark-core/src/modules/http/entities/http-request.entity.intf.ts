@@ -45,12 +45,12 @@ export interface StarkHttpRequest<P extends StarkResource = StarkResource> {
 	 */
 	requestType: StarkHttpRequestType;
 	/**
-	 * 	The items/resources to send in the request (if needed).
+	 * The items/resources to send in the request (if needed).
 	 */
 	item?: P | { [param: string]: any };
 	/**
-	 * 	A serializer class that will perform the serialization/deserialization of the items to be sent/received to/from the backend.
-	 * 	@link StarkHttpSerializer
+	 * A serializer class that will perform the serialization/deserialization of the items to be sent/received to/from the backend.
+	 * @link StarkHttpSerializer
 	 */
 	serializer: StarkHttpSerializer<P>;
 	/**

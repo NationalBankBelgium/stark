@@ -24,6 +24,7 @@ import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
 import { StarkAbstractHttpBaseRequestBuilder } from "./http-abstract-base-request-builder";
 import { StarkAbstractHttpFetchResourceRequestBuilder } from "./http-abstract-fetch-resource-request-builder";
+
 /**
  * @ignore
  */
@@ -273,6 +274,7 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 		});
 	}
 }
+
 /**
  * @ignore
  */
@@ -283,26 +285,31 @@ export class StarkHttpCreateRequestBuilderImpl<T extends StarkResource> extends 
 		return this;
 	}
 }
+
 /**
  * @ignore
  */
 export class StarkHttpUpdateRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpUpdateRequestBuilder<T> {}
+
 /**
  * @ignore
  */
 export class StarkHttpDeleteRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpDeleteRequestBuilder<T> {}
+
 /**
  * @ignore
  */
 export class StarkHttpGetRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpFetchResourceRequestBuilder<T>
 	implements StarkHttpGetRequestBuilder<T> {}
+
 /**
  * @ignore
  */
 export class StarkHttpGetCollectionRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpFetchResourceRequestBuilder<T>
 	implements StarkHttpGetCollectionRequestBuilder<T> {}
+
 /**
  * @ignore
  */

@@ -1,5 +1,4 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewEncapsulation } from "@angular/core";
-
 /* tslint:disable:no-duplicate-imports no-import-side-effect */
 import * as Prism from "prismjs";
 import { LanguageDefinition } from "prismjs";
@@ -10,7 +9,6 @@ import "prismjs/components/prism-json.min.js";
 import "prismjs/components/prism-css-extras.min.js";
 import "prismjs/components/prism-scss.min.js";
 /* tslint:enable */
-
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 

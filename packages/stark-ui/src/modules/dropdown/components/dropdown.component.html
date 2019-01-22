@@ -55,7 +55,9 @@
 	</mat-select>
 
 	<mat-error>
-		<div #ref><ng-content></ng-content></div>
+		<div #ref>
+			<ng-content></ng-content>
+		</div>
 		<span *ngIf="ref.children.length === 0 && required" translate>STARK.VALIDATION.REQUIRED</span>
 	</mat-error>
 </mat-form-field>

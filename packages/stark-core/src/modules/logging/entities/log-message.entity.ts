@@ -3,6 +3,7 @@ import { serialize, serializeAs } from "cerialize";
 import { StarkLogMessageType } from "./log-message-type.entity";
 import { StarkLogMessage } from "./log-message.entity.intf";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
+
 /**
  * @ignore
  */

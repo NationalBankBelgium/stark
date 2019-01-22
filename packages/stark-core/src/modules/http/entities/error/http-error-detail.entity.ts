@@ -1,6 +1,7 @@
 import { autoserialize, inheritSerialization } from "cerialize";
 import { StarkHttpErrorBaseImpl } from "./http-error-base.entity";
 import { StarkHttpErrorDetail } from "./http-error-detail.entity.intf";
+
 /**
  * @ignore
  */

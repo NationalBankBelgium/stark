@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-identical-functions */
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";

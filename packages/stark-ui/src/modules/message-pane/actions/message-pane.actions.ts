@@ -20,6 +20,7 @@ export class StarkAddMessages implements Action {
 	 * @link StarkMessagesActions
 	 */
 	public readonly type: StarkMessagePaneActionTypes.ADD_MESSAGES = StarkMessagePaneActionTypes.ADD_MESSAGES;
+
 	/**
 	 * Class constructor
 	 * @param messages - The messages to add.
@@ -36,6 +37,7 @@ export class StarkRemoveMessages implements Action {
 	 * @link StarkMessagesActions
 	 */
 	public readonly type: StarkMessagePaneActionTypes.REMOVE_MESSAGES = StarkMessagePaneActionTypes.REMOVE_MESSAGES;
+
 	/**
 	 * Class constructor
 	 * @param messages - The messages to remove.

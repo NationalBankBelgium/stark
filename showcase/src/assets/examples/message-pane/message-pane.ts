@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, Renderer2 } from "@angular/core";
 import {
 	STARK_MESSAGE_PANE_SERVICE,
-	StarkMessagePaneService,
 	starkMessagePaneAlignClassPrefix,
+	StarkMessagePaneService,
 	StarkMessageType
 } from "@nationalbankbelgium/stark-ui";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";

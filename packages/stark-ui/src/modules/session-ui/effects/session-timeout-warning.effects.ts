@@ -5,8 +5,8 @@ import {
 	STARK_SESSION_SERVICE,
 	StarkSessionActionTypes,
 	StarkSessionService,
-	StarkSessionTimeoutCountdownStart,
-	StarkSessionTimeoutCountdownFinish
+	StarkSessionTimeoutCountdownFinish,
+	StarkSessionTimeoutCountdownStart
 } from "@nationalbankbelgium/stark-core";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog.component";
 import { MatDialog } from "@angular/material/dialog";

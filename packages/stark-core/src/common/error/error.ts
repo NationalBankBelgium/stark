@@ -3,6 +3,7 @@ import moment from "moment";
 import { autoserialize } from "cerialize";
 
 import { StarkError } from "./error.intf";
+
 /**
  * @ignore
  */

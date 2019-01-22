@@ -1,5 +1,5 @@
 import { TranslateService } from "@ngx-translate/core";
-import { StarkLocale, mergeTranslations } from "@nationalbankbelgium/stark-core";
+import { mergeTranslations, StarkLocale } from "@nationalbankbelgium/stark-core";
 import { commonUiTranslations } from "./common-translations";
 
 /**

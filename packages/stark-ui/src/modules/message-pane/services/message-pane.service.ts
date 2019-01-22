@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs*/
 import { Observable } from "rxjs";
-import { Store, select } from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
 import { Inject, Injectable } from "@angular/core";
 
 import { StarkMessagePaneService, starkMessagePaneServiceName } from "./message-pane.service.intf";
@@ -9,7 +9,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkMessage } from "../../../common/message";
 import { StarkMessageCollection } from "../entities";
 
-import { StarkAddMessages, StarkRemoveMessages, StarkClearMessages, StarkGetAllMessages } from "../actions";
+import { StarkAddMessages, StarkClearMessages, StarkGetAllMessages, StarkRemoveMessages } from "../actions";
 
 import { StarkUIApplicationState } from "../../../common/store";
 import { selectStarkMessages } from "../reducers";

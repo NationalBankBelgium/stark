@@ -3,17 +3,17 @@ import {
 	MatSnackBar,
 	MatSnackBarConfig,
 	MatSnackBarDismiss,
+	MatSnackBarHorizontalPosition,
 	MatSnackBarRef,
-	MatSnackBarVerticalPosition,
-	MatSnackBarHorizontalPosition
+	MatSnackBarVerticalPosition
 } from "@angular/material/snack-bar";
 import { Observable, Observer } from "rxjs";
 import { tap } from "rxjs/operators";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkToastNotificationResult } from "./toast-notification-result.intf";
-import { starkToastNotificationServiceName, StarkToastNotificationService } from "./toast-notification.service.intf";
+import { StarkToastNotificationService, starkToastNotificationServiceName } from "./toast-notification.service.intf";
 import { STARK_TOAST_NOTIFICATION_OPTIONS, StarkToastNotificationOptions } from "./toast-notification-option.intf";
-import { StarkToastNotificationComponent, StarkToastMessage } from "../components";
+import { StarkToastMessage, StarkToastNotificationComponent } from "../components";
 
 /**
  * @ignore

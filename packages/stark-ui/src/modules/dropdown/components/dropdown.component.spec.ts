@@ -11,7 +11,6 @@ import { By } from "@angular/platform-browser";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-
 import Spy = jasmine.Spy;
 
 @Component({
@@ -27,7 +26,7 @@ import Spy = jasmine.Spy;
 			[options]="options"
 			[placeholder]="placeholder"
 			[required]="required"
-			(selectionChanged)="selectionChanged"
+			(selectionChanged)="(selectionChanged)"
 			[value]="value"
 		>
 		</stark-dropdown>
@@ -344,25 +343,25 @@ describe("DropdownComponent", () => {
 		// 		hostComponent.multiSelect = "true";
 		// 		hostFixture.detectChanges();
 
-				// const dropdownElement: HTMLElement = getMatSelectNativeElement();
-				// const dropdownElement: HTMLElement = hostFixture.nativeElement.querySelector(matSelectSelector);
-				// dropdownElement.click();
-				// hostFixture.detectChanges();
-				// console.log(dropdownElement);
-				// (<HTMLElement>hostFixture.nativeElement.querySelector(matSelectSelector)).click();
-				// (<HTMLElement>hostFixture.nativeElement.querySelector("mat-select")).click();
+		// const dropdownElement: HTMLElement = getMatSelectNativeElement();
+		// const dropdownElement: HTMLElement = hostFixture.nativeElement.querySelector(matSelectSelector);
+		// dropdownElement.click();
+		// hostFixture.detectChanges();
+		// console.log(dropdownElement);
+		// (<HTMLElement>hostFixture.nativeElement.querySelector(matSelectSelector)).click();
+		// (<HTMLElement>hostFixture.nativeElement.querySelector("mat-select")).click();
 
-				// console.log(hostFixture.nativeElement);
-				// const optionCheckboxElements: DebugElement[] = hostFixture.nativeElement.querySelectorAll(checkboxSelector);
-				// expect(optionCheckboxElements.length).toBe(3);
-				//
-				// hostFixture.whenStable().then(() => {
-				// 	console.log(hostFixture.nativeElement);
-				// 	const optionCheckboxElements: DebugElement[] = hostFixture.nativeElement.querySelectorAll(checkboxSelector);
-				// 	expect(optionCheckboxElements.length).toBe(3);
-				// 	// done();
-				// });
-			// });
+		// console.log(hostFixture.nativeElement);
+		// const optionCheckboxElements: DebugElement[] = hostFixture.nativeElement.querySelectorAll(checkboxSelector);
+		// expect(optionCheckboxElements.length).toBe(3);
+		//
+		// hostFixture.whenStable().then(() => {
+		// 	console.log(hostFixture.nativeElement);
+		// 	const optionCheckboxElements: DebugElement[] = hostFixture.nativeElement.querySelectorAll(checkboxSelector);
+		// 	expect(optionCheckboxElements.length).toBe(3);
+		// 	// done();
+		// });
+		// });
 
 		// 	it("should display a checkbox for every option in the dropdown when multiSelect has no value defined", (done: DoneFn) => {
 		// 		hostComponent.multiSelect = undefined;

@@ -1,12 +1,12 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from "@angular/core";
-import { Observable, Subject, of } from "rxjs";
-import { distinctUntilChanged, tap, map, delay, switchMap, take } from "rxjs/operators";
+import { Observable, of, Subject } from "rxjs";
+import { delay, distinctUntilChanged, map, switchMap, take, tap } from "rxjs/operators";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import {
 	starkMessagePaneAlignClassPrefix,
-	starkMessagePaneDisplayedClass,
+	starkMessagePaneCollapsedClass,
 	starkMessagePaneDisplayAnimatedClass,
-	starkMessagePaneCollapsedClass
+	starkMessagePaneDisplayedClass
 } from "./message-pane.constants";
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService, starkMessagePaneServiceName } from "../services/message-pane.service.intf";
 import { StarkMessage } from "../../../common/message";

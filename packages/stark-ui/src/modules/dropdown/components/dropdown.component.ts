@@ -188,7 +188,10 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 		} else {
 			const isDisabled: boolean = this.isDisabled || false;
 			this.formControl = new FormControl(
-				{ value: this.value, disabled: isDisabled },
+				{
+					value: this.value,
+					disabled: isDisabled
+				},
 				this.required ? [Validators.required] : []
 			);
 

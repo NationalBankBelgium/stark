@@ -1,7 +1,7 @@
 import { ApplicationInitStatus, Inject, ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
 import { from } from "rxjs";
-import { StarkXSRFServiceImpl, STARK_XSRF_SERVICE, StarkXSRFService, StarkXSRFConfig, STARK_XSRF_CONFIG } from "./services";
+import { STARK_XSRF_CONFIG, STARK_XSRF_SERVICE, StarkXSRFConfig, StarkXSRFService, StarkXSRFServiceImpl } from "./services";
 import { StarkHttpHeaders } from "../http/constants";
 import { StarkXSRFHttpInterceptor } from "./interceptors/http-xsrf.interceptor";
 

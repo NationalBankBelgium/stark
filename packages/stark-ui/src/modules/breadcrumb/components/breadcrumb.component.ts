@@ -3,10 +3,10 @@ import { StarkBreadcrumbPath } from "./breadcrumb-path.intf";
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import {
-	STARK_ROUTING_SERVICE,
-	StarkRoutingService,
 	STARK_LOGGING_SERVICE,
+	STARK_ROUTING_SERVICE,
 	StarkLoggingService,
+	StarkRoutingService,
 	StarkRoutingTransitionHook
 } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";

@@ -1,5 +1,5 @@
 import { Ng2StateDeclaration } from "@uirouter/angular";
-import { AboutPageComponent, NoContentPageComponent, HomePageComponent } from "./pages";
+import { AboutPageComponent, HomePageComponent, NoContentPageComponent } from "./pages";
 
 export const HOME_STATES: Ng2StateDeclaration[] = [
 	{

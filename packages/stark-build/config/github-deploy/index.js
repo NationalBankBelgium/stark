@@ -92,6 +92,7 @@ function replaceHtmlWebpackPlugin(plugins, ghRepoName) {
 		}
 	}
 }
+
 exports.getWebpackConfigModule = getWebpackConfigModule;
 exports.getRepoName = getRepoName;
 exports.safeUrl = safeUrl;

@@ -4,18 +4,18 @@ import { CommonModule } from "@angular/common";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
-	STARK_USER_SERVICE,
 	STARK_SESSION_SERVICE,
-	StarkUser,
-	StarkUserService,
+	STARK_USER_SERVICE,
 	StarkRoutingService,
-	StarkSessionService
+	StarkSessionService,
+	StarkUser,
+	StarkUserService
 } from "@nationalbankbelgium/stark-core";
 import {
 	MockStarkLoggingService,
 	MockStarkRoutingService,
-	MockStarkUserService,
-	MockStarkSessionService
+	MockStarkSessionService,
+	MockStarkUserService
 } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { MatButtonModule } from "@angular/material/button";

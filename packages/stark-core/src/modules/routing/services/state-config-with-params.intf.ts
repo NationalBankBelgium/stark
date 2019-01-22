@@ -1,4 +1,4 @@
-import { StateDeclaration, RawParams } from "@uirouter/core";
+import { RawParams, StateDeclaration } from "@uirouter/core";
 
 /**
  * This interface is used by StarkRoutingService in order to return the matching state based on a given URL.
@@ -9,7 +9,7 @@ export interface StarkStateConfigWithParams {
 	 */
 	state: StateDeclaration;
 	/**
-	 * 	An object containing the parameters key/value pairs passed at runtime to the current route state.
+	 * An object containing the parameters key/value pairs passed at runtime to the current route state.
 	 */
 	paramValues: RawParams;
 }

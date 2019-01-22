@@ -1,10 +1,10 @@
 import {
-	ValidatorConstraint,
-	ValidatorConstraintInterface,
+	getFromContainer,
+	registerDecorator,
 	ValidationArguments,
 	ValidationOptions,
-	registerDecorator,
-	getFromContainer
+	ValidatorConstraint,
+	ValidatorConstraintInterface
 } from "class-validator";
 
 import { StarkValidatorImpl } from "../../validator";

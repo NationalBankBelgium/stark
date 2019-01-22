@@ -1,11 +1,7 @@
 /* tslint:disable:completed-docs no-commented-code no-big-function no-duplicate-string max-union-size */
-import { Observable, Observer, BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, Observer } from "rxjs";
 
 import { Store } from "@ngrx/store";
-
-import Spy = jasmine.Spy;
-import SpyObj = jasmine.SpyObj;
-import createSpyObj = jasmine.createSpyObj;
 
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 
@@ -17,6 +13,10 @@ import { StarkMessageCollection } from "../entities";
 
 import { StarkAddMessages, StarkClearMessages, StarkGetAllMessages, StarkRemoveMessages } from "../actions";
 import { StarkMessageImpl } from "../../../common/message/message.entity";
+
+import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
+import createSpyObj = jasmine.createSpyObj;
 
 describe("MessagePaneService", () => {
 	let mockStore: SpyObj<Store<StarkUIApplicationState>>;

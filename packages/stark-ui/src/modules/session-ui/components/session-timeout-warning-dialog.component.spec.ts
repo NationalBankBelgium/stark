@@ -3,12 +3,11 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core
 import { CommonModule } from "@angular/common";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { StarkSessionTimeoutWarningDialogComponent } from "./session-timeout-warning-dialog.component";
-
+import { Observer } from "rxjs";
 import Spy = jasmine.Spy;
 import createSpyObj = jasmine.createSpyObj;
-import { Observer } from "rxjs";
 
 describe("SessionTimeoutWarningDialogComponent", () => {
 	let component: StarkSessionTimeoutWarningDialogComponent;

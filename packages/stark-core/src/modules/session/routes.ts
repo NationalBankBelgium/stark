@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { Transition, StateDeclaration, LazyLoadResult, RawParams } from "@uirouter/core";
+import { LazyLoadResult, RawParams, StateDeclaration, Transition } from "@uirouter/core";
 import { loadNgModule, Ng2StateDeclaration, NgModuleToLoad } from "@uirouter/angular";
 import { from, Observable, of } from "rxjs";
 import { map } from "rxjs/operators";

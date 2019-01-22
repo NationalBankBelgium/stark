@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
 import { UIRouterModule } from "@uirouter/angular";
-import { StarkRoutingServiceImpl, STARK_ROUTING_SERVICE } from "./services";
+import { STARK_ROUTING_SERVICE, StarkRoutingServiceImpl } from "./services";
 
 @NgModule({
 	imports: [UIRouterModule.forChild()]

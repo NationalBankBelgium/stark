@@ -7,10 +7,10 @@ import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkRoutingTransitionHoo
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateModule } from "@ngx-translate/core";
-import { MockStarkRoutingService, MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { By } from "@angular/platform-browser";
-import Spy = jasmine.Spy;
 import { StarkBreadcrumbPath } from "./breadcrumb-path.intf";
+import Spy = jasmine.Spy;
 
 @Component({
 	selector: `host-component`,

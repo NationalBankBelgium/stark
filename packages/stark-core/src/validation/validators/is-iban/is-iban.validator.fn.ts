@@ -1,4 +1,4 @@
-import { isValidIBAN, electronicFormatIBAN } from "ibantools";
+import { electronicFormatIBAN, isValidIBAN } from "ibantools";
 
 /**
  * @ignore

@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import {
 	STARK_TOAST_NOTIFICATION_SERVICE,
-	StarkToastNotificationService,
-	StarkToastNotificationResult,
+	StarkMessageType,
 	StarkToastMessage,
-	StarkMessageType
+	StarkToastNotificationResult,
+	StarkToastNotificationService
 } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
 

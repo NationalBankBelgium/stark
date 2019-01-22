@@ -1,4 +1,4 @@
-import { OnInit, Input, Renderer2, ElementRef } from "@angular/core";
+import { ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
 
 /**
  * Abstract class to add the right stark class color to the elementRef

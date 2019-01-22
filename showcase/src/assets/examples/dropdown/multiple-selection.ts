@@ -8,6 +8,7 @@ export class DemoDropdownComponent implements OnInit {
 	public selectedServices: string[];
 
 	public serviceDropdownOptions: any[];
+
 	/**
 	 * Component lifecycle hook
 	 */

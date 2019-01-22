@@ -1322,6 +1322,7 @@ function testCustomSerialization(typeOfBuilder: "create" | "delete" | "getSingle
 		});
 	});
 }
+
 function testUUIDPathParamNormalization(typeOfBuilder: "delete" | "getSingle" | "update"): void {
 	describe("UUID path parameter normalization", () => {
 		const mockBackend: StarkBackend = new StarkBackendImpl();

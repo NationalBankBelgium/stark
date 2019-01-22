@@ -66,13 +66,13 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * @param obj2 - Second object in the comparison
 	 */
 	@Input()
-	public compareFn?: ((obj1: object, obj2: object) => number);
+	public compareFn?: (obj1: object, obj2: object) => number;
 
 	/**
 	 * Function that returns the raw value of this column in case the access to such value can't be provided via the column name.
 	 */
 	@Input()
-	public dataAccessor?: ((data: object, name: string) => string); // TODO: really needed?
+	public dataAccessor?: (data: object, name: string) => string; // TODO: really needed?
 
 	/**
 	 * Function that returns a formatted value (string) to be set in the cell. It can be used to set different formats
@@ -82,7 +82,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * @param columnName - The column that the cell belongs to
 	 */
 	@Input()
-	public cellFormatter?: ((value: any, row?: object, columnName?: string) => string);
+	public cellFormatter?: (value: any, row?: object, columnName?: string) => string;
 
 	/**
 	 * Sorting direction of the column.

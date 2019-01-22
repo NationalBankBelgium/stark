@@ -51,6 +51,7 @@ $small-icon-size: 18px;
 .mat-white {
   @include stark-button-color(#fff, $dark-primary-text);
 }
+
 .mat-icon.stark-small-icon {
   height: $small-icon-size;
   width: $small-icon-size;

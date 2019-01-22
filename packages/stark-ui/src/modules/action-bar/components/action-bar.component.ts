@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, ViewEncapsulation, Renderer2, ElementRef } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { StarkActionBarConfig } from "./action-bar-config.intf";
 import { StarkAction, StarkActionBarButtonColor } from "./action.intf";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";

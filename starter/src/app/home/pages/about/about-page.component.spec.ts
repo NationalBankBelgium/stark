@@ -4,17 +4,13 @@ import { inject, TestBed } from "@angular/core/testing";
 import { StoreModule } from "@ngrx/store";
 import {
 	STARK_APP_CONFIG,
+	STARK_LOGGING_SERVICE,
 	StarkApplicationConfig,
 	StarkBackend,
 	StarkBackendAuthenticationTypes,
-	StarkLoggingService,
-	STARK_LOGGING_SERVICE
+	StarkLoggingService
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-
-/**
- * Load the implementations that should be tested.
- */
 import { AboutPageComponent } from "./about-page.component";
 
 describe("About", () => {

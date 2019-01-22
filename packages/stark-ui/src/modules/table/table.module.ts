@@ -13,7 +13,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
-import { StarkTableComponent, StarkTableColumnComponent } from "./components";
+import { StarkTableColumnComponent, StarkTableComponent } from "./components";
 import { StarkTableMultisortDialogComponent } from "./components/dialogs/multisort.component";
 import { StarkActionBarModule } from "../action-bar/action-bar.module";
 import { StarkPaginationModule } from "../pagination/pagination.module";

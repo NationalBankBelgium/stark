@@ -1,11 +1,9 @@
 /* tslint:disable:completed-docs no-big-function no-duplicate-string no-identical-functions */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
-
 /* stark-core imports */
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-
 /* stark-ui imports */
 import { StarkPrettyPrintComponent } from "./pretty-print.component";
 

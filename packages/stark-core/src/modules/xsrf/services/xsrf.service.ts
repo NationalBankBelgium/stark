@@ -3,7 +3,7 @@ import { Inject, Injectable, Injector } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest } from "@angular/common/http";
 import moment from "moment";
-import { Observable, of, from } from "rxjs";
+import { from, Observable, of } from "rxjs";
 import { take } from "rxjs/operators";
 import { StarkXSRFService, starkXSRFServiceName } from "./xsrf.service.intf";
 import { STARK_XSRF_CONFIG, StarkXSRFConfig } from "./xsrf-config.intf";
@@ -11,7 +11,7 @@ import { StarkHttpHeaders } from "../../http/constants";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities";
 import { StarkBackend, StarkHttpErrorWrapper, StarkHttpErrorWrapperImpl } from "../../http/entities";
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "../../logging/services/logging.service.intf";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services/logging.service.intf";
 
 /**
  * Service to get/store the XSRF token to be used with the different backends.

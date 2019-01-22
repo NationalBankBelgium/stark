@@ -1,8 +1,8 @@
 import {
-	StarkHttpService,
+	StarkCollectionResponseWrapper,
 	StarkHttpRequest,
-	StarkSingleItemResponseWrapper,
-	StarkCollectionResponseWrapper
+	StarkHttpService,
+	StarkSingleItemResponseWrapper
 } from "@nationalbankbelgium/stark-core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";

@@ -1,6 +1,7 @@
 import { StarkSingleItemResponseWrapper } from "./single-item-response-wrapper.entity.intf";
 import { StarkResource } from "../resource.entity.intf";
 import { StarkHttpStatusCodes } from "../../enumerators";
+
 /**
  * @ignore
  */

@@ -16,8 +16,8 @@ import {
 	DemoMinimapPageComponent,
 	DemoPaginationPageComponent,
 	DemoPrettyPrintPageComponent,
-	DemoSliderPageComponent,
 	DemoSidebarPageComponent,
+	DemoSliderPageComponent,
 	DemoTablePageComponent,
 	DemoToastPageComponent
 } from "./pages";

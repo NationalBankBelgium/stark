@@ -10,6 +10,7 @@ export class DemoLogoutPageComponent implements OnInit {
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
 	public referenceList: ReferenceLink[];
+
 	/**
 	 * Component lifecycle hook
 	 */

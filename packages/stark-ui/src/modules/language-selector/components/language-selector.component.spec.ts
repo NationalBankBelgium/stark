@@ -6,9 +6,6 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { DateAdapter } from "@angular/material/core";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
-
-import Spy = jasmine.Spy;
-
 /* stark-core imports */
 import {
 	STARK_APP_METADATA,
@@ -21,12 +18,11 @@ import {
 } from "@nationalbankbelgium/stark-core";
 
 import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
-
 /* stark-ui imports */
 import { StarkLanguageSelectorComponent, StarkLanguageSelectorMode } from "./language-selector.component";
 import { StarkDropdownModule } from "../../dropdown";
-import { of } from "rxjs";
-import { throwError } from "rxjs/index";
+import { of, throwError } from "rxjs";
+import Spy = jasmine.Spy;
 
 /***
  * To be able to test changes to the input fields, the Language-Selector component is hosted inside the TestComponentHost class.

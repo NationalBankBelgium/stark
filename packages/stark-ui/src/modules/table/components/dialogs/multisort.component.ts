@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit, ViewEncapsulation, Renderer2, ElementRef } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { StarkTableColumnComponent, StarkTableColumnSortingDirection } from "../column.component";
 import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
 
