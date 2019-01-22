@@ -1,0 +1,22 @@
+.basic-table {
+  border-collapse: collapse;
+  border-radius: 2px;
+  border-spacing: 0;
+  margin: 0 0 32px;
+  width: 100%;
+  box-shadow: $elevation-4;
+
+  th {
+    font-size: mat-font-size($typography-config, subheading-2);
+    font-weight: mat-font-weight($typography-config, subheading-2);
+    line-height: mat-line-height($typography-config, subheading-2);
+    padding: 13px 32px;
+    text-align: left;
+  }
+
+  td {
+    background: #fff;
+    border-bottom: solid 1px #fafafa;
+    padding: 8px 16px;
+  }
+}

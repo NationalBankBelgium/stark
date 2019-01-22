@@ -1,9 +1,11 @@
 @import "basscss-missing-variables.pcss"; /* FIXME: Remove this import once the issue in basscss is solved (see: https://github.com/basscss/basscss/issues/257) */
 @import "~basscss/css/basscss.css";
 @import "~prismjs/themes/prism-okaidia.css";
-
+/*
+IMPORTANT: Stark styles are provided as SCSS styles so they should be imported in a SCSS file!
+*/
 @import "theme";
-@import "stark-styles.scss";
+@import "~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle";
 @import "../app/app.component";
 @import "../app/shared/components/reference-block/reference-block.component";
 @import "../app/shared/components/table-of-contents/table-of-contents.component";

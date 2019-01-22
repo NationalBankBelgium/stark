@@ -1,7 +1,7 @@
-@import "~@angular/material/theming";
+/*
+Import the local variables file first to set the correct variables, see:
+  - https://stark.nbb.be/showcase/latest/styleguide/typography
+  - https://stark.nbb.be/showcase/latest/styleguide/colors
+*/
 @import "variables";
-
-/* Stark NG Material themes */
-@import "~@nationalbankbelgium/stark-ui/assets/themes/theming";
-@import "~@nationalbankbelgium/stark-ui/assets/themes/button-theme";
-@import "~@nationalbankbelgium/stark-ui/assets/themes/card-theme";
+@import "~@nationalbankbelgium/stark-ui/assets/theming";

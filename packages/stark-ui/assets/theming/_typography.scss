@@ -1,3 +1,73 @@
+// https://material.angular.io/guide/typography
+$typography-theme: (
+  font-family: "BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+  display-4: (
+    112px,
+    112px,
+    300
+  ),
+  display-3: (
+    56px,
+    56px,
+    400
+  ),
+  display-2: (
+    45px,
+    48px,
+    400
+  ),
+  display-1: (
+    34px,
+    40px,
+    400
+  ),
+  headline: (
+    24px,
+    32px,
+    400
+  ),
+  title: (
+    20px,
+    32px,
+    500
+  ),
+  subheading-2: (
+    16px,
+    28px,
+    400
+  ),
+  subheading-1: (
+    15px,
+    24px,
+    400
+  ),
+  body-2: (
+    14px,
+    24px,
+    500
+  ),
+  body-1: (
+    14px,
+    20px,
+    400
+  ),
+  caption: (
+    12px,
+    20px,
+    400
+  ),
+  button: (
+    14px,
+    16px,
+    500
+  ),
+  input: (
+    inherit,
+    1.125,
+    400
+  )
+);
+
 @function mat-typography-level-create($list) {
   @return mat-typography-level(nth($list, 1), nth($list, 2), nth($list, 3));
 }
@@ -25,42 +95,3 @@ $typography-config: mat-typography-config(
 );
 
 @include mat-core($typography-config);
-
-/*
-Angular Material body-1, body-2,... are to be used only for components
-In the body, a different font size is used
-*/
-body {
-  font-family: mat-font-family($typography-config);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 26px;
-}
-
-h1 {
-  font-size: mat-font-size($typography-config, headline);
-  font-weight: mat-font-weight($typography-config, headline);
-  line-height: mat-line-height($typography-config, headline);
-  margin: 0 0 16px;
-}
-
-h2 {
-  font-size: mat-font-size($typography-config, title);
-  font-weight: mat-font-weight($typography-config, title);
-  line-height: mat-line-height($typography-config, title);
-  margin: 0 0 16px;
-}
-
-h3 {
-  font-size: mat-font-size($typography-config, subheading-2);
-  font-weight: mat-font-weight($typography-config, subheading-2);
-  line-height: mat-line-height($typography-config, subheading-2);
-  margin: 0 0 16px;
-}
-
-h4 {
-  font-size: mat-font-size($typography-config, subheading-1);
-  font-weight: mat-font-weight($typography-config, subheading-1);
-  line-height: mat-line-height($typography-config, subheading-1);
-  margin: 0 0 16px;
-}
