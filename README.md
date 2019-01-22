@@ -21,7 +21,7 @@
 Stark provides main building blocks for accelerating front-end development:
 
 -   a solid reusable build based on Webpack
--   a [stater](/starter) project inspired by [Angular Starter](https://github.com/gdi2290/angular-starter) by [AngularClass](https://angularclass.com) and Google's [Web Starter Kit](https://github.com/google/web-starter-kit)
+-   a [starter](/starter) project inspired by [Angular Starter](https://github.com/gdi2290/angular-starter) by [AngularClass](https://angularclass.com) and Google's [Web Starter Kit](https://github.com/google/web-starter-kit)
 -   [core modules](https://stark.nbb.be/api-docs/stark-core/latest/) providing reusable APIs (e.g., reactive client for RESTful APIs based on [NBB's RESTful API Design Guide](https://github.com/NationalBankBelgium/REST-API-Design-Guide/wiki), routing, logging, log shipping, ...)
 -   [UI modules](https://stark.nbb.be/api-docs/stark-ui/latest/) providing reusable UI components (e.g., data table, message pane, ...) and themes
 -   a [showcase](https://stark.nbb.be) application containing
