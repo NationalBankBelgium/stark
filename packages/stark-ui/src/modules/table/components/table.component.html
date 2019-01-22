@@ -1,5 +1,7 @@
 <div class="header">
-	<div class="transcluded"><ng-content select="header"></ng-content></div>
+	<div class="transcluded">
+		<ng-content select="header"></ng-content>
+	</div>
 	<div class="actions" [ngClass]="{ 'actions-alt': customTableActionsType === 'alt' }">
 		<stark-action-bar
 			[actionBarConfig]="customTableRegularActions"

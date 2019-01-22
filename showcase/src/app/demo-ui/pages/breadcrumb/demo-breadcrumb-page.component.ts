@@ -14,6 +14,7 @@ const componentName: string = "demo-breadcrumb";
 })
 export class DemoBreadcrumbPageComponent implements OnInit {
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+
 	public referenceList: ReferenceLink[];
 
 	/**

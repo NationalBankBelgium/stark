@@ -2,6 +2,7 @@ import { StarkCollectionResponseWrapper } from "./collection-response-wrapper.en
 import { StarkResource } from "../resource.entity.intf";
 import { StarkCollectionMetadata } from "../metadata";
 import { StarkHttpStatusCodes } from "../../enumerators";
+
 /**
  * @ignore
  */

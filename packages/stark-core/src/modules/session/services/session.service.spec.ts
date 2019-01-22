@@ -34,9 +34,9 @@ import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
 import { MockStarkRoutingService } from "../../routing/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
+import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../constants";
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
-import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../constants";
 
 describe("Service: StarkSessionService", () => {
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;

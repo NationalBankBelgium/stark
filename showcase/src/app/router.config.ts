@@ -1,4 +1,4 @@
-import { UIRouter, Category, StateDeclaration } from "@uirouter/core";
+import { Category, StateDeclaration, UIRouter } from "@uirouter/core";
 
 export function logRegisteredStates(registeredStates: StateDeclaration[]): void {
 	let message: string = "=============  Registered Ui-Router states: ==============\n";

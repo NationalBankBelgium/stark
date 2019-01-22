@@ -1,6 +1,6 @@
 import { StarkMessage, StarkMessageType } from "../../../common/message";
 import { StarkMessageCollection } from "../entities";
-import { StarkMessagePaneActionTypes, StarkMessagePaneActions } from "../actions";
+import { StarkMessagePaneActions, StarkMessagePaneActionTypes } from "../actions";
 import { StarkAddMessages, StarkRemoveMessages } from "../actions/message-pane.actions";
 
 /**

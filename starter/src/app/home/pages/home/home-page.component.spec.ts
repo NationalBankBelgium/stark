@@ -4,17 +4,14 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { StoreModule } from "@ngrx/store";
 import {
 	STARK_APP_CONFIG,
+	STARK_HTTP_SERVICE,
+	STARK_LOGGING_SERVICE,
 	StarkApplicationConfig,
 	StarkBackend,
 	StarkBackendAuthenticationTypes,
-	StarkLoggingService,
-	STARK_LOGGING_SERVICE,
-	STARK_HTTP_SERVICE
+	StarkLoggingService
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkHttpService, MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-/**
- * Load the implementations that should be tested.
- */
 import { HomePageComponent } from "./home-page.component";
 import SpyObj = jasmine.SpyObj;
 

@@ -43,7 +43,7 @@ export class DemoDropdownPageComponent implements OnInit, OnDestroy {
 
 		this.serviceFormControl = new FormControl();
 		this.serviceFormControlSubscription = this.serviceFormControl.valueChanges.subscribe(
-			(value: any) => this.selectedServiceFormControl = value
+			(value: any) => (this.selectedServiceFormControl = value)
 		);
 	}
 

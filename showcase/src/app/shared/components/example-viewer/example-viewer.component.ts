@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from "@angular/core";
+import { Component, Inject, Input, OnInit } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { STARK_LOGGING_SERVICE, StarkErrorImpl, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { FileService } from "../../services";

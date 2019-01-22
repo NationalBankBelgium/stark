@@ -3,12 +3,8 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { StoreModule } from "@ngrx/store";
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-
-/**
- * Load the implementations that should be tested.
- */
 import { NewsPageComponent } from "./news-page.component";
 import SpyObj = jasmine.SpyObj;
 

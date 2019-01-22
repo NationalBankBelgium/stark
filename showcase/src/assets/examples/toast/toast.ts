@@ -1,10 +1,10 @@
 import { Component, Inject } from "@angular/core";
 import {
 	STARK_TOAST_NOTIFICATION_SERVICE,
-	StarkToastNotificationService,
-	StarkToastNotificationResult,
+	StarkMessageType,
 	StarkToastMessage,
-	StarkMessageType
+	StarkToastNotificationResult,
+	StarkToastNotificationService
 } from "@nationalbankbelgium/stark-ui";
 
 @Component({

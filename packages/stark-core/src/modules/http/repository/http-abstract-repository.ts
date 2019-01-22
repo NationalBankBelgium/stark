@@ -21,8 +21,8 @@ import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
  */
 export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 	/**
-	 * 	The Http Service provided by Stark
-	 * 	@link StarkHttpService
+	 * The Http Service provided by Stark
+	 * @link StarkHttpService
 	 */
 	protected starkHttpService: StarkHttpService<T>;
 	/**

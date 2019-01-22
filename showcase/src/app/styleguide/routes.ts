@@ -1,10 +1,10 @@
 import { Ng2StateDeclaration } from "@uirouter/angular";
 import {
-	StyleguideTypographyPageComponent,
-	StyleguideCardPageComponent,
 	StyleguideButtonPageComponent,
+	StyleguideCardPageComponent,
+	StyleguideColorsPageComponent,
 	StyleguideHeaderPageComponent,
-	StyleguideColorsPageComponent
+	StyleguideTypographyPageComponent
 } from "./pages";
 
 export const STYLEGUIDE_STATES: Ng2StateDeclaration[] = [

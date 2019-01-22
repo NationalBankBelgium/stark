@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs max-inline-declarations */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { Component, ViewChild, EventEmitter } from "@angular/core";
+import { Component, EventEmitter, ViewChild } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSliderComponent } from "./slider.component";

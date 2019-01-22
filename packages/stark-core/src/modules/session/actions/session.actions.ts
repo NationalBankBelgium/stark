@@ -29,6 +29,7 @@ export class StarkChangeLanguage implements Action {
 	 * @link StarkSessionActionTypes
 	 */
 	public readonly type: StarkSessionActionTypes.CHANGE_LANGUAGE = StarkSessionActionTypes.CHANGE_LANGUAGE;
+
 	/**
 	 * Class constructor
 	 * @param languageId - The target language to change to.
@@ -88,7 +89,7 @@ export class StarkInitializeSession implements Action {
 }
 
 /**
- * 	Triggered when the initialization of the user's session has finished succesfully.
+ * Triggered when the initialization of the user's session has finished succesfully.
  */
 export class StarkInitializeSessionSuccess implements Action {
 	/**
@@ -182,7 +183,7 @@ export class StarkSessionLogout implements Action {
 }
 
 /**
- * 	Triggered by the pauseUserActivityTracking() method when the user activity tracking (automatically done by the Session service) is paused.
+ * Triggered by the pauseUserActivityTracking() method when the user activity tracking (automatically done by the Session service) is paused.
  */
 export class StarkUserActivityTrackingPause implements Action {
 	/**
@@ -193,7 +194,7 @@ export class StarkUserActivityTrackingPause implements Action {
 }
 
 /**
- * 	Triggered by the resumeUserActivityTracking()  method when the user activity tracking (automatically done by the Session service) is resumed.
+ * Triggered by the resumeUserActivityTracking()  method when the user activity tracking (automatically done by the Session service) is resumed.
  */
 export class StarkUserActivityTrackingResume implements Action {
 	/**

@@ -1,13 +1,13 @@
 import { Observable } from "rxjs";
 import {
-	TransitionHookFn,
-	TransitionStateHookFn,
 	HookMatchCriteria,
 	HookRegOptions,
 	RawParams,
 	StateDeclaration,
 	StateObject,
-	TransitionOptions
+	TransitionHookFn,
+	TransitionOptions,
+	TransitionStateHookFn
 } from "@uirouter/core";
 
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";

@@ -133,6 +133,7 @@ export class StarkReload implements Action {
 	 */
 	public constructor(public state: string) {}
 }
+
 /**
  * Triggered when a reload succeeded and finished.
  * This action is dispatched for any navigation, including those navigations triggered not by the navigateTo()
@@ -152,6 +153,7 @@ export class StarkReloadSuccess implements Action {
 	 */
 	public constructor(public state: string, public params: RawParams) {}
 }
+
 /**
  * Triggered when a reload failed.
  * This action is just triggered in case the reload was done by calling the reload() method.

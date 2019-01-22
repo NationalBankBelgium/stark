@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@angular/core";
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
-import { StarkXSRFService, STARK_XSRF_SERVICE } from "../services/xsrf.service.intf";
+import { STARK_XSRF_SERVICE, StarkXSRFService } from "../services/xsrf.service.intf";
 
 /**
  * Angular Http interceptor that adds the XSRF configuration to every state-changing request (POST,PUT,PATCH and DELETE)

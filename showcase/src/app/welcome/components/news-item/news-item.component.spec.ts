@@ -5,11 +5,9 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { StoreModule } from "@ngrx/store";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-/**
- * Load the implementations that should be tested.
- */
-import SpyObj = jasmine.SpyObj;
 import { NewsItemComponent } from "./news-item.component";
+
+import SpyObj = jasmine.SpyObj;
 
 describe(`News`, () => {
 	let comp: NewsItemComponent;

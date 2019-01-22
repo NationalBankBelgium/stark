@@ -6,7 +6,7 @@ import { NgIdleModule } from "@ng-idle/core";
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { from } from "rxjs";
 import { starkSessionReducers } from "./reducers";
-import { StarkSessionConfig, STARK_SESSION_CONFIG } from "./entities";
+import { STARK_SESSION_CONFIG, StarkSessionConfig } from "./entities";
 import { STARK_SESSION_SERVICE, StarkSessionServiceImpl } from "./services";
 import { STARK_ROUTING_SERVICE, StarkRoutingService } from "../routing/services";
 import { SESSION_STATES } from "./routes";

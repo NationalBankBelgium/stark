@@ -1,27 +1,20 @@
 /* tslint:disable:completed-docs no-commented-code no-big-function no-duplicate-string max-union-size no-identical-functions */
 
 /* angular imports */
-import { async, ComponentFixture, fakeAsync, tick, TestBed } from "@angular/core/testing";
-import { Component, ViewChild, NO_ERRORS_SCHEMA, DebugElement } from "@angular/core";
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
+import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { By } from "@angular/platform-browser";
 import { CommonModule } from "@angular/common";
 import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
 import { FormsModule } from "@angular/forms";
-
 /* rxjs imports */
-import { BehaviorSubject, Observer, Observable } from "rxjs";
-
-/* jasmine imports */
-import Spy = jasmine.Spy;
-import createSpyObj = jasmine.createSpyObj;
-
+import { BehaviorSubject, Observable, Observer } from "rxjs";
 /* stark-core imports */
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-
 /* stark-ui imports */
 import { StarkMessagePaneComponent, StarkMessagePaneNavItem } from "./message-pane.component";
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService } from "../services";
@@ -29,11 +22,15 @@ import { MockStarkMessagePaneService } from "../testing/message-pane.mock";
 import { StarkMessageCollection } from "../entities";
 import {
 	starkMessagePaneAlignClassPrefix,
-	starkMessagePaneDisplayedClass,
-	starkMessagePaneDisplayAnimatedClass
+	starkMessagePaneDisplayAnimatedClass,
+	starkMessagePaneDisplayedClass
 } from "./message-pane.constants";
 import { StarkMessage, StarkMessageType } from "../../../common/message";
 import { StarkDOMUtil } from "../../../util/dom/dom.util";
+
+/* jasmine imports */
+import Spy = jasmine.Spy;
+import createSpyObj = jasmine.createSpyObj;
 
 /***
  * To be able to test changes to the input fields, the message pane component is hosted inside the TestComponentHost class.

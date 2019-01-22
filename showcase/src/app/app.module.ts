@@ -54,9 +54,9 @@ import {
 	StarkAppMenuModule,
 	StarkAppSidebarModule,
 	StarkDatePickerModule,
-	StarkMinimapModule,
 	StarkLanguageSelectorModule,
 	StarkMessagePaneModule,
+	StarkMinimapModule,
 	StarkSessionUiModule,
 	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";

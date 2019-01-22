@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Observable, interval } from "rxjs";
+import { interval, Observable } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { map, startWith, tap, take } from "rxjs/operators";
+import { map, startWith, take, tap } from "rxjs/operators";
 
 /**
  * The name of the component

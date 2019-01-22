@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkBreadcrumbConfig } from "@nationalbankbelgium/stark-ui";
+
 const componentName: string = "breadcrumb-both-input-component";
 
 /**

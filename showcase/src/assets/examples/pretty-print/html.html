@@ -2,7 +2,9 @@
 <pre class="code-block">{{ rawHtmlData }}</pre>
 
 <h3>Pretty Printed</h3>
-<div class="code-block"><stark-pretty-print [data]="rawHtmlData" format="hHtml" [enableHighlighting]="false"></stark-pretty-print></div>
+<div class="code-block">
+	<stark-pretty-print [data]="rawHtmlData" format="hHtml" [enableHighlighting]="false"></stark-pretty-print>
+</div>
 
 <h3>Pretty Printed & Highlighted</h3>
 <stark-pretty-print [data]="rawHtmlData" format="hHtml" [enableHighlighting]="true"></stark-pretty-print>

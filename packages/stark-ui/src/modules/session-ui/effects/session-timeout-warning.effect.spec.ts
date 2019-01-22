@@ -1,13 +1,12 @@
 /*tslint:disable:completed-docs no-big-function*/
-import createSpyObj = jasmine.createSpyObj;
-import { Observable, ReplaySubject, Observer, Subject } from "rxjs";
+import { Observable, Observer, ReplaySubject, Subject } from "rxjs";
 import { async, TestBed } from "@angular/core/testing";
 import {
 	STARK_SESSION_SERVICE,
+	StarkInitializeSession,
 	StarkSessionService,
-	StarkSessionTimeoutCountdownStart,
 	StarkSessionTimeoutCountdownFinish,
-	StarkInitializeSession
+	StarkSessionTimeoutCountdownStart
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import { provideMockActions } from "@ngrx/effects/testing";
@@ -19,7 +18,7 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog.component";
 import { StarkSessionTimeoutWarningDialogEffects } from "../effects/session-timeout-warning.effects";
 import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities/stark-session-ui-config";
-
+import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 
 describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {

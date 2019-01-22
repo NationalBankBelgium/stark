@@ -1,4 +1,4 @@
-import { StarkUserService, StarkUser } from "@nationalbankbelgium/stark-core";
+import { StarkUser, StarkUserService } from "@nationalbankbelgium/stark-core";
 import { Observable } from "rxjs";
 
 /**

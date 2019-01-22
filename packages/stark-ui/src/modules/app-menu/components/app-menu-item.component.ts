@@ -8,9 +8,9 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
+	Renderer2,
 	ViewChild,
-	ViewEncapsulation,
-	Renderer2
+	ViewEncapsulation
 } from "@angular/core";
 import { MatExpansionPanel } from "@angular/material/expansion";
 import {
@@ -74,6 +74,7 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	 * Active status of the component
 	 */
 	private _isActive: boolean = false;
+
 	public set isActive(isActive: boolean) {
 		this._isActive = isActive;
 		if (isActive && this.menuGroup.entries) {
@@ -86,6 +87,7 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 			this.deactivated.emit();
 		}
 	}
+
 	public get isActive(): boolean {
 		return this._isActive;
 	}

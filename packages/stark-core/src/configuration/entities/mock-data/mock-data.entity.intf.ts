@@ -1,5 +1,6 @@
 import { InjectionToken } from "@angular/core";
 import { StarkUser } from "../../../modules/user";
+
 /**
  * The InjectionToken that defines the StarkApplicationConfig, in case an injection is needed.
  */

@@ -15,12 +15,12 @@ import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants"
 import { StarkRoutingActionTypes } from "../actions";
 import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
-import CallInfo = jasmine.CallInfo;
-import Spy = jasmine.Spy;
-import SpyObj = jasmine.SpyObj;
 import { StarkErrorHandler } from "../../error-handling";
 import { StarkXSRFService } from "../../xsrf/services";
 import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
+import CallInfo = jasmine.CallInfo;
+import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
 
 @Component({ selector: "test-home", template: "HOME" })
 export class HomeComponent {}
@@ -60,7 +60,11 @@ describe("Service: StarkRoutingService", () => {
 	//             |              |
 	//       page-01-02-01   page-01-02-02
 
-	const inheritedParams: { [param: string]: any } = { requestId: "default value", seniority: undefined, onBehalfView: false };
+	const inheritedParams: { [param: string]: any } = {
+		requestId: "default value",
+		seniority: undefined,
+		onBehalfView: false
+	};
 	const mockStates: Ng2StateDeclaration[] = [
 		{
 			name: "homepage",

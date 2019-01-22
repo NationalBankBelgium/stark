@@ -1,5 +1,5 @@
 import { Component, HostBinding, Inject, Input, OnInit } from "@angular/core";
-import { StarkLoggingService, STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { ReferenceLink } from "./reference-link.intf";
 
 const componentName: string = "stark-reference-block";

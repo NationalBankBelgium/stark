@@ -2,6 +2,7 @@ import { StarkLogMessage } from "./log-message.entity.intf";
 import { StarkLogging } from "./logging.entity.intf";
 import { serialize, serializeAs } from "cerialize";
 import { StarkLogMessageImpl } from "./log-message.entity";
+
 /**
  * @ignore
  */

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAction, StarkActionBarConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";

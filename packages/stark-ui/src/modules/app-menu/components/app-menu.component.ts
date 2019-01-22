@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, ViewEncapsulation, ElementRef, Renderer2 } from "@angular/core";
+import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkMenuSection } from "./app-menu-section.intf";
@@ -36,6 +36,7 @@ export class StarkAppMenuComponent extends AbstractStarkUiComponent implements O
 		this._menuConfig = menuConfig;
 		this.hasSections = this._menuConfig.hasOwnProperty("menuSections");
 	}
+
 	public get menuConfig(): StarkMenuConfig {
 		return this._menuConfig;
 	}

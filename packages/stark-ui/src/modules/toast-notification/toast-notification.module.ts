@@ -1,16 +1,17 @@
-import { NgModule, ModuleWithProviders, SkipSelf, Optional } from "@angular/core";
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslateModule } from "@ngx-translate/core";
 import {
-	STARK_TOAST_NOTIFICATION_SERVICE,
-	StarkToastNotificationServiceImpl,
 	STARK_TOAST_NOTIFICATION_OPTIONS,
-	StarkToastNotificationOptions
+	STARK_TOAST_NOTIFICATION_SERVICE,
+	StarkToastNotificationOptions,
+	StarkToastNotificationServiceImpl
 } from "./services";
 import { StarkToastNotificationComponent } from "./components";
+
 @NgModule({
 	declarations: [StarkToastNotificationComponent],
 	imports: [CommonModule, MatButtonModule, MatIconModule, MatSnackBarModule, TranslateModule],

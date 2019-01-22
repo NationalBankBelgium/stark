@@ -1,4 +1,4 @@
-import { Injectable, Inject } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAppSidebarService, starkAppSidebarServiceName } from "./app-sidebar.service.intf";

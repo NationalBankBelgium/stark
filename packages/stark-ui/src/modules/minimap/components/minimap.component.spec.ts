@@ -1,8 +1,6 @@
 //tslint:disable:no-commented-code completed-docs
 import { StarkMinimapComponent } from "./minimap.component";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
-import createSpyObj = jasmine.createSpyObj;
-import SpyObj = jasmine.SpyObj;
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -13,6 +11,8 @@ import { Component, EventEmitter, NO_ERRORS_SCHEMA, ViewChild } from "@angular/c
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ItemVisibility } from "./item-visibility.intf";
+import createSpyObj = jasmine.createSpyObj;
+import SpyObj = jasmine.SpyObj;
 
 @Component({
 	selector: `host-component`,

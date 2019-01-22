@@ -6,9 +6,9 @@ import {
 	STARK_ROUTING_SERVICE,
 	STARK_SESSION_SERVICE,
 	STARK_USER_SERVICE,
-	StarkUser,
 	StarkRoutingService,
 	StarkSessionService,
+	StarkUser,
 	StarkUserService
 } from "@nationalbankbelgium/stark-core";
 import {

@@ -1,10 +1,10 @@
 import {
-	ValidatorConstraint,
-	ValidatorConstraintInterface,
-	ValidationOptions,
 	registerDecorator,
+	validateSync,
 	ValidationError,
-	validateSync
+	ValidationOptions,
+	ValidatorConstraint,
+	ValidatorConstraintInterface
 } from "class-validator";
 import { StarkValidationErrorsUtil } from "../../../util";
 

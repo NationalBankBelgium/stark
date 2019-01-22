@@ -1,8 +1,5 @@
-import { ViewEncapsulation, Component, Inject, Input, OnDestroy, OnInit, Renderer2, ElementRef } from "@angular/core";
-import {
-	StarkLoggingService,
-	STARK_LOGGING_SERVICE,
-} from "@nationalbankbelgium/stark-core";
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkDOMUtil } from "../../../util/dom/dom.util";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -62,7 +59,7 @@ export class StarkAppDataComponent extends AbstractStarkUiComponent implements O
 	}
 
 	/**
-	 * Manage the fact that the detail are shown or hidden. 
+	 * Manage the fact that the detail are shown or hidden.
 	 */
 	public toggleDetail(): void {
 		this.isDetailHidden = !this.isDetailHidden;

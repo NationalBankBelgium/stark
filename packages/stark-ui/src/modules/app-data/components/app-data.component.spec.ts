@@ -30,10 +30,8 @@ describe("AppDataComponent", () => {
 				MatTooltipModule,
 				TranslateModule.forRoot()
 			],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-				TranslateService
-			]}).compileComponents();
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger }, TranslateService]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -58,7 +56,6 @@ describe("AppDataComponent", () => {
 
 	describe("OnInit", () => {
 		it("OnInit", () => {
-
 			component.ngOnInit();
 
 			expect(component.isDetailHidden).toBe(true);

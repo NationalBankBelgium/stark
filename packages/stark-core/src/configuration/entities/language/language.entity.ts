@@ -2,6 +2,7 @@ import { IsNotEmpty, IsString, Matches } from "class-validator";
 import { autoserialize } from "cerialize";
 import { StarkLanguage } from "./language.entity.intf";
 import { StarkIsSupportedLanguage } from "../../../validation/decorators/is-supported-language";
+
 /**
  * @ignore
  */

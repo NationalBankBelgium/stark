@@ -28,6 +28,7 @@ import {
 	StarkApplicationConfigImpl,
 	StarkApplicationMetadata,
 	StarkApplicationMetadataImpl,
+	StarkErrorHandlingModule,
 	StarkHttpModule,
 	StarkLoggingActionTypes,
 	StarkLoggingModule,
@@ -38,8 +39,7 @@ import {
 	StarkSettingsModule,
 	StarkSettingsService,
 	StarkUser,
-	StarkUserModule,
-	StarkErrorHandlingModule
+	StarkUserModule
 } from "@nationalbankbelgium/stark-core";
 
 import {
@@ -78,6 +78,7 @@ import { AppComponent } from "./app.component";
 // load SASS styles
 import "../styles/styles.scss";
 /* tslint:enable */
+
 // TODO: where to put this factory function?
 export function starkAppConfigFactory(): StarkApplicationConfig {
 	const config: any = require("../stark-app-config.json");

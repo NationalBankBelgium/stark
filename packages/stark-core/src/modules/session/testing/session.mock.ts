@@ -1,5 +1,6 @@
 import { StarkSessionService } from "@nationalbankbelgium/stark-core";
 import { Observable } from "rxjs";
+
 /**
  * @ignore
  */

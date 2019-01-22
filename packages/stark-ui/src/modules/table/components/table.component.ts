@@ -32,7 +32,7 @@ import { StarkAction } from "../../action-bar/components/action.intf";
 import { StarkTableColumnProperties } from "./column-properties.intf";
 import { StarkTableFilter } from "./table-filter.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { StarkPaginationConfig, StarkPaginationComponent } from "../../pagination/components";
+import { StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
 import { StarkPaginateEvent } from "../../pagination/components/paginate-event.intf";
 import { StarkComponentUtil } from "../../../util/component";
 

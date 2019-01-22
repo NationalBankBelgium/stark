@@ -4,12 +4,12 @@ import { TestBed } from "@angular/core/testing";
 import { Observable, Observer, ReplaySubject } from "rxjs";
 import { provideMockActions } from "@ngrx/effects/testing";
 
-import createSpyObj = jasmine.createSpyObj;
-
 import { StarkMessagePaneEffects } from "./message-pane.effects";
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService } from "../services";
 import { StarkNavigateSuccess } from "@nationalbankbelgium/stark-core";
 import { MockStarkMessagePaneService } from "../testing/message-pane.mock";
+
+import createSpyObj = jasmine.createSpyObj;
 
 describe("Effect: StarkMessagePaneEffects", () => {
 	let messagePaneEffects: StarkMessagePaneEffects;

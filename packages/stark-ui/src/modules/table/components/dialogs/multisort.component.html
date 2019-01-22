@@ -13,7 +13,9 @@
 				<mat-form-field class="form-field-name">
 					<mat-select [value]="rule" (selectionChange)="onColumnChange(rule, $event.value)">
 						<ng-container *ngFor="let ruleOption of rules; trackBy: trackRuleFn">
-							<mat-option *ngIf="ruleOption == rule || !ruleOption.sortDirection" [value]="ruleOption">{{ ruleOption.column.name }}</mat-option>
+							<mat-option *ngIf="ruleOption == rule || !ruleOption.sortDirection" [value]="ruleOption"
+								>{{ ruleOption.column.name }}
+							</mat-option>
 						</ng-container>
 					</mat-select>
 				</mat-form-field>

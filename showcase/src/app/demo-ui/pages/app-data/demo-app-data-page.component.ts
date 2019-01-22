@@ -1,18 +1,19 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import {
-	STARK_USER_SERVICE,
-	StarkUserService,
+	STARK_APP_METADATA,
 	STARK_LOGGING_SERVICE,
-	StarkLoggingService,
-	StarkUser,
-	StarkApplicationMetadata,
-	StarkSessionService,
 	STARK_SESSION_SERVICE,
-	STARK_APP_METADATA
+	STARK_USER_SERVICE,
+	StarkApplicationMetadata,
+	StarkLoggingService,
+	StarkSessionService,
+	StarkUser,
+	StarkUserService
 } from "@nationalbankbelgium/stark-core";
 import * as moment from "moment";
 import { ReferenceLink } from "../../../shared/components/reference-block";
 import { filter } from "rxjs/operators";
+
 const componentName: string = "demo-app-data";
 
 @Component({

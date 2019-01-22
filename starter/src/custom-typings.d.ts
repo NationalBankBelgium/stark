@@ -86,5 +86,7 @@ interface ErrorStackTraceLimit {
 
 // Extend typings
 interface ErrorConstructor extends ErrorStackTraceLimit {}
+
 interface NodeRequireFunction extends Es6PromiseLoader {}
+
 interface Global extends GlobalEnvironment {}

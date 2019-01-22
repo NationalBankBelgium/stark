@@ -13,6 +13,7 @@ export class DemoDropdownComponent implements OnInit {
 	public serviceDropdownOptions: any[];
 
 	public serviceFormControl: FormControl;
+
 	/**
 	 * Component lifecycle hook
 	 */

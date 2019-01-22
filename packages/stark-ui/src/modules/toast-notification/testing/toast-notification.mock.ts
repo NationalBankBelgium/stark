@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { StarkToastMessage, StarkToastNotificationService, StarkToastNotificationResult } from "@nationalbankbelgium/stark-ui";
+import { StarkToastMessage, StarkToastNotificationResult, StarkToastNotificationService } from "@nationalbankbelgium/stark-ui";
 
 /**
  * Mock class of the {@link StarkToastNotificationService|StarkToastNotificationService}.

@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+
 /**
  * @ignore
  */

@@ -1,4 +1,5 @@
 import { StarkHttpErrorBase } from "./http-error-base.entity.intf";
+
 /**
  * The StarkHttpErrorDetail class contains all the information about the error(s) that are part of the Http
  * error in case of failure of any type of request performed by the Stark Http Service and it is wrapped in a StarkHttpError.
