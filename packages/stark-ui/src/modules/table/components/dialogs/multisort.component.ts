@@ -1,7 +1,8 @@
 import { Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { StarkTableColumnComponent, StarkTableColumnSortingDirection } from "../column.component";
+import { StarkTableColumnComponent } from "../column.component";
 import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
+import { StarkTableColumnSortingDirection } from "../../entities";
 
 /**
  * Content of the data to be passed to the StarkTableMultisortDialogComponent
@@ -36,7 +37,7 @@ export interface StarkSortingRule {
  */
 @Component({
 	selector: "stark-table-dialog-multisort",
-	templateUrl: "multisort.component.html",
+	templateUrl: "./multisort.component.html",
 	encapsulation: ViewEncapsulation.None,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {

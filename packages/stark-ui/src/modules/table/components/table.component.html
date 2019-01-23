@@ -38,11 +38,9 @@
 						<input
 							matInput
 							id="{{ htmlId + '-' + 'table-filter' }}"
-							placeholder="Global Filter"
-							name="filter"
-							value=""
-							[(ngModel)]="filter.globalFilterValue"
-							(keyup)="applyFilter()"
+							[placeholder]="'STARK.TABLE.GLOBAL_FILTER' | translate"
+							name="global-filter"
+							[formControl]="_globalFilterFormCtrl"
 						/>
 					</mat-form-field>
 					<button mat-icon-button (click)="onClearFilter()">
@@ -84,7 +82,7 @@
 			*ngFor="let col of columnProperties; trackBy: trackColumnFn"
 			[name]="col.name"
 			[headerLabel]="col.label"
-			[sortable]="col.isSortable"
+			[sortable]="col.isSortable !== false"
 			[sortDirection]="getColumnSortingDirection(col.name)"
 			[sortPriority]="getColumnSortingPriority(col.name)"
 			[filterable]="col.isFilterable"
@@ -101,7 +99,11 @@
 
 		<ng-content select=".stark-table-columns"></ng-content>
 
-		<stark-table-column *ngIf="tableRowsActionBarConfig && tableRowsActionBarConfig.actions" name="STARK.TABLE.ACTIONS">
+		<stark-table-column
+			*ngIf="tableRowsActionBarConfig && tableRowsActionBarConfig.actions"
+			[sortable]="false"
+			[name]="'STARK.TABLE.ACTIONS' | translate"
+		>
 			<ng-template let-context>
 				<stark-action-bar
 					[actionBarConfig]="tableRowsActionBarConfig"

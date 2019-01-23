@@ -4,8 +4,11 @@ import {
 	ElementRef,
 	EventEmitter,
 	Input,
+	OnChanges,
+	OnInit,
 	Output,
 	Renderer2,
+	SimpleChanges,
 	TemplateRef,
 	ViewChild,
 	ViewEncapsulation
@@ -13,16 +16,19 @@ import {
 import { MatColumnDef } from "@angular/material/table";
 import { TranslateService } from "@ngx-translate/core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { FormControl } from "@angular/forms";
+import { distinctUntilChanged } from "rxjs/operators";
+import { StarkColumnFilterChangedOutput, StarkColumnSortChangedOutput, StarkTableColumnSortingDirection } from "../entities";
+
+/**
+ * @ignore
+ */
+const _isEqual: Function = require("lodash/isEqual");
 
 /**
  * @ignore
  */
 const _get: Function = require("lodash/get");
-
-/**
- * Column sorting directions of the StarkTableComponent
- */
-export type StarkTableColumnSortingDirection = "asc" | "desc" | "";
 
 /**
  * Component to display a column inside the StarkTableComponent
@@ -36,7 +42,7 @@ export type StarkTableColumnSortingDirection = "asc" | "desc" | "";
 		class: "stark-table-column"
 	}
 })
-export class StarkTableColumnComponent extends AbstractStarkUiComponent {
+export class StarkTableColumnComponent extends AbstractStarkUiComponent implements OnInit, OnChanges {
 	/**
 	 * Name of the property that will be the source of the column.
 	 */
@@ -102,7 +108,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Use "\*" and "\?" to match exactly the characters "*" and "?"
 	 */
 	@Input()
-	public filterValue: string;
+	public filterValue?: string;
 
 	/**
 	 * Label to be shown as the column's header. Default: the column's name
@@ -114,10 +120,10 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Whether the column is sortable or not. Default: true
 	 */
 	@Input()
-	public sortable: boolean = false;
+	public sortable: boolean = true;
 
 	/**
-	 * Priority of the column. Default: PERSIST
+	 * Priority of the column.
 	 */
 	@Input()
 	public sortPriority: number;
@@ -139,13 +145,13 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Output that will emit a specific column whenever its filter value has changed
 	 */
 	@Output()
-	public filterChanged: EventEmitter<StarkTableColumnComponent> = new EventEmitter<StarkTableColumnComponent>();
+	public filterChanged: EventEmitter<StarkColumnFilterChangedOutput> = new EventEmitter<StarkColumnFilterChangedOutput>();
 
 	/**
 	 * Output that will emit a specific column whenever its sorting direction has changed
 	 */
 	@Output()
-	public sortChanged: EventEmitter<StarkTableColumnComponent> = new EventEmitter<StarkTableColumnComponent>();
+	public sortChanged: EventEmitter<StarkColumnSortChangedOutput> = new EventEmitter<StarkColumnSortChangedOutput>();
 
 	/**
 	 * Reference to the MatColumnDef embedded in this component
@@ -160,6 +166,12 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	public columnTemplate: TemplateRef<object>;
 
 	/**
+	 * @ignore
+	 * Internal formControl to manage the filter value of the column
+	 */
+	public _filterFormCtrl: FormControl;
+
+	/**
 	 * Class constructor
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
@@ -167,6 +179,28 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 */
 	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef, private translateService: TranslateService) {
 		super(renderer, elementRef);
+	}
+
+	public ngOnInit(): void {
+		this._filterFormCtrl = new FormControl(this.filterValue);
+
+		this._filterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
+			this.filterValue = value === null ? undefined : value;
+			this.filterChanged.emit({
+				filterValue: this.filterValue,
+				name: this.name
+			});
+		});
+	}
+
+	public ngOnChanges(simpleChanges: SimpleChanges): void {
+		if (
+			simpleChanges["filterValue"] &&
+			!simpleChanges["filterValue"].isFirstChange() &&
+			!_isEqual(simpleChanges["filterValue"].previousValue, simpleChanges["filterValue"].currentValue)
+		) {
+			this._filterFormCtrl.setValue(this.filterValue);
+		}
 	}
 
 	/**
@@ -223,7 +257,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Called when the Clear button in the filter pop-up is clicked
 	 */
 	public onClearFilter(): void {
-		this.filterValue = "";
+		this._filterFormCtrl.reset();
 		this.onFilterChange();
 	}
 
@@ -231,14 +265,19 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent {
 	 * Called whenever the value of the filter input changes
 	 */
 	public onFilterChange(): void {
-		this.filterChanged.emit();
+		this.filterChanged.emit(this);
 	}
 
 	/**
 	 * Called whenever the sorting of the column changes
 	 */
 	public onSortChange(): void {
-		this.sortChanged.emit(this);
+		this.sortChanged.emit({
+			name: this.name,
+			sortable: this.sortable,
+			sortDirection: this.sortDirection,
+			sortPriority: this.sortPriority
+		});
 	}
 
 	/**

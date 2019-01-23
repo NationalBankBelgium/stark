@@ -29,7 +29,7 @@
 					(keyup)="$event.stopPropagation()"
 					(keydown)="$event.stopPropagation()"
 				>
-					<input matInput placeholder="Filter" value="" name="filter" [(ngModel)]="filterValue" (keyup)="onFilterChange()" />
+					<input matInput [placeholder]="'STARK.TABLE.FILTER' | translate" name="filter" [formControl]="_filterFormCtrl" />
 				</mat-form-field>
 				<button mat-icon-button (click)="onClearFilter()">
 					<mat-icon svgIcon="close" [matTooltip]="'STARK.TABLE.CLEAR_FILTER' | translate"></mat-icon>
