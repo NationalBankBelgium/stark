@@ -33,7 +33,7 @@
                 "output": "./"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": ["src/styles/styles.scss"],
             "scripts": [],
             "deployUrl": "",
             "baseHref": "/"

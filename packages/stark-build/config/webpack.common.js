@@ -33,10 +33,12 @@ module.exports = options => {
 	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
 	const supportES2015 = buildUtils.supportES2015(METADATA.TS_CONFIG_PATH);
 
-	const entry = {
-		polyfills: "./src/polyfills.browser.ts",
-		main: "./src/main.browser.ts"
-	};
+	const globalStylePaths = buildUtils.getApplicationGlobalStylesConfig().globalStylePaths;
+
+	const entry = Object.assign({}, buildUtils.getApplicationGlobalStylesConfig().entryPoints, {
+		polyfills: helpers.root(buildUtils.ANGULAR_APP_CONFIG.buildOptions.polyfills),
+		main: helpers.root(buildUtils.ANGULAR_APP_CONFIG.buildOptions.main)
+	});
 
 	const tsConfigApp = buildUtils.readTsConfig(helpers.root(METADATA.TS_CONFIG_PATH));
 
@@ -225,7 +227,7 @@ module.exports = options => {
 							}
 						}
 					],
-					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					exclude: globalStylePaths
 				},
 
 				/**
@@ -257,7 +259,7 @@ module.exports = options => {
 						},
 						"sass-loader"
 					],
-					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					exclude: globalStylePaths
 				},
 
 				/**
@@ -288,7 +290,7 @@ module.exports = options => {
 							}
 						}
 					],
-					exclude: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					exclude: globalStylePaths
 				},
 
 				/**
@@ -428,7 +430,9 @@ module.exports = options => {
 				template: "src/index.html",
 				title: METADATA.TITLE,
 				chunksSortMode: function(a, b) {
-					const entryPoints = ["inline", "polyfills", "sw-register", "styles", "vendor", "main"];
+					// generated entry points will include those from styles config
+					// logic extracted from getBrowserConfig function in @angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/browser.js
+					const entryPoints = buildUtils.generateEntryPoints();
 					return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
 				},
 				metadata: METADATA,

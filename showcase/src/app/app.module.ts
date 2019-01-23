@@ -84,13 +84,6 @@ import { APP_STATES } from "./app.routes";
 // App is our top level component
 import { AppComponent } from "./app.component";
 
-/* tslint:disable:no-import-side-effect */
-// load PostCSS styles
-import "../styles/styles.pcss";
-// load SASS styles
-import "../styles/styles.scss";
-/* tslint:enable */
-
 // TODO: where to put this factory function?
 export function starkAppConfigFactory(): StarkApplicationConfig {
 	const config: any = require("../stark-app-config.json");
