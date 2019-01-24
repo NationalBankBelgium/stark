@@ -32,7 +32,7 @@ NODE_PACKAGES=(stark-build stark-testing)
 # Not using readarray because it does not handle \r\n
 OLD_IFS=$IFS # save old IFS value
 IFS=$'\r\n' GLOBIGNORE='*' command eval 'ALL_PACKAGES=($(cat ./modules.txt))'
-IFS=$OLD_IFS # restore IFS
+IFS=${OLD_IFS} # restore IFS
 
 BUILD_ALL=true
 BUNDLE=true
@@ -71,7 +71,7 @@ for ARG in "$@"; do
       OLD_IFS=$IFS # save old IFS value
       IFS='_ ' # use '_' as character to split
       read -r -a PACKAGES_TO_BUILD <<< ${PACKAGES_STR}
-      IFS=$OLD_IFS # restore IFS
+      IFS=${OLD_IFS} # restore IFS
       
       unset PACKAGES_STR # not needed anymore
       #echo "Packages to build: ${PACKAGES_TO_BUILD[*]}"
@@ -83,26 +83,26 @@ for ARG in "$@"; do
       FILTERED_ALL_PACKAGES=()
       
       for target in "${PACKAGES_TO_BUILD[@]}"; do
-        if containsElement "${target}" "${PACKAGES[@]}"; then
+        if [[ ${#PACKAGES[@]} > 0 && $(containsElement "${target}" "${PACKAGES[@]}"; echo $?) == 0 ]]; then
           FILTERED_PACKAGES+=(${target})
         fi
-        if containsElement "${target}" "${TSC_PACKAGES[@]}"; then
+        if [[ ${#TSC_PACKAGES[@]} > 0 && $(containsElement "${target}" "${TSC_PACKAGES[@]}"; echo $?) == 0 ]]; then
           FILTERED_TSC_PACKAGES+=(${target})
         fi
-        if containsElement "${target}" "${NODE_PACKAGES[@]}"; then
+        if [[ ${#NODE_PACKAGES[@]} > 0 && $(containsElement "${target}" "${NODE_PACKAGES[@]}"; echo $?) == 0 ]]; then
           FILTERED_NODE_PACKAGES+=(${target})
         fi
-        if containsElement "${target}" "${ALL_PACKAGES[@]}"; then
+        if [[ ${#ALL_PACKAGES[@]} > 0 && $(containsElement "${target}" "${ALL_PACKAGES[@]}"; echo $?) == 0 ]]; then
           FILTERED_ALL_PACKAGES+=(${target})
         fi
       done
-      PACKAGES=("${FILTERED_PACKAGES[@]}")
-      TSC_PACKAGES=("${FILTERED_TSC_PACKAGES[@]}")
-      NODE_PACKAGES=("${FILTERED_NODE_PACKAGES[@]}")
-      ALL_PACKAGES=("${FILTERED_ALL_PACKAGES[@]}")
+      [[ ${#FILTERED_PACKAGES[@]} > 0 ]] && PACKAGES=("${FILTERED_PACKAGES[@]}") || PACKAGES=()
+      [[ ${#FILTERED_TSC_PACKAGES[@]} > 0 ]] && TSC_PACKAGES=("${FILTERED_TSC_PACKAGES[@]}") || TSC_PACKAGES=()
+      [[ ${#FILTERED_NODE_PACKAGES[@]} > 0 ]] && NODE_PACKAGES=("${FILTERED_NODE_PACKAGES[@]}") || NODE_PACKAGES=()
+      [[ ${#FILTERED_ALL_PACKAGES[@]} > 0 ]] && ALL_PACKAGES=("${FILTERED_ALL_PACKAGES[@]}") || ALL_PACKAGES=()
       
       # if ALL_PACKAGES is empty then the input was incorrect
-      if [ ${#ALL_PACKAGES[@]} -eq 0 ]; then
+      if [[ ${#ALL_PACKAGES[@]} == 0 ]]; then
         die "No matching packages. Can't build anything :("
       fi
       ;;
@@ -182,7 +182,7 @@ if [[ ${BUILD_ALL} == true && ${TYPECHECK_ALL} == true ]]; then
 
   TSCONFIG="packages/tsconfig.json"
   travisFoldStart "tsc -p ${TSCONFIG}" "no-xtrace"
-    $TSC -p ${TSCONFIG}
+    ${TSC} -p ${TSCONFIG}
   travisFoldEnd "tsc -p ${TSCONFIG}"
 fi
 
@@ -199,9 +199,9 @@ if [[ ${BUILD_ALL} == false ]]; then
   for PACKAGE in ${ALL_PACKAGES[@]}
   do
     travisFoldStart "clean dist for ${PACKAGE}" "no-xtrace"
-    rm -rf ./dist/packages/$PACKAGE
+    rm -rf ./dist/packages/${PACKAGE}
     if [[ ${BUNDLE} == true ]]; then
-      rm -rf ./dist/packages-dist/$PACKAGE
+      rm -rf ./dist/packages-dist/${PACKAGE}
     fi
     
     if [[ ! -d "./dist/packages" ]]; then
@@ -232,7 +232,7 @@ do
     
     LICENSE_BANNER=${ROOT_DIR}/license-banner.txt
   
-    if containsElement "${PACKAGE}" "${PACKAGES[@]}"; then
+    if [[ ${#PACKAGES[@]} > 0 && $(containsElement "${PACKAGE}" "${PACKAGES[@]}"; echo $?) == 0 ]]; then
       travisFoldStart "build package: ${PACKAGE}" "no-xtrace"
         OUT_DIR_ESM5=${ROOT_OUT_DIR}/${PACKAGE}/esm5
         logTrace "OUT_DIR_ESM5: $OUT_DIR_ESM5" 1
@@ -256,7 +256,7 @@ do
 
           logInfo "Copy assets folders for package $PACKAGE"
           syncOptions=(-a --include="**/assets/" --exclude="*.js" --exclude="*.js.map" --exclude="*.ts" --include="*.json" --exclude="node_modules/" --exclude="coverage/" --exclude="reports/")
-          syncFiles $SRC_DIR $OUT_DIR "${syncOptions[@]}"
+          syncFiles ${SRC_DIR} ${OUT_DIR} "${syncOptions[@]}"
           unset syncOptions
         fi
   
@@ -268,12 +268,12 @@ do
 
           logInfo "Copy ${PACKAGE} typings from ${OUT_DIR} to ${NPM_DIR}"
           syncOptions=(-a --exclude="*.js" --exclude="*.js.map" --exclude="**/assets/" --exclude="node_modules/")
-          syncFiles $OUT_DIR $NPM_DIR "${syncOptions[@]}"
+          syncFiles ${OUT_DIR} ${NPM_DIR} "${syncOptions[@]}"
           unset syncOptions
           
           logInfo "Copy ESM2015 for ${PACKAGE}"
           syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json" --exclude="**/assets/" --exclude="node_modules/")
-          syncFiles $OUT_DIR $ESM2015_DIR "${syncOptions[@]}"
+          syncFiles ${OUT_DIR} ${ESM2015_DIR} "${syncOptions[@]}"
           unset syncOptions
        
           logDebug "Rollup $PACKAGE to ESM2015 folder" 1
@@ -284,7 +284,7 @@ do
           logDebug "Produce ESM5 version" 1
           compilePackageES5 ${SRC_DIR} ${OUT_DIR_ESM5} ${PACKAGE}
           syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json" --exclude="node_modules/")
-          syncFiles $OUT_DIR_ESM5 $ESM5_DIR "${syncOptions[@]}"
+          syncFiles ${OUT_DIR_ESM5} ${ESM5_DIR} "${syncOptions[@]}"
           unset syncOptions
           rollupIndex ${OUT_DIR_ESM5} ${FESM5_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
 
@@ -299,23 +299,23 @@ do
         travisFoldStart "copy package.json for: ${PACKAGE}" "no-xtrace"
         # TODO check if  --exclude="package-lock.json" is correctly working
         syncOptions=(-am --include="package.json" --exclude="package-lock.json" --exclude="coverage/" --exclude="node_modules/" --exclude="rollup.config.js" --exclude="*.ts" --exclude="*/*.ts" --include="*" --exclude="*")
-        syncFiles $SRC_DIR $NPM_DIR "${syncOptions[@]}"
+        syncFiles ${SRC_DIR} ${NPM_DIR} "${syncOptions[@]}"
         unset syncOptions
         travisFoldEnd "copy package.json for: ${PACKAGE}"
       travisFoldEnd "build package: ${PACKAGE}"
     fi
     
-    if containsElement "${PACKAGE}" "${NODE_PACKAGES[@]}"; then
+    if [[ ${#NODE_PACKAGES[@]} > 0 && $(containsElement "${PACKAGE}" "${NODE_PACKAGES[@]}"; echo $?) == 0 ]]; then
       travisFoldStart "build node package: ${PACKAGE}" "no-xtrace"
       
       # contents only need to be copied to the destination folder
       logInfo "Copy ${PACKAGE} to ${OUT_DIR}"
       syncOptions=(-a --include="package-lock.json" --exclude="node_modules/" --exclude="config-stark/")
-      syncFiles $SRC_DIR $OUT_DIR "${syncOptions[@]}"
+      syncFiles ${SRC_DIR} ${OUT_DIR} "${syncOptions[@]}"
       unset syncOptions
   
       logInfo "Copy $PACKAGE contents"
-      syncFiles $OUT_DIR $NPM_DIR "-a"
+      syncFiles ${OUT_DIR} ${NPM_DIR} "-a"
   
       travisFoldEnd "build node package: ${PACKAGE}"
     fi
@@ -326,7 +326,7 @@ do
         cp ${ROOT_DIR}/README.md ${NPM_DIR}/
       
         logInfo "Update version references in ${NPM_DIR}"
-        updateVersionReferences $VERSION ${NPM_DIR}
+        updateVersionReferences ${VERSION} ${NPM_DIR}
     
         logInfo "Update module name references in ${NPM_DIR}"
         updatePackageNameReferences ${PACKAGE} ${NPM_DIR}
@@ -338,12 +338,12 @@ do
         generateNpmPackage ${NPM_DIR}
         
         logInfo "Adapt showcase dependencies"
-        adaptNpmPackageDependencies $PACKAGE $VERSION "./showcase/package.json" 1
-        adaptNpmPackageLockDependencies $PACKAGE $VERSION "./showcase/package-lock.json" 1
+        adaptNpmPackageDependencies ${PACKAGE} ${VERSION} "./showcase/package.json" 1
+        adaptNpmPackageLockDependencies ${PACKAGE} ${VERSION} "./showcase/package-lock.json" 1
         
         logInfo "Adapt starter dependencies"
-        adaptNpmPackageDependencies $PACKAGE $VERSION "./starter/package.json" 1
-        adaptNpmPackageLockDependencies $PACKAGE $VERSION "./starter/package-lock.json" 1
+        adaptNpmPackageDependencies ${PACKAGE} ${VERSION} "./starter/package.json" 1
+        adaptNpmPackageLockDependencies ${PACKAGE} ${VERSION} "./starter/package-lock.json" 1
 
       fi
     travisFoldEnd "general tasks: ${PACKAGE}"
