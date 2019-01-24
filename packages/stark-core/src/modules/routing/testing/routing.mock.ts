@@ -22,6 +22,7 @@ export class MockStarkRoutingService implements StarkRoutingService {
 	public getStateDeclarationByStateName: (stateName: string) => StateDeclaration | undefined = jasmine.createSpy(
 		"getStateDeclarationByStateName"
 	);
+	// tslint:disable-next-line:bool-param-default
 	public getCurrentStateParams: (includeInherited?: boolean) => RawParams = jasmine.createSpy("getCurrentStateParams");
 	public getStateTreeParams: () => Map<string, any> = jasmine.createSpy("getStateTreeParams");
 	public getStateTreeResolves: () => Map<string, any> = jasmine.createSpy("getStateTreeResolves");

@@ -182,7 +182,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return undefined;
 	}
 
-	public getCurrentStateParams(includeInherited?: boolean): RawParams {
+	public getCurrentStateParams(includeInherited: boolean = false): RawParams {
 		// TODO: This function has unexpected behaviour in some cases
 		// for instance:
 		//   navigateTo: homepage with params { RequestID: "Request01" }
