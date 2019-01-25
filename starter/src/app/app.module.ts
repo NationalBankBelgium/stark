@@ -74,10 +74,6 @@ import { environment } from "../environments/environment";
 import { APP_STATES } from "./app.routes";
 // App is our top level component
 import { AppComponent } from "./app.component";
-/* tslint:disable:no-import-side-effect */
-// load SASS styles
-import "../styles/styles.scss";
-/* tslint:enable */
 
 // TODO: where to put this factory function?
 export function starkAppConfigFactory(): StarkApplicationConfig {

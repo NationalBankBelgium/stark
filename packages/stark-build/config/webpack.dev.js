@@ -41,6 +41,8 @@ module.exports = function(env) {
 		// PUBLIC: process.env.PUBLIC_DEV || HOST + ':' + PORT  // TODO check if needed/useful in our case?
 	});
 
+	const globalStylePaths = buildUtils.getApplicationGlobalStylesConfig().globalStylePaths;
+
 	// Directives to be used in CSP header
 	const cspDirectives = [
 		"base-uri 'self'",
@@ -180,7 +182,7 @@ module.exports = function(env) {
 							}
 						}
 					],
-					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					include: globalStylePaths
 				},
 
 				/**
@@ -215,7 +217,7 @@ module.exports = function(env) {
 						},
 						"sass-loader"
 					],
-					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					include: globalStylePaths
 				},
 
 				/**
@@ -246,7 +248,7 @@ module.exports = function(env) {
 							}
 						}
 					],
-					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					include: globalStylePaths
 				}
 			]
 		},

@@ -13,7 +13,8 @@ const ANGULAR_APP_CONFIG = {
 	deployUrl: angularCliAppConfig.architect.build.options.deployUrl || "",
 	baseHref: angularCliAppConfig.architect.build.options.baseHref || "",
 	sourceRoot: angularCliAppConfig.sourceRoot,
-	outputPath: angularCliAppConfig.architect.build.options.outputPath
+	outputPath: angularCliAppConfig.architect.build.options.outputPath,
+	buildOptions: angularCliAppConfig.architect.build.options || {}
 };
 
 const DEFAULT_METADATA = {
@@ -39,6 +40,65 @@ function supportES2015(tsConfigPath) {
 function readTsConfig(tsConfigPath) {
 	const configResult = ts.readConfigFile(tsConfigPath, ts.sys.readFile);
 	return ts.parseJsonConfigFileContent(configResult.config, ts.sys, path.dirname(tsConfigPath), undefined, tsConfigPath);
+}
+
+/**
+ * Logic extracted from @angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/styles.js
+ *
+ * @returns {{entryPoints: {}, globalStylePaths: Array}}
+ */
+function getApplicationGlobalStylesConfig() {
+	const stylesConfig = { entryPoints: {}, globalStylePaths: [] };
+
+	if (ANGULAR_APP_CONFIG.buildOptions.styles && ANGULAR_APP_CONFIG.buildOptions.styles.length > 0) {
+		// const chunkNames = [];
+		ngCliUtils.normalizeExtraEntryPoints(ANGULAR_APP_CONFIG.buildOptions.styles, "styles").forEach(style => {
+			const resolvedPath = path.resolve(ANGULAR_APP_CONFIG.config.root, style.input);
+			// Add style entry points.
+			if (stylesConfig.entryPoints[style.bundleName]) {
+				stylesConfig.entryPoints[style.bundleName].push(resolvedPath);
+			} else {
+				stylesConfig.entryPoints[style.bundleName] = [resolvedPath];
+			}
+			// Add lazy styles to the list.
+			// TODO not used for the moment
+			// if (style.lazy) {
+			// 	chunkNames.push(style.bundleName);
+			// }
+			// Add global css paths.
+			stylesConfig.globalStylePaths.push(resolvedPath);
+		});
+		// TODO not used for the moment
+		// if (chunkNames.length > 0) {
+		// 	// Add plugin to remove hashes from lazy styles.
+		// 	extraPlugins.push(new webpack_1.RemoveHashPlugin({ chunkNames, hashFormat }));
+		// }
+	}
+
+	return stylesConfig;
+}
+
+/**
+ * Method from @angular-devkit/build-angular/src/angular-cli-files/utilities/package-chunk-sort.js
+ * @returns {string[]}
+ */
+function generateEntryPoints() {
+	let entryPoints = ["runtime", "polyfills", "sw-register", "vendor"];
+	// Add all styles/scripts, except lazy-loaded ones.
+	[
+		...Object.keys(getApplicationGlobalStylesConfig().entryPoints)
+		// TODO not used for the moment
+		// ...ngCliUtils.normalizeExtraEntryPoints(appConfig.scripts, 'scripts')
+		// 	.filter(entry => !entry.lazy)
+		// 	.map(entry => entry.bundleName),
+	].forEach(bundleName => {
+		if (entryPoints.indexOf(bundleName) === -1) {
+			entryPoints.push(bundleName);
+		}
+	});
+
+	entryPoints.push("main");
+	return entryPoints;
 }
 
 /**
@@ -136,10 +196,10 @@ function getNbbAssetsConfig() {
  * See: https://github.com/angular/angular-cli/wiki/angular-workspace
  */
 function getApplicationAssetsConfig() {
-	const appConfig = ANGULAR_APP_CONFIG.config;
+	const buildOptions = ANGULAR_APP_CONFIG.buildOptions;
 
-	if (appConfig.architect && appConfig.architect.build && appConfig.architect.build.options && appConfig.architect.build.options.assets) {
-		return getCopyWebpackPluginConfig(appConfig.architect.build.options.assets);
+	if (buildOptions.assets && buildOptions.assets instanceof Array) {
+		return getCopyWebpackPluginConfig(buildOptions.assets);
 	}
 
 	return [];
@@ -212,8 +272,10 @@ function getCopyWebpackPluginConfig(assets) {
 
 exports.ANGULAR_APP_CONFIG = ANGULAR_APP_CONFIG;
 exports.DEFAULT_METADATA = DEFAULT_METADATA;
-exports.supportES2015 = supportES2015;
-exports.readTsConfig = readTsConfig;
+exports.generateEntryPoints = generateEntryPoints;
+exports.getApplicationAssetsConfig = getApplicationAssetsConfig;
+exports.getApplicationGlobalStylesConfig = getApplicationGlobalStylesConfig;
 exports.getEnvironmentFile = getEnvironmentFile;
 exports.getNbbAssetsConfig = getNbbAssetsConfig;
-exports.getApplicationAssetsConfig = getApplicationAssetsConfig;
+exports.readTsConfig = readTsConfig;
+exports.supportES2015 = supportES2015;

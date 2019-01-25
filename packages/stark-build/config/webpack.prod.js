@@ -55,6 +55,7 @@ module.exports = function() {
 	});
 	const isCITestEnv = helpers.hasProcessFlag("ci-test-env");
 	const supportES2015 = buildUtils.supportES2015(METADATA.TS_CONFIG_PATH);
+	const globalStylePaths = buildUtils.getApplicationGlobalStylesConfig().globalStylePaths;
 
 	const webpackConfig = webpackMerge(commonConfig({ ENV: ENV, metadata: METADATA }), {
 		/**
@@ -220,7 +221,7 @@ module.exports = function() {
 							}
 						}
 					],
-					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					include: globalStylePaths
 				},
 
 				/**
@@ -250,7 +251,7 @@ module.exports = function() {
 						},
 						"sass-loader"
 					],
-					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					include: globalStylePaths
 				},
 
 				/**
@@ -279,7 +280,7 @@ module.exports = function() {
 							}
 						}
 					],
-					include: [helpers.root(buildUtils.ANGULAR_APP_CONFIG.sourceRoot, "styles")]
+					include: globalStylePaths
 				}
 			]
 		},
