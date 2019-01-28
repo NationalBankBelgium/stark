@@ -42,7 +42,7 @@
   "peerDependencies": {
     "@angular/animations": "^7.0.0",
     "@angular/cdk": "^7.0.0",
-    "@angular/material": "^7.0.0",
+    "@angular/material": "^7.3.0",
     "@nationalbankbelgium/stark-core": "0.0.0-PLACEHOLDER-VERSION"
   },
   "scripts": {
