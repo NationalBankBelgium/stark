@@ -9,3 +9,5 @@
 
 Stark's UI module (aka stark-ui) provides the UI related features of the Stark framework.
 It includes the UI component kit of Stark as well as other services and utilities.
+
+**[Getting Started](../../docs/stark-ui/GETTING_STARTED.md)**

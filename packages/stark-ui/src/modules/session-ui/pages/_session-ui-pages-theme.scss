@@ -1,0 +1,4 @@
+/* stark session ui pages */
+.stark-session-ui-page header {
+  background-color: mat-color(map-get($base-theme, primary-palette), 900);
+}
