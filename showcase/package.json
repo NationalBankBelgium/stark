@@ -122,7 +122,7 @@
     "@angular/router": "~7.2.2",
     "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-beta.2-7b116cfc.tgz",
     "@nationalbankbelgium/stark-ui": "file:../dist/packages-dist/stark-ui/nationalbankbelgium-stark-ui-10.0.0-beta.2-7b116cfc.tgz",
-    "@uirouter/visualizer": "~6.0.2",
+    "@uirouter/visualizer": "~7.0.0",
     "angular-in-memory-web-api": "~0.8.0",
     "basscss": "~8.0.10",
     "core-js": "~2.6.3",
