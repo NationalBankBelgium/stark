@@ -1,0 +1,15 @@
+.styleguide-layout-page {
+  .warning {
+    color: mat-color($warning-palette, 500);
+  }
+
+  .layout-demo > * {
+    background-color: mat-color($primary-palette, 500);
+    color: mat-contrast($primary-palette, 500);
+
+    &.accent {
+      background-color: mat-color($accent-palette, 500);
+      color: mat-contrast($accent-palette, 500);
+    }
+  }
+}

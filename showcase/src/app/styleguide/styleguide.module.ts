@@ -12,7 +12,8 @@ import {
 	StyleguideCardPageComponent,
 	StyleguideColorsPageComponent,
 	StyleguideHeaderPageComponent,
-	StyleguideTypographyPageComponent
+	StyleguideTypographyPageComponent,
+	StyleguideLayoutPageComponent
 } from "./pages";
 
 @NgModule({
@@ -33,7 +34,8 @@ import {
 		StyleguideCardPageComponent,
 		StyleguideTypographyPageComponent,
 		StyleguideColorsPageComponent,
-		StyleguideHeaderPageComponent
+		StyleguideHeaderPageComponent,
+		StyleguideLayoutPageComponent
 	],
 	entryComponents: [],
 	exports: [
@@ -41,7 +43,8 @@ import {
 		StyleguideCardPageComponent,
 		StyleguideTypographyPageComponent,
 		StyleguideColorsPageComponent,
-		StyleguideHeaderPageComponent
+		StyleguideHeaderPageComponent,
+		StyleguideLayoutPageComponent
 	]
 })
 export class StyleguideModule {}

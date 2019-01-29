@@ -4,7 +4,8 @@ import {
 	StyleguideCardPageComponent,
 	StyleguideColorsPageComponent,
 	StyleguideHeaderPageComponent,
-	StyleguideTypographyPageComponent
+	StyleguideTypographyPageComponent,
+	StyleguideLayoutPageComponent
 } from "./pages";
 
 export const STYLEGUIDE_STATES: Ng2StateDeclaration[] = [
@@ -48,5 +49,13 @@ export const STYLEGUIDE_STATES: Ng2StateDeclaration[] = [
 			translationKey: "SHOWCASE.STYLEGUIDE.TYPOGRAPHY.TITLE"
 		},
 		views: { "@": { component: StyleguideTypographyPageComponent } }
+	},
+	{
+		name: "styleguide.layout",
+		url: "/layout",
+		data: {
+			translationKey: "SHOWCASE.STYLEGUIDE.LAYOUT.TITLE"
+		},
+		views: { "@": { component: StyleguideLayoutPageComponent } }
 	}
 ];
