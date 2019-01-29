@@ -65,7 +65,7 @@ describe("AppSidebarComponent", () => {
 			}
 		);
 
-		mockBreakPointObserver = jasmine.createSpyObj("BreakPointObserver", ["isMatched", "observe"]);
+		mockBreakPointObserver = jasmine.createSpyObj("BreakPointObserver", ["isMatched", "observe", "ngOnDestroy"]);
 		// add functionality to the `observe` Spy
 		mockBreakPointObserver.observe.and.callFake((value: string | string[]) => {
 			expect([[BREAKPOINT_STRING], BREAKPOINT_STRING]).toContain(value);

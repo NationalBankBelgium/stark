@@ -12,9 +12,11 @@ import {
 import { MockStarkLoggingService, MockStarkRoutingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppLogoutComponent } from "./app-logout.component";
 import { StarkSvgViewBoxModule } from "../../svg-view-box/svg-view-box.module";
-import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatButtonModule } from "@angular/material/button";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule } from "@ngx-translate/core";
+import { Subject } from "rxjs";
 import Spy = jasmine.Spy;
 
 describe("AppLogoutComponent", () => {
@@ -37,7 +39,12 @@ describe("AppLogoutComponent", () => {
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
 					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					{ provide: STARK_SESSION_CONFIG, useValue: mockStarkSessionConfig }
+					{ provide: STARK_SESSION_CONFIG, useValue: mockStarkSessionConfig },
+					{
+						// See https://github.com/NationalBankBelgium/stark/issues/1088
+						provide: HAMMER_LOADER,
+						useValue: () => new Subject<any>().toPromise()
+					}
 				],
 				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
 			})

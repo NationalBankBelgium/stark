@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { HAMMER_LOADER } from "@angular/platform-browser";
 import { Observable, of, Subject, throwError } from "rxjs";
 import { delay, filter } from "rxjs/operators";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
@@ -30,6 +31,11 @@ describe("ExampleViewerComponent", () => {
 				{
 					provide: FileService,
 					useValue: jasmine.createSpyObj("FileServiceSpy", ["fetchFile"])
+				},
+				{
+					// See https://github.com/NationalBankBelgium/stark/issues/1088
+					provide: HAMMER_LOADER,
+					useValue: () => new Subject<any>().toPromise()
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon

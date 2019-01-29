@@ -10,12 +10,14 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
-import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.component";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
+import { HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { Subject } from "rxjs";
+import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.component";
 import { StarkTableComponent } from "./table.component";
 import { StarkTableColumnComponent } from "./column.component";
 import { StarkPaginationComponent } from "../../pagination/components";
@@ -101,7 +103,15 @@ describe("TableComponent", () => {
 				StarkTableMultisortDialogComponent,
 				TestHostComponent
 			],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				TranslateService,
+				{
+					// See https://github.com/NationalBankBelgium/stark/issues/1088
+					provide: HAMMER_LOADER,
+					useValue: () => new Subject<any>().toPromise()
+				}
+			],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
 		}).compileComponents();
 	}));
