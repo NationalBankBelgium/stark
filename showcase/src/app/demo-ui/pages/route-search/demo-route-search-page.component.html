@@ -1,0 +1,27 @@
+<example-viewer
+	[extensions]="['HTML', 'TS']"
+	filesPath="route-search/route-search-direction-left"
+	exampleTitle="SHOWCASE.DEMO.ROUTE_SEARCH.DIRECTION_LEFT"
+>
+	<stark-route-search direction="left"></stark-route-search>
+	<p [innerHTML]="'SHOWCASE.DEMO.ROUTE_SEARCH.ROUTER_CONFIG_REMARKS' | translate"></p>
+</example-viewer>
+
+<example-viewer
+	[extensions]="['HTML', 'TS']"
+	filesPath="route-search/route-search-direction-right"
+	exampleTitle="SHOWCASE.DEMO.ROUTE_SEARCH.DIRECTION_RIGHT"
+>
+	<stark-route-search direction="right"></stark-route-search>
+	<p [innerHTML]="'SHOWCASE.DEMO.ROUTE_SEARCH.ROUTER_CONFIG_REMARKS' | translate"></p>
+</example-viewer>
+
+<example-viewer
+	[extensions]="['HTML', 'TS', 'SCSS']"
+	filesPath="route-search/route-search-with-custom-color-and-menu-config"
+	exampleTitle="SHOWCASE.DEMO.ROUTE_SEARCH.WITH_CUSTOM_COLOR_AND_MENU_CONFIG"
+>
+	<stark-route-search [menuConfig]="mainMenu" class="button-color-success"></stark-route-search>
+	<p [innerHTML]="'SHOWCASE.DEMO.ROUTE_SEARCH.MENU_CONFIG_REMARKS' | translate"></p>
+</example-viewer>
+<stark-reference-block [links]="referenceList"></stark-reference-block>

@@ -16,5 +16,6 @@ export * from "./pagination";
 export * from "./pretty-print";
 export * from "./sidebar";
 export * from "./slider";
+export * from "./route-search";
 export * from "./table";
 export * from "./toast";

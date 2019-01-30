@@ -1,0 +1,25 @@
+<div [ngClass]="getDirection()">
+	<button mat-mini-fab mat-icon-button class="search-button" color="none" (click)="show()" [matTooltip]="'STARK.ROUTE_SEARCH.ABOUT' | translate">
+		<mat-icon [svgIcon]="icon" starkSvgViewBox></mat-icon>
+	</button>
+	<div *ngIf="!hide">
+		<mat-form-field floatLabel="never" class="search-field">
+			<input
+				class="search-field-input"
+				matInput
+				[matAutocomplete]="autocompleteComp"
+				[placeholder]="'STARK.ROUTE_SEARCH.PLACEHOLDER' | translate"
+				[formControl]="searchField"
+			/>
+			<mat-autocomplete #autocompleteComp="matAutocomplete" autoActiveFirstOption class="search-route-autocomplete">
+				<mat-option
+					(onSelectionChange)="redirect(option)"
+					*ngFor="let option of (filteredRouteEntries | async); trackBy: trackPath"
+					[value]="option.label"
+				>
+					<p>{{ option.label }}</p>
+				</mat-option>
+			</mat-autocomplete>
+		</mat-form-field>
+	</div>
+</div>

@@ -12,26 +12,41 @@ export const STYLEGUIDE_STATES: Ng2StateDeclaration[] = [
 	{
 		name: "styleguide.button",
 		url: "/button",
+		data: {
+			translationKey: "SHOWCASE.STYLEGUIDE.BUTTON.TITLE"
+		},
 		views: { "@": { component: StyleguideButtonPageComponent } }
 	},
 	{
 		name: "styleguide.card",
 		url: "/card",
+		data: {
+			translationKey: "SHOWCASE.STYLEGUIDE.CARD.TITLE"
+		},
 		views: { "@": { component: StyleguideCardPageComponent } }
 	},
 	{
 		name: "styleguide.colors",
 		url: "/colors",
+		data: {
+			translationKey: "SHOWCASE.STYLEGUIDE.COLORS.TITLE"
+		},
 		views: { "@": { component: StyleguideColorsPageComponent } }
 	},
 	{
 		name: "styleguide.stark-header",
 		url: "/stark-header",
+		data: {
+			translationKey: "SHOWCASE.STYLEGUIDE.HEADER.TITLE"
+		},
 		views: { "@": { component: StyleguideHeaderPageComponent } }
 	},
 	{
 		name: "styleguide.typography",
 		url: "/typography",
+		data: {
+			translationKey: "SHOWCASE.STYLEGUIDE.TYPOGRAPHY.TITLE"
+		},
 		views: { "@": { component: StyleguideTypographyPageComponent } }
 	}
 ];

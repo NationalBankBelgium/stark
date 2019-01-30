@@ -57,6 +57,7 @@ import {
 	StarkLanguageSelectorModule,
 	StarkMessagePaneModule,
 	StarkMinimapModule,
+	StarkRouteSearchModule,
 	StarkSessionUiModule,
 	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";
@@ -222,6 +223,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkMessagePaneModule.forRoot(),
 		StarkDatePickerModule,
 		StarkMinimapModule,
+		StarkRouteSearchModule,
 		StarkToastNotificationModule.forRoot({
 			delay: 5000,
 			position: "top right",
