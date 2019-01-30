@@ -271,12 +271,12 @@ describe("Service: StarkSessionService", () => {
 			sessionService.registerTransitionHook();
 
 			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[0]).toBe(StarkRoutingTransitionHook.ON_BEFORE);
-			const onBeforeHookCallback: Function = (<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[2];
+			const onBeforeHookCallback: () => Promise<boolean> = (<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[2];
 
 			sessionService.session$ = of(mockSession);
 
 			// trigger the onBefore hook callback
-			defer<boolean>(() => onBeforeHookCallback()).subscribe(
+			defer(() => onBeforeHookCallback()).subscribe(
 				(result: boolean) => {
 					expect(result).toBe(true);
 				},
