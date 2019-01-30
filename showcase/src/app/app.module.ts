@@ -57,6 +57,7 @@ import {
 	StarkLanguageSelectorModule,
 	StarkMessagePaneModule,
 	StarkMinimapModule,
+	StarkProgressIndicatorModule,
 	StarkRouteSearchModule,
 	StarkSessionUiModule,
 	StarkToastNotificationModule
@@ -223,6 +224,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkMessagePaneModule.forRoot(),
 		StarkDatePickerModule,
 		StarkMinimapModule,
+		StarkProgressIndicatorModule.forRoot(),
 		StarkRouteSearchModule,
 		StarkToastNotificationModule.forRoot({
 			delay: 5000,

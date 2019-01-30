@@ -15,7 +15,7 @@ import {
 	StarkUser,
 	StarkUserService
 } from "@nationalbankbelgium/stark-core";
-import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService, StarkMenuConfig } from "@nationalbankbelgium/stark-ui";
+import { StarkMenuConfig, STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
 import * as moment from "moment";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { filter } from "rxjs/operators";
@@ -44,12 +44,12 @@ export class AppComponent implements OnInit {
 
 	// tslint:disable:no-big-function
 	public constructor(
+		@Inject(STARK_APP_METADATA) public appMetadata: StarkApplicationMetadata,
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
-		@Inject(STARK_USER_SERVICE) public userService: StarkUserService,
 		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
-		@Inject(STARK_APP_METADATA) public appMetadata: StarkApplicationMetadata,
+		@Inject(STARK_USER_SERVICE) public userService: StarkUserService,
 		public breakpointObserver: BreakpointObserver
 	) {}
 
