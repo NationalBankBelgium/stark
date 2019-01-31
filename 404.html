@@ -1,17 +1,52 @@
-<html>
+<html lang="en">
 <head>
     <script>
-        sessionStorage.redirect = location.href;
-        const finalUrlRegex = /(\/showcase\/[\d\D][^\/]+(\/|\/$|$))/;
-        const trailingSlashRegex = /\/$/;
-        const matches = finalUrlRegex.exec(window.location.pathname);
-        let finalBaseHref = "";
-        if (matches && matches[1]) {
-            finalBaseHref = matches[1];
-        }
-        // add a trailing slash to the url in case it doesn't have any
-        if (!finalBaseHref.match(trailingSlashRegex)) {
-            finalBaseHref = finalBaseHref + "/";
+        let finalBaseHref = location.origin; // root
+        const showcaseRegex = /\/showcase(\/|.*)/;
+        const apiDocsRegex = /\/api-docs(\/|.*)/;
+        const versionsRegexStr = "((\\\d+\\\.\\\d+\\\.\\\d(-alpha\\\.\\\d+|-beta\\\.\\\d+)?)|latest)";
+
+        const isShowcase = !!showcaseRegex.exec(window.location.pathname);
+        const isApiDocs = !!apiDocsRegex.exec(window.location.pathname);
+
+        if (isShowcase) {
+            const showcaseVersionsRegex = new RegExp("/showcase/" + versionsRegexStr);
+            const showcaseVersion = showcaseVersionsRegex.exec(window.location.pathname);
+
+            if (showcaseVersion) {
+                // if a version was detected, then go to the root of that version in order to load the Angular app
+                finalBaseHref = finalBaseHref + showcaseVersion[0];
+                // also store the original URL in sessionStorage so that the Angular app navigates to it and handles the wrong path
+                sessionStorage.redirect = location.href;
+            } else {
+                // in case no version was detected, then go to "latest"
+                finalBaseHref = finalBaseHref + "/showcase/latest/";
+                sessionStorage.redirect = finalBaseHref;
+            }
+        } else if (isApiDocs) {
+            const apiDocsPackagesRegexStr = "/api-docs/stark-(build|testing|core|ui)\/";
+            const apiDocsVersionsRegex = new RegExp(apiDocsPackagesRegexStr + versionsRegexStr);
+            const apiDocsVersion = apiDocsVersionsRegex.exec(window.location.pathname);
+
+            if (apiDocsVersion) {
+                // if a version was detected, then go to the root of that version
+                finalBaseHref = finalBaseHref + apiDocsVersion[0];
+                sessionStorage.redirect = finalBaseHref;
+            } else {
+                const apiDocsPackage = window.location.pathname.match(apiDocsPackagesRegexStr);
+                if (apiDocsPackage) {
+                    // in case only the package was detected, then go to that package "latest"
+                    finalBaseHref = finalBaseHref + apiDocsPackage[0] + "/latest/";
+                    sessionStorage.redirect = finalBaseHref;
+                } else {
+                    // in case no version nor package was detected, then go to "stark-core/latest"
+                    finalBaseHref = finalBaseHref + "/api-docs/stark-core/latest/";
+                    sessionStorage.redirect = finalBaseHref;
+                }
+            }
+        } else {
+            // url does not match showcase nor API docs, so go to the root
+            sessionStorage.redirect = finalBaseHref;
         }
 
         window.open(finalBaseHref, "_self"); // redirection
