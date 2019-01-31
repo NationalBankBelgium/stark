@@ -11,7 +11,7 @@ export class DemoCollapsiblePageComponent implements OnInit {
 	public referenceList: ReferenceLink[];
 
 	public constructor() {
-		//empty constructor
+		// empty constructor
 	}
 
 	public toggleCollapsible(nb: number): void {

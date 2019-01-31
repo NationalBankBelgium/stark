@@ -796,7 +796,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public getRowClasses(row: object, index: number): string {
 		const classes: string[] = [];
 
-		//Check if selected
+		// Check if selected
 		if (this.selection && this.selection.isSelected(row)) {
 			classes.push("selected");
 		}

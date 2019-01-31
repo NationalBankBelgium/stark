@@ -129,7 +129,7 @@
     "align": [false, "arguments", "statements", "parameters", "members", "elements"],
     "callable-types": true,
     "class-name": true,
-    "comment-format": [false, "check-space"],
+    "comment-format": [true, "check-space"],
     "file-header": false,
     "encoding": false,
     "interface-name": [false, "never-prefix"],
@@ -165,7 +165,7 @@
       }
     ],
     "no-magic-numbers": false,
-    "import-blacklist": [true, "@angular/material", "lodash"],
+    "import-blacklist": [true, "@angular/material", "lodash", "rxjs/internal","rxjs/index", "rxjs/Rx"],
     "ordered-imports": false,
     "max-classes-per-file": false, // [true, 1],
     "prefer-for-of": true,

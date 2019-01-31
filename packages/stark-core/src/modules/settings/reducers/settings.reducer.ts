@@ -31,8 +31,8 @@ export function settingsReducer(
 
 		// this case is ignored by the reducer as it does not result in a state change
 		// an effect takes care of doing what needs to be done with it
-		//case StarkSettingsActions.PERSIST_PREFERRED_LANGUAGE:
-		//return state;
+		// case StarkSettingsActions.PERSIST_PREFERRED_LANGUAGE:
+		// return state;
 
 		case StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE:
 			return { ...state, preferredLanguage: action.language };

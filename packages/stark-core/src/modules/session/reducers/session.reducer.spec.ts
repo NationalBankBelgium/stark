@@ -19,7 +19,7 @@ describe("Reducer: SessionReducer", () => {
 		it("should set the session language when state given", () => {
 			// create the initial state object
 			const initialState: Partial<StarkSession> = {};
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the CHANGE_LANGUAGE_SUCCESS action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new StarkChangeLanguageSuccess("NL"));
@@ -38,7 +38,7 @@ describe("Reducer: SessionReducer", () => {
 		it("should set the session user when state given", () => {
 			// create the initial state object
 			const initialState: Partial<StarkSession> = {};
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the INITIALIZE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new StarkInitializeSession(user));
@@ -57,7 +57,7 @@ describe("Reducer: SessionReducer", () => {
 		it("should remove the session user when state given", () => {
 			// create the initial state object
 			const initialState: Partial<StarkSession> = { user: user };
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the EXPIRE_SESSION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new StarkDestroySession());
@@ -75,7 +75,7 @@ describe("Reducer: SessionReducer", () => {
 	describe("on any other Action", () => {
 		it("should invoke the default state", () => {
 			const initialState: StarkSession = session;
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the MOCK_ACTION action to the sessionReducer
 			const changedState: StarkSession = sessionReducer(initialState, <any>{

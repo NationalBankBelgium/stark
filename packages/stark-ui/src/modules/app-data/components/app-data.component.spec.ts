@@ -11,7 +11,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSvgViewBoxModule } from "../../svg-view-box/svg-view-box.module";
 
-//tslint:disable:no-big-function no-identical-functions
+// tslint:disable:no-big-function no-identical-functions
 describe("AppDataComponent", () => {
 	let component: StarkAppDataComponent;
 	let fixture: ComponentFixture<StarkAppDataComponent>;

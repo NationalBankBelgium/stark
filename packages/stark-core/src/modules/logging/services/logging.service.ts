@@ -75,8 +75,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 			});
 
 			if (window) {
-				window.addEventListener("beforeunload", () => {
-					//ev: BeforeUnloadEvent
+				window.addEventListener("beforeunload", (_ev: BeforeUnloadEvent) => {
 					// Persist the remaining log entries that are still in the store, before leaving the application.
 					// We need to call the REST service synchronously,
 					// because the browser has to wait for the REST service to complete.

@@ -69,7 +69,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 */
 	public isShiftingToSmaller: boolean = false;
 
-	//TODO: move this media query to global variable that can be used through stark-ui
+	// TODO: move this media query to global variable that can be used through stark-ui
 	/**
 	 * Media query for big screens
 	 */
@@ -225,7 +225,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * Breakpoints change handler
 	 */
 	public onObserveBreakpoints(state: BreakpointState): void {
-		//Enter large desktop screen
+		// Enter large desktop screen
 		if (state.matches) {
 			if (this.sidenavLeftType === "menu") {
 				this.sidenavLeftMode = "side";
@@ -234,7 +234,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 				}
 			}
 		}
-		//Enter smaller screens
+		// Enter smaller screens
 		else {
 			if (this.sidenavLeftType === "menu") {
 				if (this.appSidenavLeft.opened) {

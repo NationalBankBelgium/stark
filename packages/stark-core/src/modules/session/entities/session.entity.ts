@@ -9,10 +9,10 @@ export class StarkSessionImpl implements StarkSession {
 
 	public user?: StarkUser;
 
-	//public condensedModeEnabled:boolean;
-	//public browser:string;
-	//public browserVersion:string;
-	//public device:string;
-	//public loginTimestamp:string;
-	//public lastSessionRefreshTimestamp:string;
+	// public condensedModeEnabled:boolean;
+	// public browser:string;
+	// public browserVersion:string;
+	// public device:string;
+	// public loginTimestamp:string;
+	// public lastSessionRefreshTimestamp:string;
 }

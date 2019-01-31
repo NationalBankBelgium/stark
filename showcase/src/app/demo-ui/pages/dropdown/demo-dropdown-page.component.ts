@@ -7,7 +7,7 @@ import { Subscription } from "rxjs";
 	selector: "demo-dropdown",
 	styleUrls: ["./demo-dropdown-page.component.scss"],
 	templateUrl: "./demo-dropdown-page.component.html",
-	encapsulation: ViewEncapsulation.None //used here to be able to customize the example-viewer background color
+	encapsulation: ViewEncapsulation.None // used here to be able to customize the example-viewer background color
 })
 export class DemoDropdownPageComponent implements OnInit, OnDestroy {
 	public isDisabledServiceFormControl: boolean;
