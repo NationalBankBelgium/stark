@@ -26,7 +26,7 @@
     "npm": ">=5.6.0"
   },
   "dependencies": {
-    "@angular/material-moment-adapter": "^7.3.0",
+    "@angular/material-moment-adapter": "^7.0.0",
     "@mdi/angular-material": "^3.3.92",
     "@types/nouislider": "^9.0.4",
     "@types/prismjs": "^1.9.0",
@@ -41,8 +41,8 @@
   },
   "peerDependencies": {
     "@angular/animations": "^7.0.0",
-    "@angular/cdk": "^7.3.0",
-    "@angular/material": "^7.3.0",
+    "@angular/cdk": "^7.0.0",
+    "@angular/material": "^7.0.0",
     "@nationalbankbelgium/stark-core": "0.0.0-PLACEHOLDER-VERSION"
   },
   "scripts": {
