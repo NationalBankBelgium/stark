@@ -10,8 +10,16 @@
       ]
     },
     "stark-apps": {
-      "packages": ["showcase/package.json", "starter/package.json"]
+      "packages": [
+        "showcase/package.json",
+        "starter/package.json"
+      ]
     }
   },
-  "ignore": ["@angular/flex-layout", "@types/node", "class-validator", "typescript"]
+  "ignore": [
+    "@angular/flex-layout",
+    "@types/node",
+    "class-validator",
+    "typescript"
+  ]
 }
