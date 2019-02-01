@@ -3,8 +3,10 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { HAMMER_LOADER } from "@angular/platform-browser";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
+import { Subject } from "rxjs";
 import { StarkSvgViewBoxModule } from "../../svg-view-box/svg-view-box.module";
 import { StarkActionBarComponent } from "./action-bar.component";
 import { StarkActionBarConfig } from "./action-bar-config.intf";
@@ -24,7 +26,12 @@ describe("ActionBarComponent", () => {
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-				TranslateService
+				TranslateService,
+				{
+					// See https://github.com/NationalBankBelgium/stark/issues/1088
+					provide: HAMMER_LOADER,
+					useValue: () => new Subject<any>().toPromise()
+				}
 			],
 			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
 		}).compileComponents();

@@ -11,6 +11,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
+import { HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Ng2StateDeclaration, StateDeclaration } from "@uirouter/angular";
 import {
@@ -24,7 +25,7 @@ import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankb
 import { StarkRouteSearchComponent } from "./route-search.component";
 import { StarkRouteSearchEntry } from "../components/route-search-entry.intf";
 import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu";
-import { of, throwError } from "rxjs";
+import { of, Subject, throwError } from "rxjs";
 import { mergeUiTranslations } from "../../../common/translations/merge-translations";
 import Spy = jasmine.Spy;
 
@@ -110,7 +111,12 @@ describe("RouteSearchComponent", () => {
 			declarations: [StarkRouteSearchComponent, TestHostComponent],
 			providers: [
 				{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService }
+				{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService },
+				{
+					// See https://github.com/NationalBankBelgium/stark/issues/1088
+					provide: HAMMER_LOADER,
+					useValue: () => new Subject<any>().toPromise()
+				}
 			],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
 		}).compileComponents();

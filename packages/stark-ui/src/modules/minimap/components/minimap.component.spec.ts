@@ -3,6 +3,7 @@ import { StarkMinimapComponent } from "./minimap.component";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
+import { HAMMER_LOADER } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -10,6 +11,7 @@ import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing
 import { Component, EventEmitter, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { Subject } from "rxjs";
 import { ItemVisibility } from "./item-visibility.intf";
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
@@ -39,7 +41,15 @@ describe("MinimapComponent", () => {
 		return TestBed.configureTestingModule({
 			imports: [FormsModule, MatCheckboxModule, MatTooltipModule, NoopAnimationsModule, TranslateModule.forRoot()],
 			declarations: [StarkMinimapComponent, TestHostComponent],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				TranslateService,
+				{
+					// See https://github.com/NationalBankBelgium/stark/issues/1088
+					provide: HAMMER_LOADER,
+					useValue: () => new Subject<any>().toPromise()
+				}
+			],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
 		}).compileComponents();
 	}));

@@ -146,7 +146,7 @@
     "test:starter": "cd starter && npm run test-fast && cd ../..",
     "test:starter:e2e": "cd starter && npm run e2e && cd ../..",
     "test:starter:e2e:browserstack": "cd starter && npm run e2e:browserstack && cd ../..",
-    "test:ci:all": "npm run test:ci:stark-core && npm run test:ci:stark-ui && npm run test:ci:starter && npm run test:ci:starter",
+    "test:ci:all": "npm run test:ci:stark-core && npm run test:ci:stark-ui && npm run test:ci:starter && npm run test:ci:showcase",
     "test:ci:stark-core": "cd packages/stark-core && npm run test-fast:ci && cd ../..",
     "test:ci:stark-ui": "cd packages/stark-ui && npm run test-fast:ci && cd ../..",
     "test:ci:showcase": "cd showcase && npm run test-fast:ci && cd ../..",
