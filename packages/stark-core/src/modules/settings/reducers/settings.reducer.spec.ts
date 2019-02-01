@@ -16,7 +16,7 @@ describe("Reducer: SettingsReducer", () => {
 		it("should set the preferred language when state given", () => {
 			// create the initial state object
 			const initialState: Partial<StarkSettings> = {};
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the SET_PREFERRED_LANGUAGE action to the settingsReducer
 			const changedState: StarkSettings = settingsReducer(<StarkSettings>initialState, new StarkSetPreferredLanguage("NL"));
@@ -32,7 +32,7 @@ describe("Reducer: SettingsReducer", () => {
 	describe("on any other Action", () => {
 		it("should invoke the default state", () => {
 			const initialState: StarkSettings = settings;
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the MOCK_ACTION action to the settingsReducer
 			const changedState: StarkSettings = settingsReducer(initialState, <any>{

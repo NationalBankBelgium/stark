@@ -132,12 +132,12 @@ describe("DropdownComponent", () => {
 					hostFixture.detectChanges();
 					expect(component.formControl.validator !== null).toBe(true);
 					// Solution found on Angular GitHub issue: https://github.com/angular/angular/issues/13461
-					//tslint:disable-next-line:no-null-keyword
+					// tslint:disable-next-line:no-null-keyword
 					expect(new FormControl(undefined, component.formControl.validator).errors).toEqual({ required: true });
 
 					hostComponent.required = false;
 					hostFixture.detectChanges();
-					//tslint:disable-next-line:no-null-keyword
+					// tslint:disable-next-line:no-null-keyword
 					expect(component.formControl.validator).toBe(<any>null);
 				});
 			});
@@ -226,7 +226,7 @@ describe("DropdownComponent", () => {
 				expect(dropdownElement.getAttribute("ng-reflect-placeholder")).toBe(dropdownPlaceholder);
 				expect(dropdownElement.getAttribute("ng-reflect-id")).toBe(dropdownId);
 
-				//FIXME find a solution to make those tests work again
+				// FIXME find a solution to make those tests work again
 				// Angular now does not diplay the option of mat-select in the html file, which means that we have no solution to test those options
 
 				// expect(dropdownElement.html()).toContain("<md-option");
@@ -301,7 +301,7 @@ describe("DropdownComponent", () => {
 				expect(dropdownElement.getAttribute("ng-reflect-placeholder")).toBe(dropdownPlaceholder);
 				expect(dropdownElement.getAttribute("ng-reflect-id")).toBe(dropdownId);
 
-				//FIXME find a solution to make those tests work again
+				// FIXME find a solution to make those tests work again
 				// Angular now does not diplay the option of mat-select in the html file, which means that we have no solution to test those options
 
 				// expect(dropdownElement.html()).toContain("<md-option");
@@ -428,7 +428,7 @@ describe("DropdownComponent", () => {
 	// 	});
 	// });
 
-	//FIXME reenable those tests as soon as a solution to replace the md-select-header as been found: https://github.com/angular/material2/pull/7835
+	// FIXME reenable those tests as soon as a solution to replace the md-select-header as been found: https://github.com/angular/material2/pull/7835
 	//
 	// describe("header", () => {
 	// 	it("should be added to the DOM when header is defined", () => {

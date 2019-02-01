@@ -90,8 +90,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		this.session$ = this.store.pipe(select(selectStarkSession));
 
 		if (window) {
-			window.addEventListener("beforeunload", () => {
-				//ev: BeforeUnloadEvent
+			window.addEventListener("beforeunload", (_ev: BeforeUnloadEvent) => {
 				// Hit the logout URL before leaving the application.
 				// We need to call the REST service synchronously,
 				// because the browser has to wait for the HTTP call to complete.

@@ -5,7 +5,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 	selector: "demo-card",
 	styleUrls: ["./styleguide-card-page.component.scss"],
 	templateUrl: "./styleguide-card-page.component.html",
-	encapsulation: ViewEncapsulation.None //used here to be able to customize the stark-full-width background color
+	encapsulation: ViewEncapsulation.None // used here to be able to customize the stark-full-width background color
 })
 export class StyleguideCardPageComponent implements OnInit {
 	public basicCard: string;

@@ -155,7 +155,7 @@ describe("PaginationComponent", () => {
 			expect(numberElements.length).toBe(0);
 			expect(pageNavElement.nativeElement.innerHTML).toContain('<li aria-label="Next" class="next"');
 
-			//Verify pageSelector
+			// Verify pageSelector
 			const pageSelector: DebugElement = hostFixture.debugElement.query(By.css("div.pagination-enter-page"));
 
 			const pageSelectorInput: DebugElement = pageSelector.query(By.css("input"));
@@ -166,7 +166,7 @@ describe("PaginationComponent", () => {
 			const pageSelectorTotalPages: DebugElement = pageSelector.query(By.css(totalPagesSelector));
 			expect(pageSelectorTotalPages.nativeElement.innerHTML).toBe("3");
 
-			//Verify itemsPerPageSelector dropdown
+			// Verify itemsPerPageSelector dropdown
 			const itemsPerPageSelector: DebugElement = hostFixture.debugElement.query(By.directive(StarkDropdownComponent));
 
 			// bindings can be checked via the ng-reflect-xxxx attributes
@@ -203,7 +203,7 @@ describe("PaginationComponent", () => {
 			assertPageNavSelection(hostFixture.debugElement.childNodes[0], "2");
 			expect(pageNavElement.nativeElement.innerHTML).toContain('<li aria-label="Next" class="next"');
 
-			//Verify pageSelector
+			// Verify pageSelector
 			const pageSelector: DebugElement = hostFixture.debugElement.query(By.css("div.pagination-enter-page"));
 
 			const pageSelectorInput: DebugElement = pageSelector.query(By.css("input"));
@@ -214,7 +214,7 @@ describe("PaginationComponent", () => {
 			const pageSelectorTotalPages: DebugElement = pageSelector.query(By.css(totalPagesSelector));
 			expect(pageSelectorTotalPages.nativeElement.innerHTML).toBe("3");
 
-			//Verify itemsPerPageSelector dropdown
+			// Verify itemsPerPageSelector dropdown
 			const itemsPerPageSelector: DebugElement = hostFixture.debugElement.query(By.directive(StarkDropdownComponent));
 
 			// bindings can be checked via the ng-reflect-xxxx attributes

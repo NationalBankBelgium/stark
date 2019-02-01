@@ -590,7 +590,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return resolvablesData;
 	}
 
-	//TODO How to fetch translationKey from the State resolves without navigating to that state?
+	// TODO How to fetch translationKey from the State resolves without navigating to that state?
 	public getTranslationKeyFromState(stateName: string): string {
 		const stateTreeResolves: Map<string, any> = this.getStateTreeResolves();
 		const stateData: object = this.$state.get(stateName).data;

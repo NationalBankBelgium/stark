@@ -58,8 +58,8 @@ describe("Reducer: MessagesReducer", () => {
 		});
 
 		it("should add the messages when state given", () => {
-			deepFreeze(initialState); //Enforce immutability
-			deepFreeze(mockMessages); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
+			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(initialState, new StarkAddMessages(mockMessages));
@@ -73,7 +73,7 @@ describe("Reducer: MessagesReducer", () => {
 		});
 
 		it("should add the messages when state not defined", () => {
-			deepFreeze(mockMessages); //Enforce immutability
+			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(<any>undefined, new StarkAddMessages(mockMessages));
@@ -91,8 +91,8 @@ describe("Reducer: MessagesReducer", () => {
 
 			mockMessages = [mockInfoMessage, mockErrorMessage];
 
-			deepFreeze(initialState); //Enforce immutability
-			deepFreeze(mockMessages); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
+			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(initialState, new StarkAddMessages(mockMessages));
@@ -118,9 +118,9 @@ describe("Reducer: MessagesReducer", () => {
 
 			mockMessages = [mockInfoMessage, mockErrorMessage, mockUnknownMessage];
 
-			deepFreeze(mockMessages); //Enforce immutability
+			deepFreeze(mockMessages); // Enforce immutability
 
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 			expect(() => messagesReducer(initialState, new StarkAddMessages(mockMessages))).toThrowError(/Unknown/);
 		});
 
@@ -128,7 +128,7 @@ describe("Reducer: MessagesReducer", () => {
 			const newMessage: StarkMessage = createMessage("1", 1, StarkMessageType.INFO);
 			const messages: StarkMessage[] = [newMessage];
 
-			deepFreeze(messages); //Enforce immutability
+			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(initialState, new StarkAddMessages(messages));
@@ -154,20 +154,20 @@ describe("Reducer: MessagesReducer", () => {
 				infoMessage4
 			];
 
-			deepFreeze(initialState); //Enforce immutability
-			deepFreeze(messages); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
+			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			testBaseState = messagesReducer(initialState, new StarkAddMessages(messages));
 
-			deepFreeze(testBaseState); //Enforce immutability
+			deepFreeze(testBaseState); // Enforce immutability
 		});
 
 		it("should put the message with priority 1 before the existing messages", () => {
 			const newMessage: StarkMessage = createMessage("100", 1, StarkMessageType.INFO);
 			const messages: StarkMessage[] = [newMessage];
 
-			deepFreeze(messages); //Enforce immutability
+			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
@@ -184,7 +184,7 @@ describe("Reducer: MessagesReducer", () => {
 			const newMessage: StarkMessage = createMessage("100", 10, StarkMessageType.INFO);
 			const messages: StarkMessage[] = [newMessage];
 
-			deepFreeze(messages); //Enforce immutability
+			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
@@ -201,7 +201,7 @@ describe("Reducer: MessagesReducer", () => {
 			const newMessage: StarkMessage = createMessage("100", 20, StarkMessageType.INFO);
 			const messages: StarkMessage[] = [newMessage];
 
-			deepFreeze(messages); //Enforce immutability
+			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
@@ -218,7 +218,7 @@ describe("Reducer: MessagesReducer", () => {
 			const newMessage: StarkMessage = createMessage("100", 40, StarkMessageType.INFO);
 			const messages: StarkMessage[] = [newMessage];
 
-			deepFreeze(messages); //Enforce immutability
+			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
@@ -235,7 +235,7 @@ describe("Reducer: MessagesReducer", () => {
 			const newMessage: StarkMessage = createMessage("100", 50, StarkMessageType.INFO);
 			const messages: StarkMessage[] = [newMessage];
 
-			deepFreeze(messages); //Enforce immutability
+			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
@@ -252,7 +252,7 @@ describe("Reducer: MessagesReducer", () => {
 			const newMessage: StarkMessage = createMessage("100", 60, StarkMessageType.INFO);
 			const messages: StarkMessage[] = [newMessage];
 
-			deepFreeze(messages); //Enforce immutability
+			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
@@ -280,8 +280,8 @@ describe("Reducer: MessagesReducer", () => {
 		});
 
 		it("should remove the messages when state given", () => {
-			deepFreeze(initialState); //Enforce immutability
-			deepFreeze(mockMessages); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
+			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the REMOVE_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(initialState, new StarkRemoveMessages(mockMessages));
@@ -292,7 +292,7 @@ describe("Reducer: MessagesReducer", () => {
 		});
 
 		it("should NOT remove any message when state not defined", () => {
-			deepFreeze(mockMessages); //Enforce immutability
+			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the CLEAR_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(<any>undefined, new StarkRemoveMessages(mockMessages));
@@ -306,8 +306,8 @@ describe("Reducer: MessagesReducer", () => {
 		it("should update the state only for those arrays of messages that are affected and leave the current state of the others", () => {
 			mockMessages = [mockInfoMessage, mockErrorMessage];
 
-			deepFreeze(initialState); //Enforce immutability
-			deepFreeze(mockMessages); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
+			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the REMOVE_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(initialState, new StarkRemoveMessages(mockMessages));
@@ -331,9 +331,9 @@ describe("Reducer: MessagesReducer", () => {
 
 			mockMessages = [mockInfoMessage, mockErrorMessage, mockUnknownMessage];
 
-			deepFreeze(mockMessages); //Enforce immutability
+			deepFreeze(mockMessages); // Enforce immutability
 
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 			expect(() => messagesReducer(initialState, new StarkRemoveMessages(mockMessages))).toThrowError(/Unknown/);
 		});
 	});
@@ -348,7 +348,7 @@ describe("Reducer: MessagesReducer", () => {
 		});
 
 		it("should remove ALL the messages when state given", () => {
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the CLEAR_MESSAGES action to the messagesReducer
 			changedState = messagesReducer(initialState, new StarkClearMessages());
@@ -391,7 +391,7 @@ describe("Reducer: MessagesReducer", () => {
 
 	describe("on any other Action", () => {
 		it("should invoke the default state", () => {
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the MOCK_ACTION action to the messagesReducer
 			changedState = messagesReducer(initialState, <any>{

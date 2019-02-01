@@ -95,9 +95,9 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 	applicationConfig.rootStateName = "";
 	applicationConfig.homeStateName = "home";
 	applicationConfig.errorStateName = "otherwise";
-	applicationConfig.angularDebugInfoEnabled = true; //DEVELOPMENT;
-	applicationConfig.debugLoggingEnabled = true; //DEVELOPMENT;
-	applicationConfig.routerLoggingEnabled = true; //DEVELOPMENT;
+	applicationConfig.angularDebugInfoEnabled = true; // DEVELOPMENT;
+	applicationConfig.debugLoggingEnabled = true; // DEVELOPMENT;
+	applicationConfig.routerLoggingEnabled = true; // DEVELOPMENT;
 
 	return applicationConfig;
 }

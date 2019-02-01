@@ -23,7 +23,7 @@ describe("Reducer: LoggingReducer", () => {
 
 			expect(initialState.messages.length).toBe(2);
 
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 			const changedState: StarkLogging = loggingReducer(
 				initialState,
 				new StarkLogMessageAction(new StarkLogMessageImpl(StarkLogMessageType.DEBUG, "Message N", ""))
@@ -60,7 +60,7 @@ describe("Reducer: LoggingReducer", () => {
 
 			expect(initialState.messages.length).toBe(5);
 
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 			const changedState: StarkLogging = loggingReducer(initialState, new StarkFlushLogMessages(3));
 
 			expect(changedState.messages.length).toBe(2);
@@ -75,7 +75,7 @@ describe("Reducer: LoggingReducer", () => {
 			const initialState: StarkLogging = starkLogging;
 			initialState.applicationId = "whatever";
 
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 			const changedState: StarkLogging = loggingReducer(initialState, new StarkSetLoggingApplicationId("new appID"));
 
 			expect(changedState.applicationId).toBe("new appID");
@@ -90,7 +90,7 @@ describe("Reducer: LoggingReducer", () => {
 	describe("on any other Action", () => {
 		it("should invoke the default state", () => {
 			const initialState: StarkLogging = starkLogging;
-			deepFreeze(initialState); //Enforce immutability
+			deepFreeze(initialState); // Enforce immutability
 
 			// Send the MOCK_ACTION action to the loggingReducer
 			const changedState: StarkLogging = loggingReducer(initialState, <any>{

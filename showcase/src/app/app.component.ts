@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 	 */
 	public isMenuModeActive: boolean;
 
-	//tslint:disable:no-big-function
+	// tslint:disable:no-big-function
 	public constructor(
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
