@@ -13,5 +13,5 @@
       "packages": ["showcase/package.json", "starter/package.json"]
     }
   },
-  "ignore": ["class-validator", "typescript"]
+  "ignore": ["@angular/flex-layout", "@types/node", "class-validator", "typescript"]
 }
