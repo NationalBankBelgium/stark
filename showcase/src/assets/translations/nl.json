@@ -188,6 +188,12 @@
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
       },
+      "PROGRESS_INDICATOR": {
+        "TITLE": "Progress indicator",
+        "HIDE": "Verbergen",
+        "SENTENCE_TO_HIDE": "Deze zin zal verbergd worden zodra de progress indicator zal weergegeven worden",
+        "SHOW": "Weergeven"
+      },
       "ROUTE_SEARCH": {
         "DIRECTION_LEFT": "Route Search component met direction 'left'",
         "DIRECTION_RIGHT": "Route Search component met direction 'right'",

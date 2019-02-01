@@ -192,6 +192,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							isVisible: true,
 							isEnabled: true,
 							targetState: "demo-ui.keyboard-directives"
+						},
+						{
+							id: "menu-stark-ui-directives-progress-indicator",
+							label: "Progress indicator",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-ui.progress-indicator"
 						}
 					]
 				},

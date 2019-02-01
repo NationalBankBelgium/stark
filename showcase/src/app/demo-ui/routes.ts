@@ -16,6 +16,7 @@ import {
 	DemoMinimapPageComponent,
 	DemoPaginationPageComponent,
 	DemoPrettyPrintPageComponent,
+	DemoProgressIndicatorPageComponent,
 	DemoRouteSearchPageComponent,
 	DemoSidebarPageComponent,
 	DemoSliderPageComponent,
@@ -152,6 +153,14 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 			translationKey: "SHOWCASE.DEMO.PRETTY_PRINT.TITLE"
 		},
 		views: { "@": { component: DemoPrettyPrintPageComponent } }
+	},
+	{
+		name: "demo-ui.progress-indicator",
+		url: "/progress-indicator",
+		data: {
+			translationKey: "SHOWCASE.DEMO.PROGRESS_INDICATOR.TITLE"
+		},
+		views: { "@": { component: DemoProgressIndicatorPageComponent } }
 	},
 	{
 		name: "demo-ui.route-search",

@@ -14,6 +14,7 @@ export * from "./message-pane";
 export * from "./minimap";
 export * from "./pagination";
 export * from "./pretty-print";
+export * from "./progress-indicator";
 export * from "./sidebar";
 export * from "./slider";
 export * from "./route-search";

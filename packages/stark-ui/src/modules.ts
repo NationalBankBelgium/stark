@@ -16,6 +16,7 @@ export * from "./modules/message-pane";
 export * from "./modules/minimap";
 export * from "./modules/pagination";
 export * from "./modules/pretty-print";
+export * from "./modules/progress-indicator";
 export * from "./modules/route-search";
 export * from "./modules/session-ui";
 export * from "./modules/slider";

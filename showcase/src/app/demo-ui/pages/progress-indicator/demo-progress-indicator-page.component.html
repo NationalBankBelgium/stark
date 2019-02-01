@@ -1,0 +1,18 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO.PROGRESS_INDICATOR.TITLE</h1>
+<section class="stark-section">
+	<example-viewer
+		class="progress-indicator-example"
+		[extensions]="['HTML', 'SCSS', 'TS']"
+		filesPath="progress-indicator/progress-indicator"
+		[exampleTitle]="'SHOWCASE.DEMO.PROGRESS_INDICATOR.TITLE' | translate"
+	>
+		<button class="progress-indicator-button" color="primary" mat-raised-button (click)="showProgressIndicator()">
+			<span translate>{{ show ? "SHOWCASE.DEMO.PROGRESS_INDICATOR.HIDE" : "SHOWCASE.DEMO.PROGRESS_INDICATOR.SHOW" }}</span>
+		</button>
+		<div class="progress-indicator-view" [starkProgressIndicator]="progressIndicatorConfig">
+			<span translate>SHOWCASE.DEMO.PROGRESS_INDICATOR.SENTENCE_TO_HIDE</span>
+		</div>
+	</example-viewer>
+</section>
+
+<stark-reference-block [links]="referenceList"></stark-reference-block>
