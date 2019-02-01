@@ -1,0 +1,47 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.TITLE</h1>
+<section class="stark-section">
+	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+	<example-viewer
+		[extensions]="['HTML', 'TS']"
+		filesPath="transform-input-directive/transform-input-directive"
+		exampleTitle="SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.TITLE"
+	>
+		<div fxLayout="column" fxLayoutAlign="stretch" fxLayout.gt-sm="row wrap" fxLayoutAlign.gt-sm="space-between end" fxLayoutGap="20px">
+			<mat-form-field fxFlex>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.ONLY_UPPER_CASE_LABEL</mat-label>
+				<input
+					matInput
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.TYPE_A_VALUE' | translate"
+					[formControl]="formControl"
+					starkTransformInput="uppercase"
+				/>
+			</mat-form-field>
+			<mat-form-field fxFlex>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.ONLY_LOWER_CASE_LABEL</mat-label>
+				<input
+					matInput
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.TYPE_A_VALUE' | translate"
+					[(ngModel)]="value"
+					starkTransformInput="lowercase"
+				/>
+			</mat-form-field>
+			<mat-form-field class="emoji-example" fxFlex>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.EMOJI_LABEL</mat-label>
+				<input
+					matInput
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.EMOJI_EXAMPLE' | translate"
+					[starkTransformInput]="simpleEmojiTransform"
+				/>
+			</mat-form-field>
+			<mat-form-field fxFlex="0 0 100%">
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.ONLY_UPPER_CASE_LABEL</mat-label>
+				<textarea
+					matInput
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.TYPE_A_VALUE' | translate"
+					starkTransformInput="uppercase"
+				></textarea>
+			</mat-form-field>
+		</div>
+	</example-viewer>
+</section>
+<stark-reference-block [links]="referenceList"></stark-reference-block>

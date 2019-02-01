@@ -31,6 +31,7 @@ import {
 	StarkDropdownModule,
 	StarkGenericSearchModule,
 	StarkKeyboardDirectivesModule,
+	StarkTransformInputDirectiveModule,
 	StarkLanguageSelectorModule,
 	StarkMinimapModule,
 	StarkPaginationModule,
@@ -65,7 +66,8 @@ import {
 	DemoSidebarPageComponent,
 	DemoSliderPageComponent,
 	DemoTablePageComponent,
-	DemoToastPageComponent
+	DemoToastPageComponent,
+	DemoTransformInputDirectivePageComponent
 } from "./pages";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
@@ -116,6 +118,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 		StarkDropdownModule,
 		StarkGenericSearchModule,
 		StarkKeyboardDirectivesModule,
+		StarkTransformInputDirectiveModule,
 		StarkLanguageSelectorModule,
 		StarkMinimapModule,
 		StarkPaginationModule,
@@ -157,7 +160,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
 		TableWithFixedHeaderComponent,
 		TableWithCustomStylingComponent,
 		DemoToastPageComponent,
-		DemoGenericSearchFormComponent
+		DemoGenericSearchFormComponent,
+		DemoTransformInputDirectivePageComponent,
 	],
 	exports: [
 		DemoActionBarPageComponent,

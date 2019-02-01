@@ -21,3 +21,4 @@ export * from "./slider";
 export * from "./route-search";
 export * from "./table";
 export * from "./toast";
+export * from "./transform-input-directive";

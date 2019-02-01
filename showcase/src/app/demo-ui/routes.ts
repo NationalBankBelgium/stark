@@ -22,7 +22,8 @@ import {
 	DemoSidebarPageComponent,
 	DemoSliderPageComponent,
 	DemoTablePageComponent,
-	DemoToastPageComponent
+	DemoToastPageComponent,
+	DemoTransformInputDirectivePageComponent
 } from "./pages";
 
 export const DEMO_STATES: Ng2StateDeclaration[] = [
@@ -100,9 +101,17 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 		name: "demo-ui.keyboard-directives",
 		url: "/keyboard-directives",
 		data: {
-			translationKey: "SHOWCASE.DEMO.KEYBOARD_DIRECTIVES.TITLE"
+			translationKey: "SHOWCASE.DEMO.DIRECTIVES.KEYBOARD.TITLE"
 		},
 		views: { "@": { component: DemoKeyboardDirectivesPageComponent } }
+	},
+	{
+		name: "demo-ui.transform-input-directive",
+		url: "/transform-input-directive",
+		data: {
+			translationKey: "SHOWCASE.DEMO.DIRECTIVES.TRANSFORM.TITLE"
+		},
+		views: { "@": { component: DemoTransformInputDirectivePageComponent } }
 	},
 	{
 		name: "demo-ui.language-selector",
