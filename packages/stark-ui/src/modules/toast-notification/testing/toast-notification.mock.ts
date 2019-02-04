@@ -10,7 +10,7 @@ import { StarkToastMessage, StarkToastNotificationResult, StarkToastNotification
  * You can use it in your unit tests by providing it while configuring the testing module in the TestBed. For example:
  * ```typescript
  * import { STARK_TOAST_NOTIFICATION_SERVICE } from "@nationalbankbelgium/stark-ui";
- * import { MockToastNotificationService } from "@nationalbankbelgium/stark-ui/testing";
+ * import { MockStarkToastNotificationService } from "@nationalbankbelgium/stark-ui/testing";
  *
  * describe("Some test", () => {
  *
@@ -20,9 +20,9 @@ import { StarkToastMessage, StarkToastNotificationResult, StarkToastNotification
  *             declarations: [...],
  *             providers: [
  *                 // provide is as a value
- *                 { provide: STARK_TOAST_NOTIFICATION_SERVICE, useValue: new MockToastNotificationService() },
+ *                 { provide: STARK_TOAST_NOTIFICATION_SERVICE, useValue: new MockStarkToastNotificationService() },
  *                 // or as a class
- *                 { provide: STARK_TOAST_NOTIFICATION_SERVICE, useClass: MockToastNotificationService }
+ *                 { provide: STARK_TOAST_NOTIFICATION_SERVICE, useClass: MockStarkToastNotificationService }
  *             ]
  *         }).compileComponents();
  *     }));
@@ -30,7 +30,7 @@ import { StarkToastMessage, StarkToastNotificationResult, StarkToastNotification
  * }
  * ```
  */
-export class MockToastNotificationService implements StarkToastNotificationService {
+export class MockStarkToastNotificationService implements StarkToastNotificationService {
 	/**
 	 * Returns an observable that will emit one of the possible StarkToastNotificationResult after the toast is closed
 	 * @param message - Message to be shown in the toast.
