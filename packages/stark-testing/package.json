@@ -32,8 +32,8 @@
     "karma-jasmine": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-typescript": "^3.0.13",
-    "karma-typescript-angular2-transform": "^1.0.2",
+    "karma-typescript": "^4.0.0",
+    "karma-typescript-angular2-transform": "^4.0.0",
     "protractor": "^5.4.2",
     "puppeteer": "^1.11.0"
   },
