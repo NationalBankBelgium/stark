@@ -265,6 +265,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					isVisible: true,
 					isEnabled: true,
 					targetState: "styleguide.typography"
+				},
+				{
+					id: "menu-style-layout",
+					label: "Layout",
+					isVisible: true,
+					isEnabled: true,
+					targetState: "styleguide.layout"
 				}
 			]
 		}

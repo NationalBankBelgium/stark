@@ -1,0 +1,14 @@
+.styleguide-layout-page {
+  .warning {
+    margin-bottom: 24px;
+
+    mat-icon > svg {
+      margin-bottom: -5px;
+    }
+  }
+
+  .layout-demo > * {
+    text-align: center;
+    padding: 10px;
+  }
+}

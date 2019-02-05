@@ -3,3 +3,4 @@ export * from "./card";
 export * from "./colors";
 export * from "./header";
 export * from "./typography";
+export * from "./layout";

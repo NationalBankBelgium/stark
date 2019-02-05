@@ -352,6 +352,14 @@
           "TITLE": "Basé sur Angular Material"
         },
         "TITLE": "Typography"
+      },
+      "LAYOUT": {
+        "TITLE": "Layout",
+        "INTRO": "Nous vous suggérons d'utiliser <a href=\"https://github.com/angular/flex-layout#angular-flex-layout\" target=\"_blank\" rel=\"noopener noreferrer\">Angular Flex-Layout</a> pour vous aider lors de la construction de l'interface de votre application. Une documentation complète est disponible sur leur <a href=\"https://github.com/angular/flex-layout/wiki/API-Documentation\"  target=\"_blank\" rel=\"noopener noreferrer\">wiki</a>.",
+        "ANGULAR_FLEX_LAYOUT": "Angular Flex Layout",
+        "FLEX": "Flexbox",
+        "GRID_WARNING": "Attention, bien que certaines directives du grid soient disponibles dans la bibliothèque d'Angular Flex-Layout, elles ne sont pas complètement documentées.  Gardez également à l'esprit que CSS Grid Layout n'est pas pris en charge par tous les navigateurs. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/grid#Browser_compatibility\" target=\"_blank\" rel=\"noopener noreferrer\">MDN</a>",
+        "GRID": "Grid layout"
       }
     }
   }
