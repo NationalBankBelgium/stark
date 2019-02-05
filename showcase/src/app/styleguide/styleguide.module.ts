@@ -12,8 +12,8 @@ import {
 	StyleguideCardPageComponent,
 	StyleguideColorsPageComponent,
 	StyleguideHeaderPageComponent,
-	StyleguideTypographyPageComponent,
-	StyleguideLayoutPageComponent
+	StyleguideLayoutPageComponent,
+	StyleguideTypographyPageComponent
 } from "./pages";
 
 @NgModule({

@@ -30,11 +30,11 @@ import { StarkSortingRule, StarkTableMultisortDialogComponent, StarkTableMultiso
 import { StarkActionBarConfig } from "../../action-bar/components/action-bar-config.intf";
 import { StarkAction } from "../../action-bar/components/action.intf";
 import {
+	StarkColumnFilterChangedOutput,
 	StarkColumnSortChangedOutput,
 	StarkTableColumnProperties,
-	StarkTableFilter,
-	StarkColumnFilterChangedOutput,
-	StarkTableColumnSortingDirection
+	StarkTableColumnSortingDirection,
+	StarkTableFilter
 } from "../entities";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";

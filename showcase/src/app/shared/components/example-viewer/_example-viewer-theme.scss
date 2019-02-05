@@ -1,6 +1,7 @@
 example-viewer {
   .example-viewer-wrapper {
     background-color: #fff;
+
     .stark-pretty-print {
       pre[class*="language-"] {
         padding: 1em;
@@ -8,16 +9,20 @@ example-viewer {
         border-radius: 0;
       }
     }
+
     .mat-tab-body-wrapper {
       border-bottom: 1px solid #555;
     }
   }
+
   .mat-tab-header {
     background-color: mat-color($mat-light-theme-background, card);
   }
+
   .mat-tab-body {
     background-color: $custom-dark-background;
   }
+
   .example-source {
     border-bottom: 1px solid mat-color($mat-light-theme-foreground, divider);
     overflow-x: scroll;

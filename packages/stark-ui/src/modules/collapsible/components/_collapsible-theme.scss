@@ -6,6 +6,7 @@
 @mixin stark-collapsible-color($color_high, $color_low) {
   .mat-expansion-panel {
     box-shadow: $elevation-1;
+
     &.mat-expanded {
       box-shadow: $elevation-16;
     }
@@ -13,11 +14,13 @@
     .mat-expansion-panel-header {
       border-bottom: 1px solid rgba($color: $color_low, $alpha: 0.12);
       background-color: rgba($color: $color_high, $alpha: 0.02);
+
       &:not(.mat-expanded) {
         &:hover {
           background-color: rgba($color: $color_low, $alpha: 0.02);
         }
       }
+
       &.mat-expanded {
         background-color: rgba($color: $color_high, $alpha: 1);
       }

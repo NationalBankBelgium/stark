@@ -9,16 +9,19 @@ export interface StarkEnvironment {
 	 * @link https://github.com/angular/angular-cli/wiki/stories-application-environments
 	 */
 	production: boolean;
+
 	/**
 	 * Whether the current environment has Hot Module Replacement enabled (as described in Angular CLI Wiki)
 	 * @link https://github.com/angular/angular-cli/wiki/stories-configure-hmr
 	 */
 	hmr: boolean;
+
 	/**
 	 * Array of providers to be included only in this environment.
 	 * For example: you might want to add a detailed logging provider only in development.
 	 */
 	ENV_PROVIDERS: any[];
+
 	/**
 	 * Function to modify/decorate the module instance created by Angular for a given platform.
 	 * Useful to enable/disable some Angular specifics such as the debug tools.

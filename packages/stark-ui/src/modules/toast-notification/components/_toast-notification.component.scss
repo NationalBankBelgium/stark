@@ -9,10 +9,12 @@
   white-space: normal;
   align-items: center;
   padding: 6px 16px 6px 16px;
+
   span {
     line-height: 24px;
     margin: 6px;
   }
+
   mat-icon {
     margin: 6px;
     min-width: 24px;
@@ -20,11 +22,13 @@
     min-height: 24px;
     height: 24px;
   }
+
   .stark-toast-action {
     float: none;
     margin: 0;
     padding: 0;
   }
+
   .stark-toast-text {
     flex: 1 1 auto;
   }
