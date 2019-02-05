@@ -1,6 +1,6 @@
-import { Store, select } from "@ngrx/store";
-import { defer, Observable, of, Subject, timer, throwError } from "rxjs";
-import { flatMap, map, retryWhen, take, tap, switchMap } from "rxjs/operators";
+import { select, Store } from "@ngrx/store";
+import { defer, Observable, of, Subject, throwError, timer } from "rxjs";
+import { flatMap, map, retryWhen, switchMap, take, tap } from "rxjs/operators";
 import { Inject, Injectable } from "@angular/core";
 
 import { StarkProgressIndicatorService, starkProgressIndicatorServiceName } from "./progress-indicator.service.intf";

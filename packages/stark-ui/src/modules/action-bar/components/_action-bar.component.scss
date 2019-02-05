@@ -10,6 +10,7 @@
   max-height: 40px;
   overflow: hidden;
   transform-origin: bottom;
+
   .action-bar-wrapper {
     display: flex;
     align-items: center;
@@ -24,11 +25,13 @@
     position: fixed;
     right: 0;
     z-index: 4;
+
     &.extended {
       transition: 0.3s ease;
       height: auto;
       max-height: 280px;
       overflow-y: scroll;
+
       .action-bar-wrapper {
         display: flex;
         align-items: flex-start;
@@ -36,6 +39,7 @@
         flex-wrap: nowrap;
       }
     }
+
     .action-label {
       font-size: 13px;
       padding-left: 15px;
@@ -48,8 +52,10 @@
     position: relative;
     height: auto;
     transition: 0.7s ease;
+
     &.stark-action-bar-full {
       position: relative;
+
       &.extended {
         max-height: 900px;
       }

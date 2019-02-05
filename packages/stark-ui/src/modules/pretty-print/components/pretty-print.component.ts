@@ -174,7 +174,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 					case "javascript":
 						prismGrammar = Prism.languages.javascript;
 						prismClass = prismClassPrefix + this.format;
-						this.prettyString = prettier.format(this.data, { parser: "babylon", plugins: prettierPlugins });
+						this.prettyString = prettier.format(this.data, { parser: "babel", plugins: prettierPlugins });
 						break;
 
 					case "typescript":

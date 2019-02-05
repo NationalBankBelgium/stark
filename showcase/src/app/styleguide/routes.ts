@@ -4,8 +4,8 @@ import {
 	StyleguideCardPageComponent,
 	StyleguideColorsPageComponent,
 	StyleguideHeaderPageComponent,
-	StyleguideTypographyPageComponent,
-	StyleguideLayoutPageComponent
+	StyleguideLayoutPageComponent,
+	StyleguideTypographyPageComponent
 } from "./pages";
 
 export const STYLEGUIDE_STATES: Ng2StateDeclaration[] = [

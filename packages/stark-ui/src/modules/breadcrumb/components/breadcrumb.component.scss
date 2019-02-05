@@ -13,6 +13,7 @@
     font-size: 15px;
     line-height: 24px;
     margin-bottom: 0;
+
     a {
       cursor: pointer;
       display: inline-block;
@@ -21,10 +22,12 @@
       font-style: italic;
       text-decoration: none;
       font-size: 12px;
+
       &:hover {
         color: $md-primary;
       }
     }
+
     span:first-child a {
       padding-left: 0;
     }
@@ -35,6 +38,7 @@
   .stark-breadcrumb {
     margin-bottom: 20px;
     font-size: 18px;
+
     a {
       cursor: pointer;
       font-size: 13px;

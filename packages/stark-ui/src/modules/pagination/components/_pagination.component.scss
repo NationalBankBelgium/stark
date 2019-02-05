@@ -4,6 +4,7 @@
   align-items: center;
   display: flex;
   justify-content: flex-start;
+
   ul {
     align-items: center;
     display: flex;
@@ -12,6 +13,7 @@
     margin-right: 18px;
     padding: 0;
   }
+
   .pagination-enter-page {
     display: none;
   }
@@ -37,6 +39,7 @@
       align-items: center;
       display: flex;
       margin-right: 40px;
+
       & input {
         margin-right: 4px;
         width: 26px;
@@ -50,6 +53,7 @@
     .page-numbers {
       cursor: pointer;
       display: flex;
+
       a {
         color: inherit;
         padding: 15px;

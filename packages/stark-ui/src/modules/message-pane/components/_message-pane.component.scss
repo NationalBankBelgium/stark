@@ -13,14 +13,17 @@
   display: none;
   overflow: visible;
   height: 0;
+
   &.align-left {
     text-align: left;
     will-change: padding-left;
     transition: all 0.3s;
   }
+
   &.align-center {
     text-align: center;
   }
+
   &.align-right {
     text-align: right;
   }
@@ -46,9 +49,11 @@
 
 .stark-message-pane {
   padding: 0 16px;
+
   &.displayed {
     display: block;
   }
+
   & .inner {
     position: relative;
     display: inline-block;
@@ -59,6 +64,7 @@
     will-change: opacity, border-radius;
     transition: all 0.4s;
   }
+
   &.display-animated .inner {
     opacity: 1;
     border-radius: 2px;
@@ -67,6 +73,7 @@
   /* summary pane */
   & .summary {
     display: flex;
+
     & button {
       display: block;
       box-sizing: border-box;
@@ -75,9 +82,11 @@
       background: none;
       border: none;
       padding: 8px;
+
       &:focus {
         outline: none;
       }
+
       &.active::after {
         content: "";
         position: absolute;
@@ -86,6 +95,7 @@
         left: 0;
         height: 4px;
       }
+
       & b {
         position: absolute;
         background: #fff;
@@ -101,6 +111,7 @@
         box-shadow: $elevation-1;
       }
     }
+
     & .may-collapse {
       overflow: hidden;
       width: 0;
@@ -108,6 +119,7 @@
       will-change: width, padding;
       transition: all 0.4s;
     }
+
     & .stark-message-pane-total {
       box-sizing: border-box;
       overflow: hidden;
@@ -117,28 +129,34 @@
       transition: all 0.4s;
       margin-right: auto;
     }
+
     & .collapse-pane {
       overflow: hidden;
       will-change: width, padding;
       transition: all 0.4s;
     }
   }
+
   &.display-animated .inner .may-collapse {
     width: 48px;
     padding: 8px;
   }
+
   &.collapsed {
     & .inner {
       border-radius: 20px;
+
       & .may-collapse,
       & .collapse-pane {
         width: 0;
         padding: 0;
       }
+
       & .stark-message-pane-total {
         width: 48px;
         padding: 8px;
       }
+
       & .stark-message-pane-content {
         display: none;
       }
@@ -152,6 +170,7 @@
     overflow-x: hidden;
     overflow-y: auto;
   }
+
   & .stark-message-pane-item {
     width: 240px;
     display: flex;
@@ -160,20 +179,25 @@
     padding: 8px 8px 8px 16px;
     border-top: solid 1px #b2b2b2;
     word-wrap: break-word;
+
     & > mat-icon {
       margin-right: 8px;
     }
+
     & > div {
       flex: 1;
     }
+
     & .mat-icon-button {
       margin: 0 0 0 16px;
       padding: 0;
+
       & mat-icon {
         vertical-align: middle;
       }
     }
   }
+
   & mat-icon {
     transition: all 0.4s;
   }

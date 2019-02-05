@@ -23,6 +23,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     &.stark-app-sidenav-menu {
       display: block;
     }
@@ -37,9 +38,11 @@
   .stark-app-sidenav-left {
     width: 200px;
   }
+
   .stark-app-sidenav-right {
     width: 300px;
   }
+
   .stark-app-sidenav-menu {
     width: 280px;
   }

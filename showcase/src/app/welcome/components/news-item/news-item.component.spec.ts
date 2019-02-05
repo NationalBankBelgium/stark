@@ -6,7 +6,6 @@ import { StoreModule } from "@ngrx/store";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { NewsItemComponent } from "./news-item.component";
-
 import SpyObj = jasmine.SpyObj;
 
 describe(`News`, () => {

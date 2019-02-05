@@ -20,13 +20,16 @@
 .stark-app-data.dropdown {
   & .stark-app-data-summary {
     padding-top: 4px;
+
     & .label {
       color: $primary-light-text-color;
     }
+
     & .value {
       color: #fff;
     }
   }
+
   & .stark-app-data-detail {
     background-color: #fff;
     color: #000;

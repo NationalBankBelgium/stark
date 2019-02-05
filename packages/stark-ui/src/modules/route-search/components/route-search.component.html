@@ -1,5 +1,12 @@
 <div [ngClass]="getDirection()">
-	<button mat-mini-fab mat-icon-button class="search-button" color="none" (click)="show()" [matTooltip]="'STARK.ROUTE_SEARCH.ABOUT' | translate">
+	<button
+		mat-mini-fab
+		mat-icon-button
+		class="search-button"
+		color="none"
+		(click)="show()"
+		[matTooltip]="'STARK.ROUTE_SEARCH.ABOUT' | translate"
+	>
 		<mat-icon [svgIcon]="icon" starkSvgViewBox></mat-icon>
 	</button>
 	<div *ngIf="!hide">

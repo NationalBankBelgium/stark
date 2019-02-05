@@ -143,7 +143,6 @@
     "object-literal-shorthand": false,
     "one-variable-per-declaration": true,
     "switch-final-break": false,
-    "type-literal-delimiter": true,
     "variable-name": [true, "check-format", "allow-leading-underscore", "allow-trailing-underscore", "ban-keywords"],
     "whitespace": [
       false,
@@ -165,7 +164,7 @@
       }
     ],
     "no-magic-numbers": false,
-    "import-blacklist": [true, "@angular/material", "lodash", "rxjs/internal","rxjs/index", "rxjs/Rx"],
+    "import-blacklist": [true, "@angular/material", "lodash", "rxjs/internal", "rxjs/index", "rxjs/Rx"],
     "ordered-imports": false,
     "max-classes-per-file": false, // [true, 1],
     "prefer-for-of": true,
@@ -277,6 +276,7 @@
   //		"esSpecCompliant": true
   //	  }
   //	],
+  //    "type-literal-delimiter": true,
   //	"space-before-function-paren": [
   //	  true,
   //	  {
