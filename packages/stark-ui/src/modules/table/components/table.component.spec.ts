@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs max-inline-declarations no-identical-functions */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -21,10 +21,8 @@ import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.componen
 import { StarkTableComponent } from "./table.component";
 import { StarkTableColumnComponent } from "./column.component";
 import { StarkPaginationComponent } from "../../pagination/components";
-import { StarkTableColumnProperties } from "./column-properties.intf";
+import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter } from "../entities";
 import { StarkActionBarConfig } from "../../action-bar/components/action-bar-config.intf";
-import { StarkTableFilter } from "./table-filter.intf";
-import { StarkTableColumnFilter } from "./table-column-filter.intf";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
 
@@ -52,7 +50,9 @@ class TestHostComponent {
 	public tableComponent: StarkTableComponent;
 
 	public columnProperties: StarkTableColumnProperties[];
-	public dummyData: object[];
+	// FIXME Currently, if no data is set on the init of the stark-table component, it breaks the component and its tests.
+	// More info on: https://github.com/NationalBankBelgium/stark/issues/1087
+	public dummyData: object[] = [];
 	public fixedHeader?: string;
 	public rowsSelectable?: boolean;
 	public multiSelect?: string;
@@ -84,6 +84,7 @@ describe("TableComponent", () => {
 		return TestBed.configureTestingModule({
 			imports: [
 				FormsModule,
+				ReactiveFormsModule,
 				MatCheckboxModule,
 				MatDialogModule,
 				MatInputModule,
@@ -151,13 +152,41 @@ describe("TableComponent", () => {
 		it("should trigger resetFilterValueOnDataChange and sortData methods when data changes", () => {
 			spyOn(component, "resetFilterValueOnDataChange");
 			spyOn(component, "sortData");
+			spyOn(component, "updateDataSource");
+			spyOn(component, "applyFilter");
 
+			hostComponent.orderProperties = ["name"];
+			hostFixture.detectChanges();
 			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
 			(<Spy>component.sortData).calls.reset();
+			(<Spy>component.updateDataSource).calls.reset();
 			hostComponent.dummyData = [{ name: "test-data" }];
 			hostFixture.detectChanges();
 			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
 			expect(component.sortData).toHaveBeenCalledTimes(1);
+			expect(component.updateDataSource).toHaveBeenCalledTimes(1);
+
+			hostComponent.orderProperties = [];
+			hostFixture.detectChanges();
+			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
+			(<Spy>component.sortData).calls.reset();
+			(<Spy>component.updateDataSource).calls.reset();
+			hostComponent.dummyData = [{ name: "test-data-1" }];
+			hostFixture.detectChanges();
+			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
+			expect(component.sortData).not.toHaveBeenCalled();
+			expect(component.updateDataSource).toHaveBeenCalledTimes(1);
+
+			hostComponent.orderProperties = undefined;
+			hostFixture.detectChanges();
+			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
+			(<Spy>component.sortData).calls.reset();
+			(<Spy>component.updateDataSource).calls.reset();
+			hostComponent.dummyData = [{ name: "test-data-2" }];
+			hostFixture.detectChanges();
+			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
+			expect(component.sortData).not.toHaveBeenCalled();
+			expect(component.updateDataSource).toHaveBeenCalledTimes(1);
 		});
 
 		it("should assign right value to isFixedHeaderEnabled when fixedHeader changes", () => {
@@ -522,27 +551,29 @@ describe("TableComponent", () => {
 
 		describe("global filter", () => {
 			it("should trigger the filtering when filterValue is not empty", () => {
-				component.filter = {
+				hostComponent.tableFilter = {
 					globalFilterValue: "1"
 				};
-				component.applyFilter();
+				hostFixture.detectChanges();
 
 				expect(component.dataSource.filteredData).toEqual([{ a: 1, b: "b" }]);
 			});
 
 			it("should trigger the filtering when filterValue contains a wildcard '*'", () => {
-				component.filter = {
+				hostComponent.tableFilter = {
 					globalFilterValue: "a*c"
 				};
-				component.applyFilter();
+				hostFixture.detectChanges();
+
 				expect(component.dataSource.filteredData).toEqual([{ a: 3, b: "aisfollowedbyc" }]);
 			});
 
 			it("should trigger the filtering and return empty data when the data does not contain the filterValue", () => {
-				component.filter = {
+				hostComponent.tableFilter = {
 					globalFilterValue: "85"
 				};
-				component.applyFilter();
+				hostFixture.detectChanges();
+
 				expect(component.dataSource.filteredData).toEqual([]);
 			});
 
@@ -857,7 +888,8 @@ describe("TableComponent", () => {
 
 			const filterHasBeenReset: boolean = component.resetFilterValueOnDataChange();
 			expect(filterHasBeenReset).toBe(true);
-			expect(component.filter.globalFilterValue).toBe("");
+			expect(component.filter.globalFilterValue).toBe(undefined);
+			expect(component._globalFilterFormCtrl.value).toBeNull();
 			expect((<StarkTableColumnFilter[]>component.filter.columns)[0].filterValue).toBe(dummyColumnFilterValue);
 		});
 

@@ -25,16 +25,23 @@ import { SelectionChange, SelectionModel } from "@angular/cdk/collections";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { Subscription } from "rxjs";
 
-import { StarkTableColumnComponent, StarkTableColumnSortingDirection } from "./column.component";
+import { StarkTableColumnComponent } from "./column.component";
 import { StarkSortingRule, StarkTableMultisortDialogComponent, StarkTableMultisortDialogData } from "./dialogs/multisort.component";
 import { StarkActionBarConfig } from "../../action-bar/components/action-bar-config.intf";
 import { StarkAction } from "../../action-bar/components/action.intf";
-import { StarkTableColumnProperties } from "./column-properties.intf";
-import { StarkTableFilter } from "./table-filter.intf";
+import {
+	StarkColumnSortChangedOutput,
+	StarkTableColumnProperties,
+	StarkTableFilter,
+	StarkColumnFilterChangedOutput,
+	StarkTableColumnSortingDirection
+} from "../entities";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
 import { StarkPaginateEvent } from "../../pagination/components/paginate-event.intf";
 import { StarkComponentUtil } from "../../../util/component";
+import { FormControl } from "@angular/forms";
+import { distinctUntilChanged } from "rxjs/operators";
 
 /**
  * Name of the component
@@ -160,10 +167,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public rowClassNameFn?: (row: object, index: number) => string;
 
 	/**
-	 * Output event emitter that will emit the latest global filter value whenever it changes.
+	 * Output event emitter that will emit the latest filter value whenever it changes.
 	 */
 	@Output()
-	public filterChanged: EventEmitter<string> = new EventEmitter<string>();
+	public filterChanged: EventEmitter<StarkTableFilter> = new EventEmitter<StarkTableFilter>();
 
 	/**
 	 * Callback function to be called when the pagination changes. Two parameters
@@ -241,6 +248,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public displayedColumns: string[] = [];
 
+	public _globalFilterFormCtrl: FormControl;
+
 	/**
 	 * Whether the fixed header is enabled.
 	 */
@@ -305,6 +314,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.customTableRegularActions = { actions: [] };
 			this.customTableAltActions = this.customTableActions;
 		}
+
+		this._globalFilterFormCtrl = new FormControl(this.filter.globalFilterValue);
 	}
 
 	/**
@@ -326,12 +337,21 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		this.addColumnsToTable(this.columns);
 
 		if (this.orderProperties instanceof Array && this.orderProperties.length) {
-			// TODO: refactor -> sortData() internally calls initializeDataSource() and applyFilter()
 			this.sortData();
-		} else {
-			this.initializeDataSource();
-			this.applyFilter();
 		}
+
+		this.initializeDataSource();
+
+		this._globalFilterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
+			this.filter.globalFilterValue = value === null ? undefined : value;
+			this.filterChanged.emit(this.filter);
+
+			if (value) {
+				this.dataSource.filter = value.trim().toLowerCase();
+			} else {
+				this.dataSource.filter = "%empty%";
+			}
+		});
 
 		this.cdRef.detectChanges();
 	}
@@ -342,20 +362,28 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["data"] && !changes["data"].isFirstChange()) {
-			this.resetFilterValueOnDataChange();
+			if (this.resetFilterValueOnDataChange()) {
+				this.filterChanged.emit(this.filter);
+				this.applyFilter();
+			}
 
-			// When data changes, we should sort it again in any case because:
-			//   * orderProperties could contain some sort rules
-			//   * every column could have a sort rule defined
-			this.sortData();
+			if (this.orderProperties instanceof Array && this.orderProperties.length) {
+				this.sortData();
+			}
+
+			this.updateDataSource();
 		}
 
 		if (changes["orderProperties"] && !changes["orderProperties"].isFirstChange()) {
 			this.sortData();
+			this.updateDataSource();
 		}
 
 		if (changes["filter"]) {
 			this.filter = { ...defaultFilter, ...this.filter };
+			if (typeof this._globalFilterFormCtrl !== "undefined") {
+				this._globalFilterFormCtrl.setValue(this.filter.globalFilterValue);
+			}
 		}
 
 		if (changes["fixedHeader"]) {
@@ -411,11 +439,13 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	private addColumnsToTable(columns: StarkTableColumnComponent[]): void {
 		for (const column of columns) {
 			this.table.addColumnDef(column.columnDef);
-			column.sortChanged.subscribe(() => {
-				this.onReorderChange(column);
+
+			column.sortChanged.subscribe((sortedColumn: StarkColumnSortChangedOutput) => {
+				this.onReorderChange(sortedColumn);
 			});
-			column.filterChanged.subscribe(() => {
-				this.onFilterChange();
+			column.filterChanged.subscribe((fitleredColumn: StarkColumnFilterChangedOutput) => {
+				this.onColumnFilterChange(fitleredColumn.name, fitleredColumn.filterValue);
+				this.applyFilter();
 			});
 			this.displayedColumns = [...this.displayedColumns, column.name];
 		}
@@ -425,11 +455,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Trigger the filtering of the MatTableDataSource used by the MatTable
 	 */
 	public applyFilter(): void {
-		if (this.filter.globalFilterValue) {
-			this.dataSource.filter = this.filter.globalFilterValue.trim().toLowerCase();
-		} else {
-			this.dataSource.filter = "%empty%";
-		}
+		this.dataSource.filter = "" + this.dataSource.filter;
 	}
 
 	/**
@@ -448,6 +474,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Create and initialize the MatTableDataSource used by the MatTable
 	 */
+	// tslint:disable-next-line:cognitive-complexity
 	private initializeDataSource(): void {
 		this.dataSource = new MatTableDataSource(this.data);
 
@@ -491,6 +518,19 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 			return !matchFilter.length || matchFilter.every(Boolean);
 		};
+
+		if (this.filter.globalFilterValue && this.filter.globalFilterValue !== "") {
+			this.dataSource.filter = this.filter.globalFilterValue;
+		} else {
+			this.dataSource.filter = "%empty%";
+		}
+	}
+
+	/**
+	 * Update data in the MatTableDataSource by setting the current value of this.data.
+	 */
+	public updateDataSource(): void {
+		this.dataSource.data = this.data;
 	}
 
 	/**
@@ -550,22 +590,30 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Called when the Clear button in the filter pop-up is clicked
 	 */
 	public onClearFilter(): void {
-		this.filter.globalFilterValue = "";
-		this.applyFilter();
+		this._globalFilterFormCtrl.reset();
 	}
 
 	/**
-	 * Called whenever the value of the filter input changes
+	 * Called whenever the value of the filter input of a column changes
 	 */
-	public onFilterChange(): void {
-		this.applyFilter();
+	public onColumnFilterChange(columnName: string, filterValue?: string): void {
+		if (typeof this.filter.columns !== "undefined") {
+			for (const columnFilter of this.filter.columns) {
+				if (columnFilter.columnName === columnName) {
+					columnFilter.filterValue = filterValue;
+					break;
+				}
+			}
+
+			this.filterChanged.emit(this.filter);
+		}
 	}
 
 	/**
 	 * Called whenever the sorting of any of the columns changes
 	 * @param column - The column whose sorting has changed
 	 */
-	public onReorderChange(column: StarkTableColumnComponent): void {
+	public onReorderChange(column: StarkColumnSortChangedOutput): void {
 		if (column.sortable) {
 			this.resetSorting(column);
 			if (column.sortable) {
@@ -583,6 +631,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 				}
 			}
 			this.sortData();
+			this.updateDataSource();
 		}
 	}
 
@@ -601,6 +650,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		dialogRef.afterClosed().subscribe((savedRules: StarkSortingRule[] | undefined) => {
 			if (savedRules) {
 				this.sortData();
+				this.updateDataSource();
 			}
 		});
 	}
@@ -609,9 +659,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Clear the sorting direction of every column in the table except for the given column (if any)
 	 * @param exceptColumn - Column whose sorting direction should not be cleared
 	 */
-	public resetSorting(exceptColumn: StarkTableColumnComponent): void {
+	public resetSorting(exceptColumn: StarkColumnSortChangedOutput): void {
 		for (const column of this.columns) {
-			if (exceptColumn !== column) {
+			if (exceptColumn.name !== column.name) {
 				column.sortDirection = "";
 				column.sortPriority = 100;
 			}
@@ -677,11 +727,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			}
 			return 0;
 		});
-
-		// FIXME: move these two calls out of this method
-		this.initializeDataSource();
-
-		this.applyFilter();
 	}
 
 	/**
@@ -766,7 +811,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.filter.globalFilterValue !== "" &&
 			this.filter.resetGlobalFilterOnDataChange === true
 		) {
-			this.filter.globalFilterValue = "";
+			this._globalFilterFormCtrl.reset();
 			filterValueReset = true;
 		}
 
