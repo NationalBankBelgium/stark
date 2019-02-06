@@ -31,7 +31,7 @@
     "@types/nouislider": "^9.0.4",
     "@types/prismjs": "^1.9.0",
     "normalize.css": "^8.0.1",
-    "nouislider": "^12.1.0",
+    "nouislider": "^13.0.0",
     "prettier": "^1.16.1",
     "pretty-data": "^0.40.0",
     "prismjs": "^1.15.0"
