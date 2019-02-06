@@ -1,0 +1,1056 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>StarkProgressIndicatorServiceImpl</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/progress-indicator/services/progress-indicator.service.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service to handle the visibility of a progress indicator (e.g., spinner, progress percentage, ...) programmatically.</p>
+
+            </p>
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger">logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#progressIndicatorMap">progressIndicatorMap</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#progressIndicatorMap$">progressIndicatorMap$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#store">store</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#topicsShowMap$">topicsShowMap$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#deregister">deregister</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hide">hide</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isVisible">isVisible</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#register">register</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#show">show</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: StarkLoggingService, store: <a href="../interfaces/StarkUIApplicationState.html">Store<StarkUIApplicationState></a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:29</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Class constructor
+Subscription is made to the progressIndicatorMap, containing the configuration for the progressIndicator</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The logger of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkUIApplicationState.html" target="_self" >Store&lt;StarkUIApplicationState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The store of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="deregister"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            deregister
+                            </b>
+                            <a href="#deregister"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>deregister(topic: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:62</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Dispatches the DEREGISTER action in case the topic exists in the Store (starkProgressIndicator) and its listenersCount is 1, otherwise
+a REFRESH_CONFIG action is dispatched to decrease the listenersCount by 1</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>topic</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hide"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hide
+                            </b>
+                            <a href="#hide"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>hide(topic: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:124</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Dispatches the HIDE action in case the indicator has no pending listeners (only 1), otherwise a REFRESH_CONFIG action is dispatched
+to decrease the pendingListenersCount by 1</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>topic</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isVisible"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            isVisible
+                            </b>
+                            <a href="#isVisible"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>isVisible(topic: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:157</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>topic</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Observable&lt;boolean | undefined&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="register"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            register
+                            </b>
+                            <a href="#register"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>register(topic: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, type: <a href="../undefineds/StarkProgressIndicatorType.html">StarkProgressIndicatorType</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:53</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Dispatches the REGISTER action in case the topic does not exist yet in the Store (starkProgressIndicator), otherwise
+a REFRESH_CONFIG action is dispatched to increase the listenersCount by 1</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>topic</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>type</td>
+                                                        <td>
+                                                                    <code><a href="../miscellaneous/enumerations.html#StarkProgressIndicatorType" target="_self" >StarkProgressIndicatorType</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="show"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            show
+                            </b>
+                            <a href="#show"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>show(topic: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:72</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Dispatches the SHOW action in case the indicator is not shown yet, otherwise a REFRESH_CONFIG action is dispatched
+to increase the pendingListenersCount by 1</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>topic</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logger"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            logger
+                            </b>
+                            <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>logger:     <code>StarkLoggingService</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>StarkLoggingService</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(STARK_LOGGING_SERVICE)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:37</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- The logger of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="progressIndicatorMap"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            progressIndicatorMap
+                            </b>
+                            <a href="#progressIndicatorMap"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>progressIndicatorMap:     <code><a href="../interfaces/StarkProgressIndicatorConfig.html" target="_self" >Map&lt;string | StarkProgressIndicatorConfig&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkProgressIndicatorConfig.html" target="_self" >Map&lt;string | StarkProgressIndicatorConfig&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="progressIndicatorMap$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            progressIndicatorMap$
+                            </b>
+                            <a href="#progressIndicatorMap$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>progressIndicatorMap$:     <code><a href="../interfaces/StarkProgressIndicatorConfig.html" target="_self" >Observable&lt;Map&lt;string, StarkProgressIndicatorConfig&gt;&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkProgressIndicatorConfig.html" target="_self" >Observable&lt;Map&lt;string, StarkProgressIndicatorConfig&gt;&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="store"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            store
+                            </b>
+                            <a href="#store"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>store:     <code><a href="../interfaces/StarkUIApplicationState.html" target="_self" >Store&lt;StarkUIApplicationState&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkUIApplicationState.html" target="_self" >Store&lt;StarkUIApplicationState&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:37</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- The store of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="topicsShowMap$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            topicsShowMap$
+                            </b>
+                            <a href="#topicsShowMap$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>topicsShowMap$:     <code>Map&lt;string | Subject&lt;string&gt;&gt;</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Map&lt;string | Subject&lt;string&gt;&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/modules/progress-indicator/services/progress-indicator.service.ts:29</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Map containing a subject per topic</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { select, Store } from &quot;@ngrx/store&quot;;
+import { defer, Observable, of, Subject, throwError, timer } from &quot;rxjs&quot;;
+import { flatMap, map, retryWhen, switchMap, take, tap } from &quot;rxjs/operators&quot;;
+import { Inject, Injectable } from &quot;@angular/core&quot;;
+
+import { StarkProgressIndicatorService, starkProgressIndicatorServiceName } from &quot;./progress-indicator.service.intf&quot;;
+import {
+	StarkProgressIndicatorDeregister,
+	StarkProgressIndicatorHide,
+	StarkProgressIndicatorRegister,
+	StarkProgressIndicatorShow
+} from &quot;../actions&quot;;
+import { StarkProgressIndicatorConfig, StarkProgressIndicatorConfigImpl, StarkProgressIndicatorType } from &quot;../entities&quot;;
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;@nationalbankbelgium/stark-core&quot;;
+import { selectStarkProgressIndicator } from &quot;../reducers&quot;;
+import { StarkUIApplicationState } from &quot;../../../common/store&quot;;
+
+/**
+ * Service to handle the visibility of a progress indicator (e.g., spinner, progress percentage, ...) programmatically.
+ */
+@Injectable()
+export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicatorService {
+	protected progressIndicatorMap$: Observable&lt;Map&lt;string, StarkProgressIndicatorConfig&gt;&gt;;
+	protected progressIndicatorMap: Map&lt;string, StarkProgressIndicatorConfig&gt;;
+
+	/**
+	 * Map containing a subject per topic
+	 */
+	public topicsShowMap$: Map&lt;string, Subject&lt;string&gt;&gt;;
+
+	/**
+	 * Class constructor
+	 * Subscription is made to the progressIndicatorMap, containing the configuration for the progressIndicator
+	 * @param logger - The logger of the application
+	 * @param store - The store of the application
+	 */
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public store: Store&lt;StarkUIApplicationState&gt;) {
+		this.logger.debug(starkProgressIndicatorServiceName + &quot; loaded&quot;);
+
+		this.progressIndicatorMap$ &#x3D; this.store.pipe(select(selectStarkProgressIndicator));
+
+		this.progressIndicatorMap$.subscribe((progressIndicatorMap: Map&lt;string, StarkProgressIndicatorConfig&gt;) &#x3D;&gt; {
+			this.progressIndicatorMap &#x3D; progressIndicatorMap;
+		});
+
+		this.topicsShowMap$ &#x3D; new Map&lt;string, Subject&lt;string&gt;&gt;();
+	}
+
+	/**
+	 * Dispatches the REGISTER action in case the topic does not exist yet in the Store (starkProgressIndicator), otherwise
+	 * a REFRESH_CONFIG action is dispatched to increase the listenersCount by 1
+	 */
+	public register(topic: string, type: StarkProgressIndicatorType): void {
+		const progressIndicatorConfig: StarkProgressIndicatorConfig &#x3D; new StarkProgressIndicatorConfigImpl(topic, type, false);
+		this.store.dispatch(new StarkProgressIndicatorRegister(progressIndicatorConfig));
+	}
+
+	/**
+	 * Dispatches the DEREGISTER action in case the topic exists in the Store (starkProgressIndicator) and its listenersCount is 1, otherwise
+	 * a REFRESH_CONFIG action is dispatched to decrease the listenersCount by 1
+	 */
+	public deregister(topic: string): void {
+		if (this.progressIndicatorMap.has(topic)) {
+			this.store.dispatch(new StarkProgressIndicatorDeregister(topic));
+		}
+	}
+
+	/**
+	 * Dispatches the SHOW action in case the indicator is not shown yet, otherwise a REFRESH_CONFIG action is dispatched
+	 * to increase the pendingListenersCount by 1
+	 */
+	public show(topic: string): void {
+		const maxRetries: number &#x3D; 15;
+		const interval: number &#x3D; 50; // milliseconds
+		const logMessagePrefix: string &#x3D; starkProgressIndicatorServiceName + &quot;: Show - progress indicator for topic &#x27;&quot; + topic + &quot;&#x27;&quot;;
+
+		if (!this.topicsShowMap$.has(topic)) {
+			this.topicsShowMap$.set(topic, new Subject()); // create the subject in case it does not exist yet for this topic
+		}
+
+		// try to find the indicator with the given topic a maximum of &#x27;maxRetries&#x27; times before throwing an error
+		defer(() &#x3D;&gt; {
+			if (this.progressIndicatorMap.has(topic)) {
+				this.store.dispatch(new StarkProgressIndicatorShow(topic));
+				return of(logMessagePrefix + &quot; shown.&quot;);
+			} else {
+				return throwError(logMessagePrefix + &quot; not found!&quot;);
+			}
+		})
+			.pipe(
+				retryWhen((errors: Observable&lt;any&gt;) &#x3D;&gt; {
+					let retries: number &#x3D; 0;
+					return errors.pipe(
+						flatMap((error: any) &#x3D;&gt; {
+							if (retries &lt; maxRetries) {
+								retries++;
+								return timer(interval);
+							} else {
+								return throwError(error);
+							}
+						})
+					);
+				}),
+				tap((result: any) &#x3D;&gt; {
+					if (this.topicsShowMap$.has(topic)) {
+						const topicShow$: Subject&lt;string&gt; &#x3D; &lt;Subject&lt;string&gt;&gt;this.topicsShowMap$.get(topic);
+
+						topicShow$.next(result); // emit result in the subject of the topic so that &#x27;hide&#x27; can continue (in case it was called)
+						// complete and remove the subject so that next calls to &#x27;hide&#x27; don&#x27;t need to wait (unless &#x27;show&#x27; is called first)
+						topicShow$.complete();
+						this.topicsShowMap$.delete(topic);
+					}
+				})
+			)
+			.subscribe({
+				error: (error: string) &#x3D;&gt; this.logger.error(error)
+			});
+	}
+
+	/**
+	 * Dispatches the HIDE action in case the indicator has no pending listeners (only 1), otherwise a REFRESH_CONFIG action is dispatched
+	 * to decrease the pendingListenersCount by 1
+	 */
+	public hide(topic: string): void {
+		const logMessagePrefix: string &#x3D; starkProgressIndicatorServiceName + &quot;: Hide - progress indicator for topic &#x27;&quot; + topic + &quot;&#x27;&quot;;
+
+		const hide$: Observable&lt;string&gt; &#x3D; defer(() &#x3D;&gt; {
+			if (this.progressIndicatorMap.has(topic)) {
+				this.store.dispatch(new StarkProgressIndicatorHide(topic));
+				return of(logMessagePrefix + &quot; hidden.&quot;);
+			} else {
+				return throwError(logMessagePrefix + &quot; not found!&quot;);
+			}
+		});
+
+		let composedHide$: Observable&lt;string&gt; &#x3D; hide$;
+
+		// check if the &#x27;hide&#x27; needs to wait for the &#x27;show&#x27; to finish, otherwise it is executed immediately
+		if (this.topicsShowMap$.has(topic)) {
+			const topicShow$: Subject&lt;string&gt; &#x3D; &lt;Subject&lt;string&gt;&gt;this.topicsShowMap$.get(topic);
+
+			composedHide$ &#x3D; topicShow$.pipe(
+				switchMap(() &#x3D;&gt; {
+					return hide$; // call the &#x27;hide&#x27; logic after the &#x27;show&#x27; finishes
+				}),
+				take(1)
+			); // unsubscribe from the &#x27;show&#x27; in this chain (every call to the hide() method must listen only to one emission)
+		}
+
+		composedHide$.subscribe({
+			error: (error: string) &#x3D;&gt; {
+				this.logger.error(error);
+			}
+		});
+	}
+
+	public isVisible(topic: string): Observable&lt;boolean | undefined&gt; {
+		return this.progressIndicatorMap$.pipe(
+			map((progressIndicatorMap: Map&lt;string, StarkProgressIndicatorConfig&gt; | undefined) &#x3D;&gt; {
+				const progressIndicator: StarkProgressIndicatorConfig | undefined &#x3D; progressIndicatorMap
+					? progressIndicatorMap.get(topic)
+					: undefined;
+				if (!progressIndicator) {
+					return undefined;
+				}
+				return progressIndicator.visible;
+			})
+		);
+	}
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkProgressIndicatorServiceImpl.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

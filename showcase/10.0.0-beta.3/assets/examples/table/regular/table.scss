@@ -1,0 +1,9 @@
+@import "~@angular/material/theming";
+
+// todo review after #509 (https://github.com/NationalBankBelgium/stark/issues/509)
+.shadowed {
+  .header {
+    padding: 10px 15px;
+    @include mat-elevation(2);
+  }
+}

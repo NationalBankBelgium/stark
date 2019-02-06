@@ -1,0 +1,2065 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>StarkGenericSearchComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/modules/generic-search/components/generic-search/generic-search.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to display a generic search form with an action bar and form buttons for these actions:</p>
+<ul>
+<li>New: call the onNew output function</li>
+<li>Search: call the onSearch output function</li>
+<li>Reset: call the onReset output function</li>
+</ul>
+
+    </p>
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+            <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                <code><a href="https://angular.io/api/core/AfterContentInit" target="_blank" >AfterContentInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>stark-generic-search</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./generic-search.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#actionBarConfig">actionBarConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#genericForm">genericForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#normalizedFormActionBarConfig">normalizedFormActionBarConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#normalizedFormButtonsConfig">normalizedFormButtonsConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#searchFormComponent">searchFormComponent</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#buildActionBarConfig">buildActionBarConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hideForm">hideForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngAfterContentInit">ngAfterContentInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#normalizeFormActionBarConfig">normalizeFormActionBarConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#normalizeFormButtonsConfig">normalizeFormButtonsConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#triggerSearch">triggerSearch</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#formActionBarConfig">formActionBarConfig</a>
+                            </li>
+                            <li>
+                                <a href="#formButtonsConfig">formButtonsConfig</a>
+                            </li>
+                            <li>
+                                <a href="#formHtmlId">formHtmlId</a>
+                            </li>
+                            <li>
+                                <a href="#hideOnSearch">hideOnSearch</a>
+                            </li>
+                            <li>
+                                <a href="#isFormHidden">isFormHidden</a>
+                            </li>
+                            <li>
+                                <a href="#color">color</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#formVisibilityChanged">formVisibilityChanged</a>
+                            </li>
+                            <li>
+                                <a href="#newTriggered">newTriggered</a>
+                            </li>
+                            <li>
+                                <a href="#resetTriggered">resetTriggered</a>
+                            </li>
+                            <li>
+                                <a href="#searchTriggered">searchTriggered</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: StarkLoggingService, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, elementRef: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:181</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The logger of the application.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Angular Renderer wrapper for DOM manipulations.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>elementRef</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Reference to the DOM element where this directive is applied to.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="formActionBarConfig"></a>
+                        <code>formActionBarConfig</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Configuration object for the action bar to be shown above the generic form</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="../interfaces/StarkGenericSearchActionBarConfig.html" target="_self" >StarkGenericSearchActionBarConfig</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:121</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="formButtonsConfig"></a>
+                        <code>formButtonsConfig</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Configuration object for the buttons to be shown in the generic form</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="../interfaces/StarkGenericSearchFormButtonsConfig.html" target="_self" >StarkGenericSearchFormButtonsConfig</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:127</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="formHtmlId"></a>
+                        <code>formHtmlId</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>HTML id of action bar component.</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </p>
+                        <p>
+                            <em>Default value : </em><code>&quot;stark-generic-search-form&quot;</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:139</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="hideOnSearch"></a>
+                        <code>hideOnSearch</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Whether the search form should be hidden once the search is triggered.
+Default: false</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </p>
+                        <p>
+                            <em>Default value : </em><code>false</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:146</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="isFormHidden"></a>
+                        <code>isFormHidden</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Whether the search form should be hidden. Default: false</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </p>
+                        <p>
+                            <em>Default value : </em><code>false</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:133</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="color"></a>
+                        <code>color</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Color theme</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in AbstractStarkUiComponent:11</div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="formVisibilityChanged"></a>
+                        <code>formVisibilityChanged</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Callback function to be called when the visibility of the generic form changes.
+A boolean is passed as parameter to indicate whether the generic form is visible or not.</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code>EventEmitter&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:173</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="newTriggered"></a>
+                        <code>newTriggered</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Callback function to be called when the &quot;New&quot; button is clicked (in case it is shown)</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code>EventEmitter&lt;void&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:152</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="resetTriggered"></a>
+                        <code>resetTriggered</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Callback function to be called when the &quot;Reset&quot; button is clicked.
+The form model object is passed as parameter to this function.</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code>EventEmitter&lt;FormGroup&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:159</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="searchTriggered"></a>
+                        <code>searchTriggered</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Callback function to be called when the &quot;Search&quot; button is clicked.
+The form model object is passed as parameter to this function.</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code>EventEmitter&lt;FormGroup&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:166</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="buildActionBarConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            buildActionBarConfig
+                            </b>
+                            <a href="#buildActionBarConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>buildActionBarConfig(searchFormActionBarConfig: <a href="../interfaces/StarkGenericSearchActionBarConfig.html">StarkGenericSearchActionBarConfigRequired</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="428" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:428</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Build the action bar config object based on the searchFormActionBarConfig object and set the action calls to emit
+values through the defined Output</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>searchFormActionBarConfig</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkGenericSearchActionBarConfig.html" target="_self" >StarkGenericSearchActionBarConfigRequired</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>Form action bar configuration</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkActionBarConfig.html" target="_self" >StarkActionBarConfig</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hideForm"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hideForm
+                            </b>
+                            <a href="#hideForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>hideForm()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="500" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:500</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Hide the search form and emit a boolean through formVisibilityChanged event emitter that indicates if the search is displayed</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngAfterContentInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngAfterContentInit
+                            </b>
+                            <a href="#ngAfterContentInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngAfterContentInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="199" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:199</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnChanges"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnChanges
+                            </b>
+                            <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnChanges(changesObj: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:219</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>changesObj</td>
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:208</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="normalizeFormActionBarConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            normalizeFormActionBarConfig
+                            </b>
+                            <a href="#normalizeFormActionBarConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>normalizeFormActionBarConfig(config?: <a href="../interfaces/StarkGenericSearchActionBarConfig.html">StarkGenericSearchActionBarConfig</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="331" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:331</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Normalize the form action bar config
+Set a default value for each property of each action if there is no value defined</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>config</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkGenericSearchActionBarConfig.html" target="_self" >StarkGenericSearchActionBarConfig</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>Form action bar configuration</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkGenericSearchActionBarConfig.html" target="_self" >StarkGenericSearchActionBarConfigRequired</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="normalizeFormButtonsConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            normalizeFormButtonsConfig
+                            </b>
+                            <a href="#normalizeFormButtonsConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>normalizeFormButtonsConfig(config?: <a href="../interfaces/StarkGenericSearchFormButtonsConfig.html">StarkGenericSearchFormButtonsConfig</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="243" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:243</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Normalize the form buttons config
+Set a default value for each property of each button if there is no value defined</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>config</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkGenericSearchFormButtonsConfig.html" target="_self" >StarkGenericSearchFormButtonsConfig</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>Form buttons configuration</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkGenericSearchFormButtonsConfig.html" target="_self" >StarkGenericSearchFormButtonsConfigRequired</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="triggerSearch"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            triggerSearch
+                            </b>
+                            <a href="#triggerSearch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>triggerSearch()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="490" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:490</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Emit the form through &quot;searchTriggered&quot; event emitter then hide the search form based on hideOnSearch variable</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in AbstractStarkUiComponent:23</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="actionBarConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            actionBarConfig
+                            </b>
+                            <a href="#actionBarConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>actionBarConfig:     <code><a href="../interfaces/StarkActionBarConfig.html" target="_self" >StarkActionBarConfig</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkActionBarConfig.html" target="_self" >StarkActionBarConfig</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:178</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="genericForm"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            genericForm
+                            </b>
+                            <a href="#genericForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>genericForm:     <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:181</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="normalizedFormActionBarConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            normalizedFormActionBarConfig
+                            </b>
+                            <a href="#normalizedFormActionBarConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>normalizedFormActionBarConfig:     <code><a href="../interfaces/StarkGenericSearchActionBarConfig.html" target="_self" >StarkGenericSearchActionBarConfigRequired</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkGenericSearchActionBarConfig.html" target="_self" >StarkGenericSearchActionBarConfigRequired</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:179</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="normalizedFormButtonsConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            normalizedFormButtonsConfig
+                            </b>
+                            <a href="#normalizedFormButtonsConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>normalizedFormButtonsConfig:     <code><a href="../interfaces/StarkGenericSearchFormButtonsConfig.html" target="_self" >StarkGenericSearchFormButtonsConfigRequired</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkGenericSearchFormButtonsConfig.html" target="_self" >StarkGenericSearchFormButtonsConfigRequired</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:180</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchFormComponent"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            searchFormComponent
+                            </b>
+                            <a href="#searchFormComponent"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>searchFormComponent:     <code><a href="../interfaces/StarkSearchFormComponent.html" target="_self" >StarkSearchFormComponent&lt;unknown&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkSearchFormComponent.html" target="_self" >StarkSearchFormComponent&lt;unknown&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ContentChild(&#x27;searchForm&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/modules/generic-search/components/generic-search/generic-search.component.ts:176</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+	AfterContentInit,
+	Component,
+	ContentChild,
+	ElementRef,
+	EventEmitter,
+	Inject,
+	Input,
+	OnChanges,
+	OnInit,
+	Output,
+	Renderer2,
+	SimpleChanges,
+	ViewEncapsulation
+} from &quot;@angular/core&quot;;
+import { StarkSearchFormComponent } from &quot;../../classes&quot;;
+import {
+	StarkFormButton,
+	StarkFormCustomizablePredefinedButton,
+	StarkFormDefaultPredefinedButton,
+	StarkGenericSearchActionBarConfig,
+	StarkGenericSearchFormButtonsConfig
+} from &quot;../../entities&quot;;
+import {
+	StarkAction,
+	StarkActionBarConfig,
+	StarkCustomizablePredefinedAction,
+	StarkDefaultPredefinedAction
+} from &quot;../../../action-bar/components&quot;;
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;@nationalbankbelgium/stark-core&quot;;
+import { FormGroup } from &quot;@angular/forms&quot;;
+import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from &quot;@angular/animations&quot;;
+import { AbstractStarkUiComponent } from &quot;../../../../common/classes/abstract-component&quot;;
+
+/**
+ * @ignore
+ */
+const _isEqual: Function &#x3D; require(&quot;lodash/isEqual&quot;);
+
+/**
+ * Name of the component
+ */
+const componentName: string &#x3D; &quot;stark-generic-search&quot;;
+
+/**
+ * @ignore
+ */
+declare type UnusedLabelProps &#x3D; &quot;labelActivated&quot; | &quot;labelSwitchFunction&quot;;
+
+/**
+ * @ignore
+ */
+declare type UnusedIconProps &#x3D; &quot;iconActivated&quot; | &quot;iconSwitchFunction&quot;;
+
+/**
+ * @ignore
+ */
+declare type StarkDefaultPredefinedActionBarGenericAction &#x3D; Required&lt;
+	Pick&lt;StarkDefaultPredefinedAction, Exclude&lt;keyof StarkDefaultPredefinedAction, UnusedLabelProps | UnusedIconProps&gt;&gt;
+&gt; &amp;
+	Pick&lt;StarkDefaultPredefinedAction, UnusedIconProps&gt;;
+
+/**
+ * @ignore
+ */
+declare type StarkCustomizablePredefinedActionBarGenericAction &#x3D; Required&lt;
+	Pick&lt;StarkCustomizablePredefinedAction, Exclude&lt;keyof StarkCustomizablePredefinedAction, UnusedLabelProps | UnusedIconProps&gt;&gt;
+&gt; &amp;
+	Partial&lt;Pick&lt;StarkCustomizablePredefinedAction, UnusedIconProps&gt;&gt;;
+
+/**
+ * @ignore
+ */
+interface StarkGenericSearchActionBarConfigRequired extends StarkGenericSearchActionBarConfig, StarkActionBarConfig {
+	search: StarkDefaultPredefinedActionBarGenericAction;
+	new: StarkCustomizablePredefinedActionBarGenericAction;
+	reset: StarkCustomizablePredefinedActionBarGenericAction;
+}
+
+/**
+ * @ignore
+ */
+interface StarkGenericSearchFormButtonsConfigRequired extends StarkGenericSearchFormButtonsConfig {
+	search: Required&lt;StarkFormDefaultPredefinedButton&gt;;
+	new: Required&lt;StarkFormCustomizablePredefinedButton&gt;;
+	reset: Required&lt;StarkFormCustomizablePredefinedButton&gt;;
+	custom: StarkFormButton[];
+}
+
+/**
+ * @ignore
+ */
+const formAnimations: AnimationTriggerMetadata &#x3D; trigger(&quot;collapse&quot;, [
+	state(&quot;closed&quot;, style({ opacity: 0, height: 0 })),
+	transition(&quot;* &lt;&#x3D;&gt; closed&quot;, animate(400))
+]);
+
+/**
+ * Component to display a generic search form with an action bar and form buttons for these actions:
+ *
+ * - New: call the onNew output function
+ * - Search: call the onSearch output function
+ * - Reset: call the onReset output function
+ *
+ */
+@Component({
+	selector: &quot;stark-generic-search&quot;,
+	templateUrl: &quot;./generic-search.component.html&quot;,
+	animations: [formAnimations],
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
+})
+export class StarkGenericSearchComponent extends AbstractStarkUiComponent implements OnInit, OnChanges, AfterContentInit {
+	/**
+	 * Configuration object for the action bar to be shown above the generic form
+	 */
+	@Input()
+	public formActionBarConfig?: StarkGenericSearchActionBarConfig;
+
+	/**
+	 * Configuration object for the buttons to be shown in the generic form
+	 */
+	@Input()
+	public formButtonsConfig?: StarkGenericSearchFormButtonsConfig;
+
+	/**
+	 * Whether the search form should be hidden. Default: false
+	 */
+	@Input()
+	public isFormHidden: boolean &#x3D; false;
+
+	/**
+	 * HTML id of action bar component.
+	 */
+	@Input()
+	public formHtmlId: string &#x3D; &quot;stark-generic-search-form&quot;;
+
+	/**
+	 * Whether the search form should be hidden once the search is triggered.
+	 * Default: false
+	 */
+	@Input()
+	public hideOnSearch: boolean &#x3D; false;
+
+	/**
+	 * Callback function to be called when the &quot;New&quot; button is clicked (in case it is shown)
+	 */
+	@Output()
+	public newTriggered: EventEmitter&lt;void&gt; &#x3D; new EventEmitter&lt;void&gt;();
+
+	/**
+	 * Callback function to be called when the &quot;Reset&quot; button is clicked.
+	 * The form model object is passed as parameter to this function.
+	 */
+	@Output()
+	public resetTriggered: EventEmitter&lt;FormGroup&gt; &#x3D; new EventEmitter&lt;FormGroup&gt;();
+
+	/**
+	 * Callback function to be called when the &quot;Search&quot; button is clicked.
+	 * The form model object is passed as parameter to this function.
+	 */
+	@Output()
+	public searchTriggered: EventEmitter&lt;FormGroup&gt; &#x3D; new EventEmitter&lt;FormGroup&gt;();
+
+	/**
+	 * Callback function to be called when the visibility of the generic form changes.
+	 * A boolean is passed as parameter to indicate whether the generic form is visible or not.
+	 */
+	@Output()
+	public formVisibilityChanged?: EventEmitter&lt;boolean&gt; &#x3D; new EventEmitter&lt;boolean&gt;();
+
+	@ContentChild(&quot;searchForm&quot;)
+	public searchFormComponent: StarkSearchFormComponent&lt;unknown&gt;;
+
+	public actionBarConfig: StarkActionBarConfig;
+	public normalizedFormActionBarConfig: StarkGenericSearchActionBarConfigRequired;
+	public normalizedFormButtonsConfig: StarkGenericSearchFormButtonsConfigRequired;
+	public genericForm: FormGroup;
+
+	/**
+	 * @param logger - The logger of the application.
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngAfterContentInit(): void {
+		if (typeof this.searchFormComponent !&#x3D;&#x3D; &quot;undefined&quot;) {
+			this.genericForm &#x3D; this.searchFormComponent.searchForm;
+		}
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnInit(): void {
+		this.normalizedFormButtonsConfig &#x3D; this.normalizeFormButtonsConfig(this.formButtonsConfig);
+		this.normalizedFormActionBarConfig &#x3D; this.normalizeFormActionBarConfig(this.formActionBarConfig);
+		this.actionBarConfig &#x3D; this.buildActionBarConfig(this.normalizedFormActionBarConfig);
+
+		this.logger.debug(componentName + &quot;: component initialized&quot;);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnChanges(changesObj: SimpleChanges): void {
+		if (
+			changesObj[&quot;formButtonsConfig&quot;] &amp;&amp;
+			!changesObj[&quot;formButtonsConfig&quot;].isFirstChange() &amp;&amp;
+			!_isEqual(this.formButtonsConfig, this.normalizedFormButtonsConfig)
+		) {
+			this.normalizedFormButtonsConfig &#x3D; this.normalizeFormButtonsConfig(this.formButtonsConfig);
+		}
+
+		if (
+			changesObj[&quot;formActionBarConfig&quot;] &amp;&amp;
+			!changesObj[&quot;formActionBarConfig&quot;].isFirstChange() &amp;&amp;
+			!_isEqual(this.formActionBarConfig, this.normalizedFormActionBarConfig)
+		) {
+			this.normalizedFormActionBarConfig &#x3D; this.normalizeFormActionBarConfig(this.formActionBarConfig);
+			this.actionBarConfig &#x3D; this.buildActionBarConfig(this.normalizedFormActionBarConfig);
+		}
+	}
+
+	/**
+	 * Normalize the form buttons config
+	 * Set a default value for each property of each button if there is no value defined
+	 * @param config - Form buttons configuration
+	 */
+	public normalizeFormButtonsConfig(config?: StarkGenericSearchFormButtonsConfig): StarkGenericSearchFormButtonsConfigRequired {
+		config &#x3D; config || {};
+
+		/**
+		 * @ignore
+		 */
+		function normalizeButtonConfig(
+			buttonConfig: StarkFormCustomizablePredefinedButton,
+			defaultConfig: Required&lt;StarkFormCustomizablePredefinedButton&gt;
+		): Required&lt;StarkFormCustomizablePredefinedButton&gt; {
+			return {
+				icon: typeof buttonConfig.icon !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.icon : defaultConfig.icon,
+				label: typeof buttonConfig.label !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.label : defaultConfig.label,
+				isEnabled: typeof buttonConfig.isEnabled !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.isEnabled : defaultConfig.isEnabled,
+				isVisible: typeof buttonConfig.isVisible !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.isVisible : defaultConfig.isVisible,
+				className: typeof buttonConfig.className !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.className : defaultConfig.className,
+				buttonColor: typeof buttonConfig.buttonColor !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.buttonColor : defaultConfig.buttonColor
+			};
+		}
+
+		/**
+		 * @ignore
+		 */
+		function normalizeDefaultButtonConfig(
+			buttonConfig: StarkFormDefaultPredefinedButton,
+			defaultConfig: Required&lt;StarkFormDefaultPredefinedButton&gt;
+		): Required&lt;StarkFormDefaultPredefinedButton&gt; {
+			return {
+				icon: typeof buttonConfig.icon !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.icon : defaultConfig.icon,
+				label: typeof buttonConfig.label !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.label : defaultConfig.label,
+				isEnabled: typeof buttonConfig.isEnabled !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.isEnabled : defaultConfig.isEnabled,
+				className: typeof buttonConfig.className !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.className : defaultConfig.className,
+				buttonColor: typeof buttonConfig.buttonColor !&#x3D;&#x3D; &quot;undefined&quot; ? buttonConfig.buttonColor : defaultConfig.buttonColor
+			};
+		}
+
+		// set default values
+		const normalizedConfig: StarkGenericSearchFormButtonsConfigRequired &#x3D; {
+			search: {
+				icon: &quot;&quot;,
+				label: &quot;STARK.ICONS.SEARCH&quot;,
+				isEnabled: true,
+				className: &quot;mat-raised-button&quot;,
+				buttonColor: &quot;primary&quot;
+			},
+			new: {
+				icon: &quot;&quot;,
+				label: &quot;STARK.ICONS.NEW_ITEM&quot;,
+				isEnabled: true,
+				isVisible: true,
+				className: &quot;mat-stroked-button&quot;,
+				buttonColor: &quot;primary&quot;
+			},
+			reset: {
+				icon: &quot;&quot;,
+				label: &quot;STARK.ICONS.RESET&quot;,
+				isEnabled: true,
+				isVisible: true,
+				className: &quot;mat-stroked-button&quot;,
+				buttonColor: &quot;primary&quot;
+			},
+			custom: []
+		};
+
+		if (config.search) {
+			normalizedConfig.search &#x3D; normalizeDefaultButtonConfig(config.search, normalizedConfig.search);
+		}
+
+		if (config.new) {
+			normalizedConfig.new &#x3D; normalizeButtonConfig(config.new, normalizedConfig.new);
+		}
+
+		if (config.reset) {
+			normalizedConfig.reset &#x3D; normalizeButtonConfig(config.reset, normalizedConfig.reset);
+		}
+
+		if (config.custom !&#x3D;&#x3D; undefined) {
+			normalizedConfig.custom &#x3D; config.custom;
+		}
+
+		return normalizedConfig;
+	}
+
+	/**
+	 * Normalize the form action bar config
+	 * Set a default value for each property of each action if there is no value defined
+	 * @param config - Form action bar configuration
+	 */
+	public normalizeFormActionBarConfig(config?: StarkGenericSearchActionBarConfig): StarkGenericSearchActionBarConfigRequired {
+		config &#x3D; config || { actions: [] };
+
+		/**
+		 * @ignore
+		 */
+		function normalizeDefaultActionConfig(
+			actionConfig: StarkDefaultPredefinedAction,
+			defaultConfig: StarkDefaultPredefinedActionBarGenericAction
+		): StarkDefaultPredefinedActionBarGenericAction {
+			return {
+				icon: typeof actionConfig.icon !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.icon : defaultConfig.icon,
+				label: typeof actionConfig.label !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.label : defaultConfig.label,
+				isEnabled: typeof actionConfig.isEnabled !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.isEnabled : defaultConfig.isEnabled,
+				iconActivated: actionConfig.iconActivated,
+				iconSwitchFunction: actionConfig.iconSwitchFunction,
+				className: typeof actionConfig.className !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.className : defaultConfig.className,
+				buttonColor: typeof actionConfig.buttonColor !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.buttonColor : defaultConfig.buttonColor
+			};
+		}
+
+		/**
+		 * @ignore
+		 */
+		function normalizeActionConfig(
+			actionConfig: StarkCustomizablePredefinedAction,
+			defaultConfig: StarkCustomizablePredefinedActionBarGenericAction
+		): StarkCustomizablePredefinedActionBarGenericAction {
+			return {
+				icon: typeof actionConfig.icon !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.icon : defaultConfig.icon,
+				label: typeof actionConfig.label !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.label : defaultConfig.label,
+				isEnabled: typeof actionConfig.isEnabled !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.isEnabled : defaultConfig.isEnabled,
+				isVisible: typeof actionConfig.isVisible !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.isVisible : defaultConfig.isVisible,
+				iconActivated: actionConfig.iconActivated,
+				iconSwitchFunction: actionConfig.iconSwitchFunction,
+				className: typeof actionConfig.className !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.className : defaultConfig.className,
+				buttonColor: typeof actionConfig.buttonColor !&#x3D;&#x3D; &quot;undefined&quot; ? actionConfig.buttonColor : defaultConfig.buttonColor
+			};
+		}
+
+		// set default values
+		const normalizedConfig: StarkGenericSearchActionBarConfigRequired &#x3D; {
+			search: {
+				icon: &quot;magnify&quot;,
+				label: &quot;STARK.ICONS.SEARCH&quot;,
+				isEnabled: true,
+				className: &quot;&quot;,
+				buttonColor: &quot;primary&quot;
+			},
+			new: {
+				icon: &quot;note-plus&quot;,
+				label: &quot;STARK.ICONS.NEW_ITEM&quot;,
+				isEnabled: true,
+				isVisible: true,
+				className: &quot;&quot;,
+				buttonColor: &quot;primary&quot;
+			},
+			reset: {
+				icon: &quot;undo&quot;,
+				label: &quot;STARK.ICONS.RESET&quot;,
+				isEnabled: true,
+				isVisible: true,
+				className: &quot;&quot;,
+				buttonColor: &quot;primary&quot;
+			},
+			actions: [],
+			isPresent: true // action bar is present by default, should be explicitly set to false to remove it
+		};
+
+		if (config.search) {
+			normalizedConfig.search &#x3D; normalizeDefaultActionConfig(config.search, normalizedConfig.search);
+		}
+
+		if (config.new) {
+			normalizedConfig.new &#x3D; normalizeActionConfig(config.new, normalizedConfig.new);
+		}
+
+		if (config.reset) {
+			normalizedConfig.reset &#x3D; normalizeActionConfig(config.reset, normalizedConfig.reset);
+		}
+
+		if (config.actions !&#x3D;&#x3D; undefined) {
+			normalizedConfig.actions &#x3D; config.actions;
+		}
+
+		if (config.isPresent !&#x3D;&#x3D; undefined) {
+			normalizedConfig.isPresent &#x3D; config.isPresent;
+		}
+
+		return normalizedConfig;
+	}
+
+	/**
+	 * Build the action bar config object based on the searchFormActionBarConfig object and set the action calls to emit
+	 * values through the defined Output
+	 * @param searchFormActionBarConfig - Form action bar configuration
+	 */
+	public buildActionBarConfig(searchFormActionBarConfig: StarkGenericSearchActionBarConfigRequired): StarkActionBarConfig {
+		// TODO: replace this code with a Type to convert all optional props to required
+		// see https://github.com/JakeGinnivan/TypeScript-Handbook/commit/a02ef7023f2fb513dc35d8de35be23b926ec82e3
+		const predefinedSearchAction: StarkDefaultPredefinedActionBarGenericAction &#x3D; searchFormActionBarConfig.search;
+		const actionSearch: StarkAction &#x3D; {
+			label: predefinedSearchAction.label,
+			icon: predefinedSearchAction.icon,
+			buttonColor: predefinedSearchAction.buttonColor,
+			isEnabled: predefinedSearchAction.isEnabled,
+			iconActivated: predefinedSearchAction.iconActivated,
+			iconSwitchFunction: predefinedSearchAction.iconSwitchFunction,
+			className: predefinedSearchAction.className,
+			id: &quot;search-action-bar&quot;,
+			isVisible: true,
+			actionCall: (): void &#x3D;&gt; {
+				this.searchTriggered.emit(this.genericForm);
+			}
+		};
+
+		const predefinedResetAction: StarkCustomizablePredefinedAction &#x3D; &lt;StarkCustomizablePredefinedAction&gt;searchFormActionBarConfig.reset;
+		const actionReset: StarkAction &#x3D; {
+			label: &lt;string&gt;predefinedResetAction.label,
+			icon: &lt;string&gt;predefinedResetAction.icon,
+			isEnabled: &lt;boolean&gt;predefinedResetAction.isEnabled,
+			isVisible: &lt;boolean&gt;predefinedResetAction.isVisible,
+			iconActivated: predefinedResetAction.iconActivated,
+			iconSwitchFunction: predefinedResetAction.iconSwitchFunction,
+			className: predefinedResetAction.className,
+			id: &quot;undo-action-bar&quot;,
+			actionCall: (): void &#x3D;&gt; {
+				if (this.resetTriggered) {
+					this.resetTriggered.emit(this.genericForm);
+				}
+			}
+		};
+
+		const predefinedNewAction: StarkCustomizablePredefinedAction &#x3D; &lt;StarkCustomizablePredefinedAction&gt;searchFormActionBarConfig.new;
+		const actionNew: StarkAction &#x3D; {
+			label: &lt;string&gt;predefinedNewAction.label,
+			icon: &lt;string&gt;predefinedNewAction.icon,
+			isEnabled: &lt;boolean&gt;predefinedNewAction.isEnabled,
+			isVisible: &lt;boolean&gt;predefinedNewAction.isVisible,
+			iconActivated: predefinedNewAction.iconActivated,
+			iconSwitchFunction: predefinedNewAction.iconSwitchFunction,
+			className: predefinedNewAction.className,
+			id: &quot;new-action-bar&quot;,
+			actionCall: (): void &#x3D;&gt; {
+				if (this.newTriggered) {
+					this.newTriggered.emit();
+				}
+			}
+		};
+
+		return {
+			isPresent: searchFormActionBarConfig.isPresent,
+			actions: [actionNew, actionSearch, actionReset, ...searchFormActionBarConfig.actions]
+		};
+	}
+
+	/**
+	 * Emit the form through &quot;searchTriggered&quot; event emitter then hide the search form based on hideOnSearch variable
+	 */
+	public triggerSearch(): void {
+		this.searchTriggered.emit(this.genericForm);
+		if (this.hideOnSearch) {
+			this.hideForm();
+		}
+	}
+
+	/**
+	 * Hide the search form and emit a boolean through formVisibilityChanged event emitter that indicates if the search is displayed
+	 */
+	public hideForm(): void {
+		if (!this.isFormHidden) {
+			this.isFormHidden &#x3D; true;
+
+			// by the moment, the callback is called only when the form is hidden
+			if (this.formVisibilityChanged) {
+				this.formVisibilityChanged.emit(!this.isFormHidden);
+			}
+		}
+	}
+
+	/**
+	 * @ignore
+	 */
+	public trackItemFn(formButton: StarkFormButton): string {
+		return formButton.id;
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;form
+	[formGroup]&#x3D;&quot;genericForm&quot;
+	*ngIf&#x3D;&quot;genericForm&quot;
+	novalidate
+	(ngSubmit)&#x3D;&quot;triggerSearch()&quot;
+	[attr.id]&#x3D;&quot;formHtmlId&quot;
+	class&#x3D;&quot;stark-generic-search-container&quot;
+	[@collapse]&#x3D;&quot;isFormHidden ? &#x27;closed&#x27; : &#x27;open&#x27;&quot;
+&gt;
+	&lt;stark-action-bar *ngIf&#x3D;&quot;actionBarConfig.isPresent&quot; mode&#x3D;&quot;full&quot; [actionBarConfig]&#x3D;&quot;actionBarConfig&quot; actionBarId&#x3D;&quot;search-action-bar&quot;&gt;
+	&lt;/stark-action-bar&gt;
+
+	&lt;ng-content&gt;&lt;/ng-content&gt;
+
+	&lt;div class&#x3D;&quot;stark-form-actions&quot;&gt;
+		&lt;button
+			mat-button
+			[color]&#x3D;&quot;normalizedFormButtonsConfig.new.buttonColor&quot;
+			*ngIf&#x3D;&quot;normalizedFormButtonsConfig.new.isVisible&quot;
+			[disabled]&#x3D;&quot;!normalizedFormButtonsConfig.new.isEnabled&quot;
+			[ngClass]&#x3D;&quot;normalizedFormButtonsConfig.new.className&quot;
+			(click)&#x3D;&quot;newTriggered.emit()&quot;
+			type&#x3D;&quot;button&quot;
+		&gt;
+			&lt;mat-icon
+				*ngIf&#x3D;&quot;normalizedFormButtonsConfig.new.icon&quot;
+				[matTooltip]&#x3D;&quot;normalizedFormButtonsConfig.new.label | translate&quot;
+				starkSvgViewBox
+				[svgIcon]&#x3D;&quot;normalizedFormButtonsConfig.new.icon&quot;
+			&gt;&lt;/mat-icon&gt;
+			&lt;span translate&gt;{{ normalizedFormButtonsConfig.new.label }}&lt;/span&gt;
+		&lt;/button&gt;
+		&lt;button
+			mat-button
+			[color]&#x3D;&quot;normalizedFormButtonsConfig.reset.buttonColor&quot;
+			*ngIf&#x3D;&quot;normalizedFormButtonsConfig.reset.isVisible&quot;
+			[disabled]&#x3D;&quot;!normalizedFormButtonsConfig.reset.isEnabled&quot;
+			[ngClass]&#x3D;&quot;normalizedFormButtonsConfig.reset.className&quot;
+			(click)&#x3D;&quot;resetTriggered.emit(genericForm)&quot;
+			type&#x3D;&quot;button&quot;
+		&gt;
+			&lt;mat-icon
+				*ngIf&#x3D;&quot;normalizedFormButtonsConfig.reset.icon&quot;
+				[matTooltip]&#x3D;&quot;normalizedFormButtonsConfig.reset.label | translate&quot;
+				starkSvgViewBox
+				[svgIcon]&#x3D;&quot;normalizedFormButtonsConfig.reset.icon&quot;
+			&gt;&lt;/mat-icon&gt;
+			&lt;span translate&gt;{{ normalizedFormButtonsConfig.reset.label }}&lt;/span&gt;
+		&lt;/button&gt;
+		&lt;button
+			mat-button
+			[color]&#x3D;&quot;normalizedFormButtonsConfig.search.buttonColor&quot;
+			[disabled]&#x3D;&quot;!normalizedFormButtonsConfig.search.isEnabled&quot;
+			[ngClass]&#x3D;&quot;normalizedFormButtonsConfig.search.className&quot;
+			type&#x3D;&quot;submit&quot;
+		&gt;
+			&lt;mat-icon
+				*ngIf&#x3D;&quot;normalizedFormButtonsConfig.search.icon&quot;
+				[matTooltip]&#x3D;&quot;normalizedFormButtonsConfig.search.label | translate&quot;
+				starkSvgViewBox
+				[svgIcon]&#x3D;&quot;normalizedFormButtonsConfig.search.icon&quot;
+			&gt;&lt;/mat-icon&gt;
+			&lt;span translate&gt;{{ normalizedFormButtonsConfig.search.label }}&lt;/span&gt;
+		&lt;/button&gt;
+		&lt;ng-container *ngFor&#x3D;&quot;let formButton of normalizedFormButtonsConfig.custom; trackBy: trackItemFn&quot;&gt;
+			&lt;button
+				mat-button
+				[color]&#x3D;&quot;formButton.buttonColor&quot;
+				*ngIf&#x3D;&quot;formButton.isVisible&quot;
+				[disabled]&#x3D;&quot;!formButton.isEnabled&quot;
+				[ngClass]&#x3D;&quot;formButton.className&quot;
+				(click)&#x3D;&quot;formButton.onClick()&quot;
+				type&#x3D;&quot;button&quot;
+			&gt;
+				&lt;mat-icon
+					*ngIf&#x3D;&quot;formButton.icon&quot;
+					[matTooltip]&#x3D;&quot;formButton.label | translate&quot;
+					starkSvgViewBox
+					[svgIcon]&#x3D;&quot;formButton.icon&quot;
+				&gt;&lt;/mat-icon&gt;
+				&lt;span&gt;{{ formButton.label | translate }}&lt;/span&gt;
+			&lt;/button&gt;
+		&lt;/ng-container&gt;
+	&lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><form	[formGroup]="genericForm"	*ngIf="genericForm"	novalidate	(ngSubmit)="triggerSearch()"	[attr.id]="formHtmlId"	class="stark-generic-search-container"	[@collapse]="isFormHidden ? \'closed\' : \'open\'">	<stark-action-bar *ngIf="actionBarConfig.isPresent" mode="full" [actionBarConfig]="actionBarConfig" actionBarId="search-action-bar">	</stark-action-bar>	<ng-content></ng-content>	<div class="stark-form-actions">		<button			mat-button			[color]="normalizedFormButtonsConfig.new.buttonColor"			*ngIf="normalizedFormButtonsConfig.new.isVisible"			[disabled]="!normalizedFormButtonsConfig.new.isEnabled"			[ngClass]="normalizedFormButtonsConfig.new.className"			(click)="newTriggered.emit()"			type="button"		>			<mat-icon				*ngIf="normalizedFormButtonsConfig.new.icon"				[matTooltip]="normalizedFormButtonsConfig.new.label | translate"				starkSvgViewBox				[svgIcon]="normalizedFormButtonsConfig.new.icon"			></mat-icon>			<span translate>{{ normalizedFormButtonsConfig.new.label }}</span>		</button>		<button			mat-button			[color]="normalizedFormButtonsConfig.reset.buttonColor"			*ngIf="normalizedFormButtonsConfig.reset.isVisible"			[disabled]="!normalizedFormButtonsConfig.reset.isEnabled"			[ngClass]="normalizedFormButtonsConfig.reset.className"			(click)="resetTriggered.emit(genericForm)"			type="button"		>			<mat-icon				*ngIf="normalizedFormButtonsConfig.reset.icon"				[matTooltip]="normalizedFormButtonsConfig.reset.label | translate"				starkSvgViewBox				[svgIcon]="normalizedFormButtonsConfig.reset.icon"			></mat-icon>			<span translate>{{ normalizedFormButtonsConfig.reset.label }}</span>		</button>		<button			mat-button			[color]="normalizedFormButtonsConfig.search.buttonColor"			[disabled]="!normalizedFormButtonsConfig.search.isEnabled"			[ngClass]="normalizedFormButtonsConfig.search.className"			type="submit"		>			<mat-icon				*ngIf="normalizedFormButtonsConfig.search.icon"				[matTooltip]="normalizedFormButtonsConfig.search.label | translate"				starkSvgViewBox				[svgIcon]="normalizedFormButtonsConfig.search.icon"			></mat-icon>			<span translate>{{ normalizedFormButtonsConfig.search.label }}</span>		</button>		<ng-container *ngFor="let formButton of normalizedFormButtonsConfig.custom; trackBy: trackItemFn">			<button				mat-button				[color]="formButton.buttonColor"				*ngIf="formButton.isVisible"				[disabled]="!formButton.isEnabled"				[ngClass]="formButton.className"				(click)="formButton.onClick()"				type="button"			>				<mat-icon					*ngIf="formButton.icon"					[matTooltip]="formButton.label | translate"					starkSvgViewBox					[svgIcon]="formButton.icon"				></mat-icon>				<span>{{ formButton.label | translate }}</span>			</button>		</ng-container>	</div></form></div>'
+    var COMPONENTS = [{'name': 'StarkActionBarComponent', 'selector': 'stark-action-bar'},{'name': 'StarkAppDataComponent', 'selector': 'stark-app-data'},{'name': 'StarkAppFooterComponent', 'selector': 'stark-app-footer'},{'name': 'StarkAppLogoComponent', 'selector': 'stark-app-logo'},{'name': 'StarkAppLogoutComponent', 'selector': 'stark-app-logout'},{'name': 'StarkAppMenuComponent', 'selector': 'stark-app-menu'},{'name': 'StarkAppMenuItemComponent', 'selector': 'stark-app-menu-item'},{'name': 'StarkAppSidebarComponent', 'selector': 'stark-app-sidebar'},{'name': 'StarkBreadcrumbComponent', 'selector': 'stark-breadcrumb'},{'name': 'StarkCollapsibleComponent', 'selector': 'stark-collapsible'},{'name': 'StarkDatePickerComponent', 'selector': 'stark-date-picker'},{'name': 'StarkDateRangePickerComponent', 'selector': 'stark-date-range-picker'},{'name': 'StarkDropdownComponent', 'selector': 'stark-dropdown'},{'name': 'StarkGenericSearchComponent', 'selector': 'stark-generic-search'},{'name': 'StarkLanguageSelectorComponent', 'selector': 'stark-language-selector'},{'name': 'StarkLoginPageComponent', 'selector': 'stark-login-page'},{'name': 'StarkMessagePaneComponent', 'selector': 'stark-message-pane'},{'name': 'StarkMinimapComponent', 'selector': 'stark-minimap'},{'name': 'StarkPaginationComponent', 'selector': 'stark-pagination'},{'name': 'StarkPreloadingPageComponent', 'selector': 'stark-preloading-page'},{'name': 'StarkPrettyPrintComponent', 'selector': 'stark-pretty-print'},{'name': 'StarkProgressIndicatorComponent', 'selector': 'stark-progress-indicator'},{'name': 'StarkRouteSearchComponent', 'selector': 'stark-route-search'},{'name': 'StarkSessionExpiredPageComponent', 'selector': 'stark-session-expired-page'},{'name': 'StarkSessionLogoutPageComponent', 'selector': 'stark-session-logout-page'},{'name': 'StarkSessionTimeoutWarningDialogComponent', 'selector': 'session-timeout-warning-dialog'},{'name': 'StarkSliderComponent', 'selector': 'stark-slider'},{'name': 'StarkTableColumnComponent', 'selector': 'stark-table-column'},{'name': 'StarkTableComponent', 'selector': 'stark-table'},{'name': 'StarkTableMultisortDialogComponent', 'selector': 'stark-table-dialog-multisort'},{'name': 'StarkToastNotificationComponent', 'selector': 'stark-toast-notification'}];
+    var DIRECTIVES = [{'name': 'StarkOnEnterKeyDirective', 'selector': 'directiveName'},{'name': 'StarkProgressIndicatorDirective', 'selector': 'directiveName'},{'name': 'StarkRestrictInputDirective', 'selector': 'directiveName'},{'name': 'StarkSvgViewBoxDirective', 'selector': 'directiveName'}];
+    var ACTUAL_COMPONENT = {'name': 'StarkGenericSearchComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkGenericSearchComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
