@@ -8,6 +8,7 @@ import {
 	DemoDateRangePickerPageComponent,
 	DemoDropdownPageComponent,
 	DemoFooterPageComponent,
+	DemoGenericSearchPageComponent,
 	DemoKeyboardDirectivesPageComponent,
 	DemoLanguageSelectorPageComponent,
 	DemoLogoutPageComponent,
@@ -81,6 +82,11 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 			translationKey: "SHOWCASE.DEMO.DROPDOWN.TITLE"
 		},
 		views: { "@": { component: DemoDropdownPageComponent } }
+	},
+	{
+		name: "demo-ui.generic-search",
+		url: "/generic-search",
+		views: { "@": { component: DemoGenericSearchPageComponent } }
 	},
 	{
 		name: "demo-ui.stark-footer",

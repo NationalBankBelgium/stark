@@ -1,0 +1,48 @@
+<div fxLayout="row wrap">
+	<!-- Year -->
+	<div fxFlex>
+		<mat-form-field>
+			<input
+				type="text"
+				placeholder="Year"
+				matInput
+				[formControl]="searchForm.controls['year']"
+				[matAutocomplete]="yearAutocomplete"
+			/>
+		</mat-form-field>
+		<mat-autocomplete #yearAutocomplete="matAutocomplete">
+			<mat-option *ngFor="let option of yearOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
+		</mat-autocomplete>
+	</div>
+	<!-- Hero -->
+	<div fxFlex>
+		<mat-form-field>
+			<input
+				type="text"
+				placeholder="Hero"
+				matInput
+				[formControl]="searchForm.controls['hero']"
+				[matAutocomplete]="heroAutocomplete"
+			/>
+		</mat-form-field>
+		<mat-autocomplete #heroAutocomplete="matAutocomplete">
+			<mat-option *ngFor="let option of heroOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
+		</mat-autocomplete>
+	</div>
+
+	<!-- Hero -->
+	<div fxFlex>
+		<mat-form-field>
+			<input
+				type="text"
+				placeholder="Movie"
+				matInput
+				[formControl]="searchForm.controls['movie']"
+				[matAutocomplete]="movieAutocomplete"
+			/>
+		</mat-form-field>
+		<mat-autocomplete #movieAutocomplete="matAutocomplete">
+			<mat-option *ngFor="let option of movieOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
+		</mat-autocomplete>
+	</div>
+</div>

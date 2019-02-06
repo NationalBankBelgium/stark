@@ -82,6 +82,18 @@
         "INPUT2": "<b>helpPageUrl</b> contains the url to the help page.",
         "INPUT3": "The included HTML elements will be copied inside the footer as the leftmost element."
       },
+      "GENERIC_SEARCH": {
+        "ACTIONS": "Actions to implement for the Generic Search",
+        "BASIC_IMPLEMENTATION": "Basic implementation of Generic Search",
+        "EXPLANATION_ABOUT_DOC_ON_GITHUB": "How to use the Stark Generic Search component",
+        "GETTING_STARTED": "Getting started",
+        "REDUCERS": "Reducers to implement for the Generic Search",
+        "SEARCH_RESULTS": "Search results",
+        "SERVICE_INTERFACE": "Interface of the service needed for the Generic Search",
+        "SERVICE_IMPLEMENTATION": "Implementation of the service needed for the Generic Search",
+        "TITLE": "Stark Generic Search",
+        "TOGGLE": "Toggle search"
+      },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
           "DESCRIPTION": "Type some value in the inputs and then press Enter in any of them to trigger the callback function",

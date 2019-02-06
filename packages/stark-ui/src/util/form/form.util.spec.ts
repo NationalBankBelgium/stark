@@ -12,14 +12,18 @@ describe("Util: FormUtil", () => {
 	let mockFormControls: FormControl[];
 
 	function getMockFormControl(name: string): FormControl {
-		return <FormControl>(<unknown>jasmine.createSpyObj<FormControl>(name, [
-			"value",
-			"setValue",
-			"markAsUntouched",
-			"markAsTouched",
-			"markAsPristine",
-			"markAsDirty"
-		]));
+		return <FormControl>
+			(<unknown>(
+				jasmine.createSpyObj<FormControl>(name, [
+					"value",
+					"setValue",
+					"markAsUntouched",
+					"markAsTouched",
+					"markAsPristine",
+					"markAsDirty"
+				])
+			)
+		);
 	}
 
 	function assertFormControl(formItem: FormControl, newState?: string): void {

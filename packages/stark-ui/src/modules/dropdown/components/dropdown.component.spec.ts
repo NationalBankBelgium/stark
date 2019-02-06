@@ -26,7 +26,7 @@ import Spy = jasmine.Spy;
 			[options]="options"
 			[placeholder]="placeholder"
 			[required]="required"
-			(selectionChanged)="(selectionChanged)"
+			(selectionChanged)="selectionChanged($event)"
 			[value]="value"
 		>
 		</stark-dropdown>

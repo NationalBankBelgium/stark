@@ -82,6 +82,18 @@
         "INPUT2": "<b>helpPageUrl</b> contient l'url de la page d'aide.",
         "INPUT3": "Les éléments HTML inclus seront copiés dans le pied de page et affichés à gauche des autres éléments."
       },
+      "GENERIC_SEARCH": {
+        "ACTIONS": "Actions to implement for the Generic Search",
+        "BASIC_IMPLEMENTATION": "Basic implementation of Generic Search",
+        "EXPLANATION_ABOUT_DOC_ON_GITHUB": "How to use the Stark Generic Search component",
+        "GETTING_STARTED": "Getting started",
+        "REDUCERS": "Reducers to implement for the Generic Search",
+        "SEARCH_RESULTS": "Search results",
+        "SERVICE_INTERFACE": "Interface of the service needed for the Generic Search",
+        "SERVICE_IMPLEMENTATION": "Implementation of the service needed for the Generic Search",
+        "TITLE": "Stark Generic Search",
+        "TOGGLE": "Toggle search"
+      },
       "KEYBOARD_DIRECTIVES": {
         "ON_ENTER_KEY": {
           "DESCRIPTION": "Tapez une valeur dans les entrées, puis appuyez sur Entrée dans l'un d'eux pour déclencher la fonction callback",

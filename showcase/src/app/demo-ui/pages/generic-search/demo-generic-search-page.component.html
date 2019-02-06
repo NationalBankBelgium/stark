@@ -1,0 +1,36 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO.GENERIC_SEARCH.TITLE</h1>
+<section class="stark-section">
+	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+	<example-viewer
+		[extensions]="['ts', 'html']"
+		filesPath="generic-search/demo-generic-search-page.component"
+		[exampleTitle]="'SHOWCASE.DEMO.GENERIC_SEARCH.BASIC_IMPLEMENTATION' | translate"
+	>
+		<mat-slide-toggle color="primary" [checked]="!hideSearch" (change)="hideSearch = !hideSearch">
+			{{ "SHOWCASE.DEMO.GENERIC_SEARCH.TOGGLE" | translate }}
+		</mat-slide-toggle>
+		<stark-generic-search
+			formHtmlId="demo-generic-search-form"
+			(searchTriggered)="onSearch($event)"
+			(resetTriggered)="onReset($event)"
+			[isFormHidden]="hideSearch"
+		>
+			<demo-generic-search-form
+				#searchForm
+				[searchCriteria]="workingCopy"
+				(workingCopyChanged)="updateWorkingCopy($event)"
+			></demo-generic-search-form>
+		</stark-generic-search>
+		<stark-table
+			htmlId="demo-generic-search-table"
+			[columnProperties]="columnsProperties"
+			[paginationConfig]="paginationConfig"
+			[data]="searchResults"
+			[starkProgressIndicator]="progressIndicatorConfig"
+		>
+			<header><h1 class="mb0" translate>SHOWCASE.DEMO.GENERIC_SEARCH.SEARCH_RESULTS</h1></header>
+		</stark-table>
+	</example-viewer>
+
+	<stark-reference-block [links]="referenceList"></stark-reference-block>
+</section>
