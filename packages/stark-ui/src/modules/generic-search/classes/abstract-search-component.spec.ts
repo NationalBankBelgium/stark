@@ -1,38 +1,40 @@
 /* tslint:disable:completed-docs no-identical-functions */
-import { Observer, Observable, Subject, Subscriber, of, throwError } from "rxjs";
+import { Observable, Observer, of, Subject, Subscriber, throwError } from "rxjs";
 import { AbstractStarkSearchComponent, StarkGenericSearchService } from "../classes";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import Spy = jasmine.Spy;
-import { StarkLoggingService, StarkResource } from "@nationalbankbelgium/stark-core";
+import { StarkResource } from "@nationalbankbelgium/stark-core";
 import { FormGroup } from "@angular/forms";
 import { StarkSearchState } from "../entities";
-import { StarkProgressIndicatorService } from "../../progress-indicator/services";
 import { MockStarkProgressIndicatorService } from "../../progress-indicator/testing";
+import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
+import createSpy = jasmine.createSpy;
+import createSpyObj = jasmine.createSpyObj;
 
 /* tslint:disable:no-big-function */
 describe("AbstractSearchComponent", () => {
 	let component: SearchComponentHelper;
-	let genericSearchService: StarkGenericSearchService<MockResource, SearchCriteria>;
-	let mockLogger: StarkLoggingService;
+	let genericSearchService: SpyObj<StarkGenericSearchService<MockResource, SearchCriteria>>;
+	let mockLogger: MockStarkLoggingService;
 
-	let mockProgressService: StarkProgressIndicatorService;
+	let mockProgressService: MockStarkProgressIndicatorService;
 
 	let originalSearchCriteria: SearchCriteria;
 	let getSearchStateObsTeardown: Spy;
 	let searchObsTeardown: Spy;
-	let mockObserver: Observer<any>;
+	let mockObserver: SpyObj<Observer<any>>;
 
 	beforeEach(() => {
-		genericSearchService = jasmine.createSpyObj("genericSearchService", ["getSearchState", "resetSearchState", "createNew", "search"]);
+		genericSearchService = createSpyObj("genericSearchService", ["getSearchState", "resetSearchState", "createNew", "search"]);
 		mockLogger = new MockStarkLoggingService();
 
 		mockProgressService = new MockStarkProgressIndicatorService();
 
 		component = new SearchComponentHelper(genericSearchService, mockLogger, mockProgressService);
-		getSearchStateObsTeardown = jasmine.createSpy("getSearchStateObsTeardown");
-		searchObsTeardown = jasmine.createSpy("searchObsTeardown");
+		getSearchStateObsTeardown = createSpy("getSearchStateObsTeardown");
+		searchObsTeardown = createSpy("searchObsTeardown");
 		originalSearchCriteria = { uuid: "3" };
-		(<Spy>genericSearchService.getSearchState).and.returnValue(
+		genericSearchService.getSearchState.and.returnValue(
 			createObservableOf<StarkSearchState<SearchCriteria>>(
 				{
 					criteria: originalSearchCriteria,
@@ -42,14 +44,14 @@ describe("AbstractSearchComponent", () => {
 			)
 		);
 
-		mockObserver = jasmine.createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+		mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 	});
 	describe("ngOnInit", () => {
 		it("should clone the searchCriteria as originalCopy and search again if hasBeenSearched is TRUE", () => {
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
 
-			(<Spy>genericSearchService.search).and.returnValue(of(expectedResult));
-			(<Spy>genericSearchService.getSearchState).and.returnValue(
+			genericSearchService.search.and.returnValue(of(expectedResult));
+			genericSearchService.getSearchState.and.returnValue(
 				of({
 					criteria: originalSearchCriteria,
 					hasBeenSearched: true
@@ -71,7 +73,7 @@ describe("AbstractSearchComponent", () => {
 		});
 
 		it("should set the searchCriteria as original copy and DON'T search if hasBeenSearched is FALSE", () => {
-			(<Spy>genericSearchService.getSearchState).and.returnValue(
+			genericSearchService.getSearchState.and.returnValue(
 				of({
 					criteria: originalSearchCriteria,
 					hasBeenSearched: false
@@ -97,8 +99,8 @@ describe("AbstractSearchComponent", () => {
 			const mockCriteria1: SearchCriteria = { uuid: "dummy uuid" };
 			const mockCriteria2: SearchCriteria = { uuid: "another uuid" };
 
-			(<Spy>genericSearchService.search).and.returnValue(of("dummy search result"));
-			(<Spy>genericSearchService.getSearchState).and.returnValue(searchState$);
+			genericSearchService.search.and.returnValue(of("dummy search result"));
+			genericSearchService.getSearchState.and.returnValue(searchState$);
 
 			component.ngOnInit();
 
@@ -112,7 +114,7 @@ describe("AbstractSearchComponent", () => {
 			expect(component.getWorkingCopy()).toEqual(mockCriteria1);
 			expect(component.getOriginalCopy()).not.toBe(component.getWorkingCopy());
 
-			(<Spy>mockObserver.next).calls.reset();
+			mockObserver.next.calls.reset();
 			searchState$.next({
 				criteria: mockCriteria2,
 				hasBeenSearched: true
@@ -130,7 +132,7 @@ describe("AbstractSearchComponent", () => {
 
 	describe("ngOnDestroy", () => {
 		it("should cancel the subscription of the searchState", () => {
-			(<Spy>genericSearchService.getSearchState).and.returnValue(
+			genericSearchService.getSearchState.and.returnValue(
 				createObservableOf<StarkSearchState<SearchCriteria>>(
 					{
 						criteria: originalSearchCriteria,
@@ -205,7 +207,7 @@ describe("AbstractSearchComponent", () => {
 	describe("performSearch", () => {
 		it("should call genericSearchService.search() passing the working copy if no searchCriteria defined", () => {
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
-			(<Spy>genericSearchService.search).and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
+			genericSearchService.search.and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
 
 			component.ngOnInit();
 			component.performSearch();
@@ -224,7 +226,7 @@ describe("AbstractSearchComponent", () => {
 		it("should call genericSearchService.search() passing the given searchCriteria", () => {
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
 			const customCriteria: SearchCriteria = { uuid: "11" };
-			(<Spy>genericSearchService.search).and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
+			genericSearchService.search.and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
 
 			component.ngOnInit();
 			component.performSearch(customCriteria);
@@ -246,8 +248,8 @@ describe("AbstractSearchComponent", () => {
 
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
 			const customCriteria: SearchCriteria = { uuid: "11" };
-			(<Spy>genericSearchService.search).and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
-			(<Spy>genericSearchService.getSearchState).and.returnValue(searchState$);
+			genericSearchService.search.and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
+			genericSearchService.getSearchState.and.returnValue(searchState$);
 
 			component.ngOnInit();
 
@@ -264,7 +266,7 @@ describe("AbstractSearchComponent", () => {
 			expect(mockObserver.complete).not.toHaveBeenCalled();
 
 			expect(genericSearchService.search).not.toHaveBeenCalled();
-			(<Spy>mockObserver.next).calls.reset();
+			mockObserver.next.calls.reset();
 
 			// perform first manual search
 			component.performSearch(customCriteria);
@@ -278,7 +280,7 @@ describe("AbstractSearchComponent", () => {
 			expect(genericSearchService.search).toHaveBeenCalledTimes(1);
 			expect(genericSearchService.search).toHaveBeenCalledWith(customCriteria);
 
-			(<Spy>genericSearchService.search).calls.reset();
+			genericSearchService.search.calls.reset();
 
 			// simulating searchState change due to first manual search => hasBeenSearched = true
 			searchState$.next({
@@ -291,7 +293,7 @@ describe("AbstractSearchComponent", () => {
 
 		it("should call progressService show/hide methods passing the progressTopic defined before and after performing the search", () => {
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
-			(<Spy>genericSearchService.search).and.returnValue(of(expectedResult));
+			genericSearchService.search.and.returnValue(of(expectedResult));
 
 			const dummyTopic: string = "dummyTopic";
 			component.setProgressTopic(dummyTopic);
@@ -312,7 +314,7 @@ describe("AbstractSearchComponent", () => {
 		});
 
 		it("should call progressService show/hide methods passing the progressTopic defined before and after performing a failing search", () => {
-			(<Spy>genericSearchService.search).and.returnValue(throwError("search failed"));
+			genericSearchService.search.and.returnValue(throwError("search failed"));
 
 			const dummyTopic: string = "dummyTopic";
 			component.setProgressTopic(dummyTopic);
@@ -330,7 +332,7 @@ describe("AbstractSearchComponent", () => {
 
 		it("should NOT call progressService show/hide methods before and after performing the search in case no progressTopic is defined", () => {
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
-			(<Spy>genericSearchService.search).and.returnValue(of(expectedResult));
+			genericSearchService.search.and.returnValue(of(expectedResult));
 
 			component.setProgressTopic("");
 			component.ngOnInit();
@@ -357,7 +359,7 @@ describe("AbstractSearchComponent", () => {
 
 		it("should return the results from the latest search that was performed as long as the preserveLatestResults option is enabled", () => {
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
-			(<Spy>genericSearchService.search).and.returnValue(of(expectedResult));
+			genericSearchService.search.and.returnValue(of(expectedResult));
 
 			component.enablePreserveLatestResults(true);
 			component.ngOnInit();
@@ -368,7 +370,7 @@ describe("AbstractSearchComponent", () => {
 
 		it("should return undefined regardless of any search that was performed when the preserveLatestResults option is disabled", () => {
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
-			(<Spy>genericSearchService.search).and.returnValue(of(expectedResult));
+			genericSearchService.search.and.returnValue(of(expectedResult));
 
 			component.enablePreserveLatestResults(false);
 			component.ngOnInit();
@@ -397,8 +399,8 @@ function createObservableOf<T>(value: T, teardown: Function): Observable<T> {
 class SearchComponentHelper extends AbstractStarkSearchComponent<MockResource, SearchCriteria> {
 	public constructor(
 		_genericSearchService_: StarkGenericSearchService<MockResource, SearchCriteria>,
-		logger: StarkLoggingService,
-		progressService: StarkProgressIndicatorService
+		logger: MockStarkLoggingService,
+		progressService: MockStarkProgressIndicatorService
 	) {
 		super(_genericSearchService_, logger, progressService);
 	}

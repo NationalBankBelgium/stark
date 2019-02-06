@@ -1,38 +1,39 @@
-import { Observable } from "rxjs";
-import { StarkMessage, StarkMessageCollection, StarkMessagePaneService } from "@nationalbankbelgium/stark-ui";
+import { StarkMessagePaneService } from "@nationalbankbelgium/stark-ui";
+import SpyObj = jasmine.SpyObj;
+import createSpy = jasmine.createSpy;
 
 /**
  * Mock class of the StarkMessagePaneService interface.
  * @link StarkMessagePaneService
  */
-export class MockStarkMessagePaneService implements StarkMessagePaneService {
+export class MockStarkMessagePaneService implements SpyObj<StarkMessagePaneService> {
 	/**
 	 * Flag to specify whether all messages should be cleared on navigation
 	 */
-	public clearOnNavigation: boolean;
+	public clearOnNavigation: SpyObj<StarkMessagePaneService>["clearOnNavigation"];
 
 	/**
 	 * Add messages to the message pane
 	 */
-	public add: (messages: StarkMessage[]) => void = jasmine.createSpy("add");
+	public add: SpyObj<StarkMessagePaneService>["add"] = createSpy("add");
 
 	/**
 	 * Add a single message to the message pane
 	 */
-	public addOne: (message: StarkMessage) => void = jasmine.createSpy("addOne");
+	public addOne: SpyObj<StarkMessagePaneService>["addOne"] = createSpy("addOne");
 
 	/**
 	 * Get all messages currently displayed in the message pane
 	 */
-	public getAll: () => Observable<StarkMessageCollection> = jasmine.createSpy("getAll");
+	public getAll: SpyObj<StarkMessagePaneService>["getAll"] = createSpy("getAll");
 
 	/**
 	 * Remove messages from the message pane
 	 */
-	public remove: (messages: StarkMessage[]) => void = jasmine.createSpy("remove");
+	public remove: SpyObj<StarkMessagePaneService>["remove"] = createSpy("remove");
 
 	/**
 	 * Remove all messages
 	 */
-	public clearAll: () => void = jasmine.createSpy("clearAll");
+	public clearAll: SpyObj<StarkMessagePaneService>["clearAll"] = createSpy("clearAll");
 }

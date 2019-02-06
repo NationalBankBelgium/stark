@@ -281,12 +281,10 @@ describe("DropdownComponent", () => {
 		describe("on change", () => {
 			it("should assign right value to isMultiSelectEnabled when multiSelect changes", () => {
 				hostComponent.multiSelect = "true";
-				// hostComponent.value = [];
 				hostFixture.detectChanges();
 				expect(component.isMultiSelectEnabled).toBe(true);
 
 				hostComponent.multiSelect = "false";
-				// hostComponent.value = undefined;
 				hostFixture.detectChanges();
 				expect(component.isMultiSelectEnabled).toBe(false);
 			});

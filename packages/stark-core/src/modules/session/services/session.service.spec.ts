@@ -29,9 +29,8 @@ import { StarkSessionServiceImpl, starkUnauthenticatedUserError } from "./sessio
 import { StarkSession, StarkSessionConfig } from "../entities";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkUser } from "../../user/entities";
-import { StarkLoggingService } from "../../logging/services";
 import { MockStarkLoggingService } from "../../logging/testing";
-import { StarkRoutingService, StarkRoutingTransitionHook } from "../../routing/services";
+import { StarkRoutingTransitionHook } from "../../routing/services";
 import { MockStarkRoutingService } from "../../routing/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../constants";
@@ -42,8 +41,8 @@ describe("Service: StarkSessionService", () => {
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
 	let appConfig: StarkApplicationConfig;
 	let mockSession: StarkSession;
-	let mockLogger: StarkLoggingService;
-	let mockRoutingService: StarkRoutingService;
+	let mockLogger: MockStarkLoggingService;
+	let mockRoutingService: MockStarkRoutingService;
 	let mockIdleService: SpyObj<Idle>;
 	let mockKeepaliveService: SpyObj<Keepalive>;
 	let mockInjectorService: SpyObj<Injector>;
@@ -114,7 +113,7 @@ describe("Service: StarkSessionService", () => {
 		mockIdleService.setTimeout.calls.reset();
 		mockIdleService.setInterrupts.calls.reset();
 		mockIdleService.clearInterrupts.calls.reset();
-		(<Spy>mockRoutingService.addTransitionHook).calls.reset();
+		mockRoutingService.addTransitionHook.calls.reset();
 	});
 
 	describe("on initialization", () => {
@@ -231,13 +230,12 @@ describe("Service: StarkSessionService", () => {
 			sessionService.registerTransitionHook();
 
 			expect(mockRoutingService.addTransitionHook).toHaveBeenCalledTimes(1);
-			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[0]).toBe(StarkRoutingTransitionHook.ON_BEFORE);
+			expect(mockRoutingService.addTransitionHook.calls.argsFor(0)[0]).toBe(StarkRoutingTransitionHook.ON_BEFORE);
 
-			const hookMatchCriteria: HookMatchCriteria = (<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[1];
+			const hookMatchCriteria: HookMatchCriteria = mockRoutingService.addTransitionHook.calls.argsFor(0)[1];
 
 			expect(hookMatchCriteria.entering).toBeDefined();
 
-			// tslint:disable-next-line:no-useless-cast
 			const matchingFn: Predicate<StateObject> = <Predicate<StateObject>>hookMatchCriteria.entering;
 			const nonMatchingStates: Partial<StateObject>[] = [
 				{ name: "starkAppInit.state1" },
@@ -263,15 +261,15 @@ describe("Service: StarkSessionService", () => {
 				expect(matchingFn(<StateObject>state)).toBe(false);
 			}
 
-			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[2]).toBeDefined();
-			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[3]).toEqual({ priority: 1000 });
+			expect(mockRoutingService.addTransitionHook.calls.argsFor(0)[2]).toBeDefined();
+			expect(mockRoutingService.addTransitionHook.calls.argsFor(0)[3]).toEqual({ priority: 1000 });
 		});
 
 		it("should resolve the promise when the onBefore hook is triggered and there IS user in the session", () => {
 			sessionService.registerTransitionHook();
 
-			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[0]).toBe(StarkRoutingTransitionHook.ON_BEFORE);
-			const onBeforeHookCallback: () => Promise<boolean> = (<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[2];
+			expect(mockRoutingService.addTransitionHook.calls.argsFor(0)[0]).toBe(StarkRoutingTransitionHook.ON_BEFORE);
+			const onBeforeHookCallback: () => Promise<boolean> = mockRoutingService.addTransitionHook.calls.argsFor(0)[2];
 
 			sessionService.session$ = of(mockSession);
 
@@ -292,8 +290,8 @@ describe("Service: StarkSessionService", () => {
 
 			sessionService.registerTransitionHook();
 
-			expect((<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[0]).toBe(StarkRoutingTransitionHook.ON_BEFORE);
-			const onBeforeHookCallback: Function = (<Spy>mockRoutingService.addTransitionHook).calls.argsFor(0)[2];
+			expect(mockRoutingService.addTransitionHook.calls.argsFor(0)[0]).toBe(StarkRoutingTransitionHook.ON_BEFORE);
+			const onBeforeHookCallback: Function = mockRoutingService.addTransitionHook.calls.argsFor(0)[2];
 
 			// trigger the onBefore hook callback
 			defer(() => onBeforeHookCallback()).subscribe(
@@ -1003,8 +1001,8 @@ class SessionServiceHelper extends StarkSessionServiceImpl {
 	/* tslint:disable-next-line:parameters-max-number */
 	public constructor(
 		store: SpyObj<Store<StarkCoreApplicationState>>,
-		logger: StarkLoggingService,
-		routingService: StarkRoutingService,
+		logger: MockStarkLoggingService,
+		routingService: MockStarkRoutingService,
 		appConfig: StarkApplicationConfig,
 		idle: SpyObj<Idle>,
 		injector: Injector,

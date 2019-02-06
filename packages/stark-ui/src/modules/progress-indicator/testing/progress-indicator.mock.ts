@@ -1,5 +1,6 @@
-import { Observable } from "rxjs";
-import { StarkProgressIndicatorService, StarkProgressIndicatorType } from "@nationalbankbelgium/stark-ui";
+import { StarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui";
+import SpyObj = jasmine.SpyObj;
+import createSpy = jasmine.createSpy;
 
 /**
  * Mock class of the {@link StarkProgressIndicatorService|StarkProgressIndicatorService}.
@@ -30,32 +31,32 @@ import { StarkProgressIndicatorService, StarkProgressIndicatorType } from "@nati
  * }
  * ```
  */
-export class MockStarkProgressIndicatorService implements StarkProgressIndicatorService {
+export class MockStarkProgressIndicatorService implements SpyObj<StarkProgressIndicatorService> {
 	/**
 	 * registers a new progress indicator in the application state. Each registered progress indicator is identified by a topic,
 	 * a unique identifier associated with it.
 	 * @param topic - The topic of the progress indicator to be registered.
 	 * @param type - Type of progress indicator (i.e. spinner)
 	 */
-	public register: (topic: string, type: StarkProgressIndicatorType) => void = jasmine.createSpy("register");
+	public register: SpyObj<StarkProgressIndicatorService>["register"] = createSpy("register");
 
 	/**
 	 * Deregister a progress indicator already existing in the application state.
 	 * @param topic - The topic of the progress indicator to be deregistered
 	 */
-	public deregister: (topic: string) => void = jasmine.createSpy("deregister");
+	public deregister: SpyObj<StarkProgressIndicatorService>["deregister"] = createSpy("deregister");
 
 	/**
 	 * Shows the designated progress indicator
 	 * @param topic - The topic that needs to be shown
 	 */
-	public show: (topic: string) => void = jasmine.createSpy("show");
+	public show: SpyObj<StarkProgressIndicatorService>["show"] = createSpy("show");
 
 	/**
 	 * Hides the progress indicator.
 	 * @param topic - The topic that needs to be hidden
 	 */
-	public hide: (topic: string) => void = jasmine.createSpy("hide");
+	public hide: SpyObj<StarkProgressIndicatorService>["hide"] = createSpy("hide");
 
 	/**
 	 * Return the latest status of the progress indicator for the given topic (whether is shown or hidden).
@@ -63,5 +64,5 @@ export class MockStarkProgressIndicatorService implements StarkProgressIndicator
 	 * @returns Observable that will emit a boolean value whenever the status of the progress indicator changes: false if it is hidden,
 	 * true if it is shown or undefined in case there is no progress indicator for the given topic.
 	 */
-	public isVisible: (topic: string) => Observable<boolean | undefined> = jasmine.createSpy("isVisible");
+	public isVisible: SpyObj<StarkProgressIndicatorService>["isVisible"] = createSpy("isVisible");
 }

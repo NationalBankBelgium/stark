@@ -1,18 +1,19 @@
-import { HttpRequest } from "@angular/common/http";
 import { StarkXSRFService } from "@nationalbankbelgium/stark-core";
+import SpyObj = jasmine.SpyObj;
+import createSpy = jasmine.createSpy;
 
 /**
  * Mock class of the StarkXSRFService interface.
  * @link StarkXSRFService
  */
-export class MockStarkXsrfService implements StarkXSRFService {
-	public configureHttpRequest: (request: HttpRequest<any>) => HttpRequest<any> = jasmine.createSpy("configureHttpRequest");
+export class MockStarkXsrfService implements SpyObj<StarkXSRFService> {
+	public configureHttpRequest: SpyObj<StarkXSRFService>["configureHttpRequest"] = createSpy("configureHttpRequest");
 
-	public configureXHR: (xhr: XMLHttpRequest) => void = jasmine.createSpy("configureXHR");
+	public configureXHR: SpyObj<StarkXSRFService>["configureXHR"] = createSpy("configureXHR");
 
-	public getXSRFToken: () => string | undefined = jasmine.createSpy("getXSRFToken");
+	public getXSRFToken: SpyObj<StarkXSRFService>["getXSRFToken"] = createSpy("getXSRFToken");
 
-	public pingBackends: () => void = jasmine.createSpy("pingBackends");
+	public pingBackends: SpyObj<StarkXSRFService>["pingBackends"] = createSpy("pingBackends");
 
-	public storeXSRFToken: () => void = jasmine.createSpy("storeXSRFToken");
+	public storeXSRFToken: SpyObj<StarkXSRFService>["storeXSRFToken"] = createSpy("storeXSRFToken");
 }

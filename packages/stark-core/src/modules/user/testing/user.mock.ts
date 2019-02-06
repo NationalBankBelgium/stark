@@ -1,14 +1,10 @@
-import { StarkUser, StarkUserService } from "@nationalbankbelgium/stark-core";
-import { Observable } from "rxjs";
+import { StarkUserService } from "@nationalbankbelgium/stark-core";
+import SpyObj = jasmine.SpyObj;
 
 /**
  * @ignore
  */
-export class MockStarkUserService implements StarkUserService {
-	public fetchUserProfile: () => Observable<StarkUser> = jasmine.createSpy("fetchUserProfile");
-	public getAllUsers: () => StarkUser[] = jasmine.createSpy("getAllUsers");
-
-	public constructor() {
-		// empty constructor
-	}
+export class MockStarkUserService implements SpyObj<StarkUserService> {
+	public fetchUserProfile: SpyObj<StarkUserService>["fetchUserProfile"] = jasmine.createSpy("fetchUserProfile");
+	public getAllUsers: SpyObj<StarkUserService>["getAllUsers"] = jasmine.createSpy("getAllUsers");
 }

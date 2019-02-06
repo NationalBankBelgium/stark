@@ -14,20 +14,13 @@ import { MatOptionModule } from "@angular/material/core";
 import { HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Ng2StateDeclaration, StateDeclaration } from "@uirouter/angular";
-import {
-	STARK_LOGGING_SERVICE,
-	STARK_ROUTING_SERVICE,
-	StarkLocale,
-	StarkLoggingService,
-	StarkRoutingService
-} from "@nationalbankbelgium/stark-core";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLocale } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkRouteSearchComponent } from "./route-search.component";
 import { StarkRouteSearchEntry } from "../components/route-search-entry.intf";
 import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu";
 import { of, Subject, throwError } from "rxjs";
 import { mergeUiTranslations } from "../../../common/translations/merge-translations";
-import Spy = jasmine.Spy;
 
 @Component({
 	selector: `host-component`,
@@ -49,8 +42,8 @@ describe("RouteSearchComponent", () => {
 	let hostFixture: ComponentFixture<TestHostComponent>;
 	let translateService: TranslateService;
 
-	const mockRoutingService: StarkRoutingService = new MockStarkRoutingService();
-	const mockLoggingService: StarkLoggingService = new MockStarkLoggingService();
+	const mockRoutingService: MockStarkRoutingService = new MockStarkRoutingService();
+	const mockLoggingService: MockStarkLoggingService = new MockStarkLoggingService();
 
 	const moduleTranslationsEn: any = {
 		PATH: {
@@ -227,11 +220,11 @@ describe("RouteSearchComponent", () => {
 
 	describe("redirect", () => {
 		beforeEach(() => {
-			(<Spy>mockRoutingService.navigateTo).calls.reset();
+			mockRoutingService.navigateTo.calls.reset();
 		});
 
 		it("should redirect to the entry.targetState when the redirect method is called", () => {
-			(<Spy>mockRoutingService.navigateTo).and.returnValue(of("redirection succeeded"));
+			mockRoutingService.navigateTo.and.returnValue(of("redirection succeeded"));
 			const entry: StarkRouteSearchEntry = { label: "URL 1", targetState: "url1" };
 
 			component.redirect(entry);
@@ -241,7 +234,7 @@ describe("RouteSearchComponent", () => {
 		it("should clear the input text as soon as the redirection finishes", () => {
 			const searchFieldValue: string = "test";
 			component.searchField.setValue(searchFieldValue);
-			(<Spy>mockRoutingService.navigateTo).and.returnValue(of("redirection succeeded"));
+			mockRoutingService.navigateTo.and.returnValue(of("redirection succeeded"));
 			const entry: StarkRouteSearchEntry = { label: "URL 1", targetState: "url1" };
 			expect(component.searchField.value).toBe(searchFieldValue);
 
@@ -253,7 +246,7 @@ describe("RouteSearchComponent", () => {
 		it("should NOT clear the input text if the redirection failed", () => {
 			const searchFieldValue: string = "test";
 			component.searchField.setValue(searchFieldValue);
-			(<Spy>mockRoutingService.navigateTo).and.returnValue(throwError("redirection failed"));
+			mockRoutingService.navigateTo.and.returnValue(throwError("redirection failed"));
 			const entry: StarkRouteSearchEntry = { label: "URL 1", targetState: "url1" };
 			expect(component.searchField.value).toBe(searchFieldValue);
 
@@ -456,8 +449,8 @@ describe("RouteSearchComponent", () => {
 				}
 			];
 
-			(<Spy>mockRoutingService.getStatesConfig).and.returnValue(mockStates);
-			(<Spy>mockRoutingService.getTranslationKeyFromState).and.callFake((stateName: string) => {
+			mockRoutingService.getStatesConfig.and.returnValue(mockStates);
+			mockRoutingService.getTranslationKeyFromState.and.callFake((stateName: string) => {
 				return stateName.toUpperCase();
 			});
 
@@ -507,12 +500,17 @@ describe("RouteSearchComponent", () => {
 				}
 			];
 
-			(<Spy>mockRoutingService.getStatesConfig).and.returnValue(mockStates);
-			(<Spy>mockRoutingService.getTranslationKeyFromState).and.callFake((stateName: string) => {
+			mockRoutingService.getStatesConfig.and.returnValue(mockStates);
+			mockRoutingService.getTranslationKeyFromState.and.callFake((stateName: string) => {
 				return stateName.toUpperCase();
 			});
 
-			const expectedRouteEntries: StarkRouteSearchEntry[] = [{ label: "PAGE-01-01-01-01-01", targetState: "page-01-01-01-01-01" }];
+			const expectedRouteEntries: StarkRouteSearchEntry[] = [
+				{
+					label: "PAGE-01-01-01-01-01",
+					targetState: "page-01-01-01-01-01"
+				}
+			];
 			component.menuConfig = undefined;
 			const result: StarkRouteSearchEntry[] = component.constructRouteEntriesFromRouterStates();
 

@@ -6,10 +6,7 @@ import {
 	STARK_ROUTING_SERVICE,
 	STARK_SESSION_SERVICE,
 	STARK_USER_SERVICE,
-	StarkRoutingService,
-	StarkSessionService,
-	StarkUser,
-	StarkUserService
+	StarkUser
 } from "@nationalbankbelgium/stark-core";
 import {
 	MockStarkLoggingService,
@@ -21,7 +18,6 @@ import { TranslateModule } from "@ngx-translate/core";
 import { MatButtonModule } from "@angular/material/button";
 import { of, throwError } from "rxjs";
 import { StarkPreloadingPageComponent } from "./preloading-page.component";
-import Spy = jasmine.Spy;
 
 describe("PreloadingPageComponent", () => {
 	let component: StarkPreloadingPageComponent;
@@ -29,9 +25,9 @@ describe("PreloadingPageComponent", () => {
 
 	const mockUser: StarkUser = { firstName: "John", lastName: "Doe", username: "jdoe", uuid: "mock-uuid", roles: [] };
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
-	const mockUserService: StarkUserService = new MockStarkUserService();
-	const mockSessionService: StarkSessionService = new MockStarkSessionService();
-	const mockRoutingService: StarkRoutingService = new MockStarkRoutingService();
+	const mockUserService: MockStarkUserService = new MockStarkUserService();
+	const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
+	const mockRoutingService: MockStarkRoutingService = new MockStarkRoutingService();
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
@@ -50,10 +46,10 @@ describe("PreloadingPageComponent", () => {
 		fixture = TestBed.createComponent(StarkPreloadingPageComponent);
 		component = fixture.componentInstance;
 
-		(<Spy>mockUserService.fetchUserProfile).calls.reset();
-		(<Spy>mockSessionService.login).calls.reset();
-		(<Spy>mockRoutingService.navigateTo).calls.reset();
-		(<Spy>mockRoutingService.navigateToHome).calls.reset();
+		mockUserService.fetchUserProfile.calls.reset();
+		mockSessionService.login.calls.reset();
+		mockRoutingService.navigateTo.calls.reset();
+		mockRoutingService.navigateToHome.calls.reset();
 	});
 
 	describe("on initialization", () => {
@@ -71,7 +67,7 @@ describe("PreloadingPageComponent", () => {
 
 	describe("ngOnInit", () => {
 		it("should log the user in automatically after fetching the user profile successfully", fakeAsync(() => {
-			(<Spy>mockUserService.fetchUserProfile).and.returnValue(of(mockUser));
+			mockUserService.fetchUserProfile.and.returnValue(of(mockUser));
 			component.loginDelay = 1; // override login delay to make unit tests faster
 
 			component.ngOnInit();
@@ -84,7 +80,7 @@ describe("PreloadingPageComponent", () => {
 		}));
 
 		it("should navigate to home or the target state if defined after fetching the user profile successfully", fakeAsync(() => {
-			(<Spy>mockUserService.fetchUserProfile).and.returnValue(of(mockUser));
+			mockUserService.fetchUserProfile.and.returnValue(of(mockUser));
 			component.loginDelay = 1; // override login delay to make unit tests faster
 
 			component.ngOnInit();
@@ -93,7 +89,7 @@ describe("PreloadingPageComponent", () => {
 			expect(mockRoutingService.navigateToHome).toHaveBeenCalledTimes(1);
 			expect(mockRoutingService.navigateTo).not.toHaveBeenCalled();
 
-			(<Spy>mockRoutingService.navigateToHome).calls.reset();
+			mockRoutingService.navigateToHome.calls.reset();
 			component.targetState = "dummy state";
 			component.targetStateParams = { someParam: "dummy param" };
 			component.ngOnInit();
@@ -105,7 +101,7 @@ describe("PreloadingPageComponent", () => {
 		}));
 
 		it("should NOT do anything when the user profile cannot be fetched", fakeAsync(() => {
-			(<Spy>mockUserService.fetchUserProfile).and.returnValue(throwError("could not fetch user profile"));
+			mockUserService.fetchUserProfile.and.returnValue(throwError("could not fetch user profile"));
 			component.loginDelay = 1; // override login delay to make unit tests faster
 
 			component.ngOnInit();

@@ -13,17 +13,15 @@ import {
 import { StarkHttpService } from "../services/http.service.intf";
 import { MockStarkHttpService } from "../testing";
 import { MockStarkLoggingService } from "../../logging/testing";
-import { StarkLoggingService } from "../../logging/services";
 import { StarkHttpRequestBuilderImpl } from "../builder";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import createSpyObj = jasmine.createSpyObj;
-import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 
 // tslint:disable-next-line:no-big-function
 describe("Repository: AbstractStarkHttpRepository", () => {
-	let mockStarkHttpService: StarkHttpService<MockResource>;
-	let mockLogger: StarkLoggingService;
+	let mockStarkHttpService: MockStarkHttpService<MockResource>;
+	let mockLogger: MockStarkLoggingService;
 	let mockBackend: SpyObj<StarkBackend>;
 	let mockResourcePath: string;
 	let mockResource: MockResource;
@@ -70,13 +68,13 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	describe("on create", () => {
 		it("should create a create request using the builder and send it to the starkHttpServiceName", () => {
 			const mockResponse: any = {};
-			(<Spy>mockStarkHttpService.executeSingleItemRequest).and.returnValue(mockResponse);
+			mockStarkHttpService.executeSingleItemRequest.and.returnValue(mockResponse);
 
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.create(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
 			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent().args[0]
+				mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0]
 			);
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.CREATE);
 			expect(starkHttpRequest.item).toBe(mockResource);
@@ -87,13 +85,13 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	describe("on update", () => {
 		it("should create an update request using the builder and send it to the starkHttpServiceName", () => {
 			const mockResponse: any = {};
-			(<Spy>mockStarkHttpService.executeSingleItemRequest).and.returnValue(mockResponse);
+			mockStarkHttpService.executeSingleItemRequest.and.returnValue(mockResponse);
 
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.update(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
 			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent().args[0]
+				mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0]
 			);
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.UPDATE);
 			expect(starkHttpRequest.item).toBe(mockResource);
@@ -104,13 +102,13 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	describe("on delete", () => {
 		it("should create a delete request using the builder and send it to the starkHttpServiceName", () => {
 			const mockResponse: any = {};
-			(<Spy>mockStarkHttpService.executeSingleItemRequest).and.returnValue(mockResponse);
+			mockStarkHttpService.executeSingleItemRequest.and.returnValue(mockResponse);
 
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.delete(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
 			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent().args[0]
+				mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0]
 			);
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.DELETE);
 			expect(starkHttpRequest.item).toBe(mockResource);
@@ -121,13 +119,13 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	describe("on get", () => {
 		it("should create a get request using the builder and send it to the starkHttpServiceName", () => {
 			const mockResponse: any = {};
-			(<Spy>mockStarkHttpService.executeSingleItemRequest).and.returnValue(mockResponse);
+			mockStarkHttpService.executeSingleItemRequest.and.returnValue(mockResponse);
 
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.get(resourceUuid);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
 			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				(<Spy>mockStarkHttpService.executeSingleItemRequest).calls.mostRecent().args[0]
+				mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0]
 			);
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.GET);
 			expect(starkHttpRequest.item).toBeUndefined();
@@ -138,13 +136,13 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	describe("on getCollection", () => {
 		it("should create a getCollection request using the builder and send it to the starkHttpServiceName", () => {
 			const mockResponse: any = {};
-			(<Spy>mockStarkHttpService.executeCollectionRequest).and.returnValue(mockResponse);
+			mockStarkHttpService.executeCollectionRequest.and.returnValue(mockResponse);
 
 			const result: Observable<StarkCollectionResponseWrapper<MockResource>> = repository.getCollection(10, 0);
 
 			expect(mockStarkHttpService.executeCollectionRequest).toHaveBeenCalled();
 			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				(<Spy>mockStarkHttpService.executeCollectionRequest).calls.mostRecent().args[0]
+				mockStarkHttpService.executeCollectionRequest.calls.mostRecent().args[0]
 			);
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
 			expect(starkHttpRequest.item).toBeUndefined();
@@ -155,14 +153,14 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	describe("on search", () => {
 		it("should create a search request using the builder and send it to the starkHttpServiceName", () => {
 			const mockResponse: any = {};
-			(<Spy>mockStarkHttpService.executeCollectionRequest).and.returnValue(mockResponse);
+			mockStarkHttpService.executeCollectionRequest.and.returnValue(mockResponse);
 			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
 			const result: Observable<StarkCollectionResponseWrapper<MockResource>> = repository.search(mockCriteria, 10, 0);
 
 			expect(mockStarkHttpService.executeCollectionRequest).toHaveBeenCalled();
 			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				(<Spy>mockStarkHttpService.executeCollectionRequest).calls.mostRecent().args[0]
+				mockStarkHttpService.executeCollectionRequest.calls.mostRecent().args[0]
 			);
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.SEARCH);
 			expect(starkHttpRequest.item).toEqual(mockCriteria);
@@ -316,7 +314,7 @@ class AbstractHttpRepositoryTestHelper extends AbstractStarkHttpRepository<MockR
 
 	public constructor(
 		starkHttpService: StarkHttpService<MockResource>,
-		logger: StarkLoggingService,
+		logger: MockStarkLoggingService,
 		backend: StarkBackend,
 		path: string,
 		serializer?: StarkHttpSerializer<MockResource>

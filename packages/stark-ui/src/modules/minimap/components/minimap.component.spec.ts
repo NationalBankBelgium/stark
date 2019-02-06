@@ -1,4 +1,4 @@
-// tslint:disable:no-commented-code completed-docs
+// tslint:disable:completed-docs
 import { StarkMinimapComponent } from "./minimap.component";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";

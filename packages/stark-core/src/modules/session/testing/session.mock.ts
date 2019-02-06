@@ -1,20 +1,23 @@
 import { StarkSessionService } from "@nationalbankbelgium/stark-core";
-import { Observable } from "rxjs";
+import SpyObj = jasmine.SpyObj;
+import createSpy = jasmine.createSpy;
 
 /**
  * @ignore
  */
-export class MockStarkSessionService implements StarkSessionService {
-	public devAuthenticationHeaders: Map<string, string>;
+export class MockStarkSessionService implements SpyObj<StarkSessionService> {
+	public devAuthenticationHeaders: SpyObj<StarkSessionService>["devAuthenticationHeaders"];
 
-	public getCurrentUser: () => Observable<any> = jasmine.createSpy("getCurrentLanguage");
-	public getCurrentLanguage: () => Observable<string> = jasmine.createSpy("getCurrentLanguage");
-	public setCurrentLanguage: () => void = jasmine.createSpy("setCurrentLanguage");
-	public login: () => void = jasmine.createSpy("login");
-	public logout: () => void = jasmine.createSpy("logout");
-	public pauseUserActivityTracking: () => void = jasmine.createSpy("pauseUserActivityTracking");
-	public resumeUserActivityTracking: () => void = jasmine.createSpy("resumeUserActivityTracking");
-	public setDevAuthenticationHeaders: () => void = jasmine.createSpy("setDevAuthenticationHeaders");
+	public getCurrentUser: SpyObj<StarkSessionService>["getCurrentUser"] = createSpy("getCurrentLanguage");
+	public getCurrentLanguage: SpyObj<StarkSessionService>["getCurrentLanguage"] = createSpy("getCurrentLanguage");
+	public setCurrentLanguage: SpyObj<StarkSessionService>["setCurrentLanguage"] = createSpy("setCurrentLanguage");
+	public login: SpyObj<StarkSessionService>["login"] = createSpy("login");
+	public logout: SpyObj<StarkSessionService>["logout"] = createSpy("logout");
+	public pauseUserActivityTracking: SpyObj<StarkSessionService>["pauseUserActivityTracking"] = createSpy("pauseUserActivityTracking");
+	public resumeUserActivityTracking: SpyObj<StarkSessionService>["resumeUserActivityTracking"] = createSpy("resumeUserActivityTracking");
+	public setDevAuthenticationHeaders: SpyObj<StarkSessionService>["setDevAuthenticationHeaders"] = createSpy(
+		"setDevAuthenticationHeaders"
+	);
 
 	public constructor(devAuthenticationHeaders?: Map<string, string>) {
 		if (!devAuthenticationHeaders) {

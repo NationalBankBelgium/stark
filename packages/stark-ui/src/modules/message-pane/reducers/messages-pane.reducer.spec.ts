@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-commented-code no-big-function no-duplicate-string max-union-size no-identical-functions */
+/* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size no-identical-functions */
 import { StarkMessage, StarkMessageType } from "../../../common/message";
 
 import { StarkAddMessages, StarkClearMessages, StarkRemoveMessages } from "../actions";

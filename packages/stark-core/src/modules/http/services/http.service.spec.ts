@@ -32,16 +32,14 @@ import {
 
 import { StarkHttpHeaders, StarkSortOrder } from "../constants";
 import { StarkHttpStatusCodes } from "../enumerators";
-import { StarkLoggingService } from "../../logging/services";
-import { StarkSessionService } from "../../session/services";
 import { MockStarkLoggingService } from "../../logging/testing";
 import { MockStarkSessionService } from "../../session/testing";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 
 /* tslint:disable:no-big-function no-duplicate-string max-union-size */
 describe("Service: StarkHttpService", () => {
-	let loggerMock: StarkLoggingService;
-	let mockSessionService: StarkSessionService;
+	let loggerMock: MockStarkLoggingService;
+	let mockSessionService: MockStarkSessionService;
 	let mockDevAuthHeaders: Map<string, string>;
 	let httpMock: SpyObj<HttpClient>;
 	let starkHttpService: HttpServiceHelper<MockResource>;
@@ -55,7 +53,7 @@ describe("Service: StarkHttpService", () => {
 	interface StarkHttpServiceSpecVariables {
 		starkHttpService: HttpServiceHelper<MockResource>;
 		httpMock: SpyObj<HttpClient>;
-		loggerMock: StarkLoggingService;
+		loggerMock: MockStarkLoggingService;
 		httpRequest: StarkHttpRequest<MockResource>;
 	}
 
@@ -305,7 +303,7 @@ describe("Service: StarkHttpService", () => {
 			let request: StarkHttpRequest<MockResource>;
 			let httpResponse: Partial<HttpResponse<StarkResource | StarkHttpRawCollectionResponseData<MockResource>>>;
 			let httpClientMock: SpyObj<HttpClient>;
-			let loggingServiceMock: StarkLoggingService;
+			let loggingServiceMock: MockStarkLoggingService;
 			let httpService: HttpServiceHelper<MockResource>;
 			let expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 
@@ -730,7 +728,7 @@ describe("Service: StarkHttpService", () => {
 			let request: StarkHttpRequest<MockResource>;
 			let httpClientMock: SpyObj<HttpClient>;
 			let httpMockMethod: Spy;
-			let loggingServiceMock: StarkLoggingService;
+			let loggingServiceMock: MockStarkLoggingService;
 			let httpService: HttpServiceHelper<MockResource>;
 			let resultObs: Observable<StarkCollectionResponseWrapper<MockResource>>;
 			const mockCustomMetadata: object = {
@@ -799,7 +797,7 @@ describe("Service: StarkHttpService", () => {
 							pagination: mockPaginationMetadata
 						});
 						expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no 'etags'");
+						expect(loggingServiceMock.warn.calls.argsFor(0)[0]).toContain("no 'etags'");
 					},
 					() => {
 						fail(errorShouldNotBeCalled);
@@ -844,7 +842,7 @@ describe("Service: StarkHttpService", () => {
 							});
 							assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 							expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
-							expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no etag");
+							expect(loggingServiceMock.warn.calls.argsFor(0)[0]).toContain("no etag");
 						},
 						() => {
 							fail(errorShouldNotBeCalled);
@@ -889,7 +887,7 @@ describe("Service: StarkHttpService", () => {
 						});
 						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no 'items'");
+						expect(loggingServiceMock.warn.calls.argsFor(0)[0]).toContain("no 'items'");
 					},
 					() => {
 						fail(errorShouldNotBeCalled);
@@ -943,7 +941,7 @@ describe("Service: StarkHttpService", () => {
 							});
 							assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 							expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
-							expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("it is not an object");
+							expect(loggingServiceMock.warn.calls.argsFor(0)[0]).toContain("it is not an object");
 						},
 						() => {
 							fail(errorShouldNotBeCalled);
@@ -993,7 +991,7 @@ describe("Service: StarkHttpService", () => {
 							});
 							assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 							expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
-							expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no 'uuid' property found in item");
+							expect(loggingServiceMock.warn.calls.argsFor(0)[0]).toContain("no 'uuid' property found in item");
 						},
 						() => {
 							fail(errorShouldNotBeCalled);
@@ -1026,7 +1024,7 @@ describe("Service: StarkHttpService", () => {
 						expect(result.metadata).toBeUndefined();
 						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 						expect(loggingServiceMock.warn).toHaveBeenCalledTimes(1);
-						expect((<Spy>loggingServiceMock.warn).calls.argsFor(0)[0]).toContain("no 'metadata'");
+						expect(loggingServiceMock.warn.calls.argsFor(0)[0]).toContain("no 'metadata'");
 					},
 					() => {
 						fail(errorShouldNotBeCalled);
@@ -1534,7 +1532,7 @@ function convertMapIntoObject(map: Map<string, any>): { [param: string]: any } {
 class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P> {
 	public retryDelay: number;
 
-	public constructor(logger: StarkLoggingService, sessionService: StarkSessionService, httpClient: SpyObj<HttpClient>) {
+	public constructor(logger: MockStarkLoggingService, sessionService: MockStarkSessionService, httpClient: SpyObj<HttpClient>) {
 		super(logger, sessionService, <HttpClient>(<unknown>httpClient));
 	}
 
