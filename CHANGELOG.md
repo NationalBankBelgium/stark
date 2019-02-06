@@ -1,3 +1,43 @@
+<a name="10.0.0-beta.3"></a>
+# [10.0.0-beta.3](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.2...10.0.0-beta.3) (2019-02-06)
+
+
+### Bug Fixes
+
+* **build-main:** adapt regex pattern to include 'resolved' in package-lock.json replacement ([e07108f](https://github.com/nationalbankbelgium/stark/commit/e07108f))
+* **docs:** fix typo ([c15e0cd](https://github.com/nationalbankbelgium/stark/commit/c15e0cd))
+* **stark-core:** export StarkMessageImpl in public_api.ts ([6c2546b](https://github.com/nationalbankbelgium/stark/commit/6c2546b))
+* **stark-core:** update typing in accordance with rxjs 6.4.0 ([2aa37d4](https://github.com/nationalbankbelgium/stark/commit/2aa37d4))
+* **stark-demo:** fix 404 error when loading `pre-load-style.css` ([6fa246f](https://github.com/nationalbankbelgium/stark/commit/6fa246f)), closes [#1037](https://github.com/nationalbankbelgium/stark/issues/1037)
+* **stark-demo:** fix icons not displaying correctly ([8bd9b4a](https://github.com/nationalbankbelgium/stark/commit/8bd9b4a)), closes [#504](https://github.com/nationalbankbelgium/stark/issues/504) [#1030](https://github.com/nationalbankbelgium/stark/issues/1030)
+* **stark-ui:** add missing [@angular](https://github.com/angular)/forms peerDependency ([28866cf](https://github.com/nationalbankbelgium/stark/commit/28866cf))
+* **stark-ui:** fix table filter implementation ([73b40b3](https://github.com/nationalbankbelgium/stark/commit/73b40b3)), closes [#1071](https://github.com/nationalbankbelgium/stark/issues/1071)
+
+
+### Features
+
+* **stark-all:** prefix all (dev)dependencies with '^' in all Stark's packages + in starter & showcase ([40c4dd6](https://github.com/nationalbankbelgium/stark/commit/40c4dd6)), closes [#1053](https://github.com/nationalbankbelgium/stark/issues/1053)
+* **stark-all:** refine exports for the services ([1bf950e](https://github.com/nationalbankbelgium/stark/commit/1bf950e)), closes [#1112](https://github.com/nationalbankbelgium/stark/issues/1112)
+* **stark-build:** adapt build utils and webpack config to read global styles from angular.json to align with Angular CLI ([d0876f0](https://github.com/nationalbankbelgium/stark/commit/d0876f0)), closes [#1070](https://github.com/nationalbankbelgium/stark/issues/1070)
+* **stark-demo:** add `styleguide/layout` page for documenting the use of Angular Flex-layout ([e1d157c](https://github.com/nationalbankbelgium/stark/commit/e1d157c)), closes [#668](https://github.com/nationalbankbelgium/stark/issues/668)
+* **stark-ui:** expose single file (src/assets/stark-ui-bundle.scss) to import all component styles/theming ([b86e190](https://github.com/nationalbankbelgium/stark/commit/b86e190)), closes [#103](https://github.com/nationalbankbelgium/stark/issues/103)
+* **stark-ui:** implement generic search component in generic module ([68f7d24](https://github.com/nationalbankbelgium/stark/commit/68f7d24)), closes [#794](https://github.com/nationalbankbelgium/stark/issues/794)
+* **stark-ui:** implement Route Search component ([f3dda15](https://github.com/nationalbankbelgium/stark/commit/f3dda15)), closes [#207](https://github.com/nationalbankbelgium/stark/issues/207)
+* **stark-ui:** implementation of progress-indicator component ([5240bee](https://github.com/nationalbankbelgium/stark/commit/5240bee)), closes [#126](https://github.com/nationalbankbelgium/stark/issues/126)
+
+
+### BREAKING CHANGES
+
+* **stark-ui:** changed the following Output return types in Table module:
+  - Table Column component:
+    - filterChanged now emits `StarkColumnFilterChangedOutput` object instead of `StarkTableColumnComponent`
+    - sortChanged now emits `StarkColumnSortChangedOutput` object instead of `StarkTableColumnComponent`
+  - Table component:
+    - filterChanged now emits `StarkTableFilter` object instead of a `string`
+* **stark-build:** global styles must be included in the angular.json (standard Angular CLI behavior) instead of importing them directly in the app
+
+
+
 <a name="10.0.0-beta.2"></a>
 # [10.0.0-beta.2](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.1...10.0.0-beta.2) (2019-01-14)
 
