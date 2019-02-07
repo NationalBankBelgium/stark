@@ -1,0 +1,461 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>StarkDestroySession</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/session/actions/session.actions.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Triggered before the process to destroy the user&#39;s session starts right after the HTTP logout call has been sent.
+This action is dispatched whenever the user is going to be logged out due to:
+1) Manually clicking in the App Logout component
+2) Calling the logout() method.
+3) Closing the browser tab.
+4) Being inactive for a certain period of time reaching the idle timeout defined by the application.</p>
+
+            </p>
+
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code>Action</code>
+            </p>
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#type">type</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                                <span class="modifier">Readonly</span>
+                            type
+                            </b>
+                            <a href="#type"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>type:     <code><a href="../interfaces/StarkSession.html" target="_self" >StarkSessionActionTypes.DESTROY_SESSION</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkSession.html" target="_self" >StarkSessionActionTypes.DESTROY_SESSION</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>StarkSessionActionTypes.DESTROY_SESSION</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/modules/session/actions/session.actions.ts:114</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The type of action</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Action } from &quot;@ngrx/store&quot;;
+import { StarkUser } from &quot;../../user/entities&quot;;
+
+/**
+ * Actions related to stark session service
+ */
+export enum StarkSessionActionTypes {
+	CHANGE_LANGUAGE &#x3D; &quot;[StarkSession] Change Language&quot;,
+	CHANGE_LANGUAGE_SUCCESS &#x3D; &quot;[StarkSession] Change Language Success&quot;,
+	CHANGE_LANGUAGE_FAILURE &#x3D; &quot;[StarkSession] Change Language Failure&quot;,
+	INITIALIZE_SESSION &#x3D; &quot;[StarkSession] Initialize Session&quot;,
+	INITIALIZE_SESSION_SUCCESS &#x3D; &quot;[StarkSession] Initialize Session Success&quot;,
+	DESTROY_SESSION &#x3D; &quot;[StarkSession] Destroy Session&quot;,
+	DESTROY_SESSION_SUCCESS &#x3D; &quot;[StarkSession] Destroy Session Success&quot;,
+	SESSION_TIMEOUT_COUNTDOWN_START &#x3D; &quot;[StarkSession] Session Timeout Countdown Start&quot;,
+	SESSION_TIMEOUT_COUNTDOWN_STOP &#x3D; &quot;[StarkSession] Session Timeout Countdown Stop&quot;,
+	SESSION_TIMEOUT_COUNTDOWN_FINISH &#x3D; &quot;[StarkSession] Session Timeout Countdown Finish&quot;,
+	SESSION_LOGOUT &#x3D; &quot;[StarkSession] Session Logout&quot;,
+	USER_ACTIVITY_TRACKING_PAUSE &#x3D; &quot;[StarkSession] User Activity Tracking Pause&quot;,
+	USER_ACTIVITY_TRACKING_RESUME &#x3D; &quot;[StarkSession] User Activity Tracking Resume&quot;
+}
+
+/**
+ * Triggered when the setCurrentLanguage() method is called, just before changing the current session&#x27;s language.
+ */
+export class StarkChangeLanguage implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.CHANGE_LANGUAGE &#x3D; StarkSessionActionTypes.CHANGE_LANGUAGE;
+	/**
+	 * Class constructor
+	 * @param languageId - The target language to change to.
+	 */
+	public constructor(public languageId: string) {}
+}
+
+/**
+ * Triggered when the current session&#x27;s language has been successfully changed by calling the setCurrentLanguage() method.
+ */
+export class StarkChangeLanguageSuccess implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.CHANGE_LANGUAGE_SUCCESS &#x3D; StarkSessionActionTypes.CHANGE_LANGUAGE_SUCCESS;
+
+	/**
+	 * Class constructor
+	 * @param languageId -  The target language that was successfully changed to.
+	 */
+	public constructor(public languageId: string) {}
+}
+
+/**
+ * Triggered when the change of the current session&#x27;s language failed.
+ */
+export class StarkChangeLanguageFailure implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.CHANGE_LANGUAGE_FAILURE &#x3D; StarkSessionActionTypes.CHANGE_LANGUAGE_FAILURE;
+
+	/**
+	 * Class constructor
+	 * @param error - The error that caused the language change to fail.
+	 */
+	public constructor(public error: any) {}
+}
+
+/**
+ * Triggered by the login() method before the process to initialize the session for the given user starts.
+ */
+export class StarkInitializeSession implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.INITIALIZE_SESSION &#x3D; StarkSessionActionTypes.INITIALIZE_SESSION;
+
+	/**
+	 * Class constructor
+	 * @param user - The user whose session will be initialized.
+	 */
+	public constructor(public user: StarkUser) {}
+}
+
+/**
+ * 	Triggered when the initialization of the user&#x27;s session has finished succesfully.
+ */
+export class StarkInitializeSessionSuccess implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.INITIALIZE_SESSION_SUCCESS &#x3D; StarkSessionActionTypes.INITIALIZE_SESSION_SUCCESS;
+}
+
+/**
+ * Triggered before the process to destroy the user&#x27;s session starts right after the HTTP logout call has been sent.
+ * This action is dispatched whenever the user is going to be logged out due to:
+ * 1) Manually clicking in the App Logout component
+ * 2) Calling the logout() method.
+ * 3) Closing the browser tab.
+ * 4) Being inactive for a certain period of time reaching the idle timeout defined by the application.
+ */
+export class StarkDestroySession implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.DESTROY_SESSION &#x3D; StarkSessionActionTypes.DESTROY_SESSION;
+}
+
+/**
+ * Triggered when the destruction of the user&#x27;s session has finished successfully.
+ * This action is the last action to be dispatched when the user is logged out (either manually by himself or automatically due to inactivity).
+ */
+export class StarkDestroySessionSuccess implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.DESTROY_SESSION_SUCCESS &#x3D; StarkSessionActionTypes.DESTROY_SESSION_SUCCESS;
+}
+
+/**
+ * Triggered when the countdown to automatically destroy the user&#x27;s session due to inactivity starts.
+ * The countdown is defined in the sessionTimeoutWarningPeriod option in the application configuration. By default is set to 15 seconds.
+ */
+export class StarkSessionTimeoutCountdownStart implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_START &#x3D; StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_START;
+
+	/**
+	 * Class constructor
+	 * @param countdown - The countdown until the session will be automatically destroyed.
+	 */
+	public constructor(public countdown: number) {}
+}
+
+/**
+ * Triggered when the countdown to automatically destroy the user&#x27;s session due to inactivity stops.
+ * This countdown stops automatically when the user is active again and no longer idle.
+ */
+export class StarkSessionTimeoutCountdownStop implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_STOP &#x3D; StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_STOP;
+}
+
+/**
+ * Triggered when the countdown to automatically destroy the user&#x27;s session has finished. In this case the user will be automatically logged out.
+ */
+export class StarkSessionTimeoutCountdownFinish implements Action {
+	/**
+	 * Defines the type of NGRX action to perform.
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_FINISH &#x3D;
+		StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_FINISH;
+}
+
+/**
+ * Triggered when the user is about to be logged out and the HTTP logout call to be sent. This action is called before the process to destroy the user&#x27;s session starts.
+ * This action is dispatched by the logout() method or in case the browser tab was closed.
+ * This action is dispatched before the StarkSessionActions.DESTROY_SESSION action.
+ */
+export class StarkSessionLogout implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.SESSION_LOGOUT &#x3D; StarkSessionActionTypes.SESSION_LOGOUT;
+}
+
+/**
+ * 	Triggered by the pauseUserActivityTracking() method when the user activity tracking (automatically done by the Session service) is paused.
+ */
+export class StarkUserActivityTrackingPause implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.USER_ACTIVITY_TRACKING_PAUSE &#x3D; StarkSessionActionTypes.USER_ACTIVITY_TRACKING_PAUSE;
+}
+
+/**
+ * 	Triggered by the resumeUserActivityTracking()  method when the user activity tracking (automatically done by the Session service) is resumed.
+ */
+export class StarkUserActivityTrackingResume implements Action {
+	/**
+	 * The type of action
+	 * @link StarkSessionActionTypes
+	 */
+	public readonly type: StarkSessionActionTypes.USER_ACTIVITY_TRACKING_RESUME &#x3D; StarkSessionActionTypes.USER_ACTIVITY_TRACKING_RESUME;
+}
+
+export type StarkSessionActions &#x3D;
+	| StarkChangeLanguage
+	| StarkChangeLanguageSuccess
+	| StarkChangeLanguageFailure
+	| StarkInitializeSession
+	| StarkInitializeSessionSuccess
+	| StarkDestroySession
+	| StarkDestroySessionSuccess
+	| StarkSessionTimeoutCountdownStart
+	| StarkSessionTimeoutCountdownStop
+	| StarkSessionTimeoutCountdownFinish
+	| StarkSessionLogout
+	| StarkUserActivityTrackingPause
+	| StarkUserActivityTrackingResume;
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkDestroySession.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,334 @@
+{
+  "SHOWCASE": {
+    "COMMON": {
+      "ENABLED": "Enabled",
+      "VALUE": "Value"
+    },
+    "DEMO": {
+      "ACTION_BAR": {
+        "ALT": "Action Bar Alternative",
+        "CLASSIC-COMPACT": "Action Bar Classic Compact",
+        "CLASSIC-FULL": "Action Bar Classic Full",
+        "TITLE": "Stark action bar"
+      },
+      "APP_DATA": {
+        "DROPDOWN": "Dropdown example with user image",
+        "DROPDOWN.NO_AVATAR": "Dropdown example without user image",
+        "MENU": "Menu example",
+        "USER": "User",
+        "LAST_ACCESS": "Last access",
+        "VERSION": "Version",
+        "ENVIRONMENT": "Environment",
+        "TITLE": "App data"
+      },
+      "BREADCRUMB": {
+        "CHILD": "Child",
+        "CONFIG_INPUT": "Breadcrumb demonstration (with breadcrumbConfig)",
+        "GRANDPARENT": "Grand parent",
+        "NO_INPUT": "Breadcrumb demonstration (without parameters)",
+        "PARENT": "Parent",
+        "ROOT": "Root ancestor",
+        "TITLE": "Stark breadcrumb"
+      },
+      "BUTTON": {
+        "TITLE": "Stark buttons"
+      },
+      "CARD": {
+        "ADVANCED": {
+          "DETAILS": "Stark handles more complex cards also, here is an example with subtitle, actions and also the option to have full width elements thanks to the <code>.stark-full-width</code> class added inside the <code>mat-card-content</code> tag.",
+          "TITLE": "Advanced card"
+        },
+        "BASIC": {
+          "DETAILS": "Stark provides an alternative layout for cards. You can keep the same html structure and add the <code>.stark-card</code> class to the Angular Material card. We also recommend to use <code>h3</code> tag inside the <code>mat-card-title</code>.<br><br><br>For more information on Angular Material's card, check out this link: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "TITLE": "Basic card"
+        },
+        "CODE": "Here, the code to display this card:",
+        "TITLE": "Stark Cards"
+      },
+      "COLLAPSIBLE": {
+        "CLOSED": "Closed",
+        "CUSTOM_ICON": "Custom icon",
+        "DEFAULT_ICON": "Default icon",
+        "HTML_CONTENT": "Any HTML content",
+        "OPEN": "Open",
+        "TITLE": "Stark collapsible",
+        "TITLE_0": "Default icon collapsible title",
+        "TITLE_1": "Custom icon collapsible title",
+        "TOGGLE_COLLAPSIBLE": "Toggle collapsible"
+      },
+      "COLORS": {
+        "ALT": {
+          "DETAILS": "In addition to the 3 basic palettes, Stark provides 3 alternative palettes: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
+          "TITLE": "Alternative palettes"
+        },
+        "BASIC": {
+          "DETAILS": "Angular Material uses 3 color palettes: a primary palette, an accent palette and a warn palette. Stark gives you the ability to define those palettes through 3 SCSS maps: <code>$stark-primary-palette</code>, <code>$stark-accent-palette</code> and <code>$stark-warn-palette</code>.<br><br>For more details on how Angular Material deals with theming, check out <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a>",
+          "TITLE": "Basic palettes"
+        },
+        "CUSTOM": {
+          "DETAILS": "If you want to customize those palettes, you first need to create a palette and this tool is really useful: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Just define your main color and it will generate the full palette, then you just need to copy the SCSS code and associate it to the palette you want to modify. Don't forget to import stark theming after the maps declaration. <br>Here, an example with default values on how to achieve this:",
+          "TITLE": "Customize palettes"
+        },
+        "LINKS": {
+          "DETAILS": "You can find the Material Design color palettes here: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
+          "TITLE": "Useful links"
+        },
+        "TITLE": "Stark Colors"
+      },
+      "DATE_PICKER": {
+        "CUSTOM_FILTER": "Date Picker - Custom Filter",
+        "ONLY_WEEKDAYS": "Date Picker - Only weekdays",
+        "ONLY_WEEKENDS": "Date Picker - Only weekends",
+        "PLACEHOLDER": "Choose a date",
+        "TITLE": "Stark date picker"
+      },
+      "DATE_RANGE_PICKER": {
+        "TITLE": "Stark date range picker"
+      },
+      "DROPDOWN": {
+        "PR": "IT applications",
+        "BLANK": "Single selection with default blank",
+        "CS": "IT customer services",
+        "DISABLED": "Disabled dropdown",
+        "IO": "Informatics infrastructure and operations",
+        "MULTIPLE": "Multiple selection",
+        "MULTIPLE_REQUIRED": "Required multiple selection",
+        "REACTIVE_FORM": "Reactive form",
+        "REQUIRED": "Single required selection",
+        "SELECTED_VALUE": "Selected value ",
+        "SELECTED_VALUES": "Selected values ",
+        "SELECT_SERVICE": "Select Service",
+        "SELECT_NUMBER": "Select your lucky number",
+        "SELECT_SERVICES": "Select one or more services",
+        "SELECT_ONE_SERVICE": "Select at least one service",
+        "SELECT_DISABLED": "Sorry, it's disabled",
+        "TITLE": "Stark dropdown",
+        "WHITE": "White dropdown on black background (full width)"
+      },
+      "EXAMPLE_VIEWER": {
+        "TITLE": "Stark example viewer"
+      },
+      "FOOTER": {
+        "TITLE": "Stark App Footer Guidelines",
+        "INTRO": "Stark provides you a custom footer for your application. It's a standard component you can use by copying this HTML into your code",
+        "INFO": "This component takes 3 elements as input :",
+        "INPUT1": "<b>legalInfoUrl</b> contains the url to the legal information page.",
+        "INPUT2": "<b>helpPageUrl</b> contains the url to the help page.",
+        "INPUT3": "The included HTML elements will be copied inside the footer as the leftmost element."
+      },
+      "HEADER": {
+        "COPY_PASTE": "Then you can copy/paste this HTML into your code",
+        "EXPLAINED": "Introduction",
+        "INTEGRATION": "Integration",
+        "INTEGRATION_DETAILS": "Stark provides you with useful classes to implement your application header. You just need to include the header theme in your SCSS",
+        "STARK_APP_HEADER": "The <code>stark-app-header</code> provides a background to the header",
+        "STARK_APP_BAR": "The <code>stark-app-bar</code> contains three content containers <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <code>stark-app-bar</code> also provides a <code>stark-app-bar-page-title</code> which is placed on the bottom left of the header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contains <code>stark-actions</code> for the navigation actions.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <code>stark-app-bar-content-right-actions-alt</code> which contains some alternative actions.",
+        "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> displays the current page title.",
+        "TITLE": "Stark App Header Guidelines"
+      },
+      "KEYBOARD_DIRECTIVES": {
+        "ON_ENTER_KEY": {
+          "DESCRIPTION": "Type some value in the inputs and then press Enter in any of them to trigger the callback function",
+          "INPUT_WITH_CONTEXT": "With bound context",
+          "INPUT_WITHOUT_CONTEXT": "Without bound context (bound values are not accessible)",
+          "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Without bound context but passed as parameter",
+          "TITLE": "On Enter Key Directive",
+          "TYPE_AND_PRESS_ENTER": "Type a value and press Enter",
+          "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Type a value, press Enter and check the console"
+        },
+        "RESTRICT_INPUT": {
+          "TITLE": "Restrict Input Directive",
+          "DESCRIPTION": "Type some value in the inputs and some characters will be prevented depending on the restriction set in every field",
+          "INPUT_ONLY_NUMBERS": "Accept only numbers",
+          "INPUT_ALPHANUMERICAL_CHARACTERS": "Accept only alphanumeric characters",
+          "INPUT_NO_SPECIAL_CHARACTERS": "Accept all except special characters",
+          "INPUT_UPPERCASE_CHARACTERS": "Accept only uppercase characters",
+          "TYPE_A_VALUE": "Type a value"
+        },
+        "TITLE": "Stark keyboard directive"
+      },
+      "LANGUAGE_SELECTOR": {
+        "DROPDOWN": "Language selector in 'dropdown' mode",
+        "TITLE": "Stark language selector",
+        "TOOLBAR": "Language selector in 'toolbar' mode"
+      },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
+        "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon",
+        "TITLE": "Stark app logout"
+      },
+      "MENU": {
+        "SIMPLE": "Simple menu",
+        "SECTIONS": "Menu with sections",
+        "TITLE": "Stark app menu"
+      },
+      "MESSAGE_PANE": {
+        "BUTTONS": {
+          "CENTER": "Center",
+          "CHANGE_THEME": "Change theme",
+          "CLEAR_AND_SHOW_NEW_MESSAGES": "Clear & Show new messages",
+          "CLEAR_MESSAGES": "Clear messages",
+          "LEFT": "Left",
+          "RIGHT": "Right",
+          "SHOW_MESSAGES": "Show messages"
+        },
+        "DESCRIPTION": "The Message Pane will persist on the page until dismissed, but will not stop page interactions (like dialogs do). It can be used, for instance, to show validation errors of the form in case your app needs to keep them until dismissed.",
+        "MESSAGES": {
+          "ERRORS": {
+            "ERROR_1": "Error 1: Too many fingers on the keyboard - priority 500",
+            "ERROR_2": "Error 2: priority 10",
+            "ERROR_3": "Error 3: priority 200",
+            "NEW_ERROR_1": "New Error 1",
+            "NEW_ERROR_2": "New Error 2"
+          },
+          "WARNINGS": {
+            "WARNING_1": "Warning 1: priority 1",
+            "WARNING_2": "Warning 2: priority undefined",
+            "NEW_WARNING_1": "New warning 1"
+          },
+          "INFOS": {
+            "INFO_1": "Info 1: priority undefined",
+            "INFO_2": "Info 2: priority 998",
+            "NEW_INFO_1": "New info 1",
+            "NEW_INFO_2": "New info 2"
+          }
+        },
+        "TITLE": "Stark message pane",
+        "EXAMPLE": "Example",
+        "BUTTON_GROUPS": {
+          "DEMO": "Demo",
+          "DISPLAY_ALIGNMENT": "Display alignment",
+          "DISPLAY_STYLE": "Display style"
+        }
+      },
+      "MINIMAP": {
+        "TITLE": "Stark Minimap",
+        "FULL": "Minimap (classic version)",
+        "COMPACT": "Minimap (compact version)"
+      },
+      "PAGINATION": {
+        "ADVANCED_CONFIGURATION": "Pagination with advanced configuration",
+        "COMPACT_CONFIGURATION": "Pagination in compact mode",
+        "EMITTED_PAGINATE_EVENT": "Emitted paginate event",
+        "EXTENDED_CONFIGURATION": "Pagination with extended page selector",
+        "SIMPLE_CONFIGURATION": "Pagination with simple configuration",
+        "TITLE": "Stark Pagination"
+      },
+      "PRETTY_PRINT": {
+        "CSS": "Pretty-Print CSS",
+        "ENABLE_HIGHLIGHTING": "Enable highlighting",
+        "ENTER_DATA": "Type or copy/paste unformatted code",
+        "HTML": "Pretty-Print HTML",
+        "JAVASCRIPT": "Pretty-Print Javascript",
+        "JSON": "Pretty-Print JSON",
+        "ORIGINAL_CODE": "Original Code",
+        "PRETTY_PRINTED": "Formatted",
+        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Formatted with highlighting",
+        "SCSS": "Pretty-Print SCSS",
+        "SELECT_DATAFORMAT": "Select a format",
+        "SQL": "Pretty-Print SQL",
+        "TITLE": "Stark pretty print",
+        "TRY_IT_YOURSELF": "Try it yourself",
+        "TYPESCRIPT": "Pretty-Print Typescript",
+        "XML": "Pretty-Print XML"
+      },
+      "SHARED": {
+        "EXAMPLE_VIEWER_LIST": "Examples and code samples"
+      },
+      "SIDEBAR": {
+        "INTRO": "The preview of this code is the actual sidebar of the showcase",
+        "OPEN_LEFT": "Open the left sidebar",
+        "OPEN_MENU": "Open the menu",
+        "OPEN_RIGHT": "Open the right sidebar",
+        "TITLE": "Stark app sidebar"
+      },
+      "SLIDER": {
+        "HORIZONTAL_RANGE_SLIDER": "Horizontal Range Slider",
+        "SIMPLE_HORIZONTAL_SLIDER": "Simple Horizontal Slider",
+        "SIMPLE_VERTICAL_SLIDER": "Simple Vertical Slider",
+        "VERTICAL_RANGE_SLIDER": "Vertical Range Slider",
+        "TITLE": "Stark slider"
+      },
+      "TABLE": {
+        "LABELS": {
+          "TITLE": "Title",
+          "DESCRIPTION": "Description"
+        },
+        "REGULAR": "Regular Table",
+        "WITH_SELECTION": "Table with selection",
+        "WITH_CUSTOM_ACTIONS": "Table with custom actions",
+        "WITH_FIXED_HEADER": "Table with fixed header",
+        "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
+        "WITH_CUSTOM_STYLING": "Table with custom styling",
+        "TITLE": "Stark table"
+      },
+      "TOAST": {
+        "BUTTON_INFO": "Info",
+        "BUTTON_ALERT": "Error",
+        "BUTTON_WARNING": "Warning",
+        "BUTTON_ACTION": "Action",
+        "BUTTON_DELAY_LONG": "Long Delay",
+        "BUTTON_DELAY_SHORT": "Short Delay",
+        "BUTTON_HIDE": "Hide the toast",
+        "EXAMPLE": "Example",
+        "MESSAGE_CLOSED_ON_DELAY_TIMEOUT": "Toast closed automatically after delay timeout.",
+        "MESSAGE_ACTION_CLICKED": "You clicked the 'DISMISS' action!",
+        "MESSAGE_HIDDEN": "You closed the toast!",
+        "MESSAGE_OPENED": "Toast opened.",
+        "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast automatically closed before displaying a new one.",
+        "MESSAGE_INTRO": "Click one button to test the toast notification.",
+        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
+        "TITLE": "Stark toast notification"
+      },
+      "TYPOGRAPHY": {
+        "CLASSES_AND_TAGS": {
+          "TITLE": "Available classes & tags"
+        },
+        "CUSTOMIZATION": {
+          "TITLE": "Customization",
+          "DETAILS": "Stark allows you to customize simultaneously the typography settings of Angular Material and Stark easily by adding a simple SCSS map declaration. <br>First, declare the SCSS map and then you need to import the Stark's theme. On this example, a full version of the map is shown but you can also use it partially.",
+          "MAP_EXPLAINED": "Here are the corresponding classes and tags:"
+        },
+        "FONT_FAMILY": {
+          "TITLE": "Font family",
+          "DETAILS_1": "Material Design does not require to use a specific font, but it suggests Roboto, the sans-serif font available on Android mobile devices. We have chosen to let the system decide the most readable font it has to offer. This has the added advantage that no font will be embedded, reducing the first page load time.",
+          "DETAILS_2": "The font stack used to get the optimal sans-serif font the system provides:",
+          "CUSTOM_FONT_EXPLAINED": "To set a web font (eg: Roboto) you must first add the font (ttf, woff, ...) to your projects assets, add it as a font-face in SCSS and set it trough the <code>$stark-typography-theme</code> (more about customization below).",
+          "IE_NOTE": "* The font format woff2 is not supported by IE. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face#Browser_compatibility\" target=\"_blank\" rel=\"noopener\">MDN</a>",
+          "CDN_FONT_EXPLAINED": "To set a web font from an external source (CDN) webpack needs to be told to allow fonts from external sources. To do this add a the host/port to cspFontSrc in <code>config/webpack-custom-config.dev.json</code>. For more details check out: <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src\" target=\"_blank\" rel=\"noopener\"> CSP: font-src </a>."
+        },
+        "MATERIAL_BASED": {
+          "DETAILS": "We try to keep consistency with Angular Material. For more details checkout: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
+          "TITLE": "Based on Angular Material"
+        },
+        "TITLE": "Stark Typography"
+      }
+    },
+    "HOMEPAGE": {
+      "MAIN_TITLE": "About Stark",
+      "DESCRIPTION_BEFORE_DETAIL": "<p>Stark is an Angular 5+ based front-end framework built on top of Angular Stark features... An awesome reusable build using Webpack, built-in support for state of the art front-end tech.</p> <p>Stark provides main building blocks for accelerating front-end development:</p>",
+      "DESCRIPTION_DETAIL": "<ul><li>a solid reusable build based on Webpack</li><li>a starter project inspired by Angular Starter by AngularClass and Google's Web Starterk Kit</li><li>core modules providing useful APIs</li><li>UI modules providing interesting UI components </li><li>a showcase application containing: <ul><li>our living style guide</li><li>a showcase of all components/services along with their API</li><li>our developer guide</li></ul></li></ul>",
+      "DESCRIPTION_DETAIL_LEGO_BLOCKS": "<p>Stark modules are like LEGO blocks: add what you need, no less, no more. If you don't like our defaults then you may replace/override/ignore anything you fancy.</p>",
+      "DESCRIPTION_AFTER_DETAIL": "<p>And even better, the Stark repository is available on the National Bank of Belgium page on Github!</p><p>Come and have a look at our amazing open sources projects!</p>",
+      "NEWS_TITLE": "Stark News",
+      "NEWS_DESCRIPTION": "Want to find the hottest news about the Stark framework?",
+      "NEWS_CONTENT": "Have a look at the news page right <a target=\"_blank\" href=\"news\" rel=\"noopener noreferrer\">here!</a>",
+      "DOCUMENTATION_MAIN_TITLE": "Stark Documentation",
+      "DOCUMENTATION_MAIN_DESC": "<p>Want some more info about Stark? Take a look at our links just below!</p>",
+      "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aka stark-core, is a module providing reusable APIs, such as a routing, logging, log shipping, etc.</p><p>You can find the latest API documentation for stark-core <a href=\"https://stark.nbb.be/api-docs/stark-core/latest\" target=\"_blank\" rel=\"noopener noreferrer\" >here</a>.</p><p>Or check the API for previous releases right <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core \" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>",
+      "DOCUMENTATION_UI_DESC": "<p>Stark UI provides reusable UI components, for example data table, message pane, ... but also themes.</p><p>The latest API doc for that module can be found <a href=\"https://stark.nbb.be/api-docs/stark-ui/latest\" target=\"_blank\" rel=\"noopener noreferrer\" >here</a>.</p><p>Or check the API for previous releases right <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui \" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>",
+      "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!</p><p> Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.</p>If you are interested in seeing the previous version of Stark showcase, have a look <a href=\"https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.</p>"
+    },
+    "ICONS": {
+      "GITHUB": "Github repo",
+      "STARK_UI": "Stark-UI documentation",
+      "STARK_CORE": "Stark-Core documentation"
+    },
+    "STYLEGUIDE": {
+      "TITLE": "Style guide"
+    }
+  }
+}
