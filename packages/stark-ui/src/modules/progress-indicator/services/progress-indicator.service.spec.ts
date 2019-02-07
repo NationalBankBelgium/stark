@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs*/
-import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
 import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import {
 	progressIndicatorReducer,
@@ -16,7 +16,7 @@ import { StarkProgressIndicatorActions } from "../actions/progress-indicator.act
 
 // tslint:disable:no-big-function
 describe("Service: StarkProgressIndicatorService", () => {
-	let mockStore: Store<StarkUIApplicationState>;
+	let mockStore: SpyObj<Store<StarkUIApplicationState>>;
 	let progressIndicatorService: ProgressIndicatorServiceHelper;
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 	let mockProgressIndicatorMap: Map<string, StarkProgressIndicatorConfig>;
@@ -29,11 +29,11 @@ describe("Service: StarkProgressIndicatorService", () => {
 		mockStore = jasmine.createSpyObj("store", ["dispatch", "pipe"]);
 		mockProgressIndicatorMap = new Map<string, StarkProgressIndicatorConfig>();
 		progressIndicatorState$ = new BehaviorSubject(mockProgressIndicatorMap);
-		(<Spy>mockStore.pipe).and.returnValue(progressIndicatorState$);
+		mockStore.pipe.and.returnValue(progressIndicatorState$);
 
 		progressIndicatorService = new ProgressIndicatorServiceHelper(mockLogger, mockStore);
 
-		(<Spy>mockStore.dispatch).and.callFake((action: StarkProgressIndicatorActions) => {
+		mockStore.dispatch.and.callFake((action: StarkProgressIndicatorActions) => {
 			// reducer
 			progressIndicatorService.progressIndicatorMap = progressIndicatorReducer(progressIndicatorService.progressIndicatorMap, action);
 		});
@@ -60,7 +60,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 				progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 			);
 
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toEqual("PROGRESS_INDICATOR_REGISTER");
+			expect(mockStore.dispatch.calls.argsFor(0)[0].type).toEqual("PROGRESS_INDICATOR_REGISTER");
 
 			expect(progressIndicatorConfig.topic).toBe(dummyTopic);
 			expect(progressIndicatorConfig.type).toBe(dummyType);
@@ -80,7 +80,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 				progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 			);
 
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+			expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
 
 			expect(progressIndicatorConfig.topic).toBe(dummyTopic);
 			expect(progressIndicatorConfig.type).toBe(dummyType);
@@ -102,8 +102,8 @@ describe("Service: StarkProgressIndicatorService", () => {
 
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
 
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
 
 				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
@@ -132,8 +132,8 @@ describe("Service: StarkProgressIndicatorService", () => {
 
 			setTimeout(() => {
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
 
 				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
@@ -160,10 +160,10 @@ describe("Service: StarkProgressIndicatorService", () => {
 			setTimeout(() => {
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(4);
 
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
 
 				expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 
@@ -193,9 +193,9 @@ describe("Service: StarkProgressIndicatorService", () => {
 			setTimeout(() => {
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(3);
 
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
 
 				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
@@ -223,11 +223,11 @@ describe("Service: StarkProgressIndicatorService", () => {
 			setTimeout(() => {
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(5);
 
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
 
 				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
@@ -260,9 +260,9 @@ describe("Service: StarkProgressIndicatorService", () => {
 				expect(progressIndicatorConfig.pendingListenersCount).toEqual(0);
 
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(3);
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
 
 				expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 
@@ -286,8 +286,8 @@ describe("Service: StarkProgressIndicatorService", () => {
 				expect(progressIndicatorConfig.pendingListenersCount).toEqual(1);
 
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
 
 				expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 
@@ -302,8 +302,8 @@ describe("Service: StarkProgressIndicatorService", () => {
 			progressIndicatorService.deregister(dummyTopic);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
+			expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+			expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
 
 			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkProgressIndicatorDeregister(dummyTopic));
 			expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(false);
@@ -315,9 +315,9 @@ describe("Service: StarkProgressIndicatorService", () => {
 			progressIndicatorService.deregister(dummyTopic);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(3);
-			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-			expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
+			expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+			expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+			expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
 
 			expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 
@@ -353,10 +353,10 @@ describe("Service: StarkProgressIndicatorService", () => {
 
 			setTimeout(() => {
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(4);
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
 
 				expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(false);
 				done();
@@ -381,11 +381,11 @@ describe("Service: StarkProgressIndicatorService", () => {
 				);
 
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(5);
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
 
 				expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 				expect(progressIndicatorConfig.topic).toBe(dummyTopic);
@@ -419,12 +419,12 @@ describe("Service: StarkProgressIndicatorService", () => {
 
 					expect(mockStore.dispatch).toHaveBeenCalledTimes(6);
 
-					expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-					expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-					expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-					expect((<Spy>mockStore.dispatch).calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-					expect((<Spy>mockStore.dispatch).calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
-					expect((<Spy>mockStore.dispatch).calls.argsFor(5)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
+					expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+					expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+					expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+					expect(mockStore.dispatch.calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+					expect(mockStore.dispatch.calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+					expect(mockStore.dispatch.calls.argsFor(5)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
 
 					expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 
@@ -458,13 +458,13 @@ describe("Service: StarkProgressIndicatorService", () => {
 			setTimeout(() => {
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(7);
 
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(5)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(6)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(5)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(6)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
 
 				expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 				done();
@@ -487,14 +487,14 @@ describe("Service: StarkProgressIndicatorService", () => {
 			setTimeout(() => {
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(8);
 
-				expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(5)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(6)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
-				expect((<Spy>mockStore.dispatch).calls.argsFor(6)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
+				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
+				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
+				expect(mockStore.dispatch.calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(5)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
+				expect(mockStore.dispatch.calls.argsFor(6)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
+				expect(mockStore.dispatch.calls.argsFor(6)[0].type).toBe("PROGRESS_INDICATOR_DEREGISTER");
 
 				expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(false);
 				done();

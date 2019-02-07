@@ -6,10 +6,7 @@ import {
 	STARK_ROUTING_SERVICE,
 	STARK_SESSION_SERVICE,
 	STARK_USER_SERVICE,
-	StarkRoutingService,
-	StarkSessionService,
-	StarkUser,
-	StarkUserService
+	StarkUser
 } from "@nationalbankbelgium/stark-core";
 import {
 	MockStarkLoggingService,
@@ -20,16 +17,15 @@ import {
 import { TranslateModule } from "@ngx-translate/core";
 import { RawParams } from "@uirouter/core";
 import { StarkLoginPageComponent } from "./login-page.component";
-import Spy = jasmine.Spy;
 
 describe("LoginPageComponent", () => {
 	let component: StarkLoginPageComponent;
 	let fixture: ComponentFixture<StarkLoginPageComponent>;
 
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
-	const mockUserService: StarkUserService = new MockStarkUserService();
-	const mockSessionService: StarkSessionService = new MockStarkSessionService();
-	const mockRoutingService: StarkRoutingService = new MockStarkRoutingService();
+	const mockUserService: MockStarkUserService = new MockStarkUserService();
+	const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
+	const mockRoutingService: MockStarkRoutingService = new MockStarkRoutingService();
 	const mockUser: StarkUser = { firstName: "John", lastName: "Doe", username: "jdoe", uuid: "mock-uuid", roles: [] };
 
 	const mockUserWithRoles: StarkUser = {
@@ -57,9 +53,9 @@ describe("LoginPageComponent", () => {
 		fixture = TestBed.createComponent(StarkLoginPageComponent);
 		component = fixture.componentInstance;
 
-		(<Spy>mockSessionService.login).calls.reset();
-		(<Spy>mockRoutingService.navigateTo).calls.reset();
-		(<Spy>mockRoutingService.navigateToHome).calls.reset();
+		mockSessionService.login.calls.reset();
+		mockRoutingService.navigateTo.calls.reset();
+		mockRoutingService.navigateToHome.calls.reset();
 	});
 
 	describe("on initialization", () => {
@@ -111,8 +107,8 @@ describe("LoginPageComponent", () => {
 			expect(mockRoutingService.navigateTo).not.toHaveBeenCalled();
 			expect(mockRoutingService.navigateToHome).toHaveBeenCalledTimes(1);
 
-			(<Spy>mockSessionService.login).calls.reset();
-			(<Spy>mockRoutingService.navigateToHome).calls.reset();
+			mockSessionService.login.calls.reset();
+			mockRoutingService.navigateToHome.calls.reset();
 			const mockState: string = "mock-state";
 			const mockStateParams: RawParams = {
 				param: "mock-state-param"

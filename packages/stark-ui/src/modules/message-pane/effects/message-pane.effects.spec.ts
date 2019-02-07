@@ -5,16 +5,16 @@ import { Observable, Observer, ReplaySubject } from "rxjs";
 import { provideMockActions } from "@ngrx/effects/testing";
 
 import { StarkMessagePaneEffects } from "./message-pane.effects";
-import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService } from "../services";
+import { STARK_MESSAGE_PANE_SERVICE } from "../services";
 import { StarkNavigateSuccess } from "@nationalbankbelgium/stark-core";
 import { MockStarkMessagePaneService } from "../testing/message-pane.mock";
-
+import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
 describe("Effect: StarkMessagePaneEffects", () => {
 	let messagePaneEffects: StarkMessagePaneEffects;
 
-	let mockMessagePaneService: StarkMessagePaneService;
+	let mockMessagePaneService: MockStarkMessagePaneService;
 	let actions: Observable<any>;
 
 	// Inject module dependencies
@@ -38,7 +38,7 @@ describe("Effect: StarkMessagePaneEffects", () => {
 	describe("On clearOnNavigationSuccess$", () => {
 		it("Should clear and hide the message pane", () => {
 			mockMessagePaneService.clearOnNavigation = true;
-			const mockObserver: Observer<any> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
 			actions = subject.asObservable();
@@ -55,7 +55,7 @@ describe("Effect: StarkMessagePaneEffects", () => {
 
 		it("Should not clear and hide the message pane when the 'clearOnNavigation' option is not set", () => {
 			mockMessagePaneService.clearOnNavigation = false;
-			const mockObserver: Observer<any> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
 			actions = subject.asObservable();

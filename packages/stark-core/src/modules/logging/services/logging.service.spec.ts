@@ -11,7 +11,6 @@ import { StarkLoggingServiceImpl } from "./logging.service";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../../logging/entities";
 import { StarkBackend } from "../../http/entities/backend";
-import { StarkXSRFService } from "../../xsrf/services";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
 import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
@@ -21,7 +20,7 @@ describe("Service: StarkLoggingService", () => {
 	let appConfig: StarkApplicationConfig;
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
 	let mockInjectorService: SpyObj<Injector>;
-	let mockXSRFService: StarkXSRFService;
+	let mockXSRFService: MockStarkXsrfService;
 	let loggingService: LoggingServiceHelper;
 	const loggingBackend: StarkBackend = {
 		name: "logging",
@@ -58,7 +57,7 @@ describe("Service: StarkLoggingService", () => {
 		};
 		mockStore.pipe.and.returnValue(of(mockStarkLogging));
 		/* tslint:disable-next-line:deprecation */
-		(<Spy>mockInjectorService.get).and.returnValue(mockXSRFService);
+		mockInjectorService.get.and.returnValue(mockXSRFService);
 		loggingService = new LoggingServiceHelper(mockStore, appConfig, mockInjectorService);
 		// reset the calls counter because there is a log in the constructor
 		mockStore.dispatch.calls.reset();

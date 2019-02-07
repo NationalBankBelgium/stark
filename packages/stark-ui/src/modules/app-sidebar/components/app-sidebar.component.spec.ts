@@ -6,16 +6,10 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { HookMatchCriteria, TransitionHookFn, TransitionStateHookFn } from "@uirouter/core";
-import {
-	STARK_LOGGING_SERVICE,
-	STARK_ROUTING_SERVICE,
-	StarkLoggingService,
-	StarkRoutingService,
-	StarkRoutingTransitionHook
-} from "@nationalbankbelgium/stark-core";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkRoutingTransitionHook } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppSidebarComponent } from "./app-sidebar.component";
-import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService } from "../services/app-sidebar.service.intf";
+import { STARK_APP_SIDEBAR_SERVICE } from "../services/app-sidebar.service.intf";
 import { MockAppSidebarService } from "../testing/app-sidebar.mock";
 
 // Definitions
@@ -43,16 +37,16 @@ let fixture: ComponentFixture<StarkAppSidebarComponent>;
 let component: StarkAppSidebarComponent;
 
 // Mocked services
-let mockStarkLoggingService: jasmine.SpyObj<StarkLoggingService>;
-let mockStarkAppSideBarService: jasmine.SpyObj<StarkAppSidebarService>;
-let mockStarkRoutingService: jasmine.SpyObj<StarkRoutingService>;
+let mockStarkLoggingService: MockStarkLoggingService;
+let mockStarkAppSideBarService: MockAppSidebarService;
+let mockStarkRoutingService: MockStarkRoutingService;
 let mockBreakPointObserver: jasmine.SpyObj<BreakpointObserver>;
 
 describe("AppSidebarComponent", () => {
 	beforeEach(() => {
-		mockStarkLoggingService = new MockStarkLoggingService() as jasmine.SpyObj<MockStarkLoggingService>;
-		mockStarkAppSideBarService = new MockAppSidebarService() as jasmine.SpyObj<MockAppSidebarService>;
-		mockStarkRoutingService = new MockStarkRoutingService() as jasmine.SpyObj<MockStarkRoutingService>;
+		mockStarkLoggingService = new MockStarkLoggingService();
+		mockStarkAppSideBarService = new MockAppSidebarService();
+		mockStarkRoutingService = new MockStarkRoutingService();
 		// add functionality to the `addTransitionHook` Spy
 		mockStarkRoutingService.addTransitionHook.and.callFake(
 			(lifecycleHook: string, matchCriteria: HookMatchCriteria, callback: TransitionHookFn | TransitionStateHookFn): Function => {

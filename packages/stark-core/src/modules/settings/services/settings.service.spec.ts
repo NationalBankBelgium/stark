@@ -1,8 +1,6 @@
 /*tslint:disable:completed-docs*/
 import { Store } from "@ngrx/store";
-import { StarkLoggingService } from "../../logging/services";
 import { MockStarkLoggingService } from "../../logging/testing";
-import { StarkSessionService } from "../../session/services";
 import { MockStarkSessionService } from "../../session/testing";
 import {
 	StarkApplicationConfig,
@@ -18,16 +16,15 @@ import { StarkSettingsServiceImpl } from "./settings.service";
 import { StarkSetPreferredLanguage } from "../actions";
 import { StarkUser } from "../../user/entities";
 import { of } from "rxjs";
-import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 
 describe("Service: StarkSettingsService", () => {
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
-	let mockLogger: StarkLoggingService;
+	let mockLogger: MockStarkLoggingService;
 	let appConfig: StarkApplicationConfig;
 	let appMetadata: StarkApplicationMetadata;
 	let settingsService: StarkSettingsServiceImpl;
-	let mockSessionService: StarkSessionService;
+	let mockSessionService: MockStarkSessionService;
 	let mockUser: StarkUser;
 	let browserLanguageCode: string;
 
@@ -51,7 +48,7 @@ describe("Service: StarkSettingsService", () => {
 		};
 
 		mockSessionService = new MockStarkSessionService();
-		(<Spy>mockSessionService.getCurrentUser).and.returnValue(of(mockUser));
+		mockSessionService.getCurrentUser.and.returnValue(of(mockUser));
 
 		settingsService = new StarkSettingsServiceImpl(mockLogger, mockSessionService, appMetadata, appConfig, <
 			Store<StarkCoreApplicationState>
@@ -121,19 +118,19 @@ describe("Service: StarkSettingsService", () => {
 		it("should set browser language as preferred language if user language is undefined OR null", () => {
 			// tslint:disable-next-line:no-null-keyword */
 			mockUser.language = <any>null;
-			(<Spy>mockSessionService.getCurrentUser).and.returnValue(of(mockUser));
+			mockSessionService.getCurrentUser.and.returnValue(of(mockUser));
 			settingsService.initializeSettings();
 			expect(settingsService.preferredLanguage).toEqual(browserLanguageCode);
 
 			mockUser.language = undefined;
-			(<Spy>mockSessionService.getCurrentUser).and.returnValue(of(mockUser));
+			mockSessionService.getCurrentUser.and.returnValue(of(mockUser));
 			settingsService.initializeSettings();
 			expect(settingsService.preferredLanguage).toEqual(browserLanguageCode);
 		});
 
 		it("should set browser language as preferred language if user language is NOT in supported languages", () => {
 			mockUser.language = "NL";
-			(<Spy>mockSessionService.getCurrentUser).and.returnValue(of(mockUser));
+			mockSessionService.getCurrentUser.and.returnValue(of(mockUser));
 			settingsService.initializeSettings();
 			expect(settingsService.preferredLanguage).toEqual(browserLanguageCode);
 		});

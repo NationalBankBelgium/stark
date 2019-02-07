@@ -4,7 +4,6 @@ import { fakeAsync, tick } from "@angular/core/testing";
 import { Injector } from "@angular/core";
 import { Observable, of, Subject, throwError } from "rxjs";
 import { StarkHttpHeaders } from "../../http/constants";
-import { StarkLoggingService } from "../../logging/services";
 import { StarkXSRFServiceImpl } from "./xsrf.service";
 import { StarkXSRFConfig } from "./xsrf-config.intf";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities";
@@ -23,7 +22,7 @@ describe("Service: StarkXSRFService", () => {
 	let mockInjectorService: SpyObj<Injector>;
 	let mockXsrfConfig: StarkXSRFConfig;
 
-	const mockLogger: StarkLoggingService = new MockStarkLoggingService();
+	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 	const httpMock: SpyObj<HttpClient> = createSpyObj<HttpClient>("HttpClient", ["get"]);
 	const mockXSRFToken: string = "dummy xsrf token";
 	const dummyHeader: string = "X-DUMMY-HEADER";
@@ -38,8 +37,6 @@ describe("Service: StarkXSRFService", () => {
 	const mockBackend2: StarkBackend = { ...mockBackend1, name: "dummy backend 2", url: "other/url" };
 	const mockBackend3: StarkBackend = { ...mockBackend1, name: "dummy backend 3", url: "another/url" };
 
-	// FIXME: this tslint disable flag is due to a bug in 'no-element-overwrite' rule. Remove it once it is solved
-	/* tslint:disable:no-element-overwrite */
 	beforeEach(() => {
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.backends = new Map<string, StarkBackend>();
@@ -50,13 +47,12 @@ describe("Service: StarkXSRFService", () => {
 		mockInjectorService = jasmine.createSpyObj<Injector>("injector,", ["get"]);
 		mockXsrfConfig = {};
 
-		(<Spy>mockLogger.error).calls.reset();
-		(<Spy>mockLogger.warn).calls.reset();
+		mockLogger.error.calls.reset();
+		mockLogger.warn.calls.reset();
 		httpMock.get.calls.reset();
 
 		xsrfService = new StarkXSRFServiceHelper(appConfig, mockLogger, httpMock, <any>mockDocument, mockInjectorService, mockXsrfConfig);
 	});
-	/* tslint:enable:no-element-overwrite */
 
 	describe("configureXHR", () => {
 		it("should add the necessary options to the XHR object in order to enable XSRF protection", () => {
@@ -217,7 +213,7 @@ describe("Service: StarkXSRFService", () => {
 
 			expect(xsrfToken).toBeUndefined();
 			expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-			const warningMessage: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+			const warningMessage: string = mockLogger.warn.calls.argsFor(0)[0];
 			expect(warningMessage).toContain("no XSRF token found");
 		});
 	});
@@ -311,7 +307,7 @@ describe("Service: StarkXSRFService", () => {
 			});
 
 			expect(mockLogger.error).toHaveBeenCalledTimes(failingBackends.length);
-			const logErrorCalls: CallInfo[] = (<Spy>mockLogger.error).calls.all();
+			const logErrorCalls: CallInfo[] = mockLogger.error.calls.all();
 			let logErrorCallIdx: number = 0;
 
 			for (const failingBackend of failingBackends) {
@@ -339,7 +335,7 @@ describe("Service: StarkXSRFService", () => {
 	class StarkXSRFServiceHelper extends StarkXSRFServiceImpl {
 		public constructor(
 			applicationConfig: StarkApplicationConfig,
-			logger: StarkLoggingService,
+			logger: MockStarkLoggingService,
 			httpClient: SpyObj<HttpClient>,
 			document: Document,
 			injector: Injector,

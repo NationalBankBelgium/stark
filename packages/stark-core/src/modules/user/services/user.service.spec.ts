@@ -17,7 +17,6 @@ import {
 import { StarkUser } from "../entities";
 import { StarkUserService } from "./user.service.intf";
 import { StarkUserServiceImpl } from "./user.service";
-import { StarkLoggingService } from "../../logging/services/logging.service.intf";
 import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkUserRepository } from "../repository";
 import {
@@ -42,7 +41,7 @@ describe("Service: StarkUserService", () => {
 	let userService: StarkUserService;
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
 	let mockUserRepository: SpyObj<StarkUserRepository>;
-	let mockLogger: StarkLoggingService;
+	let mockLogger: MockStarkLoggingService;
 
 	let mockData: StarkMockData;
 	let mockUsers: StarkUserWithCustomData[];
@@ -97,9 +96,7 @@ describe("Service: StarkUserService", () => {
 		mockUserInstances = [Deserialize(mockUsers[0], StarkUser), Deserialize(mockUsers[1], StarkUser)];
 		mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
-		userService = new StarkUserServiceImpl(mockLogger, mockUserRepository, mockData, <Store<StarkCoreApplicationState>>(
-			<unknown>mockStore
-		));
+		userService = new StarkUserServiceImpl(mockLogger, mockUserRepository, mockData, mockStore);
 	});
 
 	describe("getAllUsers", () => {

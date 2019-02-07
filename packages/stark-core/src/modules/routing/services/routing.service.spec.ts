@@ -8,7 +8,6 @@ import { catchError, switchMap, tap } from "rxjs/operators";
 import { throwError } from "rxjs";
 import { Store } from "@ngrx/store";
 import { StarkRoutingServiceImpl } from "./routing.service";
-import { StarkLoggingService } from "../../logging/services";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
@@ -16,7 +15,6 @@ import { StarkRoutingActionTypes } from "../actions";
 import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkErrorHandler } from "../../error-handling";
-import { StarkXSRFService } from "../../xsrf/services";
 import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
 import CallInfo = jasmine.CallInfo;
 import Spy = jasmine.Spy;
@@ -32,10 +30,10 @@ describe("Service: StarkRoutingService", () => {
 	let $state: StateService;
 	let router: UIRouter;
 	let mockInjectorService: SpyObj<Injector>;
-	let mockXSRFService: StarkXSRFService;
+	let mockXSRFService: MockStarkXsrfService;
 	let errorHandler: StarkErrorHandler;
 	let routingService: StarkRoutingServiceImpl;
-	let mockLogger: StarkLoggingService;
+	let mockLogger: MockStarkLoggingService;
 	let appConfig: StarkApplicationConfig;
 	const mockStore: SpyObj<Store<StarkCoreApplicationState>> = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("storeSpy", [
 		"dispatch"
@@ -360,7 +358,7 @@ describe("Service: StarkRoutingService", () => {
 		mockInjectorService = jasmine.createSpyObj<Injector>("injector,", ["get"]);
 		mockXSRFService = new MockStarkXsrfService();
 		/* tslint:disable-next-line:deprecation */
-		(<Spy>mockInjectorService.get).and.returnValue(mockXSRFService);
+		mockInjectorService.get.and.returnValue(mockXSRFService);
 	});
 
 	const starkRoutingServiceFactory: Function = (state: StateService, transitions: TransitionService) => {
@@ -405,9 +403,9 @@ describe("Service: StarkRoutingService", () => {
 		$state = router.stateService;
 		routingService = _routingService;
 
-		(<Spy>mockLogger.warn).calls.reset();
-		(<Spy>mockLogger.debug).calls.reset();
-		(<Spy>mockLogger.error).calls.reset();
+		mockLogger.warn.calls.reset();
+		mockLogger.debug.calls.reset();
+		mockLogger.error.calls.reset();
 		mockStore.dispatch.calls.reset();
 	}));
 
@@ -1028,7 +1026,7 @@ describe("Service: StarkRoutingService", () => {
 					}),
 					tap((enteredState: StateObject) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+						const message: string = mockLogger.warn.calls.argsFor(0)[0];
 						expect(message).toMatch(/Route transition ignored/);
 
 						expect(enteredState).toBeDefined();
@@ -1056,7 +1054,7 @@ describe("Service: StarkRoutingService", () => {
 					}),
 					tap((enteredState: StateObject) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+						const message: string = mockLogger.warn.calls.argsFor(0)[0];
 						expect(message).toMatch(/Route transition superseded/);
 
 						expect(enteredState).toBeDefined();
@@ -1083,7 +1081,7 @@ describe("Service: StarkRoutingService", () => {
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+						const message: string = mockLogger.warn.calls.argsFor(0)[0];
 						expect(message).toMatch(/Route transition rejected/);
 						return throwError(errorPrefix + error);
 					})
@@ -1101,7 +1099,7 @@ describe("Service: StarkRoutingService", () => {
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
-						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
+						const message: string = mockLogger.error.calls.argsFor(0)[0];
 						expect(message).toMatch(/Error during route transition/);
 						return throwError(errorPrefix + error);
 					})
@@ -1119,7 +1117,7 @@ describe("Service: StarkRoutingService", () => {
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
-						const message: string = (<Spy>mockLogger.warn).calls.argsFor(0)[0];
+						const message: string = mockLogger.warn.calls.argsFor(0)[0];
 						expect(message).toMatch(/transition aborted/);
 						return throwError(errorPrefix + error);
 					})
@@ -1137,7 +1135,7 @@ describe("Service: StarkRoutingService", () => {
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
-						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
+						const message: string = mockLogger.error.calls.argsFor(0)[0];
 						expect(message).toMatch(/An error occurred with a resolve in the new state/);
 						return throwError(errorPrefix + error);
 					})
@@ -1151,7 +1149,7 @@ describe("Service: StarkRoutingService", () => {
 				.pipe(
 					catchError((error: any) => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
-						const message: string = (<Spy>mockLogger.error).calls.argsFor(0)[0];
+						const message: string = mockLogger.error.calls.argsFor(0)[0];
 						expect(message).toMatch(/The target state does NOT exist/);
 						return throwError(errorPrefix + error);
 					})

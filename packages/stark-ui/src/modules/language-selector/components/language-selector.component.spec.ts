@@ -13,8 +13,7 @@ import {
 	STARK_SESSION_SERVICE,
 	StarkApplicationMetadata,
 	StarkApplicationMetadataImpl,
-	StarkLanguages,
-	StarkSessionService
+	StarkLanguages
 } from "@nationalbankbelgium/stark-core";
 
 import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
@@ -22,7 +21,6 @@ import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankb
 import { StarkLanguageSelectorComponent, StarkLanguageSelectorMode } from "./language-selector.component";
 import { StarkDropdownModule } from "../../dropdown";
 import { of, throwError } from "rxjs";
-import Spy = jasmine.Spy;
 
 /***
  * To be able to test changes to the input fields, the Language-Selector component is hosted inside the TestComponentHost class.
@@ -50,8 +48,8 @@ describe("LanguageSelectorComponent", () => {
 	appMetadata.supportedLanguages = [StarkLanguages.EN_US, StarkLanguages.FR_BE, StarkLanguages.NL_BE];
 
 	describe("on initialization", () => {
-		const mockSessionService: StarkSessionService = new MockStarkSessionService();
-		(<Spy>mockSessionService.getCurrentLanguage).and.returnValue(of("fr"));
+		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
+		mockSessionService.getCurrentLanguage.and.returnValue(of("fr"));
 
 		beforeEach(async(() => {
 			return compileComponent(mockSessionService);
@@ -77,8 +75,8 @@ describe("LanguageSelectorComponent", () => {
 	});
 
 	describe("on failing initialization", () => {
-		const mockSessionService: StarkSessionService = new MockStarkSessionService();
-		(<Spy>mockSessionService.getCurrentLanguage).and.returnValue(throwError("dummy-error"));
+		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
+		mockSessionService.getCurrentLanguage.and.returnValue(throwError("dummy-error"));
 
 		beforeEach(async(() => {
 			return compileComponent(mockSessionService);
@@ -95,8 +93,8 @@ describe("LanguageSelectorComponent", () => {
 	});
 
 	describe("on changeLanguage", () => {
-		const mockSessionService: StarkSessionService = new MockStarkSessionService();
-		(<Spy>mockSessionService.getCurrentLanguage).and.returnValue(of("fr"));
+		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
+		mockSessionService.getCurrentLanguage.and.returnValue(of("fr"));
 
 		beforeEach(async(() => {
 			return compileComponent(mockSessionService);
@@ -123,7 +121,7 @@ describe("LanguageSelectorComponent", () => {
 	 * This function contains the component compilation code
 	 * Instead of repeating the code, it is placed in a separate function
 	 */
-	function compileComponent(mockSessionService: StarkSessionService): Promise<any> {
+	function compileComponent(mockSessionService: MockStarkSessionService): Promise<any> {
 		return TestBed.configureTestingModule({
 			imports: [CommonModule, MatButtonToggleModule, StarkDropdownModule, TranslateModule.forRoot()],
 			declarations: [StarkLanguageSelectorComponent, TestHostComponent],

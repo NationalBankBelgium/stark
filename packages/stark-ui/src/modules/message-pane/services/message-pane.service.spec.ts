@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-commented-code no-big-function no-duplicate-string max-union-size */
+/* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size */
 import { BehaviorSubject, Observable, Observer } from "rxjs";
 
 import { Store } from "@ngrx/store";
@@ -14,7 +14,6 @@ import { StarkMessageCollection } from "../entities";
 import { StarkAddMessages, StarkClearMessages, StarkGetAllMessages, StarkRemoveMessages } from "../actions";
 import { StarkMessageImpl } from "../../../common/message/message.entity";
 
-import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
@@ -57,7 +56,7 @@ describe("MessagePaneService", () => {
 		};
 
 		appMessagesState$ = new BehaviorSubject(mockMessageCollection);
-		(<Spy>mockStore.pipe).and.returnValue(appMessagesState$);
+		mockStore.pipe.and.returnValue(appMessagesState$);
 
 		messagePaneService = new MessagePaneServiceHelper(mockLogger, <Store<StarkUIApplicationState>>(<unknown>mockStore));
 	});
@@ -71,7 +70,7 @@ describe("MessagePaneService", () => {
 			expect(mockStore.pipe).toHaveBeenCalledTimes(1);
 			expect(messagePaneService.messages$).toBeDefined();
 
-			const mockMessagesObserver: Observer<any> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			const mockMessagesObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 			messagePaneService.messages$.subscribe(mockMessagesObserver);
 
@@ -164,7 +163,7 @@ describe("MessagePaneService", () => {
 		it("should dispatch the GET_ALL_MESSAGES action passing the given messages in the payload", () => {
 			expect(messagePaneService.messages$).toBeDefined();
 
-			const mockMessagesObserver: Observer<any> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			const mockMessagesObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 			const getAll$: Observable<StarkMessageCollection> = messagePaneService.getAll();
 			expect(getAll$).toBe(messagePaneService.messages$);

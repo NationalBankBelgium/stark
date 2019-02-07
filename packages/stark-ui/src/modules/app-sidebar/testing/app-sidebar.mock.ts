@@ -1,5 +1,7 @@
-import { Subject } from "rxjs";
 import { StarkAppSidebarOpenEvent, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
+import { Subject } from "rxjs";
+import SpyObj = jasmine.SpyObj;
+import createSpy = jasmine.createSpy;
 
 /**
  * Mock class of the {@link StarkAppSidebarService|StarkAppSidebarService}.
@@ -30,7 +32,7 @@ import { StarkAppSidebarOpenEvent, StarkAppSidebarService } from "@nationalbankb
  * }
  * ```
  */
-export class MockAppSidebarService implements StarkAppSidebarService {
+export class MockAppSidebarService implements SpyObj<StarkAppSidebarService> {
 	/**
 	 * Observable subscribed by components to catch close events
 	 */
@@ -49,25 +51,25 @@ export class MockAppSidebarService implements StarkAppSidebarService {
 	/**
 	 * Close all sidebars
 	 */
-	public close: () => void = jasmine.createSpy("close");
+	public close: SpyObj<StarkAppSidebarService>["close"] = createSpy("close");
 
 	/**
 	 * Open sidebar's menu
 	 */
-	public openMenu: () => void = jasmine.createSpy("openMenu");
+	public openMenu: SpyObj<StarkAppSidebarService>["openMenu"] = createSpy("openMenu");
 
 	/**
 	 * Open the left sidebar
 	 */
-	public openLeft: () => void = jasmine.createSpy("openLeft");
+	public openLeft: SpyObj<StarkAppSidebarService>["openLeft"] = createSpy("openLeft");
 
 	/**
 	 * Open the right sidebar
 	 */
-	public openRight: () => void = jasmine.createSpy("openRight");
+	public openRight: SpyObj<StarkAppSidebarService>["openRight"] = createSpy("openRight");
 
 	/**
 	 * Toggle the menu
 	 */
-	public toggleMenu: () => void = jasmine.createSpy("toggleMenu");
+	public toggleMenu: SpyObj<StarkAppSidebarService>["toggleMenu"] = createSpy("toggleMenu");
 }

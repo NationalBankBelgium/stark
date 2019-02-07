@@ -1,44 +1,32 @@
-import { StarkRoutingService, StarkStateConfigWithParams } from "@nationalbankbelgium/stark-core";
-import { Observable } from "rxjs";
-import { HookFn, HookMatchCriteria, HookRegOptions, RawParams, StateDeclaration, StateObject, TransitionOptions } from "@uirouter/core";
+import { StarkRoutingService } from "@nationalbankbelgium/stark-core";
+import SpyObj = jasmine.SpyObj;
+import createSpy = jasmine.createSpy;
 
 /**
  * @ignore
  */
-export class MockStarkRoutingService implements StarkRoutingService {
-	public navigateTo: (newState: string, params?: RawParams, options?: TransitionOptions) => Observable<any> = jasmine.createSpy(
-		"navigateTo"
-	);
-	public navigateToHome: (params?: RawParams) => Observable<any> = jasmine.createSpy("navigateToHome");
-	public navigateToPrevious: () => Observable<any> = jasmine.createSpy("navigateToPrevious");
-	public reload: () => Observable<any> = jasmine.createSpy("reload");
-	public getCurrentStateName: () => string = jasmine.createSpy("getCurrentStateName");
-	public getCurrentState: () => StateObject = jasmine.createSpy("getCurrentState");
-	public getCurrentStateConfig: () => StateDeclaration = jasmine.createSpy("getCurrentStateConfig");
-	public getStatesConfig: () => StateDeclaration[] = jasmine.createSpy("getStatesConfig");
-	public getStateConfigByUrlPath: (urlPath: string) => StarkStateConfigWithParams | undefined = jasmine.createSpy(
-		"getStateConfigByUrlPath"
-	);
-	public getStateDeclarationByStateName: (stateName: string) => StateDeclaration | undefined = jasmine.createSpy(
+export class MockStarkRoutingService implements SpyObj<StarkRoutingService> {
+	public navigateTo: SpyObj<StarkRoutingService>["navigateTo"] = createSpy("navigateTo");
+	public navigateToHome: SpyObj<StarkRoutingService>["navigateToHome"] = createSpy("navigateToHome");
+	public navigateToPrevious: SpyObj<StarkRoutingService>["navigateToPrevious"] = createSpy("navigateToPrevious");
+	public reload: SpyObj<StarkRoutingService>["reload"] = createSpy("reload");
+	public getCurrentStateName: SpyObj<StarkRoutingService>["getCurrentStateName"] = createSpy("getCurrentStateName");
+	public getCurrentState: SpyObj<StarkRoutingService>["getCurrentState"] = createSpy("getCurrentState");
+	public getCurrentStateConfig: SpyObj<StarkRoutingService>["getCurrentStateConfig"] = createSpy("getCurrentStateConfig");
+	public getStatesConfig: SpyObj<StarkRoutingService>["getStatesConfig"] = createSpy("getStatesConfig");
+	public getStateConfigByUrlPath: SpyObj<StarkRoutingService>["getStateConfigByUrlPath"] = createSpy("getStateConfigByUrlPath");
+	public getStateDeclarationByStateName: SpyObj<StarkRoutingService>["getStateDeclarationByStateName"] = createSpy(
 		"getStateDeclarationByStateName"
 	);
-	// tslint:disable-next-line:bool-param-default
-	public getCurrentStateParams: (includeInherited?: boolean) => RawParams = jasmine.createSpy("getCurrentStateParams");
-	public getStateTreeParams: () => Map<string, any> = jasmine.createSpy("getStateTreeParams");
-	public getStateTreeResolves: () => Map<string, any> = jasmine.createSpy("getStateTreeResolves");
-	public getStateTreeData: () => Map<string, any> = jasmine.createSpy("getStateTreeData");
-	public isCurrentUiState: (stateName: string, stateParams?: RawParams) => boolean = jasmine.createSpy("isCurrentUiState");
-	public isCurrentUiStateIncludedIn: (stateName: string, stateParams?: RawParams) => boolean = jasmine.createSpy("includesState");
-	public addKnownNavigationRejectionCause: (rejectionCause: string) => void = jasmine.createSpy("addKnownNavigationRejectionCause");
-	public addTransitionHook: (
-		lifecycleHook: string,
-		matchCriteria: HookMatchCriteria,
-		callback: HookFn,
-		options?: HookRegOptions
-	) => Function = jasmine.createSpy("addTransitionHook");
-	public getTranslationKeyFromState: (stateName: string) => string = jasmine.createSpy("getTranslationKeyFromState");
-
-	public constructor() {
-		// empty constructor
-	}
+	public getCurrentStateParams: SpyObj<StarkRoutingService>["getCurrentStateParams"] = createSpy("getCurrentStateParams");
+	public getStateTreeParams: SpyObj<StarkRoutingService>["getStateTreeParams"] = createSpy("getStateTreeParams");
+	public getStateTreeResolves: SpyObj<StarkRoutingService>["getStateTreeResolves"] = createSpy("getStateTreeResolves");
+	public getStateTreeData: SpyObj<StarkRoutingService>["getStateTreeData"] = createSpy("getStateTreeData");
+	public isCurrentUiState: SpyObj<StarkRoutingService>["isCurrentUiState"] = createSpy("isCurrentUiState");
+	public isCurrentUiStateIncludedIn: SpyObj<StarkRoutingService>["isCurrentUiStateIncludedIn"] = createSpy("includesState");
+	public addKnownNavigationRejectionCause: SpyObj<StarkRoutingService>["addKnownNavigationRejectionCause"] = createSpy(
+		"addKnownNavigationRejectionCause"
+	);
+	public addTransitionHook: SpyObj<StarkRoutingService>["addTransitionHook"] = createSpy("addTransitionHook");
+	public getTranslationKeyFromState: SpyObj<StarkRoutingService>["getTranslationKeyFromState"] = createSpy("getTranslationKeyFromState");
 }

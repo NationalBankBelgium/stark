@@ -8,7 +8,6 @@ import { MatListModule } from "@angular/material/list";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppMenuItemComponent } from "./app-menu-item.component";
-import Spy = jasmine.Spy;
 
 describe("StarkAppMenuItemComponent", () => {
 	let component: StarkAppMenuItemComponent;
@@ -51,7 +50,7 @@ describe("StarkAppMenuItemComponent", () => {
 		};
 		component.level = 1;
 		fixture.detectChanges();
-		(<Spy>mockRoutingService.navigateTo).calls.reset();
+		mockRoutingService.navigateTo.calls.reset();
 	});
 
 	describe("Simple menu item", () => {
