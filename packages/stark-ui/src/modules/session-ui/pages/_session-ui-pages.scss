@@ -11,24 +11,24 @@
   border: solid 1px $divider-color;
   box-shadow: $elevation-2;
 
-  & header {
+  header {
     padding: 16px;
     background-image: url(/assets/images/app-header.png);
     background-position: top right;
     background-repeat: no-repeat;
     border-radius: 2px 2px 0 0;
 
-    & i {
+    i {
       margin: auto;
       display: block;
       width: 200px;
       height: 60px;
-      background: url(/assets/stark-core/logo/stark_logo_transparent.svg) no-repeat;
+      background: url(/assets/stark-core/logo/light/stark_logo_light.svg) no-repeat;
       background-size: 100% 100%;
     }
   }
 
-  & content {
+  content {
     display: block;
     padding: 16px;
     background: #fff;

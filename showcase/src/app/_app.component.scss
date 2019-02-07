@@ -28,12 +28,12 @@
   .stark-app-sidebar {
     .stark-app-sidenav-menu {
       .stark-app-logo {
-        & i {
+        i {
           display: block;
           width: 200px;
           height: 60px;
           margin-top: 0;
-          background-image: url(/assets/stark-core/logo/stark_logo_black.svg);
+          background-image: url(/assets/stark-core/logo/dark/stark_logo_dark.svg);
           background-size: 100% 100%;
         }
       }
