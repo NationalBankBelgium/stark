@@ -33,11 +33,7 @@
                 "output": "./"
               }
             ],
-            "styles": [
-              "node_modules/@nationalbankbelgium/stark-core/assets/css/pre-load-style.css",
-              "src/styles/styles.scss",
-              "src/styles/styles.pcss"
-            ],
+            "styles": ["node_modules/@nationalbankbelgium/stark-core/assets/css/pre-load-style.css", "src/styles/styles.scss"],
             "scripts": [],
             "deployUrl": "",
             "baseHref": "/"
