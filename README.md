@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="packages/stark-core/assets/logo/stark_logo_black.png" alt="Stark : a powerful front-end framework" width="150" height="60">
+	<a href="/packages/stark-core/assets/logo/dark/stark_logo_dark_small.png?raw=true" target="_blank" rel="noopener noreferrer">
+		<img src="/packages/stark-core/assets/logo/dark/stark_logo_dark_small.png?raw=true" alt="Stark: a powerful front-end framework" style="max-width:100%;">
+	</a>
 </p>
 
 > An Angular 6+ based front-end framework built on top of [Angular](https://angular.io)...

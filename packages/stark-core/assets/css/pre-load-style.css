@@ -50,17 +50,21 @@
 
 .stark-preload header {
   padding: 16px;
-  background: #143e74 url("/assets/stark-core/logo/stark_header_bg.png") top right no-repeat;
+  background: #143e74 url(/assets/stark-core/logo/stark_header_bg.png) top right no-repeat;
   border-radius: 2px 2px 0 0;
 }
 
 .stark-preload header i {
-  margin: auto;
   display: block;
+  margin: auto;
+  
   width: 200px;
   height: 60px;
-  background: url("/assets/stark-core/logo/stark_logo_transparent.svg") no-repeat;
-  background-size: 100% 100%;
+  
+  background-image: url(/assets/stark-core/logo/light/stark_logo_light.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .stark-preload .content {
