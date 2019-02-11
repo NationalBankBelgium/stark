@@ -1,94 +1,121 @@
-//set the header image
-.about-background {
+.centered-title {
+  text-align: center;
+  font-size: 17px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+.homepage-item {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  
-  margin-bottom: 20px;
+  box-sizing: border-box;
+  margin: 16px auto;
+}
+
+.doc-subtitle {
+  margin-left: 25px;
+}
+
+.stark-logo{
+  background-image: url(/assets/stark-core/logo/dark/stark_logo_dark.svg);
+  width: 250px;
   height: 100px;
-
-  background-color: mat-color($primary-palette, 900);
-  background-image: url(/assets/stark-core/logo/light/stark_logo_light.svg);
+  background-size: contain;
   background-repeat: no-repeat;
-  background-size: 250px 100px;
-  background-position: center;
+  display: flex;
+  margin: auto;
 }
 
-.light-font {
-  font-weight: normal;
+.mat-icon.homepage-icons{
+  height: 80px;
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
 }
 
-.bottom-margin {
-  margin-bottom: 20px;
+.page-content {
+  margin: 0;
+  overflow: hidden;
 }
 
-//icon with a link to github
-.github-link .github-icon {
-  height: 60px;
-  width: 60px;
-  position: relative;
-  float: right;
+.doc-description {
+  display: flex;
+  margin-left: 25px;
+  margin-right: 25px;
+  max-width: 750px;
+  align-items: stretch;
 
-  svg {
-    fill: #000;
+  p {
+	display: flex;
   }
 }
 
-.information-title {
-  font-size: 21px;
-  color: mat-color($grey-palette, 900);
-  padding-bottom: 0;
-  display: inline-flex;
-  vertical-align: middle;
-  margin: 10px 0 10px 0;
+
+.buttons-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 25px;
+
+  .button.custom-homepage-button {
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	text-decoration: none;
+	height: 40px;
+	font-weight: 600;
+	line-height: 40px;
+	border-radius: 48px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: flex;
+	padding: 0 24px;
+	text-align: center;
+	margin: auto 6px auto 6px;
+	font-size: 12px;
+  }
+  
 }
 
-@media #{$desktop-query} {
-  .about-title {
-    font-size: 55px;
-    margin-left: 25px;
-  }
-
-  .information-title {
-    font-size: 30px;
-  }
-
-  .about-background {
-    height: 150px;
-    background-size: 250px 75px;
-  }
+.section-division {
+  padding-bottom: 20px;
+  padding-top: 20px;
 }
 
-@media #{$tablet-only-query} {
-  .list {
-    font-size: 17px;
-  }
-
-  .about-background {
-    height: 100px;
-    background-size: 250px 75px;
-  }
+.last-section-division{
+  padding-top: 20px;
 }
 
-@media #{$tablet-query} {
-  .stark-app-bar-content-center {
-    align-self: center;
-    margin-bottom: 15px;
+@media #{$tablet-query}{
+
+  .buttons-row{
+	.button.custom-homepage-button {
+	  margin: auto 30px auto 30px;
+	  font-size: 15px;
+	}
   }
-}
+  
+  .mat-icon.homepage-icons{
+	margin-left: 25px;
+	height: 120px;
+	width: 120px;
+	min-width: 120px;
+	max-width: 120px;
+  }
 
-@media #{$mobile-only-query} {
-  .stark-app-bar-page-title {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    
-    width: 100px;
-    height: 30px;
-    max-width: 100%;
+  .homepage-item {
+	flex-direction: row;
+  }
 
-    background-image: url(/assets/stark-core/logo/light/stark_logo_light.svg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+  .centered-title {
+	font-size: 30px;
+	line-height: 50px;
+  }
+
+  .stark-logo{
+	width: 450px;
+	height: 130px;
   }
 }

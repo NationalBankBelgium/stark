@@ -1,31 +1,111 @@
-.first-news-image {
-  background: url("/assets/images/screenshots/showcase-screenshot.png") no-repeat center center;
-  width: 250px;
-  height: 60px;
-  display: inline-block;
-  background-size: contain;
+.fourth-news-image {
+  background: url("/assets/images/news/10.0.0-beta3.PNG");
+}
+
+.third-news-image {
+  background: url("/assets/images/news/10.0.0-beta2.PNG");
 }
 
 .second-news-image {
-  height: 60px;
-  width: 200px;
+  background: url("/assets/images/news/10.0.0-beta1.PNG");
+}
 
+.first-news-image {
   background-image: url(/assets/stark-core/logo/dark/stark_logo_dark.svg);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
-@media #{$desktop-query} {
-  .first-news-image {
-    width: 750px;
-    height: 200px;
+.news-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.custom-homepage-button {
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  text-decoration: none;
+  height: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 30px;
+  color: #fff;
+  background-color: #0063bb;
+  border-radius: 48px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  margin: 15px auto auto auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.top-news news-item {
+  .section-border {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	margin: 16px auto;
+	width: 100%;
+  }
+  .news-item-container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	flex-direction: column;
+  }
+  .news-item-title {
+	width: 100%;
+	font-size: 25px;
+  }
+  .news-item-content {
+	width: 100%;
+	font-size: 15px;
+  }
+  .information {
+	width: 100%;
+	font-size: 13px;
+  }
+  .news-image {
+	min-width: 350px;
+	height: 200px;
+	margin-right: 25px;
   }
 }
 
-@media #{$tablet-only-query} {
-  .first-news-image {
-    width: 500px;
-    height: 100px;
+@media #{$handset-toc-query-screen}{
+  .news-container {
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	display: flex;
   }
+
+  .top-news news-item {
+	.section-border {
+	  flex-direction: column;
+	  width: 290px;
+	  padding: 0 0 0 0;
+	}
+	.news-item-title {
+	  font-size: 15px;
+	}
+	.news-item-content {
+	  font-size: 13px;
+	}
+	.information {
+	  font-size: 12px;
+	}
+	.news-image {
+	  min-width: 290px;
+	  height: 150px;
+	  margin: 0 0 0 0;
+	}
+  }
+  
 }

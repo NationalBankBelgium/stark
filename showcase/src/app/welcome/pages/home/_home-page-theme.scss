@@ -1,0 +1,25 @@
+.mat-icon.core-image {
+  color: mat-color($accent-palette, 500);
+}
+
+.mat-icon.about-image {
+  color: mat-color($primary-palette, 500);
+}
+
+.mat-icon.ui-image {
+  color: mat-color($success-palette, 500);
+}
+
+.mat-icon.showcase-image {
+  color: mat-color($warning-palette, 900);
+}
+
+.custom-homepage-button {
+  color: #fff;
+  background-color: #0063bb;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
+.section-division {
+  border-bottom: 1px solid #bdbdbd;
+}

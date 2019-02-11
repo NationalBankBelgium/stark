@@ -1,40 +1,89 @@
-<span class="stark-section about-background"></span>
-<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_BEFORE_DETAIL' | translate"></p>
-<p class="mat-h4" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_DETAIL' | translate"></p>
-<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_DETAIL_LEGO_BLOCKS' | translate"></p>
-<a class="github-link" href="https://github.com/NationalBankBelgium" target="_blank" rel="noopener noreferrer">
-	<mat-icon class="github-icon" svgIcon="github-circle" starkSvgViewBox></mat-icon>
-</a>
-<p class="mat-body-2 light-font" [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_AFTER_DETAIL' | translate"></p>
+<div class="section-division">
+	<div class="stark-logo"></div>
+	<p class="centered-title" [innerHTML]="'SHOWCASE.HOMEPAGE.INTRODUCTION' | translate"></p>
+	<div class="buttons-row">
+		<a class="button custom-homepage-button" uiSref="getting-started" uiSrefActive="active">
+			{{ "SHOWCASE.HOMEPAGE.GETTING_STARTED" | translate }}
+		</a>
+		<a class="button custom-homepage-button" uiSref="news" uiSrefActive="active">
+			{{ "SHOWCASE.HOMEPAGE.LATEST_NEWS" | translate }}
+		</a>
+	</div>
+</div>
 
-<section class="stark-section bottom-margin">
-	<mat-accordion>
-		<mat-expansion-panel>
-			<mat-expansion-panel-header>
-				<mat-panel-title class="information-title" [innerHTML]="'SHOWCASE.HOMEPAGE.NEWS_TITLE' | translate"></mat-panel-title>
-			</mat-expansion-panel-header>
-			<h2 [innerHTML]="'SHOWCASE.HOMEPAGE.NEWS_DESCRIPTION' | translate"></h2>
-			<div [innerHTML]="'SHOWCASE.HOMEPAGE.NEWS_CONTENT' | translate"></div>
-		</mat-expansion-panel>
-	</mat-accordion>
-</section>
-<section class="stark-section bottom-margin">
-	<mat-accordion>
-		<mat-expansion-panel>
-			<mat-expansion-panel-header>
-				<mat-panel-title class="information-title" [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_MAIN_TITLE' | translate">
-				</mat-panel-title>
-			</mat-expansion-panel-header>
-			<h2 [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_MAIN_DESC' | translate"></h2>
+<div class="page-content">
+	<div class="section-division">
+		<div class="homepage-item">
+			<mat-icon class="about-image homepage-icons" starkSvgViewBox svgIcon="wall"></mat-icon>
+			<div><h2 class="doc-subtitle" [innerHTML]="'SHOWCASE.HOMEPAGE.MAIN_TITLE' | translate"></h2>
+				<div class="doc-description"
+					 [innerHTML]="'SHOWCASE.HOMEPAGE.DESCRIPTION_DETAIL' | translate">
+				</div>
+			</div>
+		</div>
+	</div>
 
-			<h2>Stark Core</h2>
-			<div [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_CORE_DESC' | translate"></div>
-			<br />
-			<h2>Stark UI</h2>
-			<div [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_UI_DESC' | translate"></div>
-			<br />
-			<h2>Showcase</h2>
-			<div [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_SHOWCASE_DESC' | translate"></div>
-		</mat-expansion-panel>
-	</mat-accordion>
-</section>
+	<div class="section-division">
+		<div class="homepage-item">
+
+			<div class="text-block"><h2 class="doc-subtitle">{{ "SHOWCASE.HOMEPAGE.CORE" | translate }}</h2>
+				<div class="doc-description"
+					 [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_CORE_DESC' | translate"></div>
+			</div>
+			<mat-icon class="core-image homepage-icons" starkSvgViewBox svgIcon="atom"></mat-icon>
+		</div>
+		<div class="buttons-row">
+			<a class="button custom-homepage-button" href="https://stark.nbb.be/api-docs/stark-core/latest"
+			   target="_blank"
+			   rel="noopener noreferrer">
+				{{ "SHOWCASE.HOMEPAGE.LATEST_API" | translate }}
+			</a>
+			<a class="button custom-homepage-button"
+			   href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-core" target="_blank"
+			   rel="noopener noreferrer">
+				{{ "SHOWCASE.HOMEPAGE.PREVIOUS_API" | translate }}
+			</a>
+		</div>
+	</div>
+
+	<div class="section-division">
+		<div class="homepage-item">
+			<mat-icon class="ui-image homepage-icons" starkSvgViewBox svgIcon="television-guide"></mat-icon>
+			<div class="text-block"><h2 class="doc-subtitle">{{ "SHOWCASE.HOMEPAGE.UI" | translate }}</h2>
+				<div class="doc-description"
+					 [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_UI_DESC' | translate"></div>
+
+			</div>
+		</div>
+		<div class="buttons-row">
+			<a class="button custom-homepage-button" href="https://stark.nbb.be/api-docs/stark-ui/latest"
+			   target="_blank"
+			   rel="noopener noreferrer">
+				{{ "SHOWCASE.HOMEPAGE.LATEST_API" | translate }}
+			</a>
+			<a class="button custom-homepage-button"
+			   href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/api-docs/stark-ui" target="_blank"
+			   rel="noopener noreferrer">
+				{{ "SHOWCASE.HOMEPAGE.PREVIOUS_API" | translate }}
+			</a>
+		</div>
+	</div>
+
+	<div class="last-section-division">
+		<div class="homepage-item">
+			<div class="text-block"><h2 class="doc-subtitle">{{ "SHOWCASE.HOMEPAGE.SHOWCASE" | translate }}</h2>
+				<div class="doc-description"
+					 [innerHTML]="'SHOWCASE.HOMEPAGE.DOCUMENTATION_SHOWCASE_DESC' | translate">
+				</div>
+			</div>
+			<mat-icon class="showcase-image homepage-icons" starkSvgViewBox svgIcon="theater"></mat-icon>
+		</div>
+		<div class="buttons-row">
+			<a class="button custom-homepage-button"
+			   href="https://github.com/NationalBankBelgium/stark/tree/gh-pages/showcase"
+			   target="_blank" rel="noopener noreferrer">
+				{{ "SHOWCASE.HOMEPAGE.PREVIOUS_VERSIONS" | translate }}
+			</a>
+		</div>
+	</div>
+</div>

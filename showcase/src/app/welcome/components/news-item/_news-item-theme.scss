@@ -1,0 +1,14 @@
+news-item {
+  .news-image {
+	border: 1px solid mat-color($grey-palette, 700);
+	background-color: #fff;
+  }
+
+  .news-item-content {
+	color: mat-color($grey-palette, 900);
+  }
+
+  .information {
+	color: mat-color($grey-palette, 600);
+  }
+}

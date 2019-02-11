@@ -1,23 +1,71 @@
-<div class="mat-display-3 ">Stark news</div>
-<div class="mat-display-1">Discover here the latest news about the Stark framework!</div>
+<div class="mat-display-3 ">What's new in Stark?</div>
 
-<news-item [release]="'10.0.0-beta.0'" [newsDate]="'27/09/2018'">
-	<div class="news-image second-news-image"></div>
-	<h2 class="news-item-title">A very happy occasion</h2>
-	<div class="news-item-content">
-		<p>Stark Logo was born this week!</p>
-		<p>
-			Let's all make a round of applause for our java consultant, Maxime, who had the good idea to mix Angular's pretty logo with the
-			name of our project!
-		</p>
-	</div>
-</news-item>
+<div class="top-news">
+	<news-item [release]="'10.0.0-beta.3'" [newsDate]="'06/02/2019'">
+		<div class="news-image fourth-news-image">
+		</div>
+		<h2 class="news-item-title">10.0.0-beta.3 Released!</h2>
 
-<news-item [release]="'10.0.0-beta.0'" [newsDate]="'19/07/2018'">
-	<div class="news-image first-news-image"></div>
-	<h2 class="news-item-title">Stark News page is finally here!</h2>
-	<div class="news-item-content">
-		<p>The news page is there, get happy!</p>
-		<p>Don't mind me, I'm just an example with a bigger image, just so you know how I look like.</p>
-	</div>
-</news-item>
+		<div class="news-item-content">
+			<p>In this release has been implemented, among others, a very efficient generic search component.
+				New documentation has also been added and some bugs have been fixed.
+				</p>
+			<a class="button custom-homepage-button"
+			   href="https://github.com/NationalBankBelgium/stark/blob/master/CHANGELOG.md#1000-beta3-2019-02-06" target="_blank"
+			   rel="noopener noreferrer">
+				Release Notes
+			</a>
+		</div>
+	</news-item>
+</div>
+
+<div class="news-container">
+	<news-item [release]="'10.0.0-beta.2'" [newsDate]="'14/01/2019'">
+		<div class="news-image third-news-image"></div>
+		<h2 class="news-item-title">10.0.0-beta.2 Released!</h2>
+		<div class="news-item-content">
+			<p>Big changes for Stark: it has been upgraded to Angular 7! New features such as a preloading
+				screen,
+				a session timeout warning, new stylings applicable to Stark table component have been added.
+			</p>
+			<a class="button custom-homepage-button"
+			   href="https://github.com/NationalBankBelgium/stark/blob/master/CHANGELOG.md#1000-beta2-2019-01-14"
+			   target="_blank"
+			   rel="noopener noreferrer">
+				Release Notes
+			</a>
+		</div>
+	</news-item>
+
+	<news-item [release]="'10.0.0-beta.1'" [newsDate]="'09/11/2018'">
+		<div class="news-image second-news-image"></div>
+		<h2 class="news-item-title">10.0.0-beta.1 Released!</h2>
+		<div class="news-item-content">
+			<p>
+				The next release of Stark is available right now! 
+				This release provides lots of packages update, new components such as Message Pane or Minimap, the implementation of a custom error handler, ... 
+			</p>
+			<a class="button custom-homepage-button"
+			   href="https://github.com/NationalBankBelgium/stark/blob/master/CHANGELOG.md#1000-beta1-2018-11-09"
+			   target="_blank"
+			   rel="noopener noreferrer">
+				Release Notes
+			</a>
+		</div>
+	</news-item>
+
+	<news-item [release]="'10.0.0-beta.0'" [newsDate]="'27/09/2018'">
+		<div class="news-image first-news-image"></div>
+		<h2 class="news-item-title">A very happy occasion</h2>
+		<div class="news-item-content">
+			<p>Stark Logo was born this week!</p>
+			<p>
+				Let's all make a round of applause for our java colleague, Maxime, who had the good idea to mix
+				Angular's pretty logo with the name of our project!
+				Thanks also to Carlo, who rearranged it to make it more portable on other browsers such as IE!
+			</p>
+		</div>
+	</news-item>
+
+</div>
+
