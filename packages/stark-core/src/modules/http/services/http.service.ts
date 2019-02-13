@@ -5,9 +5,8 @@ import { Observable, throwError, timer } from "rxjs";
 import { catchError, map, mergeMap, retryWhen } from "rxjs/operators";
 import { Inject, Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
-
-import { StarkHttpService, starkHttpServiceName } from "./http.service.intf";
-
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
+import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 import { StarkHttpHeaders } from "../constants";
 import {
 	StarkCollectionMetadataImpl,
@@ -21,8 +20,9 @@ import {
 	StarkSingleItemResponseWrapper,
 	StarkSingleItemResponseWrapperImpl
 } from "../entities";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
-import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
+import { convertMapIntoObject } from "../../../util/util-helpers";
+import { StarkHttpUtil } from "../../../util/http.util";
+import { StarkHttpService, starkHttpServiceName } from "./http.service.intf";
 
 /**
  *  @ignore
@@ -193,8 +193,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			// serialize returns a pre-stringified json object, Angular will generate a string out of it
 			this.serialize(<P>request.item, request),
 			{
-				params: this.convertMapIntoObject(request.queryParameters),
-				headers: this.convertMapIntoObject(request.headers),
+				params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
+				headers: convertMapIntoObject(request.headers),
 				observe: "response", // full response, not only the body
 				responseType: "json" // body as JSON
 			}
@@ -208,15 +208,15 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 		if (request.requestType === StarkHttpRequestType.UPDATE_IDEMPOTENT) {
 			return this.httpClient.put<P>(requestUrl, requestData, {
-				params: this.convertMapIntoObject(request.queryParameters),
-				headers: this.convertMapIntoObject(request.headers),
+				params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
+				headers: convertMapIntoObject(request.headers),
 				observe: "response", // full response, not only the body
 				responseType: "json" // body as JSON
 			});
 		} else {
 			return this.httpClient.post<P>(requestUrl, requestData, {
-				params: this.convertMapIntoObject(request.queryParameters),
-				headers: this.convertMapIntoObject(request.headers),
+				params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
+				headers: convertMapIntoObject(request.headers),
 				observe: "response", // full response, not only the body
 				responseType: "json" // body as JSON
 			});
@@ -225,8 +225,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 	private performDeleteRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<P>> {
 		return this.httpClient.delete<P>(request.backend.url + "/" + request.resourcePath, {
-			params: this.convertMapIntoObject(request.queryParameters),
-			headers: this.convertMapIntoObject(request.headers),
+			params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
+			headers: convertMapIntoObject(request.headers),
 			observe: "response", // full response, not only the body
 			responseType: "json" // body as JSON
 		});
@@ -234,8 +234,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 	private performGetRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<P>> {
 		return this.httpClient.get<P>(request.backend.url + "/" + request.resourcePath, {
-			params: this.convertMapIntoObject(request.queryParameters),
-			headers: this.convertMapIntoObject(request.headers),
+			params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
+			headers: convertMapIntoObject(request.headers),
 			observe: "response", // full response, not only the body
 			responseType: "json" // body as JSON
 		});
@@ -243,8 +243,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 	private performGetCollectionRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>> {
 		return this.httpClient.get<StarkHttpRawCollectionResponseData<P>>(request.backend.url + "/" + request.resourcePath, {
-			params: this.convertMapIntoObject(request.queryParameters),
-			headers: this.convertMapIntoObject(request.headers),
+			params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
+			headers: convertMapIntoObject(request.headers),
 			observe: "response", // full response, not only the body
 			responseType: "json" // body as JSON
 		});
@@ -256,22 +256,12 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			// Serialize returns a pre-stringified json object, Angular will generate a string out of it
 			Serialize(request.item), // the search criteria comes in the request item
 			{
-				params: this.convertMapIntoObject(request.queryParameters),
-				headers: this.convertMapIntoObject(request.headers),
+				params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
+				headers: convertMapIntoObject(request.headers),
 				observe: "response", // full response, not only the body
 				responseType: "json" // body as JSON
 			}
 		);
-	}
-
-	private convertMapIntoObject(mapObj: Map<string, any>): { [param: string]: any } {
-		const resultObj: { [param: string]: any } = {};
-
-		mapObj.forEach((value: any, key: string) => {
-			resultObj[key] = value;
-		});
-
-		return resultObj;
 	}
 
 	// TODO: return the Angular HttpHeaders or still return our own Map?

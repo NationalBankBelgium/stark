@@ -5,9 +5,12 @@ import SpyObj = jasmine.SpyObj;
 import { autoserialize, autoserializeAs, inheritSerialization, Serialize } from "cerialize";
 import { Observable, of, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
-
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from "@angular/common/http";
+import { convertMapIntoObject } from "../../../util/util-helpers";
+import { StarkHttpUtil } from "../../../util/http.util";
 import { StarkHttpServiceImpl } from "./http.service";
+import { MockStarkLoggingService } from "../../logging/testing";
+import { MockStarkSessionService } from "../../session/testing";
 import {
 	StarkBackend,
 	StarkBackendImpl,
@@ -32,8 +35,6 @@ import {
 
 import { StarkHttpHeaders, StarkSortOrder } from "../constants";
 import { StarkHttpStatusCodes } from "../enumerators";
-import { MockStarkLoggingService } from "../../logging/testing";
-import { MockStarkSessionService } from "../../session/testing";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 
 /* tslint:disable:no-big-function no-duplicate-string max-union-size */
@@ -149,9 +150,7 @@ describe("Service: StarkHttpService", () => {
 	};
 
 	interface HttpRequestOptions {
-		params: {
-			[param: string]: string | string[];
-		};
+		params: HttpParams;
 		headers: {
 			[header: string]: string | string[];
 		};
@@ -471,7 +470,7 @@ describe("Service: StarkHttpService", () => {
 							httpMockMethod,
 							mockResourceFullUrl,
 							{
-								params: convertMapIntoObject(request.queryParameters),
+								params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
 								headers: convertMapIntoObject(headersMap),
 								observe: "response",
 								responseType: "json"
@@ -565,7 +564,7 @@ describe("Service: StarkHttpService", () => {
 							httpMockMethod,
 							mockResourceFullUrl,
 							{
-								params: convertMapIntoObject(request.queryParameters),
+								params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
 								headers: convertMapIntoObject(headersMap),
 								observe: "response",
 								responseType: "json"
@@ -1112,7 +1111,7 @@ describe("Service: StarkHttpService", () => {
 					httpClientMock.post,
 					mockResourceFullUrl,
 					{
-						params: convertMapIntoObject(request.queryParameters),
+						params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
 						headers: convertMapIntoObject(headersMap),
 						observe: "response",
 						responseType: "json"
@@ -1517,16 +1516,6 @@ const mockResourceSerializer: StarkHttpSerializer<MockResource> = new StarkHttpS
 
 function httpHeadersGetter(inputHeaders: { [name: string]: string }): HttpHeaders {
 	return new HttpHeaders(inputHeaders);
-}
-
-function convertMapIntoObject(map: Map<string, any>): { [param: string]: any } {
-	const resultObj: object = {};
-
-	map.forEach((value: any, key: string) => {
-		resultObj[key] = value;
-	});
-
-	return resultObj;
 }
 
 class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P> {
