@@ -96,11 +96,37 @@
       },
       "DIRECTIVES": {
         "INPUT_MASK": {
+          "EMAIL_MASK": {
+            "TITLE": "Email Mask directive",
+            "EMAIL_MASK": "Email",
+            "EMAIL_PLACEHOLDER": "Tapez une adresse email"
+          },
+          "NUMBER_MASK": {
+            "TITLE": "Number Mask directive",
+            "US_DOLLARS_AMOUNT_MASK": "Montant en US Dollars ",
+            "EURO_AMOUNT_MASK": "Montant en Euros",
+            "PERCENTAGE_MASK": "Percentage"
+          },
           "TEXT_MASK": {
             "TITLE": "Text Mask directive",
             "CREDIT_CARD_MASK": "Carte de crédit",
             "STRUCTURED_MESSAGE_MASK": "Message de communication structurée",
-            "CUSTOM_MASK": "Masque personnalisé"
+            "PHONE_NUMBER_MASK": "Numéro de téléphone"
+          },
+          "TIMESTAMP_MASK": {
+            "TITLE": "Timestamp Mask directive",
+            "TIMESTAMP_DMY_MASK": "Horodatage au format JMA",
+            "TIMESTAMP_DMY_PLACEHOLDER": "DD-MM-YYYY HH:mm:ss",
+            "TIMESTAMP_MDY_MASK": "Horodatage au format MJA",
+            "TIMESTAMP_MDY_PLACEHOLDER": "MM-DD-YYYY HH:mm:ss",
+            "FULL_DATE_DMY_MASK": "Date au format JMA",
+            "FULL_DATE_DMY_PLACEHOLDER": "DD-MM-YYYY",
+            "DAY_MONTH_MASK": "Jour-Mois",
+            "DAY_MONTH_PLACEHOLDER": "DD-MM",
+            "MONTH_DAY_MASK": "Mois / Jour",
+            "MONTH_DAY_PLACEHOLDER": "MM/DD",
+            "TIME_MASK": "Temps",
+            "TIME_PLACEHOLDER": "HH:mm:ss"
           },
           "TITLE": "Input Mask directives"
         },

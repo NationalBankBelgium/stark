@@ -33,7 +33,6 @@ import {
 	StarkGenericSearchModule,
 	StarkInputMaskDirectivesModule,
 	StarkKeyboardDirectivesModule,
-	StarkTransformInputDirectiveModule,
 	StarkLanguageSelectorModule,
 	StarkMinimapModule,
 	StarkPaginationModule,
@@ -42,7 +41,8 @@ import {
 	StarkRouteSearchModule,
 	StarkSliderModule,
 	StarkSvgViewBoxModule,
-	StarkTableModule
+	StarkTableModule,
+	StarkTransformInputDirectiveModule
 } from "@nationalbankbelgium/stark-ui";
 import {
 	DemoActionBarPageComponent,
@@ -166,7 +166,7 @@ import {
 		TableWithCustomStylingComponent,
 		DemoToastPageComponent,
 		DemoGenericSearchFormComponent,
-		DemoTransformInputDirectivePageComponent,
+		DemoTransformInputDirectivePageComponent
 	],
 	exports: [
 		DemoActionBarPageComponent,

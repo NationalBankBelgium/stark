@@ -11,7 +11,7 @@ import { StarkTextMasks, StarkTextMaskConfig } from "@nationalbankbelgium/stark-
 export class DemoTextMaskComponent implements OnInit {
 	public creditCardMaskConfig: StarkTextMaskConfig;
 	public structuredMessageMaskConfig: StarkTextMaskConfig;
-	public customMaskConfig: StarkTextMaskConfig;
+	public phoneNumberMaskConfig: StarkTextMaskConfig;
 	public structuredMessage: string;
 	public phoneNumberField: FormControl;
 
@@ -26,7 +26,7 @@ export class DemoTextMaskComponent implements OnInit {
 			mask: StarkTextMasks.STRUCTURED_COMMUNICATION_NUMBER
 		};
 
-		this.customMaskConfig = {
+		this.phoneNumberMaskConfig = {
 			mask: ["(", "+", "3", "2", ")", " ", /\d/, /\d/, /\d/, " ", /\d/, /\d/, " ", /\d/, /\d/, " ", /\d/, /\d/],
 			placeholderChar: "#"
 		};
@@ -36,14 +36,16 @@ export class DemoTextMaskComponent implements OnInit {
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
-		this.phoneNumberField.valueChanges.subscribe((value: string) => this.logger.debug("phoneNumberField value changed: ", value));
+		this.phoneNumberField.valueChanges.subscribe((changedValue: string) =>
+			this.logger.debug("formControl value changed: ", changedValue)
+		);
 	}
 
 	public logChange(event: Event): void {
-		this.logger.debug("creditCard value changed", (<HTMLInputElement>event.srcElement).value);
+		this.logger.debug("input value changed", (<HTMLInputElement>event.srcElement).value);
 	}
 
-	public logModelChange(): void {
-		this.logger.debug("structuredMessage value changed", this.structuredMessage);
+	public logModelChange(model: any): void {
+		this.logger.debug("model value changed", model);
 	}
 }

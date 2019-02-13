@@ -1,39 +1,41 @@
 import { Directive, ElementRef, forwardRef, Inject, Input, OnChanges, Optional, Provider, Renderer2, SimpleChanges } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { MaskedInputDirective, TextMaskConfig as Ng2TextMaskConfig } from "angular2-text-mask";
-import { StarkTextMaskConfig } from "./text-mask-config.intf";
+import { MaskArray } from "text-mask-core";
+import { StarkTimestampMaskConfig } from "./timestamp-mask-config.intf";
+import { createTimestampPipe } from "./timestamp-pipe.fn";
 
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkTextMask]";
+const directiveName: string = "[starkTimestampMask]";
 
 /**
  * @ignore
  */
-export const STARK_TEXT_MASK_VALUE_ACCESSOR: Provider = {
+export const STARK_TIMESTAMP_MASK_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	// tslint:disable-next-line:no-forward-ref
-	useExisting: forwardRef(() => StarkTextMaskDirective),
+	useExisting: forwardRef(() => StarkTimestampMaskDirective),
 	multi: true
 };
 
 /**
- * Directive to display a mask in input elements. This directive internally uses the {@link https://github.com/text-mask/text-mask/tree/master/core|text-mask-core} library
+ * Directive to display a timestamp mask in input elements. This directive internally uses the {@link https://github.com/text-mask/text-mask/tree/master/core|text-mask-core} library
  * to provide the input mask functionality.
  *
- * **`IMPORTANT:`** Currently the Text Mask supports only input of type text, tel, url, password, and search.
+ * **`IMPORTANT:`** Currently the Number Mask supports only input of type text, tel, url, password, and search.
  * Due to a limitation in browser API, other input types, such as email or number, cannot be supported.
  *
  * ### Disabling the mask
- * Passing an `undefined` value as config or a config object with `mask: false` will disable the mask.
+ * Passing an `undefined` value as config to the directive will disable the mask.
  *
  * @example
- * <input type="text" [starkTextMask]="yourMaskConfig">
+ * <input type="text" [starkTimestampMask]="yourMaskConfig">
  * <!-- or -->
- * <input type="text" [(ngModel)]="yourModelValue" [starkTextMask]="yourMaskConfig">
+ * <input type="text" [(ngModel)]="yourModelValue" [starkTimestampMask]="yourMaskConfig">
  * <!-- or -->
- * <input type="text" [formControl]="yourFormControl" [starkTextMask]="yourMaskConfig">
+ * <input type="text" [formControl]="yourFormControl" [starkTimestampMask]="yourMaskConfig">
  *
  */
 @Directive({
@@ -44,31 +46,28 @@ export const STARK_TEXT_MASK_VALUE_ACCESSOR: Provider = {
 		"(compositionend)": "_compositionEnd($event.target.value)"
 	},
 	selector: directiveName,
-	exportAs: "starkTextMask",
-	providers: [STARK_TEXT_MASK_VALUE_ACCESSOR]
+	exportAs: "starkTimestampMask",
+	providers: [STARK_TIMESTAMP_MASK_VALUE_ACCESSOR]
 })
-export class StarkTextMaskDirective extends MaskedInputDirective implements OnChanges {
+export class StarkTimestampMaskDirective extends MaskedInputDirective implements OnChanges {
 	/**
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
 	/* tslint:disable:no-input-rename */
-	@Input("starkTextMask")
-	public maskConfig: StarkTextMaskConfig;
+	@Input("starkTimestampMask")
+	public maskConfig: StarkTimestampMaskConfig;
 
 	/**
 	 * @ignore
 	 */
-	private elementRef: ElementRef;
+	public elementRef: ElementRef;
 
 	/**
 	 * Default configuration.
 	 * It will be merged with the configuration passed to the directive.
 	 */
-	private readonly defaultTextMaskConfig: StarkTextMaskConfig = {
-		mask: false, // by default the mask is disabled
-		guide: true,
-		placeholderChar: "_",
-		keepCharPositions: true
+	private readonly defaultTimestampMaskConfig: StarkTimestampMaskConfig = {
+		format: "DD-MM-YYYY HH:mm:ss"
 	};
 
 	/**
@@ -108,8 +107,41 @@ export class StarkTextMaskDirective extends MaskedInputDirective implements OnCh
 	 * Create a valid configuration to be passed to the MaskedInputDirective
 	 * @param maskConfig - The provided configuration via the directive's input
 	 */
-	public normalizeMaskConfig(maskConfig: StarkTextMaskConfig): Ng2TextMaskConfig {
-		// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
-		return { ...this.defaultTextMaskConfig, ...(<any>maskConfig) };
+	public normalizeMaskConfig(maskConfig: StarkTimestampMaskConfig): Ng2TextMaskConfig {
+		if (typeof maskConfig === "undefined") {
+			return { mask: false }; // remove the mask
+		} else {
+			// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
+			const timestampMaskConfig: StarkTimestampMaskConfig = { ...this.defaultTimestampMaskConfig, ...maskConfig };
+
+			return {
+				pipe: <any>createTimestampPipe(timestampMaskConfig.format),
+				mask: this.convertFormatIntoMask(timestampMaskConfig.format),
+				placeholderChar: "_"
+			};
+		}
+	}
+
+	/**
+	 * Construct a valid Mask out of the given timestamp format string
+	 * @param format - The timestamp format string
+	 */
+	public convertFormatIntoMask(format: string): MaskArray {
+		const mask: MaskArray = [];
+		for (let i: number = 0; i < format.length; i++) {
+			if (
+				format.charAt(i) === "D" ||
+				format.charAt(i) === "M" ||
+				format.charAt(i) === "Y" ||
+				format.charAt(i) === "H" ||
+				format.charAt(i) === "m" ||
+				format.charAt(i) === "s"
+			) {
+				mask[i] = /\d/;
+			} else {
+				mask[i] = format.charAt(i);
+			}
+		}
+		return mask;
 	}
 }
