@@ -94,26 +94,35 @@
         "TITLE": "Stark Generic Search",
         "TOGGLE": "Toggle search"
       },
-      "KEYBOARD_DIRECTIVES": {
-        "ON_ENTER_KEY": {
-          "DESCRIPTION": "Typ een waarde in de invulvelden en druk vervolgens op Enter om de callback functie te activeren",
-          "INPUT_WITH_CONTEXT": "Met verbonden context",
-          "INPUT_WITHOUT_CONTEXT": "Zonder verbonden context (verbonden waarden zijn niet toegankelijk)",
-          "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Zonder verbonden context maar doorgegeven als parameter",
-          "TITLE": "On Enter Key Directive",
-          "TYPE_AND_PRESS_ENTER": "Typ een waarde en druk Enter",
-          "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Typ een waarde, druk Enter en controleer de console"
+      "DIRECTIVES": {
+        "KEYBOARD": {
+          "TITLE": "Keyboard directives",
+          "ON_ENTER_KEY": {
+            "DESCRIPTION": "Typ een waarde in de velden en druk vervolgens op Enter om de callback functie te activeren",
+            "INPUT_WITH_CONTEXT": "Met verbonden context",
+            "INPUT_WITHOUT_CONTEXT": "Zonder verbonden context (verbonden waarden zijn niet toegankelijk)",
+            "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Zonder verbonden context maar doorgegeven als parameter",
+            "TITLE": "On Enter Key Directive",
+            "TYPE_AND_PRESS_ENTER": "Typ een waarde en druk Enter",
+            "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Typ een waarde, druk Enter en controleer de console"
+          },
+          "RESTRICT_INPUT": {
+            "TITLE": "Restrict Input Directive",
+            "DESCRIPTION": "Typ een waarde in de input velden en sommige karakters zullen niet toegelaten worden door de restricties die op het veld werden gezet.",
+            "INPUT_ONLY_NUMBERS": "Aanvaard enkel cijfers",
+            "INPUT_ALPHANUMERICAL_CHARACTERS": "Aanvaard enkel alfanumerische karakters",
+            "INPUT_NO_SPECIAL_CHARACTERS": "Aanvaard alle karakters, behalve speciale karakters",
+            "INPUT_UPPERCASE_CHARACTERS": "Aanvaard enkel hoofdletters"
+          }
         },
-        "RESTRICT_INPUT": {
-          "TITLE": "Restrict Input Directive",
-          "DESCRIPTION": "Typ een waarde in de input velden en sommige karakters zullen niet toegelaten worden door de restricties die op het veld werden gezet.",
-          "INPUT_ONLY_NUMBERS": "Aanvaard enkel cijfers",
-          "INPUT_ALPHANUMERICAL_CHARACTERS": "Aanvaard enkel alfanumerische karakters",
-          "INPUT_NO_SPECIAL_CHARACTERS": "Aanvaard alle karakters, behalve speciale karakters",
-          "INPUT_UPPERCASE_CHARACTERS": "Aanvaard enkel hoofdletters",
-          "TYPE_A_VALUE": "Geef een waarde in"
+        "TRANSFORM": {
+          "TITLE": "Transform Input Directive",
+          "ONLY_UPPER_CASE_LABEL": "Alleen hoofdletters",
+          "ONLY_LOWER_CASE_LABEL": "Alleen kleine letters",
+          "EMOJI_LABEL": "\uD83D\uDE04\uD83D\uDE04\uD83D\uDE04",
+          "EMOJI_EXAMPLE": ":+1: :-1: :smile: :tada: :rocket: :zap:"
         },
-        "TITLE": "Keyboard directive"
+        "TYPE_A_VALUE": "Geef een waarde in"
       },
       "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Taal selector in 'dropdown' mode",
@@ -215,7 +224,7 @@
         "WITH_CUSTOM_COLOR_AND_MENU_CONFIG": "Route Search component met 'menuConfig' en aangepaste kleur"
       },
       "SHARED": {
-        "EXAMPLE_VIEWER_LIST": "Examples and code samples"
+        "EXAMPLE_VIEWER_LIST": "Voorbeelden met code"
       },
       "SIDEBAR": {
         "INTRO": "De preview van deze code is de eigenlijke zijbalk van de showcase",

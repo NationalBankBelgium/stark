@@ -94,26 +94,35 @@
         "TITLE": "Stark Generic Search",
         "TOGGLE": "Toggle search"
       },
-      "KEYBOARD_DIRECTIVES": {
-        "ON_ENTER_KEY": {
-          "DESCRIPTION": "Tapez une valeur dans les entrées, puis appuyez sur Entrée dans l'un d'eux pour déclencher la fonction callback",
-          "INPUT_WITH_CONTEXT": "Avec contexte lié",
-          "INPUT_WITHOUT_CONTEXT": "Sans contexte lié (les valeurs liées ne sont pas accessibles)",
-          "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Sans contexte lié mais passé en paramètre",
-          "TITLE": "On Enter Key Directive",
-          "TYPE_AND_PRESS_ENTER": "Tapez une valeur et appuyez sur Entrée",
-          "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Tapez une valeur, appuyez sur Entrée et vérifiez la console"
+      "DIRECTIVES": {
+        "KEYBOARD": {
+          "TITLE": "Keyboard directives",
+          "ON_ENTER_KEY": {
+            "DESCRIPTION": "Tapez une valeur dans les entrées, puis appuyez sur Entrée dans l'un d'eux pour déclencher la fonction callback",
+            "INPUT_WITH_CONTEXT": "Avec contexte lié",
+            "INPUT_WITHOUT_CONTEXT": "Sans contexte lié (les valeurs liées ne sont pas accessibles)",
+            "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Sans contexte lié mais passé en paramètre",
+            "TITLE": "On Enter Key Directive",
+            "TYPE_AND_PRESS_ENTER": "Tapez une valeur et appuyez sur Entrée",
+            "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Tapez une valeur, appuyez sur Entrée et vérifiez la console"
+          },
+          "RESTRICT_INPUT": {
+            "TITLE": "Restrict Input Directive",
+            "DESCRIPTION": "Tapez une valeur dans les entrées et certains caractères seront prévenus en fonction de l'ensemble de restriction dans chaque champ",
+            "INPUT_ONLY_NUMBERS": "Accepter seulement les nombres",
+            "INPUT_ALPHANUMERICAL_CHARACTERS": "Accepter uniquement les caractères alphanumériques",
+            "INPUT_NO_SPECIAL_CHARACTERS": "Accepter tous les caractères sauf les caractères spéciaux",
+            "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules"
+          }
         },
-        "RESTRICT_INPUT": {
-          "TITLE": "Restrict Input Directive",
-          "DESCRIPTION": "Tapez une valeur dans les entrées et certains caractères seront prévenus en fonction de l'ensemble de restriction dans chaque champ",
-          "INPUT_ONLY_NUMBERS": "Accepter seulement les nombres",
-          "INPUT_ALPHANUMERICAL_CHARACTERS": "Accepter uniquement les caractères alphanumériques",
-          "INPUT_NO_SPECIAL_CHARACTERS": "Accepter tous les caractères sauf les caractères spéciaux",
-          "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules",
-          "TYPE_A_VALUE": "Taper une valeur"
+        "TRANSFORM": {
+          "TITLE": "Transform Input Directive",
+          "ONLY_UPPER_CASE_LABEL": "Uniquement les majuscules",
+          "ONLY_LOWER_CASE_LABEL": "Uniquement les minuscules",
+          "EMOJI_LABEL": "\uD83D\uDE04\uD83D\uDE04\uD83D\uDE04",
+          "EMOJI_EXAMPLE": ":+1: :-1: :smile: :tada: :rocket: :zap:"
         },
-        "TITLE": "Keyboard directive"
+        "TYPE_A_VALUE": "Taper une valeur"
       },
       "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Sélecteur de langue en mode 'dropdown'",

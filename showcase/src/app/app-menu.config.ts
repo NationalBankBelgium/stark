@@ -201,6 +201,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							targetState: "demo-ui.keyboard-directives"
 						},
 						{
+							id: "menu-stark-ui-transform-input",
+							label: "Transform input directive",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-ui.transform-input-directive"
+						},
+						{
 							id: "menu-stark-ui-directives-progress-indicator",
 							label: "Progress indicator",
 							isVisible: true,

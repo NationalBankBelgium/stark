@@ -24,3 +24,4 @@ export * from "./modules/slider";
 export * from "./modules/svg-view-box";
 export * from "./modules/table";
 export * from "./modules/toast-notification";
+export * from "./modules/transform-input-directive";
