@@ -7,6 +7,7 @@ export * from "./date-range-picker";
 export * from "./dropdown";
 export * from "./footer";
 export * from "./generic-search";
+export * from "./input-mask-directives";
 export * from "./keyboard-directives";
 export * from "./language-selector";
 export * from "./logout";

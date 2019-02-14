@@ -51,6 +51,7 @@ const globals = {
 	"@ngx-translate/core": "ngxTranslate.core",
 	"@uirouter/core": "uirouter.core",
 	"@uirouter/angular": "uirouter.angular",
+	"angular2-text-mask": "ng2TextMask",
 	"class-validator": "class-validator",
 	cerialize: "cerialize",
 	ibantools: "ibantools",
@@ -67,6 +68,7 @@ const globals = {
 	"prismjs/components/prism-json.min.js": "Prism.languages.json",
 	"prismjs/components/prism-css-extras.min.js": "Prism.languages.css.selector",
 	"prismjs/components/prism-scss.min.js": "Prism.languages.scss",
+	"text-mask-core": "textMaskCore",
 	uuid: "uuid",
 
 	rxjs: "rxjs",

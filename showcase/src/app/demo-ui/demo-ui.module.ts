@@ -8,6 +8,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -30,6 +31,7 @@ import {
 	StarkDateRangePickerModule,
 	StarkDropdownModule,
 	StarkGenericSearchModule,
+	StarkInputMaskDirectivesModule,
 	StarkKeyboardDirectivesModule,
 	StarkTransformInputDirectiveModule,
 	StarkLanguageSelectorModule,
@@ -51,8 +53,11 @@ import {
 	DemoDateRangePickerPageComponent,
 	DemoDropdownPageComponent,
 	DemoFooterPageComponent,
+	DemoGenericSearchFormComponent,
 	DemoGenericSearchPageComponent,
+	demoGenericSearchReducers,
 	DemoGenericService,
+	DemoInputMaskDirectivesPageComponent,
 	DemoKeyboardDirectivesPageComponent,
 	DemoLanguageSelectorPageComponent,
 	DemoLogoutPageComponent,
@@ -79,8 +84,6 @@ import {
 	TableWithSelectionComponent,
 	TableWithTranscludedActionBarComponent
 } from "./components";
-import { DemoGenericSearchFormComponent, demoGenericSearchReducers } from "./pages/generic-search";
-import { MatExpansionModule } from "@angular/material/expansion";
 
 @NgModule({
 	imports: [
@@ -117,6 +120,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 		StarkDateRangePickerModule,
 		StarkDropdownModule,
 		StarkGenericSearchModule,
+		StarkInputMaskDirectivesModule,
 		StarkKeyboardDirectivesModule,
 		StarkTransformInputDirectiveModule,
 		StarkLanguageSelectorModule,
@@ -143,6 +147,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 		DemoKeyboardDirectivesPageComponent,
 		DemoLanguageSelectorPageComponent,
 		DemoLogoutPageComponent,
+		DemoInputMaskDirectivesPageComponent,
 		DemoMenuPageComponent,
 		DemoMessagePanePageComponent,
 		DemoMinimapPageComponent,
@@ -176,6 +181,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 		DemoKeyboardDirectivesPageComponent,
 		DemoLanguageSelectorPageComponent,
 		DemoLogoutPageComponent,
+		DemoInputMaskDirectivesPageComponent,
 		DemoMenuPageComponent,
 		DemoMessagePanePageComponent,
 		DemoMinimapPageComponent,

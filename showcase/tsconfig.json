@@ -5,7 +5,11 @@
     "outDir": "./dist",
     "declaration": false,
     "lib": ["dom", "dom.iterable", "es2017"],
-    "typeRoots": ["./node_modules/@types", "./node_modules/@nationalbankbelgium/stark-build/typings"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@nationalbankbelgium/stark-build/typings",
+      "./node_modules/@nationalbankbelgium/stark-ui/typings"
+    ],
     "paths": {
       "@angular/*": ["../node_modules/@angular/*"],
       "@nationalbankbelgium/*": ["../node_modules/@nationalbankbelgium/*"]
