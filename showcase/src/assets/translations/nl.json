@@ -96,11 +96,37 @@
       },
       "DIRECTIVES": {
         "INPUT_MASK": {
+          "EMAIL_MASK": {
+            "TITLE": "Email Mask directive",
+            "EMAIL_MASK": "E-mail",
+            "EMAIL_PLACEHOLDER": "Typ een e-mailadres"
+          },
+          "NUMBER_MASK": {
+            "TITLE": "Number Mask directive",
+            "US_DOLLARS_AMOUNT_MASK": "Bedrag in US Dollars ",
+            "EURO_AMOUNT_MASK": "Bedrag in Euros",
+            "PERCENTAGE_MASK": "Percentage"
+          },
           "TEXT_MASK": {
             "TITLE": "Text Mask directive",
             "CREDIT_CARD_MASK": "Kredietkaart",
             "STRUCTURED_MESSAGE_MASK": "Gestructureerde mededeling",
-            "CUSTOM_MASK": "Aangepast masker"
+            "PHONE_NUMBER_MASK": "Telefoonnummer"
+          },
+          "TIMESTAMP_MASK": {
+            "TITLE": "Timestamp Mask directive",
+            "TIMESTAMP_DMY_MASK": "Timestamp in DMJ format",
+            "TIMESTAMP_DMY_PLACEHOLDER": "DD-MM-YYYY HH:mm:ss",
+            "TIMESTAMP_MDY_MASK": "Timestamp in MDJ format",
+            "TIMESTAMP_MDY_PLACEHOLDER": "MM-DD-YYYY HH:mm:ss",
+            "FULL_DATE_DMY_MASK": "Datum in DMJ format",
+            "FULL_DATE_DMY_PLACEHOLDER": "DD-MM-YYYY",
+            "DAY_MONTH_MASK": "Dag-Maand",
+            "DAY_MONTH_PLACEHOLDER": "DD-MM",
+            "MONTH_DAY_MASK": "Maand / Dag",
+            "MONTH_DAY_PLACEHOLDER": "MM/DD",
+            "TIME_MASK": "Tijd",
+            "TIME_PLACEHOLDER": "HH:mm:ss"
           },
           "TITLE": "Input Mask directives"
         },

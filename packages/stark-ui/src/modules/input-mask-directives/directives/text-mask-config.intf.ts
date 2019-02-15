@@ -1,7 +1,7 @@
 import { Mask, PipeFunction } from "text-mask-core";
 
 /**
- * Defines the base configuration for the mask directives provided by Stark.
+ * Defines the base configuration for the mask directives provided by Stark-UI.
  */
 export interface StarkTextMaskBaseConfig {
 	/**
@@ -27,7 +27,7 @@ export interface StarkTextMaskBaseConfig {
 }
 
 /**
- * Defines the configuration for the {@link StarkTextMaskDirective}.
+ * Defines the configuration object for the {@link StarkTextMaskDirective}.
  */
 export interface StarkTextMaskConfig extends StarkTextMaskBaseConfig {
 	/**

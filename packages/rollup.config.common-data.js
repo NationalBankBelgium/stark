@@ -69,6 +69,7 @@ const globals = {
 	"prismjs/components/prism-css-extras.min.js": "Prism.languages.css.selector",
 	"prismjs/components/prism-scss.min.js": "Prism.languages.scss",
 	"text-mask-core": "textMaskCore",
+	"text-mask-addons": "textMaskAddons",
 	uuid: "uuid",
 
 	rxjs: "rxjs",

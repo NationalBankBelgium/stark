@@ -96,11 +96,37 @@
       },
       "DIRECTIVES": {
         "INPUT_MASK": {
+          "EMAIL_MASK": {
+            "TITLE": "Email Mask directive",
+            "EMAIL_MASK": "Email",
+            "EMAIL_PLACEHOLDER": "Type an email address"
+          },
+          "NUMBER_MASK": {
+            "TITLE": "Number Mask directive",
+            "US_DOLLARS_AMOUNT_MASK": "Amount in US Dollars ",
+            "EURO_AMOUNT_MASK": "Amount in Euros",
+            "PERCENTAGE_MASK": "Percentage"
+          },
           "TEXT_MASK": {
             "TITLE": "Text Mask directive",
-            "CREDIT_CARD_MASK": "Credit Card",
-            "STRUCTURED_MESSAGE_MASK": "Structured Communication Message",
-            "CUSTOM_MASK": "Custom Mask"
+            "CREDIT_CARD_MASK": "Credit card",
+            "STRUCTURED_MESSAGE_MASK": "Structured communication message",
+            "PHONE_NUMBER_MASK": "Phone number"
+          },
+          "TIMESTAMP_MASK": {
+            "TITLE": "Timestamp Mask directive",
+            "TIMESTAMP_DMY_MASK": "Timestamp in DMY format",
+            "TIMESTAMP_DMY_PLACEHOLDER": "DD-MM-YYYY HH:mm:ss",
+            "TIMESTAMP_MDY_MASK": "Timestamp in MDY format",
+            "TIMESTAMP_MDY_PLACEHOLDER": "MM-DD-YYYY HH:mm:ss",
+            "FULL_DATE_DMY_MASK": "Date in DMY format",
+            "FULL_DATE_DMY_PLACEHOLDER": "DD-MM-YYYY",
+            "DAY_MONTH_MASK": "Day-Month",
+            "DAY_MONTH_PLACEHOLDER": "DD-MM",
+            "MONTH_DAY_MASK": "Month / Day",
+            "MONTH_DAY_PLACEHOLDER": "MM/DD",
+            "TIME_MASK": "Time",
+            "TIME_PLACEHOLDER": "HH:mm:ss"
           },
           "TITLE": "Input Mask directives"
         },
