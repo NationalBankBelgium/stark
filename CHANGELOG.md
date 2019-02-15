@@ -1,3 +1,31 @@
+<a name="10.0.0-beta.4"></a>
+# [10.0.0-beta.4](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.3...10.0.0-beta.4) (2019-02-15)
+
+
+### Bug Fixes
+
+* **stark-all:** replace the stark logo ([7519ea3](https://github.com/nationalbankbelgium/stark/commit/7519ea3)), closes [#1115](https://github.com/nationalbankbelgium/stark/issues/1115)
+* **stark-core:** correctly encode url parameters ([b55ca8b](https://github.com/nationalbankbelgium/stark/commit/b55ca8b)), closes [/github.com/angular/angular/issues/18261#issuecomment-426383787](https://github.com//github.com/angular/angular/issues/18261/issues/issuecomment-426383787) [#1130](https://github.com/nationalbankbelgium/stark/issues/1130)
+* **stark-demo:** minor fixes in script that replaces baseHref and deployURL in Showcase when deploying to GhPages ([4047429](https://github.com/nationalbankbelgium/stark/commit/4047429))
+* **stark-starter:** remove faulty import from angular.json ([3fcfd0d](https://github.com/nationalbankbelgium/stark/commit/3fcfd0d))
+
+
+### Features
+
+* **stark-ui:** add directive for transforming input value before passing it to a ngControl ([0cf396c](https://github.com/nationalbankbelgium/stark/commit/0cf396c)), closes [#1099](https://github.com/nationalbankbelgium/stark/issues/1099)
+* **stark-ui:** implement directives for email, number and timestamp masks ([3452894](https://github.com/nationalbankbelgium/stark/commit/3452894)), closes [#681](https://github.com/nationalbankbelgium/stark/issues/681) [#682](https://github.com/nationalbankbelgium/stark/issues/682) [#683](https://github.com/nationalbankbelgium/stark/issues/683)
+* **stark-ui:** implement text-mask directive ([f430ad0](https://github.com/nationalbankbelgium/stark/commit/f430ad0)), closes [#680](https://github.com/nationalbankbelgium/stark/issues/680)
+
+
+### BREAKING CHANGES
+
+* **stark-ui:** new `typings` folder in the package containing
+typings for some libraries used by Stark-UI components/directives.
+This must be included in the `typeRoots` of your app `tsconfig.json`:
+`"typeRoots": ["./node_modules/@nationalbankbelgium/stark-ui/typings", ...]`
+
+
+
 <a name="10.0.0-beta.3"></a>
 # [10.0.0-beta.3](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.2...10.0.0-beta.3) (2019-02-06)
 
