@@ -6,10 +6,12 @@ const filesToChange = [
 	/main.*\.css$/,
 	/main.*\.js$/,
 	/main.*\.js\.map$/,
-	/runtime~main.*\.js$/,
-	/runtime~main.*\.js\.map$/,
-	/runtime~polyfills.*\.js$/,
-	/runtime~polyfills.*\.js\.map$/
+	/runtime.*\.js$/,
+	/runtime.*\.js\.map$/,
+	/styles.*\.css$/,
+	/vendor.*\.css$/,
+	/vendor.*\.js$/,
+	/vendor.*\.js\.map$/
 ];
 
 if (process.argv.length <= 2) {
