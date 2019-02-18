@@ -281,7 +281,6 @@ fi
 
 git clone --quiet --depth=1 --branch=${TARGET_BRANCH} ${TARGET_REPO} ${DOCS_WORK_DIR}
 
-logTrace "Copying the API docs"
 API_DOCS_TARGET_DIR_STARK_CORE=${DOCS_WORK_DIR}/${API_DOCS_DIR_NAME}/${STARK_CORE}/${DOCS_VERSION}
 API_DOCS_TARGET_DIR_STARK_CORE_LATEST=${DOCS_WORK_DIR}/${API_DOCS_DIR_NAME}/${STARK_CORE}/${LATEST_DIR_NAME}
 
@@ -290,6 +289,18 @@ API_DOCS_TARGET_DIR_STARK_UI_LATEST=${DOCS_WORK_DIR}/${API_DOCS_DIR_NAME}/${STAR
 
 SHOWCASE_TARGET_DIR=${DOCS_WORK_DIR}/${SHOWCASE}/${DOCS_VERSION}
 SHOWCASE_TARGET_DIR_LATEST=${DOCS_WORK_DIR}/${SHOWCASE}/${LATEST_DIR_NAME}
+
+logTrace "Cleaning all '${LATEST_DIR_NAME}' directories from API docs and showcase..." 2
+rm -rf ${API_DOCS_TARGET_DIR_STARK_CORE_LATEST}
+mkdir -p ${API_DOCS_TARGET_DIR_STARK_CORE_LATEST}
+
+rm -rf ${API_DOCS_TARGET_DIR_STARK_UI_LATEST}
+mkdir -p ${API_DOCS_TARGET_DIR_STARK_UI_LATEST}
+
+rm -rf ${SHOWCASE_TARGET_DIR_LATEST}
+mkdir -p ${SHOWCASE_TARGET_DIR_LATEST}
+
+logTrace "Copying the API docs"
 
 syncOptions=(--archive --delete --ignore-errors --quiet --include="**/**") # we overwrite docs if they're present already for this version
 
