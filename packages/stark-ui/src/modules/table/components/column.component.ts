@@ -129,6 +129,12 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public sortPriority: number;
 
 	/**
+	 * Whether the column is visible or not. Default: true
+	 */
+	@Input()
+	public visible?: boolean = true;
+
+	/**
 	 * A function to generate classNames for cells based on the value, its row and the name of the column.
 	 * Or a static string with the classNames.
 	 */
@@ -286,9 +292,14 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * @returns The classes for the cell.
 	 */
 	public getCellClassNames(row: object): string {
+		if (!this.visible) {
+			return "hidden";
+		}
+
 		if (!this.cellClassName) {
 			return "";
 		}
+
 		if (typeof this.cellClassName === "string") {
 			return this.cellClassName;
 		}
@@ -304,12 +315,18 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public getHeaderClassNames(): string {
 		const classes: string[] = [];
 
+		if (!this.visible) {
+			classes.push("hidden");
+		}
+
 		if (this.sortable) {
 			classes.push("sortable");
 		}
+
 		if (this.filterValue) {
 			classes.push("filtering");
 		}
+
 		if (this.headerClassName) {
 			classes.push(this.headerClassName);
 		}

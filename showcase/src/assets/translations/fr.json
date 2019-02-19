@@ -278,7 +278,8 @@
       "TABLE": {
         "LABELS": {
           "TITLE": "Titre",
-          "DESCRIPTION": "Description"
+          "DESCRIPTION": "Description",
+          "EXTRA_INFO": "Information supplémentaire"
         },
         "REGULAR": "Table régulière",
         "WITH_SELECTION": "Table avec sélection",

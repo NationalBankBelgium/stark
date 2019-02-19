@@ -133,6 +133,7 @@ $warning-palette: (
 );
 
 $mat-light-theme-background: $backgrounds;
+
 $mat-light-theme-foreground: $foregrounds;
 
 @if variable-exists(stark-accent-palette) {

@@ -51,6 +51,11 @@ export interface StarkTableColumnProperties {
 	isSortable?: boolean;
 
 	/**
+	 * Whether the column should initially be shown. Default: true
+	 */
+	isVisible?: boolean;
+
+	/**
 	 * Label to be shown as the column's title. Default: the column's name
 	 */
 	label?: string;
@@ -69,6 +74,7 @@ export interface StarkTableColumnProperties {
 	onClickCallback?: (value: any, row?: object, columnName?: string) => void;
 
 	/**
+	 * @deprecated
 	 * Priority of the column. Default: PERSIST
 	 */
 	priority?: StarkTableColumnPriority;

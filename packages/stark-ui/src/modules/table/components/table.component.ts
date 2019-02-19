@@ -42,6 +42,7 @@ import { StarkPaginateEvent } from "../../pagination/components/paginate-event.i
 import { StarkComponentUtil } from "../../../util/component";
 import { FormControl } from "@angular/forms";
 import { distinctUntilChanged } from "rxjs/operators";
+import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "@nationalbankbelgium/stark-ui";
 
 /**
  * Name of the component
@@ -53,6 +54,15 @@ const componentName: string = "stark-table";
  */
 const defaultFilter: StarkTableFilter = {
 	globalFilterPresent: true
+};
+
+/**
+ * The default values set for StarkTableColumnProperties
+ */
+const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
+	isFilterable: true,
+	isSortable: true,
+	isVisible: true
 };
 
 /**
@@ -73,7 +83,29 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Array of {@link StarkColumnProperties} objects which define the columns of the data table.
 	 */
 	@Input()
-	public columnProperties: StarkTableColumnProperties[] = [];
+	public set columnProperties(input: StarkTableColumnProperties[]) {
+		this._columnProperties = (input || []).map((properties: StarkTableColumnProperties) => ({
+			...DEFAULT_COLUMN_PROPERTIES,
+			...this._columnProperties,
+			...properties
+		}));
+	}
+
+	public get columnProperties(): StarkTableColumnProperties[] {
+		return this._columnProperties;
+	}
+
+	public get _minimapItemProperties(): StarkMinimapItemProperties[] {
+		return this._columnProperties.map(({ name, label }: StarkTableColumnProperties) => ({ name, label: label || name }));
+	}
+
+	public get _visibleMinimapItems(): string[] {
+		return this._columnProperties
+			.filter(({ isVisible }: StarkTableColumnProperties) => isVisible)
+			.map(({ name }: StarkTableColumnProperties) => name);
+	}
+
+	private _columnProperties: StarkTableColumnProperties[] = [];
 
 	/**
 	 * Array of {@link StarkAction} objects.
@@ -147,6 +179,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	@Input()
 	public paginate: boolean = false;
+
+	/**
+	 * Shows or hides the minimap component in the header. When set to 'compact' it shows the compacted minimap
+	 */
+	@Input()
+	public minimap: boolean | StarkMinimapComponentMode = true;
 
 	/**
 	 * {@link StarkPaginationConfig} configuration object for embedded pagination component
@@ -868,6 +906,15 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		} else {
 			// Do nothing
 		}
+	}
+
+	/**
+	 * Toggles the visibility of a column
+	 * @param item - the item containing the name of the column
+	 */
+	public toggleColumnVisibility(item: StarkMinimapItemProperties): void {
+		const index: number = this.columnProperties.findIndex(({ name }: StarkTableColumnProperties) => name === item.name);
+		this.columnProperties[index].isVisible = !this.columnProperties[index].isVisible;
 	}
 
 	/**
