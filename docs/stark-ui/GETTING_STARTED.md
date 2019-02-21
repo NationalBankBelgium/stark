@@ -2,7 +2,7 @@
 
 The recommended way to get started with **Stark** is to download the [starter](../../starter) and run `npm install`.
 
-## Styling
+## <a name="styling"></a>Styling
 
 The starter comes with most things preconfigured meaning that all SCSS files needed for Stark-UI are imported by default via `~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle`:
 
@@ -54,7 +54,7 @@ IMPORTANT: Stark-UI styles are provided as SCSS styles so they should be importe
 @import "../app/app.component";
 ```
 
-## Typings
+## <a name="typings"></a>Typings
 
 Stark-UI also provides some typings for some libraries that are used internally by some components/directives. This are located under the `typings` folder.
 For this reason, you must add these typings to the `typeRoots` in the `tsconfig.json` of your app so that Angular compiler can build your application correctly:
@@ -76,3 +76,89 @@ For this reason, you must add these typings to the `typeRoots` in the `tsconfig.
 ```
 
 **IMPORTANT:** This should always be done even if you don't use such types yourself. As mentioned above, this is used by Stark-UI internally.
+
+## <a name="assets"></a>Assets
+
+### Material Icons
+
+The different features provided by Stark-UI (components and directives) follow the Material Design specs as much as possible. This is the reason why all the components
+are implemented with [Angular Material](https://material.angular.io/) and the icons used are also from the Material Design specs.
+
+In this case, the icons used in Stark-UI are provided by [MaterialDesign-Angular-Material](https://github.com/Templarian/MaterialDesign-Angular-Material) which is an SVG icon set specially
+bundled for Angular Material. You can see the different icons that are available in this icon set at https://materialdesignicons.com/.
+
+Therefore you must add this SVG icon set in your `angular.json` so that it is copied to your application `assets` folder and the Stark-UI components can be rendered correctly:
+
+```text
+"projects": {
+    ...
+    "your-app": {
+        ...
+        "architect": {
+            ...
+            "build": {
+                "options": {
+                    "assets": [
+                        {
+                            "glob": "mdi.svg",
+                            "input": "node_modules/@mdi/angular-material",
+                            "output": "assets/material-icons"
+                        },
+                        ...
+                    ],
+                    ...
+                },
+                ...
+            },
+            ...
+        }
+    }
+}
+```
+
+**IMPORTANT:** This should be done always even if you don't use any of these icons yourself. As mentioned above, these are used by Stark-UI internally.
+
+### Component assets
+
+Some Stark-UI components use certain predefined assets (mainly images) which are provided under the `assets` folder of the package. Therefore in case you use such components than
+you should include those assets in your `angular.json` so that they are copied to your application `assets` folder and the Stark-UI components can be rendered correctly:
+
+```text
+"projects": {
+    ...
+    "your-app": {
+        ...
+        "architect": {
+            ...
+            "build": {
+                "options": {
+                    "assets": [
+                        {
+                            "glob": "**/*",
+                            "input": "node_modules/@nationalbankbelgium/stark-ui/assets/",
+                            "output": "assets/stark-ui"
+                        },
+                        ...
+                    ],
+                    ...
+                },
+                ...
+            },
+            ...
+        }
+    }
+}
+```
+
+**IMPORTANT:** This should be done only in case the Stark-UI component(s) you use requires any of these assets. In case you want to copy just certain assets from Stark-UI,
+make sure that you copy them following this structure in your application `assets` folder:
+
+```text
+|
++---yourApp
+|   +---assets
+|   |   +---stark-ui  // assets from Stark-UI should be available at this location
+|   ...
+```
+
+This will ensure that your application `assets` folder will contain only the assets that are actually used in your app.

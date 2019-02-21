@@ -9,3 +9,5 @@
 
 Stark's build module (aka stark-build) provides the build configurations of the Stark framework.
 It includes our default configuration for webpack, json-server, prettier, stylelint, ...
+
+**[NG CLI Build Customizations](../../docs/stark-build/NG_CLI_BUILD_CUSTOMIZATIONS.md)**

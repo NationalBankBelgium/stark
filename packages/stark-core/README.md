@@ -7,4 +7,6 @@
 
 # Stark Core
 
-Stark's core module (aka stark-core) provides the foundations of the Stark framework.
+Stark's Core module (aka stark-core) provides the foundations of the Stark framework.
+
+**[Getting Started](../../docs/stark-core/GETTING_STARTED.md)**

@@ -9,8 +9,17 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack-partial.dev.js",
+              "mergeStrategies": {
+                "modules.rules": "prepend",
+                "plugins": "prepend",
+                "devServer": "prepend",
+                "replaceDuplicatePlugins": false
+              }
+            },
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.browser.ts",
@@ -19,18 +28,28 @@
             "assets": [
               {
                 "glob": "mdi.svg",
-                "input": "../node_modules/@mdi/angular-material",
-                "output": "./assets/material-icons"
+                "input": "node_modules/@mdi/angular-material",
+                "output": "assets/material-icons"
               },
               {
                 "glob": "**/*",
-                "input": "assets",
-                "output": "./assets"
+                "input": "src/assets",
+                "output": "assets"
               },
               {
                 "glob": "**/*",
-                "input": "assets-base",
-                "output": "./"
+                "input": "src/assets-base",
+                "output": "."
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@nationalbankbelgium/stark-core/assets",
+                "output": "assets/stark-core"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@nationalbankbelgium/stark-ui/assets",
+                "output": "assets/stark-ui"
               }
             ],
             "styles": [
@@ -52,11 +71,18 @@
               ]
             },
             "production": {
+              "customWebpackConfig": {
+                "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack-partial.prod.js",
+                "mergeStrategies": {
+                  "modules.rules": "prepend",
+                  "plugins": "prepend",
+                  "replaceDuplicatePlugins": false
+                }
+              },
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -73,7 +99,6 @@
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -88,12 +113,15 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/dev-server:generic",
           "options": {
-            "browserTarget": "showcase:build"
+            "browserTarget": "showcase:build",
+            "port": 3000,
+            "open": true
           },
           "configurations": {
             "hmr": {
+              "hmr": true,
               "browserTarget": "showcase:build:hmr"
             },
             "production": {
@@ -118,24 +146,48 @@
           }
         },
         "test": {
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "base.spec.ts",
+            "karmaConfig": "./karma.conf.js",
             "tsConfig": "tsconfig.spec.json"
           }
         }
       }
     },
     "showcase-e2e": {
-      "root": "",
+      "root": "e2e/",
       "sourceRoot": "",
-      "projectType": "application"
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "showcase:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "showcase:serve:production"              
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "showcase",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "showcase",
-      "styleext": "pcss"
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "showcase"

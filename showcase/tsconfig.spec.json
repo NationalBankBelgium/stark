@@ -3,5 +3,5 @@
   "compilerOptions": {
     "module": "commonjs"
   },
-  "exclude": ["src/assets"]
+  "exclude": ["src/assets", "dist"]
 }

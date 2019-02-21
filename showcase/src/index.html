@@ -31,14 +31,6 @@
 		<!-- Webpack Dev Server reload -->
 		<script src="/webpack-dev-server.js"></script>
 		<% } %>
-
-		<!-- add this block at the end of the <head> section -->
-		<!-- dllFiles will be filled in by the Dll plugin -->
-		<% if (htmlWebpackPlugin.options.dllFiles) { %>
-		<!-- Webpack DLL CSS files -->
-		<% for (let i = 0; i < htmlWebpackPlugin.options.dllFiles.css.length; ++i) { %>
-		<link href="<%= htmlWebpackPlugin.options.dllFiles.css[i] %>" rel="stylesheet" />
-		<% } %> <% } %>
 	</head>
 	<body class="">
 		<noscript>
@@ -89,15 +81,8 @@
 				if (starkApp) document.body.removeChild(starkApp);
 			}
 		</script>
-		<!-- dllFiles will be filled in by the Dll plugin -->
-		<% if (htmlWebpackPlugin.options.dllFiles) { %>
-		<!-- Webpack DLL JS files -->
-		<% for (let i = 0; i < htmlWebpackPlugin.options.dllFiles.js.length; ++i) { %>
-		<script type="text/javascript" src="<%= htmlWebpackPlugin.options.dllFiles.js[i] %>"></script>
-		<% } %> <% } %>
 
 		<!-- CSS will be injected by webpack here -->
-		<!-- Preload link tags will be injected by webpack here -->
 		<!-- Generated bundle scripts will be injected by webpack here: html-webpack-plugin -->
 	</body>
 </html>
