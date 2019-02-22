@@ -18,7 +18,6 @@
 
   "files": ["public_api.ts"],
 
-  // Unfortunately, all those options have to be written in every tsconfig file
   "angularCompilerOptions": {
     "generateCodeForLibraries": true,
     "skipMetadataEmit": false,

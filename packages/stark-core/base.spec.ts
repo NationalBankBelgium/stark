@@ -5,6 +5,9 @@ import "core-js/es7/reflect";
 import "core-js/stage/4";
 
 /* tslint:disable:no-import-side-effect */
+// FIXME: change when https://github.com/monounity/karma-typescript/issues/320 is resolved
+// tslint:disable-next-line:import-blacklist
+import "lodash-es"; // see https://github.com/monounity/karma-typescript/issues/150#issuecomment-318620280
 import "zone.js/dist/zone";
 import "zone.js/dist/long-stack-trace-zone";
 import "zone.js/dist/proxy"; // since zone.js 0.6.15

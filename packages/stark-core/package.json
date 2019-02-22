@@ -33,6 +33,7 @@
     "@ngrx/store": "^7.1.0",
     "@ngrx/store-devtools": "^7.1.0",
     "@ngx-translate/core": "^11.0.1",
+    "@types/lodash-es": "^4.17.1",
     "@types/node": "^8.10.37",
     "@types/uuid": "^3.4.4",
     "@uirouter/angular": "^3.0.0",
@@ -40,7 +41,7 @@
     "class-validator": "^0.7.3",
     "deep-freeze-strict": "^1.1.1",
     "ibantools": "^2.0.0",
-    "lodash": "^4.17.11",
+    "lodash-es": "^4.17.11",
     "moment": "^2.22.2",
     "uuid": "^3.3.2"
   },

@@ -53,7 +53,6 @@ export class AppComponent implements OnInit {
 		public breakpointObserver: BreakpointObserver
 	) {}
 
-	/* tslint:disable */
 	public ngOnInit(): void {
 		this.logger.debug("app: component loaded");
 		this.mainMenu = APP_MENU_CONFIG;
@@ -73,7 +72,6 @@ export class AppComponent implements OnInit {
 			this.isMenuModeActive = state.matches;
 		});
 	}
-	/* tslint:enable */
 
 	public toggleMenu(): void {
 		this.sidebarService.toggleMenu();

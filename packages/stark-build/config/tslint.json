@@ -164,7 +164,7 @@
       }
     ],
     "no-magic-numbers": false,
-    "import-blacklist": [true, "@angular/material", "lodash", "rxjs/internal", "rxjs/index", "rxjs/Rx"],
+    "import-blacklist": [true, "@angular/material", "lodash", "rxjs/internal", "rxjs/index", "rxjs/Rx", "lodash-es"],
     "ordered-imports": false,
     "max-classes-per-file": false, // [true, 1],
     "prefer-for-of": true,

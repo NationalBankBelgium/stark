@@ -43,7 +43,12 @@ const rawKarmaConfig = {
 			],
 			resolve: {},
 			transforms: [
-				require("karma-typescript-angular2-transform") // see https://github.com/monounity/karma-typescript-angular2-transform
+				//see https://github.com/monounity/karma-typescript/tree/master/packages/karma-typescript-angular2-transform
+				require("karma-typescript-angular2-transform"),
+				//see https://github.com/monounity/karma-typescript/tree/master/packages/karma-typescript-es6-transform
+				require("karma-typescript-es6-transform")({
+					presets: ["babel-preset-env"] // default setting
+				})
 			]
 		},
 		tsconfig: helpers.getAngularCliAppConfig().architect.test.options.tsConfig
