@@ -1,3 +1,4 @@
+import  isEqual  from "lodash-es/isEqual";
 import {
 	AfterViewInit,
 	Component,
@@ -12,19 +13,11 @@ import {
 	SimpleChanges,
 	ViewEncapsulation
 } from "@angular/core";
-
 import * as noUiSliderLibrary from "nouislider";
-
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
-
 import { StarkDOMUtil } from "../../../util/dom/dom.util";
 import { StarkSliderConfig } from "./slider-config.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-
-/**
- * @ignore
- */
-const _isEqual: Function = require("lodash/isEqual");
 
 /**
  * Name of the component
@@ -135,7 +128,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 */
 	public ngOnChanges(onChangesObj: SimpleChanges): void {
 		// cannot compare using slider.get() method because it returns the current formatted values (we need to compare the unencoded values)
-		if (onChangesObj["values"] && !onChangesObj["values"].isFirstChange() && !_isEqual(this.latestUnencodedValues, this.values)) {
+		if (onChangesObj["values"] && !onChangesObj["values"].isFirstChange() && !isEqual(this.latestUnencodedValues, this.values)) {
 			this.updateSliderInstanceValues();
 		}
 	}
@@ -158,7 +151,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 */
 	public attachSliderInstanceUpdateHandler(): void {
 		this.slider.on("update", (_values: string[], _handle: number, unencodedValues: number[]) => {
-			if (!_isEqual(this.values, unencodedValues)) {
+			if (!isEqual(this.values, unencodedValues)) {
 				this.values = unencodedValues;
 				this.latestUnencodedValues = unencodedValues;
 

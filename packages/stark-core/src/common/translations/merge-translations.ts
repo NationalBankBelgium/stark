@@ -1,11 +1,7 @@
 import { TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "./locale.intf";
 import { commonCoreTranslations } from "./common-translations";
-
-/**
- *  @ignore
- */
-const _cloneDeep: Function = require("lodash/cloneDeep");
+import cloneDeep from "lodash-es/cloneDeep";
 
 /**
  * This function can be used by Stark modules to merge their translations into existing translations,
@@ -36,7 +32,7 @@ const _cloneDeep: Function = require("lodash/cloneDeep");
  *   mergeTranslations(this.translateService, english, french, dutch);
  */
 export function mergeTranslations(translateService: TranslateService, ...localesToMerge: StarkLocale[]): void {
-	const currentTranslations: object = _cloneDeep(translateService.translations);
+	const currentTranslations: object = cloneDeep(translateService.translations);
 
 	for (const locale of localesToMerge) {
 		translateService.setTranslation(locale.languageCode, commonCoreTranslations[locale.languageCode], false);

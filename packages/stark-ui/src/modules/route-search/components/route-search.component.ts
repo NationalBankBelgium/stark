@@ -15,11 +15,7 @@ import {
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkRouteSearchEntry } from "../components/route-search-entry.intf";
 import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu/components";
-
-/**
- *  @ignore
- */
-const _sortBy: Function = require("lodash/sortBy");
+import  sortBy  from "lodash-es/sortBy";
 
 /**
  * Name of the component
@@ -298,7 +294,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	 * @returns the sorted array of {@link StarkRouteSearchEntry} objects
 	 */
 	public sortRoutesLabels(routeEntries: StarkRouteSearchEntry[]): StarkRouteSearchEntry[] {
-		routeEntries = _sortBy(routeEntries, ["label"]);
+		routeEntries = sortBy(routeEntries, ["label"]);
 		return routeEntries;
 	}
 

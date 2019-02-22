@@ -42,11 +42,7 @@ import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 import { starkAppExitStateName, starkAppInitStateName } from "../../session/constants";
-
-/**
- * @ignore
- */
-const _isEmpty: Function = require("lodash/isEmpty");
+import isEmpty from "lodash-es/isEmpty";
 
 /**
  * @ignore
@@ -515,7 +511,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 					(pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state))
 				) {
 					const resolvablesData: { [key: string]: any } = this.extractResolvablesData(pathNode.resolvables);
-					const stateResolves: any = _isEmpty(resolvablesData) ? undefined : resolvablesData;
+					const stateResolves: any = isEmpty(resolvablesData) ? undefined : resolvablesData;
 					stateTreeResolves.set(pathNode.state.name, stateResolves);
 				}
 			}
@@ -548,7 +544,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 					pathNode.state !== pathNode.state.root() &&
 					(pathNode.state === this.getCurrentState() || this.isParentState(pathNode.state))
 				) {
-					const stateData: any = _isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
+					const stateData: any = isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
 					stateTreeData.set(pathNode.state.name, stateData);
 				}
 			}

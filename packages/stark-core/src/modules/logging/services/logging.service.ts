@@ -17,11 +17,7 @@ import { StarkFlushLogMessages, StarkLogMessageAction } from "../actions";
 import { selectStarkLogging } from "../reducers";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
-
-/**
- *  @ignore
- */
-const _noop: Function = require("lodash/noop");
+import noop from "lodash-es/noop";
 
 const xsrfServiceNotFound: "not provided" = "not provided";
 
@@ -246,7 +242,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	 */
 	protected getConsole(type: string): Function {
 		const console: any = window && window.console ? window.console : {};
-		const logFn: Function = console[type] || console.log || _noop;
+		const logFn: Function = console[type] || console.log || noop;
 
 		return (...args: any[]): any => {
 			const consoleArgs: any[] = [];

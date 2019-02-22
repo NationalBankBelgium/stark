@@ -1,7 +1,4 @@
-/**
- * @ignore
- */
-const _floor: Function = require("lodash/floor");
+import floor from "lodash-es/floor";
 
 import { isValidBBAN } from "ibantools";
 
@@ -42,7 +39,7 @@ export function starkIsBBAN(bban: string, countryCode: string = ""): boolean {
  */
 function calculateCheckDigit(bbanNumber: string): number {
 	const firstPart: number = parseInt(bbanNumber.substring(0, bbanNumber.length - 2), 10);
-	let checkDigit: number = _floor(firstPart % 97);
+	let checkDigit: number = floor(firstPart % 97);
 	if (checkDigit === 0) {
 		checkDigit = 97;
 	}

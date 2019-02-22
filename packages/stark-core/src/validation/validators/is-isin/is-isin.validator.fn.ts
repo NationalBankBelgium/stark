@@ -1,7 +1,4 @@
-/**
- * @ignore
- */
-const _floor: Function = require("lodash/floor");
+import floor from "lodash-es/floor";
 
 /**
  * @ignore
@@ -45,12 +42,12 @@ export function starkIsISIN(isin: string): boolean {
 				digit *= 2;
 			}
 
-			sum += _floor(digit / modulo);
+			sum += floor(digit / modulo);
 			sum += digit % modulo;
 		}
 
 		const currentCheckDigit: number = parseInt(isin[lengthWithoutCheckDigit], base);
-		const expectedCheckDigit: number = sum % modulo === 0 ? 0 : (_floor(sum / modulo) + 1) * modulo - sum;
+		const expectedCheckDigit: number = sum % modulo === 0 ? 0 : (floor(sum / modulo) + 1) * modulo - sum;
 		isValid = currentCheckDigit === expectedCheckDigit;
 	}
 	return isValid;

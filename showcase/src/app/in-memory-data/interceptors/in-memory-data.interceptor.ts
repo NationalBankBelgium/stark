@@ -2,9 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-
-const _cloneDeep: Function = require("lodash/cloneDeep");
-const _uniqueId: Function = require("lodash/uniqueId");
+import cloneDeep from "lodash-es/cloneDeep";
+import uniqueId from "lodash-es/uniqueId";
 
 export interface HostUrlParts {
 	protocol?: string;
@@ -89,7 +88,7 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 		let modifiedRequest: HttpRequest<any>;
 
 		// add a unique Id to the new item(s) if they don't have any
-		const normalizedBody: any = _cloneDeep(request.body);
+		const normalizedBody: any = cloneDeep(request.body);
 		this.deepSetUniqueId(normalizedBody, "id");
 
 		modifiedRequest = request.clone({
@@ -129,7 +128,7 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 		let modifiedResponse: HttpResponse<any> = httpResponse;
 
 		if (httpResponse.body instanceof Array) {
-			const normalizedBody: any = _cloneDeep(httpResponse.body);
+			const normalizedBody: any = cloneDeep(httpResponse.body);
 
 			modifiedResponse = httpResponse.clone<any>({
 				body: { items: normalizedBody, metadata: {} } // TODO: collection metadata
@@ -154,7 +153,7 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 			}
 		} else if (typeof item === "object") {
 			if (!item.hasOwnProperty(idProperty)) {
-				item[idProperty] = _uniqueId();
+				item[idProperty] = uniqueId();
 			}
 
 			Object.keys(item).forEach((subItem: any) => {
@@ -194,6 +193,6 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 	}
 
 	protected generateXSRFToken(): string {
-		return _uniqueId("xsrf-token-");
+		return uniqueId("xsrf-token-");
 	}
 }

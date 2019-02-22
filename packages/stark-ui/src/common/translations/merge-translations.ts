@@ -1,11 +1,7 @@
+import  merge  from "lodash-es/merge";
 import { TranslateService } from "@ngx-translate/core";
 import { mergeTranslations, StarkLocale } from "@nationalbankbelgium/stark-core";
 import { commonUiTranslations } from "./common-translations";
-
-/**
- *  @ignore
- */
-const _merge: Function = require("lodash/merge");
 
 /**
  * This function can be used by Stark UI modules to merge their translations into existing translations,
@@ -26,7 +22,7 @@ export function mergeUiTranslations(translateService: TranslateService, ...local
 	for (const locale of localesToMerge) {
 		allLocalesToMerge.push({
 			languageCode: locale.languageCode,
-			translations: _merge({}, commonUiTranslations[locale.languageCode], locale.translations)
+			translations: merge({}, commonUiTranslations[locale.languageCode], locale.translations)
 		});
 	}
 

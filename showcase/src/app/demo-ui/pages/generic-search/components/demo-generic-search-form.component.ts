@@ -5,8 +5,8 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { DemoGenericService } from "../services";
 import { take } from "rxjs/operators";
+import isEqual from "lodash-es/isEqual";
 
-const _isEqual: Function = require("lodash/isEqual");
 const componentName: string = "demo-generic-search-form";
 
 @Component({
@@ -60,7 +60,7 @@ export class DemoGenericSearchFormComponent implements OnInit, OnChanges, StarkS
 		if (
 			changes["searchCriteria"] &&
 			!changes["searchCriteria"].isFirstChange() &&
-			!_isEqual(changes["searchCriteria"].previousValue, this.searchCriteria)
+			!isEqual(changes["searchCriteria"].previousValue, this.searchCriteria)
 		) {
 			this.resetSearchForm(this.searchCriteria);
 		}

@@ -31,11 +31,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { FormGroup } from "@angular/forms";
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from "@angular/animations";
 import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
-
-/**
- * @ignore
- */
-const _isEqual: Function = require("lodash/isEqual");
+import  isEqual  from "lodash-es/isEqual";
 
 /**
  * Name of the component
@@ -262,7 +258,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 		if (
 			changesObj["formButtonsConfig"] &&
 			!changesObj["formButtonsConfig"].isFirstChange() &&
-			!_isEqual(this.formButtonsConfig, this.normalizedFormButtonsConfig)
+			!isEqual(this.formButtonsConfig, this.normalizedFormButtonsConfig)
 		) {
 			this.normalizedFormButtonsConfig = this.normalizeFormButtonsConfig(this.formButtonsConfig);
 		}
@@ -270,7 +266,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 		if (
 			changesObj["formActionBarConfig"] &&
 			!changesObj["formActionBarConfig"].isFirstChange() &&
-			!_isEqual(this.formActionBarConfig, this.normalizedFormActionBarConfig)
+			!isEqual(this.formActionBarConfig, this.normalizedFormActionBarConfig)
 		) {
 			this.normalizedFormActionBarConfig = this.normalizeFormActionBarConfig(this.formActionBarConfig);
 			this.actionBarConfig = this.buildActionBarConfig(this.normalizedFormActionBarConfig);

@@ -25,11 +25,8 @@ import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { MatSelectChange } from "@angular/material/select";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
+import  isEqual  from "lodash-es/isEqual";
 
-/**
- * @ignore
- */
-const _isEqual: Function = require("lodash/isEqual");
 
 /**
  * Name of the component
@@ -160,7 +157,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	}
 
 	public set value(value: any | any[]) {
-		if (!_isEqual(this._value, value)) {
+		if (!isEqual(this._value, value)) {
 			this._value = value;
 			this.stateChanges.next();
 		}
