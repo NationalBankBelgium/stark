@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs*/
 import { Inject, Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";

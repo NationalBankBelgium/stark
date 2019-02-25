@@ -1,3 +1,4 @@
+/* tslint:disable:completed-docs*/
 import { Validator } from "class-validator";
 import { StarkValidator } from "./validator.intf";
 import {

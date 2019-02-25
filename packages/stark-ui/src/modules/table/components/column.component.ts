@@ -187,6 +187,9 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		super(renderer, elementRef);
 	}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnInit(): void {
 		this._filterFormCtrl = new FormControl(this.filterValue);
 
@@ -199,6 +202,9 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		});
 	}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnChanges(simpleChanges: SimpleChanges): void {
 		if (
 			simpleChanges["filterValue"] &&
