@@ -83,9 +83,9 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * The directive registers itself with the StarkProgressIndicator service
+	 * The directive registers itself with the StarkProgressIndicator service.
 	 * The component to add is then created and inserted inside of the container.
-	 * Finally, if the component should be hidden or shown, the stark-hide class is removed or add from it according to the wanted result
+	 * Finally, if the component should be hidden or shown, the stark-hide class is removed/added accordingly
 	 */
 	public ngOnInit(): void {
 		this.registerInstance(this.starkProgressIndicator);
@@ -108,6 +108,9 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 		});
 	}
 
+	/**
+	 * The directive de-registers itself from the StarkProgressIndicator service when it is destroyed.
+	 */
 	public ngOnDestroy(): void {
 		this._viewContainer.clear();
 		this.progressSubscription.unsubscribe();
