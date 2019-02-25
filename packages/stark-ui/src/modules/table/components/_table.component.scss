@@ -32,13 +32,37 @@
     }
   }
 
+  .table-container {
+    overflow: auto;
+
+    &,
+    &:focus,
+    &:hover,
+    &:active {
+      outline: none;
+    }
+  }
+
+  .mat-table-sticky:first-child {
+    padding-right: 10px;
+    border-right: 1px solid rgba(0, 0, 0, 0.12); // material-default
+  }
+
+  .mat-table-sticky:last-child {
+    padding-left: 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.12); // material-default
+  }
+
   table {
-    width: 100%;
+    min-width: 100%;
 
     td,
     th {
       &.hidden {
         display: none;
+      }
+      .stark-action-bar .action-bar-wrapper {
+        flex-wrap: nowrap;
       }
     }
 

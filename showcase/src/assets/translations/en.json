@@ -287,6 +287,7 @@
         "WITH_FIXED_HEADER": "Table with fixed header",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
         "WITH_CUSTOM_STYLING": "Table with custom styling",
+        "WITH_FIXED_ACTIONS": "Table with fixed row actions",
         "TITLE": "Table"
       },
       "TOAST": {
