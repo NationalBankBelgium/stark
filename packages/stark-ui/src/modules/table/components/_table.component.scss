@@ -22,11 +22,25 @@
       &.actions-alt {
         flex-direction: row-reverse;
       }
+
+      stark-minimap {
+        mat-icon {
+          width: 18px;
+          height: 18px;
+        }
+      }
     }
   }
 
   table {
     width: 100%;
+
+    td,
+    th {
+      &.hidden {
+        display: none;
+      }
+    }
 
     th {
       .priority {

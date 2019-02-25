@@ -1,13 +1,48 @@
 <h1 class="mat-display-2" translate>SHOWCASE.DEMO.MINIMAP.TITLE</h1>
 <section class="stark-section">
 	<example-viewer [extensions]="['HTML', 'TS']" filesPath="minimap/full" exampleTitle="SHOWCASE.DEMO.MINIMAP.FULL">
-		<stark-minimap [items]="items" [visibleItems]="visibleItems" (showHideItem)="showHideItem($event)"></stark-minimap>
+		<div fxLayout="row" fxLayoutAlign="space-between center">
+			<stark-minimap [items]="items" [visibleItems]="visibleItems" (showHideItem)="showHideItem($event)"></stark-minimap>
+			<stark-minimap
+				[items]="items"
+				[visibleItems]="visibleItems"
+				(showHideItem)="showHideItem($event)"
+				color="primary"
+			></stark-minimap>
+			<stark-minimap
+				[items]="items"
+				[visibleItems]="visibleItems"
+				(showHideItem)="showHideItem($event)"
+				color="accent"
+			></stark-minimap>
+		</div>
 	</example-viewer>
 </section>
 
 <section class="stark-section">
 	<example-viewer [extensions]="['HTML', 'TS']" filesPath="minimap/compact" exampleTitle="SHOWCASE.DEMO.MINIMAP.COMPACT">
-		<stark-minimap mode="compact" [items]="items" [visibleItems]="visibleItems" (showHideItem)="showHideItem($event)"></stark-minimap>
+		<div fxLayout="row" fxLayoutAlign="space-between center">
+			<stark-minimap
+				mode="compact"
+				[items]="items"
+				[visibleItems]="visibleItems"
+				(showHideItem)="showHideItem($event)"
+			></stark-minimap>
+			<stark-minimap
+				mode="compact"
+				[items]="items"
+				[visibleItems]="visibleItems"
+				(showHideItem)="showHideItem($event)"
+				color="primary"
+			></stark-minimap>
+			<stark-minimap
+				mode="compact"
+				[items]="items"
+				[visibleItems]="visibleItems"
+				(showHideItem)="showHideItem($event)"
+				color="accent"
+			></stark-minimap>
+		</div>
 	</example-viewer>
 </section>
 

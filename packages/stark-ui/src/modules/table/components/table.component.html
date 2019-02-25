@@ -18,7 +18,7 @@
 				svgIcon="sort"
 			></mat-icon>
 		</button>
-		<div *ngIf="filter.globalFilterPresent">
+		<ng-container *ngIf="filter.globalFilterPresent">
 			<button [matMenuTriggerFor]="globalFilter" mat-icon-button>
 				<mat-icon
 					[matTooltip]="'STARK.TABLE.FILTER' | translate"
@@ -27,7 +27,6 @@
 					svgIcon="filter"
 				></mat-icon>
 			</button>
-
 			<mat-menu class="mat-table-filter" #globalFilter="matMenu" xPosition="before" [overlapTrigger]="false">
 				<div>
 					<mat-form-field
@@ -53,7 +52,15 @@
 					</button>
 				</div>
 			</mat-menu>
-		</div>
+		</ng-container>
+		<stark-minimap
+			[matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate"
+			*ngIf="minimap !== false"
+			[mode]="minimap === 'compact' ? 'compact' : undefined"
+			[items]="_minimapItemProperties"
+			[visibleItems]="_visibleMinimapItems"
+			(showHideItem)="toggleColumnVisibility($event)"
+		></stark-minimap>
 	</div>
 </div>
 
@@ -87,6 +94,7 @@
 			[sortPriority]="getColumnSortingPriority(col.name)"
 			[filterable]="col.isFilterable"
 			[filterValue]="getColumnFilterValue(col.name)"
+			[visible]="col.isVisible"
 			[compareFn]="col.compareFn"
 			[cellFormatter]="col.cellFormatter"
 			[cellClassName]="col.cellClassName"

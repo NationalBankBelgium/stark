@@ -137,7 +137,7 @@ describe("TableComponent", () => {
 		});
 
 		it("should NOT have any inputs set", () => {
-			expect(component.columnProperties).toBe(hostComponent.columnProperties);
+			expect(component.columnProperties).toEqual([]);
 			expect(component.data).toBe(hostComponent.dummyData);
 			expect(component.filter).toBeDefined(); // the default filter is set
 			expect(component.fixedHeader).toBe(hostComponent.fixedHeader);
@@ -742,6 +742,39 @@ describe("TableComponent", () => {
 				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "!" }] }, [mockData[11]]);
 				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "=" }] }, [mockData[12]]);
 				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "+" }] }, [mockData[13]]);
+			});
+		});
+	});
+
+	describe("column visibility", () => {
+		const columns: StarkTableColumnProperties[] = [{ name: "a" }, { name: "b", isVisible: false }, { name: "c", isVisible: true }];
+		const data: any = [{ a: 1, b: "b1", c: "c1" }, { a: 2, b: "b2", c: "c2" }, { a: 3, b: "b3", c: "c3" }];
+		beforeEach(() => {
+			hostComponent.columnProperties = columns;
+			hostComponent.dummyData = data;
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+
+		it("column a should be visible and column b hidden", () => {
+			const tableHeaderElements: NodeListOf<HTMLTableHeaderCellElement> = hostFixture.nativeElement.querySelectorAll("table th");
+			expect(tableHeaderElements.length).toBe(columns.length); // Will fail when columns are not rendered instead of hidden
+
+			tableHeaderElements.forEach((tableHeaderElement: HTMLTableHeaderCellElement) => {
+				const text: string = (tableHeaderElement.textContent || "").trim();
+				const column: StarkTableColumnProperties | undefined = hostComponent.columnProperties.find(
+					({ name }: StarkTableColumnProperties) => name === text
+				);
+				expect(column).toBeTruthy();
+				if (!column) {
+					return;
+				}
+
+				const isHidden: boolean = tableHeaderElement.classList.contains("hidden");
+				expect(isHidden).toBe(
+					column.isVisible === false,
+					`th of column "${column.name}" should be ${column.isVisible === false ? "hidden" : "visible"}`
+				);
 			});
 		});
 	});

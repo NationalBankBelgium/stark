@@ -1,25 +1,22 @@
 // tslint:disable:completed-docs
 import { StarkMinimapComponent } from "./minimap.component";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, inject, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { HAMMER_LOADER } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { Component, EventEmitter, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Subject } from "rxjs";
-import { ItemVisibility } from "./item-visibility.intf";
-import createSpyObj = jasmine.createSpyObj;
-import SpyObj = jasmine.SpyObj;
+import { MatMenuModule } from "@angular/material/menu";
+import { OverlayContainer } from "@angular/cdk/overlay";
 
 @Component({
 	selector: `host-component`,
 	template: `
-		<stark-minimap [visibleItems]="visibleItems" [items]="items"></stark-minimap>
+		<stark-minimap [visibleItems]="visibleItems" [items]="items" [mode]="mode" (showHideItem)="onShowHideItem($event)"></stark-minimap>
 	`
 })
 class TestHostComponent {
@@ -27,22 +24,34 @@ class TestHostComponent {
 	public minimapComponent: StarkMinimapComponent;
 	public items: StarkMinimapItemProperties[];
 	public visibleItems: string[];
+	public mode: string;
+
+	public onShowHideItem(_item: StarkMinimapItemProperties): void {
+		/*noop*/
+	}
 }
 
-/* tslint:disable:no-big-function */
 describe("MinimapComponent", () => {
 	let component: StarkMinimapComponent;
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;
-	let defaultItem: StarkMinimapItemProperties;
-	let defaultItemVisibility: ItemVisibility;
+	// Rendered menu context
+	let overlayContainer: OverlayContainer;
+	let overlayContainerElement: HTMLElement;
+	// Values
+	const items: StarkMinimapItemProperties[] = [
+		{ name: "column1", label: "Column 1" },
+		{ name: "column2", label: "Column 2" },
+		{ name: "column3", label: "Column 3" },
+		{ name: "column4", label: "Column 4" }
+	];
+	const visibleItems: string[] = ["column1", "column2"];
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			imports: [FormsModule, MatCheckboxModule, MatTooltipModule, NoopAnimationsModule, TranslateModule.forRoot()],
+			imports: [FormsModule, MatCheckboxModule, MatTooltipModule, MatMenuModule, NoopAnimationsModule, TranslateModule.forRoot()],
 			declarations: [StarkMinimapComponent, TestHostComponent],
 			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				TranslateService,
 				{
 					// See https://github.com/NationalBankBelgium/stark/issues/1088
@@ -55,6 +64,12 @@ describe("MinimapComponent", () => {
 	}));
 
 	beforeEach(() => {
+		// OverlayContainer needs to be injected to get the context for the rendered menu dropdown
+		inject([OverlayContainer], (oc: OverlayContainer) => {
+			overlayContainer = oc;
+			overlayContainerElement = overlayContainer.getContainerElement();
+		})();
+
 		hostFixture = TestBed.createComponent(TestHostComponent);
 		hostComponent = hostFixture.componentInstance;
 		hostFixture.detectChanges();
@@ -62,51 +77,84 @@ describe("MinimapComponent", () => {
 		component = hostComponent.minimapComponent;
 	});
 
-	describe("on initialization", () => {
-		it("should set internal component properties", () => {
-			expect(hostFixture).toBeDefined();
-			expect(component).toBeDefined();
-
-			expect(component.logger).not.toBeNull();
-			expect(component.logger).toBeDefined();
-			expect(component.items).toBeUndefined();
-			expect(component.visibleItems).toBeUndefined();
-		});
+	// Prepare hostComponent
+	beforeEach(() => {
+		hostComponent.items = items;
+		hostComponent.visibleItems = visibleItems;
+		spyOn(hostComponent, "onShowHideItem");
+		hostFixture.detectChanges();
 	});
 
-	describe("toggleDropdownMenu", () => {
-		it("should set TRUE if customMenu is displayed", () => {
-			component.isDisplayedMenu = false;
-			component.toggleDropdownMenu();
-			expect(component.isDisplayedMenu).toBe(true);
+	describe("Configuration", () => {
+		let menuElement: HTMLElement | null;
+		let menuItemLabels: NodeListOf<HTMLLabelElement>;
+
+		beforeEach(() => {
+			// Open Menu
+			const button: HTMLButtonElement = hostFixture.nativeElement.querySelector("button");
+			button.click();
+			hostFixture.detectChanges();
+
+			menuElement = overlayContainerElement.querySelector(".mat-menu-panel");
+			menuItemLabels = overlayContainerElement.querySelectorAll(".mat-menu-panel .mat-menu-content .mat-menu-item label");
 		});
 
-		it("should set FALSE if customMenu is hidden", () => {
-			component.isDisplayedMenu = true;
-			component.toggleDropdownMenu();
-			expect(component.isDisplayedMenu).toBe(false);
-		});
-	});
-
-	describe("getItemLabel", () => {
-		it("should return the label of item when it is declared in minimapItemsProperties", () => {
-			const getItemLabel: string = component.getItemLabel({ name: "column1", label: "Test label" });
-			expect(getItemLabel).toEqual("Test label");
+		it("clicking button should open menu", () => {
+			expect(menuElement).toBeTruthy("menu should have opened");
+			expect(menuItemLabels.length).toBe(items.length, "menu should show a label for all items");
 		});
 
-		it("should return the item name of item when it is not declared in minimapItemsProperties", () => {
-			const getItemLabel: string = component.getItemLabel({ name: "column2" });
-			expect(getItemLabel).toEqual("column2");
+		it("correct items should be checked", () => {
+			expect(menuItemLabels.length).toBe(items.length);
+			menuItemLabels.forEach((labelElement: HTMLLabelElement) => {
+				const textContainer: HTMLElement | null = labelElement.querySelector(".mat-checkbox-label");
+				expect(textContainer).toBeTruthy("mat-checkbox-label should exist");
+				const text: string = ((textContainer && textContainer.textContent) || "").trim();
+
+				const inputElement: HTMLInputElement | null = labelElement.querySelector("input");
+				expect(inputElement).toBeTruthy("input element should exist");
+				const isChecked: boolean = (inputElement && inputElement.checked) || false;
+
+				const item: StarkMinimapItemProperties | undefined = items.find(({ label }: StarkMinimapItemProperties) => label === text);
+				expect(item).toBeTruthy("text content should match a label");
+				const name: string = (item && item.name) || "";
+
+				const isVisible: boolean = visibleItems.includes(name);
+
+				expect(isChecked).toBe(isVisible, `input for "${name}" should${isVisible ? " " : " not "}be checked.`);
+			});
+		});
+
+		it("full view should render by default", () => {
+			expect(component.mode).toBeFalsy();
+
+			const dotsElement: HTMLElement | null = hostFixture.nativeElement.querySelector("stark-minimap .stark-minimap-dots");
+			expect(dotsElement).toBeTruthy("should have dots");
+			if (!dotsElement) {
+				return;
+			}
+
+			const dotElements: NodeListOf<HTMLElement> = dotsElement.querySelectorAll(".stark-minimap-dot");
+			expect(dotElements.length).toBe(items.length);
+		});
+
+		it("compact view should be rendered", () => {
+			hostComponent.mode = "compact";
+			hostFixture.detectChanges();
+
+			const dotsElement: HTMLElement | null = hostFixture.nativeElement.querySelector("stark-minimap .stark-minimap-dots");
+			console.log(dotsElement);
+			expect(dotsElement).toBeNull("compact view should not have dots");
 		});
 	});
 
 	describe("isItemVisible", () => {
+		let defaultItem: StarkMinimapItemProperties;
+
 		beforeEach(() => {
 			component.items = [];
 			component.visibleItems = [];
-			defaultItem = {
-				name: "item"
-			};
+			defaultItem = { name: "item" };
 		});
 
 		it("should return FALSE if item is NOT present in visibleItems array", () => {
@@ -121,28 +169,35 @@ describe("MinimapComponent", () => {
 		});
 	});
 
-	describe("triggerShowHideItem", () => {
+	describe("Events", () => {
+		let menuItemLabels: NodeListOf<HTMLLabelElement>;
+
 		beforeEach(() => {
-			defaultItem = {
-				name: "item"
-			};
-			defaultItemVisibility = {
-				isVisible: true,
-				item: {
-					name: "item"
-				}
-			};
+			(<jasmine.Spy>hostComponent.onShowHideItem).calls.reset();
+
+			// Open Menu
+			const button: HTMLButtonElement = hostFixture.nativeElement.querySelector("button");
+			button.click();
+			hostFixture.detectChanges();
+
+			menuItemLabels = overlayContainerElement.querySelectorAll(" .mat-menu-panel .mat-menu-content .mat-menu-item label");
 		});
 
-		it("should trigger the callback showHideItem method with item as argument if callback is defined", () => {
-			const showHideItemSpy: SpyObj<EventEmitter<any>> = createSpyObj("showHideItem", ["emit"]);
-			component.items = [];
-			component.visibleItems = [];
-			component.showHideItem = <any>showHideItemSpy;
-			component.triggerShowHideItem(defaultItem);
+		it("event should be triggered with correct item for each label click", () => {
+			expect(menuItemLabels.length).toBe(items.length);
 
-			expect(showHideItemSpy.emit).toHaveBeenCalledTimes(1);
-			expect(showHideItemSpy.emit).toHaveBeenCalledWith(defaultItemVisibility);
+			menuItemLabels.forEach((labelElement: HTMLLabelElement) => {
+				const textContainer: HTMLElement | null = labelElement.querySelector(".mat-checkbox-label");
+				expect(textContainer).toBeTruthy("mat-checkbox-label should exist");
+				const text: string = ((textContainer && textContainer.textContent) || "").trim();
+				const expectedItem: StarkMinimapItemProperties | undefined = items.find(
+					({ label }: StarkMinimapItemProperties) => label === text
+				);
+				labelElement.click();
+				expect(hostComponent.onShowHideItem).toHaveBeenCalledWith(expectedItem);
+			});
+
+			expect(hostComponent.onShowHideItem).toHaveBeenCalledTimes(items.length);
 		});
 	});
 });

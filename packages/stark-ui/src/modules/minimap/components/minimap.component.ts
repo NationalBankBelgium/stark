@@ -1,21 +1,5 @@
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import {
-	ApplicationRef,
-	Component,
-	ElementRef,
-	EventEmitter,
-	Inject,
-	Input,
-	OnDestroy,
-	OnInit,
-	Output,
-	Renderer2,
-	ViewEncapsulation
-} from "@angular/core";
-
-import { ItemVisibility } from "./item-visibility.intf";
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewEncapsulation } from "@angular/core";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
-import { StarkDOMUtil } from "../../../util/dom";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 export type StarkMinimapComponentMode = "compact";
@@ -37,18 +21,18 @@ const componentName: string = "stark-minimap";
 		class: componentName
 	}
 })
-export class StarkMinimapComponent extends AbstractStarkUiComponent implements OnInit, OnDestroy {
+export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	/**
 	 * Array of StarkMinimapItemProperties objects which define the items to display in the minimap.
 	 */
 	@Input()
-	public items: StarkMinimapItemProperties[];
+	public items: StarkMinimapItemProperties[] = [];
 
 	/**
 	 * Array of names of the items that are visible.
 	 */
 	@Input()
-	public visibleItems: string[];
+	public visibleItems: string[] = [];
 
 	/**
 	 * the minimap mode we want to display
@@ -60,107 +44,38 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent implements O
 	 * Output that will emit the selected element to be shown/hidden
 	 */
 	@Output()
-	public showHideItem: EventEmitter<ItemVisibility> = new EventEmitter<ItemVisibility>();
+	public showHideItem: EventEmitter<StarkMinimapItemProperties> = new EventEmitter<StarkMinimapItemProperties>();
 
 	public windowClickHandler: EventListener;
 	public isDisplayedMenu: boolean;
 
-	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef,
-		protected applicationRef: ApplicationRef
-	) {
+	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
 		super(renderer, elementRef);
-	}
-
-	public ngOnInit(): void {
-		super.ngOnInit();
-		this.isDisplayedMenu = false;
-		this.attachWindowClickHandler();
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnDestroy(): void {
-		this.logger.debug(componentName + ": removing clickHandler");
-		this.removeWindowClickHandler();
-	}
-
-	/**
-	 * Retrieve the label of an item
-	 * @param itemToHandle - the item whose label we want to retrieve
-	 * @returns the label of the item
-	 */
-	public getItemLabel(itemToHandle: StarkMinimapItemProperties): string {
-		if (itemToHandle.label) {
-			return itemToHandle.label;
-		}
-
-		return itemToHandle.name;
-	}
-
-	/**
-	 * Attach a handler when a click is performed on the window
-	 */
-	public attachWindowClickHandler(): void {
-		this.windowClickHandler = (event: Event) => {
-			if (this.isDisplayedMenu) {
-				const parentElement: Element | undefined = StarkDOMUtil.searchParentElementByClass(
-					<Element>event.target,
-					"stark-minimap-dropdown-toggle"
-				);
-
-				if (!parentElement) {
-					this.toggleDropdownMenu();
-					this.applicationRef.tick();
-				}
-			}
-		};
-
-		window.addEventListener("click", this.windowClickHandler);
-	}
-
-	/**
-	 * remove the handler attached to a window
-	 */
-	public removeWindowClickHandler(): void {
-		window.removeEventListener("click", this.windowClickHandler);
 	}
 
 	/**
 	 * Return true/false if the given item is already visible or if the priority (if specified) for such item is not "hidden"
 	 * Otherwise, the item is considered to be hidden by default
 	 */
-	public isItemVisible(itemToHandle: StarkMinimapItemProperties): boolean {
-		return this.visibleItems instanceof Array ? this.visibleItems.indexOf(itemToHandle.name) > -1 : false;
+	public isItemVisible(item: StarkMinimapItemProperties): boolean {
+		return this.visibleItems.indexOf(item.name) > -1;
 	}
 
 	/**
-	 * Display / Hide the dropdown menu
+	 * Prevents click event from propagating (/closing the menu) and emits an event
+	 * @param event - the event that was triggered by default (and needs to be stopped)
+	 * @param item - the item that was clicked
 	 */
-	public toggleDropdownMenu(): void {
-		this.isDisplayedMenu = !this.isDisplayedMenu;
-	}
-
-	/**
-	 * triggers the show/hide event on an item
-	 * @param itemToHandle : item - the item to show/hide
-	 */
-	public triggerShowHideItem(itemToHandle: StarkMinimapItemProperties): void {
-		const visibleItem: ItemVisibility = {
-			isVisible: !this.isItemVisible(itemToHandle),
-			item: itemToHandle
-		};
-		this.showHideItem.emit(visibleItem);
+	public handleCheckboxClick(event: Event, item: StarkMinimapItemProperties): void {
+		event.stopPropagation();
+		event.preventDefault();
+		this.showHideItem.emit(item);
 	}
 
 	/**
 	 * @ignore
 	 */
-	public trackItemFn(_itemToHandle: any): string {
-		// FIXME: cannot call areSimpleTypes() from the component since this track function gets no context
-		return _itemToHandle;
+	public trackItemFn(item: StarkMinimapItemProperties): string {
+		return item.name;
 	}
 }

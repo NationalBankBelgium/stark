@@ -33,7 +33,8 @@ export const translationsNl: object = {
 			PRISTINE_MESSAGE: "Nog geen data geladen.",
 			SELECT_ALL: "Alles selectioneren",
 			SELECT_DESELECT_ALL: "Alles selectioneren/Selectie wissen",
-			TOGGLE_COLUMNS: "Kolom filters",
+			TOGGLE_COLUMNS: "Kolommen weergeven / verbergen",
+			COLUMN_FILTER: "Kolom filters",
 			TOGGLE_SELECTION: "Selectie omkeren"
 		}
 	}

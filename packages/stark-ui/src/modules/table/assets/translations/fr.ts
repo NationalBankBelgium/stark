@@ -33,7 +33,8 @@ export const translationsFr: object = {
 			PRISTINE_MESSAGE: "Il n'y a pas encore de données chargées.",
 			SELECT_ALL: "Tout sélectionner",
 			SELECT_DESELECT_ALL: "Tout sélectionner/Tout désélectionner",
-			TOGGLE_COLUMNS: "Filtre colonnes",
+			TOGGLE_COLUMNS: "Afficher / masquer les colonnes",
+			COLUMN_FILTER: "Filtre colonnes",
 			TOGGLE_SELECTION: "Inverser la sélection"
 		}
 	}

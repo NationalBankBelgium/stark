@@ -278,7 +278,8 @@
       "TABLE": {
         "LABELS": {
           "TITLE": "Titel",
-          "DESCRIPTION": "Omschrijving"
+          "DESCRIPTION": "Omschrijving",
+          "EXTRA_INFO": "Extra informatie"
         },
         "REGULAR": "Normale tabel",
         "WITH_SELECTION": "Tabel met selectie",

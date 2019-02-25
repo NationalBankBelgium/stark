@@ -1,1 +1,17 @@
-<stark-minimap mode="compact" [items]="items" [visibleItems]="visibleItems" (showHideItem)="showHideItem($event)"></stark-minimap>
+<div>
+	<stark-minimap mode="compact" [items]="items" [visibleItems]="visibleItems" (showHideItem)="showHideItem($event)"></stark-minimap>
+	<stark-minimap
+		mode="compact"
+		[items]="items"
+		[visibleItems]="visibleItems"
+		(showHideItem)="showHideItem($event)"
+		color="primary"
+	></stark-minimap>
+	<stark-minimap
+		mode="compact"
+		[items]="items"
+		[visibleItems]="visibleItems"
+		(showHideItem)="showHideItem($event)"
+		color="accent"
+	></stark-minimap>
+</div>

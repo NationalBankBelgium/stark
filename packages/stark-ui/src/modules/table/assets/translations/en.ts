@@ -33,7 +33,8 @@ export const translationsEn: object = {
 			PRISTINE_MESSAGE: "No data loaded yet.",
 			SELECT_ALL: "Select all",
 			SELECT_DESELECT_ALL: "Select all/Deselect all",
-			TOGGLE_COLUMNS: "Column filters",
+			TOGGLE_COLUMNS: "Show / hide columns",
+			COLUMN_FILTER: "Column filters",
 			TOGGLE_SELECTION: "Toggle selection"
 		}
 	}

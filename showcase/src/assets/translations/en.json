@@ -278,7 +278,8 @@
       "TABLE": {
         "LABELS": {
           "TITLE": "Title",
-          "DESCRIPTION": "Description"
+          "DESCRIPTION": "Description",
+          "EXTRA_INFO": "Extra info"
         },
         "REGULAR": "Regular Table",
         "WITH_SELECTION": "Table with selection",
@@ -311,22 +312,22 @@
       "TITLE": "Getting Started"
     },
     "HOMEPAGE": {
-      "CORE":"Stark Core",
-      "DESCRIPTION_DETAIL":"<p>Stark provides blocks perfectly fit for accelerating front-end development.<br>You'll find in Stark a reusable build based on Webpack, a starter project, core and ui modules providing awesome ui components, ...<br>All those modules act like LEGO blocks: you add what you need, no more, no less!</p>",
+      "CORE": "Stark Core",
+      "DESCRIPTION_DETAIL": "<p>Stark provides blocks perfectly fit for accelerating front-end development.<br>You'll find in Stark a reusable build based on Webpack, a starter project, core and ui modules providing awesome ui components, ...<br>All those modules act like LEGO blocks: you add what you need, no more, no less!</p>",
       "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aka stark-core, is a module providing reusable APIs, such as a routing, logging, log shipping, etc.</p>",
       "DOCUMENTATION_MAIN_TITLE": "Documentation",
       "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!<br>Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.<br></p>",
       "DOCUMENTATION_UI_DESC": "<p>Stark UI provides reusable UI components, for example data table, message pane, ... but also themes.</p>",
-      "GETTING_STARTED":"Getting Started",
+      "GETTING_STARTED": "Getting Started",
       "INTRODUCTION": "A front-end framework based on Angular 7",
-      "LATEST_API":"Latest API",
-      "LATEST_NEWS":"Latest News",
+      "LATEST_API": "Latest API",
+      "LATEST_NEWS": "Latest News",
       "MAIN_TITLE": "What is Stark?",
-      "PREVIOUS_API":"Previous API",
-      "PREVIOUS_VERSIONS":"Previous versions",
-      "SHOWCASE":"Showcase",
+      "PREVIOUS_API": "Previous API",
+      "PREVIOUS_VERSIONS": "Previous versions",
+      "SHOWCASE": "Showcase",
       "TITLE": "Home",
-      "UI":"Stark UI"
+      "UI": "Stark UI"
     },
     "ICONS": {
       "GITHUB": "Github repo",
