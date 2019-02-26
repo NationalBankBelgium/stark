@@ -17,14 +17,10 @@ function hasNpmFlag(flag) {
 	return EVENT.includes(flag);
 }
 
-function isWebpackDevServer() {
-	return process.argv[1] && !!/webpack-dev-server/.exec(process.argv[1]);
-}
-
 /**
  * Retrieve the relative path from the config directory to the path argument value (if provided). That path argument can be passed to only execute a subset of the unit tests (see spec-bundle.ts)
- * @param args the arguments to look into
- * @returns The relative path from this directory (config) to the location pointed at by the path argument value (if provided), an empty string otherwise
+ * @param args - The arguments to look into
+ * @returns {string} - The relative path from this directory (config) to the location pointed at by the path argument value (if provided), an empty string otherwise
  */
 function getTestPath(args) {
 	for (let i = 0; i < args.length; ++i) {
@@ -46,7 +42,6 @@ const rootStark = path.join.bind(path, _rootStark);
 
 exports.hasProcessFlag = hasProcessFlag;
 exports.hasNpmFlag = hasNpmFlag;
-exports.isWebpackDevServer = isWebpackDevServer;
 exports.getTestPath = getTestPath;
 exports.root = root;
 exports.rootStark = rootStark;
