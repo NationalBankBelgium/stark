@@ -53,7 +53,7 @@
     "string-replace-loader": "^2.1.1",
     "style-loader": "^0.23.1",
     "stylelint": "^9.10.1",
-    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-prettier": "^5.0.0",
     "stylelint-webpack-plugin": "^0.10.5",
     "to-string-loader": "^1.1.5",
     "tslint": "^5.11.0",
