@@ -98,10 +98,25 @@ const formAnimations: AnimationTriggerMetadata = trigger("collapse", [
 /**
  * Component to display a generic search form with an action bar and form buttons for these actions:
  *
- * - New: call the onNew output function
- * - Search: call the onSearch output function
- * - Reset: call the onReset output function
+ * - New: emits in the newTriggered event emitter
+ * - Search: emits in the searchTriggered event emitter
+ * - Reset: emits in the resetTriggered event emitter
  *
+ * **IMPORTANT:** In the HTML, the component defining the search form content should be exported as `searchForm`
+ * so that it is accessible from the Stark Generic Search component.
+ * See [Angular: Template reference variables](https://angular.io/guide/template-syntax#template-reference-variables--var-)
+ *
+ * @example
+ * <stark-generic-search formHtmlId="demo-generic-search-form"
+ *                       (searchTriggered)="onSearch($event)"
+ *                       (resetTriggered)="onReset($event)"
+ *                       [isFormHidden]="hideSearch">
+ *       							<!-- your search form component should be exported as 'searchForm' -->
+ *                    <your-search-form-component #searchForm
+ *                               [searchCriteria]="workingCopy"
+ *                               (workingCopyChanged)="updateWorkingCopy($event)">
+ *                    </your-search-form-component>
+ * </stark-generic-search>
  */
 @Component({
 	selector: "stark-generic-search",
@@ -172,15 +187,42 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	@Output()
 	public formVisibilityChanged?: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+	/**
+	 * Reference to the child search form component. Such component is looked up by the `searchForm` template reference variable.
+	 *
+	 * Therefore, the child search form component should be exported as `searchForm`.
+	 *
+	 * See https://angular.io/guide/template-syntax#template-reference-variables--var- for more info about template reference variables.
+	 */
 	@ContentChild("searchForm")
 	public searchFormComponent: StarkSearchFormComponent<unknown>;
 
+	/**
+	 * Configuration object for the the {@link StarkActionBarComponent} to be shown in the search form.
+	 */
 	public actionBarConfig: StarkActionBarConfig;
+
+	/**
+	 * Object containing normalized options that will be used to generate config for the the {@link StarkActionBarComponent}
+	 * to be shown in the search form.
+	 */
 	public normalizedFormActionBarConfig: StarkGenericSearchActionBarConfigRequired;
+
+	/**
+	 * Object containing normalized options for the different buttons to be shown in the search form.
+	 */
 	public normalizedFormButtonsConfig: StarkGenericSearchFormButtonsConfigRequired;
+
+	/**
+	 * Reference to the FormGroup instance bound to the search form.
+	 *
+	 * In the HTML, the component defining the search form content should be exported as `searchForm`
+	 * so that it is accessible from the Stark Generic Search component. See example above.
+	 */
 	public genericForm: FormGroup;
 
 	/**
+	 * Class constructor
 	 * @param logger - The logger of the application.
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
