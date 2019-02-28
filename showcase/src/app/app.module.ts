@@ -193,7 +193,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		EffectsModule.forRoot([StarkErrorHandlingEffects]), // needed to set up the providers required for effects
 		UIRouterModule.forRoot({
 			states: APP_STATES,
-			useHash: !Boolean(history.pushState),
+			useHash: false, // to use Angular's PathLocationStrategy in order to support HTML5 Push State
 			otherwise: "otherwise",
 			config: routerConfigFn
 		}),
