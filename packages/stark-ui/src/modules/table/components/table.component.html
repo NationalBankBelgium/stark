@@ -64,7 +64,7 @@
 	</div>
 </div>
 
-<div [ngClass]="{ 'fixed-header': isFixedHeaderEnabled }">
+<div [ngClass]="{ 'table-container': true, 'fixed-header': isFixedHeaderEnabled }">
 	<table #matTable mat-table [dataSource]="dataSource" [ngClass]="{ 'multi-sorting': isMultiSorting }">
 		<ng-container matColumnDef="select">
 			<th mat-header-cell *matHeaderCellDef>
@@ -108,13 +108,14 @@
 		<ng-content select=".stark-table-columns"></ng-content>
 
 		<stark-table-column
-			*ngIf="tableRowsActionBarConfig && tableRowsActionBarConfig.actions"
+			*ngIf="tableRowActions && tableRowActions.actions"
 			[sortable]="false"
 			[name]="'STARK.TABLE.ACTIONS' | translate"
+			[stickyEnd]="tableRowActions.isFixed"
 		>
 			<ng-template let-context>
 				<stark-action-bar
-					[actionBarConfig]="tableRowsActionBarConfig"
+					[actionBarConfig]="tableRowActions"
 					[actionBarScope]="context.rowData"
 					mode="compact"
 				></stark-action-bar>

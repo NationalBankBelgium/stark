@@ -21,8 +21,7 @@ import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.componen
 import { StarkTableComponent } from "./table.component";
 import { StarkTableColumnComponent } from "./column.component";
 import { StarkPaginationComponent } from "../../pagination/components";
-import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter } from "../entities";
-import { StarkActionBarConfig } from "../../action-bar/components/action-bar-config.intf";
+import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "../entities";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
 
@@ -38,7 +37,7 @@ import createSpy = jasmine.createSpy;
 			[rowsSelectable]="rowsSelectable"
 			[multiSelect]="multiSelect"
 			[orderProperties]="orderProperties"
-			[tableRowsActionBarConfig]="tableRowsActionBarConfig"
+			[tableRowActions]="tableRowActions"
 			[rowClassNameFn]="rowClassNameFn"
 			(rowClicked)="rowClickHandler($event)"
 		>
@@ -57,7 +56,7 @@ class TestHostComponent {
 	public rowsSelectable?: boolean;
 	public multiSelect?: string;
 	public multiSort?: string;
-	public tableRowsActionBarConfig: StarkActionBarConfig;
+	public tableRowActions: StarkTableRowActions;
 	public tableFilter: StarkTableFilter;
 	public orderProperties?: string[];
 	public rowClassNameFn?: (row: object, index: number) => string;
@@ -144,7 +143,7 @@ describe("TableComponent", () => {
 			expect(component.multiSelect).toBe(hostComponent.multiSelect);
 			expect(component.multiSort).toBe(hostComponent.multiSort);
 			expect(component.orderProperties).toBe(hostComponent.orderProperties);
-			expect(component.tableRowsActionBarConfig).toBe(hostComponent.tableRowsActionBarConfig);
+			expect(component.tableRowActions).toBe(hostComponent.tableRowActions);
 		});
 	});
 

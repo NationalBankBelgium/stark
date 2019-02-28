@@ -148,6 +148,12 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public headerClassName?: string;
 
 	/**
+	 * Make the column stick to the right side of the table
+	 */
+	@Input()
+	public stickyEnd?: boolean = false;
+
+	/**
 	 * Output that will emit a specific column whenever its filter value has changed
 	 */
 	@Output()

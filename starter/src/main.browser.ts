@@ -7,7 +7,7 @@ import { AppModule } from "./app";
 import { AbstractStarkMain, StarkEnvironment } from "@nationalbankbelgium/stark-core";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
-import { environment } from "environments/environment";
+import { environment } from "./environments/environment";
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject

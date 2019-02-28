@@ -1,13 +1,10 @@
 <stark-table
-	class="shadowed"
 	[data]="data"
 	[columnProperties]="columns"
 	[filter]="filter"
-	[orderProperties]="order"
 	[paginationConfig]="pagination"
 	[tableRowActions]="tableRowActions"
-	multiSort
-	(rowClicked)="handleRowClicked($event)"
+	customTableActionsType="alt"
 >
-	<header><h1 class="mb0">Regular Table</h1></header>
+	<header><h1 class="mb0">Table with fixed row actions</h1></header>
 </stark-table>

@@ -34,7 +34,8 @@ import {
 	StarkColumnSortChangedOutput,
 	StarkTableColumnProperties,
 	StarkTableColumnSortingDirection,
-	StarkTableFilter
+	StarkTableFilter,
+	StarkTableRowActions
 } from "../entities";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
@@ -196,7 +197,16 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * {@link StarkActionBarConfig} object for the action bar component to be displayed in all the rows
 	 */
 	@Input()
-	public tableRowsActionBarConfig: StarkActionBarConfig;
+	public tableRowActions: StarkTableRowActions;
+
+	/**
+	 * @deprecated - use {@link this.tableRowActions}
+	 */
+	@Input()
+	public set tableRowsActionBarConfig(config: StarkActionBarConfig) {
+		this.logger.warn("[tableRowsActionBarConfig] attribute on <stark-table> is deprecated. Use [tableRowActions] instead.");
+		this.tableRowActions = <StarkTableRowActions>config;
+	}
 
 	/**
 	 * Function to generate classNames for rows

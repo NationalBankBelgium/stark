@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkActionBarConfig, StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "@nationalbankbelgium/stark-ui";
 
 const DUMMY_DATA: object[] = [
 	{
@@ -49,7 +49,7 @@ export class TableRegularComponent implements OnInit {
 
 	public pagination: StarkPaginationConfig;
 
-	public rowActionBarConfig: StarkActionBarConfig;
+	public tableRowActions: StarkTableRowActions;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
 
@@ -74,7 +74,7 @@ export class TableRegularComponent implements OnInit {
 
 		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: 10 };
 
-		this.rowActionBarConfig = {
+		this.tableRowActions = {
 			actions: [
 				{
 					id: "edit-item",
