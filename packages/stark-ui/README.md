@@ -11,3 +11,9 @@ Stark's UI module (aka stark-ui) provides the UI related features of the Stark f
 It includes the UI component kit of Stark as well as other services and utilities.
 
 **[Getting Started](../../docs/stark-ui/GETTING_STARTED.md)**
+
+## Developer Guide
+
+-   **[Generic Search component](../../docs/stark-ui/GENERIC_SEARCH.md)**
+
+-   **[Session Timeout Warning configuration](../../docs/stark-ui/TIMEOUT_WARNING.md)**

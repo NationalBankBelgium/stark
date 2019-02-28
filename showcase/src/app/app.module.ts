@@ -63,7 +63,6 @@ import {
 	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";
 import { SharedModule } from "./shared/shared.module";
-import { DemoUiModule } from "./demo-ui/demo-ui.module";
 import { InMemoryDataModule } from "./in-memory-data/in-memory-data.module";
 import { WelcomeModule } from "./welcome/welcome.module";
 import { logRegisteredStates, routerConfigFn } from "./router.config";
@@ -214,11 +213,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			}
 		}),
 		SharedModule,
-		/**
-		 * FIXME Remove this when we find a solution to make reducers working with lazy loading and we find a way to only
-		 * import the MatAutocompleteModule in the demo UI Module (and not in the app module) with lazy loading
-		 */
-		DemoUiModule,
 		WelcomeModule,
 		StarkAppFooterModule,
 		StarkAppDataModule,

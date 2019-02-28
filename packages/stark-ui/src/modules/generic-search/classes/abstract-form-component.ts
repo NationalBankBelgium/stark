@@ -10,10 +10,25 @@ const _cloneDeep: Function = require("lodash/cloneDeep");
  */
 const _isEqual: Function = require("lodash/isEqual");
 
+/**
+ * Abstract class defining the source model to bind to form components in Stark (i.e. {@link AbstractStarkSearchComponent})
+ * as well as methods to manipulate it.
+ */
 export abstract class AbstractStarkFormComponent<CriteriaType> {
+	/**
+	 * The form's original copy (the initial model when the form is pristine)
+	 */
 	public originalCopy: CriteriaType;
+
+	/**
+	 * The form's working copy (the current model with the latest changes)
+	 */
 	public workingCopy: CriteriaType;
 
+	/**
+	 * Class constructor
+	 * @param logger - The logging service of the application
+	 */
 	protected constructor(public logger: StarkLoggingService) {}
 
 	/**

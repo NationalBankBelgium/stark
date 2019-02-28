@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { StarkSearchFormComponent } from "@nationalbankbelgium/stark-ui";
 import { HeroMovieSearchCriteria } from "../entities";
 import { FormBuilder, FormGroup } from "@angular/forms";
@@ -6,13 +6,14 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { DemoGenericService } from "../services";
 import { take } from "rxjs/operators";
 
+const _isEqual: Function = require("lodash/isEqual");
 const componentName: string = "demo-generic-search-form";
 
 @Component({
 	selector: "demo-generic-search-form",
 	templateUrl: "./demo-generic-search-form.component.html"
 })
-export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormComponent<HeroMovieSearchCriteria> {
+export class DemoGenericSearchFormComponent implements OnInit, OnChanges, StarkSearchFormComponent<HeroMovieSearchCriteria> {
 	@Input()
 	public searchCriteria: HeroMovieSearchCriteria = <any>{};
 
@@ -32,11 +33,7 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 	) {}
 
 	public ngOnInit(): void {
-		this.searchForm = this.formBuilder.group({
-			year: this.searchCriteria.year,
-			hero: this.searchCriteria.hero,
-			movie: this.searchCriteria.movie
-		});
+		this.searchForm = this.createSearchForm(this.searchCriteria);
 
 		this.searchForm.valueChanges.subscribe(() => {
 			const modifiedCriteria: HeroMovieSearchCriteria = this.mapFormGroupToSearchCriteria(this.searchForm);
@@ -57,6 +54,36 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 			.subscribe((movies: string[]) => (this.movieOptions = movies));
 
 		this.logger.debug(componentName + " is initialized");
+	}
+
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (
+			changes["searchCriteria"] &&
+			!changes["searchCriteria"].isFirstChange() &&
+			!_isEqual(changes["searchCriteria"].previousValue, this.searchCriteria)
+		) {
+			this.resetSearchForm(this.searchCriteria);
+		}
+	}
+
+	public createSearchForm(searchCriteria: HeroMovieSearchCriteria): FormGroup {
+		return this.formBuilder.group({
+			year: searchCriteria.year,
+			hero: searchCriteria.hero,
+			movie: searchCriteria.movie
+		});
+	}
+
+	public resetSearchForm(searchCriteria: HeroMovieSearchCriteria): void {
+		// reset the form fields but don't emit a "change" event to statusChanges and valueChanges to avoid infinite loops!
+		this.searchForm.reset(
+			{
+				year: searchCriteria.year,
+				hero: searchCriteria.hero,
+				movie: searchCriteria.movie
+			},
+			{ emitEvent: false }
+		);
 	}
 
 	public mapFormGroupToSearchCriteria(formGroup: FormGroup): HeroMovieSearchCriteria {

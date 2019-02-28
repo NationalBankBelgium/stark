@@ -1,13 +1,12 @@
 import { ReplaySubject, Subscription } from "rxjs";
 import { map, take } from "rxjs/operators";
 import { OnDestroy, OnInit } from "@angular/core";
-
+import { FormGroup } from "@angular/forms";
 import { AbstractStarkFormComponent } from "../classes/abstract-form-component";
 import { StarkGenericSearchService } from "../classes/generic-search.service.intf";
 import { StarkSearchState } from "../entities/search-state.entity.intf";
 import { StarkErrorImpl, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkFormUtil } from "../../../util/form";
-import { FormGroup } from "@angular/forms";
 import { StarkProgressIndicatorConfig, StarkProgressIndicatorService, StarkProgressIndicatorType } from "../../progress-indicator";
 
 /**
@@ -18,10 +17,20 @@ const defaultProgressIndicatorConfig: StarkProgressIndicatorConfig = {
 	type: StarkProgressIndicatorType.SPINNER
 };
 
+/**
+ * Abstract class defining the common properties and methods for the Search Page using the {@link StarkGenericSearchComponent}.
+ */
 export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaType> extends AbstractStarkFormComponent<CriteriaType>
 	implements OnInit, OnDestroy {
-	/** @internal */
+	/**
+	 * @internal
+	 * @ignore
+	 */
 	private _latestResults: Readonly<SearchResultsType[]>;
+	/**
+	 * @internal
+	 * @ignore
+	 */
 	private searchStateSubscription: Subscription;
 
 	/**
@@ -44,7 +53,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	protected results$: ReplaySubject<SearchResultsType[]>;
 
 	/**
-	 *
+	 * Class constructor
 	 * @param genericSearchService - Service implementing the StarkGenericSearchService interface providing all the necessary methods to search items.
 	 * @param logger - The logging service of the application
 	 * @param progressService - Service that provides an easy way to change the visibility of a progress indicator.
