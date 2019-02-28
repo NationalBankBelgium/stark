@@ -35,8 +35,8 @@ export const STYLEGUIDE_STATES: Ng2StateDeclaration[] = [
 		views: { "@": { component: StyleguideColorsPageComponent } }
 	},
 	{
-		name: "styleguide.stark-header",
-		url: "/stark-header",
+		name: "styleguide.header",
+		url: "/app-header",
 		data: {
 			translationKey: "SHOWCASE.STYLEGUIDE.HEADER.TITLE"
 		},

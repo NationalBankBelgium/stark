@@ -64,17 +64,19 @@ The component must only have one **input** binding, the object which describes t
 And the component have the **output** binding "workingCopyChanged" to emit a new value of the search criteria when they change.
 
 ```typescript
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { StarkSearchFormComponent } from "@nationalbankbelgium/stark-ui";
 import { MovieSearchCriteria } from "../entities";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { DEMO_GENERIC_SERVICE, DemoGenericService } from "../services";
 
+const _isEqual: Function = require("lodash/isEqual");
+
 @Component({
 	selector: "movie-search-form",
 	templateUrl: "./movie-search-form.component.html"
 })
-export class MovieSearchFormComponent implements OnInit, StarkSearchFormComponent<MovieSearchCriteria> {
+export class MovieSearchFormComponent implements OnInit, OnChanges, StarkSearchFormComponent<MovieSearchCriteria> {
 	@Input()
 	public searchCriteria: MovieSearchCriteria = {};
 
@@ -98,6 +100,16 @@ export class MovieSearchFormComponent implements OnInit, StarkSearchFormComponen
 		});
 
 		// ...
+	}
+
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (
+			changes["searchCriteria"] &&
+			!changes["searchCriteria"].isFirstChange() &&
+			!_isEqual(changes["searchCriteria"].previousValue, this.searchCriteria)
+		) {
+			this.resetSearchForm(this.searchCriteria);
+		}
 	}
 
 	public createSearchForm(searchCriteria: MovieSearchCriteria): FormGroup {
@@ -509,7 +521,7 @@ export class MovieSearchPageComponent extends AbstractStarkSearchComponent<Movie
 #### 2.6.2. Define your template
 
 The template contains all information necessary for a page, the title and the stark-generic-search component.
-The usage of Generic Search component is explained in the [API documentation](https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkGenericSearchComponent.html).
+The usage of Generic Search component is explained in the [StarkGenericSearchComponent API documentation](https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkGenericSearchComponent.html).
 
 ```html
 <h1 class="mat-display-3" translate>Movie Search</h1>

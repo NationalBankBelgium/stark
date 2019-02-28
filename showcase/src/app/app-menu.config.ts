@@ -53,6 +53,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							targetState: "demo-ui.app-data"
 						},
 						{
+							id: "menu-stark-ui-footer",
+							label: "SHOWCASE.DEMO.FOOTER.TITLE",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-ui.app-footer"
+						},
+						{
 							id: "menu-stark-ui-components-logout",
 							label: "SHOWCASE.DEMO.LOGOUT.TITLE",
 							isVisible: true,
@@ -109,14 +116,7 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							targetState: "demo-ui.dropdown"
 						},
 						{
-							id: "menu-style-footer",
-							label: "SHOWCASE.DEMO.FOOTER.TITLE",
-							isVisible: true,
-							isEnabled: true,
-							targetState: "demo-ui.stark-footer"
-						},
-						{
-							id: "menu-style-generic-search",
+							id: "menu-stark-ui-generic-search",
 							label: "SHOWCASE.DEMO.GENERIC_SEARCH.TITLE",
 							isVisible: true,
 							isEnabled: true,
@@ -227,8 +227,7 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					id: "menu-stark-ui-services",
 					label: "Services",
 					isVisible: true,
-					isEnabled: true,
-					targetState: "#"
+					isEnabled: true
 				}
 			]
 		},
@@ -253,7 +252,14 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 			label: "Style guide",
 			menuGroups: [
 				{
-					id: "menu-stark-ui-components-button",
+					id: "menu-style-header",
+					label: "App Header",
+					isVisible: true,
+					isEnabled: true,
+					targetState: "styleguide.header"
+				},
+				{
+					id: "menu-style-components-button",
 					label: "Button",
 					isVisible: true,
 					isEnabled: true,
@@ -268,24 +274,10 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 				},
 				{
 					id: "menu-style-colors",
-					label: "Colors",
+					label: "Color Palettes",
 					isVisible: true,
 					isEnabled: true,
 					targetState: "styleguide.colors"
-				},
-				{
-					id: "menu-style-header",
-					label: "Header",
-					isVisible: true,
-					isEnabled: true,
-					targetState: "styleguide.stark-header"
-				},
-				{
-					id: "menu-style-typography",
-					label: "Typography",
-					isVisible: true,
-					isEnabled: true,
-					targetState: "styleguide.typography"
 				},
 				{
 					id: "menu-style-layout",
@@ -293,6 +285,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					isVisible: true,
 					isEnabled: true,
 					targetState: "styleguide.layout"
+				},
+				{
+					id: "menu-style-typography",
+					label: "Typography",
+					isVisible: true,
+					isEnabled: true,
+					targetState: "styleguide.typography"
 				}
 			]
 		}
