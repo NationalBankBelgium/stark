@@ -79,6 +79,14 @@ describe("TableComponent", () => {
 		}
 	};
 
+	const triggerClick: Function = (element: HTMLElement): void => {
+		// more verbose way to create and trigger an event (the only way it works in IE)
+		// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+		const clickEvent: Event = document.createEvent("Event");
+		clickEvent.initEvent("click", true, true);
+		element.dispatchEvent(clickEvent);
+	};
+
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			imports: [
@@ -1052,7 +1060,7 @@ describe("TableComponent", () => {
 			}
 
 			// click on the row
-			rowElement.dispatchEvent(new Event("click"));
+			triggerClick(rowElement);
 			hostFixture.detectChanges();
 
 			// listener should be called with the data of the first row
@@ -1091,7 +1099,7 @@ describe("TableComponent", () => {
 				fail("Checkbox not found.");
 				return;
 			}
-			checkboxElement.dispatchEvent(new Event("click"));
+			triggerClick(checkboxElement);
 			hostFixture.detectChanges();
 
 			expect(component.selectChanged.emit).toHaveBeenCalledWith([dummyData[0]]);

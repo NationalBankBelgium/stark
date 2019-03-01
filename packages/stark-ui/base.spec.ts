@@ -2,7 +2,23 @@
 
 import "core-js/es6";
 import "core-js/es7/reflect";
+import "core-js/es7/string";
 import "core-js/stage/4";
+
+// IE polyfills
+
+// See https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+if (!Element.prototype.matches) {
+	// @ts-ignore
+	Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+}
+
+// See: https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Polyfill
+// @ts-ignore: Window.NodeList
+if (window.NodeList && !NodeList.prototype.forEach) {
+	// @ts-ignore: forEach mismatching types
+	NodeList.prototype.forEach = Array.prototype.forEach;
+}
 
 /* tslint:disable:no-import-side-effect */
 import "zone.js/dist/zone";

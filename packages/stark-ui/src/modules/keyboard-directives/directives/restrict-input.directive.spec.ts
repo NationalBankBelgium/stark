@@ -29,16 +29,18 @@ describe("RestrictInputDirective", () => {
 		fixture.detectChanges();
 	}
 
-	function triggerKeyPressEvent(inputElement: DebugElement, value: string): KeyboardEvent {
+	/**
+	 * Return whether the triggered event was cancelled (default prevented)
+	 */
+	function triggerKeyPressEvent(inputElement: DebugElement, value: string): boolean {
 		(<HTMLInputElement>inputElement.nativeElement).value = value;
 
 		const keypressEvent: Event = document.createEvent("Event");
 		keypressEvent.initEvent("keypress", true, true);
 		keypressEvent["char"] = value;
 		keypressEvent["key"] = value;
-		inputElement.triggerEventHandler("keypress", keypressEvent);
-
-		return <KeyboardEvent>keypressEvent;
+		// dispatchEvent() returns false if any of the event handlers which handled this event called Event.preventDefault()
+		return !(<HTMLInputElement>inputElement.nativeElement).dispatchEvent(keypressEvent);
 	}
 
 	beforeEach(() => {
@@ -62,14 +64,14 @@ describe("RestrictInputDirective", () => {
 			expect(fixture).toBeDefined();
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
 
-			let keyPressEvent: Event = triggerKeyPressEvent(inputElement, "1");
-			expect(keyPressEvent.defaultPrevented).toBe(false);
+			let keyPressEventDefaultPrevented: boolean = triggerKeyPressEvent(inputElement, "1");
+			expect(keyPressEventDefaultPrevented).toBe(false);
 
-			keyPressEvent = triggerKeyPressEvent(inputElement, "9");
-			expect(keyPressEvent.defaultPrevented).toBe(false);
+			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "9");
+			expect(keyPressEventDefaultPrevented).toBe(false);
 
-			keyPressEvent = triggerKeyPressEvent(inputElement, "0");
-			expect(keyPressEvent.defaultPrevented).toBe(false);
+			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "0");
+			expect(keyPressEventDefaultPrevented).toBe(false);
 		});
 	});
 
@@ -92,27 +94,27 @@ describe("RestrictInputDirective", () => {
 		it("should prevent any value other than the given ones in the configuration from being typed in the input", () => {
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
 
-			let keyPressEvent: KeyboardEvent = triggerKeyPressEvent(inputElement, "a");
-			expect(keyPressEvent.defaultPrevented).toBe(true);
+			let keyPressEventDefaultPrevented: boolean = triggerKeyPressEvent(inputElement, "a");
+			expect(keyPressEventDefaultPrevented).toBe(true);
 
-			keyPressEvent = triggerKeyPressEvent(inputElement, "B");
-			expect(keyPressEvent.defaultPrevented).toBe(true);
+			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "B");
+			expect(keyPressEventDefaultPrevented).toBe(true);
 
-			keyPressEvent = triggerKeyPressEvent(inputElement, "-");
-			expect(keyPressEvent.defaultPrevented).toBe(true);
+			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "-");
+			expect(keyPressEventDefaultPrevented).toBe(true);
 		});
 
 		it("should NOT prevent any of the values given in the configuration from being typed in the input", () => {
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
 
-			let keyPressEvent: Event = triggerKeyPressEvent(inputElement, "1");
-			expect(keyPressEvent.defaultPrevented).toBe(false);
+			let keyPressEventDefaultPrevented: boolean = triggerKeyPressEvent(inputElement, "1");
+			expect(keyPressEventDefaultPrevented).toBe(false);
 
-			keyPressEvent = triggerKeyPressEvent(inputElement, "9");
-			expect(keyPressEvent.defaultPrevented).toBe(false);
+			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "9");
+			expect(keyPressEventDefaultPrevented).toBe(false);
 
-			keyPressEvent = triggerKeyPressEvent(inputElement, "0");
-			expect(keyPressEvent.defaultPrevented).toBe(false);
+			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "0");
+			expect(keyPressEventDefaultPrevented).toBe(false);
 		});
 	});
 });

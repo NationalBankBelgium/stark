@@ -107,7 +107,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the datepickers minDate should be set correctly", () => {
-			const minDate: Date = new Date("07-01-2018");
+			const minDate: Date = new Date(2018, 6, 1);
 			component.startMinDate = minDate;
 			component.endMinDate = minDate;
 			fixture.detectChanges();
@@ -116,7 +116,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the datepickers maxDate should be set correctly", () => {
-			const maxDate: Date = new Date("07-02-2018");
+			const maxDate: Date = new Date(2018, 6, 2);
 			component.startMaxDate = maxDate;
 			component.endMaxDate = maxDate;
 			fixture.detectChanges();
@@ -125,7 +125,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the datepickers value should be set correctly", () => {
-			const date: Date = new Date("07-03-2018");
+			const date: Date = new Date(2018, 6, 3);
 			component.startDate = date;
 			component.endDate = date;
 			fixture.detectChanges();
@@ -136,16 +136,16 @@ describe("DateRangePickerComponent", () => {
 
 	describe("dates selection", () => {
 		it("the end date should be undefined before the start date", () => {
-			component.startDate = new Date("07-05-2018");
-			component.endDate = new Date("07-04-2018");
+			component.startDate = new Date(2018, 6, 5);
+			component.endDate = new Date(2018, 6, 4);
 			fixture.detectChanges();
 			component.checkDates();
 			expect(component.endDate).toBeUndefined();
 		});
 
 		it("the end date should be correctly set if after the start date", () => {
-			const endDate: Date = new Date("07-07-2018");
-			component.startDate = new Date("07-06-2018");
+			const endDate: Date = new Date(2018, 6, 7);
+			component.startDate = new Date(2018, 6, 6);
 			component.endDate = endDate;
 			fixture.detectChanges();
 			component.checkDates();
@@ -153,7 +153,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the end date should be correctly set if after the start date is undefined", () => {
-			const endDate: Date = new Date("07-08-2018");
+			const endDate: Date = new Date(2018, 6, 8);
 			component.startDate = undefined;
 			component.endDate = endDate;
 			fixture.detectChanges();
