@@ -1,3 +1,39 @@
+<a name="10.0.0-beta.5"></a>
+# [10.0.0-beta.5](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.4...10.0.0-beta.5) (2019-03-01)
+
+
+### Bug Fixes
+
+* **release:** remove all files from 'latest' folders before copying the new ones ([bce59d0](https://github.com/nationalbankbelgium/stark/commit/bce59d0)), closes [#1138](https://github.com/nationalbankbelgium/stark/issues/1138)
+* **stark-demo:** change import to relative path ([468a3f1](https://github.com/nationalbankbelgium/stark/commit/468a3f1))
+* **stark-demo:** remove transform from `table-of-contents` component ([03b8954](https://github.com/nationalbankbelgium/stark/commit/03b8954)), closes [#1137](https://github.com/nationalbankbelgium/stark/issues/1137)
+* **stark-ui:** add methods to create/reset the search form in the Generic Search. Fix the Generic Search demo page in Showcase. ([128d8bf](https://github.com/nationalbankbelgium/stark/commit/128d8bf)), closes [#1125](https://github.com/nationalbankbelgium/stark/issues/1125)
+
+
+### Features
+
+* **stark-build:** implement integration with Angular CLI via [@angular-builders](https://github.com/angular-builders) ([9a26c00](https://github.com/nationalbankbelgium/stark/commit/9a26c00)), closes [#883](https://github.com/nationalbankbelgium/stark/issues/883) [#146](https://github.com/nationalbankbelgium/stark/issues/146) [#114](https://github.com/nationalbankbelgium/stark/issues/114)
+* **stark-testing:** add browser launchers for karma: Firefox, Edge and IE ([754d0fd](https://github.com/nationalbankbelgium/stark/commit/754d0fd))
+* **stark-ui:** add show/hide functionality to tables ([69b56f0](https://github.com/nationalbankbelgium/stark/commit/69b56f0)), closes [#522](https://github.com/nationalbankbelgium/stark/issues/522)
+* **stark-ui:** add sticky action column to `stark-table` ([0904e94](https://github.com/nationalbankbelgium/stark/commit/0904e94)), closes [#1143](https://github.com/nationalbankbelgium/stark/issues/1143)
+
+
+### BREAKING CHANGES
+
+* **stark-ui:** new methods added to `StarkSearchFormComponent` interface:
+
+   - **createSearchForm:** method that should contain the necessary logic to create
+   the FormGroup to be bound to the search form.
+   - **resetSearchForm:** method that should contain the necessary logic to
+   reset the FormGroup bound to the search form.
+* **stark-build:** stark-build now integrates with Angular CLI:
+
+   - **stark-build:** now provides partial Webpack configurations to override default configuration from Angular CLI. The application's `angular.json` file must be adapted to use this partial configs from stark-build via [@angular-builders](https://github.com/meltedspark/angular-builders). See [Stark-Build: Ng CLI Customizations](./docs/stark-build/NG_CLI_BUILD_CUSTOMIZATIONS.md)
+   - **stark-core:** the application's `angular.json` file must be adapted to add the assets from stark-core to be copied to the application's `assets` folder. See [Stark-Core: Getting Started](./docs/stark-core/GETTING_STARTED.md#assets)
+   - **stark-ui:** the application's `angular.json` file must be adapted to add the assets from stark-ui to be copied to the application's `assets` folder. See [Stark-UI: Getting Started](./docs/stark-ui/GETTING_STARTED.md#assets)
+
+
+
 <a name="10.0.0-beta.4"></a>
 # [10.0.0-beta.4](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.3...10.0.0-beta.4) (2019-02-15)
 
