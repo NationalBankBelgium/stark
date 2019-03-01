@@ -1,0 +1,2073 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>StarkRouteSearchComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/modules/route-search/components/route-search.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to search a particular route with autocompletion and to redirect to the route chosen by the user.</p>
+<p><strong><code>IMPORTANT:</code></strong> by default, when no menu config is provided, the Route Search component will display only those routes already registered by the Router at the time the component is initialized.
+In this case the lazy loaded routes that have not been loaded yet will not be displayed.</p>
+<h3 id="setting-labels-for-routes">Setting labels for routes</h3>
+<p>The component will construct the routes to display by recursively processing all the routes registered by the Router.
+In this case, the label for each route will be taken from the route&#39;s <code>data.translationKey</code> property or from the route name if such property is not found.</p>
+<h3 id="customizing-component-labels">Customizing component labels</h3>
+<p>It is possible to override the following translations used in the different labels of this component:</p>
+<ul>
+<li><strong>STARK.ROUTE_SEARCH.ABOUT:</strong> label shown in the tooltip of the search button</li>
+<li><strong>STARK.ROUTE_SEARCH.PLACEHOLDER:</strong> label shown in the placeholder of the search field</li>
+</ul>
+
+    </p>
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+            <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>stark-route-search</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./route-search.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#elementRef">elementRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#filteredRouteEntries">filteredRouteEntries</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hide">hide</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger">logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#renderer">renderer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#routesToDisplay">routesToDisplay</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#searchField">searchField</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#starkRoutingService">starkRoutingService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#translateService">translateService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#constructRouteEntriesFromMenuConfig">constructRouteEntriesFromMenuConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#constructRouteEntriesFromRouterStates">constructRouteEntriesFromRouterStates</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#extractRoutesFromMenuGroup">extractRoutesFromMenuGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#filterRouteEntries">filterRouteEntries</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getDirection">getDirection</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#redirect">redirect</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#show">show</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sortRoutesLabels">sortRoutesLabels</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#translateRoutesLabels">translateRoutesLabels</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#direction">direction</a>
+                            </li>
+                            <li>
+                                <a href="#icon">icon</a>
+                            </li>
+                            <li>
+                                <a href="#menuConfig">menuConfig</a>
+                            </li>
+                            <li>
+                                <a href="#color">color</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(starkRoutingService: StarkRoutingService, logger: StarkLoggingService, translateService: TranslateService, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, elementRef: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:98</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Class constructor</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>starkRoutingService</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkRoutingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The routing service of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The logger of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>translateService</td>
+                                                  
+                                                        <td>
+                                                                    <code>TranslateService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The translation service of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Angular Renderer wrapper for DOM manipulations</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>elementRef</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Reference to the DOM element where this directive is applied to</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="direction"></a>
+                        <code>direction</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>The direction in which the Route Search field will be displayed. Default: &quot;left&quot;</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="../miscellaneous/typealiases.html#StarkRouteSearchDirection" target="_self" >StarkRouteSearchDirection</a></code>
+
+                            </p>
+                        <p>
+                            <em>Default value : </em><code>&quot;left&quot;</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:72</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="icon"></a>
+                        <code>icon</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Desired icon of the search button. Default: &quot;magnify&quot;</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code>&quot;magnify&quot; | string</code>
+
+                            </p>
+                        <p>
+                            <em>Default value : </em><code>&quot;magnify&quot;</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:78</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="menuConfig"></a>
+                        <code>menuConfig</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>The <a href="../interfaces/StarkMenuConfig.html">StarkMenuConfig</a> where the routes should be taken from.
+Normally the same <a href="../interfaces/StarkMenuConfig.html">StarkMenuConfig</a> is used for the <a href="../components/StarkAppMenuComponent.html">StarkAppMenuComponent</a>.</p>
+<p><strong><code>IMPORTANT:</code></strong> when this is provided, the component will display all the routes from the config including the lazy loaded routes (if any).</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="../interfaces/StarkMenuConfig.html" target="_self" >StarkMenuConfig</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:66</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="color"></a>
+                        <code>color</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Color theme</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in AbstractStarkUiComponent:11</div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="constructRouteEntriesFromMenuConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            constructRouteEntriesFromMenuConfig
+                            </b>
+                            <a href="#constructRouteEntriesFromMenuConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>constructRouteEntriesFromMenuConfig(menuConfig: <a href="../interfaces/StarkMenuConfig.html">StarkMenuConfig</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="204" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:204</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Retrieve the list of routes from a <a href="../interfaces/StarkMenuConfig.html">StarkMenuConfig</a> object which the user have passed to the component</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>menuConfig</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkMenuConfig.html" target="_self" >StarkMenuConfig</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="constructRouteEntriesFromRouterStates"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            constructRouteEntriesFromRouterStates
+                            </b>
+                            <a href="#constructRouteEntriesFromRouterStates"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>constructRouteEntriesFromRouterStates()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="251" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:251</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Retrieve the list of routes from the Router if the user haven&#39;t passed a list to the component</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="extractRoutesFromMenuGroup"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            extractRoutesFromMenuGroup
+                            </b>
+                            <a href="#extractRoutesFromMenuGroup"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>extractRoutesFromMenuGroup(group: <a href="../interfaces/StarkMenuGroup.html">StarkMenuGroup</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="229" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:229</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Recursive method to extract routes from a StarkMenuGroup object.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>group</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkMenuGroup.html" target="_self" >StarkMenuGroup</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>the group which entries need to be extracted</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>the extracted array of {</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterRouteEntries"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            filterRouteEntries
+                            </b>
+                            <a href="#filterRouteEntries"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>filterRouteEntries(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:122</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Filters the options according to what has been entered by the user in the input field</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>value</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getDirection"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getDirection
+                            </b>
+                            <a href="#getDirection"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getDirection()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="308" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:308</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Determine the css class to use according to the direction chosen by the user</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:136</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="redirect"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            redirect
+                            </b>
+                            <a href="#redirect"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>redirect(routeEntry: <a href="../interfaces/StarkRouteSearchEntry.html">StarkRouteSearchEntry</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:167</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>redirect the user to the chosen path</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>routeEntry</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="show"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            show
+                            </b>
+                            <a href="#show"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>show()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:182</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Show/hide the input field</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sortRoutesLabels"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            sortRoutesLabels
+                            </b>
+                            <a href="#sortRoutesLabels"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>sortRoutesLabels(routeEntries: <a href="../interfaces/StarkRouteSearchEntry.html">StarkRouteSearchEntry[]</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="300" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:300</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Sort the array of <a href="../interfaces/StarkRouteSearchEntry.html">StarkRouteSearchEntry</a> objects by alphabetical order</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>routeEntries</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>the list of entries to sort</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>the sorted array of {</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="translateRoutesLabels"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            translateRoutesLabels
+                            </b>
+                            <a href="#translateRoutesLabels"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>translateRoutesLabels(routeEntries: <a href="../interfaces/StarkRouteSearchEntry.html">StarkRouteSearchEntry[]</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="278" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:278</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Translate the label of all elements in the <a href="../interfaces/StarkRouteSearchEntry.html">StarkRouteSearchEntry</a> object.
+This is useful as the language can change during runtime.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>routeEntries</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>route entries to translate</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>the translate route entries</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in AbstractStarkUiComponent:23</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="elementRef"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            elementRef
+                            </b>
+                            <a href="#elementRef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>elementRef:     <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:113</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- Reference to the DOM element where this directive is applied to</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filteredRouteEntries"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            filteredRouteEntries
+                            </b>
+                            <a href="#filteredRouteEntries"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>filteredRouteEntries:     <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >Observable&lt;StarkRouteSearchEntry[]&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >Observable&lt;StarkRouteSearchEntry[]&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:88</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The list of <a href="../interfaces/StarkRouteSearchEntry.html">StarkRouteSearchEntry</a>&#39;s objects filtered by the auto-complete field</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hide"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hide
+                            </b>
+                            <a href="#hide"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>hide:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>true</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:98</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the input field must be hidden or not</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logger"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            logger
+                            </b>
+                            <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>logger:     <code>StarkLoggingService</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>StarkLoggingService</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(STARK_LOGGING_SERVICE)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:110</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- The logger of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="renderer"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            renderer
+                            </b>
+                            <a href="#renderer"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>renderer:     <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:112</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- Angular Renderer wrapper for DOM manipulations</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="routesToDisplay"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            routesToDisplay
+                            </b>
+                            <a href="#routesToDisplay"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>routesToDisplay:     <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkRouteSearchEntry.html" target="_self" >StarkRouteSearchEntry[]</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:93</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The list of routes to be displayed</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchField"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            searchField
+                            </b>
+                            <a href="#searchField"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>searchField:     <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:83</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The source FormControl object of the search field</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="starkRoutingService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            starkRoutingService
+                            </b>
+                            <a href="#starkRoutingService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>starkRoutingService:     <code>StarkRoutingService</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>StarkRoutingService</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(STARK_ROUTING_SERVICE)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:109</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- The routing service of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="translateService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            translateService
+                            </b>
+                            <a href="#translateService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>translateService:     <code>TranslateService</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>TranslateService</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(TranslateService)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/modules/route-search/components/route-search.component.ts:111</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">-  The translation service of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from &quot;@angular/core&quot;;
+import { FormControl } from &quot;@angular/forms&quot;;
+import { LangChangeEvent, TranslateService } from &quot;@ngx-translate/core&quot;;
+import { Ng2StateDeclaration } from &quot;@uirouter/angular&quot;;
+import { Observable } from &quot;rxjs&quot;;
+import { map, startWith } from &quot;rxjs/operators&quot;;
+import {
+	STARK_LOGGING_SERVICE,
+	STARK_ROUTING_SERVICE,
+	starkAppExitStateName,
+	starkAppInitStateName,
+	StarkLoggingService,
+	StarkRoutingService
+} from &quot;@nationalbankbelgium/stark-core&quot;;
+import { AbstractStarkUiComponent } from &quot;../../../common/classes/abstract-component&quot;;
+import { StarkRouteSearchEntry } from &quot;../components/route-search-entry.intf&quot;;
+import { StarkMenuConfig, StarkMenuGroup } from &quot;../../app-menu/components&quot;;
+
+/**
+ *  @ignore
+ */
+const _sortBy: Function &#x3D; require(&quot;lodash/sortBy&quot;);
+
+/**
+ * Name of the component
+ */
+const componentName: string &#x3D; &quot;stark-route-search&quot;;
+
+/**
+ * Direction in which the Route Search field can be displayed
+ */
+export type StarkRouteSearchDirection &#x3D; &quot;left&quot; | &quot;right&quot;;
+
+/**
+ * Component to search a particular route with autocompletion and to redirect to the route chosen by the user.
+ *
+ * **&#x60;IMPORTANT:&#x60;** by default, when no menu config is provided, the Route Search component will display only those routes already registered by the Router at the time the component is initialized.
+ * In this case the lazy loaded routes that have not been loaded yet will not be displayed.
+ *
+ * ### Setting labels for routes
+ * The component will construct the routes to display by recursively processing all the routes registered by the Router.
+ * In this case, the label for each route will be taken from the route&#x27;s &#x60;data.translationKey&#x60; property or from the route name if such property is not found.
+ *
+ * ### Customizing component labels
+ * It is possible to override the following translations used in the different labels of this component:
+ *
+ * - **STARK.ROUTE_SEARCH.ABOUT:** label shown in the tooltip of the search button
+ * - **STARK.ROUTE_SEARCH.PLACEHOLDER:** label shown in the placeholder of the search field
+ */
+@Component({
+	selector: &quot;stark-route-search&quot;,
+	templateUrl: &quot;./route-search.component.html&quot;,
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: componentName
+	}
+})
+export class StarkRouteSearchComponent extends AbstractStarkUiComponent implements OnInit {
+	/**
+	 * The {@link StarkMenuConfig} where the routes should be taken from.
+	 * Normally the same {@link StarkMenuConfig} is used for the {@link StarkAppMenuComponent}.
+	 *
+	 * **&#x60;IMPORTANT:&#x60;** when this is provided, the component will display all the routes from the config including the lazy loaded routes (if any).
+	 */
+	@Input()
+	public menuConfig?: StarkMenuConfig;
+
+	/**
+	 * The direction in which the Route Search field will be displayed. Default: &quot;left&quot;
+	 */
+	@Input()
+	public direction: StarkRouteSearchDirection &#x3D; &quot;left&quot;;
+
+	/**
+	 * Desired icon of the search button. Default: &quot;magnify&quot;
+	 */
+	@Input()
+	public icon: &quot;magnify&quot; | string &#x3D; &quot;magnify&quot;;
+
+	/**
+	 * The source FormControl object of the search field
+	 */
+	public searchField: FormControl;
+
+	/**
+	 * The list of {@link StarkRouteSearchEntry}&#x27;s objects filtered by the auto-complete field
+	 */
+	public filteredRouteEntries: Observable&lt;StarkRouteSearchEntry[]&gt;;
+
+	/**
+	 * The list of routes to be displayed
+	 */
+	public routesToDisplay: StarkRouteSearchEntry[] &#x3D; [];
+
+	/**
+	 * Whether the input field must be hidden or not
+	 */
+	public hide: boolean &#x3D; true;
+
+	/**
+	 * Class constructor
+	 * @param starkRoutingService - The routing service of the application
+	 * @param logger - The logger of the application
+	 * @param translateService -  The translation service of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations
+	 * @param elementRef- Reference to the DOM element where this directive is applied to
+	 */
+	public constructor(
+		@Inject(STARK_ROUTING_SERVICE) public starkRoutingService: StarkRoutingService,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(TranslateService) public translateService: TranslateService,
+		public renderer: Renderer2,
+		public elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+		this.searchField &#x3D; new FormControl();
+	}
+
+	/**
+	 * Filters the options according to what has been entered by the user in the input field
+	 */
+	public filterRouteEntries(value: string): StarkRouteSearchEntry[] {
+		const filterValue: string &#x3D; value.toLowerCase();
+		return this.routesToDisplay.filter(
+			(routeEntry: StarkRouteSearchEntry) &#x3D;&gt;
+				routeEntry.label
+					.toString()
+					.toLowerCase()
+					.indexOf(filterValue) &#x3D;&#x3D;&#x3D; 0
+		);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnInit(): void {
+		super.ngOnInit();
+
+		this.searchField.setValue(&quot;&quot;);
+		this.filteredRouteEntries &#x3D; this.searchField.valueChanges.pipe(
+			startWith(&quot;&quot;),
+			map((option: string) &#x3D;&gt; {
+				return option ? this.filterRouteEntries(option) : [...this.routesToDisplay];
+			})
+		);
+
+		if (typeof this.menuConfig &#x3D;&#x3D;&#x3D; &quot;undefined&quot;) {
+			this.routesToDisplay &#x3D; this.constructRouteEntriesFromRouterStates();
+		} else {
+			this.routesToDisplay &#x3D; this.constructRouteEntriesFromMenuConfig(this.menuConfig);
+		}
+
+		this.routesToDisplay &#x3D; this.translateRoutesLabels(this.routesToDisplay);
+		this.routesToDisplay &#x3D; this.sortRoutesLabels(this.routesToDisplay);
+
+		this.translateService.onLangChange.subscribe((_ev: LangChangeEvent) &#x3D;&gt; {
+			this.routesToDisplay &#x3D; this.translateRoutesLabels(this.routesToDisplay);
+			this.routesToDisplay &#x3D; this.sortRoutesLabels(this.routesToDisplay);
+		});
+
+		this.logger.debug(componentName + &quot;: component initialized&quot;);
+	}
+
+	/**
+	 * redirect the user to the chosen path
+	 */
+	public redirect(routeEntry: StarkRouteSearchEntry): void {
+		this.starkRoutingService.navigateTo(routeEntry.targetState, routeEntry.targetStateParams).subscribe(
+			() &#x3D;&gt; {
+				this.hide &#x3D; true;
+				this.searchField.setValue(&quot;&quot;);
+			},
+			(error: any) &#x3D;&gt; {
+				this.logger.warn(componentName + &quot;: navigation failed. Error:&quot; + error);
+			}
+		);
+	}
+
+	/**
+	 * Show/hide the input field
+	 */
+	public show(): void {
+		this.hide &#x3D; !this.hide;
+
+		if (!this.hide) {
+			// set focus on the search field automatically
+			setTimeout(() &#x3D;&gt; {
+				const inputField: HTMLElement &#x3D; this.elementRef.nativeElement.querySelector(&quot;.search-field-input&quot;);
+				inputField.focus();
+			}, 80);
+		}
+	}
+
+	/**
+	 * @ignore
+	 */
+	public trackPath(_index: number, routeEntry: StarkRouteSearchEntry): string {
+		return routeEntry.targetState;
+	}
+
+	/**
+	 * Retrieve the list of routes from a {@link StarkMenuConfig} object which the user have passed to the component
+	 */
+	public constructRouteEntriesFromMenuConfig(menuConfig: StarkMenuConfig): StarkRouteSearchEntry[] {
+		let routesToDisplay: StarkRouteSearchEntry[] &#x3D; [];
+
+		if (menuConfig !&#x3D;&#x3D; undefined &amp;&amp; menuConfig.menuSections !&#x3D;&#x3D; undefined) {
+			for (const section of menuConfig.menuSections) {
+				for (const group of section.menuGroups) {
+					routesToDisplay &#x3D; [...routesToDisplay, ...this.extractRoutesFromMenuGroup(group)];
+				}
+			}
+		}
+
+		if (menuConfig !&#x3D;&#x3D; undefined &amp;&amp; menuConfig.menuGroups !&#x3D;&#x3D; undefined) {
+			for (const group of menuConfig.menuGroups) {
+				routesToDisplay &#x3D; [...routesToDisplay, ...this.extractRoutesFromMenuGroup(group)];
+			}
+		}
+
+		return routesToDisplay;
+	}
+
+	/**
+	 * Recursive method to extract routes from a StarkMenuGroup object.
+	 * @param group - the group which entries need to be extracted
+	 * @returns the extracted array of {@link StarkRouteSearchEntry} objects
+	 */
+	public extractRoutesFromMenuGroup(group: StarkMenuGroup): StarkRouteSearchEntry[] {
+		let routesToDisplay: StarkRouteSearchEntry[] &#x3D; [];
+
+		if (group.isVisible &amp;&amp; group.isEnabled &amp;&amp; group.targetState) {
+			routesToDisplay.push({
+				label: group.label,
+				targetState: group.targetState,
+				targetStateParams: group.targetStateParams
+			});
+		}
+		if (group.entries) {
+			for (const subGroup of group.entries) {
+				routesToDisplay &#x3D; [...routesToDisplay, ...this.extractRoutesFromMenuGroup(subGroup)];
+			}
+		}
+
+		return routesToDisplay;
+	}
+
+	/**
+	 * Retrieve the list of routes from the Router if the user haven&#x27;t passed a list to the component
+	 */
+	public constructRouteEntriesFromRouterStates(): StarkRouteSearchEntry[] {
+		const routesToDisplay: StarkRouteSearchEntry[] &#x3D; [];
+		for (const state of this.starkRoutingService.getStatesConfig()) {
+			const ng2State: Ng2StateDeclaration &#x3D; state;
+			const regexInitExitStateName: RegExp &#x3D; new RegExp(&quot;(&quot; + starkAppInitStateName + &quot;|&quot; + starkAppExitStateName + &quot;)&quot;);
+			if (
+				ng2State.name !&#x3D;&#x3D; undefined &amp;&amp;
+				ng2State.url !&#x3D;&#x3D; undefined &amp;&amp;
+				ng2State.url.length &gt; 1 &amp;&amp;
+				!ng2State.abstract &amp;&amp;
+				!ng2State.loadChildren &amp;&amp;
+				!ng2State.name.match(regexInitExitStateName)
+			) {
+				const translationKey: string &#x3D; this.starkRoutingService.getTranslationKeyFromState(ng2State.name);
+				routesToDisplay.push({ label: translationKey, targetState: ng2State.name });
+			}
+		}
+
+		return routesToDisplay;
+	}
+
+	/**
+	 * Translate the label of all elements in the {@link StarkRouteSearchEntry} object.
+	 * This is useful as the language can change during runtime.
+	 * @param routeEntries - route entries to translate
+	 * @returns the translate route entries
+	 */
+	public translateRoutesLabels(routeEntries: StarkRouteSearchEntry[]): StarkRouteSearchEntry[] {
+		const routesToDisplay: StarkRouteSearchEntry[] &#x3D; [];
+		for (const route of routeEntries) {
+			let translatedLabel: string | object &#x3D; this.translateService.instant(route.label.toString());
+			// in case the translation fails because the key is not found, an object containing all the translations will be returned!
+			// in that case the route label is used
+			translatedLabel &#x3D; typeof translatedLabel &#x3D;&#x3D;&#x3D; &quot;string&quot; ? translatedLabel : route.label.toString();
+			routesToDisplay.push({
+				label: translatedLabel,
+				targetState: route.targetState,
+				targetStateParams: route.targetStateParams
+			});
+		}
+
+		return routesToDisplay;
+	}
+
+	/**
+	 * Sort the array of {@link StarkRouteSearchEntry} objects by alphabetical order
+	 * @param routeEntries - the list of entries to sort
+	 * @returns the sorted array of {@link StarkRouteSearchEntry} objects
+	 */
+	public sortRoutesLabels(routeEntries: StarkRouteSearchEntry[]): StarkRouteSearchEntry[] {
+		routeEntries &#x3D; _sortBy(routeEntries, [&quot;label&quot;]);
+		return routeEntries;
+	}
+
+	/**
+	 * Determine the css class to use according to the direction chosen by the user
+	 */
+	public getDirection(): string {
+		if (this.direction &#x3D;&#x3D;&#x3D; &quot;right&quot;) {
+			return &quot;route-search-right&quot;;
+		}
+		return &quot;route-search-left&quot;;
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div [ngClass]&#x3D;&quot;getDirection()&quot;&gt;
+	&lt;button
+		mat-mini-fab
+		mat-icon-button
+		class&#x3D;&quot;search-button&quot;
+		color&#x3D;&quot;none&quot;
+		(click)&#x3D;&quot;show()&quot;
+		[matTooltip]&#x3D;&quot;&#x27;STARK.ROUTE_SEARCH.ABOUT&#x27; | translate&quot;
+	&gt;
+		&lt;mat-icon [svgIcon]&#x3D;&quot;icon&quot; starkSvgViewBox&gt;&lt;/mat-icon&gt;
+	&lt;/button&gt;
+	&lt;div *ngIf&#x3D;&quot;!hide&quot;&gt;
+		&lt;mat-form-field floatLabel&#x3D;&quot;never&quot; class&#x3D;&quot;search-field&quot;&gt;
+			&lt;input
+				class&#x3D;&quot;search-field-input&quot;
+				matInput
+				[matAutocomplete]&#x3D;&quot;autocompleteComp&quot;
+				[placeholder]&#x3D;&quot;&#x27;STARK.ROUTE_SEARCH.PLACEHOLDER&#x27; | translate&quot;
+				[formControl]&#x3D;&quot;searchField&quot;
+			/&gt;
+			&lt;mat-autocomplete #autocompleteComp&#x3D;&quot;matAutocomplete&quot; autoActiveFirstOption class&#x3D;&quot;search-route-autocomplete&quot;&gt;
+				&lt;mat-option
+					(onSelectionChange)&#x3D;&quot;redirect(option)&quot;
+					*ngFor&#x3D;&quot;let option of (filteredRouteEntries | async); trackBy: trackPath&quot;
+					[value]&#x3D;&quot;option.label&quot;
+				&gt;
+					&lt;p&gt;{{ option.label }}&lt;/p&gt;
+				&lt;/mat-option&gt;
+			&lt;/mat-autocomplete&gt;
+		&lt;/mat-form-field&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div [ngClass]="getDirection()">	<button		mat-mini-fab		mat-icon-button		class="search-button"		color="none"		(click)="show()"		[matTooltip]="\'STARK.ROUTE_SEARCH.ABOUT\' | translate"	>		<mat-icon [svgIcon]="icon" starkSvgViewBox></mat-icon>	</button>	<div *ngIf="!hide">		<mat-form-field floatLabel="never" class="search-field">			<input				class="search-field-input"				matInput				[matAutocomplete]="autocompleteComp"				[placeholder]="\'STARK.ROUTE_SEARCH.PLACEHOLDER\' | translate"				[formControl]="searchField"			/>			<mat-autocomplete #autocompleteComp="matAutocomplete" autoActiveFirstOption class="search-route-autocomplete">				<mat-option					(onSelectionChange)="redirect(option)"					*ngFor="let option of (filteredRouteEntries | async); trackBy: trackPath"					[value]="option.label"				>					<p>{{ option.label }}</p>				</mat-option>			</mat-autocomplete>		</mat-form-field>	</div></div></div>'
+    var COMPONENTS = [{'name': 'StarkActionBarComponent', 'selector': 'stark-action-bar'},{'name': 'StarkAppDataComponent', 'selector': 'stark-app-data'},{'name': 'StarkAppFooterComponent', 'selector': 'stark-app-footer'},{'name': 'StarkAppLogoComponent', 'selector': 'stark-app-logo'},{'name': 'StarkAppLogoutComponent', 'selector': 'stark-app-logout'},{'name': 'StarkAppMenuComponent', 'selector': 'stark-app-menu'},{'name': 'StarkAppMenuItemComponent', 'selector': 'stark-app-menu-item'},{'name': 'StarkAppSidebarComponent', 'selector': 'stark-app-sidebar'},{'name': 'StarkBreadcrumbComponent', 'selector': 'stark-breadcrumb'},{'name': 'StarkCollapsibleComponent', 'selector': 'stark-collapsible'},{'name': 'StarkDatePickerComponent', 'selector': 'stark-date-picker'},{'name': 'StarkDateRangePickerComponent', 'selector': 'stark-date-range-picker'},{'name': 'StarkDropdownComponent', 'selector': 'stark-dropdown'},{'name': 'StarkGenericSearchComponent', 'selector': 'stark-generic-search'},{'name': 'StarkLanguageSelectorComponent', 'selector': 'stark-language-selector'},{'name': 'StarkLoginPageComponent', 'selector': 'stark-login-page'},{'name': 'StarkMessagePaneComponent', 'selector': 'stark-message-pane'},{'name': 'StarkMinimapComponent', 'selector': 'stark-minimap'},{'name': 'StarkPaginationComponent', 'selector': 'stark-pagination'},{'name': 'StarkPreloadingPageComponent', 'selector': 'stark-preloading-page'},{'name': 'StarkPrettyPrintComponent', 'selector': 'stark-pretty-print'},{'name': 'StarkProgressIndicatorComponent', 'selector': 'stark-progress-indicator'},{'name': 'StarkRouteSearchComponent', 'selector': 'stark-route-search'},{'name': 'StarkSessionExpiredPageComponent', 'selector': 'stark-session-expired-page'},{'name': 'StarkSessionLogoutPageComponent', 'selector': 'stark-session-logout-page'},{'name': 'StarkSessionTimeoutWarningDialogComponent', 'selector': 'session-timeout-warning-dialog'},{'name': 'StarkSliderComponent', 'selector': 'stark-slider'},{'name': 'StarkTableColumnComponent', 'selector': 'stark-table-column'},{'name': 'StarkTableComponent', 'selector': 'stark-table'},{'name': 'StarkTableMultisortDialogComponent', 'selector': 'stark-table-dialog-multisort'},{'name': 'StarkToastNotificationComponent', 'selector': 'stark-toast-notification'}];
+    var DIRECTIVES = [{'name': 'StarkEmailMaskDirective', 'selector': 'directiveName'},{'name': 'StarkNumberMaskDirective', 'selector': 'directiveName'},{'name': 'StarkOnEnterKeyDirective', 'selector': 'directiveName'},{'name': 'StarkProgressIndicatorDirective', 'selector': 'directiveName'},{'name': 'StarkRestrictInputDirective', 'selector': 'directiveName'},{'name': 'StarkSvgViewBoxDirective', 'selector': 'directiveName'},{'name': 'StarkTextMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTimestampMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTransformInputDirective', 'selector': '[starkTransformInput]'}];
+    var ACTUAL_COMPONENT = {'name': 'StarkRouteSearchComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkRouteSearchComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

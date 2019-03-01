@@ -1,0 +1,9 @@
+::ng-deep table {
+  td,
+  th {
+    white-space: nowrap;
+    &.mat-cell {
+      padding-right: 20px;
+    }
+  }
+}
