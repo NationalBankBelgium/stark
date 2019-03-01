@@ -91,8 +91,8 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 		views: { "@": { component: DemoGenericSearchPageComponent } }
 	},
 	{
-		name: "demo-ui.stark-footer",
-		url: "/stark-footer",
+		name: "demo-ui.app-footer",
+		url: "/app-footer",
 		data: {
 			translationKey: "SHOWCASE.DEMO.FOOTER.TITLE"
 		},

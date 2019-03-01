@@ -36,7 +36,7 @@
         "DEFAULT_ICON": "Standaard pictogram",
         "HTML_CONTENT": "Alle HTML-inhoud",
         "OPEN": "Open",
-        "TITLE": "Stark collapsible",
+        "TITLE": "Collapsible",
         "TITLE_0": "Standaard icon collapsible titel",
         "TITLE_1": "Aangepast icon collapsible titel",
         "TOGGLE_COLLAPSIBLE": "Collapsible omschakelen"
@@ -68,14 +68,14 @@
         "SELECT_SERVICES": "Selecteer een of meer diensten",
         "SELECT_ONE_SERVICE": "Selecteer ten minsten een dienst",
         "SELECT_DISABLED": "Sorry, deze dropdown is niet geactiveerd",
-        "TITLE": "Stark dropdown",
+        "TITLE": "Dropdown",
         "WHITE": "Witte dropdown met zwarte achtergrond (maximum breedte)"
       },
       "EXAMPLE_VIEWER": {
         "TITLE": "Example viewer"
       },
       "FOOTER": {
-        "TITLE": "Stark App Footer Guidelines",
+        "TITLE": "App footer",
         "INTRO": "Stark provides you a custom footer for your application. It's a standard component you can use by copying this HTML into your code",
         "INFO": "This component takes 3 elements as input :",
         "INPUT1": "<b>legalInfoUrl</b> contains the url to the legal information page.",
@@ -91,7 +91,7 @@
         "SEARCH_RESULTS": "Search results",
         "SERVICE_INTERFACE": "Interface of the service needed for the Generic Search",
         "SERVICE_IMPLEMENTATION": "Implementation of the service needed for the Generic Search",
-        "TITLE": "Stark Generic Search",
+        "TITLE": "Generic Search",
         "TOGGLE": "Toggle search"
       },
       "DIRECTIVES": {
@@ -151,7 +151,7 @@
           }
         },
         "TRANSFORM": {
-          "TITLE": "Transform Input Directive",
+          "TITLE": "Transform input",
           "ONLY_UPPER_CASE_LABEL": "Alleen hoofdletters",
           "ONLY_LOWER_CASE_LABEL": "Alleen kleine letters",
           "EMOJI_LABEL": "\uD83D\uDE04\uD83D\uDE04\uD83D\uDE04",
@@ -161,7 +161,7 @@
       },
       "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Taal selector in 'dropdown' mode",
-        "TITLE": "Stark language selector",
+        "TITLE": "Language selector",
         "TOOLBAR": "Taal selector in 'toolbar' mode"
       },
       "LOGOUT": {
@@ -205,7 +205,7 @@
             "NEW_INFO_2": "Nieuwe informatie 2"
           }
         },
-        "TITLE": "Stark message pane",
+        "TITLE": "Message pane",
         "EXAMPLE": "Voorbeeld",
         "BUTTON_GROUPS": {
           "DEMO": "Demonstratie",
@@ -239,7 +239,7 @@
         "SCSS": "Pretty-Print SCSS",
         "SELECT_DATAFORMAT": "Selecteer een formaat",
         "SQL": "Pretty-Print SQL",
-        "TITLE": "Stark pretty print",
+        "TITLE": "Pretty print",
         "TRY_IT_YOURSELF": "Probeer het zelf",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
@@ -356,16 +356,16 @@
           "TITLE": "Basiskaart"
         },
         "CODE": "Hier is de code om een kaart te tonen:",
-        "TITLE": "Stark Kaarten"
+        "TITLE": "Kaarten"
       },
       "COLORS": {
         "ALT": {
           "DETAILS": "In addition to the 3 basic palettes, Stark provides 3 alternative palettes: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
-          "TITLE": "Alternative palettes"
+          "TITLE": "Stark alternative palettes"
         },
         "BASIC": {
           "DETAILS": "Stark provides an alternative layout for cards. You can keep the same html structure and add the <code>.stark-card</code> class to the Angular Material card. We also recommend to use <code>h3</code> tag inside the <code>mat-card-title</code>.<br><br><br>For more information on Angular Material's card, check out this link: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
-          "TITLE": "Basic palettes"
+          "TITLE": "Material palettes"
         },
         "CUSTOM": {
           "DETAILS": "If you want to customize those palettes, you first need to create a palette and this tool is really useful: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Just define your main color and it will generate the full palette, then you just need to copy the SCSS code and associate it to the palette you want to modify. Don't forget to import stark theming after the maps declaration. <br>Here, an example with default values on how to achieve this:",
@@ -375,7 +375,7 @@
           "DETAILS": "You can find the Material Design color palettes here: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
           "TITLE": "Useful links"
         },
-        "TITLE": "Stark Colors"
+        "TITLE": "Color Palettes"
       },
       "HEADER": {
         "COPY_PASTE": "Then you can copy/paste this HTML into your code",

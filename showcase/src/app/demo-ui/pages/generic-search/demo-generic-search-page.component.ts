@@ -21,7 +21,7 @@ export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent
 
 	public referenceList: ReferenceLink[] = [
 		{
-			label: "Stark Generic Search component API",
+			label: "Stark Generic Search component",
 			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkGenericSearchComponent.html"
 		},
 		{

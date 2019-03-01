@@ -14,7 +14,7 @@ To use this feature, you'll have to modify the `app.module.ts` file of your appl
 
 You'll have to import the StarkSessionUiModule like follow:
 
-```
+```typescript
 import {StarkSessionUiModule} from "@nationalbankbelgium/stark-ui";
 
 @NgModule({
@@ -28,7 +28,7 @@ import {StarkSessionUiModule} from "@nationalbankbelgium/stark-ui";
 To indicate that you don't wish to display such warning dialog, just set `timeoutWarningDialogDisabled` value to true.
 This option is false by default.
 
-```
+```typescript
 import {StarkSessionUiModule} from "@nationalbankbelgium/stark-ui";
 
 @NgModule({

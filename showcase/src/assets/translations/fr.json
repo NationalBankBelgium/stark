@@ -36,7 +36,7 @@
         "DEFAULT_ICON": "Icône par défaut",
         "HTML_CONTENT": "N'impoerte quel contenu HTML",
         "OPEN": "Ouvert",
-        "TITLE": "Stark collapsible",
+        "TITLE": "Collapsible",
         "TITLE_0": "Titre du collapsible avec icône par défaut",
         "TITLE_1": "Titre du collapsible avec icône custom",
         "TOGGLE_COLLAPSIBLE": "Ouvrir/fermer le collapsible"
@@ -75,7 +75,7 @@
         "TITLE": "Example viewer"
       },
       "FOOTER": {
-        "TITLE": "Stark App Footer Guidelines",
+        "TITLE": "App footer",
         "INTRO": "Stark fournit un pied de page personalisé pour votre application. Il s'agit d'un composant standard que vous pouvez utiliser en copiant ce HTML dans votre code",
         "INFO": "Ce composant prend trois éléments en entrée :",
         "INPUT1": "<b>legalInfoUrl</b> contient l'url de la page d'information légale.",
@@ -91,7 +91,7 @@
         "SEARCH_RESULTS": "Search results",
         "SERVICE_INTERFACE": "Interface of the service needed for the Generic Search",
         "SERVICE_IMPLEMENTATION": "Implementation of the service needed for the Generic Search",
-        "TITLE": "Stark Generic Search",
+        "TITLE": "Generic Search",
         "TOGGLE": "Toggle search"
       },
       "DIRECTIVES": {
@@ -151,7 +151,7 @@
           }
         },
         "TRANSFORM": {
-          "TITLE": "Transform Input Directive",
+          "TITLE": "Transform input",
           "ONLY_UPPER_CASE_LABEL": "Uniquement les majuscules",
           "ONLY_LOWER_CASE_LABEL": "Uniquement les minuscules",
           "EMOJI_LABEL": "\uD83D\uDE04\uD83D\uDE04\uD83D\uDE04",
@@ -161,7 +161,7 @@
       },
       "LANGUAGE_SELECTOR": {
         "DROPDOWN": "Sélecteur de langue en mode 'dropdown'",
-        "TITLE": "Stark language selector",
+        "TITLE": "Language selector",
         "TOOLBAR": "Sélecteur de langue en mode 'toolbar'"
       },
       "LOGOUT": {
@@ -205,7 +205,7 @@
             "NEW_INFO_2": "Nouvelle info 2"
           }
         },
-        "TITLE": "Message Pane",
+        "TITLE": "Message pane",
         "EXAMPLE": "Example",
         "BUTTON_GROUPS": {
           "DEMO": "Demo",
@@ -239,7 +239,7 @@
         "SCSS": "Pretty-Print SCSS",
         "SELECT_DATAFORMAT": "Sélectionner un format",
         "SQL": "Pretty-Print SQL",
-        "TITLE": "Stark pretty print",
+        "TITLE": "Pretty print",
         "TRY_IT_YOURSELF": "Essayez vous-même",
         "TYPESCRIPT": "Pretty-Print Typescript",
         "XML": "Pretty-Print XML"
@@ -356,16 +356,16 @@
           "TITLE": "Carte basique"
         },
         "CODE": "Voici le code correspondant à cette carte:",
-        "TITLE": "Stark Cartes"
+        "TITLE": "Cartes"
       },
       "COLORS": {
         "ALT": {
           "DETAILS": "En plus de ces trois palettes, Stark ajoute 3 palettes alternatives: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
-          "TITLE": "Palettes alternatives"
+          "TITLE": "Palettes Stark alternatives"
         },
         "BASIC": {
           "DETAILS": "Angular Material utilise trois palettes de couleurs: primary, accent et warn. Stark donne la possibilité de définir ces palettes de couleur via 3 maps SCSS: <code>$stark-primary-palette</code>, <code>$stark-accent-palette</code> and <code>$stark-warn-palette</code>.<br><br><br>Pour plus de détails sur la gestion du theme par Angular Material, veuillez consulter <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a>",
-          "TITLE": "Palettes basiques"
+          "TITLE": "Material palettes"
         },
         "CUSTOM": {
           "DETAILS": "Afin de personnaliser ces palettes, il faut d'abord créer une palette à l'aide de cet outil: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Selectionner la couleur de votre choix, l'outil génère le code SCSS pour vous, puis il suffit d'assigner la map à la palette que vous souhaitez modifier. Ne pas oublier d'importer le theming Stark après la déclaration des maps. <br>Voici un example:",
@@ -375,7 +375,7 @@
           "DETAILS": "Voici les palettes mises à dispostion par Material Design: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
           "TITLE": "Liens utiles"
         },
-        "TITLE": "Stark Colors"
+        "TITLE": "Color Palettes"
       },
       "HEADER": {
         "COPY_PASTE": "Ensuite il faut copier/coller ce bout de code HTML",
@@ -388,7 +388,7 @@
         "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contient le logo de l'application",
         "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contient 3 conteneurs, le premier pour le App Data component et le boutton de déconnection, le second pour le choix de langue et <code>stark-app-bar-content-right-actions-alt</code> qui contient des actions alternatives.",
         "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> affiche le titre de la page visitée.",
-        "TITLE": "Stark header guidelines"
+        "TITLE": "App Header Guidelines"
       },
       "TYPOGRAPHY": {
         "CLASSES_AND_TAGS": {

@@ -75,7 +75,7 @@
         "TITLE": "Stark example viewer"
       },
       "FOOTER": {
-        "TITLE": "App Footer Guidelines",
+        "TITLE": "App footer",
         "INTRO": "Stark provides you a custom footer for your application. It's a standard component you can use by copying this HTML into your code",
         "INFO": "This component takes 3 elements as input :",
         "INPUT1": "<b>legalInfoUrl</b> contains the url to the legal information page.",
@@ -91,7 +91,7 @@
         "SEARCH_RESULTS": "Search results",
         "SERVICE_INTERFACE": "Interface of the service needed for the Generic Search",
         "SERVICE_IMPLEMENTATION": "Implementation of the service needed for the Generic Search",
-        "TITLE": "Stark Generic Search",
+        "TITLE": "Generic Search",
         "TOGGLE": "Toggle search"
       },
       "DIRECTIVES": {
@@ -151,7 +151,7 @@
           }
         },
         "TRANSFORM": {
-          "TITLE": "Transform Input Directive",
+          "TITLE": "Transform input",
           "ONLY_UPPER_CASE_LABEL": "Upper case only",
           "ONLY_LOWER_CASE_LABEL": "Lower case only",
           "EMOJI_LABEL": "\uD83D\uDE04\uD83D\uDE04\uD83D\uDE04",
@@ -344,7 +344,7 @@
     "STYLEGUIDE": {
       "TITLE": "Style guide",
       "BUTTON": {
-        "TITLE": "Stark buttons"
+        "TITLE": "Buttons"
       },
       "CARD": {
         "ADVANCED": {
@@ -356,16 +356,16 @@
           "TITLE": "Basic card"
         },
         "CODE": "Here, the code to display this card:",
-        "TITLE": "Stark Cards"
+        "TITLE": "Cards"
       },
       "COLORS": {
         "ALT": {
           "DETAILS": "In addition to the 3 basic palettes, Stark provides 3 alternative palettes: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
-          "TITLE": "Alternative palettes"
+          "TITLE": "Stark alternative palettes"
         },
         "BASIC": {
           "DETAILS": "Angular Material uses 3 color palettes: a primary palette, an accent palette and a warn palette. Stark gives you the ability to define those palettes through 3 SCSS maps: <code>$stark-primary-palette</code>, <code>$stark-accent-palette</code> and <code>$stark-warn-palette</code>.<br><br>For more details on how Angular Material deals with theming, check out <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a>",
-          "TITLE": "Basic palettes"
+          "TITLE": "Material palettes"
         },
         "CUSTOM": {
           "DETAILS": "If you want to customize those palettes, you first need to create a palette and this tool is really useful: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Just define your main color and it will generate the full palette, then you just need to copy the SCSS code and associate it to the palette you want to modify. Don't forget to import stark theming after the maps declaration. <br>Here, an example with default values on how to achieve this:",
@@ -375,7 +375,7 @@
           "DETAILS": "You can find the Material Design color palettes here: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
           "TITLE": "Useful links"
         },
-        "TITLE": "Stark Colors"
+        "TITLE": "Color Palettes"
       },
       "HEADER": {
         "COPY_PASTE": "Then you can copy/paste this HTML into your code",
@@ -411,7 +411,7 @@
           "DETAILS": "We try to keep consistency with Angular Material. For more details checkout: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
           "TITLE": "Based on Angular Material"
         },
-        "TITLE": "Stark Typography"
+        "TITLE": "Typography"
       },
       "LAYOUT": {
         "TITLE": "Layout",

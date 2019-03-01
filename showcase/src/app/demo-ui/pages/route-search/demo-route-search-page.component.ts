@@ -22,7 +22,7 @@ export class DemoRouteSearchPageComponent implements OnInit {
 
 		this.referenceList = [
 			{
-				label: "Stark RoutSearch component",
+				label: "Stark Route Search component",
 				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkRouteSearchComponent.html"
 			}
 		];
