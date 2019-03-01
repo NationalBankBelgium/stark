@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkDatePickerFilter } from "@nationalbankbelgium/stark-ui";
+import { StarkDatePickerFilter, StarkDateRangePickerEvent } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
 
 @Component({
@@ -9,8 +9,8 @@ import { ReferenceLink } from "../../../shared/components";
 })
 export class DemoDateRangePickerPageComponent implements OnInit {
 	public isDisabled: boolean;
-	public startDate: Date;
-	public endDate: Date;
+	public startDate?: Date;
+	public endDate?: Date;
 	public minDate: Date;
 	public maxDate: Date;
 	public customDateFilter: StarkDatePickerFilter;
@@ -39,7 +39,10 @@ export class DemoDateRangePickerPageComponent implements OnInit {
 		];
 	}
 
-	public onDateChanged(event: Object): void {
+	public onDateChanged(event: StarkDateRangePickerEvent): void {
 		this.logger.debug(event);
+
+		this.startDate = event.startDate;
+		this.endDate = event.endDate;
 	}
 }

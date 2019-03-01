@@ -143,7 +143,6 @@ describe("MinimapComponent", () => {
 			hostFixture.detectChanges();
 
 			const dotsElement: HTMLElement | null = hostFixture.nativeElement.querySelector("stark-minimap .stark-minimap-dots");
-			console.log(dotsElement);
 			expect(dotsElement).toBeNull("compact view should not have dots");
 		});
 	});

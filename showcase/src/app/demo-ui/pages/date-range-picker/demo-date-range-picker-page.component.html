@@ -14,7 +14,7 @@
 				endDateLabel="STARK.DATE_RANGE_PICKER.TO"
 				[startMinDate]="minDate"
 				[startMaxDate]="maxDate"
-				[endMinDate]="minDate"
+				[endMinDate]="startDate || minDate"
 				[endMaxDate]="maxDate"
 				(dateRangeChanged)="onDateChanged($event)"
 			>

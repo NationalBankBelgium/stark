@@ -34,7 +34,7 @@
         "CLOSED": "Fermé",
         "CUSTOM_ICON": "Icône custom",
         "DEFAULT_ICON": "Icône par défaut",
-        "HTML_CONTENT": "N'impoerte quel contenu HTML",
+        "HTML_CONTENT": "N'importe quel contenu HTML",
         "OPEN": "Ouvert",
         "TITLE": "Collapsible",
         "TITLE_0": "Titre du collapsible avec icône par défaut",
@@ -43,9 +43,12 @@
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Filtre sur mesure",
+        "DISABLED": "Désactivé",
+        "NG_MODEL": "Date Picker - Utilisant NgModel",
         "ONLY_WEEKDAYS": "Date Picker - Seulement les jours de semaine",
         "ONLY_WEEKENDS": "Date Picker - Seulement les jours de weekend",
         "PLACEHOLDER": "Choisir une date",
+        "REACTIVE_FORM": "Date Picker - Utilisant Reactive form",
         "TITLE": "Date picker"
       },
       "DATE_RANGE_PICKER": {

@@ -1,30 +1,89 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.DATE_PICKER.TITLE</h1>
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+	<example-viewer
+		[extensions]="['HTML', 'TS']"
+		filesPath="date-picker/reactive-form"
+		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.REACTIVE_FORM"
+	>
+		<mat-form-field>
+			<stark-date-picker
+				pickerId="picker-reactive-form"
+				pickerName="picker-reactive-form"
+				[placeholder]="'SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER' | translate"
+				[dateFilter]="'OnlyWeekends'"
+				[min]="minDate"
+				[max]="maxDate"
+				dateMask
+				[formControl]="formControl"
+				required
+			></stark-date-picker>
+			<mat-error>
+				<div *ngIf="formControl.hasError('required')">This is required</div>
+				<div *ngIf="formControl.hasError('matDatepickerFilter')">Date filter</div>
+				<div *ngIf="formControl.hasError('matDatepickerMin')">Min date</div>
+				<div *ngIf="formControl.hasError('matDatepickerMax')">Max date</div>
+			</mat-error>
+		</mat-form-field>
+		<div>
+			<mat-checkbox (change)="toggleDisabledReactiveFormControl(formControl)" [value]="formControl.disabled">
+				{{ 'SHOWCASE.DEMO.DATE_PICKER.DISABLED' | translate }}
+			</mat-checkbox>
+		</div>
+	</example-viewer>
+
+	<example-viewer [extensions]="['HTML', 'TS']" filesPath="date-picker/ng-model" exampleTitle="SHOWCASE.DEMO.DATE_PICKER.NG_MODEL">
+		<mat-form-field>
+			<stark-date-picker
+				pickerId="picker-ng-model"
+				pickerName="picker-ng-model"
+				[(ngModel)]="ngModelDate"
+				[placeholder]="'SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER' | translate"
+				[min]="minDate"
+				[max]="maxDate"
+				[disabled]="disabled"
+				(dateChange)="onDateNgModelChanged()"
+				[dateMask]="maskConfig"
+				required
+			></stark-date-picker>
+		</mat-form-field>
+		<div>
+			<mat-checkbox (change)="disabled = !disabled" [value]="disabled">
+				{{ 'SHOWCASE.DEMO.DATE_PICKER.DISABLED' | translate }}
+			</mat-checkbox>
+		</div>
+	</example-viewer>
+
 	<example-viewer [extensions]="['HTML', 'TS']" filesPath="date-picker/weekends" exampleTitle="SHOWCASE.DEMO.DATE_PICKER.ONLY_WEEKENDS">
-		<stark-date-picker
-			pickerId="picker-only-weekends"
-			pickerName="only-weekends"
-			[date]="currentDate"
-			[dateFilter]="'OnlyWeekends'"
-			label="SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER"
-			[minDate]="minDate"
-			[maxDate]="maxDate"
-			(dateChanged)="onDateChanged($event)"
-		></stark-date-picker>
+		<mat-form-field>
+			<stark-date-picker
+				pickerId="picker-only-weekends"
+				pickerName="only-weekends"
+				[value]="currentDate"
+				[dateFilter]="'OnlyWeekends'"
+				[placeholder]="'SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER' | translate"
+				[min]="minDate"
+				[max]="maxDate"
+				[required]="required"
+				(dateChange)="onDateChanged($event)"
+			></stark-date-picker>
+		</mat-form-field>
 	</example-viewer>
 
 	<example-viewer [extensions]="['HTML', 'TS']" filesPath="date-picker/weekdays" exampleTitle="SHOWCASE.DEMO.DATE_PICKER.ONLY_WEEKDAYS">
-		<stark-date-picker
-			pickerId="picker-only-weekdays"
-			pickerName="only-weekdays"
-			[date]="currentDate"
-			[dateFilter]="'OnlyWeekdays'"
-			label="SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER"
-			[minDate]="minDate"
-			[maxDate]="maxDate"
-			(dateChanged)="onDateChanged($event)"
-		></stark-date-picker>
+		<mat-form-field>
+			<stark-date-picker
+				pickerId="picker-only-weekdays"
+				pickerName="only-weekdays"
+				[value]="currentDate"
+				[dateFilter]="'OnlyWeekdays'"
+				[placeholder]="'SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER' | translate"
+				[min]="minDate"
+				[max]="maxDate"
+				dateMask="true"
+				(dateChange)="onDateChanged($event)"
+			></stark-date-picker>
+		</mat-form-field>
 	</example-viewer>
 
 	<example-viewer
@@ -32,16 +91,18 @@
 		filesPath="date-picker/custom-filter"
 		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.CUSTOM_FILTER"
 	>
-		<stark-date-picker
-			pickerId="picker-custom-filter"
-			pickerName="custom-filter"
-			[date]="currentDate"
-			[dateFilter]="customDateFilter"
-			label="SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER"
-			[minDate]="minDate"
-			[maxDate]="maxDate"
-			(dateChanged)="onDateChanged($event)"
-		></stark-date-picker>
+		<mat-form-field>
+			<stark-date-picker
+				pickerId="picker-custom-filter"
+				pickerName="custom-filter"
+				[value]="currentDate"
+				[dateFilter]="customDateFilter"
+				[placeholder]="'SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER' | translate"
+				[min]="minDate"
+				[max]="maxDate"
+				(dateChange)="onDateChanged($event)"
+			></stark-date-picker>
+		</mat-form-field>
 	</example-viewer>
 </section>
 <stark-reference-block [links]="referenceList"></stark-reference-block>

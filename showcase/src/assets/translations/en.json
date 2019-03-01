@@ -43,9 +43,12 @@
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Custom Filter",
+        "DISABLED": "Disabled",
+        "NG_MODEL": "Date Picker - Using NgModel",
         "ONLY_WEEKDAYS": "Date Picker - Only weekdays",
         "ONLY_WEEKENDS": "Date Picker - Only weekends",
         "PLACEHOLDER": "Choose a date",
+        "REACTIVE_FORM": "Date Picker - Using Reactive form",
         "TITLE": "Date picker"
       },
       "DATE_RANGE_PICKER": {

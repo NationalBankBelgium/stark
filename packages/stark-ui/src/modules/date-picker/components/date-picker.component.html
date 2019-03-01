@@ -1,17 +1,22 @@
-<mat-form-field [id]="pickerId">
-	<input
-		matInput
-		[disabled]="isDisabled"
-		[id]="pickerId + '-input'"
-		[matDatepicker]="picker"
-		[placeholder]="label | translate"
-		[matDatepickerFilter]="dateFilterFnWrapper"
-		[min]="minDate"
-		[max]="maxDate"
-		[name]="pickerName"
-		[value]="date"
-		(dateChange)="onDateChange($event)"
-	/>
+<input
+	matInput
+	[id]="pickerId + '-input'"
+	[matDatepicker]="picker"
+	[value]="value"
+	(dateInput)="onDateInput($event)"
+	(dateChange)="onDateChange($event)"
+	[matDatepickerFilter]="dateFilterFnWrapper"
+	[min]="min"
+	[disabled]="disabled"
+	[max]="max"
+	[name]="pickerName"
+	[required]="required"
+	(focus)="onFocus($event)"
+	(blur)="onBlur()"
+	[starkTimestampMask]="getTimestampMaskConfig()"
+/>
+<mat-datepicker [id]="pickerId" #picker></mat-datepicker>
+<!-- This class is necessary to apply the mat-form-field styles on the `mat-datepicker-toggle` element. -->
+<div class="mat-form-field-suffix">
 	<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-	<mat-datepicker [id]="pickerId" #picker></mat-datepicker>
-</mat-form-field>
+</div>
