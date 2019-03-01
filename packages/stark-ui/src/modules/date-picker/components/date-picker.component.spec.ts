@@ -99,21 +99,21 @@ describe("DatePickerComponent", () => {
 		});
 
 		it("the MatDatepickerInput minDate should be min", () => {
-			const minDate: Date = new Date("07-01-2018");
+			const minDate: Date = new Date(2018, 6, 1);
 			component.minDate = minDate;
 			fixture.detectChanges();
 			expect(component.pickerInput.min.toDate()).toEqual(minDate);
 		});
 
 		it("the MatDatepickerInput maxDate should be max", () => {
-			const maxDate: Date = new Date("07-02-2018");
+			const maxDate: Date = new Date(2018, 6, 2);
 			component.maxDate = maxDate;
 			fixture.detectChanges();
 			expect(component.pickerInput.max.toDate()).toEqual(maxDate);
 		});
 
 		it("the MatDatepickerInput value should be date", () => {
-			const date: Date = new Date("07-03-2018");
+			const date: Date = new Date(2018, 6, 3);
 			component.date = date;
 			fixture.detectChanges();
 			expect(component.pickerInput.value.toDate()).toEqual(date);
@@ -122,23 +122,23 @@ describe("DatePickerComponent", () => {
 
 	describe("Dates filter", () => {
 		it("filterOnlyWeekdays() should filter week days", () => {
-			expect(component.filterOnlyWeekdays(new Date("07-16-2018"))).toBe(true);
-			expect(component.filterOnlyWeekdays(new Date("07-17-2018"))).toBe(true);
-			expect(component.filterOnlyWeekdays(new Date("07-18-2018"))).toBe(true);
-			expect(component.filterOnlyWeekdays(new Date("07-19-2018"))).toBe(true);
-			expect(component.filterOnlyWeekdays(new Date("07-20-2018"))).toBe(true);
-			expect(component.filterOnlyWeekdays(new Date("07-21-2018"))).toBe(false);
-			expect(component.filterOnlyWeekdays(new Date("07-22-2018"))).toBe(false);
+			expect(component.filterOnlyWeekdays(new Date(2018, 6, 16))).toBe(true);
+			expect(component.filterOnlyWeekdays(new Date(2018, 6, 17))).toBe(true);
+			expect(component.filterOnlyWeekdays(new Date(2018, 6, 18))).toBe(true);
+			expect(component.filterOnlyWeekdays(new Date(2018, 6, 19))).toBe(true);
+			expect(component.filterOnlyWeekdays(new Date(2018, 6, 20))).toBe(true);
+			expect(component.filterOnlyWeekdays(new Date(2018, 6, 21))).toBe(false);
+			expect(component.filterOnlyWeekdays(new Date(2018, 6, 22))).toBe(false);
 		});
 
 		it("filterOnlyWeekends() should filter week days", () => {
-			expect(component.filterOnlyWeekends(new Date("07-16-2018"))).toBe(false);
-			expect(component.filterOnlyWeekends(new Date("07-17-2018"))).toBe(false);
-			expect(component.filterOnlyWeekends(new Date("07-18-2018"))).toBe(false);
-			expect(component.filterOnlyWeekends(new Date("07-19-2018"))).toBe(false);
-			expect(component.filterOnlyWeekends(new Date("07-20-2018"))).toBe(false);
-			expect(component.filterOnlyWeekends(new Date("07-21-2018"))).toBe(true);
-			expect(component.filterOnlyWeekends(new Date("07-22-2018"))).toBe(true);
+			expect(component.filterOnlyWeekends(new Date(2018, 6, 16))).toBe(false);
+			expect(component.filterOnlyWeekends(new Date(2018, 6, 17))).toBe(false);
+			expect(component.filterOnlyWeekends(new Date(2018, 6, 18))).toBe(false);
+			expect(component.filterOnlyWeekends(new Date(2018, 6, 19))).toBe(false);
+			expect(component.filterOnlyWeekends(new Date(2018, 6, 20))).toBe(false);
+			expect(component.filterOnlyWeekends(new Date(2018, 6, 21))).toBe(true);
+			expect(component.filterOnlyWeekends(new Date(2018, 6, 22))).toBe(true);
 		});
 
 		it("dateFilter should be filterOnlyWeekdays() when dateFilter is OnlyWeekdays", () => {

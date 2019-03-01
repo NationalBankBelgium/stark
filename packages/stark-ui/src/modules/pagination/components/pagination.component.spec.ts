@@ -73,7 +73,11 @@ describe("PaginationComponent", () => {
 		const pageSelectorInput: DebugElement = rootElement.query(By.css(querySelector));
 
 		(<HTMLInputElement>pageSelectorInput.nativeElement).value = value;
-		(<HTMLInputElement>pageSelectorInput.nativeElement).dispatchEvent(new Event("input"));
+		// more verbose way to create and trigger an event (the only way it works in IE)
+		// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+		const inputEvent: Event = document.createEvent("Event");
+		inputEvent.initEvent("input", true, true);
+		(<HTMLInputElement>pageSelectorInput.nativeElement).dispatchEvent(inputEvent); // to trigger the input change on IE
 
 		const changeEvent: Event = document.createEvent("Event");
 		changeEvent.initEvent("change", true, true);
@@ -83,6 +87,14 @@ describe("PaginationComponent", () => {
 		keypressEvent.initEvent("keypress", true, true);
 		keypressEvent["key"] = "Enter";
 		pageSelectorInput.triggerEventHandler("keypress", keypressEvent);
+	};
+
+	const triggerClick: Function = (element: DebugElement): void => {
+		// more verbose way to create and trigger an event (the only way it works in IE)
+		// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+		const clickEvent: Event = document.createEvent("Event");
+		clickEvent.initEvent("click", true, true);
+		(<HTMLElement>element.nativeElement).dispatchEvent(clickEvent);
 	};
 
 	const assertPageInputSelection: Function = (rootElement: DebugElement, selectedOption: string) => {
@@ -150,10 +162,10 @@ describe("PaginationComponent", () => {
 
 			const pageNavElement: DebugElement = hostFixture.debugElement.query(By.css("ul"));
 			expect(pageNavElement).toBeDefined();
-			expect(pageNavElement.nativeElement.innerHTML).toContain('<li aria-label="Previous" class="previous"');
+			expect(pageNavElement.nativeElement.innerHTML).toMatch('<li.* aria-label="Previous"');
 			const numberElements: DebugElement[] = pageNavElement.queryAll(By.css(pageNumbersSelector));
 			expect(numberElements.length).toBe(0);
-			expect(pageNavElement.nativeElement.innerHTML).toContain('<li aria-label="Next" class="next"');
+			expect(pageNavElement.nativeElement.innerHTML).toMatch('<li.* aria-label="Next"');
 
 			// Verify pageSelector
 			const pageSelector: DebugElement = hostFixture.debugElement.query(By.css("div.pagination-enter-page"));
@@ -194,14 +206,14 @@ describe("PaginationComponent", () => {
 
 			const pageNavElement: DebugElement = hostFixture.debugElement.query(By.css("ul"));
 			expect(pageNavElement).toBeDefined();
-			expect(pageNavElement.nativeElement.innerHTML).toContain('<li aria-label="Previous" class="previous"');
+			expect(pageNavElement.nativeElement.innerHTML).toMatch('<li.* aria-label="Previous"');
 			const numberElements: DebugElement[] = pageNavElement.queryAll(By.css(pageNumbersSelector));
 			expect(numberElements.length).toBe(3);
 			expect(numberElements[0].nativeElement.textContent).toBe("1");
 			expect(numberElements[1].nativeElement.textContent).toBe("2");
 			expect(numberElements[2].nativeElement.textContent).toBe("3");
 			assertPageNavSelection(hostFixture.debugElement.childNodes[0], "2");
-			expect(pageNavElement.nativeElement.innerHTML).toContain('<li aria-label="Next" class="next"');
+			expect(pageNavElement.nativeElement.innerHTML).toMatch('<li.* aria-label="Next"');
 
 			// Verify pageSelector
 			const pageSelector: DebugElement = hostFixture.debugElement.query(By.css("div.pagination-enter-page"));
@@ -848,7 +860,7 @@ describe("PaginationComponent", () => {
 
 				firstButtonElement = hostFixture.debugElement.query(By.css(selectorFirstButtonElement));
 				expect(firstButtonElement.properties["disabled"]).toBeFalsy();
-				firstButtonElement.triggerEventHandler("click", {});
+				triggerClick(firstButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -868,7 +880,7 @@ describe("PaginationComponent", () => {
 
 				firstButtonElement = hostFixture.debugElement.query(By.css(selectorFirstButtonElement));
 				expect(firstButtonElement.properties["disabled"]).toBe(true);
-				firstButtonElement.triggerEventHandler("click", {});
+				triggerClick(firstButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -893,7 +905,7 @@ describe("PaginationComponent", () => {
 
 				previousButtonElement = hostFixture.debugElement.query(By.css(selectorPreviousButtonElement));
 				expect(previousButtonElement.properties["disabled"]).toBeFalsy();
-				previousButtonElement.triggerEventHandler("click", {});
+				triggerClick(previousButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -913,7 +925,7 @@ describe("PaginationComponent", () => {
 
 				previousButtonElement = hostFixture.debugElement.query(By.css(selectorPreviousButtonElement));
 				expect(previousButtonElement.properties["disabled"]).toBe(true);
-				previousButtonElement.triggerEventHandler("click", {});
+				triggerClick(previousButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -938,7 +950,7 @@ describe("PaginationComponent", () => {
 
 				nextButtonElement = hostFixture.debugElement.query(By.css(selectorNextButtonElement));
 				expect(nextButtonElement.properties["disabled"]).toBeFalsy();
-				nextButtonElement.triggerEventHandler("click", {});
+				triggerClick(nextButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -958,7 +970,7 @@ describe("PaginationComponent", () => {
 
 				nextButtonElement = hostFixture.debugElement.query(By.css(selectorNextButtonElement));
 				expect(nextButtonElement.properties["disabled"]).toBe(true);
-				nextButtonElement.triggerEventHandler("click", {});
+				triggerClick(nextButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -991,7 +1003,7 @@ describe("PaginationComponent", () => {
 
 				lastButtonElement = hostFixture.debugElement.query(By.css(selectorLastButtonElement));
 				expect(lastButtonElement.properties["disabled"]).toBeFalsy();
-				lastButtonElement.triggerEventHandler("click", {});
+				triggerClick(lastButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -1011,7 +1023,7 @@ describe("PaginationComponent", () => {
 
 				lastButtonElement = hostFixture.debugElement.query(By.css(selectorLastButtonElement));
 				expect(lastButtonElement.properties["disabled"]).toBe(true);
-				lastButtonElement.triggerEventHandler("click", {});
+				triggerClick(lastButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -1039,7 +1051,7 @@ describe("PaginationComponent", () => {
 				fail("li a with innerHTML '3' not found.");
 				return;
 			}
-			pageTwoElement.triggerEventHandler("click", {});
+			triggerClick(pageTwoElement);
 			hostFixture.detectChanges();
 			tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
@@ -1062,7 +1074,7 @@ describe("PaginationComponent", () => {
 				fail("No li element with textContent '...' found.");
 				return;
 			}
-			morePagesElement.triggerEventHandler("click", {});
+			triggerClick(morePagesElement);
 			hostFixture.detectChanges();
 			tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
