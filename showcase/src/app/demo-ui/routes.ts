@@ -6,6 +6,7 @@ import {
 	DemoCollapsiblePageComponent,
 	DemoDatePickerPageComponent,
 	DemoDateRangePickerPageComponent,
+	DemoDialogsPageComponent,
 	DemoDropdownPageComponent,
 	DemoFooterPageComponent,
 	DemoGenericSearchPageComponent,
@@ -76,6 +77,14 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 			translationKey: "SHOWCASE.DEMO.DATE_RANGE_PICKER.TITLE"
 		},
 		views: { "@": { component: DemoDateRangePickerPageComponent } }
+	},
+	{
+		name: "demo-ui.dialogs",
+		url: "/dialogs",
+		data: {
+			translationKey: "SHOWCASE.DEMO.DIALOGS.TITLE"
+		},
+		views: { "@": { component: DemoDialogsPageComponent } }
 	},
 	{
 		name: "demo-ui.dropdown",

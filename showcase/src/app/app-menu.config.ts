@@ -109,6 +109,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							targetState: "demo-ui.date-range-picker"
 						},
 						{
+							id: "menu-stark-ui-components-dialogs",
+							label: "SHOWCASE.DEMO.DIALOGS.TITLE",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-ui.dialogs"
+						},
+						{
 							id: "menu-stark-ui-components-dropdown",
 							label: "SHOWCASE.DEMO.DROPDOWN.TITLE",
 							isVisible: true,

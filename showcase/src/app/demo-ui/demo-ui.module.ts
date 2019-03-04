@@ -29,6 +29,7 @@ import {
 	StarkCollapsibleModule,
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
+	StarkDialogsModule,
 	StarkDropdownModule,
 	StarkGenericSearchModule,
 	StarkInputMaskDirectivesModule,
@@ -51,6 +52,7 @@ import {
 	DemoCollapsiblePageComponent,
 	DemoDatePickerPageComponent,
 	DemoDateRangePickerPageComponent,
+	DemoDialogsPageComponent,
 	DemoDropdownPageComponent,
 	DemoFooterPageComponent,
 	DemoGenericSearchFormComponent,
@@ -80,10 +82,10 @@ import {
 	TableRegularComponent,
 	TableWithCustomActionsComponent,
 	TableWithCustomStylingComponent,
+	TableWithFixedActionsComponent,
 	TableWithFixedHeaderComponent,
 	TableWithSelectionComponent,
-	TableWithTranscludedActionBarComponent,
-	TableWithFixedActionsComponent
+	TableWithTranscludedActionBarComponent
 } from "./components";
 
 @NgModule({
@@ -119,6 +121,7 @@ import {
 		StarkCollapsibleModule,
 		StarkDatePickerModule,
 		StarkDateRangePickerModule,
+		StarkDialogsModule,
 		StarkDropdownModule,
 		StarkGenericSearchModule,
 		StarkInputMaskDirectivesModule,
@@ -142,6 +145,7 @@ import {
 		DemoCollapsiblePageComponent,
 		DemoDatePickerPageComponent,
 		DemoDateRangePickerPageComponent,
+		DemoDialogsPageComponent,
 		DemoDropdownPageComponent,
 		DemoFooterPageComponent,
 		DemoGenericSearchPageComponent,
@@ -177,6 +181,7 @@ import {
 		DemoCollapsiblePageComponent,
 		DemoDatePickerPageComponent,
 		DemoDateRangePickerPageComponent,
+		DemoDialogsPageComponent,
 		DemoDropdownPageComponent,
 		DemoFooterPageComponent,
 		DemoGenericSearchPageComponent,

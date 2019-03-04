@@ -1,0 +1,6 @@
+.stark-prompt-dialog {
+  .button-ok {
+    background-color: mat-color($primary-palette, 500);
+    color: mat-contrast($primary-palette, 500);
+  }
+}

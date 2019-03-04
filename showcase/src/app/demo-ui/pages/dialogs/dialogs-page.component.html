@@ -1,0 +1,24 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO.DIALOGS.TITLE</h1>
+<section class="stark-section">
+	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+	<example-viewer
+		[extensions]="['HTML', 'TS']"
+		filesPath="dialogs/predefined-dialogs"
+		exampleTitle="SHOWCASE.DEMO.DIALOGS.PREDEFINED_DIALOGS"
+	>
+		<div class="dialog-demo-content">
+			<button mat-raised-button color="alert" (click)="showAlert()">{{ "SHOWCASE.DEMO.DIALOGS.ALERT_DIALOG" | translate }}</button>
+			<button mat-raised-button color="primary" (click)="showConfirm()">
+				{{ "SHOWCASE.DEMO.DIALOGS.CONFIRM_DIALOG" | translate }}
+			</button>
+			<button mat-stroked-button color="primary" (click)="showPrompt()">
+				{{ "SHOWCASE.DEMO.DIALOGS.PROMPT_DIALOG" | translate }}
+			</button>
+		</div>
+
+		<div *ngIf="dialogStatus" class="demo-prompt-dialog-status">
+			<b>{{ dialogStatus | translate: { result: dialogResult } }}</b>
+		</div>
+	</example-viewer>
+</section>
+<stark-reference-block [links]="referenceList"></stark-reference-block>

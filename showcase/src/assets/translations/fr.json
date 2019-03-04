@@ -51,6 +51,37 @@
       "DATE_RANGE_PICKER": {
         "TITLE": "Date range picker"
       },
+      "DIALOGS": {
+        "ALERT": {
+          "TITLE": "Ceci est un titre d'alerte",
+          "TEXT": "Vous pouvez spécifier un texte de description ici.",
+          "OK": "Compris!",
+          "RESULT_OK": "Dialogue d'alerte fermé avec la valeur '{{ result }}'",
+          "RESULT_CANCEL": "Dialogue d'alerte annulé avec la valeur '{{ result }}'"
+        },
+        "CONFIRM": {
+          "TITLE": "Voulez-vous supprimer votre dette?",
+          "TEXT": "Toutes les banques ont accepté d'oublier vos dettes.",
+          "OK": "Faites-le!",
+          "CANCEL": "On dirait une arnaque",
+          "RESULT_OK": "Vous avez décidé de vous débarrasser de votre dette.",
+          "RESULT_CANCEL": "Vous avez décidé de garder votre dette."
+        },
+        "PROMPT": {
+          "TITLE": "Comment nommeriez-vous votre chien?",
+          "TEXT": "Bowser est un nom commun.",
+          "PLACEHOLDER": "Nom du chien",
+          "OK": "D'accord!",
+          "CANCEL": "Je suis une personne à chat",
+          "RESULT_OK": "Vous avez décidé de nommer votre chien '{{ result }}'",
+          "RESULT_CANCEL": "Vous n'avez pas nommé votre chien."
+        },
+        "TITLE": "Dialogues",
+        "PREDEFINED_DIALOGS": "Dialogues prédéfinis",
+        "ALERT_DIALOG": "Dialogue d'alerte",
+        "CONFIRM_DIALOG": "Dialogue de confirmation",
+        "PROMPT_DIALOG": "Dialogue d'invite"
+      },
       "DROPDOWN": {
         "PR": "Applications informatiques",
         "BLANK": "Option par défaut (blank)",
