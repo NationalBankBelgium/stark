@@ -20,6 +20,7 @@ const globals = {
 	"@angular/material/autocomplete": "ngMaterial.autocomplete",
 	"@angular/material/button": "ngMaterial.button",
 	"@angular/material/button-toggle": "ngMaterial.buttonToggle",
+	"@angular/material/card":"ngMaterial.card",
 	"@angular/material/checkbox": "ngMaterial.checkbox",
 	"@angular/material/core": "ngMaterial.core",
 	"@angular/material/datepicker": "ngMaterial.datepicker",

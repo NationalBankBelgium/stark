@@ -15,7 +15,7 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog.component";
+import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 import { StarkSessionTimeoutWarningDialogEffects } from "../effects/session-timeout-warning.effects";
 import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities/stark-session-ui-config";
 import createSpyObj = jasmine.createSpyObj;

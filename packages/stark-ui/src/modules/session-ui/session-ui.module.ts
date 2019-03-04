@@ -1,8 +1,17 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
 import { UIRouterModule } from "@uirouter/angular";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { EffectsModule } from "@ngrx/effects";
 import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
+import { StarkLocale } from "@nationalbankbelgium/stark-core";
+import { MatCardModule } from "@angular/material/card";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatListModule } from "@angular/material/list";
+import { StarkAppLogoModule } from "../app-logo/app-logo.module";
+import { mergeUiTranslations } from "../../common/translations";
+import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "./entities";
 import { SESSION_UI_STATES } from "./routes";
 import {
 	StarkLoginPageComponent,
@@ -13,14 +22,9 @@ import {
 import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
-import { mergeUiTranslations } from "../../common/translations";
-
-import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "./entities";
-import { StarkSessionTimeoutWarningDialogComponent } from "./components/session-timeout-warning-dialog.component";
-import { MatDialogModule } from "@angular/material/dialog";
-import { StarkLocale } from "@nationalbankbelgium/stark-core";
-import { EffectsModule } from "@ngrx/effects";
 import { StarkSessionTimeoutWarningDialogEffects } from "./effects";
+import { StarkSessionCardComponent } from "./components/session-card/session-card.component";
+import { StarkSessionTimeoutWarningDialogComponent } from "./components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 
 @NgModule({
 	declarations: [
@@ -28,7 +32,8 @@ import { StarkSessionTimeoutWarningDialogEffects } from "./effects";
 		StarkPreloadingPageComponent,
 		StarkSessionExpiredPageComponent,
 		StarkSessionLogoutPageComponent,
-		StarkSessionTimeoutWarningDialogComponent
+		StarkSessionTimeoutWarningDialogComponent,
+		StarkSessionCardComponent
 	],
 	exports: [
 		StarkLoginPageComponent,
@@ -44,8 +49,12 @@ import { StarkSessionTimeoutWarningDialogEffects } from "./effects";
 		}),
 		MatButtonModule,
 		MatDialogModule,
+		MatCardModule,
+		MatDividerModule,
+		MatListModule,
 		TranslateModule,
-		EffectsModule.forFeature([StarkSessionTimeoutWarningDialogEffects])
+		EffectsModule.forFeature([StarkSessionTimeoutWarningDialogEffects]),
+		StarkAppLogoModule
 	],
 	entryComponents: [StarkSessionTimeoutWarningDialogComponent]
 })

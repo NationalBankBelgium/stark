@@ -1,0 +1,13 @@
+<mat-card role="dialog">
+	<div class="logo-header">
+		<stark-app-logo></stark-app-logo>
+	</div>
+	<mat-card-header *ngIf="cardTitle">
+		<mat-card-title>
+			<h1>{{ cardTitle | translate }}</h1>
+		</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<ng-content></ng-content>
+	</mat-card-content>
+</mat-card>
