@@ -49,8 +49,6 @@ class TestHostComponent {
 	public tableComponent: StarkTableComponent;
 
 	public columnProperties: StarkTableColumnProperties[];
-	// FIXME Currently, if no data is set on the init of the stark-table component, it breaks the component and its tests.
-	// More info on: https://github.com/NationalBankBelgium/stark/issues/1087
 	public dummyData: object[] = [];
 	public fixedHeader?: string;
 	public rowsSelectable?: boolean;
@@ -1103,6 +1101,34 @@ describe("TableComponent", () => {
 			hostFixture.detectChanges();
 
 			expect(component.selectChanged.emit).toHaveBeenCalledWith([dummyData[0]]);
+		});
+	});
+
+	describe("async", () => {
+		const dummyData: object[] = [
+			{ id: 1, description: "dummy 1" },
+			{ id: 2, description: "dummy 2" },
+			{ id: 3, description: "dummy 3" }
+		];
+
+		beforeEach(() => {
+			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+			hostComponent.dummyData = <any>undefined; // data starts uninitialized
+
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+
+		it("should update rows after async data fetch", () => {
+			const rowsBeforeData: NodeListOf<HTMLTableRowElement> = hostFixture.nativeElement.querySelectorAll("table tbody tr");
+			expect(rowsBeforeData.length).toBe(0);
+
+			// "async fetch of data resolves"
+			hostComponent.dummyData = dummyData;
+			hostFixture.detectChanges();
+
+			const rowsAfterData: NodeListOf<HTMLTableRowElement> = hostFixture.nativeElement.querySelectorAll("table tbody tr");
+			expect(rowsAfterData.length).toBe(dummyData.length);
 		});
 	});
 });
