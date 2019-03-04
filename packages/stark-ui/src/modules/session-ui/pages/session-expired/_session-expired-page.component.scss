@@ -4,14 +4,9 @@
 /* stark-ui: src/modules/session-ui/pages/session-expired/_session-expired-page.component.scss */
 
 .stark-session-expired-page {
-  & .stark-session-ui-page {
-    margin: 16px auto;
-    box-sizing: border-box;
-    border-radius: 8px;
-    text-align: center;
-  }
+  text-align: center;
 
-  & p {
+  p {
     text-align: left;
     line-height: 1.5;
   }

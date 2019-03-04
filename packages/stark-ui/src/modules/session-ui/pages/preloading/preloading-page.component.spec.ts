@@ -1,6 +1,10 @@
 /* tslint:disable:completed-docs */
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
+import { of, throwError } from "rxjs";
+import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
@@ -14,9 +18,8 @@ import {
 	MockStarkSessionService,
 	MockStarkUserService
 } from "@nationalbankbelgium/stark-core/testing";
-import { TranslateModule } from "@ngx-translate/core";
-import { MatButtonModule } from "@angular/material/button";
-import { of, throwError } from "rxjs";
+import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui";
+import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkPreloadingPageComponent } from "./preloading-page.component";
 
 describe("PreloadingPageComponent", () => {
@@ -31,8 +34,8 @@ describe("PreloadingPageComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			declarations: [StarkPreloadingPageComponent],
-			imports: [CommonModule, MatButtonModule, TranslateModule.forRoot()],
+			declarations: [StarkSessionCardComponent, StarkPreloadingPageComponent],
+			imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot(), StarkAppLogoModule],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
 				{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
