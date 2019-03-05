@@ -22,6 +22,7 @@ import {
 } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkMenuGroup } from "./app-menu-group.intf";
+import { StarkComponentUtil } from "../../../util/component";
 
 /**
  * Name of the component
@@ -82,9 +83,13 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 		}
 
 		if (isActive) {
-			this.activated.emit();
+			if (StarkComponentUtil.isOutputWiredUp(this.activated)) {
+				this.activated.emit();
+			}
 		} else {
-			this.deactivated.emit();
+			if (StarkComponentUtil.isOutputWiredUp(this.deactivated)) {
+				this.deactivated.emit();
+			}
 		}
 	}
 

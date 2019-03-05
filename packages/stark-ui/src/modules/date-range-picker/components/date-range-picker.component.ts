@@ -4,6 +4,7 @@ import moment from "moment";
 import { StarkDatePickerComponent, StarkDatePickerFilter } from "../../date-picker/components/date-picker.component";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
+import { StarkComponentUtil } from "../../../util/component";
 
 /**
  * Name of the component
@@ -161,9 +162,11 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 			this.endDate = undefined;
 			this.endPicker.pickerInput.value = undefined;
 		}
-		this.dateRangeChanged.emit({
-			startDate: this.startDate,
-			endDate: this.endDate
-		});
+		if (StarkComponentUtil.isOutputWiredUp(this.dateRangeChanged)) {
+			this.dateRangeChanged.emit({
+				startDate: this.startDate,
+				endDate: this.endDate
+			});
+		}
 	}
 }

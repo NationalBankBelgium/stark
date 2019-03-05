@@ -8,6 +8,9 @@ import { MatListModule } from "@angular/material/list";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppMenuItemComponent } from "./app-menu-item.component";
+import { Observer } from "rxjs";
+import createSpyObj = jasmine.createSpyObj;
+import SpyObj = jasmine.SpyObj;
 
 describe("StarkAppMenuItemComponent", () => {
 	let component: StarkAppMenuItemComponent;
@@ -88,17 +91,23 @@ describe("StarkAppMenuItemComponent", () => {
 		});
 
 		it("should dispatch activated event", () => {
-			spyOn(component.activated, "emit");
+			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			component.activated.subscribe(mockObserver);
 			component.isActive = true;
 			fixture.detectChanges();
-			expect(component.activated.emit).toHaveBeenCalledTimes(1);
+			expect(mockObserver.next).toHaveBeenCalledTimes(1);
+			expect(mockObserver.error).not.toHaveBeenCalled();
+			expect(mockObserver.complete).not.toHaveBeenCalled();
 		});
 
 		it("should dispatch deactivated event", () => {
-			spyOn(component.deactivated, "emit");
+			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			component.deactivated.subscribe(mockObserver);
 			component.isActive = false;
 			fixture.detectChanges();
-			expect(component.deactivated.emit).toHaveBeenCalledTimes(1);
+			expect(mockObserver.next).toHaveBeenCalledTimes(1);
+			expect(mockObserver.error).not.toHaveBeenCalled();
+			expect(mockObserver.complete).not.toHaveBeenCalled();
 		});
 	});
 

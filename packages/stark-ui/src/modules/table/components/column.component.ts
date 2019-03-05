@@ -19,6 +19,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 import { FormControl } from "@angular/forms";
 import { distinctUntilChanged } from "rxjs/operators";
 import { StarkColumnFilterChangedOutput, StarkColumnSortChangedOutput, StarkTableColumnSortingDirection } from "../entities";
+import { StarkComponentUtil } from "../../../util/component";
 
 /**
  * @ignore
@@ -201,10 +202,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 
 		this._filterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
 			this.filterValue = value === null ? undefined : value;
-			this.filterChanged.emit({
-				filterValue: this.filterValue,
-				name: this.name
-			});
+			this.onFilterChange();
 		});
 	}
 
@@ -283,19 +281,26 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Called whenever the value of the filter input changes
 	 */
 	public onFilterChange(): void {
-		this.filterChanged.emit(this);
+		if (StarkComponentUtil.isOutputWiredUp(this.filterChanged)) {
+			this.filterChanged.emit({
+				filterValue: this.filterValue,
+				name: this.name
+			});
+		}
 	}
 
 	/**
 	 * Called whenever the sorting of the column changes
 	 */
 	public onSortChange(): void {
-		this.sortChanged.emit({
-			name: this.name,
-			sortable: this.sortable,
-			sortDirection: this.sortDirection,
-			sortPriority: this.sortPriority
-		});
+		if (StarkComponentUtil.isOutputWiredUp(this.sortChanged)) {
+			this.sortChanged.emit({
+				name: this.name,
+				sortable: this.sortable,
+				sortDirection: this.sortDirection,
+				sortPriority: this.sortPriority
+			});
+		}
 	}
 
 	/**

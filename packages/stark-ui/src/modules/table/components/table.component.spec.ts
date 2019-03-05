@@ -16,14 +16,16 @@ import { HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { Subject } from "rxjs";
+import { Observer, Subject } from "rxjs";
 import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.component";
 import { StarkTableComponent } from "./table.component";
 import { StarkTableColumnComponent } from "./column.component";
 import { StarkPaginationComponent } from "../../pagination/components";
 import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "../entities";
-import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
+import createSpyObj = jasmine.createSpyObj;
+import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
 
 @Component({
 	selector: `host-component`,
@@ -1092,7 +1094,8 @@ describe("TableComponent", () => {
 		});
 
 		it("should emit event when row is selected", () => {
-			spyOn(component.selectChanged, "emit");
+			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			component.selectChanged.subscribe(mockObserver);
 
 			const checkboxElement: HTMLElement | null = hostFixture.nativeElement.querySelector("table tbody tr input[type=checkbox]");
 			if (!checkboxElement) {
@@ -1102,7 +1105,10 @@ describe("TableComponent", () => {
 			triggerClick(checkboxElement);
 			hostFixture.detectChanges();
 
-			expect(component.selectChanged.emit).toHaveBeenCalledWith([dummyData[0]]);
+			expect(mockObserver.next).toHaveBeenCalledTimes(1);
+			expect(mockObserver.next).toHaveBeenCalledWith([dummyData[0]]);
+			expect(mockObserver.error).not.toHaveBeenCalled();
+			expect(mockObserver.complete).not.toHaveBeenCalled();
 		});
 	});
 });

@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { StarkComponentUtil } from "../../../util/component";
 
 /**
  * Name of the component
@@ -84,6 +85,8 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	 */
 	public toggleCollapsible(): void {
 		this.isExpanded = !this.isExpanded;
-		this.isExpandedChange.emit(this.isExpanded);
+		if (StarkComponentUtil.isOutputWiredUp(this.isExpandedChange)) {
+			this.isExpandedChange.emit(this.isExpanded);
+		}
 	}
 }

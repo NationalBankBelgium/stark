@@ -3,6 +3,7 @@ import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from "@ang
 import moment from "moment";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { StarkComponentUtil } from "../../../util/component";
 
 export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Date) => boolean) | undefined;
 
@@ -170,7 +171,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent implement
 	 * @param event - The MatDatepickerInputEvent to re-emit
 	 */
 	public onDateChange(event: MatDatepickerInputEvent<moment.Moment>): void {
-		if (event.value) {
+		if (event.value && StarkComponentUtil.isOutputWiredUp(this.dateChanged)) {
 			this.dateChanged.emit(event.value.toDate());
 		}
 	}

@@ -138,7 +138,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 	 * This will emit the newly selected value.
 	 */
 	@Output()
-	public selectionChanged?: EventEmitter<any> = new EventEmitter<any>();
+	public selectionChanged: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
 	 * Whether the multiple row selection is enabled.
@@ -201,7 +201,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent implements 
 					distinctUntilChanged()
 				)
 				.subscribe((value: any) => {
-					if (this.selectionChanged) {
+					if (StarkComponentUtil.isOutputWiredUp(this.selectionChanged)) {
 						this.selectionChanged.emit(value);
 					}
 				});

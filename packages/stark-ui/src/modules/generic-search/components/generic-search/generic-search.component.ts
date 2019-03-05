@@ -31,6 +31,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { FormGroup } from "@angular/forms";
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from "@angular/animations";
 import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
+import { StarkComponentUtil } from "../../../../util/component";
 
 /**
  * @ignore
@@ -185,7 +186,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * A boolean is passed as parameter to indicate whether the generic form is visible or not.
 	 */
 	@Output()
-	public formVisibilityChanged?: EventEmitter<boolean> = new EventEmitter<boolean>();
+	public formVisibilityChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	/**
 	 * Reference to the child search form component. Such component is looked up by the `searchForm` template reference variable.
@@ -482,7 +483,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 			id: "search-action-bar",
 			isVisible: true,
 			actionCall: (): void => {
-				this.searchTriggered.emit(this.genericForm);
+				if (StarkComponentUtil.isOutputWiredUp(this.searchTriggered)) {
+					this.searchTriggered.emit(this.genericForm);
+				}
 			}
 		};
 
@@ -497,7 +500,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 			className: predefinedResetAction.className,
 			id: "undo-action-bar",
 			actionCall: (): void => {
-				if (this.resetTriggered) {
+				if (StarkComponentUtil.isOutputWiredUp(this.resetTriggered)) {
 					this.resetTriggered.emit(this.genericForm);
 				}
 			}
@@ -514,7 +517,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 			className: predefinedNewAction.className,
 			id: "new-action-bar",
 			actionCall: (): void => {
-				if (this.newTriggered) {
+				if (StarkComponentUtil.isOutputWiredUp(this.newTriggered)) {
 					this.newTriggered.emit();
 				}
 			}
@@ -530,7 +533,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * Emit the form through "searchTriggered" event emitter then hide the search form based on hideOnSearch variable
 	 */
 	public triggerSearch(): void {
-		this.searchTriggered.emit(this.genericForm);
+		if (StarkComponentUtil.isOutputWiredUp(this.searchTriggered)) {
+			this.searchTriggered.emit(this.genericForm);
+		}
 		if (this.hideOnSearch) {
 			this.hideForm();
 		}
@@ -544,7 +549,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 			this.isFormHidden = true;
 
 			// by the moment, the callback is called only when the form is hidden
-			if (this.formVisibilityChanged) {
+			if (StarkComponentUtil.isOutputWiredUp(this.formVisibilityChanged)) {
 				this.formVisibilityChanged.emit(!this.isFormHidden);
 			}
 		}

@@ -17,7 +17,7 @@ import * as noUiSliderLibrary from "nouislider";
 
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
 
-import { StarkDOMUtil } from "../../../util/dom/dom.util";
+import { StarkDOMUtil, StarkComponentUtil } from "../../../util";
 import { StarkSliderConfig } from "./slider-config.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -74,7 +74,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 * Event to be emitted when the slider's value(s) change.
 	 */
 	@Output()
-	public changed?: EventEmitter<number[]> = new EventEmitter();
+	public changed: EventEmitter<number[]> = new EventEmitter<number[]>();
 
 	/**
 	 * Stores the latest value, to be able to see if values have been changed
@@ -162,7 +162,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 				this.values = unencodedValues;
 				this.latestUnencodedValues = unencodedValues;
 
-				if (this.changed) {
+				if (StarkComponentUtil.isOutputWiredUp(this.changed)) {
 					this.changed.emit(this.values);
 				}
 			}

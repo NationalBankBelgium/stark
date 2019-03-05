@@ -18,6 +18,7 @@ import { MatPaginator, MatPaginatorIntl, PageEvent } from "@angular/material/pag
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginationConfig } from "./pagination-config.intf";
 import { StarkPaginateEvent } from "./paginate-event.intf";
+import { StarkComponentUtil } from "../../../util/component";
 
 /**
  * @ignore
@@ -276,10 +277,12 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 			typeof this.paginationConfig.page === "number" &&
 			typeof this.paginationConfig.itemsPerPage === "number"
 		) {
-			this.paginated.emit({
-				page: this.paginationConfig.page,
-				itemsPerPage: this.paginationConfig.itemsPerPage
-			});
+			if (StarkComponentUtil.isOutputWiredUp(this.paginated)) {
+				this.paginated.emit({
+					page: this.paginationConfig.page,
+					itemsPerPage: this.paginationConfig.itemsPerPage
+				});
+			}
 
 			this.setMatPaginatorProperties(this.paginationConfig);
 			this.emitMatPaginationEvent();

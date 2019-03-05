@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewEncapsulation } from "@angular/core";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { StarkComponentUtil } from "../../../util/component";
 
 export type StarkMinimapComponentMode = "compact";
 
@@ -69,7 +70,9 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	public handleCheckboxClick(event: Event, item: StarkMinimapItemProperties): void {
 		event.stopPropagation();
 		event.preventDefault();
-		this.showHideItem.emit(item);
+		if (StarkComponentUtil.isOutputWiredUp(this.showHideItem)) {
+			this.showHideItem.emit(item);
+		}
 	}
 
 	/**

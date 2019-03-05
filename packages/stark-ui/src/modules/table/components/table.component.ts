@@ -43,7 +43,7 @@ import { StarkPaginateEvent } from "../../pagination/components/paginate-event.i
 import { StarkComponentUtil } from "../../../util/component";
 import { FormControl } from "@angular/forms";
 import { distinctUntilChanged } from "rxjs/operators";
-import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "@nationalbankbelgium/stark-ui";
+import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../minimap";
 
 /**
  * Name of the component
@@ -392,7 +392,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 		this._globalFilterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
 			this.filter.globalFilterValue = value === null ? undefined : value;
-			this.filterChanged.emit(this.filter);
+			if (StarkComponentUtil.isOutputWiredUp(this.filterChanged)) {
+				this.filterChanged.emit(this.filter);
+			}
 
 			if (value) {
 				this.dataSource.filter = value.trim().toLowerCase();
@@ -411,7 +413,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["data"] && !changes["data"].isFirstChange()) {
 			if (this.resetFilterValueOnDataChange()) {
-				this.filterChanged.emit(this.filter);
+				if (StarkComponentUtil.isOutputWiredUp(this.filterChanged)) {
+					this.filterChanged.emit(this.filter);
+				}
 				this.applyFilter();
 			}
 
@@ -530,7 +534,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		// so we just re-emit the event from the Stark Pagination component (online mode)
 		if (this.paginationChanged.observers.length > 0) {
 			this.starkPaginator.paginated.subscribe((paginateEvent: StarkPaginateEvent) => {
-				this.paginationChanged.emit(paginateEvent);
+				if (StarkComponentUtil.isOutputWiredUp(this.paginationChanged)) {
+					this.paginationChanged.emit(paginateEvent);
+				}
 			});
 		} else {
 			// if there are no observers, then the data will be paginated internally in the MatTable via the Stark paginator event (offline mode)
@@ -653,7 +659,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 				}
 			}
 
-			this.filterChanged.emit(this.filter);
+			if (StarkComponentUtil.isOutputWiredUp(this.filterChanged)) {
+				this.filterChanged.emit(this.filter);
+			}
 		}
 	}
 
@@ -728,7 +736,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		}
 		this._selectionSub = this.selection.changed.subscribe((change: SelectionChange<object>) => {
 			const selected: object[] = change.source.selected;
-			this.selectChanged.emit(selected);
+			if (StarkComponentUtil.isOutputWiredUp(this.selectChanged)) {
+				this.selectChanged.emit(selected);
+			}
 		});
 	}
 
@@ -907,7 +917,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * @param row - The data object passed to the row
 	 */
 	public onRowClick(row: object): void {
-		if (this.rowClicked.observers.length > 0) {
+		if (StarkComponentUtil.isOutputWiredUp(this.rowClicked)) {
 			// If there is an observer, emit an event
 			this.rowClicked.emit(row);
 		} else if (this.rowsSelectable) {
