@@ -12,45 +12,20 @@ body {
   &.translate-cloak {
     visibility: hidden;
   }
-}
 
-.stark-section {
-  margin-bottom: 64px;
-}
+  .stark-section {
+    margin-bottom: 64px;
+  }
 
-.stark-main-container {
-  align-self: stretch;
-  min-height: 670px;
-  padding: 64px 15px;
-}
+  main.stark-main-container {
+    flex: 1 0 auto;
+    align-self: center;
 
-@media screen {
-  .stark-app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-    .content-wrapper {
-      flex: 1;
-      display: flex;
-      overflow-y: hidden;
-      position: relative;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-
-      > ui-view {
-        flex: 1 0 auto;
-      }
-    }
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 64px 15px;
   }
 }
-
 @media #{$tablet-query} {
   .stark-main-container {
     padding-left: 70px;

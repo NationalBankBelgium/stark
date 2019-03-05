@@ -4,17 +4,19 @@
 			<stark-app-logo></stark-app-logo>
 			<stark-app-menu [menuConfig]="mainMenu"></stark-app-menu>
 		</ng-container>
+
 		<ng-container stark-app-sidenav-left>
 			<div class="stark-app-sidenav-top m1 center">Top content</div>
 			<div class="stark-app-sidenav-middle m1 center">Middle content</div>
 			<div class="stark-app-sidenav-bottom m1 center">Bottom content</div>
 		</ng-container>
+
 		<ng-container stark-app-sidenav-right>
 			<div class="stark-app-sidenav-top m1 center">Top content</div>
 			<div class="stark-app-sidenav-middle m1 center">Middle content</div>
 			<div class="stark-app-sidenav-bottom m1 center">Bottom content</div>
 		</ng-container>
-		<div stark-app-sidenav-content>
+		<ng-container stark-app-sidenav-content>
 			<header class="stark-app-header">
 				<div class="stark-header-container">
 					<div class="stark-app-bar">
@@ -120,16 +122,15 @@
 					</div>
 				</div>
 			</header>
-			<div class="stark-main-container">
-				<main>
-					<ui-view></ui-view>
-				</main>
-			</div>
+			
+			<main class="stark-main-container">
+				<ui-view></ui-view>
+			</main>
+			
 			<stark-app-footer
 				legalInfoUrl="https://www.nbb.be/en/disclaimer-and-legal-information"
 				helpPageUrl="https://www.nbb.be/en/links"
-			>
-			</stark-app-footer>
-		</div>
+			></stark-app-footer>
+		</ng-container>
 	</stark-app-sidebar>
 </stark-app-container>
