@@ -2,8 +2,8 @@
 	<div class="table-of-contents-heading">Contents</div>
 	<nav>
 		<a
-			(click)="scrollToAnchor('#' + link.id)"
 			*ngFor="let link of links; trackBy: trackItem"
+			[href]="getHref(link)"
 			class="table-of-contents-level-{{ link.type }} table-of-contents-link"
 			[class.table-of-contents-active-link]="link.active"
 		>

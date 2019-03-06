@@ -139,6 +139,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	 * @param currentLink - the Link we are analysing
 	 * @param nextLink - the Link that follows the currentLink
 	 * @returns - if the link is active (true) or not (false)
+	 * FIXME: No longer works see https://github.com/NationalBankBelgium/stark/issues/1172
 	 */
 	private isLinkActive(currentLink: TableOfContentLink, nextLink: TableOfContentLink): boolean {
 		// A link is considered active if the page is scrolled passed the anchor without also
@@ -148,13 +149,12 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	}
 
 	/**
-	 * Method used to scroll to a link directly.
-	 * We cannot use the classical href with id's method because it would logoff the user from the application.
-	 * @param anchor - the title to scroll to
+	 * 	Hacky way to prevent redirect to homepage when clicking an anchor.
+	 * 	@ignore
 	 */
-	public scrollToAnchor(anchor: string): void {
-		const anchorPosition: number = (<HTMLElement>document.querySelector(anchor)).offsetTop;
-		window.scrollTo(0, anchorPosition);
+	public getHref(link: TableOfContentLink): string {
+		const { origin, pathname }: { origin: string; pathname: string } = window.location;
+		return `${origin}${pathname}#${link.id}`;
 	}
 
 	/**
