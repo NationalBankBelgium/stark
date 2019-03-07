@@ -409,17 +409,20 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
-		if (changes["data"] && !changes["data"].isFirstChange()) {
-			if (this.resetFilterValueOnDataChange()) {
-				this.filterChanged.emit(this.filter);
-				this.applyFilter();
-			}
+		if (changes["data"]) {
+			this.data = this.data || [];
+			if (!changes["data"].isFirstChange()) {
+				if (this.resetFilterValueOnDataChange()) {
+					this.filterChanged.emit(this.filter);
+					this.applyFilter();
+				}
 
-			if (this.orderProperties instanceof Array && this.orderProperties.length) {
-				this.sortData();
-			}
+				if (this.orderProperties instanceof Array && this.orderProperties.length) {
+					this.sortData();
+				}
 
-			this.updateDataSource();
+				this.updateDataSource();
+			}
 		}
 
 		if (changes["orderProperties"] && !changes["orderProperties"].isFirstChange()) {
