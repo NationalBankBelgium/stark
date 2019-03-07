@@ -547,7 +547,8 @@ describe("TableComponent", () => {
 				{ a: 4, b: "b4" },
 				{ a: 5, b: "b5" },
 				{ a: 6, b: "b6" },
-				{ a: 7, b: "b7" }
+				{ a: 7, b: "b7" },
+				{ a: 7, b: "ThisShouldBeAUniqueValue" }
 			];
 			hostComponent.tableFilter = {};
 			hostFixture.detectChanges(); // trigger data binding
@@ -639,6 +640,12 @@ describe("TableComponent", () => {
 				assertFilteredData(component, { globalFilterValue: "!" }, [mockData[11]]);
 				assertFilteredData(component, { globalFilterValue: "=" }, [mockData[12]]);
 				assertFilteredData(component, { globalFilterValue: "+" }, [mockData[13]]);
+			});
+
+			it("should update the total number of items to paginate when the filter is changed", () => {
+				hostComponent.tableFilter = { globalFilterPresent: true, globalFilterValue: "ThisShouldBeAUniqueValue" };
+				hostFixture.detectChanges();
+				expect(component.paginationConfig.totalItems).toBe(1);
 			});
 		});
 
@@ -747,6 +754,12 @@ describe("TableComponent", () => {
 				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "!" }] }, [mockData[11]]);
 				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "=" }] }, [mockData[12]]);
 				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "+" }] }, [mockData[13]]);
+			});
+
+			it("should update the total number of items to paginate when the filter is changed", () => {
+				hostComponent.tableFilter = { columns: [{ columnName: "b", filterValue: "ThisShouldBeAUniqueValue" }] };
+				hostFixture.detectChanges();
+				expect(component.paginationConfig.totalItems).toBe(1);
 			});
 		});
 	});
@@ -1105,7 +1118,7 @@ describe("TableComponent", () => {
 	});
 
 	describe("async", () => {
-		const dummyData: object[] = [
+		const DUMMY_DATA: object[] = [
 			{ id: 1, description: "dummy 1" },
 			{ id: 2, description: "dummy 2" },
 			{ id: 3, description: "dummy 3" }
@@ -1124,11 +1137,21 @@ describe("TableComponent", () => {
 			expect(rowsBeforeData.length).toBe(0);
 
 			// "async fetch of data resolves"
-			hostComponent.dummyData = dummyData;
+			hostComponent.dummyData = DUMMY_DATA;
 			hostFixture.detectChanges();
 
 			const rowsAfterData: NodeListOf<HTMLTableRowElement> = hostFixture.nativeElement.querySelectorAll("table tbody tr");
-			expect(rowsAfterData.length).toBe(dummyData.length);
+			expect(rowsAfterData.length).toBe(DUMMY_DATA.length);
+		});
+
+		it("should update pagination total after async data fetch", () => {
+			expect(component.paginationConfig.totalItems).toBe(0);
+
+			// "async fetch of data resolves"
+			hostComponent.dummyData = DUMMY_DATA;
+			hostFixture.detectChanges();
+
+			expect(component.paginationConfig.totalItems).toBe(DUMMY_DATA.length);
 		});
 	});
 });
