@@ -59,14 +59,14 @@ export class TableRegularComponent implements OnInit {
 			actions: [
 				{
 					id: "edit-item",
-					label: "STARK.ICONS.EDIT_ITEM",
+					label: "Edit",
 					icon: "pencil",
 					actionCall: ($event: Event, data: object) => this.logger.debug("EDIT", $event, data),
 					isEnabled: true
 				},
 				{
 					id: "delete-item",
-					label: "STARK.ICONS.DELETE_ITEM",
+					label: "Delete",
 					icon: "delete",
 					actionCall: ($event: Event, data: object) => this.logger.debug("DELETE", $event, data),
 					isEnabled: false
