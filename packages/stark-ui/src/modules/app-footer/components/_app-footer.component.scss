@@ -3,20 +3,20 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/app-footer/components/_app-footer.component.scss */
 stark-app-footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
+  align-self: stretch;
 }
 
 .stark-app-footer-container {
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 13px;
   line-height: 1.1;
   padding-left: 16px;
   padding-right: 16px;
-  height: $stark-footer-size;
+
+  min-height: $stark-footer-size;
 
   a {
     display: inline-block;

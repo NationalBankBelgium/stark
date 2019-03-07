@@ -1,14 +1,3 @@
-:host {
-  font-size: 13px;
-  // Width is container width minus content width
-  width: 19%;
-  position: sticky;
-  top: 0;
-  padding-left: 25px;
-  box-sizing: border-box;
-  display: inline-flex;
-}
-
 .table-of-contents-heading {
   margin: 8px 5px 0;
   padding: 0;
@@ -17,43 +6,34 @@
 }
 
 .table-of-contents-link {
-  line-height: 20px;
-  margin: 8px 8px 0;
   position: relative;
-  text-decoration: none;
   display: block;
-  width: 100%;
-  overflow: hidden;
+  margin: 8px 8px 0;
+
+  text-decoration: none;
+  line-height: 20px;
+
   cursor: pointer;
 }
 
-@media #{$desktop-lg-query} {
+.table-of-contents-container {
+  position: inherit;
+
+  width: 100%;
+
+  box-sizing: border-box;
+  padding: 5px 10px 10px 10px;
+
+  display: inline-table;
+}
+
+@media #{$desktop-query} {
   .table-of-contents-container {
-    padding: 5px 0 10px 10px;
-    width: 200px;
     position: fixed;
-    top: 145px;
+    top: 150px;
     right: 20px;
-  }
-}
 
-@media #{$handset-toc-query-screen} {
-  .table-of-contents-container {
-    padding: 5px 0 10px 10px;
-    width: 500px;
-    left: 40px;
-    position: inherit;
-    display: inline-table;
-  }
-}
-
-@media #{$tablet-toc-query-screen} {
-  .table-of-contents-container {
-    padding: 5px 0 10px 10px;
-    position: fixed;
-    top: 145px;
     width: 200px;
     display: inline-table;
-    right: 0;
   }
 }
