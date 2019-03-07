@@ -8,7 +8,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { StarkPaginationComponent } from "./components";
 import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
-import { StarkKeyboardDirectivesModule } from "../keyboard-directives/keyboard-directives.module";
+import { StarkRestrictInputDirectiveModule } from "../restrict-input-directive/restrict-input-directive.module";
 import { StarkDropdownModule } from "../dropdown/dropdown.module";
 
 @NgModule({
@@ -22,7 +22,7 @@ import { StarkDropdownModule } from "../dropdown/dropdown.module";
 		MatInputModule,
 		MatPaginatorModule,
 		MatTooltipModule,
-		StarkKeyboardDirectivesModule,
+		StarkRestrictInputDirectiveModule,
 		StarkSvgViewBoxModule,
 		StarkDropdownModule
 	]

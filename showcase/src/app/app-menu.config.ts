@@ -201,11 +201,11 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							targetState: "demo-ui.input-mask-directives"
 						},
 						{
-							id: "menu-stark-ui-directives-keyboard",
-							label: "SHOWCASE.DEMO.DIRECTIVES.KEYBOARD.TITLE",
+							id: "menu-stark-ui-restrict-input",
+							label: "SHOWCASE.DEMO.DIRECTIVES.RESTRICT_INPUT.TITLE",
 							isVisible: true,
 							isEnabled: true,
-							targetState: "demo-ui.keyboard-directives"
+							targetState: "demo-ui.restrict-input-directive"
 						},
 						{
 							id: "menu-stark-ui-transform-input",

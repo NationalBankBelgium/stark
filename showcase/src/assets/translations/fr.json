@@ -130,25 +130,13 @@
           },
           "TITLE": "Input Mask directives"
         },
-        "KEYBOARD": {
-          "TITLE": "Keyboard directives",
-          "ON_ENTER_KEY": {
-            "DESCRIPTION": "Tapez une valeur dans les entrées, puis appuyez sur Entrée dans l'un d'eux pour déclencher la fonction callback",
-            "INPUT_WITH_CONTEXT": "Avec contexte lié",
-            "INPUT_WITHOUT_CONTEXT": "Sans contexte lié (les valeurs liées ne sont pas accessibles)",
-            "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Sans contexte lié mais passé en paramètre",
-            "TITLE": "On Enter Key Directive",
-            "TYPE_AND_PRESS_ENTER": "Tapez une valeur et appuyez sur Entrée",
-            "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Tapez une valeur, appuyez sur Entrée et vérifiez la console"
-          },
-          "RESTRICT_INPUT": {
-            "TITLE": "Restrict Input Directive",
-            "DESCRIPTION": "Tapez une valeur dans les entrées et certains caractères seront prévenus en fonction de l'ensemble de restriction dans chaque champ",
-            "INPUT_ONLY_NUMBERS": "Accepter seulement les nombres",
-            "INPUT_ALPHANUMERICAL_CHARACTERS": "Accepter uniquement les caractères alphanumériques",
-            "INPUT_NO_SPECIAL_CHARACTERS": "Accepter tous les caractères sauf les caractères spéciaux",
-            "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules"
-          }
+        "RESTRICT_INPUT": {
+          "TITLE": "Restrict input",
+          "DESCRIPTION": "Tapez une valeur dans les entrées et certains caractères seront prévenus en fonction de l'ensemble de restriction dans chaque champ",
+          "INPUT_ONLY_NUMBERS": "Accepter seulement les nombres",
+          "INPUT_ALPHANUMERICAL_CHARACTERS": "Accepter uniquement les caractères alphanumériques",
+          "INPUT_NO_SPECIAL_CHARACTERS": "Accepter tous les caractères sauf les caractères spéciaux",
+          "INPUT_UPPERCASE_CHARACTERS": "Accepter uniquement les majuscules"
         },
         "TRANSFORM": {
           "TITLE": "Transform input",

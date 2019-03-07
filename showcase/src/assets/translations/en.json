@@ -130,25 +130,13 @@
           },
           "TITLE": "Input Mask directives"
         },
-        "KEYBOARD": {
-          "TITLE": "Keyboard directives",
-          "ON_ENTER_KEY": {
-            "DESCRIPTION": "Type some value in the inputs and then press Enter in any of them to trigger the callback function",
-            "INPUT_WITH_CONTEXT": "With bound context",
-            "INPUT_WITHOUT_CONTEXT": "Without bound context (bound values are not accessible)",
-            "INPUT_WITHOUT_CONTEXT_ALTERNATIVE": "Without bound context but passed as parameter",
-            "TITLE": "On Enter Key Directive",
-            "TYPE_AND_PRESS_ENTER": "Type a value and press Enter",
-            "TYPE_PRESS_ENTER_AND_CHECK_CONSOLE": "Type a value, press Enter and check the console"
-          },
-          "RESTRICT_INPUT": {
-            "TITLE": "Restrict Input Directive",
-            "DESCRIPTION": "Type some value in the inputs and some characters will be prevented depending on the restriction set in every field",
-            "INPUT_ONLY_NUMBERS": "Accept only numbers",
-            "INPUT_ALPHANUMERICAL_CHARACTERS": "Accept only alphanumeric characters",
-            "INPUT_NO_SPECIAL_CHARACTERS": "Accept all except special characters",
-            "INPUT_UPPERCASE_CHARACTERS": "Accept only uppercase characters"
-          }
+        "RESTRICT_INPUT": {
+          "TITLE": "Restrict input",
+          "DESCRIPTION": "Type some value in the inputs and some characters will be prevented depending on the restriction set in every field",
+          "INPUT_ONLY_NUMBERS": "Accept only numbers",
+          "INPUT_ALPHANUMERICAL_CHARACTERS": "Accept only alphanumeric characters",
+          "INPUT_NO_SPECIAL_CHARACTERS": "Accept all except special characters",
+          "INPUT_UPPERCASE_CHARACTERS": "Accept only uppercase characters"
         },
         "TRANSFORM": {
           "TITLE": "Transform input",

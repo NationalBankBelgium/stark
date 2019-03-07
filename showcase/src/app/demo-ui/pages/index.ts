@@ -8,7 +8,7 @@ export * from "./dropdown";
 export * from "./footer";
 export * from "./generic-search";
 export * from "./input-mask-directives";
-export * from "./keyboard-directives";
+export * from "./restrict-input-directive";
 export * from "./language-selector";
 export * from "./logout";
 export * from "./menu";
