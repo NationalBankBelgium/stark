@@ -191,7 +191,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * {@link StarkPaginationConfig} configuration object for embedded pagination component
 	 */
 	@Input()
-	public paginationConfig: StarkPaginationConfig;
+	public paginationConfig: StarkPaginationConfig = {};
 
 	/**
 	 * {@link StarkActionBarConfig} object for the action bar component to be displayed in all the rows
@@ -388,6 +388,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.sortData();
 		}
 
+		this.paginationConfig = {
+			...this.paginationConfig,
+			totalItems: this.dataSource ? this.dataSource.filteredData.length : this.data.length
+		};
 		this.initializeDataSource();
 
 		this._globalFilterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
@@ -410,6 +414,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["data"] && !changes["data"].isFirstChange()) {
+			this.paginationConfig = {
+				...this.paginationConfig,
+				totalItems: this.dataSource ? this.dataSource.filteredData.length : this.data.length
+			};
 			if (this.resetFilterValueOnDataChange()) {
 				this.filterChanged.emit(this.filter);
 				this.applyFilter();
@@ -504,6 +512,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public applyFilter(): void {
 		this.dataSource.filter = "" + this.dataSource.filter;
+		this.paginationConfig = { ...this.paginationConfig, totalItems: this.dataSource.filteredData.length };
 	}
 
 	/**
