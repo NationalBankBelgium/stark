@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import { StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
 const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
@@ -28,8 +28,6 @@ export class TableWithSelectionComponent implements OnInit {
 
 	public filter: StarkTableFilter;
 
-	public pagination: StarkPaginationConfig;
-
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
 
 	public ngOnInit(): void {
@@ -46,8 +44,6 @@ export class TableWithSelectionComponent implements OnInit {
 		];
 
 		this.filter = { globalFilterPresent: false, columns: [] };
-
-		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: 10 };
 	}
 
 	public handleRowSelected(data: object[]): void {
