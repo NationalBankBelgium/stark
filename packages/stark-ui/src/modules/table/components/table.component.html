@@ -2,6 +2,7 @@
 	<div class="transcluded">
 		<ng-content select="header"></ng-content>
 	</div>
+
 	<div class="actions" [ngClass]="{ 'actions-alt': customTableActionsType === 'alt' }">
 		<stark-action-bar
 			[actionBarConfig]="customTableRegularActions"
@@ -9,7 +10,9 @@
 			buttonColor="alt"
 			mode="compact"
 		></stark-action-bar>
+
 		<stark-pagination htmlSuffixId="{{ htmlId }}-pagination" [paginationConfig]="paginationConfig" mode="compact"></stark-pagination>
+
 		<button *ngIf="isMultiSortEnabled" (click)="openMultiSortDialog()" mat-icon-button>
 			<mat-icon
 				class="stark-small-icon"
@@ -18,6 +21,7 @@
 				svgIcon="sort"
 			></mat-icon>
 		</button>
+
 		<ng-container *ngIf="filter.globalFilterPresent">
 			<button [matMenuTriggerFor]="globalFilter" mat-icon-button>
 				<mat-icon
@@ -53,6 +57,7 @@
 				</div>
 			</mat-menu>
 		</ng-container>
+
 		<stark-minimap
 			[matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate"
 			*ngIf="minimap !== false"
@@ -114,15 +119,12 @@
 			[stickyEnd]="tableRowActions.isFixed"
 		>
 			<ng-template let-context>
-				<stark-action-bar
-					[actionBarConfig]="tableRowActions"
-					[actionBarScope]="context.rowData"
-					mode="compact"
-				></stark-action-bar>
+				<stark-action-bar [actionBarConfig]="tableRowActions" [actionBarScope]="context.rowData" mode="compact"></stark-action-bar>
 			</ng-template>
 		</stark-table-column>
 
 		<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: isFixedHeaderEnabled"></tr>
+
 		<tr
 			mat-row
 			*matRowDef="let row; columns: displayedColumns; let i = index"

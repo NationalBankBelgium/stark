@@ -5,11 +5,13 @@
 				<mat-icon starkSvgViewBox svgIcon="page-first"></mat-icon>
 			</button>
 		</li>
+
 		<li class="previous" aria-label="Previous">
 			<button mat-icon-button (click)="goToPrevious()" [disabled]="!hasPrevious()" aria-label="Previous">
 				<mat-icon starkSvgViewBox svgIcon="chevron-left"></mat-icon>
 			</button>
 		</li>
+
 		<ng-container *ngIf="paginationConfig.isExtended">
 			<!-- workaround to use ngIf together with ngFor -->
 			<li
@@ -18,30 +20,38 @@
 				[ngClass]="paginationConfig.page === pageNumber ? 'active' : ''"
 			>
 				<a *ngIf="pageNumber !== '...'" (click)="goToPage(pageNumber)">{{ pageNumber }}</a>
+
 				<span *ngIf="pageNumber === '...'">{{ pageNumber }}</span>
 			</li>
 		</ng-container>
+
 		<li class="next" aria-label="Next">
 			<button mat-icon-button type="button" (click)="goToNext()" [disabled]="!hasNext()">
 				<mat-icon starkSvgViewBox svgIcon="chevron-right"></mat-icon>
 			</button>
 		</li>
+
 		<li class="last-page" aria-label="Last page" *ngIf="!paginationConfig.isExtended">
 			<button mat-icon-button type="button" (click)="goToLast()" [disabled]="!hasNext()" aria-label="Last page">
 				<mat-icon starkSvgViewBox svgIcon="page-last"></mat-icon>
 			</button>
 		</li>
 	</ul>
+
 	<div class="pagination-enter-page" *ngIf="paginationConfig.pageInputIsPresent !== false">
 		<input
+			id="current-page-{{ htmlSuffixId }}"
+			[(ngModel)]="paginationInput"
 			[starkOnEnterKey]="changePageOnEnter.bind(this)"
 			starkRestrictInput="\d"
 			maxlength="{{ getPageInputMaxDigits() }}"
-			id="current-page-{{ htmlSuffixId }}"
-			[(ngModel)]="paginationInput"
 		/>
-		<span> /&nbsp;</span><span class="total-pages">{{ getTotalPages() }}</span>
+
+		<span>&nbsp;/&nbsp;</span>
+
+		<span class="total-pages">{{ getTotalPages() }}</span>
 	</div>
+
 	<div class="pagination-items-per-page" *ngIf="paginationConfig.itemsPerPageIsPresent !== false">
 		<stark-dropdown
 			[options]="paginationConfig.itemsPerPageOptions"
@@ -61,26 +71,30 @@
 				<mat-icon starkSvgViewBox svgIcon="page-first"></mat-icon>
 			</button>
 		</li>
+
 		<li class="previous" aria-label="Previous">
 			<button mat-icon-button (click)="goToPrevious()" [disabled]="!hasPrevious()" aria-label="Previous">
 				<mat-icon starkSvgViewBox svgIcon="chevron-left"></mat-icon>
 			</button>
 		</li>
+
 		<div class="pagination-enter-page" *ngIf="paginationConfig.pageInputIsPresent !== false">
 			<input
+				id="current-page-{{ htmlSuffixId }}"
+				[(ngModel)]="paginationInput"
 				[starkOnEnterKey]="changePageOnEnter.bind(this)"
 				starkRestrictInput="\d"
 				maxlength="{{ getPageInputMaxDigits() }}"
-				id="current-page-{{ htmlSuffixId }}"
-				[(ngModel)]="paginationInput"
 			/>
-			<span> /&nbsp;</span><span class="total-pages">{{ getTotalPages() }}</span>
+			<span>&nbsp;/&nbsp;</span><span class="total-pages">{{ getTotalPages() }}</span>
 		</div>
+
 		<li class="next" aria-label="Next">
 			<button mat-icon-button (click)="goToNext()" [disabled]="!hasNext()">
 				<mat-icon starkSvgViewBox svgIcon="chevron-right"></mat-icon>
 			</button>
 		</li>
+
 		<li class="last-page" aria-label="Last page">
 			<button mat-icon-button (click)="goToLast()" [disabled]="!hasNext()" aria-label="Last page">
 				<mat-icon starkSvgViewBox svgIcon="page-last"></mat-icon>

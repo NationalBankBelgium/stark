@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import { StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
 const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
@@ -27,8 +27,6 @@ export class TableWithFixedHeaderComponent implements OnInit {
 
 	public filter: StarkTableFilter;
 
-	public pagination: StarkPaginationConfig;
-
 	public ngOnInit(): void {
 		this.data = DUMMY_DATA;
 
@@ -43,7 +41,5 @@ export class TableWithFixedHeaderComponent implements OnInit {
 		];
 
 		this.filter = { globalFilterPresent: false, columns: [] };
-
-		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: DUMMY_DATA.length };
 	}
 }

@@ -191,7 +191,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * {@link StarkPaginationConfig} configuration object for embedded pagination component
 	 */
 	@Input()
-	public paginationConfig: StarkPaginationConfig;
+	public paginationConfig: StarkPaginationConfig = {};
 
 	/**
 	 * {@link StarkActionBarConfig} object for the action bar component to be displayed in all the rows
@@ -399,6 +399,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			} else {
 				this.dataSource.filter = "%empty%";
 			}
+
+			this.applyFilter();
 		});
 
 		this.cdRef.detectChanges();
@@ -411,6 +413,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["data"]) {
 			this.data = this.data || [];
+
 			if (!changes["data"].isFirstChange()) {
 				if (this.resetFilterValueOnDataChange()) {
 					this.filterChanged.emit(this.filter);
@@ -507,6 +510,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public applyFilter(): void {
 		this.dataSource.filter = "" + this.dataSource.filter;
+		this.paginationConfig = { ...this.paginationConfig, totalItems: this.dataSource.filteredData.length };
 	}
 
 	/**
@@ -528,6 +532,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	// tslint:disable-next-line:cognitive-complexity
 	private initializeDataSource(): void {
 		this.dataSource = new MatTableDataSource(this.data);
+		this.paginationConfig = {
+			...this.paginationConfig,
+			totalItems: this.dataSource.filteredData.length
+		};
 
 		// if there are observers subscribed to the StarkPagination event, it means that the developer will take care of the pagination
 		// so we just re-emit the event from the Stark Pagination component (online mode)
@@ -582,6 +590,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public updateDataSource(): void {
 		this.dataSource.data = this.data;
+		this.paginationConfig = {
+			...this.paginationConfig,
+			totalItems: this.dataSource.filteredData.length
+		};
 	}
 
 	/**
