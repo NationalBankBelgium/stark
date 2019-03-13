@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 let packageJsonPath = process.argv[2];
-let starkVersion = process.argv[3];
+let validVersion = process.argv[3];
 let isCorrect = true;
 
 fs.readFile("./modules.txt", "utf8", function(err, modulesData) {
@@ -19,15 +19,21 @@ fs.readFile("./modules.txt", "utf8", function(err, modulesData) {
 		}
 
 		for (const starkPackage of starkPackagesArray) {
-			const validVersionPattern = new RegExp('\\"@nationalbankbelgium/' + starkPackage + '\\": \\"' + starkVersion + '\\"', "gi");
+			const validVersionPattern = new RegExp('\\"@nationalbankbelgium/' + starkPackage + '\\": \\"' + validVersion + '\\"', "gi");
 			if (!packageJsonData.match(validVersionPattern)) {
 				isCorrect = false;
-				console.error("Version of package " + starkPackage + " is not correct. It should be `" + starkVersion + "`");
+				console.error("Version of package " + starkPackage + " is not correct. It should be '" + validVersion + "'");
 			}
 		}
 
 		if (!isCorrect) {
-			throw new Error("The version of some of the Stark packages is not correct in the Starter. Please adapt to a valid version.");
+			throw new Error(
+				"The version of some of the Stark packages is not correct in " +
+					packageJsonPath +
+					". Please adapt to '" +
+					validVersion +
+					"'."
+			);
 		}
 	});
 });

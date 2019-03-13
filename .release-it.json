@@ -6,7 +6,7 @@
 	"pkgFiles": ["package.json", "package-lock.json"],
 	"increment": "conventional:angular",
 	"scripts": {
-		"afterBump": "npm run generate:changelog",
+		"afterBump": "npm run check:nightly:stark-versions -- ${version} && npm run generate:changelog",
 		"afterRelease": false,
 		"beforeStage": false,
 		"beforeStart": "npm run check:starter:stark-versions",
