@@ -164,6 +164,8 @@ do
         if [[ ${NIGHTLY_BUILD} == false ]]; then
           logTrace "Publishing the release (with tag latest)" 2
           npm publish ${file} --access public
+          logTrace "Adapting the tag next to point to the new release" 2
+          npm dist-tag add @nationalbankbelgium/${PACKAGE}@${TRAVIS_TAG} next
         else
           logTrace "Check if nightly build is not already published."
           LATEST_NPM_VERSION=`npm view @nationalbankbelgium/${PACKAGE} dist-tags.next`

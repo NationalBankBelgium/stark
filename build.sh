@@ -36,7 +36,6 @@ IFS=${OLD_IFS} # restore IFS
 
 BUILD_ALL=true
 BUNDLE=true
-VERSION_PREFIX=$(node -p "require('./package.json').version")
 COMPILE_SOURCE=true
 TYPECHECK_ALL=true
 
@@ -144,12 +143,20 @@ if [[ -z ${TRAVIS_TAG+x} ]]; then
   TRAVIS_TAG=""
 fi
 
+if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
+  logInfo "Nightly build initiated by Travis cron job. Using nightly version as version prefix!" 1
+  VERSION_PREFIX=$(node -p "require('./package.json').config.nightlyVersion")
+else
+  logInfo "Normal build. Using current version as version prefix" 1
+  VERSION_PREFIX=$(node -p "require('./package.json').version")
+fi
+
 if [[ ${TRAVIS_TAG} == "" ]]; then
   logTrace "Setting the version suffix to the latest commit hash" 1
   VERSION_SUFFIX="-$(git log --oneline -1 | awk '{print $1}')" # last commit id
 else
   logTrace "Build executed for a tag. Not using a version suffix!" 1
-  VERSION_SUFFIX="" # last commit id
+  VERSION_SUFFIX="" # no suffix
 fi
 
 VERSION="${VERSION_PREFIX}${VERSION_SUFFIX}"

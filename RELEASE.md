@@ -5,7 +5,7 @@
 ### Local
 
 On your local machine, you must configure the `GITHUB_TOKEN` environment variable.
-It will be used by release-it to push to and create the release page on GitHub (cfr release:prepare section below).
+It will be used by release-it to push to and create the release page on GitHub (cfr [What happens once a release is triggered](#release-process) section below).
 
 ### Travis
 
@@ -17,10 +17,10 @@ On Travis, the following should be configured:
 
 ## Changelog
 
-First of all: _Never_ edit CHANGELOG.md manually!
+First of all: _**Never**_ edit [CHANGELOG.md](./CHANGELOG.md) manually!
 
 The changelog will be updated automatically as part of the release process and based on the commit log using conventional-changelog (https://github.com/conventional-changelog)
-We use the Angular format for our changelog and for it to work properly, please make sure to respect our commit conventions (see CONTRIBUTING guide).
+We use the Angular format for our changelog and for it to work properly, please make sure to respect our commit conventions (see our [CONTRIBUTING](./CONTRIBUTING.md) guide).
 
 ## Creating a release
 
@@ -29,18 +29,21 @@ Make sure that:
 -   all changes have merged into master
 -   everything is up to date locally
 -   everything is clean locally
+-   the base version set for nightly builds (at `config.nightlyVersion` in the root `package.json`) is higher than the version to be released
 -   execute `npm run release`
 
-Enjoy the show.
+Enjoy the show!
+
+_NOTE:_ If any of the pre-conditions mentioned above are not met, no worries, the npm command will fail with the proper description about what needs to be fixed.
 
 ## Publishing the release on npm
 
 Once you have pushed the tag, Travis will handle things from there.
 
-Once done, you must make sure that the tags are adapted so that the "latest" tag still points to what we consider the latest (i.e., next major/minor)!
+Once done, you must make sure that the distribution tags are adapted so that the `latest` tag still points to what we consider the latest (i.e., next major/minor)!
 Refer to the "Adapting tags of published packages" section below.
 
-## What happens once a release is triggered
+## <a name="release-process"></a>What happens once a release is triggered
 
 ### release
 
@@ -48,7 +51,8 @@ Refer to the "Adapting tags of published packages" section below.
 -   then we execute release-it: https://github.com/webpro/release-it which
     -   bumps the version in the root package.json automatically (determines the bump type to use depending on the commit message logs)
         -   that version number will be used as basis in the build to adapt all other package.json files
-    -   generates/updates the CHANGELOG.md file using: conventional-changelog: https://github.com/conventional-changelog
+    -   checks that the base version for nightly builds (at `config.nightlyVersion` in the root `package.json`) is higher than the version to be released
+    -   generates/updates the [CHANGELOG.md](./CHANGELOG.md) file using: conventional-changelog: https://github.com/conventional-changelog
     -   commits both package.json and CHANGELOG.md
     -   creates a new git tag and pushes it
     -   creates a github release page and makes it final
@@ -94,7 +98,7 @@ To replace the keys used by the docs publish script:
 -   associate the public key with the Stark repository as a "Deploy Key": https://developer.github.com/v3/guides/managing-deploy-keys/
 -   encrypt the private key with the Travis CLI: `travis encrypt-file ./stark-ssh -r NationalBankBelgium/stark`
     -   that command will generate an encrypted version of the key
-    -   make sure you're logged in (see next section)
+    -   make sure you're logged in (see [Installing the Travis CLI](#intalling-travis-cli) section)
     -   **IMPORTANT: on Windows the generation of the encrypted key produces a corrupted file. So you should generate it on a Linux system. See https://github.com/travis-ci/travis-ci/issues/4746**
 -   save the encrypted file as `stark-ssh.enc` and get rid of the non-encrypted key directly
 
@@ -105,7 +109,7 @@ The command will also
 
 The name of those variables will change each time it is used, therefore the `gh-deploy.sh` MUST also be adapted afterwards.
 
-#### Installing the Travis CLI
+#### <a name="intalling-travis-cli"></a>Installing the Travis CLI
 
 Steps:
 
@@ -119,7 +123,8 @@ Steps:
 
 Finally, Travis executes `npm run release:publish`.
 
-That script makes some checks then, if all succeed it publishes the different packages on npm.
+That script makes some checks then, if all succeed, it publishes the different packages on npm and sets the `last` and `next` distribution tags to the published version.
+
 Checks that are performed:
 
 -   node version: should be "8"
@@ -131,5 +136,5 @@ Other details can be found here: https://github.com/NationalBankBelgium/stark/is
 
 ## Adapting tags of published packages
 
-If a published version doesn't have all necessary tags, or if we want to adapt those for some reason (e.g., latest pointing to a patch release rather than the latest major/minor), then we can use the `npm dist-tag` command.
+If a published version doesn't have all necessary distribution tags, or if we want to adapt those for some reason (e.g., `latest` pointing to a patch release rather than the latest major/minor), then we can use the `npm dist-tag` command.
 Reference: https://docs.npmjs.com/cli/dist-tag
