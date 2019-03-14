@@ -42,7 +42,7 @@
 		<input
 			id="current-page-{{ htmlSuffixId }}"
 			[(ngModel)]="paginationInput"
-			[starkOnEnterKey]="changePageOnEnter.bind(this)"
+			(keyup.enter)="changePageOnEnter()"
 			starkRestrictInput="\d"
 			maxlength="{{ getPageInputMaxDigits() }}"
 		/>
@@ -82,7 +82,7 @@
 			<input
 				id="current-page-{{ htmlSuffixId }}"
 				[(ngModel)]="paginationInput"
-				[starkOnEnterKey]="changePageOnEnter.bind(this)"
+				(keyup.enter)="changePageOnEnter()"
 				starkRestrictInput="\d"
 				maxlength="{{ getPageInputMaxDigits() }}"
 			/>

@@ -12,7 +12,7 @@ export * from "./modules/date-range-picker";
 export * from "./modules/dropdown";
 export * from "./modules/generic-search";
 export * from "./modules/input-mask-directives";
-export * from "./modules/keyboard-directives";
+export * from "./modules/restrict-input-directive";
 export * from "./modules/language-selector";
 export * from "./modules/message-pane";
 export * from "./modules/minimap";

@@ -17,7 +17,7 @@ import { StarkPaginationComponent } from "./pagination.component";
 import { StarkPaginateEvent } from "./paginate-event.intf";
 import { StarkPaginationConfig } from "./pagination-config.intf";
 import { StarkDropdownComponent, StarkDropdownModule } from "../../dropdown";
-import { StarkKeyboardDirectivesModule } from "../../keyboard-directives";
+import { StarkRestrictInputDirectiveModule } from "../../restrict-input-directive";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
@@ -71,22 +71,24 @@ describe("PaginationComponent", () => {
 	const changeInputValueAndPressEnter: Function = (rootElement: DebugElement, value: string) => {
 		const querySelector: string = "div.pagination-enter-page input";
 		const pageSelectorInput: DebugElement = rootElement.query(By.css(querySelector));
+		const nativeInputElement: HTMLInputElement = <HTMLInputElement>pageSelectorInput.nativeElement;
 
-		(<HTMLInputElement>pageSelectorInput.nativeElement).value = value;
+		nativeInputElement.value = value;
 		// more verbose way to create and trigger an event (the only way it works in IE)
 		// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
 		const inputEvent: Event = document.createEvent("Event");
 		inputEvent.initEvent("input", true, true);
-		(<HTMLInputElement>pageSelectorInput.nativeElement).dispatchEvent(inputEvent); // to trigger the input change on IE
+		nativeInputElement.dispatchEvent(inputEvent); // to trigger the input change on IE
 
 		const changeEvent: Event = document.createEvent("Event");
 		changeEvent.initEvent("change", true, true);
 		pageSelectorInput.triggerEventHandler("change", changeEvent);
-
-		const keypressEvent: Event = document.createEvent("Event");
-		keypressEvent.initEvent("keypress", true, true);
-		keypressEvent["key"] = "Enter";
-		pageSelectorInput.triggerEventHandler("keypress", keypressEvent);
+		
+		// key up
+		const keyupEvent: Event = document.createEvent("Event");
+		keyupEvent.initEvent("keyup", true, true);
+		keyupEvent["key"] = "Enter";
+		nativeInputElement.dispatchEvent(keyupEvent);
 	};
 
 	const triggerClick: Function = (element: DebugElement): void => {
@@ -115,7 +117,7 @@ describe("PaginationComponent", () => {
 				NoopAnimationsModule,
 				TranslateModule.forRoot(),
 				StarkDropdownModule,
-				StarkKeyboardDirectivesModule
+				StarkRestrictInputDirectiveModule
 			],
 			declarations: [StarkPaginationComponent, TestHostComponent],
 			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
@@ -174,7 +176,6 @@ describe("PaginationComponent", () => {
 			expect(pageSelectorInput.properties["id"]).toBe(currentPagePrefix + htmlSuffixId);
 			/// expect(pageSelectorInput.attributes["ngModel"]).toBe("paginationInput"); // FIXME: ngModel not included in the element
 			expect(pageSelectorInput.attributes["starkRestrictInput"]).toBe("\\d");
-			expect(pageSelectorInput.attributes["ng-reflect-on-enter-key-handler"]).toBeDefined(); // starkOnEnterKey directive
 			const pageSelectorTotalPages: DebugElement = pageSelector.query(By.css(totalPagesSelector));
 			expect(pageSelectorTotalPages.nativeElement.innerHTML).toBe("3");
 
@@ -222,7 +223,6 @@ describe("PaginationComponent", () => {
 			expect(pageSelectorInput.properties["id"]).toBe(currentPagePrefix + htmlSuffixId);
 			/// expect(pageSelectorInput.attributes["ngModel"]).toBe("paginationInput"); // FIXME: ngModel not included in the element
 			expect(pageSelectorInput.attributes["starkRestrictInput"]).toBe("\\d");
-			expect(pageSelectorInput.attributes["ng-reflect-on-enter-key-handler"]).toBeDefined(); // starkOnEnterKey directive
 			const pageSelectorTotalPages: DebugElement = pageSelector.query(By.css(totalPagesSelector));
 			expect(pageSelectorTotalPages.nativeElement.innerHTML).toBe("3");
 

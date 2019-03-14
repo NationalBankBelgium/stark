@@ -10,7 +10,7 @@ import {
 	DemoFooterPageComponent,
 	DemoGenericSearchPageComponent,
 	DemoInputMaskDirectivesPageComponent,
-	DemoKeyboardDirectivesPageComponent,
+	DemoRestrictInputDirectivePageComponent,
 	DemoLanguageSelectorPageComponent,
 	DemoLogoutPageComponent,
 	DemoMenuPageComponent,
@@ -99,12 +99,12 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 		views: { "@": { component: DemoFooterPageComponent } }
 	},
 	{
-		name: "demo-ui.keyboard-directives",
-		url: "/keyboard-directives",
+		name: "demo-ui.restrict-input-directive",
+		url: "/restrict-input-directive",
 		data: {
-			translationKey: "SHOWCASE.DEMO.DIRECTIVES.KEYBOARD.TITLE"
+			translationKey: "SHOWCASE.DEMO.DIRECTIVES.RESTRICT_INPUT.TITLE"
 		},
-		views: { "@": { component: DemoKeyboardDirectivesPageComponent } }
+		views: { "@": { component: DemoRestrictInputDirectivePageComponent } }
 	},
 	{
 		name: "demo-ui.transform-input-directive",
