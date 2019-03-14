@@ -143,6 +143,11 @@ if [[ -z ${TRAVIS_TAG+x} ]]; then
   TRAVIS_TAG=""
 fi
 
+# Making sure the variable exists
+if [[ -z ${TRAVIS_EVENT_TYPE+x} ]]; then
+  TRAVIS_EVENT_TYPE=""
+fi
+
 if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
   logInfo "Nightly build initiated by Travis cron job. Using nightly version as version prefix!" 1
   VERSION_PREFIX=$(node -p "require('./package.json').config.nightlyVersion")
