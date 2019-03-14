@@ -17,6 +17,7 @@ export function resolveTargetRoute(
 	/**
 	 * Get the corresponding registered state that matches with the given URL.
 	 * If the state is part of a lazy loaded module, then such module is loaded first and then the URL is searched again to get the correct state
+	 * @param targetUrl - the URL of the target state being searched
 	 */
 	function getTargetStateByUrl(targetUrl: string): StarkStateConfigWithParams | undefined {
 		let targetState: StarkStateConfigWithParams | undefined = routingService.getStateConfigByUrlPath(targetUrl);
