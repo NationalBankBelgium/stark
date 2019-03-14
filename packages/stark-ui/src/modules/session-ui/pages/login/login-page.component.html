@@ -1,17 +1,12 @@
-<div class="stark-session-ui-page" role="alertdialog" aria-busy="true" aria-live="assertive">
-	<header><i></i></header>
-	<content>
-		<h2 class="dialog-title" translate>STARK.LOGIN.TITLE</h2>
-		<div *ngIf="userProfilesAvailable()">
-			<ul>
-				<li *ngFor="let user of users; trackBy: trackItemFn">
-					<a (click)="authenticateUser(user)">
-						<h3>{{ user.firstName }} {{ user.lastName }}</h3>
-						<p>({{ getUserRoles(user) }})</p>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div *ngIf="!userProfilesAvailable()" translate>STARK.LOGIN.NO_PROFILE</div>
-	</content>
-</div>
+<stark-session-card cardTitle="STARK.LOGIN.TITLE">
+	<mat-list *ngIf="userProfilesAvailable()">
+		<ng-container *ngFor="let user of users; trackBy: trackItemFn; let i = index">
+			<a mat-list-item (click)="authenticateUser(user)">
+				<h3 mat-line>{{ user.firstName }} {{ user.lastName }}</h3>
+				<p mat-line>({{ getUserRoles(user) }})</p>
+			</a>
+			<mat-divider *ngIf="i !== users.length - 1"></mat-divider>
+		</ng-container>
+	</mat-list>
+	<div *ngIf="!userProfilesAvailable()" translate>STARK.LOGIN.NO_PROFILE</div>
+</stark-session-card>

@@ -8,7 +8,7 @@ import {
 	StarkSessionTimeoutCountdownFinish,
 	StarkSessionTimeoutCountdownStart
 } from "@nationalbankbelgium/stark-core";
-import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog.component";
+import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { Actions, Effect, EffectNotification, ofType, OnRunEffects } from "@ngrx/effects";
 import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities/stark-session-ui-config";

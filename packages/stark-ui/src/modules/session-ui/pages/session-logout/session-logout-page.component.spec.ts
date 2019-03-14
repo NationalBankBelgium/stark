@@ -1,9 +1,12 @@
 /* tslint:disable:completed-docs */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { CommonModule } from "@angular/common";
-import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule } from "@ngx-translate/core";
+import { CommonModule } from "@angular/common";
+import { MatCardModule } from "@angular/material/card";
+import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkApplicationConfig } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
+import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui";
+import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkSessionLogoutPageComponent } from "./session-logout-page.component";
 
 describe("SessionLogoutPageComponent", () => {
@@ -16,10 +19,12 @@ describe("SessionLogoutPageComponent", () => {
 
 	beforeEach(async(() => {
 		const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
+
 		return TestBed.configureTestingModule({
-			declarations: [StarkSessionLogoutPageComponent],
-			imports: [CommonModule, TranslateModule.forRoot()],
+			declarations: [StarkSessionCardComponent, StarkSessionLogoutPageComponent],
+			imports: [CommonModule, MatCardModule, TranslateModule.forRoot(), StarkAppLogoModule],
 			providers: [
+				{ provide: STARK_ROUTING_SERVICE, useValue: MockStarkRoutingService },
 				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
 				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
 			]

@@ -1,0 +1,34 @@
+@mixin center-content() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stark-session-card {
+  @include center-content;
+
+  width: 100vw;
+  height: 100vh;
+
+  mat-card {
+    overflow: hidden;
+    min-width: 500px;
+
+    .logo-header {
+      @include center-content;
+
+      margin: -16px -16px 0 -16px;
+      padding: 16px;
+      background-image: url(/assets/stark-core/logo/stark_header_bg.png);
+      background-size: cover;
+    }
+
+    mat-card-header {
+      @include center-content;
+
+      mat-card-title h1 {
+        margin: 16px 0;
+      }
+    }
+  }
+}

@@ -25,6 +25,7 @@
             "main": "src/main.browser.ts",
             "tsConfig": "tsconfig.app.json",
             "polyfills": "src/polyfills.browser.ts",
+            "extractCss": true,
             "assets": [
               {
                 "glob": "mdi.svg",
