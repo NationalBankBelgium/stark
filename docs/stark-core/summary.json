@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Getting Started",
+    "file": "GETTING_STARTED.md"
+  },
+  {
+    "title": "Environments support",
+    "file": "ENVIRONMENTS.md"
+  },
+  {
+    "title": "Default Error Handling",
+    "file": "ERROR_HANDLING.md"
+  }
+]

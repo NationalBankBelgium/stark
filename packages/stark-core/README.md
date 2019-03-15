@@ -9,4 +9,4 @@
 
 Stark's Core module (aka stark-core) provides the foundations of the Stark framework.
 
-**[Getting Started](../../docs/stark-core/GETTING_STARTED.md)**
+**[Getting Started](https://stark.nbb.be/api-docs/stark-core/latest/additional-documentation/getting-started.html)**

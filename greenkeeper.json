@@ -18,6 +18,7 @@
   },
   "ignore": [
     "@angular/flex-layout",
+    "@compodoc/compodoc",
     "@types/node",
     "class-validator",
     "typescript"

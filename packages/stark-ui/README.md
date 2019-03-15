@@ -10,10 +10,10 @@
 Stark's UI module (aka stark-ui) provides the UI related features of the Stark framework.
 It includes the UI component kit of Stark as well as other services and utilities.
 
-**[Getting Started](../../docs/stark-ui/GETTING_STARTED.md)**
+**[Getting Started](https://stark.nbb.be/api-docs/stark-ui/latest/additional-documentation/getting-started.html)**
 
 ## Developer Guide
 
--   **[Generic Search component](../../docs/stark-ui/GENERIC_SEARCH.md)**
+-   **[Generic Search component](https://stark.nbb.be/api-docs/stark-ui/latest/additional-documentation/generic-search-component.html)**
 
--   **[Session Timeout Warning configuration](../../docs/stark-ui/TIMEOUT_WARNING.md)**
+-   **[Session Timeout Warning configuration](https://stark.nbb.be/api-docs/stark-ui/latest/additional-documentation/timeout-warning-configuration.html)**

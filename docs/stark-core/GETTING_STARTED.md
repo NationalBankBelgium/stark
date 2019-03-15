@@ -1,6 +1,6 @@
 # Getting started
 
-The recommended way to get started with **Stark** is to download the [starter](../../starter) and run `npm install`.
+The recommended way to get started with **Stark** is to download the [starter](https://github.com/NationalBankBelgium/stark/tree/master/starter) and run `npm install`.
 
 ## <a name="styling"></a>Styling
 
