@@ -1,0 +1,16 @@
+.dialog-demo-content {
+  //display: flex;
+  //flex-direction: row;
+  //justify-content: space-between;
+  display: block;
+  text-align: center;
+
+  button {
+    margin: 10px;
+  }
+}
+
+.demo-prompt-dialog-status {
+  text-align: center;
+  padding: 16px 0;
+}

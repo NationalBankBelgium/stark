@@ -51,6 +51,37 @@
       "DATE_RANGE_PICKER": {
         "TITLE": "Date range picker"
       },
+      "DIALOGS": {
+        "ALERT": {
+          "TITLE": "This is an alert title",
+          "TEXT": "You can specify some description text in here.",
+          "OK": "Got it!",
+          "RESULT_OK": "Alert dialog closed with value '{{ result }}'",
+          "RESULT_CANCEL": "Alert dialog cancelled with value '{{ result }}'"
+        },
+        "CONFIRM": {
+          "TITLE": "Would you like to delete your debt?",
+          "TEXT": "All of the banks have agreed to forgive you your debts.",
+          "OK": "Please do it!",
+          "CANCEL": "Sounds like a scam",
+          "RESULT_OK": "You decided to get rid of your debt.",
+          "RESULT_CANCEL": "You decided to keep your debt."
+        },
+        "PROMPT": {
+          "TITLE": "What would you name your dog?",
+          "TEXT": "Bowser is a common name.",
+          "PLACEHOLDER": "Dog name",
+          "OK": "Okay!",
+          "CANCEL": "I'm a cat person",
+          "RESULT_OK": "You decided to name your dog '{{ result }}'",
+          "RESULT_CANCEL": "You didn't name your dog."
+        },
+        "TITLE": "Dialogs",
+        "PREDEFINED_DIALOGS": "Predefined dialogs",
+        "ALERT_DIALOG": "Alert dialog",
+        "CONFIRM_DIALOG": "Confirm dialog",
+        "PROMPT_DIALOG": "Prompt dialog"
+      },
       "DROPDOWN": {
         "PR": "IT applications",
         "BLANK": "Single selection with default blank",

@@ -32,3 +32,12 @@
 .mat-button-wrapper .mat-icon {
   margin-top: -2.5px;
 }
+
+// FIXME: remove as soon as the MatDialogActions is adapted to align with Material Design guidelines: https://github.com/angular/material2/issues/14736
+mat-dialog-actions,
+[mat-dialog-actions],
+[matDialogActions] {
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: -16px;
+}

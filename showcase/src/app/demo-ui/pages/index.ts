@@ -4,6 +4,7 @@ export * from "./breadcrumb";
 export * from "./collapsible";
 export * from "./date-picker";
 export * from "./date-range-picker";
+export * from "./dialogs";
 export * from "./dropdown";
 export * from "./footer";
 export * from "./generic-search";

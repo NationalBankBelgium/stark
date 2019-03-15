@@ -51,6 +51,37 @@
       "DATE_RANGE_PICKER": {
         "TITLE": "Date range picker"
       },
+      "DIALOGS": {
+        "ALERT": {
+          "TITLE": "Dit is een waarschuwings titel",
+          "TEXT": "Je kan hierin een beschrijvende tekst opgeven.",
+          "OK": "Begrepen!",
+          "RESULT_OK": "Waarschuwings dialoog gesloten met waarde '{{ result }}'",
+          "RESULT_CANCEL": "Waarschuwings dialoog gesloten met waarde '{{ result }}'"
+        },
+        "CONFIRM": {
+          "TITLE": "Wil je jouw schuld laten schrappen?",
+          "TEXT": "Alle banken hebben afgesproken om jouw schulden te vergeven.",
+          "OK": "Doe het alsjeblieft!",
+          "CANCEL": "Klinkt als een scam",
+          "RESULT_OK": "Je hebt besloten om jouw schuld te laten kwijtschelden.",
+          "RESULT_CANCEL": "Je hebt besloten jouw schuld te behouden."
+        },
+        "PROMPT": {
+          "TITLE": "Hoe zou je jouw hond noemen?",
+          "TEXT": "Bowser is een veel voorkomende naam.",
+          "PLACEHOLDER": "Hondennaam",
+          "OK": "Oké!",
+          "CANCEL": "Ik ben een kat persoon",
+          "RESULT_OK": "Je hebt besloten om je hond '{{ result }}' te noemen.",
+          "RESULT_CANCEL": "Je hebt je hond geen naam gegeven."
+        },
+        "TITLE": "Dialogen",
+        "PREDEFINED_DIALOGS": "Voorgedefinieerde dialogen",
+        "ALERT_DIALOG": "Waarschuwings dialoog",
+        "CONFIRM_DIALOG": "Bevestigings dialoog",
+        "PROMPT_DIALOG": "Prompt dialoog"
+      },
       "DROPDOWN": {
         "PR": "Informaticatoepassingen",
         "BLANK": "Bij verstek keus (blank)",

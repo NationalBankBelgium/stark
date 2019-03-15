@@ -9,6 +9,7 @@ export * from "./modules/breadcrumb";
 export * from "./modules/collapsible";
 export * from "./modules/date-picker";
 export * from "./modules/date-range-picker";
+export * from "./modules/dialogs";
 export * from "./modules/dropdown";
 export * from "./modules/generic-search";
 export * from "./modules/input-mask-directives";
