@@ -29,15 +29,15 @@ export class DemoDialogsPageComponent {
 		this.referenceList = [
 			{
 				label: "Stark Alert Dialog component",
-				url: "blabla"
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkAlertDialogComponent.html"
 			},
 			{
 				label: "Stark Confirm Dialog component",
-				url: "blabla"
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkConfirmDialogComponent.html"
 			},
 			{
 				label: "Stark Prompt Dialog component",
-				url: "blabla"
+				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkPromptDialogComponent.html"
 			}
 		];
 	}
