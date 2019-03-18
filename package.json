@@ -172,7 +172,7 @@
     "commitizen": {
       "path": "node_modules/cz-customizable"
     },
-    "nightlyVersion": "10.0.0-beta.6"
+    "nightlyVersion": "10.0.0-beta.7"
   },
   "greenkeeper": {
     "commitMessages": {
