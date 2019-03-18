@@ -463,8 +463,8 @@ logTrace "Executing function: ${FUNCNAME[0]}" 1
   logTrace "SHA-512: $SHA"
   logTrace "SHA-512 escaped: $ESCAPED_SHA"
   
-  local PATTERN="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\{(\s*)\\\"version\\\": \\\"(\S*)\\\"(,(\s*)\\\"resolved\\\": \\\"(.*))?,(\s*)\\\"integrity\\\": \\\"sha512-(.*)\\\","
-  local REPLACEMENT='"\@nationalbankbelgium\/'$PACKAGE'": {$1"version": "'$TGZ_PATH'",$4"integrity": "sha512-'$ESCAPED_SHA'",'
+  local PATTERN="\\\"\@nationalbankbelgium\/$PACKAGE\\\": \\{(\s*)\\\"version\\\": \\\"(\S*)\\\"(,(\s*)\\\"resolved\\\": \\\"(.*))?,(\s*)\\\"integrity\\\": \\\"sha512-(.*)\\\""
+  local REPLACEMENT='"\@nationalbankbelgium\/'$PACKAGE'": {$1"version": "'$TGZ_PATH'",$4"integrity": "sha512-'$ESCAPED_SHA'"'
   
   logTrace "PATTERN: $PATTERN"
   logTrace "REPLACEMENT: $REPLACEMENT"

@@ -46,6 +46,8 @@ import {
 	StarkXSRFModule
 } from "@nationalbankbelgium/stark-core";
 
+import { StarkRBACAuthorizationModule } from "@nationalbankbelgium/stark-rbac";
+
 import {
 	StarkAppDataModule,
 	StarkAppFooterModule,
@@ -68,7 +70,7 @@ import { WelcomeModule } from "./welcome/welcome.module";
 import { logRegisteredStates, routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
-import { StarkErrorHandlingEffects } from "./shared/effects";
+import { StarkErrorHandlingEffects, StarkRbacUnauthorizedNavigationEffects } from "./shared/effects";
 /*
  * Translations
  */
@@ -189,7 +191,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 			name: "Stark Showcase - NgRx Store DevTools", // shown in the monitor page
 			logOnly: environment.production // restrict extension to log-only mode (setting it to false enables all extension features)
 		}),
-		EffectsModule.forRoot([StarkErrorHandlingEffects]), // needed to set up the providers required for effects
+		EffectsModule.forRoot([StarkErrorHandlingEffects, StarkRbacUnauthorizedNavigationEffects]), // needed to set up the providers required for effects
 		UIRouterModule.forRoot({
 			states: APP_STATES,
 			useHash: false, // to use Angular's PathLocationStrategy in order to support HTML5 Push State
@@ -205,6 +207,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkErrorHandlingModule.forRoot(),
 		StarkSettingsModule.forRoot(),
 		StarkRoutingModule.forRoot(),
+		StarkRBACAuthorizationModule.forRoot(),
 		StarkUserModule.forRoot(),
 		StarkXSRFModule.forRoot({
 			waitBeforePinging: {

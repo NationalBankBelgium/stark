@@ -22,7 +22,7 @@
   align-items: baseline;
 }
 
-.custom-homepage-button {
+.custom-news-page-button {
   align-items: center;
   justify-content: center;
   width: 150px;
@@ -31,10 +31,8 @@
   font-size: 13px;
   font-weight: 600;
   line-height: 30px;
-  color: #fff;
-  background-color: #0063bb;
   border-radius: 48px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   box-sizing: border-box;
   cursor: pointer;
   display: block;
@@ -45,67 +43,66 @@
 
 .top-news news-item {
   .section-border {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	box-sizing: border-box;
-	margin: 16px auto;
-	width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 16px auto;
+    width: 100%;
   }
   .news-item-container {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	flex-direction: column;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
   }
   .news-item-title {
-	width: 100%;
-	font-size: 25px;
+    width: 100%;
+    font-size: 25px;
   }
   .news-item-content {
-	width: 100%;
-	font-size: 15px;
+    width: 100%;
+    font-size: 15px;
   }
   .information {
-	width: 100%;
-	font-size: 13px;
+    width: 100%;
+    font-size: 13px;
   }
   .news-image {
-	min-width: 350px;
-	height: 200px;
-	margin-right: 25px;
+    min-width: 350px;
+    height: 200px;
+    margin-right: 25px;
   }
 }
 
-@media #{$handset-toc-query-screen}{
+@media #{$handset-toc-query-screen} {
   .news-container {
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
   }
 
   .top-news news-item {
-	.section-border {
-	  flex-direction: column;
-	  width: 290px;
-	  padding: 0 0 0 0;
-	}
-	.news-item-title {
-	  font-size: 15px;
-	}
-	.news-item-content {
-	  font-size: 13px;
-	}
-	.information {
-	  font-size: 12px;
-	}
-	.news-image {
-	  min-width: 290px;
-	  height: 150px;
-	  margin: 0 0 0 0;
-	}
+    .section-border {
+      flex-direction: column;
+      width: 290px;
+      padding: 0 0 0 0;
+    }
+    .news-item-title {
+      font-size: 15px;
+    }
+    .news-item-content {
+      font-size: 13px;
+    }
+    .information {
+      font-size: 12px;
+    }
+    .news-image {
+      min-width: 290px;
+      height: 150px;
+      margin: 0 0 0 0;
+    }
   }
-  
 }

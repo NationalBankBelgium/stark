@@ -330,6 +330,43 @@
         "TITLE": "Toast notification"
       }
     },
+    "DEMO_RBAC": {
+      "DIRECTIVES": {
+        "AUTHORIZATION": {
+          "HIDE_ON_PERMISSION": {
+            "TITLE": "Hide On Permission directive",
+            "SWITCH_UNAUTHORIZED_ROLE": "Changer le rôle non autorisé:",
+            "ONLY_VISIBLE_TO": "Il n'est visible que par un utilisateur autorisé qui n'a pas le rôle '{{ role }}'."
+          },
+          "SHOW_ON_PERMISSION": {
+            "TITLE": "Show On Permission directive",
+            "SWITCH_AUTHORIZED_ROLE": "Changer le rôle autorisé:",
+            "ONLY_VISIBLE_TO": "Il n'est visible que par un utilisateur autorisé ayant le rôle '{{ role }}'."
+          },
+          "CONTENT_PROTECTED": "Ce contenu est protégé.",
+          "TITLE": "Authorization directives"
+        }
+      },
+      "SERVICES": {
+        "AUTHORIZATION": {
+          "FUNCTIONALITY": "Fonctionnalité",
+          "DESCRIPTION_METHODS": "Le <code>StarkRBACAuthorizationService</code> fournit les méthodes nécessaires pour savoir si l'utilisateur a un rôle spécifique ou un ensemble de rôles ou s'il s'agit d'un utilisateur anonyme.",
+          "DESCRIPTION_TRANSITION_HOOKS": "Il ajoute également un \"transition hook\" au Routeur pour protéger certaines routes non accessibles à des utilisateurs non autorisés. Le \"transition hook\" empêchera l'utilisateur de naviguer vers n'importe quelle route avec des droits d'accès spécifiques définis sur celles-ci. En plus de cela, l'utilisateur peut être redirigé vers une autre route si cette redirection est définie dans la configuration des autorisations de la route.",
+          "PROTECTED_ROUTES": "Déclarer des routes protégées",
+          "DESCRIPTION_PROTECTED_ROUTES": "Les routes protégées doivent être déclarées à l'aide de l'interface <code>StarkRBACStateDeclaration</code> en définissant la configuration 'permissions' dans l'objet 'data' des routes.<br>Dans cet exemple, elles sont définies comme suit:",
+          "NAVIGATE_TO_ADMINS_PAGE": "Aller sur la page des Admins",
+          "NAVIGATE_TO_MANAGERS_PAGE": "Aller sur la page des Managers",
+          "NAVIGATE_TO_SUPER_ADMINS_PAGE": "Aller sur la page des Super-Admins",
+          "REDIRECTION_MESSAGE": "{{ rbacActionType }}.<br>Vous avez été redirigé car vous ne disposez pas des autorisations nécessaires pour accéder à la page demandée.",
+          "TITLE": "Authorization service"
+        },
+        "RESTRICTED_PAGE": {
+          "TITLE": "Page restreinte",
+          "DESCRIPTION": "Vous y avez accès car vous disposez des autorisations adéquates.",
+          "GO_BACK": "Revenir à la page précédente"
+        }
+      }
+    },
     "GETTING_STARTED": {
       "TITLE": "Démarrer"
     },
@@ -338,6 +375,7 @@
       "DESCRIPTION_DETAIL": "<p>Stark fournit les principaux outils pour accélérer le développement front-end.<br>Vous y trouverez un build fiable et réutilisable basé sur Webpack, un projet Starter, des modules core et ui fournissant des composants ui incroyables, ... <br>Tous ces modules sont comme des LEGO: ajoutez ce dont vous avez besoin, ni plus, ni moins!</p>",
       "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aussi appelé stark-core, est un module fournissant des APIs réutilisables, comme par exemple une API de routing, de logging, de log shipping,etc... </p>",
       "DOCUMENTATION_MAIN_TITLE": "Documentation",
+      "DOCUMENTATION_RBAC_DESC": "<p>Le module RBAC de Stark, aussi appelé stark-rbac, est un module distinct de Stark qui peut éventuellement être inclus dans toute application basée sur Stark afin de fournir différents éléments (directives, services et composants) prenant en charge le mécanisme de contrôle d'accès basé sur le rôle (RBAC).</p>",
       "DOCUMENTATION_SHOWCASE_DESC": "<p>Le Showcase, vous vous y trouvez en ce moment même! <br> Amusez-vous à parcourir notre liste de composants visuels ainsi que leur documentation et à découvrir de vos propres yeux nos guidelines en matière de design.</p>",
       "DOCUMENTATION_UI_DESC": "<p>Stark UI fournit des composants UI réutilisables: table de données, boite de dialogue, ... mais également des thèmes.</p>",
       "GETTING_STARTED": "Démarrer",
@@ -347,6 +385,7 @@
       "MAIN_TITLE": "Qu'est-ce que Stark?",
       "PREVIOUS_API": "API précédentes",
       "PREVIOUS_VERSIONS": "Versions précédentes",
+      "RBAC": "Stark RBAC",
       "SHOWCASE": "Showcase",
       "TITLE": "Home",
       "UI": "Stark UI"
@@ -354,7 +393,8 @@
     "ICONS": {
       "GITHUB": "Repo Github",
       "STARK_UI": "Documentation Stark-UI",
-      "STARK_CORE": "Documentation Stark-Core"
+      "STARK_CORE": "Documentation Stark-Core",
+      "STARK_RBAC": "Documentation Stark-RBAC"
     },
     "NEWS": {
       "TITLE": "Nouvelles"

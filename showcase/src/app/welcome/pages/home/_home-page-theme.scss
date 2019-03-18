@@ -1,23 +1,29 @@
-.mat-icon.core-image {
-  color: mat-color($accent-palette, 500);
-}
+.mat-icon {
+  &.core-image {
+    color: mat-color($accent-palette, 500);
+  }
 
-.mat-icon.about-image {
-  color: mat-color($primary-palette, 500);
-}
+  &.about-image {
+    color: mat-color($primary-palette, 500);
+  }
 
-.mat-icon.ui-image {
-  color: mat-color($success-palette, 500);
-}
+  &.ui-image {
+    color: mat-color($success-palette, 500);
+  }
 
-.mat-icon.showcase-image {
-  color: mat-color($warning-palette, 900);
+  &.rbac-image {
+    color: mat-color($alert-palette, 500);
+  }
+
+  &.showcase-image {
+    color: mat-color($warning-palette, 900);
+  }
 }
 
 .custom-homepage-button {
-  color: #fff;
-  background-color: #0063bb;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  color: mat-contrast($primary-palette, 500);
+  background-color: mat-color($primary-palette, 700);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
 .section-division {

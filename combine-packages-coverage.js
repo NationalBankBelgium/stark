@@ -2,7 +2,11 @@ const fs = require("fs");
 const StreamConcat = require("stream-concat");
 
 // add the reports of all the different Stark packages to be combined
-const fileNames = ["packages/stark-core/reports/coverage/packages/lcov.info", "packages/stark-ui/reports/coverage/packages/lcov.info"];
+const fileNames = [
+	"packages/stark-core/reports/coverage/packages/lcov.info",
+	"packages/stark-ui/reports/coverage/packages/lcov.info",
+	"packages/stark-rbac/reports/coverage/packages/lcov.info"
+];
 let fileIndex = 0;
 
 const nextStream = function() {

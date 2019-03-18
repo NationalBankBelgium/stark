@@ -5,22 +5,14 @@
         "package.json",
         "packages/stark-build/package.json",
         "packages/stark-core/package.json",
+        "packages/stark-rbac/package.json",
         "packages/stark-testing/package.json",
         "packages/stark-ui/package.json"
       ]
     },
     "stark-apps": {
-      "packages": [
-        "showcase/package.json",
-        "starter/package.json"
-      ]
+      "packages": ["showcase/package.json", "starter/package.json"]
     }
   },
-  "ignore": [
-    "@angular/flex-layout",
-    "@compodoc/compodoc",
-    "@types/node",
-    "class-validator",
-    "typescript"
-  ]
+  "ignore": ["@angular/flex-layout", "@compodoc/compodoc", "@types/node", "class-validator", "typescript"]
 }

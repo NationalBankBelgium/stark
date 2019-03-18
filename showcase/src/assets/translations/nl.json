@@ -330,6 +330,43 @@
         "TITLE": "Toast notification"
       }
     },
+    "DEMO_RBAC": {
+      "DIRECTIVES": {
+        "AUTHORIZATION": {
+          "HIDE_ON_PERMISSION": {
+            "TITLE": "Hide On Permission directive",
+            "SWITCH_UNAUTHORIZED_ROLE": "Wissel van ongeautoriseerde rol:",
+            "ONLY_VISIBLE_TO": "Het is alleen zichtbaar voor een geautoriseerde gebruiker die niet de '{{ role }}' rol heeft."
+          },
+          "SHOW_ON_PERMISSION": {
+            "TITLE": "Show On Permission directive",
+            "SWITCH_AUTHORIZED_ROLE": "Wissel van geautoriseerde rol: ",
+            "ONLY_VISIBLE_TO": "Het is alleen zichtbaar voor een geautoriseerde gebruiker die de '{{ role }}' rol heeft."
+          },
+          "CONTENT_PROTECTED": "Deze inhoud is beveiligd.",
+          "TITLE": "Authorization directives"
+        }
+      },
+      "SERVICES": {
+        "AUTHORIZATION": {
+          "FUNCTIONALITY": "Functionaliteit",
+          "DESCRIPTION_METHODS": "De <code>StarkRBACAuthorizationService</code> voorziet de nodige methodes om te weten of een gebruiker een (reeks van) specifieke rol(len) heeft of anoniem is.",
+          "DESCRIPTION_TRANSITION_HOOKS": "Het voegt ook een \"transition hook\" toe aan de Router om bepaalde routes te kunnen afschermen voor ongeautoriseerde gebruikers. De \"transition hook\" al de gebruiker voorkomen om eender welke route te gebruiken waarop specifieke requirements worden gedefinieerd. Daarbij kunnen gebruikers ook geredirect worden naar een andere route moest dit opgenomen zijn in de configuratie.",
+          "PROTECTED_ROUTES": "Beschermde routes declareren",
+          "DESCRIPTION_PROTECTED_ROUTES": "Beschermde routes moeten gedeclareerd worden door middel van de <code>StarkRBACStateDeclaration</code> interface en de definitie van de 'permissions' configuratie in het 'data' object van de route. In dit voorbeeld zijn ze als volgt gedefinieerd:",
+          "NAVIGATE_TO_ADMINS_PAGE": "Naar de Admin pagina",
+          "NAVIGATE_TO_MANAGERS_PAGE": "Naar de Manager pagina",
+          "NAVIGATE_TO_SUPER_ADMINS_PAGE": "Naar de Super-Admin pagina",
+          "REDIRECTION_MESSAGE": "{{ rbacActionType }}.<br>U bent omgeleid omdat u niet over de juiste machtigingen beschikt om toegang te krijgen tot de aangevraagde pagina.",
+          "TITLE": "Authorization service"
+        },
+        "RESTRICTED_PAGE": {
+          "TITLE": "Beschermde pagina",
+          "DESCRIPTION": "U hebt toegang omdat u de juiste rechten hebt.",
+          "GO_BACK": "Terug naar de vorige pagina"
+        }
+      }
+    },
     "GETTING_STARTED": {
       "TITLE": "Begonnen"
     },
@@ -338,6 +375,7 @@
       "DESCRIPTION_DETAIL": "<p>Stark levert de belangrijkste instrumenten om de front-end ontwikkeling te versnellen.<br>U zult een betrouwbare en herbruikbare build gebouwd op Webpack vinden, een Starter project, core en ui modules dat interessante visuele componenten verschaffen, ... <br>Deze modules zijn zoals LEGO: Voegt wat u nodig hebt, niet meer en niet minder!</p>",
       "DOCUMENTATION_CORE_DESC": "<p>Stark Core, ook bekend als stark-core, is een module dat herbruikbare APIs verstrekt, zoals routing, logging, log shipping,enzovoort.</p>",
       "DOCUMENTATION_MAIN_TITLE": "Documentatie",
+      "DOCUMENTATION_RBAC_DESC": "<p>De RBAC-module van Stark (ook bekend als stark-rbac) is een afzonderlijke module in Stark die optioneel kan worden opgenomen in elke op Stark gebaseerde toepassing om verschillende elementen (directives, services en componenten) te bieden om Role Based Access Control (RBAC) mechanisme te ondersteunen.</p>",
       "DOCUMENTATION_SHOWCASE_DESC": "<p>De Showcase, u zich hier bevindt!<br>Veel plezier met de ontdekking van onze componenten lijst !</p>",
       "DOCUMENTATION_UI_DESC": "<p>Stark UI levert UI herbruikbare componenten : gegevenstabel, dialoogvenster, ... maar ook themas.</p>",
       "GETTING_STARTED": "Ermee beginnen",
@@ -347,6 +385,7 @@
       "MAIN_TITLE": "Wat is Stark?",
       "PREVIOUS_API": "Vorige API",
       "PREVIOUS_VERSIONS": "Vorige versies",
+      "RBAC": "Stark RBAC",
       "SHOWCASE": "Showcase",
       "TITLE": "Home",
       "UI": "Stark UI"
@@ -354,7 +393,8 @@
     "ICONS": {
       "GITHUB": "Github repo",
       "STARK_UI": "Stark-UI documentatie",
-      "STARK_CORE": "Stark-Core documentatie"
+      "STARK_CORE": "Stark-Core documentatie",
+      "STARK_RBAC": "Stark-RBAC documentatie"
     },
     "NEWS": {
       "TITLE": "Nieuws"

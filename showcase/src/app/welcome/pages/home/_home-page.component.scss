@@ -18,7 +18,7 @@
   margin-left: 25px;
 }
 
-.stark-logo{
+.stark-logo {
   background-image: url(/assets/stark-core/logo/dark/stark_logo_dark.svg);
   width: 250px;
   height: 100px;
@@ -28,7 +28,7 @@
   margin: auto;
 }
 
-.mat-icon.homepage-icons{
+.mat-icon.homepage-icons {
   height: 80px;
   width: 80px;
   min-width: 80px;
@@ -48,35 +48,33 @@
   align-items: stretch;
 
   p {
-	display: flex;
+    display: flex;
   }
 }
 
-
-.buttons-row{
+.buttons-row {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-bottom: 25px;
 
   .button.custom-homepage-button {
-	align-items: center;
-	justify-content: center;
-	width: 200px;
-	text-decoration: none;
-	height: 40px;
-	font-weight: 600;
-	line-height: 40px;
-	border-radius: 48px;
-	box-sizing: border-box;
-	cursor: pointer;
-	display: flex;
-	padding: 0 24px;
-	text-align: center;
-	margin: auto 6px auto 6px;
-	font-size: 12px;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    text-decoration: none;
+    height: 40px;
+    font-weight: 600;
+    line-height: 40px;
+    border-radius: 48px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    padding: 0 24px;
+    text-align: center;
+    margin: auto 6px auto 6px;
+    font-size: 12px;
   }
-  
 }
 
 .section-division {
@@ -84,38 +82,37 @@
   padding-top: 20px;
 }
 
-.last-section-division{
+.last-section-division {
   padding-top: 20px;
 }
 
-@media #{$tablet-query}{
-
-  .buttons-row{
-	.button.custom-homepage-button {
-	  margin: auto 30px auto 30px;
-	  font-size: 15px;
-	}
+@media #{$tablet-query} {
+  .buttons-row {
+    .button.custom-homepage-button {
+      margin: auto 30px auto 30px;
+      font-size: 15px;
+    }
   }
-  
-  .mat-icon.homepage-icons{
-	margin-left: 25px;
-	height: 120px;
-	width: 120px;
-	min-width: 120px;
-	max-width: 120px;
+
+  .mat-icon.homepage-icons {
+    margin-left: 25px;
+    height: 120px;
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
   }
 
   .homepage-item {
-	flex-direction: row;
+    flex-direction: row;
   }
 
   .centered-title {
-	font-size: 30px;
-	line-height: 50px;
+    font-size: 30px;
+    line-height: 50px;
   }
 
-  .stark-logo{
-	width: 450px;
-	height: 130px;
+  .stark-logo {
+    width: 450px;
+    height: 130px;
   }
 }

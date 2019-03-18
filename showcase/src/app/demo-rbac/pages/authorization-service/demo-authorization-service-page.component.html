@@ -1,0 +1,33 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.TITLE</h1>
+<section class="stark-section">
+	<div fxFlexLayout="column">
+		<h1 translate>SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.FUNCTIONALITY</h1>
+		<p [innerHTML]="'SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.DESCRIPTION_METHODS' | translate"></p>
+
+		<p [innerHTML]="'SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.DESCRIPTION_TRANSITION_HOOKS' | translate"></p>
+
+		<example-viewer
+			[extensions]="['HTML']"
+			filesPath="rbac-authorization-service/authorization-service"
+			exampleTitle="SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.TITLE"
+		>
+			<div class="nav-button-row">
+				<button class="rbac-demo-button" color="primary" mat-raised-button uiSref="demo-rbac.protected-page-admin">
+					{{ "SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.NAVIGATE_TO_ADMINS_PAGE" | translate }}
+				</button>
+				<button class="rbac-demo-button" color="primary" mat-raised-button uiSref="demo-rbac.protected-page-manager">
+					{{ "SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.NAVIGATE_TO_MANAGERS_PAGE" | translate }}
+				</button>
+				<button class="rbac-demo-button" color="primary" mat-raised-button uiSref="demo-rbac.protected-page-super-admin">
+					{{ "SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.NAVIGATE_TO_SUPER_ADMINS_PAGE" | translate }}
+				</button>
+			</div>
+		</example-viewer>
+
+		<h1 translate>SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.PROTECTED_ROUTES</h1>
+		<p [innerHTML]="'SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.DESCRIPTION_PROTECTED_ROUTES' | translate"></p>
+
+		<stark-pretty-print [data]="stateDeclarations" [enableHighlighting]="true" format="typescript"></stark-pretty-print>
+	</div>
+</section>
+<stark-reference-block [links]="referenceList"></stark-reference-block>

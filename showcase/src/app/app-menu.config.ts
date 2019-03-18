@@ -201,7 +201,7 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					isEnabled: true,
 					entries: [
 						{
-							id: "menu-stark-ui-directives-mask",
+							id: "menu-stark-ui-input-mask",
 							label: "SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TITLE",
 							isVisible: true,
 							isEnabled: true,
@@ -222,7 +222,7 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							targetState: "demo-ui.transform-input-directive"
 						},
 						{
-							id: "menu-stark-ui-directives-progress-indicator",
+							id: "menu-stark-ui-progress-indicator",
 							label: "SHOWCASE.DEMO.PROGRESS_INDICATOR.TITLE",
 							isVisible: true,
 							isEnabled: true,
@@ -235,6 +235,41 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					label: "Services",
 					isVisible: true,
 					isEnabled: true
+				}
+			]
+		},
+		{
+			label: "Stark RBAC",
+			menuGroups: [
+				{
+					id: "menu-stark-rbac-directives",
+					label: "Directives",
+					isVisible: true,
+					isEnabled: true,
+					entries: [
+						{
+							id: "menu-stark-rbac-authorization",
+							label: "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.TITLE",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-rbac.authorization-directives"
+						}
+					]
+				},
+				{
+					id: "menu-stark-rbac-services",
+					label: "Services",
+					isVisible: true,
+					isEnabled: true,
+					entries: [
+						{
+							id: "menu-stark-rbac-authorization-service",
+							label: "SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.TITLE",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-rbac.authorization-service"
+						}
+					]
 				}
 			]
 		},

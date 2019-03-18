@@ -104,6 +104,16 @@
 										<mat-icon class="header-icon" svgIcon="atom"></mat-icon>
 									</button>
 								</a>
+								<a href="https://stark.nbb.be/api-docs/stark-rbac/latest/" target="_blank" rel="noopener noreferrer">
+									<button
+										mat-mini-fab
+										mat-icon-button
+										color="alert"
+										[matTooltip]="'SHOWCASE.ICONS.STARK_RBAC' | translate"
+									>
+										<mat-icon class="header-icon" svgIcon="shield-lock-outline" starkSvgViewBox></mat-icon>
+									</button>
+								</a>
 								<a href="https://github.com/NationalBankBelgium" target="_blank" rel="noopener noreferrer">
 									<button
 										mat-mini-fab
@@ -122,11 +132,11 @@
 					</div>
 				</div>
 			</header>
-			
+
 			<main class="stark-main-container">
 				<ui-view></ui-view>
 			</main>
-			
+
 			<stark-app-footer
 				legalInfoUrl="https://www.nbb.be/en/disclaimer-and-legal-information"
 				helpPageUrl="https://www.nbb.be/en/links"

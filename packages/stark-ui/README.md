@@ -10,6 +10,9 @@
 Stark's UI module (aka stark-ui) provides the UI related features of the Stark framework.
 It includes the UI component kit of Stark as well as other services and utilities.
 
+The Stark-UI module depends on some functionalities provided by the Stark-Core module such as services. However you can use this module without Stark-Core
+as long as you provide the same functionalities/services yourself.
+
 **[Getting Started](https://stark.nbb.be/api-docs/stark-ui/latest/additional-documentation/getting-started.html)**
 
 ## Developer Guide

@@ -330,6 +330,43 @@
         "TITLE": "Toast notification"
       }
     },
+    "DEMO_RBAC": {
+      "DIRECTIVES": {
+        "AUTHORIZATION": {
+          "HIDE_ON_PERMISSION": {
+            "TITLE": "Hide On Permission directive",
+            "SWITCH_UNAUTHORIZED_ROLE": "Switch the unauthorized role:",
+            "ONLY_VISIBLE_TO": "It is only visible to an authorized user that doesn't have the '{{ role }}' role."
+          },
+          "SHOW_ON_PERMISSION": {
+            "TITLE": "Show On Permission directive",
+            "SWITCH_AUTHORIZED_ROLE": "Switch the authorized role:",
+            "ONLY_VISIBLE_TO": "It is only visible to an authorized user that has the '{{ role }}' role."
+          },
+          "CONTENT_PROTECTED": "This content is protected.",
+          "TITLE": "Authorization directives"
+        }
+      },
+      "SERVICES": {
+        "AUTHORIZATION": {
+          "FUNCTIONALITY": "Functionality",
+          "DESCRIPTION_METHODS": "The <code>StarkRBACAuthorizationService</code> provides the necessary methods to know whether the user has an specific role or set of roles and whether it is an anonymous user.",
+          "DESCRIPTION_TRANSITION_HOOKS": "It also adds a \"transition hook\" to the Router to protect certain routes from being accessed by unauthorized users. The transition hook will prevent the user from navigating to any route with specific permissions requirements defined on those routes. On top of that, the user can be redirected to another route if such redirection is defined as part of the route permissions configuration.",
+          "PROTECTED_ROUTES": "Declaring Protected Routes",
+          "DESCRIPTION_PROTECTED_ROUTES": "The protected routes should be declared using the <code>StarkRBACStateDeclaration</code> interface and defining the 'permissions' configuration inside the routes' 'data' object.<br>In this example they are defined as follows:",
+          "NAVIGATE_TO_ADMINS_PAGE": "Go to Admins page",
+          "NAVIGATE_TO_MANAGERS_PAGE": "Go to Managers page",
+          "NAVIGATE_TO_SUPER_ADMINS_PAGE": "Go to Super-Admins page",
+          "REDIRECTION_MESSAGE": "{{ rbacActionType }}.<br>You have been redirected because you don't have the right permissions to access the request page.",
+          "TITLE": "Authorization service"
+        },
+        "RESTRICTED_PAGE": {
+          "TITLE": "Restricted Page",
+          "DESCRIPTION": "You have access to it because you have the right permissions.",
+          "GO_BACK": "Go back to previous page"
+        }
+      }
+    },
     "GETTING_STARTED": {
       "TITLE": "Getting Started"
     },
@@ -338,7 +375,8 @@
       "DESCRIPTION_DETAIL": "<p>Stark provides blocks perfectly fit for accelerating front-end development.<br>You'll find in Stark a reusable build based on Webpack, a starter project, core and ui modules providing awesome ui components, ...<br>All those modules act like LEGO blocks: you add what you need, no more, no less!</p>",
       "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aka stark-core, is a module providing reusable APIs, such as a routing, logging, log shipping, etc.</p>",
       "DOCUMENTATION_MAIN_TITLE": "Documentation",
-      "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!<br>Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.<br></p>",
+      "DOCUMENTATION_RBAC_DESC": "<p>Stark's RBAC module (aka stark-rbac) is a separate module in Stark that can be optionally included in any Stark based application in order to provide different elements\n(directives, services and components) to support Role Based Access Control (RBAC) mechanism.</p>",
+      "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!<br>Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.</p>",
       "DOCUMENTATION_UI_DESC": "<p>Stark UI provides reusable UI components, for example data table, message pane, ... but also themes.</p>",
       "GETTING_STARTED": "Getting Started",
       "INTRODUCTION": "A front-end framework based on Angular 7",
@@ -347,6 +385,7 @@
       "MAIN_TITLE": "What is Stark?",
       "PREVIOUS_API": "Previous API",
       "PREVIOUS_VERSIONS": "Previous versions",
+      "RBAC": "Stark RBAC",
       "SHOWCASE": "Showcase",
       "TITLE": "Home",
       "UI": "Stark UI"
@@ -354,7 +393,8 @@
     "ICONS": {
       "GITHUB": "Github repo",
       "STARK_UI": "Stark-UI documentation",
-      "STARK_CORE": "Stark-Core documentation"
+      "STARK_CORE": "Stark-Core documentation",
+      "STARK_RBAC": "Stark-RBAC documentation"
     },
     "NEWS": {
       "TITLE": "News"
