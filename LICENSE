@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2017 National Bank of Belgium
+Copyright (c) 2017-2019 National Bank of Belgium
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Except as contained in this notice, the name(s) of the above copyright holders shall not be used in
+advertising or otherwise to promote the sale, use or other dealings in this Software without prior written
+authorization.
+
+Jurisdiction :
+Any litigation arising between the licensor and the licensee, resulting from the interpretation
+of this License, will be subject to the exclusive jurisdiction of the Belgian courts.
+Applicable law :
+This License shall be governed by the Belgian law, being the law of the Member State
+of the European Union where the Licensor has settled its seat.
