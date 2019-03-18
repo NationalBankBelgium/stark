@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MAT_DATE_FORMATS, MatOptionModule } from "@angular/material/core";
+import { MatOptionModule } from "@angular/material/core";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatButtonModule } from "@angular/material/button";
@@ -20,7 +20,6 @@ import { StoreModule } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { UIRouterModule } from "@uirouter/angular";
 import {
-	STARK_DATE_FORMATS,
 	StarkActionBarModule,
 	StarkAppDataModule,
 	StarkAppLogoutModule,
@@ -201,6 +200,6 @@ import {
 		DemoToastPageComponent,
 		DemoGenericSearchFormComponent
 	],
-	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }, DemoGenericService]
+	providers: [DemoGenericService]
 })
 export class DemoUiModule {}

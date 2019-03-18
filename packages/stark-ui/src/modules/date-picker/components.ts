@@ -1,2 +1,2 @@
-export * from "./components/date-picker.component";
+export { StarkDatePickerMaskConfig, StarkDatePickerComponent, StarkDatePickerFilter } from "./components/date-picker.component";
 export * from "./components/date-format.constants";

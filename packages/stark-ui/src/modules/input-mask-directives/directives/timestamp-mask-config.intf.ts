@@ -7,3 +7,11 @@ export interface StarkTimestampMaskConfig {
 	 */
 	format: string;
 }
+
+/**
+ * Type guard for {StarkTimestampMaskConfig|StarkTimestampMaskConfig}
+ * @param config - Config to validate
+ */
+export function isStarkTimestampMaskConfig(config: any): config is StarkTimestampMaskConfig {
+	return config && typeof config.format === "string";
+}

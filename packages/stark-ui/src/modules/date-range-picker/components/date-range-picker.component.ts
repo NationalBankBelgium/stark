@@ -159,7 +159,8 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 		if (moment.isDate(this.startDate) && moment.isDate(this.endDate) && moment(this.endDate).isBefore(this.startDate)) {
 			this.logger.error("StarkDateRangePicker: Start Date cannot be lower than End Date. End Date will be cleared");
 			this.endDate = undefined;
-			this.endPicker.pickerInput.value = undefined;
+			// tslint:disable-next-line:no-null-keyword
+			this.endPicker.pickerInput.value = null;
 		}
 		this.dateRangeChanged.emit({
 			startDate: this.startDate,

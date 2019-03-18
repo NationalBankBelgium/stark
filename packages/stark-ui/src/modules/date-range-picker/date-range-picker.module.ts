@@ -8,10 +8,12 @@ import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "../../common/translations";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @NgModule({
 	declarations: [StarkDateRangePickerComponent],
-	imports: [CommonModule, StarkDatePickerModule, TranslateModule],
+	imports: [CommonModule, StarkDatePickerModule, FormsModule, MatFormFieldModule, ReactiveFormsModule, TranslateModule],
 	exports: [StarkDateRangePickerComponent]
 })
 export class StarkDateRangePickerModule {

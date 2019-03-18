@@ -16,8 +16,9 @@ export class DemoDatePickerComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.currentDate = new Date();
-		this.minDate = new Date("07-01-2017");
-		this.maxDate = new Date("07-20-2017");
+		this.minDate = new Date();
+		this.maxDate = new Date();
+		this.maxDate.setMonth(this.maxDate.getMonth() + 6);
 
 		this.customDateFilter = (date: Date): boolean => {
 			const day: number = date.getDay();

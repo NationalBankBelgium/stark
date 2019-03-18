@@ -3,12 +3,15 @@ import { EventEmitter } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from "@angular/material-moment-adapter";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkDatePickerModule } from "../../date-picker";
 import { StarkDateRangePickerComponent } from "./date-range-picker.component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
+import { ReactiveFormsModule } from "@angular/forms";
+import moment from "moment";
 
 describe("DateRangePickerComponent", () => {
 	let fixture: ComponentFixture<StarkDateRangePickerComponent>;
@@ -17,14 +20,13 @@ describe("DateRangePickerComponent", () => {
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			declarations: [StarkDateRangePickerComponent],
-			imports: [NoopAnimationsModule, StarkDatePickerModule, TranslateModule.forRoot()],
+			imports: [NoopAnimationsModule, StarkDatePickerModule, MatFormFieldModule, TranslateModule.forRoot(), ReactiveFormsModule],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
 				{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
 				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-				TranslateService
+				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
 			]
 		}).compileComponents();
 	}));
@@ -100,28 +102,32 @@ describe("DateRangePickerComponent", () => {
 			component.startDateLabel = "startDateLabel";
 			component.endDateLabel = "endDateLabel";
 			fixture.detectChanges();
-			let input: HTMLElement = fixture.nativeElement.querySelector('[placeholder="startDateLabel"]');
+			let input: HTMLElement = fixture.nativeElement.querySelector('[ng-reflect-placeholder="startDateLabel"]');
 			expect(input).not.toBeNull();
-			input = fixture.nativeElement.querySelector('[placeholder="endDateLabel"]');
+			input = fixture.nativeElement.querySelector('[ng-reflect-placeholder="endDateLabel"]');
 			expect(input).not.toBeNull();
 		});
 
-		it("the datepickers minDate should be set correctly", () => {
+		it("the datepickers min date should be set correctly", () => {
 			const minDate: Date = new Date(2018, 6, 1);
 			component.startMinDate = minDate;
 			component.endMinDate = minDate;
 			fixture.detectChanges();
-			expect(component.startPicker.pickerInput.min.toDate()).toEqual(minDate);
-			expect(component.endPicker.pickerInput.min.toDate()).toEqual(minDate);
+			expect(component.startPicker.pickerInput.min).not.toBeNull();
+			expect((<moment.Moment>component.startPicker.pickerInput.min).toDate()).toEqual(minDate);
+			expect(component.endPicker.pickerInput.min).not.toBeNull();
+			expect((<moment.Moment>component.endPicker.pickerInput.min).toDate()).toEqual(minDate);
 		});
 
-		it("the datepickers maxDate should be set correctly", () => {
+		it("the datepickers max date should be set correctly", () => {
 			const maxDate: Date = new Date(2018, 6, 2);
 			component.startMaxDate = maxDate;
 			component.endMaxDate = maxDate;
 			fixture.detectChanges();
-			expect(component.startPicker.pickerInput.max.toDate()).toEqual(maxDate);
-			expect(component.endPicker.pickerInput.max.toDate()).toEqual(maxDate);
+			expect(component.startPicker.pickerInput.max).not.toBeNull();
+			expect((<moment.Moment>component.startPicker.pickerInput.max).toDate()).toEqual(maxDate);
+			expect(component.endPicker.pickerInput.max).not.toBeNull();
+			expect((<moment.Moment>component.endPicker.pickerInput.max).toDate()).toEqual(maxDate);
 		});
 
 		it("the datepickers value should be set correctly", () => {
@@ -129,8 +135,10 @@ describe("DateRangePickerComponent", () => {
 			component.startDate = date;
 			component.endDate = date;
 			fixture.detectChanges();
-			expect(component.startPicker.pickerInput.value.toDate()).toEqual(date);
-			expect(component.endPicker.pickerInput.value.toDate()).toEqual(date);
+			expect(component.startPicker.pickerInput.value).not.toBeNull();
+			expect((<moment.Moment>component.startPicker.pickerInput.value).toDate()).toEqual(date);
+			expect(component.endPicker.pickerInput.value).not.toBeNull();
+			expect((<moment.Moment>component.endPicker.pickerInput.value).toDate()).toEqual(date);
 		});
 	});
 
@@ -149,7 +157,7 @@ describe("DateRangePickerComponent", () => {
 			component.endDate = endDate;
 			fixture.detectChanges();
 			component.checkDates();
-			expect(component.endDate).toBe(endDate);
+			expect(component.endDate).toEqual(endDate);
 		});
 
 		it("the end date should be correctly set if after the start date is undefined", () => {
@@ -158,7 +166,7 @@ describe("DateRangePickerComponent", () => {
 			component.endDate = endDate;
 			fixture.detectChanges();
 			component.checkDates();
-			expect(component.endDate).toBe(endDate);
+			expect(component.endDate).toEqual(endDate);
 		});
 	});
 });
