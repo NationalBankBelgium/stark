@@ -53,7 +53,7 @@
     "clean": "npx rimraf dist",
     "clean:modules": "npx rimraf ./node_modules package-lock.json",
     "clean:all": "npm run clean && npm run clean:modules",
-    "docs": "node ../../node_modules/@compodoc/compodoc/bin/index-cli src --theme material --tsconfig ../tsconfig.json --output ../../reports/api-docs/stark-ui",
+    "docs": "node ../../node_modules/@compodoc/compodoc/bin/index-cli src",
     "docs:coverage": "npm run docs -- --coverageTest 85 --coverageTestThresholdFail true",
     "docs:serve": "npm run docs -- --watch --serve --port 4321",
     "ngc": "node ../../node_modules/@angular/compiler-cli/src/main.js -p ./tsconfig-build.json",

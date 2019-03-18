@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Getting Started",
+    "file": "GETTING_STARTED.md"
+  },
+  {
+    "title": "Generic Search component",
+    "file": "GENERIC_SEARCH.md"
+  },
+  {
+    "title": "Timeout Warning configuration",
+    "file": "TIMEOUT_WARNING.md"
+  }
+]

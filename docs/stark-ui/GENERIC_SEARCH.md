@@ -8,7 +8,7 @@ Finally this component will return the results in an Observable that you can sub
 
 ## 2. How to use it
 
-### 2.1. Create an entitity for the search (optional)
+### 2.1. Create an entity for the search (optional)
 
 For using the Generic Search component, you must have an entity that describes your object. For some reasons, the entity which describes the search form could be different than the object and in this case, it is necessary to create a different entity to describe this search object.
 

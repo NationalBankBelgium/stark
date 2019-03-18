@@ -191,42 +191,10 @@ export const environment: StarkEnvironment = {
 
 ## Environment information at compilation time (Webpack global variables)
 
-Thanks to the Webpack [DefinePlugin](https://webpack.js.org/plugins/define-plugin), Stark provides some global variables that are available at compilation time, which means that you can
-implement some checks in your code and this will be analyzed when your application bundle is being built by Webpack.
+Thanks to the customizations done by Stark-Build to the default Angular CLI build configuration you have some global variables available at compilation time,
+which means that you can implement some checks in your code and this will be analyzed when your application bundle is being built by Webpack.
 
-The global variables available at compilation time are the following:
-
--   `ENV` which indicates the current environment: `"development"` or `"production"`
--   `HMR` which indicates whether the Hot Module Replacement support is enabled (true/false).
-
-### How to get target environment at compilation time?
-
-Since Webpack defines the environment variables as global, you can use them everywhere in your code so you can, for example, determine on which environment your app is currently running
-and execute some logic only on that specific environment:
-
-```typescript
-// if true, your app is running in development environment
-if (ENV === "development") {
-	/* the code inside this block will be executed only in development */
-}
-```
-
-To avoid Typescript compilation issues regarding these global variables, make sure that you include the typings from the stark-build package in your app `tsconfig.json`:
-
-```text
-{
-    "extends": "./node_modules/@nationalbankbelgium/stark-build/tsconfig.json",
-    "compilerOptions": {
-        ...
-        "typeRoots": [
-            "./node_modules/@types",
-            "./node_modules/@nationalbankbelgium/stark-build/typings"  // typings from stark-build
-        ],
-        ...
-    },
-    ...
-}
-```
+See [Stark-Build: Webpack build customizations - DefinePlugin](https://github.com/NationalBankBelgium/stark/blob/master/docs/stark-build/NG_CLI_BUILD_CUSTOMIZATIONS.md#define-plugin)
 
 ### Why do you need the target environment at compilation time?
 

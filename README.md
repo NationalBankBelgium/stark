@@ -69,9 +69,17 @@ So they can be consumed by [Angular CLI](https://github.com/angular/angular-cli)
 
 ## Developer guide
 
-### [End-to-End Testing](docs/E2E_TESTING.md)
+-   [Stark-Build](docs/stark-build/NG_CLI_BUILD_CUSTOMIZATIONS.md)
+-   [Stark-Core](https://stark.nbb.be/api-docs/stark-core/latest/additional-documentation/getting-started.html)
+-   [Stark-UI](https://stark.nbb.be/api-docs/stark-ui/latest/additional-documentation/getting-started.html)
 
-TODO add links to developer guide sections
+## Stark monorepo documentation
+
+-   [Common errors during development](docs/COMMON_DEV_ERRORS.md)
+-   [End-to-End Testing](docs/E2E_TESTING.md)
+-   [Polyfills](docs/POLYFILLS.md)
+-   [Prettier](docs/PRETTIER.md)
+-   [TSConfig files structure](docs/TSCONFIG.md)
 
 ## Releases
 
@@ -117,14 +125,14 @@ This project and all associated source code is licensed under the terms of the [
 
 ## Showcase and Documentation
 
-The Stark showcase and the documentation can be found at [the following location](https://stark.nbb.be).
-There, you'll find links about:
+The Stark Showcase can be found **[here](https://stark.nbb.be)**.
+There, you'll also find links about:
 
--   the latest api-docs for stark-core
--   the previous api-docs for stark-core
--   the latest api-docs for stark-ui
--   the previous api-docs for stark-ui
--   the previous showcase versions
+-   the latest [API docs for Stark-Core](https://stark.nbb.be/api-docs/stark-core/latest/)
+-   the previous API docs for Stark-Core
+-   the latest [API docs for Stark-UI](https://stark.nbb.be/api-docs/stark-ui/latest/)
+-   the previous API docs for Stark-UI
+-   the previous Showcase versions
 
 ## Thank you notes :)
 
