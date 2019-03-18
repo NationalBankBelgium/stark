@@ -1,63 +1,55 @@
-<mat-form-field>
-	<!-- single-selection view -->
-	<mat-select
-		*ngIf="!isMultiSelectEnabled"
-		[id]="dropdownId"
-		[formControl]="formControl"
-		[placeholder]="placeholder | translate"
-		[attr.aria-label]="dropdownName | translate"
-		[required]="required"
-	>
-		<!-- FIXME find a replacement for md-select-header as mat-select-header does not exist yet https://github.com/angular/material2/pull/7835 -->
-		<!--<mat-select-header-->
-		<!--*ngIf="header !== undefined && header !== ''"-->
-		<!--class="stark-dropdown-header"-->
-		<!--translate>-->
-		<!--{{header}}-->
-		<!--</mat-select-header>-->
+<!-- Support for changing multiSelect after init. https://material.angular.io/components/select/overview#error-cannot-change-code-multiple-code-mode-of-select-after-initialization -->
+<!-- single-selection view -->
+<mat-select
+	*ngIf="!multiSelect"
+	[value]="value"
+	[id]="dropdownId"
+	[placeholder]="placeholder"
+	[attr.aria-label]="dropdownName | translate"
+	[required]="required"
+	[disabled]="disabled"
+	(selectionChange)="onSelectionChange($event)"
+	(openedChange)="onOpenedChange()"
+>
+	<!-- FIXME find a replacement for md-select-header as mat-select-header does not exist yet https://github.com/angular/material2/pull/7835 -->
+	<!--<mat-select-header-->
+	<!--*ngIf="header !== undefined && header !== ''"-->
+	<!--class="stark-dropdown-header"-->
+	<!--translate>-->
+	<!--{{header}}-->
+	<!--</mat-select-header>-->
 
-		<mat-option *ngIf="defaultBlank" [value]=""></mat-option>
+	<mat-option *ngIf="defaultBlank" [value]=""></mat-option>
 
-		<span>
-			<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)">
-				{{ getOptionLabel(option) | translate }}
-			</mat-option>
-		</span>
-	</mat-select>
+	<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)">
+		{{ getOptionLabel(option) | translate }}
+	</mat-option>
+</mat-select>
 
-	<!-- multiple-selection view -->
-	<mat-select
-		*ngIf="isMultiSelectEnabled"
-		[id]="dropdownId"
-		[formControl]="formControl"
-		[placeholder]="placeholder | translate"
-		[attr.aria-label]="dropdownName | translate"
-		[required]="required"
-		multiple
-	>
-		<!-- FIXME find a replacement for md-select-header as mat-select-header does not exist yet https://github.com/angular/material2/pull/7835 -->
-		<!--<mat-select-header-->
-		<!--ng-if="$ctrl.header !== undefined && $ctrl.header !== ''"-->
-		<!--class="stark-dropdown-header"-->
-		<!--translate>-->
-		<!--{{header}}-->
-		<!--</mat-select-header>-->
+<!-- multiple-selection view -->
+<mat-select
+	*ngIf="multiSelect"
+	[value]="value"
+	[id]="dropdownId"
+	[placeholder]="placeholder"
+	[attr.aria-label]="dropdownName | translate"
+	[required]="required"
+	[disabled]="disabled"
+	(selectionChange)="onSelectionChange($event)"
+	(openedChange)="onOpenedChange()"
+	multiple
+>
+	<!-- FIXME find a replacement for md-select-header as mat-select-header does not exist yet https://github.com/angular/material2/pull/7835 -->
+	<!--<mat-select-header-->
+	<!--ng-if="$ctrl.header !== undefined && $ctrl.header !== ''"-->
+	<!--class="stark-dropdown-header"-->
+	<!--translate>-->
+	<!--{{header}}-->
+	<!--</mat-select-header>-->
+	<mat-option *ngIf="defaultBlank" [value]=""></mat-option>
 
-		<!-- the translate filter should be used in the options instead of the directive, otherwise the checkboxes are not rendered :( -->
-
-		<mat-option *ngIf="defaultBlank" [value]=""></mat-option>
-
-		<span>
-			<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)">
-				{{ getOptionLabel(option) | translate }}
-			</mat-option>
-		</span>
-	</mat-select>
-
-	<mat-error>
-		<div #ref>
-			<ng-content></ng-content>
-		</div>
-		<span *ngIf="ref.children.length === 0 && required" translate>STARK.VALIDATION.REQUIRED</span>
-	</mat-error>
-</mat-form-field>
+	<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)">
+		<!-- the translate filter should be used in the options instead of the directive, otherwise the text is not translated :( -->
+		{{ getOptionLabel(option) | translate }}
+	</mat-option>
+</mat-select>

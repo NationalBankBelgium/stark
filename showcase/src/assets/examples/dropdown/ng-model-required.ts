@@ -6,7 +6,6 @@ import { Component, OnInit } from "@angular/core";
 })
 export class DemoDropdownComponent implements OnInit {
 	public selectedService: string;
-
 	public serviceDropdownOptions: any[];
 
 	/**
@@ -18,9 +17,5 @@ export class DemoDropdownComponent implements OnInit {
 			{ id: "IO", value: "Informatics infrastructure and operations" },
 			{ id: "CS", value: "IT customer services" }
 		];
-	}
-
-	public serviceDropdownOnChange(selectedValue: string): void {
-		this.selectedService = selectedValue;
 	}
 }

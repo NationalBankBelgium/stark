@@ -1,15 +1,17 @@
 <div *ngIf="mode === 'dropdown'">
-	<stark-dropdown
-		dropdownId="languageDropdown"
-		[options]="appMetadata.supportedLanguages"
-		[value]="selectedLanguage"
-		[color]="color"
-		placeholder=""
-		optionIdProperty="code"
-		optionLabelProperty="translationKey"
-		(selectionChanged)="changeLanguage($event)"
-	>
-	</stark-dropdown>
+	<mat-form-field>
+		<stark-dropdown
+			dropdownId="languageDropdown"
+			[options]="appMetadata.supportedLanguages"
+			[value]="selectedLanguage"
+			[color]="color"
+			placeholder=""
+			optionIdProperty="code"
+			optionLabelProperty="translationKey"
+			(selectionChanged)="changeLanguage($event)"
+		>
+		</stark-dropdown>
+	</mat-form-field>
 </div>
 <div *ngIf="mode === 'toolbar'">
 	<mat-button-toggle-group name="languageSelector" [value]="selectedLanguage">

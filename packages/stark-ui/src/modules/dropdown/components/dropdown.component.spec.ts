@@ -1,7 +1,7 @@
-/* tslint:disable:completed-docs max-inline-declarations no-commented-code no-big-function no-identical-functions */
+/* tslint:disable:completed-docs max-inline-declarations no-commented-code no-big-function no-identical-functions no-duplicate-string */
 import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, fakeAsync, flush, inject, TestBed, tick } from "@angular/core/testing";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -11,48 +11,112 @@ import { By } from "@angular/platform-browser";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import Spy = jasmine.Spy;
-
-@Component({
-	selector: `host-component`,
-	template: `
-		<stark-dropdown
-			[dropdownId]="dropdownId"
-			[dropdownFormControl]="formControl"
-			[isDisabled]="disabled"
-			[multiSelect]="multiSelect"
-			[optionIdProperty]="optionIdProperty"
-			[optionLabelProperty]="optionLabelProperty"
-			[options]="options"
-			[placeholder]="placeholder"
-			[required]="required"
-			(selectionChanged)="selectionChanged($event)"
-			[value]="value"
-		>
-		</stark-dropdown>
-	`
-})
-class TestHostComponent {
-	@ViewChild(StarkDropdownComponent)
-	public dropdownComponent: StarkDropdownComponent;
-	public dropdownId: string;
-	public formControl: FormControl;
-	// public header?: string;
-	public disabled?: boolean;
-	public multiSelect?: string;
-	public optionIdProperty?: string;
-	public optionLabelProperty?: string;
-	public options: any[];
-	public placeholder: string;
-	public value: any | any[];
-	public selectionChanged: Function;
-	public required?: boolean;
-}
+import { OverlayContainer } from "@angular/cdk/overlay";
+import { Observer } from "rxjs";
+import SpyObj = jasmine.SpyObj;
+import createSpyObj = jasmine.createSpyObj;
 
 describe("DropdownComponent", () => {
+	@Component({
+		selector: `host-ng-control-component`,
+		template: `
+			<stark-dropdown
+				[dropdownId]="dropdownId"
+				[formControl]="formControl"
+				[multiSelect]="multiSelect"
+				[optionIdProperty]="optionIdProperty"
+				[optionLabelProperty]="optionLabelProperty"
+				[options]="options"
+				[placeholder]="placeholder"
+				[required]="required"
+				(selectionChanged)="selectionChanged($event)"
+			>
+			</stark-dropdown>
+		`
+	})
+	class TestHostNgControlComponent {
+		@ViewChild(StarkDropdownComponent)
+		public dropdownComponent: StarkDropdownComponent;
+		public dropdownId: string;
+		public formControl: FormControl = new FormControl();
+		// public header?: string;
+		public multiSelect?: boolean;
+		public optionIdProperty?: string;
+		public optionLabelProperty?: string;
+		public options: any[];
+		public placeholder: string;
+		public selectionChanged: Function;
+		public required?: boolean;
+	}
+
+	@Component({
+		selector: `host-component`,
+		template: `
+			<stark-dropdown
+				[dropdownId]="dropdownId"
+				[disabled]="disabled"
+				[multiSelect]="multiSelect"
+				[optionIdProperty]="optionIdProperty"
+				[optionLabelProperty]="optionLabelProperty"
+				[options]="options"
+				[placeholder]="placeholder"
+				[required]="required"
+				(selectionChanged)="selectionChanged($event)"
+				[value]="value"
+			>
+			</stark-dropdown>
+		`
+	})
+	class TestHostValueComponent {
+		@ViewChild(StarkDropdownComponent)
+		public dropdownComponent: StarkDropdownComponent;
+		public dropdownId: string;
+		// public header?: string;
+		public disabled: boolean;
+		public multiSelect?: boolean;
+		public optionIdProperty?: string;
+		public optionLabelProperty?: string;
+		public options: any[];
+		public placeholder: string;
+		public value: any | any[];
+		public selectionChanged: (value: any | any[]) => void;
+		public required?: boolean;
+	}
+
+	@Component({
+		selector: `host-component`,
+		template: `
+			<stark-dropdown
+				[dropdownId]="dropdownId"
+				[disabled]="disabled"
+				[multiSelect]="multiSelect"
+				[optionIdProperty]="optionIdProperty"
+				[optionLabelProperty]="optionLabelProperty"
+				[options]="options"
+				[placeholder]="placeholder"
+				[required]="required"
+			>
+			</stark-dropdown>
+		`
+	})
+	class TestHostComponent {
+		@ViewChild(StarkDropdownComponent)
+		public dropdownComponent: StarkDropdownComponent;
+		public dropdownId: string;
+		// public header?: string;
+		public disabled: boolean;
+		public multiSelect?: boolean;
+		public optionIdProperty?: string;
+		public optionLabelProperty?: string;
+		public options: any[];
+		public placeholder: string;
+		public required?: boolean;
+	}
+
 	let component: StarkDropdownComponent;
-	let hostComponent: TestHostComponent;
-	let hostFixture: ComponentFixture<TestHostComponent>;
+
+	let overlayContainer: OverlayContainer;
+	let overlayContainerElement: HTMLElement;
 
 	const simpleOptions: string[] = ["1", "2", "3"];
 	const complexOptions: object[] = [
@@ -75,22 +139,58 @@ describe("DropdownComponent", () => {
 	const dropdownOnChange: any = () => {
 		return "dummyDropdownOnChange";
 	};
-	const dropdownFormControl: FormControl = new FormControl("dropdownFormControl");
 	const dropdownOptionIdProperty: string = "id";
 	const dropdownOptionLabelProperty: string = "label";
+
 	const matSelectSelector: string = "mat-select";
+	const matOptionSelector: string = ".mat-option";
+	const matOptionTextSelector: string = ".mat-option-text";
+	const matSelectTagSelector: string = "<mat-select";
+
+	const reflectIdAttr: string = "ng-reflect-id";
+	const reflectPlaceholderAttr: string = "ng-reflect-placeholder";
+	const reflectValueAttr: string = "ng-reflect-value";
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			imports: [CommonModule, MatSelectModule, MatOptionModule, ReactiveFormsModule, TranslateModule.forRoot(), NoopAnimationsModule],
-			declarations: [StarkDropdownComponent, TestHostComponent],
+			declarations: [StarkDropdownComponent, TestHostComponent, TestHostValueComponent, TestHostNgControlComponent],
 			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService],
 			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (selectionChange)
 		}).compileComponents();
 	}));
 
-	describe("Using value + selectionChanged", () => {
-		// Inject the mocked services
+	beforeEach(inject([OverlayContainer], (oc: OverlayContainer) => {
+		overlayContainer = oc;
+		overlayContainerElement = oc.getContainerElement();
+	}));
+
+	afterEach(() => {
+		overlayContainer.ngOnDestroy();
+	});
+
+	function openMatSelect(hostFixture: ComponentFixture<any>): void {
+		const trigger: HTMLElement = hostFixture.debugElement.query(By.css(".mat-select-trigger")).nativeElement;
+		trigger.click();
+		hostFixture.detectChanges();
+	}
+
+	function assertMatSelectValue(hostFixture: ComponentFixture<any>, value: any): void {
+		const dropdownComponent: DebugElement = hostFixture.debugElement.query(By.directive(StarkDropdownComponent));
+		expect(hostFixture.nativeElement.innerHTML).toContain(matSelectTagSelector);
+		const dropdownElement: HTMLElement = dropdownComponent.nativeElement.querySelector(matSelectSelector);
+		expect(dropdownElement.getAttribute(reflectValueAttr)).toBe(String(value));
+		const dropdownSelectedValue: HTMLElement | null = dropdownElement.querySelector(".mat-select-value");
+		expect(dropdownSelectedValue).toBeDefined();
+		if (dropdownSelectedValue) {
+			expect(dropdownSelectedValue.innerHTML).toContain(String(value));
+		}
+	}
+
+	describe("Default", () => {
+		let hostComponent: TestHostComponent;
+		let hostFixture: ComponentFixture<TestHostComponent>;
+
 		beforeEach(() => {
 			hostFixture = TestBed.createComponent(TestHostComponent);
 			hostComponent = hostFixture.componentInstance;
@@ -98,10 +198,8 @@ describe("DropdownComponent", () => {
 			component = hostComponent.dropdownComponent;
 
 			hostComponent.dropdownId = dropdownId;
-			hostComponent.selectionChanged = dropdownOnChange;
 			hostComponent.options = simpleOptions;
 			hostComponent.placeholder = dropdownPlaceholder;
-			hostComponent.value = dropdownValue;
 
 			hostFixture.detectChanges();
 		});
@@ -117,201 +215,142 @@ describe("DropdownComponent", () => {
 			it("should NOT have any inputs set", () => {
 				expect(component.dropdownId).toBe(hostComponent.dropdownId);
 				expect(component.selectionChanged).toBeDefined();
-				expect(component.multiSelect).toBe(hostComponent.multiSelect);
+				expect(component.multiSelect).toBe(!!hostComponent.multiSelect);
 				expect(component.options).toBe(hostComponent.options);
 				expect(component.placeholder).toBe(hostComponent.placeholder);
-				expect(component.required).toBe(<boolean>hostComponent.required);
-				expect(component.value).toBe(hostComponent.value);
+				expect(component.disabled).toBeUndefined();
+				expect(component.required).toBe(!!hostComponent.required);
+			});
+
+			it("should render the appropriate content", () => {
+				const dropdownComponent: DebugElement = hostFixture.debugElement.query(By.directive(StarkDropdownComponent));
+				expect(dropdownComponent.nativeElement.getAttribute(reflectValueAttr)).toBeNull();
+				expect(hostFixture.nativeElement.innerHTML).toContain(matSelectTagSelector);
+				const dropdownElement: HTMLElement = dropdownComponent.nativeElement.querySelector(matSelectSelector);
+				expect(dropdownElement.getAttribute(reflectValueAttr)).toBeNull();
+				expect(dropdownElement.getAttribute(reflectPlaceholderAttr)).toBe(dropdownPlaceholder);
+				expect(dropdownElement.getAttribute(reflectIdAttr)).toBe(dropdownId);
 			});
 		});
 
 		describe("on change", () => {
 			describe("required", () => {
-				it("should set the right value to the formControl when 'required' changes", () => {
+				it("should set the right value to the mat-select when 'required' changes", () => {
 					hostComponent.required = true;
 					hostFixture.detectChanges();
-					expect(component.formControl.validator !== null).toBe(true);
-					// Solution found on Angular GitHub issue: https://github.com/angular/angular/issues/13461
-					// tslint:disable-next-line:no-null-keyword
-					expect(new FormControl(undefined, component.formControl.validator).errors).toEqual({ required: true });
+					const selectElement: HTMLElement = hostFixture.nativeElement.querySelector(matSelectSelector);
+					expect(selectElement.outerHTML).toMatch(/ng-reflect-required="true"/);
 
 					hostComponent.required = false;
 					hostFixture.detectChanges();
-					// tslint:disable-next-line:no-null-keyword
-					expect(component.formControl.validator).toBe(<any>null);
+					expect(selectElement.outerHTML).toMatch(/ng-reflect-required="false"/);
 				});
 			});
 
-			describe("isDisabled", () => {
-				it("should set the right value to the formControl when 'isDisabled' changes", () => {
+			describe("disabled", () => {
+				it("should set the right value to the mat-select when 'disabled' changes", () => {
 					hostComponent.disabled = true;
 					hostFixture.detectChanges();
-					expect(component.formControl.disabled).toBe(true);
+					const selectElement: HTMLElement = hostFixture.nativeElement.querySelector(matSelectSelector);
+					expect(selectElement.outerHTML).toMatch(/ng-reflect-disabled="true"/);
 
 					hostComponent.disabled = false;
 					hostFixture.detectChanges();
-					expect(component.formControl.disabled).toBe(false);
-				});
-
-				it("should log a warning if 'dropdownFormControl' and 'isDisabled' are set", () => {
-					hostComponent.formControl = dropdownFormControl;
-					hostComponent.disabled = true;
-					hostFixture.detectChanges();
-					expect(component.logger.warn).toHaveBeenCalledTimes(1);
-					expect((<Spy>component.logger.warn).calls.mostRecent().args[0]).toMatch(/When dropdownFormControl is set/);
-				});
-			});
-
-			describe("value", () => {
-				it("should set the right value to the formControl when 'isDisabled' changes", () => {
-					hostComponent.disabled = true;
-					hostFixture.detectChanges();
-					expect(component.formControl.disabled).toBe(true);
-
-					hostComponent.disabled = false;
-					hostFixture.detectChanges();
-					expect(component.formControl.disabled).toBe(false);
-				});
-
-				it("should log a warning if 'dropdownFormControl' and 'isDisabled' are set", () => {
-					hostComponent.formControl = dropdownFormControl;
-					hostComponent.disabled = true;
-					hostFixture.detectChanges();
-					expect(component.logger.warn).toHaveBeenCalledTimes(1);
-					expect((<Spy>component.logger.warn).calls.mostRecent().args[0]).toMatch(/When dropdownFormControl is set/);
+					expect(selectElement.outerHTML).toMatch(/ng-reflect-disabled="false"/g);
 				});
 			});
 
 			describe("multiSelect", () => {
-				it("should set the right value to isMultiSelectEnabled when 'multiSelect' changes", () => {
-					hostComponent.value = [];
-					hostComponent.multiSelect = "true";
+				it("should set the right value to multiSelect when 'multiSelect' changes", () => {
+					hostComponent.multiSelect = true;
 					hostFixture.detectChanges();
-					expect(component.isMultiSelectEnabled).toBe(true);
+					expect(component.multiSelect).toBe(true);
 
-					hostComponent.multiSelect = "";
+					hostComponent.multiSelect = <any>"true";
 					hostFixture.detectChanges();
-					expect(component.isMultiSelectEnabled).toBe(true);
+					expect(component.multiSelect).toBe(true);
+
+					hostComponent.multiSelect = <any>"";
+					hostFixture.detectChanges();
+					expect(component.multiSelect).toBe(true);
 
 					hostComponent.multiSelect = undefined;
 					hostFixture.detectChanges();
-					expect(component.isMultiSelectEnabled).toBe(false);
-				});
-			});
+					expect(component.multiSelect).toBe(false);
 
-			describe("optionIdProperty & optionLabelProperty", () => {
-				it("should set the right value to optionsAreSimpleTypes when 'optionIdProperty' or 'optionLabelProperty' change", () => {
-					hostComponent.optionIdProperty = dropdownOptionIdProperty;
+					hostComponent.multiSelect = false;
 					hostFixture.detectChanges();
-					expect(component.optionsAreSimpleTypes).toBe(true);
+					expect(component.multiSelect).toBe(false);
 
-					hostComponent.optionLabelProperty = dropdownOptionLabelProperty;
-					hostComponent.options = complexOptions;
+					hostComponent.multiSelect = <any>"false";
 					hostFixture.detectChanges();
-					expect(component.optionsAreSimpleTypes).toBe(false);
-
-					hostComponent.optionLabelProperty = undefined;
-					hostFixture.detectChanges();
-					expect(component.optionsAreSimpleTypes).toBe(true);
+					expect(component.multiSelect).toBe(false);
 				});
 			});
 		});
 
-		describe("options defined as array of simple types", () => {
-			it("should render the appropriate content", () => {
-				const dropdownComponent: DebugElement = hostFixture.debugElement.query(By.directive(StarkDropdownComponent));
-				expect(dropdownComponent.nativeElement.getAttribute("ng-reflect-value")).toBe(dropdownValue); // ngModel is replaced by Angular to "ng-reflect-value"
-				expect(hostFixture.nativeElement.innerHTML).toContain("<mat-select");
-				const dropdownElement: HTMLElement = dropdownComponent.nativeElement.querySelector(matSelectSelector);
-				expect(dropdownElement.getAttribute("ng-reflect-placeholder")).toBe(dropdownPlaceholder);
-				expect(dropdownElement.getAttribute("ng-reflect-id")).toBe(dropdownId);
-
-				// FIXME find a solution to make those tests work again
-				// Angular now does not diplay the option of mat-select in the html file, which means that we have no solution to test those options
-
-				// expect(dropdownElement.html()).toContain("<md-option");
-				// const optionElements: IAugmentedJQuery = UnitTestingUtils.getElementsByTagName(element, "md-option");
-				// expect(optionElements.length).toBe(3);
-				//
-				// for (let index: number = 0; index < optionElements.length; index++) {
-				// 	const option: IAugmentedJQuery = angular.element(optionElements[index]);
-				// 	expect(option.attr("ng-value")).toBe("$ctrl.optionsAreSimpleTypes ? option : option[$ctrl.optionIdProperty]");
-				// 	expect(option.attr("value")).toBe(String(index + 1));
-				// 	expect(option.text().trim()).toBe(String(index + 1));
-				// }
-			});
-		});
-	});
-
-	describe("Using reactive forms", () => {
-		// Inject the mocked services
-		beforeEach(() => {
-			hostFixture = TestBed.createComponent(TestHostComponent);
-			hostComponent = hostFixture.componentInstance;
-			hostFixture.detectChanges();
-			component = hostComponent.dropdownComponent;
-
-			hostComponent.dropdownId = dropdownId;
-			hostComponent.options = simpleOptions;
-			hostComponent.placeholder = dropdownPlaceholder;
-			hostComponent.formControl = dropdownFormControl;
-
-			hostFixture.detectChanges();
-		});
-
-		describe("on initialization", () => {
-			it("should set internal component properties", () => {
-				expect(hostFixture).toBeDefined();
-				expect(component).toBeDefined();
-				expect(component.logger).not.toBeNull();
-				expect(component.logger).toBeDefined();
-			});
-
-			it("should NOT have any inputs set", () => {
-				expect(component.dropdownId).toBe(hostComponent.dropdownId);
-				expect(component.selectionChanged).toBeDefined();
-				expect(component.multiSelect).toBe(hostComponent.multiSelect);
-				expect(component.options).toBe(hostComponent.options);
-				expect(component.placeholder).toBe(hostComponent.placeholder);
-				expect(component.required).toBe(<boolean>hostComponent.required);
-				expect(component.dropdownFormControl).toBe(hostComponent.formControl);
-			});
-		});
-
-		describe("on change", () => {
-			it("should assign right value to isMultiSelectEnabled when multiSelect changes", () => {
-				hostComponent.multiSelect = "true";
+		describe("rendering 'options' in 'mat-option' when 'open mat-select'", () => {
+			it("should render the right values when 'options' is an array of simple types", () => {
+				hostComponent.options = simpleOptions;
 				hostFixture.detectChanges();
-				expect(component.isMultiSelectEnabled).toBe(true);
 
-				hostComponent.multiSelect = "false";
+				openMatSelect(hostFixture);
+				const optionElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(matOptionSelector);
+				expect(optionElements.length).toBe(simpleOptions.length);
+
+				for (let index: number = 0; index < optionElements.length; index++) {
+					const option: Element = optionElements[index];
+					const optionText: Element = <Element>option.querySelector(matOptionTextSelector);
+					expect(optionText.textContent).toContain(simpleOptions[index]);
+				}
+			});
+
+			it("should render the right values when 'options' is an array of complex types", () => {
+				hostComponent.options = complexOptions;
+				hostComponent.optionIdProperty = dropdownOptionIdProperty;
+				hostComponent.optionLabelProperty = dropdownOptionLabelProperty;
 				hostFixture.detectChanges();
-				expect(component.isMultiSelectEnabled).toBe(false);
+
+				openMatSelect(hostFixture);
+				const optionElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(matOptionSelector);
+				expect(optionElements.length).toBe(complexOptions.length);
+
+				for (let index: number = 0; index < optionElements.length; index++) {
+					const option: Element = optionElements[index];
+					const optionText: Element = <Element>option.querySelector(matOptionTextSelector);
+					expect(optionText.textContent).toContain(complexOptions[index][dropdownOptionLabelProperty]);
+				}
 			});
 		});
 
-		describe("options defined as array of simple types", () => {
-			it("should render the appropriate content", () => {
-				const dropdownComponent: DebugElement = hostFixture.debugElement.query(By.directive(StarkDropdownComponent));
-				expect(dropdownComponent.nativeElement.getAttribute("ng-reflect-dropdown-form-control")).toBe("[object Object]"); // ngModel is replaced by Angular to "ng-reflect-value"
-				expect(hostFixture.nativeElement.innerHTML).toContain("<mat-select");
-				const dropdownElement: HTMLElement = dropdownComponent.nativeElement.querySelector(matSelectSelector);
-				expect(dropdownElement.getAttribute("ng-reflect-placeholder")).toBe(dropdownPlaceholder);
-				expect(dropdownElement.getAttribute("ng-reflect-id")).toBe(dropdownId);
+		describe("should render checkboxes in 'mat-option' based on 'multiSelect' value", () => {
+			const checkboxSelector: string = ".mat-option .mat-pseudo-checkbox";
 
-				// FIXME find a solution to make those tests work again
-				// Angular now does not diplay the option of mat-select in the html file, which means that we have no solution to test those options
+			it("should display a checkbox for every option in the dropdown when multiSelect is set to 'true'", () => {
+				hostComponent.multiSelect = true;
+				hostFixture.detectChanges();
 
-				// expect(dropdownElement.html()).toContain("<md-option");
-				// const optionElements: IAugmentedJQuery = UnitTestingUtils.getElementsByTagName(element, "md-option");
-				// expect(optionElements.length).toBe(3);
-				//
-				// for (let index: number = 0; index < optionElements.length; index++) {
-				// 	const option: IAugmentedJQuery = angular.element(optionElements[index]);
-				// 	expect(option.attr("ng-value")).toBe("$ctrl.optionsAreSimpleTypes ? option : option[$ctrl.optionIdProperty]");
-				// 	expect(option.attr("value")).toBe(String(index + 1));
-				// 	expect(option.text().trim()).toBe(String(index + 1));
-				// }
+				openMatSelect(hostFixture);
+				const optionCheckboxElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(checkboxSelector);
+				expect(optionCheckboxElements.length).toBe(hostComponent.options.length);
+			});
+
+			it("should display a checkbox for every option in the dropdown when multiSelect has no value defined", () => {
+				hostComponent.multiSelect = <any>"";
+				hostFixture.detectChanges();
+
+				openMatSelect(hostFixture);
+				const optionCheckboxElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(checkboxSelector);
+				expect(optionCheckboxElements.length).toBe(hostComponent.options.length);
+			});
+
+			it("should NOT render the checkboxes if multiSelect is to any value other than 'true'", () => {
+				hostComponent.multiSelect = <any>"false";
+				hostFixture.detectChanges();
+
+				openMatSelect(hostFixture);
+				const optionCheckboxElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(checkboxSelector);
+				expect(optionCheckboxElements.length).toBe(0);
 			});
 		});
 
@@ -334,97 +373,257 @@ describe("DropdownComponent", () => {
 			});
 		});
 
-		// describe("multiSelect", () => {
-		// 	const checkboxSelector: string = ".mat-select-panel mat-option mat-pseudo-checkbox";
-		//
-		// 	it("should display a checkbox for every option in the dropdown when multiSelect is set to 'true'", () => {
-		// 		hostComponent.multiSelect = "true";
-		// 		hostFixture.detectChanges();
+		describe("optionIdProperty & optionLabelProperty", () => {
+			it("should set the right value to optionsAreSimpleTypes when 'optionIdProperty' or 'optionLabelProperty' change", () => {
+				hostComponent.optionIdProperty = dropdownOptionIdProperty;
+				hostFixture.detectChanges();
+				expect(component.optionsAreSimpleTypes).toBe(true);
 
-		// const dropdownElement: HTMLElement = getMatSelectNativeElement();
-		// const dropdownElement: HTMLElement = hostFixture.nativeElement.querySelector(matSelectSelector);
-		// dropdownElement.click();
-		// hostFixture.detectChanges();
-		// console.log(dropdownElement);
-		// (<HTMLElement>hostFixture.nativeElement.querySelector(matSelectSelector)).click();
-		// (<HTMLElement>hostFixture.nativeElement.querySelector("mat-select")).click();
+				hostComponent.optionLabelProperty = dropdownOptionLabelProperty;
+				hostComponent.options = complexOptions;
+				hostFixture.detectChanges();
+				expect(component.optionsAreSimpleTypes).toBe(false);
 
-		// console.log(hostFixture.nativeElement);
-		// const optionCheckboxElements: DebugElement[] = hostFixture.nativeElement.querySelectorAll(checkboxSelector);
-		// expect(optionCheckboxElements.length).toBe(3);
-		//
-		// hostFixture.whenStable().then(() => {
-		// 	console.log(hostFixture.nativeElement);
-		// 	const optionCheckboxElements: DebugElement[] = hostFixture.nativeElement.querySelectorAll(checkboxSelector);
-		// 	expect(optionCheckboxElements.length).toBe(3);
-		// 	// done();
-		// });
-		// });
-
-		// 	it("should display a checkbox for every option in the dropdown when multiSelect has no value defined", (done: DoneFn) => {
-		// 		hostComponent.multiSelect = undefined;
-		// 		hostFixture.detectChanges();
-		//
-		// 		// const dropdownElement: HTMLElement = getMatSelectNativeElement();
-		// 		// dropdownElement.click();
-		// 		(<HTMLElement>hostFixture.nativeElement.querySelector(matSelectSelector)).click();
-		// 		// (<HTMLElement>hostFixture.nativeElement.querySelector(matSelectSelector)).click();
-		//
-		// 		hostFixture.whenStable().then(() => {
-		// 			const optionCheckboxElements: DebugElement[] = hostFixture.nativeElement.querySelectorAll(checkboxSelector);
-		// 			console.log(optionCheckboxElements);
-		// 			expect(optionCheckboxElements.length).toBe(component.options.length);
-		// 			done();
-		// 		});
-		// 	});
-		//
-		// 	it("should NOT render the checkboxes if multiSelect is to any value other than 'true'", (done: DoneFn) => {
-		// 		hostComponent.multiSelect = "whatever";
-		// 		hostFixture.detectChanges();
-		//
-		// 		// const dropdownElement: HTMLElement = getMatSelectNativeElement();
-		// 		// dropdownElement.click();
-		// 		(<HTMLElement>hostFixture.nativeElement.querySelector(matSelectSelector)).click();
-		// 		// (<HTMLElement>hostFixture.nativeElement.querySelector("mat-select")).click();
-		//
-		// 		hostFixture.whenStable().then(() => {
-		// 			const optionCheckboxElements: DebugElement[] = hostFixture.nativeElement.querySelectorAll(checkboxSelector);
-		// 			expect(optionCheckboxElements.length).toBe(0);
-		// 			done();
-		// 		});
-		// 	});
-		// });
+				hostComponent.optionLabelProperty = undefined;
+				hostFixture.detectChanges();
+				expect(component.optionsAreSimpleTypes).toBe(true);
+			});
+		});
 	});
 
-	// FIXME Reenable this test
-	// the only thing changing from this test to the previous one are the options.
-	// We should fix that to make both test more relevant.
+	describe("Using value + selectionChanged", () => {
+		let hostComponent: TestHostValueComponent;
+		let hostFixture: ComponentFixture<TestHostValueComponent>;
 
-	// describe("options defined as array of objects", () => {
-	// 	it("should render the appropriate content", () => {
-	// 		expect(component).toContain("<label");
-	// 		const labelElement: HTMLElement = hostFixture.debugElement.nativeElement.querySelector("label");
-	// 		expect(labelElement.tagName).toBe(dropdownLabel);
-	// 		expect(component).toContain("<mat-select");
-	// 		const dropdownElement: HTMLElement = hostFixture.debugElement.nativeElement.querySelector("mat-select");
-	// 		expect(dropdownElement.getAttribute("id")).toBe(dropdownId);
-	// 		expect(dropdownElement.getAttribute("[(ngModel)]")).toBe("value");
-	// 		expect(dropdownElement.getAttribute("placeholder")).toBe(dropdownPlaceholder);
-	// 		const headerElement: HTMLElement = hostFixture.debugElement.nativeElement.querySelector("mat-select-header");
-	// 		expect(headerElement.tagName.trim()).toBe(dropdownHeader);
+		// Inject the mocked services
+		beforeEach(() => {
+			hostFixture = TestBed.createComponent(TestHostValueComponent);
+			hostComponent = hostFixture.componentInstance;
+			hostFixture.detectChanges();
+			component = hostComponent.dropdownComponent;
 
-	// expect(dropdownElement.html()).toContain("<md-option");
-	// const optionElements: IAugmentedJQuery = UnitTestingUtils.getElementsByTagName(element, "md-option");
-	// expect(optionElements.length).toBe(3);
-	//
-	// for (let index: number = 0; index < optionElements.length; index++) {
-	// 	const option: IAugmentedJQuery = angular.element(optionElements[index]);
-	// 	expect(option.attr("ng-value")).toBe("$ctrl.optionsAreSimpleTypes ? option : option[$ctrl.optionIdProperty]");
-	// 	expect(option.attr("value")).toBe("option_" + (index + 1));
-	// 	expect(option.text().trim()).toBe("this is option " + (index + 1));
-	// }
-	// 	});
-	// });
+			hostComponent.dropdownId = dropdownId;
+			hostComponent.selectionChanged = dropdownOnChange;
+			hostComponent.options = simpleOptions;
+			hostComponent.placeholder = dropdownPlaceholder;
+			hostComponent.value = dropdownValue;
+
+			hostFixture.detectChanges();
+		});
+
+		describe("on initialization", () => {
+			it("should have right inputs set", () => {
+				expect(component.selectionChanged).toBeDefined();
+				expect(component.disabled).toBeUndefined();
+				expect(component.value).toBe(hostComponent.value);
+			});
+
+			it("should render the appropriate content", () => {
+				const dropdownComponent: DebugElement = hostFixture.debugElement.query(By.directive(StarkDropdownComponent));
+				expect(dropdownComponent.nativeElement.getAttribute(reflectValueAttr)).toBe(dropdownValue); // ngModel is replaced by Angular to "ng-reflect-value"
+				expect(hostFixture.nativeElement.innerHTML).toContain(matSelectTagSelector);
+				const dropdownElement: HTMLElement = dropdownComponent.nativeElement.querySelector(matSelectSelector);
+				expect(dropdownElement.getAttribute(reflectValueAttr)).toBe(dropdownValue);
+				expect(dropdownElement.getAttribute(reflectPlaceholderAttr)).toBe(dropdownPlaceholder);
+				expect(dropdownElement.getAttribute(reflectIdAttr)).toBe(dropdownId);
+			});
+		});
+
+		describe("on change", () => {
+			describe("value", () => {
+				it("should set the right value to the formControl when 'value' changes", () => {
+					hostComponent.value = "dummy-value";
+					hostFixture.detectChanges();
+					const selectElement: HTMLElement = hostFixture.nativeElement.querySelector(matSelectSelector);
+					expect(selectElement.outerHTML).toMatch(/ng-reflect-value="dummy-value"/);
+				});
+			});
+		});
+
+		describe("on select option", () => {
+			it("should emit the right value to 'selectionChanged' when 'simple types' options", fakeAsync(() => {
+				hostComponent.options = simpleOptions;
+				hostComponent.optionIdProperty = undefined;
+				hostComponent.optionLabelProperty = undefined;
+				hostComponent.value = undefined;
+				spyOn(hostComponent, "selectionChanged");
+				hostFixture.detectChanges();
+
+				openMatSelect(hostFixture);
+				const optionElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(matOptionSelector);
+				expect(optionElements.length).toBe(simpleOptions.length);
+				(<HTMLElement>optionElements[2]).click();
+				hostFixture.detectChanges();
+				tick();
+
+				expect(hostComponent.selectionChanged).toHaveBeenCalledTimes(1);
+				expect(hostComponent.selectionChanged).toHaveBeenCalledWith(simpleOptions[2]);
+				assertMatSelectValue(hostFixture, simpleOptions[2]);
+
+				hostFixture.destroy();
+				flush();
+			}));
+
+			it("should emit the right value to 'selectionChanged' when 'complex types' options", fakeAsync(() => {
+				hostComponent.options = complexOptions;
+				hostComponent.optionIdProperty = dropdownOptionIdProperty;
+				hostComponent.optionLabelProperty = dropdownOptionLabelProperty;
+				hostComponent.value = undefined;
+				spyOn(hostComponent, "selectionChanged");
+				hostFixture.detectChanges();
+
+				openMatSelect(hostFixture);
+				const optionElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(matOptionSelector);
+				expect(optionElements.length).toBe(complexOptions.length);
+				(<HTMLElement>optionElements[2]).click();
+				hostFixture.detectChanges();
+				tick();
+
+				expect(hostComponent.selectionChanged).toHaveBeenCalledTimes(1);
+				expect(hostComponent.selectionChanged).toHaveBeenCalledWith(complexOptions[2][dropdownOptionIdProperty]);
+				assertMatSelectValue(hostFixture, complexOptions[2][dropdownOptionIdProperty]);
+
+				hostFixture.destroy();
+				flush();
+			}));
+		});
+	});
+
+	describe("Using reactive forms", () => {
+		let hostComponent: TestHostNgControlComponent;
+		let hostFixture: ComponentFixture<TestHostNgControlComponent>;
+
+		beforeEach(() => {
+			hostFixture = TestBed.createComponent(TestHostNgControlComponent);
+			hostComponent = hostFixture.componentInstance;
+			hostFixture.detectChanges();
+			component = hostComponent.dropdownComponent;
+
+			hostComponent.dropdownId = dropdownId;
+			hostComponent.selectionChanged = dropdownOnChange;
+			hostComponent.options = simpleOptions;
+			hostComponent.placeholder = dropdownPlaceholder;
+			hostComponent.formControl.setValue(dropdownValue);
+
+			hostFixture.detectChanges();
+		});
+
+		describe("on initialization", () => {
+			it("should have right inputs set", () => {
+				expect(component.disabled).toBe(hostComponent.formControl.disabled);
+				expect(component.required).toBe(!!hostComponent.required);
+				expect(component.value).toBe(hostComponent.formControl.value);
+			});
+
+			it("should render the appropriate content", () => {
+				const dropdownComponent: DebugElement = hostFixture.debugElement.query(By.directive(StarkDropdownComponent));
+				expect(dropdownComponent.nativeElement.getAttribute("ng-reflect-form")).toBe("[object Object]"); // formControl is replaced by Angular to "ng-reflect-form"
+				expect(hostFixture.nativeElement.innerHTML).toContain(matSelectTagSelector);
+				const dropdownElement: HTMLElement = dropdownComponent.nativeElement.querySelector(matSelectSelector);
+				expect(dropdownElement.getAttribute(reflectValueAttr)).toBe(dropdownValue);
+				expect(dropdownElement.getAttribute(reflectPlaceholderAttr)).toBe(dropdownPlaceholder);
+				expect(dropdownElement.getAttribute(reflectIdAttr)).toBe(dropdownId);
+			});
+		});
+
+		describe("on change", () => {
+			describe("required", () => {
+				it("should change the validators of the 'formControl' when 'required' changes", () => {
+					hostComponent.required = true;
+					hostComponent.formControl.reset();
+					hostFixture.detectChanges();
+
+					expect(hostComponent.formControl.validator).not.toBeNull();
+					// Solution found on Angular GitHub issue: https://github.com/angular/angular/issues/13461
+					expect(hostComponent.formControl.errors).toEqual({ required: true });
+
+					hostComponent.required = false;
+					hostFixture.detectChanges();
+					expect(hostComponent.formControl.validator).not.toBeNull();
+					expect(hostComponent.formControl.errors).toBeNull();
+				});
+			});
+
+			describe("formControl.disabled", () => {
+				it("should set the right value to the mat-select when 'formControl.disabled' changes", () => {
+					hostComponent.formControl.disable();
+					hostFixture.detectChanges();
+					const selectElement: HTMLElement = hostFixture.nativeElement.querySelector(matSelectSelector);
+					expect(selectElement.outerHTML).toMatch(/ng-reflect-disabled="true"/);
+
+					hostComponent.formControl.enable();
+					hostFixture.detectChanges();
+					expect(selectElement.outerHTML).toMatch(/ng-reflect-disabled="false"/);
+				});
+			});
+
+			describe("formControl.value", () => {
+				it("should set the right value to the formControl when 'value' changes", () => {
+					hostComponent.formControl.setValue("dummy-value");
+					hostFixture.detectChanges();
+
+					const selectElement: HTMLElement = hostFixture.nativeElement.querySelector(matSelectSelector);
+					expect(selectElement.outerHTML).toMatch(/ng-reflect-value="dummy-value"/);
+				});
+			});
+		});
+
+		describe("on select option", () => {
+			it("should emit the right value to 'formControl' when 'simple types' options", fakeAsync(() => {
+				const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+
+				hostComponent.options = simpleOptions;
+				hostComponent.optionIdProperty = undefined;
+				hostComponent.optionLabelProperty = undefined;
+				hostComponent.formControl.valueChanges.subscribe(mockObserver);
+				hostFixture.detectChanges();
+
+				openMatSelect(hostFixture);
+				const optionElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(matOptionSelector);
+				expect(optionElements.length).toBe(simpleOptions.length);
+				(<HTMLElement>optionElements[1]).click();
+				hostFixture.detectChanges();
+				tick();
+
+				expect(hostComponent.formControl.value).toEqual(simpleOptions[1]);
+				expect(mockObserver.next).toHaveBeenCalled();
+				expect(mockObserver.next).toHaveBeenCalledWith(simpleOptions[1]);
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+				assertMatSelectValue(hostFixture, simpleOptions[1]);
+
+				hostFixture.destroy();
+				flush();
+			}));
+
+			it("should emit the right value to 'formControl' when 'complex types' options", fakeAsync(() => {
+				const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+
+				hostComponent.options = complexOptions;
+				hostComponent.optionIdProperty = dropdownOptionIdProperty;
+				hostComponent.optionLabelProperty = dropdownOptionLabelProperty;
+				hostComponent.formControl.valueChanges.subscribe(mockObserver);
+				hostFixture.detectChanges();
+
+				openMatSelect(hostFixture);
+				const optionElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(matOptionSelector);
+				expect(optionElements.length).toBe(complexOptions.length);
+				(<HTMLElement>optionElements[2]).click();
+				hostFixture.detectChanges();
+				tick();
+
+				expect(hostComponent.formControl.value).toEqual(complexOptions[2][dropdownOptionIdProperty]);
+				expect(mockObserver.next).toHaveBeenCalled();
+				expect(mockObserver.next).toHaveBeenCalledWith(complexOptions[2][dropdownOptionIdProperty]);
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+				assertMatSelectValue(hostFixture, complexOptions[2][dropdownOptionIdProperty]);
+
+				hostFixture.destroy();
+				flush();
+			}));
+		});
+	});
 
 	// FIXME reenable those tests as soon as a solution to replace the md-select-header as been found: https://github.com/angular/material2/pull/7835
 	//
@@ -445,6 +644,4 @@ describe("DropdownComponent", () => {
 	// 		expect(dropdownHeader.length).toBe(0);
 	// 	});
 	// });
-
-	// FIXME reenable and adapt those tests once the solution for the option has been found
 });

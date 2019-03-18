@@ -1,6 +1,7 @@
 {
   "SHOWCASE": {
     "COMMON": {
+      "DISABLED": "Uitgeschakeld",
       "ENABLED": "Ingeschakeld",
       "VALUE": "Waarde"
     },
@@ -43,7 +44,6 @@
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Aangepaste filter",
-        "DISABLED": "Uitgeschakeld",
         "NG_MODEL": "Date Picker - Met NgModel",
         "ONLY_WEEKDAYS": "Date Picker - Alleen weekdagen",
         "ONLY_WEEKENDS": "Date Picker - Alleen weekenden",
@@ -92,9 +92,8 @@
         "DISABLED": "Niet geactiveerd dropdown",
         "IO": "Informatica-infrastructuur en operaties",
         "MULTIPLE": "Meerdere selectie",
-        "MULTIPLE_REQUIRED": "Gewenste meerdere selectie",
-        "REACTIVE_FORM": "Reactive form",
-        "REQUIRED": "Dropdown met gewenste keuze",
+        "NG_MODEL_REQUIRED": "Met NgModel + gewenste keuze",
+        "REACTIVE_FORM": "Met Reactive form",
         "SELECTED_VALUE": "Geselecteerde waarde ",
         "SELECTED_VALUES": "Geselecteerde waarden ",
         "SELECT_SERVICE": "Selecteer een dienst",

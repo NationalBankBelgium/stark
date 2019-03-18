@@ -6,43 +6,56 @@
 		filesPath="dropdown/reactive-form-dropdown"
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.REACTIVE_FORM' | translate"
 	>
-		<stark-dropdown
-			dropdownId="reactiveFormDropdown"
-			[options]="serviceDropdownOptions"
-			[dropdownFormControl]="serviceFormControl"
-			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
-			optionIdProperty="id"
-			optionLabelProperty="value"
-			required
-		>
-		</stark-dropdown>
-
-		<div *ngIf="selectedServiceFormControl">
-			{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUE" | translate }}: {{ selectedServiceFormControl }}
+		<mat-form-field>
+			<stark-dropdown
+				dropdownId="reactiveFormDropdown"
+				[options]="serviceDropdownOptions"
+				[formControl]="serviceFormControl"
+				placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
+				optionIdProperty="id"
+				optionLabelProperty="value"
+				required
+			>
+			</stark-dropdown>
+			<mat-error>
+				<span *ngIf="serviceFormControl.touched && serviceFormControl.hasError('required')" translate>
+					STARK.VALIDATION.REQUIRED
+				</span>
+			</mat-error>
+		</mat-form-field>
+		<div *ngIf="serviceFormControl.value">
+			{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUE" | translate }}: {{ serviceFormControl.value }}
 		</div>
 		<div>
-			<mat-checkbox (change)="toggleDisabledReactiveFormControl()" [(ngModel)]="isDisabledServiceFormControl">
-				isDisabled
+			<mat-checkbox (change)="toggleDisabledReactiveFormControl()" [value]="serviceFormControl.disabled">
+				{{ "SHOWCASE.COMMON.DISABLED" | translate }}
 			</mat-checkbox>
 		</div>
 	</example-viewer>
 
 	<example-viewer
 		[extensions]="['HTML', 'TS']"
-		filesPath="dropdown/single-required-selection"
-		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.REQUIRED' | translate"
+		filesPath="dropdown/ng-model-required"
+		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.NG_MODEL_REQUIRED' | translate"
 	>
-		<stark-dropdown
-			dropdownId="serviceDropdown"
-			[options]="serviceDropdownOptions"
-			[value]="selectedService"
-			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
-			optionIdProperty="id"
-			optionLabelProperty="value"
-			(selectionChanged)="serviceDropdownOnChange($event)"
-			required
-		>
-		</stark-dropdown>
+		<form #modelForm="ngForm">
+			<mat-form-field>
+				<stark-dropdown
+					name="serviceDropdown"
+					dropdownId="serviceDropdown"
+					[options]="serviceDropdownOptions"
+					[(ngModel)]="selectedService"
+					placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
+					optionIdProperty="id"
+					optionLabelProperty="value"
+					required
+				>
+				</stark-dropdown>
+				<mat-error *ngIf="modelForm.invalid && modelForm.touched">
+					{{ "STARK.VALIDATION.REQUIRED" | translate }}
+				</mat-error>
+			</mat-form-field>
+		</form>
 
 		<div *ngIf="selectedService">{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUE" | translate }}: {{ selectedService }}</div>
 	</example-viewer>
@@ -52,15 +65,17 @@
 		filesPath="dropdown/single-blank-selection"
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.BLANK' | translate"
 	>
-		<stark-dropdown
-			dropdownId="numberDropdown"
-			[options]="[1, 2, 3, 4, 5, 6, 7]"
-			[value]="selectedNumber"
-			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_NUMBER"
-			(selectionChanged)="numberDropdownOnChange($event)"
-			[defaultBlank]="true"
-		>
-		</stark-dropdown>
+		<mat-form-field>
+			<stark-dropdown
+				dropdownId="numberDropdown"
+				[options]="[1, 2, 3, 4, 5, 6, 7]"
+				[value]="selectedNumber"
+				placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_NUMBER"
+				(selectionChanged)="numberDropdownOnChange($event)"
+				[defaultBlank]="true"
+			>
+			</stark-dropdown>
+		</mat-form-field>
 		<div *ngIf="selectedNumber">{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUE" | translate }}: {{ selectedNumber }}</div>
 	</example-viewer>
 
@@ -69,40 +84,20 @@
 		filesPath="dropdown/multiple-selection"
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.MULTIPLE' | translate"
 	>
-		<stark-dropdown
-			dropdownId="multipleServiceDropdown"
-			[options]="serviceDropdownOptions"
-			[value]="selectedServices"
-			optionIdProperty="id"
-			optionLabelProperty="value"
-			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICES"
-			(selectionChanged)="multipleServicesDropdownOnChange($event)"
-			multiSelect
-		>
-		</stark-dropdown>
+		<mat-form-field>
+			<stark-dropdown
+				dropdownId="multipleServiceDropdown"
+				[options]="serviceDropdownOptions"
+				[value]="selectedServices"
+				optionIdProperty="id"
+				optionLabelProperty="value"
+				placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICES"
+				(selectionChanged)="multipleServicesDropdownOnChange($event)"
+				multiSelect
+			>
+			</stark-dropdown>
+		</mat-form-field>
 		<div *ngIf="selectedServices">{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUES" | translate }}: {{ selectedServices }}</div>
-	</example-viewer>
-
-	<example-viewer
-		[extensions]="['HTML', 'TS']"
-		filesPath="dropdown/multiple-required-selection"
-		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.MULTIPLE_REQUIRED' | translate"
-	>
-		<stark-dropdown
-			dropdownId="multipleServicesRequiredDropdown"
-			[options]="serviceDropdownOptions"
-			[value]="selectedRequiredServices"
-			optionIdProperty="id"
-			optionLabelProperty="value"
-			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_ONE_SERVICE"
-			(selectionChanged)="multipleServicesRequiredDropdownOnChange($event)"
-			multiSelect
-			required
-		>
-		</stark-dropdown>
-		<div *ngIf="selectedRequiredServices">
-			{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUES" | translate }} : {{ selectedRequiredServices }}
-		</div>
 	</example-viewer>
 
 	<example-viewer
@@ -110,14 +105,16 @@
 		filesPath="dropdown/disabled-dropdown"
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.DISABLED' | translate"
 	>
-		<stark-dropdown
-			dropdownId="disabledDropdown"
-			[options]="[1, 2, 3, 4, 5, 6, 7]"
-			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_DISABLED"
-			[isDisabled]="true"
-			multiSelect
-		>
-		</stark-dropdown>
+		<mat-form-field>
+			<stark-dropdown
+				dropdownId="disabledDropdown"
+				[options]="[1, 2, 3, 4, 5, 6, 7]"
+				[placeholder]="'SHOWCASE.DEMO.DROPDOWN.SELECT_DISABLED' | translate"
+				[disabled]="true"
+				multiSelect
+			>
+			</stark-dropdown>
+		</mat-form-field>
 	</example-viewer>
 
 	<example-viewer
@@ -126,19 +123,19 @@
 		filesPath="dropdown/white"
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.WHITE' | translate"
 	>
-		<stark-dropdown
-			class="stark-full-width"
-			color="white"
-			dropdownId="serviceWhiteDropdown"
-			[options]="serviceDropdownOptions"
-			[value]="selectedServiceWhiteDropdown"
-			placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
-			optionIdProperty="id"
-			optionLabelProperty="value"
-			(selectionChanged)="whiteDropdownOnChange($event)"
-			required
-		>
-		</stark-dropdown>
+		<mat-form-field class="stark-full-width">
+			<stark-dropdown
+				color="white"
+				dropdownId="serviceWhiteDropdown"
+				[options]="serviceDropdownOptions"
+				[value]="selectedServiceWhiteDropdown"
+				placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
+				optionIdProperty="id"
+				optionLabelProperty="value"
+				(selectionChanged)="whiteDropdownOnChange($event)"
+			>
+			</stark-dropdown>
+		</mat-form-field>
 
 		<div class="result-display" *ngIf="selectedServiceWhiteDropdown">
 			{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUE" | translate }}: {{ selectedServiceWhiteDropdown }}
