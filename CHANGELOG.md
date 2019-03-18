@@ -1,3 +1,73 @@
+<a name="10.0.0-beta.6"></a>
+# [10.0.0-beta.6](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.5...10.0.0-beta.6) (2019-03-18)
+
+
+### Bug Fixes
+
+* **release:** set npm tags 'latest' and 'next' correctly after every release. Fix nightly builds versioning ([e747fd0](https://github.com/nationalbankbelgium/stark/commit/e747fd0)), closes [#420](https://github.com/nationalbankbelgium/stark/issues/420) [#468](https://github.com/nationalbankbelgium/stark/issues/468)
+* **stark-demo:** fix for links in table-of-contents ([01257d9](https://github.com/nationalbankbelgium/stark/commit/01257d9))
+* **stark-demo:** fix warning about deprecated property ([77cbca4](https://github.com/nationalbankbelgium/stark/commit/77cbca4))
+* **stark-demo:** update usage examples of stark table ([fd06086](https://github.com/nationalbankbelgium/stark/commit/fd06086)), closes [#1012](https://github.com/nationalbankbelgium/stark/issues/1012)
+* **stark-ui:** fix table error when `data` not initialized ([d78ac80](https://github.com/nationalbankbelgium/stark/commit/d78ac80)), closes [#1087](https://github.com/nationalbankbelgium/stark/issues/1087)
+* **stark-ui:** keep table paginator in sync with (filtered) data ([3c3a4ca](https://github.com/nationalbankbelgium/stark/commit/3c3a4ca)), closes [#1090](https://github.com/nationalbankbelgium/stark/issues/1090) [#1012](https://github.com/nationalbankbelgium/stark/issues/1012)
+* **stark-ui:** update some component styling to fix bugs ([ad12b5a](https://github.com/nationalbankbelgium/stark/commit/ad12b5a)), closes [#1169](https://github.com/nationalbankbelgium/stark/issues/1169)
+
+
+### Code Refactoring
+
+* **stark-ui:** remove `starkOnEnterKey` in favor of Angulars implementation ([e363923](https://github.com/nationalbankbelgium/stark/commit/e363923)), closes [#1156](https://github.com/nationalbankbelgium/stark/issues/1156)
+
+
+### Features
+
+* **stark-ui:** add `stark-session-card` component ([4a1db25](https://github.com/nationalbankbelgium/stark/commit/4a1db25)), closes [#718](https://github.com/nationalbankbelgium/stark/issues/718)
+* **stark-ui:** date-picker - add support for ControlValueAccessor, MatFormFieldControl, Validator and starkTimestampMask directive ([81dcd18](https://github.com/nationalbankbelgium/stark/commit/81dcd18)), closes [#1146](https://github.com/nationalbankbelgium/stark/issues/1146)
+* **stark-ui:** implement `stark-session-card` in stark session pages ([debe387](https://github.com/nationalbankbelgium/stark/commit/debe387)), closes [#718](https://github.com/nationalbankbelgium/stark/issues/718)
+* **stark-ui:** implement Material dialogs presets: alert, confirm and prompt ([a38d24a](https://github.com/nationalbankbelgium/stark/commit/a38d24a)), closes [#793](https://github.com/nationalbankbelgium/stark/issues/793)
+
+
+### Performance Improvements
+
+* **build:** add `"extractCss": true` to build options ([e212d71](https://github.com/nationalbankbelgium/stark/commit/e212d71))
+
+
+### BREAKING CHANGES
+
+* **stark-ui:** stark-date-picker now integrates ControlValueAccessor and Validator:
+
+  - The following Input have been changed:
+      - **date** is now **value**
+      - **maxDate** is now **max**
+      - **minDate** is now **min**
+      - **label** is now **placeholder** (the date-picker does not
+      translate the placeholder anymore, it has to be done by the
+      developer when passing the value --> `[placeholder]="'MY_TRANSLATION_KEY' | translate"`)
+      - **isDisabled** is now **disabled**
+  - The output **dateChanged** is now **dateChange**
+  - **dateInput** Output has been added and now the date-picker Input/Output are
+    similar to the ones of MatDatepicker component
+  - We respect now the Constraint validation standards. See: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation#Validation-related_attributes
+* **stark-ui:** Refactor of Session Pages (login / logout / sessionExpired / preloading).
+
+  - **stark-ui:** css on these components to change the default Stark logo will no longer work and should be refactored.
+    For example adding this to `src/styles/styles.scss`
+```SCSS
+.stark-app-logo i {
+  background-image: url("/assets/path-to-your-logo.png");
+  background-size: contain;
+}
+```
+* **stark-ui:** the `starkOnEnterKey` directive is no longer available.
+
+  - Angular provides this natively (see [docs](https://angular.io/guide/user-input#key-event-filtering-with-keyenter) for an example)
+* **stark-ui:**   - `stark-app-sidenav-content` should not be applied to a wrapper element (`div`) anymore. Replace it with a `ng-container`.
+  This ensures the footer is always at the bottom. (see Starter for an example)
+
+  - the css selector for `.stark-main-container` has changed and can now be applied directly to the `main` element in app.component.html.
+  (see Starter for an example)
+
+
+
 <a name="10.0.0-beta.5"></a>
 # [10.0.0-beta.5](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.4...10.0.0-beta.5) (2019-03-01)
 
