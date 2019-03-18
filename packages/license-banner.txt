@@ -1,5 +1,7 @@
 /**
- * @license Stark v0.0.0-PLACEHOLDER-VERSION
- * (c) 2018 National Bank of Belgium SA. https://www.nbb.be/
- * License: MIT
+ * @license
+ * Copyright National Bank of Belgium All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/NationalBankBelgium/stark/blob/master/LICENSE
  */
