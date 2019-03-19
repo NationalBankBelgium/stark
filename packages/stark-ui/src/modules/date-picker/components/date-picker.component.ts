@@ -123,7 +123,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * Timestamp Mask Configuration to apply on the date-picker.
 	 * If `true` is passed, the default mask config is applied: {DEFAULT_DATE_MASK_CONFIG|DEFAULT_DATE_MASK_CONFIG}
 	 * If `false` is passed or if `dateMask` is not present, the directive is disabled.
-	 * If a `StarkTimestampMaskConfig` is passed, it is set as the date mask config. 
+	 * If a `StarkTimestampMaskConfig` is passed, it is set as the date mask config.
 	 */
 	@Input()
 	public dateMask: StarkDatePickerMaskConfig;
@@ -291,7 +291,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 		super(renderer, elementRef);
 
 		fm.monitor(elementRef, true).subscribe((origin: FocusOrigin) => {
-			this.focused = !!origin;
+			this.focused = !!origin && !this.disabled;
 			this.stateChanges.next();
 		});
 	}
@@ -419,7 +419,6 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	public setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
 		this.stateChanges.next();
-		this.cdRef.detectChanges();
 		this._onValidatorChange();
 	}
 
@@ -519,7 +518,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 
 		// tslint:disable-next-line:no-null-keyword
 		this.value = event.value ? event.value.toDate() : null;
-		
+
 		const value: Date | undefined = this.value ? this.value : undefined;
 		this.dateChange.emit(value);
 		this._onChange(value);
