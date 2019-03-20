@@ -25,7 +25,8 @@
       "./stark-build/typings",
       "./stark-core/node_modules/@types",
       "./stark-testing/node_modules/@types",
-      "./stark-ui/node_modules/@types"
+      "./stark-ui/node_modules/@types",
+      "../node_modules/@types"
     ]
   },
   "exclude": ["stark-build/config-stark"]

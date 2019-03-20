@@ -1,9 +1,9 @@
-const helpers = require("./node_modules/@nationalbankbelgium/stark-testing/helpers");
+const helpers = require("../stark-testing/helpers");
 
 /**
  * Load karma config from Stark
  */
-const defaultKarmaCIConfig = require("./node_modules/@nationalbankbelgium/stark-testing/karma.conf.ci.js").rawKarmaConfig;
+const defaultKarmaCIConfig = require("../stark-testing/karma.conf.ci.js").rawKarmaConfig;
 const karmaTypescriptFiles = require("./karma.conf").karmaTypescriptFiles;
 
 // start customizing the KarmaCI configuration from stark-testing

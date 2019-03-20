@@ -45,7 +45,8 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@nationalbankbelgium/stark-testing": "../stark-testing"
+    "@types/jasmine": "^3.3.12",
+    "@types/node": "^8.10.37"
   },
   "peerDependencies": {
     "@angular/common": "^7.0.0",
@@ -68,8 +69,8 @@
     "lint-css": "node ../../node_modules/stylelint/bin/stylelint \"./(src|assets)/**/*.?(pc|sc|c|sa)ss\" --formatter \"string\"",
     "test": "npm run lint && npm run test-fast",
     "test:ci": "npm run lint && npm run test-fast:ci",
-    "test-fast": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start",
-    "test-fast:ci": "node ./node_modules/@nationalbankbelgium/stark-testing/node_modules/karma/bin/karma start karma.conf.ci.js",
+    "test-fast": "node ../stark-testing/node_modules/karma/bin/karma start",
+    "test-fast:ci": "node ../stark-testing/node_modules/karma/bin/karma start karma.conf.ci.js",
     "tsc": "node ../../node_modules/typescript/bin/tsc -p ./tsconfig-build.json",
     "tslint": "node ../../node_modules/tslint/bin/tslint"
   }
