@@ -339,7 +339,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * Callback function when the left sidenav needs to shift type
 	 * @param result: MatDrawerToggleResult
 	 */
-	public shiftLeftSidenavCallback: (value: MatDrawerToggleResult) => void = (result: MatDrawerToggleResult) => {
+	public shiftLeftSidenavCallback: (result: MatDrawerToggleResult) => void = (result: MatDrawerToggleResult) => {
 		this.logger.debug(componentName + ": sidenav " + result);
 		this.sidenavLeftType = this.sidenavLeftType === "menu" ? "regular" : "menu";
 		this.setComponentBehaviour();

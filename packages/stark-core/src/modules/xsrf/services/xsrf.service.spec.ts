@@ -14,6 +14,9 @@ import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 import CallInfo = jasmine.CallInfo;
 
+// this type is necessary due to the overloads of the HttpClient.get, so this refines the type to the one we use in StarkHttpService
+type HttpClientGet = (...args: any[]) => Observable<HttpResponse<string>>;
+
 /* tslint:disable-next-line:no-big-function */
 describe("Service: StarkXSRFService", () => {
 	let xsrfService: StarkXSRFServiceHelper;
@@ -270,7 +273,7 @@ describe("Service: StarkXSRFService", () => {
 			tick();
 
 			expect(httpMock.get).toHaveBeenCalledTimes(appConfig.backends.size);
-			const httpCalls: CallInfo[] = httpMock.get.calls.all();
+			const httpCalls: CallInfo<HttpClientGet>[] = httpMock.get.calls.all();
 			let callIndex: number = 0;
 
 			appConfig.backends.forEach((backendConfig: StarkBackend) => {
@@ -285,7 +288,7 @@ describe("Service: StarkXSRFService", () => {
 		it("should log an error when the HTTP call to a backend failed", fakeAsync(() => {
 			const failingBackends: StarkBackend[] = [mockBackend1, mockBackend3];
 
-			httpMock.get.and.callFake((url: string) => {
+			(<Spy<HttpClientGet>>httpMock.get).and.callFake((url: string) => {
 				if (failingBackends.map((failingBackend: StarkBackend) => failingBackend.url).indexOf(url) !== -1) {
 					return throwError(new HttpErrorResponse({ error: "ping failed" }));
 				} else {
@@ -297,7 +300,7 @@ describe("Service: StarkXSRFService", () => {
 			tick();
 
 			expect(httpMock.get).toHaveBeenCalledTimes(appConfig.backends.size);
-			const httpCalls: CallInfo[] = httpMock.get.calls.all();
+			const httpCalls: CallInfo<HttpClientGet>[] = httpMock.get.calls.all();
 			let httpCallIdx: number = 0;
 
 			appConfig.backends.forEach((backendConfig: StarkBackend) => {
@@ -307,7 +310,7 @@ describe("Service: StarkXSRFService", () => {
 			});
 
 			expect(mockLogger.error).toHaveBeenCalledTimes(failingBackends.length);
-			const logErrorCalls: CallInfo[] = mockLogger.error.calls.all();
+			const logErrorCalls: CallInfo<HttpClientGet>[] = mockLogger.error.calls.all();
 			let logErrorCallIdx: number = 0;
 
 			for (const failingBackend of failingBackends) {

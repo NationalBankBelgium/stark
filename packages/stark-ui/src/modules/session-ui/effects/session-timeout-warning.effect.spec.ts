@@ -1,6 +1,12 @@
 /*tslint:disable:completed-docs no-big-function*/
 import { Observable, Observer, ReplaySubject, Subject } from "rxjs";
 import { async, TestBed } from "@angular/core/testing";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { provideMockActions } from "@ngrx/effects/testing";
+import { EffectNotification } from "@ngrx/effects";
+import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatButtonModule } from "@angular/material/button";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import {
 	STARK_SESSION_SERVICE,
 	StarkInitializeSession,
@@ -9,17 +15,12 @@ import {
 	StarkSessionTimeoutCountdownStart
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
-import { provideMockActions } from "@ngrx/effects/testing";
-import { EffectNotification } from "@ngrx/effects";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { MatDialog, MatDialogModule } from "@angular/material/dialog";
-import { MatButtonModule } from "@angular/material/button";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 import { StarkSessionTimeoutWarningDialogEffects } from "../effects/session-timeout-warning.effects";
 import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities/stark-session-ui-config";
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
+import Spy = jasmine.Spy;
 
 describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 	let effectsClass: StarkSessionTimeoutWarningDialogEffects;
@@ -67,7 +68,9 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 			const afterClosedResult: string = "keep-logged";
 			const afterClosed$: Subject<string> = new Subject();
 
-			mockDialogService.open.and.returnValue({
+			(<Spy<(...args: any[]) => Partial<MatDialogRef<StarkSessionTimeoutWarningDialogComponent, string>>>>(
+				mockDialogService.open
+			)).and.returnValue({
 				afterClosed: () => {
 					return afterClosed$;
 				}

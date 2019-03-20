@@ -34,9 +34,9 @@ describe("Effect: StarkSettingsEffects", () => {
 	});
 
 	describe("On setPreferredLanguage$", () => {
-		it("Should set the language successfully", () => {
+		it("should set the language successfully", () => {
 			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
-			mockSessionService.setCurrentLanguage.and.returnValue({});
+			mockSessionService.setCurrentLanguage.and.returnValue(undefined);
 
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
 			actions = subject.asObservable();
@@ -47,8 +47,7 @@ describe("Effect: StarkSettingsEffects", () => {
 
 			expect(mockSessionService.setCurrentLanguage).toHaveBeenCalledWith("NL");
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);
-			const effectResult: any = mockObserver.next.calls.mostRecent().args[0];
-			expect(effectResult).toBeDefined();
+			expect(mockObserver.next).toHaveBeenCalledWith(undefined);
 			expect(mockObserver.error).not.toHaveBeenCalled();
 			expect(mockObserver.complete).not.toHaveBeenCalled(); // effects should never complete!
 		});

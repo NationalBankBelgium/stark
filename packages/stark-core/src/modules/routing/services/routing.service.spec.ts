@@ -1,7 +1,7 @@
 /*tslint:disable:completed-docs no-identical-functions no-duplicate-string no-big-function*/
 import { Component, Injector, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
-import { Ng2StateDeclaration, UIRouterModule } from "@uirouter/angular";
+import { Ng2StateDeclaration, UIRouterModule, TransitionPromise } from "@uirouter/angular";
 import { RawParams, StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
 // FIXME Adapt switchMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
 import { catchError, switchMap, tap } from "rxjs/operators";
@@ -11,7 +11,7 @@ import { StarkRoutingServiceImpl } from "./routing.service";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
-import { StarkRoutingActionTypes } from "../actions";
+import { StarkNavigate, StarkNavigationHistoryLimitReached, StarkRoutingActionTypes } from "../actions";
 import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkErrorHandler } from "../../error-handling";
@@ -19,6 +19,8 @@ import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
 import CallInfo = jasmine.CallInfo;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
+
+type CallableRoutingAction = (action: StarkNavigate | StarkNavigationHistoryLimitReached) => void;
 
 @Component({ selector: "test-home", template: "HOME" })
 export class HomeComponent {}
@@ -760,7 +762,7 @@ describe("Service: StarkRoutingService", () => {
 		});
 
 		it("should navigate to a non-existing page", (done: DoneFn) => {
-			spyOn($state, "go").and.returnValue(throwError("uh-oh").toPromise());
+			spyOn($state, "go").and.returnValue(<TransitionPromise>(<unknown>throwError("uh-oh").toPromise()));
 
 			routingService
 				.navigateTo("whatever")
@@ -1832,11 +1834,11 @@ describe("Service: StarkRoutingService", () => {
 			const expectedCalls: number = 16 + 12 + 3 + 1;
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(expectedCalls);
 
-			const actions: CallInfo[] = mockStore.dispatch.calls.all();
+			const actions: CallInfo<CallableRoutingAction>[] = mockStore.dispatch.calls.all();
 			const actionIndex: number = 16 + 12;
 
 			for (let i: number = 0; i < actions.length; i++) {
-				const action: CallInfo = actions[i];
+				const action: CallInfo<CallableRoutingAction> = actions[i];
 
 				if (i === actionIndex) {
 					expect(action.args[0].type).toBe(StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED);

@@ -43,7 +43,7 @@ export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implement
 	 * @ignore
 	 * @internal
 	 */
-	public transitionHookDeregisterFn: Function;
+	public transitionHookDeregisterFn: () => void;
 
 	/**
 	 * Class constructor

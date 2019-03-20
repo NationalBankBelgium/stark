@@ -1,5 +1,6 @@
 /* tslint:disable:completed-docs*/
 import SpyObj = jasmine.SpyObj;
+import Spy = jasmine.Spy;
 import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import {
 	progressIndicatorReducer,
@@ -33,7 +34,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 
 		progressIndicatorService = new ProgressIndicatorServiceHelper(mockLogger, mockStore);
 
-		mockStore.dispatch.and.callFake((action: StarkProgressIndicatorActions) => {
+		(<Spy<(action: StarkProgressIndicatorActions) => void>>mockStore.dispatch).and.callFake((action: StarkProgressIndicatorActions) => {
 			// reducer
 			progressIndicatorService.progressIndicatorMap = progressIndicatorReducer(progressIndicatorService.progressIndicatorMap, action);
 		});

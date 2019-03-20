@@ -2,7 +2,7 @@
 import { Subject } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, fakeAsync, tick, ComponentFixture, TestBed } from "@angular/core/testing";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { HookMatchCriteria, TransitionHookFn, TransitionStateHookFn } from "@uirouter/core";
@@ -49,7 +49,7 @@ describe("AppSidebarComponent", () => {
 		mockStarkRoutingService = new MockStarkRoutingService();
 		// add functionality to the `addTransitionHook` Spy
 		mockStarkRoutingService.addTransitionHook.and.callFake(
-			(lifecycleHook: string, matchCriteria: HookMatchCriteria, callback: TransitionHookFn | TransitionStateHookFn): Function => {
+			(lifecycleHook: string, matchCriteria: HookMatchCriteria, callback: TransitionHookFn | TransitionStateHookFn): (() => void) => {
 				expect(lifecycleHook).toBe(StarkRoutingTransitionHook.ON_SUCCESS);
 				expect(matchCriteria).toEqual({});
 				mockNavigationTrigger = <() => void>callback;
@@ -153,9 +153,9 @@ function sidebarEventsHandlingTests(): void {
 			expect(sidenav).toBeDefined();
 		});
 
-		it("left sidebar should close and then open when left sidebar is opened and sidenavLeftType is changed", () => {
+		it("left sidebar should close and then open when left sidebar is opened and sidenavLeftType is changed", fakeAsync(() => {
 			spyOn(component, "shiftLeftSidenavCallback").and.callThrough();
-			spyOn(component, "closeSidenav").and.callFake(component.shiftLeftSidenavCallback);
+			spyOn(component, "closeSidenav").and.callThrough();
 			component.sidenavLeftType = "menu";
 			component.appSidenavLeft.opened = true;
 			fixture.detectChanges();
@@ -163,10 +163,11 @@ function sidebarEventsHandlingTests(): void {
 				sidebar: "left",
 				type: "regular"
 			});
+			tick();
 			expect(component.closeSidenav).toHaveBeenCalledTimes(1);
 			expect(component.shiftLeftSidenavCallback).toHaveBeenCalledTimes(1);
 			expect(component.sidenavLeftType).toBe("regular");
-		});
+		}));
 	});
 
 	describe("onToggleSidenav should work as expected", () => {

@@ -13,8 +13,8 @@ const INITIAL_STATE: Map<string, StarkProgressIndicatorConfig> = new Map<string,
 
 /**
  * Reducer for the progress indicator
- * @param Map<string, StarkProgressIndicatorConfig> the actual state of the progress indicator
- * @param StarkProgressIndicatorActions the action to perform
+ * @param state Map<string, StarkProgressIndicatorConfig> the actual state of the progress indicator
+ * @param action StarkProgressIndicatorActions the action to perform
  * @returns Map<string, StarkProgressIndicatorConfig> the new state of the progress inidcator
  */
 // TODO refactor to reduce complexity
