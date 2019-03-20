@@ -99,8 +99,8 @@ describe("AbstractSearchComponent", () => {
 			const mockCriteria1: SearchCriteria = { uuid: "dummy uuid" };
 			const mockCriteria2: SearchCriteria = { uuid: "another uuid" };
 
-			genericSearchService.search.and.returnValue(of("dummy search result"));
-			genericSearchService.getSearchState.and.returnValue(searchState$);
+			genericSearchService.search.and.returnValue(of(<any>"dummy search result"));
+			genericSearchService.getSearchState.and.returnValue(searchState$.asObservable());
 
 			component.ngOnInit();
 

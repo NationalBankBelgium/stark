@@ -269,7 +269,9 @@ describe("Service: StarkSessionService", () => {
 			sessionService.registerTransitionHook();
 
 			expect(mockRoutingService.addTransitionHook.calls.argsFor(0)[0]).toBe(StarkRoutingTransitionHook.ON_BEFORE);
-			const onBeforeHookCallback: () => Promise<boolean> = mockRoutingService.addTransitionHook.calls.argsFor(0)[2];
+			const onBeforeHookCallback: (...args: any[]) => Promise<boolean> = <(...args: any[]) => Promise<boolean>>(
+				mockRoutingService.addTransitionHook.calls.argsFor(0)[2]
+			);
 
 			sessionService.session$ = of(mockSession);
 
@@ -361,7 +363,7 @@ describe("Service: StarkSessionService", () => {
 	describe("logout", () => {
 		it("should dispatch the SESSION_LOGOUT action and send the logout HTTP request asynchronously ", () => {
 			spyOn(sessionService, "destroySession");
-			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(of("HTTP response"));
+			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(of(undefined)); // HTTP 200 
 
 			sessionService.logout();
 
@@ -378,8 +380,8 @@ describe("Service: StarkSessionService", () => {
 
 		it("should call the destroySession() method only when the logout HTTP request has returned a response (either success or error)", () => {
 			spyOn(sessionService, "destroySession");
-			const logoutHttpResponse$: Subject<string> = new Subject();
-			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(logoutHttpResponse$);
+			const logoutHttpResponse$: Subject<void> = new Subject();
+			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(logoutHttpResponse$.asObservable());
 
 			sessionService.logout();
 
@@ -389,7 +391,7 @@ describe("Service: StarkSessionService", () => {
 			expect(sendLogoutRequestSpy.calls.mostRecent().args[2]).toBe(true);
 			expect(sessionService.destroySession).not.toHaveBeenCalled();
 
-			logoutHttpResponse$.next("HTTP 200");
+			logoutHttpResponse$.next(); // HTTP 200
 
 			expect(sessionService.destroySession).toHaveBeenCalledTimes(1);
 			(<Spy>sessionService.destroySession).calls.reset();

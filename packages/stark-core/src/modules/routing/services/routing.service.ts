@@ -246,32 +246,32 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		matchCriteria: HookMatchCriteria,
 		callback: TransitionHookFn | TransitionStateHookFn,
 		options?: HookRegOptions
-	): Function {
+	): () => void {
 		switch (lifecycleHook) {
 			case StarkRoutingTransitionHook.ON_BEFORE:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onbefore
-				return this.$transitions.onBefore(matchCriteria, <TransitionHookFn>callback, options);
+				return <() => void>this.$transitions.onBefore(matchCriteria, <TransitionHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_START:
 				// see https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onstart
-				return this.$transitions.onStart(matchCriteria, <TransitionHookFn>callback, options);
+				return <() => void>this.$transitions.onStart(matchCriteria, <TransitionHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_EXIT:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onexit
-				return this.$transitions.onExit(matchCriteria, <TransitionStateHookFn>callback, options);
+				return <() => void>this.$transitions.onExit(matchCriteria, <TransitionStateHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_RETAIN:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onretain
-				return this.$transitions.onRetain(matchCriteria, <TransitionStateHookFn>callback, options);
+				return <() => void>this.$transitions.onRetain(matchCriteria, <TransitionStateHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_ENTER:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onenter
-				return this.$transitions.onEnter(matchCriteria, <TransitionStateHookFn>callback, options);
+				return <() => void>this.$transitions.onEnter(matchCriteria, <TransitionStateHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_FINISH:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onfinish
-				return this.$transitions.onFinish(matchCriteria, <TransitionHookFn>callback, options);
+				return <() => void>this.$transitions.onFinish(matchCriteria, <TransitionHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_SUCCESS:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onsuccess
-				return this.$transitions.onSuccess(matchCriteria, <TransitionHookFn>callback, options);
+				return <() => void>this.$transitions.onSuccess(matchCriteria, <TransitionHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_ERROR:
 				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onerror
-				return this.$transitions.onError(matchCriteria, <TransitionHookFn>callback, options);
+				return <() => void>this.$transitions.onError(matchCriteria, <TransitionHookFn>callback, options);
 			default:
 				throw new Error(starkRoutingServiceName + ": lifecycle hook unknown => " + lifecycleHook);
 		}

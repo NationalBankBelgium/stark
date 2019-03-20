@@ -74,7 +74,7 @@ describe("BreadcrumbComponent", () => {
 	mockStateTreeData.set(parentConst, { translationKey: "PARENT" });
 	mockStateTreeData.set(grandParentConst, { translationKey: "GRANDPARENT" });
 	mockStateTreeData.set(rootAncesterConst, { translationKey: "ROOT_ANCESTOR" });
-	const mockDeregisterTransitionHookFn: Function = () => {
+	const mockDeregisterTransitionHookFn: () => void = () => {
 		return "transition hook deregistered";
 	};
 

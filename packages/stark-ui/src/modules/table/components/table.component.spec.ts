@@ -67,7 +67,7 @@ describe("TableComponent", () => {
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
-	const dummyCompareFn: Function = (obj1: string, obj2: string): number => {
+	const dummyCompareFn: StarkTableColumnProperties["compareFn"] = (obj1: string, obj2: string): number => {
 		if (obj1 > obj2) {
 			return 1;
 		} else if (obj1 < obj2) {
@@ -1059,8 +1059,7 @@ describe("TableComponent", () => {
 
 		it("should emit event when row is clicked", () => {
 			// set observer
-			hostComponent.rowClickHandler = () => undefined; // add empty function so spy can find it
-			spyOn(hostComponent, "rowClickHandler");
+			hostComponent.rowClickHandler = createSpy("rowClickHandlerSpy", () => undefined); // add empty function so spy can find it
 			hostFixture.detectChanges();
 
 			// get a row

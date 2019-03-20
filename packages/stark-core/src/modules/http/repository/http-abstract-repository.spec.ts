@@ -73,9 +73,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.create(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0]
-			);
+			const starkHttpRequest: StarkHttpRequest = mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.CREATE);
 			expect(starkHttpRequest.item).toBe(mockResource);
 			expect(result).toBe(mockResponse);
@@ -90,9 +88,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.update(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0]
-			);
+			const starkHttpRequest: StarkHttpRequest = mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.UPDATE);
 			expect(starkHttpRequest.item).toBe(mockResource);
 			expect(result).toBe(mockResponse);
@@ -107,9 +103,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.delete(mockResource);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0]
-			);
+			const starkHttpRequest: StarkHttpRequest = mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.DELETE);
 			expect(starkHttpRequest.item).toBe(mockResource);
 			expect(result).toBe(mockResponse);
@@ -124,9 +118,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkSingleItemResponseWrapper<MockResource>> = repository.get(resourceUuid);
 
 			expect(mockStarkHttpService.executeSingleItemRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0]
-			);
+			const starkHttpRequest: StarkHttpRequest = mockStarkHttpService.executeSingleItemRequest.calls.mostRecent().args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.GET);
 			expect(starkHttpRequest.item).toBeUndefined();
 			expect(result).toBe(mockResponse);
@@ -141,9 +133,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkCollectionResponseWrapper<MockResource>> = repository.getCollection(10, 0);
 
 			expect(mockStarkHttpService.executeCollectionRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				mockStarkHttpService.executeCollectionRequest.calls.mostRecent().args[0]
-			);
+			const starkHttpRequest: StarkHttpRequest = mockStarkHttpService.executeCollectionRequest.calls.mostRecent().args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.GET_COLLECTION);
 			expect(starkHttpRequest.item).toBeUndefined();
 			expect(result).toBe(mockResponse);
@@ -159,9 +149,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const result: Observable<StarkCollectionResponseWrapper<MockResource>> = repository.search(mockCriteria, 10, 0);
 
 			expect(mockStarkHttpService.executeCollectionRequest).toHaveBeenCalled();
-			const starkHttpRequest: StarkHttpRequest = <StarkHttpRequest>(
-				mockStarkHttpService.executeCollectionRequest.calls.mostRecent().args[0]
-			);
+			const starkHttpRequest: StarkHttpRequest = mockStarkHttpService.executeCollectionRequest.calls.mostRecent().args[0];
 			expect(starkHttpRequest.requestType).toBe(StarkHttpRequestType.SEARCH);
 			expect(starkHttpRequest.item).toEqual(mockCriteria);
 			expect(result).toBe(mockResponse);

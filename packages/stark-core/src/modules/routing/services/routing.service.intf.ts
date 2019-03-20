@@ -167,7 +167,7 @@ export interface StarkRoutingService {
 		matchCriteria: HookMatchCriteria,
 		callback: TransitionHookFn | TransitionStateHookFn,
 		options?: HookRegOptions
-	): Function;
+	): () => void;
 
 	/**
 	 * Get the "translationKey" token from the state in this order:
