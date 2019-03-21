@@ -3,12 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/@nationalbankbelgium/stark-testing/node_modules/@types",
-      "../stark-build/typings",
-      "./typings"
-    ],
+    "typeRoots": ["./node_modules/@types", "../stark-build/typings", "./typings"],
     "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
       "@angularclass/hmr": ["../stark-core/node_modules/@angularclass/hmr"],
