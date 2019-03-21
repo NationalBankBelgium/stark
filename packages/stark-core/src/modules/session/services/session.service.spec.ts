@@ -48,8 +48,8 @@ describe("Service: StarkSessionService", () => {
 	let mockInjectorService: SpyObj<Injector>;
 	let mockTranslateService: SpyObj<TranslateService>;
 	let sessionService: SessionServiceHelper;
-	const mockCorrelationId: string = "12345";
-	const mockCorrelationIdHeaderName: string = "The-Correlation-Id";
+	const mockCorrelationId = "12345";
+	const mockCorrelationIdHeaderName = "The-Correlation-Id";
 	const mockUser: StarkUser = {
 		uuid: "1",
 		username: "jdoe",
@@ -363,7 +363,7 @@ describe("Service: StarkSessionService", () => {
 	describe("logout", () => {
 		it("should dispatch the SESSION_LOGOUT action and send the logout HTTP request asynchronously ", () => {
 			spyOn(sessionService, "destroySession");
-			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(of(undefined)); // HTTP 200 
+			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(of(undefined)); // HTTP 200
 
 			sessionService.logout();
 
@@ -381,7 +381,9 @@ describe("Service: StarkSessionService", () => {
 		it("should call the destroySession() method only when the logout HTTP request has returned a response (either success or error)", () => {
 			spyOn(sessionService, "destroySession");
 			const logoutHttpResponse$: Subject<void> = new Subject();
-			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(logoutHttpResponse$.asObservable());
+			const sendLogoutRequestSpy: Spy = spyOn(sessionService, "sendLogoutRequest").and.returnValue(
+				logoutHttpResponse$.asObservable()
+			);
 
 			sessionService.logout();
 
@@ -494,7 +496,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(mockIdleService.onIdleEnd.observers.length).toBe(1);
 
-				const mockIdleEndValue: string = "some end value";
+				const mockIdleEndValue = "some end value";
 				const onIdleEndSubscriber: Subscriber<any> = <Subscriber<any>>mockIdleService.onIdleEnd.observers[0];
 				spyOn(onIdleEndSubscriber, "next");
 				spyOn(onIdleEndSubscriber, "error");
@@ -628,7 +630,7 @@ describe("Service: StarkSessionService", () => {
 			it("should dispatch the COUNTDOWN_START action only when the value emitted is the first one of the countdown", () => {
 				mockIdleService.onTimeoutWarning = new EventEmitter<number>();
 				expect(mockIdleService.onTimeoutWarning.observers.length).toBe(0);
-				const countdownStartValue: number = 22;
+				const countdownStartValue = 22;
 				mockIdleService.getTimeout.and.returnValue(countdownStartValue);
 
 				sessionService.configureIdleService();
@@ -826,7 +828,7 @@ describe("Service: StarkSessionService", () => {
 
 			sessionServiceHelper.startKeepaliveService();
 
-			expect(sessionServiceHelper.keepalive.ping).toHaveBeenCalledTimes(1);
+			expect((<Keepalive>sessionServiceHelper.keepalive).ping).toHaveBeenCalledTimes(1);
 		});
 
 		it("should do NOTHING in case the Keepalive service is DISABLED", () => {
@@ -857,7 +859,7 @@ describe("Service: StarkSessionService", () => {
 
 			sessionServiceHelper.stopKeepaliveService();
 
-			expect(sessionServiceHelper.keepalive.stop).toHaveBeenCalledTimes(1);
+			expect((<Keepalive>sessionServiceHelper.keepalive).stop).toHaveBeenCalledTimes(1);
 		});
 
 		it("should do NOTHING in case the keepalive service is DISABLED", () => {
@@ -921,7 +923,7 @@ describe("Service: StarkSessionService", () => {
 
 	describe("setDevAuthenticationHeaders", () => {
 		it("should construct the dev authentication headers based on the http headers that are passed", () => {
-			expect(sessionService["_devAuthenticationHeaders"]).toBe(<any>undefined);
+			expect(sessionService["_devAuthenticationHeaders"] instanceof Map).toBeTruthy();
 
 			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
 			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
@@ -940,7 +942,7 @@ describe("Service: StarkSessionService", () => {
 		});
 
 		it("should construct the dev authentication headers excluding those http headers with undefined or null names or values", () => {
-			expect(sessionService["_devAuthenticationHeaders"]).toBe(<any>undefined);
+			expect(sessionService["_devAuthenticationHeaders"] instanceof Map).toBeTruthy();
 
 			const expectedDevAuthHeaders: Map<string, string> = new Map<string, string>();
 			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
@@ -985,15 +987,6 @@ describe("Service: StarkSessionService", () => {
 				expect(expectedDevAuthHeaders.has(header)).toBe(true);
 				expect(expectedDevAuthHeaders.get(header)).toBe(value);
 			});
-		});
-
-		it("should return an empty map if the pre-authentication headers were not constructed", () => {
-			/* tslint:disable-next-line:no-undefined-argument */
-			sessionService.setInternalDevAuthenticationHeaders(undefined);
-
-			const devAuthenticationHeaders: Map<string, string | string[]> = sessionService.devAuthenticationHeaders;
-
-			expect(devAuthenticationHeaders.size).toBe(0);
 		});
 	});
 });

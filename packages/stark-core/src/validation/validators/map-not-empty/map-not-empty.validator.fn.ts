@@ -1,7 +1,7 @@
 /**
  * Name of the starkMapNotEmpty validator.
  */
-export const starkMapNotEmptyValidatorName: string = "starkMapNotEmpty";
+export const starkMapNotEmptyValidatorName = "starkMapNotEmpty";
 
 /**
  * Validator function that checks if the given map is not empty

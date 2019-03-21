@@ -1,11 +1,11 @@
 /**
  * Name of the initialization states of the application
  */
-export const starkAppInitStateName: string = "starkAppInit";
+export const starkAppInitStateName = "starkAppInit";
 /**
  * Name of the exit states of the application
  */
-export const starkAppExitStateName: string = "starkAppExit";
+export const starkAppExitStateName = "starkAppExit";
 
 /**
  * Name of the login state of the application
@@ -14,7 +14,7 @@ export const starkLoginStateName: string = starkAppInitStateName + ".starkLogin"
 /**
  * URL of the login state of the application
  */
-export const starkLoginStateUrl: string = "/starkLogin";
+export const starkLoginStateUrl = "/starkLogin";
 
 /**
  * Name of the Preloading state of the application
@@ -23,7 +23,7 @@ export const starkPreloadingStateName: string = starkAppInitStateName + ".starkP
 /**
  * URL of the Preloading state of the application
  */
-export const starkPreloadingStateUrl: string = "/starkPreloading";
+export const starkPreloadingStateUrl = "/starkPreloading";
 
 /**
  * Name of the SessionExpired state of the application
@@ -32,7 +32,7 @@ export const starkSessionExpiredStateName: string = starkAppExitStateName + ".st
 /**
  * URL of the SessionExpired state of the application
  */
-export const starkSessionExpiredStateUrl: string = "/starkSessionExpired";
+export const starkSessionExpiredStateUrl = "/starkSessionExpired";
 
 /**
  * Name of the SessionLogout state of the application
@@ -41,4 +41,4 @@ export const starkSessionLogoutStateName: string = starkAppExitStateName + ".sta
 /**
  * URL of the SessionLogout state of the application
  */
-export const starkSessionLogoutStateUrl: string = "/starkSessionLogout";
+export const starkSessionLogoutStateUrl = "/starkSessionLogout";

@@ -11,7 +11,7 @@ import { StarkValidationErrorsUtil } from "../../../util";
 /**
  * Name of the validator, in case injection is needed.
  */
-export const starkMapIsValidValidatorName: string = "starkMapIsValid";
+export const starkMapIsValidValidatorName = "starkMapIsValid";
 
 /**
  * StarkMapIsValid validator constraint
@@ -22,11 +22,11 @@ class StarkMapIsValidConstraint implements ValidatorConstraintInterface {
 	/**
 	 * an Array of validation errors' keys
 	 */
-	public keysValidationErrors: ValidationError[];
+	public keysValidationErrors: ValidationError[] = [];
 	/**
 	 * an Array of validation errors' values
 	 */
-	public valuesValidationErrors: ValidationError[];
+	public valuesValidationErrors: ValidationError[] = [];
 
 	/**
 	 * Validates that a give Map is valid

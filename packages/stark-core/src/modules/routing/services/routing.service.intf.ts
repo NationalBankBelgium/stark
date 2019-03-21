@@ -16,7 +16,7 @@ import { InjectionToken } from "@angular/core";
 /**
  * The name of the Stark Routing Service, in case injection is needed
  */
-export const starkRoutingServiceName: string = "StarkRoutingService";
+export const starkRoutingServiceName = "StarkRoutingService";
 /**
  * The injection Token version of the service name
  */

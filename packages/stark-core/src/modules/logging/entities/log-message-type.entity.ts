@@ -5,17 +5,17 @@ export class StarkLogMessageType {
 	/**
 	 * The debug type
 	 */
-	public static DEBUG: string = "DEBUG";
+	public static DEBUG = "DEBUG";
 	/**
 	 * The info type
 	 */
-	public static INFO: string = "INFO";
+	public static INFO = "INFO";
 	/**
 	 * The warning type
 	 */
-	public static WARNING: string = "WARNING";
+	public static WARNING = "WARNING";
 	/**
 	 * The error type
 	 */
-	public static ERROR: string = "ERROR";
+	public static ERROR = "ERROR";
 }

@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 /**
  * The name of the service in case an injection is needed
  */
-export const starkHttpServiceName: string = "StarkHttpService";
+export const starkHttpServiceName = "StarkHttpService";
 /**
  * The InjectionToken version of the service name
  */

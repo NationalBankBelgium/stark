@@ -31,7 +31,7 @@ import cloneDeep from "lodash-es/cloneDeep";
  */
 @Injectable()
 export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpService<P> {
-	protected retryDelay: number = 1000;
+	protected retryDelay = 1000;
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
@@ -393,7 +393,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	private addRetryLogic<R>(httpResponse$: Observable<HttpResponse<R>>, retryCount: number): Observable<HttpResponse<R>> {
 		return httpResponse$.pipe(
 			retryWhen((errors: Observable<any>) => {
-				let retries: number = 0;
+				let retries = 0;
 				return errors.pipe(
 					mergeMap((error: HttpResponse<P>) => {
 						if (retries < retryCount) {

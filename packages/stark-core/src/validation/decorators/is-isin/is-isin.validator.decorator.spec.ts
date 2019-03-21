@@ -5,12 +5,12 @@ import { starkIsISINValidatorName } from "../../validators/is-isin";
 
 class MyClass {
 	@StarkIsISIN()
-	public name: string;
+	public name!: string;
 }
 
 class SimpleClass {
 	@StarkIsISIN()
-	public dummyObject: object;
+	public dummyObject!: object;
 }
 
 describe("ValidatorDecorator: StarkIsISIN", () => {

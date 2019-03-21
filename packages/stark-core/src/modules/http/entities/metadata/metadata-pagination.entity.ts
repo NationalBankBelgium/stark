@@ -2,27 +2,28 @@ import { deserialize } from "cerialize";
 import { StarkPaginationMetadata } from "./metadata-pagination.entity.intf";
 
 /**
+ * This class is only for serialization purposes
  * @ignore
  */
 export class StarkPaginationMetadataImpl implements StarkPaginationMetadata {
 	@deserialize
-	public offset: number;
+	public offset!: number;
 
 	@deserialize
-	public limit: number;
+	public limit!: number;
 
 	@deserialize
-	public previousOffset: number;
+	public previousOffset!: number;
 
 	@deserialize
-	public nextOffset: number;
+	public nextOffset!: number;
 
 	@deserialize
-	public currentPage: number;
+	public currentPage!: number;
 
 	@deserialize
-	public pageCount: number;
+	public pageCount!: number;
 
 	@deserialize
-	public totalCount: number;
+	public totalCount!: number;
 }

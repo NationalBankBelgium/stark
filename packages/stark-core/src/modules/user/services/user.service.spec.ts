@@ -93,7 +93,7 @@ describe("Service: StarkUserService", () => {
 				custom: mockUserCustomData2
 			}
 		];
-		mockUserInstances = [Deserialize(mockUsers[0], StarkUser), Deserialize(mockUsers[1], StarkUser)];
+		mockUserInstances = Deserialize(mockUsers, StarkUser);
 		mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 		userService = new StarkUserServiceImpl(mockLogger, mockUserRepository, mockData, mockStore);
@@ -127,7 +127,21 @@ describe("Service: StarkUserService", () => {
 		it("should dispatch the failure action in case the mock data has no users defined", () => {
 			userService["userProfiles"] = [];
 
-			const result: StarkUser[] = userService.getAllUsers();
+			let result: StarkUser[] = userService.getAllUsers();
+
+			expect(result).toEqual([]);
+
+			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
+
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkGetAllUsers());
+			expect((<StarkGetAllUsersFailure>mockStore.dispatch.calls.argsFor(1)[0]).type).toBe(StarkUserActionTypes.GET_ALL_USERS_FAILURE);
+			expect((<StarkGetAllUsersFailure>mockStore.dispatch.calls.argsFor(1)[0]).message).toContain("No user profiles found");
+
+			mockStore.dispatch.calls.reset();
+			// tslint:disable-next-line:no-null-keyword
+			userService["userProfiles"] = null;
+
+			result = userService.getAllUsers();
 
 			expect(result).toEqual([]);
 

@@ -3,9 +3,9 @@ import { ArrayNotEmpty, IsNotEmpty, Matches, ValidateNested, validateSync, Valid
 import { StarkValidationErrorsUtil } from "./validation-errors.util";
 
 describe("Util: ValidationErrorsUtil", () => {
-	const customIsNotEmptyMessage: string = "The property $property should not be empty";
-	const customArrayNotEmptyMessage: string = "The array $property should not be empty";
-	const customMatchesMessage: string = "The property $property should be exactly 2 lower case characters";
+	const customIsNotEmptyMessage = "The property $property should not be empty";
+	const customArrayNotEmptyMessage = "The array $property should not be empty";
+	const customMatchesMessage = "The property $property should be exactly 2 lower case characters";
 
 	class LanguageClass {
 		@Matches(/^[a-z]{2}$/, { message: customMatchesMessage })
@@ -22,10 +22,10 @@ describe("Util: ValidationErrorsUtil", () => {
 
 	class MyClass {
 		@IsNotEmpty({ message: customIsNotEmptyMessage })
-		public name: string;
+		public name!: string;
 
 		@IsNotEmpty({ message: customIsNotEmptyMessage })
-		public lastName: string;
+		public lastName!: string;
 
 		@ArrayNotEmpty({ message: customArrayNotEmptyMessage })
 		@ValidateNested({ each: true }) // validate each item of the array

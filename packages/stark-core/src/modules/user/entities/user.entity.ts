@@ -6,28 +6,29 @@ import { IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf } from "cl
 import { StarkClassValidationUtil } from "../../../util";
 
 /**
+ * This class is only for serialization purposes
  * @ignore
  */
 export class StarkUser implements StarkUserProfile, StarkUserSecurityProfile, StarkResource {
 	@IsDefined()
 	@IsString()
 	@autoserialize
-	public uuid: string;
+	public uuid!: string;
 
 	@IsDefined()
 	@IsString()
 	@autoserialize
-	public username: string;
+	public username!: string;
 
 	@IsDefined()
 	@IsString()
 	@autoserialize
-	public firstName: string;
+	public firstName!: string;
 
 	@IsDefined()
 	@IsString()
 	@autoserialize
-	public lastName: string;
+	public lastName!: string;
 
 	@ValidateIf(StarkClassValidationUtil.validateIfDefinedAndNotNull)
 	@IsEmail()

@@ -48,8 +48,8 @@ describe("Service: StarkHttpService", () => {
 	let mockResourceWithEtag: MockResource;
 	let mockResourceWithoutEtag: MockResource;
 	let mockResourceWithMetadata: MockResource;
-	const nextShouldNotBeCalled: string = "The 'next' function should not be called in case of an http error";
-	const errorShouldNotBeCalled: string = "The 'error' function should not be called in case the http call succeeded";
+	const nextShouldNotBeCalled = "The 'next' function should not be called in case of an http error";
+	const errorShouldNotBeCalled = "The 'error' function should not be called in case the http call succeeded";
 
 	interface StarkHttpServiceSpecVariables {
 		starkHttpService: HttpServiceHelper<MockResource>;
@@ -59,21 +59,21 @@ describe("Service: StarkHttpService", () => {
 	}
 
 	/* MockResource */
-	const mockUuid: string = "dfd45d31-1c78-4075-914e-9dd570f3eb31";
-	const mockEtag: string = "0123456789";
-	const mockProperty1: string = "Value1";
-	const mockProperty2: string = "Value2";
+	const mockUuid = "dfd45d31-1c78-4075-914e-9dd570f3eb31";
+	const mockEtag = "0123456789";
+	const mockProperty1 = "Value1";
+	const mockProperty2 = "Value2";
 
 	/* HTTP Headers */
 	const contentTypeKey: string = StarkHttpHeaders.CONTENT_TYPE;
-	const contentTypeValue: string = "application/json; charset=utf-8";
-	const contentLengthKey: string = "Content-Length";
-	const contentLengthValue: string = "10000";
-	const expiresKey: string = "Expires";
-	const expiresValue: string = "-1";
+	const contentTypeValue = "application/json; charset=utf-8";
+	const contentLengthKey = "Content-Length";
+	const contentLengthValue = "10000";
+	const expiresKey = "Expires";
+	const expiresValue = "-1";
 
-	const mockCorrelationId: string = "fooBarCorrelationIdentifier";
-	const mockCorrelationIdHeaderName: string = "The-Correlation-Id";
+	const mockCorrelationId = "fooBarCorrelationIdentifier";
+	const mockCorrelationIdHeaderName = "The-Correlation-Id";
 	const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
 	const httpHeaders: { [name: string]: string } = {};
@@ -82,20 +82,20 @@ describe("Service: StarkHttpService", () => {
 	httpHeaders[expiresKey] = expiresValue;
 
 	/* HTTP Errors */
-	const mockHttpErrorType: string = "https://api.demo.nbb.be/v1/errors/validation";
-	const mockHttpErrorTitle: string = "Validation errors";
-	const mockHttpErrorInstance: string = "4f4b3e6b-0707-4451-922f-53982ef83fdf";
-	const mockHttpDetailErrorType: string = "https://api.demo.nbb.be/v1/errors/user-invalid";
-	const mockHttpDetailErrorTitle: string = "Invalid user information";
-	const mockHttpErrorDetail1: string = "The username is already in use";
-	const mockHttpErrorDetail2: string = "The user's name is missing";
-	const mockHttpErrorDetailField1: string = "firstname";
-	const mockHttpErrorDetailField2: string = "lastname";
-	const mockHttpErrorDetail3: string = "The e-mail is invalid";
+	const mockHttpErrorType = "https://api.demo.nbb.be/v1/errors/validation";
+	const mockHttpErrorTitle = "Validation errors";
+	const mockHttpErrorInstance = "4f4b3e6b-0707-4451-922f-53982ef83fdf";
+	const mockHttpDetailErrorType = "https://api.demo.nbb.be/v1/errors/user-invalid";
+	const mockHttpDetailErrorTitle = "Invalid user information";
+	const mockHttpErrorDetail1 = "The username is already in use";
+	const mockHttpErrorDetail2 = "The user's name is missing";
+	const mockHttpErrorDetailField1 = "firstname";
+	const mockHttpErrorDetailField2 = "lastname";
+	const mockHttpErrorDetail3 = "The e-mail is invalid";
 
 	let headersMap: Map<string, string>;
-	const dummyBackendUrl: string = "www.awesomeapi.com";
-	const mockResourcePath: string = "mock";
+	const dummyBackendUrl = "www.awesomeapi.com";
+	const mockResourcePath = "mock";
 	const mockResourceFullUrl: string = dummyBackendUrl + "/" + mockResourcePath;
 
 	const mockHttpError: StarkHttpError = {
@@ -582,7 +582,7 @@ describe("Service: StarkHttpService", () => {
 					"'), should retry the request before emitting the failure if the request retryCount option is set",
 				(done: DoneFn) => {
 					request.retryCount = 2;
-					let errorCounter: number = 0;
+					let errorCounter = 0;
 					const httpErrorResponse$: Observable<never> = throwError(httpErrorResponse).pipe(
 						catchError((err: any) => {
 							errorCounter++;
@@ -1416,8 +1416,8 @@ describe("Service: StarkHttpService", () => {
 
 	describe("addDevAuthenticationHeaders", () => {
 		it("should get the authentication headers from the Session service and add them to the current request headers", () => {
-			const dummyHeaderName: string = "some header";
-			const dummyHeaderValue: string = "some value";
+			const dummyHeaderName = "some header";
+			const dummyHeaderValue = "some value";
 			const request: StarkHttpRequest<MockResource> = {
 				backend: mockBackend,
 				resourcePath: mockResourcePath,
@@ -1446,8 +1446,8 @@ describe("Service: StarkHttpService", () => {
 	});
 
 	describe("addCorrelationIdentifierHeader", () => {
-		const dummyHeaderName: string = "some header";
-		const dummyHeaderValue: string = "some value";
+		const dummyHeaderName = "some header";
+		const dummyHeaderValue = "some value";
 		const request: StarkHttpRequest<MockResource> = {
 			backend: mockBackend,
 			resourcePath: mockResourcePath,
@@ -1491,21 +1491,25 @@ class MockResourceMetadata extends StarkSingleItemMetadataImpl {
 	public someValue?: string;
 }
 
+/**
+ * This class is only for serialization purposes
+ * @ignore
+ */
 class MockResource implements StarkResource {
 	@autoserialize
 	public uuid: string;
 
 	@autoserialize
-	public etag: string;
+	public etag!: string;
 
 	@autoserializeAs(MockResourceMetadata)
-	public metadata: MockResourceMetadata;
+	public metadata!: MockResourceMetadata;
 
 	@autoserialize
-	public property1: string;
+	public property1!: string;
 
 	@autoserialize
-	public property2: string;
+	public property2!: string;
 
 	public constructor(uuid: string) {
 		this.uuid = uuid;
@@ -1519,7 +1523,7 @@ function httpHeadersGetter(inputHeaders: { [name: string]: string }): HttpHeader
 }
 
 class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P> {
-	public retryDelay: number;
+	public retryDelay!: number;
 
 	public constructor(logger: MockStarkLoggingService, sessionService: MockStarkSessionService, httpClient: SpyObj<HttpClient>) {
 		super(logger, sessionService, <HttpClient>(<unknown>httpClient));

@@ -4,7 +4,7 @@ import { StarkError } from "../../../common/error";
 /**
  * The name of the service in case an injection is needed
  */
-export const starkLoggingServiceName: string = "StarkLoggingService";
+export const starkLoggingServiceName = "StarkLoggingService";
 /**
  * The InjectionToken version of the service name
  */

@@ -4,7 +4,7 @@ import floor from "lodash-es/floor";
  * @ignore
  * Name of the validator, in case injection is needed
  */
-export const starkIsEstablishmentUnitNumberValidatorName: string = "starkIsEstablishmentUnitNumber";
+export const starkIsEstablishmentUnitNumberValidatorName = "starkIsEstablishmentUnitNumber";
 
 /**
  * @ignore
@@ -12,15 +12,15 @@ export const starkIsEstablishmentUnitNumberValidatorName: string = "starkIsEstab
  * @param establishmentNumber - the establishmentNumber to validate
  */
 export function starkIsEstablishmentUnitNumber(establishmentNumber: string): boolean {
-	const controlNumberBeginIndex: number = 8;
-	const controlNumberEndIndex: number = 10;
+	const controlNumberBeginIndex = 8;
+	const controlNumberEndIndex = 10;
 
 	// Z.NNN.NNN.NNN with Z in (2-8) and N in (0-9)
 	const establishmentNumberPattern: RegExp = /^[2-8][.][0-9]{3}[.][0-9]{3}[.][0-9]{3}/;
 	// ZNNNNNNNNN with Z in (2-8) and N in (0-9)
 	const establishmentUnitNumberWithoutFormattingPattern: RegExp = /^[2-8][0-9]{3}[0-9]{3}[0-9]{3}/;
 
-	let isValid: boolean = false;
+	let isValid = false;
 
 	if (
 		typeof establishmentNumber === "string" &&

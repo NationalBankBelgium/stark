@@ -105,7 +105,7 @@ describe("Service: StarkSettingsService", () => {
 	describe("initializeSettings", () => {
 		beforeEach(() => {
 			Object.defineProperty(navigator, "language", {
-				get: () => "fr-be"
+				get: (): string => "fr-be"
 			});
 			browserLanguageCode = "fr";
 		});

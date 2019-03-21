@@ -5,12 +5,12 @@ import { starkIsEstablishmentUnitNumberValidatorName } from "../../validators/is
 
 class MyClass {
 	@StarkIsEstablishmentUnitNumber()
-	public name: string;
+	public name!: string;
 }
 
 class SimpleClass {
 	@StarkIsEstablishmentUnitNumber()
-	public dummyObject: object;
+	public dummyObject!: object;
 }
 
 describe("ValidatorDecorator: StarkIsEstablishmentUnitNumber", () => {

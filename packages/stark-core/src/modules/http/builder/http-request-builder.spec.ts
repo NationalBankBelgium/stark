@@ -27,9 +27,9 @@ import { StarkQueryParam } from "../entities/http-request.entity.intf";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 
-const resourcePath: string = "/something/:somethingId/else/:elseId/next";
-const resourceUuid: string = "dummyUUID";
-const resourceEtag: string = "123456789";
+const resourcePath = "/something/:somethingId/else/:elseId/next";
+const resourceUuid = "dummyUUID";
+const resourceEtag = "123456789";
 const mockDate: Date = new Date();
 const mockFrozenPathParamsWithoutUUID: StarkHttpRequestParams = deepFreeze({
 	pathParameters: { someId: "1234" }
@@ -117,7 +117,7 @@ function testEcho(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<Stark
 function testSetHeader(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables): void {
 	describe("on setHeader", () => {
 		let builder: StarkHttpBaseRequestBuilder<MockResource>;
-		const contentTypeJSON: string = "application/json";
+		const contentTypeJSON = "application/json";
 
 		beforeEach(() => {
 			({ requestBuilder: builder } = beforeEachFn());
@@ -572,7 +572,7 @@ function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle
 			let expectedRequestType: string;
 			let expectedHeaders: Map<string, string> = new Map();
 			let expectedResource: StarkResource | undefined;
-			let expectedResourcePath: string = "/something/1/else/3/next";
+			let expectedResourcePath = "/something/1/else/3/next";
 
 			expectedQueryParams = new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]]);
 

@@ -4,7 +4,7 @@ import { StarkSettings } from "../entities";
 /**
  * Key defined to find the service in a store
  */
-export const starkSettingsStoreKey: string = "starkSettings";
+export const starkSettingsStoreKey = "starkSettings";
 /**
  * Defines the initial state of the reducer
  * @link StarkSettings

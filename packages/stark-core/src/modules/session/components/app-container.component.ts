@@ -6,7 +6,7 @@ import { starkAppExitStateName, starkAppInitStateName } from "../constants";
 /**
  * Name of the component
  */
-const componentName: string = "stark-app-container";
+const componentName = "stark-app-container";
 
 /**
  * Component to coordinate the display of the init/exit states when the application starts or ends and hide the application content.

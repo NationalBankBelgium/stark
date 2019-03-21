@@ -2,8 +2,8 @@ import { StarkDateUtil } from "./date.util";
 
 // tslint:disable-next-line:no-big-function
 describe("Util: DateUtil", () => {
-	const dateTimeFormat: string = "YYYY-MM-DD HH:mm:ss.SSS";
-	const dateString: string = "2016-03-18T18:25:43.511Z";
+	const dateTimeFormat = "YYYY-MM-DD HH:mm:ss.SSS";
+	const dateString = "2016-03-18T18:25:43.511Z";
 
 	describe("parseDateWithFormat", () => {
 		it("should return a valid Date when different valid dateStrings are provided using the same format", () => {
@@ -243,7 +243,7 @@ describe("Util: DateUtil", () => {
 		});
 
 		it("should return 'invalid date' when the given date or the format is invalid", () => {
-			const mockFormat: string = "DD-MM-YYYY";
+			const mockFormat = "DD-MM-YYYY";
 
 			let formattedDate: string = StarkDateUtil.format(<any>undefined, mockFormat);
 			expect(formattedDate).toBe("invalid date");

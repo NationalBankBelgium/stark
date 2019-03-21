@@ -59,10 +59,10 @@ interface StarkState {
  */
 @Injectable()
 export class StarkRoutingServiceImpl implements StarkRoutingService {
-	public lastTransition: Transition;
+	public lastTransition?: Transition;
 	public knownRejectionCausesRegex: RegExp;
 	public knownRejectionCauses: string[];
-	public errorLastTransition: string = "lastTransition needs to be defined";
+	public errorLastTransition = "lastTransition needs to be defined";
 
 	// To store the state history
 	/** @internal */
@@ -99,7 +99,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	}
 
 	public navigateToPrevious(): Observable<any> {
-		const reason: string = "There is no previous state to navigate to.";
+		const reason = "There is no previous state to navigate to.";
 
 		if (this._starkStateHistory.length > 1) {
 			const previousState: StarkState = this._starkStateHistory[this._starkStateHistory.length - 2];
@@ -206,7 +206,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public isCurrentUiState(stateName: string, stateParams?: RawParams): boolean {
 		if (stateName === this.getCurrentStateName() && stateParams) {
 			const currentStateParams: RawParams = this.getCurrentStateParams(true);
-			let stateParamsMatchCurrent: boolean = true;
+			let stateParamsMatchCurrent = true;
 
 			// If there is a value in the stateParams that is different from the currentStateParams, then it is not the current state
 			for (const key in stateParams) {
@@ -366,7 +366,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#oninvalid
 		this.$state.onInvalid(
 			(toState?: TargetState, fromState?: TargetState): HookResult => {
-				const errorType: string = "Invalid state change";
+				const errorType = "Invalid state change";
 				const failureAction: Action = new StarkNavigateFailure(
 					(<TargetState>fromState).name(),
 					(<TargetState>toState).name(),

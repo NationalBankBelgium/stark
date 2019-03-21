@@ -4,7 +4,7 @@ import { HttpRequest } from "@angular/common/http";
 /**
  * The name of the service in case an injection is needed
  */
-export const starkXSRFServiceName: string = "StarkXSRFService";
+export const starkXSRFServiceName = "StarkXSRFService";
 /**
  * The InjectionToken version of the service name
  */

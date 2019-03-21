@@ -8,6 +8,7 @@ import { StarkValidationErrorsUtil } from "../../../util";
 import { StarkMapIsValid, StarkMapNotEmpty } from "../../../validation/decorators";
 
 /**
+ * This class is only for serialization purposes
  * @ignore
  */
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
@@ -16,32 +17,32 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@IsDefined({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public rootStateUrl: string;
+	public rootStateUrl!: string;
 
 	@IsDefined({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public rootStateName: string;
+	public rootStateName!: string;
 
 	@IsDefined({ groups: ["routing"] })
 	@IsString({ groups: ["routing"] })
 	@autoserialize
-	public homeStateName: string;
+	public homeStateName!: string;
 
 	@IsDefined({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public errorStateName: string;
+	public errorStateName!: string;
 
 	@IsDefined({ groups: ["temp"] })
 	@IsBoolean({ groups: ["temp"] })
 	@autoserialize
-	public angularDebugInfoEnabled: boolean;
+	public angularDebugInfoEnabled!: boolean;
 
 	@IsDefined({ groups: ["logging"] })
 	@IsBoolean({ groups: ["logging"] })
 	@autoserialize
-	public debugLoggingEnabled: boolean;
+	public debugLoggingEnabled!: boolean;
 
 	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled, { groups: ["logging"] })
 	@IsPositive({ groups: ["logging"] })
@@ -73,7 +74,7 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@IsDefined({ groups: ["temp"] })
 	@IsBoolean({ groups: ["temp"] })
 	@autoserialize
-	public routerLoggingEnabled: boolean;
+	public routerLoggingEnabled!: boolean;
 
 	@IsBoolean({ groups: ["temp"] })
 	@autoserialize
@@ -83,7 +84,7 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@IsString({ groups: ["settings"] })
 	@Matches(/^[a-z]{2}$/, { groups: ["settings"] })
 	@autoserialize
-	public defaultLanguage: string;
+	public defaultLanguage!: string;
 
 	@IsDefined({ groups: ["session"] })
 	@IsPositive({ groups: ["session"] })
@@ -111,17 +112,17 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@IsDefined({ groups: ["session"] })
 	@IsUrl({}, { groups: ["session"] })
 	@autoserialize
-	public logoutUrl: string;
+	public logoutUrl!: string;
 
 	@IsNotEmpty({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public baseUrl: string;
+	public baseUrl!: string;
 
 	@IsDefined({ groups: ["session"] })
 	@IsBoolean({ groups: ["session"] })
 	@autoserialize
-	public publicApp: boolean;
+	public publicApp!: boolean;
 
 	@StarkMapNotEmpty({ groups: ["http"] })
 	@StarkMapIsValid({ groups: ["http"] })

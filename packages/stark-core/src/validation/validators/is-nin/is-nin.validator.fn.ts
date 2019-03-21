@@ -4,7 +4,7 @@ import floor from "lodash-es/floor";
  * @ignore
  * Name of the starkIsNIN validator
  */
-export const starkIsNINValidatorName: string = "starkIsNIN";
+export const starkIsNINValidatorName = "starkIsNIN";
 
 /**
  * @ignore
@@ -14,7 +14,7 @@ export const starkIsNINValidatorName: string = "starkIsNIN";
  * @returns boolean - true if the given input is a valid NIN
  */
 export function starkIsNIN(nin: string, countryCode: string): boolean {
-	let isValid: boolean = false;
+	let isValid = false;
 	if (typeof nin === "string" && typeof countryCode === "string" && nin !== "" && countryCode !== "") {
 		if (countryCode.match(/^BE$/i)) {
 			isValid = isValidBelgianNin(nin);
@@ -57,9 +57,9 @@ export function starkIsNIN(nin: string, countryCode: string): boolean {
  *
  */
 function isValidBelgianNin(nin: string): boolean {
-	const birthdayEndIndex: number = 6;
-	const orderEndIndex: number = 9;
-	const numberOfDigits: number = 11;
+	const birthdayEndIndex = 6;
+	const orderEndIndex = 9;
+	const numberOfDigits = 11;
 
 	const getBirthDate: Function = (value: string): string => {
 		return value.substring(0, birthdayEndIndex);

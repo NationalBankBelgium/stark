@@ -25,7 +25,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 	let mockBackend: SpyObj<StarkBackend>;
 	let mockResourcePath: string;
 	let mockResource: MockResource;
-	const resourceUuid: string = "dummyUUID";
+	const resourceUuid = "dummyUUID";
 	const mockSerializer: StarkHttpSerializer<any> = new StarkHttpSerializerImpl();
 
 	let repository: AbstractHttpRepositoryTestHelper;
@@ -53,7 +53,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			);
 		});
 
-		it("should NOT set the serializer if no serializer is passed in its constructor", () => {
+		it("should use the default serializer when no serializer is passed in its constructor", () => {
 			const repositoryWithDefaultSerializer: AbstractHttpRepositoryTestHelper = new AbstractHttpRepositoryTestHelper(
 				mockStarkHttpService,
 				mockLogger,
@@ -61,7 +61,9 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 				mockResourcePath
 			);
 
-			expect(repositoryWithDefaultSerializer.serializer).toBeUndefined();
+			expect(repositoryWithDefaultSerializer.serializer).toBeDefined();
+			// @ts-ignore get protected field _type from StarkHttpSerializerImpl
+			expect(repositoryWithDefaultSerializer.serializer._type).toEqual(repositoryWithDefaultSerializer.type);
 		});
 	});
 
@@ -205,7 +207,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 		});
 
 		it("should override the resource path with the one passed as parameter to construct the request", () => {
-			const customResourcePath: string = "/custom/path/:uuid";
+			const customResourcePath = "/custom/path/:uuid";
 			const interpolatedCustomResourcePath: string = "/custom/path/" + resourceUuid;
 
 			let request: StarkHttpRequest = repository
@@ -298,7 +300,7 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 });
 
 class AbstractHttpRepositoryTestHelper extends AbstractStarkHttpRepository<MockResource> {
-	public serializer: StarkHttpSerializer<MockResource>;
+	public serializer!: StarkHttpSerializer<MockResource>;
 
 	public constructor(
 		starkHttpService: StarkHttpService<MockResource>,
