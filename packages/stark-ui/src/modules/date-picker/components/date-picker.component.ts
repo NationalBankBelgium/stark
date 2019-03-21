@@ -25,9 +25,10 @@ import { isStarkTimestampMaskConfig, StarkTimestampMaskConfig } from "../../inpu
 import { MAT_DATE_FORMATS, MatDateFormats } from "@angular/material/core";
 import { MatFormFieldControl } from "@angular/material/form-field";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { TranslateService } from "@ngx-translate/core";
 
 /**
  * Type expected by `dateFilter` @Input.
@@ -161,6 +162,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Placeholder to be displayed in the datepicker
+	 * Dynamically translated via the @ngx-translate service if the provided text is defined in the translation keys).
 	 */
 	@Input()
 	public placeholder: string;
@@ -270,6 +272,19 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	}
 
 	/**
+	 * @ignore
+	 * @internal
+	 * Original placeholder translation key to keep in memory to translate again when language changes.
+	 */
+	private originalPlaceholder: string = "";
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private translateOnLangChangeSubscription: Subscription;
+
+	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
@@ -278,6 +293,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * @param dateFormats - Reference to the date formats provided to MAT_DATE_FORMATS
 	 * @param fm - The Focus Monitor Service
 	 * @param injector - The Injector of the application
+	 * @param translateService - The Translate Service of the application
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -286,7 +302,8 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 		private cdRef: ChangeDetectorRef,
 		@Inject(MAT_DATE_FORMATS) private dateFormats: MatDateFormats,
 		private fm: FocusMonitor,
-		private injector: Injector
+		private injector: Injector,
+		private translateService: TranslateService
 	) {
 		super(renderer, elementRef);
 
@@ -308,6 +325,16 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
 		}
+
+		this.translateOnLangChangeSubscription = this.translateService.onLangChange.subscribe(() => {
+			// Handle translation internally because mat-form-field uses the value of `@Input public placeholder` to display the label / placeholder
+			this.placeholder = this.originalPlaceholder
+				? this.translateService.instant(this.originalPlaceholder)
+				: this.originalPlaceholder;
+			this.stateChanges.next();
+		});
+		
+		super.ngOnInit();
 	}
 
 	/**
@@ -321,10 +348,19 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 			);
 		}
 
-		if (changes["max"] || changes["min"] || changes["required"] || changes["placeholder"]) {
+		if (changes["max"] || changes["min"] || changes["required"]) {
 			this.stateChanges.next();
 			this.cdRef.detectChanges();
 			this._onValidatorChange();
+		}
+		
+		if (changes["placeholder"]) {
+			this.originalPlaceholder = changes["placeholder"].currentValue || "";
+			// Handle translation internally because mat-form-field uses the value of `@Input public placeholder` to display the label / placeholder
+			this.placeholder = this.originalPlaceholder
+				? this.translateService.instant(this.originalPlaceholder)
+				: this.originalPlaceholder;
+			this.stateChanges.next();
 		}
 
 		if (changes["dateMask"]) {
@@ -369,6 +405,10 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	public ngOnDestroy(): void {
 		this.stateChanges.complete();
 		this.fm.stopMonitoring(this.elementRef.nativeElement);
+
+		if (this.translateOnLangChangeSubscription) {
+			this.translateOnLangChangeSubscription.unsubscribe();
+		}
 	}
 
 	/**

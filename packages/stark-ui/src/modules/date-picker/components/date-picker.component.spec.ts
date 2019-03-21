@@ -61,7 +61,7 @@ class TestHostComponent {
 	selector: `host-form-control-component`,
 	template: `
 		<mat-form-field>
-			<stark-date-picker [required]="required" [dateMask]="dateMask" [formControl]="formControl"></stark-date-picker>
+			<stark-date-picker [required]="required" [placeholder]="placeholder" [dateMask]="dateMask" [formControl]="formControl"></stark-date-picker>
 		</mat-form-field>
 	`
 })
@@ -71,6 +71,7 @@ class TestHostFormControlComponent {
 
 	public dateMask: StarkDatePickerMaskConfig;
 	public formControl: FormControl = new FormControl();
+	public placeholder: string;
 	public required: boolean;
 }
 
@@ -133,7 +134,7 @@ describe("DatePickerComponent", () => {
 				expect(component.pickerId).toEqual("");
 				expect(component.pickerName).toBeDefined();
 				expect(component.pickerName).toEqual("");
-				expect(component.placeholder).toBeUndefined();
+				expect(component.placeholder).toEqual("");
 				expect(component.dateChange).toBeDefined();
 				expect(component.dateInput).toBeDefined();
 			});
@@ -300,7 +301,7 @@ describe("DatePickerComponent", () => {
 				expect(component.pickerId).toEqual("");
 				expect(component.pickerName).toBeDefined();
 				expect(component.pickerName).toEqual("");
-				expect(component.placeholder).toBeUndefined();
+				expect(component.placeholder).toEqual("");
 				expect(component.dateChange).toBeDefined();
 				expect(component.dateInput).toBeDefined();
 			});
