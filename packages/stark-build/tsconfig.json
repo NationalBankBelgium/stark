@@ -34,6 +34,7 @@
     "sourceMap": true,
     "strict": true,
     "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
     "strictNullChecks": true,
     "stripInternal": true,
     "skipLibCheck": true,
@@ -45,9 +46,7 @@
     "rootDirs": ["./src", "./config", "./typings"],
     "lib": ["dom", "dom.iterable", "es2017"],
     "typeRoots": ["./node_modules/@types"],
-    "paths": {},
-    // FIXME set this to true asap we have a newer version of IntelliJ
-    "strictPropertyInitialization": false
+    "paths": {}
   },
   "exclude": ["node_modules", "dist", "packages/stark-build/config-stark"],
   "awesomeTypescriptLoaderOptions": {

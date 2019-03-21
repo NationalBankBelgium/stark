@@ -47,23 +47,12 @@
     ],
     "no-any": false,
     "no-empty-interface": false,
-    "no-inferrable-types": false,
+    "no-inferrable-types": [true, "ignore-params"],
+    "typedef": [true, "call-signature", "arrow-call-signature", "parameter", "arrow-parameter", "property-declaration"],
     "no-internal-module": true,
     "no-namespace": [true, "allow-declarations"],
     "no-reference": true,
     "no-var-requires": false,
-    "typedef": [
-      true,
-      "call-signature",
-      // "arrow-call-signature",
-      "parameter",
-      "arrow-parameter",
-      "property-declaration",
-      "variable-declaration",
-      "member-variable-declaration",
-      "object-destructuring",
-      "array-destructuring"
-    ],
     "typedef-whitespace": [
       false,
       {
