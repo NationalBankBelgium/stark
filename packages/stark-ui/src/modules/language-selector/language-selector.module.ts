@@ -3,10 +3,11 @@ import { CommonModule } from "@angular/common";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { StarkLanguageSelectorComponent } from "./components";
 import { StarkDropdownModule } from "../dropdown";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @NgModule({
 	declarations: [StarkLanguageSelectorComponent],
-	imports: [CommonModule, MatButtonToggleModule, StarkDropdownModule],
+	imports: [CommonModule, MatButtonToggleModule, StarkDropdownModule, MatFormFieldModule],
 	exports: [StarkLanguageSelectorComponent]
 })
 export class StarkLanguageSelectorModule {}

@@ -1,0 +1,20 @@
+<form #modelForm="ngForm">
+	<mat-form-field>
+		<stark-dropdown
+			name="serviceDropdown"
+			dropdownId="serviceDropdown"
+			[options]="serviceDropdownOptions"
+			[(ngModel)]="selectedService"
+			placeholder="Select Service"
+			optionIdProperty="id"
+			optionLabelProperty="value"
+			required
+		>
+		</stark-dropdown>
+		<mat-error *ngIf="modelForm.invalid && modelForm.touched">
+			{{ "STARK.VALIDATION.REQUIRED" | translate }}
+		</mat-error>
+	</mat-form-field>
+</form>
+
+<div *ngIf="selectedService">Selected value: {{ selectedService }}</div>

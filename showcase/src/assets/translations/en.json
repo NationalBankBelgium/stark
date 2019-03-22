@@ -1,6 +1,7 @@
 {
   "SHOWCASE": {
     "COMMON": {
+      "DISABLED": "Disabled",
       "ENABLED": "Enabled",
       "VALUE": "Value"
     },
@@ -43,7 +44,6 @@
       },
       "DATE_PICKER": {
         "CUSTOM_FILTER": "Date Picker - Custom Filter",
-        "DISABLED": "Disabled",
         "NG_MODEL": "Date Picker - Using NgModel",
         "ONLY_WEEKDAYS": "Date Picker - Only weekdays",
         "ONLY_WEEKENDS": "Date Picker - Only weekends",
@@ -92,9 +92,8 @@
         "DISABLED": "Disabled dropdown",
         "IO": "Informatics infrastructure and operations",
         "MULTIPLE": "Multiple selection",
-        "MULTIPLE_REQUIRED": "Required multiple selection",
-        "REACTIVE_FORM": "Reactive form",
-        "REQUIRED": "Single required selection",
+        "NG_MODEL_REQUIRED": "Using NgModel + required",
+        "REACTIVE_FORM": "Using Reactive form",
         "SELECTED_VALUE": "Selected value ",
         "SELECTED_VALUES": "Selected values ",
         "SELECT_SERVICE": "Select Service",

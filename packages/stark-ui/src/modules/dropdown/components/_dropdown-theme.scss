@@ -21,8 +21,29 @@
   }
 }
 
-.stark-dropdown {
+.stark-dropdown-mat-form-field {
+  &.stark-primary {
+    @include stark-dropdown-color(mat-color(map-get($base-theme, primary-palette), 900));
+  }
+  &.stark-accent {
+    @include stark-dropdown-color(mat-color(map-get($base-theme, accent-palette), 900));
+  }
+  &.stark-warn {
+    @include stark-dropdown-color(mat-color(map-get($base-theme, warn-palette), 900));
+  }
   &.stark-white {
     @include stark-dropdown-color(mat-color($grey-palette, A100));
+  }
+  &.stark-success {
+    @include stark-dropdown-color(mat-color($success-palette, 900));
+  }
+  &.stark-alert {
+    @include stark-dropdown-color(mat-color($alert-palette, 900));
+  }
+  &.stark-alt {
+    @include stark-dropdown-color(mat-color($grey-palette, 900));
+  }
+  &.stark-neutral {
+    @include stark-dropdown-color(mat-color($success-palette, 400));
   }
 }

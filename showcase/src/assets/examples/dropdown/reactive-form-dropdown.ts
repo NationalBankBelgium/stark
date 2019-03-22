@@ -1,17 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
 	selector: "demo-dropdown",
 	templateUrl: "./demo-dropdown.component.html"
 })
 export class DemoDropdownComponent implements OnInit {
-	public isDisabled: boolean;
-
-	public selectedService: string;
-
 	public serviceDropdownOptions: any[];
-
 	public serviceFormControl: FormControl;
 
 	/**
@@ -24,15 +19,14 @@ export class DemoDropdownComponent implements OnInit {
 			{ id: "CS", value: "IT customer services" }
 		];
 
-		this.serviceFormControl = new FormControl();
-		this.serviceFormControl.valueChanges.subscribe((value: any) => (this.selectedService = value));
+		this.serviceFormControl = new FormControl("", Validators.required);
 	}
 
 	public toggleDisabling(): void {
-		if (this.isDisabled) {
-			this.serviceFormControl.disable();
-		} else {
+		if (this.serviceFormControl.disabled) {
 			this.serviceFormControl.enable();
+		} else {
+			this.serviceFormControl.disable();
 		}
 	}
 }

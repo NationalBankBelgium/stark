@@ -3,6 +3,7 @@
 import { Component, ViewChild } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { DateAdapter } from "@angular/material/core";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
@@ -123,7 +124,7 @@ describe("LanguageSelectorComponent", () => {
 	 */
 	function compileComponent(mockSessionService: MockStarkSessionService): Promise<any> {
 		return TestBed.configureTestingModule({
-			imports: [CommonModule, MatButtonToggleModule, StarkDropdownModule, TranslateModule.forRoot()],
+			imports: [CommonModule, MatButtonToggleModule, StarkDropdownModule, MatFormFieldModule, TranslateModule.forRoot()],
 			declarations: [StarkLanguageSelectorComponent, TestHostComponent],
 			providers: [
 				{ provide: STARK_APP_METADATA, useValue: appMetadata },
