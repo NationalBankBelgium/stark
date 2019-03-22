@@ -26,16 +26,16 @@
  * Polyfill: https://github.com/zloirock/core-js
  */
 /* tslint:disable:no-import-side-effect */
-import "core-js/es6";
-import "core-js/es7/reflect";
-import "core-js/es7/string";
-import "core-js/stage/4";
+// FIXME: remove the workaround added to the tsconfig.json to support core-js 3.0.0 with Angular CLI 7.x (https://github.com/angular/angular-cli/issues/13954#issuecomment-475452588)
+// it will be fixed most likely in Angular 8
+import "core-js/es";
+import "core-js/proposals/reflect-metadata";
 /**
  * IE11 does not support iteration on certain DOM collections (NodeList).
  * This polyfill is specifically needed for the animation on mat-menu used in stark-table.
  * More info: https://github.com/angular/angular/issues/27887
  */
-import "core-js/modules/web.dom.iterable";
+import "core-js/modules/web.dom-collections.iterator";
 
 /**
  * IE11 and Edge require this to support Server-sent events

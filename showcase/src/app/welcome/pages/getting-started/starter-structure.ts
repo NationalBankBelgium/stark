@@ -183,6 +183,7 @@ export const starkStylesCss = `
 @import "~@nationalbankbelgium/stark-ui/src/modules/session-ui/pages/login/login-page.component";
 @import "~@nationalbankbelgium/stark-ui/src/modules/session-ui/pages/preloading/preloading-page.component";
 `;
+
 export const polyfillsBrowsersContent = `
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
@@ -199,21 +200,48 @@ export const polyfillsBrowsersContent = `
  *
  * Learn more in https://angular.io/guide/browser-support
  */
+
 /***************************************************************************************************
  * BROWSER POLYFILLS
  *
  * See: https://angular.io/guide/browser-support#optional-browser-features-to-polyfill
  */
+
 /**
  * IE11 requires all of the following polyfills.
  *
  * Polyfill: https://github.com/zloirock/core-js
+ * Add the specific lines below corresponding to the version of core-js you want to use: 2.x or 3.x
  */
 /* tslint:disable:no-import-side-effect */
+
+/******************** core-js 2.x ********************/
 import "core-js/es6";
 import "core-js/es7/reflect";
 import "core-js/es7/string";
 import "core-js/stage/4";
+/**
+ * IE11 does not support iteration on certain DOM collections (NodeList).
+ * This polyfill is specifically needed for the animation on mat-menu used in stark-table.
+ * More info: https://github.com/angular/angular/issues/27887
+ */
+import "core-js/modules/web.dom.iterable";
+/*****************************************************/
+
+/******************** core-js 3.x ********************
+ * Make sure you add the 'paths' workaround to the tsconfig.json to support core-js 3.x with Angular CLI 7.x
+ * See: https://github.com/angular/angular-cli/issues/13954#issuecomment-475452588
+ */
+import "core-js/es";
+import "core-js/proposals/reflect-metadata";
+/**
+ * IE11 does not support iteration on certain DOM collections (NodeList).
+ * This polyfill is specifically needed for the animation on mat-menu used in stark-table.
+ * More info: https://github.com/angular/angular/issues/27887
+ */
+import "core-js/modules/web.dom-collections.iterator";
+/*****************************************************/
+
 /**
  * IE11 and Edge require this to support Server-sent events
  * https://caniuse.com/#feat=eventsource
@@ -221,6 +249,7 @@ import "core-js/stage/4";
  * Polyfill: https://github.com/Yaffle/EventSource
  */
 import "event-source-polyfill";
+
 /**
  * IE11 requires Element.classList for NgClass support on SVG elements
  * See: https://caniuse.com/#feat=classlist
@@ -230,6 +259,7 @@ import "event-source-polyfill";
  * Polyfill: https://github.com/eligrey/classList.js
  */
 import "eligrey-classlist-js-polyfill";
+
 /**
  * Web Animations polyfill is no longer needed for standard animation support as of Angular 6
  * IMPORTANT: It is only needed in case you use the AnimationBuilder from '@angular/animations' in the application
@@ -239,6 +269,7 @@ import "eligrey-classlist-js-polyfill";
  * Polyfill: https://github.com/web-animations/web-animations-js
  */
 // import "web-animations-js";
+
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
  */
