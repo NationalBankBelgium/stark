@@ -14,13 +14,13 @@ function createElement(html: string): Element {
 /* tslint:disable:no-big-function */
 describe("Util: DOMUtil", () => {
 	/* repeated messages */
-	const shouldReturnParentElement: string = "should return the parent element if it is found";
-	const shouldReturnUndefined: string = "should return UNDEFINED if the parent element was not found";
-	const shouldStopSearching: string = "should stop searching when it reaches the BODY element";
-	const notParent: string = "this-is-not-a-parent";
-	const rootClass: string = "root-class";
+	const shouldReturnParentElement = "should return the parent element if it is found";
+	const shouldReturnUndefined = "should return UNDEFINED if the parent element was not found";
+	const shouldStopSearching = "should stop searching when it reaches the BODY element";
+	const notParent = "this-is-not-a-parent";
+	const rootClass = "root-class";
 
-	const rootClassHtml: string = "<root class='root-class'>";
+	const rootClassHtml = "<root class='root-class'>";
 	const grandparentParentChildHtml: string =
 		"<grandparent class='grandparent-class' id='grandparent-id'>" +
 		"	<parent class='parent-class' id='parent-id'>" +

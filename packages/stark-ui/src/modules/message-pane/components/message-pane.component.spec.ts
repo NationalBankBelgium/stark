@@ -43,9 +43,9 @@ import createSpyObj = jasmine.createSpyObj;
 })
 class TestHostComponent {
 	@ViewChild(StarkMessagePaneComponent)
-	public messagePaneComponent: StarkMessagePaneComponent;
-	public clearOnNavigation: boolean;
-	public align: string;
+	public messagePaneComponent!: StarkMessagePaneComponent;
+	public clearOnNavigation?: boolean;
+	public align?: string;
 }
 
 describe("MessagePaneComponent", () => {
@@ -54,7 +54,7 @@ describe("MessagePaneComponent", () => {
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
-	const mockClearOnNavigation: boolean = false;
+	const mockClearOnNavigation = false;
 	const mockDefaultAlign: "center" | "left" | "right" | undefined = "right";
 	const mockCenterAlign: "center" | "left" | "right" | undefined = "center";
 

@@ -6,7 +6,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-app-data";
+const componentName = "stark-app-data";
 
 export type StarkAppDataComponentMode = "dropdown" | "menu";
 
@@ -30,7 +30,7 @@ export class StarkAppDataComponent extends AbstractStarkUiComponent implements O
 	 */
 	@Input() public mode?: StarkAppDataComponentMode = "dropdown";
 
-	public isDetailHidden: boolean = true;
+	public isDetailHidden = true;
 
 	public windowClickHandler?: EventListener;
 
@@ -75,14 +75,17 @@ export class StarkAppDataComponent extends AbstractStarkUiComponent implements O
 	 * Method use to attach a click handler to the window
 	 */
 	public attachWindowClickHandler(): void {
-		this.windowClickHandler = (event: Event) => {
-			if (!this.isDetailHidden) {
-				const parentElement: Element | undefined = StarkDOMUtil.searchParentElementByClass(<Element>event.target, componentName);
-
-				if (!parentElement) {
-					this.toggleDetail();
-				}
+		this.windowClickHandler = (event: Event): void => {
+			if (this.isDetailHidden) {
+				return;
 			}
+
+			const parentElement: Element | undefined = StarkDOMUtil.searchParentElementByClass(<Element>event.target, componentName);
+			if (parentElement) {
+				return;
+			}
+
+			this.toggleDetail();
 		};
 
 		window.addEventListener("click", this.windowClickHandler);

@@ -7,7 +7,7 @@ import { map, startWith, take, tap } from "rxjs/operators";
 /**
  * The name of the component
  */
-const componentName: string = "stark-session-timeout-warning-dialog";
+const componentName = "stark-session-timeout-warning-dialog";
 
 /**
  * Component to display a session timeout warning dialog
@@ -21,7 +21,7 @@ export class StarkSessionTimeoutWarningDialogComponent implements OnInit {
 	/**
 	 * countdown Time in seconds before the current session expires.
 	 */
-	public countdown$: Observable<number>;
+	public countdown$!: Observable<number>;
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

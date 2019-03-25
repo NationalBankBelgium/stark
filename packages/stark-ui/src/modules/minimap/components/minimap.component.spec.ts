@@ -21,10 +21,10 @@ import { OverlayContainer } from "@angular/cdk/overlay";
 })
 class TestHostComponent {
 	@ViewChild(StarkMinimapComponent)
-	public minimapComponent: StarkMinimapComponent;
-	public items: StarkMinimapItemProperties[];
-	public visibleItems: string[];
-	public mode: string;
+	public minimapComponent!: StarkMinimapComponent;
+	public items?: StarkMinimapItemProperties[];
+	public visibleItems?: string[];
+	public mode?: string;
 
 	public onShowHideItem(_item: StarkMinimapItemProperties): void {
 		/*noop*/
@@ -56,7 +56,7 @@ describe("MinimapComponent", () => {
 				{
 					// See https://github.com/NationalBankBelgium/stark/issues/1088
 					provide: HAMMER_LOADER,
-					useValue: () => new Subject<any>().toPromise()
+					useValue: (): Promise<any> => new Subject<any>().toPromise()
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)

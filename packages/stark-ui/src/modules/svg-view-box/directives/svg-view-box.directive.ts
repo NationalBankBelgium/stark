@@ -4,7 +4,12 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkSvgViewBox]";
+const directiveName = "[starkSvgViewBox]";
+
+/**
+ * Default value for the width and height of the 'viewBox' attribute if it is not given as an input.
+ */
+const DEFAULT_VIEW_BOX_SIZE = 24;
 
 /**
  * Directive to add the 'viewBox' attribute to an SVG element.
@@ -25,12 +30,7 @@ export class StarkSvgViewBoxDirective implements AfterViewChecked, OnInit {
 	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkSvgViewBox")
-	private viewBoxSize: number;
-
-	/**
-	 * Default value for the width and height of the 'viewBox' attribute if it is not given as an input.
-	 */
-	private defaultViewBoxSize: number = 24;
+	private viewBoxSize: number = DEFAULT_VIEW_BOX_SIZE;
 
 	/**
 	 * SVG element to which the viewBox attribute should be added.
@@ -64,12 +64,12 @@ export class StarkSvgViewBoxDirective implements AfterViewChecked, OnInit {
 		// ensure that this should be set only once since the ngAfterViewChecked is triggered continuously
 		if (!this.svgIcon) {
 			this.svgIcon = this.element.nativeElement.querySelector("svg") || undefined;
-			this.viewBoxSize = this.viewBoxSize || this.defaultViewBoxSize;
+			this.viewBoxSize = this.viewBoxSize || DEFAULT_VIEW_BOX_SIZE;
 
 			// set the "viewBox" attribute only if the SVG element doesn't have any defined
 			if (this.svgIcon && !this.svgIcon.hasAttribute("viewBox")) {
 				// viewBox value: the points "seen" in the SVG drawing area. Four values separated by white space or commas. (min x, min y, width, height)
-				const viewBoxValue: string = `0 0 ${this.viewBoxSize} ${this.viewBoxSize}`;
+				const viewBoxValue = `0 0 ${this.viewBoxSize} ${this.viewBoxSize}`;
 				this.renderer.setAttribute(this.svgIcon, "viewBox", viewBoxValue);
 			}
 		}

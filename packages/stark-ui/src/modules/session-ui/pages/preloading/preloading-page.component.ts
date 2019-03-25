@@ -17,7 +17,7 @@ import {
 /**
  * Name of the component
  */
-const componentName: string = "stark-preloading-page";
+const componentName = "stark-preloading-page";
 
 /**
  * Preloading Page smart component.
@@ -38,28 +38,28 @@ export class StarkPreloadingPageComponent implements OnInit {
 	 * Target page to navigate to after the user profile is loaded and automatically logged in.
 	 */
 	@Input()
-	public targetState: string;
+	public targetState?: string;
 
 	/**
 	 * Params to pass to the target page (if any).
 	 */
 	@Input()
-	public targetStateParams: RawParams;
+	public targetStateParams?: RawParams;
 
 	/**
 	 * Whether the fetching of the user profile failed
 	 */
-	public userFetchingFailed: boolean;
+	public userFetchingFailed = false;
 
 	/**
 	 * The current correlation Id of the application (useful when troubleshooting errors).
 	 */
-	public correlationId: string;
+	public correlationId = "undefined";
 
 	/**
 	 * @ignore
 	 */
-	public loginDelay: number = 200;
+	public loginDelay = 200;
 
 	/**
 	 * Class constructor

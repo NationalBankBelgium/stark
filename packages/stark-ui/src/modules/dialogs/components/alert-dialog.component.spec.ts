@@ -37,10 +37,10 @@ describe("AlertDialogComponent", () => {
 		ok: "Ok button label"
 	};
 
-	const matDialogSelector: string = "mat-dialog-container";
-	const matDialogTitleSelector: string = "[mat-dialog-title]";
-	const matDialogContentSelector: string = "[mat-dialog-content]";
-	const matDialogActionsSelector: string = "[mat-dialog-actions]";
+	const matDialogSelector = "mat-dialog-container";
+	const matDialogTitleSelector = "[mat-dialog-title]";
+	const matDialogContentSelector = "[mat-dialog-content]";
+	const matDialogActionsSelector = "[mat-dialog-actions]";
 
 	function openDialog(dialogData: StarkAlertDialogContent): MatDialogRef<StarkAlertDialogComponent, StarkAlertDialogResult> {
 		return dialogService.open<StarkAlertDialogComponent, StarkAlertDialogContent, StarkAlertDialogResult>(StarkAlertDialogComponent, {
@@ -73,7 +73,8 @@ describe("AlertDialogComponent", () => {
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
 		})
 			.overrideModule(BrowserDynamicTestingModule, {
-				// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/12079)
+				// FIXME review after https://github.com/angular/angular/issues/10760
+				// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
 				set: { entryComponents: [StarkAlertDialogComponent] }
 			})
 			.compileComponents();

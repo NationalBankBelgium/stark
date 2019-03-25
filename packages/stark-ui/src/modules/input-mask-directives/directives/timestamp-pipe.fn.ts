@@ -1,5 +1,5 @@
 import { starkIsDateTime } from "@nationalbankbelgium/stark-core";
-import { PipeFunction } from "text-mask-core";
+import { PipeFunction, PipeResultObject } from "text-mask-core";
 
 // TODO: refactor this function to reduce its cognitive complexity
 /**
@@ -8,12 +8,12 @@ import { PipeFunction } from "text-mask-core";
  */
 // tslint:disable-next-line:cognitive-complexity
 export function createTimestampPipe(timestampFormat: string = "DD-MM-YYYY HH:mm:ss"): PipeFunction {
-	return (conformedValue: string) => {
+	return (conformedValue: string): false | string | PipeResultObject => {
 		const dateFormatArray: string[] = timestampFormat.split(/[^DMYHms]+/);
 		const maxValue: object = { DD: 31, MM: 12, YYYY: 2999, HH: 24, mm: 60, ss: 60 };
 		const minValue: object = { DD: 0, MM: 0, YYYY: 1, HH: 0, mm: 0, ss: 0 };
 
-		let skipValidation: boolean = false;
+		let skipValidation = false;
 
 		// Check for invalid date
 		const isInvalid: boolean = dateFormatArray.some((format: string) => {

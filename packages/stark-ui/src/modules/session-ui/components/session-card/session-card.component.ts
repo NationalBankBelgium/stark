@@ -3,7 +3,7 @@ import { Component, Input, ViewEncapsulation } from "@angular/core";
 /**
  * The name of the component
  */
-const componentName: string = "stark-session-card";
+const componentName = "stark-session-card";
 
 /**
  * Component to display session pages
@@ -21,5 +21,5 @@ export class StarkSessionCardComponent {
 	 * The title shown in the header of the card
 	 */
 	@Input()
-	public cardTitle: string;
+	public cardTitle = "";
 }

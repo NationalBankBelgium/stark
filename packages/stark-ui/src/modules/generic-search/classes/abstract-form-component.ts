@@ -10,12 +10,12 @@ export abstract class AbstractStarkFormComponent<CriteriaType> {
 	/**
 	 * The form's original copy (the initial model when the form is pristine)
 	 */
-	public originalCopy: CriteriaType;
+	public originalCopy!: CriteriaType;
 
 	/**
 	 * The form's working copy (the current model with the latest changes)
 	 */
-	public workingCopy: CriteriaType;
+	public workingCopy!: CriteriaType;
 
 	/**
 	 * Class constructor

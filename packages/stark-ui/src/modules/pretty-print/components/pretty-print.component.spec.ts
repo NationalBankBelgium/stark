@@ -18,11 +18,11 @@ import { StarkPrettyPrintComponent } from "./pretty-print.component";
 })
 class TestHostComponent {
 	@ViewChild(StarkPrettyPrintComponent)
-	public prettyPrintComponent: StarkPrettyPrintComponent;
+	public prettyPrintComponent!: StarkPrettyPrintComponent;
 
-	public data: string;
-	public format: string;
-	public enableHighlighting: boolean;
+	public data?: string;
+	public format?: string;
+	public enableHighlighting?: boolean;
 }
 
 describe("PrettyPrintComponent", () => {
@@ -30,12 +30,12 @@ describe("PrettyPrintComponent", () => {
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
-	const shouldHaveInputs: string = "should have inputs set";
-	const marginBottom: string = "margin-bottom";
-	const classTokenFunction: string = 'class="token function"';
-	const classTokenKeyword: string = 'class="token keyword"';
-	const classTokenProperty: string = 'class="token property"';
-	const classTokenSelector: string = 'class="token selector"';
+	const shouldHaveInputs = "should have inputs set";
+	const marginBottom = "margin-bottom";
+	const classTokenFunction = 'class="token function"';
+	const classTokenKeyword = 'class="token keyword"';
+	const classTokenProperty = 'class="token property"';
+	const classTokenSelector = 'class="token selector"';
 
 	const rawXmlData: string = [
 		'<menu id="file" value="File"><menuitem value="New" onclick="CreateNewDoc()" />',
@@ -481,7 +481,7 @@ describe("PrettyPrintComponent", () => {
 
 			it(shouldHaveInputs, () => {
 				expect(component.data).toBe(rawTypescriptData);
-				expect(component.format).toBe("unknownformat");
+				expect(<string>component.format).toBe("unknownformat");
 				expect(component.enableHighlighting).toBeUndefined();
 			});
 

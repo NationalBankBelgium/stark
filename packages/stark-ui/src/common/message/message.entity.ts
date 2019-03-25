@@ -7,13 +7,15 @@ import  uniqueId  from "lodash-es/uniqueId";
  */
 export class StarkMessageImpl implements StarkMessage {
 	public id: string;
-	public key: string;
-	public interpolateValues: object;
-	public code: string;
-	public type: StarkMessageType;
 
-	public constructor() {
-		// set random id
-		this.id = uniqueId();
+	public constructor(
+		id: string | undefined,
+		public key: string,
+		public code: string,
+		public type: StarkMessageType,
+		public interpolateValues?: object,
+		public priority?: number
+	) {
+		this.id = id || uniqueId();
 	}
 }

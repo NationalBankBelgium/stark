@@ -5,7 +5,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 /**
  * Name of the component
  */
-const componentName: string = "stark-app-footer";
+const componentName = "stark-app-footer";
 
 /**
  * Component to display the application's footer.
@@ -36,7 +36,7 @@ export class StarkAppFooterComponent implements OnInit {
 	/**
 	 * Copyright period displayed.
 	 */
-	public copyrightPeriod: string;
+	public copyrightPeriod!: string;
 
 	/**
 	 * Class constructor

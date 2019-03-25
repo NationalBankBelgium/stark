@@ -7,7 +7,7 @@ import { MaskedInputDirective, TextMaskConfig as Ng2TextMaskConfig } from "angul
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkEmailMask]";
+const directiveName = "[starkEmailMask]";
 
 /**
  * @ignore
@@ -60,7 +60,7 @@ export class StarkEmailMaskDirective extends MaskedInputDirective implements OnC
 	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkEmailMask")
-	public maskConfig?: boolean = true; // enabled by default
+	public maskConfig = true; // enabled by default
 
 	/**
 	 * Class constructor

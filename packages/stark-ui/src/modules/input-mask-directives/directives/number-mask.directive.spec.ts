@@ -23,8 +23,8 @@ describe("NumberMaskDirective", () => {
 	})
 	class TestComponent {
 		public numberMaskConfig: StarkNumberMaskConfig = numberMaskConfig;
-		public ngModelValue: string = "";
-		public formControl: FormControl = new FormControl("");
+		public ngModelValue = "";
+		public formControl = new FormControl("");
 	}
 
 	function getTemplate(numberMaskDirective: string): string {

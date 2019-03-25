@@ -2,8 +2,8 @@
 import { createTimestampPipe } from "./timestamp-pipe.fn";
 
 describe("createTimestampPipe", () => {
-	const fullDateTimeLongYearFormat: string = "YYYY-DD-MM HH:mm:ss";
-	const fullDateTimeShortYearFormat: string = "DD-MM-YY HH:mm:ss";
+	const fullDateTimeLongYearFormat = "YYYY-DD-MM HH:mm:ss";
+	const fullDateTimeShortYearFormat = "DD-MM-YY HH:mm:ss";
 
 	function assertTimestampsValidity(dateTimeStrings: string[], shouldBeValid: boolean, customFormat?: string): void {
 		const timestampPipeFn: Function = createTimestampPipe(customFormat);

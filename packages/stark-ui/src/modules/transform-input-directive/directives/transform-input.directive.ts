@@ -45,17 +45,17 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	/**
 	 * Internal property for holding the transformation function
 	 */
-	public _transformation: (value: any) => any;
+	public _transformation: (value: any) => any = value => value;
 
 	// tslint:disable-next-line:no-input-rename
 	@Input("starkTransformInput")
 	public set transformation(transformation: StarkInputTransformationType) {
 		switch (transformation) {
 			case UPPERCASE:
-				this._transformation = (v: string) => v.toUpperCase();
+				this._transformation = (v: string): string => v.toUpperCase();
 				break;
 			case LOWERCASE:
-				this._transformation = (v: string) => v.toLocaleLowerCase();
+				this._transformation = (v: string): string => v.toLocaleLowerCase();
 				break;
 			default:
 				this._transformation = transformation;

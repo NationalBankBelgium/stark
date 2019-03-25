@@ -1,19 +1,19 @@
 /**
  * message pane align prefix
  */
-export const starkMessagePaneAlignClassPrefix: string = "align-";
+export const starkMessagePaneAlignClassPrefix = "align-";
 
 /**
  * message pane displayed class
  */
-export const starkMessagePaneDisplayedClass: string = "displayed";
+export const starkMessagePaneDisplayedClass = "displayed";
 
 /**
  * message pane display animated
  */
-export const starkMessagePaneDisplayAnimatedClass: string = "display-animated";
+export const starkMessagePaneDisplayAnimatedClass = "display-animated";
 
 /**
  * message pane collapsed
  */
-export const starkMessagePaneCollapsedClass: string = "collapsed";
+export const starkMessagePaneCollapsedClass = "collapsed";

@@ -121,7 +121,7 @@ describe("LoginPageComponent", () => {
 
 			mockSessionService.login.calls.reset();
 			mockRoutingService.navigateToHome.calls.reset();
-			const mockState: string = "mock-state";
+			const mockState = "mock-state";
 			const mockStateParams: RawParams = {
 				param: "mock-state-param"
 			};

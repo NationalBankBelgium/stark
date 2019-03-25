@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations */
+/* tslint:disable:completed-docs max-inline-declarations no-big-function */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, EventEmitter, ViewChild } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -23,11 +23,11 @@ import Spy = jasmine.Spy;
 })
 class TestHostComponent {
 	@ViewChild(StarkSliderComponent)
-	public sliderComponent: StarkSliderComponent;
+	public sliderComponent!: StarkSliderComponent;
 
-	public sliderId: string;
-	public sliderValues: number[];
-	public sliderConfig: StarkSliderConfig;
+	public sliderId?: string;
+	public sliderValues?: number[];
+	public sliderConfig?: StarkSliderConfig;
 
 	/**
 	 * Simulates the OnValueChanges event of the slider component
@@ -38,6 +38,7 @@ class TestHostComponent {
 		this.sliderValues = values;
 	}
 }
+
 
 describe("SliderComponent", () => {
 	let component: StarkSliderComponent;
@@ -50,7 +51,7 @@ describe("SliderComponent", () => {
 			max: 95
 		}
 	};
-	const mockSliderId: string = "rangeSlider";
+	const mockSliderId = "rangeSlider";
 	const mockValues: number[] = [11, 22];
 	const newMockValues: number[] = [14, 18];
 	let attachSliderInstanceUpdateHandlerSpy: jasmine.Spy;
@@ -133,6 +134,30 @@ describe("SliderComponent", () => {
 		});
 	});
 
+	describe("required inputs", () => {
+		beforeEach(() => {
+			hostFixture = TestBed.createComponent(TestHostComponent);
+			hostComponent = hostFixture.componentInstance;
+
+			hostComponent.sliderValues = mockValues;
+			hostComponent.sliderConfig = mockConfig;
+		});
+
+		it("should not throw any errors when everything is set correctly", () => {
+			expect(() => hostFixture.detectChanges()).not.toThrowError();
+		});
+
+		it("should throw an error when values are not set", () => {
+			hostComponent.sliderValues = undefined;
+			expect(() => hostFixture.detectChanges()).toThrowError("StarkSliderComponent: values should be set.");
+		});
+
+		it("should throw an error when values are not set", () => {
+			hostComponent.sliderConfig = undefined;
+			expect(() => hostFixture.detectChanges()).toThrowError("StarkSliderComponent: sliderConfig should be set.");
+		});
+	});
+
 	describe("createSliderInstance", () => {
 		it("should create the slider instance and assign it to the internal variable", () => {
 			expect(component.noUiSliderLibrary.create).toHaveBeenCalledTimes(1);
@@ -169,7 +194,7 @@ describe("SliderComponent", () => {
 
 			const updateHandler: Function = (<Spy>component.slider.on).calls.argsFor(0)[1];
 
-			const dummyHandle: number = 0;
+			const dummyHandle = 0;
 			const dummyEncodedValues: number[] = [];
 			const dummyUnencodedValues: number[] = [14, 18];
 
@@ -195,7 +220,7 @@ describe("SliderComponent", () => {
 
 			const updateHandler: Function = (<Spy>component.slider.on).calls.argsFor(0)[1];
 
-			const dummyHandle: number = 0;
+			const dummyHandle = 0;
 			const dummyEncodedValues: number[] = [];
 
 			updateHandler(dummyEncodedValues, dummyHandle, mockValues);

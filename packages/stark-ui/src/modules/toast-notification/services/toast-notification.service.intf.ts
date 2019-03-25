@@ -6,7 +6,7 @@ import { StarkToastMessage } from "../components/toast-message.intf";
 /**
  * Name of the toast notification service
  */
-export const starkToastNotificationServiceName: string = "StarkToastNotificationService";
+export const starkToastNotificationServiceName = "StarkToastNotificationService";
 
 /**
  * Injection token of the toast notification service.

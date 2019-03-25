@@ -31,12 +31,12 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { FormGroup } from "@angular/forms";
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from "@angular/animations";
 import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
-import  isEqual  from "lodash-es/isEqual";
+import isEqual from "lodash-es/isEqual";
 
 /**
  * Name of the component
  */
-const componentName: string = "stark-generic-search";
+const componentName = "stark-generic-search";
 
 /**
  * @ignore
@@ -141,47 +141,47 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * Whether the search form should be hidden. Default: false
 	 */
 	@Input()
-	public isFormHidden: boolean = false;
+	public isFormHidden = false;
 
 	/**
 	 * HTML id of action bar component.
 	 */
 	@Input()
-	public formHtmlId: string = "stark-generic-search-form";
+	public formHtmlId = "stark-generic-search-form";
 
 	/**
 	 * Whether the search form should be hidden once the search is triggered.
 	 * Default: false
 	 */
 	@Input()
-	public hideOnSearch: boolean = false;
+	public hideOnSearch = false;
 
 	/**
 	 * Callback function to be called when the "New" button is clicked (in case it is shown)
 	 */
 	@Output()
-	public newTriggered: EventEmitter<void> = new EventEmitter<void>();
+	public newTriggered = new EventEmitter<void>();
 
 	/**
 	 * Callback function to be called when the "Reset" button is clicked.
 	 * The form model object is passed as parameter to this function.
 	 */
 	@Output()
-	public resetTriggered: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+	public resetTriggered = new EventEmitter<FormGroup>();
 
 	/**
 	 * Callback function to be called when the "Search" button is clicked.
 	 * The form model object is passed as parameter to this function.
 	 */
 	@Output()
-	public searchTriggered: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+	public searchTriggered = new EventEmitter<FormGroup | undefined>();
 
 	/**
 	 * Callback function to be called when the visibility of the generic form changes.
 	 * A boolean is passed as parameter to indicate whether the generic form is visible or not.
 	 */
 	@Output()
-	public formVisibilityChanged?: EventEmitter<boolean> = new EventEmitter<boolean>();
+	public formVisibilityChanged? = new EventEmitter<boolean>();
 
 	/**
 	 * Reference to the child search form component. Such component is looked up by the `searchForm` template reference variable.
@@ -191,23 +191,23 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * See https://angular.io/guide/template-syntax#template-reference-variables--var- for more info about template reference variables.
 	 */
 	@ContentChild("searchForm")
-	public searchFormComponent: StarkSearchFormComponent<unknown>;
+	public searchFormComponent!: StarkSearchFormComponent<unknown>;
 
 	/**
 	 * Configuration object for the the {@link StarkActionBarComponent} to be shown in the search form.
 	 */
-	public actionBarConfig: StarkActionBarConfig;
+	public actionBarConfig: StarkActionBarConfig = { actions: [] };
 
 	/**
 	 * Object containing normalized options that will be used to generate config for the the {@link StarkActionBarComponent}
 	 * to be shown in the search form.
 	 */
-	public normalizedFormActionBarConfig: StarkGenericSearchActionBarConfigRequired;
+	public normalizedFormActionBarConfig!: StarkGenericSearchActionBarConfigRequired;
 
 	/**
 	 * Object containing normalized options for the different buttons to be shown in the search form.
 	 */
-	public normalizedFormButtonsConfig: StarkGenericSearchFormButtonsConfigRequired;
+	public normalizedFormButtonsConfig!: StarkGenericSearchFormButtonsConfigRequired;
 
 	/**
 	 * Reference to the FormGroup instance bound to the search form.
@@ -215,7 +215,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * In the HTML, the component defining the search form content should be exported as `searchForm`
 	 * so that it is accessible from the Stark Generic Search component. See example above.
 	 */
-	public genericForm: FormGroup;
+	public get genericForm(): FormGroup {
+		return this.searchFormComponent.searchForm;
+	}
 
 	/**
 	 * Class constructor
@@ -235,8 +237,8 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * Component lifecycle hook
 	 */
 	public ngAfterContentInit(): void {
-		if (typeof this.searchFormComponent !== "undefined") {
-			this.genericForm = this.searchFormComponent.searchForm;
+		if (!this.searchFormComponent) {
+			throw new Error("StarkGenericSearchComponent: the searchForm content child is required.");
 		}
 	}
 

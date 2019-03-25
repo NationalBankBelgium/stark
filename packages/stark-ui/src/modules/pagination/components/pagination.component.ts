@@ -23,7 +23,7 @@ import  isEqual  from "lodash-es/isEqual";
 /**
  * Name of the component
  */
-const componentName: string = "stark-pagination";
+const componentName = "stark-pagination";
 
 export type StarkPaginationComponentMode = "compact";
 
@@ -66,7 +66,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	 * StarkPaginationConfig object containing main information for the pagination.
 	 */
 	@Input()
-	public paginationConfig: StarkPaginationConfig;
+	public paginationConfig!: StarkPaginationConfig;
 
 	/**
 	 * Output event emitter that will emit the paginate event when the pagination changed.
@@ -87,10 +87,10 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 		this._paginationInput = newValue;
 	}
 
-	public _paginationInput: number;
-	public previousPaginationInput: number;
-	public previousPageIndex: number;
-	public pageNumbers: (string | number)[];
+	public _paginationInput = 0;
+	public previousPaginationInput = 0;
+	public previousPageIndex = 0;
+	public pageNumbers: (string | number)[] = [];
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -109,7 +109,6 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	public ngOnInit(): void {
 		this.paginationConfig = this.normalizePaginationConfig(this.paginationConfig);
 		this.setMatPaginatorProperties(this.paginationConfig);
-		this.previousPageIndex = 0;
 
 		this.htmlSuffixId = this.htmlSuffixId || "pagination";
 
@@ -161,31 +160,23 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	 * Creates a normalized paginationConfig to be used by this component.
 	 * If the given config is undefined it will set totalItems only, otherwise it sets default values for the missing properties
 	 */
-	// FIXME: refactor this function to reduce its cognitive complexity
-	/* tslint:disable-next-line:cognitive-complexity */
-	public normalizePaginationConfig(config: StarkPaginationConfig | undefined): StarkPaginationConfig {
-		let normalizedConfig: StarkPaginationConfig;
+	public normalizePaginationConfig(config: StarkPaginationConfig): StarkPaginationConfig {
 		if (!config) {
 			// initialize paginationConfig to prevent errors in other functions depending on this config
-			normalizedConfig = {
-				totalItems: 0
-			};
-			this.logger.warn(componentName + ": No configuration defined. TotalItems set to 0 by default");
-		} else {
-			normalizedConfig = {
-				itemsPerPageOptions: config.itemsPerPageOptions || [5, 10, 15],
-				itemsPerPage: config.itemsPerPage || (config.itemsPerPageOptions ? config.itemsPerPageOptions[0] : 5),
-				page: config.page || 1,
-				isExtended: config.isExtended !== undefined ? config.isExtended : false,
-				itemsPerPageIsPresent: config.itemsPerPageIsPresent !== undefined ? config.itemsPerPageIsPresent : true,
-				pageNavIsPresent: config.pageNavIsPresent !== undefined ? config.pageNavIsPresent : true,
-				pageInputIsPresent: config.pageInputIsPresent !== undefined ? config.pageInputIsPresent : true,
-				totalItems: config.totalItems !== undefined ? config.totalItems : 0
-			};
-			this.logger.debug(componentName + ": normalized pagination config: ", normalizedConfig);
+			this.logger.warn(componentName + ": No configuration defined in pagination component. TotalItems set to 0 by default");
+			return { totalItems: 0 };
 		}
 
-		return normalizedConfig;
+		return {
+			itemsPerPageOptions: config.itemsPerPageOptions || [5, 10, 15],
+			itemsPerPage: config.itemsPerPage || (config.itemsPerPageOptions ? config.itemsPerPageOptions[0] : 5),
+			page: config.page || 1,
+			isExtended: config.isExtended !== undefined ? config.isExtended : false,
+			itemsPerPageIsPresent: config.itemsPerPageIsPresent !== undefined ? config.itemsPerPageIsPresent : true,
+			pageNavIsPresent: config.pageNavIsPresent !== undefined ? config.pageNavIsPresent : true,
+			pageInputIsPresent: config.pageInputIsPresent !== undefined ? config.pageInputIsPresent : true,
+			totalItems: config.totalItems !== undefined ? config.totalItems : 0
+		};
 	}
 
 	/**
@@ -288,7 +279,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	 * Get total number of pages available based on itemsPerPage and totalItems.
 	 */
 	public getTotalPages(): number {
-		let calculatedTotalPages: number = 0;
+		let calculatedTotalPages = 0;
 		if (this.paginationConfig) {
 			const itemsPerPage: number = this.isZero(<number>this.paginationConfig.itemsPerPage)
 				? 1

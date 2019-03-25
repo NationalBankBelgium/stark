@@ -22,7 +22,7 @@ import { StarkUIApplicationState } from "../../../common/store";
 @Injectable()
 export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicatorService {
 	protected progressIndicatorMap$: Observable<Map<string, StarkProgressIndicatorConfig>>;
-	protected progressIndicatorMap: Map<string, StarkProgressIndicatorConfig>;
+	protected progressIndicatorMap: Map<string, StarkProgressIndicatorConfig> = new Map();
 
 	/**
 	 * Map containing a subject per topic
@@ -71,8 +71,8 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 	 * to increase the pendingListenersCount by 1
 	 */
 	public show(topic: string): void {
-		const maxRetries: number = 15;
-		const interval: number = 50; // milliseconds
+		const maxRetries = 15;
+		const interval = 50; // milliseconds
 		const logMessagePrefix: string = starkProgressIndicatorServiceName + ": Show - progress indicator for topic '" + topic + "'";
 
 		if (!this.topicsShowMap$.has(topic)) {
@@ -90,7 +90,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 		})
 			.pipe(
 				retryWhen((errors: Observable<any>) => {
-					let retries: number = 0;
+					let retries = 0;
 					return errors.pipe(
 						flatMap((error: any) => {
 							if (retries < maxRetries) {
@@ -114,7 +114,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 				})
 			)
 			.subscribe({
-				error: (error: string) => this.logger.error(error)
+				error: (error: string): void => this.logger.error(error)
 			});
 	}
 
@@ -149,9 +149,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 		}
 
 		composedHide$.subscribe({
-			error: (error: string) => {
-				this.logger.error(error);
-			}
+			error: (error: string): void => this.logger.error(error)
 		});
 	}
 

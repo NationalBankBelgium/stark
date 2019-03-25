@@ -22,7 +22,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 	let mockProgressIndicatorMap: Map<string, StarkProgressIndicatorConfig>;
 
-	const dummyTopic: string = "some topic";
+	const dummyTopic = "some topic";
 	const dummyType: StarkProgressIndicatorType = StarkProgressIndicatorType.SPINNER;
 	let progressIndicatorState$: BehaviorSubject<Map<string, StarkProgressIndicatorConfig>>;
 
@@ -505,8 +505,8 @@ describe("Service: StarkProgressIndicatorService", () => {
 });
 
 class ProgressIndicatorServiceHelper extends StarkProgressIndicatorServiceImpl {
-	public progressIndicatorMap: Map<string, StarkProgressIndicatorConfig>;
-	public progressIndicatorMap$: Observable<Map<string, StarkProgressIndicatorConfig>>;
+	public progressIndicatorMap!: Map<string, StarkProgressIndicatorConfig>;
+	public progressIndicatorMap$!: Observable<Map<string, StarkProgressIndicatorConfig>>;
 
 	public constructor(logger: StarkLoggingService, store: Store<StarkUIApplicationState>) {
 		super(logger, store);

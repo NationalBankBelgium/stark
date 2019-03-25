@@ -18,7 +18,7 @@ import { StarkSessionCardComponent } from "./session-card.component";
 	`
 })
 class TestComponent {
-	public cardTitle: string = "";
+	public cardTitle = "";
 }
 
 describe("SessionCardComponent", () => {
@@ -42,7 +42,7 @@ describe("SessionCardComponent", () => {
 	});
 
 	it("Component should render", () => {
-		const expected: string = "TEST";
+		const expected = "TEST";
 
 		const sessionCard: HTMLElement | null = fixture.nativeElement.querySelector("stark-session-card");
 		if (!sessionCard) {
@@ -65,7 +65,7 @@ describe("SessionCardComponent", () => {
 		component.cardTitle = "Testing-title";
 		fixture.detectChanges();
 
-		const expected: string = "Testing-title";
+		const expected = "Testing-title";
 
 		const titleElement: HTMLElement | null = fixture.nativeElement.querySelector("stark-session-card mat-card-header mat-card-title");
 		if (!titleElement) {

@@ -20,7 +20,7 @@ import Spy = jasmine.Spy;
 })
 class TestHostComponent {
 	@ViewChild(StarkBreadcrumbComponent)
-	public breadcrumbComponent: StarkBreadcrumbComponent;
+	public breadcrumbComponent!: StarkBreadcrumbComponent;
 	public breadcrumbConfig?: StarkBreadcrumbConfig;
 }
 
@@ -29,10 +29,10 @@ describe("BreadcrumbComponent", () => {
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
-	const childConst: string = "child";
-	const parentConst: string = "parent";
-	const grandParentConst: string = "grandparent";
-	const rootAncesterConst: string = "root ancestor";
+	const childConst = "child";
+	const parentConst = "parent";
+	const grandParentConst = "grandparent";
+	const rootAncesterConst = "root ancestor";
 
 	// component bindings values
 	const breadcrumbConfig: StarkBreadcrumbConfig = {
@@ -69,14 +69,14 @@ describe("BreadcrumbComponent", () => {
 	mockStateTreeParams.set(parentConst, { param5: "param 5", param6: "param 6" });
 	mockStateTreeParams.set(grandParentConst, { param3: "param 3", param4: "param 4" });
 	mockStateTreeParams.set(rootAncesterConst, { param1: "param 1", param2: "param 2" });
+
 	const mockStateTreeData: Map<string, any> = new Map<string, unknown>();
 	mockStateTreeData.set(childConst, { translationKey: "CHILD" });
 	mockStateTreeData.set(parentConst, { translationKey: "PARENT" });
 	mockStateTreeData.set(grandParentConst, { translationKey: "GRANDPARENT" });
 	mockStateTreeData.set(rootAncesterConst, { translationKey: "ROOT_ANCESTOR" });
-	const mockDeregisterTransitionHookFn: () => void = () => {
-		return "transition hook deregistered";
-	};
+
+	const mockDeregisterTransitionHookFn: Spy<() => void> = jasmine.createSpy("deregistersTransitionHook");
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
@@ -122,7 +122,7 @@ describe("BreadcrumbComponent", () => {
 		const pathLinks: DebugElement[] = hostFixture.debugElement.queryAll(By.css("a"));
 		expect(pathLinks.length).toBe(4);
 
-		for (let i: number = 0; i < pathLinks.length; i++) {
+		for (let i = 0; i < pathLinks.length; i++) {
 			expect(pathLinks[i].properties["id"]).toBe(breadcrumbConfig.breadcrumbPaths[i].id);
 			expect(pathLinks[i].nativeElement.innerHTML).toBe(breadcrumbConfig.breadcrumbPaths[i].translationKey);
 		}
@@ -152,7 +152,7 @@ describe("BreadcrumbComponent", () => {
 		const pathLinks: DebugElement[] = hostFixture.debugElement.queryAll(By.css("a"));
 		expect(pathLinks.length).toBe(2);
 
-		for (let i: number = 0; i < pathLinks.length; i++) {
+		for (let i = 0; i < pathLinks.length; i++) {
 			expect(pathLinks[i].properties["id"]).toBe(newBreadcrumbConfig.breadcrumbPaths[i].id);
 			expect(pathLinks[i].nativeElement.innerHTML).toBe(newBreadcrumbConfig.breadcrumbPaths[i].translationKey);
 		}
@@ -192,20 +192,24 @@ describe("BreadcrumbComponent", () => {
 	});
 
 	describe("ngOnDestroy", () => {
-		it("should call the transition hook deregistration function if it is defined", () => {
-			component.transitionHookDeregisterFn = mockDeregisterTransitionHookFn;
-			spyOn(component, "transitionHookDeregisterFn");
-
-			component.ngOnDestroy();
-
-			expect(component.transitionHookDeregisterFn).toBeDefined();
-			expect(component.transitionHookDeregisterFn).toHaveBeenCalledTimes(1);
+		beforeEach(() => {
+			mockDeregisterTransitionHookFn.calls.reset();
 		});
 
-		it("should NOT call the transition hook deregistration function if it is undefined", () => {
-			component.ngOnDestroy();
+		it("should call the transition hook deregistration function when no config is set", () => {
+			hostComponent.breadcrumbConfig = undefined;
+			hostFixture.detectChanges();
 
-			expect(component.transitionHookDeregisterFn).toBeUndefined();
+			component.ngOnDestroy();
+			expect(mockDeregisterTransitionHookFn).toHaveBeenCalledTimes(1);
+		});
+
+		it("should NOT call the transition hook deregistration function when a config is set", () => {
+			hostComponent.breadcrumbConfig = breadcrumbConfig;
+			hostFixture.detectChanges();
+
+			component.ngOnDestroy();
+			expect(mockDeregisterTransitionHookFn).not.toHaveBeenCalled();
 		});
 	});
 
@@ -228,7 +232,7 @@ describe("BreadcrumbComponent", () => {
 
 			expect(result.length).toBe(mockStateTreeParams.size);
 
-			for (let idx: number = 0; idx < result.length; idx++) {
+			for (let idx = 0; idx < result.length; idx++) {
 				expect(result[idx].id).toBe("breadcrumb-path-" + breadcrumbConfig.breadcrumbPaths[idx].state);
 				expect(result[idx].state).toBe(breadcrumbConfig.breadcrumbPaths[idx].state);
 				expect(result[idx].stateParams).toEqual(breadcrumbConfig.breadcrumbPaths[idx].stateParams);

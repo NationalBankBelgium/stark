@@ -36,16 +36,19 @@ describe("DropdownComponent", () => {
 	})
 	class TestHostNgControlComponent {
 		@ViewChild(StarkDropdownComponent)
-		public dropdownComponent: StarkDropdownComponent;
-		public dropdownId: string;
-		public formControl: FormControl = new FormControl();
+		public dropdownComponent!: StarkDropdownComponent;
+
+		public dropdownId?: string;
+		public formControl = new FormControl();
 		// public header?: string;
 		public multiSelect?: boolean;
 		public optionIdProperty?: string;
 		public optionLabelProperty?: string;
-		public options: any[];
-		public placeholder: string;
-		public selectionChanged: Function;
+		public options: any[] = [];
+		public placeholder?: string;
+		public selectionChanged = (_value: any | any[]): void => {
+			/*noop*/
+		};
 		public required?: boolean;
 	}
 
@@ -69,17 +72,20 @@ describe("DropdownComponent", () => {
 	})
 	class TestHostValueComponent {
 		@ViewChild(StarkDropdownComponent)
-		public dropdownComponent: StarkDropdownComponent;
-		public dropdownId: string;
+		public dropdownComponent!: StarkDropdownComponent;
+
+		public dropdownId?: string;
 		// public header?: string;
-		public disabled: boolean;
+		public disabled?: boolean;
 		public multiSelect?: boolean;
 		public optionIdProperty?: string;
 		public optionLabelProperty?: string;
-		public options: any[];
-		public placeholder: string;
+		public options?: any[];
+		public placeholder?: string;
 		public value: any | any[];
-		public selectionChanged: (value: any | any[]) => void;
+		public selectionChanged = (_value: any | any[]): void => {
+			/*noop*/
+		};
 		public required?: boolean;
 	}
 
@@ -101,15 +107,15 @@ describe("DropdownComponent", () => {
 	})
 	class TestHostComponent {
 		@ViewChild(StarkDropdownComponent)
-		public dropdownComponent: StarkDropdownComponent;
-		public dropdownId: string;
+		public dropdownComponent!: StarkDropdownComponent;
+		public dropdownId?: string;
 		// public header?: string;
-		public disabled: boolean;
+		public disabled?: boolean;
 		public multiSelect?: boolean;
 		public optionIdProperty?: string;
 		public optionLabelProperty?: string;
-		public options: any[];
-		public placeholder: string;
+		public options: any[] = [];
+		public placeholder?: string;
 		public required?: boolean;
 	}
 
@@ -133,23 +139,21 @@ describe("DropdownComponent", () => {
 			label: "label2"
 		}
 	];
-	const dropdownPlaceholder: string = "dropdown placeholder";
-	const dropdownValue: string = "dropdownValue";
-	const dropdownId: string = "dropdownId";
-	const dropdownOnChange: any = () => {
-		return "dummyDropdownOnChange";
-	};
-	const dropdownOptionIdProperty: string = "id";
-	const dropdownOptionLabelProperty: string = "label";
+	const dropdownPlaceholder = "dropdown placeholder";
+	const dropdownValue = "dropdownValue";
+	const dropdownId = "dropdownId";
+	const dropdownOnChange = (): string => "dummyDropdownOnChange";
+	const dropdownOptionIdProperty = "id";
+	const dropdownOptionLabelProperty = "label";
 
-	const matSelectSelector: string = "mat-select";
-	const matOptionSelector: string = ".mat-option";
-	const matOptionTextSelector: string = ".mat-option-text";
-	const matSelectTagSelector: string = "<mat-select";
+	const matSelectSelector = "mat-select";
+	const matOptionSelector = ".mat-option";
+	const matOptionTextSelector = ".mat-option-text";
+	const matSelectTagSelector = "<mat-select";
 
-	const reflectIdAttr: string = "ng-reflect-id";
-	const reflectPlaceholderAttr: string = "ng-reflect-placeholder";
-	const reflectValueAttr: string = "ng-reflect-value";
+	const reflectIdAttr = "ng-reflect-id";
+	const reflectPlaceholderAttr = "ng-reflect-placeholder";
+	const reflectValueAttr = "ng-reflect-value";
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
@@ -213,11 +217,11 @@ describe("DropdownComponent", () => {
 			});
 
 			it("should NOT have any inputs set", () => {
-				expect(component.dropdownId).toBe(hostComponent.dropdownId);
+				expect(component.dropdownId).toBe(<any>hostComponent.dropdownId);
 				expect(component.selectionChanged).toBeDefined();
 				expect(component.multiSelect).toBe(!!hostComponent.multiSelect);
 				expect(component.options).toBe(hostComponent.options);
-				expect(component.placeholder).toBe(hostComponent.placeholder);
+				expect(component.placeholder).toBe(<any>hostComponent.placeholder);
 				expect(component.disabled).toBeUndefined();
 				expect(component.required).toBe(!!hostComponent.required);
 			});
@@ -298,7 +302,7 @@ describe("DropdownComponent", () => {
 				const optionElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(matOptionSelector);
 				expect(optionElements.length).toBe(simpleOptions.length);
 
-				for (let index: number = 0; index < optionElements.length; index++) {
+				for (let index = 0; index < optionElements.length; index++) {
 					const option: Element = optionElements[index];
 					const optionText: Element = <Element>option.querySelector(matOptionTextSelector);
 					expect(optionText.textContent).toContain(simpleOptions[index]);
@@ -315,7 +319,7 @@ describe("DropdownComponent", () => {
 				const optionElements: NodeListOf<Element> = overlayContainerElement.querySelectorAll(matOptionSelector);
 				expect(optionElements.length).toBe(complexOptions.length);
 
-				for (let index: number = 0; index < optionElements.length; index++) {
+				for (let index = 0; index < optionElements.length; index++) {
 					const option: Element = optionElements[index];
 					const optionText: Element = <Element>option.querySelector(matOptionTextSelector);
 					expect(optionText.textContent).toContain(complexOptions[index][dropdownOptionLabelProperty]);
@@ -324,7 +328,7 @@ describe("DropdownComponent", () => {
 		});
 
 		describe("should render checkboxes in 'mat-option' based on 'multiSelect' value", () => {
-			const checkboxSelector: string = ".mat-option .mat-pseudo-checkbox";
+			const checkboxSelector = ".mat-option .mat-pseudo-checkbox";
 
 			it("should display a checkbox for every option in the dropdown when multiSelect is set to 'true'", () => {
 				hostComponent.multiSelect = true;

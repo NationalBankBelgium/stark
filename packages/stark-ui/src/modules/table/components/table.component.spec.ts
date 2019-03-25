@@ -46,16 +46,16 @@ import createSpy = jasmine.createSpy;
 })
 class TestHostComponent {
 	@ViewChild(StarkTableComponent)
-	public tableComponent: StarkTableComponent;
+	public tableComponent!: StarkTableComponent;
 
-	public columnProperties: StarkTableColumnProperties[];
+	public columnProperties?: StarkTableColumnProperties[];
 	public dummyData: object[] = [];
 	public fixedHeader?: string;
 	public rowsSelectable?: boolean;
 	public multiSelect?: string;
 	public multiSort?: string;
-	public tableRowActions: StarkTableRowActions;
-	public tableFilter: StarkTableFilter;
+	public tableRowActions?: StarkTableRowActions;
+	public tableFilter?: StarkTableFilter;
 	public orderProperties?: string[];
 	public rowClassNameFn?: (row: object, index: number) => string;
 	public rowClickHandler?: (row: object) => void;
@@ -115,7 +115,7 @@ describe("TableComponent", () => {
 				{
 					// See https://github.com/NationalBankBelgium/stark/issues/1088
 					provide: HAMMER_LOADER,
-					useValue: () => new Subject<any>().toPromise()
+					useValue: (): Promise<any> => new Subject<any>().toPromise()
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
@@ -149,7 +149,7 @@ describe("TableComponent", () => {
 			expect(component.multiSelect).toBe(hostComponent.multiSelect);
 			expect(component.multiSort).toBe(hostComponent.multiSort);
 			expect(component.orderProperties).toBe(hostComponent.orderProperties);
-			expect(component.tableRowActions).toBe(hostComponent.tableRowActions);
+			expect(component.tableRowActions).toBe(<any>hostComponent.tableRowActions);
 		});
 	});
 
@@ -780,7 +780,8 @@ describe("TableComponent", () => {
 
 			tableHeaderElements.forEach((tableHeaderElement: HTMLTableHeaderCellElement) => {
 				const text: string = (tableHeaderElement.textContent || "").trim();
-				const column: StarkTableColumnProperties | undefined = hostComponent.columnProperties.find(
+
+				const column: StarkTableColumnProperties | undefined = (<StarkTableColumnProperties[]>hostComponent.columnProperties).find(
 					({ name }: StarkTableColumnProperties) => name === text
 				);
 				expect(column).toBeTruthy();
@@ -799,7 +800,7 @@ describe("TableComponent", () => {
 
 	describe("getUnmetFilterCriteria", () => {
 		it("should return an empty criteria array when the item met ALL the filter criteria", () => {
-			const itemStr: string = "some dummy item string";
+			const itemStr = "some dummy item string";
 			const itemObj: object = {
 				name: "some dummy name",
 				user: "item string"
@@ -813,7 +814,7 @@ describe("TableComponent", () => {
 		});
 
 		it("should return a non-empty criteria array when the item met SOME or NONE filter criteria", () => {
-			const itemStr: string = "some dummy item string";
+			const itemStr = "some dummy item string";
 			const itemObj: object = {
 				name: "some dummy name",
 				user: "item string"
@@ -919,8 +920,8 @@ describe("TableComponent", () => {
 	});
 
 	describe("resetFilterValueOnDataChange", () => {
-		const dummyGlobalFilterValue: string = "dummy global filter value";
-		const dummyColumnFilterValue: string = "dummy column filter value";
+		const dummyGlobalFilterValue = "dummy global filter value";
+		const dummyColumnFilterValue = "dummy column filter value";
 
 		it("should reset the global filter value and return TRUE when resetGlobalFilterOnDataChange is true", () => {
 			hostComponent.tableFilter = {
@@ -993,7 +994,7 @@ describe("TableComponent", () => {
 		beforeEach(() => {
 			hostComponent.rowClassNameFn = returnEvenAndOdd;
 			hostComponent.columnProperties = [
-				{ name: "id", cellClassName: (value: any) => (value === 1 ? "one" : "") },
+				{ name: "id", cellClassName: (value: any): string => (value === 1 ? "one" : "") },
 				{ name: "description", cellClassName: "description-body-cell", headerClassName: "description-header-cell" }
 			];
 			hostComponent.dummyData = dummyData;

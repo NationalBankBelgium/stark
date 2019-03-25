@@ -147,7 +147,7 @@ function insertMessage(messageArray: StarkMessage[], newMessage: StarkMessage): 
 		return messageArray;
 	}
 
-	let index: number = 0;
+	let index = 0;
 	for (const message of messageArray) {
 		if (<number>message.priority >= <number>newMessage.priority) {
 			break;

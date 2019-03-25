@@ -20,7 +20,7 @@ import  sortBy  from "lodash-es/sortBy";
 /**
  * Name of the component
  */
-const componentName: string = "stark-route-search";
+const componentName = "stark-route-search";
 
 /**
  * Direction in which the Route Search field can be displayed
@@ -81,7 +81,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * The list of {@link StarkRouteSearchEntry}'s objects filtered by the auto-complete field
 	 */
-	public filteredRouteEntries: Observable<StarkRouteSearchEntry[]>;
+	public filteredRouteEntries!: Observable<StarkRouteSearchEntry[]>;
 
 	/**
 	 * The list of routes to be displayed
@@ -91,7 +91,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Whether the input field must be hidden or not
 	 */
-	public hide: boolean = true;
+	public hide = true;
 
 	/**
 	 * Class constructor

@@ -5,7 +5,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-app-logo";
+const componentName = "stark-app-logo";
 
 /**
  * Component to display the application's logo

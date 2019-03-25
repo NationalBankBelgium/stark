@@ -41,7 +41,7 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 					useValue: createSpyObj("MatDialogSpy", ["open", "close", "closeAll"])
 				},
 				{ provide: StarkSessionTimeoutWarningDialogComponent, useValue: StarkSessionTimeoutWarningDialogComponent },
-				{ provide: STARK_SESSION_SERVICE, useFactory: () => new MockStarkSessionService() },
+				{ provide: STARK_SESSION_SERVICE, useFactory: (): MockStarkSessionService => new MockStarkSessionService() },
 				{ provide: STARK_SESSION_UI_CONFIG, useValue: new StarkSessionUiConfig() }
 			]
 		}).compileComponents();
@@ -65,15 +65,13 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 
 	describe("On StarkSessionTimeoutWarning$", () => {
 		it("Should open a dialog when the timeout countdown begins", () => {
-			const afterClosedResult: string = "keep-logged";
+			const afterClosedResult = "keep-logged";
 			const afterClosed$: Subject<string> = new Subject();
 
 			(<Spy<(...args: any[]) => Partial<MatDialogRef<StarkSessionTimeoutWarningDialogComponent, string>>>>(
 				mockDialogService.open
 			)).and.returnValue({
-				afterClosed: () => {
-					return afterClosed$;
-				}
+				afterClosed: (): Subject<string> => afterClosed$
 			});
 
 			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);

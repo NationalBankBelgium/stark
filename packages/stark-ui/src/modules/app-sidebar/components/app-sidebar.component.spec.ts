@@ -16,7 +16,7 @@ import { MockAppSidebarService } from "../testing/app-sidebar.mock";
 /**
  * Defines the breakpoint set by the app-sidebar component.
  */
-const BREAKPOINT_STRING: string = "(min-width: 1280px)";
+const BREAKPOINT_STRING = "(min-width: 1280px)";
 let _fakeBreakPointObservable: Subject<BreakpointState>;
 
 /**
@@ -53,7 +53,7 @@ describe("AppSidebarComponent", () => {
 				expect(lifecycleHook).toBe(StarkRoutingTransitionHook.ON_SUCCESS);
 				expect(matchCriteria).toEqual({});
 				mockNavigationTrigger = <() => void>callback;
-				return () => {
+				return (): void => {
 					/*Do Nothing*/
 				};
 			}

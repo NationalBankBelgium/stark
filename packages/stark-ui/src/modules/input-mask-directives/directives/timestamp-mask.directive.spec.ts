@@ -22,8 +22,8 @@ describe("TimestampMaskDirective", () => {
 	})
 	class TestComponent {
 		public timestampMaskConfig: StarkTimestampMaskConfig = timestampMaskConfig;
-		public ngModelValue: string = "";
-		public formControl: FormControl = new FormControl("");
+		public ngModelValue = "";
+		public formControl = new FormControl("");
 	}
 
 	function getTemplate(timestampMaskDirective: string): string {

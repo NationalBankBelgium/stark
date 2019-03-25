@@ -30,7 +30,7 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 	/**
 	 * Reference of the currently displayed toast notification
 	 */
-	public currentToast: MatSnackBarRef<StarkToastNotificationComponent>;
+	public currentToast?: MatSnackBarRef<StarkToastNotificationComponent>;
 
 	/**
 	 * Options for the toast notifications
@@ -65,29 +65,31 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 			this.currentToastResult$.complete();
 			this.currentToastResult$ = undefined;
 		}
-		return new Observable((observer: Observer<StarkToastNotificationResult>) => {
-			const config: MatSnackBarConfig = this.getConfig(message);
-			this.currentToastResult$ = observer;
-			this.currentToast = this.snackBar.openFromComponent(StarkToastNotificationComponent, config);
-			this.currentToast
-				.afterDismissed()
-				.pipe(
-					tap((toastDismissedEvent: MatSnackBarDismiss) => {
-						// emit on the observer only if it is the current toast
-						// otherwise, it means it is a previous toast that is being closed by a new one
-						if (this.currentToastResult$ === observer && !observer.closed) {
-							if (!toastDismissedEvent.dismissedByAction) {
-								observer.next(StarkToastNotificationResult.CLOSED_ON_DELAY_TIMEOUT);
-							} else {
-								observer.next(StarkToastNotificationResult.ACTION_CLICKED);
+		return new Observable(
+			(observer: Observer<StarkToastNotificationResult>): void => {
+				const config: MatSnackBarConfig = this.getConfig(message);
+				this.currentToastResult$ = observer;
+				this.currentToast = this.snackBar.openFromComponent(StarkToastNotificationComponent, config);
+				this.currentToast
+					.afterDismissed()
+					.pipe(
+						tap((toastDismissedEvent: MatSnackBarDismiss) => {
+							// emit on the observer only if it is the current toast
+							// otherwise, it means it is a previous toast that is being closed by a new one
+							if (this.currentToastResult$ === observer && !observer.closed) {
+								if (!toastDismissedEvent.dismissedByAction) {
+									observer.next(StarkToastNotificationResult.CLOSED_ON_DELAY_TIMEOUT);
+								} else {
+									observer.next(StarkToastNotificationResult.ACTION_CLICKED);
+								}
+								this.ref.tick();
 							}
-							this.ref.tick();
-						}
-						observer.complete();
-					})
-				)
-				.subscribe();
-		});
+							observer.complete();
+						})
+					)
+					.subscribe();
+			}
+		);
 	}
 
 	public hide(): void {
@@ -95,7 +97,9 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 			this.currentToastResult$.next(StarkToastNotificationResult.HIDDEN);
 			this.currentToastResult$.complete();
 			this.currentToastResult$ = undefined;
-			this.currentToast.dismiss();
+			if (this.currentToast) {
+				this.currentToast.dismiss();
+			}
 		}
 	}
 
