@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
@@ -12,30 +12,22 @@ const DUMMY_DATA: object[] = [
 	selector: "showcase-table-with-selection",
 	templateUrl: "./table-with-selection.component.html"
 })
-export class TableWithSelectionComponent implements OnInit {
-	public data: object[];
+export class TableWithSelectionComponent {
+	public data: object[] = DUMMY_DATA;
 
-	public columns: StarkTableColumnProperties[];
+	public columns: StarkTableColumnProperties[] = [
+		{ name: "id", label: "Id", isFilterable: true, isSortable: true },
+		{
+			name: "title",
+			label: "Title",
+			cellFormatter: (value: { label: string }): string => "~" + value.label
+		},
+		{ name: "description", label: "Description" }
+	];
 
-	public filter: StarkTableFilter;
+	public filter: StarkTableFilter = { globalFilterPresent: false, columns: [] };
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
-
-	public ngOnInit(): void {
-		this.data = DUMMY_DATA;
-
-		this.columns = [
-			{ name: "id", label: "Id", isFilterable: true, isSortable: true },
-			{
-				name: "title",
-				label: "Title",
-				cellFormatter: (value: { label: string }): string => "~" + value.label
-			},
-			{ name: "description", label: "Description" }
-		];
-
-		this.filter = { globalFilterPresent: false, columns: [] };
-	}
 
 	public handleRowSelected(data: object[]): void {
 		this.logger.debug("SELECTED ROW:", data);

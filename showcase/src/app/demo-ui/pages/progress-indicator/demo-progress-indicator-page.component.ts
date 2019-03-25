@@ -1,55 +1,41 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { ReferenceLink } from "../../../shared/components";
+import { Component, Inject } from "@angular/core";
 import {
 	STARK_PROGRESS_INDICATOR_SERVICE,
 	StarkProgressIndicatorConfig,
 	StarkProgressIndicatorService,
 	StarkProgressIndicatorType
 } from "@nationalbankbelgium/stark-ui";
+import { ReferenceLink } from "../../../shared/components";
 
 @Component({
 	selector: "demo-progress-indicator",
 	templateUrl: "./demo-progress-indicator-page.component.html",
 	styleUrls: ["./demo-progress-indicator-page.component.scss"]
 })
-export class DemoProgressIndicatorPageComponent implements OnInit {
-	public show: boolean;
+export class DemoProgressIndicatorPageComponent {
+	public show = false;
 
-	public referenceList: ReferenceLink[];
-	public progressIndicatorConfig: StarkProgressIndicatorConfig;
+	public progressIndicatorConfig: StarkProgressIndicatorConfig = {
+		topic: "progressIndicatorTopic",
+		type: StarkProgressIndicatorType.SPINNER
+	};
 
-	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) private progressService: StarkProgressIndicatorService
-	) {}
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Progress Indicator Component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkProgressIndicatorComponent.html"
+		},
+		{
+			label: "Stark Progress Indicator Directive",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/directives/StarkProgressIndicatorDirective.html"
+		},
+		{
+			label: "Stark Progress Indicator Service",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkProgressIndicatorService.html"
+		}
+	];
 
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.show = false;
-
-		this.referenceList = [
-			{
-				label: "Stark Progress Indicator Component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkProgressIndicatorComponent.html"
-			},
-			{
-				label: "Stark Progress Indicator Directive",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/directives/StarkProgressIndicatorDirective.html"
-			},
-			{
-				label: "Stark Progress Indicator Service",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkProgressIndicatorService.html"
-			}
-		];
-
-		this.progressIndicatorConfig = {
-			topic: "progressIndicatorTopic",
-			type: StarkProgressIndicatorType.SPINNER
-		};
-	}
+	public constructor(@Inject(STARK_PROGRESS_INDICATOR_SERVICE) private progressService: StarkProgressIndicatorService) {}
 
 	public showProgressIndicator(): void {
 		this.show = !this.show;

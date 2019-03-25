@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
 	templateUrl: "./demo-dropdown.component.html"
 })
 export class DemoDropdownComponent {
-	public selectedNumber: string;
+	public selectedNumber = "";
 
 	public numberDropdownOnChange(selectedValue: string): void {
 		this.selectedNumber = selectedValue;

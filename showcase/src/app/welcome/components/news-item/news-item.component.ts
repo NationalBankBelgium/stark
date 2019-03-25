@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
-const componentName: string = "news-item-component";
+const componentName = "news-item-component";
 
 @Component({
 	selector: "news-item",
@@ -9,10 +9,10 @@ const componentName: string = "news-item-component";
 })
 export class NewsItemComponent implements OnInit {
 	@Input()
-	public release: string;
+	public release?: string;
 
 	@Input()
-	public newsDate: string;
+	public newsDate?: string;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService) {}
 

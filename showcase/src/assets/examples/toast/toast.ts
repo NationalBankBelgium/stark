@@ -13,18 +13,23 @@ import {
 	templateUrl: "./demo-toast.component.html"
 })
 /**
- * Example component for the toast notifications
+ * Component to demo the toast notifications
  */
 export class DemoToastComponent {
 	/**
-	 * Message, or ID of message you want to display in the toast (translations applies).
+	 * Message, or ID of message displayed in the message in the message box (translations applies).
 	 */
-	public exampleMessage: string = "Lorem ipsum dolor sit amet, {{value}}";
+	public messageText = "Click one button to test the toast notification.";
+
+	/**
+	 * Message, or ID of message displayed in the toast (translations applies).
+	 */
+	public exampleMessage = "Lorem ipsum dolor sit amet, {{value}}";
 
 	/**
 	 * Memorize the state of the "hide toast" button
 	 */
-	public hideDisabled: boolean = true;
+	public hideDisabled = true;
 
 	/**
 	 * Class constructor
@@ -71,28 +76,29 @@ export class DemoToastComponent {
 				value: "consectetur adipiscing elit. Sed non risus"
 			}
 		};
-		if (delay) {
+		if (typeof delay !== "undefined") {
 			toastData.delay = delay;
 		}
 		this.toastService.show(toastData).subscribe((result: StarkToastNotificationResult) => {
 			/** result contains the type of message sent by the toast service */
 			switch (result) {
 				case StarkToastNotificationResult.CLOSED_ON_DELAY_TIMEOUT:
-					/** Do Something */
+					this.messageText = "Toast closed automatically after delay timeout.";
 					this.hideDisabled = true;
 					break;
 				case StarkToastNotificationResult.ACTION_CLICKED:
-					/** Do Something */
+					this.messageText = "You clicked the 'DISMISS' action!";
 					this.hideDisabled = true;
 					break;
 				case StarkToastNotificationResult.HIDDEN:
-					/** Do Something */
+					this.messageText = "You closed the toast!";
 					this.hideDisabled = true;
 					break;
 				case StarkToastNotificationResult.CLOSED_BY_NEW_TOAST:
-					/** Do Something */
+					this.messageText = "Toast automatically closed before displaying a new one.";
 					break;
 				default:
+					this.messageText = "";
 					this.hideDisabled = true;
 					throw new Error("Unknown toast notification result!!");
 			}

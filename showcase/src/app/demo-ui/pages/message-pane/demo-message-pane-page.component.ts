@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Renderer2 } from "@angular/core";
+import { Component, Inject, Renderer2 } from "@angular/core";
 import {
 	STARK_MESSAGE_PANE_SERVICE,
 	starkMessagePaneAlignClassPrefix,
@@ -9,42 +9,26 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { ReferenceLink } from "../../../shared/components";
 import uniqueId from "lodash-es/uniqueId";
 
-const componentName: string = "demo-message-pane";
-
-/**
- * @ngdoc component
- * @description Layout overview smart component MessagePane
- *
- */
 @Component({
 	selector: "demo-message-pane",
 	templateUrl: "./demo-message-pane-page.component.html"
 })
-export class DemoMessagePanePageComponent implements OnInit {
-	public messagePanePosition: string;
-	public starkMessagePaneString: string = ".stark-message-pane";
-	public referenceList: ReferenceLink[];
+export class DemoMessagePanePageComponent {
+	public messagePanePosition = "right";
+	public starkMessagePaneString = ".stark-message-pane";
+
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Message Pane component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkMessagePaneComponent.html"
+		}
+	];
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_MESSAGE_PANE_SERVICE) public starkMessagePaneService: StarkMessagePaneService,
 		protected renderer: Renderer2
 	) {}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.logger.debug(componentName + ": controller initialized");
-		this.messagePanePosition = "right";
-
-		this.referenceList = [
-			{
-				label: "Stark Message Pane component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkMessagePaneComponent.html"
-			}
-		];
-	}
 
 	public notifyMessages(): void {
 		this.starkMessagePaneService.add([

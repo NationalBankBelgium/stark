@@ -30,17 +30,17 @@ import { APP_MENU_CONFIG } from "./app-menu.config";
 	templateUrl: "./app.component.html"
 })
 export class AppComponent implements OnInit {
-	public mainMenu: StarkMenuConfig;
+	public mainMenu: StarkMenuConfig = APP_MENU_CONFIG;
 	public user?: StarkUser;
-	public time: string;
+	public time: string = moment().format("lll");
 	/**
 	 * Media query for mobile and tablet screens
 	 */
-	public mediaQueryMdSm: string = "(max-width: 960px)";
+	public mediaQueryMdSm = "(max-width: 960px)";
 	/**
 	 * If the app data menu mode is to be used instead of the dropdown mode
 	 */
-	public isMenuModeActive: boolean;
+	public isMenuModeActive = false;
 
 	// tslint:disable:no-big-function
 	public constructor(
@@ -55,7 +55,6 @@ export class AppComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.logger.debug("app: component loaded");
-		this.mainMenu = APP_MENU_CONFIG;
 
 		this.userService
 			.fetchUserProfile()
@@ -63,8 +62,6 @@ export class AppComponent implements OnInit {
 			.subscribe((user: StarkUser) => {
 				this.user = user;
 			});
-
-		this.time = moment().format("lll");
 
 		this.isMenuModeActive = this.breakpointObserver.isMatched([this.mediaQueryMdSm]);
 

@@ -20,7 +20,7 @@ export function getAuthenticationHeaders(user: StarkUser): Map<string, string> {
 
 	const descriptionHeaderValue: string = referenceNumber + devAuthentication.descriptionSeparator + workpost;
 
-	let rolesHeaderValue: string = "";
+	let rolesHeaderValue = "";
 	if (user && user.roles) {
 		rolesHeaderValue = user.roles.join(devAuthentication.roleSeparator);
 	}
@@ -83,29 +83,29 @@ class AppHttpHeaders {
 	/**
 	 * The user's username
 	 */
-	public static NBB_USER_NAME: string = "nbbuser";
+	public static NBB_USER_NAME = "nbbuser";
 	/**
 	 * The user's firstname
 	 */
-	public static NBB_FIRST_NAME: string = "nbbfirstname";
+	public static NBB_FIRST_NAME = "nbbfirstname";
 	/**
 	 * The user's lastname
 	 */
-	public static NBB_LAST_NAME: string = "nbblastname";
+	public static NBB_LAST_NAME = "nbblastname";
 	/**
 	 * The user's email adress
 	 */
-	public static NBB_MAIL: string = "nbbmail";
+	public static NBB_MAIL = "nbbmail";
 	/**
 	 * The user's language
 	 */
-	public static NBB_LANGUAGE: string = "nbblanguage";
+	public static NBB_LANGUAGE = "nbblanguage";
 	/**
 	 * Used to describe the user (team, workspace, ...)
 	 */
-	public static NBB_DESCRIPTION: string = "nbbdescription";
+	public static NBB_DESCRIPTION = "nbbdescription";
 	/**
 	 * The user's groups (ADMIN, ...)
 	 */
-	public static NBB_ROLES: string = "nbbgroups";
+	public static NBB_ROLES = "nbbgroups";
 }

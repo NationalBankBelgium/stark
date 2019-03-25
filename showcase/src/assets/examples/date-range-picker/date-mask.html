@@ -1,19 +1,19 @@
 <div>
 	<stark-date-range-picker
-			rangePickerId="date-mask-range-picker"
-			rangePickerName="date-mask-range-picker"
-			[isDisabled]="isDisabled"
-			[dateFilter]="customDateFilter"
-			dateMask
-			[startDate]="startDate"
-			startDateLabel="From"
-			[endDate]="endDate"
-			endDateLabel="To"
-			[startMinDate]="minDate"
-			[startMaxDate]="maxDate"
-			[endMinDate]="startDate || minDate"
-			[endMaxDate]="maxDate"
-			(dateRangeChanged)="onDateChanged($event)"
+		rangePickerId="date-mask-range-picker"
+		rangePickerName="date-mask-range-picker"
+		startDateLabel="From"
+		endDateLabel="To"
+		[startDate]="startDate"
+		[endDate]="endDate"
+		[startMinDate]="minDate"
+		[startMaxDate]="maxDate"
+		[endMinDate]="startDate || minDate"
+		[endMaxDate]="maxDate"
+		[dateFilter]="customDateFilter"
+		dateMask
+		[isDisabled]="isDisabled"
+		(dateRangeChanged)="onDateChanged($event)"
 	>
 	</stark-date-range-picker>
 	<mat-checkbox [(ngModel)]="isDisabled">isDisabled</mat-checkbox>

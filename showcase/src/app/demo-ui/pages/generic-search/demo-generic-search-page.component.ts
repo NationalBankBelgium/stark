@@ -17,7 +17,38 @@ import { DemoGenericService } from "./services";
 })
 export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria>
 	implements OnInit, OnDestroy {
-	public hideSearch: boolean;
+	public hideSearch = false;
+
+	public columnsProperties: StarkTableColumnProperties[] = [
+		{
+			name: "hero",
+			label: "Hero",
+			isFilterable: true,
+			isSortable: true
+		},
+		{
+			name: "movie",
+			label: "Movie",
+			isFilterable: true,
+			isSortable: true
+		},
+		{
+			name: "year",
+			label: "Year",
+			isFilterable: true,
+			isSortable: true
+		}
+	];
+	public searchResults?: HeroMovie[];
+	public paginationConfig: StarkPaginationConfig = {
+		isExtended: false,
+		itemsPerPage: 10,
+		itemsPerPageOptions: [10, 20, 50],
+		itemsPerPageIsPresent: true,
+		page: 1,
+		pageNavIsPresent: true,
+		pageInputIsPresent: true
+	};
 
 	public referenceList: ReferenceLink[] = [
 		{
@@ -30,14 +61,10 @@ export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent
 		}
 	];
 
-	public columnsProperties: StarkTableColumnProperties[];
-	public searchResults: HeroMovie[];
-	public paginationConfig: StarkPaginationConfig;
-
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) logger: StarkLoggingService,
-		demoGenericService: DemoGenericService,
-		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) progressIndicatorService: StarkProgressIndicatorService
+		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) progressIndicatorService: StarkProgressIndicatorService,
+		demoGenericService: DemoGenericService
 	) {
 		super(demoGenericService, logger, progressIndicatorService);
 
@@ -51,39 +78,7 @@ export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent
 	 */
 	public ngOnInit(): void {
 		super.ngOnInit();
-
 		this.results$.subscribe((genericObjects: HeroMovie[]) => (this.searchResults = genericObjects));
-
-		this.columnsProperties = [
-			{
-				name: "hero",
-				label: "Hero",
-				isFilterable: true,
-				isSortable: true
-			},
-			{
-				name: "movie",
-				label: "Movie",
-				isFilterable: true,
-				isSortable: true
-			},
-			{
-				name: "year",
-				label: "Year",
-				isFilterable: true,
-				isSortable: true
-			}
-		];
-
-		this.paginationConfig = {
-			isExtended: false,
-			itemsPerPage: 10,
-			itemsPerPageOptions: [10, 20, 50],
-			itemsPerPageIsPresent: true,
-			page: 1,
-			pageNavIsPresent: true,
-			pageInputIsPresent: true
-		};
 	}
 
 	/**

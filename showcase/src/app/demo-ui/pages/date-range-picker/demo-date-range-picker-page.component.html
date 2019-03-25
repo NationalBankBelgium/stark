@@ -6,7 +6,7 @@
 			<stark-date-range-picker
 				rangePickerId="id-range-picker"
 				rangePickerName="name-range-picker"
-				[isDisabled]="isDisabled"
+				[isDisabled]="disabled"
 				[dateFilter]="customDateFilter"
 				[startDate]="startDate"
 				startDateLabel="STARK.DATE_RANGE_PICKER.FROM"
@@ -20,7 +20,7 @@
 			>
 			</stark-date-range-picker>
 		</div>
-		<mat-checkbox [(ngModel)]="isDisabled">isDisabled</mat-checkbox>
+		<mat-checkbox [(ngModel)]="disabled">isDisabled</mat-checkbox>
 	</example-viewer>
 
 	<example-viewer

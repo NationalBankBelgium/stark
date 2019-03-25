@@ -1,32 +1,23 @@
-import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { Subscription } from "rxjs";
 import { StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
+
+const DAY_IN_MILLISECONDS = 86400000;
 
 @Component({
 	selector: "demo-date-picker",
 	templateUrl: "./demo-date-picker.component.html"
 })
-export class DemoDatePickerComponent implements OnInit, OnDestroy {
-	public date?: Date;
-	public minDate: Date;
-	public maxDate: Date;
-	public disabled: boolean;
+export class DemoDatePickerComponent {
+	public minDate = new Date();
+	public maxDate = new Date(Date.now() + 30 * DAY_IN_MILLISECONDS);
+
+	public date: Date = new Date();
+	public disabled = false;
+
 	public maskConfig: StarkTimestampMaskConfig = { format: "DD-MM-YYYY" };
 
-	private subscription: Subscription;
-
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
-
-	public ngOnInit(): void {
-		this.minDate = new Date();
-		this.maxDate = new Date();
-		this.maxDate.setMonth(this.maxDate.getMonth() + 6);
-	}
-
-	public ngOnDestroy(): void {
-		this.subscription.unsubscribe();
-	}
 
 	public onDateChanged(): void {
 		this.logger.debug("ngModel: ", this.date);

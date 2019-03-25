@@ -67,13 +67,15 @@ describe("TableOfContents", () => {
 
 	it("should have created links", () => {
 		let links: TableOfContentLink[];
+		fixture.componentInstance.headerSelectors = "h2";
 		fixture.detectChanges();
+
 		const headerSelector: Partial<HTMLElement>[] = [
 			{ innerText: "first link", offsetTop: 25, tagName: "FIRST", id: "1" },
 			{ innerText: "second link", offsetTop: 50, tagName: "SECOND", id: "2" }
 		];
 
-		spyOn(document, "querySelectorAll").and.returnValue(<NodeListOf<HTMLElement>><unknown>headerSelector);
+		spyOn(document, "querySelectorAll").and.returnValue(<NodeListOf<HTMLElement>>(<unknown>headerSelector));
 
 		const expectedFirstLink: TableOfContentLink = { name: "first link", type: "first", top: 5, id: "1", active: false };
 		const expectedSecondLink: TableOfContentLink = { name: "second link", type: "second", top: 30, id: "2", active: false };

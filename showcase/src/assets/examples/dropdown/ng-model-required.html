@@ -3,17 +3,15 @@
 		<stark-dropdown
 			name="serviceDropdown"
 			dropdownId="serviceDropdown"
-			[options]="serviceDropdownOptions"
 			[(ngModel)]="selectedService"
+			[options]="serviceDropdownOptions"
 			placeholder="Select Service"
 			optionIdProperty="id"
 			optionLabelProperty="value"
 			required
 		>
 		</stark-dropdown>
-		<mat-error *ngIf="modelForm.invalid && modelForm.touched">
-			{{ "STARK.VALIDATION.REQUIRED" | translate }}
-		</mat-error>
+		<mat-error *ngIf="modelForm.invalid && modelForm.touched"> This field is required</mat-error>
 	</mat-form-field>
 </form>
 

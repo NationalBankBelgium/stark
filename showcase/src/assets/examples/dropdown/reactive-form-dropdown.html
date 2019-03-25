@@ -1,21 +1,20 @@
 <mat-form-field>
 	<stark-dropdown
 		dropdownId="reactiveFormDropdown"
-		[options]="serviceDropdownOptions"
 		[formControl]="serviceFormControl"
+		[options]="serviceDropdownOptions"
 		placeholder="Select Service"
 		optionIdProperty="id"
 		optionLabelProperty="value"
 		required
 	>
 	</stark-dropdown>
-	<mat-error>
-		<span *ngIf="serviceFormControl.touched && serviceFormControl.hasError('required')">
-			This field is required
-		</span>
+	<mat-error *ngIf="serviceFormControl.touched && serviceFormControl.hasError('required')">
+		This field is required
 	</mat-error>
 </mat-form-field>
+
+<br />
+
 <div *ngIf="serviceFormControl.value">Selected value: {{ serviceFormControl.value }}</div>
-<div>
-	<mat-checkbox (change)="toggleDisabling()" [value]="serviceFormControl.disabled">Disabled</mat-checkbox>
-</div>
+<mat-checkbox (change)="toggleDisabledReactiveFormControl()" [value]="serviceFormControl.disabled">Disabled</mat-checkbox>

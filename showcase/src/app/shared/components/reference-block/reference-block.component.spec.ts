@@ -48,7 +48,7 @@ describe("ReferenceBlockComponent", () => {
 		const pathLinks: DebugElement[] = fixture.debugElement.queryAll(By.css("a"));
 		expect(pathLinks.length).toBe(3);
 
-		for (let i: number = 0; i < pathLinks.length; i++) {
+		for (let i = 0; i < pathLinks.length; i++) {
 			expect(pathLinks[i].nativeElement.innerHTML).toBe(referenceList[i].label);
 			expect(pathLinks[i].nativeElement.getAttribute("href")).toBe(referenceList[i].url);
 		}

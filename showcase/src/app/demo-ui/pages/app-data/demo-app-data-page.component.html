@@ -1,39 +1,51 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.APP_DATA.TITLE</h1>
-<example-viewer [extensions]="['HTML', 'TS']" filesPath="app-data/dropdown" exampleTitle="SHOWCASE.DEMO.APP_DATA.DROPDOWN">
+<example-viewer [extensions]="['HTML', 'TS', 'SCSS']" filesPath="app-data/dropdown" exampleTitle="SHOWCASE.DEMO.APP_DATA.DROPDOWN">
 	<stark-app-data class="dropdown-app-data with-user-image" mode="dropdown">
 		<div class="summary-slot">
 			<i class="stark-user-image"></i>
 			<div class="summary-with-user-image">
-				<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span
-				>: <span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span><br />
-				<span class="label" translate>{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}</span
-				>: <span class="value">{{ time }}</span>
+				<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span>
+				:
+				<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span><br />
+				<span class="label" translate>{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}</span>
+				:
+				<span class="value">{{ time }}</span>
 			</div>
 		</div>
 		<div class="detail-slot">
-			<span class="label" translate>{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}</span
-			>: <span class="value">{{ appMetadata.version }}</span
-			><br />
-			<span class="label" translate>{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}</span
-			>: <span class="value">{{ appMetadata.environment }}</span>
+			<span class="label" translate>{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}</span>
+			:
+			<span class="value">{{ appMetadata.version }}</span>
+			<br />
+			<span class="label" translate>{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}</span>
+			:
+			<span class="value">{{ appMetadata.environment }}</span>
 		</div>
 	</stark-app-data>
 </example-viewer>
 
-<example-viewer [extensions]="['HTML', 'TS']" filesPath="app-data/dropdown" exampleTitle="SHOWCASE.DEMO.APP_DATA.DROPDOWN.NO_AVATAR">
+<example-viewer
+	[extensions]="['HTML', 'TS']"
+	filesPath="app-data/dropdown-no-avatar"
+	exampleTitle="SHOWCASE.DEMO.APP_DATA.DROPDOWN.NO_AVATAR"
+>
 	<stark-app-data mode="dropdown" class="dropdown-app-data">
 		<div class="summary-slot">
-			<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span
-			>: <span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span><br />
-			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}</span
-			>: <span class="value">{{ time }}</span>
+			<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span>
+			:
+			<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span><br />
+			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}</span>
+			:
+			<span class="value">{{ time }}</span>
 		</div>
 		<div class="detail-slot">
-			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}</span
-			>: <span class="value">{{ appMetadata.version }}</span
-			><br />
-			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}</span
-			>: <span class="value">{{ appMetadata.environment }}</span>
+			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}</span>
+			:
+			<span class="value">{{ appMetadata.version }}</span>
+			<br />
+			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}</span>
+			:
+			<span class="value">{{ appMetadata.environment }}</span>
 		</div>
 	</stark-app-data>
 </example-viewer>
@@ -41,16 +53,20 @@
 <example-viewer [extensions]="['HTML', 'TS']" filesPath="app-data/menu" exampleTitle="SHOWCASE.DEMO.APP_DATA.MENU">
 	<stark-app-data mode="menu">
 		<div class="detail-slot">
-			<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span
-			>: <span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span><br />
-			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}</span
-			>: <span class="value">{{ time }}</span
-			><br />
-			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}</span
-			>: <span class="value">{{ appMetadata.version }}</span
-			><br />
-			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}</span
-			>: <span class="value">{{ appMetadata.environment }}</span>
+			<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span>
+			:
+			<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span><br />
+			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}</span>
+			:
+			<span class="value">{{ time }}</span>
+			<br />
+			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}</span>
+			:
+			<span class="value">{{ appMetadata.version }}</span>
+			<br />
+			<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}</span>
+			:
+			<span class="value">{{ appMetadata.environment }}</span>
 		</div>
 	</stark-app-data>
 </example-viewer>

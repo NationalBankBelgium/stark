@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Component, Inject } from "@angular/core";
 import {
 	STARK_PROGRESS_INDICATOR_SERVICE,
 	StarkProgressIndicatorConfig,
@@ -9,29 +8,18 @@ import {
 
 @Component({
 	selector: "demo-progress-indicator",
-	templateUrl: "./demo-progress-indicator-page.component.html"
+	templateUrl: "./demo-progress-indicator.component.html",
+	styleUrls: ["./demo-progress-indicator.component.scss"]
 })
-export class DemoProgressIndicatorPageComponent implements OnInit {
-	private show: boolean;
+export class DemoProgressIndicatorComponent {
+	public show = false;
 
-	public progressIndicatorConfig: StarkProgressIndicatorConfig;
+	public progressIndicatorConfig: StarkProgressIndicatorConfig = {
+		topic: "progressIndicatorTopic",
+		type: StarkProgressIndicatorType.SPINNER
+	};
 
-	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
-		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) private progressService: StarkProgressIndicatorService
-	) {}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.show = false;
-
-		this.progressIndicatorConfig = {
-			topic: "progressIndicatorTopic",
-			type: StarkProgressIndicatorType.SPINNER
-		};
-	}
+	public constructor(@Inject(STARK_PROGRESS_INDICATOR_SERVICE) private progressService: StarkProgressIndicatorService) {}
 
 	public showProgressIndicator(): void {
 		this.show = !this.show;

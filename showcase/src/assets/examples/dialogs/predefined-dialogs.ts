@@ -18,7 +18,7 @@ import {
 	templateUrl: "./demo-dialogs.component.html"
 })
 export class DemoDialogsComponent {
-	public dialogStatus: string;
+	public dialogStatus = "";
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public dialogService: MatDialog) {}
 

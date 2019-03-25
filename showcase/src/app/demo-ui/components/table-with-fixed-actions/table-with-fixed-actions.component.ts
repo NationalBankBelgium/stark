@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "@nationalbankbelgium/stark-ui";
 
@@ -108,55 +108,45 @@ const DUMMY_DATA: object[] = [
 	templateUrl: "./table-with-fixed-actions.component.html",
 	styleUrls: ["./table-with-fixed-actions.component.scss"]
 })
-export class TableWithFixedActionsComponent implements OnInit {
-	public data: object[];
+export class TableWithFixedActionsComponent {
+	public data: object[] = DUMMY_DATA;
 
-	public columns: StarkTableColumnProperties[];
+	public columns: StarkTableColumnProperties[] = [
+		{ name: "id", label: "Id" },
+		{
+			name: "title",
+			label: "SHOWCASE.DEMO.TABLE.LABELS.TITLE",
+			cellFormatter: (value: { label: string }): string => "~" + value.label
+		},
+		{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION" },
+		// tslint:disable:no-duplicate-string
+		{ name: "info", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO" },
+		{ name: "more_info", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO" },
+		{ name: "even_more_info", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO" }
+		// tslint:enable:no-duplicate-string
+	];
 
-	public filter: StarkTableFilter;
+	public filter: StarkTableFilter = { globalFilterPresent: false, columns: [] };
 
-	public tableRowActions: StarkTableRowActions;
+	public tableRowActions: StarkTableRowActions = {
+		actions: [
+			{
+				id: "edit-item",
+				label: "STARK.ICONS.EDIT_ITEM",
+				icon: "pencil",
+				actionCall: ($event: Event, data: object): void => this.logger.debug("EDIT", $event, data),
+				isEnabled: true
+			},
+			{
+				id: "delete-item",
+				label: "STARK.ICONS.DELETE_ITEM",
+				icon: "delete",
+				actionCall: ($event: Event, data: object): void => this.logger.debug("DELETE", $event, data),
+				isEnabled: true
+			}
+		],
+		isFixed: true
+	};
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
-
-	public ngOnInit(): void {
-		this.data = DUMMY_DATA;
-
-		this.columns = [
-			{ name: "id", label: "Id" },
-			{
-				name: "title",
-				label: "SHOWCASE.DEMO.TABLE.LABELS.TITLE",
-				cellFormatter: (value: { label: string }): string => "~" + value.label
-			},
-			{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION" },
-			// tslint:disable:no-duplicate-string
-			{ name: "info", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO" },
-			{ name: "more_info", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO" },
-			{ name: "even_more_info", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO" }
-			// tslint:enable:no-duplicate-string
-		];
-
-		this.filter = { globalFilterPresent: false, columns: [] };
-
-		this.tableRowActions = {
-			actions: [
-				{
-					id: "edit-item",
-					label: "STARK.ICONS.EDIT_ITEM",
-					icon: "pencil",
-					actionCall: ($event: Event, data: object) => this.logger.debug("EDIT", $event, data),
-					isEnabled: true
-				},
-				{
-					id: "delete-item",
-					label: "STARK.ICONS.DELETE_ITEM",
-					icon: "delete",
-					actionCall: ($event: Event, data: object) => this.logger.debug("DELETE", $event, data),
-					isEnabled: true
-				}
-			],
-			isFixed: true
-		};
-	}
 }

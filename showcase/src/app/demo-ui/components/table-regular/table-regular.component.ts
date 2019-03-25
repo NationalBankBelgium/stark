@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Inject, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "@nationalbankbelgium/stark-ui";
 
@@ -38,61 +38,47 @@ const DUMMY_DATA: object[] = [
 	styleUrls: ["./table-regular.component.scss"],
 	encapsulation: ViewEncapsulation.None // Important
 })
-export class TableRegularComponent implements OnInit {
-	public data: object[];
+export class TableRegularComponent {
+	public data: object[] = DUMMY_DATA;
 
-	public columns: StarkTableColumnProperties[];
+	public columns: StarkTableColumnProperties[] = [
+		{ name: "id", label: "Id" },
+		{
+			name: "title",
+			label: "SHOWCASE.DEMO.TABLE.LABELS.TITLE",
+			cellFormatter: (value: { label: string }): string => "~" + value.label,
+			compareFn: (n1: { value: number }, n2: { value: number }): number => n1.value - n2.value
+		},
+		{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION" },
+		{ name: "extra", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO", isFilterable: false, isSortable: false, isVisible: false }
+	];
 
-	public filter: StarkTableFilter;
+	public filter: StarkTableFilter = { globalFilterPresent: true, columns: [] };
 
-	public order: string[];
+	public order: string[] = ["title", "-description", "id"];
 
-	public pagination: StarkPaginationConfig;
+	public pagination: StarkPaginationConfig = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: 10 };
 
-	public tableRowActions: StarkTableRowActions;
+	public tableRowActions: StarkTableRowActions = {
+		actions: [
+			{
+				id: "edit-item",
+				label: "STARK.ICONS.EDIT_ITEM",
+				icon: "pencil",
+				actionCall: ($event: Event, data: object): void => this.logger.debug("EDIT", $event, data),
+				isEnabled: true
+			},
+			{
+				id: "delete-item",
+				label: "STARK.ICONS.DELETE_ITEM",
+				icon: "delete",
+				actionCall: ($event: Event, data: object): void => this.logger.debug("DELETE", $event, data),
+				isEnabled: false
+			}
+		]
+	};
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
-
-	public ngOnInit(): void {
-		this.data = DUMMY_DATA;
-
-		this.columns = [
-			{ name: "id", label: "Id" },
-			{
-				name: "title",
-				label: "SHOWCASE.DEMO.TABLE.LABELS.TITLE",
-				cellFormatter: (value: { label: string }): string => "~" + value.label,
-				compareFn: (n1: { value: number }, n2: { value: number }) => n1.value - n2.value
-			},
-			{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION" },
-			{ name: "extra", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO", isFilterable: false, isSortable: false, isVisible: false }
-		];
-
-		this.order = ["title", "-description", "id"];
-
-		this.filter = { globalFilterPresent: true, columns: [] };
-
-		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: 10 };
-
-		this.tableRowActions = {
-			actions: [
-				{
-					id: "edit-item",
-					label: "STARK.ICONS.EDIT_ITEM",
-					icon: "pencil",
-					actionCall: ($event: Event, data: object) => this.logger.debug("EDIT", $event, data),
-					isEnabled: true
-				},
-				{
-					id: "delete-item",
-					label: "STARK.ICONS.DELETE_ITEM",
-					icon: "delete",
-					actionCall: ($event: Event, data: object) => this.logger.debug("DELETE", $event, data),
-					isEnabled: false
-				}
-			]
-		};
-	}
 
 	public handleRowClicked(data: object): void {
 		this.logger.debug("ROW CLICKED:", data);

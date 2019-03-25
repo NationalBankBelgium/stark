@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { ReferenceLink } from "../../../shared/components";
+import { Component, ViewEncapsulation } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
+import { ReferenceLink } from "../../../shared/components";
 
 @Component({
 	selector: "demo-dropdown",
@@ -8,36 +8,26 @@ import { FormControl, Validators } from "@angular/forms";
 	templateUrl: "./demo-dropdown-page.component.html",
 	encapsulation: ViewEncapsulation.None // used here to be able to customize the example-viewer background color
 })
-export class DemoDropdownPageComponent implements OnInit {
-	public selectedService: string;
-	public serviceFormControl: FormControl;
-	public selectedServiceWhiteDropdown: string;
-	public selectedServices: string[];
-	public selectedNumber: string;
+export class DemoDropdownPageComponent {
+	public serviceDropdownOptions = [
+		{ id: "PR", value: "SHOWCASE.DEMO.DROPDOWN.PR" },
+		{ id: "IO", value: "SHOWCASE.DEMO.DROPDOWN.IO" },
+		{ id: "CS", value: "SHOWCASE.DEMO.DROPDOWN.CS" }
+	];
+	public serviceFormControl = new FormControl("", Validators.required);
+	public selectedService = "";
 
-	public serviceDropdownOptions: any[];
+	public selectedServiceWhiteDropdown = "";
+	public selectedServices: string[] = [];
 
-	public referenceList: ReferenceLink[];
+	public selectedNumber = "";
 
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.serviceDropdownOptions = [
-			{ id: "PR", value: "SHOWCASE.DEMO.DROPDOWN.PR" },
-			{ id: "IO", value: "SHOWCASE.DEMO.DROPDOWN.IO" },
-			{ id: "CS", value: "SHOWCASE.DEMO.DROPDOWN.CS" }
-		];
-
-		this.referenceList = [
-			{
-				label: "Stark Dropdown component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkDropdownComponent.html"
-			}
-		];
-
-		this.serviceFormControl = new FormControl("", Validators.required);
-	}
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Dropdown component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkDropdownComponent.html"
+		}
+	];
 
 	public numberDropdownOnChange(selectedValue: string): void {
 		this.selectedNumber = selectedValue;

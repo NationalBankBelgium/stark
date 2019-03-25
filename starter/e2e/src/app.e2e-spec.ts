@@ -7,7 +7,7 @@ describe("General tests:", () => {
 
 	it("should have title 'Stark Starter'", async () => {
 		const subject: string = await browser.driver.getTitle();
-		const result: string = "Stark Starter";
+		const result = "Stark Starter";
 		expect(subject).toBe(result);
 	});
 

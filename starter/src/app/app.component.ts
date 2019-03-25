@@ -20,12 +20,31 @@ export class AppComponent implements OnInit {
 	/**
 	 * Name of the project
 	 */
-	public name: string = "Stark Starter";
+	public name = "Stark Starter";
 
 	/**
 	 * App menu configuration
 	 */
-	public mainMenu: StarkMenuConfig;
+	public mainMenu: StarkMenuConfig = {
+		menuGroups: [
+			{
+				id: "menu-home",
+				label: "STARTER.MENU.HOME",
+				isVisible: true,
+				isEnabled: true,
+				targetState: "home",
+				targetStateParams: { param1: "1-1-1", param2: "1-1-2" }
+			},
+			{
+				id: "menu-about",
+				label: "STARTER.MENU.ABOUT",
+				isVisible: true,
+				isEnabled: true,
+				targetState: "about",
+				targetStateParams: { paramData: "data passed via params" }
+			}
+		]
+	};
 
 	public constructor(
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
@@ -38,27 +57,6 @@ export class AppComponent implements OnInit {
 	 */
 	public ngOnInit(): void {
 		this.logger.debug("app: component loaded");
-
-		this.mainMenu = {
-			menuGroups: [
-				{
-					id: "menu-home",
-					label: "STARTER.MENU.HOME",
-					isVisible: true,
-					isEnabled: true,
-					targetState: "home",
-					targetStateParams: { param1: "1-1-1", param2: "1-1-2" }
-				},
-				{
-					id: "menu-about",
-					label: "STARTER.MENU.ABOUT",
-					isVisible: true,
-					isEnabled: true,
-					targetState: "about",
-					targetStateParams: { paramData: "data passed via params" }
-				}
-			]
-		};
 	}
 
 	public toggleMenu(): void {

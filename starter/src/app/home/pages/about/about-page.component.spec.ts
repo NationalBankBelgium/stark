@@ -42,7 +42,7 @@ describe("About", () => {
 					provide: ActivatedRoute,
 					useValue: {
 						data: {
-							subscribe: (fn: (value: Data) => void) =>
+							subscribe: (fn: (value: Data) => void): void =>
 								fn({
 									yourData: "yolo"
 								})

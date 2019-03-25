@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
 const DUMMY_DATA: object[] = [
@@ -11,22 +11,18 @@ const DUMMY_DATA: object[] = [
 	selector: "showcase-table-with-fixed-header",
 	templateUrl: "./table-with-fixed-header.component.html"
 })
-export class TableWithFixedHeaderComponent implements OnInit {
-	public data: object[];
+export class TableWithFixedHeaderComponent {
+	public data: object[] = DUMMY_DATA;
 
-	public columns: StarkTableColumnProperties[];
+	public columns: StarkTableColumnProperties[] = [
+		{ name: "id", label: "Id" },
+		{
+			name: "title",
+			label: "Title",
+			cellFormatter: (value: { label: string }): string => "~" + value.label
+		},
+		{ name: "description", label: "Description" }
+	];
 
-	public filter: StarkTableFilter;
-
-	public ngOnInit(): void {
-		this.data = DUMMY_DATA;
-
-		this.columns = [
-			{ name: "id", label: "Id" },
-			{ name: "title", label: "Title", cellFormatter: (value: { label: string }): string => "~" + value.label },
-			{ name: "description", label: "Description" }
-		];
-
-		this.filter = { globalFilterPresent: false, columns: [] };
-	}
+	public filter: StarkTableFilter = { globalFilterPresent: false, columns: [] };
 }

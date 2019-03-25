@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkNumberMaskConfig } from "@nationalbankbelgium/stark-ui";
@@ -8,61 +8,48 @@ import { StarkNumberMaskConfig } from "@nationalbankbelgium/stark-ui";
 	styleUrls: ["./demo-number-mask.component.scss"],
 	templateUrl: "./demo-number-mask.component.html"
 })
-export class DemoNumberMaskComponent implements OnInit {
-	public dollarsMaskConfig: StarkNumberMaskConfig;
-	public eurosMaskConfig: StarkNumberMaskConfig;
-	public percentageMaskConfig: StarkNumberMaskConfig;
+export class DemoNumberMaskComponent {
+	public eurosMaskConfig: StarkNumberMaskConfig = {
+		prefix: "",
+		suffix: " €",
+		includeThousandsSeparator: true,
+		thousandsSeparatorSymbol: ",",
+		allowDecimal: true,
+		decimalSymbol: ".",
+		decimalLimit: 2,
+		integerLimit: 9,
+		allowNegative: false,
+		allowLeadingZeroes: false
+	};
+	public dollarsMaskConfig: StarkNumberMaskConfig = {
+		prefix: "$ ",
+		suffix: "",
+		includeThousandsSeparator: true,
+		thousandsSeparatorSymbol: ",",
+		allowDecimal: true,
+		decimalSymbol: ".",
+		decimalLimit: 2,
+		integerLimit: 9,
+		allowNegative: false,
+		allowLeadingZeroes: false
+	};
+	public percentageMaskConfig: StarkNumberMaskConfig = {
+		prefix: "% ",
+		suffix: "",
+		includeThousandsSeparator: true,
+		thousandsSeparatorSymbol: ",",
+		allowDecimal: true,
+		decimalSymbol: ".",
+		decimalLimit: 3,
+		integerLimit: 3,
+		allowNegative: true,
+		allowLeadingZeroes: true
+	};
 
-	public dollarsAmount: string;
-	public percentageField: FormControl;
+	public dollarsAmount = "";
+	public percentageField = new FormControl();
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {
-		this.percentageField = new FormControl();
-
-		this.eurosMaskConfig = {
-			prefix: "",
-			suffix: " €",
-			includeThousandsSeparator: true,
-			thousandsSeparatorSymbol: ",",
-			allowDecimal: true,
-			decimalSymbol: ".",
-			decimalLimit: 2,
-			integerLimit: 9,
-			allowNegative: false,
-			allowLeadingZeroes: false
-		};
-
-		this.dollarsMaskConfig = {
-			prefix: "$ ",
-			suffix: "",
-			includeThousandsSeparator: true,
-			thousandsSeparatorSymbol: ",",
-			allowDecimal: true,
-			decimalSymbol: ".",
-			decimalLimit: 2,
-			integerLimit: 9,
-			allowNegative: false,
-			allowLeadingZeroes: false
-		};
-
-		this.percentageMaskConfig = {
-			prefix: "% ",
-			suffix: "",
-			includeThousandsSeparator: true,
-			thousandsSeparatorSymbol: ",",
-			allowDecimal: true,
-			decimalSymbol: ".",
-			decimalLimit: 3,
-			integerLimit: 3,
-			allowNegative: true,
-			allowLeadingZeroes: true
-		};
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
 		this.percentageField.valueChanges.subscribe((changedValue: string) =>
 			this.logger.debug("formControl value changed: ", changedValue)
 		);

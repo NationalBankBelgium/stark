@@ -12,20 +12,49 @@ import { DemoGenericService } from "./services";
 
 @Component({
 	selector: "demo-generic-search",
-	templateUrl: "./demo-generic-search-page.component.html"
+	templateUrl: "./demo-generic-search.component.html"
 })
-export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria>
+export class DemoGenericSearchComponent extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria>
 	implements OnInit, OnDestroy {
-	public columnsProperties: StarkTableColumnProperties[];
-	public searchResults: HeroMovie[];
-	public paginationConfig: StarkPaginationConfig;
+	public hideSearch = false;
+
+	public columnsProperties: StarkTableColumnProperties[] = [
+		{
+			name: "hero",
+			label: "Hero",
+			isFilterable: true,
+			isSortable: true
+		},
+		{
+			name: "movie",
+			label: "Movie",
+			isFilterable: true,
+			isSortable: true
+		},
+		{
+			name: "year",
+			label: "Year",
+			isFilterable: true,
+			isSortable: true
+		}
+	];
+	public searchResults?: HeroMovie[];
+	public paginationConfig: StarkPaginationConfig = {
+		isExtended: false,
+		itemsPerPage: 10,
+		itemsPerPageOptions: [10, 20, 50],
+		itemsPerPageIsPresent: true,
+		page: 1,
+		pageNavIsPresent: true,
+		pageInputIsPresent: true
+	};
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) logger: StarkLoggingService,
-		demoGenericService: DemoGenericService,
-		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) progressService: StarkProgressIndicatorService
+		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) progressIndicatorService: StarkProgressIndicatorService,
+		demoGenericService: DemoGenericService
 	) {
-		super(demoGenericService, logger, progressService);
+		super(demoGenericService, logger, progressIndicatorService);
 
 		this.progressIndicatorConfig.topic = "demo-generic-search"; // Set the progress topic to make the progressService working
 		this.performSearchOnInit = true; // Turn on automatic search (last search criteria)
@@ -37,39 +66,7 @@ export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent
 	 */
 	public ngOnInit(): void {
 		super.ngOnInit();
-
 		this.results$.subscribe((genericObjects: HeroMovie[]) => (this.searchResults = genericObjects));
-
-		this.columnsProperties = [
-			{
-				name: "hero",
-				label: "Hero",
-				isFilterable: true,
-				isSortable: true
-			},
-			{
-				name: "movie",
-				label: "Movie",
-				isFilterable: true,
-				isSortable: true
-			},
-			{
-				name: "year",
-				label: "Year",
-				isFilterable: true,
-				isSortable: true
-			}
-		];
-
-		this.paginationConfig = {
-			isExtended: false,
-			itemsPerPage: 10,
-			itemsPerPageOptions: [10, 20, 50],
-			itemsPerPageIsPresent: true,
-			page: 1,
-			pageNavIsPresent: true,
-			pageInputIsPresent: true
-		};
 	}
 
 	/**

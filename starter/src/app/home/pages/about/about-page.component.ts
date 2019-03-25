@@ -18,7 +18,7 @@ export class AboutPageComponent implements OnInit {
 	 * @ignore
 	 */
 	@Input()
-	public resolvedData: Observable<any>;
+	public resolvedData?: Observable<any>;
 	/**
 	 * @ignore
 	 */

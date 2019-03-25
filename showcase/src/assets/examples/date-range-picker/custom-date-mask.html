@@ -1,19 +1,19 @@
 <div>
 	<stark-date-range-picker
-			rangePickerId="custom-date-mask-range-picker"
-			rangePickerName="custom-date-mask-range-picker"
-			[isDisabled]="isDisabled"
-			[dateFilter]="customDateFilter"
-			[dateMask]="customDateMask"
-			[startDate]="startDate"
-			startDateLabel="From"
-			[startMinDate]="minDate"
-			[startMaxDate]="maxDate"
-			[endDate]="endDate"
-			endDateLabel="To"
-			[endMinDate]="startDate || minDate"
-			[endMaxDate]="maxDate"
-			(dateRangeChanged)="onDateChanged($event)"
+		rangePickerId="custom-date-mask-range-picker"
+		rangePickerName="custom-date-mask-range-picker"
+		startDateLabel="From"
+		endDateLabel="To"
+		[startDate]="startDate"
+		[endDate]="endDate"
+		[startMinDate]="minDate"
+		[startMaxDate]="maxDate"
+		[endMinDate]="startDate || minDate"
+		[endMaxDate]="maxDate"
+		[dateFilter]="customDateFilter"
+		[dateMask]="customDateMask"
+		[isDisabled]="disabled"
+		(dateRangeChanged)="onDateChanged($event)"
 	>
 	</stark-date-range-picker>
 </div>

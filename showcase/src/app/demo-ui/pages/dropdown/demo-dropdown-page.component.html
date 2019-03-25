@@ -1,4 +1,5 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.DROPDOWN.TITLE</h1>
+
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer
@@ -9,28 +10,26 @@
 		<mat-form-field>
 			<stark-dropdown
 				dropdownId="reactiveFormDropdown"
-				[options]="serviceDropdownOptions"
 				[formControl]="serviceFormControl"
+				[options]="serviceDropdownOptions"
 				placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
 				optionIdProperty="id"
 				optionLabelProperty="value"
 				required
 			>
 			</stark-dropdown>
-			<mat-error>
-				<span *ngIf="serviceFormControl.touched && serviceFormControl.hasError('required')" translate>
-					STARK.VALIDATION.REQUIRED
-				</span>
+			<mat-error *ngIf="serviceFormControl.touched && serviceFormControl.hasError('required')" translate>
+				STARK.VALIDATION.REQUIRED
 			</mat-error>
 		</mat-form-field>
+		<br />
 		<div *ngIf="serviceFormControl.value">
 			{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUE" | translate }}: {{ serviceFormControl.value }}
 		</div>
-		<div>
-			<mat-checkbox (change)="toggleDisabledReactiveFormControl()" [value]="serviceFormControl.disabled">
-				{{ "SHOWCASE.COMMON.DISABLED" | translate }}
-			</mat-checkbox>
-		</div>
+
+		<mat-checkbox (change)="toggleDisabledReactiveFormControl()" [value]="serviceFormControl.disabled">
+			{{ "SHOWCASE.COMMON.DISABLED" | translate }}
+		</mat-checkbox>
 	</example-viewer>
 
 	<example-viewer
@@ -43,8 +42,8 @@
 				<stark-dropdown
 					name="serviceDropdown"
 					dropdownId="serviceDropdown"
-					[options]="serviceDropdownOptions"
 					[(ngModel)]="selectedService"
+					[options]="serviceDropdownOptions"
 					placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
 					optionIdProperty="id"
 					optionLabelProperty="value"
@@ -101,7 +100,7 @@
 	</example-viewer>
 
 	<example-viewer
-		[extensions]="['HTML', 'TS']"
+		[extensions]="['HTML']"
 		filesPath="dropdown/disabled-dropdown"
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.DISABLED' | translate"
 	>
@@ -109,9 +108,8 @@
 			<stark-dropdown
 				dropdownId="disabledDropdown"
 				[options]="[1, 2, 3, 4, 5, 6, 7]"
-				[placeholder]="'SHOWCASE.DEMO.DROPDOWN.SELECT_DISABLED' | translate"
+				placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_DISABLED"
 				[disabled]="true"
-				multiSelect
 			>
 			</stark-dropdown>
 		</mat-form-field>
@@ -119,7 +117,7 @@
 
 	<example-viewer
 		class="dark"
-		[extensions]="['HTML', 'TS', 'CSS']"
+		[extensions]="['HTML', 'TS', 'SCSS']"
 		filesPath="dropdown/white"
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.WHITE' | translate"
 	>
@@ -142,4 +140,5 @@
 		</div>
 	</example-viewer>
 </section>
+
 <stark-reference-block [links]="referenceList"></stark-reference-block>
