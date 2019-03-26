@@ -599,7 +599,8 @@ describe("PrettyPrintComponent", () => {
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
 				expect(preElement).not.toBeNull();
 				expect(preElement.innerHTML).toContain('<code class="language-css">');
-				expect(preElement.innerHTML).toContain('<span class="token selector">body </span>');
+				// in PrismJS 1.15.0 there is an extra whitespace (most likely a bug) but in version 1.16.0 it is not there anymore
+				expect(preElement.innerHTML).toMatch('<span class="token selector">body.+</span>');
 				expect(preElement.innerHTML).toContain('<span class="token punctuation">:</span>');
 			});
 
