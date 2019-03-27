@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewEncapsulation } from "@angular/core";
 /* tslint:disable:no-duplicate-imports no-import-side-effect */
 import * as Prism from "prismjs";
-import { LanguageDefinition } from "prismjs";
+import { Grammar } from "prismjs";
 // prism loads these languages by default: "css", "clike", "javascript" and "markup" (which includes "xml", "html", "mathml", "svg")
 import "prismjs/components/prism-typescript.min.js";
 import "prismjs/components/prism-sql.min.js";
@@ -134,7 +134,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 		this.prettyString = "";
 
 		if (this.data && this.data.length > 0) {
-			let prismGrammar: LanguageDefinition = <any>"";
+			let prismGrammar: Grammar = <any>"";
 			let prismClass: string = "";
 
 			try {
@@ -201,7 +201,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 			}
 
 			if (this.highlightingEnabled) {
-				this.prettyString = Prism.highlight(this.prettyString, prismGrammar);
+				this.prettyString = Prism.highlight(this.prettyString, prismGrammar, this.format);
 				this.prettyString =
 					"<pre class='" + prismClass + "'><code class='" + prismClass + "'>" + this.prettyString + "</code></pre>";
 			}
