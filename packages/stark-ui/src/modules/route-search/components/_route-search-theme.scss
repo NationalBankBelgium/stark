@@ -5,7 +5,7 @@
 .search-field {
   .mat-form-field-wrapper {
     border: 1px solid mat-color($grey-palette, 400);
-    background-color: #ffff;
+    background-color: #fff;
     color: mat-color($grey-palette, 900);
   }
 }
@@ -14,16 +14,6 @@ button.search-button {
   background-color: mat-color($accent-palette, 500);
   /* stylelint-disable-next-line value-keyword-case */
   color: mat-color($grey-palette, A100);
-}
-
-@media #{$mobile-only-query} {
-  .search-field {
-    .mat-form-field-wrapper {
-      border: 1px solid mat-color($grey-palette, 400);
-      background-color: #ffff;
-      color: mat-color($grey-palette, 900);
-    }
-  }
 }
 
 /* END stark-ui: src/modules/route-search/components/route-search-theme.scss */
