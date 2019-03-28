@@ -37,7 +37,6 @@ describe("CollapsibleComponent", () => {
 		// inputs
 		component.htmlId = "toto";
 		component.titleLabel = "titre";
-		component.iconSpinningEnabled = true;
 
 		fixture.detectChanges(); // trigger initial data binding
 	});
@@ -62,9 +61,7 @@ describe("CollapsibleComponent", () => {
 			expect(component.titleLabel).toBeDefined();
 			expect(component.titleLabel).toBe("titre");
 
-			expect(component.iconSpinningEnabled).not.toBeNull();
-			expect(component.iconSpinningEnabled).toBeDefined();
-			expect(component.iconSpinningEnabled).toBe(true);
+			expect(component._isDefaultIcon).toBe(true);
 		});
 	});
 

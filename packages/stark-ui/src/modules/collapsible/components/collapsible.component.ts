@@ -8,6 +8,11 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 const componentName: string = "stark-collapsible";
 
 /**
+ * The default icon for a collapsible
+ */
+const DEFAULT_COLLAPSIBLE_ICON: string = "chevron-right";
+
+/**
  * Component to display an accordion around included html using angular material's expansion panel.
  */
 @Component({
@@ -30,7 +35,25 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	 * Icon to use in the header (based on Material Design Icons)
 	 */
 	@Input()
-	public icon: "chevron-right" | string = "chevron-right";
+	public get icon(): string {
+		return this._icon;
+	}
+
+	public set icon(value: string) {
+		this._isDefaultIcon = typeof value === "undefined";
+		this._icon = typeof value === "undefined" ? DEFAULT_COLLAPSIBLE_ICON : value;
+	}
+
+	/**
+	 * for internal use only
+	 * @ignore
+	 */
+	public _isDefaultIcon: boolean = true;
+	/**
+	 * for internal use only
+	 * @ignore
+	 */
+	private _icon: string = DEFAULT_COLLAPSIBLE_ICON;
 
 	/**
 	 * Boolean value triggering the collapsing of the collapsible
@@ -51,12 +74,6 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	 */
 	@Input()
 	public titleLabel: string;
-
-	/**
-	 * Design options related to the component
-	 */
-	@Input()
-	public iconSpinningEnabled: boolean = false;
 
 	/**
 	 * Class constructor

@@ -7,10 +7,6 @@ import { Component } from "@angular/core";
 export class DemoCollapsibleComponent {
 	public collapsed: boolean = false;
 
-	public constructor() {
-		// empty constructor
-	}
-
 	public toggleCollapsible(): void {
 		this.collapsed = !this.collapsed;
 	}
