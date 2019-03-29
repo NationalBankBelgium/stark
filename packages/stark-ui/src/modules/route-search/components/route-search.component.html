@@ -9,7 +9,7 @@
 	>
 		<mat-icon [svgIcon]="icon" starkSvgViewBox></mat-icon>
 	</button>
-	<div *ngIf="!hide">
+	<div [ngClass]="{ hide: hide }" class="route-search-input-wrapper">
 		<mat-form-field floatLabel="never" class="search-field">
 			<input
 				class="search-field-input"
