@@ -1,7 +1,4 @@
-/**
- * @ignore
- */
-const _floor: Function = require("lodash/floor");
+import floor from "lodash-es/floor";
 
 /**
  * @ignore
@@ -79,7 +76,7 @@ function isValidBelgianNin(nin: string): boolean {
 			const numberToCheck19thCentury: number = parseInt(getBirthDate(nin) + getOrder(nin), 10);
 			const numberToCheck20thCentury: number = parseInt("2" + getBirthDate(nin) + getOrder(nin), 10);
 
-			return 97 - _floor(numberToCheck19thCentury % 97) === checkDigits || 97 - _floor(numberToCheck20thCentury % 97) === checkDigits;
+			return 97 - floor(numberToCheck19thCentury % 97) === checkDigits || 97 - floor(numberToCheck20thCentury % 97) === checkDigits;
 		}
 	}
 

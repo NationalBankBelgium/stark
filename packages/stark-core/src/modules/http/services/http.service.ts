@@ -23,11 +23,7 @@ import {
 import { convertMapIntoObject } from "../../../util/util-helpers";
 import { StarkHttpUtil } from "../../../util/http.util";
 import { StarkHttpService, starkHttpServiceName } from "./http.service.intf";
-
-/**
- *  @ignore
- */
-const _cloneDeep: Function = require("lodash/cloneDeep");
+import cloneDeep from "lodash-es/cloneDeep";
 
 /**
  * @ignore
@@ -140,8 +136,8 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		let requestCopy: StarkHttpRequest<P> = request;
 
 		if (request.item) {
-			requestCopy = _cloneDeep(request);
-			const itemWithoutETag: P = _cloneDeep(<P>requestCopy.item);
+			requestCopy = cloneDeep(request);
+			const itemWithoutETag: P = cloneDeep(<P>requestCopy.item);
 			delete itemWithoutETag.etag;
 			requestCopy.item = itemWithoutETag;
 		}
@@ -157,7 +153,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	public addDevAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
 		this.logger.debug(starkHttpServiceName + ": Adding dev-authentication headers");
 
-		const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
+		const requestCopy: StarkHttpRequest<P> = cloneDeep(request);
 
 		// add the preAuthentication headers to the request headers
 		this.sessionService.devAuthenticationHeaders.forEach((value: string | string[], header: string) => {
@@ -175,7 +171,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 	public addCorrelationIdentifierHeader(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
 		if (this.logger.correlationIdHttpHeaderName && this.logger.correlationIdHttpHeaderName.length > 0 && this.logger.correlationId) {
 			this.logger.debug(starkHttpServiceName + ": Adding correlation identifier header");
-			const requestCopy: StarkHttpRequest<P> = _cloneDeep(request);
+			const requestCopy: StarkHttpRequest<P> = cloneDeep(request);
 			requestCopy.headers.set(this.logger.correlationIdHttpHeaderName, this.logger.correlationId);
 			return requestCopy;
 		}

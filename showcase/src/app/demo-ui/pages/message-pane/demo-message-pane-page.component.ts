@@ -7,9 +7,9 @@ import {
 } from "@nationalbankbelgium/stark-ui";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { ReferenceLink } from "../../../shared/components";
+import uniqueId from "lodash-es/uniqueId";
 
 const componentName: string = "demo-message-pane";
-const _uniqueId: any = require("lodash/uniqueId");
 
 /**
  * @ngdoc component
@@ -49,7 +49,7 @@ export class DemoMessagePanePageComponent implements OnInit {
 	public notifyMessages(): void {
 		this.starkMessagePaneService.add([
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.ERRORS.ERROR_1",
 				interpolateValues: { priority: "priority = 500" },
 				code: "54987",
@@ -57,7 +57,7 @@ export class DemoMessagePanePageComponent implements OnInit {
 				priority: 500
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.ERRORS.ERROR_2",
 				interpolateValues: { priority: "priority = 10" },
 				code: "333",
@@ -65,7 +65,7 @@ export class DemoMessagePanePageComponent implements OnInit {
 				priority: 10
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.ERRORS.ERROR_3",
 				interpolateValues: { priority: "priority = 200" },
 				code: "777",
@@ -73,7 +73,7 @@ export class DemoMessagePanePageComponent implements OnInit {
 				priority: 200
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.WARNINGS.WARNING_1",
 				interpolateValues: { priority: "priority = 1" },
 				code: "",
@@ -81,21 +81,21 @@ export class DemoMessagePanePageComponent implements OnInit {
 				priority: 1
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.WARNINGS.WARNING_2",
 				interpolateValues: { priority: "priority = undefined" },
 				code: "PMO",
 				type: StarkMessageType.WARNING
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.INFOS.INFO_1",
 				interpolateValues: { priority: "priority = undefined" },
 				code: "54987",
 				type: StarkMessageType.INFO
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.INFOS.INFO_2",
 				interpolateValues: { priority: "priority = 998" },
 				code: "333",
@@ -113,35 +113,35 @@ export class DemoMessagePanePageComponent implements OnInit {
 		this.starkMessagePaneService.clearAll();
 		this.starkMessagePaneService.add([
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.ERRORS.NEW_ERROR_1",
 				interpolateValues: {},
 				code: "54987",
 				type: StarkMessageType.ERROR
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.ERRORS.NEW_ERROR_2",
 				interpolateValues: {},
 				code: "333",
 				type: StarkMessageType.ERROR
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.WARNINGS.NEW_WARNING_1",
 				interpolateValues: {},
 				code: "",
 				type: StarkMessageType.WARNING
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.INFOS.NEW_INFO_1",
 				interpolateValues: {},
 				code: "54987",
 				type: StarkMessageType.INFO
 			},
 			{
-				id: _uniqueId(),
+				id: uniqueId(),
 				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.INFOS.NEW_INFO_2",
 				interpolateValues: {},
 				code: "333",

@@ -2,11 +2,7 @@ import { StarkMessage, StarkMessageType } from "../../../common/message";
 import { StarkMessageCollection } from "../entities";
 import { StarkMessagePaneActions, StarkMessagePaneActionTypes } from "../actions";
 import { StarkAddMessages, StarkRemoveMessages } from "../actions/message-pane.actions";
-
-/**
- * @ignore
- */
-const _findIndex: Function = require("lodash/findIndex");
+import  findIndex  from "lodash-es/findIndex";
 
 /**
  * Initial state of the store
@@ -110,21 +106,21 @@ function removeMessages(state: Readonly<StarkMessageCollection>, action: Readonl
 
 		switch (messageToRemove.type) {
 			case StarkMessageType.INFO:
-				idx = _findIndex(mutableState.infoMessages, ["id", messageToRemove.id]);
+				idx = findIndex(mutableState.infoMessages, ["id", messageToRemove.id]);
 				if (idx !== -1) {
 					mutableState.infoMessages.splice(idx, 1);
 					newStateAfterRemoval.infoMessages = mutableState.infoMessages;
 				}
 				break;
 			case StarkMessageType.WARNING:
-				idx = _findIndex(mutableState.warningMessages, ["id", messageToRemove.id]);
+				idx = findIndex(mutableState.warningMessages, ["id", messageToRemove.id]);
 				if (idx !== -1) {
 					mutableState.warningMessages.splice(idx, 1);
 					newStateAfterRemoval.warningMessages = mutableState.warningMessages;
 				}
 				break;
 			case StarkMessageType.ERROR:
-				idx = _findIndex(mutableState.errorMessages, ["id", messageToRemove.id]);
+				idx = findIndex(mutableState.errorMessages, ["id", messageToRemove.id]);
 				if (idx !== -1) {
 					mutableState.errorMessages.splice(idx, 1);
 					newStateAfterRemoval.errorMessages = mutableState.errorMessages;

@@ -18,11 +18,7 @@ import { MatPaginator, MatPaginatorIntl, PageEvent } from "@angular/material/pag
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginationConfig } from "./pagination-config.intf";
 import { StarkPaginateEvent } from "./paginate-event.intf";
-
-/**
- * @ignore
- */
-const _isEqual: Function = require("lodash/isEqual");
+import  isEqual  from "lodash-es/isEqual";
 
 /**
  * Name of the component
@@ -151,7 +147,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 			) {
 				this.onChangePagination();
 			} else if (
-				!_isEqual(paginationConfigOriginalChange, changesObj["paginationConfig"].previousValue) ||
+				!isEqual(paginationConfigOriginalChange, changesObj["paginationConfig"].previousValue) ||
 				paginationConfigOriginalChange.totalItems !== this.paginationConfig.totalItems ||
 				paginationConfigOriginalChange.itemsPerPageOptions !== this.paginationConfig.itemsPerPageOptions
 			) {

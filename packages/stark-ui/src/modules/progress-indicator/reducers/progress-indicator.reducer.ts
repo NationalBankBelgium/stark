@@ -1,10 +1,6 @@
 import { StarkProgressIndicatorConfig } from "../entities";
 import { StarkProgressIndicatorActions, StarkProgressIndicatorActionTypes } from "../actions/progress-indicator.actions";
-
-/**
- * @ignore
- */
-const _cloneDeep: Function = require("lodash/cloneDeep");
+import  cloneDeep  from "lodash-es/cloneDeep";
 
 /**
  * Initial state of the reducer
@@ -24,7 +20,7 @@ export function progressIndicatorReducer(
 	action: StarkProgressIndicatorActions
 ): Map<string, StarkProgressIndicatorConfig> {
 	// the new state will be calculated from the data coming in the actions
-	let newState: Map<string, StarkProgressIndicatorConfig> = _cloneDeep(state);
+	let newState: Map<string, StarkProgressIndicatorConfig> = cloneDeep(state);
 
 	let topic: string;
 
@@ -34,7 +30,7 @@ export function progressIndicatorReducer(
 			topic = payload.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = _cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
+				const progressIndicatorConfig: StarkProgressIndicatorConfig = cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
 				progressIndicatorConfig.listenersCount = <number>progressIndicatorConfig.listenersCount + 1;
 				newState = newState.set(topic, progressIndicatorConfig);
 			} else {
@@ -47,7 +43,7 @@ export function progressIndicatorReducer(
 			topic = action.payload;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = _cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
+				const progressIndicatorConfig: StarkProgressIndicatorConfig = cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
 
 				progressIndicatorConfig.listenersCount = <number>progressIndicatorConfig.listenersCount - 1;
 
@@ -64,7 +60,7 @@ export function progressIndicatorReducer(
 			topic = action.payload;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = _cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
+				const progressIndicatorConfig: StarkProgressIndicatorConfig = cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
 				progressIndicatorConfig.visible = true;
 				progressIndicatorConfig.pendingListenersCount = <number>progressIndicatorConfig.pendingListenersCount + 1;
 				newState = newState.set(topic, progressIndicatorConfig);
@@ -76,7 +72,7 @@ export function progressIndicatorReducer(
 			topic = action.payload;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = _cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
+				const progressIndicatorConfig: StarkProgressIndicatorConfig = cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
 
 				if (<number>progressIndicatorConfig.pendingListenersCount > 0) {
 					progressIndicatorConfig.pendingListenersCount = <number>progressIndicatorConfig.pendingListenersCount - 1;

@@ -1,14 +1,6 @@
 import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
-
-/**
- * @ignore
- */
-const _cloneDeep: Function = require("lodash/cloneDeep");
-
-/**
- * @ignore
- */
-const _isEqual: Function = require("lodash/isEqual");
+import cloneDeep from "lodash-es/cloneDeep";
+import isEqual from "lodash-es/isEqual";
 
 /**
  * Abstract class defining the source model to bind to form components in Stark (i.e. {@link AbstractStarkSearchComponent})
@@ -37,14 +29,14 @@ export abstract class AbstractStarkFormComponent<CriteriaType> {
 	 */
 	protected setOriginalCopy(originalCopy: CriteriaType = <any>{}): void {
 		this.originalCopy = originalCopy;
-		this.workingCopy = _cloneDeep(this.originalCopy);
+		this.workingCopy = cloneDeep(this.originalCopy);
 	}
 
 	/**
 	 * Revert the form's working copy back to the original copy (a deep clone copy)
 	 */
 	protected reset(): void {
-		this.workingCopy = _cloneDeep(this.originalCopy);
+		this.workingCopy = cloneDeep(this.originalCopy);
 	}
 
 	/**
@@ -52,6 +44,6 @@ export abstract class AbstractStarkFormComponent<CriteriaType> {
 	 * Performs a deep comparison between the two objects to determine if they are equivalent.
 	 */
 	protected isDirty(): boolean {
-		return !_isEqual(this.workingCopy, this.originalCopy);
+		return !isEqual(this.workingCopy, this.originalCopy);
 	}
 }

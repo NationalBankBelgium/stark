@@ -1,5 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import cloneDeep from "lodash-es/cloneDeep";
 // using the full path to import the "angular-in-memory-web-api" interfaces to avoid adding "@angular/http" to Showcase npm dependencies!
 // see https://github.com/angular/in-memory-web-api/issues/215
 import {
@@ -11,7 +12,6 @@ import {
 } from "angular-in-memory-web-api/interfaces";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
-const _cloneDeep: Function = require("lodash/cloneDeep");
 const mockData: object = require("../../../../config/json-server/data.json");
 
 @Injectable()
@@ -29,7 +29,7 @@ export class InMemoryDataService implements InMemoryDbService {
 	 */
 	public createDb(_reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
 		// replace the "uuid" field defined in the mock data by the "id" field expected by the in-memory-db
-		const normalizedMockData: object = _cloneDeep(mockData); // avoid modifying the original mock data
+		const normalizedMockData: object = cloneDeep(mockData); // avoid modifying the original mock data
 		this.deepReplaceProperty(normalizedMockData, "uuid", "id");
 
 		// 	IMPORTANT: cannot mock "logging" and "logout" requests since they are performed via XHR and not via Angular
@@ -95,7 +95,7 @@ export class InMemoryDataService implements InMemoryDbService {
 		// a full copy of the database can be retrieved by calling _requestInfo.utils.getDb())
 
 		// replace the "id" field coming from the in-memory-db by the "uuid" field expected by the application
-		const normalizedBody: any = _cloneDeep(response.body);
+		const normalizedBody: any = cloneDeep(response.body);
 		this.deepReplaceProperty(normalizedBody, "id", "uuid");
 		response.body = normalizedBody;
 

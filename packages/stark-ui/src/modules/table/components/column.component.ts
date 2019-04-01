@@ -18,17 +18,9 @@ import { TranslateService } from "@ngx-translate/core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { FormControl } from "@angular/forms";
 import { distinctUntilChanged } from "rxjs/operators";
+import isEqual from "lodash-es/isEqual";
+import get from "lodash-es/get";
 import { StarkColumnFilterChangedOutput, StarkColumnSortChangedOutput, StarkTableColumnSortingDirection } from "../entities";
-
-/**
- * @ignore
- */
-const _isEqual: Function = require("lodash/isEqual");
-
-/**
- * @ignore
- */
-const _get: Function = require("lodash/get");
 
 /**
  * Component to display a column inside the StarkTableComponent
@@ -215,7 +207,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		if (
 			simpleChanges["filterValue"] &&
 			!simpleChanges["filterValue"].isFirstChange() &&
-			!_isEqual(simpleChanges["filterValue"].previousValue, simpleChanges["filterValue"].currentValue)
+			!isEqual(simpleChanges["filterValue"].previousValue, simpleChanges["filterValue"].currentValue)
 		) {
 			this._filterFormCtrl.setValue(this.filterValue);
 		}
@@ -234,7 +226,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * @returns The raw value of the property from the given row item
 	 */
 	public getRawValue(row: object): any | undefined {
-		let rawValue: any | undefined = _get(row, this.name);
+		let rawValue: any | undefined = get(row, this.name);
 
 		if (this.dataAccessor) {
 			rawValue = this.dataAccessor(row, this.name);

@@ -1,7 +1,4 @@
-/**
- * @ignore
- */
-const _floor: Function = require("lodash/floor");
+import floor from "lodash-es/floor";
 
 /**
  * @ignore
@@ -36,7 +33,7 @@ export function starkIsEstablishmentUnitNumber(establishmentNumber: string): boo
 		const numberToCheck: number = parseInt(enterpriseNumber.substring(0, controlNumberBeginIndex), 10);
 
 		// We validate 8 first digits with a mod-97 checksum algorithm
-		isValid = 97 - _floor(numberToCheck % 97) === controlNumber;
+		isValid = 97 - floor(numberToCheck % 97) === controlNumber;
 	}
 
 	return isValid;

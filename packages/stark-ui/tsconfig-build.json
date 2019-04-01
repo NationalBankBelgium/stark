@@ -3,7 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "typeRoots": ["./node_modules/@types", "../stark-build/typings", "./typings"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "../stark-build/typings",
+      "./typings"
+    ],
     "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
       "@angularclass/hmr": ["../stark-core/node_modules/@angularclass/hmr"],
@@ -21,7 +25,7 @@
       "class-validator": ["../stark-core/node_modules/class-validator"],
       "moment": ["../stark-core/node_modules/moment"],
       "ibantools": ["../stark-core/node_modules/ibantools"],
-      "lodash": ["../stark-core/node_modules/lodash"],
+      "lodash-es/*": ["../stark-core/node_modules/lodash-es/*"],
       "rxjs/*": ["../../node_modules/rxjs/*"],
       "environments/environment": ["../../dist/packages/stark-core/src/common/environment"],
       "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
@@ -32,7 +36,6 @@
 
   "files": ["public_api.ts"],
 
-  // Unfortunately, all those options have to be written in every tsconfig file
   "angularCompilerOptions": {
     "generateCodeForLibraries": true,
     "skipMetadataEmit": false,

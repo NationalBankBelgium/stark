@@ -1,8 +1,7 @@
 /* tslint:disable:completed-docs no-identical-functions */
 import { StarkFormControlState, StarkFormUtil } from "./form.util";
 import { FormControl, FormGroup } from "@angular/forms";
-
-const _startCase: Function = require("lodash/startCase");
+import  startCase  from "lodash-es/startCase";
 
 /* tslint:disable:no-big-function */
 describe("Util: FormUtil", () => {
@@ -28,14 +27,14 @@ describe("Util: FormUtil", () => {
 
 	function assertFormControl(formItem: FormControl, newState?: string): void {
 		if (newState) {
-			const newStateSetter: string = "markAs" + _startCase(newState);
+			const newStateSetter: string = "markAs" + startCase(newState);
 			expect(formItem[newStateSetter]).toHaveBeenCalledTimes(1);
 		}
 
 		// check that the setters for other states where not called
 		const nonUsedStates: string[] = formItemStates.filter((state: string) => state !== newState);
 		for (const nonUsedState of nonUsedStates) {
-			const nonUsedStateSetter: string = "markAs" + _startCase(nonUsedState);
+			const nonUsedStateSetter: string = "markAs" + startCase(nonUsedState);
 			expect(formItem[nonUsedStateSetter]).not.toHaveBeenCalled();
 		}
 	}

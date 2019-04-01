@@ -28,6 +28,7 @@
   "dependencies": {
     "@angular/material-moment-adapter": "^7.0.0",
     "@mdi/angular-material": "^3.3.92",
+    "@types/lodash-es": "^4.17.1",
     "@types/nouislider": "^9.0.4",
     "@types/prismjs": "^1.16.0",
     "angular2-text-mask": "^9.0.0",

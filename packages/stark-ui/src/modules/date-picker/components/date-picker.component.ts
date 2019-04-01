@@ -29,6 +29,7 @@ import { Subject, Subscription } from "rxjs";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
+import isEqual from "lodash-es/isEqual";
 
 /**
  * Type expected by `dateFilter` @Input.
@@ -39,11 +40,6 @@ export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Da
  * Type expected by `mastConfig` @Input.
  */
 export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean | undefined;
-
-/**
- * @ignore
- */
-const _isEqual: Function = require("lodash/isEqual");
 
 /**
  * Default DateMask configuration
@@ -182,7 +178,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	}
 
 	public set value(value: Date | null) {
-		if (!_isEqual(this._value, value)) {
+		if (!isEqual(this._value, value)) {
 			this._value = value;
 			this.stateChanges.next();
 		}

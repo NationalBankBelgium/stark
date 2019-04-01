@@ -4,11 +4,7 @@ import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { STARK_TOAST_NOTIFICATION_SERVICE, StarkMessageType, StarkToastNotificationService } from "@nationalbankbelgium/stark-ui";
 import { StarkErrorHandlingActionTypes, StarkUnhandledError } from "@nationalbankbelgium/stark-core";
-
-/**
- * Unique Id of the displayed toaster
- */
-const _uniqueId: Function = require("lodash/uniqueId");
+import uniqueId from "lodash-es/uniqueId";
 
 /**
  * This class is used to determine what to do with an error
@@ -33,7 +29,7 @@ export class StarkErrorHandlingEffects {
 				this.zone.run(() => {
 					this.toastNotificationService
 						.show({
-							id: _uniqueId(),
+							id: uniqueId(),
 							type: StarkMessageType.ERROR,
 							key: action.error.toString(),
 							code: "Unhandled error - no code"

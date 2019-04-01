@@ -1,10 +1,6 @@
 import { StarkMessage } from "./message.intf";
 import { StarkMessageType } from "./message-type.intf";
-
-/**
- * @ignore
- */
-const _uniqueId: any = require("lodash/uniqueId");
+import  uniqueId  from "lodash-es/uniqueId";
 
 /**
  * @ignore
@@ -18,6 +14,6 @@ export class StarkMessageImpl implements StarkMessage {
 
 	public constructor() {
 		// set random id
-		this.id = _uniqueId();
+		this.id = uniqueId();
 	}
 }
