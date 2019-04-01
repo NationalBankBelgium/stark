@@ -5,11 +5,7 @@ import { Component } from "@angular/core";
 	templateUrl: "./demo-collapsible.component.html"
 })
 export class DemoCollapsibleComponent {
-	public collapsed: boolean[] = [true, false, true];
-
-	public constructor() {
-		// empty constructor
-	}
+	public collapsed: boolean[] = [false, true];
 
 	public toggleCollapsible(nb: number): void {
 		this.collapsed[nb] = !this.collapsed[nb];

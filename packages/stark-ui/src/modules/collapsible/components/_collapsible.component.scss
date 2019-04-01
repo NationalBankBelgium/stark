@@ -7,14 +7,13 @@
   .mat-expansion-panel {
     transition: box-shadow 150ms linear;
 
-    &.mat-expanded {
-      .mat-expansion-panel-header-title {
-        .stark-collapsible-icon {
-          &.spin {
-            transform: rotate(180deg);
-          }
-        }
-      }
+    .stark-collapsible-icon {
+      transition: transform 150ms linear;
+      margin-right: 6px;
+    }
+
+    &.mat-expanded .stark-collapsible-icon.spin {
+      transform: rotate(90deg);
     }
 
     .mat-expansion-panel-header {
@@ -33,11 +32,6 @@
         font-weight: mat-font-weight($typography-config, subheading-1);
         line-height: mat-line-height($typography-config, subheading-1);
       }
-    }
-
-    .stark-collapsible-icon {
-      transition: transform 150ms linear;
-      margin-right: 6px;
     }
   }
 }

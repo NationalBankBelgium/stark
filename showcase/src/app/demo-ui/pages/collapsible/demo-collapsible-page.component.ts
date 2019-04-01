@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ReferenceLink } from "../../../shared/components";
 
 @Component({
@@ -6,27 +6,16 @@ import { ReferenceLink } from "../../../shared/components";
 	styleUrls: ["./demo-collapsible-page.component.scss"],
 	templateUrl: "./demo-collapsible-page.component.html"
 })
-export class DemoCollapsiblePageComponent implements OnInit {
-	public collapsed: boolean[] = [false, true, false, true, false, false, false];
-	public referenceList: ReferenceLink[];
-
-	public constructor() {
-		// empty constructor
-	}
+export class DemoCollapsiblePageComponent {
+	public collapsed: boolean[] = [false, false, true];
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Collapsible component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkCollapsibleComponent.html"
+		}
+	];
 
 	public toggleCollapsible(nb: number): void {
 		this.collapsed[nb] = !this.collapsed[nb];
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.referenceList = [
-			{
-				label: "Stark Collapsible component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkCollapsibleComponent.html"
-			}
-		];
 	}
 }
