@@ -187,7 +187,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 			setTimeout(() => {
 				const inputField: HTMLElement = this.elementRef.nativeElement.querySelector(".search-field-input");
 				inputField.focus();
-			}, 80);
+			});
 		}
 	}
 
