@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ReferenceLink } from "../../../shared/components";
 import { FormControl, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
 
 @Component({
 	selector: "demo-dropdown",
@@ -9,10 +8,9 @@ import { Subscription } from "rxjs";
 	templateUrl: "./demo-dropdown-page.component.html",
 	encapsulation: ViewEncapsulation.None // used here to be able to customize the example-viewer background color
 })
-export class DemoDropdownPageComponent implements OnInit, OnDestroy {
+export class DemoDropdownPageComponent implements OnInit {
 	public selectedService: string;
 	public serviceFormControl: FormControl;
-	public serviceFormControlSubscription: Subscription;
 	public selectedServiceWhiteDropdown: string;
 	public selectedServices: string[];
 	public selectedNumber: string;
@@ -39,10 +37,6 @@ export class DemoDropdownPageComponent implements OnInit, OnDestroy {
 		];
 
 		this.serviceFormControl = new FormControl("", Validators.required);
-	}
-
-	public ngOnDestroy(): void {
-		this.serviceFormControlSubscription.unsubscribe();
 	}
 
 	public numberDropdownOnChange(selectedValue: string): void {
