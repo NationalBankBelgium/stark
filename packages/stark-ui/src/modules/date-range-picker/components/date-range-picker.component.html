@@ -9,6 +9,7 @@
 		[placeholder]="startDateLabel | translate"
 		[min]="startMinDate"
 		[max]="startMaxDate"
+		[dateMask]="dateMask"
 		(dateChange)="onDateStartChanged($event)"
 	>
 	</stark-date-picker>
@@ -24,6 +25,7 @@
 		[placeholder]="endDateLabel | translate"
 		[min]="endMinDate"
 		[max]="endMaxDate"
+		[dateMask]="dateMask"
 		(dateChange)="onDateEndChanged($event)"
 	>
 	</stark-date-picker>

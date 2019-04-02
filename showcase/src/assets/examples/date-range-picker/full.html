@@ -9,7 +9,7 @@
 	[startMaxDate]="maxDate"
 	[endDate]="endDate"
 	endDateLabel="To"
-	[endMinDate]="minDate"
+	[endMinDate]="startDate || minDate"
 	[endMaxDate]="maxDate"
 	(dateRangeChanged)="onDateChanged($event)"
 >

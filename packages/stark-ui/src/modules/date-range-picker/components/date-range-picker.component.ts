@@ -1,7 +1,11 @@
 import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import moment from "moment";
-import { StarkDatePickerComponent, StarkDatePickerFilter } from "../../date-picker/components/date-picker.component";
+import {
+	StarkDatePickerComponent,
+	StarkDatePickerFilter,
+	StarkDatePickerMaskConfig
+} from "../../date-picker/components/date-picker.component";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 
@@ -29,6 +33,15 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 */
 	@Input()
 	public dateFilter?: StarkDatePickerFilter;
+
+	/**
+	 * Timestamp Mask Configuration to apply on the start/end date-picker.
+	 * If `true` is passed, the default mask config is applied: {DEFAULT_DATE_MASK_CONFIG|DEFAULT_DATE_MASK_CONFIG}
+	 * If `false` is passed or if `dateMask` is not present, the directive is disabled.
+	 * If a `StarkTimestampMaskConfig` is passed, it is set as the date mask config.
+	 */
+	@Input()
+	public dateMask: StarkDatePickerMaskConfig;
 
 	/**
 	 * Source Date to be bound to the end datepicker model

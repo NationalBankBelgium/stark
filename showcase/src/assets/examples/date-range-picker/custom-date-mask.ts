@@ -1,22 +1,18 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkDatePickerFilter, StarkDateRangePickerEvent, StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
-import { ReferenceLink } from "../../../shared/components";
+import { StarkDatePickerFilter, StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
 
 @Component({
 	selector: "demo-date-range-picker",
-	templateUrl: "./demo-date-range-picker-page.component.html"
+	templateUrl: "./demo-date-range-picker.component.html"
 })
-export class DemoDateRangePickerPageComponent implements OnInit {
+export class DemoDateRangePickerComponent implements OnInit {
 	public isDisabled: boolean;
-	public isDisabledDateMask: boolean;
-	public isDisabledCustomDateMask: boolean;
-	public startDate?: Date;
-	public endDate?: Date;
+	public startDate: Date;
+	public endDate: Date;
 	public minDate: Date;
 	public maxDate: Date;
 	public customDateFilter: StarkDatePickerFilter;
-	public referenceList: ReferenceLink[];
 	public customDateMask: StarkTimestampMaskConfig = {
 		format: "DD-MM-YYYY"
 	};
@@ -35,19 +31,9 @@ export class DemoDateRangePickerPageComponent implements OnInit {
 			const day: number = date.getDay();
 			return day !== 0;
 		};
-
-		this.referenceList = [
-			{
-				label: "Stark Date Range Picker component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkDateRangePickerComponent.html"
-			}
-		];
 	}
 
-	public onDateChanged(event: StarkDateRangePickerEvent): void {
+	public onDateChanged(event: Object): void {
 		this.logger.debug(event);
-
-		this.startDate = event.startDate;
-		this.endDate = event.endDate;
 	}
 }
