@@ -1,0 +1,43 @@
+// Fixes that need to be applied directly to the Angular Material css because of custom stark implementations or as workarounds
+
+// the line-height of the calendar needs to be reset, because of the line-height set in _typography.scss
+// (see: https://github.com/NationalBankBelgium/stark/issues/732)
+.mat-datepicker-content {
+  line-height: initial;
+}
+
+// Causes checkbox trigger to take up entire width/height of menu item
+.mat-menu-content div.mat-menu-item > mat-checkbox label {
+  margin: 0 -16px;
+  padding: 0 16px;
+  display: block;
+}
+
+// FIXME: Remove after https://github.com/angular/material2/pull/11801 is merged
+// See: https://github.com/angular/material2/issues/11609
+/** IE 11 fixes */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  /** IE 11 fixes */
+  .mat-select-panel {
+    min-width: inherit !important;
+  }
+  .cdk-overlay-pane {
+    display: block;
+  }
+}
+
+// Needed since @angular/Material v7, the icons are slightly off center.
+// 2.5px was chosen as the offset that worked best across most popular browsers
+.mat-button-wrapper .mat-icon {
+  margin-top: -2.5px;
+}
+
+// FIXME: remove as soon as the MatDialogActions is adapted to align with Material Design guidelines: https://github.com/angular/material2/issues/14736
+mat-dialog-actions,
+[mat-dialog-actions],
+[matDialogActions] {
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: -16px;
+}

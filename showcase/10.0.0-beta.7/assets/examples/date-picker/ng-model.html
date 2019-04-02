@@ -1,0 +1,19 @@
+<mat-form-field>
+	<stark-date-picker
+		pickerId="picker-ng-model"
+		pickerName="picker-ng-model"
+		[(ngModel)]="date"
+		placeholder="Choose a date"
+		[min]="minDate"
+		[max]="maxDate"
+		[disabled]="disabled"
+		(dateChange)="onDateChanged()"
+		[dateMask]="maskConfig"
+		required
+	></stark-date-picker>
+</mat-form-field>
+<div>
+	<mat-checkbox (change)="disabled = !disabled" [value]="disabled">
+		disabled
+	</mat-checkbox>
+</div>

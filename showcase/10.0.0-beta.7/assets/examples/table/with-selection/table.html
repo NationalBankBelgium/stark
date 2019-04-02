@@ -1,0 +1,10 @@
+<stark-table
+	[data]="data"
+	[columnProperties]="columns"
+	[filter]="filter"
+	[rowsSelectable]="true"
+	(selectChanged)="handleRowSelected($event)"
+	multiSelect
+>
+	<header><h1 class="mb0">Table with selection</h1></header>
+</stark-table>
