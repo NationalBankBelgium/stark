@@ -1,6 +1,9 @@
 const ts = require("typescript");
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
+const crypto = require("crypto");
+
 const helpers = require("./helpers");
 const ngCliUtils = require("./ng-cli-utils");
 
@@ -90,8 +93,67 @@ function getEnvironmentFile(environment) {
 	}
 }
 
+/**
+ * Gets the value at `path` of `object`. If the resolved value is
+ * `undefined`, the `defaultValue` is returned in its place.
+ *
+ * @param {Object} obj The object to query.
+ * @param {string|Array} path The path of the property to get.
+ * @param {*} [defaultValue] The value returned for `undefined` resolved values.
+ * @returns {*} Returns the resolved value.
+ */
+function get(obj, path, defaultValue) {
+	let args;
+	if (typeof path === "string") {
+		args = path.split(".");
+	} else {
+		args = path;
+	}
+
+	for (let i = 0; i < args.length; i++) {
+		if (!obj || !obj.hasOwnProperty(args[i])) {
+			return defaultValue;
+		}
+		obj = obj[args[i]];
+	}
+	return obj;
+}
+
+/**
+ * Makes a new tslint.json file that extends the default (tslint.json) and disables all the tslint rules that require typechecking
+ * @see FIXME on webpack-partial.common.js (module.exports().module.rules)
+ *
+ * @param {string} tslintConfig The path to the projects tslint.json
+ * @return {string} Returns the path to the temporary tslint configuration for tslint-loader
+ */
+function getFixedTSLintConfig(tslintConfig) {
+	// Windows style separators need to be replaced before injecting it into the new tslint.json
+	const tslintConfigPath = helpers.root(tslintConfig).replace(/\\/g, "/");
+
+	const noTypeCheckTSLintConfig = fs
+		.readFileSync(helpers.rootStark("config/tslint-disabled-typecheck-rules.json"), "utf8")
+		.replace(/TSLINT_CONFIG_PLACEHOLDER/, tslintConfigPath);
+
+	const contentHash = crypto
+		.createHash("md5")
+		.update(noTypeCheckTSLintConfig)
+		.digest("hex");
+
+	const noTypeCheckTSLintConfigPath = path.resolve(os.tmpdir(), `national-bank-belgium_stark-build_tslint-${contentHash}.json`);
+
+	// check if file already exists before writing it
+	if (!fs.existsSync(noTypeCheckTSLintConfigPath)) {
+		console.log(`Writing TSLint configuration to ${noTypeCheckTSLintConfigPath}`);
+		fs.writeFileSync(noTypeCheckTSLintConfigPath, noTypeCheckTSLintConfig, "utf8");
+	}
+
+	return noTypeCheckTSLintConfigPath;
+}
+
 exports.ANGULAR_APP_CONFIG = ANGULAR_APP_CONFIG;
 exports.DEFAULT_METADATA = DEFAULT_METADATA;
 exports.getEnvironmentFile = getEnvironmentFile;
 exports.readTsConfig = readTsConfig;
+exports.getFixedTSLintConfig = getFixedTSLintConfig;
 exports.supportES2015 = supportES2015;
+exports.get = get;

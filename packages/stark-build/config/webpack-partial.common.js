@@ -24,6 +24,10 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPl
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 
+const fixedTSLintConfig = buildUtils.getFixedTSLintConfig(
+	buildUtils.get(buildUtils.ANGULAR_APP_CONFIG.config, "architect.lint.options.tslintConfig", "tslint.json")
+);
+
 /**
  * Webpack configuration
  *
@@ -65,14 +69,14 @@ module.exports = metadata => {
 		/**
 		 * Options affecting the normal modules.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#module
+		 * See: https://webpack.js.org/configuration/module
 		 */
 		module: {
 			rules: [
-				// TsLint loader support for *.ts files
-				// reference: https://github.com/wbuchwalter/tslint-loader
-				// FIXME: given the warnings we have with build:prod (see https://github.com/NationalBankBelgium/stark/issues/397)
-				// this probably doesn't load the tslint configuration we think?
+				/**
+				 * TSLint loader support for *.ts files
+				 * @see https://github.com/wbuchwalter/tslint-loader
+				 */
 				{
 					enforce: "pre",
 					test: /\.ts$/,
@@ -80,7 +84,9 @@ module.exports = metadata => {
 						{
 							loader: "tslint-loader",
 							options: {
-								typeCheck: false // FIXME remove this line once the type checking issues are gone (cfr FIXME above)
+								typeCheck: false, // FIXME enable type checking when it is improved in tslint-loader (https://github.com/wbuchwalter/tslint-loader/pull/114)
+								tsconfig: buildUtils.ANGULAR_APP_CONFIG.buildOptions.tsconfig || "tsconfig.json",
+								configFile: fixedTSLintConfig //FIXME use the configured tslint.json when type checking is enabled
 							}
 						}
 					],
@@ -92,7 +98,7 @@ module.exports = metadata => {
 		/**
 		 * Add additional plugins to the compiler.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#plugins
+		 * See: https://webpack.js.org/configuration/plugins
 		 */
 		plugins: [
 			// TODO: cannot enable this WriteFilePlugin due to Error: Content and Map of this Source is no longer available (only size() is supported)
@@ -150,10 +156,10 @@ module.exports = metadata => {
 				// xhtml: true, // TODO: why XHTML?
 				minify: isProd
 					? {
-							caseSensitive: true,
-							collapseWhitespace: true,
-							keepClosingSlash: true
-					  }
+						caseSensitive: true,
+						collapseWhitespace: true,
+						keepClosingSlash: true
+					}
 					: false
 			}),
 
@@ -191,6 +197,15 @@ module.exports = metadata => {
 			// new InlineManifestWebpackPlugin(),
 
 			/**
+			 * Plugin: WriteFilePlugin
+			 * Description: This plugin makes sure that bundles and assets are written to disk
+			 * this is necessary so that assets are available in dev mode
+			 * See: https://www.npmjs.com/package/write-file-webpack-plugin
+			 */
+			// TODO evaluate this
+			// new WriteFilePlugin(),
+
+			/**
 			 * Generate html tags based on javascript maps.
 			 *
 			 * If a publicPath is set in the webpack output configuration, it will be automatically added to
@@ -214,10 +229,10 @@ module.exports = metadata => {
 			 */
 			...(fs.existsSync(helpers.root("config/index-head-config.js"))
 				? [
-						new HtmlElementsWebpackPlugin({
-							headTags: require(helpers.root("config/index-head-config"))
-						})
-				  ]
+					new HtmlElementsWebpackPlugin({
+						headTags: require(helpers.root("config/index-head-config"))
+					})
+				]
 				: []),
 
 			/**
@@ -237,14 +252,14 @@ module.exports = metadata => {
 			 */
 			...(MONITOR
 				? [
-						new WebpackMonitor({
-							capture: true, // -> default 'true'
-							target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
-							launch: true, // -> default 'false'
-							port: 3030, // default 8081
-							excludeSourceMaps: true // default 'true'
-						})
-				  ]
+					new WebpackMonitor({
+						capture: true, // -> default 'true'
+						target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
+						launch: true, // -> default 'false'
+						port: 3030, // default 8081
+						excludeSourceMaps: true // default 'true'
+					})
+				]
 				: []),
 
 			/**
@@ -254,13 +269,13 @@ module.exports = metadata => {
 			 */
 			...(BUNDLE_ANALYZER
 				? [
-						new BundleAnalyzerPlugin({
-							generateStatsFile: true, // default 'false'
-							statsFilename: helpers.root("reports/bundle-analyzer/stats.json"), // default -> 'stats.json'
-							openAnalyzer: true, //default 'true'
-							analyzerPort: 3030 // default 8888
-						})
-				  ]
+					new BundleAnalyzerPlugin({
+						generateStatsFile: true, // default 'false'
+						statsFilename: helpers.root("reports/bundle-analyzer/stats.json"), // default -> 'stats.json'
+						openAnalyzer: true, //default 'true'
+						analyzerPort: 3030 // default 8888
+					})
+				]
 				: []),
 
 			/**
