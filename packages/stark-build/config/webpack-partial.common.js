@@ -65,14 +65,14 @@ module.exports = metadata => {
 		/**
 		 * Options affecting the normal modules.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#module
+		 * See: https://webpack.js.org/configuration/module
 		 */
 		module: {
 			rules: [
-				// TsLint loader support for *.ts files
-				// reference: https://github.com/wbuchwalter/tslint-loader
-				// FIXME: given the warnings we have with build:prod (see https://github.com/NationalBankBelgium/stark/issues/397)
-				// this probably doesn't load the tslint configuration we think?
+				/**
+				 * TSLint loader support for *.ts files
+				 * @see https://github.com/wbuchwalter/tslint-loader
+				 */
 				{
 					enforce: "pre",
 					test: /\.ts$/,
@@ -80,7 +80,8 @@ module.exports = metadata => {
 						{
 							loader: "tslint-loader",
 							options: {
-								typeCheck: false // FIXME remove this line once the type checking issues are gone (cfr FIXME above)
+								// FIXME enable type checking when it is improved in tslint-loader (https://github.com/wbuchwalter/tslint-loader/pull/114)
+								typeCheck: false
 							}
 						}
 					],
@@ -92,7 +93,7 @@ module.exports = metadata => {
 		/**
 		 * Add additional plugins to the compiler.
 		 *
-		 * See: http://webpack.github.io/docs/configuration.html#plugins
+		 * See: https://webpack.js.org/configuration/plugins
 		 */
 		plugins: [
 			// TODO: cannot enable this WriteFilePlugin due to Error: Content and Map of this Source is no longer available (only size() is supported)
