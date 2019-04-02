@@ -20,7 +20,7 @@ cd ${currentDir}
 
 # List of all packages, separated by a space
 # Packages will be transpiled using NGC (unless if also part of NODE_PACKAGES like the build package)
-PACKAGES=(stark-core stark-ui)
+PACKAGES=(stark-core stark-ui stark-rbac)
 
 # Packages that should not be compiled by NGC but just with TSC
 TSC_PACKAGES=()

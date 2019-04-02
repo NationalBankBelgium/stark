@@ -13,6 +13,11 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 		loadChildren: "./demo-ui/demo-ui.module#DemoUiModule" // lazy loaded module
 	},
 	{
+		name: "demo-rbac.**",
+		url: "^/demo-rbac", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
+		loadChildren: "./demo-rbac/demo-rbac.module#DemoRBACModule" // lazy loaded module
+	},
+	{
 		name: "styleguide.**",
 		url: "^/styleguide", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
 		loadChildren: "./styleguide/styleguide.module#StyleguideModule" // lazy loaded module

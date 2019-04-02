@@ -24,6 +24,7 @@
       "./stark-build/node_modules/@types",
       "./stark-build/typings",
       "./stark-core/node_modules/@types",
+      "./stark-rbac/node_modules/@types",
       "./stark-testing/node_modules/@types",
       "./stark-ui/node_modules/@types",
       "../node_modules/@types"

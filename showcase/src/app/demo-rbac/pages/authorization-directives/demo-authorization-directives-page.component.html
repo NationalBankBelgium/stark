@@ -1,0 +1,48 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.TITLE</h1>
+<section class="stark-section">
+	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+	<div fxFlexLayout="column">
+		<example-viewer
+			[extensions]="['HTML', 'TS']"
+			filesPath="rbac-authorization-directives/show-on-permission"
+			exampleTitle="SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.SHOW_ON_PERMISSION.TITLE"
+		>
+			<div class="authorized-roles">
+				<label class="toggle-button-label" translate
+					>SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.SHOW_ON_PERMISSION.SWITCH_AUTHORIZED_ROLE</label
+				>
+				<mat-button-toggle-group [(ngModel)]="selectedAuthorizedRole" (change)="onAuthorizedRoleChange($event)">
+					<mat-button-toggle value="admin">Admin</mat-button-toggle>
+					<mat-button-toggle value="manager">Manager</mat-button-toggle>
+				</mat-button-toggle-group>
+			</div>
+
+			<div *starkShowOnPermission="onShowPermissionsConfig" class="protected-content">
+				{{ "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.CONTENT_PROTECTED" | translate }}<br />
+				<b>{{ "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.SHOW_ON_PERMISSION.ONLY_VISIBLE_TO" | translate: { role: "manager" } }}</b>
+			</div>
+		</example-viewer>
+
+		<example-viewer
+			[extensions]="['HTML', 'TS']"
+			filesPath="rbac-authorization-directives/hide-on-permission"
+			exampleTitle="SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.HIDE_ON_PERMISSION.TITLE"
+		>
+			<div class="authorized-roles">
+				<label class="toggle-button-label" translate
+					>SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.HIDE_ON_PERMISSION.SWITCH_UNAUTHORIZED_ROLE</label
+				>
+				<mat-button-toggle-group [(ngModel)]="selectedUnauthorizedRole" (change)="onUnauthorizedRoleChange($event)">
+					<mat-button-toggle value="admin">Admin</mat-button-toggle>
+					<mat-button-toggle value="manager">Manager</mat-button-toggle>
+				</mat-button-toggle-group>
+			</div>
+
+			<div *starkHideOnPermission="onHidePermissionsConfig" class="protected-content">
+				{{ "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.CONTENT_PROTECTED" | translate }}<br />
+				<b>{{ "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.HIDE_ON_PERMISSION.ONLY_VISIBLE_TO" | translate: { role: "manager" } }}</b>
+			</div>
+		</example-viewer>
+	</div>
+</section>
+<stark-reference-block [links]="referenceList"></stark-reference-block>
