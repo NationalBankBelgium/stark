@@ -37,7 +37,7 @@ import isEqual from "lodash-es/isEqual";
 export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Date) => boolean) | undefined;
 
 /**
- * Type expected by `mastConfig` @Input.
+ * Type expected by `maskConfig` @Input.
  */
 export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean | undefined;
 

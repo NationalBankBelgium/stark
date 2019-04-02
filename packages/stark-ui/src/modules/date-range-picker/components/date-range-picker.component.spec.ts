@@ -48,6 +48,7 @@ describe("DateRangePickerComponent", () => {
 
 		it("should NOT have any inputs set", () => {
 			expect(component.dateFilter).toBeUndefined();
+			expect(component.dateMask).toBeUndefined();
 			expect(component.endDate).toBeUndefined();
 			expect(component.endDateLabel).toBeDefined();
 			expect(component.endDateLabel).toEqual("STARK.DATE_RANGE_PICKER.TO");

@@ -52,6 +52,8 @@
         "TITLE": "Date picker"
       },
       "DATE_RANGE_PICKER": {
+        "CUSTOM_MASK": "Date range picker - Custom date mask ({{ mask }})",
+        "DEFAULT_MASK": "Date range picker - Default date mask",
         "TITLE": "Date range picker"
       },
       "DIALOGS": {
