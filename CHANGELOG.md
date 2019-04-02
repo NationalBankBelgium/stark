@@ -1,3 +1,41 @@
+<a name="10.0.0-beta.7"></a>
+# [10.0.0-beta.7](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.6...10.0.0-beta.7) (2019-04-02)
+
+
+### Bug Fixes
+
+* **release:** enhance check for stark versions in Starter to skip those packages that are not listed as dependencies ([b1b50dd](https://github.com/nationalbankbelgium/stark/commit/b1b50dd))
+* **showcase:** fix subscription issue in dropdown demo page ([95bbf75](https://github.com/nationalbankbelgium/stark/commit/95bbf75))
+* **stark-demo:** change default behaviour of collapsible icon ([3737371](https://github.com/nationalbankbelgium/stark/commit/3737371)), closes [#1013](https://github.com/nationalbankbelgium/stark/issues/1013)
+* **stark-demo:** fix `route-search-component` tests failing with ` Uncaught TypeError: Cannot read property 'focus' of null thrown` ([1d39083](https://github.com/nationalbankbelgium/stark/commit/1d39083))
+* **stark-demo:** fix reference border ([3bd81e4](https://github.com/nationalbankbelgium/stark/commit/3bd81e4))
+* **stark-demo:** fix wrong reference links in Dialogs demo page ([0fe2e77](https://github.com/nationalbankbelgium/stark/commit/0fe2e77))
+* **stark-ui:** change background-color of `.search-field .mat-form-field-wrapper` to variable $offWh ([87aa706](https://github.com/nationalbankbelgium/stark/commit/87aa706)), closes [#1181](https://github.com/nationalbankbelgium/stark/issues/1181)
+* **stark-ui:** change default behaviour of collapsible icon ([552461f](https://github.com/nationalbankbelgium/stark/commit/552461f))
+* **stark-ui:** date-picker - disabled stark-date-picker not focusable anymore ([ac3e673](https://github.com/nationalbankbelgium/stark/commit/ac3e673))
+
+
+### Features
+
+* **build:** add lodash es imports and lodash types ([7d8b2e5](https://github.com/nationalbankbelgium/stark/commit/7d8b2e5)), closes [#1129](https://github.com/nationalbankbelgium/stark/issues/1129) [monounity/karma-typescript#320](https://github.com/monounity/karma-typescript/issues/320) [#1145](https://github.com/nationalbankbelgium/stark/issues/1145) [#150](https://github.com/nationalbankbelgium/stark/issues/150)
+* **stark-rbac:** implement new Stark-RBAC package including StarkRBACAuthorization module. Add demos for RBAC features in Showcase ([53d3f33](https://github.com/nationalbankbelgium/stark/commit/53d3f33)), closes [#105](https://github.com/nationalbankbelgium/stark/issues/105)
+* **stark-ui:** date-picker - add support to translate placeholder internally ([63545f8](https://github.com/nationalbankbelgium/stark/commit/63545f8)), closes [#1204](https://github.com/nationalbankbelgium/stark/issues/1204)
+* **stark-ui:** date-range-picker - add support for timestamp mask ([0403dea](https://github.com/nationalbankbelgium/stark/commit/0403dea)), closes [#1231](https://github.com/nationalbankbelgium/stark/issues/1231)
+* **stark-ui:** dropdown - add support for ControlValueAccessor, MatFormFieldControl and Validator ([dbbcd65](https://github.com/nationalbankbelgium/stark/commit/dbbcd65)), closes [#1193](https://github.com/nationalbankbelgium/stark/issues/1193)
+
+
+### BREAKING CHANGES
+
+* **stark-ui:** Collapsible component:
+  - `iconSpinningEnabled` Input has been removed. The spin effect can be
+  done easily by the developer if needed
+  - The default icon is now 'chevron-right' and it is rotated 90
+  degrees when collapsible is expanded.
+* **stark-ui:**   * **dropdownFormControl** has been removed. Please use [formControl] instead
+  * **isDisabled** has been replaced by **disabled**
+
+
+
 <a name="10.0.0-beta.6"></a>
 # [10.0.0-beta.6](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.5...10.0.0-beta.6) (2019-03-18)
 
