@@ -19,8 +19,9 @@ fs.readFile("./modules.txt", "utf8", function(err, modulesData) {
 		}
 
 		for (const starkPackage of starkPackagesArray) {
+			const packageDependency = new RegExp('\\"@nationalbankbelgium/' + starkPackage + '\\"', "gi");
 			const validVersionPattern = new RegExp('\\"@nationalbankbelgium/' + starkPackage + '\\": \\"' + validVersion + '\\"', "gi");
-			if (!packageJsonData.match(validVersionPattern)) {
+			if (packageJsonData.match(packageDependency) && !packageJsonData.match(validVersionPattern)) {
 				isCorrect = false;
 				console.error("Version of package " + starkPackage + " is not correct. It should be '" + validVersion + "'");
 			}
