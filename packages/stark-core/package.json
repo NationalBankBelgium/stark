@@ -38,7 +38,7 @@
     "@types/uuid": "^3.4.4",
     "@uirouter/angular": "^3.0.0",
     "cerialize": "^0.1.18",
-    "class-validator": "^0.7.3",
+    "class-validator": "^0.9.1",
     "deep-freeze-strict": "^1.1.1",
     "ibantools": "^2.0.0",
     "lodash-es": "^4.17.11",
