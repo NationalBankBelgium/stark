@@ -3,7 +3,7 @@ import { InjectionToken } from "@angular/core";
 /**
  * The name of the service
  */
-export const starkRBACAuthorizationServiceName: string = "StarkRBACAuthorizationService";
+export const starkRBACAuthorizationServiceName = "StarkRBACAuthorizationService";
 /**
  * Injection Token version of the Service Name
  */

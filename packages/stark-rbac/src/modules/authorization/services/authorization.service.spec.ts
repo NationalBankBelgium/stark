@@ -25,8 +25,8 @@ describe("StarkRBACAuthorizationService", () => {
 	let mockSessionService: MockStarkSessionService;
 	let mockRoutingService: MockStarkRoutingService;
 	let authorizationService: AuthorizationServiceHelper;
-	const dummyRole: string = "super user";
-	const dummyUnauthorizedStateName: string = "unauthorized state";
+	const dummyRole = "super user";
+	const dummyUnauthorizedStateName = "unauthorized state";
 
 	function getMockTransitionTargetStateWithPermissions(mockPermissions: StarkRBACStatePermissions): StateDeclaration {
 		return {
@@ -130,7 +130,7 @@ describe("StarkRBACAuthorizationService", () => {
 				only: [""]
 			};
 			const mockTransition: Partial<Transition> = {
-				to: () => getMockTransitionTargetStateWithPermissions(mockPermissions)
+				to: (): StateDeclaration => getMockTransitionTargetStateWithPermissions(mockPermissions)
 			};
 
 			// trigger the onStart hook callback
@@ -155,7 +155,7 @@ describe("StarkRBACAuthorizationService", () => {
 				only: [""]
 			};
 			const mockTransition: Partial<Transition> = {
-				to: () => getMockTransitionTargetStateWithPermissions(mockPermissions)
+				to: (): StateDeclaration => getMockTransitionTargetStateWithPermissions(mockPermissions)
 			};
 
 			// trigger the onStart hook callback
@@ -172,7 +172,7 @@ describe("StarkRBACAuthorizationService", () => {
 	describe("hasRole", () => {
 		it("should return true only if the current user has the given role", () => {
 			const authorizedRole: string = dummyRole;
-			const unauthorizedRole: string = "simple mortal";
+			const unauthorizedRole = "simple mortal";
 			const mockUserWithRoles: Partial<StarkUser> = {
 				roles: [dummyRole, "manager"]
 			};
@@ -193,7 +193,7 @@ describe("StarkRBACAuthorizationService", () => {
 		});
 
 		it("should return false when there is no current user defined or it has no roles", () => {
-			const someRole: string = "whatever";
+			const someRole = "whatever";
 			authorizationService.user = <any>undefined;
 
 			expect(authorizationService.hasRole(someRole)).toBe(false);
@@ -345,7 +345,7 @@ describe("StarkRBACAuthorizationService", () => {
 		});
 
 		it("should return true without calling hasAnyRole() when the permissions object has invalid 'only' nor 'except' or is undefined", () => {
-			const undefinedStatePermissionsStr: string = "could not find 'only' or 'except'";
+			const undefinedStatePermissionsStr = "could not find 'only' or 'except'";
 
 			spyOn(authorizationService, "hasAnyRole");
 

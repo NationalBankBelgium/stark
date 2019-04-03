@@ -6,7 +6,7 @@ import { STARK_RBAC_AUTHORIZATION_SERVICE, StarkRBACAuthorizationService } from 
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkHideOnPermission]";
+const directiveName = "[starkHideOnPermission]";
 
 /**
  * [Structural Directive](https://angular.io/guide/structural-directives#structural-directives) to remove an element if the user has any of the roles specified
