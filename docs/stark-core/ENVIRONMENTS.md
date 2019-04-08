@@ -194,7 +194,7 @@ export const environment: StarkEnvironment = {
 Thanks to the customizations done by Stark-Build to the default Angular CLI build configuration you have some global variables available at compilation time,
 which means that you can implement some checks in your code and this will be analyzed when your application bundle is being built by Webpack.
 
-See [Stark-Build: Webpack build customizations - DefinePlugin](https://github.com/NationalBankBelgium/stark/blob/master/docs/stark-build/NG_CLI_BUILD_CUSTOMIZATIONS.md#define-plugin)
+See [Stark-Build: Webpack build customizations - DefinePlugin](https://github.com/NationalBankBelgium/stark/blob/master/docs/stark-build/NG_CLI_BUILD_CUSTOMIZATIONS.md#defineplugin)
 
 ### Why do you need the target environment at compilation time?
 

@@ -117,9 +117,17 @@ Webpack plugins as well as some utils in order to leverage some functionality to
 
 This is the list of utils and plugins used by the Stark-Build package:
 
+### Loaders
+
+#### [tslint-loader](https://github.com/wbuchwalter/tslint-loader)
+
+This loader [lints](https://palantir.github.io/tslint/) your TypeScript files based on the configuration in your `tslint.json`.
+
+**Because at this moment disabling `typeCheck` in this loader drasticly improves build time we opted to overwrite and disable all [tslint rules](https://palantir.github.io/tslint/rules/) that require Type Info.**
+
 ### Plugins
 
-#### <a name="define-plugin"></a>[DefinePlugin](https://webpack.js.org/plugins/define-plugin)
+#### [DefinePlugin](https://webpack.js.org/plugins/define-plugin)
 
 Allows to define global variables that will be available during the compilation and building of the application bundles.
 
