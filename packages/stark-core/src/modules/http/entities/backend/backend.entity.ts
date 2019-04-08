@@ -15,7 +15,7 @@ export class StarkBackendImpl implements StarkBackend {
 
 	// validation must be performed always, regardless of validation groups used
 	@IsNotEmpty({ message: "each backend object MUST have an url", always: true })
-	@IsUrl({}, { always: true })
+	@IsUrl({ require_tld: false }, { always: true })
 	@autoserialize
 	public url: string;
 

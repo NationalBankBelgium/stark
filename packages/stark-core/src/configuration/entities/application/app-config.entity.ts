@@ -100,7 +100,7 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	public keepAliveInterval?: number;
 
 	@ValidateIf(StarkApplicationConfigImpl.validateIfKeepAliveEnabled, { groups: ["session"] })
-	@IsUrl({}, { groups: ["session"] })
+	@IsUrl({ require_tld: false }, { groups: ["session"] })
 	@autoserialize
 	public keepAliveUrl?: string;
 
@@ -109,7 +109,7 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	public keepAliveDisabled?: boolean;
 
 	@IsDefined({ groups: ["session"] })
-	@IsUrl({}, { groups: ["session"] })
+	@IsUrl({ require_tld: false }, { groups: ["session"] })
 	@autoserialize
 	public logoutUrl: string;
 
