@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAction, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
@@ -22,43 +22,33 @@ const DUMMY_DATA: object[] = [
 	templateUrl: "./table-with-transcluded-action-bar.component.html",
 	styleUrls: ["./table-with-transcluded-action-bar.scss"]
 })
-export class TableWithTranscludedActionBarComponent implements OnInit {
-	public data: object[];
+export class TableWithTranscludedActionBarComponent {
+	public data: object[] = DUMMY_DATA;
 
-	public columns: StarkTableColumnProperties[];
+	public columns: StarkTableColumnProperties[] = [
+		{ name: "id", label: "Id" },
+		{ name: "title", label: "Title", cellFormatter: (value: { label: string }): string => "~" + value.label },
+		{ name: "description", label: "Description" }
+	];
 
-	public filter: StarkTableFilter;
+	public filter: StarkTableFilter = { globalFilterPresent: false, columns: [] };
 
-	public tableActions: StarkAction[];
+	public tableActions: StarkAction[] = [
+		{
+			id: "edit-item",
+			label: "STARK.ICONS.EDIT_ITEM",
+			icon: "pencil",
+			actionCall: ($event: Event, data: object): void => this.logger.debug("EDIT:", $event, data),
+			isEnabled: false
+		},
+		{
+			id: "reload",
+			label: "STARK.ICONS.RELOAD_PAGE",
+			icon: "autorenew",
+			actionCall: ($event: Event, data: object): void => this.logger.debug("RELOAD:", $event, data),
+			isEnabled: true
+		}
+	];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
-
-	public ngOnInit(): void {
-		this.data = DUMMY_DATA;
-
-		this.columns = [
-			{ name: "id", label: "Id" },
-			{ name: "title", label: "Title", cellFormatter: (value: { label: string }): string => "~" + value.label },
-			{ name: "description", label: "Description" }
-		];
-
-		this.filter = { globalFilterPresent: false, columns: [] };
-
-		this.tableActions = [
-			{
-				id: "edit-item",
-				label: "STARK.ICONS.EDIT_ITEM",
-				icon: "pencil",
-				actionCall: ($event: Event, data: object) => this.logger.debug("EDIT:", $event, data),
-				isEnabled: false
-			},
-			{
-				id: "reload",
-				label: "STARK.ICONS.RELOAD_PAGE",
-				icon: "autorenew",
-				actionCall: ($event: Event, data: object) => this.logger.debug("RELOAD:", $event, data),
-				isEnabled: true
-			}
-		];
-	}
 }

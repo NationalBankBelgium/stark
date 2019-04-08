@@ -14,7 +14,6 @@ import {
 	ViewEncapsulation
 } from "@angular/core";
 import { MatColumnDef } from "@angular/material/table";
-import { TranslateService } from "@ngx-translate/core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { FormControl } from "@angular/forms";
 import { distinctUntilChanged } from "rxjs/operators";
@@ -52,7 +51,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * @ignore
 	 * @internal
 	 */
-	private _name: string;
+	private _name = "";
 
 	/**
 	 * Function that returns
@@ -86,13 +85,13 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Sorting direction of the column.
 	 */
 	@Input()
-	public sortDirection: StarkTableColumnSortingDirection;
+	public sortDirection: StarkTableColumnSortingDirection = "";
 
 	/**
 	 * Whether this column is filterable
 	 */
 	@Input()
-	public filterable: boolean = false;
+	public filterable = false;
 
 	/**
 	 * Value of the filter
@@ -106,25 +105,36 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Label to be shown as the column's header. Default: the column's name
 	 */
 	@Input()
-	public headerLabel: string;
+	public set headerLabel(value: string) {
+		this._headerLabel = value;
+	}
+
+	/**
+	 * Returns the header label of the column if it's specified. If not, simply returns the name of the column
+	 */
+	public get headerLabel(): string {
+		return this._headerLabel || this.name;
+	}
+
+	private _headerLabel?: string;
 
 	/**
 	 * Whether the column is sortable or not. Default: true
 	 */
 	@Input()
-	public sortable: boolean = true;
+	public sortable = true;
 
 	/**
 	 * Priority of the column.
 	 */
 	@Input()
-	public sortPriority: number;
+	public sortPriority = 0;
 
 	/**
 	 * Whether the column is visible or not. Default: true
 	 */
 	@Input()
-	public visible?: boolean = true;
+	public visible = true;
 
 	/**
 	 * A function to generate classNames for cells based on the value, its row and the name of the column.
@@ -143,7 +153,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Make the column stick to the right side of the table
 	 */
 	@Input()
-	public stickyEnd?: boolean = false;
+	public stickyEnd = false;
 
 	/**
 	 * Output that will emit a specific column whenever its filter value has changed
@@ -161,27 +171,26 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Reference to the MatColumnDef embedded in this component
 	 */
 	@ViewChild(MatColumnDef)
-	public columnDef: MatColumnDef;
+	public columnDef!: MatColumnDef;
 
 	/**
 	 * Reference to the transcluded template in this component via the ngTemplateOutlet
 	 */
 	@ContentChild(TemplateRef)
-	public columnTemplate: TemplateRef<object>;
+	public columnTemplate?: TemplateRef<object>;
 
 	/**
 	 * @ignore
 	 * Internal formControl to manage the filter value of the column
 	 */
-	public _filterFormCtrl: FormControl;
+	public _filterFormCtrl = new FormControl();
 
 	/**
 	 * Class constructor
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
-	 * @param translateService - the translation service of the application
 	 */
-	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef, private translateService: TranslateService) {
+	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
 		super(renderer, elementRef);
 	}
 
@@ -189,8 +198,6 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
-		this._filterFormCtrl = new FormControl(this.filterValue);
-
 		this._filterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
 			this.filterValue = value === null ? undefined : value;
 			this.filterChanged.emit({
@@ -206,18 +213,10 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public ngOnChanges(simpleChanges: SimpleChanges): void {
 		if (
 			simpleChanges["filterValue"] &&
-			!simpleChanges["filterValue"].isFirstChange() &&
 			!isEqual(simpleChanges["filterValue"].previousValue, simpleChanges["filterValue"].currentValue)
 		) {
 			this._filterFormCtrl.setValue(this.filterValue);
 		}
-	}
-
-	/**
-	 * Returns the header label of the column if it's specified. If not, simply returns the name of the column
-	 */
-	public getHeaderLabel(): string {
-		return this.translateService.instant(this.headerLabel ? this.headerLabel : this.name);
 	}
 
 	/**
@@ -243,7 +242,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * formatter (if there was any defined in the column) and translating the value (in case the value is a translation key)
 	 */
 	public getDisplayedValue(row: object): string | number {
-		let formattedValue: string = "";
+		let formattedValue = "";
 		const rawValue: any | undefined = this.getRawValue(row);
 
 		if (typeof rawValue !== "undefined") {

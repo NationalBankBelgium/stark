@@ -133,26 +133,27 @@ describe("MessagePaneService", () => {
 		});
 
 		it("should throw an error when the priority is greater than 999", () => {
-			const message: StarkMessage = {
-				id: "3",
-				key: "MESSAGES.INFOS.DUMMY",
-				interpolateValues: { var1: "some info value", var2: "whatever" },
-				code: "1234",
-				type: StarkMessageType.INFO,
-				priority: 1000
-			};
+			const message: StarkMessage = new StarkMessageImpl(
+				"3",
+				"MESSAGES.INFOS.DUMMY",
+				"1234",
+				StarkMessageType.INFO,
+				{ var1: "some info value", var2: "whatever" },
+				1000
+			);
 
 			expect(() => messagePaneService.addOne(message)).toThrowError(/priority has to be between 1 and 999/);
 		});
 
 		it("should not change a priority between 1 and 999", () => {
-			const message: StarkMessage = new StarkMessageImpl();
-			message.id = "3";
-			message.key = "MESSAGES.INFOS.DUMMY";
-			message.interpolateValues = { var1: "some info value", var2: "whatever" };
-			message.code = "1234";
-			message.type = StarkMessageType.INFO;
-			message.priority = 200;
+			const message: StarkMessage = new StarkMessageImpl(
+				"3",
+				"MESSAGES.INFOS.DUMMY",
+				"1234",
+				StarkMessageType.INFO,
+				{ var1: "some info value", var2: "whatever" },
+				200
+			);
 
 			messagePaneService.addOne(message);
 			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkAddMessages([message]));
@@ -201,7 +202,7 @@ describe("MessagePaneService", () => {
 });
 
 class MessagePaneServiceHelper extends StarkMessagePaneServiceImpl {
-	public messages$: Observable<StarkMessageCollection>;
+	public messages$!: Observable<StarkMessageCollection>;
 
 	public constructor(logger: MockStarkLoggingService, store: Store<StarkUIApplicationState>) {
 		super(logger, store);

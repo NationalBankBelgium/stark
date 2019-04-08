@@ -16,7 +16,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-language-selector";
+const componentName = "stark-language-selector";
 
 export type StarkLanguageSelectorMode = "dropdown" | "toolbar";
 
@@ -37,24 +37,24 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 	 * HTML id of action bar component.
 	 */
 	@Input()
-	public languageSelectorId: string = "";
+	public languageSelectorId = "";
 
 	/**
 	 * In which 'mode' the language selector is displayed: dropdown / toolbar
 	 */
 	@Input()
-	public mode: StarkLanguageSelectorMode;
+	public mode: StarkLanguageSelectorMode = "dropdown";
 
 	/**
 	 * The currently selected language
 	 */
 	@Input()
-	public selectedLanguage: string;
+	public selectedLanguage = "undefined";
 
 	/**
 	 * A reference to the sessionService subscription, needed to unsubscribe upon destroy.
 	 */
-	private sessionServiceSubscription: Subscription;
+	private sessionServiceSubscription!: Subscription;
 
 	/**
 	 * Class constructor

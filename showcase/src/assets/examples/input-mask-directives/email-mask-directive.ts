@@ -7,7 +7,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 	templateUrl: "./demo-email-mask.component.html"
 })
 export class DemoEmailMaskComponent {
-	public email: string;
+	public email = "";
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
 

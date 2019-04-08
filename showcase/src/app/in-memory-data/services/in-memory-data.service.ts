@@ -57,7 +57,7 @@ export class InMemoryDataService implements InMemoryDbService {
 	 */
 	public get(requestInfo: RequestInfo): Observable<Response> | undefined {
 		if (requestInfo.apiBase === "/" && (requestInfo.collectionName === undefined || requestInfo.collectionName === "")) {
-			const inMemoryDBResponse: string = `<h2>Congrats!</h2>
+			const inMemoryDBResponse = `<h2>Congrats!</h2>
 				<p>You\'re successfully running <b>Stark in memory database</b></p>
 				<br>
 				<p>

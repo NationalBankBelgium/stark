@@ -6,7 +6,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-progress-indicator";
+const componentName = "stark-progress-indicator";
 
 /**
  * Component that is dynamically created by the ProgressIndicatorDirective
@@ -21,7 +21,7 @@ const componentName: string = "stark-progress-indicator";
 	}
 })
 export class StarkProgressIndicatorComponent extends AbstractStarkUiComponent implements OnInit {
-	public isShown: boolean = false;
+	public isShown = false;
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

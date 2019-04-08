@@ -29,20 +29,20 @@ const xsrfServiceNotFound: "not provided" = "not provided";
  */
 @Injectable()
 export class StarkLoggingServiceImpl implements StarkLoggingService {
-	private backend: StarkBackend;
-	private logUrl: string;
-	private logPersistSize: number;
+	private backend!: StarkBackend;
+	private logUrl = "undefined";
+	private logPersistSize = NaN;
 	private isPersisting: boolean;
 	private retryCounter: number;
 	private consoleDebug: Function;
 	private consoleInfo: Function;
 	private consoleWarn: Function;
 	private consoleError: Function;
-	private starkLogging: StarkLogging;
+	private starkLogging!: StarkLogging;
 	/** @internal */
 	private _xsrfService?: StarkXSRFService | typeof xsrfServiceNotFound;
 	/** @internal */
-	private _correlationId: string;
+	private _correlationId = "undefined";
 
 	public constructor(
 		private store: Store<StarkCoreApplicationState>,
@@ -59,30 +59,32 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		this.consoleWarn = this.getConsole("warn");
 		this.consoleError = this.getConsole("error");
 
-		if (!this.appConfig.loggingFlushDisabled) {
-			this.backend = this.appConfig.getBackend("logging");
-			this.logPersistSize = <number>this.appConfig.loggingFlushPersistSize;
-			this.logUrl = this.backend.url + "/" + this.appConfig.loggingFlushResourceName;
-			this.generateNewCorrelationId();
-
-			this.store.pipe(select(selectStarkLogging)).subscribe((starkLogging: StarkLogging) => {
-				this.starkLogging = starkLogging;
-				this.persistLogMessages();
-			});
-
-			if (window) {
-				window.addEventListener("beforeunload", (_ev: BeforeUnloadEvent) => {
-					// Persist the remaining log entries that are still in the store, before leaving the application.
-					// We need to call the REST service synchronously,
-					// because the browser has to wait for the REST service to complete.
-
-					const data: string = JSON.stringify(Serialize(this.starkLogging, StarkLoggingImpl));
-					this.sendRequest(this.logUrl, data, false);
-				});
-			}
-
-			this.debug(starkLoggingServiceName + " loaded");
+		if (this.appConfig.loggingFlushDisabled) {
+			return;
 		}
+
+		this.backend = this.appConfig.getBackend("logging");
+		this.logPersistSize = <number>this.appConfig.loggingFlushPersistSize;
+		this.logUrl = `${this.backend.url}/${this.appConfig.loggingFlushResourceName}`;
+		this.generateNewCorrelationId();
+
+		this.store.pipe(select(selectStarkLogging)).subscribe((starkLogging: StarkLogging) => {
+			this.starkLogging = starkLogging;
+			this.persistLogMessages();
+		});
+
+		if (window) {
+			window.addEventListener("beforeunload", (_ev: BeforeUnloadEvent) => {
+				// Persist the remaining log entries that are still in the store, before leaving the application.
+				// We need to call the REST service synchronously,
+				// because the browser has to wait for the REST service to complete.
+
+				const data: string = JSON.stringify(Serialize(this.starkLogging, StarkLoggingImpl));
+				this.sendRequest(this.logUrl, data, false);
+			});
+		}
+
+		this.debug(starkLoggingServiceName + " loaded");
 	}
 
 	public debug(...args: any[]): void {
@@ -184,7 +186,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	protected sendRequest(url: string, serializedData: string, async: boolean = true): Observable<void> {
 		const httpRequest$: Subject<void> = new Subject<void>();
 
-		const emitXhrResult: Function = (xhrRequest: XMLHttpRequest) => {
+		const emitXhrResult = (xhrRequest: XMLHttpRequest): void => {
 			if (xhrRequest.readyState === XMLHttpRequest.DONE) {
 				if (xhrRequest.status === StarkHttpStatusCodes.HTTP_200_OK || xhrRequest.status === StarkHttpStatusCodes.HTTP_201_CREATED) {
 					httpRequest$.next();
@@ -198,7 +200,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		const xhr: XMLHttpRequest = new XMLHttpRequest();
 
 		if (async) {
-			xhr.onreadystatechange = () => {
+			xhr.onreadystatechange = (): void => {
 				emitXhrResult(xhr);
 			};
 		} else {

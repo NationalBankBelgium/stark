@@ -4,7 +4,7 @@ import { StarkLogging, StarkLogMessage } from "../entities";
 /**
  * The store key will allow the application to find the reducer in the store
  */
-export const starkLoggingStoreKey: string = "starkLogging";
+export const starkLoggingStoreKey = "starkLogging";
 
 /**
  * Defines the initial state of the reducer

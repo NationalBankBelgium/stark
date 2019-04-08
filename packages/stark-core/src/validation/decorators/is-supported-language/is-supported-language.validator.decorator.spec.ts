@@ -5,7 +5,7 @@ import { starkIsSupportedLanguageValidatorName } from "../../validators/is-suppo
 
 class MyClass {
 	@StarkIsSupportedLanguage()
-	public language: string;
+	public language!: string;
 }
 
 describe("ValidatorDecorator: StarkIsSupportedLanguage", () => {

@@ -34,12 +34,12 @@ import isEqual from "lodash-es/isEqual";
 /**
  * Type expected by `dateFilter` @Input.
  */
-export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Date) => boolean) | undefined;
+export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Date) => boolean);
 
 /**
  * Type expected by `maskConfig` @Input.
  */
-export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean | undefined;
+export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean;
 
 /**
  * Default DateMask configuration
@@ -49,7 +49,7 @@ export const DEFAULT_DATE_MASK_CONFIG: StarkTimestampMaskConfig = { format: "DD/
 /**
  * Name of the component
  */
-const componentName: string = "stark-date-picker";
+const componentName = "stark-date-picker";
 
 /**
  * Component to display the stark date-picker
@@ -79,13 +79,13 @@ const componentName: string = "stark-date-picker";
 })
 export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date> {
-	public static nextId: number = 0;
+	public static nextId = 0;
 
 	@HostBinding()
-	public id: string = `stark-date-picker-input-${StarkDatePickerComponent.nextId++}`;
+	public id = `stark-date-picker-input-${StarkDatePickerComponent.nextId++}`;
 
 	@HostBinding("attr.aria-describedby")
-	public describedBy: string = "";
+	public describedBy = "";
 
 	@HostBinding("class.floating")
 	public get shouldLabelFloat(): boolean {
@@ -97,11 +97,11 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * Whenever this value is changed, we set the dateFilter
 	 */
 	@Input()
-	public get dateFilter(): StarkDatePickerFilter {
+	public get dateFilter(): StarkDatePickerFilter | undefined {
 		return this._dateFilter;
 	}
 
-	public set dateFilter(value: StarkDatePickerFilter) {
+	public set dateFilter(value: StarkDatePickerFilter | undefined) {
 		this._dateFilter = value;
 		if (this._dateFilter === "OnlyWeekends") {
 			this._dateFilter = this.filterOnlyWeekends;
@@ -123,51 +123,51 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * If a `StarkTimestampMaskConfig` is passed, it is set as the date mask config.
 	 */
 	@Input()
-	public dateMask: StarkDatePickerMaskConfig;
+	public dateMask?: StarkDatePickerMaskConfig;
 
 	/**
 	 * Whether the datepicker is disabled
 	 */
 	@Input()
-	public disabled: boolean;
+	public disabled = false;
 
 	/**
 	 * Maximum date of the date picker
 	 */
 	@Input()
-	public max: Date;
+	public max?: Date;
 
 	/**
 	 * Minimum date of the date picker
 	 */
 	@Input()
-	public min: Date;
+	public min?: Date;
 
 	/**
 	 * id attribute of the form field wrapping the mat-datepicker
 	 * id attribute followed by "-input" of the mat-datepicker-input
 	 */
 	@Input()
-	public pickerId: string = "";
+	public pickerId = "";
 
 	/**
 	 * HTML "name" attribute of the element.
 	 */
 	@Input()
-	public pickerName: string = "";
+	public pickerName = "";
 
 	/**
 	 * Placeholder to be displayed in the datepicker
 	 * Dynamically translated via the @ngx-translate service if the provided text is defined in the translation keys).
 	 */
 	@Input()
-	public placeholder: string;
+	public placeholder = "";
 
 	/**
 	 * If the date-picker is required or not. by default, the date-picker is not required
 	 */
 	@Input()
-	public required: boolean;
+	public required = false;
 
 	/**
 	 * Source Date to be bound to the datepicker model
@@ -189,7 +189,8 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * @ignore
 	 * @internal
 	 */
-	private _value: Date | null;
+	// tslint:disable-next-line:no-null-keyword
+	private _value: Date | null = null;
 
 	/**
 	 * Output that will emit a specific date whenever the selection has changed
@@ -207,19 +208,19 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * Reference to the MatDatepicker embedded in this component
 	 */
 	@ViewChild(MatDatepicker)
-	public picker: MatDatepicker<moment.Moment>;
+	public picker!: MatDatepicker<moment.Moment>;
 
 	/**
 	 * Reference to the MatDatepickerInput embedded in this component
 	 */
 	@ViewChild(MatDatepickerInput)
-	public pickerInput: MatDatepickerInput<moment.Moment>;
+	public pickerInput!: MatDatepickerInput<moment.Moment>;
 
 	/**
 	 * @ignore
 	 * @internal
 	 */
-	public inputMaskEnabled: boolean = false;
+	public inputMaskEnabled = false;
 
 	/**
 	 * @ignore
@@ -245,7 +246,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * @ignore
 	 * @internal
 	 */
-	public focused: boolean = false;
+	public focused = false;
 
 	/**
 	 * Variable to define to use MatFormFieldControl
@@ -272,13 +273,13 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * @internal
 	 * Original placeholder translation key to keep in memory to translate again when language changes.
 	 */
-	private originalPlaceholder: string = "";
+	private originalPlaceholder = "";
 
 	/**
 	 * @ignore
 	 * @internal
 	 */
-	private translateOnLangChangeSubscription: Subscription;
+	private translateOnLangChangeSubscription!: Subscription;
 
 	/**
 	 * Class constructor
@@ -329,7 +330,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 				: this.originalPlaceholder;
 			this.stateChanges.next();
 		});
-		
+
 		super.ngOnInit();
 	}
 
@@ -338,7 +339,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 */
 	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
-		if ((changes["max"] || changes["min"]) && this.max < this.min) {
+		if (this.max && this.min && (changes["max"] || changes["min"]) && this.max < this.min) {
 			this.logger.error(
 				componentName + ": min date [" + this.min.toDateString() + "] cannot be after max date [" + this.max.toDateString() + "]"
 			);
@@ -349,7 +350,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 			this.cdRef.detectChanges();
 			this._onValidatorChange();
 		}
-		
+
 		if (changes["placeholder"]) {
 			this.originalPlaceholder = changes["placeholder"].currentValue || "";
 			// Handle translation internally because mat-form-field uses the value of `@Input public placeholder` to display the label / placeholder
@@ -575,11 +576,8 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * If the inputMask is not enabled, it returns `undefined` to disable `starkTimestampMask`.
 	 * Otherwise, it returns the defined configuration.
 	 */
-	public getTimestampMaskConfig(): StarkDatePickerMaskConfig {
-		if (this.inputMaskEnabled) {
-			return this.dateMaskConfig;
-		}
-		return undefined;
+	public getTimestampMaskConfig(): StarkDatePickerMaskConfig | undefined {
+		return this.inputMaskEnabled ? this.dateMaskConfig : undefined;
 	}
 
 	/**

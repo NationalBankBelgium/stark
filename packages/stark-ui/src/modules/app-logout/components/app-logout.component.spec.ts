@@ -43,7 +43,7 @@ describe("AppLogoutComponent", () => {
 					{
 						// See https://github.com/NationalBankBelgium/stark/issues/1088
 						provide: HAMMER_LOADER,
-						useValue: () => new Subject<any>().toPromise()
+						useValue: (): Promise<any> => new Subject<any>().toPromise()
 					}
 				],
 				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)

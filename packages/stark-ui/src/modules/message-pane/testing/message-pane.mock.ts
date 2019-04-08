@@ -10,7 +10,7 @@ export class MockStarkMessagePaneService implements SpyObj<StarkMessagePaneServi
 	/**
 	 * Flag to specify whether all messages should be cleared on navigation
 	 */
-	public clearOnNavigation: SpyObj<StarkMessagePaneService>["clearOnNavigation"];
+	public clearOnNavigation = false;
 
 	/**
 	 * Add messages to the message pane

@@ -36,12 +36,12 @@ import moment from "moment";
 })
 class TestHostComponent {
 	@ViewChild(StarkDatePickerComponent)
-	public datePickerComponent: StarkDatePickerComponent;
+	public datePickerComponent!: StarkDatePickerComponent;
 
-	public placeholder: string;
-	public value: Date;
-	public isDisabled: boolean;
-	public required: boolean;
+	public placeholder?: string;
+	public value?: Date;
+	public isDisabled?: boolean;
+	public required?: boolean;
 
 	/**
 	 * Simulates the OnValueChanges event of the date-picker component
@@ -61,18 +61,23 @@ class TestHostComponent {
 	selector: `host-form-control-component`,
 	template: `
 		<mat-form-field>
-			<stark-date-picker [required]="required" [placeholder]="placeholder" [dateMask]="dateMask" [formControl]="formControl"></stark-date-picker>
+			<stark-date-picker
+				[required]="required"
+				[placeholder]="placeholder"
+				[dateMask]="dateMask"
+				[formControl]="formControl"
+			></stark-date-picker>
 		</mat-form-field>
 	`
 })
 class TestHostFormControlComponent {
 	@ViewChild(StarkDatePickerComponent)
-	public datePickerComponent: StarkDatePickerComponent;
+	public datePickerComponent!: StarkDatePickerComponent;
 
-	public dateMask: StarkDatePickerMaskConfig;
-	public formControl: FormControl = new FormControl();
-	public placeholder: string;
-	public required: boolean;
+	public dateMask?: StarkDatePickerMaskConfig;
+	public formControl = new FormControl();
+	public placeholder?: string;
+	public required?: boolean;
 }
 
 describe("DatePickerComponent", () => {
@@ -126,7 +131,7 @@ describe("DatePickerComponent", () => {
 			it("should NOT have any inputs set", () => {
 				expect(component.value).toBeNull();
 				expect(component.dateFilter).toBeUndefined();
-				expect(component.disabled).toBeUndefined();
+				expect(component.disabled).toBe(false);
 				expect(component.required).toBeUndefined();
 				expect(component.max).toBeUndefined();
 				expect(component.min).toBeUndefined();

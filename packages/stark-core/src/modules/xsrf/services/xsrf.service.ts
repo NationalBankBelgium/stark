@@ -19,7 +19,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/servic
  */
 @Injectable()
 export class StarkXSRFServiceImpl implements StarkXSRFService {
-	protected xsrfCookieName: string = "XSRF-TOKEN";
+	protected xsrfCookieName = "XSRF-TOKEN";
 	protected currentToken?: string;
 
 	public constructor(
@@ -131,7 +131,7 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 					})
 					.subscribe({
 						// error: (errorWrapper: StarkHttpErrorWrapper) => {
-						error: (errorResponse: HttpErrorResponse) => {
+						error: (errorResponse: HttpErrorResponse): void => {
 							// the backend might return 404 Not Found, but it will still send the cookie
 							if (errorResponse.status !== StarkHttpStatusCodes.HTTP_404_NOT_FOUND) {
 								const httpResponseHeaders: Map<string, string> = new Map<string, string>();

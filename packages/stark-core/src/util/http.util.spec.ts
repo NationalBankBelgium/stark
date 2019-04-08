@@ -11,7 +11,7 @@ describe("Stark HTTP helpers", () => {
 			const expected: HttpParams = new HttpParams({ encoder: STARK_HTTP_PARAM_ENCODER })
 				.set("param1", "value1")
 				.set("param2", "value2");
-			const expectedString: string = "param1=value1&param2=value2";
+			const expectedString = "param1=value1&param2=value2";
 
 			const result: HttpParams = StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(initial);
 
@@ -22,7 +22,7 @@ describe("Stark HTTP helpers", () => {
 		it("with special characters", () => {
 			const initial: Map<string, StarkQueryParam> = new Map();
 			initial.set("special", ";/?:@&=+,$");
-			const expectedString: string = "special=%3B%2F%3F%3A%40%26%3D%2B%2C%24";
+			const expectedString = "special=%3B%2F%3F%3A%40%26%3D%2B%2C%24";
 
 			const result: HttpParams = StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(initial);
 
@@ -33,7 +33,7 @@ describe("Stark HTTP helpers", () => {
 			const initial: Map<string, StarkQueryParam> = new Map();
 			initial.set("nothing", undefined);
 			initial.set("something", "value");
-			const expectedString: string = "nothing=&something=value";
+			const expectedString = "nothing=&something=value";
 
 			const result: HttpParams = StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(initial);
 
@@ -44,7 +44,7 @@ describe("Stark HTTP helpers", () => {
 			const initial: Map<string, StarkQueryParam> = new Map();
 			initial.set("zero", <any>0);
 			initial.set("something", "value");
-			const expectedString: string = "zero=0&something=value";
+			const expectedString = "zero=0&something=value";
 
 			const result: HttpParams = StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(initial);
 
@@ -56,7 +56,7 @@ describe("Stark HTTP helpers", () => {
 			// tslint:disable-next-line:no-null-keyword
 			initial.set("NULL", <any>null);
 			initial.set("something", "value");
-			const expectedString: string = "NULL=null&something=value";
+			const expectedString = "NULL=null&something=value";
 
 			const result: HttpParams = StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(initial);
 
@@ -66,7 +66,7 @@ describe("Stark HTTP helpers", () => {
 		it("with array", () => {
 			const initial: Map<string, StarkQueryParam> = new Map();
 			initial.set("list", ["1", "2", "3"]);
-			const expectedString: string = "list=1&list=2&list=3";
+			const expectedString = "list=1&list=2&list=3";
 
 			const result: HttpParams = StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(initial);
 

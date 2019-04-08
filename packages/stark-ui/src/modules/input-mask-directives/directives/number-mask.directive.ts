@@ -7,7 +7,7 @@ import { StarkNumberMaskConfig } from "./number-mask-config.intf";
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkNumberMask]";
+const directiveName = "[starkNumberMask]";
 
 /**
  * @ignore
@@ -54,7 +54,7 @@ export class StarkNumberMaskDirective extends MaskedInputDirective implements On
 	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkNumberMask")
-	public maskConfig: StarkNumberMaskConfig;
+	public maskConfig: StarkNumberMaskConfig = {};
 
 	/**
 	 * @ignore

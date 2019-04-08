@@ -5,12 +5,12 @@ import { starkIsKBOValidatorName } from "../../validators/is-kbo";
 
 class MyClass {
 	@StarkIsKBO()
-	public name: string;
+	public name!: string;
 }
 
 class SimpleClass {
 	@StarkIsKBO()
-	public dummyObject: object;
+	public dummyObject!: object;
 }
 
 describe("ValidatorDecorator: StarkIsKBO", () => {

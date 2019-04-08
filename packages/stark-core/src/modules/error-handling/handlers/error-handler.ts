@@ -6,8 +6,8 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/servic
 
 @Injectable()
 export class StarkErrorHandler implements ErrorHandler {
-	private _starkLoggingService: StarkLoggingService;
-	private _applicationStore: Store<StarkCoreApplicationState>;
+	private _starkLoggingService?: StarkLoggingService;
+	private _applicationStore?: Store<StarkCoreApplicationState>;
 
 	public constructor(private injector: Injector) {}
 

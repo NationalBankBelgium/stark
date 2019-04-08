@@ -42,7 +42,7 @@ import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateN
 /**
  * @ignore
  */
-export const starkUnauthenticatedUserError: string = "StarkSessionService => user not authenticated";
+export const starkUnauthenticatedUserError = "StarkSessionService => user not authenticated";
 
 /**
  * @ignore
@@ -51,10 +51,10 @@ export const starkUnauthenticatedUserError: string = "StarkSessionService => use
  */
 @Injectable()
 export class StarkSessionServiceImpl implements StarkSessionService {
-	public keepalive: Keepalive;
+	public keepalive?: Keepalive;
 	public session$: Observable<StarkSession>;
-	protected _devAuthenticationHeaders: Map<string, string | string[]>;
-	public countdownStarted: boolean;
+	protected _devAuthenticationHeaders = new Map<string, string | string[]>();
+	public countdownStarted = false;
 
 	// TODO Check if we can simplify this service
 	/* tslint:disable-next-line:parameters-max-number */
@@ -156,7 +156,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 			StarkRoutingTransitionHook.ON_BEFORE,
 			{
 				// match any state except the ones that are children of starkAppInit/starkAppExit or the Ui-Router's root state
-				entering: (state?: StateObject) => {
+				entering: (state?: StateObject): boolean => {
 					if (state && typeof state.name !== "undefined") {
 						const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 						return !state.name.match(regexInitExitStateName) && !(state.abstract && state.name === "");
@@ -224,7 +224,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	protected sendLogoutRequest(url: string, serializedData: string, async: boolean = true): Observable<void> {
 		const httpRequest$: Subject<void> = new Subject<void>();
 
-		const emitXhrResult: Function = (xhrRequest: XMLHttpRequest) => {
+		const emitXhrResult = (xhrRequest: XMLHttpRequest): void => {
 			if (xhrRequest.readyState === XMLHttpRequest.DONE) {
 				if (xhrRequest.status === StarkHttpStatusCodes.HTTP_200_OK || xhrRequest.status === StarkHttpStatusCodes.HTTP_201_CREATED) {
 					httpRequest$.next();
@@ -238,9 +238,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		const xhr: XMLHttpRequest = new XMLHttpRequest();
 
 		if (async) {
-			xhr.onreadystatechange = () => {
-				emitXhrResult(xhr);
-			};
+			xhr.onreadystatechange = (): void => emitXhrResult(xhr);
 		} else {
 			emitXhrResult(xhr);
 		}
@@ -357,10 +355,6 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 
 	public setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string | string[]>): void {
 		this.logger.debug(starkSessionServiceName + ": constructing the authentication headers");
-		if (!this._devAuthenticationHeaders) {
-			this._devAuthenticationHeaders = new Map<string, string>();
-		}
-
 		devAuthenticationHeaders.forEach((value: string | string[], key: string) => {
 			// in Angular, a header value can only be string or string[], not null/undefined (https://github.com/angular/angular/issues/18743)
 			if (key && typeof value !== "undefined" && value !== null) {
@@ -370,7 +364,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	}
 
 	public get devAuthenticationHeaders(): Map<string, string | string[]> {
-		return this._devAuthenticationHeaders || new Map<string, string | string[]>();
+		return this._devAuthenticationHeaders;
 	}
 
 	protected startIdleService(): void {

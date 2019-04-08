@@ -26,12 +26,12 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	 * @internal
 	 * @ignore
 	 */
-	private _latestResults: Readonly<SearchResultsType[]>;
+	private _latestResults?: Readonly<SearchResultsType[]>;
 	/**
 	 * @internal
 	 * @ignore
 	 */
-	private searchStateSubscription: Subscription;
+	private searchStateSubscription!: Subscription;
 
 	/**
 	 * Whether a new search should be performed automatically after initialization in case the last search criteria can be fetched
@@ -50,7 +50,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	 * Observable that will emit the search results. This Observable is created as soon as the Search Page controller is constructed
 	 * and the first value it emits is an empty array in order to avoid the having undefined values passed down to the subscriber(s).
 	 */
-	protected results$: ReplaySubject<SearchResultsType[]>;
+	protected results$!: ReplaySubject<SearchResultsType[]>;
 
 	/**
 	 * Class constructor
@@ -175,7 +175,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	/**
 	 * The latest search results that have been emitted in the results$ Observable.
 	 */
-	public get latestResults(): Readonly<SearchResultsType[]> {
+	public get latestResults(): Readonly<SearchResultsType[]> | undefined {
 		return this._latestResults;
 	}
 

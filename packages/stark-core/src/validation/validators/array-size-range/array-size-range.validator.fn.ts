@@ -6,7 +6,7 @@ import { StarkValidatorImpl } from "../../validator";
  * @ignore
  * Name of the validator, in case injection is needed
  */
-export const starkArraySizeRangeValidatorName: string = "starkArraySizeRange";
+export const starkArraySizeRangeValidatorName = "starkArraySizeRange";
 
 /**
  * @ignore
@@ -18,7 +18,7 @@ export const starkArraySizeRangeValidatorName: string = "starkArraySizeRange";
  */
 export function starkArraySizeRange(array: any[], minSize?: number, maxSize?: number): boolean {
 	const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
-	let isValid: boolean = true;
+	let isValid = true;
 
 	if (typeof minSize !== "undefined") {
 		isValid = isValid && validator.arrayMinSize(array, minSize);

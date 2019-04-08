@@ -23,7 +23,7 @@ function mockInputEvent(value: string, element: HTMLInputElement | HTMLTextAreaE
  * @param word - the word to filter
  */
 function wordFilter(word: string): (v: string) => string {
-	return (v: string) =>
+	return (v: string): string =>
 		v.replace(word, (match: string) =>
 			match
 				.split("")
@@ -42,7 +42,7 @@ describe("TransformInputDirective", () => {
 			public starkTransformInputValue: StarkInputTransformationType = () => {
 				/*noop*/
 			};
-			public value: string = "";
+			public value = "";
 		}
 
 		let fixture: ComponentFixture<TestComponent>;
@@ -66,8 +66,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should set value to uppercase", () => {
-			const input: string = "upper";
-			const expected: string = "UPPER";
+			const input = "upper";
+			const expected = "UPPER";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = "uppercase";
@@ -80,8 +80,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should set value to lowercase", () => {
-			const input: string = "LOWER";
-			const expected: string = "lower";
+			const input = "LOWER";
+			const expected = "lower";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = "lowercase";
@@ -94,11 +94,11 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should replace dirty word", () => {
-			const input: string = "fudge you!";
-			const expected: string = "***** you!";
+			const input = "fudge you!";
+			const expected = "***** you!";
 
 			// Set directive to correct implementation
-			component.starkTransformInputValue = (v: string) =>
+			component.starkTransformInputValue = (v: string): string =>
 				v.replace("fudge", (match: string) =>
 					match
 						.split("")
@@ -123,7 +123,7 @@ describe("TransformInputDirective", () => {
 			public starkTransformInputValue: StarkInputTransformationType = () => {
 				/*noop*/
 			};
-			public formControl: FormControl = new FormControl("");
+			public formControl = new FormControl("");
 		}
 
 		let fixture: ComponentFixture<TestComponent>;
@@ -152,8 +152,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should set value to uppercase", () => {
-			const input: string = "upper";
-			const expected: string = "UPPER";
+			const input = "upper";
+			const expected = "UPPER";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = "uppercase";
@@ -169,8 +169,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should set value to lowercase", () => {
-			const input: string = "LOWER";
-			const expected: string = "lower";
+			const input = "LOWER";
+			const expected = "lower";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = "lowercase";
@@ -186,8 +186,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should replace dirty word", () => {
-			const input: string = "fudge you!";
-			const expected: string = "***** you!";
+			const input = "fudge you!";
+			const expected = "***** you!";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = wordFilter("fudge");
@@ -235,8 +235,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should set value to uppercase", () => {
-			const input: string = "upper";
-			const expected: string = "UPPER";
+			const input = "upper";
+			const expected = "UPPER";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = "uppercase";
@@ -249,8 +249,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should set value to lowercase", () => {
-			const input: string = "LOWER";
-			const expected: string = "lower";
+			const input = "LOWER";
+			const expected = "lower";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = "lowercase";
@@ -263,8 +263,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should replace dirty word", () => {
-			const input: string = "fudge you!";
-			const expected: string = "***** you!";
+			const input = "fudge you!";
+			const expected = "***** you!";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = wordFilter("fudge");
@@ -309,8 +309,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should set value to uppercase", () => {
-			const input: string = "upper";
-			const expected: string = "UPPER";
+			const input = "upper";
+			const expected = "UPPER";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = "uppercase";
@@ -323,8 +323,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should set value to lowercase", () => {
-			const input: string = "LOWER";
-			const expected: string = "lower";
+			const input = "LOWER";
+			const expected = "lower";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = "lowercase";
@@ -337,8 +337,8 @@ describe("TransformInputDirective", () => {
 		});
 
 		it("should replace dirty word", () => {
-			const input: string = "fudge you!";
-			const expected: string = "***** you!";
+			const input = "fudge you!";
+			const expected = "***** you!";
 
 			// Set directive to correct implementation
 			component.starkTransformInputValue = wordFilter("fudge");
@@ -357,7 +357,7 @@ describe("TransformInputDirective", () => {
 			template: "<input [starkTransformInput]='invalidInput'/>"
 		})
 		class TestComponent {
-			public invalidInput: string = "INVALID_INPUT";
+			public invalidInput = "INVALID_INPUT";
 		}
 
 		beforeEach(() => {

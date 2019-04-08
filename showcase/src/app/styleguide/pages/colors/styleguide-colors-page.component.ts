@@ -1,18 +1,11 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Component } from "@angular/core";
 
 @Component({
 	selector: "demo-colors",
 	templateUrl: "./styleguide-colors-page.component.html"
 })
-export class StyleguideColorsPageComponent implements OnInit {
-	public simpleMap: string;
-	public advancedMap: string;
-
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
-
-	public ngOnInit(): void {
-		this.advancedMap = `
+export class StyleguideColorsPageComponent {
+	public advancedMap = `
             $dark-primary-text: rgba(black, 0.87);
             $light-primary-text: white;
 
@@ -51,47 +44,4 @@ export class StyleguideColorsPageComponent implements OnInit {
 
             @import "~@nationalbankbelgium/stark-ui/assets/themes/theming";
         `;
-
-		this.simpleMap = `
-            $dark-primary-text: rgba(black, 0.87);
-            $light-primary-text: white;
-
-            $stark-color-theme: (
-                accent: (
-                color: #8f0039,
-                contrast: $light-primary-text
-                ),
-                alert: (
-                color: #d32f2f,
-                contrast: $light-primary-text
-                ),
-                alt: (
-                color: #323232,
-                contrast: $light-primary-text
-                ),
-                neutral: (
-                color: #bfbfbf,
-                contrast: $light-primary-text
-                ),
-                primary: (
-                color: #0076c8,
-                contrast: $light-primary-text
-                ),
-                success: (
-                color: #4caf50,
-                contrast: $light-primary-text
-                ),
-                warning: (
-                color: #ff9800,
-                contrast: $light-primary-text
-                ),
-                white-transp: (
-                color: rgba(255, 255, 255, 0.87),
-                contrast: $dark-primary-text
-                )
-            );
-
-            @import "~@nationalbankbelgium/stark-ui/assets/themes/theming";
-		`;
-	}
 }

@@ -17,7 +17,7 @@ export type StarkAppSidebarLeftMode = "regular" | "menu" | undefined;
 /**
  * Name of the component
  */
-const componentName: string = "stark-app-sidebar";
+const componentName = "stark-app-sidebar";
 
 /**
  * Component to display the application's sidebar
@@ -38,47 +38,47 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * Default: true
 	 */
 	@Input()
-	public closeOnNavigate: boolean = true;
+	public closeOnNavigate = true;
 
 	/**
 	 * Reference to the MatSidenavContainer embedded in this component
 	 */
 	@ViewChild("appSidenavContainer")
-	public appSidenavContainer: MatSidenavContainer;
+	public appSidenavContainer!: MatSidenavContainer;
 
 	/**
 	 * Reference to the left MatSidenav embedded in this component
 	 */
 	@ViewChild("appSidenavLeft")
-	public appSidenavLeft: MatSidenav;
+	public appSidenavLeft!: MatSidenav;
 
 	/**
 	 * Reference to the right MatSidenav embedded in this component
 	 */
 	@ViewChild("appSidenavRight")
-	public appSidenavRight: MatSidenav;
+	public appSidenavRight!: MatSidenav;
 
 	/**
 	 * Subscription to the close sidebar Observable
 	 */
-	public closeSidebarSubscription: Subscription;
+	public closeSidebarSubscription!: Subscription;
 
 	/**
 	 * Boolean that indicates if the left sidebar menu is currently shifting from larger to smaller desktop
 	 * In this case, it should wait that the transition is finished before applying the smaller screen styles
 	 */
-	public isShiftingToSmaller: boolean = false;
+	public isShiftingToSmaller = false;
 
 	// TODO: move this media query to global variable that can be used through stark-ui
 	/**
 	 * Media query for big screens
 	 */
-	public mediaQueryGtLg: string = "(min-width: 1280px)";
+	public mediaQueryGtLg = "(min-width: 1280px)";
 
 	/**
 	 * Subscription to the open sidebar Observable
 	 */
-	public openSidebarSubscription: Subscription;
+	public openSidebarSubscription!: Subscription;
 
 	/**
 	 * Dynamic mode for the menu, should always show on large desktop screen
@@ -88,22 +88,22 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	/**
 	 * Dynamic mode for the left sidebar
 	 */
-	public sidenavLeftMode: string;
+	public sidenavLeftMode?: "over" | "push" | "side";
 
 	/**
 	 * Either the left sidebar is opened or not
 	 */
-	public sidenavLeftOpened: boolean;
+	public sidenavLeftOpened = false;
 
 	/**
 	 * Subscription to the close sidebar Observable
 	 */
-	public toggleSidebarSubscription: Subscription;
+	public toggleSidebarSubscription!: Subscription;
 
 	/**
 	 * Function to deregister the routing transition hook
 	 */
-	public deregisterTransitionHook: Function;
+	public deregisterTransitionHook!: Function;
 
 	/**
 	 * Class constructor

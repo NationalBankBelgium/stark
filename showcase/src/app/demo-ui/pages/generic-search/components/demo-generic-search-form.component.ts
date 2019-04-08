@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular/core";
 import { StarkSearchFormComponent } from "@nationalbankbelgium/stark-ui";
 import { HeroMovieSearchCriteria } from "../entities";
 import { FormBuilder, FormGroup } from "@angular/forms";
@@ -7,15 +7,26 @@ import { DemoGenericService } from "../services";
 import { take } from "rxjs/operators";
 import isEqual from "lodash-es/isEqual";
 
-const componentName: string = "demo-generic-search-form";
+const componentName = "demo-generic-search-form";
 
 @Component({
 	selector: "demo-generic-search-form",
 	templateUrl: "./demo-generic-search-form.component.html"
 })
-export class DemoGenericSearchFormComponent implements OnInit, OnChanges, StarkSearchFormComponent<HeroMovieSearchCriteria> {
+export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormComponent<HeroMovieSearchCriteria> {
 	@Input()
-	public searchCriteria: HeroMovieSearchCriteria = <any>{};
+	public set searchCriteria(value: HeroMovieSearchCriteria) {
+		if (isEqual(value, this._searchCriteria)) {
+			return;
+		}
+
+		this._searchCriteria = value;
+		this.resetSearchForm(this._searchCriteria);
+	}
+	public get searchCriteria(): HeroMovieSearchCriteria {
+		return this._searchCriteria;
+	}
+	public _searchCriteria: HeroMovieSearchCriteria = {};
 
 	@Output()
 	public workingCopyChanged: EventEmitter<HeroMovieSearchCriteria> = new EventEmitter();
@@ -24,7 +35,7 @@ export class DemoGenericSearchFormComponent implements OnInit, OnChanges, StarkS
 	public heroOptions: string[] = [];
 	public movieOptions: string[] = [];
 
-	public searchForm: FormGroup;
+	public searchForm: FormGroup = this.createSearchForm(this.searchCriteria);
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
@@ -33,8 +44,6 @@ export class DemoGenericSearchFormComponent implements OnInit, OnChanges, StarkS
 	) {}
 
 	public ngOnInit(): void {
-		this.searchForm = this.createSearchForm(this.searchCriteria);
-
 		this.searchForm.valueChanges.subscribe(() => {
 			const modifiedCriteria: HeroMovieSearchCriteria = this.mapFormGroupToSearchCriteria(this.searchForm);
 			this.workingCopyChanged.emit(modifiedCriteria);
@@ -54,16 +63,6 @@ export class DemoGenericSearchFormComponent implements OnInit, OnChanges, StarkS
 			.subscribe((movies: string[]) => (this.movieOptions = movies));
 
 		this.logger.debug(componentName + " is initialized");
-	}
-
-	public ngOnChanges(changes: SimpleChanges): void {
-		if (
-			changes["searchCriteria"] &&
-			!changes["searchCriteria"].isFirstChange() &&
-			!isEqual(changes["searchCriteria"].previousValue, this.searchCriteria)
-		) {
-			this.resetSearchForm(this.searchCriteria);
-		}
 	}
 
 	public createSearchForm(searchCriteria: HeroMovieSearchCriteria): FormGroup {

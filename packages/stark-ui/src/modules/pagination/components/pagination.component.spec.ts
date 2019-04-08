@@ -29,10 +29,10 @@ import createSpyObj = jasmine.createSpyObj;
 })
 class TestHostComponent {
 	@ViewChild(StarkPaginationComponent)
-	public paginationComponent: StarkPaginationComponent;
+	public paginationComponent!: StarkPaginationComponent;
 
-	public htmlSuffixId: string;
-	public paginationConfig: StarkPaginationConfig;
+	public htmlSuffixId?: string;
+	public paginationConfig?: StarkPaginationConfig;
 }
 
 /* tslint:disable:no-big-function no-duplicate-string */
@@ -49,13 +49,13 @@ describe("PaginationComponent", () => {
 		isExtended: true
 	};
 
-	const htmlSuffixId: string = "testHtmlId";
-	const currentPagePrefix: string = "current-page-";
-	const itemsPerPagePrefix: string = "items-per-page-";
-	const pageNumbersSelector: string = "li.page-numbers";
-	const totalPagesSelector: string = "span.total-pages";
+	const htmlSuffixId = "testHtmlId";
+	const currentPagePrefix = "current-page-";
+	const itemsPerPagePrefix = "items-per-page-";
+	const pageNumbersSelector = "li.page-numbers";
+	const totalPagesSelector = "span.total-pages";
 
-	const assertPageNavSelection: Function = (paginationElement: DebugElement, selectedOption: string) => {
+	const assertPageNavSelection: Function = (paginationElement: DebugElement, selectedOption: string): void => {
 		const pageNavElement: DebugElement = paginationElement.query(By.css("ul"));
 		const pageNavOptionElements: DebugElement[] = pageNavElement.queryAll(By.css("li"));
 
@@ -68,8 +68,8 @@ describe("PaginationComponent", () => {
 		}
 	};
 
-	const changeInputValueAndPressEnter: Function = (rootElement: DebugElement, value: string) => {
-		const querySelector: string = "div.pagination-enter-page input";
+	const changeInputValueAndPressEnter: Function = (rootElement: DebugElement, value: string): void => {
+		const querySelector = "div.pagination-enter-page input";
 		const pageSelectorInput: DebugElement = rootElement.query(By.css(querySelector));
 		const nativeInputElement: HTMLInputElement = <HTMLInputElement>pageSelectorInput.nativeElement;
 
@@ -83,7 +83,7 @@ describe("PaginationComponent", () => {
 		const changeEvent: Event = document.createEvent("Event");
 		changeEvent.initEvent("change", true, true);
 		pageSelectorInput.triggerEventHandler("change", changeEvent);
-		
+
 		// key up
 		const keyupEvent: Event = document.createEvent("Event");
 		keyupEvent.initEvent("keyup", true, true);
@@ -99,8 +99,8 @@ describe("PaginationComponent", () => {
 		(<HTMLElement>element.nativeElement).dispatchEvent(clickEvent);
 	};
 
-	const assertPageInputSelection: Function = (rootElement: DebugElement, selectedOption: string) => {
-		const querySelector: string = "div.pagination-enter-page input";
+	const assertPageInputSelection: Function = (rootElement: DebugElement, selectedOption: string): void => {
+		const querySelector = "div.pagination-enter-page input";
 		const pageSelectorInput: DebugElement = rootElement.query(By.css(querySelector));
 		expect(pageSelectorInput.properties["value"].toString()).toBe(selectedOption);
 	};
@@ -620,7 +620,7 @@ describe("PaginationComponent", () => {
 
 	describe("normalizePaginationConfig", () => {
 		it("should set paginationConfig.totalItems to zero if paginationConfig is not defined", () => {
-			const normalizedConfig: StarkPaginationConfig = component.normalizePaginationConfig(undefined);
+			const normalizedConfig: StarkPaginationConfig = component.normalizePaginationConfig(<any>undefined);
 			expect(normalizedConfig).toEqual({ totalItems: 0 });
 		});
 
@@ -709,7 +709,7 @@ describe("PaginationComponent", () => {
 	});
 
 	describe("page nav", () => {
-		const selectorPageNavElement: string = ".stark-pagination ul";
+		const selectorPageNavElement = ".stark-pagination ul";
 
 		it("should be rendered if pageNavIsPresent is true or undefined", () => {
 			hostComponent.paginationConfig = { ...paginationConfig, pageNavIsPresent: true };
@@ -739,7 +739,7 @@ describe("PaginationComponent", () => {
 	});
 
 	describe("page input", () => {
-		const selectorPageSelector: string = ".stark-pagination div.pagination-enter-page";
+		const selectorPageSelector = ".stark-pagination div.pagination-enter-page";
 
 		it("should be rendered if pageInputIsPresent is undefined", () => {
 			hostComponent.paginationConfig = { ...paginationConfig, pageInputIsPresent: undefined };
@@ -840,7 +840,7 @@ describe("PaginationComponent", () => {
 	describe("navigation buttons", () => {
 		describe("goToFirst", () => {
 			let firstButtonElement: DebugElement | null;
-			const selectorFirstButtonElement: string = "li.first-page button";
+			const selectorFirstButtonElement = "li.first-page button";
 
 			it("button should not be rendered in extended mode", () => {
 				hostComponent.paginationConfig = { ...paginationConfig, page: 2, isExtended: true };
@@ -893,7 +893,7 @@ describe("PaginationComponent", () => {
 
 		describe("goToPrevious", () => {
 			let previousButtonElement: DebugElement;
-			const selectorPreviousButtonElement: string = "li.previous button";
+			const selectorPreviousButtonElement = "li.previous button";
 
 			it("should change the page when the page is not already the first one", fakeAsync(() => {
 				hostComponent.paginationConfig = { ...paginationConfig, page: 2 };
@@ -938,7 +938,7 @@ describe("PaginationComponent", () => {
 
 		describe("goToNext", () => {
 			let nextButtonElement: DebugElement;
-			const selectorNextButtonElement: string = "li.next button";
+			const selectorNextButtonElement = "li.next button";
 
 			it("should change the page if the page is not already the last one", fakeAsync(() => {
 				hostComponent.paginationConfig = { ...paginationConfig, page: 1 };
@@ -983,7 +983,7 @@ describe("PaginationComponent", () => {
 
 		describe("goToLast", () => {
 			let lastButtonElement: DebugElement | null;
-			const selectorLastButtonElement: string = "li.last-page button";
+			const selectorLastButtonElement = "li.last-page button";
 
 			it("button should not be rendered in extended mode", () => {
 				hostComponent.paginationConfig = { ...paginationConfig, page: 2, isExtended: true };

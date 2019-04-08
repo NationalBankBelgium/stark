@@ -6,7 +6,7 @@ import { StarkTextMaskConfig } from "./text-mask-config.intf";
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkTextMask]";
+const directiveName = "[starkTextMask]";
 
 /**
  * @ignore
@@ -53,7 +53,7 @@ export class StarkTextMaskDirective extends MaskedInputDirective implements OnCh
 	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkTextMask")
-	public maskConfig: StarkTextMaskConfig;
+	public maskConfig: StarkTextMaskConfig = { mask: false };
 
 	/**
 	 * @ignore

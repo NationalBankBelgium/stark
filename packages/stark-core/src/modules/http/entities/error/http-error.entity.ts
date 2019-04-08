@@ -5,6 +5,7 @@ import { StarkHttpErrorDetail } from "./http-error-detail.entity.intf";
 import { StarkHttpErrorDetailImpl } from "./http-error-detail.entity";
 
 /**
+ * This class is only for serialization purposes
  * @ignore
  */
 @inheritSerialization(StarkHttpErrorBaseImpl)
@@ -14,5 +15,5 @@ export class StarkHttpErrorImpl extends StarkHttpErrorBaseImpl implements StarkH
 	}
 
 	@autoserializeAs(StarkHttpErrorDetailImpl)
-	public errors: StarkHttpErrorDetail[];
+	public errors!: StarkHttpErrorDetail[];
 }

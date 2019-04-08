@@ -45,7 +45,7 @@ export class StarkDOMUtil {
 	 */
 	public static searchParentElementByClasses(element: Element, classNames: string[]): Element | undefined {
 		if (element.parentElement) {
-			let parentElementHasClass: boolean = false;
+			let parentElementHasClass = false;
 			for (const className of classNames) {
 				if (StarkDOMUtil.hasClass(element.parentElement, className)) {
 					parentElementHasClass = true;

@@ -19,7 +19,7 @@ import { StarkProgressIndicatorComponent } from "../components/progress-indicato
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkProgressIndicator]";
+const directiveName = "[starkProgressIndicator]";
 
 /**
  * This directive must be used as attribute on a DOM element and the config provided should be a {@link StarkProgressIndicatorConfig} object:
@@ -49,13 +49,13 @@ const directiveName: string = "[starkProgressIndicator]";
 })
 export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 	@Input()
-	public starkProgressIndicator: StarkProgressIndicatorConfig;
+	public starkProgressIndicator!: StarkProgressIndicatorConfig;
 
-	public topic: string;
-	public type: StarkProgressIndicatorType | string;
-	public progressSubscription: Subscription;
+	public topic!: string;
+	public type!: StarkProgressIndicatorType | string;
+	public progressSubscription!: Subscription;
 	private _componentFactory: ComponentFactory<StarkProgressIndicatorComponent>;
-	public _componentRef: ComponentRef<StarkProgressIndicatorComponent>;
+	public _componentRef!: ComponentRef<StarkProgressIndicatorComponent>;
 
 	public constructor(
 		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) public _progressService: StarkProgressIndicatorService,
@@ -88,8 +88,6 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 	 * Finally, if the component should be hidden or shown, the stark-hide class is removed/added accordingly
 	 */
 	public ngOnInit(): void {
-		this.registerInstance(this.starkProgressIndicator);
-
 		this._componentRef = this._viewContainer.createComponent(this._componentFactory);
 
 		// TODO The element is here added as a child, not as a sibling
@@ -97,15 +95,21 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 
 		this._viewContainer.insert(this._componentRef.hostView);
 
-		// tslint:disable-next-line:bool-param-default
-		this.progressSubscription = this._progressService.isVisible(this.topic).subscribe((isVisible: boolean | undefined) => {
-			this._componentRef.instance.isShown = !!isVisible;
-			if (isVisible) {
-				this.renderer.addClass(this.elementRef.nativeElement, "stark-hide");
-			} else {
-				this.renderer.removeClass(this.elementRef.nativeElement, "stark-hide");
+		this.progressSubscription = this._progressService.isVisible(this.topic).subscribe(
+			(isVisible: boolean = false): void => {
+				this._componentRef.instance.isShown = isVisible;
+				if (isVisible) {
+					this.renderer.addClass(this.elementRef.nativeElement, "stark-hide");
+				} else {
+					this.renderer.removeClass(this.elementRef.nativeElement, "stark-hide");
+				}
 			}
-		});
+		);
+
+		if (!this.starkProgressIndicator) {
+			throw new Error("StarkProgressIndicatorDirective: a StarkProgressIndicatorConfig is required.");
+		}
+		this.registerInstance(this.starkProgressIndicator);
 	}
 
 	/**

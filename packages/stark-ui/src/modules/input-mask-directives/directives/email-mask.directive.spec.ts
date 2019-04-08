@@ -16,9 +16,9 @@ describe("EmailMaskDirective", () => {
 		template: getTemplate("[starkEmailMask]='emailMaskConfig'")
 	})
 	class TestComponent {
-		public emailMaskConfig: boolean;
-		public ngModelValue: string = "";
-		public formControl: FormControl = new FormControl("");
+		public emailMaskConfig?: boolean | "";
+		public ngModelValue = "";
+		public formControl = new FormControl("");
 	}
 
 	function getTemplate(emailMaskDirective: string): string {
@@ -112,7 +112,7 @@ describe("EmailMaskDirective", () => {
 
 			expect(inputElement.nativeElement.value).toBe("my-email@ .");
 
-			hostComponent.emailMaskConfig = <any>undefined;
+			hostComponent.emailMaskConfig = undefined;
 			fixture.detectChanges();
 
 			changeInputValue(inputElement, "what@.ever@.");
@@ -120,7 +120,7 @@ describe("EmailMaskDirective", () => {
 
 			expect(inputElement.nativeElement.value).toBe("my-email@ ."); // the mask is enabled by default
 
-			hostComponent.emailMaskConfig = <any>""; // use case when the directive is used with no inputs: <input type='text' starkEmailMask>
+			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' starkEmailMask>
 			fixture.detectChanges();
 
 			changeInputValue(inputElement, "what@.ever@.");
@@ -203,7 +203,7 @@ describe("EmailMaskDirective", () => {
 
 			expect(hostComponent.ngModelValue).toBe("my-email@ .");
 
-			hostComponent.emailMaskConfig = <any>undefined;
+			hostComponent.emailMaskConfig = undefined;
 			fixture.detectChanges();
 
 			changeInputValue(inputElement, "what@.ever@.");
@@ -211,7 +211,7 @@ describe("EmailMaskDirective", () => {
 
 			expect(hostComponent.ngModelValue).toBe("my-email@ ."); // the mask is enabled by default
 
-			hostComponent.emailMaskConfig = <any>""; // use case when the directive is used with no inputs: <input type='text' [(ngModel)]='ngModelValue' starkEmailMask>
+			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' [(ngModel)]='ngModelValue' starkEmailMask>
 			fixture.detectChanges();
 
 			changeInputValue(inputElement, "what@.ever@.");
@@ -316,7 +316,7 @@ describe("EmailMaskDirective", () => {
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
-			hostComponent.emailMaskConfig = <any>undefined;
+			hostComponent.emailMaskConfig = undefined;
 			fixture.detectChanges();
 			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask is enabled by default
 
@@ -328,7 +328,7 @@ describe("EmailMaskDirective", () => {
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
-			hostComponent.emailMaskConfig = <any>""; // use case when the directive is used with no inputs: <input type='text' [formControl]='formControl' starkEmailMask>
+			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' [formControl]='formControl' starkEmailMask>
 			fixture.detectChanges();
 			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask is enabled by default
 

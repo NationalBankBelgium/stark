@@ -15,12 +15,12 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-pretty-print";
+const componentName = "stark-pretty-print";
 
 /**
  * The prefix used in the PrismJs css classes
  */
-const prismClassPrefix: string = "language-";
+const prismClassPrefix = "language-";
 
 /**
  * A reference to the prettier library
@@ -75,13 +75,13 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 	 * The text to be pretty printed
 	 */
 	@Input()
-	public data: string;
+	public data = "";
 
 	/**
 	 * The format to be used to pretty print the data string
 	 */
 	@Input()
-	public format: StarkPrettyPrintFormat;
+	public format?: StarkPrettyPrintFormat;
 
 	/**
 	 * If true, also highlight the pretty printed string
@@ -92,12 +92,12 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * The final prettified string
 	 */
-	public prettyString: string;
+	public prettyString = "";
 
 	/**
 	 * Whether the prettified string should be highlighted as well
 	 */
-	public highlightingEnabled: boolean;
+	public highlightingEnabled = false;
 
 	/**
 	 * Class constructor
@@ -135,7 +135,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 
 		if (this.data && this.data.length > 0) {
 			let prismGrammar: Grammar = <any>"";
-			let prismClass: string = "";
+			let prismClass = "";
 
 			try {
 				switch (this.format) {

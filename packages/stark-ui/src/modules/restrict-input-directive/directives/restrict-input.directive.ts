@@ -4,7 +4,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkRestrictInput]";
+const directiveName = "[starkRestrictInput]";
 
 /**
  * Directive to restrict the characters that can be typed in a field to allow only those matching a regex pattern.
@@ -18,7 +18,7 @@ export class StarkRestrictInputDirective implements OnInit {
 	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkRestrictInput")
-	public inputRestriction: string;
+	public inputRestriction = "";
 
 	/**
 	 * Event handler to be invoked on a "keypress" event in the field

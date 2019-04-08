@@ -10,7 +10,7 @@ class MyClass {
 
 class SimpleClass {
 	@StarkMapNotEmpty()
-	public name: string;
+	public name!: string;
 }
 
 describe("ValidatorDecorator: StarkMapNotEmpty", () => {

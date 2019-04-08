@@ -1,58 +1,42 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnDestroy } from "@angular/core";
+import { FormControl, Validators } from "@angular/forms";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkDatePickerFilter, StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
-import { FormControl, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
+
+const DAY_IN_MILLISECONDS = 86400000;
 
 @Component({
 	selector: "demo-date-picker",
 	templateUrl: "./demo-date-picker-page.component.html"
 })
-export class DemoDatePickerPageComponent implements OnInit {
-	public currentDate: Date;
-	public ngModelDate: Date;
-	public disabled: boolean;
-	public formControl: FormControl;
-	public minDate: Date;
-	public maxDate: Date;
-	public customDateFilter: StarkDatePickerFilter;
-	public referenceList: ReferenceLink[];
-	public maskConfig: StarkTimestampMaskConfig;
+export class DemoDatePickerPageComponent implements OnDestroy {
+	public currentDate = new Date();
+	public minDate = new Date();
+	public maxDate = new Date(Date.now() + 30 * DAY_IN_MILLISECONDS);
 
-	public required: boolean;
+	public ngModelDate: Date = new Date();
+	public formControl = new FormControl(new Date(), Validators.required);
 
-	public subscription: Subscription;
+	public disabled = false;
+	public required = false;
+
+	public customDateFilter: StarkDatePickerFilter = (date: Date): boolean => date.getDay() === 3;
+	public maskConfig: StarkTimestampMaskConfig = { format: "DD-MM-YYYY" };
+
+	public subscription = this.formControl.valueChanges.subscribe(this.onDateChanged.bind(this));
+
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Date Picker component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkDatePickerComponent.html"
+		}
+	];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.currentDate = new Date();
-		this.ngModelDate = new Date();
-		this.minDate = new Date();
-		this.maxDate = new Date();
-		this.maxDate.setMonth(this.maxDate.getMonth() + 6);
-		this.formControl = new FormControl(new Date(), Validators.required);
-		this.maskConfig = { format: "DD-MM-YYYY" };
-
-		this.subscription = this.formControl.valueChanges.subscribe((date: Date) => {
-			this.onDateChanged(date);
-		});
-
-		this.customDateFilter = (date: Date): boolean => {
-			const day: number = date.getDay();
-			return day === 3;
-		};
-
-		this.referenceList = [
-			{
-				label: "Stark Date Picker component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkDatePickerComponent.html"
-			}
-		];
+	public ngOnDestroy(): void {
+		this.subscription.unsubscribe();
 	}
 
 	public onDateChanged(date: Date): void {
@@ -63,15 +47,11 @@ export class DemoDatePickerPageComponent implements OnInit {
 		this.logger.debug("ngModel: ", this.ngModelDate);
 	}
 
-	public toggleDisabledReactiveFormControl(formControl: FormControl): void {
+	public toggleFormControlState(formControl: FormControl): void {
 		if (formControl.disabled) {
 			formControl.enable();
 		} else {
 			formControl.disable();
 		}
-	}
-
-	public changeMax(): void {
-		this.maxDate = new Date(2017, 1, 2);
 	}
 }

@@ -5,7 +5,7 @@ import { StarkUser } from "../entities";
 /**
  * Name of the User service, in case injection is needed
  */
-export const starkUserServiceName: string = "StarkUserService";
+export const starkUserServiceName = "StarkUserService";
 /**
  * InjectionToken version of the service name
  */

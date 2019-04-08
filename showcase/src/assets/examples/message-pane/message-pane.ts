@@ -1,41 +1,24 @@
-import { Component, Inject, OnInit, Renderer2 } from "@angular/core";
+import { Component, Inject, Renderer2 } from "@angular/core";
 import {
 	STARK_MESSAGE_PANE_SERVICE,
 	starkMessagePaneAlignClassPrefix,
 	StarkMessagePaneService,
 	StarkMessageType
 } from "@nationalbankbelgium/stark-ui";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import uniqueId from "lodash-es/uniqueId";
 
-const componentName: string = "demo-message-pane";
-
-/**
- * @ngdoc component
- * @description Layout overview smart component MessagePane
- *
- */
 @Component({
 	selector: "demo-message-pane",
 	templateUrl: "./demo-message-pane.component.html"
 })
-export class DemoMessagePaneComponent implements OnInit {
-	public messagePanePosition: string;
-	public starkMessagePaneString: string = ".stark-message-pane";
+export class DemoMessagePaneComponent {
+	public messagePanePosition = "right";
+	public starkMessagePaneString = ".stark-message-pane";
 
 	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_MESSAGE_PANE_SERVICE) public starkMessagePaneService: StarkMessagePaneService,
 		protected renderer: Renderer2
 	) {}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.logger.debug(componentName + ": controller initialized");
-		this.messagePanePosition = "right";
-	}
 
 	public notifyMessages(): void {
 		this.starkMessagePaneService.add([
@@ -105,14 +88,14 @@ export class DemoMessagePaneComponent implements OnInit {
 		this.starkMessagePaneService.add([
 			{
 				id: uniqueId(),
-				key: "New Error 1",
+				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.ERRORS.NEW_ERROR_1",
 				interpolateValues: {},
 				code: "54987",
 				type: StarkMessageType.ERROR
 			},
 			{
 				id: uniqueId(),
-				key: "New Error 2",
+				key: "SHOWCASE.DEMO.MESSAGE_PANE.MESSAGES.ERRORS.NEW_ERROR_2",
 				interpolateValues: {},
 				code: "333",
 				type: StarkMessageType.ERROR

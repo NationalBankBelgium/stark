@@ -32,7 +32,7 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 	private resourcePath: string;
 	private backend: StarkBackend;
 	private serializer: StarkHttpSerializer<T>;
-	private uuidPlaceholder: string = ":uuid";
+	private uuidPlaceholder = ":uuid";
 
 	public constructor(backend: StarkBackend, resourcePath: string, serializer: StarkHttpSerializer<T>) {
 		this.backend = backend;

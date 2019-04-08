@@ -21,67 +21,39 @@ import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
  */
 export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 	/**
-	 * The Http Service provided by Stark
-	 * @link StarkHttpService
+	 * @ignore
 	 */
-	protected starkHttpService: StarkHttpService<T>;
-	/**
-	 * The logging service.
-	 * @link StarkLoggingService
-	 */
-	protected logger: StarkLoggingService;
-	/**
-	 * The backend that this HttpRespository will target.
-	 * @link StarkBackend
-	 */
-	protected backend: StarkBackend;
-	/**
-	 *
-	 * The resource path that will be used as default for all the requests performed by this HttpRespository.
-	 * This will be replaced by the resourcePath provided (if any) in the getRequestBuilder() method.
-	 */
-	protected resourcePath: string;
-	/**
-	 *
-	 * The serializer that will be attached by default to every StarkHttpRequest sent by this HttpRespository
-	 * to serialize/deserialize the items to be sent/received to/from the backend.
-	 */
-	protected serializer: StarkHttpSerializer<T>;
+	private _serializer?: StarkHttpSerializer<T>;
+	protected get serializer(): StarkHttpSerializer<T> {
+		// set the default serializer in case no custom serializer was defined
+		// it should be set here to prevent exceptions when the type() getter returns values depending on the actual instance ('return this.xxxx')
+		this._serializer = this._serializer || new StarkHttpSerializerImpl<T>(this.type);
+		return this._serializer;
+	}
 
 	/**
 	 * Class constructor
-	 * @param starkHttpService - the Http Service provided by Stark
-	 * @param logger - the logging service
-	 * @param backend - the backend to target
-	 * @param resourcePath - the path used by default
-	 * @param serializer - the serializer used by default
+	 * @param starkHttpService The Http Service provided by Stark.
+	 * @param logger The logging service. @link StarkLoggingService.
+	 * @param backend The backend that this HttpRespository will target.
+	 * @param resourcePath The resource path that will be used as default for all the requests performed by this HttpRespository. This will be replaced by the resourcePath provided (if any) in the getRequestBuilder() method.
+	 * @param serializer The serializer that will be attached by default to every StarkHttpRequest sent by this HttpRespository to serialize/deserialize the items to be sent/received to/from the backend.
 	 */
 	public constructor(
-		starkHttpService: StarkHttpService<T>,
-		logger: StarkLoggingService,
-		backend: StarkBackend | undefined,
-		resourcePath: string | undefined,
+		protected starkHttpService: StarkHttpService<T>,
+		protected logger: StarkLoggingService,
+		protected backend: StarkBackend,
+		protected resourcePath: string,
 		serializer?: StarkHttpSerializer<T>
 	) {
-		this.starkHttpService = starkHttpService;
-		this.logger = logger;
-
-		if (serializer) {
-			this.serializer = serializer;
-		}
-
 		if (!backend) {
-			throw new Error('AbstractStarkHttpRepository: backend config missing for resourcePath "' + this.resourcePath + '".');
-		} else {
-			this.backend = backend;
+			throw new Error(`AbstractStarkHttpRepository: backend config missing for resourcePath "${resourcePath}".`);
 		}
 		if (typeof resourcePath === "undefined") {
-			throw new Error(
-				'AbstractStarkHttpRepository: resourcePath missing in Http Repository with backend "' + this.backend.name + '".'
-			);
-		} else {
-			this.resourcePath = resourcePath;
+			throw new Error(`AbstractStarkHttpRepository: resourcePath missing in Http Repository with backend "${backend.name}".`);
 		}
+
+		this._serializer = serializer;
 	}
 
 	/**
@@ -180,9 +152,6 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 	 */
 	// the default resourcePath of the returned builder will be replaced with the one that is passed here (if any)
 	public getRequestBuilder(resourcePath?: string): StarkHttpRequestBuilder<T> {
-		// set the default serializer in case no custom serializer was defined
-		// it should be set here to prevent exceptions when the type() getter returns values depending on the actual instance ('return this.xxxx')
-		this.serializer = this.serializer || new StarkHttpSerializerImpl<T>(this.type);
 		return new StarkHttpRequestBuilderImpl(this.backend, resourcePath || this.resourcePath, this.serializer);
 	}
 

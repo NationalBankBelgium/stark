@@ -22,8 +22,8 @@ describe("TextMaskDirective", () => {
 	})
 	class TestComponent {
 		public textMaskConfig: StarkTextMaskConfig = textMaskConfig;
-		public ngModelValue: string = "";
-		public formControl: FormControl = new FormControl("");
+		public ngModelValue = "";
+		public formControl = new FormControl("");
 	}
 
 	function getTemplate(textMaskDirective: string): string {

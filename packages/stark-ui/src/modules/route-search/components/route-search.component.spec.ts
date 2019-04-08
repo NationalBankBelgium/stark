@@ -30,9 +30,9 @@ import { mergeUiTranslations } from "../../../common/translations/merge-translat
 })
 class TestHostComponent {
 	@ViewChild(StarkRouteSearchComponent)
-	public routeSearchComponent: StarkRouteSearchComponent;
+	public routeSearchComponent!: StarkRouteSearchComponent;
 
-	public menuConfig: StarkMenuConfig;
+	public menuConfig?: StarkMenuConfig;
 }
 
 /* tslint:disable:no-big-function */
@@ -108,7 +108,7 @@ describe("RouteSearchComponent", () => {
 				{
 					// See https://github.com/NationalBankBelgium/stark/issues/1088
 					provide: HAMMER_LOADER,
-					useValue: () => new Subject<any>().toPromise()
+					useValue: (): Promise<any> => new Subject<any>().toPromise()
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
@@ -232,7 +232,7 @@ describe("RouteSearchComponent", () => {
 		});
 
 		it("should clear the input text as soon as the redirection finishes", () => {
-			const searchFieldValue: string = "test";
+			const searchFieldValue = "test";
 			component.searchField.setValue(searchFieldValue);
 			mockRoutingService.navigateTo.and.returnValue(of("redirection succeeded"));
 			const entry: StarkRouteSearchEntry = { label: "URL 1", targetState: "url1" };
@@ -244,7 +244,7 @@ describe("RouteSearchComponent", () => {
 		});
 
 		it("should NOT clear the input text if the redirection failed", () => {
-			const searchFieldValue: string = "test";
+			const searchFieldValue = "test";
 			component.searchField.setValue(searchFieldValue);
 			mockRoutingService.navigateTo.and.returnValue(throwError("redirection failed"));
 			const entry: StarkRouteSearchEntry = { label: "URL 1", targetState: "url1" };

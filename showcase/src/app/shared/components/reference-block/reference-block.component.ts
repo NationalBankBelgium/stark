@@ -2,7 +2,7 @@ import { Component, HostBinding, Inject, Input, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { ReferenceLink } from "./reference-link.intf";
 
-const componentName: string = "stark-reference-block";
+const componentName = "stark-reference-block";
 
 /**
  * Component to display a list of URLS to documentation
@@ -16,7 +16,7 @@ export class ReferenceBlockComponent implements OnInit {
 	public class: string = componentName;
 
 	@Input()
-	public links: ReferenceLink[];
+	public links: ReferenceLink[] = [];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 

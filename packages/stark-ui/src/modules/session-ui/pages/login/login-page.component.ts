@@ -15,7 +15,7 @@ import {
 /**
  * Name of the component
  */
-const componentName: string = "stark-login-page";
+const componentName = "stark-login-page";
 
 /**
  * Login Page smart component.
@@ -37,18 +37,18 @@ export class StarkLoginPageComponent implements OnInit {
 	 * Target page to navigate to after the user profile is loaded and automatically logged in.
 	 */
 	@Input()
-	public targetState: string;
+	public targetState?: string;
 
 	/**
 	 * Params to pass to the target page (if any).
 	 */
 	@Input()
-	public targetStateParams: RawParams;
+	public targetStateParams?: RawParams;
 
 	/**
 	 * User profiles to be displayed in the list where the user can choose from.
 	 */
-	public users: StarkUser[];
+	public users: StarkUser[] = [];
 
 	/**
 	 * Class constructor

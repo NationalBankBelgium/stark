@@ -8,7 +8,7 @@ import { DomSanitizer } from "@angular/platform-browser";
  */
 export function registerMaterialIconSet(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer): void {
 	// IMPORTANT: the path of the @mdi svg icon set should match the output path given to it in the angular.json file
-	const iconSetUrl: string = "assets/material-icons/mdi.svg";
+	const iconSetUrl = "assets/material-icons/mdi.svg";
 
 	matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl(iconSetUrl));
 }

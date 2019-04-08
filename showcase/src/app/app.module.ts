@@ -121,8 +121,8 @@ export function starkMockDataFactory(): StarkMockData {
 	}
 }
 
-export function initRouterLog(router: UIRouter): Function {
-	return () => logRegisteredStates(router.stateService.get());
+export function initRouterLog(router: UIRouter): () => void {
+	return (): void => logRegisteredStates(router.stateService.get());
 }
 
 export function getXsrfWaitBeforePinging(sessionService: StarkSessionService): Observable<any> {

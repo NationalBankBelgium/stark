@@ -36,8 +36,7 @@ const userErrorMessagePrefix: string = starkUserServiceName + ": invalid user pr
  */
 @Injectable()
 export class StarkUserServiceImpl implements StarkUserService {
-	public user$: Observable<StarkUser | undefined>;
-	public userProfiles: StarkUser[];
+	public userProfiles: StarkUser[] = [];
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -77,9 +76,9 @@ export class StarkUserServiceImpl implements StarkUserService {
 	public getAllUsers(): StarkUser[] {
 		this.store.dispatch(new StarkGetAllUsers());
 
-		const allUsers: StarkUser[] = this.userProfiles;
+		const allUsers: StarkUser[] = this.userProfiles || []; // fallback to empty array in case "userProfiles" is null/undefined
 
-		if (!allUsers || allUsers.length === 0) {
+		if (allUsers.length === 0) {
 			this.store.dispatch(new StarkGetAllUsersFailure(starkUserServiceName + ": No user profiles found in mock data!"));
 		} else {
 			for (const user of allUsers) {

@@ -8,9 +8,11 @@ import { StarkLogMessageImpl } from "./log-message.entity";
  */
 export class StarkLoggingImpl implements StarkLogging {
 	@serialize
-	public uuid: string;
+	public uuid!: string;
+
 	@serialize
-	public applicationId: string;
+	public applicationId!: string;
+
 	@serializeAs(StarkLogMessageImpl)
-	public messages: StarkLogMessage[];
+	public messages!: StarkLogMessage[];
 }

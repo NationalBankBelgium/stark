@@ -66,7 +66,7 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 	}
 
 	public hasAnyRole(roleCodes: string[]): boolean {
-		let hasAnyRole: boolean = false;
+		let hasAnyRole = false;
 
 		if (roleCodes instanceof Array) {
 			for (const roleCode of roleCodes) {
@@ -95,7 +95,7 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 			StarkRoutingTransitionHook.ON_START,
 			{
 				// match only states with permissions except the ones that are children of starkAppInit/starkAppExit or the Ui-Router's root state
-				entering: (state?: StateObject) => {
+				entering: (state?: StateObject): boolean => {
 					const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 					if (
 						state &&

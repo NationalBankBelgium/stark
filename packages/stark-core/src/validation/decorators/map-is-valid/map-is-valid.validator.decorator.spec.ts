@@ -4,12 +4,12 @@ import { StarkMapIsValid, starkMapIsValidValidatorName } from "./map-is-valid.va
 
 class KeyClass {
 	@IsNotEmpty()
-	public id: string;
+	public id!: string;
 }
 
 class ValueClass {
 	@MaxLength(10)
-	public description: string;
+	public description!: string;
 }
 
 class MyClass {
@@ -19,7 +19,7 @@ class MyClass {
 
 class SimpleClass {
 	@StarkMapIsValid()
-	public name: string;
+	public name!: string;
 }
 
 describe("ValidatorDecorator: StarkMapIsValid", () => {

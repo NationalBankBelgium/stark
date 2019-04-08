@@ -19,9 +19,19 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 export type StarkMessagePaneNavItem = "" | "errors" | "warnings" | "infos";
 
 /**
+ * Type of alignment that can be set
+ */
+export type AlignTypes = "left" | "center" | "right";
+
+/**
+ * The default align
+ */
+const DEFAULT_ALIGN: AlignTypes = "right";
+
+/**
  * The name of the component
  */
-const componentName: string = "stark-message-pane";
+const componentName = "stark-message-pane";
 
 // FIXME: refactor the template of this component function to reduce its cyclomatic complexity
 /* tslint:disable:template-cyclomatic-complexity */
@@ -48,7 +58,13 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 	 * Alignment to be used: "left", "center" or "right". Default: "right".
 	 */
 	@Input()
-	public align?: "left" | "center" | "right";
+	public set align(value: AlignTypes) {
+		this._align = value || DEFAULT_ALIGN;
+	}
+	public get align(): "left" | "center" | "right" {
+		return this._align;
+	}
+	private _align: "left" | "center" | "right" = DEFAULT_ALIGN;
 
 	/**
 	 * Collection of messages currently shown.
@@ -62,47 +78,47 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Messages tab currently selected
 	 */
-	public currentNavItem: StarkMessagePaneNavItem;
+	public currentNavItem: StarkMessagePaneNavItem = "";
 
 	/**
 	 * Total number of messages currently shown
 	 */
-	public totalMessages: number;
+	public totalMessages = 0;
 
 	/**
 	 * Maximum level of the messages currently shown (error, warning or info).
 	 */
-	public maxLevel: StarkMessagePaneNavItem;
+	public maxLevel: StarkMessagePaneNavItem = "infos";
 
 	/**
 	 * Whether the message pane is currently visible
 	 */
-	public isVisible: boolean;
+	public isVisible = false;
 
 	/**
 	 * Delay of the animation when the messages are shown
 	 */
-	public showAnimationDelay: number = 20;
+	public showAnimationDelay = 20;
 
 	/**
 	 * Delay of the animation when the messages are hidden
 	 */
-	public hideAnimationDelay: number = 500; // the CSS animation takes 0.4 secs
+	public hideAnimationDelay = 500; // the CSS animation takes 0.4 secs
 
 	/**
 	 * @ignore
 	 */
-	public errorMessages$: Observable<StarkMessage[]>;
+	public errorMessages$!: Observable<StarkMessage[]>;
 
 	/**
 	 * @ignore
 	 */
-	public infoMessages$: Observable<StarkMessage[]>;
+	public infoMessages$!: Observable<StarkMessage[]>;
 
 	/**
 	 * @ignore
 	 */
-	public warningMessages$: Observable<StarkMessage[]>;
+	public warningMessages$!: Observable<StarkMessage[]>;
 
 	/**
 	 * @ignore
@@ -130,13 +146,7 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
-		if (!this.align) {
-			this.align = "right";
-		}
-
 		this.renderer.addClass(this.elementRef.nativeElement, starkMessagePaneAlignClassPrefix + this.align);
-		this.currentNavItem = "";
-		this.isVisible = false;
 
 		const appMsgCollection$: Observable<StarkMessageCollection> = this.messagePaneService.getAll();
 
@@ -192,7 +202,7 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 	 * @param messageCollection - the collection to count
 	 */
 	private countMessages(messageCollection: StarkMessageCollection): number {
-		let msgCount: number = 0;
+		let msgCount = 0;
 
 		if (messageCollection) {
 			if (messageCollection.errorMessages.length > 0) {

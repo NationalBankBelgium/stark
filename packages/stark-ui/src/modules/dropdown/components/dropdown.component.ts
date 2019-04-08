@@ -31,7 +31,7 @@ import  isEqual  from "lodash-es/isEqual";
 /**
  * Name of the component
  */
-const componentName: string = "stark-dropdown";
+const componentName = "stark-dropdown";
 
 /**
  * Component to display dropdown list based on the options passed as parameters. The dropdown component is based
@@ -61,13 +61,13 @@ const componentName: string = "stark-dropdown";
 })
 export class StarkDropdownComponent extends AbstractStarkUiComponent
 	implements OnInit, OnChanges, OnInit, OnDestroy, ControlValueAccessor, MatFormFieldControl<any | any[]>, Validator {
-	public static nextId: number = 0;
+	public static nextId = 0;
 
 	@HostBinding()
-	public id: string = `stark-dropdown-input-${StarkDropdownComponent.nextId++}`;
+	public id = `stark-dropdown-input-${StarkDropdownComponent.nextId++}`;
 
 	@HostBinding("attr.aria-describedby")
-	public describedBy: string = "";
+	public describedBy = "";
 
 	@HostBinding("class.floating")
 	public get shouldLabelFloat(): boolean {
@@ -84,13 +84,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * HTML "id" attribute of the element.
 	 */
 	@Input()
-	public dropdownId: string;
+	public dropdownId = "undefined";
 
 	/**
 	 * HTML "name" attribute of the element.
 	 */
 	@Input()
-	public dropdownName: string;
+	public dropdownName = "undefined";
 
 	/**
 	 * header Text to be displayed as the dropdown's header. Such header will be shown at the top of the
@@ -104,21 +104,21 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * Whether the dropdown is disabled
 	 */
 	@Input()
-	public disabled: boolean = false;
+	public disabled = false;
 
 	/**
 	 * Allows multiple option selection. Setting the attribute to "true" or empty
 	 * will enable this feature. (optional)
 	 */
 	@Input()
-	public multiSelect?: boolean = false;
+	public multiSelect = false;
 
 	/**
 	 * Array of options to be included in the dropdown list. This parameter is a one-way
 	 * binding (one-directional).
 	 */
 	@Input()
-	public options: any[];
+	public options: any[] = [];
 
 	/**
 	 * Property name to be used as id of the options defined. If this parameter as
@@ -140,13 +140,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * Dynamically translated via the @ngx-translate service if the provided text is defined in the translation keys.
 	 */
 	@Input()
-	public placeholder: string;
+	public placeholder = "";
 
 	/**
 	 * If the dropdown is required or not. by default, the dropdown is not required
 	 */
 	@Input()
-	public required: boolean = false;
+	public required = false;
 
 	/**
 	 * Source object to be bound to the dropdown ngModel.
@@ -179,7 +179,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * @ignore
 	 * @internal
 	 */
-	public optionsAreSimpleTypes: boolean;
+	public optionsAreSimpleTypes?: boolean;
 
 	/**
 	 * @ignore
@@ -199,7 +199,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * @ignore
 	 * @internal
 	 */
-	public focused: boolean = false;
+	public focused = false;
 
 	/**
 	 * Variable to define to use MatFormFieldControl
@@ -231,13 +231,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * @internal
 	 * Original placeholder translation key to keep in memory to translate again when language changes.
 	 */
-	private originalPlaceholder: string = "";
+	private originalPlaceholder = "";
 
 	/**
 	 * @ignore
 	 * @internal
 	 */
-	private translateOnLangChangeSubscription: Subscription;
+	private translateOnLangChangeSubscription?: Subscription;
 
 	/**
 	 * Class constructor

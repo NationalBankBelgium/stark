@@ -2,7 +2,7 @@
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer
-		[extensions]="['HTML', 'TS']"
+		[extensions]="['HTML']"
 		filesPath="restrict-input-directive/restrict-input-directive"
 		exampleTitle="SHOWCASE.DEMO.DIRECTIVES.RESTRICT_INPUT.TITLE"
 	>
@@ -28,12 +28,7 @@
 			</mat-form-field>
 			<mat-form-field>
 				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.RESTRICT_INPUT.INPUT_NO_SPECIAL_CHARACTERS</mat-label>
-				<input
-					name="test"
-					matInput
-					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.TYPE_A_VALUE' | translate"
-					starkRestrictInput="\w"
-				/>
+				<input name="test" matInput [placeholder]="'SHOWCASE.DEMO.DIRECTIVES.TYPE_A_VALUE' | translate" starkRestrictInput="\w" />
 			</mat-form-field>
 			<mat-form-field>
 				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.RESTRICT_INPUT.INPUT_UPPERCASE_CHARACTERS</mat-label>

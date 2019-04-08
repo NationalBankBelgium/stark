@@ -16,7 +16,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-app-logout";
+const componentName = "stark-app-logout";
 
 /**
  * Component to display the application's logout button

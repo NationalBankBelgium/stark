@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Component } from "@angular/core";
 import { StarkPaginateEvent, StarkPaginationConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
 
@@ -8,64 +7,50 @@ type PaginationConfigType = "simple" | "extended" | "advanced" | "compact";
 @Component({
 	selector: "demo-pagination",
 	templateUrl: "./demo-pagination-page.component.html",
-	styleUrls: ["./demo-pagination-page.component.scss"]
 })
-export class DemoPaginationPageComponent implements OnInit {
-	public paginationSimpleConfig: StarkPaginationConfig;
-	public paginationExtendedConfig: StarkPaginationConfig;
-	public paginationAdvancedConfig: StarkPaginationConfig;
-	public paginationCompactConfig: StarkPaginationConfig;
-	public paginateEventSimple: string;
-	public paginateEventExtended: string;
-	public paginateEventAdvanced: string;
-	public paginateEventCompact: string;
-	public referenceList: ReferenceLink[];
+export class DemoPaginationPageComponent {
+	public paginationSimpleConfig: StarkPaginationConfig = {
+		totalItems: 20,
+		page: 1,
+		itemsPerPage: 10,
+		itemsPerPageOptions: [2, 4, 6, 8, 10, 20]
+	};
+	public paginateEventSimple = "";
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
+	public paginationExtendedConfig: StarkPaginationConfig = {
+		totalItems: 20,
+		page: 1,
+		itemsPerPage: 2,
+		itemsPerPageOptions: [2, 4, 6, 8, 10, 20],
+		isExtended: true
+	};
+	public paginateEventExtended = "";
 
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.paginationSimpleConfig = {
-			totalItems: 20,
-			page: 1,
-			itemsPerPage: 10,
-			itemsPerPageOptions: [2, 4, 6, 8, 10, 20]
-		};
+	public paginationAdvancedConfig: StarkPaginationConfig = {
+		totalItems: 20,
+		page: 1,
+		itemsPerPage: 4,
+		itemsPerPageOptions: [2, 4, 6, 8, 10, 20],
+		itemsPerPageIsPresent: true,
+		pageInputIsPresent: false,
+		pageNavIsPresent: true
+	};
+	public paginateEventAdvanced = "";
 
-		this.paginationExtendedConfig = {
-			totalItems: 20,
-			page: 1,
-			itemsPerPage: 2,
-			itemsPerPageOptions: [2, 4, 6, 8, 10, 20],
-			isExtended: true
-		};
+	public paginationCompactConfig: StarkPaginationConfig = {
+		totalItems: 20,
+		page: 1,
+		itemsPerPage: 4,
+		itemsPerPageOptions: [2, 4, 6, 8, 10, 20]
+	};
+	public paginateEventCompact = "";
 
-		this.paginationAdvancedConfig = {
-			totalItems: 20,
-			page: 1,
-			itemsPerPage: 4,
-			itemsPerPageOptions: [2, 4, 6, 8, 10, 20],
-			itemsPerPageIsPresent: true,
-			pageInputIsPresent: false,
-			pageNavIsPresent: true
-		};
-
-		this.paginationCompactConfig = {
-			totalItems: 20,
-			page: 1,
-			itemsPerPage: 4,
-			itemsPerPageOptions: [2, 4, 6, 8, 10, 20]
-		};
-
-		this.referenceList = [
-			{
-				label: "Stark Pagination component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkPaginationComponent.html"
-			}
-		];
-	}
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Pagination component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkPaginationComponent.html"
+		}
+	];
 
 	public onPaginationChange(paginateEvent: StarkPaginateEvent, config: PaginationConfigType): void {
 		switch (config) {

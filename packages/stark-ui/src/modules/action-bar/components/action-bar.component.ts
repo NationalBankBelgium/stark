@@ -9,7 +9,7 @@ export type StarkActionBarComponentMode = "full" | "compact";
 /**
  * Name of the component
  */
-const componentName: string = "stark-action-bar";
+const componentName = "stark-action-bar";
 
 /**
  * Component to display the application's action bars
@@ -28,13 +28,13 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 * HTML id of action bar component.
 	 */
 	@Input()
-	public actionBarId: string = "";
+	public actionBarId = "";
 
 	/**
 	 * StarkActionBarConfig object.
 	 */
 	@Input()
-	public actionBarConfig: StarkActionBarConfig;
+	public actionBarConfig: StarkActionBarConfig = { actions: [] };
 
 	/**
 	 * If provided, this object will be passed as parameter in every
@@ -47,7 +47,7 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 * Alternative actions
 	 */
 	@Input()
-	public alternativeActions: StarkAction[];
+	public alternativeActions?: StarkAction[];
 
 	/**
 	 * Default color of the buttons
@@ -66,7 +66,7 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	/**
 	 * status of the extended action in full mode
 	 */
-	public isExtended: boolean = false;
+	public isExtended = false;
 
 	/**
 	 * Class constructor

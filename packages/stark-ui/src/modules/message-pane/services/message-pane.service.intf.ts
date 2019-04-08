@@ -6,7 +6,7 @@ import { StarkMessageCollection } from "../entities/message-collection.entity.in
 /**
  * The name of the service
  */
-export const starkMessagePaneServiceName: string = "StarkMessagePaneService";
+export const starkMessagePaneServiceName = "StarkMessagePaneService";
 /**
  * Injection Token version of the Service Name
  */

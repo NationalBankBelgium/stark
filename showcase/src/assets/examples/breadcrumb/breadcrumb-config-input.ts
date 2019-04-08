@@ -1,26 +1,11 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Component } from "@angular/core";
 import { StarkBreadcrumbConfig } from "@nationalbankbelgium/stark-ui";
 
-const componentName: string = "breadcrumb-both-input-component";
-
-/**
- * Demo Breadcrumb with breadcrumbConfig component page
- */
 @Component({
 	selector: "demo-breadcrumb",
 	templateUrl: "./demo-breadcrumb.component.html"
 })
-export class DemoBreadcrumbComponent implements OnInit {
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.logger.debug(componentName + ": controller initialized");
-	}
-
+export class DemoBreadcrumbComponent {
 	public breadcrumbConfig: StarkBreadcrumbConfig = {
 		breadcrumbPaths: [
 			{

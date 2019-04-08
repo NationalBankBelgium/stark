@@ -2,7 +2,7 @@
  * @ignore
  * Name of the validator, in case injection is needed.
  */
-export const starkIsCompanyNumberValidatorName: string = "starkIsCompanyNumber";
+export const starkIsCompanyNumberValidatorName = "starkIsCompanyNumber";
 
 /**
  * @ignore
@@ -10,7 +10,7 @@ export const starkIsCompanyNumberValidatorName: string = "starkIsCompanyNumber";
  * @param companyNumber - the company number to validate
  */
 export function starkIsCompanyNumber(companyNumber: string): boolean {
-	let valid: boolean = false;
+	let valid = false;
 
 	if (typeof companyNumber === "string") {
 		const enterpriseNumberRegex: RegExp = /^[01]?[0-9]{3}[.][0-9]{3}[.][0-9]{3}/;

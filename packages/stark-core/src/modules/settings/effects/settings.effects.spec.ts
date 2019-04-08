@@ -23,7 +23,7 @@ describe("Effect: StarkSettingsEffects", () => {
 				provideMockActions(() => actions),
 				{
 					provide: STARK_SESSION_SERVICE,
-					useFactory: () => new MockStarkSessionService()
+					useFactory: (): MockStarkSessionService => new MockStarkSessionService()
 				}
 			],
 			imports: []

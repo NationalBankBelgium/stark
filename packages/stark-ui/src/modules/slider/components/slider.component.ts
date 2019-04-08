@@ -1,4 +1,4 @@
-import  isEqual  from "lodash-es/isEqual";
+import isEqual from "lodash-es/isEqual";
 import {
 	AfterViewInit,
 	Component,
@@ -22,7 +22,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-slider";
+const componentName = "stark-slider";
 
 /**
  * Component to display a slider with one or more handles
@@ -47,13 +47,13 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 * Configuration object for the slider instance to be created.
 	 */
 	@Input()
-	public sliderConfig: StarkSliderConfig;
+	public sliderConfig!: StarkSliderConfig;
 
 	/**
 	 * HTML "id" attribute of the element.
 	 */
 	@Input()
-	public sliderId: string;
+	public sliderId = "undefined";
 
 	/**
 	 * Array of numeric values to be set to the slider.
@@ -61,7 +61,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 * For range sliders, the array should contain two or more values.
 	 */
 	@Input()
-	public values: number[];
+	public values!: number[];
 
 	/**
 	 * Event to be emitted when the slider's value(s) change.
@@ -72,17 +72,17 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	/**
 	 * Stores the latest value, to be able to see if values have been changed
 	 */
-	public latestUnencodedValues: number[];
+	public latestUnencodedValues?: number[];
 
 	/**
 	 * set to true if the slider is in horizontal mode
 	 */
-	public isHorizontal: boolean;
+	public isHorizontal = false;
 
 	/**
 	 * a reference to the noUiSlider component inside the noUiSlider library
 	 */
-	public slider: noUiSliderLibrary.noUiSlider;
+	public slider!: noUiSliderLibrary.noUiSlider;
 
 	/**
 	 * a reference to the noUiSlider library
@@ -110,8 +110,15 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 * Component lifecycle hook that is called after data-bound properties of a directive are initialized.
 	 */
 	public ngOnInit(): void {
-		this.logger.debug(componentName + ": component initialized");
+		if (!this.values) {
+			throw new Error("StarkSliderComponent: values should be set.");
+		}
+		if (!this.sliderConfig) {
+			throw new Error("StarkSliderComponent: sliderConfig should be set.");
+		}
+
 		this.isHorizontal = this.sliderConfig.orientation !== "vertical";
+		this.logger.debug(componentName + ": component initialized");
 	}
 
 	/**

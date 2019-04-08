@@ -5,7 +5,7 @@ import { StarkSerializable } from "../../../serialization";
 
 class Shape {
 	@autoserialize
-	public uuid: string = "mock-uuid";
+	public uuid = "mock-uuid";
 
 	@autoserialize
 	public type: string;

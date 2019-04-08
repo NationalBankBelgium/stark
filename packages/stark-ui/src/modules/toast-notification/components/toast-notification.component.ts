@@ -8,7 +8,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-toast-notification";
+const componentName = "stark-toast-notification";
 
 /**
  * Component display stark's toast notification (based on Angular Material's MatSnackBar) with custom html

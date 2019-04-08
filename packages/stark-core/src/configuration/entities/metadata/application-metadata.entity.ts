@@ -7,6 +7,7 @@ import { StarkLanguage } from "../language/language.entity.intf";
 import { StarkLanguages } from "../language/language.constants";
 
 /**
+ * This class is only for serialization purposes
  * @ignore
  */
 export class StarkApplicationMetadataImpl implements StarkApplicationMetadata {
@@ -15,32 +16,32 @@ export class StarkApplicationMetadataImpl implements StarkApplicationMetadata {
 	@IsNotEmpty({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public name: string;
+	public name!: string;
 
 	@IsNotEmpty({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public description: string;
+	public description!: string;
 
 	@IsNotEmpty({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public version: string;
+	public version!: string;
 
 	@IsNotEmpty({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public environment: string;
+	public environment!: string;
 
 	@IsNotEmpty({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public buildTimestamp: string;
+	public buildTimestamp!: string;
 
 	@IsNotEmpty({ groups: ["temp"] })
 	@IsString({ groups: ["temp"] })
 	@autoserialize
-	public deploymentTimestamp: string;
+	public deploymentTimestamp!: string;
 
 	@IsDefined({ groups: ["settings"] })
 	@ArrayNotEmpty({ groups: ["settings"] })

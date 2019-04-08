@@ -5,12 +5,12 @@ import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-n
 
 class MyClass {
 	@StarkIsCompanyNumber()
-	public name: string;
+	public name!: string;
 }
 
 class SimpleClass {
 	@StarkIsCompanyNumber()
-	public dummyObject: object;
+	public dummyObject!: object;
 }
 
 describe("ValidatorDecorator: StarkIsCompanyNumber", () => {

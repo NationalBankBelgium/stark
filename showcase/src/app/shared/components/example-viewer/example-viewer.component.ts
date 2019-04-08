@@ -18,9 +18,9 @@ export class ExampleViewerComponent implements OnInit {
 	@Input()
 	public extensions: string[];
 	@Input()
-	public filesPath: string;
+	public filesPath = "undefined";
 	@Input()
-	public exampleTitle: string;
+	public exampleTitle = "undefined";
 
 	public appBaseHref: string;
 	public examplesFolder: string;
@@ -62,7 +62,7 @@ export class ExampleViewerComponent implements OnInit {
 		const trailingSlashRegex: RegExp = /\/$/;
 		const matches: RegExpExecArray | null = finalUrlRegex.exec(window.location.pathname);
 
-		let finalBaseHref: string = "";
+		let finalBaseHref = "";
 
 		if (matches && matches[1]) {
 			finalBaseHref = matches[1]; // match group 1 contains the base url (i.e. "/showcase/latest/")

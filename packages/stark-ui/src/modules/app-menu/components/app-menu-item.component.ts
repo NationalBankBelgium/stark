@@ -26,7 +26,18 @@ import { StarkMenuGroup } from "./app-menu-group.intf";
 /**
  * Name of the component
  */
-const componentName: string = "stark-app-menu-item";
+const componentName = "stark-app-menu-item";
+
+/**
+ *
+ * Default value for MenuGroup
+ */
+const DEFAULT_MENU_GROUP: StarkMenuGroup = {
+	id: "",
+	label: "",
+	isVisible: false,
+	isEnabled: false
+};
 
 /**
  * Component to display app-menu-item based on the options passed as parameters.
@@ -44,13 +55,13 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	 * Current menu level
 	 */
 	@Input()
-	public level: number;
+	public level = 0;
 
 	/**
 	 * Data source of the component
 	 */
 	@Input()
-	public menuGroup: StarkMenuGroup;
+	public menuGroup: StarkMenuGroup = DEFAULT_MENU_GROUP;
 
 	/**
 	 * Event to emit when the component is activated
@@ -68,12 +79,12 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	 * Viewchild catching the extension panel in order to open/close it programmatically
 	 */
 	@ViewChild("menuGroupsPanel")
-	public menuGroupsPanel: MatExpansionPanel;
+	public menuGroupsPanel!: MatExpansionPanel;
 
 	/**
 	 * Active status of the component
 	 */
-	private _isActive: boolean = false;
+	private _isActive = false;
 
 	public set isActive(isActive: boolean) {
 		this._isActive = isActive;

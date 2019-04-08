@@ -295,7 +295,7 @@ describe("AbstractSearchComponent", () => {
 			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
 			genericSearchService.search.and.returnValue(of(expectedResult));
 
-			const dummyTopic: string = "dummyTopic";
+			const dummyTopic = "dummyTopic";
 			component.setProgressTopic(dummyTopic);
 
 			component.ngOnInit();
@@ -316,7 +316,7 @@ describe("AbstractSearchComponent", () => {
 		it("should call progressService show/hide methods passing the progressTopic defined before and after performing a failing search", () => {
 			genericSearchService.search.and.returnValue(throwError("search failed"));
 
-			const dummyTopic: string = "dummyTopic";
+			const dummyTopic = "dummyTopic";
 			component.setProgressTopic(dummyTopic);
 
 			component.ngOnInit();
@@ -390,10 +390,12 @@ interface SearchCriteria {
 }
 
 function createObservableOf<T>(value: T, teardown: Function): Observable<T> {
-	return new Observable((subscriber: Subscriber<T>) => {
-		subscriber.next(value);
-		return teardown;
-	});
+	return new Observable(
+		(subscriber: Subscriber<T>): Function => {
+			subscriber.next(value);
+			return teardown;
+		}
+	);
 }
 
 class SearchComponentHelper extends AbstractStarkSearchComponent<MockResource, SearchCriteria> {

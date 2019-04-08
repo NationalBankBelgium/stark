@@ -5,5 +5,5 @@ export class StarkSettings {
 	/**
 	 * the user's preferred language
 	 */
-	public preferredLanguage: string;
+	public preferredLanguage = "";
 }

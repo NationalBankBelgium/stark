@@ -1,16 +1,19 @@
 import { StarkResource } from "@nationalbankbelgium/stark-core";
 import { autoserialize } from "cerialize";
 
+/**
+ * This class is only for serialization purposes
+ */
 export class HeroMovie implements StarkResource {
 	@autoserialize
-	public uuid: string;
+	public uuid!: string;
 
 	@autoserialize
-	public year: number;
+	public year!: number;
 
 	@autoserialize
-	public hero: string;
+	public hero!: string;
 
 	@autoserialize
-	public movie: string;
+	public movie!: string;
 }

@@ -15,7 +15,7 @@ import uniqueId from "lodash-es/uniqueId";
  */
 @Injectable()
 export class StarkRbacUnauthorizedNavigationEffects {
-	private _starkToastNotificationService: StarkToastNotificationService;
+	private _starkToastNotificationService?: StarkToastNotificationService;
 
 	/**
 	 * Class constructor
@@ -65,8 +65,6 @@ export class StarkRbacUnauthorizedNavigationEffects {
 			})
 		);
 	}
-
-	//
 
 	/**
 	 * Gets the StarkToastNotificationService from the Injector.

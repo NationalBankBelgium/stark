@@ -48,7 +48,7 @@ import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "@national
 /**
  * Name of the component
  */
-const componentName: string = "stark-table";
+const componentName = "stark-table";
 
 /**
  * Default filter configuration
@@ -124,7 +124,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Data that will be display inside your table.
 	 */
 	@Input()
-	public data: object[];
+	public data: object[] = [];
 
 	/**
 	 * Object which contains filtering information for the table.
@@ -149,7 +149,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * HTML id of the table
 	 */
 	@Input()
-	public htmlId: string;
+	public htmlId?: string;
 
 	/**
 	 * Determine if you can select the rows in the table
@@ -179,7 +179,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Whether to display the pagination component
 	 */
 	@Input()
-	public paginate: boolean = false;
+	public paginate = false;
 
 	/**
 	 * Shows or hides the minimap component in the header. When set to 'compact' it shows the compacted minimap
@@ -197,7 +197,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * {@link StarkActionBarConfig} object for the action bar component to be displayed in all the rows
 	 */
 	@Input()
-	public tableRowActions: StarkTableRowActions;
+	public tableRowActions: StarkTableRowActions = { actions: [] };
 
 	/**
 	 * @deprecated - use {@link this.tableRowActions}
@@ -251,30 +251,30 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Reference to the MatTable embedded in this component
 	 */
 	@ViewChild(MatTable)
-	public table: MatTable<object>;
+	public table!: MatTable<object>;
 
 	/**
 	 * Reference to the MatPaginator embedded in this component
 	 */
 	@ViewChild(StarkPaginationComponent)
-	public starkPaginator: StarkPaginationComponent;
+	public starkPaginator!: StarkPaginationComponent;
 
 	/**
 	 * Columns added automatically by this component according to the columnProperties input
 	 */
 	@ViewChildren(StarkTableColumnComponent)
-	public viewColumns: QueryList<StarkTableColumnComponent>;
+	public viewColumns!: QueryList<StarkTableColumnComponent>;
 
 	/**
 	 * Columns added by the user via transclusion inside an <div> element with class "stark-table-columns"
 	 */
 	@ContentChildren(StarkTableColumnComponent)
-	public contentColumns: QueryList<StarkTableColumnComponent>;
+	public contentColumns!: QueryList<StarkTableColumnComponent>;
 
 	/**
 	 * Array of StarkTableColumnComponents defined in this table
 	 */
-	public columns: StarkTableColumnComponent[];
+	public columns: StarkTableColumnComponent[] = [];
 
 	/**
 	 * Array of StarkAction for alt mode
@@ -284,34 +284,34 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * {@link StarkActionBarConfig} object for the action bar component in regular mode
 	 */
-	public customTableRegularActions: StarkActionBarConfig;
+	public customTableRegularActions: StarkActionBarConfig = { actions: [] };
 
 	/**
 	 * MatTableDataSource associated to the MatTable embedded in this component
 	 */
-	public dataSource: MatTableDataSource<object>;
+	public dataSource!: MatTableDataSource<object>;
 
 	/**
 	 * Array of columns (column id's) to be displayed in the table.
 	 */
 	public displayedColumns: string[] = [];
 
-	public _globalFilterFormCtrl: FormControl;
+	public _globalFilterFormCtrl = new FormControl();
 
 	/**
 	 * Whether the fixed header is enabled.
 	 */
-	public isFixedHeaderEnabled: boolean = false;
+	public isFixedHeaderEnabled = false;
 
 	/**
 	 * Whether the current sorting is done on multiple columns
 	 */
-	public isMultiSorting: boolean = false;
+	public isMultiSorting = false;
 
 	/**
 	 * Whether the sorting by multiple columns is enabled.
 	 */
-	public isMultiSortEnabled: boolean = false;
+	public isMultiSortEnabled = false;
 
 	/**
 	 * Whether the multiple row selection is enabled.
@@ -323,7 +323,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * @ignore
 	 */
-	private _selectionSub: Subscription;
+	private _selectionSub!: Subscription;
 
 	/**
 	 * Angular CDK selection model used for the "master" selection of the table
@@ -362,8 +362,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.customTableRegularActions = { actions: [] };
 			this.customTableAltActions = this.customTableActions;
 		}
-
-		this._globalFilterFormCtrl = new FormControl(this.filter.globalFilterValue);
 	}
 
 	/**
@@ -379,7 +377,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public ngAfterViewInit(): void {
 		this.logger.debug(componentName + ": ngAfterViewInit");
 		// add the columns the developer defined with the <stark-table-column>
-		this.columns = this.viewColumns.toArray().concat(this.contentColumns.toArray());
+		this.columns = [...this.viewColumns.toArray(), ...this.contentColumns.toArray()];
 
 		this.removeOldColumnsFromTable();
 		this.addColumnsToTable(this.columns);
@@ -435,9 +433,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 		if (changes["filter"]) {
 			this.filter = { ...defaultFilter, ...this.filter };
-			if (typeof this._globalFilterFormCtrl !== "undefined") {
-				this._globalFilterFormCtrl.setValue(this.filter.globalFilterValue);
-			}
+			this._globalFilterFormCtrl.setValue(this.filter.globalFilterValue);
 		}
 
 		if (changes["fixedHeader"]) {
@@ -550,7 +546,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 		this.starkPaginator.emitMatPaginationEvent();
 
-		this.dataSource.filterPredicate = (rowData: object, globalFilter: string) => {
+		this.dataSource.filterPredicate = (rowData: object, globalFilter: string): boolean => {
 			const matchFilter: boolean[] = [];
 
 			if (globalFilter !== "%empty%") {
@@ -846,7 +842,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public getColumnSortingPriority(columnName: string): number | undefined {
 		let columnSortingPriority: number | undefined;
-		let index: number = 1;
+		let index = 1;
 
 		if (this.orderProperties instanceof Array) {
 			for (const orderProperty of this.orderProperties) {
@@ -867,7 +863,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * @returns Whether the filter has been reset
 	 */
 	public resetFilterValueOnDataChange(): boolean {
-		let filterValueReset: boolean = false;
+		let filterValueReset = false;
 
 		if (
 			typeof this.filter.globalFilterValue === "string" &&

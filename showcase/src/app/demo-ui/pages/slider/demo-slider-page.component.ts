@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Component } from "@angular/core";
 import { StarkSliderConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
 
@@ -13,18 +12,21 @@ export enum SLIDER_HANDLES {
 	templateUrl: "./demo-slider-page.component.html",
 	styleUrls: ["./demo-slider-page.component.scss"]
 })
-export class DemoSliderPageComponent implements OnInit {
-	public referenceList: ReferenceLink[];
-
+export class DemoSliderPageComponent {
 	public SLIDER_HANDLES: typeof SLIDER_HANDLES = SLIDER_HANDLES;
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public loggingService: StarkLoggingService) {}
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Slider component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkSliderComponent.html"
+		}
+	];
 
 	/***
 	 * Simple Horizontal Slider
 	 */
-	public isSimpleHorizontalSliderEnabled: boolean;
-	public valueForSimpleHorizontalSlider: number = 100;
+	public isSimpleHorizontalSliderEnabled = true;
+	public valueForSimpleHorizontalSlider = 100;
 	public simpleHorizontalSliderValues: number[] = [100];
 	public simpleHorizontalSliderConfig: StarkSliderConfig = {
 		connect: [true, false],
@@ -44,9 +46,9 @@ export class DemoSliderPageComponent implements OnInit {
 	/***
 	 * Horizontal Range Slider
 	 */
-	public isHorizontalRangeSliderEnabled: boolean;
-	public lowerValueForHorizontalRangeSlider: number = 100;
-	public upperValueForHorizontalRangeSlider: number = 900;
+	public isHorizontalRangeSliderEnabled = true;
+	public lowerValueForHorizontalRangeSlider = 100;
+	public upperValueForHorizontalRangeSlider = 900;
 	public horizontalRangeSliderValues: number[] = [100, 900];
 	public horizontalRangeSliderConfig: StarkSliderConfig = {
 		connect: [false, true, false],
@@ -66,8 +68,8 @@ export class DemoSliderPageComponent implements OnInit {
 	/***
 	 * Simple Vertical Slider
 	 */
-	public isSimpleVerticalSliderEnabled: boolean;
-	public valueForSimpleVerticalSlider: number = 100;
+	public isSimpleVerticalSliderEnabled = true;
+	public valueForSimpleVerticalSlider = 100;
 	public simpleVerticalSliderValues: number[] = [100];
 	public simpleVerticalSliderConfig: StarkSliderConfig = {
 		connect: [true, false],
@@ -88,9 +90,9 @@ export class DemoSliderPageComponent implements OnInit {
 	/***
 	 * Vertical Range Slider
 	 */
-	public isVerticalRangeSliderEnabled: boolean;
-	public lowerValueForVerticalRangeSlider: number = 100;
-	public upperValueForVerticalRangeSlider: number = 900;
+	public isVerticalRangeSliderEnabled = true;
+	public lowerValueForVerticalRangeSlider = 100;
+	public upperValueForVerticalRangeSlider = 900;
 	public verticalRangeSliderValues: number[] = [100, 900];
 	public verticalRangeSliderConfig: StarkSliderConfig = {
 		connect: [false, true, false],
@@ -107,24 +109,6 @@ export class DemoSliderPageComponent implements OnInit {
 			density: 6
 		}
 	};
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.loggingService.debug("Hello from the `Slider` component");
-		this.isSimpleHorizontalSliderEnabled = true;
-		this.isHorizontalRangeSliderEnabled = true;
-		this.isSimpleVerticalSliderEnabled = true;
-		this.isVerticalRangeSliderEnabled = true;
-
-		this.referenceList = [
-			{
-				label: "Stark Slider component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkSliderComponent.html"
-			}
-		];
-	}
 
 	/***
 	 * Simple Horizontal Slider

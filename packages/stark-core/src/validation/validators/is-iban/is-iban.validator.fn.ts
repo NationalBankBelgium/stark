@@ -4,7 +4,7 @@ import { electronicFormatIBAN, isValidIBAN } from "ibantools";
  * @ignore
  * Name of the validator, in case injection is needed.
  */
-export const starkIsIBANValidatorName: string = "starkIsIBAN";
+export const starkIsIBANValidatorName = "starkIsIBAN";
 
 /**
  * @ignore

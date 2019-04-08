@@ -14,9 +14,9 @@ export enum SLIDER_HANDLES {
 export class DemoSliderComponent {
 	public SLIDER_HANDLES: typeof SLIDER_HANDLES = SLIDER_HANDLES;
 
-	public isSliderEnabled: boolean;
-	public lowerValueForSlider: number = 100;
-	public upperValueForSlider: number = 900;
+	public isSliderEnabled = true;
+	public lowerValueForSlider = 100;
+	public upperValueForSlider = 900;
 	public sliderValues: number[] = [100, 900];
 	public sliderConfig: StarkSliderConfig = {
 		connect: [false, true, false],

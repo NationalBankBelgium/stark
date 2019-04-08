@@ -8,7 +8,12 @@ import { createTimestampPipe } from "./timestamp-pipe.fn";
 /**
  * Name of the directive
  */
-const directiveName: string = "[starkTimestampMask]";
+const directiveName = "[starkTimestampMask]";
+
+/**
+ * The Time date format that is used when no other is specified.
+ */
+const DEFAULT_DATE_TIME_FORMAT = "DD-MM-YYYY HH:mm:ss";
 
 /**
  * @ignore
@@ -51,24 +56,24 @@ export const STARK_TIMESTAMP_MASK_VALUE_ACCESSOR: Provider = {
 })
 export class StarkTimestampMaskDirective extends MaskedInputDirective implements OnChanges {
 	/**
+	 * Default configuration.
+	 * It will be merged with the configuration passed to the directive.
+	 */
+	private readonly defaultTimestampMaskConfig: StarkTimestampMaskConfig = {
+		format: DEFAULT_DATE_TIME_FORMAT
+	};
+
+	/**
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkTimestampMask")
-	public maskConfig: StarkTimestampMaskConfig;
+	public maskConfig?: StarkTimestampMaskConfig;
 
 	/**
 	 * @ignore
 	 */
 	public elementRef: ElementRef;
-
-	/**
-	 * Default configuration.
-	 * It will be merged with the configuration passed to the directive.
-	 */
-	private readonly defaultTimestampMaskConfig: StarkTimestampMaskConfig = {
-		format: "DD-MM-YYYY HH:mm:ss"
-	};
 
 	/**
 	 * Class constructor
@@ -107,7 +112,7 @@ export class StarkTimestampMaskDirective extends MaskedInputDirective implements
 	 * Create a valid configuration to be passed to the MaskedInputDirective
 	 * @param maskConfig - The provided configuration via the directive's input
 	 */
-	public normalizeMaskConfig(maskConfig: StarkTimestampMaskConfig): Ng2TextMaskConfig {
+	public normalizeMaskConfig(maskConfig?: StarkTimestampMaskConfig): Ng2TextMaskConfig {
 		if (typeof maskConfig === "undefined") {
 			return { mask: false }; // remove the mask
 		} else {
@@ -128,7 +133,7 @@ export class StarkTimestampMaskDirective extends MaskedInputDirective implements
 	 */
 	public convertFormatIntoMask(format: string): MaskArray {
 		const mask: MaskArray = [];
-		for (let i: number = 0; i < format.length; i++) {
+		for (let i = 0; i < format.length; i++) {
 			if (
 				format.charAt(i) === "D" ||
 				format.charAt(i) === "M" ||

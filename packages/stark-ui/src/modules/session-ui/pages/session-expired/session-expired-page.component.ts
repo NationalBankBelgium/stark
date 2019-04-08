@@ -5,7 +5,7 @@ import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig, StarkL
 /**
  * Name of the component
  */
-const componentName: string = "stark-session-expired-page";
+const componentName = "stark-session-expired-page";
 
 /**
  * Session Expired Page smart component.

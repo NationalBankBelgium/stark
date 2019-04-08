@@ -1,4 +1,5 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.DATE_PICKER.TITLE</h1>
+
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer
@@ -25,8 +26,9 @@
 				<div *ngIf="formControl.hasError('matDatepickerMax')">Max date</div>
 			</mat-error>
 		</mat-form-field>
+
 		<div>
-			<mat-checkbox (change)="toggleDisabledReactiveFormControl(formControl)" [value]="formControl.disabled">
+			<mat-checkbox (change)="toggleFormControlState(formControl)" [value]="formControl.disabled">
 				{{ "SHOWCASE.COMMON.DISABLED" | translate }}
 			</mat-checkbox>
 		</div>
@@ -105,4 +107,5 @@
 		</mat-form-field>
 	</example-viewer>
 </section>
+
 <stark-reference-block [links]="referenceList"></stark-reference-block>

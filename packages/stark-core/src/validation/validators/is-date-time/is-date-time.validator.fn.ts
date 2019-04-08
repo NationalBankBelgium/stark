@@ -4,7 +4,7 @@ import moment from "moment";
  * @ignore
  * Name of the validator, in case injection is needed
  */
-export const starkIsDateTimeValidatorName: string = "starkIsDateTime";
+export const starkIsDateTimeValidatorName = "starkIsDateTime";
 
 /**
  * @ignore

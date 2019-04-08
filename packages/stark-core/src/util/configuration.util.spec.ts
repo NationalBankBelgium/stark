@@ -13,7 +13,7 @@ import { StarkBackendAuthenticationTypes, StarkBackendImpl } from "../modules/ht
 
 // tslint:disable-next-line:no-big-function
 describe("Util: ConfigurationUtil", () => {
-	const errorMessagePrefix: string = "some prefix";
+	const errorMessagePrefix = "some prefix";
 	const configErrorMessage: RegExp = new RegExp(STARK_APP_CONFIG.toString() + " constant is not valid");
 	const metadataErrorMessage: RegExp = new RegExp(STARK_APP_METADATA.toString() + " constant is not valid");
 

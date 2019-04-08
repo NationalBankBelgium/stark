@@ -14,7 +14,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Name of the component
  */
-const componentName: string = "stark-breadcrumb";
+const componentName = "stark-breadcrumb";
 
 /**
  * Component to display the breadcrumb of the view where it is included.
@@ -43,7 +43,9 @@ export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implement
 	 * @ignore
 	 * @internal
 	 */
-	public transitionHookDeregisterFn: () => void;
+	public deregisterTransitionHook: () => void = () => {
+		/*noop*/
+	};
 
 	/**
 	 * Class constructor
@@ -69,7 +71,7 @@ export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implement
 		if (typeof this.breadcrumbConfig === "undefined") {
 			this.breadcrumbConfig = { breadcrumbPaths: this.getPathsFromStateTree() };
 			// then refresh the config after every successful transition
-			this.transitionHookDeregisterFn = this.routingService.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, {}, () => {
+			this.deregisterTransitionHook = this.routingService.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, {}, () => {
 				this.breadcrumbConfig = { breadcrumbPaths: this.getPathsFromStateTree() };
 			});
 		}
@@ -79,9 +81,7 @@ export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implement
 	 * Component lifecycle hook
 	 */
 	public ngOnDestroy(): void {
-		if (this.transitionHookDeregisterFn) {
-			this.transitionHookDeregisterFn();
-		}
+		this.deregisterTransitionHook();
 	}
 
 	/**
@@ -89,23 +89,22 @@ export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implement
 	 * From the current child state up to the root parent
 	 */
 	public getPathsFromStateTree(): StarkBreadcrumbPath[] {
-		const statePaths: StarkBreadcrumbPath[] = [];
-
-		const stateTreeParams: Map<string, any> = this.routingService.getStateTreeParams();
-
-		stateTreeParams.forEach((stateParams: any, stateName: string) => {
-			const stateTranslationKey: string = this.routingService.getTranslationKeyFromState(stateName);
-
-			const breadcrumbPath: StarkBreadcrumbPath = {
-				id: "breadcrumb-path-" + stateName.toLowerCase(),
-				state: stateName,
-				stateParams: stateParams,
-				translationKey: stateTranslationKey
-			};
-			statePaths.unshift(breadcrumbPath); // added to the start of the array because we go in the reverse way
-		});
-
-		return statePaths;
+		const stateTreeParams = this.routingService.getStateTreeParams();
+		return (
+			// convert Map<string,any> to Array<[string,any]>
+			Array.from(stateTreeParams)
+				// Transform values into StarkBreadcrumbPath
+				.map(
+					([stateName, stateParams]: [string, any]): StarkBreadcrumbPath => ({
+						id: `breadcrumb-path-${stateName.toLowerCase()}`,
+						state: stateName,
+						stateParams: stateParams,
+						translationKey: this.routingService.getTranslationKeyFromState(stateName)
+					})
+				)
+				// Reverse the array
+				.reverse()
+		);
 	}
 
 	/**

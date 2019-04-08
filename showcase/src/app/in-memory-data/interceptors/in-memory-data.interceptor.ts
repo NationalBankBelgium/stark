@@ -19,7 +19,7 @@ export interface HostUrlParts {
  */
 @Injectable()
 export class InMemoryDataHttpInterceptor implements HttpInterceptor {
-	protected xsrfCookieName: string = "XSRF-TOKEN";
+	protected xsrfCookieName = "XSRF-TOKEN";
 
 	public constructor() {
 		/* empty constructor */

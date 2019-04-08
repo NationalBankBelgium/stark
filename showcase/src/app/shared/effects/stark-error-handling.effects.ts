@@ -11,7 +11,7 @@ import uniqueId from "lodash-es/uniqueId";
  */
 @Injectable()
 export class StarkErrorHandlingEffects {
-	private _starkToastNotificationService: StarkToastNotificationService;
+	private _starkToastNotificationService?: StarkToastNotificationService;
 
 	/**
 	 * Class constructor

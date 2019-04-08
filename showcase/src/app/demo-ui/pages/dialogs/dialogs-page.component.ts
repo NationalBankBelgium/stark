@@ -21,26 +21,26 @@ import { ReferenceLink } from "../../../shared/components/reference-block";
 	styleUrls: ["./dialogs-page.component.scss"]
 })
 export class DemoDialogsPageComponent {
-	public referenceList: ReferenceLink[];
-	public dialogStatus: string;
+	public dialogStatus = "";
+
 	public dialogResult: any = "";
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public dialogService: MatDialog) {
-		this.referenceList = [
-			{
-				label: "Stark Alert Dialog component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkAlertDialogComponent.html"
-			},
-			{
-				label: "Stark Confirm Dialog component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkConfirmDialogComponent.html"
-			},
-			{
-				label: "Stark Prompt Dialog component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkPromptDialogComponent.html"
-			}
-		];
-	}
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Alert Dialog component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkAlertDialogComponent.html"
+		},
+		{
+			label: "Stark Confirm Dialog component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkConfirmDialogComponent.html"
+		},
+		{
+			label: "Stark Prompt Dialog component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkPromptDialogComponent.html"
+		}
+	];
+
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public dialogService: MatDialog) {}
 
 	public showAlert(): void {
 		this.dialogService

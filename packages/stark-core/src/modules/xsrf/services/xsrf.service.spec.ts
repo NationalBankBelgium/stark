@@ -27,8 +27,8 @@ describe("Service: StarkXSRFService", () => {
 
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 	const httpMock: SpyObj<HttpClient> = createSpyObj<HttpClient>("HttpClient", ["get"]);
-	const mockXSRFToken: string = "dummy xsrf token";
-	const dummyHeader: string = "X-DUMMY-HEADER";
+	const mockXSRFToken = "dummy xsrf token";
+	const dummyHeader = "X-DUMMY-HEADER";
 
 	const mockBackend1: StarkBackend = {
 		name: "dummy backend 1",
@@ -274,7 +274,7 @@ describe("Service: StarkXSRFService", () => {
 
 			expect(httpMock.get).toHaveBeenCalledTimes(appConfig.backends.size);
 			const httpCalls: CallInfo<HttpClientGet>[] = httpMock.get.calls.all();
-			let callIndex: number = 0;
+			let callIndex = 0;
 
 			appConfig.backends.forEach((backendConfig: StarkBackend) => {
 				expect(httpCalls[callIndex].args[0]).toBe(backendConfig.url);
@@ -288,20 +288,22 @@ describe("Service: StarkXSRFService", () => {
 		it("should log an error when the HTTP call to a backend failed", fakeAsync(() => {
 			const failingBackends: StarkBackend[] = [mockBackend1, mockBackend3];
 
-			(<Spy<HttpClientGet>>httpMock.get).and.callFake((url: string) => {
-				if (failingBackends.map((failingBackend: StarkBackend) => failingBackend.url).indexOf(url) !== -1) {
-					return throwError(new HttpErrorResponse({ error: "ping failed" }));
-				} else {
+			(<Spy<HttpClientGet>>httpMock.get).and.callFake(
+				(url: string): Observable<HttpResponse<string> | never> => {
+					if (failingBackends.map((failingBackend: StarkBackend) => failingBackend.url).indexOf(url) !== -1) {
+						return throwError(new HttpErrorResponse({ error: "ping failed" }));
+					}
+
 					return of(new HttpResponse({ body: "ping OK" }));
 				}
-			});
+			);
 
 			xsrfService.pingBackends();
 			tick();
 
 			expect(httpMock.get).toHaveBeenCalledTimes(appConfig.backends.size);
 			const httpCalls: CallInfo<HttpClientGet>[] = httpMock.get.calls.all();
-			let httpCallIdx: number = 0;
+			let httpCallIdx = 0;
 
 			appConfig.backends.forEach((backendConfig: StarkBackend) => {
 				expect(httpCalls[httpCallIdx].args[0]).toBe(backendConfig.url);
@@ -311,7 +313,7 @@ describe("Service: StarkXSRFService", () => {
 
 			expect(mockLogger.error).toHaveBeenCalledTimes(failingBackends.length);
 			const logErrorCalls: CallInfo<HttpClientGet>[] = mockLogger.error.calls.all();
-			let logErrorCallIdx: number = 0;
+			let logErrorCallIdx = 0;
 
 			for (const failingBackend of failingBackends) {
 				expect(logErrorCalls[logErrorCallIdx].args[0]).toContain(failingBackend.name);

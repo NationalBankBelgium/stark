@@ -18,6 +18,7 @@
 				type="number"
 				step="10"
 				[(ngModel)]="valueForSlider"
+				[disabled]="!isSliderEnabled"
 				(change)="onChangeValueForSlider($event)"
 			/>
 		</mat-form-field>

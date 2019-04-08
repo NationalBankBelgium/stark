@@ -6,7 +6,7 @@ import { StarkSingleItemResponseWrapper } from "../../http/entities";
 /**
  * Name of the User Repository, in case injection is needed
  */
-export const starkUserRepositoryName: string = "StarkUserRepository";
+export const starkUserRepositoryName = "StarkUserRepository";
 /**
  * Injection Token version of the Repository Name
  * @link InjectionToken

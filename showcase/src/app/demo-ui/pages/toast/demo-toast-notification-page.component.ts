@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import {
 	STARK_TOAST_NOTIFICATION_SERVICE,
@@ -17,23 +17,44 @@ import { ReferenceLink } from "../../../shared/components";
 /**
  * Component to demo the toast notifications
  */
-export class DemoToastPageComponent implements OnInit {
-	public referenceList: ReferenceLink[];
+export class DemoToastPageComponent {
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Toast Notification service",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastNotificationService.html"
+		},
+		{
+			label: "Stark Mock Toast Notification service",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/classes/MockToastNotificationService.html"
+		},
+		{
+			label: "Stark Toast Notification options",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastNotificationOptions.html"
+		},
+		{
+			label: "Stark Toast Message",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastMessage.html"
+		},
+		{
+			label: "Stark Toast Notification component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkToastNotificationComponent.html"
+		}
+	];
 
 	/**
 	 * Message, or ID of message displayed in the message in the message box (translations applies).
 	 */
-	public messageText: string = "SHOWCASE.DEMO.TOAST.MESSAGE_INTRO";
+	public messageText = "SHOWCASE.DEMO.TOAST.MESSAGE_INTRO";
 
 	/**
 	 * Message, or ID of message displayed in the toast (translations applies).
 	 */
-	public exampleMessage: string = "SHOWCASE.DEMO.TOAST.MESSAGE_TEXT";
+	public exampleMessage = "SHOWCASE.DEMO.TOAST.MESSAGE_TEXT";
 
 	/**
 	 * Memorize the state of the "hide toast" button
 	 */
-	public hideDisabled: boolean = true;
+	public hideDisabled = true;
 
 	/**
 	 * Class constructor
@@ -118,33 +139,5 @@ export class DemoToastPageComponent implements OnInit {
 	 */
 	public hideToast(): void {
 		this.toastService.hide();
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.referenceList = [
-			{
-				label: "Stark Toast Notification service",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastNotificationService.html"
-			},
-			{
-				label: "Stark Mock Toast Notification service",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/classes/MockToastNotificationService.html"
-			},
-			{
-				label: "Stark Toast Notification options",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastNotificationOptions.html"
-			},
-			{
-				label: "Stark Toast Message",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/interfaces/StarkToastMessage.html"
-			},
-			{
-				label: "Stark Toast Notification component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkToastNotificationComponent.html"
-			}
-		];
 	}
 }

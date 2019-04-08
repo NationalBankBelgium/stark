@@ -9,8 +9,8 @@ import { ReferenceLink } from "../../../shared/components/reference-block";
 	styleUrls: ["./demo-authorization-directives-page.component.scss"]
 })
 export class DemoAuthorizationDirectivesPageComponent {
-	public selectedAuthorizedRole: string = "manager"; // current user's role
-	public selectedUnauthorizedRole: string = "manager"; // current user's role
+	public selectedAuthorizedRole = "manager"; // current user's role
+	public selectedUnauthorizedRole = "manager"; // current user's role
 
 	public referenceList: ReferenceLink[] = [
 		{

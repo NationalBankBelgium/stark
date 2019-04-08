@@ -12,8 +12,8 @@ import { StarkResource } from "../entities/resource.entity.intf";
 export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpFetchResourceRequestBuilder {
 	public addAcceptedLanguage(...languages: StarkLanguage[]): this {
-		let languageHeaders: string = "";
-		let queryParameters: string = "";
+		let languageHeaders = "";
+		let queryParameters = "";
 
 		if (this.request.headers && this.request.headers.has(StarkHttpHeaders.ACCEPT_LANGUAGE)) {
 			languageHeaders = <string>this.request.headers.get(StarkHttpHeaders.ACCEPT_LANGUAGE);

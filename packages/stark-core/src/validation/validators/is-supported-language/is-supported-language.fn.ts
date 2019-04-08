@@ -5,7 +5,7 @@ import { StarkLanguages } from "../../../configuration/entities/language/languag
  * @ignore
  * Name of the starkIsSupportedLanguage validator. {@link StarkLanguage}
  */
-export const starkIsSupportedLanguageValidatorName: string = "starkIsSupportedLanguage";
+export const starkIsSupportedLanguageValidatorName = "starkIsSupportedLanguage";
 
 /**
  * @ignore

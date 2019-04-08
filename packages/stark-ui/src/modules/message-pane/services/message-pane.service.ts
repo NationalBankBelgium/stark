@@ -21,7 +21,7 @@ import { StarkMessageImpl } from "../../../common/message/message.entity";
 @Injectable()
 export class StarkMessagePaneServiceImpl implements StarkMessagePaneService {
 	protected messages$: Observable<StarkMessageCollection>;
-	public clearOnNavigation: boolean;
+	public clearOnNavigation = false;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public store: Store<StarkUIApplicationState>) {
 		this.logger.debug(starkMessagePaneServiceName + " loaded");
@@ -67,18 +67,14 @@ export class StarkMessagePaneServiceImpl implements StarkMessagePaneService {
 		if (message instanceof StarkMessageImpl) {
 			normalizedMessage = message;
 		} else {
-			normalizedMessage = new StarkMessageImpl();
-
-			// Only copy the id if it is filled-in, otherwise keep the auto-generated id
-			if (message.id && message.id.length > 0) {
-				normalizedMessage.id = message.id;
-			}
-
-			normalizedMessage.key = message.key;
-			normalizedMessage.interpolateValues = message.interpolateValues;
-			normalizedMessage.code = message.code;
-			normalizedMessage.type = message.type;
-			normalizedMessage.priority = message.priority;
+			normalizedMessage = new StarkMessageImpl(
+				message.id,
+				message.key,
+				message.code,
+				message.type,
+				message.interpolateValues,
+				message.priority
+			);
 		}
 
 		// Priority should be a value between 1 & 999

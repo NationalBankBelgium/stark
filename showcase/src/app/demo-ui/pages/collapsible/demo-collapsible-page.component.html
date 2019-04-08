@@ -2,7 +2,7 @@
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer
-		[extensions]="['HTML', 'CSS', 'TS']"
+		[extensions]="['HTML', 'TS']"
 		filesPath="collapsible/collapsible-default"
 		exampleTitle="SHOWCASE.DEMO.COLLAPSIBLE.DEFAULT_ICON"
 	>
@@ -18,15 +18,15 @@
 	</example-viewer>
 
 	<example-viewer
-		[extensions]="['HTML', 'CSS', 'TS']"
+		[extensions]="['HTML', 'TS']"
 		filesPath="collapsible/collapsible-custom"
 		exampleTitle="SHOWCASE.DEMO.COLLAPSIBLE.CUSTOM_ICON"
 	>
 		<stark-collapsible
-				htmlId="thirdCollapsible"
-				titleLabel="SHOWCASE.DEMO.COLLAPSIBLE.TITLE_1"
-				[(isExpanded)]="collapsed[1]"
-				icon="information"
+			htmlId="thirdCollapsible"
+			titleLabel="SHOWCASE.DEMO.COLLAPSIBLE.TITLE_1"
+			[(isExpanded)]="collapsed[1]"
+			icon="information"
 		>
 			{{ "SHOWCASE.DEMO.COLLAPSIBLE.HTML_CONTENT" | translate }}
 		</stark-collapsible>
@@ -38,10 +38,10 @@
 		</span>
 		<hr class="collapsible-demo-line" />
 		<stark-collapsible
-				htmlId="fourthCollapsible"
-				titleLabel="SHOWCASE.DEMO.COLLAPSIBLE.TITLE_1"
-				[(isExpanded)]="collapsed[2]"
-				icon="account-circle"
+			htmlId="fourthCollapsible"
+			titleLabel="SHOWCASE.DEMO.COLLAPSIBLE.TITLE_1"
+			[(isExpanded)]="collapsed[2]"
+			icon="account-circle"
 		>
 			{{ "SHOWCASE.DEMO.COLLAPSIBLE.HTML_CONTENT" | translate }}
 		</stark-collapsible>

@@ -7,7 +7,7 @@ export type StarkMinimapComponentMode = "compact";
 /**
  * Name of the component
  */
-const componentName: string = "stark-minimap";
+const componentName = "stark-minimap";
 
 /**
  * Component to display a minimap which permits to toggle the visibility of passed elements.
@@ -45,9 +45,6 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	 */
 	@Output()
 	public showHideItem: EventEmitter<StarkMinimapItemProperties> = new EventEmitter<StarkMinimapItemProperties>();
-
-	public windowClickHandler: EventListener;
-	public isDisplayedMenu: boolean;
 
 	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
 		super(renderer, elementRef);

@@ -12,7 +12,7 @@ import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 /**
  * Name of the component
  */
-const componentName: string = "stark-date-range-picker";
+const componentName = "stark-date-range-picker";
 
 /**
  * Component to display the stark date-range-picker
@@ -41,7 +41,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * If a `StarkTimestampMaskConfig` is passed, it is set as the date mask config.
 	 */
 	@Input()
-	public dateMask: StarkDatePickerMaskConfig;
+	public dateMask?: StarkDatePickerMaskConfig;
 
 	/**
 	 * Source Date to be bound to the end datepicker model
@@ -53,19 +53,19 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * Label to be displayed in the end datepicker
 	 */
 	@Input()
-	public endDateLabel: string = "STARK.DATE_RANGE_PICKER.TO";
+	public endDateLabel = "STARK.DATE_RANGE_PICKER.TO";
 
 	/**
 	 * Maximum date of the end date picker
 	 */
 	@Input()
-	public endMaxDate: Date;
+	public endMaxDate?: Date;
 
 	/**
 	 * Minimum date of the end date picker
 	 */
 	@Input()
-	public endMinDate: Date;
+	public endMinDate?: Date;
 
 	/**
 	 * Whether the datepickers are disabled
@@ -77,13 +77,13 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * HTML "name" attribute of the element.
 	 */
 	@Input()
-	public rangePickerId: string = "";
+	public rangePickerId = "";
 
 	/**
 	 * HTML "name" attribute of the element.
 	 */
 	@Input()
-	public rangePickerName: string = "";
+	public rangePickerName = "";
 
 	/**
 	 * Source Date to be bound to the start datepicker model
@@ -96,19 +96,19 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * Label to be displayed in the start datepicker
 	 */
 	@Input()
-	public startDateLabel: string = "STARK.DATE_RANGE_PICKER.FROM";
+	public startDateLabel = "STARK.DATE_RANGE_PICKER.FROM";
 
 	/**
 	 * Maximum date of the start date picker
 	 */
 	@Input()
-	public startMaxDate: Date;
+	public startMaxDate?: Date;
 
 	/**
 	 * Minimum date of the start date picker
 	 */
 	@Input()
-	public startMinDate: Date;
+	public startMinDate?: Date;
 
 	/**
 	 * Output that will emit a specific date whenever the selection has changed
@@ -120,13 +120,13 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * Reference to the start datepicker embedded in this component
 	 */
 	@ViewChild("startPicker")
-	public startPicker: StarkDatePickerComponent;
+	public startPicker!: StarkDatePickerComponent;
 
 	/**
 	 * Reference to the end datepicker embedded in this component
 	 */
 	@ViewChild("endPicker")
-	public endPicker: StarkDatePickerComponent;
+	public endPicker!: StarkDatePickerComponent;
 
 	/**
 	 * Class constructor

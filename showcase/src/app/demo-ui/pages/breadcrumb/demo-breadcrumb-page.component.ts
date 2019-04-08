@@ -1,9 +1,6 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Component } from "@angular/core";
 import { StarkBreadcrumbConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
-
-const componentName: string = "demo-breadcrumb";
 
 /**
  * Demo Breadcrumb component page
@@ -12,25 +9,7 @@ const componentName: string = "demo-breadcrumb";
 	selector: "demo-breadcrumb",
 	templateUrl: "./demo-breadcrumb-page.component.html"
 })
-export class DemoBreadcrumbPageComponent implements OnInit {
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
-
-	public referenceList: ReferenceLink[];
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.logger.debug(componentName + ": controller initialized");
-
-		this.referenceList = [
-			{
-				label: "Stark Breadcrumb component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkBreadcrumbComponent.html"
-			}
-		];
-	}
-
+export class DemoBreadcrumbPageComponent {
 	public breadcrumbConfig: StarkBreadcrumbConfig = {
 		breadcrumbPaths: [
 			{
@@ -59,4 +38,11 @@ export class DemoBreadcrumbPageComponent implements OnInit {
 			}
 		]
 	};
+
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Breadcrumb component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkBreadcrumbComponent.html"
+		}
+	];
 }

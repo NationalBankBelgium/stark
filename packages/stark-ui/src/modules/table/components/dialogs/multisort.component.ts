@@ -52,12 +52,12 @@ export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent
 	/**
 	 * The priority to be set to a new rule when added
 	 */
-	public currentPriority: number = 0;
+	public currentPriority = 0;
 
 	/**
 	 * Whether the Add button is disabled
 	 */
-	public isAddDisabled: boolean = false;
+	public isAddDisabled = false;
 
 	/**
 	 * Class constructor

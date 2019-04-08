@@ -28,9 +28,11 @@ describe("ToastNotificationService", () => {
 
 	beforeEach(async(() => {
 		const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
-		const afterDismissedObs: Observable<MatSnackBarDismiss> = new Observable<MatSnackBarDismiss>((o: Observer<MatSnackBarDismiss>) => {
-			observer = o;
-		});
+		const afterDismissedObs: Observable<MatSnackBarDismiss> = new Observable<MatSnackBarDismiss>(
+			(o: Observer<MatSnackBarDismiss>): void => {
+				observer = o;
+			}
+		);
 		const mockSnackBar: SpyObj<MatSnackBar> = createSpyObj<MatSnackBar>("MatSnackBar", {
 			openFromComponent: <any>createSpyObj<MatSnackBarRef<StarkToastNotificationComponent>>("MatSnackBarRef", {
 				afterDismissed: afterDismissedObs,

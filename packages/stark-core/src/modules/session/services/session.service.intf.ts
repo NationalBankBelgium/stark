@@ -5,7 +5,7 @@ import { StarkUser } from "../../user/entities";
 /**
  * Name of the Session Service, in case injection is required
  */
-export const starkSessionServiceName: string = "StarkSessionService";
+export const starkSessionServiceName = "StarkSessionService";
 /**
  * Injection Token version of the Service Name
  */

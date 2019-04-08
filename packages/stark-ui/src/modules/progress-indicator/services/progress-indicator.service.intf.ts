@@ -5,7 +5,7 @@ import { InjectionToken } from "@angular/core";
 /**
  * The name of the StarkProgressIndicatorService
  */
-export const starkProgressIndicatorServiceName: string = "StarkProgressIndicatorService";
+export const starkProgressIndicatorServiceName = "StarkProgressIndicatorService";
 /**
  * The InjectionToken version of the service name
  */

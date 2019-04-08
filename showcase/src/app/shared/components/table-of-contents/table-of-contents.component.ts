@@ -19,11 +19,11 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	 * The classes of the titles you want to use in your table of contents
 	 */
 	@Input()
-	public headerSelectors: string;
+	public headerSelectors?: string;
 
-	private _scrollContainer: Window;
+	private _scrollContainer: Window = window;
 	private _destroyed: Subject<any> = new Subject();
-	private _urlFragment: string = "";
+	private _urlFragment = "";
 
 	public constructor() {
 		//
@@ -36,7 +36,6 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 		// to subscribe to its scroll event until next tick (when it does exist).
 		Promise.resolve()
 			.then(() => {
-				this._scrollContainer = window;
 				if (this._scrollContainer) {
 					fromEvent(this._scrollContainer, "scroll")
 						.pipe(
@@ -72,7 +71,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	 * Basically, this will return the position on the screen where the user is located.
 	 */
 	private getScrollOffset(): number {
-		let top: number = 0;
+		let top = 0;
 		if (typeof this._scrollContainer.pageYOffset !== "undefined") {
 			top = top + this._scrollContainer.pageYOffset;
 		}
@@ -85,6 +84,10 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	 */
 	public createLinks(): TableOfContentLink[] {
 		const links: TableOfContentLink[] = [];
+
+		if (!this.headerSelectors) {
+			return links;
+		}
 		const headings: HTMLElement[] = Array.from(document.querySelectorAll(this.headerSelectors));
 
 		for (const heading of headings) {
@@ -121,12 +124,12 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 			(<HTMLElement>document.documentElement).offsetHeight;
 		if (pos === max) {
 			this.links[linksCounter].active = true;
-			for (let i: number = 0; i < linksCounter; i++) {
+			for (let i = 0; i < linksCounter; i++) {
 				this.links[i].active = false;
 			}
 		} else {
 			this.links[linksCounter].active = false;
-			for (let i: number = 0; i < linksCounter; i++) {
+			for (let i = 0; i < linksCounter; i++) {
 				this.links[i].active = this.isLinkActive(this.links[i], this.links[i + 1]);
 			}
 		}

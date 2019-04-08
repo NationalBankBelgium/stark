@@ -1,7 +1,7 @@
 import { StarkUrlUtil } from "./url-util";
 
 describe("Util: UrlUtil", () => {
-	const fullTestUrl: string = "/something/:somethingId/else/:elseId";
+	const fullTestUrl = "/something/:somethingId/else/:elseId";
 
 	describe("parseUrlParams", () => {
 		it("should return the words after the colon till the next slash", () => {

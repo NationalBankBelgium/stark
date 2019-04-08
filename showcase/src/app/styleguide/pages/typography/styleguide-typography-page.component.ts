@@ -1,24 +1,15 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Component } from "@angular/core";
 
 @Component({
 	selector: "demo-typography",
 	templateUrl: "./styleguide-typography-page.component.html"
 })
-export class StyleguideTypographyPageComponent implements OnInit {
-	public fontFamilyCSS: string;
-	public fontFaceExample: string;
-	public webpackExample: string;
-	public customizeMap: string;
-
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
-
-	public ngOnInit(): void {
-		this.fontFamilyCSS = `
+export class StyleguideTypographyPageComponent {
+	public fontFamilyCSS = `
 			  font-family: "BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif";
 		`;
 
-		this.fontFaceExample = `
+	public fontFaceExample = `
 		@font-face {
 		  font-family: "Roboto";
 		  font-style: "Regular";
@@ -30,7 +21,7 @@ export class StyleguideTypographyPageComponent implements OnInit {
 		);
 	 	`;
 
-		this.webpackExample = `
+	public webpackExample = `
 		{
 			"cspConnectSrc": "http://localhost:5000 http://localhost:5001 http://localhost:5002 http://localhost:4000 https://nationalbankbelgium.github.io",
 			"cspFormAction": "http://localhost:5000/myAwesomeUpload",
@@ -38,7 +29,7 @@ export class StyleguideTypographyPageComponent implements OnInit {
 		}
 		`;
 
-		this.customizeMap = `
+	public customizeMap = `
 		$stark-typography-theme: (
 			font-family: "BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
 			display-4: (112px, 112px, 300),
@@ -58,5 +49,4 @@ export class StyleguideTypographyPageComponent implements OnInit {
 
 		@import "~@nationalbankbelgium/stark-ui/assets/themes/theming";
 		`;
-	}
 }

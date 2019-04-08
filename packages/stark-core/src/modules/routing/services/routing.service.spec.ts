@@ -19,6 +19,7 @@ import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
 import CallInfo = jasmine.CallInfo;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
+import { StarkRoutingService } from "@nationalbankbelgium/stark-core";
 
 type CallableRoutingAction = (action: StarkNavigate | StarkNavigationHistoryLimitReached) => void;
 
@@ -40,8 +41,8 @@ describe("Service: StarkRoutingService", () => {
 	const mockStore: SpyObj<Store<StarkCoreApplicationState>> = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("storeSpy", [
 		"dispatch"
 	]);
-	const mockCorrelationId: string = "12345";
-	const requestId: string = "652d9053-32a0-457c-9eca-162cd301a4e8";
+	const mockCorrelationId = "12345";
+	const requestId = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
 	// mockStates Tree
 	//                                homepage
@@ -73,9 +74,7 @@ describe("Service: StarkRoutingService", () => {
 				...inheritedParams // ALL states will inherit these params
 			},
 			resolve: {
-				availableHolidays: () => {
-					return 11 * 2;
-				}
+				availableHolidays: (): number => 11 * 2
 			},
 			data: {
 				translationKey: "HOME",
@@ -99,9 +98,7 @@ describe("Service: StarkRoutingService", () => {
 				pageTitleFontSize: 16
 			},
 			resolve: {
-				translationKey: () => {
-					return "PAGE.01.FROM.RESOLVE";
-				}
+				translationKey: (): string => "PAGE.01.FROM.RESOLVE"
 			},
 			parent: "homepage",
 			views: {
@@ -298,7 +295,7 @@ describe("Service: StarkRoutingService", () => {
 		}
 
 		if (previousNavigations) {
-			for (let i: number = 0; i < previousNavigations; i++) {
+			for (let i = 0; i < previousNavigations; i++) {
 				routingService.navigateToPrevious();
 				tick();
 			}
@@ -309,7 +306,7 @@ describe("Service: StarkRoutingService", () => {
 		const stateTreeParams: Map<string, any> = routingService.getStateTreeParams();
 
 		expect(stateTreeParams.size).toBe(expectedStateTreeParams.length);
-		let index: number = 0;
+		let index = 0;
 		stateTreeParams.forEach((stateParams: any, stateName: string) => {
 			expect(stateName).toBe(expectedStateTreeParams[index].stateName);
 			expect(stateParams).toEqual(expectedStateTreeParams[index].stateParams);
@@ -321,7 +318,7 @@ describe("Service: StarkRoutingService", () => {
 		const stateTreeResolves: Map<string, any> = routingService.getStateTreeResolves();
 
 		expect(stateTreeResolves.size).toBe(expectedStateTreeResolves.length);
-		let index: number = 0;
+		let index = 0;
 
 		stateTreeResolves.forEach((stateResolve: any, token: string) => {
 			expect(token).toBe(expectedStateTreeResolves[index].name);
@@ -334,7 +331,7 @@ describe("Service: StarkRoutingService", () => {
 		const stateTreeData: Map<string, any> = routingService.getStateTreeData();
 
 		expect(stateTreeData.size).toBe(expectedStateTreeData.length);
-		let index: number = 0;
+		let index = 0;
 
 		stateTreeData.forEach((stateData: any, stateName: string) => {
 			expect(stateName).toBe(expectedStateTreeData[index].name);
@@ -363,7 +360,7 @@ describe("Service: StarkRoutingService", () => {
 		mockInjectorService.get.and.returnValue(mockXSRFService);
 	});
 
-	const starkRoutingServiceFactory: Function = (state: StateService, transitions: TransitionService) => {
+	const starkRoutingServiceFactory = (state: StateService, transitions: TransitionService): StarkRoutingService => {
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.homeStateName = "homepage";
 
@@ -513,7 +510,7 @@ describe("Service: StarkRoutingService", () => {
 			const stateDeclarations: StateDeclaration[] = routingService.getStatesConfig();
 			expect(stateDeclarations.length).toBe(numberOfMockStates);
 
-			for (let index: number = 0; index < numberOfMockStates; index++) {
+			for (let index = 0; index < numberOfMockStates; index++) {
 				expect(stateDeclarations[index]).toBe(statesConfig[index]);
 			}
 		});
@@ -535,7 +532,7 @@ describe("Service: StarkRoutingService", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates);
 
-			const stateName: string = "page-01";
+			const stateName = "page-01";
 			const stateDeclaration: StateDeclaration = <StateDeclaration>routingService.getStateDeclarationByStateName(stateName);
 			expect(stateDeclaration).toBeDefined();
 			expect(stateDeclaration.name).toBe(stateName);
@@ -545,7 +542,7 @@ describe("Service: StarkRoutingService", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates);
 
-			const stateName: string = "unexisting state";
+			const stateName = "unexisting state";
 			const stateDeclaration: StateDeclaration = <StateDeclaration>routingService.getStateDeclarationByStateName(stateName);
 			expect(stateDeclaration).toBeUndefined();
 		});
@@ -1005,13 +1002,13 @@ describe("Service: StarkRoutingService", () => {
 						return throwError("reload " + error);
 					})
 				)
-				.subscribe(() => () => fail("the test should not enter the next block"), () => done());
+				.subscribe(() => (): void => fail("the test should not enter the next block"), () => done());
 		});
 	});
 
 	describe("navigationErrorHandler", () => {
-		const nextShouldNotBeCalled: string = "the 'next' function should not be called in case the navigation failed";
-		const errorPrefix: string = "navigationErrorHandler: ";
+		const nextShouldNotBeCalled = "the 'next' function should not be called in case the navigation failed";
+		const errorPrefix = "navigationErrorHandler: ";
 
 		it("should not navigate to a page when that page is already the current page", (done: DoneFn) => {
 			spyOn($state, "go").and.callThrough();
@@ -1837,7 +1834,7 @@ describe("Service: StarkRoutingService", () => {
 			const actions: CallInfo<CallableRoutingAction>[] = mockStore.dispatch.calls.all();
 			const actionIndex: number = 16 + 12;
 
-			for (let i: number = 0; i < actions.length; i++) {
+			for (let i = 0; i < actions.length; i++) {
 				const action: CallInfo<CallableRoutingAction> = actions[i];
 
 				if (i === actionIndex) {

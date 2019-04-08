@@ -3,25 +3,26 @@ import { StarkHttpErrorBaseImpl } from "./http-error-base.entity";
 import { StarkHttpErrorDetail } from "./http-error-detail.entity.intf";
 
 /**
+ * This class is only for serialization purposes
  * @ignore
  */
 @inheritSerialization(StarkHttpErrorBaseImpl)
 export class StarkHttpErrorDetailImpl extends StarkHttpErrorBaseImpl implements StarkHttpErrorDetail {
 	@autoserialize
-	public detail: string;
+	public detail!: string;
 
 	@autoserialize
-	public detailKey: string;
+	public detailKey!: string;
 
 	@autoserialize
-	public detailKeyParameters: string[];
+	public detailKeyParameters!: string[];
 
 	@autoserialize
-	public fields: string[];
+	public fields!: string[];
 
 	@autoserialize
-	public status: string;
+	public status!: string;
 
 	@autoserialize
-	public index: number;
+	public index!: number;
 }

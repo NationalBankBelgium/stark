@@ -62,7 +62,7 @@ describe("SvgViewBoxDirective", () => {
 	});
 
 	describe("when viewBox value is given", () => {
-		const viewBoxValue: number = 48;
+		const viewBoxValue = 48;
 
 		// overriding the components's template
 		beforeEach(fakeAsync(() => {
@@ -90,7 +90,7 @@ describe("SvgViewBoxDirective", () => {
 	});
 
 	describe("when SVG has already the viewBox attribute", () => {
-		const viewBoxAttribute: string = "0 0 12 12";
+		const viewBoxAttribute = "0 0 12 12";
 
 		// overriding the components's template
 		beforeEach(fakeAsync(() => {

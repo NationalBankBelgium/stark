@@ -27,7 +27,7 @@ export class StarkDateUtil {
 	 * @link https://momentjs.com/docs/#/displaying/format/
 	 */
 	public static format(date: Date, format: string = "DD-MM-YYYY"): string {
-		let formattedDate: string = "invalid date";
+		let formattedDate = "invalid date";
 
 		if (moment.isDate(date)) {
 			const invalidTokens: RegExp = /[^AaDdEeGgHhMmQSsWwYkZXx:.\/\-\s]/g; // everything except the tokens used by moment format API

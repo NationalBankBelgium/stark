@@ -4,7 +4,7 @@ import floor from "lodash-es/floor";
  * @ignore
  * Name of the validator, in case injection is needed.
  */
-export const starkIsISINValidatorName: string = "starkIsISIN";
+export const starkIsISINValidatorName = "starkIsISIN";
 
 /**
  * @ignore
@@ -16,16 +16,16 @@ export const starkIsISINValidatorName: string = "starkIsISIN";
  * Checks if the number is a valid ISIN number (Modulus 10 Double Add Double)
  */
 export function starkIsISIN(isin: string): boolean {
-	const modulo: number = 10;
-	const base: number = 36;
-	const lengthWithoutCheckDigit: number = 11;
+	const modulo = 10;
+	const base = 36;
+	const lengthWithoutCheckDigit = 11;
 	const isinPattern: RegExp = /^[A-Z]{2}([A-Z0-9]){9}[0-9]/;
 
-	let isValid: boolean = false;
+	let isValid = false;
 	if (typeof isin === "string" && isinPattern.test(isin)) {
-		let digits: string = "";
+		let digits = "";
 
-		for (let i: number = 0; i < lengthWithoutCheckDigit; i++) {
+		for (let i = 0; i < lengthWithoutCheckDigit; i++) {
 			digits += parseInt(isin[i], base).toString();
 		}
 
@@ -34,8 +34,8 @@ export function starkIsISIN(isin: string): boolean {
 			.reverse()
 			.join("");
 
-		let sum: number = 0;
-		for (let i: number = 0; i < digits.length; i++) {
+		let sum = 0;
+		for (let i = 0; i < digits.length; i++) {
 			let digit: number = parseInt(digits[i], base);
 
 			if (i % 2 === 0) {

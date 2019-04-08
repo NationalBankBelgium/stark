@@ -1,7 +1,7 @@
 import { Component, HostBinding, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
-const componentName: string = "styleguide-layout-page";
+const componentName = "styleguide-layout-page";
 
 @Component({
 	selector: "demo-layout",

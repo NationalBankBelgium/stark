@@ -8,17 +8,18 @@ import { StarkPaginationMetadataImpl } from "./metadata-pagination.entity";
 import { StarkHttpErrorDetail, StarkHttpErrorDetailImpl } from "../error";
 
 /**
+ * This class is only for serialization purposes
  * @ignore
  */
 export class StarkCollectionMetadataImpl implements StarkCollectionMetadata {
 	@deserializeAs(StarkSortItemImpl)
-	public sortedBy: StarkSortItem[];
+	public sortedBy!: StarkSortItem[];
 
 	@deserializeAs(StarkPaginationMetadataImpl)
-	public pagination: StarkPaginationMetadata;
+	public pagination!: StarkPaginationMetadata;
 
 	@deserialize
-	public etags: { [uuid: string]: string };
+	public etags!: { [uuid: string]: string };
 
 	@deserializeAs(StarkHttpErrorDetailImpl)
 	public warnings?: StarkHttpErrorDetail[];

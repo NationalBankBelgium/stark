@@ -1,40 +1,27 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { Component } from "@angular/core";
+import { StarkMinimapItemProperties } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
-import {  StarkMinimapItemProperties } from "@nationalbankbelgium/stark-ui";
 
 @Component({
 	selector: "demo-minimap",
 	templateUrl: "./demo-minimap-page.component.html",
 	styleUrls: ["./demo-minimap-page.component.scss"]
 })
-export class DemoMinimapPageComponent implements OnInit {
-	public items: StarkMinimapItemProperties[];
-	public visibleItems: string[];
-	public referenceList: ReferenceLink[];
+export class DemoMinimapPageComponent {
+	public items: StarkMinimapItemProperties[] = [
+		{ name: "First", label: "First" },
+		{ name: "Second", label: "Second" },
+		{ name: "Third", label: "Third" },
+		{ name: "Fourth", label: "Fourth" }
+	];
+	public visibleItems = [this.items[0].name, this.items[1].name, this.items[2].name, this.items[3].name];
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		this.items = [
-			{ name: "First", label: "First" },
-			{ name: "Second", label: "Second" },
-			{ name: "Third", label: "Third" },
-			{ name: "Fourth", label: "Fourth" }
-		];
-
-		this.visibleItems = [this.items[0].name, this.items[1].name, this.items[2].name, this.items[3].name];
-
-		this.referenceList = [
-			{
-				label: "Stark Minimap component",
-				url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkMinimapComponent.html"
-			}
-		];
-	}
+	public referenceList: ReferenceLink[] = [
+		{
+			label: "Stark Minimap component",
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkMinimapComponent.html"
+		}
+	];
 
 	public showHideItem(item: StarkMinimapItemProperties): void {
 		const index: number = this.visibleItems.indexOf(item.name);

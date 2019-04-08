@@ -1,4 +1,4 @@
-export const starterStructure: string = `|
+export const starterStructure = `|
 +---config
 |       index-head-config.js                         # defines all the Head tags to be added by Webpack to the app index.html
 |       webpack-custom-config.dev.json               # custom Webpack configuration for the development environment
@@ -151,7 +151,7 @@ export const starterStructure: string = `|
 |   tsconfig.spec.json                  # typescript configuration for the Karma tests, extends tsconfig.json
 \\   tslint.json                         # tslint configuration file`;
 
-export const stylesheetImport: string = `|
+export const stylesheetImport = `|
 +---src
 |   |
 |   +---app
@@ -159,7 +159,7 @@ export const stylesheetImport: string = `|
 |   \\--styles                      # application-specific styles
 |          styles.scss             # import all application styles as well as all external stylesheets`;
 
-export const stylesCss: string = `
+export const stylesCss = `
 @import "~basscss/css/basscss.css";  /* 3rd party library */
 
 @import "theme";
@@ -167,7 +167,7 @@ export const stylesCss: string = `
 @import "../app/app.component.scss";
 `;
 
-export const starkStylesCss: string = `
+export const starkStylesCss = `
 /* Stark styles */
 @import "~@nationalbankbelgium/stark-ui/assets/styles/header";
 
@@ -183,7 +183,7 @@ export const starkStylesCss: string = `
 @import "~@nationalbankbelgium/stark-ui/src/modules/session-ui/pages/login/login-page.component";
 @import "~@nationalbankbelgium/stark-ui/src/modules/session-ui/pages/preloading/preloading-page.component";
 `;
-export const polyfillsBrowsersContent: string = `
+export const polyfillsBrowsersContent = `
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
@@ -250,7 +250,7 @@ import "zone.js/dist/zone";
 /* tslint:enable */
 `;
 
-export const polyfillsAngularJsonAdaptation: string = `{
+export const polyfillsAngularJsonAdaptation = `{
  "projects": {
     "starter": {
         ...

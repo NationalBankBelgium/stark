@@ -34,10 +34,10 @@ describe("Service: StarkLoggingService", () => {
 	const dummyObject: object = {
 		prop1: "dummy prop",
 		prop2: 123,
-		method1: () => "dummy method"
+		method1: (): string => "dummy method"
 	};
 	let mockStarkLogging: StarkLogging;
-	const loggingFlushPersistSize: number = 11;
+	const loggingFlushPersistSize = 11;
 
 	beforeEach(() => {
 		mockStore = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("store", ["dispatch", "pipe"]);
@@ -89,8 +89,8 @@ describe("Service: StarkLoggingService", () => {
 	});
 
 	describe("debug", () => {
-		const dummyDebugMessagePrefix: string = "dummy debug message";
-		const dummyDebugMessageSuffix: string = "end of debug message";
+		const dummyDebugMessagePrefix = "dummy debug message";
+		const dummyDebugMessageSuffix = "end of debug message";
 
 		it("should dispatch LOG_MESSAGE action with an StarkLogMessageType of type DEBUG", () => {
 			loggingService.debug(dummyDebugMessagePrefix, dummyObject, dummyDebugMessageSuffix);
@@ -119,8 +119,8 @@ describe("Service: StarkLoggingService", () => {
 	});
 
 	describe("info", () => {
-		const dummyInfoMessagePrefix: string = "dummy debug message";
-		const dummyInfoMessageSuffix: string = "end of info message";
+		const dummyInfoMessagePrefix = "dummy debug message";
+		const dummyInfoMessageSuffix = "end of info message";
 
 		it("should dispatch LOG_MESSAGE action with an StarkLogMessageType of type INFO", () => {
 			loggingService.info(dummyInfoMessagePrefix, dummyObject, dummyInfoMessageSuffix);
@@ -142,8 +142,8 @@ describe("Service: StarkLoggingService", () => {
 	});
 
 	describe("warn", () => {
-		const dummyWarnMessagePrefix: string = "dummy warning message";
-		const dummyWarnMessageSuffix: string = "end of warning message";
+		const dummyWarnMessagePrefix = "dummy warning message";
+		const dummyWarnMessageSuffix = "end of warning message";
 
 		it("should dispatch LOG_MESSAGE action with an StarkLogMessageType of type WARNING", () => {
 			loggingService.warn(dummyWarnMessagePrefix, dummyObject, dummyWarnMessageSuffix);
@@ -165,11 +165,11 @@ describe("Service: StarkLoggingService", () => {
 	});
 
 	describe("error", () => {
-		const dummyErrorMessagePrefix: string = "dummy error message";
-		const dummyErrorMessageSuffix: string = "end of error message";
+		const dummyErrorMessagePrefix = "dummy error message";
+		const dummyErrorMessageSuffix = "end of error message";
 
 		it("should dispatch LOG_MESSAGE action with an StarkLogMessageType of type ERROR", () => {
-			const mockErrorMessage: string = "this is the error";
+			const mockErrorMessage = "this is the error";
 			const errorMsg: string = dummyErrorMessagePrefix + JSON.stringify(dummyObject) + dummyErrorMessageSuffix;
 			loggingService.error(errorMsg, new Error(mockErrorMessage));
 
@@ -246,8 +246,8 @@ describe("Service: StarkLoggingService", () => {
 
 		describe("Error messages ", () => {
 			it("should return an StarkLogMessage instance of the type ERROR containing a message and the error string", () => {
-				const dummyErrorLogMessage: string = "dummy error message";
-				const mockErrorMessage: string = "this is the error";
+				const dummyErrorLogMessage = "dummy error message";
+				const mockErrorMessage = "this is the error";
 				const error: StarkError = new StarkErrorImpl(mockErrorMessage);
 				const message: StarkLogMessage = loggingService.constructErrorLogMessageHelper(dummyErrorLogMessage, error);
 
@@ -269,7 +269,7 @@ describe("Service: StarkLoggingService", () => {
 
 	describe("persistLogMessages", () => {
 		beforeEach(() => {
-			for (let i: number = 1; i <= loggingFlushPersistSize; i++) {
+			for (let i = 1; i <= loggingFlushPersistSize; i++) {
 				const message: StarkLogMessage = loggingService.constructLogMessageHelper(
 					StarkLogMessageType.INFO,
 					"Message " + i,
@@ -336,7 +336,7 @@ class LoggingServiceHelper extends StarkLoggingServiceImpl {
 
 	// override parent's implementation to prevent logging to the console
 	public getConsole(): Function {
-		return () => {
+		return (): void => {
 			/* noop */
 		};
 	}

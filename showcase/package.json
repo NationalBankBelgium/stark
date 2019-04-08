@@ -61,6 +61,7 @@
     "karma": "karma",
     "lint": "npm run lint-ts && npm run lint-css",
     "lint-ts": "tslint --config ./tslint.json --project ./tsconfig.json --format codeFrame",
+    "lint-ts:fix": "node --max_old_space_size=4096 ./node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.json --format codeFrame --fix",
     "lint-css": "stylelint \"./src/**/*.?(pc|sc|c|sa)ss\" --formatter \"string\"",
     "ng": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng",
     "ngc": "ngc",

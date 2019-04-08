@@ -43,10 +43,10 @@ describe("PromptDialogComponent", () => {
 		cancel: "Cancel button label"
 	};
 
-	const matDialogSelector: string = "mat-dialog-container";
-	const matDialogTitleSelector: string = "[mat-dialog-title]";
-	const matDialogContentSelector: string = "[mat-dialog-content]";
-	const matDialogActionsSelector: string = "[mat-dialog-actions]";
+	const matDialogSelector = "mat-dialog-container";
+	const matDialogTitleSelector = "[mat-dialog-title]";
+	const matDialogContentSelector = "[mat-dialog-content]";
+	const matDialogActionsSelector = "[mat-dialog-actions]";
 
 	function openDialog(dialogData: StarkPromptDialogContent): MatDialogRef<StarkPromptDialogComponent, StarkPromptDialogResult> {
 		return dialogService.open<StarkPromptDialogComponent, StarkPromptDialogContent, StarkPromptDialogResult>(
@@ -81,7 +81,8 @@ describe("PromptDialogComponent", () => {
 			providers: []
 		})
 			.overrideModule(BrowserDynamicTestingModule, {
-				// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/12079)
+				// FIXME review after https://github.com/angular/angular/issues/10760
+				// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
 				set: { entryComponents: [StarkPromptDialogComponent] }
 			})
 			.compileComponents();
@@ -148,7 +149,7 @@ describe("PromptDialogComponent", () => {
 
 		dialogRef.afterClosed().subscribe(mockObserver);
 
-		const dummyValue: string = "some dummy value";
+		const dummyValue = "some dummy value";
 		expect(dialogRef.componentInstance.formControl.value).toBe(dummyDialogContent.initialValue);
 		dialogRef.componentInstance.formControl.setValue(dummyValue); // changing the input's value
 

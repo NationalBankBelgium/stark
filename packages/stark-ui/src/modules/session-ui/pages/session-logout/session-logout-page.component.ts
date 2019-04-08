@@ -5,7 +5,7 @@ import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig, StarkL
 /**
  * Name of the component
  */
-const componentName: string = "stark-session-logout-page";
+const componentName = "stark-session-logout-page";
 
 /**
  * Session Logout Page smart component.

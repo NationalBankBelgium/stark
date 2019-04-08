@@ -25,7 +25,7 @@ describe("Effect: StarkMessagePaneEffects", () => {
 				provideMockActions(() => actions),
 				{
 					provide: STARK_MESSAGE_PANE_SERVICE,
-					useFactory: () => new MockStarkMessagePaneService()
+					useFactory: (): MockStarkMessagePaneService => new MockStarkMessagePaneService()
 				}
 			],
 			imports: []

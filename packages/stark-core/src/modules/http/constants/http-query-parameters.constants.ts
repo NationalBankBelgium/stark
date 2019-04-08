@@ -5,17 +5,17 @@ export class StarkHttpQueryParameters {
 	/**
 	 * the fields concerned by the queries
 	 */
-	public static FIELDS: string = "fields";
+	public static FIELDS = "fields";
 	/**
 	 * specifies the language of the content
 	 */
-	public static LANG: string = "lang";
+	public static LANG = "lang";
 	/**
 	 * specifies the style to apply to the reponse's elements
 	 */
-	public static STYLE: string = "style";
+	public static STYLE = "style";
 	/**
 	 * specifies if the reponse must be sorted or not
 	 */
-	public static SORT: string = "sort";
+	public static SORT = "sort";
 }

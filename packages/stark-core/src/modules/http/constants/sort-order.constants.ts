@@ -5,9 +5,9 @@ export class StarkSortOrder {
 	/**
 	 * The fields will be sorted ASC
 	 */
-	public static ASC: string = "ASC";
+	public static ASC = "ASC";
 	/**
 	 * The fields will be sorted DESC
 	 */
-	public static DESC: string = "DESC";
+	public static DESC = "DESC";
 }

@@ -5,21 +5,21 @@ export class StarkHttpHeaders {
 	/**
 	 * Contains information about the language preference of a user
 	 */
-	public static ACCEPT_LANGUAGE: string = "Accept-Language";
+	public static ACCEPT_LANGUAGE = "Accept-Language";
 	/**
 	 * The ETag value
 	 */
-	public static ETAG: string = "etag";
+	public static ETAG = "etag";
 	/**
 	 * The request will perform the action only if the entity given by the client matches the same entity on the server.
 	 */
-	public static IF_MATCH: string = "If-Match";
+	public static IF_MATCH = "If-Match";
 	/**
 	 * The media type of the body request
 	 */
-	public static CONTENT_TYPE: string = "Content-Type";
+	public static CONTENT_TYPE = "Content-Type";
 	/**
 	 * Used to prevent Cross Site Request Forgery
 	 */
-	public static XSRF_TOKEN: string = "X-XSRF-TOKEN";
+	public static XSRF_TOKEN = "X-XSRF-TOKEN";
 }

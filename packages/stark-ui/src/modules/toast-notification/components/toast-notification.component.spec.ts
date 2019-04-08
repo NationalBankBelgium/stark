@@ -19,7 +19,7 @@ import { StarkSvgViewBoxModule } from "../../svg-view-box";
 })
 class TestHostComponent {
 	@ViewChild(StarkToastNotificationComponent)
-	public toastNotificationComponent: StarkToastNotificationComponent;
+	public toastNotificationComponent!: StarkToastNotificationComponent;
 }
 
 describe("ToastNotificationComponent", () => {

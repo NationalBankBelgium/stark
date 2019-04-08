@@ -5,7 +5,7 @@ import { InjectionToken } from "@angular/core";
 /**
  * The name of the service in case an injection is needed
  */
-export const starkAppSidebarServiceName: string = "StarkAppSidebarService";
+export const starkAppSidebarServiceName = "StarkAppSidebarService";
 /**
  * The InjectionToken version of the service name
  */

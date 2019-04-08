@@ -26,7 +26,7 @@ export class DemoAuthorizationServicePageComponent {
 		}
 	];
 
-	public stateDeclarations: string = `
+	public stateDeclarations = `
 	import { DemoProtectedPageComponent } from "./pages";
 	import { StarkRBACStateDeclaration } from "@nationalbankbelgium/stark-rbac";
 	

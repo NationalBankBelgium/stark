@@ -8,7 +8,7 @@ import { StarkMenuGroup } from "./app-menu-group.intf";
 /**
  * Name of the component
  */
-const componentName: string = "stark-app-menu";
+const componentName = "stark-app-menu";
 
 /**
  * Component to display app-menu based on the options passed as parameters.
@@ -26,7 +26,7 @@ export class StarkAppMenuComponent extends AbstractStarkUiComponent implements O
 	 * @internal
 	 * @ignore
 	 */
-	private _menuConfig: StarkMenuConfig;
+	private _menuConfig: StarkMenuConfig = {};
 
 	/**
 	 * Configuration of the menu
@@ -44,7 +44,7 @@ export class StarkAppMenuComponent extends AbstractStarkUiComponent implements O
 	/**
 	 * Either the component have section or not
 	 */
-	public hasSections: boolean;
+	public hasSections = false;
 
 	/**
 	 * Class constructor
