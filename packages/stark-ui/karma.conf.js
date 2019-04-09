@@ -43,15 +43,19 @@ const karmaTypescriptBundlerAlias = {
 };
 
 // start customizing the KarmaCI configuration from stark-testing
-const starkUiSpecificConfiguration = Object.assign({}, defaultKarmaConfig, {
-	// change the module resolution for the KarmaTypescript bundler
+const starkUiSpecificConfiguration = {
+	...defaultKarmaConfig,
+	// add missing files due to "@nationalbankbelgium/stark-ui" imports used in mock files of the testing sub-package
+	files: [...defaultKarmaConfig.files, ...karmaTypescriptFiles],
 	karmaTypescriptConfig: {
 		...defaultKarmaConfig.karmaTypescriptConfig,
 		bundlerOptions: {
 			...defaultKarmaConfig.karmaTypescriptConfig.bundlerOptions,
+			// change the module resolution for the KarmaTypescript bundler
 			resolve: {
 				alias: karmaTypescriptBundlerAlias
 			},
+			// Overwrite the karmaTypescriptConfig to pass the correct preset to karma-typescript-es6-transform
 			transforms: [
 				require("../stark-testing/node_modules/karma-typescript-angular2-transform"),
 				require("../stark-testing/node_modules/karma-typescript-es6-transform")({
@@ -59,10 +63,8 @@ const starkUiSpecificConfiguration = Object.assign({}, defaultKarmaConfig, {
 				})
 			]
 		}
-	},
-	// add missing files due to "@nationalbankbelgium/stark-ui" imports used in mock files of the testing sub-package
-	files: [...defaultKarmaConfig.files, ...karmaTypescriptFiles]
-});
+	}
+};
 
 // export the configuration function that karma expects and simply return the stark configuration
 module.exports = {
