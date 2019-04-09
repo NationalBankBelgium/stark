@@ -30,7 +30,7 @@ const deepFreeze: Function = require("deep-freeze-strict");
 const resourcePath = "/something/:somethingId/else/:elseId/next";
 const resourceUuid = "dummyUUID";
 const resourceEtag = "123456789";
-const mockDate: Date = new Date();
+const mockDate = new Date();
 const mockFrozenPathParamsWithoutUUID: StarkHttpRequestParams = deepFreeze({
 	pathParameters: { someId: "1234" }
 });

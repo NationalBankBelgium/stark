@@ -15,7 +15,7 @@ export class DemoDatePickerPageComponent implements OnDestroy {
 	public minDate = new Date();
 	public maxDate = new Date(Date.now() + 30 * DAY_IN_MILLISECONDS);
 
-	public ngModelDate: Date = new Date();
+	public ngModelDate = new Date();
 	public formControl = new FormControl(new Date(), Validators.required);
 
 	public disabled = false;

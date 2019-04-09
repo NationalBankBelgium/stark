@@ -25,7 +25,7 @@ const karmaTypescriptBundlerAlias = {
 	cerialize: "../stark-core/node_modules/cerialize/index.js",
 	"class-validator": "../stark-core/node_modules/class-validator/index.js",
 	"deep-freeze-strict": "../stark-core/node_modules/deep-freeze-strict/index.js",
-	moment: "../stark-core/node_modules/moment/moment.js",
+	ibantools: "../stark-core/node_modules/ibantools/build/ibantools.js",
 	"lodash-es": "../stark-core/node_modules/lodash-es/lodash.js",
 	"lodash-es/cloneDeep": "../stark-core/node_modules/lodash-es/cloneDeep.js",
 	"lodash-es/findIndex": "../stark-core/node_modules/lodash-es/findIndex.js",
@@ -39,7 +39,7 @@ const karmaTypescriptBundlerAlias = {
 	"lodash-es/reduce": "../stark-core/node_modules/lodash-es/reduce.js",
 	"lodash-es/startCase": "../stark-core/node_modules/lodash-es/startCase.js",
 	"lodash-es/uniqueId": "../stark-core/node_modules/lodash-es/uniqueId.js",
-	ibantools: "../stark-core/node_modules/ibantools/build/ibantools.js"
+	moment: "../stark-core/node_modules/moment/moment.js"
 };
 
 // start customizing the KarmaCI configuration from stark-testing

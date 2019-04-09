@@ -7,7 +7,7 @@ describe("Util: DateUtil", () => {
 
 	describe("parseDateWithFormat", () => {
 		it("should return a valid Date when different valid dateStrings are provided using the same format", () => {
-			const expectedDate: Date = new Date();
+			const expectedDate = new Date();
 
 			// full date-time
 			expectedDate.setFullYear(2016, 2, 18);
@@ -60,7 +60,7 @@ describe("Util: DateUtil", () => {
 		});
 
 		it("should return a valid Date when the same dateString is used and passing different formats", () => {
-			const expectedDate: Date = new Date();
+			const expectedDate = new Date();
 
 			// full date-time (UTC format and including milliseconds)
 			expectedDate.setUTCFullYear(2016, 2, 18);
@@ -124,7 +124,7 @@ describe("Util: DateUtil", () => {
 		});
 
 		it("should return a valid Date when the same date is represented in different formats", () => {
-			const expectedDate: Date = new Date();
+			const expectedDate = new Date();
 			expectedDate.setUTCFullYear(2016, 2, 18);
 			expectedDate.setUTCHours(17, 25, 43, 511);
 
@@ -185,10 +185,10 @@ describe("Util: DateUtil", () => {
 		it("should return the date in a formatted string based on the given format", () => {
 			// IMPORTANT: in case the date string has a timezone, it should have a ':' between the hours and the minutes
 			// otherwise IE will fail to parse it returning "Invalid Date"
-			const mockDate: Date = new Date("2016-03-18T10:25:43.511+01:00");
+			const mockDate = new Date("2016-03-18T10:25:43.511+01:00");
 
 			// another way to create a date
-			// const mockDate: Date = new Date();
+			// const mockDate = new Date();
 			// mockDate.setFullYear(2016, 2, 18);
 			// mockDate.setHours(10, 25, 43, 511);
 
@@ -222,7 +222,7 @@ describe("Util: DateUtil", () => {
 		});
 
 		it("should return the date in a formatted string based on the default format if no format is defined", () => {
-			const mockDate: Date = new Date();
+			const mockDate = new Date();
 			mockDate.setFullYear(2016, 2, 18);
 			mockDate.setHours(10, 25, 43, 511);
 
@@ -231,7 +231,7 @@ describe("Util: DateUtil", () => {
 		});
 
 		it("should return 'invalid format' when the given format is invalid", () => {
-			const mockDate: Date = new Date();
+			const mockDate = new Date();
 			mockDate.setFullYear(2016, 2, 18);
 			mockDate.setHours(10, 25, 43, 511);
 

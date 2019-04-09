@@ -27,8 +27,14 @@ const karmaTypescriptBundlerAliasResolution = {
 			cerialize: "../stark-core/node_modules/cerialize/index.js",
 			"class-validator": "../stark-core/node_modules/class-validator/index.js",
 			"deep-freeze-strict": "../stark-core/node_modules/deep-freeze-strict/index.js",
-			moment: "../stark-core/node_modules/moment/moment.js",
-			ibantools: "../stark-core/node_modules/ibantools/build/ibantools.js"
+			ibantools: "../stark-core/node_modules/ibantools/build/ibantools.js",
+			"lodash-es": "../stark-core/node_modules/lodash-es/lodash.js",
+			"lodash-es/cloneDeep": "../stark-core/node_modules/lodash-es/cloneDeep.js",
+			"lodash-es/floor": "../stark-core/node_modules/lodash-es/floor.js",
+			"lodash-es/isEmpty": "../stark-core/node_modules/lodash-es/isEmpty.js",
+			"lodash-es/noop": "../stark-core/node_modules/lodash-es/noop.js",
+			"lodash-es/reduce": "../stark-core/node_modules/lodash-es/reduce.js",
+			moment: "../stark-core/node_modules/moment/moment.js"
 		}
 	}
 };

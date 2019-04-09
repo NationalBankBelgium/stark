@@ -110,7 +110,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the datepickers min date should be set correctly", () => {
-			const minDate: Date = new Date(2018, 6, 1);
+			const minDate = new Date(2018, 6, 1);
 			component.startMinDate = minDate;
 			component.endMinDate = minDate;
 			fixture.detectChanges();
@@ -121,7 +121,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the datepickers max date should be set correctly", () => {
-			const maxDate: Date = new Date(2018, 6, 2);
+			const maxDate = new Date(2018, 6, 2);
 			component.startMaxDate = maxDate;
 			component.endMaxDate = maxDate;
 			fixture.detectChanges();
@@ -132,7 +132,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the datepickers value should be set correctly", () => {
-			const date: Date = new Date(2018, 6, 3);
+			const date = new Date(2018, 6, 3);
 			component.startDate = date;
 			component.endDate = date;
 			fixture.detectChanges();
@@ -153,7 +153,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the end date should be correctly set if after the start date", () => {
-			const endDate: Date = new Date(2018, 6, 7);
+			const endDate = new Date(2018, 6, 7);
 			component.startDate = new Date(2018, 6, 6);
 			component.endDate = endDate;
 			fixture.detectChanges();
@@ -162,7 +162,7 @@ describe("DateRangePickerComponent", () => {
 		});
 
 		it("the end date should be correctly set if after the start date is undefined", () => {
-			const endDate: Date = new Date(2018, 6, 8);
+			const endDate = new Date(2018, 6, 8);
 			component.startDate = undefined;
 			component.endDate = endDate;
 			fixture.detectChanges();

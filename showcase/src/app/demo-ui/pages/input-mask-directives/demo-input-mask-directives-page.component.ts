@@ -115,7 +115,7 @@ export class DemoInputMaskDirectivesPageComponent {
 	}
 
 	public logChange(event: Event): void {
-		this.logger.debug("input value changed", (<HTMLInputElement>event.srcElement).value);
+		this.logger.debug("input value changed", (<HTMLInputElement>event.target).value);
 	}
 
 	public logModelChange(model: any): void {

@@ -12,7 +12,7 @@ export class DemoDatePickerComponent {
 	public minDate = new Date();
 	public maxDate = new Date(Date.now() + 30 * DAY_IN_MILLISECONDS);
 
-	public date: Date = new Date();
+	public date = new Date();
 	public disabled = false;
 
 	public maskConfig: StarkTimestampMaskConfig = { format: "DD-MM-YYYY" };
