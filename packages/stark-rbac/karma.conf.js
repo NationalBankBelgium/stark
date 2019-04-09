@@ -27,8 +27,14 @@ const karmaTypescriptBundlerAliasResolution = {
 			cerialize: "../stark-core/node_modules/cerialize/index.js",
 			"class-validator": "../stark-core/node_modules/class-validator/index.js",
 			"deep-freeze-strict": "../stark-core/node_modules/deep-freeze-strict/index.js",
-			moment: "../stark-core/node_modules/moment/moment.js",
-			ibantools: "../stark-core/node_modules/ibantools/build/ibantools.js"
+			ibantools: "../stark-core/node_modules/ibantools/build/ibantools.js",
+			"lodash-es": "../stark-core/node_modules/lodash-es/lodash.js",
+			"lodash-es/cloneDeep": "../stark-core/node_modules/lodash-es/cloneDeep.js",
+			"lodash-es/floor": "../stark-core/node_modules/lodash-es/floor.js",
+			"lodash-es/isEmpty": "../stark-core/node_modules/lodash-es/isEmpty.js",
+			"lodash-es/noop": "../stark-core/node_modules/lodash-es/noop.js",
+			"lodash-es/reduce": "../stark-core/node_modules/lodash-es/reduce.js",
+			moment: "../stark-core/node_modules/moment/moment.js"
 		}
 	}
 };
@@ -36,12 +42,15 @@ const karmaTypescriptBundlerAliasResolution = {
 // start customizing the KarmaCI configuration from stark-testing
 const starkRBACSpecificConfiguration = {
 	...defaultKarmaConfig,
-	// change the module resolution for the KarmaTypescript bundler
+	// add missing files due to "@nationalbankbelgium/stark-rbac" imports used in mock files of the testing sub-package
+	files: [...defaultKarmaConfig.files, ...karmaTypescriptFiles],
 	karmaTypescriptConfig: {
 		...defaultKarmaConfig.karmaTypescriptConfig,
 		bundlerOptions: {
 			...defaultKarmaConfig.karmaTypescriptConfig.bundlerOptions,
+			// change the module resolution for the KarmaTypescript bundler
 			...karmaTypescriptBundlerAliasResolution,
+			// Overwrite the karmaTypescriptConfig to pass the correct preset to karma-typescript-es6-transform
 			transforms: [
 				require("../stark-testing/node_modules/karma-typescript-angular2-transform"),
 				require("../stark-testing/node_modules/karma-typescript-es6-transform")({
@@ -49,9 +58,7 @@ const starkRBACSpecificConfiguration = {
 				})
 			]
 		}
-	},
-	// add missing files due to "@nationalbankbelgium/stark-rbac" imports used in mock files of the testing sub-package
-	files: [...defaultKarmaConfig.files, ...karmaTypescriptFiles]
+	}
 };
 
 // export the configuration function that karma expects and simply return the stark configuration

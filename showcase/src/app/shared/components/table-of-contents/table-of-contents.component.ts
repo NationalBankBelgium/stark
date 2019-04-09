@@ -9,7 +9,7 @@ import { TableOfContentLink } from "./table-of-content-link.intf";
 	templateUrl: "./table-of-contents.component.html"
 })
 /**
- * The table of contents component, freely inspired from :
+ * The table of contents component, freely inspired from:
  * @link https://github.com/angular/material.angular.io/tree/master/src/app/shared/table-of-contents
  */
 export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -67,7 +67,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	}
 
 	/**
-	 * Gets the scrolloffset of the container.
+	 * Gets the scrollOffset of the container.
 	 * Basically, this will return the position on the screen where the user is located.
 	 */
 	private getScrollOffset(): number {
@@ -118,10 +118,8 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	 */
 	private onScroll(): void {
 		const linksCounter: number = this.links.length - 1;
-		const max: number = (<HTMLElement>document.documentElement).scrollHeight;
-		const pos: number =
-			((<HTMLElement>document.documentElement).scrollTop || document.body.scrollTop) +
-			(<HTMLElement>document.documentElement).offsetHeight;
+		const max: number = document.documentElement.scrollHeight;
+		const pos: number = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
 		if (pos === max) {
 			this.links[linksCounter].active = true;
 			for (let i = 0; i < linksCounter; i++) {
@@ -137,8 +135,8 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 
 	/**
 	 * This method will check, thanks to the user's position on a screen, if a link is active or not.
-	 * If the value of scrolloffset is higher than the top of the currentlink (so, below the currentLink)
-	 * and lower than the top of tne nextlinkg (so, above the nextLink), it means that the link is active.
+	 * If the value of scrollOffset is higher than the top of the current link (so, below the current link)
+	 * and lower than the top of tne next link (so, above the next link), it means that the link is active.
 	 * @param currentLink - the Link we are analysing
 	 * @param nextLink - the Link that follows the currentLink
 	 * @returns - if the link is active (true) or not (false)

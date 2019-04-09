@@ -14,5 +14,5 @@
       "packages": ["showcase/package.json", "starter/package.json"]
     }
   },
-  "ignore": ["@angular/flex-layout", "@compodoc/compodoc", "@types/node", "typescript"]
+  "ignore": ["@compodoc/compodoc", "@types/node", "typescript"]
 }

@@ -174,7 +174,7 @@ describe("DatePickerComponent", () => {
 			});
 
 			it("the MatDatepickerInput min date should be minDate", () => {
-				const minDate: Date = new Date(2018, 6, 1);
+				const minDate = new Date(2018, 6, 1);
 				component.min = minDate;
 				hostFixture.detectChanges();
 				expect(component.pickerInput.min).not.toBeNull();
@@ -182,7 +182,7 @@ describe("DatePickerComponent", () => {
 			});
 
 			it("the MatDatepickerInput max date should be maxDate", () => {
-				const maxDate: Date = new Date(2018, 6, 2);
+				const maxDate = new Date(2018, 6, 2);
 				component.max = maxDate;
 				hostFixture.detectChanges();
 				expect(component.pickerInput.max).not.toBeNull();
@@ -190,7 +190,7 @@ describe("DatePickerComponent", () => {
 			});
 
 			it("the MatDatepickerInput value should be date", () => {
-				const date: Date = new Date(2018, 6, 3);
+				const date = new Date(2018, 6, 3);
 				hostComponent.formControl.setValue(date);
 				hostFixture.detectChanges();
 				expect(component.pickerInput.value).not.toBeNull();
@@ -341,7 +341,7 @@ describe("DatePickerComponent", () => {
 			});
 
 			it("the MatDatepickerInput min date should be minDate", () => {
-				const minDate: Date = new Date(2018, 6, 1);
+				const minDate = new Date(2018, 6, 1);
 				component.min = minDate;
 				hostFixture.detectChanges();
 				expect(component.pickerInput.min).not.toBeNull();
@@ -349,7 +349,7 @@ describe("DatePickerComponent", () => {
 			});
 
 			it("the MatDatepickerInput max date should be maxDate", () => {
-				const maxDate: Date = new Date(2018, 6, 2);
+				const maxDate = new Date(2018, 6, 2);
 				component.max = maxDate;
 				hostFixture.detectChanges();
 				expect(component.pickerInput.max).not.toBeNull();
@@ -357,7 +357,7 @@ describe("DatePickerComponent", () => {
 			});
 
 			it("the MatDatepickerInput value should be date", () => {
-				const date: Date = new Date(2018, 6, 3);
+				const date = new Date(2018, 6, 3);
 				hostComponent.value = date;
 				hostFixture.detectChanges();
 				expect(component.pickerInput.value).not.toBeNull();

@@ -184,7 +184,7 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 		// 	.add(40, "m")
 		// 	.toDate()
 		// 	.toUTCString(); // 40 minutes from now
-		const expirationDate: Date = new Date();
+		const expirationDate = new Date();
 		expirationDate.setTime(new Date().getTime() + 2400000); // 40 minutes from now
 		const cookieExpiration: string = expirationDate.toUTCString();
 		const cookieAttributes: string[] = [`${this.xsrfCookieName}=${xsrfToken}`, `path='/'`, `expires=${cookieExpiration}`];

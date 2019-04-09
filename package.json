@@ -56,7 +56,7 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
     "tslint-sonarts": "^1.8.0",
-    "typescript": "~3.1.6",
+    "typescript": "~3.2.4",
     "uglify-es": "^3.3.9",
     "zone.js": "~0.8.26"
   },
@@ -154,7 +154,7 @@
     "test:showcase:e2e:browserstack": "cd showcase && npm run e2e:browserstack && cd ../..",
     "test:starter": "cd starter && npm run test-fast && cd ../..",
     "test:starter:e2e": "cd starter && npm run e2e && cd ../..",
-    "test:ci:all": "npm run test:ci:stark-core && npm run test:ci:stark-ui && npm run test:ci:starter && npm run test:ci:showcase",
+    "test:ci:all": "npm run test:ci:stark-core && npm run test:ci:stark-ui && npm run test:ci:stark-rbac && npm run test:ci:starter && npm run test:ci:showcase",
     "test:ci:stark-core": "cd packages/stark-core && npm run test-fast:ci && cd ../..",
     "test:ci:stark-rbac": "cd packages/stark-rbac && npm run test-fast:ci && cd ../..",
     "test:ci:stark-ui": "cd packages/stark-ui && npm run test-fast:ci && cd ../..",
