@@ -44,6 +44,7 @@ import { StarkComponentUtil } from "../../../util/component";
 import { FormControl } from "@angular/forms";
 import { distinctUntilChanged } from "rxjs/operators";
 import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "@nationalbankbelgium/stark-ui";
+import find from "lodash-es/find";
 
 /**
  * Name of the component
@@ -87,9 +88,18 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public set columnProperties(input: StarkTableColumnProperties[]) {
 		this._columnProperties = (input || []).map((properties: StarkTableColumnProperties) => ({
 			...DEFAULT_COLUMN_PROPERTIES,
-			...this._columnProperties,
 			...properties
 		}));
+
+		if (this.dataSource) {
+			this.cdRef.detectChanges();
+
+			this.updateTableColumns();
+
+			if (this.isArrayFilled(this.orderProperties)) {
+				this.sortData();
+			}
+		}
 	}
 
 	public get columnProperties(): StarkTableColumnProperties[] {
@@ -376,17 +386,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public ngAfterViewInit(): void {
 		this.logger.debug(componentName + ": ngAfterViewInit");
-		// add the columns the developer defined with the <stark-table-column>
-		this.columns = [...this.viewColumns.toArray(), ...this.contentColumns.toArray()];
 
-		this.removeOldColumnsFromTable();
-		this.addColumnsToTable(this.columns);
-
-		if (this.orderProperties instanceof Array && this.orderProperties.length) {
-			this.sortData();
-		}
+		this.updateTableColumns();
 
 		this.initializeDataSource();
+
+		if (this.isArrayFilled(this.orderProperties)) {
+			this.sortData();
+		}
 
 		this._globalFilterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
 			this.filter.globalFilterValue = value === null ? undefined : value;
@@ -418,17 +425,21 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 					this.applyFilter();
 				}
 
-				if (this.orderProperties instanceof Array && this.orderProperties.length) {
+				if (this.isArrayFilled(this.orderProperties)) {
 					this.sortData();
+				} else {
+					this.dataSource.data = [...this.data];
 				}
 
-				this.updateDataSource();
+				this.paginationConfig = {
+					...this.paginationConfig,
+					totalItems: this.dataSource.filteredData.length
+				};
 			}
 		}
 
 		if (changes["orderProperties"] && !changes["orderProperties"].isFirstChange()) {
 			this.sortData();
-			this.updateDataSource();
 		}
 
 		if (changes["filter"]) {
@@ -582,14 +593,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	/**
-	 * Update data in the MatTableDataSource by setting the current value of this.data.
+	 * Update columns of the Mat-Table component based on columnProperties.
 	 */
-	public updateDataSource(): void {
-		this.dataSource.data = this.data;
-		this.paginationConfig = {
-			...this.paginationConfig,
-			totalItems: this.dataSource.filteredData.length
-		};
+	public updateTableColumns(): void {
+		// add the columns the developer defined with the <stark-table-column>
+		this.columns = [...this.viewColumns.toArray(), ...this.contentColumns.toArray()];
+
+		this.removeOldColumnsFromTable();
+		this.addColumnsToTable(this.columns);
 	}
 
 	/**
@@ -675,22 +686,22 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public onReorderChange(column: StarkColumnSortChangedOutput): void {
 		if (column.sortable) {
 			this.resetSorting(column);
-			if (column.sortable) {
-				column.sortPriority = 1;
+			const sortedColumn = find(this.columns, { name: column.name });
+			if (sortedColumn) {
+				sortedColumn.sortPriority = 1;
 				switch (column.sortDirection) {
 					case "asc":
-						column.sortDirection = "desc";
+						sortedColumn.sortDirection = "desc";
 						break;
 					case "desc":
-						column.sortDirection = "";
+						sortedColumn.sortDirection = "";
 						break;
 					default:
-						column.sortDirection = "asc";
+						sortedColumn.sortDirection = "asc";
 						break;
 				}
 			}
 			this.sortData();
-			this.updateDataSource();
 		}
 	}
 
@@ -709,7 +720,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		dialogRef.afterClosed().subscribe((savedRules: StarkSortingRule[] | undefined) => {
 			if (savedRules) {
 				this.sortData();
-				this.updateDataSource();
 			}
 		});
 	}
@@ -762,7 +772,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		// Should remove this condition ?
 		this.isMultiSorting = sortableColumns.length > 1;
 
-		this.data.sort((row1: object, row2: object) => {
+		this.dataSource.data = [...this.data].sort((row1: object, row2: object) => {
 			for (const column of sortableColumns) {
 				const isAscendingDirection: boolean = column.sortDirection === "asc";
 				if (column.compareFn instanceof Function) {
@@ -819,7 +829,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public getColumnSortingDirection(columnName: string): StarkTableColumnSortingDirection {
 		let columnSortingDirection: StarkTableColumnSortingDirection = "";
 
-		if (this.orderProperties instanceof Array) {
+		if (this.isArrayFilled(this.orderProperties)) {
 			const columnOrderProperty: string | undefined = this.orderProperties.filter((orderProperty: string) => {
 				if (orderProperty.startsWith("-")) {
 					return orderProperty === "-" + columnName;
@@ -844,7 +854,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		let columnSortingPriority: number | undefined;
 		let index = 1;
 
-		if (this.orderProperties instanceof Array) {
+		if (this.isArrayFilled(this.orderProperties)) {
 			for (const orderProperty of this.orderProperties) {
 				if (orderProperty === columnName || (orderProperty.startsWith("-") && orderProperty === "-" + columnName)) {
 					columnSortingPriority = index;
@@ -936,6 +946,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public toggleColumnVisibility(item: StarkMinimapItemProperties): void {
 		const index: number = this.columnProperties.findIndex(({ name }: StarkTableColumnProperties) => name === item.name);
 		this.columnProperties[index].isVisible = !this.columnProperties[index].isVisible;
+	}
+
+	/**
+	 * @ignore
+	 * Type guard
+	 */
+	private isArrayFilled(array: any): array is any[] {
+		return array instanceof Array && !!array.length;
 	}
 
 	/**

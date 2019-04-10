@@ -60,6 +60,7 @@ const globals = {
 	ibantools: "ibantools",
 	moment: "moment",
 	"lodash-es/cloneDeep": "lodash-es.cloneDeep",
+	"lodash-es/find": "lodash-es.find",
 	"lodash-es/findIndex": "lodash-es.findIndex",
 	"lodash-es/floor": "lodash-es.floor",
 	"lodash-es/get": "lodash-es.get",

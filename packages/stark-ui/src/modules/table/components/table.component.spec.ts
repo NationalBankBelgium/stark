@@ -85,6 +85,8 @@ describe("TableComponent", () => {
 		element.dispatchEvent(clickEvent);
 	};
 
+	const getColumnSelector = (columnName: string): string => `.stark-table th.mat-column-${columnName} div div`;
+
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			imports: [
@@ -154,44 +156,48 @@ describe("TableComponent", () => {
 	});
 
 	describe("on change", () => {
+		it("should make a copy of 'data' in 'dataSource' when 'data' changes to keep 'data' immutable", () => {
+			const dummyData = [{ name: "test-data" }];
+			hostComponent.dummyData = dummyData;
+			hostFixture.detectChanges();
+			expect(component.data).toEqual(dummyData);
+			expect(component.dataSource.data).toEqual(dummyData);
+			expect(component.dataSource.data).not.toBe(component.data);
+		});
+		
 		it("should trigger resetFilterValueOnDataChange and sortData methods when data changes", () => {
 			spyOn(component, "resetFilterValueOnDataChange");
 			spyOn(component, "sortData");
-			spyOn(component, "updateDataSource");
 			spyOn(component, "applyFilter");
 
 			hostComponent.orderProperties = ["name"];
 			hostFixture.detectChanges();
 			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
 			(<Spy>component.sortData).calls.reset();
-			(<Spy>component.updateDataSource).calls.reset();
 			hostComponent.dummyData = [{ name: "test-data" }];
 			hostFixture.detectChanges();
 			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
 			expect(component.sortData).toHaveBeenCalledTimes(1);
-			expect(component.updateDataSource).toHaveBeenCalledTimes(1);
 
 			hostComponent.orderProperties = [];
 			hostFixture.detectChanges();
 			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
 			(<Spy>component.sortData).calls.reset();
-			(<Spy>component.updateDataSource).calls.reset();
 			hostComponent.dummyData = [{ name: "test-data-1" }];
 			hostFixture.detectChanges();
 			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
 			expect(component.sortData).not.toHaveBeenCalled();
-			expect(component.updateDataSource).toHaveBeenCalledTimes(1);
+			expect(component.dataSource.data).toEqual([{ name: "test-data-1" }]);
 
 			hostComponent.orderProperties = undefined;
 			hostFixture.detectChanges();
 			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
 			(<Spy>component.sortData).calls.reset();
-			(<Spy>component.updateDataSource).calls.reset();
 			hostComponent.dummyData = [{ name: "test-data-2" }];
 			hostFixture.detectChanges();
 			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
 			expect(component.sortData).not.toHaveBeenCalled();
-			expect(component.updateDataSource).toHaveBeenCalledTimes(1);
+			expect(component.dataSource.data).toEqual([{ name: "test-data-2" }]);
 		});
 
 		it("should assign right value to isFixedHeaderEnabled when fixedHeader changes", () => {
@@ -268,7 +274,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([{ a: 1 }, { a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
 			});
 
 			it("should sort data descending", () => {
@@ -279,7 +285,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([{ a: 20 }, { a: 10 }, { a: 5 }, { a: 4 }, { a: 3 }, { a: 2 }, { a: 1 }, { a: 1 }]);
+				expect(component.dataSource.data).toEqual([{ a: 20 }, { a: 10 }, { a: 5 }, { a: 4 }, { a: 3 }, { a: 2 }, { a: 1 }, { a: 1 }]);
 			});
 
 			it("should sort data descending column A then ascending column B", () => {
@@ -302,7 +308,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([
+				expect(component.dataSource.data).toEqual([
 					{ a: 7, b: 2 },
 					{ a: 6, b: 2 },
 					{ a: 5, b: 2 },
@@ -335,7 +341,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([
+				expect(component.dataSource.data).toEqual([
 					{ a: "g", b: "b" },
 					{ a: "f", b: "b" },
 					{ a: "e", b: "b" },
@@ -365,9 +371,54 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([{ a: 1 }, { a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
-				// it seems that Angular optimizes the sorting to call it the minimum times possible
-				expect(hostComponent.columnProperties[0].compareFn).toHaveBeenCalledTimes(7); // 7 times instead of 8!!!
+				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+				expect(hostComponent.columnProperties[0].compareFn).toHaveBeenCalled();
+				// Due to browsers, we cannot predict exactly the number of calls. On IE, it is 9 times, on Chrome it can be 7, 8 or 14 times depending on the version 
+				expect((<Spy>hostComponent.columnProperties[0].compareFn).calls.count()).toBeGreaterThanOrEqual(7);
+				expect((<Spy>hostComponent.columnProperties[0].compareFn).calls.count()).toBeLessThanOrEqual(14);
+			});
+
+			it("should sort data when click on the column", () => {
+				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 3 }, { a: 2 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+				
+				const column: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("a"));
+				column.click();
+				hostFixture.detectChanges();
+				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+
+				column.click();
+				hostFixture.detectChanges();
+				expect(component.dataSource.data).toEqual([{ a: 20 }, { a: 10 }, { a: 5 }, { a: 4 }, { a: 3 }, { a: 2 }, { a: 1 }, { a: 1 }]);
+
+				column.click();
+				hostFixture.detectChanges();
+				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 3 }, { a: 2 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+			});
+
+			it("should sort data when click on different columns", () => {
+				hostComponent.dummyData = [{ a: 2, b: 3, c: 1 }, { a: 1, b: 2, c: 3 }, { a: 3, b: 1, c: 2 }];
+				hostComponent.columnProperties = [{ name: "a" }, { name: "b" }, { name: "c" }];
+				hostFixture.detectChanges();
+				expect(component.dataSource.data).toEqual(hostComponent.dummyData);
+				
+				const columnA: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("a"));
+				const columnB: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("b"));
+				const columnC: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("c"));
+				
+				columnA.click();
+				expect(component.dataSource.data).toEqual([{ a: 1, b: 2, c: 3 }, { a: 2, b: 3, c: 1 }, { a: 3, b: 1, c: 2 }]);
+				columnA.click();
+				expect(component.dataSource.data).toEqual([{ a: 3, b: 1, c: 2 }, { a: 2, b: 3, c: 1 }, { a: 1, b: 2, c: 3 }]);
+
+				columnB.click();
+				expect(component.dataSource.data).toEqual([{ a: 3, b: 1, c: 2 }, { a: 1, b: 2, c: 3 }, { a: 2, b: 3, c: 1 }]);
+				columnB.click();
+				expect(component.dataSource.data).toEqual([{ a: 2, b: 3, c: 1 }, { a: 1, b: 2, c: 3 }, { a: 3, b: 1, c: 2 }]);
+				
+				columnC.click();
+				expect(component.dataSource.data).toEqual([{ a: 2, b: 3, c: 1 }, { a: 3, b: 1, c: 2 }, { a: 1, b: 2, c: 3 }]);
+				columnC.click();
+				expect(component.dataSource.data).toEqual([{ a: 1, b: 2, c: 3 }, { a: 3, b: 1, c: 2 }, { a: 2, b: 3, c: 1 }]);
 			});
 		});
 
@@ -397,7 +448,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([
+				expect(component.dataSource.data).toEqual([
 					{ a: { b: 1 } },
 					{ a: { b: 1 } },
 					{ a: { b: 2 } },
@@ -417,7 +468,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([
+				expect(component.dataSource.data).toEqual([
 					{ a: { b: 7 } },
 					{ a: { b: 6 } },
 					{ a: { b: 5 } },
@@ -449,7 +500,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([
+				expect(component.dataSource.data).toEqual([
 					{ a: { b: 7 }, b: 2 },
 					{ a: { b: 6 }, b: 2 },
 					{ a: { b: 5 }, b: 2 },
@@ -482,7 +533,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([
+				expect(component.dataSource.data).toEqual([
 					{ a: 7, b: { a: 2 } },
 					{ a: 6, b: { a: 2 } },
 					{ a: 5, b: { a: 2 } },
@@ -512,7 +563,7 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.data).toEqual([
+				expect(component.dataSource.data).toEqual([
 					{ a: { b: 1 } },
 					{ a: { b: 1 } },
 					{ a: { b: 2 } },
@@ -522,8 +573,10 @@ describe("TableComponent", () => {
 					{ a: { b: 6 } },
 					{ a: { b: 7 } }
 				]);
-				// it seems that Angular optimizes the sorting to call it the minimum times possible
-				expect(hostComponent.columnProperties[0].compareFn).toHaveBeenCalledTimes(7); // 7 times instead of 8!!!
+				expect(hostComponent.columnProperties[0].compareFn).toHaveBeenCalled();
+				// Due to browsers, we cannot predict exactly the number of calls. On IE, it is 9 times, on Chrome it can be 7, 8 or 14 times depending on the version 
+				expect((<Spy>hostComponent.columnProperties[0].compareFn).calls.count()).toBeGreaterThanOrEqual(7);
+				expect((<Spy>hostComponent.columnProperties[0].compareFn).calls.count()).toBeLessThanOrEqual(14);
 			});
 		});
 	});
