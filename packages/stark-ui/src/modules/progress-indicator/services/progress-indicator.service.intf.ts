@@ -13,9 +13,12 @@ export const STARK_PROGRESS_INDICATOR_SERVICE: InjectionToken<StarkProgressIndic
 	StarkProgressIndicatorService
 >(starkProgressIndicatorServiceName);
 
+/**
+ * Service to handle the visibility of a progress indicator (e.g., spinner, progress percentage, ...) programmatically.
+ */
 export interface StarkProgressIndicatorService {
 	/**
-	 * registers a new progress indicator in the application state. Each registered progress indicator is identified by a topic,
+	 * Registers a new progress indicator in the application state. Each registered progress indicator is identified by a topic,
 	 * a unique identifier associated with it.
 	 * @param topic - The topic of the progress indicator to be registered.
 	 * @param type - Type of progress indicator (i.e. spinner)
@@ -23,7 +26,7 @@ export interface StarkProgressIndicatorService {
 	register(topic: string, type: StarkProgressIndicatorType): void;
 
 	/**
-	 * Deregister a progress indicator already existing in the application state.
+	 * Deregisters a progress indicator already existing in the application state.
 	 * @param topic - The topic of the progress indicator to be deregistered
 	 */
 	deregister(topic: string): void;
@@ -41,7 +44,7 @@ export interface StarkProgressIndicatorService {
 	hide(topic: string): void;
 
 	/**
-	 * Return the latest status of the progress indicator for the given topic (whether is shown or hidden).
+	 * Returns the latest status of the progress indicator for the given topic (whether is shown or hidden).
 	 * @param topic - The topic of the progress indicator whose status will be fetched.
 	 * @returns Observable that will emit a boolean value whenever the status of the progress indicator changes: false if it is hidden,
 	 * true if it is shown or undefined in case there is no progress indicator for the given topic.

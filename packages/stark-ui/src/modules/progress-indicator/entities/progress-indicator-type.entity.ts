@@ -1,5 +1,5 @@
 /**
- * Progress Indicator types supported by Stark.
+ * Progress Indicator types supported by {@link StarkProgressIndicatorDirective}.
  */
 export enum StarkProgressIndicatorType {
 	SPINNER

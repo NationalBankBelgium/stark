@@ -6,12 +6,9 @@ import { By } from "@angular/platform-browser";
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import {
-	STARK_PROGRESS_INDICATOR_SERVICE,
-	StarkProgressIndicatorConfig,
-	StarkProgressIndicatorDirective,
-	StarkProgressIndicatorType
-} from "@nationalbankbelgium/stark-ui";
+import { StarkProgressIndicatorType, StarkProgressIndicatorConfig } from "../entities";
+import { StarkProgressIndicatorDirective } from "../directives";
+import { STARK_PROGRESS_INDICATOR_SERVICE } from "../services";
 import { MockStarkProgressIndicatorService } from "../testing/progress-indicator.mock";
 import { StarkProgressIndicatorComponent } from "../components/progress-indicator.component";
 
@@ -28,7 +25,7 @@ class TestComponent {
 	public progressIndicatorDirective!: StarkProgressIndicatorDirective;
 }
 
-describe("StarkProgressIndicator", () => {
+describe("ProgressIndicatorDirective", () => {
 	let hostFixture: ComponentFixture<TestComponent>;
 	let hostComponent: TestComponent;
 	const hostElementSelector = "#host-element";

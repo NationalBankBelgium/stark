@@ -48,14 +48,41 @@ const directiveName = "[starkProgressIndicator]";
 	selector: directiveName
 })
 export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
+	/**
+	 * Configuration object for the progress indicator to be shown.
+	 */
 	@Input()
 	public starkProgressIndicator!: StarkProgressIndicatorConfig;
 
+	/**
+	 * The topic that the progress indicator will subscribe to.
+	 */
 	public topic!: string;
+
+	/**
+	 * Type of progress indicator
+	 */
 	public type!: StarkProgressIndicatorType | string;
-	public progressSubscription?: Subscription;
+
+	/**
+	 * @ignore
+	 */
+	private progressSubscription?: Subscription;
+
+	/**
+	 * @ignore
+	 */
 	private readonly componentViewRef!: ViewRef;
 
+	/**
+	 * Class constructor
+	 * @param _progressService - The ProgressIndicator service of the application
+	 * @param componentFactoryResolver - Resolver that returns Angular component factories
+	 * @param injector - The application Injector
+	 * @param _viewContainer - The container where one or more views can be attached to the host element of this directive.
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
 	public constructor(
 		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) public _progressService: StarkProgressIndicatorService,
 		componentFactoryResolver: ComponentFactoryResolver,

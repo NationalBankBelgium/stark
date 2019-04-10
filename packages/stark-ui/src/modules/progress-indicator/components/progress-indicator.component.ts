@@ -21,6 +21,12 @@ const componentName = "stark-progress-indicator";
 	}
 })
 export class StarkProgressIndicatorComponent extends AbstractStarkUiComponent implements OnInit {
+	/**
+	 * Class constructor
+	 * @param logger- The logger of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		protected renderer: Renderer2,
