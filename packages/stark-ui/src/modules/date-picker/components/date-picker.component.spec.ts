@@ -13,7 +13,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { DEFAULT_DATE_MASK_CONFIG, StarkDatePickerComponent, StarkDatePickerMaskConfig } from "./date-picker.component";
 import { STARK_DATE_FORMATS } from "./date-format.constants";
-import { StarkInputMaskDirectivesModule } from "../../input-mask-directives";
+import { StarkTimestampMaskDirective } from "../../input-mask-directives";
 import moment from "moment";
 
 /**
@@ -85,7 +85,7 @@ describe("DatePickerComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			declarations: [StarkDatePickerComponent, TestHostComponent, TestHostFormControlComponent],
+			declarations: [StarkTimestampMaskDirective, StarkDatePickerComponent, TestHostComponent, TestHostFormControlComponent],
 			imports: [
 				NoopAnimationsModule,
 				MatDatepickerModule,
@@ -94,7 +94,6 @@ describe("DatePickerComponent", () => {
 				MatMomentDateModule,
 				FormsModule,
 				ReactiveFormsModule,
-				StarkInputMaskDirectivesModule,
 				TranslateModule.forRoot()
 			],
 			providers: [

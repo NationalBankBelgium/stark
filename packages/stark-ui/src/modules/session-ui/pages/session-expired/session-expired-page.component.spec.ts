@@ -4,9 +4,9 @@ import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
-import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE,StarkApplicationConfig } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService,MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui";
+import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkApplicationConfig } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
+import { StarkAppLogoComponent } from "../../../app-logo/components";
 import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkSessionExpiredPageComponent } from "./session-expired-page.component";
 
@@ -21,8 +21,8 @@ describe("SessionExpiredPageComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			declarations: [StarkSessionCardComponent, StarkSessionExpiredPageComponent],
-			imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot(), StarkAppLogoModule],
+			declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkSessionExpiredPageComponent],
+			imports: [CommonModule, MatButtonModule, MatCardModule, TranslateModule.forRoot()],
 			providers: [
 				{ provide: STARK_ROUTING_SERVICE, useValue: MockStarkRoutingService },
 				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },

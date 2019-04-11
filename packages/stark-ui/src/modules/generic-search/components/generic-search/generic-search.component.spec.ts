@@ -1,16 +1,17 @@
 /* tslint:disable:completed-docs no-identical-functions */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { Component, EventEmitter } from "@angular/core";
+import { Component, EventEmitter, NO_ERRORS_SCHEMA } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatMenuModule } from "@angular/material/menu";
 import { TranslateModule } from "@ngx-translate/core";
-import { StarkActionBarModule, StarkGenericSearchComponent, StarkSearchFormComponent } from "@nationalbankbelgium/stark-ui";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { BrowserAnimationsModule, NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { StarkGenericSearchComponent } from "./generic-search.component";
+import { StarkSearchFormComponent } from "../../classes";
+import { StarkActionBarComponent } from "../../../action-bar/components";
 
 @Component({
 	selector: "search-form-component",
@@ -57,15 +58,19 @@ describe("GenericSearchComponent", () => {
 				FormsModule,
 				ReactiveFormsModule,
 				MatButtonModule,
-				MatIconModule,
-				MatTooltipModule,
-				StarkActionBarModule,
-				BrowserAnimationsModule,
+				MatMenuModule,
 				NoopAnimationsModule,
 				TranslateModule.forRoot()
 			],
-			declarations: [StarkGenericSearchComponent, TestSearchFormComponent, TestHostComponent, BadTestHostComponent],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+			declarations: [
+				StarkActionBarComponent,
+				StarkGenericSearchComponent,
+				TestSearchFormComponent,
+				TestHostComponent,
+				BadTestHostComponent
+			],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
+			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" and "matTooltip" directives not known (which we don't want to add in these tests)
 		}).compileComponents();
 	}));
 

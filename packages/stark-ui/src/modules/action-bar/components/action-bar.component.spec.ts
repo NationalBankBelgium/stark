@@ -6,12 +6,12 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { HAMMER_LOADER } from "@angular/platform-browser";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Subject } from "rxjs";
-import { StarkSvgViewBoxModule } from "../../svg-view-box/svg-view-box.module";
+import { StarkSvgViewBoxDirective } from "../../svg-view-box";
 import { StarkActionBarComponent } from "./action-bar.component";
 import { StarkActionBarConfig } from "./action-bar-config.intf";
 import { StarkAction } from "./action.intf";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import createSpy = jasmine.createSpy;
 
 describe("ActionBarComponent", () => {
@@ -21,8 +21,8 @@ describe("ActionBarComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			declarations: [StarkActionBarComponent],
-			imports: [StarkSvgViewBoxModule, MatButtonModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
+			declarations: [StarkSvgViewBoxDirective, StarkActionBarComponent],
+			imports: [MatButtonModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },

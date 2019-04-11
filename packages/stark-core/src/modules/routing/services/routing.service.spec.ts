@@ -16,10 +16,10 @@ import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkErrorHandler } from "../../error-handling";
 import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
+import { StarkRoutingService } from "./routing.service.intf";
 import CallInfo = jasmine.CallInfo;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
-import { StarkRoutingService } from "@nationalbankbelgium/stark-core";
 
 type CallableRoutingAction = (action: StarkNavigate | StarkNavigationHistoryLimitReached) => void;
 

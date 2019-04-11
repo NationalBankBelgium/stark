@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAppLogoModule } from "../../../app-logo";
+import { StarkAppLogoComponent } from "../../../app-logo";
 import { StarkSessionCardComponent } from "./session-card.component";
 
 @Component({
@@ -27,8 +27,8 @@ describe("SessionCardComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			imports: [CommonModule, TranslateModule.forRoot(), MatCardModule, StarkAppLogoModule],
-			declarations: [TestComponent, StarkSessionCardComponent],
+			imports: [CommonModule, TranslateModule.forRoot(), MatCardModule],
+			declarations: [TestComponent, StarkAppLogoComponent, StarkSessionCardComponent],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() }

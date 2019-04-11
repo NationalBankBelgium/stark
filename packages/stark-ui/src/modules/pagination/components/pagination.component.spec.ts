@@ -16,8 +16,8 @@ import { Observer } from "rxjs";
 import { StarkPaginationComponent } from "./pagination.component";
 import { StarkPaginateEvent } from "./paginate-event.intf";
 import { StarkPaginationConfig } from "./pagination-config.intf";
-import { StarkDropdownComponent, StarkDropdownModule } from "../../dropdown";
-import { StarkRestrictInputDirectiveModule } from "../../restrict-input-directive";
+import { StarkDropdownComponent } from "../../dropdown";
+import { StarkRestrictInputDirective } from "../../restrict-input-directive";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
@@ -115,11 +115,9 @@ describe("PaginationComponent", () => {
 				MatPaginatorModule,
 				MatTooltipModule,
 				NoopAnimationsModule,
-				TranslateModule.forRoot(),
-				StarkDropdownModule,
-				StarkRestrictInputDirectiveModule
+				TranslateModule.forRoot()
 			],
-			declarations: [StarkPaginationComponent, TestHostComponent],
+			declarations: [StarkDropdownComponent, StarkRestrictInputDirective, StarkPaginationComponent, TestHostComponent],
 			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
 			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
 		}).compileComponents();

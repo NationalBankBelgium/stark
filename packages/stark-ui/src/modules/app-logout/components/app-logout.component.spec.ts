@@ -11,7 +11,7 @@ import {
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppLogoutComponent } from "./app-logout.component";
-import { StarkSvgViewBoxModule } from "../../svg-view-box/svg-view-box.module";
+import { StarkSvgViewBoxDirective } from "../../svg-view-box/directives";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { HAMMER_LOADER } from "@angular/platform-browser";
@@ -33,8 +33,8 @@ describe("AppLogoutComponent", () => {
 	beforeEach(async(() => {
 		return (
 			TestBed.configureTestingModule({
-				imports: [MatTooltipModule, MatButtonModule, StarkSvgViewBoxModule, TranslateModule.forRoot()],
-				declarations: [StarkAppLogoutComponent],
+				imports: [MatTooltipModule, MatButtonModule, TranslateModule.forRoot()],
+				declarations: [StarkSvgViewBoxDirective, StarkAppLogoutComponent],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
