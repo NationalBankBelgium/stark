@@ -1,7 +1,11 @@
-import { StarkProgressIndicatorConfig } from "./progress-indicator-config.entity.intf";
+import { StarkProgressIndicatorFullConfig } from "./progress-indicator-full-config.entity.intf";
 import { StarkProgressIndicatorType } from "./progress-indicator-type.entity";
 
-export class StarkProgressIndicatorConfigImpl implements StarkProgressIndicatorConfig {
+/**
+ * @internal
+ * @ignore
+ */
+export class StarkProgressIndicatorFullConfigImpl implements StarkProgressIndicatorFullConfig {
 	private _topic: string;
 	private _type: StarkProgressIndicatorType;
 	private _visible: boolean;

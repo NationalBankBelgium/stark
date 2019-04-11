@@ -33,15 +33,10 @@ describe("ProgressIndicatorComponent", () => {
 		});
 	});
 
-	describe("display Progress Indicator", () => {
-		it("should not display the progress indicator if isShown is set to false", () => {
-			component.isShown = false;
-			expect(hostFixture.debugElement.query(By.css(".div"))).toBeNull();
-		});
-
-		it("should display the progress indicator if isShown is set to true", () => {
-			component.isShown = true;
-			expect(hostFixture.debugElement.query(By.css(".div"))).toBeDefined();
+	describe("progress indicator", () => {
+		it("should be correctly displayed", () => {
+			const progressIndicator = hostFixture.debugElement.query(By.css("div.stark-loading-icon"));
+			expect(progressIndicator).toBeTruthy();
 		});
 	});
 });

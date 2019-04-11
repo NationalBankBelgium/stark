@@ -1,49 +1,48 @@
-import { StarkProgressIndicatorConfig } from "../entities";
+import { StarkProgressIndicatorFullConfig } from "../entities";
 import { StarkProgressIndicatorActions, StarkProgressIndicatorActionTypes } from "../actions/progress-indicator.actions";
-import  cloneDeep  from "lodash-es/cloneDeep";
+import cloneDeep from "lodash-es/cloneDeep";
 
 /**
  * Initial state of the reducer
  */
-const INITIAL_STATE: Map<string, StarkProgressIndicatorConfig> = new Map<string, StarkProgressIndicatorConfig>();
+const INITIAL_STATE: Map<string, StarkProgressIndicatorFullConfig> = new Map<string, StarkProgressIndicatorFullConfig>();
 
 /**
  * Reducer for the progress indicator
- * @param state Map<string, StarkProgressIndicatorConfig> the actual state of the progress indicator
+ * @param state Map<string, StarkProgressIndicatorFullConfig> the actual state of the progress indicator
  * @param action StarkProgressIndicatorActions the action to perform
- * @returns Map<string, StarkProgressIndicatorConfig> the new state of the progress inidcator
+ * @returns Map<string, StarkProgressIndicatorFullConfig> the new state of the progress inidcator
  */
 // TODO refactor to reduce complexity
 // tslint:disable:cognitive-complexity
 export function progressIndicatorReducer(
-	state: Map<string, StarkProgressIndicatorConfig> = INITIAL_STATE,
+	state: Map<string, StarkProgressIndicatorFullConfig> = INITIAL_STATE,
 	action: StarkProgressIndicatorActions
-): Map<string, StarkProgressIndicatorConfig> {
+): Map<string, StarkProgressIndicatorFullConfig> {
 	// the new state will be calculated from the data coming in the actions
-	let newState: Map<string, StarkProgressIndicatorConfig> = cloneDeep(state);
+	let newState: Map<string, StarkProgressIndicatorFullConfig> = cloneDeep(state);
 
 	let topic: string;
 
 	switch (action.type) {
 		case StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_REGISTER:
-			const payload: StarkProgressIndicatorConfig = action.payload;
-			topic = payload.topic;
+			topic = action.progressIndicatorConfig.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
+				const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
 				progressIndicatorConfig.listenersCount = <number>progressIndicatorConfig.listenersCount + 1;
 				newState = newState.set(topic, progressIndicatorConfig);
 			} else {
-				newState = newState.set(topic, payload);
+				newState = newState.set(topic, action.progressIndicatorConfig);
 			}
 
 			return newState;
 
 		case StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_DEREGISTER:
-			topic = action.payload;
+			topic = action.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
+				const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
 
 				progressIndicatorConfig.listenersCount = <number>progressIndicatorConfig.listenersCount - 1;
 
@@ -57,10 +56,10 @@ export function progressIndicatorReducer(
 			return newState;
 
 		case StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_SHOW:
-			topic = action.payload;
+			topic = action.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
+				const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
 				progressIndicatorConfig.visible = true;
 				progressIndicatorConfig.pendingListenersCount = <number>progressIndicatorConfig.pendingListenersCount + 1;
 				newState = newState.set(topic, progressIndicatorConfig);
@@ -69,10 +68,10 @@ export function progressIndicatorReducer(
 			return newState;
 
 		case StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_HIDE:
-			topic = action.payload;
+			topic = action.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = cloneDeep(<StarkProgressIndicatorConfig>newState.get(topic));
+				const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
 
 				if (<number>progressIndicatorConfig.pendingListenersCount > 0) {
 					progressIndicatorConfig.pendingListenersCount = <number>progressIndicatorConfig.pendingListenersCount - 1;

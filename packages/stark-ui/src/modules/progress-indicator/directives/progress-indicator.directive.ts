@@ -1,15 +1,15 @@
 import {
-	ComponentFactory,
 	ComponentFactoryResolver,
-	ComponentRef,
 	Directive,
 	ElementRef,
 	Inject,
+	Injector,
 	Input,
 	OnDestroy,
 	OnInit,
 	Renderer2,
-	ViewContainerRef
+	ViewContainerRef,
+	ViewRef
 } from "@angular/core";
 import { STARK_PROGRESS_INDICATOR_SERVICE, StarkProgressIndicatorService } from "../services";
 import { StarkProgressIndicatorConfig, StarkProgressIndicatorType } from "../entities";
@@ -48,23 +48,52 @@ const directiveName = "[starkProgressIndicator]";
 	selector: directiveName
 })
 export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
+	/**
+	 * Configuration object for the progress indicator to be shown.
+	 */
 	@Input()
 	public starkProgressIndicator!: StarkProgressIndicatorConfig;
 
+	/**
+	 * The topic that the progress indicator will subscribe to.
+	 */
 	public topic!: string;
-	public type!: StarkProgressIndicatorType | string;
-	public progressSubscription!: Subscription;
-	private _componentFactory: ComponentFactory<StarkProgressIndicatorComponent>;
-	public _componentRef!: ComponentRef<StarkProgressIndicatorComponent>;
 
+	/**
+	 * Type of progress indicator
+	 */
+	public type!: StarkProgressIndicatorType | string;
+
+	/**
+	 * @ignore
+	 */
+	private progressSubscription?: Subscription;
+
+	/**
+	 * @ignore
+	 */
+	private readonly componentViewRef!: ViewRef;
+
+	/**
+	 * Class constructor
+	 * @param _progressService - The ProgressIndicator service of the application
+	 * @param componentFactoryResolver - Resolver that returns Angular component factories
+	 * @param injector - The application Injector
+	 * @param _viewContainer - The container where one or more views can be attached to the host element of this directive.
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
 	public constructor(
 		@Inject(STARK_PROGRESS_INDICATOR_SERVICE) public _progressService: StarkProgressIndicatorService,
 		componentFactoryResolver: ComponentFactoryResolver,
+		injector: Injector,
 		private _viewContainer: ViewContainerRef,
 		protected renderer: Renderer2,
 		protected elementRef: ElementRef
 	) {
-		this._componentFactory = componentFactoryResolver.resolveComponentFactory(StarkProgressIndicatorComponent);
+		const componentFactory = componentFactoryResolver.resolveComponentFactory(StarkProgressIndicatorComponent);
+		const componentRef = componentFactory.create(injector);
+		this.componentViewRef = componentRef.hostView;
 	}
 
 	/**
@@ -83,41 +112,40 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * The directive registers itself with the StarkProgressIndicator service.
+	 * The directive registers itself to the {@link StarkProgressIndicatorService}.
 	 * The component to add is then created and inserted inside of the container.
-	 * Finally, if the component should be hidden or shown, the stark-hide class is removed/added accordingly
+	 * Finally, if the host component should be hidden or shown, the "stark-hide" class is removed/added accordingly
 	 */
 	public ngOnInit(): void {
-		this._componentRef = this._viewContainer.createComponent(this._componentFactory);
-
-		// TODO The element is here added as a child, not as a sibling
-		// this.renderer.appendChild(this.elementRef.nativeElement, this._componentRef.location.nativeElement);
-
-		this._viewContainer.insert(this._componentRef.hostView);
-
-		this.progressSubscription = this._progressService.isVisible(this.topic).subscribe(
-			(isVisible: boolean = false): void => {
-				this._componentRef.instance.isShown = isVisible;
-				if (isVisible) {
-					this.renderer.addClass(this.elementRef.nativeElement, "stark-hide");
-				} else {
-					this.renderer.removeClass(this.elementRef.nativeElement, "stark-hide");
-				}
-			}
-		);
-
 		if (!this.starkProgressIndicator) {
 			throw new Error("StarkProgressIndicatorDirective: a StarkProgressIndicatorConfig is required.");
 		}
 		this.registerInstance(this.starkProgressIndicator);
+
+		this.progressSubscription = this._progressService.isVisible(this.topic).subscribe(
+			(isVisible: boolean = false): void => {
+				if (isVisible) {
+					// TODO The element is here added as a child, not as a sibling
+					// this.renderer.appendChild(this.elementRef.nativeElement, componentRef.location.nativeElement);
+
+					this._viewContainer.insert(this.componentViewRef); // insert the view in the last position
+					this.renderer.addClass(this.elementRef.nativeElement, "stark-hide");
+				} else {
+					this._viewContainer.detach(this._viewContainer.indexOf(this.componentViewRef));
+					this.renderer.removeClass(this.elementRef.nativeElement, "stark-hide");
+				}
+			}
+		);
 	}
 
 	/**
-	 * The directive de-registers itself from the StarkProgressIndicator service when it is destroyed.
+	 * The directive de-registers itself from the {@link StarkProgressIndicatorService} when it is destroyed.
 	 */
 	public ngOnDestroy(): void {
-		this._viewContainer.clear();
-		this.progressSubscription.unsubscribe();
+		this.componentViewRef.destroy(); // destroy the progress indicator
+		if (this.progressSubscription) {
+			this.progressSubscription.unsubscribe();
+		}
 		this._progressService.deregister(this.topic);
 	}
 }

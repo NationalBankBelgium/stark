@@ -9,7 +9,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 const componentName = "stark-progress-indicator";
 
 /**
- * Component that is dynamically created by the ProgressIndicatorDirective
+ * Component that is dynamically created by the {@link StarkProgressIndicatorDirective}
  */
 @Component({
 	selector: "stark-progress-indicator",
@@ -21,8 +21,12 @@ const componentName = "stark-progress-indicator";
 	}
 })
 export class StarkProgressIndicatorComponent extends AbstractStarkUiComponent implements OnInit {
-	public isShown = false;
-
+	/**
+	 * Class constructor
+	 * @param logger- The logger of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		protected renderer: Renderer2,

@@ -1,5 +1,5 @@
-import { StarkProgressIndicatorConfig } from "../entities";
 import { Action } from "@ngrx/store";
+import { StarkProgressIndicatorFullConfig } from "../entities";
 
 /**
  * Progress indicator action types enumeration
@@ -11,8 +11,10 @@ export enum StarkProgressIndicatorActionTypes {
 	PROGRESS_INDICATOR_SHOW = "PROGRESS_INDICATOR_SHOW"
 }
 
+/**
+ * Triggered by the {@link StarkProgressIndicatorService} register() method.
+ */
 export class StarkProgressIndicatorRegister implements Action {
-	public payload: StarkProgressIndicatorConfig;
 	/**
 	 * The type of action
 	 * @link StarkProgressIndicatorActionTypes
@@ -22,16 +24,15 @@ export class StarkProgressIndicatorRegister implements Action {
 
 	/**
 	 * Class constructor
-	 * @param starkProgressIndicatorConfig - configuration of the indicator
+	 * @param progressIndicatorConfig - configuration of the indicator
 	 */
-	public constructor(starkProgressIndicatorConfig: StarkProgressIndicatorConfig) {
-		this.payload = starkProgressIndicatorConfig;
-	}
+	public constructor(public progressIndicatorConfig: StarkProgressIndicatorFullConfig) {}
 }
 
+/**
+ * Triggered by the {@link StarkProgressIndicatorService} deregister() method.
+ */
 export class StarkProgressIndicatorDeregister implements Action {
-	public payload: string;
-
 	/**
 	 * The type of action
 	 * @link StarkProgressIndicatorActionTypes
@@ -43,14 +44,13 @@ export class StarkProgressIndicatorDeregister implements Action {
 	 * Class constructor
 	 * @param topic - the topic of the indicator
 	 */
-	public constructor(topic: string) {
-		this.payload = topic;
-	}
+	public constructor(public topic: string) {}
 }
 
+/**
+ * Triggered by the {@link StarkProgressIndicatorService} hide() method.
+ */
 export class StarkProgressIndicatorHide implements Action {
-	public payload: string;
-
 	/**
 	 * The type of action
 	 * @link StarkProgressIndicatorActionTypes
@@ -62,13 +62,13 @@ export class StarkProgressIndicatorHide implements Action {
 	 * Class constructor
 	 * @param topic - the topic of the indicator
 	 */
-	public constructor(topic: string) {
-		this.payload = topic;
-	}
+	public constructor(public topic: string) {}
 }
 
+/**
+ * Triggered by the {@link StarkProgressIndicatorService} show() method.
+ */
 export class StarkProgressIndicatorShow implements Action {
-	public payload: string;
 	/**
 	 * The type of action
 	 * @link StarkProgressIndicatorActionTypes
@@ -80,9 +80,7 @@ export class StarkProgressIndicatorShow implements Action {
 	 * Class constructor
 	 * @param topic - the topic of the indicator
 	 */
-	public constructor(topic: string) {
-		this.payload = topic;
-	}
+	public constructor(public topic: string) {}
 }
 
 export type StarkProgressIndicatorActions =

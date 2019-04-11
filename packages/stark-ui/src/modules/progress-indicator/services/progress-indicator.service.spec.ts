@@ -1,34 +1,31 @@
 /* tslint:disable:completed-docs*/
+import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { Store } from "@ngrx/store";
+import { BehaviorSubject, Observable } from "rxjs";
+import { StarkProgressIndicatorDeregister } from "../actions";
+import { StarkProgressIndicatorType, StarkProgressIndicatorFullConfig } from "../entities";
+import { StarkProgressIndicatorServiceImpl } from "../services";
+import { progressIndicatorReducer } from "../reducers";
+import { StarkUIApplicationState } from "../../../common/store";
+import { StarkProgressIndicatorActions } from "../actions/progress-indicator.actions";
 import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;
-import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import {
-	progressIndicatorReducer,
-	StarkProgressIndicatorConfig,
-	StarkProgressIndicatorDeregister,
-	StarkProgressIndicatorServiceImpl,
-	StarkProgressIndicatorType,
-	StarkUIApplicationState
-} from "@nationalbankbelgium/stark-ui";
-import { Store } from "@ngrx/store";
-import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { BehaviorSubject, Observable } from "rxjs";
-import { StarkProgressIndicatorActions } from "../actions/progress-indicator.actions";
 
 // tslint:disable:no-big-function
-describe("Service: StarkProgressIndicatorService", () => {
+describe("ProgressIndicatorService", () => {
 	let mockStore: SpyObj<Store<StarkUIApplicationState>>;
 	let progressIndicatorService: ProgressIndicatorServiceHelper;
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
-	let mockProgressIndicatorMap: Map<string, StarkProgressIndicatorConfig>;
+	let mockProgressIndicatorMap: Map<string, StarkProgressIndicatorFullConfig>;
 
 	const dummyTopic = "some topic";
 	const dummyType: StarkProgressIndicatorType = StarkProgressIndicatorType.SPINNER;
-	let progressIndicatorState$: BehaviorSubject<Map<string, StarkProgressIndicatorConfig>>;
+	let progressIndicatorState$: BehaviorSubject<Map<string, StarkProgressIndicatorFullConfig>>;
 
 	beforeEach(() => {
 		mockStore = jasmine.createSpyObj("store", ["dispatch", "pipe"]);
-		mockProgressIndicatorMap = new Map<string, StarkProgressIndicatorConfig>();
+		mockProgressIndicatorMap = new Map<string, StarkProgressIndicatorFullConfig>();
 		progressIndicatorState$ = new BehaviorSubject(mockProgressIndicatorMap);
 		mockStore.pipe.and.returnValue(progressIndicatorState$);
 
@@ -57,7 +54,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 			expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+			const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 				progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 			);
 
@@ -77,7 +74,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 			expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
 
-			const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+			const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 				progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 			);
 
@@ -106,7 +103,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
 				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
 
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+				const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 				);
 
@@ -136,7 +133,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 				expect(mockStore.dispatch.calls.argsFor(0)[0].type).toBe("PROGRESS_INDICATOR_REGISTER");
 				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
 
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+				const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 				);
 				expect(progressIndicatorConfig.topic).toBe(dummyTopic);
@@ -168,7 +165,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 
 				expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+				const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 				);
 
@@ -198,7 +195,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 				expect(mockStore.dispatch.calls.argsFor(1)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
 				expect(mockStore.dispatch.calls.argsFor(2)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
 
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+				const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 				);
 
@@ -230,7 +227,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 				expect(mockStore.dispatch.calls.argsFor(3)[0].type).toBe("PROGRESS_INDICATOR_SHOW");
 				expect(mockStore.dispatch.calls.argsFor(4)[0].type).toBe("PROGRESS_INDICATOR_HIDE");
 
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+				const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 				);
 
@@ -251,7 +248,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 			progressIndicatorService.register(dummyTopic, dummyType);
 
 			setTimeout(() => {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+				const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 				);
 				expect(progressIndicatorConfig.topic).toBe(dummyTopic);
@@ -277,7 +274,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 			progressIndicatorService.register(dummyTopic, dummyType);
 
 			setTimeout(() => {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+				const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 				);
 				expect(progressIndicatorConfig.topic).toBe(dummyTopic);
@@ -322,7 +319,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 
 			expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(true);
 
-			const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+			const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 				progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 			);
 
@@ -377,7 +374,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 			// There is a 100 ms delay between show and hide, to allow the observables to catch-up
 
 			setTimeout(() => {
-				const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+				const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 					progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 				);
 
@@ -414,7 +411,7 @@ describe("Service: StarkProgressIndicatorService", () => {
 				// There is a 100 ms delay between show and hide, to allow the observables to catch-up
 
 				setTimeout(() => {
-					const progressIndicatorConfig: StarkProgressIndicatorConfig = <StarkProgressIndicatorConfig>(
+					const progressIndicatorConfig: StarkProgressIndicatorFullConfig = <StarkProgressIndicatorFullConfig>(
 						progressIndicatorService.progressIndicatorMap.get(dummyTopic)
 					);
 
@@ -505,8 +502,8 @@ describe("Service: StarkProgressIndicatorService", () => {
 });
 
 class ProgressIndicatorServiceHelper extends StarkProgressIndicatorServiceImpl {
-	public progressIndicatorMap!: Map<string, StarkProgressIndicatorConfig>;
-	public progressIndicatorMap$!: Observable<Map<string, StarkProgressIndicatorConfig>>;
+	public progressIndicatorMap!: Map<string, StarkProgressIndicatorFullConfig>;
+	public progressIndicatorMap$!: Observable<Map<string, StarkProgressIndicatorFullConfig>>;
 
 	public constructor(logger: StarkLoggingService, store: Store<StarkUIApplicationState>) {
 		super(logger, store);
