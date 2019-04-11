@@ -28,6 +28,7 @@ const karmaTypescriptBundlerAlias = {
 	ibantools: "../stark-core/node_modules/ibantools/build/ibantools.js",
 	"lodash-es": "../stark-core/node_modules/lodash-es/lodash.js",
 	"lodash-es/cloneDeep": "../stark-core/node_modules/lodash-es/cloneDeep.js",
+	"lodash-es/find": "../stark-core/node_modules/lodash-es/find.js",
 	"lodash-es/findIndex": "../stark-core/node_modules/lodash-es/findIndex.js",
 	"lodash-es/floor": "../stark-core/node_modules/lodash-es/floor.js",
 	"lodash-es/get": "../stark-core/node_modules/lodash-es/get.js",
