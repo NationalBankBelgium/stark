@@ -1,16 +1,18 @@
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { EventEmitter } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ReactiveFormsModule } from "@angular/forms";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from "@angular/material-moment-adapter";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkDatePickerModule } from "../../date-picker";
+import { StarkDatePickerComponent } from "../../date-picker";
 import { StarkDateRangePickerComponent } from "./date-range-picker.component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
-import { ReactiveFormsModule } from "@angular/forms";
+import { StarkTimestampMaskDirective } from "../../input-mask-directives";
 import moment from "moment";
 
 describe("DateRangePickerComponent", () => {
@@ -19,8 +21,8 @@ describe("DateRangePickerComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			declarations: [StarkDateRangePickerComponent],
-			imports: [NoopAnimationsModule, StarkDatePickerModule, MatFormFieldModule, TranslateModule.forRoot(), ReactiveFormsModule],
+			declarations: [StarkTimestampMaskDirective, StarkDatePickerComponent, StarkDateRangePickerComponent],
+			imports: [NoopAnimationsModule, MatDatepickerModule, MatFormFieldModule, TranslateModule.forRoot(), ReactiveFormsModule],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },

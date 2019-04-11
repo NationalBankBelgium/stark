@@ -5,6 +5,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { DateAdapter } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 /* stark-core imports */
@@ -20,7 +21,7 @@ import {
 import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 /* stark-ui imports */
 import { StarkLanguageSelectorComponent, StarkLanguageSelectorMode } from "./language-selector.component";
-import { StarkDropdownModule } from "../../dropdown";
+import { StarkDropdownComponent } from "../../dropdown";
 import { of, throwError } from "rxjs";
 
 /***
@@ -124,8 +125,8 @@ describe("LanguageSelectorComponent", () => {
 	 */
 	function compileComponent(mockSessionService: MockStarkSessionService): Promise<any> {
 		return TestBed.configureTestingModule({
-			imports: [CommonModule, MatButtonToggleModule, StarkDropdownModule, MatFormFieldModule, TranslateModule.forRoot()],
-			declarations: [StarkLanguageSelectorComponent, TestHostComponent],
+			imports: [CommonModule, MatButtonToggleModule, MatFormFieldModule, MatSelectModule, TranslateModule.forRoot()],
+			declarations: [StarkDropdownComponent, StarkLanguageSelectorComponent, TestHostComponent],
 			providers: [
 				{ provide: STARK_APP_METADATA, useValue: appMetadata },
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
