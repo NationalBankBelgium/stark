@@ -1,8 +1,8 @@
-/*tslint:disable:completed-docs*/
+/*tslint:disable:completed-docs no-identical-functions*/
 import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkSvgViewBoxDirective } from "./svg-view-box.directive";
+import { STARK_DEFAULT_VIEW_BOX_SIZE, StarkSvgViewBoxDirective } from "./svg-view-box.directive";
 import { Component, DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
@@ -16,15 +16,13 @@ describe("SvgViewBoxDirective", () => {
 	let fixture: ComponentFixture<TestComponent>;
 
 	function getTemplate(svgViewBoxDirective: string, viewBoxAttribute?: string): string {
-		return (
-			"<div " +
-			svgViewBoxDirective +
-			"><svg xmlns='http://www.w3.org/2000/svg' " +
-			viewBoxAttribute +
-			">" +
-			"<text font-size='8' font-family='serif' y='6'><![CDATA[dummy icon]]></text>" +
-			"</svg></div>"
-		);
+		return (`
+<div ${svgViewBoxDirective}>
+	<svg xmlns="http://www.w3.org/2000/svg" ${viewBoxAttribute}>
+		<text font-size="8" font-family="serif" y="6"><![CDATA[dummy icon]]></text>
+	</svg>
+</div>
+`);
 	}
 
 	function initializeComponentFixture(): void {
@@ -57,7 +55,7 @@ describe("SvgViewBoxDirective", () => {
 			const svgElement: SVGElement = parentElement.nativeElement.querySelector("svg");
 			expect(svgElement).toBeDefined();
 			expect(svgElement.hasAttribute("viewBox")).toBe(true);
-			expect(svgElement.getAttribute("viewBox")).toBe("0 0 24 24");
+			expect(svgElement.getAttribute("viewBox")).toBe(`0 0 ${STARK_DEFAULT_VIEW_BOX_SIZE} ${STARK_DEFAULT_VIEW_BOX_SIZE}`);
 		});
 	});
 
@@ -106,14 +104,14 @@ describe("SvgViewBoxDirective", () => {
 			initializeComponentFixture();
 		});
 
-		it("should keep the viewBox attribute as is", () => {
+		it("should overwrite the viewBox attribute", () => {
 			expect(fixture).toBeDefined();
 			const parentElement: DebugElement = fixture.debugElement.query(By.directive(StarkSvgViewBoxDirective));
 			expect(parentElement).toBeDefined();
 			const svgElement: SVGElement = parentElement.nativeElement.querySelector("svg");
 			expect(svgElement).toBeDefined();
 			expect(svgElement.hasAttribute("viewBox")).toBe(true);
-			expect(svgElement.getAttribute("viewBox")).toBe(viewBoxAttribute);
+			expect(svgElement.getAttribute("viewBox")).toBe(`0 0 ${STARK_DEFAULT_VIEW_BOX_SIZE} ${STARK_DEFAULT_VIEW_BOX_SIZE}`);
 		});
 	});
 });
