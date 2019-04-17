@@ -1,4 +1,5 @@
 import {
+	AfterViewInit,
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
@@ -78,15 +79,32 @@ const componentName = "stark-date-picker";
 	]
 })
 export class StarkDatePickerComponent extends AbstractStarkUiComponent
-	implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date> {
+	implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date> {
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
 	public static nextId = 0;
 
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 */
 	@HostBinding()
 	public id = `stark-date-picker-input-${StarkDatePickerComponent.nextId++}`;
 
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 */
 	@HostBinding("attr.aria-describedby")
 	public describedBy = "";
 
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 */
 	@HostBinding("class.floating")
 	public get shouldLabelFloat(): boolean {
 		return this.focused || !this.empty;
@@ -144,8 +162,8 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	public min?: Date;
 
 	/**
-	 * id attribute of the form field wrapping the mat-datepicker
-	 * id attribute followed by "-input" of the mat-datepicker-input
+	 * The HTML "id" attribute of the date picker's calendar popup.
+	 * This "id" is also used, suffixed with "-input", as the HTML "id" attribute of the date picker's input field.
 	 */
 	@Input()
 	public pickerId = "";
@@ -229,6 +247,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	public dateMaskConfig?: StarkTimestampMaskConfig = undefined;
 
 	/**
+	 * Part of {@link MatFormFieldControl} API
 	 * @ignore
 	 * @internal
 	 */
@@ -236,33 +255,61 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	public ngControl: NgControl | null = null;
 
 	/**
-	 * Variable to define to use MatFormFieldControl.
-	 * Stream that emits whenever the state of the control changes such that the parent `MatFormField`
-	 * needs to run change detection.
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
 	 */
 	public stateChanges: Subject<void> = new Subject<void>();
 
 	/**
+	 * Part of {@link MatFormFieldControl} API
 	 * @ignore
 	 * @internal
 	 */
 	public focused = false;
 
 	/**
-	 * Variable to define to use MatFormFieldControl
-	 * Whether the control is in an error state.
+	 * @ignore
+	 * @internal
+	 */
+	public pickerInputTouched = false;
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
 	 */
 	public get errorState(): boolean {
-		return (
+		// the control can be in an error state as long as one of these conditions is met:
+		// 1) the user has interacted with it
+		// 2) the control is programmatically marked as 'touched' or 'dirty'
+		const newErrorState =
 			this.ngControl !== null &&
 			this.ngControl.control !== null &&
-			(!!this.ngControl.errors || !!this.pickerInput.validate(this.ngControl.control))
-		);
+			(this.pickerInputTouched || !!this.ngControl.touched || !!this.ngControl.dirty) &&
+			(!!this.ngControl.errors || !!this.pickerInput.validate(this.ngControl.control));
+
+		// IMPORTANT: emit a state change when the errorState changes
+		// This is needed to force the MatFormFieldControl to refresh and render the MatError's
+		if (this._errorState !== newErrorState) {
+			this._errorState = newErrorState;
+			this.stateChanges.next();
+		}
+
+		return this._errorState;
 	}
 
 	/**
-	 * Variable to define to use MatFormFieldControl
-	 * Whether the control is empty.
+	 * The current error state
+	 * @ignore
+	 * @internal
+	 */
+	public _errorState = false;
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
 	 */
 	public get empty(): boolean {
 		return !this.value;
@@ -332,6 +379,21 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 		});
 
 		super.ngOnInit();
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngAfterViewInit(): void {
+		const markPickerInputAsTouched = (): void => {
+			this.pickerInputTouched = true;
+			this.stateChanges.next();
+		};
+
+		// the picker input should be marked as touched when it has actually been touched or when the calendar is closed
+		// this way we ensure that the errors are displayed properly when the user interacted with the picker (and not when the picker is pristine)
+		this.pickerInput.registerOnTouched(markPickerInputAsTouched);
+		this.picker.closedStream.subscribe(markPickerInputAsTouched);
 	}
 
 	/**
@@ -409,6 +471,8 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	}
 
 	/**
+	 * @ignore
+	 * @internal
 	 * The registered callback function called when an input event occurs on the input element.
 	 */
 	private _onChange: (_: any) => void = (_: any) => {
@@ -417,6 +481,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 
 	/**
 	 * @ignore
+	 * @internal
 	 * The registered callback function called when a blur event occurs on the input element.
 	 */
 	private _onTouched: () => void = () => {
@@ -424,6 +489,8 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	};
 
 	/**
+	 * @ignore
+	 * @internal
 	 * The registered callback function called when the validator inputs change.
 	 */
 	private _onValidatorChange: () => void = () => {
@@ -431,27 +498,30 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	};
 
 	/**
-	 * Registers a function called when the control value changes.
-	 *
-	 * @param fn The callback function
+	 * Part of {@link ControlValueAccessor} API
+	 * Registers a function to be called when the control value changes.
+	 * @ignore
+	 * @internal
 	 */
 	public registerOnChange(fn: (_: any) => void): void {
 		this._onChange = fn;
 	}
 
 	/**
-	 * Registers a function called when the control is touched.
-	 *
-	 * @param fn The callback function
+	 * Part of {@link ControlValueAccessor} API
+	 * Registers a function to be called when the control is touched.
+	 * @ignore
+	 * @internal
 	 */
 	public registerOnTouched(fn: () => void): void {
 		this._onTouched = fn;
 	}
 
 	/**
+	 * Part of {@link ControlValueAccessor} API
 	 * Sets the "disabled" property on the input element.
-	 *
-	 * @param isDisabled The disabled value
+	 * @ignore
+	 * @internal
 	 */
 	public setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
@@ -460,27 +530,28 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	}
 
 	/**
+	 * Part of {@link ControlValueAccessor} API
 	 * Sets the "value" property on the input element.
-	 *
-	 * @param obj The checked value
+	 * @ignore
+	 * @internal
 	 */
 	public writeValue(obj: any): void {
 		this.value = obj;
 	}
 
 	/**
-	 * Method implemented to use MatFormFieldControl
-	 * Sets the list of element IDs that currently describe this control.
-	 * @param ids - Ids describing the MatFormFieldControl
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
 	 */
 	public setDescribedByIds(ids: string[]): void {
 		this.describedBy = ids.join(" ");
 	}
 
 	/**
-	 * Method implemented to use MatFormFieldControl
-	 * It handles a click on the control's container.
-	 * @param event - Click Event
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
 	 */
 	public onContainerClick(event: MouseEvent): void {
 		if ((<Element>event.target).tagName.toLowerCase() !== "input") {
@@ -557,9 +628,10 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 		this.value = event.value ? event.value.toDate() : null;
 
 		const value: Date | undefined = this.value ? this.value : undefined;
-		this.dateChange.emit(value);
 		this._onChange(value);
 		this._onValidatorChange();
+		// emit after the model has actually changed
+		this.dateChange.emit(value);
 	}
 
 	/**

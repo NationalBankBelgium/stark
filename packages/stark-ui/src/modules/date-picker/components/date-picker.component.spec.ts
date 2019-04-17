@@ -1,16 +1,17 @@
 /* tslint:disable:completed-docs max-inline-declarations no-identical-functions no-big-function */
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { By } from "@angular/platform-browser";
 import { Component, ViewChild } from "@angular/core";
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { DEFAULT_DATE_MASK_CONFIG, StarkDatePickerComponent, StarkDatePickerMaskConfig } from "./date-picker.component";
 import { STARK_DATE_FORMATS } from "./date-format.constants";
 import { StarkTimestampMaskDirective } from "../../input-mask-directives";
@@ -105,6 +106,71 @@ describe("DatePickerComponent", () => {
 			]
 		}).compileComponents();
 	}));
+
+	describe("MatFormFieldControl", () => {
+		let hostComponent: TestHostFormControlComponent;
+		let hostFixture: ComponentFixture<TestHostFormControlComponent>;
+		const formFieldInvalidClass = "mat-form-field-invalid";
+
+		beforeEach(() => {
+			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
+			hostComponent = hostFixture.componentInstance;
+			hostFixture.detectChanges(); // trigger initial data binding
+
+			component = hostComponent.datePickerComponent;
+		});
+
+		it("if date is initially invalid, the date picker should not be displayed as invalid until the user interacts with it", () => {
+			// re-create component with a form control with "required" validator
+			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
+			hostComponent = hostFixture.componentInstance;
+			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostFixture.detectChanges(); // trigger initial data binding
+
+			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+
+			const blurEvent = document.createEvent("Event");
+			blurEvent.initEvent("blur", true, true);
+			const inputDebugElement = hostFixture.debugElement.query(By.css("input"));
+			inputDebugElement.triggerEventHandler("blur", blurEvent); // simulate that the user has touched the input
+			hostFixture.detectChanges();
+
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(true);
+		});
+
+		it("if date is initially invalid, the date picker should not be displayed as invalid until it is marked as 'touched'", () => {
+			// re-create component with a form control with "required" validator
+			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
+			hostComponent = hostFixture.componentInstance;
+			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostFixture.detectChanges(); // trigger initial data binding
+
+			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+
+			hostComponent.formControl.markAsTouched();
+			hostFixture.detectChanges();
+
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(true);
+		});
+
+		it("if date is initially invalid, the date picker should not be displayed as invalid until it is marked as 'dirty'", () => {
+			// re-create component with a form control with "required" validator
+			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
+			hostComponent = hostFixture.componentInstance;
+			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostFixture.detectChanges(); // trigger initial data binding
+
+			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+
+			hostComponent.formControl.markAsDirty();
+			hostFixture.detectChanges();
+
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(true);
+		});
+	});
 
 	describe("using formControl", () => {
 		let hostComponent: TestHostFormControlComponent;
