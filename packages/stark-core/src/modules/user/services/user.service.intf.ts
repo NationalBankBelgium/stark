@@ -14,7 +14,7 @@ export const STARK_USER_SERVICE: InjectionToken<StarkUserService> = new Injectio
 /**
  * Stark User Service.
  * Service to fetch the user profile from the REST API.
- * In Development, it can also be used to set the user profile manually.
+ * In Development, it can also be used to set the user profile manually and to retrieve a list of profiles from a mock data file.
  */
 export interface StarkUserService {
 	/**

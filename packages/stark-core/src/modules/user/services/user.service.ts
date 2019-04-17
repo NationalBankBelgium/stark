@@ -30,9 +30,6 @@ const userErrorMessagePrefix: string = starkUserServiceName + ": invalid user pr
 
 /**
  * @ignore
- * @ngdoc service
- * @description Service to fetch the user profile from the REST API. In Development, it can also be used to
- * set the user profile manually and to retrieve a list of profiles from a mock data file.
  */
 @Injectable()
 export class StarkUserServiceImpl implements StarkUserService {

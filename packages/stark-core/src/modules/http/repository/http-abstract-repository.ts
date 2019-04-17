@@ -35,9 +35,9 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 	 * Class constructor
 	 * @param starkHttpService The Http Service provided by Stark.
 	 * @param logger The logging service. @link StarkLoggingService.
-	 * @param backend The backend that this HttpRespository will target.
-	 * @param resourcePath The resource path that will be used as default for all the requests performed by this HttpRespository. This will be replaced by the resourcePath provided (if any) in the getRequestBuilder() method.
-	 * @param serializer The serializer that will be attached by default to every StarkHttpRequest sent by this HttpRespository to serialize/deserialize the items to be sent/received to/from the backend.
+	 * @param backend The backend that this HttpRepository will target.
+	 * @param resourcePath The resource path that will be used as default for all the requests performed by this HttpRepository. This will be replaced by the resourcePath provided (if any) in the getRequestBuilder() method.
+	 * @param serializer The serializer that will be attached by default to every StarkHttpRequest sent by this HttpRepository to serialize/deserialize the items to be sent/received to/from the backend.
 	 */
 	public constructor(
 		protected starkHttpService: StarkHttpService<T>,
