@@ -1,8 +1,9 @@
 import { StarkProgressIndicatorConfig } from "./progress-indicator-config.entity.intf";
 
+// FIXME: currently the '@internal' JSDoc tag cannot be used in interfaces due to a bug in TSLint (https://github.com/palantir/tslint/issues/4326)
 /**
  * Interface of progress indicator config to be used internally by the {@link StarkProgressIndicatorService}
- * @internal
+ * **internal**
  */
 export interface StarkProgressIndicatorFullConfig extends StarkProgressIndicatorConfig {
 	/**
