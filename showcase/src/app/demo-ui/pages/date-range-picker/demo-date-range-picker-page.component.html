@@ -1,80 +1,76 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.DATE_RANGE_PICKER.TITLE</h1>
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="date-range-picker/full" exampleTitle="SHOWCASE.DEMO.DATE_RANGE_PICKER.TITLE">
-		<div>
-			<stark-date-range-picker
-				rangePickerId="id-range-picker"
-				rangePickerName="name-range-picker"
-				[isDisabled]="disabled"
-				[dateFilter]="customDateFilter"
-				[startDate]="startDate"
-				startDateLabel="STARK.DATE_RANGE_PICKER.FROM"
-				[endDate]="endDate"
-				endDateLabel="STARK.DATE_RANGE_PICKER.TO"
-				[startMinDate]="minDate"
-				[startMaxDate]="maxDate"
-				[endMinDate]="startDate || minDate"
-				[endMaxDate]="maxDate"
-				(dateRangeChanged)="onDateChanged($event)"
-			>
-			</stark-date-range-picker>
-		</div>
-		<mat-checkbox [(ngModel)]="disabled">isDisabled</mat-checkbox>
+
+	<example-viewer
+		[extensions]="['HTML', 'TS']"
+		filesPath="date-range-picker/model"
+		exampleTitle="SHOWCASE.DEMO.DATE_RANGE_PICKER.WITH_MODEL"
+	>
+		<stark-date-range-picker
+			[(ngModel)]="dateRangeModel"
+			(dateRangeChanged)="onDateModelChange()"
+			dateFilter="OnlyWeekdays"
+			[startMinDate]="today"
+			[startMaxDate]="inOneMonth"
+			[endMinDate]="today"
+			[endMaxDate]="inOneMonth"
+			[disabled]="modelDisabled"
+			[required]="true"
+			#dateRangeComponent
+		>
+			<ng-container start-date-errors *ngFor="let error of getErrorMessages(dateRangeComponent.startDateFormControl)">
+				{{ error | translate }}
+				<br />
+			</ng-container>
+
+			<ng-container end-date-errors *ngFor="let error of getErrorMessages(dateRangeComponent.endDateFormControl)">
+				{{ error | translate }}
+				<br />
+			</ng-container>
+		</stark-date-range-picker>
+		<br /><br />
+		<mat-checkbox [(ngModel)]="modelDisabled">
+			{{ (modelDisabled ? "SHOWCASE.COMMON.DISABLED" : "SHOWCASE.COMMON.ENABLED") | translate }}
+		</mat-checkbox>
+	</example-viewer>
+
+	<example-viewer
+		[extensions]="['HTML', 'TS']"
+		filesPath="date-range-picker/form-group"
+		exampleTitle="SHOWCASE.DEMO.DATE_RANGE_PICKER.WITH_FORM_GROUP"
+	>
+		<stark-date-range-picker [rangeFormGroup]="dateRangeFormGroup" required>
+			<ng-container start-date-errors *ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.startDate)">
+				{{ error | translate }}
+				<br />
+			</ng-container>
+
+			<ng-container end-date-errors *ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.endDate)">
+				{{ error | translate }}
+				<br />
+			</ng-container>
+		</stark-date-range-picker>
+		<br /><br />
+		<mat-checkbox [checked]="dateRangeFormGroup.disabled" (change)="onDateRangeFormGroupDisableCheckboxChange($event)">
+			{{ (dateRangeFormGroup.disabled ? "SHOWCASE.COMMON.DISABLED" : "SHOWCASE.COMMON.ENABLED") | translate }}
+		</mat-checkbox>
 	</example-viewer>
 
 	<example-viewer
 		[extensions]="['HTML', 'TS']"
 		filesPath="date-range-picker/date-mask"
-		exampleTitle="SHOWCASE.DEMO.DATE_RANGE_PICKER.DEFAULT_MASK"
+		exampleTitle="SHOWCASE.DEMO.DATE_RANGE_PICKER.WITH_MASK"
 	>
-		<div>
-			<stark-date-range-picker
-				rangePickerId="date-mask-range-picker"
-				rangePickerName="date-mask-range-picker"
-				[isDisabled]="isDisabledDateMask"
-				dateMask
-				[dateFilter]="customDateFilter"
-				[startDate]="startDate"
-				startDateLabel="STARK.DATE_RANGE_PICKER.FROM"
-				[endDate]="endDate"
-				endDateLabel="STARK.DATE_RANGE_PICKER.TO"
-				[startMinDate]="minDate"
-				[startMaxDate]="maxDate"
-				[endMinDate]="startDate || minDate"
-				[endMaxDate]="maxDate"
-				(dateRangeChanged)="onDateChanged($event)"
-			>
-			</stark-date-range-picker>
-		</div>
-		<mat-checkbox [(ngModel)]="isDisabledDateMask">isDisabled</mat-checkbox>
+		<stark-date-range-picker dateMask (dateRangeChanged)="onDateChange($event)"></stark-date-range-picker>
 	</example-viewer>
 
 	<example-viewer
 		[extensions]="['HTML', 'TS']"
 		filesPath="date-range-picker/custom-date-mask"
-		[exampleTitle]="'SHOWCASE.DEMO.DATE_RANGE_PICKER.CUSTOM_MASK' | translate: { mask: customDateMask.format }"
+		exampleTitle="SHOWCASE.DEMO.DATE_RANGE_PICKER.WITH_CUSTOM_MASK"
 	>
-		<div>
-			<stark-date-range-picker
-				rangePickerId="custom-date-mask-range-picker"
-				rangePickerName="custom-date-mask-range-picker"
-				[isDisabled]="isDisabledCustomDateMask"
-				[dateFilter]="customDateFilter"
-				[dateMask]="customDateMask"
-				[startDate]="startDate"
-				startDateLabel="STARK.DATE_RANGE_PICKER.FROM"
-				[endDate]="endDate"
-				endDateLabel="STARK.DATE_RANGE_PICKER.TO"
-				[startMinDate]="minDate"
-				[startMaxDate]="maxDate"
-				[endMinDate]="startDate || minDate"
-				[endMaxDate]="maxDate"
-				(dateRangeChanged)="onDateChanged($event)"
-			>
-			</stark-date-range-picker>
-		</div>
-		<mat-checkbox [(ngModel)]="isDisabledCustomDateMask">isDisabled</mat-checkbox>
+		<stark-date-range-picker [dateMask]="{ format: 'DD-MM-YYYY' }" (dateRangeChanged)="onDateChange($event)"></stark-date-range-picker>
 	</example-viewer>
 </section>
 <stark-reference-block [links]="referenceList"></stark-reference-block>

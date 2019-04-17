@@ -52,9 +52,20 @@
         "TITLE": "Date picker"
       },
       "DATE_RANGE_PICKER": {
-        "CUSTOM_MASK": "Date range picker - Custom date mask ({{ mask }})",
-        "DEFAULT_MASK": "Date range picker - Default date mask",
-        "TITLE": "Date range picker"
+        "TITLE": "Date range picker",
+        "WITH_MODEL": "ngModel",
+        "WITH_FORM_GROUP": "Form group",
+        "WITH_MASK": "Default date mask",
+        "WITH_CUSTOM_MASK": "Custom date mask (DD-MM-YYYY)",
+        "ERROR_MESSAGES": {
+          "MIN_TODAY": "Date should be after today",
+          "MAX_MONTH": "Date should be in less than 1 month",
+          "WEEKDAY": "Date should be a weekday",
+          "START_BEFORE_END": "Start date should be before end date",
+          "END_AFTER_START": "End date should be after start date",
+          "IN_FEBRUARY": "Date should not be in February",
+          "REQUIRED": "Date is required"
+        }
       },
       "DIALOGS": {
         "ALERT": {
