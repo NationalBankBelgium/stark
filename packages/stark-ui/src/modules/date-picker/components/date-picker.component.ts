@@ -407,6 +407,10 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 			);
 		}
 
+		if (changes["required"]) {
+			this.required = coerceBooleanProperty(changes["required"].currentValue);
+		}
+
 		if (changes["max"] || changes["min"] || changes["required"]) {
 			this.stateChanges.next();
 			this.cdRef.detectChanges();
