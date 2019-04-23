@@ -6,13 +6,12 @@
 	"pkgFiles": ["package.json", "package-lock.json"],
 	"increment": "conventional:angular",
 	"scripts": {
-		"afterBump": "npm run check:nightly:stark-versions -- ${version} && npm run generate:changelog",
 		"afterRelease": false,
-		"beforeStage": false,
-		"beforeStart": "npm run check:starter:stark-versions",
-		"changelog": "npm run generate:changelog-recent"
+		"beforeStage": "npm run check:nightly:stark-versions -- ${version} && npm run generate:changelog",
+		"beforeStart": "npm run check:starter:stark-versions"
 	},
 	"git": {
+		"changelog": "npm run generate:changelog-recent",
 		"requireCleanWorkingDir": true,
 		"requireUpstream": true,
 		"commit": true,
@@ -35,12 +34,5 @@
 		"tokenRef": "GITHUB_TOKEN",
 		"assets": null,
 		"host": null
-	},
-	"prompt": {
-		"commit": true,
-		"tag": true,
-		"push": true,
-		"release": true,
-		"publish": true
 	}
 }
