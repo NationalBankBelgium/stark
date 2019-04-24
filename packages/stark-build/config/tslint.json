@@ -195,7 +195,8 @@
     "no-floating-promises": true,
     "match-default-export-name": true,
     "return-undefined": true,
-    "deprecation": true,
+    // FIXME: re-enable this option once the bug introduced in RxJS 6.5.0 is solved (https://github.com/ReactiveX/rxjs/issues/4723)
+    "deprecation": false,
     "use-default-type-parameter": true,
     "await-promise": true,
     "no-for-in-array": true
