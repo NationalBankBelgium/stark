@@ -12,7 +12,6 @@
 				pickerId="picker-reactive-form"
 				pickerName="picker-reactive-form"
 				placeholder="SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER"
-				[dateFilter]="'OnlyWeekends'"
 				[min]="minDate"
 				[max]="maxDate"
 				dateMask
@@ -21,7 +20,6 @@
 			></stark-date-picker>
 			<mat-error>
 				<div *ngIf="formControl.hasError('required')">This is required</div>
-				<div *ngIf="formControl.hasError('matDatepickerFilter')">Date filter</div>
 				<div *ngIf="formControl.hasError('matDatepickerMin')">Min date</div>
 				<div *ngIf="formControl.hasError('matDatepickerMax')">Max date</div>
 			</mat-error>
@@ -46,8 +44,14 @@
 				[disabled]="disabled"
 				(dateChange)="onDateNgModelChanged()"
 				[dateMask]="maskConfig"
+				#pickerNgModel="ngModel"
 				required
 			></stark-date-picker>
+			<mat-error>
+				<div *ngIf="pickerNgModel.errors && pickerNgModel.errors['required']">This is required</div>
+				<div *ngIf="pickerNgModel.errors && pickerNgModel.errors['matDatepickerMin']">Min date</div>
+				<div *ngIf="pickerNgModel.errors && pickerNgModel.errors['matDatepickerMax']">Max date</div>
+			</mat-error>
 		</mat-form-field>
 		<div>
 			<mat-checkbox (change)="disabled = !disabled" [value]="disabled">
