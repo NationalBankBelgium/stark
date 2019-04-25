@@ -1,0 +1,39 @@
+<div class="date-time-wrapper" [formGroup]="dateTimeFormGroup">
+	<stark-date-picker
+		[pickerId]="pickerId"
+		[pickerName]="pickerName"
+		formControlName="date"
+		(dateChange)="onDateTimeChange()"
+		[dateFilter]="dateFilter"
+		[dateMask]="dateMask"
+		[required]="required"
+		[max]="max"
+		[min]="min"
+	></stark-date-picker>
+
+	<input
+		matInput
+		#timeInput
+		id="{{ pickerId + '-time-input' }}"
+		name="{{ pickerName + '-time-input' }}"
+		class="time-input"
+		formControlName="time"
+		(change)="onDateTimeChange()"
+		[starkTimestampMask]="timeMask"
+		[required]="required"
+	/>
+	<div class="mat-form-field-suffix mat-datepicker-toggle">
+		<button mat-icon-button (click)="focusTimeInput($event)" [disabled]="disabled">
+			<mat-icon svgIcon="clock"></mat-icon>
+		</button>
+	</div>
+</div>
+
+<button
+	mat-icon-button
+	(click)="clearDateTime()"
+	class="clear-date-time-button"
+	[ngClass]="{ hidden: disabled || !focused || (!dateTimeFormGroup.value.date && !dateTimeFormGroup.value.time) }"
+>
+	<mat-icon svgIcon="close" [matTooltip]="'STARK.DATE_TIME_PICKER.CLEAR_DATETIME' | translate"></mat-icon>
+</button>

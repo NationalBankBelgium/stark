@@ -1,0 +1,51 @@
+/* The 'stark-date-time-picker-form-field-wrapper' is added dynamically by the component to the surrounding form field wrapper*/
+.mat-form-field .mat-form-field-wrapper.stark-date-time-picker-form-field-wrapper {
+  width: 280px;
+}
+
+.stark-date-time-picker {
+  display: flex;
+
+  .date-time-wrapper {
+    width: 100%;
+    display: flex;
+
+    input {
+      text-align: left;
+    }
+
+    /* Date */
+    > .stark-date-picker {
+      flex: 2;
+      max-width: 200px;
+    }
+
+    /* Time */
+    > .time-input {
+      flex: 1;
+      max-width: 60px;
+    }
+  }
+
+  .mat-datepicker-toggle {
+    transition: color 500ms;
+  }
+
+  /*
+  &:not(.floating) .mat-datepicker-toggle {
+    color: rgba(0, 0, 0, 0);
+  }
+  */
+
+  .clear-date-time-button {
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    position: absolute;
+    margin-left: 280px; /* should be the same width of the 'stark-date-time-picker-form-field-wrapper' (see above) */
+
+    &.hidden {
+      display: none;
+    }
+  }
+}

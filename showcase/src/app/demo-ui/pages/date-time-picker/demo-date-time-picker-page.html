@@ -1,0 +1,71 @@
+<h1 class="mat-display-3" translate>SHOWCASE.DEMO.DATE_TIME_PICKER.TITLE</h1>
+
+<section class="stark-section">
+	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+
+	<example-viewer
+		exampleTitle="SHOWCASE.DEMO.DATE_TIME_PICKER.REACTIVE_FORM"
+		[extensions]="['HTML', 'TS', 'SCSS']"
+		filesPath="date-time-picker/reactive-form"
+	>
+		<mat-form-field [ngClass]="{ expanded: !!(formControl.errors && (formControl.errors | keyvalue).length > 1) }">
+			<stark-date-time-picker
+				pickerId="date-time-picker-form-control"
+				[formControl]="formControl"
+				placeholder="SHOWCASE.DEMO.DATE_TIME_PICKER.PLACEHOLDER"
+				dateFilter="OnlyWeekdays"
+				[dateMask]="dateMask"
+				[timeMask]="timeMask"
+				[min]="minDate"
+				[max]="maxDate"
+				required
+			></stark-date-time-picker>
+			<mat-error>
+				<div *ngFor="let errorMessage of getErrorMessages(formControl); trackBy: trackItemFn">
+					{{ errorMessage | translate }}
+				</div>
+			</mat-error>
+		</mat-form-field>
+		<div>
+			<mat-checkbox (change)="toggleFormControlState(formControl)" [value]="formControl.disabled">
+				{{ "SHOWCASE.COMMON.DISABLED" | translate }}
+			</mat-checkbox>
+		</div>
+	</example-viewer>
+
+	<example-viewer
+		exampleTitle="SHOWCASE.DEMO.DATE_TIME_PICKER.NG_MODEL"
+		[extensions]="['HTML', 'TS', 'SCSS']"
+		filesPath="date-time-picker/ng-model"
+	>
+		<mat-form-field
+			[ngClass]="{ expanded: !!(timePickerNgModel.control.errors && (timePickerNgModel.control.errors | keyvalue).length > 1) }"
+		>
+			<stark-date-time-picker
+				pickerId="date-time-picker-ng-model"
+				[(ngModel)]="dateTimeModel"
+				(dateTimeChange)="onDateTimeNgModelChanged()"
+				placeholder="SHOWCASE.DEMO.DATE_TIME_PICKER.PLACEHOLDER"
+				dateFilter="OnlyWeekdays"
+				[dateMask]="dateMask"
+				[min]="minDate"
+				[max]="maxDate"
+				[disabled]="isDisabled"
+				#timePickerNgModel="ngModel"
+				required
+			></stark-date-time-picker>
+			<mat-error *ngIf="timePickerNgModel.errors">
+				<div *ngFor="let errorMessage of getErrorMessages(timePickerNgModel.control); trackBy: trackItemFn">
+					{{ errorMessage | translate }}
+				</div>
+			</mat-error>
+		</mat-form-field>
+		<div>
+			<mat-checkbox [value]="isDisabled" (change)="isDisabled = !isDisabled">
+				{{ "SHOWCASE.COMMON.DISABLED" | translate }}
+			</mat-checkbox>
+		</div>
+	</example-viewer>
+</section>
+
+<stark-reference-block [links]="referenceList"></stark-reference-block>
