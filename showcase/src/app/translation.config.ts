@@ -1,6 +1,7 @@
+import moment from "moment";
 import "moment/locale/fr";
 import "moment/locale/nl-be";
-import "moment/locale/en-gb";
+// no need to load the English locale since we use US English and Moment default language is just that one (see https://momentjs.com/docs/#/i18n/changing-locale/)
 
 import { TranslateService } from "@ngx-translate/core";
 import { DateAdapter } from "@angular/material/core";
@@ -15,7 +16,9 @@ export function initializeTranslation(translateService: TranslateService, dateAd
 	translateService.setDefaultLang("en");
 	translateService.use("en");
 
-	dateAdapter.setLocale("en-us");
+	// set the Moment language, otherwise it is set by the last imported locale!
+	moment.locale("en"); // in fact Moment default language is US English
+	dateAdapter.setLocale("en"); // US English locale in Moment is just "en"
 
 	const english: StarkLocale = { languageCode: "en", translations: translationsEn };
 	const french: StarkLocale = { languageCode: "fr", translations: translationsFr };
