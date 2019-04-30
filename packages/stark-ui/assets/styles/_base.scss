@@ -21,23 +21,11 @@ body {
     flex: 1 0 auto;
     align-self: center;
 
-    max-width: 100%;
+    width: 100%;
+    max-width: $stark-max-content-width;
+
     box-sizing: border-box;
     padding: 64px 15px;
-  }
-}
-@media #{$tablet-query} {
-  .stark-main-container {
-    padding-left: 70px;
-    padding-right: 70px;
-  }
-}
-
-// We want to keep at least 70px horizontal padding for the main content, therefore we add 140px to the media query
-@media screen and (min-width: 1100px) {
-  .stark-main-container {
-    align-self: center;
-    width: $stark-max-content-width;
   }
 }
 
