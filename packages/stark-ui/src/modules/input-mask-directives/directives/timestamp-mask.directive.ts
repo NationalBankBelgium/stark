@@ -122,7 +122,8 @@ export class StarkTimestampMaskDirective extends MaskedInputDirective implements
 			return {
 				pipe: <any>createTimestampPipe(timestampMaskConfig.format),
 				mask: this.convertFormatIntoMask(timestampMaskConfig.format),
-				placeholderChar: "_"
+				placeholderChar: "_",
+				keepCharPositions: true // to avoid weird date values when deleting characters (see https://github.com/NationalBankBelgium/stark/issues/1260)
 			};
 		}
 	}
