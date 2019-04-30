@@ -39,8 +39,11 @@ The following polyfills are suitable for most of the cases, especially when targ
  * IE11 requires all of the following polyfills.
  *
  * Polyfill: https://github.com/zloirock/core-js
+ * Add the specific lines below corresponding to the version of core-js you want to use: 2.x or 3.x
  */
 /* tslint:disable:no-import-side-effect */
+
+/******************** core-js 2.x ********************/
 import "core-js/es6";
 import "core-js/es7/reflect";
 import "core-js/es7/string";
@@ -51,6 +54,21 @@ import "core-js/stage/4";
  * More info: https://github.com/angular/angular/issues/27887
  */
 import "core-js/modules/web.dom.iterable";
+/*****************************************************/
+
+/******************** core-js 3.x ********************
+ * Make sure you add the 'paths' workaround to the tsconfig.json to support core-js 3.x with Angular CLI 7.x
+ * See: https://github.com/angular/angular-cli/issues/13954#issuecomment-475452588
+ */
+import "core-js/es";
+import "core-js/proposals/reflect-metadata";
+/**
+ * IE11 does not support iteration on certain DOM collections (NodeList).
+ * This polyfill is specifically needed for the animation on mat-menu used in stark-table.
+ * More info: https://github.com/angular/angular/issues/27887
+ */
+import "core-js/modules/web.dom-collections.iterator";
+/*****************************************************/
 
 /**
  * IE11 and Edge require this to support Server-sent events

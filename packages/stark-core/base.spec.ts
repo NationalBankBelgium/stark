@@ -1,8 +1,7 @@
 "use strict";
 
-import "core-js/es6";
-import "core-js/es7/reflect";
-import "core-js/stage/4";
+import "core-js/es";
+import "core-js/proposals/reflect-metadata";
 
 /* tslint:disable:no-import-side-effect */
 // FIXME: change when https://github.com/monounity/karma-typescript/issues/320 is resolved

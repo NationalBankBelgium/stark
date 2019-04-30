@@ -1,9 +1,7 @@
 "use strict";
 
-import "core-js/es6";
-import "core-js/es7/reflect";
-import "core-js/es7/string";
-import "core-js/stage/4";
+import "core-js/es";
+import "core-js/proposals/reflect-metadata";
 
 // IE polyfills
 

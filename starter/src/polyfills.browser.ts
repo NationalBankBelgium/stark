@@ -26,16 +26,17 @@
  * Polyfill: https://github.com/zloirock/core-js
  */
 /* tslint:disable:no-import-side-effect */
-import "core-js/es6";
-import "core-js/es7/reflect";
-import "core-js/es7/string";
-import "core-js/stage/4";
+// FIXME: remove the workaround added to the tsconfig.json to support core-js 3.0.0 with Angular CLI 7.x (https://github.com/angular/angular-cli/issues/13954#issuecomment-475452588)
+// it will be fixed most likely in Angular 8
+import "core-js/es";
+import "core-js/proposals/reflect-metadata";
 /**
  * IE11 does not support iteration on certain DOM collections (NodeList).
  * This polyfill is specifically needed for the animation on mat-menu used in stark-table.
  * More info: https://github.com/angular/angular/issues/27887
  */
-import "core-js/modules/web.dom.iterable";
+import "core-js/modules/web.dom-collections.iterator";
+
 /**
  * IE11 and Edge require this to support Server-sent events
  * https://caniuse.com/#feat=eventsource
@@ -43,6 +44,7 @@ import "core-js/modules/web.dom.iterable";
  * Polyfill: https://github.com/Yaffle/EventSource
  */
 import "event-source-polyfill";
+
 /**
  * IE11 requires Element.classList for NgClass support on SVG elements
  * See: https://caniuse.com/#feat=classlist
@@ -52,7 +54,6 @@ import "event-source-polyfill";
  * Polyfill: https://github.com/eligrey/classList.js
  */
 import "eligrey-classlist-js-polyfill";
-import "zone.js/dist/zone";
 
 /**
  * Web Animations polyfill is no longer needed for standard animation support as of Angular 6
@@ -69,6 +70,7 @@ import "zone.js/dist/zone";
  */
 // workaround for IE11 before loading zone.ks (see: https://github.com/angular/zone.js/issues/933)
 (window as any).__Zone_enable_cross_context_check = true;
+import "zone.js/dist/zone";
 // async stack traces with zone.js included for dev
 // import 'zone.js/dist/long-stack-trace-zone'
 /* tslint:enable */

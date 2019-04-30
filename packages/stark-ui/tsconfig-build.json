@@ -3,11 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "typeRoots": [
-      "./node_modules/@types",
-      "../stark-build/typings",
-      "./typings"
-    ],
+    "typeRoots": ["./node_modules/@types", "../stark-build/typings", "./typings"],
     "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
       "@angularclass/hmr": ["../stark-core/node_modules/@angularclass/hmr"],
@@ -17,19 +13,21 @@
       "@angular/core": ["../../node_modules/@angular/core"],
       "@angular/material": ["../../node_modules/@angular/material"],
       "@angular/router": ["../../node_modules/@angular/router"],
+      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
+      "@nationalbankbelgium/stark-ui": ["."],
       "@ng-idle/*": ["../stark-core/node_modules/@ng-idle/*"],
       "@ngrx/*": ["../stark-core/node_modules/@ngrx/*"],
       "@ngx-translate/*": ["../stark-core/node_modules/@ngx-translate/*"],
       "@uirouter/*": ["../stark-core/node_modules/@uirouter/*"],
       "cerialize": ["../stark-core/node_modules/cerialize"],
       "class-validator": ["../stark-core/node_modules/class-validator"],
-      "moment": ["../stark-core/node_modules/moment"],
+      "core-js/*": ["../../node_modules/core-js/*"],
+      "environments/environment": ["../../dist/packages/stark-core/src/common/environment"],
       "ibantools": ["../stark-core/node_modules/ibantools"],
       "lodash-es/*": ["../stark-core/node_modules/lodash-es/*"],
+      "moment": ["../stark-core/node_modules/moment"],
       "rxjs/*": ["../../node_modules/rxjs/*"],
-      "environments/environment": ["../../dist/packages/stark-core/src/common/environment"],
-      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
-      "@nationalbankbelgium/stark-ui": ["."]
+      "zone.js/*": ["../../node_modules/zone.js/*"]
     },
     "outDir": "../../dist/packages/stark-ui"
   },

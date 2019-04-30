@@ -9,9 +9,11 @@
       "@angular/common": ["../../node_modules/@angular/common"],
       "@angular/core": ["../../node_modules/@angular/core"],
       "@angular/router": ["../../node_modules/@angular/router"],
-      "rxjs/*": ["../../node_modules/rxjs/*"],
+      "@nationalbankbelgium/stark-core": ["."],
+      "core-js/*": ["../../node_modules/core-js/*"],
       "environments/environment": ["./src/common/environment"],
-      "@nationalbankbelgium/stark-core": ["."]
+      "rxjs/*": ["../../node_modules/rxjs/*"],
+      "zone.js/*": ["../../node_modules/zone.js/*"]
     },
     "outDir": "../../dist/packages/stark-core"
   },
