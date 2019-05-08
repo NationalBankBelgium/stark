@@ -129,7 +129,7 @@
     "@nationalbankbelgium/stark-ui": "file:../dist/packages-dist/stark-ui/nationalbankbelgium-stark-ui-10.0.0-beta.7-67351e8b.tgz",
     "@uirouter/visualizer": "~7.0.0",
     "angular-in-memory-web-api": "~0.8.0",
-    "basscss": "~8.0.10",
+    "basscss": "~8.1.0",
     "core-js": "~3.0.0",
     "eligrey-classlist-js-polyfill": "~1.2.20180112",
     "event-source-polyfill": "~1.0.5",
