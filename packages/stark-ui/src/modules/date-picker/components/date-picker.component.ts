@@ -20,16 +20,16 @@ import {
 } from "@angular/core";
 import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from "@angular/material/datepicker";
 import moment from "moment";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NgControl, ValidationErrors, Validator } from "@angular/forms";
-import { isStarkTimestampMaskConfig, StarkTimestampMaskConfig } from "../../input-mask-directives";
 import { MAT_DATE_FORMATS, MatDateFormats } from "@angular/material/core";
 import { MatFormFieldControl } from "@angular/material/form-field";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { Subject, Subscription } from "rxjs";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
+import { Subject, Subscription } from "rxjs";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { isStarkTimestampMaskConfig, StarkTimestampMaskConfig } from "../../input-mask-directives/directives";
+import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import isEqual from "lodash-es/isEqual";
 
 /**
@@ -179,13 +179,36 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * Dynamically translated via the @ngx-translate service if the provided text is defined in the translation keys).
 	 */
 	@Input()
-	public placeholder = "";
+	public set placeholder(value: string) {
+		this.originalPlaceholder = value || "";
+		// Handle translation internally because mat-form-field uses the value of `@Input public placeholder` to display the label / placeholder
+		this._placeholder = this.originalPlaceholder ? this.translateService.instant(this.originalPlaceholder) : this.originalPlaceholder;
+		this.stateChanges.next();
+	}
+
+	public get placeholder(): string {
+		return this._placeholder;
+	}
+
+	private _placeholder = "";
 
 	/**
 	 * If the date-picker is required or not. by default, the date-picker is not required
 	 */
 	@Input()
-	public required = false;
+	public get required(): boolean {
+		return this._required;
+	}
+
+	public set required(isRequired: boolean) {
+		this._required = coerceBooleanProperty(isRequired);
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _required = false;
 
 	/**
 	 * Source Date to be bound to the datepicker model
@@ -361,8 +384,6 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
-		this.logger.debug(componentName + ": component initialized");
-
 		// tslint:disable-next-line:no-null-keyword
 		this.ngControl = this.injector.get<NgControl>(<Type<NgControl>>NgControl, <any>null);
 
@@ -371,14 +392,12 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 		}
 
 		this.translateOnLangChangeSubscription = this.translateService.onLangChange.subscribe(() => {
-			// Handle translation internally because mat-form-field uses the value of `@Input public placeholder` to display the label / placeholder
-			this.placeholder = this.originalPlaceholder
-				? this.translateService.instant(this.originalPlaceholder)
-				: this.originalPlaceholder;
-			this.stateChanges.next();
+			// re-assign the placeholder to refresh the translation (see 'placeholder' setter)
+			this.placeholder = this.originalPlaceholder;
 		});
 
 		super.ngOnInit();
+		this.logger.debug(componentName + ": component initialized");
 	}
 
 	/**
@@ -401,28 +420,19 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 */
 	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
-		if (this.max && this.min && (changes["max"] || changes["min"]) && this.max < this.min) {
+		if ((changes["max"] || changes["min"]) && this.max && this.min && this.max.getTime() < this.min.getTime()) {
 			this.logger.error(
 				componentName + ": min date [" + this.min.toDateString() + "] cannot be after max date [" + this.max.toDateString() + "]"
 			);
 		}
 
-		if (changes["required"]) {
-			this.required = coerceBooleanProperty(changes["required"].currentValue);
-		}
-
 		if (changes["max"] || changes["min"] || changes["required"]) {
-			this.stateChanges.next();
 			this.cdRef.detectChanges();
-			this._onValidatorChange();
-		}
-
-		if (changes["placeholder"]) {
-			this.originalPlaceholder = changes["placeholder"].currentValue || "";
-			// Handle translation internally because mat-form-field uses the value of `@Input public placeholder` to display the label / placeholder
-			this.placeholder = this.originalPlaceholder
-				? this.translateService.instant(this.originalPlaceholder)
-				: this.originalPlaceholder;
+			// IMPORTANT: the '_onValidatorChange()' callback from Validator API should not be called here to update the validity of the control because it triggers a valueChange event!
+			// therefore we call 'updateValueAndValidity()' manually on the control instead and without emitting the valueChanges event :)
+			if (this.ngControl && this.ngControl.control) {
+				this.ngControl.control.updateValueAndValidity({ emitEvent: false });
+			}
 			this.stateChanges.next();
 		}
 
@@ -453,7 +463,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 						componentName +
 							': dateMask.format ["' +
 							this.dateMaskConfig.format +
-							'"] and provided dateFormats ["' +
+							'"] and the provided parse format(s) in MAT_DATE_FORMATS ["' +
 							dateInputFormats.join('","') +
 							'"] are NOT compatible. Please adapt one of them.'
 					);
@@ -493,15 +503,6 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	};
 
 	/**
-	 * @ignore
-	 * @internal
-	 * The registered callback function called when the validator inputs change.
-	 */
-	private _onValidatorChange: () => void = () => {
-		/*noop*/
-	};
-
-	/**
 	 * Part of {@link ControlValueAccessor} API
 	 * Registers a function to be called when the control value changes.
 	 * @ignore
@@ -530,7 +531,6 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	public setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
 		this.stateChanges.next();
-		this._onValidatorChange();
 	}
 
 	/**
@@ -567,20 +567,19 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	}
 
 	/**
-	 * Registers a callback function to call when the validator inputs change.
-	 *
-	 * @param fn - The callback function
+	 * Part of {@link Validator} API
+	 * @ignore
+	 * @internal
 	 */
-	public registerOnValidatorChange(fn: () => void): void {
-		this._onValidatorChange = fn;
+	public registerOnValidatorChange(_fn: () => void): void {
+		// we don't need to keep a reference to the callback function (i.e. in a '_onValidatorChange' property)
+		// because such callback, when it is called to update the validity of the control, it triggers a valueChange event too!
 	}
 
 	/**
-	 * Method that performs synchronous validation against the provided control.
-	 *
-	 * @param control - The control to validate against.
-	 *
-	 * @returns A map of validation errors if validation fails, otherwise null.
+	 * Part of {@link Validator} API
+	 * @ignore
+	 * @internal
 	 */
 	public validate(control: AbstractControl): ValidationErrors | null {
 		return this.pickerInput.validate(control);
@@ -633,7 +632,6 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 
 		const value: Date | undefined = this.value ? this.value : undefined;
 		this._onChange(value);
-		this._onValidatorChange();
 		// emit after the model has actually changed
 		this.dateChange.emit(value);
 	}

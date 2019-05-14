@@ -27,14 +27,15 @@ export class DemoDatePickerComponent implements OnDestroy {
 	}
 
 	public onDateChanged(date: Date): void {
-		this.logger.debug(date);
+		this.logger.debug("Date changed: ", date);
 	}
 
 	public toggleFormControlState(formControl: FormControl): void {
+		// enable/disable the control without emitting a change event since the value did not change (to avoid unnecessary extra calls!)
 		if (formControl.disabled) {
-			formControl.enable();
+			formControl.enable({ emitEvent: false });
 		} else {
-			formControl.disable();
+			formControl.disable({ emitEvent: false });
 		}
 	}
 }
