@@ -8,10 +8,11 @@ import { PipeFunction, PipeResultObject } from "text-mask-core";
  */
 // tslint:disable-next-line:cognitive-complexity
 export function createTimestampPipe(timestampFormat: string = "DD-MM-YYYY HH:mm:ss"): PipeFunction {
+	const dateFormatArray: string[] = timestampFormat.split(/[^DMYHms]+/);
+
 	return (conformedValue: string): false | string | PipeResultObject => {
-		const dateFormatArray: string[] = timestampFormat.split(/[^DMYHms]+/);
-		const maxValue: object = { DD: 31, MM: 12, YYYY: 2999, HH: 24, mm: 60, ss: 60 };
-		const minValue: object = { DD: 0, MM: 0, YYYY: 1, HH: 0, mm: 0, ss: 0 };
+		const maxValue: object = { DD: 31, MM: 12, YYYY: 9999, HH: 23, mm: 59, ss: 59 };
+		const minValue: object = { DD: 1, MM: 1, YYYY: 0, HH: 0, mm: 0, ss: 0 };
 
 		let skipValidation = false;
 
@@ -22,14 +23,17 @@ export function createTimestampPipe(timestampFormat: string = "DD-MM-YYYY HH:mm:
 			const textValue: string = conformedValue.substr(position, length).replace(/\D/g, "");
 			const value: number = parseInt(textValue, 10);
 
-			// skip the validation if the day starts with 0, but is not 00
-			// because if we would validate it would give not valid, because day 0 doesn't exist
-			// but maybe we want to type for example 02
-			// it should not give invalid if we only already have typed the 0
-			if (format === "DD" && (value === 0 && textValue !== "00")) {
-				skipValidation = true;
-				// same for month
-			} else if (format === "MM" && (value === 0 && textValue !== "00")) {
+			// Skip the validation in these cases:
+			// 1) if the day/month starts with 0, but is not "00" because if we would validate it, it would give not valid because day 0 doesn't exist
+			//    but maybe we want to type for example "02" so it should not give invalid if we only have typed the "0"
+			// 2) if the textValue is empty (not filled by the user or maybe he deleted the day/month completely)
+			// 3) if the day/month has just one character (instead of two like "0X") otherwise the strict validation of starkIsDateTime would treat it as invalid
+			// FIXME: for use case 3 we should enhance the logic to prepend the missing 0's so that the date string aligns with the expected format and it passes the strict validation of starkIsDateTime
+			// See https://github.com/NationalBankBelgium/stark/issues/1277
+			if (
+				(format === "DD" || format === "MM") &&
+				((value === 0 && textValue !== "00") || textValue === "" || (value < 10 && textValue.length === 1))
+			) {
 				skipValidation = true;
 			}
 			return value > maxValue[format] || (textValue.length === length && value < minValue[format]);
@@ -53,8 +57,6 @@ export function createTimestampPipe(timestampFormat: string = "DD-MM-YYYY HH:mm:
 		if (!skipValidation && !isInvalid && inputValue.length > 0 && !starkIsDateTime(inputValue, partialFormat)) {
 			return false;
 		}
-
-		skipValidation = false;
 
 		if (isInvalid) {
 			return false;

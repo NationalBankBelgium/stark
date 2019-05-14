@@ -218,7 +218,7 @@ export class AppModule {
 
 		this.settingsService.initializeSettings();
 
-		sessionService
+		this.sessionService
 			.getCurrentUser()
 			.pipe(filter((user?: StarkUser): user is StarkUser => typeof user !== "undefined"))
 			.subscribe((user: StarkUser) => {
