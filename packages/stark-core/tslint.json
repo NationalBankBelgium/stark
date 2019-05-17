@@ -24,7 +24,6 @@
         }
       }
     ],
-    "jsdoc-format": [true, "check-multiline-start"],
-    "no-redundant-jsdoc": true
+    "use-view-encapsulation": false
   }
 }
