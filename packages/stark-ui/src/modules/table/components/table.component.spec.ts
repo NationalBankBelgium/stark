@@ -22,6 +22,7 @@ import { StarkTableComponent } from "./table.component";
 import { StarkTableColumnComponent } from "./column.component";
 import { StarkPaginationComponent } from "../../pagination/components";
 import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "../entities";
+import find from "lodash-es/find";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
 
@@ -36,9 +37,10 @@ import createSpy = jasmine.createSpy;
 			[multiSort]="multiSort"
 			[rowsSelectable]="rowsSelectable"
 			[multiSelect]="multiSelect"
+			[showRowsCounter]="showRowsCounter"
+			[showRowIndex]="showRowIndex"
 			[orderProperties]="orderProperties"
 			[tableRowActions]="tableRowActions"
-			[showRowsCounter]="showRowsCounter"
 			[rowClassNameFn]="rowClassNameFn"
 			(rowClicked)="rowClickHandler($event)"
 		>
@@ -56,6 +58,7 @@ class TestHostComponent {
 	public multiSelect?: string;
 	public multiSort?: string;
 	public showRowsCounter?: boolean;
+	public showRowIndex?: boolean;
 	public tableRowActions?: StarkTableRowActions;
 	public tableFilter?: StarkTableFilter;
 	public orderProperties?: string[];
@@ -154,11 +157,14 @@ describe("TableComponent", () => {
 			expect(component.multiSort).toBe(hostComponent.multiSort);
 			expect(component.orderProperties).toBe(hostComponent.orderProperties);
 			expect(component.showRowsCounter).toBe(false);
+			expect(component.showRowIndex).toBe(false);
 			expect(component.tableRowActions).toBe(<any>hostComponent.tableRowActions);
 		});
 	});
 
 	describe("on change", () => {
+		const tableThSelector = ".stark-table thead tr th";
+
 		it("should make a copy of 'data' in 'dataSource' when 'data' changes to keep 'data' immutable", () => {
 			const dummyData = [{ name: "test-data" }];
 			hostComponent.dummyData = dummyData;
@@ -223,20 +229,57 @@ describe("TableComponent", () => {
 			expect(component.isMultiSortEnabled).toBe(false);
 		});
 
-		it("should assign right value to isMultiSelectEnabled when multiSelect changes and adapt displayedColumns", () => {
-			spyOn(component.displayedColumns, "unshift");
+		it("should assign right value to isMultiSelectEnabled when multiSelect changes and rowsSelectable is enabled", () => {
 			hostComponent.rowsSelectable = true;
 			hostComponent.multiSelect = "true";
 			hostFixture.detectChanges();
 			expect(component.isMultiSelectEnabled).toBe(true);
-			expect(component.displayedColumns.unshift).toHaveBeenCalledTimes(1);
-			expect(component.displayedColumns.unshift).toHaveBeenCalledWith("select");
 
-			(<Spy>component.displayedColumns.unshift).calls.reset();
 			hostComponent.multiSelect = "false";
 			hostFixture.detectChanges();
 			expect(component.isMultiSelectEnabled).toBe(false);
-			expect(component.displayedColumns.unshift).not.toHaveBeenCalled();
+		});
+
+		it("should assign right value to display/hide 'select' column when rowsSelectable changes", () => {
+			hostComponent.rowsSelectable = true;
+			hostFixture.detectChanges();
+
+			expect(component.displayedColumns.indexOf("select") > -1).toBe(true);
+			let rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
+			expect(rowThElements.length).toBeGreaterThan(0);
+			let selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf("cdk-column-select") > -1);
+			expect(selectThElement).toBeDefined();
+
+			hostComponent.rowsSelectable = false;
+			hostFixture.detectChanges();
+			expect(component.displayedColumns.indexOf("select") > -1).toBe(false);
+			rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
+			expect(rowThElements.length).toBeGreaterThanOrEqual(0);
+			selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf("cdk-column-select") > -1);
+			expect(selectThElement).toBeUndefined();
+		});
+
+		it("should assign right value to _showRowIndex when showRowIndex changes and adapt displayedColumns", () => {
+			hostComponent.showRowIndex = true;
+			hostFixture.detectChanges();
+			expect(component.showRowIndex).toBe(true);
+			expect(component.displayedColumns.indexOf("rowIndex") > -1).toBe(true);
+			let rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
+			expect(rowThElements.length).toBeGreaterThan(0);
+			let rowIndexThElement = find(
+				rowThElements,
+				(thElement: HTMLElement) => thElement.className.indexOf("cdk-column-rowIndex") > -1
+			);
+			expect(rowIndexThElement).toBeDefined();
+
+			hostComponent.showRowIndex = false;
+			hostFixture.detectChanges();
+			expect(component.showRowIndex).toBe(false);
+			expect(component.displayedColumns.indexOf("rowIndex") > -1).toBe(false);
+			rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
+			expect(rowThElements.length).toBeGreaterThanOrEqual(0);
+			rowIndexThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf("cdk-column-rowIndex") > -1);
+			expect(rowIndexThElement).toBeUndefined();
 		});
 
 		it("should assign the right value to filter", () => {
@@ -1054,6 +1097,19 @@ describe("TableComponent", () => {
 			component.ngAfterViewInit();
 
 			expect(component.getColumnSortingPriority("c")).toBeUndefined();
+		});
+	});
+
+	describe("getRowIndex", () => {
+		it("should return the right index for every row", () => {
+			for (let i = 0; i < component.dataSource.data.length; i++) {
+				expect(component.getRowIndex(component.dataSource.data[i])).toBe(i + 1);
+			}
+		});
+
+		it("should return 'undefined' if dataSource is not initialized yet", () => {
+			component.dataSource = <any>undefined;
+			expect(component.getRowIndex({ name: "dummy-row-data" })).toBeUndefined();
 		});
 	});
 

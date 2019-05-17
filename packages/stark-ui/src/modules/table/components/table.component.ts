@@ -245,6 +245,34 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public rowClassNameFn?: (row: object, index: number) => string;
 
 	/**
+	 * Determine if the row index must be present or not.
+	 * Default: false
+	 */
+	@Input()
+	public get showRowIndex(): boolean {
+		return this._showRowIndex;
+	}
+
+	public set showRowIndex(showRowIndex: boolean) {
+		this._showRowIndex = coerceBooleanProperty(showRowIndex);
+
+		if (this._showRowIndex) {
+			if (!this.displayedColumns.includes("rowIndex")) {
+				this.displayedColumns.unshift("rowIndex");
+			}
+		} else {
+			const i: number = this.displayedColumns.indexOf("rowIndex");
+			this.displayedColumns.splice(i);
+		}
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _showRowIndex = false;
+
+	/**
 	 * Output event emitter that will emit the latest filter value whenever it changes.
 	 */
 	@Output()
@@ -957,6 +985,18 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		} else {
 			// Do nothing
 		}
+	}
+
+	/**
+	 * Get the row index, based on its position in dataSource.data
+	 * @param row - Row to get index
+	 */
+	public getRowIndex(row: any): number | undefined {
+		if (this.dataSource && this.dataSource.data) {
+			return this.dataSource.data.indexOf(row) + 1;
+		}
+
+		return undefined;
 	}
 
 	/**
