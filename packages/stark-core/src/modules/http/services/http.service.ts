@@ -81,10 +81,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 			return this.getSingleItemResponseWrapperObservable(httpResponse$, request);
 		} else {
 			return throwError(
-				"Unknown request type encountered " +
-					request.requestType +
-					". For collection requests, " +
-					"call the executeCollectionRequest method"
+				`Unknown request type encountered ${request.requestType}. For collection requests, call the executeCollectionRequest method`
 			);
 		}
 	}
@@ -118,10 +115,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		} else {
 			// we return directly here because otherwise compilation fails (can't assign the ErrorObservable type to Subject)
 			return throwError(
-				"Unknown request type encountered " +
-					request.requestType +
-					". For single requests (no " +
-					"collection), call the executeSingleItemRequest method"
+				`Unknown request type encountered ${
+					request.requestType
+				}. For single requests (no collection), call the executeSingleItemRequest method`
 			);
 		}
 	}
@@ -360,10 +356,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 									}
 								} else {
 									this.logger.warn(
-										starkHttpServiceName +
-											": cannot set the etag property in the item '" +
-											item +
-											"' because it is not an object"
+										`${starkHttpServiceName}: cannot set the etag property in the item '${item}' because it is not an object`
 									);
 								}
 							}

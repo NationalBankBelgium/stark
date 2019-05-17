@@ -228,7 +228,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Output event emitter that will emit the latest filter value whenever it changes.
 	 */
 	@Output()
-	public filterChanged: EventEmitter<StarkTableFilter> = new EventEmitter<StarkTableFilter>();
+	public readonly filterChanged = new EventEmitter<StarkTableFilter>();
 
 	/**
 	 * Callback function to be called when the pagination changes. Two parameters
@@ -242,20 +242,20 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * When set onPaginate, these attributes are required : totalItems
 	 */
 	@Output()
-	public paginationChanged: EventEmitter<StarkPaginateEvent> = new EventEmitter<StarkPaginateEvent>();
+	public readonly paginationChanged = new EventEmitter<StarkPaginateEvent>();
 
 	/**
 	 * Output event emitter that will emit the array of selected rows.
 	 */
 	@Output()
-	public selectChanged: EventEmitter<object[]> = new EventEmitter<object[]>();
+	public readonly selectChanged = new EventEmitter<object[]>();
 
 	/**
 	 * Output event emitter that will emit the data of a row when it is clicked.
 	 * If there are no observers it will not emit, but instead select the row.
 	 */
 	@Output()
-	public rowClicked: EventEmitter<object> = new EventEmitter<object>();
+	public readonly rowClicked = new EventEmitter<object>();
 
 	/**
 	 * Reference to the MatTable embedded in this component

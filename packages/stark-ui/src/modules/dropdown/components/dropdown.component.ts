@@ -25,8 +25,7 @@ import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { MatSelectChange } from "@angular/material/select";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
-import  isEqual  from "lodash-es/isEqual";
-
+import isEqual from "lodash-es/isEqual";
 
 /**
  * Name of the component
@@ -173,7 +172,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * This will emit the newly selected value.
 	 */
 	@Output()
-	public selectionChanged: EventEmitter<any> = new EventEmitter<any>();
+	public readonly selectionChanged = new EventEmitter<any>();
 
 	/**
 	 * @ignore

@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations no-identical-functions */
+/* tslint:disable:completed-docs max-inline-declarations no-identical-functions no-life-cycle-call */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -164,7 +164,7 @@ describe("TableComponent", () => {
 			expect(component.dataSource.data).toEqual(dummyData);
 			expect(component.dataSource.data).not.toBe(component.data);
 		});
-		
+
 		it("should trigger resetFilterValueOnDataChange and sortData methods when data changes", () => {
 			spyOn(component, "resetFilterValueOnDataChange");
 			spyOn(component, "sortData");
@@ -274,7 +274,16 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 1 },
+					{ a: 1 },
+					{ a: 2 },
+					{ a: 3 },
+					{ a: 4 },
+					{ a: 5 },
+					{ a: 10 },
+					{ a: 20 }
+				]);
 			});
 
 			it("should sort data descending", () => {
@@ -285,7 +294,16 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.dataSource.data).toEqual([{ a: 20 }, { a: 10 }, { a: 5 }, { a: 4 }, { a: 3 }, { a: 2 }, { a: 1 }, { a: 1 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 20 },
+					{ a: 10 },
+					{ a: 5 },
+					{ a: 4 },
+					{ a: 3 },
+					{ a: 2 },
+					{ a: 1 },
+					{ a: 1 }
+				]);
 			});
 
 			it("should sort data descending column A then ascending column B", () => {
@@ -371,28 +389,73 @@ describe("TableComponent", () => {
 
 				component.sortData();
 
-				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 1 },
+					{ a: 1 },
+					{ a: 2 },
+					{ a: 3 },
+					{ a: 4 },
+					{ a: 5 },
+					{ a: 10 },
+					{ a: 20 }
+				]);
 				expect(hostComponent.columnProperties[0].compareFn).toHaveBeenCalled();
-				// Due to browsers, we cannot predict exactly the number of calls. On IE, it is 9 times, on Chrome it can be 7, 8 or 14 times depending on the version 
+				// Due to browsers, we cannot predict exactly the number of calls. On IE, it is 9 times, on Chrome it can be 7, 8 or 14 times depending on the version
 				expect((<Spy>hostComponent.columnProperties[0].compareFn).calls.count()).toBeGreaterThanOrEqual(7);
 				expect((<Spy>hostComponent.columnProperties[0].compareFn).calls.count()).toBeLessThanOrEqual(14);
 			});
 
 			it("should sort data when click on the column", () => {
-				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 3 }, { a: 2 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
-				
+				expect(component.dataSource.data).toEqual([
+					{ a: 1 },
+					{ a: 1 },
+					{ a: 3 },
+					{ a: 2 },
+					{ a: 4 },
+					{ a: 5 },
+					{ a: 10 },
+					{ a: 20 }
+				]);
+
 				const column: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("a"));
 				column.click();
 				hostFixture.detectChanges();
-				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 1 },
+					{ a: 1 },
+					{ a: 2 },
+					{ a: 3 },
+					{ a: 4 },
+					{ a: 5 },
+					{ a: 10 },
+					{ a: 20 }
+				]);
 
 				column.click();
 				hostFixture.detectChanges();
-				expect(component.dataSource.data).toEqual([{ a: 20 }, { a: 10 }, { a: 5 }, { a: 4 }, { a: 3 }, { a: 2 }, { a: 1 }, { a: 1 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 20 },
+					{ a: 10 },
+					{ a: 5 },
+					{ a: 4 },
+					{ a: 3 },
+					{ a: 2 },
+					{ a: 1 },
+					{ a: 1 }
+				]);
 
 				column.click();
 				hostFixture.detectChanges();
-				expect(component.dataSource.data).toEqual([{ a: 1 }, { a: 1 }, { a: 3 }, { a: 2 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 1 },
+					{ a: 1 },
+					{ a: 3 },
+					{ a: 2 },
+					{ a: 4 },
+					{ a: 5 },
+					{ a: 10 },
+					{ a: 20 }
+				]);
 			});
 
 			it("should sort data when click on different columns", () => {
@@ -400,11 +463,11 @@ describe("TableComponent", () => {
 				hostComponent.columnProperties = [{ name: "a" }, { name: "b" }, { name: "c" }];
 				hostFixture.detectChanges();
 				expect(component.dataSource.data).toEqual(hostComponent.dummyData);
-				
+
 				const columnA: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("a"));
 				const columnB: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("b"));
 				const columnC: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("c"));
-				
+
 				columnA.click();
 				expect(component.dataSource.data).toEqual([{ a: 1, b: 2, c: 3 }, { a: 2, b: 3, c: 1 }, { a: 3, b: 1, c: 2 }]);
 				columnA.click();
@@ -414,7 +477,7 @@ describe("TableComponent", () => {
 				expect(component.dataSource.data).toEqual([{ a: 3, b: 1, c: 2 }, { a: 1, b: 2, c: 3 }, { a: 2, b: 3, c: 1 }]);
 				columnB.click();
 				expect(component.dataSource.data).toEqual([{ a: 2, b: 3, c: 1 }, { a: 1, b: 2, c: 3 }, { a: 3, b: 1, c: 2 }]);
-				
+
 				columnC.click();
 				expect(component.dataSource.data).toEqual([{ a: 2, b: 3, c: 1 }, { a: 3, b: 1, c: 2 }, { a: 1, b: 2, c: 3 }]);
 				columnC.click();
@@ -574,7 +637,7 @@ describe("TableComponent", () => {
 					{ a: { b: 7 } }
 				]);
 				expect(hostComponent.columnProperties[0].compareFn).toHaveBeenCalled();
-				// Due to browsers, we cannot predict exactly the number of calls. On IE, it is 9 times, on Chrome it can be 7, 8 or 14 times depending on the version 
+				// Due to browsers, we cannot predict exactly the number of calls. On IE, it is 9 times, on Chrome it can be 7, 8 or 14 times depending on the version
 				expect((<Spy>hostComponent.columnProperties[0].compareFn).calls.count()).toBeGreaterThanOrEqual(7);
 				expect((<Spy>hostComponent.columnProperties[0].compareFn).calls.count()).toBeLessThanOrEqual(14);
 			});

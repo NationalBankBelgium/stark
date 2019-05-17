@@ -34,9 +34,7 @@ export class StarkUrlUtil {
 				// only if the value is not undefined/null
 				const expected: string | undefined = expectedParams.find((findExpected: string) => findExpected === param);
 				if (!expected) {
-					throw new Error(
-						"StarkUrlUtil: Passing a param ( " + param + ") that is not in the url (expected " + expectedParams + "} )"
-					);
+					throw new Error(`StarkUrlUtil: Passing a param (${param}) that is not in the url (expected ${expectedParams}} )`);
 				} else {
 					url = url.replace(":" + param, () => params[param]);
 					expectedParams.splice(expectedParams.indexOf(expected), 1);
@@ -44,7 +42,7 @@ export class StarkUrlUtil {
 			}
 		}
 		if (expectedParams.length > 0) {
-			throw new Error("StarkUrlUtil: Not every value was replaced, left over ones are: " + expectedParams);
+			throw new Error(`StarkUrlUtil: Not every value was replaced, left over ones are: ${expectedParams}`);
 		}
 		return url;
 	}

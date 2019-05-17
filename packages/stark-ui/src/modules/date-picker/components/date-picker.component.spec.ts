@@ -328,6 +328,7 @@ describe("DatePickerComponent", () => {
 				hostFixture.detectChanges();
 				expect(typeof component.dateFilter).toBe("function");
 				if (typeof component.dateFilter === "function") {
+					/* tslint:disable-next-line:no-unbound-method */
 					expect(component.dateFilter).toBe(component.filterOnlyWeekdays);
 				}
 			});
@@ -336,6 +337,7 @@ describe("DatePickerComponent", () => {
 				component.dateFilter = "OnlyWeekends";
 				expect(typeof component.dateFilter).toBe("function");
 				if (typeof component.dateFilter === "function") {
+					/* tslint:disable-next-line:no-unbound-method */
 					expect(component.dateFilter).toBe(component.filterOnlyWeekends);
 				}
 			});

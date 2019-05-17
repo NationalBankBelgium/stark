@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs*/
+/* tslint:disable:completed-docs no-life-cycle-call */
 import { StarkAppDataComponent } from "./app-data.component";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";

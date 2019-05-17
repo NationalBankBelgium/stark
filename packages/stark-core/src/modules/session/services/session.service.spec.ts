@@ -236,7 +236,7 @@ describe("Service: StarkSessionService", () => {
 
 			expect(hookMatchCriteria.entering).toBeDefined();
 
-			const matchingFn: Predicate<StateObject> = <Predicate<StateObject>>hookMatchCriteria.entering;
+			const matchingFn = <Predicate<StateObject>>hookMatchCriteria.entering;
 			const nonMatchingStates: Partial<StateObject>[] = [
 				{ name: "starkAppInit.state1" },
 				{ name: "starkAppInit.state2" },

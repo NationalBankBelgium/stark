@@ -168,12 +168,9 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 					(error: Error) => {
 						this.isPersisting = false;
 						this.retryCounter++;
-						const errorMsg: string =
-							starkLoggingServiceName +
-							": an error occurred while persisting log messages." +
-							" (retry " +
-							this.retryCounter +
-							")";
+						const errorMsg = `${starkLoggingServiceName}: an error occurred while persisting log messages. (retry ${
+							this.retryCounter
+						})`;
 						this.error(errorMsg, error);
 					}
 				);

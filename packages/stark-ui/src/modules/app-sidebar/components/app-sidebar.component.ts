@@ -161,6 +161,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 		this.openSidebarSubscription.unsubscribe();
 		this.closeSidebarSubscription.unsubscribe();
 		this.toggleSidebarSubscription.unsubscribe();
+		/* tslint:disable-next-line:no-life-cycle-call */
 		this.breakpointObserver.ngOnDestroy();
 		this.deregisterTransitionHook();
 	}

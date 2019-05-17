@@ -67,13 +67,13 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	 * Event to emit when the component is activated
 	 */
 	@Output()
-	public activated: EventEmitter<void> = new EventEmitter();
+	public readonly activated = new EventEmitter<void>();
 
 	/**
 	 * Event to emit when the component is deactivated
 	 */
 	@Output()
-	public deactivated: EventEmitter<void> = new EventEmitter();
+	public readonly deactivated = new EventEmitter<void>();
 
 	/**
 	 * Viewchild catching the extension panel in order to open/close it programmatically

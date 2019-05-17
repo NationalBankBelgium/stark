@@ -454,7 +454,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledTimes(1);
 					}),
 					catchError((error: any) => {
-						return throwError("getCurrentState " + error);
+						return throwError(`getCurrentState ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -474,7 +474,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateName).toBe(currentState.name);
 					}),
 					catchError((error: any) => {
-						return throwError("getCurrentStateName " + error);
+						return throwError(`getCurrentStateName ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -495,7 +495,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateConfig.url).toBe("/page-01");
 					}),
 					catchError((error: any) => {
-						return throwError("getCurrentStateConfig " + error);
+						return throwError(`getCurrentStateConfig ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -573,7 +573,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateParams.onBehalfView).toBe(true);
 					}),
 					catchError((error: any) => {
-						return throwError("getCurrentStateParams " + error);
+						return throwError(`getCurrentStateParams ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -600,7 +600,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateParams).toEqual({});
 					}),
 					catchError((error: any) => {
-						return throwError("getCurrentStateParams " + error);
+						return throwError(`getCurrentStateParams ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -630,7 +630,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateParams.onBehalfView).toBe(true);
 					}),
 					catchError((error: any) => {
-						return throwError("getCurrentStateParams " + error);
+						return throwError(`getCurrentStateParams ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -653,7 +653,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(isCurrentUIState).toBe(false);
 					}),
 					catchError((error: any) => {
-						return throwError("isCurrentUiState " + error);
+						return throwError(`isCurrentUiState ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -686,7 +686,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(isCurrentUIState).toBe(false);
 					}),
 					catchError((error: any) => {
-						return throwError("isCurrentUiState " + error);
+						return throwError(`isCurrentUiState ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -711,7 +711,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(routingService.isCurrentUiStateIncludedIn("otherState")).toBe(false);
 					}),
 					catchError((error: any) => {
-						return throwError("navigateTo " + error);
+						return throwError(`navigateTo ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -735,7 +735,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return throwError("navigateTo " + error);
+						return throwError(`navigateTo ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -752,7 +752,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, { reload: true });
 					}),
 					catchError((error: any) => {
-						return throwError("navigateTo " + error);
+						return throwError(`navigateTo ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -798,7 +798,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("homepage", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return throwError("navigateToHome " + error);
+						return throwError(`navigateToHome ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -828,7 +828,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(currentStateParams.onBehalfView).toBe(true);
 					}),
 					catchError((error: any) => {
-						return throwError("navigateToHome " + error);
+						return throwError(`navigateToHome ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -843,15 +843,15 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("homepage")
 				.pipe(
 					catchError((error: any) => {
-						return throwError("navigateTo homepage " + error);
+						return throwError(`navigateTo homepage ${error}`);
 					}),
 					switchMap(() => routingService.navigateTo("page-01")),
 					catchError((error: any) => {
-						return throwError("navigateTo page-01 " + error);
+						return throwError(`navigateTo page-01 ${error}`);
 					}),
 					switchMap(() => routingService.navigateTo("page-01-01")),
 					catchError((error: any) => {
-						return throwError("navigateTo page-01-01 " + error);
+						return throwError(`navigateTo page-01-01 ${error}`);
 					}),
 					switchMap(() => routingService.navigateToPrevious()),
 					tap((enteredState: StateObject) => {
@@ -861,7 +861,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return throwError("navigateToPrevious " + error);
+						return throwError(`navigateToPrevious ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -874,19 +874,19 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("homepage")
 				.pipe(
 					catchError((error: any) => {
-						return throwError("navigateTo homepage " + error);
+						return throwError(`navigateTo homepage ${error}`);
 					}),
 					switchMap(() => routingService.navigateTo("page-01", { requestId: "999" })),
 					catchError((error: any) => {
-						return throwError("navigateTo page-01 " + error);
+						return throwError(`navigateTo page-01 ${error}`);
 					}),
 					switchMap(() => routingService.navigateTo("page-01-01")), // no params
 					catchError((error: any) => {
-						return throwError("navigateTo page-01-01 " + error);
+						return throwError(`navigateTo page-01-01 ${error}`);
 					}),
 					switchMap(() => routingService.navigateTo("page-02", { requestId: "111" })),
 					catchError((error: any) => {
-						return throwError("navigateTo page-02 " + error);
+						return throwError(`navigateTo page-02 ${error}`);
 					}),
 					switchMap(() => {
 						return routingService.navigateToPrevious();
@@ -906,7 +906,7 @@ describe("Service: StarkRoutingService", () => {
 						]);
 					}),
 					catchError((error: any) => {
-						return throwError("navigateToPrevious " + error);
+						return throwError(`navigateToPrevious ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -922,19 +922,19 @@ describe("Service: StarkRoutingService", () => {
 					.navigateTo("homepage")
 					.pipe(
 						catchError((error: any) => {
-							return throwError("navigateTo homepage " + error);
+							return throwError(`navigateTo homepage ${error}`);
 						}),
 						switchMap(() => routingService.navigateTo("page-03-01", { dummyParameter: "abc" })),
 						catchError((error: any) => {
-							return throwError("navigateTo page-03-01 " + error);
+							return throwError(`navigateTo page-03-01 ${error}`);
 						}),
 						switchMap(() => routingService.navigateTo("page-03-01", { dummyParameter: "def" })), // dynamic transition
 						catchError((error: any) => {
-							return throwError("navigateTo page-03-01 " + error);
+							return throwError(`navigateTo page-03-01 ${error}`);
 						}),
 						switchMap(() => routingService.navigateTo("page-03-01", { dummyParameter: "xyz" })), // dynamic transition
 						catchError((error: any) => {
-							return throwError("navigateTo page-03-01 " + error);
+							return throwError(`navigateTo page-03-01 ${error}`);
 						}),
 						switchMap(() => {
 							return routingService.navigateToPrevious();
@@ -950,7 +950,7 @@ describe("Service: StarkRoutingService", () => {
 							expect((<Spy>$state.go).calls.argsFor(4)).toEqual(["homepage", { ...inheritedParams }, undefined]);
 						}),
 						catchError((error: any) => {
-							return throwError("navigateToPrevious " + error);
+							return throwError(`navigateToPrevious ${error}`);
 						})
 					)
 					.subscribe(() => done(), (error: any) => fail(error));
@@ -969,7 +969,7 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
-						return throwError("navigateTo homepage " + error);
+						return throwError(`navigateTo homepage ${error}`);
 					}),
 					switchMap(() => routingService.reload()),
 					tap((enteredState: StateObject) => {
@@ -978,7 +978,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(enteredState.name).toBe("page-01");
 					}),
 					catchError((error: any) => {
-						return throwError("reload " + error);
+						return throwError(`reload ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -994,12 +994,12 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
-						return throwError("navigateTo homepage " + error);
+						return throwError(`navigateTo homepage ${error}`);
 					}),
 					switchMap(() => routingService.reload()),
 					catchError((error: any) => {
 						expect(error).toBe("Reload has failed");
-						return throwError("reload " + error);
+						return throwError(`reload ${error}`);
 					})
 				)
 				.subscribe(() => (): void => fail("the test should not enter the next block"), () => done());
@@ -1017,11 +1017,11 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01")
 				.pipe(
 					catchError((error: any) => {
-						return throwError("navigateTo page-01 " + error);
+						return throwError(`navigateTo page-01 ${error}`);
 					}),
 					switchMap(() => routingService.navigateTo("page-01")),
 					catchError((error: any) => {
-						return throwError("navigateTo page-01 " + error);
+						return throwError(`navigateTo page-01 ${error}`);
 					}),
 					tap((enteredState: StateObject) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
@@ -1034,7 +1034,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return throwError(errorPrefix + error);
+						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -1049,7 +1049,7 @@ describe("Service: StarkRoutingService", () => {
 				.navigateTo("page-01-01")
 				.pipe(
 					catchError((error: any) => {
-						return throwError("navigateTo page-01-01 " + error);
+						return throwError(`navigateTo page-01-01 ${error}`);
 					}),
 					tap((enteredState: StateObject) => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
@@ -1062,7 +1062,7 @@ describe("Service: StarkRoutingService", () => {
 						expect($state.go).toHaveBeenCalledWith("page-01-01", undefined, undefined);
 					}),
 					catchError((error: any) => {
-						return throwError(errorPrefix + error);
+						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
 				.subscribe(() => done(), (error: any) => fail(error));
@@ -1082,7 +1082,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
 						const message: string = mockLogger.warn.calls.argsFor(0)[0];
 						expect(message).toMatch(/Route transition rejected/);
-						return throwError(errorPrefix + error);
+						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
 				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
@@ -1100,7 +1100,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
 						const message: string = mockLogger.error.calls.argsFor(0)[0];
 						expect(message).toMatch(/Error during route transition/);
-						return throwError(errorPrefix + error);
+						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
 				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
@@ -1118,7 +1118,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.warn).toHaveBeenCalledTimes(1);
 						const message: string = mockLogger.warn.calls.argsFor(0)[0];
 						expect(message).toMatch(/transition aborted/);
-						return throwError(errorPrefix + error);
+						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
 				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
@@ -1136,7 +1136,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
 						const message: string = mockLogger.error.calls.argsFor(0)[0];
 						expect(message).toMatch(/An error occurred with a resolve in the new state/);
-						return throwError(errorPrefix + error);
+						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
 				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
@@ -1150,7 +1150,7 @@ describe("Service: StarkRoutingService", () => {
 						expect(mockLogger.error).toHaveBeenCalledTimes(1);
 						const message: string = mockLogger.error.calls.argsFor(0)[0];
 						expect(message).toMatch(/The target state does NOT exist/);
-						return throwError(errorPrefix + error);
+						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
 				.subscribe(() => fail(nextShouldNotBeCalled), () => done());

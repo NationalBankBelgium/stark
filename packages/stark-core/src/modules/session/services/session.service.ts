@@ -272,12 +272,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	protected configureIdleService(): void {
 		// ensuring that the session timeout values are valid to prevent errors while setting the idle value
 		if (this.appConfig.sessionTimeoutWarningPeriod >= this.appConfig.sessionTimeout) {
-			const errorMsg: string =
-				starkSessionServiceName +
-				": " +
-				STARK_APP_CONFIG +
-				" constant is not valid.\n\n" +
-				"- sessionTimeoutWarningPeriod cannot be equal or higher than sessionTimeout\n";
+			const errorMsg = `${starkSessionServiceName}: ${STARK_APP_CONFIG} constant is not valid.\n\n- sessionTimeoutWarningPeriod cannot be equal or higher than sessionTimeout\n`;
 
 			throw new Error(errorMsg);
 		}

@@ -206,7 +206,7 @@ describe("Service: StarkXSRFService", () => {
 			expect(cookieOptions.length).toBe(3);
 			expect(cookieOptions[0]).toBe(xsrfService.getXsrfCookieName() + "=" + mockXSRFToken);
 			expect(cookieOptions[1]).toBe("path='/'");
-			expect(cookieOptions[2]).toMatch(new RegExp("expires=.*(" + new Date().getFullYear() + ")"));
+			expect(cookieOptions[2]).toMatch(new RegExp(`expires=.*(${new Date().getFullYear()})`));
 		});
 
 		it("should return undefined and log a warning in case there is no XSRF token yet", () => {
@@ -261,7 +261,7 @@ describe("Service: StarkXSRFService", () => {
 			expect(cookieOptions.length).toBe(3);
 			expect(cookieOptions[0]).toBe(xsrfService.getXsrfCookieName() + "=" + mockXSRFToken);
 			expect(cookieOptions[1]).toBe("path='/'");
-			expect(cookieOptions[2]).toMatch(new RegExp("expires=.*(" + new Date().getFullYear() + ")"));
+			expect(cookieOptions[2]).toMatch(new RegExp(`expires=.*(${new Date().getFullYear()})`));
 		});
 	});
 

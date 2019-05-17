@@ -62,7 +62,7 @@ function addMessage(state: Readonly<StarkMessageCollection>, action: Readonly<St
 				newStateAfterAddition.errorMessages = insertMessage(newStateAfterAddition.errorMessages, newMessage); // immutable PUSH
 				break;
 			default:
-				throw new Error("Unknown message type received by reducer: " + newMessage.type);
+				throw new Error(`Unknown message type received by reducer: ${newMessage.type}`);
 		}
 	}
 
@@ -127,7 +127,7 @@ function removeMessages(state: Readonly<StarkMessageCollection>, action: Readonl
 				}
 				break;
 			default:
-				throw new Error("Unknown message type received by reducer: " + messageToRemove.type);
+				throw new Error(`Unknown message type received by reducer: ${messageToRemove.type}`);
 		}
 	}
 

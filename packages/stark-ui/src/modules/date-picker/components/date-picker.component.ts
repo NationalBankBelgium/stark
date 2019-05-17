@@ -214,13 +214,13 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	 * Output that will emit a specific date whenever the selection has changed
 	 */
 	@Output()
-	public dateChange: EventEmitter<Date | undefined> = new EventEmitter<Date | undefined>();
+	public readonly dateChange = new EventEmitter<Date | undefined>();
 
 	/**
 	 * Output that will emit a specific date whenever the input has changed
 	 */
 	@Output()
-	public dateInput: EventEmitter<Date | undefined> = new EventEmitter<Date | undefined>();
+	public readonly dateInput = new EventEmitter<Date | undefined>();
 
 	/**
 	 * Reference to the MatDatepicker embedded in this component

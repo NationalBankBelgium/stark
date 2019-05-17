@@ -160,28 +160,28 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * Callback function to be called when the "New" button is clicked (in case it is shown)
 	 */
 	@Output()
-	public newTriggered = new EventEmitter<void>();
+	public readonly newTriggered = new EventEmitter<void>();
 
 	/**
 	 * Callback function to be called when the "Reset" button is clicked.
 	 * The form model object is passed as parameter to this function.
 	 */
 	@Output()
-	public resetTriggered = new EventEmitter<FormGroup>();
+	public readonly resetTriggered = new EventEmitter<FormGroup>();
 
 	/**
 	 * Callback function to be called when the "Search" button is clicked.
 	 * The form model object is passed as parameter to this function.
 	 */
 	@Output()
-	public searchTriggered = new EventEmitter<FormGroup | undefined>();
+	public readonly searchTriggered = new EventEmitter<FormGroup | undefined>();
 
 	/**
 	 * Callback function to be called when the visibility of the generic form changes.
 	 * A boolean is passed as parameter to indicate whether the generic form is visible or not.
 	 */
 	@Output()
-	public formVisibilityChanged? = new EventEmitter<boolean>();
+	public readonly formVisibilityChanged = new EventEmitter<boolean>();
 
 	/**
 	 * Reference to the child search form component. Such component is looked up by the `searchForm` template reference variable.
@@ -542,9 +542,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 			this.isFormHidden = true;
 
 			// by the moment, the callback is called only when the form is hidden
-			if (this.formVisibilityChanged) {
-				this.formVisibilityChanged.emit(!this.isFormHidden);
-			}
+			this.formVisibilityChanged.emit(!this.isFormHidden);
 		}
 	}
 

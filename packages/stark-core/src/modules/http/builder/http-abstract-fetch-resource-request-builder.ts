@@ -44,13 +44,14 @@ export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends Sta
 	}
 
 	public addFilterByInclude(...fields: string[]): this {
+		const fieldNames = fields.join(",");
 		if (this.request.queryParameters && this.request.queryParameters.has(StarkHttpQueryParameters.FIELDS)) {
 			this.addQueryParameter(
 				StarkHttpQueryParameters.FIELDS,
-				this.request.queryParameters.get(StarkHttpQueryParameters.FIELDS) + "," + fields.join(",")
+				`${this.request.queryParameters.get(StarkHttpQueryParameters.FIELDS)},${fieldNames}`
 			);
 		} else {
-			this.addQueryParameter(StarkHttpQueryParameters.FIELDS, fields.join(","));
+			this.addQueryParameter(StarkHttpQueryParameters.FIELDS, fieldNames);
 		}
 		return this;
 	}
@@ -61,15 +62,14 @@ export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends Sta
 	}
 
 	public addSortBy(...sortItems: StarkSortItem[]): this {
+		const sortValues = sortItems.map((sortBy: StarkSortItem) => sortBy.sortValue).join(",");
 		if (this.request.queryParameters && this.request.queryParameters.has(StarkHttpQueryParameters.SORT)) {
 			this.addQueryParameter(
 				StarkHttpQueryParameters.SORT,
-				this.request.queryParameters.get(StarkHttpQueryParameters.SORT) +
-					"," +
-					sortItems.map((sortBy: StarkSortItem) => sortBy.sortValue).join(",")
+				`${this.request.queryParameters.get(StarkHttpQueryParameters.SORT)},${sortValues}`
 			);
 		} else {
-			this.addQueryParameter(StarkHttpQueryParameters.SORT, sortItems.map((sortBy: StarkSortItem) => sortBy.sortValue).join(","));
+			this.addQueryParameter(StarkHttpQueryParameters.SORT, sortValues);
 		}
 		return this;
 	}

@@ -61,11 +61,11 @@ function isValidBelgianNin(nin: string): boolean {
 	const orderEndIndex = 9;
 	const numberOfDigits = 11;
 
-	const getBirthDate: Function = (value: string): string => {
+	const getBirthDate = (value: string): string => {
 		return value.substring(0, birthdayEndIndex);
 	};
 
-	const getOrder: Function = (value: string): string => {
+	const getOrder = (value: string): string => {
 		return value.substring(birthdayEndIndex, orderEndIndex);
 	};
 

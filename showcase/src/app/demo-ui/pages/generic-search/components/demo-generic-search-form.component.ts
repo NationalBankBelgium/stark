@@ -29,7 +29,7 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 	public _searchCriteria: HeroMovieSearchCriteria = {};
 
 	@Output()
-	public workingCopyChanged: EventEmitter<HeroMovieSearchCriteria> = new EventEmitter();
+	public readonly workingCopyChanged = new EventEmitter<HeroMovieSearchCriteria>();
 
 	public yearOptions: number[] = [];
 	public heroOptions: string[] = [];
