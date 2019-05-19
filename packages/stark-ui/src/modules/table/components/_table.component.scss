@@ -19,16 +19,19 @@
       display: flex;
       justify-content: flex-end;
 
-      &.actions-alt {
-        flex-direction: row-reverse;
-      }
-
       stark-minimap {
         mat-icon {
           width: 18px;
           height: 18px;
         }
       }
+    }
+
+    .stark-table-rows-counter {
+      flex: 1;
+      text-align: center;
+      line-height: 22px;
+      margin-right: 16px;
     }
   }
 

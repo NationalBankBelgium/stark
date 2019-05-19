@@ -38,6 +38,7 @@ import createSpy = jasmine.createSpy;
 			[multiSelect]="multiSelect"
 			[orderProperties]="orderProperties"
 			[tableRowActions]="tableRowActions"
+			[showRowsCounter]="showRowsCounter"
 			[rowClassNameFn]="rowClassNameFn"
 			(rowClicked)="rowClickHandler($event)"
 		>
@@ -54,6 +55,7 @@ class TestHostComponent {
 	public rowsSelectable?: boolean;
 	public multiSelect?: string;
 	public multiSort?: string;
+	public showRowsCounter?: boolean;
 	public tableRowActions?: StarkTableRowActions;
 	public tableFilter?: StarkTableFilter;
 	public orderProperties?: string[];
@@ -151,6 +153,7 @@ describe("TableComponent", () => {
 			expect(component.multiSelect).toBe(hostComponent.multiSelect);
 			expect(component.multiSort).toBe(hostComponent.multiSort);
 			expect(component.orderProperties).toBe(hostComponent.orderProperties);
+			expect(component.showRowsCounter).toBe(false);
 			expect(component.tableRowActions).toBe(<any>hostComponent.tableRowActions);
 		});
 	});
@@ -253,6 +256,25 @@ describe("TableComponent", () => {
 			hostFixture.detectChanges();
 			expect(component.sortData).toHaveBeenCalledTimes(1);
 			expect(component.orderProperties).toEqual(["test"]);
+		});
+
+		it("should display/hide the counter element when 'showRowsCounter' changes", () => {
+			const rowsCounterSelector = ".stark-table-rows-counter";
+			hostComponent.dummyData = [{ name: "dummy-data-1" }, { name: "dummy-data-2" }, { name: "dummy-data-3" }, { name: "dummy-data-4" }];
+			hostFixture.detectChanges();
+
+			let rowsCounterElement = hostFixture.debugElement.nativeElement.querySelector(rowsCounterSelector);
+			expect(rowsCounterElement).toBeNull();
+			expect(component.showRowsCounter).toBe(false);
+
+			hostComponent.showRowsCounter = true;
+			hostFixture.detectChanges();
+			expect(component.showRowsCounter).toBe(true);
+			rowsCounterElement = hostFixture.debugElement.nativeElement.querySelector(rowsCounterSelector);
+			expect(rowsCounterElement).toBeTruthy();
+			const rowsCounterNumberElement = (<HTMLElement>rowsCounterElement).querySelector("span");
+			expect(rowsCounterNumberElement).toBeTruthy();
+			expect((<HTMLElement>rowsCounterNumberElement).innerText).toContain("4");
 		});
 	});
 
