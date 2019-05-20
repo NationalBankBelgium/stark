@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/* tslint:disable:completed-docs no-life-cycle-call */
 import { ActivatedRoute, Data } from "@angular/router";
 import { inject, TestBed } from "@angular/core/testing";
 import { StoreModule } from "@ngrx/store";

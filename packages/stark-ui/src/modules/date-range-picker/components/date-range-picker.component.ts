@@ -114,7 +114,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * Output that will emit a specific date whenever the selection has changed
 	 */
 	@Output()
-	public dateRangeChanged: EventEmitter<StarkDateRangePickerEvent> = new EventEmitter<StarkDateRangePickerEvent>();
+	public readonly dateRangeChanged = new EventEmitter<StarkDateRangePickerEvent>();
 
 	/**
 	 * Reference to the start datepicker embedded in this component

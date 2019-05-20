@@ -67,7 +67,7 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	 * For more info, see : https://angular.io/guide/template-syntax#two-way-binding---
 	 */
 	@Output()
-	public isExpandedChange: EventEmitter<boolean> = new EventEmitter();
+	public readonly isExpandedChange = new EventEmitter<boolean>();
 
 	/**
 	 * String or translation key that will be displayed in the title part of the header.

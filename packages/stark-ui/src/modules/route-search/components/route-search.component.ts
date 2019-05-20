@@ -167,7 +167,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 				this.searchField.setValue("");
 			},
 			(error: any) => {
-				this.logger.warn(componentName + ": navigation failed. Error:" + error);
+				this.logger.warn(`${componentName}: navigation failed. Error:${error}`);
 			}
 		);
 	}

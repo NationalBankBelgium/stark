@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-identical-functions */
+/* tslint:disable:completed-docs no-identical-functions no-life-cycle-call */
 import { Observable, Observer, of, Subject, Subscriber, throwError } from "rxjs";
 import { AbstractStarkSearchComponent, StarkGenericSearchService } from "../classes";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";

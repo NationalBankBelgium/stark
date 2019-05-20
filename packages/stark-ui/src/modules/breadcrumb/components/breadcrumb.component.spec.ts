@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function*/
+/* tslint:disable:completed-docs no-big-function no-life-cycle-call */
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
 import { StarkBreadcrumbComponent } from "./breadcrumb.component";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
@@ -247,8 +247,8 @@ describe("BreadcrumbComponent", () => {
 
 			component.breadcrumbClickHandler(breadcrumbPath);
 
-			expect(<Spy>component.routingService.navigateTo).toHaveBeenCalledTimes(1);
-			expect(<Spy>component.routingService.navigateTo).toHaveBeenCalledWith(breadcrumbPath.state, breadcrumbPath.stateParams);
+			expect(component.routingService.navigateTo).toHaveBeenCalledTimes(1);
+			expect(component.routingService.navigateTo).toHaveBeenCalledWith(breadcrumbPath.state, breadcrumbPath.stateParams);
 		});
 	});
 });

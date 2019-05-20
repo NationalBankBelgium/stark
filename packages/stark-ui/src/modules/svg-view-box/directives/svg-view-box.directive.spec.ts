@@ -64,7 +64,7 @@ describe("SvgViewBoxDirective", () => {
 
 		// overriding the components's template
 		beforeEach(fakeAsync(() => {
-			const newTemplate: string = getTemplate("starkSvgViewBox='" + viewBoxValue + "'");
+			const newTemplate: string = getTemplate(`starkSvgViewBox='${viewBoxValue}'`);
 
 			TestBed.overrideTemplate(TestComponent, newTemplate);
 

@@ -44,7 +44,7 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	 * Output that will emit the selected element to be shown/hidden
 	 */
 	@Output()
-	public showHideItem: EventEmitter<StarkMinimapItemProperties> = new EventEmitter<StarkMinimapItemProperties>();
+	public readonly showHideItem = new EventEmitter<StarkMinimapItemProperties>();
 
 	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
 		super(renderer, elementRef);

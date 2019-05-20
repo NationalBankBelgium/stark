@@ -272,7 +272,7 @@ describe("Service: StarkLoggingService", () => {
 			for (let i = 1; i <= loggingFlushPersistSize; i++) {
 				const message: StarkLogMessage = loggingService.constructLogMessageHelper(
 					StarkLogMessageType.INFO,
-					"Message " + i,
+					`Message ${i}`,
 					dummyObject
 				);
 				mockStarkLogging.messages = [...mockStarkLogging.messages, message];
@@ -286,7 +286,7 @@ describe("Service: StarkLoggingService", () => {
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
 			loggingService.persistLogMessagesHelper();
 			expect(sendRequestSpy).toHaveBeenCalledTimes(1);
-			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(loggingBackend.url + "/" + loggingBackend.loginResource);
+			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(`${loggingBackend.url}/${loggingBackend.loginResource}`);
 			expect(sendRequestSpy.calls.mostRecent().args[1]).toBe(data);
 			expect(sendRequestSpy.calls.mostRecent().args[2]).toBe(true);
 
@@ -302,7 +302,7 @@ describe("Service: StarkLoggingService", () => {
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
 			loggingService.persistLogMessagesHelper();
 			expect(sendRequestSpy).toHaveBeenCalledTimes(1);
-			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(loggingBackend.url + "/" + loggingBackend.loginResource);
+			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(`${loggingBackend.url}/${loggingBackend.loginResource}`);
 			expect(sendRequestSpy.calls.mostRecent().args[1]).toBe(data);
 			expect(sendRequestSpy.calls.mostRecent().args[2]).toBe(true);
 			expect(errorSpy).toHaveBeenCalledTimes(1);

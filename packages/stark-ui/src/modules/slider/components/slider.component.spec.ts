@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs max-inline-declarations no-big-function */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { Component, EventEmitter, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSliderComponent } from "./slider.component";
@@ -38,7 +38,6 @@ class TestHostComponent {
 		this.sliderValues = values;
 	}
 }
-
 
 describe("SliderComponent", () => {
 	let component: StarkSliderComponent;
@@ -83,7 +82,7 @@ describe("SliderComponent", () => {
 
 		spyOn(component.noUiSliderLibrary, "create").and.callThrough();
 		spyOn(component, "updateSliderInstanceValues").and.callThrough();
-		spyOn(<EventEmitter<number[]>>component.changed, "emit").and.callThrough();
+		spyOn(component.changed, "emit").and.callThrough();
 
 		/***
 		 * The stage
@@ -202,8 +201,8 @@ describe("SliderComponent", () => {
 
 			expect(component.values).toEqual(dummyUnencodedValues);
 			expect(component.latestUnencodedValues).toBe(dummyUnencodedValues);
-			expect((<EventEmitter<number[]>>component.changed).emit).toHaveBeenCalledTimes(1);
-			expect((<EventEmitter<number[]>>component.changed).emit).toHaveBeenCalledWith(component.values);
+			expect(component.changed.emit).toHaveBeenCalledTimes(1);
+			expect(component.changed.emit).toHaveBeenCalledWith(component.values);
 		});
 
 		it("should not update the slider instance when the same values are used", () => {
@@ -227,7 +226,7 @@ describe("SliderComponent", () => {
 
 			expect(component.values).toBe(mockValues);
 			expect(component.latestUnencodedValues).toBeUndefined();
-			expect((<EventEmitter<number[]>>component.changed).emit).not.toHaveBeenCalled();
+			expect(component.changed.emit).not.toHaveBeenCalled();
 		});
 	});
 

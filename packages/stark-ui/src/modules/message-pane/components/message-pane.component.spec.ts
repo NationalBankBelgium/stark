@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size no-identical-functions */
+/* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size no-identical-functions no-life-cycle-call */
 
 /* angular imports */
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
@@ -130,7 +130,7 @@ describe("MessagePaneComponent", () => {
 		const messagesTab: HTMLElement = <HTMLElement>totalMessagesButton.query(By.css("b")).nativeElement;
 
 		expect(totalMessagesButton.classes[messageType]).toBe(true);
-		expect(messagesTab.innerText).toEqual("" + numberOfMessages);
+		expect(messagesTab.innerText).toEqual(`${numberOfMessages}`);
 	}
 
 	function assertDisplayedMessages(messageType: StarkMessagePaneNavItem, messages: StarkMessage[]): void {
@@ -144,7 +144,7 @@ describe("MessagePaneComponent", () => {
 			expect(messagesButton).toBeDefined();
 			expect(messagePaneContent).toBeDefined();
 			expect(messagesTab).toBeDefined();
-			expect(messagesTab.nativeElement.innerText).toEqual("" + messages.length);
+			expect(messagesTab.nativeElement.innerText).toEqual(`${messages.length}`);
 
 			// clicking on the button should display the message-pane content
 			messagesButton.nativeElement.click();
@@ -398,10 +398,10 @@ describe("MessagePaneComponent", () => {
 				const totalMessages: number =
 					mockMessages.infoMessages.length + mockMessages.warningMessages.length + mockMessages.errorMessages.length;
 
-				expect(errorMessagesTab.innerText).toEqual("" + mockMessages.errorMessages.length);
-				expect(warningMessagesTab.innerText).toEqual("" + mockMessages.warningMessages.length);
-				expect(infoMessagesTab.innerText).toEqual("" + mockMessages.infoMessages.length);
-				expect(totalMessagesTab.innerText).toEqual("" + totalMessages);
+				expect(errorMessagesTab.innerText).toEqual(`${mockMessages.errorMessages.length}`);
+				expect(warningMessagesTab.innerText).toEqual(`${mockMessages.warningMessages.length}`);
+				expect(infoMessagesTab.innerText).toEqual(`${mockMessages.infoMessages.length}`);
+				expect(totalMessagesTab.innerText).toEqual(`${totalMessages}`);
 			});
 		});
 

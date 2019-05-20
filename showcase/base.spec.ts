@@ -6,10 +6,12 @@ import "core-js/proposals/reflect-metadata";
 // IE polyfills
 
 // See https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+/* tslint:disable:no-unbound-method */
 if (!Element.prototype.matches) {
 	// @ts-ignore
 	Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
 }
+/* tslint:enable:no-unbound-method */
 
 // See: https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Polyfill
 // @ts-ignore: Window.NodeList
@@ -36,5 +38,5 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@ang
 
 TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
-// define global environment variable (used in some places in stark-core)
+// define global environment variable (used in some places in stark-core and stark-ui)
 global["ENV"] = "development";

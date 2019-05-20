@@ -36,6 +36,7 @@ const DUMMY_DATA: object[] = [
 	selector: "showcase-table-regular",
 	templateUrl: "./table-regular.component.html",
 	styleUrls: ["./table-regular.component.scss"],
+	/* tslint:disable-next-line:use-view-encapsulation */
 	encapsulation: ViewEncapsulation.None // Important
 })
 export class TableRegularComponent {

@@ -159,13 +159,13 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Output that will emit a specific column whenever its filter value has changed
 	 */
 	@Output()
-	public filterChanged: EventEmitter<StarkColumnFilterChangedOutput> = new EventEmitter<StarkColumnFilterChangedOutput>();
+	public readonly filterChanged = new EventEmitter<StarkColumnFilterChangedOutput>();
 
 	/**
 	 * Output that will emit a specific column whenever its sorting direction has changed
 	 */
 	@Output()
-	public sortChanged: EventEmitter<StarkColumnSortChangedOutput> = new EventEmitter<StarkColumnSortChangedOutput>();
+	public readonly sortChanged = new EventEmitter<StarkColumnSortChangedOutput>();
 
 	/**
 	 * Reference to the MatColumnDef embedded in this component

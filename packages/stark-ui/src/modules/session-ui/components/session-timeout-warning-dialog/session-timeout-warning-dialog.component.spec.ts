@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/* tslint:disable:completed-docs no-life-cycle-call */
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";

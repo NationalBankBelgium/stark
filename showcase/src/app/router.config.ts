@@ -4,12 +4,7 @@ export function logRegisteredStates(registeredStates: StateDeclaration[]): void 
 	let message = "=============  Registered Ui-Router states: ==============\n";
 
 	for (const state of registeredStates) {
-		message += "State : " + state.name;
-		message += " [";
-		message += "parent: " + state.parent;
-		message += ", url: " + state.url;
-		message += ", abstract: " + state.abstract;
-		message += "]\n";
+		message += `State : ${state.name} [parent: ${state.parent}, url: ${state.url}, abstract: ${state.abstract}]\n`;
 	}
 	message += "=======================================================";
 	console.log(message);

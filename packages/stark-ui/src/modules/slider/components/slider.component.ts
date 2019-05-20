@@ -67,7 +67,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 * Event to be emitted when the slider's value(s) change.
 	 */
 	@Output()
-	public changed?: EventEmitter<number[]> = new EventEmitter();
+	public readonly changed = new EventEmitter<number[]>();
 
 	/**
 	 * Stores the latest value, to be able to see if values have been changed
@@ -162,9 +162,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 				this.values = unencodedValues;
 				this.latestUnencodedValues = unencodedValues;
 
-				if (this.changed) {
-					this.changed.emit(this.values);
-				}
+				this.changed.emit(this.values);
 			}
 		});
 	}

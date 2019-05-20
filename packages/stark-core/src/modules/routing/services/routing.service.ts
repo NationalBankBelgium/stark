@@ -296,13 +296,9 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				const rejection: Rejection = transition.error();
 				const rejectionString: string = rejection.toString();
 				let message: string = starkRoutingServiceName + ": ";
-				const complementaryInfo: string =
-					targetState.name() +
-					'" navigated from "' +
-					fromState.name +
-					'"' +
-					". Parameters that were passed: " +
-					JSON.stringify(targetState.params());
+				const complementaryInfo = `"${targetState.name()}" navigated from "${
+					fromState.name
+				}". Parameters that were passed: ${JSON.stringify(targetState.params())}`;
 
 				if (this.knownRejectionCausesRegex.test(rejectionString)) {
 					const rejectionAction: Action = new StarkNavigateRejection(

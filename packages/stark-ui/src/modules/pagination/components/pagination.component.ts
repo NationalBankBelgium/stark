@@ -18,7 +18,7 @@ import { MatPaginator, MatPaginatorIntl, PageEvent } from "@angular/material/pag
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginationConfig } from "./pagination-config.intf";
 import { StarkPaginateEvent } from "./paginate-event.intf";
-import  isEqual  from "lodash-es/isEqual";
+import isEqual from "lodash-es/isEqual";
 
 /**
  * Name of the component
@@ -72,7 +72,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	 * Output event emitter that will emit the paginate event when the pagination changed.
 	 */
 	@Output()
-	public paginated: EventEmitter<StarkPaginateEvent> = new EventEmitter<StarkPaginateEvent>();
+	public readonly paginated = new EventEmitter<StarkPaginateEvent>();
 
 	public get paginationInput(): number {
 		return this._paginationInput;

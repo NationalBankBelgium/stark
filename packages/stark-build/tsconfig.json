@@ -33,6 +33,7 @@
     "removeComments": false,
     "sourceMap": true,
     "strict": true,
+    "strictBindCallApply": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
