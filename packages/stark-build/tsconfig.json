@@ -24,7 +24,7 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noImplicitThis": false,
+    "noImplicitThis": true,
     "noImplicitUseStrict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -50,11 +50,6 @@
     "paths": {}
   },
   "exclude": ["node_modules", "dist", "packages/stark-build/config-stark"],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true,
-    "useCache": false
-  },
   "formatCodeOptions": {
     "indentSize": 2,
     "tabSize": 4,
