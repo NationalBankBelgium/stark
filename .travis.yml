@@ -40,7 +40,7 @@ branches:
   only:
     - master
     - /^greenkeeper/.*$/
-    - /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+)?$/
+    - /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+|-rc\.\d+)?$/
 
 cache:
   directories:
