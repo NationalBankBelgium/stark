@@ -22,6 +22,7 @@ import {
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatColumnDef, MatTable, MatTableDataSource } from "@angular/material/table";
 import { SelectionChange, SelectionModel } from "@angular/cdk/collections";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { Subscription } from "rxjs";
 
@@ -202,6 +203,25 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	@Input()
 	public paginationConfig: StarkPaginationConfig = {};
+
+	/**
+	 * Determine if the item counter is enabled. Shows how many items are in the data object array.
+	 * Default: false
+	 */
+	@Input()
+	public get showRowsCounter(): boolean {
+		return this._showRowsCounter;
+	}
+
+	public set showRowsCounter(showRowsCounter: boolean) {
+		this._showRowsCounter = coerceBooleanProperty(showRowsCounter);
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _showRowsCounter = false;
 
 	/**
 	 * {@link StarkActionBarConfig} object for the action bar component to be displayed in all the rows

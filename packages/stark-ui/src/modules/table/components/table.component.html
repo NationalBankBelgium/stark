@@ -1,9 +1,70 @@
+<!-- the projected detail content should be put in an ng-template so that it can be rendered multiple times in this template -->
+<!-- solution taken from https://github.com/angular/angular/issues/22972#issuecomment-407358396 -->
+<ng-template #tableActions>
+	<!-- Count of element in the table -->
+	<div *ngIf="showRowsCounter && dataSource" class="stark-table-rows-counter">
+		<span>{{ dataSource.filteredData.length }} </span>
+		<span translate>STARK.TABLE.ITEMS_FOUND</span>
+	</div>
+
+	<stark-pagination htmlSuffixId="{{ htmlId }}-pagination" [paginationConfig]="paginationConfig" mode="compact"></stark-pagination>
+
+	<button *ngIf="isMultiSortEnabled" (click)="openMultiSortDialog()" mat-icon-button>
+		<mat-icon
+			class="stark-small-icon"
+			[matTooltip]="'STARK.TABLE.MULTI_COLUMN_SORTING' | translate"
+			starkSvgViewBox
+			svgIcon="sort"
+		></mat-icon>
+	</button>
+
+	<ng-container *ngIf="filter.globalFilterPresent">
+		<button [matMenuTriggerFor]="globalFilter" mat-icon-button>
+			<mat-icon [matTooltip]="'STARK.TABLE.FILTER' | translate" class="stark-small-icon" starkSvgViewBox svgIcon="filter"></mat-icon>
+		</button>
+		<mat-menu class="mat-table-filter" #globalFilter="matMenu" xPosition="before" [overlapTrigger]="false">
+			<div>
+				<mat-form-field (click)="$event.stopPropagation()" (keyup)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+					<input
+						matInput
+						id="{{ htmlId + '-' + 'table-filter' }}"
+						[placeholder]="'STARK.TABLE.GLOBAL_FILTER' | translate"
+						name="global-filter"
+						[formControl]="_globalFilterFormCtrl"
+					/>
+				</mat-form-field>
+				<button mat-icon-button (click)="onClearFilter()">
+					<mat-icon
+						class="stark-small-icon"
+						starkSvgViewBox
+						svgIcon="close"
+						[matTooltip]="'STARK.TABLE.CLEAR_FILTER' | translate"
+					></mat-icon>
+				</button>
+			</div>
+		</mat-menu>
+	</ng-container>
+
+	<stark-minimap
+		[matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate"
+		*ngIf="minimap !== false"
+		[mode]="minimap === 'compact' ? 'compact' : undefined"
+		[items]="_minimapItemProperties"
+		[visibleItems]="_visibleMinimapItems"
+		(showHideItem)="toggleColumnVisibility($event)"
+	></stark-minimap>
+</ng-template>
+
 <div class="header">
 	<div class="transcluded">
 		<ng-content select="header"></ng-content>
 	</div>
 
-	<div class="actions" [ngClass]="{ 'actions-alt': customTableActionsType === 'alt' }">
+	<div class="actions">
+		<ng-container *ngIf="customTableActionsType === 'alt'">
+			<ng-container *ngTemplateOutlet="tableActions"></ng-container>
+		</ng-container>
+
 		<stark-action-bar
 			[actionBarConfig]="customTableRegularActions"
 			[alternativeActions]="customTableAltActions"
@@ -11,61 +72,9 @@
 			mode="compact"
 		></stark-action-bar>
 
-		<stark-pagination htmlSuffixId="{{ htmlId }}-pagination" [paginationConfig]="paginationConfig" mode="compact"></stark-pagination>
-
-		<button *ngIf="isMultiSortEnabled" (click)="openMultiSortDialog()" mat-icon-button>
-			<mat-icon
-				class="stark-small-icon"
-				[matTooltip]="'STARK.TABLE.MULTI_COLUMN_SORTING' | translate"
-				starkSvgViewBox
-				svgIcon="sort"
-			></mat-icon>
-		</button>
-
-		<ng-container *ngIf="filter.globalFilterPresent">
-			<button [matMenuTriggerFor]="globalFilter" mat-icon-button>
-				<mat-icon
-					[matTooltip]="'STARK.TABLE.FILTER' | translate"
-					class="stark-small-icon"
-					starkSvgViewBox
-					svgIcon="filter"
-				></mat-icon>
-			</button>
-			<mat-menu class="mat-table-filter" #globalFilter="matMenu" xPosition="before" [overlapTrigger]="false">
-				<div>
-					<mat-form-field
-						(click)="$event.stopPropagation()"
-						(keyup)="$event.stopPropagation()"
-						(keydown)="$event.stopPropagation()"
-					>
-						<input
-							matInput
-							id="{{ htmlId + '-' + 'table-filter' }}"
-							[placeholder]="'STARK.TABLE.GLOBAL_FILTER' | translate"
-							name="global-filter"
-							[formControl]="_globalFilterFormCtrl"
-						/>
-					</mat-form-field>
-					<button mat-icon-button (click)="onClearFilter()">
-						<mat-icon
-							class="stark-small-icon"
-							starkSvgViewBox
-							svgIcon="close"
-							[matTooltip]="'STARK.TABLE.CLEAR_FILTER' | translate"
-						></mat-icon>
-					</button>
-				</div>
-			</mat-menu>
+		<ng-container *ngIf="customTableActionsType !== 'alt'">
+			<ng-container *ngTemplateOutlet="tableActions"></ng-container>
 		</ng-container>
-
-		<stark-minimap
-			[matTooltip]="'STARK.TABLE.TOGGLE_COLUMNS' | translate"
-			*ngIf="minimap !== false"
-			[mode]="minimap === 'compact' ? 'compact' : undefined"
-			[items]="_minimapItemProperties"
-			[visibleItems]="_visibleMinimapItems"
-			(showHideItem)="toggleColumnVisibility($event)"
-		></stark-minimap>
 	</div>
 </div>
 

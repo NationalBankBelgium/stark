@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import {StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter} from "@nationalbankbelgium/stark-ui";
 
 const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
@@ -22,6 +22,9 @@ const DUMMY_DATA: object[] = [
 })
 export class TableWithFixedHeaderComponent {
 	public data: object[] = DUMMY_DATA;
+	public paginationConfig: StarkPaginationConfig = {
+		itemsPerPage: 10
+	};
 
 	public columns: StarkTableColumnProperties[] = [
 		{ name: "id", label: "Id" },
