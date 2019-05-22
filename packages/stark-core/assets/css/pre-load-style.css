@@ -57,10 +57,10 @@
 .stark-preload header i {
   display: block;
   margin: auto;
-  
+
   width: 200px;
   height: 60px;
-  
+
   background-image: url(/assets/stark-core/logo/light/stark_logo_light.svg);
   background-size: contain;
   background-position: center;

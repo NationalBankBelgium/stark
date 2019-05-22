@@ -170,7 +170,7 @@
           },
           "configurations": {
             "production": {
-              "devServerTarget": "showcase:serve:production"              
+              "devServerTarget": "showcase:serve:production"
             }
           }
         },

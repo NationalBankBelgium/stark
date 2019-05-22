@@ -1,5 +1,11 @@
 {
-  "extends": ["tslint:latest", "tslint-sonarts", "codelyzer", "tslint-config-prettier", "../stark-build/config/tslint.json"],
+  "extends": [
+    "tslint:latest",
+    "tslint-sonarts",
+    "@nationalbankbelgium/code-style/codelyzer/4.5.x",
+    "@nationalbankbelgium/code-style/tslint/4.3.x",
+    "tslint-config-prettier"
+  ],
   "rules": {
     "completed-docs": [
       true,

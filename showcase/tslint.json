@@ -2,9 +2,9 @@
   "extends": [
     "tslint:latest",
     "tslint-sonarts",
-    "codelyzer",
-    "tslint-config-prettier",
-    "./node_modules/@nationalbankbelgium/stark-build/config/tslint.json"
+    "@nationalbankbelgium/code-style/codelyzer/4.5.x",
+    "@nationalbankbelgium/code-style/tslint/4.3.x",
+    "tslint-config-prettier"
   ],
   "rules": {
     "component-selector": false

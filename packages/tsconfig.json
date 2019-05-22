@@ -1,6 +1,6 @@
 {
   // this config is only used by build.sh
-  "extends": "./stark-build/tsconfig.json",
+  "extends": "@nationalbankbelgium/code-style/tsconfig/3.2.x/ng7",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
