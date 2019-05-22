@@ -99,6 +99,11 @@
 			</td>
 		</ng-container>
 
+		<ng-container matColumnDef="rowIndex">
+			<th mat-header-cell *matHeaderCellDef></th>
+			<td mat-cell *matCellDef="let row">{{ getRowIndex(row) }}</td>
+		</ng-container>
+
 		<stark-table-column
 			*ngFor="let col of columnProperties; trackBy: trackColumnFn"
 			[name]="col.name"
