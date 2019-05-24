@@ -1,6 +1,6 @@
 /* tslint:disable:no-null-keyword */
 import {
-	AfterViewInit,
+	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	EventEmitter,
@@ -15,13 +15,23 @@ import {
 	ViewChild,
 	ViewEncapsulation
 } from "@angular/core";
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, NgControl, ValidatorFn, Validators } from "@angular/forms";
+import {
+	AbstractControl,
+	ControlValueAccessor,
+	FormControl,
+	FormGroup,
+	NG_VALUE_ACCESSOR,
+	NgControl,
+	ValidatorFn,
+	Validators
+} from "@angular/forms";
 import { Subscription } from "rxjs";
-import noop from "lodash-es/noop";
+import { distinctUntilChanged } from "rxjs/operators";
 import get from "lodash-es/get";
+import isEqual from "lodash-es/isEqual";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker";
+import { StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker/components";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 
 /**
@@ -48,51 +58,7 @@ const componentName = "stark-date-range-picker";
 		}
 	]
 })
-export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
-	implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
-	/**
-	 * ControlValueAccessor listener
-	 * @ignore
-	 */
-	private _onTouched: () => void = noop;
-
-	/**
-	 * ControlValueAccessor listener
-	 * @ignore
-	 */
-	private _onChange: (_dateRange: StarkDateRangePickerEvent) => void = noop;
-
-	/**
-	 * Subscriptions to be removed at end of component lifecycle
-	 * @ignore
-	 */
-	private subs: Subscription[] = [];
-
-	/*--- VIEW CHILDREN ---*/
-	/**
-	 * Reference to the start datepicker embedded in this component
-	 */
-	@ViewChild("startPicker")
-	public startPicker!: StarkDatePickerComponent;
-
-	/**
-	 * Reference to the end datepicker embedded in this component
-	 */
-	@ViewChild("endPicker")
-	public endPicker!: StarkDatePickerComponent;
-
-	/*--- START-DATE CONFIGURATIONS ---*/
-
-	/**
-	 * @ignore
-	 * @internal
-	 */
-	private _startBeforeEndValidator: ValidatorFn = ({ value }) => {
-		return value instanceof Date && this.endDate instanceof Date && value.getTime() > this.endDate.getTime()
-			? { startBeforeEnd: true }
-			: null;
-	};
-
+export class StarkDateRangePickerComponent extends AbstractStarkUiComponent implements ControlValueAccessor, OnInit, OnDestroy {
 	/**
 	 * Source Date to be bound to the start datepicker model
 	 */
@@ -124,7 +90,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	/**
 	 * @ignore
 	 */
-	private _startDate = new FormControl();
+	private _startDate!: FormControl; // will be defined by '_setupFormControls()' called in the constructor
 
 	/**
 	 * Label to be displayed in the end datepicker
@@ -144,18 +110,6 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	@Input()
 	public startMaxDate?: Date;
 
-	/*--- END-DATE CONFIGURATIONS ---*/
-
-	/**
-	 * @ignore
-	 * @internal
-	 */
-	private _endAfterStartValidator: ValidatorFn = ({ value }) => {
-		return value instanceof Date && this.startDate instanceof Date && value.getTime() < this.startDate.getTime()
-			? { endAfterStart: true }
-			: null;
-	};
-
 	/**
 	 * Source Date to be bound to the end datepicker model
 	 */
@@ -165,7 +119,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	}
 
 	public set endDate(value: Date | undefined) {
-		this._endDate.setValue(value || null);
+		this._endDate.setValue(value);
 	}
 
 	/**
@@ -187,7 +141,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	/**
 	 * @ignore
 	 */
-	private _endDate = new FormControl();
+	private _endDate!: FormControl; // will be defined by '_setupFormControls()' called in the constructor
 
 	/**
 	 * Label to be displayed in the end datepicker
@@ -199,15 +153,22 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	 * Minimum date of the end date picker
 	 */
 	@Input()
-	public endMinDate?: Date;
+	public set endMinDate(date: Date | undefined) {
+		this._endMinDate = date;
+	}
+
+	public get endMinDate(): Date | undefined {
+		// use the startDate when defined to provide better user experience :)
+		return this.startDate || this._endMinDate;
+	}
+
+	private _endMinDate?: Date;
 
 	/**
 	 * Maximum date of the end date picker
 	 */
 	@Input()
 	public endMaxDate?: Date;
-
-	/*--- SHARED CONFIGURATIONS ---*/
 
 	/**
 	 * Input to manage both start date and end date.
@@ -216,26 +177,21 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	public set rangeFormGroup(val: FormGroup) {
 		const { startDate, endDate } = val.controls;
 		if (!(startDate instanceof FormControl && endDate instanceof FormControl)) {
-			this.logger.error(`[${componentName}]: "formGroup" requires a FormControl for startDate and endDate`);
+			this.logger.error(`[${componentName}]: "formGroup" requires a FormControl for startDate and another one for endDate`);
 			return;
 		}
 
 		this._formGroup = val;
-		// overwrite internal formControls
+		// overwrite internal formControls and setup again the validators, subscriptions, etc.
 		this._startDate = startDate;
 		this._endDate = endDate;
+		this._setupFormControls();
 	}
 
 	/**
 	 * @ignore
 	 */
 	private _formGroup?: FormGroup;
-
-	/**
-	 * Output that will emit a specific date whenever the selection has changed
-	 */
-	@Output()
-	public readonly dateRangeChanged = new EventEmitter<StarkDateRangePickerEvent>();
 
 	/**
 	 * Filter function or a string
@@ -254,7 +210,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	public dateMask?: StarkDatePickerMaskConfig;
 
 	/**
-	 * Whether the datepickers are disabled
+	 * Whether the date pickers are disabled
 	 */
 	@Input()
 	public set disabled(val: boolean) {
@@ -270,17 +226,26 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 			`);
 		}
 
+		// enable/disable the controls without emitting a change event since the values did not change (to avoid unnecessary extra calls!)
 		if (val) {
-			this.startDateFormControl.disable();
-			this.endDateFormControl.disable();
+			if (this.startDateFormControl) {
+				this.startDateFormControl.disable({ emitEvent: false });
+			}
+			if (this.endDateFormControl) {
+				this.endDateFormControl.disable({ emitEvent: false });
+			}
 		} else {
-			this.startDateFormControl.enable();
-			this.endDateFormControl.enable();
+			if (this.startDateFormControl) {
+				this.startDateFormControl.enable({ emitEvent: false });
+			}
+			if (this.endDateFormControl) {
+				this.endDateFormControl.enable({ emitEvent: false });
+			}
 		}
 	}
 
 	/**
-	 * Whether the datepickers are required
+	 * Whether the date pickers are required
 	 */
 	@Input()
 	public required = false;
@@ -298,34 +263,122 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	public rangePickerName = "";
 
 	/**
+	 * Output that will emit a specific date range whenever the selection has changed
+	 */
+	@Output()
+	public readonly dateRangeChanged = new EventEmitter<StarkDateRangePickerEvent>();
+
+	/**
+	 * Reference to the start datepicker embedded in this component
+	 */
+	@ViewChild("startPicker")
+	public startPicker!: StarkDatePickerComponent;
+
+	/**
+	 * Reference to the end datepicker embedded in this component
+	 */
+	@ViewChild("endPicker")
+	public endPicker!: StarkDatePickerComponent;
+
+	/**
+	 * @ignore
+	 * @internal
+	 * The registered callback function called when a blur event occurs on the input element.
+	 */
+	private _onTouched: () => void = () => {
+		/*noop*/
+	};
+
+	/**
+	 * @ignore
+	 * @internal
+	 * The registered callback function called when an input event occurs on the input element.
+	 */
+	private _onChange: (_dateRange: StarkDateRangePickerEvent) => void = (_: any) => {
+		/*noop*/
+	};
+
+	/**
+	 * Subscriptions to be removed at end of component lifecycle
+	 * @ignore
+	 */
+	private subs: Subscription[] = [];
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	public currentRange?: StarkDateRangePickerEvent;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _startBeforeEndValidator: ValidatorFn = ({ value }) => {
+		return value instanceof Date && this.endDate instanceof Date && value.getTime() > this.endDate.getTime()
+			? { startBeforeEnd: true }
+			: null;
+	};
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _endAfterStartValidator: ValidatorFn = ({ value }) => {
+		return value instanceof Date && this.startDate instanceof Date && value.getTime() < this.startDate.getTime()
+			? { endAfterStart: true }
+			: null;
+	};
+
+	/**
+	 * @ignore
+	 * @internal
+	 * Validator that will perform the 'required' validation only if the 'required' input is enabled
+	 * IMPORTANT: this should be always added to the internal form controls for the start and end date pickers
+	 */
+	private _requiredValidator: ValidatorFn = (control: AbstractControl) => {
+		if (this.required) {
+			return Validators.required(control);
+		} else {
+			return null;
+		}
+	};
+
+	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
 	 * @param injector - The Injector of the application
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param cdRef - Reference to the change detector attached to this component
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		private injector: Injector,
 		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		protected elementRef: ElementRef,
+		protected cdRef: ChangeDetectorRef
 	) {
 		super(renderer, elementRef);
-	}
-
-	/**
-	 * Angular lifecycle method
-	 */
-	public ngOnInit(): void {
-		this.logger.debug(componentName + ": component initialized");
+		// IMPORTANT: the form controls should be initialized here because they should be available before the developer passes his own form controls
 		this._setupFormControls();
 	}
 
 	/**
 	 * Angular lifecycle method
 	 */
-	public ngAfterViewInit(): void {
+	public ngOnInit(): void {
 		this._setupNgControl();
+		this.logger.debug(componentName + ": component initialized");
+	}
+
+	/**
+	 * Angular lifecycle method
+	 */
+	public ngOnDestroy(): void {
+		for (const subscription of this.subs) {
+			subscription.unsubscribe();
+		}
 	}
 
 	/**
@@ -333,21 +386,37 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	 * @internal
 	 */
 	private _setupFormControls(): void {
-		// Merge the original validators with ones from the start/end date form controls
-		this.startDateFormControl.setValidators(Validators.compose([this.startDateFormControl.validator, this._startBeforeEndValidator]));
-		this.endDateFormControl.setValidators(Validators.compose([this.endDateFormControl.validator, this._endAfterStartValidator]));
+		// merge the original validators with ones from the start/end date form controls if already available
+		// or create the form controls with such validators otherwise
+		// IMPORTANT: the '_requiredValidator' should ALWAYS be added. Internally it checks whether the control is actually required or not.
+		// By doing this, the formControl will be marked as 'required' since the beginning (if it is marked as required).
+		// This prevents the 'ExpressionChangedAfterItHasBeenCheckedError' in the template when the developer uses an NgModel and retrieves the internal errors
+		// However, the error will NOT prevent the error from happening when FormControl is used (via the 'rangeFormGroup' input).
+		if (this.startDateFormControl) {
+			this.startDateFormControl.setValidators(
+				Validators.compose([this.startDateFormControl.validator, this._requiredValidator, this._startBeforeEndValidator])
+			);
+		} else {
+			this._startDate = new FormControl(undefined, [this._requiredValidator, this._startBeforeEndValidator]);
+		}
+		if (this.endDateFormControl) {
+			this.endDateFormControl.setValidators(
+				Validators.compose([this.endDateFormControl.validator, this._requiredValidator, this._endAfterStartValidator])
+			);
+		} else {
+			this._endDate = new FormControl(undefined, [this._requiredValidator, this._endAfterStartValidator]);
+		}
 
 		for (const subscription of this.subs) {
 			subscription.unsubscribe();
 		}
+
 		this.subs.push(
-			this.startDateFormControl.valueChanges.subscribe(() => {
-				this.endDateFormControl.updateValueAndValidity({ emitEvent: false, onlySelf: true });
-				this.onDateChanged();
+			this.startDateFormControl.valueChanges.pipe(distinctUntilChanged()).subscribe((_value: Date) => {
+				this.onDateChanged("start");
 			}),
-			this.endDateFormControl.valueChanges.subscribe(() => {
-				this.startDateFormControl.updateValueAndValidity({ emitEvent: false, onlySelf: true });
-				this.onDateChanged();
+			this.endDateFormControl.valueChanges.pipe(distinctUntilChanged()).subscribe((_value: Date) => {
+				this.onDateChanged("end");
 			})
 		);
 	}
@@ -374,51 +443,71 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent
 	}
 
 	/**
-	 * Angular lifecycle method
+	 * Handle the date changed on the start and end datepicker
+	 * @param dateOrigin - Whether the change was triggered by the start or end date picker
 	 */
-	public ngOnDestroy(): void {
-		for (const subscription of this.subs) {
-			subscription.unsubscribe();
+	public onDateChanged(dateOrigin: "start" | "end"): void {
+		this._onTouched();
+
+		if (this.startDate && this.endDate && this.endDate.getTime() < this.startDate.getTime()) {
+			// clear the value of one of the date pickers and make the change to affect ONLY that control
+			// this is because at the end both controls will be validated once the final value is emitted (see the 'else' block below)
+			if (dateOrigin === "start") {
+				this.endDateFormControl.setValue(undefined, { onlySelf: true });
+			} else {
+				this.startDateFormControl.setValue(undefined, { onlySelf: true });
+			}
+			this.cdRef.detectChanges(); // to force a refresh of the validation errors
+		} else {
+			const dateRange: StarkDateRangePickerEvent = { startDate: this.startDate, endDate: this.endDate };
+
+			if (!isEqual(dateRange, this.currentRange)) {
+				// calling 'updateValueAndValidity()' manually on both form controls without emitting the valueChanges event (to avoid unnecessary extra calls in the end user's code!)
+				this.startDateFormControl.updateValueAndValidity({ emitEvent: false });
+				this.endDateFormControl.updateValueAndValidity({ emitEvent: false });
+
+				this.currentRange = dateRange;
+				this._onChange(dateRange);
+				this.dateRangeChanged.emit(dateRange);
+			}
 		}
 	}
 
 	/**
-	 * Handle the date changed on the start and end datepicker
-	 */
-	public onDateChanged(): void {
-		this._onTouched();
-
-		const dateRange: StarkDateRangePickerEvent = { startDate: this.startDate, endDate: this.endDate };
-
-		this._onChange(dateRange);
-		this.dateRangeChanged.emit(dateRange);
-	}
-
-	/*--- Control Value Accessor methods---*/
-
-	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Registers a function to be called when the control value changes.
 	 * @ignore
+	 * @internal
 	 */
 	public registerOnChange(fn: (_dateRange: StarkDateRangePickerEvent) => void): void {
 		this._onChange = fn;
 	}
 
 	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Registers a function to be called when the control is touched.
 	 * @ignore
+	 * @internal
 	 */
 	public registerOnTouched(fn: () => void): void {
 		this._onTouched = fn;
 	}
 
 	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Sets the "disabled" property on the input element.
 	 * @ignore
+	 * @internal
 	 */
 	public setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
 	}
 
 	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Sets the "value" property on the input element.
 	 * @ignore
+	 * @internal
 	 */
 	public writeValue(dateRange: StarkDateRangePickerEvent): void {
 		dateRange = dateRange || {};

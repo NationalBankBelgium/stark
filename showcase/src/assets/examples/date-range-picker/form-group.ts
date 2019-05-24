@@ -4,7 +4,6 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { Subscription } from "rxjs";
-import map from "lodash-es/map";
 
 @Component({
 	selector: "demo-date-range-picker",
@@ -16,9 +15,10 @@ export class DemoDateRangePickerComponent implements OnDestroy {
 		return value instanceof Date && value.getMonth() === 1 ? { inFebruary: true } : null; // date counts months from 0
 	}
 
+	// IMPORTANT: if the DateRangePicker should be required, then add the 'required' validator to both form controls too!
 	public dateRangeFormGroup = new FormGroup({
-		startDate: new FormControl(null, Validators.compose([DemoDateRangePickerComponent.noFebruaryValidator])),
-		endDate: new FormControl(null, Validators.compose([DemoDateRangePickerComponent.noFebruaryValidator]))
+		startDate: new FormControl(undefined, Validators.compose([Validators.required, DemoDateRangePickerComponent.noFebruaryValidator])),
+		endDate: new FormControl(undefined, Validators.compose([Validators.required, DemoDateRangePickerComponent.noFebruaryValidator]))
 	});
 
 	/**
@@ -26,41 +26,63 @@ export class DemoDateRangePickerComponent implements OnDestroy {
 	 */
 	private _subs: Subscription[] = [];
 
-	public getErrorMessages(control: AbstractControl): string[] {
-		return map(
-			control.errors || [],
-			(_value: any, key: string): string => {
-				switch (key) {
-					case "required":
-						return "Date is required";
-					case "startBeforeEnd":
-						return "Start date should be before end date";
-					case "endAfterStart":
-						return "End date should be after start date";
-					case "inFebruary":
-						return "Date should not be in February";
-					default:
-						return "";
-				}
-			}
-		);
-	}
-
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
 		this._subs.push(this.dateRangeFormGroup.valueChanges.subscribe((v: any) => this.logger.debug("formGroup:", v)));
 	}
 
-	public onDateRangeFormGroupDisableCheckboxChange(event: MatCheckboxChange): void {
-		if (event.checked) {
-			this.dateRangeFormGroup.disable();
-		} else {
-			this.dateRangeFormGroup.enable();
+	public ngOnDestroy(): void {
+		for (const subscription of this._subs) {
+			subscription.unsubscribe();
 		}
 	}
 
-	public ngOnDestroy(): void {
-		for (const subscription of this._subs) {
-			subscription.unsubscribe()
+	public getErrorMessages(control?: AbstractControl): string[] {
+		const errors: string[] = [];
+
+		if (control && control.errors) {
+			for (const key of Object.keys(control.errors)) {
+				switch (key) {
+					case "required":
+						errors.push("Date is required");
+						break;
+					case "matDatepickerMin":
+						errors.push("Date should be after today");
+						break;
+					case "matDatepickerMax":
+						errors.push("Date should be in less than 1 month");
+						break;
+					case "matDatepickerFilter":
+						errors.push("Date should be a weekday");
+						break;
+					case "startBeforeEnd":
+						errors.push("Start date should be before end date");
+						break;
+					case "endAfterStart":
+						errors.push("End date should be after start date");
+						break;
+					case "inFebruary":
+						errors.push("Date should not be in February");
+						break;
+					default:
+						errors.push(key);
+						break;
+				}
+			}
 		}
+
+		return errors;
+	}
+
+	public onDateRangeFormGroupDisableCheckboxChange(event: MatCheckboxChange): void {
+		// enable/disable the control without emitting a change event since the value did not change (to avoid unnecessary extra calls!)
+		if (event.checked) {
+			this.dateRangeFormGroup.disable({ emitEvent: false });
+		} else {
+			this.dateRangeFormGroup.enable({ emitEvent: false });
+		}
+	}
+
+	public trackItemFn(item: string): string {
+		return item;
 	}
 }

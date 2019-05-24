@@ -2,7 +2,6 @@
 import { Component, Inject, OnDestroy } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractControl } from "@angular/forms";
-import map from "lodash-es/map";
 
 const MONTH_IN_MILLI = 2592000000;
 
@@ -17,40 +16,47 @@ export class DemoDateRangePickerComponent implements OnDestroy {
 	public dateRangeModel = { startDate: this.today, endDate: this.inOneMonth };
 	public modelDisabled = false;
 
-	public getErrorMessages: (control: AbstractControl) => string[] = () => [];
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
-	private _activateGetErrorMessages(): void {
-		this.getErrorMessages = (control: AbstractControl): string[] =>
-			map(
-				control.errors || {},
-				(_value: any, key: string): string => {
-					switch (key) {
-						case "required":
-							return "Date is required";
-						case "matDatepickerMin":
-							return "Date should be after today";
-						case "matDatepickerMax":
-							return "Date should be in less than 1 month";
-						case "matDatepickerFilter":
-							return "Date should be a weekday";
-						case "startBeforeEnd":
-							return "Start date should be before end date";
-						case "endAfterStart":
-							return "End date should be after start date";
-						default:
-							return "";
-					}
+	public getErrorMessages(control?: AbstractControl): string[] {
+		const errors: string[] = [];
+
+		if (control && control.errors) {
+			for (const key of Object.keys(control.errors)) {
+				switch (key) {
+					case "required":
+						errors.push("Date is required");
+						break;
+					case "matDatepickerMin":
+						errors.push("Date should be after today");
+						break;
+					case "matDatepickerMax":
+						errors.push("Date should be in less than 1 month");
+						break;
+					case "matDatepickerFilter":
+						errors.push("Date should be a weekday");
+						break;
+					case "startBeforeEnd":
+						errors.push("Start date should be before end date");
+						break;
+					case "endAfterStart":
+						errors.push("End date should be after start date");
+						break;
+					default:
+						errors.push(key);
+						break;
 				}
-			);
-	}
+			}
+		}
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
-		// FIXME: For some reason validation is run on the internal formControls before the value is set.
-		//  this results in a ExpressionChangedAfterItHasBeenCheckedError on the usage of getErrorMessages.
-		setTimeout(() => this._activateGetErrorMessages());
+		return errors;
 	}
 
 	public onDateModelChange(): void {
 		this.logger.debug("ngModel", this.dateRangeModel);
+	}
+
+	public trackItemFn(item: string): string {
+		return item;
 	}
 }

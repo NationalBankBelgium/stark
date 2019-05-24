@@ -8,39 +8,80 @@ import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from "@angular/material-mo
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { TranslateModule } from "@ngx-translate/core";
-import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkDatePickerComponent } from "../../date-picker";
+import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { StarkDatePickerComponent } from "../../date-picker/components";
+import { StarkTimestampMaskDirective } from "../../input-mask-directives/directives";
 import { StarkDateRangePickerComponent } from "./date-range-picker.component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
-import { StarkTimestampMaskDirective } from "../../input-mask-directives";
+import { Observer } from "rxjs";
 import moment from "moment";
+import Spy = jasmine.Spy;
+import SpyObj = jasmine.SpyObj;
+import createSpyObj = jasmine.createSpyObj;
 
 describe("DateRangePickerComponent", () => {
+	@Component({
+		selector: "test-model",
+		template: `
+			<stark-date-range-picker [(ngModel)]="dateRange"></stark-date-range-picker>
+		`
+	})
+	class TestModelComponent {
+		@ViewChild(StarkDateRangePickerComponent)
+		public dateRangePicker!: StarkDateRangePickerComponent;
+
+		public dateRange = {};
+	}
+
+	@Component({
+		selector: "test-form-group",
+		template: `
+			<stark-date-range-picker [rangeFormGroup]="formGroup">
+				<ng-container start-date-errors>START-ERROR</ng-container>
+				<ng-container end-date-errors>END-ERROR</ng-container>
+			</stark-date-range-picker>
+		`
+	})
+	class TestFormGroupComponent {
+		@ViewChild(StarkDateRangePickerComponent)
+		public dateRangePicker!: StarkDateRangePickerComponent;
+
+		public formGroup = new FormGroup({
+			startDate: new FormControl(),
+			endDate: new FormControl()
+		});
+	}
+
+	beforeEach(async(() => {
+		return TestBed.configureTestingModule({
+			declarations: [
+				StarkTimestampMaskDirective,
+				StarkDatePickerComponent,
+				StarkDateRangePickerComponent,
+				TestModelComponent,
+				TestFormGroupComponent
+			],
+			imports: [
+				NoopAnimationsModule,
+				MatDatepickerModule,
+				MatFormFieldModule,
+				FormsModule,
+				ReactiveFormsModule,
+				TranslateModule.forRoot()
+			],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
+				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
+			]
+		}).compileComponents();
+	}));
+
 	describe("uncontrolled", () => {
 		let fixture: ComponentFixture<StarkDateRangePickerComponent>;
 		let component: StarkDateRangePickerComponent;
-
-		beforeEach(async(() => {
-			return TestBed.configureTestingModule({
-				declarations: [StarkTimestampMaskDirective, StarkDatePickerComponent, StarkDateRangePickerComponent],
-				imports: [
-					NoopAnimationsModule,
-					MatDatepickerModule,
-					MatFormFieldModule,
-					FormsModule,
-					ReactiveFormsModule,
-					TranslateModule.forRoot()
-				],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
-				]
-			}).compileComponents();
-		}));
 
 		beforeEach(() => {
 			fixture = TestBed.createComponent(StarkDateRangePickerComponent);
@@ -79,262 +120,443 @@ describe("DateRangePickerComponent", () => {
 			});
 		});
 
-		describe("datepickers properties binding", () => {
-			it("the ids of the datepickers should be set correctly", () => {
+		describe("date pickers properties", () => {
+			let mockObserver: SpyObj<Observer<any>>;
+
+			beforeEach(() => {
+				mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			});
+
+			it("should be set correctly according to the given inputs and WITHOUT triggering a 'dateRangeChanged' event", () => {
+				component.dateRangeChanged.subscribe(mockObserver);
+
 				component.rangePickerId = "test-id";
-				fixture.detectChanges();
-				let input: HTMLElement = fixture.nativeElement.querySelector("#test-id-start-input");
-				expect(input).not.toBeNull();
-				input = fixture.nativeElement.querySelector("#test-id-end-input");
-				expect(input).not.toBeNull();
-				let picker: HTMLElement = fixture.nativeElement.querySelector("#test-id-start");
-				expect(picker).not.toBeNull();
-				picker = fixture.nativeElement.querySelector("#test-id-end");
-				expect(picker).not.toBeNull();
-			});
-
-			it("the names of the datepickers should be set correctly", () => {
 				component.rangePickerName = "test-name";
-				fixture.detectChanges();
-				let input: HTMLElement = fixture.nativeElement.querySelector('[name="test-name-start"]');
-				expect(input).not.toBeNull();
-				input = fixture.nativeElement.querySelector('[name="test-name-end"]');
-				expect(input).not.toBeNull();
-			});
-
-			it("the datepickers should be disabled when isDisabled is true", () => {
-				component.disabled = true;
-				fixture.detectChanges();
-				expect(component.startPicker.pickerInput.disabled).toBe(true);
-				expect(component.endPicker.pickerInput.disabled).toBe(true);
-			});
-
-			it("the placeholders of the datepickers should be set correctly", () => {
 				component.startDateLabel = "startDateLabel";
 				component.endDateLabel = "endDateLabel";
-				fixture.detectChanges();
-				let input: HTMLElement = fixture.nativeElement.querySelector('[ng-reflect-placeholder="startDateLabel"]');
-				expect(input).not.toBeNull();
-				input = fixture.nativeElement.querySelector('[ng-reflect-placeholder="endDateLabel"]');
-				expect(input).not.toBeNull();
-			});
-
-			it("the datepickers min date should be set correctly", () => {
 				const minDate = new Date(2018, 6, 1);
 				component.startMinDate = minDate;
 				component.endMinDate = minDate;
-				fixture.detectChanges();
-				expect(component.startPicker.pickerInput.min).not.toBeNull();
-				expect((<moment.Moment>component.startPicker.pickerInput.min).toDate()).toEqual(minDate);
-				expect(component.endPicker.pickerInput.min).not.toBeNull();
-				expect((<moment.Moment>component.endPicker.pickerInput.min).toDate()).toEqual(minDate);
-			});
-
-			it("the datepickers max date should be set correctly", () => {
 				const maxDate = new Date(2018, 6, 2);
 				component.startMaxDate = maxDate;
 				component.endMaxDate = maxDate;
 				fixture.detectChanges();
+
+				expect(fixture.nativeElement.querySelector("#test-id-start-input")).toBeTruthy();
+				expect(fixture.nativeElement.querySelector("#test-id-end-input")).toBeTruthy();
+				expect(fixture.nativeElement.querySelector("#test-id-start")).toBeTruthy();
+				expect(fixture.nativeElement.querySelector("#test-id-end")).toBeTruthy();
+				expect(fixture.nativeElement.querySelector('[name="test-name-start"]')).toBeTruthy();
+				expect(fixture.nativeElement.querySelector('[name="test-name-end"]')).toBeTruthy();
+				expect(fixture.nativeElement.querySelector('[ng-reflect-placeholder="startDateLabel"]')).toBeTruthy();
+				expect(fixture.nativeElement.querySelector('[ng-reflect-placeholder="endDateLabel"]')).toBeTruthy();
+				expect(component.startPicker.pickerInput.min).not.toBeNull();
+				expect((<moment.Moment>component.startPicker.pickerInput.min).toDate()).toEqual(minDate);
+				expect(component.endPicker.pickerInput.min).not.toBeNull();
+				expect((<moment.Moment>component.endPicker.pickerInput.min).toDate()).toEqual(minDate);
 				expect(component.startPicker.pickerInput.max).not.toBeNull();
 				expect((<moment.Moment>component.startPicker.pickerInput.max).toDate()).toEqual(maxDate);
 				expect(component.endPicker.pickerInput.max).not.toBeNull();
 				expect((<moment.Moment>component.endPicker.pickerInput.max).toDate()).toEqual(maxDate);
+
+				expect(mockObserver.next).not.toHaveBeenCalled();
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
 			});
 
-			it("the datepickers value should be set correctly", fakeAsync(() => {
+			it("the date pickers should be disabled when 'disabled' is true and it should NOT emit a 'dateRangeChanged' event", () => {
+				component.dateRangeChanged.subscribe(mockObserver);
+
+				component.disabled = true;
+				fixture.detectChanges();
+				expect(component.startPicker.pickerInput.disabled).toBe(true);
+				expect(component.endPicker.pickerInput.disabled).toBe(true);
+
+				expect(mockObserver.next).not.toHaveBeenCalled();
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
+
+			it("the date pickers value should be set correctly and they should emit a 'dateRangeChanged' event", () => {
+				component.dateRangeChanged.subscribe(mockObserver);
+
 				const date = new Date(2018, 6, 3);
 				component.startDate = date;
+				fixture.detectChanges();
+
+				expect(component.startPicker.value).not.toBeNull();
+				expect(component.startPicker.value).toEqual(date);
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({ startDate: date, endDate: undefined });
+
+				mockObserver.next.calls.reset();
 				component.endDate = date;
 				fixture.detectChanges();
-				tick();
 
-				expect(component.startPicker.value).not.toBeNull("The value of the startDate date-picker should be set.");
-				expect(component.startPicker.value).toEqual(date);
-				expect(component.endPicker.value).not.toBeNull("The value of the endDate date-picker should be set.");
+				expect(component.endPicker.value).not.toBeNull();
 				expect(component.endPicker.value).toEqual(date);
-			}));
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({ startDate: date, endDate: date });
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
 		});
 
 		describe("dates selection", () => {
-			it("the end date should be invalid if before startdate", () => {
-				component.startDate = new Date(2018, 6, 5);
-				component.endDate = new Date(2018, 6, 4);
-				fixture.detectChanges();
+			let mockObserver: SpyObj<Observer<any>>;
 
-				expect(component.endDateFormControl.status).toBe("INVALID");
+			beforeEach(() => {
+				mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 			});
 
-			it("the end date should be correctly set if after the start date", () => {
+			it("the end date should be correctly set if after the start date and emit the new value in the 'dateRangeChanged' output", () => {
+				// initialize start date
+				const startDate = new Date(2018, 6, 6);
+				component.startPicker.picker.select(moment(startDate)); // select a date in the internal date picker
+				fixture.detectChanges();
+				component.dateRangeChanged.subscribe(mockObserver);
+
+				expect(component.startDate).toEqual(startDate);
 				const endDate = new Date(2018, 6, 7);
-				component.startDate = new Date(2018, 6, 6);
-				component.endDate = endDate;
+				component.endPicker.picker.select(moment(endDate)); // select a date in the internal date picker
 				fixture.detectChanges();
 
 				expect(component.endDate).toEqual(endDate);
+
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({
+					startDate: startDate,
+					endDate: endDate
+				});
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
 			});
 
-			it("the end date should be correctly set if after the start date is undefined", () => {
+			it("the end date should be correctly set if start date is undefined and emit the new value in the 'dateRangeChanged' output", () => {
+				// initialize start date
+				component.startPicker.picker.select(<any>undefined); // select a date in the internal date picker
+				fixture.detectChanges();
+				component.dateRangeChanged.subscribe(mockObserver);
+
+				expect(component.startDate).toBeUndefined();
 				const endDate = new Date(2018, 6, 8);
-				component.startDate = undefined;
-				component.endDate = endDate;
+				component.endPicker.picker.select(moment(endDate)); // select a date in the internal date picker
 				fixture.detectChanges();
 
 				expect(component.endDate).toEqual(endDate);
+
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({
+					startDate: undefined,
+					endDate: endDate
+				});
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
+
+			it("the end date should be still valid if it is before the startDate BUT the startDate should be set to undefined and it should emit the new value in the 'dateRangeChanged' output", () => {
+				// initialize start date
+				const startDate = new Date(2018, 6, 5);
+				component.startPicker.picker.select(moment(startDate)); // select a date in the internal date picker
+				fixture.detectChanges();
+				component.dateRangeChanged.subscribe(mockObserver);
+
+				expect(component.startDate).toEqual(startDate);
+				const endDate = new Date(2018, 6, 4);
+				component.endPicker.picker.select(moment(endDate)); // select a date in the internal date picker
+				fixture.detectChanges();
+
+				expect(component.startDate).toBeUndefined();
+				expect(component.endDate).toEqual(endDate);
+				expect(component.endDateFormControl.status).toBe("VALID");
+
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({
+					startDate: undefined,
+					endDate: endDate
+				});
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
+
+			it("the start date should be still valid if it is after the endDate BUT the endDate should be set to undefined and it should emit the new value in the 'dateRangeChanged' output", () => {
+				// initialize end date
+				const endDate = new Date(2018, 6, 5);
+				component.endPicker.picker.select(moment(endDate)); // select a date in the internal date picker
+				fixture.detectChanges();
+				component.dateRangeChanged.subscribe(mockObserver);
+
+				expect(component.endDate).toEqual(endDate);
+				const startDate = new Date(2018, 6, 6);
+				component.startPicker.picker.select(moment(startDate)); // select a date in the internal date picker
+				fixture.detectChanges();
+
+				expect(component.endDate).toBeUndefined();
+				expect(component.startDate).toEqual(startDate);
+				expect(component.startDateFormControl.status).toBe("VALID");
+
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({
+					startDate: startDate,
+					endDate: undefined
+				});
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
 			});
 		});
 	});
 
-	@Component({
-		selector: "test-model",
-		template: `
-			<stark-date-range-picker [(ngModel)]="dateRange"></stark-date-range-picker>
-		`
-	})
-	class TestModelComponent {
-		@ViewChild(StarkDateRangePickerComponent)
-		public dateRangePicker!: StarkDateRangePickerComponent;
-
-		public dateRange = {};
-	}
-
 	describe("with ngModel", () => {
-		let fixture: ComponentFixture<TestModelComponent>;
+		let hostFixture: ComponentFixture<TestModelComponent>;
 		let hostComponent: TestModelComponent;
 		let component: StarkDateRangePickerComponent;
-
-		beforeEach(async(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkTimestampMaskDirective, StarkDatePickerComponent, StarkDateRangePickerComponent, TestModelComponent],
-				imports: [
-					NoopAnimationsModule,
-					MatDatepickerModule,
-					MatFormFieldModule,
-					FormsModule,
-					ReactiveFormsModule,
-					TranslateModule.forRoot()
-				],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
-				]
-			}).compileComponents()));
+		let mockObserver: SpyObj<Observer<any>>;
 
 		beforeEach(() => {
-			fixture = TestBed.createComponent(TestModelComponent);
-			hostComponent = fixture.componentInstance;
+			hostFixture = TestBed.createComponent(TestModelComponent);
+			hostComponent = hostFixture.componentInstance;
 			component = hostComponent.dateRangePicker;
+			hostFixture.detectChanges();
+
+			mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 		});
 
-		it("should update when model is updated", fakeAsync(() => {
-			const expected = { startDate: new Date(2019, 0, 1), endDate: new Date(2019, 0, 2) };
+		it("should update when model is updated and it should not emit a 'dateRangeChanged' event", fakeAsync(() => {
+			component.dateRangeChanged.subscribe(mockObserver);
+			const dateRange = { startDate: new Date(2019, 0, 1), endDate: new Date(2019, 0, 2) };
 
-			hostComponent.dateRange = expected;
-			fixture.detectChanges();
+			hostComponent.dateRange = dateRange;
+			hostFixture.detectChanges();
 
 			tick();
 
 			expect(component.startDate).toBeDefined();
+			expect(component.startDate).toEqual(dateRange.startDate);
 			expect(component.endDate).toBeDefined();
+			expect(component.endDate).toEqual(dateRange.endDate);
 
-			expect(component.startDate).toEqual(expected.startDate);
-			expect(component.endDate).toEqual(expected.endDate);
+			expect(mockObserver.next).not.toHaveBeenCalled();
+			expect(mockObserver.error).not.toHaveBeenCalled();
+			expect(mockObserver.complete).not.toHaveBeenCalled();
 		}));
 	});
 
-	@Component({
-		selector: "test-form-group",
-		template: `
-			<stark-date-range-picker [rangeFormGroup]="formGroup">
-				<ng-container start-date-errors>START-ERROR</ng-container>
-				<ng-container end-date-errors>END-ERROR</ng-container>
-			</stark-date-range-picker>
-		`
-	})
-	class TestFormGroupComponent {
-		@ViewChild(StarkDateRangePickerComponent)
-		public dateRangePicker!: StarkDateRangePickerComponent;
-
-		public formGroup = new FormGroup({
-			startDate: new FormControl(),
-			endDate: new FormControl()
-		});
-	}
-
 	describe("with formGroup", () => {
-		let fixture: ComponentFixture<TestFormGroupComponent>;
+		let hostFixture: ComponentFixture<TestFormGroupComponent>;
 		let hostComponent: TestFormGroupComponent;
 		let component: StarkDateRangePickerComponent;
 
-		beforeEach(async(() =>
-			TestBed.configureTestingModule({
-				declarations: [
-					StarkTimestampMaskDirective,
-					StarkDatePickerComponent,
-					StarkDateRangePickerComponent,
-					TestFormGroupComponent
-				],
-				imports: [
-					NoopAnimationsModule,
-					MatDatepickerModule,
-					MatFormFieldModule,
-					FormsModule,
-					ReactiveFormsModule,
-					TranslateModule.forRoot()
-				],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
-				]
-			}).compileComponents()));
-
 		beforeEach(() => {
-			fixture = TestBed.createComponent(TestFormGroupComponent);
-			hostComponent = fixture.componentInstance;
+			hostFixture = TestBed.createComponent(TestFormGroupComponent);
+			hostComponent = hostFixture.componentInstance;
 			component = hostComponent.dateRangePicker;
+			hostFixture.detectChanges();
 		});
 
-		it("should update when form group is updated", () => {
-			const expected = { startDate: new Date(2019, 0, 1), endDate: new Date(2019, 0, 2) };
+		describe("date pickers properties", () => {
+			let mockObserver: SpyObj<Observer<any>>;
 
-			hostComponent.formGroup.setValue(expected);
-			fixture.detectChanges();
+			beforeEach(() => {
+				mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			});
 
-			expect(component.startDate).toBeDefined();
-			expect(component.endDate).toBeDefined();
+			it("the date pickers should be disabled when the form controls are disabled AND a 'valueChange' event should be triggered ONLY IF the 'emitEvent' option is enabled", () => {
+				hostComponent.formGroup.valueChanges.subscribe(mockObserver);
 
-			expect(component.startDate).toEqual(expected.startDate);
-			expect(component.endDate).toEqual(expected.endDate);
+				hostComponent.formGroup.disable({ emitEvent: false });
+				hostFixture.detectChanges();
+
+				expect(component.startPicker.pickerInput.disabled).toBe(true);
+				expect(component.endPicker.pickerInput.disabled).toBe(true);
+
+				hostComponent.formGroup.enable({ emitEvent: false });
+				hostFixture.detectChanges();
+
+				expect(component.startPicker.pickerInput.disabled).toBe(false);
+				expect(component.endPicker.pickerInput.disabled).toBe(false);
+				expect(mockObserver.next).not.toHaveBeenCalled(); // because the 'emitEvent' is false
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+
+				hostComponent.formGroup.disable(); // 'emitEvent' true by default
+				hostFixture.detectChanges();
+
+				expect(component.startPicker.pickerInput.disabled).toBe(true);
+				expect(component.endPicker.pickerInput.disabled).toBe(true);
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				mockObserver.next.calls.reset();
+
+				hostComponent.formGroup.enable(); // 'emitEvent' true by default
+				hostFixture.detectChanges();
+
+				expect(component.startPicker.pickerInput.disabled).toBe(false);
+				expect(component.endPicker.pickerInput.disabled).toBe(false);
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
+
+			it("should update start and end dates when values in 'rangeFormGroup' are updated", () => {
+				const startDate = new Date(2019, 0, 1);
+				const endDate = new Date(2019, 0, 2);
+
+				hostComponent.formGroup.setValue({ startDate, endDate });
+				hostFixture.detectChanges();
+
+				expect(component.startDate).toBeDefined();
+				expect(component.startDate).toEqual(startDate);
+				expect(component.endDate).toBeDefined();
+				expect(component.endDate).toEqual(endDate);
+			});
+
+			it("the start and end dates should be the same as the values set on the form controls of the 'rangeFormGroup'", () => {
+				const startDate = new Date(2018, 6, 3);
+				const endDate = new Date(2018, 7, 3);
+				hostComponent.formGroup.controls["startDate"].setValue(startDate);
+				hostComponent.formGroup.controls["endDate"].setValue(endDate);
+				hostFixture.detectChanges();
+
+				expect(component.startDate).toBe(startDate);
+				expect(component.endDate).toBe(endDate);
+			});
+
+			it("should log an error when the given 'rangeFormGroup' does not contain expected 'startDate' and 'endDate' controls", () => {
+				hostComponent.formGroup = new FormGroup({
+					start: new FormControl(new Date(2019, 0, 1)),
+					end: new FormControl(new Date(2019, 0, 2))
+				});
+				hostFixture.detectChanges();
+
+				expect(component.logger.error).toHaveBeenCalledTimes(1);
+				const errorMessage: string = (<Spy>component.logger.error).calls.argsFor(0)[0];
+				expect(errorMessage).toMatch(/formGroup.*startDate.*endDate/);
+			});
+
+			it("should show errors at the correct input", () => {
+				const { startDate: startDateFormControl, endDate: endDateFormControl } = hostComponent.formGroup.controls;
+				const alwaysFail = (): ValidationErrors => ({ alwaysFail: "error" });
+
+				startDateFormControl.setValidators(alwaysFail);
+				startDateFormControl.setValue(new Date());
+				startDateFormControl.markAsTouched();
+
+				endDateFormControl.setValidators(alwaysFail);
+				endDateFormControl.setValue(new Date());
+				endDateFormControl.markAsTouched();
+
+				hostFixture.detectChanges();
+
+				const startDateError = hostFixture.nativeElement.querySelectorAll("mat-form-field mat-error").item(0);
+				expect(startDateError).not.toBeNull();
+				expect(startDateError.textContent).toEqual("START-ERROR");
+
+				const endDateError = hostFixture.nativeElement.querySelectorAll("mat-form-field mat-error").item(1);
+				expect(endDateError).not.toBeNull();
+				expect(endDateError.textContent).toEqual("END-ERROR");
+			});
 		});
 
-		it("should show errors at the correct input", () => {
-			const { startDate: startDateFC, endDate: endDateFC } = hostComponent.formGroup.controls;
-			const alwaysFail = (): ValidationErrors => ({ alwaysFail: "error" });
+		describe("dates selection", () => {
+			let mockObserver: SpyObj<Observer<any>>;
 
-			startDateFC.setValidators(alwaysFail);
-			startDateFC.setValue(new Date());
-			startDateFC.markAsTouched();
-			startDateFC.markAsDirty();
+			beforeEach(() => {
+				mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+			});
 
-			endDateFC.setValidators(alwaysFail);
-			endDateFC.setValue(new Date());
-			endDateFC.markAsTouched();
-			endDateFC.markAsDirty();
+			it("the end date should be correctly set if after the start date and emit the new value in the form control's 'valueChange' observable", () => {
+				// initialize start date
+				const startDate = new Date(2018, 6, 6);
+				component.startPicker.picker.select(moment(startDate)); // select a date in the internal date picker
+				hostFixture.detectChanges();
+				hostComponent.formGroup.valueChanges.subscribe(mockObserver);
 
-			fixture.detectChanges();
+				expect(component.startDate).toEqual(startDate);
+				const endDate = new Date(2018, 6, 7);
+				component.endPicker.picker.select(moment(endDate)); // select a date in the internal date picker
+				hostFixture.detectChanges();
 
-			const startDateError = fixture.nativeElement.querySelectorAll("mat-form-field mat-error").item(0);
-			expect(startDateError).not.toBeNull();
-			expect(startDateError.textContent).toEqual("START-ERROR");
+				expect(component.endDate).toEqual(endDate);
 
-			const endDateError = fixture.nativeElement.querySelectorAll("mat-form-field mat-error").item(1);
-			expect(endDateError).not.toBeNull();
-			expect(endDateError.textContent).toEqual("END-ERROR");
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({
+					startDate: startDate,
+					endDate: endDate
+				});
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
+
+			it("the end date should be correctly set if start date is undefined and emit the new value in the form control's 'valueChange' observable", () => {
+				// initialize start date
+				component.startPicker.picker.select(<any>undefined); // select a date in the internal date picker
+				hostFixture.detectChanges();
+				hostComponent.formGroup.valueChanges.subscribe(mockObserver);
+
+				expect(component.startDate).toBeUndefined();
+				const endDate = new Date(2018, 6, 8);
+				component.endPicker.picker.select(moment(endDate)); // select a date in the internal date picker
+				hostFixture.detectChanges();
+
+				expect(component.endDate).toEqual(endDate);
+
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({
+					startDate: null, // TODO: null is emitted instead of undefined because it seems Angular Forms work internally with null initial values rather than undefined
+					endDate: endDate
+				});
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
+
+			it("the end date should be still valid if it is before the startDate BUT the startDate should be set to undefined and it should emit the new value in the form control's 'valueChange' observable", () => {
+				// initialize start date
+				const startDate = new Date(2018, 6, 5);
+				component.startPicker.picker.select(moment(startDate)); // select a date in the internal date picker
+				hostFixture.detectChanges();
+				hostComponent.formGroup.valueChanges.subscribe(mockObserver);
+
+				expect(component.startDate).toEqual(startDate);
+				const endDate = new Date(2018, 6, 4);
+				component.endPicker.picker.select(moment(endDate)); // select a date in the internal date picker
+				hostFixture.detectChanges();
+
+				expect(component.startDate).toBeUndefined();
+				expect(component.endDate).toEqual(endDate);
+				expect(component.endDateFormControl.status).toBe("VALID");
+
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({
+					startDate: undefined,
+					endDate: endDate
+				});
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
+
+			it("the start date should be still valid if it is after the endDate BUT the endDate should be set to undefined and it should emit the new value in the form control's 'valueChange' observable", () => {
+				// initialize end date
+				const endDate = new Date(2018, 6, 5);
+				component.endPicker.picker.select(moment(endDate)); // select a date in the internal date picker
+				hostFixture.detectChanges();
+				hostComponent.formGroup.valueChanges.subscribe(mockObserver);
+
+				expect(component.endDate).toEqual(endDate);
+				const startDate = new Date(2018, 6, 6);
+				component.startPicker.picker.select(moment(startDate)); // select a date in the internal date picker
+				hostFixture.detectChanges();
+
+				expect(component.endDate).toBeUndefined();
+				expect(component.startDate).toEqual(startDate);
+				expect(component.startDateFormControl.status).toBe("VALID");
+
+				expect(mockObserver.next).toHaveBeenCalledTimes(1);
+				expect(mockObserver.next).toHaveBeenCalledWith({
+					startDate: startDate,
+					endDate: undefined
+				});
+				expect(mockObserver.error).not.toHaveBeenCalled();
+				expect(mockObserver.complete).not.toHaveBeenCalled();
+			});
 		});
 	});
 });

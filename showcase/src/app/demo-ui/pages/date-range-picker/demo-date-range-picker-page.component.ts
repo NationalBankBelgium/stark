@@ -1,12 +1,11 @@
-/* tslint:disable:no-null-keyword trackBy-function */
+/* tslint:disable:no-null-keyword */
 import { Component, Inject, OnDestroy } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { StarkDateRangePickerEvent } from "@nationalbankbelgium/stark-ui";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { Subscription } from "rxjs";
 import { ReferenceLink } from "../../../shared/components";
-import { StarkDateRangePickerEvent } from "@nationalbankbelgium/stark-ui";
-import map from "lodash-es/map";
 
 const MONTH_IN_MILLI = 2592000000;
 
@@ -26,39 +25,15 @@ export class DemoDateRangePickerPageComponent implements OnDestroy {
 	public dateRangeModel = { startDate: this.today, endDate: this.inOneMonth };
 	public modelDisabled = false;
 
+	// IMPORTANT: if the DateRangePicker should be required, then add the 'required' validator to both form controls too!
 	public dateRangeFormGroup = new FormGroup({
-		startDate: new FormControl(null, Validators.compose([DemoDateRangePickerPageComponent.noFebruaryValidator])),
-		endDate: new FormControl(null, Validators.compose([DemoDateRangePickerPageComponent.noFebruaryValidator]))
+		startDate: new FormControl(
+			undefined,
+			Validators.compose([Validators.required, DemoDateRangePickerPageComponent.noFebruaryValidator])
+		),
+		endDate: new FormControl(undefined, Validators.compose([Validators.required, DemoDateRangePickerPageComponent.noFebruaryValidator]))
 	});
 
-	public getErrorMessages: (control: AbstractControl) => string[] = () => [];
-
-	private _activateGetErrorMessages(): void {
-		this.getErrorMessages = (control: AbstractControl): string[] =>
-			map(
-				control.errors || {},
-				(_value: any, key: string): string => {
-					switch (key) {
-						case "required":
-							return "SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.REQUIRED";
-						case "matDatepickerMin":
-							return "SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.MIN_TODAY";
-						case "matDatepickerMax":
-							return "SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.MAX_MONTH";
-						case "matDatepickerFilter":
-							return "SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.WEEKDAY";
-						case "startBeforeEnd":
-							return "SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.START_BEFORE_END";
-						case "endAfterStart":
-							return "SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.END_AFTER_START";
-						case "inFebruary":
-							return "SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.IN_FEBRUARY";
-						default:
-							return "";
-					}
-				}
-			);
-	}
 	/**
 	 * List of subscriptions to be unsubscribed when component is destroyed
 	 */
@@ -72,11 +47,49 @@ export class DemoDateRangePickerPageComponent implements OnDestroy {
 	];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
-		this._subs.push(this.dateRangeFormGroup.valueChanges.subscribe((v: any) => this.logger.debug("formGroup:", v)));
+		this._subs.push(this.dateRangeFormGroup.valueChanges.subscribe((value: any) => this.logger.debug("formGroup:", value)));
+	}
 
-		// FIXME: For some reason validation is run on the internal formControls before the value is set.
-		//  this results in a ExpressionChangedAfterItHasBeenCheckedError on the usage of getErrorMessages.
-		setTimeout(() => this._activateGetErrorMessages());
+	public ngOnDestroy(): void {
+		for (const subscription of this._subs) {
+			subscription.unsubscribe();
+		}
+	}
+
+	public getErrorMessages(control?: AbstractControl): string[] {
+		const errors: string[] = [];
+
+		if (control && control.errors) {
+			for (const key of Object.keys(control.errors)) {
+				switch (key) {
+					case "required":
+						errors.push("SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.REQUIRED");
+						break;
+					case "matDatepickerMin":
+						errors.push("SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.MIN_TODAY");
+						break;
+					case "matDatepickerMax":
+						errors.push("SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.MAX_MONTH");
+						break;
+					case "matDatepickerFilter":
+						errors.push("SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.WEEKDAY");
+						break;
+					case "startBeforeEnd":
+						errors.push("SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.START_BEFORE_END");
+						break;
+					case "endAfterStart":
+						errors.push("SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.END_AFTER_START");
+						break;
+					case "inFebruary":
+						errors.push("SHOWCASE.DEMO.DATE_RANGE_PICKER.ERROR_MESSAGES.IN_FEBRUARY");
+						break;
+					default:
+						errors.push(key);
+				}
+			}
+		}
+
+		return errors;
 	}
 
 	public onDateModelChange(): void {
@@ -84,10 +97,11 @@ export class DemoDateRangePickerPageComponent implements OnDestroy {
 	}
 
 	public onDateRangeFormGroupDisableCheckboxChange(event: MatCheckboxChange): void {
+		// enable/disable the control without emitting a change event since the value did not change (to avoid unnecessary extra calls!)
 		if (event.checked) {
-			this.dateRangeFormGroup.disable();
+			this.dateRangeFormGroup.disable({ emitEvent: false });
 		} else {
-			this.dateRangeFormGroup.enable();
+			this.dateRangeFormGroup.enable({ emitEvent: false });
 		}
 	}
 
@@ -95,9 +109,7 @@ export class DemoDateRangePickerPageComponent implements OnDestroy {
 		this.logger.debug("onChange:", dateRange);
 	}
 
-	public ngOnDestroy(): void {
-		for (const subscription of this._subs) {
-			subscription.unsubscribe()
-		}
+	public trackItemFn(item: string): string {
+		return item;
 	}
 }

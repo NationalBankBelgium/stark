@@ -19,19 +19,25 @@
 			[required]="true"
 			#dateRangeComponent
 		>
-			<ng-container start-date-errors *ngFor="let error of getErrorMessages(dateRangeComponent.startDateFormControl)">
+			<ng-container
+				start-date-errors
+				*ngFor="let error of getErrorMessages(dateRangeComponent.startDateFormControl); trackBy: trackItemFn"
+			>
 				{{ error | translate }}
 				<br />
 			</ng-container>
 
-			<ng-container end-date-errors *ngFor="let error of getErrorMessages(dateRangeComponent.endDateFormControl)">
+			<ng-container
+				end-date-errors
+				*ngFor="let error of getErrorMessages(dateRangeComponent.endDateFormControl); trackBy: trackItemFn"
+			>
 				{{ error | translate }}
 				<br />
 			</ng-container>
 		</stark-date-range-picker>
 		<br /><br />
 		<mat-checkbox [(ngModel)]="modelDisabled">
-			{{ (modelDisabled ? "SHOWCASE.COMMON.DISABLED" : "SHOWCASE.COMMON.ENABLED") | translate }}
+			{{ "SHOWCASE.COMMON.DISABLED" | translate }}
 		</mat-checkbox>
 	</example-viewer>
 
@@ -41,19 +47,22 @@
 		exampleTitle="SHOWCASE.DEMO.DATE_RANGE_PICKER.WITH_FORM_GROUP"
 	>
 		<stark-date-range-picker [rangeFormGroup]="dateRangeFormGroup" required>
-			<ng-container start-date-errors *ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.startDate)">
+			<ng-container
+				start-date-errors
+				*ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.startDate); trackBy: trackItemFn"
+			>
 				{{ error | translate }}
 				<br />
 			</ng-container>
 
-			<ng-container end-date-errors *ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.endDate)">
+			<ng-container end-date-errors *ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.endDate); trackBy: trackItemFn">
 				{{ error | translate }}
 				<br />
 			</ng-container>
 		</stark-date-range-picker>
 		<br /><br />
 		<mat-checkbox [checked]="dateRangeFormGroup.disabled" (change)="onDateRangeFormGroupDisableCheckboxChange($event)">
-			{{ (dateRangeFormGroup.disabled ? "SHOWCASE.COMMON.DISABLED" : "SHOWCASE.COMMON.ENABLED") | translate }}
+			{{ "SHOWCASE.COMMON.DISABLED" | translate }}
 		</mat-checkbox>
 	</example-viewer>
 
