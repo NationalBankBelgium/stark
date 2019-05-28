@@ -44,7 +44,7 @@
     "webpack-monitor": "^1.0.14"
   },
   "devDependencies": {
-    "@angular/cli": "^7.0.0",
+    "@angular/cli": "^8.0.0",
     "@angular/compiler": "^7.0.0",
     "@angular/compiler-cli": "^7.0.0"
   },
