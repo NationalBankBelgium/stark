@@ -19,12 +19,14 @@ import {
 	ViewChildren,
 	ViewEncapsulation
 } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatColumnDef, MatTable, MatTableDataSource } from "@angular/material/table";
 import { SelectionChange, SelectionModel } from "@angular/cdk/collections";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { Subscription } from "rxjs";
+import { distinctUntilChanged } from "rxjs/operators";
 
 import { StarkTableColumnComponent } from "./column.component";
 import { StarkSortingRule, StarkTableMultisortDialogComponent, StarkTableMultisortDialogData } from "./dialogs/multisort.component";
@@ -42,9 +44,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 import { StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
 import { StarkPaginateEvent } from "../../pagination/components/paginate-event.intf";
 import { StarkComponentUtil } from "../../../util/component";
-import { FormControl } from "@angular/forms";
-import { distinctUntilChanged } from "rxjs/operators";
-import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "@nationalbankbelgium/stark-ui";
+import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../minimap/components";
 import find from "lodash-es/find";
 
 /**
