@@ -34,7 +34,6 @@
     "@ngrx/store-devtools": "^7.1.0",
     "@ngx-translate/core": "^11.0.1",
     "@types/lodash-es": "^4.17.1",
-    "@types/node": "^8.10.37",
     "@types/uuid": "^3.4.4",
     "@uirouter/angular": "^3.0.0",
     "cerialize": "^0.1.18",
