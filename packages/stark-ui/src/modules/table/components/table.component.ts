@@ -43,7 +43,6 @@ import {
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
 import { StarkPaginateEvent } from "../../pagination/components/paginate-event.intf";
-import { StarkComponentUtil } from "../../../util/component";
 import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../minimap/components";
 import find from "lodash-es/find";
 
@@ -375,7 +374,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Whether the multiple row selection is enabled.
 	 */
 	public get isMultiSelectEnabled(): boolean {
-		return StarkComponentUtil.isInputEnabled(this.multiSelect);
+		return coerceBooleanProperty(this.multiSelect);
 	}
 
 	/**
@@ -496,11 +495,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		}
 
 		if (changes["fixedHeader"]) {
-			this.isFixedHeaderEnabled = StarkComponentUtil.isInputEnabled(this.fixedHeader);
+			this.isFixedHeaderEnabled = coerceBooleanProperty(this.fixedHeader);
 		}
 
 		if (changes["multiSort"]) {
-			this.isMultiSortEnabled = StarkComponentUtil.isInputEnabled(this.multiSort);
+			this.isMultiSortEnabled = coerceBooleanProperty(this.multiSort);
 		}
 
 		if (changes["rowsSelectable"]) {
