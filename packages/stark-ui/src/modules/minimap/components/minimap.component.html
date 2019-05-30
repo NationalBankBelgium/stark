@@ -4,8 +4,8 @@
 	</div>
 </div>
 <button mat-icon-button #minimapMenuTrigger="matMenuTrigger" [matMenuTriggerFor]="minimapMenu" [color]="color">
-	<mat-icon *ngIf="mode === 'compact'" svgIcon="view-column" starkSvgViewBox></mat-icon>
-	<mat-icon *ngIf="mode !== 'compact'" [class.open]="minimapMenuTrigger.menuOpen" svgIcon="menu-down" starkSvgViewBox></mat-icon>
+	<mat-icon *ngIf="mode === 'compact'" svgIcon="view-column"></mat-icon>
+	<mat-icon *ngIf="mode !== 'compact'" [class.open]="minimapMenuTrigger.menuOpen" svgIcon="menu-down"></mat-icon>
 </button>
 <mat-menu #minimapMenu="matMenu">
 	<div class="stark-minimap-menu-item" mat-menu-item *ngFor="let item of items; trackBy: trackItemFn">

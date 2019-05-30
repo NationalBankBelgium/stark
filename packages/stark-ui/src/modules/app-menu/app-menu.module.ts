@@ -7,20 +7,10 @@ import { MatListModule } from "@angular/material/list";
 import { TranslateModule } from "@ngx-translate/core";
 import { UIRouterModule } from "@uirouter/angular";
 import { StarkAppMenuComponent, StarkAppMenuItemComponent } from "./components";
-import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
 
 @NgModule({
 	declarations: [StarkAppMenuComponent, StarkAppMenuItemComponent],
-	imports: [
-		CommonModule,
-		MatListModule,
-		MatDividerModule,
-		MatExpansionModule,
-		MatIconModule,
-		StarkSvgViewBoxModule,
-		TranslateModule,
-		UIRouterModule
-	],
+	imports: [CommonModule, MatListModule, MatDividerModule, MatExpansionModule, MatIconModule, TranslateModule, UIRouterModule],
 	exports: [StarkAppMenuComponent, StarkAppMenuItemComponent]
 })
 export class StarkAppMenuModule {}

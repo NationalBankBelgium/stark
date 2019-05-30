@@ -7,7 +7,7 @@
 		(click)="show()"
 		[matTooltip]="'STARK.ROUTE_SEARCH.ABOUT' | translate"
 	>
-		<mat-icon [svgIcon]="icon" starkSvgViewBox></mat-icon>
+		<mat-icon [svgIcon]="icon"></mat-icon>
 	</button>
 	<div [ngClass]="{ hide: hide }" class="route-search-input-wrapper">
 		<mat-form-field floatLabel="never" class="search-field">
@@ -21,7 +21,7 @@
 			<mat-autocomplete #autocompleteComp="matAutocomplete" autoActiveFirstOption class="search-route-autocomplete">
 				<mat-option
 					(onSelectionChange)="redirect(option)"
-					*ngFor="let option of (filteredRouteEntries | async); trackBy: trackPath"
+					*ngFor="let option of filteredRouteEntries | async; trackBy: trackPath"
 					[value]="option.label"
 				>
 					<p>{{ option.label }}</p>

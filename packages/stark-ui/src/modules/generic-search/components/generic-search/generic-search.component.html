@@ -25,7 +25,6 @@
 			<mat-icon
 				*ngIf="normalizedFormButtonsConfig.new.icon"
 				[matTooltip]="normalizedFormButtonsConfig.new.label | translate"
-				starkSvgViewBox
 				[svgIcon]="normalizedFormButtonsConfig.new.icon"
 			></mat-icon>
 			<span translate>{{ normalizedFormButtonsConfig.new.label }}</span>
@@ -42,7 +41,6 @@
 			<mat-icon
 				*ngIf="normalizedFormButtonsConfig.reset.icon"
 				[matTooltip]="normalizedFormButtonsConfig.reset.label | translate"
-				starkSvgViewBox
 				[svgIcon]="normalizedFormButtonsConfig.reset.icon"
 			></mat-icon>
 			<span translate>{{ normalizedFormButtonsConfig.reset.label }}</span>
@@ -57,7 +55,6 @@
 			<mat-icon
 				*ngIf="normalizedFormButtonsConfig.search.icon"
 				[matTooltip]="normalizedFormButtonsConfig.search.label | translate"
-				starkSvgViewBox
 				[svgIcon]="normalizedFormButtonsConfig.search.icon"
 			></mat-icon>
 			<span translate>{{ normalizedFormButtonsConfig.search.label }}</span>
@@ -72,12 +69,7 @@
 				(click)="formButton.onClick()"
 				type="button"
 			>
-				<mat-icon
-					*ngIf="formButton.icon"
-					[matTooltip]="formButton.label | translate"
-					starkSvgViewBox
-					[svgIcon]="formButton.icon"
-				></mat-icon>
+				<mat-icon *ngIf="formButton.icon" [matTooltip]="formButton.label | translate" [svgIcon]="formButton.icon"></mat-icon>
 				<span>{{ formButton.label | translate }}</span>
 			</button>
 		</ng-container>

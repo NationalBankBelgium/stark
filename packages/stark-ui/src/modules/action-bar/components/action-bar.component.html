@@ -21,7 +21,6 @@
 					type="button"
 				>
 					<mat-icon
-						starkSvgViewBox
 						[svgIcon]="action.iconSwitchFunction ? action.iconActivated : action.icon"
 						class="stark-small-icon"
 					></mat-icon>
@@ -46,7 +45,7 @@
 			(click)="toggleExtendedActionBar()"
 			type="button"
 		>
-			<mat-icon starkSvgViewBox svgIcon="dots-horizontal" class="stark-small-icon"></mat-icon>
+			<mat-icon svgIcon="dots-horizontal" class="stark-small-icon"></mat-icon>
 		</button>
 		<button
 			class="open-alt-actions"
@@ -56,7 +55,7 @@
 			[matMenuTriggerFor]="menu"
 			type="button"
 		>
-			<mat-icon starkSvgViewBox svgIcon="dots-vertical" class="stark-small-icon"></mat-icon>
+			<mat-icon svgIcon="dots-vertical" class="stark-small-icon"></mat-icon>
 		</button>
 		<mat-menu #menu="matMenu" xPosition="before">
 			<div
@@ -68,7 +67,7 @@
 			>
 				<ng-container *ngIf="action.isVisible !== false">
 					<div [ngClass]="action.className">
-						<mat-icon starkSvgViewBox [svgIcon]="action.icon" class="stark-small-icon"></mat-icon>
+						<mat-icon [svgIcon]="action.icon" class="stark-small-icon"></mat-icon>
 						<span translate>{{ action.label }}</span>
 					</div>
 				</ng-container>

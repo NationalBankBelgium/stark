@@ -7,7 +7,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { CommonModule } from "@angular/common";
 import { Inject, NgModule } from "@angular/core";
-import { StarkPrettyPrintModule, StarkSvgViewBoxModule } from "@nationalbankbelgium/stark-ui";
+import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 import { TranslateModule } from "@ngx-translate/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {
@@ -33,13 +33,12 @@ import { FileService } from "./services";
 		MatTabsModule,
 		CommonModule,
 		StarkPrettyPrintModule,
-		TranslateModule,
-		StarkSvgViewBoxModule // is needed here for directive to work in the different modules
+		TranslateModule
 	],
 	providers: [FileService],
 	declarations: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],
 	entryComponents: [],
-	exports: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent, FlexLayoutModule, StarkSvgViewBoxModule]
+	exports: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent, FlexLayoutModule]
 })
 export class SharedModule {
 	public constructor(

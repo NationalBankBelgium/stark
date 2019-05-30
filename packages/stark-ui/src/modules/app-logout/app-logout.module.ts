@@ -5,7 +5,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
 import { StarkAppLogoutComponent } from "./components";
-import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
 import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
@@ -14,7 +13,7 @@ import { mergeUiTranslations } from "../../common/translations";
 @NgModule({
 	declarations: [StarkAppLogoutComponent],
 	exports: [StarkAppLogoutComponent],
-	imports: [MatIconModule, StarkSvgViewBoxModule, TranslateModule, MatTooltipModule, MatButtonModule]
+	imports: [MatIconModule, TranslateModule, MatTooltipModule, MatButtonModule]
 })
 export class StarkAppLogoutModule {
 	/**

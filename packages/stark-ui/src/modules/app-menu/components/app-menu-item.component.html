@@ -7,13 +7,7 @@
 	[disableRipple]="!menuGroup.isEnabled"
 	(click)="onClick()"
 >
-	<mat-icon
-		*ngIf="menuGroup.icon"
-		[color]="isActive ? 'primary' : ''"
-		starkSvgViewBox
-		[svgIcon]="menuGroup.icon"
-		class="stark-small-icon"
-	></mat-icon>
+	<mat-icon *ngIf="menuGroup.icon" [color]="isActive ? 'primary' : ''" [svgIcon]="menuGroup.icon" class="stark-small-icon"></mat-icon>
 	<span matLine translate>{{ menuGroup.label }}</span>
 </mat-list-item>
 <mat-expansion-panel *ngIf="menuGroup.entries" #menuGroupsPanel>

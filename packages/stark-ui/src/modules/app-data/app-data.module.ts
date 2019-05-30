@@ -10,11 +10,10 @@ import { mergeUiTranslations } from "../../common/translations";
 import { translationsEn } from "./assets/translations/en";
 import { translationsNl } from "./assets/translations/nl";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
-import { StarkSvgViewBoxModule } from "../svg-view-box";
 
 @NgModule({
 	declarations: [StarkAppDataComponent],
-	imports: [CommonModule, StarkSvgViewBoxModule, MatButtonModule, MatIconModule, MatTooltipModule, TranslateModule],
+	imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule, TranslateModule],
 	exports: [StarkAppDataComponent]
 })
 export class StarkAppDataModule {

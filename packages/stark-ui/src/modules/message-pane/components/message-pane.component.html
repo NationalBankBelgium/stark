@@ -80,9 +80,9 @@
 		<ng-container *ngIf="currentNavItem === 'errors'">
 			<div
 				class="stark-message-pane-item stark-message-pane-item-error errors"
-				*ngFor="let message of (errorMessages$ | async); trackBy: trackItemFn"
+				*ngFor="let message of errorMessages$ | async; trackBy: trackItemFn"
 			>
-				<mat-icon starkSvgViewBox svgIcon="alert-circle"></mat-icon>
+				<mat-icon svgIcon="alert-circle"></mat-icon>
 				<div translate="{{ message.key }}" translate-values="message.interpolateValues"></div>
 				<button
 					mat-icon-button
@@ -98,9 +98,9 @@
 		<ng-container *ngIf="currentNavItem === 'warnings'">
 			<div
 				class="stark-message-pane-item stark-message-pane-item-warning warnings"
-				*ngFor="let message of (warningMessages$ | async); trackBy: trackItemFn"
+				*ngFor="let message of warningMessages$ | async; trackBy: trackItemFn"
 			>
-				<mat-icon starkSvgViewBox svgIcon="alert"></mat-icon>
+				<mat-icon svgIcon="alert"></mat-icon>
 				<div translate="{{ message.key }}" translate-values="message.interpolateValues"></div>
 				<button
 					mat-icon-button
@@ -116,9 +116,9 @@
 		<ng-container *ngIf="currentNavItem === 'infos'">
 			<div
 				class="stark-message-pane-item stark-message-pane-item-info infos"
-				*ngFor="let message of (infoMessages$ | async); trackBy: trackItemFn"
+				*ngFor="let message of infoMessages$ | async; trackBy: trackItemFn"
 			>
-				<mat-icon starkSvgViewBox svgIcon="information"></mat-icon>
+				<mat-icon svgIcon="information"></mat-icon>
 				<div translate="{{ message.key }}" translate-values="message.interpolateValues"></div>
 				<button
 					mat-icon-button
