@@ -12,7 +12,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
-import { HAMMER_LOADER } from "@angular/platform-browser";
+import { By, HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
@@ -303,7 +303,12 @@ describe("TableComponent", () => {
 
 		it("should display/hide the counter element when 'showRowsCounter' changes", () => {
 			const rowsCounterSelector = ".stark-table-rows-counter";
-			hostComponent.dummyData = [{ name: "dummy-data-1" }, { name: "dummy-data-2" }, { name: "dummy-data-3" }, { name: "dummy-data-4" }];
+			hostComponent.dummyData = [
+				{ name: "dummy-data-1" },
+				{ name: "dummy-data-2" },
+				{ name: "dummy-data-3" },
+				{ name: "dummy-data-4" }
+			];
 			hostFixture.detectChanges();
 
 			let rowsCounterElement = hostFixture.debugElement.nativeElement.querySelector(rowsCounterSelector);
@@ -827,6 +832,20 @@ describe("TableComponent", () => {
 				hostComponent.tableFilter = { globalFilterPresent: true, globalFilterValue: "ThisShouldBeAUniqueValue" };
 				hostFixture.detectChanges();
 				expect(component.paginationConfig.totalItems).toBe(1);
+			});
+
+			it("should add the 'filter-enabled' CSS class to the global filter button only when filterValue is not empty", () => {
+				hostComponent.tableFilter = { globalFilterValue: "some value" };
+				hostFixture.detectChanges();
+
+				const globalFilterButton = hostFixture.debugElement.query(By.css(".header .actions .button-global-filter"));
+
+				expect(globalFilterButton.classes["filter-enabled"]).toBe(true);
+
+				hostComponent.tableFilter = { globalFilterValue: "" };
+				hostFixture.detectChanges();
+
+				expect(globalFilterButton.classes["filter-enabled"]).toBe(false);
 			});
 		});
 

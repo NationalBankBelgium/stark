@@ -14,7 +14,12 @@
 	</button>
 
 	<ng-container *ngIf="filter.globalFilterPresent">
-		<button [matMenuTriggerFor]="globalFilter" mat-icon-button>
+		<button
+			[matMenuTriggerFor]="globalFilter"
+			mat-icon-button
+			class="button-global-filter"
+			[ngClass]="{ 'filter-enabled': !!filter.globalFilterValue }"
+		>
 			<mat-icon [matTooltip]="'STARK.TABLE.FILTER' | translate" class="stark-small-icon" svgIcon="filter"></mat-icon>
 		</button>
 		<mat-menu class="mat-table-filter" #globalFilter="matMenu" xPosition="before" [overlapTrigger]="false">
