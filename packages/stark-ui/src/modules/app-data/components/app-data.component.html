@@ -10,7 +10,7 @@
 	</div>
 
 	<button mat-icon-button aria-label="Application Data" (click)="toggleDetail()" [ngClass]="{ 'is-open': !isDetailHidden }" mat-button>
-		<mat-icon svgIcon="menu-down" starkSvgViewBox></mat-icon>
+		<mat-icon svgIcon="menu-down"></mat-icon>
 	</button>
 	<div class="stark-app-data-detail stark-fade-animation" *ngIf="!isDetailHidden">
 		<ng-container *ngTemplateOutlet="appDataDetail"></ng-container>
@@ -25,7 +25,7 @@
 		mat-button
 		[matTooltip]="'STARK.ICONS.APP_DATA' | translate"
 	>
-		<mat-icon svgIcon="dots-vertical" starkSvgViewBox></mat-icon>
+		<mat-icon svgIcon="dots-vertical"></mat-icon>
 	</button>
 	<div class="stark-app-data-detail animate-show-hide" *ngIf="!isDetailHidden">
 		<ng-container *ngTemplateOutlet="appDataDetail"></ng-container>

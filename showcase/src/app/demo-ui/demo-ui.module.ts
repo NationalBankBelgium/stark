@@ -40,7 +40,6 @@ import {
 	StarkProgressIndicatorModule,
 	StarkRouteSearchModule,
 	StarkSliderModule,
-	StarkSvgViewBoxModule,
 	StarkTableModule,
 	StarkTransformInputDirectiveModule
 } from "@nationalbankbelgium/stark-ui";
@@ -133,7 +132,6 @@ import {
 		StarkPrettyPrintModule,
 		StarkRouteSearchModule,
 		StarkSliderModule,
-		StarkSvgViewBoxModule,
 		StarkTableModule,
 		StoreModule.forFeature("DemoGenericSearch", demoGenericSearchReducers)
 	],

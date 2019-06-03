@@ -8,7 +8,6 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 import { MatMenuModule } from "@angular/material/menu";
-import { StarkSvgViewBoxModule } from "../svg-view-box";
 
 @NgModule({
 	declarations: [StarkMinimapComponent],
@@ -20,7 +19,6 @@ import { StarkSvgViewBoxModule } from "../svg-view-box";
 		MatIconModule,
 		MatTooltipModule,
 		MatMenuModule,
-		StarkSvgViewBoxModule,
 		TranslateModule
 	],
 	exports: [StarkMinimapComponent]

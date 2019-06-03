@@ -17,7 +17,6 @@ import { StarkTableColumnComponent, StarkTableComponent } from "./components";
 import { StarkTableMultisortDialogComponent } from "./components/dialogs/multisort.component";
 import { StarkActionBarModule } from "../action-bar/action-bar.module";
 import { StarkPaginationModule } from "../pagination/pagination.module";
-import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
 import { StarkMinimapModule } from "../minimap/minimap.module";
 import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
@@ -45,7 +44,6 @@ import { mergeUiTranslations } from "../../common/translations";
 		TranslateModule,
 		StarkActionBarModule,
 		StarkPaginationModule,
-		StarkSvgViewBoxModule,
 		StarkMinimapModule
 	]
 })

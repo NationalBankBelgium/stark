@@ -7,7 +7,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { StarkPaginationComponent } from "./components";
-import { StarkSvgViewBoxModule } from "../svg-view-box/svg-view-box.module";
 import { StarkRestrictInputDirectiveModule } from "../restrict-input-directive/restrict-input-directive.module";
 import { StarkDropdownModule } from "../dropdown/dropdown.module";
 
@@ -23,7 +22,6 @@ import { StarkDropdownModule } from "../dropdown/dropdown.module";
 		MatPaginatorModule,
 		MatTooltipModule,
 		StarkRestrictInputDirectiveModule,
-		StarkSvgViewBoxModule,
 		StarkDropdownModule
 	]
 })

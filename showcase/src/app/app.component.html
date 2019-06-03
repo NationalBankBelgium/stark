@@ -23,10 +23,10 @@
 						<div class="stark-app-bar-content-left">
 							<div class="stark-actions">
 								<button class="stark-home-button" (click)="goHome()" color="white" mat-icon-button>
-									<mat-icon starkSvgViewBox svgIcon="home"></mat-icon>
+									<mat-icon svgIcon="home"></mat-icon>
 								</button>
 								<button color="white" mat-icon-button (click)="toggleMenu()">
-									<mat-icon starkSvgViewBox svgIcon="menu"></mat-icon>
+									<mat-icon svgIcon="menu"></mat-icon>
 								</button>
 							</div>
 						</div>
@@ -75,10 +75,10 @@
 								</div>
 								<stark-language-selector color="white" class="stark-full-width" mode="dropdown"></stark-language-selector>
 								<button color="white" (click)="openLeftSidebar()" mat-icon-button>
-									<mat-icon starkSvgViewBox svgIcon="skip-next"></mat-icon>
+									<mat-icon svgIcon="skip-next"></mat-icon>
 								</button>
 								<button color="white" (click)="openRightSidebar()" mat-icon-button>
-									<mat-icon starkSvgViewBox svgIcon="skip-previous"></mat-icon>
+									<mat-icon svgIcon="skip-previous"></mat-icon>
 								</button>
 							</div>
 							<div class="stark-app-bar-content-right-actions-alt">
@@ -90,7 +90,7 @@
 										color="success"
 										[matTooltip]="'SHOWCASE.ICONS.STARK_UI' | translate"
 									>
-										<mat-icon class="header-icon" svgIcon="television-guide" starkSvgViewBox></mat-icon>
+										<mat-icon class="header-icon" svgIcon="television-guide"></mat-icon>
 									</button>
 								</a>
 								<a href="https://stark.nbb.be/api-docs/stark-core/latest/" target="_blank" rel="noopener noreferrer">
@@ -99,7 +99,6 @@
 										mat-icon-button
 										color="primary"
 										[matTooltip]="'SHOWCASE.ICONS.STARK_CORE' | translate"
-										starkSvgViewBox
 									>
 										<mat-icon class="header-icon" svgIcon="atom"></mat-icon>
 									</button>
@@ -111,7 +110,7 @@
 										color="alert"
 										[matTooltip]="'SHOWCASE.ICONS.STARK_RBAC' | translate"
 									>
-										<mat-icon class="header-icon" svgIcon="shield-lock-outline" starkSvgViewBox></mat-icon>
+										<mat-icon class="header-icon" svgIcon="shield-lock-outline"></mat-icon>
 									</button>
 								</a>
 								<a href="https://github.com/NationalBankBelgium" target="_blank" rel="noopener noreferrer">
@@ -121,7 +120,7 @@
 										class="github-icon"
 										[matTooltip]="'SHOWCASE.ICONS.GITHUB' | translate"
 									>
-										<mat-icon class="custom-icon" svgIcon="github-circle" starkSvgViewBox></mat-icon>
+										<mat-icon class="custom-icon" svgIcon="github-circle"></mat-icon>
 									</button>
 								</a>
 							</div>

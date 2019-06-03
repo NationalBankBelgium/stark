@@ -51,7 +51,6 @@ import {
 	StarkDatePickerModule,
 	StarkLanguageSelectorModule,
 	StarkSessionUiModule,
-	StarkSvgViewBoxModule,
 	StarkToastNotificationModule
 } from "@nationalbankbelgium/stark-ui";
 import { HomeModule } from "./home/home.module";
@@ -182,7 +181,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		StarkAppSidebarModule.forRoot(),
 		StarkErrorHandlingModule.forRoot(),
 		StarkLanguageSelectorModule,
-		StarkSvgViewBoxModule,
 		StarkDatePickerModule,
 		StarkToastNotificationModule.forRoot({
 			delay: 5000,

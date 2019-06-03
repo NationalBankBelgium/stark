@@ -16,13 +16,13 @@ describe("SvgViewBoxDirective", () => {
 	let fixture: ComponentFixture<TestComponent>;
 
 	function getTemplate(svgViewBoxDirective: string, viewBoxAttribute?: string): string {
-		return (`
+		return `
 <div ${svgViewBoxDirective}>
 	<svg xmlns="http://www.w3.org/2000/svg" ${viewBoxAttribute}>
 		<text font-size="8" font-family="serif" y="6"><![CDATA[dummy icon]]></text>
 	</svg>
 </div>
-`);
+`;
 	}
 
 	function initializeComponentFixture(): void {
