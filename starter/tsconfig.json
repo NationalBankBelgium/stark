@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/@nationalbankbelgium/stark-build/tsconfig.json",
+  "extends": "@nationalbankbelgium/code-style/tsconfig/3.2.x/ng7",
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",

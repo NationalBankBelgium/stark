@@ -1,5 +1,5 @@
 {
-	"extends": "./node_modules/@nationalbankbelgium/stark-build/config/stylelint.config.js",
+  	"extends": ["@nationalbankbelgium/code-style/stylelint/9.10.x", "stylelint-config-prettier"],
     "rules": {
 	  "selector-pseudo-element-no-unknown": [true, { "ignorePseudoElements": ["ng-deep"] }]
     }

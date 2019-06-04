@@ -1,1 +1,1 @@
-module.exports = require("./node_modules/@nationalbankbelgium/stark-build/config/.prettierrc.js");
+module.exports = require("@nationalbankbelgium/code-style/prettier/1.16.x");

@@ -34,6 +34,7 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@compodoc/compodoc": "1.1.8",
+    "@nationalbankbelgium/code-style": "^1.0.1",
     "@ngtools/json-schema": "^1.1.0",
     "codelyzer": "^4.5.0",
     "commitizen": "^3.0.5",
