@@ -1,7 +1,7 @@
 /* ============================================================================== */
 /*  S t a r k   T a b l e                                                         */
 /* ============================================================================== */
-/* stark-ui: src/modules/table/components/table/_table.component.scss */
+/* stark-ui: src/modules/table/components/_table.component.scss */
 
 .stark-table {
   .header {
@@ -18,6 +18,13 @@
       align-items: center;
       display: flex;
       justify-content: flex-end;
+
+      .button-global-filter {
+        opacity: 0.2;
+        &.filter-enabled {
+          opacity: 1;
+        }
+      }
 
       stark-minimap {
         mat-icon {
