@@ -17,7 +17,7 @@ export enum StarkMessagePaneActionTypes {
 export class StarkAddMessages implements Action {
 	/**
 	 * The type of action
-	 * @link StarkMessagesActions
+	 * @link StarkMessagePaneActionTypes
 	 */
 	public readonly type: StarkMessagePaneActionTypes.ADD_MESSAGES = StarkMessagePaneActionTypes.ADD_MESSAGES;
 
@@ -34,7 +34,7 @@ export class StarkAddMessages implements Action {
 export class StarkRemoveMessages implements Action {
 	/**
 	 * The type of action
-	 * @link StarkMessagesActions
+	 * @link StarkMessagePaneActionTypes
 	 */
 	public readonly type: StarkMessagePaneActionTypes.REMOVE_MESSAGES = StarkMessagePaneActionTypes.REMOVE_MESSAGES;
 
@@ -51,7 +51,7 @@ export class StarkRemoveMessages implements Action {
 export class StarkClearMessages implements Action {
 	/**
 	 * The type of action
-	 * @link StarkMessagesActions
+	 * @link StarkMessagePaneActionTypes
 	 */
 	public readonly type: StarkMessagePaneActionTypes.CLEAR_MESSAGES = StarkMessagePaneActionTypes.CLEAR_MESSAGES;
 }
@@ -62,7 +62,7 @@ export class StarkClearMessages implements Action {
 export class StarkGetAllMessages implements Action {
 	/**
 	 * The type of action
-	 * @link StarkMessagesActions
+	 * @link StarkMessagePaneActionTypes
 	 */
 	public readonly type: StarkMessagePaneActionTypes.GET_ALL_MESSAGES = StarkMessagePaneActionTypes.GET_ALL_MESSAGES;
 }

@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs*/
 import { progressIndicatorReducer } from "./progress-indicator.reducer";
 import { StarkProgressIndicatorFullConfig, StarkProgressIndicatorFullConfigImpl, StarkProgressIndicatorType } from "../entities";
-import { StarkProgressIndicatorActionTypes, StarkProgressIndicatorRegister } from "../actions/progress-indicator.actions";
+import { StarkProgressIndicatorActionTypes, StarkProgressIndicatorRegister } from "../actions";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 

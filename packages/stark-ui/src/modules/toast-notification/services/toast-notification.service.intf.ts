@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
 import { Observable } from "rxjs";
 import { StarkToastNotificationResult } from "./toast-notification-result.intf";
-import { StarkToastMessage } from "../components/toast-message.intf";
+import { StarkToastMessage } from "../components";
 
 /**
  * Name of the toast notification service

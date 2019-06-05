@@ -13,7 +13,7 @@ import {
 	StarkRoutingService
 } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { StarkRouteSearchEntry } from "../components/route-search-entry.intf";
+import { StarkRouteSearchEntry } from "./route-search-entry.intf";
 import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu/components";
 import  sortBy  from "lodash-es/sortBy";
 

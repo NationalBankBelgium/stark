@@ -9,7 +9,6 @@ import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkMessageType } from "../../../common/message";
 import { StarkToastNotificationComponent } from "./toast-notification.component";
-import { StarkSvgViewBoxDirective } from "../../svg-view-box";
 
 @Component({
 	selector: `host-component`,
@@ -46,7 +45,7 @@ describe("ToastNotificationComponent", () => {
 	beforeEach(async(() => {
 		return (
 			TestBed.configureTestingModule({
-				declarations: [StarkSvgViewBoxDirective, StarkToastNotificationComponent, TestHostComponent],
+				declarations: [StarkToastNotificationComponent, TestHostComponent],
 				imports: [TranslateModule.forRoot(), MatButtonModule, MatIconModule],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },

@@ -9,7 +9,6 @@ import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkSvgViewBoxDirective } from "../../svg-view-box";
 
 // tslint:disable:no-big-function no-identical-functions
 describe("AppDataComponent", () => {
@@ -20,7 +19,7 @@ describe("AppDataComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			declarations: [StarkSvgViewBoxDirective, StarkAppDataComponent],
+			declarations: [StarkAppDataComponent],
 			imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
 			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger }, TranslateService]
 		}).compileComponents();

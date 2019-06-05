@@ -14,7 +14,7 @@ import {
 import { STARK_PROGRESS_INDICATOR_SERVICE, StarkProgressIndicatorService } from "../services";
 import { StarkProgressIndicatorConfig, StarkProgressIndicatorType } from "../entities";
 import { Subscription } from "rxjs";
-import { StarkProgressIndicatorComponent } from "../components/progress-indicator.component";
+import { StarkProgressIndicatorComponent } from "../components";
 
 /**
  * Name of the directive

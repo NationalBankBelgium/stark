@@ -30,8 +30,7 @@ import { distinctUntilChanged } from "rxjs/operators";
 
 import { StarkTableColumnComponent } from "./column.component";
 import { StarkSortingRule, StarkTableMultisortDialogComponent, StarkTableMultisortDialogData } from "./dialogs/multisort.component";
-import { StarkActionBarConfig } from "../../action-bar/components/action-bar-config.intf";
-import { StarkAction } from "../../action-bar/components/action.intf";
+import { StarkAction, StarkActionBarConfig } from "../../action-bar/components";
 import {
 	StarkColumnFilterChangedOutput,
 	StarkColumnSortChangedOutput,
@@ -41,8 +40,7 @@ import {
 	StarkTableRowActions
 } from "../entities";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
-import { StarkPaginateEvent } from "../../pagination/components/paginate-event.intf";
+import { StarkPaginateEvent, StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
 import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../minimap/components";
 import find from "lodash-es/find";
 
@@ -82,7 +80,7 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 /* tslint:enable */
 export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
 	/**
-	 * Array of {@link StarkColumnProperties} objects which define the columns of the data table.
+	 * Array of {@link StarkTableColumnProperties} objects which define the columns of the data table.
 	 */
 	@Input()
 	public set columnProperties(input: StarkTableColumnProperties[]) {
@@ -107,7 +105,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	public get _minimapItemProperties(): StarkMinimapItemProperties[] {
-		return this._columnProperties.map(({ name, label }: StarkTableColumnProperties) => ({ name, label: label || name }));
+		return this._columnProperties.map(({ name, label }: StarkTableColumnProperties) => ({
+			name,
+			label: label || name
+		}));
 	}
 
 	public get _visibleMinimapItems(): string[] {
@@ -229,7 +230,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public tableRowActions: StarkTableRowActions = { actions: [] };
 
 	/**
-	 * @deprecated - use {@link this.tableRowActions}
+	 * @deprecated - use {@link tableRowActions} instead
 	 */
 	@Input()
 	public set tableRowsActionBarConfig(config: StarkActionBarConfig) {
@@ -551,8 +552,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			column.sortChanged.subscribe((sortedColumn: StarkColumnSortChangedOutput) => {
 				this.onReorderChange(sortedColumn);
 			});
-			column.filterChanged.subscribe((fitleredColumn: StarkColumnFilterChangedOutput) => {
-				this.onColumnFilterChange(fitleredColumn.name, fitleredColumn.filterValue);
+			column.filterChanged.subscribe((filteredColumn: StarkColumnFilterChangedOutput) => {
+				this.onColumnFilterChange(filteredColumn.name, filteredColumn.filterValue);
 				this.applyFilter();
 			});
 			this.displayedColumns = [...this.displayedColumns, column.name];
@@ -815,7 +816,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			.filter((columnToFilter: StarkTableColumnComponent) => columnToFilter.sortDirection)
 			.sort((column1: StarkTableColumnComponent, column2: StarkTableColumnComponent) => column1.sortPriority - column2.sortPriority);
 
-		// FIXME If "multiSort" is empty or equal to "true", isMultiSorting is true. Otherwise, "isMultisorting" should stay false.
+		// FIXME If "multiSort" is empty or equal to "true", isMultiSorting is true. Otherwise, "isMultiSorting" should stay false.
 		// Should remove this condition ?
 		this.isMultiSorting = sortableColumns.length > 1;
 

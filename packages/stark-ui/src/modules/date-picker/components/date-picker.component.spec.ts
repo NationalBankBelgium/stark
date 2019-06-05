@@ -16,7 +16,7 @@ import moment from "moment";
 import { Observer } from "rxjs";
 import { DEFAULT_DATE_MASK_CONFIG, StarkDatePickerComponent, StarkDatePickerMaskConfig } from "./date-picker.component";
 import { STARK_DATE_FORMATS } from "./date-format.constants";
-import { StarkTimestampMaskDirective } from "../../input-mask-directives";
+import { StarkTimestampMaskDirective } from "../../input-mask-directives/directives";
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;

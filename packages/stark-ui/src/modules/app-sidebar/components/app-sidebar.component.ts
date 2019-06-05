@@ -109,6 +109,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * Class constructor
 	 * @param logger - The sidebar service of the application
 	 * @param sidebarService - The sidebar service of the application
+	 * @param routingService - The routing service of the application
 	 * @param breakpointObserver - Utility for checking the matching state of @media queries
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.

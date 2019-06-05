@@ -38,7 +38,7 @@ export class StarkToastNotificationModule {
 	/**
 	 * Prevent this module from being re-imported
 	 * @link https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
-	 * @param the parent module
+	 * @param parentModule - the parent module
 	 */
 	public constructor(
 		@Optional()

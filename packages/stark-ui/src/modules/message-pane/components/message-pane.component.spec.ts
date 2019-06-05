@@ -26,7 +26,7 @@ import {
 	starkMessagePaneDisplayedClass
 } from "./message-pane.constants";
 import { StarkMessage, StarkMessageType } from "../../../common/message";
-import { StarkDOMUtil } from "../../../util/dom/dom.util";
+import { StarkDOMUtil } from "../../../util/dom";
 
 /* jasmine imports */
 import SpyObj = jasmine.SpyObj;

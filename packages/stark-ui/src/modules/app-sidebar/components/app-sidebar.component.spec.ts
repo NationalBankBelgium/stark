@@ -9,7 +9,7 @@ import { HookMatchCriteria, TransitionHookFn, TransitionStateHookFn } from "@uir
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkRoutingTransitionHook } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppSidebarComponent } from "./app-sidebar.component";
-import { STARK_APP_SIDEBAR_SERVICE } from "../services/app-sidebar.service.intf";
+import { STARK_APP_SIDEBAR_SERVICE } from "../services";
 import { MockAppSidebarService } from "../testing/app-sidebar.mock";
 
 // Definitions

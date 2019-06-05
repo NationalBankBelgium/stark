@@ -2,12 +2,13 @@ import { ReplaySubject, Subscription } from "rxjs";
 import { map, take } from "rxjs/operators";
 import { OnDestroy, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { AbstractStarkFormComponent } from "../classes/abstract-form-component";
-import { StarkGenericSearchService } from "../classes/generic-search.service.intf";
-import { StarkSearchState } from "../entities/search-state.entity.intf";
+import { AbstractStarkFormComponent } from "./abstract-form-component";
+import { StarkGenericSearchService } from "./generic-search.service.intf";
+import { StarkSearchState } from "../entities";
 import { StarkErrorImpl, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkFormUtil } from "../../../util/form";
-import { StarkProgressIndicatorConfig, StarkProgressIndicatorService, StarkProgressIndicatorType } from "../../progress-indicator";
+import { StarkProgressIndicatorConfig, StarkProgressIndicatorType } from "../../progress-indicator/entities";
+import { StarkProgressIndicatorService } from "../../progress-indicator/services";
 
 /**
  * Default progress indicator configuration

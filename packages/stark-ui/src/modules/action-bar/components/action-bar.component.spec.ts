@@ -4,13 +4,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { HAMMER_LOADER } from "@angular/platform-browser";
-import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
+import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Subject } from "rxjs";
-import { StarkSvgViewBoxDirective } from "../../svg-view-box";
 import { StarkActionBarComponent } from "./action-bar.component";
-import { StarkActionBarConfig } from "./action-bar-config.intf";
 import { StarkAction } from "./action.intf";
 import createSpy = jasmine.createSpy;
 
@@ -21,11 +19,10 @@ describe("ActionBarComponent", () => {
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			declarations: [StarkSvgViewBoxDirective, StarkActionBarComponent],
+			declarations: [StarkActionBarComponent],
 			imports: [MatButtonModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
 				TranslateService,
 				{
 					// See https://github.com/NationalBankBelgium/stark/issues/1088
@@ -59,12 +56,10 @@ describe("ActionBarComponent", () => {
 			}
 		];
 
-		const demoActionBarConfig: StarkActionBarConfig = {
+		component.actionBarConfig = {
 			actions: demoActions,
 			isPresent: true
 		};
-
-		component.actionBarConfig = demoActionBarConfig;
 		fixture.detectChanges();
 	});
 

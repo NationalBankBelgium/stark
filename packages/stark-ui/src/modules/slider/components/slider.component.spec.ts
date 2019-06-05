@@ -1,8 +1,8 @@
 /* tslint:disable:completed-docs max-inline-declarations no-big-function */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
-import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
+import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSliderComponent } from "./slider.component";
 import { StarkSliderConfig } from "./slider-config.intf";
 import Spy = jasmine.Spy;
@@ -61,10 +61,7 @@ describe("SliderComponent", () => {
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			declarations: [StarkSliderComponent, TestHostComponent],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-			]
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
 		}).compileComponents();
 	}));
 
@@ -121,8 +118,6 @@ describe("SliderComponent", () => {
 
 			expect(component.logger).not.toBeNull();
 			expect(component.logger).toBeDefined();
-			expect(component.routingService).not.toBeNull();
-			expect(component.routingService).toBeDefined();
 		});
 
 		it("should have inputs", () => {

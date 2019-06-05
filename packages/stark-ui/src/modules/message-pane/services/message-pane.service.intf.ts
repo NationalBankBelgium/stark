@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { InjectionToken } from "@angular/core";
 import { StarkMessage } from "../../../common/message";
-import { StarkMessageCollection } from "../entities/message-collection.entity.intf";
+import { StarkMessageCollection } from "../entities";
 
 /**
  * The name of the service

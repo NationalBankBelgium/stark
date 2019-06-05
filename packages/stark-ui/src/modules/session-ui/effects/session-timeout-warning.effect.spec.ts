@@ -16,8 +16,8 @@ import {
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
-import { StarkSessionTimeoutWarningDialogEffects } from "../effects/session-timeout-warning.effects";
-import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities/stark-session-ui-config";
+import { StarkSessionTimeoutWarningDialogEffects } from "../effects";
+import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities";
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;

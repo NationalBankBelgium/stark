@@ -10,7 +10,7 @@ import { StarkProgressIndicatorType, StarkProgressIndicatorConfig } from "../ent
 import { StarkProgressIndicatorDirective } from "../directives";
 import { STARK_PROGRESS_INDICATOR_SERVICE } from "../services";
 import { MockStarkProgressIndicatorService } from "../testing/progress-indicator.mock";
-import { StarkProgressIndicatorComponent } from "../components/progress-indicator.component";
+import { StarkProgressIndicatorComponent } from "../components";
 
 @Component({
 	selector: "test-component",

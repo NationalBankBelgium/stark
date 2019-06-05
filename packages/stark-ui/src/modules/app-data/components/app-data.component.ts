@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkDOMUtil } from "../../../util/dom/dom.util";
+import { StarkDOMUtil } from "../../../util/dom";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**

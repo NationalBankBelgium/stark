@@ -32,14 +32,14 @@ describe("BreadcrumbComponent", () => {
 	const childConst = "child";
 	const parentConst = "parent";
 	const grandParentConst = "grandparent";
-	const rootAncesterConst = "root ancestor";
+	const rootAncestorConst = "root ancestor";
 
 	// component bindings values
 	const breadcrumbConfig: StarkBreadcrumbConfig = {
 		breadcrumbPaths: [
 			{
 				id: "path 1",
-				state: rootAncesterConst,
+				state: rootAncestorConst,
 				stateParams: { param1: "param 1", param2: "param 2" },
 				translationKey: "ROOT_ANCESTOR"
 			},
@@ -68,13 +68,13 @@ describe("BreadcrumbComponent", () => {
 	mockStateTreeParams.set(childConst, { param7: "param 7", param8: "param 8" });
 	mockStateTreeParams.set(parentConst, { param5: "param 5", param6: "param 6" });
 	mockStateTreeParams.set(grandParentConst, { param3: "param 3", param4: "param 4" });
-	mockStateTreeParams.set(rootAncesterConst, { param1: "param 1", param2: "param 2" });
+	mockStateTreeParams.set(rootAncestorConst, { param1: "param 1", param2: "param 2" });
 
 	const mockStateTreeData: Map<string, any> = new Map<string, unknown>();
 	mockStateTreeData.set(childConst, { translationKey: "CHILD" });
 	mockStateTreeData.set(parentConst, { translationKey: "PARENT" });
 	mockStateTreeData.set(grandParentConst, { translationKey: "GRANDPARENT" });
-	mockStateTreeData.set(rootAncesterConst, { translationKey: "ROOT_ANCESTOR" });
+	mockStateTreeData.set(rootAncestorConst, { translationKey: "ROOT_ANCESTOR" });
 
 	const mockDeregisterTransitionHookFn: Spy<() => void> = jasmine.createSpy("deregistersTransitionHook");
 
