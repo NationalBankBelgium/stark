@@ -3,17 +3,21 @@
 	"dry-run": false,
 	"verbose": false,
 	"force": false,
-	"pkgFiles": ["package.json", "package-lock.json"],
-	"increment": "conventional:angular",
 	"scripts": {
-		"afterRelease": false,
-		"beforeStage": "npm run check:nightly:stark-versions -- ${version} && npm run generate:changelog",
-		"beforeStart": "npm run check:starter:stark-versions"
+		"afterRelease": null,
+		"beforeStage": ["npm run check:nightly:stark-versions -- ${version}", "npm run generate:changelog"],
+		"beforeStart": ["npm run check:starter:stark-versions"]
+	},
+	"plugins": {
+		"@release-it/conventional-changelog": {
+			"preset": "angular"
+		}
 	},
 	"git": {
 		"changelog": "npm run generate:changelog-recent",
 		"requireCleanWorkingDir": true,
 		"requireUpstream": true,
+		"requireCommits": false,
 		"commit": true,
 		"commitMessage": "chore(release): release %s",
 		"commitArgs": "",
@@ -21,7 +25,7 @@
 		"tagName": "%s",
 		"tagAnnotation": "%s",
 		"push": true,
-		"pushArgs": "",
+		"pushArgs": "--follow-tags",
 		"pushRepo": "origin"
 	},
 	"npm": {
