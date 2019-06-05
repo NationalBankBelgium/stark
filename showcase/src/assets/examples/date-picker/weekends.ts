@@ -15,6 +15,6 @@ export class DemoDatePickerComponent implements OnInit {
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 
 	public onDateChanged(date: Date): void {
-		this.logger.debug(date);
+		this.logger.debug("Date changed: ", date);
 	}
 }

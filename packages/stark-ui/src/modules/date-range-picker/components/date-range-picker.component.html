@@ -3,30 +3,37 @@
 		#startPicker
 		[pickerId]="rangePickerId + '-start'"
 		[pickerName]="rangePickerName + '-start'"
-		[value]="startDate"
-		[dateFilter]="dateFilter"
-		[disabled]="isDisabled"
+		[formControl]="startDateFormControl"
 		[placeholder]="startDateLabel | translate"
+		[dateFilter]="dateFilter"
+		[dateMask]="dateMask"
 		[min]="startMinDate"
 		[max]="startMaxDate"
-		[dateMask]="dateMask"
-		(dateChange)="onDateStartChanged($event)"
+		[required]="required"
 	>
 	</stark-date-picker>
+	<!-- <mat-error> should always be a direct child of <mat-form-field> -->
+	<mat-error>
+		<ng-content select="[start-date-errors]"></ng-content>
+	</mat-error>
 </mat-form-field>
+
 <mat-form-field>
 	<stark-date-picker
 		#endPicker
 		[pickerId]="rangePickerId + '-end'"
 		[pickerName]="rangePickerName + '-end'"
-		[value]="endDate"
-		[dateFilter]="dateFilter"
-		[disabled]="isDisabled"
+		[formControl]="endDateFormControl"
 		[placeholder]="endDateLabel | translate"
+		[dateFilter]="dateFilter"
+		[dateMask]="dateMask"
 		[min]="endMinDate"
 		[max]="endMaxDate"
-		[dateMask]="dateMask"
-		(dateChange)="onDateEndChanged($event)"
+		[required]="required"
 	>
 	</stark-date-picker>
+	<!-- <mat-error> should always be a direct child of <mat-form-field> -->
+	<mat-error>
+		<ng-content select="[end-date-errors]"></ng-content>
+	</mat-error>
 </mat-form-field>
