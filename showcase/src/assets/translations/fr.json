@@ -67,6 +67,19 @@
           "REQUIRED": "La date est requise"
         }
       },
+      "DATE_TIME_PICKER": {
+        "TITLE": "Date time picker",
+        "NG_MODEL": "Utilisant ngModel",
+        "PLACEHOLDER": "Date et l'heure",
+        "REACTIVE_FORM": "Utilisant Reactive form",
+        "ERROR_MESSAGES": {
+          "MIN_DATE": "La date ne peut pas être antérieure à la date minimale autorisée",
+          "MAX_DATE": "La date ne peut pas être ultérieure à la date maximum autorisée",
+          "MIN_DATE_TIME": "La date-heure ne peut pas être antérieure à la date-heure minimale autorisée",
+          "MAX_DATE_TIME": "La date-heure ne peut pas être ultérieure à la date-heure maximum autorisée",
+          "INVALID_DATE": "Date invalide"
+        }
+      },
       "DIALOGS": {
         "ALERT": {
           "TITLE": "Ceci est un titre d'alerte",

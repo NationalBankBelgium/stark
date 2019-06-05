@@ -8,14 +8,15 @@
     "module": "commonjs",
     "importHelpers": false,
     "paths": {
-      "rxjs/*": ["../node_modules/rxjs/*"],
       "@angular/*": ["../node_modules/@angular/*"],
+      "@nationalbankbelgium/stark-*": ["./stark-*"],
       "@ngrx/*": ["./stark-core/node_modules/@ngrx/*"],
       "@ngx-translate/*": ["./stark-core/node_modules/@ngx-translate/*"],
       "@uirouter/*": ["./stark-core/node_modules/@uirouter/*"],
-      "moment": ["./stark-core/node_modules/moment"],
+      "class-validator": ["./stark-core/node_modules/class-validator"],
       "environments/environment": ["./stark-core/src/common/environment"],
-      "@nationalbankbelgium/stark-*": ["./stark-*"]
+      "moment": ["./stark-core/node_modules/moment"],
+      "rxjs/*": ["../node_modules/rxjs/*"]
     },
     "skipDefaultLibCheck": true,
     "inlineSourceMap": true,

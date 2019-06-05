@@ -10,21 +10,21 @@
       "../typings"
     ],
     "paths": {
-      "cerialize": ["../../stark-core/node_modules/cerialize"],
+      "@nationalbankbelgium/stark-core": ["../../../dist/packages/stark-core"],
+      "@nationalbankbelgium/stark-ui": ["../"],
       "@ng-idle/*": ["../../stark-core/node_modules/@ng-idle/*"],
       "@ngrx/*": ["../../stark-core/node_modules/@ngrx/*"],
       "@ngx-translate/*": ["../../stark-core/node_modules/@ngx-translate/*"],
       "@uirouter/*": ["../../stark-core/node_modules/@uirouter/*"],
+      "cerialize": ["../../stark-core/node_modules/cerialize"],
+      "class-validator": ["../../stark-core/node_modules/class-validator"],
       "environments/environment": ["../../../dist/packages/stark-core/src/common/environment"],
-      "moment": ["../../stark-core/node_modules/moment"],
-      "@nationalbankbelgium/stark-core": ["../../../dist/packages/stark-core"],
-      "@nationalbankbelgium/stark-ui": ["../"]
+      "moment": ["../../stark-core/node_modules/moment"]
     },
     "outDir": "../../../dist/packages/stark-ui"
   },
 
   "files": ["public_api.ts"],
-
 
   "angularCompilerOptions": {
     "generateCodeForLibraries": true,

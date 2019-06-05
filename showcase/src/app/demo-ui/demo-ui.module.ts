@@ -28,6 +28,7 @@ import {
 	StarkCollapsibleModule,
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
+	StarkDateTimePickerModule,
 	StarkDialogsModule,
 	StarkDropdownModule,
 	StarkGenericSearchModule,
@@ -72,7 +73,8 @@ import {
 	DemoSliderPageComponent,
 	DemoTablePageComponent,
 	DemoToastPageComponent,
-	DemoTransformInputDirectivePageComponent
+	DemoTransformInputDirectivePageComponent,
+	DemoDateTimePickerPageComponent
 } from "./pages";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
@@ -119,6 +121,7 @@ import {
 		StarkCollapsibleModule,
 		StarkDatePickerModule,
 		StarkDateRangePickerModule,
+		StarkDateTimePickerModule,
 		StarkDialogsModule,
 		StarkDropdownModule,
 		StarkGenericSearchModule,
@@ -142,6 +145,7 @@ import {
 		DemoCollapsiblePageComponent,
 		DemoDatePickerPageComponent,
 		DemoDateRangePickerPageComponent,
+		DemoDateTimePickerPageComponent,
 		DemoDialogsPageComponent,
 		DemoDropdownPageComponent,
 		DemoFooterPageComponent,

@@ -67,6 +67,19 @@
           "REQUIRED": "Datum is verplicht"
         }
       },
+      "DATE_TIME_PICKER": {
+        "TITLE": "Date time picker",
+        "NG_MODEL": "Met ngModel",
+        "PLACEHOLDER": "Datum en tijd",
+        "REACTIVE_FORM": "Met Reactive form",
+        "ERROR_MESSAGES": {
+          "MIN_DATE": "Datum mag niet vóór de toegestane minimale datum zijn",
+          "MAX_DATE": "Datum mag niet na de toegestane maximale datum zijn",
+          "MIN_DATE_TIME": "Datetime mag niet vóór de toegestane minimale datetime zijn",
+          "MAX_DATE_TIME": "Datetime mag niet na de toegestane maximale datetime zijn",
+          "INVALID_DATE": "Ongeldige datum"
+        }
+      },
       "DIALOGS": {
         "ALERT": {
           "TITLE": "Dit is een waarschuwings titel",

@@ -25,7 +25,8 @@ import {
 	DemoSliderPageComponent,
 	DemoTablePageComponent,
 	DemoToastPageComponent,
-	DemoTransformInputDirectivePageComponent
+	DemoTransformInputDirectivePageComponent,
+	DemoDateTimePickerPageComponent
 } from "./pages";
 
 export const DEMO_STATES: Ng2StateDeclaration[] = [
@@ -77,6 +78,14 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 			translationKey: "SHOWCASE.DEMO.DATE_RANGE_PICKER.TITLE"
 		},
 		views: { "@": { component: DemoDateRangePickerPageComponent } }
+	},
+	{
+		name: "demo-ui.date-time-picker",
+		url: "/date-time-picker",
+		data: {
+			translationKey: "SHOWCASE.DEMO.DATE_TIME_PICKER.TITLE"
+		},
+		views: { "@": { component: DemoDateTimePickerPageComponent } }
 	},
 	{
 		name: "demo-ui.dialogs",

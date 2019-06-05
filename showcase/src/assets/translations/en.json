@@ -67,6 +67,19 @@
           "REQUIRED": "Date is required"
         }
       },
+      "DATE_TIME_PICKER": {
+        "TITLE": "Date time picker",
+        "NG_MODEL": "Using ngModel",
+        "PLACEHOLDER": "Date and time",
+        "REACTIVE_FORM": "Using Reactive form",
+        "ERROR_MESSAGES": {
+          "MIN_DATE": "Date cannot be before the minimum date allowed",
+          "MAX_DATE": "Date cannot be after the maximum date allowed",
+          "MIN_DATE_TIME": "Datetime cannot be before the minimum datetime allowed",
+          "MAX_DATE_TIME": "Datetime cannot be after the maximum datetime allowed",
+          "INVALID_DATE": "Invalid date"
+        }
+      },
       "DIALOGS": {
         "ALERT": {
           "TITLE": "This is an alert title",
