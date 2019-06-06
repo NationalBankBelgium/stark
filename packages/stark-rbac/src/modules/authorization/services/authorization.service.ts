@@ -16,7 +16,7 @@ import {
 } from "@nationalbankbelgium/stark-core";
 import { StarkRBACAuthorizationService, starkRBACAuthorizationServiceName } from "./authorization.service.intf";
 import { StarkRBACStatePermissions, StarkStateRedirection, StarkStateRedirectionFn } from "../entities";
-import { StarkUserNavigationUnauthorized, StarkUserNavigationUnauthorizedRedirected } from "../actions/authorization.actions";
+import { StarkUserNavigationUnauthorized, StarkUserNavigationUnauthorizedRedirected } from "../actions";
 
 /**
  * @ignore

@@ -1,7 +1,7 @@
 import { Directive, Inject, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef, ViewRef } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkRBACDirectivePermission } from "./permission.intf";
-import { STARK_RBAC_AUTHORIZATION_SERVICE, StarkRBACAuthorizationService } from "../services/authorization.service.intf";
+import { STARK_RBAC_AUTHORIZATION_SERVICE, StarkRBACAuthorizationService } from "../services";
 
 /**
  * Name of the directive
