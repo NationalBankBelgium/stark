@@ -1,5 +1,5 @@
 import { StarkSearchState } from "@nationalbankbelgium/stark-ui";
-import { HeroMovieSearchCriteria } from "../entities/hero-movie-search.entity";
+import { HeroMovieSearchCriteria } from "../entities";
 import { DemoGenericActionTypes, DemoGenericSearchActions } from "../actions";
 
 const INITIAL_STATE: Readonly<StarkSearchState<HeroMovieSearchCriteria>> = {

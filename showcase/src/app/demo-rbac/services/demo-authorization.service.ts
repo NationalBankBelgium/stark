@@ -11,7 +11,7 @@ export class DemoAuthorizationService extends StarkRBACAuthorizationServiceImpl 
 		this.sessionService.getCurrentUser().subscribe(
 			(user: StarkUser | undefined) => {
 				if (user) {
-					this.user = { ...user, roles: [...user.roles, "blabla"] };
+					this.user = { ...user, roles: [...user.roles] };
 				}
 			},
 			() => {

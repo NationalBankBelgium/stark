@@ -7,7 +7,7 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { TranslateModule } from "@ngx-translate/core";
 import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 import { StarkRBACAuthorizationModule } from "@nationalbankbelgium/stark-rbac";
-import { DEMO_STATES } from "../demo-rbac/routes";
+import { DEMO_STATES } from "./routes";
 import { SharedModule } from "../shared";
 import { DemoAuthorizationDirectivesPageComponent, DemoAuthorizationServicePageComponent, DemoProtectedPageComponent } from "./pages";
 

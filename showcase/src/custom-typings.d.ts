@@ -25,7 +25,7 @@ declare module 'jwt-decode' {
 }
 
  *
- * If you're prototying and you will fix the types later you can also declare it as type any
+ * If you're prototyping and you will fix the types later you can also declare it as type any
  *
 
 declare var assert: any;
