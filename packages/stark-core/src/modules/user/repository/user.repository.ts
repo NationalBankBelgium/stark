@@ -6,7 +6,7 @@ import { STARK_USER_PROFILE_RESOURCE_PATH, StarkUser } from "../entities";
 import { StarkHttpRequest, StarkSingleItemResponseWrapper } from "../../http/entities";
 import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
 import { StarkUserRepository, starkUserRepositoryName } from "./user.repository.intf";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services/logging.service.intf";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { STARK_HTTP_SERVICE, StarkHttpService } from "../../http/services";
 import { AbstractStarkHttpRepository } from "../../http/repository";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";

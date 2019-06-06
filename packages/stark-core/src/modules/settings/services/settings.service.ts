@@ -18,11 +18,6 @@ import { StarkUser } from "../../user/entities";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
-/**
- * @ignore
- * @ngdoc service
- * @description Service that allows the manipulation of application settings, some of which can be persisted.
- */
 @Injectable()
 export class StarkSettingsServiceImpl implements StarkSettingsService {
 	public preferredLanguage: string;

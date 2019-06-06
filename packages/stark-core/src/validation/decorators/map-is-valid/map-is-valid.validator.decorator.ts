@@ -6,7 +6,7 @@ import {
 	ValidatorConstraint,
 	ValidatorConstraintInterface
 } from "class-validator";
-import { StarkValidationErrorsUtil } from "../../../util";
+import { StarkValidationErrorsUtil } from "../../../util/validation-errors.util";
 
 /**
  * Name of the validator, in case injection is needed.

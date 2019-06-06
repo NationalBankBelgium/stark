@@ -7,7 +7,7 @@ export class StarkHttpEchoType {
 	 */
 	public static NONE = "NONE";
 	/**
-	 * ID is used to retrieve the reponse body's id.
+	 * ID is used to retrieve the response body's id.
 	 */
 	public static ID = "ID";
 }

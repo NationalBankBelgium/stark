@@ -3,7 +3,7 @@ import { StarkUserProfile } from "./user-profile.entity.intf";
 import { StarkUserSecurityProfile } from "./user-security-profile.entity.intf";
 import { StarkResource } from "../../http/entities";
 import { IsArray, IsBoolean, IsDefined, IsEmail, IsString, ValidateIf } from "class-validator";
-import { StarkClassValidationUtil } from "../../../util";
+import { StarkClassValidationUtil } from "../../../util/validation-class.util";
 
 /**
  * This class is only for serialization purposes

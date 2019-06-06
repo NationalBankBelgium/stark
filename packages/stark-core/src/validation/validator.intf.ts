@@ -6,7 +6,7 @@ import { Validator } from "class-validator";
 export interface StarkValidator extends Validator {
 	/**
 	 * Validates that the size of the given array is between the minimum and maximum limits defined
-	 * @param any - an array of selected items
+	 * @param value - an array of selected items
 	 * @param minSize - the minSize we want to apply to the array
 	 * @param maxSize - the maxSize we want to apply to the array
 	 * @returns boolean - true if the array size range is valid
@@ -92,10 +92,10 @@ export interface StarkValidator extends Validator {
 	starkIsKBO(value: string): boolean;
 
 	/**
-	 * Validates that the given string is a valid NIN (National Idenfier Number).
+	 * Validates that the given string is a valid NIN (National Identifier Number).
 	 * This validation requires a special usage because of the of the country code.
 	 * @param value - the nin to validate
-	 * @param countryCode - the countrycode to use for the nin validation
+	 * @param countryCode - the country code to use for the nin validation
 	 * @returns boolean - true if the nin is valid
 	 */
 	starkIsNIN(value: string, countryCode: string): boolean;

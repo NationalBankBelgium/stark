@@ -3,7 +3,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from "@angu
 import { from } from "rxjs";
 import { STARK_XSRF_CONFIG, STARK_XSRF_SERVICE, StarkXSRFConfig, StarkXSRFService, StarkXSRFServiceImpl } from "./services";
 import { StarkHttpHeaders } from "../http/constants";
-import { StarkXSRFHttpInterceptor } from "./interceptors/http-xsrf.interceptor";
+import { StarkXSRFHttpInterceptor } from "./interceptors";
 
 @NgModule({
 	imports: [
@@ -41,6 +41,8 @@ export class StarkXSRFModule {
 	 * Prevents this module from being re-imported
 	 * @link https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
 	 * @param parentModule - the parent module
+	 * @param xsrfService - The XSRF service of the application
+	 * @param appInitStatus - A class that reflects the state of running {@link APP_INITIALIZER}s.
 	 */
 	public constructor(
 		@Optional()

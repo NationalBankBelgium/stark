@@ -12,7 +12,7 @@ export class StarkErrorHandler implements ErrorHandler {
 	public constructor(private injector: Injector) {}
 
 	/**
-	 * Thie method will dispatch an error method, which the user can then handle
+	 * This method will dispatch an error method, which the user can then handle
 	 * @param error the encountered error
 	 */
 	public handleError(error: any): void {

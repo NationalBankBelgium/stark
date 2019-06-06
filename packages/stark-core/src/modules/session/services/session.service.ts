@@ -36,7 +36,7 @@ import { StarkHttpHeaders } from "../../http/constants";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { selectStarkSession } from "../reducers";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
-import { StarkValidationErrorsUtil } from "../../../util";
+import { StarkValidationErrorsUtil } from "../../../util/validation-errors.util";
 import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../constants";
 
 /**
@@ -44,11 +44,6 @@ import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateN
  */
 export const starkUnauthenticatedUserError = "StarkSessionService => user not authenticated";
 
-/**
- * @ignore
- * @ngdoc service
- * @description Service to get/set session settings (language, ...).
- */
 @Injectable()
 export class StarkSessionServiceImpl implements StarkSessionService {
 	public keepalive?: Keepalive;

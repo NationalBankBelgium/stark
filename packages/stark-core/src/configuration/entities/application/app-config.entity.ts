@@ -4,7 +4,7 @@ import { autoserialize, autoserializeAs, Deserialize } from "cerialize";
 import { StarkApplicationConfig } from "./app-config.entity.intf";
 import { StarkBackend, StarkBackendImpl } from "../../../modules/http/entities/backend";
 import { stringMap } from "../../../serialization";
-import { StarkValidationErrorsUtil } from "../../../util";
+import { StarkValidationErrorsUtil } from "../../../util/validation-errors.util";
 import { StarkMapIsValid, StarkMapNotEmpty } from "../../../validation/decorators";
 
 /**

@@ -21,7 +21,7 @@ import { StarkUserService, starkUserServiceName } from "./user.service.intf";
 import { STARK_USER_REPOSITORY, StarkUserRepository } from "../repository";
 import { STARK_MOCK_DATA, StarkMockData } from "../../../configuration/entities/mock-data";
 import { StarkCoreApplicationState } from "../../../common/store";
-import { StarkValidationErrorsUtil } from "../../../util";
+import { StarkValidationErrorsUtil } from "../../../util/validation-errors.util";
 
 /**
  * @ignore

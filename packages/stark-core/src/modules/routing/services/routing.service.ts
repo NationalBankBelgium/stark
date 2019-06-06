@@ -52,11 +52,6 @@ interface StarkState {
 	params?: RawParams;
 }
 
-/**
- * @ignore
- * @ngdoc service
- * @description Service that can be used to interact with the router implementation.
- */
 @Injectable()
 export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public lastTransition?: Transition;
