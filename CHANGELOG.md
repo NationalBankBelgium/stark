@@ -1,3 +1,150 @@
+<a name="10.0.0-beta.8"></a>
+# [10.0.0-beta.8](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.7...10.0.0-beta.8) (2019-06-06)
+
+
+### Bug Fixes
+
+* **build-main:** fix travis branches (before alpha/beta, now alpha/beta/rc) ([53987ae](https://github.com/nationalbankbelgium/stark/commit/53987ae))
+* **stark-demo:** enhance change language logic in Showcase and Starter to also change Moment and date pickers locale ([75420fd](https://github.com/nationalbankbelgium/stark/commit/75420fd))
+* **stark-demo:** remove workaround added in [#788](https://github.com/nationalbankbelgium/stark/issues/788) for basscss missing PCSS variables (solved in latest version: 8.1.0) ([80b7734](https://github.com/nationalbankbelgium/stark/commit/80b7734))
+* **stark-ui:** coerce 'required' input in StarkDatePicker to properly show the asterisk on the field ([0fd9fca](https://github.com/nationalbankbelgium/stark/commit/0fd9fca)), closes [#1255](https://github.com/nationalbankbelgium/stark/issues/1255)
+* **stark-ui:** display the invalid status only when the datepicker is touched. Adapt HTML in demo examples ([9a8318d](https://github.com/nationalbankbelgium/stark/commit/9a8318d)), closes [#1257](https://github.com/nationalbankbelgium/stark/issues/1257)
+* **stark-ui:** enable 'keepCharPositions' option in internal mask config of timestamp mask directive. Fix wrong max and min values in date parts. ([e126260](https://github.com/nationalbankbelgium/stark/commit/e126260)), closes [#1260](https://github.com/nationalbankbelgium/stark/issues/1260)
+* **stark-ui:** fix regression in ProgressIndicator directive introduced in [#1218](https://github.com/nationalbankbelgium/stark/issues/1218) ([2f378fd](https://github.com/nationalbankbelgium/stark/commit/2f378fd))
+* **stark-ui:** fix wrong code coverage report generation path in karma CI config (bug introduced in [#1147](https://github.com/nationalbankbelgium/stark/issues/1147)) ([8d656e6](https://github.com/nationalbankbelgium/stark/commit/8d656e6))
+* **stark-ui:** fix wrong imports 'from "[@nationalbankbelgium](https://github.com/nationalbankbelgium)/stark-ui"' in Table module ([e0b3ee0](https://github.com/nationalbankbelgium/stark/commit/e0b3ee0))
+* **stark-ui:** overwrite viewBox value when using `starkSvgViewBox` directive ([63f82e1](https://github.com/nationalbankbelgium/stark/commit/63f82e1)), closes [#1216](https://github.com/nationalbankbelgium/stark/issues/1216)
+* **stark-ui:** properly size `.stark-main-container` on different screen sizes ([f8e4441](https://github.com/nationalbankbelgium/stark/commit/f8e4441))
+* **stark-ui:** table - Add support to show row index ([37af1c7](https://github.com/nationalbankbelgium/stark/commit/37af1c7)), closes [#1283](https://github.com/nationalbankbelgium/stark/issues/1283)
+* **stark-ui:** table - fix sorting + fix onChanges on columnProperties ([b7f374d](https://github.com/nationalbankbelgium/stark/commit/b7f374d)), closes [#1241](https://github.com/nationalbankbelgium/stark/issues/1241)
+
+
+### Chores
+
+* **stark-build:** remove code-style from Stark in favor of @NationalBankBelgium/code-style ([3661f43](https://github.com/nationalbankbelgium/stark/commit/3661f43)), closes [#1293](https://github.com/nationalbankbelgium/stark/issues/1293)
+
+
+### Code Refactoring
+
+* **stark-ui:** move internal properties from StarkProgressIndicatorConfig to a new StarkProgressIndicatorFullConfig ([36a362a](https://github.com/nationalbankbelgium/stark/commit/36a362a))
+* **stark-ui:** remove 'StarkComponentUtil.isInputEnabled' in favor of Angular CDK function 'coerceBooleanProperty' ([3889c88](https://github.com/nationalbankbelgium/stark/commit/3889c88)), closes [#1190](https://github.com/nationalbankbelgium/stark/issues/1190)
+
+
+### Features
+
+* **build:** update TypeScript configuration and TSLint configuration ([f3d00eb](https://github.com/nationalbankbelgium/stark/commit/f3d00eb)), closes [#1144](https://github.com/nationalbankbelgium/stark/issues/1144)
+* **stark-all:** upgrade to TypeScript 3.2 (latest version supported in Angular 7.2) ([600f88e](https://github.com/nationalbankbelgium/stark/commit/600f88e)), closes [#1234](https://github.com/nationalbankbelgium/stark/issues/1234)
+* **stark-build:** enable all strict type checking options in tsconfig.json file. Remove obsolete options ([ae3fccc](https://github.com/nationalbankbelgium/stark/commit/ae3fccc))
+* **stark-build:** enhance/enable stricter rules in TSLint/codelyzer config to improve code style and consistency ([1cad77d](https://github.com/nationalbankbelgium/stark/commit/1cad77d))
+* **stark-build:** tslintLoader - Disable typecheck rules to remove warnings since typeCheck is false ([ab61379](https://github.com/nationalbankbelgium/stark/commit/ab61379)), closes [#405](https://github.com/nationalbankbelgium/stark/issues/405)
+* **stark-core:** allow configuring the User profile resource path used by the User Repository ([8698970](https://github.com/nationalbankbelgium/stark/commit/8698970)), closes [#956](https://github.com/nationalbankbelgium/stark/issues/956)
+* **stark-core:** upgrade 'class-validator' to the latest version (0.9.1). Fix breaking changes in validations on ApplicationConfig and Backend entities ([ce4f3fb](https://github.com/nationalbankbelgium/stark/commit/ce4f3fb)), closes [#1237](https://github.com/nationalbankbelgium/stark/issues/1237)
+* **stark-demo:** adapt polyfills (app and tests) according to the new structure in core-js 3.0.0 ([8da6515](https://github.com/nationalbankbelgium/stark/commit/8da6515))
+* **stark-ui:** change color of global filter icon to indicate when the global filter is applied ([69d0d05](https://github.com/nationalbankbelgium/stark/commit/69d0d05)), closes [#1303](https://github.com/nationalbankbelgium/stark/issues/1303)
+* **stark-ui:** implement `ControlValueAccessor` on `DateRangePicker` component ([0e78064](https://github.com/nationalbankbelgium/stark/commit/0e78064)), closes [#1197](https://github.com/nationalbankbelgium/stark/issues/1197)
+* **stark-ui:** implement `stark-date-time-picker` module/component ([6075e6a](https://github.com/nationalbankbelgium/stark/commit/6075e6a)), closes [#587](https://github.com/nationalbankbelgium/stark/issues/587)
+* **stark-ui:** table - Add support to show rows counter ([bdad94f](https://github.com/nationalbankbelgium/stark/commit/bdad94f)), closes [#1244](https://github.com/nationalbankbelgium/stark/issues/1244)
+
+
+### BREAKING CHANGES
+
+* **stark-build:** code style configurations have been removed from this
+package and moved
+to the new package **@nationalbankbelgium/code-style**. See
+[@NationalBankBelgium/code-style](https://github.com/NationalBankBelgium/code-style)
+for more info about how to include those configs in your project. You
+can also check how they are included in the
+[Showcase](https://github.com/NationalBankBelgium/stark/tree/master/showcase)
+and
+[Starter](https://github.com/NationalBankBelgium/stark/tree/master/starter)
+apps.
+* **stark-ui:** `StarkComponentUtil.isInputEnabled()` function has been removed. To coerce boolean inputs in your components you can use the `coerceBooleanProperty()` function from `@angular/cdk/coercion` instead.
+* **stark-ui:** `stark-date-range-picker` is now implemented as a ControlValueAccessor to better integrate with Angular Forms:
+
+  - new `rangeFormGroup` input to provide the start and end date form
+  controls. You can handle validations and error messages via those form
+  controls.
+  - new `required` input to mark the control as required
+  and display the required asterisk '*' in the start/end date pickers
+  (same as with the `stark-date-picker`).
+  - the `isDisabled` input has been renamed to `disabled`. If you use
+  the new `rangeFormGroup` input to provide your start/end date form controls, then you should disable/enable those form
+  controls directly yourself instead of using the `disabled` input.
+* **stark-build:** Some TSLint and codelyzer stricter rules are now enabled:
+
+  - `jsdoc-format` (TSLint)
+  - `no-redundant-jsdoc` (TSLint)
+  - `no-unbound-method` (TSLint)
+  - `no-unnecessary-type-assertion` (TSLint)
+  - `restrict-plus-operands` (TSLint)
+  - `no-life-cycle-call` (codelyzer)
+  - `prefer-output-readonly` (codelyzer)
+  - `no-queries-parameter` (codelyzer)
+  - `use-view-encapsulation` (codelyzer)
+
+  Projects extending the TSLint config from `@nationalbankbelgium/stark-build`
+  will most likely receive more TSLint warnings when running `npm run lint` or `ng lint`.
+
+  To resolve these warnings you can first try **adding the script** below
+  to your `package.json` and running `npm run lint-ts:fix`:
+
+  ```JSON
+    "lint-ts:fix": "node --max_old_space_size=4096 ./node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.json --format codeFrame --fix"
+  ```
+
+  **This should fix most if not all of the new warnings you are gettting.**
+
+  Alternatively, you can disable the stricter rules mentioned above at your convenience.
+* **stark-ui:** the main container (`main.stark-main-container`) will now have a 100% width on some smaller (< 1100px) screen sizes.
+* **stark-ui:** `starkSvgViewBox` will now overwrite the `viewBox` value of the svg. If this is not desired the `starkSvgViewBox` directive should be removed from the element.
+* **stark-ui:** `StarkProgressIndicatorConfig` object now contains
+only `topic` and `type` properties. The rest of properties (`visible`, `listenersCount` and `pendingListenersCount`) are now in a new `StarkProgressIndicatorFullConfig` object that is only used internally by the `StarkProgressIndicatorService`. This change does not affect the functionality of the `StarkProgressIndicatorDirective` since the removed properties were in fact not used by the directive.
+* **build:** Projects extending the `@nationalbankbelgium/stark-build/tsconfig.json` will possibly break.
+Projects extending the `@nationalbankbelgium/stark-build/config/tslint.json` will most likely receive more tslint warnings.
+
+  - **Build breaking**
+
+  Preferably this can be resolved by **refactoring the code** for improved quality, but if desired the effects of this update can be reverted.
+
+  To fix your TypeScript build add the following option to your `tsconfig.json` under `"compilerOptions"`.
+
+  ```JSON
+    "strictPropertyInitialization": false
+  ```
+
+  - **TSLint warnings**
+
+  To resolve the warnings received by TSLint when running `npm run lint` you can first try **adding the script** below to your `package.json` and running `npm run lint-ts:fix`.
+
+  ```JSON
+  "lint-ts:fix": "node --max_old_space_size=4096 ./node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.json --format codeFrame --fix",
+  ```
+
+  **This should fix most if not all of the new warnings you are getting.**
+
+  After running the scripts any additional warnings caused by this update can be solved by **adding types**.
+
+  _Alternatively you can revert the new TSLint rules by adding the following lines to your `tslint.json` under `"rules"`._
+
+  ```
+  "no-inferrable-types": false,
+  "typedef": [
+    true,
+    "call-signature",
+    // "arrow-call-signature",
+    "parameter",
+    "arrow-parameter",
+    "property-declaration",
+    "variable-declaration",
+    "member-variable-declaration",
+    "object-destructuring",
+    "array-destructuring"
+  ]
+  ```
+* **stark-core:** 'class-validator' upgraded from v0.7.3 to v0.9.1. Not a breaking change in any Stark package; however, if you are using validation decorators from 'class-validator' yourself please check its [CHANGELOG](https://github.com/typestack/class-validator/blob/master/CHANGELOG.md) to know the breaking changes in versions 0.8.x and 0.9.x.
+
+
+
 <a name="10.0.0-beta.7"></a>
 # [10.0.0-beta.7](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.6...10.0.0-beta.7) (2019-04-02)
 
