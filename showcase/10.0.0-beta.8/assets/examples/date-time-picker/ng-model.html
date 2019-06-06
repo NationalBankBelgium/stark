@@ -1,0 +1,23 @@
+<mat-form-field [ngClass]="{ expanded: !!(timePickerNgModel.control.errors && (timePickerNgModel.control.errors | keyvalue).length > 1) }">
+	<stark-date-time-picker
+		pickerId="date-time-picker-ng-model"
+		[(ngModel)]="dateTimeModel"
+		(dateTimeChange)="onDateTimeNgModelChanged()"
+		placeholder="Date and Time"
+		dateFilter="OnlyWeekdays"
+		[dateMask]="dateMask"
+		[min]="minDate"
+		[max]="maxDate"
+		[disabled]="isDisabled"
+		#timePickerNgModel="ngModel"
+		required
+	></stark-date-time-picker>
+	<mat-error *ngIf="timePickerNgModel.errors">
+		<div *ngFor="let errorMessage of getErrorMessages(timePickerNgModel.control); trackBy: trackItemFn">
+			{{ errorMessage | translate }}
+		</div>
+	</mat-error>
+</mat-form-field>
+<div>
+	<mat-checkbox [value]="isDisabled" (change)="isDisabled = !isDisabled">Disabled</mat-checkbox>
+</div>

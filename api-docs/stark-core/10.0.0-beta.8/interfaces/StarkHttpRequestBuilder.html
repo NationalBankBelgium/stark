@@ -1,0 +1,899 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>StarkHttpRequestBuilder</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/http/builder/http-request-builder.intf.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Stark Http Request Builder
+Builder to construct an StarkRequest that can be executed by the StarkHttpService</p>
+
+            </p>
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Methods</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#create">create</a>
+                                </li>
+                                <li>
+                                    <a href="#delete">delete</a>
+                                </li>
+                                <li>
+                                    <a href="#get">get</a>
+                                </li>
+                                <li>
+                                    <a href="#getCollection">getCollection</a>
+                                </li>
+                                <li>
+                                    <a href="#search">search</a>
+                                </li>
+                                <li>
+                                    <a href="#update">update</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="create"></a>
+                        <span class="name">
+                            <b>
+                            create
+                            </b>
+                            <a href="#create"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>create(item: T, params?: <a href="../interfaces/StarkHttpCreateRequestParams.html">StarkHttpCreateRequestParams</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/modules/http/builder/http-request-builder.intf.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets an instance of a suitable builder to perform a Create request</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>item</td>
+                                                        <td>
+                                                                    <code>T</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Item to be sent in the Create request</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>params</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkHttpCreateRequestParams.html" target="_self" >StarkHttpCreateRequestParams</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Object containing additional parameters to construct the request to be sent</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkHttpCreateRequestBuilder.html" target="_self" >StarkHttpCreateRequestBuilder&lt;T&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>StarkHttpCreateRequestBuilder instance</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="delete"></a>
+                        <span class="name">
+                            <b>
+                            delete
+                            </b>
+                            <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>delete(item: T, params?: <a href="../interfaces/StarkHttpDeleteRequestParams.html">StarkHttpDeleteRequestParams</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/modules/http/builder/http-request-builder.intf.ts:44</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets an instance of a suitable builder to perform a Delete request</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>item</td>
+                                                        <td>
+                                                                    <code>T</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Item to be sent in the Delete request</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>params</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkHttpDeleteRequestParams.html" target="_self" >StarkHttpDeleteRequestParams</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Object containing additional parameters to construct the request to be sent</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkHttpDeleteRequestBuilder.html" target="_self" >StarkHttpDeleteRequestBuilder&lt;T&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>StarkHttpDeleteRequestBuilder instance</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="get"></a>
+                        <span class="name">
+                            <b>
+                            get
+                            </b>
+                            <a href="#get"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>get(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, params?: <a href="../interfaces/StarkHttpGetRequestParams.html">StarkHttpGetRequestParams</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/modules/http/builder/http-request-builder.intf.ts:52</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets an instance of a suitable builder to perform a Get request</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>uuid</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>UUID of the item to be fetched by the Get request</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>params</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkHttpGetRequestParams.html" target="_self" >StarkHttpGetRequestParams</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Object containing additional parameters to construct the request to be sent</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkHttpGetRequestBuilder.html" target="_self" >StarkHttpGetRequestBuilder&lt;T&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>StarkHttpGetRequestBuilder instance</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCollection"></a>
+                        <span class="name">
+                            <b>
+                            getCollection
+                            </b>
+                            <a href="#getCollection"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getCollection(limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, offset: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, params?: <a href="../interfaces/StarkHttpGetCollectionRequestParams.html">StarkHttpGetCollectionRequestParams</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/modules/http/builder/http-request-builder.intf.ts:61</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets an instance of a suitable builder to perform a GetCollection request</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>limit</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Maximum number of items to return</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>offset</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Index at which to begin the extraction of the collection to be returned</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>params</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkHttpGetCollectionRequestParams.html" target="_self" >StarkHttpGetCollectionRequestParams</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Object containing additional parameters to construct the request to be sent</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkHttpGetCollectionRequestBuilder.html" target="_self" >StarkHttpGetCollectionRequestBuilder&lt;T&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>StarkHttpGetCollectionRequestBuilder instance</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="search"></a>
+                        <span class="name">
+                            <b>
+                            search
+                            </b>
+                            <a href="#search"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>search(criteria: literal type | object, limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, offset: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, params?: <a href="../interfaces/StarkHttpSearchRequestParams.html">StarkHttpSearchRequestParams</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/modules/http/builder/http-request-builder.intf.ts:72</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets an instance of a suitable builder to perform a Search request. Similar to a GetCollection request but the search
+parameters are sent in the request body payload whereas in the GetCollection request they are sent as URL query parameters</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>criteria</td>
+                                                        <td>
+                                                                    <code>literal type | object</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Object containing the search criteria to be sent in the request body payload</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>limit</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Maximum number of items to return</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>offset</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Index at which to begin the extraction of the collection to be returned</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>params</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkHttpSearchRequestParams.html" target="_self" >StarkHttpSearchRequestParams</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Object containing additional parameters to construct the request to be sent</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkHttpSearchRequestBuilder.html" target="_self" >StarkHttpSearchRequestBuilder&lt;T&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>StarkHttpSearchRequestBuilder instance</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="update"></a>
+                        <span class="name">
+                            <b>
+                            update
+                            </b>
+                            <a href="#update"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>update(item: T, params?: <a href="../interfaces/StarkHttpUpdateRequestParams.html">StarkHttpUpdateRequestParams</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/modules/http/builder/http-request-builder.intf.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets an instance of a suitable builder to perform an Update request</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>item</td>
+                                                        <td>
+                                                                    <code>T</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Item to be sent in the Update request</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>params</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkHttpUpdateRequestParams.html" target="_self" >StarkHttpUpdateRequestParams</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Object containing additional parameters to construct the request to be sent</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkHttpUpdateRequestBuilder.html" target="_self" >StarkHttpUpdateRequestBuilder&lt;T&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>StarkHttpUpdateRequestBuilder instance</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { StarkHttpCreateRequestBuilder } from &quot;./http-create-request-builder.intf&quot;;
+import { StarkHttpDeleteRequestBuilder } from &quot;./http-delete-request-builder.intf&quot;;
+import { StarkHttpGetRequestBuilder } from &quot;./http-get-request-builder.intf&quot;;
+import { StarkHttpGetCollectionRequestBuilder } from &quot;./http-get-collection-request-builder.intf&quot;;
+import { StarkHttpSearchRequestBuilder } from &quot;./http-search-request-builder.intf&quot;;
+import { StarkHttpUpdateRequestBuilder } from &quot;./http-update-request-builder.intf&quot;;
+import {
+	StarkHttpCreateRequestParams,
+	StarkHttpDeleteRequestParams,
+	StarkHttpGetCollectionRequestParams,
+	StarkHttpGetRequestParams,
+	StarkHttpSearchRequestParams,
+	StarkHttpUpdateRequestParams
+} from &quot;./http-request-parameters.intf&quot;;
+import { StarkResource } from &quot;../entities/resource.entity.intf&quot;;
+
+/**
+ * Stark Http Request Builder
+ * Builder to construct an StarkRequest that can be executed by the StarkHttpService
+ */
+export interface StarkHttpRequestBuilder&lt;T extends StarkResource&gt; {
+	/**
+	 * Gets an instance of a suitable builder to perform a Create request
+	 * @param item - Item to be sent in the Create request
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpCreateRequestBuilder instance
+	 */
+	create(item: T, params?: StarkHttpCreateRequestParams): StarkHttpCreateRequestBuilder&lt;T&gt;;
+
+	/**
+	 * Gets an instance of a suitable builder to perform an Update request
+	 * @param item - Item to be sent in the Update request
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpUpdateRequestBuilder instance
+	 */
+	update(item: T, params?: StarkHttpUpdateRequestParams): StarkHttpUpdateRequestBuilder&lt;T&gt;;
+
+	/**
+	 * Gets an instance of a suitable builder to perform a Delete request
+	 * @param item - Item to be sent in the Delete request
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpDeleteRequestBuilder instance
+	 */
+	delete(item: T, params?: StarkHttpDeleteRequestParams): StarkHttpDeleteRequestBuilder&lt;T&gt;;
+
+	/**
+	 * Gets an instance of a suitable builder to perform a Get request
+	 * @param uuid - UUID of the item to be fetched by the Get request
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpGetRequestBuilder instance
+	 */
+	get(uuid: string, params?: StarkHttpGetRequestParams): StarkHttpGetRequestBuilder&lt;T&gt;;
+
+	/**
+	 * Gets an instance of a suitable builder to perform a GetCollection request
+	 * @param limit - Maximum number of items to return
+	 * @param offset - Index at which to begin the extraction of the collection to be returned
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpGetCollectionRequestBuilder instance
+	 */
+	getCollection(limit: number, offset: number, params?: StarkHttpGetCollectionRequestParams): StarkHttpGetCollectionRequestBuilder&lt;T&gt;;
+
+	/**
+	 * Gets an instance of a suitable builder to perform a Search request. Similar to a GetCollection request but the search
+	 * parameters are sent in the request body payload whereas in the GetCollection request they are sent as URL query parameters
+	 * @param criteria - Object containing the search criteria to be sent in the request body payload
+	 * @param limit - Maximum number of items to return
+	 * @param offset - Index at which to begin the extraction of the collection to be returned
+	 * @param params - Object containing additional parameters to construct the request to be sent
+	 * @returns StarkHttpSearchRequestBuilder instance
+	 */
+	search(
+		criteria: { [param: string]: string } | object,
+		limit: number,
+		offset: number,
+		params?: StarkHttpSearchRequestParams
+	): StarkHttpSearchRequestBuilder&lt;T&gt;;
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkHttpRequestBuilder.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
