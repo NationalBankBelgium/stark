@@ -17,10 +17,10 @@ import { Ng2StateDeclaration, StateDeclaration } from "@uirouter/angular";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLocale } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkRouteSearchComponent } from "./route-search.component";
-import { StarkRouteSearchEntry } from "../components/route-search-entry.intf";
-import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu";
+import { StarkRouteSearchEntry } from "../components";
+import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu/components";
 import { of, Subject, throwError } from "rxjs";
-import { mergeUiTranslations } from "../../../common/translations/merge-translations";
+import { mergeUiTranslations } from "../../../common/translations";
 
 @Component({
 	selector: `host-component`,

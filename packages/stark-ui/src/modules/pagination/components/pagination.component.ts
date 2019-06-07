@@ -90,7 +90,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	public _paginationInput = 0;
 	public previousPaginationInput = 0;
 	public previousPageIndex = 0;
-	public pageNumbers: (string | number)[] = [];
+	public pageNumbers: ("..." | number)[] = [];
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -315,7 +315,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 		let i: number;
 		let j: number;
 
-		const input: (string | number)[] = [];
+		const input: ("..." | number)[] = [];
 
 		if (this.isCompactMode()) {
 			min = <number>this.paginationConfig.page > 1 ? <number>this.paginationConfig.page - 1 : 1;

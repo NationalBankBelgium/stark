@@ -89,7 +89,7 @@ export class StarkInitializeSession implements Action {
 }
 
 /**
- * Triggered when the initialization of the user's session has finished succesfully.
+ * Triggered when the initialization of the user's session has finished successfully.
  */
 export class StarkInitializeSessionSuccess implements Action {
 	/**

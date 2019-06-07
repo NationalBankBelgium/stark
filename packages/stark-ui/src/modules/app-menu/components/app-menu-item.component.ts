@@ -76,7 +76,7 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	public readonly deactivated = new EventEmitter<void>();
 
 	/**
-	 * Viewchild catching the extension panel in order to open/close it programmatically
+	 * ViewChild catching the extension panel in order to open/close it programmatically
 	 */
 	@ViewChild("menuGroupsPanel")
 	public menuGroupsPanel!: MatExpansionPanel;

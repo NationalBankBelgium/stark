@@ -3,12 +3,11 @@ import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { Store } from "@ngrx/store";
 import { BehaviorSubject, Observable } from "rxjs";
-import { StarkProgressIndicatorDeregister } from "../actions";
-import { StarkProgressIndicatorType, StarkProgressIndicatorFullConfig } from "../entities";
+import { StarkProgressIndicatorActions, StarkProgressIndicatorDeregister } from "../actions";
+import { StarkProgressIndicatorFullConfig, StarkProgressIndicatorType } from "../entities";
 import { StarkProgressIndicatorServiceImpl } from "../services";
 import { progressIndicatorReducer } from "../reducers";
 import { StarkUIApplicationState } from "../../../common/store";
-import { StarkProgressIndicatorActions } from "../actions/progress-indicator.actions";
 import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;
 

@@ -4,7 +4,7 @@ import { StoreModule } from "@ngrx/store";
 import { StarkProgressIndicatorDirective } from "./directives";
 import { STARK_PROGRESS_INDICATOR_SERVICE, StarkProgressIndicatorServiceImpl } from "./services";
 import { starkProgressIndicatorReducers } from "./reducers";
-import { StarkProgressIndicatorComponent } from "./components/progress-indicator.component";
+import { StarkProgressIndicatorComponent } from "./components";
 
 @NgModule({
 	declarations: [StarkProgressIndicatorDirective, StarkProgressIndicatorComponent],

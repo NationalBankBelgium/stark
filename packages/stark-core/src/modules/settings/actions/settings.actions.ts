@@ -44,7 +44,7 @@ export class StarkPersistPreferredLanguageSuccess implements Action {
  * Action that notifies the application that the preferred language could not be persisted.
  * @returns The created action object
  */
-export class StarkPersistPreferredLanguageFailureimplements implements Action {
+export class StarkPersistPreferredLanguageFailure implements Action {
 	/**
 	 * The type of action
 	 */
@@ -78,5 +78,5 @@ export class StarkSetPreferredLanguage implements Action {
 export type StarkSettingsActions =
 	| StarkPersistPreferredLanguage
 	| StarkPersistPreferredLanguageSuccess
-	| StarkPersistPreferredLanguageFailureimplements
+	| StarkPersistPreferredLanguageFailure
 	| StarkSetPreferredLanguage;

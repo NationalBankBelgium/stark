@@ -14,8 +14,8 @@ import {
 	ViewEncapsulation
 } from "@angular/core";
 import * as noUiSliderLibrary from "nouislider";
-import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, StarkRoutingService } from "@nationalbankbelgium/stark-core";
-import { StarkDOMUtil } from "../../../util/dom/dom.util";
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { StarkDOMUtil } from "../../../util/dom";
 import { StarkSliderConfig } from "./slider-config.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -92,13 +92,11 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	/**
 	 * Class constructor
 	 * @param logger - The logger of the application
-	 * @param routingService - The routing service of the application
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		protected renderer: Renderer2,
 		protected elementRef: ElementRef
 	) {

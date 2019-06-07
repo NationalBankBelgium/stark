@@ -1,5 +1,5 @@
 import { StarkProgressIndicatorFullConfig } from "../entities";
-import { StarkProgressIndicatorActions, StarkProgressIndicatorActionTypes } from "../actions/progress-indicator.actions";
+import { StarkProgressIndicatorActions, StarkProgressIndicatorActionTypes } from "../actions";
 import cloneDeep from "lodash-es/cloneDeep";
 
 /**
@@ -11,7 +11,7 @@ const INITIAL_STATE: Map<string, StarkProgressIndicatorFullConfig> = new Map<str
  * Reducer for the progress indicator
  * @param state Map<string, StarkProgressIndicatorFullConfig> the actual state of the progress indicator
  * @param action StarkProgressIndicatorActions the action to perform
- * @returns Map<string, StarkProgressIndicatorFullConfig> the new state of the progress inidcator
+ * @returns Map<string, StarkProgressIndicatorFullConfig> the new state of the progress indicator
  */
 // TODO refactor to reduce complexity
 // tslint:disable:cognitive-complexity

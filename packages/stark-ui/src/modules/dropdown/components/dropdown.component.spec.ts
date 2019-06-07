@@ -629,7 +629,7 @@ describe("DropdownComponent", () => {
 		});
 	});
 
-	// FIXME reenable those tests as soon as a solution to replace the md-select-header as been found: https://github.com/angular/material2/pull/7835
+	// FIXME re-enable those tests as soon as a solution to replace the md-select-header as been found: https://github.com/angular/material2/pull/7835
 	//
 	// describe("header", () => {
 	// 	it("should be added to the DOM when header is defined", () => {

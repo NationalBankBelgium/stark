@@ -11,7 +11,7 @@ import { StarkBackend } from "../../http/entities/backend";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
-import { STARK_XSRF_SERVICE, StarkXSRFService } from "../../xsrf/services/xsrf.service.intf";
+import { STARK_XSRF_SERVICE, StarkXSRFService } from "../../xsrf/services";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
 import { StarkFlushLogMessages, StarkLogMessageAction } from "../actions";
 import { selectStarkLogging } from "../reducers";
@@ -21,12 +21,6 @@ import noop from "lodash-es/noop";
 
 const xsrfServiceNotFound: "not provided" = "not provided";
 
-/**
- *  @ignore
- * @ngdoc service
- * @description Basic logging service implementation.
- * Integrates logging with the Redux store
- */
 @Injectable()
 export class StarkLoggingServiceImpl implements StarkLoggingService {
 	private backend!: StarkBackend;

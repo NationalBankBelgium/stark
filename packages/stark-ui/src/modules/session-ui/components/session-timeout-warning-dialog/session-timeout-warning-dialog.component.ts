@@ -26,7 +26,7 @@ export class StarkSessionTimeoutWarningDialogComponent implements OnInit {
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(MatDialogRef) private dialogRef: MatDialogRef<StarkSessionTimeoutWarningDialogComponent>,
-		@Inject(MAT_DIALOG_DATA) private coutdown: number
+		@Inject(MAT_DIALOG_DATA) private countdown: number
 	) {}
 
 	/**
@@ -35,9 +35,9 @@ export class StarkSessionTimeoutWarningDialogComponent implements OnInit {
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": controller initialized");
 		this.countdown$ = interval(1000).pipe(
-			take(this.coutdown),
+			take(this.countdown),
 			startWith(-1),
-			map((value: number) => this.coutdown - value - 1), // -1 due to the delay of the dialog animation
+			map((value: number) => this.countdown - value - 1), // -1 due to the delay of the dialog animation
 			tap((value: number) => {
 				if (value === 0) {
 					this.dialogRef.close("countdown-finished");

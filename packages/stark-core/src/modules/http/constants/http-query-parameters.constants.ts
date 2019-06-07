@@ -11,11 +11,11 @@ export class StarkHttpQueryParameters {
 	 */
 	public static LANG = "lang";
 	/**
-	 * specifies the style to apply to the reponse's elements
+	 * specifies the style to apply to the response's elements
 	 */
 	public static STYLE = "style";
 	/**
-	 * specifies if the reponse must be sorted or not
+	 * specifies if the response must be sorted or not
 	 */
 	public static SORT = "sort";
 }

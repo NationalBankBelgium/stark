@@ -542,7 +542,7 @@ describe("Service: StarkRoutingService", () => {
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates);
 
-			const stateName = "unexisting state";
+			const stateName = "nonexistent state";
 			const stateDeclaration: StateDeclaration = <StateDeclaration>routingService.getStateDeclarationByStateName(stateName);
 			expect(stateDeclaration).toBeUndefined();
 		});

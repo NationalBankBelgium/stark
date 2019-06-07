@@ -24,7 +24,7 @@ describe("SessionExpiredPageComponent", () => {
 			declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkSessionExpiredPageComponent],
 			imports: [CommonModule, MatButtonModule, MatCardModule, TranslateModule.forRoot()],
 			providers: [
-				{ provide: STARK_ROUTING_SERVICE, useValue: MockStarkRoutingService },
+				{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() }, // needed by AppLogo component
 				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
 				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
 			]

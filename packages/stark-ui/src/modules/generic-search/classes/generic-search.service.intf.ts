@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { StarkSearchState } from "../entities/search-state.entity.intf";
+import { StarkSearchState } from "../entities";
 
 /**
  * Service to implement to use the Generic Search.

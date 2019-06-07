@@ -95,7 +95,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * header Text to be displayed as the dropdown's header. Such header will be shown at the top of the
 	 * dropdown options list(dynamically translated via the $translate service if the provided text is defined in the translation keys).
 	 */
-	// TODO reenable once a solution for the replacement of md-select-header as been found
+	// TODO re-enable once a solution for the replacement of md-select-header as been found
 	// @Input()
 	// public header?: string;
 
@@ -360,7 +360,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	}
 
 	/**
-	 * Trigger required methods `selectonChanged.emit`, `_onChange`, `_onValidatorChange` when `value´ is changed internally.
+	 * Trigger required methods `selectionChanged.emit`, `_onChange`, `_onValidatorChange` when `value´ is changed internally.
 	 * @param value - New value to assign
 	 */
 	public onInternalValueChange(value: any | any[]): void {

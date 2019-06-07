@@ -1,4 +1,4 @@
-import { StarkActionBarConfig, StarkCustomizablePredefinedAction, StarkDefaultPredefinedAction } from "../../action-bar";
+import { StarkActionBarConfig, StarkCustomizablePredefinedAction, StarkDefaultPredefinedAction } from "../../action-bar/components";
 
 /**
  * This interface describes the properties of the action bar displayed in the generic search component.

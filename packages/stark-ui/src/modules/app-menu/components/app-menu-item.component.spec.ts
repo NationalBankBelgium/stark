@@ -123,7 +123,7 @@ describe("StarkAppMenuItemComponent", () => {
 			fixture.detectChanges();
 		});
 
-		it("should have an expension panel", () => {
+		it("should have an expansion panel", () => {
 			const expansionPanel: HTMLElement = fixture.nativeElement.querySelector(".mat-expansion-panel");
 			expect(expansionPanel).toBeDefined();
 		});

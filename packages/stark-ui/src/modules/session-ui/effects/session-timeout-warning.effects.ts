@@ -11,7 +11,7 @@ import {
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { Actions, Effect, EffectNotification, ofType, OnRunEffects } from "@ngrx/effects";
-import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities/stark-session-ui-config";
+import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities";
 
 @Injectable()
 export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {

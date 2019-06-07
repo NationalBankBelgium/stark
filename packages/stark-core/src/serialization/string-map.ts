@@ -1,7 +1,7 @@
 import { Deserialize, ISerializable, Serialize } from "cerialize";
 
 /**
- * Ssolution proposed by @weichx for Maps having string keys
+ * Solution proposed by @weichx for Maps having string keys
  * in this way the custom behavior for handling ES6 Maps is defined once instead of doing it every time a Map is used
  * @link https://github.com/weichx/cerialize/issues/32
  * @link https://github.com/weichx/cerialize/issues/33

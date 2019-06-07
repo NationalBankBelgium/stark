@@ -1,8 +1,7 @@
 import { StarkMessage, StarkMessageType } from "../../../common/message";
 import { StarkMessageCollection } from "../entities";
-import { StarkMessagePaneActions, StarkMessagePaneActionTypes } from "../actions";
-import { StarkAddMessages, StarkRemoveMessages } from "../actions/message-pane.actions";
-import  findIndex  from "lodash-es/findIndex";
+import { StarkAddMessages, StarkMessagePaneActions, StarkMessagePaneActionTypes, StarkRemoveMessages } from "../actions";
+import findIndex from "lodash-es/findIndex";
 
 /**
  * Initial state of the store

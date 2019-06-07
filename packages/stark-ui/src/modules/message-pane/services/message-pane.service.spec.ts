@@ -5,15 +5,13 @@ import { Store } from "@ngrx/store";
 
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 
-import { StarkMessage, StarkMessageType } from "../../../common/message";
+import { StarkMessage, StarkMessageImpl, StarkMessageType } from "../../../common/message";
 import { StarkUIApplicationState } from "../../../common/store";
 
 import { StarkMessagePaneServiceImpl } from "./message-pane.service";
 import { StarkMessageCollection } from "../entities";
 
 import { StarkAddMessages, StarkClearMessages, StarkGetAllMessages, StarkRemoveMessages } from "../actions";
-import { StarkMessageImpl } from "../../../common/message/message.entity";
-
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 

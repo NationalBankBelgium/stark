@@ -16,8 +16,8 @@ import { Observer } from "rxjs";
 import { StarkPaginationComponent } from "./pagination.component";
 import { StarkPaginateEvent } from "./paginate-event.intf";
 import { StarkPaginationConfig } from "./pagination-config.intf";
-import { StarkDropdownComponent } from "../../dropdown";
-import { StarkRestrictInputDirective } from "../../restrict-input-directive";
+import { StarkDropdownComponent } from "../../dropdown/components";
+import { StarkRestrictInputDirective } from "../../restrict-input-directive/directives";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
@@ -660,7 +660,7 @@ describe("PaginationComponent", () => {
 			expect(component.paginationConfig.page).toBe(1);
 		});
 
-		it("should change itempsPerPage to 8", () => {
+		it("should change itemsPerPage to 8", () => {
 			component.onChangeItemsPerPage((<number[]>component.paginationConfig.itemsPerPageOptions)[1]);
 			expect(component.paginationConfig.itemsPerPage).toBe(8);
 		});

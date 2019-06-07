@@ -7,11 +7,11 @@ export interface StarkUserProfile {
 	 */
 	username: string;
 	/**
-	 * The user's firstname
+	 * The user's first name
 	 */
 	firstName: string;
 	/**
-	 * The user's lastname
+	 * The user's last name
 	 */
 	lastName: string;
 	/**

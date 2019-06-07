@@ -11,7 +11,7 @@ import { starkIsIBANValidatorName } from "../../validators/is-iban";
 @ValidatorConstraint({ name: starkIsIBANValidatorName, async: false })
 class StarkIsIBANConstraint implements ValidatorConstraintInterface {
 	/**
-	 * Validtes that a given IBAN number is valid
+	 * Validates that a given IBAN number is valid
 	 * @param iban - the iban to validate
 	 * @returns boolean - true if the iban is valid
 	 */

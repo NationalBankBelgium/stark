@@ -14,7 +14,7 @@ import { MockStarkLoggingService, MockStarkRoutingService, MockStarkSessionServi
 
 import { StarkRBACStatePermissions, StarkStateRedirection, StarkStateRedirectionFn } from "../entities";
 import { StarkRBACAuthorizationServiceImpl, starkUnauthorizedUserError } from "./authorization.service";
-import { StarkUserNavigationUnauthorized, StarkUserNavigationUnauthorizedRedirected } from "../actions/authorization.actions";
+import { StarkUserNavigationUnauthorized, StarkUserNavigationUnauthorizedRedirected } from "../actions";
 import createSpyObj = jasmine.createSpyObj;
 import createSpy = jasmine.createSpy;
 import Spy = jasmine.Spy;

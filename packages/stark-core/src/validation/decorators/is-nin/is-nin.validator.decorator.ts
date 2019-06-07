@@ -39,7 +39,7 @@ class StarkIsNINConstraint implements ValidatorConstraintInterface {
 
 /**
  * Validator decorator that uses the StarkIsNIN validator constraint
- * @param property : the property to validate
+ * @param property - The property to validate
  * @param validationOptions - the options that will define if the nin is valid
  */
 export function StarkIsNIN(property: string, validationOptions?: ValidationOptions): Function {

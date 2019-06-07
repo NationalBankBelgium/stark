@@ -6,7 +6,7 @@ import { StarkPromptDialogContent } from "./prompt-dialog-content.intf";
 /**
  * Possible results of the {@link StarkPromptDialogComponent} after being closed.
  *
- * - `string`: The value provided by the user in the dialog's input after clikcing the "Ok" button.
+ * - `string`: The value provided by the user in the dialog's input after clicking the "Ok" button.
  * - "cancel": The dialog was cancelled by clicking on the "Cancel" button
  * - `undefined`: The dialog was cancelled either by clicking outside of dialog or by pressing the ESC key
  */
