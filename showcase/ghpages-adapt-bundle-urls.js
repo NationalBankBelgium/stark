@@ -1,18 +1,7 @@
 let fs = require("fs");
 let path = require("path");
 
-const filesToChange = [
-	/index.html/,
-	/main.*\.css$/,
-	/main.*\.js$/,
-	/main.*\.js\.map$/,
-	/runtime.*\.js$/,
-	/runtime.*\.js\.map$/,
-	/styles.*\.css$/,
-	/vendor.*\.css$/,
-	/vendor.*\.js$/,
-	/vendor.*\.js\.map$/
-];
+const filesToChange = [/index.html/, /\.css$/, /\.js$/, /\.js\.map$/];
 
 if (process.argv.length <= 2) {
 	console.log("Usage: " + __filename + " deployDir oldDeployDir");
@@ -68,18 +57,26 @@ function replaceValuesInFile(fileName, valueReplacements) {
 		}
 
 		let result = data;
+		let replacementsDone = false;
 
 		for (const replacement of valueReplacements) {
 			const searchValueRegex = new RegExp(replacement.searchValue, "g");
-			result = result.replace(searchValueRegex, replacement.replaceValue);
+			if (searchValueRegex.test(result)) {
+				result = result.replace(searchValueRegex, replacement.replaceValue);
+				replacementsDone = true;
+			}
 		}
 
-		fs.writeFile(fileName, result, "utf8", function(err) {
-			if (err) {
-				return console.error(err);
-			} else {
-				return console.log(`${fileName} updated successfully`);
-			}
-		});
+		if (replacementsDone) {
+			fs.writeFile(fileName, result, "utf8", function(err) {
+				if (err) {
+					return console.error(err);
+				} else {
+					return console.log(`${fileName} updated successfully`);
+				}
+			});
+		} else {
+			return console.log(`${fileName} remained unchanged`);
+		}
 	});
 }
