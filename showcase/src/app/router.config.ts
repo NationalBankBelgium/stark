@@ -1,5 +1,4 @@
 import { Category, StateDeclaration, UIRouter } from "@uirouter/core";
-import { Visualizer } from "@uirouter/visualizer"
 export function logRegisteredStates(registeredStates: StateDeclaration[]): void {
 	let message = "=============  Registered Ui-Router states: ==============\n";
 
