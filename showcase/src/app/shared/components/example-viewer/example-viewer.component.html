@@ -3,7 +3,7 @@
 		<mat-card-title>
 			<h3 translate>{{ exampleTitle }}</h3>
 		</mat-card-title>
-		<button color="white" mat-icon-button (click)="toggleSourceView()" matTooltip="View source">
+		<button color="white" mat-icon-button (click)="toggleSourceView()" matTooltip="View source" [disabled]="extensions.length === 0">
 			<mat-icon svgIcon="code-tags"></mat-icon>
 		</button>
 	</mat-card-header>

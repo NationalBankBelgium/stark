@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";
@@ -17,14 +17,32 @@ import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;
 
 describe("ExampleViewerComponent", () => {
+	@Component({
+		selector: "host-component",
+		template: `
+			<example-viewer [extensions]="extensions" [filesPath]="filesPath" [exampleTitle]="exampleTitle"></example-viewer>
+		`
+	})
+	class TestHostComponent {
+		@ViewChild(ExampleViewerComponent)
+		public exampleViewer!: ExampleViewerComponent;
+
+		public extensions: string[] = [];
+		public filesPath?: string;
+		public exampleTitle?: string;
+	}
+
+	// IMPORTANT: The official way to test components using ChangeDetectionStrategy.OnPush is to wrap it with a test host component
+	// see https://github.com/angular/angular/issues/12313#issuecomment-444623173
+	let hostFixture: ComponentFixture<TestHostComponent>;
+	let hostComponent: TestHostComponent;
 	let component: ExampleViewerComponent;
 	let fileService: SpyObj<FileService>;
-	let fixture: ComponentFixture<ExampleViewerComponent>;
 	let logger: SpyObj<StarkLoggingService>;
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
-			declarations: [ExampleViewerComponent],
+			declarations: [ExampleViewerComponent, TestHostComponent],
 			imports: [NoopAnimationsModule, MatButtonModule, MatTabsModule, MatTooltipModule, StarkPrettyPrintModule],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
@@ -47,29 +65,29 @@ describe("ExampleViewerComponent", () => {
 		fileService = TestBed.get(FileService);
 		fileService.fetchFile.and.callFake(() => of("initial dummy file content"));
 
-		fixture = TestBed.createComponent(ExampleViewerComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges(); // trigger initial data binding
+		hostFixture = TestBed.createComponent(TestHostComponent);
+		hostComponent = hostFixture.componentInstance;
+		component = hostComponent.exampleViewer;
+		hostFixture.detectChanges(); // trigger initial data binding
 	});
 
 	describe("@Input() exampleTitle", () => {
 		it("should change the exampleTitle according to the @Input", () => {
-			const h3: HTMLHeadingElement = fixture.nativeElement.querySelector("mat-card-header h3");
-			component.exampleTitle = "Test title";
-			fixture.detectChanges();
-			expect(h3.textContent).toContain(component.exampleTitle);
+			const h3: HTMLHeadingElement = hostFixture.nativeElement.querySelector("mat-card-header h3");
+			hostComponent.exampleTitle = "Test title";
+			hostFixture.detectChanges();
+			expect(h3.textContent).toContain(hostComponent.exampleTitle);
 		});
 	});
 
 	describe("@Input() extensions", () => {
 		it("should show the tabs when the file exist", (done: DoneFn) => {
-			component.exampleFiles = [];
-			component.extensions = ["CSS", "JS", "HTML", "SCSS", "TS"];
-			fixture.detectChanges();
+			hostComponent.extensions = ["CSS", "JS", "HTML", "SCSS", "TS"];
+			hostFixture.detectChanges();
 
-			let button: HTMLButtonElement = fixture.nativeElement.querySelector("mat-card-header button");
+			let button: HTMLButtonElement = hostFixture.nativeElement.querySelector("mat-card-header button");
 			button.click();
-			let tabs: any[] = fixture.nativeElement.querySelectorAll(".mat-tab-labels .mat-tab-label");
+			let tabs: any[] = hostFixture.nativeElement.querySelectorAll(".mat-tab-labels .mat-tab-label");
 			expect(tabs.length).toBe(0);
 
 			fileService.fetchFile.and.callFake(() => {
@@ -84,11 +102,12 @@ describe("ExampleViewerComponent", () => {
 			);
 
 			allFilesFetched.subscribe(() => {
-				fixture.detectChanges();
+				hostFixture.detectChanges();
 
-				button = fixture.nativeElement.querySelector("mat-card-header button");
+				button = hostFixture.nativeElement.querySelector("mat-card-header button");
 				button.click();
-				tabs = fixture.nativeElement.querySelectorAll(".mat-tab-labels .mat-tab-label");
+
+				tabs = hostFixture.nativeElement.querySelectorAll(".mat-tab-labels .mat-tab-label");
 				expect(tabs.length).toBe(component.extensions.length);
 				done();
 			});
@@ -102,6 +121,8 @@ describe("ExampleViewerComponent", () => {
 			spyOn(component, "addExampleFile");
 			fileService.fetchFile.calls.reset();
 			logger.error.calls.reset();
+
+			component.extensions = ["HTML", "TS", "CSS"];
 		});
 
 		it("should not do anything when the file doesn't exist", () => {
