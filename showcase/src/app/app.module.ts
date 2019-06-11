@@ -1,21 +1,13 @@
 import { APP_INITIALIZER, Inject, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
 import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FormsModule } from "@angular/forms";
 import { UIRouter, UIRouterModule } from "@uirouter/angular";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
 import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
-import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
-import { MatButtonModule } from "@angular/material/button";
-import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { MatCardModule } from "@angular/material/card";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { MatListModule } from "@angular/material/list";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatIconRegistry } from "@angular/material/icon";
 import { DateAdapter } from "@angular/material/core";
 import { Observable, of } from "rxjs";
 import { filter, map } from "rxjs/operators";
@@ -173,15 +165,6 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
-		FormsModule,
-		MatButtonModule,
-		MatButtonToggleModule,
-		MatCardModule,
-		MatCheckboxModule,
-		MatExpansionModule,
-		MatIconModule,
-		MatListModule,
-		MatTooltipModule,
 		StoreModule.forRoot(reducers, {
 			metaReducers
 		}),

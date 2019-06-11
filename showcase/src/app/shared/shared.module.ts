@@ -1,11 +1,16 @@
 import { DateAdapter } from "@angular/material/core";
 import { MatButtonModule } from "@angular/material/button";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCardModule } from "@angular/material/card";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
+import { MatListModule } from "@angular/material/list";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Inject, NgModule } from "@angular/core";
 import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 import { TranslateModule } from "@ngx-translate/core";
@@ -24,21 +29,48 @@ import { FileService } from "./services";
 
 @NgModule({
 	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
 		FlexLayoutModule,
 		MatButtonModule,
+		MatButtonToggleModule,
 		MatCardModule,
+		MatCheckboxModule,
+		MatExpansionModule,
 		MatIconModule,
+		MatListModule,
+		MatTabsModule,
 		MatTooltipModule,
 		MatSnackBarModule,
-		MatTabsModule,
-		CommonModule,
 		StarkPrettyPrintModule,
 		TranslateModule
 	],
 	providers: [FileService],
 	declarations: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],
 	entryComponents: [],
-	exports: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent, FlexLayoutModule]
+	// export commonly used components/directives/components (see https://angular.io/guide/sharing-ngmodules)
+	exports: [
+		ExampleViewerComponent,
+		ReferenceBlockComponent,
+		TableOfContentsComponent,
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		FlexLayoutModule,
+		MatButtonModule,
+		MatButtonToggleModule,
+		MatCardModule,
+		MatCheckboxModule,
+		MatExpansionModule,
+		MatIconModule,
+		MatListModule,
+		MatTabsModule,
+		MatTooltipModule,
+		MatSnackBarModule,
+		StarkPrettyPrintModule,
+		TranslateModule
+	]
 })
 export class SharedModule {
 	public constructor(
