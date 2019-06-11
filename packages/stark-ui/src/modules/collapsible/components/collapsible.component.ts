@@ -1,4 +1,15 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewEncapsulation } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	EventEmitter,
+	Inject,
+	Input,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewEncapsulation
+} from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -19,6 +30,7 @@ const DEFAULT_COLLAPSIBLE_ICON = "chevron-right";
 	selector: "stark-collapsible",
 	templateUrl: "./collapsible.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName

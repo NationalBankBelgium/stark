@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { StarkTableColumnComponent } from "../column.component";
 import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
@@ -39,6 +39,7 @@ export interface StarkSortingRule {
 	selector: "stark-table-dialog-multisort",
 	templateUrl: "./multisort.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: "stark-table-dialog-multisort"
@@ -114,12 +115,12 @@ export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Called when Delete button is clicked.
-	 * Deletes the sorting rule corresponding to the given column.
-	 * @param column - The column to be deleted
+	 * Deletes the given column sorting rule.
+	 * @param rule - The column sorting rule to be deleted
 	 */
-	public onDelete(column: StarkSortingRule): void {
-		column.sortDirection = "";
-		column.sortPriority = 100;
+	public onDelete(rule: StarkSortingRule): void {
+		rule.sortDirection = "";
+		rule.sortPriority = 100;
 		this.sortRules();
 	}
 
@@ -133,28 +134,22 @@ export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Called when the sorting rule changes.
-	 * @param oldColumn - New state of the sorting rule
-	 * @param newColumn - Previous state of the sorting rule
+	 * @param oldRule - New state of the sorting rule
+	 * @param newRule - Previous state of the sorting rule
 	 */
-	public onColumnChange(oldColumn: StarkSortingRule, newColumn: StarkSortingRule): void {
-		newColumn.sortDirection = oldColumn.sortDirection;
-		newColumn.sortPriority = oldColumn.sortPriority;
-		oldColumn.sortDirection = "";
-		oldColumn.sortPriority = 100;
+	public onColumnChange(oldRule: StarkSortingRule, newRule: StarkSortingRule): void {
+		newRule.sortDirection = oldRule.sortDirection;
+		newRule.sortPriority = oldRule.sortPriority;
+		oldRule.sortDirection = "";
+		oldRule.sortPriority = 100;
 		this.sortRules();
 	}
 
 	/**
 	 * Called when Save button is clicked.
-	 * Updates all the original sorting rules with the config defined in this dialog and closes the dialog passing the updated rules
+	 * Close the dialog returning the updated rules defined back to the dialog opener.
 	 */
 	public onSave(): void {
-		this.currentPriority = 1;
-		for (const rule of this.rules) {
-			rule.column.sortDirection = rule.sortDirection;
-			rule.column.sortPriority = this.currentPriority;
-			this.currentPriority++;
-		}
 		this.dialogRef.close(this.rules);
 	}
 

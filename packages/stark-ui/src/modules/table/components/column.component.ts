@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
 	ElementRef,
@@ -28,6 +29,7 @@ import { StarkColumnFilterChangedOutput, StarkColumnSortChangedOutput, StarkTabl
 	selector: "stark-table-column",
 	templateUrl: "./column.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: "stark-table-column"
@@ -116,6 +118,10 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		return this._headerLabel || this.name;
 	}
 
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	private _headerLabel?: string;
 
 	/**

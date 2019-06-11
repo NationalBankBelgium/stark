@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from "@angular/core";
+import {ChangeDetectionStrategy, Component, Inject, ViewEncapsulation} from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { StarkConfirmDialogContent } from "./confirm-dialog-content.intf";
 
@@ -18,6 +18,7 @@ export type StarkConfirmDialogResult = "ok" | "cancel" | undefined;
 	selector: "stark-confirm-dialog",
 	templateUrl: "./confirm-dialog.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: "stark-confirm-dialog"

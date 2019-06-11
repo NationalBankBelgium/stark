@@ -1,6 +1,7 @@
 import isEqual from "lodash-es/isEqual";
 import {
 	AfterViewInit,
+	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
 	EventEmitter,
@@ -31,6 +32,7 @@ const componentName = "stark-slider";
 	selector: "stark-slider",
 	templateUrl: "./slider.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName

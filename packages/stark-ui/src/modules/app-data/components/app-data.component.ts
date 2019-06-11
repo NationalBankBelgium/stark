@@ -1,4 +1,14 @@
-import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	Inject,
+	Input,
+	OnDestroy,
+	OnInit,
+	Renderer2,
+	ViewEncapsulation
+} from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkDOMUtil } from "../../../util/dom";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
@@ -20,6 +30,7 @@ export type StarkAppDataComponentMode = "dropdown" | "menu";
 	selector: "stark-app-data",
 	templateUrl: "./app-data.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: componentName
 	}

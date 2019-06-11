@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { Ng2StateDeclaration } from "@uirouter/angular";
@@ -15,7 +15,7 @@ import {
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import { StarkRouteSearchEntry } from "./route-search-entry.intf";
 import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu/components";
-import  sortBy  from "lodash-es/sortBy";
+import sortBy from "lodash-es/sortBy";
 
 /**
  * Name of the component
@@ -47,6 +47,8 @@ export type StarkRouteSearchDirection = "left" | "right";
 	selector: "stark-route-search",
 	templateUrl: "./route-search.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
 	}

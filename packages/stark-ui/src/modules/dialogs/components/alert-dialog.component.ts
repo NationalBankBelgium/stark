@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { StarkAlertDialogContent } from "./alert-dialog-content.intf";
 
@@ -17,6 +17,7 @@ export type StarkAlertDialogResult = "ok" | undefined;
 	selector: "stark-alert-dialog",
 	templateUrl: "./alert-dialog.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: "stark-alert-dialog"

@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { RawParams } from "@uirouter/core";
 import { delay, take } from "rxjs/operators";
 
@@ -29,6 +29,7 @@ const componentName = "stark-preloading-page";
 	selector: "stark-preloading-page",
 	templateUrl: "./preloading-page.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: componentName
 	}

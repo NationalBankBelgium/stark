@@ -1,5 +1,7 @@
 import {
 	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	EventEmitter,
@@ -46,6 +48,8 @@ const DEFAULT_MENU_GROUP: StarkMenuGroup = {
 	selector: "stark-app-menu-item",
 	templateUrl: "./app-menu-item.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
 	}
@@ -93,8 +97,10 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 		}
 
 		if (isActive) {
+			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the css classes
 			this.activated.emit();
 		} else {
+			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the css classes
 			this.deactivated.emit();
 		}
 	}
@@ -119,12 +125,14 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	 * @param routingService - The router of the application
 	 * @param renderer - The custom render of the component
 	 * @param elementRef - The elementRef of the component
+	 * @param cdRef - Reference to the change detector attached to this component.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		protected elementRef: ElementRef,
+		protected cdRef: ChangeDetectorRef
 	) {
 		super(renderer, elementRef);
 	}

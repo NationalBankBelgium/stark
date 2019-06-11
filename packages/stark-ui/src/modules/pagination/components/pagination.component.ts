@@ -1,5 +1,6 @@
 import {
 	AfterViewInit,
+	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
@@ -37,7 +38,8 @@ export type StarkPaginationComponentMode = "compact";
 @Component({
 	selector: "stark-pagination",
 	templateUrl: "./pagination.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StarkPaginationComponent extends MatPaginator implements OnInit, OnChanges, AfterViewInit {
 	/**

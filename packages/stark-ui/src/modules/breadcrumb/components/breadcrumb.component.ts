@@ -1,7 +1,17 @@
 /*tslint:disable:trackBy-function*/
 import { StarkBreadcrumbPath } from "./breadcrumb-path.intf";
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
-import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	Inject,
+	Input,
+	OnDestroy,
+	OnInit,
+	Renderer2,
+	ViewEncapsulation
+} from "@angular/core";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
@@ -23,6 +33,7 @@ const componentName = "stark-breadcrumb";
 	selector: "stark-breadcrumb",
 	templateUrl: "./breadcrumb.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName

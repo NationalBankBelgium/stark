@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from "@angular/core";
 
 /**
  * The name of the component
@@ -12,6 +12,8 @@ const componentName = "stark-session-card";
 	selector: "stark-session-card",
 	templateUrl: "./session-card.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
 	}

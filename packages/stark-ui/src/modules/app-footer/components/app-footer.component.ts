@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Inject, Input, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
@@ -12,7 +12,8 @@ const componentName = "stark-app-footer";
  */
 @Component({
 	selector: "stark-app-footer",
-	templateUrl: "./app-footer.component.html"
+	templateUrl: "./app-footer.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StarkAppFooterComponent implements OnInit {
 	/**

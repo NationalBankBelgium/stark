@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { interval, Observable } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
@@ -15,7 +15,8 @@ const componentName = "stark-session-timeout-warning-dialog";
 @Component({
 	selector: "session-timeout-warning-dialog",
 	templateUrl: "./session-timeout-warning-dialog.component.html",
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StarkSessionTimeoutWarningDialogComponent implements OnInit {
 	/**

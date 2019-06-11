@@ -1,4 +1,15 @@
-import { Component, ElementRef, Inject, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	Inject,
+	Input,
+	OnChanges,
+	OnInit,
+	Renderer2,
+	SimpleChanges
+} from "@angular/core";
 import { Observable, of, Subject } from "rxjs";
 import { delay, distinctUntilChanged, map, switchMap, take, tap } from "rxjs/operators";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
@@ -41,6 +52,7 @@ const componentName = "stark-message-pane";
 @Component({
 	selector: "stark-message-pane",
 	templateUrl: "./message-pane.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
@@ -132,12 +144,14 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 	 * @param messagePaneService - The service to display/hide messages in the pane.
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param cdRef - Reference to the change detector attached to this component.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_MESSAGE_PANE_SERVICE) public messagePaneService: StarkMessagePaneService,
 		public renderer: Renderer2,
-		public elementRef: ElementRef
+		public elementRef: ElementRef,
+		protected cdRef: ChangeDetectorRef
 	) {
 		super(renderer, elementRef);
 	}
@@ -166,6 +180,7 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 					this.isVisible = true;
 				}
 			}
+			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the css classes
 		});
 
 		this.errorMessages$ = appMsgCollection$.pipe(
