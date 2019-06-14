@@ -1,8 +1,9 @@
 .styleguide-layout-page {
   .warning {
     margin-bottom: 24px;
+    font-weight: bold;
 
-    mat-icon > svg {
+    .mat-icon > svg {
       margin-bottom: -5px;
     }
   }

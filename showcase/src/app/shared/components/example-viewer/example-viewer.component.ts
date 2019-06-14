@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { STARK_LOGGING_SERVICE, StarkErrorImpl, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { FileService } from "../../services";
@@ -12,27 +12,24 @@ export interface ExampleFile {
 @Component({
 	selector: "example-viewer",
 	templateUrl: "./example-viewer.component.html",
-	styleUrls: ["./example-viewer.component.scss"]
+	styleUrls: ["./example-viewer.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExampleViewerComponent implements OnInit {
 	@Input()
-	public extensions: string[];
+	public extensions = ["HTML", "TS", "CSS"];
 	@Input()
 	public filesPath = "undefined";
 	@Input()
 	public exampleTitle = "undefined";
 
 	public appBaseHref: string;
-	public examplesFolder: string;
-	public exampleFiles: ExampleFile[];
-	public showSource: boolean;
+	public examplesFolder = "assets/examples/";
+	public exampleFiles: ExampleFile[] = [];
+	public showSource = false;
 
 	public constructor(private fileService: FileService, @Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
-		this.extensions = ["HTML", "TS", "CSS"];
-		this.exampleFiles = [];
-		this.showSource = false;
 		this.appBaseHref = this.getAppBaseHref();
-		this.examplesFolder = "assets/examples/";
 	}
 
 	public ngOnInit(): void {

@@ -1,6 +1,8 @@
 .styleguide-layout-page {
   .warning {
-    color: mat-color($warning-palette, 500);
+    .mat-icon {
+      color: mat-color($warning-palette, 500);
+    }
   }
 
   .layout-demo > * {
