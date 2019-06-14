@@ -35,7 +35,7 @@
     "@ngx-translate/core": "^11.0.1",
     "@types/lodash-es": "^4.17.1",
     "@types/uuid": "^3.4.4",
-    "@uirouter/angular": "^3.0.0",
+    "@uirouter/angular": "^4.0.0",
     "cerialize": "^0.1.18",
     "class-validator": "^0.9.1",
     "deep-freeze-strict": "^1.1.1",
