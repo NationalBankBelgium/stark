@@ -23,13 +23,14 @@ export function progressIndicatorReducer(
 	let newState: Map<string, StarkProgressIndicatorFullConfig> = cloneDeep(state);
 
 	let topic: string;
+	let progressIndicatorConfig: StarkProgressIndicatorFullConfig;
 
 	switch (action.type) {
 		case StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_REGISTER:
 			topic = action.progressIndicatorConfig.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
+				progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
 				progressIndicatorConfig.listenersCount = <number>progressIndicatorConfig.listenersCount + 1;
 				newState = newState.set(topic, progressIndicatorConfig);
 			} else {
@@ -42,7 +43,7 @@ export function progressIndicatorReducer(
 			topic = action.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
+				progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
 
 				progressIndicatorConfig.listenersCount = <number>progressIndicatorConfig.listenersCount - 1;
 
@@ -59,7 +60,7 @@ export function progressIndicatorReducer(
 			topic = action.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
+				progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
 				progressIndicatorConfig.visible = true;
 				progressIndicatorConfig.pendingListenersCount = <number>progressIndicatorConfig.pendingListenersCount + 1;
 				newState = newState.set(topic, progressIndicatorConfig);
@@ -71,7 +72,7 @@ export function progressIndicatorReducer(
 			topic = action.topic;
 
 			if (newState.has(topic)) {
-				const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
+				progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>newState.get(topic));
 
 				if (<number>progressIndicatorConfig.pendingListenersCount > 0) {
 					progressIndicatorConfig.pendingListenersCount = <number>progressIndicatorConfig.pendingListenersCount - 1;

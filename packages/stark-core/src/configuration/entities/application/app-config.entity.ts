@@ -10,6 +10,7 @@ import { StarkMapIsValid, StarkMapNotEmpty } from "../../../validation/decorator
 /**
  * This class is only for serialization purposes
  * @ignore
+ * @dynamic See: https://angular.io/guide/aot-compiler#strictmetadataemit
  */
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	// FIXME: properties of the group "temp" are not used yet. Will they still be used?

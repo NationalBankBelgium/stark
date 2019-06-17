@@ -12,6 +12,7 @@ export const STARK_HTTP_PARAM_ENCODER: HttpParameterCodec = new StarkHttpParamet
 
 /**
  * Util class used for the HTTP module
+ * @dynamic See: https://angular.io/guide/aot-compiler#strictmetadataemit
  */
 export class StarkHttpUtil {
 	/**

@@ -1,18 +1,7 @@
 {
-  "extends": "./tsconfig-build.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "paths": {
-      "@ngrx/*": ["../stark-core/node_modules/@ngrx/*"],
-      "@ngx-translate/*": ["../stark-core/node_modules/@ngx-translate/*"],
-      "@uirouter/*": ["../stark-core/node_modules/@uirouter/*"],
-      "moment": ["../stark-core/node_modules/moment"],
-      "lodash-es": ["../stark-core/node_modules/lodash-es"],
-      "lodash-es/*": ["../stark-core/node_modules/lodash-es/*"],
-      "@nationalbankbelgium/stark-core/testing": ["../../dist/packages/stark-core/testing"],
-      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
-      "@nationalbankbelgium/stark-rbac": ["."]
-    }
+    "module": "commonjs"
   },
   "files": null,
   "include": ["**/*.ts"]

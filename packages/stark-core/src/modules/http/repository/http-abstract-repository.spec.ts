@@ -11,8 +11,7 @@ import {
 	StarkSingleItemResponseWrapper
 } from "../entities";
 import { StarkHttpService } from "../services/http.service.intf";
-import { MockStarkHttpService } from "../testing";
-import { MockStarkLoggingService } from "../../logging/testing";
+import { MockStarkLoggingService, MockStarkHttpService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkHttpRequestBuilderImpl } from "../builder";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import createSpyObj = jasmine.createSpyObj;

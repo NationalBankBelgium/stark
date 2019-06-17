@@ -17,7 +17,7 @@ import {
 import { StarkUser } from "../entities";
 import { StarkUserService } from "./user.service.intf";
 import { StarkUserServiceImpl } from "./user.service";
-import { MockStarkLoggingService } from "../../logging/testing";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkUserRepository } from "../repository";
 import {
 	StarkHttpError,

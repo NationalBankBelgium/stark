@@ -1,5 +1,6 @@
 /**
  * Util class containing some constants with predefined masks for common mask patterns to be used with the {@link StarkTextMaskDirective}.
+ * @dynamic See: https://angular.io/guide/aot-compiler#strictmetadataemit
  */
 export class StarkTextMasks {
 	/**

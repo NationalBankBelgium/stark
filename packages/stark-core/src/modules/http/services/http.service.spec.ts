@@ -9,8 +9,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } 
 import { convertMapIntoObject } from "../../../util/util-helpers";
 import { StarkHttpUtil } from "../../../util/http.util";
 import { StarkHttpServiceImpl } from "./http.service";
-import { MockStarkLoggingService } from "../../logging/testing";
-import { MockStarkSessionService } from "../../session/testing";
+import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import {
 	StarkBackend,
 	StarkBackendImpl,

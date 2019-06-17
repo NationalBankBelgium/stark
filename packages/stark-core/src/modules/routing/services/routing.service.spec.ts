@@ -7,15 +7,14 @@ import { RawParams, StateDeclaration, StateObject, StateService, TransitionServi
 import { catchError, switchMap, tap } from "rxjs/operators";
 import { throwError } from "rxjs";
 import { Store } from "@ngrx/store";
+import { MockStarkLoggingService, MockStarkXsrfService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkRoutingServiceImpl } from "./routing.service";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
 import { StarkNavigate, StarkNavigationHistoryLimitReached, StarkRoutingActionTypes } from "../actions";
-import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkErrorHandler } from "../../error-handling";
-import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
 import { StarkRoutingService } from "./routing.service.intf";
 import CallInfo = jasmine.CallInfo;
 import Spy = jasmine.Spy;

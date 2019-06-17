@@ -6,7 +6,7 @@ import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing
 import { StarkRBACDirectivePermission } from "./permission.intf";
 import { StarkHideOnPermissionDirective } from "./hide-on-permission.directive";
 import { STARK_RBAC_AUTHORIZATION_SERVICE } from "../services";
-import { MockStarkRBACAuthorizationService } from "../testing/authorization.mock";
+import { MockStarkRBACAuthorizationService } from "@nationalbankbelgium/stark-rbac/testing";
 
 describe("StarkHideOnPermissionDirective", () => {
 	let fixture: ComponentFixture<TestComponent>;

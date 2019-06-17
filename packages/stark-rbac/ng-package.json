@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "lib": {
+    "entryFile": "public_api.ts",
+    "flatModuleFile": "stark-rbac",
+    "umdModuleIds": {
+      "@nationalbankbelgium/stark-core": "stark.core",
+      "@ngrx/store": "ngrx.store"
+    }
+  },
+  "dest": "../../dist/packages/stark-rbac",
+  "whitelistedNonPeerDependencies": ["@types/lodash-es"]
+}

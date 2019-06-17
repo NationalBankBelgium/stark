@@ -1,8 +1,7 @@
 import { StarkUserRepository } from "./user.repository.intf";
 import { DEFAULT_USER_PROFILE_RESOURCE_PATH, StarkUserRepositoryImpl } from "./user.repository";
-import { MockStarkHttpService } from "../../http/testing";
+import { MockStarkHttpService, MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkBackend, StarkBackendImpl, StarkHttpRequestType, StarkSingleItemResponseWrapper } from "../../http/entities";
-import { MockStarkLoggingService } from "../../logging/testing";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration";
 import { Observer, of } from "rxjs";
 import SpyObj = jasmine.SpyObj;

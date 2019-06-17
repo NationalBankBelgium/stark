@@ -9,7 +9,7 @@ import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing
 import { StarkProgressIndicatorType, StarkProgressIndicatorConfig } from "../entities";
 import { StarkProgressIndicatorDirective } from "../directives";
 import { STARK_PROGRESS_INDICATOR_SERVICE } from "../services";
-import { MockStarkProgressIndicatorService } from "../testing/progress-indicator.mock";
+import { MockStarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui/testing";
 import { StarkProgressIndicatorComponent } from "../components";
 
 @Component({

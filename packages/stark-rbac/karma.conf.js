@@ -6,14 +6,14 @@ const helpers = require("../stark-testing/helpers");
 const defaultKarmaConfig = require("../stark-testing/karma.conf.js").rawKarmaConfig;
 
 // entry files of the "@nationalbankbelgium/stark-rbac" module imported in mock files
-const karmaTypescriptFiles = [{ pattern: helpers.root("index.ts") }, { pattern: helpers.root("public_api.ts") }];
+const karmaTypescriptFiles = [{ pattern: helpers.root("public_api.ts") }, { pattern: helpers.root("testing/**/*.ts") }];
 
 const karmaTypescriptBundlerAliasResolution = {
 	resolve: {
 		alias: {
 			// adapt the resolution of the stark-core module to the UMD module
-			"@nationalbankbelgium/stark-core": "../../dist/packages-dist/stark-core/bundles/stark-core.umd.js",
-			"@nationalbankbelgium/stark-core/testing": "../../dist/packages-dist/stark-core/bundles/stark-core-testing.umd.js",
+			"@nationalbankbelgium/stark-core": "../../dist/packages/stark-core/bundles/stark-core.umd.js",
+			"@nationalbankbelgium/stark-core/testing": "../../dist/packages/stark-core/bundles/stark-core-testing.umd.js",
 			// adapt the resolution of the 3rd party modules used in stark-core
 			"@angularclass/hmr": "../stark-core/node_modules/@angularclass/hmr/dist/index.js",
 			"@ng-idle/core": "../stark-core/node_modules/@ng-idle/core/bundles/core.umd.js",

@@ -1,0 +1,47 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "lib": {
+    "entryFile": "public_api.ts",
+    "umdModuleIds": {
+      "@angular/material-moment-adapter": "ngMaterialMomentAdapter",
+      "@angular/core": "ng.core",
+      "@angular/material/sidenav": "ngMaterial.sidenav",
+      "@nationalbankbelgium/stark-core": "stark.core",
+      "@ngrx/effects": "ngrx.effects",
+      "@ngrx/store": "ngrx.store",
+      "@ngx-translate/core": "ngxTranslate.core",
+      "@uirouter/angular": "uirouter.angular",
+      "angular2-text-mask": "ng2TextMask",
+      "class-validator": "class-validator",
+      "lodash-es/cloneDeep": "lodash-es.cloneDeep",
+      "lodash-es/find": "lodash-es.find",
+      "lodash-es/findIndex": "lodash-es.findIndex",
+      "lodash-es/get": "lodash-es.get",
+      "lodash-es/isEqual": "lodash-es.isEqual",
+      "lodash-es/merge": "lodash-es.merge",
+      "lodash-es/sortBy": "lodash-es.sortBy",
+      "lodash-es/uniqueId": "lodash-es.uniqueId",
+      "moment": "moment",
+      "nouislider": "nouislider",
+      "prismjs": "Prism",
+      "text-mask-addons": "textMaskAddons"
+    },
+    "flatModuleFile": "stark-ui"
+  },
+  "dest": "../../dist/packages/stark-ui",
+  "whitelistedNonPeerDependencies": [
+    "@angular/material-moment-adapter",
+    "@mdi/angular-material",
+    "@types/lodash-es",
+    "@types/nouislider",
+    "@types/prismjs",
+    "angular2-text-mask",
+    "normalize.css",
+    "nouislider",
+    "prettier",
+    "pretty-data",
+    "prismjs",
+    "text-mask-addons",
+    "text-mask-core"
+  ]
+}
