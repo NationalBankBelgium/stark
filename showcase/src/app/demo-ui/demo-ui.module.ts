@@ -1,12 +1,25 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatOptionModule } from "@angular/material/core";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatButtonModule } from "@angular/material/button";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { StoreModule } from "@ngrx/store";
+import { TranslateModule } from "@ngx-translate/core";
 import { UIRouterModule } from "@uirouter/angular";
+import { NgxFormErrorsModule } from "@nationalbankbelgium/ngx-form-errors";
 import {
 	StarkActionBarModule,
 	StarkAppDataModule,
@@ -62,7 +75,8 @@ import {
 	DemoTablePageComponent,
 	DemoToastPageComponent,
 	DemoTransformInputDirectivePageComponent,
-	DemoDateTimePickerPageComponent
+	DemoDateTimePickerPageComponent,
+	DemoReactiveFormsWithNgxFormErrorsPageComponent
 } from "./pages";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
@@ -73,7 +87,9 @@ import {
 	TableWithFixedActionsComponent,
 	TableWithFixedHeaderComponent,
 	TableWithSelectionComponent,
-	TableWithTranscludedActionBarComponent
+	TableWithTranscludedActionBarComponent,
+	TranslatedFormErrorComponent,
+	CardComponent
 } from "./components";
 
 @NgModule({
@@ -81,12 +97,26 @@ import {
 		UIRouterModule.forChild({
 			states: DEMO_STATES
 		}),
+		CommonModule,
+		FormsModule,
+		NgxFormErrorsModule.forRoot({ formErrorComponent: TranslatedFormErrorComponent }),
+		ReactiveFormsModule,
 		MatAutocompleteModule,
+		MatButtonModule,
+		MatButtonToggleModule,
+		MatCardModule,
+		MatCheckboxModule,
 		MatDividerModule,
+		MatExpansionModule,
 		MatFormFieldModule,
+		MatIconModule,
 		MatInputModule,
 		MatOptionModule,
+		MatTooltipModule,
+		MatSnackBarModule,
+		MatTabsModule,
 		MatSlideToggleModule,
+		TranslateModule,
 		SharedModule,
 		StarkActionBarModule,
 		StarkAppLogoutModule,
@@ -148,7 +178,10 @@ import {
 		TableWithFixedActionsComponent,
 		DemoToastPageComponent,
 		DemoGenericSearchFormComponent,
-		DemoTransformInputDirectivePageComponent
+		DemoTransformInputDirectivePageComponent,
+		DemoReactiveFormsWithNgxFormErrorsPageComponent,
+		TranslatedFormErrorComponent,
+		CardComponent
 	],
 	exports: [
 		DemoActionBarPageComponent,
@@ -175,8 +208,10 @@ import {
 		DemoSliderPageComponent,
 		DemoTablePageComponent,
 		DemoToastPageComponent,
-		DemoGenericSearchFormComponent
+		DemoGenericSearchFormComponent,
+		DemoReactiveFormsWithNgxFormErrorsPageComponent
 	],
-	providers: [DemoGenericService]
+	providers: [DemoGenericService],
+	entryComponents: [TranslatedFormErrorComponent]
 })
 export class DemoUiModule {}

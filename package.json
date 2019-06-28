@@ -61,6 +61,7 @@
     "tslint-sonarts": "^1.8.0",
     "typescript": "~3.2.4",
     "uglify-es": "^3.3.9",
+    "webpack-jarvis": "^0.3.2",
     "zone.js": "~0.9.0"
   },
   "scripts": {

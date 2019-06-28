@@ -1,0 +1,156 @@
+<div class="container">
+	<h1 class="mat-display-1" translate>
+		SHOWCASE.FORMS.NGX_FORMS.TITLE
+	</h1>
+	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+	<section class="stark-section">
+		<example-viewer
+			class="progress-indicator-example"
+			[extensions]="['HTML', 'SCSS', 'TS']"
+			filesPath="progress-indicator/progress-indicator"
+			[exampleTitle]="'SHOWCASE.FORMS.NGX_FORMS.TITLE' | translate"
+		>
+			<form [formGroup]="formGroup" (ngSubmit)="onSubmitUserDetails(formGroup)" class="form-group">
+				<div class="grid">
+					<app-card class="form-card">
+						<mat-card-content>
+							<mat-form-field class="full-width">
+								<input matInput [placeholder]="'SHOWCASE.FORMS.NGX_FORMS.USER_NAME' | translate" formControlName="username" required />
+								<mat-error>
+									<ng-template ngxFormErrors="username" #usernameField="ngxFormErrors"></ng-template>
+								</mat-error>
+							</mat-form-field>
+
+							<div formGroupName="matchingPasswords" ngxFormErrorsGroup="passwords-group">
+								<mat-form-field class="full-width">
+									<input
+											matInput
+											type="password"
+											[placeholder]="'SHOWCASE.FORMS.NGX_FORMS.PASSWORD' | translate"
+											formControlName="password"
+											required
+									/>
+									<mat-error>
+										<ng-template
+												ngxFormErrors="matchingPasswords.password"
+												ngxFormErrorsFieldName="SHOWCASE.FORMS.NGX_FORMS.PASSWORD_ALIAS"
+												#passwordField="ngxFormErrors"
+										></ng-template>
+									</mat-error>
+								</mat-form-field>
+
+								<mat-form-field class="full-width">
+									<input
+											matInput
+											type="password"
+											[placeholder]="'SHOWCASE.FORMS.NGX_FORMS.CONFIRM_PASSWORD' | translate"
+											formControlName="confirmPassword"
+											[errorStateMatcher]="parentErrorStateMatcher"
+											required
+									/>
+									<mat-error>
+										<ng-template
+												ngxFormErrors="matchingPasswords.confirmPassword"
+												#confirmPasswordField="ngxFormErrors"
+										></ng-template>
+									</mat-error>
+								</mat-form-field>
+							</div>
+						</mat-card-content>
+
+						<mat-card-actions>
+							<button color="primary" mat-raised-button type="submit" [disabled]="!formGroup.valid">Submit</button>
+							<button color="primary" mat-stroked-button type="button" (click)="toggleValidationDetails()">
+								{{ showValidationDetails ? "Hide validation details" : "Show validation details" }}
+							</button>
+							<button color="primary" mat-stroked-button type="button" (click)="toggleValidationSummary()">
+								{{ showValidationSummary ? "Hide validation summary" : "Show validation summary" }}
+							</button>
+						</mat-card-actions>
+					</app-card>
+
+					<ng-container *ngIf="showValidationDetails">
+						<app-card class="form-field-info" color="accent">
+							<mat-card-title>Username</mat-card-title>
+							<mat-card-content>
+								<div>Has errors: {{ usernameField.hasErrors }}</div>
+								<div>Has 'required' error: {{ usernameField.hasError("required") }}</div>
+								<div>Is touched? {{ usernameField.hasState("touched") }}</div>
+								<div>
+									'required' error:
+									<pre>{{ usernameField.getError("required") | json }}</pre>
+								</div>
+								<div *ngIf="usernameField.hasErrors">
+									Errors:
+									<pre>{{ usernameField.errors | json }}</pre>
+								</div>
+							</mat-card-content>
+						</app-card>
+
+						<app-card class="form-field-info" color="accent">
+							<mat-card-title>Password</mat-card-title>
+							<mat-card-content>
+								<div>Has errors: {{ passwordField.hasErrors }}</div>
+								<div>Has 'pattern' error: {{ passwordField.hasError("pattern") }}</div>
+								<div>Is touched? {{ passwordField.hasState("touched") }}</div>
+								<div>
+									'pattern' error:
+									<pre>{{ passwordField.getError("pattern") | json }}</pre>
+								</div>
+								<div *ngIf="passwordField.hasErrors">
+									Errors:
+									<pre>{{ passwordField.errors | json }}</pre>
+								</div>
+							</mat-card-content>
+						</app-card>
+
+						<app-card class="form-field-info" color="accent">
+							<mat-card-title>Confirm password</mat-card-title>
+							<mat-card-content>
+								<div>Has errors: {{ confirmPasswordField.hasErrors }}</div>
+								<div>Has 'required' error: {{ confirmPasswordField.hasError("required") }}</div>
+								<div>Is touched? {{ confirmPasswordField.hasState("touched") }}</div>
+								<div>
+									'required' error:
+									<pre>{{ confirmPasswordField.getError("required") | json }}</pre>
+								</div>
+								<div *ngIf="confirmPasswordField.hasErrors">
+									Errors:
+									<pre>{{ confirmPasswordField.errors | json }}</pre>
+								</div>
+							</mat-card-content>
+						</app-card>
+					</ng-container>
+
+					<app-card
+							*ngIf="showValidationSummary"
+							class="form-validation-messages"
+							[color]="!usernameField.hasErrors && !passwordField.hasErrors && !confirmPasswordField.hasErrors ? 'success' : 'warning'"
+					>
+				<span *ngIf="!usernameField.hasErrors && !passwordField.hasErrors && !confirmPasswordField.hasErrors">
+					No validation errors
+				</span>
+
+						<!-- TODO: IMPORTANT: the ngIf cannot be used here because it causes some issues with the ErrorComponent created by the ngxFormErrors -->
+						<ul [hidden]="!usernameField.hasErrors && !passwordField.hasErrors && !confirmPasswordField.hasErrors">
+							<li [hidden]="!usernameField.hasErrors">
+								<ng-template ngxFormErrors="username"></ng-template>
+							</li>
+
+							<li [hidden]="!passwordField.hasErrors">
+								<ng-template
+										ngxFormErrors="matchingPasswords.password"
+										ngxFormErrorsFieldName="SHOWCASE.FORMS.NGX_FORMS.PASSWORD_ALIAS"
+								></ng-template>
+							</li>
+
+							<li [hidden]="!confirmPasswordField.hasErrors">
+								<ng-template ngxFormErrors="matchingPasswords.confirmPassword"></ng-template>
+							</li>
+						</ul>
+					</app-card>
+				</div>
+			</form>
+		</example-viewer>
+	</section>
+</div>

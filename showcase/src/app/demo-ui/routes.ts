@@ -26,7 +26,8 @@ import {
 	DemoTablePageComponent,
 	DemoToastPageComponent,
 	DemoTransformInputDirectivePageComponent,
-	DemoDateTimePickerPageComponent
+	DemoDateTimePickerPageComponent,
+	DemoReactiveFormsWithNgxFormErrorsPageComponent
 } from "./pages";
 
 export const DEMO_STATES: Ng2StateDeclaration[] = [
@@ -243,5 +244,13 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 			translationKey: "SHOWCASE.DEMO.TOAST.TITLE"
 		},
 		views: { "@": { component: DemoToastPageComponent } }
+	},
+	{
+		name: "demo-ui.reactive-forms-with-ngx-form-errors",
+		url: "/ngxform",
+		data: {
+			translationKey: "SHOWCASE.DEMO.REACTIVE_FORMS_WITH_NGX_FORM_ERRORS.TITLE"
+		},
+		views: { "@": { component: DemoReactiveFormsWithNgxFormErrorsPageComponent } }
 	}
 ];

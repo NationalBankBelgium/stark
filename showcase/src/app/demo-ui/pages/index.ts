@@ -25,3 +25,4 @@ export * from "./route-search";
 export * from "./table";
 export * from "./toast";
 export * from "./transform-input-directive";
+export * from "./reactive-forms-with-ngx-form-errors";

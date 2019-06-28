@@ -1,0 +1,1 @@
+<span *ngFor="let error of errors; trackBy: trackError" [ngClass]="getErrorClass()"> {{ error.message | translate: error.params }} </span>
