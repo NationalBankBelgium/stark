@@ -313,6 +313,32 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 			]
 		},
 		{
+			label: "Stark form",
+			menuGroups: [
+				{
+					id: "template-driven-forms",
+					label: "Template Driven Forms",
+					isVisible: true,
+					isEnabled: true,
+					targetState: "starkform.templatedrivenforms"
+				},
+				{
+					id: "reactive-forms",
+					label: "Reactive Forms",
+					isVisible: true,
+					isEnabled: true,
+					targetState: "starkform.reactiveforms"
+				},
+				{
+					id: "ngx-form-errors",
+					label: "Reactive Forms with NgxFormErros",
+					isVisible: true,
+					isEnabled: true,
+					targetState: "starkform.reactiveformswithngxformerrors"
+				},
+			]
+		},
+		{
 			label: "Style guide",
 			menuGroups: [
 				{
