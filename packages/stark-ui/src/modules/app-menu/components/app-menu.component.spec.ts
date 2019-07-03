@@ -8,7 +8,7 @@ import { StarkAppMenuComponent } from "./app-menu.component";
 import { StarkAppMenuItemComponent } from "./app-menu-item.component";
 import { UIRouterModule } from "@uirouter/angular";
 
-describe("StarkAppMenuComponent", () => {
+describe("AppMenuComponent", () => {
 	let component: StarkAppMenuComponent;
 	let fixture: ComponentFixture<StarkAppMenuComponent>;
 

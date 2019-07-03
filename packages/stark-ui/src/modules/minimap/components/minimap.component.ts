@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewEncapsulation } from "@angular/core";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -17,6 +17,8 @@ const componentName = "stark-minimap";
 	selector: "stark-minimap",
 	templateUrl: "./minimap.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
 	}

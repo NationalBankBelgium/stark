@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { RawParams } from "@uirouter/core";
 import {
 	STARK_LOGGING_SERVICE,
@@ -28,6 +28,7 @@ const componentName = "stark-login-page";
 	selector: "stark-login-page",
 	templateUrl: "./login-page.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: componentName
 	}

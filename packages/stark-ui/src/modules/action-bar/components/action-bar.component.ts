@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { StarkActionBarConfig } from "./action-bar-config.intf";
 import { StarkAction, StarkActionBarButtonColor } from "./action.intf";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
@@ -18,6 +18,7 @@ const componentName = "stark-action-bar";
 	selector: "stark-action-bar",
 	templateUrl: "./action-bar.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { MAT_SNACK_BAR_DATA, MatSnackBar } from "@angular/material/snack-bar";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkMessageType } from "../../../common/message";
@@ -17,6 +17,7 @@ const componentName = "stark-toast-notification";
 	selector: "stark-toast-notification",
 	templateUrl: "./toast-notification.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName

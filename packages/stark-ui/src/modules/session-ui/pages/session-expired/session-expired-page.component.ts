@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 
 import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
@@ -17,6 +17,7 @@ const componentName = "stark-session-expired-page";
 	selector: "stark-session-expired-page",
 	templateUrl: "./session-expired-page.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: componentName
 	}

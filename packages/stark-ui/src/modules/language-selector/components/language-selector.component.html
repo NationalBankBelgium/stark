@@ -1,7 +1,7 @@
 <div *ngIf="mode === 'dropdown'">
 	<mat-form-field>
 		<stark-dropdown
-			dropdownId="languageDropdown"
+			[dropdownId]="languageSelectorId"
 			[options]="appMetadata.supportedLanguages"
 			[value]="selectedLanguage"
 			[color]="color"

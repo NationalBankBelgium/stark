@@ -141,9 +141,9 @@ describe("MessagePaneComponent", () => {
 		if (messages.length > 0) {
 			// if there are messages for the error-type
 			// the button should be displayed
-			expect(messagesButton).toBeDefined();
-			expect(messagePaneContent).toBeDefined();
-			expect(messagesTab).toBeDefined();
+			expect(messagesButton).toBeTruthy();
+			expect(messagePaneContent).toBeTruthy();
+			expect(messagesTab).toBeTruthy();
 			expect(messagesTab.nativeElement.innerText).toEqual(`${messages.length}`);
 
 			// clicking on the button should display the message-pane content
@@ -214,10 +214,8 @@ describe("MessagePaneComponent", () => {
 			expect(hostFixture).toBeDefined();
 			expect(component).toBeDefined();
 
-			expect(component.logger).not.toBeNull();
-			expect(component.logger).toBeDefined();
-			expect(component.messagePaneService).not.toBeNull();
-			expect(component.messagePaneService).toBeDefined();
+			expect(component.logger).toBeTruthy();
+			expect(component.messagePaneService).toBeTruthy();
 		});
 
 		it("should have default inputs", () => {
@@ -250,7 +248,7 @@ describe("MessagePaneComponent", () => {
 		it("should add classes to the root element", fakeAsync(() => {
 			component.ngOnInit();
 
-			expect(debugElementComponent).toBeDefined();
+			expect(debugElementComponent).toBeTruthy();
 			expect(debugElementComponent.classes[starkMessagePaneDisplayedClass]).toBeUndefined();
 			expect(debugElementComponent.classes[starkMessagePaneDisplayAnimatedClass]).toBeUndefined();
 
@@ -307,7 +305,7 @@ describe("MessagePaneComponent", () => {
 	describe("hidePane", () => {
 		it("should remove classes from the root element", fakeAsync(() => {
 			component.ngOnInit();
-			expect(component.elementRef.nativeElement).toBeDefined();
+			expect(component.elementRef.nativeElement).toBeTruthy();
 			component.renderer.addClass(component.elementRef.nativeElement, starkMessagePaneDisplayAnimatedClass);
 			component.renderer.addClass(component.elementRef.nativeElement, starkMessagePaneDisplayedClass);
 
@@ -380,20 +378,16 @@ describe("MessagePaneComponent", () => {
 				expect(activeTab).toBeNull();
 
 				const errorMessagesTab: HTMLElement = debugElementComponent.query(By.css(".errors b")).nativeElement;
-				expect(errorMessagesTab).toBeDefined();
-				expect(errorMessagesTab).not.toBeNull();
+				expect(errorMessagesTab).toBeTruthy();
 
 				const warningMessagesTab: HTMLElement = debugElementComponent.query(By.css(".warnings b")).nativeElement;
-				expect(warningMessagesTab).toBeDefined();
-				expect(warningMessagesTab).not.toBeNull();
+				expect(warningMessagesTab).toBeTruthy();
 
 				const infoMessagesTab: HTMLElement = debugElementComponent.query(By.css(".infos b")).nativeElement;
-				expect(infoMessagesTab).toBeDefined();
-				expect(infoMessagesTab).not.toBeNull();
+				expect(infoMessagesTab).toBeTruthy();
 
 				const totalMessagesTab: HTMLElement = debugElementComponent.query(By.css(".stark-message-pane-total b")).nativeElement;
-				expect(totalMessagesTab).toBeDefined();
-				expect(totalMessagesTab).not.toBeNull();
+				expect(totalMessagesTab).toBeTruthy();
 
 				const totalMessages: number =
 					mockMessages.infoMessages.length + mockMessages.warningMessages.length + mockMessages.errorMessages.length;
@@ -423,8 +417,8 @@ describe("MessagePaneComponent", () => {
 				const collapseMessagesButton: DebugElement = debugElementComponent.query(By.css(".collapse-pane"));
 				const totalMessagesButton: DebugElement = debugElementComponent.query(By.css(".stark-message-pane-total"));
 
-				expect(collapseMessagesButton.nativeElement).toBeDefined();
-				expect(totalMessagesButton.nativeElement).toBeDefined();
+				expect(collapseMessagesButton.nativeElement).toBeTruthy();
+				expect(totalMessagesButton.nativeElement).toBeTruthy();
 
 				// the max. message level, initially mocked 'errors'
 				expect(totalMessagesButton.classes["errors"]).toBe(true);
@@ -446,7 +440,7 @@ describe("MessagePaneComponent", () => {
 			it("should clear all messages and hide the message pane component", () => {
 				const clearAllMessagesButton: HTMLElement = debugElementComponent.query(By.css(".clear-all-messages")).nativeElement;
 
-				expect(clearAllMessagesButton).toBeDefined();
+				expect(clearAllMessagesButton).toBeTruthy();
 
 				clearAllMessagesButton.click();
 				hostFixture.detectChanges();

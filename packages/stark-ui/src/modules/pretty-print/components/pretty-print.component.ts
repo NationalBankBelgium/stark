@@ -1,4 +1,15 @@
-import { Component, ElementRef, Inject, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	Inject,
+	Input,
+	OnChanges,
+	OnInit,
+	Renderer2,
+	SimpleChanges,
+	ViewEncapsulation
+} from "@angular/core";
 /* tslint:disable:no-duplicate-imports no-import-side-effect */
 import * as Prism from "prismjs";
 import { Grammar } from "prismjs";
@@ -65,6 +76,7 @@ export type StarkPrettyPrintFormat = "css" | "scss" | "html" | "xml" | "json" | 
 	selector: "stark-pretty-print",
 	templateUrl: "./pretty-print.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName

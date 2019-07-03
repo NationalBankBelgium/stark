@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { StarkPromptDialogContent } from "./prompt-dialog-content.intf";
@@ -19,6 +19,7 @@ export type StarkPromptDialogResult = string | "cancel" | undefined;
 	selector: "stark-prompt-dialog",
 	templateUrl: "./prompt-dialog.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: "stark-prompt-dialog"

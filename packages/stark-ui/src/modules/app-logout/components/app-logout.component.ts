@@ -1,4 +1,14 @@
-import { Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, ViewEncapsulation } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	Inject,
+	Input,
+	OnInit,
+	Optional,
+	Renderer2,
+	ViewEncapsulation
+} from "@angular/core";
 
 import {
 	STARK_LOGGING_SERVICE,
@@ -25,6 +35,7 @@ const componentName = "stark-app-logout";
 	selector: "stark-app-logout",
 	templateUrl: "./app-logout.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName

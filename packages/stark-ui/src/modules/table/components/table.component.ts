@@ -1,6 +1,7 @@
 import {
 	AfterContentInit,
 	AfterViewInit,
+	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
@@ -72,6 +73,7 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 	selector: "stark-table",
 	templateUrl: "./table.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
@@ -104,19 +106,29 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		return this._columnProperties;
 	}
 
+	/**
+	 * Return the array of {@link StarkMinimapItemProperties} to be displayed display in the table minimap component
+	 */
 	public get _minimapItemProperties(): StarkMinimapItemProperties[] {
-		return this._columnProperties.map(({ name, label }: StarkTableColumnProperties) => ({
+		return this.columnProperties.map(({ name, label }: StarkTableColumnProperties) => ({
 			name,
 			label: label || name
 		}));
 	}
 
+	/**
+	 * Return the items to be shown as "visible" in the table minimap component
+	 */
 	public get _visibleMinimapItems(): string[] {
-		return this._columnProperties
+		return this.columnProperties
 			.filter(({ isVisible }: StarkTableColumnProperties) => isVisible)
 			.map(({ name }: StarkTableColumnProperties) => name);
 	}
 
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	private _columnProperties: StarkTableColumnProperties[] = [];
 
 	/**
@@ -354,6 +366,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public displayedColumns: string[] = [];
 
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	public _globalFilterFormCtrl = new FormControl();
 
 	/**
@@ -766,7 +782,30 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		});
 
 		dialogRef.afterClosed().subscribe((savedRules: StarkSortingRule[] | undefined) => {
+			// re-calculate the orderProperties with the sorting defined in the dialog
 			if (savedRules) {
+				const newOrderProperties: string[] = [];
+
+				// IMPORTANT: the rules should be ordered by priority because the priority passed to the columns by getColumnSortingPriority()
+				// is calculated based on the order in which the columns appear in the "orderProperties"
+				const orderedRulesByPriority = savedRules
+					// we only care about the columns that are really sorted, the rest should be discarded
+					.filter((rule: StarkSortingRule) => rule.sortDirection !== "")
+					.sort((rule1: StarkSortingRule, rule2: StarkSortingRule) => {
+						return rule1.sortPriority < rule2.sortPriority ? -1 : 1;
+					});
+
+				for (const rule of orderedRulesByPriority) {
+					let columnWithSortDirection: string = rule.column.name; // asc
+					if (rule.sortDirection === "desc") {
+						columnWithSortDirection = "-" + rule.column.name; // desc
+					}
+					newOrderProperties.push(columnWithSortDirection);
+				}
+
+				this.orderProperties = newOrderProperties; // enforcing immutability :)
+				this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the columns
+
 				this.sortData();
 			}
 		});
@@ -806,7 +845,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * In case there is a compareFn defined for any of the columns then such method is called to perform the custom sorting.
 	 * FIXME: refactor this method to reduce its cognitive complexity
 	 */
-
 	/* tslint:disable-next-line:cognitive-complexity */
 	public sortData(): void {
 		if (!this.columns) {
@@ -900,16 +938,16 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public getColumnSortingPriority(columnName: string): number | undefined {
 		let columnSortingPriority: number | undefined;
-		let index = 1;
+		let priority = 1;
 
 		if (this.isArrayFilled(this.orderProperties)) {
 			for (const orderProperty of this.orderProperties) {
 				if (orderProperty === columnName || (orderProperty.startsWith("-") && orderProperty === "-" + columnName)) {
-					columnSortingPriority = index;
+					columnSortingPriority = priority;
 					break;
 				}
 
-				index++;
+				priority++;
 			}
 		}
 

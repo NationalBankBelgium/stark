@@ -1,13 +1,13 @@
 <div *ngIf="mode !== 'compact'">
 	<ul *ngIf="paginationConfig.pageNavIsPresent !== false">
 		<li class="first-page" aria-label="First page" *ngIf="!paginationConfig.isExtended">
-			<button mat-icon-button (click)="goToFirst()" [disabled]="!hasPrevious()" aria-label="First page">
+			<button mat-icon-button type="button" (click)="goToFirst()" [disabled]="!hasPrevious()" aria-label="First page">
 				<mat-icon svgIcon="page-first"></mat-icon>
 			</button>
 		</li>
 
 		<li class="previous" aria-label="Previous">
-			<button mat-icon-button (click)="goToPrevious()" [disabled]="!hasPrevious()" aria-label="Previous">
+			<button mat-icon-button type="button" (click)="goToPrevious()" [disabled]="!hasPrevious()" aria-label="Previous">
 				<mat-icon svgIcon="chevron-left"></mat-icon>
 			</button>
 		</li>
@@ -46,9 +46,7 @@
 			starkRestrictInput="\d"
 			maxlength="{{ getPageInputMaxDigits() }}"
 		/>
-
 		<span>&nbsp;/&nbsp;</span>
-
 		<span class="total-pages">{{ getTotalPages() }}</span>
 	</div>
 
@@ -67,13 +65,13 @@
 <div *ngIf="mode === 'compact'" class="compact">
 	<ul *ngIf="paginationConfig.pageNavIsPresent !== false">
 		<li class="first-page" aria-label="First page">
-			<button mat-icon-button (click)="goToFirst()" [disabled]="!hasPrevious()" aria-label="First page">
+			<button mat-icon-button type="button" (click)="goToFirst()" [disabled]="!hasPrevious()" aria-label="First page">
 				<mat-icon svgIcon="page-first"></mat-icon>
 			</button>
 		</li>
 
 		<li class="previous" aria-label="Previous">
-			<button mat-icon-button (click)="goToPrevious()" [disabled]="!hasPrevious()" aria-label="Previous">
+			<button mat-icon-button type="button" (click)="goToPrevious()" [disabled]="!hasPrevious()" aria-label="Previous">
 				<mat-icon svgIcon="chevron-left"></mat-icon>
 			</button>
 		</li>
@@ -86,17 +84,18 @@
 				starkRestrictInput="\d"
 				maxlength="{{ getPageInputMaxDigits() }}"
 			/>
-			<span>&nbsp;/&nbsp;</span><span class="total-pages">{{ getTotalPages() }}</span>
+			<span>&nbsp;/&nbsp;</span>
+			<span class="total-pages">{{ getTotalPages() }}</span>
 		</div>
 
 		<li class="next" aria-label="Next">
-			<button mat-icon-button (click)="goToNext()" [disabled]="!hasNext()">
+			<button mat-icon-button type="button" (click)="goToNext()" [disabled]="!hasNext()">
 				<mat-icon svgIcon="chevron-right"></mat-icon>
 			</button>
 		</li>
 
 		<li class="last-page" aria-label="Last page">
-			<button mat-icon-button (click)="goToLast()" [disabled]="!hasNext()" aria-label="Last page">
+			<button mat-icon-button type="button" (click)="goToLast()" [disabled]="!hasNext()" aria-label="Last page">
 				<mat-icon svgIcon="page-last"></mat-icon>
 			</button>
 		</li>

@@ -1,4 +1,15 @@
-import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	Inject,
+	Input,
+	OnDestroy,
+	OnInit,
+	Renderer2,
+	ViewEncapsulation
+} from "@angular/core";
 import { DateAdapter } from "@angular/material/core";
 import { Subscription } from "rxjs";
 
@@ -27,6 +38,7 @@ export type StarkLanguageSelectorMode = "dropdown" | "toolbar";
 	selector: "stark-language-selector",
 	templateUrl: "./language-selector.component.html",
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
@@ -34,7 +46,7 @@ export type StarkLanguageSelectorMode = "dropdown" | "toolbar";
 })
 export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent implements OnInit, OnDestroy {
 	/**
-	 * HTML id of action bar component.
+	 * HTML id of the language selector component.
 	 */
 	@Input()
 	public languageSelectorId = "";
@@ -64,6 +76,7 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 	 * @param dateAdapter - Needed to change the locale of the DateAdapter
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param cdRef - Reference to the change detector attached to this component.
 	 */
 	public constructor(
 		@Inject(STARK_APP_METADATA) public appMetadata: StarkApplicationMetadata,
@@ -71,7 +84,8 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
 		public dateAdapter: DateAdapter<any>,
 		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		protected elementRef: ElementRef,
+		protected cdRef: ChangeDetectorRef
 	) {
 		super(renderer, elementRef);
 	}
@@ -82,12 +96,13 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": controller initialized");
 
-		this.sessionServiceSubscription = this.sessionService
-			.getCurrentLanguage()
-			.subscribe(
-				(language: string) => (this.selectedLanguage = language),
-				() => this.logger.error(componentName + ": an error occurred getting the current language.")
-			);
+		this.sessionServiceSubscription = this.sessionService.getCurrentLanguage().subscribe(
+			(language: string) => {
+				this.selectedLanguage = language;
+				this.cdRef.detectChanges(); // necessary because of the ChangeDetectionStrategy.OnPush
+			},
+			() => this.logger.error(componentName + ": an error occurred getting the current language.")
+		);
 	}
 
 	/**
