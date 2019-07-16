@@ -242,6 +242,21 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					label: "Services",
 					isVisible: true,
 					isEnabled: true
+				},
+				{
+					id: "menu-stark-ui-forms",
+					label: "Forms",
+					isVisible: true,
+					isEnabled: true,
+					entries: [
+						{
+							id: "ngx-form-errors",
+							label: "Reactive Forms with NgxFormErros",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-ui.reactive-forms-with-ngx-form-errors"
+						}
+					]
 				}
 			]
 		},

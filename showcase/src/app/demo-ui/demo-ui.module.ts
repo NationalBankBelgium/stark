@@ -1,4 +1,6 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatOptionModule } from "@angular/material/core";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatDividerModule } from "@angular/material/divider";
@@ -7,6 +9,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { StoreModule } from "@ngrx/store";
 import { UIRouterModule } from "@uirouter/angular";
+import { NgxFormErrorsModule } from "@nationalbankbelgium/ngx-form-errors";
 import {
 	StarkActionBarModule,
 	StarkAppDataModule,
@@ -62,7 +65,8 @@ import {
 	DemoTablePageComponent,
 	DemoToastPageComponent,
 	DemoTransformInputDirectivePageComponent,
-	DemoDateTimePickerPageComponent
+	DemoDateTimePickerPageComponent,
+	DemoReactiveFormsWithNgxFormErrorsPageComponent
 } from "./pages";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
@@ -73,7 +77,9 @@ import {
 	TableWithFixedActionsComponent,
 	TableWithFixedHeaderComponent,
 	TableWithSelectionComponent,
-	TableWithTranscludedActionBarComponent
+	TableWithTranscludedActionBarComponent,
+	TranslatedFormErrorComponent,
+	CardComponent
 } from "./components";
 
 @NgModule({
@@ -81,6 +87,10 @@ import {
 		UIRouterModule.forChild({
 			states: DEMO_STATES
 		}),
+		CommonModule,
+		FormsModule,
+		NgxFormErrorsModule.forRoot({ formErrorComponent: TranslatedFormErrorComponent }),
+		ReactiveFormsModule,
 		MatAutocompleteModule,
 		MatDividerModule,
 		MatFormFieldModule,
@@ -148,7 +158,10 @@ import {
 		TableWithFixedActionsComponent,
 		DemoToastPageComponent,
 		DemoGenericSearchFormComponent,
-		DemoTransformInputDirectivePageComponent
+		DemoTransformInputDirectivePageComponent,
+		DemoReactiveFormsWithNgxFormErrorsPageComponent,
+		TranslatedFormErrorComponent,
+		CardComponent
 	],
 	exports: [
 		DemoActionBarPageComponent,
@@ -175,8 +188,10 @@ import {
 		DemoSliderPageComponent,
 		DemoTablePageComponent,
 		DemoToastPageComponent,
-		DemoGenericSearchFormComponent
+		DemoGenericSearchFormComponent,
+		DemoReactiveFormsWithNgxFormErrorsPageComponent
 	],
-	providers: [DemoGenericService]
+	providers: [DemoGenericService],
+	entryComponents: [TranslatedFormErrorComponent]
 })
 export class DemoUiModule {}
