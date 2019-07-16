@@ -1,4 +1,6 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatOptionModule } from "@angular/material/core";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatDividerModule } from "@angular/material/divider";
@@ -81,6 +83,9 @@ import {
 		UIRouterModule.forChild({
 			states: DEMO_STATES
 		}),
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
 		MatAutocompleteModule,
 		MatDividerModule,
 		MatFormFieldModule,

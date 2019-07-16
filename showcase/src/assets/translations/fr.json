@@ -393,6 +393,16 @@
         }
       }
     },
+    "FORMS": {
+      "NGX_FORMS": {
+        "MAIN_TITLE": "Reactive Forms Errors",
+        "TITLE": "Exemple de Reactive Forms errors",
+        "USER_NAME": "Nom d'utilisateur",
+        "PASSWORD": "Password",
+        "CONFIRM_PASSWORD": "Password confirmation",
+        "PASSWORD_ALIAS": "Password alias"
+      }
+    },
     "GETTING_STARTED": {
       "TITLE": "Démarrer"
     },
@@ -424,6 +434,9 @@
     },
     "NEWS": {
       "TITLE": "Nouvelles"
+    },
+    "NGX_FORM_ERRORS": {
+      "TITLE": "Reactive Forms errors"
     },
     "OTHERWISE": {
       "TITLE": "Autre"

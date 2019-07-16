@@ -393,6 +393,16 @@
         }
       }
     },
+    "FORMS": {
+      "NGX_FORMS": {
+        "MAIN_TITLE": "Reactive Forms Errors",
+        "TITLE": "Reactive Forms errors voorbeeld",
+        "USER_NAME": "User Name",
+        "PASSWORD": "Wachtwoord",
+        "CONFIRM_PASSWORD": "Confirm Wachtwoord",
+        "PASSWORD_ALIAS": "Wachtwoord alias"
+      }
+    },
     "GETTING_STARTED": {
       "TITLE": "Begonnen"
     },
@@ -424,6 +434,9 @@
     },
     "NEWS": {
       "TITLE": "Nieuws"
+    },
+    "NGX_FORM_ERRORS": {
+      "TITLE": "Reactive Forms errors"
     },
     "OTHERWISE": {
       "TITLE": "Andersom"

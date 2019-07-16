@@ -1,0 +1,20 @@
+app-card.app-color-primary mat-card {
+  background-color: mat-color($primary-palette, 500);
+  color: mat-contrast($primary-palette, 500);
+}
+
+app-card.app-color-accent mat-card {
+  background-color: mat-color($primary-palette, 500);
+  color: mat-contrast($primary-palette, 500);
+}
+
+app-card.app-color-warning mat-card {
+  background-color: mat-color($warning-palette, 500);
+  color: mat-contrast($warning-palette, 500);
+}
+
+app-card.app-color-success mat-card {
+  /*Themes do not have a success map by default*/
+  background-color: mat-color($success-palette, 500);
+  color: mat-contrast($success-palette, 500);
+}

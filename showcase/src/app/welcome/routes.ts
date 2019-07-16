@@ -1,5 +1,11 @@
 import { Ng2StateDeclaration } from "@uirouter/angular";
-import { GettingStartedPageComponent, HomePageComponent, NewsPageComponent, NoContentPageComponent } from "./pages";
+import {
+	GettingStartedPageComponent,
+	HomePageComponent,
+	NewsPageComponent,
+	NoContentPageComponent,
+	DemoReactiveFormErrorsPageComponent
+} from "./pages";
 
 export const NEWS_STATES: Ng2StateDeclaration[] = [
 	{
@@ -27,6 +33,15 @@ export const NEWS_STATES: Ng2StateDeclaration[] = [
 			translationKey: "SHOWCASE.NEWS.TITLE"
 		},
 		views: { "@": { component: NewsPageComponent } },
+		parent: "app"
+	},
+	{
+		name: "reactive-form-errors",
+		url: "^/form", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
+		data: {
+			translationKey: "SHOWCASE.FORM.TITLE"
+		},
+		views: { "@": { component: DemoReactiveFormErrorsPageComponent } },
 		parent: "app"
 	},
 	{

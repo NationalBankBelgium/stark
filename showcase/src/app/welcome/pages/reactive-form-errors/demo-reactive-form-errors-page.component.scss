@@ -1,0 +1,80 @@
+@import "~@nationalbankbelgium/stark-ui/assets/styles/media-queries";
+button {
+  margin: 8px;
+}
+.grid {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.form-card {
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+  mat-form-field {
+    box-sizing: border-box;
+    width: 100%;
+    @media #{$desktop-screen-query} {
+      width: 45%;
+      &:last-child {
+        margin-left: 10%;
+      }
+    }
+  }
+
+  mat-card-actions {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: -10px;
+
+    button {
+      margin: 10px;
+      @media #{$mobile-only-query} {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.form-field-info {
+  @media #{$tablet-only-query} {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+
+  mat-card-content {
+    margin: 0;
+    padding: 5px 0;
+
+    pre {
+      overflow: auto;
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      max-height: 200px;
+
+      margin: inherit;
+      padding: 15px 5px;
+      border-radius: 4px;
+
+      background-color: rgba(0, 0, 0, 0.2);
+
+      word-break: break-all;
+
+      /* Non standard for webkit */
+
+      hyphens: auto;
+      &:empty {
+        display: none;
+      }
+    }
+  }
+}
+
+.form-validation-messages {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
