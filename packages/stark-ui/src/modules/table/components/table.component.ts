@@ -484,6 +484,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.data = this.data || [];
 
 			if (!changes["data"].isFirstChange()) {
+				this._resetSelection();
+
 				if (this.resetFilterValueOnDataChange()) {
 					this.filterChanged.emit(this.filter);
 					this.applyFilter();

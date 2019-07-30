@@ -209,6 +209,16 @@ describe("TableComponent", () => {
 			expect(component.dataSource.data).toEqual([{ name: "test-data-2" }]);
 		});
 
+		it("should reset 'selection' when 'data' changes", () => {
+			component.selection.toggle({ name: "selected-data-1" });
+			expect(component.selection.selected).toEqual([{ name: "selected-data-1" }]);
+
+			hostComponent.dummyData = [{ name: "data-1" }];
+			hostFixture.detectChanges();
+
+			expect(component.selection.selected).toEqual([]);
+		});
+
 		it("should assign right value to isFixedHeaderEnabled when fixedHeader changes", () => {
 			hostComponent.fixedHeader = "true";
 			hostFixture.detectChanges();
