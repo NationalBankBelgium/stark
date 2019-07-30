@@ -7,17 +7,15 @@
   .mat-sidenav-container {
     height: 100vh;
     width: 100vw;
-    
+
     display: flex;
     flex-direction: column;
   }
 
   .mat-sidenav-content {
-    margin-top: $stark-header-size;
-
     flex: 1 1 0;
     align-self: stretch;
-    
+
     display: flex;
     flex-direction: column;
   }
@@ -49,6 +47,10 @@
   .stark-app-sidenav-menu {
     width: 280px;
   }
+}
+
+.stark-app-sidebar .mat-sidenav-content {
+  margin-top: $stark-header-size;
 }
 
 @media #{$tablet-screen-query} {

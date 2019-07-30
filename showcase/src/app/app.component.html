@@ -1,137 +1,164 @@
 <stark-app-container>
+	<header class="stark-app-header">
+		<div class="stark-header-container">
+			<div class="stark-app-bar">
+				<div class="stark-app-bar-content-left">
+					<div class="stark-actions">
+						<button class="stark-home-button" (click)="goHome()" color="white" mat-icon-button>
+							<mat-icon svgIcon="home"></mat-icon>
+						</button>
+
+						<button color="white" mat-icon-button (click)="toggleMenu()">
+							<mat-icon svgIcon="menu"></mat-icon>
+						</button>
+					</div>
+				</div>
+
+				<div class="stark-app-bar-content-center">
+					<div class="app-logo">
+						<stark-app-logo></stark-app-logo>
+					</div>
+				</div>
+
+				<div class="stark-app-bar-content-right">
+					<div>
+						<div *ngIf="!isMenuModeActive">
+							<stark-app-data mode="dropdown">
+								<div class="summary-slot">
+									<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}:&nbsp;</span>
+									<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span>
+									<br />
+									<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}
+										:&nbsp;</span>
+									<span class="value">{{ time }}</span>
+								</div>
+
+								<div class="detail-slot">
+									<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}:&nbsp;</span>
+									<span class="value">{{ appMetadata.version }}</span>
+									<br />
+									<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}
+										:&nbsp;</span>
+									<span class="value">{{ appMetadata.environment }}</span>
+								</div>
+							</stark-app-data>
+						</div>
+
+						<stark-app-logout></stark-app-logout>
+					</div>
+
+					<div class="stark-app-bar-content-right-center">
+						<div *ngIf="isMenuModeActive">
+							<stark-app-data mode="menu">
+								<div class="detail-slot">
+									<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}:&nbsp;</span>
+									<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span>
+									<br />
+									<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}
+										:&nbsp;</span>
+									<span class="value">{{ time }}</span>
+									<br />
+									<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}:&nbsp;</span>
+									<span class="value">{{ appMetadata.version }}</span>
+									<br />
+									<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}
+										:&nbsp;</span>
+									<span class="value">{{ appMetadata.environment }}</span>
+								</div>
+							</stark-app-data>
+						</div>
+
+						<stark-language-selector color="white"
+												 class="stark-full-width"
+												 mode="dropdown"></stark-language-selector>
+
+						<button color="white" (click)="openLeftSidebar()" mat-icon-button>
+							<mat-icon svgIcon="skip-next"></mat-icon>
+						</button>
+
+						<button color="white" (click)="openRightSidebar()" mat-icon-button>
+							<mat-icon svgIcon="skip-previous"></mat-icon>
+						</button>
+					</div>
+
+					<div class="stark-app-bar-content-right-actions-alt">
+						<stark-route-search direction="left" [menuConfig]="mainMenu"></stark-route-search>
+
+						<a href="https://stark.nbb.be/api-docs/stark-ui/latest/"
+						   target="_blank"
+						   rel="noopener noreferrer">
+							<button mat-mini-fab
+									mat-icon-button
+									color="success"
+									[matTooltip]="'SHOWCASE.ICONS.STARK_UI' | translate">
+								<mat-icon class="header-icon" svgIcon="television-guide"></mat-icon>
+							</button>
+						</a>
+
+						<a href="https://stark.nbb.be/api-docs/stark-core/latest/"
+						   target="_blank"
+						   rel="noopener noreferrer">
+							<button mat-mini-fab
+									mat-icon-button
+									color="primary"
+									[matTooltip]="'SHOWCASE.ICONS.STARK_CORE' | translate">
+								<mat-icon class="header-icon" svgIcon="atom"></mat-icon>
+							</button>
+						</a>
+
+						<a href="https://stark.nbb.be/api-docs/stark-rbac/latest/"
+						   target="_blank"
+						   rel="noopener noreferrer">
+							<button mat-mini-fab
+									mat-icon-button
+									color="alert"
+									[matTooltip]="'SHOWCASE.ICONS.STARK_RBAC' | translate">
+								<mat-icon class="header-icon" svgIcon="shield-lock-outline"></mat-icon>
+							</button>
+						</a>
+
+						<a href="https://github.com/NationalBankBelgium" target="_blank" rel="noopener noreferrer">
+							<button mat-mini-fab
+									mat-icon-button
+									class="github-icon"
+									[matTooltip]="'SHOWCASE.ICONS.GITHUB' | translate">
+								<mat-icon class="custom-icon" svgIcon="github-circle"></mat-icon>
+							</button>
+						</a>
+					</div>
+				</div>
+
+				<div class="stark-app-bar-page-title"></div>
+
+				<stark-message-pane [clearOnNavigation]="true"></stark-message-pane>
+			</div>
+		</div>
+	</header>
+
 	<stark-app-sidebar>
 		<ng-container stark-app-sidenav-menu>
 			<stark-app-logo></stark-app-logo>
+
 			<stark-app-menu [menuConfig]="mainMenu"></stark-app-menu>
 		</ng-container>
 
 		<ng-container stark-app-sidenav-left>
 			<div class="stark-app-sidenav-top m1 center">Top content</div>
+
 			<div class="stark-app-sidenav-middle m1 center">Middle content</div>
+
 			<div class="stark-app-sidenav-bottom m1 center">Bottom content</div>
 		</ng-container>
 
 		<ng-container stark-app-sidenav-right>
 			<div class="stark-app-sidenav-top m1 center">Top content</div>
+
 			<div class="stark-app-sidenav-middle m1 center">Middle content</div>
+
 			<div class="stark-app-sidenav-bottom m1 center">Bottom content</div>
 		</ng-container>
+
 		<ng-container stark-app-sidenav-content>
-			<header class="stark-app-header">
-				<div class="stark-header-container">
-					<div class="stark-app-bar">
-						<div class="stark-app-bar-content-left">
-							<div class="stark-actions">
-								<button class="stark-home-button" (click)="goHome()" color="white" mat-icon-button>
-									<mat-icon svgIcon="home"></mat-icon>
-								</button>
-								<button color="white" mat-icon-button (click)="toggleMenu()">
-									<mat-icon svgIcon="menu"></mat-icon>
-								</button>
-							</div>
-						</div>
-						<div class="stark-app-bar-content-center">
-							<div class="app-logo">
-								<stark-app-logo></stark-app-logo>
-							</div>
-						</div>
-						<div class="stark-app-bar-content-right">
-							<div>
-								<div *ngIf="!isMenuModeActive">
-									<stark-app-data mode="dropdown">
-										<div class="summary-slot">
-											<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span
-											>: <span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span><br />
-											<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}</span
-											>: <span class="value">{{ time }}</span>
-										</div>
-										<div class="detail-slot">
-											<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}</span
-											>: <span class="value">{{ appMetadata.version }}</span
-											><br />
-											<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}</span
-											>: <span class="value">{{ appMetadata.environment }}</span>
-										</div>
-									</stark-app-data>
-								</div>
-								<stark-app-logout></stark-app-logout>
-							</div>
-							<div class="stark-app-bar-content-right-center">
-								<div *ngIf="isMenuModeActive">
-									<stark-app-data mode="menu">
-										<div class="detail-slot">
-											<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span
-											>: <span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span><br />
-											<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }}</span
-											>: <span class="value">{{ time }}</span
-											><br />
-											<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.VERSION" | translate }}</span
-											>: <span class="value">{{ appMetadata.version }}</span
-											><br />
-											<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.ENVIRONMENT" | translate }}</span
-											>: <span class="value">{{ appMetadata.environment }}</span>
-										</div>
-									</stark-app-data>
-								</div>
-								<stark-language-selector color="white" class="stark-full-width" mode="dropdown"></stark-language-selector>
-								<button color="white" (click)="openLeftSidebar()" mat-icon-button>
-									<mat-icon svgIcon="skip-next"></mat-icon>
-								</button>
-								<button color="white" (click)="openRightSidebar()" mat-icon-button>
-									<mat-icon svgIcon="skip-previous"></mat-icon>
-								</button>
-							</div>
-							<div class="stark-app-bar-content-right-actions-alt">
-								<stark-route-search direction="left" [menuConfig]="mainMenu"></stark-route-search>
-								<a href="https://stark.nbb.be/api-docs/stark-ui/latest/" target="_blank" rel="noopener noreferrer">
-									<button
-										mat-mini-fab
-										mat-icon-button
-										color="success"
-										[matTooltip]="'SHOWCASE.ICONS.STARK_UI' | translate"
-									>
-										<mat-icon class="header-icon" svgIcon="television-guide"></mat-icon>
-									</button>
-								</a>
-								<a href="https://stark.nbb.be/api-docs/stark-core/latest/" target="_blank" rel="noopener noreferrer">
-									<button
-										mat-mini-fab
-										mat-icon-button
-										color="primary"
-										[matTooltip]="'SHOWCASE.ICONS.STARK_CORE' | translate"
-									>
-										<mat-icon class="header-icon" svgIcon="atom"></mat-icon>
-									</button>
-								</a>
-								<a href="https://stark.nbb.be/api-docs/stark-rbac/latest/" target="_blank" rel="noopener noreferrer">
-									<button
-										mat-mini-fab
-										mat-icon-button
-										color="alert"
-										[matTooltip]="'SHOWCASE.ICONS.STARK_RBAC' | translate"
-									>
-										<mat-icon class="header-icon" svgIcon="shield-lock-outline"></mat-icon>
-									</button>
-								</a>
-								<a href="https://github.com/NationalBankBelgium" target="_blank" rel="noopener noreferrer">
-									<button
-										mat-mini-fab
-										mat-icon-button
-										class="github-icon"
-										[matTooltip]="'SHOWCASE.ICONS.GITHUB' | translate"
-									>
-										<mat-icon class="custom-icon" svgIcon="github-circle"></mat-icon>
-									</button>
-								</a>
-							</div>
-						</div>
-						<div class="stark-app-bar-page-title"></div>
-
-						<stark-message-pane [clearOnNavigation]="true"></stark-message-pane>
-					</div>
-				</div>
-			</header>
-
 			<main class="stark-main-container">
 				<ui-view></ui-view>
 			</main>
