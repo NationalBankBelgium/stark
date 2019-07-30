@@ -1,6 +1,7 @@
 <!-- Support for changing multiSelect after init. https://material.angular.io/components/select/overview#error-cannot-change-code-multiple-code-mode-of-select-after-initialization -->
 <!-- single-selection view -->
 <mat-select
+	#singleSelect
 	*ngIf="!multiSelect"
 	[value]="value"
 	[id]="dropdownId"
@@ -28,6 +29,7 @@
 
 <!-- multiple-selection view -->
 <mat-select
+	#multiSelect
 	*ngIf="multiSelect"
 	[value]="value"
 	[id]="dropdownId"

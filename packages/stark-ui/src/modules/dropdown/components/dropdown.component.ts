@@ -14,6 +14,7 @@ import {
 	Renderer2,
 	SimpleChanges,
 	Type,
+	ViewChild,
 	ViewEncapsulation
 } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
@@ -22,7 +23,7 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NgControl, Valida
 import { Subject, Subscription } from "rxjs";
 import { MatFormField, MatFormFieldControl } from "@angular/material/form-field";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
-import { MatSelectChange } from "@angular/material/select";
+import { MatSelect, MatSelectChange } from "@angular/material/select";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
 import isEqual from "lodash-es/isEqual";
@@ -175,6 +176,18 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	public readonly selectionChanged = new EventEmitter<any>();
 
 	/**
+	 * Reference to the single MatSelect element embedded in this component
+	 */
+	@ViewChild("singleSelect")
+	private singleSelectElement?: MatSelect;
+
+	/**
+	 * Reference to the multi MatSelect element embedded in this component
+	 */
+	@ViewChild("multiSelect")
+	private multiSelectElement?: MatSelect;
+
+	/**
 	 * @ignore
 	 * @internal
 	 */
@@ -222,7 +235,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * Whether the control is empty.
 	 */
 	public get empty(): boolean {
-		return !this.value;
+		return !this.value || (this.multiSelect && !this.value.length);
 	}
 
 	/**
@@ -497,14 +510,15 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	/**
 	 * Method implemented to use MatFormFieldControl
 	 * It handles a click on the control's container.
-	 * @param event - Click Event
 	 */
-	public onContainerClick(event: MouseEvent): void {
-		if ((<Element>event.target).tagName.toLowerCase() !== "input") {
-			const inputElement: HTMLElement = this.elementRef.nativeElement.querySelector("input");
-			if (inputElement) {
-				inputElement.focus();
-			}
+	public onContainerClick(): void {
+		// Mimic implementation of MatSelect: https://github.com/angular/components/blob/master/src/material/select/select.ts
+		if (!!this.singleSelectElement) {
+			this.singleSelectElement.focus();
+			this.singleSelectElement.open();
+		} else if (!!this.multiSelectElement) {
+			this.multiSelectElement.focus();
+			this.multiSelectElement.open();
 		}
 	}
 
