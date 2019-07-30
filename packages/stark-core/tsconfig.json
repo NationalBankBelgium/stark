@@ -9,31 +9,21 @@
       "@angular/common": ["../../node_modules/@angular/common"],
       "@angular/core": ["../../node_modules/@angular/core"],
       "@angular/router": ["../../node_modules/@angular/router"],
-      "@nationalbankbelgium/stark-core": ["."],
+      "@nationalbankbelgium/stark-core": ["./public_api.ts"],
+      "@nationalbankbelgium/stark-core/testing": ["./testing/public_api.ts"],
+      "@ng-idle/core": ["./node_modules/@ng-idle/core"],
+      "@ng-idle/keepalive": ["./node_modules/@ng-idle/keepalive"],
+      "@ngrx/effects": ["./node_modules/@ngrx/effects"],
+      "@ngrx/store": ["./node_modules/@ngrx/store"],
+      "@ngx-translate/core": ["./node_modules/@ngx-translate/core"],
+      "@uirouter/angular": ["./node_modules/@uirouter/angular"],
+      "@uirouter/core": ["./node_modules/@uirouter/core"],
+      "cerialize": ["./node_modules/cerialize"],
       "core-js/*": ["../../node_modules/core-js/*"],
       "environments/environment": ["./src/common/environment"],
       "rxjs/*": ["../../node_modules/rxjs/*"],
       "zone.js/*": ["../../node_modules/zone.js/*"]
     },
     "outDir": "../../dist/packages/stark-core"
-  },
-
-  "files": ["public_api.ts"],
-
-  "angularCompilerOptions": {
-    "generateCodeForLibraries": true,
-    "skipMetadataEmit": false,
-    "strictMetadataEmit": false,
-    "strictInjectionParameters": true,
-    "fullTemplateTypeCheck": true,
-    "annotationsAs": "static fields",
-    "enableLegacyTemplate": false,
-    "preserveWhitespaces": false,
-    "allowEmptyCodegenFiles": false,
-    "annotateForClosureCompiler": true,
-    "skipTemplateCodegen": true,
-    "enableResourceInlining": true,
-    "flatModuleOutFile": "stark-core.js",
-    "flatModuleId": "@nationalbankbelgium/stark-core"
   }
 }

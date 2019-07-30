@@ -20,59 +20,18 @@ isIgnoredDirectory() {
 }
 
 #######################################
-# Recursively runs rollup on any entry point that has a "rollup.config.js" file
+# Run "ng build <library_name>"
 # Arguments:
-#   param1 - Base source folder containing rollup.config.js
+#   param1 - Library name
+
 # Returns:
 #   None
 #######################################
-runRollup() {
-  logTrace "${FUNCNAME[0]}" 1
-  logDebug "Preparing to execute rollup" 1
-  local ROLLUP_CONFIG_PATH=${1}/rollup.config.js
-  
-  if [[ -f $ROLLUP_CONFIG_PATH ]]; then
-  	logTrace "${FUNCNAME[0]}: Rollup configuration file found at $ROLLUP_CONFIG_PATH" 2
-    cd ${1}
-    logTrace "${FUNCNAME[0]}: Rollup command: $ROLLUP -c $ROLLUP_CONFIG_PATH" 2
-    local ROLLUP_RESULTS=`$ROLLUP -c $ROLLUP_CONFIG_PATH 2>&1`
-    
-    if [[ $ROLLUP_RESULTS =~ ^.*\[\!\].* ]]; then
-      logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
-      exit 1
-    elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
-      local DISPLAYED_TRACE=false
-      if [[ $ROLLUP_RESULTS =~ .*Unresolved\ dependencies.* ]]; then
-        DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected. Please adapt rollup.config.common-data.js to solve this $ROLLUP_RESULTS"
-        exit 1
-      fi
-      if [[ $ROLLUP_RESULTS =~ .*Missing\ global\ variable\ name.* ]]; then
-        DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name detected. Please adapt rollup.config.common-data.js to solve this $ROLLUP_RESULTS"
-        exit 1
-      fi
-      if [[ $ROLLUP_RESULTS =~ .*Circular\ dependency.* ]]; then
-        DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Circular dependency detected." 2
-      fi
-      if ! $DISPLAYED_TRACE ; then
-        logInfo "${FUNCNAME[0]}: Warning appeared during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
-      fi
-    fi
-    cd - > /dev/null
-
-	logTrace "${FUNCNAME[0]}: Rollup execution output: $ROLLUP_RESULTS" 2
-	logTrace "${FUNCNAME[0]}: Rollup completed" 2
-	
-    # Recurse for sub directories
-    for DIR in ${1}/* ; do
-      isIgnoredDirectory ${DIR} && continue
-      logTrace "${FUNCNAME[0]}: Running rollup recursively" 2
-      runRollup ${DIR}
-      logTrace "${FUNCNAME[0]}: Recursive rollup completed" 2
-    done
-  fi
+ngBuild() {
+  logTrace "Executing function: ${FUNCNAME[0]}: 'ng build ${1}'" 1
+  logTrace "${FUNCNAME[0]}: command: '${NG} build ${1}'" 2
+  ${NG} build $1
+  logTrace "${FUNCNAME[0]}: 'ng build ${1}' completed" 1
 }
 
 #######################################
@@ -87,80 +46,6 @@ containsElement () {
   local e
   for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
   return 1
-}
-
-#######################################
-# Rollup index files recursively, ignoring blacklisted directories
-# Arguments:
-#   param1 - Base source folder
-#   param2 - Destination directory
-#   param3 - Package name
-#   param4 - Rollup default config location
-#   param5 - Is sub directory (optional)
-
-# Returns:
-#   None
-#######################################
-rollupIndex() {
-  logTrace "${FUNCNAME[0]}" 1
-  logDebug "Rolling up index files recursively" 1
-  logTrace "Base source folder: $1. Destination directory: $2. Package name: $3. Is sub dir? ${5:-NO}" 1
-  # Iterate over the files in this directory, rolling up each into ${2} directory
-  in_file="${1}/${3}.js"
-  if [ ${5:-} ]; then
-    out_file="$(dropLast ${2})/${3}.js"
-  else
-    out_file="${2}/${3}.js"
-  fi
-  local ROLLUP_CONFIG_PATH=$4
-  
-  # TODO pass LICENSE_BANNER as a param to the function
-  BANNER_TEXT=`cat ${LICENSE_BANNER}`
-  if [[ -f ${in_file} ]]; then
-    logTrace "Executing rollup with $ROLLUP -c ${ROLLUP_CONFIG_PATH} -i ${in_file} -o ${out_file} --banner \"$BANNER_TEXT\" 2>&1" 2
-    
-    local ROLLUP_RESULTS=`$ROLLUP -c ${ROLLUP_CONFIG_PATH} -i ${in_file} -o ${out_file} --banner "$BANNER_TEXT" 2>&1`
-    
-    if [[ $ROLLUP_RESULTS =~ ^.*\[\!\].* ]]; then
-      logInfo "${FUNCNAME[0]}: Error happened during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
-      exit 1
-    elif [[ $ROLLUP_RESULTS =~ ^.*\(\!\).* ]]; then
-      # If this execution of rollup ends up with warnings like "(!) Unresolved dependencies..." or "(!) Missing global variable name..."
-      # Then adapt rollup.config.common-data.js in order to include the missing globals and/or externals!
-      # Note that this execution of rollup MUST NOT include globals/external libs like rxjs, angular, ...
-      # For this usage scenario, the client app is supposed to import those dependencies on their own (e.g., script tag above on the page)
-      local DISPLAYED_TRACE=false
-      if [[ $ROLLUP_RESULTS =~ .*Unresolved\ dependencies.* ]]; then
-        DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Unresolved dependencies detected. Please adapt rollup.config.common-data.js to solve this. $ROLLUP_RESULTS"
-        exit 1
-      fi
-      if [[ $ROLLUP_RESULTS =~ .*Missing\ global\ variable\ name.* ]]; then
-        DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Missing global variable name detected. Please adapt rollup.config.common-data.js to solve this. $ROLLUP_RESULTS"
-        exit 1
-      fi
-      if [[ $ROLLUP_RESULTS =~ .*Circular\ dependency.* ]]; then
-        DISPLAYED_TRACE=true
-        logInfo "${FUNCNAME[0]}: Rollup - (!) Circular dependency detected." 2
-      fi
-      if ! $DISPLAYED_TRACE ; then
-        logInfo "${FUNCNAME[0]}: Warning appeared during rollup execution. Rollup execution output: $ROLLUP_RESULTS"
-      fi
-    fi
-
-    logTrace "${FUNCNAME[0]}: Rollup execution output: $ROLLUP_RESULTS" 2
-  fi
-
-  # Recurse for sub directories
-  for DIR in ${1}/*; do
-    local sub_package=$(basename "${DIR}")
-    isIgnoredDirectory ${DIR} && continue
-    local regex=".+/(.+)/${sub_package}.js"
-    if [[ "${DIR}/${sub_package}.js" =~ $regex ]]; then
-      rollupIndex ${DIR} ${2}/${BASH_REMATCH[1]} ${sub_package} ${ROLLUP_CONFIG_PATH} true
-    fi
-  done
 }
 
 #######################################
@@ -180,134 +65,6 @@ addBanners() {
       cat ${LICENSE_BANNER} > ${file}.tmp
       cat ${file} >> ${file}.tmp
       mv ${file}.tmp ${file}
-    fi
-  done
-}
-
-#######################################
-# Minifies files in a directory
-# Arguments:
-#   param1 - Path to uglify
-#   param2 - Directory to minify
-# Returns:
-#   None
-#######################################
-minify() {
-  logTrace "Executing function: ${FUNCNAME[0]}" 1
-  logDebug "Minifying JS files in: $2" 1
-  
-  local UGLIFY_PATH="$1"
-  
-  # Iterate over the files in this directory, rolling up each into ${2} directory
-  regex="(.+).js"
-  files=(${2}/*)
-  logTrace "Identified files to minify: [$files]" 2
-  for file in "${files[@]}"; do
-    logTrace "Minifying $file" 2
-    base_file=$( basename "${file}" )
-    if [[ "${base_file}" =~ $regex && "${base_file##*.}" != "map" ]]; then
-      local out_file=$(dirname "${file}")/${BASH_REMATCH[1]}.min.js
-      logTrace "Running Uglify"
-      local UGLIFY_RESULTS=$(${UGLIFY_PATH} ${file} -c --comments --output ${out_file} --source-map "includeSources=true content=\"${file}.map\" filename=\"${out_file}.map\"" ${file} 2>&1)
-      logTrace "Uglify completed. Execution output: $UGLIFY_RESULTS" 2
-    fi
-  done
-}
-
-#######################################
-# Recursively compile package
-# Arguments:
-#   param1 - Source directory
-#   param2 - Out dir
-#   param3 - Package Name
-#   param4 - Tsc Packages
-# Returns:
-#   None
-#######################################
-compilePackage() {
-  logTrace "Executing function: ${FUNCNAME[0]}" 1
-  logDebug "Compiling package [$3] located in: $1" 1
-
-  if containsElement "${3}" "${4:-}"; then
-    logTrace "[$3]: Compiling: $TSC -p $1/tsconfig-build.json" 2
-    $TSC -p ${1}/tsconfig-build.json
-  else
-    logTrace "[$3]: Compiling: $NGC -p $1/tsconfig-build.json" 2
-    local package_name=$(basename "${2}")
-    $NGC -p ${1}/tsconfig-build.json
-    logTrace "[$3]: Create ${package_name}.d.ts re-export file for tsickle" 2
-    
-    # this is not a typo!
-N="
-"
-
-    # Generate the package's d.ts file at the root of dist/packages (e.g., dist/packages/stark-core.d.ts)
-    echo "$(cat ${LICENSE_BANNER}) ${N} export * from './${package_name}/${package_name}'" > ${2}/../${package_name}.d.ts
-    echo "{\"__symbolic\":\"module\",\"version\":3,\"metadata\":{},\"exports\":[{\"from\":\"./${package_name}/${package_name}\"}],\"flatModuleIndexRedirect\":true}" > ${2}/../${package_name}.metadata.json
-  fi
-
-  logTrace "Building sub-packages" 2
-  for DIR in ${1}/* ; do
-    [ -d "${DIR}" ] || continue
-    BASE_DIR=$(basename "${DIR}")
-    # Skip over directories that are not nested entry points
-    [[ -e ${DIR}/tsconfig-build.json && "${BASE_DIR}" != "integrationtest" ]] || continue
-    compilePackage ${DIR} ${2}/${BASE_DIR} ${3} ${4:-}
-  done
-}
-
-#######################################
-# Recursively compile package
-# Arguments:
-#   param1 - Source directory
-#   param2 - Out dir
-#   param3 - Package Name
-#   param4 - Tsc Packages
-# Returns:
-#   None
-#######################################
-compilePackageES5() {
-  logTrace "Executing function: ${FUNCNAME[0]}" 1
-  logDebug "Compiling package located in : $1 to ES5" 1 
-
-  if containsElement "${3}" "${4:-}"; then
-    logTrace "${FUNCNAME[0]}: [${3}]: Compiling: ${TSC} -p ${1}/tsconfig-build.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap" 2
-    local package_name=$(basename "${2}")
-    $TSC -p ${1}/tsconfig-build.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap
-  else
-    logTrace "${FUNCNAME[0]}: [${3}]: Compiling: ${NGC} -p ${1}/tsconfig-build.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap" 2
-    local package_name=$(basename "${2}")
-    $NGC -p ${1}/tsconfig-build.json --target es5 -d false --outDir ${2} --importHelpers true --sourceMap
-  fi
-
-  logTrace "Building sub-packages" 2
-  for DIR in ${1}/* ; do
-    [ -d "${DIR}" ] || continue
-    BASE_DIR=$(basename "${DIR}")
-    # Skip over directories that are not nested entry points
-    [[ -e ${DIR}/tsconfig-build.json && "${BASE_DIR}" != "integrationtest" ]] || continue
-    compilePackageES5 ${DIR} ${2} ${3}
-  done
-}
-
-#######################################
-# Adds a package.json in directories where needed (secondary entry point typings).
-# This is read by NGC to be able to find the flat module index.
-# Arguments:
-#   param1 - Source directory of typings files
-# Returns:
-#   None
-#######################################
-addNgcPackageJson() {
-  logTrace "Executing function: ${FUNCNAME[0]}" 1
-  logDebug "Adding a package.json where needed for NGC" 1
-  for DIR in ${1}/* ; do
-    [ -d "${DIR}" ] || continue
-    # Confirm there is an ${PACKAGE}.d.ts and ${PACKAGE}.metadata.json file. If so, create
-    # the package.json and recurse.
-    if [[ -f ${DIR}/${PACKAGE}.d.ts && -f ${DIR}/${PACKAGE}.metadata.json ]]; then
-      echo '{"typings": "${PACKAGE}.d.ts"}' > ${DIR}/package.json
-      addNgcPackageJson ${DIR}
     fi
   done
 }
@@ -437,7 +194,7 @@ adaptNpmPackageDependencies() {
 #   None
 #######################################
 adaptNpmPackageLockDependencies() {
-logTrace "Executing function: ${FUNCNAME[0]}" 1
+  logTrace "Executing function: ${FUNCNAME[0]}" 1
   
   local PACKAGE="$1"
   local VERSION="$2"
@@ -474,22 +231,4 @@ logTrace "Executing function: ${FUNCNAME[0]}" 1
   # We should only replace the value of the devDependency for make it work.
   
   perl -p -i.bak -0 -e "s/$PATTERN/$REPLACEMENT/m" $PACKAGE_JSON_FILE
-}
-
-#######################################
-# Drops the last entry of a path. Similar to normalizing a path such as
-# /parent/child/.. to /parent.
-# Arguments:
-#   param1 - Directory on which to drop the last item
-# Returns:
-#   None
-#######################################
-dropLast() {
-  local last_item=$(basename ${1})
-  local regex=local regex="(.+)/${last_item}"
-  if [[ "${1}" =~ $regex ]]; then
-    echo "${BASH_REMATCH[1]}"
-  else
-    echo "${1}"
-  fi
 }

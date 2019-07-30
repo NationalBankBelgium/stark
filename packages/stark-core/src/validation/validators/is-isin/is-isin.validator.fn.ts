@@ -35,10 +35,10 @@ export function starkIsISIN(isin: string): boolean {
 			.join("");
 
 		let sum = 0;
-		for (let i = 0; i < digits.length; i++) {
-			let digit: number = parseInt(digits[i], base);
+		for (let j = 0; j < digits.length; j++) {
+			let digit: number = parseInt(digits[j], base);
 
-			if (i % 2 === 0) {
+			if (j % 2 === 0) {
 				digit *= 2;
 			}
 

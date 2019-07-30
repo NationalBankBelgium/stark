@@ -1,14 +1,6 @@
 {
   "name": "@nationalbankbelgium/stark-rbac",
   "version": "0.0.0-PLACEHOLDER-VERSION",
-  "module": "./fesm5/stark-rbac.js",
-  "es2015": "./fesm2015/stark-rbac.js",
-  "esm5": "./esm5/stark-rbac.js",
-  "esm2015": "./esm2015/stark-rbac.js",
-  "fesm5": "./fesm5/stark-rbac.js",
-  "fesm2015": "./fesm2015/stark-rbac.js",
-  "main": "bundles/stark-rbac.umd.js",
-  "types": "stark-rbac.d.ts",
   "description": "Stark - RBAC",
   "author": "Stark Team",
   "contributors": [
@@ -42,7 +34,7 @@
     "docs": "node ../../node_modules/@compodoc/compodoc/bin/index-cli src",
     "docs:coverage": "npm run docs -- --coverageTest 85 --coverageTestThresholdFail true",
     "docs:serve": "npm run docs -- --watch --serve --port 4321",
-    "ngc": "node ../../node_modules/@angular/compiler-cli/src/main.js -p ./tsconfig-build.json",
+    "ngc": "node ../../node_modules/@angular/compiler-cli/src/main.js -p ./tsconfig.json",
     "lint": "npm run lint-ts && npm run lint-css",
     "lint-ts": "node ../../node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.spec.json --format codeFrame",
     "lint-ts:fix": "node --max_old_space_size=4096 ../../node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.spec.json --format codeFrame --fix",
@@ -51,7 +43,7 @@
     "test:ci": "npm run lint && npm run test-fast:ci",
     "test-fast": "node ../stark-testing/node_modules/karma/bin/karma start",
     "test-fast:ci": "node ../stark-testing/node_modules/karma/bin/karma start karma.conf.ci.js",
-    "tsc": "node ../../node_modules/typescript/bin/tsc -p ./tsconfig-build.json",
+    "tsc": "node ../../node_modules/typescript/bin/tsc -p ./tsconfig.json",
     "tslint": "node ../../node_modules/tslint/bin/tslint"
   }
 }

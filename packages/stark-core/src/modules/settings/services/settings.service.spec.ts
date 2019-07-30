@@ -1,7 +1,6 @@
 /*tslint:disable:completed-docs*/
 import { Store } from "@ngrx/store";
-import { MockStarkLoggingService } from "../../logging/testing";
-import { MockStarkSessionService } from "../../session/testing";
+import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import {
 	StarkApplicationConfig,
 	StarkApplicationConfigImpl,

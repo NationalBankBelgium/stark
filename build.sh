@@ -37,7 +37,6 @@ IFS=${OLD_IFS} # restore IFS
 BUILD_ALL=true
 BUNDLE=true
 COMPILE_SOURCE=true
-TYPECHECK_ALL=true
 
 TRAVIS=${TRAVIS:-}
 
@@ -48,7 +47,6 @@ for ARG in "$@"; do
   case "$ARG" in
     --quick-bundle=*)
       COMPILE_SOURCE=false
-      TYPECHECK_ALL=false
       ;;
     --packages=*)
       # asked to build a subset of the packages
@@ -110,9 +108,6 @@ for ARG in "$@"; do
       ;;
     --compile=*)
       COMPILE_SOURCE=${ARG#--compile=}
-      ;;
-    --typecheck=*)
-      TYPECHECK_ALL=${ARG#--typecheck=}
       ;;
     --verbose)
       logInfo "============================================="
@@ -177,25 +172,12 @@ else
 fi
 logInfo "============================================="
 
-TSC=`pwd`/node_modules/.bin/tsc
-logTrace "TSC Path: $TSC"
-NGC="node --max-old-space-size=3000 `pwd`/node_modules/@angular/compiler-cli/src/main"
-UGLIFY=`pwd`/node_modules/.bin/uglifyjs
-TSCONFIG=./tools/tsconfig.json
-ROLLUP=`pwd`/node_modules/.bin/rollup
+NG=`pwd`/node_modules/.bin/ng
 
-if [[ ${BUILD_ALL} == true && ${TYPECHECK_ALL} == true ]]; then
+if [[ ${BUILD_ALL} == true ]]; then
   travisFoldStart "clean dist" "no-xtrace"
-    rm -rf ./dist/all/
     rm -rf ./dist/packages
   travisFoldEnd "clean dist"
-
-  mkdir -p ./dist/all/
-
-  TSCONFIG="packages/tsconfig.json"
-  travisFoldStart "tsc -p ${TSCONFIG}" "no-xtrace"
-    ${TSC} -p ${TSCONFIG}
-  travisFoldEnd "tsc -p ${TSCONFIG}"
 fi
 
 if [[ ${BUILD_ALL} == true ]]; then
@@ -229,9 +211,6 @@ fi
 
 mkdir -p ${ROOT_OUT_DIR}
 
-ROLLUP_DEFAULT_CONFIG_PATH=${ROOT_DIR}/rollup.config.js
-logTrace "ROLLUP_DEFAULT_CONFIG_PATH: ${ROLLUP_DEFAULT_CONFIG_PATH}" 1
-
 for PACKAGE in ${ALL_PACKAGES[@]}
 do
   travisFoldStart "global build: ${PACKAGE}" "no-xtrace"
@@ -246,6 +225,9 @@ do
   
     if [[ ${#PACKAGES[@]} > 0 && $(containsElement "${PACKAGE}" "${PACKAGES[@]}"; echo $?) == 0 ]]; then
       travisFoldStart "build package: ${PACKAGE}" "no-xtrace"
+        rm -rf ${OUT_DIR}
+        rm -f ${ROOT_OUT_DIR}/${PACKAGE}.js
+        
         OUT_DIR_ESM5=${ROOT_OUT_DIR}/${PACKAGE}/esm5
         logTrace "OUT_DIR_ESM5: $OUT_DIR_ESM5" 1
         ESM2015_DIR=${NPM_DIR}/esm2015
@@ -258,67 +240,32 @@ do
         logTrace "FESM5_DIR: $FESM5_DIR" 1
         BUNDLES_DIR=${NPM_DIR}/bundles
         logTrace "BUNDLES_DIR: $BUNDLES_DIR" 1
-
-        if [[ ${COMPILE_SOURCE} == true ]]; then
-          rm -rf ${OUT_DIR}
-          rm -f ${ROOT_OUT_DIR}/${PACKAGE}.js
-    
-          logInfo "Compile package $PACKAGE"
-          compilePackage ${SRC_DIR} ${OUT_DIR} ${PACKAGE} ${TSC_PACKAGES[@]+"${TSC_PACKAGES[@]}"}
-
-          logInfo "Copy assets folders for package $PACKAGE"
-          syncOptions=(-a --include="**/assets/" --exclude="*.js" --exclude="*.js.map" --exclude="*.ts" --include="*.json" --exclude="node_modules/" --exclude="coverage/" --exclude="reports/")
-          syncFiles ${SRC_DIR} ${OUT_DIR} "${syncOptions[@]}"
-          unset syncOptions
-
-          logInfo "Copy typings folders for package $PACKAGE"
-          syncOptions=(-a --include="/typings/***" --exclude="*")
-          syncFiles ${SRC_DIR} ${OUT_DIR} "${syncOptions[@]}"
-          unset syncOptions
-        fi
   
-        if [[ ${BUNDLE} == true ]]; then
-          logInfo "Bundle $PACKAGE ($SRC_DIR)"
-    
-          logDebug "Clean up ${NPM_DIR}" 1
-          rm -rf ${NPM_DIR} && mkdir -p ${NPM_DIR}
+        logInfo "Compile package $PACKAGE"
+        ngBuild ${PACKAGE}
 
-          logInfo "Copy ${PACKAGE} typings from ${OUT_DIR} to ${NPM_DIR}"
-          syncOptions=(-a --exclude="*.js" --exclude="*.js.map" --exclude="**/assets/" --exclude="node_modules/")
-          syncFiles ${OUT_DIR} ${NPM_DIR} "${syncOptions[@]}"
-          unset syncOptions
-          
-          logInfo "Copy ESM2015 for ${PACKAGE}"
-          syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json" --exclude="**/assets/" --exclude="node_modules/")
-          syncFiles ${OUT_DIR} ${ESM2015_DIR} "${syncOptions[@]}"
-          unset syncOptions
-       
-          logDebug "Rollup $PACKAGE to ESM2015 folder" 1
-          rollupIndex ${OUT_DIR} ${ESM2015_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
-          logDebug "Rollup $PACKAGE to FESM2015 folder" 1
-          rollupIndex ${OUT_DIR} ${FESM2015_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
-
-          logDebug "Produce ESM5 version" 1
-          compilePackageES5 ${SRC_DIR} ${OUT_DIR_ESM5} ${PACKAGE}
-          syncOptions=(-a --exclude="**/*.d.ts" --exclude="**/*.metadata.json" --exclude="node_modules/")
-          syncFiles ${OUT_DIR_ESM5} ${ESM5_DIR} "${syncOptions[@]}"
-          unset syncOptions
-          rollupIndex ${OUT_DIR_ESM5} ${FESM5_DIR} ${PACKAGE} ${ROLLUP_DEFAULT_CONFIG_PATH}
-
-          logDebug "Run rollup conversions on $PACKAGE" 1
-          runRollup ${SRC_DIR}
-          addBanners ${BUNDLES_DIR}
-          minify ${UGLIFY} ${BUNDLES_DIR}
-        fi
-        
-        logInfo "Copy $PACKAGE package.json to $NPM_DIR"
-        # FIXME exclude node modules!
-        travisFoldStart "copy package.json for: ${PACKAGE}" "no-xtrace"
-        # TODO check if  --exclude="package-lock.json" is correctly working
-        syncOptions=(-am --include="package.json" --exclude="package-lock.json" --exclude="coverage/" --exclude="node_modules/" --exclude="rollup.config.js" --exclude="*.ts" --exclude="*/*.ts" --include="*" --exclude="*")
-        syncFiles ${SRC_DIR} ${NPM_DIR} "${syncOptions[@]}"
+        logInfo "Copy assets folders for package $PACKAGE"
+        syncOptions=(-a --include="**/assets/" --exclude="*.js" --exclude="*.js.map" --exclude="*.ts" --exclude="/*.json" --exclude="testing/*.json" --include="*.json" --exclude="node_modules/" --exclude="coverage/" --exclude="reports/")
+        syncFiles ${SRC_DIR} ${OUT_DIR} "${syncOptions[@]}"
         unset syncOptions
-        travisFoldEnd "copy package.json for: ${PACKAGE}"
+
+        logInfo "Copy typings folders for package $PACKAGE"
+        syncOptions=(-a --include="/typings/***" --exclude="*")
+        syncFiles ${SRC_DIR} ${OUT_DIR} "${syncOptions[@]}"
+        unset syncOptions
+        
+        logDebug "Clean up ${NPM_DIR}" 1
+        rm -rf ${NPM_DIR} && mkdir -p ${NPM_DIR}
+        
+        logInfo "Copy ${PACKAGE} files from ${OUT_DIR} to ${NPM_DIR}"
+        syncOptions=(-a)
+        syncFiles ${OUT_DIR} ${NPM_DIR} "${syncOptions[@]}"
+        unset syncOptions
+        
+        addBanners ${FESM2015_DIR}
+        addBanners ${FESM5_DIR}
+        addBanners ${BUNDLES_DIR}
+        
       travisFoldEnd "build package: ${PACKAGE}"
     fi
     

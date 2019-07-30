@@ -10,7 +10,7 @@ import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkRoutingTransitionHoo
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppSidebarComponent } from "./app-sidebar.component";
 import { STARK_APP_SIDEBAR_SERVICE } from "../services";
-import { MockAppSidebarService } from "../testing/app-sidebar.mock";
+import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
 
 // Definitions
 /**

@@ -18,7 +18,7 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
 /* stark-ui imports */
 import { StarkMessagePaneComponent, StarkMessagePaneNavItem } from "./message-pane.component";
 import { STARK_MESSAGE_PANE_SERVICE } from "../services";
-import { MockStarkMessagePaneService } from "../testing/message-pane.mock";
+import { MockStarkMessagePaneService } from "@nationalbankbelgium/stark-ui/testing";
 import { StarkMessageCollection } from "../entities";
 import {
 	starkMessagePaneAlignClassPrefix,

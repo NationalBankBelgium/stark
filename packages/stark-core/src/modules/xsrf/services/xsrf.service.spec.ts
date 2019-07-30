@@ -8,7 +8,7 @@ import { StarkXSRFServiceImpl } from "./xsrf.service";
 import { StarkXSRFConfig } from "./xsrf-config.intf";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities";
 import { StarkBackend, StarkBackendAuthenticationTypes } from "../../http/entities";
-import { MockStarkLoggingService } from "../../logging/testing/logging.mock";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;

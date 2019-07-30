@@ -6,7 +6,7 @@ const helpers = require("../stark-testing/helpers");
 const defaultKarmaConfig = require("../stark-testing/karma.conf.js").rawKarmaConfig;
 
 // entry files of the "@nationalbankbelgium/stark-core" module imported in mock files
-const karmaTypescriptFiles = [{ pattern: helpers.root("index.ts") }, { pattern: helpers.root("public_api.ts") }];
+const karmaTypescriptFiles = [{ pattern: helpers.root("public_api.ts") }, { pattern: helpers.root("testing/**/*.ts") }];
 
 // start customizing the Karma configuration from stark-testing
 const starkCoreSpecificConfiguration = Object.assign({}, defaultKarmaConfig, {

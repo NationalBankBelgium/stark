@@ -12,7 +12,9 @@ fs.readFile(packageJsonPath, "utf8", function(err, packageJsonData) {
 	const validVersionPattern = new RegExp('\\"nightlyVersion\\": \\"' + latestVersion + '\\"', "gi");
 	if (packageJsonData.match(validVersionPattern)) {
 		isCorrect = false;
-		console.error("Nightly version of Stark packages is not correct. It should be higher than the latest version: '" + latestVersion + "'");
+		console.error(
+			"Nightly version of Stark packages is not correct. It should be higher than the latest version: '" + latestVersion + "'"
+		);
 	}
 
 	if (!isCorrect) {

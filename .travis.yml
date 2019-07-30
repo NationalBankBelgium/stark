@@ -1,65 +1,65 @@
 language: node_js
 node_js:
-  - "8"
-  - "10"
+    - "8"
+    - "10"
 
 dist: trusty
 sudo: false # better for performance
 
 before_install:
-  - echo $TRAVIS_COMMIT
-  - echo $TRAVIS_TAG
-  - echo $TRAVIS_BRANCH
-  - echo $TRAVIS_BUILD_NUMBER
-  - echo $TRAVIS_REPO
-  - AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
-  - echo $AUTHOR_NAME
-  - export TZ=Europe/Brussels
-  - npm i -g npm@6.4.1
-  - NODE_VERSION="$(node -v)"
-  - echo $NODE_VERSION
-  # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
-  - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
+    - echo $TRAVIS_COMMIT
+    - echo $TRAVIS_TAG
+    - echo $TRAVIS_BRANCH
+    - echo $TRAVIS_BUILD_NUMBER
+    - echo $TRAVIS_REPO
+    - AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+    - echo $AUTHOR_NAME
+    - export TZ=Europe/Brussels
+    - npm i -g npm@6.4.1
+    - NODE_VERSION="$(node -v)"
+    - echo $NODE_VERSION
+    # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
+    - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
 install:
-  # Create file & folder for Travis logs
-  # cfr scripts/_travis-fold.sh
-  - mkdir -p $LOGS_DIR
-  - touch $LOGS_DIR/build-perf.log
-  - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run clean:modules:all; fi
-  - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm i; else npm ci; fi
-  - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run install:travis:all; else npm run install:ci:all; fi
-  - npm run build:showcase:ghpages
+    # Create file & folder for Travis logs
+    # cfr scripts/_travis-fold.sh
+    - mkdir -p $LOGS_DIR
+    - touch $LOGS_DIR/build-perf.log
+    - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run clean:modules:all; fi
+    - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm i; else npm ci; fi
+    - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run install:travis:all; else npm run install:ci:all; fi
+    - npm run build:showcase:ghpages
 
 env:
-  global:
-    - LOGS_DIR=/tmp/stark/logs
-    - LOGS_FILE=/tmp/stark/logs/build-perf.log
+    global:
+        - LOGS_DIR=/tmp/stark/logs
+        - LOGS_FILE=/tmp/stark/logs/build-perf.log
 
 branches:
-  only:
-    - master
-    - /^greenkeeper/.*$/
-    - /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+|-rc\.\d+)?$/
+    only:
+        - master
+        - /^greenkeeper/.*$/
+        - /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+|-rc\.\d+)?$/
 
 cache:
-  directories:
-    - $HOME/.npm
+    directories:
+        - $HOME/.npm
 
 # Not needed since we use Puppeteer in karma.conf.ci.js
 # It downloads Chrome itself and works with or without Travis
 #  chrome: stable
 
 script:
-  - npm run lint:all
-  - npm run test:ci:all
-  # E2E tests only need to be run on 1 node version (v10)
-  # and the secure environmentals BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY should be set. (only on secure builds)
-  - if [[ ${NODE_VERSION} =~ ^v10.*$ && -n "${BROWSERSTACK_USERNAME}" && -n "${BROWSERSTACK_ACCESS_KEY}"  ]]; then npm run test:showcase:e2e:browserstack; else echo "Skipping browserstack tests."; fi
-  - npm run docs:coverage
-  - npm run docs:publish
-  - npm run release:publish
-  - bash ./scripts/ci/print-logs.sh
+    - npm run lint:all
+    - npm run test:ci:all
+    # E2E tests only need to be run on 1 node version (v10)
+    # and the secure environmentals BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY should be set. (only on secure builds)
+    - if [[ ${NODE_VERSION} =~ ^v10.*$ && -n "${BROWSERSTACK_USERNAME}" && -n "${BROWSERSTACK_ACCESS_KEY}"  ]]; then npm run test:showcase:e2e:browserstack; else echo "Skipping browserstack tests."; fi
+    - npm run docs:coverage
+    - npm run docs:publish
+    - npm run release:publish
+    - bash ./scripts/ci/print-logs.sh
 
 after_success:
-  - npm run test:ci:coveralls:combined
+    - npm run test:ci:coveralls:combined

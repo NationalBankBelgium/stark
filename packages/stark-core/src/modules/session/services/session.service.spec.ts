@@ -29,9 +29,8 @@ import { StarkSessionServiceImpl, starkUnauthenticatedUserError } from "./sessio
 import { StarkSession, StarkSessionConfig } from "../entities";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkUser } from "../../user/entities";
-import { MockStarkLoggingService } from "../../logging/testing";
+import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkRoutingTransitionHook } from "../../routing/services";
-import { MockStarkRoutingService } from "../../routing/testing";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateName } from "../constants";
 import Spy = jasmine.Spy;

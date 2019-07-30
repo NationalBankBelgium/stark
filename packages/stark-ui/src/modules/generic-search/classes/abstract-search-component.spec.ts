@@ -5,7 +5,7 @@ import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing
 import { StarkResource } from "@nationalbankbelgium/stark-core";
 import { FormGroup } from "@angular/forms";
 import { StarkSearchState } from "../entities";
-import { MockStarkProgressIndicatorService } from "../../progress-indicator/testing";
+import { MockStarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui/testing";
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;

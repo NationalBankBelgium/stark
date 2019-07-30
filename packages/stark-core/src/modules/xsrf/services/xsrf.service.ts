@@ -16,6 +16,8 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/servic
 /**
  * Service to get/store the XSRF token to be used with the different backends.
  * It also adds the XSRF configuration to XHR objects for those HTTP requests not performed using StarkHttpService or Angular's HttpClient.
+ *
+ * @dynamic See: https://angular.io/guide/aot-compiler#strictmetadataemit
  */
 @Injectable()
 export class StarkXSRFServiceImpl implements StarkXSRFService {

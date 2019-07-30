@@ -13,7 +13,7 @@ import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, S
 import { StarkBackend } from "../../http/entities/backend";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
-import { MockStarkXsrfService } from "../../xsrf/testing/xsrf.mock";
+import { MockStarkXsrfService } from "@nationalbankbelgium/stark-core/testing";
 
 // tslint:disable-next-line:no-big-function
 describe("Service: StarkLoggingService", () => {

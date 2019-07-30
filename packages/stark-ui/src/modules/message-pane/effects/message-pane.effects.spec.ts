@@ -7,7 +7,7 @@ import { provideMockActions } from "@ngrx/effects/testing";
 import { StarkMessagePaneEffects } from "./message-pane.effects";
 import { STARK_MESSAGE_PANE_SERVICE } from "../services";
 import { StarkNavigateSuccess } from "@nationalbankbelgium/stark-core";
-import { MockStarkMessagePaneService } from "../testing/message-pane.mock";
+import { MockStarkMessagePaneService } from "@nationalbankbelgium/stark-ui/testing";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
