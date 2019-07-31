@@ -44,6 +44,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 import { StarkPaginateEvent, StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
 import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../minimap/components";
 import find from "lodash-es/find";
+import isEqual from "lodash-es/isEqual";
 
 /**
  * Name of the component
@@ -257,6 +258,13 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public rowClassNameFn?: (row: object, index: number) => string;
 
 	/**
+	 * Array of the selected rows
+	 * Default: []
+	 */
+	@Input()
+	public selectedRows: object[] = [];
+
+	/**
 	 * Determine if the row index must be present or not.
 	 * Default: false
 	 */
@@ -428,7 +436,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": component initialized");
 
-		this._resetSelection();
+		this._resetSelection(this.selectedRows);
 
 		if (this.customTableActionsType === "regular") {
 			this.customTableRegularActions = { actions: this.customTableActions || [] };
@@ -484,8 +492,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.data = this.data || [];
 
 			if (!changes["data"].isFirstChange()) {
-				this._resetSelection();
-
 				if (this.resetFilterValueOnDataChange()) {
 					this.filterChanged.emit(this.filter);
 					this.applyFilter();
@@ -532,8 +538,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			}
 		}
 
-		if (changes["multiSelect"]) {
-			this._resetSelection();
+		if (changes["selectedRows"] && !isEqual(changes["selectedRows"].currentValue, this.selection.selected)) {
+			this._resetSelection(this.selectedRows);
+		}
+
+		if (changes["multiSelect"] && !changes["multiSelect"].isFirstChange()) {
+			this._resetSelection(this.selection.selected, true);
 		}
 	}
 
@@ -829,8 +839,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * @ignore
 	 */
-	private _resetSelection(): void {
-		this.selection = new SelectionModel<object>(this.isMultiSelectEnabled, []);
+	private _resetSelection(selectedRows: object[], shouldEmitDirectly: boolean = false): void {
+		this.selection = new SelectionModel<object>(this.isMultiSelectEnabled, selectedRows);
+
+		if (shouldEmitDirectly) {
+			this.selectChanged.emit(this.selection.selected);
+		}
 
 		// Emit event when selection changes
 		if (this._selectionSub) {

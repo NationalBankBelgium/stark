@@ -40,6 +40,7 @@ import createSpy = jasmine.createSpy;
 			[showRowsCounter]="showRowsCounter"
 			[showRowIndex]="showRowIndex"
 			[orderProperties]="orderProperties"
+			[selectedRows]="selectedRows"
 			[tableRowActions]="tableRowActions"
 			[rowClassNameFn]="rowClassNameFn"
 			(rowClicked)="rowClickHandler($event)"
@@ -62,6 +63,7 @@ class TestHostComponent {
 	public tableRowActions?: StarkTableRowActions;
 	public tableFilter?: StarkTableFilter;
 	public orderProperties?: string[];
+	public selectedRows?: object[];
 	public rowClassNameFn?: (row: object, index: number) => string;
 	public rowClickHandler?: (row: object) => void;
 }
@@ -209,14 +211,30 @@ describe("TableComponent", () => {
 			expect(component.dataSource.data).toEqual([{ name: "test-data-2" }]);
 		});
 
-		it("should reset 'selection' when 'data' changes", () => {
-			component.selection.toggle({ name: "selected-data-1" });
-			expect(component.selection.selected).toEqual([{ name: "selected-data-1" }]);
+		it("should change internal selection when 'selectedRows' changes and is different of selection.selected", () => {
+			// tslint:disable-next-line:no-duplicate-string
+			const dummySelectedRow = [{ name: "selected-data-1" }];
+			const dummySelectedRows = [{ name: "selected-data-1" }, { name: "selected-data-2" }, { name: "selected-data-3" }];
+			spyOn(component.selectChanged, "emit");
 
-			hostComponent.dummyData = [{ name: "data-1" }];
+			hostComponent.multiSelect = "true";
 			hostFixture.detectChanges();
-
+			(<Spy>component.selectChanged.emit).calls.reset();
+			
 			expect(component.selection.selected).toEqual([]);
+			hostComponent.selectedRows = dummySelectedRow;
+			hostFixture.detectChanges();
+			expect(component.selectChanged.emit).not.toHaveBeenCalled();
+			expect(component.selection.selected).toEqual(dummySelectedRow);
+
+			hostFixture.detectChanges();
+			expect(component.selection.selected).toEqual(dummySelectedRow);
+			expect(component.selectChanged.emit).not.toHaveBeenCalled();
+			
+			hostComponent.selectedRows = dummySelectedRows;
+			hostFixture.detectChanges();
+			expect(component.selectChanged.emit).not.toHaveBeenCalled();
+			expect(component.selection.selected).toEqual(dummySelectedRows);
 		});
 
 		it("should assign right value to isFixedHeaderEnabled when fixedHeader changes", () => {
@@ -248,6 +266,32 @@ describe("TableComponent", () => {
 			hostComponent.multiSelect = "false";
 			hostFixture.detectChanges();
 			expect(component.isMultiSelectEnabled).toBe(false);
+		});
+
+		it("should assign right value when 'multiSelect' changes and emit new value on 'selectChanged'", () => {
+			const dummySelectedRows = [{ name: "selected-data-1" }, { name: "selected-data-2" }, { name: "selected-data-3" }];
+			spyOn(component.selectChanged, "emit");
+
+			hostComponent.selectedRows = dummySelectedRows;
+			hostComponent.multiSelect = "true";
+			hostFixture.detectChanges();
+			expect(component.selection.selected).toEqual(dummySelectedRows);
+			expect(component.selectChanged.emit).toHaveBeenCalledTimes(1);
+			expect(component.selectChanged.emit).toHaveBeenCalledWith(dummySelectedRows);
+
+			(<Spy>component.selectChanged.emit).calls.reset();
+			hostComponent.multiSelect = "false";
+			hostFixture.detectChanges();
+			expect(component.selection.selected).toEqual([dummySelectedRows[0]]);
+			expect(component.selectChanged.emit).toHaveBeenCalledTimes(1);
+			expect(component.selectChanged.emit).toHaveBeenCalledWith([dummySelectedRows[0]]);
+
+			(<Spy>component.selectChanged.emit).calls.reset();
+			hostComponent.multiSelect = "true";
+			hostFixture.detectChanges();
+			expect(component.selection.selected).toEqual([dummySelectedRows[0]]);
+			expect(component.selectChanged.emit).toHaveBeenCalledTimes(1);
+			expect(component.selectChanged.emit).toHaveBeenCalledWith([dummySelectedRows[0]]);
 		});
 
 		it("should assign right value to display/hide 'select' column when rowsSelectable changes", () => {
