@@ -559,6 +559,48 @@ describe("DropdownComponent", () => {
 					hostFixture.detectChanges();
 					expect(selectElement.outerHTML).toMatch(/ng-reflect-disabled="false"/);
 				});
+
+				it("shouldn't trigger a 'valueChange' event when the formControl is disabled or enabled with emitEvent set to false", () => {
+					const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+
+					hostComponent.formControl.valueChanges.subscribe(mockObserver);
+
+					hostComponent.formControl.disable({ emitEvent: false });
+					hostFixture.detectChanges();
+
+					expect(component.disabled).toBe(true);
+
+					hostComponent.formControl.enable({ emitEvent: false });
+					hostFixture.detectChanges();
+
+					expect(component.disabled).toBe(false);
+					expect(mockObserver.next).not.toHaveBeenCalled(); // because the 'emitEvent' is false
+					expect(mockObserver.error).not.toHaveBeenCalled();
+					expect(mockObserver.complete).not.toHaveBeenCalled();
+				});
+
+				it("should trigger a 'valueChange' event when the formControl is disabled or enabled with emitEvent set to true", () => {
+					const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
+
+					hostComponent.formControl.valueChanges.subscribe(mockObserver);
+
+					hostComponent.formControl.disable(); // 'emitEvent' true by default
+					hostFixture.detectChanges();
+
+					expect(component.disabled).toBe(true);
+					expect(mockObserver.next).toHaveBeenCalledTimes(1);
+					expect(mockObserver.error).not.toHaveBeenCalled();
+					expect(mockObserver.complete).not.toHaveBeenCalled();
+					mockObserver.next.calls.reset();
+
+					hostComponent.formControl.enable(); // 'emitEvent' true by default
+					hostFixture.detectChanges();
+
+					expect(component.disabled).toBe(false);
+					expect(mockObserver.next).toHaveBeenCalledTimes(1);
+					expect(mockObserver.error).not.toHaveBeenCalled();
+					expect(mockObserver.complete).not.toHaveBeenCalled();
+				});
 			});
 
 			describe("formControl.value", () => {
@@ -628,7 +670,6 @@ describe("DropdownComponent", () => {
 			}));
 		});
 	});
-
 	// FIXME re-enable those tests as soon as a solution to replace the md-select-header as been found: https://github.com/angular/material2/pull/7835
 	//
 	// describe("header", () => {

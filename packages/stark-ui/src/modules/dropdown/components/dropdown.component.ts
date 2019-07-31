@@ -473,7 +473,6 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	public setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
 		this.stateChanges.next();
-		this._onValidatorChange();
 	}
 
 	/**
