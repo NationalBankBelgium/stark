@@ -429,13 +429,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		this.logger.debug(componentName + ": component initialized");
 
 		this._resetSelection();
-
-		if (this.customTableActionsType === "regular") {
-			this.customTableRegularActions = { actions: this.customTableActions || [] };
-		} else {
-			this.customTableRegularActions = { actions: [] };
-			this.customTableAltActions = this.customTableActions;
-		}
 	}
 
 	/**
@@ -532,6 +525,15 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 		if (changes["multiSelect"]) {
 			this._resetSelection();
+		}
+
+		if (changes["customTableActionsType"] || changes["customTableActions"]) {
+			if (this.customTableActionsType === "regular") {
+				this.customTableRegularActions = { actions: this.customTableActions || [] };
+			} else {
+				this.customTableRegularActions = { actions: [] };
+				this.customTableAltActions = this.customTableActions;
+			}
 		}
 	}
 

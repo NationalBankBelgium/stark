@@ -28,9 +28,13 @@ import { mergeUiTranslations } from "../../common/translations";
 	entryComponents: [StarkTableMultisortDialogComponent],
 	exports: [StarkTableComponent, StarkTableColumnComponent],
 	imports: [
+		// Common
 		CommonModule,
 		FormsModule,
 		ReactiveFormsModule,
+		TranslateModule,
+
+		// Material
 		MatButtonModule,
 		MatCheckboxModule,
 		MatDialogModule,
@@ -41,7 +45,8 @@ import { mergeUiTranslations } from "../../common/translations";
 		MatSortModule,
 		MatTableModule,
 		MatTooltipModule,
-		TranslateModule,
+
+		// Stark
 		StarkActionBarModule,
 		StarkPaginationModule,
 		StarkMinimapModule
