@@ -23,8 +23,11 @@ import { StarkTableColumnComponent } from "./column.component";
 import { StarkPaginationComponent } from "../../pagination/components";
 import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "../entities";
 import find from "lodash-es/find";
+import noop from "lodash-es/noop";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
+import { StarkAction, StarkActionBarModule } from "@nationalbankbelgium/stark-ui";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
 	selector: `host-component`,
@@ -42,6 +45,7 @@ import createSpy = jasmine.createSpy;
 			[orderProperties]="orderProperties"
 			[tableRowActions]="tableRowActions"
 			[rowClassNameFn]="rowClassNameFn"
+			[customTableActions]="customTableActions"
 			(rowClicked)="rowClickHandler($event)"
 		>
 		</stark-table>
@@ -62,6 +66,7 @@ class TestHostComponent {
 	public tableRowActions?: StarkTableRowActions;
 	public tableFilter?: StarkTableFilter;
 	public orderProperties?: string[];
+	public customTableActions?: StarkAction[];
 	public rowClassNameFn?: (row: object, index: number) => string;
 	public rowClickHandler?: (row: object) => void;
 }
@@ -95,8 +100,13 @@ describe("TableComponent", () => {
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			imports: [
+				// Common
 				FormsModule,
 				ReactiveFormsModule,
+				NoopAnimationsModule,
+				TranslateModule.forRoot(),
+
+				// Material
 				MatCheckboxModule,
 				MatDialogModule,
 				MatInputModule,
@@ -106,15 +116,17 @@ describe("TableComponent", () => {
 				MatSelectModule,
 				MatTableModule,
 				MatTooltipModule,
-				NoopAnimationsModule,
-				TranslateModule.forRoot()
+				MatIconModule,
+
+				// Stark
+				StarkActionBarModule
 			],
 			declarations: [
+				TestHostComponent,
 				StarkPaginationComponent,
 				StarkTableComponent,
 				StarkTableColumnComponent,
-				StarkTableMultisortDialogComponent,
-				TestHostComponent
+				StarkTableMultisortDialogComponent
 			],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
@@ -1365,6 +1377,35 @@ describe("TableComponent", () => {
 			hostFixture.detectChanges();
 
 			expect(component.paginationConfig.totalItems).toBe(DUMMY_DATA.length);
+		});
+	});
+
+	describe("custom table actions", () => {
+		const action1: StarkAction = { id: "action-1", label: "action 1", icon: "question", isEnabled: true, actionCall: noop };
+		const action2: StarkAction = { id: "action-2", label: "action 2", icon: "question", isEnabled: true, actionCall: noop };
+
+		beforeEach(() => {
+			hostComponent.customTableActions = [action1, action2];
+			hostFixture.detectChanges();
+		});
+
+		it("should render when set", () => {
+			const actionElement1 = hostFixture.debugElement.query(By.css("stark-action-bar #-action-1"));
+			expect(actionElement1).toBeTruthy("First action should be rendered.");
+
+			const actionElement2 = hostFixture.debugElement.query(By.css("stark-action-bar #-action-2"));
+			expect(actionElement2).toBeTruthy("Second action should be rendered.");
+		});
+
+		it("should update when changed", () => {
+			hostComponent.customTableActions = [action1];
+			hostFixture.detectChanges();
+
+			const actionElement1 = hostFixture.debugElement.query(By.css("stark-action-bar #-action-1"));
+			expect(actionElement1).toBeTruthy("First action is not rendered.");
+
+			const actionElement2 = hostFixture.debugElement.query(By.css("stark-action-bar #-action-2"));
+			expect(actionElement2).toBeNull("Section action should not be rendered.");
 		});
 	});
 });
