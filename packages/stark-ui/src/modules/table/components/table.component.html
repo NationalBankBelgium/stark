@@ -78,7 +78,7 @@
 		<ng-container matColumnDef="select">
 			<th mat-header-cell *matHeaderCellDef>
 				<mat-checkbox
-					*ngIf="isMultiSelectEnabled"
+					*ngIf="selection.isMultipleSelection()"
 					(change)="$event ? masterToggle() : null"
 					[checked]="selection.hasValue() && isAllSelected()"
 					[indeterminate]="selection.hasValue() && !isAllSelected()"

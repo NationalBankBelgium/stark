@@ -1,6 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import { SelectionChange, SelectionModel } from "@angular/cdk/collections";
 
 const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
@@ -23,6 +24,7 @@ const DUMMY_DATA: object[] = [
 })
 export class TableWithSelectionComponent {
 	public data: object[] = DUMMY_DATA;
+	public selection = new SelectionModel<object>(true);
 
 	public columns: StarkTableColumnProperties[] = [
 		{ name: "id", label: "Id", isFilterable: true, isSortable: true },
@@ -36,9 +38,9 @@ export class TableWithSelectionComponent {
 
 	public filter: StarkTableFilter = { globalFilterPresent: false, columns: [] };
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
-
-	public handleRowSelected(data: object[]): void {
-		this.logger.debug("SELECTED ROW:", data);
+	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {
+		this.selection.changed.subscribe((change: SelectionChange<object>) => {
+			this.logger.debug("SELECTED ROW:", change.source.selected);
+		});
 	}
 }
