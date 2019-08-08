@@ -1,3 +1,29 @@
+<a name="10.0.0-rc.0"></a>
+# [10.0.0-rc.0](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.8...10.0.0-rc.0) (2019-08-08)
+
+
+### Bug Fixes
+
+* **stark-demo:** enhance script to replace baseHref and deployUrl in any JS, CSS and JS.MAP file in Showcase when deploying to GhPages ([54ea128](https://github.com/nationalbankbelgium/stark/commit/54ea128)), closes [#1328](https://github.com/nationalbankbelgium/stark/issues/1328)
+* **stark-demo:** move header outside of sidenav-content ([f7ab74b](https://github.com/nationalbankbelgium/stark/commit/f7ab74b)), closes [#1338](https://github.com/nationalbankbelgium/stark/issues/1338)
+* **stark-ui:** change table actions when input changes ([0fdd43e](https://github.com/nationalbankbelgium/stark/commit/0fdd43e)), closes [#1315](https://github.com/nationalbankbelgium/stark/issues/1315)
+* **stark-ui:** dropdown - fix container click + badly floating label in multiSelect ([b29c762](https://github.com/nationalbankbelgium/stark/commit/b29c762)), closes [#1369](https://github.com/nationalbankbelgium/stark/issues/1369) [#1370](https://github.com/nationalbankbelgium/stark/issues/1370)
+* **stark-ui:** ui dropdown: not taking into account option emitEvent ([15eea33](https://github.com/nationalbankbelgium/stark/commit/15eea33)), closes [#1364](https://github.com/nationalbankbelgium/stark/issues/1364)
+
+
+### Features
+
+* **stark-demo:** add back Grid Layout example to Layout demo page ([e2b8e55](https://github.com/nationalbankbelgium/stark/commit/e2b8e55))
+* **stark-ui:** table - add support for angular CDK selection model ([a20da4f](https://github.com/nationalbankbelgium/stark/commit/a20da4f)), closes [#1366](https://github.com/nationalbankbelgium/stark/issues/1366)
+
+
+### Performance Improvements
+
+* **stark-demo:** set ChangeDetectionStrategy.OnPush to ExampleViewer component to prevent Angular from running unnecessary change detection cycles ([709c261](https://github.com/nationalbankbelgium/stark/commit/709c261))
+* **stark-ui:** set ChangeDetectionStrategy.OnPush to UI components to prevent Angular from running unnecessary change detection cycles ([dff48b9](https://github.com/nationalbankbelgium/stark/commit/dff48b9))
+
+
+
 <a name="10.0.0-beta.8"></a>
 # [10.0.0-beta.8](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.7...10.0.0-beta.8) (2019-06-06)
 
