@@ -1,0 +1,2341 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>StarkDateRangePickerComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/modules/date-range-picker/components/date-range-picker.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to display the stark date-range-picker</p>
+
+    </p>
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+            <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code><a href="../components/StarkDateRangePickerComponent.html" target="_self" >{
+    provide: NG_VALUE_ACCESSOR, multi: true, useExisting: StarkDateRangePickerComponent
+}</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>stark-date-range-picker</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./date-range-picker.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#_endMinDate">_endMinDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#endPicker">endPicker</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger">logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#startPicker">startPicker</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onDateChanged">onDateChanged</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dateFilter">dateFilter</a>
+                            </li>
+                            <li>
+                                <a href="#dateMask">dateMask</a>
+                            </li>
+                            <li>
+                                <a href="#disabled">disabled</a>
+                            </li>
+                            <li>
+                                <a href="#endDate">endDate</a>
+                            </li>
+                            <li>
+                                <a href="#endDateLabel">endDateLabel</a>
+                            </li>
+                            <li>
+                                <a href="#endMaxDate">endMaxDate</a>
+                            </li>
+                            <li>
+                                <a href="#endMinDate">endMinDate</a>
+                            </li>
+                            <li>
+                                <a href="#rangeFormGroup">rangeFormGroup</a>
+                            </li>
+                            <li>
+                                <a href="#rangePickerId">rangePickerId</a>
+                            </li>
+                            <li>
+                                <a href="#rangePickerName">rangePickerName</a>
+                            </li>
+                            <li>
+                                <a href="#required">required</a>
+                            </li>
+                            <li>
+                                <a href="#startDate">startDate</a>
+                            </li>
+                            <li>
+                                <a href="#startDateLabel">startDateLabel</a>
+                            </li>
+                            <li>
+                                <a href="#startMaxDate">startMaxDate</a>
+                            </li>
+                            <li>
+                                <a href="#startMinDate">startMinDate</a>
+                            </li>
+                            <li>
+                                <a href="#color">color</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dateRangeChanged">dateRangeChanged</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#startDate">startDate</a>
+                                </li>
+                                <li>
+                                    <a href="#startDateFormControl">startDateFormControl</a>
+                                </li>
+                                <li>
+                                    <a href="#endDate">endDate</a>
+                                </li>
+                                <li>
+                                    <a href="#endDateFormControl">endDateFormControl</a>
+                                </li>
+                                <li>
+                                    <a href="#endMinDate">endMinDate</a>
+                                </li>
+                                <li>
+                                    <a href="#rangeFormGroup">rangeFormGroup</a>
+                                </li>
+                                <li>
+                                    <a href="#disabled">disabled</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: StarkLoggingService, injector: <a href="https://angular.io/api/core/Injector" target="_blank">Injector</a>, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, elementRef: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>, cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="345" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:345</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Class constructor</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The logger of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>injector</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Injector" target="_blank" >Injector</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The Injector of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Angular Renderer wrapper for DOM manipulations.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>elementRef</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Reference to the DOM element where this directive is applied to.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Reference to the change detector attached to this component</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dateFilter"></a>
+                        <b>dateFilter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#StarkDatePickerFilter" target="_self" >StarkDatePickerFilter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:201</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Filter function or a string
+Will be applied to both date-picker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dateMask"></a>
+                        <b>dateMask</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#StarkDatePickerMaskConfig" target="_self" >StarkDatePickerMaskConfig</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="210" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:210</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Timestamp Mask Configuration to apply on the start/end date-picker.
+If <code>true</code> is passed, the default mask config is applied: {DEFAULT_DATE_MASK_CONFIG|DEFAULT_DATE_MASK_CONFIG}
+If <code>false</code> is passed or if <code>dateMask</code> is not present, the directive is disabled.
+If a <code>StarkTimestampMaskConfig</code> is passed, it is set as the date mask config.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="disabled"></a>
+                        <b>disabled</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:216</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the date pickers are disabled</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="endDate"></a>
+                        <b>endDate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Date | undefined</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:117</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Source Date to be bound to the end datepicker model</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="endDateLabel"></a>
+                        <b>endDateLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;STARK.DATE_RANGE_PICKER.TO&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:150</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Label to be displayed in the end datepicker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="endMaxDate"></a>
+                        <b>endMaxDate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:171</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Maximum date of the end date picker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="endMinDate"></a>
+                        <b>endMinDate</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:156</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Minimum date of the end date picker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="rangeFormGroup"></a>
+                        <b>rangeFormGroup</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:177</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Input to manage both start date and end date.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="rangePickerId"></a>
+                        <b>rangePickerId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:257</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>HTML &quot;name&quot; attribute of the element.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="rangePickerName"></a>
+                        <b>rangePickerName</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:263</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>HTML &quot;name&quot; attribute of the element.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="required"></a>
+                        <b>required</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="251" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:251</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the date pickers are required</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startDate"></a>
+                        <b>startDate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Date | undefined</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:66</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Source Date to be bound to the start datepicker model</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startDateLabel"></a>
+                        <b>startDateLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;STARK.DATE_RANGE_PICKER.FROM&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:99</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Label to be displayed in the end datepicker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startMaxDate"></a>
+                        <b>startMaxDate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:111</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Maximum date of the start date picker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startMinDate"></a>
+                        <b>startMinDate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:105</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Minimum date of the start date picker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="color"></a>
+                        <b>color</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in AbstractStarkUiComponent:11</div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Color theme</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dateRangeChanged"></a>
+                        <b>dateRangeChanged</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="269" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:269</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Output that will emit a specific date range whenever the selection has changed</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnDestroy"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnDestroy
+                            </b>
+                            <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnDestroy()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="378" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:378</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Angular lifecycle method</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="370" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:370</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Angular lifecycle method</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onDateChanged"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            onDateChanged
+                            </b>
+                            <a href="#onDateChanged"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>onDateChanged(dateOrigin: "start" | "end")</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="449" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:449</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Handle the date changed on the start and end datepicker</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>dateOrigin</td>
+                                                        <td>
+                                                                    <code>&quot;start&quot; | &quot;end&quot;</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Whether the change was triggered by the start or end date picker</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in AbstractStarkUiComponent:23</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_endMinDate"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                                <span class="modifier">Optional</span>
+                            _endMinDate</b>
+                            <a href="#_endMinDate"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="165" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:165</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="endPicker"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            endPicker</b>
+                            <a href="#endPicker"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../components/StarkDatePickerComponent.html" target="_self" >StarkDatePickerComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;endPicker&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="281" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:281</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Reference to the end datepicker embedded in this component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logger"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            logger</b>
+                            <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>StarkLoggingService</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(STARK_LOGGING_SERVICE)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="356" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:356</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- The logger of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startPicker"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            startPicker</b>
+                            <a href="#startPicker"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../components/StarkDatePickerComponent.html" target="_self" >StarkDatePickerComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;startPicker&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="275" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:275</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Reference to the start datepicker embedded in this component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startDate"></a>
+                        <span class="name"><b>startDate</b><a href="#startDate"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>startDate(value)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:70</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startDateFormControl"></a>
+                        <span class="name"><b>startDateFormControl</b><a href="#startDateFormControl"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>startDateFormControl()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:86</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>The internal formControl used to manage the state of the starkDatePicker for the start date.
+This can be used to retrieve internal errors.</p>
+</div>
+
+                                <div>
+                                        <b>Example :</b>
+                                            <div>
+                                                <pre class="line-numbers"><code class="language-html">&amp;lt;stark-date-range-picker required #starkDateRangePicker &amp;gt;
+   &lt;ng-container start-date-errors&gt;
+     {{starkDateRangePicker.startDateFormControl.hasError(&amp;#39;required&amp;#39;) ? &amp;quot;Start date is required&amp;quot; : null }}
+   &lt;/ng-container&gt;
+&lt;/stark-date-range-picker&gt;</code></pre>
+                                            </div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="endDate"></a>
+                        <span class="name"><b>endDate</b><a href="#endDate"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>endDate(value)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:121</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="endDateFormControl"></a>
+                        <span class="name"><b>endDateFormControl</b><a href="#endDateFormControl"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>endDateFormControl()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:137</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>The internal formControl used to manage the state of the starkDatePicker for the start date.
+This can be used to retrieve internal errors.</p>
+</div>
+
+                                <div>
+                                        <b>Example :</b>
+                                            <div>
+                                                <pre class="line-numbers"><code class="language-html">&amp;lt;stark-date-range-picker required #starkDateRangePicker &amp;gt;
+   &lt;ng-container end-date-errors&gt;
+     {{starkDateRangePicker.endDateFormControl.hasError(&amp;#39;required&amp;#39;) ? &amp;quot;End date is required&amp;quot; : null }}
+   &lt;/ng-container&gt;
+&lt;/stark-date-range-picker&gt;</code></pre>
+                                            </div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="endMinDate"></a>
+                        <span class="name"><b>endMinDate</b><a href="#endMinDate"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>endMinDate()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:160</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>endMinDate(date)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:156</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Minimum date of the end date picker</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>date</td>
+                                                    
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="rangeFormGroup"></a>
+                        <span class="name"><b>rangeFormGroup</b><a href="#rangeFormGroup"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>rangeFormGroup(val)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:177</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Input to manage both start date and end date.</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>val</td>
+                                                    
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="disabled"></a>
+                        <span class="name"><b>disabled</b><a href="#disabled"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>disabled(val: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">src/modules/date-range-picker/components/date-range-picker.component.ts:216</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Whether the date pickers are disabled</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>val</td>
+                                                    
+                                                            <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	Inject,
+	Injector,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	Type,
+	ViewChild,
+	ViewEncapsulation
+} from &quot;@angular/core&quot;;
+import {
+	AbstractControl,
+	ControlValueAccessor,
+	FormControl,
+	FormGroup,
+	NG_VALUE_ACCESSOR,
+	NgControl,
+	ValidatorFn,
+	Validators
+} from &quot;@angular/forms&quot;;
+import { Subscription } from &quot;rxjs&quot;;
+import { distinctUntilChanged } from &quot;rxjs/operators&quot;;
+import get from &quot;lodash-es/get&quot;;
+import isEqual from &quot;lodash-es/isEqual&quot;;
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;@nationalbankbelgium/stark-core&quot;;
+import { AbstractStarkUiComponent } from &quot;../../../common/classes/abstract-component&quot;;
+import { StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from &quot;../../date-picker/components&quot;;
+import { StarkDateRangePickerEvent } from &quot;./date-range-picker-event.intf&quot;;
+
+/**
+ * Name of the component
+ */
+const componentName &#x3D; &quot;stark-date-range-picker&quot;;
+
+/**
+ * Component to display the stark date-range-picker
+ */
+@Component({
+	selector: &quot;stark-date-range-picker&quot;,
+	templateUrl: &quot;./date-range-picker.component.html&quot;,
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	},
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			multi: true,
+			useExisting: StarkDateRangePickerComponent
+		}
+	]
+})
+export class StarkDateRangePickerComponent extends AbstractStarkUiComponent implements ControlValueAccessor, OnInit, OnDestroy {
+	/**
+	 * Source Date to be bound to the start datepicker model
+	 */
+	@Input()
+	public get startDate(): Date | undefined {
+		return this._startDate.value || undefined;
+	}
+
+	public set startDate(value: Date | undefined) {
+		this._startDate.setValue(value);
+	}
+
+	/**
+	 * The internal formControl used to manage the state of the starkDatePicker for the start date.
+	 * This can be used to retrieve internal errors.
+	 *
+	 * @example
+	 *
+	 * &lt;stark-date-range-picker required #starkDateRangePicker &gt;
+	 *   &lt;ng-container start-date-errors&gt;
+	 *     {{starkDateRangePicker.startDateFormControl.hasError(&#x27;required&#x27;) ? &quot;Start date is required&quot; : null }}
+	 *   &lt;/ng-container&gt;
+	 * &lt;/stark-date-range-picker&gt;
+	 */
+	public get startDateFormControl(): FormControl {
+		return this._startDate;
+	}
+
+	/**
+	 * @ignore
+	 */
+	private _startDate!: FormControl; // will be defined by &#x27;_setupFormControls()&#x27; called in the constructor
+
+	/**
+	 * Label to be displayed in the end datepicker
+	 */
+	@Input()
+	public startDateLabel &#x3D; &quot;STARK.DATE_RANGE_PICKER.FROM&quot;;
+
+	/**
+	 * Minimum date of the start date picker
+	 */
+	@Input()
+	public startMinDate?: Date;
+
+	/**
+	 * Maximum date of the start date picker
+	 */
+	@Input()
+	public startMaxDate?: Date;
+
+	/**
+	 * Source Date to be bound to the end datepicker model
+	 */
+	@Input()
+	public get endDate(): Date | undefined {
+		return this._endDate.value || undefined;
+	}
+
+	public set endDate(value: Date | undefined) {
+		this._endDate.setValue(value);
+	}
+
+	/**
+	 * The internal formControl used to manage the state of the starkDatePicker for the start date.
+	 * This can be used to retrieve internal errors.
+	 *
+	 * @example
+	 *
+	 * &lt;stark-date-range-picker required #starkDateRangePicker &gt;
+	 *   &lt;ng-container end-date-errors&gt;
+	 *     {{starkDateRangePicker.endDateFormControl.hasError(&#x27;required&#x27;) ? &quot;End date is required&quot; : null }}
+	 *   &lt;/ng-container&gt;
+	 * &lt;/stark-date-range-picker&gt;
+	 */
+	public get endDateFormControl(): FormControl {
+		return this._endDate;
+	}
+
+	/**
+	 * @ignore
+	 */
+	private _endDate!: FormControl; // will be defined by &#x27;_setupFormControls()&#x27; called in the constructor
+
+	/**
+	 * Label to be displayed in the end datepicker
+	 */
+	@Input()
+	public endDateLabel &#x3D; &quot;STARK.DATE_RANGE_PICKER.TO&quot;;
+
+	/**
+	 * Minimum date of the end date picker
+	 */
+	@Input()
+	public set endMinDate(date: Date | undefined) {
+		this._endMinDate &#x3D; date;
+	}
+
+	public get endMinDate(): Date | undefined {
+		// use the startDate when defined to provide better user experience :)
+		return this.startDate || this._endMinDate;
+	}
+
+	private _endMinDate?: Date;
+
+	/**
+	 * Maximum date of the end date picker
+	 */
+	@Input()
+	public endMaxDate?: Date;
+
+	/**
+	 * Input to manage both start date and end date.
+	 */
+	@Input()
+	public set rangeFormGroup(val: FormGroup) {
+		const { startDate, endDate } &#x3D; val.controls;
+		if (!(startDate instanceof FormControl &amp;&amp; endDate instanceof FormControl)) {
+			this.logger.error(&#x60;[${componentName}]: &quot;formGroup&quot; requires a FormControl for startDate and another one for endDate&#x60;);
+			return;
+		}
+
+		this._formGroup &#x3D; val;
+		// overwrite internal formControls and setup again the validators, subscriptions, etc.
+		this._startDate &#x3D; startDate;
+		this._endDate &#x3D; endDate;
+		this._setupFormControls();
+	}
+
+	/**
+	 * @ignore
+	 */
+	private _formGroup?: FormGroup;
+
+	/**
+	 * Filter function or a string
+	 * Will be applied to both date-picker
+	 */
+	@Input()
+	public dateFilter?: StarkDatePickerFilter;
+
+	/**
+	 * Timestamp Mask Configuration to apply on the start/end date-picker.
+	 * If &#x60;true&#x60; is passed, the default mask config is applied: {DEFAULT_DATE_MASK_CONFIG|DEFAULT_DATE_MASK_CONFIG}
+	 * If &#x60;false&#x60; is passed or if &#x60;dateMask&#x60; is not present, the directive is disabled.
+	 * If a &#x60;StarkTimestampMaskConfig&#x60; is passed, it is set as the date mask config.
+	 */
+	@Input()
+	public dateMask?: StarkDatePickerMaskConfig;
+
+	/**
+	 * Whether the date pickers are disabled
+	 */
+	@Input()
+	public set disabled(val: boolean) {
+		if (this._formGroup) {
+			this.logger.warn(&#x60;[${componentName}]: 
+			It looks like you&#x27;re using the &quot;disabled&quot; attribute with a &quot;formGroup&quot;. We recommend using following approach.
+       
+      Example: 
+      dateRangeFormGroup &#x3D; new FormGroup({
+        startDate: new FormControl({value: null, disabled: true}),
+        endDate: new FormControl({value: null, disabled: true})
+      });
+			&#x60;);
+		}
+
+		// enable/disable the controls without emitting a change event since the values did not change (to avoid unnecessary extra calls!)
+		if (val) {
+			if (this.startDateFormControl) {
+				this.startDateFormControl.disable({ emitEvent: false });
+			}
+			if (this.endDateFormControl) {
+				this.endDateFormControl.disable({ emitEvent: false });
+			}
+		} else {
+			if (this.startDateFormControl) {
+				this.startDateFormControl.enable({ emitEvent: false });
+			}
+			if (this.endDateFormControl) {
+				this.endDateFormControl.enable({ emitEvent: false });
+			}
+		}
+	}
+
+	/**
+	 * Whether the date pickers are required
+	 */
+	@Input()
+	public required &#x3D; false;
+
+	/**
+	 * HTML &quot;name&quot; attribute of the element.
+	 */
+	@Input()
+	public rangePickerId &#x3D; &quot;&quot;;
+
+	/**
+	 * HTML &quot;name&quot; attribute of the element.
+	 */
+	@Input()
+	public rangePickerName &#x3D; &quot;&quot;;
+
+	/**
+	 * Output that will emit a specific date range whenever the selection has changed
+	 */
+	@Output()
+	public readonly dateRangeChanged &#x3D; new EventEmitter&lt;StarkDateRangePickerEvent&gt;();
+
+	/**
+	 * Reference to the start datepicker embedded in this component
+	 */
+	@ViewChild(&quot;startPicker&quot;)
+	public startPicker!: StarkDatePickerComponent;
+
+	/**
+	 * Reference to the end datepicker embedded in this component
+	 */
+	@ViewChild(&quot;endPicker&quot;)
+	public endPicker!: StarkDatePickerComponent;
+
+	/**
+	 * @ignore
+	 * @internal
+	 * The registered callback function called when a blur event occurs on the input element.
+	 */
+	private _onTouched: () &#x3D;&gt; void &#x3D; () &#x3D;&gt; {
+		/*noop*/
+	};
+
+	/**
+	 * @ignore
+	 * @internal
+	 * The registered callback function called when an input event occurs on the input element.
+	 */
+	private _onChange: (_dateRange: StarkDateRangePickerEvent) &#x3D;&gt; void &#x3D; (_: any) &#x3D;&gt; {
+		/*noop*/
+	};
+
+	/**
+	 * Subscriptions to be removed at end of component lifecycle
+	 * @ignore
+	 */
+	private subs: Subscription[] &#x3D; [];
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	public currentRange?: StarkDateRangePickerEvent;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _startBeforeEndValidator: ValidatorFn &#x3D; ({ value }) &#x3D;&gt; {
+		return value instanceof Date &amp;&amp; this.endDate instanceof Date &amp;&amp; value.getTime() &gt; this.endDate.getTime()
+			? { startBeforeEnd: true }
+			: null;
+	};
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _endAfterStartValidator: ValidatorFn &#x3D; ({ value }) &#x3D;&gt; {
+		return value instanceof Date &amp;&amp; this.startDate instanceof Date &amp;&amp; value.getTime() &lt; this.startDate.getTime()
+			? { endAfterStart: true }
+			: null;
+	};
+
+	/**
+	 * @ignore
+	 * @internal
+	 * Validator that will perform the &#x27;required&#x27; validation only if the &#x27;required&#x27; input is enabled
+	 * IMPORTANT: this should be always added to the internal form controls for the start and end date pickers
+	 */
+	private _requiredValidator: ValidatorFn &#x3D; (control: AbstractControl) &#x3D;&gt; {
+		if (this.required) {
+			return Validators.required(control);
+		} else {
+			return null;
+		}
+	};
+
+	/**
+	 * Class constructor
+	 * @param logger - The logger of the application
+	 * @param injector - The Injector of the application
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param cdRef - Reference to the change detector attached to this component
+	 */
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		private injector: Injector,
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef,
+		protected cdRef: ChangeDetectorRef
+	) {
+		super(renderer, elementRef);
+		// IMPORTANT: the form controls should be initialized here because they should be available before the developer passes his own form controls
+		this._setupFormControls();
+	}
+
+	/**
+	 * Angular lifecycle method
+	 */
+	public ngOnInit(): void {
+		this._setupNgControl();
+		this.logger.debug(componentName + &quot;: component initialized&quot;);
+	}
+
+	/**
+	 * Angular lifecycle method
+	 */
+	public ngOnDestroy(): void {
+		for (const subscription of this.subs) {
+			subscription.unsubscribe();
+		}
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _setupFormControls(): void {
+		// merge the original validators with ones from the start/end date form controls if already available
+		// or create the form controls with such validators otherwise
+		// IMPORTANT: the &#x27;_requiredValidator&#x27; should ALWAYS be added. Internally it checks whether the control is actually required or not.
+		// By doing this, the formControl will be marked as &#x27;required&#x27; since the beginning (if it is marked as required).
+		// This prevents the &#x27;ExpressionChangedAfterItHasBeenCheckedError&#x27; in the template when the developer uses an NgModel and retrieves the internal errors
+		// However, the error will NOT prevent the error from happening when FormControl is used (via the &#x27;rangeFormGroup&#x27; input).
+		if (this.startDateFormControl) {
+			this.startDateFormControl.setValidators(
+				Validators.compose([this.startDateFormControl.validator, this._requiredValidator, this._startBeforeEndValidator])
+			);
+		} else {
+			this._startDate &#x3D; new FormControl(undefined, [this._requiredValidator, this._startBeforeEndValidator]);
+		}
+		if (this.endDateFormControl) {
+			this.endDateFormControl.setValidators(
+				Validators.compose([this.endDateFormControl.validator, this._requiredValidator, this._endAfterStartValidator])
+			);
+		} else {
+			this._endDate &#x3D; new FormControl(undefined, [this._requiredValidator, this._endAfterStartValidator]);
+		}
+
+		for (const subscription of this.subs) {
+			subscription.unsubscribe();
+		}
+
+		this.subs.push(
+			this.startDateFormControl.valueChanges.pipe(distinctUntilChanged()).subscribe((_value: Date) &#x3D;&gt; {
+				this.onDateChanged(&quot;start&quot;);
+			}),
+			this.endDateFormControl.valueChanges.pipe(distinctUntilChanged()).subscribe((_value: Date) &#x3D;&gt; {
+				this.onDateChanged(&quot;end&quot;);
+			})
+		);
+	}
+
+	/**
+	 * Link the passed control (if one is available) to the internal formControls.
+	 * @ignore
+	 * @internal
+	 */
+	private _setupNgControl(): void {
+		// Get the ngControl from the injector
+		const ngControl &#x3D; this.injector.get&lt;NgControl&gt;(&lt;Type&lt;NgControl&gt;&gt;NgControl, &lt;any&gt;null);
+		if (!ngControl) {
+			return;
+		}
+
+		ngControl.valueAccessor &#x3D; this;
+
+		if (typeof get(ngControl, &quot;control.validator&quot;) &#x3D;&#x3D;&#x3D; &quot;function&quot;) {
+			this.logger.warn(
+				&#x60;[${componentName}]: validators set on the control will not be used, use the &quot;formGroup&quot; attribute to manage your own validations.&#x60;
+			);
+		}
+	}
+
+	/**
+	 * Handle the date changed on the start and end datepicker
+	 * @param dateOrigin - Whether the change was triggered by the start or end date picker
+	 */
+	public onDateChanged(dateOrigin: &quot;start&quot; | &quot;end&quot;): void {
+		this._onTouched();
+
+		if (this.startDate &amp;&amp; this.endDate &amp;&amp; this.endDate.getTime() &lt; this.startDate.getTime()) {
+			// clear the value of one of the date pickers and make the change to affect ONLY that control
+			// this is because at the end both controls will be validated once the final value is emitted (see the &#x27;else&#x27; block below)
+			if (dateOrigin &#x3D;&#x3D;&#x3D; &quot;start&quot;) {
+				this.endDateFormControl.setValue(undefined, { onlySelf: true });
+			} else {
+				this.startDateFormControl.setValue(undefined, { onlySelf: true });
+			}
+			this.cdRef.detectChanges(); // to force a refresh of the validation errors
+		} else {
+			const dateRange: StarkDateRangePickerEvent &#x3D; { startDate: this.startDate, endDate: this.endDate };
+
+			if (!isEqual(dateRange, this.currentRange)) {
+				// calling &#x27;updateValueAndValidity()&#x27; manually on both form controls without emitting the valueChanges event (to avoid unnecessary extra calls in the end user&#x27;s code!)
+				this.startDateFormControl.updateValueAndValidity({ emitEvent: false });
+				this.endDateFormControl.updateValueAndValidity({ emitEvent: false });
+
+				this.currentRange &#x3D; dateRange;
+				this._onChange(dateRange);
+				this.dateRangeChanged.emit(dateRange);
+			}
+		}
+	}
+
+	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Registers a function to be called when the control value changes.
+	 * @ignore
+	 * @internal
+	 */
+	public registerOnChange(fn: (_dateRange: StarkDateRangePickerEvent) &#x3D;&gt; void): void {
+		this._onChange &#x3D; fn;
+	}
+
+	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Registers a function to be called when the control is touched.
+	 * @ignore
+	 * @internal
+	 */
+	public registerOnTouched(fn: () &#x3D;&gt; void): void {
+		this._onTouched &#x3D; fn;
+	}
+
+	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Sets the &quot;disabled&quot; property on the input element.
+	 * @ignore
+	 * @internal
+	 */
+	public setDisabledState(isDisabled: boolean): void {
+		this.disabled &#x3D; isDisabled;
+	}
+
+	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Sets the &quot;value&quot; property on the input element.
+	 * @ignore
+	 * @internal
+	 */
+	public writeValue(dateRange: StarkDateRangePickerEvent): void {
+		dateRange &#x3D; dateRange || {};
+		this.startDateFormControl.setValue(dateRange.startDate, { emitEvent: false });
+		this.endDateFormControl.setValue(dateRange.endDate, { emitEvent: false });
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-form-field&gt;
+	&lt;stark-date-picker
+		#startPicker
+		[pickerId]&#x3D;&quot;rangePickerId + &#x27;-start&#x27;&quot;
+		[pickerName]&#x3D;&quot;rangePickerName + &#x27;-start&#x27;&quot;
+		[formControl]&#x3D;&quot;startDateFormControl&quot;
+		[placeholder]&#x3D;&quot;startDateLabel | translate&quot;
+		[dateFilter]&#x3D;&quot;dateFilter&quot;
+		[dateMask]&#x3D;&quot;dateMask&quot;
+		[min]&#x3D;&quot;startMinDate&quot;
+		[max]&#x3D;&quot;startMaxDate&quot;
+		[required]&#x3D;&quot;required&quot;
+	&gt;
+	&lt;/stark-date-picker&gt;
+	&lt;!-- &lt;mat-error&gt; should always be a direct child of &lt;mat-form-field&gt; --&gt;
+	&lt;mat-error&gt;
+		&lt;ng-content select&#x3D;&quot;[start-date-errors]&quot;&gt;&lt;/ng-content&gt;
+	&lt;/mat-error&gt;
+&lt;/mat-form-field&gt;
+
+&lt;mat-form-field&gt;
+	&lt;stark-date-picker
+		#endPicker
+		[pickerId]&#x3D;&quot;rangePickerId + &#x27;-end&#x27;&quot;
+		[pickerName]&#x3D;&quot;rangePickerName + &#x27;-end&#x27;&quot;
+		[formControl]&#x3D;&quot;endDateFormControl&quot;
+		[placeholder]&#x3D;&quot;endDateLabel | translate&quot;
+		[dateFilter]&#x3D;&quot;dateFilter&quot;
+		[dateMask]&#x3D;&quot;dateMask&quot;
+		[min]&#x3D;&quot;endMinDate&quot;
+		[max]&#x3D;&quot;endMaxDate&quot;
+		[required]&#x3D;&quot;required&quot;
+	&gt;
+	&lt;/stark-date-picker&gt;
+	&lt;!-- &lt;mat-error&gt; should always be a direct child of &lt;mat-form-field&gt; --&gt;
+	&lt;mat-error&gt;
+		&lt;ng-content select&#x3D;&quot;[end-date-errors]&quot;&gt;&lt;/ng-content&gt;
+	&lt;/mat-error&gt;
+&lt;/mat-form-field&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-form-field>	<stark-date-picker		#startPicker		[pickerId]="rangePickerId + \'-start\'"		[pickerName]="rangePickerName + \'-start\'"		[formControl]="startDateFormControl"		[placeholder]="startDateLabel | translate"		[dateFilter]="dateFilter"		[dateMask]="dateMask"		[min]="startMinDate"		[max]="startMaxDate"		[required]="required"	>	</stark-date-picker>	<!-- <mat-error> should always be a direct child of <mat-form-field> -->	<mat-error>		<ng-content select="[start-date-errors]"></ng-content>	</mat-error></mat-form-field><mat-form-field>	<stark-date-picker		#endPicker		[pickerId]="rangePickerId + \'-end\'"		[pickerName]="rangePickerName + \'-end\'"		[formControl]="endDateFormControl"		[placeholder]="endDateLabel | translate"		[dateFilter]="dateFilter"		[dateMask]="dateMask"		[min]="endMinDate"		[max]="endMaxDate"		[required]="required"	>	</stark-date-picker>	<!-- <mat-error> should always be a direct child of <mat-form-field> -->	<mat-error>		<ng-content select="[end-date-errors]"></ng-content>	</mat-error></mat-form-field></div>'
+    var COMPONENTS = [{'name': 'StarkActionBarComponent', 'selector': 'stark-action-bar'},{'name': 'StarkAlertDialogComponent', 'selector': 'stark-alert-dialog'},{'name': 'StarkAppDataComponent', 'selector': 'stark-app-data'},{'name': 'StarkAppFooterComponent', 'selector': 'stark-app-footer'},{'name': 'StarkAppLogoComponent', 'selector': 'stark-app-logo'},{'name': 'StarkAppLogoutComponent', 'selector': 'stark-app-logout'},{'name': 'StarkAppMenuComponent', 'selector': 'stark-app-menu'},{'name': 'StarkAppMenuItemComponent', 'selector': 'stark-app-menu-item'},{'name': 'StarkAppSidebarComponent', 'selector': 'stark-app-sidebar'},{'name': 'StarkBreadcrumbComponent', 'selector': 'stark-breadcrumb'},{'name': 'StarkCollapsibleComponent', 'selector': 'stark-collapsible'},{'name': 'StarkConfirmDialogComponent', 'selector': 'stark-confirm-dialog'},{'name': 'StarkDatePickerComponent', 'selector': 'stark-date-picker'},{'name': 'StarkDateRangePickerComponent', 'selector': 'stark-date-range-picker'},{'name': 'StarkDateTimePickerComponent', 'selector': 'stark-date-time-picker'},{'name': 'StarkDropdownComponent', 'selector': 'stark-dropdown'},{'name': 'StarkGenericSearchComponent', 'selector': 'stark-generic-search'},{'name': 'StarkLanguageSelectorComponent', 'selector': 'stark-language-selector'},{'name': 'StarkLoginPageComponent', 'selector': 'stark-login-page'},{'name': 'StarkMessagePaneComponent', 'selector': 'stark-message-pane'},{'name': 'StarkMinimapComponent', 'selector': 'stark-minimap'},{'name': 'StarkPaginationComponent', 'selector': 'stark-pagination'},{'name': 'StarkPreloadingPageComponent', 'selector': 'stark-preloading-page'},{'name': 'StarkPrettyPrintComponent', 'selector': 'stark-pretty-print'},{'name': 'StarkProgressIndicatorComponent', 'selector': 'stark-progress-indicator'},{'name': 'StarkPromptDialogComponent', 'selector': 'stark-prompt-dialog'},{'name': 'StarkRouteSearchComponent', 'selector': 'stark-route-search'},{'name': 'StarkSessionCardComponent', 'selector': 'stark-session-card'},{'name': 'StarkSessionExpiredPageComponent', 'selector': 'stark-session-expired-page'},{'name': 'StarkSessionLogoutPageComponent', 'selector': 'stark-session-logout-page'},{'name': 'StarkSessionTimeoutWarningDialogComponent', 'selector': 'session-timeout-warning-dialog'},{'name': 'StarkSliderComponent', 'selector': 'stark-slider'},{'name': 'StarkTableColumnComponent', 'selector': 'stark-table-column'},{'name': 'StarkTableComponent', 'selector': 'stark-table'},{'name': 'StarkTableMultisortDialogComponent', 'selector': 'stark-table-dialog-multisort'},{'name': 'StarkToastNotificationComponent', 'selector': 'stark-toast-notification'}];
+    var DIRECTIVES = [{'name': 'StarkEmailMaskDirective', 'selector': 'directiveName'},{'name': 'StarkNumberMaskDirective', 'selector': 'directiveName'},{'name': 'StarkProgressIndicatorDirective', 'selector': 'directiveName'},{'name': 'StarkRestrictInputDirective', 'selector': 'directiveName'},{'name': 'StarkSvgViewBoxDirective', 'selector': 'directiveName'},{'name': 'StarkTextMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTimestampMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTransformInputDirective', 'selector': '[starkTransformInput]'}];
+    var ACTUAL_COMPONENT = {'name': 'StarkDateRangePickerComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkDateRangePickerComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

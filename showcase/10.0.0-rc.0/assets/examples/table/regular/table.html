@@ -1,0 +1,15 @@
+<stark-table
+	class="shadowed"
+	[data]="data"
+	[columnProperties]="columns"
+	[filter]="filter"
+	[orderProperties]="order"
+	[paginationConfig]="pagination"
+	[tableRowActions]="tableRowActions"
+	showRowIndex
+	multiSort
+	showRowsCounter
+	(rowClicked)="handleRowClicked($event)"
+>
+	<header><h1 class="mb0">Regular Table</h1></header>
+</stark-table>
