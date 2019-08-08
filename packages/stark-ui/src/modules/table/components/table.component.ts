@@ -1,5 +1,4 @@
 import {
-	AfterContentInit,
 	AfterViewInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
@@ -73,14 +72,15 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 	selector: "stark-table",
 	templateUrl: "./table.component.html",
 	encapsulation: ViewEncapsulation.None,
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// See note on CdkTable for explanation on why this uses the default change detection strategy.
+	changeDetection: ChangeDetectionStrategy.Default,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
 	}
 })
 /* tslint:enable */
-export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
+export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 	/**
 	 * Array of {@link StarkTableColumnProperties} objects which define the columns of the data table.
 	 */
@@ -176,12 +176,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Determine if you can select the rows in the table
+	 * @deprecated  - use {@link selection} instead
 	 */
 	@Input()
 	public rowsSelectable?: boolean;
 
 	/**
 	 * Allows multiple row selection. Setting the attribute to "true" or empty will enable this feature.
+	 * @deprecated  - use {@link selection} instead
 	 */
 	@Input()
 	public multiSelect?: string;
@@ -257,6 +259,45 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public rowClassNameFn?: (row: object, index: number) => string;
 
 	/**
+	 * Angular CDK selection model used for the "master" selection of the table
+	 */
+	@Input()
+	public get selection(): SelectionModel<object> {
+		return this._selection;
+	}
+
+	public set selection(selection: SelectionModel<object>) {
+		// tslint:disable-next-line:deprecation
+		if (coerceBooleanProperty(this.multiSelect) || !!this.rowsSelectable) {
+			this.logger.error(
+				`${componentName}: 'selection' cannot be used with 'multiSelect' and/or 'rowsSelectable'. Please use 'selection' only.`
+			);
+		}
+
+		if (selection) {
+			this._managedSelection = true;
+
+			if (!this.displayedColumns.includes("select")) {
+				this.displayedColumns.unshift("select");
+			}
+
+			this._selection = selection;
+			this._resetSelection();
+		} else if (this._selection) {
+			this._managedSelection = false;
+			const i: number = this.displayedColumns.indexOf("select");
+			this.displayedColumns.splice(i);
+
+			this._resetSelection(true);
+		}
+	}
+
+	/**
+	 * @ignore
+	 */
+	private _selection!: SelectionModel<object>;
+
+	/**
 	 * Determine if the row index must be present or not.
 	 * Default: false
 	 */
@@ -306,6 +347,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Output event emitter that will emit the array of selected rows.
+	 * @deprecated  - use {@link selection} instead
 	 */
 	@Output()
 	public readonly selectChanged = new EventEmitter<object[]>();
@@ -388,21 +430,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public isMultiSortEnabled = false;
 
 	/**
-	 * Whether the multiple row selection is enabled.
-	 */
-	public get isMultiSelectEnabled(): boolean {
-		return coerceBooleanProperty(this.multiSelect);
-	}
-
-	/**
 	 * @ignore
 	 */
 	private _selectionSub!: Subscription;
 
 	/**
-	 * Angular CDK selection model used for the "master" selection of the table
+	 * @ignore
 	 */
-	public selection: SelectionModel<object> = new SelectionModel<object>(true, []);
+	private _managedSelection = false;
 
 	/**
 	 * Class constructor
@@ -429,13 +464,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		this.logger.debug(componentName + ": component initialized");
 
 		this._resetSelection();
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngAfterContentInit(): void {
-		this.logger.debug(componentName + ": ngAfterContentInit");
 	}
 
 	/**
@@ -471,7 +499,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Component lifecycle hook
 	 */
-	// tslint:disable-next-line:cognitive-complexity
+	// tslint:disable-next-line:cognitive-complexity cyclomatic-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["data"]) {
 			this.data = this.data || [];
@@ -512,8 +540,13 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this.isMultiSortEnabled = coerceBooleanProperty(this.multiSort);
 		}
 
+		// tslint:disable:deprecation
 		if (changes["rowsSelectable"]) {
-			if (this.rowsSelectable) {
+			if (this._managedSelection) {
+				this.logger.error(
+					`${componentName}: 'selection' cannot be used with 'multiSelect' and/or 'rowsSelectable'. Please use 'selection' only.`
+				);
+			} else if (this.rowsSelectable) {
 				if (!this.displayedColumns.includes("select")) {
 					this.displayedColumns.unshift("select");
 				}
@@ -522,9 +555,16 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 				this.displayedColumns.splice(i);
 			}
 		}
+		// tslint:enable:deprecation
 
-		if (changes["multiSelect"]) {
-			this._resetSelection();
+		if (changes["multiSelect"] && !changes["multiSelect"].isFirstChange()) {
+			if (this._managedSelection) {
+				this.logger.error(
+					`${componentName}: 'selection' cannot be used with 'multiSelect' and/or 'rowsSelectable'. Please use 'selection' only.`
+				);
+			} else {
+				this._resetSelection(true);
+			}
 		}
 
 		if (changes["customTableActionsType"] || changes["customTableActions"]) {
@@ -829,8 +869,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * @ignore
 	 */
-	private _resetSelection(): void {
-		this.selection = new SelectionModel<object>(this.isMultiSelectEnabled, []);
+	private _resetSelection(forceReset: boolean = false): void {
+		// tslint:disable:deprecation
+		if (!this.selection || forceReset) {
+			this._selection = new SelectionModel<object>(coerceBooleanProperty(this.multiSelect), []);
+		}
 
 		// Emit event when selection changes
 		if (this._selectionSub) {
@@ -840,6 +883,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			const selected: object[] = change.source.selected;
 			this.selectChanged.emit(selected);
 		});
+		// tslint:enable:deprecation
 	}
 
 	/**
@@ -1019,7 +1063,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		if (this.rowClicked.observers.length > 0) {
 			// If there is an observer, emit an event
 			this.rowClicked.emit(row);
-		} else if (this.rowsSelectable) {
+			// tslint:disable-next-line:deprecation
+		} else if (this._managedSelection || this.rowsSelectable) {
 			// If multi-select is enabled, (un)select the row
 			this.selection.toggle(row);
 		} else {
@@ -1061,12 +1106,5 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public trackColumnFn(_index: number, item: StarkTableColumnProperties): string {
 		return item.name;
-	}
-
-	/**
-	 * @ignore
-	 */
-	public trackActionFn(_index: number, item: StarkAction): string {
-		return item.id;
 	}
 }

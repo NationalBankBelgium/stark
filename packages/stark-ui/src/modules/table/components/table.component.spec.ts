@@ -1,4 +1,5 @@
-/* tslint:disable:completed-docs max-inline-declarations no-identical-functions no-life-cycle-call */
+/* tslint:disable:completed-docs max-inline-declarations no-identical-functions no-life-cycle-call deprecation */
+import { SelectionModel } from "@angular/cdk/collections";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -7,6 +8,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -16,6 +18,7 @@ import { By, HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { StarkAction, StarkActionBarModule } from "@nationalbankbelgium/stark-ui";
 import { Subject } from "rxjs";
 import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.component";
 import { StarkTableComponent } from "./table.component";
@@ -26,14 +29,13 @@ import find from "lodash-es/find";
 import noop from "lodash-es/noop";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
-import { StarkAction, StarkActionBarModule } from "@nationalbankbelgium/stark-ui";
-import { MatIconModule } from "@angular/material/icon";
 
 @Component({
 	selector: `host-component`,
 	template: `
 		<stark-table
 			[columnProperties]="columnProperties"
+			[customTableActions]="customTableActions"
 			[data]="dummyData"
 			[filter]="tableFilter"
 			[fixedHeader]="fixedHeader"
@@ -43,9 +45,9 @@ import { MatIconModule } from "@angular/material/icon";
 			[showRowsCounter]="showRowsCounter"
 			[showRowIndex]="showRowIndex"
 			[orderProperties]="orderProperties"
+			[selection]="selection"
 			[tableRowActions]="tableRowActions"
 			[rowClassNameFn]="rowClassNameFn"
-			[customTableActions]="customTableActions"
 			(rowClicked)="rowClickHandler($event)"
 		>
 		</stark-table>
@@ -56,6 +58,7 @@ class TestHostComponent {
 	public tableComponent!: StarkTableComponent;
 
 	public columnProperties?: StarkTableColumnProperties[];
+	public customTableActions?: StarkAction[];
 	public dummyData: object[] = [];
 	public fixedHeader?: string;
 	public rowsSelectable?: boolean;
@@ -66,7 +69,7 @@ class TestHostComponent {
 	public tableRowActions?: StarkTableRowActions;
 	public tableFilter?: StarkTableFilter;
 	public orderProperties?: string[];
-	public customTableActions?: StarkAction[];
+	public selection?: SelectionModel<object>;
 	public rowClassNameFn?: (row: object, index: number) => string;
 	public rowClickHandler?: (row: object) => void;
 }
@@ -96,6 +99,8 @@ describe("TableComponent", () => {
 	};
 
 	const getColumnSelector = (columnName: string): string => `.stark-table th.mat-column-${columnName} div div`;
+	const columnSelectSelector = "cdk-column-select";
+	const rowSelector = "table tbody tr";
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
@@ -221,6 +226,52 @@ describe("TableComponent", () => {
 			expect(component.dataSource.data).toEqual([{ name: "test-data-2" }]);
 		});
 
+		it("should change internal 'selection' when 'selection' is managed by host and then trigger selectChanged", () => {
+			const dummySelectedRows = [{ name: "selected-data-1" }, { name: "selected-data-2" }, { name: "selected-data-3" }];
+			spyOn(component.selectChanged, "emit");
+
+			hostComponent.selection = new SelectionModel<object>(true, []);
+			hostFixture.detectChanges();
+			expect(hostComponent.selection).toEqual(component.selection);
+
+			hostComponent.selection.select(...dummySelectedRows);
+			expect(component.selection.selected).toEqual(dummySelectedRows);
+			expect(component.selection.isSelected(dummySelectedRows[0])).toBe(true);
+			expect(component.selection.isSelected(dummySelectedRows[1])).toBe(true);
+			expect(component.selection.isSelected(dummySelectedRows[2])).toBe(true);
+			expect(component.selectChanged.emit).toHaveBeenCalledTimes(1);
+			expect(component.selectChanged.emit).toHaveBeenCalledWith(dummySelectedRows);
+
+			(<Spy>component.selectChanged.emit).calls.reset();
+			hostComponent.selection.clear();
+			expect(component.selection.selected).toEqual([]);
+			expect(component.selectChanged.emit).toHaveBeenCalledTimes(1);
+			expect(component.selectChanged.emit).toHaveBeenCalledWith([]);
+		});
+
+		it("should change host 'selection' when 'selection' is managed by host and then trigger selectChanged", () => {
+			const dummySelectedRows = [{ name: "selected-data-1" }, { name: "selected-data-2" }, { name: "selected-data-3" }];
+			spyOn(component.selectChanged, "emit");
+
+			hostComponent.selection = new SelectionModel<object>(true, []);
+			hostFixture.detectChanges();
+			expect(hostComponent.selection).toEqual(component.selection);
+
+			component.selection.select(...dummySelectedRows);
+			expect(hostComponent.selection.selected).toEqual(dummySelectedRows);
+			expect(hostComponent.selection.isSelected(dummySelectedRows[0])).toBe(true);
+			expect(hostComponent.selection.isSelected(dummySelectedRows[1])).toBe(true);
+			expect(hostComponent.selection.isSelected(dummySelectedRows[2])).toBe(true);
+			expect(component.selectChanged.emit).toHaveBeenCalledTimes(1);
+			expect(component.selectChanged.emit).toHaveBeenCalledWith(dummySelectedRows);
+
+			(<Spy>component.selectChanged.emit).calls.reset();
+			component.selection.clear();
+			expect(hostComponent.selection.selected).toEqual([]);
+			expect(component.selectChanged.emit).toHaveBeenCalledTimes(1);
+			expect(component.selectChanged.emit).toHaveBeenCalledWith([]);
+		});
+
 		it("should assign right value to isFixedHeaderEnabled when fixedHeader changes", () => {
 			hostComponent.fixedHeader = "true";
 			hostFixture.detectChanges();
@@ -241,15 +292,29 @@ describe("TableComponent", () => {
 			expect(component.isMultiSortEnabled).toBe(false);
 		});
 
-		it("should assign right value to isMultiSelectEnabled when multiSelect changes and rowsSelectable is enabled", () => {
-			hostComponent.rowsSelectable = true;
-			hostComponent.multiSelect = "true";
-			hostFixture.detectChanges();
-			expect(component.isMultiSelectEnabled).toBe(true);
+		it("should assign right value to display/hide 'select' column when 'selection' changes", () => {
+			expect(component.displayedColumns.indexOf("select") > -1).toBe(false);
+			let rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
+			expect(rowThElements.length).toBeGreaterThanOrEqual(0);
+			let selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf(columnSelectSelector) > -1);
+			expect(selectThElement).toBeUndefined();
 
-			hostComponent.multiSelect = "false";
+			hostComponent.selection = new SelectionModel<object>();
 			hostFixture.detectChanges();
-			expect(component.isMultiSelectEnabled).toBe(false);
+
+			expect(component.displayedColumns.indexOf("select") > -1).toBe(true);
+			rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
+			expect(rowThElements.length).toBeGreaterThan(0);
+			selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf(columnSelectSelector) > -1);
+			expect(selectThElement).toBeDefined();
+
+			hostComponent.selection = <any>undefined;
+			hostFixture.detectChanges();
+			expect(component.displayedColumns.indexOf("select") > -1).toBe(false);
+			rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
+			expect(rowThElements.length).toBeGreaterThanOrEqual(0);
+			selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf(columnSelectSelector) > -1);
+			expect(selectThElement).toBeUndefined();
 		});
 
 		it("should assign right value to display/hide 'select' column when rowsSelectable changes", () => {
@@ -259,7 +324,7 @@ describe("TableComponent", () => {
 			expect(component.displayedColumns.indexOf("select") > -1).toBe(true);
 			let rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
 			expect(rowThElements.length).toBeGreaterThan(0);
-			let selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf("cdk-column-select") > -1);
+			let selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf(columnSelectSelector) > -1);
 			expect(selectThElement).toBeDefined();
 
 			hostComponent.rowsSelectable = false;
@@ -267,7 +332,7 @@ describe("TableComponent", () => {
 			expect(component.displayedColumns.indexOf("select") > -1).toBe(false);
 			rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
 			expect(rowThElements.length).toBeGreaterThanOrEqual(0);
-			selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf("cdk-column-select") > -1);
+			selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf(columnSelectSelector) > -1);
 			expect(selectThElement).toBeUndefined();
 		});
 
@@ -1312,10 +1377,7 @@ describe("TableComponent", () => {
 		const dummyData: object[] = [
 			{ id: 1, description: "dummy 1" },
 			{ id: 2, description: "dummy 2" },
-			{
-				id: 3,
-				description: "dummy 3"
-			}
+			{ id: 3, description: "dummy 3" }
 		];
 
 		beforeEach(() => {
@@ -1331,6 +1393,9 @@ describe("TableComponent", () => {
 			spyOn(component.selectChanged, "emit");
 
 			const checkboxElement: HTMLElement | null = hostFixture.nativeElement.querySelector("table tbody tr input[type=checkbox]");
+			const rowElement: HTMLElement = hostFixture.nativeElement.querySelector(rowSelector);
+			expect(rowElement.classList).not.toContain("selected");
+
 			if (!checkboxElement) {
 				fail("Checkbox not found.");
 				return;
@@ -1338,7 +1403,30 @@ describe("TableComponent", () => {
 			triggerClick(checkboxElement);
 			hostFixture.detectChanges();
 
+			expect(rowElement.classList).toContain("selected");
 			expect(component.selectChanged.emit).toHaveBeenCalledWith([dummyData[0]]);
+			expect(component.selection.isSelected(dummyData[0])).toBe(true);
+		});
+
+		it("should select the right rows in the template when selecting them through host 'selection' object", () => {
+			hostComponent.selection = new SelectionModel<object>(true);
+			hostComponent.rowsSelectable = undefined;
+			hostFixture.detectChanges();
+
+			expect(component.selection.selected).toEqual([]);
+			const rowsElements: HTMLElement[] = hostFixture.nativeElement.querySelectorAll(rowSelector);
+			expect(rowsElements).not.toBeNull();
+			expect(rowsElements[0].classList).not.toContain("selected");
+			expect(rowsElements[1].classList).not.toContain("selected");
+			expect(rowsElements[2].classList).not.toContain("selected");
+
+			hostComponent.selection.select(dummyData[1]);
+			hostFixture.detectChanges();
+
+			expect(component.selection.selected).toEqual([dummyData[1]]);
+			expect(rowsElements[0].classList).not.toContain("selected");
+			expect(rowsElements[1].classList).toContain("selected");
+			expect(rowsElements[2].classList).not.toContain("selected");
 		});
 	});
 
@@ -1358,14 +1446,14 @@ describe("TableComponent", () => {
 		});
 
 		it("should update rows after async data fetch", () => {
-			const rowsBeforeData: NodeListOf<HTMLTableRowElement> = hostFixture.nativeElement.querySelectorAll("table tbody tr");
+			const rowsBeforeData: NodeListOf<HTMLTableRowElement> = hostFixture.nativeElement.querySelectorAll(rowSelector);
 			expect(rowsBeforeData.length).toBe(0);
 
 			// "async fetch of data resolves"
 			hostComponent.dummyData = DUMMY_DATA;
 			hostFixture.detectChanges();
 
-			const rowsAfterData: NodeListOf<HTMLTableRowElement> = hostFixture.nativeElement.querySelectorAll("table tbody tr");
+			const rowsAfterData: NodeListOf<HTMLTableRowElement> = hostFixture.nativeElement.querySelectorAll(rowSelector);
 			expect(rowsAfterData.length).toBe(DUMMY_DATA.length);
 		});
 
