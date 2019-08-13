@@ -17,15 +17,28 @@ body {
     margin-bottom: 64px;
   }
 
-  main.stark-main-container {
-    flex: 1 0 auto;
-    align-self: center;
+  .mat-drawer {
+    z-index: 120; /* z-index of header is 110. z-index of mat-drawer should be bigger */
+  }
+  
+  .mat-drawer-content {
+    z-index: initial; // fix safari not showing fixed header
 
-    width: 100%;
-    max-width: $stark-max-content-width;
+    display: flex;
+    flex-direction: column;
 
-    box-sizing: border-box;
-    padding: 64px 15px;
+    overflow: auto;
+
+    main.stark-main-container {
+      flex: 1 0 auto;
+      align-self: center;
+
+      width: 100%;
+      max-width: $stark-max-content-width;
+
+      box-sizing: border-box;
+      padding: 64px 15px;
+    }
   }
 }
 
