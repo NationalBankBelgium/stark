@@ -6,6 +6,11 @@
   line-height: initial;
 }
 
+// the line-height of the mat-form-field needs to be reset, because of the line-height set in _typography.scss
+.mat-form-field {
+  line-height: initial;
+}
+
 // Causes checkbox trigger to take up entire width/height of menu item
 .mat-menu-content div.mat-menu-item > mat-checkbox label {
   margin: 0 -16px;
