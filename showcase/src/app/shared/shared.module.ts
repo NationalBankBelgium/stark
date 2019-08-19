@@ -22,6 +22,7 @@ import {
 	StarkLanguage,
 	StarkSessionService
 } from "@nationalbankbelgium/stark-core";
+import { UIRouterModule } from "@uirouter/angular";
 import moment from "moment";
 import { filter } from "rxjs/operators";
 import { ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent } from "./components";
@@ -44,7 +45,8 @@ import { FileService } from "./services";
 		MatTooltipModule,
 		MatSnackBarModule,
 		StarkPrettyPrintModule,
-		TranslateModule
+		TranslateModule,
+		UIRouterModule.forChild()
 	],
 	providers: [FileService],
 	declarations: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],

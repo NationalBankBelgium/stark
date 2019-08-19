@@ -1,7 +1,10 @@
-<mat-card class="stark-card">
+<mat-card [id]="id" class="stark-card">
 	<mat-card-header>
-		<mat-card-title>
-			<h3 translate>{{ exampleTitle }}</h3>
+		<mat-card-title fxLayout fxLayoutAlign="start center">
+			<a *ngIf="id" mat-icon-button class="anchor-link" [uiSref]="exampleState" [uiParams]="{ '#': id }">
+				<mat-icon svgIcon="link"></mat-icon>
+			</a>
+			<h3 fxFlex translate>{{ exampleTitle }}</h3>
 		</mat-card-title>
 		<button color="white" mat-icon-button (click)="toggleSourceView()" matTooltip="View source" [disabled]="extensions.length === 0">
 			<mat-icon svgIcon="code-tags"></mat-icon>
