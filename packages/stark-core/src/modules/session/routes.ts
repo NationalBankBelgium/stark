@@ -37,7 +37,7 @@ export function resolveTargetRoute(
 	}
 
 	// get the path of the current URL in the browser's navigation bar
-	const targetUrlPath: string = $location.path();
+	const targetUrlPath: string = $location.path(true);
 	const targetRoute: StarkStateConfigWithParams | undefined = getTargetStateByUrl(targetUrlPath);
 	let finalTargetRoute$: Observable<StarkStateConfigWithParams | undefined> = of(targetRoute);
 
