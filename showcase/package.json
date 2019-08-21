@@ -129,7 +129,7 @@
     "@nationalbankbelgium/stark-rbac": "file:../dist/packages-dist/stark-rbac/nationalbankbelgium-stark-rbac-10.0.0-rc.0-efc04238.tgz",
     "@nationalbankbelgium/stark-ui": "file:../dist/packages-dist/stark-ui/nationalbankbelgium-stark-ui-10.0.0-rc.0-efc04238.tgz",
     "@uirouter/visualizer": "~7.0.0",
-    "angular-in-memory-web-api": "~0.8.0",
+    "angular-in-memory-web-api": "~0.9.0",
     "basscss": "~8.1.0",
     "core-js": "~3.2.1",
     "eligrey-classlist-js-polyfill": "~1.2.20180112",
