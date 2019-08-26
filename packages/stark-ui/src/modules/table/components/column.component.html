@@ -16,7 +16,7 @@
 				<mat-icon class="stark-small-icon" svgIcon="filter" [matTooltip]="'STARK.TABLE.COLUMN_FILTER' | translate"></mat-icon>
 			</button>
 		</div>
-		<mat-menu class="mat-table-filter" #filterMenu="matMenu" xPosition="before" [overlapTrigger]="false">
+		<mat-menu class="mat-table-filter" #filterMenu="matMenu" [yPosition]="filterPosition" xPosition="before" [overlapTrigger]="false">
 			<div>
 				<mat-form-field
 					class=""

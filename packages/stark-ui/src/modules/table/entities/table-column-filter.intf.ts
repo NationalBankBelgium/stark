@@ -18,4 +18,9 @@ export interface StarkTableColumnFilter {
 	 * Whether the filter in the Table component must be reset when the data changes. Default: false.
 	 */
 	resetFilterOnDataChange?: boolean;
+
+	/**
+	 * The position where the column filter box should be displayed. Default: "below".
+	 */
+	filterPosition?: "below" | "above";
 }

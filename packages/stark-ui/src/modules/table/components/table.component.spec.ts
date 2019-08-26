@@ -366,7 +366,8 @@ describe("TableComponent", () => {
 			hostFixture.detectChanges();
 			expect(component.filter).toEqual({
 				globalFilterValue: "test",
-				globalFilterPresent: true
+				globalFilterPresent: true,
+				filterPosition: "below"
 			});
 		});
 
