@@ -1,5 +1,10 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.APP_DATA.TITLE</h1>
-<example-viewer [extensions]="['HTML', 'TS', 'SCSS']" filesPath="app-data/dropdown" exampleTitle="SHOWCASE.DEMO.APP_DATA.DROPDOWN">
+<example-viewer
+	id="dropdown"
+	[extensions]="['HTML', 'TS', 'SCSS']"
+	filesPath="app-data/dropdown"
+	exampleTitle="SHOWCASE.DEMO.APP_DATA.DROPDOWN"
+>
 	<stark-app-data class="dropdown-app-data with-user-image" mode="dropdown">
 		<div class="summary-slot">
 			<i class="stark-user-image"></i>
@@ -25,6 +30,7 @@
 </example-viewer>
 
 <example-viewer
+	id="dropdown-no-avatar"
 	[extensions]="['HTML', 'TS']"
 	filesPath="app-data/dropdown-no-avatar"
 	exampleTitle="SHOWCASE.DEMO.APP_DATA.DROPDOWN.NO_AVATAR"
@@ -50,7 +56,7 @@
 	</stark-app-data>
 </example-viewer>
 
-<example-viewer [extensions]="['HTML', 'TS']" filesPath="app-data/menu" exampleTitle="SHOWCASE.DEMO.APP_DATA.MENU">
+<example-viewer id="menu" [extensions]="['HTML', 'TS']" filesPath="app-data/menu" exampleTitle="SHOWCASE.DEMO.APP_DATA.MENU">
 	<stark-app-data mode="menu">
 		<div class="detail-slot">
 			<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}</span>

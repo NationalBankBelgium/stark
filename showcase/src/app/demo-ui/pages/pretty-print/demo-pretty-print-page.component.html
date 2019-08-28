@@ -43,6 +43,7 @@
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer
 		*ngFor="let fileType of fileTypes; trackBy: trackFileTypes"
+		[id]="'pretty-print-' + fileType.format"
 		[extensions]="['HTML', 'SCSS', 'TS']"
 		[filesPath]="fileType.path"
 		[exampleTitle]="fileType.title"

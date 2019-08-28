@@ -1,14 +1,14 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.MENU.TITLE</h1>
 <h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 <section class="stark-section">
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="menu/sections" exampleTitle="SHOWCASE.DEMO.MENU.SECTIONS">
+	<example-viewer id="sections" [extensions]="['HTML', 'TS']" filesPath="menu/sections" exampleTitle="SHOWCASE.DEMO.MENU.SECTIONS">
 		<div fxLayout fxLayoutAlign="center">
 			<stark-app-menu fxFlex="250px" [menuConfig]="menuWithSections"></stark-app-menu>
 		</div>
 	</example-viewer>
 </section>
 <section class="stark-section">
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="menu/simple" exampleTitle="SHOWCASE.DEMO.MENU.SIMPLE">
+	<example-viewer id="no-sections" [extensions]="['HTML', 'TS']" filesPath="menu/simple" exampleTitle="SHOWCASE.DEMO.MENU.SIMPLE">
 		<div fxLayout fxLayoutAlign="center">
 			<stark-app-menu fxFlex="250px" [menuConfig]="simpleMenu"></stark-app-menu>
 		</div>

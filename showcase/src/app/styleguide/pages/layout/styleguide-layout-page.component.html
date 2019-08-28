@@ -2,7 +2,12 @@
 <h2 class="mat-display-2" translate>SHOWCASE.STYLEGUIDE.LAYOUT.ANGULAR_FLEX_LAYOUT</h2>
 <p [innerHTML]="'SHOWCASE.STYLEGUIDE.LAYOUT.INTRO' | translate"></p>
 
-<example-viewer filesPath="flex-layout/flex" [extensions]="['HTML', 'SCSS']" exampleTitle="SHOWCASE.STYLEGUIDE.LAYOUT.FLEX">
+<example-viewer
+	id="flex-layout"
+	filesPath="flex-layout/flex"
+	[extensions]="['HTML', 'SCSS']"
+	exampleTitle="SHOWCASE.STYLEGUIDE.LAYOUT.FLEX"
+>
 	<div class="layout-demo" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
 		<div fxFlex>1</div>
 		<div class="accent" fxFlex fxFlex.gt-md="75%">
@@ -13,7 +18,12 @@
 	</div>
 </example-viewer>
 
-<example-viewer filesPath="flex-layout/grid" [extensions]="['HTML', 'SCSS']" exampleTitle="SHOWCASE.STYLEGUIDE.LAYOUT.GRID">
+<example-viewer
+	id="grid-layout"
+	filesPath="flex-layout/grid"
+	[extensions]="['HTML', 'SCSS']"
+	exampleTitle="SHOWCASE.STYLEGUIDE.LAYOUT.GRID"
+>
 	<div class="warning">
 		<mat-icon svgIcon="alert-circle"></mat-icon>
 		<span [innerHTML]="'SHOWCASE.STYLEGUIDE.LAYOUT.GRID_WARNING' | translate"></span>
