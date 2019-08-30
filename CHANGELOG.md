@@ -25,7 +25,7 @@
 
 
 <a name="10.0.0-beta.8"></a>
-# [10.0.0-beta.8](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.7...10.0.0-beta.8) (2019-26-06)
+# [10.0.0-beta.8](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.7...10.0.0-beta.8) (2019-06-06)
 
 
 ### Bug Fixes
