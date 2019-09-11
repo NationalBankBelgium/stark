@@ -7,8 +7,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { HAMMER_LOADER } from "@angular/platform-browser";
 import { Observable, of, Subject, throwError } from "rxjs";
 import { delay, filter } from "rxjs/operators";
-import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 
 import { ExampleFile, ExampleViewerComponent } from "./example-viewer.component";
@@ -20,13 +20,14 @@ describe("ExampleViewerComponent", () => {
 	@Component({
 		selector: "host-component",
 		template: `
-			<example-viewer [extensions]="extensions" [filesPath]="filesPath" [exampleTitle]="exampleTitle"></example-viewer>
+			<example-viewer [id]="id" [extensions]="extensions" [filesPath]="filesPath" [exampleTitle]="exampleTitle"></example-viewer>
 		`
 	})
 	class TestHostComponent {
 		@ViewChild(ExampleViewerComponent)
 		public exampleViewer!: ExampleViewerComponent;
 
+		public id = "";
 		public extensions: string[] = [];
 		public filesPath?: string;
 		public exampleTitle?: string;
@@ -40,12 +41,18 @@ describe("ExampleViewerComponent", () => {
 	let fileService: SpyObj<FileService>;
 	let logger: SpyObj<StarkLoggingService>;
 
+	// Router config
+	const mockStateName = "mock-state-name";
+	const router: MockStarkRoutingService = new MockStarkRoutingService();
+	router.getCurrentStateName.and.returnValue(mockStateName);
+
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
 			declarations: [ExampleViewerComponent, TestHostComponent],
 			imports: [NoopAnimationsModule, MatButtonModule, MatTabsModule, MatTooltipModule, StarkPrettyPrintModule],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: STARK_ROUTING_SERVICE, useValue: router },
 				{
 					provide: FileService,
 					useValue: jasmine.createSpyObj("FileServiceSpy", ["fetchFile"])
@@ -69,6 +76,12 @@ describe("ExampleViewerComponent", () => {
 		hostComponent = hostFixture.componentInstance;
 		component = hostComponent.exampleViewer;
 		hostFixture.detectChanges(); // trigger initial data binding
+	});
+
+	describe("current state", () => {
+		it("should be set on init", () => {
+			expect(component.exampleState).toBe(mockStateName);
+		});
 	});
 
 	describe("@Input() exampleTitle", () => {
@@ -113,6 +126,24 @@ describe("ExampleViewerComponent", () => {
 			});
 
 			component.fetchExampleFiles();
+		});
+	});
+
+	describe("@Input() id", () => {
+		it("should not render an anchor when not set", () => {
+			hostComponent.id = "";
+			hostFixture.detectChanges();
+
+			const anchorIcon = hostFixture.nativeElement.querySelector("mat-card-title a.anchor-link");
+			expect(anchorIcon).toBeNull("anchor link element found.");
+		});
+
+		it("should render an anchor when set", () => {
+			hostComponent.id = "some-hash";
+			hostFixture.detectChanges();
+
+			const anchorIcon = hostFixture.nativeElement.querySelector("mat-card-title a.anchor-link");
+			expect(anchorIcon).not.toBeNull("anchor link element not found.");
 		});
 	});
 

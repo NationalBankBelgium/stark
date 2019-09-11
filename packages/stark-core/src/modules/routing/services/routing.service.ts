@@ -149,14 +149,17 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public getStateConfigByUrlPath(urlPath: string): StarkStateConfigWithParams | undefined {
 		let targetRoute: StarkStateConfigWithParams | undefined;
 
+		// separate path from hash
+		const [, path = urlPath, hash]: string[] = urlPath.match(/(.*)#(.*)/) || [];
+
 		const matchedState: StateDeclaration[] = this.getStatesConfig().filter((state: StateDeclaration) => {
-			return (<Function>state.$$state)().url && (<Function>state.$$state)().url.exec(urlPath);
+			return (<Function>state.$$state)().url && (<Function>state.$$state)().url.exec(path, undefined, hash);
 		});
 
 		if (matchedState.length) {
 			targetRoute = {
 				state: matchedState[0],
-				paramValues: (<Function>matchedState[0].$$state)().url.exec(urlPath)
+				paramValues: (<Function>matchedState[0].$$state)().url.exec(path, undefined, hash)
 			};
 		}
 
@@ -387,20 +390,18 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 		// provide custom default error handler
 		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#defaulterrorhandler
-		this.$state.defaultErrorHandler(
-			(error: any): void => {
-				let stringError: string;
-				if (error instanceof Rejection) {
-					stringError = error.toString();
-				} else {
-					stringError = String(error);
-				}
-
-				if (!this.knownRejectionCausesRegex.test(stringError)) {
-					this.defaultErrorHandler.handleError(Error(stringError));
-				}
+		this.$state.defaultErrorHandler((error: any): void => {
+			let stringError: string;
+			if (error instanceof Rejection) {
+				stringError = error.toString();
+			} else {
+				stringError = String(error);
 			}
-		);
+
+			if (!this.knownRejectionCausesRegex.test(stringError)) {
+				this.defaultErrorHandler.handleError(Error(stringError));
+			}
+		});
 	}
 
 	/**

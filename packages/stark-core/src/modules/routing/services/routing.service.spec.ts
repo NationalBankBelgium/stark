@@ -524,6 +524,16 @@ describe("Service: StarkRoutingService", () => {
 			const stateDeclarations: StarkStateConfigWithParams = <StarkStateConfigWithParams>routingService.getStateConfigByUrlPath(url);
 			expect(stateDeclarations.state).toBe(statesConfig[1]);
 		});
+
+		it("should return the state of the requested url with a hash as parameter", () => {
+			const statesConfig: StateDeclaration[] = $state.get();
+			expect(statesConfig.length).toBe(numberOfMockStates);
+			const url: string = <string>statesConfig[1].url + "#some-hash";
+
+			const stateDeclarations: StarkStateConfigWithParams = <StarkStateConfigWithParams>routingService.getStateConfigByUrlPath(url);
+			expect(stateDeclarations.state).toBe(statesConfig[1]);
+			expect(stateDeclarations.paramValues["#"]).toBe("some-hash");
+		});
 	});
 
 	describe("getStateDeclarationByStateName", () => {

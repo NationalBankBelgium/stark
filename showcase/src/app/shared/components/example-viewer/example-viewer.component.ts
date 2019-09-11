@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { STARK_LOGGING_SERVICE, StarkErrorImpl, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import {
+	STARK_LOGGING_SERVICE,
+	STARK_ROUTING_SERVICE,
+	StarkErrorImpl,
+	StarkLoggingService,
+	StarkRoutingService
+} from "@nationalbankbelgium/stark-core";
 import { FileService } from "../../services";
 
 export interface ExampleFile {
@@ -22,14 +28,23 @@ export class ExampleViewerComponent implements OnInit {
 	public filesPath = "undefined";
 	@Input()
 	public exampleTitle = "undefined";
+	@Input()
+	public id = "";
+
+	public exampleState: string;
 
 	public appBaseHref: string;
 	public examplesFolder = "assets/examples/";
 	public exampleFiles: ExampleFile[] = [];
 	public showSource = false;
 
-	public constructor(private fileService: FileService, @Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
+	public constructor(
+		private fileService: FileService,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(STARK_ROUTING_SERVICE) private routingService: StarkRoutingService
+	) {
 		this.appBaseHref = this.getAppBaseHref();
+		this.exampleState = this.routingService.getCurrentStateName();
 	}
 
 	public ngOnInit(): void {

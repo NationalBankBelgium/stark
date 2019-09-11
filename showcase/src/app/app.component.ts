@@ -2,6 +2,7 @@
  * Angular 2 decorators and services
  */
 import { Component, Inject, OnInit } from "@angular/core";
+import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import {
 	STARK_APP_METADATA,
 	STARK_LOGGING_SERVICE,
@@ -13,12 +14,16 @@ import {
 	StarkRoutingService,
 	StarkSessionService,
 	StarkUser,
-	StarkUserService
+	StarkUserService,
+	StarkRoutingTransitionHook,
+	starkAppInitStateName,
+	starkAppExitStateName
 } from "@nationalbankbelgium/stark-core";
 import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarService, StarkMenuConfig } from "@nationalbankbelgium/stark-ui";
-import * as moment from "moment";
-import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
+import { Transition } from "@uirouter/angular";
+import { StateObject } from "@uirouter/core";
 import { filter } from "rxjs/operators";
+import * as moment from "moment";
 import { APP_MENU_CONFIG } from "./app-menu.config";
 
 /**
@@ -67,6 +72,37 @@ export class AppComponent implements OnInit {
 
 		this.breakpointObserver.observe([this.mediaQueryMdSm]).subscribe((state: BreakpointState) => {
 			this.isMenuModeActive = state.matches;
+		});
+
+		this.routingService.addTransitionHook(
+			StarkRoutingTransitionHook.ON_SUCCESS,
+			{
+				// match any state except the ones that are children of starkAppInit/starkAppExit or the Ui-Router's root state
+				to: (state?: StateObject): boolean => {
+					if (state && typeof state.name !== "undefined") {
+						const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+						return !state.name.match(regexInitExitStateName) && !(state.abstract && state.name === "");
+					} else {
+						return true; // always match
+					}
+				}
+			},
+			(tran: Transition) => {
+				const hash: string = tran.targetState().params()["#"];
+				if (hash) {
+					this.scrollToHash(hash);
+				}
+			}
+		);
+	}
+
+	public scrollToHash(hash: string): void {
+		// Document not loaded on first run yet
+		setTimeout(() => {
+			const element: HTMLElement | null = document.querySelector(`#${hash}`);
+			if (element) {
+				element.scrollIntoView();
+			}
 		});
 	}
 

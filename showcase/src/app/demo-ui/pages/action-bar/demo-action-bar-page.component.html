@@ -3,6 +3,7 @@
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<div fxFlexLayout="column">
 		<example-viewer
+			id="classic-full"
 			[extensions]="['HTML', 'TS']"
 			filesPath="action-bar/classic-full"
 			exampleTitle="SHOWCASE.DEMO.ACTION_BAR.CLASSIC-FULL"
@@ -11,6 +12,7 @@
 		</example-viewer>
 
 		<example-viewer
+			id="classic-compact"
 			[extensions]="['HTML', 'TS']"
 			filesPath="action-bar/classic-compact"
 			exampleTitle="SHOWCASE.DEMO.ACTION_BAR.CLASSIC-COMPACT"
@@ -18,7 +20,12 @@
 			<stark-action-bar actionBarId="classic-compact" [actionBarConfig]="actionBarConfig" mode="compact"></stark-action-bar>
 		</example-viewer>
 
-		<example-viewer [extensions]="['HTML', 'TS']" filesPath="action-bar/alt" exampleTitle="SHOWCASE.DEMO.ACTION_BAR.ALT">
+		<example-viewer
+			id="alternative"
+			[extensions]="['HTML', 'TS']"
+			filesPath="action-bar/alt"
+			exampleTitle="SHOWCASE.DEMO.ACTION_BAR.ALT"
+		>
 			<stark-action-bar
 				actionBarId="alt"
 				[actionBarConfig]="actionBarConfig"

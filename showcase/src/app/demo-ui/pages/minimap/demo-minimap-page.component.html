@@ -1,7 +1,7 @@
 <h1 class="mat-display-3" translate>SHOWCASE.DEMO.MINIMAP.TITLE</h1>
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="minimap/full" exampleTitle="SHOWCASE.DEMO.MINIMAP.FULL">
+	<example-viewer id="full" [extensions]="['HTML', 'TS']" filesPath="minimap/full" exampleTitle="SHOWCASE.DEMO.MINIMAP.FULL">
 		<div fxLayout="row" fxLayoutAlign="space-between center">
 			<stark-minimap [items]="items" [visibleItems]="visibleItems" (showHideItem)="showHideItem($event)"></stark-minimap>
 			<stark-minimap
@@ -21,7 +21,7 @@
 </section>
 
 <section class="stark-section">
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="minimap/compact" exampleTitle="SHOWCASE.DEMO.MINIMAP.COMPACT">
+	<example-viewer id="compact" [extensions]="['HTML', 'TS']" filesPath="minimap/compact" exampleTitle="SHOWCASE.DEMO.MINIMAP.COMPACT">
 		<div fxLayout="row" fxLayoutAlign="space-between center">
 			<stark-minimap
 				mode="compact"

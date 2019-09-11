@@ -3,6 +3,7 @@
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer
+		id="reactive-form"
 		[extensions]="['HTML', 'TS']"
 		filesPath="date-picker/reactive-form"
 		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.REACTIVE_FORM"
@@ -32,7 +33,12 @@
 		</div>
 	</example-viewer>
 
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="date-picker/ng-model" exampleTitle="SHOWCASE.DEMO.DATE_PICKER.NG_MODEL">
+	<example-viewer
+		id="ng-model"
+		[extensions]="['HTML', 'TS']"
+		filesPath="date-picker/ng-model"
+		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.NG_MODEL"
+	>
 		<mat-form-field>
 			<stark-date-picker
 				pickerId="picker-ng-model"
@@ -60,7 +66,12 @@
 		</div>
 	</example-viewer>
 
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="date-picker/weekends" exampleTitle="SHOWCASE.DEMO.DATE_PICKER.ONLY_WEEKENDS">
+	<example-viewer
+		id="weekends-filter"
+		[extensions]="['HTML', 'TS']"
+		filesPath="date-picker/weekends"
+		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.ONLY_WEEKENDS"
+	>
 		<mat-form-field>
 			<stark-date-picker
 				pickerId="picker-only-weekends"
@@ -76,7 +87,12 @@
 		</mat-form-field>
 	</example-viewer>
 
-	<example-viewer [extensions]="['HTML', 'TS']" filesPath="date-picker/weekdays" exampleTitle="SHOWCASE.DEMO.DATE_PICKER.ONLY_WEEKDAYS">
+	<example-viewer
+		id="weekdays-filter"
+		[extensions]="['HTML', 'TS']"
+		filesPath="date-picker/weekdays"
+		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.ONLY_WEEKDAYS"
+	>
 		<mat-form-field>
 			<stark-date-picker
 				pickerId="picker-only-weekdays"
@@ -93,6 +109,7 @@
 	</example-viewer>
 
 	<example-viewer
+		id="custom-filter"
 		[extensions]="['HTML', 'TS']"
 		filesPath="date-picker/custom-filter"
 		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.CUSTOM_FILTER"
