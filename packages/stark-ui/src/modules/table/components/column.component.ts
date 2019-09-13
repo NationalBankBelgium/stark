@@ -20,7 +20,12 @@ import { FormControl } from "@angular/forms";
 import { distinctUntilChanged } from "rxjs/operators";
 import isEqual from "lodash-es/isEqual";
 import get from "lodash-es/get";
-import { StarkColumnFilterChangedOutput, StarkColumnSortChangedOutput, StarkTableColumnSortingDirection } from "../entities";
+import {
+	StarkColumnFilterChangedOutput,
+	StarkColumnSortChangedOutput,
+	StarkTableColumnFilter,
+	StarkTableColumnSortingDirection
+} from "../entities";
 
 /**
  * Component to display a column inside the StarkTableComponent
@@ -129,6 +134,24 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 */
 	@Input()
 	public sortable = true;
+
+	/**
+	 * Position where the column filter box should be displayed. Default: "below"
+	 */
+	@Input()
+	public get filterPosition(): StarkTableColumnFilter["filterPosition"] {
+		return this._filterPosition;
+	}
+
+	public set filterPosition(value: StarkTableColumnFilter["filterPosition"]) {
+		this._filterPosition = value || "below";
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _filterPosition?: StarkTableColumnFilter["filterPosition"] = "below";
 
 	/**
 	 * Priority of the column.

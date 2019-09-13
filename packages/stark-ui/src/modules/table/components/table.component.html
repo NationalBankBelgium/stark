@@ -22,7 +22,13 @@
 		>
 			<mat-icon [matTooltip]="'STARK.TABLE.FILTER' | translate" class="stark-small-icon" svgIcon="filter"></mat-icon>
 		</button>
-		<mat-menu class="mat-table-filter" #globalFilter="matMenu" xPosition="before" [overlapTrigger]="false">
+		<mat-menu
+			class="mat-table-filter"
+			#globalFilter="matMenu"
+			[yPosition]="filter.filterPosition"
+			xPosition="before"
+			[overlapTrigger]="false"
+		>
 			<div>
 				<mat-form-field (click)="$event.stopPropagation()" (keyup)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
 					<input
@@ -109,6 +115,7 @@
 			[filterable]="col.isFilterable"
 			[filterValue]="getColumnFilterValue(col.name)"
 			[visible]="col.isVisible"
+			[filterPosition]="getColumnFilterPosition(col.name)"
 			[compareFn]="col.compareFn"
 			[cellFormatter]="col.cellFormatter"
 			[cellClassName]="col.cellClassName"

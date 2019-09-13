@@ -51,10 +51,20 @@ export class TableRegularComponent {
 			compareFn: (n1: { value: number }, n2: { value: number }): number => n1.value - n2.value
 		},
 		{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION" },
-		{ name: "extra", label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO", isFilterable: false, isSortable: false, isVisible: false }
+		{
+			name: "extra",
+			label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO",
+			isFilterable: false,
+			isSortable: false,
+			isVisible: false
+		}
 	];
 
-	public filter: StarkTableFilter = { globalFilterPresent: true, columns: [] };
+	public filter: StarkTableFilter = {
+		globalFilterPresent: true,
+		columns: [{ columnName: "id", filterPosition: "below" }, { columnName: "title", filterPosition: "above" }],
+		filterPosition: "below"
+	};
 
 	public order: string[] = ["title", "-description", "id"];
 

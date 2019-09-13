@@ -26,4 +26,9 @@ export interface StarkTableFilter {
 	 * Whether the filter in the Table component must be reset when the data changes. Default: false.
 	 */
 	resetGlobalFilterOnDataChange?: boolean;
+
+	/**
+	 * The position in which the global filter box for the table should be displayed. Default: "below".
+	 */
+	filterPosition?: "above" | "below";
 }

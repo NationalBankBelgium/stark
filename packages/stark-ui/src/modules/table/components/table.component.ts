@@ -34,6 +34,7 @@ import { StarkAction, StarkActionBarConfig } from "../../action-bar/components";
 import {
 	StarkColumnFilterChangedOutput,
 	StarkColumnSortChangedOutput,
+	StarkTableColumnFilter,
 	StarkTableColumnProperties,
 	StarkTableColumnSortingDirection,
 	StarkTableFilter,
@@ -53,7 +54,8 @@ const componentName = "stark-table";
  * Default filter configuration
  */
 const defaultFilter: StarkTableFilter = {
-	globalFilterPresent: true
+	globalFilterPresent: true,
+	filterPosition: "below"
 };
 
 /**
@@ -951,6 +953,20 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			}
 		}
 		return columnFilterValue;
+	}
+
+	/**
+	 * Get the position of the filter box of the specified column.
+	 * @param columnName - Name of the column whose filter box position should be retrieved.
+	 * @returns The position of the filter box of the specified column.
+	 */
+	public getColumnFilterPosition(columnName: string): StarkTableColumnFilter["filterPosition"] {
+		if (!(this.filter.columns instanceof Array)) {
+			return undefined;
+		}
+
+		const column = this.filter.columns.find((columnFilter: StarkTableColumnFilter) => columnFilter.columnName === columnName);
+		return column ? column.filterPosition : undefined;
 	}
 
 	/**
