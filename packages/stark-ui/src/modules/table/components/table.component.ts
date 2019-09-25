@@ -635,7 +635,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		if (this.isAllSelected()) {
 			this.selection.clear();
 		} else {
-			for (const row of this.data) {
+			for (const row of this.dataSource.filteredData) {
 				this.selection.select(row);
 			}
 		}

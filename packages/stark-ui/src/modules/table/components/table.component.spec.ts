@@ -1429,6 +1429,44 @@ describe("TableComponent", () => {
 			expect(rowsElements[1].classList).toContain("selected");
 			expect(rowsElements[2].classList).not.toContain("selected");
 		});
+
+		describe("select all", () => {
+			let selectAllButton: HTMLButtonElement;
+			const handleChange = jasmine.createSpy();
+
+			beforeEach(() => {
+				hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+				hostComponent.dummyData = dummyData;
+
+				hostComponent.selection = new SelectionModel<object>(true);
+				hostComponent.selection.changed.subscribe(handleChange);
+				handleChange.calls.reset();
+
+				hostFixture.detectChanges(); // trigger data binding
+				component.ngAfterViewInit();
+
+				selectAllButton = hostFixture.nativeElement.querySelector(
+					"table thead tr th.mat-column-select mat-checkbox .mat-checkbox-inner-container"
+				);
+			});
+
+			it("should select all rows when clicking the select all", () => {
+				selectAllButton.click();
+				hostFixture.detectChanges();
+
+				expect(handleChange).toHaveBeenCalledTimes(dummyData.length);
+			});
+
+			it("should select all rows available after filter when clicking the select all", () => {
+				component.filter.columns = [{ columnName: "id", filterValue: "1" }];
+				hostFixture.detectChanges();
+
+				selectAllButton.click();
+				hostFixture.detectChanges();
+
+				expect(handleChange).toHaveBeenCalledTimes(1);
+			});
+		});
 	});
 
 	describe("async", () => {
