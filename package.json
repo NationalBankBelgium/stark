@@ -183,7 +183,7 @@
     "commitizen": {
       "path": "node_modules/cz-customizable"
     },
-    "nightlyVersion": "10.0.0-rc.1"
+    "nightlyVersion": "10.0.0-rc.2"
   },
   "greenkeeper": {
     "commitMessages": {
