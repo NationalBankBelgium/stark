@@ -1,3 +1,25 @@
+<a name="10.0.0-rc.1"></a>
+# [10.0.0-rc.1](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.0...10.0.0-rc.1) (2019-09-25)
+
+
+### Bug Fixes
+
+* **stark-ui:** app-data, set top postion of the detail pane to 100% ([abc8962](https://github.com/nationalbankbelgium/stark/commit/abc8962)), closes [#1341](https://github.com/nationalbankbelgium/stark/issues/1341)
+* **stark-ui:** change the Multisort component to display the label instead of the name of the column ([fc47144](https://github.com/nationalbankbelgium/stark/commit/fc47144)), closes [#1397](https://github.com/nationalbankbelgium/stark/issues/1397)
+* **stark-ui:** fix side navigation rendering behind header ([ed580f1](https://github.com/nationalbankbelgium/stark/commit/ed580f1)), closes [#1338](https://github.com/nationalbankbelgium/stark/issues/1338)
+* **stark-ui:** reset line-height of input ([7289ec7](https://github.com/nationalbankbelgium/stark/commit/7289ec7)), closes [#1374](https://github.com/nationalbankbelgium/stark/issues/1374)
+* **stark-ui:** select only available rows with select all on table ([6bfe4e2](https://github.com/nationalbankbelgium/stark/commit/6bfe4e2)), closes [#1392](https://github.com/nationalbankbelgium/stark/issues/1392)
+
+
+### Features
+
+* **stark-core:** include url hash part when landing on site ([ba6985a](https://github.com/nationalbankbelgium/stark/commit/ba6985a))
+* **stark-demo:** add anchors to example viewer component ([29afe52](https://github.com/nationalbankbelgium/stark/commit/29afe52)), closes [#1214](https://github.com/nationalbankbelgium/stark/issues/1214)
+* **stark-demo:** add ids to examples ([5b86433](https://github.com/nationalbankbelgium/stark/commit/5b86433)), closes [#1214](https://github.com/nationalbankbelgium/stark/issues/1214)
+* **stark-ui:** add the possibility to display the filter of the table and the filter of their columns above or below the title ([86137fc](https://github.com/nationalbankbelgium/stark/commit/86137fc)), closes [#1352](https://github.com/nationalbankbelgium/stark/issues/1352)
+
+
+
 <a name="10.0.0-rc.0"></a>
 # [10.0.0-rc.0](https://github.com/nationalbankbelgium/stark/compare/10.0.0-beta.8...10.0.0-rc.0) (2019-08-08)
 
@@ -449,12 +471,12 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 * **package:** update copy-webpack-plugin to version 4.5.4 ([ab76952](https://github.com/nationalbankbelgium/stark/commit/ab76952))
 * **package:** update copy-webpack-plugin to version 4.6.0 ([a4aac38](https://github.com/nationalbankbelgium/stark/commit/a4aac38))
 * **package:** update css-loader to version 1.0.1 ([8bbc642](https://github.com/nationalbankbelgium/stark/commit/8bbc642))
-* **package:** update event-source-polyfill to version 1.0.0 ([32a0ec6](https://github.com/nationalbankbelgium/stark/commit/32a0ec6))
 * **package:** update event-source-polyfill to version 1.0.0 ([a62cf49](https://github.com/nationalbankbelgium/stark/commit/a62cf49))
-* **package:** update event-source-polyfill to version 1.0.3 ([2dffcb0](https://github.com/nationalbankbelgium/stark/commit/2dffcb0)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
+* **package:** update event-source-polyfill to version 1.0.0 ([32a0ec6](https://github.com/nationalbankbelgium/stark/commit/32a0ec6))
 * **package:** update event-source-polyfill to version 1.0.3 ([ce41d15](https://github.com/nationalbankbelgium/stark/commit/ce41d15)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
-* **package:** update event-source-polyfill to version 1.0.4 ([aca911f](https://github.com/nationalbankbelgium/stark/commit/aca911f))
+* **package:** update event-source-polyfill to version 1.0.3 ([2dffcb0](https://github.com/nationalbankbelgium/stark/commit/2dffcb0)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
 * **package:** update event-source-polyfill to version 1.0.4 ([0df420c](https://github.com/nationalbankbelgium/stark/commit/0df420c))
+* **package:** update event-source-polyfill to version 1.0.4 ([aca911f](https://github.com/nationalbankbelgium/stark/commit/aca911f))
 * **package:** update jasmine-core to version 3.3.0 ([7fec286](https://github.com/nationalbankbelgium/stark/commit/7fec286))
 * **package:** update karma to version 3.1.1 ([548103e](https://github.com/nationalbankbelgium/stark/commit/548103e))
 * **package:** update nouislider to version 12.1.0 ([6fd6337](https://github.com/nationalbankbelgium/stark/commit/6fd6337))
@@ -690,8 +712,8 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 * **coverage:** add support for code coverage with Coveralls ([72aefce](https://github.com/nationalbankbelgium/stark/commit/72aefce))
 * **http:** correction for imports ([464566a](https://github.com/nationalbankbelgium/stark/commit/464566a))
 * **http:** create StarkHttp module. Fixed imports. Implemented small demo in Starter [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([201edb8](https://github.com/nationalbankbelgium/stark/commit/201edb8))
-* **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([719d92d](https://github.com/nationalbankbelgium/stark/commit/719d92d))
 * **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([579c59b](https://github.com/nationalbankbelgium/stark/commit/579c59b))
+* **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([719d92d](https://github.com/nationalbankbelgium/stark/commit/719d92d))
 * **logging:** create StarkLogging module. Fixed imports ([f3684db](https://github.com/nationalbankbelgium/stark/commit/f3684db))
 * **logging:** implement STARK_APP_CONFIG token and implement Stark logging in Starter ([ec09736](https://github.com/nationalbankbelgium/stark/commit/ec09736))
 * **polyfills:** Update polyfills.browser.ts with the relevant polyfills needed only for IE11 and some special features from Angular. Add needed npm dependencies for those polyfils ([2b6a160](https://github.com/nationalbankbelgium/stark/commit/2b6a160))
