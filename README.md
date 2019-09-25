@@ -18,7 +18,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE)
 [![Greenkeeper badge](https://badges.greenkeeper.io/NationalBankBelgium/stark.svg)](https://greenkeeper.io/)
-[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=dXkxd0JnL0V6TlRuVkszSGs5TDJscWFPOXdNL2hrMFdZREtMeEQ0SXU5RT0tLTBLZVJOb1JPR3pnUVhVY1NNMUtvdVE9PQ==--32b9d322c064334a80a3409239111be75d3d6ddd)](https://www.browserstack.com/automate/public-build/dXkxd0JnL0V6TlRuVkszSGs5TDJscWFPOXdNL2hrMFdZREtMeEQ0SXU5RT0tLTBLZVJOb1JPR3pnUVhVY1NNMUtvdVE9PQ==--32b9d322c064334a80a3409239111be75d3d6ddd)
+[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=NUVVaWg2YUhpY1VHc2pYRDNqWHZFbWVkQ1crMHdhRGlzK1pDVGdpSkpKOD0tLURQamdJWk5JQmZMd2tPMmtOSXBFMmc9PQ==--5aad1febf23a4df3b619fa41bcc2a3ef53d50347)](https://automate.browserstack.com/public-build/<badge_key>)
 
 Stark provides main building blocks for accelerating front-end development:
 
