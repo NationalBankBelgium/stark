@@ -1,0 +1,23 @@
+<mat-form-field>
+	<stark-date-picker
+		pickerId="picker-reactive-form"
+		pickerName="picker-reactive-form"
+		placeholder="Choose a date"
+		[min]="minDate"
+		[max]="maxDate"
+		dateMask
+		[formControl]="formControl"
+		required
+	>
+	</stark-date-picker>
+	<mat-error>
+		<div *ngIf="formControl.hasError('required')">This is required</div>
+		<div *ngIf="formControl.hasError('matDatepickerMin')">Min date</div>
+		<div *ngIf="formControl.hasError('matDatepickerMax')">Max date</div>
+	</mat-error>
+</mat-form-field>
+<div>
+	<mat-checkbox (change)="toggleFormControlState(formControl)" [value]="formControl.disabled">
+		Disabled
+	</mat-checkbox>
+</div>

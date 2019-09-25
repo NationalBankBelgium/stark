@@ -1,0 +1,2653 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>StarkAppSidebarComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/modules/app-sidebar/components/app-sidebar.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to display the application&#39;s sidebar
+Only 2 sidebars are allowed: <a href="https://github.com/angular/material2/issues/1514">https://github.com/angular/material2/issues/1514</a></p>
+
+    </p>
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+            <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>stark-app-sidebar</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./app-sidebar.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#appSidenavContainer">appSidenavContainer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#appSidenavLeft">appSidenavLeft</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#appSidenavRight">appSidenavRight</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#breakpointObserver">breakpointObserver</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#closeSidebarSubscription">closeSidebarSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#deregisterTransitionHook">deregisterTransitionHook</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#displayErrorCallback">displayErrorCallback</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#displaySuccessCallback">displaySuccessCallback</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isShiftingToSmaller">isShiftingToSmaller</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger">logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#mediaQueryGtLg">mediaQueryGtLg</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#openSidebarSubscription">openSidebarSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#routingService">routingService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#shiftLeftSidenavCallback">shiftLeftSidenavCallback</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sidebarService">sidebarService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#sidenavLeftMode">sidenavLeftMode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sidenavLeftOpened">sidenavLeftOpened</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#sidenavLeftType">sidenavLeftType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggleSidebarSubscription">toggleSidebarSubscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#closeSidenav">closeSidenav</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onCloseSidenavs">onCloseSidenavs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onObserveBreakpoints">onObserveBreakpoints</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onOpenSidenav">onOpenSidenav</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onSuccessfulTransition">onSuccessfulTransition</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onToggleSidenav">onToggleSidenav</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#openSidenav">openSidenav</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setClassOnCloseStart">setClassOnCloseStart</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setClassOnOpenStart">setClassOnOpenStart</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setComponentBehaviour">setComponentBehaviour</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggleClassesOnOpen">toggleClassesOnOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeOnNavigate">closeOnNavigate</a>
+                            </li>
+                            <li>
+                                <a href="#color">color</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: StarkLoggingService, sidebarService: <a href="../interfaces/StarkAppSidebarService.html">StarkAppSidebarService</a>, routingService: StarkRoutingService, breakpointObserver: BreakpointObserver, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, elementRef: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:106</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Class constructor</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The sidebar service of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>sidebarService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkAppSidebarService.html" target="_self" >StarkAppSidebarService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The sidebar service of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>routingService</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkRoutingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The routing service of the application</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>breakpointObserver</td>
+                                                  
+                                                        <td>
+                                                                    <code>BreakpointObserver</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Utility for checking the matching state of </li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Angular Renderer wrapper for DOM manipulations.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>elementRef</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>Reference to the DOM element where this directive is applied to.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeOnNavigate"></a>
+                        <b>closeOnNavigate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:41</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>When on smaller devices ( width &lt; 1280px ) the sidebar is automatically closed after navigating.
+Can be set to false to prevent this behaviour.
+Default: true</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="color"></a>
+                        <b>color</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in AbstractStarkUiComponent:11</div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Color theme</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeSidenav"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            closeSidenav
+                            </b>
+                            <a href="#closeSidenav"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>closeSidenav(sidenav: MatSidenav, successHandler: (value: MatDrawerToggleResult) => void)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:175</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Close one of the sidenavs</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>sidenav</td>
+                                                        <td>
+                                                                    <code>MatSidenav</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>The sidebar to close</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>successHandler</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Handler function to be called when the sidenav closes</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnDestroy"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnDestroy
+                            </b>
+                            <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnDestroy()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:161</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle OnDestroy hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:131</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle OnInit hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onCloseSidenavs"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            onCloseSidenavs
+                            </b>
+                            <a href="#onCloseSidenavs"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>onCloseSidenavs()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:198</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Close sidenav handler</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onObserveBreakpoints"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            onObserveBreakpoints
+                            </b>
+                            <a href="#onObserveBreakpoints"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>onObserveBreakpoints(state: BreakpointState)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="229" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:229</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Breakpoints change handler</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>state</td>
+                                                        <td>
+                                                                    <code>BreakpointState</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onOpenSidenav"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            onOpenSidenav
+                            </b>
+                            <a href="#onOpenSidenav"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>onOpenSidenav(event: <a href="../interfaces/StarkAppSidebarOpenEvent.html">StarkAppSidebarOpenEvent</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:205</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Open sidenav handler</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>event</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkAppSidebarOpenEvent.html" target="_self" >StarkAppSidebarOpenEvent</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onSuccessfulTransition"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            onSuccessfulTransition
+                            </b>
+                            <a href="#onSuccessfulTransition"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>onSuccessfulTransition()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:258</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Navigation handler</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onToggleSidenav"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            onToggleSidenav
+                            </b>
+                            <a href="#onToggleSidenav"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>onToggleSidenav(event: <a href="../interfaces/StarkAppSidebarOpenEvent.html">StarkAppSidebarOpenEvent</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="267" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:267</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Toggle sidenav handler</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>event</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkAppSidebarOpenEvent.html" target="_self" >StarkAppSidebarOpenEvent</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openSidenav"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            openSidenav
+                            </b>
+                            <a href="#openSidenav"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>openSidenav(sidenav: MatSidenav, successHandler: (value: MatDrawerToggleResult) => void)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="291" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:291</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Open one of the sidenavs</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Default value</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>sidenav</td>
+                                                        <td>
+                                                                    <code>MatSidenav</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+
+                                                        <td>
+                                                                <ul>
+<li>The sidebar to open</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>successHandler</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code>this.displaySuccessCallback</code>
+                                                        </td>
+
+                                                        <td>
+                                                                <ul>
+<li>Handler function to be called when the sidenav closes</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setClassOnCloseStart"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setClassOnCloseStart
+                            </b>
+                            <a href="#setClassOnCloseStart"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setClassOnCloseStart()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="321" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:321</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Set the corresponding class when the sidenav starts to close</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setClassOnOpenStart"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setClassOnOpenStart
+                            </b>
+                            <a href="#setClassOnOpenStart"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setClassOnOpenStart()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="314" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:314</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Set the corresponding class when the sidenav starts to open</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setComponentBehaviour"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setComponentBehaviour
+                            </b>
+                            <a href="#setComponentBehaviour"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setComponentBehaviour()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="328" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:328</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Set the component with the right settings before opening</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggleClassesOnOpen"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            toggleClassesOnOpen
+                            </b>
+                            <a href="#toggleClassesOnOpen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>toggleClassesOnOpen(isOpen: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="299" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:299</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Toggle the different classes when the sidenav is open or closed</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>isOpen</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <ul>
+<li>Whether the sidebar is open</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in AbstractStarkUiComponent:23</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appSidenavContainer"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            appSidenavContainer</b>
+                            <a href="#appSidenavContainer"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatSidenavContainer</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;appSidenavContainer&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:47</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Reference to the MatSidenavContainer embedded in this component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appSidenavLeft"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            appSidenavLeft</b>
+                            <a href="#appSidenavLeft"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatSidenav</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;appSidenavLeft&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:53</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Reference to the left MatSidenav embedded in this component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appSidenavRight"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            appSidenavRight</b>
+                            <a href="#appSidenavRight"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatSidenav</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;appSidenavRight&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:59</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Reference to the right MatSidenav embedded in this component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="breakpointObserver"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            breakpointObserver</b>
+                            <a href="#breakpointObserver"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>BreakpointObserver</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:121</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- Utility for checking the matching state of </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeSidebarSubscription"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            closeSidebarSubscription</b>
+                            <a href="#closeSidebarSubscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:64</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Subscription to the close sidebar Observable</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="deregisterTransitionHook"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            deregisterTransitionHook</b>
+                            <a href="#deregisterTransitionHook"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:106</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Function to deregister the routing transition hook</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="displayErrorCallback"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            displayErrorCallback</b>
+                            <a href="#displayErrorCallback"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:191</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Callback function to be called when the sidenav failed to open</p>
+<ul>
+<li>@param error: Error</li>
+</ul>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="displaySuccessCallback"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            displaySuccessCallback</b>
+                            <a href="#displaySuccessCallback"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:183</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Callback function to be called when the sidenav opens</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>result</td>
+                                                        <td>
+                                                                <code><p>: MatDrawerToggleResult</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isShiftingToSmaller"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            isShiftingToSmaller</b>
+                            <a href="#isShiftingToSmaller"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:70</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Boolean that indicates if the left sidebar menu is currently shifting from larger to smaller desktop
+In this case, it should wait that the transition is finished before applying the smaller screen styles</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logger"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            logger</b>
+                            <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>StarkLoggingService</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(STARK_LOGGING_SERVICE)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:118</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- The sidebar service of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mediaQueryGtLg"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            mediaQueryGtLg</b>
+                            <a href="#mediaQueryGtLg"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;(min-width: 1280px)&quot;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:76</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Media query for big screens</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openSidebarSubscription"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            openSidebarSubscription</b>
+                            <a href="#openSidebarSubscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:81</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Subscription to the open sidebar Observable</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="routingService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            routingService</b>
+                            <a href="#routingService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>StarkRoutingService</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(STARK_ROUTING_SERVICE)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:120</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- The routing service of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="shiftLeftSidenavCallback"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            shiftLeftSidenavCallback</b>
+                            <a href="#shiftLeftSidenavCallback"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="344" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:344</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Callback function when the left sidenav needs to shift type</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>result</td>
+                                                        <td>
+                                                                <code><p>: MatDrawerToggleResult</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sidebarService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            sidebarService</b>
+                            <a href="#sidebarService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkAppSidebarService.html" target="_self" >StarkAppSidebarService</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(STARK_APP_SIDEBAR_SERVICE)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:119</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">- The sidebar service of the application</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sidenavLeftMode"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                                <span class="modifier">Optional</span>
+                            sidenavLeftMode</b>
+                            <a href="#sidenavLeftMode"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>&quot;over&quot; | &quot;push&quot; | &quot;side&quot;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:91</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Dynamic mode for the left sidebar</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sidenavLeftOpened"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            sidenavLeftOpened</b>
+                            <a href="#sidenavLeftOpened"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:96</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Either the left sidebar is opened or not</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sidenavLeftType"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                                <span class="modifier">Optional</span>
+                            sidenavLeftType</b>
+                            <a href="#sidenavLeftType"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>&quot;menu&quot; | &quot;regular&quot;</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;menu&quot;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:86</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Dynamic mode for the menu, should always show on large desktop screen</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggleSidebarSubscription"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            toggleSidebarSubscription</b>
+                            <a href="#toggleSidebarSubscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/modules/app-sidebar/components/app-sidebar.component.ts:101</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Subscription to the close sidebar Observable</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from &quot;@angular/core&quot;;
+import { BreakpointObserver, BreakpointState } from &quot;@angular/cdk/layout&quot;;
+import { MatDrawerToggleResult, MatSidenav, MatSidenavContainer } from &quot;@angular/material/sidenav&quot;;
+import { from, Subscription } from &quot;rxjs&quot;;
+import {
+	STARK_LOGGING_SERVICE,
+	STARK_ROUTING_SERVICE,
+	StarkLoggingService,
+	StarkRoutingService,
+	StarkRoutingTransitionHook
+} from &quot;@nationalbankbelgium/stark-core&quot;;
+import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarOpenEvent, StarkAppSidebarService } from &quot;../services&quot;;
+import { AbstractStarkUiComponent } from &quot;../../../common/classes/abstract-component&quot;;
+
+export type StarkAppSidebarLeftMode &#x3D; &quot;regular&quot; | &quot;menu&quot; | undefined;
+
+/**
+ * Name of the component
+ */
+const componentName &#x3D; &quot;stark-app-sidebar&quot;;
+
+/**
+ * Component to display the application&#x27;s sidebar
+ * Only 2 sidebars are allowed: https://github.com/angular/material2/issues/1514
+ */
+@Component({
+	selector: &quot;stark-app-sidebar&quot;,
+	templateUrl: &quot;./app-sidebar.component.html&quot;,
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: componentName
+	}
+})
+export class StarkAppSidebarComponent extends AbstractStarkUiComponent implements OnDestroy, OnInit {
+	/**
+	 * When on smaller devices ( width &lt; 1280px ) the sidebar is automatically closed after navigating.
+	 * Can be set to false to prevent this behaviour.
+	 * Default: true
+	 */
+	@Input()
+	public closeOnNavigate &#x3D; true;
+
+	/**
+	 * Reference to the MatSidenavContainer embedded in this component
+	 */
+	@ViewChild(&quot;appSidenavContainer&quot;)
+	public appSidenavContainer!: MatSidenavContainer;
+
+	/**
+	 * Reference to the left MatSidenav embedded in this component
+	 */
+	@ViewChild(&quot;appSidenavLeft&quot;)
+	public appSidenavLeft!: MatSidenav;
+
+	/**
+	 * Reference to the right MatSidenav embedded in this component
+	 */
+	@ViewChild(&quot;appSidenavRight&quot;)
+	public appSidenavRight!: MatSidenav;
+
+	/**
+	 * Subscription to the close sidebar Observable
+	 */
+	public closeSidebarSubscription!: Subscription;
+
+	/**
+	 * Boolean that indicates if the left sidebar menu is currently shifting from larger to smaller desktop
+	 * In this case, it should wait that the transition is finished before applying the smaller screen styles
+	 */
+	public isShiftingToSmaller &#x3D; false;
+
+	// TODO: move this media query to global variable that can be used through stark-ui
+	/**
+	 * Media query for big screens
+	 */
+	public mediaQueryGtLg &#x3D; &quot;(min-width: 1280px)&quot;;
+
+	/**
+	 * Subscription to the open sidebar Observable
+	 */
+	public openSidebarSubscription!: Subscription;
+
+	/**
+	 * Dynamic mode for the menu, should always show on large desktop screen
+	 */
+	public sidenavLeftType?: &quot;menu&quot; | &quot;regular&quot; &#x3D; &quot;menu&quot;;
+
+	/**
+	 * Dynamic mode for the left sidebar
+	 */
+	public sidenavLeftMode?: &quot;over&quot; | &quot;push&quot; | &quot;side&quot;;
+
+	/**
+	 * Either the left sidebar is opened or not
+	 */
+	public sidenavLeftOpened &#x3D; false;
+
+	/**
+	 * Subscription to the close sidebar Observable
+	 */
+	public toggleSidebarSubscription!: Subscription;
+
+	/**
+	 * Function to deregister the routing transition hook
+	 */
+	public deregisterTransitionHook!: Function;
+
+	/**
+	 * Class constructor
+	 * @param logger - The sidebar service of the application
+	 * @param sidebarService - The sidebar service of the application
+	 * @param routingService - The routing service of the application
+	 * @param breakpointObserver - Utility for checking the matching state of @media queries
+	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 */
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
+		public breakpointObserver: BreakpointObserver,
+		renderer: Renderer2,
+		elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
+
+	/**
+	 * Component lifecycle OnInit hook
+	 */
+	public ngOnInit(): void {
+		super.ngOnInit();
+		this.logger.debug(componentName + &quot;: component initialized&quot;);
+
+		this.sidenavLeftOpened &#x3D; this.breakpointObserver.isMatched([this.mediaQueryGtLg]);
+
+		this.openSidebarSubscription &#x3D; this.sidebarService.openSidebar$.subscribe((event: StarkAppSidebarOpenEvent) &#x3D;&gt; {
+			this.onOpenSidenav(event);
+		});
+
+		this.closeSidebarSubscription &#x3D; this.sidebarService.closeSidebar$.subscribe(() &#x3D;&gt; {
+			this.onCloseSidenavs();
+		});
+
+		this.toggleSidebarSubscription &#x3D; this.sidebarService.toggleSidebar$.subscribe((event: StarkAppSidebarOpenEvent) &#x3D;&gt; {
+			this.onToggleSidenav(event);
+		});
+
+		this.breakpointObserver.observe([this.mediaQueryGtLg]).subscribe((state: BreakpointState) &#x3D;&gt; {
+			this.onObserveBreakpoints(state);
+		});
+
+		this.deregisterTransitionHook &#x3D; this.routingService.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, {}, () &#x3D;&gt; {
+			this.onSuccessfulTransition();
+		});
+	}
+
+	/**
+	 * Component lifecycle OnDestroy hook
+	 */
+	public ngOnDestroy(): void {
+		this.openSidebarSubscription.unsubscribe();
+		this.closeSidebarSubscription.unsubscribe();
+		this.toggleSidebarSubscription.unsubscribe();
+		/* tslint:disable-next-line:no-life-cycle-call */
+		this.breakpointObserver.ngOnDestroy();
+		this.deregisterTransitionHook();
+	}
+
+	/**
+	 * Close one of the sidenavs
+	 * @param sidenav - The sidebar to close
+	 * @param successHandler - Handler function to be called when the sidenav closes
+	 */
+	public closeSidenav(sidenav: MatSidenav, successHandler: (value: MatDrawerToggleResult) &#x3D;&gt; void): void {
+		from(sidenav.close()).subscribe(successHandler, this.displayErrorCallback);
+	}
+
+	/**
+	 * Callback function to be called when the sidenav opens
+	 * @param result: MatDrawerToggleResult
+	 */
+	private displaySuccessCallback: (value: MatDrawerToggleResult) &#x3D;&gt; void &#x3D; (result: MatDrawerToggleResult) &#x3D;&gt; {
+		this.logger.debug(componentName + result);
+	};
+
+	/**
+	 * Callback function to be called when the sidenav failed to open
+	 * * @param error: Error
+	 */
+	private displayErrorCallback: (error: Error) &#x3D;&gt; void &#x3D; (error: Error) &#x3D;&gt; {
+		this.logger.warn(componentName + &quot;: &quot;, error);
+	};
+
+	/**
+	 * Close sidenav handler
+	 */
+	public onCloseSidenavs(): void {
+		this.appSidenavContainer.close();
+	}
+
+	/**
+	 * Open sidenav handler
+	 */
+	public onOpenSidenav(event: StarkAppSidebarOpenEvent): void {
+		switch (event.sidebar) {
+			case &quot;left&quot;:
+				if (this.sidenavLeftType !&#x3D;&#x3D; event.type &amp;&amp; this.appSidenavLeft.opened) {
+					this.closeSidenav(this.appSidenavLeft, this.shiftLeftSidenavCallback);
+				} else if (!this.appSidenavLeft.opened) {
+					this.sidenavLeftType &#x3D; event.type;
+					this.setComponentBehaviour();
+					this.openSidenav(this.appSidenavLeft);
+				}
+				break;
+			case &quot;right&quot;:
+				if (!this.appSidenavRight.opened) {
+					this.openSidenav(this.appSidenavRight);
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Breakpoints change handler
+	 */
+	public onObserveBreakpoints(state: BreakpointState): void {
+		// Enter large desktop screen
+		if (state.matches) {
+			if (this.sidenavLeftType &#x3D;&#x3D;&#x3D; &quot;menu&quot;) {
+				this.sidenavLeftMode &#x3D; &quot;side&quot;;
+				if (!this.appSidenavLeft.opened) {
+					this.openSidenav(this.appSidenavLeft);
+				}
+			}
+		}
+		// Enter smaller screens
+		else {
+			if (this.sidenavLeftType &#x3D;&#x3D;&#x3D; &quot;menu&quot;) {
+				if (this.appSidenavLeft.opened) {
+					this.isShiftingToSmaller &#x3D; true;
+					this.closeSidenav(this.appSidenavLeft, (result: MatDrawerToggleResult) &#x3D;&gt; {
+						this.logger.debug(componentName + &quot;: sidenav &quot; + result);
+						this.isShiftingToSmaller &#x3D; false;
+					});
+				} else {
+					this.sidenavLeftMode &#x3D; &quot;over&quot;;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Navigation handler
+	 */
+	public onSuccessfulTransition(): void {
+		if (this.closeOnNavigate &amp;&amp; !this.breakpointObserver.isMatched(this.mediaQueryGtLg)) {
+			this.sidebarService.close();
+		}
+	}
+
+	/**
+	 * Toggle sidenav handler
+	 */
+	public onToggleSidenav(event: StarkAppSidebarOpenEvent): void {
+		switch (event.sidebar) {
+			case &quot;left&quot;:
+				this.sidenavLeftType &#x3D; event.type;
+				if (this.appSidenavLeft.opened) {
+					this.closeSidenav(this.appSidenavLeft, this.displaySuccessCallback);
+				} else {
+					this.setComponentBehaviour();
+					this.openSidenav(this.appSidenavLeft);
+				}
+				break;
+			case &quot;right&quot;:
+				from(this.appSidenavRight.toggle()).subscribe(this.displaySuccessCallback, this.displayErrorCallback);
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Open one of the sidenavs
+	 * @param sidenav - The sidebar to open
+	 * @param successHandler - Handler function to be called when the sidenav closes
+	 */
+	public openSidenav(sidenav: MatSidenav, successHandler: (value: MatDrawerToggleResult) &#x3D;&gt; void &#x3D; this.displaySuccessCallback): void {
+		from(sidenav.open()).subscribe(successHandler, this.displayErrorCallback);
+	}
+
+	/**
+	 * Toggle the different classes when the sidenav is open or closed
+	 * @param isOpen - Whether the sidebar is open
+	 */
+	public toggleClassesOnOpen(isOpen: boolean): void {
+		if (isOpen) {
+			this.renderer.addClass(this.elementRef.nativeElement, &quot;sidebar-open&quot;);
+			this.renderer.removeClass(this.elementRef.nativeElement, &quot;sidebar-open-start&quot;);
+			this.renderer.removeClass(this.elementRef.nativeElement, &quot;sidebar-close&quot;);
+		} else {
+			this.renderer.addClass(this.elementRef.nativeElement, &quot;sidebar-close&quot;);
+			this.renderer.removeClass(this.elementRef.nativeElement, &quot;sidebar-close-start&quot;);
+			this.renderer.removeClass(this.elementRef.nativeElement, &quot;sidebar-open&quot;);
+		}
+	}
+
+	/**
+	 * Set the corresponding class when the sidenav starts to open
+	 */
+	public setClassOnOpenStart(): void {
+		this.renderer.addClass(this.elementRef.nativeElement, &quot;sidebar-open-start&quot;);
+	}
+
+	/**
+	 * Set the corresponding class when the sidenav starts to close
+	 */
+	public setClassOnCloseStart(): void {
+		this.renderer.addClass(this.elementRef.nativeElement, &quot;sidebar-close-start&quot;);
+	}
+
+	/**
+	 * Set the component with the right settings before opening
+	 */
+	public setComponentBehaviour(): void {
+		if (this.sidenavLeftType &#x3D;&#x3D;&#x3D; &quot;regular&quot;) {
+			this.sidenavLeftMode &#x3D; &quot;over&quot;;
+		} else {
+			if (this.breakpointObserver.isMatched([this.mediaQueryGtLg])) {
+				this.sidenavLeftMode &#x3D; &quot;side&quot;;
+			} else {
+				this.sidenavLeftMode &#x3D; &quot;over&quot;;
+			}
+		}
+	}
+
+	/**
+	 * Callback function when the left sidenav needs to shift type
+	 * @param result: MatDrawerToggleResult
+	 */
+	public shiftLeftSidenavCallback: (result: MatDrawerToggleResult) &#x3D;&gt; void &#x3D; (result: MatDrawerToggleResult) &#x3D;&gt; {
+		this.logger.debug(componentName + &quot;: sidenav &quot; + result);
+		this.sidenavLeftType &#x3D; this.sidenavLeftType &#x3D;&#x3D;&#x3D; &quot;menu&quot; ? &quot;regular&quot; : &quot;menu&quot;;
+		this.setComponentBehaviour();
+		this.openSidenav(this.appSidenavLeft);
+	};
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container #appSidenavContainer&gt;
+	&lt;mat-sidenav
+		#appSidenavLeft
+		class&#x3D;&quot;stark-app-sidenav-left&quot;
+		[ngClass]&#x3D;&quot;{ &#x27;stark-app-sidenav-menu&#x27;: sidenavLeftType &#x3D;&#x3D;&#x3D; &#x27;menu&#x27;, &#x27;stark-app-sidenav-menu-shifting&#x27;: isShiftingToSmaller }&quot;
+		[mode]&#x3D;&quot;sidenavLeftMode&quot;
+		[fixedInViewport]&#x3D;&quot;true&quot;
+		[fixedBottomGap]&#x3D;&quot;0&quot;
+		[opened]&#x3D;&quot;sidenavLeftOpened&quot;
+		(openedChange)&#x3D;&quot;toggleClassesOnOpen($event)&quot;
+		(openedStart)&#x3D;&quot;setClassOnOpenStart()&quot;
+		(closedStart)&#x3D;&quot;setClassOnCloseStart()&quot;
+		[autoFocus]&#x3D;&quot;false&quot;
+	&gt;
+		&lt;ng-container *ngIf&#x3D;&quot;sidenavLeftType &#x3D;&#x3D;&#x3D; &#x27;regular&#x27;&quot;&gt;
+			&lt;ng-content class&#x3D;&quot;regular&quot; select&#x3D;&quot;[stark-app-sidenav-left]&quot;&gt;&lt;/ng-content&gt;
+		&lt;/ng-container&gt;
+		&lt;ng-container class&#x3D;&quot;menu&quot; *ngIf&#x3D;&quot;sidenavLeftType &#x3D;&#x3D;&#x3D; &#x27;menu&#x27;&quot;&gt;
+			&lt;ng-content select&#x3D;&quot;[stark-app-sidenav-menu]&quot;&gt;&lt;/ng-content&gt;
+		&lt;/ng-container&gt;
+	&lt;/mat-sidenav&gt;
+	&lt;mat-sidenav #appSidenavRight class&#x3D;&quot;stark-app-sidenav-right&quot; mode&#x3D;&quot;over&quot; position&#x3D;&quot;end&quot; [fixedInViewport]&#x3D;&quot;true&quot; [fixedBottomGap]&#x3D;&quot;0&quot;&gt;
+		&lt;ng-content select&#x3D;&quot;[stark-app-sidenav-right]&quot;&gt;&lt;/ng-content&gt;
+	&lt;/mat-sidenav&gt;
+	&lt;mat-sidenav-content&gt;
+		&lt;ng-content select&#x3D;&quot;[stark-app-sidenav-content]&quot;&gt;&lt;/ng-content&gt;
+	&lt;/mat-sidenav-content&gt;
+&lt;/mat-sidenav-container&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container #appSidenavContainer>	<mat-sidenav		#appSidenavLeft		class="stark-app-sidenav-left"		[ngClass]="{ \'stark-app-sidenav-menu\': sidenavLeftType === \'menu\', \'stark-app-sidenav-menu-shifting\': isShiftingToSmaller }"		[mode]="sidenavLeftMode"		[fixedInViewport]="true"		[fixedBottomGap]="0"		[opened]="sidenavLeftOpened"		(openedChange)="toggleClassesOnOpen($event)"		(openedStart)="setClassOnOpenStart()"		(closedStart)="setClassOnCloseStart()"		[autoFocus]="false"	>		<ng-container *ngIf="sidenavLeftType === \'regular\'">			<ng-content class="regular" select="[stark-app-sidenav-left]"></ng-content>		</ng-container>		<ng-container class="menu" *ngIf="sidenavLeftType === \'menu\'">			<ng-content select="[stark-app-sidenav-menu]"></ng-content>		</ng-container>	</mat-sidenav>	<mat-sidenav #appSidenavRight class="stark-app-sidenav-right" mode="over" position="end" [fixedInViewport]="true" [fixedBottomGap]="0">		<ng-content select="[stark-app-sidenav-right]"></ng-content>	</mat-sidenav>	<mat-sidenav-content>		<ng-content select="[stark-app-sidenav-content]"></ng-content>	</mat-sidenav-content></mat-sidenav-container></div>'
+    var COMPONENTS = [{'name': 'StarkActionBarComponent', 'selector': 'stark-action-bar'},{'name': 'StarkAlertDialogComponent', 'selector': 'stark-alert-dialog'},{'name': 'StarkAppDataComponent', 'selector': 'stark-app-data'},{'name': 'StarkAppFooterComponent', 'selector': 'stark-app-footer'},{'name': 'StarkAppLogoComponent', 'selector': 'stark-app-logo'},{'name': 'StarkAppLogoutComponent', 'selector': 'stark-app-logout'},{'name': 'StarkAppMenuComponent', 'selector': 'stark-app-menu'},{'name': 'StarkAppMenuItemComponent', 'selector': 'stark-app-menu-item'},{'name': 'StarkAppSidebarComponent', 'selector': 'stark-app-sidebar'},{'name': 'StarkBreadcrumbComponent', 'selector': 'stark-breadcrumb'},{'name': 'StarkCollapsibleComponent', 'selector': 'stark-collapsible'},{'name': 'StarkConfirmDialogComponent', 'selector': 'stark-confirm-dialog'},{'name': 'StarkDatePickerComponent', 'selector': 'stark-date-picker'},{'name': 'StarkDateRangePickerComponent', 'selector': 'stark-date-range-picker'},{'name': 'StarkDateTimePickerComponent', 'selector': 'stark-date-time-picker'},{'name': 'StarkDropdownComponent', 'selector': 'stark-dropdown'},{'name': 'StarkGenericSearchComponent', 'selector': 'stark-generic-search'},{'name': 'StarkLanguageSelectorComponent', 'selector': 'stark-language-selector'},{'name': 'StarkLoginPageComponent', 'selector': 'stark-login-page'},{'name': 'StarkMessagePaneComponent', 'selector': 'stark-message-pane'},{'name': 'StarkMinimapComponent', 'selector': 'stark-minimap'},{'name': 'StarkPaginationComponent', 'selector': 'stark-pagination'},{'name': 'StarkPreloadingPageComponent', 'selector': 'stark-preloading-page'},{'name': 'StarkPrettyPrintComponent', 'selector': 'stark-pretty-print'},{'name': 'StarkProgressIndicatorComponent', 'selector': 'stark-progress-indicator'},{'name': 'StarkPromptDialogComponent', 'selector': 'stark-prompt-dialog'},{'name': 'StarkRouteSearchComponent', 'selector': 'stark-route-search'},{'name': 'StarkSessionCardComponent', 'selector': 'stark-session-card'},{'name': 'StarkSessionExpiredPageComponent', 'selector': 'stark-session-expired-page'},{'name': 'StarkSessionLogoutPageComponent', 'selector': 'stark-session-logout-page'},{'name': 'StarkSessionTimeoutWarningDialogComponent', 'selector': 'session-timeout-warning-dialog'},{'name': 'StarkSliderComponent', 'selector': 'stark-slider'},{'name': 'StarkTableColumnComponent', 'selector': 'stark-table-column'},{'name': 'StarkTableComponent', 'selector': 'stark-table'},{'name': 'StarkTableMultisortDialogComponent', 'selector': 'stark-table-dialog-multisort'},{'name': 'StarkToastNotificationComponent', 'selector': 'stark-toast-notification'}];
+    var DIRECTIVES = [{'name': 'StarkEmailMaskDirective', 'selector': 'directiveName'},{'name': 'StarkNumberMaskDirective', 'selector': 'directiveName'},{'name': 'StarkProgressIndicatorDirective', 'selector': 'directiveName'},{'name': 'StarkRestrictInputDirective', 'selector': 'directiveName'},{'name': 'StarkSvgViewBoxDirective', 'selector': 'directiveName'},{'name': 'StarkTextMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTimestampMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTransformInputDirective', 'selector': '[starkTransformInput]'}];
+    var ACTUAL_COMPONENT = {'name': 'StarkAppSidebarComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkAppSidebarComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
