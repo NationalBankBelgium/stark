@@ -598,7 +598,7 @@ describe("Service: StarkSessionService", () => {
 				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownFinish());
 				expect(sessionService.logout).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledTimes(1);
-				expect(mockRoutingService.navigateTo).toHaveBeenCalledWith(mockSessionConfig.sessionExpiredStateName);
+				expect(mockRoutingService.navigateTo).toHaveBeenCalledWith(<string>mockSessionConfig.sessionExpiredStateName);
 
 				mockIdleService.onTimeout.complete();
 			});
@@ -691,7 +691,7 @@ describe("Service: StarkSessionService", () => {
 			expectedDevAuthHeaders.forEach((value: string, key: string) => (mockHeadersObj = mockHeadersObj.set(key, value)));
 			mockHeadersObj = mockHeadersObj.set(mockCorrelationIdHeaderName, mockCorrelationId);
 
-			expect(mockKeepaliveService.request).toHaveBeenCalledWith(
+			expect(<HttpRequest<void>>(<unknown>mockKeepaliveService.request)).toHaveBeenCalledWith(
 				new HttpRequest<void>("GET", <string>appConfig.keepAliveUrl, { headers: mockHeadersObj })
 			);
 		});
@@ -729,7 +729,7 @@ describe("Service: StarkSessionService", () => {
 			let mockHeadersObj: HttpHeaders = new HttpHeaders();
 			expectedDevAuthHeaders.forEach((value: string, key: string) => (mockHeadersObj = mockHeadersObj.set(key, value)));
 
-			expect(mockKeepaliveService.request).toHaveBeenCalledWith(
+			expect(<HttpRequest<void>>(<unknown>mockKeepaliveService.request)).toHaveBeenCalledWith(
 				new HttpRequest<void>("GET", <string>appConfig.keepAliveUrl, { headers: mockHeadersObj })
 			);
 		});

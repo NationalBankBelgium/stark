@@ -1840,7 +1840,7 @@ describe("Service: StarkRoutingService", () => {
 			const expectedCalls: number = 16 + 12 + 3 + 1;
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(expectedCalls);
 
-			const actions: CallInfo<CallableRoutingAction>[] = mockStore.dispatch.calls.all();
+			const actions: ReadonlyArray<CallInfo<CallableRoutingAction>> = mockStore.dispatch.calls.all();
 			const actionIndex: number = 16 + 12;
 
 			for (let i = 0; i < actions.length; i++) {
