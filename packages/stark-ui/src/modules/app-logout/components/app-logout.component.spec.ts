@@ -92,7 +92,7 @@ describe("AppLogoutComponent", () => {
 			component.logout();
 			expect(component.sessionService.logout).toHaveBeenCalledTimes(1);
 			expect(component.routingService.navigateTo).toHaveBeenCalledTimes(1);
-			expect(component.routingService.navigateTo).toHaveBeenCalledWith(mockStarkSessionConfig.sessionLogoutStateName);
+			expect(component.routingService.navigateTo).toHaveBeenCalledWith(<string>mockStarkSessionConfig.sessionLogoutStateName);
 		});
 
 		it("should log out the user and navigate to starkSessionLogoutStateName", () => {

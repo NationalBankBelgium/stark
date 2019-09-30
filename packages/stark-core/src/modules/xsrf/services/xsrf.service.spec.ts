@@ -255,7 +255,7 @@ describe("Service: StarkXSRFService", () => {
 			xsrfService.storeXSRFToken();
 
 			expect(xsrfService.setXSRFCookie).toHaveBeenCalledTimes(1);
-			expect(xsrfService.setXSRFCookie).toHaveBeenCalledWith(xsrfService.getCurrentToken());
+			expect(xsrfService.setXSRFCookie).toHaveBeenCalledWith(<string>xsrfService.getCurrentToken());
 			expect(mockDocument.cookie.length).toBeGreaterThan(0);
 			const cookieOptions: any[] = mockDocument.cookie.split(";");
 			expect(cookieOptions.length).toBe(3);
@@ -273,7 +273,7 @@ describe("Service: StarkXSRFService", () => {
 			tick();
 
 			expect(httpMock.get).toHaveBeenCalledTimes(appConfig.backends.size);
-			const httpCalls: CallInfo<HttpClientGet>[] = httpMock.get.calls.all();
+			const httpCalls: ReadonlyArray<CallInfo<HttpClientGet>> = httpMock.get.calls.all();
 			let callIndex = 0;
 
 			appConfig.backends.forEach((backendConfig: StarkBackend) => {
@@ -302,7 +302,7 @@ describe("Service: StarkXSRFService", () => {
 			tick();
 
 			expect(httpMock.get).toHaveBeenCalledTimes(appConfig.backends.size);
-			const httpCalls: CallInfo<HttpClientGet>[] = httpMock.get.calls.all();
+			const httpCalls: ReadonlyArray<CallInfo<HttpClientGet>> = httpMock.get.calls.all();
 			let httpCallIdx = 0;
 
 			appConfig.backends.forEach((backendConfig: StarkBackend) => {
@@ -312,7 +312,7 @@ describe("Service: StarkXSRFService", () => {
 			});
 
 			expect(mockLogger.error).toHaveBeenCalledTimes(failingBackends.length);
-			const logErrorCalls: CallInfo<HttpClientGet>[] = mockLogger.error.calls.all();
+			const logErrorCalls: ReadonlyArray<CallInfo<HttpClientGet>> = mockLogger.error.calls.all();
 			let logErrorCallIdx = 0;
 
 			for (const failingBackend of failingBackends) {

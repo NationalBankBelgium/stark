@@ -165,7 +165,7 @@ describe("StarkRBACAuthorizationService", () => {
 			expect(authorizationService.isNavigationAuthorized).toHaveBeenCalledTimes(1);
 			expect(authorizationService.isNavigationAuthorized).toHaveBeenCalledWith(mockPermissions);
 			expect(authorizationService.handleUnauthorizedNavigation).toHaveBeenCalledTimes(1);
-			expect(authorizationService.handleUnauthorizedNavigation).toHaveBeenCalledWith(mockPermissions, mockTransition);
+			expect(authorizationService.handleUnauthorizedNavigation).toHaveBeenCalledWith(mockPermissions, <Transition>mockTransition);
 		});
 	});
 
@@ -293,14 +293,14 @@ describe("StarkRBACAuthorizationService", () => {
 
 			expect(result).toBe(true);
 			expect(authorizationService.hasAnyRole).toHaveBeenCalledTimes(1);
-			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(mockPermissions.only);
+			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(<string[]>mockPermissions.only);
 
 			(<Spy>authorizationService.hasAnyRole).calls.reset();
 			result = authorizationService.isNavigationAuthorized(mockPermissions);
 
 			expect(result).toBe(false);
 			expect(authorizationService.hasAnyRole).toHaveBeenCalledTimes(1);
-			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(mockPermissions.only);
+			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(<string[]>mockPermissions.only);
 		});
 
 		it("should call hasAnyRole() with the permissions 'except' if they are defined and return the INVERTED value that is returned", () => {
@@ -313,14 +313,14 @@ describe("StarkRBACAuthorizationService", () => {
 
 			expect(result).toBe(false); // inverted value of what hasAnyRole returns => 'except'
 			expect(authorizationService.hasAnyRole).toHaveBeenCalledTimes(1);
-			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(mockPermissions.except);
+			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(<string[]>mockPermissions.except);
 
 			(<Spy>authorizationService.hasAnyRole).calls.reset();
 			result = authorizationService.isNavigationAuthorized(mockPermissions);
 
 			expect(result).toBe(true); // inverted value of what hasAnyRole returns => 'except'
 			expect(authorizationService.hasAnyRole).toHaveBeenCalledTimes(1);
-			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(mockPermissions.except);
+			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(<string[]>mockPermissions.except);
 		});
 
 		it("should give preference to permissions 'only' over 'except' when both are defined and call hasAnyRole() with those", () => {
@@ -334,14 +334,14 @@ describe("StarkRBACAuthorizationService", () => {
 
 			expect(result).toBe(true);
 			expect(authorizationService.hasAnyRole).toHaveBeenCalledTimes(1);
-			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(mockPermissions.only);
+			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(<string[]>mockPermissions.only);
 
 			(<Spy>authorizationService.hasAnyRole).calls.reset();
 			result = authorizationService.isNavigationAuthorized(mockPermissions);
 
 			expect(result).toBe(false);
 			expect(authorizationService.hasAnyRole).toHaveBeenCalledTimes(1);
-			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(mockPermissions.only);
+			expect(authorizationService.hasAnyRole).toHaveBeenCalledWith(<string[]>mockPermissions.only);
 		});
 
 		it("should return true without calling hasAnyRole() when the permissions object has invalid 'only' nor 'except' or is undefined", () => {
@@ -391,7 +391,10 @@ describe("StarkRBACAuthorizationService", () => {
 
 			expect(result).toBe(<any>"dummy redirection return value");
 			expect(authorizationService.redirectNavigation).toHaveBeenCalledTimes(1);
-			expect(authorizationService.redirectNavigation).toHaveBeenCalledWith(mockPermissions.redirectTo, mockTransition);
+			expect(authorizationService.redirectNavigation).toHaveBeenCalledWith(
+				<StarkStateRedirection>mockPermissions.redirectTo,
+				<Transition>mockTransition
+			);
 			expect(mockLogger.warn).toHaveBeenCalledTimes(1);
 			expect(mockLogger.warn).toHaveBeenCalledWith(starkUnauthorizedUserError);
 			expect(mockStore.dispatch).not.toHaveBeenCalled();
@@ -497,7 +500,7 @@ describe("StarkRBACAuthorizationService", () => {
 			expect(result["redirectionStateParams"]).toBe(mockRedirectToObj.params);
 			expect(result["redirectionStateParamsReplaced"]).toBe(true);
 			expect(mockRedirectToFn).toHaveBeenCalledTimes(1);
-			expect(mockRedirectToFn).toHaveBeenCalledWith(mockTransition);
+			expect(mockRedirectToFn).toHaveBeenCalledWith(<Transition>mockTransition);
 			expect(mockTransition.targetState).toHaveBeenCalledTimes(1);
 			expect(targetStateObj.withState).toHaveBeenCalledTimes(1);
 			expect(targetStateObj.withState).toHaveBeenCalledWith(mockRedirectToObj.stateName);

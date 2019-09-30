@@ -193,7 +193,8 @@ describe("MinimapComponent", () => {
 					({ label }: StarkMinimapItemProperties) => label === text
 				);
 				labelElement.click();
-				expect(hostComponent.onShowHideItem).toHaveBeenCalledWith(expectedItem);
+				expect(expectedItem).toBeDefined();
+				expect(hostComponent.onShowHideItem).toHaveBeenCalledWith(<StarkMinimapItemProperties>expectedItem);
 			});
 
 			expect(hostComponent.onShowHideItem).toHaveBeenCalledTimes(items.length);

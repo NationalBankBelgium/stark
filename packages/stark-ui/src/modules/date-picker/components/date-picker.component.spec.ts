@@ -61,7 +61,7 @@ class TestHostComponent {
 	 * To be able to test the 'Changes' output
 	 * @param value: Date.
 	 */
-	public onValueChange(value: Date): void {
+	public onValueChange(value: Date | undefined): void {
 		this.value = value;
 	}
 }
