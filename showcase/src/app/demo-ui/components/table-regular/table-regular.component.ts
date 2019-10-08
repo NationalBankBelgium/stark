@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from "@angular/core";
+import { Component, HostBinding, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "@nationalbankbelgium/stark-ui";
 
@@ -34,12 +34,12 @@ const DUMMY_DATA: object[] = [
 
 @Component({
 	selector: "showcase-table-regular",
-	templateUrl: "./table-regular.component.html",
-	styleUrls: ["./table-regular.component.scss"],
-	/* tslint:disable-next-line:use-view-encapsulation */
-	encapsulation: ViewEncapsulation.None // Important
+	templateUrl: "./table-regular.component.html"
 })
 export class TableRegularComponent {
+	@HostBinding("class")
+	public class = "showcase-table-regular";
+
 	public data: object[] = DUMMY_DATA;
 
 	public columns: StarkTableColumnProperties[] = [

@@ -2,7 +2,7 @@
 .showcase-table-regular {
   .shadowed {
     .header {
-      padding: 10px 15px;
+      @include mat-elevation(2);
     }
   }
 }
