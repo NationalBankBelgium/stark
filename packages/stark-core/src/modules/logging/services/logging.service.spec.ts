@@ -11,6 +11,7 @@ import { StarkLoggingServiceImpl } from "./logging.service";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../../logging/entities";
 import { StarkBackend } from "../../http/entities/backend";
+import { StarkHttpHeaders } from "../../http/constants";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
 import { MockStarkXsrfService } from "@nationalbankbelgium/stark-core/testing";
@@ -28,7 +29,7 @@ describe("Service: StarkLoggingService", () => {
 		authenticationType: 1,
 		devAuthenticationEnabled: true,
 		devAuthenticationRolePrefix: "",
-		loginResource: "logging",
+		loginResource: "some resource name",
 		token: ""
 	};
 	const dummyObject: object = {
@@ -38,12 +39,14 @@ describe("Service: StarkLoggingService", () => {
 	};
 	let mockStarkLogging: StarkLogging;
 	const loggingFlushPersistSize = 11;
+	const loggingFlushResourceName = "dummy-logging";
 
 	beforeEach(() => {
 		mockStore = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("store", ["dispatch", "pipe"]);
 		mockInjectorService = jasmine.createSpyObj<Injector>("injector,", ["get"]);
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.debugLoggingEnabled = true;
+		appConfig.loggingFlushResourceName = loggingFlushResourceName;
 		appConfig.loggingFlushDisabled = false;
 		appConfig.loggingFlushApplicationId = "TEST";
 		appConfig.loggingFlushPersistSize = loggingFlushPersistSize;
@@ -284,14 +287,57 @@ describe("Service: StarkLoggingService", () => {
 
 			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.returnValue(of(undefined));
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
+
 			loggingService.persistLogMessagesHelper();
+
 			expect(sendRequestSpy).toHaveBeenCalledTimes(1);
-			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(`${loggingBackend.url}/${loggingBackend.loginResource}`);
+			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(`${loggingBackend.url}/${appConfig.loggingFlushResourceName}`);
 			expect(sendRequestSpy.calls.mostRecent().args[1]).toBe(data);
 			expect(sendRequestSpy.calls.mostRecent().args[2]).toBe(true);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkFlushLogMessages(loggingFlushPersistSize));
+		});
+
+		it("should send the XMLHttpRequest to the correct URL and with the correct data and headers", () => {
+			const mockOpen = jasmine.createSpy("openSpy");
+			const mockSend = jasmine.createSpy("sendSpy");
+			const mockSetRequestHeader = jasmine.createSpy("setRequestHeaderSpy");
+
+			class MockXHR {
+				public constructor() {
+					return {
+						open: mockOpen,
+						setRequestHeader: mockSetRequestHeader,
+						send: mockSend,
+						readyState: XMLHttpRequest.OPENED,
+						status: ""
+					};
+				}
+			}
+
+			const originalXMLHttpRequest = global["XMLHttpRequest"];
+			global["XMLHttpRequest"] = MockXHR; // override global XMLHttpRequest object
+
+			const mockFlushUrl = `${loggingBackend.url}/${appConfig.loggingFlushResourceName}`;
+			const mockSerializedData = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
+
+			// restore the original call only for this test
+			loggingService.sendRequest = loggingService.originalSendRequest;
+			loggingService.persistLogMessagesHelper(true);
+
+			expect(mockOpen).toHaveBeenCalledTimes(1);
+			expect(mockOpen).toHaveBeenCalledWith("POST", mockFlushUrl, true);
+			expect(mockSend).toHaveBeenCalledTimes(1);
+			expect(mockSend).toHaveBeenCalledWith(mockSerializedData);
+			expect(mockSetRequestHeader).toHaveBeenCalledTimes(2);
+			const allSetRequestHeaderCalls = mockSetRequestHeader.calls.all();
+			expect([allSetRequestHeaderCalls[0].args, allSetRequestHeaderCalls[1].args]).toEqual([
+				[StarkHttpHeaders.CONTENT_TYPE, "application/json"],
+				[loggingService.correlationIdHttpHeaderName, loggingService.correlationId]
+			]);
+
+			global["XMLHttpRequest"] = originalXMLHttpRequest; // restore original global XMLHttpRequest object
 		});
 
 		it("should fail to persist messages when the back-end fails", () => {
@@ -300,9 +346,11 @@ describe("Service: StarkLoggingService", () => {
 			const sendRequestSpy: Spy = spyOn(loggingService, "sendRequest").and.returnValue(throwError("ko"));
 			const errorSpy: Spy = spyOn(loggingService, "error");
 			const data: string = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
+
 			loggingService.persistLogMessagesHelper();
+
 			expect(sendRequestSpy).toHaveBeenCalledTimes(1);
-			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(`${loggingBackend.url}/${loggingBackend.loginResource}`);
+			expect(sendRequestSpy.calls.mostRecent().args[0]).toBe(`${loggingBackend.url}/${appConfig.loggingFlushResourceName}`);
 			expect(sendRequestSpy.calls.mostRecent().args[1]).toBe(data);
 			expect(sendRequestSpy.calls.mostRecent().args[2]).toBe(true);
 			expect(errorSpy).toHaveBeenCalledTimes(1);
@@ -312,6 +360,8 @@ describe("Service: StarkLoggingService", () => {
 });
 
 class LoggingServiceHelper extends StarkLoggingServiceImpl {
+	public originalSendRequest = super["sendRequest"];
+
 	public constructor(store: SpyObj<Store<StarkCoreApplicationState>>, appConfig: StarkApplicationConfig, injector: Injector) {
 		super(<Store<StarkCoreApplicationState>>(<unknown>store), appConfig, injector);
 	}
@@ -329,7 +379,7 @@ class LoggingServiceHelper extends StarkLoggingServiceImpl {
 	}
 
 	// override parent's implementation to prevent actual HTTP request to be sent!
-	public sendRequest(): Observable<void> {
+	public sendRequest(..._args: any[]): Observable<void> {
 		/* dummy function to be mocked */
 		return of(undefined);
 	}
