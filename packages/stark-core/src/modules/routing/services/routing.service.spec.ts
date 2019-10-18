@@ -348,8 +348,7 @@ describe("Service: StarkRoutingService", () => {
 
 	const routerModule: UIRouterModule = UIRouterModule.forRoot({
 		useHash: true,
-		states: mockStates,
-		deferIntercept: true // FIXME: this option shouldn't be used but is needed for Chrome and HeadlessChrome otherwise it doesn't work. Why?
+		states: mockStates
 	});
 
 	beforeEach(() => {
