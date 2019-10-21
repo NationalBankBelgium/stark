@@ -134,11 +134,11 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	protected constructLogMessage(messageType: StarkLogMessageType, ...args: any[]): StarkLogMessage {
 		const parsedArgs: string[] = args.map((arg: any) => this.parseArg(arg));
 		const parsedMessage: string = parsedArgs.join(" | ");
-		return new StarkLogMessageImpl(messageType, parsedMessage, this._correlationId, undefined);
+		return new StarkLogMessageImpl(messageType, parsedMessage, this.correlationId, undefined);
 	}
 
 	protected constructErrorLogMessage(message: string, error: StarkError): StarkLogMessage {
-		return new StarkLogMessageImpl(StarkLogMessageType.ERROR, message, this._correlationId, error);
+		return new StarkLogMessageImpl(StarkLogMessageType.ERROR, message, this.correlationId, error);
 	}
 
 	protected persistLogMessages(isForced: boolean = false): void {
@@ -207,6 +207,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 				this.xsrfService.configureXHR(xhr);
 			}
 			xhr.setRequestHeader(StarkHttpHeaders.CONTENT_TYPE, "application/json");
+			xhr.setRequestHeader(this.correlationIdHttpHeaderName, this.correlationId);
 			xhr.send(serializedData);
 		} catch (e) {
 			httpRequest$.error(e);
