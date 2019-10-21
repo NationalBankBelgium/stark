@@ -199,7 +199,7 @@ First, clone the project:
 
 ```bash
 # --depth 1 removes all but one .git commit history
-git clone --depth 1 https://github.com/NationalBankBelgum/stark.git
+git clone --depth 1 https://github.com/NationalBankBelgium/stark.git
 ```
 
 Then go to the showcase folder (`cd showcase`) and install all dependencies using: `npm install`.
