@@ -18,6 +18,7 @@ const karmaTypescriptBundlerAlias = {
 	"@ng-idle/keepalive": "../stark-core/node_modules/@ng-idle/keepalive/bundles/keepalive.umd.js",
 	"@ngrx/store": "../stark-core/node_modules/@ngrx/store/bundles/store.umd.js",
 	"@ngrx/effects": "../stark-core/node_modules/@ngrx/effects/bundles/effects.umd.js",
+	"@ngrx/effects/testing": "../stark-core/node_modules/@ngrx/effects/bundles/effects-testing.umd.js",
 	"@ngx-translate/core": "../stark-core/node_modules/@ngx-translate/core/bundles/ngx-translate-core.umd.js",
 	"@uirouter/angular": "../stark-core/node_modules/@uirouter/angular/_bundles/ui-router-ng2.js",
 	"@uirouter/core": "../stark-core/node_modules/@uirouter/core/lib/index.js",
