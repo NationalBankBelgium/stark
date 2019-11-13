@@ -36,6 +36,9 @@ const rawKarmaConfig = {
 				"protractor", // not needed for unit testing
 				"selenium-webdriver" // not needed for unit testing
 			],
+			// don't parse "parser-typescript" to avoid "UncaughtException" in Karma server thrown by "karma-typescript-es6-transform"
+			// see https://github.com/NationalBankBelgium/stark/issues/1434
+			noParse: ["prettier/parser-typescript"],
 			resolve: {},
 			transforms: [
 				//see https://github.com/monounity/karma-typescript/tree/master/packages/karma-typescript-angular2-transform
