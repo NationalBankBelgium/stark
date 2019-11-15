@@ -8,7 +8,6 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -18,7 +17,7 @@ import { By, HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAction, StarkActionBarModule } from "@nationalbankbelgium/stark-ui";
+import { StarkAction, StarkActionBarComponent } from "@nationalbankbelgium/stark-ui";
 import { Subject } from "rxjs";
 import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.component";
 import { StarkTableComponent } from "./table.component";
@@ -120,14 +119,11 @@ describe("TableComponent", () => {
 				MatPaginatorModule,
 				MatSelectModule,
 				MatTableModule,
-				MatTooltipModule,
-				MatIconModule,
-
-				// Stark
-				StarkActionBarModule
+				MatTooltipModule
 			],
 			declarations: [
 				TestHostComponent,
+				StarkActionBarComponent,
 				StarkPaginationComponent,
 				StarkTableComponent,
 				StarkTableColumnComponent,
