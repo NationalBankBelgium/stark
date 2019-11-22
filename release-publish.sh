@@ -20,7 +20,7 @@ IFS=$'\r\n' GLOBIGNORE='*' command eval 'ALL_PACKAGES=($(cat ./modules.txt))'
 IFS=$OLD_IFS # restore IFS
 
 EXPECTED_REPO_SLUG="NationalBankBelgium/stark"
-EXPECTED_NODE_VERSION="8"
+EXPECTED_NODE_VERSION="10"
 
 #----------------------------------------------
 # Uncomment block below to test locally
@@ -31,7 +31,7 @@ EXPECTED_NODE_VERSION="8"
 #NPM_TOKEN="dummy"
 #TRAVIS=true
 #TRAVIS_REPO_SLUG="NationalBankBelgium/stark"
-#TRAVIS_NODE_VERSION="8"
+#TRAVIS_NODE_VERSION="10"
 
 # For normal builds:
 #TRAVIS_EVENT_TYPE="pull_request"

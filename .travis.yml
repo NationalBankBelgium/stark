@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-    - "8"
     - "10"
+    - "12"
 
 dist: trusty
 sudo: false # better for performance
@@ -15,7 +15,7 @@ before_install:
     - AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
     - echo $AUTHOR_NAME
     - export TZ=Europe/Brussels
-    - npm i -g npm@6.4.1
+    - npm i -g npm@6.9.2
     - NODE_VERSION="$(node -v)"
     - echo $NODE_VERSION
     # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
