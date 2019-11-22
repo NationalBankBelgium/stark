@@ -335,6 +335,7 @@
         "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
         "WITH_CUSTOM_STYLING": "Table with custom styling",
         "WITH_FIXED_ACTIONS": "Table with fixed row actions",
+        "WITH_CUSTOM_ITEM_PER_PAGE": "Table with custom number of items per page",
         "TITLE": "Table"
       },
       "TOAST": {

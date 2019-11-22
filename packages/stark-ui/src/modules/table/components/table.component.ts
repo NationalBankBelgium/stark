@@ -152,6 +152,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public data: object[] = [];
 
 	/**
+	 * Data that will be display inside your table.
+	 */
+	@Input()
+	public mode: "default" | "compact" = "compact";
+
+	/**
 	 * Object which contains filtering information for the table.
 	 */
 	@Input()

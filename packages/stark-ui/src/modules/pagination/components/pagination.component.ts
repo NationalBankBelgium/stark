@@ -298,10 +298,11 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	/**
 	 * Set page to first then call onChangePagination function.
 	 */
-	public onChangeItemsPerPage(itemsPerPage: number): void {
-		if (this.paginationConfig.itemsPerPage !== itemsPerPage) {
+	public onChangeItemsPerPage(itemsPerPage: number | string): void {
+		const newItemsPerPage: number = typeof itemsPerPage === "string" ? parseInt(itemsPerPage, 10) : itemsPerPage;
+		if (this.paginationConfig.itemsPerPage !== newItemsPerPage) {
 			this.paginationConfig.page = 1;
-			this.paginationConfig.itemsPerPage = itemsPerPage;
+			this.paginationConfig.itemsPerPage = newItemsPerPage;
 			this.onChangePagination();
 		}
 	}

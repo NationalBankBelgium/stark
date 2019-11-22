@@ -73,7 +73,8 @@ import {
 	TableWithFixedActionsComponent,
 	TableWithFixedHeaderComponent,
 	TableWithSelectionComponent,
-	TableWithTranscludedActionBarComponent
+	TableWithTranscludedActionBarComponent,
+	TableWithCustomItemsPerPageComponent
 } from "./components";
 
 @NgModule({
@@ -146,6 +147,7 @@ import {
 		TableWithFixedHeaderComponent,
 		TableWithCustomStylingComponent,
 		TableWithFixedActionsComponent,
+		TableWithCustomItemsPerPageComponent,
 		DemoToastPageComponent,
 		DemoGenericSearchFormComponent,
 		DemoTransformInputDirectivePageComponent

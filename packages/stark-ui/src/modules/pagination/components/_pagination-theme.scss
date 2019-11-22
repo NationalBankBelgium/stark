@@ -3,7 +3,8 @@
 
 @media #{$tablet-query} {
   .stark-pagination > div {
-    .pagination-enter-page {
+    .pagination-enter-page,
+    .pagination-items-per-page {
       & input {
         border: solid 1px $divider-color;
       }

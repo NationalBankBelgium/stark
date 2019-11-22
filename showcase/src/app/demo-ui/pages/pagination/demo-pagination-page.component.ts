@@ -6,7 +6,7 @@ type PaginationConfigType = "simple" | "extended" | "advanced" | "compact";
 
 @Component({
 	selector: "demo-pagination",
-	templateUrl: "./demo-pagination-page.component.html",
+	templateUrl: "./demo-pagination-page.component.html"
 })
 export class DemoPaginationPageComponent {
 	public paginationSimpleConfig: StarkPaginationConfig = {
@@ -32,7 +32,7 @@ export class DemoPaginationPageComponent {
 		itemsPerPage: 4,
 		itemsPerPageOptions: [2, 4, 6, 8, 10, 20],
 		itemsPerPageIsPresent: true,
-		pageInputIsPresent: false,
+		pageInputIsPresent: true,
 		pageNavIsPresent: true
 	};
 	public paginateEventAdvanced = "";

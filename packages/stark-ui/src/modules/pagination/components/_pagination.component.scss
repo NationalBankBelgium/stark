@@ -35,7 +35,8 @@
     font-weight: mat-font-weight($typography-config, caption);
     line-height: mat-line-height($typography-config, caption);
 
-    .pagination-enter-page {
+    .pagination-enter-page,
+    .pagination-items-per-page {
       align-items: center;
       display: flex;
       margin-right: 40px;

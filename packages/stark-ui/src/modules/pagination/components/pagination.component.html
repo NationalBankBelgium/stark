@@ -51,6 +51,7 @@
 	</div>
 
 	<div class="pagination-items-per-page" *ngIf="paginationConfig.itemsPerPageIsPresent !== false">
+		<input [value]="paginationConfig.itemsPerPage" (keyup.enter)="onChangeItemsPerPage($event.target.value)" />
 		<stark-dropdown
 			[options]="paginationConfig.itemsPerPageOptions"
 			[value]="paginationConfig.itemsPerPage"

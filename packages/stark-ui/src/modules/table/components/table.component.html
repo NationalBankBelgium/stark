@@ -7,7 +7,7 @@
 		<span translate>STARK.TABLE.ITEMS_FOUND</span>
 	</div>
 
-	<stark-pagination htmlSuffixId="{{ htmlId }}-pagination" [paginationConfig]="paginationConfig" mode="compact"></stark-pagination>
+	<stark-pagination htmlSuffixId="{{ htmlId }}-pagination" [paginationConfig]="paginationConfig" [mode]="mode"></stark-pagination>
 
 	<button *ngIf="isMultiSortEnabled" (click)="openMultiSortDialog()" mat-icon-button>
 		<mat-icon class="stark-small-icon" [matTooltip]="'STARK.TABLE.MULTI_COLUMN_SORTING' | translate" svgIcon="sort"></mat-icon>
