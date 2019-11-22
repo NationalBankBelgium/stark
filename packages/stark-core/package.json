@@ -37,7 +37,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@types/jasmine": "^3.3.12",
+    "@types/jasmine": "^3.5.0",
     "@types/node": "^8.10.37"
   },
   "peerDependencies": {
