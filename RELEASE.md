@@ -73,7 +73,7 @@ That script makes some checks then, if all succeed it publishes the API docs of 
 
 Checks that are performed:
 
--   node version: should be "8"
+-   node version: should be "10"
 -   TRAVIS_REPO_SLUG should be "NationalBankBelgium/stark"
 -   TRAVIS_TAG should be defined and not empty (this is the case when Travis builds for a tag)
 -   TRAVIS_PULL_REQUEST should be false
@@ -127,7 +127,7 @@ That script makes some checks then, if all succeed, it publishes the different p
 
 Checks that are performed:
 
--   node version: should be "8"
+-   node version: should be "10"
 -   NPM_TOKEN environment variable should be defined
 -   TRAVIS_REPO_SLUG should be "NationalBankBelgium/stark"
 -   TRAVIS_TAG should be defined and not empty (this is the case when Travis builds for a tag)
