@@ -100,4 +100,15 @@
 			</button>
 		</li>
 	</ul>
+
+	<div class="pagination-items-per-page" *ngIf="!!paginationConfig.itemsPerPageIsPresent">
+		<stark-dropdown
+			[options]="paginationConfig.itemsPerPageOptions"
+			[value]="paginationConfig.itemsPerPage"
+			placeholder=""
+			(selectionChanged)="onChangeItemsPerPage($event)"
+			dropdownId="items-per-page-{{ htmlSuffixId }}"
+			dropdownName="items-per-page-{{ htmlSuffixId }}"
+		></stark-dropdown>
+	</div>
 </div>

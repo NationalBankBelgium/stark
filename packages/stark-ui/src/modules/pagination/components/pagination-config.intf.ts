@@ -22,7 +22,7 @@ export interface StarkPaginationConfig {
 
 	/**
 	 * If false, then itemsPerPage dropdown will not be present.
-	 * Default: true
+	 * Default: true on "default" mode, false on "compact" mode
 	 */
 	itemsPerPageIsPresent?: boolean;
 

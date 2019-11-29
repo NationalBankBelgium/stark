@@ -169,12 +169,18 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 			return { totalItems: 0 };
 		}
 
+		let defaultItemsPerPageIsPresent: StarkPaginationConfig["itemsPerPageIsPresent"];
+
+		if (typeof config.itemsPerPageIsPresent === "undefined") {
+			defaultItemsPerPageIsPresent = this.mode !== "compact"; // true on "default" mode, false on "compact" mode
+		}
+
 		return {
 			itemsPerPageOptions: config.itemsPerPageOptions || [5, 10, 15],
 			itemsPerPage: config.itemsPerPage || (config.itemsPerPageOptions ? config.itemsPerPageOptions[0] : 5),
 			page: config.page || 1,
 			isExtended: config.isExtended !== undefined ? config.isExtended : false,
-			itemsPerPageIsPresent: config.itemsPerPageIsPresent !== undefined ? config.itemsPerPageIsPresent : true,
+			itemsPerPageIsPresent: config.itemsPerPageIsPresent !== undefined ? config.itemsPerPageIsPresent : defaultItemsPerPageIsPresent,
 			pageNavIsPresent: config.pageNavIsPresent !== undefined ? config.pageNavIsPresent : true,
 			pageInputIsPresent: config.pageInputIsPresent !== undefined ? config.pageInputIsPresent : true,
 			totalItems: config.totalItems !== undefined ? config.totalItems : 0
