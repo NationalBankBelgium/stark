@@ -21,6 +21,7 @@ import { distinctUntilChanged } from "rxjs/operators";
 import isEqual from "lodash-es/isEqual";
 import get from "lodash-es/get";
 import {
+	StarkColumnCellClickedOutput,
 	StarkColumnFilterChangedOutput,
 	StarkColumnSortChangedOutput,
 	StarkTableColumnFilter,
@@ -185,6 +186,12 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public stickyEnd = false;
 
 	/**
+	 * Output that will emit a StarkColumnCellClickedOutput whenever a cell in the column is clicked
+	 */
+	@Output()
+	public readonly cellClicked = new EventEmitter<StarkColumnCellClickedOutput>();
+
+	/**
 	 * Output that will emit a specific column whenever its filter value has changed
 	 */
 	@Output()
@@ -262,6 +269,23 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 
 		// ensure we always return undefined instead of null
 		return rawValue !== null ? rawValue : undefined;
+	}
+
+	/**
+	 * Called whenever a cell of the column is clicked
+	 * @param $event - The handled event
+	 * @param row - The row item
+	 */
+	public onCellClick($event: Event, row: object): void {
+		if (this.cellClicked.observers.length > 0) {
+			$event.stopPropagation();
+
+			this.cellClicked.emit({
+				value: this.getRawValue(row),
+				row: row,
+				columnName: this.name
+			});
+		}
 	}
 
 	/**

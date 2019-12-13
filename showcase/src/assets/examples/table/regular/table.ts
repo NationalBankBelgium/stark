@@ -30,11 +30,24 @@ export class TableRegularComponent {
 			cellFormatter: (value: { label: string }): string => "~" + value.label,
 			compareFn: (n1: { value: number }, n2: { value: number }): number => n1.value - n2.value
 		},
-		{ name: "description", label: "Description" },
+		{
+			name: "description",
+			label: "Description",
+			onClickCallback: (value: any, row?: object, columnName?: string): void => {
+				this.logger.debug("CELL CLICKED - value:", value, ", row: ", row, ", columnName: ", columnName);
+			}
+		},
 		{ name: "extra", label: "Extra info", isFilterable: false, isSortable: false, isVisible: false }
 	];
 
-	public filter: StarkTableFilter = { globalFilterPresent: true, columns: [] };
+	public filter = {
+		globalFilterPresent: true,
+		columns: [
+			{ columnName: "id", filterPosition: "below" },
+			{ columnName: "title", filterPosition: "above" }
+		],
+		filterPosition: "below"
+	};
 
 	public order: string[] = ["title", "-description", "id"];
 
