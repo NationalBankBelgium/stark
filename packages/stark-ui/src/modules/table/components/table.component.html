@@ -129,7 +129,7 @@
 		<ng-content select=".stark-table-columns"></ng-content>
 
 		<stark-table-column
-			*ngIf="tableRowActions && tableRowActions.actions"
+			*ngIf="tableRowActions && tableRowActions.actions && tableRowActions.actions.length"
 			[sortable]="false"
 			[name]="'STARK.TABLE.ACTIONS' | translate"
 			[stickyEnd]="tableRowActions.isFixed"
