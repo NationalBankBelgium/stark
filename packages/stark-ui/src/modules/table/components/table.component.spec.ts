@@ -1038,6 +1038,45 @@ describe("TableComponent", () => {
 		});
 	});
 
+	describe("column actions", () => {
+		const actionsColumnSelector = "table thead tr th.mat-column-STARK-TABLE-ACTIONS";
+
+		it("should display the 'actions' column when 'tableRowActions' contains some actions", () => {
+			hostComponent.tableRowActions = {
+				actions: [
+					{
+						id: "edit-item",
+						label: "STARK.ICONS.EDIT_ITEM",
+						icon: "pencil",
+						actionCall: (): void => undefined,
+						isEnabled: true
+					}
+				]
+			};
+			hostFixture.detectChanges();
+			component.ngAfterViewInit();
+
+			const actionsColumnElement = hostFixture.nativeElement.querySelector(actionsColumnSelector);
+			expect(actionsColumnElement).not.toBeNull();
+		});
+
+		it("should NOT display the 'actions' column when 'tableRowActions' input does NOT contain any action", () => {
+			hostComponent.tableRowActions = { actions: [] };
+			hostFixture.detectChanges();
+
+			const actionsColumnElement = hostFixture.nativeElement.querySelector(actionsColumnSelector);
+			expect(actionsColumnElement).toBeNull();
+		});
+
+		it("should NOT display the 'actions' column when 'tableRowActions' input is NOT defined", () => {
+			hostComponent.tableRowActions = undefined;
+			hostFixture.detectChanges();
+
+			const actionsColumnElement = hostFixture.nativeElement.querySelector(actionsColumnSelector);
+			expect(actionsColumnElement).toBeNull();
+		});
+	});
+
 	describe("column visibility", () => {
 		const columns: StarkTableColumnProperties[] = [{ name: "a" }, { name: "b", isVisible: false }, { name: "c", isVisible: true }];
 		const data: any = [{ a: 1, b: "b1", c: "c1" }, { a: 2, b: "b2", c: "c2" }, { a: 3, b: "b3", c: "c3" }];
