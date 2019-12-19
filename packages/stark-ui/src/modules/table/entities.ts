@@ -1,3 +1,4 @@
+export * from "./entities/column-cell-clicked-output.intf";
 export * from "./entities/column-priority.intf";
 export * from "./entities/column-properties.intf";
 export * from "./entities/column-sort-changed-output.intf";

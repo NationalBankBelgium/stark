@@ -34,7 +34,7 @@
 	</th>
 	<!-- the column template defined by the user will be displayed here -->
 	<!-- and it will receive the right context containing the displayedValue and the row data-->
-	<td mat-cell *matCellDef="let rowItem" [ngClass]="getCellClassNames(rowItem)">
+	<td mat-cell *matCellDef="let rowItem" [ngClass]="getCellClassNames(rowItem)" (click)="onCellClick($event, rowItem)">
 		<ng-container
 			*ngTemplateOutlet="columnTemplate; context: { $implicit: { rowData: rowItem, displayedValue: getDisplayedValue(rowItem) } }"
 		></ng-container>

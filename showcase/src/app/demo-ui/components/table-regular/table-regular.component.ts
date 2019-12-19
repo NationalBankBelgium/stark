@@ -50,7 +50,13 @@ export class TableRegularComponent {
 			cellFormatter: (value: { label: string }): string => "~" + value.label,
 			compareFn: (n1: { value: number }, n2: { value: number }): number => n1.value - n2.value
 		},
-		{ name: "description", label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION" },
+		{
+			name: "description",
+			label: "SHOWCASE.DEMO.TABLE.LABELS.DESCRIPTION",
+			onClickCallback: (value: any, row?: object, columnName?: string): void => {
+				this.logger.debug("CELL CLICKED - value:", value, ", row: ", row, ", columnName: ", columnName);
+			}
+		},
 		{
 			name: "extra",
 			label: "SHOWCASE.DEMO.TABLE.LABELS.EXTRA_INFO",
@@ -62,7 +68,10 @@ export class TableRegularComponent {
 
 	public filter: StarkTableFilter = {
 		globalFilterPresent: true,
-		columns: [{ columnName: "id", filterPosition: "below" }, { columnName: "title", filterPosition: "above" }],
+		columns: [
+			{ columnName: "id", filterPosition: "below" },
+			{ columnName: "title", filterPosition: "above" }
+		],
 		filterPosition: "below"
 	};
 

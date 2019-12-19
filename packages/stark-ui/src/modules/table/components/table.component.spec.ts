@@ -97,6 +97,12 @@ describe("TableComponent", () => {
 		element.dispatchEvent(clickEvent);
 	};
 
+	const DUMMY_DATA: object[] = [
+		{ id: 1, description: "dummy 1" },
+		{ id: 2, description: "dummy 2" },
+		{ id: 3, description: "dummy 3" }
+	];
+
 	const getColumnSelector = (columnName: string): string => `.stark-table th.mat-column-${columnName} div div`;
 	const columnSelectSelector = "cdk-column-select";
 	const rowSelector = "table tbody tr";
@@ -1309,11 +1315,6 @@ describe("TableComponent", () => {
 	});
 
 	describe("setStyling", () => {
-		const dummyData: object[] = [
-			{ id: 1, description: "dummy 1" },
-			{ id: 2, description: "dummy 2" },
-			{ id: 3, description: "dummy 3" }
-		];
 		const returnEvenAndOdd: (row: object, index: number) => string = (_row: object, index: number): string =>
 			(index + 1) % 2 === 0 ? "even" : "odd"; // offset index with 1
 
@@ -1323,7 +1324,7 @@ describe("TableComponent", () => {
 				{ name: "id", cellClassName: (value: any): string => (value === 1 ? "one" : "") },
 				{ name: "description", cellClassName: "description-body-cell", headerClassName: "description-header-cell" }
 			];
-			hostComponent.dummyData = dummyData;
+			hostComponent.dummyData = DUMMY_DATA;
 
 			hostFixture.detectChanges(); // trigger data binding
 			component.ngAfterViewInit();
@@ -1366,19 +1367,52 @@ describe("TableComponent", () => {
 		});
 	});
 
-	describe("rowClick", () => {
-		const dummyData: object[] = [
-			{ id: 1, description: "dummy 1" },
-			{ id: 2, description: "dummy 2" },
-			{
-				id: 3,
-				description: "dummy 3"
-			}
-		];
+	describe("cellClick", () => {
+		const onClickCallbackSpy = createSpy("onClickCallback");
+	
+		beforeEach(() => {
+			hostComponent.columnProperties = [{ name: "id" }, { name: "description", onClickCallback: onClickCallbackSpy }];
+			hostComponent.dummyData = DUMMY_DATA;
+			hostComponent.rowClickHandler = createSpy("rowClickHandlerSpy", () => undefined); // add empty function so spy can find it
 
+			onClickCallbackSpy.calls.reset();
+			(<Spy>hostComponent.rowClickHandler).calls.reset();
+			
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+	
+		it("should trigger 'onClickCallback' property when click on the cell and should not emit on 'rowClicked' when 'onClickCallback' is defined",() => {
+			const descriptionColumnElement = hostFixture.nativeElement.querySelector(
+				"table tbody tr td.mat-column-description"
+			);
+			expect(descriptionColumnElement).not.toBeNull();
+
+			// click on the cell
+			triggerClick(descriptionColumnElement);
+			
+			// We expect "2" due to the check "columnProperties.onClickCallback instanceof Function" in table.component.ts
+			expect(onClickCallbackSpy).toHaveBeenCalledTimes(2);
+			expect(onClickCallbackSpy).toHaveBeenCalledWith(DUMMY_DATA[0]["description"], DUMMY_DATA[0], "description");
+			expect(hostComponent.rowClickHandler).not.toHaveBeenCalled();
+		});
+
+		it("should not trigger 'onClickCallback' property when click on the cell but should emit on 'rowClicked' when 'onClickCallback' is not defined", () => {
+			const idColumnElement = hostFixture.nativeElement.querySelector(
+				"table tbody tr td.mat-column-id"
+			);
+			expect(idColumnElement).not.toBeNull();
+
+			// click on the cell
+			triggerClick(idColumnElement);
+			expect(hostComponent.rowClickHandler).toHaveBeenCalledTimes(1);
+		});
+	});
+	
+	describe("rowClick", () => {
 		beforeEach(() => {
 			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
-			hostComponent.dummyData = dummyData;
+			hostComponent.dummyData = DUMMY_DATA;
 
 			hostFixture.detectChanges(); // trigger data binding
 			component.ngAfterViewInit();
@@ -1402,23 +1436,17 @@ describe("TableComponent", () => {
 
 			// listener should be called with the data of the first row
 			expect(hostComponent.rowClickHandler).toHaveBeenCalled();
-			expect(hostComponent.rowClickHandler).toHaveBeenCalledWith(dummyData[0]);
+			expect(hostComponent.rowClickHandler).toHaveBeenCalledWith(DUMMY_DATA[0]);
 
 			// the row should not have been selected
-			expect(component.selection.isSelected(dummyData[0])).toBe(false);
+			expect(component.selection.isSelected(DUMMY_DATA[0])).toBe(false);
 		});
 	});
 
 	describe("selection", () => {
-		const dummyData: object[] = [
-			{ id: 1, description: "dummy 1" },
-			{ id: 2, description: "dummy 2" },
-			{ id: 3, description: "dummy 3" }
-		];
-
 		beforeEach(() => {
 			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
-			hostComponent.dummyData = dummyData;
+			hostComponent.dummyData = DUMMY_DATA;
 			hostComponent.rowsSelectable = true;
 
 			hostFixture.detectChanges(); // trigger data binding
@@ -1440,8 +1468,8 @@ describe("TableComponent", () => {
 			hostFixture.detectChanges();
 
 			expect(rowElement.classList).toContain("selected");
-			expect(component.selectChanged.emit).toHaveBeenCalledWith([dummyData[0]]);
-			expect(component.selection.isSelected(dummyData[0])).toBe(true);
+			expect(component.selectChanged.emit).toHaveBeenCalledWith([DUMMY_DATA[0]]);
+			expect(component.selection.isSelected(DUMMY_DATA[0])).toBe(true);
 		});
 
 		it("should select the right rows in the template when selecting them through host 'selection' object", () => {
@@ -1456,10 +1484,10 @@ describe("TableComponent", () => {
 			expect(rowsElements[1].classList).not.toContain("selected");
 			expect(rowsElements[2].classList).not.toContain("selected");
 
-			hostComponent.selection.select(dummyData[1]);
+			hostComponent.selection.select(DUMMY_DATA[1]);
 			hostFixture.detectChanges();
 
-			expect(component.selection.selected).toEqual([dummyData[1]]);
+			expect(component.selection.selected).toEqual([DUMMY_DATA[1]]);
 			expect(rowsElements[0].classList).not.toContain("selected");
 			expect(rowsElements[1].classList).toContain("selected");
 			expect(rowsElements[2].classList).not.toContain("selected");
@@ -1471,7 +1499,7 @@ describe("TableComponent", () => {
 
 			beforeEach(() => {
 				hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
-				hostComponent.dummyData = dummyData;
+				hostComponent.dummyData = DUMMY_DATA;
 
 				hostComponent.selection = new SelectionModel<object>(true);
 				hostComponent.selection.changed.subscribe(handleChange);
@@ -1489,7 +1517,7 @@ describe("TableComponent", () => {
 				selectAllButton.click();
 				hostFixture.detectChanges();
 
-				expect(handleChange).toHaveBeenCalledTimes(dummyData.length);
+				expect(handleChange).toHaveBeenCalledTimes(DUMMY_DATA.length);
 			});
 
 			it("should select all rows available after filter when clicking the select all", () => {
@@ -1505,12 +1533,6 @@ describe("TableComponent", () => {
 	});
 
 	describe("async", () => {
-		const DUMMY_DATA: object[] = [
-			{ id: 1, description: "dummy 1" },
-			{ id: 2, description: "dummy 2" },
-			{ id: 3, description: "dummy 3" }
-		];
-
 		beforeEach(() => {
 			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
 			hostComponent.dummyData = <any>undefined; // data starts uninitialized

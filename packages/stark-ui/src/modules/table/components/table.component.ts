@@ -32,6 +32,7 @@ import { StarkTableColumnComponent } from "./column.component";
 import { StarkSortingRule, StarkTableMultisortDialogComponent, StarkTableMultisortDialogData } from "./dialogs/multisort.component";
 import { StarkAction, StarkActionBarConfig } from "../../action-bar/components";
 import {
+	StarkColumnCellClickedOutput,
 	StarkColumnFilterChangedOutput,
 	StarkColumnSortChangedOutput,
 	StarkTableColumnFilter,
@@ -597,7 +598,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		oldColumns.forEach((oldColumn: MatColumnDef) => {
 			this.table.removeColumnDef(oldColumn);
 			// removing column also from the displayed columns (such array should match the dataSource!)
-			this.displayedColumns.splice(this.displayedColumns.findIndex((column: string) => column === oldColumn.name), 1);
+			this.displayedColumns.splice(
+				this.displayedColumns.findIndex((column: string) => column === oldColumn.name),
+				1
+			);
 		});
 	}
 
@@ -608,6 +612,17 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	private addColumnsToTable(columns: StarkTableColumnComponent[]): void {
 		for (const column of columns) {
 			this.table.addColumnDef(column.columnDef);
+
+			const columnProperties = find(
+				this.columnProperties,
+				(columnProps: StarkTableColumnProperties) => column.name === columnProps.name
+			);
+
+			if (this.isColumnPropertiesWithOnClickCallback(columnProperties)) {
+				column.cellClicked.subscribe((cellClickedOutput: StarkColumnCellClickedOutput) => {
+					columnProperties.onClickCallback(cellClickedOutput.value, cellClickedOutput.row, cellClickedOutput.columnName);
+				});
+			}
 
 			column.sortChanged.subscribe((sortedColumn: StarkColumnSortChangedOutput) => {
 				this.onReorderChange(sortedColumn);
@@ -1122,5 +1137,15 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public trackColumnFn(_index: number, item: StarkTableColumnProperties): string {
 		return item.name;
+	}
+
+	/**
+	 * @ignore
+	 * Type guard
+	 */
+	private isColumnPropertiesWithOnClickCallback(
+		columnProperties?: StarkTableColumnProperties
+	): columnProperties is StarkTableColumnProperties & Required<Pick<StarkTableColumnProperties, "onClickCallback">> {
+		return !!columnProperties && columnProperties.onClickCallback instanceof Function;
 	}
 }
