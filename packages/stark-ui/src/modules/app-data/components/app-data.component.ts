@@ -100,7 +100,7 @@ export class StarkAppDataComponent extends AbstractStarkUiComponent implements O
 		};
 
 		window.addEventListener("click", this.windowClickHandler);
-		this.logger.debug("clickHandler added");
+		this.logger.debug(componentName + ": clickHandler added");
 	}
 
 	/**
@@ -108,7 +108,7 @@ export class StarkAppDataComponent extends AbstractStarkUiComponent implements O
 	 */
 	public removeWindowClickHandler(): void {
 		if (this.windowClickHandler) {
-			this.logger.debug("clickHandler removed");
+			this.logger.debug(componentName + ": clickHandler removed");
 			window.removeEventListener("click", this.windowClickHandler);
 			this.windowClickHandler = undefined;
 		}
