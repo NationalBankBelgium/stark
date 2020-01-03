@@ -229,17 +229,16 @@ describe("createTimestampPipe", () => {
 			assertTimestampsValidity(invalidDateTimeStrings, false, fullDateTimeShortYearFormat);
 		});
 
-		it("should return FALSE if 29 February is given and the format given has no year", () => {
-			// it is invalid because when there is no year specified, it is assumed to be something recurrent
-			// and you shouldn't put something recurrent on a Feb 29!
+		it("should return FALSE if 29 February is given and the format given has no year and current year is NOT leap", () => {
+			const isALeapYear = new Date().getFullYear() % 4 === 0;
 
 			let invalidDateTimeStrings = ["29-02"];
 
-			assertTimestampsValidity(invalidDateTimeStrings, false, "DD-MM");
+			assertTimestampsValidity(invalidDateTimeStrings, isALeapYear, "DD-MM");
 
 			invalidDateTimeStrings = ["02-29"];
 
-			assertTimestampsValidity(invalidDateTimeStrings, false, "MM-DD");
+			assertTimestampsValidity(invalidDateTimeStrings, isALeapYear, "MM-DD");
 		});
 
 		it("should return FALSE if the date time string doesn't match the format", () => {
