@@ -12,8 +12,6 @@ before_install:
     - echo $TRAVIS_BRANCH
     - echo $TRAVIS_BUILD_NUMBER
     - echo $TRAVIS_REPO
-    - AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
-    - echo $AUTHOR_NAME
     - export TZ=Europe/Brussels
     - npm i -g npm@6.9.2
     - NODE_VERSION="$(node -v)"
@@ -26,9 +24,8 @@ install:
     # cfr scripts/_travis-fold.sh
     - mkdir -p $LOGS_DIR
     - touch $LOGS_DIR/build-perf.log
-    - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run clean:modules:all; fi
-    - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm i; else npm ci; fi
-    - if [[ ${TRAVIS_BRANCH} =~ ^greenkeeper.*$ || ${AUTHOR_NAME} == "greenkeeper[bot]" ]]; then npm run install:travis:all; else npm run install:ci:all; fi
+    - npm ci
+    - npm run install:ci:all
     - npm run build:showcase:ghpages
 
 env:
@@ -39,7 +36,7 @@ env:
 branches:
     only:
         - master
-        - /^greenkeeper/.*$/
+        - /^dependabot/npm_and_yarn/.*$/
         - /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+|-rc\.\d+)?$/
 
 cache:
