@@ -181,7 +181,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	 * @param result: MatDrawerToggleResult
 	 */
 	private displaySuccessCallback: (value: MatDrawerToggleResult) => void = (result: MatDrawerToggleResult) => {
-		this.logger.debug(componentName + result);
+		this.logger.debug(componentName + ": " + result);
 	};
 
 	/**
