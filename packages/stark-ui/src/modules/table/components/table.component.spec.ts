@@ -1314,6 +1314,48 @@ describe("TableComponent", () => {
 		});
 	});
 
+	// TODO Move this test in "column.component.spec.ts" once https://github.com/NationalBankBelgium/stark/issues/1469 is solved.
+	describe("setCellFormatter", () => {
+		const dummyData: object[] = [
+			{ id: 1, description: "dummy 1", test: "test-1" },
+			{ id: 2, test: "test-2" },
+			{ id: 3, description: "dummy 3" }
+		];
+
+		beforeEach(() => {
+			hostComponent.columnProperties = [
+				{ name: "id", cellFormatter: (value: any): string => (value === 1 ? "one" : "") },
+				{ name: "description", cellFormatter: (value: any): string => typeof value === "undefined" ? "-null-" : value },
+				{ name: "test" }
+			];
+			hostComponent.dummyData = dummyData;
+
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+
+		it("should display the formatted value in the cell instead of the raw value", () => {
+			const rowIdElements = hostFixture.nativeElement.querySelectorAll("table tbody tr td.mat-column-id");
+
+			expect(rowIdElements.length).toBe(3);
+			expect(rowIdElements[0].innerText).toEqual("one");
+		});
+
+		it("should display the formatted value in the cell even if the raw value is undefined", () => {
+			const rowIdElements = hostFixture.nativeElement.querySelectorAll("table tbody tr td.mat-column-description");
+
+			expect(rowIdElements.length).toBe(3);
+			expect(rowIdElements[1].innerText).toEqual("-null-");
+		});
+
+		it("should NOT display anything when the raw value is undefined and there is no 'cellFormatter' defined for the column", () => {
+			const rowIdElements = hostFixture.nativeElement.querySelectorAll("table tbody tr td.mat-column-test");
+
+			expect(rowIdElements.length).toBe(3);
+			expect(rowIdElements[2].innerText).toEqual("");
+		})
+	});
+
 	describe("setStyling", () => {
 		const returnEvenAndOdd: (row: object, index: number) => string = (_row: object, index: number): string =>
 			(index + 1) % 2 === 0 ? "even" : "odd"; // offset index with 1
