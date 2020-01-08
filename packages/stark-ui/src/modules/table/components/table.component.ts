@@ -217,6 +217,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * {@link StarkPaginationConfig} configuration object for embedded pagination component
+	 *
+	 * **IMPORTANT:** the pagination component is displayed in "compact" mode
 	 */
 	@Input()
 	public paginationConfig: StarkPaginationConfig = {};

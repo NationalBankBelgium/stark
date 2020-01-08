@@ -1,4 +1,5 @@
 export * from "./table-regular";
+export * from "./table-with-items-per-page-selector";
 export * from "./table-with-selection";
 export * from "./table-with-custom-actions";
 export * from "./table-with-transcluded-action-bar";

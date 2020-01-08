@@ -330,6 +330,7 @@
         },
         "REGULAR": "Regular Table",
         "WITH_SELECTION": "Table with selection",
+        "WITH_ITEMS_PER_PAGE_SELECTOR": "Table with the selector of items per page to display",
         "WITH_CUSTOM_ACTIONS": "Table with custom actions",
         "WITH_FIXED_HEADER": "Table with fixed header",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",

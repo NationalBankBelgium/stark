@@ -68,6 +68,7 @@ import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
 import {
 	TableRegularComponent,
+	TableWithItemsPerPageSelectorComponent,
 	TableWithCustomActionsComponent,
 	TableWithCustomStylingComponent,
 	TableWithFixedActionsComponent,
@@ -140,6 +141,7 @@ import {
 		DemoSliderPageComponent,
 		DemoTablePageComponent,
 		TableRegularComponent,
+		TableWithItemsPerPageSelectorComponent,
 		TableWithSelectionComponent,
 		TableWithCustomActionsComponent,
 		TableWithTranscludedActionBarComponent,
