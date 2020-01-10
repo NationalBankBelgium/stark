@@ -1,3 +1,23 @@
+<a name="10.0.0-rc.3"></a>
+# [10.0.0-rc.3](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.2...10.0.0-rc.3) (2020-01-10)
+
+
+### Bug Fixes
+
+* **stark-testing:** don't parse 'prettier/parser-typescript.js' with karma-typescript to prevent uncaught exception thrown as from Prettier 1.19 ([a290eb9](https://github.com/nationalbankbelgium/stark/commit/a290eb9)), closes [#1434](https://github.com/nationalbankbelgium/stark/issues/1434)
+* **stark-ui:** add missing componentName and ":" in debug messages in StarkAppData and StarkAppSidebar components ([79ac571](https://github.com/nationalbankbelgium/stark/commit/79ac571))
+* **stark-ui:** add support for `onClickCallback` column properties in Table component ([c5e3847](https://github.com/nationalbankbelgium/stark/commit/c5e3847)), closes [#1466](https://github.com/nationalbankbelgium/stark/issues/1466)
+* **stark-ui:** change the Multisort component to display the label instead of the column ([fc3863c](https://github.com/nationalbankbelgium/stark/commit/fc3863c)), closes [#1397](https://github.com/nationalbankbelgium/stark/issues/1397)
+* **stark-ui:** fixed column issue when rawValue is undefined, cellFormatter is not called ([815ac6c](https://github.com/nationalbankbelgium/stark/commit/815ac6c)), closes [#1465](https://github.com/nationalbankbelgium/stark/issues/1465)
+* **stark-ui:** table actions column is not displayed anymore if no row actions are defined ([b1ec04e](https://github.com/nationalbankbelgium/stark/commit/b1ec04e)), closes [#1462](https://github.com/nationalbankbelgium/stark/issues/1462)
+
+
+### Features
+
+* **stark-ui:** add support for displaying the "items per page" dropdown also in Pagination on "compact" mode ([705bb23](https://github.com/nationalbankbelgium/stark/commit/705bb23)), closes [#1248](https://github.com/nationalbankbelgium/stark/issues/1248)
+
+
+
 <a name="10.0.0-rc.2"></a>
 # [10.0.0-rc.2](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.1...10.0.0-rc.2) (2019-10-28)
 
