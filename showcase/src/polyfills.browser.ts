@@ -56,6 +56,11 @@ import "event-source-polyfill";
 import "eligrey-classlist-js-polyfill";
 
 /**
+ * Hammerjs must be imported for gestures
+ */
+import "hammerjs";
+
+/**
  * Web Animations polyfill is no longer needed for standard animation support as of Angular 6
  * IMPORTANT: It is only needed in case you use the AnimationBuilder from '@angular/animations' in the application
  *

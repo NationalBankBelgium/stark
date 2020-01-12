@@ -90,9 +90,10 @@ export function starkAppConfigFactory(): StarkApplicationConfig {
 	applicationConfig.rootStateName = "";
 	applicationConfig.homeStateName = "home";
 	applicationConfig.errorStateName = "otherwise";
-	applicationConfig.angularDebugInfoEnabled = true; // DEVELOPMENT;
-	applicationConfig.debugLoggingEnabled = true; // DEVELOPMENT;
-	applicationConfig.routerLoggingEnabled = true; // DEVELOPMENT;
+	applicationConfig.angularDebugInfoEnabled = !environment.production; // DEVELOPMENT;
+	applicationConfig.debugLoggingEnabled = !environment.production; // DEVELOPMENT;
+	applicationConfig.routerLoggingEnabled = !environment.production; // DEVELOPMENT;
+	applicationConfig.keepAliveDisabled = environment.production; // DEVELOPMENT;
 
 	return applicationConfig;
 }
@@ -120,7 +121,7 @@ export function initRouterLog(router: UIRouter): () => void {
 export function getXsrfWaitBeforePinging(sessionService: StarkSessionService): Observable<any> {
 	let waitFor$: Observable<any> = of("production"); // no need to wait on production
 
-	if (ENV !== "production") {
+	if (ENV === "development") {
 		// wait for the user to be logged in (useful when targeting a live backend on DEV)
 		waitFor$ = sessionService.getCurrentUser().pipe(
 			filter((user?: StarkUser) => typeof user !== "undefined"),
@@ -151,7 +152,7 @@ export function logger(reducer: ActionReducer<State>): any {
 	})(reducer);
 }
 
-export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger, storeFreeze] : [];
+export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logger, storeFreeze] : [];
 
 /**
  * `AppModule` is the main entry point into Angular's bootstrapping process
@@ -229,7 +230,7 @@ export const metaReducers: MetaReducer<State>[] = ENV !== "production" ? [logger
 		{ provide: STARK_APP_CONFIG, useFactory: starkAppConfigFactory },
 		{ provide: STARK_APP_METADATA, useFactory: starkAppMetadataFactory },
 		{ provide: STARK_MOCK_DATA, useFactory: starkMockDataFactory },
-		{ provide: APP_INITIALIZER, useFactory: initRouterLog, multi: true, deps: [UIRouter] }
+		...(ENV === "development" ? [{ provide: APP_INITIALIZER, useFactory: initRouterLog, multi: true, deps: [UIRouter] }] : [])
 	]
 })
 export class AppModule {
