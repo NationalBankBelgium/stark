@@ -1,0 +1,159 @@
+# See documentation on https://dependabot.com/docs/config-file/
+
+version: 1
+update_configs:
+  - package_manager: "javascript"
+    directory: "/packages/stark-build"
+    update_schedule: "live"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "in_range"
+    ignored_updates:
+      - match:
+          dependency_name: "@angular/*"
+          version_requirement: ">=8"
+      - match:
+          dependency_name: "@angular-builders/*"
+          version_requirement: ">=8"
+      - match:
+          dependency_name: "@angular-devkit/build-angular"
+          version_requirement: ">=0.800"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
+
+  - package_manager: "javascript"
+    directory: "/packages/stark-core"
+    update_schedule: "live"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "in_range"
+    ignored_updates:
+      - match:
+          dependency_name: "@uirouter/angular"
+          version_requirement: ">=6"
+      - match:
+          dependency_name: "@types/node"
+          version_requirement: ">=11"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
+
+  - package_manager: "javascript"
+    directory: "/packages/stark-rbac"
+    update_schedule: "live"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "in_range"
+    ignored_updates:
+      - match:
+          dependency_name: "@types/node"
+          version_requirement: ">=11"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
+
+  - package_manager: "javascript"
+    directory: "/packages/stark-testing"
+    update_schedule: "live"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "in_range"
+    ignored_updates:
+      - match:
+          dependency_name: "@types/node"
+          version_requirement: ">=11"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
+
+  - package_manager: "javascript"
+    directory: "/packages/stark-ui"
+    update_schedule: "live"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "in_range"
+    ignored_updates:
+      - match:
+          dependency_name: "@angular/*"
+          version_requirement: ">=8"
+      - match:
+          dependency_name: "@types/node"
+          version_requirement: ">=11"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
+
+  - package_manager: "javascript"
+    directory: "/"
+    update_schedule: "live"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "in_range"
+    ignored_updates:
+      - match:
+          dependency_name: "@angular/*"
+          version_requirement: ">=8"
+      - match:
+          dependency_name: "@angular-devkit/build-ng-packagr"
+          version_requirement: ">=0.800"
+      - match:
+          dependency_name: "@compodoc/compodoc"
+      - match:
+          dependency_name: "@types/node"
+          version_requirement: ">=11"
+      - match:
+          dependency_name: "typescript"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
+
+  - package_manager: "javascript"
+    directory: "/showcase"
+    update_schedule: "live"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "in_range"
+    ignored_updates:
+      - match:
+          dependency_name: "@angular/*"
+          version_requirement: ">=8"
+      - match:
+          dependency_name: "@compodoc/compodoc"
+      - match:
+          dependency_name: "@types/node"
+          version_requirement: ">=11"
+      - match:
+          dependency_name: "typescript"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
+
+  - package_manager: "javascript"
+    directory: "/starter"
+    update_schedule: "live"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "in_range"
+    ignored_updates:
+      - match:
+          dependency_name: "@angular/*"
+          version_requirement: ">=8"
+      - match:
+          dependency_name: "@compodoc/compodoc"
+      - match:
+          dependency_name: "@types/node"
+          version_requirement: ">=11"
+      - match:
+          dependency_name: "typescript"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
