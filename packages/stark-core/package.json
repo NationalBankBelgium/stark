@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^3.5.0",
-    "@types/node": "^8.10.37"
+    "@types/node": "^10.17.13"
   },
   "peerDependencies": {
     "@angular/common": "^7.0.0",
