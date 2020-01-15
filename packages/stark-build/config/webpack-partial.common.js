@@ -72,6 +72,9 @@ module.exports = metadata => {
 		 * See: https://webpack.js.org/configuration/module
 		 */
 		module: {
+			// FIXME Remove the following line once Prettier 2.0.0 is released. See: https://github.com/NationalBankBelgium/stark/issues/1483
+			noParse: /prettier\/parser-typescript/,
+
 			rules: [
 				/**
 				 * TSLint loader support for *.ts files
