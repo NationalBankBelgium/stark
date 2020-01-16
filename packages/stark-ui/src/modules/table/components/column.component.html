@@ -10,7 +10,7 @@
 					<mat-icon *ngSwitchCase="'desc'" svgIcon="arrow-down" class="stark-small-icon"></mat-icon>
 					<mat-icon class="order-tip stark-small-icon" *ngSwitchDefault svgIcon="arrow-up"></mat-icon>
 				</ng-container>
-				<span *ngIf="sortPriority < 1000 && sortDirection" class="priority">{{ sortPriority }}</span>
+				<span *ngIf="sortPriority < 100 && sortDirection" class="priority">{{ sortPriority }}</span>
 			</div>
 			<button *ngIf="filterable" class="button-filter" [matMenuTriggerFor]="filterMenu" mat-icon-button>
 				<mat-icon class="stark-small-icon" svgIcon="filter" [matTooltip]="'STARK.TABLE.COLUMN_FILTER' | translate"></mat-icon>

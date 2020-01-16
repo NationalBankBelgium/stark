@@ -158,7 +158,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Priority of the column.
 	 */
 	@Input()
-	public sortPriority = 0;
+	public sortPriority = 100;
 
 	/**
 	 * Whether the column is visible or not. Default: true
@@ -252,6 +252,10 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 			!isEqual(simpleChanges["filterValue"].previousValue, simpleChanges["filterValue"].currentValue)
 		) {
 			this._filterFormCtrl.setValue(this.filterValue);
+		}
+
+		if (simpleChanges["sortPriority"] && typeof simpleChanges["sortPriority"].currentValue === "undefined") {
+			this.sortPriority = 100;
 		}
 	}
 
