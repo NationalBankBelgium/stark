@@ -19,7 +19,9 @@ class Main extends AbstractStarkMain {
 	}
 
 	public main = (): Promise<any> => {
-		console.log("Bootstrapping the App");
+		if (ENV === "development") {
+			console.log("Bootstrapping the App");
+		}
 
 		// Bootstrap our Angular app with a top level NgModule
 		return (

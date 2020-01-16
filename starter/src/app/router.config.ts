@@ -11,7 +11,9 @@ export function logRegisteredStates(registeredStates: StateDeclaration[]): void 
 }
 
 export function routerConfigFn(router: UIRouter): void {
-	router.trace.enable(Category.TRANSITION);
+	if (ENV === "development") {
+		router.trace.enable(Category.TRANSITION);
+	}
 	// Enable UI-Router visualizer here if needed (for development purposes only)
 	// if (ENV === "development") {
 	// 	router.plugin(Visualizer);  // Visualizer should be imported from "@uirouter/visualizer"
