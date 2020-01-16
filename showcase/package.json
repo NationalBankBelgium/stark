@@ -148,7 +148,7 @@
     "@types/core-js": "~2.5.0",
     "@types/hammerjs": "~2.0.36",
     "@types/node": "~10.17.13",
-    "@types/webpack-env": "~1.14.1",
+    "@types/webpack-env": "~1.15.0",
     "browserstack-local": "~1.4.4",
     "cross-env": "~6.0.0",
     "find-root": "~1.1.0",
