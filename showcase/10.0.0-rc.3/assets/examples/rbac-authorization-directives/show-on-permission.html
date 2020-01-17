@@ -1,0 +1,12 @@
+<div class="authorized-roles">
+	<label class="toggle-button-label">Switch the authorized role:</label>
+	<mat-button-toggle-group [(ngModel)]="selectedAuthorizedRole" (change)="onRoleChange($event)">
+		<mat-button-toggle value="admin">Admin</mat-button-toggle>
+		<mat-button-toggle value="manager">Manager</mat-button-toggle>
+	</mat-button-toggle-group>
+</div>
+
+<div *starkShowOnPermission="permissionsConfig" class="protected-content">
+	This content is protected.<br />
+	<b>It is only visible to an authorized user that has the 'manager' role.</b>
+</div>

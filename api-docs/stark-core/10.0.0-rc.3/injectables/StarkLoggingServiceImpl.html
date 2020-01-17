@@ -1,0 +1,1899 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>StarkLoggingServiceImpl</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/logging/services/logging.service.ts</code>
+        </p>
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_correlationId">_correlationId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#_xsrfService">_xsrfService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#backend">backend</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#consoleDebug">consoleDebug</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#consoleError">consoleError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#consoleInfo">consoleInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#consoleWarn">consoleWarn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isPersisting">isPersisting</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#logPersistSize">logPersistSize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#logUrl">logUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#retryCounter">retryCounter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#starkLogging">starkLogging</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#constructErrorLogMessage">constructErrorLogMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#constructLogMessage">constructLogMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#debug">debug</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#error">error</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#generateNewCorrelationId">generateNewCorrelationId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getConsole">getConsole</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#info">info</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#parseArg">parseArg</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#persistLogMessages">persistLogMessages</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#sendRequest">sendRequest</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#warn">warn</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#correlationId">correlationId</a>
+                                </li>
+                                <li>
+                                    <a href="#correlationIdHttpHeaderName">correlationIdHttpHeaderName</a>
+                                </li>
+                                <li>
+                                    <a href="#xsrfService">xsrfService</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(store: <a href="../interfaces/StarkCoreApplicationState.html">Store<StarkCoreApplicationState></a>, appConfig: <a href="../interfaces/StarkApplicationConfig.html">StarkApplicationConfig</a>, injector: <a href="https://angular.io/api/core/Injector" target="_blank">Injector</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/modules/logging/services/logging.service.ts:39</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkCoreApplicationState.html" target="_self" >Store&lt;StarkCoreApplicationState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appConfig</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkApplicationConfig.html" target="_self" >StarkApplicationConfig</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>injector</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Injector" target="_blank" >Injector</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="constructErrorLogMessage"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            constructErrorLogMessage
+                            </b>
+                            <a href="#constructErrorLogMessage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>constructErrorLogMessage(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, error: <a href="../interfaces/StarkError.html">StarkError</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/modules/logging/services/logging.service.ts:140</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>message</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>error</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkError.html" target="_self" >StarkError</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkLogMessage.html" target="_self" >StarkLogMessage</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="constructLogMessage"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            constructLogMessage
+                            </b>
+                            <a href="#constructLogMessage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>constructLogMessage(messageType: <a href="../interfaces/StarkLogMessage.html">StarkLogMessageType</a>, ...args: any[])</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/modules/logging/services/logging.service.ts:134</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>messageType</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkLogMessage.html" target="_self" >StarkLogMessageType</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>args</td>
+                                                        <td>
+                                                                    <code>any[]</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/StarkLogMessage.html" target="_self" >StarkLogMessage</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="debug"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            debug
+                            </b>
+                            <a href="#debug"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>debug(...args: any[])</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/modules/logging/services/logging.service.ts:84</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>args</td>
+                                                        <td>
+                                                                    <code>any[]</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="error"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            error
+                            </b>
+                            <a href="#error"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>error(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, error?: <a href="../interfaces/StarkError.html">StarkError | Error</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/modules/logging/services/logging.service.ts:107</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>message</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>error</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/StarkError.html" target="_self" >StarkError | Error</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="generateNewCorrelationId"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            generateNewCorrelationId
+                            </b>
+                            <a href="#generateNewCorrelationId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>generateNewCorrelationId()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/modules/logging/services/logging.service.ts:129</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getConsole"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            getConsole
+                            </b>
+                            <a href="#getConsole"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getConsole(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">src/modules/logging/services/logging.service.ts:237</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns the specified window console method if it exists (debug, warn, info, error, trace),
+otherwise returns console.log or empty function</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>type</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <p>Type of console to be used: info, debug, warn, error, trace</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="info"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            info
+                            </b>
+                            <a href="#info"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>info(...args: any[])</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/modules/logging/services/logging.service.ts:93</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>args</td>
+                                                        <td>
+                                                                    <code>any[]</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="parseArg"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            parseArg
+                            </b>
+                            <a href="#parseArg"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>parseArg(arg: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/modules/logging/services/logging.service.ts:219</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>arg</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="persistLogMessages"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            persistLogMessages
+                            </b>
+                            <a href="#persistLogMessages"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>persistLogMessages(isForced: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/modules/logging/services/logging.service.ts:144</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Default value</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>isForced</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code>false</code>
+                                                        </td>
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sendRequest"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            sendRequest
+                            </b>
+                            <a href="#sendRequest"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>sendRequest(url: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, serializedData: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, async: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/modules/logging/services/logging.service.ts:177</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Default value</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>url</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+
+                                                </tr>
+                                                <tr>
+                                                        <td>serializedData</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+
+                                                </tr>
+                                                <tr>
+                                                        <td>async</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code>true</code>
+                                                        </td>
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Observable&lt;void&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="warn"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            warn
+                            </b>
+                            <a href="#warn"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>warn(...args: any[])</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/modules/logging/services/logging.service.ts:100</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>args</td>
+                                                        <td>
+                                                                    <code>any[]</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_correlationId"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            _correlationId</b>
+                            <a href="#_correlationId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;undefined&quot;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/modules/logging/services/logging.service.ts:39</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_xsrfService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                                <span class="modifier">Optional</span>
+                            _xsrfService</b>
+                            <a href="#_xsrfService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkXSRFService.html" target="_self" >StarkXSRFService | </a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/modules/logging/services/logging.service.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="backend"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            backend</b>
+                            <a href="#backend"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkBackend.html" target="_self" >StarkBackend</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/modules/logging/services/logging.service.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="consoleDebug"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            consoleDebug</b>
+                            <a href="#consoleDebug"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/modules/logging/services/logging.service.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="consoleError"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            consoleError</b>
+                            <a href="#consoleError"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/modules/logging/services/logging.service.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="consoleInfo"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            consoleInfo</b>
+                            <a href="#consoleInfo"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/modules/logging/services/logging.service.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="consoleWarn"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            consoleWarn</b>
+                            <a href="#consoleWarn"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/modules/logging/services/logging.service.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isPersisting"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            isPersisting</b>
+                            <a href="#isPersisting"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/modules/logging/services/logging.service.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logPersistSize"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            logPersistSize</b>
+                            <a href="#logPersistSize"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>NaN</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/modules/logging/services/logging.service.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logUrl"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            logUrl</b>
+                            <a href="#logUrl"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;undefined&quot;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/modules/logging/services/logging.service.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="retryCounter"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            retryCounter</b>
+                            <a href="#retryCounter"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/modules/logging/services/logging.service.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="starkLogging"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            starkLogging</b>
+                            <a href="#starkLogging"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/StarkLogging.html" target="_self" >StarkLogging</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/modules/logging/services/logging.service.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="correlationId"></a>
+                        <span class="name"><b>correlationId</b><a href="#correlationId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>correlationId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/modules/logging/services/logging.service.ts:121</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="correlationIdHttpHeaderName"></a>
+                        <span class="name"><b>correlationIdHttpHeaderName</b><a href="#correlationIdHttpHeaderName"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>correlationIdHttpHeaderName()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/modules/logging/services/logging.service.ts:125</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="xsrfService"></a>
+                        <span class="name"><b>xsrfService</b><a href="#xsrfService"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>xsrfService()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">src/modules/logging/services/logging.service.ts:258</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Gets the StarkXSRFService from the Injector (this is tried only once).
+It returns &#39;undefined&#39; if the service is not found (the XSRF module is not imported in the app).</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="../interfaces/StarkXSRFService.html" target="_self" >StarkXSRFService | undefined</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import uuid from &quot;uuid&quot;;
+import { Serialize } from &quot;cerialize&quot;;
+import { select, Store } from &quot;@ngrx/store&quot;;
+import { Inject, Injectable, Injector } from &quot;@angular/core&quot;;
+import { Observable, Subject } from &quot;rxjs&quot;;
+
+import { StarkLoggingService, starkLoggingServiceName } from &quot;./logging.service.intf&quot;;
+import { STARK_APP_CONFIG, StarkApplicationConfig } from &quot;../../../configuration/entities/application&quot;;
+import { StarkBackend } from &quot;../../http/entities/backend&quot;;
+import { StarkCoreApplicationState } from &quot;../../../common/store&quot;;
+import { StarkHttpStatusCodes } from &quot;../../http/enumerators&quot;;
+import { StarkHttpHeaders } from &quot;../../http/constants&quot;;
+import { STARK_XSRF_SERVICE, StarkXSRFService } from &quot;../../xsrf/services&quot;;
+import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from &quot;../entities&quot;;
+import { StarkFlushLogMessages, StarkLogMessageAction } from &quot;../actions&quot;;
+import { selectStarkLogging } from &quot;../reducers&quot;;
+import { StarkError, StarkErrorImpl } from &quot;../../../common/error&quot;;
+import { StarkConfigurationUtil } from &quot;../../../util/configuration.util&quot;;
+import noop from &quot;lodash-es/noop&quot;;
+
+const xsrfServiceNotFound: &quot;not provided&quot; &#x3D; &quot;not provided&quot;;
+
+@Injectable()
+export class StarkLoggingServiceImpl implements StarkLoggingService {
+	private backend!: StarkBackend;
+	private logUrl &#x3D; &quot;undefined&quot;;
+	private logPersistSize &#x3D; NaN;
+	private isPersisting: boolean;
+	private retryCounter: number;
+	private consoleDebug: Function;
+	private consoleInfo: Function;
+	private consoleWarn: Function;
+	private consoleError: Function;
+	private starkLogging!: StarkLogging;
+	/** @internal */
+	private _xsrfService?: StarkXSRFService | typeof xsrfServiceNotFound;
+	/** @internal */
+	private _correlationId &#x3D; &quot;undefined&quot;;
+
+	public constructor(
+		private store: Store&lt;StarkCoreApplicationState&gt;,
+		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
+		private injector: Injector
+	) {
+		// ensuring that the app config is valid before doing anything
+		StarkConfigurationUtil.validateConfig(this.appConfig, [&quot;logging&quot;, &quot;http&quot;], starkLoggingServiceName);
+
+		this.isPersisting &#x3D; false;
+		this.retryCounter &#x3D; 0;
+		this.consoleDebug &#x3D; this.getConsole(&quot;debug&quot;);
+		this.consoleInfo &#x3D; this.getConsole(&quot;info&quot;);
+		this.consoleWarn &#x3D; this.getConsole(&quot;warn&quot;);
+		this.consoleError &#x3D; this.getConsole(&quot;error&quot;);
+
+		if (this.appConfig.loggingFlushDisabled) {
+			return;
+		}
+
+		this.backend &#x3D; this.appConfig.getBackend(&quot;logging&quot;);
+		this.logPersistSize &#x3D; &lt;number&gt;this.appConfig.loggingFlushPersistSize;
+		this.logUrl &#x3D; &#x60;${this.backend.url}/${this.appConfig.loggingFlushResourceName}&#x60;;
+		this.generateNewCorrelationId();
+
+		this.store.pipe(select(selectStarkLogging)).subscribe((starkLogging: StarkLogging) &#x3D;&gt; {
+			this.starkLogging &#x3D; starkLogging;
+			this.persistLogMessages();
+		});
+
+		if (window) {
+			window.addEventListener(&quot;beforeunload&quot;, (_ev: BeforeUnloadEvent) &#x3D;&gt; {
+				// Persist the remaining log entries that are still in the store, before leaving the application.
+				// We need to call the REST service synchronously,
+				// because the browser has to wait for the REST service to complete.
+
+				const data: string &#x3D; JSON.stringify(Serialize(this.starkLogging, StarkLoggingImpl));
+				this.sendRequest(this.logUrl, data, false);
+			});
+		}
+
+		this.debug(starkLoggingServiceName + &quot; loaded&quot;);
+	}
+
+	public debug(...args: any[]): void {
+		if (this.appConfig.debugLoggingEnabled) {
+			const debugMessage: StarkLogMessage &#x3D; this.constructLogMessage(StarkLogMessageType.DEBUG, ...args);
+			this.store.dispatch(new StarkLogMessageAction(debugMessage));
+			// also log the message to the console
+			this.consoleDebug(...args);
+		}
+	}
+
+	public info(...args: any[]): void {
+		const infoMessage: StarkLogMessage &#x3D; this.constructLogMessage(StarkLogMessageType.INFO, ...args);
+		this.store.dispatch(new StarkLogMessageAction(infoMessage));
+		// also log the message to the console
+		this.consoleInfo(...args);
+	}
+
+	public warn(...args: any[]): void {
+		const warningMessage: StarkLogMessage &#x3D; this.constructLogMessage(StarkLogMessageType.WARNING, ...args);
+		this.store.dispatch(new StarkLogMessageAction(warningMessage));
+		// also log the message to the console
+		this.consoleWarn(...args);
+	}
+
+	public error(message: string, error?: StarkError | Error): void {
+		if (!error) {
+			error &#x3D; new StarkErrorImpl();
+		}
+
+		if (error instanceof Error) {
+			error &#x3D; new StarkErrorImpl(error);
+		}
+
+		const errorMessage: StarkLogMessage &#x3D; this.constructErrorLogMessage(message, error);
+		this.store.dispatch(new StarkLogMessageAction(errorMessage));
+		this.consoleError(message, error); // also log the message to the console
+	}
+
+	public get correlationId(): string {
+		return this._correlationId;
+	}
+
+	public get correlationIdHttpHeaderName(): string {
+		return this.appConfig.loggingCorrelationIdHttpHeaderName;
+	}
+
+	public generateNewCorrelationId(): string {
+		this._correlationId &#x3D; uuid.v4();
+		return this._correlationId;
+	}
+
+	protected constructLogMessage(messageType: StarkLogMessageType, ...args: any[]): StarkLogMessage {
+		const parsedArgs: string[] &#x3D; args.map((arg: any) &#x3D;&gt; this.parseArg(arg));
+		const parsedMessage: string &#x3D; parsedArgs.join(&quot; | &quot;);
+		return new StarkLogMessageImpl(messageType, parsedMessage, this.correlationId, undefined);
+	}
+
+	protected constructErrorLogMessage(message: string, error: StarkError): StarkLogMessage {
+		return new StarkLogMessageImpl(StarkLogMessageType.ERROR, message, this.correlationId, error);
+	}
+
+	protected persistLogMessages(isForced: boolean &#x3D; false): void {
+		const numberOfMessages: number &#x3D; this.starkLogging.messages.length;
+
+		if (numberOfMessages &gt; 0 &amp;&amp; this.starkLogging.messages[numberOfMessages - 1].type &#x3D;&#x3D;&#x3D; StarkLogMessageType.ERROR) {
+			isForced &#x3D; true;
+		}
+
+		if ((numberOfMessages &gt;&#x3D; this.logPersistSize &amp;&amp; !this.isPersisting) || isForced) {
+			if (this.retryCounter &lt; 5) {
+				this.isPersisting &#x3D; true;
+				const data: string &#x3D; JSON.stringify(Serialize(this.starkLogging, StarkLoggingImpl));
+
+				this.sendRequest(this.logUrl, data, true).subscribe(
+					() &#x3D;&gt; {
+						this.isPersisting &#x3D; false;
+						this.retryCounter &#x3D; 0;
+						this.store.dispatch(new StarkFlushLogMessages(numberOfMessages));
+					},
+					(error: Error) &#x3D;&gt; {
+						this.isPersisting &#x3D; false;
+						this.retryCounter++;
+						const errorMsg &#x3D; &#x60;${starkLoggingServiceName}: an error occurred while persisting log messages. (retry ${
+							this.retryCounter
+						})&#x60;;
+						this.error(errorMsg, error);
+					}
+				);
+			} else {
+				// still no success after retrying 5 times, will be tried again in the next logged message
+			}
+		}
+	}
+
+	protected sendRequest(url: string, serializedData: string, async: boolean &#x3D; true): Observable&lt;void&gt; {
+		const httpRequest$: Subject&lt;void&gt; &#x3D; new Subject&lt;void&gt;();
+
+		const emitXhrResult &#x3D; (xhrRequest: XMLHttpRequest): void &#x3D;&gt; {
+			if (xhrRequest.readyState &#x3D;&#x3D;&#x3D; XMLHttpRequest.DONE) {
+				if (xhrRequest.status &#x3D;&#x3D;&#x3D; StarkHttpStatusCodes.HTTP_200_OK || xhrRequest.status &#x3D;&#x3D;&#x3D; StarkHttpStatusCodes.HTTP_201_CREATED) {
+					httpRequest$.next();
+					httpRequest$.complete();
+				} else {
+					httpRequest$.error(xhrRequest.status);
+				}
+			}
+		};
+
+		const xhr: XMLHttpRequest &#x3D; new XMLHttpRequest();
+
+		if (async) {
+			xhr.onreadystatechange &#x3D; (): void &#x3D;&gt; {
+				emitXhrResult(xhr);
+			};
+		} else {
+			emitXhrResult(xhr);
+		}
+
+		// catch any error raised by the browser while opening the connection. for example:
+		// Chrome &quot;mixed content&quot; error: https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content
+		// IE &quot;Access is denied&quot; error: https://stackoverflow.com/questions/22098259/access-denied-in-ie-10-and-11-when-ajax-target-is-localhost
+		try {
+			xhr.open(&quot;POST&quot;, url, async);
+			if (this.xsrfService) {
+				this.xsrfService.configureXHR(xhr);
+			}
+			xhr.setRequestHeader(StarkHttpHeaders.CONTENT_TYPE, &quot;application/json&quot;);
+			xhr.setRequestHeader(this.correlationIdHttpHeaderName, this.correlationId);
+			xhr.send(serializedData);
+		} catch (e) {
+			httpRequest$.error(e);
+		}
+
+		return httpRequest$.asObservable();
+	}
+
+	private parseArg(arg: any): string {
+		if (typeof arg &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+			return arg;
+		} else {
+			// catch potential &quot;circular reference&quot; error
+			try {
+				return JSON.stringify(arg);
+			} catch (e) {
+				return arg; // return the arg &quot;as is&quot; in case of error
+			}
+		}
+	}
+
+	/**
+	 * Returns the specified window console method if it exists (debug, warn, info, error, trace),
+	 * otherwise returns console.log or empty function
+	 * @param type Type of console to be used: info, debug, warn, error, trace
+	 */
+	protected getConsole(type: string): Function {
+		const console: any &#x3D; window &amp;&amp; window.console ? window.console : {};
+		const logFn: Function &#x3D; console[type] || console.log || noop;
+
+		return (...args: any[]): any &#x3D;&gt; {
+			const consoleArgs: any[] &#x3D; [];
+			for (const arg of args) {
+				if (arg instanceof Error) {
+					consoleArgs.push(this.parseArg(arg));
+				} else {
+					consoleArgs.push(arg);
+				}
+			}
+			return logFn.apply(console, consoleArgs);
+		};
+	}
+
+	/**
+	 * Gets the StarkXSRFService from the Injector (this is tried only once).
+	 * It returns &#x27;undefined&#x27; if the service is not found (the XSRF module is not imported in the app).
+	 */
+	private get xsrfService(): StarkXSRFService | undefined {
+		if (typeof this._xsrfService &#x3D;&#x3D;&#x3D; &quot;undefined&quot;) {
+			// The StarkXSRFService should be resolved at runtime to prevent the Angular DI circular dependency errors
+			try {
+				this._xsrfService &#x3D; this.injector.get&lt;StarkXSRFService&gt;(STARK_XSRF_SERVICE);
+				return this._xsrfService;
+			} catch (exception) {
+				this._xsrfService &#x3D; xsrfServiceNotFound;
+				return undefined;
+			}
+		}
+
+		return this._xsrfService !&#x3D;&#x3D; xsrfServiceNotFound ? this._xsrfService : undefined;
+	}
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkLoggingServiceImpl.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,546 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content additional-page">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="stark-generic-search-component">Stark Generic Search component</h1>
+<h2 id="1-about">1. About</h2>
+<p>This component provides a generic way to handle search flow in your application.
+You only need to provide this component with your custom search form via transclusion and the necessary methods to perform the search.
+Finally this component will return the results in an Observable that you can subscribe to.</p>
+<h2 id="2-how-to-use-it">2. How to use it</h2>
+<h3 id="2-1-create-an-entity-for-the-search-optional-">2.1. Create an entity for the search (optional)</h3>
+<p>For using the Generic Search component, you must have an entity that describes your object. For some reasons, the entity which describes the search form could be different than the object and in this case, it is necessary to create a different entity to describe this search object.</p>
+<p>This HowTo presents the usage of the Generic Search component with the search entity. Obviously, if you don&#39;t need a specific entity for the search, you could just replace the &quot;Search entity&quot; by the entity of your object in the code of the controllers, reducers and services that follow.</p>
+<h4 id="2-1-1-create-the-entity-for-your-object">2.1.1. Create the entity for your object</h4>
+<p>For the following example, we need this entity:</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { StarkResource } from &quot;&#64;nationalbankbelgium/stark-core&quot;;
+import { autoserialize } from &quot;cerialize&quot;;
+
+export class MovieObject implements StarkResource {
+    &#64;autoserialize
+    public uuid: string;
+
+    &#64;autoserialize
+    public year: number;
+
+    &#64;autoserialize
+    public hero: string;
+
+    &#64;autoserialize
+    public title: string;
+}</code></pre></div><h4 id="2-1-2-create-the-search-entity-file">2.1.2. Create the search entity file</h4>
+<p>Under the src/app/modules/<module-name>/entities folder create the <em>type-data</em>-<strong>search.entity.ts</strong> file.
+This entity contains all the fields that the search form will contain to find a specific element in the concerned collection.</p>
+<div><pre class="line-numbers"><code class="language-typescript">export class MovieSearchCriteria {
+    public year?: string;
+    public hero?: string;
+    public title?: string;
+}</code></pre></div><h3 id="2-2-create-a-form-component">2.2. Create a form component</h3>
+<p>Generate your form component in <em>src/app/modules/&lt;module</em>name&gt;/components_ by using <strong>ng cli</strong>:</p>
+<div><pre class="line-numbers"><code class="language-bash">ng generate component src/app/modules/my_module/components/my_component-search-form</code></pre></div><h4 id="2-2-1-define-your-component">2.2.1. Define your component</h4>
+<p>The component must only have one <strong>input</strong> binding, the object which describes the content of the form.
+And the component have the <strong>output</strong> binding &quot;workingCopyChanged&quot; to emit a new value of the search criteria when they change.</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from &quot;&#64;angular/core&quot;;
+import { StarkSearchFormComponent } from &quot;&#64;nationalbankbelgium/stark-ui&quot;;
+import { MovieSearchCriteria } from &quot;../entities&quot;;
+import { FormBuilder, FormGroup } from &quot;&#64;angular/forms&quot;;
+import { DEMO_GENERIC_SERVICE, DemoGenericService } from &quot;../services&quot;;
+
+const _isEqual: Function = require(&quot;lodash/isEqual&quot;);
+
+&#64;Component({
+    selector: &quot;movie-search-form&quot;,
+    templateUrl: &quot;./movie-search-form.component.html&quot;
+})
+export class MovieSearchFormComponent implements OnInit, OnChanges, StarkSearchFormComponent&lt;MovieSearchCriteria&gt; {
+    &#64;Input()
+    public searchCriteria: MovieSearchCriteria = {};
+
+    &#64;Output()
+    public workingCopyChanged: EventEmitter&lt;MovieSearchCriteria&gt; = new EventEmitter();
+
+    public yearOptions: number[] = [];
+    public heroOptions: string[] = [];
+    public movieOptions: string[] = [];
+
+    public searchForm: FormGroup;
+
+    public constructor(&#64;Inject(DEMO_GENERIC_SERVICE) private genericService: DemoGenericService, private formBuilder: FormBuilder) {}
+
+    public ngOnInit(): void {
+        this.searchForm = this.createSearchForm(this.searchCriteria);
+
+        this.searchForm.valueChanges.subscribe(() =&gt; {
+            const modifiedCriteria: MovieSearchCriteria = this.mapFormGroupToSearchCriteria(this.searchForm);
+            this.workingCopyChanged.emit(modifiedCriteria);
+        });
+
+        // ...
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (
+            changes[&quot;searchCriteria&quot;] &amp;&amp;
+            !changes[&quot;searchCriteria&quot;].isFirstChange() &amp;&amp;
+            !_isEqual(changes[&quot;searchCriteria&quot;].previousValue, this.searchCriteria)
+        ) {
+            this.resetSearchForm(this.searchCriteria);
+        }
+    }
+
+    public createSearchForm(searchCriteria: MovieSearchCriteria): FormGroup {
+        return this.formBuilder.group({
+            year: searchCriteria.year,
+            hero: searchCriteria.hero,
+            movie: searchCriteria.movie
+        });
+    }
+
+    public resetSearchForm(searchCriteria: MovieSearchCriteria): void {
+        // reset the form fields but don&#39;t emit a &quot;change&quot; event to statusChanges and valueChanges to avoid infinite loops!
+        this.searchForm.reset(
+            {
+                year: searchCriteria.year,
+                hero: searchCriteria.hero,
+                movie: searchCriteria.movie
+            },
+            { emitEvent: false }
+        );
+    }
+
+    public mapFormGroupToSearchCriteria(formGroup: FormGroup): MovieSearchCriteria {
+        // return formGroup.getRawValue();
+
+        return {
+            year: formGroup.controls[&quot;year&quot;].value,
+            hero: formGroup.controls[&quot;hero&quot;].value,
+            title: formGroup.controls[&quot;title&quot;].value
+        };
+    }
+
+    /**
+     * &#64;ignore
+     */
+    public trackItemFn(item: string): string {
+        return item;
+    }
+}</code></pre></div><h4 id="2-2-2-define-your-template">2.2.2. Define your template</h4>
+<div><pre class="line-numbers"><code class="language-html">&lt;div fxLayout=&quot;row wrap&quot;&gt;
+    &lt;!-- Year --&gt;
+    &lt;div fxFlex&gt;
+        &lt;mat-form-field&gt;
+            &lt;input
+                type=&quot;text&quot;
+                placeholder=&quot;Year&quot;
+                matInput
+                [formControl]=&quot;searchForm.controls[&#39;year&#39;]&quot;
+                [matAutocomplete]=&quot;yearAutocomplete&quot;
+            /&gt;
+        &lt;/mat-form-field&gt;
+        &lt;mat-autocomplete #yearAutocomplete=&quot;matAutocomplete&quot;&gt;
+            &lt;mat-option *ngFor=&quot;let option of yearOptions; trackBy: trackItemFn&quot; [value]=&quot;option&quot;&gt;{{ option }}&lt;/mat-option&gt;
+        &lt;/mat-autocomplete&gt;
+    &lt;/div&gt;
+    &lt;!-- Hero --&gt;
+    &lt;div fxFlex&gt;
+        &lt;mat-form-field&gt;
+            &lt;input
+                type=&quot;text&quot;
+                placeholder=&quot;Hero&quot;
+                matInput
+                [formControl]=&quot;searchForm.controls[&#39;hero&#39;]&quot;
+                [matAutocomplete]=&quot;heroAutocomplete&quot;
+            /&gt;
+        &lt;/mat-form-field&gt;
+        &lt;mat-autocomplete #heroAutocomplete=&quot;matAutocomplete&quot;&gt;
+            &lt;mat-option *ngFor=&quot;let option of heroOptions; trackBy: trackItemFn&quot; [value]=&quot;option&quot;&gt;{{ option }}&lt;/mat-option&gt;
+        &lt;/mat-autocomplete&gt;
+    &lt;/div&gt;
+    &lt;!-- Movie --&gt;
+    &lt;div fxFlex&gt;
+        &lt;mat-form-field&gt;
+            &lt;input
+                type=&quot;text&quot;
+                placeholder=&quot;Movie&quot;
+                matInput
+                [formControl]=&quot;searchForm.controls[&#39;movie&#39;]&quot;
+                [matAutocomplete]=&quot;movieAutocomplete&quot;
+            /&gt;
+        &lt;/mat-form-field&gt;
+        &lt;mat-autocomplete #movieAutocomplete=&quot;matAutocomplete&quot;&gt;
+            &lt;mat-option *ngFor=&quot;let option of movieOptions; trackBy: trackItemFn&quot; [value]=&quot;option&quot;&gt;{{ option }}&lt;/mat-option&gt;
+        &lt;/mat-autocomplete&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre></div><h3 id="2-3-create-the-search-actions">2.3. Create the search actions</h3>
+<h4 id="2-3-1-create-the-following-files">2.3.1. Create the following files</h4>
+<p>Under the <code>src/app/modules/&lt;module-name&gt;/actions</code> folder create the files <strong>movies-search.actions.ts</strong> and <strong>index.ts</strong>.</p>
+<p>Obviously, you&#39;ll have to export everything from your <em>actions.ts</em> file in your barrel (index.ts).</p>
+<h4 id="2-3-2-define-the-actions">2.3.2. Define the actions</h4>
+<p>The following actions should be defined to make your GenericSearch working perfectly.</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { Action } from &quot;&#64;ngrx/store&quot;;
+import { MovieSearchCriteria } from &quot;../entities&quot;;
+
+export enum MovieActionTypes {
+    SET_MOVIE_SEARCH_CRITERIA = &quot;[MovieSearch] Set criteria&quot;,
+    REMOVE_MOVIE_SEARCH_CRITERIA = &quot;[MovieSearch] Remove criteria&quot;,
+    MOVIE_HAS_SEARCHED = &quot;[MovieSearch] Has searched&quot;,
+    MOVIE_HAS_SEARCHED_RESET = &quot;[MovieSearch] Has searched reset&quot;
+}
+
+export class MovieSearchSetCriteria implements Action {
+    /**
+     * The type of action
+     */
+    public readonly type: MovieActionTypes.SET_MOVIE_SEARCH_CRITERIA = MovieActionTypes.SET_MOVIE_SEARCH_CRITERIA;
+    /**
+     * Class constructor
+     * &#64;param criteria - Criteria to be set
+     */
+    public constructor(public criteria: MovieSearchCriteria) {}
+}
+
+export class MovieSearchRemoveCriteria implements Action {
+    /**
+     * The type of action
+     */
+    public readonly type: MovieActionTypes.REMOVE_MOVIE_SEARCH_CRITERIA = MovieActionTypes.REMOVE_MOVIE_SEARCH_CRITERIA;
+}
+
+export class MovieSearchHasSearched implements Action {
+    /**
+     * The type of action
+     */
+    public readonly type: MovieActionTypes.MOVIE_HAS_SEARCHED = MovieActionTypes.MOVIE_HAS_SEARCHED;
+}
+
+export class MovieSearchHasSearchedReset implements Action {
+    /**
+     * The type of action
+     */
+    public readonly type: MovieActionTypes.MOVIE_HAS_SEARCHED_RESET = MovieActionTypes.MOVIE_HAS_SEARCHED_RESET;
+}
+
+export type MovieSearchActions = MovieSearchRemoveCriteria | MovieSearchHasSearchedReset | MovieSearchHasSearched | MovieSearchSetCriteria;</code></pre></div><h3 id="2-4-create-the-search-reducers">2.4. Create the search reducers</h3>
+<h4 id="2-4-1-create-the-following-files">2.4.1. Create the following files</h4>
+<p>Under the <code>src/app/modules/&lt;module-name&gt;/reducers</code> folder create the files <strong>movie-search.reducer.ts</strong> and <strong>index.ts</strong>.</p>
+<h4 id="2-4-2-define-the-search-reducer">2.4.2. Define the search reducer</h4>
+<p>The reducer must contain the following options.</p>
+<p>Don&#39;t forget to rename every variable and function that contain &quot;movies&quot; with your used type.</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { StarkSearchState } from &quot;&#64;nationalbankbelgium/stark-ui&quot;;
+import { MovieSearchCriteria } from &quot;../entities/movies-search.entity&quot;;
+import { MovieActionTypes, MovieSearchActions } from &quot;../actions&quot;;
+
+const INITIAL_STATE: Readonly&lt;StarkSearchState&lt;MovieSearchCriteria&gt;&gt; = {
+    criteria: new MovieSearchCriteria(),
+    hasBeenSearched: false
+};
+
+export function demoGenericSearchReducer(
+    state: Readonly&lt;StarkSearchState&lt;MovieSearchCriteria&gt;&gt; = INITIAL_STATE,
+    action: Readonly&lt;MovieSearchActions&gt;
+): Readonly&lt;StarkSearchState&lt;MovieSearchCriteria&gt;&gt; {
+    switch (action.type) {
+        case MovieActionTypes.SET_MOVIE_SEARCH_CRITERIA:
+            return { ...state, criteria: action.criteria };
+        case MovieActionTypes.REMOVE_MOVIE_SEARCH_CRITERIA:
+            return { ...state, criteria: INITIAL_STATE.criteria };
+        case MovieActionTypes.MOVIE_HAS_SEARCHED:
+            return { ...state, hasBeenSearched: true };
+        case MovieActionTypes.MOVIE_HAS_SEARCHED_RESET:
+            return { ...state, hasBeenSearched: false };
+        default:
+            return state;
+    }
+}</code></pre></div><h4 id="2-4-3-define-the-search-reducers-index">2.4.3. Define the search reducers index</h4>
+<p>Copy the following snippet in your <em>reducers/index.ts</em> file.</p>
+<p>Don&#39;t forget to rename every variable and function that contain &quot;movies&quot; with your used type.</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { StarkSearchState } from &quot;&#64;nationalbankbelgium/stark-ui&quot;;
+import { ActionReducerMap, createSelector, MemoizedSelector, createFeatureSelector } from &quot;&#64;ngrx/store&quot;;
+import { MovieSearchCriteria } from &quot;../entities&quot;;
+import { MovieSearchActions } from &quot;../actions&quot;;
+import { movieSearchReducer } from &quot;./movie-search.reducer&quot;;
+
+export interface MovieSearchState {
+    movieSearch: StarkSearchState&lt;MovieSearchCriteria&gt;;
+}
+
+export const movieSearchReducers: ActionReducerMap&lt;MovieSearchState, MovieSearchActions&gt; = {
+    movieSearch: movieSearchReducer
+};
+
+export const selectMovieSearch: MemoizedSelector&lt;object, StarkSearchState&lt;MovieSearchCriteria&gt;&gt; = createSelector(
+    createFeatureSelector&lt;MovieSearchState&gt;(&quot;MovieSearch&quot;),
+    (state: MovieSearchState) =&gt; state.movieSearch
+);</code></pre></div><h4 id="2-4-4-declare-the-reducers">2.4.4. Declare the reducers</h4>
+<p>In your module file, add the following import to be able to use your reducers.</p>
+<div><pre class="line-numbers"><code class="language-typescript">// imports
+
+import { StoreModule } from &quot;&#64;ngrx/store&quot;;
+import { movieSearchReducers } from &quot;./reducers&quot;;
+
+&#64;NgModule({
+    imports: [
+        // ...
+        StoreModule.forFeature(&quot;MovieSearch&quot;, movieSearchReducers)
+    ]
+})
+export class MyModule {}</code></pre></div><h3 id="2-5-create-the-search-service">2.5. Create the search service</h3>
+<p>The search service is an implementation of the Stark Generic Search Service.</p>
+<p>It must contain these functions :</p>
+<ul>
+<li>search</li>
+<li>getSearchState</li>
+<li>resetSearchState</li>
+<li>createNew</li>
+</ul>
+<p>The search service depends on the <em>type</em>.<strong>repository.ts</strong>.</p>
+<h4 id="2-5-1-create-the-search-service">2.5.1. Create the search service</h4>
+<h5 id="2-5-1-1-create-the-interface">2.5.1.1. Create the interface</h5>
+<p>You need to create a Search service interface that extends the <strong>StarkGenericSearchService</strong> interface and pass the type of the data in the extension.
+Firstly the main entity, <strong>Movie</strong> in this case, and secondly the search entity, <strong>MovieSearch</strong> still for this case.</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { MovieObject, MovieSearchCriteria } from &quot;../entities&quot;;
+import { StarkGenericSearchService } from &quot;&#64;nationalbankbelgium/stark-ui&quot;;
+import { InjectionToken } from &quot;&#64;angular/core&quot;;
+import { Observable } from &quot;rxjs&quot;;
+
+export const movieServiceName: string = &quot;DemoGenericService&quot;;
+export const MOVIE_SERVICE: InjectionToken&lt;MovieService&gt; = new InjectionToken&lt;MovieService&gt;(movieServiceName);
+
+export interface MovieService extends StarkGenericSearchService&lt;MovieObject, MovieSearchCriteria&gt; {
+    getYears(): Observable&lt;number[]&gt;;
+
+    getMovies(): Observable&lt;string[]&gt;;
+
+    getHeroes(): Observable&lt;string[]&gt;;
+}</code></pre></div><h5 id="2-5-1-2-create-the-implementation">2.5.1.2. Create the implementation</h5>
+<p>You need</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { MovieService } from &quot;./demo-generic.service.intf&quot;;
+import { Inject, Injectable } from &quot;&#64;angular/core&quot;;
+import { Observable, of } from &quot;rxjs&quot;;
+import { map } from &quot;rxjs/operators&quot;;
+import { StarkSearchState } from &quot;&#64;nationalbankbelgium/stark-ui&quot;;
+import { MovieObject, MovieSearchCriteria } from &quot;../entities&quot;;
+import { MovieSearchState, selectMovieSearch } from &quot;../reducers&quot;;
+import { MOVIE_REPOSITORY, MovieRepository } from &quot;../repositories&quot;;
+import { Store, select } from &quot;&#64;ngrx/store&quot;;
+import { MovieSearchHasSearched, MovieSearchHasSearchedReset, MovieSearchRemoveCriteria, MovieSearchSetCriteria } from &quot;../actions&quot;;
+
+&#64;Injectable()
+export class DemoGenericServiceImpl implements MovieService {
+    public constructor(private store: Store&lt;MovieSearchState&gt;, &#64;Inject(MOVIE_REPOSITORY) private movieRepository: MovieRepository) {}
+
+    public getSearchState(): Observable&lt;StarkSearchState&lt;MovieSearchCriteria&gt;&gt; {
+        return this.store.pipe(select(selectMovieSearch));
+    }
+
+    public resetSearchState(): void {
+        this.store.dispatch(new MovieSearchRemoveCriteria());
+        this.store.dispatch(new MovieSearchHasSearchedReset());
+    }
+
+    public search(criteria: MovieSearchCriteria): Observable&lt;MovieObject[]&gt; {
+        this.store.dispatch(new MovieSearchSetCriteria(criteria));
+        this.store.dispatch(new MovieSearchHasSearched());
+
+        return this.movieRepository.search(criteria);
+    }
+}</code></pre></div><p>Then don&#39;t forget to declare your service in your module :blush:</p>
+<h3 id="2-6-create-the-search-component-page">2.6. Create the search component page</h3>
+<p>Generate your search component page in <em>src/app/modules/&lt;module</em>name&gt;/pages_ by using <strong>ng cli</strong>:</p>
+<div><pre class="line-numbers"><code class="language-bash">ng generate component src/app/modules/my_module/pages/my_component-search-page</code></pre></div><h4 id="2-6-1-define-your-component">2.6.1. Define your component</h4>
+<p>The component extends the <strong>AbstractStarkSearchComponent</strong> and pass the type of the data in the extension.
+Firstly the main entity, <strong>Movie</strong> in this case, and secondly the search entity, <strong>MovieSearch</strong> still for this case.
+This component controller describes the different elements necessary for the Stark Table, as the StarkPaginationConfig and the StarkTableColumnProperties.</p>
+<p>Also, this component&#39;s controller must call the parent function ngOnInit in the ngOnInit function.</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { Component, Inject, OnDestroy, OnInit } from &quot;&#64;angular/core&quot;;
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;&#64;nationalbankbelgium/stark-core&quot;;
+import { AbstractStarkSearchComponent, StarkPaginationConfig, StarkTableColumnProperties } from &quot;&#64;nationalbankbelgium/stark-ui&quot;;
+import { Movie, MovieSearchCriteria } from &quot;./entities&quot;;
+import { MOVIE_SERVICE, MovieService } from &quot;./services&quot;;
+
+&#64;Component({
+    selector: &quot;movie-search&quot;,
+    templateUrl: &quot;./movie-search-page.component.html&quot;
+})
+export class MovieSearchPageComponent extends AbstractStarkSearchComponent&lt;Movie, MovieSearchCriteria&gt; implements OnInit, OnDestroy {
+    public columnsProperties: StarkTableColumnProperties[];
+    public searchResults: Movie[];
+    public paginationConfig: StarkPaginationConfig;
+
+    public constructor(
+        &#64;Inject(STARK_LOGGING_SERVICE) logger: StarkLoggingService,
+        &#64;Inject(MOVIE_SERVICE) demoGenericService: MovieService
+    ) {
+        super(demoGenericService, logger);
+
+        this.performSearchOnInit = true; // Turn on automatic search (last search criteria)
+        this.preserveLatestResults = true; // Keep a reference to the latest results in the latestResults variable
+    }
+
+    /**
+     * Component lifecycle hook
+     */
+    public ngOnInit(): void {
+        super.ngOnInit();
+
+        this.results$.subscribe((movies: Movie[]) =&gt; (this.searchResults = movies));
+
+        this.columnsProperties = [
+            {
+                name: &quot;hero&quot;,
+                label: &quot;Hero&quot;,
+                isFilterable: true,
+                isSortable: true
+            },
+            {
+                name: &quot;title&quot;,
+                label: &quot;Title&quot;,
+                isFilterable: true,
+                isSortable: true
+            },
+            {
+                name: &quot;year&quot;,
+                label: &quot;Year&quot;,
+                isFilterable: true,
+                isSortable: true
+            }
+        ];
+
+        this.paginationConfig = {
+            isExtended: false,
+            itemsPerPage: 10,
+            itemsPerPageOptions: [10, 20, 50],
+            itemsPerPageIsPresent: true,
+            page: 1,
+            pageNavIsPresent: true,
+            pageInputIsPresent: true
+        };
+    }
+
+    /**
+     * Component lifecycle hook
+     */
+    public ngOnDestroy(): void {
+        super.ngOnDestroy();
+    }
+}</code></pre></div><h4 id="2-6-2-define-your-template">2.6.2. Define your template</h4>
+<p>The template contains all information necessary for a page, the title and the stark-generic-search component.
+The usage of Generic Search component is explained in the <a href="https://stark.nbb.be/api-docs/stark-ui/latest/components/StarkGenericSearchComponent.html">StarkGenericSearchComponent API documentation</a>.</p>
+<div><pre class="line-numbers"><code class="language-html">&lt;h1 class=&quot;mat-display-3&quot; translate&gt;Movie Search&lt;/h1&gt;
+&lt;section class=&quot;stark-section&quot;&gt;
+    &lt;stark-generic-search
+        formHtmlId=&quot;demo-generic-search-form&quot;
+        (searchTriggered)=&quot;onSearch($event)&quot;
+        (resetTriggered)=&quot;onReset($event)&quot;
+        [isFormHidden]=&quot;false&quot;
+        (newTriggered)=&quot;onNew($event)&quot;
+        (formVisibilityChanged)=&quot;onFormVisibilityChange($event)&quot;
+    &gt;
+        &lt;movies-search-form
+            #searchForm
+            [searchCriteria]=&quot;workingCopy&quot;
+            (workingCopyChanged)=&quot;updateWorkingCopy($event)&quot;
+        &gt;&lt;/movies-search-form&gt;
+    &lt;/stark-generic-search&gt;
+    &lt;stark-table
+        htmlId=&quot;demo-generic-search-table&quot;
+        [columnProperties]=&quot;columnsProperties&quot;
+        [paginationConfig]=&quot;paginationConfig&quot;
+        [data]=&quot;searchResults&quot;
+    &gt;&lt;/stark-table&gt;
+&lt;/section&gt;</code></pre></div>
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
+            var COMPODOC_CURRENT_PAGE_URL = 'generic-search-component.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

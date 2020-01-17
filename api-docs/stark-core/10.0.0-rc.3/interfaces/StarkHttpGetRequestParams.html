@@ -1,0 +1,230 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>StarkHttpGetRequestParams</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/http/builder/http-request-parameters.intf.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Extra parameters to customize the get Http request to be sent.</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                    <code><a href="../interfaces/StarkHttpRequestParams.html" target="_self" >StarkHttpRequestParams</a></code>
+            </p>
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { StarkSerializable } from &quot;../../../serialization&quot;;
+
+/**
+ * This interface defines the structure to follow when providing additional parameters to the StarkHttpRequestBuilder.
+ */
+export interface StarkHttpRequestParams {
+	/**
+	 * Whether to allow query parameters with undefined value or not. Default: false.
+	 */
+	allowUndefinedQueryParams?: boolean;
+
+	/**
+	 * Whether to allow query parameters with empty value (&#x27;&#x27;) or not. Default: false.
+	 */
+	allowEmptyQueryParams?: boolean;
+
+	/**
+	 * Path parameters to be added in the url when working with nested resources
+	 */
+	pathParameters?: { [param: string]: string };
+
+	/**
+	 * Query parameters to be added to the request
+	 */
+	queryParameters?: { [param: string]: string | string[] | undefined };
+
+	/**
+	 * Maximum number of times the request should be retried in case of error before emitting the failure. Default: 0
+	 */
+	retryCount?: number;
+
+	/**
+	 * Custom type to be used to serialize/deserialize the resource instead of the default serialization type for the request
+	 */
+	serializationType?: StarkSerializable;
+}
+
+/**
+ * Extra parameters to customize the create Http request to be sent.
+ */
+export interface StarkHttpCreateRequestParams extends StarkHttpRequestParams {}
+
+/**
+ * Extra parameters to customize the get Http request to be sent.
+ */
+export interface StarkHttpGetRequestParams extends StarkHttpRequestParams {}
+
+/**
+ * Extra parameters to customize the update Http request to be sent.
+ */
+export interface StarkHttpUpdateRequestParams extends StarkHttpRequestParams {
+	/**
+	 * When true, the request-type uses HTTP PUT else it uses HTTP POST. Default: false
+	 */
+	isIdempotent?: boolean;
+}
+
+/**
+ * Extra parameters to customize the delete Http request to be sent.
+ */
+export interface StarkHttpDeleteRequestParams extends StarkHttpRequestParams {
+	/**
+	 * Whether the delete should be enforced or not. Default: false
+	 * When set to true, the ETag value is not passed.
+	 * Only set this to true if it makes sense for the use case and if your back-end allows it!
+	 */
+	force?: boolean;
+}
+
+/**
+ * Extra parameters to customize the get collection Http request to be sent.
+ */
+export interface StarkHttpGetCollectionRequestParams extends StarkHttpRequestParams {}
+
+/**
+ * Extra parameters to customize the search Http request to be sent.
+ */
+export interface StarkHttpSearchRequestParams extends StarkHttpRequestParams {
+	/**
+	 * Whether to allow criteria with empty value (&#x27;&#x27;) or not. Default: false.
+	 */
+	allowEmptyCriteria?: boolean;
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkHttpGetRequestParams.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
