@@ -129,6 +129,7 @@
     "core-js": "~3.6.0",
     "eligrey-classlist-js-polyfill": "~1.2.20180112",
     "event-source-polyfill": "~1.0.5",
+    "hammerjs": "^2.0.8",
     "http-server": "~0.12.0",
     "ngrx-store-freeze": "~0.2.4",
     "ngrx-store-logger": "~0.2.2",
