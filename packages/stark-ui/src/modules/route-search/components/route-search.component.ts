@@ -124,7 +124,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 				routeEntry.label
 					.toString()
 					.toLowerCase()
-					.indexOf(filterValue) === 0
+					.includes(filterValue)
 		);
 	}
 
