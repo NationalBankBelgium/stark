@@ -208,6 +208,11 @@ describe("RouteSearchComponent", () => {
 				expect(result.length).toBe(2);
 				expect(result[0]).toEqual({ label: "Test 1", targetState: "test1", targetStateParams: undefined });
 				expect(result[1]).toEqual({ label: "Test 2", targetState: "test2", targetStateParams: undefined });
+
+				result = component.filterRouteEntries("st");
+				expect(result.length).toBe(2);
+				expect(result[0]).toEqual({ label: "Test 1", targetState: "test1", targetStateParams: undefined });
+				expect(result[1]).toEqual({ label: "Test 2", targetState: "test2", targetStateParams: undefined });
 			});
 
 			it("should return an empty array if the input is not in the list", () => {
