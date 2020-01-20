@@ -18,7 +18,7 @@ COMMIT_HASH=`git rev-parse --verify HEAD`
 
 TARGET_REPO="git@github.com:NationalBankBelgium/stark.git"
 EXPECTED_REPO_SLUG="NationalBankBelgium/stark"
-EXPECTED_NODE_VERSION="8"
+EXPECTED_NODE_VERSION="10"
 
 COMMIT_AUTHOR_USERNAME="TravisCI"
 COMMIT_AUTHOR_EMAIL="alexis.georges@nbb.be"
@@ -41,7 +41,7 @@ LATEST_DIR_NAME="latest"
 #touch ${LOGS_DIR}/build-perf.log
 #DRY_RUN=true
 #TRAVIS=true
-#TRAVIS_NODE_VERSION="8"
+#TRAVIS_NODE_VERSION="10"
 #TRAVIS_COMMIT=${COMMIT_HASH}
 #TRAVIS_REPO_SLUG="NationalBankBelgium/stark" # yes we're always on the correct repo
 #ENFORCE_SHOWCASE_VERSION_CHECK=false # allows not have consistency between tag version and showcase version
