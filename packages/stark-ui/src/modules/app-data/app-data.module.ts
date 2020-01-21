@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { StarkAppDataComponent } from "./components";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
@@ -13,7 +14,7 @@ import { StarkLocale } from "@nationalbankbelgium/stark-core";
 
 @NgModule({
 	declarations: [StarkAppDataComponent],
-	imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule, TranslateModule],
+	imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, TranslateModule],
 	exports: [StarkAppDataComponent]
 })
 export class StarkAppDataModule {

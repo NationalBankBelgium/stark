@@ -1,16 +1,5 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ElementRef,
-	Inject,
-	Input,
-	OnDestroy,
-	OnInit,
-	Renderer2,
-	ViewEncapsulation
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkDOMUtil } from "../../../util/dom";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
@@ -35,15 +24,12 @@ export type StarkAppDataComponentMode = "dropdown" | "menu";
 		class: componentName
 	}
 })
-export class StarkAppDataComponent extends AbstractStarkUiComponent implements OnInit, OnDestroy {
+export class StarkAppDataComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * The mode in which the component should be displayed.
+	 * Default: "dropdown"
 	 */
 	@Input() public mode?: StarkAppDataComponentMode = "dropdown";
-
-	public isDetailHidden = true;
-
-	public windowClickHandler?: EventListener;
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -58,59 +44,5 @@ export class StarkAppDataComponent extends AbstractStarkUiComponent implements O
 	 */
 	public ngOnInit(): void {
 		this.logger.debug(componentName + ": controller initialized");
-
-		this.isDetailHidden = true;
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnDestroy(): void {
-		this.removeWindowClickHandler();
-	}
-
-	/**
-	 * Manage the fact that the detail are shown or hidden.
-	 */
-	public toggleDetail(): void {
-		this.isDetailHidden = !this.isDetailHidden;
-
-		if (this.isDetailHidden) {
-			this.removeWindowClickHandler();
-		} else {
-			this.attachWindowClickHandler();
-		}
-	}
-
-	/**
-	 * Method use to attach a click handler to the window
-	 */
-	public attachWindowClickHandler(): void {
-		this.windowClickHandler = (event: Event): void => {
-			if (this.isDetailHidden) {
-				return;
-			}
-
-			const parentElement: Element | undefined = StarkDOMUtil.searchParentElementByClass(<Element>event.target, componentName);
-			if (parentElement) {
-				return;
-			}
-
-			this.toggleDetail();
-		};
-
-		window.addEventListener("click", this.windowClickHandler);
-		this.logger.debug(componentName + ": clickHandler added");
-	}
-
-	/**
-	 * Method to remove a click handler from the windows
-	 */
-	public removeWindowClickHandler(): void {
-		if (this.windowClickHandler) {
-			this.logger.debug(componentName + ": clickHandler removed");
-			window.removeEventListener("click", this.windowClickHandler);
-			this.windowClickHandler = undefined;
-		}
 	}
 }
