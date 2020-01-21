@@ -9,7 +9,6 @@ module.exports = {
 			"always",
 			[
 				"accessibility",
-				"build",
 				"build-main",
 				"developer-guide",
 				"docs",
@@ -18,11 +17,11 @@ module.exports = {
 				"stark-all",
 				"stark-build",
 				"stark-core",
-				"stark-demo",
 				"stark-rbac",
-				"stark-starter",
 				"stark-testing",
-				"stark-ui"
+				"stark-ui",
+				"showcase",
+				"starter"
 			]
 		],
 		"scope-case": [2, "always", "lowerCase"]
