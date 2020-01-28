@@ -435,7 +435,6 @@ Must be one of the following:
 Must be one of the following:
 
 -   **accessibility**
--   **build**
 -   **build-main**
 -   **developer-guide**
 -   **docs**
@@ -444,11 +443,11 @@ Must be one of the following:
 -   **stark-all**
 -   **stark-build**
 -   **stark-core**
--   **stark-demo**
 -   **stark-rbac**
--   **stark-starter**
 -   **stark-testing**
 -   **stark-ui**
+-   **showcase**
+-   **starter**
 
 If the scope you want to specify is not in the list, you can ask to add it or add it in the commitlint
 configuration file (`commitlint.config.js`) in the root.
