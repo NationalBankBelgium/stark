@@ -62,7 +62,6 @@
     "postinstall": "npm run webdriver:update",
     "postversion": "git push && git push --tags",
     "preclean:install": "npm run clean",
-    "precommit": "lint-staged",
     "prettier-check": "prettier **/*.{css,js,json,md,pcss,scss,ts} --write",
     "preversion": "npm test",
     "protractor": "protractor ./e2e/protractor.conf",
@@ -101,10 +100,14 @@
     "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run docs:coverage"
+    }
+  },
   "lint-staged": {
     "*.{css,js,json,md,pcss,scss,ts}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "dependencies": {
