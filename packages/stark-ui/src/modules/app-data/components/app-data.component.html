@@ -1,7 +1,9 @@
 <!-- the projected detail content should be put in an ng-template so that it can be rendered multiple times in this template -->
 <!-- solution taken from https://github.com/angular/angular/issues/22972#issuecomment-407358396 -->
 <ng-template #appDataDetail>
-	<ng-content select=".detail-slot"></ng-content>
+	<div class="stark-app-data-detail" (click)="$event.stopPropagation()">
+		<ng-content select=".detail-slot"></ng-content>
+	</div>
 </ng-template>
 
 <div *ngIf="mode === 'dropdown'" class="stark-app-data dropdown">
@@ -9,25 +11,36 @@
 		<ng-content select=".summary-slot"></ng-content>
 	</div>
 
-	<button mat-icon-button aria-label="Application Data" (click)="toggleDetail()" [ngClass]="{ 'is-open': !isDetailHidden }" mat-button>
+	<button
+		mat-icon-button
+		aria-label="Application Data"
+		#dropdownDetailTrigger="matMenuTrigger"
+		[matMenuTriggerFor]="dropdownDetail"
+		[class.is-open]="dropdownDetailTrigger.menuOpen"
+		mat-button
+	>
 		<mat-icon svgIcon="menu-down"></mat-icon>
 	</button>
-	<div class="stark-app-data-detail stark-fade-animation" *ngIf="!isDetailHidden">
-		<ng-container *ngTemplateOutlet="appDataDetail"></ng-container>
-	</div>
+	<mat-menu #dropdownDetail="matMenu" xPosition="before" yPosition="below" class="stark-app-data dropdown-detail">
+		<ng-template matMenuContent>
+			<ng-container *ngTemplateOutlet="appDataDetail"></ng-container>
+		</ng-template>
+	</mat-menu>
 </div>
 
 <div *ngIf="mode === 'menu'" class="stark-app-data menu">
 	<button
+		mat-button
 		mat-icon-button
 		aria-label="Application Data"
-		(click)="toggleDetail()"
-		mat-button
+		[matMenuTriggerFor]="menuDetail"
 		[matTooltip]="'STARK.ICONS.APP_DATA' | translate"
 	>
 		<mat-icon svgIcon="dots-vertical"></mat-icon>
 	</button>
-	<div class="stark-app-data-detail animate-show-hide" *ngIf="!isDetailHidden">
-		<ng-container *ngTemplateOutlet="appDataDetail"></ng-container>
-	</div>
+	<mat-menu #menuDetail="matMenu" yPosition="below" class="stark-app-data menu-detail">
+		<ng-template matMenuContent>
+			<ng-container *ngTemplateOutlet="appDataDetail"></ng-container>
+		</ng-template>
+	</mat-menu>
 </div>
