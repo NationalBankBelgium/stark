@@ -3,6 +3,7 @@ import { Subject } from "rxjs";
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 
+/* tslint:disable:jsdoc-format */
 /**
  * Mock class of the {@link StarkAppSidebarService|StarkAppSidebarService}.
  *
@@ -10,28 +11,29 @@ import createSpy = jasmine.createSpy;
  * Therefore, it is up to you to define the return values of such spies according to your needs.
  *
  * You can use it in your unit tests by providing it while configuring the testing module in the TestBed. For example:
- * ```typescript
- * import { STARK_APP_SIDEBAR_SERVICE } from "@nationalbankbelgium/stark-ui";
- * import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
- *
- * describe("Some test", () => {
- *
- *     beforeEach(async(() => {
- *         return TestBed.configureTestingModule({
- *             imports: [...],
- *             declarations: [...],
- *             providers: [
- *                 // provide is as a value
- *                 { provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockAppSidebarService() },
- *                 // or as a class
- *                 { provide: STARK_APP_SIDEBAR_SERVICE, useClass: MockAppSidebarService }
- *             ]
- *         }).compileComponents();
- *     }));
- *
- * }
- * ```
+```typescript
+import { STARK_APP_SIDEBAR_SERVICE } from "@nationalbankbelgium/stark-ui";
+import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
+
+describe("Some test", () => {
+
+	beforeEach(async(() => {
+		return TestBed.configureTestingModule({
+			imports: [...],
+			declarations: [...],
+			providers: [
+				// provide is as a value
+				{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockAppSidebarService() },
+				// or as a class
+				{ provide: STARK_APP_SIDEBAR_SERVICE, useClass: MockAppSidebarService }
+			]
+		}).compileComponents();
+	}));
+
+});
+```
  */
+/* tslint:enable:jsdoc-format */
 export class MockAppSidebarService implements SpyObj<StarkAppSidebarService> {
 	/**
 	 * Observable subscribed by components to catch close events

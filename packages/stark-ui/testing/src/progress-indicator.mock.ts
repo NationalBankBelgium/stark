@@ -2,6 +2,7 @@ import { StarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui";
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 
+/* tslint:disable:jsdoc-format */
 /**
  * Mock class of the {@link StarkProgressIndicatorService|StarkProgressIndicatorService}.
  *
@@ -9,28 +10,29 @@ import createSpy = jasmine.createSpy;
  * Therefore, it is up to you to define the return values of such spies according to your needs.
  *
  * You can use it in your unit tests by providing it while configuring the testing module in the TestBed. For example:
- * ```typescript
- * import { STARK_PROGRESS_INDICATOR_SERVICE } from "@nationalbankbelgium/stark-ui";
- * import { MockStarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui/testing";
- *
- * describe("Some test", () => {
- *
- *     beforeEach(async(() => {
- *         return TestBed.configureTestingModule({
- *             imports: [...],
- *             declarations: [...],
- *             providers: [
- *                 // provide is as a value
- *                 { provide: STARK_PROGRESS_INDICATOR_SERVICE, useValue: new MockStarkProgressIndicatorService() },
- *                 // or as a class
- *                 { provide: STARK_PROGRESS_INDICATOR_SERVICE, useClass: MockStarkProgressIndicatorService }
- *             ]
- *         }).compileComponents();
- *     }));
- *
- * }
- * ```
+```typescript
+import { STARK_PROGRESS_INDICATOR_SERVICE } from "@nationalbankbelgium/stark-ui";
+import { MockStarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui/testing";
+
+describe("Some test", () => {
+
+	beforeEach(async(() => {
+		return TestBed.configureTestingModule({
+			imports: [...],
+			declarations: [...],
+			providers: [
+				// provide is as a value
+				{ provide: STARK_PROGRESS_INDICATOR_SERVICE, useValue: new MockStarkProgressIndicatorService() },
+				// or as a class
+				{ provide: STARK_PROGRESS_INDICATOR_SERVICE, useClass: MockStarkProgressIndicatorService }
+			]
+		}).compileComponents();
+	}));
+
+});
+```
  */
+/* tslint:enable:jsdoc-format */
 export class MockStarkProgressIndicatorService implements SpyObj<StarkProgressIndicatorService> {
 	/**
 	 * registers a new progress indicator in the application state. Each registered progress indicator is identified by a topic,

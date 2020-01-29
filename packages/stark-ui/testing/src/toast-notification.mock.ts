@@ -2,6 +2,7 @@ import { StarkToastNotificationService } from "@nationalbankbelgium/stark-ui";
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 
+/* tslint:disable:jsdoc-format */
 /**
  * Mock class of the {@link StarkToastNotificationService|StarkToastNotificationService}.
  *
@@ -9,28 +10,29 @@ import createSpy = jasmine.createSpy;
  * Therefore, it is up to you to define the return values of such spies according to your needs.
  *
  * You can use it in your unit tests by providing it while configuring the testing module in the TestBed. For example:
- * ```typescript
- * import { STARK_TOAST_NOTIFICATION_SERVICE } from "@nationalbankbelgium/stark-ui";
- * import { MockStarkToastNotificationService } from "@nationalbankbelgium/stark-ui/testing";
- *
- * describe("Some test", () => {
- *
- *     beforeEach(async(() => {
- *         return TestBed.configureTestingModule({
- *             imports: [...],
- *             declarations: [...],
- *             providers: [
- *                 // provide is as a value
- *                 { provide: STARK_TOAST_NOTIFICATION_SERVICE, useValue: new MockStarkToastNotificationService() },
- *                 // or as a class
- *                 { provide: STARK_TOAST_NOTIFICATION_SERVICE, useClass: MockStarkToastNotificationService }
- *             ]
- *         }).compileComponents();
- *     }));
- *
- * }
- * ```
+```typescript
+import { STARK_TOAST_NOTIFICATION_SERVICE } from "@nationalbankbelgium/stark-ui";
+import { MockStarkToastNotificationService } from "@nationalbankbelgium/stark-ui/testing";
+
+describe("Some test", () => {
+
+	beforeEach(async(() => {
+		return TestBed.configureTestingModule({
+			imports: [...],
+			declarations: [...],
+			providers: [
+				// provide is as a value
+				{ provide: STARK_TOAST_NOTIFICATION_SERVICE, useValue: new MockStarkToastNotificationService() },
+				// or as a class
+				{ provide: STARK_TOAST_NOTIFICATION_SERVICE, useClass: MockStarkToastNotificationService }
+			]
+		}).compileComponents();
+	}));
+
+});
+```
  */
+/* tslint:enable:jsdoc-format */
 export class MockStarkToastNotificationService implements SpyObj<StarkToastNotificationService> {
 	/**
 	 * Returns an observable that will emit one of the possible StarkToastNotificationResult after the toast is closed

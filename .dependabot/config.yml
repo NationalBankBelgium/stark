@@ -104,8 +104,6 @@ update_configs:
           dependency_name: "@angular-devkit/build-ng-packagr"
           version_requirement: ">=0.800"
       - match:
-          dependency_name: "@compodoc/compodoc"
-      - match:
           dependency_name: "@types/node"
           version_requirement: ">=11"
       - match:
@@ -126,8 +124,6 @@ update_configs:
           dependency_name: "@angular/*"
           version_requirement: ">=8"
       - match:
-          dependency_name: "@compodoc/compodoc"
-      - match:
           dependency_name: "@types/node"
           version_requirement: ">=11"
       - match:
@@ -147,8 +143,6 @@ update_configs:
       - match:
           dependency_name: "@angular/*"
           version_requirement: ">=8"
-      - match:
-          dependency_name: "@compodoc/compodoc"
       - match:
           dependency_name: "@types/node"
           version_requirement: ">=11"
