@@ -141,7 +141,7 @@
     "zone.js": "~0.9.0"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "~1.1.7",
+    "@compodoc/compodoc": "~1.1.11",
     "@nationalbankbelgium/stark-build": "latest",
     "@nationalbankbelgium/stark-testing": "latest",
     "@types/core-js": "~2.5.0",

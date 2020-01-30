@@ -21,29 +21,31 @@ import { StarkProgressIndicatorComponent } from "../components";
  */
 const directiveName = "[starkProgressIndicator]";
 
+/* tslint:disable:jsdoc-format */
 /**
  * This directive must be used as attribute on a DOM element and the config provided should be a {@link StarkProgressIndicatorConfig} object:
  *
- * ```html
- * <some-element [starkProgressIndicator]="{topic: 'some-topic', type: 'SPINNER'}" ></some-element>
- * <!-- or -->
- * <some-element [starkProgressIndicator]="progressIndicatorConfig" ></some-element>
- * ```
+```html
+<some-element [starkProgressIndicator]="{topic: 'some-topic', type: 'SPINNER'}" ></some-element>
+<!-- or -->
+<some-element [starkProgressIndicator]="progressIndicatorConfig" ></some-element>
+```
  *
  * Once the directive is initialized, it registers itself to the {@link StarkProgressIndicatorService} and creates an instance of the {@link StarkProgressIndicatorComponent} which is the one that actually displays the progress indicator (e.g., spinner).
  *
  * From then on you can control the state/visibility of the progress indicator programmatically by using the {@link StarkProgressIndicatorService}:
  *
- * ```typescript
- * // the service should be injected in your component
- * @Inject(STARK_PROGRESS_INDICATOR_SERVICE) private progressService: StarkProgressIndicatorService
- *
- * // then you can call the method to show the progress indicator
- * this.progressService.show(this.progressIndicatorConfig.topic);
- * // or to hide it
- * this.progressService.hide(this.progressIndicatorConfig.topic);
- * ```
+```typescript
+// the service should be injected in your component
+@Inject(STARK_PROGRESS_INDICATOR_SERVICE) private progressService: StarkProgressIndicatorService;
+
+// then you can call the method to show the progress indicator
+this.progressService.show(this.progressIndicatorConfig.topic);
+// or to hide it
+this.progressService.hide(this.progressIndicatorConfig.topic);
+```
  */
+/* tslint:enable:jsdoc-format */
 @Directive({
 	selector: directiveName
 })
@@ -122,20 +124,18 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 		}
 		this.registerInstance(this.starkProgressIndicator);
 
-		this.progressSubscription = this._progressService.isVisible(this.topic).subscribe(
-			(isVisible: boolean = false): void => {
-				if (isVisible) {
-					// TODO The element is here added as a child, not as a sibling
-					// this.renderer.appendChild(this.elementRef.nativeElement, componentRef.location.nativeElement);
+		this.progressSubscription = this._progressService.isVisible(this.topic).subscribe((isVisible: boolean = false): void => {
+			if (isVisible) {
+				// TODO The element is here added as a child, not as a sibling
+				// this.renderer.appendChild(this.elementRef.nativeElement, componentRef.location.nativeElement);
 
-					this._viewContainer.insert(this.componentViewRef); // insert the view in the last position
-					this.renderer.addClass(this.elementRef.nativeElement, "stark-hide");
-				} else {
-					this._viewContainer.detach(this._viewContainer.indexOf(this.componentViewRef));
-					this.renderer.removeClass(this.elementRef.nativeElement, "stark-hide");
-				}
+				this._viewContainer.insert(this.componentViewRef); // insert the view in the last position
+				this.renderer.addClass(this.elementRef.nativeElement, "stark-hide");
+			} else {
+				this._viewContainer.detach(this._viewContainer.indexOf(this.componentViewRef));
+				this.renderer.removeClass(this.elementRef.nativeElement, "stark-hide");
 			}
-		);
+		});
 	}
 
 	/**

@@ -19,6 +19,7 @@ export interface StarkRBACStatePermissions {
 	redirectTo?: StarkStateRedirection | StarkStateRedirectionFn;
 }
 
+/* tslint:disable:jsdoc-format */
 /**
  * Describes a Router state configuration with 'data.permissions' defined in order to protect such state(s) with RBAC authorization
  * via the {@link StarkRBACAuthorizationService}.
@@ -27,27 +28,28 @@ export interface StarkRBACStatePermissions {
  * be used to define Router state configurations, it is recommended to use this interface instead because it clearly indicates the intention
  * to protect the given state(s) and also enables the IDE to provide code completion and code hinting.
  *
- * ```typescript
- * export const APP_STATES: StarkRBACStateDeclaration[] = [
- *   {
- *     name: "someState",
- *     url: "/someUrl",
- *     component: SomeComponent,
- *     data: {
- *         ...
- *         permissions: {
- *             only: ["roleA", "roleB"] // or define 'except' option instead
- *             redirectTo: {
- *                 stateName: "anotherState",
- *                 params: {...}
- *             }
- *         }
- *     }
- *   },
- *   ...
- * ];
- * ```
+```typescript
+export const APP_STATES: StarkRBACStateDeclaration[] = [
+	{
+		name: "someState",
+		url: "/someUrl",
+		component: SomeComponent,
+		data: {
+			...
+			permissions: {
+				only: ["roleA", "roleB"], // or define 'except' option instead
+				redirectTo: {
+					stateName: "anotherState",
+					params: {...}
+				}
+			}
+		}
+	},
+  ...
+];
+```
  */
+/* tslint:enable:jsdoc-format */
 export interface StarkRBACStateDeclaration extends Ng2StateDeclaration {
 	/**
 	 * An inherited property to store state data
