@@ -73,6 +73,7 @@ import {
 	TableWithCustomStylingComponent,
 	TableWithFixedActionsComponent,
 	TableWithFixedHeaderComponent,
+	TableWithFooterComponent,
 	TableWithSelectionComponent,
 	TableWithTranscludedActionBarComponent
 } from "./components";
@@ -146,6 +147,7 @@ import {
 		TableWithCustomActionsComponent,
 		TableWithTranscludedActionBarComponent,
 		TableWithFixedHeaderComponent,
+		TableWithFooterComponent,
 		TableWithCustomStylingComponent,
 		TableWithFixedActionsComponent,
 		DemoToastPageComponent,

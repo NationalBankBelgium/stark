@@ -39,4 +39,9 @@
 			*ngTemplateOutlet="columnTemplate; context: { $implicit: { rowData: rowItem, displayedValue: getDisplayedValue(rowItem) } }"
 		></ng-container>
 	</td>
+	<ng-container *ngIf="footerValue !== 'undefined'">
+		<td mat-footer-cell *matFooterCellDef>
+			{{ footerValue!.toString() | translate }}
+		</td>
+	</ng-container>
 </ng-container>

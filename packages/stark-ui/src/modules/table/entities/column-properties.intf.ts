@@ -61,6 +61,14 @@ export interface StarkTableColumnProperties {
 	label?: string;
 
 	/**
+	 * Value to be shown as the column's footer.
+	 * Default: if there is no footer defined here and in any other column,
+	 * then it won't be displayed. Otherwise, if at least one of the other columns defines a footer,
+	 * then the footer of this column will be displayed as empty
+	 */
+	footerValue?: string | number;
+
+	/**
 	 * Name of the property that will be the source of the column.
 	 */
 	name: string;
