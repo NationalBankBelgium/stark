@@ -50,12 +50,24 @@
 }
 
 .stark-app-sidebar .mat-sidenav-content {
-  margin-top: $stark-header-size;
+  &:not(.stark-ios-device) {
+    margin-top: $stark-header-size;
+  }
+
+  &.stark-ios-device .stark-main-container {
+    margin-top: $stark-header-size;
+  }
 }
 
 @media #{$tablet-screen-query} {
   .stark-app-sidebar .mat-sidenav-content {
-    margin-top: $stark-header-size-desktop;
+    &:not(.stark-ios-device) {
+      margin-top: $stark-header-size-desktop;
+    }
+
+    &.stark-ios-device .stark-main-container {
+      margin-top: $stark-header-size-desktop;
+    }
   }
 }
 
