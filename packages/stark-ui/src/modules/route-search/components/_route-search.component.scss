@@ -26,6 +26,10 @@
   }
 
   .search-field {
+    .mat-form-field-label {
+      font-size: 15px;
+    }
+
     .mat-form-field-wrapper {
       margin-left: 5px;
       margin-right: 5px;
@@ -35,12 +39,8 @@
       padding-bottom: 0;
 
       .mat-form-field-label {
-        line-height: 18px;
+        line-height: 19px;
       }
-    }
-
-    .mat-form-field-label {
-      font-size: 15px;
     }
 
     .mat-input-element {
