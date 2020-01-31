@@ -101,6 +101,11 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	public toggleSidebarSubscription!: Subscription;
 
 	/**
+	 * Either the browser is running on iOS or not
+	 */
+	public isiOSDevice = false;
+
+	/**
 	 * Function to deregister the routing transition hook
 	 */
 	public deregisterTransitionHook!: Function;
@@ -153,6 +158,9 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 		this.deregisterTransitionHook = this.routingService.addTransitionHook(StarkRoutingTransitionHook.ON_SUCCESS, {}, () => {
 			this.onSuccessfulTransition();
 		});
+
+		// Detection method documented here: https://stackoverflow.com/questions/9038625/detect-if-device-is-ios#answer-9039885
+		this.isiOSDevice = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 	}
 
 	/**
