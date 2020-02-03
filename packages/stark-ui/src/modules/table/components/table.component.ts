@@ -367,13 +367,13 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Reference to the MatTable embedded in this component
 	 */
-	@ViewChild(MatTable)
+	@ViewChild(MatTable, { static: true })
 	public table!: MatTable<object>;
 
 	/**
 	 * Reference to the MatPaginator embedded in this component
 	 */
-	@ViewChild(StarkPaginationComponent)
+	@ViewChild(StarkPaginationComponent, { static: false })
 	public starkPaginator!: StarkPaginationComponent;
 
 	/**

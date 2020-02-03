@@ -35,12 +35,13 @@ module.exports = {
 		{ rel: "icon", type: "image/png", sizes: "16x16", href: "assets/images/app-icons/favicon-16x16.png" }
 	],
 	meta: [
+		{ name: "description", content: "<%= starkAppMetadata.description %>" },
 		{ name: "viewport", content: "width=device-width, initial-scale=1" },
 		// Disable tap highlight on IE
 		{ name: "msapplication-tap-highlight", content: "no" },
 		// Fallback to homescreen for Chrome <39 on Android
 		{ name: "mobile-web-app-capable", content: "yes" },
-		{ name: "application-name", content: "Stark Starter" },
+		{ name: "application-name", content: "<%= starkOptions.starkAppMetadata.name %>" },
 		// Add to homescreen for Safari on iOS
 		{ name: "apple-mobile-web-app-capable", content: "yes" },
 		{ name: "apple-mobile-web-app-status-bar-style", content: "black" },

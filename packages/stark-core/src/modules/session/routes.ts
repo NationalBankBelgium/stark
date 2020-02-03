@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { LazyLoadResult, RawParams, StateDeclaration, Transition } from "@uirouter/core";
-import { loadNgModule, Ng2StateDeclaration, NgModuleToLoad } from "@uirouter/angular";
+import { loadNgModule, Ng2StateDeclaration, ModuleTypeCallback } from "@uirouter/angular";
 import { from, Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 import { STARK_ROUTING_SERVICE, StarkRoutingService, StarkStateConfigWithParams } from "../routing/services";
@@ -44,7 +44,7 @@ export function resolveTargetRoute(
 	// in case the state is part of a module to load lazily, we need to load it and search the url again
 	if (targetRoute && (<Function>targetRoute.state.$$state)().loadChildren) {
 		// so we call the needed function to lazy load the module
-		const moduleToLoad: NgModuleToLoad = (<Function>targetRoute.state.$$state)().loadChildren;
+		const moduleToLoad: ModuleTypeCallback = (<Function>targetRoute.state.$$state)().loadChildren;
 		const lazyLoadNgModule: (transition: Transition, stateObject: StateDeclaration) => Promise<LazyLoadResult> = loadNgModule(
 			moduleToLoad
 		);

@@ -28,7 +28,7 @@ describe("DateRangePickerComponent", () => {
 		`
 	})
 	class TestModelComponent {
-		@ViewChild(StarkDateRangePickerComponent)
+		@ViewChild(StarkDateRangePickerComponent, { static: true })
 		public dateRangePicker!: StarkDateRangePickerComponent;
 
 		public dateRange = {};
@@ -44,7 +44,7 @@ describe("DateRangePickerComponent", () => {
 		`
 	})
 	class TestFormGroupComponent {
-		@ViewChild(StarkDateRangePickerComponent)
+		@ViewChild(StarkDateRangePickerComponent, { static: true })
 		public dateRangePicker!: StarkDateRangePickerComponent;
 
 		public formGroup = new FormGroup({

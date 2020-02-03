@@ -1,21 +1,13 @@
 "use strict";
 
 const helpers = require("./helpers");
-const fs = require("fs");
-const commonData = require("./webpack.common-data.js"); // common configuration between environments
 const buildUtils = require("./build-utils");
-const ngCliPackageChunkSort = require("@angular-devkit/build-angular/src/angular-cli-files/utilities/package-chunk-sort");
 
 /**
  * Webpack Plugins
  *
  */
-const IndexHtmlWebpackPlugin = require("@angular-devkit/build-angular/src/angular-cli-files/plugins/index-html-webpack-plugin")
-	.IndexHtmlWebpackPlugin;
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BaseHrefWebpackPlugin = require("base-href-webpack-plugin").BaseHrefWebpackPlugin;
 const DefinePlugin = require("webpack/lib/DefinePlugin");
-const HtmlElementsWebpackPlugin = require("html-elements-webpack-plugin");
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const WebpackMonitor = require("webpack-monitor");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
@@ -34,7 +26,6 @@ const fixedTSLintConfig = buildUtils.getFixedTSLintConfig(
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = metadata => {
-	const isProd = metadata.ENV === "production";
 	const METADATA = metadata;
 
 	const MONITOR = !!process.env.MONITOR; // env MONITOR variable set via cross-env
@@ -135,62 +126,6 @@ module.exports = metadata => {
 			}),
 
 			/**
-			 * Plugin: HtmlWebpackPlugin
-			 * Description: Simplifies creation of HTML files to serve your webpack bundles.
-			 * This is especially useful for webpack bundles that include a hash in the filename
-			 * which changes every compilation.
-			 *
-			 * See: https://github.com/jantimon/html-webpack-plugin
-			 */
-			new HtmlWebpackPlugin({
-				template: "!!ejs-loader!src/index.html",
-				title: METADATA.TITLE,
-				chunksSortMode: function(a, b) {
-					// generated entry points will include those from styles config
-					// const entryPoints = ["runtime", "polyfills", "sw-register", "styles", "vendor", "main"];
-					// logic extracted from getBrowserConfig function in @angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/browser.js
-					const entryPoints = ngCliPackageChunkSort.generateEntryPoints(buildUtils.ANGULAR_APP_CONFIG.buildOptions);
-					return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
-				},
-				metadata: METADATA,
-				inject: "body", //  true (default) or  "body" are the same
-				starkAppMetadata: commonData.starkAppMetadata,
-				starkAppConfig: commonData.starkAppConfig, // TODO: shall we remove it?
-				// xhtml: true, // TODO: why XHTML?
-				minify: isProd
-					? {
-						caseSensitive: true,
-						collapseWhitespace: true,
-						keepClosingSlash: true
-					}
-					: false
-			}),
-
-			/**
-			 * Plugin: BaseHrefWebpackPlugin
-			 * Description: Extension for html-webpack-plugin to programmatically insert or update <base href="" /> tag.
-			 * Therefore, HtmlWebpackPlugin should also be installed
-			 *
-			 * See: https://github.com/dzonatan/base-href-webpack-plugin
-			 */
-			new BaseHrefWebpackPlugin({ baseHref: buildUtils.ANGULAR_APP_CONFIG.baseHref }),
-
-			/**
-			 * Plugin: ScriptExtHtmlWebpackPlugin
-			 * Description: Enhances html-webpack-plugin functionality
-			 * with different deployment options for your scripts including:
-			 *
-			 * See: https://github.com/numical/script-ext-html-webpack-plugin
-			 */
-			// TODO evaluate this
-			// new ScriptExtHtmlWebpackPlugin({
-			// 	sync: /inline|polyfills|vendor/,
-			// 	defaultAttribute: 'async',
-			// 	preload: [/polyfills|vendor|main/],
-			// 	prefetch: [/chunk/]
-			// }),
-
-			/**
 			 * Plugin: InlineManifestWebpackPlugin
 			 * Inline Webpack's manifest.js in index.html
 			 *
@@ -209,36 +144,6 @@ module.exports = metadata => {
 			// new WriteFilePlugin(),
 
 			/**
-			 * Generate html tags based on javascript maps.
-			 *
-			 * If a publicPath is set in the webpack output configuration, it will be automatically added to
-			 * href attributes, you can disable that by adding a "=href": false property.
-			 * You can also enable it to other attribute by settings "=attName": true.
-			 *
-			 * The configuration supplied is map between a location (key) and an element definition object (value)
-			 * The location (key) is then exported to the template under then htmlElements property in webpack configuration.
-			 *
-			 * Example:
-			 *  Adding this plugin configuration
-			 *  new HtmlElementsWebpackPlugin({
-			 *  headTags: { ... }
-			 *  })
-			 *
-			 * Means we can use it in the template like this:
-			 * <%= webpackConfig.htmlElements.headTags %>
-			 *
-			 * @link : https://github.com/fulls1z3/html-elements-webpack-plugin
-			 *
-			 */
-			...(fs.existsSync(helpers.root("config/index-head-config.js"))
-				? [
-					new HtmlElementsWebpackPlugin({
-						headTags: require(helpers.root("config/index-head-config"))
-					})
-				]
-				: []),
-
-			/**
 			 * Plugin: ContextReplacementPlugin
 			 * Description: allows to override the inferred information in a 'require' context
 			 * Including only a certain set of Moment locales
@@ -255,14 +160,14 @@ module.exports = metadata => {
 			 */
 			...(MONITOR
 				? [
-					new WebpackMonitor({
-						capture: true, // -> default 'true'
-						target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
-						launch: true, // -> default 'false'
-						port: 3030, // default 8081
-						excludeSourceMaps: true // default 'true'
-					})
-				]
+						new WebpackMonitor({
+							capture: true, // -> default 'true'
+							target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
+							launch: true, // -> default 'false'
+							port: 3030, // default 8081
+							excludeSourceMaps: true // default 'true'
+						})
+				  ]
 				: []),
 
 			/**
@@ -272,24 +177,14 @@ module.exports = metadata => {
 			 */
 			...(BUNDLE_ANALYZER
 				? [
-					new BundleAnalyzerPlugin({
-						generateStatsFile: true, // default 'false'
-						statsFilename: helpers.root("reports/bundle-analyzer/stats.json"), // default -> 'stats.json'
-						openAnalyzer: true, //default 'true'
-						analyzerPort: 3030 // default 8888
-					})
-				]
-				: []),
-
-			/**
-			 * Internally, NG CLI uses its own IndexHtmlWebpackPlugin.
-			 * So we override this to generate a "dummy" index html that won't be used.
-			 * The "index.html" that will be used is the one generated with the HtmlWebpackPlugin.
-			 */
-			new IndexHtmlWebpackPlugin({
-				input: "src/index.html",
-				output: ".ng-cli.index.html"
-			})
+						new BundleAnalyzerPlugin({
+							generateStatsFile: true, // default 'false'
+							statsFilename: helpers.root("reports/bundle-analyzer/stats.json"), // default -> 'stats.json'
+							openAnalyzer: true, //default 'true'
+							analyzerPort: 3030 // default 8888
+						})
+				  ]
+				: [])
 
 			// TODO: StylelintWebpackPlugin breaks the build: the assets are not copied
 			// /**

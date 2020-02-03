@@ -1,5 +1,5 @@
 /*tslint:disable:completed-docs no-identical-functions no-duplicate-string no-big-function*/
-import { Component, Injector, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
+import { Component, Injector, NO_ERRORS_SCHEMA } from "@angular/core";
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule, TransitionPromise } from "@uirouter/angular";
 import { RawParams, StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
@@ -388,8 +388,7 @@ describe("Service: StarkRoutingService", () => {
 					provide: StarkRoutingServiceImpl,
 					useFactory: starkRoutingServiceFactory,
 					deps: [StateService, TransitionService]
-				},
-				{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader } // needed for ui-router
+				}
 			],
 			imports: [routerModule]
 		});

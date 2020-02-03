@@ -22,7 +22,7 @@ import Spy = jasmine.Spy;
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkSliderComponent)
+	@ViewChild(StarkSliderComponent, { static: true })
 	public sliderComponent!: StarkSliderComponent;
 
 	public sliderId?: string;

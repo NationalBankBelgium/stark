@@ -42,7 +42,7 @@ import createSpyObj = jasmine.createSpyObj;
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkMessagePaneComponent)
+	@ViewChild(StarkMessagePaneComponent, { static: true })
 	public messagePaneComponent!: StarkMessagePaneComponent;
 	public clearOnNavigation?: boolean;
 	public align?: string;

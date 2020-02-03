@@ -34,7 +34,7 @@ import { of, throwError } from "rxjs";
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkLanguageSelectorComponent)
+	@ViewChild(StarkLanguageSelectorComponent, { static: true })
 	public languageSelectorComponent!: StarkLanguageSelectorComponent;
 
 	public mode?: StarkLanguageSelectorMode;

@@ -206,13 +206,13 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Reference to the MatColumnDef embedded in this component
 	 */
-	@ViewChild(MatColumnDef)
+	@ViewChild(MatColumnDef, { static: true })
 	public columnDef!: MatColumnDef;
 
 	/**
 	 * Reference to the transcluded template in this component via the ngTemplateOutlet
 	 */
-	@ContentChild(TemplateRef)
+	@ContentChild(TemplateRef, { static: true })
 	public columnTemplate?: TemplateRef<object>;
 
 	/**

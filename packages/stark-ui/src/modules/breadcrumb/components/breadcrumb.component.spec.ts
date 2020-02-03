@@ -19,7 +19,7 @@ import Spy = jasmine.Spy;
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkBreadcrumbComponent)
+	@ViewChild(StarkBreadcrumbComponent, { static: true })
 	public breadcrumbComponent!: StarkBreadcrumbComponent;
 	public breadcrumbConfig?: StarkBreadcrumbConfig;
 }

@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, Inject, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
+import { APP_INITIALIZER, Inject, NgModule } from "@angular/core";
 import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { UIRouter, UIRouterModule } from "@uirouter/angular";
@@ -195,7 +195,6 @@ export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logge
 	 */
 	providers: [
 		environment.ENV_PROVIDERS,
-		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
 		{ provide: STARK_APP_CONFIG, useFactory: starkAppConfigFactory },
 		{ provide: STARK_APP_METADATA, useFactory: starkAppMetadataFactory },
 		{ provide: STARK_MOCK_DATA, useFactory: starkMockDataFactory },

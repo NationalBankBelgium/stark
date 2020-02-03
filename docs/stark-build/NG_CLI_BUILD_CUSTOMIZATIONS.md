@@ -52,6 +52,7 @@ Any app using **Stark** should include the customizations provided by Stark-Buil
                             "replaceDuplicatePlugins": false
                         }
                     },
+		    "indexTransform": "./node_modules/@nationalbankbelgium/stark-build/config/index-html.transform.js",
                     ...
                 },
                 "configurations": {
@@ -83,7 +84,7 @@ Any app using **Stark** should include the customizations provided by Stark-Buil
                 }
             },
             "serve": {
-                "builder": "@angular-builders/dev-server:generic",
+		"builder": "@angular-builders/custom-webpack:dev-server",
                 "options": {
                     "browserTarget": "your-app:build"
                 },
@@ -108,7 +109,7 @@ Any app using **Stark** should include the customizations provided by Stark-Buil
 Notice that the custom Webpack partial configurations are set to the dev and prod configurations in the `build` and the `serve` targets.
 
 This must be done by using the `@angular-builders/custom-webpack:browser` builder in the `build` target and set the `customWebpackConfig` options.
-For the `serve` target this must be done by using `@angular-builders/dev-server:generic` builder.
+For the `serve` target this must be done by using `@angular-builders/custom-webpack:dev-server` builder.
 
 ## Webpack Customizations
 
@@ -183,20 +184,18 @@ if (ENV === "development") {
 }
 ```
 
-#### [HtmlWebpackPlugin](https://github.com/jantimon/html-webpack-plugin "HtmlWebpackPlugin")
+#### [Html indexTransform](https://github.com/NationalBankBelgium/stark/blob/master/packages/stark-build/config/index-html.transform.js "Html indexTransform")
+This plugin extends the Angular CLI build system.
 
-Simplifies the creation of the main _index.html_ file in the application bundle. This plugin will generate the final _index.html_ based on
-the `src/index.html` file in your project.
-
-This plugin is configured to use the [ejs-loader](https://github.com/okonet/ejs-loader) for [Underscore/LoDash Templates](https://lodash.com/docs#template).
-Which means that you can use that templating syntax in your `src/index.html`. This is really powerful given the information from the HtmlWebpackPlugin
-that you can access in your template to customize it. For example:
+This plugin is configured to use the [Underscore/LoDash Templates](https://lodash.com/docs#template).
+Which means that you can use that templating syntax in your `src/index.html`. This is really powerful given the information from the Html IndexTransform
+that you can access in your _index.html_ template to customize it. For example:
 
 ```html
 <html lang="en">
 	<head>
 		<!-- Use the application name from StarkAppMetadata as the Page title -->
-		<title><%= htmlWebpackPlugin.options.starkAppMetadata.name %></title>
+		<title><%= starkOptions.starkAppMetadata.name %></title>
 	</head>
 	<body>
 		Some content here
@@ -204,9 +203,9 @@ that you can access in your template to customize it. For example:
 </html>
 ```
 
-This is the information from HtmlWebpackPlugin that is accessible in the template:
+This is the information from `indexTransform` that is accessible in the template:
 
--   **options:** all options that were passed to the plugin including plugin's own options as well as Stark custom data containing the following:
+-   **starkOptions:** all options that were passed to the plugin including plugin's own options as well as Stark custom data containing the following:
     -   **metadata:**
         -   **TITLE:** Default title for Stark based apps: "Stark Application by @NationalBankBelgium"
         -   **BASE_URL:** The base URL of the current build
@@ -221,35 +220,9 @@ This is the information from HtmlWebpackPlugin that is accessible in the templat
     -   **starkAppMetadata:** the Stark metadata of the application available in the `src/stark-app-metadata.json` file
     -   **starkAppConfig:** the Stark specific configuration for the application available in the `src/stark-app-config.json` file
 
-#### [BaseHrefWebpackPlugin](https://github.com/dzonatan/base-href-webpack-plugin "BaseHrefWebpackPlugin")
+The Angular CLI build system will automatically add the base tag `<base href="<custom-base-url>">` to the _index.html_ so you don't need to add it manually yourself.
 
-Allows to customize the base url in the _index.html_ via the Webpack config.
-
-In Stark-Build, the custom base url provided to this plugin is the one you define in the **baseHref** option of your project's `angular.json` file:
-
-```text
-{
-    ...
-    "projects": {
-        "your-app": {
-            ...
-            "architect": {
-                "yourTargetName": {
-                    ...
-                    "options": {
-                        ...
-                        "baseHref": "/some-url"  // default value: "/"
-                    }
-                }
-            }
-        }
-    }
-}
-```
-
-This plugin will automatically add the base tag `<base href="<custom-base-url>">` to the _index.html_ so you don't need to add it manually yourself.
-
-#### [HtmlElementWebpackPlugin](https://github.com/fulls1z3/html-elements-webpack-plugin "HtmlElementWebpackPlugin")
+#### [HtmlHeadElements](https://github.com/NationalBankBelgium/stark/blob/master/packages/stark-build/config/html-head-elements "HtmlHeadElements")
 
 This plugin appends head elements during the creation of _index.html_.
 
@@ -278,6 +251,7 @@ module.exports = {
     ],
     meta: [
         ...
+	{ name: "description", "content": "<%= starkAppMetadata.description %>"}
         { name: "apple-mobile-web-app-capable", content: "yes" },
         { name: "apple-mobile-web-app-status-bar-style", content: "black" },
         { name: "apple-mobile-web-app-title", content: "template" },
@@ -287,21 +261,7 @@ module.exports = {
 }
 ```
 
-Finally, to include in your _index.html_ file the elements defined in this new file, you will have to add
-the following lines in your `<head>` section:
-
-```html
-<head>
-	...
-	<% if (webpackConfig.htmlElements.headTags) { %>
-	<%= webpackConfig.htmlElements.headTags %>
-	<% } %>
-	...
-</head>
-```
-
-_If you do not intend to use this feature, simply don't create the `index-head-config.js` file and
-don't include the check for `webpackConfig.htmlElements.headTags` in the `<head>` section of index.html._
+_If you do not intend to use this feature, simply don't create the `index-head-config.js` file._
 
 #### [ContextReplacementPlugin](https://webpack.js.org/plugins/context-replacement-plugin/)
 

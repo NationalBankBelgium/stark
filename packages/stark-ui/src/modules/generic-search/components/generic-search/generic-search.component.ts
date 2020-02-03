@@ -190,7 +190,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 *
 	 * See https://angular.io/guide/template-syntax#template-reference-variables--var- for more info about template reference variables.
 	 */
-	@ContentChild("searchForm")
+	@ContentChild("searchForm", { static: true })
 	public searchFormComponent!: StarkSearchFormComponent<unknown>;
 
 	/**

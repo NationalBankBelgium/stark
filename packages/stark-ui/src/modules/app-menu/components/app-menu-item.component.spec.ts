@@ -18,7 +18,7 @@ describe("AppMenuItemComponent", () => {
 		`
 	})
 	class TestHostComponent {
-		@ViewChild(StarkAppMenuItemComponent)
+		@ViewChild(StarkAppMenuItemComponent, { static: true })
 		public starkAppMenuItem!: StarkAppMenuItemComponent;
 
 		public level?: number;

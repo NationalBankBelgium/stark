@@ -20,7 +20,7 @@ const karmaTypescriptBundlerAlias = {
 	"@ngrx/effects": "../stark-core/node_modules/@ngrx/effects/bundles/effects.umd.js",
 	"@ngrx/effects/testing": "../stark-core/node_modules/@ngrx/effects/bundles/effects-testing.umd.js",
 	"@ngx-translate/core": "../stark-core/node_modules/@ngx-translate/core/bundles/ngx-translate-core.umd.js",
-	"@uirouter/angular": "../stark-core/node_modules/@uirouter/angular/_bundles/ui-router-ng2.js",
+	"@uirouter/angular": "../stark-core/node_modules/@uirouter/angular/bundles/uirouter-angular.umd.js",
 	"@uirouter/core": "../stark-core/node_modules/@uirouter/core/lib/index.js",
 	"@uirouter/rx": "../stark-core/node_modules/@uirouter/rx/lib/index.js",
 	cerialize: "../stark-core/node_modules/cerialize/index.js",

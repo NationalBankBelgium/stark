@@ -21,7 +21,7 @@ import { StarkProgressIndicatorComponent } from "../components";
 class TestComponent {
 	public starkProgressIndicatorConfig?: StarkProgressIndicatorConfig;
 
-	@ViewChild(StarkProgressIndicatorDirective)
+	@ViewChild(StarkProgressIndicatorDirective, { static: true })
 	public progressIndicatorDirective!: StarkProgressIndicatorDirective;
 }
 

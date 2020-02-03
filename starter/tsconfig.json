@@ -3,6 +3,10 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",
+
+    //FIXME Necessary due to angular 8. See: https://stackoverflow.com/questions/56375703/angular-8-lazy-loading-modules-error-ts1323-dynamic-import-is-only-supporte
+    "module": "esnext",
+
     "declaration": false,
     "lib": ["dom", "dom.iterable", "es2017"],
     "typeRoots": [

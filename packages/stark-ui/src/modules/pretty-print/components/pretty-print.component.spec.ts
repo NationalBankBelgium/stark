@@ -17,7 +17,7 @@ import { StarkPrettyPrintComponent } from "./pretty-print.component";
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkPrettyPrintComponent)
+	@ViewChild(StarkPrettyPrintComponent, { static: true })
 	public prettyPrintComponent!: StarkPrettyPrintComponent;
 
 	public data?: string;

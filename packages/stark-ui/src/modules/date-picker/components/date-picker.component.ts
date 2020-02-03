@@ -248,13 +248,13 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	/**
 	 * Reference to the MatDatepicker embedded in this component
 	 */
-	@ViewChild(MatDatepicker)
+	@ViewChild(MatDatepicker, { static: true })
 	public picker!: MatDatepicker<moment.Moment>;
 
 	/**
 	 * Reference to the MatDatepickerInput embedded in this component
 	 */
-	@ViewChild(MatDatepickerInput)
+	@ViewChild(MatDatepickerInput, { static: true })
 	public pickerInput!: MatDatepickerInput<moment.Moment>;
 
 	/**
