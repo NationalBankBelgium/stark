@@ -39,7 +39,10 @@ export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {
 			map((action: StarkSessionTimeoutCountdownStart) => {
 				this.sessionService.pauseUserActivityTracking();
 				this.dialogService
-					.open<StarkSessionTimeoutWarningDialogComponent>(StarkSessionTimeoutWarningDialogComponent, { data: action.countdown })
+					.open<StarkSessionTimeoutWarningDialogComponent>(StarkSessionTimeoutWarningDialogComponent, {
+						data: action.countdown,
+						disableClose: true
+					})
 					.afterClosed()
 					.subscribe((result: string) => {
 						if (result && result === "keep-logged") {
