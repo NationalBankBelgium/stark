@@ -90,7 +90,7 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 			expect(mockObserver.error).not.toHaveBeenCalled();
 			expect(mockObserver.complete).not.toHaveBeenCalled();
 			expect(mockDialogService.open).toHaveBeenCalledTimes(1);
-			expect(mockDialogService.open).toHaveBeenCalledWith(StarkSessionTimeoutWarningDialogComponent, { data: 20 });
+			expect(mockDialogService.open).toHaveBeenCalledWith(StarkSessionTimeoutWarningDialogComponent, { data: 20, disableClose: true });
 
 			expect(mockSessionService.resumeUserActivityTracking).not.toHaveBeenCalled();
 
