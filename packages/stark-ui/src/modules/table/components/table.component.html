@@ -98,17 +98,24 @@
 					[checked]="selection?.isSelected(row)"
 				></mat-checkbox>
 			</td>
+			<ng-container *ngIf="isFooterEnabled">
+				<td mat-footer-cell *matFooterCellDef></td>
+			</ng-container>
 		</ng-container>
 
 		<ng-container matColumnDef="rowIndex">
 			<th mat-header-cell *matHeaderCellDef></th>
 			<td mat-cell *matCellDef="let row">{{ getRowIndex(row) }}</td>
+			<ng-container *ngIf="isFooterEnabled">
+				<td mat-footer-cell *matFooterCellDef></td>
+			</ng-container>
 		</ng-container>
 
 		<stark-table-column
 			*ngFor="let col of columnProperties; trackBy: trackColumnFn"
 			[name]="col.name"
 			[headerLabel]="col.label"
+			[footerValue]="col.footerValue"
 			[sortable]="col.isSortable !== false"
 			[sortDirection]="getColumnSortingDirection(col.name)"
 			[sortPriority]="getColumnSortingPriority(col.name)"
@@ -147,5 +154,9 @@
 			[ngClass]="getRowClasses(row, i)"
 			(click)="onRowClick(row)"
 		></tr>
+
+		<ng-container *ngIf="isFooterEnabled">
+			<tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+		</ng-container>
 	</table>
 </div>

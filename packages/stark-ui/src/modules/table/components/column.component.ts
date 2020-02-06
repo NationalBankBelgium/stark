@@ -131,6 +131,27 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	private _headerLabel?: string;
 
 	/**
+	 * Value to be shown as the column's footer.
+	 */
+	@Input()
+	public set footerValue(value: string | number | undefined) {
+		this._footerValue = value;
+	}
+
+	/**
+	 * Returns the footer value of the column if it's specified.
+	 */
+	public get footerValue(): string | number | undefined {
+		return this._footerValue;
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _footerValue?: string | number;
+
+	/**
 	 * Whether the column is sortable or not. Default: true
 	 */
 	@Input()

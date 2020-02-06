@@ -45,6 +45,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 import { StarkPaginateEvent, StarkPaginationComponent, StarkPaginationConfig } from "../../pagination/components";
 import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../minimap/components";
 import find from "lodash-es/find";
+import findIndex from "lodash-es/findIndex";
 
 /**
  * Name of the component
@@ -68,6 +69,8 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 	isVisible: true
 };
 
+// FIXME: refactor the template of this component function to reduce its cyclomatic complexity
+/* tslint:disable:template-cyclomatic-complexity */
 /**
  * Component to display array data in a table layout.
  */
@@ -82,16 +85,22 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 		class: componentName
 	}
 })
-/* tslint:enable */
 export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 	/**
 	 * Array of {@link StarkTableColumnProperties} objects which define the columns of the data table.
 	 */
 	@Input()
 	public set columnProperties(input: StarkTableColumnProperties[]) {
+		this.isFooterEnabled =
+			findIndex(
+				input || [],
+				(column: StarkTableColumnProperties) => typeof column.footerValue !== "undefined" && column.footerValue !== ""
+			) > -1;
+
 		this._columnProperties = (input || []).map((properties: StarkTableColumnProperties) => ({
 			...DEFAULT_COLUMN_PROPERTIES,
-			...properties
+			...properties,
+			footerValue: this.isFooterEnabled ? properties.footerValue || "" : undefined
 		}));
 
 		if (this.dataSource) {
@@ -423,6 +432,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Whether the fixed header is enabled.
 	 */
 	public isFixedHeaderEnabled = false;
+
+	/**
+	 * Whether the footer is enabled.
+	 * Default: if there is no footer defined here and in any other column, then it won't be displayed.
+	 * Otherwise, if at least one of the other columns defines a footer,
+	 * then the footer of this column will be displayed as empty
+	 */
+	public isFooterEnabled = false;
 
 	/**
 	 * Whether the current sorting is done on multiple columns
