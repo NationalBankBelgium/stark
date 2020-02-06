@@ -1,0 +1,12 @@
+<stark-app-data mode="dropdown" class="dropdown-app-data">
+	<div class="summary-slot">
+		<span *ngIf="user" class="label">user</span>: <span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span>
+		<br />
+		<span class="label">Last access</span>: <span class="value">{{ time }}</span>
+	</div>
+	<div class="detail-slot">
+		<span class="label">Version</span>: <span class="value">{{ appMetadata.version }}</span>
+		<br />
+		<span class="label">Environment</span>: <span class="value">{{ appMetadata.environment }}</span>
+	</div>
+</stark-app-data>
