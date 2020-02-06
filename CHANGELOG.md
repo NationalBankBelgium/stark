@@ -1,3 +1,28 @@
+<a name="10.0.0-rc.4"></a>
+# [10.0.0-rc.4](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.3...10.0.0-rc.4) (2020-02-06)
+
+
+### Bug Fixes
+
+* **build-main:** changed expected node version to 10 in gh-deploy script ([ce3819b](https://github.com/nationalbankbelgium/stark/commit/ce3819b)), closes [#1485](https://github.com/nationalbankbelgium/stark/issues/1485)
+* **build-main:** fix sync scripts for starter + add 'showcase' in scopes of commitlint ([798094c](https://github.com/nationalbankbelgium/stark/commit/798094c))
+* **stark-build:** don't parse Prettier Typescript parser in Webpack to prevent "Can't resolve '[@microsoft](https://github.com/microsoft)/typescript-etw'" warning ([9ebe868](https://github.com/nationalbankbelgium/stark/commit/9ebe868)), closes [#1483](https://github.com/nationalbankbelgium/stark/issues/1483)
+* **stark-showcase:** add missing hammerjs dependency ([c19f4c0](https://github.com/nationalbankbelgium/stark/commit/c19f4c0))
+* **stark-starter:** add missing hammerjs dependency ([b781c02](https://github.com/nationalbankbelgium/stark/commit/b781c02))
+* **stark-ui:** app-data - fixed issues with detail-slot not displayed correctly on small screens ([155509a](https://github.com/nationalbankbelgium/stark/commit/155509a)), closes [#1555](https://github.com/nationalbankbelgium/stark/issues/1555)
+* **stark-ui:** app-sidebar - header is now visible on iOS devices (iTouch, iPhone, iPad) ([e107c71](https://github.com/nationalbankbelgium/stark/commit/e107c71)), closes [#1338](https://github.com/nationalbankbelgium/stark/issues/1338)
+* **stark-ui:** session - prevent click outside the Session Timeout Warning Dialog ([8283216](https://github.com/nationalbankbelgium/stark/commit/8283216))
+* **stark-ui:** table - Multisort - fix order issue when adding/removing sort criteria ([d113d05](https://github.com/nationalbankbelgium/stark/commit/d113d05)), closes [#1478](https://github.com/nationalbankbelgium/stark/issues/1478)
+
+
+### Features
+
+* **stark-ui:** add footer to table component ([159b245](https://github.com/nationalbankbelgium/stark/commit/159b245)), closes [#1540](https://github.com/nationalbankbelgium/stark/issues/1540)
+* **stark-ui:** route-search - add support for partial matching ([c9802d7](https://github.com/nationalbankbelgium/stark/commit/c9802d7)), closes [#1335](https://github.com/nationalbankbelgium/stark/issues/1335)
+* **starter:** configure husky and lint-staged properly ([ce600d1](https://github.com/nationalbankbelgium/stark/commit/ce600d1))
+
+
+
 <a name="10.0.0-rc.3"></a>
 # [10.0.0-rc.3](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.2...10.0.0-rc.3) (2020-01-10)
 
@@ -24,6 +49,7 @@
 
 ### Bug Fixes
 
+* **docs:** update BrowserStack badge to display correctly from `README.md` ([f102bed](https://github.com/nationalbankbelgium/stark/commit/f102bed)), closes [#1387](https://github.com/nationalbankbelgium/stark/issues/1387)
 * **stark-core:** add missing correlation-id header in the HTTP request sent to flush the logs ([4cf5f87](https://github.com/nationalbankbelgium/stark/commit/4cf5f87)), closes [#1319](https://github.com/nationalbankbelgium/stark/issues/1319)
 * **stark-demo:** replace encapsulated styles of Table Regular Component by global styles since they depend on Angular Material theming ([97b969e](https://github.com/nationalbankbelgium/stark/commit/97b969e)), closes [#1311](https://github.com/nationalbankbelgium/stark/issues/1311)
 * **stark-ui:** fix missing width in the "items per page" dropdown of StarkPagination component ([7962c25](https://github.com/nationalbankbelgium/stark/commit/7962c25)), closes [#1345](https://github.com/nationalbankbelgium/stark/issues/1345)
@@ -36,7 +62,6 @@
 
 ### Bug Fixes
 
-* **docs:** update BrowserStack badge to display correctly from `README.md` ([f102bed](https://github.com/nationalbankbelgium/stark/commit/f102bed)), closes [#1387](https://github.com/nationalbankbelgium/stark/issues/1387)
 * **stark-ui:** app-data, set top postion of the detail pane to 100% ([abc8962](https://github.com/nationalbankbelgium/stark/commit/abc8962)), closes [#1341](https://github.com/nationalbankbelgium/stark/issues/1341)
 * **stark-ui:** change the Multisort component to display the label instead of the name of the column ([fc47144](https://github.com/nationalbankbelgium/stark/commit/fc47144)), closes [#1397](https://github.com/nationalbankbelgium/stark/issues/1397)
 * **stark-ui:** fix side navigation rendering behind header ([ed580f1](https://github.com/nationalbankbelgium/stark/commit/ed580f1)), closes [#1338](https://github.com/nationalbankbelgium/stark/issues/1338)
