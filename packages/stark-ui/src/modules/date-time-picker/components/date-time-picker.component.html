@@ -11,21 +11,23 @@
 		[min]="min"
 	></stark-date-picker>
 
-	<input
-		matInput
-		#timeInput
-		id="{{ pickerId + '-time-input' }}"
-		name="{{ pickerName + '-time-input' }}"
-		class="time-input"
-		formControlName="time"
-		(change)="onDateTimeChange()"
-		[starkTimestampMask]="timeMask"
-		[required]="required"
-	/>
-	<div class="mat-form-field-suffix mat-datepicker-toggle">
-		<button mat-icon-button (click)="focusTimeInput($event)" [disabled]="disabled">
-			<mat-icon svgIcon="clock"></mat-icon>
-		</button>
+	<div class="time-picker">
+		<input
+			matInput
+			#timeInput
+			id="{{ pickerId + '-time-input' }}"
+			name="{{ pickerName + '-time-input' }}"
+			class="time-input"
+			formControlName="time"
+			(change)="onDateTimeChange()"
+			[starkTimestampMask]="timeMask"
+			[required]="required"
+		/>
+		<div class="mat-form-field-suffix mat-datepicker-toggle">
+			<button mat-icon-button (click)="focusTimeInput($event)" [disabled]="disabled">
+				<mat-icon svgIcon="clock"></mat-icon>
+			</button>
+		</div>
 	</div>
 </div>
 

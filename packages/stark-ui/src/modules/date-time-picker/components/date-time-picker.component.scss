@@ -21,9 +21,13 @@
     }
 
     /* Time */
-    > .time-input {
-      flex: 1;
-      max-width: 60px;
+    > .time-picker {
+      display: inline-flex;
+      justify-content: space-around;
+      
+      .time-input {
+        max-width: 60px;
+      }
     }
   }
 
@@ -42,7 +46,7 @@
     width: 20px;
     line-height: 20px;
     position: absolute;
-    margin-left: 280px; /* should be the same width of the 'stark-date-time-picker-form-field-wrapper' (see above) */
+    right: -20px; /* to render it to the right of the date-time-wrapper */
 
     &.hidden {
       display: none;
