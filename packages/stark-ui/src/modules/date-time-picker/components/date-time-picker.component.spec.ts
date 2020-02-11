@@ -185,7 +185,7 @@ describe("DateTimePickerComponent", () => {
 			formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
 			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
 
-			const timeInputDebugElement = hostFixture.debugElement.query(By.css(".date-time-wrapper > input"));
+			const timeInputDebugElement = hostFixture.debugElement.query(By.css(".time-picker > input"));
 			expect(timeInputDebugElement).toBeTruthy();
 			// more verbose way to create and trigger an event (the only way it works in IE)
 			// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
