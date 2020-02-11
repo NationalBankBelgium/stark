@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations no-life-cycle-call */
+/* tslint:disable:completed-docs component-max-inline-declarations no-lifecycle-call */
 import { StarkAppDataComponent, StarkAppDataComponentMode } from "./app-data.component";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { async, fakeAsync, inject, tick, ComponentFixture, TestBed } from "@angular/core/testing";

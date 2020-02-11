@@ -1,4 +1,4 @@
-/*tslint:disable:trackBy-function*/
+/*tslint:disable:template-use-track-by-function*/
 import { StarkBreadcrumbPath } from "./breadcrumb-path.intf";
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
 import {

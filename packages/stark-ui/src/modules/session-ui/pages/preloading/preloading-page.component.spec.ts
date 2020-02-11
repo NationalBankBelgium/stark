@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-life-cycle-call */
+/* tslint:disable:completed-docs no-lifecycle-call */
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { of, throwError } from "rxjs";
 import { TranslateModule } from "@ngx-translate/core";

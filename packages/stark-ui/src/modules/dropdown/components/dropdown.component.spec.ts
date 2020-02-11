@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations no-commented-code no-big-function no-identical-functions no-duplicate-string no-life-cycle-call */
+/* tslint:disable:completed-docs component-max-inline-declarations no-commented-code no-big-function no-identical-functions no-duplicate-string no-lifecycle-call */
 import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { async, ComponentFixture, fakeAsync, flush, inject, TestBed, tick } from "@angular/core/testing";

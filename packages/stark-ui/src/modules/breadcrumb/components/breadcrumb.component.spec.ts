@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-life-cycle-call */
+/* tslint:disable:completed-docs no-big-function no-lifecycle-call */
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
 import { StarkBreadcrumbComponent } from "./breadcrumb.component";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";

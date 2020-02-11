@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations no-identical-functions no-life-cycle-call deprecation */
+/* tslint:disable:completed-docs component-max-inline-declarations no-identical-functions no-lifecycle-call deprecation */
 import { SelectionModel } from "@angular/cdk/collections";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";

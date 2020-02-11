@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations no-identical-functions no-big-function */
+/* tslint:disable:completed-docs component-max-inline-declarations no-identical-functions no-big-function */
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { By } from "@angular/platform-browser";
 import { Component, ViewChild } from "@angular/core";

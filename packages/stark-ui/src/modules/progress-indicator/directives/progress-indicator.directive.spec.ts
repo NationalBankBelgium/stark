@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-life-cycle-call */
+/* tslint:disable:completed-docs no-lifecycle-call */
 import { Observable, of, Subject } from "rxjs";
 import { Component, ViewChild } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";

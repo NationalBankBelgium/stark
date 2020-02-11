@@ -1,4 +1,4 @@
-/* tslint:disable:no-null-keyword completed-docs max-inline-declarations no-big-function */
+/* tslint:disable:no-null-keyword completed-docs component-max-inline-declarations no-big-function */
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { Component, EventEmitter, ViewChild } from "@angular/core";
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";

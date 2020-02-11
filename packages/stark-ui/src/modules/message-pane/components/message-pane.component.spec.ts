@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size no-identical-functions no-life-cycle-call */
+/* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size no-identical-functions no-lifecycle-call */
 
 /* angular imports */
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";

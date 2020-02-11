@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-life-cycle-call */
+/* tslint:disable:completed-docs no-big-function no-lifecycle-call */
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
 import { Component, ComponentFactoryResolver, NO_ERRORS_SCHEMA } from "@angular/core";

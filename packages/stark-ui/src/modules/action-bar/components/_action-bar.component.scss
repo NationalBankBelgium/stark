@@ -11,6 +11,12 @@
   overflow: hidden;
   transform-origin: bottom;
 
+  &.extended {
+    .stark-action-bar-action {
+      width: auto;
+    }
+  }
+
   .action-bar-wrapper {
     display: flex;
     align-items: center;
@@ -43,7 +49,14 @@
     .action-label {
       font-size: 13px;
       padding-left: 15px;
+      text-transform: none;
     }
+  }
+}
+
+.stark-action-bar-menu-item {
+  .stark-small-icon {
+    margin-bottom: 4px;
   }
 }
 

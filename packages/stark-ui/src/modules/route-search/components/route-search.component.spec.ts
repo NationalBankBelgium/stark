@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-duplicate-string no-life-cycle-call */
+/* tslint:disable:completed-docs no-duplicate-string no-lifecycle-call */
 import { async, ComponentFixture, inject, TestBed } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";

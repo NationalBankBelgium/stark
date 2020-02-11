@@ -16,7 +16,7 @@ const componentName = "stark-app-container";
 	selector: "stark-app-container",
 	templateUrl: "./app-container.component.html",
 	encapsulation: ViewEncapsulation.None,
-	// tslint:disable-next-line: use-host-property-decorator
+	// tslint:disable-next-line: no-host-metadata-property
 	host: {
 		class: componentName
 	}
