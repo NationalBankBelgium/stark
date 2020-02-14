@@ -1,5 +1,4 @@
 /* tslint:disable:completed-docs*/
-import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { Store } from "@ngrx/store";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -503,8 +502,4 @@ describe("ProgressIndicatorService", () => {
 class ProgressIndicatorServiceHelper extends StarkProgressIndicatorServiceImpl {
 	public progressIndicatorMap!: Map<string, StarkProgressIndicatorFullConfig>;
 	public progressIndicatorMap$!: Observable<Map<string, StarkProgressIndicatorFullConfig>>;
-
-	public constructor(logger: StarkLoggingService, store: Store<StarkUIApplicationState>) {
-		super(logger, store);
-	}
 }

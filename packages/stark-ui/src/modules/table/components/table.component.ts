@@ -133,7 +133,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public get _visibleMinimapItems(): string[] {
 		return this.columnProperties
-			.filter(({ isVisible }: StarkTableColumnProperties) => isVisible)
+			.filter(({ isVisible }: StarkTableColumnProperties) => !!isVisible)
 			.map(({ name }: StarkTableColumnProperties) => name);
 	}
 
@@ -777,9 +777,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 					return "\\S*"; // wildcard "*"
 				} else if (match === "?") {
 					return "\\S{1}"; // wildcard "?"
-				} else {
-					return "\\" + match; // add trailing "\" to escape the character
 				}
+
+				return "\\" + match; // add trailing "\" to escape the character
 			})
 			.replace("<stark_char_star>", "\\*")
 			.replace("<stark_char_quot>", "\\?")
@@ -932,7 +932,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			return;
 		}
 		const sortableColumns: StarkTableColumnComponent[] = this.columns
-			.filter((columnToFilter: StarkTableColumnComponent) => columnToFilter.sortDirection)
+			.filter((columnToFilter: StarkTableColumnComponent) => !!columnToFilter.sortDirection)
 			.sort((column1: StarkTableColumnComponent, column2: StarkTableColumnComponent) => column1.sortPriority - column2.sortPriority);
 
 		// FIXME If "multiSort" is empty or equal to "true", isMultiSorting is true. Otherwise, "isMultiSorting" should stay false.

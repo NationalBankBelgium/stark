@@ -288,15 +288,13 @@ describe("Service: StarkXSRFService", () => {
 		it("should log an error when the HTTP call to a backend failed", fakeAsync(() => {
 			const failingBackends: StarkBackend[] = [mockBackend1, mockBackend3];
 
-			(<Spy<HttpClientGet>>httpMock.get).and.callFake(
-				(url: string): Observable<HttpResponse<string> | never> => {
-					if (failingBackends.map((failingBackend: StarkBackend) => failingBackend.url).indexOf(url) !== -1) {
-						return throwError(new HttpErrorResponse({ error: "ping failed" }));
-					}
-
-					return of(new HttpResponse({ body: "ping OK" }));
+			(<Spy<HttpClientGet>>httpMock.get).and.callFake((url: string) => {
+				if (failingBackends.map((failingBackend: StarkBackend) => failingBackend.url).indexOf(url) !== -1) {
+					return throwError(new HttpErrorResponse({ error: "ping failed" }));
 				}
-			);
+
+				return of(new HttpResponse({ body: "ping OK" }));
+			});
 
 			xsrfService.pingBackends();
 			tick();

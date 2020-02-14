@@ -3,13 +3,7 @@ import { of, throwError } from "rxjs";
 import { Store } from "@ngrx/store";
 import { fakeAsync, tick } from "@angular/core/testing";
 import { HookMatchCriteria, Predicate, RawParams, StateDeclaration, StateOrName, TargetState, Transition } from "@uirouter/core";
-import {
-	StarkLoggingService,
-	StarkRoutingService,
-	StarkRoutingTransitionHook,
-	StarkSessionService,
-	StarkUser
-} from "@nationalbankbelgium/stark-core";
+import { StarkRoutingTransitionHook, StarkUser } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 
 import { StarkRBACStatePermissions, StarkStateRedirection, StarkStateRedirectionFn } from "../entities";
@@ -517,15 +511,6 @@ describe("StarkRBACAuthorizationService", () => {
 });
 
 class AuthorizationServiceHelper extends StarkRBACAuthorizationServiceImpl {
-	public constructor(
-		logger: StarkLoggingService,
-		sessionService: StarkSessionService,
-		routingService: StarkRoutingService,
-		store: Store<any>
-	) {
-		super(logger, sessionService, routingService, store);
-	}
-
 	public registerTransitionHook(): void {
 		super.registerTransitionHook();
 	}

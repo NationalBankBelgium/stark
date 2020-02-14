@@ -124,7 +124,7 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 		}
 		this.registerInstance(this.starkProgressIndicator);
 
-		this.progressSubscription = this._progressService.isVisible(this.topic).subscribe((isVisible: boolean = false): void => {
+		this.progressSubscription = this._progressService.isVisible(this.topic).subscribe((isVisible: boolean = false) => {
 			if (isVisible) {
 				// TODO The element is here added as a child, not as a sibling
 				// this.renderer.appendChild(this.elementRef.nativeElement, componentRef.location.nativeElement);

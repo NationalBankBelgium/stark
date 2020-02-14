@@ -4,7 +4,7 @@
  */
 import { AppModule } from "./app";
 
-import { AbstractStarkMain, StarkEnvironment } from "@nationalbankbelgium/stark-core";
+import { AbstractStarkMain } from "@nationalbankbelgium/stark-core";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
 import { environment } from "./environments/environment";
@@ -14,10 +14,6 @@ import { environment } from "./environments/environment";
  * our Services and Providers into Angular's dependency injection system
  */
 class Main extends AbstractStarkMain {
-	public constructor(env: StarkEnvironment) {
-		super(env);
-	}
-
 	public main = (): Promise<any> => {
 		if (ENV === "development") {
 			console.log("Bootstrapping the App");

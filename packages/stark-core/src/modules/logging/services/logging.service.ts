@@ -223,13 +223,13 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	private parseArg(arg: any): string {
 		if (typeof arg === "string") {
 			return arg;
-		} else {
-			// catch potential "circular reference" error
-			try {
-				return JSON.stringify(arg);
-			} catch (e) {
-				return arg; // return the arg "as is" in case of error
-			}
+		}
+
+		// catch potential "circular reference" error
+		try {
+			return JSON.stringify(arg);
+		} catch (e) {
+			return arg; // return the arg "as is" in case of error
 		}
 	}
 

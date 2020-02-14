@@ -549,7 +549,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	/**
 	 * @ignore
 	 */
-	public trackItemFn(formButton: StarkFormButton): string {
+	public trackItemFn(_index: number, formButton: StarkFormButton): string {
 		return formButton.id;
 	}
 }

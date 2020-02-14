@@ -67,9 +67,9 @@ export class StarkAppFooterComponent implements OnInit {
 		const currentYear: string = new Date().getFullYear().toString();
 		if (startYear === currentYear) {
 			return startYear;
-		} else {
-			return startYear + " - " + currentYear;
 		}
+
+		return startYear + " - " + currentYear;
 	}
 
 	/**

@@ -78,9 +78,9 @@ export class InMemoryDataService implements InMemoryDbService {
 					url: requestInfo.url
 				};
 			});
-		} else {
-			return undefined; // do not intercept, let the default GET handle it
 		}
+
+		return undefined; // do not intercept, let the default GET handle it
 	}
 
 	/**

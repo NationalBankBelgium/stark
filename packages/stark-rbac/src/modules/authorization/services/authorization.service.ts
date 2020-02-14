@@ -60,9 +60,9 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 	public hasRole(roleCode: string): boolean {
 		if (this.user && roleCode && roleCode.trim() !== "") {
 			return this.user.roles.indexOf(roleCode) > -1;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 	public hasAnyRole(roleCodes: string[]): boolean {
@@ -83,9 +83,9 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 	public isAnonymous(): boolean {
 		if (this.user) {
 			return this.user.isAnonymous === true;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 	protected registerTransitionHook(): void {
@@ -128,9 +128,9 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 				return this.hasAnyRole(permissions.only);
 			} else if (permissions.except instanceof Array) {
 				return !this.hasAnyRole(permissions.except);
-			} else {
-				this.logger.warn(starkRBACAuthorizationServiceName + ": could not find 'only' or 'except' in state 'data.permissions'");
 			}
+
+			this.logger.warn(starkRBACAuthorizationServiceName + ": could not find 'only' or 'except' in state 'data.permissions'");
 		}
 
 		return true;
@@ -140,11 +140,11 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 		this.logger.warn(starkUnauthorizedUserError);
 		if (permissions && permissions.redirectTo) {
 			return this.redirectNavigation(permissions.redirectTo, transition);
-		} else {
-			// dispatch action so an effect can run any logic if needed
-			this.store.dispatch(new StarkUserNavigationUnauthorized(transition.targetState().name()));
-			throw new Error(starkUnauthorizedUserError);
 		}
+
+		// dispatch action so an effect can run any logic if needed
+		this.store.dispatch(new StarkUserNavigationUnauthorized(transition.targetState().name()));
+		throw new Error(starkUnauthorizedUserError);
 	}
 
 	protected redirectNavigation(redirectTo: StarkStateRedirection | StarkStateRedirectionFn, transition: Transition): TargetState {

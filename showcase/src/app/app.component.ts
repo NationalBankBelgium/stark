@@ -82,9 +82,9 @@ export class AppComponent implements OnInit {
 					if (state && typeof state.name !== "undefined") {
 						const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 						return !state.name.match(regexInitExitStateName) && !(state.abstract && state.name === "");
-					} else {
-						return true; // always match
 					}
+
+					return true; // always match
 				}
 			},
 			(tran: Transition) => {

@@ -109,7 +109,7 @@ export class DemoDateRangePickerPageComponent implements OnDestroy {
 		this.logger.debug("onChange:", dateRange);
 	}
 
-	public trackItemFn(item: string): string {
+	public trackItemFn(_index: number, item: string): string {
 		return item;
 	}
 }

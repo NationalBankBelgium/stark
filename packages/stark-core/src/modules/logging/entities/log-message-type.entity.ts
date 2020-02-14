@@ -1,21 +1,21 @@
 /**
  * The type of logging messages that can be sent to the back-end
  */
-export class StarkLogMessageType {
+export enum StarkLogMessageType {
 	/**
 	 * The debug type
 	 */
-	public static DEBUG = "DEBUG";
+	DEBUG = "DEBUG",
 	/**
 	 * The info type
 	 */
-	public static INFO = "INFO";
+	INFO = "INFO",
 	/**
 	 * The warning type
 	 */
-	public static WARNING = "WARNING";
+	WARNING = "WARNING",
 	/**
 	 * The error type
 	 */
-	public static ERROR = "ERROR";
+	ERROR = "ERROR"
 }

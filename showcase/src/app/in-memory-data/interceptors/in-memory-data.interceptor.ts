@@ -21,10 +21,6 @@ export interface HostUrlParts {
 export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 	protected xsrfCookieName = "XSRF-TOKEN";
 
-	public constructor() {
-		/* empty constructor */
-	}
-
 	/**
 	 * Intercept an outgoing `HttpRequest` and optionally transform it if necessary.
 	 * @param request - The intercepted outgoing `HttpRequest`
@@ -141,9 +137,9 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 	protected isGetCollectionRequest(request: HttpRequest<any>): boolean {
 		if (ENV === "development") {
 			return request.method === "GET" && request.params.has("mockCollectionRequest");
-		} else {
-			return request.method === "GET"; // on PROD we take all GET requests as GetCollectionRequests
 		}
+
+		return request.method === "GET"; // on PROD we take all GET requests as GetCollectionRequests
 	}
 
 	protected deepSetUniqueId(item: any, idProperty: string): void {

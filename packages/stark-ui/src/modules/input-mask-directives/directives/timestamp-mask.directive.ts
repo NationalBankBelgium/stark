@@ -115,17 +115,17 @@ export class StarkTimestampMaskDirective extends MaskedInputDirective implements
 	public normalizeMaskConfig(maskConfig?: StarkTimestampMaskConfig): Ng2TextMaskConfig {
 		if (typeof maskConfig === "undefined") {
 			return { mask: false }; // remove the mask
-		} else {
-			// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
-			const timestampMaskConfig: StarkTimestampMaskConfig = { ...this.defaultTimestampMaskConfig, ...maskConfig };
-
-			return {
-				pipe: <any>createTimestampPipe(timestampMaskConfig.format),
-				mask: this.convertFormatIntoMask(timestampMaskConfig.format),
-				placeholderChar: "_",
-				keepCharPositions: true // to avoid weird date values when deleting characters (see https://github.com/NationalBankBelgium/stark/issues/1260)
-			};
 		}
+
+		// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
+		const timestampMaskConfig: StarkTimestampMaskConfig = { ...this.defaultTimestampMaskConfig, ...maskConfig };
+
+		return {
+			pipe: <any>createTimestampPipe(timestampMaskConfig.format),
+			mask: this.convertFormatIntoMask(timestampMaskConfig.format),
+			placeholderChar: "_",
+			keepCharPositions: true // to avoid weird date values when deleting characters (see https://github.com/NationalBankBelgium/stark/issues/1260)
+		};
 	}
 
 	/**

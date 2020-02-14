@@ -74,7 +74,7 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	/**
 	 * @ignore
 	 */
-	public trackItemFn(item: StarkMinimapItemProperties): string {
+	public trackItemFn(_index: number, item: StarkMinimapItemProperties): string {
 		return item.name;
 	}
 }

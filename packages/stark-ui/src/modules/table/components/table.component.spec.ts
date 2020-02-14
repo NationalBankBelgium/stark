@@ -84,9 +84,9 @@ describe("TableComponent", () => {
 			return 1;
 		} else if (obj1 < obj2) {
 			return -1;
-		} else {
-			return 0;
 		}
+
+		return 0;
 	};
 
 	const triggerClick: Function = (element: HTMLElement): void => {

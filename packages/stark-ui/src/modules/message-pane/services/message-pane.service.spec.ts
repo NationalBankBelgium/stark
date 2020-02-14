@@ -201,8 +201,4 @@ describe("MessagePaneService", () => {
 
 class MessagePaneServiceHelper extends StarkMessagePaneServiceImpl {
 	public messages$!: Observable<StarkMessageCollection>;
-
-	public constructor(logger: MockStarkLoggingService, store: Store<StarkUIApplicationState>) {
-		super(logger, store);
-	}
 }

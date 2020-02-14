@@ -78,11 +78,11 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 		if (httpResponse$) {
 			return this.getSingleItemResponseWrapperObservable(httpResponse$, request);
-		} else {
-			return throwError(
-				`Unknown request type encountered ${request.requestType}. For collection requests, call the executeCollectionRequest method`
-			);
 		}
+
+		return throwError(
+			`Unknown request type encountered ${request.requestType}. For collection requests, call the executeCollectionRequest method`
+		);
 	}
 
 	public executeCollectionRequest(request: StarkHttpRequest<P>): Observable<StarkCollectionResponseWrapper<P>> {
@@ -111,12 +111,12 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 		if (httpResponse$) {
 			return this.getCollectionResponseWrapperObservable(httpResponse$, request);
-		} else {
-			// we return directly here because otherwise compilation fails (can't assign the ErrorObservable type to Subject)
-			return throwError(
-				`Unknown request type encountered ${request.requestType}. For single requests (no collection), call the executeSingleItemRequest method`
-			);
 		}
+
+		// we return directly here because otherwise compilation fails (can't assign the ErrorObservable type to Subject)
+		return throwError(
+			`Unknown request type encountered ${request.requestType}. For single requests (no collection), call the executeSingleItemRequest method`
+		);
 	}
 
 	/**
@@ -195,6 +195,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		// serialize returns a pre-stringified json object, Angular will generate a string out of it
 		const requestData: string | object = this.serialize(<P>request.item, request);
 
+		// tslint:disable-next-line:strict-comparisons
 		if (request.requestType === StarkHttpRequestType.UPDATE_IDEMPOTENT) {
 			return this.httpClient.put<P>(requestUrl, requestData, {
 				params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
@@ -202,14 +203,14 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 				observe: "response", // full response, not only the body
 				responseType: "json" // body as JSON
 			});
-		} else {
-			return this.httpClient.post<P>(requestUrl, requestData, {
-				params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
-				headers: convertMapIntoObject(request.headers),
-				observe: "response", // full response, not only the body
-				responseType: "json" // body as JSON
-			});
 		}
+
+		return this.httpClient.post<P>(requestUrl, requestData, {
+			params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
+			headers: convertMapIntoObject(request.headers),
+			observe: "response", // full response, not only the body
+			responseType: "json" // body as JSON
+		});
 	}
 
 	private performDeleteRequest(request: StarkHttpRequest<P>): Observable<HttpResponse<P>> {
@@ -389,9 +390,9 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 						if (retries < retryCount) {
 							retries++;
 							return timer(this.retryDelay);
-						} else {
-							return throwError(error);
 						}
+
+						return throwError(error);
 					})
 				);
 			})

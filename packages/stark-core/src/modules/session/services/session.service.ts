@@ -158,12 +158,12 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 					if (state && typeof state.name !== "undefined") {
 						const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 						return !state.name.match(regexInitExitStateName) && !(state.abstract && state.name === "");
-					} else {
-						return true; // always match
 					}
+
+					return true; // always match
 				}
 			},
-			(): Promise<boolean> => {
+			() => {
 				return this.session$
 					.pipe(
 						take(1),
@@ -171,9 +171,9 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 							if (typeof session.user === "undefined") {
 								// reject transition in case there is no user in the session
 								throw new Error(starkUnauthenticatedUserError);
-							} else {
-								return true;
 							}
+
+							return true;
 						})
 					)
 					.toPromise<boolean>();

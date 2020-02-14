@@ -109,9 +109,9 @@ export function starkAppMetadataFactory(): StarkApplicationMetadata {
 export function starkMockDataFactory(): StarkMockData {
 	if (ENV === "development") {
 		return require("../../config/json-server/data.json");
-	} else {
-		return {};
 	}
+
+	return {};
 }
 
 export function initRouterLog(router: UIRouter): () => void {

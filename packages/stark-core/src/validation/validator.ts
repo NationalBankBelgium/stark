@@ -20,10 +20,6 @@ import {
  * @ignore
  */
 export class StarkValidatorImpl extends Validator implements StarkValidator {
-	public constructor() {
-		super();
-	}
-
 	public starkMapNotEmpty(value: Map<any, any>): boolean {
 		return starkMapNotEmpty(value);
 	}
