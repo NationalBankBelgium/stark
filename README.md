@@ -154,4 +154,4 @@ We're supported by [Travis](https://travis-ci.org/)
 
 We're supported by [BrowserStack](https://www.browserstack.com)
 
-<a href="https://www.browserstack.com"><img src="https://bstacksupport.zendesk.com/attachments/token/22M109zCUfkKcqXrJKzapE2f7/?name=browserstack-logo-600x315.png" width="144px"></a>
+<a href="https://www.browserstack.com"><img src="http://www.browserstack.com/images/layout/browserstack-logo-600x315.png" width="144px"></a>

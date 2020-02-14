@@ -2,6 +2,8 @@ const browserstack = require("browserstack-local");
 const { BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY, TRAVIS_BUILD_NUMBER } = process.env;
 const defaultConfig = require("../node_modules/@nationalbankbelgium/stark-testing/protractor.conf.js").config;
 
+const BROWSERSTACK_LOCAL_IDENTIFIER = TRAVIS_BUILD_NUMBER ? `travis-${TRAVIS_BUILD_NUMBER}` : "local";
+
 /**
  * Specifies the different capabilities for BrowserStack.
  * Here you can configure what OS / Browser you want to run your tests on.
@@ -70,7 +72,9 @@ const beforeLaunch = async () => {
 
 	exports.bs_local = new browserstack.Local();
 	await new Promise((resolve, reject) =>
-		exports.bs_local.start({ key: BROWSERSTACK_ACCESS_KEY }, error => (error ? reject(error) : resolve()))
+		exports.bs_local.start({ key: BROWSERSTACK_ACCESS_KEY, localIdentifier: BROWSERSTACK_LOCAL_IDENTIFIER }, error =>
+			error ? reject(error) : resolve()
+		)
 	);
 
 	console.log("BrowserStack local is connected. Starting tests...");
@@ -114,9 +118,10 @@ const config = {
 		"browserstack.debug": "true",
 		"browserstack.console": "errors",
 		"browserstack.networkLogs": "true",
+		"browserstack.localIdentifier": BROWSERSTACK_LOCAL_IDENTIFIER,
 
 		project: "Stark Showcase",
-		build: TRAVIS_BUILD_NUMBER ? `travis ${TRAVIS_BUILD_NUMBER}` : "local"
+		build: BROWSERSTACK_LOCAL_IDENTIFIER
 	},
 
 	/**
