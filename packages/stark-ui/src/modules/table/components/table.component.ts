@@ -424,7 +424,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * @ignore
-	 * @internal
 	 */
 	public _globalFilterFormCtrl = new FormControl();
 
