@@ -6,7 +6,7 @@ type PaginationConfigType = "simple" | "extended" | "advanced" | "compact";
 
 @Component({
 	selector: "demo-pagination",
-	templateUrl: "./demo-pagination-page.component.html",
+	templateUrl: "./demo-pagination-page.component.html"
 })
 export class DemoPaginationPageComponent {
 	public paginationSimpleConfig: StarkPaginationConfig = {

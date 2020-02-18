@@ -82,7 +82,7 @@ describe("ProgressIndicatorDirective", () => {
 				expect(mockStarkProgressIndicatorService.register).toHaveBeenCalledTimes(1);
 				expect(mockStarkProgressIndicatorService.register).toHaveBeenCalledWith(
 					mockConfig.topic,
-					<StarkProgressIndicatorType><unknown>StarkProgressIndicatorType[mockConfig.type]
+					<StarkProgressIndicatorType>(<unknown>StarkProgressIndicatorType[mockConfig.type])
 				);
 			});
 

@@ -213,7 +213,10 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		// dispatch action so an effect can run any logic if needed
 		this.store.dispatch(new StarkSessionLogout());
 		// the session will always be destroyed right after the response of the logout HTTP call (regardless of its result)
-		this.sendLogoutRequest(this.appConfig.logoutUrl, "", true).subscribe(() => this.destroySession(), () => this.destroySession());
+		this.sendLogoutRequest(this.appConfig.logoutUrl, "", true).subscribe(
+			() => this.destroySession(),
+			() => this.destroySession()
+		);
 	}
 
 	protected sendLogoutRequest(url: string, serializedData: string, async: boolean = true): Observable<void> {

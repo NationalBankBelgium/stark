@@ -38,10 +38,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 			.then(() => {
 				if (this._scrollContainer) {
 					fromEvent(this._scrollContainer, "scroll")
-						.pipe(
-							takeUntil(this._destroyed),
-							debounceTime(10)
-						)
+						.pipe(takeUntil(this._destroyed), debounceTime(10))
 						.subscribe(() => {
 							this.onScroll();
 						});

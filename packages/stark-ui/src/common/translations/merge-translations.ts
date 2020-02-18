@@ -1,4 +1,4 @@
-import  merge  from "lodash-es/merge";
+import merge from "lodash-es/merge";
 import { TranslateService } from "@ngx-translate/core";
 import { mergeTranslations, StarkLocale } from "@nationalbankbelgium/stark-core";
 import { commonUiTranslations } from "./common-translations";

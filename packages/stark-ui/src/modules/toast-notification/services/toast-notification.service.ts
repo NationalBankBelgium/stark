@@ -65,31 +65,29 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 			this.currentToastResult$.complete();
 			this.currentToastResult$ = undefined;
 		}
-		return new Observable(
-			(observer: Observer<StarkToastNotificationResult>): void => {
-				const config: MatSnackBarConfig = this.getConfig(message);
-				this.currentToastResult$ = observer;
-				this.currentToast = this.snackBar.openFromComponent(StarkToastNotificationComponent, config);
-				this.currentToast
-					.afterDismissed()
-					.pipe(
-						tap((toastDismissedEvent: MatSnackBarDismiss) => {
-							// emit on the observer only if it is the current toast
-							// otherwise, it means it is a previous toast that is being closed by a new one
-							if (this.currentToastResult$ === observer && !observer.closed) {
-								if (!toastDismissedEvent.dismissedByAction) {
-									observer.next(StarkToastNotificationResult.CLOSED_ON_DELAY_TIMEOUT);
-								} else {
-									observer.next(StarkToastNotificationResult.ACTION_CLICKED);
-								}
-								this.ref.tick();
+		return new Observable((observer: Observer<StarkToastNotificationResult>): void => {
+			const config: MatSnackBarConfig = this.getConfig(message);
+			this.currentToastResult$ = observer;
+			this.currentToast = this.snackBar.openFromComponent(StarkToastNotificationComponent, config);
+			this.currentToast
+				.afterDismissed()
+				.pipe(
+					tap((toastDismissedEvent: MatSnackBarDismiss) => {
+						// emit on the observer only if it is the current toast
+						// otherwise, it means it is a previous toast that is being closed by a new one
+						if (this.currentToastResult$ === observer && !observer.closed) {
+							if (!toastDismissedEvent.dismissedByAction) {
+								observer.next(StarkToastNotificationResult.CLOSED_ON_DELAY_TIMEOUT);
+							} else {
+								observer.next(StarkToastNotificationResult.ACTION_CLICKED);
 							}
-							observer.complete();
-						})
-					)
-					.subscribe();
-			}
-		);
+							this.ref.tick();
+						}
+						observer.complete();
+					})
+				)
+				.subscribe();
+		});
 	}
 
 	public hide(): void {

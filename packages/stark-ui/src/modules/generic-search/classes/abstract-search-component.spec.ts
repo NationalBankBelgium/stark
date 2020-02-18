@@ -48,7 +48,10 @@ describe("AbstractSearchComponent", () => {
 	});
 	describe("ngOnInit", () => {
 		it("should clone the searchCriteria as originalCopy and search again if hasBeenSearched is TRUE", () => {
-			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
+			const expectedResult: MockResource[] = [
+				{ uuid: "1", name: "first" },
+				{ uuid: "2", name: "second" }
+			];
 
 			genericSearchService.search.and.returnValue(of(expectedResult));
 			genericSearchService.getSearchState.and.returnValue(
@@ -206,7 +209,10 @@ describe("AbstractSearchComponent", () => {
 
 	describe("performSearch", () => {
 		it("should call genericSearchService.search() passing the working copy if no searchCriteria defined", () => {
-			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
+			const expectedResult: MockResource[] = [
+				{ uuid: "1", name: "first" },
+				{ uuid: "2", name: "second" }
+			];
 			genericSearchService.search.and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
 
 			component.ngOnInit();
@@ -224,7 +230,10 @@ describe("AbstractSearchComponent", () => {
 		});
 
 		it("should call genericSearchService.search() passing the given searchCriteria", () => {
-			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
+			const expectedResult: MockResource[] = [
+				{ uuid: "1", name: "first" },
+				{ uuid: "2", name: "second" }
+			];
 			const customCriteria: SearchCriteria = { uuid: "11" };
 			genericSearchService.search.and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
 
@@ -246,7 +255,10 @@ describe("AbstractSearchComponent", () => {
 			const searchState$: Subject<StarkSearchState<SearchCriteria>> = new Subject();
 			const pristineCriteria: SearchCriteria = { uuid: "" };
 
-			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
+			const expectedResult: MockResource[] = [
+				{ uuid: "1", name: "first" },
+				{ uuid: "2", name: "second" }
+			];
 			const customCriteria: SearchCriteria = { uuid: "11" };
 			genericSearchService.search.and.returnValue(createObservableOf<MockResource[]>(expectedResult, searchObsTeardown));
 			genericSearchService.getSearchState.and.returnValue(searchState$);
@@ -292,7 +304,10 @@ describe("AbstractSearchComponent", () => {
 		});
 
 		it("should call progressService show/hide methods passing the progressTopic defined before and after performing the search", () => {
-			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
+			const expectedResult: MockResource[] = [
+				{ uuid: "1", name: "first" },
+				{ uuid: "2", name: "second" }
+			];
 			genericSearchService.search.and.returnValue(of(expectedResult));
 
 			const dummyTopic = "dummyTopic";
@@ -331,7 +346,10 @@ describe("AbstractSearchComponent", () => {
 		});
 
 		it("should NOT call progressService show/hide methods before and after performing the search in case no progressTopic is defined", () => {
-			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
+			const expectedResult: MockResource[] = [
+				{ uuid: "1", name: "first" },
+				{ uuid: "2", name: "second" }
+			];
 			genericSearchService.search.and.returnValue(of(expectedResult));
 
 			component.setProgressTopic("");
@@ -358,7 +376,10 @@ describe("AbstractSearchComponent", () => {
 		});
 
 		it("should return the results from the latest search that was performed as long as the preserveLatestResults option is enabled", () => {
-			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
+			const expectedResult: MockResource[] = [
+				{ uuid: "1", name: "first" },
+				{ uuid: "2", name: "second" }
+			];
 			genericSearchService.search.and.returnValue(of(expectedResult));
 
 			component.enablePreserveLatestResults(true);
@@ -369,7 +390,10 @@ describe("AbstractSearchComponent", () => {
 		});
 
 		it("should return undefined regardless of any search that was performed when the preserveLatestResults option is disabled", () => {
-			const expectedResult: MockResource[] = [{ uuid: "1", name: "first" }, { uuid: "2", name: "second" }];
+			const expectedResult: MockResource[] = [
+				{ uuid: "1", name: "first" },
+				{ uuid: "2", name: "second" }
+			];
 			genericSearchService.search.and.returnValue(of(expectedResult));
 
 			component.enablePreserveLatestResults(false);

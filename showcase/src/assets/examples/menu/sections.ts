@@ -3,7 +3,7 @@ import { StarkMenuConfig } from "@nationalbankbelgium/stark-ui";
 
 @Component({
 	selector: "demo-menu",
-	templateUrl: "./demo-menu.component.html",
+	templateUrl: "./demo-menu.component.html"
 })
 export class DemoMenuComponent {
 	public menuWithSections: StarkMenuConfig = {

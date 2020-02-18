@@ -3,7 +3,7 @@ import { StarkPaginateEvent, StarkPaginationConfig } from "@nationalbankbelgium/
 
 @Component({
 	selector: "demo-pagination",
-	templateUrl: "./demo-pagination.component.html",
+	templateUrl: "./demo-pagination.component.html"
 })
 export class DemoPaginationComponent {
 	public paginationAdvancedConfig: StarkPaginationConfig = {

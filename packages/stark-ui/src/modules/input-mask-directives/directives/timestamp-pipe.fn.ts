@@ -72,7 +72,10 @@ export function createTimestampPipe(timestampFormat: string = "DD-MM-YYYY HH:mm:
 function isLeapDay(value: string, format: string, fullFormat: string): boolean {
 	const textValue: string = value.replace(/\D/, ""); // removing all non digits
 	const dayMonthFormat: string = format.replace(/[^DM]/, ""); // keeping only day and month parts
-	const leapDays: { format: string; date: string }[] = [{ format: "DDMM", date: "2902" }, { format: "MMDD", date: "0229" }];
+	const leapDays: { format: string; date: string }[] = [
+		{ format: "DDMM", date: "2902" },
+		{ format: "MMDD", date: "0229" }
+	];
 
 	// is leap day as long as there is no year entered yet and the full format does have a year part
 	for (const leapDay of leapDays) {

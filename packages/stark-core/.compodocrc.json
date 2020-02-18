@@ -1,8 +1,8 @@
 {
-	"$schema": "../../node_modules/@compodoc/compodoc/src/config/schema.json",
-	"theme": "material",
-	"tsconfig": "./tsconfig.json",
-	"output": "../../reports/api-docs/stark-core",
-	"includes": "../../docs/stark-core",
-	"includesName": "Developer Guide"
+  "$schema": "../../node_modules/@compodoc/compodoc/src/config/schema.json",
+  "theme": "material",
+  "tsconfig": "./tsconfig.json",
+  "output": "../../reports/api-docs/stark-core",
+  "includes": "../../docs/stark-core",
+  "includesName": "Developer Guide"
 }

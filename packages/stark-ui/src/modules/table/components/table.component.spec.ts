@@ -468,7 +468,10 @@ describe("TableComponent", () => {
 					{ a: 6, b: 2 },
 					{ a: 7, b: 2 }
 				];
-				hostComponent.columnProperties = [{ name: "a", isSortable: true }, { name: "b", isSortable: true }];
+				hostComponent.columnProperties = [
+					{ name: "a", isSortable: true },
+					{ name: "b", isSortable: true }
+				];
 				hostComponent.orderProperties = ["-a", "b"];
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -501,7 +504,10 @@ describe("TableComponent", () => {
 					{ a: "f", b: "b" },
 					{ a: "g", b: "b" }
 				];
-				hostComponent.columnProperties = [{ name: "a", isSortable: true }, { name: "b", isSortable: true }];
+				hostComponent.columnProperties = [
+					{ name: "a", isSortable: true },
+					{ name: "b", isSortable: true }
+				];
 				hostComponent.orderProperties = ["-a", "-b"];
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -609,7 +615,11 @@ describe("TableComponent", () => {
 			});
 
 			it("should sort data when click on different columns", () => {
-				hostComponent.dummyData = [{ a: 2, b: 3, c: 1 }, { a: 1, b: 2, c: 3 }, { a: 3, b: 1, c: 2 }];
+				hostComponent.dummyData = [
+					{ a: 2, b: 3, c: 1 },
+					{ a: 1, b: 2, c: 3 },
+					{ a: 3, b: 1, c: 2 }
+				];
 				hostComponent.columnProperties = [{ name: "a" }, { name: "b" }, { name: "c" }];
 				hostFixture.detectChanges();
 				expect(component.dataSource.data).toEqual(hostComponent.dummyData);
@@ -619,19 +629,43 @@ describe("TableComponent", () => {
 				const columnC: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("c"));
 
 				columnA.click();
-				expect(component.dataSource.data).toEqual([{ a: 1, b: 2, c: 3 }, { a: 2, b: 3, c: 1 }, { a: 3, b: 1, c: 2 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 1, b: 2, c: 3 },
+					{ a: 2, b: 3, c: 1 },
+					{ a: 3, b: 1, c: 2 }
+				]);
 				columnA.click();
-				expect(component.dataSource.data).toEqual([{ a: 3, b: 1, c: 2 }, { a: 2, b: 3, c: 1 }, { a: 1, b: 2, c: 3 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 3, b: 1, c: 2 },
+					{ a: 2, b: 3, c: 1 },
+					{ a: 1, b: 2, c: 3 }
+				]);
 
 				columnB.click();
-				expect(component.dataSource.data).toEqual([{ a: 3, b: 1, c: 2 }, { a: 1, b: 2, c: 3 }, { a: 2, b: 3, c: 1 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 3, b: 1, c: 2 },
+					{ a: 1, b: 2, c: 3 },
+					{ a: 2, b: 3, c: 1 }
+				]);
 				columnB.click();
-				expect(component.dataSource.data).toEqual([{ a: 2, b: 3, c: 1 }, { a: 1, b: 2, c: 3 }, { a: 3, b: 1, c: 2 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 2, b: 3, c: 1 },
+					{ a: 1, b: 2, c: 3 },
+					{ a: 3, b: 1, c: 2 }
+				]);
 
 				columnC.click();
-				expect(component.dataSource.data).toEqual([{ a: 2, b: 3, c: 1 }, { a: 3, b: 1, c: 2 }, { a: 1, b: 2, c: 3 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 2, b: 3, c: 1 },
+					{ a: 3, b: 1, c: 2 },
+					{ a: 1, b: 2, c: 3 }
+				]);
 				columnC.click();
-				expect(component.dataSource.data).toEqual([{ a: 1, b: 2, c: 3 }, { a: 3, b: 1, c: 2 }, { a: 2, b: 3, c: 1 }]);
+				expect(component.dataSource.data).toEqual([
+					{ a: 1, b: 2, c: 3 },
+					{ a: 3, b: 1, c: 2 },
+					{ a: 2, b: 3, c: 1 }
+				]);
 			});
 		});
 
@@ -705,7 +739,10 @@ describe("TableComponent", () => {
 					{ a: { b: 6 }, b: 2 },
 					{ a: { b: 7 }, b: 2 }
 				];
-				hostComponent.columnProperties = [{ name: "a.b", isSortable: true }, { name: "b", isSortable: true }];
+				hostComponent.columnProperties = [
+					{ name: "a.b", isSortable: true },
+					{ name: "b", isSortable: true }
+				];
 				hostComponent.orderProperties = ["-a.b", "b"];
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -738,7 +775,10 @@ describe("TableComponent", () => {
 					{ a: 6, b: { a: 2 } },
 					{ a: 7, b: { a: 2 } }
 				];
-				hostComponent.columnProperties = [{ name: "a", isSortable: true }, { name: "b.a", isSortable: true }];
+				hostComponent.columnProperties = [
+					{ name: "a", isSortable: true },
+					{ name: "b.a", isSortable: true }
+				];
 				hostComponent.orderProperties = ["-a", "-b.a"];
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -805,7 +845,10 @@ describe("TableComponent", () => {
 		}
 
 		beforeEach(() => {
-			hostComponent.columnProperties = [{ name: "a", isFilterable: true }, { name: "b", isFilterable: true }];
+			hostComponent.columnProperties = [
+				{ name: "a", isFilterable: true },
+				{ name: "b", isFilterable: true }
+			];
 			hostComponent.dummyData = [
 				{ a: 1, b: "b" },
 				{ a: 2, b: "b2" },
@@ -880,7 +923,10 @@ describe("TableComponent", () => {
 					{ column1: "content1" + "=" + "m", column2: "content2b" },
 					{ column1: "content1" + "+" + "n", column2: "content2a" }
 				];
-				hostComponent.columnProperties = [{ name: "column1", isFilterable: true }, { name: "column2", isFilterable: true }];
+				hostComponent.columnProperties = [
+					{ name: "column1", isFilterable: true },
+					{ name: "column2", isFilterable: true }
+				];
 				hostComponent.dummyData = mockData;
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -1007,7 +1053,10 @@ describe("TableComponent", () => {
 					{ column1: "content1" + "=" + "m", column2: "content2b" },
 					{ column1: "content1" + "+" + "n", column2: "content2a" }
 				];
-				hostComponent.columnProperties = [{ name: "column1", isFilterable: true }, { name: "column2", isFilterable: true }];
+				hostComponent.columnProperties = [
+					{ name: "column1", isFilterable: true },
+					{ name: "column2", isFilterable: true }
+				];
 				hostComponent.dummyData = mockData;
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -1085,7 +1134,11 @@ describe("TableComponent", () => {
 
 	describe("column visibility", () => {
 		const columns: StarkTableColumnProperties[] = [{ name: "a" }, { name: "b", isVisible: false }, { name: "c", isVisible: true }];
-		const data: any = [{ a: 1, b: "b1", c: "c1" }, { a: 2, b: "b2", c: "c2" }, { a: 3, b: "b3", c: "c3" }];
+		const data: any = [
+			{ a: 1, b: "b1", c: "c1" },
+			{ a: 2, b: "b2", c: "c2" },
+			{ a: 3, b: "b3", c: "c3" }
+		];
 		beforeEach(() => {
 			hostComponent.columnProperties = columns;
 			hostComponent.dummyData = data;
@@ -1163,7 +1216,10 @@ describe("TableComponent", () => {
 	describe("getColumnSortingDirection", () => {
 		it("should return the sorting direction of the given column if such column exists in the orderProperties array", () => {
 			hostComponent.dummyData = [];
-			hostComponent.columnProperties = [{ name: "a", isSortable: true }, { name: "b", isSortable: true }];
+			hostComponent.columnProperties = [
+				{ name: "a", isSortable: true },
+				{ name: "b", isSortable: true }
+			];
 			hostComponent.orderProperties = ["-a", "b"];
 
 			hostFixture.detectChanges(); // trigger data binding
@@ -1175,7 +1231,10 @@ describe("TableComponent", () => {
 
 		it(`should return an empty string ("") when the given column DOES NOT exist in the orderProperties array`, () => {
 			hostComponent.dummyData = [];
-			hostComponent.columnProperties = [{ name: "a", isSortable: true }, { name: "b", isSortable: true }];
+			hostComponent.columnProperties = [
+				{ name: "a", isSortable: true },
+				{ name: "b", isSortable: true }
+			];
 			hostComponent.orderProperties = ["-a", "b"];
 
 			hostFixture.detectChanges(); // trigger data binding
@@ -1202,7 +1261,10 @@ describe("TableComponent", () => {
 	describe("getColumnSortingPriority", () => {
 		it("should return the sorting priority of the given column according to its position in the orderProperties array", () => {
 			hostComponent.dummyData = [];
-			hostComponent.columnProperties = [{ name: "a", isSortable: true }, { name: "b", isSortable: true }];
+			hostComponent.columnProperties = [
+				{ name: "a", isSortable: true },
+				{ name: "b", isSortable: true }
+			];
 			hostComponent.orderProperties = ["-a", "b"];
 
 			hostFixture.detectChanges(); // trigger data binding
@@ -1214,7 +1276,10 @@ describe("TableComponent", () => {
 
 		it(`should return undefined when the given column DOES NOT exist in the orderProperties array`, () => {
 			hostComponent.dummyData = [];
-			hostComponent.columnProperties = [{ name: "a", isSortable: true }, { name: "b", isSortable: true }];
+			hostComponent.columnProperties = [
+				{ name: "a", isSortable: true },
+				{ name: "b", isSortable: true }
+			];
 			hostComponent.orderProperties = ["-a", "b"];
 
 			hostFixture.detectChanges(); // trigger data binding
@@ -1325,7 +1390,7 @@ describe("TableComponent", () => {
 		beforeEach(() => {
 			hostComponent.columnProperties = [
 				{ name: "id", cellFormatter: (value: any): string => (value === 1 ? "one" : "") },
-				{ name: "description", cellFormatter: (value: any): string => typeof value === "undefined" ? "-null-" : value },
+				{ name: "description", cellFormatter: (value: any): string => (typeof value === "undefined" ? "-null-" : value) },
 				{ name: "test" }
 			];
 			hostComponent.dummyData = dummyData;
@@ -1353,7 +1418,7 @@ describe("TableComponent", () => {
 
 			expect(rowIdElements.length).toBe(3);
 			expect(rowIdElements[2].innerText).toEqual("");
-		})
+		});
 	});
 
 	describe("setStyling", () => {
@@ -1411,7 +1476,7 @@ describe("TableComponent", () => {
 
 	describe("cellClick", () => {
 		const onClickCallbackSpy = createSpy("onClickCallback");
-	
+
 		beforeEach(() => {
 			hostComponent.columnProperties = [{ name: "id" }, { name: "description", onClickCallback: onClickCallbackSpy }];
 			hostComponent.dummyData = DUMMY_DATA;
@@ -1419,20 +1484,18 @@ describe("TableComponent", () => {
 
 			onClickCallbackSpy.calls.reset();
 			(<Spy>hostComponent.rowClickHandler).calls.reset();
-			
+
 			hostFixture.detectChanges(); // trigger data binding
 			component.ngAfterViewInit();
 		});
-	
-		it("should trigger 'onClickCallback' property when click on the cell and should not emit on 'rowClicked' when 'onClickCallback' is defined",() => {
-			const descriptionColumnElement = hostFixture.nativeElement.querySelector(
-				"table tbody tr td.mat-column-description"
-			);
+
+		it("should trigger 'onClickCallback' property when click on the cell and should not emit on 'rowClicked' when 'onClickCallback' is defined", () => {
+			const descriptionColumnElement = hostFixture.nativeElement.querySelector("table tbody tr td.mat-column-description");
 			expect(descriptionColumnElement).not.toBeNull();
 
 			// click on the cell
 			triggerClick(descriptionColumnElement);
-			
+
 			// We expect "2" due to the check "columnProperties.onClickCallback instanceof Function" in table.component.ts
 			expect(onClickCallbackSpy).toHaveBeenCalledTimes(2);
 			expect(onClickCallbackSpy).toHaveBeenCalledWith(DUMMY_DATA[0]["description"], DUMMY_DATA[0], "description");
@@ -1440,9 +1503,7 @@ describe("TableComponent", () => {
 		});
 
 		it("should not trigger 'onClickCallback' property when click on the cell but should emit on 'rowClicked' when 'onClickCallback' is not defined", () => {
-			const idColumnElement = hostFixture.nativeElement.querySelector(
-				"table tbody tr td.mat-column-id"
-			);
+			const idColumnElement = hostFixture.nativeElement.querySelector("table tbody tr td.mat-column-id");
 			expect(idColumnElement).not.toBeNull();
 
 			// click on the cell
@@ -1450,7 +1511,7 @@ describe("TableComponent", () => {
 			expect(hostComponent.rowClickHandler).toHaveBeenCalledTimes(1);
 		});
 	});
-	
+
 	describe("rowClick", () => {
 		beforeEach(() => {
 			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];

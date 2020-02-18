@@ -1,13 +1,11 @@
 // typings not yet provided in the text-mask library
 // TODO: remove these and use the ones from DefinitelyTyped once they are implemented
 declare module "text-mask-addons" {
-
 	import * as textMaskCore from "text-mask-core";
 
 	export = textMaskAddons;
 
 	namespace textMaskAddons {
-
 		interface NumberMaskConfig {
 			prefix?: string;
 			suffix?: string;

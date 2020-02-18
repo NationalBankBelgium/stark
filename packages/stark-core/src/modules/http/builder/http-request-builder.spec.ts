@@ -183,7 +183,13 @@ function testAddQueryParameter(beforeEachFn: () => StarkHttpRequestBuilderSpecVa
 
 			const request: StarkHttpRequest = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", undefined]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["echo", StarkHttpEchoType.ID],
+					["forceValidParam", undefined]
+				])
+			);
 		});
 
 		it("should add the query parameters including those with empty value (allowEmpty = true)", () => {
@@ -192,7 +198,13 @@ function testAddQueryParameter(beforeEachFn: () => StarkHttpRequestBuilderSpecVa
 
 			const request: StarkHttpRequest = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", ""]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["echo", StarkHttpEchoType.ID],
+					["forceValidParam", ""]
+				])
+			);
 		});
 
 		it("should add the query parameters name/value and add it to existing ones", () => {
@@ -201,7 +213,13 @@ function testAddQueryParameter(beforeEachFn: () => StarkHttpRequestBuilderSpecVa
 
 			const request: StarkHttpRequest = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["include", "name"]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["echo", StarkHttpEchoType.ID],
+					["include", "name"]
+				])
+			);
 		});
 	});
 }
@@ -227,7 +245,13 @@ function testAddQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 
 			const request: StarkHttpRequest = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", undefined]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["echo", StarkHttpEchoType.ID],
+					["forceValidParam", undefined]
+				])
+			);
 		});
 
 		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
@@ -235,7 +259,13 @@ function testAddQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 
 			const request: StarkHttpRequest = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", ""]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["echo", StarkHttpEchoType.ID],
+					["forceValidParam", ""]
+				])
+			);
 		});
 
 		it("should add the query parameters name/value WITHOUT removing the existing ones", () => {
@@ -249,7 +279,14 @@ function testAddQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 
 			request = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["param1", "one"], ["param2", "two"]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["echo", StarkHttpEchoType.ID],
+					["param1", "one"],
+					["param2", "two"]
+				])
+			);
 		});
 	});
 }
@@ -275,7 +312,13 @@ function testSetQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 
 			const request: StarkHttpRequest = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", undefined]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["echo", StarkHttpEchoType.ID],
+					["forceValidParam", undefined]
+				])
+			);
 		});
 
 		it("should set the query parameters including those with empty value (allowEmpty = true)", () => {
@@ -283,7 +326,13 @@ function testSetQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 
 			const request: StarkHttpRequest = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["echo", StarkHttpEchoType.ID], ["forceValidParam", ""]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["echo", StarkHttpEchoType.ID],
+					["forceValidParam", ""]
+				])
+			);
 		});
 
 		it("should set the query parameters name/value and remove the existing ones", () => {
@@ -297,7 +346,13 @@ function testSetQueryParameters(beforeEachFn: () => StarkHttpRequestBuilderSpecV
 
 			request = builder.build();
 
-			assertQueryParameters(request.queryParameters, new Map([["param1", "one"], ["param2", "two"]]));
+			assertQueryParameters(
+				request.queryParameters,
+				new Map([
+					["param1", "one"],
+					["param2", "two"]
+				])
+			);
 		});
 	});
 }
@@ -574,7 +629,10 @@ function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle
 			let expectedResource: StarkResource | undefined;
 			let expectedResourcePath = "/something/1/else/3/next";
 
-			expectedQueryParams = new Map<string, string | string[]>([["param1", "one"], ["duplicateParam", ["dup1", "dup2", "dup3"]]]);
+			expectedQueryParams = new Map<string, string | string[]>([
+				["param1", "one"],
+				["duplicateParam", ["dup1", "dup2", "dup3"]]
+			]);
 
 			switch (typeOfBuilder) {
 				case "getSingle":
@@ -750,7 +808,10 @@ function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle
 				queryParameters: { param1: "one", invalidQueryParam: "", forceValidParam: undefined },
 				allowUndefinedQueryParams: true
 			};
-			const expectedBaseQueryParams: (string | undefined)[][] = [["param1", "one"], ["forceValidParam", undefined]];
+			const expectedBaseQueryParams: (string | undefined)[][] = [
+				["param1", "one"],
+				["forceValidParam", undefined]
+			];
 
 			expectedQueryParams = new Map(<any>expectedBaseQueryParams);
 
@@ -815,7 +876,10 @@ function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle
 				queryParameters: { param1: "one", invalidQueryParam: undefined, forceValidParam: "" },
 				allowEmptyQueryParams: true
 			};
-			const expectedBaseQueryParams: string[][] = [["param1", "one"], ["forceValidParam", ""]];
+			const expectedBaseQueryParams: string[][] = [
+				["param1", "one"],
+				["forceValidParam", ""]
+			];
 
 			expectedQueryParams = new Map(<any>expectedBaseQueryParams);
 
