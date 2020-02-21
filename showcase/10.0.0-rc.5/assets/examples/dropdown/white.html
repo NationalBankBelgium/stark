@@ -1,0 +1,14 @@
+<mat-form-field class="stark-full-width">
+	<stark-dropdown
+		color="white"
+		dropdownId="serviceWhiteDropdown"
+		[options]="serviceDropdownOptions"
+		[value]="selectedServiceWhiteDropdown"
+		placeholder="Select Service"
+		optionIdProperty="id"
+		optionLabelProperty="value"
+		(selectionChanged)="whiteDropdownOnChange($event)"
+	>
+	</stark-dropdown>
+</mat-form-field>
+<div class="result-display" *ngIf="selectedServiceWhiteDropdown">Selected value: {{ selectedServiceWhiteDropdown }}</div>

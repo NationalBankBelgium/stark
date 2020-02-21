@@ -1,0 +1,518 @@
+{
+  "SHOWCASE": {
+    "COMMON": {
+      "DISABLED": "Disabled",
+      "ENABLED": "Enabled",
+      "VALUE": "Value"
+    },
+    "DEMO": {
+      "ACTION_BAR": {
+        "ALT": "Action Bar Alternative",
+        "CLASSIC-COMPACT": "Action Bar Classic Compact",
+        "CLASSIC-FULL": "Action Bar Classic Full",
+        "TITLE": "Action bar"
+      },
+      "APP_DATA": {
+        "DROPDOWN": "Dropdown example with user image",
+        "DROPDOWN.NO_AVATAR": "Dropdown example without user image",
+        "MENU": "Menu example",
+        "USER": "User",
+        "LAST_ACCESS": "Last access",
+        "VERSION": "Version",
+        "ENVIRONMENT": "Environment",
+        "TITLE": "App data"
+      },
+      "BREADCRUMB": {
+        "CHILD": "Child",
+        "CONFIG_INPUT": "Breadcrumb demonstration (with breadcrumbConfig)",
+        "GRANDPARENT": "Grand parent",
+        "NO_INPUT": "Breadcrumb demonstration (without parameters)",
+        "PARENT": "Parent",
+        "ROOT": "Root ancestor",
+        "TITLE": "Breadcrumb"
+      },
+      "COLLAPSIBLE": {
+        "CLOSED": "Closed",
+        "CUSTOM_ICON": "Custom icon",
+        "DEFAULT_ICON": "Default icon",
+        "HTML_CONTENT": "Any HTML content",
+        "OPEN": "Open",
+        "TITLE": "Collapsible",
+        "TITLE_0": "Default icon collapsible title",
+        "TITLE_1": "Custom icon collapsible title",
+        "TOGGLE_COLLAPSIBLE": "Toggle collapsible"
+      },
+      "DATE_PICKER": {
+        "CUSTOM_FILTER": "Date Picker - Custom Filter",
+        "NG_MODEL": "Date Picker - Using NgModel",
+        "ONLY_WEEKDAYS": "Date Picker - Only weekdays",
+        "ONLY_WEEKENDS": "Date Picker - Only weekends",
+        "PLACEHOLDER": "Choose a date",
+        "REACTIVE_FORM": "Date Picker - Using Reactive form",
+        "TITLE": "Date picker"
+      },
+      "DATE_RANGE_PICKER": {
+        "TITLE": "Date range picker",
+        "WITH_MODEL": "ngModel",
+        "WITH_FORM_GROUP": "Form group",
+        "WITH_MASK": "Default date mask",
+        "WITH_CUSTOM_MASK": "Custom date mask (DD-MM-YYYY)",
+        "ERROR_MESSAGES": {
+          "MIN_TODAY": "Date should be after today",
+          "MAX_MONTH": "Date should be in less than 1 month",
+          "WEEKDAY": "Date should be a weekday",
+          "START_BEFORE_END": "Start date should be before end date",
+          "END_AFTER_START": "End date should be after start date",
+          "IN_FEBRUARY": "Date should not be in February",
+          "REQUIRED": "Date is required"
+        }
+      },
+      "DATE_TIME_PICKER": {
+        "TITLE": "Date time picker",
+        "NG_MODEL": "Using ngModel",
+        "PLACEHOLDER": "Date and time",
+        "REACTIVE_FORM": "Using Reactive form",
+        "ERROR_MESSAGES": {
+          "MIN_DATE": "Date cannot be before the minimum date allowed",
+          "MAX_DATE": "Date cannot be after the maximum date allowed",
+          "MIN_DATE_TIME": "Datetime cannot be before the minimum datetime allowed",
+          "MAX_DATE_TIME": "Datetime cannot be after the maximum datetime allowed",
+          "INVALID_DATE": "Invalid date"
+        }
+      },
+      "DIALOGS": {
+        "ALERT": {
+          "TITLE": "This is an alert title",
+          "TEXT": "You can specify some description text in here.",
+          "OK": "Got it!",
+          "RESULT_OK": "Alert dialog closed with value '{{ result }}'",
+          "RESULT_CANCEL": "Alert dialog cancelled with value '{{ result }}'"
+        },
+        "CONFIRM": {
+          "TITLE": "Would you like to delete your debt?",
+          "TEXT": "All of the banks have agreed to forgive you your debts.",
+          "OK": "Please do it!",
+          "CANCEL": "Sounds like a scam",
+          "RESULT_OK": "You decided to get rid of your debt.",
+          "RESULT_CANCEL": "You decided to keep your debt."
+        },
+        "PROMPT": {
+          "TITLE": "What would you name your dog?",
+          "TEXT": "Bowser is a common name.",
+          "PLACEHOLDER": "Dog name",
+          "OK": "Okay!",
+          "CANCEL": "I'm a cat person",
+          "RESULT_OK": "You decided to name your dog '{{ result }}'",
+          "RESULT_CANCEL": "You didn't name your dog."
+        },
+        "TITLE": "Dialogs",
+        "PREDEFINED_DIALOGS": "Predefined dialogs",
+        "ALERT_DIALOG": "Alert dialog",
+        "CONFIRM_DIALOG": "Confirm dialog",
+        "PROMPT_DIALOG": "Prompt dialog"
+      },
+      "DROPDOWN": {
+        "PR": "IT applications",
+        "BLANK": "Single selection with default blank",
+        "CS": "IT customer services",
+        "DISABLED": "Disabled dropdown",
+        "IO": "Informatics infrastructure and operations",
+        "MULTIPLE": "Multiple selection",
+        "NG_MODEL_REQUIRED": "Using NgModel + required",
+        "REACTIVE_FORM": "Using Reactive form",
+        "SELECTED_VALUE": "Selected value ",
+        "SELECTED_VALUES": "Selected values ",
+        "SELECT_SERVICE": "Select Service",
+        "SELECT_NUMBER": "Select your lucky number",
+        "SELECT_SERVICES": "Select one or more services",
+        "SELECT_ONE_SERVICE": "Select at least one service",
+        "SELECT_DISABLED": "Sorry, it's disabled",
+        "TITLE": "Dropdown",
+        "WHITE": "White dropdown on black background (full width)"
+      },
+      "EXAMPLE_VIEWER": {
+        "TITLE": "Stark example viewer"
+      },
+      "FOOTER": {
+        "TITLE": "App footer",
+        "INTRO": "Stark provides you a custom footer for your application. It's a standard component you can use by copying this HTML into your code",
+        "INFO": "This component takes 3 elements as input :",
+        "INPUT1": "<b>legalInfoUrl</b> contains the url to the legal information page.",
+        "INPUT2": "<b>helpPageUrl</b> contains the url to the help page.",
+        "INPUT3": "The included HTML elements will be copied inside the footer as the leftmost element."
+      },
+      "GENERIC_SEARCH": {
+        "ACTIONS": "Actions to implement for the Generic Search",
+        "BASIC_IMPLEMENTATION": "Basic implementation of Generic Search",
+        "EXPLANATION_ABOUT_DOC_ON_GITHUB": "How to use the Stark Generic Search component",
+        "GETTING_STARTED": "Getting started",
+        "REDUCERS": "Reducers to implement for the Generic Search",
+        "SEARCH_RESULTS": "Search results",
+        "SERVICE_INTERFACE": "Interface of the service needed for the Generic Search",
+        "SERVICE_IMPLEMENTATION": "Implementation of the service needed for the Generic Search",
+        "TITLE": "Generic Search",
+        "TOGGLE": "Toggle search"
+      },
+      "DIRECTIVES": {
+        "INPUT_MASK": {
+          "EMAIL_MASK": {
+            "TITLE": "Email Mask directive",
+            "EMAIL_MASK": "Email",
+            "EMAIL_PLACEHOLDER": "Type an email address"
+          },
+          "NUMBER_MASK": {
+            "TITLE": "Number Mask directive",
+            "US_DOLLARS_AMOUNT_MASK": "Amount in US Dollars ",
+            "EURO_AMOUNT_MASK": "Amount in Euros",
+            "PERCENTAGE_MASK": "Percentage"
+          },
+          "TEXT_MASK": {
+            "TITLE": "Text Mask directive",
+            "CREDIT_CARD_MASK": "Credit card",
+            "STRUCTURED_MESSAGE_MASK": "Structured communication message",
+            "PHONE_NUMBER_MASK": "Phone number"
+          },
+          "TIMESTAMP_MASK": {
+            "TITLE": "Timestamp Mask directive",
+            "TIMESTAMP_DMY_MASK": "Timestamp in DMY format",
+            "TIMESTAMP_DMY_PLACEHOLDER": "DD-MM-YYYY HH:mm:ss",
+            "TIMESTAMP_MDY_MASK": "Timestamp in MDY format",
+            "TIMESTAMP_MDY_PLACEHOLDER": "MM-DD-YYYY HH:mm:ss",
+            "FULL_DATE_DMY_MASK": "Date in DMY format",
+            "FULL_DATE_DMY_PLACEHOLDER": "DD-MM-YYYY",
+            "DAY_MONTH_MASK": "Day-Month",
+            "DAY_MONTH_PLACEHOLDER": "DD-MM",
+            "MONTH_DAY_MASK": "Month / Day",
+            "MONTH_DAY_PLACEHOLDER": "MM/DD",
+            "TIME_MASK": "Time",
+            "TIME_PLACEHOLDER": "HH:mm:ss"
+          },
+          "TITLE": "Input Mask directives"
+        },
+        "RESTRICT_INPUT": {
+          "TITLE": "Restrict input",
+          "DESCRIPTION": "Type some value in the inputs and some characters will be prevented depending on the restriction set in every field",
+          "INPUT_ONLY_NUMBERS": "Accept only numbers",
+          "INPUT_ALPHANUMERICAL_CHARACTERS": "Accept only alphanumeric characters",
+          "INPUT_NO_SPECIAL_CHARACTERS": "Accept all except special characters",
+          "INPUT_UPPERCASE_CHARACTERS": "Accept only uppercase characters"
+        },
+        "TRANSFORM": {
+          "TITLE": "Transform input",
+          "ONLY_UPPER_CASE_LABEL": "Upper case only",
+          "ONLY_LOWER_CASE_LABEL": "Lower case only",
+          "EMOJI_LABEL": "\uD83D\uDE04\uD83D\uDE04\uD83D\uDE04",
+          "EMOJI_EXAMPLE": ":+1: :-1: :smile: :tada: :rocket: :zap:"
+        },
+        "TYPE_A_VALUE": "Type a value"
+      },
+      "LANGUAGE_SELECTOR": {
+        "DROPDOWN": "Language selector in 'dropdown' mode",
+        "TITLE": "Language selector",
+        "TOOLBAR": "Language selector in 'toolbar' mode"
+      },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Logout button - Default icon",
+        "LOGOUT_CUSTOM_ICON": "Logout button - Custom icon",
+        "TITLE": "App logout"
+      },
+      "MENU": {
+        "SIMPLE": "Simple menu",
+        "SECTIONS": "Menu with sections",
+        "TITLE": "App menu"
+      },
+      "MESSAGE_PANE": {
+        "BUTTONS": {
+          "CENTER": "Center",
+          "CHANGE_THEME": "Change theme",
+          "CLEAR_AND_SHOW_NEW_MESSAGES": "Clear & Show new messages",
+          "CLEAR_MESSAGES": "Clear messages",
+          "LEFT": "Left",
+          "RIGHT": "Right",
+          "SHOW_MESSAGES": "Show messages"
+        },
+        "DESCRIPTION": "The Message Pane will persist on the page until dismissed, but will not stop page interactions (like dialogs do). It can be used, for instance, to show validation errors of the form in case your app needs to keep them until dismissed.",
+        "MESSAGES": {
+          "ERRORS": {
+            "ERROR_1": "Error 1: Too many fingers on the keyboard - priority 500",
+            "ERROR_2": "Error 2: priority 10",
+            "ERROR_3": "Error 3: priority 200",
+            "NEW_ERROR_1": "New Error 1",
+            "NEW_ERROR_2": "New Error 2"
+          },
+          "WARNINGS": {
+            "WARNING_1": "Warning 1: priority 1",
+            "WARNING_2": "Warning 2: priority undefined",
+            "NEW_WARNING_1": "New warning 1"
+          },
+          "INFOS": {
+            "INFO_1": "Info 1: priority undefined",
+            "INFO_2": "Info 2: priority 998",
+            "NEW_INFO_1": "New info 1",
+            "NEW_INFO_2": "New info 2"
+          }
+        },
+        "TITLE": "Message pane",
+        "EXAMPLE": "Example",
+        "BUTTON_GROUPS": {
+          "DEMO": "Demo",
+          "DISPLAY_ALIGNMENT": "Display alignment",
+          "DISPLAY_STYLE": "Display style"
+        }
+      },
+      "MINIMAP": {
+        "TITLE": "Minimap",
+        "FULL": "Minimap (classic version)",
+        "COMPACT": "Minimap (compact version)"
+      },
+      "PAGINATION": {
+        "ADVANCED_CONFIGURATION": "Pagination with advanced configuration",
+        "COMPACT_CONFIGURATION": "Pagination in compact mode",
+        "EMITTED_PAGINATE_EVENT": "Emitted paginate event",
+        "EXTENDED_CONFIGURATION": "Pagination with extended page selector",
+        "SIMPLE_CONFIGURATION": "Pagination with simple configuration",
+        "TITLE": "Pagination"
+      },
+      "PRETTY_PRINT": {
+        "CSS": "Pretty-Print CSS",
+        "ENABLE_HIGHLIGHTING": "Enable highlighting",
+        "ENTER_DATA": "Type or copy/paste unformatted code",
+        "HTML": "Pretty-Print HTML",
+        "JAVASCRIPT": "Pretty-Print Javascript",
+        "JSON": "Pretty-Print JSON",
+        "ORIGINAL_CODE": "Original Code",
+        "PRETTY_PRINTED": "Formatted",
+        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Formatted with highlighting",
+        "SCSS": "Pretty-Print SCSS",
+        "SELECT_DATAFORMAT": "Select a format",
+        "SQL": "Pretty-Print SQL",
+        "TITLE": "Pretty print",
+        "TRY_IT_YOURSELF": "Try it yourself",
+        "TYPESCRIPT": "Pretty-Print Typescript",
+        "XML": "Pretty-Print XML"
+      },
+      "PROGRESS_INDICATOR": {
+        "TITLE": "Progress indicator",
+        "HIDE": "Hide",
+        "SENTENCE_TO_HIDE": "This content will be hidden as soon as the progress indicator is displayed",
+        "SHOW": "Show"
+      },
+      "ROUTE_SEARCH": {
+        "DIRECTION_LEFT": "Route Search component with direction 'left'",
+        "DIRECTION_RIGHT": "Route Search component with direction 'right'",
+        "MENU_CONFIG_REMARKS": "<b>IMPORTANT: </b> The Route Search component will display all the routes available in the 'menuConfig' input. This config can include also lazy loaded routes.",
+        "ROUTER_CONFIG_REMARKS": "<b>IMPORTANT: </b> The Route Search component will display only those routes already registered by the Router at this time. The lazy loaded routes that have not been loaded yet will not be displayed.",
+        "TITLE": "Route Search",
+        "WITH_CUSTOM_COLOR_AND_MENU_CONFIG": "Route Search component with 'menuConfig' and custom color"
+      },
+      "SHARED": {
+        "EXAMPLE_VIEWER_LIST": "Examples and code samples"
+      },
+      "SIDEBAR": {
+        "INTRO": "The preview of this code is the actual sidebar of the showcase",
+        "OPEN_LEFT": "Open the left sidebar",
+        "OPEN_MENU": "Open the menu",
+        "OPEN_RIGHT": "Open the right sidebar",
+        "TITLE": "App sidebar"
+      },
+      "SLIDER": {
+        "HORIZONTAL_RANGE_SLIDER": "Horizontal Range Slider",
+        "SIMPLE_HORIZONTAL_SLIDER": "Simple Horizontal Slider",
+        "SIMPLE_VERTICAL_SLIDER": "Simple Vertical Slider",
+        "VERTICAL_RANGE_SLIDER": "Vertical Range Slider",
+        "TITLE": "Slider"
+      },
+      "TABLE": {
+        "LABELS": {
+          "TITLE": "Title",
+          "DESCRIPTION": "Description",
+          "EXTRA_INFO": "Extra info"
+        },
+        "FOOTER": {
+          "TOTAL": "Total"
+        },
+        "REGULAR": "Regular Table",
+        "WITH_SELECTION": "Table with selection",
+        "WITH_ITEMS_PER_PAGE_SELECTOR": "Table with the selector of items per page to display",
+        "WITH_CUSTOM_ACTIONS": "Table with custom actions",
+        "WITH_FIXED_HEADER": "Table with fixed header",
+        "WITH_FOOTER": "Table with footer",
+        "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
+        "WITH_CUSTOM_STYLING": "Table with custom styling",
+        "WITH_FIXED_ACTIONS": "Table with fixed row actions",
+        "TITLE": "Table"
+      },
+      "TOAST": {
+        "BUTTON_INFO": "Info",
+        "BUTTON_ALERT": "Error",
+        "BUTTON_WARNING": "Warning",
+        "BUTTON_ACTION": "Action",
+        "BUTTON_DELAY_LONG": "Long Delay",
+        "BUTTON_DELAY_SHORT": "Short Delay",
+        "BUTTON_HIDE": "Hide the toast",
+        "EXAMPLE": "Example",
+        "MESSAGE_CLOSED_ON_DELAY_TIMEOUT": "Toast closed automatically after delay timeout.",
+        "MESSAGE_ACTION_CLICKED": "You clicked the 'DISMISS' action!",
+        "MESSAGE_HIDDEN": "You closed the toast!",
+        "MESSAGE_OPENED": "Toast opened.",
+        "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast automatically closed before displaying a new one.",
+        "MESSAGE_INTRO": "Click one button to test the toast notification.",
+        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
+        "TITLE": "Toast notification"
+      }
+    },
+    "DEMO_RBAC": {
+      "DIRECTIVES": {
+        "AUTHORIZATION": {
+          "HIDE_ON_PERMISSION": {
+            "TITLE": "Hide On Permission directive",
+            "SWITCH_UNAUTHORIZED_ROLE": "Switch the unauthorized role:",
+            "ONLY_VISIBLE_TO": "It is only visible to an authorized user that doesn't have the '{{ role }}' role."
+          },
+          "SHOW_ON_PERMISSION": {
+            "TITLE": "Show On Permission directive",
+            "SWITCH_AUTHORIZED_ROLE": "Switch the authorized role:",
+            "ONLY_VISIBLE_TO": "It is only visible to an authorized user that has the '{{ role }}' role."
+          },
+          "CONTENT_PROTECTED": "This content is protected.",
+          "TITLE": "Authorization directives"
+        }
+      },
+      "SERVICES": {
+        "AUTHORIZATION": {
+          "FUNCTIONALITY": "Functionality",
+          "DESCRIPTION_METHODS": "The <code>StarkRBACAuthorizationService</code> provides the necessary methods to know whether the user has an specific role or set of roles and whether it is an anonymous user.",
+          "DESCRIPTION_TRANSITION_HOOKS": "It also adds a \"transition hook\" to the Router to protect certain routes from being accessed by unauthorized users. The transition hook will prevent the user from navigating to any route with specific permissions requirements defined on those routes. On top of that, the user can be redirected to another route if such redirection is defined as part of the route permissions configuration.",
+          "PROTECTED_ROUTES": "Declaring Protected Routes",
+          "DESCRIPTION_PROTECTED_ROUTES": "The protected routes should be declared using the <code>StarkRBACStateDeclaration</code> interface and defining the 'permissions' configuration inside the routes' 'data' object.<br>In this example they are defined as follows:",
+          "NAVIGATE_TO_ADMINS_PAGE": "Go to Admins page",
+          "NAVIGATE_TO_MANAGERS_PAGE": "Go to Managers page",
+          "NAVIGATE_TO_SUPER_ADMINS_PAGE": "Go to Super-Admins page",
+          "REDIRECTION_MESSAGE": "{{ rbacActionType }}.<br>You have been redirected because you don't have the right permissions to access the request page.",
+          "TITLE": "Authorization service"
+        },
+        "RESTRICTED_PAGE": {
+          "TITLE": "Restricted Page",
+          "DESCRIPTION": "You have access to it because you have the right permissions.",
+          "GO_BACK": "Go back to previous page"
+        }
+      }
+    },
+    "GETTING_STARTED": {
+      "TITLE": "Getting Started"
+    },
+    "HOMEPAGE": {
+      "CORE": "Stark Core",
+      "DESCRIPTION_DETAIL": "<p>Stark provides blocks perfectly fit for accelerating front-end development.<br>You'll find in Stark a reusable build based on Webpack, a starter project, core and ui modules providing awesome ui components, ...<br>All those modules act like LEGO blocks: you add what you need, no more, no less!</p>",
+      "DOCUMENTATION_CORE_DESC": "<p>Stark Core, aka stark-core, is a module providing reusable APIs, such as a routing, logging, log shipping, etc.</p>",
+      "DOCUMENTATION_MAIN_TITLE": "Documentation",
+      "DOCUMENTATION_RBAC_DESC": "<p>Stark's RBAC module (aka stark-rbac) is a separate module in Stark that can be optionally included in any Stark based application in order to provide different elements\n(directives, services and components) to support Role Based Access Control (RBAC) mechanism.</p>",
+      "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!<br>Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.</p>",
+      "DOCUMENTATION_UI_DESC": "<p>Stark UI provides reusable UI components, for example data table, message pane, ... but also themes.</p>",
+      "GETTING_STARTED": "Getting Started",
+      "INTRODUCTION": "A front-end framework based on Angular 7",
+      "LATEST_API": "Latest API",
+      "LATEST_NEWS": "Latest News",
+      "MAIN_TITLE": "What is Stark?",
+      "PREVIOUS_API": "Previous API",
+      "PREVIOUS_VERSIONS": "Previous versions",
+      "RBAC": "Stark RBAC",
+      "SHOWCASE": "Showcase",
+      "TITLE": "Home",
+      "UI": "Stark UI"
+    },
+    "ICONS": {
+      "GITHUB": "Github repo",
+      "STARK_UI": "Stark-UI documentation",
+      "STARK_CORE": "Stark-Core documentation",
+      "STARK_RBAC": "Stark-RBAC documentation"
+    },
+    "NEWS": {
+      "TITLE": "News"
+    },
+    "OTHERWISE": {
+      "TITLE": "Otherwise"
+    },
+    "STYLEGUIDE": {
+      "TITLE": "Style guide",
+      "BUTTON": {
+        "TITLE": "Buttons"
+      },
+      "CARD": {
+        "ADVANCED": {
+          "DETAILS": "Stark handles more complex cards also, here is an example with subtitle, actions and also the option to have full width elements thanks to the <code>.stark-full-width</code> class added inside the <code>mat-card-content</code> tag.",
+          "TITLE": "Advanced card"
+        },
+        "BASIC": {
+          "DETAILS": "Stark provides an alternative layout for cards. You can keep the same html structure and add the <code>.stark-card</code> class to the Angular Material card. We also recommend to use <code>h3</code> tag inside the <code>mat-card-title</code>.<br><br><br>For more information on Angular Material's card, check out this link: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "TITLE": "Basic card"
+        },
+        "CODE": "Here, the code to display this card:",
+        "TITLE": "Cards"
+      },
+      "COLORS": {
+        "ALT": {
+          "DETAILS": "In addition to the 3 basic palettes, Stark provides 3 alternative palettes: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
+          "TITLE": "Stark alternative palettes"
+        },
+        "BASIC": {
+          "DETAILS": "Angular Material uses 3 color palettes: a primary palette, an accent palette and a warn palette. Stark gives you the ability to define those palettes through 3 SCSS maps: <code>$stark-primary-palette</code>, <code>$stark-accent-palette</code> and <code>$stark-warn-palette</code>.<br><br>For more details on how Angular Material deals with theming, check out <a href=\"https://material.angular.io/guide/theming\" target=\"_blank\">https://material.angular.io/guide/theming</a>",
+          "TITLE": "Material palettes"
+        },
+        "CUSTOM": {
+          "DETAILS": "If you want to customize those palettes, you first need to create a palette and this tool is really useful: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Just define your main color and it will generate the full palette, then you just need to copy the SCSS code and associate it to the palette you want to modify. Don't forget to import stark theming after the maps declaration. <br>Here, an example with default values on how to achieve this:",
+          "TITLE": "Customize palettes"
+        },
+        "LINKS": {
+          "DETAILS": "You can find the Material Design color palettes here: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
+          "TITLE": "Useful links"
+        },
+        "TITLE": "Color Palettes"
+      },
+      "HEADER": {
+        "COPY_PASTE": "Then you can copy/paste this HTML into your code",
+        "EXPLAINED": "Introduction",
+        "INTEGRATION": "Integration",
+        "INTEGRATION_DETAILS": "Stark provides you with useful classes to implement your application header. You just need to include the header theme in your SCSS",
+        "STARK_APP_HEADER": "The <code>stark-app-header</code> provides a background to the header",
+        "STARK_APP_BAR": "The <code>stark-app-bar</code> contains three content containers <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <code>stark-app-bar</code> also provides a <code>stark-app-bar-page-title</code> which is placed on the bottom left of the header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contains <code>stark-actions</code> for the navigation actions.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <code>stark-app-bar-content-right-actions-alt</code> which contains some alternative actions.",
+        "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> displays the current page title.",
+        "TITLE": "App Header Guidelines"
+      },
+      "TYPOGRAPHY": {
+        "CLASSES_AND_TAGS": {
+          "TITLE": "Available classes & tags"
+        },
+        "CUSTOMIZATION": {
+          "TITLE": "Customization",
+          "DETAILS": "Stark allows you to customize simultaneously the typography settings of Angular Material and Stark easily by adding a simple SCSS map declaration. <br>First, declare the SCSS map and then you need to import the Stark's theme. On this example, a full version of the map is shown but you can also use it partially.",
+          "MAP_EXPLAINED": "Here are the corresponding classes and tags:"
+        },
+        "FONT_FAMILY": {
+          "TITLE": "Font family",
+          "DETAILS_1": "Material Design does not require to use a specific font, but it suggests Roboto, the sans-serif font available on Android mobile devices. We have chosen to let the system decide the most readable font it has to offer. This has the added advantage that no font will be embedded, reducing the first page load time.",
+          "DETAILS_2": "The font stack used to get the optimal sans-serif font the system provides:",
+          "CUSTOM_FONT_EXPLAINED": "To set a web font (eg: Roboto) you must first add the font (ttf, woff, ...) to your projects assets, add it as a font-face in SCSS and set it trough the <code>$stark-typography-theme</code> (more about customization below).",
+          "IE_NOTE": "* The font format woff2 is not supported by IE. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face#Browser_compatibility\" target=\"_blank\" rel=\"noopener\">MDN</a>",
+          "CDN_FONT_EXPLAINED": "To set a web font from an external source (CDN) webpack needs to be told to allow fonts from external sources. To do this add a the host/port to cspFontSrc in <code>config/webpack-custom-config.dev.json</code>. For more details check out: <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src\" target=\"_blank\" rel=\"noopener\"> CSP: font-src </a>."
+        },
+        "MATERIAL_BASED": {
+          "DETAILS": "We try to keep consistency with Angular Material. For more details checkout: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
+          "TITLE": "Based on Angular Material"
+        },
+        "TITLE": "Typography"
+      },
+      "LAYOUT": {
+        "TITLE": "Layout",
+        "INTRO": "We suggest using <a href=\"https://github.com/angular/flex-layout#angular-flex-layout\" target=\"_blank\" rel=\"noopener noreferrer\">Angular Flex-Layout</a> as a helper library when constructing the layout of your app. Full documentation is available on their <a href=\"https://github.com/angular/flex-layout/wiki/API-Documentation\"  target=\"_blank\" rel=\"noopener noreferrer\">wiki</a>.",
+        "ANGULAR_FLEX_LAYOUT": "Angular Flex Layout",
+        "FLEX": "Flexbox",
+        "GRID_WARNING": "Warning, although certain grid directives are available through the Angular Flex-Layout library they are not completely documented. Also keep in mind CSS Grid Layout is not supported in all browsers. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/grid#Browser_compatibility\" target=\"_blank\" rel=\"noopener noreferrer\">MDN</a>",
+        "GRID": "Grid layout"
+      }
+    }
+  }
+}
