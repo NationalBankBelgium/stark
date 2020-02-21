@@ -23,7 +23,7 @@
       background-color: rgba($color: $contrast, $alpha: 0.1);
     }
   }
-  .mat-icon-button {
+  &.mat-icon-button {
     .mat-ripple-element {
       background-color: rgba($color: $color, $alpha: 0.2);
     }

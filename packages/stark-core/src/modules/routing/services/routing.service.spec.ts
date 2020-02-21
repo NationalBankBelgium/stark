@@ -456,7 +456,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`getCurrentState ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 	});
 
@@ -476,7 +479,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`getCurrentStateName ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 	});
 
@@ -497,7 +503,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`getCurrentStateConfig ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 	});
 
@@ -585,7 +594,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`getCurrentStateParams ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should return NO params if the transition params don't belong to the target state but to its parent (inherited)", (done: DoneFn) => {
@@ -612,7 +624,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`getCurrentStateParams ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should return ALL params including the inherited ones from the parent when passing includeInherited = TRUE", (done: DoneFn) => {
@@ -642,7 +657,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`getCurrentStateParams ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 	});
 
@@ -665,7 +683,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`isCurrentUiState ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should return whether or not the current state is equal a specific state name and parameters combination", (done: DoneFn) => {
@@ -698,7 +719,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`isCurrentUiState ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 	});
 
@@ -723,7 +747,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`navigateTo ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 	});
 
@@ -747,7 +774,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`navigateTo ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should contain the options, when provided", (done: DoneFn) => {
@@ -764,7 +794,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`navigateTo ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should navigate to a non-existing page", (done: DoneFn) => {
@@ -810,7 +843,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`navigateToHome ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should contain the params, when provided", (done: DoneFn) => {
@@ -840,7 +876,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`navigateToHome ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 	});
 
@@ -873,7 +912,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`navigateToPrevious ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should navigate to the previous page passing the right params including those inherited from the parent state", (done: DoneFn) => {
@@ -918,7 +960,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`navigateToPrevious ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it(
@@ -962,7 +1007,10 @@ describe("Service: StarkRoutingService", () => {
 							return throwError(`navigateToPrevious ${error}`);
 						})
 					)
-					.subscribe(() => done(), (error: any) => fail(error));
+					.subscribe(
+						() => done(),
+						(error: any) => fail(error)
+					);
 			}
 		);
 	});
@@ -990,7 +1038,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`reload ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should reload the current page", (done: DoneFn) => {
@@ -1011,7 +1062,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`reload ${error}`);
 					})
 				)
-				.subscribe(() => (): void => fail("the test should not enter the next block"), () => done());
+				.subscribe(
+					() => (): void => fail("the test should not enter the next block"),
+					() => done()
+				);
 		});
 	});
 
@@ -1046,7 +1100,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should cancel a navigation when another navigation is triggered before the first was completed", (done: DoneFn) => {
@@ -1074,7 +1131,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
-				.subscribe(() => done(), (error: any) => fail(error));
+				.subscribe(
+					() => done(),
+					(error: any) => fail(error)
+				);
 		});
 
 		it("should not throw an error for a known navigation rejection cause", (done: DoneFn) => {
@@ -1094,7 +1154,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
-				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
+				.subscribe(
+					() => fail(nextShouldNotBeCalled),
+					() => done()
+				);
 		});
 
 		it("should not log a known navigation rejection cause", (done: DoneFn) => {
@@ -1112,7 +1175,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
-				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
+				.subscribe(
+					() => fail(nextShouldNotBeCalled),
+					() => done()
+				);
 		});
 
 		it("should log a warning if it is not a known navigation rejection cause", (done: DoneFn) => {
@@ -1130,7 +1196,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
-				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
+				.subscribe(
+					() => fail(nextShouldNotBeCalled),
+					() => done()
+				);
 		});
 
 		it("should log an error if it is not a known navigation rejection cause", (done: DoneFn) => {
@@ -1148,7 +1217,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
-				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
+				.subscribe(
+					() => fail(nextShouldNotBeCalled),
+					() => done()
+				);
 		});
 
 		it("should log an error if the state does not exist", (done: DoneFn) => {
@@ -1162,7 +1234,10 @@ describe("Service: StarkRoutingService", () => {
 						return throwError(`${errorPrefix} ${error}`);
 					})
 				)
-				.subscribe(() => fail(nextShouldNotBeCalled), () => done());
+				.subscribe(
+					() => fail(nextShouldNotBeCalled),
+					() => done()
+				);
 		});
 	});
 

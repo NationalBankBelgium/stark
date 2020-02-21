@@ -9,9 +9,9 @@
 			exampleTitle="SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.SHOW_ON_PERMISSION.TITLE"
 		>
 			<div class="authorized-roles">
-				<label class="toggle-button-label" translate
-					>SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.SHOW_ON_PERMISSION.SWITCH_AUTHORIZED_ROLE</label
-				>
+				<span class="toggle-button-label" translate>
+					SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.SHOW_ON_PERMISSION.SWITCH_AUTHORIZED_ROLE
+				</span>
 				<mat-button-toggle-group [(ngModel)]="selectedAuthorizedRole" (change)="onAuthorizedRoleChange($event)">
 					<mat-button-toggle value="admin">Admin</mat-button-toggle>
 					<mat-button-toggle value="manager">Manager</mat-button-toggle>
@@ -20,7 +20,9 @@
 
 			<div *starkShowOnPermission="onShowPermissionsConfig" class="protected-content">
 				{{ "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.CONTENT_PROTECTED" | translate }}<br />
-				<b>{{ "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.SHOW_ON_PERMISSION.ONLY_VISIBLE_TO" | translate: { role: "manager" } }}</b>
+				<b>{{
+					"SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.SHOW_ON_PERMISSION.ONLY_VISIBLE_TO" | translate: { role: "manager" }
+				}}</b>
 			</div>
 		</example-viewer>
 
@@ -31,9 +33,9 @@
 			exampleTitle="SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.HIDE_ON_PERMISSION.TITLE"
 		>
 			<div class="authorized-roles">
-				<label class="toggle-button-label" translate
-					>SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.HIDE_ON_PERMISSION.SWITCH_UNAUTHORIZED_ROLE</label
-				>
+				<span class="toggle-button-label" translate>
+					SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.HIDE_ON_PERMISSION.SWITCH_UNAUTHORIZED_ROLE
+				</span>
 				<mat-button-toggle-group [(ngModel)]="selectedUnauthorizedRole" (change)="onUnauthorizedRoleChange($event)">
 					<mat-button-toggle value="admin">Admin</mat-button-toggle>
 					<mat-button-toggle value="manager">Manager</mat-button-toggle>
@@ -42,7 +44,9 @@
 
 			<div *starkHideOnPermission="onHidePermissionsConfig" class="protected-content">
 				{{ "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.CONTENT_PROTECTED" | translate }}<br />
-				<b>{{ "SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.HIDE_ON_PERMISSION.ONLY_VISIBLE_TO" | translate: { role: "manager" } }}</b>
+				<b>{{
+					"SHOWCASE.DEMO_RBAC.DIRECTIVES.AUTHORIZATION.HIDE_ON_PERMISSION.ONLY_VISIBLE_TO" | translate: { role: "manager" }
+				}}</b>
 			</div>
 		</example-viewer>
 	</div>

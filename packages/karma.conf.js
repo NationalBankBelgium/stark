@@ -74,6 +74,6 @@ module.exports = {
 		return config.set(starkPackagesSpecificConfiguration);
 	},
 	karmaTypescriptBundlerAlias,
-    karmaTypescriptFiles,
-    rawKarmaConfig: starkPackagesSpecificConfiguration
+	karmaTypescriptFiles,
+	rawKarmaConfig: starkPackagesSpecificConfiguration
 };

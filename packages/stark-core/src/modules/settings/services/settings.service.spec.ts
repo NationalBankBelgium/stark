@@ -49,9 +49,13 @@ describe("Service: StarkSettingsService", () => {
 		mockSessionService = new MockStarkSessionService();
 		mockSessionService.getCurrentUser.and.returnValue(of(mockUser));
 
-		settingsService = new StarkSettingsServiceImpl(mockLogger, mockSessionService, appMetadata, appConfig, <
-			Store<StarkCoreApplicationState>
-		>(<unknown>mockStore));
+		settingsService = new StarkSettingsServiceImpl(
+			mockLogger,
+			mockSessionService,
+			appMetadata,
+			appConfig,
+			<Store<StarkCoreApplicationState>>(<unknown>mockStore)
+		);
 		// reset the calls counter because there is a log in the constructor
 		mockStore.dispatch.calls.reset();
 	});
@@ -64,9 +68,13 @@ describe("Service: StarkSettingsService", () => {
 
 				expect(
 					() =>
-						new StarkSettingsServiceImpl(mockLogger, mockSessionService, appMetadata, appConfig, <
-							Store<StarkCoreApplicationState>
-						>(<unknown>mockStore))
+						new StarkSettingsServiceImpl(
+							mockLogger,
+							mockSessionService,
+							appMetadata,
+							appConfig,
+							<Store<StarkCoreApplicationState>>(<unknown>mockStore)
+						)
 				).toThrowError(/defaultLanguage/);
 			}
 		});
@@ -89,9 +97,13 @@ describe("Service: StarkSettingsService", () => {
 
 				expect(
 					() =>
-						new StarkSettingsServiceImpl(mockLogger, mockSessionService, appMetadata, appConfig, <
-							Store<StarkCoreApplicationState>
-						>(<unknown>mockStore))
+						new StarkSettingsServiceImpl(
+							mockLogger,
+							mockSessionService,
+							appMetadata,
+							appConfig,
+							<Store<StarkCoreApplicationState>>(<unknown>mockStore)
+						)
 				).toThrowError(/supportedLanguages/);
 			}
 		});

@@ -5,35 +5,29 @@
 	[id]="actionBarId"
 >
 	<div class="action-bar-wrapper">
-		<div
-			*ngFor="let action of actionBarConfig.actions; trackBy: trackAction"
-			[id]="actionBarId + '-' + action.id"
-			(click)="onClick(action, $event)"
-			class="stark-action-bar--action"
-		>
-			<ng-container *ngIf="action.isVisible !== false">
-				<button
-					[color]="action.buttonColor ? action.buttonColor : buttonColor"
-					[ngClass]="action.className"
-					[matTooltip]="action.labelSwitchFunction ? (action.labelActivated | translate) : (action.label | translate)"
-					[disabled]="!action.isEnabled"
-					mat-icon-button
-					type="button"
-				>
-					<mat-icon
-						[svgIcon]="action.iconSwitchFunction ? action.iconActivated : action.icon"
-						class="stark-small-icon"
-					></mat-icon>
-				</button>
-				<label
+		<ng-container *ngFor="let action of actionBarConfig.actions; trackBy: trackAction">
+			<button
+				[id]="actionBarId + '-' + action.id"
+				(click)="onClick(action, $event)"
+				*ngIf="action.isVisible !== false"
+				class="stark-action-bar-action"
+				[color]="action.buttonColor ? action.buttonColor : buttonColor"
+				[ngClass]="action.className"
+				[matTooltip]="action.labelSwitchFunction ? (action.labelActivated | translate) : (action.label | translate)"
+				[disabled]="!action.isEnabled"
+				mat-icon-button
+				type="button"
+			>
+				<mat-icon [svgIcon]="action.iconSwitchFunction ? action.iconActivated : action.icon" class="stark-small-icon"></mat-icon>
+				<span
 					[class]="'action-label ' + (action.buttonColor ? action.buttonColor : buttonColor)"
 					[ngClass]="{ disabled: !action.isEnabled }"
 					*ngIf="isExtended"
 				>
 					{{ action.label | translate }}
-				</label>
-			</ng-container>
-		</div>
+				</span>
+			</button>
+		</ng-container>
 	</div>
 
 	<div *ngIf="mode === 'full' || alternativeActions" class="alt-actions">
@@ -58,20 +52,20 @@
 			<mat-icon svgIcon="dots-vertical" class="stark-small-icon"></mat-icon>
 		</button>
 		<mat-menu #menu="matMenu" xPosition="before">
-			<div
-				*ngFor="let action of alternativeActions; trackBy: trackAction"
-				mat-menu-item
-				[id]="actionBarId + '-alt-' + action.id"
-				[disabled]="!action.isEnabled"
-				(click)="onClick(action, $event)"
-			>
-				<ng-container *ngIf="action.isVisible !== false">
-					<div [ngClass]="action.className">
-						<mat-icon [svgIcon]="action.icon" class="stark-small-icon"></mat-icon>
-						<span translate>{{ action.label }}</span>
-					</div>
-				</ng-container>
-			</div>
+			<ng-container *ngFor="let action of alternativeActions; trackBy: trackAction">
+				<button
+					*ngIf="action.isVisible !== false"
+					mat-menu-item
+					class="stark-action-bar-menu-item"
+					[ngClass]="action.className"
+					[id]="actionBarId + '-alt-' + action.id"
+					[disabled]="!action.isEnabled"
+					(click)="onClick(action, $event)"
+				>
+					<mat-icon [svgIcon]="action.icon" class="stark-small-icon"></mat-icon>
+					<span translate>{{ action.label }}</span>
+				</button>
+			</ng-container>
 		</mat-menu>
 	</div>
 </div>

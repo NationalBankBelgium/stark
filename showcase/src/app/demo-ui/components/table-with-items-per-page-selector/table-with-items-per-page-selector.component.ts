@@ -49,7 +49,10 @@ export class TableWithItemsPerPageSelectorComponent {
 
 	public filter: StarkTableFilter = {
 		globalFilterPresent: true,
-		columns: [{ columnName: "id", filterPosition: "below" }, { columnName: "title", filterPosition: "above" }],
+		columns: [
+			{ columnName: "id", filterPosition: "below" },
+			{ columnName: "title", filterPosition: "above" }
+		],
 		filterPosition: "below"
 	};
 

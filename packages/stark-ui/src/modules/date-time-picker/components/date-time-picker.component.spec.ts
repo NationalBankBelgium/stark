@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations no-big-function */
+/* tslint:disable:completed-docs component-max-inline-declarations no-big-function */
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";

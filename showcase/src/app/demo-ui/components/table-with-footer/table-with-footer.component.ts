@@ -20,7 +20,7 @@ const DUMMY_DATA: object[] = [
 	selector: "showcase-table-with-footer",
 	templateUrl: "./table-with-footer.component.html",
 	styleUrls: ["./table-with-footer.component.scss"],
-	/* tslint:disable-next-line:use-view-encapsulation */
+	/* tslint:disable-next-line:use-component-view-encapsulation */
 	encapsulation: ViewEncapsulation.None // Important
 })
 export class TableWithFooterComponent {

@@ -115,9 +115,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		} else {
 			// we return directly here because otherwise compilation fails (can't assign the ErrorObservable type to Subject)
 			return throwError(
-				`Unknown request type encountered ${
-					request.requestType
-				}. For single requests (no collection), call the executeSingleItemRequest method`
+				`Unknown request type encountered ${request.requestType}. For single requests (no collection), call the executeSingleItemRequest method`
 			);
 		}
 	}

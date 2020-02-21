@@ -95,6 +95,6 @@ export class DemoActionBarComponent {
 			isVisible: true
 		}
 	];
-	
+
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 }

@@ -2,8 +2,8 @@
   "extends": [
     "tslint:latest",
     "tslint-sonarts",
-    "@nationalbankbelgium/code-style/codelyzer/4.5.x",
-    "@nationalbankbelgium/code-style/tslint/4.3.x",
+    "@nationalbankbelgium/code-style/codelyzer/5.2.x",
+    "@nationalbankbelgium/code-style/tslint/5.10.x",
     "tslint-config-prettier"
   ],
   "rules": {
@@ -30,6 +30,7 @@
         }
       }
     ],
-    "use-view-encapsulation": false
+    "use-component-view-encapsulation": false,
+    "use-injectable-provided-in": false
   }
 }

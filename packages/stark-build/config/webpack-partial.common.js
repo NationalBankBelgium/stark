@@ -159,10 +159,10 @@ module.exports = metadata => {
 				// xhtml: true, // TODO: why XHTML?
 				minify: isProd
 					? {
-						caseSensitive: true,
-						collapseWhitespace: true,
-						keepClosingSlash: true
-					}
+							caseSensitive: true,
+							collapseWhitespace: true,
+							keepClosingSlash: true
+					  }
 					: false
 			}),
 
@@ -232,10 +232,10 @@ module.exports = metadata => {
 			 */
 			...(fs.existsSync(helpers.root("config/index-head-config.js"))
 				? [
-					new HtmlElementsWebpackPlugin({
-						headTags: require(helpers.root("config/index-head-config"))
-					})
-				]
+						new HtmlElementsWebpackPlugin({
+							headTags: require(helpers.root("config/index-head-config"))
+						})
+				  ]
 				: []),
 
 			/**
@@ -255,14 +255,14 @@ module.exports = metadata => {
 			 */
 			...(MONITOR
 				? [
-					new WebpackMonitor({
-						capture: true, // -> default 'true'
-						target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
-						launch: true, // -> default 'false'
-						port: 3030, // default 8081
-						excludeSourceMaps: true // default 'true'
-					})
-				]
+						new WebpackMonitor({
+							capture: true, // -> default 'true'
+							target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
+							launch: true, // -> default 'false'
+							port: 3030, // default 8081
+							excludeSourceMaps: true // default 'true'
+						})
+				  ]
 				: []),
 
 			/**
@@ -272,13 +272,13 @@ module.exports = metadata => {
 			 */
 			...(BUNDLE_ANALYZER
 				? [
-					new BundleAnalyzerPlugin({
-						generateStatsFile: true, // default 'false'
-						statsFilename: helpers.root("reports/bundle-analyzer/stats.json"), // default -> 'stats.json'
-						openAnalyzer: true, //default 'true'
-						analyzerPort: 3030 // default 8888
-					})
-				]
+						new BundleAnalyzerPlugin({
+							generateStatsFile: true, // default 'false'
+							statsFilename: helpers.root("reports/bundle-analyzer/stats.json"), // default -> 'stats.json'
+							openAnalyzer: true, //default 'true'
+							analyzerPort: 3030 // default 8888
+						})
+				  ]
 				: []),
 
 			/**

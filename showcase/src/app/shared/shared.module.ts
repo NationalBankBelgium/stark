@@ -26,7 +26,6 @@ import { UIRouterModule } from "@uirouter/angular";
 import moment from "moment";
 import { filter } from "rxjs/operators";
 import { ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent } from "./components";
-import { FileService } from "./services";
 
 @NgModule({
 	imports: [
@@ -48,7 +47,6 @@ import { FileService } from "./services";
 		TranslateModule,
 		UIRouterModule.forChild()
 	],
-	providers: [FileService],
 	declarations: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],
 	entryComponents: [],
 	// export commonly used components/directives/components (see https://angular.io/guide/sharing-ngmodules)

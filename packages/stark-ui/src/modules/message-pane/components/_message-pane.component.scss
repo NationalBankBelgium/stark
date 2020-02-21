@@ -4,6 +4,7 @@
 /* stark-ui: src/modules/message-pane/components/message-pane.component.scss */
 
 .stark-message-pane {
+  padding: 0 16px;
   position: fixed;
   top: 16px;
   right: 16px;
@@ -27,28 +28,6 @@
   &.align-right {
     text-align: right;
   }
-}
-
-.stark-app-header .stark-message-pane {
-  position: absolute;
-  top: auto;
-  right: 0;
-  bottom: 40px;
-  left: 0;
-}
-
-@media #{$desktop-lg-query} {
-  .stark-app-sidebar.sidebar-open-start .stark-message-pane.align-left,
-  .stark-app-sidebar.sidebar-open .stark-message-pane.align-left {
-    padding-left: 280px;
-  }
-  .stark-app-sidebar.sidebar-close-start .stark-message-pane.align-left {
-    padding: 0 16px;
-  }
-}
-
-.stark-message-pane {
-  padding: 0 16px;
 
   &.displayed {
     display: block;
@@ -137,9 +116,20 @@
     }
   }
 
+  & mat-icon {
+    transition: all 0.4s;
+  }
+
   &.display-animated .inner .may-collapse {
     width: 48px;
     padding: 8px;
+  }
+
+  /* content pane */
+  & .stark-message-pane-content {
+    max-height: calc(100vh - 180px);
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   &.collapsed {
@@ -161,14 +151,6 @@
         display: none;
       }
     }
-  }
-
-  /* content pane */
-  & .stark-message-pane-content {
-    /* stylelint-disable-next-line unit-no-unknown */
-    max-height: calc(100vh-180px);
-    overflow-x: hidden;
-    overflow-y: auto;
   }
 
   & .stark-message-pane-item {
@@ -197,9 +179,23 @@
       }
     }
   }
+}
 
-  & mat-icon {
-    transition: all 0.4s;
+.stark-app-header .stark-message-pane {
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: 40px;
+  left: 0;
+}
+
+@media #{$desktop-lg-query} {
+  .stark-app-sidebar.sidebar-open-start .stark-message-pane.align-left,
+  .stark-app-sidebar.sidebar-open .stark-message-pane.align-left {
+    padding-left: 280px;
+  }
+  .stark-app-sidebar.sidebar-close-start .stark-message-pane.align-left {
+    padding: 0 16px;
   }
 }
 

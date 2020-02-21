@@ -6,7 +6,7 @@ import { ReferenceLink } from "../../../shared/components";
 	selector: "demo-dropdown",
 	styleUrls: ["./demo-dropdown-page.component.scss"],
 	templateUrl: "./demo-dropdown-page.component.html",
-	/* tslint:disable-next-line:use-view-encapsulation */
+	/* tslint:disable-next-line:use-component-view-encapsulation */
 	encapsulation: ViewEncapsulation.None // used here to be able to customize the example-viewer background color
 })
 export class DemoDropdownPageComponent {

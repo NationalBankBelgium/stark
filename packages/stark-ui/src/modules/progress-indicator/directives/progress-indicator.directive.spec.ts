@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-life-cycle-call */
+/* tslint:disable:completed-docs no-lifecycle-call */
 import { Observable, of, Subject } from "rxjs";
 import { Component, ViewChild } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
@@ -82,7 +82,7 @@ describe("ProgressIndicatorDirective", () => {
 				expect(mockStarkProgressIndicatorService.register).toHaveBeenCalledTimes(1);
 				expect(mockStarkProgressIndicatorService.register).toHaveBeenCalledWith(
 					mockConfig.topic,
-					<StarkProgressIndicatorType><unknown>StarkProgressIndicatorType[mockConfig.type]
+					<StarkProgressIndicatorType>(<unknown>StarkProgressIndicatorType[mockConfig.type])
 				);
 			});
 

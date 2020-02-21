@@ -37,5 +37,5 @@ module.exports = {
 	default: function(config) {
 		return config.set(starkPackagesSpecificConfiguration);
 	},
-    rawKarmaConfig: starkPackagesSpecificConfiguration
+	rawKarmaConfig: starkPackagesSpecificConfiguration
 };

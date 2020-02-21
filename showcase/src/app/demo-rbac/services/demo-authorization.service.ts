@@ -2,7 +2,7 @@ import { StarkRBACAuthorizationServiceImpl } from "@nationalbankbelgium/stark-rb
 import { StarkUser } from "@nationalbankbelgium/stark-core";
 import { Injectable } from "@angular/core";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class DemoAuthorizationService extends StarkRBACAuthorizationServiceImpl {
 	/**
 	 * To be called only when the app initializes

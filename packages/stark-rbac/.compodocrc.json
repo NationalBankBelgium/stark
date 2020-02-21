@@ -1,6 +1,6 @@
 {
-	"$schema": "../../node_modules/@compodoc/compodoc/src/config/schema.json",
-	"theme": "material",
-	"tsconfig": "./tsconfig.json",
-	"output": "../../reports/api-docs/stark-rbac"
+  "$schema": "../../node_modules/@compodoc/compodoc/src/config/schema.json",
+  "theme": "material",
+  "tsconfig": "./tsconfig.json",
+  "output": "../../reports/api-docs/stark-rbac"
 }

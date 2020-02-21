@@ -290,6 +290,7 @@ module.exports = {
 Finally, to include in your _index.html_ file the elements defined in this new file, you will have to add
 the following lines in your `<head>` section:
 
+<!-- prettier-ignore-start -->
 ```html
 <head>
 	...
@@ -299,6 +300,7 @@ the following lines in your `<head>` section:
 	...
 </head>
 ```
+<!-- prettier-ignore-end -->
 
 _If you do not intend to use this feature, simply don't create the `index-head-config.js` file and
 don't include the check for `webpackConfig.htmlElements.headTags` in the `<head>` section of index.html._

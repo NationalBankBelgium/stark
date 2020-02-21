@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations */
+/* tslint:disable:completed-docs component-max-inline-declarations */
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";

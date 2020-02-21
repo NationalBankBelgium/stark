@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs max-inline-declarations no-big-function */
+/* tslint:disable:completed-docs component-max-inline-declarations no-big-function */
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";

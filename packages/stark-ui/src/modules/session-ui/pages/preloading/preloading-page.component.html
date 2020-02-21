@@ -1,4 +1,8 @@
-<stark-session-card [cardTitle]="userFetchingFailed && 'STARK.PRELOADING.FETCHING_USER_PROFILE_FAILURE'" aria-busy="true" aria-live="polite">
+<stark-session-card
+	[cardTitle]="userFetchingFailed && 'STARK.PRELOADING.FETCHING_USER_PROFILE_FAILURE'"
+	aria-busy="true"
+	aria-live="polite"
+>
 	<ng-container *ngIf="!userFetchingFailed">
 		<div class="stark-loading-icon"></div>
 		<h1 translate>STARK.PRELOADING.FETCHING_USER_PROFILE</h1>

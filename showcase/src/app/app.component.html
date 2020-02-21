@@ -49,11 +49,8 @@
 								<div *ngIf="!isMenuModeActive">
 									<stark-app-data mode="dropdown">
 										<div class="summary-slot">
-											<span *ngIf="user"
-												  class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}
-												:&nbsp;</span>
-											<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }}
-																								 )</span>
+											<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}:&nbsp;</span>
+											<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span>
 											<br />
 											<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }} :&nbsp;</span>
 											<span class="value">{{ time }}</span>
@@ -76,11 +73,8 @@
 								<div *ngIf="isMenuModeActive">
 									<stark-app-data mode="menu">
 										<div class="detail-slot">
-											<span *ngIf="user"
-												  class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}
-												:&nbsp;</span>
-											<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }}
-																								 )</span>
+											<span *ngIf="user" class="label">{{ "SHOWCASE.DEMO.APP_DATA.USER" | translate }}:&nbsp;</span>
+											<span *ngIf="user" class="value">{{ user.username }} ({{ user.roles[0] }})</span>
 											<br />
 											<span class="label">{{ "SHOWCASE.DEMO.APP_DATA.LAST_ACCESS" | translate }} :&nbsp;</span>
 											<span class="value">{{ time }}</span>
@@ -94,9 +88,7 @@
 									</stark-app-data>
 								</div>
 
-								<stark-language-selector color="white"
-														 class="stark-full-width"
-														 mode="dropdown"></stark-language-selector>
+								<stark-language-selector color="white" class="stark-full-width" mode="dropdown"></stark-language-selector>
 
 								<button color="white" (click)="openLeftSidebar()" mat-icon-button>
 									<mat-icon svgIcon="skip-next"></mat-icon>
@@ -110,9 +102,7 @@
 							<div class="stark-app-bar-content-right-actions-alt">
 								<stark-route-search direction="left" [menuConfig]="mainMenu"></stark-route-search>
 
-								<a href="https://stark.nbb.be/api-docs/stark-ui/latest/"
-								   target="_blank"
-								   rel="noopener noreferrer">
+								<a href="https://stark.nbb.be/api-docs/stark-ui/latest/" target="_blank" rel="noopener noreferrer">
 									<button
 										mat-mini-fab
 										mat-icon-button
@@ -123,9 +113,7 @@
 									</button>
 								</a>
 
-								<a href="https://stark.nbb.be/api-docs/stark-core/latest/"
-								   target="_blank"
-								   rel="noopener noreferrer">
+								<a href="https://stark.nbb.be/api-docs/stark-core/latest/" target="_blank" rel="noopener noreferrer">
 									<button
 										mat-mini-fab
 										mat-icon-button
@@ -136,9 +124,7 @@
 									</button>
 								</a>
 
-								<a href="https://stark.nbb.be/api-docs/stark-rbac/latest/"
-								   target="_blank"
-								   rel="noopener noreferrer">
+								<a href="https://stark.nbb.be/api-docs/stark-rbac/latest/" target="_blank" rel="noopener noreferrer">
 									<button
 										mat-mini-fab
 										mat-icon-button
@@ -149,9 +135,7 @@
 									</button>
 								</a>
 
-								<a href="https://github.com/NationalBankBelgium"
-								   target="_blank"
-								   rel="noopener noreferrer">
+								<a href="https://github.com/NationalBankBelgium" target="_blank" rel="noopener noreferrer">
 									<button
 										mat-mini-fab
 										mat-icon-button
