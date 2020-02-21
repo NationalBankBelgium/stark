@@ -1,3 +1,26 @@
+<a name="10.0.0-rc.5"></a>
+# [10.0.0-rc.5](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.4...10.0.0-rc.5) (2020-02-21)
+
+
+### Bug Fixes
+
+* **build-main:** `npm run install:starter` is now working well on every platform (MacOS, Windows, Linux) ([c7590b2](https://github.com/nationalbankbelgium/stark/commit/c7590b2)), closes [#1617](https://github.com/nationalbankbelgium/stark/issues/1617)
+* **stark-ui:** enhance styling of date time picker component to display the 'clear' button correctly aligned in IE 11 ([3a3e832](https://github.com/nationalbankbelgium/stark/commit/3a3e832)), closes [#1430](https://github.com/nationalbankbelgium/stark/issues/1430)
+* **stark-ui:** remove wrong `[@internal](https://github.com/internal)` decorator on `_globalFilterFormCtrl` in table component ([e85b810](https://github.com/nationalbankbelgium/stark/commit/e85b810)), closes [#1644](https://github.com/nationalbankbelgium/stark/issues/1644)
+
+
+### Features
+
+* **stark-all:** upgrade `[@nationalbankbelgium](https://github.com/nationalbankbelgium)/code-style` and `codelyzer` dependencies and adapt code ([77d6b29](https://github.com/nationalbankbelgium/stark/commit/77d6b29))
+* **stark-all:** upgrade `stylelint` dependency to 13.0.0 and adapt code ([f4ff4dc](https://github.com/nationalbankbelgium/stark/commit/f4ff4dc))
+
+
+### BREAKING CHANGES
+
+* **stark-all:** Due to the update of the `codelyzer` dependency, multiple rules have been renamed and new rules been added, as documented on [codelyzer/CHANGELOG.md](https://github.com/mgechev/codelyzer/blob/master/CHANGELOG.md#500-2019-03-27). We strongly recommend to upgrade your `tslint` configuration to use the new rules. The [@nationalbankbelgium/code-style](https://github.com/NationalBankBelgium/code-style) library contains the NBB recommended configuration for `codelyzer@5.2.x`.
+
+
+
 <a name="10.0.0-rc.4"></a>
 # [10.0.0-rc.4](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.3...10.0.0-rc.4) (2020-02-06)
 
@@ -529,12 +552,12 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 * **package:** update copy-webpack-plugin to version 4.5.4 ([ab76952](https://github.com/nationalbankbelgium/stark/commit/ab76952))
 * **package:** update copy-webpack-plugin to version 4.6.0 ([a4aac38](https://github.com/nationalbankbelgium/stark/commit/a4aac38))
 * **package:** update css-loader to version 1.0.1 ([8bbc642](https://github.com/nationalbankbelgium/stark/commit/8bbc642))
-* **package:** update event-source-polyfill to version 1.0.0 ([32a0ec6](https://github.com/nationalbankbelgium/stark/commit/32a0ec6))
 * **package:** update event-source-polyfill to version 1.0.0 ([a62cf49](https://github.com/nationalbankbelgium/stark/commit/a62cf49))
-* **package:** update event-source-polyfill to version 1.0.3 ([2dffcb0](https://github.com/nationalbankbelgium/stark/commit/2dffcb0)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
+* **package:** update event-source-polyfill to version 1.0.0 ([32a0ec6](https://github.com/nationalbankbelgium/stark/commit/32a0ec6))
 * **package:** update event-source-polyfill to version 1.0.3 ([ce41d15](https://github.com/nationalbankbelgium/stark/commit/ce41d15)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
-* **package:** update event-source-polyfill to version 1.0.4 ([aca911f](https://github.com/nationalbankbelgium/stark/commit/aca911f))
+* **package:** update event-source-polyfill to version 1.0.3 ([2dffcb0](https://github.com/nationalbankbelgium/stark/commit/2dffcb0)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
 * **package:** update event-source-polyfill to version 1.0.4 ([0df420c](https://github.com/nationalbankbelgium/stark/commit/0df420c))
+* **package:** update event-source-polyfill to version 1.0.4 ([aca911f](https://github.com/nationalbankbelgium/stark/commit/aca911f))
 * **package:** update jasmine-core to version 3.3.0 ([7fec286](https://github.com/nationalbankbelgium/stark/commit/7fec286))
 * **package:** update karma to version 3.1.1 ([548103e](https://github.com/nationalbankbelgium/stark/commit/548103e))
 * **package:** update nouislider to version 12.1.0 ([6fd6337](https://github.com/nationalbankbelgium/stark/commit/6fd6337))
@@ -770,8 +793,8 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 * **coverage:** add support for code coverage with Coveralls ([72aefce](https://github.com/nationalbankbelgium/stark/commit/72aefce))
 * **http:** correction for imports ([464566a](https://github.com/nationalbankbelgium/stark/commit/464566a))
 * **http:** create StarkHttp module. Fixed imports. Implemented small demo in Starter [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([201edb8](https://github.com/nationalbankbelgium/stark/commit/201edb8))
-* **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([719d92d](https://github.com/nationalbankbelgium/stark/commit/719d92d))
 * **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([579c59b](https://github.com/nationalbankbelgium/stark/commit/579c59b))
+* **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([719d92d](https://github.com/nationalbankbelgium/stark/commit/719d92d))
 * **logging:** create StarkLogging module. Fixed imports ([f3684db](https://github.com/nationalbankbelgium/stark/commit/f3684db))
 * **logging:** implement STARK_APP_CONFIG token and implement Stark logging in Starter ([ec09736](https://github.com/nationalbankbelgium/stark/commit/ec09736))
 * **polyfills:** Update polyfills.browser.ts with the relevant polyfills needed only for IE11 and some special features from Angular. Add needed npm dependencies for those polyfils ([2b6a160](https://github.com/nationalbankbelgium/stark/commit/2b6a160))
