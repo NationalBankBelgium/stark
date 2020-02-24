@@ -34,7 +34,7 @@
     "ibantools": "^2.0.0",
     "lodash-es": "^4.17.11",
     "moment": "^2.22.2",
-    "uuid": "^3.3.2"
+    "uuid": "^7.0.0"
   },
   "devDependencies": {
     "@types/jasmine": "^3.5.0",
