@@ -174,7 +174,12 @@
     "test:ci:coveralls:combined": "node combine-packages-coverage.js | packages/stark-testing/node_modules/coveralls/bin/coveralls.js",
     "tsc": "tsc",
     "tslint": "tslint",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "tslint-check:all": "npm run tslint-check:stark-core && npm run tslint-check:stark-ui && npm run tslint-check:stark-rbac && npm run tslint-check:starter && npm run tslint-check:showcase",
+    "tslint-check:stark-core": "cd packages/stark-core && npm run tslint-check && cd ../..",
+    "tslint-check:stark-rbac": "cd packages/stark-rbac && npm run tslint-check && cd ../..",
+    "tslint-check:stark-ui": "cd packages/stark-ui && npm run tslint-check && cd ../..",
+    "tslint-check:showcase": "cd showcase && npm run tslint-check && cd ../..",
+    "tslint-check:starter": "cd starter && npm run tslint-check && cd ../..",
     "update:showcase": "npm run clean:showcase && npm run install:showcase",
     "update:starter": "npm run clean:starter && npm run install:starter"
   },

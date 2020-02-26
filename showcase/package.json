@@ -89,6 +89,7 @@
     "test-fast:ci": "karma start karma.conf.ci.js",
     "tsc": "tsc",
     "tslint": "tslint",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "version": "npm run build",
     "watch:dev:hmr": "npm run watch:dev -- --hot",
     "watch:dev": "npm run build:dev -- --watch",
