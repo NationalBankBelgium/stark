@@ -1,3 +1,8 @@
+<a name="10.0.0"></a>
+# [10.0.0](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.5...10.0.0) (2020-03-10)
+
+
+
 <a name="10.0.0-rc.5"></a>
 # [10.0.0-rc.5](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.4...10.0.0-rc.5) (2020-02-21)
 
