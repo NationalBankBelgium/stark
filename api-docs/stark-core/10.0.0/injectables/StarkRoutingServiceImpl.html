@@ -1,0 +1,2597 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>StarkRoutingServiceImpl</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/routing/services/routing.service.ts</code>
+        </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_starkStateHistory">_starkStateHistory</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#errorLastTransition">errorLastTransition</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#knownRejectionCauses">knownRejectionCauses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#knownRejectionCausesRegex">knownRejectionCausesRegex</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#lastTransition">lastTransition</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#addKnownNavigationRejectionCause">addKnownNavigationRejectionCause</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#addNavigationErrorHandlers">addNavigationErrorHandlers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#addNavigationSuccessHandlers">addNavigationSuccessHandlers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#addTransitionHook">addTransitionHook</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#extractResolvablesData">extractResolvablesData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCurrentState">getCurrentState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCurrentStateConfig">getCurrentStateConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCurrentStateName">getCurrentStateName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCurrentStateParams">getCurrentStateParams</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getStateConfigByUrlPath">getStateConfigByUrlPath</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getStateDeclarationByStateName">getStateDeclarationByStateName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getStatesConfig">getStatesConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getStateTreeData">getStateTreeData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getStateTreeParams">getStateTreeParams</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getStateTreeResolves">getStateTreeResolves</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getTranslationKeyFromState">getTranslationKeyFromState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isCurrentUiState">isCurrentUiState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isCurrentUiStateIncludedIn">isCurrentUiStateIncludedIn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isParentState">isParentState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#navigateTo">navigateTo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#navigateToHome">navigateToHome</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#navigateToPrevious">navigateToPrevious</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#reload">reload</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: <a href="../interfaces/StarkLoggingService.html">StarkLoggingService</a>, appConfig: <a href="../interfaces/StarkApplicationConfig.html">StarkApplicationConfig</a>, defaultErrorHandler: <a href="https://angular.io/api/core/ErrorHandler" target="_blank">ErrorHandler</a>, store: <a href="../interfaces/StarkCoreApplicationState.html">Store<StarkCoreApplicationState></a>, $state: StateService, $transitions: TransitionService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/modules/routing/services/routing.service.ts:64</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/StarkLoggingService.html" target="_self" >StarkLoggingService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appConfig</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/StarkApplicationConfig.html" target="_self" >StarkApplicationConfig</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>defaultErrorHandler</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ErrorHandler" target="_blank" >ErrorHandler</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/StarkCoreApplicationState.html" target="_self" >Store&lt;StarkCoreApplicationState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>$state</td>
+                                                  
+                                                        <td>
+                                                                    <code>StateService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>$transitions</td>
+                                                  
+                                                        <td>
+                                                                    <code>TransitionService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addKnownNavigationRejectionCause"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            addKnownNavigationRejectionCause
+                        </b>
+                        <a href="#addKnownNavigationRejectionCause"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addKnownNavigationRejectionCause(rejectionCause: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="233"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:233</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>rejectionCause</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addNavigationErrorHandlers"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            addNavigationErrorHandlers
+                        </b>
+                        <a href="#addNavigationErrorHandlers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addNavigationErrorHandlers()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="280"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:280</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Adds Angular UI-Router specific handlers for errors..
+It logs an error and dispatches a NAVIGATE_FAILURE action to the NGRX Store</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addNavigationSuccessHandlers"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            addNavigationSuccessHandlers
+                        </b>
+                        <a href="#addNavigationSuccessHandlers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addNavigationSuccessHandlers()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="411"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:411</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Adds Angular UI-Router specific handlers for success..
+It stores the last transition</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addTransitionHook"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            addTransitionHook
+                        </b>
+                        <a href="#addTransitionHook"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addTransitionHook(lifecycleHook: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, matchCriteria: HookMatchCriteria, callback: TransitionHookFn | TransitionStateHookFn, options?: HookRegOptions)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="238"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:238</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>lifecycleHook</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>matchCriteria</td>
+                                    <td>
+                                            <code>HookMatchCriteria</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>callback</td>
+                                    <td>
+                                            <code>TransitionHookFn | TransitionStateHookFn</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>HookRegOptions</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="extractResolvablesData"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            extractResolvablesData
+                        </b>
+                        <a href="#extractResolvablesData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>extractResolvablesData(resolvables: Resolvable[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="567"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:567</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>resolvables</td>
+                                    <td>
+                                            <code>Resolvable[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>literal type</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentState"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getCurrentState
+                        </b>
+                        <a href="#getCurrentState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCurrentState()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="137"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:137</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>StateObject</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentStateConfig"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getCurrentStateConfig
+                        </b>
+                        <a href="#getCurrentStateConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCurrentStateConfig()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>StateDeclaration</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentStateName"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getCurrentStateName
+                        </b>
+                        <a href="#getCurrentStateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCurrentStateName()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="133"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:133</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentStateParams"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getCurrentStateParams
+                        </b>
+                        <a href="#getCurrentStateParams"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCurrentStateParams(includeInherited: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="179"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:179</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>includeInherited</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>RawParams</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStateConfigByUrlPath"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getStateConfigByUrlPath
+                        </b>
+                        <a href="#getStateConfigByUrlPath"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStateConfigByUrlPath(urlPath: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="149"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:149</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>urlPath</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/StarkStateConfigWithParams.html" target="_self" >StarkStateConfigWithParams | undefined</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStateDeclarationByStateName"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getStateDeclarationByStateName
+                        </b>
+                        <a href="#getStateDeclarationByStateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStateDeclarationByStateName(stateName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="169"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:169</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>stateName</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>StateDeclaration | undefined</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatesConfig"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getStatesConfig
+                        </b>
+                        <a href="#getStatesConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStatesConfig()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="145"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:145</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>StateDeclaration[]</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStateTreeData"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getStateTreeData
+                        </b>
+                        <a href="#getStateTreeData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStateTreeData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="519"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:519</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Map&lt;string, any&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStateTreeParams"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getStateTreeParams
+                        </b>
+                        <a href="#getStateTreeParams"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStateTreeParams()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="449"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:449</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Map&lt;string, any&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStateTreeResolves"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getStateTreeResolves
+                        </b>
+                        <a href="#getStateTreeResolves"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStateTreeResolves()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="485"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:485</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Map&lt;string, any&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTranslationKeyFromState"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getTranslationKeyFromState
+                        </b>
+                        <a href="#getTranslationKeyFromState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTranslationKeyFromState(stateName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="582"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:582</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>stateName</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCurrentUiState"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            isCurrentUiState
+                        </b>
+                        <a href="#isCurrentUiState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isCurrentUiState(stateName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, stateParams?: RawParams)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="204"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:204</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>stateName</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>stateParams</td>
+                                    <td>
+                                            <code>RawParams</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCurrentUiStateIncludedIn"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            isCurrentUiStateIncludedIn
+                        </b>
+                        <a href="#isCurrentUiStateIncludedIn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isCurrentUiStateIncludedIn(stateName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, stateParams?: RawParams)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="227"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:227</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>stateName</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>stateParams</td>
+                                    <td>
+                                            <code>RawParams</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isParentState"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            isParentState
+                        </b>
+                        <a href="#isParentState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isParentState(state: StateObject, currentState: StateObject)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="555"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:555</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check whether the given state is a parent/ancestor of the given currentState</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>state</td>
+                                    <td>
+                                            <code>StateObject</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        <ul>
+<li>The state that will be checked whether is a parent of the currentState</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>currentState</td>
+                                    <td>
+                                            <code>StateObject</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>this.getCurrentState()</code>
+                                    </td>
+
+                                    <td>
+                                        <ul>
+<li>(Optional) If not provided, it is set to the current router state</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateTo"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            navigateTo
+                        </b>
+                        <a href="#navigateTo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>navigateTo(newState: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, params?: RawParams, options?: TransitionOptions)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="87"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:87</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>newState</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                            <code>RawParams</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>TransitionOptions</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToHome"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            navigateToHome
+                        </b>
+                        <a href="#navigateToHome"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>navigateToHome(params?: RawParams)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:92</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                            <code>RawParams</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToPrevious"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            navigateToPrevious
+                        </b>
+                        <a href="#navigateToPrevious"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>navigateToPrevious()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="96"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:96</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reload"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            reload
+                        </b>
+                        <a href="#reload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>reload()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="122"
+                            class="link-to-prism">src/modules/routing/services/routing.service.ts:122</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_starkStateHistory"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            _starkStateHistory</b>
+                            <a href="#_starkStateHistory"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>StarkState[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/modules/routing/services/routing.service.ts:64</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="errorLastTransition"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            errorLastTransition</b>
+                            <a href="#errorLastTransition"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;lastTransition needs to be defined&quot;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/modules/routing/services/routing.service.ts:60</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="knownRejectionCauses"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            knownRejectionCauses</b>
+                            <a href="#knownRejectionCauses"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/modules/routing/services/routing.service.ts:59</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="knownRejectionCausesRegex"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            knownRejectionCausesRegex</b>
+                            <a href="#knownRejectionCausesRegex"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>RegExp</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/modules/routing/services/routing.service.ts:58</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="lastTransition"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                                <span class="modifier">Optional</span>
+                            lastTransition</b>
+                            <a href="#lastTransition"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Transition</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/modules/routing/services/routing.service.ts:57</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Action, Store } from &quot;@ngrx/store&quot;;
+import { EMPTY, from, Observable } from &quot;rxjs&quot;;
+import { ErrorHandler, Inject, Injectable } from &quot;@angular/core&quot;;
+import {
+	HookMatchCriteria,
+	HookRegOptions,
+	HookResult,
+	Param,
+	PathNode,
+	RawParams,
+	Rejection,
+	RejectType,
+	Resolvable,
+	StateDeclaration,
+	StateObject,
+	StateParams,
+	StateService,
+	TargetState,
+	Transition,
+	TransitionHookFn,
+	TransitionOptions,
+	TransitionService,
+	TransitionStateHookFn
+} from &quot;@uirouter/core&quot;;
+
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;../../logging/services&quot;;
+import { StarkRoutingService, starkRoutingServiceName } from &quot;./routing.service.intf&quot;;
+import {
+	StarkNavigate,
+	StarkNavigateFailure,
+	StarkNavigateRejection,
+	StarkNavigateSuccess,
+	StarkNavigationHistoryLimitReached,
+	StarkReload,
+	StarkReloadFailure,
+	StarkReloadSuccess
+} from &quot;../actions&quot;;
+import { STARK_APP_CONFIG, StarkApplicationConfig } from &quot;../../../configuration/entities/application&quot;;
+import { StarkRoutingTransitionHook } from &quot;./routing-transition-hook.constants&quot;;
+import { StarkStateConfigWithParams } from &quot;./state-config-with-params.intf&quot;;
+import { StarkCoreApplicationState } from &quot;../../../common/store&quot;;
+import { StarkConfigurationUtil } from &quot;../../../util/configuration.util&quot;;
+import { starkAppExitStateName, starkAppInitStateName } from &quot;../../session/constants&quot;;
+import isEmpty from &quot;lodash-es/isEmpty&quot;;
+
+/**
+ * @ignore
+ */
+interface StarkState {
+	name: string;
+	params?: RawParams;
+}
+
+@Injectable()
+export class StarkRoutingServiceImpl implements StarkRoutingService {
+	public lastTransition?: Transition;
+	public knownRejectionCausesRegex: RegExp;
+	public knownRejectionCauses: string[];
+	public errorLastTransition &#x3D; &quot;lastTransition needs to be defined&quot;;
+
+	// To store the state history
+	/** @internal */
+	private _starkStateHistory: StarkState[];
+
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
+		@Inject(STARK_APP_CONFIG) private appConfig: StarkApplicationConfig,
+		private defaultErrorHandler: ErrorHandler,
+		private store: Store&lt;StarkCoreApplicationState&gt;,
+		private $state: StateService,
+		private $transitions: TransitionService
+	) {
+		// ensuring that the app config is valid before doing anything
+		StarkConfigurationUtil.validateConfig(this.appConfig, [&quot;routing&quot;], starkRoutingServiceName);
+
+		this.knownRejectionCauses &#x3D; [];
+		this.knownRejectionCausesRegex &#x3D; new RegExp(starkRoutingServiceName + &quot;: initial value&quot;);
+		this._starkStateHistory &#x3D; [];
+
+		this.addNavigationSuccessHandlers();
+		this.addNavigationErrorHandlers();
+
+		this.logger.debug(starkRoutingServiceName + &quot; loaded&quot;);
+	}
+
+	public navigateTo(newState: string, params?: RawParams, options?: TransitionOptions): Observable&lt;any&gt; {
+		this.store.dispatch(new StarkNavigate(this.getCurrentStateName(), newState, params, options));
+		return from(this.$state.go(newState, params, options));
+	}
+
+	public navigateToHome(params?: RawParams): Observable&lt;any&gt; {
+		return this.navigateTo(this.appConfig.homeStateName, params);
+	}
+
+	public navigateToPrevious(): Observable&lt;any&gt; {
+		const reason &#x3D; &quot;There is no previous state to navigate to.&quot;;
+
+		if (this._starkStateHistory.length &gt; 1) {
+			const previousState: StarkState &#x3D; this._starkStateHistory[this._starkStateHistory.length - 2];
+			this._starkStateHistory &#x3D; this._starkStateHistory.slice(0, this._starkStateHistory.length - 2);
+
+			const regexInitExitStateName: RegExp &#x3D; new RegExp(&quot;(&quot; + starkAppInitStateName + &quot;|&quot; + starkAppExitStateName + &quot;)&quot;);
+
+			if (
+				(this._starkStateHistory.length &#x3D;&#x3D;&#x3D; 1 &amp;&amp; this._starkStateHistory[0].name.match(regexInitExitStateName)) ||
+				this._starkStateHistory.length &#x3D;&#x3D;&#x3D; 0
+			) {
+				this.store.dispatch(new StarkNavigationHistoryLimitReached());
+			}
+
+			if (previousState &amp;&amp; !previousState.name.match(regexInitExitStateName) &amp;&amp; previousState.name !&#x3D;&#x3D; &quot;&quot;) {
+				return this.navigateTo(previousState.name, previousState.params);
+			}
+		}
+
+		this.store.dispatch(new StarkNavigationHistoryLimitReached());
+		this.logger.warn(starkRoutingServiceName + &quot;: navigateToPrevious - &quot; + reason);
+		return EMPTY;
+	}
+
+	public reload(): Observable&lt;any&gt; {
+		this.store.dispatch(new StarkReload(this.getCurrentStateName()));
+		const reload$: Observable&lt;any&gt; &#x3D; from(this.$state.reload());
+		// dispatch corresponding success action when transition is completed
+		reload$.subscribe(
+			() &#x3D;&gt; this.store.dispatch(new StarkReloadSuccess(this.getCurrentStateName(), this.getCurrentStateParams(true))),
+			() &#x3D;&gt; this.store.dispatch(new StarkReloadFailure(this.getCurrentStateName(), this.getCurrentStateParams(true)))
+		);
+		return reload$;
+	}
+
+	public getCurrentStateName(): string {
+		return &lt;string&gt;this.$state.current.name;
+	}
+
+	public getCurrentState(): StateObject {
+		return this.$state.$current;
+	}
+
+	public getCurrentStateConfig(): StateDeclaration {
+		return this.$state.current;
+	}
+
+	public getStatesConfig(): StateDeclaration[] {
+		return this.$state.get();
+	}
+
+	public getStateConfigByUrlPath(urlPath: string): StarkStateConfigWithParams | undefined {
+		let targetRoute: StarkStateConfigWithParams | undefined;
+
+		// separate path from hash
+		const [, path &#x3D; urlPath, hash]: string[] &#x3D; urlPath.match(/(.*)#(.*)/) || [];
+
+		const matchedState: StateDeclaration[] &#x3D; this.getStatesConfig().filter((state: StateDeclaration) &#x3D;&gt; {
+			return (&lt;Function&gt;state.$$state)().url &amp;&amp; (&lt;Function&gt;state.$$state)().url.exec(path, undefined, hash);
+		});
+
+		if (matchedState.length) {
+			targetRoute &#x3D; {
+				state: matchedState[0],
+				paramValues: (&lt;Function&gt;matchedState[0].$$state)().url.exec(path, undefined, hash)
+			};
+		}
+
+		return targetRoute;
+	}
+
+	public getStateDeclarationByStateName(stateName: string): StateDeclaration | undefined {
+		const stateDeclaration: StateDeclaration &#x3D; this.$state.get(stateName);
+
+		if (stateDeclaration) {
+			return stateDeclaration;
+		}
+
+		return undefined;
+	}
+
+	public getCurrentStateParams(includeInherited: boolean &#x3D; false): RawParams {
+		// TODO: This function has unexpected behaviour in some cases
+		// for instance:
+		//   navigateTo: homepage with params { RequestID: &quot;Request01&quot; }
+		//   navigateTo: page-01 with params { RequestID: &quot;Request02&quot; }
+		//   navigateTo: page-01-01 with params { RequestID: &quot;Request03&quot; }
+		//   navigateTo: homepage with params undefined
+		//
+		//   getCurrentStateParams returns homepage with params { RequestID: &quot;Request03&quot; }
+
+		const currentParams: StateParams &#x3D; this.$state.params;
+		const currentStateParams: RawParams &#x3D; {};
+		const stateParams: Param[] &#x3D; this.$state.$current.parameters({ inherit: includeInherited });
+
+		// extract the values from the stateOwnParams (no other way to do this :S)
+		for (const param of stateParams) {
+			// filter out root state default param &quot;#&quot;
+			if (param.id !&#x3D;&#x3D; &quot;#&quot;) {
+				currentStateParams[param.id] &#x3D; currentParams[param.id];
+			}
+		}
+
+		return currentStateParams;
+	}
+
+	public isCurrentUiState(stateName: string, stateParams?: RawParams): boolean {
+		if (stateName &#x3D;&#x3D;&#x3D; this.getCurrentStateName() &amp;&amp; stateParams) {
+			const currentStateParams: RawParams &#x3D; this.getCurrentStateParams(true);
+			let stateParamsMatchCurrent &#x3D; true;
+
+			// If there is a value in the stateParams that is different from the currentStateParams, then it is not the current state
+			for (const key in stateParams) {
+				if (
+					stateParams.hasOwnProperty(key) &amp;&amp;
+					currentStateParams.hasOwnProperty(key) &amp;&amp;
+					stateParams[key] !&#x3D;&#x3D; currentStateParams[key]
+				) {
+					stateParamsMatchCurrent &#x3D; false;
+					break;
+				}
+			}
+
+			return stateParamsMatchCurrent;
+		}
+
+		return stateName &#x3D;&#x3D;&#x3D; this.getCurrentStateName();
+	}
+
+	public isCurrentUiStateIncludedIn(stateName: string, stateParams?: RawParams): boolean {
+		// &#x3D;&#x3D;&#x3D; true is necessary here because includes method returns TRUE, FALSE or undefined
+		// tslint:disable-next-line:no-boolean-literal-compare
+		return this.$state.includes(stateName, stateParams) &#x3D;&#x3D;&#x3D; true;
+	}
+
+	public addKnownNavigationRejectionCause(rejectionCause: string): void {
+		this.knownRejectionCauses.push(rejectionCause);
+		this.knownRejectionCausesRegex &#x3D; new RegExp(this.knownRejectionCauses.join(&quot;|&quot;));
+	}
+
+	public addTransitionHook(
+		lifecycleHook: string,
+		matchCriteria: HookMatchCriteria,
+		callback: TransitionHookFn | TransitionStateHookFn,
+		options?: HookRegOptions
+	): () &#x3D;&gt; void {
+		switch (lifecycleHook) {
+			case StarkRoutingTransitionHook.ON_BEFORE:
+				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onbefore
+				return &lt;() &#x3D;&gt; void&gt;this.$transitions.onBefore(matchCriteria, &lt;TransitionHookFn&gt;callback, options);
+			case StarkRoutingTransitionHook.ON_START:
+				// see https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onstart
+				return &lt;() &#x3D;&gt; void&gt;this.$transitions.onStart(matchCriteria, &lt;TransitionHookFn&gt;callback, options);
+			case StarkRoutingTransitionHook.ON_EXIT:
+				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onexit
+				return &lt;() &#x3D;&gt; void&gt;this.$transitions.onExit(matchCriteria, &lt;TransitionStateHookFn&gt;callback, options);
+			case StarkRoutingTransitionHook.ON_RETAIN:
+				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onretain
+				return &lt;() &#x3D;&gt; void&gt;this.$transitions.onRetain(matchCriteria, &lt;TransitionStateHookFn&gt;callback, options);
+			case StarkRoutingTransitionHook.ON_ENTER:
+				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onenter
+				return &lt;() &#x3D;&gt; void&gt;this.$transitions.onEnter(matchCriteria, &lt;TransitionStateHookFn&gt;callback, options);
+			case StarkRoutingTransitionHook.ON_FINISH:
+				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onfinish
+				return &lt;() &#x3D;&gt; void&gt;this.$transitions.onFinish(matchCriteria, &lt;TransitionHookFn&gt;callback, options);
+			case StarkRoutingTransitionHook.ON_SUCCESS:
+				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onsuccess
+				return &lt;() &#x3D;&gt; void&gt;this.$transitions.onSuccess(matchCriteria, &lt;TransitionHookFn&gt;callback, options);
+			case StarkRoutingTransitionHook.ON_ERROR:
+				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onerror
+				return &lt;() &#x3D;&gt; void&gt;this.$transitions.onError(matchCriteria, &lt;TransitionHookFn&gt;callback, options);
+			default:
+				throw new Error(starkRoutingServiceName + &quot;: lifecycle hook unknown &#x3D;&gt; &quot; + lifecycleHook);
+		}
+	}
+
+	/**
+	 * Adds Angular UI-Router specific handlers for errors..
+	 * It logs an error and dispatches a NAVIGATE_FAILURE action to the NGRX Store
+	 */
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
+	private addNavigationErrorHandlers(): void {
+		this.logger.debug(starkRoutingServiceName + &quot;: adding navigation error handlers&quot;);
+
+		const hookMatchCriteria: HookMatchCriteria &#x3D; {
+			/* empty criteria */
+		};
+
+		// Whenever an error occurs during a router transition
+		this.addTransitionHook(
+			StarkRoutingTransitionHook.ON_ERROR,
+			hookMatchCriteria,
+			(transition: Transition): HookResult &#x3D;&gt; {
+				const fromState: StateDeclaration &#x3D; transition.from();
+				const targetState: TargetState &#x3D; transition.targetState();
+				const rejection: Rejection &#x3D; transition.error();
+				const rejectionString: string &#x3D; rejection.toString();
+				let message: string &#x3D; starkRoutingServiceName + &quot;: &quot;;
+				const complementaryInfo &#x3D; &#x60;&quot;${targetState.name()}&quot; navigated from &quot;${
+					fromState.name
+				}&quot;. Parameters that were passed: ${JSON.stringify(targetState.params())}&#x60;;
+
+				if (this.knownRejectionCausesRegex.test(rejectionString)) {
+					const rejectionAction: Action &#x3D; new StarkNavigateRejection(
+						&lt;string&gt;fromState.name,
+						targetState.name().toString(),
+						targetState.params(),
+						rejectionString
+					);
+					message +&#x3D; &#x27;Route transition rejected: &quot;&#x27; + complementaryInfo + &quot; Known rejection: &quot; + rejectionString;
+
+					// dispatch corresponding action to allow the user to trigger his own effects if needed
+					this.store.dispatch(rejectionAction);
+					this.logger.warn(message);
+				} else {
+					switch (rejection.type) {
+						case RejectType.IGNORED:
+							message +&#x3D; &#x27;Route transition ignored: &quot;&#x27; + complementaryInfo + &quot; Rejection: &quot; + rejectionString;
+
+							this.logger.warn(message);
+							break;
+						case RejectType.SUPERSEDED:
+							message +&#x3D; &#x27;Route transition superseded: &quot;&#x27; + complementaryInfo + &quot; Rejection: &quot; + rejectionString;
+
+							this.logger.warn(message);
+							break;
+						default:
+							const failureAction: Action &#x3D; new StarkNavigateFailure(
+								&lt;string&gt;fromState.name,
+								targetState.name().toString(),
+								targetState.params(),
+								rejectionString
+							);
+
+							// dispatch corresponding action to allow the user to trigger his own effects if needed
+							this.store.dispatch(failureAction);
+
+							// reference: https://ui-router.github.io/docs/latest/classes/state.stateservice.html#go
+							if (rejectionString.match(/transition superseded|transition prevented|transition aborted|transition failed/)) {
+								this.logger.warn(starkRoutingServiceName + &quot;: &quot; + rejectionString);
+							} else if (rejectionString.match(/resolve error/)) {
+								this.logger.error(
+									starkRoutingServiceName + &quot;: An error occurred with a resolve in the new state. &quot; + rejectionString
+								);
+							} else {
+								message +&#x3D; &#x27;Error during route transition: &quot;&#x27; + complementaryInfo;
+								this.logger.error(message, transition.error());
+							}
+
+							break;
+					}
+				}
+
+				// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
+				// boolean | TargetState | void | Promise&lt;boolean | TargetState | void&gt;
+				return false;
+			},
+			{ priority: 1000 } // very high priority (this hook should be the first one to be called to dispatch actions immediately)
+		);
+
+		// declare the onInvalid handler
+		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#oninvalid
+		this.$state.onInvalid(
+			(toState?: TargetState, fromState?: TargetState): HookResult &#x3D;&gt; {
+				const errorType &#x3D; &quot;Invalid state change&quot;;
+				const failureAction: Action &#x3D; new StarkNavigateFailure(
+					(&lt;TargetState&gt;fromState).name(),
+					(&lt;TargetState&gt;toState).name(),
+					(&lt;TargetState&gt;toState).params(),
+					errorType
+				);
+				let message: string &#x3D;
+					starkRoutingServiceName + &#x27;: Error while trying to navigate from &quot;&#x27; + (&lt;TargetState&gt;fromState).name() + &#x27;&quot;&#x27;;
+				message +&#x3D; &#x27; to &quot;&#x27; + (&lt;TargetState&gt;toState).name() + &#x27;&quot;&#x27;;
+
+				if (toState &amp;&amp; !toState.exists()) {
+					message &#x3D; message + &quot;. The target state does NOT exist&quot;;
+				}
+
+				// dispatch corresponding action to allow the user to trigger his own effects if needed
+				this.store.dispatch(failureAction);
+				this.logger.error(message, new Error(&quot;Parameters that were passed: &quot; + JSON.stringify((&lt;TargetState&gt;toState).params())));
+
+				// TODO redirect to the generic error page once implemented: https://jira.prd.nbb/browse/NG-847
+				// should probably be done via an effect reacting to the StarkRoutingActions.navigateFailure action
+
+				// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
+				// boolean | TargetState | void | Promise&lt;boolean | TargetState | void&gt;
+				return false;
+			}
+		);
+
+		// provide custom default error handler
+		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#defaulterrorhandler
+		this.$state.defaultErrorHandler((error: any): void &#x3D;&gt; {
+			let stringError: string;
+			if (error instanceof Rejection) {
+				stringError &#x3D; error.toString();
+			} else {
+				stringError &#x3D; String(error);
+			}
+
+			if (!this.knownRejectionCausesRegex.test(stringError)) {
+				this.defaultErrorHandler.handleError(Error(stringError));
+			}
+		});
+	}
+
+	/**
+	 * Adds Angular UI-Router specific handlers for success..
+	 * It stores the last transition
+	 */
+	private addNavigationSuccessHandlers(): void {
+		this.logger.debug(starkRoutingServiceName + &quot;: adding navigation success handlers&quot;);
+
+		const hookMatchCriteria: HookMatchCriteria &#x3D; {
+			/* empty criteria */
+		};
+
+		// Whenever a router transition successfully completes
+		this.addTransitionHook(
+			StarkRoutingTransitionHook.ON_SUCCESS,
+			hookMatchCriteria,
+			(transition: Transition): HookResult &#x3D;&gt; {
+				this.lastTransition &#x3D; transition;
+				// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
+				// boolean | TargetState | void | Promise&lt;boolean | TargetState | void&gt;
+
+				const previousStateName: string &#x3D; &lt;string&gt;transition.from().name;
+				const currentState: TargetState &#x3D; transition.targetState();
+				const currentStateParams: RawParams &#x3D; this.getCurrentStateParams(true);
+
+				this.store.dispatch(new StarkNavigateSuccess(previousStateName, currentState.name(), currentStateParams));
+
+				if (transition.dynamic()) {
+					// for a dynamic transition, the last entry in the stateHistory should be re-created rather than being added again!
+					// so it should be removed first ;)
+					this._starkStateHistory.pop();
+				}
+				// Add the params of the current state to the _stateTreeParams array
+				this._starkStateHistory.push({ name: currentState.name(), params: currentStateParams });
+
+				return true; // the transition will resume
+			},
+			{ priority: 1000 } // very high priority (this hook should be the first one to be called to keep the lastTransition up to date)
+		);
+	}
+
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
+	public getStateTreeParams(): Map&lt;string, any&gt; {
+		const stateTreeParams: Map&lt;string, any&gt; &#x3D; new Map&lt;string, unknown&gt;();
+
+		if (typeof this.lastTransition !&#x3D;&#x3D; &quot;undefined&quot;) {
+			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
+			const pathNodes: PathNode[] &#x3D; this.lastTransition.treeChanges().to;
+
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number &#x3D; pathNodes.length - 1;
+
+			for (index; index &gt;&#x3D; 0; index--) {
+				const pathNode: PathNode &#x3D; pathNodes[index];
+
+				// skipping abstract states and the root state
+				if (!pathNode.state.abstract &amp;&amp; pathNode.state !&#x3D;&#x3D; pathNode.state.root()) {
+					let stateParams: RawParams | undefined;
+
+					for (let i: number &#x3D; this._starkStateHistory.length - 1; i &gt;&#x3D; 0; i--) {
+						if (this._starkStateHistory[i].name &#x3D;&#x3D;&#x3D; pathNode.state.name) {
+							stateParams &#x3D; this._starkStateHistory[i].params;
+							break;
+						}
+					}
+
+					stateTreeParams.set(pathNode.state.name, stateParams);
+				}
+			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
+		}
+
+		return stateTreeParams;
+	}
+
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
+	public getStateTreeResolves(): Map&lt;string, any&gt; {
+		const stateTreeResolves: Map&lt;string, any&gt; &#x3D; new Map&lt;string, unknown&gt;();
+
+		if (typeof this.lastTransition !&#x3D;&#x3D; &quot;undefined&quot;) {
+			// we use the TO pathNodes because the resolved values can only be found in those and not in the FROM pathNodes
+			const pathNodes: PathNode[] &#x3D; this.lastTransition.treeChanges().to;
+
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number &#x3D; pathNodes.length - 1;
+
+			for (index; index &gt;&#x3D; 0; index--) {
+				const pathNode: PathNode &#x3D; pathNodes[index];
+
+				// skipping abstract states and the root state
+				// and taking only the current state and parent/ancestor states
+				if (
+					!pathNode.state.abstract &amp;&amp;
+					pathNode.state !&#x3D;&#x3D; pathNode.state.root() &amp;&amp;
+					(pathNode.state &#x3D;&#x3D;&#x3D; this.getCurrentState() || this.isParentState(pathNode.state))
+				) {
+					const resolvablesData: { [key: string]: any } &#x3D; this.extractResolvablesData(pathNode.resolvables);
+					const stateResolves: any &#x3D; isEmpty(resolvablesData) ? undefined : resolvablesData;
+					stateTreeResolves.set(pathNode.state.name, stateResolves);
+				}
+			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
+		}
+
+		return stateTreeResolves;
+	}
+
+	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
+	// tslint:disable-next-line:cognitive-complexity
+	public getStateTreeData(): Map&lt;string, any&gt; {
+		const stateTreeData: Map&lt;string, any&gt; &#x3D; new Map&lt;string, unknown&gt;();
+
+		if (typeof this.lastTransition !&#x3D;&#x3D; &quot;undefined&quot;) {
+			// we use the TO pathNodes to get also the current state (the FROM pathNodes include only the previous/parent states)
+			const pathNodes: PathNode[] &#x3D; this.lastTransition.treeChanges().to;
+
+			// the array is processed in reverse to start with the child state first (the pathNodesArray is [rootState, ..., childState])
+			let index: number &#x3D; pathNodes.length - 1;
+
+			for (index; index &gt;&#x3D; 0; index--) {
+				const pathNode: PathNode &#x3D; pathNodes[index];
+
+				// skipping abstract states and the root state
+				// and taking only the current state and parent/ancestor states
+				if (
+					!pathNode.state.abstract &amp;&amp;
+					pathNode.state !&#x3D;&#x3D; pathNode.state.root() &amp;&amp;
+					(pathNode.state &#x3D;&#x3D;&#x3D; this.getCurrentState() || this.isParentState(pathNode.state))
+				) {
+					const stateData: any &#x3D; isEmpty(pathNode.state.data) ? undefined : pathNode.state.data;
+					stateTreeData.set(pathNode.state.name, stateData);
+				}
+			}
+		} else {
+			this.logger.debug(this.errorLastTransition);
+		}
+
+		return stateTreeData;
+	}
+
+	/**
+	 * Check whether the given state is a parent/ancestor of the given currentState
+	 * @param state - The state that will be checked whether is a parent of the currentState
+	 * @param currentState - (Optional) If not provided, it is set to the current router state
+	 */
+	private isParentState(state: StateObject, currentState: StateObject &#x3D; this.getCurrentState()): boolean {
+		if (currentState.parent) {
+			if (currentState.parent &#x3D;&#x3D;&#x3D; state) {
+				return true;
+			} else {
+				return this.isParentState(state, currentState.parent);
+			}
+		} else {
+			return false;
+		}
+	}
+
+	private extractResolvablesData(resolvables: Resolvable[]): { [key: string]: any } {
+		const resolvablesData: { [key: string]: any } &#x3D; {};
+
+		for (const resolvable of resolvables) {
+			// exclude the &#x27;Core Resolvables&#x27; added by angular-ui-router
+			// see: https://github.com/ui-router/core/commit/a06948b
+			if (resolvable.token !&#x3D;&#x3D; &quot;$state$&quot; &amp;&amp; resolvable.token !&#x3D;&#x3D; &quot;$transition$&quot; &amp;&amp; resolvable.token !&#x3D;&#x3D; &quot;$stateParams&quot;) {
+				resolvablesData[resolvable.token] &#x3D; resolvable.data;
+			}
+		}
+
+		return resolvablesData;
+	}
+
+	// TODO How to fetch translationKey from the State resolves without navigating to that state?
+	public getTranslationKeyFromState(stateName: string): string {
+		const stateTreeResolves: Map&lt;string, any&gt; &#x3D; this.getStateTreeResolves();
+		const stateData: object &#x3D; this.$state.get(stateName).data;
+
+		let stateTranslationKey: string | undefined;
+		// get the translationKey in case it is defined as a resolve in the state definition
+		if (stateTreeResolves.get(stateName)) {
+			stateTranslationKey &#x3D; stateTreeResolves.get(stateName)[&quot;translationKey&quot;];
+		}
+		// if not found in the resolves then check the state&#x27;s data object
+		if (stateData &amp;&amp; !stateTranslationKey &amp;&amp; stateData.hasOwnProperty(&quot;translationKey&quot;)) {
+			stateTranslationKey &#x3D; stateData[&quot;translationKey&quot;];
+		}
+		// if no translationKey so far, then the state name is used
+		if (!stateTranslationKey) {
+			this.logger.warn(starkRoutingServiceName + &quot;: translation key not found for state &quot; + stateName);
+			stateTranslationKey &#x3D; stateName;
+		}
+
+		return stateTranslationKey;
+	}
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkRoutingServiceImpl.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

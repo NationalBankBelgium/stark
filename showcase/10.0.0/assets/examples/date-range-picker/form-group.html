@@ -1,0 +1,13 @@
+<stark-date-range-picker [formGroup]="dateRangeFormGroup" required>
+	<ng-container start-date-errors *ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.startDate); trackBy: trackItemFn">
+		{{ error }}
+		<br />
+	</ng-container>
+
+	<ng-container end-date-errors *ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.endDate); trackBy: trackItemFn">
+		{{ error }}
+		<br />
+	</ng-container>
+</stark-date-range-picker>
+<br /><br />
+<mat-checkbox [value]="dateRangeFormGroup.disabled" (change)="onDateRangeFormGroupDisableCheckboxChange($event)">Disabled</mat-checkbox>

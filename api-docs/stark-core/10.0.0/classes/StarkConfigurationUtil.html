@@ -1,0 +1,472 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>StarkConfigurationUtil</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/util/configuration.util.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Util class used to validate AppConfig and AppMetadata instances</p>
+
+            </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#validateConfig">validateConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#validateMetadata">validateMetadata</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateConfig"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            validateConfig
+                        </b>
+                        <a href="#validateConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateConfig(appConfig: <a href="../interfaces/StarkApplicationConfig.html">StarkApplicationConfig</a>, groups: <a href="../undefineds/StarkConfigValidationGroups.html">StarkConfigValidationGroups[]</a>, errorMessagePrefix: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">src/util/configuration.util.ts:19</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Validates the given AppConfig instance and throws an error in case it is not valid</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>appConfig</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkApplicationConfig.html" target="_self" >StarkApplicationConfig</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The AppConfig instance to be validated</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>groups</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#StarkConfigValidationGroups" target="_self" >StarkConfigValidationGroups[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The groups to be used for validating the config</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>errorMessagePrefix</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The prefix to be added to the error message in case the config is not valid</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateMetadata"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            validateMetadata
+                        </b>
+                        <a href="#validateMetadata"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateMetadata(appMetadata: <a href="../interfaces/StarkApplicationMetadata.html">StarkApplicationMetadata</a>, groups: <a href="../undefineds/StarkMetadataValidationGroups.html">StarkMetadataValidationGroups[]</a>, errorMessagePrefix: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/util/configuration.util.ts:38</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Validates the given AppMetadata instance and throws an error in case it is not valid</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>appMetadata</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkApplicationMetadata.html" target="_self" >StarkApplicationMetadata</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The AppMetadata instance to be validated</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>groups</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#StarkMetadataValidationGroups" target="_self" >StarkMetadataValidationGroups[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The groups to be used for validating the config</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>errorMessagePrefix</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The prefix to be added to the error message in case the config is not valid</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { validateSync, ValidatorOptions } from &quot;class-validator&quot;;
+import { StarkValidationErrorsUtil } from &quot;./validation-errors.util&quot;;
+import { STARK_APP_CONFIG, StarkApplicationConfig } from &quot;../configuration/entities/application&quot;;
+import { STARK_APP_METADATA, StarkApplicationMetadata } from &quot;../configuration/entities/metadata&quot;;
+
+export type StarkConfigValidationGroups &#x3D; &quot;logging&quot; | &quot;routing&quot; | &quot;session&quot; | &quot;settings&quot; | &quot;http&quot;;
+export type StarkMetadataValidationGroups &#x3D; &quot;settings&quot;;
+
+/**
+ * Util class used to validate AppConfig and AppMetadata instances
+ */
+export class StarkConfigurationUtil {
+	/**
+	 * Validates the given AppConfig instance and throws an error in case it is not valid
+	 * @param appConfig - The AppConfig instance to be validated
+	 * @param groups - The groups to be used for validating the config
+	 * @param errorMessagePrefix - The prefix to be added to the error message in case the config is not valid
+	 */
+	public static validateConfig(
+		appConfig: StarkApplicationConfig,
+		groups: StarkConfigValidationGroups[],
+		errorMessagePrefix: string
+	): void {
+		const validationOptions: ValidatorOptions &#x3D; groups.length ? { groups } : { groups: [&quot;&quot;] }; // empty group (&quot;&quot;) by default
+
+		StarkValidationErrorsUtil.throwOnError(
+			validateSync(appConfig, validationOptions),
+			errorMessagePrefix + &quot;: &quot; + STARK_APP_CONFIG.toString() + &quot; constant is not valid.&quot;
+		);
+	}
+
+	/**
+	 * Validates the given AppMetadata instance and throws an error in case it is not valid
+	 * @param appMetadata - The AppMetadata instance to be validated
+	 * @param groups - The groups to be used for validating the config
+	 * @param errorMessagePrefix - The prefix to be added to the error message in case the config is not valid
+	 */
+	public static validateMetadata(
+		appMetadata: StarkApplicationMetadata,
+		groups: StarkMetadataValidationGroups[],
+		errorMessagePrefix: string
+	): void {
+		const validationOptions: ValidatorOptions &#x3D; groups.length ? { groups } : { groups: [&quot;&quot;] }; // empty group (&quot;&quot;) by default
+
+		StarkValidationErrorsUtil.throwOnError(
+			validateSync(appMetadata, validationOptions),
+			errorMessagePrefix + &quot;: &quot; + STARK_APP_METADATA.toString() + &quot; constant is not valid.&quot;
+		);
+	}
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkConfigurationUtil.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
