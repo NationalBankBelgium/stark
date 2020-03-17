@@ -4,8 +4,9 @@ const fs = require("fs");
 /**
  * Helper functions.
  */
-// const ROOT = path.resolve(__dirname, '..');
 const _root = path.resolve(process.cwd(), "."); // project root folder
+
+const currentFolder = path.basename(_root);
 
 const root = path.join.bind(path, _root);
 
@@ -28,5 +29,8 @@ function getAngularCliAppConfig() {
 	}
 }
 
-exports.root = root;
-exports.getAngularCliAppConfig = getAngularCliAppConfig;
+module.exports = {
+	currentFolder,
+	getAngularCliAppConfig,
+	root
+};

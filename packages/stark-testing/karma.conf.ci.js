@@ -1,6 +1,5 @@
 // Helpers
 const helpers = require("./helpers");
-const IstanbulInstrumenter = require("./istanbul-instrumenter");
 
 // Puppeteer: https://github.com/GoogleChrome/puppeteer/
 // takes care of download Chrome and making it available (can do much more :p)
@@ -29,7 +28,7 @@ const rawKarmaConfig = {
 	// preprocess matching files before serving them to the browser
 	// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 	preprocessors: {
-		"**/*.ts": ["karma-typescript", "sourcemap", "coverage"]
+		"**/*.ts": ["karma-typescript"]
 	},
 
 	karmaTypescriptConfig: {
@@ -50,41 +49,34 @@ const rawKarmaConfig = {
 				require("karma-typescript-angular2-transform"),
 				//see https://github.com/monounity/karma-typescript/tree/master/packages/karma-typescript-es6-transform
 				require("karma-typescript-es6-transform")({
-					presets: ["babel-preset-env"] // default setting
+					presets: ["@babel/preset-env"] // default setting
 				})
 			]
 		},
+		reports: {
+			"text-summary": {
+				directory: helpers.root("reports"),
+				subdirectory: "coverage"
+			},
+			json: {
+				directory: helpers.root("reports"),
+				subdirectory: "coverage"
+			},
+			html: {
+				directory: helpers.root("reports"),
+				subdirectory: "coverage"
+			},
+			// format supported by Sonar and Coveralls
+			lcovonly: {
+				directory: helpers.root("reports"),
+				subdirectory: "coverage"
+			},
+			clover: {
+				directory: helpers.root("reports"),
+				subdirectory: "coverage"
+			}
+		},
 		tsconfig: helpers.getAngularCliAppConfig().architect.test.options.tsConfig
-	},
-
-	// IMPORTANT: define the custom instrumenter here to support the latest Istanbul API
-	// see: https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md
-	coverageReporter: {
-		type: "in-memory",
-		instrumenters: {
-			istanbulV1: {
-				Instrumenter: IstanbulInstrumenter
-			}
-		},
-		instrumenter: {
-			"**/*.ts": "istanbulV1"
-		},
-		instrumenterOptions: {
-			istanbulV1: {
-				// options for the istanbul instrumenter here
-			}
-		}
-	},
-
-	coverageIstanbulReporter: {
-		dir: helpers.root("reports/coverage"),
-		reports: [
-			"text-summary",
-			"json",
-			"html",
-			"lcov", // format supported by Sonar and Coveralls
-			"clover"
-		]
 	},
 
 	// test results reporter to use
@@ -92,9 +84,8 @@ const rawKarmaConfig = {
 	// available reporters: https://npmjs.org/browse/keyword/karma-reporter
 	// https://www.npmjs.com/package/karma-junit-reporter
 	// https://www.npmjs.com/package/karma-spec-reporter
-	// IMPORTANT: "karma-typescript" reporter should not be included here because it uses the old Istanbul (0.x)
-	// which throws an error when generating lcov reports for Coveralls
-	reporters: ["mocha", "progress", "coverage", "coverage-istanbul"],
+	// IMPORTANT: using "karma-typescript" reporter as from karma-typescript 5.0.0 which now uses the latest Istanbul API
+	reporters: ["mocha", "progress", "karma-typescript"],
 
 	// web server port
 	port: 9876,
