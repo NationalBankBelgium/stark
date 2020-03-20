@@ -61,7 +61,7 @@ const starkPackagesSpecificConfiguration = {
 			transforms: [
 				require(helpers.root("../stark-testing/node_modules/karma-typescript-angular2-transform")),
 				require(helpers.root("../stark-testing/node_modules/karma-typescript-es6-transform"))({
-					presets: [helpers.root("../stark-testing/node_modules/babel-preset-env")] // add preset in a way that the package can find it
+					presets: [helpers.root("../stark-testing/node_modules/@babel/preset-env")] // add preset in a way that the package can find it
 				})
 			]
 		}

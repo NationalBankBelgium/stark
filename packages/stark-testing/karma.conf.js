@@ -45,7 +45,7 @@ const rawKarmaConfig = {
 				require("karma-typescript-angular2-transform"),
 				//see https://github.com/monounity/karma-typescript/tree/master/packages/karma-typescript-es6-transform
 				require("karma-typescript-es6-transform")({
-					presets: ["babel-preset-env"] // default setting
+					presets: ["@babel/preset-env"] // default setting
 				})
 			]
 		},
