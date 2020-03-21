@@ -48,7 +48,7 @@
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
     "ng-packagr": "^5.3.0",
-    "prettier": "^1.16.1",
+    "prettier": "^2.0.0",
     "release-it": "^12.6.3",
     "rxjs": "^6.5.4",
     "stream-concat": "^0.3.0",
