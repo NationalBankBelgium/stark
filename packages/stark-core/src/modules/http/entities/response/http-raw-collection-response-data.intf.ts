@@ -10,7 +10,6 @@ export interface StarkHttpRawCollectionResponseData<P> {
 	items: P[];
 	/**
 	 * Contains all the metadata related to the collection of items in the response.
-	 * @link StarkCollectionMetadata
 	 */
 	metadata: StarkCollectionMetadata;
 }

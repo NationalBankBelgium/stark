@@ -17,7 +17,7 @@ export function resolveTargetRoute(
 	/**
 	 * Get the corresponding registered state that matches with the given URL.
 	 * If the state is part of a lazy loaded module, then such module is loaded first and then the URL is searched again to get the correct state
-	 * @param targetUrl - the URL of the target state being searched
+	 * @param targetUrl - The URL of the target state being searched
 	 */
 	function getTargetStateByUrl(targetUrl: string): StarkStateConfigWithParams | undefined {
 		let targetState: StarkStateConfigWithParams | undefined = routingService.getStateConfigByUrlPath(targetUrl);
@@ -61,23 +61,23 @@ export function resolveTargetRoute(
 }
 
 /**
- * Check if targetRoute is defined and returns the name of the state OR undefined.
- * @param targetRoute - returned value of resolveTargetRoute method
+ * Check if targetRoute is defined and returns the name of the state OR `undefined`.
+ * @param targetRoute - Returned value of `resolveTargetRoute` method
  */
 export function resolveTargetState(targetRoute?: StarkStateConfigWithParams): Promise<string | undefined> {
 	return of(typeof targetRoute !== "undefined" ? targetRoute.state.name : undefined).toPromise();
 }
 
 /**
- * Check if targetRoute is defined and returns the params of the state OR undefined.
- * @param targetRoute - returned value of resolveTargetRoute method
+ * Check if targetRoute is defined and returns the params of the state OR `undefined`.
+ * @param targetRoute - Returned value of `resolveTargetRoute` method
  */
 export function resolveTargetStateParams(targetRoute?: StarkStateConfigWithParams): Promise<RawParams | undefined> {
 	return of(typeof targetRoute !== "undefined" ? targetRoute.paramValues : undefined).toPromise();
 }
 
 /**
- * States defined by Session Module
+ * States defined by {@link StarkSessionModule}
  */
 export const SESSION_STATES: Ng2StateDeclaration[] = [
 	{

@@ -14,13 +14,12 @@ export enum StarkErrorHandlingActionTypes {
 export class StarkUnhandledError implements Action {
 	/**
 	 * The type of action
-	 * @link StarkErrorHandlingActionTypes
 	 */
 	public readonly type: StarkErrorHandlingActionTypes.UNHANDLED_ERROR = StarkErrorHandlingActionTypes.UNHANDLED_ERROR;
 
 	/**
 	 * Class constructor
-	 * @param error - the error to display
+	 * @param error - The error to display
 	 */
 	public constructor(public error: any) {}
 }

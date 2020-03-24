@@ -6,9 +6,8 @@ import { StarkSortItem } from "../entities";
  */
 export interface StarkHttpFetchResourceRequestBuilder {
 	/**
-	 * Adds language codes to the "Accept-Language" header
+	 * Adds {@link StarkLanguage} codes to the "Accept-Language" header
 	 *
-	 * @link StarkLanguage
 	 * @param languages - Language(s) in which the response should be returned
 	 * @returns The current builder
 	 */
@@ -29,9 +28,8 @@ export interface StarkHttpFetchResourceRequestBuilder {
 	addFilterByStyle(style: string): this;
 
 	/**
-	 * Adds a "sort" query parameter to the request
+	 * Adds {@link StarkSortItem} query parameter(s) to the request
 	 *
-	 * @link StarkSortItem
 	 * @param sortItems - Sort parameters to define the order in which the items will be returned
 	 * @returns The current builder
 	 */

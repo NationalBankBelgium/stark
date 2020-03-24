@@ -7,12 +7,11 @@ import { StarkHttpSerializer } from "../serializer";
 export type StarkQueryParam = string | string[] | undefined;
 
 /**
- * This interface describes all the available options of an Http request performed via the StarkHttpService.
+ * This interface describes all the available options of an Http request performed via the {@link StarkHttpService}.
  */
 export interface StarkHttpRequest<P extends StarkResource = StarkResource> {
 	/**
 	 * The backend that the request will target.
-	 * @link StarkBackend
 	 */
 	backend: StarkBackend;
 	/**
@@ -21,7 +20,6 @@ export interface StarkHttpRequest<P extends StarkResource = StarkResource> {
 	resourcePath: string;
 	/**
 	 * The sort criteria that will be sent along with the request as query parameters.
-	 * @link StarkSortItem
 	 */
 	sortItems?: StarkSortItem[];
 	/**
@@ -29,19 +27,19 @@ export interface StarkHttpRequest<P extends StarkResource = StarkResource> {
 	 */
 	fieldsToInclude?: string[];
 	/**
-	 * Map containing the headers to be sent with the request. Multiple values for a header are supported.
+	 * Map containing the headers to be sent with the request. **Multiple values for a header are supported.**
 	 */
 	headers: Map<string, string | string[]>;
 	/**
-	 * Map containing the parameters that will be included as query parameters.
-	 * The query parameters might be undefined values in case the allowUndefinedQueryParams option is enabled and passed to the corresponding builder.
-	 * If an array of strings is defined as value, then the parameter will be added to the URL for every value in the array.
-	 * @link StarkQueryParam
+	 * Map containing the {@link StarkQueryParam} objects that will be included as query parameters.
+	 * 
+	 * The query parameters might be `undefined` values in case the `allowUndefinedQueryParams` option is enabled and passed to the corresponding builder.
+	 * 
+	 * **If an array of strings is defined as value, then the parameter will be added to the URL for every value in the array.**
 	 */
 	queryParameters: Map<string, StarkQueryParam>;
 	/**
 	 * The type of request according to the different CRUD operations.
-	 * @link StarkHttpRequestType
 	 */
 	requestType: StarkHttpRequestType;
 	/**
@@ -50,7 +48,6 @@ export interface StarkHttpRequest<P extends StarkResource = StarkResource> {
 	item?: P | { [param: string]: any };
 	/**
 	 * A serializer class that will perform the serialization/deserialization of the items to be sent/received to/from the backend.
-	 * @link StarkHttpSerializer
 	 */
 	serializer: StarkHttpSerializer<P>;
 	/**

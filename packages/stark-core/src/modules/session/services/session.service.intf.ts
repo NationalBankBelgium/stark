@@ -3,11 +3,11 @@ import { Observable } from "rxjs";
 import { StarkUser } from "../../user/entities";
 
 /**
- * Name of the Session Service, in case injection is required
+ * @ignore
  */
 export const starkSessionServiceName = "StarkSessionService";
 /**
- * Injection Token version of the Service Name
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkSessionService}
  */
 export const STARK_SESSION_SERVICE: InjectionToken<StarkSessionService> = new InjectionToken<StarkSessionService>(starkSessionServiceName);
 
@@ -23,9 +23,8 @@ export interface StarkSessionService {
 	readonly devAuthenticationHeaders: Map<string, string | string[]>;
 
 	/**
-	 * Returns the session's current user
+	 * Returns the session's current {@link StarkUser}
 	 *
-	 * @link StarkUser
 	 * @returns Observable that will emit the current user and the latest value whenever it changes
 	 */
 	getCurrentUser(): Observable<StarkUser | undefined>;
@@ -46,9 +45,8 @@ export interface StarkSessionService {
 	setCurrentLanguage(newLanguage: string): void;
 
 	/**
-	 * Performs the login of the user. Internally, it performs all the necessary actions to initialize the session.
+	 * Performs the login of the given {@link StarkUser}. Internally, it performs all the necessary actions to initialize the session.
 	 *
-	 * @link StarkUser
 	 * @param user - The user to log in.
 	 */
 	login(user: StarkUser): void;

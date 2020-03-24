@@ -2,14 +2,14 @@ import { StarkLanguage } from "../language";
 import { InjectionToken } from "@angular/core";
 
 /**
- * The InjectionToken that defines the Application Metadata, in case an injection is needed.
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkApplicationMetadata}
  */
 export const STARK_APP_METADATA: InjectionToken<StarkApplicationMetadata> = new InjectionToken<StarkApplicationMetadata>(
 	"STARK_APP_METADATA"
 );
 
 /**
- * Metadata that describes the current application build
+ * Metadata that describes the current application build.
  * An implementation should be instantiated and be available under the name defined in the constants.
  */
 export interface StarkApplicationMetadata {
@@ -44,8 +44,7 @@ export interface StarkApplicationMetadata {
 	deploymentTimestamp: string;
 
 	/**
-	 * Array of languages to be supported in the application
-	 * @link StarkLanguage
+	 * Array of {@link StarkLanguage} objects to be supported in the application
 	 */
 	supportedLanguages: StarkLanguage[];
 }

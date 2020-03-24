@@ -14,24 +14,26 @@ import { StarkBackend, StarkHttpErrorWrapper, StarkHttpErrorWrapperImpl } from "
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services/logging.service.intf";
 
 /**
- * Service to get/store the XSRF token to be used with the different backends.
- * It also adds the XSRF configuration to XHR objects for those HTTP requests not performed using StarkHttpService or Angular's HttpClient.
- *
- * @dynamic See: https://angular.io/guide/aot-compiler#strictmetadataemit
+ * @ignore
  */
 @Injectable()
 export class StarkXSRFServiceImpl implements StarkXSRFService {
 	protected xsrfCookieName = "XSRF-TOKEN";
 	protected currentToken?: string;
+	public document: Document;
 
 	public constructor(
 		@Inject(STARK_APP_CONFIG) public appConfig: StarkApplicationConfig,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		private httpClient: HttpClient,
-		@Inject(DOCUMENT) public document: Document,
+		@Inject(DOCUMENT) document: any,
 		private injector: Injector,
 		@Inject(STARK_XSRF_CONFIG) public configOptions?: StarkXSRFConfig
 	) {
+		// workaround to avoid Angular compiler error: "Could not resolve type Document"
+		// see https://stackoverflow.com/questions/49513359/could-not-resolve-type-document-in-angular5
+		// and https://github.com/angular/angular/issues/20351
+		this.document = document as Document;
 		this.logger.debug(starkXSRFServiceName + " loaded");
 	}
 
@@ -72,7 +74,7 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 					headers: newHeaders,
 					// Enforce the 'withCredentials' property flag on every XHR object created by Angular $http.
 					// We leverage "credentialed" requests that are aware of HTTP cookies (necessary for XSRF to work with multiple backends)
-					// https://angular.io/api/common/http/HttpRequest#withCredentials
+					// https://v7.angular.io/api/common/http/HttpRequest#withCredentials
 					// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
 					withCredentials: true
 				});
@@ -80,7 +82,7 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 		}
 
 		// in any case the "withCredentials: true" should be added to ALL requests, otherwise the browser won't accept the XSRF cookie from the backend!
-		// see: https://angular.io/api/common/http/HttpRequest#withCredentials
+		// see: https://v7.angular.io/api/common/http/HttpRequest#withCredentials
 		// see: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
 		return request.clone({ withCredentials: true });
 	}
@@ -192,7 +194,8 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 		this.document.cookie = cookieAttributes.join(";");
 	}
 
-	// code taken from ngx-cookie-service library (https://github.com/7leads/ngx-cookie-service/blob/master/lib/cookie-service/cookie.service.ts)
+	// code taken from ngx-cookie-service library
+	// see https://github.com/stevermeister/ngx-cookie-service/blob/master/projects/ngx-cookie-service/src/lib/cookie.service.ts
 	protected getXSRFCookie(): string | undefined {
 		const cookieRegExp: RegExp = this.getCookieRegExp(encodeURIComponent(this.xsrfCookieName));
 		const result: RegExpExecArray | null = cookieRegExp.exec(this.document.cookie);

@@ -3,7 +3,7 @@ import { Component, Injector, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsN
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule, TransitionPromise } from "@uirouter/angular";
 import { RawParams, StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
-// FIXME Adapt switchMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
+// FIXME Adapt switchMap code --> See: https://github.com/ReactiveX/rxjs/blob/6.x/docs_app/content/guide/v6/migration.md#howto-result-selector-migration
 import { catchError, switchMap, tap } from "rxjs/operators";
 import { throwError } from "rxjs";
 import { Store } from "@ngrx/store";

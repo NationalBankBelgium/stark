@@ -8,8 +8,7 @@ import { StarkSingleItemResponseWrapper } from "../../http/entities";
  */
 export const starkUserRepositoryName = "StarkUserRepository";
 /**
- * Injection Token version of the Repository Name
- * @link InjectionToken
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkUserRepository}
  */
 export const STARK_USER_REPOSITORY: InjectionToken<StarkUserRepository> = new InjectionToken<StarkUserRepository>(starkUserRepositoryName);
 
@@ -18,7 +17,7 @@ export const STARK_USER_REPOSITORY: InjectionToken<StarkUserRepository> = new In
  */
 export interface StarkUserRepository {
 	/**
-	 * Fetch the user profile from the back-end
+	 * Fetch the {@link StarkUser} profile from the back-end
 	 */
 	getUser(): Observable<StarkSingleItemResponseWrapper<StarkUser>>;
 }

@@ -8,21 +8,21 @@ export const starkLoggingStoreKey = "starkLogging";
 
 /**
  * Defines the initial state of the reducer
- * @link StarkLogging
  */
-const INITIAL_STATE: Readonly<StarkLogging> = {
+const INITIAL_LOGGING_STATE: Readonly<StarkLogging> = {
 	uuid: "",
 	applicationId: "",
 	messages: []
 };
 
 /**
- * Definition of the logging reducer.
- * @param state - the state of the reducer
- * @param action - the action to perform
+ * Definition of the `logging` reducer.
+ * @param state - The state of the reducer
+ * @param action - The action to perform
+ * @returns The new `StarkLogging` state
  */
 export function loggingReducer(
-	state: Readonly<StarkLogging> = INITIAL_STATE,
+	state: Readonly<StarkLogging> = INITIAL_LOGGING_STATE,
 	action: Readonly<StarkLoggingActions>
 ): Readonly<StarkLogging> {
 	// the new state will be calculated from the data coming in the actions

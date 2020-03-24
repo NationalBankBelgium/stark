@@ -1,7 +1,7 @@
 import { StarkUser } from "../../user/entities";
 
 /**
- * The StarkSession interface describes the information that is stored and available during the whole session of a user.
+ * Interface that describes the information that is stored and available during the whole session of a user.
  */
 export interface StarkSession {
 	/**
@@ -10,8 +10,7 @@ export interface StarkSession {
 	currentLanguage: string;
 
 	/**
-	 * The current user logged in the application (if there is one logged in), otherwise it will be undefined
-	 * @link StarkUser
+	 * The current {@link StarkUser} logged in the application (if there is one logged in), otherwise it will be `undefined`
 	 */
 	user?: StarkUser;
 }

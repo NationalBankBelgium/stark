@@ -7,19 +7,28 @@ import { StarkEnvironment } from "../environment";
 
 /**
  * Parent class for bootstrapping Stark applications.
+ *
  * It handles the DOMContentLoaded event of the Web browser in order to bootstrap the application.
  * This class also supports HMR in development mode.
  */
 export abstract class AbstractStarkMain implements StarkMain {
+	/**
+	 * Class constructor
+	 * @param environment - Environment constant provided by the current Angular build
+	 */
 	protected constructor(protected environment: StarkEnvironment) {
 		// no-op
 	}
 
 	/**
-	 * Must be implemented by children classes. Called within bootstrapDomReady (i.e., when the DOM has been loaded)
+	 * Must be implemented by children classes. Called within {@link #bootstrapDomReady|bootstrapDomReady} (i.e., when the DOM has been loaded)
 	 */
 	public abstract main: () => Promise<any>;
 
+	/**
+	 * Callback function for the `DOMContentLoaded` event listener.
+	 * Removes itself when triggered and calls the {@link #initialize|initialize} method.
+	 */
 	public mainWrapper = (): void => {
 		// written like this because otherwise "this" will not be captured :)
 		// no need for the event listener after this
@@ -111,7 +120,7 @@ We need great software developers like you! https://jobs.nbb.be
 	/**
 	 * Configure HMR
 	 * Code based on: https://github.com/angular/angular-cli/wiki/stories-configure-hmr
-	 * Reference: https://github.com/gdi2290/angular-hmr
+	 * Reference: https://github.com/PatrickJS/angular-hmr
 	 * @ignore
 	 */
 	protected bootstrapHmr: Function = (module: any, bootstrap: () => Promise<NgModuleRef<any>>) => {
@@ -148,12 +157,12 @@ We need great software developers like you! https://jobs.nbb.be
 			console.log("Customizing configuration for development!");
 
 			// Ensure that we get detailed stack tracks during development (useful with node & Webpack)
-			// Reference: http://stackoverflow.com/questions/7697038/more-than-10-lines-in-a-node-js-stack-error
+			// Reference: https://stackoverflow.com/questions/7697038/more-than-10-lines-in-a-node-js-stack-error
 			Error.stackTraceLimit = Infinity;
 			require("zone.js/dist/long-stack-trace-zone");
 
 			// Enable Angular debug tools in the dev console
-			// https://github.com/angular/angular/blob/86405345b781a9dc2438c0fbe3e9409245647019/TOOLS_JS.md
+			// https://github.com/angular/angular/blob/master/docs/TOOLS.md
 			const appRef: ApplicationRef = moduleRef.injector.get(ApplicationRef);
 			const cmpRef: ComponentRef<any> = appRef.components[0];
 			enableDebugTools(cmpRef);

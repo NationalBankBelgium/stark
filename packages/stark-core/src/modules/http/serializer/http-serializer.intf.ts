@@ -2,11 +2,12 @@ import { HttpResponse } from "@angular/common/http";
 import { StarkHttpRawCollectionResponseData, StarkHttpRequest, StarkResource } from "../entities";
 
 /**
- * This is the base interface for entities' serializers used mainly by the HTTP Service.
+ * This is the base interface for entities' serializers used mainly by the {@link StarkHttpService}.
  *
- * ResourceType type that this serializer handles.
- * RequestType, defaults to StarkHttpRequest
- * ResponseType, defaults to angular IHttpResponse
+ * It is a generic interface defined by these types:
+ * - `ResourceType`: type that this serializer handles.
+ * - `RequestType`: defaults to {@link StarkHttpRequest}
+ * - `ResponseType`: defaults to the Angular {@link https://v7.angular.io/api/common/http/HttpResponse|HttpResponse}
  */
 export interface StarkHttpSerializer<
 	ResourceType extends StarkResource,

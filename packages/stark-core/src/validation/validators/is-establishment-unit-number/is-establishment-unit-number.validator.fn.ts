@@ -9,7 +9,7 @@ export const starkIsEstablishmentUnitNumberValidatorName = "starkIsEstablishment
 /**
  * @ignore
  * Validates that the given string is a valid establishment unit number (Belgium).
- * @param establishmentNumber - the establishmentNumber to validate
+ * @param establishmentNumber - The establishmentNumber to validate
  */
 export function starkIsEstablishmentUnitNumber(establishmentNumber: string): boolean {
 	const controlNumberBeginIndex = 8;

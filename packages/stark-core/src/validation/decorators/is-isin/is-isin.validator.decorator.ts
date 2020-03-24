@@ -12,8 +12,8 @@ import { starkIsISINValidatorName } from "../../validators/is-isin";
 class StarkIsISINConstraint implements ValidatorConstraintInterface {
 	/**
 	 * Validates that the given ISIN number is valid
-	 * @param isin - the isin number to validate
-	 * @returns boolean - true if the isin is valid
+	 * @param isin - The isin number to validate
+	 * @returns `true` if the isin is valid
 	 */
 	public validate(isin: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
@@ -22,8 +22,8 @@ class StarkIsISINConstraint implements ValidatorConstraintInterface {
 	}
 
 	/**
-	 * Displayes message if the ISIN number is not valid
-	 * @returns a default message
+	 * Default message displayed if the ISIN number is not valid
+	 * @returns A default message
 	 */
 	public defaultMessage(): string {
 		return "$property value is not a valid ISIN number";
@@ -32,7 +32,7 @@ class StarkIsISINConstraint implements ValidatorConstraintInterface {
 
 /**
  * Validator decorator that uses the StarkIsISIN validator constraint
- * @param validationOptions - will ensure if the isin is valid or not
+ * @param validationOptions - The options that will define the validity of the ISIN number
  * @returns Function
  */
 export function StarkIsISIN(validationOptions?: ValidationOptions): Function {

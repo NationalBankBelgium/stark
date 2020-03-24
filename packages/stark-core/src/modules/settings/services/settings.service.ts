@@ -18,6 +18,9 @@ import { StarkUser } from "../../user/entities";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 
+/**
+ * @ignore
+ */
 @Injectable()
 export class StarkSettingsServiceImpl implements StarkSettingsService {
 	public preferredLanguage: string;

@@ -33,11 +33,11 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 
 	/**
 	 * Class constructor
-	 * @param starkHttpService The Http Service provided by Stark.
-	 * @param logger The logging service. @link StarkLoggingService.
-	 * @param backend The backend that this HttpRepository will target.
-	 * @param resourcePath The resource path that will be used as default for all the requests performed by this HttpRepository. This will be replaced by the resourcePath provided (if any) in the getRequestBuilder() method.
-	 * @param serializer The serializer that will be attached by default to every StarkHttpRequest sent by this HttpRepository to serialize/deserialize the items to be sent/received to/from the backend.
+	 * @param starkHttpService - The Http Service provided by Stark.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param backend - The backend that this HttpRepository will target.
+	 * @param resourcePath - The resource path that will be used as default for all the requests performed by this HttpRepository. This will be replaced by the resourcePath provided (if any) in the getRequestBuilder() method.
+	 * @param serializer - The serializer that will be attached by default to every `StarkHttpRequest` sent by this HttpRepository to serialize/deserialize the items to be sent/received to/from the backend.
 	 */
 	public constructor(
 		protected starkHttpService: StarkHttpService<T>,
@@ -58,8 +58,8 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 
 	/**
 	 * Perform an Http request to create a resource item.
-	 * @param item - the item to create
-	 * @param params - the parameters used to create the item
+	 * @param item - The item to create
+	 * @param params - The parameters used to create the item
 	 */
 	public create(item: T, params?: StarkHttpCreateRequestParams): Observable<StarkSingleItemResponseWrapper<T>> {
 		return this.starkHttpService.executeSingleItemRequest(
@@ -71,8 +71,8 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 
 	/**
 	 * Perform an Http request to update an existing resource item.
-	 * @param item - the item to update
-	 * @param params - the parameters used to update the item
+	 * @param item - The item to update
+	 * @param params - The parameters used to update the item
 	 */
 	public update(item: T, params?: StarkHttpUpdateRequestParams): Observable<StarkSingleItemResponseWrapper<T>> {
 		return this.starkHttpService.executeSingleItemRequest(
@@ -84,8 +84,8 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 
 	/**
 	 * Perform an Http request to delete a resource item.
-	 * @param item - the item to delete
-	 * @param params - the parameters used to delete the item
+	 * @param item - The item to delete
+	 * @param params - The parameters used to delete the item
 	 */
 	public delete(item: T, params?: StarkHttpDeleteRequestParams): Observable<StarkSingleItemResponseWrapper<T>> {
 		return this.starkHttpService.executeSingleItemRequest(
@@ -97,8 +97,8 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 
 	/**
 	 * Perform an Http request to fetch a resource item.
-	 * @param uuid - the uuid of the item to fetch
-	 * @param params - the parameters used to fetch the item
+	 * @param uuid - The uuid of the item to fetch
+	 * @param params - The parameters used to fetch the item
 	 */
 	public get(uuid: string, params?: StarkHttpGetRequestParams): Observable<StarkSingleItemResponseWrapper<T>> {
 		return this.starkHttpService.executeSingleItemRequest(
@@ -110,9 +110,9 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 
 	/**
 	 * Perform an Http request to fetch a range of resource items based on the limit and offset.
-	 * @param limit - the limit to apply to the request
-	 * @param offset - the offset to apply to the request
-	 * @param params - the parameters to apply to the request
+	 * @param limit - The limit to apply to the request
+	 * @param offset - The offset to apply to the request
+	 * @param params - The parameters to apply to the request
 	 */
 	public getCollection(
 		limit: number,
@@ -128,10 +128,10 @@ export abstract class AbstractStarkHttpRepository<T extends StarkResource> {
 
 	/**
 	 * Perform an Http request to fetch a range of resource items that match with the given criteria.
-	 * @param criteria - the criteria of the request
-	 * @param limit - the limit to apply to the request
-	 * @param offset - the offset to apply to the request
-	 * @param params - the parameters to apply to the request
+	 * @param criteria - The criteria of the request
+	 * @param limit - The limit to apply to the request
+	 * @param offset - The offset to apply to the request
+	 * @param params - The parameters to apply to the request
 	 */
 	public search(
 		criteria: { [param: string]: string },

@@ -52,6 +52,9 @@ interface StarkState {
 	params?: RawParams;
 }
 
+/**
+ * @ignore
+ */
 @Injectable()
 export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public lastTransition?: Transition;
@@ -243,28 +246,28 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	): () => void {
 		switch (lifecycleHook) {
 			case StarkRoutingTransitionHook.ON_BEFORE:
-				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onbefore
+				// see: https://ui-router.github.io/ng2/docs/latest/classes/transition.transitionservice.html#onbefore
 				return <() => void>this.$transitions.onBefore(matchCriteria, <TransitionHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_START:
-				// see https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onstart
+				// see https://ui-router.github.io/ng2/docs/latest/classes/transition.transitionservice.html#onstart
 				return <() => void>this.$transitions.onStart(matchCriteria, <TransitionHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_EXIT:
-				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onexit
+				// see: https://ui-router.github.io/ng2/docs/latest/classes/transition.transitionservice.html#onexit
 				return <() => void>this.$transitions.onExit(matchCriteria, <TransitionStateHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_RETAIN:
-				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onretain
+				// see: https://ui-router.github.io/ng2/docs/latest/classes/transition.transitionservice.html#onretain
 				return <() => void>this.$transitions.onRetain(matchCriteria, <TransitionStateHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_ENTER:
-				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onenter
+				// see: https://ui-router.github.io/ng2/docs/latest/classes/transition.transitionservice.html#onenter
 				return <() => void>this.$transitions.onEnter(matchCriteria, <TransitionStateHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_FINISH:
-				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onfinish
+				// see: https://ui-router.github.io/ng2/docs/latest/classes/transition.transitionservice.html#onfinish
 				return <() => void>this.$transitions.onFinish(matchCriteria, <TransitionHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_SUCCESS:
-				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onsuccess
+				// see: https://ui-router.github.io/ng2/docs/latest/classes/transition.transitionservice.html#onsuccess
 				return <() => void>this.$transitions.onSuccess(matchCriteria, <TransitionHookFn>callback, options);
 			case StarkRoutingTransitionHook.ON_ERROR:
-				// see: https://ui-router.github.io/ng1/docs/latest/classes/transition.transitionservice.html#onerror
+				// see: https://ui-router.github.io/ng2/docs/latest/classes/transition.transitionservice.html#onerror
 				return <() => void>this.$transitions.onError(matchCriteria, <TransitionHookFn>callback, options);
 			default:
 				throw new Error(starkRoutingServiceName + ": lifecycle hook unknown => " + lifecycleHook);
@@ -333,7 +336,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 							// dispatch corresponding action to allow the user to trigger his own effects if needed
 							this.store.dispatch(failureAction);
 
-							// reference: https://ui-router.github.io/docs/latest/classes/state.stateservice.html#go
+							// reference: https://ui-router.github.io/ng2/docs/latest/classes/state.stateservice.html#go
 							if (rejectionString.match(/transition superseded|transition prevented|transition aborted|transition failed/)) {
 								this.logger.warn(starkRoutingServiceName + ": " + rejectionString);
 							} else if (rejectionString.match(/resolve error/)) {
@@ -349,7 +352,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 					}
 				}
 
-				// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
+				// HookResult: https://ui-router.github.io/ng2/docs/latest/modules/transition.html#hookresult
 				// boolean | TargetState | void | Promise<boolean | TargetState | void>
 				return false;
 			},
@@ -357,7 +360,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		);
 
 		// declare the onInvalid handler
-		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#oninvalid
+		// https://ui-router.github.io/ng2/docs/latest/classes/state.stateservice.html#oninvalid
 		this.$state.onInvalid(
 			(toState?: TargetState, fromState?: TargetState): HookResult => {
 				const errorType = "Invalid state change";
@@ -382,14 +385,14 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				// TODO redirect to the generic error page once implemented: https://jira.prd.nbb/browse/NG-847
 				// should probably be done via an effect reacting to the StarkRoutingActions.navigateFailure action
 
-				// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
+				// HookResult: https://ui-router.github.io/ng2/docs/latest/modules/transition.html#hookresult
 				// boolean | TargetState | void | Promise<boolean | TargetState | void>
 				return false;
 			}
 		);
 
 		// provide custom default error handler
-		// https://ui-router.github.io/ng1/docs/latest/classes/state.stateservice.html#defaulterrorhandler
+		// https://ui-router.github.io/ng2/docs/latest/classes/state.stateservice.html#defaulterrorhandler
 		this.$state.defaultErrorHandler((error: any): void => {
 			let stringError: string;
 			if (error instanceof Rejection) {
@@ -421,7 +424,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			hookMatchCriteria,
 			(transition: Transition): HookResult => {
 				this.lastTransition = transition;
-				// HookResult: https://ui-router.github.io/docs/latest/modules/transition.html#hookresult
+				// HookResult: https://ui-router.github.io/ng2/docs/latest/modules/transition.html#hookresult
 				// boolean | TargetState | void | Promise<boolean | TargetState | void>
 
 				const previousStateName: string = <string>transition.from().name;
