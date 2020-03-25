@@ -7,6 +7,13 @@
 
 # Stark Core
 
-Stark's Core module (aka stark-core) provides the foundations of the Stark framework.
+Stark's Core package (aka stark-core) provides the foundations of the Stark framework.
 
 **[Getting Started](https://stark.nbb.be/api-docs/stark-core/latest/additional-documentation/getting-started.html)**
+
+## Testing subpackage
+
+Stark Core comes also with the subpackage `@nationalbankbelgium/stark-core/testing` which contains the mock classes that come in hand
+when implementing unit tests that depend on any of the main services provided by Stark Core.
+
+**[Using Stark Core mock classes](https://stark.nbb.be/api-docs/stark-core/latest/additional-documentation/testing-subpackage.html)**
