@@ -1,12 +1,12 @@
 {
-  "non-interactive": false,
+  "ci": false,
   "dry-run": false,
   "verbose": false,
   "force": false,
-  "scripts": {
-    "afterRelease": null,
-    "beforeStage": ["npm run check:nightly:stark-versions -- ${version}", "npm run generate:changelog"],
-    "beforeStart": ["npm run check:starter:stark-versions"]
+  "disable-metrics": true,
+  "hooks": {
+    "before:init": ["npm run check:starter:stark-versions"],
+    "after:bump": ["npm run check:nightly:stark-versions -- ${version}", "npm run generate:changelog"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
@@ -19,13 +19,13 @@
     "requireUpstream": true,
     "requireCommits": false,
     "commit": true,
-    "commitMessage": "chore(release): release %s",
+    "commitMessage": "chore(release): release ${version}",
     "commitArgs": "",
     "tag": true,
-    "tagName": "%s",
-    "tagAnnotation": "%s",
+    "tagName": "${version}",
+    "tagAnnotation": "${version}",
     "push": true,
-    "pushArgs": "--follow-tags",
+    "pushArgs": ["--follow-tags"],
     "pushRepo": "origin"
   },
   "npm": {
@@ -33,7 +33,7 @@
   },
   "github": {
     "release": true,
-    "releaseName": "Release %s",
+    "releaseName": "Release ${version}",
     "draft": false,
     "tokenRef": "GITHUB_TOKEN",
     "assets": null,
