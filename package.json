@@ -49,7 +49,7 @@
     "lint-staged": "^10.0.9",
     "ng-packagr": "^5.3.0",
     "prettier": "^1.16.1",
-    "release-it": "^13.4.0",
+    "release-it": "^13.5.0",
     "rxjs": "^6.5.4",
     "stream-concat": "^0.3.0",
     "stylelint": "^13.2.1",
