@@ -2,7 +2,7 @@ import { Ng2StateDeclaration } from "@uirouter/angular";
 import { StarkStateRedirection, StarkStateRedirectionFn } from "./state-redirection.intf";
 
 /**
- * Describes the content of the 'permissions' object to be set inside the 'data' property of a Router state configuration
+ * Describes the content of the `permissions` object to be set inside the `data` property of a Router state configuration
  */
 export interface StarkRBACStatePermissions {
 	/**
@@ -21,7 +21,7 @@ export interface StarkRBACStatePermissions {
 
 /* tslint:disable:jsdoc-format */
 /**
- * Describes a Router state configuration with 'data.permissions' defined in order to protect such state(s) with RBAC authorization
+ * Describes a Router state configuration with `data.permissions` defined in order to protect such state(s) with RBAC authorization
  * via the {@link StarkRBACAuthorizationService}.
  *
  * **IMPORTANT:** Although the [Ng2StateDeclaration](https://ui-router.github.io/ng2/docs/latest/interfaces/state.ng2statedeclaration.html) can
@@ -58,9 +58,9 @@ export interface StarkRBACStateDeclaration extends Ng2StateDeclaration {
 	 *
 	 * This is the right spot to store RBAC authorization info (`permissions`)
 	 *
-	 * Note: because prototypal inheritance is used, changes to parent `data` objects reflect in the child `data` objects.
+	 * **Note: because prototypal inheritance is used, changes to parent `data` objects reflect in the child `data` objects.
 	 * Care should be taken if you are using `hasOwnProperty` on the `data` object.
-	 * Properties from parent objects will return false for `hasOwnProperty`.
+	 * Properties from parent objects will return false for `hasOwnProperty`.**
 	 */
 	data: {
 		permissions: StarkRBACStatePermissions;

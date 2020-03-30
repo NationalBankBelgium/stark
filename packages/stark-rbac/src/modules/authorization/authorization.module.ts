@@ -12,9 +12,10 @@ import { StarkHideOnPermissionDirective, StarkShowOnPermissionDirective } from "
 export class StarkRBACAuthorizationModule {
 	/**
 	 * Instantiates the services only once since they should be singletons
-	 * so the forRoot() should be called only by the AppModule
-	 * @link https://angular.io/guide/singleton-services#forroot
-	 * @returns a module with providers
+	 * so the `forRoot()` should be called only by the `AppModule`.
+	 *
+	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
+	 * @returns A module with providers
 	 */
 	public static forRoot(): ModuleWithProviders {
 		return {
@@ -24,10 +25,10 @@ export class StarkRBACAuthorizationModule {
 	}
 
 	/**
-	 * Verifies that the 'forRoot' method of this module has been called so that its providers are effectively registered.
-	 * @param rootAuthorizationService - The RBAC authorization service of the application (null when the 'forRoot' method was called)
-	 * @param childAuthorizationService - The RBAC authorization service of the application (null when the 'forRoot' was not called, so this module is imported as a child module)
-	 * @param appInitStatus - A class that reflects the state of running {@link APP_INITIALIZER}s
+	 * Verifies that the `forRoot()` method of this module has been called so that its providers are effectively registered.
+	 * @param rootAuthorizationService - The `StarkRBACAuthorizationService` instance of the application (null when the `forRoot()` method was called)
+	 * @param childAuthorizationService - The `StarkRBACAuthorizationService` instance of the application (null when the `forRoot()` was not called, so this module is imported as a child module)
+	 * @param appInitStatus - A class that reflects the state of running {@link https://v7.angular.io/api/core/APP_INITIALIZER|APP_INITIALIZER}s
 	 */
 	public constructor(
 		@Optional() @SkipSelf() @Inject(STARK_RBAC_AUTHORIZATION_SERVICE) rootAuthorizationService: StarkRBACAuthorizationService,

@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 
 /**
- * Actions related to RBAC authorization
+ * Actions related to {@link StarkRBACAuthorizationService}
  */
 export enum StarkRBACAuthorizationActionsTypes {
 	RBAC_USER_NAVIGATION_UNAUTHORIZED = "[StarkRBAC] User navigation unauthorized",
@@ -14,7 +14,6 @@ export enum StarkRBACAuthorizationActionsTypes {
 export class StarkUserNavigationUnauthorized implements Action {
 	/**
 	 * The type of action
-	 * @link StarkRBACAuthorizationActionsTypes
 	 */
 	public readonly type: StarkRBACAuthorizationActionsTypes.RBAC_USER_NAVIGATION_UNAUTHORIZED =
 		StarkRBACAuthorizationActionsTypes.RBAC_USER_NAVIGATION_UNAUTHORIZED;
@@ -32,7 +31,6 @@ export class StarkUserNavigationUnauthorized implements Action {
 export class StarkUserNavigationUnauthorizedRedirected implements Action {
 	/**
 	 * The type of action
-	 * @link StarkRBACAuthorizationActionsTypes
 	 */
 	public readonly type: StarkRBACAuthorizationActionsTypes.RBAC_USER_NAVIGATION_UNAUTHORIZED_REDIRECTED =
 		StarkRBACAuthorizationActionsTypes.RBAC_USER_NAVIGATION_UNAUTHORIZED_REDIRECTED;

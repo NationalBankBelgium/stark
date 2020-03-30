@@ -9,7 +9,7 @@ import { STARK_RBAC_AUTHORIZATION_SERVICE, StarkRBACAuthorizationService } from 
 const directiveName = "[starkHideOnPermission]";
 
 /**
- * [Structural Directive](https://angular.io/guide/structural-directives#structural-directives) to remove an element if the user has any of the roles specified
+ * [Structural Directive](https://v7.angular.io/guide/structural-directives#structural-directives) to remove an element if the user has any of the roles specified
  * in the {@link StarkRBACDirectivePermission} object passed as input.
  *
  * This directive should be used in cases where some content in the application should be shown to all the users except to those that have a specific role.
@@ -57,8 +57,8 @@ export class StarkHideOnPermissionDirective implements OnInit, OnDestroy {
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param authorizationService - The RBAC authorization service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application
+	 * @param authorizationService - The `StarkRBACAuthorizationService` instance of the application
 	 * @param _templateRef - The embedded template of the host element of this directive.
 	 * @param _viewContainer - The container where one or more views can be attached to the host element of this directive.
 	 */
