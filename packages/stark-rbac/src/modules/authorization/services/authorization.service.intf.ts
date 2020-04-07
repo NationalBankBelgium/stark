@@ -1,11 +1,11 @@
 import { InjectionToken } from "@angular/core";
 
 /**
- * The name of the service
+ * The name of the service in case an injection is needed
  */
 export const starkRBACAuthorizationServiceName = "StarkRBACAuthorizationService";
 /**
- * Injection Token version of the Service Name
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkRBACAuthorizationService}
  */
 export const STARK_RBAC_AUTHORIZATION_SERVICE: InjectionToken<StarkRBACAuthorizationService> = new InjectionToken<
 	StarkRBACAuthorizationService
@@ -19,10 +19,11 @@ export interface StarkRBACAuthorizationService {
 	 * Method to be called right after the app initializes in order to get the necessary info to determine the permissions of the current user.
 	 * This method is called internally by the {@link StarkRBACAuthorizationModule}.
 	 *
-	 * **IMPORTANT:** In case you don't want to import the {@link StarkRBACAuthorizationModule} but you only want to define your own
-	 * implementation of the StarkRBACAuthorizationService, make sure you call this method right after the app initializes.
+	 * **IMPORTANT: In case you don't want to import the {@link StarkRBACAuthorizationModule} but you only want to define your own
+	 * implementation of the `StarkRBACAuthorizationService`, make sure you call this method right after the app initializes.**
 	 */
 	initializeService(): void;
+
 	/**
 	 * Whether the current principal has the specified role.
 	 */

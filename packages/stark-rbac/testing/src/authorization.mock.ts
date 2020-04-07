@@ -1,29 +1,29 @@
 import { StarkRBACAuthorizationService } from "@nationalbankbelgium/stark-rbac";
+import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 
 /**
- * Mock class of the StarkRBACAuthorizationService interface.
- * @link StarkRBACAuthorizationService
+ * Mock class of the {@link StarkRBACAuthorizationService} interface.
  */
 export class MockStarkRBACAuthorizationService implements SpyObj<StarkRBACAuthorizationService> {
 	/**
-	 * Method to be called right after the app initializes in order to get the necessary info to determine the permissions of the current user.
+	 * See [StarkRBACAuthorizationService initializeService()]{@link StarkRBACAuthorizationService#initializeService} method
 	 */
-	public initializeService: SpyObj<StarkRBACAuthorizationService>["initializeService"] = createSpy("initializeService");
+	public initializeService: Spy<StarkRBACAuthorizationService["initializeService"]> = createSpy("initializeService");
 
 	/**
-	 * Whether the current principal has the specified role.
+	 * See [StarkRBACAuthorizationService hasRole()]{@link StarkRBACAuthorizationService#hasRole} method
 	 */
-	public hasRole: SpyObj<StarkRBACAuthorizationService>["hasRole"] = createSpy("hasRole");
+	public hasRole: Spy<StarkRBACAuthorizationService["hasRole"]> = createSpy("hasRole");
 
 	/**
-	 * Whether the current principal has any of the supplied roles (given as an array of strings).
+	 * See [StarkRBACAuthorizationService hasAnyRole()]{@link StarkRBACAuthorizationService#hasAnyRole} method
 	 */
-	public hasAnyRole: SpyObj<StarkRBACAuthorizationService>["hasAnyRole"] = createSpy("hasAnyRole");
+	public hasAnyRole: Spy<StarkRBACAuthorizationService["hasAnyRole"]> = createSpy("hasAnyRole");
 
 	/**
-	 * Whether the current principal is an anonymous user.
+	 * See [StarkRBACAuthorizationService isAnonymous()]{@link StarkRBACAuthorizationService#isAnonymous} method
 	 */
-	public isAnonymous: SpyObj<StarkRBACAuthorizationService>["isAnonymous"] = createSpy("isAnonymous");
+	public isAnonymous: Spy<StarkRBACAuthorizationService["isAnonymous"]> = createSpy("isAnonymous");
 }

@@ -15,7 +15,7 @@ export interface StarkStateRedirection {
 }
 
 /**
- * Describes a function invoked passing the current {@link Transition} which should return the redirection to be performed by the Router.
- * This is handy in case the redirection will happen only on specific cases.
+ * Describes a function invoked passing the current {@link https://ui-router.github.io/ng2/docs/latest/classes/transition.transition-1.html|Transition} which should return the redirection to be performed by the Router.
+ * This comes in hand in case the redirection should happen only in specific cases.
  */
 export type StarkStateRedirectionFn = (transition: Transition) => StarkStateRedirection;
