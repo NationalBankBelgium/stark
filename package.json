@@ -39,7 +39,7 @@
     "@ngtools/json-schema": "^1.1.0",
     "@release-it/conventional-changelog": "^1.1.4",
     "codelyzer": "^5.2.2",
-    "commitizen": "^4.0.5",
+    "commitizen": "^4.1.0",
     "conventional-changelog-cli": "^2.0.31",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.2",
