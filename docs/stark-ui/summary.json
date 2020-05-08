@@ -10,5 +10,9 @@
   {
     "title": "Timeout Warning configuration",
     "file": "TIMEOUT_WARNING.md"
+  },
+  {
+    "title": "Testing Subpackage",
+    "file": "TESTING_SUBPACKAGE.md"
   }
 ]

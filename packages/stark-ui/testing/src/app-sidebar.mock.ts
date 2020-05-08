@@ -1,77 +1,50 @@
 import { StarkAppSidebarOpenEvent, StarkAppSidebarService } from "@nationalbankbelgium/stark-ui";
 import { Subject } from "rxjs";
+import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 
-/* tslint:disable:jsdoc-format */
 /**
- * Mock class of the {@link StarkAppSidebarService|StarkAppSidebarService}.
- *
- * * `IMPORTANT:` This class just provides mocks (jasmine Spies) for all the methods of the actual service.
- * Therefore, it is up to you to define the return values of such spies according to your needs.
- *
- * You can use it in your unit tests by providing it while configuring the testing module in the TestBed. For example:
-```typescript
-import { STARK_APP_SIDEBAR_SERVICE } from "@nationalbankbelgium/stark-ui";
-import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
-
-describe("Some test", () => {
-
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [...],
-			declarations: [...],
-			providers: [
-				// provide is as a value
-				{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockAppSidebarService() },
-				// or as a class
-				{ provide: STARK_APP_SIDEBAR_SERVICE, useClass: MockAppSidebarService }
-			]
-		}).compileComponents();
-	}));
-
-});
-```
+ * Mock class of the {@link StarkAppSidebarService} interface.
  */
-/* tslint:enable:jsdoc-format */
 export class MockAppSidebarService implements SpyObj<StarkAppSidebarService> {
 	/**
-	 * Observable subscribed by components to catch close events
+	 * See [StarkAppSidebarService closeSidebar$]{@link StarkAppSidebarService#closeSidebar$} property
 	 */
 	public closeSidebar$: Subject<void> = new Subject<void>();
 
 	/**
-	 * Observable subscribed by components to catch open events
+	 * See [StarkAppSidebarService openSidebar$]{@link StarkAppSidebarService#openSidebar$} property
 	 */
 	public openSidebar$: Subject<StarkAppSidebarOpenEvent> = new Subject<StarkAppSidebarOpenEvent>();
 
 	/**
-	 * Observable subscribed by components to catch toggle events
+	 * See [StarkAppSidebarService toggleSidebar$]{@link StarkAppSidebarService#toggleSidebar$} property
 	 */
 	public toggleSidebar$: Subject<StarkAppSidebarOpenEvent> = new Subject<StarkAppSidebarOpenEvent>();
 
 	/**
-	 * Close all sidebars
+	 * See [StarkAppSidebarService close()]{@link StarkAppSidebarService#close} method
 	 */
-	public close: SpyObj<StarkAppSidebarService>["close"] = createSpy("close");
+	public close: Spy<StarkAppSidebarService["close"]> = createSpy("close");
 
 	/**
-	 * Open sidebar's menu
+	 * See [StarkAppSidebarService openMenu()]{@link StarkAppSidebarService#openMenu} method
 	 */
-	public openMenu: SpyObj<StarkAppSidebarService>["openMenu"] = createSpy("openMenu");
+	public openMenu: Spy<StarkAppSidebarService["openMenu"]> = createSpy("openMenu");
 
 	/**
-	 * Open the left sidebar
+	 * See [StarkAppSidebarService openLeft()]{@link StarkAppSidebarService#openLeft} method
 	 */
-	public openLeft: SpyObj<StarkAppSidebarService>["openLeft"] = createSpy("openLeft");
+	public openLeft: Spy<StarkAppSidebarService["openLeft"]> = createSpy("openLeft");
 
 	/**
-	 * Open the right sidebar
+	 * See [StarkAppSidebarService openRight()]{@link StarkAppSidebarService#openRight} method
 	 */
-	public openRight: SpyObj<StarkAppSidebarService>["openRight"] = createSpy("openRight");
+	public openRight: Spy<StarkAppSidebarService["openRight"]> = createSpy("openRight");
 
 	/**
-	 * Toggle the menu
+	 * See [StarkAppSidebarService toggleMenu()]{@link StarkAppSidebarService#toggleMenu} method
 	 */
-	public toggleMenu: SpyObj<StarkAppSidebarService>["toggleMenu"] = createSpy("toggleMenu");
+	public toggleMenu: Spy<StarkAppSidebarService["toggleMenu"]> = createSpy("toggleMenu");
 }
