@@ -12,8 +12,8 @@ import { starkIsBICValidatorName } from "../../validators/is-bic";
 class StarkIsBICConstraint implements ValidatorConstraintInterface {
 	/**
 	 * Validates that a give BIC address is valid
-	 * @param bic - the bic to validate
-	 * @returns boolean - true if the bic has been validated
+	 * @param bic - The bic to validate
+	 * @returns `true` if the bic has been validated
 	 */
 	public validate(bic: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
@@ -22,7 +22,7 @@ class StarkIsBICConstraint implements ValidatorConstraintInterface {
 
 	/**
 	 * Default message displayed if the BIC address is not valid
-	 * @returns a default message
+	 * @returns A default message
 	 */
 	public defaultMessage(): string {
 		return "$property value is not a valid BIC address";

@@ -7,7 +7,7 @@ export const starkIsCompanyNumberValidatorName = "starkIsCompanyNumber";
 /**
  * @ignore
  * Validates that the given string is a valid company number (Belgium).
- * @param companyNumber - the company number to validate
+ * @param companyNumber - The company number to validate
  */
 export function starkIsCompanyNumber(companyNumber: string): boolean {
 	let valid = false;

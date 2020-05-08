@@ -1,6 +1,6 @@
 # Stark Default Error Handling
 
-Stark provides its own error handler, StarkErrorHandler, that overrides [ Angular's default ErrorHandler](https://angular.io/api/core/ErrorHandler).
+Stark provides its own error handler, StarkErrorHandler, that overrides [Angular's default ErrorHandler](https://angular.io/api/core/ErrorHandler).
 
 This handler will dispatch a StarkUnhandledError action to the application Store which you can treat as you want.
 

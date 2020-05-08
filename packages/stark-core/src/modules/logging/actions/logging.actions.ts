@@ -2,7 +2,7 @@ import { Action } from "@ngrx/store";
 import { StarkLogMessage } from "../entities";
 
 /**
- * Actions related to stark logging service
+ * Actions related to {@link StarkLoggingService}
  */
 export enum StarkLoggingActionTypes {
 	SET_LOGGING_APPLICATION_ID = "[StarkLogging] Set Logging Application Id",
@@ -16,13 +16,12 @@ export enum StarkLoggingActionTypes {
 export class StarkSetLoggingApplicationId implements Action {
 	/**
 	 * The type of action
-	 * @link StarkLoggingActionTypes
 	 */
 	public readonly type: StarkLoggingActionTypes.SET_LOGGING_APPLICATION_ID = StarkLoggingActionTypes.SET_LOGGING_APPLICATION_ID;
 
 	/**
 	 * Class constructor
-	 * @param applicationId - the id of the application
+	 * @param applicationId - The id of the application
 	 */
 	public constructor(public applicationId: string) {}
 }
@@ -33,13 +32,12 @@ export class StarkSetLoggingApplicationId implements Action {
 export class StarkLogMessageAction implements Action {
 	/**
 	 * The type of action
-	 * @link StarkLoggingActionTypes
 	 */
 	public readonly type: StarkLoggingActionTypes.LOG_MESSAGE = StarkLoggingActionTypes.LOG_MESSAGE;
 
 	/**
 	 * Class constructor
-	 * @param message - the message to log
+	 * @param message - The message to log
 	 */
 	public constructor(public message: StarkLogMessage) {}
 }
@@ -50,13 +48,12 @@ export class StarkLogMessageAction implements Action {
 export class StarkFlushLogMessages implements Action {
 	/**
 	 * The type of action
-	 * @link StarkLoggingActionTypes
 	 */
 	public readonly type: StarkLoggingActionTypes.FLUSH_LOG = StarkLoggingActionTypes.FLUSH_LOG;
 
 	/**
 	 * Class constructor
-	 * @param numberOfMessagesToFlush - the number of messages to flush
+	 * @param numberOfMessagesToFlush - The number of messages to flush
 	 */
 	public constructor(public numberOfMessagesToFlush: number) {}
 }

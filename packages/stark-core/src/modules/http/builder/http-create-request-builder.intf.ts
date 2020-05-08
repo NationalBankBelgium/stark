@@ -3,13 +3,12 @@ import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builde
 import { StarkResource } from "../entities/resource.entity.intf";
 
 /**
- * This StarkHttpCreateRequestBuilder interface describes the different operations supported by Http request builders for resource-creating requests
+ * This interface describes the different operations supported by Http request builders for "resource-creating" requests
  */
 export interface StarkHttpCreateRequestBuilder<T extends StarkResource> extends StarkHttpBaseRequestBuilder<T> {
 	/**
 	 * Adds an "echo" query parameter to the request
 	 *
-	 * @link StarkHttpEchoType
 	 * @param echo - Echo parameter to specify whether the response should contain a response body
 	 * @returns The current builder
 	 */

@@ -6,25 +6,23 @@ import { StarkError } from "../../../common/error";
  */
 export interface StarkLogMessage {
 	/**
-	 * the timestamp of the message
+	 * The timestamp of the message
 	 */
 	timestamp: string;
 	/**
-	 * the log message
+	 * The log message
 	 */
 	message: string;
 	/**
-	 * the type of message (debug, warn, info,...)
-	 * @link StarkLogMessageType
+	 * The type of message (debug, warn, info,...)
 	 */
 	type: StarkLogMessageType;
 	/**
-	 * the correlation id of the log message
+	 * The correlation id of the log message
 	 */
 	correlationId: string;
 	/**
-	 * the (optional) error linked to the log message
-	 * @link StarkError
+	 * The error linked to the log message
 	 */
 	error?: StarkError;
 }

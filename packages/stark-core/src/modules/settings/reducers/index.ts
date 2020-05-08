@@ -4,37 +4,29 @@ import { StarkSettingsActions } from "../actions";
 import { settingsReducer } from "./settings.reducer";
 
 /**
- * We define part of the state assigned to the settings module
+ * Defines the part of the state assigned to the {@link StarkSettingsModule}
  */
 export interface StarkSettingsState {
 	/**
-	 * The settings property
-	 * @link StarkSettings
+	 * State corresponding to the {@link StarkSettingsModule}
 	 */
 	settings: StarkSettings;
 }
 
 /**
- * We assign a reducer to our settings property
+ * Reducers assigned to each property of the {@link StarkSettingsModule}'s state
  */
 export const starkSettingsReducers: ActionReducerMap<StarkSettingsState, StarkSettingsActions> = {
 	/**
-	 * the reducer is assigned to our property
+	 * Reducer assigned to the state's `settings` property
 	 */
 	settings: settingsReducer
 };
 
 /**
- * This will create the session feature used by the selector to find the settings module in the state
- */
-export const selectStarkSettingsFeature: MemoizedSelector<object, StarkSettingsState> = createFeatureSelector<StarkSettingsState>(
-	"StarkSettings"
-);
-
-/**
- * The selector will return the part of the state assigned to the settings when called
+ * NGRX Selector for the {@link StarkSettingsModule}'s state
  */
 export const selectStarkSettings: MemoizedSelector<object, StarkSettings> = createSelector(
-	selectStarkSettingsFeature,
+	createFeatureSelector<StarkSettingsState>("StarkSettings"),
 	(state: StarkSettingsState) => state.settings
 );

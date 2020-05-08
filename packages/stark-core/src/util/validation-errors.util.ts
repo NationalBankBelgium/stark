@@ -5,7 +5,7 @@ import { ValidationError } from "class-validator";
  */
 export class StarkValidationErrorsUtil {
 	/**
-	 * Throws an error in case there are  validation errors. The error contains the description of the different errors.
+	 * Throws an error in case there are validation errors. The error contains the description of the different errors.
 	 * @param validationErrors - Array containing validation results
 	 * @param errorMessagePrefix - (Optional) A prefix to be added to the error message
 	 * @throws Error

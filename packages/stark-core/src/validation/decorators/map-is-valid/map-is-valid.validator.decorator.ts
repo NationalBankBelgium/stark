@@ -31,7 +31,7 @@ class StarkMapIsValidConstraint implements ValidatorConstraintInterface {
 	/**
 	 * Validates that a give Map is valid
 	 * @param map: the map to validate
-	 * @returns boolean - true if the map is valid
+	 * @returns `true` if the map is valid
 	 */
 	public validate(map: Map<any, any>): boolean {
 		if (!(map instanceof Map) || !map.size) {
@@ -56,7 +56,7 @@ class StarkMapIsValidConstraint implements ValidatorConstraintInterface {
 
 	/**
 	 * Default message displayed when the map contains invalid entries
-	 * @returns a default message
+	 * @returns A default message
 	 */
 	public defaultMessage(): string {
 		let keysValidationMessage: string = StarkValidationErrorsUtil.toString(this.keysValidationErrors);

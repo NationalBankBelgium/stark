@@ -12,8 +12,8 @@ import { starkIsIBANValidatorName } from "../../validators/is-iban";
 class StarkIsIBANConstraint implements ValidatorConstraintInterface {
 	/**
 	 * Validates that a given IBAN number is valid
-	 * @param iban - the iban to validate
-	 * @returns boolean - true if the iban is valid
+	 * @param iban - The iban to validate
+	 * @returns `true` if the iban is valid
 	 */
 	public validate(iban: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
@@ -22,7 +22,7 @@ class StarkIsIBANConstraint implements ValidatorConstraintInterface {
 
 	/**
 	 * Default message displayed if the IBAN number is not valid
-	 * @returns a default message
+	 * @returns A default message
 	 */
 	public defaultMessage(): string {
 		return "$property value is not a valid IBAN number";

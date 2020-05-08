@@ -20,7 +20,6 @@ export enum StarkUserActionTypes {
 export class StarkFetchUserProfile implements Action {
 	/**
 	 * The type of Action
-	 * @link StarkUserActionTypes
 	 */
 	public readonly type: StarkUserActionTypes.FETCH_USER_PROFILE = StarkUserActionTypes.FETCH_USER_PROFILE;
 }
@@ -31,7 +30,6 @@ export class StarkFetchUserProfile implements Action {
 export class StarkFetchUserProfileSuccess implements Action {
 	/**
 	 * The type of Action
-	 * @link StarkUserActionTypes
 	 */
 	public readonly type: StarkUserActionTypes.FETCH_USER_PROFILE_SUCCESS = StarkUserActionTypes.FETCH_USER_PROFILE_SUCCESS;
 
@@ -48,7 +46,6 @@ export class StarkFetchUserProfileSuccess implements Action {
 export class StarkFetchUserProfileFailure implements Action {
 	/**
 	 * The type of Action
-	 * @link StarkUserActionTypes
 	 */
 	public readonly type: StarkUserActionTypes.FETCH_USER_PROFILE_FAILURE = StarkUserActionTypes.FETCH_USER_PROFILE_FAILURE;
 
@@ -66,7 +63,6 @@ export class StarkFetchUserProfileFailure implements Action {
 export class StarkGetAllUsers implements Action {
 	/**
 	 * The type of Action
-	 * @link StarkUserActionTypes
 	 */
 	public readonly type: StarkUserActionTypes.GET_ALL_USERS = StarkUserActionTypes.GET_ALL_USERS;
 }
@@ -77,7 +73,6 @@ export class StarkGetAllUsers implements Action {
 export class StarkGetAllUsersSuccess implements Action {
 	/**
 	 * The type of Action
-	 * @link StarkUserActionTypes
 	 */
 	public readonly type: StarkUserActionTypes.GET_ALL_USERS_SUCCESS = StarkUserActionTypes.GET_ALL_USERS_SUCCESS;
 
@@ -94,7 +89,6 @@ export class StarkGetAllUsersSuccess implements Action {
 export class StarkGetAllUsersFailure implements Action {
 	/**
 	 * The type of Action
-	 * @link StarkUserActionTypes
 	 */
 	public readonly type: StarkUserActionTypes.GET_ALL_USERS_FAILURE = StarkUserActionTypes.GET_ALL_USERS_FAILURE;
 

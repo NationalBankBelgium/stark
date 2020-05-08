@@ -17,13 +17,12 @@ export enum StarkSettingsActionTypes {
 export class StarkPersistPreferredLanguage implements Action {
 	/**
 	 * The type of action
-	 * @link StarkSettingsActionTypes
 	 */
 	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE = StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE;
 
 	/**
 	 * Class constructor
-	 * @param language - the language to persist
+	 * @param language - The language to persist
 	 */
 	public constructor(public language: string) {}
 }
@@ -53,7 +52,7 @@ export class StarkPersistPreferredLanguageFailure implements Action {
 
 	/**
 	 * Class constructor
-	 * @param error - the reason why the preferred language could not be persisted
+	 * @param error - The reason why the preferred language could not be persisted
 	 */
 	public constructor(public error: any) {}
 }
@@ -70,7 +69,7 @@ export class StarkSetPreferredLanguage implements Action {
 
 	/**
 	 * Class constructor
-	 * @param language - the new preferred language
+	 * @param language - The new preferred language
 	 */
 	public constructor(public language: string) {}
 }

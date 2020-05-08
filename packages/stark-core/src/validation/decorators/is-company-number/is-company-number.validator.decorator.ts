@@ -12,8 +12,8 @@ import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-n
 class StarkIsCompanyNumberConstraint implements ValidatorConstraintInterface {
 	/**
 	 * Validates that a given Company number is valid
-	 * @param companyNumber - the number to validate
-	 * @returns boolean - true if the company number is valid or not
+	 * @param companyNumber - The number to validate
+	 * @returns `true` if the company number is valid or not
 	 */
 	public validate(companyNumber: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
@@ -22,7 +22,7 @@ class StarkIsCompanyNumberConstraint implements ValidatorConstraintInterface {
 
 	/**
 	 * Default message displayed if the Company number is not valid
-	 * @returns a default message
+	 * @returns A default message
 	 */
 	public defaultMessage(): string {
 		return "$property value is not a valid company number";

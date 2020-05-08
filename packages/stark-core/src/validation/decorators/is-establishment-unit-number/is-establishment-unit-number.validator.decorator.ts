@@ -12,8 +12,8 @@ import { starkIsEstablishmentUnitNumberValidatorName } from "../../validators/is
 class StarkIsEstablishmentUnitNumberConstraint implements ValidatorConstraintInterface {
 	/**
 	 * Validates that a given Establishment number provided is valid
-	 * @param establishmentNumber - the establishment number to validate
-	 * @returns boolean - true if the establishment number is valida
+	 * @param establishmentNumber - The establishment number to validate
+	 * @returns `true` if the establishment number is valida
 	 */
 	public validate(establishmentNumber: string): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
@@ -23,7 +23,7 @@ class StarkIsEstablishmentUnitNumberConstraint implements ValidatorConstraintInt
 
 	/**
 	 * Default Message displayed if the Establishment number is not valid
-	 * @returns a default message
+	 * @returns A default message
 	 */
 	public defaultMessage(): string {
 		return "$property value is not a valid Establishment number";
@@ -32,7 +32,7 @@ class StarkIsEstablishmentUnitNumberConstraint implements ValidatorConstraintInt
 
 /**
  * Validator decorator that uses the StarkIsIsEstablishmentUnitNumber validator constraint
- * @param validationOptions - the options that will define the validity of the establishment number
+ * @param validationOptions - The options that will define the validity of the establishment number
  * @returns Function
  */
 export function StarkIsEstablishmentUnitNumber(validationOptions?: ValidationOptions): Function {

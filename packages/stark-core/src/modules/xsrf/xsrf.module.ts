@@ -10,10 +10,10 @@ import { StarkXSRFHttpInterceptor } from "./interceptors";
 		HttpClientModule,
 		HttpClientXsrfModule.withOptions({
 			// Name of cookie containing the XSRF token. Default value in Angular is 'XSRF-TOKEN'
-			// https://angular.io/guide/http#security-xsrf-protection
+			// https://v7.angular.io/guide/http#security-xsrf-protection
 			cookieName: "XSRF-TOKEN",
 			// Name of HTTP header to populate with the XSRF token. Default value in Angular is 'X-XSRF-TOKEN'.
-			// https://angular.io/guide/http#security-xsrf-protection
+			// https://v7.angular.io/guide/http#security-xsrf-protection
 			headerName: StarkHttpHeaders.XSRF_TOKEN
 		})
 	]
@@ -21,10 +21,11 @@ import { StarkXSRFHttpInterceptor } from "./interceptors";
 export class StarkXSRFModule {
 	/**
 	 * Instantiates the services only once since they should be singletons
-	 * so the forRoot() should be called only by the AppModule
-	 * @link https://angular.io/guide/singleton-services#forroot
-	 * @param xsrfConfig - Object containing the configuration (if any) for the XSRF service
-	 * @returns a module with providers
+	 * so the `forRoot()` should be called only by the `AppModule`.
+	 *
+	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
+	 * @param xsrfConfig - Object containing the configuration (if any) for the `StarkXSRFService`
+	 * @returns A module with providers
 	 */
 	public static forRoot(xsrfConfig?: StarkXSRFConfig): ModuleWithProviders {
 		return {
@@ -39,17 +40,17 @@ export class StarkXSRFModule {
 
 	/**
 	 * Prevents this module from being re-imported
-	 * @link https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
-	 * @param parentModule - the parent module
-	 * @param xsrfService - The XSRF service of the application
-	 * @param appInitStatus - A class that reflects the state of running {@link APP_INITIALIZER}s.
+	 * See {@link https://v7.angular.io/guide/singleton-services#prevent-reimport-of-the-greetingmodule|Angular docs: Prevent reimport of a root module}
+	 * @param xsrfService - The `StarkXSRFService` instance of the application.
+	 * @param appInitStatus - A class that reflects the state of running {@link https://v7.angular.io/api/core/APP_INITIALIZER|APP_INITIALIZER}s.
+	 * @param parentModule - The parent module.
 	 */
 	public constructor(
+		@Inject(STARK_XSRF_SERVICE) xsrfService: StarkXSRFService,
+		appInitStatus: ApplicationInitStatus,
 		@Optional()
 		@SkipSelf()
-		parentModule: StarkXSRFModule,
-		@Inject(STARK_XSRF_SERVICE) xsrfService: StarkXSRFService,
-		appInitStatus: ApplicationInitStatus
+		parentModule?: StarkXSRFModule
 	) {
 		if (parentModule) {
 			throw new Error("StarkXSRFModule is already loaded. Import it in the AppModule only");

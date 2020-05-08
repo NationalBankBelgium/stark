@@ -1,56 +1,57 @@
 import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 
 /**
- * Mock class of the StarkLoggingService interface.
- * @link StarkLoggingService
+ * Mock class of the {@link StarkLoggingService} interface.
  */
 export class MockStarkLoggingService implements SpyObj<StarkLoggingService> {
 	/**
-	 * Gets the current correlationId. In fact when the logging service is created, it gets a unique correlation Id.
-	 * This value can be used while displaying a generic error message.
+	 * See [StarkLoggingService correlationId]{@link StarkLoggingService#correlationId} property
 	 */
 	public correlationId: StarkLoggingService["correlationId"];
+
+	/**
+	 * See [StarkLoggingService correlationIdHttpHeaderName]{@link StarkLoggingService#correlationIdHttpHeaderName} property
+	 */
 	public correlationIdHttpHeaderName: StarkLoggingService["correlationIdHttpHeaderName"];
 
 	/**
-	 * Logs debug messages to be used only in development to track issues.
-	 * The debug messages are only logged (and afterwards stored in the Redux store) only when the debugLoggingEnabled configuration setting from the StarkApplicationConfig is set to true.
-	 * @param args - the arguments to log
+	 * See [StarkLoggingService generateNewCorrelationId()]{@link StarkLoggingService#generateNewCorrelationId} method
 	 */
-	public debug: SpyObj<StarkLoggingService>["debug"] = createSpy("debug");
+	public generateNewCorrelationId: Spy<StarkLoggingService["generateNewCorrelationId"]> = createSpy("generateNewCorrelationId");
 
 	/**
-	 * Logs information messages. These messages are also stored in the Redux store.
-	 * @param args - the arguments to log
+	 * See [StarkLoggingService debug()]{@link StarkLoggingService#debug} method
 	 */
-	public info: SpyObj<StarkLoggingService>["info"] = createSpy("info");
+	public debug: Spy<StarkLoggingService["debug"]> = createSpy("debug");
 
 	/**
-	 * Logs warning messages. Warning messages can, for instance, indicate a non blocking problem in the software. These messages are also stored in the Redux store.
-	 * @param args - the arguments to log
+	 * See [StarkLoggingService info()]{@link StarkLoggingService#info} method
 	 */
-	public warn: SpyObj<StarkLoggingService>["warn"] = createSpy("warn");
+	public info: Spy<StarkLoggingService["info"]> = createSpy("info");
 
 	/**
-	 * Logs error messages. Error messages should be logged when there was an unexpected error while executing the code.
-	 * They are typically logged in the catch method of a try-catch block. These messages are also stored in the Redux store.
-	 * @param message - the message to log
-	 * @param error - the arguments to log
+	 * See [StarkLoggingService warn()]{@link StarkLoggingService#warn} method
 	 */
-	public error: SpyObj<StarkLoggingService>["error"] = createSpy("error");
+	public warn: Spy<StarkLoggingService["warn"]> = createSpy("warn");
 
 	/**
-	 * Method to generate a new correlationId.
+	 * See [StarkLoggingService error()]{@link StarkLoggingService#error} method
 	 */
-	public generateNewCorrelationId: SpyObj<StarkLoggingService>["generateNewCorrelationId"] = createSpy("generateNewCorrelationId");
+	public error: Spy<StarkLoggingService["error"]> = createSpy("error");
 
+	/**
+	 * Creates a new mock instance.
+	 * @param mockCorrelationId - Correlation id to set to this instance
+	 * @param mockCorrelationIdHeaderName - Correlation header name to set to this instance
+	 */
 	public constructor(
-		correlationId: string = "dummyCorrelationId",
+		mockCorrelationId: string = "dummyCorrelationId",
 		mockCorrelationIdHeaderName: string = "Correlation-Id-HttpHeaderName"
 	) {
-		this.correlationId = correlationId;
+		this.correlationId = mockCorrelationId;
 		this.correlationIdHttpHeaderName = mockCorrelationIdHeaderName;
 	}
 }

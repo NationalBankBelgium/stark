@@ -1,16 +1,16 @@
 import { StarkSerializable } from "../../../serialization";
 
 /**
- * This interface defines the structure to follow when providing additional parameters to the StarkHttpRequestBuilder.
+ * This interface defines the structure to follow when providing additional parameters via the {@link StarkHttpRequestBuilder}.
  */
 export interface StarkHttpRequestParams {
 	/**
-	 * Whether to allow query parameters with undefined value or not. Default: false.
+	 * Whether to allow query parameters with `undefined` value or not. Default: `false`.
 	 */
 	allowUndefinedQueryParams?: boolean;
 
 	/**
-	 * Whether to allow query parameters with empty value ('') or not. Default: false.
+	 * Whether to allow query parameters with empty value ('') or not. Default: `false`.
 	 */
 	allowEmptyQueryParams?: boolean;
 
@@ -25,7 +25,7 @@ export interface StarkHttpRequestParams {
 	queryParameters?: { [param: string]: string | string[] | undefined };
 
 	/**
-	 * Maximum number of times the request should be retried in case of error before emitting the failure. Default: 0
+	 * Maximum number of times the request should be retried in case of error before emitting the failure. Default: `0`
 	 */
 	retryCount?: number;
 
@@ -36,48 +36,48 @@ export interface StarkHttpRequestParams {
 }
 
 /**
- * Extra parameters to customize the create Http request to be sent.
+ * Extra parameters to customize the `create` Http request to be sent.
  */
 export interface StarkHttpCreateRequestParams extends StarkHttpRequestParams {}
 
 /**
- * Extra parameters to customize the get Http request to be sent.
+ * Extra parameters to customize the `get` Http request to be sent.
  */
 export interface StarkHttpGetRequestParams extends StarkHttpRequestParams {}
 
 /**
- * Extra parameters to customize the update Http request to be sent.
+ * Extra parameters to customize the `update` Http request to be sent.
  */
 export interface StarkHttpUpdateRequestParams extends StarkHttpRequestParams {
 	/**
-	 * When true, the request-type uses HTTP PUT else it uses HTTP POST. Default: false
+	 * When `true`, the request-type uses HTTP PUT else it uses HTTP POST. Default: `false`
 	 */
 	isIdempotent?: boolean;
 }
 
 /**
- * Extra parameters to customize the delete Http request to be sent.
+ * Extra parameters to customize the `delete` Http request to be sent.
  */
 export interface StarkHttpDeleteRequestParams extends StarkHttpRequestParams {
 	/**
-	 * Whether the delete should be enforced or not. Default: false
-	 * When set to true, the ETag value is not passed.
-	 * Only set this to true if it makes sense for the use case and if your back-end allows it!
+	 * Whether the delete should be enforced or not. Default: `false`
+	 * When set to `true`, the ETag value is not passed.
+	 * Only set this to `true` if it makes sense for the use case and if your back-end allows it!
 	 */
 	force?: boolean;
 }
 
 /**
- * Extra parameters to customize the get collection Http request to be sent.
+ * Extra parameters to customize the `getCollection` Http request to be sent.
  */
 export interface StarkHttpGetCollectionRequestParams extends StarkHttpRequestParams {}
 
 /**
- * Extra parameters to customize the search Http request to be sent.
+ * Extra parameters to customize the `search` Http request to be sent.
  */
 export interface StarkHttpSearchRequestParams extends StarkHttpRequestParams {
 	/**
-	 * Whether to allow criteria with empty value ('') or not. Default: false.
+	 * Whether to allow criteria with empty value ('') or not. Default: `false`.
 	 */
 	allowEmptyCriteria?: boolean;
 }

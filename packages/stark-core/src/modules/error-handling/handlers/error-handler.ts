@@ -4,16 +4,32 @@ import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkUnhandledError } from "../actions";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 
+/**
+ * Replacement for the default {@link https://v7.angular.io/api/core/ErrorHandler|ErrorHandler} from Angular
+ */
 @Injectable()
 export class StarkErrorHandler implements ErrorHandler {
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	private _starkLoggingService?: StarkLoggingService;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
 	private _applicationStore?: Store<StarkCoreApplicationState>;
 
+	/**
+	 * Class constructor
+	 * @param injector - The Angular injector
+	 */
 	public constructor(private injector: Injector) {}
 
 	/**
-	 * This method will dispatch an error method, which the user can then handle
-	 * @param error the encountered error
+	 * Dispatches an {@link StarkUnhandledError} action which the user can then handle
+	 * @param error - The encountered error
 	 */
 	public handleError(error: any): void {
 		this.starkLoggingService.error("StarkErrorHandler: an error has occurred : ", error);
@@ -21,8 +37,9 @@ export class StarkErrorHandler implements ErrorHandler {
 	}
 
 	/**
-	 * Gets the StarkLoggingService from the Injector.
-	 * @throws When the service is not found (the StarkLoggingService is not provided in the app).
+	 * @ignore
+	 * @internal
+	 * @throws When the service is not found (the {@link StarkLoggingService} is not provided in the app).
 	 */
 	private get starkLoggingService(): StarkLoggingService {
 		if (typeof this._starkLoggingService === "undefined") {
@@ -34,7 +51,8 @@ export class StarkErrorHandler implements ErrorHandler {
 	}
 
 	/**
-	 * Gets the Application Store from the Injector.
+	 * @ignore
+	 * @internal
 	 * @throws When the Store is not found (the NGRX Store module is not imported in the app).
 	 */
 	private get applicationStore(): Store<StarkCoreApplicationState> {

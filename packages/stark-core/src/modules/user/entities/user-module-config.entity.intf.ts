@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
 
 /**
- * The InjectionToken version of the config value
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the [StarkUserModuleConfig userProfileResourcePath]{@link StarkUserModuleConfig#userProfileResourcePath}
  */
 export const STARK_USER_PROFILE_RESOURCE_PATH = new InjectionToken<StarkUserModuleConfig["userProfileResourcePath"]>(
 	"StarkUserProfileResourcePath"

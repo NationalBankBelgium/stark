@@ -10,8 +10,8 @@ export const starkIsSupportedLanguageValidatorName = "starkIsSupportedLanguage";
 /**
  * @ignore
  * Validator function that checks if the given ISO code is supported by Stark or not
- * @param isoCode - the ISO code to check
- * @returns true if the given ISO code is part of {@link StarkLanguage}
+ * @param isoCode - The ISO code to check
+ * @returns `true` if the given ISO code is part of {@link StarkLanguage}
  */
 export function starkIsSupportedLanguage(isoCode: string): boolean {
 	if (typeof isoCode === "string") {

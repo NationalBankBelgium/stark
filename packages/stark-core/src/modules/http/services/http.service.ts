@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs*/
 import { Deserialize, Serialize } from "cerialize";
 import { Observable, throwError, timer } from "rxjs";
-// FIXME Adapt mergeMap code --> See: https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#howto-result-selector-migration
+// FIXME Adapt mergeMap code --> See: https://github.com/ReactiveX/rxjs/blob/6.x/docs_app/content/guide/v6/migration.md#howto-result-selector-migration
 import { catchError, map, mergeMap, retryWhen } from "rxjs/operators";
 import { Inject, Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
@@ -27,7 +27,6 @@ import cloneDeep from "lodash-es/cloneDeep";
 
 /**
  * @ignore
- * Service to make HTTP calls in compliance with the guidelines from the NBB REST API Design Guide.
  */
 @Injectable()
 export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpService<P> {
@@ -54,7 +53,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		request = this.addCorrelationIdentifierHeader(request);
 
 		// IMPORTANT: In Angular2+ HTTP service subscribing multiple times will actually do multiple requests
-		// see https://angular.io/guide/http#always-subscribe
+		// see https://v7.angular.io/guide/http#always-subscribe
 		let httpResponse$: Observable<HttpResponse<P>> | undefined;
 
 		switch (request.requestType) {
@@ -96,7 +95,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		request = this.addCorrelationIdentifierHeader(request);
 
 		// IMPORTANT: In Angular2+ HTTP service subscribing multiple times will actually do multiple requests
-		// see https://angular.io/guide/http#always-subscribe
+		// see https://v7.angular.io/guide/http#always-subscribe
 		let httpResponse$: Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>> | undefined;
 
 		switch (request.requestType) {

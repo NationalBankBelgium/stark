@@ -19,8 +19,14 @@ import { StarkError, StarkErrorImpl } from "../../../common/error";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
 import noop from "lodash-es/noop";
 
+/**
+ * @ignore
+ */
 const xsrfServiceNotFound: "not provided" = "not provided";
 
+/**
+ * @ignore
+ */
 @Injectable()
 export class StarkLoggingServiceImpl implements StarkLoggingService {
 	private backend!: StarkBackend;
@@ -230,7 +236,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	/**
 	 * Returns the specified window console method if it exists (debug, warn, info, error, trace),
 	 * otherwise returns console.log or empty function
-	 * @param type Type of console to be used: info, debug, warn, error, trace
+	 * @param type - Type of console to be used: info, debug, warn, error, trace
 	 */
 	protected getConsole(type: string): Function {
 		const console: any = window && window.console ? window.console : {};
@@ -251,7 +257,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 
 	/**
 	 * Gets the StarkXSRFService from the Injector (this is tried only once).
-	 * It returns 'undefined' if the service is not found (the XSRF module is not imported in the app).
+	 * It returns `undefined` if the service is not found (the XSRF module is not imported in the app).
 	 */
 	private get xsrfService(): StarkXSRFService | undefined {
 		if (typeof this._xsrfService === "undefined") {

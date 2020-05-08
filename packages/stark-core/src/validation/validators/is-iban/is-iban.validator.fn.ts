@@ -9,7 +9,7 @@ export const starkIsIBANValidatorName = "starkIsIBAN";
 /**
  * @ignore
  * Validates that the given string is a valid IBAN. (Based on the country)
- * @param iban - the IBAN number to validate
+ * @param iban - The IBAN number to validate
  */
 export function starkIsIBAN(iban: string): boolean {
 	if (typeof iban === "string") {

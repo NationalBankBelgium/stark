@@ -44,6 +44,9 @@ import { starkAppExitStateName, starkAppInitStateName, starkSessionExpiredStateN
  */
 export const starkUnauthenticatedUserError = "StarkSessionService => user not authenticated";
 
+/**
+ * @ignore
+ */
 @Injectable()
 export class StarkSessionServiceImpl implements StarkSessionService {
 	public keepalive?: Keepalive;

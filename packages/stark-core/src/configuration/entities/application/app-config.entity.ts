@@ -10,9 +10,17 @@ import { StarkMapIsValid, StarkMapNotEmpty } from "../../../validation/decorator
 /**
  * This class is only for serialization purposes
  * @ignore
- * @dynamic See: https://angular.io/guide/aot-compiler#strictmetadataemit
  */
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
+	/**
+	 * Extracted regex as a workaround to avoid Angular compiler error: "Expression form not supported" due to the
+	 * regex passed to the `@Matches` decorator in the `defaultLanguage` property of this class.
+	 *
+	 * Using simple string instead of RegExp string since the compiler has a restricted expression syntax.
+	 * See https://v7.angular.io/guide/aot-compiler#expression-syntax
+	 */
+	private static languageCodeRegex = new RegExp("^[a-z]{2}$");
+
 	// FIXME: properties of the group "temp" are not used yet. Will they still be used?
 
 	@IsDefined({ groups: ["temp"] })
@@ -83,7 +91,7 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 
 	@IsNotEmpty({ groups: ["settings"] })
 	@IsString({ groups: ["settings"] })
-	@Matches(/^[a-z]{2}$/, { groups: ["settings"] })
+	@Matches(StarkApplicationConfigImpl.languageCodeRegex, { groups: ["settings"] })
 	@autoserialize
 	public defaultLanguage!: string;
 
@@ -181,20 +189,20 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	}
 
 	/**
-	 * Check whether the keepAlive option in the StarkApplicationConfig is disabled
+	 * Check whether the `keepAlive` option in the {@link StarkApplicationConfig} is disabled
 	 *
-	 * @param instance - the instance of the stark application configuration
-	 * @returns boolean - if keepAlive is in use, the value of keepAliveDisabled is set to false
+	 * @param instance - The instance of the stark application configuration
+	 * @returns Whether keepAlive is in use, the value of `keepAliveDisabled` is set to false
 	 */
 	public static validateIfKeepAliveEnabled(instance: StarkApplicationConfig): boolean {
 		return instance.keepAliveDisabled !== true;
 	}
 
 	/**
-	 * Check whether the loggingFlush option in the StarkApplicationConfig is disabled
+	 * Check whether the `loggingFlush` option in the {@link StarkApplicationConfig} is disabled
 	 *
-	 * @param instance - the instance of the stark application configuration
-	 * @returns boolean - if loggingFlush is in use, the value of loggingFlushDisabled is set to false
+	 * @param instance - The instance of the stark application configuration
+	 * @returns Whether loggingFlush is in use, the value of `loggingFlushDisabled` is set to false
 	 */
 	public static validateIfLoggingFlushEnabled(instance: StarkApplicationConfig): boolean {
 		return instance.loggingFlushDisabled !== true;

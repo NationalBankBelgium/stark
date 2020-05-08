@@ -5,20 +5,20 @@ import { StarkSettings } from "../entities";
  * Key defined to find the service in a store
  */
 export const starkSettingsStoreKey = "starkSettings";
-/**
- * Defines the initial state of the reducer
- * @link StarkSettings
- */
-const INITIAL_STATE: StarkSettings = new StarkSettings();
 
 /**
- * Definition of the settings reducer
- * @param state - the state of the reducer
- * @param action - the action to apply to the reducer
- * @returns a StarkSettings instance
+ * Defines the initial state of the reducer
+ */
+const INITIAL_SETTINGS_STATE: StarkSettings = new StarkSettings();
+
+/**
+ * Definition of the `settings` reducer
+ * @param state - The state of the reducer
+ * @param action - The action to apply to the reducer
+ * @returns The new `StarkSettings` state
  */
 export function settingsReducer(
-	state: Readonly<StarkSettings> = INITIAL_STATE,
+	state: Readonly<StarkSettings> = INITIAL_SETTINGS_STATE,
 	action: Readonly<StarkSettingsActions>
 ): Readonly<StarkSettings> {
 	// the new state will be calculated from the data coming in the actions

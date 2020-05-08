@@ -1,16 +1,15 @@
 import { StarkHttpService, StarkResource } from "@nationalbankbelgium/stark-core";
+import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 import createSpyObj = jasmine.createSpyObj;
 
 /**
- * Mock class of the StarkHttpService interface.
- * @link StarkHttpService
+ * Mock class of the {@link StarkHttpService} interface.
  */
 export class MockStarkHttpService<T extends StarkResource> implements SpyObj<StarkHttpService<T>> {
 	/**
-	 * Gets the core Angular HTTP API (HttpClient)
-	 * @returns Angular Http client
+	 * See [StarkHttpService rawHttpClient]{@link StarkHttpService#rawHttpClient} property
 	 */
 	public readonly rawHttpClient: SpyObj<StarkHttpService<T>["rawHttpClient"]> = createSpyObj<StarkHttpService<T>["rawHttpClient"]>(
 		"rawHttpClient",
@@ -18,16 +17,12 @@ export class MockStarkHttpService<T extends StarkResource> implements SpyObj<Sta
 	);
 
 	/**
-	 * Executes requests to fetch a single resource
-	 * @param request - The HTTP request to be executed
-	 * @returns Observable that will emit the single item response wrapper
+	 * See [StarkHttpService executeSingleItemRequest()]{@link StarkHttpService#executeSingleItemRequest} method
 	 */
-	public executeSingleItemRequest: SpyObj<StarkHttpService<T>>["executeSingleItemRequest"] = createSpy("executeSingleItemRequest");
+	public executeSingleItemRequest: Spy<StarkHttpService<T>["executeSingleItemRequest"]> = createSpy("executeSingleItemRequest");
 
 	/**
-	 * Executes requests to fetch an array of resources
-	 * @param request - The HTTP request to be executed
-	 * @returns Observable that will emit the collection response wrapper
+	 * See [StarkHttpService executeCollectionRequest()]{@link StarkHttpService#executeCollectionRequest} method
 	 */
-	public executeCollectionRequest: SpyObj<StarkHttpService<T>>["executeCollectionRequest"] = createSpy("executeCollectionRequest");
+	public executeCollectionRequest: Spy<StarkHttpService<T>["executeCollectionRequest"]> = createSpy("executeCollectionRequest");
 }

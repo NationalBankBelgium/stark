@@ -3,7 +3,7 @@ import { StarkHttpFetchResourceRequestBuilder } from "./http-abstract-fetch-reso
 import { StarkResource } from "../entities/resource.entity.intf";
 
 /**
- *  This StarkHttpGetRequestBuilder interface describes the different operations supported by Http request builders for resource-fetching requests
+ * Describes the different operations supported by Http request builders for resource-fetching requests
  */
 export interface StarkHttpGetRequestBuilder<T extends StarkResource>
 	extends StarkHttpBaseRequestBuilder<T>,

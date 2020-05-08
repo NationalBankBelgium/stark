@@ -1,6 +1,6 @@
 /**
  * Converts a map (used for params and headers) into a plain object
- * @param map - the Map to convert
+ * @param map - The Map to convert
  */
 export function convertMapIntoObject(map: Map<string, any>): { [param: string]: any } {
 	const resultObj: { [param: string]: any } = {};

@@ -5,16 +5,15 @@ import { StarkLogMessage } from "./log-message.entity.intf";
  */
 export interface StarkLogging {
 	/**
-	 * the uuid of the entity
+	 * The `uuid` of the entity
 	 */
 	uuid: string;
 	/**
-	 * the id of the application
+	 * The id of the application
 	 */
 	applicationId: string;
 	/**
-	 * the messages being logged
-	 * @link StarkLogMessage
+	 * The {@link StarkLogMessage} objects being logged
 	 */
 	messages: StarkLogMessage[];
 }

@@ -106,7 +106,7 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 
 		// if the force parameter is not defined or is set to false
 		// then we DO set the If-Match header (i.e., conditional delete)
-		// if force is set to true, the ETag is not given
+		// if force is set to `true`, the ETag is not given
 		// this makes sense in cases where the user states "delete this no matter what", given that the server supports/allows it
 		if (!normalizedParams || normalizedParams.force !== true) {
 			builder.setHeader(StarkHttpHeaders.IF_MATCH, <string>item.etag);

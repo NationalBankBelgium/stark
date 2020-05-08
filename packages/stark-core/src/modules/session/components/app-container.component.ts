@@ -24,8 +24,8 @@ const componentName = "stark-app-container";
 export class StarkAppContainerComponent implements OnInit {
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param routingService - The routing service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param routingService - The `StarkRoutingService` instance of the application.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,

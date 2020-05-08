@@ -4,27 +4,27 @@ import { StarkLoggingActions } from "../actions";
 import { loggingReducer } from "./logging.reducer";
 
 /**
- * We define part of the state assigned to the logging module
+ * Defines the part of the state assigned to the {@link StarkLoggingModule}
  */
 export interface StarkLoggingState {
 	/**
-	 * The logging property
+	 * State corresponding to the {@link StarkLoggingModule}
 	 */
 	logging: StarkLogging;
 }
 
 /**
- * We assign a reducer to our logging property
+ * Reducers assigned to each property of the {@link StarkLoggingModule}'s state
  */
 export const starkLoggingReducers: ActionReducerMap<StarkLoggingState, StarkLoggingActions> = {
 	/**
-	 * the reducer is assigned to our property
+	 * Reducer assigned to the state's `logging` property
 	 */
 	logging: loggingReducer
 };
 
 /**
- * The selector will return the part of the state assigned to the logging when called
+ * NGRX Selector for the {@link StarkLoggingModule}'s state
  */
 export const selectStarkLogging: MemoizedSelector<object, StarkLogging> = createSelector(
 	createFeatureSelector<StarkLoggingState>("StarkLogging"),

@@ -2,7 +2,7 @@ import { StarkBackend } from "../../../modules/http/entities/backend";
 import { InjectionToken } from "@angular/core";
 
 /**
- * The InjectionToken that defines the StarkApplicationConfig, in case an injection is needed.
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkApplicationConfig}
  */
 export const STARK_APP_CONFIG: InjectionToken<StarkApplicationConfig> = new InjectionToken<StarkApplicationConfig>("STARK_APP_CONFIG");
 
@@ -31,6 +31,7 @@ export interface StarkApplicationConfig {
 	 */
 	errorStateName: string;
 
+	// FIXME: remove obsolete property
 	/**
 	 * Enable Angular's debug runtime information.
 	 *
@@ -46,26 +47,30 @@ export interface StarkApplicationConfig {
 	debugLoggingEnabled: boolean;
 
 	/**
-	 * When the number of log messages reaches the loggingFlushPersistSize value,
+	 * When the number of log messages reaches the `loggingFlushPersistSize` value,
 	 * the log messages are sent to the back-end and removed from the redux store.
-	 * Default - 15
+	 *
+	 * Default: `15`
 	 */
 	loggingFlushPersistSize?: number;
 
 	/**
-	 * The loggingFlushApplicationId uniquely identifies the application.
-	 * It makes that the back-end can recognize your application.
+	 * Id that uniquely identifies the application when flushing the logs to the back-end.
+	 * It allows the back-end to recognize your application.
 	 */
 	loggingFlushApplicationId?: string;
 
 	/**
-	 * The loggingFlushResourceName defines the name of the logging resource on the back-end. Default: "logging"
+	 * Defines the name of the logging resource on the back-end.
+	 *
+	 * Default: `logging`
 	 */
 	loggingFlushResourceName?: string;
 
 	/**
 	 * Option to disable the logging flush if it not needed for the application.
-	 * Default - false
+	 *
+	 * Default: `false`
 	 */
 	loggingFlushDisabled?: boolean;
 
@@ -81,7 +86,8 @@ export interface StarkApplicationConfig {
 
 	/**
 	 * Enable router visualizer. Only in DEV (the router visualizer is not available in PROD)
-	 * Default - false
+	 *
+	 * Default: `false`
 	 */
 	routerVisualizerEnabled?: boolean;
 
@@ -92,23 +98,27 @@ export interface StarkApplicationConfig {
 
 	/**
 	 * Seconds before the session is ended (due to no user interaction) when the timeout warning event will be emitted.
-	 * Default - 15
+	 *
+	 * Default: `15`
 	 */
 	sessionTimeoutWarningPeriod: number;
 
 	/**
-	 * Interval in seconds between every "keepalive" ping. Default: 15
+	 * Interval in seconds between every `keepalive` ping.
+	 *
+	 * Default: `15`
 	 */
 	keepAliveInterval?: number;
 
 	/**
-	 * Url where the "keepalive" pings should be sent to
+	 * Url where the `keepalive` pings should be sent to
 	 */
 	keepAliveUrl?: string;
 
 	/**
-	 * Option to disable the keepAlive if it is not needed for the application.
-	 * Default - false
+	 * Option to disable the `keepAlive` mechanism if it is not needed for the application.
+	 *
+	 * Default: `false`
 	 */
 	keepAliveDisabled?: boolean;
 
@@ -135,41 +145,36 @@ export interface StarkApplicationConfig {
 	publicApp: boolean;
 
 	/**
-	 * Map containing the different back-ends that the application will interact with.
-	 * @link StarkBackend
+	 * Map containing the different {@link StarkBackend} objects that the application will interact with.
 	 */
 	backends: Map<string, StarkBackend>;
 
 	/**
-	 * Get a back-end by name
+	 * Get a {@link StarkBackend} by name
 	 *
-	 * @link StarkBackend
 	 * @param name - Name of the back-end object to get
-	 * @returns The requested backend object
+	 * @returns The requested `StarkBackend` object
 	 */
 	getBackend(name: string): StarkBackend;
 
 	/**
-	 * Add a back-end
+	 * Add a {@link StarkBackend}
 	 *
-	 * @link StarkBackend
-	 * @param backend - Back-end object to add
+	 * @param backend - `StarkBackend` object to add
 	 */
 	addBackend(backend: StarkBackend): void;
 
 	/**
-	 * Define all back-ends
+	 * Define all {@link StarkBackend} objects
 	 *
-	 * @link StarkBackend
-	 * @param backends - Array of back-end objects to add
+	 * @param backends - Array of `StarkBackend` objects to add
 	 */
 	setBackends(backends: StarkBackend[]): void;
 
-	/***
-	 * Get all currently defined back-end objects
+	/**
+	 * Get all currently defined {@link StarkBackend} objects
 	 *
-	 * @link StarkBackend
-	 * @returns A Map containing the different back-end objects
+	 * @returns A Map containing the different `StarkBackend` objects
 	 */
 	getBackends(): Map<string, StarkBackend>;
 }

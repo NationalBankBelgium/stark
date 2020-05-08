@@ -5,8 +5,7 @@ import { StarkHttpStatusCodes } from "../../enumerators";
  */
 export interface StarkHttpResponse {
 	/**
-	 * The corresponding status code of the request matching one of the StarkHttpStatusCodes.
-	 * @link StarkHttpStatusCodes
+	 * The corresponding status code of the request matching one of the {@link StarkHttpStatusCodes}.
 	 */
 	starkHttpStatusCode: StarkHttpStatusCodes;
 	/**

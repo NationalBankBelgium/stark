@@ -4,37 +4,29 @@ import { StarkSessionActions } from "../actions";
 import { sessionReducer } from "./session.reducer";
 
 /**
- * We define part of the state assigned to the session module
+ * Defines the part of the state assigned to the {@link StarkSessionModule}
  */
 export interface StarkSessionState {
 	/**
-	 * The session property
-	 * @link StarkSession
+	 * State corresponding to the {@link StarkSessionModule}
 	 */
 	session: StarkSession;
 }
 
 /**
- * We assign a reducer to our session property
+ * Reducers assigned to each property of the {@link StarkSessionModule}'s state
  */
 export const starkSessionReducers: ActionReducerMap<StarkSessionState, StarkSessionActions> = {
 	/**
-	 * the reducer is assigned to our property
+	 * Reducer assigned to the state's `session` property
 	 */
 	session: sessionReducer
 };
 
 /**
- * This will create the session feature used by the selector to find the session module in the state
- */
-export const selectStarkSessionFeature: MemoizedSelector<object, StarkSessionState> = createFeatureSelector<StarkSessionState>(
-	"StarkSession"
-);
-
-/**
- * The selector will return the part of the state assigned to the logging when called
+ * NGRX Selector for the {@link StarkSessionModule}'s state
  */
 export const selectStarkSession: MemoizedSelector<object, StarkSession> = createSelector(
-	selectStarkSessionFeature,
+	createFeatureSelector<StarkSessionState>("StarkSession"),
 	(state: StarkSessionState) => state.session
 );
