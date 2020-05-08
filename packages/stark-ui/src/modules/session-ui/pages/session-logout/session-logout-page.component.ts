@@ -3,14 +3,14 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation }
 import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-session-logout-page";
 
 /**
  * Session Logout Page smart component.
  *
- * This page will be shown when the user logs out from the application (i.e. clicking the {@AppLogoComponent} button).
+ * This page will be shown when the user logs out from the application (i.e. clicking the {@link StarkAppLogoComponent} button).
  * In this page, the user has the ability to reload and log in again into the application by clicking the Login button.
  */
 @Component({
@@ -25,7 +25,7 @@ const componentName = "stark-session-logout-page";
 export class StarkSessionLogoutPageComponent implements OnInit {
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param appConfig - The application configuration
 	 */
 	public constructor(

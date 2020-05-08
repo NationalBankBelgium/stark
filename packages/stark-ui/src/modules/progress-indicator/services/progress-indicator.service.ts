@@ -32,7 +32,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 	/**
 	 * Class constructor
 	 * Subscription is made to the progressIndicatorMap, containing the configuration for the progressIndicator
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param store - The store of the application
 	 */
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public store: Store<StarkUIApplicationState>) {

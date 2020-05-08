@@ -41,27 +41,36 @@ export interface StarkTableColumnProperties {
 	headerClassName?: string;
 
 	/**
-	 * Whether the column is filterable or not. Default: true
+	 * Whether the column is filterable or not.
+	 *
+	 * Default: `true`
 	 */
 	isFilterable?: boolean;
 
 	/**
-	 * Whether the column is sortable or not. Default: true
+	 * Whether the column is sortable or not.
+	 *
+	 * Default: `true`
 	 */
 	isSortable?: boolean;
 
 	/**
-	 * Whether the column should initially be shown. Default: true
+	 * Whether the column should initially be shown.
+	 *
+	 * Default: `true`
 	 */
 	isVisible?: boolean;
 
 	/**
-	 * Label to be shown as the column's title. Default: the column's name
+	 * Label to be shown as the column's title.
+	 *
+	 * Default: the column's name
 	 */
 	label?: string;
 
 	/**
 	 * Value to be shown as the column's footer.
+	 *
 	 * Default: if there is no footer defined here and in any other column,
 	 * then it won't be displayed. Otherwise, if at least one of the other columns defines a footer,
 	 * then the footer of this column will be displayed as empty
@@ -82,8 +91,10 @@ export interface StarkTableColumnProperties {
 	onClickCallback?: (value: any, row?: object, columnName?: string) => void;
 
 	/**
+	 * Priority of the column.
+	 *
+	 * Default: `PERSIST`
 	 * @deprecated
-	 * Priority of the column. Default: PERSIST
 	 */
 	priority?: StarkTableColumnPriority;
 }

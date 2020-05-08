@@ -22,18 +22,22 @@ import { StarkPaginateEvent } from "./paginate-event.intf";
 import isEqual from "lodash-es/isEqual";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-pagination";
 
+/**
+ * The available modes for the {@link StarkPaginationComponent}
+ */
 export type StarkPaginationComponentMode = "compact";
 
 // FIXME: refactor the template of this component function to reduce its cyclomatic complexity
 /* tslint:disable:template-cyclomatic-complexity */
 /**
  * Component to display pagination bar to be used with a collection of items.
- * It extends the MatPaginator class from Angular Material so it can be integrated as well with the MatTable.
- * {@link https://material.angular.io/components/paginator/api|MatPaginator}
+ *
+ * It extends the {@link https://v7.material.angular.io/components/paginator/api#MatPaginator|Angular Material's MatPaginator class}
+ * so it can be integrated as well with the {@link https://v7.material.angular.io/components/table/examples|Angular Material's MatTable}.
  */
 @Component({
 	selector: "stark-pagination",
@@ -49,23 +53,24 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	public class: string = componentName;
 
 	/**
-	 * Suffix id given to items per page dropdown
-	 * (items-per-page-<htmlSuffixId>) and pageSelector dropdown (page-selector-<htmlSuffixId>)
-	 * Default: "pagination"
+	 * Suffix id given to "items per page" dropdown (`items-per-page-<htmlSuffixId>`)
+	 * and "page selector" dropdown (`page-selector-<htmlSuffixId>`)
+	 *
+	 * Default: `"pagination"`
 	 */
 	@Input()
 	public htmlSuffixId?: string;
 
 	/**
 	 * Desired layout or flavour:
-	 * - compact: Displayed in a compact mode.
-	 * - default: basic implementation with everything
+	 * - `compact`: Displayed in a compact mode.
+	 * - `default`: basic implementation with multiple buttons to change pages
 	 */
 	@Input()
 	public mode?: StarkPaginationComponentMode;
 
 	/**
-	 * StarkPaginationConfig object containing main information for the pagination.
+	 * Object containing main information for the pagination.
 	 */
 	@Input()
 	public paginationConfig!: StarkPaginationConfig;
@@ -76,6 +81,9 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	@Output()
 	public readonly paginated = new EventEmitter<StarkPaginateEvent>();
 
+	/**
+	 * Page number entered manually by the user via the "enter page" input field
+	 */
 	public get paginationInput(): number {
 		return this._paginationInput;
 	}
@@ -89,11 +97,33 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 		this._paginationInput = newValue;
 	}
 
-	public _paginationInput = 0;
+	/**
+	 * @ignore
+	 */
+	private _paginationInput = 0;
+
+	/**
+	 * Previous page number entered by the user
+	 */
 	public previousPaginationInput = 0;
+
+	/**
+	 * Index corresponding to the previous page
+	 */
 	public previousPageIndex = 0;
+
+	/**
+	 * Page numbers to be displayed by the component when `extended` mode is enabled
+	 */
 	public pageNumbers: ("..." | number)[] = [];
 
+	/**
+	 * Class constructor
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param element - Reference to the DOM element where this component is attached to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param cdRef - Reference to the change detector attached to this component.
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		public element: ElementRef,
@@ -101,7 +131,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 		public cdRef: ChangeDetectorRef
 	) {
 		// we don't use the MatPaginatorIntl service to translate the labels but it is needed for the MatPaginator base class
-		// see https://material.angular.io/components/paginator/api#services
+		// see https://v7.material.angular.io/components/paginator/api#services
 		super(new MatPaginatorIntl(), cdRef);
 	}
 
@@ -172,7 +202,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 		let defaultItemsPerPageIsPresent: StarkPaginationConfig["itemsPerPageIsPresent"];
 
 		if (typeof config.itemsPerPageIsPresent === "undefined") {
-			defaultItemsPerPageIsPresent = this.mode !== "compact"; // true on "default" mode, false on "compact" mode
+			defaultItemsPerPageIsPresent = this.mode !== "compact"; // `true` on "default" mode, `false` on "compact" mode
 		}
 
 		return {
@@ -188,9 +218,10 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	}
 
 	/**
-	 * Set the properties needed for the MatPaginator base class based on the given pagination configuration
-	 * {@link https://material.angular.io/components/paginator/api#MatPaginator|MatPaginator API}
-	 * @param config - The config object which be used to set the MatPaginator properties
+	 * Set the properties needed for the {@link https://v7.material.angular.io/components/paginator/api#MatPaginator|MatPaginator} base class
+	 * based on the given pagination configuration.
+	 *
+	 * @param config - The config object which be used to set the `MatPaginator` properties
 	 */
 	public setMatPaginatorProperties(config: StarkPaginationConfig): void {
 		// The set of provided page size options to display to the user.
@@ -204,7 +235,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	}
 
 	/**
-	 * Check whether the given value is equal to zero (as number 0 or as string "0").
+	 * Check whether the given value is equal to zero (as number `0` or as string `"0"`).
 	 */
 	public isZero(numberToCheck: string | number): boolean {
 		return numberToCheck === 0 || numberToCheck === "0";
@@ -284,7 +315,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	}
 
 	/**
-	 * Get total number of pages available based on itemsPerPage and totalItems.
+	 * Get total number of pages available based on `itemsPerPage` and `totalItems`.
 	 */
 	public getTotalPages(): number {
 		let calculatedTotalPages = 0;
@@ -302,7 +333,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	}
 
 	/**
-	 * Set page to first then call onChangePagination function.
+	 * Set page to first then call `onChangePagination` function.
 	 */
 	public onChangeItemsPerPage(itemsPerPage: number): void {
 		if (this.paginationConfig.itemsPerPage !== itemsPerPage) {
@@ -373,7 +404,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	}
 
 	/**
-	 * Change to the given page if it is different than "...". It calls onChangePagination afterwards.
+	 * Change to the given page if it is different than `"..."`. It calls `onChangePagination` afterwards.
 	 */
 	public goToPage(page: number | "..."): void {
 		if (page !== "...") {
@@ -404,15 +435,15 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	}
 
 	/**
-	 * Whether the component is to be rendered in the "compact" mode
+	 * Whether the component is to be rendered in the `compact` mode
 	 */
 	public isCompactMode(): boolean {
 		return typeof this.mode !== "undefined" && this.mode === "compact";
 	}
 
 	/**
-	 * Emit the PageEvent according to the MatPaginator API
-	 * {@link https://material.angular.io/components/paginator/api#PageEvent|MatPaginator PageEvent}
+	 * Emit the `PageEvent` according to the MatPaginator API.
+	 * See {@link https://v7.material.angular.io/components/paginator/api#PageEvent|MatPaginator PageEvent}
 	 */
 	public emitMatPaginationEvent(): void {
 		const pageEvent: PageEvent = {

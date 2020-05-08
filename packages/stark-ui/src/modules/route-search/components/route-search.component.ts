@@ -18,7 +18,7 @@ import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu/components";
 import sortBy from "lodash-es/sortBy";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-route-search";
 
@@ -64,13 +64,17 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	public menuConfig?: StarkMenuConfig;
 
 	/**
-	 * The direction in which the Route Search field will be displayed. Default: "left"
+	 * The direction in which the Route Search field will be displayed.
+	 *
+	 * Default: `"left"`
 	 */
 	@Input()
 	public direction: StarkRouteSearchDirection = "left";
 
 	/**
-	 * Desired icon of the search button. Default: "magnify"
+	 * Desired icon of the search button.
+	 *
+	 * Default: `"magnify"`
 	 */
 	@Input()
 	public icon: "magnify" | string = "magnify";
@@ -97,14 +101,14 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Class constructor
-	 * @param starkRoutingService - The routing service of the application
-	 * @param logger - The logger of the application
-	 * @param translateService -  The translation service of the application
+	 * @param routingService - The `StarkRoutingService` instance of the application.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param translateService - The `TranslateService` instance of the application.
 	 * @param renderer - Angular Renderer wrapper for DOM manipulations
-	 * @param elementRef- Reference to the DOM element where this directive is applied to
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
-		@Inject(STARK_ROUTING_SERVICE) public starkRoutingService: StarkRoutingService,
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(TranslateService) public translateService: TranslateService,
 		public renderer: Renderer2,
@@ -162,7 +166,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	 * redirect the user to the chosen path
 	 */
 	public redirect(routeEntry: StarkRouteSearchEntry): void {
-		this.starkRoutingService.navigateTo(routeEntry.targetState, routeEntry.targetStateParams).subscribe(
+		this.routingService.navigateTo(routeEntry.targetState, routeEntry.targetStateParams).subscribe(
 			() => {
 				this.hide = true;
 				this.searchField.setValue("");
@@ -220,8 +224,8 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Recursive method to extract routes from a StarkMenuGroup object.
-	 * @param group - the group which entries need to be extracted
-	 * @returns the extracted array of {@link StarkRouteSearchEntry} objects
+	 * @param group - The group which entries need to be extracted
+	 * @returns The extracted array of {@link StarkRouteSearchEntry} objects
 	 */
 	public extractRoutesFromMenuGroup(group: StarkMenuGroup): StarkRouteSearchEntry[] {
 		let routesToDisplay: StarkRouteSearchEntry[] = [];
@@ -247,7 +251,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	 */
 	public constructRouteEntriesFromRouterStates(): StarkRouteSearchEntry[] {
 		const routesToDisplay: StarkRouteSearchEntry[] = [];
-		for (const state of this.starkRoutingService.getStatesConfig()) {
+		for (const state of this.routingService.getStatesConfig()) {
 			const ng2State: Ng2StateDeclaration = state;
 			const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 			if (
@@ -258,7 +262,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 				!ng2State.loadChildren &&
 				!ng2State.name.match(regexInitExitStateName)
 			) {
-				const translationKey: string = this.starkRoutingService.getTranslationKeyFromState(ng2State.name);
+				const translationKey: string = this.routingService.getTranslationKeyFromState(ng2State.name);
 				routesToDisplay.push({ label: translationKey, targetState: ng2State.name });
 			}
 		}
@@ -269,8 +273,8 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Translate the label of all elements in the {@link StarkRouteSearchEntry} object.
 	 * This is useful as the language can change during runtime.
-	 * @param routeEntries - route entries to translate
-	 * @returns the translate route entries
+	 * @param routeEntries - Route entries to translate
+	 * @returns The translate route entries
 	 */
 	public translateRoutesLabels(routeEntries: StarkRouteSearchEntry[]): StarkRouteSearchEntry[] {
 		const routesToDisplay: StarkRouteSearchEntry[] = [];
@@ -291,8 +295,8 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Sort the array of {@link StarkRouteSearchEntry} objects by alphabetical order
-	 * @param routeEntries - the list of entries to sort
-	 * @returns the sorted array of {@link StarkRouteSearchEntry} objects
+	 * @param routeEntries - The list of entries to sort
+	 * @returns The sorted array of {@link StarkRouteSearchEntry} objects
 	 */
 	public sortRoutesLabels(routeEntries: StarkRouteSearchEntry[]): StarkRouteSearchEntry[] {
 		routeEntries = sortBy(routeEntries, ["label"]);
@@ -300,7 +304,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	}
 
 	/**
-	 * Determine the css class to use according to the direction chosen by the user
+	 * Determine the CSS class to use according to the direction chosen by the user
 	 */
 	public getDirection(): string {
 		if (this.direction === "right") {

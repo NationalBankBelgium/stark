@@ -15,7 +15,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 export type StarkAppSidebarLeftMode = "regular" | "menu" | undefined;
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-app-sidebar";
 
@@ -33,9 +33,10 @@ const componentName = "stark-app-sidebar";
 })
 export class StarkAppSidebarComponent extends AbstractStarkUiComponent implements OnDestroy, OnInit {
 	/**
-	 * When on smaller devices ( width < 1280px ) the sidebar is automatically closed after navigating.
-	 * Can be set to false to prevent this behaviour.
-	 * Default: true
+	 * When on smaller devices (`width < 1280px`) the sidebar is automatically closed after navigating.
+	 * Can be set to `false` to prevent this behaviour.
+	 *
+	 * Default: `true`
 	 */
 	@Input()
 	public closeOnNavigate = true;
@@ -112,12 +113,12 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 
 	/**
 	 * Class constructor
-	 * @param logger - The sidebar service of the application
-	 * @param sidebarService - The sidebar service of the application
-	 * @param routingService - The routing service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param sidebarService - The `StarkAppSidebarService` instance of the application
+	 * @param routingService - The `StarkRoutingService` instance of the application.
 	 * @param breakpointObserver - Utility for checking the matching state of @media queries
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

@@ -21,7 +21,7 @@ import { StarkSliderConfig } from "./slider-config.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-slider";
 
@@ -40,7 +40,9 @@ const componentName = "stark-slider";
 })
 export class StarkSliderComponent extends AbstractStarkUiComponent implements AfterViewInit, OnChanges, OnInit {
 	/**
-	 * Whether the slider is disabled. Default: false
+	 * Whether the slider is disabled.
+	 *
+	 * Default: `false`
 	 */
 	@Input()
 	public isDisabled?: boolean;
@@ -82,7 +84,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	public isHorizontal = false;
 
 	/**
-	 * a reference to the noUiSlider component inside the noUiSlider library
+	 * a reference to the `noUiSlider` component
 	 */
 	public slider!: noUiSliderLibrary.noUiSlider;
 
@@ -93,9 +95,9 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

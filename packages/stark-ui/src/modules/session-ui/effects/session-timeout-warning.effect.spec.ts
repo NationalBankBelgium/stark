@@ -63,8 +63,8 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 		});
 	});
 
-	describe("On StarkSessionTimeoutWarning$", () => {
-		it("Should open a dialog when the timeout countdown begins", () => {
+	describe("on StarkSessionTimeoutWarning$", () => {
+		it("should open a dialog when the timeout countdown begins", () => {
 			const afterClosedResult = "keep-logged";
 			const afterClosed$: Subject<string> = new Subject();
 
@@ -103,8 +103,8 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 		});
 	});
 
-	describe("On StarkSessionTimeoutWarningClose$", () => {
-		it("Should close the dialog when the countdown finishes", () => {
+	describe("on StarkSessionTimeoutWarningClose$", () => {
+		it("should close the dialog when the countdown finishes", () => {
 			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
@@ -123,8 +123,8 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 		});
 	});
 
-	describe("On ngrxOnRunEffects", () => {
-		it("Should stop the effects immediately when the option timeoutWarningDialogDisabled is true", () => {
+	describe("on ngrxOnRunEffects", () => {
+		it("should stop the effects immediately when the option timeoutWarningDialogDisabled is true", () => {
 			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 			const actions$: ReplaySubject<any> = new ReplaySubject(1);
@@ -154,7 +154,7 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 			expect(mockObserver.complete).not.toHaveBeenCalled();
 		});
 
-		it("Should run the effects immediately when the option timeoutWarningDialogDisabled is false", () => {
+		it("should run the effects immediately when the option timeoutWarningDialogDisabled is false", () => {
 			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 			const actions$: ReplaySubject<any> = new ReplaySubject(1);
@@ -189,7 +189,7 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 			expect(mockObserver.complete).not.toHaveBeenCalled();
 		});
 
-		it("Should run the effects immediately when the option timeoutWarningDialogDisabled is undefined", () => {
+		it("should run the effects immediately when the option timeoutWarningDialogDisabled is undefined", () => {
 			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
 			const actions$: ReplaySubject<any> = new ReplaySubject(1);

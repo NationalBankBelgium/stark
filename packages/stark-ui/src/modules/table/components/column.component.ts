@@ -110,7 +110,9 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public filterValue?: string;
 
 	/**
-	 * Label to be shown as the column's header. Default: the column's name
+	 * Label to be shown as the column's header.
+	 *
+	 * Default: the column's name
 	 */
 	@Input()
 	public set headerLabel(value: string) {
@@ -152,13 +154,17 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	private _footerValue?: string | number;
 
 	/**
-	 * Whether the column is sortable or not. Default: true
+	 * Whether the column is sortable or not.
+	 *
+	 * Default: `true`
 	 */
 	@Input()
 	public sortable = true;
 
 	/**
-	 * Position where the column filter box should be displayed. Default: "below"
+	 * Position where the column filter box should be displayed.
+	 *
+	 * Default: `"below"`
 	 */
 	@Input()
 	public get filterPosition(): StarkTableColumnFilter["filterPosition"] {
@@ -182,7 +188,9 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public sortPriority = 100;
 
 	/**
-	 * Whether the column is visible or not. Default: true
+	 * Whether the column is visible or not.
+	 *
+	 * Default: `true`
 	 */
 	@Input()
 	public visible = true;
@@ -244,8 +252,8 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Class constructor
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
 		super(renderer, elementRef);

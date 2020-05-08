@@ -6,7 +6,8 @@ import { StarkActionBarConfig } from "../../action-bar/components";
 export interface StarkTableRowActions extends StarkActionBarConfig {
 	/**
 	 * Should the actions always be shown on the right side of the table (sticky)
-	 * Default: false
+	 *
+	 * Default: `false`
 	 */
 	isFixed?: boolean;
 }

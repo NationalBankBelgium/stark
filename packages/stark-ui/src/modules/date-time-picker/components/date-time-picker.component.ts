@@ -53,7 +53,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 export const DEFAULT_TIME_MASK_CONFIG: StarkTimestampMaskConfig = { format: "HH:mm:ss" };
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-date-time-picker";
 
@@ -76,7 +76,7 @@ const componentName = "stark-date-time-picker";
 		},
 		{
 			// This implementation has been made thanks to the official documentation.
-			// See: https://material.angular.io/guide/creating-a-custom-form-field-control
+			// See: https://v7.material.angular.io/guide/creating-a-custom-form-field-control
 			provide: MatFormFieldControl,
 			useExisting: StarkDateTimePickerComponent
 		}
@@ -459,15 +459,15 @@ export class StarkDateTimePickerComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param _fb - The Angular Form builder
 	 * @param _fm - The Angular Material Focus Monitor service
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param matFormField - The parent MatFormField directive surrounding this component
 	 * @param injector - The Injector of the application
 	 * @param cdRef - Reference to the change detector attached to this component
-	 * @param translateService - The Translate Service of the application
+	 * @param translateService - The `TranslateService` instance of the application.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

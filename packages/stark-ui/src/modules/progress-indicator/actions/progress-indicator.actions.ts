@@ -17,14 +17,13 @@ export enum StarkProgressIndicatorActionTypes {
 export class StarkProgressIndicatorRegister implements Action {
 	/**
 	 * The type of action
-	 * @link StarkProgressIndicatorActionTypes
 	 */
 	public readonly type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_REGISTER =
 		StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_REGISTER;
 
 	/**
 	 * Class constructor
-	 * @param progressIndicatorConfig - configuration of the indicator
+	 * @param progressIndicatorConfig - Configuration of the indicator
 	 */
 	public constructor(public progressIndicatorConfig: StarkProgressIndicatorFullConfig) {}
 }
@@ -35,14 +34,13 @@ export class StarkProgressIndicatorRegister implements Action {
 export class StarkProgressIndicatorDeregister implements Action {
 	/**
 	 * The type of action
-	 * @link StarkProgressIndicatorActionTypes
 	 */
 	public readonly type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_DEREGISTER =
 		StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_DEREGISTER;
 
 	/**
 	 * Class constructor
-	 * @param topic - the topic of the indicator
+	 * @param topic - The topic of the indicator
 	 */
 	public constructor(public topic: string) {}
 }
@@ -53,14 +51,13 @@ export class StarkProgressIndicatorDeregister implements Action {
 export class StarkProgressIndicatorHide implements Action {
 	/**
 	 * The type of action
-	 * @link StarkProgressIndicatorActionTypes
 	 */
 	public readonly type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_HIDE =
 		StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_HIDE;
 
 	/**
 	 * Class constructor
-	 * @param topic - the topic of the indicator
+	 * @param topic - The topic of the indicator
 	 */
 	public constructor(public topic: string) {}
 }
@@ -71,14 +68,13 @@ export class StarkProgressIndicatorHide implements Action {
 export class StarkProgressIndicatorShow implements Action {
 	/**
 	 * The type of action
-	 * @link StarkProgressIndicatorActionTypes
 	 */
 	public readonly type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_SHOW =
 		StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_SHOW;
 
 	/**
 	 * Class constructor
-	 * @param topic - the topic of the indicator
+	 * @param topic - The topic of the indicator
 	 */
 	public constructor(public topic: string) {}
 }

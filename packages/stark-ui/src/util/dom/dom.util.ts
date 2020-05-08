@@ -90,8 +90,8 @@ export class StarkDOMUtil {
 
 	/**
 	 * To check if an element has a certain class
-	 * @param element - the element to be checked
-	 * @param classname - the classname being searched
+	 * @param element - The element to be checked
+	 * @param classname - The classname being searched
 	 * @returns True if the element has the requested class
 	 */
 	public static hasClass(element: Element, classname: string): boolean {

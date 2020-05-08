@@ -12,9 +12,10 @@ import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarServiceImpl } from "./service
 export class StarkAppSidebarModule {
 	/**
 	 * Instantiates the services only once since they should be singletons
-	 * so the forRoot() should be called only by the AppModule
-	 * @link https://angular.io/guide/singleton-services#forroot
-	 * @returns a module with providers
+	 * so the `forRoot()` should be called only by the `AppModule`.
+	 *
+	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
+	 * @returns A module with providers
 	 */
 	public static forRoot(): ModuleWithProviders {
 		return {
@@ -25,13 +26,13 @@ export class StarkAppSidebarModule {
 
 	/**
 	 * Prevents this module from being re-imported
-	 * @link https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
-	 * @param parentModule - the parent module
+	 * See {@link https://v7.angular.io/guide/singleton-services#prevent-reimport-of-the-greetingmodule|Angular docs: Prevent reimport of a root module}
+	 * @param parentModule - The parent module
 	 */
 	public constructor(
 		@Optional()
 		@SkipSelf()
-		parentModule: StarkAppSidebarModule
+		parentModule?: StarkAppSidebarModule
 	) {
 		if (parentModule) {
 			throw new Error("StarkAppSidebarModule is already loaded. Import it in the AppModule only");

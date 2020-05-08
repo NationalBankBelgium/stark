@@ -26,7 +26,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 import { StarkMenuGroup } from "./app-menu-group.intf";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-app-menu-item";
 
@@ -97,10 +97,10 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 		}
 
 		if (isActive) {
-			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the css classes
+			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the CSS classes
 			this.activated.emit();
 		} else {
-			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the css classes
+			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the CSS classes
 			this.deactivated.emit();
 		}
 	}
@@ -121,10 +121,10 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param routingService - The router of the application
-	 * @param renderer - The custom render of the component
-	 * @param elementRef - The elementRef of the component
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param routingService - The `StarkRoutingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 * @param cdRef - Reference to the change detector attached to this component.
 	 */
 	public constructor(

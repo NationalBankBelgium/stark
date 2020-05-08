@@ -25,7 +25,7 @@ import {
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-language-selector";
 
@@ -71,11 +71,11 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 	/**
 	 * Class constructor
 	 * @param appMetadata - The Metadata of the application the contains the supportedLanguages
-	 * @param logger - The logger of the application
-	 * @param sessionService - The session service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param sessionService - The `StarkSessionService` instance of the application.
 	 * @param dateAdapter - Needed to change the locale of the DateAdapter
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 * @param cdRef - Reference to the change detector attached to this component.
 	 */
 	public constructor(

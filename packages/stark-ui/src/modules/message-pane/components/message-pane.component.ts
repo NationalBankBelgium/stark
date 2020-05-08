@@ -40,7 +40,7 @@ export type AlignTypes = "left" | "center" | "right";
 const DEFAULT_ALIGN: AlignTypes = "right";
 
 /**
- * The name of the component
+ * @ignore
  */
 const componentName = "stark-message-pane";
 
@@ -61,21 +61,28 @@ const componentName = "stark-message-pane";
 export class StarkMessagePaneComponent extends AbstractStarkUiComponent implements OnInit, OnChanges {
 	/**
 	 * Whether the messages should be cleared on every navigation to another view/page.
-	 * Default: false.
+	 *
+	 * Default: `false`.
 	 */
 	@Input()
 	public clearOnNavigation?: boolean;
 
 	/**
-	 * Alignment to be used: "left", "center" or "right". Default: "right".
+	 * Alignment to be used: `"left"`, `"center"` or `"right"`.
+	 *
+	 * Default: `"right"`.
 	 */
 	@Input()
 	public set align(value: AlignTypes) {
 		this._align = value || DEFAULT_ALIGN;
 	}
-	public get align(): "left" | "center" | "right" {
+	public get align(): AlignTypes {
 		return this._align;
 	}
+
+	/**
+	 * @ignore
+	 */
 	private _align: "left" | "center" | "right" = DEFAULT_ALIGN;
 
 	/**
@@ -140,10 +147,10 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param messagePaneService - The service to display/hide messages in the pane.
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 * @param cdRef - Reference to the change detector attached to this component.
 	 */
 	public constructor(
@@ -180,7 +187,7 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 					this.isVisible = true;
 				}
 			}
-			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the css classes
+			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the CSS classes
 		});
 
 		this.errorMessages$ = appMsgCollection$.pipe(
@@ -214,7 +221,7 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Count the number of messages by type in the collection
-	 * @param messageCollection - the collection to count
+	 * @param messageCollection - The collection to count
 	 */
 	private countMessages(messageCollection: StarkMessageCollection): number {
 		let msgCount = 0;
@@ -236,7 +243,7 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Retrieve the level of the message pane
-	 * @param messageCollection - the collection to analyse
+	 * @param messageCollection - The collection to analyse
 	 */
 	private getMaxLevel(messageCollection: StarkMessageCollection): StarkMessagePaneNavItem {
 		let level: StarkMessagePaneNavItem = "infos";
@@ -322,7 +329,7 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Toggle from one item to another
-	 * @param navItem - the item to navigate to
+	 * @param navItem - The item to navigate to
 	 */
 	public toggleActive(navItem: StarkMessagePaneNavItem): void {
 		if (this.currentNavItem === navItem) {

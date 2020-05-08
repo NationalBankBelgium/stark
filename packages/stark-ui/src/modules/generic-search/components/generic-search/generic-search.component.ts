@@ -34,7 +34,7 @@ import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-co
 import isEqual from "lodash-es/isEqual";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-generic-search";
 
@@ -94,13 +94,14 @@ const formAnimations: AnimationTriggerMetadata = trigger("collapse", [
 /**
  * Component to display a generic search form with an action bar and form buttons for these actions:
  *
- * - New: emits in the newTriggered event emitter
- * - Search: emits in the searchTriggered event emitter
- * - Reset: emits in the resetTriggered event emitter
+ * - **New:** emits in the newTriggered event emitter
+ * - **Search:** emits in the searchTriggered event emitter
+ * - **Reset:** emits in the resetTriggered event emitter
  *
- * **IMPORTANT:** In the HTML, the component defining the search form content should be exported as `searchForm`
- * so that it is accessible from the Stark Generic Search component.
- * See [Angular: Template reference variables](https://angular.io/guide/template-syntax#template-reference-variables--var-)
+ * **IMPORTANT: In the HTML, the component defining the search form content should be exported as `searchForm`
+ * so that it is accessible from the Stark Generic Search component.**
+ *
+ * See [Angular Template Syntax: Template reference variables](https://v7.angular.io/guide/template-syntax#template-reference-variables--var-)
  *
  * @example
  * <stark-generic-search formHtmlId="demo-generic-search-form"
@@ -138,7 +139,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	public formButtonsConfig?: StarkGenericSearchFormButtonsConfig;
 
 	/**
-	 * Whether the search form should be hidden. Default: false
+	 * Whether the search form should be hidden.
+	 *
+	 * Default: `false`
 	 */
 	@Input()
 	public isFormHidden = false;
@@ -151,7 +154,8 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 
 	/**
 	 * Whether the search form should be hidden once the search is triggered.
-	 * Default: false
+	 *
+	 * Default: `false`
 	 */
 	@Input()
 	public hideOnSearch = false;
@@ -186,9 +190,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	/**
 	 * Reference to the child search form component. Such component is looked up by the `searchForm` template reference variable.
 	 *
-	 * Therefore, the child search form component should be exported as `searchForm`.
+	 * **Therefore, the child search form component should be exported as `searchForm`.**
 	 *
-	 * See https://angular.io/guide/template-syntax#template-reference-variables--var- for more info about template reference variables.
+	 * See {@link https://v7.angular.io/guide/template-syntax#template-reference-variables--var-|Angular Template Syntax: Template reference variables} for more info about template reference variables.
 	 */
 	@ContentChild("searchForm")
 	public searchFormComponent!: StarkSearchFormComponent<unknown>;
@@ -221,9 +225,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application.
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,

@@ -85,7 +85,7 @@ describe("MinimapComponent", () => {
 		hostFixture.detectChanges();
 	});
 
-	describe("Configuration", () => {
+	describe("configuration", () => {
 		let menuElement: HTMLElement | null;
 		let menuItemLabels: NodeListOf<HTMLLabelElement>;
 
@@ -168,7 +168,7 @@ describe("MinimapComponent", () => {
 		});
 	});
 
-	describe("Events", () => {
+	describe("events", () => {
 		let menuItemLabels: NodeListOf<HTMLLabelElement>;
 
 		beforeEach(() => {

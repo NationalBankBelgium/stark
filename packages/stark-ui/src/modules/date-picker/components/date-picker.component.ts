@@ -33,22 +33,22 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 import isEqual from "lodash-es/isEqual";
 
 /**
- * Type expected by `dateFilter` @Input.
+ * Type expected by [StarkDatePickerComponent dateFilter]{@link StarkDatePickerComponent#dateFilter} input.
  */
 export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Date) => boolean);
 
 /**
- * Type expected by `maskConfig` @Input.
+ * Type expected by [StarkDatePickerComponent maskConfig]{@link StarkDatePickerComponent#maskConfig} input.
  */
 export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean;
 
 /**
- * Default DateMask configuration
+ * Default date mask configuration used by the {@link StarkDatePickerComponent}
  */
 export const DEFAULT_DATE_MASK_CONFIG: StarkTimestampMaskConfig = { format: "DD/MM/YYYY" };
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-date-picker";
 
@@ -72,7 +72,7 @@ const componentName = "stark-date-picker";
 		},
 		{
 			// This implementation has been made thanks to the official documentation.
-			// See: https://material.angular.io/guide/creating-a-custom-form-field-control
+			// See: https://v7.material.angular.io/guide/creating-a-custom-form-field-control
 			provide: MatFormFieldControl,
 			useExisting: StarkDatePickerComponent
 		}
@@ -136,9 +136,9 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Timestamp Mask Configuration to apply on the date-picker.
-	 * If `true` is passed, the default mask config is applied: {DEFAULT_DATE_MASK_CONFIG|DEFAULT_DATE_MASK_CONFIG}
-	 * If `false` is passed or if `dateMask` is not present, the directive is disabled.
-	 * If a `StarkTimestampMaskConfig` is passed, it is set as the date mask config.
+	 * - If `true` is passed, the default mask config is applied: {@link DEFAULT_DATE_MASK_CONFIG}
+	 * - If `false` is passed or if `dateMask` is not present, the directive is disabled.
+	 * - If a {@link StarkTimestampMaskConfig} is passed, it is set as the date mask config.
 	 */
 	@Input()
 	public dateMask?: StarkDatePickerMaskConfig;
@@ -162,21 +162,21 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 	public min?: Date;
 
 	/**
-	 * The HTML "id" attribute of the date picker's calendar popup.
-	 * This "id" is also used, suffixed with "-input", as the HTML "id" attribute of the date picker's input field.
+	 * The HTML `id` attribute of the date picker's calendar popup.
+	 * This id is also used, suffixed with `"-input"`, as the HTML `id` attribute of the date picker's input field.
 	 */
 	@Input()
 	public pickerId = "";
 
 	/**
-	 * HTML "name" attribute of the element.
+	 * HTML `name` attribute of the element.
 	 */
 	@Input()
 	public pickerName = "";
 
 	/**
-	 * Placeholder to be displayed in the datepicker
-	 * Dynamically translated via the @ngx-translate service if the provided text is defined in the translation keys).
+	 * Placeholder to be displayed in the datepicker.
+	 * This is dynamically translated via the @ngx-translate service if the provided text is defined in the translation keys).
 	 */
 	@Input()
 	public set placeholder(value: string) {
@@ -190,10 +190,15 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 		return this._placeholder;
 	}
 
+	/**
+	 * @ignore
+	 */
 	private _placeholder = "";
 
 	/**
-	 * If the date-picker is required or not. by default, the date-picker is not required
+	 * If the date-picker is required or not.
+	 * 
+	 * Default: `false` (the date-picker is not required)
 	 */
 	@Input()
 	public get required(): boolean {
@@ -353,14 +358,14 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 * @param cdRef - Reference to the change detector attached to this component
 	 * @param dateFormats - Reference to the date formats provided to MAT_DATE_FORMATS
 	 * @param fm - The Focus Monitor Service
 	 * @param injector - The Injector of the application
-	 * @param translateService - The Translate Service of the application
+	 * @param translateService - The `TranslateService` instance of the application.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

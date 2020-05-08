@@ -19,12 +19,14 @@ export abstract class AbstractStarkFormComponent<CriteriaType> {
 
 	/**
 	 * Class constructor
-	 * @param logger - The logging service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 */
 	protected constructor(public logger: StarkLoggingService) {}
 
 	/**
-	 * Set the form's original copy to the object passed as parameter (a deep cloned copy). Default: empty object ({})
+	 * Set the form's original copy to the object passed as parameter (a deep cloned copy).
+	 *
+	 * Default: `{}` (empty object)
 	 * @param originalCopy - The object to be set as the form's original copy
 	 */
 	protected setOriginalCopy(originalCopy: CriteriaType = <any>{}): void {

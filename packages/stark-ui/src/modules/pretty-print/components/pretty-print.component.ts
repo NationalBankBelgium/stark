@@ -24,12 +24,12 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-pretty-print";
 
 /**
- * The prefix used in the PrismJs css classes
+ * The prefix used in the PrismJs CSS classes
  */
 const prismClassPrefix = "language-";
 
@@ -115,9 +115,9 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

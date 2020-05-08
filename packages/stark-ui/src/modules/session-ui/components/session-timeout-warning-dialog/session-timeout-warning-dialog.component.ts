@@ -5,7 +5,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { map, startWith, take, tap } from "rxjs/operators";
 
 /**
- * The name of the component
+ * @ignore
  */
 const componentName = "stark-session-timeout-warning-dialog";
 
@@ -24,6 +24,12 @@ export class StarkSessionTimeoutWarningDialogComponent implements OnInit {
 	 */
 	public countdown$!: Observable<number>;
 
+	/**
+	 * Class constructor
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param dialogRef - The `MatDialogRef` reference to the `StarkSessionTimeoutWarningDialogComponent`.
+	 * @param countdown - Countdown before the session times out
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(MatDialogRef) private dialogRef: MatDialogRef<StarkSessionTimeoutWarningDialogComponent>,

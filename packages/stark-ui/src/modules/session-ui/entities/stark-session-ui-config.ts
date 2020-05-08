@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
 
 /**
- * The InjectionToken version of the config name
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkSessionUiConfig}
  */
 export const STARK_SESSION_UI_CONFIG: InjectionToken<StarkSessionUiConfig> = new InjectionToken<StarkSessionUiConfig>(
 	"StarkSessionUiConfig"

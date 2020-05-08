@@ -4,28 +4,27 @@ import { StarkProgressIndicatorActions } from "../actions";
 import { progressIndicatorReducer } from "./progress-indicator.reducer";
 
 /**
- * We define part of the state assigned to the session module
+ * Defines the part of the state assigned to the {@link StarkProgressIndicatorModule}
  */
 export interface StarkProgressIndicatorState {
 	/**
-	 * The session property
-	 * @link StarkProgressIndicatorConfig
+	 * State corresponding to the {@link StarkProgressIndicatorModule}
 	 */
 	progressIndicator: Map<string, StarkProgressIndicatorFullConfig>;
 }
 
 /**
- * We assign a reducer to our session property
+ * Reducers assigned to the each property of the {@link StarkProgressIndicatorModule}'s state
  */
 export const starkProgressIndicatorReducers: ActionReducerMap<StarkProgressIndicatorState, StarkProgressIndicatorActions> = {
 	/**
-	 * the reducer is assigned to our property
+	 * Reducer assigned to the state's `progressIndicator` property
 	 */
 	progressIndicator: progressIndicatorReducer
 };
 
 /**
- * The selector will return the part of the state assigned to the logging when called
+ * NGRX Selector for the {@link StarkProgressIndicatorModule}'s state
  */
 export const selectStarkProgressIndicator: MemoizedSelector<object, Map<string, StarkProgressIndicatorFullConfig>> = createSelector(
 	createFeatureSelector<StarkProgressIndicatorState>("StarkProgressIndicator"),

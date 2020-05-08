@@ -232,12 +232,12 @@ describe("MessagePaneComponent", () => {
 			hostFixture.detectChanges(); // trigger initial data binding
 		});
 
-		describe("Inputs", () => {
+		describe("inputs", () => {
 			it("should have inputs set", () => {
 				expect(component.clearOnNavigation).toBe(mockClearOnNavigation);
 				expect(component.align).toBe(mockCenterAlign);
 			});
-			it("should have the correct css classes", () => {
+			it("should have the correct CSS classes", () => {
 				const alignClassname: string = starkMessagePaneAlignClassPrefix + mockCenterAlign;
 				expect(debugElementComponent.classes[alignClassname]).toBe(true);
 			});
@@ -399,7 +399,7 @@ describe("MessagePaneComponent", () => {
 			});
 		});
 
-		describe("Collapse, expand and hide the message pane", () => {
+		describe("collapse, expand and hide the message pane", () => {
 			beforeEach(fakeAsync(() => {
 				mockMessagePaneService.clearAll.and.callFake(() => {
 					const emptyMessageCollection: StarkMessageCollection = {

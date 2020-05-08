@@ -4,7 +4,7 @@ import { MaskedInputDirective, TextMaskConfig as Ng2TextMaskConfig } from "angul
 import { StarkTextMaskConfig } from "./text-mask-config.intf";
 
 /**
- * Name of the directive
+ * @ignore
  */
 const directiveName = "[starkTextMask]";
 
@@ -73,7 +73,7 @@ export class StarkTextMaskDirective extends MaskedInputDirective implements OnCh
 
 	/**
 	 * Class constructor
-	 * @param _renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
 	 * @param _compositionMode - Injected token to control if form directives buffer IME input until the "compositionend" event occurs.
 	 */

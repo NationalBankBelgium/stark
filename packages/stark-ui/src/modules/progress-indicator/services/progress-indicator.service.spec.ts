@@ -177,7 +177,7 @@ describe("ProgressIndicatorService", () => {
 		});
 	});
 
-	describe("HIDE", () => {
+	describe("hide", () => {
 		it("should dispatch the HIDE action in case the topic exists and decrease the pendingListenersCount by 1", (done: DoneFn) => {
 			expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(false);
 			progressIndicatorService.register(dummyTopic, dummyType);
@@ -239,7 +239,7 @@ describe("ProgressIndicatorService", () => {
 		});
 	});
 
-	describe("Register after showing/hiding", () => {
+	describe("register after showing/hiding", () => {
 		it("should dispatch the show/hide actions in order", (done: DoneFn) => {
 			progressIndicatorService.show(dummyTopic);
 			progressIndicatorService.hide(dummyTopic);

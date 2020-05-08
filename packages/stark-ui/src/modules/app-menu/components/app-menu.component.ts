@@ -6,7 +6,7 @@ import { StarkMenuConfig } from "./app-menu-config.intf";
 import { StarkMenuGroup } from "./app-menu-group.intf";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-app-menu";
 
@@ -50,10 +50,10 @@ export class StarkAppMenuComponent extends AbstractStarkUiComponent implements O
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param routingService - The router of the application
-	 * @param renderer - The custom render of the component
-	 * @param elementRef - The elementRef of the component
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param routingService - The `StarkRoutingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

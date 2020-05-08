@@ -5,7 +5,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 export type StarkMinimapComponentMode = "compact";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-minimap";
 
@@ -25,7 +25,7 @@ const componentName = "stark-minimap";
 })
 export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	/**
-	 * Array of StarkMinimapItemProperties objects which define the items to display in the minimap.
+	 * Array of {@link StarkMinimapItemProperties} objects which define the items to display in the minimap.
 	 */
 	@Input()
 	public items: StarkMinimapItemProperties[] = [];
@@ -48,6 +48,11 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	@Output()
 	public readonly showHideItem = new EventEmitter<StarkMinimapItemProperties>();
 
+	/**
+	 * Class constructor
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 */
 	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
 		super(renderer, elementRef);
 	}
@@ -55,6 +60,7 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	/**
 	 * Return true/false if the given item is already visible or if the priority (if specified) for such item is not "hidden"
 	 * Otherwise, the item is considered to be hidden by default
+	 * @param item - The item whose visibility will be checked
 	 */
 	public isItemVisible(item: StarkMinimapItemProperties): boolean {
 		return this.visibleItems.indexOf(item.name) > -1;
@@ -62,8 +68,8 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 
 	/**
 	 * Prevents click event from propagating (/closing the menu) and emits an event
-	 * @param event - the event that was triggered by default (and needs to be stopped)
-	 * @param item - the item that was clicked
+	 * @param event - The event that was triggered by default (and needs to be stopped)
+	 * @param item - The item that was clicked
 	 */
 	public handleCheckboxClick(event: Event, item: StarkMinimapItemProperties): void {
 		event.stopPropagation();

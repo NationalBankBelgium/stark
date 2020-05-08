@@ -9,7 +9,7 @@ import { commonUiTranslations } from "./common-translations";
  *
  * See {@link mergeTranslations} docs for more information about how the translations are merged.
  *
- * @param translateService - A reference to the translateService instance
+ * @param translateService - The `TranslateService` instance of the application.
  * @param localesToMerge - A list of StarkLocales that contain the translations for a specific language
  *
  * @example:

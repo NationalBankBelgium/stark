@@ -3,11 +3,11 @@ import { StarkAppSidebarOpenEvent } from "./app-sidebar-open-event.intf";
 import { InjectionToken } from "@angular/core";
 
 /**
- * The name of the service in case an injection is needed
+ * @ignore
  */
 export const starkAppSidebarServiceName = "StarkAppSidebarService";
 /**
- * The InjectionToken version of the service name
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkAppSidebarService}
  */
 export const STARK_APP_SIDEBAR_SERVICE: InjectionToken<StarkAppSidebarService> = new InjectionToken<StarkAppSidebarService>(
 	starkAppSidebarServiceName
@@ -28,32 +28,32 @@ export interface StarkAppSidebarService {
 	openSidebar$: Observable<StarkAppSidebarOpenEvent>;
 
 	/**
-	 * Observable subscribed by components to catch open events
+	 * Observable subscribed by components to catch toggle events
 	 */
 	toggleSidebar$: Observable<StarkAppSidebarOpenEvent>;
 
 	/**
-	 * close all sidebars
+	 * Close all sidebars
 	 */
 	close(): void;
 
 	/**
-	 * open sidebar's menu
+	 * Open sidebar's menu
 	 */
 	openMenu(): void;
 
 	/**
-	 * open the left sidebar
+	 * Open the left sidebar
 	 */
 	openLeft(): void;
 
 	/**
-	 * open the right sidebar
+	 * Open the right sidebar
 	 */
 	openRight(): void;
 
 	/**
-	 * toggle sidebar's menu
+	 * Toggle sidebar's menu
 	 */
 	toggleMenu(): void;
 }

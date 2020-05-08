@@ -24,8 +24,9 @@ import { StarkInputMaskDirectivesModule } from "../input-mask-directives";
 	exports: [StarkDatePickerComponent],
 	/**
 	 * Since we import `MomentDateModule`, there is no default value for `MAT_DATE_FORMATS`.
-	 * This provider is really useful to set a default `MAT_DATE_FORMATS` configuration for the date-picker component.
-	 * To be able to use the `StarkDatePicker` component, the developer simply needs to import `StarkDatePickerModule`, nothing else.
+	 * This provider is really useful to set a default `MAT_DATE_FORMATS` configuration for the {@link StarkDatePickerComponent}.
+	 *
+	 * **To be able to use the {@link StarkDatePickerComponent}, the developer simply needs to import {@link StarkDatePickerModule}, nothing else.**
 	 */
 	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]
 })

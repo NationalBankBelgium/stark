@@ -5,7 +5,7 @@ import { createNumberMask } from "text-mask-addons";
 import { StarkNumberMaskConfig } from "./number-mask-config.intf";
 
 /**
- * Name of the directive
+ * @ignore
  */
 const directiveName = "[starkNumberMask]";
 
@@ -80,7 +80,7 @@ export class StarkNumberMaskDirective extends MaskedInputDirective implements On
 
 	/**
 	 * Class constructor
-	 * @param _renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
 	 * @param _compositionMode - Injected token to control if form directives buffer IME input until the "compositionend" event occurs.
 	 */

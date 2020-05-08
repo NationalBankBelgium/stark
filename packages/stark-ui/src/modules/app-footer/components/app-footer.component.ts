@@ -3,7 +3,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-app-footer";
 
@@ -41,8 +41,8 @@ export class StarkAppFooterComponent implements OnInit {
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param $translate - The translation service
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param $translate - The `TranslateService` instance of the application.
 	 */
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public $translate: TranslateService) {
 		// empty constructor

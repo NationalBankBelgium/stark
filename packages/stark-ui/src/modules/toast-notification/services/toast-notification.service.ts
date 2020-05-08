@@ -18,7 +18,6 @@ import { StarkToastMessage, StarkToastNotificationComponent } from "../component
 
 /**
  * @ignore
- * Service to display different types of messages in a toast (info, warning or error).
  */
 @Injectable()
 export class StarkToastNotificationServiceImpl implements StarkToastNotificationService {
@@ -40,7 +39,7 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 	/**
 	 * Class constructor
 	 * @param snackBar - Tha snackBar used to display the toast
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param ref - The angular application reference running on the page
 	 * @param defaultToastNotificationOption - The default toast notification option
 	 */

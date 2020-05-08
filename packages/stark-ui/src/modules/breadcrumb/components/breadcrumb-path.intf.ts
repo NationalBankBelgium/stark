@@ -1,5 +1,5 @@
 /**
- * Interface that will define a path used in the breadcrumb component
+ * Interface that will define a path used in the {@link StarkBreadcrumbComponent}
  */
 export interface StarkBreadcrumbPath {
 	/**

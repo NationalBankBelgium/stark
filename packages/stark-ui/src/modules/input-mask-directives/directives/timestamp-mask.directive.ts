@@ -6,7 +6,7 @@ import { StarkTimestampMaskConfig } from "./timestamp-mask-config.intf";
 import { createTimestampPipe } from "./timestamp-pipe.fn";
 
 /**
- * Name of the directive
+ * @ignore
  */
 const directiveName = "[starkTimestampMask]";
 
@@ -77,7 +77,7 @@ export class StarkTimestampMaskDirective extends MaskedInputDirective implements
 
 	/**
 	 * Class constructor
-	 * @param _renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
 	 * @param _compositionMode - Injected token to control if form directives buffer IME input until the "compositionend" event occurs.
 	 */

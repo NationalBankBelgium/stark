@@ -14,7 +14,7 @@ import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
 
 // Definitions
 /**
- * Defines the breakpoint set by the app-sidebar component.
+ * Defines the breakpoint set by the {@link StarkAppSidebarComponent}.
  */
 const BREAKPOINT_STRING = "(min-width: 1280px)";
 let _fakeBreakPointObservable: Subject<BreakpointState>;
@@ -28,7 +28,7 @@ function simulateBreakPointStateChange(breakPointState: BreakpointState): void {
 }
 
 /**
- * Placeholder for function set by the app-sidebar component through `mockStarkRoutingService.addTransitionHook` function.
+ * Placeholder for function set by the {@link StarkAppSidebarComponent} through `mockStarkRoutingService.addTransitionHook` function.
  * Use this to trigger the flow following a navigation.
  */
 let mockNavigationTrigger: () => void;
@@ -87,11 +87,11 @@ describe("AppSidebarComponent", () => {
 		fixture.detectChanges();
 	});
 
-	describe("App sidebar events handling", sidebarEventsHandlingTests);
+	describe("sidebar events handling", sidebarEventsHandlingTests);
 
-	describe("Screen size change handler", screenSizeChangeHandlingTests);
+	describe("screen size change handler", screenSizeChangeHandlingTests);
 
-	describe("Navigation handler", navigationHandlingTests);
+	describe("navigation handler", navigationHandlingTests);
 });
 
 function sidebarEventsHandlingTests(): void {
@@ -192,7 +192,7 @@ function sidebarEventsHandlingTests(): void {
 }
 
 function screenSizeChangeHandlingTests(): void {
-	describe("From large desktop screen to smaller", () => {
+	describe("from large desktop screen to smaller", () => {
 		const state: BreakpointState = {
 			matches: false,
 			breakpoints: {}
@@ -227,7 +227,7 @@ function screenSizeChangeHandlingTests(): void {
 		});
 	});
 
-	describe("From smaller screen to large desktop", () => {
+	describe("from smaller screen to large desktop", () => {
 		const state: BreakpointState = {
 			matches: true,
 			breakpoints: {}
@@ -261,7 +261,7 @@ function screenSizeChangeHandlingTests(): void {
 }
 
 function navigationHandlingTests(): void {
-	describe("Behaviour when automatic closing is enabled (/ default behaviour).", () => {
+	describe("behaviour when automatic closing is enabled (/ default behaviour).", () => {
 		beforeEach(() => {
 			mockStarkAppSideBarService.close.calls.reset();
 			fixture.detectChanges();
@@ -289,7 +289,7 @@ function navigationHandlingTests(): void {
 		});
 	});
 
-	describe("Behaviour when automatic closing is disabled", () => {
+	describe("behaviour when automatic closing is disabled", () => {
 		beforeEach(() => {
 			mockStarkAppSideBarService.close.calls.reset();
 			component.closeOnNavigate = false;

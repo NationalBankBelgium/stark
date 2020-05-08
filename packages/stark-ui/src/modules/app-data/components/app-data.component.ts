@@ -3,10 +3,13 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-app-data";
 
+/**
+ * Modes in which the {@link StarkAppDataComponent} can be displayed
+ */
 export type StarkAppDataComponentMode = "dropdown" | "menu";
 
 /**
@@ -27,10 +30,17 @@ export type StarkAppDataComponentMode = "dropdown" | "menu";
 export class StarkAppDataComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
 	 * The mode in which the component should be displayed.
-	 * Default: "dropdown"
+	 *
+	 * Default: `"dropdown"`
 	 */
 	@Input() public mode?: StarkAppDataComponentMode = "dropdown";
 
+	/**
+	 * Class constructor
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		protected renderer: Renderer2,
