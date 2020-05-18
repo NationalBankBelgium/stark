@@ -52,7 +52,7 @@
     "release-it": "^13.6.1",
     "rxjs": "^6.5.5",
     "stream-concat": "^0.3.0",
-    "stylelint": "^13.4.0",
+    "stylelint": "^13.4.1",
     "stylelint-config-prettier": "^8.0.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
