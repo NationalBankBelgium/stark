@@ -7,7 +7,7 @@ import createSpy = jasmine.createSpy;
 /**
  * Mock class of the {@link StarkAppSidebarService} interface.
  */
-export class MockAppSidebarService implements SpyObj<StarkAppSidebarService> {
+export class MockStarkAppSidebarService implements SpyObj<StarkAppSidebarService> {
 	/**
 	 * See [StarkAppSidebarService closeSidebar$]{@link StarkAppSidebarService#closeSidebar$} property
 	 */

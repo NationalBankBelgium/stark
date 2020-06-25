@@ -1,9 +1,9 @@
 # Usage
 
-The mock class `MockAppSidebarService` can be imported as follows:
+The mock class `MockStarkAppSidebarService` can be imported as follows:
 
 ```typescript
-import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
+import { MockStarkAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
 ```
 
 Since the mock class implements the base interface of the service it mocks, you just need to provide the mock in your `TestingModule`:
@@ -14,7 +14,7 @@ TestBed.configureTestingModule({
     declarations: [...],
     providers: [
         ...
-        { provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockAppSidebarService() },
+        { provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockStarkAppSidebarService() },
         ...
     ]
 });
@@ -24,7 +24,7 @@ Then you can just inject the Stark service via the TestBed using its correspondi
 
 ```typescript
 // this will inject the instantiated mock class
-mockAppSidebarService = TestBed.get(STARK_APP_SIDEBAR_SERVICE);
+mockStarkAppSidebarService = TestBed.get(STARK_APP_SIDEBAR_SERVICE);
 ```
 
 In fact, every method of the base interface is simply mocked
@@ -39,13 +39,13 @@ For example:
 
 ```typescript
 // reading a value
-const sidebarOpen$ = mockAppSidebarService.openSidebar$;
+const sidebarOpen$ = mockStarkAppSidebarService.openSidebar$;
 
 // overriding a method with a custom function
-mockAppSidebarService.openMenu.and.callFake(() => {
+mockStarkAppSidebarService.openMenu.and.callFake(() => {
 	// some custom logic
 });
 
 // asserting that a method was indeed called
-expect(mockAppSidebarService.close).toHaveBeenCalledTimes(1);
+expect(mockStarkAppSidebarService.close).toHaveBeenCalledTimes(1);
 ```

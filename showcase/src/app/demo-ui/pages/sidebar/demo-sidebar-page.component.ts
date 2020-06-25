@@ -15,7 +15,7 @@ export class DemoSidebarPageComponent {
 		},
 		{
 			label: "Stark Mock AppSidebar service",
-			url: "https://stark.nbb.be/api-docs/stark-ui/latest/classes/MockAppSidebarService.html"
+			url: "https://stark.nbb.be/api-docs/stark-ui/latest/classes/MockStarkAppSidebarService.html"
 		},
 		{
 			label: "Stark AppSidebar component",

@@ -10,7 +10,7 @@ import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkRoutingTransitionHoo
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppSidebarComponent } from "./app-sidebar.component";
 import { STARK_APP_SIDEBAR_SERVICE } from "../services";
-import { MockAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
+import { MockStarkAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
 
 // Definitions
 /**
@@ -38,14 +38,14 @@ let component: StarkAppSidebarComponent;
 
 // Mocked services
 let mockStarkLoggingService: MockStarkLoggingService;
-let mockStarkAppSideBarService: MockAppSidebarService;
+let mockStarkAppSideBarService: MockStarkAppSidebarService;
 let mockStarkRoutingService: MockStarkRoutingService;
 let mockBreakPointObserver: jasmine.SpyObj<BreakpointObserver>;
 
 describe("AppSidebarComponent", () => {
 	beforeEach(() => {
 		mockStarkLoggingService = new MockStarkLoggingService();
-		mockStarkAppSideBarService = new MockAppSidebarService();
+		mockStarkAppSideBarService = new MockStarkAppSidebarService();
 		mockStarkRoutingService = new MockStarkRoutingService();
 		// add functionality to the `addTransitionHook` Spy
 		mockStarkRoutingService.addTransitionHook.and.callFake(
