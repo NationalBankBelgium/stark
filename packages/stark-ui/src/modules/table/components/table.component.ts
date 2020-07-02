@@ -1,9 +1,12 @@
 import {
 	AfterViewInit,
+	AfterContentInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	ContentChild,
 	ContentChildren,
+	Directive,
 	ElementRef,
 	EventEmitter,
 	Inject,
@@ -15,6 +18,7 @@ import {
 	QueryList,
 	Renderer2,
 	SimpleChanges,
+	TemplateRef,
 	ViewChild,
 	ViewChildren,
 	ViewEncapsulation
@@ -69,6 +73,16 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 	isVisible: true
 };
 
+// TODO: move this directive to a separate file
+@Directive({
+	selector: "[starkTableRowContent]"
+})
+export class StarkTableRowContentDirective {
+	// IMPORTANT: The "projected"" content will be injected in the "template" property of this directive
+	// This is a workaround to be able to get the "projected" content and to add it as a nested "projected" content of the <<stark-table-column>
+	public constructor(public readonly template: TemplateRef<any>) {}
+}
+
 // FIXME: refactor the template of this component function to reduce its cyclomatic complexity
 /* tslint:disable:template-cyclomatic-complexity */
 /**
@@ -85,7 +99,7 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 		class: componentName
 	}
 })
-export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterViewInit, AfterContentInit, OnChanges, OnDestroy {
 	/**
 	 * Array of {@link StarkTableColumnProperties} objects which define the columns of the data table.
 	 */
@@ -397,6 +411,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	@ContentChildren(StarkTableColumnComponent)
 	public contentColumns!: QueryList<StarkTableColumnComponent>;
 
+	@ContentChild(StarkTableRowContentDirective)
+	public customRowContent!: StarkTableRowContentDirective;
+
+	public customRowTemplate?: TemplateRef<any>;
+
 	/**
 	 * Array of StarkTableColumnComponents defined in this table
 	 */
@@ -515,6 +534,16 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		});
 
 		this.cdRef.detectChanges();
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngAfterContentInit(): void {
+		if (this.customRowContent) {
+			this.customRowTemplate = this.customRowContent.template;
+			console.log("--- dummyTemplate", this.customRowTemplate);
+		}
 	}
 
 	/**

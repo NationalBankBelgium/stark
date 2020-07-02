@@ -7,3 +7,4 @@ export * from "./table-with-fixed-header";
 export * from "./table-with-custom-styling";
 export * from "./table-with-fixed-actions";
 export * from "./table-with-footer";
+export * from "./table-with-collapse";
