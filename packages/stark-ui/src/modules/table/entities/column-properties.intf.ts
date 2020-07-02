@@ -16,6 +16,15 @@ export interface StarkTableColumnProperties {
 	cellClassName?: ((value: any, row?: object, columnName?: string) => string) | string;
 
 	/**
+	 * Function that returns class(es) to be set to an specific cell. It can be used to set different classes
+	 * depending on the row, value and or columnName. This function is called with 3 parameters:
+	 * @param value - The value of the cell
+	 * @param row - The row object that contains the cell
+	 * @param columnName - The column that the cell belongs to
+	 */
+	cellClassNameFn?: (value: any, row?: any, columnName?: string) => string;
+
+	/**
 	 * Function that returns a formatted value (string) to be set in the cell. It can be used to set different formats
 	 * depending on the row, value and or columnName. This function is called with 3 parameters:
 	 * @param value - The value of the cell to be formatted

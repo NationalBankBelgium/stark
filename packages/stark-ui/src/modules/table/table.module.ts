@@ -13,7 +13,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
-import { StarkTableColumnComponent, StarkTableComponent } from "./components";
+import { StarkTableColumnComponent, StarkTableComponent, StarkTableRowContentDirective } from "./components";
 import { StarkTableMultisortDialogComponent } from "./components/dialogs/multisort.component";
 import { StarkActionBarModule } from "../action-bar/action-bar.module";
 import { StarkPaginationModule } from "../pagination/pagination.module";
@@ -24,9 +24,9 @@ import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "../../common/translations";
 
 @NgModule({
-	declarations: [StarkTableComponent, StarkTableMultisortDialogComponent, StarkTableColumnComponent],
+	declarations: [StarkTableComponent, StarkTableMultisortDialogComponent, StarkTableColumnComponent, StarkTableRowContentDirective],
 	entryComponents: [StarkTableMultisortDialogComponent],
-	exports: [StarkTableComponent, StarkTableColumnComponent],
+	exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableRowContentDirective],
 	imports: [
 		// Common
 		CommonModule,
