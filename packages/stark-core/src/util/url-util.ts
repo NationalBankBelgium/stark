@@ -35,10 +35,10 @@ export class StarkUrlUtil {
 				const expected: string | undefined = expectedParams.find((findExpected: string) => findExpected === param);
 				if (!expected) {
 					throw new Error(`StarkUrlUtil: Passing a param (${param}) that is not in the url (expected ${expectedParams}} )`);
-				} else {
-					url = url.replace(":" + param, () => params[param]);
-					expectedParams.splice(expectedParams.indexOf(expected), 1);
 				}
+
+				url = url.replace(":" + param, () => params[param]);
+				expectedParams.splice(expectedParams.indexOf(expected), 1);
 			}
 		}
 		if (expectedParams.length > 0) {

@@ -16,7 +16,7 @@ export class StarkFormUtil {
 				// filtering just the FormControl objects of the form
 				const formControl: AbstractControl = formGroup.controls[key];
 				if (StarkFormUtil.isFormControl(formControl)) {
-					this.setFormControlState(formControl, statesToBeSet);
+					StarkFormUtil.setFormControlState(formControl, statesToBeSet);
 				}
 			}
 		}
@@ -96,10 +96,10 @@ export class StarkFormUtil {
 		if (formGroup.invalid) {
 			StarkFormUtil.setFormChildControlsState(formGroup, ["touched"]);
 			return false;
-		} else {
-			StarkFormUtil.setFormChildControlsState(formGroup, ["pristine"]);
-			return true;
 		}
+
+		StarkFormUtil.setFormChildControlsState(formGroup, ["pristine"]);
+		return true;
 	}
 
 	// type guard

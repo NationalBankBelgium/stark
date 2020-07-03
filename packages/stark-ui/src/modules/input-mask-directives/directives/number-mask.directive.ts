@@ -118,10 +118,10 @@ export class StarkNumberMaskDirective extends MaskedInputDirective implements On
 	public normalizeMaskConfig(maskConfig: StarkNumberMaskConfig): Ng2TextMaskConfig {
 		if (typeof maskConfig === "undefined") {
 			return { mask: false }; // remove the mask
-		} else {
-			// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
-			const numberMaskConfig: StarkNumberMaskConfig = { ...this.defaultNumberMaskConfig, ...maskConfig };
-			return { mask: <any>createNumberMask(numberMaskConfig) };
 		}
+
+		// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
+		const numberMaskConfig: StarkNumberMaskConfig = { ...this.defaultNumberMaskConfig, ...maskConfig };
+		return { mask: <any>createNumberMask(numberMaskConfig) };
 	}
 }

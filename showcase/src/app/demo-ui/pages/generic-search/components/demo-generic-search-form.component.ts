@@ -98,7 +98,7 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 	/**
 	 * @ignore
 	 */
-	public trackItemFn(item: string): string {
+	public trackItemFn(_index: number, item: string): string {
 		return item;
 	}
 }

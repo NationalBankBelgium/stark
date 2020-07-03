@@ -218,14 +218,13 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 			// the uuid is added to the pathParams to be replaced in the resourcePath
 			const pathParamsWithUUID: { [param: string]: string } = { ...params.pathParameters, uuid: uuid };
 			return { ...params, pathParameters: pathParamsWithUUID };
-		} else {
-			// the resource uuid value should be defined in case there is a placeholder for it in the resource path, otherwise throw an error
-			if (resourcePathParams.indexOf("uuid") !== -1) {
-				throw new Error("StarkHttpRequestBuilder: resource path has :uuid placeholder but resource uuid value is undefined");
-			} else {
-				return params; // leave it unchanged
-			}
 		}
+
+		// the resource uuid value should be defined in case there is a placeholder for it in the resource path, otherwise throw an error
+		if (resourcePathParams.indexOf("uuid") !== -1) {
+			throw new Error("StarkHttpRequestBuilder: resource path has :uuid placeholder but resource uuid value is undefined");
+		}
+		return params; // leave it unchanged
 	}
 
 	private getCustomType(params?: StarkHttpCreateRequestParams): StarkSerializable | undefined {

@@ -10,7 +10,6 @@ import {
 	StarkResource,
 	StarkSingleItemResponseWrapper
 } from "../entities";
-import { StarkHttpService } from "../services/http.service.intf";
 import { MockStarkLoggingService, MockStarkHttpService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkHttpRequestBuilderImpl } from "../builder";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
@@ -61,8 +60,9 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			);
 
 			expect(repositoryWithDefaultSerializer.serializer).toBeDefined();
-			// @ts-ignore get protected field _type from StarkHttpSerializerImpl
-			expect(repositoryWithDefaultSerializer.serializer._type).toEqual(repositoryWithDefaultSerializer.type);
+			expect((<StarkHttpSerializerImpl<MockResource>>repositoryWithDefaultSerializer.serializer)["_type"]).toEqual(
+				repositoryWithDefaultSerializer.type
+			);
 		});
 	});
 
@@ -300,16 +300,6 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 
 class AbstractHttpRepositoryTestHelper extends AbstractStarkHttpRepository<MockResource> {
 	public serializer!: StarkHttpSerializer<MockResource>;
-
-	public constructor(
-		starkHttpService: StarkHttpService<MockResource>,
-		logger: MockStarkLoggingService,
-		backend: StarkBackend,
-		path: string,
-		serializer?: StarkHttpSerializer<MockResource>
-	) {
-		super(starkHttpService, logger, backend, path, serializer);
-	}
 
 	public get type(): StarkSerializable {
 		return MockResource;

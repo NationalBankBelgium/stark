@@ -96,12 +96,12 @@ export class StarkEmailMaskDirective extends MaskedInputDirective implements OnC
 
 		if (!maskConfig) {
 			return { mask: false }; // remove the mask
-		} else {
-			// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
-			// even though emailMask is passed as a mask, it is actually made of both a mask and a pipe bundled together for convenience
-			// https://github.com/text-mask/text-mask/tree/master/addons
-			const { mask, pipe }: CombinedPipeMask = emailMask;
-			return { mask: <any>mask, pipe: <any>pipe };
 		}
+
+		// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
+		// even though emailMask is passed as a mask, it is actually made of both a mask and a pipe bundled together for convenience
+		// https://github.com/text-mask/text-mask/tree/master/addons
+		const { mask, pipe }: CombinedPipeMask = emailMask;
+		return { mask: <any>mask, pipe: <any>pipe };
 	}
 }

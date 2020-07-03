@@ -158,7 +158,7 @@ export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent
 	 */
 	public sortRules(): void {
 		this.rules.sort((a: StarkSortingRule, b: StarkSortingRule) => a.sortPriority - b.sortPriority);
-		this.isAddDisabled = this.rules.filter((rule: StarkSortingRule) => rule.sortDirection).length === this.rules.length;
+		this.isAddDisabled = this.rules.filter((rule: StarkSortingRule) => !!rule.sortDirection).length === this.rules.length;
 	}
 
 	/**

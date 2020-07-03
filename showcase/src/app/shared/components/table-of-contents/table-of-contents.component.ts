@@ -25,10 +25,6 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	private _destroyed: Subject<any> = new Subject();
 	private _urlFragment = "";
 
-	public constructor() {
-		//
-	}
-
 	public ngOnInit(): void {
 		this.links = this.createLinks();
 

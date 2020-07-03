@@ -10,10 +10,6 @@ import { StarkHttpErrorDetailImpl } from "./http-error-detail.entity";
  */
 @inheritSerialization(StarkHttpErrorBaseImpl)
 export class StarkHttpErrorImpl extends StarkHttpErrorBaseImpl implements StarkHttpError {
-	public constructor(error: Error) {
-		super(error);
-	}
-
 	@autoserializeAs(StarkHttpErrorDetailImpl)
 	public errors!: StarkHttpErrorDetail[];
 }

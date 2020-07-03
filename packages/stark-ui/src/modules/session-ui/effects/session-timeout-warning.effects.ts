@@ -76,12 +76,12 @@ export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {
 					return resolvedEffects$.pipe(takeUntil(of("stop")));
 				})
 			);
-		} else {
-			return this.actions$.pipe(
-				exhaustMap(() => {
-					return resolvedEffects$;
-				})
-			);
 		}
+
+		return this.actions$.pipe(
+			exhaustMap(() => {
+				return resolvedEffects$;
+			})
+		);
 	}
 }

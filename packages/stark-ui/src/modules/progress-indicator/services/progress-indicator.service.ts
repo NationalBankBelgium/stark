@@ -84,9 +84,9 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 			if (this.progressIndicatorMap.has(topic)) {
 				this.store.dispatch(new StarkProgressIndicatorShow(topic));
 				return of(logMessagePrefix + " shown.");
-			} else {
-				return throwError(logMessagePrefix + " not found!");
 			}
+
+			return throwError(logMessagePrefix + " not found!");
 		})
 			.pipe(
 				retryWhen((errors: Observable<any>) => {
@@ -96,9 +96,9 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 							if (retries < maxRetries) {
 								retries++;
 								return timer(interval);
-							} else {
-								return throwError(error);
 							}
+
+							return throwError(error);
 						})
 					);
 				}),
@@ -129,12 +129,12 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 			if (this.progressIndicatorMap.has(topic)) {
 				this.store.dispatch(new StarkProgressIndicatorHide(topic));
 				return of(logMessagePrefix + " hidden.");
-			} else {
-				return throwError(logMessagePrefix + " not found!");
 			}
+
+			return throwError(logMessagePrefix + " not found!");
 		});
 
-		let composedHide$: Observable<string> = hide$;
+		let composedHide$ = hide$;
 
 		// check if the 'hide' needs to wait for the 'show' to finish, otherwise it is executed immediately
 		if (this.topicsShowMap$.has(topic)) {
@@ -156,9 +156,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 	public isVisible(topic: string): Observable<boolean | undefined> {
 		return this.progressIndicatorMap$.pipe(
 			map((progressIndicatorMap: Map<string, StarkProgressIndicatorFullConfig> | undefined) => {
-				const progressIndicator: StarkProgressIndicatorFullConfig | undefined = progressIndicatorMap
-					? progressIndicatorMap.get(topic)
-					: undefined;
+				const progressIndicator = progressIndicatorMap ? progressIndicatorMap.get(topic) : undefined;
 				if (!progressIndicator) {
 					return undefined;
 				}

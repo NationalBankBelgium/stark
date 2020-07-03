@@ -60,6 +60,7 @@
     "test-fast": "node ../stark-testing/node_modules/karma/bin/karma start",
     "test-fast:ci": "node ../stark-testing/node_modules/karma/bin/karma start karma.conf.ci.js",
     "tsc": "node ../../node_modules/typescript/bin/tsc -p ./tsconfig.json",
-    "tslint": "node ../../node_modules/tslint/bin/tslint"
+    "tslint": "node ../../node_modules/tslint/bin/tslint",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json"
   }
 }

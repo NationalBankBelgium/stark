@@ -3,7 +3,7 @@
     "tslint:latest",
     "tslint-sonarts",
     "@nationalbankbelgium/code-style/codelyzer/5.2.x",
-    "@nationalbankbelgium/code-style/tslint/5.10.x",
+    "@nationalbankbelgium/code-style/tslint/6.1.x",
     "tslint-config-prettier"
   ],
   "rules": {
@@ -30,7 +30,8 @@
         }
       }
     ],
-    "use-host-property-decorator": false,
-    "use-injectable-provided-in": false
+    "no-host-metadata-property": false,
+    "use-injectable-provided-in": false,
+    "typedef": [true, "call-signature", "parameter", "arrow-parameter", "property-declaration"]
   }
 }

@@ -93,7 +93,7 @@ export class DemoDateTimePickerPageComponent implements OnDestroy {
 		return errors;
 	}
 
-	public trackItemFn(item: string): string {
+	public trackItemFn(_index: number, item: string): string {
 		return item;
 	}
 }

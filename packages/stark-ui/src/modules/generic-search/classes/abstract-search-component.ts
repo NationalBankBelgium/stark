@@ -59,7 +59,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	 * @param logger - The logging service of the application
 	 * @param progressService - Service that provides an easy way to change the visibility of a progress indicator.
 	 */
-	protected constructor(
+	public constructor(
 		protected genericSearchService: StarkGenericSearchService<SearchResultsType, CriteriaType>,
 		logger: StarkLoggingService,
 		protected progressService: StarkProgressIndicatorService

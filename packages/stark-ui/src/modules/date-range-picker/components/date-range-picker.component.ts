@@ -339,9 +339,9 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	private _requiredValidator: ValidatorFn = (control: AbstractControl) => {
 		if (this.required) {
 			return Validators.required(control);
-		} else {
-			return null;
 		}
+
+		return null;
 	};
 
 	/**

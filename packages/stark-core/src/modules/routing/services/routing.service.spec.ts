@@ -939,9 +939,7 @@ describe("Service: StarkRoutingService", () => {
 					catchError((error: any) => {
 						return throwError(`navigateTo page-02 ${error}`);
 					}),
-					switchMap(() => {
-						return routingService.navigateToPrevious();
-					}),
+					switchMap(() => routingService.navigateToPrevious()),
 					tap((enteredState: StateObject) => {
 						expect(enteredState).toBeDefined();
 						expect(enteredState.name).toBe("page-01-01");
@@ -990,9 +988,7 @@ describe("Service: StarkRoutingService", () => {
 						catchError((error: any) => {
 							return throwError(`navigateTo page-03-01 ${error}`);
 						}),
-						switchMap(() => {
-							return routingService.navigateToPrevious();
-						}),
+						switchMap(() => routingService.navigateToPrevious()),
 						tap((enteredState: StateObject) => {
 							expect(enteredState).toBeDefined();
 							expect(enteredState.name).toBe("homepage");
@@ -1063,7 +1059,7 @@ describe("Service: StarkRoutingService", () => {
 					})
 				)
 				.subscribe(
-					() => (): void => fail("the test should not enter the next block"),
+					() => fail("the test should not enter the next block"),
 					() => done()
 				);
 		});

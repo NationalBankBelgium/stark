@@ -559,12 +559,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		if (currentState.parent) {
 			if (currentState.parent === state) {
 				return true;
-			} else {
-				return this.isParentState(state, currentState.parent);
 			}
-		} else {
-			return false;
+
+			return this.isParentState(state, currentState.parent);
 		}
+
+		return false;
 	}
 
 	private extractResolvablesData(resolvables: Resolvable[]): { [key: string]: any } {

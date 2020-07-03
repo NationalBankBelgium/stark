@@ -423,14 +423,6 @@ function createObservableOf<T>(value: T, teardown: Function): Observable<T> {
 }
 
 class SearchComponentHelper extends AbstractStarkSearchComponent<MockResource, SearchCriteria> {
-	public constructor(
-		_genericSearchService_: StarkGenericSearchService<MockResource, SearchCriteria>,
-		logger: MockStarkLoggingService,
-		progressService: MockStarkProgressIndicatorService
-	) {
-		super(_genericSearchService_, logger, progressService);
-	}
-
 	public enablePreserveLatestResults(value: boolean): void {
 		this.preserveLatestResults = value;
 	}

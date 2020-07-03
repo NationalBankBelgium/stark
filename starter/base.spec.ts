@@ -8,16 +8,13 @@ import "core-js/proposals/reflect-metadata";
 // See https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
 /* tslint:disable:no-unbound-method */
 if (!Element.prototype.matches) {
-	// @ts-ignore
-	Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+	Element.prototype.matches = (<any>Element.prototype).msMatchesSelector || Element.prototype.webkitMatchesSelector;
 }
 /* tslint:enable:no-unbound-method */
 
 // See: https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Polyfill
-// @ts-ignore: Window.NodeList
-if (window.NodeList && !NodeList.prototype.forEach) {
-	// @ts-ignore: forEach mismatching types
-	NodeList.prototype.forEach = Array.prototype.forEach;
+if ((<any>window).NodeList && !NodeList.prototype.forEach) {
+	(<any>NodeList.prototype).forEach = Array.prototype.forEach;
 }
 
 /* tslint:disable:no-import-side-effect */

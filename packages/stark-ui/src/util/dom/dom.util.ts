@@ -14,9 +14,9 @@ export class StarkDOMUtil {
 			return element.parentElement;
 		} else if (element.parentElement && element.parentElement.tagName !== "BODY") {
 			return StarkDOMUtil.searchParentElementByTag(element.parentElement, tagName);
-		} else {
-			return undefined;
 		}
+
+		return undefined;
 	}
 
 	/**
@@ -31,9 +31,9 @@ export class StarkDOMUtil {
 			return element.parentElement;
 		} else if (element.parentElement && element.parentElement.tagName !== "BODY") {
 			return StarkDOMUtil.searchParentElementByClass(element.parentElement, className);
-		} else {
-			return undefined;
 		}
+
+		return undefined;
 	}
 
 	/**
@@ -73,9 +73,9 @@ export class StarkDOMUtil {
 			return element.parentElement;
 		} else if (element.parentElement && element.parentElement.tagName !== "BODY") {
 			return StarkDOMUtil.searchParentElementById(element.parentElement, htmlId);
-		} else {
-			return undefined;
 		}
+
+		return undefined;
 	}
 
 	/**

@@ -202,9 +202,9 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 
 		if (result) {
 			return decodeURIComponent(result[1]);
-		} else {
-			return undefined;
 		}
+
+		return undefined;
 	}
 
 	private getCookieRegExp(cookieName: string): RegExp {
