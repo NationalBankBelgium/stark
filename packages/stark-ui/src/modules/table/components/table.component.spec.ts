@@ -137,6 +137,7 @@ describe("TableComponent", () => {
 	const getColumnSelector = (columnName: string): string => `.stark-table th.mat-column-${columnName} div div`;
 	const columnSelectSelector = "cdk-column-select";
 	const rowSelector = "table tbody tr";
+	const getColumnCellSelector = (columnName: string): string => `table tbody tr td.mat-column-${columnName}`;
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
@@ -1464,7 +1465,7 @@ describe("TableComponent", () => {
 				{ name: "description", cellClassName: "description-body-cell", headerClassName: "description-header-cell" }
 			];
 			hostComponent.dummyData = DUMMY_DATA;
-
+			
 			hostFixture.detectChanges(); // trigger data binding
 			component.ngAfterViewInit();
 		});
@@ -1783,6 +1784,79 @@ describe("TableComponent", () => {
 
 			const actionElement2 = hostFixture.debugElement.query(By.css("stark-action-bar #-action-2"));
 			expect(actionElement2).toBeNull("Section action should not be rendered.");
+		});
+	});
+	
+	describe("table sticky columns", () => {
+		const dummyData: object[] = [
+			{ id: 1, description: "dummy 1", test_one: "test-1", test_two: "test-2", info: "info-1", more_info: "more-info-1" },
+			{ id: 2, description: "dummy 2", test_one: "test-1", test_two: "test-2", info: "info-2", more_info: "more-info-2" },
+			{ id: 3, description: "dummy 3", test_one: "test-1", test_two: "test-2", info: "info-3", more_info: "more-info-3" }
+		];
+		
+		const stickyClass = "mat-table-sticky";
+
+		beforeEach(() => {
+			hostComponent.columnProperties = [
+				{ name: "id", sticky: false },
+				{ name: "description", sticky: true },
+				{ name: "test_one" },
+				{ name: "test_two"},
+				{ name: "info", stickyEnd: false },
+				{ name: "more_info", stickyEnd: true }
+			];
+			hostComponent.dummyData = dummyData;
+
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+		
+		it("should have class mat-table-sticky when sticky is true", () => {
+			const cellElements: NodeListOf<HTMLElement> = hostFixture.nativeElement.querySelectorAll(getColumnCellSelector("description"));
+			expect(cellElements.length).toBe(3);
+			cellElements.forEach((cellElement: HTMLElement) => {
+				expect(cellElement && cellElement.classList).toContain(stickyClass);
+			});
+		});
+
+		it("should have class mat-table-sticky when stickyEnd is true", () => {
+			const cellElements: NodeListOf<HTMLElement> = hostFixture.nativeElement.querySelectorAll(getColumnCellSelector("more_info"));
+			expect(cellElements.length).toBe(3);
+			cellElements.forEach((cellElement: HTMLElement) => {
+				expect(cellElement && cellElement.classList).toContain(stickyClass);
+			});
+		});
+
+		it("should not have class mat-table-sticky when sticky is false", () => {
+			const cellElements: NodeListOf<HTMLElement> = hostFixture.nativeElement.querySelectorAll(getColumnCellSelector("id"));
+			expect(cellElements.length).toBe(3);
+			cellElements.forEach((cellElement: HTMLElement) => {
+				expect(cellElement && cellElement.classList).not.toContain(stickyClass);
+			});
+		});
+
+		it("should not have class mat-table-sticky when stickyEnd is false", () => {
+			const cellElements: NodeListOf<HTMLElement> = hostFixture.nativeElement.querySelectorAll(getColumnCellSelector("info"));
+			expect(cellElements.length).toBe(3);
+			cellElements.forEach((cellElement: HTMLElement) => {
+				expect(cellElement && cellElement.classList).not.toContain(stickyClass);
+			});
+		});
+
+		it("should not have class mat-table-sticky when sticky is not defined", () => {
+			const cellElements: NodeListOf<HTMLElement> = hostFixture.nativeElement.querySelectorAll(getColumnCellSelector("test_one"));
+			expect(cellElements.length).toBe(3);
+			cellElements.forEach((cellElement: HTMLElement) => {
+				expect(cellElement && cellElement.classList).not.toContain(stickyClass);
+			});
+		});
+
+		it("should not have class mat-table-sticky when stickyEnd is not defined", () => {
+			const cellElements: NodeListOf<HTMLElement> = hostFixture.nativeElement.querySelectorAll(getColumnCellSelector("test_two"));
+			expect(cellElements.length).toBe(3);
+			cellElements.forEach((cellElement: HTMLElement) => {
+				expect(cellElement && cellElement.classList).not.toContain(stickyClass);
+			});
 		});
 	});
 });

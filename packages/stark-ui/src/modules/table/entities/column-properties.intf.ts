@@ -86,4 +86,16 @@ export interface StarkTableColumnProperties {
 	 * Priority of the column. Default: PERSIST
 	 */
 	priority?: StarkTableColumnPriority;
+
+	/**
+	 * Whether the column should be fixed to the right side of the table (stickyEnd)
+	 * Default: false
+	 */
+	stickyEnd?: boolean;
+
+	/**
+	 * Whether the column should be fixed to the left side of the table (sticky)
+	 * Default: false
+	 */
+	sticky?: boolean;
 }
