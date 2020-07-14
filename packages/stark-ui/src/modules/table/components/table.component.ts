@@ -50,6 +50,7 @@ import find from "lodash-es/find";
 import findIndex from "lodash-es/findIndex";
 import { trigger, state, style, transition, animate } from "@angular/animations";
 import { StarkTableExpandDetailDirective } from "../directives/table-expand-detail.directive"
+import { StarkTableRowContentDirective } from "../directives/table-row-content.directive";
 
 /**
  * Name of the component
@@ -422,6 +423,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	@ContentChild(StarkTableExpandDetailDirective, { read: TemplateRef })
 	public expandedDetailTemplate!: StarkTableExpandDetailDirective;
+	
+	@ContentChild(StarkTableRowContentDirective, { read: TemplateRef })
+	public customRowTemplate!: StarkTableRowContentDirective;
 
 	/**
 	 * Array of StarkTableColumnComponents defined in this table

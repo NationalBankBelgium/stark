@@ -74,6 +74,7 @@ import {
 	TableWithFixedActionsComponent,
 	TableWithFixedHeaderComponent,
 	TableWithFooterComponent,
+	TableWithCustomCellRenderingComponent,
 	TableWithSelectionComponent,
 	TableWithTranscludedActionBarComponent,
 	TableWithCollapsibleRowsComponent
@@ -149,6 +150,7 @@ import {
 		TableWithTranscludedActionBarComponent,
 		TableWithFixedHeaderComponent,
 		TableWithFooterComponent,
+		TableWithCustomCellRenderingComponent,
 		TableWithCustomStylingComponent,
 		TableWithFixedActionsComponent,
 		DemoToastPageComponent,

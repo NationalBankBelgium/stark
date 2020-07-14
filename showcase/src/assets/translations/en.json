@@ -339,6 +339,7 @@
         "WITH_FOOTER": "Table with footer",
         "WITH_TRANSCLUDED_ACTION_BAR": "Table with transcluded Action bar",
         "WITH_CUSTOM_STYLING": "Table with custom styling",
+        "WITH_CUSTOM_CELL_RENDERING": "Table with custom cell rendering",
         "WITH_FIXED_ACTIONS": "Table with fixed row actions",
         "WITH_COLLAPSIBLE_ROWS": "Table with collapsible rows",
         "TITLE": "Table"
