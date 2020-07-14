@@ -296,23 +296,6 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		return rawValue !== null ? rawValue : undefined;
 	}
 
-	public getCellClasses(column: StarkTableColumnProperties, row: object): string {
-		let className: string = "";
-
-		if (column.cellClassName) {
-			className += column.cellClassName + " ";
-		}
-
-		if (column.cellClassNameFn) {
-			className += column.cellClassNameFn(row[column.name], row, column.name) + " ";
-		}
-
-		className += this.getVisibilityClass(column.name) + " ";
-
-		className += this.getPriorityClass(column);
-
-		return className.trim();
-	}
 	/**
 	 * Called whenever a cell of the column is clicked
 	 * @param $event - The handled event
