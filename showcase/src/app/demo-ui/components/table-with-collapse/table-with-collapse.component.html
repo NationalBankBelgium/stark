@@ -1,0 +1,16 @@
+<stark-table [data]="data" [columnProperties]="columns" [filter]="filter" (rowClicked)="handleRowClicked($event)">
+	<header><h1 class="mb0" translate>SHOWCASE.DEMO.TABLE.WITH_COLLAPSE</h1></header>
+	<ng-container
+		*starkTableRowContent="
+			let implicitContext = implicitContext;
+			let rowData = rowData;
+			let cellRawValue = rawValue;
+			let cellDisplayedValue = displayedValue
+		"
+	>
+		<div [className]="cellRawValue > 1 ? 'example-class' : 'other-class'">
+			<span>{{ cellRawValue }}</span>
+			<button (click)="logData(implicitContext, rowData, cellRawValue, cellDisplayedValue)">log data</button>
+		</div>
+	</ng-container>
+</stark-table>
