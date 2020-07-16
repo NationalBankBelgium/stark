@@ -17,7 +17,9 @@ import {
 	SimpleChanges,
 	ViewChild,
 	ViewChildren,
-	ViewEncapsulation
+	ViewEncapsulation,
+	TemplateRef,
+	ContentChild
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
@@ -46,6 +48,8 @@ import { StarkPaginateEvent, StarkPaginationComponent, StarkPaginationConfig } f
 import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../minimap/components";
 import find from "lodash-es/find";
 import findIndex from "lodash-es/findIndex";
+import { trigger, state, style, transition, animate } from "@angular/animations";
+import { StarkTableExpandDetailDirective } from "../directives/table-expand-detail.directive"
 
 /**
  * Name of the component
@@ -83,7 +87,14 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
-	}
+	},
+	animations: [
+		trigger("detailExpand", [
+			state("collapsed", style({ height: "0px", minHeight: "0", display: "none" })),
+			state("expanded", style({ height: "*" })),
+			transition("expanded <=> collapsed", animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)"))
+		])
+	]
 })
 export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 	/**
@@ -258,6 +269,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public tableRowActions: StarkTableRowActions = { actions: [] };
 
 	/**
+	 * Active row that should be collapsed
+	 */
+	@Input()
+	public expandedRows: object[] = [];
+
+	/**
 	 * @deprecated - use {@link tableRowActions} instead
 	 */
 	@Input()
@@ -271,6 +288,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	@Input()
 	public rowClassNameFn?: (row: object, index: number) => string;
+
+	/**
+	 * Function to see if a row is collapsed
+	 */
+	@Input()
+	public expandedRowFn: (expandedRow: object, row: object) => boolean = (expandedRow: object, row: object) => expandedRow === row;
 
 	/**
 	 * Angular CDK selection model used for the "master" selection of the table
@@ -396,6 +419,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	@ContentChildren(StarkTableColumnComponent)
 	public contentColumns!: QueryList<StarkTableColumnComponent>;
+
+	@ContentChild(StarkTableExpandDetailDirective, { read: TemplateRef })
+	public expandedDetailTemplate!: StarkTableExpandDetailDirective;
 
 	/**
 	 * Array of StarkTableColumnComponents defined in this table
@@ -1082,6 +1108,15 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	/**
+	 * Check if a given row is inside the expandedRow.
+	 * @param row - The data object to check.
+	 * @returns boolean
+	 */
+	public isRowInExpandedRows(row: object): boolean  {
+		return this.expandedRows.some((expandedRow: object) => this.expandedRowFn(expandedRow, row));
+	}
+
+	/**
 	 * Gets the class for a specific row if a rowClassNameFn function has been given as an Input.
 	 * Also checks if the row is selected.
 	 * @param row - The data object passed to the row.
@@ -1095,6 +1130,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		if (this.selection && this.selection.isSelected(row)) {
 			classes.push("selected");
 		}
+
+		if (this.isRowInExpandedRows(row)) {
+			classes.push("expanded");
+		}
+
 		// Run rowClassNameFn
 		if (typeof this.rowClassNameFn === "function") {
 			classes.push(this.rowClassNameFn(row, index));
