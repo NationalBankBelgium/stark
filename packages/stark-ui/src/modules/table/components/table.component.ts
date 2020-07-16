@@ -50,6 +50,8 @@ import { StarkPaginateEvent, StarkPaginationComponent, StarkPaginationConfig } f
 import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../minimap/components";
 import find from "lodash-es/find";
 import findIndex from "lodash-es/findIndex";
+import { trigger, state, style, transition, animate } from "@angular/animations";
+import { StarkTableCollapseDetailDirective } from "../directives/table-collapse-detail.directive";
 
 /**
  * Name of the component
@@ -97,7 +99,14 @@ export class StarkTableRowContentDirective {
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {
 		class: componentName
-	}
+	},
+	animations: [
+		trigger("detailExpand", [
+			state("collapsed", style({ height: "0px", minHeight: "0", display: "none" })),
+			state("expanded", style({ height: "*" })),
+			transition("expanded <=> collapsed", animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)"))
+		])
+	]
 })
 export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterViewInit, AfterContentInit, OnChanges, OnDestroy {
 	/**
@@ -287,6 +296,12 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public rowClassNameFn?: (row: object, index: number) => string;
 
 	/**
+	 * Function to see if a row is collapsed
+	 */
+	@Input()
+	public rowCollapsedFn: (row: object) => boolean = (row: object) => this.collapsedRow === row;
+
+	/**
 	 * Angular CDK selection model used for the "master" selection of the table
 	 */
 	@Input()
@@ -414,12 +429,20 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	@ContentChild(StarkTableRowContentDirective)
 	public customRowContent!: StarkTableRowContentDirective;
 
+	@ContentChild(StarkTableCollapseDetailDirective, { read: TemplateRef })
+	public collapseDetailTempl!: StarkTableCollapseDetailDirective;
+
 	public customRowTemplate?: TemplateRef<any>;
 
 	/**
 	 * Array of StarkTableColumnComponents defined in this table
 	 */
 	public columns: StarkTableColumnComponent[] = [];
+
+	/**
+	 * The row that is currently collapsed
+	 */
+	public collapsedRow?: Object;
 
 	/**
 	 * Array of StarkAction for alt mode
@@ -1124,6 +1147,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		if (this.selection && this.selection.isSelected(row)) {
 			classes.push("selected");
 		}
+
+		if (this.rowCollapsedFn(row)) {
+			classes.push("row-collapsed");
+		}
+
 		// Run rowClassNameFn
 		if (typeof this.rowClassNameFn === "function") {
 			classes.push(this.rowClassNameFn(row, index));
@@ -1148,6 +1176,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		} else {
 			// Do nothing
 		}
+	}
+
+	/**
+	 * Collapse a row
+	 * @param row - Row to collapse
+	 */
+	public expandRow(row: object): void {
+		this.collapsedRow = this.rowCollapsedFn(row) ? undefined : row;
 	}
 
 	/**

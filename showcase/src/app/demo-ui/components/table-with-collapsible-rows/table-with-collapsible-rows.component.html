@@ -1,0 +1,9 @@
+<stark-table [data]="data" [columnProperties]="columns" [filter]="filter" (rowClicked)="handleRowClicked($event)">
+	<header><h1 class="mb0" translate>SHOWCASE.DEMO.TABLE.WITH_COLLAPSIBLE_ROWS</h1></header>
+	<ng-container *starkTableCollapseDetail="let row">
+		<div class="collapse-detail-example">
+			<h3>Row {{ row.id }}</h3>
+			<p>{{ row.description }}</p>
+		</div>
+	</ng-container>
+</stark-table>

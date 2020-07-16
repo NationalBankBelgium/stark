@@ -76,7 +76,8 @@ import {
 	TableWithFooterComponent,
 	TableWithCustomCellclassNameComponent,
 	TableWithSelectionComponent,
-	TableWithTranscludedActionBarComponent
+	TableWithTranscludedActionBarComponent,
+	TableWithCollapsibleRowsComponent
 } from "./components";
 
 @NgModule({
@@ -154,7 +155,8 @@ import {
 		TableWithFixedActionsComponent,
 		DemoToastPageComponent,
 		DemoGenericSearchFormComponent,
-		DemoTransformInputDirectivePageComponent
+		DemoTransformInputDirectivePageComponent,
+		TableWithCollapsibleRowsComponent
 	],
 	exports: [
 		DemoActionBarPageComponent,

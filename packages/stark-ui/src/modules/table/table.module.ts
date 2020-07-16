@@ -22,11 +22,18 @@ import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "../../common/translations";
+import { StarkTableCollapseDetailDirective } from "./directives/table-collapse-detail.directive";
 
 @NgModule({
-	declarations: [StarkTableComponent, StarkTableMultisortDialogComponent, StarkTableColumnComponent, StarkTableRowContentDirective],
+	declarations: [
+		StarkTableComponent,
+		StarkTableMultisortDialogComponent,
+		StarkTableColumnComponent,
+		StarkTableRowContentDirective,
+		StarkTableCollapseDetailDirective
+	],
 	entryComponents: [StarkTableMultisortDialogComponent],
-	exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableRowContentDirective],
+	exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableRowContentDirective, StarkTableCollapseDetailDirective],
 	imports: [
 		// Common
 		CommonModule,

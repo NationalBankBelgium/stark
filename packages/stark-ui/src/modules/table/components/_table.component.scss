@@ -151,6 +151,23 @@
     height: 400px;
     overflow-y: auto;
   }
+
+  tr.collapsed-row {
+    height: 0;
+
+    .mat-column-collapseDetail {
+      padding: 0;
+      border: 0;
+    }
+
+    .collapse-detail-inner {
+      overflow: hidden;
+    }
+
+    &:hover td {
+      background: inherit;
+    }
+  }
 }
 
 .mat-table-filter .mat-menu-content {

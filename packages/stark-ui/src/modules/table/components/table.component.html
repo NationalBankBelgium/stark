@@ -156,6 +156,14 @@
 			</ng-template>
 		</stark-table-column>
 
+		<ng-container matColumnDef="collapseDetail">
+			<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+				<div class="collapse-detail-inner" [@detailExpand]="rowCollapsedFn(element) ? 'expanded' : 'collapsed'">
+					<ng-container *ngTemplateOutlet="collapseDetailTempl; context: { $implicit: element }"></ng-container>
+				</div>
+			</td>
+		</ng-container>
+
 		<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: isFixedHeaderEnabled"></tr>
 
 		<tr
@@ -164,6 +172,10 @@
 			[ngClass]="getRowClasses(row, i)"
 			(click)="onRowClick(row)"
 		></tr>
+
+		<ng-container *ngIf="collapseDetailTempl">
+			<tr mat-row *matRowDef="let row; columns: ['collapseDetail']" class="collapsed-row"></tr>
+		</ng-container>
 
 		<ng-container *ngIf="isFooterEnabled">
 			<tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
