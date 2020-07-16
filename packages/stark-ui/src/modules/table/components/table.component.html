@@ -55,7 +55,6 @@
 		(showHideItem)="toggleColumnVisibility($event)"
 	></stark-minimap>
 </ng-template>
-
 <div class="header">
 	<div class="transcluded">
 		<ng-content select="header"></ng-content>
@@ -80,7 +79,7 @@
 </div>
 
 <div [ngClass]="{ 'table-container': true, 'fixed-header': isFixedHeaderEnabled }">
-	<table #matTable mat-table [dataSource]="dataSource" [ngClass]="{ 'multi-sorting': isMultiSorting }">
+	<table #matTable mat-table [dataSource]="dataSource" multiTemplateDataRows [ngClass]="{ 'multi-sorting': isMultiSorting }">
 		<ng-container matColumnDef="select">
 			<th mat-header-cell *matHeaderCellDef>
 				<mat-checkbox
@@ -129,7 +128,18 @@
 			[headerClassName]="col.headerClassName"
 		>
 			<ng-template let-context>
-				<span>{{ context.displayedValue }}</span>
+				<ng-container
+					*ngTemplateOutlet="
+						customRowTemplate;
+						context: {
+							$implicit: context.rowData,
+							rowData: context.rowData,
+							rawValue: context.rawValue,
+							displayedValue: context.displayedValue
+						}
+					"
+				></ng-container>
+				<span *ngIf="!customRowTemplate">{{ context.displayedValue }}</span>
 			</ng-template>
 		</stark-table-column>
 
