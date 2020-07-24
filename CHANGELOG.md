@@ -1,3 +1,24 @@
+<a name="10.1.0"></a>
+# [10.1.0](https://github.com/nationalbankbelgium/stark/compare/10.0.0...10.1.0) (2020-07-24)
+
+
+### Bug Fixes
+
+* **showcase:** typo noopener in link rel ([da1b365](https://github.com/nationalbankbelgium/stark/commit/da1b365)), closes [#1971](https://github.com/nationalbankbelgium/stark/issues/1971)
+* **stark-ui:** remove all overlays by destroying the Angular CDK OverlayContainer when navigating to an 'exit' state ([8d3dee3](https://github.com/nationalbankbelgium/stark/commit/8d3dee3)), closes [#1570](https://github.com/nationalbankbelgium/stark/issues/1570)
+* **starter:** typo noopener in link rel ([6111f5d](https://github.com/nationalbankbelgium/stark/commit/6111f5d)), closes [#1971](https://github.com/nationalbankbelgium/stark/issues/1971)
+
+
+### Features
+
+* **docs:** include the Stark Core `testing` subpackage and its classes in the API docs and Developer Guide ([5563d2a](https://github.com/nationalbankbelgium/stark/commit/5563d2a)), closes [#1600](https://github.com/nationalbankbelgium/stark/issues/1600)
+* **docs:** include the Stark RBAC `testing` subpackage and its classes in the API docs and Developer Guide ([3b040dc](https://github.com/nationalbankbelgium/stark/commit/3b040dc)), closes [#1600](https://github.com/nationalbankbelgium/stark/issues/1600)
+* **stark-testing:** upgrade `karma-typescript` packages to version 5.0.0. Replace `karma-coverage` and `karma-coverage-istanbul-reporter` by `karma-typescript` reporter. ([9d98e62](https://github.com/nationalbankbelgium/stark/commit/9d98e62))
+* **stark-ui:** add the possibility to custom the rendering of a cell in tables ([0aab82a](https://github.com/nationalbankbelgium/stark/commit/0aab82a))
+* **stark-ui:** added collapsible table rows ([05a2792](https://github.com/nationalbankbelgium/stark/commit/05a2792)), closes [#1637](https://github.com/nationalbankbelgium/stark/issues/1637)
+
+
+
 <a name="10.0.0"></a>
 # [10.0.0](https://github.com/nationalbankbelgium/stark/compare/10.0.0-rc.5...10.0.0) (2020-03-10)
 
