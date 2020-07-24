@@ -85,6 +85,9 @@ update_configs:
       - match:
           dependency_name: "@types/node"
           version_requirement: ">=11"
+      - match:
+          dependency_name: "@mdi/angular-material"
+          version_requirement: ">=5"
     commit_message:
       prefix: "chore"
       include_scope: true
