@@ -23,6 +23,7 @@ import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.componen
 import { StarkTableComponent } from "./table.component";
 import { StarkTableColumnComponent } from "./column.component";
 import { StarkPaginationComponent } from "../../pagination/components";
+import { StarkTableRowContentDirective } from "../directives/table-row-content.directive";
 import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "../entities";
 import find from "lodash-es/find";
 import noop from "lodash-es/noop";
@@ -50,9 +51,32 @@ import createSpy = jasmine.createSpy;
 			[expandedRows]="expandedRows"
 			(rowClicked)="rowClickHandler($event)"
 		>
+		<ng-container *ngIf="customRowTesting">
+			<ng-container
+				[ngSwitch]="true"
+				*starkTableRowContent="let rowData = rowData; let cellRawValue = rawValue; let cellDisplayedValue = displayedValue"
+			>
+				<div class="custom" *ngSwitchCase="rowData.id === 1"
+					><span style="color: blue">{{ cellDisplayedValue }}</span></div
+				>
+				<div class="custom" *ngSwitchCase="rowData.id === 2"
+					><span style="color: red">{{ cellDisplayedValue }}</span></div
+				>
+				<div class="custom" *ngSwitchCase="rowData.id === 3"
+					><i>{{ cellDisplayedValue }}</i></div
+				>
+				<div class="custom" *ngSwitchCase="cellRawValue > 23">
+					<mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
+					{{ cellDisplayedValue }}
+				</div>
+				<div class="custom" *ngSwitchDefault>{{ cellDisplayedValue }}</div>
+			</ng-container>
+		</ng-container>
+		<ng-container *ngIf="expandRowTesting">
 			<ng-container *starkTableExpandDetail="let row">
 				{{ row | json }}
 			</ng-container>
+		</ng-container>
 		</stark-table>
 	`
 })
@@ -76,6 +100,8 @@ class TestHostComponent {
 	public selection?: SelectionModel<object>;
 	public rowClassNameFn?: (row: object, index: number) => string;
 	public rowClickHandler?: (row: object) => void;
+	public customRowTesting?: boolean;
+	public expandRowTesting?: boolean;
 }
 
 /* tslint:disable:no-big-function */
@@ -138,7 +164,8 @@ describe("TableComponent", () => {
 				StarkPaginationComponent,
 				StarkTableComponent,
 				StarkTableColumnComponent,
-				StarkTableMultisortDialogComponent
+				StarkTableMultisortDialogComponent,
+				StarkTableRowContentDirective
 			],
 			providers: [
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
@@ -1479,6 +1506,26 @@ describe("TableComponent", () => {
 		});
 	});
 
+	describe("customCellRendering", () => {
+		beforeEach(() => {
+			hostComponent.customRowTesting = true;
+			hostComponent.columnProperties = [
+				{ name: "id" },
+				{ name: "description", cellClassName: (description: string): string => (description === "dummy 2" ? "danger" : "") }
+			];
+			hostComponent.dummyData = DUMMY_DATA;
+
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+
+		it("cell should render custom content", () => {
+			const tableElement: HTMLElement = hostFixture.nativeElement;
+			const contentCell: HTMLElement | null = tableElement.querySelector(".custom"); // select the class cells
+			expect(contentCell).toBeTruthy();
+		});
+	});
+
 	describe("cellClick", () => {
 		const onClickCallbackSpy = createSpy("onClickCallback");
 
@@ -1643,6 +1690,7 @@ describe("TableComponent", () => {
 	describe("collapsible rows", () => {		
 		const collapsedClass = "expanded";
 		beforeEach(() => {
+			hostComponent.expandRowTesting = true;
 			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
 			hostComponent.dummyData = DUMMY_DATA;
 			hostComponent.rowClickHandler = (row: object) => hostComponent.expandedRows = hostComponent.expandedRows.includes(row) ? [] : [row];

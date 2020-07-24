@@ -129,7 +129,18 @@
 			[headerClassName]="col.headerClassName"
 		>
 			<ng-template let-context>
-				<span>{{ context.displayedValue }}</span>
+				<ng-container
+					*ngTemplateOutlet="
+						customRowTemplate;
+						context: {
+							$implicit: context.rowData,
+							rowData: context.rowData,
+							rawValue: context.rawValue,
+							displayedValue: context.displayedValue
+						}
+					"
+				></ng-container>
+				<span *ngIf="!customRowTemplate">{{ context.displayedValue }}</span>
 			</ng-template>
 		</stark-table-column>
 
