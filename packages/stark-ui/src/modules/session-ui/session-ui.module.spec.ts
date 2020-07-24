@@ -6,7 +6,7 @@ import { UIRouterModule } from "@uirouter/angular";
 import { Store } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { provideMockActions } from "@ngrx/effects/testing";
-import { StateObject, StateService, UIRouter } from "@uirouter/core";
+import { StateObject, StateService, UIRouter, UIRouterGlobals } from "@uirouter/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { catchError, switchMap } from "rxjs/operators";
 import { from, of, throwError } from "rxjs";
@@ -23,6 +23,7 @@ import SpyObj = jasmine.SpyObj;
 
 describe("SessionUiModule", () => {
 	let $state: StateService;
+	let $globals: UIRouterGlobals;
 	let router: UIRouter;
 	let overlayContainer: SpyObj<OverlayContainer>;
 	const homeStateNAme = "homepage";
@@ -71,6 +72,7 @@ describe("SessionUiModule", () => {
 		router = _router;
 		overlayContainer = _overlayContainer;
 		$state = router.stateService;
+		$globals = router.globals;
 
 		overlayContainer.ngOnDestroy.calls.reset();
 	}));
@@ -90,7 +92,7 @@ describe("SessionUiModule", () => {
 							expect(enteredState).toBeDefined();
 							expect(enteredState.name).toBe(homeStateNAme);
 
-							expect($state.$current.name).toBe(enteredState.name);
+							expect($globals.$current.name).toBe(enteredState.name);
 							expect(overlayContainer.ngOnDestroy).not.toHaveBeenCalled();
 
 							return $state.go(starkSessionExpiredStateName);
@@ -104,7 +106,7 @@ describe("SessionUiModule", () => {
 							expect(enteredState).toBeDefined();
 							expect(enteredState.name).toBe(starkSessionExpiredStateName);
 
-							expect($state.$current.name).toBe(enteredState.name);
+							expect($globals.$current.name).toBe(enteredState.name);
 							expect(overlayContainer.ngOnDestroy).toHaveBeenCalledTimes(1);
 						},
 						(error: any) => fail(error)
@@ -122,7 +124,7 @@ describe("SessionUiModule", () => {
 							expect(enteredState).toBeDefined();
 							expect(enteredState.name).toBe(homeStateNAme);
 
-							expect($state.$current.name).toBe(enteredState.name);
+							expect($globals.$current.name).toBe(enteredState.name);
 							expect(overlayContainer.ngOnDestroy).not.toHaveBeenCalled();
 
 							return $state.go(starkSessionLogoutStateName);
@@ -136,7 +138,7 @@ describe("SessionUiModule", () => {
 							expect(enteredState).toBeDefined();
 							expect(enteredState.name).toBe(starkSessionLogoutStateName);
 
-							expect($state.$current.name).toBe(enteredState.name);
+							expect($globals.$current.name).toBe(enteredState.name);
 							expect(overlayContainer.ngOnDestroy).toHaveBeenCalledTimes(1);
 						},
 						(error: any) => fail(error)
