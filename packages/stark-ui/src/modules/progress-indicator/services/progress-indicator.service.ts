@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs*/
 import { select, Store } from "@ngrx/store";
 import { defer, Observable, of, Subject, throwError, timer } from "rxjs";
-import { flatMap, map, retryWhen, switchMap, take, tap } from "rxjs/operators";
+import { map, mergeMap, retryWhen, switchMap, take, tap } from "rxjs/operators";
 import { Inject, Injectable } from "@angular/core";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
@@ -92,7 +92,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 				retryWhen((errors: Observable<any>) => {
 					let retries = 0;
 					return errors.pipe(
-						flatMap((error: any) => {
+						mergeMap((error: any) => {
 							if (retries < maxRetries) {
 								retries++;
 								return timer(interval);

@@ -2,7 +2,7 @@
 import { Component, Injector, NgModuleFactoryLoader, NO_ERRORS_SCHEMA, SystemJsNgModuleLoader } from "@angular/core";
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule, TransitionPromise } from "@uirouter/angular";
-import { RawParams, StateDeclaration, StateObject, StateService, TransitionService, UIRouter } from "@uirouter/core";
+import { RawParams, StateDeclaration, StateObject, StateService, TransitionService, UIRouter, UIRouterGlobals } from "@uirouter/core";
 // FIXME Adapt switchMap code --> See: https://github.com/ReactiveX/rxjs/blob/6.x/docs_app/content/guide/v6/migration.md#howto-result-selector-migration
 import { catchError, switchMap, tap } from "rxjs/operators";
 import { throwError } from "rxjs";
@@ -359,7 +359,11 @@ describe("Service: StarkRoutingService", () => {
 		mockInjectorService.get.and.returnValue(mockXSRFService);
 	});
 
-	const starkRoutingServiceFactory = (state: StateService, transitions: TransitionService): StarkRoutingService => {
+	const starkRoutingServiceFactory = (
+		state: StateService,
+		transitions: TransitionService,
+		globals: UIRouterGlobals
+	): StarkRoutingService => {
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.homeStateName = "homepage";
 
@@ -372,7 +376,8 @@ describe("Service: StarkRoutingService", () => {
 			errorHandler,
 			<Store<StarkCoreApplicationState>>(<unknown>mockStore),
 			state,
-			transitions
+			transitions,
+			globals
 		);
 	};
 
@@ -387,7 +392,7 @@ describe("Service: StarkRoutingService", () => {
 				{
 					provide: StarkRoutingServiceImpl,
 					useFactory: starkRoutingServiceFactory,
-					deps: [StateService, TransitionService]
+					deps: [StateService, TransitionService, UIRouterGlobals]
 				},
 				{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader } // needed for ui-router
 			],
@@ -425,6 +430,7 @@ describe("Service: StarkRoutingService", () => {
 						modifiedAppConfig,
 						errorHandler,
 						<Store<StarkCoreApplicationState>>(<unknown>mockStore),
+						<any>{},
 						<any>{},
 						<any>{}
 					)

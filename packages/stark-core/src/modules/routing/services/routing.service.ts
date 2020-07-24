@@ -21,7 +21,8 @@ import {
 	TransitionHookFn,
 	TransitionOptions,
 	TransitionService,
-	TransitionStateHookFn
+	TransitionStateHookFn,
+	UIRouterGlobals
 } from "@uirouter/core";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
@@ -72,7 +73,8 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		private defaultErrorHandler: ErrorHandler,
 		private store: Store<StarkCoreApplicationState>,
 		private $state: StateService,
-		private $transitions: TransitionService
+		private $transitions: TransitionService,
+		private $globals: UIRouterGlobals
 	) {
 		// ensuring that the app config is valid before doing anything
 		StarkConfigurationUtil.validateConfig(this.appConfig, ["routing"], starkRoutingServiceName);
@@ -134,15 +136,15 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	}
 
 	public getCurrentStateName(): string {
-		return <string>this.$state.current.name;
+		return <string>this.$globals.current.name;
 	}
 
 	public getCurrentState(): StateObject {
-		return this.$state.$current;
+		return this.$globals.$current;
 	}
 
 	public getCurrentStateConfig(): StateDeclaration {
-		return this.$state.current;
+		return this.$globals.current;
 	}
 
 	public getStatesConfig(): StateDeclaration[] {
@@ -189,9 +191,9 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		//
 		//   getCurrentStateParams returns homepage with params { RequestID: "Request03" }
 
-		const currentParams: StateParams = this.$state.params;
+		const currentParams: StateParams = this.$globals.params;
 		const currentStateParams: RawParams = {};
-		const stateParams: Param[] = this.$state.$current.parameters({ inherit: includeInherited });
+		const stateParams: Param[] = this.$globals.$current.parameters({ inherit: includeInherited });
 
 		// extract the values from the stateOwnParams (no other way to do this :S)
 		for (const param of stateParams) {
