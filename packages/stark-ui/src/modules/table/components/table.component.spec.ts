@@ -47,8 +47,12 @@ import createSpy = jasmine.createSpy;
 			[selection]="selection"
 			[tableRowActions]="tableRowActions"
 			[rowClassNameFn]="rowClassNameFn"
+			[expandedRows]="expandedRows"
 			(rowClicked)="rowClickHandler($event)"
 		>
+			<ng-container *starkTableExpandDetail="let row">
+				{{ row | json }}
+			</ng-container>
 		</stark-table>
 	`
 })
@@ -59,6 +63,7 @@ class TestHostComponent {
 	public columnProperties?: StarkTableColumnProperties[];
 	public customTableActions?: StarkAction[];
 	public dummyData: object[] = [];
+	public expandedRows: object[] = [];
 	public fixedHeader?: string;
 	public rowsSelectable?: boolean;
 	public multiSelect?: string;
@@ -1632,6 +1637,43 @@ describe("TableComponent", () => {
 
 				expect(handleChange).toHaveBeenCalledTimes(1);
 			});
+		});
+	});
+
+	describe("collapsible rows", () => {		
+		const collapsedClass = "expanded";
+		beforeEach(() => {
+			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+			hostComponent.dummyData = DUMMY_DATA;
+			hostComponent.rowClickHandler = (row: object) => hostComponent.expandedRows = hostComponent.expandedRows.includes(row) ? [] : [row];
+
+			hostFixture.detectChanges();
+			component.ngAfterViewInit();
+		});
+
+		it("should show the expanded row(s) when expandedRows is filled", () => {
+			const rowElement: HTMLElement = hostFixture.nativeElement.querySelector(rowSelector);
+			expect(rowElement.classList).not.toContain(collapsedClass);
+
+			triggerClick(rowElement);
+			hostFixture.detectChanges();
+
+			expect(rowElement.classList).toContain(collapsedClass);
+			expect(component.expandedRows).toEqual([DUMMY_DATA[0]]);
+		});
+
+		it("should hide the expanded row when expandedRows is empty", () => {
+			hostComponent.expandedRows = [DUMMY_DATA[0]];
+			hostFixture.detectChanges();
+
+			const rowElement: HTMLElement = hostFixture.nativeElement.querySelector(rowSelector);
+			expect(rowElement.classList).toContain(collapsedClass);
+
+			triggerClick(rowElement);
+			hostFixture.detectChanges();
+
+			expect(rowElement.classList).not.toContain(collapsedClass);
+			expect(component.expandedRows).toEqual([])
 		});
 	});
 

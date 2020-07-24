@@ -22,11 +22,17 @@ import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "../../common/translations";
+import { StarkTableExpandDetailDirective } from "./directives/table-expand-detail.directive";
 
 @NgModule({
-	declarations: [StarkTableComponent, StarkTableMultisortDialogComponent, StarkTableColumnComponent],
+	declarations: [
+		StarkTableComponent,
+		StarkTableMultisortDialogComponent,
+		StarkTableColumnComponent,
+		StarkTableExpandDetailDirective
+	],
 	entryComponents: [StarkTableMultisortDialogComponent],
-	exports: [StarkTableComponent, StarkTableColumnComponent],
+	exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableExpandDetailDirective],
 	imports: [
 		// Common
 		CommonModule,

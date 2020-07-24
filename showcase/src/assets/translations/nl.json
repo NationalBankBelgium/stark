@@ -340,6 +340,7 @@
         "WITH_TRANSCLUDED_ACTION_BAR": "Tabel met 'transcluded' Action Bar",
         "WITH_CUSTOM_STYLING": "Tabel met aangepaste opmaak",
         "WITH_FIXED_ACTIONS": "Tabel met vaste rijacties",
+        "WITH_COLLAPSIBLE_ROWS": "Tabel met uitklapbare rijen",
         "TITLE": "Table"
       },
       "TOAST": {

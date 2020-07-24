@@ -80,7 +80,7 @@
 </div>
 
 <div [ngClass]="{ 'table-container': true, 'fixed-header': isFixedHeaderEnabled }">
-	<table #matTable mat-table [dataSource]="dataSource" [ngClass]="{ 'multi-sorting': isMultiSorting }">
+	<table #matTable mat-table [dataSource]="dataSource" multiTemplateDataRows [ngClass]="{ 'multi-sorting': isMultiSorting }">
 		<ng-container matColumnDef="select">
 			<th mat-header-cell *matHeaderCellDef>
 				<mat-checkbox
@@ -146,14 +146,26 @@
 			</ng-template>
 		</stark-table-column>
 
+		<ng-container matColumnDef="expandedDetail">
+			<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+				<div class="expanded-detail-inner" [@detailExpand]="isRowInExpandedRows(element) ? 'expanded' : 'collapsed'">
+					<ng-container *ngTemplateOutlet="expandedDetailTemplate; context: { $implicit: element }"></ng-container>
+				</div>
+			</td>
+		</ng-container>
+
 		<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: isFixedHeaderEnabled"></tr>
 
 		<tr
 			mat-row
-			*matRowDef="let row; columns: displayedColumns; let i = index"
+			*matRowDef="let row; columns: displayedColumns; let i = dataIndex"
 			[ngClass]="getRowClasses(row, i)"
 			(click)="onRowClick(row)"
 		></tr>
+
+		<ng-container *ngIf="expandedDetailTemplate">
+			<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="expandable-row"></tr>
+		</ng-container>
 
 		<ng-container *ngIf="isFooterEnabled">
 			<tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>

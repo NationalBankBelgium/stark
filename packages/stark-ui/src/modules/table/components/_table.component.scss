@@ -151,6 +151,23 @@
     height: 400px;
     overflow-y: auto;
   }
+
+  tr.expandable-row {
+    height: 0;
+
+    .mat-column-expandedDetail {
+      padding: 0;
+      border: 0;
+    }
+
+    .expanded-detail-inner {
+      overflow: hidden;
+    }
+
+    &:hover td {
+      background: inherit;
+    }
+  }
 }
 
 .mat-table-filter .mat-menu-content {
