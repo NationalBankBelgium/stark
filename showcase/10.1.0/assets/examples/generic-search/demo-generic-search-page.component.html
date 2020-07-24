@@ -1,0 +1,22 @@
+<mat-slide-toggle color="primary" [checked]="!hideSearch" (change)="hideSearch = !hideSearch">Toggle search</mat-slide-toggle>
+<stark-generic-search
+	formHtmlId="demo-generic-search-form"
+	(searchTriggered)="onSearch($event)"
+	(resetTriggered)="onReset($event)"
+	[isFormHidden]="hideSearch"
+>
+	<demo-generic-search-form
+		#searchForm
+		[searchCriteria]="workingCopy"
+		(workingCopyChanged)="updateWorkingCopy($event)"
+	></demo-generic-search-form>
+</stark-generic-search>
+<stark-table
+	htmlId="demo-generic-search-table"
+	[columnProperties]="columnsProperties"
+	[paginationConfig]="paginationConfig"
+	[data]="searchResults"
+	[starkProgressIndicator]="progressIndicatorConfig"
+>
+	<header><h1 class="mb0">Search Results</h1></header>
+</stark-table>

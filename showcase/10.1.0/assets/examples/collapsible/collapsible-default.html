@@ -1,0 +1,9 @@
+<stark-collapsible htmlId="firstCollapsible" titleLabel="Default icon collapsible title" [(isExpanded)]="collapsed">
+	Any HTML content
+</stark-collapsible>
+
+<button color="primary" class="collapsible-demo-button" (click)="toggleCollapsible()" mat-raised-button>
+	Toggle collapsible
+</button>
+
+<span class="collapsible-demo-status">{{ collapsed ? "Open" : "Closed" }}</span>
