@@ -26,6 +26,7 @@ export const translationsEn: object = {
 		SESSION_TIMEOUT: {
 			SECONDS: " seconds.",
 			STAY_CONNECTED: "Stay connected",
+			DISCONNECT: "Disconnect",
 			TITLE: "Session about to expire",
 			WILL_EXPIRE_IN: "Your session will expire in ",
 			WISH_STAY_CONNECTED: "Do you wish to stay connected?"

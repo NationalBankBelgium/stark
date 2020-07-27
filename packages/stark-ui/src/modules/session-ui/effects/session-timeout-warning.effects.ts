@@ -6,7 +6,12 @@ import {
 	StarkSessionActionTypes,
 	StarkSessionService,
 	StarkSessionTimeoutCountdownFinish,
-	StarkSessionTimeoutCountdownStart
+	StarkSessionTimeoutCountdownStart,
+	StarkRoutingService,
+	starkSessionLogoutStateName,
+	StarkSessionConfig,
+	STARK_SESSION_CONFIG,
+	STARK_ROUTING_SERVICE
 } from "@nationalbankbelgium/stark-core";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
@@ -21,9 +26,13 @@ export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {
 	public constructor(
 		public actions$: Actions,
 		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
+		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		@Optional()
 		@Inject(STARK_SESSION_UI_CONFIG)
 		public starkSessionUiConfig: StarkSessionUiConfig,
+		@Optional()
+		@Inject(STARK_SESSION_CONFIG)
+		public sessionConfig: StarkSessionConfig,
 		@Inject(MatDialog) public dialogService: MatDialog
 	) {}
 
@@ -45,8 +54,24 @@ export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {
 					})
 					.afterClosed()
 					.subscribe((result: string) => {
-						if (result && result === "keep-logged") {
-							this.sessionService.resumeUserActivityTracking();
+						switch (result) {
+							case "keep-session":
+								this.sessionService.resumeUserActivityTracking();
+								break;
+							case "kill-session":
+								this.sessionService.logout();
+								let sessionLogoutStateName: string = starkSessionLogoutStateName;
+								if (
+									this.sessionConfig &&
+									typeof this.sessionConfig.sessionLogoutStateName !== "undefined" &&
+									this.sessionConfig.sessionLogoutStateName !== ""
+								) {
+									sessionLogoutStateName = this.sessionConfig.sessionLogoutStateName;
+								}
+								this.routingService.navigateTo(sessionLogoutStateName);
+								break;
+							default:
+								break;
 						}
 					});
 			})

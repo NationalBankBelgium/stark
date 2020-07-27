@@ -14,9 +14,10 @@ import {
 	SESSION_STATES,
 	STARK_SESSION_SERVICE,
 	starkSessionExpiredStateName,
-	starkSessionLogoutStateName
+	starkSessionLogoutStateName,
+	STARK_ROUTING_SERVICE
 } from "@nationalbankbelgium/stark-core";
-import { MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
+import { MockStarkSessionService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSessionUiModule } from "./session-ui.module";
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
@@ -62,6 +63,7 @@ describe("SessionUiModule", () => {
 					provide: STARK_SESSION_SERVICE,
 					useValue: new MockStarkSessionService()
 				},
+				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
 				{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader } // needed for ui-router
 			]
 		}).compileComponents();

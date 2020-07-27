@@ -12,9 +12,12 @@ import {
 	StarkInitializeSession,
 	StarkSessionService,
 	StarkSessionTimeoutCountdownFinish,
-	StarkSessionTimeoutCountdownStart
+	StarkSessionTimeoutCountdownStart,
+	STARK_ROUTING_SERVICE,
+	STARK_SESSION_CONFIG,
+	StarkSessionConfig
 } from "@nationalbankbelgium/stark-core";
-import { MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
+import { MockStarkSessionService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 import { StarkSessionTimeoutWarningDialogEffects } from "../effects";
 import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities";
@@ -27,7 +30,12 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 	let mockSessionService: StarkSessionService;
 	let mockDialogService: SpyObj<MatDialog>;
 	let mockSessionUiConfig: StarkSessionUiConfig;
+
 	let actions: Observable<any>;
+
+	const mockStarkSessionConfig: Partial<StarkSessionConfig> = {
+		sessionLogoutStateName: "logout-state"
+	};
 
 	beforeEach(async(() => {
 		return TestBed.configureTestingModule({
@@ -42,7 +50,9 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 				},
 				{ provide: StarkSessionTimeoutWarningDialogComponent, useValue: StarkSessionTimeoutWarningDialogComponent },
 				{ provide: STARK_SESSION_SERVICE, useFactory: (): MockStarkSessionService => new MockStarkSessionService() },
-				{ provide: STARK_SESSION_UI_CONFIG, useValue: new StarkSessionUiConfig() }
+				{ provide: STARK_SESSION_UI_CONFIG, useValue: new StarkSessionUiConfig() },
+				{ provide: STARK_SESSION_CONFIG, useValue: mockStarkSessionConfig },
+				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
 			]
 		}).compileComponents();
 	}));
@@ -60,12 +70,16 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 			expect(effectsClass.sessionService).toBeDefined();
 			expect(effectsClass.starkSessionUiConfig).not.toBeNull();
 			expect(effectsClass.starkSessionUiConfig).toBeDefined();
+			expect(effectsClass.sessionConfig).not.toBeNull();
+			expect(effectsClass.sessionConfig).toBeDefined();
+			expect(effectsClass.routingService).not.toBeNull();
+			expect(effectsClass.routingService).toBeDefined();
 		});
 	});
 
 	describe("On StarkSessionTimeoutWarning$", () => {
 		it("Should open a dialog when the timeout countdown begins", () => {
-			const afterClosedResult = "keep-logged";
+			const afterClosedResult = "keep-session";
 			const afterClosed$: Subject<string> = new Subject();
 
 			(<Spy<(...args: any[]) => Partial<MatDialogRef<StarkSessionTimeoutWarningDialogComponent, string>>>>(

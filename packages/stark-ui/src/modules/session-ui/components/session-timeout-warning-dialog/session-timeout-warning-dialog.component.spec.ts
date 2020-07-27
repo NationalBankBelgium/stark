@@ -63,7 +63,17 @@ describe("SessionTimeoutWarningDialogComponent", () => {
 			component.keepSession();
 
 			expect(mockDialogRef.close).toHaveBeenCalledTimes(1);
-			expect(mockDialogRef.close).toHaveBeenCalledWith("keep-logged");
+			expect(mockDialogRef.close).toHaveBeenCalledWith("keep-session");
+		}));
+	});
+
+	describe("killSession", () => {
+		it("should close the windows when the button is clicked", fakeAsync(() => {
+			component.ngOnInit();
+			component.killSession();
+
+			expect(mockDialogRef.close).toHaveBeenCalledTimes(1);
+			expect(mockDialogRef.close).toHaveBeenCalledWith("kill-session");
 		}));
 	});
 });
