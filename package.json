@@ -50,7 +50,7 @@
     "ng-packagr": "^5.3.0",
     "prettier": "^1.16.1",
     "release-it": "^13.6.6",
-    "rxjs": "^6.5.5",
+    "rxjs": "^6.6.2",
     "stream-concat": "^0.3.0",
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",
