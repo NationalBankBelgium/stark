@@ -97,4 +97,34 @@ export interface StarkTableColumnProperties {
 	 * @deprecated
 	 */
 	priority?: StarkTableColumnPriority;
+
+	/**
+	 * Function that returns tooltip to be set to an specific cell. It can be used to set different tooltips
+	 * depending on the row, value and or columnName. This function is called with 3 parameters:
+	 * @param value - The value of the cell
+	 * @param row - The row object that contains the cell
+	 * @param columnName - The column that the cell belongs to
+	 *
+	 * This could also be a static string with tooltip
+	 */
+	cellTooltip?: ((value: any, row?: object, columnName?: string) => string) | string;
+
+	/**
+	 * Position where the tooltip should be displayed.
+	 * Default: "below"
+	 * Possible positions: above, below, left, right, before, after
+	 */
+	cellTooltipPosition?: string;
+
+	/**
+	 * Function that returns class(es) to be set to the tooltip of an specific cell. It can be used to set different classes
+	 * depending on the row, value and or columnName. This function is called with 3 parameters:
+	 * @param value - The value of the cell
+	 * @param row - The row object that contains the cell
+	 * @param columnName - The column that the cell belongs to
+	 *
+	 * This could also be a static string with class(es)
+	 */
+	cellTooltipClassName?: ((value: any, row?: object, columnName?: string) => string) | string;
+
 }
