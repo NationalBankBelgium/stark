@@ -8,6 +8,9 @@
 		<p translate>STARK.SESSION_TIMEOUT.WISH_STAY_CONNECTED</p>
 	</div>
 	<div mat-dialog-actions>
+		<button mat-raised-button (click)="killSession()" aria-label="Close Dialog">
+			<span translate>STARK.SESSION_TIMEOUT.DISCONNECT</span>
+		</button>
 		<button mat-raised-button color="primary" (click)="keepSession()" aria-label="Close Dialog">
 			<span translate>STARK.SESSION_TIMEOUT.STAY_CONNECTED</span>
 		</button>

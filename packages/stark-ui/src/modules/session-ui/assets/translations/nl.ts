@@ -26,6 +26,7 @@ export const translationsNl: object = {
 		SESSION_TIMEOUT: {
 			SECONDS: " seconden vervallen.",
 			STAY_CONNECTED: "Blijf verbonden",
+			DISCONNECT: "Verbreek verbinding",
 			TITLE: "Sessie verlopen",
 			WILL_EXPIRE_IN: "Uw sessie zal binnen ",
 			WISH_STAY_CONNECTED: "Wilt u verbonden blijven?"
