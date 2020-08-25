@@ -27,7 +27,7 @@
     "@types/webpack": "^4.4.24",
     "babel-loader": "^8.0.5",
     "base-href-webpack-plugin": "^2.0.0",
-    "codelyzer": "^5.0.0",
+    "codelyzer": "^6.0.0",
     "ejs-loader": "^0.3.1",
     "html-elements-webpack-plugin": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
