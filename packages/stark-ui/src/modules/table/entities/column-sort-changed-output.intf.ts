@@ -10,7 +10,9 @@ export interface StarkColumnSortChangedOutput {
 	name: string;
 
 	/**
-	 * Whether the column is sortable or not. Default: true
+	 * Whether the column is sortable or not.
+	 *
+	 * Default: `true`
 	 */
 	sortable: boolean;
 

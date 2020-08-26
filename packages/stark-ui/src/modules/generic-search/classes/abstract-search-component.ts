@@ -56,7 +56,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	/**
 	 * Class constructor
 	 * @param genericSearchService - Service implementing the StarkGenericSearchService interface providing all the necessary methods to search items.
-	 * @param logger - The logging service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param progressService - Service that provides an easy way to change the visibility of a progress indicator.
 	 */
 	public constructor(

@@ -135,9 +135,9 @@ describe("RouteSearchComponent", () => {
 			expect(hostFixture).toBeDefined();
 			expect(component).toBeDefined();
 
-			expect(component.starkRoutingService).not.toBeNull();
-			expect(component.starkRoutingService).toBeDefined();
-			expect(component.starkRoutingService).toBeDefined();
+			expect(component.routingService).not.toBeNull();
+			expect(component.routingService).toBeDefined();
+			expect(component.routingService).toBeDefined();
 			expect(component.translateService).toBeDefined();
 
 			expect(component.hide).toBe(true);

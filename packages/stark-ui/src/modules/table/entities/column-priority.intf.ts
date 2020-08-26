@@ -1,5 +1,5 @@
 /**
- * Possible priorities of a column in the Stark Table component
+ * Possible priorities of a column in the {@link StarkTableComponent}
  */
 export enum StarkTableColumnPriority {
 	ONE = 1,

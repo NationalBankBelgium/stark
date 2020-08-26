@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation }
 import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, StarkApplicationConfig, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-session-expired-page";
 
@@ -25,7 +25,7 @@ const componentName = "stark-session-expired-page";
 export class StarkSessionExpiredPageComponent implements OnInit {
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param appConfig - The application configuration
 	 */
 	public constructor(

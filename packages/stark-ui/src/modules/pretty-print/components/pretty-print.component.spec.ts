@@ -197,7 +197,7 @@ describe("PrettyPrintComponent", () => {
 		});
 	});
 
-	describe("Formatting", () => {
+	describe("formatting", () => {
 		describe("XML", () => {
 			beforeEach(() => {
 				hostComponent.data = rawXmlData;
@@ -372,7 +372,7 @@ describe("PrettyPrintComponent", () => {
 			});
 		});
 
-		describe("Javascript", () => {
+		describe("JavaScript", () => {
 			beforeEach(() => {
 				hostComponent.data = rawJavascriptData;
 				hostComponent.format = "javascript";
@@ -410,7 +410,7 @@ describe("PrettyPrintComponent", () => {
 			});
 		});
 
-		describe("Typescript", () => {
+		describe("TypeScript", () => {
 			beforeEach(() => {
 				hostComponent.data = rawTypescriptData;
 				hostComponent.format = "typescript";
@@ -448,7 +448,7 @@ describe("PrettyPrintComponent", () => {
 			});
 		});
 
-		describe("Undefined format", () => {
+		describe("undefined format", () => {
 			beforeEach(() => {
 				hostComponent.data = rawTypescriptData;
 				hostComponent.format = <any>undefined;
@@ -472,7 +472,7 @@ describe("PrettyPrintComponent", () => {
 			});
 		});
 
-		describe("Unknown Format string", () => {
+		describe("unknown format string", () => {
 			beforeEach(() => {
 				hostComponent.data = rawTypescriptData;
 				hostComponent.format = "UnknownFormat";
@@ -497,7 +497,7 @@ describe("PrettyPrintComponent", () => {
 		});
 	});
 
-	describe("Highlighting", () => {
+	describe("highlighting", () => {
 		describe("XML", () => {
 			beforeEach(() => {
 				hostComponent.data = rawXmlData;

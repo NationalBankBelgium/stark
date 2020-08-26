@@ -29,7 +29,7 @@ import { TranslateService } from "@ngx-translate/core";
 import isEqual from "lodash-es/isEqual";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-dropdown";
 
@@ -53,7 +53,7 @@ const componentName = "stark-dropdown";
 		},
 		{
 			// This implementation has been made thanks to the official documentation.
-			// See: https://material.angular.io/guide/creating-a-custom-form-field-control
+			// See: https://v7.material.angular.io/guide/creating-a-custom-form-field-control
 			provide: MatFormFieldControl,
 			useExisting: StarkDropdownComponent
 		}
@@ -61,14 +61,26 @@ const componentName = "stark-dropdown";
 })
 export class StarkDropdownComponent extends AbstractStarkUiComponent
 	implements OnInit, OnChanges, OnInit, OnDestroy, ControlValueAccessor, MatFormFieldControl<any | any[]>, Validator {
+	/**
+	 * Variable that will be incremented automatically to serve as unique id for every new instance of this component
+	 */
 	public static nextId = 0;
 
+	/**
+	 * HTML id of this component
+	 */
 	@HostBinding()
 	public id = `stark-dropdown-input-${StarkDropdownComponent.nextId++}`;
 
+	/**
+	 * ARIA `describedBy` attribute to be set to the DOM element where this component is attached to
+	 */
 	@HostBinding("attr.aria-describedby")
 	public describedBy = "";
 
+	/**
+	 * Whether the label should float above the field to let the user type a value
+	 */
 	@HostBinding("class.floating")
 	public get shouldLabelFloat(): boolean {
 		return this.focused || !this.empty;
@@ -253,13 +265,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
-	 * @param fm - The Focus Monitor Service
-	 * @param injector - The Injector of the application
-	 * @param formField - The MatFormField of this component
-	 * @param translateService - The Translate Service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 * @param fm - The Focus Monitor Service.
+	 * @param injector - The Injector of the application.
+	 * @param translateService - The `TranslateService` instance of the application.
+	 * @param formField - The MatFormField of this component (in case the component is used inside a `mat-form-field`).
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -267,8 +279,8 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 		protected elementRef: ElementRef,
 		private fm: FocusMonitor,
 		private injector: Injector,
-		@Optional() private formField: MatFormField,
-		private translateService: TranslateService
+		private translateService: TranslateService,
+		@Optional() private formField?: MatFormField
 	) {
 		super(renderer, elementRef);
 
@@ -413,8 +425,8 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Return the id of the option or the option itself if it is a simple type.
-	 * @param option - the option which id we want to retrieve
-	 * @returns the value to return
+	 * @param option - The option which id we want to retrieve
+	 * @returns The value to return
 	 */
 	public getOptionValue(option: any): any {
 		return this.optionsAreSimpleTypes ? option : option[<string>this.optionIdProperty];
@@ -422,8 +434,8 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 
 	/**
 	 * Return the label of the option or the option itself if it is a simple type.
-	 * @param option - the option which value we want to retrieve
-	 * @returns the value to return
+	 * @param option - The option which value we want to retrieve
+	 * @returns The value to return
 	 */
 	public getOptionLabel(option: any): any {
 		const optionLabel: string = this.optionsAreSimpleTypes ? option : option[<string>this.optionLabelProperty];
@@ -463,7 +475,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	/**
 	 * Registers a function called when the control value changes.
 	 *
-	 * @param fn The callback function
+	 * @param fn - The callback function
 	 */
 	public registerOnChange(fn: (_: any) => void): void {
 		this._onChange = fn;
@@ -472,7 +484,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	/**
 	 * Registers a function called when the control is touched.
 	 *
-	 * @param fn The callback function
+	 * @param fn - The callback function
 	 */
 	public registerOnTouched(fn: () => void): void {
 		this._onTouched = fn;
@@ -481,7 +493,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	/**
 	 * Sets the "disabled" property on the input element.
 	 *
-	 * @param isDisabled The disabled value
+	 * @param isDisabled - The disabled value
 	 */
 	public setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
@@ -491,7 +503,7 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	/**
 	 * Sets the "value" property on the input element.
 	 *
-	 * @param obj The checked value
+	 * @param obj - The checked value
 	 */
 	public writeValue(obj: any): void {
 		this.value = obj;

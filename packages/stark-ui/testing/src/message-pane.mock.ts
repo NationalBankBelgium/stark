@@ -1,39 +1,41 @@
 import { StarkMessagePaneService } from "@nationalbankbelgium/stark-ui";
+import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 
 /**
- * Mock class of the StarkMessagePaneService interface.
- * @link StarkMessagePaneService
+ * Mock class of the {@link StarkMessagePaneService} interface.
  */
 export class MockStarkMessagePaneService implements SpyObj<StarkMessagePaneService> {
 	/**
-	 * Flag to specify whether all messages should be cleared on navigation
+	 * See [StarkMessagePaneService clearOnNavigation]{@link StarkMessagePaneService#clearOnNavigation} property
+	 *
+	 * Default: `false`.
 	 */
 	public clearOnNavigation = false;
 
 	/**
-	 * Add messages to the message pane
+	 * See [StarkMessagePaneService add()]{@link StarkMessagePaneService#add} method
 	 */
-	public add: SpyObj<StarkMessagePaneService>["add"] = createSpy("add");
+	public add: Spy<StarkMessagePaneService["add"]> = createSpy("add");
 
 	/**
-	 * Add a single message to the message pane
+	 * See [StarkMessagePaneService addOne()]{@link StarkMessagePaneService#addOne} method
 	 */
-	public addOne: SpyObj<StarkMessagePaneService>["addOne"] = createSpy("addOne");
+	public addOne: Spy<StarkMessagePaneService["addOne"]> = createSpy("addOne");
 
 	/**
-	 * Get all messages currently displayed in the message pane
+	 * See [StarkMessagePaneService getAll()]{@link StarkMessagePaneService#getAll} method
 	 */
-	public getAll: SpyObj<StarkMessagePaneService>["getAll"] = createSpy("getAll");
+	public getAll: Spy<StarkMessagePaneService["getAll"]> = createSpy("getAll");
 
 	/**
-	 * Remove messages from the message pane
+	 * See [StarkMessagePaneService remove()]{@link StarkMessagePaneService#remove} method
 	 */
-	public remove: SpyObj<StarkMessagePaneService>["remove"] = createSpy("remove");
+	public remove: Spy<StarkMessagePaneService["remove"]> = createSpy("remove");
 
 	/**
-	 * Remove all messages
+	 * See [StarkMessagePaneService clearAll()]{@link StarkMessagePaneService#clearAll} method
 	 */
-	public clearAll: SpyObj<StarkMessagePaneService>["clearAll"] = createSpy("clearAll");
+	public clearAll: Spy<StarkMessagePaneService["clearAll"]> = createSpy("clearAll");
 }

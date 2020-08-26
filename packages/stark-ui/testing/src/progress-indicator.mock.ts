@@ -1,70 +1,34 @@
 import { StarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui";
+import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 
-/* tslint:disable:jsdoc-format */
 /**
- * Mock class of the {@link StarkProgressIndicatorService|StarkProgressIndicatorService}.
- *
- * `IMPORTANT:` This class just provides mocks (jasmine Spies) for all the methods of the actual service.
- * Therefore, it is up to you to define the return values of such spies according to your needs.
- *
- * You can use it in your unit tests by providing it while configuring the testing module in the TestBed. For example:
-```typescript
-import { STARK_PROGRESS_INDICATOR_SERVICE } from "@nationalbankbelgium/stark-ui";
-import { MockStarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui/testing";
-
-describe("Some test", () => {
-
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [...],
-			declarations: [...],
-			providers: [
-				// provide is as a value
-				{ provide: STARK_PROGRESS_INDICATOR_SERVICE, useValue: new MockStarkProgressIndicatorService() },
-				// or as a class
-				{ provide: STARK_PROGRESS_INDICATOR_SERVICE, useClass: MockStarkProgressIndicatorService }
-			]
-		}).compileComponents();
-	}));
-
-});
-```
+ * Mock class of the {@link StarkProgressIndicatorService} interface.
  */
-/* tslint:enable:jsdoc-format */
 export class MockStarkProgressIndicatorService implements SpyObj<StarkProgressIndicatorService> {
 	/**
-	 * registers a new progress indicator in the application state. Each registered progress indicator is identified by a topic,
-	 * a unique identifier associated with it.
-	 * @param topic - The topic of the progress indicator to be registered.
-	 * @param type - Type of progress indicator (i.e. spinner)
+	 * See [StarkProgressIndicatorService register()]{@link StarkProgressIndicatorService#register} method
 	 */
-	public register: SpyObj<StarkProgressIndicatorService>["register"] = createSpy("register");
+	public register: Spy<StarkProgressIndicatorService["register"]> = createSpy("register");
 
 	/**
-	 * Deregister a progress indicator already existing in the application state.
-	 * @param topic - The topic of the progress indicator to be deregistered
+	 * See [StarkProgressIndicatorService deregister()]{@link StarkProgressIndicatorService#deregister} method
 	 */
-	public deregister: SpyObj<StarkProgressIndicatorService>["deregister"] = createSpy("deregister");
+	public deregister: Spy<StarkProgressIndicatorService["deregister"]> = createSpy("deregister");
 
 	/**
-	 * Shows the designated progress indicator
-	 * @param topic - The topic that needs to be shown
+	 * See [StarkProgressIndicatorService show()]{@link StarkProgressIndicatorService#show} method
 	 */
-	public show: SpyObj<StarkProgressIndicatorService>["show"] = createSpy("show");
+	public show: Spy<StarkProgressIndicatorService["show"]> = createSpy("show");
 
 	/**
-	 * Hides the progress indicator.
-	 * @param topic - The topic that needs to be hidden
+	 * See [StarkProgressIndicatorService hide()]{@link StarkProgressIndicatorService#hide} method
 	 */
-	public hide: SpyObj<StarkProgressIndicatorService>["hide"] = createSpy("hide");
+	public hide: Spy<StarkProgressIndicatorService["hide"]> = createSpy("hide");
 
 	/**
-	 * Return the latest status of the progress indicator for the given topic (whether is shown or hidden).
-	 * @param topic - The topic of the progress indicator whose status will be fetched.
-	 * @returns Observable that will emit a boolean value whenever the status of the progress indicator changes: false if it is hidden,
-	 * true if it is shown or undefined in case there is no progress indicator for the given topic.
+	 * See [StarkProgressIndicatorService isVisible()]{@link StarkProgressIndicatorService#isVisible} method
 	 */
-	public isVisible: SpyObj<StarkProgressIndicatorService>["isVisible"] = createSpy("isVisible");
+	public isVisible: Spy<StarkProgressIndicatorService["isVisible"]> = createSpy("isVisible");
 }

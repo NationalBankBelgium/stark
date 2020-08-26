@@ -6,14 +6,14 @@ import { StarkNavigateSuccess, StarkRoutingActionTypes } from "@nationalbankbelg
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService } from "../services";
 
 /**
- * Effects definition for the MessagePane component.
+ * Effects definition for the {@link StarkMessagePaneComponent}.
  */
 @Injectable()
 export class StarkMessagePaneEffects {
 	/**
 	 * Class constructor
-	 * @param actions$ - the action to perform
-	 * @param messagePaneService - the Message-Pane Service
+	 * @param actions$ - The action to perform.
+	 * @param messagePaneService - The `StarkMessagePaneService` instance of the application.
 	 */
 	public constructor(
 		private actions$: Actions,
@@ -21,8 +21,10 @@ export class StarkMessagePaneEffects {
 	) {}
 
 	/**
-	 * If the 'clearOnNavigation' option is set to 'true',
-	 * the messages will be cleared when there is a successful navigation
+	 * If the [StarkMessagePaneService clearOnNavigation]{@link StarkMessagePaneService#clearOnNavigation} property is set to `true`,
+	 * the messages will be cleared when there is a successful navigation.
+	 *
+	 * `dispatch: false` => because this effect does not dispatch an action
 	 */
 	@Effect({ dispatch: false })
 	public clearOnNavigationSuccess$(): Observable<any> {

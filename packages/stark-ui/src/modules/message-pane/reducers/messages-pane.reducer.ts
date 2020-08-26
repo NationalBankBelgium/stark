@@ -6,7 +6,7 @@ import findIndex from "lodash-es/findIndex";
 /**
  * Initial state of the store
  */
-const INITIAL_STATE: Readonly<StarkMessageCollection> = {
+const INITIAL_MESSAGES_STATE: Readonly<StarkMessageCollection> = {
 	infoMessages: [],
 	warningMessages: [],
 	errorMessages: []
@@ -14,11 +14,11 @@ const INITIAL_STATE: Readonly<StarkMessageCollection> = {
 
 /**
  * Definition of the message reducer.
- * @param state - the state of the reducer
- * @param action - the action to perform
+ * @param state - The state of the reducer
+ * @param action - The action to perform
  */
 export function messagesReducer(
-	state: Readonly<StarkMessageCollection> = INITIAL_STATE,
+	state: Readonly<StarkMessageCollection> = INITIAL_MESSAGES_STATE,
 	action: Readonly<StarkMessagePaneActions>
 ): Readonly<StarkMessageCollection> {
 	// the new state will be calculated from the data coming in the actions
@@ -72,7 +72,7 @@ function addMessage(state: Readonly<StarkMessageCollection>, action: Readonly<St
  * Ignore
  */
 function clearMessages(state: Readonly<StarkMessageCollection>): Readonly<StarkMessageCollection> {
-	let clearedState: StarkMessageCollection = INITIAL_STATE;
+	let clearedState: StarkMessageCollection = INITIAL_MESSAGES_STATE;
 
 	// a new state will be created as long as there are messages to be cleared, otherwise the state remains untouched
 	if (state.errorMessages.length + state.infoMessages.length + state.warningMessages.length === 0) {

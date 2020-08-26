@@ -19,7 +19,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 export class StarkDateRangePickerModule {
 	/**
 	 * Class constructor
-	 * @param translateService - the translation service of the application
+	 * @param translateService - The `TranslateService` instance of the application.
 	 */
 	public constructor(translateService: TranslateService) {
 		const english: StarkLocale = { languageCode: "en", translations: translationsEn };

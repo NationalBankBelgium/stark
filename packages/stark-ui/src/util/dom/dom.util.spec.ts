@@ -2,8 +2,8 @@ import { StarkDOMUtil } from "./dom.util";
 
 /**
  * Creates a 'div' element that surrounds the html code passed by the parameter.
- * @param html the html code that is inserted inside the div
- * @returns an html element
+ * @param html - The html code that is inserted inside the div
+ * @returns An html element
  */
 function createElement(html: string): Element {
 	const div: Element = document.createElement("div");

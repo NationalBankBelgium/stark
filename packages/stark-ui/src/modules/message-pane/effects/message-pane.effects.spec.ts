@@ -35,8 +35,8 @@ describe("Effect: StarkMessagePaneEffects", () => {
 		mockMessagePaneService = TestBed.get(STARK_MESSAGE_PANE_SERVICE);
 	});
 
-	describe("On clearOnNavigationSuccess$", () => {
-		it("Should clear and hide the message pane", () => {
+	describe("on clearOnNavigationSuccess$", () => {
+		it("should clear and hide the message pane", () => {
 			mockMessagePaneService.clearOnNavigation = true;
 			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 
@@ -53,7 +53,7 @@ describe("Effect: StarkMessagePaneEffects", () => {
 			expect(mockObserver.complete).not.toHaveBeenCalled(); // effects should never complete!
 		});
 
-		it("Should not clear and hide the message pane when the 'clearOnNavigation' option is not set", () => {
+		it("should not clear and hide the message pane when the 'clearOnNavigation' option is not set", () => {
 			mockMessagePaneService.clearOnNavigation = false;
 			const mockObserver: SpyObj<Observer<any>> = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 

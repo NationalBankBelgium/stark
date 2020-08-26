@@ -191,7 +191,7 @@ describe("DropdownComponent", () => {
 		}
 	}
 
-	describe("Default", () => {
+	describe("default", () => {
 		let hostComponent: TestHostComponent;
 		let hostFixture: ComponentFixture<TestHostComponent>;
 
@@ -395,7 +395,7 @@ describe("DropdownComponent", () => {
 		});
 	});
 
-	describe("Using value + selectionChanged", () => {
+	describe("using value + selectionChanged", () => {
 		let hostComponent: TestHostValueComponent;
 		let hostFixture: ComponentFixture<TestHostValueComponent>;
 
@@ -493,7 +493,7 @@ describe("DropdownComponent", () => {
 		});
 	});
 
-	describe("Using reactive forms", () => {
+	describe("using reactive forms", () => {
 		let hostComponent: TestHostNgControlComponent;
 		let hostFixture: ComponentFixture<TestHostNgControlComponent>;
 

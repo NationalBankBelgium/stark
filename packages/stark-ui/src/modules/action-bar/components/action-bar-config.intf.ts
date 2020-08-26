@@ -5,12 +5,12 @@ import { StarkAction } from "./action.intf";
  */
 export interface StarkActionBarConfig {
 	/**
-	 * Array of actions (StarkAction config objects) to be included in the action bar
+	 * Array of {@link StarkAction} objects to be included in the action bar
 	 */
 	actions: StarkAction[];
 
 	/**
-	 * If false, then action bar will not be present on the page (optional)
+	 * If `false`, then action bar will not be present on the page (optional)
 	 */
 	isPresent?: boolean;
 }

@@ -3,7 +3,7 @@ import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService, Star
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-app-logo";
 
@@ -22,17 +22,17 @@ const componentName = "stark-app-logo";
 })
 export class StarkAppLogoComponent extends AbstractStarkUiComponent implements OnInit {
 	/**
-	 * Params object to be passed to the UI router state defined as homeState.
+	 * Params object to be passed to the router state defined as homeState.
 	 */
 	@Input()
 	public homeStateParams?: { [property: string]: any };
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param routingService - The routing service of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param routingService - The `StarkRoutingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

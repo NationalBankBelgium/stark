@@ -22,7 +22,7 @@ import {
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-breadcrumb";
 
@@ -41,11 +41,12 @@ const componentName = "stark-breadcrumb";
 })
 export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implements OnInit, OnDestroy {
 	/**
-	 * Object containing an array of StarkBreadcrumbPath objects.
+	 * An {@link StarkBreadcrumbConfig} configuration object for the breadcrumb paths to be displayed.
 	 *
-	 * If omitted, then the StarkBreadcrumbConfig object will calculated processing recursively the UI router state tree from the
-	 * current state to its ancestors to extract the different paths. In this case, the translationKey will be taken from the
-	 * "data" object of the state definition.
+	 * If omitted, then the {@link StarkBreadcrumbConfig} object will be calculated processing recursively the router state tree from the
+	 * current state to its ancestors to extract the different paths.
+	 *
+	 * In this case, the translationKey will be taken from the `data` object of the state definition.
 	 */
 	@Input()
 	public breadcrumbConfig?: StarkBreadcrumbConfig;
@@ -60,10 +61,10 @@ export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implement
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param routingService - The routing service of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param routingService - The `StarkRoutingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

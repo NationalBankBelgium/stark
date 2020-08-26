@@ -24,7 +24,7 @@ import {
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-app-logout";
 
@@ -50,12 +50,12 @@ export class StarkAppLogoutComponent extends AbstractStarkUiComponent implements
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param routingService - The routing service of the application
-	 * @param sessionService - The session service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param routingService - The `StarkRoutingService` instance of the application.
+	 * @param sessionService - The `StarkSessionService` instance of the application.
 	 * @param sessionConfig - The configuration of the session module
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

@@ -1,8 +1,16 @@
 /**
  * Util class containing some constants with predefined masks for common mask patterns to be used with the {@link StarkTextMaskDirective}.
- * @dynamic See: https://angular.io/guide/aot-compiler#strictmetadataemit
  */
 export class StarkTextMasks {
+	/**
+	 * Extracted regex as a workaround to avoid Angular compiler error: "Expression form not supported".
+	 *
+	 * Using simple string instead of RegExp strings since the compiler has a restricted expression syntax.
+	 * See https://v7.angular.io/guide/aot-compiler#expression-syntax
+	 * @ignore
+	 */
+	private static regexSingleDigit = new RegExp("\\d");
+
 	/**
 	 * Mask for Belgian Structured Communication numbers: "+++ddd/dddd/ddddd/+++"
 	 */
@@ -10,20 +18,20 @@ export class StarkTextMasks {
 		"+",
 		"+",
 		"+",
-		/\d/,
-		/\d/,
-		/\d/,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
 		"/",
-		/\d/,
-		/\d/,
-		/\d/,
-		/\d/,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
 		"/",
-		/\d/,
-		/\d/,
-		/\d/,
-		/\d/,
-		/\d/,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
 		"+",
 		"+",
 		"+"
@@ -33,24 +41,24 @@ export class StarkTextMasks {
 	 * Mask for credit card numbers: "dddd-dddd-dddd-dddd"
 	 */
 	public static CREDITCARD_NUMBER: (RegExp | string)[] = [
-		/\d/,
-		/\d/,
-		/\d/,
-		/\d/,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
 		"-",
-		/\d/,
-		/\d/,
-		/\d/,
-		/\d/,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
 		"-",
-		/\d/,
-		/\d/,
-		/\d/,
-		/\d/,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
 		"-",
-		/\d/,
-		/\d/,
-		/\d/,
-		/\d/
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit,
+		StarkTextMasks.regexSingleDigit
 	];
 }

@@ -7,8 +7,8 @@ import { Observer } from "rxjs";
 
 /**
  * Mocks an InputEvent on the element with the given value.
- * @param value - the value to set the element to.
- * @param element - the HTMLInputElement to mock the event on
+ * @param value - The value to set the element to.
+ * @param element - The HTMLInputElement to mock the event on
  */
 function mockInputEvent(value: string, element: HTMLInputElement | HTMLTextAreaElement): void {
 	const inputEvent: Event = document.createEvent("Event");
@@ -20,7 +20,7 @@ function mockInputEvent(value: string, element: HTMLInputElement | HTMLTextAreaE
 
 /**
  * Returns a function which replaces a specific word with a corresponding number of '*'.
- * @param word - the word to filter
+ * @param word - The word to filter
  */
 function wordFilter(word: string): (v: string) => string {
 	return (v: string): string =>

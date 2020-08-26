@@ -35,7 +35,7 @@ import { StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskCon
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-date-range-picker";
 
@@ -162,6 +162,9 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 		return this.startDate || this._endMinDate;
 	}
 
+	/**
+	 * @ignore
+	 */
 	private _endMinDate?: Date;
 
 	/**
@@ -346,10 +349,10 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param injector - The Injector of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 * @param cdRef - Reference to the change detector attached to this component
 	 */
 	public constructor(

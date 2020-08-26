@@ -1,20 +1,25 @@
-import { Directive, ElementRef, forwardRef, Input, OnChanges, Renderer2 } from "@angular/core";
+import { Directive, ElementRef, forwardRef, Input, OnChanges, Provider, Renderer2 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 /**
- * The constant that contains the command for StarkTransformInputDirective to transform the input value in an element to uppercase.
+ * The constant that contains the command for {@link StarkTransformInputDirective} to transform the input value in an element to uppercase.
  */
 export const UPPERCASE: "uppercase" = "uppercase";
-/**
- * The constant that contains the command for StarkTransformInputDirective to transform the input value in an element to lowercase.
- */
-export const LOWERCASE: "lowercase" = "lowercase";
-export type StarkInputTransformationType = "uppercase" | "lowercase" | ((value: any) => any);
 
 /**
- * Provider for StarkTransformInputDirective
+ * The constant that contains the command for {@link StarkTransformInputDirective} to transform the input value in an element to lowercase.
  */
-export const STARK_TRANSFORM_INPUT_PROVIDER: any = {
+export const LOWERCASE: "lowercase" = "lowercase";
+
+/**
+ * Type of transformations that can be done via the {@link StarkTransformInputDirective}
+ */
+export type StarkInputTransformationType = typeof UPPERCASE | typeof LOWERCASE | ((value: any) => any);
+
+/**
+ * Provider for {@link StarkTransformInputDirective}
+ */
+export const STARK_TRANSFORM_INPUT_PROVIDER: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	// tslint:disable-next-line:no-forward-ref
 	useExisting: forwardRef(() => StarkTransformInputDirective),
@@ -47,6 +52,9 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	 */
 	public _transformation: (value: any) => any = value => value;
 
+	/**
+	 * Transformation to be done on the input value
+	 */
 	// tslint:disable-next-line:no-input-rename
 	@Input("starkTransformInput")
 	public set transformation(transformation: StarkInputTransformationType) {
@@ -81,7 +89,7 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	/**
 	 * Class constructor
 	 * @param _renderer - Angular renderer
-	 * @param _elementRef - Reference to the element
+	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(private _renderer: Renderer2, private _elementRef: ElementRef) {}
 
@@ -98,7 +106,7 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	/**
 	 * Sets the "value" property on the input element.
 	 *
-	 * @param value The checked value
+	 * @param value - The checked value
 	 */
 	public writeValue(value: any): void {
 		const normalizedValue: any = value === null ? "" : value;
@@ -108,7 +116,7 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	/**
 	 * Registers a function called when the control value changes.
 	 *
-	 * @param fn The callback function
+	 * @param fn - The callback function
 	 */
 	public registerOnChange(fn: (_: any) => void): void {
 		this._onChange = fn;
@@ -117,7 +125,7 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	/**
 	 * Registers a function called when the control is touched.
 	 *
-	 * @param fn The callback function
+	 * @param fn - The callback function
 	 */
 	public registerOnTouched(fn: () => void): void {
 		this._onTouched = fn;
@@ -126,7 +134,7 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	/**
 	 * Sets the "disabled" property on the input element.
 	 *
-	 * @param isDisabled The disabled value
+	 * @param isDisabled - The disabled value
 	 */
 	public setDisabledState(isDisabled: boolean): void {
 		this._renderer.setProperty(this._elementRef.nativeElement, "disabled", isDisabled);

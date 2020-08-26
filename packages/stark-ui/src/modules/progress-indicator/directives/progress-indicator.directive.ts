@@ -17,7 +17,7 @@ import { Subscription } from "rxjs";
 import { StarkProgressIndicatorComponent } from "../components";
 
 /**
- * Name of the directive
+ * @ignore
  */
 const directiveName = "[starkProgressIndicator]";
 
@@ -82,7 +82,7 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 	 * @param componentFactoryResolver - Resolver that returns Angular component factories
 	 * @param injector - The application Injector
 	 * @param _viewContainer - The container where one or more views can be attached to the host element of this directive.
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this directive is applied to.
 	 */
 	public constructor(

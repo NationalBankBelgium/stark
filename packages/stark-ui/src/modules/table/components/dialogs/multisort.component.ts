@@ -64,8 +64,8 @@ export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent
 	 * Class constructor
 	 * @param dialogRef - Reference to this dialog opened via the MatDialog service
 	 * @param data - The data to be passed to this dialog component
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		public dialogRef: MatDialogRef<StarkTableMultisortDialogComponent>,

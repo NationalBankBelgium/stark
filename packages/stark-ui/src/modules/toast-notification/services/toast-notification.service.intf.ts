@@ -4,12 +4,12 @@ import { StarkToastNotificationResult } from "./toast-notification-result.intf";
 import { StarkToastMessage } from "../components";
 
 /**
- * Name of the toast notification service
+ * @ignore
  */
 export const starkToastNotificationServiceName = "StarkToastNotificationService";
 
 /**
- * Injection token of the toast notification service.
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkToastNotificationService}
  */
 export const STARK_TOAST_NOTIFICATION_SERVICE: InjectionToken<StarkToastNotificationService> = new InjectionToken<
 	StarkToastNotificationService
@@ -21,14 +21,14 @@ export const STARK_TOAST_NOTIFICATION_SERVICE: InjectionToken<StarkToastNotifica
  */
 export interface StarkToastNotificationService {
 	/**
-	 * Returns an observable that will emit one of the possible StarkToastNotificationResult after the toast is closed
+	 * Returns an observable that will emit one of the possible {@link StarkToastNotificationResult} after the toast is closed
 	 * @param message - Message to be shown in the toast.
 	 * @returns Observable that will emit the result value as soon as the toast is closed.
 	 */
 	show(message: StarkToastMessage): Observable<StarkToastNotificationResult>;
 
 	/**
-	 * Hides the current toast and emits the corresponding result in the observable returned by the show() method
+	 * Hides the current toast and emits the corresponding result in the observable returned by the `show()` method
 	 */
 	hide(): void;
 }

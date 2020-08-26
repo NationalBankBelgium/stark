@@ -14,7 +14,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-collapsible";
 
@@ -24,7 +24,8 @@ const componentName = "stark-collapsible";
 const DEFAULT_COLLAPSIBLE_ICON = "chevron-right";
 
 /**
- * Component to display an accordion around included html using angular material's expansion panel.
+ * Component to display an accordion around embedded HTML
+ * using {@link https://v7.material.angular.io/components/expansion/examples|Angular Material's Expansion Panel}.
  */
 @Component({
 	selector: "stark-collapsible",
@@ -74,9 +75,11 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	public isExpanded = false;
 
 	/**
-	 * Output value giving the collapse state of the collapsible
-	 * NOTE : isExpandedChange is used with isExpanded to create a two-way binding (using a banana in the box "[(isExpanded)]" ).
-	 * For more info, see : https://angular.io/guide/template-syntax#two-way-binding---
+	 * Output value giving the collapse state of the collapsible.
+	 *
+	 * **NOTE:** isExpandedChange is used with isExpanded to create a two-way binding (using a banana in the box `[(isExpanded)]`).
+	 *
+	 * See: {@link https://v7.angular.io/guide/template-syntax#two-way-binding---|Angular Template Syntax: Two Way Binding}
 	 */
 	@Output()
 	public readonly isExpandedChange = new EventEmitter<boolean>();
@@ -89,9 +92,9 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

@@ -2,7 +2,7 @@ import { AfterViewChecked, Directive, ElementRef, Inject, Input, OnInit, Rendere
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
- * Name of the directive
+ * @ignore
  */
 const directiveName = "[starkSvgViewBox]";
 
@@ -39,9 +39,9 @@ export class StarkSvgViewBoxDirective implements AfterViewChecked, OnInit {
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param element - Reference to the DOM element where this directive is applied to.
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,

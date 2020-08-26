@@ -61,9 +61,10 @@ import { StarkSessionTimeoutWarningDialogComponent } from "./components/session-
 export class StarkSessionUiModule {
 	/**
 	 * Instantiates the services only once since they should be singletons
-	 * so the forRoot() should be called only by the AppModule
-	 * @link https://angular.io/guide/singleton-services#forroot
-	 * @returns a module with providers
+	 * so the `forRoot()` should be called only by the `AppModule`.
+	 *
+	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
+	 * @returns A module with providers
 	 */
 	public static forRoot(starkSessionUiConfig?: StarkSessionUiConfig): ModuleWithProviders {
 		return {
@@ -74,15 +75,15 @@ export class StarkSessionUiModule {
 
 	/**
 	 * Prevents this module from being re-imported
-	 * @link https://angular.io/guide/singleton-services#prevent-reimport-of-the-coremodule
+	 * See {@link https://v7.angular.io/guide/singleton-services#prevent-reimport-of-the-greetingmodule|Angular docs: Prevent reimport of a root module}
+	 * @param translateService - The `TranslateService` instance of the application.
 	 * @param parentModule - The parent module
-	 * @param translateService - the translation service of the application
 	 */
 	public constructor(
+		translateService: TranslateService,
 		@Optional()
 		@SkipSelf()
-		parentModule: StarkSessionUiModule,
-		translateService: TranslateService
+		parentModule?: StarkSessionUiModule
 	) {
 		if (parentModule) {
 			throw new Error("StarkSessionUiModule is already loaded. Import it in the AppModule only");

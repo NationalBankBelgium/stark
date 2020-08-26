@@ -13,7 +13,7 @@ import {
 } from "@nationalbankbelgium/stark-core";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-login-page";
 
@@ -53,10 +53,10 @@ export class StarkLoginPageComponent implements OnInit {
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
-	 * @param userService - The user service of the application
-	 * @param sessionService - The session service of the application
-	 * @param routingService - The routing service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param userService - The `StarkUserService` instance of the application.
+	 * @param sessionService - The `StarkSessionService` instance of the application.
+	 * @param routingService - The `StarkRoutingService` instance of the application.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

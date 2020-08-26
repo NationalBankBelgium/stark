@@ -2,7 +2,7 @@ import { Directive, HostListener, Inject, Input, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 /**
- * Name of the directive
+ * @ignore
  */
 const directiveName = "[starkRestrictInput]";
 
@@ -47,7 +47,7 @@ export class StarkRestrictInputDirective implements OnInit {
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 */
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
 

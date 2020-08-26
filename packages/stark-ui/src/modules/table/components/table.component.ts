@@ -53,12 +53,12 @@ import { StarkTableExpandDetailDirective } from "../directives/table-expand-deta
 import { StarkTableRowContentDirective } from "../directives/table-row-content.directive";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-table";
 
 /**
- * Default filter configuration
+ * Default filter {@link StarkTableFilter} configuration
  */
 const defaultFilter: StarkTableFilter = {
 	globalFilterPresent: true,
@@ -66,7 +66,7 @@ const defaultFilter: StarkTableFilter = {
 };
 
 /**
- * The default values set for StarkTableColumnProperties
+ * The default values set for {@link StarkTableColumnProperties}
  */
 const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 	isFilterable: true,
@@ -181,13 +181,13 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Allows to fix the header to the top of the scrolling viewport containing the table.
-	 * Setting the attribute to "true" or empty will enable this feature.
+	 * Setting the attribute to `true` or empty will enable this feature.
 	 *
-	 * The class "fixed-header" will be added under .stark-table which defines the following css properties:
-	 *     - overflow-y: auto;
-	 *     - height: 400px;
+	 * The class `fixed-header` will be added under `.stark-table` which defines the following CSS properties:
+	 * - `overflow-y: auto;`
+	 * - `height: 400px;`
 	 *
-	 * If you desire to change the height, please redefine the value for .stark-table .fixed-header { height: 400px; }
+	 * If you need to change the height, please redefine the value for `.stark-table .fixed-header { height: 400px; }`
 	 */
 	@Input()
 	public fixedHeader?: string;
@@ -231,13 +231,13 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public paginate = false;
 
 	/**
-	 * Shows or hides the minimap component in the header. When set to 'compact' it shows the compacted minimap
+	 * Shows or hides the {@link StarkMinimapComponent} in the header. When set to 'compact' it shows the compacted minimap
 	 */
 	@Input()
 	public minimap: boolean | StarkMinimapComponentMode = true;
 
 	/**
-	 * {@link StarkPaginationConfig} configuration object for embedded pagination component
+	 * {@link StarkPaginationConfig} object for the embedded {@link StarkPaginationComponent}
 	 *
 	 * **IMPORTANT:** the pagination component is displayed in "compact" mode
 	 */
@@ -246,7 +246,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Determine if the item counter is enabled. Shows how many items are in the data object array.
-	 * Default: false
+	 *
+	 * Default: `false`
 	 */
 	@Input()
 	public get showRowsCounter(): boolean {
@@ -264,7 +265,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	private _showRowsCounter = false;
 
 	/**
-	 * {@link StarkActionBarConfig} object for the action bar component to be displayed in all the rows
+	 * {@link StarkActionBarConfig} object for the {@link StarkActionBarComponent} to be displayed in all the rows
 	 */
 	@Input()
 	public tableRowActions: StarkTableRowActions = { actions: [] };
@@ -276,6 +277,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public expandedRows: object[] = [];
 
 	/**
+	 * An {@link StarkActionBarConfig} object defining the different actions to be shown in each row of the table
 	 * @deprecated - use {@link tableRowActions} instead
 	 */
 	@Input()
@@ -337,7 +339,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Determine if the row index must be present or not.
-	 * Default: false
+	 *
+	 * Default: `false`
 	 */
 	@Input()
 	public get showRowIndex(): boolean {
@@ -385,7 +388,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Output event emitter that will emit the array of selected rows.
-	 * @deprecated  - use {@link selection} instead
+	 * @deprecated - use {@link selection} instead
 	 */
 	@Output()
 	public readonly selectChanged = new EventEmitter<object[]>();
@@ -410,7 +413,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public starkPaginator!: StarkPaginationComponent;
 
 	/**
-	 * Columns added automatically by this component according to the columnProperties input
+	 * Columns added automatically by this component according to the `columnProperties` input
 	 */
 	@ViewChildren(StarkTableColumnComponent)
 	public viewColumns!: QueryList<StarkTableColumnComponent>;
@@ -438,7 +441,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	public customTableAltActions?: StarkAction[];
 
 	/**
-	 * {@link StarkActionBarConfig} object for the action bar component in regular mode
+	 * {@link StarkActionBarConfig} object for the {@link StarkActionBarComponent} in regular mode
 	 */
 	public customTableRegularActions: StarkActionBarConfig = { actions: [] };
 
@@ -464,6 +467,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Whether the footer is enabled.
+	 *
 	 * Default: if there is no footer defined here and in any other column, then it won't be displayed.
 	 * Otherwise, if at least one of the other columns defines a footer,
 	 * then the footer of this column will be displayed as empty
@@ -492,11 +496,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Class constructor
-	 * @param logger - The logging service of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param dialogService - Angular Material service to open Material Design modal dialogs.
 	 * @param cdRef - Reference to the change detector attached to this component
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -776,6 +780,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Return the filter criteria that the item does not meet
+	 * @param item - The item to filter
+	 * @param filterCriteria - The criteria that should be met by the item
 	 */
 	public getUnmetFilterCriteria(item: object | string, filterCriteria: RegExp[]): RegExp[] {
 		let itemStr: string;
@@ -836,6 +842,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Called whenever the value of the filter input of a column changes
+	 * @param columnName - The column whose filter input has changed
+	 * @param filterValue - The new value set to the filter input
 	 */
 	public onColumnFilterChange(columnName: string, filterValue?: string): void {
 		if (typeof this.filter.columns !== "undefined") {
@@ -954,8 +962,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Sort the data according to the direction and priority (if any) defined for each column.
 	 * In case there is a compareFn defined for any of the columns then such method is called to perform the custom sorting.
-	 * FIXME: refactor this method to reduce its cognitive complexity
 	 */
+	// FIXME: refactor this method to reduce its cognitive complexity
 	/* tslint:disable-next-line:cognitive-complexity */
 	public sortData(): void {
 		if (!this.columns) {
@@ -1179,7 +1187,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Toggles the visibility of a column
-	 * @param item - the item containing the name of the column
+	 * @param item - The item containing the name of the column
 	 */
 	public toggleColumnVisibility(item: StarkMinimapItemProperties): void {
 		const index: number = this.columnProperties.findIndex(({ name }: StarkTableColumnProperties) => name === item.name);

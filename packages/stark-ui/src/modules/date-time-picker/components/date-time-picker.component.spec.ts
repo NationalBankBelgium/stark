@@ -426,7 +426,7 @@ describe("DateTimePickerComponent", () => {
 				mockObserver = createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
 			});
 
-			it("should be set correctly according to the specified inputs  and WITHOUT triggering a 'valueChange' event", () => {
+			it("should be set correctly according to the specified inputs and WITHOUT triggering a 'valueChange' event", () => {
 				hostComponent.formControl.valueChanges.subscribe(mockObserver);
 
 				hostComponent.pickerId = "test-id";

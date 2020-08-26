@@ -5,18 +5,18 @@ import cloneDeep from "lodash-es/cloneDeep";
 /**
  * Initial state of the reducer
  */
-const INITIAL_STATE: Map<string, StarkProgressIndicatorFullConfig> = new Map<string, StarkProgressIndicatorFullConfig>();
+const INITIAL_PROGRESS_INDICATOR_STATE: Map<string, StarkProgressIndicatorFullConfig> = new Map<string, StarkProgressIndicatorFullConfig>();
 
 /**
  * Reducer for the progress indicator
- * @param state Map<string, StarkProgressIndicatorFullConfig> the actual state of the progress indicator
- * @param action StarkProgressIndicatorActions the action to perform
+ * @param state - Map<string, StarkProgressIndicatorFullConfig> the actual state of the progress indicator
+ * @param action - StarkProgressIndicatorActions the action to perform
  * @returns Map<string, StarkProgressIndicatorFullConfig> the new state of the progress indicator
  */
 // TODO refactor to reduce complexity
 // tslint:disable:cognitive-complexity
 export function progressIndicatorReducer(
-	state: Map<string, StarkProgressIndicatorFullConfig> = INITIAL_STATE,
+	state: Map<string, StarkProgressIndicatorFullConfig> = INITIAL_PROGRESS_INDICATOR_STATE,
 	action: StarkProgressIndicatorActions
 ): Map<string, StarkProgressIndicatorFullConfig> {
 	// the new state will be calculated from the data coming in the actions

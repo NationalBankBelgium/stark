@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from "@angular/core";
 
 /**
- * The name of the component
+ * @ignore
  */
 const componentName = "stark-session-card";
 

@@ -7,7 +7,6 @@ import { StarkAppSidebarOpenEvent } from "./app-sidebar-open-event.intf";
 
 /**
  * @ignore
- * StarkAppSidebarService service
  */
 @Injectable()
 export class StarkAppSidebarServiceImpl implements StarkAppSidebarService {

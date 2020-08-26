@@ -58,7 +58,7 @@ export class StarkMessagePaneServiceImpl implements StarkMessagePaneService {
 
 	/**
 	 * Analyse the priority of the message and give it one if it is undefined. If the priority value is wrong, an error is thrown.
-	 * @param message - the message to analyse
+	 * @param message - The message to analyse
 	 */
 	private normalizeMessage(message: StarkMessage): StarkMessage {
 		let normalizedMessage: StarkMessage;

@@ -3,11 +3,11 @@ import { StarkProgressIndicatorType } from "../entities";
 import { InjectionToken } from "@angular/core";
 
 /**
- * The name of the StarkProgressIndicatorService
+ * @ignore
  */
 export const starkProgressIndicatorServiceName = "StarkProgressIndicatorService";
 /**
- * The InjectionToken version of the service name
+ * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkProgressIndicatorService}
  */
 export const STARK_PROGRESS_INDICATOR_SERVICE: InjectionToken<StarkProgressIndicatorService> = new InjectionToken<
 	StarkProgressIndicatorService
@@ -46,8 +46,8 @@ export interface StarkProgressIndicatorService {
 	/**
 	 * Returns the latest status of the progress indicator for the given topic (whether is shown or hidden).
 	 * @param topic - The topic of the progress indicator whose status will be fetched.
-	 * @returns Observable that will emit a boolean value whenever the status of the progress indicator changes: false if it is hidden,
-	 * true if it is shown or undefined in case there is no progress indicator for the given topic.
+	 * @returns Observable that will emit a boolean value whenever the status of the progress indicator changes: `false` if it is hidden,
+	 * `true` if it is shown or `undefined` in case there is no progress indicator for the given topic.
 	 */
 	isVisible(topic: string): Observable<boolean | undefined>;
 }

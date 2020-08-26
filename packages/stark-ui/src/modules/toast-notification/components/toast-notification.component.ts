@@ -6,7 +6,7 @@ import { StarkToastMessage } from "./toast-message.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
 /**
- * Name of the component
+ * @ignore
  */
 const componentName = "stark-toast-notification";
 
@@ -31,11 +31,11 @@ export class StarkToastNotificationComponent extends AbstractStarkUiComponent im
 
 	/**
 	 * Class constructor
-	 * @param logger - The logger of the application
+	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param snackBar - Tha snackBar used to display the toast
-	 * @param data - the data linked to the toast notification
-	 * @param renderer - Angular Renderer wrapper for DOM manipulations.
-	 * @param elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param data - The data linked to the toast notification
+	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -67,8 +67,8 @@ export class StarkToastNotificationComponent extends AbstractStarkUiComponent im
 	}
 
 	/**
-	 * Generate the css class of the toast notification based on its type
-	 * @returns a string containing the css class of the toast notification
+	 * Generate the CSS class of the toast notification based on its type
+	 * @returns A string containing the CSS class of the toast notification
 	 */
 	public getMessageTypeClass(): string {
 		switch (this.message.type) {
