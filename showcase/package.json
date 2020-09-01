@@ -145,7 +145,7 @@
     "@types/hammerjs": "~2.0.36",
     "@types/node": "~10.17.27",
     "@types/webpack-env": "~1.15.2",
-    "browserstack-local": "~1.4.5",
+    "browserstack-local": "~1.4.7",
     "cross-env": "~7.0.2",
     "find-root": "~1.1.0",
     "gh-pages": "~3.1.0",
