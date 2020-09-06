@@ -139,7 +139,7 @@
     "ngrx-store-logger": "~0.2.2",
     "reflect-metadata": "~0.1.13",
     "rxjs": "^6.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.11.1"
   },
   "devDependencies": {
     "@compodoc/compodoc": "~1.1.11",
