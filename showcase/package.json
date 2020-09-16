@@ -123,7 +123,7 @@
     "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.0.0-e7b2cbb9.tgz",
     "@nationalbankbelgium/stark-rbac": "file:../dist/packages-dist/stark-rbac/nationalbankbelgium-stark-rbac-10.0.0-e7b2cbb9.tgz",
     "@nationalbankbelgium/stark-ui": "file:../dist/packages-dist/stark-ui/nationalbankbelgium-stark-ui-10.0.0-e7b2cbb9.tgz",
-    "@uirouter/visualizer": "~7.0.0",
+    "@uirouter/visualizer": "~7.2.0",
     "angular-in-memory-web-api": "~0.8.0",
     "basscss": "~8.1.0",
     "core-js": "~3.6.5",
