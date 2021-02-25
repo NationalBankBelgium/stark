@@ -16,6 +16,9 @@ before_install:
   - npm i -g npm@6.9.2
   - NODE_VERSION="$(node -v)"
   - echo $NODE_VERSION
+  # Testing part is now handled by GitHub Actions. In a next PR, we'll the configuration to handle release process also in GitHub Actions.
+  # See: https://github.com/NationalBankBelgium/stark/issues/2493
+  - if [[ ${TRAVIS_TAG} == "" && ${TRAVIS_EVENT_TYPE} != "cron" ]]; then echo "Travis CI should be used ONLY for release process. Testing part should be done by GitHub Actions"; travis_terminate 0; fi  
   # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
   - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc'
 
@@ -37,7 +40,6 @@ env:
 branches:
   only:
     - master
-    - /^dependabot/npm_and_yarn/.*$/
     - /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+|-rc\.\d+)?$/
 
 cache:
@@ -54,11 +56,9 @@ script:
   - npm run test:travis-ci:all
   # E2E tests only need to be run on 1 node version (v10)
   # and the secure environmentals BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY should be set. (only on secure builds)
-  - if [[ ${NODE_VERSION} =~ ^v10.*$ && -n "${BROWSERSTACK_USERNAME}" && -n "${BROWSERSTACK_ACCESS_KEY}"  ]]; then npm run test:showcase:e2e:browserstack; else echo "Skipping browserstack tests."; fi
+  # E2E is now handled in GitHub Actions
+  # - if [[ ${NODE_VERSION} =~ ^v10.*$ && -n "${BROWSERSTACK_USERNAME}" && -n "${BROWSERSTACK_ACCESS_KEY}"  ]]; then npm run test:showcase:e2e:browserstack; else echo "Skipping browserstack tests."; fi
   - npm run docs:travis-ci:coverage
   - npm run docs:publish
   - npm run release:publish
   - bash ./scripts/ci/print-logs.sh
-
-after_success:
-  - npm run test:ci:coveralls:combined

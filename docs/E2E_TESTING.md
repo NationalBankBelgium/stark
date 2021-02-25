@@ -37,7 +37,7 @@ Keeping e2e tests separate like this prevents confusion when testing multiple co
 
 ## BrowserStack (optional)
 
-The showcase app uses Travis CI and BrowserStack to automatically run e2e-tests on multiple setups (Chrome, Firefox, IE, Safari, Android, IOS, ...).
+The showcase app uses GitHub Actions and BrowserStack to automatically run e2e-tests on multiple setups (Chrome, Firefox, IE, Safari, Android, IOS, ...).
 
 If you want to run your e2e-tests automatically on multiple setups one of the easiest solutions is BrowserStack.
 They offer a free solution for open source projects.
@@ -69,9 +69,9 @@ _For more documentation see:_
 -   _[https://github.com/angular/protractor/blob/master/lib/config.ts](https://github.com/angular/protractor/blob/master/lib/config.ts)_
 -   _[https://www.browserstack.com/automate/capabilities](https://www.browserstack.com/automate/capabilities)_
 
-### Integrating BrowserStack with Travis CI
+### Integrating BrowserStack with GitHub Actions
 
-To integrate the BrowserStack testing with Travis-CI simply add the same environmentals as before. **Remember to keep them private.**
+To integrate the BrowserStack testing with GitHub Actions simply add the same environmentals as before. **Remember to keep them private.**
 
 ### Common errors
 

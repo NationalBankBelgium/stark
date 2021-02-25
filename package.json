@@ -175,7 +175,7 @@
     "test:ci:stark-ui": "cd packages/stark-ui && npm run test-fast:ci && cd ../..",
     "test:ci:showcase": "cd showcase && npm run test-fast:ci && cd ../..",
     "test:ci:starter": "cd starter && npm run test-fast:ci && cd ../..",
-    "test:ci:coveralls:combined": "node combine-packages-coverage.js | packages/stark-testing/node_modules/coveralls/bin/coveralls.js",
+    "test:ci:coveralls:combined": "node combine-packages-coverage.js",
     "tsc": "tsc",
     "tslint": "tslint",
     "tslint-check:all": "npm run tslint-check:stark-core && npm run tslint-check:stark-ui && npm run tslint-check:stark-rbac && npm run tslint-check:starter && npm run tslint-check:showcase",
