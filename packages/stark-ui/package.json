@@ -20,21 +20,21 @@
   "dependencies": {
     "@angular/material-moment-adapter": "^7.0.0",
     "@mdi/angular-material": "^4.0.96",
-    "@types/lodash-es": "^4.17.1",
-    "@types/nouislider": "^9.0.4",
-    "@types/prismjs": "^1.16.0",
+    "@types/lodash-es": "^4.17.4",
+    "@types/nouislider": "^9.0.10",
+    "@types/prismjs": "^1.16.3",
     "angular2-text-mask": "^9.0.0",
     "normalize.css": "^8.0.1",
-    "nouislider": "^14.0.0",
+    "nouislider": "^14.6.3",
     "prettier": "^1.16.1",
     "pretty-data": "^0.40.0",
-    "prismjs": "^1.15.0",
+    "prismjs": "^1.23.0",
     "text-mask-addons": "^3.8.0",
     "text-mask-core": "^5.1.2"
   },
   "devDependencies": {
-    "@types/jasmine": "^3.5.0",
-    "@types/node": "^10.17.13"
+    "@types/jasmine": "^3.6.4",
+    "@types/node": "^10.17.54"
   },
   "peerDependencies": {
     "@angular/animations": "^7.0.0",
