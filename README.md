@@ -10,6 +10,7 @@
 [![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-core.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
 [![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-core.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
 [![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
+[![Build Status](https://github.com/NationalBankBelgium/stark/workflows/ci/badge.svg)](https://github.com/NationalBankBelgium/stark/actions?query=workflow%3Aci)
 [![Coverage Status](https://coveralls.io/repos/github/NationalBankBelgium/stark/badge.svg?branch=master)](https://coveralls.io/github/NationalBankBelgium/stark?branch=master)
 [![Dependency Status](https://david-dm.org/NationalBankBelgium/stark.svg)](https://david-dm.org/NationalBankBelgium/stark)
 [![devDependency Status](https://david-dm.org/NationalBankBelgium/stark/dev-status.svg)](https://david-dm.org/NationalBankBelgium/stark#info=devDependencies)
@@ -149,6 +150,13 @@ We're supported by [Jetbrains](https://www.jetbrains.com) and their awesome [sup
 We're supported by [Travis](https://travis-ci.org/)
 
 <a href="https://travis-ci.org/"><img src="https://travis-ci.com/images/logos/TravisCI-Full-Color.png" width="144px"></a>
+
+### GitHub Actions
+
+We're supported by [GitHub Actions](https://github.com/features/actions)
+
+<a href="https://github.com/features/actions"><img src="https://github.githubassets.com/images/modules/site/features/actions-icon-actions.svg" width="144px"></a>
+
 
 ### BrowserStack
 

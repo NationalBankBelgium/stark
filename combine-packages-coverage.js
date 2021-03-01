@@ -56,6 +56,7 @@ for (const fileName of fileNames) {
 // then concatenate the files (but wait X milliseconds for the files to be overwritten in the previous step)
 setTimeout(() => {
 	const combinedStream = new StreamConcat(nextStream);
+	const combinedLcovFileName = fs.createWriteStream("combined-lcov.info");
 
-	combinedStream.pipe(process.stdout);
+	combinedStream.pipe(combinedLcovFileName);
 }, 250);

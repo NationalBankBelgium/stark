@@ -1,8 +1,6 @@
 const browserstack = require("browserstack-local");
-const { BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY, TRAVIS_BUILD_NUMBER } = process.env;
+const { BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY, BROWSERSTACK_LOCAL_IDENTIFIER, BROWSERSTACK_PROJECT_NAME } = process.env;
 const defaultConfig = require("../node_modules/@nationalbankbelgium/stark-testing/protractor.conf.js").config;
-
-const BROWSERSTACK_LOCAL_IDENTIFIER = TRAVIS_BUILD_NUMBER ? `travis-${TRAVIS_BUILD_NUMBER}` : "local";
 
 /**
  * Specifies the different capabilities for BrowserStack.
@@ -57,40 +55,6 @@ const CAPABILITIES = [
 	}
 ];
 
-if (!BROWSERSTACK_USERNAME || !BROWSERSTACK_ACCESS_KEY) {
-	throw new Error(
-		"The environmentals 'BROWSERSTACK_USERNAME' and 'BROWSERSTACK_ACCESS_KEY' need to be set to run tests on BrowserStack."
-	);
-}
-
-/**
- * Code to start BrowserStack local before start of test.
- * @returns {Promise<void>}
- */
-const beforeLaunch = async () => {
-	console.log("Connecting to BrowserStack local...");
-
-	exports.bs_local = new browserstack.Local();
-	await new Promise((resolve, reject) =>
-		exports.bs_local.start({ key: BROWSERSTACK_ACCESS_KEY, localIdentifier: BROWSERSTACK_LOCAL_IDENTIFIER }, error =>
-			error ? reject(error) : resolve()
-		)
-	);
-
-	console.log("BrowserStack local is connected. Starting tests...");
-};
-
-/**
- * Code to stop BrowserStack local after end of test.
- * @param exitCode
- * @returns {Promise<void>}
- */
-const afterLaunch = async exitCode => {
-	console.log(`Tests finished with exit code ${exitCode}.`);
-	console.log("Stopping BrowserStack local...");
-	await new Promise(resolve => exports.bs_local.stop(resolve));
-	console.log("BrowserStack local stopped.");
-};
 
 /**
  * The config object for protractor. @see {@link https://github.com/angular/protractor/blob/master/lib/config.ts}
@@ -120,7 +84,7 @@ const config = {
 		"browserstack.networkLogs": "true",
 		"browserstack.localIdentifier": BROWSERSTACK_LOCAL_IDENTIFIER,
 
-		project: "Stark Showcase",
+		project: BROWSERSTACK_PROJECT_NAME,
 		build: BROWSERSTACK_LOCAL_IDENTIFIER
 	},
 
@@ -128,9 +92,6 @@ const config = {
 	 * Specifies all the different environments in which the tests are ran.
 	 */
 	multiCapabilities: CAPABILITIES,
-
-	beforeLaunch,
-	afterLaunch
 };
 
 exports.config = {
