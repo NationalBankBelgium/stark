@@ -12,9 +12,10 @@ export const starkIsIBANValidatorName = "starkIsIBAN";
  * @param iban - The IBAN number to validate
  */
 export function starkIsIBAN(iban: string): boolean {
-	if (typeof iban === "string") {
+	const electronicIban = electronicFormatIBAN(iban);
+	if (typeof electronicIban === "string") {
 		// Since v2.0.0 of ibantools, isValidIBAN() is false if there is " " in the verified IBAN
-		return isValidIBAN(electronicFormatIBAN(iban));
+		return isValidIBAN(electronicIban);
 	}
 	return false;
 }

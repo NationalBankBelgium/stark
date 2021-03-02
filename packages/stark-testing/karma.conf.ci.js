@@ -115,9 +115,9 @@ const rawKarmaConfig = {
 	customLaunchers: {
 		ChromeHeadlessNoSandbox: {
 			base: "ChromeHeadless",
-			// necessary for travis: https://chromium.googlesource.com/chromium/src/+/master/docs/linux_suid_sandbox_development.md
+			// necessary for travis: https://github.com/puppeteer/puppeteer/blob/v7.1.0/docs/troubleshooting.md#setting-up-chrome-linux-sandbox
 			// as it runs in a container-based environment
-			flags: ["--no-sandbox"]
+			flags: ["--no-sandbox", "--disable-setuid-sandbox"]
 		}
 	},
 
