@@ -126,7 +126,7 @@ jobs:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           project-name: "Stark Showcase"
-        if: env.IS_MAIN_ENVIRONMENT == 1
+        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
 
       - name: BrowserStack Local Tunnel Setup
         uses: browserstack/github-actions/setup-local@master
@@ -134,23 +134,23 @@ jobs:
           local-testing: "start"
           local-logging-level: "all-logs"
           local-identifier: "github-actions-${{ github.run_number }}"
-        if: env.IS_MAIN_ENVIRONMENT == 1
+        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
     
       - name: Running application under test
         run: npm run server:prod:ci &
-        if: env.IS_MAIN_ENVIRONMENT == 1
+        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
         working-directory: showcase
         
       - name: Running test on BrowserStack
         run: npm run protractor:browserstack
-        if: env.IS_MAIN_ENVIRONMENT == 1
+        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
         working-directory: showcase
     
       - name: BrowserStackLocal Stop
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: stop
-        if: env.IS_MAIN_ENVIRONMENT == 1
+        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
         
       - name: Generate docs coverage
         run: npm run docs:travis-ci:coverage
@@ -169,8 +169,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: "combined-lcov.info"
         if: env.IS_MAIN_ENVIRONMENT == 1
-      
-      
+
   release:
     name: Release
     runs-on: "ubuntu-latest"
