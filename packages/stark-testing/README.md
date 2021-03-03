@@ -1,6 +1,6 @@
 [![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-testing.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-testing)
 [![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-testing.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-testing)
-[![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
+[![Build Status](https://api.travis-ci.com/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.com/NationalBankBelgium/stark)
 [![Build Status](https://github.com/NationalBankBelgium/stark/workflows/ci/badge.svg)](https://github.com/NationalBankBelgium/stark/actions?query=workflow%3Aci)
 [![Dependency Status](https://david-dm.org/NationalBankBelgium/stark-testing.svg)](https://david-dm.org/NationalBankBelgium/stark-testing)
 [![devDependency Status](https://david-dm.org/NationalBankBelgium/stark-testing/dev-status.svg)](https://david-dm.org/NationalBankBelgium/stark-testing#info=devDependencies)

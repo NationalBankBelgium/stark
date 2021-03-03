@@ -1,6 +1,6 @@
 [![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-ui.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-ui)
 [![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-ui.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-ui)
-[![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
+[![Build Status](https://api.travis-ci.com/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.com/NationalBankBelgium/stark)
 [![Build Status](https://github.com/NationalBankBelgium/stark/workflows/ci/badge.svg)](https://github.com/NationalBankBelgium/stark/actions?query=workflow%3Aci)
 [![Dependency Status](https://david-dm.org/NationalBankBelgium/stark-ui.svg)](https://david-dm.org/NationalBankBelgium/stark-ui)
 [![devDependency Status](https://david-dm.org/NationalBankBelgium/stark-ui/dev-status.svg)](https://david-dm.org/NationalBankBelgium/stark-ui#info=devDependencies)
