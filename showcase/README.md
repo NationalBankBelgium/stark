@@ -377,7 +377,7 @@ and [docker](https://www.docker.com/) and thats all - any other software is not 
 
 ##### MacOS:
 
-`brew cask install docker`
+`brew install --cask docker`
 
 And run docker by Mac bottom menu> launchpad > docker (on first run docker will ask you about password)
 
