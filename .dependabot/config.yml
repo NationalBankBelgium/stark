@@ -67,6 +67,9 @@ update_configs:
       - match:
           dependency_name: "@types/node"
           version_requirement: ">=11"
+      - match:
+          dependency_name: "karma-typescript-es6-transform"
+          version_requirement: ">=5.2.0"
     commit_message:
       prefix: "chore"
       include_scope: true
