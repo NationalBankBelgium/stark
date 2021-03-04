@@ -7,17 +7,17 @@
 > An Angular 6+ based front-end framework built on top of [Angular](https://angular.io)...
 > Stark features an awesome reusable build using [Webpack](https://webpack.js.org/) and built-in support for state of the art front-end tech
 
-[![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-core.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
-[![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-core.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
-[![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
-[![Build Status](https://github.com/NationalBankBelgium/stark/workflows/ci/badge.svg)](https://github.com/NationalBankBelgium/stark/actions?query=workflow%3Aci)
-[![Coverage Status](https://coveralls.io/repos/github/NationalBankBelgium/stark/badge.svg?branch=master)](https://coveralls.io/github/NationalBankBelgium/stark?branch=master)
-[![Dependency Status](https://david-dm.org/NationalBankBelgium/stark.svg)](https://david-dm.org/NationalBankBelgium/stark)
-[![devDependency Status](https://david-dm.org/NationalBankBelgium/stark/dev-status.svg)](https://david-dm.org/NationalBankBelgium/stark#info=devDependencies)
+[![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-core.svg?logo=npm&logoColor=fff&label=npm+package&color=limegreen)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
+[![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-core.svg?logo=npm)](https://www.npmjs.com/package/@nationalbankbelgium/stark-core)
+[![Build Status](https://img.shields.io/travis/com/NationalBankBelgium/stark.svg?branch=master&logo=travis)](https://travis-ci.com/NationalBankBelgium/stark)
+[![Build Status](https://github.com/NationalBankBelgium/stark/workflows/build/badge.svg)](https://github.com/NationalBankBelgium/stark/actions?query=workflow%3Abuild)
+[![Coverage Status](https://img.shields.io/coveralls/github/NationalBankBelgium/stark/master?logo=coveralls)](https://coveralls.io/github/NationalBankBelgium/stark?branch=master)
+[![Dependency Status](https://img.shields.io/david/nationalbankbelgium/stark-core)](https://david-dm.org/NationalBankBelgium/stark-core)
+[![devDependency Status](https://img.shields.io/david/dev/nationalbankbelgium/stark-core?label=devDependencies)](https://david-dm.org/NationalBankBelgium/stark-core#info=devDependencies)
 [![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square&logo=prettier)](https://github.com/prettier/prettier)
+[![License](https://img.shields.io/npm/l/@nationalbankbelgium/stark-core)](LICENSE)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=NationalBankBelgium/stark)](https://dependabot.com)
 [![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=Tm5SaUZSU2IyN3NRMUJubytEUFdrZUNSRTg1RUhoNjJSbHNFdDJGbUZ0az0tLUtza3NYT3JVdGJoNVJ1Y2Ywa3NUY2c9PQ==--f293e37574a75b6a4f37428b1ff6978c55760aa7)](https://automate.browserstack.com/public-build/Tm5SaUZSU2IyN3NRMUJubytEUFdrZUNSRTg1RUhoNjJSbHNFdDJGbUZ0az0tLUtza3NYT3JVdGJoNVJ1Y2Ywa3NUY2c9PQ==--f293e37574a75b6a4f37428b1ff6978c55760aa7)
 
@@ -147,16 +147,15 @@ We're supported by [Jetbrains](https://www.jetbrains.com) and their awesome [sup
 
 ### Travis
 
-We're supported by [Travis](https://travis-ci.org/)
+We're supported by [Travis](https://travis-ci.com/)
 
-<a href="https://travis-ci.org/"><img src="https://travis-ci.com/images/logos/TravisCI-Full-Color.png" width="144px"></a>
+<a href="https://travis-ci.com/"><img src="https://travis-ci.com/images/logos/TravisCI-Full-Color.png" width="144px"></a>
 
 ### GitHub Actions
 
 We're supported by [GitHub Actions](https://github.com/features/actions)
 
 <a href="https://github.com/features/actions"><img src="https://github.githubassets.com/images/modules/site/features/actions-icon-actions.svg" width="144px"></a>
-
 
 ### BrowserStack
 

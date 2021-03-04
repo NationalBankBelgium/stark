@@ -1,10 +1,10 @@
-[![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-ui.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-ui)
-[![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-ui.svg)](https://www.npmjs.com/package/@nationalbankbelgium/stark-ui)
-[![Build Status](https://travis-ci.org/NationalBankBelgium/stark.svg?branch=master)](https://travis-ci.org/NationalBankBelgium/stark)
-[![Build Status](https://github.com/NationalBankBelgium/stark/workflows/ci/badge.svg)](https://github.com/NationalBankBelgium/stark/actions?query=workflow%3Aci)
-[![Dependency Status](https://david-dm.org/NationalBankBelgium/stark-ui.svg)](https://david-dm.org/NationalBankBelgium/stark-ui)
-[![devDependency Status](https://david-dm.org/NationalBankBelgium/stark-ui/dev-status.svg)](https://david-dm.org/NationalBankBelgium/stark-ui#info=devDependencies)
-[![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE)
+[![NPM version](https://img.shields.io/npm/v/@nationalbankbelgium/stark-ui.svg?logo=npm&logoColor=fff&label=npm+package&color=limegreen)](https://www.npmjs.com/package/@nationalbankbelgium/stark-ui)
+[![npm](https://img.shields.io/npm/dm/@nationalbankbelgium/stark-ui.svg?logo=npm)](https://www.npmjs.com/package/@nationalbankbelgium/stark-ui)
+[![Build Status](https://img.shields.io/travis/com/NationalBankBelgium/stark.svg?branch=master&logo=travis)](https://travis-ci.com/NationalBankBelgium/stark)
+[![Build Status](https://github.com/NationalBankBelgium/stark/workflows/build/badge.svg)](https://github.com/NationalBankBelgium/stark/actions?query=workflow%3Abuild)
+[![Dependency Status](https://img.shields.io/david/nationalbankbelgium/stark-ui)](https://david-dm.org/NationalBankBelgium/stark-ui)
+[![devDependency Status](https://img.shields.io/david/dev/nationalbankbelgium/stark-ui?label=devDependencies)](https://david-dm.org/NationalBankBelgium/stark-ui#info=devDependencies)
+[![License](https://img.shields.io/npm/l/@nationalbankbelgium/stark-ui)](LICENSE)
 
 # Stark UI
 

@@ -152,7 +152,7 @@ groupings trying to match Angular concepts:
 |   .prettierignore                     # files and directories to be excluded by prettier
 |   .prettierrc.js                      # prettier configuration file
 |   .stylelintrc                        # stylelint configuration file
-|   .travis.yml                         # YAML file to customize the Travis build (https://travis-ci.org/)
+|   .travis.yml                         # YAML file to customize the Travis build (https://travis-ci.com/)
 |   angular.json                        # Angular configuration file
 |   base.spec.ts                        # initializes the test environment
 |   Dockerfile                          # the commands that will be executed by the Docker Build command
@@ -377,7 +377,7 @@ and [docker](https://www.docker.com/) and thats all - any other software is not 
 
 ##### MacOS:
 
-`brew cask install docker`
+`brew install --cask docker`
 
 And run docker by Mac bottom menu> launchpad > docker (on first run docker will ask you about password)
 
