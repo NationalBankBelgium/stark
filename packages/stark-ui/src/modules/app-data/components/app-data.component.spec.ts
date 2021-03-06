@@ -25,7 +25,7 @@ import { OverlayContainer } from "@angular/cdk/overlay";
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkAppDataComponent)
+	@ViewChild(StarkAppDataComponent, { static: true })
 	public appDataComponent!: StarkAppDataComponent;
 	public mode?: StarkAppDataComponentMode;
 }

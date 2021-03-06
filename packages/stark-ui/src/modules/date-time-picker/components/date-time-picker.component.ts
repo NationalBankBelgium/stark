@@ -278,13 +278,13 @@ export class StarkDateTimePickerComponent extends AbstractStarkUiComponent
 	/**
 	 * Reference to the time input embedded in this component
 	 */
-	@ViewChild("timeInput")
+	@ViewChild("timeInput", { static: true })
 	public timeInput!: ElementRef<HTMLInputElement>;
 
 	/**
 	 * Reference to the Stark date picker embedded in this component
 	 */
-	@ViewChild(StarkDatePickerComponent)
+	@ViewChild(StarkDatePickerComponent, { static: true })
 	public datePicker!: StarkDatePickerComponent;
 
 	/**

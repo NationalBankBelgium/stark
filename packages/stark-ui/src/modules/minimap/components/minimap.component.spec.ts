@@ -20,7 +20,7 @@ import { OverlayContainer } from "@angular/cdk/overlay";
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkMinimapComponent)
+	@ViewChild(StarkMinimapComponent, { static: true })
 	public minimapComponent!: StarkMinimapComponent;
 	public items?: StarkMinimapItemProperties[];
 	public visibleItems?: string[];

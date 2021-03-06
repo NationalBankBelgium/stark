@@ -26,7 +26,7 @@ import createSpyObj = jasmine.createSpyObj;
 	template: ` <stark-pagination [htmlSuffixId]="htmlSuffixId" [paginationConfig]="paginationConfig"></stark-pagination> `
 })
 class TestHostComponent {
-	@ViewChild(StarkPaginationComponent)
+	@ViewChild(StarkPaginationComponent, { static: true })
 	public paginationComponent!: StarkPaginationComponent;
 
 	public htmlSuffixId?: string;
@@ -855,13 +855,13 @@ describe("PaginationComponent", () => {
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 
 				firstButtonElement = hostFixture.debugElement.query(By.css(selectorFirstButtonElement));
-				expect(firstButtonElement.properties["disabled"]).toBeFalsy();
+				expect(firstButtonElement.attributes["disabled"]).toBeFalsy();
 				triggerClick(firstButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
 				firstButtonElement = hostFixture.debugElement.query(By.css(selectorFirstButtonElement));
-				expect(firstButtonElement.properties["disabled"]).toBe(true);
+				expect(firstButtonElement.attributes["disabled"]).toBeTruthy();
 				assertPageNavSelection(hostFixture.debugElement.childNodes[0], "1");
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 			}));
@@ -875,13 +875,13 @@ describe("PaginationComponent", () => {
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 
 				firstButtonElement = hostFixture.debugElement.query(By.css(selectorFirstButtonElement));
-				expect(firstButtonElement.properties["disabled"]).toBe(true);
+				expect(firstButtonElement.attributes["disabled"]).toBeTruthy();
 				triggerClick(firstButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
 				firstButtonElement = hostFixture.debugElement.query(By.css(selectorFirstButtonElement));
-				expect(firstButtonElement.properties["disabled"]).toBe(true);
+				expect(firstButtonElement.attributes["disabled"]).toBeTruthy();
 				assertPageNavSelection(hostFixture.debugElement.childNodes[0], "1");
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 			}));
@@ -900,13 +900,13 @@ describe("PaginationComponent", () => {
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 
 				previousButtonElement = hostFixture.debugElement.query(By.css(selectorPreviousButtonElement));
-				expect(previousButtonElement.properties["disabled"]).toBeFalsy();
+				expect(previousButtonElement.attributes["disabled"]).toBeFalsy();
 				triggerClick(previousButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
 				previousButtonElement = hostFixture.debugElement.query(By.css(selectorPreviousButtonElement));
-				expect(previousButtonElement.properties["disabled"]).toBe(true);
+				expect(previousButtonElement.attributes["disabled"]).toBeTruthy();
 				assertPageNavSelection(hostFixture.debugElement.childNodes[0], "1");
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 			}));
@@ -920,13 +920,13 @@ describe("PaginationComponent", () => {
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 
 				previousButtonElement = hostFixture.debugElement.query(By.css(selectorPreviousButtonElement));
-				expect(previousButtonElement.properties["disabled"]).toBe(true);
+				expect(previousButtonElement.attributes["disabled"]).toBeTruthy();
 				triggerClick(previousButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
 				previousButtonElement = hostFixture.debugElement.query(By.css(selectorPreviousButtonElement));
-				expect(previousButtonElement.properties["disabled"]).toBe(true);
+				expect(previousButtonElement.attributes["disabled"]).toBeTruthy();
 				assertPageNavSelection(hostFixture.debugElement.childNodes[0], "1");
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 			}));
@@ -945,13 +945,13 @@ describe("PaginationComponent", () => {
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 
 				nextButtonElement = hostFixture.debugElement.query(By.css(selectorNextButtonElement));
-				expect(nextButtonElement.properties["disabled"]).toBeFalsy();
+				expect(nextButtonElement.attributes["disabled"]).toBeFalsy();
 				triggerClick(nextButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
 				nextButtonElement = hostFixture.debugElement.query(By.css(selectorNextButtonElement));
-				expect(nextButtonElement.properties["disabled"]).toBe(true);
+				expect(nextButtonElement.attributes["disabled"]).toBeTruthy();
 				assertPageNavSelection(hostFixture.debugElement.childNodes[0], "2");
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 			}));
@@ -965,13 +965,13 @@ describe("PaginationComponent", () => {
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 
 				nextButtonElement = hostFixture.debugElement.query(By.css(selectorNextButtonElement));
-				expect(nextButtonElement.properties["disabled"]).toBe(true);
+				expect(nextButtonElement.attributes["disabled"]).toBeTruthy();
 				triggerClick(nextButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
 				nextButtonElement = hostFixture.debugElement.query(By.css(selectorNextButtonElement));
-				expect(nextButtonElement.properties["disabled"]).toBe(true);
+				expect(nextButtonElement.attributes["disabled"]).toBeTruthy();
 				assertPageNavSelection(hostFixture.debugElement.childNodes[0], "2");
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 			}));
@@ -998,13 +998,13 @@ describe("PaginationComponent", () => {
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "1");
 
 				lastButtonElement = hostFixture.debugElement.query(By.css(selectorLastButtonElement));
-				expect(lastButtonElement.properties["disabled"]).toBeFalsy();
+				expect(lastButtonElement.attributes["disabled"]).toBeFalsy();
 				triggerClick(lastButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
 				lastButtonElement = hostFixture.debugElement.query(By.css(selectorLastButtonElement));
-				expect(lastButtonElement.properties["disabled"]).toBe(true);
+				expect(lastButtonElement.attributes["disabled"]).toBeTruthy();
 				assertPageNavSelection(hostFixture.debugElement.childNodes[0], "2");
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 			}));
@@ -1018,13 +1018,13 @@ describe("PaginationComponent", () => {
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 
 				lastButtonElement = hostFixture.debugElement.query(By.css(selectorLastButtonElement));
-				expect(lastButtonElement.properties["disabled"]).toBe(true);
+				expect(lastButtonElement.attributes["disabled"]).toBeTruthy();
 				triggerClick(lastButtonElement);
 				hostFixture.detectChanges();
 				tick(); // since values are set on ngModel asynchronously (see https://github.com/angular/angular/issues/22606)
 
 				lastButtonElement = hostFixture.debugElement.query(By.css(selectorLastButtonElement));
-				expect(lastButtonElement.properties["disabled"]).toBe(true);
+				expect(lastButtonElement.attributes["disabled"]).toBeTruthy();
 				assertPageNavSelection(hostFixture.debugElement.childNodes[0], "2");
 				assertPageInputSelection(hostFixture.debugElement.childNodes[0], "2");
 			}));

@@ -17,7 +17,7 @@ import Spy = jasmine.Spy;
 	template: ` <stark-breadcrumb [breadcrumbConfig]="breadcrumbConfig"></stark-breadcrumb> `
 })
 class TestHostComponent {
-	@ViewChild(StarkBreadcrumbComponent)
+	@ViewChild(StarkBreadcrumbComponent, { static: true })
 	public breadcrumbComponent!: StarkBreadcrumbComponent;
 	public breadcrumbConfig?: StarkBreadcrumbConfig;
 }

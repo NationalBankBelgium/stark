@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs */
 import { async, fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
-import { Component, ModuleWithProviders, NgModuleFactoryLoader, SystemJsNgModuleLoader } from "@angular/core";
+import { Component, ModuleWithProviders } from "@angular/core";
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { UIRouterModule } from "@uirouter/angular";
 import { Store } from "@ngrx/store";
@@ -61,8 +61,7 @@ describe("SessionUiModule", () => {
 				{
 					provide: STARK_SESSION_SERVICE,
 					useValue: new MockStarkSessionService()
-				},
-				{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader } // needed for ui-router
+				}
 			]
 		}).compileComponents();
 	}));

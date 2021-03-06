@@ -15,7 +15,7 @@ import { StarkToastNotificationComponent } from "./toast-notification.component"
 	template: ` <stark-toast-notification></stark-toast-notification> `
 })
 class TestHostComponent {
-	@ViewChild(StarkToastNotificationComponent)
+	@ViewChild(StarkToastNotificationComponent, { static: true })
 	public toastNotificationComponent!: StarkToastNotificationComponent;
 }
 

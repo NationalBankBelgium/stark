@@ -403,13 +403,13 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Reference to the MatTable embedded in this component
 	 */
-	@ViewChild(MatTable)
+	@ViewChild(MatTable, { static: true })
 	public table!: MatTable<object>;
 
 	/**
 	 * Reference to the MatPaginator embedded in this component
 	 */
-	@ViewChild(StarkPaginationComponent)
+	@ViewChild(StarkPaginationComponent, { static: false })
 	public starkPaginator!: StarkPaginationComponent;
 
 	/**
@@ -424,10 +424,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	@ContentChildren(StarkTableColumnComponent)
 	public contentColumns!: QueryList<StarkTableColumnComponent>;
 
-	@ContentChild(StarkTableExpandDetailDirective, { read: TemplateRef })
+	@ContentChild(StarkTableExpandDetailDirective, { static: false, read: TemplateRef })
 	public expandedDetailTemplate!: StarkTableExpandDetailDirective;
 
-	@ContentChild(StarkTableRowContentDirective, { read: TemplateRef })
+	@ContentChild(StarkTableRowContentDirective, { static: false, read: TemplateRef })
 	public customRowTemplate!: StarkTableRowContentDirective;
 
 	/**

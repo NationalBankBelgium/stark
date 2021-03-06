@@ -16,7 +16,7 @@ describe("AppMenuItemComponent", () => {
 		template: ` <stark-app-menu-item [level]="level" [menuGroup]="menuGroup"></stark-app-menu-item> `
 	})
 	class TestHostComponent {
-		@ViewChild(StarkAppMenuItemComponent)
+		@ViewChild(StarkAppMenuItemComponent, { static: true })
 		public starkAppMenuItem!: StarkAppMenuItemComponent;
 
 		public level?: number;

@@ -46,7 +46,8 @@ const prettierPlugins: any = [require("prettier/parser-babel"), require("prettie
 /**
  * A reference to the prettyData library
  */
-const prettyData: any = require("pretty-data").pd;
+// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
+// const prettyData: any = require("pretty-data").pd;
 
 /**
  * The code languages that are supported by the Stark-Pretty-Print component
@@ -153,7 +154,9 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 					case "html":
 						prismGrammar = Prism.languages.markup;
 						prismClass = prismClassPrefix + "markup";
-						this.prettyString = prettyData.xml(this.data);
+						// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
+						// this.prettyString = prettyData.xml(this.data);
+						this.prettyString = this.data;
 						break;
 
 					case "json":
@@ -178,7 +181,9 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 					case "sql":
 						prismGrammar = Prism.languages.sql;
 						prismClass = prismClassPrefix + this.format;
-						this.prettyString = prettyData.sql(this.data);
+						// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
+						// this.prettyString = prettyData.sql(this.data);
+						this.prettyString = this.data;
 						break;
 
 					case "javascript":

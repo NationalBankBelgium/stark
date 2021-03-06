@@ -49,7 +49,7 @@ import SpyObj = jasmine.SpyObj;
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkDateTimePickerComponent)
+	@ViewChild(StarkDateTimePickerComponent, { static: true })
 	public dateTimePickerComponent!: StarkDateTimePickerComponent;
 
 	public value?: Date;
@@ -89,7 +89,7 @@ class TestHostComponent {
 	`
 })
 class TestHostFormControlComponent {
-	@ViewChild(StarkDateTimePickerComponent)
+	@ViewChild(StarkDateTimePickerComponent, { static: true })
 	public dateTimePickerComponent!: StarkDateTimePickerComponent;
 
 	public formControl = new FormControl();

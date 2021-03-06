@@ -27,7 +27,7 @@ describe("ActionBarComponent", () => {
 		`
 	})
 	class TestHostComponent {
-		@ViewChild(StarkActionBarComponent)
+		@ViewChild(StarkActionBarComponent, { static: true })
 		public starkActionBar!: StarkActionBarComponent;
 
 		public mode?: StarkActionBarComponentMode;
