@@ -24,7 +24,7 @@ describe("ExampleViewerComponent", () => {
 		`
 	})
 	class TestHostComponent {
-		@ViewChild(ExampleViewerComponent)
+		@ViewChild(ExampleViewerComponent, { static: true })
 		public exampleViewer!: ExampleViewerComponent;
 
 		public id = "";
