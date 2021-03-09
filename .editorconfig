@@ -16,11 +16,7 @@ charset = utf-8
 [*.bat]
 end_of_line = crlf
 
-[{package.json,.travis.yml}]
-indent_style = space
-indent_size = 2
-
-[**.{css, pcss, scss,json,sh}]
+[**.{css, pcss, scss, json, sh, yml}]
 indent_style = space
 indent_size = 2
 

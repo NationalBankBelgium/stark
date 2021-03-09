@@ -16,15 +16,13 @@ ENFORCE_SHOWCASE_VERSION_CHECK=true
 TARGET_BRANCH="gh-pages"
 COMMIT_HASH=`git rev-parse --verify HEAD`
 
-TARGET_REPO="git@github.com:NationalBankBelgium/stark.git"
-EXPECTED_REPO_SLUG="NationalBankBelgium/stark"
-EXPECTED_NODE_VERSION="10"
+TARGET_REPO="github.com/NationalBankBelgium/stark.git"
+EXPECTED_REPOSITORY="NationalBankBelgium/stark"
+GH_ACTIONS_TAG=${GH_ACTIONS_TAG:-""}
+GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME:-""}
 
-COMMIT_AUTHOR_USERNAME="TravisCI"
+COMMIT_AUTHOR_USERNAME="Github Actions CI"
 COMMIT_AUTHOR_EMAIL="alexis.georges@nbb.be"
-
-SSH_KEY_ENCRYPTED="stark-ssh.enc"
-SSH_KEY_CLEARTEXT_FILE="stark-ssh"
 
 STARK_CORE="stark-core"
 STARK_UI="stark-ui"
@@ -38,40 +36,37 @@ LATEST_DIR_NAME="latest"
 #----------------------------------------------
 #LOGS_DIR=./.tmp/stark/logs
 #mkdir -p ${LOGS_DIR}
-#touch ${LOGS_DIR}/build-perf.log
+#LOGS_FILE=${LOGS_DIR}/build-perf.log
+#touch ${LOGS_FILE}
 #DRY_RUN=true
-#TRAVIS=true
-#TRAVIS_NODE_VERSION="10"
-#TRAVIS_COMMIT=${COMMIT_HASH}
-#TRAVIS_REPO_SLUG="NationalBankBelgium/stark" # yes we're always on the correct repo
+#GITHUB_ACTIONS=true
+#GITHUB_ACTOR="SuperITMan"
+#GITHUB_SHA=${COMMIT_HASH}
+#GITHUB_REPOSITORY="NationalBankBelgium/stark" # yes we're always on the correct repo
 #ENFORCE_SHOWCASE_VERSION_CHECK=false # allows not have consistency between tag version and showcase version
-#encrypted_084795922354_iv="foo" # variable needed for the decryption of the SSH private key
-#encrypted_084795922354_key="bar" # variable needed for the decryption of the SSH private key
 
 # Point to a fork or any other repo
-#TARGET_REPO="git@github.com:superitman/stark.git"
+#TARGET_REPO="github.com/superitman/stark.git"
 
 # Avoid messing up Git config (even though limited to the current repo)
 #COMMIT_AUTHOR_USERNAME="Alexis Georges"
 #COMMIT_AUTHOR_EMAIL="alexis.georges@nbb.be"
 
 # For PRs (NOT accepted)
-#TRAVIS_EVENT_TYPE="pull_request"
+#GITHUB_EVENT_NAME="pull_request"
 
 # For nightly builds (NOT accepted)
-#TRAVIS_PULL_REQUEST="false"
-#TRAVIS_EVENT_TYPE="cron"
+#GITHUB_EVENT_TYPE="schedule"
 
 # For releases
-#TRAVIS_PULL_REQUEST="false"
-#TRAVIS_TAG="barFoo"
-#TRAVIS_EVENT_TYPE="push"
+#GH_ACTIONS_TAG="barFoo"
+#GITHUB_EVENT_NAME="push"
 
 #----------------------------------------------
 
 readonly currentDir=$(cd $(dirname $0); pwd)
 
-source ${currentDir}/scripts/ci/_travis-fold.sh
+source ${currentDir}/scripts/ci/_ghactions-group.sh
 source ${currentDir}/util-functions.sh
 
 cd ${currentDir}
@@ -129,111 +124,62 @@ rm -rf ${DOCS_WORK_DIR}
 mkdir -p ${DOCS_WORK_DIR}
 
 
-travisFoldStart "docs publication checks" "no-xtrace"
+ghActionsGroupStart "docs publication checks" "no-xtrace"
 
-if [[ ${TRAVIS} == true ]]; then
+if [[ ${GITHUB_ACTIONS} == true ]]; then
   logInfo "Publishing docs to GH pages";
   logInfo "============================================="
 
   # Don't even try if not running against the official repo
   # We don't want docs publish to run outside of our own little world
-  if [[ ${TRAVIS_REPO_SLUG} != ${EXPECTED_REPO_SLUG} ]]; then
+  if [[ ${GITHUB_REPOSITORY} != ${EXPECTED_REPOSITORY} ]]; then
     logInfo "Skipping release because this is not the main repository.";
     exit 0;
   fi
 
-  # Ensuring that this is the execution for Node x
-  # Without this check, we would publish a release for each node version we test under! :)
-  if [[ ${TRAVIS_NODE_VERSION} != ${EXPECTED_NODE_VERSION} ]]; then
-    logInfo "Skipping release because this is not the expected version of node: ${TRAVIS_NODE_VERSION}"
-    exit 0;
-  fi
-
-  logInfo "Verifying if this build has been triggered for a tag" 
-  # Making sure the variables exist..
-  if [[ -z ${TRAVIS_TAG+x} ]]; then
-    TRAVIS_TAG=""
-  fi
-
-  if [[ -z ${TRAVIS_PULL_REQUEST+x} ]]; then
-    TRAVIS_PULL_REQUEST=""
-  fi
-
-  if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
+  if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     logInfo "Not publishing because this is a build triggered for a pull request" 1
     exit 0;
   fi
 
-  if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
+  if [[ ${GITHUB_EVENT_NAME} == "schedule" ]]; then
     logInfo "Not publishing because this is a build triggered for a nightly build" 1
     exit 0;
   fi
 
-  if [[ ${TRAVIS_TAG} == "" ]]; then
+  if [[ ${GH_ACTIONS_TAG} == "" ]]; then
     logInfo "Not publishing because this is not a build triggered for a tag" 1
     exit 0;
   else
     logInfo "OK, this build has been triggered for a tag"
   fi
-
-  # Those keys are needed to decrypt the ${SSH_KEY_ENCRYPTED} file, which contains the SSH private key
-  # that we'll use to push to GitHub pages!
-  logInfo "Verifying that the necessary decryption keys are available"
-  if [[ -z ${encrypted_084795922354_iv+x} ]]; then
-    encrypted_084795922354_iv=""
-  fi
-  if [[ -z ${encrypted_084795922354_key+x} ]]; then
-    encrypted_084795922354_key=""
-  fi
-
-  if [[ ${encrypted_084795922354_iv} == "" ]]; then
-    logInfo "Not publishing because the SSH key decryption IV is not available as environment variable" 1
-    exit 0;
-  else
-    logTrace "SSH key decryption IV is available" 2
-    ENCRYPTED_IV=${encrypted_084795922354_iv}
-  fi
-
-  if [[ ${encrypted_084795922354_key} == "" ]]; then
-    logInfo "Not publishing because the SSH key decryption key is not available as environment variable" 1
-    exit 0;
-  else
-    logTrace "SSH key decryption key is available" 2
-    ENCRYPTED_KEY=${encrypted_084795922354_key}
-  fi
-
-  # If any of the previous commands in the `script` section of .travis.yaml failed, then abort.
-  # The variable is not set in early stages of the build, so we default to 0 there.
-  # https://docs.travis-ci.com/user/environment-variables/
-  if [[ ${TRAVIS_TEST_RESULT=0} == 1 ]]; then
-    logInfo "Skipping docs publication because a previous script in the Travis build has failed" 1
-    exit 0;
-  fi
 else
-  logInfo "Not publishing because we are not in Travis. Currently that is the only supported option!"
+  logInfo "Not publishing because we are not in GitHub Actions. Currently that is the only supported option!"
   exit 0
 fi
 
-travisFoldEnd "docs publication checks"
+ghActionsGroupEnd "docs publication checks"
 
 
-travisFoldStart "docs generation" "no-xtrace"
+ghActionsGroupStart "docs generation" "no-xtrace"
 
 logInfo "Generating API docs"
-npm run docs:all
+npm run docs:stark-core:generate
+npm run docs:stark-ui:generate
+npm run docs:stark-rbac:generate
 logTrace "API docs generated successfully" 1
 
-travisFoldEnd "docs generation" "no-xtrace"
+ghActionsGroupEnd "docs generation" "no-xtrace"
 
 
 
-travisFoldStart "docs publication" "no-xtrace"
+ghActionsGroupStart "docs publication" "no-xtrace"
 
 logInfo "Publishing API docs"
 
 logTrace "Determining target folders for api docs" 1
 
-DOCS_VERSION=${TRAVIS_TAG}
+DOCS_VERSION=${GH_ACTIONS_TAG}
 SHOWCASE_PACKAGE_VERSION=$(node -p "require('./package.json').version")
 #alternative (faster but less safe): SHOWCASE_PACKAGE_VERSION=$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json) 
 
@@ -247,40 +193,17 @@ fi
 
 logTrace "Version for which we are producing docs: ${DOCS_VERSION}"
 
-if [[ ${TRAVIS} == true ]]; then
-    logTrace "Configuring Git for Travis"
+if [[ ${GITHUB_ACTIONS} == true ]]; then
+    logTrace "Configuring Git for GitHub Actions"
     git config user.name ${COMMIT_AUTHOR_USERNAME}
     git config user.email ${COMMIT_AUTHOR_EMAIL}
 fi
 
 logTrace "Cloning stark's github pages branch to ${DOCS_WORK_DIR}"
 
-if [[ ${DRY_RUN} == false ]]; then
-    logTrace "Decrypting the SSH private key"
-    openssl aes-256-cbc -K ${ENCRYPTED_KEY} -iv ${ENCRYPTED_IV} -in ./${SSH_KEY_ENCRYPTED} -out ./${SSH_KEY_CLEARTEXT_FILE} -d
-    chmod 600 ./${SSH_KEY_CLEARTEXT_FILE}
-    logTrace "Decrypted the SSH private key"
+AUTHENTICATED_TARGET_REPO=https://${GITHUB_ACTOR}:${GITHUB_API_KEY}@${TARGET_REPO}
 
-    # to test the connection with GitHub using the decrypted key 
-    # logTrace "Hi github.com!"
-    # ssh -T git@github.com -i ./${SSH_KEY_CLEARTEXT_FILE}
-
-    # we use our decrypted private SSH key
-    logTrace "Setting SSH config"
-    mv -f ./${SSH_KEY_CLEARTEXT_FILE} ~/.ssh
-    mv -f ./ssh-config ~/.ssh/config
-    logTrace "SSH config set"
-
-    # these alternatives did not work
-    # alias git="GIT_SSH_COMMAND='ssh -i ./${SSH_KEY_CLEARTEXT_FILE}' git"
-    # git config core.sshCommand "ssh -i ./${SSH_KEY_CLEARTEXT_FILE}"
-
-    # possible alternative:
-    #eval `ssh-agent -s`
-    #ssh-add ./${SSH_KEY_CLEARTEXT_FILE}
-fi
-
-git clone --quiet --depth=1 --branch=${TARGET_BRANCH} ${TARGET_REPO} ${DOCS_WORK_DIR}
+git clone --quiet --depth=1 --branch=${TARGET_BRANCH} ${AUTHENTICATED_TARGET_REPO} ${DOCS_WORK_DIR}
 
 API_DOCS_TARGET_DIR_STARK_CORE=${DOCS_WORK_DIR}/${API_DOCS_DIR_NAME}/${STARK_CORE}/${DOCS_VERSION}
 API_DOCS_TARGET_DIR_STARK_CORE_LATEST=${DOCS_WORK_DIR}/${API_DOCS_DIR_NAME}/${STARK_CORE}/${LATEST_DIR_NAME}
@@ -339,15 +262,9 @@ git commit --quiet -m "Publishing docs for version: ${DOCS_VERSION}"
 git push --quiet --force
 cd - > /dev/null
 
-# TODO: if a GITHUB_API_KEY was passed, then we should use it
-#if [[ ${GITHUB_API_KEY} != "" ]]; then
-#    logTrace "Using the provided GITHUB API KEY to push" 1
-#    exit 0;
-#fi
-
 logInfo "Documentation published successfully!"
 
-travisFoldEnd "docs publication"
+ghActionsGroupEnd "docs publication"
 
 # Print return arrows as a log separator
-travisFoldReturnArrows
+ghActionsGroupReturnArrows
