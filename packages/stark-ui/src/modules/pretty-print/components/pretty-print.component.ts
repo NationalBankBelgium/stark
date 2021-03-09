@@ -41,11 +41,7 @@ const prettier: any = require("prettier/standalone");
 /**
  * A reference to the prettier plugins
  */
-const prettierPlugins: any = [
-	require("prettier/parser-babylon"),
-	require("prettier/parser-postcss"),
-	require("prettier/parser-typescript")
-];
+const prettierPlugins: any = [require("prettier/parser-babel"), require("prettier/parser-postcss"), require("prettier/parser-typescript")];
 
 /**
  * A reference to the prettyData library
