@@ -61,7 +61,7 @@ module.exports = webpackMerge(commonConfig(METADATA), {
 			 */
 			{
 				test: /node_modules.*\.js$/,
-				exclude: /node_modules.*(@angular|@mdi|@ng-idle|@nationalbankbelgium|@ngrx|@ngx-translate|@uirouter|cerialize|class-validator|core-js|ibantools|lodash|prettier|rxjs)/,
+				exclude: /node_modules.*(@angular|@mdi|@ng-idle|@nationalbankbelgium|@ngrx|@ngx-translate|@uirouter|cerialize|class-validator|core-js|google-libphonenumber|ibantools|lodash|prettier|rxjs)/,
 				use: {
 					loader: "babel-loader",
 					options: {

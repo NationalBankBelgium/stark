@@ -33,7 +33,7 @@ const fixedTSLintConfig = buildUtils.getFixedTSLintConfig(
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = metadata => {
+module.exports = (metadata) => {
 	const isProd = metadata.ENV === "production";
 	const METADATA = metadata;
 
@@ -72,9 +72,6 @@ module.exports = metadata => {
 		 * See: https://webpack.js.org/configuration/module
 		 */
 		module: {
-			// FIXME Remove the following line once Prettier 2.0.0 is released. See: https://github.com/NationalBankBelgium/stark/issues/1483
-			noParse: /prettier\/parser-typescript/,
-
 			rules: [
 				/**
 				 * TSLint loader support for *.ts files
@@ -145,7 +142,7 @@ module.exports = metadata => {
 			new HtmlWebpackPlugin({
 				template: "!!ejs-loader!src/index.html",
 				title: METADATA.TITLE,
-				chunksSortMode: function(a, b) {
+				chunksSortMode: function (a, b) {
 					// generated entry points will include those from styles config
 					// const entryPoints = ["runtime", "polyfills", "sw-register", "styles", "vendor", "main"];
 					// logic extracted from getBrowserConfig function in @angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/browser.js
