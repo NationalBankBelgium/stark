@@ -10,6 +10,6 @@ const starkStarterSpecificConfiguration = Object.assign({}, defaultKarmaCIConfig
 });
 
 // export the configuration function that karma expects and simply return the stark configuration
-module.exports = config => {
+module.exports = (config) => {
 	return config.set(starkStarterSpecificConfiguration);
 };
