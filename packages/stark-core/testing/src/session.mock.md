@@ -22,7 +22,7 @@ TestBed.configureTestingModule({
 
 The instantiated mock will have this default property assigned:
 
--   `devAuthenticationHeaders = new Map<string, string>()`
+- `devAuthenticationHeaders = new Map<string, string>()`
 
 In case you need specific values for those headers, then you need to pass a custom `devAuthenticationHeaders`
 to the constructor of the mock class:
@@ -46,10 +46,10 @@ mockSessionService = TetBed.get(STARK_SESSION_SERVICE);
 In fact, every method of the base interface is simply mocked
 with a [Jasmine Spy](https://jasmine.github.io/api/3.5/Spy.html) which can then be used in the unit tests to:
 
--   return custom values
--   override a method with a custom function
--   asserting that they are actually called
--   do any other operation than can be performed with an Spy.
+- return custom values
+- override a method with a custom function
+- asserting that they are actually called
+- do any other operation than can be performed with an Spy.
 
 For example:
 
@@ -59,7 +59,7 @@ const devAuthenticationHeaders = mockSessionService.devAuthenticationHeaders;
 
 // overriding a method with a custom function
 mockSessionService.getCurrentUser.and.callFake(() => {
-	// some custom logic to return a specific value
+  // some custom logic to return a specific value
 });
 
 // asserting that a method was indeed called

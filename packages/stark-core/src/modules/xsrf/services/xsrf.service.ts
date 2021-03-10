@@ -184,10 +184,7 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 	}
 
 	protected setXSRFCookie(xsrfToken: string): void {
-		const cookieExpiration: string = moment()
-			.add(40, "m")
-			.toDate()
-			.toUTCString(); // 40 minutes from now
+		const cookieExpiration: string = moment().add(40, "m").toDate().toUTCString(); // 40 minutes from now
 
 		const cookieAttributes: string[] = [`${this.xsrfCookieName}=${xsrfToken}`, `path='/'`, `expires=${cookieExpiration}`];
 

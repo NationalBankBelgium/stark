@@ -30,10 +30,10 @@ mockUserService = TetBed.get(STARK_USER_SERVICE);
 In fact, every method of the base interface is simply mocked
 with a [Jasmine Spy](https://jasmine.github.io/api/3.5/Spy.html) which can then be used in the unit tests to:
 
--   return custom values
--   override a method with a custom function
--   asserting that they are actually called
--   do any other operation than can be performed with an Spy.
+- return custom values
+- override a method with a custom function
+- asserting that they are actually called
+- do any other operation than can be performed with an Spy.
 
 For example:
 
@@ -43,7 +43,7 @@ mockUserService.fetchUserProfile.and.returnValue(of(someUser));
 
 // overriding a method with a custom function
 mockUserService.fetchUserProfile.and.callFake(() => {
-	// some custom logic to return a specific value
+  // some custom logic to return a specific value
 });
 
 // asserting that a method was indeed called

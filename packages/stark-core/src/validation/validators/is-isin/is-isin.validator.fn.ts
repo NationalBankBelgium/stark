@@ -29,10 +29,7 @@ export function starkIsISIN(isin: string): boolean {
 			digits += parseInt(isin[i], base).toString();
 		}
 
-		digits = digits
-			.split("")
-			.reverse()
-			.join("");
+		digits = digits.split("").reverse().join("");
 
 		let sum = 0;
 		for (let j = 0; j < digits.length; j++) {
