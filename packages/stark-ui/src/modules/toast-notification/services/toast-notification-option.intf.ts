@@ -8,9 +8,9 @@ export type StarkToastNotificationPosition = "bottom left" | "bottom right" | "t
 /**
  * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkToastNotificationPosition}
  */
-export const STARK_TOAST_NOTIFICATION_OPTIONS: InjectionToken<StarkToastNotificationOptions> = new InjectionToken<
-	StarkToastNotificationOptions
->("StarkToastNotificationOptions");
+export const STARK_TOAST_NOTIFICATION_OPTIONS: InjectionToken<StarkToastNotificationOptions> = new InjectionToken<StarkToastNotificationOptions>(
+	"StarkToastNotificationOptions"
+);
 
 /**
  * Available options for the toast notifications to be shown via the {@link StarkToastNotificationComponent}

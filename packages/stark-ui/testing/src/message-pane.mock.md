@@ -30,10 +30,10 @@ mockStarkMessagePaneService = TestBed.get(STARK_MESSAGE_PANE_SERVICE);
 In fact, every method of the base interface is simply mocked
 with a [Jasmine Spy](https://jasmine.github.io/api/3.5/Spy.html) which can then be used in the unit tests to:
 
--   return custom values
--   override a method with a custom function
--   asserting that they are actually called
--   do any other operation than can be performed with an Spy.
+- return custom values
+- override a method with a custom function
+- asserting that they are actually called
+- do any other operation than can be performed with an Spy.
 
 For example:
 
@@ -46,7 +46,7 @@ mockStarkMessagePaneService.getAll.and.returnValue(someCustomObservable);
 
 // overriding a method with a custom function
 mockStarkMessagePaneService.add.and.callFake((messages: StarkMessage[]) => {
-	// some custom logic to add the messages
+  // some custom logic to add the messages
 });
 
 // asserting that a method was indeed called

@@ -23,9 +23,7 @@ import createSpyObj = jasmine.createSpyObj;
 
 @Component({
 	selector: `host-component`,
-	template: `
-		<stark-pagination [htmlSuffixId]="htmlSuffixId" [paginationConfig]="paginationConfig"></stark-pagination>
-	`
+	template: ` <stark-pagination [htmlSuffixId]="htmlSuffixId" [paginationConfig]="paginationConfig"></stark-pagination> `
 })
 class TestHostComponent {
 	@ViewChild(StarkPaginationComponent)

@@ -78,7 +78,8 @@ const componentName = "stark-date-picker";
 		}
 	]
 })
-export class StarkDatePickerComponent extends AbstractStarkUiComponent
+export class StarkDatePickerComponent
+	extends AbstractStarkUiComponent
 	implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date> {
 	/**
 	 * Part of {@link MatFormFieldControl} API
@@ -197,7 +198,7 @@ export class StarkDatePickerComponent extends AbstractStarkUiComponent
 
 	/**
 	 * If the date-picker is required or not.
-	 * 
+	 *
 	 * Default: `false` (the date-picker is not required)
 	 */
 	@Input()

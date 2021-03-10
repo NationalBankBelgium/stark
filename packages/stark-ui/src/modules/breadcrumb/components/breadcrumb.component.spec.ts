@@ -14,9 +14,7 @@ import Spy = jasmine.Spy;
 
 @Component({
 	selector: `host-component`,
-	template: `
-		<stark-breadcrumb [breadcrumbConfig]="breadcrumbConfig"></stark-breadcrumb>
-	`
+	template: ` <stark-breadcrumb [breadcrumbConfig]="breadcrumbConfig"></stark-breadcrumb> `
 })
 class TestHostComponent {
 	@ViewChild(StarkBreadcrumbComponent)

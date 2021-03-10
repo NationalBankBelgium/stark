@@ -49,7 +49,7 @@ import { StarkMinimapComponentMode, StarkMinimapItemProperties } from "../../min
 import find from "lodash-es/find";
 import findIndex from "lodash-es/findIndex";
 import { trigger, state, style, transition, animate } from "@angular/animations";
-import { StarkTableExpandDetailDirective } from "../directives/table-expand-detail.directive"
+import { StarkTableExpandDetailDirective } from "../directives/table-expand-detail.directive";
 import { StarkTableRowContentDirective } from "../directives/table-row-content.directive";
 
 /**
@@ -426,7 +426,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	@ContentChild(StarkTableExpandDetailDirective, { read: TemplateRef })
 	public expandedDetailTemplate!: StarkTableExpandDetailDirective;
-	
+
 	@ContentChild(StarkTableRowContentDirective, { read: TemplateRef })
 	public customRowTemplate!: StarkTableRowContentDirective;
 
@@ -1124,7 +1124,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * @param row - The data object to check.
 	 * @returns boolean
 	 */
-	public isRowInExpandedRows(row: object): boolean  {
+	public isRowInExpandedRows(row: object): boolean {
 		return this.expandedRows.some((expandedRow: object) => this.expandedRowFn(expandedRow, row));
 	}
 

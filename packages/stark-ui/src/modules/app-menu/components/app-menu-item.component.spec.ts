@@ -13,9 +13,7 @@ import { StarkMenuGroup } from "./app-menu-group.intf";
 describe("AppMenuItemComponent", () => {
 	@Component({
 		selector: "host-component",
-		template: `
-			<stark-app-menu-item [level]="level" [menuGroup]="menuGroup"></stark-app-menu-item>
-		`
+		template: ` <stark-app-menu-item [level]="level" [menuGroup]="menuGroup"></stark-app-menu-item> `
 	})
 	class TestHostComponent {
 		@ViewChild(StarkAppMenuItemComponent)

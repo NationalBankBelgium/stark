@@ -26,7 +26,13 @@ import { StarkTableExpandDetailDirective } from "./directives/table-expand-detai
 import { StarkTableRowContentDirective } from "./directives/table-row-content.directive";
 
 @NgModule({
-	declarations: [StarkTableComponent, StarkTableMultisortDialogComponent, StarkTableColumnComponent, StarkTableRowContentDirective, StarkTableExpandDetailDirective],
+	declarations: [
+		StarkTableComponent,
+		StarkTableMultisortDialogComponent,
+		StarkTableColumnComponent,
+		StarkTableRowContentDirective,
+		StarkTableExpandDetailDirective
+	],
 	entryComponents: [StarkTableMultisortDialogComponent],
 	exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableRowContentDirective, StarkTableExpandDetailDirective],
 	imports: [

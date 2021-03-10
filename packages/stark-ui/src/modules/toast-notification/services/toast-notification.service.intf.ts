@@ -11,9 +11,9 @@ export const starkToastNotificationServiceName = "StarkToastNotificationService"
 /**
  * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkToastNotificationService}
  */
-export const STARK_TOAST_NOTIFICATION_SERVICE: InjectionToken<StarkToastNotificationService> = new InjectionToken<
-	StarkToastNotificationService
->(starkToastNotificationServiceName);
+export const STARK_TOAST_NOTIFICATION_SERVICE: InjectionToken<StarkToastNotificationService> = new InjectionToken<StarkToastNotificationService>(
+	starkToastNotificationServiceName
+);
 
 /**
  * Stark Toast Notification Service

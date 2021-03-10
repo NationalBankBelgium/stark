@@ -50,7 +50,7 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	/**
 	 * Internal property for holding the transformation function
 	 */
-	public _transformation: (value: any) => any = value => value;
+	public _transformation: (value: any) => any = (value) => value;
 
 	/**
 	 * Transformation to be done on the input value

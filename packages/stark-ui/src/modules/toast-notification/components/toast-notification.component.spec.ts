@@ -12,9 +12,7 @@ import { StarkToastNotificationComponent } from "./toast-notification.component"
 
 @Component({
 	selector: `host-component`,
-	template: `
-		<stark-toast-notification></stark-toast-notification>
-	`
+	template: ` <stark-toast-notification></stark-toast-notification> `
 })
 class TestHostComponent {
 	@ViewChild(StarkToastNotificationComponent)

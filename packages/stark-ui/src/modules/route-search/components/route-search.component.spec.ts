@@ -24,9 +24,7 @@ import { mergeUiTranslations } from "../../../common/translations";
 
 @Component({
 	selector: `host-component`,
-	template: `
-		<stark-route-search [menuConfig]="menuConfig"></stark-route-search>
-	`
+	template: ` <stark-route-search [menuConfig]="menuConfig"></stark-route-search> `
 })
 class TestHostComponent {
 	@ViewChild(StarkRouteSearchComponent)
