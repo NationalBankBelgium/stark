@@ -202,6 +202,6 @@
     "commitizen": {
       "path": "node_modules/cz-customizable"
     },
-    "nightlyVersion": "10.2.0"
+    "nightlyVersion": "11.0.0"
   }
 }
