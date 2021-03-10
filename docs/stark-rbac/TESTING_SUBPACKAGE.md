@@ -9,4 +9,4 @@ any of the main services provided by Stark RBAC.
 
 The mock classes provided by this subpackage are the following:
 
--   [MockStarkRBACAuthorizationService](https://stark.nbb.be/api-docs/stark-rbac/latest/classes/MockStarkRBACAuthorizationService.html#readme)
+- [MockStarkRBACAuthorizationService](https://stark.nbb.be/api-docs/stark-rbac/latest/classes/MockStarkRBACAuthorizationService.html#readme)

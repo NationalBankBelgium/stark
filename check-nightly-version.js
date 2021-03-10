@@ -4,7 +4,7 @@ let packageJsonPath = process.argv[2];
 let latestVersion = process.argv[3];
 let isCorrect = true;
 
-fs.readFile(packageJsonPath, "utf8", function(err, packageJsonData) {
+fs.readFile(packageJsonPath, "utf8", function (err, packageJsonData) {
 	if (err) {
 		return console.error("Error while reading file => " + err);
 	}
