@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - master
+      - /^\d+\.\d+\.x$/
     tags:
       - "*"
   pull_request:
     branches:
       - master
+      - /^\d+\.\d+\.x$/
 
 env:
   TZ: "Europe/Brussels"
