@@ -1,0 +1,1310 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>AbstractStarkHttpRepository</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/http/repository/http-abstract-repository.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This abstract class provides methods for the most common requests to be performed so it can be extended by your own Http repositories.</p>
+
+            </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#create">create</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#delete">delete</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#get">get</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCollection">getCollection</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getRequestBuilder">getRequestBuilder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#search">search</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#update">update</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#serializer">serializer</a>
+                                </li>
+                                <li>
+                                    <a href="#type">type</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(starkHttpService: <a href="../interfaces/StarkHttpService.html">StarkHttpService<T></a>, logger: <a href="../interfaces/StarkLoggingService.html">StarkLoggingService</a>, backend: <a href="../interfaces/StarkBackend.html">StarkBackend</a>, resourcePath: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, serializer?: <a href="../interfaces/StarkHttpSerializer.html">StarkHttpSerializer<T></a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:32</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Class constructor</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>starkHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/StarkHttpService.html" target="_self" >StarkHttpService&lt;T&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The Http Service provided by Stark.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/StarkLoggingService.html" target="_self" >StarkLoggingService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The <code>StarkLoggingService</code> instance of the application.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>backend</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/StarkBackend.html" target="_self" >StarkBackend</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The backend that this HttpRepository will target.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>resourcePath</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The resource path that will be used as default for all the requests performed by this HttpRepository. This will be replaced by the resourcePath provided (if any) in the getRequestBuilder() method.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>serializer</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/StarkHttpSerializer.html" target="_self" >StarkHttpSerializer&lt;T&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><ul>
+<li>The serializer that will be attached by default to every <code>StarkHttpRequest</code> sent by this HttpRepository to serialize/deserialize the items to be sent/received to/from the backend.</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="create"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            create
+                        </b>
+                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>create(item: T, params?: <a href="../interfaces/StarkHttpCreateRequestParams.html">StarkHttpCreateRequestParams</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:64</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Perform an Http request to create a resource item.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+                                    <td>
+                                            <code>T</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The item to create</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkHttpCreateRequestParams.html" target="_self" >StarkHttpCreateRequestParams</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The parameters used to create the item</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/StarkSingleItemResponseWrapper.html" target="_self" >Observable&lt;StarkSingleItemResponseWrapper&lt;T&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            delete
+                        </b>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>delete(item: T, params?: <a href="../interfaces/StarkHttpDeleteRequestParams.html">StarkHttpDeleteRequestParams</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="90"
+                            class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:90</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Perform an Http request to delete a resource item.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+                                    <td>
+                                            <code>T</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The item to delete</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkHttpDeleteRequestParams.html" target="_self" >StarkHttpDeleteRequestParams</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The parameters used to delete the item</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/StarkSingleItemResponseWrapper.html" target="_self" >Observable&lt;StarkSingleItemResponseWrapper&lt;T&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="get"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            get
+                        </b>
+                        <a href="#get"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>get(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, params?: <a href="../interfaces/StarkHttpGetRequestParams.html">StarkHttpGetRequestParams</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:103</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Perform an Http request to fetch a resource item.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>uuid</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The uuid of the item to fetch</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkHttpGetRequestParams.html" target="_self" >StarkHttpGetRequestParams</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The parameters used to fetch the item</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/StarkSingleItemResponseWrapper.html" target="_self" >Observable&lt;StarkSingleItemResponseWrapper&lt;T&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCollection"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getCollection
+                        </b>
+                        <a href="#getCollection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCollection(limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, offset: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, params?: <a href="../interfaces/StarkHttpGetCollectionRequestParams.html">StarkHttpGetCollectionRequestParams</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="117"
+                            class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:117</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Perform an Http request to fetch a range of resource items based on the limit and offset.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>limit</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The limit to apply to the request</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>offset</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The offset to apply to the request</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkHttpGetCollectionRequestParams.html" target="_self" >StarkHttpGetCollectionRequestParams</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The parameters to apply to the request</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/StarkCollectionResponseWrapper.html" target="_self" >Observable&lt;StarkCollectionResponseWrapper&lt;T&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRequestBuilder"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getRequestBuilder
+                        </b>
+                        <a href="#getRequestBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getRequestBuilder(resourcePath?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="154"
+                            class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:154</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Return a new instance of StarkHttpRequestBuilder which can be used to construct an StarkHttpRequest via one of the StarkHttpBuilder variants.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>resourcePath</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>: the resourcePath of the requestBuilder</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>StarkHttpRequestBuilder&lt;T&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="search"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            search
+                        </b>
+                        <a href="#search"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>search(criteria: literal type, limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, offset: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, params?: <a href="../interfaces/StarkHttpSearchRequestParams.html">StarkHttpSearchRequestParams</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="136"
+                            class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:136</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Perform an Http request to fetch a range of resource items that match with the given criteria.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>criteria</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The criteria of the request</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>limit</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The limit to apply to the request</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>offset</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The offset to apply to the request</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkHttpSearchRequestParams.html" target="_self" >StarkHttpSearchRequestParams</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The parameters to apply to the request</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/StarkCollectionResponseWrapper.html" target="_self" >Observable&lt;StarkCollectionResponseWrapper&lt;T&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="update"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            update
+                        </b>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>update(item: T, params?: <a href="../interfaces/StarkHttpUpdateRequestParams.html">StarkHttpUpdateRequestParams</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:77</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Perform an Http request to update an existing resource item.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+                                    <td>
+                                            <code>T</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The item to update</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkHttpUpdateRequestParams.html" target="_self" >StarkHttpUpdateRequestParams</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The parameters used to update the item</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/StarkSingleItemResponseWrapper.html" target="_self" >Observable&lt;StarkSingleItemResponseWrapper&lt;T&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+            <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="serializer"></a>
+                        <span class="name"><b>serializer</b><a href="#serializer"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>serializer()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:27</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name"><b>type</b><a href="#type"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>type()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/modules/http/repository/http-abstract-repository.ts:164</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Return the type of a class to be used in order to deserialize (using the default StarkHttpSerializerImpl
+or a custom serializer) the Http response of the different requests.
+This method must be implemented in every Http repository that extends this abstract class
+and the returned class should have the correct serialization decorators.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#StarkSerializable" target="_self" >StarkSerializable</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Observable } from &quot;rxjs&quot;;
+import { StarkBackend } from &quot;../entities/backend&quot;;
+import { StarkCollectionResponseWrapper, StarkResource, StarkSingleItemResponseWrapper } from &quot;../entities&quot;;
+import {
+	StarkHttpCreateRequestParams,
+	StarkHttpDeleteRequestParams,
+	StarkHttpGetCollectionRequestParams,
+	StarkHttpGetRequestParams,
+	StarkHttpRequestBuilder,
+	StarkHttpRequestBuilderImpl,
+	StarkHttpSearchRequestParams,
+	StarkHttpUpdateRequestParams
+} from &quot;../builder&quot;;
+import { StarkHttpService } from &quot;../services/http.service.intf&quot;;
+import { StarkLoggingService } from &quot;../../logging/services&quot;;
+import { StarkSerializable } from &quot;../../../serialization&quot;;
+import { StarkHttpSerializer, StarkHttpSerializerImpl } from &quot;../serializer&quot;;
+
+/**
+ * This abstract class provides methods for the most common requests to be performed so it can be extended by your own Http repositories.
+ */
+export abstract class AbstractStarkHttpRepository&lt;T extends StarkResource&gt; {
+	/**
+	 * @ignore
+	 */
+	private _serializer?: StarkHttpSerializer&lt;T&gt;;
+	protected get serializer(): StarkHttpSerializer&lt;T&gt; {
+		// set the default serializer in case no custom serializer was defined
+		// it should be set here to prevent exceptions when the type() getter returns values depending on the actual instance (&#x27;return this.xxxx&#x27;)
+		this._serializer &#x3D; this._serializer || new StarkHttpSerializerImpl&lt;T&gt;(this.type);
+		return this._serializer;
+	}
+
+	/**
+	 * Class constructor
+	 * @param starkHttpService - The Http Service provided by Stark.
+	 * @param logger - The &#x60;StarkLoggingService&#x60; instance of the application.
+	 * @param backend - The backend that this HttpRepository will target.
+	 * @param resourcePath - The resource path that will be used as default for all the requests performed by this HttpRepository. This will be replaced by the resourcePath provided (if any) in the getRequestBuilder() method.
+	 * @param serializer - The serializer that will be attached by default to every &#x60;StarkHttpRequest&#x60; sent by this HttpRepository to serialize/deserialize the items to be sent/received to/from the backend.
+	 */
+	public constructor(
+		protected starkHttpService: StarkHttpService&lt;T&gt;,
+		protected logger: StarkLoggingService,
+		protected backend: StarkBackend,
+		protected resourcePath: string,
+		serializer?: StarkHttpSerializer&lt;T&gt;
+	) {
+		if (!backend) {
+			throw new Error(&#x60;AbstractStarkHttpRepository: backend config missing for resourcePath &quot;${resourcePath}&quot;.&#x60;);
+		}
+		if (typeof resourcePath &#x3D;&#x3D;&#x3D; &quot;undefined&quot;) {
+			throw new Error(&#x60;AbstractStarkHttpRepository: resourcePath missing in Http Repository with backend &quot;${backend.name}&quot;.&#x60;);
+		}
+
+		this._serializer &#x3D; serializer;
+	}
+
+	/**
+	 * Perform an Http request to create a resource item.
+	 * @param item - The item to create
+	 * @param params - The parameters used to create the item
+	 */
+	public create(item: T, params?: StarkHttpCreateRequestParams): Observable&lt;StarkSingleItemResponseWrapper&lt;T&gt;&gt; {
+		return this.starkHttpService.executeSingleItemRequest(
+			this.getRequestBuilder()
+				.create(item, params)
+				.build()
+		);
+	}
+
+	/**
+	 * Perform an Http request to update an existing resource item.
+	 * @param item - The item to update
+	 * @param params - The parameters used to update the item
+	 */
+	public update(item: T, params?: StarkHttpUpdateRequestParams): Observable&lt;StarkSingleItemResponseWrapper&lt;T&gt;&gt; {
+		return this.starkHttpService.executeSingleItemRequest(
+			this.getRequestBuilder()
+				.update(item, params)
+				.build()
+		);
+	}
+
+	/**
+	 * Perform an Http request to delete a resource item.
+	 * @param item - The item to delete
+	 * @param params - The parameters used to delete the item
+	 */
+	public delete(item: T, params?: StarkHttpDeleteRequestParams): Observable&lt;StarkSingleItemResponseWrapper&lt;T&gt;&gt; {
+		return this.starkHttpService.executeSingleItemRequest(
+			this.getRequestBuilder()
+				.delete(item, params)
+				.build()
+		);
+	}
+
+	/**
+	 * Perform an Http request to fetch a resource item.
+	 * @param uuid - The uuid of the item to fetch
+	 * @param params - The parameters used to fetch the item
+	 */
+	public get(uuid: string, params?: StarkHttpGetRequestParams): Observable&lt;StarkSingleItemResponseWrapper&lt;T&gt;&gt; {
+		return this.starkHttpService.executeSingleItemRequest(
+			this.getRequestBuilder()
+				.get(uuid, params)
+				.build()
+		);
+	}
+
+	/**
+	 * Perform an Http request to fetch a range of resource items based on the limit and offset.
+	 * @param limit - The limit to apply to the request
+	 * @param offset - The offset to apply to the request
+	 * @param params - The parameters to apply to the request
+	 */
+	public getCollection(
+		limit: number,
+		offset: number,
+		params?: StarkHttpGetCollectionRequestParams
+	): Observable&lt;StarkCollectionResponseWrapper&lt;T&gt;&gt; {
+		return this.starkHttpService.executeCollectionRequest(
+			this.getRequestBuilder()
+				.getCollection(limit, offset, params)
+				.build()
+		);
+	}
+
+	/**
+	 * Perform an Http request to fetch a range of resource items that match with the given criteria.
+	 * @param criteria - The criteria of the request
+	 * @param limit - The limit to apply to the request
+	 * @param offset - The offset to apply to the request
+	 * @param params - The parameters to apply to the request
+	 */
+	public search(
+		criteria: { [param: string]: string },
+		limit: number,
+		offset: number,
+		params?: StarkHttpSearchRequestParams
+	): Observable&lt;StarkCollectionResponseWrapper&lt;T&gt;&gt; {
+		return this.starkHttpService.executeCollectionRequest(
+			this.getRequestBuilder()
+				.search(criteria, limit, offset, params)
+				.build()
+		);
+	}
+
+	/**
+	 * Return a new instance of StarkHttpRequestBuilder which can be used to construct an StarkHttpRequest via one of the StarkHttpBuilder variants.
+	 * @param resourcePath: the resourcePath of the requestBuilder
+	 */
+	// the default resourcePath of the returned builder will be replaced with the one that is passed here (if any)
+	public getRequestBuilder(resourcePath?: string): StarkHttpRequestBuilder&lt;T&gt; {
+		return new StarkHttpRequestBuilderImpl(this.backend, resourcePath || this.resourcePath, this.serializer);
+	}
+
+	/**
+	 * Return the type of a class to be used in order to deserialize (using the default StarkHttpSerializerImpl
+	 * or a custom serializer) the Http response of the different requests.
+	 * This method must be implemented in every Http repository that extends this abstract class
+	 * and the returned class should have the correct serialization decorators.
+	 */
+	protected abstract get type(): StarkSerializable;
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'AbstractStarkHttpRepository.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

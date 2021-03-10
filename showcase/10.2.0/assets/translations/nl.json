@@ -1,0 +1,520 @@
+{
+  "SHOWCASE": {
+    "COMMON": {
+      "DISABLED": "Uitgeschakeld",
+      "ENABLED": "Ingeschakeld",
+      "VALUE": "Waarde"
+    },
+    "DEMO": {
+      "ACTION_BAR": {
+        "ALT": "Action Bar Alternative",
+        "CLASSIC-COMPACT": "Action Bar Classic Compact",
+        "CLASSIC-FULL": "Action Bar Classic Full",
+        "TITLE": "Action bar"
+      },
+      "APP_DATA": {
+        "DROPDOWN": "Voorbeeld in een dropdown met de profielfoto van de gebruiker",
+        "DROPDOWN.NO_AVATAR": "Voorbeeld in een dropdown zonder profieldfoto",
+        "MENU": "Voorbeeld in een menu",
+        "USER": "Gebruiker",
+        "LAST_ACCESS": "Laatste toegang",
+        "VERSION": "Versie",
+        "ENVIRONMENT": "Omgeving",
+        "TITLE": "App data"
+      },
+      "BREADCRUMB": {
+        "CHILD": "Kind",
+        "CONFIG_INPUT": "Breadcrumb demonstration (met breadcrumbConfig)",
+        "GRANDPARENT": "Grootouder",
+        "NO_INPUT": "Breadcrumb demonstration (zonder parameters)",
+        "PARENT": "Ouder",
+        "ROOT": "Voorouder",
+        "TITLE": "Breadcrumb"
+      },
+      "COLLAPSIBLE": {
+        "CLOSED": "Gesloten",
+        "CUSTOM_ICON": "Aangepast icon",
+        "DEFAULT_ICON": "Standaard pictogram",
+        "HTML_CONTENT": "Alle HTML-inhoud",
+        "OPEN": "Open",
+        "TITLE": "Collapsible",
+        "TITLE_0": "Standaard icon collapsible titel",
+        "TITLE_1": "Aangepast icon collapsible titel",
+        "TOGGLE_COLLAPSIBLE": "Collapsible omschakelen"
+      },
+      "DATE_PICKER": {
+        "CUSTOM_FILTER": "Date Picker - Aangepaste filter",
+        "NG_MODEL": "Date Picker - Met NgModel",
+        "ONLY_WEEKDAYS": "Date Picker - Alleen weekdagen",
+        "ONLY_WEEKENDS": "Date Picker - Alleen weekenden",
+        "PLACEHOLDER": "Datum kiezen",
+        "REACTIVE_FORM": "Date Picker - Met Reactive form",
+        "TITLE": "Date picker"
+      },
+      "DATE_RANGE_PICKER": {
+        "TITLE": "Date range picker",
+        "WITH_MODEL": "ngModel",
+        "WITH_FORM_GROUP": "Form group",
+        "WITH_MASK": "Standaard datummasker",
+        "WITH_CUSTOM_MASK": "Aangepast datummasker (DD-MM-YYYY)",
+        "ERROR_MESSAGES": {
+          "MIN_TODAY": "Datum moet na vandaag zijn",
+          "MAX_MONTH": "Datum moet binnen minder dan 1 maand zijn",
+          "WEEKDAY": "Datum moet een weekdag zijn",
+          "START_BEFORE_END": "Startdatum moet voor einddatum zijn",
+          "END_AFTER_START": "Einddatum moet na startdatum zijn",
+          "IN_FEBRUARY": "Datum mag niet in februari zijn",
+          "REQUIRED": "Datum is verplicht"
+        }
+      },
+      "DATE_TIME_PICKER": {
+        "TITLE": "Date time picker",
+        "NG_MODEL": "Met ngModel",
+        "PLACEHOLDER": "Datum en tijd",
+        "REACTIVE_FORM": "Met Reactive form",
+        "ERROR_MESSAGES": {
+          "MIN_DATE": "Datum mag niet vóór de toegestane minimale datum zijn",
+          "MAX_DATE": "Datum mag niet na de toegestane maximale datum zijn",
+          "MIN_DATE_TIME": "Datetime mag niet vóór de toegestane minimale datetime zijn",
+          "MAX_DATE_TIME": "Datetime mag niet na de toegestane maximale datetime zijn",
+          "INVALID_DATE": "Ongeldige datum"
+        }
+      },
+      "DIALOGS": {
+        "ALERT": {
+          "TITLE": "Dit is een waarschuwings titel",
+          "TEXT": "Je kan hierin een beschrijvende tekst opgeven.",
+          "OK": "Begrepen!",
+          "RESULT_OK": "Waarschuwings dialoog gesloten met waarde '{{ result }}'",
+          "RESULT_CANCEL": "Waarschuwings dialoog gesloten met waarde '{{ result }}'"
+        },
+        "CONFIRM": {
+          "TITLE": "Wil je jouw schuld laten schrappen?",
+          "TEXT": "Alle banken hebben afgesproken om jouw schulden te vergeven.",
+          "OK": "Doe het alsjeblieft!",
+          "CANCEL": "Klinkt als een scam",
+          "RESULT_OK": "Je hebt besloten om jouw schuld te laten kwijtschelden.",
+          "RESULT_CANCEL": "Je hebt besloten jouw schuld te behouden."
+        },
+        "PROMPT": {
+          "TITLE": "Hoe zou je jouw hond noemen?",
+          "TEXT": "Bowser is een veel voorkomende naam.",
+          "PLACEHOLDER": "Hondennaam",
+          "OK": "Oké!",
+          "CANCEL": "Ik ben een kat persoon",
+          "RESULT_OK": "Je hebt besloten om je hond '{{ result }}' te noemen.",
+          "RESULT_CANCEL": "Je hebt je hond geen naam gegeven."
+        },
+        "TITLE": "Dialogen",
+        "PREDEFINED_DIALOGS": "Voorgedefinieerde dialogen",
+        "ALERT_DIALOG": "Waarschuwings dialoog",
+        "CONFIRM_DIALOG": "Bevestigings dialoog",
+        "PROMPT_DIALOG": "Prompt dialoog"
+      },
+      "DROPDOWN": {
+        "PR": "Informaticatoepassingen",
+        "BLANK": "Bij verstek keus (blank)",
+        "CS": "IT-klantendiensten",
+        "DISABLED": "Niet geactiveerd dropdown",
+        "IO": "Informatica-infrastructuur en operaties",
+        "MULTIPLE": "Meerdere selectie",
+        "NG_MODEL_REQUIRED": "Met NgModel + gewenste keuze",
+        "REACTIVE_FORM": "Met Reactive form",
+        "SELECTED_VALUE": "Geselecteerde waarde ",
+        "SELECTED_VALUES": "Geselecteerde waarden ",
+        "SELECT_SERVICE": "Selecteer een dienst",
+        "SELECT_NUMBER": "Selecteer uw geluksnummer",
+        "SELECT_SERVICES": "Selecteer een of meer diensten",
+        "SELECT_ONE_SERVICE": "Selecteer ten minsten een dienst",
+        "SELECT_DISABLED": "Sorry, deze dropdown is niet geactiveerd",
+        "TITLE": "Dropdown",
+        "WHITE": "Witte dropdown met zwarte achtergrond (maximum breedte)"
+      },
+      "EXAMPLE_VIEWER": {
+        "TITLE": "Example viewer"
+      },
+      "FOOTER": {
+        "TITLE": "App footer",
+        "INTRO": "Stark provides you a custom footer for your application. It's a standard component you can use by copying this HTML into your code",
+        "INFO": "This component takes 3 elements as input :",
+        "INPUT1": "<b>legalInfoUrl</b> contains the url to the legal information page.",
+        "INPUT2": "<b>helpPageUrl</b> contains the url to the help page.",
+        "INPUT3": "The included HTML elements will be copied inside the footer as the leftmost element."
+      },
+      "GENERIC_SEARCH": {
+        "ACTIONS": "Actions to implement for the Generic Search",
+        "BASIC_IMPLEMENTATION": "Basic implementation of Generic Search",
+        "EXPLANATION_ABOUT_DOC_ON_GITHUB": "How to use the Stark Generic Search component",
+        "GETTING_STARTED": "Getting started",
+        "REDUCERS": "Reducers to implement for the Generic Search",
+        "SEARCH_RESULTS": "Search results",
+        "SERVICE_INTERFACE": "Interface of the service needed for the Generic Search",
+        "SERVICE_IMPLEMENTATION": "Implementation of the service needed for the Generic Search",
+        "TITLE": "Generic Search",
+        "TOGGLE": "Toggle search"
+      },
+      "DIRECTIVES": {
+        "INPUT_MASK": {
+          "EMAIL_MASK": {
+            "TITLE": "Email Mask directive",
+            "EMAIL_MASK": "E-mail",
+            "EMAIL_PLACEHOLDER": "Typ een e-mailadres"
+          },
+          "NUMBER_MASK": {
+            "TITLE": "Number Mask directive",
+            "US_DOLLARS_AMOUNT_MASK": "Bedrag in US Dollars ",
+            "EURO_AMOUNT_MASK": "Bedrag in Euros",
+            "PERCENTAGE_MASK": "Percentage"
+          },
+          "TEXT_MASK": {
+            "TITLE": "Text Mask directive",
+            "CREDIT_CARD_MASK": "Kredietkaart",
+            "STRUCTURED_MESSAGE_MASK": "Gestructureerde mededeling",
+            "PHONE_NUMBER_MASK": "Telefoonnummer"
+          },
+          "TIMESTAMP_MASK": {
+            "TITLE": "Timestamp Mask directive",
+            "TIMESTAMP_DMY_MASK": "Timestamp in DMJ format",
+            "TIMESTAMP_DMY_PLACEHOLDER": "DD-MM-YYYY HH:mm:ss",
+            "TIMESTAMP_MDY_MASK": "Timestamp in MDJ format",
+            "TIMESTAMP_MDY_PLACEHOLDER": "MM-DD-YYYY HH:mm:ss",
+            "FULL_DATE_DMY_MASK": "Datum in DMJ format",
+            "FULL_DATE_DMY_PLACEHOLDER": "DD-MM-YYYY",
+            "DAY_MONTH_MASK": "Dag-Maand",
+            "DAY_MONTH_PLACEHOLDER": "DD-MM",
+            "MONTH_DAY_MASK": "Maand / Dag",
+            "MONTH_DAY_PLACEHOLDER": "MM/DD",
+            "TIME_MASK": "Tijd",
+            "TIME_PLACEHOLDER": "HH:mm:ss"
+          },
+          "TITLE": "Input Mask directives"
+        },
+        "RESTRICT_INPUT": {
+          "TITLE": "Restrict input",
+          "DESCRIPTION": "Typ een waarde in de input velden en sommige karakters zullen niet toegelaten worden door de restricties die op het veld werden gezet.",
+          "INPUT_ONLY_NUMBERS": "Aanvaard enkel cijfers",
+          "INPUT_ALPHANUMERICAL_CHARACTERS": "Aanvaard enkel alfanumerische karakters",
+          "INPUT_NO_SPECIAL_CHARACTERS": "Aanvaard alle karakters, behalve speciale karakters",
+          "INPUT_UPPERCASE_CHARACTERS": "Aanvaard enkel hoofdletters"
+        },
+        "TRANSFORM": {
+          "TITLE": "Transform input",
+          "ONLY_UPPER_CASE_LABEL": "Alleen hoofdletters",
+          "ONLY_LOWER_CASE_LABEL": "Alleen kleine letters",
+          "EMOJI_LABEL": "\uD83D\uDE04\uD83D\uDE04\uD83D\uDE04",
+          "EMOJI_EXAMPLE": ":+1: :-1: :smile: :tada: :rocket: :zap:"
+        },
+        "TYPE_A_VALUE": "Geef een waarde in"
+      },
+      "LANGUAGE_SELECTOR": {
+        "DROPDOWN": "Taal selector in 'dropdown' mode",
+        "TITLE": "Language selector",
+        "TOOLBAR": "Taal selector in 'toolbar' mode"
+      },
+      "LOGOUT": {
+        "LOGOUT_DEFAULT_ICON": "Logout-knop - Standaard pictogram",
+        "LOGOUT_CUSTOM_ICON": "Logout-knop - Aangepast pictogram",
+        "TITLE": "App logout"
+      },
+      "MENU": {
+        "SIMPLE": "Simple menu",
+        "SECTIONS": "Menu with sections",
+        "TITLE": "App menu"
+      },
+      "MESSAGE_PANE": {
+        "BUTTONS": {
+          "CENTER": "Gecentreerd",
+          "CHANGE_THEME": "Wijzig thema",
+          "CLEAR_AND_SHOW_NEW_MESSAGES": "Wis & Toon nieuwe berichten",
+          "CLEAR_MESSAGES": "Wis berichten",
+          "LEFT": "Links",
+          "RIGHT": "Rechts",
+          "SHOW_MESSAGES": "Toon berichten"
+        },
+        "DESCRIPTION": "Het berichtenvenster blijft op de pagina staan totdat het wordt gesloten, maar de pagina-interacties worden niet geblokkeerd (zoals dat het geval is met een dialoogvenster). Het kan worden gebruikt om validatiefouten van het formulier weer te geven, indien uw toepassing ze moet tonen tot ze worden verwijderd.",
+        "MESSAGES": {
+          "ERRORS": {
+            "ERROR_1": "Fout 1: Te veel vingers op het toetsenbord - prioriteit 500",
+            "ERROR_2": "Fout 2: prioriteit 10",
+            "ERROR_3": "Fout 3: prioriteit 200",
+            "NEW_ERROR_1": "Nieuwe fout 1",
+            "NEW_ERROR_2": "Nieuwe fout 2"
+          },
+          "WARNINGS": {
+            "WARNING_1": "Waarschuwing 1: prioriteit 1",
+            "WARNING_2": "Waarschuwing 2: prioriteit onbepaald",
+            "NEW_WARNING_1": "Nieuwe waarschuwing 1"
+          },
+          "INFOS": {
+            "INFO_1": "Informatie 1: prioriteit onbepaald",
+            "INFO_2": "Informatie 2: prioriteit 998",
+            "NEW_INFO_1": "Nieuwe informatie 1",
+            "NEW_INFO_2": "Nieuwe informatie 2"
+          }
+        },
+        "TITLE": "Message pane",
+        "EXAMPLE": "Voorbeeld",
+        "BUTTON_GROUPS": {
+          "DEMO": "Demonstratie",
+          "DISPLAY_ALIGNMENT": "Weergave uitlijning",
+          "DISPLAY_STYLE": "Weergave stijl"
+        }
+      },
+      "MINIMAP": {
+        "TITLE": "Minimap",
+        "FULL": "Minimap (klassieke versie)",
+        "COMPACT": "Minimap (compacte version)"
+      },
+      "PAGINATION": {
+        "ADVANCED_CONFIGURATION": "Pagination met geavanceerde configuratie",
+        "COMPACT_CONFIGURATION": "Pagination in compacte modus",
+        "EMITTED_PAGINATE_EVENT": "Verzonden Paginate event",
+        "EXTENDED_CONFIGURATION": "Pagination met uitgebreide paginakiezer",
+        "SIMPLE_CONFIGURATION": "Pagination met eenvoudige configuratie",
+        "TITLE": "Pagination"
+      },
+      "PRETTY_PRINT": {
+        "CSS": "Pretty-Print CSS",
+        "ENABLE_HIGHLIGHTING": "Highlighting activeren",
+        "ENTER_DATA": "Typ of kopieer/plak ongeformatteerde code",
+        "HTML": "Pretty-Print HTML",
+        "JAVASCRIPT": "Pretty-Print Javascript",
+        "JSON": "Pretty-Print JSON",
+        "ORIGINAL_CODE": "Originele Code",
+        "PRETTY_PRINTED": "Geformatteerd",
+        "PRETTY_PRINTED_WITH_HIGHLIGHTING": "Geformatteerd en gehighlight",
+        "SCSS": "Pretty-Print SCSS",
+        "SELECT_DATAFORMAT": "Selecteer een formaat",
+        "SQL": "Pretty-Print SQL",
+        "TITLE": "Pretty print",
+        "TRY_IT_YOURSELF": "Probeer het zelf",
+        "TYPESCRIPT": "Pretty-Print Typescript",
+        "XML": "Pretty-Print XML"
+      },
+      "PROGRESS_INDICATOR": {
+        "TITLE": "Progress indicator",
+        "HIDE": "Verbergen",
+        "SENTENCE_TO_HIDE": "Deze zin zal verbergd worden zodra de progress indicator zal weergegeven worden",
+        "SHOW": "Weergeven"
+      },
+      "ROUTE_SEARCH": {
+        "DIRECTION_LEFT": "Route Search component met direction 'left'",
+        "DIRECTION_RIGHT": "Route Search component met direction 'right'",
+        "MENU_CONFIG_REMARKS": "<b>BELANGRIJK: </b> Het Route Search component geeft alle routes weer die beschikbaar zijn in de input 'menuConfig'. Deze config kan ook lazy-loaded routes bevatten.",
+        "ROUTER_CONFIG_REMARKS": "<b>BELANGRIJK: </b> Het Route Search component zal alleen de routes weergeven die op dit moment al door de router zijn geregistreerd. De lazy-loaded routes die nog niet zijn geladen, worden niet getoond.",
+        "TITLE": "Route Search",
+        "WITH_CUSTOM_COLOR_AND_MENU_CONFIG": "Route Search component met 'menuConfig' en aangepaste kleur"
+      },
+      "SHARED": {
+        "EXAMPLE_VIEWER_LIST": "Voorbeelden met code"
+      },
+      "SIDEBAR": {
+        "INTRO": "De preview van deze code is de eigenlijke zijbalk van de showcase",
+        "OPEN_LEFT": "Open de linker sidebar",
+        "OPEN_MENU": "Open de menu",
+        "OPEN_RIGHT": "Open de rechter sidebar",
+        "TITLE": "App sidebar"
+      },
+      "SLIDER": {
+        "HORIZONTAL_RANGE_SLIDER": "Horizontale schuifregelaar met bereik",
+        "SIMPLE_HORIZONTAL_SLIDER": "Eenvoudige horizontale schuifregelaar",
+        "SIMPLE_VERTICAL_SLIDER": "Eenvoudige verticale schuifregelaar",
+        "VERTICAL_RANGE_SLIDER": "Verticale schuifregelaar met bereik",
+        "TITLE": "Slider"
+      },
+      "TABLE": {
+        "LABELS": {
+          "TITLE": "Titel",
+          "DESCRIPTION": "Omschrijving",
+          "EXTRA_INFO": "Extra informatie"
+        },
+        "FOOTER": {
+          "TOTAL": "Totaal"
+        },
+        "REGULAR": "Normale tabel",
+        "WITH_SELECTION": "Tabel met selectie",
+        "WITH_ITEMS_PER_PAGE_SELECTOR": "Tabel met de selector van items per pagina om weer te geven",
+        "WITH_CUSTOM_ACTIONS": "Tabel met aangepaste acties",
+        "WITH_FIXED_HEADER": "Tabel met vaste header",
+        "WITH_FOOTER": "Tabel met footer",
+        "WITH_TRANSCLUDED_ACTION_BAR": "Tabel met 'transcluded' Action Bar",
+        "WITH_CUSTOM_STYLING": "Tabel met aangepaste opmaak",
+        "WITH_CUSTOM_CELL_RENDERING": "Table met aangepaste kolommen",
+        "WITH_FIXED_ACTIONS": "Tabel met vaste rijacties",
+        "WITH_COLLAPSIBLE_ROWS": "Tabel met uitklapbare rijen",
+        "TITLE": "Table"
+      },
+      "TOAST": {
+        "BUTTON_INFO": "Info",
+        "BUTTON_ALERT": "Fout",
+        "BUTTON_WARNING": "Waarschuwing",
+        "BUTTON_ACTION": "Actie",
+        "BUTTON_DELAY_LONG": "Lange vertraging",
+        "BUTTON_DELAY_SHORT": "Korte vertraging",
+        "BUTTON_HIDE": "Verberg de toast",
+        "EXAMPLE": "Voorbeeld",
+        "MESSAGE_CLOSED_ON_DELAY_TIMEOUT": "Toast wordt automatisch gesloten na een time-out voor vertraging.",
+        "MESSAGE_ACTION_CLICKED": "Je hebt op de actie 'DISMISS' geklikt!",
+        "MESSAGE_HIDDEN": "Je sloot de toast!",
+        "MESSAGE_OPENED": "Toast geopend.",
+        "MESSAGE_CLOSED_BY_NEW_TOAST": "Toast automatisch gesloten voordat een nieuwe wordt weergegeven.",
+        "MESSAGE_INTRO": "Klik op een knop om de toastmelding te testen.",
+        "MESSAGE_TEXT": "Lorem ipsum dolor sit amet, {{value}}",
+        "TITLE": "Toast notification"
+      }
+    },
+    "DEMO_RBAC": {
+      "DIRECTIVES": {
+        "AUTHORIZATION": {
+          "HIDE_ON_PERMISSION": {
+            "TITLE": "Hide On Permission directive",
+            "SWITCH_UNAUTHORIZED_ROLE": "Wissel van ongeautoriseerde rol:",
+            "ONLY_VISIBLE_TO": "Het is alleen zichtbaar voor een geautoriseerde gebruiker die niet de '{{ role }}' rol heeft."
+          },
+          "SHOW_ON_PERMISSION": {
+            "TITLE": "Show On Permission directive",
+            "SWITCH_AUTHORIZED_ROLE": "Wissel van geautoriseerde rol: ",
+            "ONLY_VISIBLE_TO": "Het is alleen zichtbaar voor een geautoriseerde gebruiker die de '{{ role }}' rol heeft."
+          },
+          "CONTENT_PROTECTED": "Deze inhoud is beveiligd.",
+          "TITLE": "Authorization directives"
+        }
+      },
+      "SERVICES": {
+        "AUTHORIZATION": {
+          "FUNCTIONALITY": "Functionaliteit",
+          "DESCRIPTION_METHODS": "De <code>StarkRBACAuthorizationService</code> voorziet de nodige methodes om te weten of een gebruiker een (reeks van) specifieke rol(len) heeft of anoniem is.",
+          "DESCRIPTION_TRANSITION_HOOKS": "Het voegt ook een \"transition hook\" toe aan de Router om bepaalde routes te kunnen afschermen voor ongeautoriseerde gebruikers. De \"transition hook\" al de gebruiker voorkomen om eender welke route te gebruiken waarop specifieke requirements worden gedefinieerd. Daarbij kunnen gebruikers ook geredirect worden naar een andere route moest dit opgenomen zijn in de configuratie.",
+          "PROTECTED_ROUTES": "Beschermde routes declareren",
+          "DESCRIPTION_PROTECTED_ROUTES": "Beschermde routes moeten gedeclareerd worden door middel van de <code>StarkRBACStateDeclaration</code> interface en de definitie van de 'permissions' configuratie in het 'data' object van de route. In dit voorbeeld zijn ze als volgt gedefinieerd:",
+          "NAVIGATE_TO_ADMINS_PAGE": "Naar de Admin pagina",
+          "NAVIGATE_TO_MANAGERS_PAGE": "Naar de Manager pagina",
+          "NAVIGATE_TO_SUPER_ADMINS_PAGE": "Naar de Super-Admin pagina",
+          "REDIRECTION_MESSAGE": "{{ rbacActionType }}.<br>U bent omgeleid omdat u niet over de juiste machtigingen beschikt om toegang te krijgen tot de aangevraagde pagina.",
+          "TITLE": "Authorization service"
+        },
+        "RESTRICTED_PAGE": {
+          "TITLE": "Beschermde pagina",
+          "DESCRIPTION": "U hebt toegang omdat u de juiste rechten hebt.",
+          "GO_BACK": "Terug naar de vorige pagina"
+        }
+      }
+    },
+    "GETTING_STARTED": {
+      "TITLE": "Begonnen"
+    },
+    "HOMEPAGE": {
+      "CORE": "Stark Core",
+      "DESCRIPTION_DETAIL": "<p>Stark levert de belangrijkste instrumenten om de front-end ontwikkeling te versnellen.<br>U zult een betrouwbare en herbruikbare build gebouwd op Webpack vinden, een Starter project, core en ui modules dat interessante visuele componenten verschaffen, ... <br>Deze modules zijn zoals LEGO: Voegt wat u nodig hebt, niet meer en niet minder!</p>",
+      "DOCUMENTATION_CORE_DESC": "<p>Stark Core, ook bekend als stark-core, is een module dat herbruikbare APIs verstrekt, zoals routing, logging, log shipping,enzovoort.</p>",
+      "DOCUMENTATION_MAIN_TITLE": "Documentatie",
+      "DOCUMENTATION_RBAC_DESC": "<p>De RBAC-module van Stark (ook bekend als stark-rbac) is een afzonderlijke module in Stark die optioneel kan worden opgenomen in elke op Stark gebaseerde toepassing om verschillende elementen (directives, services en componenten) te bieden om Role Based Access Control (RBAC) mechanisme te ondersteunen.</p>",
+      "DOCUMENTATION_SHOWCASE_DESC": "<p>De Showcase, u zich hier bevindt!<br>Veel plezier met de ontdekking van onze componenten lijst !</p>",
+      "DOCUMENTATION_UI_DESC": "<p>Stark UI levert UI herbruikbare componenten : gegevenstabel, dialoogvenster, ... maar ook themas.</p>",
+      "GETTING_STARTED": "Ermee beginnen",
+      "INTRODUCTION": "Een front-end framework gebaseerd op Angular 7",
+      "LATEST_API": "Laatste API",
+      "LATEST_NEWS": "Laatste nieuws",
+      "MAIN_TITLE": "Wat is Stark?",
+      "PREVIOUS_API": "Vorige API",
+      "PREVIOUS_VERSIONS": "Vorige versies",
+      "RBAC": "Stark RBAC",
+      "SHOWCASE": "Showcase",
+      "TITLE": "Home",
+      "UI": "Stark UI"
+    },
+    "ICONS": {
+      "GITHUB": "Github repo",
+      "STARK_UI": "Stark-UI documentatie",
+      "STARK_CORE": "Stark-Core documentatie",
+      "STARK_RBAC": "Stark-RBAC documentatie"
+    },
+    "NEWS": {
+      "TITLE": "Nieuws"
+    },
+    "OTHERWISE": {
+      "TITLE": "Andersom"
+    },
+    "STYLEGUIDE": {
+      "TITLE": "Stijlgids",
+      "BUTTON": {
+        "TITLE": "Buttons"
+      },
+      "CARD": {
+        "ADVANCED": {
+          "DETAILS": "Stark kan ook complexere kaarten aan. Hier is een voorbeeld met een ondertitel en acties. Er is ook de mogelijkheid om elementen de volledige breedte te laten gebruiken dankzij de <code>.stark-full-width</code> klasse die toegevoegd is aan de <code>mat-card-content</code> html-tag.",
+          "TITLE": "Geavanceerde kaart"
+        },
+        "BASIC": {
+          "DETAILS": "Stark biedt een alternatieve opmaak aan voor kaarten. Je kan de html structuur behouden en de klas <code>.stark-card</code> aan de Angular Material kaart toevoegen. We raden aan om het <code>h3</code> label te gebruiken binnen een <code>mat-card-title</code>.<br>Meer informatie over de kaarten van Angular Material, kan je terugvinden via deze link: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "TITLE": "Basiskaart"
+        },
+        "CODE": "Hier is de code om een kaart te tonen:",
+        "TITLE": "Kaarten"
+      },
+      "COLORS": {
+        "ALT": {
+          "DETAILS": "In addition to the 3 basic palettes, Stark provides 3 alternative palettes: <code>$stark-alert-palette</code>, <code>$stark-grey-palette</code> and <code>$stark-success-palette</code>.",
+          "TITLE": "Stark alternative palettes"
+        },
+        "BASIC": {
+          "DETAILS": "Stark provides an alternative layout for cards. You can keep the same html structure and add the <code>.stark-card</code> class to the Angular Material card. We also recommend to use <code>h3</code> tag inside the <code>mat-card-title</code>.<br><br><br>For more information on Angular Material's card, check out this link: <a href=\"https://material.angular.io/components/card/overview\" target=\"_blank\">https://material.angular.io/components/card/overview</a>",
+          "TITLE": "Material palettes"
+        },
+        "CUSTOM": {
+          "DETAILS": "If you want to customize those palettes, you first need to create a palette and this tool is really useful: <a href=\"http://mcg.mbitson.com/\" target=\"_blank\">http://mcg.mbitson.com/</a>. Just define your main color and it will generate the full palette, then you just need to copy the SCSS code and associate it to the palette you want to modify. Don't forget to import stark theming after the maps declaration. <br>Here, an example with default values on how to achieve this:",
+          "TITLE": "Customize palettes"
+        },
+        "LINKS": {
+          "DETAILS": "You can find the Material Design color palettes here: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">https://material.io/design/color/the-color-system.html#tools-for-picking-colors</a>",
+          "TITLE": "Useful links"
+        },
+        "TITLE": "Color Palettes"
+      },
+      "HEADER": {
+        "COPY_PASTE": "Then you can copy/paste this HTML into your code",
+        "EXPLAINED": "Introduction",
+        "INTEGRATION": "Integration",
+        "INTEGRATION_DETAILS": "Stark provides you with useful classes to implement your application header. You just need to include the header theme in your SCSS",
+        "STARK_APP_HEADER": "The <code>stark-app-header</code> provides a background to the header",
+        "STARK_APP_BAR": "The <code>stark-app-bar</code> contains three content containers <code>stark-app-bar-content-left</code>, <code>stark-app-bar-content-center</code>, <code>stark-app-bar-content-right</code> which split the header in three parts. All the direct children of those 3 containers will be aligned in a column. The <code>stark-app-bar</code> also provides a <code>stark-app-bar-page-title</code> which is placed on the bottom left of the header.",
+        "STARK_APP_BAR_CONTENT_LEFT": "<code>stark-app-bar-content-left</code> contains <code>stark-actions</code> for the navigation actions.",
+        "STARK_APP_BAR_CONTENT_CENTER": "<code>stark-app-bar-content-center</code> contains the app logo.",
+        "STARK_APP_BAR_CONTENT_RIGHT": "<code>stark-app-bar-content-right</code> contains 3 containers, the first one for the App Data component and the logout button, the second for language selection and <code>stark-app-bar-content-right-actions-alt</code> which contains some alternative actions.",
+        "STARK_APP_BAR_PAGE_TITLE": "<code>stark-app-bar-page-title</code> displays the current page title.",
+        "TITLE": "App Header Guidelines"
+      },
+      "TYPOGRAPHY": {
+        "CLASSES_AND_TAGS": {
+          "TITLE": "Available classes & tags"
+        },
+        "CUSTOMIZATION": {
+          "TITLE": "Customization",
+          "DETAILS": "Stark allows you to customize simultaneously the typography settings of Angular Material and Stark easily by adding a simple SCSS map declaration. <br>First, declare the SCSS map and then you need to import the Stark's theme. On this example, a full version of the map is shown but you can also use it partially.",
+          "MAP_EXPLAINED": "Here are the corresponding classes and tags:"
+        },
+        "FONT_FAMILY": {
+          "TITLE": "Font family",
+          "DETAILS_1": "Material Design does not require to use a specific font, but it suggests Roboto, the sans-serif font available on Android mobile devices. We have chosen to let the system decide the most readable font it has to offer. This has the added advantage that no font will be embedded, reducing the first page load time.",
+          "DETAILS_2": "The font stack used to get the optimal sans-serif font the system provides:",
+          "CUSTOM_FONT_EXPLAINED": "To set a web font (eg: Roboto) you must first add the font (ttf, woff, ...) to your projects assets, add it as a font-face in SCSS and set it trough the <code>$stark-typography-theme</code> (more about customization below).",
+          "IE_NOTE": "* The font format woff2 is not supported by IE. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face#Browser_compatibility\" target=\"_blank\" rel=\"noopener\">MDN</a>",
+          "CDN_FONT_EXPLAINED": "To set a web font from an external source (CDN) webpack needs to be told to allow fonts from external sources. To do this add a the host/port to cspFontSrc in <code>config/webpack-custom-config.dev.json</code>. For more details check out: <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src\" target=\"_blank\" rel=\"noopener\"> CSP: font-src </a>."
+        },
+        "MATERIAL_BASED": {
+          "DETAILS": "We try to keep consistency with Angular Material. For more details checkout: <a href=\"https://material.angular.io/guide/typography\" target=\"_blank\">https://material.angular.io/guide/typography</a>",
+          "TITLE": "Based on Angular Material"
+        },
+        "TITLE": "Typography"
+      },
+      "LAYOUT": {
+        "TITLE": "Layout",
+        "INTRO": "We raden aan om <a href=\"https://github.com/angular/flex-layout#angular-flex-layout\" target=\"_blank\" rel=\"noopener noreferrer\">Angular Flex-Layout</a> te gebruiken als hulp bij het samenstellen van de lay-out van uw app. Volledige documentatie is beschikbaar op hun <a href=\"https://github.com/angular/flex-layout/wiki/API-Documentation\"  target=\"_blank\" rel=\"noopener noreferrer\">wiki</a>.",
+        "ANGULAR_FLEX_LAYOUT": "Angular Flex Layout",
+        "FLEX": "Flexbox",
+        "GRID_WARNING": "Waarschuwing, hoewel bepaalde grid directives beschikbaar zijn via de Angular Flex-Layout bibliotheek, zijn ze niet volledig gedocumenteerd. Hou er ook rekening met dat niet alle browsers CSS Grid Layout ondersteunen.  <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/grid#Browser_compatibility\" target=\"_blank\" rel=\"noopener noreferrer\">MDN</a>",
+        "GRID": "Grid layout"
+      }
+    }
+  }
+}
