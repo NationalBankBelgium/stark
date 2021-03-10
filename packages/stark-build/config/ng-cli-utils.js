@@ -11,7 +11,7 @@ function isDirectory(pathToCheck) {
 }
 
 function getDirectoriesNames(source) {
-	return fs.readdirSync(source).filter(name => isDirectory(path.join(source, name)));
+	return fs.readdirSync(source).filter((name) => isDirectory(path.join(source, name)));
 }
 
 function getAngularCliAppConfig(angularCliAppConfigPath) {

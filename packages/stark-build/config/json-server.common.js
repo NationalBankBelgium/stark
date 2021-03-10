@@ -95,10 +95,10 @@ function addUploadEndpoints(server, endPoints) {
 
 	// multer disk storage settings
 	var storage = multer.diskStorage({
-		destination: function(req, file, callback) {
+		destination: function (req, file, callback) {
 			callback(null, "./uploads/");
 		},
-		filename: function(req, file, callback) {
+		filename: function (req, file, callback) {
 			var timestamp = Date.now();
 			var fileNamePartials = file.originalname.split(".");
 			var fileExtension = fileNamePartials.pop();
@@ -108,13 +108,13 @@ function addUploadEndpoints(server, endPoints) {
 		}
 	});
 
-	endPoints.forEach(function(endPoint) {
+	endPoints.forEach(function (endPoint) {
 		// multer settings
 		var upload = multer({ storage: storage }).single("file");
 
 		// API path that will upload the files
-		server.post(endPoint.path, function(req, res) {
-			upload(req, res, function(err) {
+		server.post(endPoint.path, function (req, res) {
+			upload(req, res, function (err) {
 				if (err) {
 					res.jsonp({ error_code: 1, error_dec: err });
 					return;
@@ -132,13 +132,13 @@ function addUploadEndpoints(server, endPoints) {
  */
 function initializeServer(server, backends) {
 	var usedPorts = [];
-	const listenPort = function(server, name, port) {
-		server.listen(port, function() {
+	const listenPort = function (server, name, port) {
+		server.listen(port, function () {
 			console.log("JSON Server is running mock backend " + name + " in port " + port);
 		});
 	};
 
-	Object.keys(backends).forEach(function(key) {
+	Object.keys(backends).forEach(function (key) {
 		var backend = backends[key];
 		if (backend.mock === "json-server") {
 			var port = backend.url.split(":").slice(-1)[0];
@@ -178,7 +178,7 @@ function transformRequests(req, res, next) {
  * - StarkMetadata: metadata object constructed by the Stark middleware (only for Collection responses)
  */
 function composeTransformResponses(transformFn) {
-	return function(req, res) {
+	return function (req, res) {
 		var collectionMetadata = {};
 
 		transformResponses(req, res, collectionMetadata);
@@ -285,7 +285,7 @@ function transformSortingParams(req) {
 		var fields = [];
 		var order = [];
 
-		sortingParams.forEach(function(sortingParam) {
+		sortingParams.forEach(function (sortingParam) {
 			fields.push(sortingParam.split("+")[0]);
 			order.push(sortingParam.split("+")[1].toLowerCase());
 		});
@@ -383,7 +383,7 @@ function addSortingMetadata(req, collectionMetadata) {
 
 		const sortingParams = sortingParam.match(sortingRegex);
 
-		sortingParams.forEach(function(sortingParam) {
+		sortingParams.forEach(function (sortingParam) {
 			sortedBy.push({
 				field: sortingParam.split("+")[0],
 				order: sortingParam.split("+")[1]
@@ -428,13 +428,7 @@ function getNestedResourceName(req) {
  * @param item
  */
 function generateEtagValue(item) {
-	return _uniqueId(
-		item.uuid +
-			Math.random()
-				.toFixed(8)
-				.toString()
-				.replace("0.", "")
-	);
+	return _uniqueId(item.uuid + Math.random().toFixed(8).toString().replace("0.", ""));
 }
 
 /**
@@ -454,7 +448,7 @@ function deepReplaceProperty(item, property, newProperty) {
 			delete item[property];
 		}
 
-		Object.keys(item).forEach(function(subItem) {
+		Object.keys(item).forEach(function (subItem) {
 			deepReplaceProperty(item[subItem], property, newProperty);
 		});
 	}
@@ -472,7 +466,7 @@ function expandRewrittenRoutes(routes) {
 	var expandedRoutes = {};
 	var keysToDelete = [];
 
-	Object.keys(routes).forEach(function(key) {
+	Object.keys(routes).forEach(function (key) {
 		if (key.match(nestedResourceRegex)) {
 			let expandedKey = key + optionalQueryParamsString;
 			expandedRoutes[expandedKey] = routes[key]; // add new key with the expanded route
@@ -482,7 +476,7 @@ function expandRewrittenRoutes(routes) {
 
 	if (keysToDelete.length) {
 		// deleting routes that were expanded
-		keysToDelete.forEach(function(key) {
+		keysToDelete.forEach(function (key) {
 			delete routes[key];
 		});
 
