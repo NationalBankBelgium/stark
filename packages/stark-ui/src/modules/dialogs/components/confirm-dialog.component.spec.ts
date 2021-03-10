@@ -16,9 +16,7 @@ import SpyObj = jasmine.SpyObj;
 
 @Component({
 	selector: `host-component`,
-	template: `
-		no content
-	`
+	template: ` no content `
 })
 class TestHostComponent {}
 

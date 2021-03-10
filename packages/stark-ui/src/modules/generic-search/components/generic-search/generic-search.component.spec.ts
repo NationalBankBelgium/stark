@@ -42,9 +42,7 @@ class TestHostComponent {}
 
 @Component({
 	selector: "bad-host-component",
-	template: `
-		<stark-generic-search> </stark-generic-search>
-	`
+	template: ` <stark-generic-search> </stark-generic-search> `
 })
 class BadTestHostComponent extends TestHostComponent {}
 

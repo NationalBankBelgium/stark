@@ -35,7 +35,7 @@ exports.config = {
 		}
 	},
 
-	onPrepare: function() {
+	onPrepare: function () {
 		browser.ignoreSynchronization = true;
 	},
 

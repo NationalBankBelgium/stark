@@ -48,7 +48,7 @@ For more information go to [https://www.browserstack.com/automate](https://www.b
 
 #### Prerequisites
 
--   BrowserStack Account ([https://www.browserstack.com/](https://www.browserstack.com/))
+- BrowserStack Account ([https://www.browserstack.com/](https://www.browserstack.com/))
 
 #### Setup
 
@@ -66,8 +66,8 @@ _If you want to integrate BrowserStack in your own project you can have a look a
 
 _For more documentation see:_
 
--   _[https://github.com/angular/protractor/blob/master/lib/config.ts](https://github.com/angular/protractor/blob/master/lib/config.ts)_
--   _[https://www.browserstack.com/automate/capabilities](https://www.browserstack.com/automate/capabilities)_
+- _[https://github.com/angular/protractor/blob/master/lib/config.ts](https://github.com/angular/protractor/blob/master/lib/config.ts)_
+- _[https://www.browserstack.com/automate/capabilities](https://www.browserstack.com/automate/capabilities)_
 
 ### Integrating BrowserStack with GitHub Actions
 
@@ -83,5 +83,5 @@ LocalError: Either another browserstack local client is running on your machine 
 
 BrowserStack Local was probably not stopped properly on the last run. You can resolve this by manually terminating it.
 
--   MacOS: `pkill BrowserStack`
--   Windows: Find the task in Task Manager and end it.
+- MacOS: `pkill BrowserStack`
+- Windows: Find the task in Task Manager and end it.

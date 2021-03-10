@@ -12,9 +12,7 @@ import { StarkPrettyPrintComponent } from "./pretty-print.component";
  */
 @Component({
 	selector: `host-component`,
-	template: `
-		<stark-pretty-print [data]="data" [format]="format" [enableHighlighting]="enableHighlighting"></stark-pretty-print>
-	`
+	template: ` <stark-pretty-print [data]="data" [format]="format" [enableHighlighting]="enableHighlighting"></stark-pretty-print> `
 })
 class TestHostComponent {
 	@ViewChild(StarkPrettyPrintComponent)
@@ -218,10 +216,7 @@ describe("PrettyPrintComponent", () => {
 				const regExGreaterThan: RegExp = /&gt;/gi;
 				const regExQuote: RegExp = /&quot;/gi;
 
-				formattedData = formattedData
-					.replace(regExLessThan, "<")
-					.replace(regExGreaterThan, ">")
-					.replace(regExQuote, '"');
+				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
 				expect(formattedData).toBe(formattedXmlData);
 
@@ -519,10 +514,7 @@ describe("PrettyPrintComponent", () => {
 				const regExGreaterThan: RegExp = /&gt;/gi;
 				const regExQuote: RegExp = /&quot;/gi;
 
-				formattedData = formattedData
-					.replace(regExLessThan, "<")
-					.replace(regExGreaterThan, ">")
-					.replace(regExQuote, '"');
+				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
 				expect(formattedData).toContain("class='language-markup'");
 				expect(formattedData).toContain('class="token tag"');
@@ -549,10 +541,7 @@ describe("PrettyPrintComponent", () => {
 				const regExGreaterThan: RegExp = /&gt;/gi;
 				const regExQuote: RegExp = /&quot;/gi;
 
-				formattedData = formattedData
-					.replace(regExLessThan, "<")
-					.replace(regExGreaterThan, ">")
-					.replace(regExQuote, '"');
+				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
 				expect(formattedData).not.toContain("class='language-markup'");
 				expect(formattedData).not.toContain('class="token tag"');

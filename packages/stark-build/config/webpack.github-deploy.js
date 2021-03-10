@@ -12,7 +12,7 @@ const GIT_REMOTE_NAME = "origin";
 const COMMIT_MESSAGE = "Updates";
 const GH_REPO_NAME = ghDeploy.getRepoName(GIT_REMOTE_NAME);
 
-module.exports = function(options) {
+module.exports = function (options) {
 	const webpackConfigFactory = ghDeploy.getWebpackConfigModule(options); // the settings that are common to prod and dev
 	const webpackConfig = webpackConfigFactory(options);
 
@@ -40,11 +40,11 @@ module.exports = function(options) {
 		},
 
 		plugins: [
-			function() {
-				this.plugin("done", function(stats) {
+			function () {
+				this.plugin("done", function (stats) {
 					console.log("Starting deployment to GitHub.");
 
-					const logger = function(msg) {
+					const logger = function (msg) {
 						console.log(msg);
 					};
 
@@ -63,7 +63,7 @@ module.exports = function(options) {
 					fs.writeFileSync(path.join(webpackConfig.output.path, ".nojekyll"), "");
 
 					const ghpages = require("gh-pages");
-					ghpages.publish(webpackConfig.output.path, options, function(err) {
+					ghpages.publish(webpackConfig.output.path, options, function (err) {
 						if (err) {
 							console.log("GitHub deployment done. STATUS: ERROR.");
 							throw err;

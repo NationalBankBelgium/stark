@@ -124,10 +124,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	public filterRouteEntries(value: string): StarkRouteSearchEntry[] {
 		const filterValue: string = value.toLowerCase();
 		return this.routesToDisplay.filter((routeEntry: StarkRouteSearchEntry) =>
-			routeEntry.label
-				.toString()
-				.toLowerCase()
-				.includes(filterValue)
+			routeEntry.label.toString().toLowerCase().includes(filterValue)
 		);
 	}
 

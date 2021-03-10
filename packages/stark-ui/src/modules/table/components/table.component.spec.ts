@@ -51,32 +51,32 @@ import createSpy = jasmine.createSpy;
 			[expandedRows]="expandedRows"
 			(rowClicked)="rowClickHandler($event)"
 		>
-		<ng-container *ngIf="customRowTesting">
-			<ng-container
-				[ngSwitch]="true"
-				*starkTableRowContent="let rowData = rowData; let cellRawValue = rawValue; let cellDisplayedValue = displayedValue"
-			>
-				<div class="custom" *ngSwitchCase="rowData.id === 1"
-					><span style="color: blue">{{ cellDisplayedValue }}</span></div
+			<ng-container *ngIf="customRowTesting">
+				<ng-container
+					[ngSwitch]="true"
+					*starkTableRowContent="let rowData = rowData; let cellRawValue = rawValue; let cellDisplayedValue = displayedValue"
 				>
-				<div class="custom" *ngSwitchCase="rowData.id === 2"
-					><span style="color: red">{{ cellDisplayedValue }}</span></div
-				>
-				<div class="custom" *ngSwitchCase="rowData.id === 3"
-					><i>{{ cellDisplayedValue }}</i></div
-				>
-				<div class="custom" *ngSwitchCase="cellRawValue > 23">
-					<mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
-					{{ cellDisplayedValue }}
-				</div>
-				<div class="custom" *ngSwitchDefault>{{ cellDisplayedValue }}</div>
+					<div class="custom" *ngSwitchCase="rowData.id === 1"
+						><span style="color: blue">{{ cellDisplayedValue }}</span></div
+					>
+					<div class="custom" *ngSwitchCase="rowData.id === 2"
+						><span style="color: red">{{ cellDisplayedValue }}</span></div
+					>
+					<div class="custom" *ngSwitchCase="rowData.id === 3"
+						><i>{{ cellDisplayedValue }}</i></div
+					>
+					<div class="custom" *ngSwitchCase="cellRawValue > 23">
+						<mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
+						{{ cellDisplayedValue }}
+					</div>
+					<div class="custom" *ngSwitchDefault>{{ cellDisplayedValue }}</div>
+				</ng-container>
 			</ng-container>
-		</ng-container>
-		<ng-container *ngIf="expandRowTesting">
-			<ng-container *starkTableExpandDetail="let row">
-				{{ row | json }}
+			<ng-container *ngIf="expandRowTesting">
+				<ng-container *starkTableExpandDetail="let row">
+					{{ row | json }}
+				</ng-container>
 			</ng-container>
-		</ng-container>
 		</stark-table>
 	`
 })
@@ -1687,13 +1687,14 @@ describe("TableComponent", () => {
 		});
 	});
 
-	describe("collapsible rows", () => {		
+	describe("collapsible rows", () => {
 		const collapsedClass = "expanded";
 		beforeEach(() => {
 			hostComponent.expandRowTesting = true;
 			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
 			hostComponent.dummyData = DUMMY_DATA;
-			hostComponent.rowClickHandler = (row: object) => hostComponent.expandedRows = hostComponent.expandedRows.includes(row) ? [] : [row];
+			hostComponent.rowClickHandler = (row: object) =>
+				(hostComponent.expandedRows = hostComponent.expandedRows.includes(row) ? [] : [row]);
 
 			hostFixture.detectChanges();
 			component.ngAfterViewInit();
@@ -1721,7 +1722,7 @@ describe("TableComponent", () => {
 			hostFixture.detectChanges();
 
 			expect(rowElement.classList).not.toContain(collapsedClass);
-			expect(component.expandedRows).toEqual([])
+			expect(component.expandedRows).toEqual([]);
 		});
 	});
 

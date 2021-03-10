@@ -136,8 +136,8 @@ your code and this will be analyzed when your application bundle is being built 
 
 The global variables available at compilation time are the following:
 
--   `ENV` which indicates the current environment: `"development"` or `"production"`
--   `HMR` which indicates whether the Hot Module Replacement support is enabled (true/false).
+- `ENV` which indicates the current environment: `"development"` or `"production"`
+- `HMR` which indicates whether the Hot Module Replacement support is enabled (true/false).
 
 Since the DefinePlugin defines those variables as global, you can use them everywhere in your code so you can, for example, determine on which
 environment your app is currently running and execute some logic only on that specific environment:
@@ -145,7 +145,7 @@ environment your app is currently running and execute some logic only on that sp
 ```typescript
 // if true, your app is running in development environment
 if (ENV === "development") {
-	/* the code inside this block will be executed only in development */
+  /* the code inside this block will be executed only in development */
 }
 ```
 
@@ -179,7 +179,7 @@ This is why knowing the target environment at compilation time is useful. You ca
 // this check is translated to "if (false)" when ENV is "production"
 // allowing Webpack to identify it as dead code and so remove it
 if (ENV === "development") {
-	/* the code inside this block will only be included in development */
+  /* the code inside this block will only be included in development */
 }
 ```
 
@@ -194,32 +194,32 @@ that you can access in your template to customize it. For example:
 
 ```html
 <html lang="en">
-	<head>
-		<!-- Use the application name from StarkAppMetadata as the Page title -->
-		<title><%= htmlWebpackPlugin.options.starkAppMetadata.name %></title>
-	</head>
-	<body>
-		Some content here
-	</body>
+  <head>
+    <!-- Use the application name from StarkAppMetadata as the Page title -->
+    <title><%= htmlWebpackPlugin.options.starkAppMetadata.name %></title>
+  </head>
+  <body>
+    Some content here
+  </body>
 </html>
 ```
 
 This is the information from HtmlWebpackPlugin that is accessible in the template:
 
--   **options:** all options that were passed to the plugin including plugin's own options as well as Stark custom data containing the following:
-    -   **metadata:**
-        -   **TITLE:** Default title for Stark based apps: "Stark Application by @NationalBankBelgium"
-        -   **BASE_URL:** The base URL of the current build
-        -   **IS_DEV_SERVER:** Whether the current build is served locally with the development server
-        -   **HMR:** Whether the current build has HMR enabled
-        -   **AOT:** Whether the current build was generated with AOT compilation enabled
-        -   **E2E:** Whether the current build was generated with the E2E configuration
-        -   **WATCH:** Whether the option to rebuild on changes is enabled
-        -   **TS_CONFIG_PATH:** Path to the application's `tsconfig` file as defined in the `angular.json`
-        -   **ENV:** The environment of the current build: `production` or `development`
-        -   **environment:** The specific target used for the current build: `hmr`, `dev`, `e2e.prod` or `prod`
-    -   **starkAppMetadata:** the Stark metadata of the application available in the `src/stark-app-metadata.json` file
-    -   **starkAppConfig:** the Stark specific configuration for the application available in the `src/stark-app-config.json` file
+- **options:** all options that were passed to the plugin including plugin's own options as well as Stark custom data containing the following:
+  - **metadata:**
+    - **TITLE:** Default title for Stark based apps: "Stark Application by @NationalBankBelgium"
+    - **BASE_URL:** The base URL of the current build
+    - **IS_DEV_SERVER:** Whether the current build is served locally with the development server
+    - **HMR:** Whether the current build has HMR enabled
+    - **AOT:** Whether the current build was generated with AOT compilation enabled
+    - **E2E:** Whether the current build was generated with the E2E configuration
+    - **WATCH:** Whether the option to rebuild on changes is enabled
+    - **TS_CONFIG_PATH:** Path to the application's `tsconfig` file as defined in the `angular.json`
+    - **ENV:** The environment of the current build: `production` or `development`
+    - **environment:** The specific target used for the current build: `hmr`, `dev`, `e2e.prod` or `prod`
+  - **starkAppMetadata:** the Stark metadata of the application available in the `src/stark-app-metadata.json` file
+  - **starkAppConfig:** the Stark specific configuration for the application available in the `src/stark-app-config.json` file
 
 #### [BaseHrefWebpackPlugin](https://github.com/dzonatan/base-href-webpack-plugin "BaseHrefWebpackPlugin")
 

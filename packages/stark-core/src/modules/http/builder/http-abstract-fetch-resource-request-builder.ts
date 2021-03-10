@@ -9,7 +9,8 @@ import { StarkResource } from "../entities/resource.entity.intf";
 /**
  * @ignore
  */
-export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
+export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends StarkResource>
+	extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpFetchResourceRequestBuilder {
 	public addAcceptedLanguage(...languages: StarkLanguage[]): this {
 		let languageHeaders = "";

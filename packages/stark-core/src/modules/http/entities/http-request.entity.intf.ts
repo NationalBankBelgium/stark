@@ -32,9 +32,9 @@ export interface StarkHttpRequest<P extends StarkResource = StarkResource> {
 	headers: Map<string, string | string[]>;
 	/**
 	 * Map containing the {@link StarkQueryParam} objects that will be included as query parameters.
-	 * 
+	 *
 	 * The query parameters might be `undefined` values in case the `allowUndefinedQueryParams` option is enabled and passed to the corresponding builder.
-	 * 
+	 *
 	 * **If an array of strings is defined as value, then the parameter will be added to the URL for every value in the array.**
 	 */
 	queryParameters: Map<string, StarkQueryParam>;

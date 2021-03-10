@@ -23,9 +23,7 @@ import createSpyObj = jasmine.createSpyObj;
 describe("DateRangePickerComponent", () => {
 	@Component({
 		selector: "test-model",
-		template: `
-			<stark-date-range-picker [(ngModel)]="dateRange"></stark-date-range-picker>
-		`
+		template: ` <stark-date-range-picker [(ngModel)]="dateRange"></stark-date-range-picker> `
 	})
 	class TestModelComponent {
 		@ViewChild(StarkDateRangePickerComponent)

@@ -134,10 +134,7 @@ function getFixedTSLintConfig(tslintConfig) {
 		.readFileSync(helpers.rootStark("config/tslint-disabled-typecheck-rules.json"), "utf8")
 		.replace(/TSLINT_CONFIG_PLACEHOLDER/, tslintConfigPath);
 
-	const contentHash = crypto
-		.createHash("md5")
-		.update(noTypeCheckTSLintConfig)
-		.digest("hex");
+	const contentHash = crypto.createHash("md5").update(noTypeCheckTSLintConfig).digest("hex");
 
 	const noTypeCheckTSLintConfigPath = path.resolve(os.tmpdir(), `national-bank-belgium_stark-build_tslint-${contentHash}.json`);
 

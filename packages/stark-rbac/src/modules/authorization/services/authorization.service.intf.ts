@@ -7,9 +7,9 @@ export const starkRBACAuthorizationServiceName = "StarkRBACAuthorizationService"
 /**
  * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkRBACAuthorizationService}
  */
-export const STARK_RBAC_AUTHORIZATION_SERVICE: InjectionToken<StarkRBACAuthorizationService> = new InjectionToken<
-	StarkRBACAuthorizationService
->(starkRBACAuthorizationServiceName);
+export const STARK_RBAC_AUTHORIZATION_SERVICE: InjectionToken<StarkRBACAuthorizationService> = new InjectionToken<StarkRBACAuthorizationService>(
+	starkRBACAuthorizationServiceName
+);
 
 /**
  * Service to be used in order to know whether the user has an specific role or set of roles and whether it is an anonymous user.

@@ -5,12 +5,12 @@ That's why referenced those common errors here for sharing our solutions.
 
 > Table of contents
 
--   [NGC](#ngcErrors)
-    -   [TypeError: Cannot read property 'module' of undefined](#ngcErrorModuleUndefined)
-    -   [TypeError: Cannot read property 'kind' of undefined](#ngcErrorKindUndefined)
--   [Rollup](#rollupErrors)
+- [NGC](#ngcErrors)
+  - [TypeError: Cannot read property 'module' of undefined](#ngcErrorModuleUndefined)
+  - [TypeError: Cannot read property 'kind' of undefined](#ngcErrorKindUndefined)
+- [Rollup](#rollupErrors)
 
-    -   [(!) Unresolved dependencies detected](#rollupErrorUnresolvedDeps)
+  - [(!) Unresolved dependencies detected](#rollupErrorUnresolvedDeps)
 
 ## <a id="ngcErrors"></a>NGC errors
 
@@ -52,26 +52,26 @@ Our mistake was we declared a function inside the decorate which triggered an er
 ```typescript
 // The following code is not working
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
-	@ValidateIf((appConfig: StarkApplicationConfig) => appConfig.loggingFlushDisabled !== true)
-	@IsDefined()
-	@IsString()
-	@autoserialize
-	public loggingFlushApplicationId?: string;
+  @ValidateIf((appConfig: StarkApplicationConfig) => appConfig.loggingFlushDisabled !== true)
+  @IsDefined()
+  @IsString()
+  @autoserialize
+  public loggingFlushApplicationId?: string;
 }
 
 // The following code is working
 export class StarkApplicationConfigImpl implements StarkApplicationConfig {
-	@ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled)
-	@IsDefined()
-	@IsString()
-	@autoserialize
-	public loggingFlushApplicationId?: string;
+  @ValidateIf(StarkApplicationConfigImpl.validateIfLoggingFlushEnabled)
+  @IsDefined()
+  @IsString()
+  @autoserialize
+  public loggingFlushApplicationId?: string;
 
-	// ...
+  // ...
 
-	public static validateIfLoggingFlushEnabled(instance: StarkApplicationConfig): boolean {
-		return instance.loggingFlushDisabled !== true;
-	}
+  public static validateIfLoggingFlushEnabled(instance: StarkApplicationConfig): boolean {
+    return instance.loggingFlushDisabled !== true;
+  }
 }
 ```
 
@@ -108,10 +108,10 @@ You can simply add the missing dependencies as following:
 // ...
 
 const globals = {
-	// ...
-	"rxjs/observable/timer": "rxjs.observable.timer",
-	"rxjs/observable/throw": "rxjs.observable.throw"
-	// ...
+  // ...
+  "rxjs/observable/timer": "rxjs.observable.timer",
+  "rxjs/observable/throw": "rxjs.observable.throw"
+  // ...
 };
 ```
 

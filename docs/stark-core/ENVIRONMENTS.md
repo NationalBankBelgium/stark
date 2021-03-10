@@ -2,8 +2,8 @@
 
 Stark provides 2 different ways to get environment information depending on your needs:
 
--   at runtime by importing the environment.ts file
--   at compilation time by checking the global/ambient variables set by Webpack
+- at runtime by importing the environment.ts file
+- at compilation time by checking the global/ambient variables set by Webpack
 
 ## Environment information at runtime (environment.ts)
 
@@ -16,27 +16,27 @@ Such environment interface is defined as follows:
 import { NgModuleRef } from "@angular/core";
 
 export interface StarkEnvironment {
-	/**
-	 * Whether the current environment is production (as described in Angular CLI Wiki)
-	 * @link https://github.com/angular/angular-cli/wiki/stories-application-environments
-	 */
-	production: boolean;
-	/**
-	 * Whether the current environment has Hot Module Replacement enabled (as described in Angular CLI Wiki)
-	 * @link https://github.com/angular/angular-cli/wiki/stories-configure-hmr
-	 */
-	hmr: boolean;
-	/**
-	 * Array of providers to be included only in this environment.
-	 * For example: you might want to add a detailed logging provider only in development.
-	 */
-	ENV_PROVIDERS: any[];
-	/**
-	 * Function to modify/decorate the NgModule Instance created by Angular for a given platform.
-	 * Useful to enable/disable some Angular specifics such as the debug tools.
-	 * @param moduleRef - NgModule instance created by Angular for a given platform.
-	 */
-	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any>;
+  /**
+   * Whether the current environment is production (as described in Angular CLI Wiki)
+   * @link https://github.com/angular/angular-cli/wiki/stories-application-environments
+   */
+  production: boolean;
+  /**
+   * Whether the current environment has Hot Module Replacement enabled (as described in Angular CLI Wiki)
+   * @link https://github.com/angular/angular-cli/wiki/stories-configure-hmr
+   */
+  hmr: boolean;
+  /**
+   * Array of providers to be included only in this environment.
+   * For example: you might want to add a detailed logging provider only in development.
+   */
+  ENV_PROVIDERS: any[];
+  /**
+   * Function to modify/decorate the NgModule Instance created by Angular for a given platform.
+   * Useful to enable/disable some Angular specifics such as the debug tools.
+   * @param moduleRef - NgModule instance created by Angular for a given platform.
+   */
+  decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any>;
 }
 ```
 
@@ -67,15 +67,15 @@ import { NgModuleRef } from "@angular/core";
 import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 
 export const environment: StarkEnvironment = {
-	production: true,
-	hmr: false,
-	ENV_PROVIDERS: [ProductionOnlyProvider],
+  production: true,
+  hmr: false,
+  ENV_PROVIDERS: [ProductionOnlyProvider],
 
-	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
-		// perform any module customization needed for this specific environment here
-		// and make sure to invoke this function by passing it the NgModule created by Angular
-		return moduleRef;
-	}
+  decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
+    // perform any module customization needed for this specific environment here
+    // and make sure to invoke this function by passing it the NgModule created by Angular
+    return moduleRef;
+  }
 };
 ```
 
@@ -113,7 +113,7 @@ import { environment } from "environments/environment";
 
 // if true, your app is running in production environment
 if (environment.production) {
-	/* the code in this block will be executed only in production */
+  /* the code in this block will be executed only in production */
 }
 ```
 
@@ -128,15 +128,15 @@ import { NgModuleRef } from "@angular/core";
 import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 
 export const environment: StarkEnvironment = {
-	production: false / true,
-	hmr: false,
-	ENV_PROVIDERS: [],
+  production: false / true,
+  hmr: false,
+  ENV_PROVIDERS: [],
 
-	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
-		// perform any module customization needed for this specific environment here
-		// and make sure to invoke this function by passing it the NgModule created by Angular
-		return moduleRef;
-	}
+  decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
+    // perform any module customization needed for this specific environment here
+    // and make sure to invoke this function by passing it the NgModule created by Angular
+    return moduleRef;
+  }
 };
 ```
 
@@ -165,7 +165,7 @@ For example:
 import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 
 export interface YourOwnEnvironment extends StarkEnvironment {
-	someProperty: any;
+  someProperty: any;
 }
 ```
 
@@ -176,16 +176,16 @@ import { NgModuleRef } from "@angular/core";
 import { StarkEnvironment } from "@nationalbankbelgium/stark-core";
 
 export const environment: StarkEnvironment = {
-	production: false / true,
-	hmr: false,
-	ENV_PROVIDERS: [],
-	someProperty: "some value", // your new property
+  production: false / true,
+  hmr: false,
+  ENV_PROVIDERS: [],
+  someProperty: "some value", // your new property
 
-	decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
-		// perform any module customization needed for this specific environment here
-		// and make sure to invoke this function by passing it the NgModule created by Angular
-		return moduleRef;
-	}
+  decorateModule(moduleRef: NgModuleRef<any>): NgModuleRef<any> {
+    // perform any module customization needed for this specific environment here
+    // and make sure to invoke this function by passing it the NgModule created by Angular
+    return moduleRef;
+  }
 };
 ```
 
@@ -209,6 +209,6 @@ This is why knowing the target environment at compilation time is useful. You ca
 // this check is translated to "if (false)" when ENV is "production"
 // allowing Webpack to identify it as dead code and so remove it
 if (ENV === "development") {
-	/* the code inside this block will only be included in development */
+  /* the code inside this block will only be included in development */
 }
 ```

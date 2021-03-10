@@ -14,9 +14,7 @@ import { StarkProgressIndicatorComponent } from "../components";
 
 @Component({
 	selector: "test-component",
-	template: `
-		<div id="host-element" [starkProgressIndicator]="starkProgressIndicatorConfig"></div>
-	`
+	template: ` <div id="host-element" [starkProgressIndicator]="starkProgressIndicatorConfig"></div> `
 })
 class TestComponent {
 	public starkProgressIndicatorConfig?: StarkProgressIndicatorConfig;

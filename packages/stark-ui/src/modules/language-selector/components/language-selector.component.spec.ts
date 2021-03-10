@@ -29,9 +29,7 @@ import { of, throwError } from "rxjs";
  */
 @Component({
 	selector: `host-component`,
-	template: `
-		<stark-language-selector mode="mode"></stark-language-selector>
-	`
+	template: ` <stark-language-selector mode="mode"></stark-language-selector> `
 })
 class TestHostComponent {
 	@ViewChild(StarkLanguageSelectorComponent)

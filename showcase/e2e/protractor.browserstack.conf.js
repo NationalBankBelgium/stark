@@ -55,7 +55,6 @@ const CAPABILITIES = [
 	}
 ];
 
-
 /**
  * The config object for protractor. @see {@link https://github.com/angular/protractor/blob/master/lib/config.ts}
  * This combines the default config from stark-build and configurations needed to run on {@link https://automate.browserstack.com}
@@ -91,11 +90,11 @@ const config = {
 	/**
 	 * Specifies all the different environments in which the tests are ran.
 	 */
-	multiCapabilities: CAPABILITIES,
+	multiCapabilities: CAPABILITIES
 };
 
 exports.config = {
 	...config,
 	// Map the common capabilities to all the multi capabilities
-	multiCapabilities: config.multiCapabilities.map(caps => ({ ...config.commonCapabilities, ...caps }))
+	multiCapabilities: config.multiCapabilities.map((caps) => ({ ...config.commonCapabilities, ...caps }))
 };

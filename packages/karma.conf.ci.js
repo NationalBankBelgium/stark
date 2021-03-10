@@ -42,7 +42,7 @@ const starkPackagesSpecificConfiguration = {
 
 // export the configuration function that karma expects and simply return the stark configuration
 module.exports = {
-	default: function(config) {
+	default: function (config) {
 		return config.set(starkPackagesSpecificConfiguration);
 	},
 	rawKarmaConfig: starkPackagesSpecificConfiguration

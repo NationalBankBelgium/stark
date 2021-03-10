@@ -277,7 +277,8 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 /**
  * @ignore
  */
-export class StarkHttpCreateRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
+export class StarkHttpCreateRequestBuilderImpl<T extends StarkResource>
+	extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpCreateRequestBuilder<T> {
 	public echo(echo: StarkHttpEchoType): this {
 		this.addQueryParameter("echo", <string>echo);
@@ -288,29 +289,34 @@ export class StarkHttpCreateRequestBuilderImpl<T extends StarkResource> extends 
 /**
  * @ignore
  */
-export class StarkHttpUpdateRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
+export class StarkHttpUpdateRequestBuilderImpl<T extends StarkResource>
+	extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpUpdateRequestBuilder<T> {}
 
 /**
  * @ignore
  */
-export class StarkHttpDeleteRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpBaseRequestBuilder<T>
+export class StarkHttpDeleteRequestBuilderImpl<T extends StarkResource>
+	extends StarkAbstractHttpBaseRequestBuilder<T>
 	implements StarkHttpDeleteRequestBuilder<T> {}
 
 /**
  * @ignore
  */
-export class StarkHttpGetRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpFetchResourceRequestBuilder<T>
+export class StarkHttpGetRequestBuilderImpl<T extends StarkResource>
+	extends StarkAbstractHttpFetchResourceRequestBuilder<T>
 	implements StarkHttpGetRequestBuilder<T> {}
 
 /**
  * @ignore
  */
-export class StarkHttpGetCollectionRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpFetchResourceRequestBuilder<T>
+export class StarkHttpGetCollectionRequestBuilderImpl<T extends StarkResource>
+	extends StarkAbstractHttpFetchResourceRequestBuilder<T>
 	implements StarkHttpGetCollectionRequestBuilder<T> {}
 
 /**
  * @ignore
  */
-export class StarkHttpSearchRequestBuilderImpl<T extends StarkResource> extends StarkAbstractHttpFetchResourceRequestBuilder<T>
+export class StarkHttpSearchRequestBuilderImpl<T extends StarkResource>
+	extends StarkAbstractHttpFetchResourceRequestBuilder<T>
 	implements StarkHttpSearchRequestBuilder<T> {}

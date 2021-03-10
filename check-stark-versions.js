@@ -4,16 +4,16 @@ let packageJsonPath = process.argv[2];
 let validVersion = process.argv[3];
 let isCorrect = true;
 
-fs.readFile("./modules.txt", "utf8", function(err, modulesData) {
+fs.readFile("./modules.txt", "utf8", function (err, modulesData) {
 	if (err) {
 		return console.error("Error while reading file => " + err);
 	}
 
-	let starkPackagesArray = modulesData.split(/\s/).filter(value => {
+	let starkPackagesArray = modulesData.split(/\s/).filter((value) => {
 		return value !== "";
 	});
 
-	fs.readFile(packageJsonPath, "utf8", function(err, packageJsonData) {
+	fs.readFile(packageJsonPath, "utf8", function (err, packageJsonData) {
 		if (err) {
 			return console.error("Error while reading file => " + err);
 		}

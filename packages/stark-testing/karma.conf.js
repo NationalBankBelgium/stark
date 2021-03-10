@@ -96,7 +96,7 @@ const rawKarmaConfig = {
 module.exports = {
 	// Karma configuration
 	// reference: http://karma-runner.github.io/2.0/config/configuration-file.html
-	default: function(config) {
+	default: function (config) {
 		config.set(rawKarmaConfig);
 	},
 	rawKarmaConfig: rawKarmaConfig

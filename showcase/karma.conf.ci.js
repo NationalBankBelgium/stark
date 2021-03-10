@@ -10,6 +10,6 @@ const starkShowcaseSpecificConfiguration = Object.assign({}, defaultKarmaCIConfi
 });
 
 // export the configuration function that karma expects and simply return the stark configuration
-module.exports = config => {
+module.exports = (config) => {
 	return config.set(starkShowcaseSpecificConfiguration);
 };

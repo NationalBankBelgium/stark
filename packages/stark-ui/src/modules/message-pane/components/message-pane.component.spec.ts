@@ -37,9 +37,7 @@ import createSpyObj = jasmine.createSpyObj;
  */
 @Component({
 	selector: `host-component`,
-	template: `
-		<stark-message-pane [clearOnNavigation]="clearOnNavigation" [align]="align"></stark-message-pane>
-	`
+	template: ` <stark-message-pane [clearOnNavigation]="clearOnNavigation" [align]="align"></stark-message-pane> `
 })
 class TestHostComponent {
 	@ViewChild(StarkMessagePaneComponent)
