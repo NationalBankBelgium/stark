@@ -27,7 +27,8 @@ GH_ACTIONS_TAG=${GH_ACTIONS_TAG:-""}
 #----------------------------------------------
 #LOGS_DIR=./.tmp/stark/logs
 #mkdir -p ${LOGS_DIR}
-#touch ${LOGS_DIR}/build-perf.log
+#LOGS_FILE=${LOGS_DIR}/build-perf.log
+#touch ${LOGS_FILE}
 #GITHUB_ACTIONS=true
 #GITHUB_REPOSITORY="NationalBankBelgium/stark"
 

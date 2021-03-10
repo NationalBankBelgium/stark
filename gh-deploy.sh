@@ -21,7 +21,7 @@ EXPECTED_REPOSITORY="NationalBankBelgium/stark"
 GH_ACTIONS_TAG=${GH_ACTIONS_TAG:-""}
 GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME:-""}
 
-COMMIT_AUTHOR_USERNAME="Github Actions CI"
+COMMIT_AUTHOR_USERNAME="Github-Actions-CI"
 COMMIT_AUTHOR_EMAIL="alexis.georges@nbb.be"
 
 STARK_CORE="stark-core"
