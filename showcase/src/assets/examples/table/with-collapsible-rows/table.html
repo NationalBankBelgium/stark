@@ -1,4 +1,10 @@
-<stark-table [data]="data" [columnProperties]="columns" [filter]="filter" [expandedRows]="expandedRows" (rowClicked)="handleRowClicked($event)">
+<stark-table
+	[data]="data"
+	[columnProperties]="columns"
+	[filter]="filter"
+	[expandedRows]="expandedRows"
+	(rowClicked)="handleRowClicked($event)"
+>
 	<header><h1 class="mb0" translate>Table with collapsible rows</h1></header>
 	<ng-container *starkTableExpandDetail="let row">
 		<!-- can be anything here -->

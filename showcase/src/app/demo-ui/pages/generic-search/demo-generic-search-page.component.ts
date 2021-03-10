@@ -15,7 +15,8 @@ import { DemoGenericService } from "./services";
 	selector: "demo-generic-search",
 	templateUrl: "./demo-generic-search-page.component.html"
 })
-export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria>
+export class DemoGenericSearchPageComponent
+	extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria>
 	implements OnInit, OnDestroy {
 	public hideSearch = false;
 

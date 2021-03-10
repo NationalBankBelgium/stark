@@ -33,7 +33,7 @@ if (process.argv[3]) {
 
 let outputDir = "showcase" + path.sep + "dist";
 
-fs.readdir(outputDir, function(err, items) {
+fs.readdir(outputDir, function (err, items) {
 	if (err) {
 		return console.error("Error while reading directory => " + err);
 	}
@@ -51,7 +51,7 @@ fs.readdir(outputDir, function(err, items) {
 });
 
 function replaceValuesInFile(fileName, valueReplacements) {
-	fs.readFile(fileName, "utf8", function(err, data) {
+	fs.readFile(fileName, "utf8", function (err, data) {
 		if (err) {
 			return console.error("Error while reading file => " + err);
 		}
@@ -68,7 +68,7 @@ function replaceValuesInFile(fileName, valueReplacements) {
 		}
 
 		if (replacementsDone) {
-			fs.writeFile(fileName, result, "utf8", function(err) {
+			fs.writeFile(fileName, result, "utf8", function (err) {
 				if (err) {
 					return console.error(err);
 				} else {

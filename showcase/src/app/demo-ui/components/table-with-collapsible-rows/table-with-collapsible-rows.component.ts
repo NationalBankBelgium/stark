@@ -15,7 +15,7 @@ const DUMMY_DATA: object[] = [
 export class TableWithCollapsibleRowsComponent {
 	public data: object[] = DUMMY_DATA;
 
-	public expandedRows: object[] = []; 
+	public expandedRows: object[] = [];
 
 	public columns: StarkTableColumnProperties[] = [
 		{ name: "id", label: "Id" },

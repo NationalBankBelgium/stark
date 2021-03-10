@@ -179,8 +179,8 @@ Most of the time you won't need to change these, but they allow you to customize
 
 What you need to run this app:
 
--   `node` and `npm`
--   Ensure you're running the latest versions Node `v8.x.x`+ and NPM `5.8.x`+
+- `node` and `npm`
+- Ensure you're running the latest versions Node `v8.x.x`+ and NPM `5.8.x`+
 
 > If you have `nvm` installed, which is highly recommended you can do a `nvm install --lts && nvm use` in `$` to run with the latest Node LTS.
 > You can also have this `zsh` done for you [automatically](https://github.com/creationix/nvm#calling-nvm-use-automatically-in-a-directory-with-a-nvmrc-file)
@@ -189,7 +189,7 @@ What you need to run this app:
 
 Once you have those, you should install these globals with `npm install --global`:
 
--   Windows only: `npm install -g node-pre-gyp`
+- Windows only: `npm install -g node-pre-gyp`
 
 TODO review/complete; see #34
 
@@ -302,12 +302,12 @@ For more details, refer to the deployment section below.
 
 The following are some things that will make AoT compile fail.
 
--   Don’t use require statements for your templates or styles, use styleUrls and templateUrls, the angular2-template-loader plugin will change it to require at build time.
--   Don’t use default exports.
--   Don’t use `form.controls.controlName`, use `form.get(‘controlName’)`
--   Don’t use `control.errors?.someError`, use `control.hasError(‘someError’)`
--   Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
--   @Inputs, @Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
+- Don’t use require statements for your templates or styles, use styleUrls and templateUrls, the angular2-template-loader plugin will change it to require at build time.
+- Don’t use default exports.
+- Don’t use `form.controls.controlName`, use `form.get(‘controlName’)`
+- Don’t use `control.errors?.someError`, use `control.hasError(‘someError’)`
+- Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
+- @Inputs, @Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
 
 ### Type definitions
 
@@ -325,7 +325,7 @@ For example:
 
 ```typescript
 declare module "my-module" {
-	export function doesSomething(value: string): string;
+  export function doesSomething(value: string): string;
 }
 ```
 
@@ -353,11 +353,11 @@ TODO explain how stylesheets are loaded.
 
 We have good experience using these editors:
 
--   [Visual Studio Code](https://code.visualstudio.com/)
--   [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
--   [Webstorm](https://www.jetbrains.com/webstorm/download/)
--   [Atom](https://atom.io/) with [TypeScript plugin](https://atom.io/packages/atom-typescript)
--   [Sublime Text](http://www.sublimetext.com/3) with [Typescript-Sublime-Plugin](https://github.com/Microsoft/Typescript-Sublime-plugin#installation)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
+- [Webstorm](https://www.jetbrains.com/webstorm/download/)
+- [Atom](https://atom.io/) with [TypeScript plugin](https://atom.io/packages/atom-typescript)
+- [Sublime Text](http://www.sublimetext.com/3) with [Typescript-Sublime-Plugin](https://github.com/Microsoft/Typescript-Sublime-plugin#installation)
 
 ### Visual Studio Code + Debugger for Chrome
 

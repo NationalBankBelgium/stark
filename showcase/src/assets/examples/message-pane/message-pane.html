@@ -9,9 +9,7 @@
 	<fieldset>
 		<legend>Display alignment</legend>
 		<div class="button-group set-msg-position">
-			<button [ngClass]="{ active: messagePanePosition === 'left' }" (click)="changeMessagePanePosition('left')">
-				Left
-			</button>
+			<button [ngClass]="{ active: messagePanePosition === 'left' }" (click)="changeMessagePanePosition('left')">Left</button>
 			<button [ngClass]="{ active: messagePanePosition === 'center' }" (click)="changeMessagePanePosition('center')">Center</button>
 			<button [ngClass]="{ active: messagePanePosition === 'right' }" (click)="changeMessagePanePosition('right')">Right</button>
 		</div>
