@@ -5,7 +5,7 @@
 # provide a clean way to define/check the "current" version of node (i.e., the one we should execute the publish under/for)
 ## ideally we should read it from .nvmrc
 # provide support for publishing only a subset of the packages (same --packages logic as in build.sh)
-# provide support for publishing locally in addition to travis
+# provide support for publishing locally in addition to GitHub Actions
 
 set -u -e -o pipefail
 
@@ -19,8 +19,8 @@ OLD_IFS=$IFS # save old IFS value
 IFS=$'\r\n' GLOBIGNORE='*' command eval 'ALL_PACKAGES=($(cat ./modules.txt))'
 IFS=$OLD_IFS # restore IFS
 
-EXPECTED_REPO_SLUG="NationalBankBelgium/stark"
-EXPECTED_NODE_VERSION="10"
+EXPECTED_REPOSITORY="NationalBankBelgium/stark"
+GH_ACTIONS_TAG=${GH_ACTIONS_TAG:-""}
 
 #----------------------------------------------
 # Uncomment block below to test locally
@@ -28,24 +28,22 @@ EXPECTED_NODE_VERSION="10"
 #LOGS_DIR=./.tmp/stark/logs
 #mkdir -p ${LOGS_DIR}
 #touch ${LOGS_DIR}/build-perf.log
-#NPM_TOKEN="dummy"
-#TRAVIS=true
-#TRAVIS_REPO_SLUG="NationalBankBelgium/stark"
-#TRAVIS_NODE_VERSION="10"
+#GITHUB_ACTIONS=true
+#GITHUB_REPOSITORY="NationalBankBelgium/stark"
 
 # For normal builds:
-#TRAVIS_EVENT_TYPE="pull_request"
-#TRAVIS_TAG="fooBar"
+#GITHUB_EVENT_NAME="pull_request"
+#GH_ACTIONS_TAG="fooBar"
 
 # For nightly builds:
-#TRAVIS_EVENT_TYPE="cron"
+#GITHUB_EVENT_NAME="schedule"
 #----------------------------------------------
 
 NIGHTLY_BUILD=false
 
 readonly currentDir=$(cd $(dirname $0); pwd)
 
-source ${currentDir}/scripts/ci/_travis-fold.sh
+source ${currentDir}/scripts/ci/_ghactions-group.sh
 source ${currentDir}/util-functions.sh
 
 cd ${currentDir}
@@ -88,72 +86,49 @@ logTrace "PROJECT_ROOT_DIR: ${PROJECT_ROOT_DIR}" 1
 ROOT_PACKAGES_DIR=${PROJECT_ROOT_DIR}/dist/packages-dist
 logTrace "ROOT_PACKAGES_DIR: ${ROOT_PACKAGES_DIR}" 1
 
-travisFoldStart "publish checks" "no-xtrace"
+ghActionsGroupStart "publish checks" "no-xtrace"
 
-if [[ ${TRAVIS} == true ]]; then
+if [[ ${GITHUB_ACTIONS} == true ]]; then
+  logInfo "============================================="
   logInfo "Publishing to npm";
   logInfo "============================================="
   
   # Don't even try if not running against the official repo
   # We don't want release to run outside of our own little world
-  if [[ ${TRAVIS_REPO_SLUG} != ${EXPECTED_REPO_SLUG} ]]; then
+  if [[ ${GITHUB_REPOSITORY} != ${EXPECTED_REPOSITORY} ]]; then
     logInfo "Skipping release because this is not the main repository.";
     exit 0;
   fi
   
-  # Ensuring that this is the execution for Node x
-  # Without this check, we would publish a release for each node version we test under! :)
-  if [[ ${TRAVIS_NODE_VERSION} != ${EXPECTED_NODE_VERSION} ]]; then
-    logInfo "Skipping release because this is not the expected version of node: ${TRAVIS_NODE_VERSION}"
-    exit 0;
-  fi
-  
   logInfo "Verifying if this build has been triggered for a tag" 
-  # Making sure the variable does exist.. 
-  if [[ -z ${TRAVIS_TAG+x} ]]; then
-    TRAVIS_TAG=""
-  fi
   
-  if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
+  if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     logInfo "Not publishing because this is a build triggered for a pull request" 1
     exit 0;
-  elif [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
-    logInfo "Nightly build initiated by Travis cron job" 1
+  elif [[ ${GITHUB_EVENT_NAME} == "schedule" ]]; then
+    logInfo "Nightly build initiated by GitHub Actions scheduled job" 1
     NIGHTLY_BUILD=true
-  elif [[ ${TRAVIS_TAG} == "" ]]; then
+  elif [[ ${GH_ACTIONS_TAG} == "" ]]; then
     logInfo "Not publishing because this is not a build triggered for a tag" 1
     exit 0;
   else
     logInfo "This build has been triggered for a tag" 
   fi
-  
-  logInfo "Verifying that the NPM_TOKEN is available"
-  if [[ -z ${NPM_TOKEN+x} ]]; then
-    NPM_TOKEN=""
-  fi
-
-  if [[ ${NPM_TOKEN} == "" ]]; then
-    logInfo "Not publishing because the NPM_TOKEN environment variable is is not defined correctly" 1
-    exit 0;
-  fi
-  
-  # If any of the previous commands in the `script` section of .travis.yaml failed, then abort.
-  # The variable is not set in early stages of the build, so we default to 0 there.
-  # https://docs.travis-ci.com/user/environment-variables/
-  if [[ ${TRAVIS_TEST_RESULT=0} == 1 ]]; then
-    logInfo "Skipping release because a previous script in the Travis build has failed";
-    exit 0;
-  fi
 fi
 
-travisFoldEnd "publish checks"
+ghActionsGroupEnd "publish checks"
 
-travisFoldStart "publish" "no-xtrace"
+logInfo "============================================="
 logInfo "Publishing all packages"
+logInfo "============================================="
+# FIXME Uncomment this once GitHub Actions support nested logs
+# See: https://github.community/t5/GitHub-Actions/Feature-Request-Enhancements-to-group-commands-nested-named/m-p/45399
+#ghActionsGroupStart "publish" "no-xtrace"
+#logInfo "Publishing all packages"
 
 for PACKAGE in ${ALL_PACKAGES[@]}
 do
-  travisFoldStart "publishing: ${PACKAGE}" "no-xtrace"
+  ghActionsGroupStart "publishing: ${PACKAGE}" "no-xtrace"
     PACKAGE_FOLDER=${ROOT_PACKAGES_DIR}/${PACKAGE}
     logTrace "Package path: ${PACKAGE_FOLDER}" 2
     cd ${PACKAGE_FOLDER}
@@ -165,7 +140,7 @@ do
           logTrace "Publishing the release (with tag latest)" 2
           npm publish ${file} --access public
           logTrace "Adapting the tag next to point to the new release" 2
-          npm dist-tag add @nationalbankbelgium/${PACKAGE}@${TRAVIS_TAG} next
+          npm dist-tag add @nationalbankbelgium/${PACKAGE}@${GH_ACTIONS_TAG} next
         else
           logTrace "Check if nightly build is not already published."
           LATEST_NPM_VERSION=`npm view @nationalbankbelgium/${PACKAGE} dist-tags.next`
@@ -184,10 +159,10 @@ do
       logInfo "Package published!" 2
     done
     cd - > /dev/null; # go back to the previous folder without any output  
-  travisFoldEnd "publishing: ${PACKAGE}"
+  ghActionsGroupEnd "publishing: ${PACKAGE}"
 done
 
-travisFoldEnd "publish"
+#ghActionsGroupEnd "publish"
 
 # Print return arrows as a log separator
-travisFoldReturnArrows
+ghActionsGroupReturnArrows

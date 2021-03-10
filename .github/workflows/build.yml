@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      #- /^\d+\.\d+\.\d(-alpha\.\d+|-beta\.\d+|-rc\.\d+)?$/
     tags:
       - "*"
   pull_request:
@@ -74,7 +73,9 @@ jobs:
       - name: List main variables
         run: |
           echo "Commit SHA  : ${GITHUB_SHA}"
+          echo "Tag name    : ${{ env.GH_ACTIONS_TAG }}"
           echo "Reference   : ${GITHUB_REF}"
+          echo "Build number: ${GITHUB_RUN_NUMBER}"
           echo "Repository  : ${GITHUB_REPOSITORY}"
           echo "Event       : ${GITHUB_EVENT_NAME}"
           echo "Author      : ${GITHUB_ACTOR}"
@@ -157,7 +158,7 @@ jobs:
         if: env.IS_MAIN_ENVIRONMENT == 1
 
       - name: Save logs
-        run: bash ./scripts/ci/print-gh-logs.sh
+        run: bash ./scripts/ci/print-logs.sh
         
       - name: Combine coveralls reports
         run: node combine-packages-coverage.js
@@ -217,9 +218,16 @@ jobs:
           npm run install:ci:stark-rbac
           npm run install:ci:stark-ui
         if: github.event_name != 'schedule'
-
-      - name: Release is currently managed in Travis plan
-        run: echo "Check Travis plan for release process"
+        
+      - name: Generate docs
+        run: npm run docs:publish -- --github-api-key=${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'schedule'
+        
+      - name: Set npm token
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+        
+      - name: Release stark
+        run: npm run release:publish
 
       - name: Save logs
-        run: bash ./scripts/ci/print-gh-logs.sh
+        run: bash ./scripts/ci/print-logs.sh
