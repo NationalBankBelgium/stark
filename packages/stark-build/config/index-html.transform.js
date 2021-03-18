@@ -1,27 +1,8 @@
 const helpers = require("./helpers");
 const fs = require("fs");
-const commonData = require("./webpack.common-data.js"); // common configuration between environments
+const commonData = require("./common-data.js"); // common configuration between environments
 const HtmlHeadElements = require("./html-head-elements");
-const ngCliUtils = require("./ng-cli-utils");
-const buildUtils = require("./build-utils");
-
-const isProd = ngCliUtils.getNgCliCommandOption("prod");
-const isHMR =
-	ngCliUtils.getNgCliCommandOption("configuration") === "hmr" ||
-	ngCliUtils.hasNgCliCommandOption("hmr") ||
-	buildUtils.ANGULAR_APP_CONFIG.buildOptions.hmr;
-
-const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {
-	ENV: isProd ? "production" : "development",
-	BASE_URL: ngCliUtils.getNgCliCommandOption("baseHref") || buildUtils.ANGULAR_APP_CONFIG.buildOptions.baseHref,
-	HMR: isHMR,
-	AOT: ngCliUtils.hasNgCliCommandOption("aot") || buildUtils.ANGULAR_APP_CONFIG.buildOptions.aot,
-	WATCH:
-		!(ngCliUtils.hasNgCliCommandOption("watch") && ngCliUtils.getNgCliCommandOption("watch") === "false") &&
-		!(buildUtils.ANGULAR_APP_CONFIG.buildOptions.watch === false), // by default is true
-	environment: isHMR ? "hmr" : "dev",
-	IS_DEV_SERVER: helpers.hasProcessFlag("serve") && !isProd // NG CLI command 'serve"
-});
+const METADATA = require("./webpack-metadata").METADATA;
 
 /**
  * Check if one or more placeholders are present in the generated "index.html" and replace them

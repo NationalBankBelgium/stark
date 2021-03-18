@@ -18,16 +18,9 @@ const ANGULAR_APP_CONFIG = {
 	sourceRoot: angularCliAppConfig.sourceRoot,
 	outputPath: angularCliAppConfig.architect.build.options.outputPath,
 	buildOptions: angularCliAppConfig.architect.build.options || {},
-	buildConfigurations: angularCliAppConfig.architect.build.configurations || {}
-};
-
-const DEFAULT_METADATA = {
-	TITLE: "Stark Application by @NationalBankBelgium",
-	E2E: helpers.hasProcessFlag("e2e"), // NG CLI comand 'e2e'
-	HOST: ngCliUtils.getNgCliCommandOption("host") || ANGULAR_APP_CONFIG.config.architect.serve.options.host || "localhost", // by default is "localhost"
-	PORT: ngCliUtils.getNgCliCommandOption("port") || ANGULAR_APP_CONFIG.config.architect.serve.options.port || 4200, // by default is 4200
-	TS_CONFIG_PATH: ANGULAR_APP_CONFIG.buildOptions.tsConfig,
-	environment: ""
+	buildConfigurations: angularCliAppConfig.architect.build.configurations || {},
+	serveOptions: angularCliAppConfig.architect.serve.options || {},
+	serveConfigurations: angularCliAppConfig.architect.serve.configurations || {}
 };
 
 function supportES2015(tsConfigPath) {
@@ -147,8 +140,43 @@ function getFixedTSLintConfig(tslintConfig) {
 	return noTypeCheckTSLintConfigPath;
 }
 
+/**
+ * Based on "angular.json" file, gets the value for the `property` in specified `environment` in build configuration.
+ * If there is no definition in the `environment`, fallback gets default value in build configuration.
+ * 
+ * @param {string} property The property name
+ * @param {string} environment The environment (usually "production" or "development")
+ * @returns {*} Returns the value related to the property
+ */
+function getAngularWorkspaceBuildProperty(property, environment) {
+	if (typeof ANGULAR_APP_CONFIG.buildConfigurations[environment] !== "undefined" && 
+		typeof ANGULAR_APP_CONFIG.buildConfigurations[environment][property] !== "undefined") {
+		return ANGULAR_APP_CONFIG.buildConfigurations[environment][property];
+	} else {
+		return ANGULAR_APP_CONFIG.buildOptions[property];
+	}
+}
+
+/**
+ * Based on "angular.json" file, gets the value for the `property` in specified `environment` in serve configuration.
+ * If there is no definition in the `environment`, fallback gets default value in serve configuration.
+ *
+ * @param {string} property The property name
+ * @param {string} environment The environment (usually "production" or "development")
+ * @returns {*} Returns the value related to the property
+ */
+function getAngularWorkspaceServeProperty(property, environment) {
+	if (typeof ANGULAR_APP_CONFIG.serveConfigurations[environment] !== "undefined" &&
+		typeof ANGULAR_APP_CONFIG.serveConfigurations[environment][property] !== "undefined") {
+		return ANGULAR_APP_CONFIG.serveConfigurations[environment][property];
+	} else {
+		return ANGULAR_APP_CONFIG.serveOptions[property];
+	}
+}
+
 exports.ANGULAR_APP_CONFIG = ANGULAR_APP_CONFIG;
-exports.DEFAULT_METADATA = DEFAULT_METADATA;
+exports.getAngularWorkspaceBuildProperty = getAngularWorkspaceBuildProperty;
+exports.getAngularWorkspaceServeProperty = getAngularWorkspaceServeProperty;
 exports.getEnvironmentFile = getEnvironmentFile;
 exports.readTsConfig = readTsConfig;
 exports.getFixedTSLintConfig = getFixedTSLintConfig;
