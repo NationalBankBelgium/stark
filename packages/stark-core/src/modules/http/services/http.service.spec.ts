@@ -44,6 +44,7 @@ describe("Service: StarkHttpService", () => {
 	let httpMock: SpyObj<HttpClient>;
 	let starkHttpService: HttpServiceHelper<MockResource>;
 	let mockBackend: StarkBackend;
+	let mockResourceSerializer: StarkHttpSerializer<MockResource>;
 	let mockResourceWithEtag: MockResource;
 	let mockResourceWithoutEtag: MockResource;
 	let mockResourceWithMetadata: MockResource;
@@ -1124,6 +1125,7 @@ describe("Service: StarkHttpService", () => {
 	beforeEach(() => {
 		mockBackend = new StarkBackendImpl();
 		mockBackend.url = dummyBackendUrl;
+		mockResourceSerializer = new StarkHttpSerializerImpl<MockResource>(MockResource);
 		mockResourceWithoutEtag = new MockResource(mockUuid);
 		mockResourceWithoutEtag.property1 = mockProperty1;
 		mockResourceWithoutEtag.property2 = mockProperty2;
@@ -1514,8 +1516,6 @@ class MockResource implements StarkResource {
 		this.uuid = uuid;
 	}
 }
-
-const mockResourceSerializer: StarkHttpSerializer<MockResource> = new StarkHttpSerializerImpl<MockResource>(MockResource);
 
 function httpHeadersGetter(inputHeaders: { [name: string]: string }): HttpHeaders {
 	return new HttpHeaders(inputHeaders);

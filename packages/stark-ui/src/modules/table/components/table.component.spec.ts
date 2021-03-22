@@ -81,7 +81,7 @@ import createSpy = jasmine.createSpy;
 	`
 })
 class TestHostComponent {
-	@ViewChild(StarkTableComponent)
+	@ViewChild(StarkTableComponent, { static: true })
 	public tableComponent!: StarkTableComponent;
 
 	public columnProperties?: StarkTableColumnProperties[];

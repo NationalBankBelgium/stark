@@ -44,19 +44,19 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	/**
 	 * Reference to the MatSidenavContainer embedded in this component
 	 */
-	@ViewChild("appSidenavContainer")
+	@ViewChild("appSidenavContainer", { static: false })
 	public appSidenavContainer!: MatSidenavContainer;
 
 	/**
 	 * Reference to the left MatSidenav embedded in this component
 	 */
-	@ViewChild("appSidenavLeft")
+	@ViewChild("appSidenavLeft", { static: true })
 	public appSidenavLeft!: MatSidenav;
 
 	/**
 	 * Reference to the right MatSidenav embedded in this component
 	 */
-	@ViewChild("appSidenavRight")
+	@ViewChild("appSidenavRight", { static: true })
 	public appSidenavRight!: MatSidenav;
 
 	/**

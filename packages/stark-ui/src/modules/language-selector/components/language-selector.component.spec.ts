@@ -32,7 +32,7 @@ import { of, throwError } from "rxjs";
 	template: ` <stark-language-selector mode="mode"></stark-language-selector> `
 })
 class TestHostComponent {
-	@ViewChild(StarkLanguageSelectorComponent)
+	@ViewChild(StarkLanguageSelectorComponent, { static: true })
 	public languageSelectorComponent!: StarkLanguageSelectorComponent;
 
 	public mode?: StarkLanguageSelectorMode;

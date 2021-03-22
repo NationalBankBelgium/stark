@@ -58,14 +58,27 @@ function validateAngularCLIConfig(jsonConfig) {
 	// }
 }
 
+function getNgCliAction() {
+	const stringifiedArgs = process.argv.join(" ");
+	const cliActionRegex = new RegExp("ng\\s([\\w\\d]+)(\\s|)");
+	return stringifiedArgs.match(cliActionRegex)[1];
+}
+
 function getWorkspace() {
 	return cliUtilConfig.getWorkspace();
 }
 
 function hasNgCliCommandOption(option) {
 	const stringifiedArgs = process.argv.join(" ");
-	// NG CLI options could be passed in 2 ways: 1) --someOption someValue or 2)  --someOption=someValue
-	const cliOptionRegex = new RegExp("--" + option + "(=|\\s)");
+	/**
+	 * NG CLI options could be passed in different ways
+	 * 1. `--someOption`
+	 * 2. `--someOption someValue`
+	 * 3. `--someOption=someValue`
+	 * 4. `-c someValue`
+	 * 5. `-c=someValue`
+	 */
+	const cliOptionRegex = new RegExp("-{1,2}" + option + "(=|\\s|)");
 
 	return cliOptionRegex.test(stringifiedArgs);
 }
@@ -73,11 +86,25 @@ function hasNgCliCommandOption(option) {
 function getNgCliCommandOption(option) {
 	if (hasNgCliCommandOption(option)) {
 		const stringifiedArgs = process.argv.join(" ");
-		// NG CLI options could be passed in 2 ways: 1) --someOption someValue or 2)  --someOption=someValue
-		const cliOptionValueRegex = new RegExp("--" + option + "(=|\\s)\\S*($|\\S)");
+		/**
+		 * NG CLI options could be passed in different ways
+		 * 1. `--someOption`
+		 * 2. `--someOption someValue`
+		 * 3. `--someOption=someValue`
+		 * 4. `-c someValue`
+		 * 5. `-c=someValue`
+		 */
+		const cliOptionValueRegex = new RegExp("-{1,2}" + option + "(=|\\s)\\S*($|\\S)");
 
-		// the value is on the right side of the "=" or " "
-		return stringifiedArgs.match(cliOptionValueRegex)[0].split(/=|\s/)[1];
+		const result = stringifiedArgs.match(cliOptionValueRegex);
+		if (!!result && result.length > 0) {
+			// the value is on the right side of the "=" or " "
+			return result[0].split(/=|\s/)[1];
+		} else {
+			// if command option is and there is no value, the default is true
+			return "true";
+		}
+
 	} else {
 		return null; // the flag was not passed to the current command
 	}
@@ -86,6 +113,7 @@ function getNgCliCommandOption(option) {
 exports.getAngularCliAppConfig = getAngularCliAppConfig;
 exports.getDirectoriesNames = getDirectoriesNames;
 exports.getWorkspace = getWorkspace;
+exports.getNgCliAction = getNgCliAction;
 exports.getNgCliCommandOption = getNgCliCommandOption;
 exports.hasNgCliCommandOption = hasNgCliCommandOption;
 exports.isDirectory = isDirectory;

@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs no-duplicate-string no-lifecycle-call */
 import { async, ComponentFixture, inject, TestBed } from "@angular/core/testing";
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, NgModule, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -27,11 +27,14 @@ import { mergeUiTranslations } from "../../../common/translations";
 	template: ` <stark-route-search [menuConfig]="menuConfig"></stark-route-search> `
 })
 class TestHostComponent {
-	@ViewChild(StarkRouteSearchComponent)
+	@ViewChild(StarkRouteSearchComponent, { static: true })
 	public routeSearchComponent!: StarkRouteSearchComponent;
 
 	public menuConfig?: StarkMenuConfig;
 }
+
+@NgModule()
+class LazyLoadedModule {}
 
 /* tslint:disable:no-big-function */
 describe("RouteSearchComponent", () => {
@@ -481,7 +484,9 @@ describe("RouteSearchComponent", () => {
 					name: "page-01",
 					url: "/page-01",
 					parent: "homepage",
-					loadChildren: "./some.module#SomeModule" // lazy loaded module
+					// FIXME This should be tested properly
+					loadChildren: (): any => LazyLoadedModule
+					// loadChildren: "./some.module#SomeModule" // lazy loaded module
 				},
 				{
 					name: "page-01-01",

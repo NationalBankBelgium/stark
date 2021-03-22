@@ -82,7 +82,7 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * ViewChild catching the extension panel in order to open/close it programmatically
 	 */
-	@ViewChild("menuGroupsPanel")
+	@ViewChild("menuGroupsPanel", { static: false })
 	public menuGroupsPanel!: MatExpansionPanel;
 
 	/**

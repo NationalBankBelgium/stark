@@ -35,7 +35,7 @@ describe("DropdownComponent", () => {
 		`
 	})
 	class TestHostNgControlComponent {
-		@ViewChild(StarkDropdownComponent)
+		@ViewChild(StarkDropdownComponent, { static: true })
 		public dropdownComponent!: StarkDropdownComponent;
 
 		public dropdownId?: string;
@@ -71,7 +71,7 @@ describe("DropdownComponent", () => {
 		`
 	})
 	class TestHostValueComponent {
-		@ViewChild(StarkDropdownComponent)
+		@ViewChild(StarkDropdownComponent, { static: true })
 		public dropdownComponent!: StarkDropdownComponent;
 
 		public dropdownId?: string;
@@ -106,7 +106,7 @@ describe("DropdownComponent", () => {
 		`
 	})
 	class TestHostComponent {
-		@ViewChild(StarkDropdownComponent)
+		@ViewChild(StarkDropdownComponent, { static: true })
 		public dropdownComponent!: StarkDropdownComponent;
 		public dropdownId?: string;
 		// public header?: string;

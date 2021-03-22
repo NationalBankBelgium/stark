@@ -10,16 +10,16 @@ export const APP_STATES: Ng2StateDeclaration[] = [
 	{
 		name: "demo-ui.**",
 		url: "^/demo-ui", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
-		loadChildren: "./demo-ui/demo-ui.module#DemoUiModule" // lazy loaded module
+		loadChildren: (): any => import("./demo-ui/demo-ui.module").then((x: any) => x.DemoUiModule) // lazy loaded module
 	},
 	{
 		name: "demo-rbac.**",
 		url: "^/demo-rbac", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
-		loadChildren: "./demo-rbac/demo-rbac.module#DemoRBACModule" // lazy loaded module
+		loadChildren: (): any => import("./demo-rbac/demo-rbac.module").then((x: any) => x.DemoRBACModule) // lazy loaded module
 	},
 	{
 		name: "styleguide.**",
 		url: "^/styleguide", // use ^ to avoid double slash "//" in the URL after the domain (https://github.com/angular-ui/ui-router/wiki/URL-Routing#absolute-routes-)
-		loadChildren: "./styleguide/styleguide.module#StyleguideModule" // lazy loaded module
+		loadChildren: (): any => import("./styleguide/styleguide.module").then((x: any) => x.StyleguideModule) // lazy loaded module
 	}
 ];

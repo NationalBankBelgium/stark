@@ -20,6 +20,7 @@
                 "replaceDuplicatePlugins": false
               }
             },
+            "indexTransform": "./node_modules/@nationalbankbelgium/stark-build/config/index-html.transform.js",
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.browser.ts",
@@ -114,7 +115,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-builders/dev-server:generic",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "showcase:build",
             "port": 3000,

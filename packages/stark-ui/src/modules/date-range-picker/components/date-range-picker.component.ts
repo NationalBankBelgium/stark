@@ -274,13 +274,13 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	/**
 	 * Reference to the start datepicker embedded in this component
 	 */
-	@ViewChild("startPicker")
+	@ViewChild("startPicker", { static: true })
 	public startPicker!: StarkDatePickerComponent;
 
 	/**
 	 * Reference to the end datepicker embedded in this component
 	 */
-	@ViewChild("endPicker")
+	@ViewChild("endPicker", { static: true })
 	public endPicker!: StarkDatePickerComponent;
 
 	/**

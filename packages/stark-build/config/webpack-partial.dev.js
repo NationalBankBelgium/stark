@@ -1,32 +1,12 @@
 "use strict";
 
 const helpers = require("./helpers");
-const buildUtils = require("./build-utils");
 const webpackMerge = require("webpack-merge"); // used to merge webpack configs
 const commonConfig = require("./webpack-partial.common.js"); // the settings that are common to prod and dev
-const ngCliUtils = require("./ng-cli-utils");
+const METADATA = require("./webpack-metadata").METADATA;
 
 // Dev custom config
 const webpackCustomConfig = require(helpers.root("config/webpack-custom-config.dev.json"));
-
-const isProd = ngCliUtils.getNgCliCommandOption("prod");
-const isHMR =
-	ngCliUtils.getNgCliCommandOption("configuration") === "hmr" ||
-	ngCliUtils.hasNgCliCommandOption("hmr") ||
-	buildUtils.ANGULAR_APP_CONFIG.buildOptions.hmr;
-
-const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {
-	ENV: isProd ? "production" : "development",
-	BASE_URL: ngCliUtils.getNgCliCommandOption("baseHref") || buildUtils.ANGULAR_APP_CONFIG.buildOptions.baseHref,
-	HMR: isHMR,
-	AOT: ngCliUtils.hasNgCliCommandOption("aot") || buildUtils.ANGULAR_APP_CONFIG.buildOptions.aot,
-	WATCH:
-		!(ngCliUtils.hasNgCliCommandOption("watch") && ngCliUtils.getNgCliCommandOption("watch") === "false") &&
-		!(buildUtils.ANGULAR_APP_CONFIG.buildOptions.watch === false), // by default is true
-	environment: isHMR ? "hmr" : "dev",
-	IS_DEV_SERVER: helpers.hasProcessFlag("serve") && !isProd // NG CLI command 'serve"
-	// PUBLIC: process.env.PUBLIC_DEV || HOST + ':' + PORT  // TODO check if needed/useful in our case?
-});
 
 // Directives to be used in CSP header
 const cspDirectives = [

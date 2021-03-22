@@ -190,13 +190,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	/**
 	 * Reference to the single MatSelect element embedded in this component
 	 */
-	@ViewChild("singleSelect")
+	@ViewChild("singleSelect", { static: true })
 	private singleSelectElement?: MatSelect;
 
 	/**
 	 * Reference to the multi MatSelect element embedded in this component
 	 */
-	@ViewChild("multiSelect")
+	@ViewChild("multiSelect", { static: true })
 	private multiSelectElement?: MatSelect;
 
 	/**
