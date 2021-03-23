@@ -8,12 +8,10 @@ const fs = require("fs");
  * Webpack Plugins
  */
 const DefinePlugin = require("webpack/lib/DefinePlugin");
-const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const WebpackMonitor = require("webpack-monitor");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const StylelintPlugin = require("stylelint-webpack-plugin");
-// const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
-// const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const webpackMerge = require("webpack-merge");
 const METADATA = require("./webpack-metadata").METADATA;
 
@@ -174,23 +172,14 @@ module.exports = (config, options) => {
 			}),
 
 			/**
-			 * Plugin: InlineManifestWebpackPlugin
-			 * Inline Webpack's manifest.js in index.html
+			 * Plugin: MomentLocalesPlugin
+			 * Description: Easily remove unused Moment.js locales when building with webpack
 			 *
-			 * https://github.com/szrenwei/inline-manifest-webpack-plugin
+			 * See: https://github.com/iamakulov/moment-locales-webpack-plugin#usage
 			 */
-			// TODO evaluate this
-			// new InlineManifestWebpackPlugin(),
-
-			/**
-			 * Plugin: ContextReplacementPlugin
-			 * Description: allows to override the inferred information in a 'require' context
-			 * Including only a certain set of Moment locales
-			 *
-			 * See: https://webpack.js.org/plugins/context-replacement-plugin/
-			 */
-			// TODO Change with moment-locales-webpack-plugin
-			new ContextReplacementPlugin(/moment[\/\\]locale$/, /(de|fr|en-gb|nl|nl-be)\.js/),
+			new MomentLocalesPlugin({
+				localesToKeep: ["de", "fr", "en-gb", "nl", "nl-be"]
+			}),
 
 			/**
 			 * Plugin: WebpackMonitor
