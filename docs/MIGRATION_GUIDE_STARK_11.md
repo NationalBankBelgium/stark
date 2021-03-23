@@ -180,6 +180,58 @@ After:
 }
 ```
 
+#### 1.3. Edit `projects.<project_name>.architect.test.builder`:
+
+Add support for stark-testing karma config with command `ng test`
+
+Before:
+
+```txt
+{
+  //...
+  "projects": {
+    "<project_name>": {
+      // ...
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "base.spec.ts",
+            "karmaConfig": "./karma.conf.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+After:
+
+```txt
+{
+  //...
+  "projects": {
+    "<project_name>": {
+      // ...
+      "architect": {
+        "test": {
+          // /!\ Edit following line
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "main": "base.spec.ts",
+            "karmaConfig": "./karma.conf.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
 ### 2. Adapt "src/index.html" file
 
 As `htmlWebpackPlugin` is no longer supported by Angular CLI, the options related to this plugin have been changed.

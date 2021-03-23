@@ -134,7 +134,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/custom-webpack:karma",
           "options": {
             "main": "base.spec.ts",
             "karmaConfig": "./karma.conf.js",
