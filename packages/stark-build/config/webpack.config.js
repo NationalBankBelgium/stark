@@ -11,7 +11,6 @@ const DefinePlugin = require("webpack/lib/DefinePlugin");
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const WebpackMonitor = require("webpack-monitor");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-// const WriteFilePlugin = require("write-file-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
@@ -153,15 +152,6 @@ module.exports = (config, options) => {
 		 * See: https://webpack.js.org/configuration/plugins
 		 */
 		plugins: [
-			// TODO: cannot enable this WriteFilePlugin due to Error: Content and Map of this Source is no longer available (only size() is supported)
-			// /**
-			//  * Plugin: WriteFilePlugin
-			//  * Description: This plugin makes sure that bundles and assets are written to disk
-			//  * this is necessary so that assets are available in dev mode
-			//  * See: https://www.npmjs.com/package/write-file-webpack-plugin
-			//  */
-			// new WriteFilePlugin(),
-
 			/**
 			 * Plugin: DefinePlugin
 			 * Description: Define free variables.
@@ -191,15 +181,6 @@ module.exports = (config, options) => {
 			 */
 			// TODO evaluate this
 			// new InlineManifestWebpackPlugin(),
-
-			/**
-			 * Plugin: WriteFilePlugin
-			 * Description: This plugin makes sure that bundles and assets are written to disk
-			 * this is necessary so that assets are available in dev mode
-			 * See: https://www.npmjs.com/package/write-file-webpack-plugin
-			 */
-			// TODO evaluate this
-			// new WriteFilePlugin(),
 
 			/**
 			 * Plugin: ContextReplacementPlugin
@@ -269,6 +250,9 @@ module.exports = (config, options) => {
 		...(METADATA.IS_DEV_SERVER
 			? {
 					devServer: {
+						// See: https://webpack.js.org/configuration/dev-server/#devserverwritetodisk-
+						writeToDisk: true,
+						
 						compress: true,
 
 						// HTML5 History API support: no need for # in URLs
