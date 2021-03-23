@@ -2,6 +2,7 @@
 
 const helpers = require("./helpers");
 const buildUtils = require("./build-utils");
+const fs = require("fs");
 
 /**
  * Webpack Plugins
@@ -11,7 +12,7 @@ const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin")
 const WebpackMonitor = require("webpack-monitor");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 // const WriteFilePlugin = require("write-file-webpack-plugin");
-// const StylelintPlugin = require("stylelint-webpack-plugin");
+const StylelintPlugin = require("stylelint-webpack-plugin");
 // const InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin");
 // const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const webpackMerge = require("webpack-merge");
@@ -241,19 +242,20 @@ module.exports = (config, options) => {
 							analyzerPort: 3030 // default 8888
 						})
 				  ]
-				: [])
+				: []),
 
-			// TODO: StylelintWebpackPlugin breaks the build: the assets are not copied
-			// /**
-			//  * Plugin: Stylelint
-			//  * Description: Lints the stylesheets loaded in the app (pcss, scss, css, sass)
-			//  * See: https://github.com/JaKXz/stylelint-webpack-plugin
-			//  */
-			// new StylelintPlugin({
-			// 	configFile: ".stylelintrc",
-			// 	emitErrors: false,
-			// 	files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
-			// }),
+			/**
+			 * Plugin: Stylelint
+			 * Description: Lints the stylesheets loaded in the app (pcss, scss, css, sass)
+			 * See: https://github.com/webpack-contrib/stylelint-webpack-plugin
+			 */
+			...(fs.existsSync(helpers.root(".stylelintrc")) ? [new StylelintPlugin({
+				configFile: ".stylelintrc",
+				emitErrors: true,
+				emitWarning: true,
+				failOnError: false,
+				files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
+			})] : []),
 		],
 
 		/**
