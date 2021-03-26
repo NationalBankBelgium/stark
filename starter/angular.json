@@ -12,14 +12,9 @@
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-              "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack-partial.dev.js",
-              "mergeStrategies": {
-                "modules.rules": "prepend",
-                "plugins": "prepend",
-                "devServer": "prepend",
-                "replaceDuplicatePlugins": false
-              }
+              "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack.config.js"
             },
+            "indexTransform": "./node_modules/@nationalbankbelgium/stark-build/config/index-html.transform.js",
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.browser.ts",
@@ -110,7 +105,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-builders/dev-server:generic",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "starter:build",
             "port": 3000,
