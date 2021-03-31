@@ -10,6 +10,8 @@
       "@ngrx/effects": "ngrx.effects",
       "@ngrx/store": "ngrx.store",
       "@ngx-translate/core": "ngxTranslate.core",
+      "@prettier/plugin-xml": "prettier.plugin-xml",
+      "@sqltools/formatter": "sqltools.formatter",
       "@uirouter/angular": "uirouter.angular",
       "angular2-text-mask": "ng2TextMask",
       "class-validator": "class-validator",
@@ -32,6 +34,8 @@
   "whitelistedNonPeerDependencies": [
     "@angular/material-moment-adapter",
     "@mdi/angular-material",
+    "@prettier/plugin-xml",
+    "@sqltools/formatter",
     "@types/lodash-es",
     "@types/nouislider",
     "@types/prismjs",

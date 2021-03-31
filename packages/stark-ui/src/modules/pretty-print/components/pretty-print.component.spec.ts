@@ -35,6 +35,38 @@ describe("PrettyPrintComponent", () => {
 	const classTokenProperty = 'class="token property"';
 	const classTokenSelector = 'class="token selector"';
 
+	const rawHtmlData: string = [
+		"<!DOCTYPE html><html><head>",
+		"<style>body {background-color: powderblue;}h1{color: blue;}flashy{color: red;}</style>",
+		"</head><body><h1>This is a heading</h1>",
+		'<p class="flashy">This is a flashy paragraph.</p>',
+		"</body></html>"
+	].join("");
+
+	const formattedHtmlData: string = [
+		"<!DOCTYPE html>",
+		"<html>",
+		"  <head>",
+		"    <style>",
+		"      body {",
+		"        background-color: powderblue;",
+		"      }",
+		"      h1 {",
+		"        color: blue;",
+		"      }",
+		"      flashy {",
+		"        color: red;",
+		"      }",
+		"    </style>",
+		"  </head>",
+		"  <body>",
+		"    <h1>This is a heading</h1>",
+		'    <p class="flashy">This is a flashy paragraph.</p>',
+		"  </body>",
+		"</html>",
+		""
+	].join("\n");
+
 	const rawXmlData: string = [
 		'<menu id="file" value="File"><menuitem value="New" onclick="CreateNewDoc()" />',
 		'<menuitem value="Open" onclick="OpenDoc()" />',
@@ -46,7 +78,8 @@ describe("PrettyPrintComponent", () => {
 		'  <menuitem value="New" onclick="CreateNewDoc()" />',
 		'  <menuitem value="Open" onclick="OpenDoc()" />',
 		'  <menuitem value="Close" onclick="CloseDoc()" />',
-		"</menu>"
+		"</menu>",
+		""
 	].join("\n"); // should contain line breaks
 
 	const rawCssData: string = [
@@ -90,11 +123,12 @@ describe("PrettyPrintComponent", () => {
 	const formattedSqlData: string = [
 		"SELECT DISTINCT Name",
 		"FROM Production.Product AS p",
-		"WHERE EXISTS ",
-		"  (SELECT *",
-		"  FROM Production.ProductModel AS pm",
-		"  WHERE p.ProductModelID = pm.ProductModelID",
-		"      AND pm.Name LIKE 'Long-Sleeve Logo Jersey%')"
+		"WHERE EXISTS (",
+		"    SELECT *",
+		"    FROM Production.ProductModel AS pm",
+		"    WHERE p.ProductModelID = pm.ProductModelID",
+		"      AND pm.Name LIKE 'Long-Sleeve Logo Jersey%'",
+		"  )"
 	].join("\n"); // should contain line breaks
 
 	const rawJsonData: string = [
@@ -209,8 +243,7 @@ describe("PrettyPrintComponent", () => {
 				expect(component.enableHighlighting).toBeUndefined();
 			});
 
-			// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
-			xit("should nicely format raw XML data", () => {
+			it("should nicely format raw XML data", () => {
 				let formattedData: string = component.prettyString;
 
 				const regExLessThan: RegExp = /&lt;/gi;
@@ -226,6 +259,39 @@ describe("PrettyPrintComponent", () => {
 				expect(preElement.innerHTML).toContain('&lt;menu id="file" value="File"&gt');
 				expect(preElement.innerHTML).toContain('&lt;menuitem value="New" onclick="CreateNewDoc()" /&gt;');
 				expect(preElement.innerHTML).toContain("&lt;/menu&gt;");
+			});
+		});
+
+		describe("HTML", () => {
+			beforeEach(() => {
+				hostComponent.data = rawHtmlData;
+				hostComponent.format = "html";
+				hostFixture.detectChanges();
+			});
+
+			it(shouldHaveInputs, () => {
+				expect(component.data).toBe(rawHtmlData);
+				expect(component.format).toBe("html");
+				expect(component.enableHighlighting).toBeUndefined();
+			});
+
+			it("should nicely format raw HTML data", () => {
+				let formattedData: string = component.prettyString;
+
+				const regExLessThan: RegExp = /&lt;/gi;
+				const regExGreaterThan: RegExp = /&gt;/gi;
+				const regExQuote: RegExp = /&quot;/gi;
+
+				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
+
+				expect(formattedData).toBe(formattedHtmlData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).toContain("&lt;!DOCTYPE html&gt");
+				expect(preElement.innerHTML).toContain('&lt;p class="flashy"&gt');
+				expect(preElement.innerHTML).toContain("&lt;style&gt;");
+				expect(preElement.innerHTML).toContain("&lt;/style&gt;");
 			});
 		});
 
@@ -318,8 +384,7 @@ describe("PrettyPrintComponent", () => {
 				expect(component.enableHighlighting).toBeUndefined();
 			});
 
-			// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
-			xit("should nicely format raw SQL data", () => {
+			it("should nicely format raw SQL data", () => {
 				expect(component.prettyString).toBe(formattedSqlData);
 
 				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
@@ -533,8 +598,7 @@ describe("PrettyPrintComponent", () => {
 				expect(preElement.innerHTML).toContain('<span class="token attr-name">value</span>');
 			});
 
-			// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
-			xit("should remove highlighting from the already highlighted XML data when the enableHighlighting is set to FALSE", () => {
+			it("should remove highlighting from the already highlighted XML data when the enableHighlighting is set to FALSE", () => {
 				hostComponent.enableHighlighting = false;
 				hostFixture.detectChanges();
 
@@ -560,6 +624,72 @@ describe("PrettyPrintComponent", () => {
 				expect(preElement.innerHTML).toContain('&lt;menu id="file" value="File"&gt;');
 				expect(preElement.innerHTML).toContain('&lt;menuitem value="New" onclick="CreateNewDoc()" /&gt;');
 				expect(preElement.innerHTML).toContain("&lt;/menu&gt;");
+			});
+		});
+
+		describe("HTML", () => {
+			beforeEach(() => {
+				hostComponent.data = rawHtmlData;
+				hostComponent.format = "html";
+				hostComponent.enableHighlighting = true;
+				hostFixture.detectChanges();
+			});
+
+			it(shouldHaveInputs, () => {
+				expect(component.data).toBe(rawHtmlData);
+				expect(component.format).toBe("html");
+				expect(component.enableHighlighting).toBe(true);
+			});
+
+			it("should highlight the formatted HTML data", () => {
+				let formattedData: string = component.prettyString;
+
+				const regExLessThan: RegExp = /&lt;/gi;
+				const regExGreaterThan: RegExp = /&gt;/gi;
+				const regExQuote: RegExp = /&quot;/gi;
+
+				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
+
+				expect(formattedData).toContain("class='language-markup'");
+				expect(formattedData).toContain('class="token tag"');
+				expect(formattedData).toContain("<p");
+				expect(formattedData).toContain("flashy");
+				expect(formattedData).not.toBe(formattedHtmlData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).toContain('<code class="language-markup">');
+				expect(preElement.innerHTML).toContain('<span class="token punctuation">&lt;</span>p</span>');
+				expect(preElement.innerHTML).toContain('<span class="token punctuation">&lt;</span>head</span>');
+				expect(preElement.innerHTML).toContain('<span class="token attr-name">class</span>');
+			});
+
+			it("should remove highlighting from the already highlighted HTML data when the enableHighlighting is set to FALSE", () => {
+				hostComponent.enableHighlighting = false;
+				hostFixture.detectChanges();
+
+				let formattedData: string = component.prettyString;
+
+				const regExLessThan: RegExp = /&lt;/gi;
+				const regExGreaterThan: RegExp = /&gt;/gi;
+				const regExQuote: RegExp = /&quot;/gi;
+
+				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
+
+				expect(formattedData).not.toContain("class='language-markup'");
+				expect(formattedData).not.toContain('class="token tag"');
+				expect(formattedData).not.toContain("<span");
+				expect(formattedData).toContain("<h1");
+				expect(formattedData).toContain("<p");
+				expect(formattedData).toContain('class="flashy"');
+				expect(formattedData).toBe(formattedHtmlData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).not.toContain('<code class="language-markup">');
+				expect(preElement.innerHTML).toContain("&lt;html&gt;");
+				expect(preElement.innerHTML).toContain('&lt;p class="flashy"');
+				expect(preElement.innerHTML).toContain("&lt;/html&gt;");
 			});
 		});
 
@@ -705,8 +835,7 @@ describe("PrettyPrintComponent", () => {
 				expect(preElement.innerHTML).toContain('<span class="token operator">=</span>');
 			});
 
-			// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
-			xit("should remove highlighting from the already highlighted SQL data when the enableHighlighting is set to FALSE", () => {
+			it("should remove highlighting from the already highlighted SQL data when the enableHighlighting is set to FALSE", () => {
 				hostComponent.enableHighlighting = false;
 				hostFixture.detectChanges();
 

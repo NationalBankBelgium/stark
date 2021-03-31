@@ -20,6 +20,8 @@
   "dependencies": {
     "@angular/material-moment-adapter": "^8.2.0",
     "@mdi/angular-material": "^4.0.96",
+    "@prettier/plugin-xml": "^0.13.1",
+    "@sqltools/formatter": "^1.2.3",
     "@types/lodash-es": "^4.17.4",
     "@types/nouislider": "^9.0.10",
     "@types/prismjs": "^1.16.3",
@@ -27,7 +29,6 @@
     "normalize.css": "^8.0.1",
     "nouislider": "^14.6.3",
     "prettier": "~2.2.1",
-    "pretty-data": "^0.40.0",
     "prismjs": "^1.23.0",
     "text-mask-addons": "^3.8.0",
     "text-mask-core": "^5.1.2"
