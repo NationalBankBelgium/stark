@@ -33,7 +33,7 @@
     "@angular/router": "^8.2.0",
     "@angular-devkit/build-ng-packagr": "~0.803.29",
     "@commitlint/cli": "^12.0.0",
-    "@commitlint/config-conventional": "^12.0.0",
+    "@commitlint/config-conventional": "^12.1.1",
     "@compodoc/compodoc": "~1.1.11",
     "@nationalbankbelgium/code-style": "^1.4.0",
     "@ngtools/json-schema": "^1.1.0",
