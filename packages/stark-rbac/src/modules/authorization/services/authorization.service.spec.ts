@@ -8,7 +8,7 @@ import { MockStarkLoggingService, MockStarkRoutingService, MockStarkSessionServi
 
 import { StarkRBACStatePermissions, StarkStateRedirection, StarkStateRedirectionFn } from "../entities";
 import { StarkRBACAuthorizationServiceImpl, starkUnauthorizedUserError } from "./authorization.service";
-import { StarkUserNavigationUnauthorized, StarkUserNavigationUnauthorizedRedirected } from "../actions";
+import { StarkRBACAuthorizationActions } from "../actions";
 import createSpyObj = jasmine.createSpyObj;
 import createSpy = jasmine.createSpy;
 import Spy = jasmine.Spy;
@@ -412,7 +412,9 @@ describe("StarkRBACAuthorizationService", () => {
 			expect(mockLogger.warn).toHaveBeenCalledTimes(1);
 			expect(mockLogger.warn).toHaveBeenCalledWith(starkUnauthorizedUserError);
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkUserNavigationUnauthorized(dummyUnauthorizedStateName));
+			expect(mockStore.dispatch).toHaveBeenCalledWith(
+				StarkRBACAuthorizationActions.userNavigationUnauthorized({ targetState: dummyUnauthorizedStateName })
+			);
 
 			mockPermissions = <any>undefined;
 			mockLogger.warn.calls.reset();
@@ -481,7 +483,10 @@ describe("StarkRBACAuthorizationService", () => {
 			expect(mockLogger.warn.calls.argsFor(0)[0]).toContain("redirecting");
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 			expect(mockStore.dispatch).toHaveBeenCalledWith(
-				new StarkUserNavigationUnauthorizedRedirected(dummyUnauthorizedStateName, mockRedirectToObj.stateName)
+				StarkRBACAuthorizationActions.userNavigationUnauthorizedRedirected({
+					targetState: dummyUnauthorizedStateName,
+					redirectionState: mockRedirectToObj.stateName
+				})
 			);
 		});
 
@@ -504,7 +509,10 @@ describe("StarkRBACAuthorizationService", () => {
 			expect(mockLogger.warn.calls.argsFor(0)[0]).toContain("redirecting");
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 			expect(mockStore.dispatch).toHaveBeenCalledWith(
-				new StarkUserNavigationUnauthorizedRedirected(dummyUnauthorizedStateName, mockRedirectToObj.stateName)
+				StarkRBACAuthorizationActions.userNavigationUnauthorizedRedirected({
+					targetState: dummyUnauthorizedStateName,
+					redirectionState: mockRedirectToObj.stateName
+				})
 			);
 		});
 	});

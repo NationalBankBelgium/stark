@@ -1,1 +1,2 @@
-export * from "./actions/authorization.actions";
+import * as StarkRBACAuthorizationActions from "./actions/authorization.actions";
+export { StarkRBACAuthorizationActions };

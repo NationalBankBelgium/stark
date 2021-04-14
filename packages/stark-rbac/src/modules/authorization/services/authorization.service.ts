@@ -16,7 +16,7 @@ import {
 } from "@nationalbankbelgium/stark-core";
 import { StarkRBACAuthorizationService, starkRBACAuthorizationServiceName } from "./authorization.service.intf";
 import { StarkRBACStatePermissions, StarkStateRedirection, StarkStateRedirectionFn } from "../entities";
-import { StarkUserNavigationUnauthorized, StarkUserNavigationUnauthorizedRedirected } from "../actions";
+import { StarkRBACAuthorizationActions } from "../actions";
 
 /**
  * @ignore
@@ -143,7 +143,7 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 		}
 
 		// dispatch action so an effect can run any logic if needed
-		this.store.dispatch(new StarkUserNavigationUnauthorized(transition.targetState().name()));
+		this.store.dispatch(StarkRBACAuthorizationActions.userNavigationUnauthorized({ targetState: transition.targetState().name() }));
 		throw new Error(starkUnauthorizedUserError);
 	}
 
@@ -159,7 +159,12 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 		this.logger.warn(starkRBACAuthorizationServiceName + ": redirecting to state '" + stateRedirection.stateName + "'");
 		const originalTargetState: TargetState = transition.targetState();
 		// dispatch action so an effect can run any logic if needed
-		this.store.dispatch(new StarkUserNavigationUnauthorizedRedirected(originalTargetState.name(), stateRedirection.stateName));
+		this.store.dispatch(
+			StarkRBACAuthorizationActions.userNavigationUnauthorizedRedirected({
+				targetState: originalTargetState.name(),
+				redirectionState: stateRedirection.stateName
+			})
+		);
 		// overriding the target state with that one to be redirected to
 		return originalTargetState.withState(stateRedirection.stateName).withParams(stateRedirection.params || {}, true);
 	}
