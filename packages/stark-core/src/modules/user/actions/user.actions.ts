@@ -1,108 +1,67 @@
-import { Action } from "@ngrx/store";
+import { createAction, props, union } from "@ngrx/store";
 import { StarkUser } from "../entities";
 import { StarkHttpErrorWrapper } from "../../http/entities/error";
 
 /**
- * Enumeration of the User action types
+ * Key defined to find the service in a store
  */
-export enum StarkUserActionTypes {
-	FETCH_USER_PROFILE = "[StarkUser] Get User",
-	FETCH_USER_PROFILE_SUCCESS = "[StarkUser] Fetch User Profile Success",
-	FETCH_USER_PROFILE_FAILURE = "[StarkUser] Fetch User Profile Failure",
-	GET_ALL_USERS = "[StarkUser] Get All Users",
-	GET_ALL_USERS_SUCCESS = "[StarkUser] Get All Users Success",
-	GET_ALL_USERS_FAILURE = "[StarkUser] Get All Users Failure"
-}
+const starkUserStoreKey = "StarkUser";
 
 /**
  * Triggered when the fetchUserProfile() method is called, just before performing the HTTP to the REST API.
  */
-export class StarkFetchUserProfile implements Action {
-	/**
-	 * The type of Action
-	 */
-	public readonly type: StarkUserActionTypes.FETCH_USER_PROFILE = StarkUserActionTypes.FETCH_USER_PROFILE;
-}
+export const fetchUserProfile = createAction(`[${starkUserStoreKey}] Get User`);
 
 /**
  * Triggered when the user profile has been successfully fetched from the REST API.
+ *
+ * Parameter:
+ *   - user - The user fetched from the REST API
  */
-export class StarkFetchUserProfileSuccess implements Action {
-	/**
-	 * The type of Action
-	 */
-	public readonly type: StarkUserActionTypes.FETCH_USER_PROFILE_SUCCESS = StarkUserActionTypes.FETCH_USER_PROFILE_SUCCESS;
-
-	/**
-	 * Class constructor
-	 * @param user - The user fetched from the REST API
-	 */
-	public constructor(public user: StarkUser) {}
-}
+export const fetchUserProfileSuccess = createAction(`[${starkUserStoreKey}] Fetch User Profile Success`, props<{ user: StarkUser }>());
 
 /**
- * Triggered when the HTTP call to fetch the user profile failed or when the user profile fetched is not valid.
+ * Triggered when the user profile has been successfully fetched from the REST API.
+ *
+ * Parameter:
+ *   - error - The error that caused the user fetching to fail.
  */
-export class StarkFetchUserProfileFailure implements Action {
-	/**
-	 * The type of Action
-	 */
-	public readonly type: StarkUserActionTypes.FETCH_USER_PROFILE_FAILURE = StarkUserActionTypes.FETCH_USER_PROFILE_FAILURE;
-
-	/**
-	 * Class constructor
-	 * @param error - The error that caused the user fetching to fail.
-	 */
-	public constructor(public error: StarkHttpErrorWrapper | Error) {}
-}
+export const fetchUserProfileFailure = createAction(
+	`[${starkUserStoreKey}] Fetch User Profile Failure`,
+	props<{ error: StarkHttpErrorWrapper | Error }>()
+);
 
 /**
  * Triggered when the getAllUsers() method is called.
  * The getAllUsers() method should only be used in development.
  */
-export class StarkGetAllUsers implements Action {
-	/**
-	 * The type of Action
-	 */
-	public readonly type: StarkUserActionTypes.GET_ALL_USERS = StarkUserActionTypes.GET_ALL_USERS;
-}
+export const getAllUsers = createAction(`[${starkUserStoreKey}] Get All Users`);
 
 /**
- * Triggered when the users defined in the mock data are returned.
+ * Triggered when the fetchUserProfile() method is called, just before performing the HTTP to the REST API.
+ *
+ * Parameter:
+ *   - users - The users retrieved from the the mock data.
  */
-export class StarkGetAllUsersSuccess implements Action {
-	/**
-	 * The type of Action
-	 */
-	public readonly type: StarkUserActionTypes.GET_ALL_USERS_SUCCESS = StarkUserActionTypes.GET_ALL_USERS_SUCCESS;
-
-	/**
-	 * Class constructor
-	 * @param users - The users retrieved from the the mock data.
-	 */
-	public constructor(public users: StarkUser[]) {}
-}
+export const getAllUsersSuccess = createAction(`[${starkUserStoreKey}] Get All Users Success`, props<{ users: StarkUser[] }>());
 
 /**
  * Triggered when there are no users defined in the mock data.
+ *
+ * Parameter:
+ *   - message - The message describing all the users failure.
  */
-export class StarkGetAllUsersFailure implements Action {
-	/**
-	 * The type of Action
-	 */
-	public readonly type: StarkUserActionTypes.GET_ALL_USERS_FAILURE = StarkUserActionTypes.GET_ALL_USERS_FAILURE;
+export const getAllUsersFailure = createAction(`[${starkUserStoreKey}] Get All Users Failure`, props<{ message: string }>());
 
-	/**
-	 * Class constructor
-	 * @param message - The message describing all the users failure.
-	 */
-	public constructor(public message: string) {}
-}
-
-export type StarkUserActions =
-	| StarkFetchUserProfile
-	| StarkFetchUserProfileSuccess
-	| StarkFetchUserProfileFailure
-	| StarkGetAllUsers
-	| StarkGetAllUsersSuccess
-	| StarkGetAllUsersFailure;
+/**
+ * @ignore
+ */
+const all = union({
+	fetchUserProfile,
+	fetchUserProfileSuccess,
+	fetchUserProfileFailure,
+	getAllUsers,
+	getAllUsersSuccess,
+	getAllUsersFailure
+});
+export type Types = typeof all;

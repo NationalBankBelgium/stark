@@ -1,1 +1,2 @@
-export * from "./actions/user.actions";
+import * as StarkUserActions from "./actions/user.actions";
+export { StarkUserActions };
