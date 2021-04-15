@@ -24,7 +24,7 @@ import {
 	StarkApplicationMetadataImpl,
 	StarkErrorHandlingModule,
 	StarkHttpModule,
-	StarkLoggingActionTypes,
+	StarkLoggingActions,
 	StarkLoggingModule,
 	StarkMockData,
 	starkPreloadingStateName,
@@ -147,7 +147,7 @@ export function logger(reducer: ActionReducer<State>): any {
 	// default, no options
 	return storeLogger({
 		filter: {
-			blacklist: [StarkLoggingActionTypes.LOG_MESSAGE]
+			blacklist: [StarkLoggingActions.logMessage.type]
 		}
 	})(reducer);
 }

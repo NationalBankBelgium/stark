@@ -1,2 +1,2 @@
-export * from "./reducers/index";
-export * from "./reducers/logging.reducer";
+export { selectStarkLogging, starkLoggingReducers, StarkLoggingState } from "./reducers/index";
+export { loggingReducer } from "./reducers/logging.reducer";

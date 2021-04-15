@@ -1,1 +1,2 @@
-export * from "./actions/logging.actions";
+import * as StarkLoggingActions from "./actions/logging.actions";
+export { StarkLoggingActions };

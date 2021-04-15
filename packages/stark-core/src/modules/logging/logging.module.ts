@@ -1,10 +1,11 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
 import { StoreModule } from "@ngrx/store";
 import { starkLoggingReducers } from "./reducers";
+import { starkLoggingStoreKey } from "./constants";
 import { STARK_LOGGING_SERVICE, StarkLoggingServiceImpl } from "./services";
 
 @NgModule({
-	imports: [StoreModule.forFeature("StarkLogging", starkLoggingReducers)]
+	imports: [StoreModule.forFeature(starkLoggingStoreKey, starkLoggingReducers)]
 })
 export class StarkLoggingModule {
 	/**
