@@ -2,7 +2,7 @@
 import { StarkSession } from "../entities";
 import { StarkUser } from "../../user/entities";
 import { sessionReducer } from "./session.reducer";
-import { StarkChangeLanguageSuccess, StarkDestroySession, StarkInitializeSession } from "../actions";
+import { StarkSessionActions } from "../actions";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 
@@ -22,13 +22,19 @@ describe("Reducer: SessionReducer", () => {
 			deepFreeze(initialState); // Enforce immutability
 
 			// Send the CHANGE_LANGUAGE_SUCCESS action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new StarkChangeLanguageSuccess("NL"));
+			const changedState: StarkSession = sessionReducer(
+				<StarkSession>initialState,
+				StarkSessionActions.changeLanguageSuccess({ languageId: "NL" })
+			);
 			expect(changedState.currentLanguage).toBe("NL");
 		});
 
 		it("should set the session language even if the state is not defined", () => {
 			// Send the CHANGE_LANGUAGE_SUCCESS action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(<any>undefined, new StarkChangeLanguageSuccess("NL"));
+			const changedState: StarkSession = sessionReducer(
+				<any>undefined,
+				StarkSessionActions.changeLanguageSuccess({ languageId: "NL" })
+			);
 			expect(changedState).toBeDefined();
 			expect(changedState.currentLanguage).toBe("NL");
 		});
@@ -41,13 +47,16 @@ describe("Reducer: SessionReducer", () => {
 			deepFreeze(initialState); // Enforce immutability
 
 			// Send the INITIALIZE_SESSION action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new StarkInitializeSession(user));
+			const changedState: StarkSession = sessionReducer(
+				<StarkSession>initialState,
+				StarkSessionActions.initializeSession({ user: user })
+			);
 			expect(changedState.user).toBe(user);
 		});
 
 		it("should set the session user even if the state is not defined", () => {
 			// Send the INITIALIZE_SESSION action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(<any>undefined, new StarkInitializeSession(user));
+			const changedState: StarkSession = sessionReducer(<any>undefined, StarkSessionActions.initializeSession({ user: user }));
 			expect(changedState).toBeDefined();
 			expect(changedState.user).toBe(user);
 		});
@@ -60,13 +69,13 @@ describe("Reducer: SessionReducer", () => {
 			deepFreeze(initialState); // Enforce immutability
 
 			// Send the EXPIRE_SESSION action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, new StarkDestroySession());
+			const changedState: StarkSession = sessionReducer(<StarkSession>initialState, StarkSessionActions.destroySession());
 			expect(changedState.user).toBeUndefined();
 		});
 
 		it("should set the user as undefined even if the state is not defined", () => {
 			// Send the EXPIRE_SESSION action to the sessionReducer
-			const changedState: StarkSession = sessionReducer(<any>undefined, new StarkDestroySession());
+			const changedState: StarkSession = sessionReducer(<any>undefined, StarkSessionActions.destroySession());
 			expect(changedState).toBeDefined();
 			expect(changedState.user).toBeUndefined();
 		});

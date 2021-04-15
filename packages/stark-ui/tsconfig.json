@@ -20,6 +20,7 @@
       "@nationalbankbelgium/stark-ui/testing": ["./testing/public_api.ts"],
       "@ng-idle/*": ["../stark-core/node_modules/@ng-idle/*"],
       "@ngrx/*": ["../stark-core/node_modules/@ngrx/*"],
+      "@ngrx/effects": ["./node_modules/@ngrx/effects"],
       "@ngx-translate/*": ["../stark-core/node_modules/@ngx-translate/*"],
       "@uirouter/*": ["../stark-core/node_modules/@uirouter/*"],
       "cerialize": ["../stark-core/node_modules/cerialize"],

@@ -1,101 +1,46 @@
-import { Action } from "@ngrx/store";
+import { createAction, props, union } from "@ngrx/store";
 import { StarkUser } from "../../user/entities";
-
-/**
- * Actions related to {@link StarkSessionService}
- */
-export enum StarkSessionActionTypes {
-	CHANGE_LANGUAGE = "[StarkSession] Change Language",
-	CHANGE_LANGUAGE_SUCCESS = "[StarkSession] Change Language Success",
-	CHANGE_LANGUAGE_FAILURE = "[StarkSession] Change Language Failure",
-	INITIALIZE_SESSION = "[StarkSession] Initialize Session",
-	INITIALIZE_SESSION_SUCCESS = "[StarkSession] Initialize Session Success",
-	DESTROY_SESSION = "[StarkSession] Destroy Session",
-	DESTROY_SESSION_SUCCESS = "[StarkSession] Destroy Session Success",
-	SESSION_TIMEOUT_COUNTDOWN_START = "[StarkSession] Session Timeout Countdown Start",
-	SESSION_TIMEOUT_COUNTDOWN_STOP = "[StarkSession] Session Timeout Countdown Stop",
-	SESSION_TIMEOUT_COUNTDOWN_FINISH = "[StarkSession] Session Timeout Countdown Finish",
-	SESSION_LOGOUT = "[StarkSession] Session Logout",
-	USER_ACTIVITY_TRACKING_PAUSE = "[StarkSession] User Activity Tracking Pause",
-	USER_ACTIVITY_TRACKING_RESUME = "[StarkSession] User Activity Tracking Resume"
-}
+import { starkSessionStoreKey } from "../constants";
 
 /**
  * Triggered when the [StarkSessionService setCurrentLanguage()]{@link StarkSessionService#setCurrentLanguage} method is called,
  * just before changing the current session's language.
+ *
+ * Parameter:
+ *   - languageId - The target language to change to.
  */
-export class StarkChangeLanguage implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.CHANGE_LANGUAGE = StarkSessionActionTypes.CHANGE_LANGUAGE;
-
-	/**
-	 * Class constructor
-	 * @param languageId - The target language to change to.
-	 */
-	public constructor(public languageId: string) {}
-}
+export const changeLanguage = createAction(`[${starkSessionStoreKey}] Change Language`, props<{ languageId: string }>());
 
 /**
  * Triggered when the current session's language has been successfully changed by calling
  * the [StarkSessionService setCurrentLanguage()]{@link StarkSessionService#setCurrentLanguage} method.
+ *
+ * Parameter:
+ *   - languageId - The target language that was successfully changed to.
  */
-export class StarkChangeLanguageSuccess implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.CHANGE_LANGUAGE_SUCCESS = StarkSessionActionTypes.CHANGE_LANGUAGE_SUCCESS;
-
-	/**
-	 * Class constructor
-	 * @param languageId - The target language that was successfully changed to.
-	 */
-	public constructor(public languageId: string) {}
-}
+export const changeLanguageSuccess = createAction(`[${starkSessionStoreKey}] Change Language Success`, props<{ languageId: string }>());
 
 /**
  * Triggered when the change of the current session's language failed.
+ *
+ * Parameter:
+ *   - error - The error that caused the language change to fail.
  */
-export class StarkChangeLanguageFailure implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.CHANGE_LANGUAGE_FAILURE = StarkSessionActionTypes.CHANGE_LANGUAGE_FAILURE;
-
-	/**
-	 * Class constructor
-	 * @param error - The error that caused the language change to fail.
-	 */
-	public constructor(public error: any) {}
-}
+export const changeLanguageFailure = createAction(`[${starkSessionStoreKey}] Change Language Failure`, props<{ error: any }>());
 
 /**
  * Triggered by the [StarkSessionService login()]{@link StarkSessionService#login} method before the process to
  * initialize the session for the given user starts.
+ *
+ * Parameter:
+ *   - user - The user whose session will be initialized.
  */
-export class StarkInitializeSession implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.INITIALIZE_SESSION = StarkSessionActionTypes.INITIALIZE_SESSION;
-
-	/**
-	 * Class constructor
-	 * @param user - The user whose session will be initialized.
-	 */
-	public constructor(public user: StarkUser) {}
-}
+export const initializeSession = createAction(`[${starkSessionStoreKey}] Initialize Session`, props<{ user: StarkUser }>());
 
 /**
  * Triggered when the initialization of the user's session has finished successfully.
  */
-export class StarkInitializeSessionSuccess implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.INITIALIZE_SESSION_SUCCESS = StarkSessionActionTypes.INITIALIZE_SESSION_SUCCESS;
-}
+export const initializeSessionSuccess = createAction(`[${starkSessionStoreKey}] Initialize Session Success`);
 
 /**
  * Triggered before the process to destroy the user's session starts right after the HTTP logout call has been sent.
@@ -107,23 +52,13 @@ export class StarkInitializeSessionSuccess implements Action {
  * 4. Being inactive for a certain period of time reaching the idle timeout defined by the
  * application's [StarkApplicationConfig sessionTimeout]{@link StarkApplicationConfig#sessionTimeout}.
  */
-export class StarkDestroySession implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.DESTROY_SESSION = StarkSessionActionTypes.DESTROY_SESSION;
-}
+export const destroySession = createAction(`[${starkSessionStoreKey}] Destroy Session`);
 
 /**
  * Triggered when the destruction of the user's session has finished successfully.
  * This action is the last action to be dispatched when the user is logged out (either manually by himself or automatically due to inactivity).
  */
-export class StarkDestroySessionSuccess implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.DESTROY_SESSION_SUCCESS = StarkSessionActionTypes.DESTROY_SESSION_SUCCESS;
-}
+export const destroySessionSuccess = createAction(`[${starkSessionStoreKey}] Destroy Session Success`);
 
 /**
  * Triggered when the countdown to automatically destroy the user's session due to inactivity starts.
@@ -131,90 +66,61 @@ export class StarkDestroySessionSuccess implements Action {
  * The countdown is defined in the application's [StarkApplicationConfig sessionTimeoutWarningPeriod]{@link StarkApplicationConfig#sessionTimeoutWarningPeriod}.
  *
  * By default is set to 15 seconds.
+ *
+ * Parameter:
+ *   - countdown - The countdown until the session will be automatically destroyed.
  */
-export class StarkSessionTimeoutCountdownStart implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_START = StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_START;
-
-	/**
-	 * Class constructor
-	 * @param countdown - The countdown until the session will be automatically destroyed.
-	 */
-	public constructor(public countdown: number) {}
-}
+export const sessionTimeoutCountdownStart = createAction(`[${starkSessionStoreKey}] Session Timeout Countdown Start`, props<{ countdown: number }>());
 
 /**
  * Triggered when the countdown to automatically destroy the user's session due to inactivity stops.
  *
  * This countdown stops automatically when the user is active again and no longer idle.
  */
-export class StarkSessionTimeoutCountdownStop implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_STOP = StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_STOP;
-}
+export const sessionTimeoutCountdownStop = createAction(`[${starkSessionStoreKey}] Session Timeout Countdown Stop`);
 
 /**
  * Triggered when the countdown to automatically destroy the user's session has finished. In this case the user will be automatically logged out.
  */
-export class StarkSessionTimeoutCountdownFinish implements Action {
-	/**
-	 * Defines the type of NGRX action to perform.
-	 */
-	public readonly type: StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_FINISH =
-		StarkSessionActionTypes.SESSION_TIMEOUT_COUNTDOWN_FINISH;
-}
+export const sessionTimeoutCountdownFinish = createAction(`[${starkSessionStoreKey}] Session Timeout Countdown Finish`);
 
 /**
  * Triggered when the user is about to be logged out and the HTTP logout call to be sent.
  * This action is called before the process to destroy the user's session starts.
  *
  * This action is dispatched by the [StarkSessionService logout()]{@link StarkSessionService#logout} method or in case the browser tab was closed and is dispatched before
- * the {@link StarkDestroySession} action.
+ * the {@link destroySession} action.
  */
-export class StarkSessionLogout implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.SESSION_LOGOUT = StarkSessionActionTypes.SESSION_LOGOUT;
-}
+export const sessionLogout = createAction(`[${starkSessionStoreKey}] Session Logout`);
 
 /**
  * Triggered by the [StarkSessionService pauseUserActivityTracking()]{@link StarkSessionService#pauseUserActivityTracking} method
  * when the user activity tracking is paused (automatically done by the {@link StarkSessionService}).
  */
-export class StarkUserActivityTrackingPause implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.USER_ACTIVITY_TRACKING_PAUSE = StarkSessionActionTypes.USER_ACTIVITY_TRACKING_PAUSE;
-}
+export const userActivityTrackingPause = createAction(`[${starkSessionStoreKey}] User Activity Tracking Pause`);
 
 /**
  * Triggered by the [StarkSessionService resumeUserActivityTracking()]{@link StarkSessionService#resumeUserActivityTracking} method
  * when the user activity tracking is resumed (automatically done by the {@link StarkSessionService}).
  */
-export class StarkUserActivityTrackingResume implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSessionActionTypes.USER_ACTIVITY_TRACKING_RESUME = StarkSessionActionTypes.USER_ACTIVITY_TRACKING_RESUME;
-}
+export const userActivityTrackingResume = createAction(`[${starkSessionStoreKey}] User Activity Tracking Resume`);
 
-export type StarkSessionActions =
-	| StarkChangeLanguage
-	| StarkChangeLanguageSuccess
-	| StarkChangeLanguageFailure
-	| StarkInitializeSession
-	| StarkInitializeSessionSuccess
-	| StarkDestroySession
-	| StarkDestroySessionSuccess
-	| StarkSessionTimeoutCountdownStart
-	| StarkSessionTimeoutCountdownStop
-	| StarkSessionTimeoutCountdownFinish
-	| StarkSessionLogout
-	| StarkUserActivityTrackingPause
-	| StarkUserActivityTrackingResume;
+/**
+ * @ignore
+ */
+const all = union({
+	changeLanguage,
+	changeLanguageSuccess,
+	changeLanguageFailure,
+	initializeSession,
+	initializeSessionSuccess,
+	destroySession,
+	destroySessionSuccess,
+	sessionTimeoutCountdownStart,
+	sessionTimeoutCountdownStop,
+	sessionTimeoutCountdownFinish,
+	sessionLogout,
+	userActivityTrackingPause,
+	userActivityTrackingResume
+});
+export type Types = typeof all;

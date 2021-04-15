@@ -1,1 +1,2 @@
-export * from "./actions/session.actions";
+import * as StarkSessionActions from "./actions/session.actions";
+export { StarkSessionActions };

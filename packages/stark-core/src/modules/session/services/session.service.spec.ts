@@ -10,21 +10,7 @@ import { HookMatchCriteria, Predicate, StateObject } from "@uirouter/core";
 import { defer, Observable, of, Subject, Subscriber, throwError } from "rxjs";
 import { take } from "rxjs/operators";
 
-import {
-	StarkChangeLanguage,
-	StarkChangeLanguageFailure,
-	StarkChangeLanguageSuccess,
-	StarkDestroySession,
-	StarkDestroySessionSuccess,
-	StarkInitializeSession,
-	StarkInitializeSessionSuccess,
-	StarkSessionLogout,
-	StarkSessionTimeoutCountdownFinish,
-	StarkSessionTimeoutCountdownStart,
-	StarkSessionTimeoutCountdownStop,
-	StarkUserActivityTrackingPause,
-	StarkUserActivityTrackingResume
-} from "../actions";
+import { StarkSessionActions } from "../actions";
 import { StarkSessionServiceImpl, starkUnauthenticatedUserError } from "./session.service";
 import { StarkSession, StarkSessionConfig } from "../entities";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
@@ -317,8 +303,8 @@ describe("Service: StarkSessionService", () => {
 			expect(sessionService.startKeepaliveService).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkInitializeSession(mockUser));
-			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(new StarkInitializeSessionSuccess());
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(StarkSessionActions.initializeSession({ user: mockUser }));
+			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(StarkSessionActions.initializeSessionSuccess());
 		});
 	});
 
@@ -333,8 +319,8 @@ describe("Service: StarkSessionService", () => {
 			expect(sessionService.stopKeepaliveService).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkDestroySession());
-			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(new StarkDestroySessionSuccess());
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(StarkSessionActions.destroySession());
+			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(StarkSessionActions.destroySessionSuccess());
 		});
 	});
 
@@ -367,7 +353,7 @@ describe("Service: StarkSessionService", () => {
 			sessionService.logout();
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch.calls.mostRecent().args[0]).toEqual(new StarkSessionLogout());
+			expect(mockStore.dispatch.calls.mostRecent().args[0]).toEqual(StarkSessionActions.sessionLogout());
 
 			expect(sendLogoutRequestSpy).toHaveBeenCalledTimes(1);
 			expect(sendLogoutRequestSpy.calls.mostRecent().args[0]).toBe(appConfig.logoutUrl);
@@ -412,7 +398,7 @@ describe("Service: StarkSessionService", () => {
 
 			expect(mockIdleService.clearInterrupts).toHaveBeenCalledTimes(1);
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkUserActivityTrackingPause());
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkSessionActions.userActivityTrackingPause());
 		});
 	});
 
@@ -431,7 +417,7 @@ describe("Service: StarkSessionService", () => {
 			expect(sessionService.startKeepaliveService).toHaveBeenCalledTimes(1);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkUserActivityTrackingResume());
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkSessionActions.userActivityTrackingResume());
 		});
 	});
 
@@ -526,7 +512,7 @@ describe("Service: StarkSessionService", () => {
 
 				expect(sessionService.countdownStarted).toBe(false);
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownStop());
+				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(StarkSessionActions.sessionTimeoutCountdownStop());
 
 				mockIdleService.onIdleEnd.complete();
 			});
@@ -576,7 +562,7 @@ describe("Service: StarkSessionService", () => {
 				mockIdleService.onTimeout.next(321);
 
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownFinish());
+				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(StarkSessionActions.sessionTimeoutCountdownFinish());
 				expect(sessionService.logout).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledWith(starkSessionExpiredStateName);
@@ -595,7 +581,7 @@ describe("Service: StarkSessionService", () => {
 				mockIdleService.onTimeout.next(321);
 
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownFinish());
+				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(StarkSessionActions.sessionTimeoutCountdownFinish());
 				expect(sessionService.logout).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledTimes(1);
 				expect(mockRoutingService.navigateTo).toHaveBeenCalledWith(<string>mockSessionConfig.sessionExpiredStateName);
@@ -644,7 +630,9 @@ describe("Service: StarkSessionService", () => {
 
 				expect(sessionService.countdownStarted).toBe(true);
 				expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkSessionTimeoutCountdownStart(countdownStartValue));
+				expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(
+					StarkSessionActions.sessionTimeoutCountdownStart({ countdown: countdownStartValue })
+				);
 
 				mockIdleService.onTimeoutWarning.complete();
 			});
@@ -903,8 +891,8 @@ describe("Service: StarkSessionService", () => {
 			sessionService.setCurrentLanguage("FR");
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkChangeLanguage("FR"));
-			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(new StarkChangeLanguageSuccess("FR"));
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(StarkSessionActions.changeLanguage({ languageId: "FR" }));
+			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(StarkSessionActions.changeLanguageSuccess({ languageId: "FR" }));
 
 			expect(mockTranslateService.use).toHaveBeenCalledTimes(1);
 			expect(mockTranslateService.use).toHaveBeenCalledWith("FR");
@@ -916,8 +904,8 @@ describe("Service: StarkSessionService", () => {
 			sessionService.setCurrentLanguage("FR");
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
-			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkChangeLanguage("FR"));
-			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(new StarkChangeLanguageFailure("dummy error"));
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(StarkSessionActions.changeLanguage({ languageId: "FR" }));
+			expect(mockStore.dispatch.calls.argsFor(1)[0]).toEqual(StarkSessionActions.changeLanguageFailure({ error: "dummy error" }));
 
 			expect(mockTranslateService.use).toHaveBeenCalledTimes(1);
 			expect(mockTranslateService.use).toHaveBeenCalledWith("FR");

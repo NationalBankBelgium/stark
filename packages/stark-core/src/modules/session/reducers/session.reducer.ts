@@ -1,10 +1,6 @@
-import { StarkSessionActions, StarkSessionActionTypes } from "../actions";
+import { StarkSessionActions } from "../actions";
 import { StarkSession, StarkSessionImpl } from "../entities";
-
-/**
- * Key defined to find the service in a store
- */
-export const starkSessionStoreKey = "starkSession";
+import { createReducer, on } from "@ngrx/store";
 
 /**
  * Defines the initial state of the reducer
@@ -12,27 +8,24 @@ export const starkSessionStoreKey = "starkSession";
 const INITIAL_SESSION_STATE: StarkSession = new StarkSessionImpl();
 
 /**
- * Definition of the `session` reducer
+ * Definition of the reducer using `createReducer` method.
+ */
+const reducer = createReducer<StarkSession, StarkSessionActions.Types>(
+	INITIAL_SESSION_STATE,
+	on(StarkSessionActions.changeLanguageSuccess, (state, action) => ({ ...state, currentLanguage: action.languageId })),
+	on(StarkSessionActions.initializeSession, (state, action) => ({ ...state, user: action.user })),
+	on(StarkSessionActions.destroySession, (state) => ({ ...state, user: undefined }))
+);
+
+/**
+ * Definition of the `session` reducer function
  * @param state: the state of the reducer
  * @param action: the action to apply to the reducer
  * @returns The new `StarkSession` state
  */
 export function sessionReducer(
-	state: Readonly<StarkSession> = INITIAL_SESSION_STATE,
-	action: Readonly<StarkSessionActions>
+	state: Readonly<StarkSession> | undefined,
+	action: Readonly<StarkSessionActions.Types>
 ): Readonly<StarkSession> {
-	// the new state will be calculated from the data coming in the actions
-	switch (action.type) {
-		case StarkSessionActionTypes.CHANGE_LANGUAGE_SUCCESS:
-			return { ...state, currentLanguage: action.languageId };
-
-		case StarkSessionActionTypes.INITIALIZE_SESSION:
-			return { ...state, user: action.user };
-
-		case StarkSessionActionTypes.DESTROY_SESSION:
-			return { ...state, user: undefined };
-
-		default:
-			return state;
-	}
+	return reducer(state, action);
 }
