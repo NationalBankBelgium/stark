@@ -1,81 +1,43 @@
-import { Action } from "@ngrx/store";
-
-/**
- * All the Settings action types
- */
-export enum StarkSettingsActionTypes {
-	PERSIST_PREFERRED_LANGUAGE = "[StarkSettings] Persist Preferred Language",
-	PERSIST_PREFERRED_LANGUAGE_SUCCESS = "[StarkSettings] Persist Preferred Language Success",
-	PERSIST_PREFERRED_LANGUAGE_FAILURE = "[StarkSettings] Persist Preferred Language Failure",
-	SET_PREFERRED_LANGUAGE = "[StarkSettings] Set Preferred Language"
-}
+import { createAction, props, union } from "@ngrx/store";
+import { starkSettingsStoreKey } from "../constants";
 
 /**
  * Action that requires to persist the given language locally so that the language remains the same when the user comes back
- * @returns The created action object
+ *
+ * Parameter:
+ *   - language - The language to persist
  */
-export class StarkPersistPreferredLanguage implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE = StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE;
-
-	/**
-	 * Class constructor
-	 * @param language - The language to persist
-	 */
-	public constructor(public language: string) {}
-}
+export const persistPreferredLanguage = createAction(
+	`[${starkSettingsStoreKey}] Persist Preferred Language`,
+	props<{ language: string }>()
+);
 
 /**
  * Action that notifies the application that the preferred language was successfully persisted.
- * @returns The created action object
  */
-export class StarkPersistPreferredLanguageSuccess implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_SUCCESS =
-		StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_SUCCESS;
-}
+export const persistPreferredLanguageSuccess = createAction(`[${starkSettingsStoreKey}] Persist Preferred Language Success`);
 
 /**
  * Action that notifies the application that the preferred language could not be persisted.
- * @returns The created action object
+ *
+ * Parameter:
+ *   - error - The reason why the preferred language could not be persisted
  */
-export class StarkPersistPreferredLanguageFailure implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_FAILURE =
-		StarkSettingsActionTypes.PERSIST_PREFERRED_LANGUAGE_FAILURE;
-
-	/**
-	 * Class constructor
-	 * @param error - The reason why the preferred language could not be persisted
-	 */
-	public constructor(public error: any) {}
-}
+export const persistPreferredLanguageFailure = createAction(
+	`[${starkSettingsStoreKey}] Persist Preferred Language Failure`,
+	props<{ error: any }>()
+);
 
 /**
  * Action that notifies the application that the preferred language should be changed.
- * @returns The created action object
+ *
+ * Parameter:
+ *   - language - The new preferred language
  */
-export class StarkSetPreferredLanguage implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE = StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE;
+export const setPreferredLanguage = createAction(`[${starkSettingsStoreKey}] Set Preferred Language`, props<{ language: string }>());
 
-	/**
-	 * Class constructor
-	 * @param language - The new preferred language
-	 */
-	public constructor(public language: string) {}
-}
-
-export type StarkSettingsActions =
-	| StarkPersistPreferredLanguage
-	| StarkPersistPreferredLanguageSuccess
-	| StarkPersistPreferredLanguageFailure
-	| StarkSetPreferredLanguage;
+/**
+ * @ignore
+ */
+const all = union({ persistPreferredLanguage, persistPreferredLanguageSuccess, persistPreferredLanguageFailure, setPreferredLanguage });
+export type Types = typeof all;

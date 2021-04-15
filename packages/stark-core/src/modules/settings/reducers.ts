@@ -1,2 +1,2 @@
-export * from "./reducers/index";
-export * from "./reducers/settings.reducer";
+export { selectStarkSettings, starkSettingsReducers, StarkSettingsState } from "./reducers/index";
+export { settingsReducer } from "./reducers/settings.reducer";

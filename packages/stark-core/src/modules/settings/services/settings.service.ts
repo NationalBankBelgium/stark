@@ -6,7 +6,7 @@ import { filter } from "rxjs/operators";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 import { StarkSettingsService, starkSettingsServiceName } from "./settings.service.intf";
-import { StarkSetPreferredLanguage } from "../actions";
+import { StarkSettingsActions } from "../actions";
 import {
 	STARK_APP_CONFIG,
 	STARK_APP_METADATA,
@@ -80,7 +80,7 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 
 	public setPreferredLanguage(language: string): void {
 		this.preferredLanguage = language;
-		this.store.dispatch(new StarkSetPreferredLanguage(language));
+		this.store.dispatch(StarkSettingsActions.setPreferredLanguage({ language: language }));
 	}
 
 	public findMatchingSupportedLanguage(language: string): number {

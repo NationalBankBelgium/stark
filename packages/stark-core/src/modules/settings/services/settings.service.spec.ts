@@ -12,7 +12,7 @@ import {
 } from "../../../configuration/entities";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkSettingsServiceImpl } from "./settings.service";
-import { StarkSetPreferredLanguage } from "../actions";
+import { StarkSettingsActions } from "../actions";
 import { StarkUser } from "../../user/entities";
 import { of } from "rxjs";
 import SpyObj = jasmine.SpyObj;
@@ -165,7 +165,7 @@ describe("Service: StarkSettingsService", () => {
 			settingsService.setPreferredLanguage("NL");
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(new StarkSetPreferredLanguage("NL"));
+			expect(mockStore.dispatch.calls.argsFor(0)[0]).toEqual(StarkSettingsActions.setPreferredLanguage({ language: "NL" }));
 			expect(settingsService.preferredLanguage).toEqual("NL");
 		});
 	});

@@ -2,11 +2,12 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { starkSettingsReducers } from "./reducers";
+import { starkSettingsStoreKey } from "./constants";
 import { STARK_SETTINGS_SERVICE, StarkSettingsServiceImpl } from "./services";
 import { StarkSettingsEffects } from "./effects";
 
 @NgModule({
-	imports: [StoreModule.forFeature("StarkSettings", starkSettingsReducers), EffectsModule.forFeature([StarkSettingsEffects])]
+	imports: [StoreModule.forFeature(starkSettingsStoreKey, starkSettingsReducers), EffectsModule.forFeature([StarkSettingsEffects])]
 })
 export class StarkSettingsModule {
 	/**
