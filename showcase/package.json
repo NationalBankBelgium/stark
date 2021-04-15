@@ -119,7 +119,7 @@
     "@angular/platform-browser-dynamic": "^8.2.0",
     "@angular/platform-server": "^8.2.0",
     "@angular/router": "^8.2.0",
-    "@nationalbankbelgium/code-style": "^1.4.0",
+    "@nationalbankbelgium/code-style": "^1.5.0",
     "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.2.0-7d036910.tgz",
     "@nationalbankbelgium/stark-rbac": "file:../dist/packages-dist/stark-rbac/nationalbankbelgium-stark-rbac-10.2.0-7d036910.tgz",
     "@nationalbankbelgium/stark-ui": "file:../dist/packages-dist/stark-ui/nationalbankbelgium-stark-ui-10.2.0-7d036910.tgz",
