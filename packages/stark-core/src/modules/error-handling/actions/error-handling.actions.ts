@@ -1,27 +1,15 @@
-import { Action } from "@ngrx/store";
-
-/**
- * All the StarkErrorHandling action types
- */
-export enum StarkErrorHandlingActionTypes {
-	UNHANDLED_ERROR = "[StarkErrorHandling] Unhandled Error"
-}
+import { createAction, props, union } from "@ngrx/store";
 
 /**
  * Action that requires to display an error message as a toast notification
- * @returns The created action object
+ *
+ * Parameter:
+ *   - error - The error to display
  */
-export class StarkUnhandledError implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkErrorHandlingActionTypes.UNHANDLED_ERROR = StarkErrorHandlingActionTypes.UNHANDLED_ERROR;
+export const unhandledError = createAction("[StarkErrorHandling] Unhandled Error", props<{ error: any }>());
 
-	/**
-	 * Class constructor
-	 * @param error - The error to display
-	 */
-	public constructor(public error: any) {}
-}
-
-export type StarkErrorHandlingActions = StarkUnhandledError;
+/**
+ * @ignore
+ */
+const all = union({ unhandledError });
+export type Types = typeof all;
