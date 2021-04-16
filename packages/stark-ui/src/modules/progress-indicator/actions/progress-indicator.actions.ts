@@ -1,86 +1,44 @@
-import { Action } from "@ngrx/store";
+import { createAction, props, union } from "@ngrx/store";
 import { StarkProgressIndicatorFullConfig } from "../entities";
-
-/**
- * Progress indicator action types enumeration
- */
-export enum StarkProgressIndicatorActionTypes {
-	PROGRESS_INDICATOR_REGISTER = "PROGRESS_INDICATOR_REGISTER",
-	PROGRESS_INDICATOR_DEREGISTER = "PROGRESS_INDICATOR_DEREGISTER",
-	PROGRESS_INDICATOR_HIDE = "PROGRESS_INDICATOR_HIDE",
-	PROGRESS_INDICATOR_SHOW = "PROGRESS_INDICATOR_SHOW"
-}
+import { starkProgressIndicatorStoreKey } from "../constants";
 
 /**
  * Triggered by the {@link StarkProgressIndicatorService} register() method.
+ *
+ * Parameter:
+ *   - progressIndicatorConfig - Configuration of the indicator
  */
-export class StarkProgressIndicatorRegister implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_REGISTER =
-		StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_REGISTER;
-
-	/**
-	 * Class constructor
-	 * @param progressIndicatorConfig - Configuration of the indicator
-	 */
-	public constructor(public progressIndicatorConfig: StarkProgressIndicatorFullConfig) {}
-}
+export const register = createAction(
+	`[${starkProgressIndicatorStoreKey}] Register`,
+	props<{ progressIndicatorConfig: StarkProgressIndicatorFullConfig }>()
+);
 
 /**
  * Triggered by the {@link StarkProgressIndicatorService} deregister() method.
+ *
+ * Parameter:
+ *   - topic - The topic of the indicator
  */
-export class StarkProgressIndicatorDeregister implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_DEREGISTER =
-		StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_DEREGISTER;
-
-	/**
-	 * Class constructor
-	 * @param topic - The topic of the indicator
-	 */
-	public constructor(public topic: string) {}
-}
+export const deregister = createAction(`[${starkProgressIndicatorStoreKey}] Deregister`, props<{ topic: string }>());
 
 /**
  * Triggered by the {@link StarkProgressIndicatorService} hide() method.
+ *
+ * Parameter:
+ *   - topic - The topic of the indicator
  */
-export class StarkProgressIndicatorHide implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_HIDE =
-		StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_HIDE;
-
-	/**
-	 * Class constructor
-	 * @param topic - The topic of the indicator
-	 */
-	public constructor(public topic: string) {}
-}
+export const hide = createAction(`[${starkProgressIndicatorStoreKey}] Hide`, props<{ topic: string }>());
 
 /**
  * Triggered by the {@link StarkProgressIndicatorService} show() method.
+ *
+ * Parameter:
+ *   - topic - The topic of the indicator
  */
-export class StarkProgressIndicatorShow implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_SHOW =
-		StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_SHOW;
+export const show = createAction(`[${starkProgressIndicatorStoreKey}] Show`, props<{ topic: string }>());
 
-	/**
-	 * Class constructor
-	 * @param topic - The topic of the indicator
-	 */
-	public constructor(public topic: string) {}
-}
-
-export type StarkProgressIndicatorActions =
-	| StarkProgressIndicatorRegister
-	| StarkProgressIndicatorDeregister
-	| StarkProgressIndicatorHide
-	| StarkProgressIndicatorShow;
+/**
+ * @ignore
+ */
+const all = union({ register, deregister, hide, show });
+export type Types = typeof all;

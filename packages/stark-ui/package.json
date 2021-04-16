@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@ngrx/effects": "^8.6.1",
+    "@ngrx/store": "^8.6.1",
     "@types/jasmine": "^3.6.4",
     "@types/node": "^10.17.54"
   },

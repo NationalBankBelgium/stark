@@ -6,12 +6,7 @@ import { Inject, Injectable } from "@angular/core";
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkProgressIndicatorService, starkProgressIndicatorServiceName } from "./progress-indicator.service.intf";
-import {
-	StarkProgressIndicatorDeregister,
-	StarkProgressIndicatorHide,
-	StarkProgressIndicatorRegister,
-	StarkProgressIndicatorShow
-} from "../actions";
+import { StarkProgressIndicatorActions } from "../actions";
 import { StarkProgressIndicatorFullConfig, StarkProgressIndicatorFullConfigImpl, StarkProgressIndicatorType } from "../entities";
 import { selectStarkProgressIndicator } from "../reducers";
 import { StarkUIApplicationState } from "../../../common/store";
@@ -53,7 +48,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 	 */
 	public register(topic: string, type: StarkProgressIndicatorType): void {
 		const progressIndicatorConfig: StarkProgressIndicatorFullConfig = new StarkProgressIndicatorFullConfigImpl(topic, type, false);
-		this.store.dispatch(new StarkProgressIndicatorRegister(progressIndicatorConfig));
+		this.store.dispatch(StarkProgressIndicatorActions.register({ progressIndicatorConfig: progressIndicatorConfig }));
 	}
 
 	/**
@@ -62,7 +57,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 	 */
 	public deregister(topic: string): void {
 		if (this.progressIndicatorMap.has(topic)) {
-			this.store.dispatch(new StarkProgressIndicatorDeregister(topic));
+			this.store.dispatch(StarkProgressIndicatorActions.deregister({ topic }));
 		}
 	}
 
@@ -82,7 +77,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 		// try to find the indicator with the given topic a maximum of 'maxRetries' times before throwing an error
 		defer(() => {
 			if (this.progressIndicatorMap.has(topic)) {
-				this.store.dispatch(new StarkProgressIndicatorShow(topic));
+				this.store.dispatch(StarkProgressIndicatorActions.show({ topic: topic }));
 				return of(logMessagePrefix + " shown.");
 			}
 
@@ -127,7 +122,7 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 
 		const hide$: Observable<string> = defer(() => {
 			if (this.progressIndicatorMap.has(topic)) {
-				this.store.dispatch(new StarkProgressIndicatorHide(topic));
+				this.store.dispatch(StarkProgressIndicatorActions.hide({ topic: topic }));
 				return of(logMessagePrefix + " hidden.");
 			}
 

@@ -3,12 +3,13 @@ import { CommonModule } from "@angular/common";
 import { StoreModule } from "@ngrx/store";
 import { StarkProgressIndicatorDirective } from "./directives";
 import { STARK_PROGRESS_INDICATOR_SERVICE, StarkProgressIndicatorServiceImpl } from "./services";
+import { starkProgressIndicatorStoreKey } from "./constants";
 import { starkProgressIndicatorReducers } from "./reducers";
 import { StarkProgressIndicatorComponent } from "./components";
 
 @NgModule({
 	declarations: [StarkProgressIndicatorDirective, StarkProgressIndicatorComponent],
-	imports: [CommonModule, StoreModule.forFeature("StarkProgressIndicator", starkProgressIndicatorReducers)],
+	imports: [CommonModule, StoreModule.forFeature(starkProgressIndicatorStoreKey, starkProgressIndicatorReducers)],
 	exports: [StarkProgressIndicatorDirective],
 	entryComponents: [StarkProgressIndicatorComponent]
 })

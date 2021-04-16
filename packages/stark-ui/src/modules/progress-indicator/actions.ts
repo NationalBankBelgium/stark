@@ -1,1 +1,2 @@
-export * from "./actions/progress-indicator.actions";
+import * as StarkProgressIndicatorActions from "./actions/progress-indicator.actions";
+export { StarkProgressIndicatorActions };
