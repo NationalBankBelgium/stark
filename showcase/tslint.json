@@ -7,7 +7,6 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "component-selector": false,
-    "typedef": [true, "call-signature", "parameter", "arrow-parameter", "property-declaration"]
+    "component-selector": false
   }
 }
