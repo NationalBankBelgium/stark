@@ -1,43 +1,24 @@
-import { Action } from "@ngrx/store";
 import { RawParams, TransitionOptions } from "@uirouter/core";
+import { createAction, props, union } from "@ngrx/store";
 
 /**
- * Enumeration of Routing NGRX Actions
+ * Key defined to find the service in a store
  */
-export enum StarkRoutingActionTypes {
-	NAVIGATE = "[StarkRouting] Navigate",
-	NAVIGATE_SUCCESS = "[StarkRouting] Navigate Success",
-	NAVIGATE_FAILURE = "[StarkRouting] Navigate Failure",
-	NAVIGATE_REJECTION = "[StarkRouting] Navigate Rejection",
-	NAVIGATION_HISTORY_LIMIT_REACHED = "[StarkRouting] Navigation History Limit Reached",
-	RELOAD = "[StarkRouting] Reload",
-	RELOAD_SUCCESS = "[StarkRouting] Reload Success",
-	RELOAD_FAILURE = "[StarkRouting] Reload Failure"
-}
+const starkRoutingStoreKey = "StarkRouting";
 
 /**
  * Triggered when the [StarkRoutingService navigateTo()]{@link StarkRoutingService#navigateTo} method is called, just before starting the navigation.
+ *
+ * Parameters:
+ *   - currentState - Name of the current state before the navigation starts.
+ *   - newState - Name of the state to be navigated to.
+ *   - params - State params object to be passed to the navigated state.
+ *   - options - Transition options object to change the behavior of the transition.
  */
-export class StarkNavigate implements Action {
-	/**
-	 * The action type
-	 */
-	public readonly type: StarkRoutingActionTypes.NAVIGATE = StarkRoutingActionTypes.NAVIGATE;
-
-	/**
-	 * Class constructor
-	 * @param currentState - Name of the current state before the navigation starts.
-	 * @param newState - Name of the state to be navigated to.
-	 * @param params - State params object to be passed to the navigated state.
-	 * @param options - Transition options object to change the behavior of the transition.
-	 */
-	public constructor(
-		public currentState: string,
-		public newState: string,
-		public params?: RawParams,
-		public options?: TransitionOptions
-	) {}
-}
+export const navigate = createAction(
+	`[${starkRoutingStoreKey}] Navigate`,
+	props<{ currentState: string; newState: string; params?: RawParams; options?: TransitionOptions }>()
+);
 
 /**
  * Triggered when a navigation has succeeded and finished.
@@ -45,43 +26,33 @@ export class StarkNavigate implements Action {
  * This action is dispatched for any navigation, including those navigations triggered not by the [StarkRoutingService navigateTo()]{@link StarkRoutingService#navigateTo} method
  * but by any other mean such as [StarkRoutingService navigateToPrevious()]{@link StarkRoutingService#navigateToPrevious}, [StarkRoutingService navigateToHome()]{@link StarkRoutingService#navigateToHome},
  * [StarkRoutingService reload()]{@link StarkRoutingService#reload}, routing directives for menu links or by direct usage of the router library API.
+ *
+ * Parameters:
+ *   - previousState - Name of the initial state where the navigation was started.
+ *   - currentState - Name of the state that was navigated to.
+ *   - params - State params object that was passed to the navigated state.
  */
-export class StarkNavigateSuccess implements Action {
-	/**
-	 * The action type
-	 */
-	public readonly type: StarkRoutingActionTypes.NAVIGATE_SUCCESS = StarkRoutingActionTypes.NAVIGATE_SUCCESS;
-
-	/**
-	 * Class constructor
-	 * @param previousState - Name of the initial state where the navigation was started.
-	 * @param currentState - Name of the state that was navigated to.
-	 * @param params - State params object that was passed to the navigated state.
-	 */
-	public constructor(public previousState: string, public currentState: string, public params?: RawParams) {}
-}
+export const navigateSuccess = createAction(
+	`[${starkRoutingStoreKey}] Navigate Success`,
+	props<{ previousState: string; currentState: string; params?: RawParams }>()
+);
 
 /**
  * Triggered when a navigation failed.
  *
  * This action is dispatched for any navigation, including those navigations triggered not by the [StarkRoutingService navigateTo()]{@link StarkRoutingService#navigateTo}
  * method but by any other mean such as menu links or by direct usage of the router library API.
+ *
+ * Parameters:
+ *   - currentState - Name of the current state before the navigation started.
+ *   - newState - Name of the state tried to be navigated to.
+ *   - params - State params object passed to the navigated state.
+ *   - error - The error describing the reason of the navigation failure.
  */
-export class StarkNavigateFailure implements Action {
-	/**
-	 * The action type
-	 */
-	public readonly type: StarkRoutingActionTypes.NAVIGATE_FAILURE = StarkRoutingActionTypes.NAVIGATE_FAILURE;
-
-	/**
-	 * Class constructor
-	 * @param currentState - Name of the current state before the navigation started.
-	 * @param newState - Name of the state tried to be navigated to.
-	 * @param params - State params object passed to the navigated state.
-	 * @param error - The error describing the reason of the navigation failure.
-	 */
-	public constructor(public currentState: string, public newState: string, public params: RawParams, public error: string) {}
-}
+export const navigateFailure = createAction(
+	`[${starkRoutingStoreKey}] Navigate Failure`,
+	props<{ currentState: string; newState: string; params?: RawParams; error: string }>()
+);
 
 /**
  * Triggered when a navigation was intentionally rejected with a known rejection reason added via the
@@ -89,22 +60,17 @@ export class StarkNavigateFailure implements Action {
  *
  * The custom logic to intentionally reject a transition can be normally be injected via a transition Hook by calling
  * the [StarkRoutingService addTransitionHook()]{@link StarkRoutingService#addTransitionHook} method.
+ *
+ * Parameters:
+ *   - currentState - Name of the current state before the navigation started.
+ *   - newState - Name of the state tried to be navigated to.
+ *   - params - State params object passed to the navigated state.
+ *   - reason - The reason describing why the navigation was rejected. This is normally a reason already known by the developer.
  */
-export class StarkNavigateRejection implements Action {
-	/**
-	 * The action type
-	 */
-	public readonly type: StarkRoutingActionTypes.NAVIGATE_REJECTION = StarkRoutingActionTypes.NAVIGATE_REJECTION;
-
-	/**
-	 * Class constructor
-	 * @param currentState - Name of the current state before the navigation started.
-	 * @param newState - Name of the state tried to be navigated to.
-	 * @param params - State params object passed to the navigated state.
-	 * @param reason - The reason describing why the navigation was rejected. This is normally a reason already known by the developer.
-	 */
-	public constructor(public currentState: string, public newState: string, public params: RawParams, public reason: string) {}
-}
+export const navigateRejection = createAction(
+	`[${starkRoutingStoreKey}] Navigate Rejection`,
+	props<{ currentState: string; newState: string; params: RawParams; reason: string }>()
+);
 
 /**
  * Triggered when the [StarkRoutingService navigateToPrevious()]{@link StarkRoutingService#navigateToPrevious} method is called and there are no more
@@ -112,75 +78,51 @@ export class StarkNavigateRejection implements Action {
  *
  * This action is just triggered in case the reload was done by calling the [StarkRoutingService reload()]{@link StarkRoutingService#reload} method.
  */
-export class StarkNavigationHistoryLimitReached implements Action {
-	/**
-	 * The action type
-	 */
-	public readonly type: StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED =
-		StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED;
-}
+export const navigationHistoryLimitReached = createAction(`[${starkRoutingStoreKey}] Navigation History Limit Reached`);
 
 /**
  * Triggered when the [StarkRoutingService reload()]{@link StarkRoutingService#reload} method is called, just before starting the state reloading.
+ *
+ * Parameter:
+ *   - state - Name of the state to be reloaded.
  */
-export class StarkReload implements Action {
-	/**
-	 * The action type
-	 */
-	public readonly type: StarkRoutingActionTypes.RELOAD = StarkRoutingActionTypes.RELOAD;
-
-	/**
-	 * Class constructor
-	 * @param state - Name of the state to be reloaded.
-	 */
-	public constructor(public state: string) {}
-}
+export const reload = createAction(`[${starkRoutingStoreKey}] Reload`, props<{ state: string }>());
 
 /**
  * Triggered when a reload succeeded and finished.
  *
  * This action is dispatched for any navigation, including those navigations triggered not by the [StarkRoutingService navigateTo()]{@link StarkRoutingService#navigateTo}
  * method but by any other mean such as menu links or by direct usage of the router library API.
+ *
+ * Parameters:
+ *   - state - Name of the state that was reloaded.
+ *   - params - State params object passed to the reloaded state.
  */
-export class StarkReloadSuccess implements Action {
-	/**
-	 * The action type
-	 */
-	public readonly type: StarkRoutingActionTypes.RELOAD_SUCCESS = StarkRoutingActionTypes.RELOAD_SUCCESS;
-
-	/**
-	 * Class constructor
-	 * @param state - name of the state that was reloaded.
-	 * @param params - State params object passed to the reloaded state.
-	 */
-	public constructor(public state: string, public params: RawParams) {}
-}
+export const reloadSuccess = createAction(`[${starkRoutingStoreKey}] Reload Success`, props<{ state: string; params: RawParams }>());
 
 /**
- * Triggered when a reload failed.
+ * Triggered when a reload succeeded and finished.
  *
- * This action is just triggered in case the reload was done by calling the [StarkRoutingService reload()]{@link StarkRoutingService#reload} method.
+ * This action is dispatched for any navigation, including those navigations triggered not by the [StarkRoutingService navigateTo()]{@link StarkRoutingService#navigateTo}
+ * method but by any other mean such as menu links or by direct usage of the router library API.
+ *
+ * Parameters:
+ *   - state - Name of the state that was reloaded.
+ *   - params - State params object passed to the reloaded state.
  */
-export class StarkReloadFailure implements Action {
-	/**
-	 * The action type
-	 */
-	public readonly type: StarkRoutingActionTypes.RELOAD_FAILURE = StarkRoutingActionTypes.RELOAD_FAILURE;
+export const reloadFailure = createAction(`[${starkRoutingStoreKey}] Reload Failure`, props<{ state: string; params: RawParams }>());
 
-	/**
-	 * Class constructor
-	 * @param state - Name of the state tried to be reloaded.
-	 * @param params - State params object passed to the reloaded state.
-	 */
-	public constructor(public state: string, public params: RawParams) {}
-}
-
-export type StarkRoutingActions =
-	| StarkNavigate
-	| StarkNavigateSuccess
-	| StarkNavigateFailure
-	| StarkNavigateRejection
-	| StarkNavigationHistoryLimitReached
-	| StarkReload
-	| StarkReloadSuccess
-	| StarkReloadFailure;
+/**
+ * @ignore
+ */
+const all = union({
+	navigate,
+	navigateSuccess,
+	navigateFailure,
+	navigateRejection,
+	navigationHistoryLimitReached,
+	reload,
+	reloadSuccess,
+	reloadFailure
+});
+export type Types = typeof all;

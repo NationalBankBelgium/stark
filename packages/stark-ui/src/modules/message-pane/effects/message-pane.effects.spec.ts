@@ -6,7 +6,7 @@ import { provideMockActions } from "@ngrx/effects/testing";
 
 import { StarkMessagePaneEffects } from "./message-pane.effects";
 import { STARK_MESSAGE_PANE_SERVICE } from "../services";
-import { StarkNavigateSuccess } from "@nationalbankbelgium/stark-core";
+import { StarkRoutingActions } from "@nationalbankbelgium/stark-core";
 import { MockStarkMessagePaneService } from "@nationalbankbelgium/stark-ui/testing";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
@@ -45,7 +45,7 @@ describe("Effect: StarkMessagePaneEffects", () => {
 
 			messagePaneEffects.clearOnNavigationSuccess$().subscribe(mockObserver);
 
-			subject.next(new StarkNavigateSuccess("previousState", "currentState"));
+			subject.next(StarkRoutingActions.navigateSuccess({ previousState: "previousState", currentState: "currentState"}));
 
 			expect(mockMessagePaneService.clearAll).toHaveBeenCalledTimes(1);
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);
@@ -62,7 +62,7 @@ describe("Effect: StarkMessagePaneEffects", () => {
 
 			messagePaneEffects.clearOnNavigationSuccess$().subscribe(mockObserver);
 
-			subject.next(new StarkNavigateSuccess("previousState", "currentState"));
+			subject.next(StarkRoutingActions.navigateSuccess({ previousState: "previousState", currentState: "currentState"}));
 
 			expect(mockMessagePaneService.clearAll).not.toHaveBeenCalled();
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);

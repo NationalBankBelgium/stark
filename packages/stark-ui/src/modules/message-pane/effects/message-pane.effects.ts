@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { StarkNavigateSuccess, StarkRoutingActionTypes } from "@nationalbankbelgium/stark-core";
+import { StarkRoutingActions } from "@nationalbankbelgium/stark-core";
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService } from "../services";
 
 /**
@@ -29,7 +29,7 @@ export class StarkMessagePaneEffects {
 	@Effect({ dispatch: false })
 	public clearOnNavigationSuccess$(): Observable<any> {
 		return this.actions$.pipe(
-			ofType<StarkNavigateSuccess>(StarkRoutingActionTypes.NAVIGATE_SUCCESS),
+			ofType(StarkRoutingActions.navigateSuccess),
 			map(() => {
 				if (this.messagePaneService.clearOnNavigation) {
 					this.messagePaneService.clearAll();
