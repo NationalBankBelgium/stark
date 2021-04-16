@@ -31,7 +31,6 @@
       }
     ],
     "no-host-metadata-property": false,
-    "use-injectable-provided-in": false,
-    "typedef": [true, "call-signature", "parameter", "arrow-parameter", "property-declaration"]
+    "use-injectable-provided-in": false
   }
 }
