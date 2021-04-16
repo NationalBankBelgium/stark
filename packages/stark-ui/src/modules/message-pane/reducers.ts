@@ -1,2 +1,2 @@
-export * from "./reducers/index";
-export * from "./reducers/messages-pane.reducer";
+export { selectStarkMessages, starkMessagesReducers, StarkMessageState } from "./reducers/index";
+export { messagesReducer } from "./reducers/messages-pane.reducer";

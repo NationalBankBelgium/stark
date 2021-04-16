@@ -9,7 +9,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkMessage, StarkMessageImpl } from "../../../common/message";
 import { StarkMessageCollection } from "../entities";
 
-import { StarkAddMessages, StarkClearMessages, StarkGetAllMessages, StarkRemoveMessages } from "../actions";
+import { StarkMessagePaneActions } from "../actions";
 
 import { StarkUIApplicationState } from "../../../common/store";
 import { selectStarkMessages } from "../reducers";
@@ -34,26 +34,26 @@ export class StarkMessagePaneServiceImpl implements StarkMessagePaneService {
 			normalizedMessages.push(this.normalizeMessage(message));
 		}
 
-		this.store.dispatch(new StarkAddMessages(normalizedMessages));
+		this.store.dispatch(StarkMessagePaneActions.addMessages({ messages: normalizedMessages }));
 	}
 
 	public addOne(message: StarkMessage): void {
 		message = this.normalizeMessage(message);
-		this.store.dispatch(new StarkAddMessages([message]));
+		this.store.dispatch(StarkMessagePaneActions.addMessages({ messages: [message] }));
 	}
 
 	public getAll(): Observable<StarkMessageCollection> {
 		// dispatched action is only for keeping a trace
-		this.store.dispatch(new StarkGetAllMessages());
+		this.store.dispatch(StarkMessagePaneActions.getAllMessages());
 		return this.messages$;
 	}
 
 	public remove(messages: StarkMessage[]): void {
-		this.store.dispatch(new StarkRemoveMessages(messages));
+		this.store.dispatch(StarkMessagePaneActions.removeMessages({ messages }));
 	}
 
 	public clearAll(): void {
-		this.store.dispatch(new StarkClearMessages());
+		this.store.dispatch(StarkMessagePaneActions.clearMessages());
 	}
 
 	/**

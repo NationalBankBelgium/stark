@@ -1,6 +1,5 @@
 import { Inject, Injectable } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
-import { Observable } from "rxjs";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map } from "rxjs/operators";
 import { StarkRoutingActions } from "@nationalbankbelgium/stark-core";
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService } from "../services";
@@ -26,15 +25,16 @@ export class StarkMessagePaneEffects {
 	 *
 	 * `dispatch: false` => because this effect does not dispatch an action
 	 */
-	@Effect({ dispatch: false })
-	public clearOnNavigationSuccess$(): Observable<any> {
-		return this.actions$.pipe(
-			ofType(StarkRoutingActions.navigateSuccess),
-			map(() => {
-				if (this.messagePaneService.clearOnNavigation) {
-					this.messagePaneService.clearAll();
-				}
-			})
-		);
-	}
+	public clearOnNavigationSuccess$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(StarkRoutingActions.navigateSuccess),
+				map(() => {
+					if (this.messagePaneService.clearOnNavigation) {
+						this.messagePaneService.clearAll();
+					}
+				})
+			),
+		{ dispatch: false }
+	);
 }

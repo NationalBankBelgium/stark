@@ -43,9 +43,9 @@ describe("Effect: StarkMessagePaneEffects", () => {
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
 			actions = subject.asObservable();
 
-			messagePaneEffects.clearOnNavigationSuccess$().subscribe(mockObserver);
+			messagePaneEffects.clearOnNavigationSuccess$.subscribe(mockObserver);
 
-			subject.next(StarkRoutingActions.navigateSuccess({ previousState: "previousState", currentState: "currentState"}));
+			subject.next(StarkRoutingActions.navigateSuccess({ previousState: "previousState", currentState: "currentState" }));
 
 			expect(mockMessagePaneService.clearAll).toHaveBeenCalledTimes(1);
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);
@@ -60,9 +60,9 @@ describe("Effect: StarkMessagePaneEffects", () => {
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
 			actions = subject.asObservable();
 
-			messagePaneEffects.clearOnNavigationSuccess$().subscribe(mockObserver);
+			messagePaneEffects.clearOnNavigationSuccess$.subscribe(mockObserver);
 
-			subject.next(StarkRoutingActions.navigateSuccess({ previousState: "previousState", currentState: "currentState"}));
+			subject.next(StarkRoutingActions.navigateSuccess({ previousState: "previousState", currentState: "currentState" }));
 
 			expect(mockMessagePaneService.clearAll).not.toHaveBeenCalled();
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);

@@ -1,66 +1,39 @@
-import { Action } from "@ngrx/store";
+import { createAction, props, union } from "@ngrx/store";
 import { StarkMessage } from "../../../common/message";
 
 /**
- * Actions related to stark message pane service
+ * @ignore
  */
-export enum StarkMessagePaneActionTypes {
-	ADD_MESSAGES = "[StarkMessagePane] Add Messages",
-	REMOVE_MESSAGES = "[StarkMessagePane] Remove Messages",
-	CLEAR_MESSAGES = "[StarkMessagePane] Clear Messages",
-	GET_ALL_MESSAGES = "[StarkMessagePane] Get All Messages"
-}
+const actionKey = "StarkMessagePane";
 
 /**
  * Triggered when the addMessages() method is called.
+ *
+ * Parameter:
+ *   - messages - The messages to add.
  */
-export class StarkAddMessages implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkMessagePaneActionTypes.ADD_MESSAGES = StarkMessagePaneActionTypes.ADD_MESSAGES;
-
-	/**
-	 * Class constructor
-	 * @param messages - The messages to add.
-	 */
-	public constructor(public messages: StarkMessage[]) {}
-}
+export const addMessages = createAction(`[${actionKey}] Add Messages`, props<{ messages: StarkMessage[] }>());
 
 /**
  * Triggered when the removeMessages() method is called.
+ *
+ * Parameter:
+ *   - messages - The messages to remove.
  */
-export class StarkRemoveMessages implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkMessagePaneActionTypes.REMOVE_MESSAGES = StarkMessagePaneActionTypes.REMOVE_MESSAGES;
-
-	/**
-	 * Class constructor
-	 * @param messages - The messages to remove.
-	 */
-	public constructor(public messages: StarkMessage[]) {}
-}
+export const removeMessages = createAction(`[${actionKey}] Remove Messages`, props<{ messages: StarkMessage[] }>());
 
 /**
  * Triggered when the clearMessages() method is called.
  */
-export class StarkClearMessages implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkMessagePaneActionTypes.CLEAR_MESSAGES = StarkMessagePaneActionTypes.CLEAR_MESSAGES;
-}
+export const clearMessages = createAction(`[${actionKey}] Clear Messages`);
 
 /**
  * Triggered when the getAllMessages() method is called.
  */
-export class StarkGetAllMessages implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkMessagePaneActionTypes.GET_ALL_MESSAGES = StarkMessagePaneActionTypes.GET_ALL_MESSAGES;
-}
+export const getAllMessages = createAction(`[${actionKey}] Get All Messages`);
 
-export type StarkMessagePaneActions = StarkAddMessages | StarkRemoveMessages | StarkClearMessages | StarkGetAllMessages;
+/**
+ * @ignore
+ */
+const all = union({ addMessages, removeMessages, clearMessages, getAllMessages });
+export type Types = typeof all;
