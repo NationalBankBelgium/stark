@@ -5,12 +5,7 @@ import { StarkGenericSearchService, StarkSearchState } from "@nationalbankbelgiu
 import { HeroMovie, HeroMovieSearchCriteria } from "../entities";
 import { DemoGenericSearchState, selectDemoGenericSearch } from "../reducers";
 import { Store, select } from "@ngrx/store";
-import {
-	DemoGenericSearchHasSearched,
-	DemoGenericSearchHasSearchedReset,
-	DemoGenericSearchRemoveCriteria,
-	DemoGenericSearchSetCriteria
-} from "../actions";
+import { DemoGenericSearchActions } from "../actions";
 
 const MOVIES: HeroMovie[] = [
 	{
@@ -72,13 +67,13 @@ export class DemoGenericService implements StarkGenericSearchService<HeroMovie, 
 	}
 
 	public resetSearchState(): void {
-		this.store.dispatch(new DemoGenericSearchRemoveCriteria());
-		this.store.dispatch(new DemoGenericSearchHasSearchedReset());
+		this.store.dispatch(DemoGenericSearchActions.removeCriteria());
+		this.store.dispatch(DemoGenericSearchActions.hasSearchedReset());
 	}
 
 	public search(criteria: HeroMovieSearchCriteria): Observable<HeroMovie[]> {
-		this.store.dispatch(new DemoGenericSearchSetCriteria(criteria));
-		this.store.dispatch(new DemoGenericSearchHasSearched());
+		this.store.dispatch(DemoGenericSearchActions.setCriteria({criteria}));
+		this.store.dispatch(DemoGenericSearchActions.hasSearched());
 
 		return of(MOVIES).pipe(
 			// The delay is important to show the progress-indicator during the search process.

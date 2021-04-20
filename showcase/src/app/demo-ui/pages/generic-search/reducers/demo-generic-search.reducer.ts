@@ -1,26 +1,24 @@
 import { StarkSearchState } from "@nationalbankbelgium/stark-ui";
 import { HeroMovieSearchCriteria } from "../entities";
-import { DemoGenericActionTypes, DemoGenericSearchActions } from "../actions";
+import { DemoGenericSearchActions } from "../actions";
+import {createReducer, on} from "@ngrx/store";
 
 const INITIAL_STATE: Readonly<StarkSearchState<HeroMovieSearchCriteria>> = {
 	criteria: new HeroMovieSearchCriteria(),
 	hasBeenSearched: false
 };
 
+const reducer = createReducer<StarkSearchState<HeroMovieSearchCriteria>, DemoGenericSearchActions.Types>(
+	INITIAL_STATE,
+	on(DemoGenericSearchActions.setCriteria, (state, action) => ({ ...state, criteria: action.criteria })),
+	on(DemoGenericSearchActions.removeCriteria, (state) => ({ ...state, criteria: INITIAL_STATE.criteria })),
+	on(DemoGenericSearchActions.hasSearched, (state) => ({ ...state, hasBeenSearched: true })),
+	on(DemoGenericSearchActions.hasSearchedReset, (state) => ({ ...state, hasBeenSearched: false }))
+)
+
 export function demoGenericSearchReducer(
-	state: Readonly<StarkSearchState<HeroMovieSearchCriteria>> = INITIAL_STATE,
-	action: Readonly<DemoGenericSearchActions>
+	state: Readonly<StarkSearchState<HeroMovieSearchCriteria>> | undefined,
+	action: Readonly<DemoGenericSearchActions.Types>
 ): Readonly<StarkSearchState<HeroMovieSearchCriteria>> {
-	switch (action.type) {
-		case DemoGenericActionTypes.SET_DEMO_GENERIC_SEARCH_CRITERIA:
-			return { ...state, criteria: action.criteria };
-		case DemoGenericActionTypes.REMOVE_DEMO_GENERIC_SEARCH_CRITERIA:
-			return { ...state, criteria: INITIAL_STATE.criteria };
-		case DemoGenericActionTypes.DEMO_GENERIC_HAS_SEARCHED:
-			return { ...state, hasBeenSearched: true };
-		case DemoGenericActionTypes.DEMO_GENERIC_HAS_SEARCHED_RESET:
-			return { ...state, hasBeenSearched: false };
-		default:
-			return state;
-	}
+	return reducer(state, action);
 }
