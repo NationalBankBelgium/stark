@@ -41,7 +41,7 @@
     "codelyzer": "^5.2.2",
     "commitizen": "^4.2.3",
     "conventional-changelog-cli": "^2.1.1",
-    "core-js": "^3.9.1",
+    "core-js": "^3.10.2",
     "cross-env": "^7.0.3",
     "cz-customizable": "^6.3.0",
     "hammerjs": "^2.0.8",
