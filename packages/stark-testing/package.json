@@ -36,7 +36,7 @@
     "karma-typescript-angular2-transform": "^5.0.0",
     "karma-typescript-es6-transform": "5.1.0",
     "protractor": "^5.4.2",
-    "puppeteer": "^7.1.0"
+    "puppeteer": "^9.0.0"
   },
   "scripts": {
     "clean": "npx rimraf dist",
