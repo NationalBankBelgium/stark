@@ -46,6 +46,7 @@ const prettier: any = require("prettier/standalone");
 // const prettierPluginXML: any = require("@prettier/plugin-xml");
 const prettierPlugins: any = [
 	require("@prettier/plugin-xml"),
+	require("prettier/parser-angular"),
 	require("prettier/parser-babel"),
 	require("prettier/parser-html"),
 	require("prettier/parser-postcss"),
@@ -166,7 +167,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 					case "html":
 						prismGrammar = Prism.languages.markup;
 						prismClass = prismClassPrefix + "markup";
-						this.prettyString = prettier.format(this.data, { parser: "html", plugins: prettierPlugins });
+						this.prettyString = prettier.format(this.data, { parser: "angular", plugins: prettierPlugins });
 						break;
 
 					case "json":

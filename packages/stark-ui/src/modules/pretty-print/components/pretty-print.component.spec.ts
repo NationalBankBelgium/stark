@@ -67,6 +67,47 @@ describe("PrettyPrintComponent", () => {
 		""
 	].join("\n");
 
+	const rawAngularHtmlData: string = [
+		"<!DOCTYPE html><html><head>",
+		"<style>body {background-color: powderblue;}h1{color: blue;}flashy{color: red;}</style>",
+		"</head><body><h1>This is a {{heading|uppercase}}</h1>",
+		'<p class="flashy">This is a flashy paragraph.</p>',
+		'<button class="dummy-class" [class.active]="isActive" color="primary" (click)=triggerAction($event)>Click me</button>',
+		"</body></html>"
+	].join("");
+
+	const formattedAngularHtmlData: string = [
+		"<!DOCTYPE html>",
+		"<html>",
+		"  <head>",
+		"    <style>",
+		"      body {",
+		"        background-color: powderblue;",
+		"      }",
+		"      h1 {",
+		"        color: blue;",
+		"      }",
+		"      flashy {",
+		"        color: red;",
+		"      }",
+		"    </style>",
+		"  </head>",
+		"  <body>",
+		"    <h1>This is a {{ heading | uppercase }}</h1>",
+		'    <p class="flashy">This is a flashy paragraph.</p>',
+		"    <button",
+		'      class="dummy-class"',
+		'      [class.active]="isActive"', 
+		'      color="primary"',
+		'      (click)="triggerAction($event)"',
+		"    >",
+		"      Click me",
+		"    </button>",
+		"  </body>",
+		"</html>",
+		""
+	].join("\n");
+
 	const rawXmlData: string = [
 		'<menu id="file" value="File"><menuitem value="New" onclick="CreateNewDoc()" />',
 		'<menuitem value="Open" onclick="OpenDoc()" />',
@@ -292,6 +333,30 @@ describe("PrettyPrintComponent", () => {
 				expect(preElement.innerHTML).toContain('&lt;p class="flashy"&gt');
 				expect(preElement.innerHTML).toContain("&lt;style&gt;");
 				expect(preElement.innerHTML).toContain("&lt;/style&gt;");
+			});
+
+			it("should nicely format raw Angular HTML data", () => {
+				hostComponent.data = rawAngularHtmlData;
+				hostFixture.detectChanges();
+				
+				let formattedData: string = component.prettyString;
+
+				const regExLessThan: RegExp = /&lt;/gi;
+				const regExGreaterThan: RegExp = /&gt;/gi;
+				const regExQuote: RegExp = /&quot;/gi;
+
+				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
+
+				expect(formattedData).toBe(formattedAngularHtmlData);
+
+				const preElement: HTMLPreElement | null = <HTMLPreElement>hostFixture.nativeElement.querySelector("pre");
+				expect(preElement).not.toBeNull();
+				expect(preElement.innerHTML).toContain("&lt;!DOCTYPE html&gt");
+				expect(preElement.innerHTML).toContain('&lt;p class="flashy"&gt');
+				expect(preElement.innerHTML).toContain("&lt;style&gt;");
+				expect(preElement.innerHTML).toContain("&lt;/style&gt;");
+				expect(preElement.innerHTML).toContain("&lt;button");
+				expect(preElement.innerHTML).toContain("&lt;/button&gt;");
 			});
 		});
 
