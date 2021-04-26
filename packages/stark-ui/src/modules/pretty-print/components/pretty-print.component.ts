@@ -10,6 +10,8 @@ import {
 	SimpleChanges,
 	ViewEncapsulation
 } from "@angular/core";
+// tslint:disable-next-line:match-default-export-name
+import sqlFormatter from "@sqltools/formatter";
 /* tslint:disable:no-duplicate-imports no-import-side-effect */
 import * as Prism from "prismjs";
 import { Grammar } from "prismjs";
@@ -41,13 +43,15 @@ const prettier: any = require("prettier/standalone");
 /**
  * A reference to the prettier plugins
  */
-const prettierPlugins: any = [require("prettier/parser-babel"), require("prettier/parser-postcss"), require("prettier/parser-typescript")];
-
-/**
- * A reference to the prettyData library
- */
-// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
-// const prettyData: any = require("pretty-data").pd;
+// const prettierPluginXML: any = require("@prettier/plugin-xml");
+const prettierPlugins: any = [
+	require("@prettier/plugin-xml"),
+	require("prettier/parser-angular"),
+	require("prettier/parser-babel"),
+	require("prettier/parser-html"),
+	require("prettier/parser-postcss"),
+	require("prettier/parser-typescript")
+];
 
 /**
  * The code languages that are supported by the Stark-Pretty-Print component
@@ -151,12 +155,19 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 			try {
 				switch (this.format) {
 					case "xml":
+						prismGrammar = Prism.languages.markup;
+						prismClass = prismClassPrefix + "markup";
+						this.prettyString = prettier.format(this.data, {
+							parser: "xml",
+							plugins: prettierPlugins,
+							xmlWhitespaceSensitivity: "ignore"
+						});
+						break;
+
 					case "html":
 						prismGrammar = Prism.languages.markup;
 						prismClass = prismClassPrefix + "markup";
-						// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
-						// this.prettyString = prettyData.xml(this.data);
-						this.prettyString = this.data;
+						this.prettyString = prettier.format(this.data, { parser: "angular", plugins: prettierPlugins });
 						break;
 
 					case "json":
@@ -181,9 +192,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 					case "sql":
 						prismGrammar = Prism.languages.sql;
 						prismClass = prismClassPrefix + this.format;
-						// FIXME Adapt following line after replacing "pretty-data" dependency. See: https://github.com/NationalBankBelgium/stark/issues/2543
-						// this.prettyString = prettyData.sql(this.data);
-						this.prettyString = this.data;
+						this.prettyString = sqlFormatter.format(this.data, { language: "sql" });
 						break;
 
 					case "javascript":
