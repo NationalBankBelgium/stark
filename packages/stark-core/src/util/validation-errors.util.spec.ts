@@ -74,7 +74,9 @@ describe("Util: ValidationErrorsUtil", () => {
 			myClass.languages.push(new LanguageClass("french", "")); // invalid description
 			const errors: ValidationError[] = validateSync(myClass);
 			expect(errors.length).toBe(1);
-			expect(errors[0].children.length).toBe(myClass.languages.length);
+			expect(errors[0].children).toBeDefined();
+			// tslint:disable-next-line:no-non-null-assertion
+			expect(errors[0].children!.length).toBe(myClass.languages.length);
 
 			try {
 				StarkValidationErrorsUtil.throwOnError(errors);

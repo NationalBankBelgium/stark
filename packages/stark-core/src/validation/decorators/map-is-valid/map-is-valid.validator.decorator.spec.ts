@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/* tslint:disable:completed-docs no-non-null-assertion */
 import { IsNotEmpty, MaxLength, validateSync, ValidationError } from "class-validator";
 import { StarkMapIsValid, starkMapIsValidValidatorName } from "./map-is-valid.validator.decorator";
 
@@ -41,7 +41,7 @@ describe("ValidatorDecorator: StarkMapIsValid", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if Map contains invalid keys", () => {
@@ -53,9 +53,9 @@ describe("ValidatorDecorator: StarkMapIsValid", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toContain("map keys");
-		expect(errors[0].constraints[validatorConstraintName]).not.toContain("map values");
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toContain("map keys");
+		expect(errors[0].constraints![validatorConstraintName]).not.toContain("map values");
 	});
 
 	it("should fail if Map contains invalid values", () => {
@@ -66,9 +66,9 @@ describe("ValidatorDecorator: StarkMapIsValid", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).not.toContain("map keys");
-		expect(errors[0].constraints[validatorConstraintName]).toContain("map values");
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).not.toContain("map keys");
+		expect(errors[0].constraints![validatorConstraintName]).toContain("map values");
 	});
 
 	it("should NOT fail if Map contains valid keys and values", () => {

@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/* tslint:disable:completed-docs no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsSupportedLanguage } from "./is-supported-language.validator.decorator";
 import { starkIsSupportedLanguageValidatorName } from "../../validators/is-supported-language";
@@ -21,7 +21,7 @@ describe("ValidatorDecorator: StarkIsSupportedLanguage", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if language is not in the list of supported languages", () => {
@@ -30,7 +30,7 @@ describe("ValidatorDecorator: StarkIsSupportedLanguage", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should NOT fail if language is in the list of supported languages", () => {

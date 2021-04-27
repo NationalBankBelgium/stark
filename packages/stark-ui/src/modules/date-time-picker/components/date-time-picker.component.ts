@@ -37,7 +37,7 @@ import { MatFormField, MatFormFieldControl } from "@angular/material/form-field"
 import moment from "moment";
 import { Subject, Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
-import { Validator as ClassValidator } from "class-validator";
+import { minDate as validatorMinDate, maxDate as validatorMaxDate } from "class-validator";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
 import {
@@ -86,7 +86,8 @@ const componentName = "stark-date-time-picker";
 		class: componentName
 	}
 })
-export class StarkDateTimePickerComponent extends AbstractStarkUiComponent
+export class StarkDateTimePickerComponent
+	extends AbstractStarkUiComponent
 	implements MatFormFieldControl<Date>, ControlValueAccessor, Validator, OnInit, OnChanges, OnDestroy {
 	/**
 	 * Part of {@link MatFormFieldControl} API
@@ -404,12 +405,10 @@ export class StarkDateTimePickerComponent extends AbstractStarkUiComponent
 	private _starkMinDateValidator(minDate: Date): ValidatorFn {
 		// for the minDate, we should discard the time (we set it to the minimum possible value: 00:00:00:000)
 		// const normalizedMinDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate(), 0, 0, 0, 0);
-		const validator = new ClassValidator();
-
 		return (_control: AbstractControl): ValidationErrors | null => {
 			const controlValue = this.constructDateTime();
 
-			return controlValue && !validator.minDate(controlValue, minDate)
+			return controlValue && !validatorMinDate(controlValue, minDate)
 				? {
 						starkMinDateTime: {
 							min: minDate.toISOString(),
@@ -429,12 +428,10 @@ export class StarkDateTimePickerComponent extends AbstractStarkUiComponent
 	private _starkMaxDateValidator(maxDate: Date): ValidatorFn {
 		// for the maxDate, we should discard the time (we set it to the maximum possible value: 23:59:59:999)
 		// const normalizedMaxDate = new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate(), 23, 59, 59, 999);
-		const validator = new ClassValidator();
-
 		return (_control: AbstractControl): ValidationErrors | null => {
 			const controlValue = this.constructDateTime();
 
-			return controlValue && !validator.maxDate(controlValue, maxDate)
+			return controlValue && !validatorMaxDate(controlValue, maxDate)
 				? {
 						starkMaxDateTime: {
 							max: maxDate.toISOString(),

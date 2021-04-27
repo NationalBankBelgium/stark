@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs no-identical-functions*/
+/* tslint:disable:completed-docs no-identical-functions no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsEstablishmentUnitNumber } from "./is-establishment-unit-number.validator.decorator";
 import { starkIsEstablishmentUnitNumberValidatorName } from "../../validators/is-establishment-unit-number";
@@ -28,7 +28,7 @@ describe("ValidatorDecorator: StarkIsEstablishmentUnitNumber", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if company number is empty", () => {
@@ -36,7 +36,7 @@ describe("ValidatorDecorator: StarkIsEstablishmentUnitNumber", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if company number is not correct", () => {

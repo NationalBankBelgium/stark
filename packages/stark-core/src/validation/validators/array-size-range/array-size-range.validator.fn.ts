@@ -1,4 +1,4 @@
-import { getFromContainer, Validator } from "class-validator";
+import { arrayMaxSize, arrayMinSize } from "class-validator";
 
 /**
  * @ignore
@@ -15,17 +15,13 @@ export const starkArraySizeRangeValidatorName = "starkArraySizeRange";
  * @returns `true` if the array size range is valid
  */
 export function starkArraySizeRange(array: any[], minSize?: number, maxSize?: number): boolean {
-	// by default, if the requested validator class is not already registered in the container from the 'class-validator' container
-	// then it will registered automatically so it will indeed be a singleton
-	// IMPORTANT: the StarkValidatorImpl should be used in the same way wherever needed to avoid instantiating it multiple times!
-	const validator = getFromContainer(Validator);
 	let isValid = true;
 
 	if (typeof minSize !== "undefined") {
-		isValid = isValid && validator.arrayMinSize(array, minSize);
+		isValid = isValid && arrayMinSize(array, minSize);
 	}
 	if (typeof maxSize !== "undefined") {
-		isValid = isValid && validator.arrayMaxSize(array, maxSize);
+		isValid = isValid && arrayMaxSize(array, maxSize);
 	}
 	return isValid;
 }

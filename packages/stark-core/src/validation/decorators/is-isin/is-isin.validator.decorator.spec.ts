@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs no-identical-functions*/
+/* tslint:disable:completed-docs no-identical-functions no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsISIN } from "./is-isin.validator.decorator";
 import { starkIsISINValidatorName } from "../../validators/is-isin";
@@ -28,7 +28,7 @@ describe("ValidatorDecorator: StarkIsISIN", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if isin is empty", () => {
@@ -36,7 +36,7 @@ describe("ValidatorDecorator: StarkIsISIN", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if isin is not correct", () => {

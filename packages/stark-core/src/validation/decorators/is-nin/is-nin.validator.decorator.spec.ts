@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs no-identical-functions*/
+/* tslint:disable:completed-docs no-identical-functions no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsNIN } from "./is-nin.validator.decorator";
 import { starkIsNINValidatorName } from "../../validators/is-nin";
@@ -41,7 +41,7 @@ describe("ValidatorDecorator: StarkIsNIN", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if nin is empty", () => {
@@ -49,7 +49,7 @@ describe("ValidatorDecorator: StarkIsNIN", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if belgian nin is not correct", () => {
@@ -65,7 +65,7 @@ describe("ValidatorDecorator: StarkIsNIN", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should NOT fail if belgian nin is correct", () => {
