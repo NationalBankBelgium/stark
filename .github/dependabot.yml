@@ -55,9 +55,6 @@ updates:
     time: "04:00"
   open-pull-requests-limit: 10
   ignore:
-  - dependency-name: karma-typescript-es6-transform
-    versions:
-    - ">=5.2.0"
   - dependency-name: "@types/node"
     versions:
     - ">=11"
