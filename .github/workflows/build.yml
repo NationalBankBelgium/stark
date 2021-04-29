@@ -15,7 +15,7 @@ on:
 env:
   TZ: "Europe/Brussels"
   MAIN_NODEJS: "10"
-  NPM_VERSION: "6.9.2"
+  NPM_VERSION: "latest-6"
   LOGS_DIR: /tmp/stark/logs
   LOGS_FILE: /tmp/stark/logs/build-perf.log
   HUSKY_SKIP_INSTALL: true
