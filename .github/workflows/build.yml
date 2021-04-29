@@ -96,13 +96,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npm run install:travis-ci:all
+          npm run install:ci:all
 
       - name: Linting
-        run: npm run lint:travis-ci:all
+        run: npm run lint:all
 
       - name: Testing
-        run: npm run test:travis-ci:all
+        run: npm run test:ci:all
         
       - name: "Build showcase:ghpages"
         run: npm run build:showcase:ghpages
@@ -156,7 +156,7 @@ jobs:
         if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
         
       - name: Generate docs coverage
-        run: npm run docs:travis-ci:coverage
+        run: npm run docs:coverage
         if: env.IS_MAIN_ENVIRONMENT == 1
 
       - name: Save logs
