@@ -156,7 +156,6 @@ groupings trying to match Angular concepts:
 |   angular.json                        # Angular configuration file
 |   base.spec.ts                        # initializes the test environment
 |   Dockerfile                          # the commands that will be executed by the Docker Build command
-|   karma.conf.ci.js                    # Karma configuration file for Continuous Integration
 |   karma.conf.js                       # Karma configuration file
 |   package.json                        #
 |   protractor.conf.js                  # protractor configuration file
