@@ -1,5 +1,6 @@
 // Helpers
 const helpers = require("./helpers");
+const ciDetect = require("@npmcli/ci-detect");
 
 const rawKarmaConfig = {
 	// base path that will be used to resolve all patterns (e.g. files, exclude)
@@ -7,57 +8,29 @@ const rawKarmaConfig = {
 
 	// frameworks to use
 	// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-	frameworks: ["jasmine", "karma-typescript"],
-
-	// list of files / patterns to load in the browser
-	files: [
-		{ pattern: helpers.root(helpers.getAngularCliAppConfig().architect.test.options.main) },
-		{ pattern: helpers.root("src/**/*.ts") },
-		{ pattern: helpers.root("src/**/*.html") }
-	],
+	frameworks: ["jasmine", "@angular-devkit/build-angular"],
 
 	// list of files to exclude
 	exclude: [
-		"src/index.html" // not needed for unit testing
+		helpers.root("src/index.html") // not needed for unit testing
 	],
 
-	// preprocess matching files before serving them to the browser
-	// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-	preprocessors: {
-		"**/*.ts": ["karma-typescript", "sourcemap"]
+	client: {
+		clearContext: false // leave Jasmine Spec Runner output visible in browser
 	},
 
-	karmaTypescriptConfig: {
-		bundlerOptions: {
-			entrypoints: /\.spec\.ts$/,
-			exclude: [
-				"coffee-script", // FIXME: https://github.com/monounity/karma-typescript/issues/209
-				"saucelabs", // gives an error
-				"protractor", // not needed for unit testing
-				"selenium-webdriver" // not needed for unit testing
-			],
-			// don't parse "parser-typescript" to avoid "UncaughtException" in Karma server thrown by "karma-typescript-es6-transform"
-			// see https://github.com/NationalBankBelgium/stark/issues/1434
-			noParse: ["prettier/parser-typescript"],
-			resolve: {},
-			transforms: [
-				//see https://github.com/monounity/karma-typescript/tree/master/packages/karma-typescript-angular2-transform
-				require("karma-typescript-angular2-transform"),
-				//see https://github.com/monounity/karma-typescript/tree/master/packages/karma-typescript-es6-transform
-				require("karma-typescript-es6-transform")({
-					presets: ["@babel/preset-env"] // default setting
-				})
-			]
-		},
-		tsconfig: helpers.getAngularCliAppConfig().architect.test.options.tsConfig
-	},
+	plugins: [
+		// Default karma plugins configuration: require("karma-*")
+		"karma-*",
+		require("@angular-devkit/build-angular/plugins/karma")
+	],
 
 	// test results reporter to use
 	// possible values: "dots", "progress", "spec", "junit", "mocha", "coverage" (others if you import reporters)
 	// available reporters: https://npmjs.org/browse/keyword/karma-reporter
 	// https://www.npmjs.com/package/karma-junit-reporter
 	// https://www.npmjs.com/package/karma-spec-reporter
-	reporters: ["mocha", "progress", "karma-typescript"],
+	reporters: !!ciDetect() ? ["mocha", "progress"] : ["mocha", "progress", "kjhtml"],
 
 	// web server port
 	port: 9876,
@@ -81,16 +54,50 @@ const rawKarmaConfig = {
 
 	// start these browsers
 	// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-	browsers: ["Chrome"],
+	browsers: !!ciDetect() ? ["ChromeHeadlessNoSandbox"] : ["Chrome"],
 
 	// Continuous Integration mode
 	// if true, Karma captures browsers, runs the tests and exits
-	singleRun: false,
+	singleRun: !!ciDetect(),
+
+	// If true, tests restart automatically if a file is changed
+	restartOnFileChange: !ciDetect(),
 
 	// Timeout settings
 	browserNoActivityTimeout: 30000,
 	browserDisconnectTolerance: 1,
-	browserDisconnectTimeout: 30000
+	browserDisconnectTimeout: 30000,
+
+	// Configuration for coverage-istanbul reporter
+	coverageIstanbulReporter: {
+		// reports can be any that are listed here: https://github.com/istanbuljs/istanbuljs/tree/73c25ce79f91010d1ff073aa6ff3fd01114f90db/packages/istanbul-reports/lib
+		reports: ["html", "lcovonly", "text-summary", "clover", "json"],
+
+		// base output directory. If you include %browser% in the path it will be replaced with the karma browser name
+		dir: helpers.root("reports/coverage"),
+
+		// Combines coverage information from multiple browsers into one report rather than outputting a report
+		// for each browser.
+		combineBrowserReports: true,
+
+		// if using webpack and pre-loaders, work around webpack breaking the source path
+		fixWebpackSourcePaths: true,
+
+		// Omit files with no statements, no functions and no branches covered from the report
+		skipFilesWithNoCoverage: true,
+
+		verbose: !!ciDetect() // output config used by istanbul for debugging
+	},
+
+	// Custom launcher configuration for ChromeHeadless (with Puppeteer)
+	customLaunchers: {
+		ChromeHeadlessNoSandbox: {
+			base: "ChromeHeadless",
+			// necessary for travis: https://github.com/puppeteer/puppeteer/blob/v7.1.0/docs/troubleshooting.md#setting-up-chrome-linux-sandbox
+			// as it runs in a container-based environment
+			flags: ["--no-sandbox", "--disable-setuid-sandbox"]
+		}
+	}
 };
 
 module.exports = {
