@@ -1,1 +1,2 @@
-export * from "./actions/routing.actions";
+import * as StarkRoutingActions from "./actions/routing.actions";
+export { StarkRoutingActions };

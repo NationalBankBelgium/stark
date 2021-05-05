@@ -11,7 +11,7 @@ import { StarkUIApplicationState } from "../../../common/store";
 import { StarkMessagePaneServiceImpl } from "./message-pane.service";
 import { StarkMessageCollection } from "../entities";
 
-import { StarkAddMessages, StarkClearMessages, StarkGetAllMessages, StarkRemoveMessages } from "../actions";
+import { StarkMessagePaneActions } from "../actions";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
@@ -90,7 +90,7 @@ describe("MessagePaneService", () => {
 			mockMessages[2] = { ...mockErrorMessage, priority: 999 };
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkAddMessages(mockMessages));
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkMessagePaneActions.addMessages({ messages: mockMessages }));
 		});
 	});
 
@@ -100,7 +100,7 @@ describe("MessagePaneService", () => {
 			const validatedMessage: StarkMessage = { ...mockInfoMessage, priority: 999 };
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkAddMessages([validatedMessage]));
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkMessagePaneActions.addMessages({ messages: [validatedMessage] }));
 		});
 
 		it("should add the default priority of 999, when it is not supplied", () => {
@@ -114,7 +114,7 @@ describe("MessagePaneService", () => {
 
 			messagePaneService.addOne(message);
 			const validatedMessage: StarkMessage = { ...message, priority: 999 };
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkAddMessages([validatedMessage]));
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkMessagePaneActions.addMessages({ messages: [validatedMessage] }));
 		});
 
 		it("should throw an error when the priority is smaller than 1", () => {
@@ -154,7 +154,7 @@ describe("MessagePaneService", () => {
 			);
 
 			messagePaneService.addOne(message);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkAddMessages([message]));
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkMessagePaneActions.addMessages({ messages: [message] }));
 		});
 	});
 
@@ -174,7 +174,7 @@ describe("MessagePaneService", () => {
 			expect(mockMessagesObserver.error).not.toHaveBeenCalled();
 			expect(mockMessagesObserver.complete).not.toHaveBeenCalled();
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkGetAllMessages());
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkMessagePaneActions.getAllMessages());
 		});
 	});
 
@@ -185,7 +185,7 @@ describe("MessagePaneService", () => {
 			messagePaneService.remove(mockMessages);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkRemoveMessages(mockMessages));
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkMessagePaneActions.removeMessages({ messages: mockMessages }));
 		});
 	});
 
@@ -194,7 +194,7 @@ describe("MessagePaneService", () => {
 			messagePaneService.clearAll();
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkClearMessages());
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkMessagePaneActions.clearMessages());
 		});
 	});
 });

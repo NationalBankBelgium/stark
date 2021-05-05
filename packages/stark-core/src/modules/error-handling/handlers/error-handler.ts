@@ -1,7 +1,7 @@
 import { ErrorHandler, Injectable, Injector } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { StarkCoreApplicationState } from "../../../common/store";
-import { StarkUnhandledError } from "../actions";
+import { StarkErrorHandlingActions } from "../actions";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 
 /**
@@ -28,12 +28,12 @@ export class StarkErrorHandler implements ErrorHandler {
 	public constructor(private injector: Injector) {}
 
 	/**
-	 * Dispatches an {@link StarkUnhandledError} action which the user can then handle
+	 * Dispatches an {@link StarkErrorHandlingActions.unhandledError} action which the user can then handle
 	 * @param error - The encountered error
 	 */
 	public handleError(error: any): void {
 		this.starkLoggingService.error("StarkErrorHandler: an error has occurred : ", error);
-		this.applicationStore.dispatch(new StarkUnhandledError(error));
+		this.applicationStore.dispatch(StarkErrorHandlingActions.unhandledError({ error }));
 	}
 
 	/**

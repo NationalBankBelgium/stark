@@ -1,7 +1,9 @@
 import { StarkMessage, StarkMessageType } from "../../../common/message";
 import { StarkMessageCollection } from "../entities";
-import { StarkAddMessages, StarkMessagePaneActions, StarkMessagePaneActionTypes, StarkRemoveMessages } from "../actions";
+import { StarkMessagePaneActions } from "../actions";
 import findIndex from "lodash-es/findIndex";
+import { createReducer, on } from "@ngrx/store";
+import { TypedAction } from "@ngrx/store/src/models";
 
 /**
  * Initial state of the store
@@ -13,34 +15,35 @@ const INITIAL_MESSAGES_STATE: Readonly<StarkMessageCollection> = {
 };
 
 /**
+ * Definition of the reducer using `createReducer` method.
+ */
+const reducer = createReducer<StarkMessageCollection, StarkMessagePaneActions.Types>(
+	INITIAL_MESSAGES_STATE,
+	on(StarkMessagePaneActions.addMessages, (state, action) => addMessage(state, action)),
+	on(StarkMessagePaneActions.clearMessages, (state) => clearMessages(state)),
+	on(StarkMessagePaneActions.removeMessages, (state, action) => removeMessages(state, action))
+);
+
+/**
  * Definition of the message reducer.
  * @param state - The state of the reducer
  * @param action - The action to perform
  */
 export function messagesReducer(
-	state: Readonly<StarkMessageCollection> = INITIAL_MESSAGES_STATE,
-	action: Readonly<StarkMessagePaneActions>
+	state: Readonly<StarkMessageCollection> | undefined,
+	action: Readonly<StarkMessagePaneActions.Types>
 ): Readonly<StarkMessageCollection> {
 	// the new state will be calculated from the data coming in the actions
-	switch (action.type) {
-		case StarkMessagePaneActionTypes.ADD_MESSAGES:
-			return addMessage(state, action);
-
-		case StarkMessagePaneActionTypes.CLEAR_MESSAGES:
-			return clearMessages(state);
-
-		case StarkMessagePaneActionTypes.REMOVE_MESSAGES:
-			return removeMessages(state, action);
-
-		default:
-			return state;
-	}
+	return reducer(state, action);
 }
 
 /**
  * Ignore
  */
-function addMessage(state: Readonly<StarkMessageCollection>, action: Readonly<StarkAddMessages>): Readonly<StarkMessageCollection> {
+function addMessage(
+	state: Readonly<StarkMessageCollection>,
+	action: Readonly<{ messages: StarkMessage[] } & TypedAction<string>>
+): Readonly<StarkMessageCollection> {
 	// by default the current message arrays remain unchanged
 	const newStateAfterAddition: StarkMessageCollection = {
 		infoMessages: state.infoMessages,
@@ -85,7 +88,10 @@ function clearMessages(state: Readonly<StarkMessageCollection>): Readonly<StarkM
 /**
  * Ignore
  */
-function removeMessages(state: Readonly<StarkMessageCollection>, action: Readonly<StarkRemoveMessages>): Readonly<StarkMessageCollection> {
+function removeMessages(
+	state: Readonly<StarkMessageCollection>,
+	action: Readonly<{ messages: StarkMessage[] } & TypedAction<string>>
+): Readonly<StarkMessageCollection> {
 	// getting a deeply mutable copy
 	const mutableState: StarkMessageCollection = {
 		infoMessages: [...state.infoMessages],

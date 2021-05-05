@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs*/
-import { Action, Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { EMPTY, from, Observable } from "rxjs";
 import { ErrorHandler, Inject, Injectable } from "@angular/core";
 import {
@@ -27,16 +27,7 @@ import {
 
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 import { StarkRoutingService, starkRoutingServiceName } from "./routing.service.intf";
-import {
-	StarkNavigate,
-	StarkNavigateFailure,
-	StarkNavigateRejection,
-	StarkNavigateSuccess,
-	StarkNavigationHistoryLimitReached,
-	StarkReload,
-	StarkReloadFailure,
-	StarkReloadSuccess
-} from "../actions";
+import { StarkRoutingActions } from "../actions";
 import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
@@ -90,7 +81,14 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	}
 
 	public navigateTo(newState: string, params?: RawParams, options?: TransitionOptions): Observable<any> {
-		this.store.dispatch(new StarkNavigate(this.getCurrentStateName(), newState, params, options));
+		this.store.dispatch(
+			StarkRoutingActions.navigate({
+				currentState: this.getCurrentStateName(),
+				newState,
+				options,
+				params
+			})
+		);
 		return from(this.$state.go(newState, params, options));
 	}
 
@@ -111,7 +109,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				(this._starkStateHistory.length === 1 && this._starkStateHistory[0].name.match(regexInitExitStateName)) ||
 				this._starkStateHistory.length === 0
 			) {
-				this.store.dispatch(new StarkNavigationHistoryLimitReached());
+				this.store.dispatch(StarkRoutingActions.navigationHistoryLimitReached());
 			}
 
 			if (previousState && !previousState.name.match(regexInitExitStateName) && previousState.name !== "") {
@@ -119,18 +117,24 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			}
 		}
 
-		this.store.dispatch(new StarkNavigationHistoryLimitReached());
+		this.store.dispatch(StarkRoutingActions.navigationHistoryLimitReached());
 		this.logger.warn(starkRoutingServiceName + ": navigateToPrevious - " + reason);
 		return EMPTY;
 	}
 
 	public reload(): Observable<any> {
-		this.store.dispatch(new StarkReload(this.getCurrentStateName()));
+		this.store.dispatch(StarkRoutingActions.reload({ state: this.getCurrentStateName() }));
 		const reload$: Observable<any> = from(this.$state.reload());
 		// dispatch corresponding success action when transition is completed
 		reload$.subscribe(
-			() => this.store.dispatch(new StarkReloadSuccess(this.getCurrentStateName(), this.getCurrentStateParams(true))),
-			() => this.store.dispatch(new StarkReloadFailure(this.getCurrentStateName(), this.getCurrentStateParams(true)))
+			() =>
+				this.store.dispatch(
+					StarkRoutingActions.reloadSuccess({ state: this.getCurrentStateName(), params: this.getCurrentStateParams(true) })
+				),
+			() =>
+				this.store.dispatch(
+					StarkRoutingActions.reloadFailure({ state: this.getCurrentStateName(), params: this.getCurrentStateParams(true) })
+				)
 		);
 		return reload$;
 	}
@@ -304,12 +308,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				}". Parameters that were passed: ${JSON.stringify(targetState.params())}`;
 
 				if (this.knownRejectionCausesRegex.test(rejectionString)) {
-					const rejectionAction: Action = new StarkNavigateRejection(
-						<string>fromState.name,
-						targetState.name().toString(),
-						targetState.params(),
-						rejectionString
-					);
+					const rejectionAction = StarkRoutingActions.navigateRejection({
+						currentState: <string>fromState.name,
+						newState: targetState.name().toString(),
+						params: targetState.params(),
+						reason: rejectionString
+					});
 					message += 'Route transition rejected: "' + complementaryInfo + " Known rejection: " + rejectionString;
 
 					// dispatch corresponding action to allow the user to trigger his own effects if needed
@@ -328,12 +332,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 							this.logger.warn(message);
 							break;
 						default:
-							const failureAction: Action = new StarkNavigateFailure(
-								<string>fromState.name,
-								targetState.name().toString(),
-								targetState.params(),
-								rejectionString
-							);
+							const failureAction = StarkRoutingActions.navigateFailure({
+								currentState: <string>fromState.name,
+								newState: targetState.name().toString(),
+								params: targetState.params(),
+								error: rejectionString
+							});
 
 							// dispatch corresponding action to allow the user to trigger his own effects if needed
 							this.store.dispatch(failureAction);
@@ -366,12 +370,12 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		this.$state.onInvalid(
 			(toState?: TargetState, fromState?: TargetState): HookResult => {
 				const errorType = "Invalid state change";
-				const failureAction: Action = new StarkNavigateFailure(
-					(<TargetState>fromState).name(),
-					(<TargetState>toState).name(),
-					(<TargetState>toState).params(),
-					errorType
-				);
+				const failureAction = StarkRoutingActions.navigateFailure({
+					currentState: (<TargetState>fromState).name(),
+					newState: (<TargetState>toState).name(),
+					params: (<TargetState>toState).params(),
+					error: errorType
+				});
 				let message: string =
 					starkRoutingServiceName + ': Error while trying to navigate from "' + (<TargetState>fromState).name() + '"';
 				message += ' to "' + (<TargetState>toState).name() + '"';
@@ -433,7 +437,13 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 				const currentState: TargetState = transition.targetState();
 				const currentStateParams: RawParams = this.getCurrentStateParams(true);
 
-				this.store.dispatch(new StarkNavigateSuccess(previousStateName, currentState.name(), currentStateParams));
+				this.store.dispatch(
+					StarkRoutingActions.navigateSuccess({
+						previousState: previousStateName,
+						currentState: currentState.name(),
+						params: currentStateParams
+					})
+				);
 
 				if (transition.dynamic()) {
 					// for a dynamic transition, the last entry in the stateHistory should be re-created rather than being added again!

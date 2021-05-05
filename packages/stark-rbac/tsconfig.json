@@ -17,6 +17,7 @@
       "@nationalbankbelgium/stark-rbac/testing": ["./testing/public_api.ts"],
       "@ng-idle/*": ["../stark-core/node_modules/@ng-idle/*"],
       "@ngrx/*": ["../stark-core/node_modules/@ngrx/*"],
+      "@ngrx/store": ["./node_modules/@ngrx/store"],
       "@ngx-translate/*": ["../stark-core/node_modules/@ngx-translate/*"],
       "@uirouter/*": ["../stark-core/node_modules/@uirouter/*"],
       "cerialize": ["../stark-core/node_modules/cerialize"],

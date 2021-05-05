@@ -6,7 +6,7 @@ import { Store } from "@ngrx/store";
 import { Observable, of, throwError } from "rxjs";
 import { Serialize } from "cerialize";
 
-import { StarkFlushLogMessages, StarkLoggingActionTypes, StarkLogMessageAction } from "../../logging/actions";
+import { StarkLoggingActions } from "../../logging/actions";
 import { StarkLoggingServiceImpl } from "./logging.service";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../../logging/entities";
@@ -15,11 +15,13 @@ import { StarkHttpHeaders } from "../../http/constants";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
 import { MockStarkXsrfService } from "@nationalbankbelgium/stark-core/testing";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
+import { TestBed } from "@angular/core/testing";
 
 // tslint:disable-next-line:no-big-function
 describe("Service: StarkLoggingService", () => {
 	let appConfig: StarkApplicationConfig;
-	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
+	let mockStore: MockStore<StarkCoreApplicationState>;
 	let mockInjectorService: SpyObj<Injector>;
 	let mockXSRFService: MockStarkXsrfService;
 	let loggingService: LoggingServiceHelper;
@@ -42,7 +44,11 @@ describe("Service: StarkLoggingService", () => {
 	const loggingFlushResourceName = "dummy-logging";
 
 	beforeEach(() => {
-		mockStore = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("store", ["dispatch", "pipe"]);
+		TestBed.configureTestingModule({
+			providers: [provideMockStore({ initialState: {} })]
+		});
+
+		mockStore = TestBed.get(Store);
 		mockInjectorService = jasmine.createSpyObj<Injector>("injector,", ["get"]);
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.debugLoggingEnabled = true;
@@ -58,12 +64,13 @@ describe("Service: StarkLoggingService", () => {
 			applicationId: "dummy app id",
 			messages: []
 		};
-		mockStore.pipe.and.returnValue(of(mockStarkLogging));
+		spyOn(mockStore, "pipe").and.returnValue(of(mockStarkLogging));
+		spyOn(mockStore, "dispatch").and.callThrough();
 		/* tslint:disable-next-line:deprecation */
 		mockInjectorService.get.and.returnValue(mockXSRFService);
 		loggingService = new LoggingServiceHelper(mockStore, appConfig, mockInjectorService);
 		// reset the calls counter because there is a log in the constructor
-		mockStore.dispatch.calls.reset();
+		(<Spy>mockStore.dispatch).calls.reset();
 	});
 
 	describe("on initialization", () => {
@@ -100,10 +107,10 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = <StarkLogMessageAction>mockStore.dispatch.calls.mostRecent().args[0];
-			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
+			const dispatchedAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			expect(dispatchedAction.type).toBe(StarkLoggingActions.logMessage.type);
 
-			const { message }: StarkLogMessageAction = dispatchedAction;
+			const { message } = dispatchedAction;
 			expect(message instanceof StarkLogMessageImpl).toBe(true);
 			expect(message.type).toBe(StarkLogMessageType.DEBUG);
 			expect(message.message).toContain(dummyDebugMessagePrefix);
@@ -130,10 +137,10 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = <StarkLogMessageAction>mockStore.dispatch.calls.mostRecent().args[0];
-			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
+			const dispatchedAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			expect(dispatchedAction.type).toBe(StarkLoggingActions.logMessage.type);
 
-			const { message }: StarkLogMessageAction = dispatchedAction;
+			const { message } = dispatchedAction;
 			expect(message instanceof StarkLogMessageImpl).toBe(true);
 			expect(message.type).toBe(StarkLogMessageType.INFO);
 			expect(message.message).toContain(dummyInfoMessagePrefix);
@@ -153,10 +160,10 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = <StarkLogMessageAction>mockStore.dispatch.calls.mostRecent().args[0];
-			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
+			const dispatchedAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			expect(dispatchedAction.type).toBe(StarkLoggingActions.logMessage.type);
 
-			const { message }: StarkLogMessageAction = dispatchedAction;
+			const { message } = dispatchedAction;
 			expect(message instanceof StarkLogMessageImpl).toBe(true);
 			expect(message.type).toBe(StarkLogMessageType.WARNING);
 			expect(message.message).toContain(dummyWarnMessagePrefix);
@@ -178,10 +185,10 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = <StarkLogMessageAction>mockStore.dispatch.calls.mostRecent().args[0];
-			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
+			const dispatchedAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			expect(dispatchedAction.type).toBe(StarkLoggingActions.logMessage.type);
 
-			const { message }: StarkLogMessageAction = dispatchedAction;
+			const { message } = dispatchedAction;
 			expect(message instanceof StarkLogMessageImpl).toBe(true);
 			expect(message.type).toBe(StarkLogMessageType.ERROR);
 			expect(message.message).toContain(dummyErrorMessagePrefix);
@@ -200,10 +207,10 @@ describe("Service: StarkLoggingService", () => {
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
 
-			const dispatchedAction: StarkLogMessageAction = <StarkLogMessageAction>mockStore.dispatch.calls.mostRecent().args[0];
-			expect(dispatchedAction.type).toBe(StarkLoggingActionTypes.LOG_MESSAGE);
+			const dispatchedAction = (<Spy>mockStore.dispatch).calls.mostRecent().args[0];
+			expect(dispatchedAction.type).toBe(StarkLoggingActions.logMessage.type);
 
-			const { message }: StarkLogMessageAction = dispatchedAction;
+			const { message } = dispatchedAction;
 			expect(message instanceof StarkLogMessageImpl).toBe(true);
 			expect(message.type).toBe(StarkLogMessageType.ERROR);
 			expect(message.message).toContain(dummyErrorMessagePrefix);
@@ -296,7 +303,9 @@ describe("Service: StarkLoggingService", () => {
 			expect(sendRequestSpy.calls.mostRecent().args[2]).toBe(true);
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
-			expect(mockStore.dispatch).toHaveBeenCalledWith(new StarkFlushLogMessages(loggingFlushPersistSize));
+			expect(mockStore.dispatch).toHaveBeenCalledWith(
+				StarkLoggingActions.flushLogMessages({ numberOfMessagesToFlush: loggingFlushPersistSize })
+			);
 		});
 
 		it("should send the XMLHttpRequest to the correct URL and with the correct data and headers", () => {
@@ -362,7 +371,7 @@ describe("Service: StarkLoggingService", () => {
 class LoggingServiceHelper extends StarkLoggingServiceImpl {
 	public originalSendRequest = super["sendRequest"];
 
-	public constructor(store: SpyObj<Store<StarkCoreApplicationState>>, appConfig: StarkApplicationConfig, injector: Injector) {
+	public constructor(store: MockStore<StarkCoreApplicationState>, appConfig: StarkApplicationConfig, injector: Injector) {
 		super(<Store<StarkCoreApplicationState>>(<unknown>store), appConfig, injector);
 	}
 

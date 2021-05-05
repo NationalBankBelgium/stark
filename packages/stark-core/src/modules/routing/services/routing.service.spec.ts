@@ -12,15 +12,18 @@ import { StarkRoutingServiceImpl } from "./routing.service";
 import { StarkApplicationConfig, StarkApplicationConfigImpl } from "../../../configuration/entities/application";
 import { StarkStateConfigWithParams } from "./state-config-with-params.intf";
 import { StarkRoutingTransitionHook } from "./routing-transition-hook.constants";
-import { StarkNavigate, StarkNavigationHistoryLimitReached, StarkRoutingActionTypes } from "../actions";
+import { StarkRoutingActions } from "../actions";
 import { StarkCoreApplicationState } from "../../../common/store";
 import { StarkErrorHandler } from "../../error-handling";
 import { StarkRoutingService } from "./routing.service.intf";
 import CallInfo = jasmine.CallInfo;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
 
-type CallableRoutingAction = (action: StarkNavigate | StarkNavigationHistoryLimitReached) => void;
+type CallableRoutingAction = (
+	action: typeof StarkRoutingActions.navigate | typeof StarkRoutingActions.navigationHistoryLimitReached
+) => void;
 
 @Component({ selector: "test-home", template: "HOME" })
 export class HomeComponent {}
@@ -37,9 +40,7 @@ describe("Service: StarkRoutingService", () => {
 	let routingService: StarkRoutingServiceImpl;
 	let mockLogger: MockStarkLoggingService;
 	let appConfig: StarkApplicationConfig;
-	const mockStore: SpyObj<Store<StarkCoreApplicationState>> = jasmine.createSpyObj<Store<StarkCoreApplicationState>>("storeSpy", [
-		"dispatch"
-	]);
+	let mockStore: MockStore<StarkCoreApplicationState>;
 	const mockCorrelationId = "12345";
 	const requestId = "652d9053-32a0-457c-9eca-162cd301a4e8";
 
@@ -362,7 +363,8 @@ describe("Service: StarkRoutingService", () => {
 	const starkRoutingServiceFactory = (
 		state: StateService,
 		transitions: TransitionService,
-		globals: UIRouterGlobals
+		globals: UIRouterGlobals,
+		store: Store<StarkCoreApplicationState>
 	): StarkRoutingService => {
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.homeStateName = "homepage";
@@ -374,7 +376,7 @@ describe("Service: StarkRoutingService", () => {
 			mockLogger,
 			appConfig,
 			errorHandler,
-			<Store<StarkCoreApplicationState>>(<unknown>mockStore),
+			store,
 			state,
 			transitions,
 			globals
@@ -392,24 +394,30 @@ describe("Service: StarkRoutingService", () => {
 				{
 					provide: StarkRoutingServiceImpl,
 					useFactory: starkRoutingServiceFactory,
-					deps: [StateService, TransitionService, UIRouterGlobals]
-				}
+					deps: [StateService, TransitionService, UIRouterGlobals, Store]
+				},
+				provideMockStore()
 			],
 			imports: [routerModule]
 		});
 	});
 
 	// Inject module dependencies
-	beforeEach(inject([UIRouter, StarkRoutingServiceImpl], (_router: UIRouter, _routingService: StarkRoutingServiceImpl) => {
-		router = _router;
-		$state = router.stateService;
-		routingService = _routingService;
+	beforeEach(inject(
+		[UIRouter, StarkRoutingServiceImpl, Store],
+		(_router: UIRouter, _routingService: StarkRoutingServiceImpl, _mockStore: MockStore<StarkCoreApplicationState>) => {
+			router = _router;
+			$state = router.stateService;
+			routingService = _routingService;
+			mockStore = _mockStore;
 
-		mockLogger.warn.calls.reset();
-		mockLogger.debug.calls.reset();
-		mockLogger.error.calls.reset();
-		mockStore.dispatch.calls.reset();
-	}));
+			mockLogger.warn.calls.reset();
+			mockLogger.debug.calls.reset();
+			mockLogger.error.calls.reset();
+			spyOn(mockStore, "dispatch").and.callThrough();
+			(<Spy>mockStore.dispatch).calls.reset();
+		}
+	));
 
 	afterEach(() => {
 		// IMPORTANT: reset the url after each test,
@@ -1916,18 +1924,18 @@ describe("Service: StarkRoutingService", () => {
 			const expectedCalls: number = 16 + 12 + 3 + 1;
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(expectedCalls);
 
-			const actions: ReadonlyArray<CallInfo<CallableRoutingAction>> = mockStore.dispatch.calls.all();
+			const actions: ReadonlyArray<CallInfo<CallableRoutingAction>> = (<Spy>mockStore.dispatch).calls.all();
 			const actionIndex: number = 16 + 12;
 
 			for (let i = 0; i < actions.length; i++) {
 				const action: CallInfo<CallableRoutingAction> = actions[i];
 
 				if (i === actionIndex) {
-					expect(action.args[0].type).toBe(StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED);
+					expect(action.args[0].type).toBe(StarkRoutingActions.navigationHistoryLimitReached.type);
 				} else if (i <= actionIndex + 2) {
-					expect(action.args[0].type).toContain(StarkRoutingActionTypes.NAVIGATE);
+					expect(action.args[0].type).toContain(StarkRoutingActions.navigate.type);
 				} else {
-					expect(action.args[0].type).toBe(StarkRoutingActionTypes.NAVIGATION_HISTORY_LIMIT_REACHED);
+					expect(action.args[0].type).toBe(StarkRoutingActions.navigationHistoryLimitReached.type);
 				}
 			}
 		}));

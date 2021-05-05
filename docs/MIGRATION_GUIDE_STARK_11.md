@@ -12,6 +12,7 @@ Due to changes in Stark-Build, it is required to make some minor changes in "ang
 #### 1.1. Edit `projects.<project_name>.architect.build.options`:
 
 Before:
+
 ```txt
 {
   // ...
@@ -41,6 +42,7 @@ Before:
 ```
 
 After:
+
 ```txt
 {
   // ...
@@ -129,7 +131,7 @@ After:
 }
 ```
 
-#### 1.3. Edit `projects.<project_name>.architect.serve.builder`: 
+#### 1.3. Edit `projects.<project_name>.architect.serve.builder`:
 
 Before:
 
@@ -231,13 +233,13 @@ After:
 }
 ```
 
-
 ### 2. Adapt "src/index.html" file
 
 As `htmlWebpackPlugin` is no longer supported by Angular CLI, the options related to this plugin have been changed.
 Instead of using `htmlWebpackPlugin`, you need to use `starkOptions` like this:
 
 Before:
+
 ```html
 <%= htmlWebpackPlugin.options.starkAppMetadata.name %>
 <!-- or -->
@@ -257,6 +259,7 @@ After:
 ```
 
 Thanks to the following search & replace:
+
 - search: `htmlWebpackPlugin.options.`
 - replace: `starkOptions.`
 
@@ -275,29 +278,472 @@ This lazy load mechanism is deprecated in Angular 8 in favor of:
 
 See: https://github.com/ui-router/angular/commit/2f1506c
 
-#### 1.2. `NgModuleFactoryLoader` is no longer needed and must be removed 
+#### 1.2. `NgModuleFactoryLoader` is no longer needed and must be removed
 
 Due to the previous change, the following `provider` must be removed from "src/app/app.module.ts":
 
-  ```typescript
-  @NgModule({
+```typescript
+@NgModule({
+  // ...
+  providers: [
     // ...
-    providers: [
-      // ...
-      // /!\ Remove the following line
-      { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
-    ]
-  })
-  ```
+    // /!\ Remove the following line
+    { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
+  ]
+})
+```
+
+### Update ngrx action usage
+
+#### Remove obsolete `ngrx-store-freeze` dependency
+
+Remove `ngrx-store-freeze` dependency in favor of new built-in runtime checks in `@ngrx/store@8.x`.
+
+Adapt code as follows in "src/app/app.module.ts":
+
+```ts
+// Before
+import { storeFreeze } from "ngrx-store-freeze";
+//...
+export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logger, storeFreeze] : [];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    StoreModule.forRoot(reducer, {
+      metaReducers: metaReducers
+    })
+  ]
+})
+export class AppModule {}
+
+// After
+export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logger] : [];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    StoreModule.forRoot(rootReducer, {
+      metaReducers: metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    })
+  ]
+})
+export class AppModule {}
+```
+
+More information: https://ngrx.io/guide/migration/v8#deprecation-of-ngrx-store-freeze
+
+#### Details about changes
+
+Previous union types have been replaced as following:
+
+- `StarkErrorHandlingActions` -> `StarkErrorHandlingActions.Types`
+- `StarkLoggingActions` -> `StarkLoggingActions.Types`
+- `StarkRoutingActions` -> `StarkRoutingActions.Types`
+- `StarkSessionActions` -> `StarkSessionActions.Types`
+- `StarkSettingsActions` -> `StarkSettingsActions.Types`
+- `StarkUserActions` -> `StarkUserActions.Types`
+
+The following actions have been changed and should be used as follows:
+
+##### Error handling actions:
+
+- `StarkUnhandledError(public error: any)` -> `StarkErrorHandlingActions.unhandledError({ error: any })`
+
+Due to this change, The `StarkErrorHandlingActionsTypes` enum has been removed.
+
+##### Logging actions:
+
+- `StarkSetLoggingApplicationId(public applicationId: string)` -> `StarkLoggingActions.setLoggingApplicationId({ applicationId: string })`
+- `StarkLogMessageAction(public message: StarkLogMessage)` -> `StarkLoggingActions.logMessage({ message: StarkLogMessage })`
+- `StarkFlushLogMessages(public numberOfMessagesToFlush: number)` -> `StarkLoggingActions.flushLogMessages({ numberOfMessagesToFlush: number })`
+
+Due to this change, The `StarkLoggingActionsTypes` enum has been removed.
+
+##### Routing actions
+
+- `StarkNavigate( public currentState: string, public newState: string, public params?: RawParams, public options?: TransitionOptions )`
+  -> `StarkRoutingActions.navigate({ currentState: string; newState: string; params?: RawParams; options?: TransitionOptions })`
+- `StarkNavigateSuccess((public previousState: string, public currentState: string, public params?: RawParams))`
+  -> `StarkRoutingActions.navigateSuccess({ previousState: string; currentState: string; params?: RawParams })`
+- `StarkNavigateFailure(public currentState: string, public newState: string, public params: RawParams, public error: string)`
+  -> `StarkRoutingActions.navigateFailure({ currentState: string; newState: string; params?: RawParams; error: string })`
+- `StarkNavigateRejection(public currentState: string, public newState: string, public params: RawParams, public reason: string)`
+  -> `StarkRoutingActions.navigateRejection({ currentState: string; newState: string; params: RawParams; reason: string })`
+- `StarkNavigationHistoryLimitReached()` -> `StarkRoutingActions.navigationHistoryLimitReached()`
+- `StarkReload(public state: string)` -> `StarkRoutingActions.reload({ state: string })`
+- `StarkReloadSuccess(public state: string, public params: RawParams)` -> `StarkRoutingActions.reloadSuccess({ state: string; params: RawParams })`
+- `StarkReloadFailure(public state: string, public params: RawParams)` -> `StarkRoutingActions.reloadFailure({ state: string; params: RawParams })`
+
+Due to this change, The `StarkRoutingActionsTypes` enum has been removed.
+
+##### Session actions:
+
+- `StarkChangeLanguage(public languageId: string)` -> `StarkSessionActions.changeLanguage({ languageId: string })`
+- `StarkChangeLanguageSuccess(public languageId: string)` -> `StarkSessionActions.changeLanguageSuccess({ languageId: string })`
+- `StarkChangeLanguageFailure(public error: any)` -> `StarkSessionActions.changeLanguageFailure({ error: any })`
+- `StarkInitializeSession(public user: StarkUser)` -> `StarkSessionActions.initializeSession({ user: StarkUser })`
+- `StarkInitializeSessionSuccess()` -> `StarkSessionActions.initializeSessionSuccess()`
+- `StarkDestroySession()` -> `StarkSessionActions.destroySession()`
+- `StarkDestroySessionSuccess()` -> `StarkSessionActions.destroySessionSuccess()`
+- `StarkSessionTimeoutCountdownStart(public countdown: number)` -> `StarkSessionActions.sessionTimeoutCountdownStart({ countdown: number })`
+- `StarkSessionTimeoutCountdownStop()` -> `StarkSessionActions.sessionTimeoutCountdownStop()`
+- `StarkSessionTimeoutCountdownFinish()` -> `StarkSessionActions.sessionTimeoutCountdownFinish()`
+- `StarkSessionLogout()` -> `StarkSessionActions.sessionLogout()`
+- `StarkUserActivityTrackingPause()` -> `StarkSessionActions.userActivityTrackingPause()`
+- `StarkUserActivityTrackingResume()` -> `StarkSessionActions.userActivityTrackingResume()`
+
+Due to this change, The `StarkSessionActionsTypes` enum has been removed.
+
+##### Settings actions:
+
+- `StarkPersistPreferredLanguage(public language: string)` -> `StarkSettingsActions.persistPreferredLanguage({ language: string })`
+- `StarkPersistPreferredLanguageSuccess()` -> `StarkSettingsActions.persistPreferredLanguageSuccess()`
+- `StarkPersistPreferredLanguageFailure(public error: any)` -> `StarkSettingsActions.persistPreferredLanguageFailure({ error: any })`
+- `StarkSetPreferredLanguage(public language: string)` -> `StarkSettingsActions.setPreferredLanguage({ language: string })`
+
+Due to this change, The `StarkSettingsActionsTypes` enum has been removed.
+
+##### User actions:
+
+- `StarkFetchUserProfile()` -> `StarkUserActions.fetchUserProfile()`
+- `StarkFetchUserProfileSuccess(public user: StarkUser)` -> `StarkUserActions.fetchUserProfileSuccess({ user: StarkUser })`
+- `StarkFetchUserProfileFailure(public error: StarkHttpErrorWrapper | Error)`
+  -> `StarkUserActions.fetchUserProfileFailure({ error: StarkHttpErrorWrapper | Error })`
+- `StarkGetAllUsers()` -> `StarkUserActions.getAllUsers()`
+- `StarkGetAllUsersSuccess(public users: StarkUser[])` -> `StarkUserActions.getAllUsersSuccess({ users: StarkUser[] })`
+- `StarkGetAllUsersFailure(public message: string)` -> `StarkUserActions.getAllUsersFailure({ message: string })`
+
+Due to this change, The `StarkUserActionTypes` enum has been removed.
+
+##### Changes in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkNavigateSuccess$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkNavigateSuccess>(StarkRoutingActionsTypes.NAVIGATE_SUCCESS),
+        map((action: StarkNavigateSuccess) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkNavigateSuccess$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkRoutingActions.navigateSuccess),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+#### Using regex to quickly update:
+
+##### Error handling actions:
+
+- StarkUnhandledError:
+  - Search: `new StarkUnhandledError\((\w+)\)`
+  - Replace: `StarkErrorHandlingActions.unhandledError({ error: $1 })`
+
+##### Logging actions:
+
+- StarkSetLoggingApplicationId:
+  - Search: `new StarkSetLoggingApplicationId\((\w+)\)`
+  - Replace: `StarkLoggingActions.setLoggingApplicationId({ applicationId: $1 })`
+- StarkLogMessageAction:
+  - Search: `new StarkLogMessageAction\((\w+)\)`
+  - Replace: `StarkLoggingActions.logMessage({ message: $1 })`
+- StarkFlushLogMessages:
+  - Search: `new StarkFlushLogMessages\((\w+)\)`
+  - Replace: `StarkLoggingActions.flushLogMessages({ numberOfMessagesToFlush: $1 })`
+
+##### Routing actions
+
+- StarkNavigate:
+  - Search: `new StarkNavigate\((\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.navigate({ currentState: $1, newState: $2 })`
+- StarkNavigate (3 parameters):
+  - Search: `new StarkNavigate\((\w+), (\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.navigate({ currentState: $1, newState: $2, params: $3 })`
+- StarkNavigate (4 parameters):
+  - Search: `new StarkNavigate\((\w+), (\w+), (\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.navigate({ currentState: $1, newState: $2, params: $3, options: $4 })`
+- StarkNavigateSuccess:
+  - Search: `new StarkNavigateSuccess\((\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.navigateSuccess({ previousState: $1, currentState: $2 })`
+- StarkNavigateSuccess (3 parameters):
+  - Search: `new StarkNavigateSuccess\((\w+), (\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.navigateSuccess({ previousState: $1, currentState: $2, params: $3 })`
+- StarkNavigateFailure:
+  - Search: `new StarkNavigateFailure\((\w+), (\w+), (\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.navigateFailure({ currentState: $1, newState: $2, params: $3, error: $4 })`
+- StarkNavigateRejection:
+  - Search: `new StarkNavigateRejection\((\w+), (\w+), (\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.navigateFailure({ currentState: $1, newState: $2, params: $3, reason: $4 })`
+- StarkNavigationHistoryLimitReached:
+  - Search: `new StarkNavigationHistoryLimitReached\(\)`
+  - Replace: `StarkRoutingActions.navigationHistoryLimitReached()`
+- StarkReload:
+  - Search: `new StarkReload\((\w+)\)`
+  - Replace: `StarkRoutingActions.reload({ state: $1 })`
+- StarkReloadSuccess:
+  - Search: `new StarkReloadSuccess\((\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.reloadSuccess({ state: $1, params: $2 })`
+- StarkReloadFailure:
+  - Search: `new StarkReloadFailure\((\w+), (\w+)\)`
+  - Replace: `StarkRoutingActions.reloadFailure({ state: $1, params: $2 })`
+
+##### Session actions:
+
+- StarkChangeLanguage:
+  - Search: `new StarkChangeLanguage\((\w+)\)`
+  - Replace: `StarkSessionActions.changeLanguage({ languageId: $1 })`
+- StarkChangeLanguageSuccess:
+  - Search: `new StarkChangeLanguageSuccess\((\w+)\)`
+  - Replace: `StarkSessionActions.changeLanguageSuccess({ languageId: $1 })`
+- StarkChangeLanguageFailure:
+  - Search: `new StarkChangeLanguageFailure\((\w+)\)`
+  - Replace: `StarkSessionActions.changeLanguageFailure({ error: $1 })`
+- StarkInitializeSession:
+  - Search: `new StarkInitializeSession\((\w+)\)`
+  - Replace: `StarkSessionActions.initializeSession({ user: $1 })`
+- StarkInitializeSessionSuccess:
+  - Search: `new StarkInitializeSessionSuccess\(\)`
+  - Replace: `StarkSessionActions.initializeSessionSuccess()`
+- StarkDestroySession:
+  - Search: `new StarkDestroySession\(\)`
+  - Replace: `StarkSessionActions.destroySession()`
+- StarkDestroySessionSuccess:
+  - Search: `new StarkDestroySessionSuccess\(\)`
+  - Replace: `StarkSessionActions.destroySessionSuccess()`
+- StarkSessionTimeoutCountdownStart:
+  - Search: `new StarkSessionTimeoutCountdownStart\((\w+)\)`
+  - Replace: `StarkSessionActions.sessionTimeoutCountdownStart({ countdown: $1 })`
+- StarkSessionTimeoutCountdownStop:
+  - Search: `new StarkSessionTimeoutCountdownStop\(\)`
+  - Replace: `StarkSessionActions.sessionTimeoutCountdownStop()`
+- StarkSessionTimeoutCountdownFinish:
+  - Search: `new StarkSessionTimeoutCountdownFinish\(\)`
+  - Replace: `StarkSessionActions.sessionTimeoutCountdownFinish()`
+- StarkSessionLogout:
+  - Search: `new StarkSessionLogout\(\)`
+  - Replace: `StarkSessionActions.sessionLogout()`
+- StarkUserActivityTrackingPause:
+  - Search: `new StarkUserActivityTrackingPause\(\)`
+  - Replace: `StarkSessionActions.userActivityTrackingPause()`
+- StarkUserActivityTrackingResume:
+  - Search: `new StarkUserActivityTrackingResume\(\)`
+  - Replace: `StarkSessionActions.userActivityTrackingResume()`
+
+##### Settings actions:
+
+- StarkPersistPreferredLanguage:
+  - Search: `new StarkPersistPreferredLanguage\((\w+)\)`
+  - Replace: `StarkSettingsActions.persistPreferredLanguage({ language: $1 })`
+- StarkPersistPreferredLanguageSuccess:
+  - Search: `new StarkPersistPreferredLanguageSuccess\(\)`
+  - Replace: `StarkSettingsActions.persistPreferredLanguageSuccess()`
+- StarkPersistPreferredLanguageFailure:
+  - Search: `new StarkPersistPreferredLanguageFailure\((\w+)\)`
+  - Replace: `StarkSettingsActions.persistPreferredLanguageFailure({ error: $1 })`
+- StarkSetPreferredLanguage:
+  - Search: `new StarkSetPreferredLanguage\((\w+)\)`
+  - Replace: `StarkSettingsActions.setPreferredLanguage({ language: $1 })`
+
+##### User actions:
+
+- StarkFetchUserProfile:
+  - Search: `new StarkFetchUserProfile\(\)`
+  - Replace: `StarkUserActions.fetchUserProfile()`
+- StarkFetchUserProfileSuccess:
+  - Search: `new StarkFetchUserProfileSuccess\((\w+)\)`
+  - Replace: `StarkUserActions.fetchUserProfileSuccess({ user: $1 })`
+- StarkFetchUserProfileFailure:
+  - Search: `new StarkFetchUserProfileFailure\((\w+)\)`
+  - Replace: `StarkUserActions.fetchUserProfileSuccess({ error: $1 })`
+- StarkGetAllUsers:
+  - Search: `new StarkGetAllUsers\(\)`
+  - Replace: `StarkUserActions.getAllUsers()`
+- StarkGetAllUsersSuccess:
+  - Search: `new StarkGetAllUsersSuccess\((\w+)\)`
+  - Replace: `StarkUserActions.getAllUsersSuccess({ users: $1 })`
+- StarkGetAllUsersSuccess (with inline array)
+  - Search: `new StarkGetAllUsersSuccess\((\[\w+\])\)`
+  - Replace: `StarkUserActions.getAllUsersSuccess({ users: $1 })`
+- StarkGetAllUsersFailure:
+  - Search: `new StarkGetAllUsersFailure\((\w+)\)`
+  - Replace: `StarkUserActions.getAllUsersFailure({ message: $1 })`
 
 ## Stark-RBAC
 
-To complete
+### Update ngrx action usage
+
+#### Details about changes
+
+**RBAC Authorization actions:**
+
+The following actions have been changed and should be used as follows:
+
+- `StarkUserNavigationUnauthorized(public targetState: string)` -> `StarkRBACAuthorizationActions.userNavigationUnauthorized({ targetState: string })`
+- `StarkUserNavigationUnauthorizedRedirected(public targetState: string, public redirectionState: string)` -> `StarkRBACAuthorizationActions.userNavigationUnauthorizedRedirected({ targetState: string; redirectionState: string })`
+
+Due to this change, The `StarkRBACAuthorizationActionsTypes` enum has been removed.
+
+Previous union type has been replaced: `StarkRBACAuthorizationActions` -> `StarkRBACAuthorizationActions.Types`.
+
+Usage of action has changed as follows:
+
+##### Changes in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkRBACNavigationUnauthorized$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkUserNavigationUnauthorized>(StarkRBACAuthorizationActionsTypes.RBAC_USER_NAVIGATION_UNAUTHORIZED),
+        map((action: StarkUserNavigationUnauthorized) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkRBACNavigationUnauthorizedRedirected$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkRBACAuthorizationActions.userNavigationUnauthorized),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+##### Changes in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkUserNavigationUnauthorized(transition.targetState().name()));
+
+// After
+this.store.dispatch(StarkRBACAuthorizationActions.userNavigationUnauthorized({ targetState: transition.targetState().name() }));
+```
+
+#### Using regex to quickly update:
+
+**RBAC Authorization actions:**
+
+- StarkUserNavigationUnauthorized:
+  - Search: `new StarkUserNavigationUnauthorized\((\w+)\)`
+  - Replace: `StarkRBACAuthorizationActions.userNavigationUnauthorized({ targetState: $1 })`
+- StarkUserNavigationUnauthorizedRedirected:
+  - Search: `new StarkUserNavigationUnauthorizedRedirected\((\w+), (\w+)\)`
+  - Replace: `StarkRBACAuthorizationActions.userNavigationUnauthorizedRedirected({ targetState: $1, redirectionState: $2 })`
 
 ## Stark-Testing
 
 To complete
 
-## Starl-UI
+## Stark-UI
 
-To complete
+### Update ngrx action usage
+
+#### Details about changes
+
+The following actions have been changed and should be used as follows:
+
+##### Message Pane actions:
+
+- `StarkAddMessages(public messages: StarkMessage[])` -> `StarkMessagePaneActions.addMessages({ messages: StarkMessage[] })`
+- `StarkRemoveMessages(public messages: StarkMessage[])` -> `StarkMessagePaneActions.removeMessages({ messages: StarkMessage[] })`
+- `StarkClearMessages()` -> `StarkMessagePaneActions.clearMessages()`
+- `StarkGetAllMessages()` -> `StarkMessagePaneActions.getAllMessages()`
+
+##### Progress Indicator actions:
+
+- `StarkProgressIndicatorRegister(public progressIndicatorConfig: StarkProgressIndicatorFullConfig)` -> `StarkProgressIndicatorActions.register({ progressIndicatorConfig: StarkProgressIndicatorFullConfig })`
+- `StarkProgressIndicatorDeregister(public topic: string)` -> `StarkProgressIndicatorActions.deregister({ topic: string })`
+- `StarkProgressIndicatorHide(public topic: string)` -> `StarkProgressIndicatorActions.hide({ topic: string })`
+- `StarkProgressIndicatorShow(public topic: string)` -> `StarkProgressIndicatorActions.show({ topic: string })`
+
+Previous union type have been replaced:
+
+- `StarkMessagePaneActions` -> `StarkMessagePaneActions.Types`.
+- `StarkProgressIndicatorActions` -> `StarkProgressIndicatorActions.Types`.
+
+##### Changes in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkAddMessages$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkAddMessages>(StarkMessagePaneActionsTypes.ADD_MESSAGES),
+        map((action: StarkAddMessages) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkAddMessages$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkMessagePaneActions.addMessages),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+##### Changes in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkAddMessages(messages));
+
+// After
+this.store.dispatch(StarkMessagePaneActions.addMessages({ messages: messages }));
+```
+
+#### Using regex to quickly update:
+
+##### Message Pane actions:
+
+- StarkAddMessages:
+  - Search: `new StarkAddMessages\((\w+)\)`
+  - Replace: `StarkMessagePaneActions.addMessages({ messages: $1 })`
+- StarkAddMessages (with inline array)
+  - Search: `new StarkAddMessages\((\[\w+\])\)`
+  - Replace: `StarkMessagePaneActions.addMessages({ messages: $1 })`
+- StarkRemoveMessages:
+  - Search: `new StarkRemoveMessages\((\w+)\)`
+  - Replace: `StarkMessagePaneActions.removeMessages({ messages: $1 })`
+- StarkClearMessages
+  - Search: `new StarkClearMessages\(\)`
+  - Replace: `StarkMessagePaneActions.clearMessages()`
+
+##### Progress Indicator actions:
+
+- StarkProgressIndicatorRegister:
+  - Search: `new StarkProgressIndicatorRegister\((\w+)\)`
+  - Replace: `StarkProgressIndicatorFullConfig.register({ progressIndicatorConfig: $1 })`
+- StarkProgressIndicatorDeregister:
+  - Search: `new StarkProgressIndicatorDeregister\((\w+)\)`
+  - Replace: `StarkProgressIndicatorFullConfig.deregister({ topic: $1 })`
+- StarkProgressIndicatorHide:
+  - Search: `new StarkProgressIndicatorHide\((\w+)\)`
+  - Replace: `StarkProgressIndicatorFullConfig.hide({ topic: $1 })`
+- StarkProgressIndicatorShow
+  - Search: `new StarkProgressIndicatorShow\((\w+)\)`
+  - Replace: `StarkProgressIndicatorFullConfig.show({ topic: $1 })`

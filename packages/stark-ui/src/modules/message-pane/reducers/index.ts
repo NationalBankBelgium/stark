@@ -1,7 +1,8 @@
-import { ActionReducerMap, createFeatureSelector, createSelector, MemoizedSelector } from "@ngrx/store";
+import { ActionReducerMap, createFeatureSelector, createSelector } from "@ngrx/store";
 import { StarkMessageCollection } from "../entities";
 import { StarkMessagePaneActions } from "../actions";
 import { messagesReducer } from "./messages-pane.reducer";
+import { starkMessagePaneStoreKey } from "../constants";
 
 /**
  * Defines the part of the state assigned to the {@link StarkMessagePaneModule}
@@ -16,7 +17,7 @@ export interface StarkMessageState {
 /**
  * Reducers assigned to the each property of the {@link StarkMessagePaneModule}'s state
  */
-export const starkMessagesReducers: ActionReducerMap<StarkMessageState, StarkMessagePaneActions> = {
+export const starkMessagesReducers: ActionReducerMap<StarkMessageState, StarkMessagePaneActions.Types> = {
 	/**
 	 * Reducer assigned to the state's `messages` property
 	 */
@@ -26,7 +27,7 @@ export const starkMessagesReducers: ActionReducerMap<StarkMessageState, StarkMes
 /**
  * NGRX Selector for the {@link StarkMessagePaneModule}'s state
  */
-export const selectStarkMessages: MemoizedSelector<object, StarkMessageCollection> = createSelector(
-	createFeatureSelector<StarkMessageState>("StarkMessages"),
+export const selectStarkMessages = createSelector(
+	createFeatureSelector<StarkMessageState>(starkMessagePaneStoreKey),
 	(state: StarkMessageState) => state.messages
 );

@@ -7,13 +7,7 @@ import { EffectNotification } from "@ngrx/effects";
 import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import {
-	STARK_SESSION_SERVICE,
-	StarkInitializeSession,
-	StarkSessionService,
-	StarkSessionTimeoutCountdownFinish,
-	StarkSessionTimeoutCountdownStart
-} from "@nationalbankbelgium/stark-core";
+import { STARK_SESSION_SERVICE, StarkSessionActions, StarkSessionService } from "@nationalbankbelgium/stark-core";
 import { MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 import { StarkSessionTimeoutWarningDialogEffects } from "../effects";
@@ -78,12 +72,12 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
 			actions = subject.asObservable();
 
-			effectsClass.starkSessionTimeoutWarning$().subscribe(mockObserver);
+			effectsClass.starkSessionTimeoutWarning$.subscribe(mockObserver);
 
 			expect(mockSessionService.pauseUserActivityTracking).not.toHaveBeenCalled();
 			expect(mockDialogService.open).not.toHaveBeenCalled();
 
-			subject.next(new StarkSessionTimeoutCountdownStart(20));
+			subject.next(StarkSessionActions.sessionTimeoutCountdownStart({ countdown: 20 }));
 
 			expect(mockSessionService.pauseUserActivityTracking).toHaveBeenCalled();
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);
@@ -110,11 +104,11 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
 			actions = subject.asObservable();
 
-			effectsClass.starkSessionTimeoutWarningClose$().subscribe(mockObserver);
+			effectsClass.starkSessionTimeoutWarningClose$.subscribe(mockObserver);
 
 			expect(mockDialogService.closeAll).not.toHaveBeenCalled();
 
-			subject.next(new StarkSessionTimeoutCountdownFinish());
+			subject.next(StarkSessionActions.sessionTimeoutCountdownFinish());
 
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockObserver.error).not.toHaveBeenCalled();
@@ -146,7 +140,7 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 			actions$.next("dummy acton");
 			actions$.next("another dummy acton");
 
-			actions$.next(new StarkInitializeSession(<any>{}));
+			actions$.next(StarkSessionActions.initializeSession({ user: <any>{} }));
 			mockResolvedEffectsSubject.next("this should never be emitted");
 
 			expect(mockObserver.next).not.toHaveBeenCalled();

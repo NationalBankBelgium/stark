@@ -191,58 +191,34 @@ export class MovieSearchFormComponent implements OnInit, OnChanges, StarkSearchF
 
 Under the `src/app/modules/<module-name>/actions` folder create the files **movies-search.actions.ts** and **index.ts**.
 
-Obviously, you'll have to export everything from your _actions.ts_ file in your barrel (index.ts).
-
 #### 2.3.2. Define the actions
 
 The following actions should be defined to make your GenericSearch working perfectly.
 
 ```typescript
-import { Action } from "@ngrx/store";
+import { createAction, props, union } from "@ngrx/store";
 import { MovieSearchCriteria } from "../entities";
 
-export enum MovieActionTypes {
-  SET_MOVIE_SEARCH_CRITERIA = "[MovieSearch] Set criteria",
-  REMOVE_MOVIE_SEARCH_CRITERIA = "[MovieSearch] Remove criteria",
-  MOVIE_HAS_SEARCHED = "[MovieSearch] Has searched",
-  MOVIE_HAS_SEARCHED_RESET = "[MovieSearch] Has searched reset"
-}
+export const setCriteria = createAction("[MovieSearch] Set criteria", props<{ criteria: MovieSearchCriteria }>());
+export const removeCriteria = createAction("[MovieSearch] Remove criteria");
+export const hasSearched = createAction("[MovieSearch] Has searched");
+export const hasSearchedReset = createAction("[MovieSearch] Has searched reset");
 
-export class MovieSearchSetCriteria implements Action {
-  /**
-   * The type of action
-   */
-  public readonly type: MovieActionTypes.SET_MOVIE_SEARCH_CRITERIA = MovieActionTypes.SET_MOVIE_SEARCH_CRITERIA;
-  /**
-   * Class constructor
-   * @param criteria - Criteria to be set
-   */
-  public constructor(public criteria: MovieSearchCriteria) {}
-}
-
-export class MovieSearchRemoveCriteria implements Action {
-  /**
-   * The type of action
-   */
-  public readonly type: MovieActionTypes.REMOVE_MOVIE_SEARCH_CRITERIA = MovieActionTypes.REMOVE_MOVIE_SEARCH_CRITERIA;
-}
-
-export class MovieSearchHasSearched implements Action {
-  /**
-   * The type of action
-   */
-  public readonly type: MovieActionTypes.MOVIE_HAS_SEARCHED = MovieActionTypes.MOVIE_HAS_SEARCHED;
-}
-
-export class MovieSearchHasSearchedReset implements Action {
-  /**
-   * The type of action
-   */
-  public readonly type: MovieActionTypes.MOVIE_HAS_SEARCHED_RESET = MovieActionTypes.MOVIE_HAS_SEARCHED_RESET;
-}
-
-export type MovieSearchActions = MovieSearchRemoveCriteria | MovieSearchHasSearchedReset | MovieSearchHasSearched | MovieSearchSetCriteria;
+/**
+ * @ignore
+ */
+const all = union({ setCriteria, removeCriteria, hasSearched, hasSearchedReset });
+export type Types = typeof all;
 ```
+
+#### 2.3.3 Export the actions in barrel file
+
+Export all the actions as follows in your barrel (index.ts):
+
+import * as MovieSearchActions from "./movies-search.actions";
+export { MovieSearchActions };
+
+Obviously, you'll have to export everything from your _actions.ts_ file in your barrel (index.ts).
 
 ### 2.4. Create the search reducers
 
@@ -258,30 +234,28 @@ Don't forget to rename every variable and function that contain "movies" with yo
 
 ```typescript
 import { StarkSearchState } from "@nationalbankbelgium/stark-ui";
+import { createReducer, on } from "@ngrx/store";
 import { MovieSearchCriteria } from "../entities/movies-search.entity";
-import { MovieActionTypes, MovieSearchActions } from "../actions";
+import { MovieSearchActions } from "../actions";
 
 const INITIAL_STATE: Readonly<StarkSearchState<MovieSearchCriteria>> = {
   criteria: new MovieSearchCriteria(),
   hasBeenSearched: false
 };
 
-export function demoGenericSearchReducer(
-  state: Readonly<StarkSearchState<MovieSearchCriteria>> = INITIAL_STATE,
-  action: Readonly<MovieSearchActions>
+const reducer = createReducer<StarkSearchState<MovieSearchCriteria>, MovieSearchActions.Types>(
+  INITIAL_STATE,
+  on(DemoGenericSearchActions.setCriteria, (state, action) => ({ ...state, criteria: action.criteria })),
+  on(DemoGenericSearchActions.removeCriteria, (state) => ({ ...state, criteria: INITIAL_STATE.criteria })),
+  on(DemoGenericSearchActions.hasSearched, (state) => ({ ...state, hasBeenSearched: true })),
+  on(DemoGenericSearchActions.hasSearchedReset, (state) => ({ ...state, hasBeenSearched: false }))
+)
+
+export function movieSearchReducer(
+  state: Readonly<StarkSearchState<MovieSearchCriteria>> | undefined,
+  action: Readonly<MovieSearchActions.Types>
 ): Readonly<StarkSearchState<MovieSearchCriteria>> {
-  switch (action.type) {
-    case MovieActionTypes.SET_MOVIE_SEARCH_CRITERIA:
-      return { ...state, criteria: action.criteria };
-    case MovieActionTypes.REMOVE_MOVIE_SEARCH_CRITERIA:
-      return { ...state, criteria: INITIAL_STATE.criteria };
-    case MovieActionTypes.MOVIE_HAS_SEARCHED:
-      return { ...state, hasBeenSearched: true };
-    case MovieActionTypes.MOVIE_HAS_SEARCHED_RESET:
-      return { ...state, hasBeenSearched: false };
-    default:
-      return state;
-  }
+	return reducer(state, action);
 }
 ```
 
@@ -302,7 +276,7 @@ export interface MovieSearchState {
   movieSearch: StarkSearchState<MovieSearchCriteria>;
 }
 
-export const movieSearchReducers: ActionReducerMap<MovieSearchState, MovieSearchActions> = {
+export const movieSearchReducers: ActionReducerMap<MovieSearchState, MovieSearchActions.Types> = {
   movieSearch: movieSearchReducer
 };
 
@@ -383,7 +357,7 @@ import { MovieObject, MovieSearchCriteria } from "../entities";
 import { MovieSearchState, selectMovieSearch } from "../reducers";
 import { MOVIE_REPOSITORY, MovieRepository } from "../repositories";
 import { Store, select } from "@ngrx/store";
-import { MovieSearchHasSearched, MovieSearchHasSearchedReset, MovieSearchRemoveCriteria, MovieSearchSetCriteria } from "../actions";
+import { MovieSearchActions } from "../actions";
 
 @Injectable()
 export class DemoGenericServiceImpl implements MovieService {
@@ -394,13 +368,13 @@ export class DemoGenericServiceImpl implements MovieService {
   }
 
   public resetSearchState(): void {
-    this.store.dispatch(new MovieSearchRemoveCriteria());
-    this.store.dispatch(new MovieSearchHasSearchedReset());
+    this.store.dispatch(MovieSearchActions.removeCriteria());
+    this.store.dispatch(MovieSearchActions.hasSearchedReset());
   }
 
   public search(criteria: MovieSearchCriteria): Observable<MovieObject[]> {
-    this.store.dispatch(new MovieSearchSetCriteria(criteria));
-    this.store.dispatch(new MovieSearchHasSearched());
+    this.store.dispatch(MovieSearchActions.setCriteria({criteria}));
+    this.store.dispatch(MovieSearchActions.hasSearched());
 
     return this.movieRepository.search(criteria);
   }

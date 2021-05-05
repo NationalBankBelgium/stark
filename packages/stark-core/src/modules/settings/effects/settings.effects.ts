@@ -1,9 +1,8 @@
 import { Inject, Injectable } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
-import { Observable } from "rxjs";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map } from "rxjs/operators";
 
-import { StarkSetPreferredLanguage, StarkSettingsActionTypes } from "../actions";
+import { StarkSettingsActions } from "../actions";
 import { STARK_SESSION_SERVICE, StarkSessionService } from "../../session/services";
 
 /**
@@ -23,11 +22,12 @@ export class StarkSettingsEffects {
 	 *
 	 * `dispatch: false` => because this effect does not dispatch an action
 	 */
-	@Effect({ dispatch: false })
-	public setPreferredLanguage$(): Observable<void> {
-		return this.actions$.pipe(
-			ofType<StarkSetPreferredLanguage>(StarkSettingsActionTypes.SET_PREFERRED_LANGUAGE),
-			map((action: StarkSetPreferredLanguage) => this.sessionService.setCurrentLanguage(action.language))
-		);
-	}
+	public setPreferredLanguage$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(StarkSettingsActions.setPreferredLanguage),
+				map((action) => this.sessionService.setCurrentLanguage(action.language))
+			),
+		{ dispatch: false }
+	);
 }

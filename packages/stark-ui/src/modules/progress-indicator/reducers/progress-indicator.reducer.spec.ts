@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs*/
 import { progressIndicatorReducer } from "./progress-indicator.reducer";
 import { StarkProgressIndicatorFullConfig, StarkProgressIndicatorFullConfigImpl, StarkProgressIndicatorType } from "../entities";
-import { StarkProgressIndicatorActionTypes, StarkProgressIndicatorRegister } from "../actions";
+import { StarkProgressIndicatorActions } from "../actions";
 
 const deepFreeze: Function = require("deep-freeze-strict");
 
@@ -17,13 +17,13 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 		mockProgressIndicator = new StarkProgressIndicatorFullConfigImpl("dummy", StarkProgressIndicatorType.SPINNER, false);
 	});
 
-	describe("on PROGRESS_INDICATOR_REGISTER", () => {
+	describe("on `StarkProgressIndicatorActions.register`", () => {
 		it("should add the progressIndicator when state given", () => {
 			deepFreeze(initialState); // Enforce immutability
 			const config = mockProgressIndicator;
 			deepFreeze(config); // Enforce immutability
 
-			changedState = progressIndicatorReducer(initialState, new StarkProgressIndicatorRegister(config));
+			changedState = progressIndicatorReducer(initialState, StarkProgressIndicatorActions.register({progressIndicatorConfig: config}));
 			expect(changedState.size).toBe(1);
 			expect(changedState.get(mockProgressIndicator.topic)).toBe(mockProgressIndicator);
 		});
@@ -32,15 +32,15 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			const config = mockProgressIndicator;
 			deepFreeze(config); // Enforce immutability
 
-			// Send the PROGRESS_INDICATOR_REGISTER action to the progressIndicatorReducer
-			changedState = progressIndicatorReducer(<any>undefined, new StarkProgressIndicatorRegister(config));
+			// Send the `StarkProgressIndicatorActions.register` action to the progressIndicatorReducer
+			changedState = progressIndicatorReducer(<any>undefined, StarkProgressIndicatorActions.register({progressIndicatorConfig: config}));
 
 			expect(changedState.size).toBe(1);
 			expect(changedState.get(mockProgressIndicator.topic)).toBe(mockProgressIndicator);
 		});
 	});
 
-	describe("on PROGRESS_INDICATOR_DEREGISTER", () => {
+	describe("on `StarkProgressIndicatorActions.deregister`", () => {
 		it("should remove the progressIndicator when state given", () => {
 			// create the initial state object
 			initialState.set(mockProgressIndicator.topic, mockProgressIndicator);
@@ -48,9 +48,9 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			const topic = mockProgressIndicator.topic;
 			deepFreeze(topic); // Enforce immutability
 
-			// Send the PROGRESS_INDICATOR_DEREGISTER action to the progressIndicatorReducer
+			// Send the `StarkProgressIndicatorActions.deregister` action to the progressIndicatorReducer
 			changedState = progressIndicatorReducer(initialState, {
-				type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_DEREGISTER,
+				type: StarkProgressIndicatorActions.deregister.type,
 				topic
 			});
 
@@ -62,9 +62,9 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			const topic = mockProgressIndicator.topic;
 			deepFreeze(topic); // Enforce immutability
 
-			// Send the PROGRESS_INDICATOR_DEREGISTER action to the progressIndicatorReducer
+			// Send the `StarkProgressIndicatorActions.deregister` action to the progressIndicatorReducer
 			changedState = progressIndicatorReducer(<any>undefined, {
-				type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_DEREGISTER,
+				type: StarkProgressIndicatorActions.deregister.type,
 				topic
 			});
 
@@ -73,7 +73,7 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 		});
 	});
 
-	describe("on PROGRESS_INDICATOR_SHOW", () => {
+	describe("on `StarkProgressIndicatorActions.show`", () => {
 		it("should set the progressConfig 'visible' property to TRUE and 'pendingListenersCount' to 1 when state given", () => {
 			// create the initial state object
 			initialState.set(mockProgressIndicator.topic, mockProgressIndicator);
@@ -81,9 +81,9 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			const topic = mockProgressIndicator.topic;
 			deepFreeze(topic); // Enforce immutability
 
-			// Send the PROGRESS_INDICATOR_SHOW action to the progressIndicatorReducer
+			// Send the `StarkProgressIndicatorActions.show` action to the progressIndicatorReducer
 			changedState = progressIndicatorReducer(initialState, {
-				type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_SHOW,
+				type: StarkProgressIndicatorActions.show.type,
 				topic
 			});
 
@@ -98,9 +98,9 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			const topic = mockProgressIndicator.topic;
 			deepFreeze(topic); // Enforce immutability
 
-			// Send the PROGRESS_INDICATOR_SHOW action to the progressIndicatorReducer
+			// Send the `StarkProgressIndicatorActions.show` action to the progressIndicatorReducer
 			changedState = progressIndicatorReducer(<any>undefined, {
-				type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_SHOW,
+				type: StarkProgressIndicatorActions.show.type,
 				topic
 			});
 
@@ -109,7 +109,7 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 		});
 	});
 
-	describe("on PROGRESS_INDICATOR_HIDE", () => {
+	describe("on `StarkProgressIndicatorActions.hide`", () => {
 		it("should set the progressConfig 'visible' property to FALSE and 'pendingListenersCount' to 0 when state given", () => {
 			// create the initial state object
 			mockProgressIndicator.visible = true;
@@ -118,9 +118,9 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			const topic = mockProgressIndicator.topic;
 			deepFreeze(topic); // Enforce immutability
 
-			// Send the PROGRESS_INDICATOR_HIDE action to the progressIndicatorReducer
+			// Send the `StarkProgressIndicatorActions.hide` action to the progressIndicatorReducer
 			changedState = progressIndicatorReducer(initialState, {
-				type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_HIDE,
+				type: StarkProgressIndicatorActions.hide.type,
 				topic
 			});
 
@@ -135,9 +135,9 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			const topic = mockProgressIndicator.topic;
 			deepFreeze(topic); // Enforce immutability
 
-			// Send the PROGRESS_INDICATOR_HIDE action to the progressIndicatorReducer
+			// Send the `StarkProgressIndicatorActions.hide` action to the progressIndicatorReducer
 			changedState = progressIndicatorReducer(<any>undefined, {
-				type: StarkProgressIndicatorActionTypes.PROGRESS_INDICATOR_HIDE,
+				type: StarkProgressIndicatorActions.hide.type,
 				topic
 			});
 

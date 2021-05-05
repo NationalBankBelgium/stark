@@ -1,61 +1,33 @@
-import { Action } from "@ngrx/store";
+import { createAction, props, union } from "@ngrx/store";
 import { StarkLogMessage } from "../entities";
-
-/**
- * Actions related to {@link StarkLoggingService}
- */
-export enum StarkLoggingActionTypes {
-	SET_LOGGING_APPLICATION_ID = "[StarkLogging] Set Logging Application Id",
-	LOG_MESSAGE = "[StarkLogging] Log Message",
-	FLUSH_LOG = "[StarkLogging] Flush Log"
-}
+import { starkLoggingStoreKey } from "../constants";
 
 /**
  * Add the Application Name to the logging object
+ *
+ * Parameter:
+ *   - applicationId - The id of the application
  */
-export class StarkSetLoggingApplicationId implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkLoggingActionTypes.SET_LOGGING_APPLICATION_ID = StarkLoggingActionTypes.SET_LOGGING_APPLICATION_ID;
-
-	/**
-	 * Class constructor
-	 * @param applicationId - The id of the application
-	 */
-	public constructor(public applicationId: string) {}
-}
+export const setLoggingApplicationId = createAction(`[${starkLoggingStoreKey}] Set Logging Application Id`, props<{ applicationId: string }>());
 
 /**
  * Store a debug/info/warning/error message
+ *
+ * Parameter:
+ *   - message - The message to log
  */
-export class StarkLogMessageAction implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkLoggingActionTypes.LOG_MESSAGE = StarkLoggingActionTypes.LOG_MESSAGE;
-
-	/**
-	 * Class constructor
-	 * @param message - The message to log
-	 */
-	public constructor(public message: StarkLogMessage) {}
-}
+export const logMessage = createAction(`[${starkLoggingStoreKey}] Log Message`, props<{ message: StarkLogMessage }>());
 
 /**
  * Persists the log messages in the redux store to the back-end
+ *
+ * Parameter:
+ *   - numberOfMessagesToFlush - The number of messages to flush
  */
-export class StarkFlushLogMessages implements Action {
-	/**
-	 * The type of action
-	 */
-	public readonly type: StarkLoggingActionTypes.FLUSH_LOG = StarkLoggingActionTypes.FLUSH_LOG;
+export const flushLogMessages = createAction(`[${starkLoggingStoreKey}] Flush Log`, props<{ numberOfMessagesToFlush: number }>());
 
-	/**
-	 * Class constructor
-	 * @param numberOfMessagesToFlush - The number of messages to flush
-	 */
-	public constructor(public numberOfMessagesToFlush: number) {}
-}
-
-export type StarkLoggingActions = StarkSetLoggingApplicationId | StarkLogMessageAction | StarkFlushLogMessages;
+/**
+ * @ignore
+ */
+const all = union({ setLoggingApplicationId, logMessage, flushLogMessages });
+export type Types = typeof all;

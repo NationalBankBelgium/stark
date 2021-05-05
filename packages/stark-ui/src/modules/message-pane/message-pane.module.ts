@@ -18,6 +18,7 @@ import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneServiceImpl } from "./servi
 import { starkMessagesReducers } from "./reducers";
 import { StarkMessagePaneEffects } from "./effects";
 import { mergeUiTranslations } from "../../common/translations";
+import { starkMessagePaneStoreKey } from './constants';
 
 @NgModule({
 	declarations: [StarkMessagePaneComponent],
@@ -26,7 +27,7 @@ import { mergeUiTranslations } from "../../common/translations";
 		TranslateModule,
 		MatTooltipModule,
 		MatIconModule,
-		StoreModule.forFeature("StarkMessages", starkMessagesReducers),
+		StoreModule.forFeature(starkMessagePaneStoreKey, starkMessagesReducers),
 		EffectsModule.forFeature([StarkMessagePaneEffects])
 	],
 	exports: [StarkMessagePaneComponent]

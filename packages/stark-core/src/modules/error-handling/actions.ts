@@ -1,1 +1,2 @@
-export * from "./actions/error-handling.actions";
+import * as StarkErrorHandlingActions from "./actions/error-handling.actions";
+export { StarkErrorHandlingActions };

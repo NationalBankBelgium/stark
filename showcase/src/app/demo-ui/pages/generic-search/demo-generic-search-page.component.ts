@@ -58,7 +58,7 @@ export class DemoGenericSearchPageComponent
 		},
 		{
 			label: "SHOWCASE.DEMO.GENERIC_SEARCH.EXPLANATION_ABOUT_DOC_ON_GITHUB",
-			url: "https://github.com/NationalBankBelgium/stark/blob/master/docs/GENERIC_SEARCH.md"
+			url: "https://github.com/NationalBankBelgium/stark/blob/master/docs/stark-ui/GENERIC_SEARCH.md"
 		}
 	];
 

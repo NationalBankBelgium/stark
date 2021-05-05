@@ -5,7 +5,6 @@ import { UIRouter, UIRouterModule } from "@uirouter/angular";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
-import { storeFreeze } from "ngrx-store-freeze";
 import { storeLogger } from "ngrx-store-logger";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
@@ -30,7 +29,7 @@ import {
 	StarkApplicationMetadataImpl,
 	StarkErrorHandlingModule,
 	StarkHttpModule,
-	StarkLoggingActionTypes,
+	StarkLoggingActions,
 	StarkLoggingModule,
 	StarkMockData,
 	StarkRoutingModule,
@@ -124,12 +123,12 @@ export function logger(reducer: ActionReducer<State>): any {
 	// default, no options
 	return storeLogger({
 		filter: {
-			blacklist: [StarkLoggingActionTypes.LOG_MESSAGE]
+			blacklist: [StarkLoggingActions.logMessage.type]
 		}
 	})(reducer);
 }
 
-export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logger, storeFreeze] : [];
+export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logger] : [];
 
 /**
  * `AppModule` is the main entry point into Angular's bootstrapping process
@@ -152,7 +151,11 @@ export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logge
 		MatSidenavModule,
 		MatTooltipModule,
 		StoreModule.forRoot(reducers, {
-			metaReducers
+			metaReducers,
+			runtimeChecks: {
+				strictActionImmutability: true,
+				strictStateImmutability: true
+			}
 		}),
 		// store dev tools instrumentation must be imported AFTER StoreModule
 		StoreDevtoolsModule.instrument({

@@ -1,2 +1,2 @@
-export * from "./reducers/index";
-export * from "./reducers/progress-indicator.reducer";
+export { selectStarkProgressIndicator, starkProgressIndicatorReducers, StarkProgressIndicatorState } from "./reducers/index";
+export { progressIndicatorReducer } from "./reducers/progress-indicator.reducer";

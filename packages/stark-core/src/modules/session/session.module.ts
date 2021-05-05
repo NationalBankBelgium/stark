@@ -6,11 +6,11 @@ import { NgIdleModule } from "@ng-idle/core";
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { from } from "rxjs";
 import { starkSessionReducers } from "./reducers";
+import { starkLoginStateName, starkPreloadingStateName, starkSessionStoreKey } from "./constants";
 import { STARK_SESSION_CONFIG, StarkSessionConfig } from "./entities";
 import { STARK_SESSION_SERVICE, StarkSessionServiceImpl } from "./services";
 import { STARK_ROUTING_SERVICE, StarkRoutingService } from "../routing/services";
 import { SESSION_STATES } from "./routes";
-import { starkLoginStateName, starkPreloadingStateName } from "./constants";
 import { StarkAppContainerComponent } from "./components";
 
 @NgModule({
@@ -18,7 +18,7 @@ import { StarkAppContainerComponent } from "./components";
 		CommonModule,
 		NgIdleModule.forRoot(),
 		NgIdleKeepaliveModule.forRoot(),
-		StoreModule.forFeature("StarkSession", starkSessionReducers),
+		StoreModule.forFeature(starkSessionStoreKey, starkSessionReducers),
 		UIRouterModule.forChild({
 			states: SESSION_STATES
 		})

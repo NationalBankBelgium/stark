@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size no-identical-functions */
 import { StarkMessage, StarkMessageType } from "../../../common/message";
 
-import { StarkAddMessages, StarkClearMessages, StarkRemoveMessages } from "../actions";
+import { StarkMessagePaneActions } from "../actions";
 import { StarkMessageCollection } from "../entities";
 
 import { messagesReducer } from "./messages-pane.reducer";
@@ -62,7 +62,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(initialState, new StarkAddMessages(mockMessages));
+			changedState = messagesReducer(initialState, StarkMessagePaneActions.addMessages({ messages: mockMessages }));
 
 			expect(changedState.infoMessages.length).toBe(1);
 			expect(changedState.infoMessages[0]).toBe(mockInfoMessage);
@@ -76,7 +76,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(<any>undefined, new StarkAddMessages(mockMessages));
+			changedState = messagesReducer(<any>undefined, StarkMessagePaneActions.addMessages({ messages: mockMessages }));
 
 			expect(changedState.infoMessages.length).toBe(1);
 			expect(changedState.infoMessages[0]).toBe(mockInfoMessage);
@@ -95,7 +95,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(initialState, new StarkAddMessages(mockMessages));
+			changedState = messagesReducer(initialState, StarkMessagePaneActions.addMessages({ messages: mockMessages }));
 
 			expect(changedState.infoMessages).not.toBe(initialState.infoMessages);
 			expect(changedState.infoMessages.length).toBe(1);
@@ -121,7 +121,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(mockMessages); // Enforce immutability
 
 			deepFreeze(initialState); // Enforce immutability
-			expect(() => messagesReducer(initialState, new StarkAddMessages(mockMessages))).toThrowError(/Unknown/);
+			expect(() => messagesReducer(initialState, StarkMessagePaneActions.addMessages({ messages: mockMessages }))).toThrowError(/Unknown/);
 		});
 
 		it("should create an array with 1 message when the first message is added", () => {
@@ -131,7 +131,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(initialState, new StarkAddMessages(messages));
+			changedState = messagesReducer(initialState, StarkMessagePaneActions.addMessages({ messages: messages }));
 
 			expect(changedState.infoMessages.length).toBe(1);
 			expect(changedState.infoMessages[0]).toBe(newMessage);
@@ -158,7 +158,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			testBaseState = messagesReducer(initialState, new StarkAddMessages(messages));
+			testBaseState = messagesReducer(initialState, StarkMessagePaneActions.addMessages({ messages: messages }));
 
 			deepFreeze(testBaseState); // Enforce immutability
 		});
@@ -170,7 +170,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
+			changedState = messagesReducer(testBaseState, StarkMessagePaneActions.addMessages({ messages: messages }));
 
 			expect(changedState.infoMessages.length).toBe(5);
 			expect(changedState.infoMessages[0]).toBe(newMessage);
@@ -187,7 +187,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
+			changedState = messagesReducer(testBaseState, StarkMessagePaneActions.addMessages({ messages: messages }));
 
 			expect(changedState.infoMessages.length).toBe(5);
 			expect(changedState.infoMessages[0]).toBe(newMessage);
@@ -204,7 +204,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
+			changedState = messagesReducer(testBaseState, StarkMessagePaneActions.addMessages({ messages: messages }));
 
 			expect(changedState.infoMessages.length).toBe(5);
 			expect(changedState.infoMessages[0]).toBe(infoMessage1);
@@ -221,7 +221,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
+			changedState = messagesReducer(testBaseState, StarkMessagePaneActions.addMessages({ messages: messages }));
 
 			expect(changedState.infoMessages.length).toBe(5);
 			expect(changedState.infoMessages[0]).toBe(infoMessage1);
@@ -238,7 +238,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
+			changedState = messagesReducer(testBaseState, StarkMessagePaneActions.addMessages({ messages: messages }));
 
 			expect(changedState.infoMessages.length).toBe(5);
 			expect(changedState.infoMessages[0]).toBe(infoMessage1);
@@ -255,7 +255,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(messages); // Enforce immutability
 
 			// Send the ADD_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(testBaseState, new StarkAddMessages(messages));
+			changedState = messagesReducer(testBaseState, StarkMessagePaneActions.addMessages({ messages: messages }));
 
 			expect(changedState.infoMessages.length).toBe(5);
 			expect(changedState.infoMessages[0]).toBe(infoMessage1);
@@ -284,7 +284,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the REMOVE_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(initialState, new StarkRemoveMessages(mockMessages));
+			changedState = messagesReducer(initialState, StarkMessagePaneActions.removeMessages({ messages: mockMessages }));
 
 			expect(changedState.infoMessages.length).toBe(0);
 			expect(changedState.warningMessages.length).toBe(0);
@@ -295,7 +295,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the CLEAR_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(<any>undefined, new StarkRemoveMessages(mockMessages));
+			changedState = messagesReducer(<any>undefined, StarkMessagePaneActions.removeMessages({ messages: mockMessages }));
 
 			expect(changedState).toBeDefined();
 			expect(changedState.infoMessages.length).toBe(0);
@@ -310,7 +310,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(mockMessages); // Enforce immutability
 
 			// Send the REMOVE_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(initialState, new StarkRemoveMessages(mockMessages));
+			changedState = messagesReducer(initialState, StarkMessagePaneActions.removeMessages({ messages: mockMessages }));
 
 			expect(changedState.infoMessages).not.toBe(initialState.infoMessages);
 			expect(changedState.infoMessages.length).toBe(0);
@@ -334,7 +334,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(mockMessages); // Enforce immutability
 
 			deepFreeze(initialState); // Enforce immutability
-			expect(() => messagesReducer(initialState, new StarkRemoveMessages(mockMessages))).toThrowError(/Unknown/);
+			expect(() => messagesReducer(initialState, StarkMessagePaneActions.removeMessages({ messages: mockMessages }))).toThrowError(/Unknown/);
 		});
 	});
 
@@ -351,7 +351,7 @@ describe("Reducer: MessagesReducer", () => {
 			deepFreeze(initialState); // Enforce immutability
 
 			// Send the CLEAR_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(initialState, new StarkClearMessages());
+			changedState = messagesReducer(initialState, StarkMessagePaneActions.clearMessages());
 
 			expect(changedState.infoMessages).not.toBe(initialState.infoMessages);
 			expect(changedState.infoMessages.length).toBe(0);
@@ -367,7 +367,7 @@ describe("Reducer: MessagesReducer", () => {
 			initialState.errorMessages = [];
 
 			// Send the CLEAR_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(initialState, new StarkClearMessages());
+			changedState = messagesReducer(initialState, StarkMessagePaneActions.clearMessages());
 
 			expect(changedState).toBeDefined();
 			expect(changedState.infoMessages).toBe(initialState.infoMessages);
@@ -380,7 +380,7 @@ describe("Reducer: MessagesReducer", () => {
 
 		it("should NOT remove any message when state not defined", () => {
 			// Send the CLEAR_MESSAGES action to the messagesReducer
-			changedState = messagesReducer(<any>undefined, new StarkClearMessages());
+			changedState = messagesReducer(<any>undefined, StarkMessagePaneActions.clearMessages());
 
 			expect(changedState).toBeDefined();
 			expect(changedState.infoMessages.length).toBe(0);

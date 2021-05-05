@@ -13,7 +13,7 @@ import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
 import { STARK_XSRF_SERVICE, StarkXSRFService } from "../../xsrf/services";
 import { StarkLogging, StarkLoggingImpl, StarkLogMessage, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
-import { StarkFlushLogMessages, StarkLogMessageAction } from "../actions";
+import { StarkLoggingActions } from "../actions";
 import { selectStarkLogging } from "../reducers";
 import { StarkError, StarkErrorImpl } from "../../../common/error";
 import { StarkConfigurationUtil } from "../../../util/configuration.util";
@@ -90,7 +90,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	public debug(...args: any[]): void {
 		if (this.appConfig.debugLoggingEnabled) {
 			const debugMessage: StarkLogMessage = this.constructLogMessage(StarkLogMessageType.DEBUG, ...args);
-			this.store.dispatch(new StarkLogMessageAction(debugMessage));
+			this.store.dispatch(StarkLoggingActions.logMessage({ message: debugMessage }));
 			// also log the message to the console
 			this.consoleDebug(...args);
 		}
@@ -98,14 +98,14 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 
 	public info(...args: any[]): void {
 		const infoMessage: StarkLogMessage = this.constructLogMessage(StarkLogMessageType.INFO, ...args);
-		this.store.dispatch(new StarkLogMessageAction(infoMessage));
+		this.store.dispatch(StarkLoggingActions.logMessage({ message: infoMessage }));
 		// also log the message to the console
 		this.consoleInfo(...args);
 	}
 
 	public warn(...args: any[]): void {
 		const warningMessage: StarkLogMessage = this.constructLogMessage(StarkLogMessageType.WARNING, ...args);
-		this.store.dispatch(new StarkLogMessageAction(warningMessage));
+		this.store.dispatch(StarkLoggingActions.logMessage({ message: warningMessage }));
 		// also log the message to the console
 		this.consoleWarn(...args);
 	}
@@ -120,7 +120,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		}
 
 		const errorMessage: StarkLogMessage = this.constructErrorLogMessage(message, error);
-		this.store.dispatch(new StarkLogMessageAction(errorMessage));
+		this.store.dispatch(StarkLoggingActions.logMessage({ message: errorMessage }));
 		this.consoleError(message, error); // also log the message to the console
 	}
 
@@ -163,7 +163,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 					() => {
 						this.isPersisting = false;
 						this.retryCounter = 0;
-						this.store.dispatch(new StarkFlushLogMessages(numberOfMessages));
+						this.store.dispatch(StarkLoggingActions.flushLogMessages({ numberOfMessagesToFlush: numberOfMessages }));
 					},
 					(error: Error) => {
 						this.isPersisting = false;

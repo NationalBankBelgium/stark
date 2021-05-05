@@ -62,7 +62,8 @@ import {
 	DemoTablePageComponent,
 	DemoToastPageComponent,
 	DemoTransformInputDirectivePageComponent,
-	DemoDateTimePickerPageComponent
+	DemoDateTimePickerPageComponent,
+	demoGenericSearchStoreKey
 } from "./pages";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
@@ -115,7 +116,7 @@ import {
 		StarkRouteSearchModule,
 		StarkSliderModule,
 		StarkTableModule,
-		StoreModule.forFeature("DemoGenericSearch", demoGenericSearchReducers)
+		StoreModule.forFeature(demoGenericSearchStoreKey, demoGenericSearchReducers)
 	],
 	declarations: [
 		DemoActionBarPageComponent,

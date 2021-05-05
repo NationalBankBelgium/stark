@@ -2,11 +2,11 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { StoreModule } from "@ngrx/store";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { NewsItemComponent } from "./news-item.component";
 import SpyObj = jasmine.SpyObj;
+import { provideMockStore } from "@ngrx/store/testing";
 
 describe(`News`, () => {
 	let comp: NewsItemComponent;
@@ -21,8 +21,8 @@ describe(`News`, () => {
 			TestBed.configureTestingModule({
 				declarations: [NewsItemComponent],
 				schemas: [NO_ERRORS_SCHEMA], // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-				imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+				imports: [HttpClientTestingModule],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, provideMockStore()]
 			})
 
 				/**

@@ -2,7 +2,7 @@
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 import { StarkSettingsEffects } from "./settings.effects";
-import { StarkSetPreferredLanguage } from "../actions";
+import { StarkSettingsActions } from "../actions";
 import { STARK_SESSION_SERVICE } from "../../session/services";
 import { MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import { TestBed } from "@angular/core/testing";
@@ -41,9 +41,9 @@ describe("Effect: StarkSettingsEffects", () => {
 			const subject: ReplaySubject<any> = new ReplaySubject(1);
 			actions = subject.asObservable();
 
-			settingsEffects.setPreferredLanguage$().subscribe(mockObserver);
+			settingsEffects.setPreferredLanguage$.subscribe(mockObserver);
 
-			subject.next(new StarkSetPreferredLanguage("NL"));
+			subject.next(StarkSettingsActions.setPreferredLanguage({ language: "NL" }));
 
 			expect(mockSessionService.setCurrentLanguage).toHaveBeenCalledWith("NL");
 			expect(mockObserver.next).toHaveBeenCalledTimes(1);

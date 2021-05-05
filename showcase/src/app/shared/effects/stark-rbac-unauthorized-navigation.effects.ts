@@ -1,12 +1,7 @@
 import { Injectable, Injector, NgZone } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
-import { Observable } from "rxjs";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map } from "rxjs/operators";
-import {
-	StarkRBACAuthorizationActionsTypes,
-	StarkUserNavigationUnauthorized,
-	StarkUserNavigationUnauthorizedRedirected
-} from "@nationalbankbelgium/stark-rbac";
+import { StarkRBACAuthorizationActions } from "@nationalbankbelgium/stark-rbac";
 import { STARK_TOAST_NOTIFICATION_SERVICE, StarkMessageType, StarkToastNotificationService } from "@nationalbankbelgium/stark-ui";
 import uniqueId from "lodash-es/uniqueId";
 
@@ -25,46 +20,46 @@ export class StarkRbacUnauthorizedNavigationEffects {
 	 */
 	public constructor(private actions$: Actions, private injector: Injector, private zone: NgZone) {}
 
-	@Effect({ dispatch: false })
-	public starkRBACNavigationUnauthorized$(): Observable<void> {
-		return this.actions$.pipe(
-			ofType<StarkUserNavigationUnauthorized>(StarkRBACAuthorizationActionsTypes.RBAC_USER_NAVIGATION_UNAUTHORIZED),
-			map((action: StarkUserNavigationUnauthorized) => {
-				this.zone.run(() => {
-					this.toastNotificationService
-						.show({
-							id: uniqueId(),
-							type: StarkMessageType.ERROR,
-							key: action.type,
-							code: "Stark-RBAC: unauthorized navigation"
-						})
-						.subscribe();
-				});
-			})
-		);
-	}
-
-	@Effect({ dispatch: false })
-	public starkRBACNavigationUnauthorizedRedirected$(): Observable<void> {
-		return this.actions$.pipe(
-			ofType<StarkUserNavigationUnauthorizedRedirected>(
-				StarkRBACAuthorizationActionsTypes.RBAC_USER_NAVIGATION_UNAUTHORIZED_REDIRECTED
+	public starkRBACNavigationUnauthorized$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(StarkRBACAuthorizationActions.userNavigationUnauthorized),
+				map((action) => {
+					this.zone.run(() => {
+						this.toastNotificationService
+							.show({
+								id: uniqueId(),
+								type: StarkMessageType.ERROR,
+								key: action.type,
+								code: "Stark-RBAC: unauthorized navigation"
+							})
+							.subscribe();
+					});
+				})
 			),
-			map((action: StarkUserNavigationUnauthorizedRedirected) => {
-				this.zone.run(() => {
-					this.toastNotificationService
-						.show({
-							id: uniqueId(),
-							type: StarkMessageType.WARNING,
-							key: "SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.REDIRECTION_MESSAGE",
-							interpolateValues: { rbacActionType: action.type },
-							code: "Stark-RBAC: unauthorized navigation redirected"
-						})
-						.subscribe();
-				});
-			})
-		);
-	}
+		{ dispatch: false }
+	);
+
+	public starkRBACNavigationUnauthorizedRedirected$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(StarkRBACAuthorizationActions.userNavigationUnauthorizedRedirected),
+				map((action) => {
+					this.zone.run(() => {
+						this.toastNotificationService
+							.show({
+								id: uniqueId(),
+								type: StarkMessageType.WARNING,
+								key: "SHOWCASE.DEMO_RBAC.SERVICES.AUTHORIZATION.REDIRECTION_MESSAGE",
+								interpolateValues: { rbacActionType: action.type },
+								code: "Stark-RBAC: unauthorized navigation redirected"
+							})
+							.subscribe();
+					});
+				})
+			),
+		{ dispatch: false }
+	);
 
 	/**
 	 * Gets the StarkToastNotificationService from the Injector.

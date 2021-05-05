@@ -16,21 +16,7 @@ import { STARK_ROUTING_SERVICE, StarkRoutingService, StarkRoutingTransitionHook 
 import { STARK_APP_CONFIG, StarkApplicationConfig } from "../../../configuration/entities/application";
 import { STARK_SESSION_CONFIG, StarkSession, StarkSessionConfig } from "../entities";
 import { StarkUser } from "../../user/entities";
-import {
-	StarkChangeLanguage,
-	StarkChangeLanguageFailure,
-	StarkChangeLanguageSuccess,
-	StarkDestroySession,
-	StarkDestroySessionSuccess,
-	StarkInitializeSession,
-	StarkInitializeSessionSuccess,
-	StarkSessionLogout,
-	StarkSessionTimeoutCountdownFinish,
-	StarkSessionTimeoutCountdownStart,
-	StarkSessionTimeoutCountdownStop,
-	StarkUserActivityTrackingPause,
-	StarkUserActivityTrackingResume
-} from "../actions";
+import { StarkSessionActions } from "../actions";
 import { StarkHttpStatusCodes } from "../../http/enumerators";
 import { StarkHttpHeaders } from "../../http/constants";
 import { StarkCoreApplicationState } from "../../../common/store";
@@ -94,7 +80,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 				// because the browser has to wait for the HTTP call to complete.
 
 				// dispatch action so an effect can run any logic if needed
-				this.store.dispatch(new StarkSessionLogout());
+				this.store.dispatch(StarkSessionActions.sessionLogout());
 				this.sendLogoutRequest(this.appConfig.logoutUrl, "", false);
 				// in this case, since the HTTP call is synchronous, the session can be destroy immediately
 				this.destroySession();
@@ -188,10 +174,10 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	 * @param user - The user used to initialize the session.
 	 */
 	protected initializeSession(user: StarkUser): void {
-		this.store.dispatch(new StarkInitializeSession(user));
+		this.store.dispatch(StarkSessionActions.initializeSession({ user: user }));
 		this.startIdleService();
 		this.startKeepaliveService();
-		this.store.dispatch(new StarkInitializeSessionSuccess());
+		this.store.dispatch(StarkSessionActions.initializeSessionSuccess());
 	}
 
 	/**
@@ -199,10 +185,10 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	 * It dispatches a DESTROY_SESSION action to the NGRX-Store
 	 */
 	protected destroySession(): void {
-		this.store.dispatch(new StarkDestroySession());
+		this.store.dispatch(StarkSessionActions.destroySession());
 		this.stopIdleService();
 		this.stopKeepaliveService();
-		this.store.dispatch(new StarkDestroySessionSuccess());
+		this.store.dispatch(StarkSessionActions.destroySessionSuccess());
 	}
 
 	public login(user: StarkUser): void {
@@ -214,7 +200,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 
 	public logout(): void {
 		// dispatch action so an effect can run any logic if needed
-		this.store.dispatch(new StarkSessionLogout());
+		this.store.dispatch(StarkSessionActions.sessionLogout());
 		// the session will always be destroyed right after the response of the logout HTTP call (regardless of its result)
 		this.sendLogoutRequest(this.appConfig.logoutUrl, "", true).subscribe(
 			() => this.destroySession(),
@@ -259,12 +245,12 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	}
 
 	public pauseUserActivityTracking(): void {
-		this.store.dispatch(new StarkUserActivityTrackingPause());
+		this.store.dispatch(StarkSessionActions.userActivityTrackingPause());
 		this.idle.clearInterrupts();
 	}
 
 	public resumeUserActivityTracking(): void {
-		this.store.dispatch(new StarkUserActivityTrackingResume());
+		this.store.dispatch(StarkSessionActions.userActivityTrackingResume());
 		this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 		this.startIdleService();
 		this.startKeepaliveService();
@@ -291,14 +277,14 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 			if (this.countdownStarted) {
 				this.countdownStarted = false;
 				// dispatch action so an effect can run any logic if needed
-				this.store.dispatch(new StarkSessionTimeoutCountdownStop());
+				this.store.dispatch(StarkSessionActions.sessionTimeoutCountdownStop());
 			}
 		});
 
 		this.idle.onTimeout.subscribe(() => {
 			this.logger.warn(starkSessionServiceName + ": the user session has timed out!");
 			// dispatch action so an effect can run any logic if needed
-			this.store.dispatch(new StarkSessionTimeoutCountdownFinish());
+			this.store.dispatch(StarkSessionActions.sessionTimeoutCountdownFinish());
 			this.logout();
 
 			let sessionExpiredStateName: string = starkSessionExpiredStateName;
@@ -316,7 +302,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 			if (countdown === this.idle.getTimeout()) {
 				this.countdownStarted = true;
 				// dispatch action so an effect can run any logic if needed (i.e. displaying a timeout countdown dialog)
-				this.store.dispatch(new StarkSessionTimeoutCountdownStart(countdown));
+				this.store.dispatch(StarkSessionActions.sessionTimeoutCountdownStart({ countdown: countdown }));
 			}
 		});
 	}
@@ -401,11 +387,11 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 
 	public setCurrentLanguage(newLanguage: string): void {
 		// dispatch corresponding action to allow the user to trigger his own effects if needed
-		this.store.dispatch(new StarkChangeLanguage(newLanguage));
+		this.store.dispatch(StarkSessionActions.changeLanguage({ languageId: newLanguage }));
 
 		defer(() => this.translateService.use(newLanguage)).subscribe(
-			(_translations: any) => this.store.dispatch(new StarkChangeLanguageSuccess(newLanguage)),
-			(error: any) => this.store.dispatch(new StarkChangeLanguageFailure(error))
+			(_translations: any) => this.store.dispatch(StarkSessionActions.changeLanguageSuccess({ languageId: newLanguage })),
+			(error: any) => this.store.dispatch(StarkSessionActions.changeLanguageFailure({ error: error }))
 		);
 	}
 }

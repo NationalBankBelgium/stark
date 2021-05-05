@@ -8,7 +8,7 @@
 		[exampleTitle]="'SHOWCASE.DEMO.PROGRESS_INDICATOR.TITLE' | translate"
 	>
 		<button class="progress-indicator-button" color="primary" mat-raised-button (click)="showProgressIndicator()">
-			<span translate>{{ show ? "SHOWCASE.DEMO.PROGRESS_INDICATOR.HIDE" : "SHOWCASE.DEMO.PROGRESS_INDICATOR.SHOW" }}</span>
+			<span>{{ (show ? "SHOWCASE.DEMO.PROGRESS_INDICATOR.HIDE" : "SHOWCASE.DEMO.PROGRESS_INDICATOR.SHOW") | translate }}</span>
 		</button>
 		<div class="progress-indicator-view" [starkProgressIndicator]="progressIndicatorConfig">
 			<span translate>SHOWCASE.DEMO.PROGRESS_INDICATOR.SENTENCE_TO_HIDE</span>

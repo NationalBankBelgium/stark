@@ -2,7 +2,7 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { StoreModule } from "@ngrx/store";
+import { provideMockStore } from "@ngrx/store/testing";
 import {
 	STARK_APP_CONFIG,
 	STARK_HTTP_SERVICE,
@@ -42,11 +42,12 @@ describe(`Home`, () => {
 			TestBed.configureTestingModule({
 				declarations: [HomePageComponent],
 				schemas: [NO_ERRORS_SCHEMA],
-				imports: [StoreModule.forRoot({}), HttpClientTestingModule, TranslateModule.forRoot()],
+				imports: [HttpClientTestingModule, TranslateModule.forRoot()],
 				providers: [
 					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
 					{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					provideMockStore()
 				]
 			})
 
