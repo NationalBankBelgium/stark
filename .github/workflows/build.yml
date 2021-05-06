@@ -98,27 +98,17 @@ jobs:
           mkdir -p ${{ env.LOGS_DIR }}
           touch ${{ env.LOGS_FILE }}
 
-      - name: Sync packages dependencies when Dependabot bumps dependenciess
-        run: |
-          git config user.name "NBB Bot"
-          git config user.email "83765996+nbb-bot@users.noreply.github.com"
-          npm run sync:packages-dependencies
-          git push
-        if: github.actor == 'dependabot[bot]'
-
       - name: Install dependencies
-        run: |
-          npm ci
-          npm run install:ci:all
+        run: npm ci
 
-      - name: Linting
-        run: npm run lint:all
+      - name: Build packages
+        run: npm run build:trace
 
-      - name: Testing
-        run: npm run test:ci:all
+      - name: Linting packages
+        run: npm run lint:packages
 
-      - name: "Build showcase:ghpages"
-        run: npm run build:showcase:ghpages
+      - name: Testing packages
+        run: npm run test:ci:packages
 
       # See: https://github.com/marketplace/actions/upload-artifact
       - name: Upload stark packages-dist folder
@@ -127,6 +117,53 @@ jobs:
           name: stark-dist
           path: dist/packages-dist
         if: env.IS_MAIN_ENVIRONMENT == 1
+
+      - name: Generate docs coverage
+        run: npm run docs:coverage:packages
+        if: env.IS_MAIN_ENVIRONMENT == 1
+
+      - name: Combine coveralls reports
+        run: node combine-packages-coverage.js
+        if: env.IS_MAIN_ENVIRONMENT == 1
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: "combined-lcov.info"
+        if: env.IS_MAIN_ENVIRONMENT == 1
+
+      - name: Clean root node_modules
+        run: rm -rf ./node_modules
+
+      - name: Install starter
+        run: npm i
+        working-directory: starter
+
+      - name: "Install showcase with install command"
+        if: github.actor == 'nbb-bot' && startsWith(github.ref_head, 'dependabot/npm_and_yarn')
+        run: |
+          rm package-lock.json
+          npm install
+        working-directory: showcase
+
+      - name: "Install showcase with ci command"
+        if: github.actor != 'nbb-bot' || !startsWith(github.ref_head, 'dependabot/npm_and_yarn')
+        run: npm ci
+        working-directory: showcase
+
+      - name: Linting showcase & starter
+        run: |
+          npm run lint:showcase
+          npm run lint:starter
+
+      - name: Testing showcase & starter
+        run: |
+          npm run test:ci:showcase
+          npm run test:ci:starter
+
+      - name: "Build showcase:ghpages"
+        run: npm run build:showcase:ghpages
 
       # See: https://github.com/marketplace/actions/upload-artifact
       - name: Upload showcase dist folder
@@ -168,23 +205,12 @@ jobs:
           local-testing: stop
         if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
 
-      - name: Generate docs coverage
-        run: npm run docs:coverage
+      - name: Generate starter docs coverage
+        run: npm run docs:starter:coverage
         if: env.IS_MAIN_ENVIRONMENT == 1
 
       - name: Save logs
         run: bash ./scripts/ci/print-logs.sh
-
-      - name: Combine coveralls reports
-        run: node combine-packages-coverage.js
-        if: env.IS_MAIN_ENVIRONMENT == 1
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: "combined-lcov.info"
-        if: env.IS_MAIN_ENVIRONMENT == 1
 
   release:
     name: Release
