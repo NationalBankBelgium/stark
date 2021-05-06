@@ -44,15 +44,6 @@ const nextStream = function () {
 	return fs.createReadStream(file);
 };
 
-// first prepend the base path of each package ('packages/stark-xxxx') to every source file reference in the coverage file
-// this ensures that Coveralls can show the list of packages correctly including their files
-for (const fileName of fileNames) {
-	const packageName = fileName.match(/stark-\w*/)[0];
-	const replacements = [{ searchValue: /SF:(.*)(\r|\n)/, replaceValue: `SF:packages/${packageName}/$1$2` }];
-
-	replaceValuesInFile(fileName, replacements);
-}
-
 // then concatenate the files (but wait X milliseconds for the files to be overwritten in the previous step)
 setTimeout(() => {
 	const combinedStream = new StreamConcat(nextStream);

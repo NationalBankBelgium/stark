@@ -15,7 +15,7 @@ on:
 env:
   TZ: "Europe/Brussels"
   MAIN_NODEJS: "10"
-  NPM_VERSION: "6.9.2"
+  NPM_VERSION: "latest-6"
   LOGS_DIR: /tmp/stark/logs
   LOGS_FILE: /tmp/stark/logs/build-perf.log
   HUSKY_SKIP_INSTALL: true
@@ -96,13 +96,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npm run install:travis-ci:all
+          npm run install:ci:all
 
       - name: Linting
-        run: npm run lint:travis-ci:all
+        run: npm run lint:all
 
       - name: Testing
-        run: npm run test:travis-ci:all
+        run: npm run test:ci:all
         
       - name: "Build showcase:ghpages"
         run: npm run build:showcase:ghpages
@@ -156,7 +156,7 @@ jobs:
         if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
         
       - name: Generate docs coverage
-        run: npm run docs:travis-ci:coverage
+        run: npm run docs:coverage
         if: env.IS_MAIN_ENVIRONMENT == 1
 
       - name: Save logs

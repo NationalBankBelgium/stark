@@ -27,6 +27,7 @@
       "cerialize": ["../stark-core/node_modules/cerialize"],
       "class-validator": ["../stark-core/node_modules/class-validator"],
       "core-js/*": ["../../node_modules/core-js/*"],
+      "deep-freeze-strict": ["../stark-core/node_modules/deep-freeze-strict"],
       "environments/environment": ["../../dist/packages/stark-core/src/common/environment"],
       "ibantools": ["../stark-core/node_modules/ibantools"],
       "lodash-es/*": ["../stark-core/node_modules/lodash-es/*"],

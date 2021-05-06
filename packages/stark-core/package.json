@@ -56,6 +56,7 @@
     "docs": "compodoc",
     "docs:coverage": "npm run docs -- --coverageTest 85 --coverageTestThresholdFail true",
     "docs:serve": "npm run docs -- --watch --serve --port 4321",
+    "ng": "../../node_modules/.bin/ng",
     "ngc": "node ../../node_modules/@angular/compiler-cli/src/main.js -p ./tsconfig.json",
     "lint": "npm run lint-ts && npm run lint-css",
     "lint-ts": "node ../../node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.spec.json --format codeFrame",
@@ -63,8 +64,8 @@
     "lint-css": "node ../../node_modules/stylelint/bin/stylelint \"./(src|assets)/**/*.?(pc|sc|c|sa)ss\" --formatter \"string\" --allow-empty-input",
     "test": "npm run lint && npm run test-fast",
     "test:ci": "npm run lint && npm run test-fast:ci",
-    "test-fast": "node ../stark-testing/node_modules/karma/bin/karma start",
-    "test-fast:ci": "node ../stark-testing/node_modules/karma/bin/karma start karma.conf.ci.js",
+    "test-fast": "npm run ng test",
+    "test-fast:ci": "../../node_modules/.bin/cross-env CI=1 npm run ng test -- --code-coverage",
     "tsc": "node ../../node_modules/typescript/bin/tsc -p ./tsconfig.json",
     "tslint": "node ../../node_modules/tslint/bin/tslint",
     "tslint-check": "tslint-config-prettier-check ./tslint.json"
