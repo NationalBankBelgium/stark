@@ -28,21 +28,16 @@
     "codelyzer": "^5.0.0",
     "moment-locales-webpack-plugin": "^1.2.0",
     "prettier": "~2.2.1",
-    "stylelint": "^13.2.0",
-    "stylelint-config-prettier": "^8.0.1",
+    "stylelint": "^13.11.0",
+    "stylelint-config-prettier": "^8.0.2",
     "stylelint-webpack-plugin": "^2.1.0",
     "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.17.0",
+    "tslint-config-prettier": "^1.18.0",
     "tslint-loader": "^3.6.0",
-    "tslint-sonarts": "^1.8.0",
+    "tslint-sonarts": "^1.9.0",
     "webpack-bundle-analyzer": "^3.0.4",
     "webpack-merge": "^4.2.1",
     "webpack-monitor": "^1.0.14"
-  },
-  "devDependencies": {
-    "@angular/cli": "^8.2.0",
-    "@angular/compiler": "^8.2.0",
-    "@angular/compiler-cli": "^8.2.0"
   },
   "peerDependencies": {
     "@angular/cli": "^8.2.0",

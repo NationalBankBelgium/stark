@@ -1,7 +1,7 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/packages/stark-build"
+  directory: "/"
   schedule:
     interval: daily
     time: "04:00"
@@ -13,36 +13,10 @@ updates:
   - dependency-name: "@angular-builders/*"
     versions:
     - ">=8"
-  - dependency-name: "@angular-devkit/build-angular"
+  - dependency-name: "@angular-devkit/build-ng-packagr"
     versions:
     - ">=0.800"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
-  directory: "/packages/stark-rbac"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10g
-  ignore:
-  - dependency-name: "@types/node"
-    versions:
-    - ">=11"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@angular/*"
-    versions:
-    - ">=8"
-  - dependency-name: "@angular-devkit/build-ng-packagr"
+  - dependency-name: "@angular-devkit/build-angular"
     versions:
     - ">=0.800"
   - dependency-name: "@mdi/angular-material"
