@@ -26,8 +26,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: [ "10", "12" ]
-        os: [ ubuntu-latest, macOS-latest ]
+        node_version: ["10", "12"]
+        os: [ubuntu-latest, macOS-latest]
 
     steps:
       # Some actions should be executed only in one environment.
@@ -39,7 +39,7 @@ jobs:
           else
             echo "IS_MAIN_ENVIRONMENT=0" >> $GITHUB_ENV
           fi
-        
+
       # See: https://github.com/marketplace/actions/checkout
       - uses: actions/checkout@v2
 
@@ -63,20 +63,22 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      
+
       - name: Install npm ${{ env.NPM_VERSION }}
         run: npm i -g npm@${{ env.NPM_VERSION }}
-        
+
       - name: Get tag name if exists
         run: |
           TAG_NAME=$(echo $GITHUB_REF | sed -n "s/^refs\/tags\/\(\S*\).*$/\1/p")
           echo "GH_ACTIONS_TAG=${TAG_NAME}" >> $GITHUB_ENV
-        
+
       - name: List main variables
         run: |
           echo "Commit SHA  : ${GITHUB_SHA}"
           echo "Tag name    : ${{ env.GH_ACTIONS_TAG }}"
           echo "Reference   : ${GITHUB_REF}"
+          echo "Head branch : ${GITHUB_HEAD_REF}"
+          echo "Base branch : ${GITHUB_BASE_REF}"
           echo "Build number: ${GITHUB_RUN_NUMBER}"
           echo "Repository  : ${GITHUB_REPOSITORY}"
           echo "Event       : ${GITHUB_EVENT_NAME}"
@@ -86,13 +88,24 @@ jobs:
           echo "Node version: $NODE_VERSION"
           # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
           # echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-          
+
+      - name: Check if dependencies are in sync between root and packages
+        run: "npm run check:packages-dependencies"
+
       - name: Create file & folder for GitHub Actions logs
-        run: |  
+        run: |
           # cfr scripts/_ghactions-group.sh
           mkdir -p ${{ env.LOGS_DIR }}
           touch ${{ env.LOGS_FILE }}
-            
+
+      - name: Sync packages dependencies when Dependabot bumps dependenciess
+        run: |
+          git config user.name "NBB Bot"
+          git config user.email "83765996+nbb-bot@users.noreply.github.com"
+          npm run sync:packages-dependencies
+          git push
+        if: github.actor == 'dependabot[bot]'
+
       - name: Install dependencies
         run: |
           npm ci
@@ -103,7 +116,7 @@ jobs:
 
       - name: Testing
         run: npm run test:ci:all
-        
+
       - name: "Build showcase:ghpages"
         run: npm run build:showcase:ghpages
 
@@ -122,7 +135,7 @@ jobs:
           name: showcase-dist
           path: showcase/dist
         if: env.IS_MAIN_ENVIRONMENT == 1
-        
+
       - name: BrowserStack Env Setup
         uses: browserstack/github-actions/setup-env@master
         with:
@@ -138,34 +151,34 @@ jobs:
           local-logging-level: "all-logs"
           local-identifier: "github-actions-${{ github.run_number }}"
         if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
-    
+
       - name: Running application under test
         run: npm run server:prod:ci &
         if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
         working-directory: showcase
-        
+
       - name: Running test on BrowserStack
         run: npm run protractor:browserstack
         if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
         working-directory: showcase
-    
+
       - name: BrowserStackLocal Stop
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: stop
         if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
-        
+
       - name: Generate docs coverage
         run: npm run docs:coverage
         if: env.IS_MAIN_ENVIRONMENT == 1
 
       - name: Save logs
         run: bash ./scripts/ci/print-logs.sh
-        
+
       - name: Combine coveralls reports
         run: node combine-packages-coverage.js
         if: env.IS_MAIN_ENVIRONMENT == 1
-        
+
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
@@ -195,13 +208,13 @@ jobs:
 
       - name: Install npm ${{ env.NPM_VERSION }}
         run: npm i -g npm@${{ env.NPM_VERSION }}
-        
+
       - name: Create file & folder for GitHub Actions logs
         run: |
           # cfr scripts/_ghactions-group.sh
           mkdir -p ${{ env.LOGS_DIR }}
           touch ${{ env.LOGS_FILE }}
-        
+
       - uses: actions/download-artifact@v2
         with:
           name: stark-dist
@@ -220,14 +233,14 @@ jobs:
           npm run install:ci:stark-rbac
           npm run install:ci:stark-ui
         if: github.event_name != 'schedule'
-        
+
       - name: Generate docs
         run: npm run docs:publish -- --github-api-key=${{ secrets.GITHUB_TOKEN }}
         if: github.event_name != 'schedule'
-        
+
       - name: Set npm token
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-        
+
       - name: Release stark
         run: npm run release:publish
 

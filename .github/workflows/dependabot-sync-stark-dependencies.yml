@@ -1,0 +1,77 @@
+name: Dependabot PR - Sync stark-* packages dependencies versions
+
+on:
+  workflow_run:
+    workflows: ["build"]
+    types:
+      - completed
+env:
+  TZ: "Europe/Brussels"
+  NPM_VERSION: "latest-6"
+
+jobs:
+  run_checks:
+    runs-on: "ubuntu-latest"
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'failure'
+      && github.actor == 'dependabot[bot]' && !startsWith(github.event.workflow_run.head_branch, 'dependabot/npm_and_yarn/showcase')
+      && !startsWith(github.event.workflow_run.head_branch, 'dependabot/npm_and_yarn/starter')
+    env:
+      GH_PR_NUMBER: "${{ github.event.workflow_run.pull_requests[0].number }}"
+      GH_HEAD_REF: "${{ github.event.workflow_run.head_branch }}"
+    name: Sync deps
+    steps:
+      # See: https://github.com/marketplace/actions/setup-node-js-environment
+      - name: Use Node.js 10
+        uses: actions/setup-node@v2
+        with:
+          node-version: 10
+
+      - name: Install npm ${{ env.NPM_VERSION }}
+        run: npm i -g npm@${{ env.NPM_VERSION }}
+
+      - name: List main variables
+        run: |
+          echo "Commit SHA  : ${GITHUB_SHA}"
+          echo "Reference   : ${GITHUB_REF}"
+          echo "Head branch : ${GH_HEAD_REF}"
+          echo "Base branch : ${GITHUB_BASE_REF}"
+          echo "Build number: ${GITHUB_RUN_NUMBER}"
+          echo "Repository  : ${GITHUB_REPOSITORY}"
+          echo "Event       : ${GITHUB_EVENT_NAME}"
+          echo "Author      : ${GITHUB_ACTOR}"
+          echo "PR Number   : ${GH_PR_NUMBER}"
+
+      # See: https://github.com/marketplace/actions/checkout
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.GH_HEAD_REF }}
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+      - name: Configure git user info
+        run: |
+          git config --local user.name "NBB Bot"
+          git config --local user.email "83765996+nbb-bot@users.noreply.github.com"
+
+      - name: Sync stark packages dependendencies
+        id: sync-packages-dependencies
+        run: |
+          echo "Sync packages dependencies when based on Dependabot update for PR #${GH_PR_NUMBER}"
+          npm run sync:packages-dependencies
+          echo "::set-output name=LAST_COMMIT::$(git --no-pager log -n 1 --oneline)"
+
+      - name: Push changes
+        if: contains(steps.sync-packages-dependencies.outputs.LAST_COMMIT, '/packages/stark-')
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.NBBBOT_TOKEN }}
+          branch: ${{ env.GH_HEAD_REF }}
+
+      - name: Add comment to PR
+        if: contains(steps.sync-packages-dependencies.outputs.LAST_COMMIT, '/packages/stark-')
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: Bearer ${{ secrets.NBBBOT_TOKEN }}" \
+            --data '{"body": "Dependency version has been updated in stark-* packages dependencies :tada:\nYou should wait for green result before merging this! :+1:"}' \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GH_PR_NUMBER}/comments"
