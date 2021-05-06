@@ -24,27 +24,8 @@ updates:
   schedule:
     interval: daily
     time: "04:00"
-  open-pull-requests-limit: 10
+  open-pull-requests-limit: 10g
   ignore:
-  - dependency-name: "@types/node"
-    versions:
-    - ">=11"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
-  directory: "/packages/stark-ui"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@angular/*"
-    versions:
-    - ">=8"
-  - dependency-name: "@mdi/angular-material"
-    versions:
-    - ">=5"
   - dependency-name: "@types/node"
     versions:
     - ">=11"
