@@ -7,6 +7,7 @@ const noCommit = process.argv.indexOf("--no-commit") > -1;
 const rootDeps = require("../package.json").devDependencies;
 
 const fileNames = {
+	"stark-core": "../packages/stark-core/package.json",
 	"stark-testing": "../packages/stark-testing/package.json"
 };
 
