@@ -8,7 +8,8 @@ const rootDeps = require("../package.json").devDependencies;
 
 const fileNames = {
 	"stark-core": "../packages/stark-core/package.json",
-	"stark-testing": "../packages/stark-testing/package.json"
+	"stark-testing": "../packages/stark-testing/package.json",
+	"stark-ui": "../packages/stark-ui/package.json"
 };
 
 function replaceValuesInFile(fileName, valueReplacements) {

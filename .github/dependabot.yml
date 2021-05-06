@@ -64,6 +64,9 @@ updates:
   - dependency-name: "@angular-devkit/build-ng-packagr"
     versions:
     - ">=0.800"
+  - dependency-name: "@mdi/angular-material"
+    versions:
+    - ">=5"
   - dependency-name: "@uirouter/angular"
     versions:
     - ">=6"
