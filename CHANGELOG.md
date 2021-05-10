@@ -1,3 +1,12 @@
+## [10.2.1](https://github.com/nationalbankbelgium/stark/compare/10.2.0...10.2.1) (2021-05-10)
+
+
+### Bug Fixes
+
+* **stark-core:** add support for http 204 status code when persisting logs ([e24d92b](https://github.com/nationalbankbelgium/stark/commit/e24d92b9a5b1e6442a06fdad5b5cf85e95f4382e))
+
+
+
 # [10.2.0](https://github.com/nationalbankbelgium/stark/compare/10.1.0...10.2.0) (2021-03-10)
 
 
