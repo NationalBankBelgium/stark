@@ -183,11 +183,15 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 
 		const emitXhrResult = (xhrRequest: XMLHttpRequest): void => {
 			if (xhrRequest.readyState === XMLHttpRequest.DONE) {
-				if (xhrRequest.status === StarkHttpStatusCodes.HTTP_200_OK || xhrRequest.status === StarkHttpStatusCodes.HTTP_201_CREATED) {
-					httpRequest$.next();
-					httpRequest$.complete();
-				} else {
-					httpRequest$.error(xhrRequest.status);
+				switch (xhrRequest.status) {
+					case StarkHttpStatusCodes.HTTP_200_OK:
+					case StarkHttpStatusCodes.HTTP_201_CREATED:
+					case StarkHttpStatusCodes.HTTP_204_NO_CONTENT:
+						httpRequest$.next();
+						httpRequest$.complete();
+						break;
+					default:
+						httpRequest$.error(xhrRequest.status);
 				}
 			}
 		};
