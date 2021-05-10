@@ -117,7 +117,7 @@
     "@angular/cli": "^8.3.0",
     "@angular/common": "^8.2.0",
     "@angular/compiler": "^8.2.0",
-    "@angular/compiler-cli": "^8.2.0",
+    "@angular/compiler-cli": "^9.0.0",
     "@angular/core": "^8.2.0",
     "@angular/flex-layout": "^8.0.0-beta.25",
     "@angular/forms": "^8.2.0",
