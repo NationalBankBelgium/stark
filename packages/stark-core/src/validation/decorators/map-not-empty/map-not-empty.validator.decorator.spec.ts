@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/* tslint:disable:completed-docs no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkMapNotEmpty } from "./map-not-empty.validator.decorator";
 import { starkMapNotEmptyValidatorName } from "../../validators/map-not-empty";
@@ -28,7 +28,7 @@ describe("ValidatorDecorator: StarkMapNotEmpty", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if Map is empty", () => {
@@ -36,7 +36,7 @@ describe("ValidatorDecorator: StarkMapNotEmpty", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should NOT fail if Map is not empty", () => {

@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs no-identical-functions*/
+/* tslint:disable:completed-docs no-identical-functions no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsIBAN } from "./is-iban.validator.decorator";
 import { starkIsIBANValidatorName } from "../../validators/is-iban";
@@ -28,7 +28,7 @@ describe("ValidatorDecorator: StarkIsIBAN", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if iban is empty", () => {
@@ -36,7 +36,7 @@ describe("ValidatorDecorator: StarkIsIBAN", () => {
 
 		expect(errors.length).toBe(1);
 		expect(errors[0].constraints).toBeDefined();
-		expect(errors[0].constraints[validatorConstraintName]).toBeDefined();
+		expect(errors[0].constraints![validatorConstraintName]).toBeDefined();
 	});
 
 	it("should fail if iban is not correct", () => {
