@@ -432,6 +432,49 @@
     "NEWS": {
       "TITLE": "News"
     },
+    "NGX_FORM_ERRORS": {
+      "TITLE": "Reactive Forms errors",
+      "EXAMPLE": "Example",
+      "FORM": {
+        "VALIDATION": {
+          "REQUIRED": "{{fieldName}} is required",
+          "PASSWORD_REQUIRED": "{{fieldName}} must be provided",
+          "USER_NAME": {
+            "UNIQUE": "This username has already been taken"
+          },
+          "PASSWORD": {
+            "MAX_LENGTH": "Password cannot be more than {{requiredLength}} characters long",
+            "MIN_LENGTH": "Password must be at least {{requiredLength}} characters long",
+            "PATTERN": "Password must contain at least one uppercase, one lowercase and one number"
+          },
+          "CONFIRM_PASSWORD": {
+            "ARE_EQUAL": "Password mismatch"
+          }
+        },
+        "HIDE_DETAILS": "Hide validation details",
+        "SHOW_DETAILS": "Show validation details",
+        "HIDE_SUMMARY": "Hide validation summary",
+        "SHOW_SUMMARY": "Show validation summary",
+        "SUBMIT": "Submit"
+      },
+      "FIELDS": {
+        "USER_NAME": "User Name",
+        "PASSWORD": "Password",
+        "CONFIRM_PASSWORD": "Confirm password",
+        "ALIAS": {
+          "USER_NAME": "Your username",
+          "PASSWORD_ALIAS": "A valid password",
+          "CONFIRM_PASSWORD": "Password confirmation"
+        },
+        "INFO": {
+          "HAS_ERRORS": "Has errors: {{hasErrors}}",
+          "HAS_SPECIFIC_ERROR": "Has '{{error}}' error: {{hasError}}",
+          "ERROR": "'{{error}}' error:",
+          "ERRORS": "Errors:",
+          "IS_TOUCHED": "Is touched: {{isTouched}}"
+        }
+      }
+    },
     "OTHERWISE": {
       "TITLE": "Otherwise"
     },

@@ -432,6 +432,49 @@
     "NEWS": {
       "TITLE": "Nouvelles"
     },
+    "NGX_FORM_ERRORS": {
+      "TITLE": "Reactive Forms errors",
+      "EXAMPLE": "Exemple",
+      "FORM": {
+        "VALIDATION": {
+          "REQUIRED": "Le champ \"{{fieldName}}\" est requis",
+          "PASSWORD_REQUIRED": "Le champ \"{{fieldName}}\" est requis",
+          "USER_NAME": {
+            "UNIQUE": "Ce nom d'utilisateur est déjà pris"
+          },
+          "PASSWORD": {
+            "MAX_LENGTH": "Le mot de passe ne peut pas contenir plus de {{requiredLength}} caractères",
+            "MIN_LENGTH": "Le mot de passe doit contenir au moins {{requiredLength}} caractères",
+            "PATTERN": "Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre."
+          },
+          "CONFIRM_PASSWORD": {
+            "ARE_EQUAL": "Les mots de passe ne correspondent pas"
+          }
+        },
+        "HIDE_DETAILS": "Masquer les détails de validation",
+        "SHOW_DETAILS": "Afficher les détails de validation",
+        "HIDE_SUMMARY": "Masquer le résumé de validation",
+        "SHOW_SUMMARY": "Afficher le résumé de validation",
+        "SUBMIT": "Soumettre"
+      },
+      "FIELDS": {
+        "USER_NAME": "Nom d'utilisateur",
+        "PASSWORD": "Mot de passe",
+        "CONFIRM_PASSWORD": "Confirmez le mot de passe",
+        "ALIAS": {
+          "USER_NAME": "Votre nom d'utilisateur",
+          "PASSWORD_ALIAS": "Un mot de passe valide",
+          "CONFIRM_PASSWORD": "Confirmation du mot de passe"
+        },
+        "INFO": {
+          "HAS_ERRORS": "Contient des erreurs: {{hasErrors}}",
+          "HAS_SPECIFIC_ERROR": "Contient l'erreur '{{error}}': {{hasError}}",
+          "ERROR": "Erreur '{{error}}':",
+          "ERRORS": "Erreurs:",
+          "IS_TOUCHED": "Est touché: {{isTouched}}"
+        }
+      }
+    },
     "OTHERWISE": {
       "TITLE": "Autre"
     },
