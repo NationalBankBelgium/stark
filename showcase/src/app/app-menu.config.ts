@@ -26,6 +26,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					isVisible: true,
 					isEnabled: true,
 					targetState: "news"
+				},
+				{
+					id: "reactive-form-errors",
+					label: "SHOWCASE.NGX_FORM_ERRORS.TITLE",
+					isVisible: true,
+					isEnabled: true,
+					targetState: "reactive-form-errors"
 				}
 			]
 		},

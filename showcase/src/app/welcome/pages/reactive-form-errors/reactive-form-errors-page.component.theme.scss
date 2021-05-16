@@ -1,0 +1,19 @@
+.app-card mat-form-field.maximum-height {
+  .mat-form-field-wrapper {
+    padding-bottom: 40px;
+
+    .mat-form-field-underline {
+      bottom: 40px;
+    }
+
+    .mat-form-field-subscript-wrapper {
+      top: calc(100% - 40px);
+    }
+  }
+}
+
+.validation-summary {
+  .translated-form-error div::before {
+    content: "• ";
+  }
+}

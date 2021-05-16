@@ -432,6 +432,49 @@
     "NEWS": {
       "TITLE": "Nieuws"
     },
+    "NGX_FORM_ERRORS": {
+      "TITLE": "Reactive Forms errors",
+      "EXAMPLE": "Voorbeeld",
+      "FORM": {
+        "VALIDATION": {
+          "REQUIRED": "{{fieldName}} is verplicht",
+          "PASSWORD_REQUIRED": "{{fieldName}} moet worden gegeven",
+          "USER_NAME": {
+            "UNIQUE": "Deze gebruikersnaam is al in gebruik"
+          },
+          "PASSWORD": {
+            "MAX_LENGTH": "Wachtwoord mag niet meer dan {{requiredLength}} tekens lang zijn",
+            "MIN_LENGTH": "Wachtwoord moet minimaal {{requiredLength}} tekens lang zijn",
+            "PATTERN": "Wwachtwoord moet minimaal één hoofdletter, één kleine letter en één cijfer bevatten"
+          },
+          "CONFIRM_PASSWORD": {
+            "ARE_EQUAL": "Wachtwoord komt niet overeen"
+          }
+        },
+        "HIDE_DETAILS": "Validatiedetails verbergen",
+        "SHOW_DETAILS": "Validatiedetails weergeven",
+        "HIDE_SUMMARY": "Validatieoverzicht verbergen",
+        "SHOW_SUMMARY": "Validatieoverzicht tonen",
+        "SUBMIT": "Indienen"
+      },
+      "FIELDS": {
+        "USER_NAME": "Gebruikersnaam",
+        "PASSWORD": "Wachtwoord",
+        "CONFIRM_PASSWORD": "Bevestig wachtwoord",
+        "ALIAS": {
+          "USER_NAME": "Uw gebruikersnaam",
+          "PASSWORD_ALIAS": "Een geldig wachtwoord",
+          "CONFIRM_PASSWORD": "Wachtwoordbevestiging"
+        },
+        "INFO": {
+          "HAS_ERRORS": "Veld heeft fouten: {{hasErrors}}",
+          "HAS_SPECIFIC_ERROR": "Veld heeft de '{{error}}' fout: {{hasError}}",
+          "ERROR": "'{{error}}' fout:",
+          "ERRORS": "Fouten:",
+          "IS_TOUCHED": "Veld is aangeraakt: {{isTouched}}"
+        }
+      }
+    },
     "OTHERWISE": {
       "TITLE": "Andersom"
     },

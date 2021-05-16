@@ -1,0 +1,230 @@
+<div class="container">
+	<h1 class="mat-display-1" translate>
+		SHOWCASE.NGX_FORM_ERRORS.TITLE
+	</h1>
+	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
+	<section class="stark-section">
+		<example-viewer
+			id="example"
+			[extensions]="['HTML', 'SCSS', 'TS']"
+			filesPath="reactive-form-errors/reactive-form-errors"
+			[exampleTitle]="'SHOWCASE.NGX_FORM_ERRORS.EXAMPLE' | translate"
+		>
+			<form [formGroup]="formGroup" (ngSubmit)="onSubmitUserDetails(formGroup)">
+				<div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="10px">
+					<app-card fxFlex="1 1 auto" class="form-card">
+						<mat-card-content>
+							<mat-form-field class="full-width" [ngClass]="getErrorClass('username')">
+								<input
+									matInput
+									[placeholder]="'SHOWCASE.NGX_FORM_ERRORS.FIELDS.USER_NAME' | translate"
+									formControlName="username"
+									required
+									autocomplete="off"
+								/>
+								<mat-error>
+									<ng-template ngxFormErrors="username" #usernameField="ngxFormErrors"></ng-template>
+								</mat-error>
+							</mat-form-field>
+
+							<div formGroupName="matchingPasswords" ngxFormErrorsGroup="passwords-group">
+								<mat-form-field class="full-width" [ngClass]="getErrorClass('matchingPasswords.password')">
+									<input
+										matInput
+										type="password"
+										[placeholder]="'SHOWCASE.NGX_FORM_ERRORS.FIELDS.PASSWORD' | translate"
+										formControlName="password"
+										required
+										autocomplete="off"
+									/>
+									<mat-error>
+										<ng-template
+											ngxFormErrors="matchingPasswords.password"
+											ngxFormErrorsFieldName="SHOWCASE.NGX_FORM_ERRORS.FIELDS.ALIAS.PASSWORD_ALIAS"
+											#passwordField="ngxFormErrors"
+										></ng-template>
+									</mat-error>
+								</mat-form-field>
+
+								<mat-form-field class="full-width" [ngClass]="getErrorClass('matchingPasswords.confirmPassword')">
+									<input
+										matInput
+										type="password"
+										[placeholder]="'SHOWCASE.NGX_FORM_ERRORS.FIELDS.CONFIRM_PASSWORD' | translate"
+										formControlName="confirmPassword"
+										required
+										autocomplete="off"
+									/>
+									<mat-error>
+										<ng-template
+											ngxFormErrors="matchingPasswords.confirmPassword"
+											#confirmPasswordField="ngxFormErrors"
+										></ng-template>
+									</mat-error>
+								</mat-form-field>
+							</div>
+						</mat-card-content>
+
+						<mat-card-actions>
+							<button color="primary" mat-raised-button type="submit" [disabled]="!formGroup.valid">
+								{{ "SHOWCASE.NGX_FORM_ERRORS.FORM.SUBMIT" | translate }}
+							</button>
+							<button color="primary" mat-stroked-button type="button" (click)="toggleValidationDetails()">
+								{{
+									(showValidationDetails
+										? "SHOWCASE.NGX_FORM_ERRORS.FORM.HIDE_DETAILS"
+										: "SHOWCASE.NGX_FORM_ERRORS.FORM.SHOW_DETAILS"
+									) | translate
+								}}
+							</button>
+							<button color="primary" mat-stroked-button type="button" (click)="toggleValidationSummary()">
+								{{
+									(showValidationSummary
+										? "SHOWCASE.NGX_FORM_ERRORS.FORM.HIDE_SUMMARY"
+										: "SHOWCASE.NGX_FORM_ERRORS.FORM.SHOW_SUMMARY"
+									) | translate
+								}}
+							</button>
+						</mat-card-actions>
+					</app-card>
+
+					<div
+						*ngIf="showValidationDetails"
+						fxFlex="1 1 auto"
+						fxLayout="row"
+						fxLayoutAlign="space-between"
+						fxLayout.lt-md="column"
+						fxLayoutGap="10px"
+					>
+						<app-card class="form-field-info" color="accent" fxFlex="1 1 auto">
+							<mat-card-title translate>SHOWCASE.NGX_FORM_ERRORS.FIELDS.USER_NAME</mat-card-title>
+							<mat-card-content>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.HAS_ERRORS"
+											| translate: { hasErrors: usernameField.hasErrors }
+									}}
+								</div>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.HAS_SPECIFIC_ERROR"
+											| translate: { error: "required", hasError: usernameField.hasError("required") }
+									}}
+								</div>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.IS_TOUCHED"
+											| translate: { isTouched: usernameField.hasState("touched") }
+									}}
+								</div>
+								<div>
+									{{ "SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.ERROR" | translate: { error: "required" } }}
+									<pre>{{ usernameField.getError("required") | json }}</pre>
+								</div>
+								<div *ngIf="usernameField.hasErrors">
+									{{ "SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.ERRORS" | translate }}
+									<pre>{{ usernameField.errors | json }}</pre>
+								</div>
+							</mat-card-content>
+						</app-card>
+
+						<app-card class="form-field-info" color="accent" fxFlex="1 1 auto">
+							<mat-card-title translate>SHOWCASE.NGX_FORM_ERRORS.FIELDS.PASSWORD</mat-card-title>
+							<mat-card-content>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.HAS_ERRORS"
+											| translate: { hasErrors: passwordField.hasErrors }
+									}}
+								</div>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.HAS_SPECIFIC_ERROR"
+											| translate: { error: "pattern", hasError: passwordField.hasError("pattern") }
+									}}
+								</div>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.IS_TOUCHED"
+											| translate: { isTouched: passwordField.hasState("touched") }
+									}}
+								</div>
+								<div>
+									{{ "SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.ERROR" | translate: { error: "pattern" } }}
+									<pre>{{ passwordField.getError("pattern") | json }}</pre>
+								</div>
+								<div *ngIf="passwordField.hasErrors">
+									{{ "SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.ERRORS" | translate }}
+									<pre>{{ passwordField.errors | json }}</pre>
+								</div>
+							</mat-card-content>
+						</app-card>
+
+						<app-card class="form-field-info" color="accent" fxFlex="1 1 auto">
+							<mat-card-title translate>SHOWCASE.NGX_FORM_ERRORS.FIELDS.CONFIRM_PASSWORD</mat-card-title>
+							<mat-card-content>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.HAS_ERRORS"
+											| translate: { hasErrors: confirmPasswordField.hasErrors }
+									}}
+								</div>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.HAS_SPECIFIC_ERROR"
+											| translate: { error: "required", hasError: confirmPasswordField.hasError("required") }
+									}}
+								</div>
+								<div>
+									{{
+										"SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.IS_TOUCHED"
+											| translate: { isTouched: confirmPasswordField.hasState("touched") }
+									}}
+								</div>
+								<div>
+									{{ "SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.ERROR" | translate: { error: "required" } }}
+									<pre>{{ confirmPasswordField.getError("required") | json }}</pre>
+								</div>
+								<div *ngIf="confirmPasswordField.hasErrors">
+									{{ "SHOWCASE.NGX_FORM_ERRORS.FIELDS.INFO.ERRORS" | translate }}
+									<pre>{{ confirmPasswordField.errors | json }}</pre>
+								</div>
+							</mat-card-content>
+						</app-card>
+					</div>
+
+					<app-card
+						*ngIf="showValidationSummary"
+						fxFlex="1 1 auto"
+						class="validation-summary"
+						[color]="
+							!usernameField.hasErrors && !passwordField.hasErrors && !confirmPasswordField.hasErrors ? 'success' : 'warning'
+						"
+					>
+						<span *ngIf="!usernameField.hasErrors && !passwordField.hasErrors && !confirmPasswordField.hasErrors">
+							No validation errors
+						</span>
+
+						<div *ngIf="usernameField.hasErrors || passwordField.hasErrors || confirmPasswordField.hasErrors">
+							<ng-container *ngIf="usernameField.hasErrors">
+								<ng-template ngxFormErrors="username"></ng-template>
+							</ng-container>
+
+							<ng-container *ngIf="passwordField.hasErrors">
+								<ng-template
+									ngxFormErrors="matchingPasswords.password"
+									ngxFormErrorsFieldName="SHOWCASE.NGX_FORM_ERRORS.FIELDS.ALIAS.PASSWORD_ALIAS"
+								></ng-template>
+							</ng-container>
+
+							<ng-container *ngIf="confirmPasswordField.hasErrors">
+								<ng-template ngxFormErrors="matchingPasswords.confirmPassword"></ng-template>
+							</ng-container>
+						</div>
+					</app-card>
+				</div>
+			</form>
+		</example-viewer>
+	</section>
+	<stark-reference-block [links]="referenceList"></stark-reference-block>
+</div>
