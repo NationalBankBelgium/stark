@@ -20,7 +20,7 @@
   "types": "typings/index.d.ts",
   "dependencies": {
     "@angular-builders/custom-webpack": "^8.3.0",
-    "@angular-devkit/build-angular": ">= 0.800.0 < 0.900.0",
+    "@angular-devkit/build-angular": ">=0.1102.11",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "@types/webpack": "^4.4.24",
