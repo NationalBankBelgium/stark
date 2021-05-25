@@ -101,7 +101,7 @@
     "prettier": "~2.2.1",
     "prismjs": "^1.23.0",
     "protractor": "^5.4.2",
-    "puppeteer": "^7.1.0",
+    "puppeteer": "^9.1.1",
     "release-it": "^14.4.1",
     "rxjs": "^6.6.7",
     "stream-concat": "^0.3.0",
