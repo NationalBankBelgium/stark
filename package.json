@@ -54,7 +54,7 @@
     "@prettier/plugin-xml": "^0.13.1",
     "@release-it/conventional-changelog": "^2.0.1",
     "@sqltools/formatter": "^1.2.3",
-    "@types/jasmine": "~3.6.4",
+    "@types/jasmine": "~3.7.4",
     "@types/karma": "~5.0.1",
     "@types/lodash-es": "^4.17.4",
     "@types/node": "^10.17.54",
