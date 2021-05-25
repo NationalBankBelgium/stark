@@ -86,7 +86,7 @@
     "test": "npm run lint && npm run test-fast",
     "test:ci": "npm run lint && npm run test-fast:ci",
     "test-fast": "npm run ng test",
-    "test-fast:ci": "cross-env CI=1 npm run ng test --code-coverage",
+    "test-fast:ci": "npm run ng test --watch=false --code-coverage",
     "tsc": "tsc",
     "tslint": "tslint",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",

@@ -1,6 +1,7 @@
 // Helpers
 const helpers = require("./helpers");
 const ciDetect = require("@npmcli/ci-detect");
+const watch = process.argv.indexOf("--watch=false") < 0 && !ciDetect();
 
 const rawKarmaConfig = {
 	// base path that will be used to resolve all patterns (e.g. files, exclude)
@@ -58,10 +59,10 @@ const rawKarmaConfig = {
 
 	// Continuous Integration mode
 	// if true, Karma captures browsers, runs the tests and exits
-	singleRun: !!ciDetect(),
+	singleRun: !watch,
 
 	// If true, tests restart automatically if a file is changed
-	restartOnFileChange: !ciDetect(),
+	restartOnFileChange: watch,
 
 	// Timeout settings
 	browserNoActivityTimeout: 30000,
