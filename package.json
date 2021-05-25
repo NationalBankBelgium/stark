@@ -97,7 +97,7 @@
     "moment-locales-webpack-plugin": "^1.2.0",
     "ng-packagr": "^5.7.1",
     "normalize.css": "^8.0.1",
-    "nouislider": "^14.6.3",
+    "nouislider": "^15.1.1",
     "prettier": "~2.2.1",
     "prismjs": "^1.23.0",
     "protractor": "^5.4.2",
