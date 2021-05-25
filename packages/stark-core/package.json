@@ -36,7 +36,7 @@
     "ibantools": "^3.2.3",
     "lodash-es": "^4.17.21",
     "moment": "^2.22.2",
-    "uuid": "^3.3.2"
+    "uuid": "^8.3.2"
   },
   "peerDependencies": {
     "@angular/common": "^8.2.0",
