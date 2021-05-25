@@ -1,6 +1,7 @@
 // Helpers
 const helpers = require("./helpers");
 const ciDetect = require("@npmcli/ci-detect");
+const isCI = process.argv.indexOf("--watch=false") > -1 || !!ciDetect();
 
 const rawKarmaConfig = {
 	// base path that will be used to resolve all patterns (e.g. files, exclude)
@@ -30,7 +31,7 @@ const rawKarmaConfig = {
 	// available reporters: https://npmjs.org/browse/keyword/karma-reporter
 	// https://www.npmjs.com/package/karma-junit-reporter
 	// https://www.npmjs.com/package/karma-spec-reporter
-	reporters: !!ciDetect() ? ["mocha", "progress"] : ["mocha", "progress", "kjhtml"],
+	reporters: isCI ? ["mocha", "progress"] : ["mocha", "progress", "kjhtml"],
 
 	// web server port
 	port: 9876,
@@ -54,14 +55,14 @@ const rawKarmaConfig = {
 
 	// start these browsers
 	// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-	browsers: !!ciDetect() ? ["ChromeHeadlessNoSandbox"] : ["Chrome"],
+	browsers: isCI ? ["ChromeHeadlessNoSandbox"] : ["Chrome"],
 
 	// Continuous Integration mode
 	// if true, Karma captures browsers, runs the tests and exits
-	singleRun: !!ciDetect(),
+	singleRun: isCI,
 
 	// If true, tests restart automatically if a file is changed
-	restartOnFileChange: !ciDetect(),
+	restartOnFileChange: !isCI,
 
 	// Timeout settings
 	browserNoActivityTimeout: 30000,
@@ -94,5 +95,6 @@ module.exports = {
 	default: function (config) {
 		config.set(rawKarmaConfig);
 	},
-	rawKarmaConfig: rawKarmaConfig
+	rawKarmaConfig: rawKarmaConfig,
+	isCITest: isCI
 };
