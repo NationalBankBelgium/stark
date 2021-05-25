@@ -1,7 +1,7 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/packages/stark-build"
+  directory: "/"
   schedule:
     interval: daily
     time: "04:00"
@@ -13,86 +13,18 @@ updates:
   - dependency-name: "@angular-builders/*"
     versions:
     - ">=8"
-  - dependency-name: "@angular-devkit/build-angular"
-    versions:
-    - ">=0.800"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
-  directory: "/packages/stark-core"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@types/node"
-    versions:
-    - ">=11"
-  - dependency-name: "@uirouter/angular"
-    versions:
-    - ">=6"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
-  directory: "/packages/stark-rbac"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@types/node"
-    versions:
-    - ">=11"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
-  directory: "/packages/stark-testing"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@types/node"
-    versions:
-    - ">=11"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
-  directory: "/packages/stark-ui"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@angular/*"
-    versions:
-    - ">=8"
-  - dependency-name: "@mdi/angular-material"
-    versions:
-    - ">=5"
-  - dependency-name: "@types/node"
-    versions:
-    - ">=11"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@angular/*"
-    versions:
-    - ">=8"
   - dependency-name: "@angular-devkit/build-ng-packagr"
     versions:
     - ">=0.800"
+  - dependency-name: "@angular-devkit/build-angular"
+    versions:
+    - ">=0.800"
+  - dependency-name: "@mdi/angular-material"
+    versions:
+    - ">=5"
+  - dependency-name: "@uirouter/angular"
+    versions:
+    - ">=6"
   - dependency-name: typescript
     versions:
     - ">= 0"

@@ -3,26 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "typeRoots": ["./node_modules/@types", "../stark-build/typings"],
+    "typeRoots": ["../../node_modules/@types", "../stark-build/typings"],
     "lib": ["dom", "dom.iterable", "es2017"],
     "paths": {
-      "@angular/common": ["../../node_modules/@angular/common"],
-      "@angular/core": ["../../node_modules/@angular/core"],
-      "@angular/router": ["../../node_modules/@angular/router"],
       "@nationalbankbelgium/stark-core": ["./public_api.ts"],
       "@nationalbankbelgium/stark-core/testing": ["./testing/public_api.ts"],
-      "@ng-idle/core": ["./node_modules/@ng-idle/core"],
-      "@ng-idle/keepalive": ["./node_modules/@ng-idle/keepalive"],
-      "@ngrx/effects": ["./node_modules/@ngrx/effects"],
-      "@ngrx/store": ["./node_modules/@ngrx/store"],
-      "@ngx-translate/core": ["./node_modules/@ngx-translate/core"],
-      "@uirouter/angular": ["./node_modules/@uirouter/angular"],
-      "@uirouter/core": ["./node_modules/@uirouter/core"],
-      "cerialize": ["./node_modules/cerialize"],
-      "core-js/*": ["../../node_modules/core-js/*"],
-      "environments/environment": ["./src/common/environment"],
-      "rxjs/*": ["../../node_modules/rxjs/*"],
-      "zone.js/*": ["../../node_modules/zone.js/*"]
+      "environments/environment": ["./src/common/environment"]
     },
     "outDir": "../../dist/packages/stark-core"
   }
