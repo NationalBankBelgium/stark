@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs*/
-import uuid from "uuid";
+import { v4 as uuidV4 } from "uuid";
 import { Serialize } from "cerialize";
 import { select, Store } from "@ngrx/store";
 import { Inject, Injectable, Injector } from "@angular/core";
@@ -133,7 +133,7 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 	}
 
 	public generateNewCorrelationId(): string {
-		this._correlationId = uuid.v4();
+		this._correlationId = uuidV4();
 		return this._correlationId;
 	}
 
