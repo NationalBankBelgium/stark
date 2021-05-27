@@ -130,7 +130,7 @@
     "@nationalbankbelgium/stark-core": "latest",
     "@nationalbankbelgium/stark-ui": "latest",
     "@uirouter/visualizer": "~7.2.1",
-    "core-js": "~3.8.0",
+    "core-js": "~3.13.0",
     "eligrey-classlist-js-polyfill": "~1.2.20180112",
     "event-source-polyfill": "~1.0.22",
     "hammerjs": "^2.0.8",
