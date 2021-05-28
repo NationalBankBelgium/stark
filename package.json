@@ -189,6 +189,7 @@
     "install:ci:showcase": "cd showcase && npm ci && cd ..",
     "ng": "ng",
     "ngc": "ngc",
+    "postinstall": "husky install",
     "prettier-check": "prettier \"**/*.{css,html,js,json,md,pcss,scss,ts,yml}\" --write --html-whitespace-sensitivity strict",
     "preupdate:showcase": "npm run clean:showcase",
     "preupdate:starter": "npm run clean:starter",
@@ -237,12 +238,6 @@
     "tslint-check:starter": "cd starter && npm run tslint-check && cd ../..",
     "update:showcase": "npm run clean:showcase && npm run install:showcase",
     "update:starter": "npm run clean:starter && npm run install:starter"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged && npm run docs:coverage"
-    }
   },
   "lint-staged": {
     "*.{css,html,js,json,md,pcss,scss,ts,yml}": [
