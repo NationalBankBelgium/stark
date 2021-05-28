@@ -15,8 +15,8 @@
     "url": "https://github.com/nationalbankbelgium/stark.git"
   },
   "engines": {
-    "node": ">=10.16.0",
-    "npm": ">=6.9.2"
+    "node": ">=12.22.1",
+    "npm": ">=7.12.1"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^8.3.0",
@@ -57,7 +57,7 @@
     "@types/jasmine": "~3.6.4",
     "@types/karma": "~5.0.1",
     "@types/lodash-es": "^4.17.4",
-    "@types/node": "^10.17.54",
+    "@types/node": "^12.20.13",
     "@types/nouislider": "^9.0.10",
     "@types/prismjs": "^1.16.3",
     "@types/uuid": "^8.3.0",
