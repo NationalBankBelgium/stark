@@ -37,7 +37,7 @@
     "@angular/router": "^8.2.0",
     "@angularclass/hmr": "^3.0.0",
     "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-env": "^7.14.4",
     "@commitlint/cli": "^12.0.0",
     "@commitlint/config-conventional": "^12.1.1",
     "@compodoc/compodoc": "~1.1.11",
