@@ -265,6 +265,25 @@ Thanks to the following search & replace:
 
 It should be easy to adapt the index.html file.
 
+### 3. Adapt "package.json" file
+
+#### 3.1 Remove scripts with MONITOR
+
+Due to Angular upgrade, webpack-monitor stopped working. Since the package was no longer maintained (4 years),
+we decided to remove the support from `stark-build`.
+
+The following scripts should be removed from "package.json" file:
+
+```json
+{
+	"scripts": {
+		"build:dev:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run build:dev",
+		"server:dev:monitor": "npm run clean:dist && cross-env MONITOR=1 npm run ng -- serve",
+		"start:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run server:dev"
+	}
+}
+```
+
 ## Stark-Core
 
 ### 1. UI-router changes

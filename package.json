@@ -117,7 +117,6 @@
     "uuid": "^8.3.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-merge": "^4.2.1",
-    "webpack-monitor": "^1.0.14",
     "zone.js": "~0.9.1"
   },
   "scripts": {
