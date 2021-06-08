@@ -20,7 +20,7 @@
   "dependencies": {
     "@angularclass/hmr": "^3.0.0",
     "@ng-idle/core": "^8.0.0-beta.4",
-    "@ng-idle/keepalive": "^8.0.0-beta.4",
+    "@ng-idle/keepalive": "^9.0.0-beta.1",
     "@ngrx/effects": "^8.6.1",
     "@ngrx/store": "^8.6.1",
     "@ngrx/store-devtools": "^8.6.1",
