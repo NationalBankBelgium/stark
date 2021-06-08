@@ -22,7 +22,7 @@
     "@ng-idle/core": "^8.0.0-beta.4",
     "@ng-idle/keepalive": "^8.0.0-beta.4",
     "@ngrx/effects": "^8.6.1",
-    "@ngrx/store": "^8.6.1",
+    "@ngrx/store": "^12.0.0",
     "@ngrx/store-devtools": "^8.6.1",
     "@ngx-translate/core": "^12.1.2",
     "@types/lodash-es": "^4.17.4",
