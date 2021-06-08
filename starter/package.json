@@ -101,11 +101,6 @@
     "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run docs:coverage"
-    }
-  },
   "lint-staged": {
     "*.{css,js,json,md,pcss,scss,ts}": [
       "prettier --write"
@@ -150,7 +145,7 @@
     "@types/webpack-env": "~1.16.0",
     "cross-env": "~7.0.3",
     "find-root": "~1.1.0",
-    "husky": "~4.3.0",
+    "husky": "~6.0.0",
     "lint-staged": "~10.5.1",
     "npm-run-all": "~4.1.5",
     "parse5": "~6.0.1",

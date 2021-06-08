@@ -201,6 +201,16 @@ First, clone the project:
 git clone --depth 1 https://github.com/NationalBankBelgium/stark.git
 ```
 
+Then add following "prepare" script in your "package.json" file to add husky support:
+
+```json
+{
+	"scripts": {
+		"prepare": "husky install"
+	}
+}
+```
+
 Then go to the starter folder (`cd starter`) and install all dependencies using: `npm install`.
 
 TODO review/complete; see #34
