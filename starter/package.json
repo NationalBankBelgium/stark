@@ -101,11 +101,6 @@
     "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run docs:coverage"
-    }
-  },
   "lint-staged": {
     "*.{css,js,json,md,pcss,scss,ts}": [
       "prettier --write"

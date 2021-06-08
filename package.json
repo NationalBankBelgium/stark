@@ -184,7 +184,7 @@
     "lint:packages": "npm run lint:stark-core && npm run lint:stark-ui && npm run lint:stark-rbac",
     "install:all": "npm run build && npm run install:starter && npm run install:showcase",
     "install:showcase": "cd showcase && npm install && cd ..",
-    "install:starter": "cd starter && ../node_modules/.bin/cross-env HUSKY_SKIP_INSTALL=1 npm install && cd ..",
+    "install:starter": "cd starter && npm install && cd ..",
     "install:ci:all": "npm run build:trace && npm run install:starter && npm run install:ci:showcase",
     "install:ci:showcase": "cd showcase && npm ci && cd ..",
     "ng": "ng",
