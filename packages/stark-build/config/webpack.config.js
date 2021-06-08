@@ -9,7 +9,6 @@ const fs = require("fs");
  */
 const DefinePlugin = require("webpack/lib/DefinePlugin");
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const WebpackMonitor = require("webpack-monitor");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const StylelintPlugin = require("stylelint-webpack-plugin");
 const webpackMerge = require("webpack-merge");
@@ -48,7 +47,6 @@ const cspDirectives = [
  * @param options - The options defined in angular.json
  */
 module.exports = (config, options) => {
-	const MONITOR = !!process.env.MONITOR; // env MONITOR variable set via cross-env
 	const BUNDLE_ANALYZER = !!process.env.BUNDLE_ANALYZER; // env BUNDLE_ANALYZER variable set via cross-env
 
 	return webpackMerge(config, {
@@ -180,23 +178,6 @@ module.exports = (config, options) => {
 			new MomentLocalesPlugin({
 				localesToKeep: ["de", "fr", "en-gb", "nl", "nl-be"]
 			}),
-
-			/**
-			 * Plugin: WebpackMonitor
-			 * Description: Gives information about the bundle size
-			 * See: https://github.com/webpackmonitor/webpackmonitor
-			 */
-			...(MONITOR
-				? [
-						new WebpackMonitor({
-							capture: true, // -> default 'true'
-							target: helpers.root("reports/webpack-monitor/stats.json"), // default -> '../monitor/stats.json'
-							launch: true, // -> default 'false'
-							port: 3030, // default 8081
-							excludeSourceMaps: true // default 'true'
-						})
-				  ]
-				: []),
 
 			/**
 			 * Plugin: BundleAnalyzerPlugin
