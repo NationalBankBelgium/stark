@@ -36,8 +36,7 @@
     "tslint-loader": "^3.6.0",
     "tslint-sonarts": "^1.9.0",
     "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-merge": "^4.2.1",
-    "webpack-monitor": "^1.0.14"
+    "webpack-merge": "^4.2.1"
   },
   "peerDependencies": {
     "@angular/cli": "^8.2.0",
