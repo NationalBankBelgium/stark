@@ -18,7 +18,7 @@ env:
   NPM_VERSION: "7.12.1"
   LOGS_DIR: /tmp/stark/logs
   LOGS_FILE: /tmp/stark/logs/build-perf.log
-  HUSKY_SKIP_INSTALL: true
+  HUSKY: 0
 
 jobs:
   build-and-test:
