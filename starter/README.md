@@ -179,7 +179,7 @@ Most of the time you won't need to change these, but they allow you to customize
 What you need to run this app:
 
 -   `node` and `npm`
--   Ensure you're running the latest versions Node `v8.x.x`+ and NPM `5.8.x`+
+-   Ensure you're running the latest versions Node `v12.x.x`+ and NPM `7.12.x`+
 
 > If you have `nvm` installed, which is highly recommended you can do a `nvm install --lts && nvm use` in `$` to run with the latest Node LTS.
 > You can also have this `zsh` done for you [automatically](https://github.com/creationix/nvm#calling-nvm-use-automatically-in-a-directory-with-a-nvmrc-file)

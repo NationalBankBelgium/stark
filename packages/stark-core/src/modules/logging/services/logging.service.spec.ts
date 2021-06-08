@@ -326,7 +326,7 @@ describe("Service: StarkLoggingService", () => {
 			}
 
 			const originalXMLHttpRequest = global["XMLHttpRequest"];
-			global["XMLHttpRequest"] = MockXHR; // override global XMLHttpRequest object
+			global["XMLHttpRequest"] = <any>MockXHR; // override global XMLHttpRequest object
 
 			const mockFlushUrl = `${loggingBackend.url}/${appConfig.loggingFlushResourceName}`;
 			const mockSerializedData = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));

@@ -146,6 +146,11 @@ fi
 if [[ ${GH_ACTIONS_TAG} == "" ]]; then
   logTrace "Setting the version suffix to the latest commit hash" 1
   VERSION_SUFFIX="-$(git log --oneline -1 | awk '{print $1}')" # last commit id
+
+  # Locally, we need to ensure the generated tgz file is different for each build
+  if [[ ${GITHUB_ACTIONS} != true ]]; then
+    VERSION_SUFFIX="${VERSION_SUFFIX}-$(date +%s)"
+  fi
 else
   logTrace "Build executed for a tag. Not using a version suffix!" 1
   VERSION_SUFFIX="" # no suffix
