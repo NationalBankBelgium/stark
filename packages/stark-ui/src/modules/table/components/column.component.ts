@@ -215,6 +215,40 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public stickyEnd = false;
 
 	/**
+	 * A function to generate tooltip for cells based on the value, its row and the name of the column.
+	 * Or a static string with the tooltip.
+	 */
+	@Input()
+	public cellTooltip?: ((value: any, row?: object, columnName?: string) => string) | string;
+
+	/**
+	 * Position where the tooltip should be displayed.
+	 * Default: "below"
+	 * Possible positions: above, below, left, right, before, after
+	 */
+	@Input()
+	public get cellTooltipPosition(): string {
+		return this._cellTooltipPosition;
+	}
+
+	public set cellTooltipPosition(tooltip: string) {
+		this._cellTooltipPosition = tooltip || "below";
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _cellTooltipPosition = "below"
+
+	/**
+	 * A function to generate classNames for the tooltip of cells based on the value, its row and the name of the column.
+	 * Or a static string with the classNames.
+	 */
+	@Input()
+	public cellTooltipClassName?: ((value: any, row?: object, columnName?: string) => string) | string;
+
+	/**
 	 * Output that will emit a StarkColumnCellClickedOutput whenever a cell in the column is clicked
 	 */
 	@Output()
@@ -419,5 +453,41 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		}
 
 		return classes.join(" ");
+	}
+
+	/**
+	 * Gets the tooltip for a specific cell, if the cellTooltip Input or the cellTooltipFn function has been given as an Input.
+	 * @param row - The data object of the row the cell is in.
+	 * @returns The tooltip for the cell.
+	 */
+	public getCellTooltip(row: object): string {
+		if (!this.cellTooltip) {
+			return "";
+		}
+
+		if (typeof this.cellTooltip === "string") {
+			return this.cellTooltip;
+		}
+
+		const value: any = this.getRawValue(row);
+		return this.cellTooltip(value, row, this.name);
+	}
+
+	/**
+	 * Gets the classes for the tooltip of a specific cell, if the cellTooltipClassName Input or the cellTooltipClassNameFn function has been given as an Input.
+	 * @param row - The data object of the row the cell is in.
+	 * @returns The classes for the tooltip of the cell.
+	 */
+	public getCellTooltipClassNames(row: object): string {
+		if (!this.cellTooltipClassName) {
+			return "";
+		}
+
+		if (typeof this.cellTooltipClassName === "string") {
+			return this.cellTooltipClassName;
+		}
+
+		const value: any = this.getRawValue(row);
+		return this.cellTooltipClassName(value, row, this.name);
 	}
 }

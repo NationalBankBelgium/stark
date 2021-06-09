@@ -80,6 +80,7 @@ import {
 	TableWithTranscludedActionBarComponent,
 	TableWithCollapsibleRowsComponent
 } from "./components";
+import {TableWithTooltipComponent} from "./components/table-with-tooltip/table-with-tooltip.component";
 
 @NgModule({
 	imports: [
@@ -154,6 +155,7 @@ import {
 		TableWithCustomCellRenderingComponent,
 		TableWithCustomStylingComponent,
 		TableWithFixedActionsComponent,
+		TableWithTooltipComponent,
 		DemoToastPageComponent,
 		DemoGenericSearchFormComponent,
 		DemoTransformInputDirectivePageComponent,

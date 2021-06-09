@@ -342,6 +342,7 @@
         "WITH_CUSTOM_CELL_RENDERING": "Table met aangepaste kolommen",
         "WITH_FIXED_ACTIONS": "Tabel met vaste rijacties",
         "WITH_COLLAPSIBLE_ROWS": "Tabel met uitklapbare rijen",
+        "WITH_TOOLTIP": "Tabel met tooltip",
         "TITLE": "Table"
       },
       "TOAST": {
