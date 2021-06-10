@@ -21,7 +21,7 @@
   "dependencies": {
     "@angular-builders/custom-webpack": "^8.3.0",
     "@angular-devkit/build-angular": ">= 0.800.0 < 0.900.0",
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.14.5",
     "@babel/preset-env": "^7.14.4",
     "@types/webpack": "^4.4.24",
     "babel-loader": "^8.0.5",
