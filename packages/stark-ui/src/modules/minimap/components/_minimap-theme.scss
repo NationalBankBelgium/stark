@@ -3,39 +3,45 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/minimap/components/minimap-theme.scss */
 
-.stark-minimap {
-  .stark-minimap-dots {
-    i {
-      background-color: $secondary-dark-text-color;
-      opacity: 0.2;
-    }
+@use "~@angular/material" as mat;
+@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
+@use "../../../../styles/old-variables" as old-vars;
 
-    .selected i {
-      opacity: 1;
-    }
-  }
-}
+@mixin stark-minimap-theme() {
+  .stark-minimap {
+    .stark-minimap-dots {
+      i {
+        background-color: old-vars.$secondary-dark-text-color;
+        opacity: 0.2;
+      }
 
-.stark-primary.stark-minimap {
-  .stark-minimap-dots {
-    i {
-      background-color: mat-color($primary-palette, 500);
+      .selected i {
+        opacity: 1;
+      }
     }
   }
-}
 
-.stark-accent.stark-minimap {
-  .stark-minimap-dots {
-    i {
-      background-color: mat-color($accent-palette, 500);
+  .stark-primary.stark-minimap {
+    .stark-minimap-dots {
+      i {
+        background-color: mat.get-color-from-palette(stark-mat-palettes.$primary-palette, 500);
+      }
     }
   }
-}
 
-.stark-warning.stark-minimap {
-  .stark-minimap-dots {
-    i {
-      background-color: mat-color($warning-palette, 500);
+  .stark-accent.stark-minimap {
+    .stark-minimap-dots {
+      i {
+        background-color: mat.get-color-from-palette(stark-mat-palettes.$accent-palette, 500);
+      }
+    }
+  }
+
+  .stark-warning.stark-minimap {
+    .stark-minimap-dots {
+      i {
+        background-color: mat.get-color-from-palette(stark-mat-palettes.$warning-palette, 500);
+      }
     }
   }
 }

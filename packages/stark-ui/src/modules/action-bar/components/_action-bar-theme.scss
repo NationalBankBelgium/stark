@@ -3,61 +3,71 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/action-bar/components/_action-bar-theme.scss */
 
-@media #{$tablet-query} {
-  .stark-action-bar {
-    .action-label {
-      &.primary {
-        color: mat-color(map-get($base-theme, primary-palette));
-      }
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "~@angular/material/core/theming/palette" as mat-palette;
+@use "../../../../styles/theming/stark-palettes" as stark-palettes;
+@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
+@use "../../../../styles/components/button-theme" as stark-button-theme;
+@use "../../../../styles/media-queries" as *;
 
-      &.warn {
-        color: mat-color(map-get($base-theme, warn-palette));
-      }
+@mixin stark-action-bar-theme() {
+  @media #{$tablet-query} {
+    .stark-action-bar {
+      .action-label {
+        &.primary {
+          color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, primary-palette));
+        }
 
-      &.accent {
-        color: mat-color($accent-palette, 500);
-      }
+        &.warn {
+          color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, warn-palette));
+        }
 
-      &.success {
-        color: mat-color($success-palette, 500);
-      }
+        &.accent {
+          color: mat.get-color-from-palette(stark-mat-palettes.$accent-palette, 500);
+        }
 
-      &.alert {
-        color: mat-color($alert-palette, 500);
-      }
+        &.success {
+          color: mat.get-color-from-palette(stark-palettes.$success-palette, 500);
+        }
 
-      &.alt {
-        color: mat-color($grey-palette, 900);
-      }
+        &.alert {
+          color: mat.get-color-from-palette(stark-palettes.$alert-palette, 500);
+        }
 
-      &.neutral {
-        color: mat-color($grey-palette, 400);
-      }
+        &.alt {
+          color: mat.get-color-from-palette(stark-palettes.$grey-palette, 900);
+        }
 
-      &.white {
-        color: #fff;
-      }
+        &.neutral {
+          color: mat.get-color-from-palette(stark-palettes.$grey-palette, 400);
+        }
 
-      &.disabled {
-        color: map-get($mat-light-theme-foreground, disabled-text);
+        &.white {
+          color: #fff;
+        }
+
+        &.disabled {
+          color: map.get(mat.$light-theme-foreground-palette, disabled-text);
+        }
       }
     }
   }
-}
 
-@media #{$mobile-only-query} {
-  .stark-action-bar-full {
-    background-color: rgba(0, 0, 0, 0.85);
+  @media #{$mobile-only-query} {
+    .stark-action-bar-full {
+      background-color: rgba(0, 0, 0, 0.85);
 
-    .mat-icon-button {
-      @include stark-button-color(rgba($color: #fff, $alpha: 0.8), $light-primary-text);
-    }
+      .mat-icon-button {
+        @include stark-button-theme.stark-button-color(rgba($color: #fff, $alpha: 0.8), mat-palette.$light-primary-text);
+      }
 
-    .action-label {
-      color: rgba(255, 255, 255, 0.8);
+      .action-label {
+        color: rgba(255, 255, 255, 0.8);
 
-      &.disabled {
-        color: rgba($color: #fff, $alpha: 0.25);
+        &.disabled {
+          color: rgba($color: #fff, $alpha: 0.25);
+        }
       }
     }
   }

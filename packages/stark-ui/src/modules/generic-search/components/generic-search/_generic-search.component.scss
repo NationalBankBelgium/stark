@@ -1,32 +1,35 @@
+@use "../../../../../styles/media-queries" as *;
 $button-spacing: 10px;
 
-.stark-generic-search {
-  > form {
-    overflow: hidden;
-    box-sizing: border-box;
-    padding-bottom: 4px; // If not set `box-shadow`from buttons is cut off
-  }
-
-  .stark-form-actions {
-    display: flex;
-    flex-wrap: wrap;
-
-    margin: -$button-spacing;
-
-    button {
-      margin: $button-spacing;
-      width: calc(100% - #{$button-spacing} * 2);
-
-      font-size: 20px;
-      line-height: 48px;
+@mixin stark-generic-search() {
+  .stark-generic-search {
+    > form {
+      overflow: hidden;
+      box-sizing: border-box;
+      padding-bottom: 4px; // If not set `box-shadow`from buttons is cut off
     }
 
-    @media #{$tablet-query} {
-      justify-content: flex-end;
+    .stark-form-actions {
+      display: flex;
+      flex-wrap: wrap;
+
+      margin: -$button-spacing;
+
       button {
-        font-size: 13px;
-        line-height: 34px;
-        width: auto;
+        margin: $button-spacing;
+        width: calc(100% - #{$button-spacing} * 2);
+
+        font-size: 20px;
+        line-height: 48px;
+      }
+
+      @media #{$tablet-query} {
+        justify-content: flex-end;
+        button {
+          font-size: 13px;
+          line-height: 34px;
+          width: auto;
+        }
       }
     }
   }

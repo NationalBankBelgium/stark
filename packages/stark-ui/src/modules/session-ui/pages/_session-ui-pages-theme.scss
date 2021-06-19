@@ -1,4 +1,9 @@
 /* stark session ui pages */
+
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "styles/theming" as stark-theme;
+
 .stark-session-ui-page header {
-  background-color: mat-color(map-get($base-theme, primary-palette), 900);
+  background-color: mat.get-color-from-palette(map.get(stark-theme.$base-theme, primary-palette), 900);
 }

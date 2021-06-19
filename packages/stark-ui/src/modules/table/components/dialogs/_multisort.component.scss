@@ -5,37 +5,40 @@
 
 $stark-table-multifilters-side-padding: 10px;
 
-.stark-table-dialog-multisort-panel-class {
-  width: 500px;
-}
-
-.stark-table-dialog-multisort {
-  .header {
-    display: flex;
-    align-items: top;
-    justify-content: space-between;
+@mixin stark-multisort() {
+  .stark-table-dialog-multisort-panel-class {
+    width: 500px;
   }
 
-  .rules {
-    .rule {
+  .stark-table-dialog-multisort {
+    .header {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      // FIXME should be "start"?
+      align-items: top;
+      justify-content: space-between;
+    }
 
-      > * {
-        padding-right: $stark-table-multifilters-side-padding;
-      }
+    .rules {
+      .rule {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      > *:last-child {
-        padding-right: 0;
-      }
+        > * {
+          padding-right: $stark-table-multifilters-side-padding;
+        }
 
-      .form-field-name {
-        flex-grow: 1;
-      }
+        > *:last-child {
+          padding-right: 0;
+        }
 
-      .form-field-order .mat-form-field-infix {
-        width: 80px;
+        .form-field-name {
+          flex-grow: 1;
+        }
+
+        .form-field-order .mat-form-field-infix {
+          width: 80px;
+        }
       }
     }
   }

@@ -2,200 +2,204 @@
 /*  S t a r k   M e s s a g e   P a n e                                           */
 /* ============================================================================== */
 /* stark-ui: src/modules/message-pane/components/message-pane.component.scss */
+@use "../../../../styles/media-queries" as *;
+@use "../../../../styles/old-variables" as old-vars;
 
-.stark-message-pane {
-  padding: 0 16px;
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  left: 16px;
-  z-index: 80;
-  text-align: right;
-  display: none;
-  overflow: visible;
-  height: 0;
-
-  &.align-left {
-    text-align: left;
-    will-change: padding-left;
-    transition: all 0.3s;
-  }
-
-  &.align-center {
-    text-align: center;
-  }
-
-  &.align-right {
+@mixin stark-message-pane() {
+  .stark-message-pane {
+    padding: 0 16px;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    z-index: 80;
     text-align: right;
-  }
+    display: none;
+    overflow: visible;
+    height: 0;
 
-  &.displayed {
-    display: block;
-  }
+    &.align-left {
+      text-align: left;
+      will-change: padding-left;
+      transition: all 0.3s;
+    }
 
-  & .inner {
-    position: relative;
-    display: inline-block;
-    text-align: left;
-    box-shadow: $elevation-2;
-    opacity: 0;
-    border-radius: 20px;
-    will-change: opacity, border-radius;
-    transition: all 0.4s;
-  }
+    &.align-center {
+      text-align: center;
+    }
 
-  &.display-animated .inner {
-    opacity: 1;
-    border-radius: 2px;
-  }
+    &.align-right {
+      text-align: right;
+    }
 
-  /* summary pane */
-  & .summary {
-    display: flex;
-
-    & button {
+    &.displayed {
       display: block;
-      box-sizing: border-box;
-      position: relative;
-      margin: 0;
-      background: none;
-      border: none;
-      padding: 8px;
-
-      &:focus {
-        outline: none;
-      }
-
-      &.active::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 4px;
-      }
-
-      & b {
-        position: absolute;
-        background: #fff;
-        font-size: 12px;
-        top: 4px;
-        right: 0;
-        padding: 0 2px;
-        border-radius: 2px;
-        font-weight: normal;
-        line-height: 14px;
-        width: 16px;
-        height: 14px;
-        box-shadow: $elevation-1;
-      }
     }
 
-    & .may-collapse {
-      overflow: hidden;
-      width: 0;
-      padding: 8px 0;
-      will-change: width, padding;
-      transition: all 0.4s;
-    }
-
-    & .stark-message-pane-total {
-      box-sizing: border-box;
-      overflow: hidden;
-      width: 0;
-      padding: 0;
-      will-change: width, padding;
-      transition: all 0.4s;
-      margin-right: auto;
-    }
-
-    & .collapse-pane {
-      overflow: hidden;
-      will-change: width, padding;
-      transition: all 0.4s;
-    }
-  }
-
-  & mat-icon {
-    transition: all 0.4s;
-  }
-
-  &.display-animated .inner .may-collapse {
-    width: 48px;
-    padding: 8px;
-  }
-
-  /* content pane */
-  & .stark-message-pane-content {
-    max-height: calc(100vh - 180px);
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  &.collapsed {
     & .inner {
+      position: relative;
+      display: inline-block;
+      text-align: left;
+      box-shadow: old-vars.$elevation-2;
+      opacity: 0;
       border-radius: 20px;
+      will-change: opacity, border-radius;
+      transition: all 0.4s;
+    }
 
-      & .may-collapse,
-      & .collapse-pane {
+    &.display-animated .inner {
+      opacity: 1;
+      border-radius: 2px;
+    }
+
+    /* summary pane */
+    & .summary {
+      display: flex;
+
+      & button {
+        display: block;
+        box-sizing: border-box;
+        position: relative;
+        margin: 0;
+        background: none;
+        border: none;
+        padding: 8px;
+
+        &:focus {
+          outline: none;
+        }
+
+        &.active::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          height: 4px;
+        }
+
+        & b {
+          position: absolute;
+          background: #fff;
+          font-size: 12px;
+          top: 4px;
+          right: 0;
+          padding: 0 2px;
+          border-radius: 2px;
+          font-weight: normal;
+          line-height: 14px;
+          width: 16px;
+          height: 14px;
+          box-shadow: old-vars.$elevation-1;
+        }
+      }
+
+      & .may-collapse {
+        overflow: hidden;
         width: 0;
-        padding: 0;
+        padding: 8px 0;
+        will-change: width, padding;
+        transition: all 0.4s;
       }
 
       & .stark-message-pane-total {
-        width: 48px;
-        padding: 8px;
+        box-sizing: border-box;
+        overflow: hidden;
+        width: 0;
+        padding: 0;
+        will-change: width, padding;
+        transition: all 0.4s;
+        margin-right: auto;
       }
 
-      & .stark-message-pane-content {
-        display: none;
+      & .collapse-pane {
+        overflow: hidden;
+        will-change: width, padding;
+        transition: all 0.4s;
+      }
+    }
+
+    & mat-icon {
+      transition: all 0.4s;
+    }
+
+    &.display-animated .inner .may-collapse {
+      width: 48px;
+      padding: 8px;
+    }
+
+    /* content pane */
+    & .stark-message-pane-content {
+      max-height: calc(100vh - 180px);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    &.collapsed {
+      & .inner {
+        border-radius: 20px;
+
+        & .may-collapse,
+        & .collapse-pane {
+          width: 0;
+          padding: 0;
+        }
+
+        & .stark-message-pane-total {
+          width: 48px;
+          padding: 8px;
+        }
+
+        & .stark-message-pane-content {
+          display: none;
+        }
+      }
+    }
+
+    & .stark-message-pane-item {
+      width: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 8px 8px 16px;
+      border-top: solid 1px #b2b2b2;
+      word-wrap: break-word;
+
+      & > mat-icon {
+        margin-right: 8px;
+      }
+
+      & > div {
+        flex: 1;
+      }
+
+      & .mat-icon-button {
+        margin: 0 0 0 16px;
+        padding: 0;
+
+        & mat-icon {
+          vertical-align: middle;
+        }
       }
     }
   }
 
-  & .stark-message-pane-item {
-    width: 240px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 8px 8px 16px;
-    border-top: solid 1px #b2b2b2;
-    word-wrap: break-word;
-
-    & > mat-icon {
-      margin-right: 8px;
-    }
-
-    & > div {
-      flex: 1;
-    }
-
-    & .mat-icon-button {
-      margin: 0 0 0 16px;
-      padding: 0;
-
-      & mat-icon {
-        vertical-align: middle;
-      }
-    }
+  .stark-app-header .stark-message-pane {
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: 40px;
+    left: 0;
   }
-}
 
-.stark-app-header .stark-message-pane {
-  position: absolute;
-  top: auto;
-  right: 0;
-  bottom: 40px;
-  left: 0;
-}
-
-@media #{$desktop-lg-query} {
-  .stark-app-sidebar.sidebar-open-start .stark-message-pane.align-left,
-  .stark-app-sidebar.sidebar-open .stark-message-pane.align-left {
-    padding-left: 280px;
-  }
-  .stark-app-sidebar.sidebar-close-start .stark-message-pane.align-left {
-    padding: 0 16px;
+  @media #{$desktop-lg-query} {
+    .stark-app-sidebar.sidebar-open-start .stark-message-pane.align-left,
+    .stark-app-sidebar.sidebar-open .stark-message-pane.align-left {
+      padding-left: 280px;
+    }
+    .stark-app-sidebar.sidebar-close-start .stark-message-pane.align-left {
+      padding: 0 16px;
+    }
   }
 }
 

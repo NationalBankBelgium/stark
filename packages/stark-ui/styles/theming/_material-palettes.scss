@@ -1,0 +1,169 @@
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "~@angular/material/core/theming/palette" as mat-palette;
+
+$backgrounds: (
+  status-bar: map.get(mat.$grey-palette, 300),
+  app-bar: map.get(mat.$grey-palette, 100),
+  background: #fafafa,
+  background-light: rgba(#000, 0.02),
+  hover: rgba(black, 0.04),
+  card: #fff,
+  dialog: #fff,
+  disabled-button: rgba(black, 0.12),
+  raised-button: #fff,
+  focused-button: mat-palette.$dark-focused,
+  selected-button: map.get(mat.$grey-palette, 300),
+  selected-disabled-button: map.get(mat.$grey-palette, 400),
+  disabled-button-toggle: map.get(mat.$grey-palette, 200),
+  unselected-chip: map.get(mat.$grey-palette, 300),
+  disabled-list-option: map.get(mat.$grey-palette, 200)
+);
+
+$foregrounds: (
+  base: black,
+  divider: mat-palette.$dark-dividers,
+  dividers: mat-palette.$dark-dividers,
+  disabled: mat-palette.$dark-disabled-text,
+  disabled-button: rgba(black, 0.26),
+  disabled-text: mat-palette.$dark-disabled-text,
+  hint-text: mat-palette.$dark-disabled-text,
+  secondary-text: mat-palette.$dark-secondary-text,
+  icon: rgba(black, 0.54),
+  icons: rgba(black, 0.54),
+  text: rgba(black, 0.87),
+  slider-min: rgba(black, 0.87),
+  slider-off: rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38)
+);
+
+$accent-palette: (
+  50: #f2e0e7,
+  100: #ddb3c4,
+  200: #c7809c,
+  300: #b14d74,
+  400: #a02657,
+  500: #8f0039,
+  600: #870033,
+  700: #7c002c,
+  800: #720024,
+  900: #600017,
+  A100: #ff90a1,
+  A200: #ff5d76,
+  A400: #ff2a4a,
+  A700: #ff1135,
+  contrast: (
+    50: mat-palette.$dark-primary-text,
+    100: mat-palette.$dark-primary-text,
+    200: mat-palette.$dark-primary-text,
+    300: mat-palette.$light-primary-text,
+    400: mat-palette.$light-primary-text,
+    500: mat-palette.$light-primary-text,
+    600: mat-palette.$light-primary-text,
+    700: mat-palette.$light-primary-text,
+    800: mat-palette.$light-primary-text,
+    900: mat-palette.$light-primary-text,
+    A100: mat-palette.$dark-primary-text,
+    A200: mat-palette.$dark-primary-text,
+    A400: mat-palette.$light-primary-text,
+    A700: mat-palette.$light-primary-text
+  )
+) !default;
+
+$primary-palette: (
+  50: #e0eff8,
+  100: #b3d6ef,
+  200: #80bbe4,
+  300: #4d9fd9,
+  400: #268bd0,
+  500: #0076c8,
+  600: #006ec2,
+  700: #0063bb,
+  800: #005496,
+  900: #143e74,
+  A100: #d1e1ff,
+  A200: #9ec0ff,
+  A400: #6b9eff,
+  A700: #528eff,
+  contrast: (
+    50: mat-palette.$dark-primary-text,
+    100: mat-palette.$dark-primary-text,
+    200: mat-palette.$dark-primary-text,
+    300: mat-palette.$dark-primary-text,
+    400: mat-palette.$light-primary-text,
+    500: mat-palette.$light-primary-text,
+    600: mat-palette.$light-primary-text,
+    700: mat-palette.$light-primary-text,
+    800: mat-palette.$light-primary-text,
+    900: mat-palette.$light-primary-text,
+    A100: mat-palette.$dark-primary-text,
+    A200: mat-palette.$dark-primary-text,
+    A400: mat-palette.$dark-primary-text,
+    A700: mat-palette.$dark-primary-text
+  )
+) !default;
+
+$warning-palette: (
+  50: #fff3e0,
+  100: #ffe0b3,
+  200: #ffcc80,
+  300: #ffb74d,
+  400: #ffa726,
+  500: #ff9800,
+  600: #ff9000,
+  700: #ff8500,
+  800: #ff7b00,
+  900: #ff6a00,
+  A100: #fff,
+  A200: #fff7f2,
+  A400: #ffd6bf,
+  A700: #ffc5a6,
+  contrast: (
+    50: mat-palette.$dark-primary-text,
+    100: mat-palette.$dark-primary-text,
+    200: mat-palette.$dark-primary-text,
+    300: mat-palette.$dark-primary-text,
+    400: mat-palette.$dark-primary-text,
+    500: mat-palette.$light-primary-text,
+    600: mat-palette.$light-primary-text,
+    700: mat-palette.$light-primary-text,
+    800: mat-palette.$light-primary-text,
+    900: mat-palette.$light-primary-text,
+    A100: mat-palette.$dark-primary-text,
+    A200: mat-palette.$dark-primary-text,
+    A400: mat-palette.$dark-primary-text,
+    A700: mat-palette.$dark-primary-text
+  )
+) !default;
+
+$mat-light-theme-background: $backgrounds;
+
+$mat-light-theme-foreground: $foregrounds;
+
+@if variable-exists(stark-accent-palette) {
+  $accent-palette: map.merge($accent-palette, $stark-accent-palette);
+}
+
+@if variable-exists(stark-primary-palette) {
+  $primary-palette: map.merge($primary-palette, $stark-primary-palette);
+}
+
+@if variable-exists(stark-warning-palette) {
+  $warning-palette: map.merge($warning-palette, $stark-warning-palette);
+}
+
+$base-theme: (
+  primary-palette: mat.define-palette($primary-palette),
+  accent-palette: mat.define-palette($accent-palette),
+  warn-palette: mat.define-palette($warning-palette)
+) !default;
+
+$material-theme: mat.define-light-theme(
+  map.get($base-theme, primary-palette),
+  map.get($base-theme, accent-palette),
+  map.get($base-theme, warn-palette)
+) !default;
+
+@mixin set-stark-ui-material-theme($material-theme: $material-theme) {
+  @include mat.all-component-themes($material-theme);
+}

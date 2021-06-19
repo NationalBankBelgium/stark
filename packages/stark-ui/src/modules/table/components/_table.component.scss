@@ -3,175 +3,179 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/table/components/_table.component.scss */
 
-.stark-table {
-  .header {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-
-    .transcluded {
-      flex-grow: 1;
-    }
-
-    .actions {
+@mixin stark-table() {
+  .stark-table {
+    .header {
       align-items: center;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      margin-bottom: 20px;
 
-      .button-global-filter {
-        opacity: 0.2;
-        &.filter-enabled {
-          opacity: 1;
+      .transcluded {
+        flex-grow: 1;
+      }
+
+      .actions {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+
+        .button-global-filter {
+          opacity: 0.2;
+
+          &.filter-enabled {
+            opacity: 1;
+          }
+        }
+
+        stark-minimap {
+          mat-icon {
+            width: 18px;
+            height: 18px;
+          }
         }
       }
 
-      stark-minimap {
-        mat-icon {
-          width: 18px;
-          height: 18px;
+      .stark-table-rows-counter {
+        flex: 1;
+        text-align: center;
+        line-height: 22px;
+        margin-right: 16px;
+      }
+    }
+
+    .table-container {
+      overflow: auto;
+
+      &,
+      &:focus,
+      &:hover,
+      &:active {
+        outline: none;
+      }
+    }
+
+    .mat-table-sticky:first-child {
+      padding-right: 10px;
+      border-right: 1px solid rgba(0, 0, 0, 0.12); // material-default
+    }
+
+    .mat-table-sticky:last-child {
+      padding-left: 10px;
+      border-left: 1px solid rgba(0, 0, 0, 0.12); // material-default
+    }
+
+    table {
+      min-width: 100%;
+
+      td,
+      th {
+        &.hidden {
+          display: none;
+        }
+
+        .stark-action-bar .action-bar-wrapper {
+          flex-wrap: nowrap;
         }
       }
-    }
 
-    .stark-table-rows-counter {
-      flex: 1;
-      text-align: center;
-      line-height: 22px;
-      margin-right: 16px;
-    }
-  }
+      th {
+        .priority {
+          display: none;
+        }
 
-  .table-container {
-    overflow: auto;
+        &.mat-column-select {
+          width: 1%;
+          white-space: nowrap;
+        }
 
-    &,
-    &:focus,
-    &:hover,
-    &:active {
-      outline: none;
-    }
-  }
+        &.mat-header-cell {
+          padding-right: 24px;
 
-  .mat-table-sticky:first-child {
-    padding-right: 10px;
-    border-right: 1px solid rgba(0, 0, 0, 0.12); // material-default
-  }
-
-  .mat-table-sticky:last-child {
-    padding-left: 10px;
-    border-left: 1px solid rgba(0, 0, 0, 0.12); // material-default
-  }
-
-  table {
-    min-width: 100%;
-
-    td,
-    th {
-      &.hidden {
-        display: none;
-      }
-      .stark-action-bar .action-bar-wrapper {
-        flex-wrap: nowrap;
-      }
-    }
-
-    th {
-      .priority {
-        display: none;
-      }
-
-      &.mat-column-select {
-        width: 1%;
-        white-space: nowrap;
-      }
-
-      &.mat-header-cell {
-        padding-right: 24px;
-
-        .header-cell-content {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: flex-start;
-
-          .sort-header {
-            align-items: center;
-            cursor: pointer;
+          .header-cell-content {
             display: flex;
-            flex: 1 1 0%;
-            user-select: none;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
 
-            &:hover {
-              .order-tip {
-                opacity: 0.3;
+            .sort-header {
+              align-items: center;
+              cursor: pointer;
+              display: flex;
+              flex: 1 1 0%;
+              user-select: none;
+
+              &:hover {
+                .order-tip {
+                  opacity: 0.3;
+                }
+              }
+            }
+
+            .mat-icon {
+              &.order-tip {
+                opacity: 0;
+              }
+            }
+
+            .button-filter {
+              opacity: 0.3;
+            }
+          }
+        }
+
+        &.filtering {
+          &.mat-header-cell {
+            .header-cell-content {
+              .button-filter {
+                opacity: 1;
               }
             }
           }
-
-          .mat-icon {
-            &.order-tip {
-              opacity: 0;
-            }
-          }
-
-          .button-filter {
-            opacity: 0.3;
-          }
         }
       }
 
-      &.filtering {
-        &.mat-header-cell {
-          .header-cell-content {
-            .button-filter {
-              opacity: 1;
-            }
-          }
+      .header-cell-content.sortable {
+        cursor: pointer;
+      }
+
+      &.multi-sorting {
+        th .priority {
+          display: block;
         }
       }
     }
 
-    .header-cell-content.sortable {
-      cursor: pointer;
+    .mat-table-filter {
+      padding: 0 10px;
     }
 
-    &.multi-sorting {
-      th .priority {
-        display: block;
+    .fixed-header {
+      height: 400px;
+      overflow-y: auto;
+    }
+
+    tr.expandable-row {
+      height: 0;
+
+      .mat-column-expandedDetail {
+        padding: 0;
+        border: 0;
+      }
+
+      .expanded-detail-inner {
+        overflow: hidden;
+      }
+
+      &:hover td {
+        background: inherit;
       }
     }
   }
 
-  .mat-table-filter {
-    padding: 0 10px;
+  .mat-table-filter .mat-menu-content {
+    padding: 8px;
   }
-
-  .fixed-header {
-    height: 400px;
-    overflow-y: auto;
-  }
-
-  tr.expandable-row {
-    height: 0;
-
-    .mat-column-expandedDetail {
-      padding: 0;
-      border: 0;
-    }
-
-    .expanded-detail-inner {
-      overflow: hidden;
-    }
-
-    &:hover td {
-      background: inherit;
-    }
-  }
-}
-
-.mat-table-filter .mat-menu-content {
-  padding: 8px;
 }
 
 /* END stark-ui: src/modules/table/components/table/_table.component.scss */

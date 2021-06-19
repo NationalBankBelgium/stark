@@ -1,9 +1,20 @@
-.stark-alert-dialog {
-  [mat-dialog-title] {
-    color: mat-color($alert-palette, 500);
-  }
-  .button-ok {
-    background-color: mat-color($alert-palette, 500);
-    color: mat-contrast($alert-palette, 500);
+/* ============================================================================== */
+/*  S t a r k   A l e r t   D i a l o g                                           */
+/* ============================================================================== */
+/* stark-ui: src/modules/dialogs/components/alert-dialog.component.scss */
+
+@use "~@angular/material" as mat;
+@use "../../../../styles/theming/stark-palettes" as stark-palettes;
+
+@mixin stark-alert-dialog-theme() {
+  .stark-alert-dialog {
+    [mat-dialog-title] {
+      color: mat.get-color-from-palette(stark-palettes.$alert-palette, 500);
+    }
+
+    .button-ok {
+      background-color: mat.get-color-from-palette(stark-palettes.$alert-palette, 500);
+      color: mat.get-contrast-color-from-palette(stark-palettes.$alert-palette, 500);
+    }
   }
 }

@@ -3,42 +3,46 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/minimap/components/minimap.component.scss */
 
-.stark-minimap {
-  display: flex;
-
-  button.mat-icon-button .mat-icon {
-    transition: transform 300ms linear;
-    &.open {
-      transform: rotate(-180deg);
-    }
-  }
-
-  .stark-minimap-dots {
+@mixin stark-minimap() {
+  .stark-minimap {
     display: flex;
-    height: 40px;
-    align-items: center;
 
-    & > * {
-      margin-right: 4px;
-      &:last-child {
-        margin-right: 0;
+    button.mat-icon-button .mat-icon {
+      transition: transform 300ms linear;
+
+      &.open {
+        transform: rotate(-180deg);
       }
     }
 
-    .stark-minimap-dot {
-      i {
-        display: block;
-        width: 4px;
-        height: 4px;
+    .stark-minimap-dots {
+      display: flex;
+      height: 40px;
+      align-items: center;
+
+      & > * {
+        margin-right: 4px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .stark-minimap-dot {
+        i {
+          display: block;
+          width: 4px;
+          height: 4px;
+        }
       }
     }
   }
-}
 
-// The mat-menu is rendered outside of the stark-minimap component
-.mat-menu-content .mat-menu-item.stark-minimap-menu-item {
-  height: 35px;
-  line-height: 35px;
+  // The mat-menu is rendered outside of the stark-minimap component
+  .mat-menu-content .mat-menu-item.stark-minimap-menu-item {
+    height: 35px;
+    line-height: 35px;
+  }
 }
 
 /* END stark-ui: src/modules/minimap/components/minimap.component.scss */

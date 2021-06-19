@@ -1,0 +1,127 @@
+/* Stark styles */
+
+@use "./base" as stark-base; /* contains basic style corrections needed by the app to render correctly, so it should be loaded first */
+@use "./theming/base-theme" as stark-base-theme;
+@use "./components/button" as stark-button;
+@use "./components/button-theme" as stark-button-theme;
+@use "./components/card" as stark-card;
+@use "./components/card-theme" as stark-card-theme;
+@use "./components/header" as stark-header;
+@use "./components/header-theme" as stark-header-theme;
+@use "./components/icon" as stark-icon;
+/* Stark components */
+@use "../src/modules/action-bar/components/action-bar-theme" as stark-action-bar-theme;
+@use "../src/modules/action-bar/components/action-bar.component" as stark-action-bar;
+@use "../src/modules/app-data/components/app-data-theme" as stark-app-data-theme;
+@use "../src/modules/app-data/components/app-data.component" as stark-app-data;
+@use "../src/modules/app-footer/components/app-footer-theme" as stark-app-footer-theme;
+@use "../src/modules/app-footer/components/app-footer.component" as stark-app-footer;
+@use "../src/modules/app-logo/components/app-logo-theme" as stark-app-logo-theme;
+@use "../src/modules/app-logo/components/app-logo.component" as stark-app-logo;
+@use "../src/modules/app-menu/components/app-menu-theme" as stark-app-menu-theme;
+@use "../src/modules/app-menu/components/app-menu.component" as stark-app-menu;
+@use "../src/modules/app-sidebar/components/app-sidebar-theme" as stark-app-sidebar-theme;
+@use "../src/modules/app-sidebar/components/app-sidebar.component" as stark-app-sidebar;
+@use "../src/modules/breadcrumb/components/breadcrumb.component" as stark-breadcrumb;
+@use "../src/modules/collapsible/components/collapsible-theme" as stark-collapsible-theme;
+@use "../src/modules/collapsible/components/collapsible.component" as stark-collapsible;
+@use "../src/modules/date-range-picker/components/date-range-picker.component" as stark-date-range-picker;
+@use "../src/modules/date-time-picker/components/date-time-picker.component" as stark-date-time-picker;
+@use "../src/modules/dialogs/components/alert-dialog-theme" as stark-alert-dialog-theme;
+@use "../src/modules/dialogs/components/alert-dialog.component" as stark-alert-dialog;
+@use "../src/modules/dialogs/components/confirm-dialog-theme" as stark-confirm-dialog-theme;
+@use "../src/modules/dialogs/components/prompt-dialog-theme" as stark-prompt-dialog-theme;
+@use "../src/modules/dialogs/components/prompt-dialog.component" as stark-prompt-dialog;
+@use "../src/modules/dropdown/components/dropdown-theme" as stark-dropdown-theme;
+@use "../src/modules/dropdown/components/dropdown.component" as stark-dropdown;
+@use "../src/modules/generic-search/components/generic-search/generic-search.component" as stark-generic-search;
+@use "../src/modules/language-selector/components/language-selector.component" as stark-language-selector;
+@use "../src/modules/message-pane/components/message-pane-theme" as stark-message-pane-theme;
+@use "../src/modules/message-pane/components/message-pane.component" as stark-message-pane;
+@use "../src/modules/minimap/components/minimap-theme" as stark-minimap-theme;
+@use "../src/modules/minimap/components/minimap.component" as stark-minimap;
+@use "../src/modules/pagination/components/pagination-theme" as stark-pagination-theme;
+@use "../src/modules/pagination/components/pagination.component" as stark-pagination;
+@use "../src/modules/pretty-print/components/pretty-print.component" as stark-pretty-print;
+@use "../src/modules/route-search/components/route-search-theme" as stark-route-search-theme;
+@use "../src/modules/route-search/components/route-search.component" as stark-route-search;
+@use "../src/modules/session-ui/components/session-card/session-card.component" as stark-session-card;
+@use "../src/modules/slider/components/slider-theme" as stark-slider-theme;
+@use "../src/modules/table/components/dialogs/multisort.component" as stark-multisort;
+@use "../src/modules/table/components/table-theme" as stark-table-theme;
+@use "../src/modules/table/components/table.component" as stark-table;
+@use "../src/modules/toast-notification/components/toast-notification-theme" as stark-toast-notification-theme;
+@use "../src/modules/toast-notification/components/toast-notification.component" as stark-toast-notification;
+/* Stark session-ui pages */
+@use "../src/modules/session-ui/pages/session-ui-pages" as stark-session-ui-pages;
+@use "../src/modules/session-ui/pages/login/login-page.component" as stark-login-page;
+@use "../src/modules/session-ui/pages/preloading/preloading-page.component" as stark-preloading-page;
+@use "../src/modules/session-ui/pages/session-expired/session-expired-page.component" as stark-session-expired-page;
+@use "../src/modules/session-ui/pages/session-logout/session-logout-page.component" as stark-session-logout-page;
+
+@mixin set-default-stark-ui-styles() {
+  /* Stark styles */
+  @include stark-base.stark-base(
+
+  ); /* contains basic style corrections needed by the app to render correctly, so it should be loaded first */
+  @include stark-base-theme.base-theme();
+  @include stark-button.stark-button();
+  @include stark-button-theme.stark-button-theme();
+  @include stark-card.stark-card();
+  @include stark-card-theme.stark-card-theme();
+  @include stark-header.stark-header();
+  // FIXME Incorrect vars inside file
+  @include stark-header-theme.stark-header-theme();
+  @include stark-icon.stark-icon();
+
+  /* Stark components */
+  @include stark-action-bar-theme.stark-action-bar-theme();
+  @include stark-action-bar.stark-action-bar();
+  @include stark-app-data-theme.stark-app-data-theme();
+  @include stark-app-data.stark-app-data();
+  @include stark-app-footer-theme.stark-app-footer-theme();
+  @include stark-app-footer.stark-app-footer();
+  @include stark-app-logo-theme.stark-app-logo-theme();
+  @include stark-app-logo.stark-app-logo();
+  @include stark-app-menu-theme.stark-app-menu-theme();
+  @include stark-app-menu.stark-app-menu();
+  @include stark-app-sidebar-theme.stark-app-sidebar-theme();
+  @include stark-app-sidebar.stark-app-sidebar();
+  @include stark-breadcrumb.stark-breadcrumb();
+  @include stark-collapsible-theme.stark-collapsible-theme();
+  @include stark-collapsible.stark-collapsible();
+  @include stark-date-range-picker.stark-date-range-picker();
+  @include stark-date-time-picker.stark-date-time-picker();
+  @include stark-alert-dialog-theme.stark-alert-dialog-theme();
+  @include stark-alert-dialog.stark-alert-dialog();
+  @include stark-confirm-dialog-theme.stark-confirm-dialog-theme();
+  @include stark-prompt-dialog-theme.stark-prompt-dialog-theme();
+  @include stark-prompt-dialog.stark-prompt-dialog();
+  @include stark-dropdown-theme.stark-dropdown-theme();
+  @include stark-dropdown.stark-dropdown();
+  @include stark-generic-search.stark-generic-search();
+  @include stark-language-selector.stark-language-selector();
+  @include stark-message-pane-theme.stark-message-pane-theme();
+  @include stark-message-pane.stark-message-pane();
+  @include stark-minimap-theme.stark-minimap-theme();
+  @include stark-minimap.stark-minimap();
+  @include stark-pagination-theme.stark-pagination-theme();
+  @include stark-pagination.stark-pagination();
+  @include stark-pretty-print.stark-pretty-print();
+  @include stark-route-search-theme.stark-route-search-theme();
+  @include stark-route-search.stark-route-search();
+  @include stark-session-card.stark-session-card();
+  @include stark-slider-theme.stark-slider-theme();
+  @include stark-multisort.stark-multisort();
+  @include stark-table-theme.stark-table-theme();
+  @include stark-table.stark-table();
+  @include stark-toast-notification-theme.stark-toast-notification-theme();
+  @include stark-toast-notification.stark-toast-notification();
+
+  /* Stark session-ui pages */
+  @include stark-session-ui-pages.stark-session-ui-pages();
+  @include stark-login-page.stark-login-page();
+  @include stark-preloading-page.stark-preloading-page();
+  @include stark-session-expired-page.stark-session-expired-page();
+  @include stark-session-logout-page.stark-session-logout-page();
+}

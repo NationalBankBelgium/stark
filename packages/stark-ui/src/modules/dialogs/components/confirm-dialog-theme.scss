@@ -1,6 +1,16 @@
-.stark-confirm-dialog {
-  .button-ok {
-    background-color: mat-color($primary-palette, 500);
-    color: mat-contrast($primary-palette, 500);
+/* ============================================================================== */
+/*  S t a r k   C o n f i r m   D i a l o g                                       */
+/* ============================================================================== */
+/* stark-ui: src/modules/dialogs/components/confirm-dialog.component.scss */
+
+@use "~@angular/material" as mat;
+@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
+
+@mixin stark-confirm-dialog-theme() {
+  .stark-confirm-dialog {
+    .button-ok {
+      background-color: mat.get-color-from-palette(stark-mat-palettes.$primary-palette, 500);
+      color: mat.get-contrast-color-from-palette(stark-mat-palettes.$primary-palette, 500);
+    }
   }
 }

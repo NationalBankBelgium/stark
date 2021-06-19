@@ -1,0 +1,10 @@
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "../theming/material-palettes" as stark-mat-palettes;
+
+@mixin stark-header-theme() {
+  .stark-app-header {
+    background-color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, primary-palette), 900);
+    color: #fff;
+  }
+}

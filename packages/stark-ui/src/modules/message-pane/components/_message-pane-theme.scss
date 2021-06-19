@@ -1,3 +1,12 @@
+/* ============================================================================== */
+/*  S t a r k   M e s s a g e   P a n e                                           */
+/* ============================================================================== */
+/* stark-ui: src/modules/message-pane/components/message-pane-theme.scss */
+
+@use "~@angular/material" as mat;
+@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
+@use "../../../../styles/theming/stark-palettes" as stark-palettes;
+
 @mixin stark-message-pane-color($color) {
   .stark-message-pane-item {
     color: rgba($color: $color, $alpha: 0.87);
@@ -12,39 +21,41 @@
   }
 }
 
-.stark-message-pane {
-  @include stark-message-pane-color(mat-color($grey-palette, 800));
+@mixin stark-message-pane-theme() {
+  .stark-message-pane {
+    @include stark-message-pane-color(mat.get-color-from-palette(stark-palettes.$grey-palette, 800));
 
-  .inner {
-    color: mat-color($mat-light-theme-background, background);
-    background-color: mat-color($mat-light-theme-background, background);
-  }
-
-  .summary {
-    button.active::after {
-      background-color: mat-color($accent-palette, 500);
+    .inner {
+      color: mat.get-color-from-palette(mat.$light-theme-background-palette, background);
+      background-color: mat.get-color-from-palette(mat.$light-theme-background-palette, background);
     }
 
-    b {
-      color: mat-color($grey-palette, 900);
+    .summary {
+      button.active::after {
+        background-color: mat.get-color-from-palette(stark-mat-palettes.$accent-palette, 500);
+      }
+
+      b {
+        color: mat.get-color-from-palette(stark-palettes.$grey-palette, 900);
+      }
+    }
+
+    .errors > mat-icon {
+      fill: mat.get-color-from-palette(stark-palettes.$alert-palette, 500);
+    }
+
+    .warnings > mat-icon {
+      fill: mat.get-color-from-palette(stark-mat-palettes.$warning-palette, 500);
+    }
+
+    .infos > mat-icon {
+      fill: mat.get-color-from-palette(stark-mat-palettes.$primary-palette, 500);
     }
   }
 
-  .errors > mat-icon {
-    fill: mat-color($alert-palette, 500);
-  }
-
-  .warnings > mat-icon {
-    fill: mat-color($warning-palette, 500);
-  }
-
-  .infos > mat-icon {
-    fill: mat-color($primary-palette, 500);
-  }
-}
-
-.stark-message-pane {
-  &.stark-white {
-    @include stark-message-pane-color(mat-color($grey-palette, A100));
+  .stark-message-pane {
+    &.stark-white {
+      @include stark-message-pane-color(mat.get-color-from-palette(stark-palettes.$grey-palette, A100));
+    }
   }
 }

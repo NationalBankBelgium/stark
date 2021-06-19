@@ -2,18 +2,24 @@
 /*  S t a r k   R o u t e 	 S e a r c h    T h e m e                              */
 /* ============================================================================== */
 /* stark-ui: src/modules/route-search/components/route-search-theme.css */
-.search-field {
-  .mat-form-field-wrapper {
-    border: 1px solid mat-color($grey-palette, 400);
-    background-color: #fff;
-    color: mat-color($grey-palette, 900);
-  }
-}
+@use "~@angular/material" as mat;
+@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
+@use "../../../../styles/theming/stark-palettes" as stark-palettes;
 
-button.search-button {
-  background-color: mat-color($accent-palette, 500);
-  /* stylelint-disable-next-line value-keyword-case */
-  color: mat-color($grey-palette, A100);
+@mixin stark-route-search-theme() {
+  .search-field {
+    .mat-form-field-wrapper {
+      border: 1px solid mat.get-color-from-palette(stark-palettes.$grey-palette, 400);
+      background-color: #fff;
+      color: mat.get-color-from-palette(stark-palettes.$grey-palette, 900);
+    }
+  }
+
+  button.search-button {
+    background-color: mat.get-color-from-palette(stark-mat-palettes.$accent-palette, 500);
+    /* stylelint-disable-next-line value-keyword-case */
+    color: mat.get-color-from-palette(stark-palettes.$grey-palette, A100);
+  }
 }
 
 /* END stark-ui: src/modules/route-search/components/route-search-theme.scss */

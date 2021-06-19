@@ -3,64 +3,66 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/app-data/components/_app-data.component.scss */
 
-.stark-app-data {
-  font-size: 13px;
-
-  & ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+@mixin stark-app-data() {
+  .stark-app-data {
     font-size: 13px;
-    overflow: auto;
+
+    & ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 13px;
+      overflow: auto;
+    }
+
+    & li {
+      padding: 5px;
+    }
   }
 
-  & li {
-    padding: 5px;
-  }
-}
-
-/* ------------------------------------------------ */
-/*             app data "dropdown" mode             */
-/* ------------------------------------------------ */
-.stark-app-data {
-  &.dropdown {
-    position: relative;
-    display: flex;
-    width: 250px;
-    margin-right: 10px;
-    line-height: 1.2;
-    border-radius: 20px;
-    padding: 2px 0 2px 20px;
-
-    & .stark-app-data-summary {
-      padding-top: 4px;
+  /* ------------------------------------------------ */
+  /*             app data "dropdown" mode             */
+  /* ------------------------------------------------ */
+  .stark-app-data {
+    &.dropdown {
+      position: relative;
+      display: flex;
       width: 250px;
+      margin-right: 10px;
+      line-height: 1.2;
+      border-radius: 20px;
+      padding: 2px 0 2px 20px;
+
+      & .stark-app-data-summary {
+        padding-top: 4px;
+        width: 250px;
+      }
+
+      & svg {
+        transition: transform 0.4s;
+      }
+
+      & .is-open svg {
+        transform: rotate(180deg);
+      }
     }
 
-    & svg {
-      transition: transform 0.4s;
-    }
-
-    & .is-open svg {
-      transform: rotate(180deg);
+    &.dropdown-detail {
+      width: 270px;
     }
   }
 
-  &.dropdown-detail {
-    width: 270px;
-  }
-}
+  /* ------------------------------------------------ */
+  /*              app data "detail" slot              */
+  /* ------------------------------------------------ */
+  .stark-app-data.mat-menu-panel {
+    & .stark-app-data-detail {
+      padding: 2px 10px;
+      line-height: 1.5;
 
-/* ------------------------------------------------ */
-/*              app data "detail" slot              */
-/* ------------------------------------------------ */
-.stark-app-data.mat-menu-panel {
-  & .stark-app-data-detail {
-    padding: 2px 10px;
-    line-height: 1.5;
-
-    & .label {
-      font-weight: 500;
+      & .label {
+        font-weight: 500;
+      }
     }
   }
 }

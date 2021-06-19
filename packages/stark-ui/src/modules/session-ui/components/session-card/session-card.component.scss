@@ -4,30 +4,32 @@
   justify-content: center;
 }
 
-.stark-session-card {
-  @include center-content;
+@mixin stark-session-card() {
+  .stark-session-card {
+    @include center-content;
 
-  width: 100vw;
-  height: 100vh;
+    width: 100vw;
+    height: 100vh;
 
-  mat-card {
-    overflow: hidden;
-    min-width: 500px;
+    mat-card {
+      overflow: hidden;
+      min-width: 500px;
 
-    .logo-header {
-      @include center-content;
+      .logo-header {
+        @include center-content;
 
-      margin: -16px -16px 0 -16px;
-      padding: 16px;
-      background-image: url(/assets/stark-core/logo/stark_header_bg.png);
-      background-size: cover;
-    }
+        margin: -16px -16px 0 -16px;
+        padding: 16px;
+        background-image: url(/assets/stark-core/logo/stark_header_bg.png);
+        background-size: cover;
+      }
 
-    mat-card-header {
-      @include center-content;
+      mat-card-header {
+        @include center-content;
 
-      mat-card-title h1 {
-        margin: 16px 0;
+        mat-card-title h1 {
+          margin: 16px 0;
+        }
       }
     }
   }

@@ -1,0 +1,11 @@
+// Theming APIs
+@forward "./styles/theming/material-palettes" show $backgrounds, $foregrounds, $accent-palette, $primary-palette,
+  $warning-palette, $mat-light-theme-background, $mat-light-theme-foreground, $base-theme, $material-theme,
+  set-stark-ui-material-theme;
+@forward "./styles/theming/stark-palettes" show $alert-palette, $grey-palette, $success-palette;
+@forward "./styles/theming/typography" show $typography-theme, $typography-config, set-typography;
+
+// Core APIs
+@forward "./styles/old-variables" hide $base-theme;
+@forward "./styles/media-queries";
+@forward "./styles/stark-ui-bundle" show set-default-stark-ui-styles;

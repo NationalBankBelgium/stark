@@ -3,6 +3,9 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/app-footer/components/_app-footer.component.scss */
 
+@use "~@angular/material" as mat;
+@use "../../../../styles/theming/stark-palettes" as stark-palettes;
+
 @mixin stark-app-footer-color($color_high, $color_low) {
   .stark-app-footer-container {
     background: rgba($color: $color_low, $alpha: 1);
@@ -15,8 +18,13 @@
   }
 }
 
-.stark-app-footer {
-  @include stark-app-footer-color(mat-color($grey-palette, A100), mat-color($grey-palette, 800));
+@mixin stark-app-footer-theme() {
+  .stark-app-footer {
+    @include stark-app-footer-color(
+      mat.get-color-from-palette(stark-palettes.$grey-palette, A100),
+      mat.get-color-from-palette(stark-palettes.$grey-palette, 800)
+    );
+  }
 }
 
 /* end stark-ui: src/modules/app-footer/components/_app-footer.component.scss */

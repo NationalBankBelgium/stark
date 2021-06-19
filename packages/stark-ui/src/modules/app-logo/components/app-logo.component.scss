@@ -3,20 +3,22 @@
 /* ============================================================================== */
 /* stark-ui: packages/stark-ui/src/modules/app-logo/components/app-logo.component.scss */
 
-.stark-app-logo a {
-  margin: 6px auto 0 auto;
-}
+@mixin stark-app-logo() {
+  .stark-app-logo a {
+    margin: 6px auto 0 auto;
+  }
 
-.stark-app-logo {
-  & i {
-    display: block;
-    width: 200px;
-    height: 60px;
-    margin-top: 0;
-    background-image: url(/assets/stark-core/logo/light/stark_logo_light.svg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+  .stark-app-logo {
+    & i {
+      display: block;
+      width: 200px;
+      height: 60px;
+      margin-top: 0;
+      background-image: url(/assets/stark-core/logo/light/stark_logo_light.svg);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 }
 
