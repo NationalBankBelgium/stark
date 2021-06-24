@@ -3,11 +3,13 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/app-menu/components/app-menu/_app-menu.component.scss */
 
+@use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/typography" as stark-typography;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
 
-@mixin stark-app-menu() {
+@mixin stark-app-menu($material-theme-config, $stark-theme-config) {
+  $primary-palette: map.get($material-theme-config, primary);
+  $typography-config: map.get($material-theme-config, typography);
+
   .stark-app-menu {
     section {
       border-bottom: 1px solid #ddd;
@@ -20,15 +22,15 @@
 
     .mat-nav-list {
       .mat-list-item {
-        font-size: mat.font-size(stark-typography.$typography-config, button);
-        font-weight: mat.font-weight(stark-typography.$typography-config, button);
+        font-size: mat.font-size($typography-config, button);
+        font-weight: mat.font-weight($typography-config, button);
         height: 42px;
-        line-height: mat.line-height(stark-typography.$typography-config, button);
+        line-height: mat.line-height($typography-config, button);
 
         &.active {
           .mat-list-text > * {
             font-weight: bold;
-            color: mat.get-color-from-palette(stark-mat-palettes.$primary-palette, 500);
+            color: mat.get-color-from-palette($primary-palette, 500);
           }
         }
 

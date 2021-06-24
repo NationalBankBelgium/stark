@@ -4,6 +4,7 @@
 @use "./theming/base-theme" as stark-base-theme;
 @use "./components/button" as stark-button;
 @use "./components/button-theme" as stark-button-theme;
+@forward "./components/button-theme" show stark-button-color;
 @use "./components/card" as stark-card;
 @use "./components/card-theme" as stark-card-theme;
 @use "./components/header" as stark-header;
@@ -15,6 +16,7 @@
 @use "../src/modules/app-data/components/app-data-theme" as stark-app-data-theme;
 @use "../src/modules/app-data/components/app-data.component" as stark-app-data;
 @use "../src/modules/app-footer/components/app-footer-theme" as stark-app-footer-theme;
+@forward "../src/modules/app-footer/components/app-footer-theme" show stark-app-footer-color;
 @use "../src/modules/app-footer/components/app-footer.component" as stark-app-footer;
 @use "../src/modules/app-logo/components/app-logo-theme" as stark-app-logo-theme;
 @use "../src/modules/app-logo/components/app-logo.component" as stark-app-logo;
@@ -24,6 +26,7 @@
 @use "../src/modules/app-sidebar/components/app-sidebar.component" as stark-app-sidebar;
 @use "../src/modules/breadcrumb/components/breadcrumb.component" as stark-breadcrumb;
 @use "../src/modules/collapsible/components/collapsible-theme" as stark-collapsible-theme;
+@forward "../src/modules/collapsible/components/collapsible-theme" show stark-collapsible-color;
 @use "../src/modules/collapsible/components/collapsible.component" as stark-collapsible;
 @use "../src/modules/date-range-picker/components/date-range-picker.component" as stark-date-range-picker;
 @use "../src/modules/date-time-picker/components/date-time-picker.component" as stark-date-time-picker;
@@ -33,10 +36,12 @@
 @use "../src/modules/dialogs/components/prompt-dialog-theme" as stark-prompt-dialog-theme;
 @use "../src/modules/dialogs/components/prompt-dialog.component" as stark-prompt-dialog;
 @use "../src/modules/dropdown/components/dropdown-theme" as stark-dropdown-theme;
+@forward "../src/modules/dropdown/components/dropdown-theme" show stark-dropdown-color;
 @use "../src/modules/dropdown/components/dropdown.component" as stark-dropdown;
 @use "../src/modules/generic-search/components/generic-search/generic-search.component" as stark-generic-search;
 @use "../src/modules/language-selector/components/language-selector.component" as stark-language-selector;
 @use "../src/modules/message-pane/components/message-pane-theme" as stark-message-pane-theme;
+@forward "../src/modules/message-pane/components/message-pane-theme" show stark-message-pane-color;
 @use "../src/modules/message-pane/components/message-pane.component" as stark-message-pane;
 @use "../src/modules/minimap/components/minimap-theme" as stark-minimap-theme;
 @use "../src/modules/minimap/components/minimap.component" as stark-minimap;
@@ -54,72 +59,99 @@
 @use "../src/modules/toast-notification/components/toast-notification.component" as stark-toast-notification;
 /* Stark session-ui pages */
 @use "../src/modules/session-ui/pages/session-ui-pages" as stark-session-ui-pages;
+@use "../src/modules/session-ui/pages/session-ui-pages-theme" as stark-session-ui-pages-theme;
 @use "../src/modules/session-ui/pages/login/login-page.component" as stark-login-page;
 @use "../src/modules/session-ui/pages/preloading/preloading-page.component" as stark-preloading-page;
 @use "../src/modules/session-ui/pages/session-expired/session-expired-page.component" as stark-session-expired-page;
 @use "../src/modules/session-ui/pages/session-logout/session-logout-page.component" as stark-session-logout-page;
 
-@mixin set-default-stark-ui-styles() {
+@use "sass:map";
+@use "./theming/material-palette" as stark-mat-palette;
+@use "./theming/stark-palettes" as stark-palette;
+@use "./theming/typography" as stark-typography;
+@use "~@angular/material" as mat;
+
+@mixin set-stark-ui-styles($material-theme-config: null, $stark-theme-config: null) {
+  @if $material-theme-config == null {
+    $material-theme-config: mat.define-light-theme(
+      (
+        color: (
+          primary: mat.define-palette(stark-mat-palette.$primary-palette),
+          accent: mat.define-palette(stark-mat-palette.$accent-palette),
+          warn: mat.define-palette(stark-mat-palette.$warning-palette)
+        ),
+        typography: stark-typography.$typography-config
+      )
+    );
+  }
+
+  @include mat.all-component-themes($material-theme-config);
+
+  @if $stark-theme-config == null {
+    $stark-theme-config: stark-palette.$stark-base-theme;
+  }
+
   /* Stark styles */
   @include stark-base.stark-base(
 
   ); /* contains basic style corrections needed by the app to render correctly, so it should be loaded first */
-  @include stark-base-theme.base-theme();
+  @include stark-base-theme.stark-base-theme($material-theme-config, $stark-theme-config);
   @include stark-button.stark-button();
-  @include stark-button-theme.stark-button-theme();
+  @include stark-button-theme.stark-button-theme($material-theme-config, $stark-theme-config);
   @include stark-card.stark-card();
-  @include stark-card-theme.stark-card-theme();
+  @include stark-card-theme.stark-card-theme($material-theme-config, $stark-theme-config);
   @include stark-header.stark-header();
   // FIXME Incorrect vars inside file
-  @include stark-header-theme.stark-header-theme();
+  @include stark-header-theme.stark-header-theme($material-theme-config, $stark-theme-config);
   @include stark-icon.stark-icon();
 
   /* Stark components */
-  @include stark-action-bar-theme.stark-action-bar-theme();
+  @include stark-action-bar-theme.stark-action-bar-theme($material-theme-config, $stark-theme-config);
   @include stark-action-bar.stark-action-bar();
-  @include stark-app-data-theme.stark-app-data-theme();
+  @include stark-app-data-theme.stark-app-data-theme($material-theme-config, $stark-theme-config);
   @include stark-app-data.stark-app-data();
-  @include stark-app-footer-theme.stark-app-footer-theme();
+  @include stark-app-footer-theme.stark-app-footer-theme($material-theme-config, $stark-theme-config);
   @include stark-app-footer.stark-app-footer();
   @include stark-app-logo-theme.stark-app-logo-theme();
   @include stark-app-logo.stark-app-logo();
   @include stark-app-menu-theme.stark-app-menu-theme();
-  @include stark-app-menu.stark-app-menu();
+  @include stark-app-menu.stark-app-menu($material-theme-config, $stark-theme-config);
   @include stark-app-sidebar-theme.stark-app-sidebar-theme();
   @include stark-app-sidebar.stark-app-sidebar();
   @include stark-breadcrumb.stark-breadcrumb();
-  @include stark-collapsible-theme.stark-collapsible-theme();
-  @include stark-collapsible.stark-collapsible();
+  @include stark-collapsible-theme.stark-collapsible-theme($material-theme-config, $stark-theme-config);
+  @include stark-collapsible.stark-collapsible($material-theme-config, $stark-theme-config);
   @include stark-date-range-picker.stark-date-range-picker();
   @include stark-date-time-picker.stark-date-time-picker();
-  @include stark-alert-dialog-theme.stark-alert-dialog-theme();
+  @include stark-alert-dialog-theme.stark-alert-dialog-theme($material-theme-config, $stark-theme-config);
   @include stark-alert-dialog.stark-alert-dialog();
-  @include stark-confirm-dialog-theme.stark-confirm-dialog-theme();
-  @include stark-prompt-dialog-theme.stark-prompt-dialog-theme();
+  @include stark-confirm-dialog-theme.stark-confirm-dialog-theme($material-theme-config, $stark-theme-config);
+  @include stark-prompt-dialog-theme.stark-prompt-dialog-theme($material-theme-config, $stark-theme-config);
   @include stark-prompt-dialog.stark-prompt-dialog();
-  @include stark-dropdown-theme.stark-dropdown-theme();
+  @include stark-dropdown-theme.stark-dropdown-theme($material-theme-config, $stark-theme-config);
   @include stark-dropdown.stark-dropdown();
   @include stark-generic-search.stark-generic-search();
   @include stark-language-selector.stark-language-selector();
-  @include stark-message-pane-theme.stark-message-pane-theme();
+  @include stark-message-pane-theme.stark-message-pane-theme($material-theme-config, $stark-theme-config);
   @include stark-message-pane.stark-message-pane();
-  @include stark-minimap-theme.stark-minimap-theme();
+  @include stark-minimap-theme.stark-minimap-theme($material-theme-config, $stark-theme-config);
   @include stark-minimap.stark-minimap();
-  @include stark-pagination-theme.stark-pagination-theme();
+  @include stark-pagination-theme.stark-pagination-theme($material-theme-config, $stark-theme-config);
   @include stark-pagination.stark-pagination();
   @include stark-pretty-print.stark-pretty-print();
-  @include stark-route-search-theme.stark-route-search-theme();
+  @include stark-route-search-theme.stark-route-search-theme($material-theme-config, $stark-theme-config);
   @include stark-route-search.stark-route-search();
   @include stark-session-card.stark-session-card();
-  @include stark-slider-theme.stark-slider-theme();
+  @include stark-slider-theme.stark-slider-theme($material-theme-config, $stark-theme-config);
   @include stark-multisort.stark-multisort();
-  @include stark-table-theme.stark-table-theme();
+  @include stark-table-theme.stark-table-theme($material-theme-config, $stark-theme-config);
   @include stark-table.stark-table();
   @include stark-toast-notification-theme.stark-toast-notification-theme();
   @include stark-toast-notification.stark-toast-notification();
 
   /* Stark session-ui pages */
   @include stark-session-ui-pages.stark-session-ui-pages();
+  @include stark-session-ui-pages-theme.stark-session-ui-pages-theme($material-theme-config, $stark-theme-config);
   @include stark-login-page.stark-login-page();
   @include stark-preloading-page.stark-preloading-page();
   @include stark-session-expired-page.stark-session-expired-page();

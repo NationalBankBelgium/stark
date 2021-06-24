@@ -6,41 +6,39 @@
 @use "sass:map";
 @use "~@angular/material" as mat;
 @use "~@angular/material/core/theming/palette" as mat-palette;
-@use "../../../../styles/theming/stark-palettes" as stark-palettes;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
 @use "../../../../styles/components/button-theme" as stark-button-theme;
 @use "../../../../styles/media-queries" as *;
 
-@mixin stark-action-bar-theme() {
+@mixin stark-action-bar-theme($material-theme-config, $stark-theme-config) {
   @media #{$tablet-query} {
     .stark-action-bar {
       .action-label {
         &.primary {
-          color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, primary-palette));
+          color: mat.get-color-from-palette(map.get($material-theme-config, primary));
         }
 
         &.warn {
-          color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, warn-palette));
+          color: mat.get-color-from-palette(map.get($material-theme-config, warn));
         }
 
         &.accent {
-          color: mat.get-color-from-palette(stark-mat-palettes.$accent-palette, 500);
+          color: mat.get-color-from-palette(map.get($material-theme-config, accent), 500);
         }
 
         &.success {
-          color: mat.get-color-from-palette(stark-palettes.$success-palette, 500);
+          color: mat.get-color-from-palette(map.get($stark-theme-config, success-palette), 500);
         }
 
         &.alert {
-          color: mat.get-color-from-palette(stark-palettes.$alert-palette, 500);
+          color: mat.get-color-from-palette(map.get($stark-theme-config, alert-palette), 500);
         }
 
         &.alt {
-          color: mat.get-color-from-palette(stark-palettes.$grey-palette, 900);
+          color: mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), 900);
         }
 
         &.neutral {
-          color: mat.get-color-from-palette(stark-palettes.$grey-palette, 400);
+          color: mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), 400);
         }
 
         &.white {

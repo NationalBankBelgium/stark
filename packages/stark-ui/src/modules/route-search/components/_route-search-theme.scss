@@ -2,23 +2,24 @@
 /*  S t a r k   R o u t e 	 S e a r c h    T h e m e                              */
 /* ============================================================================== */
 /* stark-ui: src/modules/route-search/components/route-search-theme.css */
+@use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
-@use "../../../../styles/theming/stark-palettes" as stark-palettes;
 
-@mixin stark-route-search-theme() {
+@mixin stark-route-search-theme($material-theme-config, $stark-theme-config) {
+  $grey-palette: map.get($stark-theme-config, grey-palette);
+
   .search-field {
     .mat-form-field-wrapper {
-      border: 1px solid mat.get-color-from-palette(stark-palettes.$grey-palette, 400);
+      border: 1px solid mat.get-color-from-palette($grey-palette, 400);
       background-color: #fff;
-      color: mat.get-color-from-palette(stark-palettes.$grey-palette, 900);
+      color: mat.get-color-from-palette($grey-palette, 900);
     }
   }
 
   button.search-button {
-    background-color: mat.get-color-from-palette(stark-mat-palettes.$accent-palette, 500);
+    background-color: mat.get-color-from-palette(map.get($material-theme-config, accent), 500);
     /* stylelint-disable-next-line value-keyword-case */
-    color: mat.get-color-from-palette(stark-palettes.$grey-palette, A100);
+    color: mat.get-color-from-palette($grey-palette, A100);
   }
 }
 

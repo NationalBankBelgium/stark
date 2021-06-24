@@ -2,7 +2,9 @@
 @use "~@angular/material" as mat;
 @use "~@angular/material/core/theming/palette" as mat-palette;
 
-$grey-palette: mat.$grey-palette !default;
+$stark-alert-palette: null !default;
+$stark-grey-palette: null !default;
+$stark-success-palette: null !default;
 
 $alert-palette: (
   50: #fae6e6,
@@ -35,7 +37,9 @@ $alert-palette: (
     A400: mat-palette.$dark-primary-text,
     A700: mat-palette.$dark-primary-text
   )
-);
+) !default;
+
+$grey-palette: mat.$grey-palette !default;
 
 $success-palette: (
   50: #eaf5ea,
@@ -68,16 +72,22 @@ $success-palette: (
     A400: mat-palette.$dark-primary-text,
     A700: mat-palette.$dark-primary-text
   )
-);
+) !default;
 
-@if variable-exists(stark-grey-palette) {
+@if $stark-grey-palette != null {
   $grey-palette: map.merge($grey-palette, $stark-grey-palette);
 }
 
-@if variable-exists(stark-alert-palette) {
+@if $stark-alert-palette != null {
   $alert-palette: map.merge($alert-palette, $stark-alert-palette);
 }
 
-@if variable-exists(stark-success-palette) {
+@if $stark-success-palette != null {
   $success-palette: map.merge($success-palette, $stark-success-palette);
 }
+
+$stark-base-theme: (
+  alert-palette: mat.define-palette($alert-palette),
+  grey-palette: mat.define-palette($grey-palette),
+  success-palette: mat.define-palette($success-palette)
+) !default;

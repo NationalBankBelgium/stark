@@ -2,40 +2,12 @@
 @use "~@angular/material" as mat;
 @use "~@angular/material/core/theming/palette" as mat-palette;
 
-$backgrounds: (
-  status-bar: map.get(mat.$grey-palette, 300),
-  app-bar: map.get(mat.$grey-palette, 100),
-  background: #fafafa,
-  background-light: rgba(#000, 0.02),
-  hover: rgba(black, 0.04),
-  card: #fff,
-  dialog: #fff,
-  disabled-button: rgba(black, 0.12),
-  raised-button: #fff,
-  focused-button: mat-palette.$dark-focused,
-  selected-button: map.get(mat.$grey-palette, 300),
-  selected-disabled-button: map.get(mat.$grey-palette, 400),
-  disabled-button-toggle: map.get(mat.$grey-palette, 200),
-  unselected-chip: map.get(mat.$grey-palette, 300),
-  disabled-list-option: map.get(mat.$grey-palette, 200)
-);
+$backgrounds: mat.$light-theme-background-palette;
+$foregrounds: mat.$light-theme-foreground-palette;
 
-$foregrounds: (
-  base: black,
-  divider: mat-palette.$dark-dividers,
-  dividers: mat-palette.$dark-dividers,
-  disabled: mat-palette.$dark-disabled-text,
-  disabled-button: rgba(black, 0.26),
-  disabled-text: mat-palette.$dark-disabled-text,
-  hint-text: mat-palette.$dark-disabled-text,
-  secondary-text: mat-palette.$dark-secondary-text,
-  icon: rgba(black, 0.54),
-  icons: rgba(black, 0.54),
-  text: rgba(black, 0.87),
-  slider-min: rgba(black, 0.87),
-  slider-off: rgba(black, 0.26),
-  slider-off-active: rgba(black, 0.38)
-);
+$stark-accent-palette: null !default;
+$stark-primary-palette: null !default;
+$stark-warn-palette: null !default;
 
 $accent-palette: (
   50: #f2e0e7,
@@ -103,7 +75,7 @@ $primary-palette: (
   )
 ) !default;
 
-$warning-palette: (
+$warn-palette: (
   50: #fff3e0,
   100: #ffe0b3,
   200: #ffcc80,
@@ -136,34 +108,16 @@ $warning-palette: (
   )
 ) !default;
 
-$mat-light-theme-background: $backgrounds;
-
-$mat-light-theme-foreground: $foregrounds;
-
-@if variable-exists(stark-accent-palette) {
+@if $stark-accent-palette != null {
   $accent-palette: map.merge($accent-palette, $stark-accent-palette);
 }
 
-@if variable-exists(stark-primary-palette) {
+@if $stark-primary-palette != null {
   $primary-palette: map.merge($primary-palette, $stark-primary-palette);
 }
 
-@if variable-exists(stark-warning-palette) {
-  $warning-palette: map.merge($warning-palette, $stark-warning-palette);
+@if $stark-warn-palette != null {
+  $warn-palette: map.merge($warn-palette, $stark-warn-palette);
 }
 
-$base-theme: (
-  primary-palette: mat.define-palette($primary-palette),
-  accent-palette: mat.define-palette($accent-palette),
-  warn-palette: mat.define-palette($warning-palette)
-) !default;
-
-$material-theme: mat.define-light-theme(
-  map.get($base-theme, primary-palette),
-  map.get($base-theme, accent-palette),
-  map.get($base-theme, warn-palette)
-) !default;
-
-@mixin set-stark-ui-material-theme($material-theme: $material-theme) {
-  @include mat.all-component-themes($material-theme);
-}
+$warning-palette: $warn-palette;

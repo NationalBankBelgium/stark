@@ -2,10 +2,12 @@
 /*  S t a r k   S l i d e r  -  T h e m e                                         */
 /* ============================================================================== */
 /* stark-ui: src/modules/slider/components/slider/_slider-theme.scss */
+@use "sass:map";
+@use "~@angular/material" as mat;
 @use "../../../../styles/old-variables" as old-vars;
 @import "~nouislider/distribute/nouislider.css";
 
-@mixin stark-slider-theme() {
+@mixin stark-slider-theme($material-theme-config, $stark-theme-config) {
   .stark-slider {
     font-size: 12px;
 
@@ -40,7 +42,7 @@
     }
 
     .noUi-connect {
-      background-color: old-vars.$md-primary;
+      background-color: mat.get-color-from-palette(map.get($material-theme-config, primary));
     }
 
     .noUi-handle {
@@ -48,14 +50,14 @@
       border: 0;
       width: 36px;
       height: 36px;
-      background-color: old-vars.$md-primary;
+      background-color: mat.get-color-from-palette(map.get($material-theme-config, primary));
       border-radius: 50%;
       box-shadow: old-vars.$elevation-2;
 
       &:active,
       &:focus,
       &:hover {
-        background-color: old-vars.$md-primary-700;
+        background-color: mat.get-color-from-palette(map.get($material-theme-config, primary), 700);
         outline: none;
       }
 

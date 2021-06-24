@@ -1,6 +1,8 @@
 @use "sass:map";
 @use "~@angular/material" as mat;
 
+$stark-typography-theme: null !default;
+
 // https://material.angular.io/guide/typography
 $typography-theme: (
   font-family: "BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
@@ -71,7 +73,7 @@ $typography-theme: (
   )
 ) !default;
 
-@if variable-exists(stark-typography-theme) {
+@if $stark-typography-theme != null {
   $typography-theme: map.merge($typography-theme, $stark-typography-theme);
 }
 
@@ -89,14 +91,10 @@ $typography-config: mat.define-typography-config(
   $headline: define-typography-level-from-list(map.get($typography-theme, headline)),
   $title: define-typography-level-from-list(map.get($typography-theme, title)),
   $subheading-2: define-typography-level-from-list(map.get($typography-theme, subheading-2)),
-  $subheading-1: define-typography-level-from-list(map.get($typography-theme, subheading-2)),
+  $subheading-1: define-typography-level-from-list(map.get($typography-theme, subheading-1)),
   $body-2: define-typography-level-from-list(map.get($typography-theme, body-2)),
   $body-1: define-typography-level-from-list(map.get($typography-theme, body-1)),
   $caption: define-typography-level-from-list(map.get($typography-theme, caption)),
   $button: define-typography-level-from-list(map.get($typography-theme, button)),
   $input: define-typography-level-from-list(map.get($typography-theme, input))
 ) !default;
-
-@mixin set-typography($typography-config: $typography-config) {
-  @include mat.core($typography-config);
-}

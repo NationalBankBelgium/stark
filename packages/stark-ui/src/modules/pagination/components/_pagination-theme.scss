@@ -5,11 +5,10 @@
 
 @use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
 @use "../../../../styles/old-variables" as old-vars;
 @use "../../../../styles/media-queries" as *;
 
-@mixin stark-pagination-theme() {
+@mixin stark-pagination-theme($material-theme-config, $stark-theme-config) {
   @media #{$tablet-query} {
     .stark-pagination > div {
       .pagination-enter-page {
@@ -21,7 +20,7 @@
       .page-numbers {
         &.active {
           a {
-            color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, primary-palette));
+            color: mat.get-color-from-palette(map.get($material-theme-config, primary));
             opacity: 1;
           }
         }

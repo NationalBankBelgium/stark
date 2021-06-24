@@ -3,9 +3,8 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/message-pane/components/message-pane-theme.scss */
 
+@use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
-@use "../../../../styles/theming/stark-palettes" as stark-palettes;
 
 @mixin stark-message-pane-color($color) {
   .stark-message-pane-item {
@@ -21,9 +20,9 @@
   }
 }
 
-@mixin stark-message-pane-theme() {
+@mixin stark-message-pane-theme($material-theme-config, $stark-theme-config) {
   .stark-message-pane {
-    @include stark-message-pane-color(mat.get-color-from-palette(stark-palettes.$grey-palette, 800));
+    @include stark-message-pane-color(mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), 800));
 
     .inner {
       color: mat.get-color-from-palette(mat.$light-theme-background-palette, background);
@@ -32,30 +31,30 @@
 
     .summary {
       button.active::after {
-        background-color: mat.get-color-from-palette(stark-mat-palettes.$accent-palette, 500);
+        background-color: mat.get-color-from-palette(map.get($material-theme-config, accent), 500);
       }
 
       b {
-        color: mat.get-color-from-palette(stark-palettes.$grey-palette, 900);
+        color: mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), 900);
       }
     }
 
     .errors > mat-icon {
-      fill: mat.get-color-from-palette(stark-palettes.$alert-palette, 500);
+      fill: mat.get-color-from-palette(map.get($stark-theme-config, alert-palette), 500);
     }
 
     .warnings > mat-icon {
-      fill: mat.get-color-from-palette(stark-mat-palettes.$warning-palette, 500);
+      fill: mat.get-color-from-palette(map.get($material-theme-config, warn), 500);
     }
 
     .infos > mat-icon {
-      fill: mat.get-color-from-palette(stark-mat-palettes.$primary-palette, 500);
+      fill: mat.get-color-from-palette(map.get($material-theme-config, primary), 500);
     }
   }
 
   .stark-message-pane {
     &.stark-white {
-      @include stark-message-pane-color(mat.get-color-from-palette(stark-palettes.$grey-palette, A100));
+      @include stark-message-pane-color(mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), A100));
     }
   }
 }

@@ -3,18 +3,20 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/dialogs/components/alert-dialog.component.scss */
 
+@use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/stark-palettes" as stark-palettes;
 
-@mixin stark-alert-dialog-theme() {
+@mixin stark-alert-dialog-theme($material-theme-config, $stark-theme-config) {
+  $alert-palette: map.get($stark-theme-config, alert-palette);
+
   .stark-alert-dialog {
     [mat-dialog-title] {
-      color: mat.get-color-from-palette(stark-palettes.$alert-palette, 500);
+      color: mat.get-color-from-palette($alert-palette, 500);
     }
 
     .button-ok {
-      background-color: mat.get-color-from-palette(stark-palettes.$alert-palette, 500);
-      color: mat.get-contrast-color-from-palette(stark-palettes.$alert-palette, 500);
+      background-color: mat.get-color-from-palette($alert-palette, 500);
+      color: mat.get-contrast-color-from-palette($alert-palette, 500);
     }
   }
 }

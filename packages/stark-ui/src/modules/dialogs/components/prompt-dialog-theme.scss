@@ -3,14 +3,16 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/dialogs/components/prompt-dialog.component.scss */
 
+@use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
 
-@mixin stark-prompt-dialog-theme() {
+@mixin stark-prompt-dialog-theme($material-theme-config, $stark-theme-config) {
+  $primary-palette: map.get($material-theme-config, primary);
+
   .stark-prompt-dialog {
     .button-ok {
-      background-color: mat.get-color-from-palette(stark-mat-palettes.$primary-palette, 500);
-      color: mat.get-contrast-color-from-palette(stark-mat-palettes.$primary-palette, 500);
+      background-color: mat.get-color-from-palette($primary-palette, 500);
+      color: mat.get-contrast-color-from-palette($primary-palette, 500);
     }
   }
 }

@@ -3,14 +3,14 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/app-data/components/_app-data-theme.scss */
 
+@use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/stark-palettes" as stark-palettes;
 @use "../../../../styles/old-variables" as old-vars;
 
-@mixin stark-app-data-theme() {
+@mixin stark-app-data-theme($material-theme-config, $stark-theme-config) {
   .stark-app-data {
     & .label {
-      color: mat.get-color-from-palette(stark-palettes.$grey-palette, 700);
+      color: mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), 700);
     }
 
     &.dropdown {

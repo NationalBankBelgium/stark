@@ -1,11 +1,37 @@
 // Theming APIs
-@forward "./styles/theming/material-palettes" show $backgrounds, $foregrounds, $accent-palette, $primary-palette,
-  $warning-palette, $mat-light-theme-background, $mat-light-theme-foreground, $base-theme, $material-theme,
-  set-stark-ui-material-theme;
+$stark-accent-palette: null !default;
+$stark-primary-palette: null !default;
+/*
+@deprecated
+ */
+$stark-warning-palette: null !default;
+$stark-warn-palette: $stark-warning-palette !default;
+
+$stark-alert-palette: null !default;
+$stark-grey-palette: null !default;
+$stark-success-palette: null !default;
+
+$stark-typography-theme: null !default;
+
+@use "./styles/theming/material-palette" with (
+  $stark-accent-palette: $stark-accent-palette,
+  $stark-primary-palette: $stark-primary-palette,
+  $stark-warn-palette: $stark-warn-palette
+);
+@forward "./styles/theming/material-palette" show $backgrounds, $foregrounds, $accent-palette, $primary-palette, $warning-palette;
+
+@use "./styles/theming/stark-palettes" with (
+  $stark-alert-palette: $stark-alert-palette,
+  $stark-grey-palette: $stark-grey-palette,
+  $stark-success-palette: $stark-success-palette
+);
 @forward "./styles/theming/stark-palettes" show $alert-palette, $grey-palette, $success-palette;
-@forward "./styles/theming/typography" show $typography-theme, $typography-config, set-typography;
+
+@use "./styles/theming/typography" with ($stark-typography-theme: $stark-typography-theme);
+@forward "./styles/theming/typography" show $typography-theme, $typography-config;
 
 // Core APIs
-@forward "./styles/old-variables" hide $base-theme;
+@forward "./styles/old-variables" hide $material-theme-config, $_primary-palette, $_accent-palette, $_warn-palette;
 @forward "./styles/media-queries";
-@forward "./styles/stark-ui-bundle" show set-default-stark-ui-styles;
+@forward "./styles/stark-ui-bundle" show set-stark-ui-styles, stark-button-color, stark-app-footer-color, stark-collapsible-color,
+  stark-dropdown-color, stark-message-pane-color;

@@ -1,11 +1,6 @@
 @use "sass:map";
 @use "~@angular/material" as mat;
 @use "~@angular/material/core/theming/palette" as mat-palette;
-@use "../theming/stark-palettes" as stark-palettes;
-
-$success-palette: stark-palettes.$success-palette !default;
-$alert-palette: stark-palettes.$alert-palette !default;
-$grey-palette: stark-palettes.$grey-palette !default;
 
 @mixin stark-button-color($color, $contrast) {
   &.mat-button,
@@ -39,7 +34,11 @@ $grey-palette: stark-palettes.$grey-palette !default;
   }
 }
 
-@mixin stark-button-theme() {
+@mixin stark-button-theme($material-theme-config, $stark-theme-config) {
+  $success-palette: map.get($stark-theme-config, success-palette);
+  $alert-palette: map.get($stark-theme-config, alert-palette);
+  $grey-palette: map.get($stark-theme-config, grey-palette);
+
   button {
     &.mat-success {
       @include stark-button-color(

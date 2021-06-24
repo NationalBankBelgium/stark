@@ -5,8 +5,6 @@
 
 @use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
-@use "../../../../styles/theming/stark-palettes" as stark-palettes;
 
 @mixin stark-dropdown-color($color) {
   .mat-form-field-label {
@@ -31,38 +29,38 @@
   }
 }
 
-@mixin stark-dropdown-theme() {
+@mixin stark-dropdown-theme($material-theme-config, $stark-theme-config) {
   .stark-dropdown-mat-form-field {
     &.stark-primary {
-      @include stark-dropdown-color(mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, primary-palette), 900));
+      @include stark-dropdown-color(mat.get-color-from-palette(map.get($material-theme-config, primary), 900));
     }
 
     &.stark-accent {
-      @include stark-dropdown-color(mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, accent-palette), 900));
+      @include stark-dropdown-color(mat.get-color-from-palette(map.get($material-theme-config, accent), 900));
     }
 
     &.stark-warn {
-      @include stark-dropdown-color(mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, warn-palette), 900));
+      @include stark-dropdown-color(mat.get-color-from-palette(map.get($material-theme-config, warn), 900));
     }
 
     &.stark-white {
-      @include stark-dropdown-color(mat.get-color-from-palette(stark-palettes.$grey-palette, A100));
+      @include stark-dropdown-color(mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), A100));
     }
 
     &.stark-success {
-      @include stark-dropdown-color(mat.get-color-from-palette(stark-palettes.$success-palette, 900));
+      @include stark-dropdown-color(mat.get-color-from-palette(map.get($stark-theme-config, success-palette), 900));
     }
 
     &.stark-alert {
-      @include stark-dropdown-color(mat.get-color-from-palette(stark-palettes.$alert-palette, 900));
+      @include stark-dropdown-color(mat.get-color-from-palette(map.get($stark-theme-config, alert-palette), 900));
     }
 
     &.stark-alt {
-      @include stark-dropdown-color(mat.get-color-from-palette(stark-palettes.$grey-palette, 900));
+      @include stark-dropdown-color(mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), 900));
     }
 
     &.stark-neutral {
-      @include stark-dropdown-color(mat.get-color-from-palette(stark-palettes.$success-palette, 400));
+      @include stark-dropdown-color(mat.get-color-from-palette(map.get($stark-theme-config, success-palette), 400));
     }
   }
 }

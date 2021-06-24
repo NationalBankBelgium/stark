@@ -3,8 +3,8 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/app-footer/components/_app-footer.component.scss */
 
+@use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/stark-palettes" as stark-palettes;
 
 @mixin stark-app-footer-color($color_high, $color_low) {
   .stark-app-footer-container {
@@ -18,12 +18,11 @@
   }
 }
 
-@mixin stark-app-footer-theme() {
+@mixin stark-app-footer-theme($material-theme-config, $stark-theme-config) {
+  $grey-palette: map.get($stark-theme-config, grey-palette);
+
   .stark-app-footer {
-    @include stark-app-footer-color(
-      mat.get-color-from-palette(stark-palettes.$grey-palette, A100),
-      mat.get-color-from-palette(stark-palettes.$grey-palette, 800)
-    );
+    @include stark-app-footer-color(mat.get-color-from-palette($grey-palette, A100), mat.get-color-from-palette($grey-palette, 800));
   }
 }
 

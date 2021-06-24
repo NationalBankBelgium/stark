@@ -3,11 +3,11 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/minimap/components/minimap-theme.scss */
 
+@use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
 @use "../../../../styles/old-variables" as old-vars;
 
-@mixin stark-minimap-theme() {
+@mixin stark-minimap-theme($material-theme-config, $stark-theme-config) {
   .stark-minimap {
     .stark-minimap-dots {
       i {
@@ -24,7 +24,7 @@
   .stark-primary.stark-minimap {
     .stark-minimap-dots {
       i {
-        background-color: mat.get-color-from-palette(stark-mat-palettes.$primary-palette, 500);
+        background-color: mat.get-color-from-palette(map.get($material-theme-config, primary), 500);
       }
     }
   }
@@ -32,7 +32,7 @@
   .stark-accent.stark-minimap {
     .stark-minimap-dots {
       i {
-        background-color: mat.get-color-from-palette(stark-mat-palettes.$accent-palette, 500);
+        background-color: mat.get-color-from-palette(map.get($material-theme-config, accent), 500);
       }
     }
   }
@@ -40,7 +40,7 @@
   .stark-warning.stark-minimap {
     .stark-minimap-dots {
       i {
-        background-color: mat.get-color-from-palette(stark-mat-palettes.$warning-palette, 500);
+        background-color: mat.get-color-from-palette(map.get($material-theme-config, warn), 500);
       }
     }
   }

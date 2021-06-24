@@ -5,8 +5,6 @@
 
 @use "sass:map";
 @use "~@angular/material" as mat;
-@use "../../../../styles/theming/material-palettes" as stark-mat-palettes;
-@use "../../../../styles/theming/stark-palettes" as stark-palettes;
 @use "../../../../styles/old-variables" as old-vars;
 
 @mixin stark-collapsible-color($color_high, $color_low) {
@@ -38,23 +36,23 @@
   }
 }
 
-@mixin stark-collapsible-theme() {
+@mixin stark-collapsible-theme($material-theme-config, $stark-theme-config) {
+  $primary-palette: map.get($material-theme-config, primary);
+  $grey-palette: map.get($stark-theme-config, grey-palette);
+
   .stark-collapsible {
-    @include stark-collapsible-color(
-      mat.get-color-from-palette(stark-palettes.$grey-palette, A100),
-      mat.get-color-from-palette(stark-palettes.$grey-palette, 900)
-    );
+    @include stark-collapsible-color(mat.get-color-from-palette($grey-palette, A100), mat.get-color-from-palette($grey-palette, 900));
 
     .mat-expansion-panel-header-description {
-      color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, primary-palette), 900);
+      color: mat.get-color-from-palette($primary-palette, 900);
     }
 
     .mat-expansion-panel-header-title {
-      color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, primary-palette), 500);
+      color: mat.get-color-from-palette($primary-palette, 500);
     }
 
     .stark-collapsible-icon {
-      color: mat.get-color-from-palette(map.get(stark-mat-palettes.$base-theme, primary-palette), 500);
+      color: mat.get-color-from-palette($primary-palette, 500);
     }
   }
 }

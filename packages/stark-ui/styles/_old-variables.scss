@@ -1,8 +1,22 @@
 @use "sass:map";
 @use "~@angular/material" as mat;
-@use "./theming/material-palettes" as stark-mat-palettes;
+@use "./theming/material-palette" as stark-mat-palette;
+@use "./theming/typography" as stark-typography;
 
-$base-theme: stark-mat-palettes.$base-theme !default;
+$material-theme-config: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette(stark-mat-palette.$primary-palette),
+      accent: mat.define-palette(stark-mat-palette.$accent-palette),
+      warn: mat.define-palette(stark-mat-palette.$warning-palette)
+    ),
+    typography: stark-typography.$typography-config
+  )
+) !default;
+
+$_accent-palette: map.get($material-theme-config, accent);
+$_primary-palette: map.get($material-theme-config, primary);
+$_warn-palette: map.get($material-theme-config, warn);
 
 $elevation-1: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
 $elevation-2: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
@@ -53,9 +67,9 @@ $message-neutral-700: #999;
 
 $md-primary-100: #b2d5ee; /* rgb(178, 213, 238) */
 
-$md-primary: mat.get-color-from-palette(map.get($base-theme, primary-palette));
-$md-primary-600: mat.get-color-from-palette(map.get($base-theme, primary-palette), 600); /* rgb(0, 106, 180) */
-$md-primary-700: mat.get-color-from-palette(map.get($base-theme, primary-palette), 700); /* rgb(0, 94, 160) */
+$md-primary: mat.get-color-from-palette($_primary-palette);
+$md-primary-600: mat.get-color-from-palette($_primary-palette, 600); /* rgb(0, 106, 180) */
+$md-primary-700: mat.get-color-from-palette($_primary-palette, 700); /* rgb(0, 94, 160) */
 $md-primary-alpha-05: rgba(0, 118, 200, 0.05);
 $md-primary-alpha-10: rgba(0, 118, 200, 0.1);
 $md-primary-alpha-26: rgba(0, 118, 200, 0.26);
@@ -64,21 +78,21 @@ $md-primary-alpha-60: rgba(0, 118, 200, 0.6);
 $md-primary-alpha-87: rgba(0, 118, 200, 0.87);
 $md-primary-200-alpha-38: rgba(127, 186, 227, 0.38);
 
-$md-accent-50: mat.get-color-from-palette(map.get($base-theme, accent-palette), 50);
-$md-accent-100: mat.get-color-from-palette(map.get($base-theme, accent-palette), 100); /* rgb(255, 77, 148) */
-$md-accent: mat.get-color-from-palette(map.get($base-theme, accent-palette)); /* rgb(143, 0, 57) */
-$md-accent-600: mat.get-color-from-palette(map.get($base-theme, accent-palette), 600); /* rgb(112, 0, 45) */
+$md-accent-50: mat.get-color-from-palette($_accent-palette, 50);
+$md-accent-100: mat.get-color-from-palette($_accent-palette, 100); /* rgb(255, 77, 148) */
+$md-accent: mat.get-color-from-palette($_accent-palette); /* rgb(143, 0, 57) */
+$md-accent-600: mat.get-color-from-palette($_accent-palette, 600); /* rgb(112, 0, 45) */
 $md-accent-alpha-20: rgba(143, 0, 57, 0.2);
 $md-accent-alpha-26: rgba(143, 0, 57, 0.26);
 $md-accent-alpha-50: rgba(143, 0, 57, 0.5);
 $md-accent-alpha-87: rgba(143, 0, 57, 0.87);
 
-$md-warn-100: mat.get-color-from-palette(map.get($base-theme, warn-palette), 100); /* rgb(255, 204, 188) */
-$md-warn: mat.get-color-from-palette(map.get($base-theme, warn-palette)); /* rgb(255, 87, 34) */
-$md-warn-600: mat.get-color-from-palette(map.get($base-theme, warn-palette), 600); /* rgb(244, 81, 30) */
-$md-warn-700: mat.get-color-from-palette(map.get($base-theme, warn-palette), 700); /* rgb(230, 74, 25) */
+$md-warn-100: mat.get-color-from-palette($_warn-palette, 100); /* rgb(255, 204, 188) */
+$md-warn: mat.get-color-from-palette($_warn-palette); /* rgb(255, 87, 34) */
+$md-warn-600: mat.get-color-from-palette($_warn-palette, 600); /* rgb(244, 81, 30) */
+$md-warn-700: mat.get-color-from-palette($_warn-palette, 700); /* rgb(230, 74, 25) */
 /* stylelint-disable-next-line value-keyword-case */
-$md-warn-a700: mat.get-color-from-palette(map.get($base-theme, warn-palette), A700); /* rgb(221, 44, 0) */
+$md-warn-a700: mat.get-color-from-palette($_warn-palette, A700); /* rgb(221, 44, 0) */
 $md-warn-alpha-26: rgba(255, 87, 34, 0.26);
 $md-warn-alpha-50: rgba(255, 87, 34, 0.5);
 $md-warn-alpha-87: rgba(255, 87, 34, 0.87);
