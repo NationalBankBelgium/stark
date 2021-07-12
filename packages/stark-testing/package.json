@@ -33,7 +33,7 @@
     "karma-firefox-launcher": "^2.1.1",
     "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^4.0.1",
-    "karma-jasmine-html-reporter": "^1.5.4",
+    "karma-jasmine-html-reporter": "^1.7.0",
     "karma-mocha-reporter": "^2.2.5",
     "karma-sourcemap-loader": "^0.3.7",
     "protractor": "^5.4.2",
