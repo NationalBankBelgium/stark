@@ -20,7 +20,7 @@
   "dependencies": {
     "@angular/material-moment-adapter": "^8.2.0",
     "@mdi/angular-material": "^4.0.96",
-    "@prettier/plugin-xml": "^0.13.1",
+    "@prettier/plugin-xml": "^1.0.1",
     "@sqltools/formatter": "^1.2.3",
     "@types/lodash-es": "^4.17.4",
     "@types/nouislider": "^9.0.10",
