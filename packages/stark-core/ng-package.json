@@ -21,12 +21,15 @@
       "lodash-es/noop": "lodash-es.noop",
       "lodash-es/reduce": "lodash-es.reduce",
       "moment": "moment",
-      "uuid": "uuid"
+      "uuid": "uuid",
+      "zone.js/dist/long-stack-trace-zone": "zoneJs.dist.longStackTraceZone"
     },
     "flatModuleFile": "stark-core"
   },
   "dest": "../../dist/packages/stark-core",
-  "whitelistedNonPeerDependencies": [
+  "deleteDestPath": true,
+  "assets": ["./assets", "testing/**/*.md"],
+  "allowedNonPeerDependencies": [
     "@angularclass/hmr",
     "@ng-idle/core",
     "@ng-idle/keepalive",

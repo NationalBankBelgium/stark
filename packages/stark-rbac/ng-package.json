@@ -8,6 +8,7 @@
       "@ngrx/store": "ngrx.store"
     }
   },
+  "deleteDestPath": true,
   "dest": "../../dist/packages/stark-rbac",
-  "whitelistedNonPeerDependencies": ["@types/lodash-es"]
+  "assets": ["testing/**/*.md"]
 }

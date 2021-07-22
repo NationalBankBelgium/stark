@@ -31,7 +31,9 @@
     "flatModuleFile": "stark-ui"
   },
   "dest": "../../dist/packages/stark-ui",
-  "whitelistedNonPeerDependencies": [
+  "deleteDestPath": true,
+  "assets": ["./assets", "**/assets/**/*.json", "**/assets/**/*.d.ts", "src/**/*.scss", "testing/**/*.md"],
+  "allowedNonPeerDependencies": [
     "@angular/material-moment-adapter",
     "@mdi/angular-material",
     "@prettier/plugin-xml",

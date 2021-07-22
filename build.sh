@@ -247,11 +247,6 @@ do
     logInfo "Compile package $PACKAGE"
     ngBuild ${PACKAGE}
 
-    logInfo "Copy assets folders for package $PACKAGE"
-    syncOptions=(-a --include="**/assets/" --exclude="*.js" --exclude="*.js.map" --exclude="*.ts" --exclude="/*.json" --exclude="testing/*.json" --include="*.json" --exclude="node_modules/" --exclude="coverage/" --exclude="reports/")
-    syncFiles ${SRC_DIR} ${OUT_DIR} "${syncOptions[@]}"
-    unset syncOptions
-
     logInfo "Copy typings folders for package $PACKAGE"
     syncOptions=(-a --include="/typings/***" --exclude="*")
     syncFiles ${SRC_DIR} ${OUT_DIR} "${syncOptions[@]}"
