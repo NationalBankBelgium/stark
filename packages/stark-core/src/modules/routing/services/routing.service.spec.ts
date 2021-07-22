@@ -1,5 +1,5 @@
 /*tslint:disable:completed-docs no-identical-functions no-duplicate-string no-big-function*/
-import { Component, Injector, NO_ERRORS_SCHEMA } from "@angular/core";
+import { Component, Injector, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule, TransitionPromise } from "@uirouter/angular";
 import { RawParams, StateDeclaration, StateObject, StateService, TransitionService, UIRouter, UIRouterGlobals } from "@uirouter/core";
@@ -30,6 +30,12 @@ export class HomeComponent {}
 
 @Component({ selector: "logout-page", template: "LOGOUT_PAGE_COMPONENT" })
 export class LogoutPageComponent {}
+
+@NgModule({
+	declarations: [HomeComponent, LogoutPageComponent],
+	exports: [HomeComponent, LogoutPageComponent]
+})
+export class DummyTestModule {}
 
 describe("Service: StarkRoutingService", () => {
 	let $state: StateService;
@@ -372,15 +378,7 @@ describe("Service: StarkRoutingService", () => {
 		mockLogger = new MockStarkLoggingService(mockCorrelationId);
 		errorHandler = new StarkErrorHandler(mockInjectorService);
 
-		return new StarkRoutingServiceImpl(
-			mockLogger,
-			appConfig,
-			errorHandler,
-			store,
-			state,
-			transitions,
-			globals
-		);
+		return new StarkRoutingServiceImpl(mockLogger, appConfig, errorHandler, store, state, transitions, globals);
 	};
 
 	/**
@@ -388,7 +386,6 @@ describe("Service: StarkRoutingService", () => {
 	 */
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [HomeComponent, LogoutPageComponent],
 			schemas: [NO_ERRORS_SCHEMA],
 			providers: [
 				{
@@ -398,7 +395,7 @@ describe("Service: StarkRoutingService", () => {
 				},
 				provideMockStore()
 			],
-			imports: [routerModule]
+			imports: [DummyTestModule, routerModule]
 		});
 	});
 
@@ -598,10 +595,10 @@ describe("Service: StarkRoutingService", () => {
 						);
 
 						const currentStateParams: RawParams = routingService.getCurrentStateParams();
-						expect(currentStateParams.requestId).toBeDefined();
-						expect(currentStateParams.requestId).toBe(requestId);
-						expect(currentStateParams.onBehalfView).toBeDefined();
-						expect(currentStateParams.onBehalfView).toBe(true);
+						expect(currentStateParams["requestId"]).toBeDefined();
+						expect(currentStateParams["requestId"]).toBe(requestId);
+						expect(currentStateParams["onBehalfView"]).toBeDefined();
+						expect(currentStateParams["onBehalfView"]).toBe(true);
 					}),
 					catchError((error: any) => {
 						return throwError(`getCurrentStateParams ${error}`);
@@ -661,10 +658,10 @@ describe("Service: StarkRoutingService", () => {
 						);
 
 						const currentStateParams: RawParams = routingService.getCurrentStateParams(true);
-						expect(currentStateParams.requestId).toBeDefined();
-						expect(currentStateParams.requestId).toBe(requestId);
-						expect(currentStateParams.onBehalfView).toBeDefined();
-						expect(currentStateParams.onBehalfView).toBe(true);
+						expect(currentStateParams["requestId"]).toBeDefined();
+						expect(currentStateParams["requestId"]).toBe(requestId);
+						expect(currentStateParams["onBehalfView"]).toBeDefined();
+						expect(currentStateParams["onBehalfView"]).toBe(true);
 					}),
 					catchError((error: any) => {
 						return throwError(`getCurrentStateParams ${error}`);
@@ -880,10 +877,10 @@ describe("Service: StarkRoutingService", () => {
 						);
 
 						const currentStateParams: RawParams = routingService.getCurrentStateParams();
-						expect(currentStateParams.requestId).toBeDefined();
-						expect(currentStateParams.requestId).toBe(requestId);
-						expect(currentStateParams.onBehalfView).toBeDefined();
-						expect(currentStateParams.onBehalfView).toBe(true);
+						expect(currentStateParams["requestId"]).toBeDefined();
+						expect(currentStateParams["requestId"]).toBe(requestId);
+						expect(currentStateParams["onBehalfView"]).toBeDefined();
+						expect(currentStateParams["onBehalfView"]).toBe(true);
 					}),
 					catchError((error: any) => {
 						return throwError(`navigateToHome ${error}`);
@@ -979,7 +976,7 @@ describe("Service: StarkRoutingService", () => {
 
 		it(
 			"should just be called ONCE in order to navigate to the previous state when the last navigation(s) were dynamic " +
-				"(same target state different params)",
+			"(same target state different params)",
 			(done: DoneFn) => {
 				spyOn($state, "go").and.callThrough();
 

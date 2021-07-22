@@ -163,44 +163,26 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const interpolatedResourcePath: string = mockResourcePath + "/" + resourceUuid;
 			expect(repository.getRequestBuilder() instanceof StarkHttpRequestBuilderImpl).toBe(true);
 
-			let request: StarkHttpRequest = repository
-				.getRequestBuilder()
-				.create(mockResource)
-				.build();
+			let request: StarkHttpRequest = repository.getRequestBuilder().create(mockResource).build();
 			// uuid placeholder is not added in a create request (no uuid needed)
 			expect(request.resourcePath).toBe(mockResourcePath);
 
-			request = repository
-				.getRequestBuilder()
-				.update(mockResource)
-				.build();
+			request = repository.getRequestBuilder().update(mockResource).build();
 			expect(request.resourcePath).toBe(interpolatedResourcePath);
 
-			request = repository
-				.getRequestBuilder()
-				.delete(mockResource)
-				.build();
+			request = repository.getRequestBuilder().delete(mockResource).build();
 			expect(request.resourcePath).toBe(interpolatedResourcePath);
 
-			request = repository
-				.getRequestBuilder()
-				.get(resourceUuid)
-				.build();
+			request = repository.getRequestBuilder().get(resourceUuid).build();
 			expect(request.resourcePath).toBe(interpolatedResourcePath);
 
-			request = repository
-				.getRequestBuilder()
-				.getCollection(10, 0)
-				.build();
+			request = repository.getRequestBuilder().getCollection(10, 0).build();
 			// uuid placeholder is not interpolated by default in a getCollection request (no uuid needed)
 			expect(request.resourcePath).toBe(mockResourcePath);
 
 			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
-			request = repository
-				.getRequestBuilder()
-				.search(mockCriteria, 10, 0)
-				.build();
+			request = repository.getRequestBuilder().search(mockCriteria, 10, 0).build();
 			// uuid placeholder is not interpolated by default in a search request (no uuid needed)
 			expect(request.resourcePath).toBe(mockResourcePath);
 		});
@@ -209,44 +191,26 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			const customResourcePath = "/custom/path/:uuid";
 			const interpolatedCustomResourcePath: string = "/custom/path/" + resourceUuid;
 
-			let request: StarkHttpRequest = repository
-				.getRequestBuilder(customResourcePath)
-				.create(mockResource)
-				.build();
+			let request: StarkHttpRequest = repository.getRequestBuilder(customResourcePath).create(mockResource).build();
 			// uuid placeholder is not interpolated by default in a create request (no uuid needed)
 			expect(request.resourcePath).toBe(customResourcePath);
 
-			request = repository
-				.getRequestBuilder(customResourcePath)
-				.update(mockResource)
-				.build();
+			request = repository.getRequestBuilder(customResourcePath).update(mockResource).build();
 			expect(request.resourcePath).toBe(interpolatedCustomResourcePath);
 
-			request = repository
-				.getRequestBuilder(customResourcePath)
-				.delete(mockResource)
-				.build();
+			request = repository.getRequestBuilder(customResourcePath).delete(mockResource).build();
 			expect(request.resourcePath).toBe(interpolatedCustomResourcePath);
 
-			request = repository
-				.getRequestBuilder(customResourcePath)
-				.get(resourceUuid)
-				.build();
+			request = repository.getRequestBuilder(customResourcePath).get(resourceUuid).build();
 			expect(request.resourcePath).toBe(interpolatedCustomResourcePath);
 
-			request = repository
-				.getRequestBuilder(customResourcePath)
-				.getCollection(10, 0)
-				.build();
+			request = repository.getRequestBuilder(customResourcePath).getCollection(10, 0).build();
 			// uuid placeholder is not interpolated by default in a getCollection request (no uuid needed)
 			expect(request.resourcePath).toBe(customResourcePath);
 
 			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
-			request = repository
-				.getRequestBuilder(customResourcePath)
-				.search(mockCriteria, 10, 0)
-				.build();
+			request = repository.getRequestBuilder(customResourcePath).search(mockCriteria, 10, 0).build();
 			// uuid placeholder is not interpolated by default in a search request (no uuid needed)
 			expect(request.resourcePath).toBe(customResourcePath);
 		});
@@ -257,49 +221,33 @@ describe("Repository: AbstractStarkHttpRepository", () => {
 			expect(repository.serializer).toBe(mockSerializer);
 			expect(repository.type).toBe(MockResource);
 
-			let request: StarkHttpRequest = repository
-				.getRequestBuilder()
-				.create(mockResource)
-				.build();
+			let request: StarkHttpRequest = repository.getRequestBuilder().create(mockResource).build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			request = repository
-				.getRequestBuilder()
-				.update(mockResource)
-				.build();
+			request = repository.getRequestBuilder().update(mockResource).build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			request = repository
-				.getRequestBuilder()
-				.delete(mockResource)
-				.build();
+			request = repository.getRequestBuilder().delete(mockResource).build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			request = repository
-				.getRequestBuilder()
-				.get(resourceUuid)
-				.build();
+			request = repository.getRequestBuilder().get(resourceUuid).build();
 			expect(request.serializer).toBe(repository.serializer);
 
-			request = repository
-				.getRequestBuilder()
-				.getCollection(10, 0)
-				.build();
+			request = repository.getRequestBuilder().getCollection(10, 0).build();
 			expect(request.serializer).toBe(repository.serializer);
 
 			const mockCriteria: { [key: string]: any } = { field1: "anything", field2: "whatever" };
 
-			request = repository
-				.getRequestBuilder()
-				.search(mockCriteria, 10, 0)
-				.build();
+			request = repository.getRequestBuilder().search(mockCriteria, 10, 0).build();
 			expect(request.serializer).toBe(repository.serializer);
 		});
 	});
 });
 
 class AbstractHttpRepositoryTestHelper extends AbstractStarkHttpRepository<MockResource> {
-	public serializer!: StarkHttpSerializer<MockResource>;
+	public override get serializer(): AbstractStarkHttpRepository<MockResource>["serializer"] {
+		return super.serializer;
+	}
 
 	public get type(): StarkSerializable {
 		return MockResource;

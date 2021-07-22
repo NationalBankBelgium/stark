@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs no-big-function*/
+/* tslint:disable:completed-docs no-big-function no-unbound-method */
 import { HttpHeaders, HttpRequest } from "@angular/common/http";
 import { EventEmitter, Injector } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle, InterruptSource } from "@ng-idle/core";
@@ -1007,44 +1007,44 @@ class SessionServiceHelper extends StarkSessionServiceImpl {
 		);
 	}
 
-	public registerTransitionHook(): void {
+	public override registerTransitionHook(): void {
 		super.registerTransitionHook();
 	}
 
-	public initializeSession(user: StarkUser): void {
+	public override initializeSession(user: StarkUser): void {
 		super.initializeSession(user);
 	}
 
-	public destroySession(): void {
+	public override destroySession(): void {
 		super.destroySession();
 	}
 
-	public configureIdleService(): void {
+	public override configureIdleService(): void {
 		super.configureIdleService();
 	}
 
-	public startIdleService(): void {
+	public override startIdleService(): void {
 		super.startIdleService();
 	}
 
-	public stopIdleService(): void {
+	public override stopIdleService(): void {
 		super.stopIdleService();
 	}
 
-	public startKeepaliveService(): void {
+	public override startKeepaliveService(): void {
 		super.startKeepaliveService();
 	}
 
-	public stopKeepaliveService(): void {
+	public override stopKeepaliveService(): void {
 		super.stopKeepaliveService();
 	}
 
-	public setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string>): void {
+	public override setDevAuthenticationHeaders(devAuthenticationHeaders: Map<string, string>): void {
 		super.setDevAuthenticationHeaders(devAuthenticationHeaders);
 	}
 
 	// override parent's implementation to prevent actual HTTP request to be sent!
-	public sendLogoutRequest(): Observable<void> {
+	public override sendLogoutRequest(): Observable<void> {
 		/* dummy function to be mocked */
 		return of(undefined);
 	}

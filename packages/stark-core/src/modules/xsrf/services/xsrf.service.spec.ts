@@ -347,15 +347,15 @@ describe("Service: StarkXSRFService", () => {
 			super(applicationConfig, logger, <HttpClient>(<unknown>httpClient), document, injector, config);
 		}
 
-		public getXSRFCookie(): string | undefined {
+		public override getXSRFCookie(): string | undefined {
 			return super.getXSRFCookie();
 		}
 
-		public setXSRFCookie(xsrfToken: string): void {
+		public override setXSRFCookie(xsrfToken: string): void {
 			super.setXSRFCookie(xsrfToken);
 		}
 
-		public getWaitBeforePingingObs(): Observable<any> {
+		public override getWaitBeforePingingObs(): Observable<any> {
 			return super.getWaitBeforePingingObs();
 		}
 

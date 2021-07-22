@@ -29,8 +29,8 @@ describe("Effect: StarkSettingsEffects", () => {
 			imports: []
 		});
 
-		settingsEffects = TestBed.get(StarkSettingsEffects);
-		mockSessionService = TestBed.get(STARK_SESSION_SERVICE);
+		settingsEffects = TestBed.inject(StarkSettingsEffects);
+		mockSessionService = TestBed.inject<MockStarkSessionService>(STARK_SESSION_SERVICE);
 	});
 
 	describe("On setPreferredLanguage$", () => {

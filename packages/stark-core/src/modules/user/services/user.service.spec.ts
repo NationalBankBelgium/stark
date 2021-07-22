@@ -102,12 +102,12 @@ describe("Service: StarkUserService", () => {
 			result.forEach((userInstance: StarkUser, index: number) => {
 				expect(userInstance instanceof StarkUser).toBe(true);
 				expect(userInstance.uuid).toBe(mockUsers[index].uuid);
-				expect(userInstance.firstName).toBe(mockUsers[index].details.firstName);
-				expect(userInstance.lastName).toBe(mockUsers[index].details.lastName);
-				expect(userInstance.language).toBe(mockUsers[index].details.language);
-				expect(userInstance.email).toBe(mockUsers[index].details.mail);
-				expect(userInstance.referenceNumber).toBe(mockUsers[index].details.referenceNumber);
-				expect(userInstance.custom).toEqual(mockUsers[index].custom);
+				expect(userInstance.firstName).toBe(mockUsers[index]["details"].firstName);
+				expect(userInstance.lastName).toBe(mockUsers[index]["details"].lastName);
+				expect(userInstance.language).toBe(mockUsers[index]["details"].language);
+				expect(userInstance.email).toBe(mockUsers[index]["details"].mail);
+				expect(userInstance.referenceNumber).toBe(mockUsers[index]["details"].referenceNumber);
+				expect(userInstance.custom).toEqual(mockUsers[index]["custom"]);
 			});
 
 			expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
@@ -175,12 +175,12 @@ describe("Service: StarkUserService", () => {
 			expect(result).toBeDefined();
 			expect(result instanceof StarkUser).toBe(true);
 			expect(result.uuid).toBe(mockUsers[0].uuid);
-			expect(result.firstName).toBe(mockUsers[0].details.firstName);
-			expect(result.lastName).toBe(mockUsers[0].details.lastName);
-			expect(result.language).toBe(mockUsers[0].details.language);
-			expect(result.email).toBe(mockUsers[0].details.mail);
-			expect(result.referenceNumber).toBe(mockUsers[0].details.referenceNumber);
-			expect(result.custom).toEqual(mockUsers[0].custom);
+			expect(result.firstName).toBe(mockUsers[0]["details"].firstName);
+			expect(result.lastName).toBe(mockUsers[0]["details"].lastName);
+			expect(result.language).toBe(mockUsers[0]["details"].language);
+			expect(result.email).toBe(mockUsers[0]["details"].mail);
+			expect(result.referenceNumber).toBe(mockUsers[0]["details"].referenceNumber);
+			expect(result.custom).toEqual(mockUsers[0]["custom"]);
 
 			expect(mockObserver.error).not.toHaveBeenCalled();
 			expect(mockObserver.complete).toHaveBeenCalledTimes(1); // it completes because of the Store mock observable

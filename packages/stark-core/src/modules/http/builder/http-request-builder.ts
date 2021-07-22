@@ -183,7 +183,7 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 		const customType: StarkSerializable | undefined = this.getCustomType(params);
 		const serializerForCustomType: StarkHttpSerializer<T> | undefined = this.getCustomTypeSerializer(this.serializer, customType);
 
-		const builder: StarkHttpGetCollectionRequestBuilder<T> = new StarkHttpSearchRequestBuilderImpl({
+		const builder: StarkHttpGetCollectionRequestBuilder<T> = new StarkHttpSearchRequestBuilderImpl<T>({
 			backend: this.backend,
 			resourcePath: this.resourcePath,
 			headers: new Map<string, string>(),

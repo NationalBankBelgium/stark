@@ -13,7 +13,7 @@ export class StarkUserModule {
 	 * @param userModuleConfig - Object containing the configuration (if any) for the `StarkUserModule`
 	 * @returns A module with providers
 	 */
-	public static forRoot(userModuleConfig?: StarkUserModuleConfig): ModuleWithProviders {
+	public static forRoot(userModuleConfig?: StarkUserModuleConfig): ModuleWithProviders<StarkUserModule> {
 		return {
 			ngModule: StarkUserModule,
 			providers: [

@@ -22,13 +22,13 @@
       "lodash-es/reduce": "lodash-es.reduce",
       "moment": "moment",
       "uuid": "uuid",
-      "zone.js/dist/long-stack-trace-zone": "zoneJs.dist.longStackTraceZone"
+      "zone.js/plugins/long-stack-trace-zone": "zoneJs.plugins.longStackTraceZone"
     },
     "flatModuleFile": "stark-core"
   },
   "dest": "../../dist/packages/stark-core",
   "deleteDestPath": true,
-  "assets": ["./assets", "testing/**/*.md"],
+  "assets": ["./assets", "testing/**/*.md", "ngcc.config.js"],
   "allowedNonPeerDependencies": [
     "@angularclass/hmr",
     "@ng-idle/core",

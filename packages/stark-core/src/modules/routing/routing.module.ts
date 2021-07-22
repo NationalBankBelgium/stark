@@ -13,7 +13,7 @@ export class StarkRoutingModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(): ModuleWithProviders<StarkRoutingModule> {
 		return {
 			ngModule: StarkRoutingModule,
 			providers: [{ provide: STARK_ROUTING_SERVICE, useClass: StarkRoutingServiceImpl }]

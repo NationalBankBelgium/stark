@@ -2,7 +2,6 @@
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import { Injector } from "@angular/core";
-import { Store } from "@ngrx/store";
 import { Observable, of, throwError } from "rxjs";
 import { Serialize } from "cerialize";
 
@@ -48,7 +47,7 @@ describe("Service: StarkLoggingService", () => {
 			providers: [provideMockStore({ initialState: {} })]
 		});
 
-		mockStore = TestBed.get(Store);
+		mockStore = TestBed.inject(MockStore);
 		mockInjectorService = jasmine.createSpyObj<Injector>("injector,", ["get"]);
 		appConfig = new StarkApplicationConfigImpl();
 		appConfig.debugLoggingEnabled = true;
@@ -371,10 +370,6 @@ describe("Service: StarkLoggingService", () => {
 class LoggingServiceHelper extends StarkLoggingServiceImpl {
 	public originalSendRequest = super["sendRequest"];
 
-	public constructor(store: MockStore<StarkCoreApplicationState>, appConfig: StarkApplicationConfig, injector: Injector) {
-		super(<Store<StarkCoreApplicationState>>(<unknown>store), appConfig, injector);
-	}
-
 	public constructLogMessageHelper(messageType: StarkLogMessageType, ...args: any[]): StarkLogMessage {
 		return this.constructLogMessage(messageType, ...args);
 	}
@@ -388,13 +383,13 @@ class LoggingServiceHelper extends StarkLoggingServiceImpl {
 	}
 
 	// override parent's implementation to prevent actual HTTP request to be sent!
-	public sendRequest(..._args: any[]): Observable<void> {
+	public override sendRequest(..._args: any[]): Observable<void> {
 		/* dummy function to be mocked */
 		return of(undefined);
 	}
 
 	// override parent's implementation to prevent logging to the console
-	public getConsole(): Function {
+	public override getConsole(): Function {
 		return (): void => {
 			/* noop */
 		};

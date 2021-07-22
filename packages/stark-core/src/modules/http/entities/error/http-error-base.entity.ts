@@ -29,8 +29,9 @@ export class StarkHttpErrorBaseImpl extends StarkErrorImpl implements StarkHttpE
 	@autoserialize
 	public instance!: string;
 
+	// `declare` is necessary because this declaration overrides StarkErrorImpl `timestamp` declaration.
 	@autoserialize
-	public timestamp!: string;
+	public declare timestamp: string;
 
 	@autoserialize
 	public metadata?: object;
