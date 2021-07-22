@@ -5,7 +5,6 @@ const helpers = require("./stark-testing/helpers");
  */
 const defaultKarmaConfig = require("./stark-testing/karma.conf.js").rawKarmaConfig;
 
-const customReportsConfig = { ...defaultKarmaConfig.coverageIstanbulReporter["report-config"] };
 let packageDir = "/packages/";
 
 if (helpers.currentFolder === "stark") {
@@ -26,13 +25,12 @@ if (helpers.currentFolder === "stark") {
 const starkPackagesSpecificConfiguration = {
 	...defaultKarmaConfig,
 	// add missing files due to "@nationalbankbelgium/stark-*" imports used in mock files of the testing sub-package
-	coverageIstanbulReporter: {
-		...defaultKarmaConfig.coverageIstanbulReporter,
+	coverageReporter: {
+		...defaultKarmaConfig.coverageReporter,
 		dir:
 			helpers.currentFolder === "stark"
 				? helpers.root("reports/coverage" + packageDir)
-				: helpers.root("../../reports/coverage" + packageDir),
-		"report-config": customReportsConfig
+				: helpers.root("../../reports/coverage" + packageDir)
 	}
 };
 
