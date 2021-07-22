@@ -519,19 +519,19 @@ describe("StarkRBACAuthorizationService", () => {
 });
 
 class AuthorizationServiceHelper extends StarkRBACAuthorizationServiceImpl {
-	public registerTransitionHook(): void {
+	public override registerTransitionHook(): void {
 		super.registerTransitionHook();
 	}
 
-	public isNavigationAuthorized(permissions: StarkRBACStatePermissions): boolean {
+	public override isNavigationAuthorized(permissions: StarkRBACStatePermissions): boolean {
 		return super.isNavigationAuthorized(permissions);
 	}
 
-	public handleUnauthorizedNavigation(permissions: StarkRBACStatePermissions, transition: Transition): TargetState {
+	public override handleUnauthorizedNavigation(permissions: StarkRBACStatePermissions, transition: Transition): TargetState {
 		return super.handleUnauthorizedNavigation(permissions, transition);
 	}
 
-	public redirectNavigation(redirectTo: StarkStateRedirection | StarkStateRedirectionFn, transition: Transition): TargetState {
+	public override redirectNavigation(redirectTo: StarkStateRedirection | StarkStateRedirectionFn, transition: Transition): TargetState {
 		return super.redirectNavigation(redirectTo, transition);
 	}
 }
