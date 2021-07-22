@@ -8,10 +8,10 @@ const fs = require("fs");
  * Webpack Plugins
  */
 const DefinePlugin = require("webpack/lib/DefinePlugin");
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const StylelintPlugin = require("stylelint-webpack-plugin");
-const webpackMerge = require("webpack-merge");
+const webpackMerge = require("webpack-merge").merge;
 const METADATA = require("./webpack-metadata").METADATA;
 
 const fixedTSLintConfig = buildUtils.getFixedTSLintConfig(
@@ -79,7 +79,6 @@ module.exports = (config, options) => {
 						chunkModules: true,
 						chunkOrigins: true,
 						reasons: true,
-						maxModules: Infinity, // examine all modules (ModuleConcatenationPlugin debugging)
 						optimizationBailout: true // display bailout reasons (ModuleConcatenationPlugin debugging)
 				  }
 				: {}
@@ -110,35 +109,7 @@ module.exports = (config, options) => {
 						}
 					],
 					exclude: [helpers.root("node_modules")]
-				},
-
-				/**
-				 * Prevent any external library from breaking support for Internet Explorer 11 (see https://github.com/NationalBankBelgium/stark/issues/900)
-				 * Therefore, only certain libraries in 'node_modules' (except the biggest ones and the ones from NBB) are transpiled to ES5 with Babel
-				 * reference: https://github.com/babel/babel-loader
-				 */
-				...(METADATA.ENV === "development"
-					? [
-							{
-								test: /node_modules.*\.js$/,
-								exclude: /node_modules.*(@angular|@mdi|@ng-idle|@nationalbankbelgium|@ngrx|@ngx-translate|@uirouter|cerialize|class-validator|core-js|google-libphonenumber|ibantools|lodash|prettier|rxjs)/,
-								use: {
-									loader: "babel-loader",
-									options: {
-										presets: [
-											[
-												"@babel/preset-env",
-												{
-													// Environments you support/target. See https://babeljs.io/docs/en/babel-preset-env#targets
-													targets: { ie: "11" }
-												}
-											]
-										]
-									}
-								}
-							}
-					  ]
-					: [])
+				}
 			]
 		},
 
@@ -164,7 +135,6 @@ module.exports = (config, options) => {
 				AOT: METADATA.AOT, // TODO: is this needed?
 				"process.env": {
 					ENV: JSON.stringify(METADATA.ENV),
-					NODE_ENV: JSON.stringify(METADATA.ENV),
 					HMR: METADATA.HMR
 				}
 			}),
@@ -200,13 +170,17 @@ module.exports = (config, options) => {
 			 * Description: Lints the stylesheets loaded in the app (pcss, scss, css, sass)
 			 * See: https://github.com/webpack-contrib/stylelint-webpack-plugin
 			 */
-			...(fs.existsSync(helpers.root(".stylelintrc")) ? [new StylelintPlugin({
-				configFile: ".stylelintrc",
-				emitErrors: true,
-				emitWarning: true,
-				failOnError: false,
-				files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
-			})] : []),
+			...(fs.existsSync(helpers.root(".stylelintrc"))
+				? [
+						new StylelintPlugin({
+							configFile: ".stylelintrc",
+							emitErrors: true,
+							emitWarning: true,
+							failOnError: false,
+							files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
+						})
+				  ]
+				: [])
 		],
 
 		/**
@@ -222,7 +196,7 @@ module.exports = (config, options) => {
 					devServer: {
 						// See: https://webpack.js.org/configuration/dev-server/#devserverwritetodisk-
 						writeToDisk: true,
-						
+
 						compress: true,
 
 						// HTML5 History API support: no need for # in URLs
