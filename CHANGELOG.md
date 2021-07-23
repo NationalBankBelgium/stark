@@ -1,3 +1,12 @@
+## [10.2.2](https://github.com/nationalbankbelgium/stark/compare/10.2.1...10.2.2) (2021-07-23)
+
+
+### Bug Fixes
+
+* **stark-build:** fix `stylelint-webpack-plugin` dependency to `"~2.1.0"` ([7ab57de](https://github.com/nationalbankbelgium/stark/commit/7ab57deefe90f8c1202be22d7edb01bc4fe2b87d)), closes [#2851](https://github.com/nationalbankbelgium/stark/issues/2851)
+
+
+
 ## [10.2.1](https://github.com/nationalbankbelgium/stark/compare/10.2.0...10.2.1) (2021-05-10)
 
 
@@ -486,12 +495,12 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 * **package:** update copy-webpack-plugin to version 4.5.4 ([ab76952](https://github.com/nationalbankbelgium/stark/commit/ab76952943463c139476299712eed926060256b0))
 * **package:** update copy-webpack-plugin to version 4.6.0 ([a4aac38](https://github.com/nationalbankbelgium/stark/commit/a4aac3864d082a48d7ff04fe5cd24ce407c302a2))
 * **package:** update css-loader to version 1.0.1 ([8bbc642](https://github.com/nationalbankbelgium/stark/commit/8bbc6423878cc0a249d53b92cc0965150a18a443))
-* **package:** update event-source-polyfill to version 1.0.0 ([a62cf49](https://github.com/nationalbankbelgium/stark/commit/a62cf4969034c7c61505ff63c3754215195a5b77))
 * **package:** update event-source-polyfill to version 1.0.0 ([32a0ec6](https://github.com/nationalbankbelgium/stark/commit/32a0ec682151aa1ad8203098645f54f0036828c5))
-* **package:** update event-source-polyfill to version 1.0.3 ([ce41d15](https://github.com/nationalbankbelgium/stark/commit/ce41d15a30e414f5b92496f1ee76fbaa18560bb6)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
+* **package:** update event-source-polyfill to version 1.0.0 ([a62cf49](https://github.com/nationalbankbelgium/stark/commit/a62cf4969034c7c61505ff63c3754215195a5b77))
 * **package:** update event-source-polyfill to version 1.0.3 ([2dffcb0](https://github.com/nationalbankbelgium/stark/commit/2dffcb05fd55d3899fdb10aad8aa40b04745b04a)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
-* **package:** update event-source-polyfill to version 1.0.4 ([0df420c](https://github.com/nationalbankbelgium/stark/commit/0df420c9c38fecbad1c34643a214e9ca41c55295))
+* **package:** update event-source-polyfill to version 1.0.3 ([ce41d15](https://github.com/nationalbankbelgium/stark/commit/ce41d15a30e414f5b92496f1ee76fbaa18560bb6)), closes [#791](https://github.com/nationalbankbelgium/stark/issues/791)
 * **package:** update event-source-polyfill to version 1.0.4 ([aca911f](https://github.com/nationalbankbelgium/stark/commit/aca911f2ea64561e7006a0d2052909a2c72be43c))
+* **package:** update event-source-polyfill to version 1.0.4 ([0df420c](https://github.com/nationalbankbelgium/stark/commit/0df420c9c38fecbad1c34643a214e9ca41c55295))
 * **package:** update jasmine-core to version 3.3.0 ([7fec286](https://github.com/nationalbankbelgium/stark/commit/7fec28602fde2473f75125384bee1850c0bccefa))
 * **package:** update karma to version 3.1.1 ([548103e](https://github.com/nationalbankbelgium/stark/commit/548103eb3edbbf4315153e1a109d6500b3024e56))
 * **package:** update nouislider to version 12.1.0 ([6fd6337](https://github.com/nationalbankbelgium/stark/commit/6fd63376e303c82ea9d3219899c3993673d93205))
@@ -563,9 +572,9 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 
 ### Bug Fixes
 
-* **build:** add an argument for build prod when it is a Test CI. Adapt travis.yml to use it ([b954903](https://github.com/nationalbankbelgium/stark/commit/b954903fc474aaf20ba9a70bdc1eb428c96f19b3)), closes [#572](https://github.com/nationalbankbelgium/stark/issues/572) [#566](https://github.com/nationalbankbelgium/stark/issues/566)
 * **build-main:** fix version of greenkeeper-lockfile which is installed during travis build ([1970b71](https://github.com/nationalbankbelgium/stark/commit/1970b71f776c160eb2df873d4986a8a5638c0dae))
 * **build-main:** remove custom value for TRAVIS variable ([f00d63a](https://github.com/nationalbankbelgium/stark/commit/f00d63a730d5f9dba62ae7523cb1bbf3bbed966d)), closes [#605](https://github.com/nationalbankbelgium/stark/issues/605)
+* **build:** add an argument for build prod when it is a Test CI. Adapt travis.yml to use it ([b954903](https://github.com/nationalbankbelgium/stark/commit/b954903fc474aaf20ba9a70bdc1eb428c96f19b3)), closes [#572](https://github.com/nationalbankbelgium/stark/issues/572) [#566](https://github.com/nationalbankbelgium/stark/issues/566)
 * **greenkeeper:** fix greenkeeper for updating package-lock ([000a4a5](https://github.com/nationalbankbelgium/stark/commit/000a4a503f1d0072bffebef1849b4624352a5c4b))
 * **greenkeeper:** fix greenkeeper-lockfile ([865fee0](https://github.com/nationalbankbelgium/stark/commit/865fee06e1e104b59bd54f9b7008daef16967987))
 * **release:** add "package-lock.json" to the set of files to be updated by release-it ([ac7c85c](https://github.com/nationalbankbelgium/stark/commit/ac7c85c4eac624eca1e922a71cf4963f7e384bb2)), closes [#574](https://github.com/nationalbankbelgium/stark/issues/574)
@@ -649,19 +658,19 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 
 ### Bug Fixes
 
+* **build-main:** add support for circular dependency warning. Fix rollup external dependencies ([ebd0fd1](https://github.com/nationalbankbelgium/stark/commit/ebd0fd113504cf6d9c38707944241ac93436de28))
+* **build-main:** move ng dependencies to ROOT of Stark. Fix issue in build process. Rename tsconfig ([c7fecdb](https://github.com/nationalbankbelgium/stark/commit/c7fecdb22eb99cfe26feded2a459df220fcc7f05)), closes [#361](https://github.com/nationalbankbelgium/stark/issues/361) [#362](https://github.com/nationalbankbelgium/stark/issues/362)
 * **build:** adapted the perl command to specify the backup file extension. This was necessary for some perl versions ([ec4afc6](https://github.com/nationalbankbelgium/stark/commit/ec4afc627dc1260757bd5188794ff18e1083fb62))
 * **build:** fix issue in build-utils with environment. Environment file was not replaced as it should. ([d21a837](https://github.com/nationalbankbelgium/stark/commit/d21a837e8dfa94f065ec3825f7c3878700cd6b23)), closes [#439](https://github.com/nationalbankbelgium/stark/issues/439)
 * **build:** fix sourcemaps in PROD and in DEV ([c8c5696](https://github.com/nationalbankbelgium/stark/commit/c8c56960925a4c843e6ad9ba2dc6be799905746b)), closes [#401](https://github.com/nationalbankbelgium/stark/issues/401)
 * **build:** fixed webpack config and circular-dependency-plugin config. Closes [#397](https://github.com/nationalbankbelgium/stark/issues/397), [#315](https://github.com/nationalbankbelgium/stark/issues/315) ([ea9c264](https://github.com/nationalbankbelgium/stark/commit/ea9c26483af1d09974c1350ed8b30bcbce739125))
-* **build-main:** add support for circular dependency warning. Fix rollup external dependencies ([ebd0fd1](https://github.com/nationalbankbelgium/stark/commit/ebd0fd113504cf6d9c38707944241ac93436de28))
-* **build-main:** move ng dependencies to ROOT of Stark. Fix issue in build process. Rename tsconfig ([c7fecdb](https://github.com/nationalbankbelgium/stark/commit/c7fecdb22eb99cfe26feded2a459df220fcc7f05)), closes [#361](https://github.com/nationalbankbelgium/stark/issues/361) [#362](https://github.com/nationalbankbelgium/stark/issues/362)
 * **release:** adapt release-it.json and commitlint scopes to fix "release" command failure ([0e05826](https://github.com/nationalbankbelgium/stark/commit/0e058269dcca485460410e022a008cb4d71a748e))
 * **stark-all:** add npx for the remaining script calling global rimraf package ([3ce0dac](https://github.com/nationalbankbelgium/stark/commit/3ce0dac9f7862123ecf006e4ae590583cf71563e))
 * **stark-all:** fix nightly build release on Travis ([2c2445c](https://github.com/nationalbankbelgium/stark/commit/2c2445c2f1531320e3a605dee0602dc3613b7547)), closes [#357](https://github.com/nationalbankbelgium/stark/issues/357)
 * **stark-all:** fix some imports and remove obsolete fixme's. Format code with Prettier. Fix stark-ui linting. ([daf258b](https://github.com/nationalbankbelgium/stark/commit/daf258b9b1d827ab589c0b240d5763eea66239d9))
 * **stark-all:** packages: building the stark-core and stark-ui packages with the ncg script fails ([139e47b](https://github.com/nationalbankbelgium/stark/commit/139e47bcbe09a4d581be7e4e52a113dad32406e9)), closes [#441](https://github.com/nationalbankbelgium/stark/issues/441)
-* **stark-build:** include postcss loader+plugins to the Webpack css and scss files processing ([ffd60e7](https://github.com/nationalbankbelgium/stark/commit/ffd60e73a45f4bde602e2c97b80c0fa99ef9b756))
 * **stark-build) fix(stark-starter:** fix webpack monitor issues with reports folder and HMR ([78c799f](https://github.com/nationalbankbelgium/stark/commit/78c799f0111240857f59ed46fd4294b0d19cbe9b))
+* **stark-build:** include postcss loader+plugins to the Webpack css and scss files processing ([ffd60e7](https://github.com/nationalbankbelgium/stark/commit/ffd60e73a45f4bde602e2c97b80c0fa99ef9b756))
 * **stark-core:** add missing barrel for common folder. Fix stark-core translations utils imports. ([febb69b](https://github.com/nationalbankbelgium/stark/commit/febb69b05b97e99d321340d7521f9980c6f1902a))
 * **stark-starter:** fix blocking issue for reports folder ([1b7d492](https://github.com/nationalbankbelgium/stark/commit/1b7d49230ef6e806c519a8083363240d261e359c)), closes [#356](https://github.com/nationalbankbelgium/stark/issues/356)
 * **stark-ui) fix(stark-testing:** add stark-ui package to the npm install:all script. Simplify customization of default Karma config. ([4f77730](https://github.com/nationalbankbelgium/stark/commit/4f77730815f9ded19973d0363bf54e8d652fab50))
@@ -722,8 +731,8 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 * **coverage:** add support for code coverage with Coveralls ([72aefce](https://github.com/nationalbankbelgium/stark/commit/72aefce1ecf3214894c2eb7052d78456ad2a72b3))
 * **http:** correction for imports ([464566a](https://github.com/nationalbankbelgium/stark/commit/464566a94a8673cb18500244355653ecf24e5b1f))
 * **http:** create StarkHttp module. Fixed imports. Implemented small demo in Starter [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([201edb8](https://github.com/nationalbankbelgium/stark/commit/201edb86700dadb1d5266b14b28115a946b99929))
-* **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([579c59b](https://github.com/nationalbankbelgium/stark/commit/579c59b76bf215ca722ff8cd0dc70b0ab4189427))
 * **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([719d92d](https://github.com/nationalbankbelgium/stark/commit/719d92d81d3f1d19bdc72a350a978bc28002dd75))
+* **http:** implement Stark Http in stark-core (unit tests to be completed) [[#96](https://github.com/nationalbankbelgium/stark/issues/96)] ([579c59b](https://github.com/nationalbankbelgium/stark/commit/579c59b76bf215ca722ff8cd0dc70b0ab4189427))
 * **logging:** create StarkLogging module. Fixed imports ([f3684db](https://github.com/nationalbankbelgium/stark/commit/f3684db6a31ed1cca291858601a693f3faf8111c))
 * **logging:** implement STARK_APP_CONFIG token and implement Stark logging in Starter ([ec09736](https://github.com/nationalbankbelgium/stark/commit/ec097368c92d50a7ac101d5abaf9a48a35a1d57c))
 * **polyfills:** Update polyfills.browser.ts with the relevant polyfills needed only for IE11 and some special features from Angular. Add needed npm dependencies for those polyfils ([2b6a160](https://github.com/nationalbankbelgium/stark/commit/2b6a1606a50bcd02a409661c0dfe7e100be10a3a))
