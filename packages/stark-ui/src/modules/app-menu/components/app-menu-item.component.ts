@@ -130,8 +130,8 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef,
+		renderer: Renderer2,
+		elementRef: ElementRef,
 		protected cdRef: ChangeDetectorRef
 	) {
 		super(renderer, elementRef);
@@ -140,9 +140,9 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Component OnInit lifecycle hook
 	 */
-	public ngOnInit(): void {
-		this.logger.debug(componentName + ": component initialized");
+	public override ngOnInit(): void {
 		super.ngOnInit();
+		this.logger.debug(componentName + ": component initialized");
 	}
 
 	/**

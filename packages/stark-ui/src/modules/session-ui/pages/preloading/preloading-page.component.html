@@ -1,5 +1,5 @@
 <stark-session-card
-	[cardTitle]="userFetchingFailed && 'STARK.PRELOADING.FETCHING_USER_PROFILE_FAILURE'"
+	[cardTitle]="!!userFetchingFailed ? 'STARK.PRELOADING.FETCHING_USER_PROFILE_FAILURE' : ''"
 	aria-busy="true"
 	aria-live="polite"
 >

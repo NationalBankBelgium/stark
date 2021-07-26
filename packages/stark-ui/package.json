@@ -18,11 +18,10 @@
     "npm": ">=7.12.1"
   },
   "dependencies": {
-    "@angular/material-moment-adapter": "^8.2.0",
+    "@angular/material-moment-adapter": "^12.1.4",
     "@mdi/angular-material": "^4.0.96",
     "@prettier/plugin-xml": "^1.0.2",
     "@sqltools/formatter": "^1.2.3",
-    "@types/lodash-es": "^4.17.4",
     "@types/nouislider": "^9.0.10",
     "@types/prismjs": "^1.16.3",
     "angular2-text-mask": "^9.0.0",
@@ -34,10 +33,10 @@
     "text-mask-core": "^5.1.2"
   },
   "peerDependencies": {
-    "@angular/animations": "^8.2.0",
-    "@angular/cdk": "^8.2.0",
-    "@angular/forms": "^8.2.0",
-    "@angular/material": "^8.2.0",
+    "@angular/animations": "^12.1.0",
+    "@angular/cdk": "^12.1.0",
+    "@angular/forms": "^12.1.0",
+    "@angular/material": "^12.1.0",
     "@nationalbankbelgium/stark-core": "0.0.0-PLACEHOLDER-VERSION"
   },
   "scripts": {
@@ -47,8 +46,9 @@
     "docs": "compodoc",
     "docs:coverage": "npm run docs -- --coverageTest 85 --coverageTestThresholdFail true",
     "docs:serve": "npm run docs -- --watch --serve --port 4321",
-    "ng": "../../node_modules/.bin/ng",
+    "ng": "ng",
     "ngc": "node ../../node_modules/@angular/compiler-cli/src/main.js -p ./tsconfig.json",
+    "ngcc": "ngcc",
     "lint": "npm run lint-ts && npm run lint-css",
     "lint-ts": "node ../../node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.spec.json --format codeFrame",
     "lint-ts:fix": "node --max_old_space_size=4096 ../../node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.spec.json --format codeFrame --fix",

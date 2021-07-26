@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-identical-functions */
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";
@@ -103,23 +103,25 @@ describe("PaginationComponent", () => {
 		expect(pageSelectorInput.properties["value"].toString()).toBe(selectedOption);
 	};
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [
-				FormsModule,
-				MatButtonModule,
-				MatInputModule,
-				MatMenuModule,
-				MatPaginatorModule,
-				MatTooltipModule,
-				NoopAnimationsModule,
-				TranslateModule.forRoot()
-			],
-			declarations: [StarkDropdownComponent, StarkRestrictInputDirective, StarkPaginationComponent, TestHostComponent],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [
+					FormsModule,
+					MatButtonModule,
+					MatInputModule,
+					MatMenuModule,
+					MatPaginatorModule,
+					MatTooltipModule,
+					NoopAnimationsModule,
+					TranslateModule.forRoot()
+				],
+				declarations: [StarkDropdownComponent, StarkRestrictInputDirective, StarkPaginationComponent, TestHostComponent],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
+				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);

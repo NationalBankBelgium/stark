@@ -32,7 +32,7 @@
   },
   "dest": "../../dist/packages/stark-ui",
   "deleteDestPath": true,
-  "assets": ["./assets", "**/assets/**/*.json", "**/assets/**/*.d.ts", "src/**/*.scss", "testing/**/*.md"],
+  "assets": ["./assets", "**/assets/**/*.json", "**/assets/**/*.d.ts", "src/**/*.scss", "testing/**/*.md", "ngcc.config.js"],
   "allowedNonPeerDependencies": [
     "@angular/material-moment-adapter",
     "@mdi/angular-material",

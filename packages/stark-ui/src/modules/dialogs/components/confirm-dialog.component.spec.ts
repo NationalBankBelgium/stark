@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-big-function no-identical-functions no-lifecycle-call */
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
 import { Component, ComponentFactoryResolver } from "@angular/core";
 import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
@@ -67,19 +67,21 @@ describe("ConfirmDialogComponent", () => {
 		element.dispatchEvent(keydownEvent);
 	}
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [TestHostComponent, StarkConfirmDialogComponent],
-			imports: [CommonModule, NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot()],
-			providers: []
-		})
-			.overrideModule(BrowserDynamicTestingModule, {
-				// FIXME review after https://github.com/angular/angular/issues/10760
-				// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
-				set: { entryComponents: [StarkConfirmDialogComponent] }
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [TestHostComponent, StarkConfirmDialogComponent],
+				imports: [CommonModule, NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot()],
+				providers: []
 			})
-			.compileComponents();
-	}));
+				.overrideModule(BrowserDynamicTestingModule, {
+					// FIXME review after https://github.com/angular/angular/issues/10760
+					// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
+					set: { entryComponents: [StarkConfirmDialogComponent] }
+				})
+				.compileComponents();
+		})
+	);
 
 	beforeEach(inject(
 		[MatDialog, OverlayContainer, ComponentFactoryResolver],

@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-lifecycle-call */
-import { async, ComponentFixture, inject, TestBed } from "@angular/core/testing";
+import { ComponentFixture, inject, TestBed, waitForAsync } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppFooterComponent } from "./app-footer.component";
@@ -15,19 +15,21 @@ describe("AppFooterComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				imports: [TranslateModule.forRoot()],
-				declarations: [StarkAppFooterComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					imports: [TranslateModule.forRoot()],
+					declarations: [StarkAppFooterComponent],
+					providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
+				})
+					/**
+					 * Compile template and css
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	// Inject module dependencies
 	beforeEach(inject([TranslateService], (_translateService: TranslateService) => {

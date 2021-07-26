@@ -1,55 +1,59 @@
 /* The 'stark-date-time-picker-form-field-wrapper' is added dynamically by the component to the surrounding form field wrapper*/
-.mat-form-field .mat-form-field-wrapper.stark-date-time-picker-form-field-wrapper {
-  width: 280px;
-}
 
-.stark-date-time-picker {
-  display: flex;
+@mixin stark-date-time-picker() {
+  // FIXME Still necessary with NG12 ?
+  .mat-form-field .mat-form-field-wrapper.stark-date-time-picker-form-field-wrapper {
+    width: 280px;
+  }
 
-  .date-time-wrapper {
-    width: 100%;
+  .stark-date-time-picker {
     display: flex;
 
-    input {
-      text-align: left;
-    }
+    .date-time-wrapper {
+      width: 100%;
+      display: flex;
 
-    /* Date */
-    > .stark-date-picker {
-      flex: 2;
-      max-width: 200px;
-    }
+      input {
+        text-align: left;
+      }
 
-    /* Time */
-    > .time-picker {
-      display: inline-flex;
-      justify-content: space-around;
+      /* Date */
+      > .stark-date-picker {
+        flex: 2;
+        max-width: 200px;
+      }
 
-      .time-input {
-        max-width: 60px;
+      /* Time */
+      > .time-picker {
+        display: inline-flex;
+        justify-content: space-around;
+
+        .time-input {
+          max-width: 60px;
+        }
       }
     }
-  }
 
-  .mat-datepicker-toggle {
-    transition: color 500ms;
-  }
+    .mat-datepicker-toggle {
+      transition: color 500ms;
+    }
 
-  /*
-  &:not(.floating) .mat-datepicker-toggle {
-    color: rgba(0, 0, 0, 0);
-  }
-  */
+    /*
+    &:not(.floating) .mat-datepicker-toggle {
+      color: rgba(0, 0, 0, 0);
+    }
+    */
 
-  .clear-date-time-button {
-    height: 20px;
-    width: 20px;
-    line-height: 20px;
-    position: absolute;
-    right: -20px; /* to render it to the right of the date-time-wrapper */
+    .clear-date-time-button {
+      height: 20px;
+      width: 20px;
+      line-height: 20px;
+      position: absolute;
+      right: -20px; /* to render it to the right of the date-time-wrapper */
 
-    &.hidden {
-      display: none;
+      &.hidden {
+        display: none;
+      }
     }
   }
 }

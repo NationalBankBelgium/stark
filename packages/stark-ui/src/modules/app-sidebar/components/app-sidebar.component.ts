@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
-import { MatDrawerToggleResult, MatSidenav, MatSidenavContainer } from "@angular/material/sidenav";
+import { MatDrawerMode, MatDrawerToggleResult, MatSidenav, MatSidenavContainer } from "@angular/material/sidenav";
 import { from, Subscription } from "rxjs";
 import {
 	STARK_LOGGING_SERVICE,
@@ -89,7 +89,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	/**
 	 * Dynamic mode for the left sidebar
 	 */
-	public sidenavLeftMode?: "over" | "push" | "side";
+	public sidenavLeftMode: MatDrawerMode = "over";
 
 	/**
 	 * Either the left sidebar is opened or not
@@ -134,7 +134,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 	/**
 	 * Component lifecycle OnInit hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
 		super.ngOnInit();
 		this.logger.debug(componentName + ": component initialized");
 

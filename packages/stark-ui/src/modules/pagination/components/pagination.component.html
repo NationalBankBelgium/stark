@@ -50,7 +50,7 @@
 		<span class="total-pages">{{ getTotalPages() }}</span>
 	</div>
 
-	<div class="pagination-items-per-page" *ngIf="paginationConfig.itemsPerPageIsPresent !== false">
+	<div class="pagination-items-per-page" *ngIf="isItemsPerPagePresent(paginationConfig)">
 		<stark-dropdown
 			[options]="paginationConfig.itemsPerPageOptions"
 			[value]="paginationConfig.itemsPerPage"
@@ -101,7 +101,7 @@
 		</li>
 	</ul>
 
-	<div class="pagination-items-per-page" *ngIf="!!paginationConfig.itemsPerPageIsPresent">
+	<div class="pagination-items-per-page" *ngIf="isItemsPerPagePresent(paginationConfig)">
 		<stark-dropdown
 			[options]="paginationConfig.itemsPerPageOptions"
 			[value]="paginationConfig.itemsPerPage"

@@ -26,7 +26,9 @@ export class StarkToastNotificationModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(defaultToastNotificationOptions?: StarkToastNotificationOptions): ModuleWithProviders {
+	public static forRoot(
+		defaultToastNotificationOptions?: StarkToastNotificationOptions
+	): ModuleWithProviders<StarkToastNotificationModule> {
 		return {
 			ngModule: StarkToastNotificationModule,
 			providers: [

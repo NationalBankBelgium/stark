@@ -98,8 +98,8 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		renderer: Renderer2,
+		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
 	}
@@ -107,7 +107,8 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.logger.debug(componentName + ": component initialized");
 	}
 

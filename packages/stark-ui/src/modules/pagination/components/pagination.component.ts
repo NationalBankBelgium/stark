@@ -138,7 +138,8 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.paginationConfig = this.normalizePaginationConfig(this.paginationConfig);
 		this.setMatPaginatorProperties(this.paginationConfig);
 
@@ -146,7 +147,6 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 
 		this.setPageNumbers();
 
-		super.ngOnInit();
 		this.logger.debug(componentName + ": controller initialized");
 	}
 
@@ -386,13 +386,13 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 					input[2] = <number>this.paginationConfig.page;
 				}
 
-				if (<number>input[2] - 1 === min + 1) {
+				if (input[2] - 1 === min + 1) {
 					input[1] = min + 1;
 				} else {
 					input[1] = "...";
 				}
 
-				if (<number>input[2] + 1 === max - 1) {
+				if (input[2] + 1 === max - 1) {
 					input[3] = max - 1;
 				} else {
 					input[3] = "...";
@@ -453,6 +453,16 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 			previousPageIndex: this.previousPageIndex
 		};
 		this.page.emit(pageEvent);
+	}
+
+	/**
+	 * Check whether the itemsPerPage should be present according to paginationConfig.
+	 * @param paginationConfig - Object containing main information for the pagination
+	 */
+	public isItemsPerPagePresent(
+		paginationConfig: StarkPaginationConfig
+	): paginationConfig is StarkPaginationConfig & Required<Pick<StarkPaginationConfig, "itemsPerPageOptions" | "itemsPerPage">> {
+		return !!paginationConfig.itemsPerPageIsPresent && !!paginationConfig.itemsPerPage && !!paginationConfig.itemsPerPageOptions;
 	}
 
 	/**

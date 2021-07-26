@@ -200,5 +200,5 @@ describe("MessagePaneService", () => {
 });
 
 class MessagePaneServiceHelper extends StarkMessagePaneServiceImpl {
-	public messages$!: Observable<StarkMessageCollection>;
+	public declare messages$: Observable<StarkMessageCollection>;
 }

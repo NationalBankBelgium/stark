@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-duplicate-string no-lifecycle-call */
-import { async, ComponentFixture, inject, TestBed } from "@angular/core/testing";
+import { ComponentFixture, inject, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, NgModule, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -86,35 +86,37 @@ describe("RouteSearchComponent", () => {
 		]
 	};
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [
-				CommonModule,
-				FormsModule,
-				MatButtonModule,
-				MatInputModule,
-				MatFormFieldModule,
-				MatTooltipModule,
-				MatAutocompleteModule,
-				MatSelectModule,
-				NoopAnimationsModule,
-				MatOptionModule,
-				ReactiveFormsModule,
-				TranslateModule.forRoot()
-			],
-			declarations: [StarkRouteSearchComponent, TestHostComponent],
-			providers: [
-				{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService },
-				{
-					// See https://github.com/NationalBankBelgium/stark/issues/1088
-					provide: HAMMER_LOADER,
-					useValue: (): Promise<any> => new Subject<any>().toPromise()
-				}
-			],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [
+					CommonModule,
+					FormsModule,
+					MatButtonModule,
+					MatInputModule,
+					MatFormFieldModule,
+					MatTooltipModule,
+					MatAutocompleteModule,
+					MatSelectModule,
+					NoopAnimationsModule,
+					MatOptionModule,
+					ReactiveFormsModule,
+					TranslateModule.forRoot()
+				],
+				declarations: [StarkRouteSearchComponent, TestHostComponent],
+				providers: [
+					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService },
+					{
+						// See https://github.com/NationalBankBelgium/stark/issues/1088
+						provide: HAMMER_LOADER,
+						useValue: (): Promise<any> => new Subject<any>().toPromise()
+					}
+				],
+				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);

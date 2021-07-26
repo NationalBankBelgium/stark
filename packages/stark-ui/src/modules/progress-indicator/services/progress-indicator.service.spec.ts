@@ -1,6 +1,5 @@
 /* tslint:disable:completed-docs*/
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { Store } from "@ngrx/store";
 import { BehaviorSubject, Observable } from "rxjs";
 import { StarkProgressIndicatorActions } from "../actions";
 import { StarkProgressIndicatorFullConfig, StarkProgressIndicatorType } from "../entities";
@@ -8,8 +7,8 @@ import { StarkProgressIndicatorServiceImpl } from "../services";
 import { progressIndicatorReducer } from "../reducers";
 import { StarkUIApplicationState } from "../../../common/store";
 import Spy = jasmine.Spy;
-import {MockStore, provideMockStore} from "@ngrx/store/testing";
-import {TestBed} from "@angular/core/testing";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
+import { TestBed } from "@angular/core/testing";
 
 // tslint:disable:no-big-function
 describe("ProgressIndicatorService", () => {
@@ -27,7 +26,7 @@ describe("ProgressIndicatorService", () => {
 			providers: [provideMockStore<StarkUIApplicationState>()]
 		});
 
-		mockStore = TestBed.get(Store);
+		mockStore = TestBed.inject(MockStore);
 		spyOn(mockStore, "dispatch");
 		spyOn(mockStore, "pipe");
 		mockStore = jasmine.createSpyObj("store", ["dispatch", "pipe"]);
@@ -37,10 +36,15 @@ describe("ProgressIndicatorService", () => {
 
 		progressIndicatorService = new ProgressIndicatorServiceHelper(mockLogger, mockStore);
 
-		(<Spy<(action: StarkProgressIndicatorActions.Types) => void>>mockStore.dispatch).and.callFake((action: StarkProgressIndicatorActions.Types) => {
-			// reducer
-			progressIndicatorService.progressIndicatorMap = progressIndicatorReducer(progressIndicatorService.progressIndicatorMap, action);
-		});
+		(<Spy<(action: StarkProgressIndicatorActions.Types) => void>>mockStore.dispatch).and.callFake(
+			(action: StarkProgressIndicatorActions.Types) => {
+				// reducer
+				progressIndicatorService.progressIndicatorMap = progressIndicatorReducer(
+					progressIndicatorService.progressIndicatorMap,
+					action
+				);
+			}
+		);
 	});
 
 	describe("on initialization", () => {
@@ -309,7 +313,7 @@ describe("ProgressIndicatorService", () => {
 			expect((<Spy>mockStore.dispatch).calls.argsFor(0)[0].type).toBe(StarkProgressIndicatorActions.register.type);
 			expect((<Spy>mockStore.dispatch).calls.argsFor(1)[0].type).toBe(StarkProgressIndicatorActions.deregister.type);
 
-			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkProgressIndicatorActions.deregister({topic:dummyTopic}));
+			expect(mockStore.dispatch).toHaveBeenCalledWith(StarkProgressIndicatorActions.deregister({ topic: dummyTopic }));
 			expect(progressIndicatorService.progressIndicatorMap.has(dummyTopic)).toBe(false);
 		});
 
@@ -508,6 +512,6 @@ describe("ProgressIndicatorService", () => {
 });
 
 class ProgressIndicatorServiceHelper extends StarkProgressIndicatorServiceImpl {
-	public progressIndicatorMap!: Map<string, StarkProgressIndicatorFullConfig>;
-	public progressIndicatorMap$!: Observable<Map<string, StarkProgressIndicatorFullConfig>>;
+	public declare progressIndicatorMap: Map<string, StarkProgressIndicatorFullConfig>;
+	public declare progressIndicatorMap$: Observable<Map<string, StarkProgressIndicatorFullConfig>>;
 }

@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs component-max-inline-declarations no-identical-functions no-lifecycle-call deprecation */
 import { SelectionModel } from "@angular/cdk/collections";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -57,13 +57,13 @@ import createSpy = jasmine.createSpy;
 					*starkTableRowContent="let rowData = rowData; let cellRawValue = rawValue; let cellDisplayedValue = displayedValue"
 				>
 					<div class="custom" *ngSwitchCase="rowData.id === 1"
-						><span style="color: blue">{{ cellDisplayedValue }}</span></div
+					><span style="color: blue">{{ cellDisplayedValue }}</span></div
 					>
 					<div class="custom" *ngSwitchCase="rowData.id === 2"
-						><span style="color: red">{{ cellDisplayedValue }}</span></div
+					><span style="color: red">{{ cellDisplayedValue }}</span></div
 					>
 					<div class="custom" *ngSwitchCase="rowData.id === 3"
-						><i>{{ cellDisplayedValue }}</i></div
+					><i>{{ cellDisplayedValue }}</i></div
 					>
 					<div class="custom" *ngSwitchCase="cellRawValue > 23">
 						<mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
@@ -138,47 +138,49 @@ describe("TableComponent", () => {
 	const columnSelectSelector = "cdk-column-select";
 	const rowSelector = "table tbody tr";
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [
-				// Common
-				FormsModule,
-				ReactiveFormsModule,
-				NoopAnimationsModule,
-				TranslateModule.forRoot(),
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [
+					// Common
+					FormsModule,
+					ReactiveFormsModule,
+					NoopAnimationsModule,
+					TranslateModule.forRoot(),
 
-				// Material
-				MatCheckboxModule,
-				MatDialogModule,
-				MatInputModule,
-				MatFormFieldModule,
-				MatMenuModule,
-				MatPaginatorModule,
-				MatSelectModule,
-				MatTableModule,
-				MatTooltipModule
-			],
-			declarations: [
-				TestHostComponent,
-				StarkActionBarComponent,
-				StarkPaginationComponent,
-				StarkTableComponent,
-				StarkTableColumnComponent,
-				StarkTableMultisortDialogComponent,
-				StarkTableRowContentDirective
-			],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				TranslateService,
-				{
-					// See https://github.com/NationalBankBelgium/stark/issues/1088
-					provide: HAMMER_LOADER,
-					useValue: (): Promise<any> => new Subject<any>().toPromise()
-				}
-			],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+					// Material
+					MatCheckboxModule,
+					MatDialogModule,
+					MatInputModule,
+					MatFormFieldModule,
+					MatMenuModule,
+					MatPaginatorModule,
+					MatSelectModule,
+					MatTableModule,
+					MatTooltipModule
+				],
+				declarations: [
+					TestHostComponent,
+					StarkActionBarComponent,
+					StarkPaginationComponent,
+					StarkTableComponent,
+					StarkTableColumnComponent,
+					StarkTableMultisortDialogComponent,
+					StarkTableRowContentDirective
+				],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					TranslateService,
+					{
+						// See https://github.com/NationalBankBelgium/stark/issues/1088
+						provide: HAMMER_LOADER,
+						useValue: (): Promise<any> => new Subject<any>().toPromise()
+					}
+				],
+				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);
@@ -203,9 +205,9 @@ describe("TableComponent", () => {
 			expect(component.columnProperties).toEqual([]);
 			expect(component.data).toBe(hostComponent.dummyData);
 			expect(component.filter).toBeDefined(); // the default filter is set
-			expect(component.fixedHeader).toBe(hostComponent.fixedHeader);
+			expect(component.fixedHeader).toBe(<any>hostComponent.fixedHeader);
 			expect(component.multiSelect).toBe(hostComponent.multiSelect);
-			expect(component.multiSort).toBe(hostComponent.multiSort);
+			expect(component.multiSort).toBe(<any>hostComponent.multiSort);
 			expect(component.orderProperties).toBe(hostComponent.orderProperties);
 			expect(component.showRowsCounter).toBe(false);
 			expect(component.showRowIndex).toBe(false);
@@ -1003,7 +1005,7 @@ describe("TableComponent", () => {
 				hostComponent.tableFilter = { globalFilterValue: "" };
 				hostFixture.detectChanges();
 
-				expect(globalFilterButton.classes["filter-enabled"]).toBe(false);
+				expect(globalFilterButton.classes["filter-enabled"]).toBeUndefined();
 			});
 		});
 

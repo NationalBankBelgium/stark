@@ -1,6 +1,6 @@
 /*tslint:disable:completed-docs*/
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
@@ -22,23 +22,24 @@ describe("AppLogoutComponent", () => {
 	let component: StarkAppLogoutComponent;
 	let fixture: ComponentFixture<StarkAppLogoutComponent>;
 
-	const mockStarkSessionConfig: Partial<StarkSessionConfig> = {
+	const mockStarkSessionConfig: StarkSessionConfig = {
 		sessionLogoutStateName: "logout-state"
 	};
 
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
 				imports: [MatTooltipModule, MatButtonModule, TranslateModule.forRoot()],
 				declarations: [StarkAppLogoutComponent],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
 					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					{ provide: STARK_SESSION_CONFIG, useValue: mockStarkSessionConfig },
+					// Need to clone the object to avoid mutation of it between tests
+					{ provide: STARK_SESSION_CONFIG, useValue: { ...mockStarkSessionConfig } },
 					{
 						// See https://github.com/NationalBankBelgium/stark/issues/1088
 						provide: HAMMER_LOADER,
@@ -50,9 +51,9 @@ describe("AppLogoutComponent", () => {
 				/**
 				 * Compile template and css
 				 */
-				.compileComponents()
-		);
-	}));
+				.compileComponents();
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach
@@ -96,7 +97,8 @@ describe("AppLogoutComponent", () => {
 		});
 
 		it("should log out the user and navigate to starkSessionLogoutStateName", () => {
-			(<StarkSessionConfig>component.sessionConfig).sessionLogoutStateName = undefined;
+			// tslint:disable-next-line:no-non-null-assertion
+			component.sessionConfig!.sessionLogoutStateName = undefined;
 
 			(<Spy>component.routingService.navigateTo).calls.reset();
 			component.logout();

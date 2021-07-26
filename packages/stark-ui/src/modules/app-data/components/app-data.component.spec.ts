@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs component-max-inline-declarations no-lifecycle-call */
 import { StarkAppDataComponent, StarkAppDataComponentMode } from "./app-data.component";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { async, fakeAsync, inject, tick, ComponentFixture, TestBed } from "@angular/core/testing";
+import { fakeAsync, inject, tick, ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
@@ -45,30 +45,32 @@ describe("AppDataComponent", () => {
 
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [StarkAppDataComponent, TestHostComponent],
-			imports: [
-				CommonModule,
-				MatButtonModule,
-				MatIconModule,
-				MatMenuModule,
-				MatTooltipModule,
-				NoopAnimationsModule,
-				TranslateModule.forRoot()
-			],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-				{
-					// See https://github.com/NationalBankBelgium/stark/issues/1088
-					provide: HAMMER_LOADER,
-					useValue: (): Promise<any> => new Subject<any>().toPromise()
-				},
-				TranslateService
-			],
-			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkAppDataComponent, TestHostComponent],
+				imports: [
+					CommonModule,
+					MatButtonModule,
+					MatIconModule,
+					MatMenuModule,
+					MatTooltipModule,
+					NoopAnimationsModule,
+					TranslateModule.forRoot()
+				],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+					{
+						// See https://github.com/NationalBankBelgium/stark/issues/1088
+						provide: HAMMER_LOADER,
+						useValue: (): Promise<any> => new Subject<any>().toPromise()
+					},
+					TranslateService
+				],
+				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		// OverlayContainer needs to be injected to get the context for the rendered menu dropdown

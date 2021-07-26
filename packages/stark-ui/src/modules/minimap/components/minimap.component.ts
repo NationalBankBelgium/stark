@@ -53,7 +53,8 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
-	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
+	// tslint:disable-next-line:unnecessary-constructor
+	public constructor(renderer: Renderer2, elementRef: ElementRef) {
 		super(renderer, elementRef);
 	}
 

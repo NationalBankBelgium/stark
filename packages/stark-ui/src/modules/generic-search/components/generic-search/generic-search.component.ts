@@ -53,7 +53,7 @@ declare type UnusedIconProps = "iconActivated" | "iconSwitchFunction";
  */
 declare type StarkDefaultPredefinedActionBarGenericAction = Required<
 	Pick<StarkDefaultPredefinedAction, Exclude<keyof StarkDefaultPredefinedAction, UnusedLabelProps | UnusedIconProps>>
-> &
+	> &
 	Pick<StarkDefaultPredefinedAction, UnusedIconProps>;
 
 /**
@@ -61,7 +61,7 @@ declare type StarkDefaultPredefinedActionBarGenericAction = Required<
  */
 declare type StarkCustomizablePredefinedActionBarGenericAction = Required<
 	Pick<StarkCustomizablePredefinedAction, Exclude<keyof StarkCustomizablePredefinedAction, UnusedLabelProps | UnusedIconProps>>
-> &
+	> &
 	Partial<Pick<StarkCustomizablePredefinedAction, UnusedIconProps>>;
 
 /**
@@ -178,7 +178,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * The form model object is passed as parameter to this function.
 	 */
 	@Output()
-	public readonly searchTriggered = new EventEmitter<FormGroup | undefined>();
+	public readonly searchTriggered = new EventEmitter<FormGroup>();
 
 	/**
 	 * Callback function to be called when the visibility of the generic form changes.
@@ -231,8 +231,8 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		renderer: Renderer2,
+		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
 	}
@@ -249,7 +249,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
+
 		this.normalizedFormButtonsConfig = this.normalizeFormButtonsConfig(this.formButtonsConfig);
 		this.normalizedFormActionBarConfig = this.normalizeFormActionBarConfig(this.formActionBarConfig);
 		this.actionBarConfig = this.buildActionBarConfig(this.normalizedFormActionBarConfig);

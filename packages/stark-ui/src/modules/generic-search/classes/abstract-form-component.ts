@@ -1,11 +1,14 @@
 import { StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import cloneDeep from "lodash-es/cloneDeep";
 import isEqual from "lodash-es/isEqual";
+import { Directive } from "@angular/core";
 
 /**
  * Abstract class defining the source model to bind to form components in Stark (i.e. {@link AbstractStarkSearchComponent})
  * as well as methods to manipulate it.
  */
+@Directive({})
+// tslint:disable-next-line:directive-class-suffix
 export abstract class AbstractStarkFormComponent<CriteriaType> {
 	/**
 	 * The form's original copy (the initial model when the form is pristine)

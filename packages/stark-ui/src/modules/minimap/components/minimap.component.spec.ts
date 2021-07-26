@@ -1,7 +1,7 @@
 // tslint:disable:completed-docs
 import { StarkMinimapComponent } from "./minimap.component";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
-import { async, ComponentFixture, inject, TestBed } from "@angular/core/testing";
+import { ComponentFixture, inject, TestBed, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { HAMMER_LOADER } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -47,21 +47,23 @@ describe("MinimapComponent", () => {
 	];
 	const visibleItems: string[] = ["column1", "column2"];
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [FormsModule, MatCheckboxModule, MatTooltipModule, MatMenuModule, NoopAnimationsModule, TranslateModule.forRoot()],
-			declarations: [StarkMinimapComponent, TestHostComponent],
-			providers: [
-				TranslateService,
-				{
-					// See https://github.com/NationalBankBelgium/stark/issues/1088
-					provide: HAMMER_LOADER,
-					useValue: (): Promise<any> => new Subject<any>().toPromise()
-				}
-			],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [FormsModule, MatCheckboxModule, MatTooltipModule, MatMenuModule, NoopAnimationsModule, TranslateModule.forRoot()],
+				declarations: [StarkMinimapComponent, TestHostComponent],
+				providers: [
+					TranslateService,
+					{
+						// See https://github.com/NationalBankBelgium/stark/issues/1088
+						provide: HAMMER_LOADER,
+						useValue: (): Promise<any> => new Subject<any>().toPromise()
+					}
+				],
+				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		// OverlayContainer needs to be injected to get the context for the rendered menu dropdown

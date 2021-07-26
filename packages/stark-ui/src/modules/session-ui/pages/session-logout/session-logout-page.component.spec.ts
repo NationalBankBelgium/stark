@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs */
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
@@ -17,19 +17,21 @@ describe("SessionLogoutPageComponent", () => {
 		baseUrl: "base-url"
 	};
 
-	beforeEach(async(() => {
-		const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
+	beforeEach(
+		waitForAsync(() => {
+			const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
-		return TestBed.configureTestingModule({
-			declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkSessionLogoutPageComponent],
-			imports: [CommonModule, MatCardModule, TranslateModule.forRoot()],
-			providers: [
-				{ provide: STARK_ROUTING_SERVICE, useValue: MockStarkRoutingService }, // needed by AppLogo component
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
-			]
-		}).compileComponents();
-	}));
+			return TestBed.configureTestingModule({
+				declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkSessionLogoutPageComponent],
+				imports: [CommonModule, MatCardModule, TranslateModule.forRoot()],
+				providers: [
+					{ provide: STARK_ROUTING_SERVICE, useValue: MockStarkRoutingService }, // needed by AppLogo component
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
+				]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkSessionLogoutPageComponent);

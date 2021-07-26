@@ -156,8 +156,8 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_MESSAGE_PANE_SERVICE) public messagePaneService: StarkMessagePaneService,
-		public renderer: Renderer2,
-		public elementRef: ElementRef,
+		renderer: Renderer2,
+		elementRef: ElementRef,
 		protected cdRef: ChangeDetectorRef
 	) {
 		super(renderer, elementRef);
@@ -166,7 +166,8 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.renderer.addClass(this.elementRef.nativeElement, starkMessagePaneAlignClassPrefix + this.align);
 
 		const appMsgCollection$: Observable<StarkMessageCollection> = this.messagePaneService.getAll();
@@ -204,8 +205,6 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 			map((msgCollection: StarkMessageCollection) => msgCollection.warningMessages),
 			distinctUntilChanged()
 		);
-
-		super.ngOnInit();
 
 		this.logger.debug(componentName + ": controller initialized");
 	}

@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-big-function no-lifecycle-call */
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
 import { Component, ComponentFactoryResolver, NO_ERRORS_SCHEMA } from "@angular/core";
 import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
@@ -63,20 +63,22 @@ describe("AlertDialogComponent", () => {
 		element.dispatchEvent(keydownEvent);
 	}
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [TestHostComponent, StarkAlertDialogComponent],
-			imports: [CommonModule, NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot()],
-			providers: [],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-		})
-			.overrideModule(BrowserDynamicTestingModule, {
-				// FIXME review after https://github.com/angular/angular/issues/10760
-				// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
-				set: { entryComponents: [StarkAlertDialogComponent] }
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [TestHostComponent, StarkAlertDialogComponent],
+				imports: [CommonModule, NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot()],
+				providers: [],
+				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
 			})
-			.compileComponents();
-	}));
+				.overrideModule(BrowserDynamicTestingModule, {
+					// FIXME review after https://github.com/angular/angular/issues/10760
+					// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
+					set: { entryComponents: [StarkAlertDialogComponent] }
+				})
+				.compileComponents();
+		})
+	);
 
 	beforeEach(inject(
 		[MatDialog, OverlayContainer, ComponentFactoryResolver],

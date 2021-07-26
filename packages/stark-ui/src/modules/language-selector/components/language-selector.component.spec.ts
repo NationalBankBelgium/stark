@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs */
 /* angular imports */
 import { Component, ViewChild } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { DateAdapter } from "@angular/material/core";
@@ -51,9 +51,11 @@ describe("LanguageSelectorComponent", () => {
 		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
 		mockSessionService.getCurrentLanguage.and.returnValue(of("fr"));
 
-		beforeEach(async(() => {
-			return compileComponent(mockSessionService);
-		}));
+		beforeEach(
+			waitForAsync(() => {
+				return compileComponent(mockSessionService);
+			})
+		);
 
 		beforeEach(() => {
 			initializeComponent();
@@ -78,9 +80,11 @@ describe("LanguageSelectorComponent", () => {
 		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
 		mockSessionService.getCurrentLanguage.and.returnValue(throwError("dummy-error"));
 
-		beforeEach(async(() => {
-			return compileComponent(mockSessionService);
-		}));
+		beforeEach(
+			waitForAsync(() => {
+				return compileComponent(mockSessionService);
+			})
+		);
 
 		beforeEach(() => {
 			initializeComponent();
@@ -96,9 +100,11 @@ describe("LanguageSelectorComponent", () => {
 		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
 		mockSessionService.getCurrentLanguage.and.returnValue(of("fr"));
 
-		beforeEach(async(() => {
-			return compileComponent(mockSessionService);
-		}));
+		beforeEach(
+			waitForAsync(() => {
+				return compileComponent(mockSessionService);
+			})
+		);
 
 		beforeEach(() => {
 			initializeComponent();

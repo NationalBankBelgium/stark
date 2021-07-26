@@ -122,8 +122,8 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		renderer: Renderer2,
+		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
 	}
@@ -131,7 +131,8 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.logger.debug(componentName + ": component initialized");
 	}
 
@@ -155,7 +156,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 			try {
 				switch (this.format) {
 					case "xml":
-						prismGrammar = Prism.languages.markup;
+						prismGrammar = Prism.languages["markup"];
 						prismClass = prismClassPrefix + "markup";
 						this.prettyString = prettier.format(this.data, {
 							parser: "xml",
@@ -165,44 +166,44 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 						break;
 
 					case "html":
-						prismGrammar = Prism.languages.markup;
+						prismGrammar = Prism.languages["markup"];
 						prismClass = prismClassPrefix + "markup";
 						this.prettyString = prettier.format(this.data, { parser: "angular", plugins: prettierPlugins });
 						break;
 
 					case "json":
-						prismGrammar = Prism.languages.json;
+						prismGrammar = Prism.languages["json"];
 						prismClass = prismClassPrefix + this.format;
 						JSON.parse(this.data);
 						this.prettyString = prettier.format(this.data, { parser: "json", plugins: prettierPlugins });
 						break;
 
 					case "css":
-						prismGrammar = Prism.languages.css;
+						prismGrammar = Prism.languages["css"];
 						prismClass = prismClassPrefix + this.format;
 						this.prettyString = prettier.format(this.data, { parser: "css", plugins: prettierPlugins });
 						break;
 
 					case "scss":
-						prismGrammar = Prism.languages.scss;
+						prismGrammar = Prism.languages["scss"];
 						prismClass = prismClassPrefix + this.format;
 						this.prettyString = prettier.format(this.data, { parser: "scss", plugins: prettierPlugins });
 						break;
 
 					case "sql":
-						prismGrammar = Prism.languages.sql;
+						prismGrammar = Prism.languages["sql"];
 						prismClass = prismClassPrefix + this.format;
 						this.prettyString = sqlFormatter.format(this.data, { language: "sql" });
 						break;
 
 					case "javascript":
-						prismGrammar = Prism.languages.javascript;
+						prismGrammar = Prism.languages["javascript"];
 						prismClass = prismClassPrefix + this.format;
 						this.prettyString = prettier.format(this.data, { parser: "babel", plugins: prettierPlugins });
 						break;
 
 					case "typescript":
-						prismGrammar = Prism.languages.typescript;
+						prismGrammar = Prism.languages["typescript"];
 						prismClass = prismClassPrefix + this.format;
 						this.prettyString = prettier.format(this.data, {
 							parser: "typescript",

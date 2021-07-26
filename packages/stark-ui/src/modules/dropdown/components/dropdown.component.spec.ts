@@ -1,7 +1,7 @@
 /* tslint:disable:completed-docs component-max-inline-declarations no-commented-code no-big-function no-identical-functions no-duplicate-string no-lifecycle-call */
 import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
-import { async, ComponentFixture, fakeAsync, flush, inject, TestBed, tick } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -155,14 +155,23 @@ describe("DropdownComponent", () => {
 	const reflectPlaceholderAttr = "ng-reflect-placeholder";
 	const reflectValueAttr = "ng-reflect-value";
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [CommonModule, MatSelectModule, MatOptionModule, ReactiveFormsModule, TranslateModule.forRoot(), NoopAnimationsModule],
-			declarations: [StarkDropdownComponent, TestHostComponent, TestHostValueComponent, TestHostNgControlComponent],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService],
-			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (selectionChange)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [
+					CommonModule,
+					MatSelectModule,
+					MatOptionModule,
+					ReactiveFormsModule,
+					TranslateModule.forRoot(),
+					NoopAnimationsModule
+				],
+				declarations: [StarkDropdownComponent, TestHostComponent, TestHostValueComponent, TestHostNgControlComponent],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService],
+				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (selectionChange)
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(inject([OverlayContainer], (oc: OverlayContainer) => {
 		overlayContainer = oc;

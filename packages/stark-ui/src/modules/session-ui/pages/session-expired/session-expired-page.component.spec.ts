@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs */
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
@@ -19,17 +19,19 @@ describe("SessionExpiredPageComponent", () => {
 		baseUrl: "base-url"
 	};
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkSessionExpiredPageComponent],
-			imports: [CommonModule, MatButtonModule, MatCardModule, TranslateModule.forRoot()],
-			providers: [
-				{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() }, // needed by AppLogo component
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
-			]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkSessionExpiredPageComponent],
+				imports: [CommonModule, MatButtonModule, MatCardModule, TranslateModule.forRoot()],
+				providers: [
+					{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() }, // needed by AppLogo component
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
+				]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkSessionExpiredPageComponent);

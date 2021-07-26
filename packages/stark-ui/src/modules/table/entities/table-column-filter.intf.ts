@@ -1,3 +1,5 @@
+import { MenuPositionY } from "@angular/material/menu";
+
 /**
  * Definition of the filter in the {@link StarkTableComponent}
  */
@@ -30,5 +32,5 @@ export interface StarkTableColumnFilter {
 	 *
 	 * Default: `"below"`
 	 */
-	filterPosition?: "below" | "above";
+	filterPosition?: MenuPositionY;
 }

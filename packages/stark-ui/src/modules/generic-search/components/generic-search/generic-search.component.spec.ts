@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-identical-functions */
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, EventEmitter, NO_ERRORS_SCHEMA } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -49,28 +49,30 @@ class BadTestHostComponent extends TestHostComponent {}
 describe("GenericSearchComponent", () => {
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [
-				CommonModule,
-				FormsModule,
-				ReactiveFormsModule,
-				MatButtonModule,
-				MatMenuModule,
-				NoopAnimationsModule,
-				TranslateModule.forRoot()
-			],
-			declarations: [
-				StarkActionBarComponent,
-				StarkGenericSearchComponent,
-				TestSearchFormComponent,
-				TestHostComponent,
-				BadTestHostComponent
-			],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" and "matTooltip" directives not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [
+					CommonModule,
+					FormsModule,
+					ReactiveFormsModule,
+					MatButtonModule,
+					MatMenuModule,
+					NoopAnimationsModule,
+					TranslateModule.forRoot()
+				],
+				declarations: [
+					StarkActionBarComponent,
+					StarkGenericSearchComponent,
+					TestSearchFormComponent,
+					TestHostComponent,
+					BadTestHostComponent
+				],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
+				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" and "matTooltip" directives not known (which we don't want to add in these tests)
+			}).compileComponents();
+		})
+	);
 
 	it("should throw error because `searchFormComponent` is not included", () => {
 		hostFixture = TestBed.createComponent(BadTestHostComponent);

@@ -1,6 +1,6 @@
 /*tslint:disable:completed-docs*/
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { UIRouterModule } from "@uirouter/angular";
 import { MatExpansionModule } from "@angular/material/expansion";
@@ -39,23 +39,25 @@ describe("AppMenuItemComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				declarations: [StarkAppMenuItemComponent, TestHostComponent],
-				imports: [MatExpansionModule, MatListModule, NoopAnimationsModule, UIRouterModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService }
-				],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					declarations: [StarkAppMenuItemComponent, TestHostComponent],
+					imports: [MatExpansionModule, MatListModule, NoopAnimationsModule, UIRouterModule],
+					providers: [
+						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+						{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService }
+					],
+					schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
+				})
+					/**
+					 * Compile template and css
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach

@@ -12,13 +12,13 @@
 				*ngIf="action.isVisible !== false"
 				class="stark-action-bar-action"
 				[color]="action.buttonColor ? action.buttonColor : buttonColor"
-				[ngClass]="action.className"
-				[matTooltip]="action.labelSwitchFunction ? (action.labelActivated | translate) : (action.label | translate)"
+				[ngClass]="action.className || ''"
+				[matTooltip]="getActionLabel(action) | translate"
 				[disabled]="!action.isEnabled"
 				mat-icon-button
 				type="button"
 			>
-				<mat-icon [svgIcon]="action.iconSwitchFunction ? action.iconActivated : action.icon" class="stark-small-icon"></mat-icon>
+				<mat-icon [svgIcon]="getActionIcon(action)" class="stark-small-icon"></mat-icon>
 				<span
 					[class]="'action-label ' + (action.buttonColor ? action.buttonColor : buttonColor)"
 					[ngClass]="{ disabled: !action.isEnabled }"
@@ -57,7 +57,7 @@
 					*ngIf="action.isVisible !== false"
 					mat-menu-item
 					class="stark-action-bar-menu-item"
-					[ngClass]="action.className"
+					[ngClass]="action.className || ''"
 					[id]="actionBarId + '-alt-' + action.id"
 					[disabled]="!action.isEnabled"
 					(click)="onClick(action, $event)"

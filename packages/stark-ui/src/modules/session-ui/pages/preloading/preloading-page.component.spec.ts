@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-lifecycle-call */
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { of, throwError } from "rxjs";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
@@ -32,18 +32,20 @@ describe("PreloadingPageComponent", () => {
 	const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
 	const mockRoutingService: MockStarkRoutingService = new MockStarkRoutingService();
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkPreloadingPageComponent],
-			imports: [CommonModule, MatButtonModule, MatCardModule, TranslateModule.forRoot()],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-				{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
-				{ provide: STARK_USER_SERVICE, useValue: mockUserService },
-				{ provide: STARK_SESSION_SERVICE, useValue: mockSessionService }
-			]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkPreloadingPageComponent],
+				imports: [CommonModule, MatButtonModule, MatCardModule, TranslateModule.forRoot()],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
+					{ provide: STARK_USER_SERVICE, useValue: mockUserService },
+					{ provide: STARK_SESSION_SERVICE, useValue: mockSessionService }
+				]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkPreloadingPageComponent);

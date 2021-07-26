@@ -77,8 +77,8 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		renderer: Renderer2,
+		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
 	}
@@ -86,7 +86,8 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.logger.debug(componentName + ": component initialized");
 	}
 
@@ -113,6 +114,30 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 			}
 			action.actionCall($event, scope);
 		}
+	}
+
+	/**
+	 * Returns action icon based on `action.iconSwitchFunction()` state
+	 * @param action - {@link StarkAction} object
+	 * @ignore
+	 */
+	public getActionIcon(action: StarkAction): string {
+		if (!!action.iconSwitchFunction && action.iconSwitchFunction()) {
+			return <string> action.iconActivated;
+		}
+		return action.icon;
+	}
+
+	/**
+	 * Returns action icon based on `action.iconSwitchFunction()` state
+	 * @param action - {@link StarkAction} object
+	 * @ignore
+	 */
+	public getActionLabel(action: StarkAction): string {
+		if (!!action.labelSwitchFunction && action.labelSwitchFunction()) {
+			return <string> action.labelActivated;
+		}
+		return action.label;
 	}
 
 	/**

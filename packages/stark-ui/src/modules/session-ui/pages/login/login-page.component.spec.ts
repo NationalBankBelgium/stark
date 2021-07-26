@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs */
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { RawParams } from "@uirouter/core";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
@@ -41,18 +41,20 @@ describe("LoginPageComponent", () => {
 		roles: ["admin", "developer"]
 	};
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkLoginPageComponent],
-			imports: [CommonModule, MatCardModule, MatDividerModule, MatListModule, TranslateModule.forRoot()],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-				{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
-				{ provide: STARK_USER_SERVICE, useValue: mockUserService },
-				{ provide: STARK_SESSION_SERVICE, useValue: mockSessionService }
-			]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkLoginPageComponent],
+				imports: [CommonModule, MatCardModule, MatDividerModule, MatListModule, TranslateModule.forRoot()],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
+					{ provide: STARK_USER_SERVICE, useValue: mockUserService },
+					{ provide: STARK_SESSION_SERVICE, useValue: mockSessionService }
+				]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkLoginPageComponent);

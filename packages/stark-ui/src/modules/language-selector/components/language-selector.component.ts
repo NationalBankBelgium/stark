@@ -83,8 +83,8 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
 		public dateAdapter: DateAdapter<any>,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef,
+		renderer: Renderer2,
+		elementRef: ElementRef,
 		protected cdRef: ChangeDetectorRef
 	) {
 		super(renderer, elementRef);
@@ -93,7 +93,8 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.logger.debug(componentName + ": controller initialized");
 
 		this.sessionServiceSubscription = this.sessionService.getCurrentLanguage().subscribe(
