@@ -78,7 +78,7 @@
     "deep-freeze-strict": "^1.1.1",
     "hammerjs": "^2.0.8",
     "husky": "^6.0.0",
-    "ibantools": "^3.2.3",
+    "ibantools": "^3.3.1",
     "jasmine-core": "^3.6.0",
     "karma": "^5.2.3",
     "karma-chrome-launcher": "^3.0.0",
