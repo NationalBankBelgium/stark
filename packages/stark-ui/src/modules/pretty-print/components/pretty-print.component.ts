@@ -96,7 +96,19 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 	 * The format to be used to pretty print the data string
 	 */
 	@Input()
-	public format?: StarkPrettyPrintFormat;
+	public get format(): StarkPrettyPrintFormat | undefined {
+		return this._format;
+	}
+
+	public set format(value: StarkPrettyPrintFormat | undefined) {
+		this._format = typeof value !== "undefined" ? <StarkPrettyPrintFormat>value.toLowerCase() : undefined;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name prefer-optional
+	public static ngAcceptInputType_format: StarkPrettyPrintFormat | Uppercase<StarkPrettyPrintFormat> | undefined;
+
+	private _format?: StarkPrettyPrintFormat;
 
 	/**
 	 * If true, also highlight the pretty printed string
@@ -145,7 +157,6 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 			return;
 		}
 
-		this.format = <StarkPrettyPrintFormat>this.format.toLowerCase();
 		this.highlightingEnabled = !!this.enableHighlighting;
 		this.prettyString = "";
 
