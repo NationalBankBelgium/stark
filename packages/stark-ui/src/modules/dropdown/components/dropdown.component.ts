@@ -225,13 +225,13 @@ export class StarkDropdownComponent
 	/**
 	 * Reference to the single MatSelect element embedded in this component
 	 */
-	@ViewChild("singleSelect", { static: true })
+	@ViewChild("singleSelectEl")
 	private singleSelectElement?: MatSelect;
 
 	/**
 	 * Reference to the multi MatSelect element embedded in this component
 	 */
-	@ViewChild("multiSelect", { static: true })
+	@ViewChild("multiSelectEl")
 	private multiSelectElement?: MatSelect;
 
 	/**
