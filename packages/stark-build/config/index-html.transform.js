@@ -21,25 +21,22 @@ const METADATA = require("./webpack-metadata").METADATA;
  * @returns {string}
  */
 function replacePlaceholdersByValues(indexHtml) {
-	const regex = /<%=\sstarkOptions\.(starkAppMetadata|starkAppConfig|metadata)\.\w+\s%>/g;
+	const regex = /(?:<|&lt;)%=\s+starkOptions\.(starkAppMetadata|starkAppConfig|metadata)\.(\w+)\s+%(?:>|&gt;)/g;
 
-	const getRealValue = (placeholder) => {
-		const str = placeholder.slice(4, -3).split(".");
-		if (str.length === 3) {
-			const configName = str[1];
-			const property = str[2];
+	const getRealValue = (placeholder, ...args) => {
+		const configName = args[0];
+		const property = args[1];
 
-			let value;
+		let value;
 
-			if (configName === "metadata") {
-				value = METADATA[property];
-			} else {
-				value = commonData[configName][property];
-			}
+		if (configName === "metadata") {
+			value = METADATA[property];
+		} else {
+			value = commonData[configName][property];
+		}
 
-			if (value) {
-				return value;
-			}
+		if (value) {
+			return value;
 		}
 
 		return placeholder;
