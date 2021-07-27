@@ -1,7 +1,7 @@
 // tslint:disable:completed-docs
 import { StarkMinimapComponent } from "./minimap.component";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
-import { ComponentFixture, inject, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { HAMMER_LOADER } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -105,6 +105,14 @@ describe("MinimapComponent", () => {
 			expect(menuElement).withContext("menu should have opened").toBeTruthy();
 			expect(menuItemLabels.length).withContext("menu should show a label for all items").toBe(items.length);
 		});
+
+		it("clicking outside menu should close it", fakeAsync(() => {
+			const backdrop = <HTMLElement>overlayContainerElement.querySelector(".cdk-overlay-backdrop");
+			backdrop.click();
+			hostFixture.detectChanges();
+			tick(500);
+			expect(hostFixture.nativeElement.querySelector("mat-icon").classList).not.toContain("open");
+		}));
 
 		it("correct items should be checked", () => {
 			expect(menuItemLabels.length).toBe(items.length);
