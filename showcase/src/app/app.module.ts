@@ -74,7 +74,7 @@ import { getAuthenticationHeaders } from "./authentication.config";
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { environment } from "environments/environment";
+import { environment } from "../environments/environment";
 import { APP_STATES } from "./app.routes";
 // App is our top level component
 import { AppComponent } from "./app.component";

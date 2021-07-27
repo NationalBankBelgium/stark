@@ -39,7 +39,7 @@ export class DemoDatePickerPageComponent implements OnDestroy {
 		this.subscription.unsubscribe();
 	}
 
-	public onDateChanged(date: Date): void {
+	public onDateChanged(date?: Date): void {
 		this.logger.debug("Date changed: ", date);
 	}
 

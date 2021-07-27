@@ -1,6 +1,9 @@
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
 .stark-route-search.button-color-success {
   button.search-button {
-    background-color: mat-color($warning-palette, 300);
-    color: mat-color($grey-palette, 900);
+    background-color: mat.get-color-from-palette(stark-ui.$warning-palette, 300);
+    color: mat.get-color-from-palette(stark-ui.$grey-palette, 900);
   }
 }

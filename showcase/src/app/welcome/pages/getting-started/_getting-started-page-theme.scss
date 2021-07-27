@@ -1,18 +1,21 @@
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
 .file-structure-title {
-  color: mat-color($grey-palette, 900);
+  color: mat.get-color-from-palette(stark-ui.$grey-palette, 900);
 }
 
 .custom-title {
-  color: mat-color($grey-palette, 900);
+  color: mat.get-color-from-palette(stark-ui.$grey-palette, 900);
 }
 
 .custom-subtitle {
-  color: mat-color($grey-palette, 800);
+  color: mat.get-color-from-palette(stark-ui.$grey-palette, 800);
 }
 
 .custom-code {
   font-family: monospace;
-  background-color: mat-color($grey-palette, 200);
+  background-color: mat.get-color-from-palette(stark-ui.$grey-palette, 200);
 }
 
 .custom-section {
@@ -23,9 +26,9 @@
 
 .custom-pretty-print {
   & pre {
-    background-color: $custom-dark-background;
+    background-color: stark-ui.$custom-dark-background;
     border-radius: 0.3em;
   }
 
-  color: mat-color($grey-palette, 100);
+  color: mat.get-color-from-palette(stark-ui.$grey-palette, 100);
 }

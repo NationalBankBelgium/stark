@@ -1,13 +1,13 @@
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { HAMMER_LOADER } from "@angular/platform-browser";
 import { Observable, of, Subject, throwError } from "rxjs";
 import { delay, filter } from "rxjs/operators";
-import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 
@@ -39,37 +39,39 @@ describe("ExampleViewerComponent", () => {
 	let hostComponent: TestHostComponent;
 	let component: ExampleViewerComponent;
 	let fileService: SpyObj<FileService>;
-	let logger: SpyObj<StarkLoggingService>;
+	let logger: MockStarkLoggingService;
 
 	// Router config
 	const mockStateName = "mock-state-name";
 	const router: MockStarkRoutingService = new MockStarkRoutingService();
 	router.getCurrentStateName.and.returnValue(mockStateName);
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [ExampleViewerComponent, TestHostComponent],
-			imports: [NoopAnimationsModule, MatButtonModule, MatTabsModule, MatTooltipModule, StarkPrettyPrintModule],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				{ provide: STARK_ROUTING_SERVICE, useValue: router },
-				{
-					provide: FileService,
-					useValue: jasmine.createSpyObj("FileServiceSpy", ["fetchFile"])
-				},
-				{
-					// See https://github.com/NationalBankBelgium/stark/issues/1088
-					provide: HAMMER_LOADER,
-					useValue: (): Promise<any> => new Subject<any>().toPromise()
-				}
-			],
-			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [ExampleViewerComponent, TestHostComponent],
+				imports: [NoopAnimationsModule, MatButtonModule, MatTabsModule, MatTooltipModule, StarkPrettyPrintModule],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: STARK_ROUTING_SERVICE, useValue: router },
+					{
+						provide: FileService,
+						useValue: jasmine.createSpyObj("FileServiceSpy", ["fetchFile"])
+					},
+					{
+						// See https://github.com/NationalBankBelgium/stark/issues/1088
+						provide: HAMMER_LOADER,
+						useValue: (): Promise<any> => new Subject<any>().toPromise()
+					}
+				],
+				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
-		logger = TestBed.get(STARK_LOGGING_SERVICE);
-		fileService = TestBed.get(FileService);
+		logger = TestBed.inject<MockStarkLoggingService>(STARK_LOGGING_SERVICE);
+		fileService = <SpyObj<FileService>>TestBed.inject(FileService);
 		fileService.fetchFile.and.callFake(() => of("initial dummy file content"));
 
 		hostFixture = TestBed.createComponent(TestHostComponent);

@@ -1,7 +1,10 @@
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
 .table-of-contents-container {
-  border-left: solid 4px mat-color($primary-palette, 800);
+  border-left: solid 4px mat.get-color-from-palette(stark-ui.$primary-palette, 800);
 }
 
 .table-of-contents-active-link {
-  color: mat-color($grey-palette, 900);
+  color: mat.get-color-from-palette(stark-ui.$grey-palette, 900);
 }

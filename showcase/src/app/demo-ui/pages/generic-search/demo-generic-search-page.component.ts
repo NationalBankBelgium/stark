@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { ReferenceLink } from "../../../shared";
 import {
@@ -15,9 +15,7 @@ import { DemoGenericService } from "./services";
 	selector: "demo-generic-search",
 	templateUrl: "./demo-generic-search-page.component.html"
 })
-export class DemoGenericSearchPageComponent
-	extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria>
-	implements OnInit, OnDestroy {
+export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria> implements OnInit {
 	public hideSearch = false;
 
 	public columnsProperties: StarkTableColumnProperties[] = [
@@ -77,15 +75,8 @@ export class DemoGenericSearchPageComponent
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
 		super.ngOnInit();
 		this.results$.subscribe((genericObjects: HeroMovie[]) => (this.searchResults = genericObjects));
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnDestroy(): void {
-		super.ngOnDestroy();
 	}
 }

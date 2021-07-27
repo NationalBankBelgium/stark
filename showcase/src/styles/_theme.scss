@@ -1,20 +1,26 @@
 /*
-Import the local variables file first to set the correct variables, see:
+Use the local variables file first to set the correct variables, see:
   - https://stark.nbb.be/showcase/latest/styleguide/typography
   - https://stark.nbb.be/showcase/latest/styleguide/colors
 */
-@import "variables";
-@import "~@nationalbankbelgium/stark-ui/assets/theming";
-@import "../app/app.component-theme";
-@import "../app/shared/components/example-viewer/example-viewer-theme";
-@import "../app/shared/components/table-of-contents/table-of-contents-theme";
-@import "../app/welcome/pages/getting-started/getting-started-page-theme";
-@import "../app/welcome/pages/home/home-page-theme";
-@import "../app/welcome/pages/news/news-page-theme";
-@import "../app/welcome/components/news-item/news-item-theme";
-@import "../app/styleguide/pages/typography/styleguide-typography-page-theme";
-@import "../app/demo-ui/pages/route-search/demo-route-search-page.component-theme";
-@import "../app/demo-ui/components/table-regular/table-regular-theme";
-@import "../app/styleguide/pages/layout/styleguide-layout-page.theme";
-@import "../app/welcome/pages/reactive-form-errors/components/card/card.theme";
-@import "../app/welcome/pages/reactive-form-errors/reactive-form-errors-page.component.theme";
+@use "variables";
+@use "sass:map";
+
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+@use "../app/app.component-theme";
+@use "../app/shared/components/example-viewer/example-viewer-theme";
+@use "../app/shared/components/table-of-contents/table-of-contents-theme";
+@use "../app/welcome/pages/getting-started/getting-started-page-theme";
+@use "../app/welcome/pages/home/home-page-theme";
+@use "../app/welcome/pages/news/news-page-theme";
+@use "../app/welcome/components/news-item/news-item-theme";
+@use "../app/styleguide/pages/typography/styleguide-typography-page-theme";
+@use "../app/demo-ui/pages/route-search/demo-route-search-page.component-theme";
+@use "../app/demo-ui/components/table-regular/table-regular-theme";
+@use "../app/styleguide/pages/layout/styleguide-layout-page.theme";
+@use "../app/welcome/pages/reactive-form-errors/components/card/card.theme";
+@use "../app/welcome/pages/reactive-form-errors/reactive-form-errors-page.component.theme";
+
+@include mat.core();
+@include stark-ui.set-stark-ui-styles();

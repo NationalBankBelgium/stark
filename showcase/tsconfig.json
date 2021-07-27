@@ -1,21 +1,14 @@
 {
-  "extends": "@nationalbankbelgium/code-style/tsconfig/3.5.x/ng8",
+  "extends": "@nationalbankbelgium/code-style/tsconfig/4.3.x/ng12",
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",
-    "declaration": false,
-    "lib": ["dom", "dom.iterable", "es2017"],
     "typeRoots": [
       "./node_modules/@types",
       "./node_modules/@nationalbankbelgium/stark-build/typings",
       "./node_modules/@nationalbankbelgium/stark-ui/typings"
     ],
-    "paths": {
-      "@angular/*": ["../node_modules/@angular/*"],
-      "@nationalbankbelgium/*": ["../node_modules/@nationalbankbelgium/*"],
-      "core-js/es7/reflect": ["../node_modules/core-js/proposals/reflect-metadata"],
-      "core-js/es6/*": ["../node_modules/core-js/es/*"]
-    }
+    "paths": {}
   },
   "exclude": ["node_modules", "dist", "src/assets"]
 }

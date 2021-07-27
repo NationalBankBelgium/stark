@@ -1,4 +1,7 @@
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
 .custom-news-page-button {
-  color: mat-contrast($primary-palette, 500);
-  background-color: mat-color($primary-palette, 700);
+  color: mat.get-contrast-color-from-palette(stark-ui.$primary-palette, 500);
+  background-color: mat.get-color-from-palette(stark-ui.$primary-palette, 700);
 }

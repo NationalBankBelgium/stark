@@ -1,4 +1,4 @@
-@import "~@nationalbankbelgium/stark-ui/assets/styles/media-queries";
+@use "~@nationalbankbelgium/stark-ui/styles/media-queries" as *;
 
 button {
   margin: 8px;

@@ -28,7 +28,7 @@
 			{{ "SHOWCASE.DEMO.DROPDOWN.SELECTED_VALUE" | translate }}: {{ serviceFormControl.value }}
 		</div>
 
-		<mat-checkbox (change)="toggleDisabledReactiveFormControl()" [value]="serviceFormControl.disabled">
+		<mat-checkbox (change)="toggleDisabledReactiveFormControl()" [checked]="serviceFormControl.disabled">
 			{{ "SHOWCASE.COMMON.DISABLED" | translate }}
 		</mat-checkbox>
 	</example-viewer>
