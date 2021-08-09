@@ -229,7 +229,6 @@ export class StarkDatePickerComponent
 			this._value = value;
 			this.stateChanges.next();
 		}
-		this.cdRef.detectChanges();
 	}
 
 	/**
