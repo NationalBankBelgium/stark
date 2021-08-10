@@ -220,10 +220,11 @@ jobs:
           npm run install:ci:stark-rbac
           npm run install:ci:stark-ui
         if: github.event_name != 'schedule'
-        
-      - name: Generate docs
-        run: npm run docs:publish -- --github-api-key=${{ secrets.GITHUB_TOKEN }}
-        if: github.event_name != 'schedule'
+      
+      # Don't publish docs in maintenance branches  
+      # - name: Generate docs
+      #  run: npm run docs:publish -- --github-api-key=${{ secrets.GITHUB_TOKEN }}
+      #  if: github.event_name != 'schedule'
         
       - name: Set npm token
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
