@@ -100,28 +100,28 @@ describe("MinimapComponent", () => {
 		});
 
 		it("clicking button should open menu", () => {
-			expect(menuElement).toBeTruthy("menu should have opened");
-			expect(menuItemLabels.length).toBe(items.length, "menu should show a label for all items");
+			expect(menuElement).withContext("menu should have opened").toBeTruthy();
+			expect(menuItemLabels.length).withContext("menu should show a label for all items").toBe(items.length);
 		});
 
 		it("correct items should be checked", () => {
 			expect(menuItemLabels.length).toBe(items.length);
 			menuItemLabels.forEach((labelElement: HTMLLabelElement) => {
 				const textContainer: HTMLElement | null = labelElement.querySelector(".mat-checkbox-label");
-				expect(textContainer).toBeTruthy("mat-checkbox-label should exist");
+				expect(textContainer).withContext("mat-checkbox-label should exist").toBeTruthy();
 				const text: string = ((textContainer && textContainer.textContent) || "").trim();
 
 				const inputElement: HTMLInputElement | null = labelElement.querySelector("input");
-				expect(inputElement).toBeTruthy("input element should exist");
+				expect(inputElement).withContext("input element should exist").toBeTruthy();
 				const isChecked: boolean = (inputElement && inputElement.checked) || false;
 
 				const item: StarkMinimapItemProperties | undefined = items.find(({ label }: StarkMinimapItemProperties) => label === text);
-				expect(item).toBeTruthy("text content should match a label");
+				expect(item).withContext("text content should match a label").toBeTruthy();
 				const name: string = (item && item.name) || "";
 
 				const isVisible: boolean = visibleItems.includes(name);
 
-				expect(isChecked).toBe(isVisible, `input for "${name}" should${isVisible ? " " : " not "}be checked.`);
+				expect(isChecked).withContext(`input for "${name}" should${isVisible ? " " : " not "}be checked.`).toBe(isVisible);
 			});
 		});
 
@@ -129,7 +129,7 @@ describe("MinimapComponent", () => {
 			expect(component.mode).toBeFalsy();
 
 			const dotsElement: HTMLElement | null = hostFixture.nativeElement.querySelector("stark-minimap .stark-minimap-dots");
-			expect(dotsElement).toBeTruthy("should have dots");
+			expect(dotsElement).withContext("should have dots").toBeTruthy();
 			if (!dotsElement) {
 				return;
 			}
@@ -143,7 +143,7 @@ describe("MinimapComponent", () => {
 			hostFixture.detectChanges();
 
 			const dotsElement: HTMLElement | null = hostFixture.nativeElement.querySelector("stark-minimap .stark-minimap-dots");
-			expect(dotsElement).toBeNull("compact view should not have dots");
+			expect(dotsElement).withContext("compact view should not have dots").toBeNull();
 		});
 	});
 
@@ -187,7 +187,7 @@ describe("MinimapComponent", () => {
 
 			menuItemLabels.forEach((labelElement: HTMLLabelElement) => {
 				const textContainer: HTMLElement | null = labelElement.querySelector(".mat-checkbox-label");
-				expect(textContainer).toBeTruthy("mat-checkbox-label should exist");
+				expect(textContainer).withContext("mat-checkbox-label should exist").toBeTruthy();
 				const text: string = ((textContainer && textContainer.textContent) || "").trim();
 				const expectedItem: StarkMinimapItemProperties | undefined = items.find(
 					({ label }: StarkMinimapItemProperties) => label === text

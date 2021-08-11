@@ -62,7 +62,7 @@ describe("TransformInputDirective", () => {
 			// trigger initial data binding
 			fixture.detectChanges();
 
-			expect(component.value).toBe("", "field 'value' should start as empty string ");
+			expect(component.value).withContext("field 'value' should start as empty string ").toBe("");
 		});
 
 		it("should set value to uppercase", () => {
@@ -148,7 +148,7 @@ describe("TransformInputDirective", () => {
 			// trigger initial data binding
 			fixture.detectChanges();
 
-			expect(component.formControl.value).toBe("", "field 'value' should start as empty string ");
+			expect(component.formControl.value).withContext("field 'value' should start as empty string ").toBe("");
 		});
 
 		it("should set value to uppercase", () => {
@@ -231,7 +231,7 @@ describe("TransformInputDirective", () => {
 			// trigger initial data binding
 			fixture.detectChanges();
 
-			expect(htmlInputElement.value).toBe("", "field 'value' should start as empty string ");
+			expect(htmlInputElement.value).withContext("field 'value' should start as empty string ").toBe("");
 		});
 
 		it("should set value to uppercase", () => {
@@ -305,7 +305,7 @@ describe("TransformInputDirective", () => {
 			// trigger initial data binding
 			fixture.detectChanges();
 
-			expect(htmlInputElement.value).toBe("", "field 'value' should start as empty string ");
+			expect(htmlInputElement.value).withContext("field 'value' should start as empty string ").toBe("");
 		});
 
 		it("should set value to uppercase", () => {
