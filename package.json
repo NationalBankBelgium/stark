@@ -38,7 +38,7 @@
     "@angularclass/hmr": "^3.0.0",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.14.4",
-    "@commitlint/cli": "^12.0.0",
+    "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@compodoc/compodoc": "1.1.13",
     "@mdi/angular-material": "^4.0.96",
