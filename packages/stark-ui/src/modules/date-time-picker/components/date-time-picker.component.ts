@@ -135,7 +135,6 @@ export class StarkDateTimePickerComponent
 			});
 		}
 		this._value = value;
-		this.cdRef.detectChanges(); // to refresh all the validations in the internal date picker
 		this.stateChanges.next();
 	}
 
