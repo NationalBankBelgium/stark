@@ -7,7 +7,6 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
  */
 @Component({
 	selector: "about",
-	styles: [``],
 	templateUrl: "./about-page.component.html"
 })
 /**
