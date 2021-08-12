@@ -36,8 +36,6 @@
     "@angular/platform-browser-dynamic": "^8.2.0",
     "@angular/router": "^8.2.0",
     "@angularclass/hmr": "^3.0.0",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.14.4",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@compodoc/compodoc": "1.1.13",
@@ -116,7 +114,6 @@
     "typescript": "~3.5.0",
     "uuid": "^8.3.0",
     "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-merge": "^4.2.1",
     "zone.js": "~0.9.1"
   },
   "scripts": {
