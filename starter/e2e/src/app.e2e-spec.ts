@@ -14,7 +14,7 @@ describe("General tests:", () => {
 	describe("Login flow:", () => {
 		it("should login when clicking first account", async () => {
 			const firstAccount: ElementFinder = element(by.css("stark-login-page ul li:first-child > a"));
-			expect(firstAccount.isPresent()).toBeTruthy("Unable to find login.");
+			expect(firstAccount.isPresent()).withContext("Unable to find login.").toBeTruthy();
 
 			try {
 				await firstAccount.click();
@@ -23,17 +23,17 @@ describe("General tests:", () => {
 			}
 
 			const logoutButton: ElementFinder = element(by.css(".stark-app-logout"));
-			expect(logoutButton.isPresent()).toBeTruthy("Unable to find logout button");
+			expect(logoutButton.isPresent()).withContext("Unable to find logout button").toBeTruthy();
 		});
 
 		it("should have stark logo", async () => {
 			const subject: ElementFinder = element(by.className("stark-app-logo"));
-			expect(await subject.isPresent()).toBeTruthy("Unable to find logo");
+			expect(await subject.isPresent()).withContext("Unable to find logo").toBeTruthy();
 		});
 
 		it("should have 'Stark Starter Application' as header", async () => {
 			const subject: ElementFinder = element(by.css(".stark-main-container h1"));
-			expect(subject.isPresent()).toBeTruthy("No h1 found");
+			expect(subject.isPresent()).withContext("No h1 found").toBeTruthy();
 			expect(await subject.getText()).toEqual("Stark Starter Application");
 		});
 	});

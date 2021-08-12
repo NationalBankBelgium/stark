@@ -135,7 +135,7 @@ describe("ExampleViewerComponent", () => {
 			hostFixture.detectChanges();
 
 			const anchorIcon = hostFixture.nativeElement.querySelector("mat-card-title a.anchor-link");
-			expect(anchorIcon).toBeNull("anchor link element found.");
+			expect(anchorIcon).withContext("anchor link element found.").toBeNull();
 		});
 
 		it("should render an anchor when set", () => {
@@ -143,7 +143,7 @@ describe("ExampleViewerComponent", () => {
 			hostFixture.detectChanges();
 
 			const anchorIcon = hostFixture.nativeElement.querySelector("mat-card-title a.anchor-link");
-			expect(anchorIcon).not.toBeNull("anchor link element not found.");
+			expect(anchorIcon).not.withContext("anchor link element not found.").toBeNull();
 		});
 	});
 

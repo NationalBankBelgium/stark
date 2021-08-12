@@ -13,6 +13,6 @@ describe("General tests:", () => {
 
 	it("should have stark logo", () => {
 		const subject: ElementFinder = element(by.css(".stark-app-bar stark-app-logo"));
-		expect(subject.isPresent()).toBeTruthy("Unable to find logo");
+		expect(subject.isPresent()).withContext("Unable to find logo").toBeTruthy();
 	});
 });
