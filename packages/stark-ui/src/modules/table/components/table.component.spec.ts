@@ -128,10 +128,18 @@ describe("TableComponent", () => {
 		element.dispatchEvent(clickEvent);
 	};
 
+	const triggerHover: Function = (element: HTMLElement): void => {
+		// more verbose way to create and trigger an event (the only way it works in IE)
+		// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+		const hoverEvent: MouseEvent = document.createEvent("MouseEvent");
+		hoverEvent.initEvent("mouseenter", true, true);
+		element.dispatchEvent(hoverEvent);
+	};
+
 	const DUMMY_DATA: object[] = [
-		{ id: 1, description: "dummy 1" },
-		{ id: 2, description: "dummy 2" },
-		{ id: 3, description: "dummy 3" }
+		{id: 1, description: "dummy 1"},
+		{id: 2, description: "dummy 2"},
+		{id: 3, description: "dummy 3"}
 	];
 
 	const getColumnSelector = (columnName: string): string => `.stark-table th.mat-column-${columnName} div div`;
@@ -168,7 +176,7 @@ describe("TableComponent", () => {
 				StarkTableRowContentDirective
 			],
 			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService()},
 				TranslateService,
 				{
 					// See https://github.com/NationalBankBelgium/stark/issues/1088
@@ -217,7 +225,7 @@ describe("TableComponent", () => {
 		const tableThSelector = ".stark-table thead tr th";
 
 		it("should make a copy of 'data' in 'dataSource' when 'data' changes to keep 'data' immutable", () => {
-			const dummyData = [{ name: "test-data" }];
+			const dummyData = [{name: "test-data"}];
 			hostComponent.dummyData = dummyData;
 			hostFixture.detectChanges();
 			expect(component.data).toEqual(dummyData);
@@ -234,7 +242,7 @@ describe("TableComponent", () => {
 			hostFixture.detectChanges();
 			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
 			(<Spy>component.sortData).calls.reset();
-			hostComponent.dummyData = [{ name: "test-data" }];
+			hostComponent.dummyData = [{name: "test-data"}];
 			hostFixture.detectChanges();
 			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
 			expect(component.sortData).toHaveBeenCalledTimes(1);
@@ -243,25 +251,25 @@ describe("TableComponent", () => {
 			hostFixture.detectChanges();
 			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
 			(<Spy>component.sortData).calls.reset();
-			hostComponent.dummyData = [{ name: "test-data-1" }];
+			hostComponent.dummyData = [{name: "test-data-1"}];
 			hostFixture.detectChanges();
 			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
 			expect(component.sortData).not.toHaveBeenCalled();
-			expect(component.dataSource.data).toEqual([{ name: "test-data-1" }]);
+			expect(component.dataSource.data).toEqual([{name: "test-data-1"}]);
 
 			hostComponent.orderProperties = undefined;
 			hostFixture.detectChanges();
 			(<Spy>component.resetFilterValueOnDataChange).calls.reset();
 			(<Spy>component.sortData).calls.reset();
-			hostComponent.dummyData = [{ name: "test-data-2" }];
+			hostComponent.dummyData = [{name: "test-data-2"}];
 			hostFixture.detectChanges();
 			expect(component.resetFilterValueOnDataChange).toHaveBeenCalledTimes(1);
 			expect(component.sortData).not.toHaveBeenCalled();
-			expect(component.dataSource.data).toEqual([{ name: "test-data-2" }]);
+			expect(component.dataSource.data).toEqual([{name: "test-data-2"}]);
 		});
 
 		it("should change internal 'selection' when 'selection' is managed by host and then trigger selectChanged", () => {
-			const dummySelectedRows = [{ name: "selected-data-1" }, { name: "selected-data-2" }, { name: "selected-data-3" }];
+			const dummySelectedRows = [{name: "selected-data-1"}, {name: "selected-data-2"}, {name: "selected-data-3"}];
 			spyOn(component.selectChanged, "emit");
 
 			hostComponent.selection = new SelectionModel<object>(true, []);
@@ -284,7 +292,7 @@ describe("TableComponent", () => {
 		});
 
 		it("should change host 'selection' when 'selection' is managed by host and then trigger selectChanged", () => {
-			const dummySelectedRows = [{ name: "selected-data-1" }, { name: "selected-data-2" }, { name: "selected-data-3" }];
+			const dummySelectedRows = [{name: "selected-data-1"}, {name: "selected-data-2"}, {name: "selected-data-3"}];
 			spyOn(component.selectChanged, "emit");
 
 			hostComponent.selection = new SelectionModel<object>(true, []);
@@ -416,10 +424,10 @@ describe("TableComponent", () => {
 		it("should display/hide the counter element when 'showRowsCounter' changes", () => {
 			const rowsCounterSelector = ".stark-table-rows-counter";
 			hostComponent.dummyData = [
-				{ name: "dummy-data-1" },
-				{ name: "dummy-data-2" },
-				{ name: "dummy-data-3" },
-				{ name: "dummy-data-4" }
+				{name: "dummy-data-1"},
+				{name: "dummy-data-2"},
+				{name: "dummy-data-3"},
+				{name: "dummy-data-4"}
 			];
 			hostFixture.detectChanges();
 
@@ -441,8 +449,8 @@ describe("TableComponent", () => {
 	describe("sortData", () => {
 		describe("standard data", () => {
 			beforeEach(() => {
-				hostComponent.columnProperties = [{ name: "a", isSortable: true }];
-				hostComponent.dummyData = [{ a: 1 }, { a: 1 }, { a: 3 }, { a: 2 }, { a: 4 }, { a: 5 }, { a: 10 }, { a: 20 }];
+				hostComponent.columnProperties = [{name: "a", isSortable: true}];
+				hostComponent.dummyData = [{a: 1}, {a: 1}, {a: 3}, {a: 2}, {a: 4}, {a: 5}, {a: 10}, {a: 20}];
 
 				hostFixture.detectChanges(); // trigger data binding
 				component.ngAfterViewInit();
@@ -457,14 +465,14 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: 1 },
-					{ a: 1 },
-					{ a: 2 },
-					{ a: 3 },
-					{ a: 4 },
-					{ a: 5 },
-					{ a: 10 },
-					{ a: 20 }
+					{a: 1},
+					{a: 1},
+					{a: 2},
+					{a: 3},
+					{a: 4},
+					{a: 5},
+					{a: 10},
+					{a: 20}
 				]);
 			});
 
@@ -477,32 +485,32 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: 20 },
-					{ a: 10 },
-					{ a: 5 },
-					{ a: 4 },
-					{ a: 3 },
-					{ a: 2 },
-					{ a: 1 },
-					{ a: 1 }
+					{a: 20},
+					{a: 10},
+					{a: 5},
+					{a: 4},
+					{a: 3},
+					{a: 2},
+					{a: 1},
+					{a: 1}
 				]);
 			});
 
 			it("should sort data descending column A then ascending column B", () => {
 				hostComponent.dummyData = [
-					{ a: 1, b: 1 },
-					{ a: 1, b: 3 },
-					{ a: 1, b: 2 },
-					{ a: 3, b: 2 },
-					{ a: 2, b: 2 },
-					{ a: 4, b: 2 },
-					{ a: 5, b: 2 },
-					{ a: 6, b: 2 },
-					{ a: 7, b: 2 }
+					{a: 1, b: 1},
+					{a: 1, b: 3},
+					{a: 1, b: 2},
+					{a: 3, b: 2},
+					{a: 2, b: 2},
+					{a: 4, b: 2},
+					{a: 5, b: 2},
+					{a: 6, b: 2},
+					{a: 7, b: 2}
 				];
 				hostComponent.columnProperties = [
-					{ name: "a", isSortable: true },
-					{ name: "b", isSortable: true }
+					{name: "a", isSortable: true},
+					{name: "b", isSortable: true}
 				];
 				hostComponent.orderProperties = ["-a", "b"];
 
@@ -512,33 +520,33 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: 7, b: 2 },
-					{ a: 6, b: 2 },
-					{ a: 5, b: 2 },
-					{ a: 4, b: 2 },
-					{ a: 3, b: 2 },
-					{ a: 2, b: 2 },
-					{ a: 1, b: 1 },
-					{ a: 1, b: 2 },
-					{ a: 1, b: 3 }
+					{a: 7, b: 2},
+					{a: 6, b: 2},
+					{a: 5, b: 2},
+					{a: 4, b: 2},
+					{a: 3, b: 2},
+					{a: 2, b: 2},
+					{a: 1, b: 1},
+					{a: 1, b: 2},
+					{a: 1, b: 3}
 				]);
 			});
 
 			it("should sort string data descending column A then descending column B", () => {
 				hostComponent.dummyData = [
-					{ a: "a", b: "a" },
-					{ a: "a", b: "c" },
-					{ a: "a", b: "b" },
-					{ a: "c", b: "b" },
-					{ a: "b", b: "b" },
-					{ a: "d", b: "b" },
-					{ a: "e", b: "b" },
-					{ a: "f", b: "b" },
-					{ a: "g", b: "b" }
+					{a: "a", b: "a"},
+					{a: "a", b: "c"},
+					{a: "a", b: "b"},
+					{a: "c", b: "b"},
+					{a: "b", b: "b"},
+					{a: "d", b: "b"},
+					{a: "e", b: "b"},
+					{a: "f", b: "b"},
+					{a: "g", b: "b"}
 				];
 				hostComponent.columnProperties = [
-					{ name: "a", isSortable: true },
-					{ name: "b", isSortable: true }
+					{name: "a", isSortable: true},
+					{name: "b", isSortable: true}
 				];
 				hostComponent.orderProperties = ["-a", "-b"];
 
@@ -548,15 +556,15 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: "g", b: "b" },
-					{ a: "f", b: "b" },
-					{ a: "e", b: "b" },
-					{ a: "d", b: "b" },
-					{ a: "c", b: "b" },
-					{ a: "b", b: "b" },
-					{ a: "a", b: "c" },
-					{ a: "a", b: "b" },
-					{ a: "a", b: "a" }
+					{a: "g", b: "b"},
+					{a: "f", b: "b"},
+					{a: "e", b: "b"},
+					{a: "d", b: "b"},
+					{a: "c", b: "b"},
+					{a: "b", b: "b"},
+					{a: "a", b: "c"},
+					{a: "a", b: "b"},
+					{a: "a", b: "a"}
 				]);
 			});
 
@@ -578,14 +586,14 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: 1 },
-					{ a: 1 },
-					{ a: 2 },
-					{ a: 3 },
-					{ a: 4 },
-					{ a: 5 },
-					{ a: 10 },
-					{ a: 20 }
+					{a: 1},
+					{a: 1},
+					{a: 2},
+					{a: 3},
+					{a: 4},
+					{a: 5},
+					{a: 10},
+					{a: 20}
 				]);
 				expect(hostComponent.columnProperties[0].compareFn).toHaveBeenCalled();
 				// Due to browsers, we cannot predict exactly the number of calls. On IE, it is 9 times, on Chrome it can be 7, 8 or 14 times depending on the version
@@ -595,64 +603,64 @@ describe("TableComponent", () => {
 
 			it("should sort data when click on the column", () => {
 				expect(component.dataSource.data).toEqual([
-					{ a: 1 },
-					{ a: 1 },
-					{ a: 3 },
-					{ a: 2 },
-					{ a: 4 },
-					{ a: 5 },
-					{ a: 10 },
-					{ a: 20 }
+					{a: 1},
+					{a: 1},
+					{a: 3},
+					{a: 2},
+					{a: 4},
+					{a: 5},
+					{a: 10},
+					{a: 20}
 				]);
 
 				const column: HTMLElement = hostFixture.debugElement.nativeElement.querySelector(getColumnSelector("a"));
 				column.click();
 				hostFixture.detectChanges();
 				expect(component.dataSource.data).toEqual([
-					{ a: 1 },
-					{ a: 1 },
-					{ a: 2 },
-					{ a: 3 },
-					{ a: 4 },
-					{ a: 5 },
-					{ a: 10 },
-					{ a: 20 }
+					{a: 1},
+					{a: 1},
+					{a: 2},
+					{a: 3},
+					{a: 4},
+					{a: 5},
+					{a: 10},
+					{a: 20}
 				]);
 
 				column.click();
 				hostFixture.detectChanges();
 				expect(component.dataSource.data).toEqual([
-					{ a: 20 },
-					{ a: 10 },
-					{ a: 5 },
-					{ a: 4 },
-					{ a: 3 },
-					{ a: 2 },
-					{ a: 1 },
-					{ a: 1 }
+					{a: 20},
+					{a: 10},
+					{a: 5},
+					{a: 4},
+					{a: 3},
+					{a: 2},
+					{a: 1},
+					{a: 1}
 				]);
 
 				column.click();
 				hostFixture.detectChanges();
 				expect(component.dataSource.data).toEqual([
-					{ a: 1 },
-					{ a: 1 },
-					{ a: 3 },
-					{ a: 2 },
-					{ a: 4 },
-					{ a: 5 },
-					{ a: 10 },
-					{ a: 20 }
+					{a: 1},
+					{a: 1},
+					{a: 3},
+					{a: 2},
+					{a: 4},
+					{a: 5},
+					{a: 10},
+					{a: 20}
 				]);
 			});
 
 			it("should sort data when click on different columns", () => {
 				hostComponent.dummyData = [
-					{ a: 2, b: 3, c: 1 },
-					{ a: 1, b: 2, c: 3 },
-					{ a: 3, b: 1, c: 2 }
+					{a: 2, b: 3, c: 1},
+					{a: 1, b: 2, c: 3},
+					{a: 3, b: 1, c: 2}
 				];
-				hostComponent.columnProperties = [{ name: "a" }, { name: "b" }, { name: "c" }];
+				hostComponent.columnProperties = [{name: "a"}, {name: "b"}, {name: "c"}];
 				hostFixture.detectChanges();
 				expect(component.dataSource.data).toEqual(hostComponent.dummyData);
 
@@ -662,41 +670,41 @@ describe("TableComponent", () => {
 
 				columnA.click();
 				expect(component.dataSource.data).toEqual([
-					{ a: 1, b: 2, c: 3 },
-					{ a: 2, b: 3, c: 1 },
-					{ a: 3, b: 1, c: 2 }
+					{a: 1, b: 2, c: 3},
+					{a: 2, b: 3, c: 1},
+					{a: 3, b: 1, c: 2}
 				]);
 				columnA.click();
 				expect(component.dataSource.data).toEqual([
-					{ a: 3, b: 1, c: 2 },
-					{ a: 2, b: 3, c: 1 },
-					{ a: 1, b: 2, c: 3 }
+					{a: 3, b: 1, c: 2},
+					{a: 2, b: 3, c: 1},
+					{a: 1, b: 2, c: 3}
 				]);
 
 				columnB.click();
 				expect(component.dataSource.data).toEqual([
-					{ a: 3, b: 1, c: 2 },
-					{ a: 1, b: 2, c: 3 },
-					{ a: 2, b: 3, c: 1 }
+					{a: 3, b: 1, c: 2},
+					{a: 1, b: 2, c: 3},
+					{a: 2, b: 3, c: 1}
 				]);
 				columnB.click();
 				expect(component.dataSource.data).toEqual([
-					{ a: 2, b: 3, c: 1 },
-					{ a: 1, b: 2, c: 3 },
-					{ a: 3, b: 1, c: 2 }
+					{a: 2, b: 3, c: 1},
+					{a: 1, b: 2, c: 3},
+					{a: 3, b: 1, c: 2}
 				]);
 
 				columnC.click();
 				expect(component.dataSource.data).toEqual([
-					{ a: 2, b: 3, c: 1 },
-					{ a: 3, b: 1, c: 2 },
-					{ a: 1, b: 2, c: 3 }
+					{a: 2, b: 3, c: 1},
+					{a: 3, b: 1, c: 2},
+					{a: 1, b: 2, c: 3}
 				]);
 				columnC.click();
 				expect(component.dataSource.data).toEqual([
-					{ a: 1, b: 2, c: 3 },
-					{ a: 3, b: 1, c: 2 },
-					{ a: 2, b: 3, c: 1 }
+					{a: 1, b: 2, c: 3},
+					{a: 3, b: 1, c: 2},
+					{a: 2, b: 3, c: 1}
 				]);
 			});
 		});
@@ -704,16 +712,16 @@ describe("TableComponent", () => {
 		describe("nested data", () => {
 			beforeEach(() => {
 				hostComponent.dummyData = [
-					{ a: { b: 1 } },
-					{ a: { b: 1 } },
-					{ a: { b: 3 } },
-					{ a: { b: 2 } },
-					{ a: { b: 4 } },
-					{ a: { b: 5 } },
-					{ a: { b: 6 } },
-					{ a: { b: 7 } }
+					{a: {b: 1}},
+					{a: {b: 1}},
+					{a: {b: 3}},
+					{a: {b: 2}},
+					{a: {b: 4}},
+					{a: {b: 5}},
+					{a: {b: 6}},
+					{a: {b: 7}}
 				];
-				hostComponent.columnProperties = [{ name: "a.b", isSortable: true }];
+				hostComponent.columnProperties = [{name: "a.b", isSortable: true}];
 
 				hostFixture.detectChanges(); // trigger data binding
 				component.ngAfterViewInit();
@@ -728,14 +736,14 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: { b: 1 } },
-					{ a: { b: 1 } },
-					{ a: { b: 2 } },
-					{ a: { b: 3 } },
-					{ a: { b: 4 } },
-					{ a: { b: 5 } },
-					{ a: { b: 6 } },
-					{ a: { b: 7 } }
+					{a: {b: 1}},
+					{a: {b: 1}},
+					{a: {b: 2}},
+					{a: {b: 3}},
+					{a: {b: 4}},
+					{a: {b: 5}},
+					{a: {b: 6}},
+					{a: {b: 7}}
 				]);
 			});
 
@@ -748,32 +756,32 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: { b: 7 } },
-					{ a: { b: 6 } },
-					{ a: { b: 5 } },
-					{ a: { b: 4 } },
-					{ a: { b: 3 } },
-					{ a: { b: 2 } },
-					{ a: { b: 1 } },
-					{ a: { b: 1 } }
+					{a: {b: 7}},
+					{a: {b: 6}},
+					{a: {b: 5}},
+					{a: {b: 4}},
+					{a: {b: 3}},
+					{a: {b: 2}},
+					{a: {b: 1}},
+					{a: {b: 1}}
 				]);
 			});
 
 			it("should sort data descending column A.B then ascending column B", () => {
 				hostComponent.dummyData = [
-					{ a: { b: 1 }, b: 1 },
-					{ a: { b: 1 }, b: 3 },
-					{ a: { b: 1 }, b: 2 },
-					{ a: { b: 3 }, b: 2 },
-					{ a: { b: 2 }, b: 2 },
-					{ a: { b: 4 }, b: 2 },
-					{ a: { b: 5 }, b: 2 },
-					{ a: { b: 6 }, b: 2 },
-					{ a: { b: 7 }, b: 2 }
+					{a: {b: 1}, b: 1},
+					{a: {b: 1}, b: 3},
+					{a: {b: 1}, b: 2},
+					{a: {b: 3}, b: 2},
+					{a: {b: 2}, b: 2},
+					{a: {b: 4}, b: 2},
+					{a: {b: 5}, b: 2},
+					{a: {b: 6}, b: 2},
+					{a: {b: 7}, b: 2}
 				];
 				hostComponent.columnProperties = [
-					{ name: "a.b", isSortable: true },
-					{ name: "b", isSortable: true }
+					{name: "a.b", isSortable: true},
+					{name: "b", isSortable: true}
 				];
 				hostComponent.orderProperties = ["-a.b", "b"];
 
@@ -783,33 +791,33 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: { b: 7 }, b: 2 },
-					{ a: { b: 6 }, b: 2 },
-					{ a: { b: 5 }, b: 2 },
-					{ a: { b: 4 }, b: 2 },
-					{ a: { b: 3 }, b: 2 },
-					{ a: { b: 2 }, b: 2 },
-					{ a: { b: 1 }, b: 1 },
-					{ a: { b: 1 }, b: 2 },
-					{ a: { b: 1 }, b: 3 }
+					{a: {b: 7}, b: 2},
+					{a: {b: 6}, b: 2},
+					{a: {b: 5}, b: 2},
+					{a: {b: 4}, b: 2},
+					{a: {b: 3}, b: 2},
+					{a: {b: 2}, b: 2},
+					{a: {b: 1}, b: 1},
+					{a: {b: 1}, b: 2},
+					{a: {b: 1}, b: 3}
 				]);
 			});
 
 			it("should sort data descending column A then descending column B.A", () => {
 				hostComponent.dummyData = [
-					{ a: 1, b: { a: 1 } },
-					{ a: 1, b: { a: 3 } },
-					{ a: 1, b: { a: 2 } },
-					{ a: 3, b: { a: 2 } },
-					{ a: 2, b: { a: 2 } },
-					{ a: 4, b: { a: 2 } },
-					{ a: 5, b: { a: 2 } },
-					{ a: 6, b: { a: 2 } },
-					{ a: 7, b: { a: 2 } }
+					{a: 1, b: {a: 1}},
+					{a: 1, b: {a: 3}},
+					{a: 1, b: {a: 2}},
+					{a: 3, b: {a: 2}},
+					{a: 2, b: {a: 2}},
+					{a: 4, b: {a: 2}},
+					{a: 5, b: {a: 2}},
+					{a: 6, b: {a: 2}},
+					{a: 7, b: {a: 2}}
 				];
 				hostComponent.columnProperties = [
-					{ name: "a", isSortable: true },
-					{ name: "b.a", isSortable: true }
+					{name: "a", isSortable: true},
+					{name: "b.a", isSortable: true}
 				];
 				hostComponent.orderProperties = ["-a", "-b.a"];
 
@@ -819,15 +827,15 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: 7, b: { a: 2 } },
-					{ a: 6, b: { a: 2 } },
-					{ a: 5, b: { a: 2 } },
-					{ a: 4, b: { a: 2 } },
-					{ a: 3, b: { a: 2 } },
-					{ a: 2, b: { a: 2 } },
-					{ a: 1, b: { a: 3 } },
-					{ a: 1, b: { a: 2 } },
-					{ a: 1, b: { a: 1 } }
+					{a: 7, b: {a: 2}},
+					{a: 6, b: {a: 2}},
+					{a: 5, b: {a: 2}},
+					{a: 4, b: {a: 2}},
+					{a: 3, b: {a: 2}},
+					{a: 2, b: {a: 2}},
+					{a: 1, b: {a: 3}},
+					{a: 1, b: {a: 2}},
+					{a: 1, b: {a: 1}}
 				]);
 			});
 
@@ -849,14 +857,14 @@ describe("TableComponent", () => {
 				component.sortData();
 
 				expect(component.dataSource.data).toEqual([
-					{ a: { b: 1 } },
-					{ a: { b: 1 } },
-					{ a: { b: 2 } },
-					{ a: { b: 3 } },
-					{ a: { b: 4 } },
-					{ a: { b: 5 } },
-					{ a: { b: 6 } },
-					{ a: { b: 7 } }
+					{a: {b: 1}},
+					{a: {b: 1}},
+					{a: {b: 2}},
+					{a: {b: 3}},
+					{a: {b: 4}},
+					{a: {b: 5}},
+					{a: {b: 6}},
+					{a: {b: 7}}
 				]);
 				expect(hostComponent.columnProperties[0].compareFn).toHaveBeenCalled();
 				// Due to browsers, we cannot predict exactly the number of calls. On IE, it is 9 times, on Chrome it can be 7, 8 or 14 times depending on the version
@@ -878,18 +886,18 @@ describe("TableComponent", () => {
 
 		beforeEach(() => {
 			hostComponent.columnProperties = [
-				{ name: "a", isFilterable: true },
-				{ name: "b", isFilterable: true }
+				{name: "a", isFilterable: true},
+				{name: "b", isFilterable: true}
 			];
 			hostComponent.dummyData = [
-				{ a: 1, b: "b" },
-				{ a: 2, b: "b2" },
-				{ a: 3, b: "aisfollowedbyc" },
-				{ a: 4, b: "b4" },
-				{ a: 5, b: "b5" },
-				{ a: 6, b: "b6" },
-				{ a: 7, b: "b7" },
-				{ a: 7, b: "ThisShouldBeAUniqueValue" }
+				{a: 1, b: "b"},
+				{a: 2, b: "b2"},
+				{a: 3, b: "aisfollowedbyc"},
+				{a: 4, b: "b4"},
+				{a: 5, b: "b5"},
+				{a: 6, b: "b6"},
+				{a: 7, b: "b7"},
+				{a: 7, b: "ThisShouldBeAUniqueValue"}
 			];
 			hostComponent.tableFilter = {};
 			hostFixture.detectChanges(); // trigger data binding
@@ -903,7 +911,7 @@ describe("TableComponent", () => {
 				};
 				hostFixture.detectChanges();
 
-				expect(component.dataSource.filteredData).toEqual([{ a: 1, b: "b" }]);
+				expect(component.dataSource.filteredData).toEqual([{a: 1, b: "b"}]);
 			});
 
 			it("should trigger the filtering when filterValue contains a wildcard '*'", () => {
@@ -912,7 +920,7 @@ describe("TableComponent", () => {
 				};
 				hostFixture.detectChanges();
 
-				expect(component.dataSource.filteredData).toEqual([{ a: 3, b: "aisfollowedbyc" }]);
+				expect(component.dataSource.filteredData).toEqual([{a: 3, b: "aisfollowedbyc"}]);
 			});
 
 			it("should trigger the filtering and return empty data when the data does not contain the filterValue", () => {
@@ -932,7 +940,7 @@ describe("TableComponent", () => {
 				expect(component.dataSource.filteredData).toEqual(component.data);
 				expect(component.dataSource.filteredData).toEqual(hostComponent.dummyData);
 
-				component.filter = { ...component.filter, globalFilterValue: <any>undefined };
+				component.filter = {...component.filter, globalFilterValue: <any>undefined};
 				component.applyFilter();
 				expect(component.dataSource.filteredData).toEqual(component.data);
 				expect(component.dataSource.filteredData).toEqual(hostComponent.dummyData);
@@ -940,67 +948,67 @@ describe("TableComponent", () => {
 
 			it("should filter the data based on the filterValue even if such value contains regexp special characters", () => {
 				const mockData: object[] = [
-					{ column1: "content1" + "?" + "a", column2: "content2n" },
-					{ column1: "content1" + "*" + "b", column2: "content2m" },
-					{ column1: "content1" + "[" + "c", column2: "content2l" },
-					{ column1: "content1" + "]" + "d", column2: "content2k" },
-					{ column1: "content1" + "\\" + "e", column2: "content2j" },
-					{ column1: "content1" + "(" + "f", column2: "content2i" },
-					{ column1: "content1" + ")" + "g", column2: "content2h" },
-					{ column1: "content1" + "$" + "h", column2: "content2g" },
-					{ column1: "content1" + "-" + "i", column2: "content2f" },
-					{ column1: "content1" + "^" + "j", column2: "content2e" },
-					{ column1: "content1" + ":" + "k", column2: "content2d" },
-					{ column1: "content1" + "!" + "l", column2: "content2c" },
-					{ column1: "content1" + "=" + "m", column2: "content2b" },
-					{ column1: "content1" + "+" + "n", column2: "content2a" }
+					{column1: "content1" + "?" + "a", column2: "content2n"},
+					{column1: "content1" + "*" + "b", column2: "content2m"},
+					{column1: "content1" + "[" + "c", column2: "content2l"},
+					{column1: "content1" + "]" + "d", column2: "content2k"},
+					{column1: "content1" + "\\" + "e", column2: "content2j"},
+					{column1: "content1" + "(" + "f", column2: "content2i"},
+					{column1: "content1" + ")" + "g", column2: "content2h"},
+					{column1: "content1" + "$" + "h", column2: "content2g"},
+					{column1: "content1" + "-" + "i", column2: "content2f"},
+					{column1: "content1" + "^" + "j", column2: "content2e"},
+					{column1: "content1" + ":" + "k", column2: "content2d"},
+					{column1: "content1" + "!" + "l", column2: "content2c"},
+					{column1: "content1" + "=" + "m", column2: "content2b"},
+					{column1: "content1" + "+" + "n", column2: "content2a"}
 				];
 				hostComponent.columnProperties = [
-					{ name: "column1", isFilterable: true },
-					{ name: "column2", isFilterable: true }
+					{name: "column1", isFilterable: true},
+					{name: "column2", isFilterable: true}
 				];
 				hostComponent.dummyData = mockData;
 
 				hostFixture.detectChanges(); // trigger data binding
 				component.ngAfterViewInit();
 
-				assertFilteredData(component, { globalFilterValue: "*" }, mockData);
-				assertFilteredData(component, { globalFilterValue: "\\*" }, [mockData[1]]);
-				assertFilteredData(component, { globalFilterValue: "content*e" }, [mockData[4], mockData[9]]);
-				assertFilteredData(component, { globalFilterValue: "content*" }, mockData);
-				assertFilteredData(component, { globalFilterValue: "\\?" }, [mockData[0]]);
-				assertFilteredData(component, { globalFilterValue: "content?b" }, [mockData[12]]);
-				assertFilteredData(component, { globalFilterValue: "content??b" }, [mockData[1]]);
-				assertFilteredData(component, { globalFilterValue: "content?" }, mockData);
-				assertFilteredData(component, { globalFilterValue: "[" }, [mockData[2]]);
-				assertFilteredData(component, { globalFilterValue: "]" }, [mockData[3]]);
-				assertFilteredData(component, { globalFilterValue: "\\" }, [mockData[4]]);
-				assertFilteredData(component, { globalFilterValue: "(" }, [mockData[5]]);
-				assertFilteredData(component, { globalFilterValue: ")" }, [mockData[6]]);
-				assertFilteredData(component, { globalFilterValue: "$" }, [mockData[7]]);
-				assertFilteredData(component, { globalFilterValue: "-" }, [mockData[8]]);
-				assertFilteredData(component, { globalFilterValue: "^" }, [mockData[9]]);
-				assertFilteredData(component, { globalFilterValue: ":" }, [mockData[10]]);
-				assertFilteredData(component, { globalFilterValue: "!" }, [mockData[11]]);
-				assertFilteredData(component, { globalFilterValue: "=" }, [mockData[12]]);
-				assertFilteredData(component, { globalFilterValue: "+" }, [mockData[13]]);
+				assertFilteredData(component, {globalFilterValue: "*"}, mockData);
+				assertFilteredData(component, {globalFilterValue: "\\*"}, [mockData[1]]);
+				assertFilteredData(component, {globalFilterValue: "content*e"}, [mockData[4], mockData[9]]);
+				assertFilteredData(component, {globalFilterValue: "content*"}, mockData);
+				assertFilteredData(component, {globalFilterValue: "\\?"}, [mockData[0]]);
+				assertFilteredData(component, {globalFilterValue: "content?b"}, [mockData[12]]);
+				assertFilteredData(component, {globalFilterValue: "content??b"}, [mockData[1]]);
+				assertFilteredData(component, {globalFilterValue: "content?"}, mockData);
+				assertFilteredData(component, {globalFilterValue: "["}, [mockData[2]]);
+				assertFilteredData(component, {globalFilterValue: "]"}, [mockData[3]]);
+				assertFilteredData(component, {globalFilterValue: "\\"}, [mockData[4]]);
+				assertFilteredData(component, {globalFilterValue: "("}, [mockData[5]]);
+				assertFilteredData(component, {globalFilterValue: ")"}, [mockData[6]]);
+				assertFilteredData(component, {globalFilterValue: "$"}, [mockData[7]]);
+				assertFilteredData(component, {globalFilterValue: "-"}, [mockData[8]]);
+				assertFilteredData(component, {globalFilterValue: "^"}, [mockData[9]]);
+				assertFilteredData(component, {globalFilterValue: ":"}, [mockData[10]]);
+				assertFilteredData(component, {globalFilterValue: "!"}, [mockData[11]]);
+				assertFilteredData(component, {globalFilterValue: "="}, [mockData[12]]);
+				assertFilteredData(component, {globalFilterValue: "+"}, [mockData[13]]);
 			});
 
 			it("should update the total number of items to paginate when the filter is changed", () => {
-				hostComponent.tableFilter = { globalFilterPresent: true, globalFilterValue: "ThisShouldBeAUniqueValue" };
+				hostComponent.tableFilter = {globalFilterPresent: true, globalFilterValue: "ThisShouldBeAUniqueValue"};
 				hostFixture.detectChanges();
 				expect(component.paginationConfig.totalItems).toBe(1);
 			});
 
 			it("should add the 'filter-enabled' CSS class to the global filter button only when filterValue is not empty", () => {
-				hostComponent.tableFilter = { globalFilterValue: "some value" };
+				hostComponent.tableFilter = {globalFilterValue: "some value"};
 				hostFixture.detectChanges();
 
 				const globalFilterButton = hostFixture.debugElement.query(By.css(".header .actions .button-global-filter"));
 
 				expect(globalFilterButton.classes["filter-enabled"]).toBe(true);
 
-				hostComponent.tableFilter = { globalFilterValue: "" };
+				hostComponent.tableFilter = {globalFilterValue: ""};
 				hostFixture.detectChanges();
 
 				expect(globalFilterButton.classes["filter-enabled"]).toBe(false);
@@ -1010,31 +1018,31 @@ describe("TableComponent", () => {
 		describe("column filter", () => {
 			it("should trigger the filtering when filterValue is not empty", () => {
 				hostComponent.tableFilter = {
-					columns: [{ columnName: "a", filterValue: "1" }]
+					columns: [{columnName: "a", filterValue: "1"}]
 				};
 
 				hostFixture.detectChanges(); // trigger data binding
 				component.ngAfterViewInit();
 
 				component.applyFilter();
-				expect(component.dataSource.filteredData).toEqual([{ a: 1, b: "b" }]);
+				expect(component.dataSource.filteredData).toEqual([{a: 1, b: "b"}]);
 			});
 
 			it("should trigger the filtering when filterValue contains a wildcard '*'", () => {
 				hostComponent.tableFilter = {
-					columns: [{ columnName: "b", filterValue: "a*c" }]
+					columns: [{columnName: "b", filterValue: "a*c"}]
 				};
 
 				hostFixture.detectChanges(); // trigger data binding
 				component.ngAfterViewInit();
 
 				component.applyFilter();
-				expect(component.dataSource.filteredData).toEqual([{ a: 3, b: "aisfollowedbyc" }]);
+				expect(component.dataSource.filteredData).toEqual([{a: 3, b: "aisfollowedbyc"}]);
 			});
 
 			it("should trigger the filtering and return empty data when the data does not contain the filterValue", () => {
 				hostComponent.tableFilter = {
-					columns: [{ columnName: "a", filterValue: "85" }]
+					columns: [{columnName: "a", filterValue: "85"}]
 				};
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -1046,7 +1054,7 @@ describe("TableComponent", () => {
 
 			it("should NOT trigger the filtering when filterValue is empty or undefined", () => {
 				hostComponent.tableFilter = {
-					columns: [{ columnName: "a", filterValue: "" }]
+					columns: [{columnName: "a", filterValue: ""}]
 				};
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -1057,7 +1065,7 @@ describe("TableComponent", () => {
 				expect(component.dataSource.filteredData).toEqual(hostComponent.dummyData);
 
 				hostComponent.tableFilter = {
-					columns: [{ columnName: "a", filterValue: <any>undefined }]
+					columns: [{columnName: "a", filterValue: <any>undefined}]
 				};
 
 				hostFixture.detectChanges(); // trigger data binding
@@ -1070,55 +1078,75 @@ describe("TableComponent", () => {
 
 			it("should filter the data based on the filterValue even if such value contains regexp special characters", () => {
 				const mockData: object[] = [
-					{ column1: "content1" + "?" + "a", column2: "content2n" },
-					{ column1: "content1" + "*" + "b", column2: "content2m" },
-					{ column1: "content1" + "[" + "c", column2: "content2l" },
-					{ column1: "content1" + "]" + "d", column2: "content2k" },
-					{ column1: "content1" + "\\" + "e", column2: "content2j" },
-					{ column1: "content1" + "(" + "f", column2: "content2i" },
-					{ column1: "content1" + ")" + "g", column2: "content2h" },
-					{ column1: "content1" + "$" + "h", column2: "content2g" },
-					{ column1: "content1" + "-" + "i", column2: "content2f" },
-					{ column1: "content1" + "^" + "j", column2: "content2e" },
-					{ column1: "content1" + ":" + "k", column2: "content2d" },
-					{ column1: "content1" + "!" + "l", column2: "content2c" },
-					{ column1: "content1" + "=" + "m", column2: "content2b" },
-					{ column1: "content1" + "+" + "n", column2: "content2a" }
+					{column1: "content1" + "?" + "a", column2: "content2n"},
+					{column1: "content1" + "*" + "b", column2: "content2m"},
+					{column1: "content1" + "[" + "c", column2: "content2l"},
+					{column1: "content1" + "]" + "d", column2: "content2k"},
+					{column1: "content1" + "\\" + "e", column2: "content2j"},
+					{column1: "content1" + "(" + "f", column2: "content2i"},
+					{column1: "content1" + ")" + "g", column2: "content2h"},
+					{column1: "content1" + "$" + "h", column2: "content2g"},
+					{column1: "content1" + "-" + "i", column2: "content2f"},
+					{column1: "content1" + "^" + "j", column2: "content2e"},
+					{column1: "content1" + ":" + "k", column2: "content2d"},
+					{column1: "content1" + "!" + "l", column2: "content2c"},
+					{column1: "content1" + "=" + "m", column2: "content2b"},
+					{column1: "content1" + "+" + "n", column2: "content2a"}
 				];
 				hostComponent.columnProperties = [
-					{ name: "column1", isFilterable: true },
-					{ name: "column2", isFilterable: true }
+					{name: "column1", isFilterable: true},
+					{name: "column2", isFilterable: true}
 				];
 				hostComponent.dummyData = mockData;
 
 				hostFixture.detectChanges(); // trigger data binding
 				component.ngAfterViewInit();
 
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "*" }] }, mockData);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "\\*" }] }, [mockData[1]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "content*e" }] }, [mockData[4]]);
-				assertFilteredData(component, { columns: [{ columnName: "column2", filterValue: "content*e" }] }, [mockData[9]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "content*" }] }, mockData);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "\\?" }] }, [mockData[0]]);
-				assertFilteredData(component, { columns: [{ columnName: "column2", filterValue: "content?b" }] }, [mockData[12]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "content??b" }] }, [mockData[1]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "content?" }] }, mockData);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "[" }] }, [mockData[2]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "]" }] }, [mockData[3]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "\\" }] }, [mockData[4]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "(" }] }, [mockData[5]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: ")" }] }, [mockData[6]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "$" }] }, [mockData[7]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "-" }] }, [mockData[8]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "^" }] }, [mockData[9]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: ":" }] }, [mockData[10]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "!" }] }, [mockData[11]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "=" }] }, [mockData[12]]);
-				assertFilteredData(component, { columns: [{ columnName: "column1", filterValue: "+" }] }, [mockData[13]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "*"}]}, mockData);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "\\*"}]}, [mockData[1]]);
+				assertFilteredData(component, {
+					columns: [{
+						columnName: "column1",
+						filterValue: "content*e"
+					}]
+				}, [mockData[4]]);
+				assertFilteredData(component, {
+					columns: [{
+						columnName: "column2",
+						filterValue: "content*e"
+					}]
+				}, [mockData[9]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "content*"}]}, mockData);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "\\?"}]}, [mockData[0]]);
+				assertFilteredData(component, {
+					columns: [{
+						columnName: "column2",
+						filterValue: "content?b"
+					}]
+				}, [mockData[12]]);
+				assertFilteredData(component, {
+					columns: [{
+						columnName: "column1",
+						filterValue: "content??b"
+					}]
+				}, [mockData[1]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "content?"}]}, mockData);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "["}]}, [mockData[2]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "]"}]}, [mockData[3]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "\\"}]}, [mockData[4]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "("}]}, [mockData[5]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: ")"}]}, [mockData[6]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "$"}]}, [mockData[7]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "-"}]}, [mockData[8]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "^"}]}, [mockData[9]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: ":"}]}, [mockData[10]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "!"}]}, [mockData[11]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "="}]}, [mockData[12]]);
+				assertFilteredData(component, {columns: [{columnName: "column1", filterValue: "+"}]}, [mockData[13]]);
 			});
 
 			it("should update the total number of items to paginate when the filter is changed", () => {
-				hostComponent.tableFilter = { columns: [{ columnName: "b", filterValue: "ThisShouldBeAUniqueValue" }] };
+				hostComponent.tableFilter = {columns: [{columnName: "b", filterValue: "ThisShouldBeAUniqueValue"}]};
 				hostFixture.detectChanges();
 				expect(component.paginationConfig.totalItems).toBe(1);
 			});
@@ -1148,7 +1176,7 @@ describe("TableComponent", () => {
 		});
 
 		it("should NOT display the 'actions' column when 'tableRowActions' input does NOT contain any action", () => {
-			hostComponent.tableRowActions = { actions: [] };
+			hostComponent.tableRowActions = {actions: []};
 			hostFixture.detectChanges();
 
 			const actionsColumnElement = hostFixture.nativeElement.querySelector(actionsColumnSelector);
@@ -1165,11 +1193,14 @@ describe("TableComponent", () => {
 	});
 
 	describe("column visibility", () => {
-		const columns: StarkTableColumnProperties[] = [{ name: "a" }, { name: "b", isVisible: false }, { name: "c", isVisible: true }];
+		const columns: StarkTableColumnProperties[] = [{name: "a"}, {name: "b", isVisible: false}, {
+			name: "c",
+			isVisible: true
+		}];
 		const data: any = [
-			{ a: 1, b: "b1", c: "c1" },
-			{ a: 2, b: "b2", c: "c2" },
-			{ a: 3, b: "b3", c: "c3" }
+			{a: 1, b: "b1", c: "c1"},
+			{a: 2, b: "b2", c: "c2"},
+			{a: 3, b: "b3", c: "c3"}
 		];
 		beforeEach(() => {
 			hostComponent.columnProperties = columns;
@@ -1186,7 +1217,7 @@ describe("TableComponent", () => {
 				const text: string = (tableHeaderElement.textContent || "").trim();
 
 				const column: StarkTableColumnProperties | undefined = (<StarkTableColumnProperties[]>hostComponent.columnProperties).find(
-					({ name }: StarkTableColumnProperties) => name === text
+					({name}: StarkTableColumnProperties) => name === text
 				);
 				expect(column).toBeTruthy();
 				if (!column) {
@@ -1249,8 +1280,8 @@ describe("TableComponent", () => {
 		it("should return the sorting direction of the given column if such column exists in the orderProperties array", () => {
 			hostComponent.dummyData = [];
 			hostComponent.columnProperties = [
-				{ name: "a", isSortable: true },
-				{ name: "b", isSortable: true }
+				{name: "a", isSortable: true},
+				{name: "b", isSortable: true}
 			];
 			hostComponent.orderProperties = ["-a", "b"];
 
@@ -1264,8 +1295,8 @@ describe("TableComponent", () => {
 		it(`should return an empty string ("") when the given column DOES NOT exist in the orderProperties array`, () => {
 			hostComponent.dummyData = [];
 			hostComponent.columnProperties = [
-				{ name: "a", isSortable: true },
-				{ name: "b", isSortable: true }
+				{name: "a", isSortable: true},
+				{name: "b", isSortable: true}
 			];
 			hostComponent.orderProperties = ["-a", "b"];
 
@@ -1294,8 +1325,8 @@ describe("TableComponent", () => {
 		it("should return the sorting priority of the given column according to its position in the orderProperties array", () => {
 			hostComponent.dummyData = [];
 			hostComponent.columnProperties = [
-				{ name: "a", isSortable: true },
-				{ name: "b", isSortable: true }
+				{name: "a", isSortable: true},
+				{name: "b", isSortable: true}
 			];
 			hostComponent.orderProperties = ["-a", "b"];
 
@@ -1309,8 +1340,8 @@ describe("TableComponent", () => {
 		it(`should return undefined when the given column DOES NOT exist in the orderProperties array`, () => {
 			hostComponent.dummyData = [];
 			hostComponent.columnProperties = [
-				{ name: "a", isSortable: true },
-				{ name: "b", isSortable: true }
+				{name: "a", isSortable: true},
+				{name: "b", isSortable: true}
 			];
 			hostComponent.orderProperties = ["-a", "b"];
 
@@ -1344,7 +1375,7 @@ describe("TableComponent", () => {
 
 		it("should return 'undefined' if dataSource is not initialized yet", () => {
 			component.dataSource = <any>undefined;
-			expect(component.getRowIndex({ name: "dummy-row-data" })).toBeUndefined();
+			expect(component.getRowIndex({name: "dummy-row-data"})).toBeUndefined();
 		});
 	});
 
@@ -1399,7 +1430,7 @@ describe("TableComponent", () => {
 			hostComponent.tableFilter = {
 				globalFilterValue: dummyGlobalFilterValue,
 				resetGlobalFilterOnDataChange: false,
-				columns: [{ columnName: "a", filterValue: dummyColumnFilterValue, resetFilterOnDataChange: false }]
+				columns: [{columnName: "a", filterValue: dummyColumnFilterValue, resetFilterOnDataChange: false}]
 			};
 			hostFixture.detectChanges(); // trigger data binding
 			component.ngAfterViewInit();
@@ -1414,16 +1445,19 @@ describe("TableComponent", () => {
 	// TODO Move this test in "column.component.spec.ts" once https://github.com/NationalBankBelgium/stark/issues/1469 is solved.
 	describe("setCellFormatter", () => {
 		const dummyData: object[] = [
-			{ id: 1, description: "dummy 1", test: "test-1" },
-			{ id: 2, test: "test-2" },
-			{ id: 3, description: "dummy 3" }
+			{id: 1, description: "dummy 1", test: "test-1"},
+			{id: 2, test: "test-2"},
+			{id: 3, description: "dummy 3"}
 		];
 
 		beforeEach(() => {
 			hostComponent.columnProperties = [
-				{ name: "id", cellFormatter: (value: any): string => (value === 1 ? "one" : "") },
-				{ name: "description", cellFormatter: (value: any): string => (typeof value === "undefined" ? "-null-" : value) },
-				{ name: "test" }
+				{name: "id", cellFormatter: (value: any): string => (value === 1 ? "one" : "")},
+				{
+					name: "description",
+					cellFormatter: (value: any): string => (typeof value === "undefined" ? "-null-" : value)
+				},
+				{name: "test"}
 			];
 			hostComponent.dummyData = dummyData;
 
@@ -1460,8 +1494,12 @@ describe("TableComponent", () => {
 		beforeEach(() => {
 			hostComponent.rowClassNameFn = returnEvenAndOdd;
 			hostComponent.columnProperties = [
-				{ name: "id", cellClassName: (value: any): string => (value === 1 ? "one" : "") },
-				{ name: "description", cellClassName: "description-body-cell", headerClassName: "description-header-cell" }
+				{name: "id", cellClassName: (value: any): string => (value === 1 ? "one" : "")},
+				{
+					name: "description",
+					cellClassName: "description-body-cell",
+					headerClassName: "description-header-cell"
+				}
 			];
 			hostComponent.dummyData = DUMMY_DATA;
 
@@ -1510,8 +1548,11 @@ describe("TableComponent", () => {
 		beforeEach(() => {
 			hostComponent.customRowTesting = true;
 			hostComponent.columnProperties = [
-				{ name: "id" },
-				{ name: "description", cellClassName: (description: string): string => (description === "dummy 2" ? "danger" : "") }
+				{name: "id"},
+				{
+					name: "description",
+					cellClassName: (description: string): string => (description === "dummy 2" ? "danger" : "")
+				}
 			];
 			hostComponent.dummyData = DUMMY_DATA;
 
@@ -1530,7 +1571,7 @@ describe("TableComponent", () => {
 		const onClickCallbackSpy = createSpy("onClickCallback");
 
 		beforeEach(() => {
-			hostComponent.columnProperties = [{ name: "id" }, { name: "description", onClickCallback: onClickCallbackSpy }];
+			hostComponent.columnProperties = [{name: "id"}, {name: "description", onClickCallback: onClickCallbackSpy}];
 			hostComponent.dummyData = DUMMY_DATA;
 			hostComponent.rowClickHandler = createSpy("rowClickHandlerSpy", () => undefined); // add empty function so spy can find it
 
@@ -1566,7 +1607,7 @@ describe("TableComponent", () => {
 
 	describe("rowClick", () => {
 		beforeEach(() => {
-			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+			hostComponent.columnProperties = [{name: "id"}, {name: "description"}];
 			hostComponent.dummyData = DUMMY_DATA;
 
 			hostFixture.detectChanges(); // trigger data binding
@@ -1600,7 +1641,7 @@ describe("TableComponent", () => {
 
 	describe("selection", () => {
 		beforeEach(() => {
-			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+			hostComponent.columnProperties = [{name: "id"}, {name: "description"}];
 			hostComponent.dummyData = DUMMY_DATA;
 			hostComponent.rowsSelectable = true;
 
@@ -1653,7 +1694,7 @@ describe("TableComponent", () => {
 			const handleChange = jasmine.createSpy();
 
 			beforeEach(() => {
-				hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+				hostComponent.columnProperties = [{name: "id"}, {name: "description"}];
 				hostComponent.dummyData = DUMMY_DATA;
 
 				hostComponent.selection = new SelectionModel<object>(true);
@@ -1676,7 +1717,7 @@ describe("TableComponent", () => {
 			});
 
 			it("should select all rows available after filter when clicking the select all", () => {
-				component.filter.columns = [{ columnName: "id", filterValue: "1" }];
+				component.filter.columns = [{columnName: "id", filterValue: "1"}];
 				hostFixture.detectChanges();
 
 				selectAllButton.click();
@@ -1691,7 +1732,7 @@ describe("TableComponent", () => {
 		const collapsedClass = "expanded";
 		beforeEach(() => {
 			hostComponent.expandRowTesting = true;
-			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+			hostComponent.columnProperties = [{name: "id"}, {name: "description"}];
 			hostComponent.dummyData = DUMMY_DATA;
 			hostComponent.rowClickHandler = (row: object) =>
 				(hostComponent.expandedRows = hostComponent.expandedRows.includes(row) ? [] : [row]);
@@ -1728,7 +1769,7 @@ describe("TableComponent", () => {
 
 	describe("async", () => {
 		beforeEach(() => {
-			hostComponent.columnProperties = [{ name: "id" }, { name: "description" }];
+			hostComponent.columnProperties = [{name: "id"}, {name: "description"}];
 			hostComponent.dummyData = <any>undefined; // data starts uninitialized
 
 			hostFixture.detectChanges(); // trigger data binding
@@ -1759,8 +1800,20 @@ describe("TableComponent", () => {
 	});
 
 	describe("custom table actions", () => {
-		const action1: StarkAction = { id: "action-1", label: "action 1", icon: "question", isEnabled: true, actionCall: noop };
-		const action2: StarkAction = { id: "action-2", label: "action 2", icon: "question", isEnabled: true, actionCall: noop };
+		const action1: StarkAction = {
+			id: "action-1",
+			label: "action 1",
+			icon: "question",
+			isEnabled: true,
+			actionCall: noop
+		};
+		const action2: StarkAction = {
+			id: "action-2",
+			label: "action 2",
+			icon: "question",
+			isEnabled: true,
+			actionCall: noop
+		};
 
 		beforeEach(() => {
 			hostComponent.customTableActions = [action1, action2];
@@ -1784,6 +1837,98 @@ describe("TableComponent", () => {
 
 			const actionElement2 = hostFixture.debugElement.query(By.css("stark-action-bar #-action-2"));
 			expect(actionElement2).toBeNull("Section action should not be rendered.");
+		});
+	});
+
+	describe("tooltip", () => {
+		const dummyData: object[] = [
+			{ id: 1, description: { label: "dummy 1", tooltip: "dummy 1 tooltip" }, test: "test-1" },
+			{ id: 2, description: { label: "dummy 2", tooltip: "dummy 2 tooltip" }, test: "test-2" },
+			{ id: 3, description:{ label: "dummy 3", tooltip: "dummy 3 tooltip" }, test: "test-3" }
+		];
+
+		const tooltipSelector = "mat-tooltip-component div.mat-tooltip";
+		const columnSelectorPart = "table tbody tr td.mat-column-";
+
+		beforeEach(() => {
+			hostComponent.columnProperties = [
+				{ 
+					name: "id", 
+					cellTooltip: "id tooltip",
+					cellTooltipClassName: (id: number): string => id > 1 ? "tooltip-normal" : "tooltip-first"
+				},
+				{
+					name: "description",
+					cellFormatter: (value: { label: string }): string => value.label,
+					cellTooltip: (value: { tooltip: string }): string => value.tooltip,
+				},
+				{ 
+					name: "test", 
+					cellTooltip: "test tooltip",
+					cellTooltipClassName: "tooltip-class",
+					cellTooltipPosition: "right" 
+				}
+			];
+			hostComponent.dummyData = dummyData;
+
+			hostFixture.detectChanges(); // trigger data binding
+			component.ngAfterViewInit();
+		});
+		
+		it("should display the cellTooltip value in the tooltip on hover if set as string", () => {
+			const cellElement: HTMLElement = hostFixture.nativeElement.querySelector(columnSelectorPart + "id");
+			triggerHover(cellElement);
+			hostFixture.detectChanges();
+			const tooltipElement: HTMLElement | null = document.querySelector(tooltipSelector);
+			
+			expect(tooltipElement && tooltipElement.innerText).toEqual("id tooltip");
+		});
+
+		it("should display the cellTooltip value in the tooltip on hover if set as function", () => {
+			const cellElement: HTMLElement = hostFixture.nativeElement.querySelector(columnSelectorPart + "description");
+			triggerHover(cellElement);
+			hostFixture.detectChanges();
+			const tooltipElement: HTMLElement | null = document.querySelector(tooltipSelector);
+			
+			expect(tooltipElement && tooltipElement.innerText).toEqual("dummy 1 tooltip");
+		});
+
+		it("should have class 'tooltip-first if id <= 1", () => {
+			const cellElement: HTMLElement = hostFixture.nativeElement.querySelector(columnSelectorPart + "id");
+			triggerHover(cellElement);
+			hostFixture.detectChanges();
+			const tooltipElement: HTMLElement | null = document.querySelector(tooltipSelector);
+			
+			expect(tooltipElement && tooltipElement.classList).toContain("tooltip-first");
+		});
+
+		it("should have class 'tooltip-normal' if id > 1", () => {
+			const cellElement: HTMLElement = hostFixture.nativeElement.querySelector("table tbody tr:nth-child(2) td.mat-column-id");
+			triggerHover(cellElement);
+			hostFixture.detectChanges();
+			const tooltipElement: HTMLElement | null = document.querySelector(tooltipSelector);
+			
+			expect(tooltipElement && tooltipElement.classList).toContain("tooltip-normal");
+		});
+
+		it("should have class 'tooltip-class' if set as string", () => {
+			const cellElement: HTMLElement = hostFixture.nativeElement.querySelector(columnSelectorPart + "test");
+			triggerHover(cellElement);
+			hostFixture.detectChanges();
+			const tooltipElement: HTMLElement | null = document.querySelector(tooltipSelector);
+			
+			expect(tooltipElement && tooltipElement.classList).toContain("tooltip-class");
+		});
+
+		it("should be positioned 'below' by default", () => {
+			const cellElement: HTMLElement = hostFixture.nativeElement.querySelector(columnSelectorPart + "id");
+			
+			expect(cellElement.getAttribute("ng-reflect-position")).toEqual("below");
+		});
+
+		it("should be in the position set in cellTooltipPosition", () => {
+			const cellElement: HTMLElement = hostFixture.nativeElement.querySelector(columnSelectorPart + "test");
+			expect(cellElement.getAttribute("ng-reflect-position")).toEqual("right");
 		});
 	});
 });
