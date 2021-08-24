@@ -10,6 +10,7 @@ Upgrade the following dependencies in your "package.json" file:
 - @nationalbankbelgium/code-style: `"^1.6.0"`
 - @nationalbankbelgium/stark-*, from `"^10.0.0"` to `"^12.0.0"`
 - typescript, from `"~3.5.0"` to `"~4.3.5"`
+- zone.js, from `"~0.8.x"` to `"~0.11.4"`
 
 ## @Angular/CLI
 
@@ -43,6 +44,24 @@ After:
 
 Due to angular upgrade to v12, it is required to adapt TestBed usage.
 `TestBed.get` has to be replaced by `TestBed.inject`.
+
+## zone.js
+
+### 1. Adapt "base.spec.ts" and "src/polyfills.browser.ts" files
+
+Due to zone.js update, imports should be adapted in "base.spec.ts" and "src/polyfills.browser.ts" files:
+
+```typescript
+// Before
+import "zone.js/dist/zone";
+import "zone.js/dist/zone-testing";
+import "zone.js/dist/long-stack-trace-zone";
+
+// After
+import "zone.js";
+import "zone.js/testing";
+import "zone.js/plugins/long-stack-trace-zone";
+```
 
 ## Stark-Build
 
@@ -372,7 +391,7 @@ It should be easy to adapt the index.html file.
 
 Remove the following piece of code in "src/index.html"
 
-```angular2html
+```html
 <!-- move the block of webpack dev server to the <head> section and change the IF conditions -->
 <% if (starkOptions.starkAppMetadata.IS_DEV_SERVER && starkOptions.starkAppMetadata.HMR !== true) { %>
 <!-- Webpack Dev Server reload -->
