@@ -21,7 +21,7 @@ import {
 import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 /* stark-ui imports */
 import { StarkLanguageSelectorComponent, StarkLanguageSelectorMode } from "./language-selector.component";
-import { StarkDropdownComponent } from "../../dropdown/components";
+import { StarkDropdownModule } from "../../dropdown";
 import { of, throwError } from "rxjs";
 
 /***
@@ -129,8 +129,15 @@ describe("LanguageSelectorComponent", () => {
 	 */
 	function compileComponent(mockSessionService: MockStarkSessionService): Promise<any> {
 		return TestBed.configureTestingModule({
-			imports: [CommonModule, MatButtonToggleModule, MatFormFieldModule, MatSelectModule, TranslateModule.forRoot()],
-			declarations: [StarkDropdownComponent, StarkLanguageSelectorComponent, TestHostComponent],
+			imports: [
+				CommonModule,
+				MatButtonToggleModule,
+				MatFormFieldModule,
+				MatSelectModule,
+				StarkDropdownModule,
+				TranslateModule.forRoot()
+			],
+			declarations: [StarkLanguageSelectorComponent, TestHostComponent],
 			providers: [
 				{ provide: STARK_APP_METADATA, useValue: appMetadata },
 				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },

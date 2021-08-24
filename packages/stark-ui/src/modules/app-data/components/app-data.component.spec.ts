@@ -4,15 +4,14 @@ import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { fakeAsync, inject, tick, ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatMenuModule } from "@angular/material/menu";
 import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { HAMMER_LOADER } from "@angular/platform-browser";
-import { Subject } from "rxjs";
-import { ViewChild, Component, NO_ERRORS_SCHEMA } from "@angular/core";
+import { ViewChild, Component } from "@angular/core";
 import { OverlayContainer } from "@angular/cdk/overlay";
 
 @Component({
@@ -53,21 +52,13 @@ describe("AppDataComponent", () => {
 					CommonModule,
 					MatButtonModule,
 					MatIconModule,
+					MatIconTestingModule,
 					MatMenuModule,
 					MatTooltipModule,
 					NoopAnimationsModule,
 					TranslateModule.forRoot()
 				],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-					{
-						// See https://github.com/NationalBankBelgium/stark/issues/1088
-						provide: HAMMER_LOADER,
-						useValue: (): Promise<any> => new Subject<any>().toPromise()
-					},
-					TranslateService
-				],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger }, TranslateService]
 			}).compileComponents();
 		})
 	);

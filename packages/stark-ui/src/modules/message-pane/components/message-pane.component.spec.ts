@@ -2,12 +2,15 @@
 
 /* angular imports */
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
-import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, DebugElement, ViewChild } from "@angular/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { By } from "@angular/platform-browser";
 import { CommonModule } from "@angular/common";
 import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { FormsModule } from "@angular/forms";
 /* rxjs imports */
 import { BehaviorSubject, Observable, Observer } from "rxjs";
@@ -172,13 +175,22 @@ describe("MessagePaneComponent", () => {
 		waitForAsync(() => {
 			return TestBed.configureTestingModule({
 				declarations: [StarkMessagePaneComponent, TestHostComponent],
-				imports: [CommonModule, MatSelectModule, MatOptionModule, FormsModule, TranslateModule.forRoot(), NoopAnimationsModule],
+				imports: [
+					CommonModule,
+					MatIconModule,
+					MatIconTestingModule,
+					MatSelectModule,
+					MatTooltipModule,
+					MatOptionModule,
+					FormsModule,
+					TranslateModule.forRoot(),
+					NoopAnimationsModule
+				],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_MESSAGE_PANE_SERVICE, useValue: mockMessagePaneService },
 					TranslateService
-				],
-				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+				]
 			}).compileComponents();
 		})
 	);

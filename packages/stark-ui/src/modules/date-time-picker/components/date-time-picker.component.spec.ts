@@ -1,27 +1,24 @@
 /* tslint:disable:completed-docs component-max-inline-declarations no-big-function */
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { By, HAMMER_LOADER } from "@angular/platform-browser";
+import { By } from "@angular/platform-browser";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { TranslateModule } from "@ngx-translate/core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { Observer, Subject } from "rxjs";
+import { Observer } from "rxjs";
 import moment from "moment";
-import {
-	STARK_DATE_FORMATS,
-	StarkDatePickerComponent,
-	StarkDatePickerFilter,
-	StarkDatePickerMaskConfig
-} from "../../date-picker/components";
-import { StarkTimestampMaskConfig, StarkTimestampMaskDirective } from "../../input-mask-directives/directives";
+import { STARK_DATE_FORMATS, StarkDatePickerModule, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker";
+import { StarkTimestampMaskConfig, StarkInputMaskDirectivesModule } from "../../input-mask-directives";
 import { DEFAULT_TIME_MASK_CONFIG, StarkDateTimePickerComponent } from "./date-time-picker.component";
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
@@ -112,36 +109,28 @@ describe("DateTimePickerComponent", () => {
 	beforeEach(
 		waitForAsync(() => {
 			return TestBed.configureTestingModule({
-				declarations: [
-					StarkTimestampMaskDirective,
-					StarkDatePickerComponent,
-					StarkDateTimePickerComponent,
-					TestHostComponent,
-					TestHostFormControlComponent
-				],
+				declarations: [StarkDateTimePickerComponent, TestHostComponent, TestHostFormControlComponent],
 				imports: [
 					NoopAnimationsModule,
 					MatDatepickerModule,
 					MatTooltipModule,
 					MatFormFieldModule,
+					MatIconModule,
+					MatIconTestingModule,
 					MatInputModule,
 					MatMomentDateModule,
 					FormsModule,
 					ReactiveFormsModule,
+					StarkDatePickerModule,
+					StarkInputMaskDirectivesModule,
 					TranslateModule.forRoot()
 				],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS },
 					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-					{
-						// See https://github.com/NationalBankBelgium/stark/issues/1088
-						provide: HAMMER_LOADER,
-						useValue: (): Promise<any> => new Subject<any>().toPromise()
-					}
-				],
-				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
+				]
 			}).compileComponents();
 		})
 	);

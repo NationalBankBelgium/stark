@@ -2,7 +2,7 @@
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
 import { StarkBreadcrumbComponent } from "./breadcrumb.component";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, DebugElement, ViewChild } from "@angular/core";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkRoutingTransitionHook } from "@nationalbankbelgium/stark-core";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -84,8 +84,7 @@ describe("BreadcrumbComponent", () => {
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-				],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (selectionChange)
+				]
 			}).compileComponents();
 		})
 	);

@@ -6,8 +6,10 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { Component, DebugElement, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, DebugElement, ViewChild } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -16,8 +18,8 @@ import { Observer } from "rxjs";
 import { StarkPaginationComponent } from "./pagination.component";
 import { StarkPaginateEvent } from "./paginate-event.intf";
 import { StarkPaginationConfig } from "./pagination-config.intf";
-import { StarkDropdownComponent } from "../../dropdown/components";
-import { StarkRestrictInputDirective } from "../../restrict-input-directive/directives";
+import { StarkDropdownComponent, StarkDropdownModule } from "../../dropdown";
+import { StarkRestrictInputDirectiveModule } from "../../restrict-input-directive";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
@@ -109,16 +111,19 @@ describe("PaginationComponent", () => {
 				imports: [
 					FormsModule,
 					MatButtonModule,
+					MatIconModule,
+					MatIconTestingModule,
 					MatInputModule,
 					MatMenuModule,
 					MatPaginatorModule,
 					MatTooltipModule,
 					NoopAnimationsModule,
+					StarkDropdownModule,
+					StarkRestrictInputDirectiveModule,
 					TranslateModule.forRoot()
 				],
-				declarations: [StarkDropdownComponent, StarkRestrictInputDirective, StarkPaginationComponent, TestHostComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
-				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+				declarations: [StarkPaginationComponent, TestHostComponent],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
 			}).compileComponents();
 		})
 	);

@@ -1,14 +1,14 @@
 /* tslint:disable:completed-docs component-max-inline-declarations */
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { HAMMER_LOADER } from "@angular/platform-browser";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { Subject } from "rxjs";
 import { StarkActionBarComponent, StarkActionBarComponentMode } from "./action-bar.component";
 import { StarkAction } from "./action.intf";
 import { StarkActionBarConfig } from "./action-bar-config.intf";
@@ -47,17 +47,8 @@ describe("ActionBarComponent", () => {
 		waitForAsync(() => {
 			return TestBed.configureTestingModule({
 				declarations: [StarkActionBarComponent, TestHostComponent],
-				imports: [MatButtonModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					TranslateService,
-					{
-						// See https://github.com/NationalBankBelgium/stark/issues/1088
-						provide: HAMMER_LOADER,
-						useValue: (): Promise<any> => new Subject<any>().toPromise()
-					}
-				],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
+				imports: [MatButtonModule, MatIconModule, MatIconTestingModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
 			}).compileComponents();
 		})
 	);

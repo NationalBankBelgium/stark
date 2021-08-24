@@ -1,17 +1,18 @@
 /* tslint:disable:completed-docs no-duplicate-string no-lifecycle-call */
 import { ComponentFixture, inject, TestBed, waitForAsync } from "@angular/core/testing";
-import { Component, NgModule, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, NgModule, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
-import { HAMMER_LOADER } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Ng2StateDeclaration, StateDeclaration } from "@uirouter/angular";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLocale } from "@nationalbankbelgium/stark-core";
@@ -19,7 +20,7 @@ import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankb
 import { StarkRouteSearchComponent } from "./route-search.component";
 import { StarkRouteSearchEntry } from "../components";
 import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu/components";
-import { of, Subject, throwError } from "rxjs";
+import { of, throwError } from "rxjs";
 import { mergeUiTranslations } from "../../../common/translations";
 
 @Component({
@@ -97,6 +98,8 @@ describe("RouteSearchComponent", () => {
 					MatFormFieldModule,
 					MatTooltipModule,
 					MatAutocompleteModule,
+					MatIconModule,
+					MatIconTestingModule,
 					MatSelectModule,
 					NoopAnimationsModule,
 					MatOptionModule,
@@ -106,14 +109,8 @@ describe("RouteSearchComponent", () => {
 				declarations: [StarkRouteSearchComponent, TestHostComponent],
 				providers: [
 					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
-					{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService },
-					{
-						// See https://github.com/NationalBankBelgium/stark/issues/1088
-						provide: HAMMER_LOADER,
-						useValue: (): Promise<any> => new Subject<any>().toPromise()
-					}
-				],
-				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService }
+				]
 			}).compileComponents();
 		})
 	);

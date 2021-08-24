@@ -19,7 +19,7 @@ import {
 	MockStarkUserService
 } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule } from "@ngx-translate/core";
-import { StarkAppLogoComponent } from "../../../app-logo/components";
+import { StarkAppLogoModule } from "../../../app-logo";
 import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkLoginPageComponent } from "./login-page.component";
 
@@ -44,8 +44,8 @@ describe("LoginPageComponent", () => {
 	beforeEach(
 		waitForAsync(() => {
 			return TestBed.configureTestingModule({
-				declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkLoginPageComponent],
-				imports: [CommonModule, MatCardModule, MatDividerModule, MatListModule, TranslateModule.forRoot()],
+				declarations: [StarkSessionCardComponent, StarkLoginPageComponent],
+				imports: [CommonModule, MatCardModule, MatDividerModule, MatListModule, StarkAppLogoModule, TranslateModule.forRoot()],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
 					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },

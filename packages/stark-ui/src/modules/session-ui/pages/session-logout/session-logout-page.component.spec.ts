@@ -5,7 +5,7 @@ import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkApplicationConfig } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAppLogoComponent } from "../../../app-logo/components";
+import { StarkAppLogoModule } from "../../../app-logo";
 import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkSessionLogoutPageComponent } from "./session-logout-page.component";
 
@@ -22,8 +22,8 @@ describe("SessionLogoutPageComponent", () => {
 			const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
 			return TestBed.configureTestingModule({
-				declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkSessionLogoutPageComponent],
-				imports: [CommonModule, MatCardModule, TranslateModule.forRoot()],
+				declarations: [StarkSessionCardComponent, StarkSessionLogoutPageComponent],
+				imports: [CommonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
 				providers: [
 					{ provide: STARK_ROUTING_SERVICE, useValue: MockStarkRoutingService }, // needed by AppLogo component
 					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },

@@ -1,6 +1,9 @@
 /*tslint:disable:completed-docs*/
-import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkCollapsibleComponent } from "./collapsible.component";
@@ -16,10 +19,9 @@ describe("CollapsibleComponent", () => {
 		waitForAsync(() => {
 			return (
 				TestBed.configureTestingModule({
-					imports: [],
+					imports: [MatExpansionModule, MatIconModule, MatIconTestingModule, NoopAnimationsModule],
 					declarations: [StarkCollapsibleComponent],
-					providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
-					schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
+					providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
 				})
 					/**
 					 * Compile template and css

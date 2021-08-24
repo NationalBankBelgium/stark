@@ -1,28 +1,28 @@
 /* tslint:disable:completed-docs component-max-inline-declarations no-identical-functions no-lifecycle-call deprecation */
 import { SelectionModel } from "@angular/cdk/collections";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatMenuModule } from "@angular/material/menu";
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from "@angular/material/select";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatInputModule } from "@angular/material/input";
-import { By, HAMMER_LOADER } from "@angular/platform-browser";
+import { By } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAction, StarkActionBarComponent } from "@nationalbankbelgium/stark-ui";
-import { Subject } from "rxjs";
+import { StarkAction, StarkActionBarModule } from "../../action-bar";
 import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.component";
 import { StarkTableComponent } from "./table.component";
 import { StarkTableColumnComponent } from "./column.component";
-import { StarkPaginationComponent } from "../../pagination/components";
+import { StarkMinimapModule } from "../../minimap";
+import { StarkPaginationModule } from "../../pagination";
 import { StarkTableRowContentDirective } from "../directives/table-row-content.directive";
 import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "../entities";
 import find from "lodash-es/find";
@@ -57,13 +57,13 @@ import createSpy = jasmine.createSpy;
 					*starkTableRowContent="let rowData = rowData; let cellRawValue = rawValue; let cellDisplayedValue = displayedValue"
 				>
 					<div class="custom" *ngSwitchCase="rowData.id === 1"
-					><span style="color: blue">{{ cellDisplayedValue }}</span></div
+						><span style="color: blue">{{ cellDisplayedValue }}</span></div
 					>
 					<div class="custom" *ngSwitchCase="rowData.id === 2"
-					><span style="color: red">{{ cellDisplayedValue }}</span></div
+						><span style="color: red">{{ cellDisplayedValue }}</span></div
 					>
 					<div class="custom" *ngSwitchCase="rowData.id === 3"
-					><i>{{ cellDisplayedValue }}</i></div
+						><i>{{ cellDisplayedValue }}</i></div
 					>
 					<div class="custom" *ngSwitchCase="cellRawValue > 23">
 						<mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
@@ -148,36 +148,30 @@ describe("TableComponent", () => {
 					NoopAnimationsModule,
 					TranslateModule.forRoot(),
 
+					// Stark
+					StarkActionBarModule,
+					StarkPaginationModule,
+					StarkMinimapModule,
+
 					// Material
 					MatCheckboxModule,
 					MatDialogModule,
+					MatIconModule,
+					MatIconTestingModule,
 					MatInputModule,
-					MatFormFieldModule,
 					MatMenuModule,
-					MatPaginatorModule,
 					MatSelectModule,
 					MatTableModule,
 					MatTooltipModule
 				],
 				declarations: [
 					TestHostComponent,
-					StarkActionBarComponent,
-					StarkPaginationComponent,
 					StarkTableComponent,
 					StarkTableColumnComponent,
 					StarkTableMultisortDialogComponent,
 					StarkTableRowContentDirective
 				],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					TranslateService,
-					{
-						// See https://github.com/NationalBankBelgium/stark/issues/1088
-						provide: HAMMER_LOADER,
-						useValue: (): Promise<any> => new Subject<any>().toPromise()
-					}
-				],
-				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
 			}).compileComponents();
 		})
 	);

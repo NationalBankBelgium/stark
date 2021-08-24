@@ -18,7 +18,7 @@ import {
 	MockStarkSessionService,
 	MockStarkUserService
 } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAppLogoComponent } from "../../../app-logo/components";
+import { StarkAppLogoModule } from "../../../app-logo";
 import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkPreloadingPageComponent } from "./preloading-page.component";
 
@@ -35,8 +35,8 @@ describe("PreloadingPageComponent", () => {
 	beforeEach(
 		waitForAsync(() => {
 			return TestBed.configureTestingModule({
-				declarations: [StarkAppLogoComponent, StarkSessionCardComponent, StarkPreloadingPageComponent],
-				imports: [CommonModule, MatButtonModule, MatCardModule, TranslateModule.forRoot()],
+				declarations: [StarkSessionCardComponent, StarkPreloadingPageComponent],
+				imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
 					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
