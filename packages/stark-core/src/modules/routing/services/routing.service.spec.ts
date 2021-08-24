@@ -1,5 +1,5 @@
 /*tslint:disable:completed-docs no-identical-functions no-duplicate-string no-big-function*/
-import { Component, Injector, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
+import { Component, Injector, NgModule } from "@angular/core";
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { Ng2StateDeclaration, UIRouterModule, TransitionPromise } from "@uirouter/angular";
 import { RawParams, StateDeclaration, StateObject, StateService, TransitionService, UIRouter, UIRouterGlobals } from "@uirouter/core";
@@ -386,7 +386,6 @@ describe("Service: StarkRoutingService", () => {
 	 */
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			schemas: [NO_ERRORS_SCHEMA],
 			providers: [
 				{
 					provide: StarkRoutingServiceImpl,
@@ -976,7 +975,7 @@ describe("Service: StarkRoutingService", () => {
 
 		it(
 			"should just be called ONCE in order to navigate to the previous state when the last navigation(s) were dynamic " +
-			"(same target state different params)",
+				"(same target state different params)",
 			(done: DoneFn) => {
 				spyOn($state, "go").and.callThrough();
 
