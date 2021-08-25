@@ -24,7 +24,7 @@
     "@angular/animations": "^12.1.4",
     "@angular/cdk": "^12.1.4",
     "@angular/cli": "^12.1.4",
-    "@angular/common": "^12.1.4",
+    "@angular/common": "^12.2.2",
     "@angular/compiler": "^12.1.4",
     "@angular/compiler-cli": "^12.1.4",
     "@angular/core": "^12.1.4",
