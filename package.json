@@ -33,7 +33,7 @@
     "@angular/material-moment-adapter": "^12.1.4",
     "@angular/platform-browser": "^12.1.4",
     "@angular/platform-browser-dynamic": "^12.1.4",
-    "@angular/router": "^12.1.4",
+    "@angular/router": "^12.2.2",
     "@angularclass/hmr": "^3.0.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
