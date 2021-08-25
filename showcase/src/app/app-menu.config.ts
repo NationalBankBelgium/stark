@@ -18,21 +18,21 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 					label: "SHOWCASE.GETTING_STARTED.TITLE",
 					isVisible: true,
 					isEnabled: true,
-					targetState: "getting-started"
+					targetState: "welcome.getting-started"
 				},
 				{
 					id: "menu-news",
 					label: "SHOWCASE.NEWS.TITLE",
 					isVisible: true,
 					isEnabled: true,
-					targetState: "news"
+					targetState: "welcome.news"
 				},
 				{
 					id: "reactive-form-errors",
 					label: "SHOWCASE.NGX_FORM_ERRORS.TITLE",
 					isVisible: true,
 					isEnabled: true,
-					targetState: "reactive-form-errors"
+					targetState: "welcome.reactive-form-errors"
 				}
 			]
 		},

@@ -80,6 +80,7 @@ import {
 	TableWithTranscludedActionBarComponent,
 	TableWithCollapsibleRowsComponent
 } from "./components";
+import { ExampleViewerModule } from "../example-viewer";
 
 @NgModule({
 	imports: [
@@ -116,6 +117,7 @@ import {
 		StarkRouteSearchModule,
 		StarkSliderModule,
 		StarkTableModule,
+		ExampleViewerModule,
 		StoreModule.forFeature(demoGenericSearchStoreKey, demoGenericSearchReducers)
 	],
 	declarations: [

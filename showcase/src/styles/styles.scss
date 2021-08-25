@@ -6,7 +6,7 @@ IMPORTANT: Stark styles are provided as SCSS styles so they should be imported i
 @use "../app/shared/components/reference-block/reference-block.component";
 @use "../app/shared/components/table-of-contents/table-of-contents.component";
 @use "../app/welcome/pages/getting-started/getting-started-page.component";
-@use "../app/welcome/pages/home/home-page.component";
+@use "../app/home/pages/home/home-page.component";
 @use "../app/welcome/pages/news/news-page.component";
 @use "../app/welcome/components/news-item/news-item.component";
 @use "../app/demo-ui/pages/message-pane/demo-message-pane-page.component";

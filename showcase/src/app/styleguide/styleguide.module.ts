@@ -10,13 +10,15 @@ import {
 	StyleguideLayoutPageComponent,
 	StyleguideTypographyPageComponent
 } from "./pages";
+import { ExampleViewerModule } from "../example-viewer";
 
 @NgModule({
 	imports: [
 		UIRouterModule.forChild({
 			states: STYLEGUIDE_STATES
 		}),
-		SharedModule
+		SharedModule,
+		ExampleViewerModule
 	],
 	providers: [],
 	declarations: [

@@ -8,7 +8,7 @@ import {
 	StarkRoutingService
 } from "@nationalbankbelgium/stark-core";
 import { StarkPrettyPrintFormat } from "@nationalbankbelgium/stark-ui";
-import { FileService } from "../../services";
+import { FileService } from "../services";
 
 export interface ExampleFile {
 	extension: string;
