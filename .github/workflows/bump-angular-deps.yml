@@ -1,0 +1,94 @@
+# Based on https://github.com/dependabot/dependabot-core/issues/1296#issuecomment-657438154
+name: Bump angular dependencies
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+env:
+  TZ: "Europe/Brussels"
+  NPM_VERSION: "7.12.1"
+
+jobs:
+  bump-angular-deps:
+    runs-on: ubuntu-latest
+    steps:
+      # See: https://github.com/marketplace/actions/setup-node-js-environment
+      - name: Use Node.js 12
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+
+      - name: Install npm ${{ env.NPM_VERSION }}
+        run: npm i -g npm@${{ env.NPM_VERSION }}
+
+      - name: List main variables
+        run: |
+          echo "Commit SHA  : ${GITHUB_SHA}"
+          echo "Reference   : ${GITHUB_REF}"
+          echo "Head branch : ${GH_HEAD_REF}"
+          echo "Base branch : ${GITHUB_BASE_REF}"
+          echo "Build number: ${GITHUB_RUN_NUMBER}"
+          echo "Repository  : ${GITHUB_REPOSITORY}"
+          echo "Event       : ${GITHUB_EVENT_NAME}"
+          echo "Author      : ${GITHUB_ACTOR}"
+          echo "PR Number   : ${GH_PR_NUMBER}"
+
+      # See: https://github.com/marketplace/actions/checkout
+      - uses: actions/checkout@v2
+
+      - name: Configure git user info
+        run: |
+          git config --local user.name "NBB Bot"
+          git config --local user.email "83765996+nbb-bot@users.noreply.github.com"
+
+      - name: "Upgrade '@angular/*' deps thanks to 'npm-check-updates'"
+        run: |
+          npx npm-check-updates -u "/^@angular\/.*$/"
+          npm i
+          if [[ -n $(git status --porcelain) ]];
+          then
+            git add package.json package-lock.json
+            git commit -m "chore(deps-dev): bump \`@angular/*\` dependencies" --no-verify
+            npm run sync:packages-dependencies
+          fi
+
+      - name: "Upgrade '@angular-devkit/*' deps thanks to 'npm-check-updates'"
+        run: |
+          npx npm-check-updates -u "/^@angular-devkit\/.*$/"
+          npm i
+          if [[ -n $(git status --porcelain) ]];
+          then
+            git add package.json package-lock.json
+            git commit -m "chore(deps-dev): bump \`@angular-devkit/*\` dependencies" --no-verify
+            npm run sync:packages-dependencies
+          fi
+
+      - name: "Upgrade '@angular-builders/*' deps thanks to 'npm-check-updates'"
+        run: |
+          npx npm-check-updates -u "/^@angular-builders\/.*$/"
+          npm i
+          if [[ -n $(git status --porcelain) ]];
+          then
+            git add package.json package-lock.json
+            git commit -m "chore(deps-dev): bump \`@angular-builders/*\` dependencies" --no-verify
+            npm run sync:packages-dependencies
+          fi
+
+      - name: Get tag name if exists
+        run: |
+          PR_BRANCH_NAME="nbb-bot/deps/angular-$( date +%Y%m%d )"
+          echo "PR_BRANCH_NAME=${PR_BRANCH_NAME}" >> $GITHUB_ENV
+
+      # See: https://github.com/marketplace/actions/create-pull-request
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: ${{ env.PR_BRANCH_NAME }}
+          author: NBB Bot <83765996+nbb-bot@users.noreply.github.com>
+          committer: NBB Bot <83765996+nbb-bot@users.noreply.github.com>
+          title: "scheduled: bump `@angular/*`, `@angular-devkit/*` and `@angular-builders/*` dependencies"
+          body: |
+            Automated changes by @nbb-bot. Upgrade `@angular/*`, `@angular-devkit/*` and `@angular-builders/*` dependencies.
+          labels: dependencies
