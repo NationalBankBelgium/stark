@@ -1,13 +1,17 @@
-.stark-toast {
-  &.stark-toast-message-error {
-    background-color: $message-alert-700;
-  }
+@use "../../../../styles/old-variables" as old-vars;
 
-  &.stark-toast-message-warning {
-    background-color: $message-warning-700;
-  }
+@mixin stark-toast-notification-theme() {
+  .stark-toast {
+    &.stark-toast-message-error {
+      background-color: old-vars.$message-alert-700;
+    }
 
-  &.stark-toast-message-info {
-    background-color: $message-info-700;
+    &.stark-toast-message-warning {
+      background-color: old-vars.$message-warning-700;
+    }
+
+    &.stark-toast-message-info {
+      background-color: old-vars.$message-info-700;
+    }
   }
 }

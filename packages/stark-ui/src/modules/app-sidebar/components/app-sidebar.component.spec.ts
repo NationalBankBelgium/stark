@@ -2,7 +2,7 @@
 import { Subject } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { async, fakeAsync, tick, ComponentFixture, TestBed } from "@angular/core/testing";
+import { fakeAsync, tick, ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { HookMatchCriteria, TransitionHookFn, TransitionStateHookFn } from "@uirouter/core";
@@ -67,18 +67,20 @@ describe("AppSidebarComponent", () => {
 		});
 	});
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [StarkAppSidebarComponent],
-			imports: [CommonModule, MatSidenavModule, NoopAnimationsModule],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockStarkLoggingService },
-				{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: mockStarkAppSideBarService },
-				{ provide: STARK_ROUTING_SERVICE, useValue: mockStarkRoutingService },
-				{ provide: BreakpointObserver, useValue: mockBreakPointObserver }
-			]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkAppSidebarComponent],
+				imports: [CommonModule, MatSidenavModule, NoopAnimationsModule],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockStarkLoggingService },
+					{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: mockStarkAppSideBarService },
+					{ provide: STARK_ROUTING_SERVICE, useValue: mockStarkRoutingService },
+					{ provide: BreakpointObserver, useValue: mockBreakPointObserver }
+				]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkAppSidebarComponent);

@@ -3,12 +3,14 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/session-ui/pages/session-expired/_session-expired-page.component.scss */
 
-.stark-session-expired-page {
-  text-align: center;
+@mixin stark-session-expired-page() {
+  .stark-session-expired-page {
+    text-align: center;
 
-  p {
-    text-align: left;
-    line-height: 1.5;
+    p {
+      text-align: left;
+      line-height: 1.5;
+    }
   }
 }
 

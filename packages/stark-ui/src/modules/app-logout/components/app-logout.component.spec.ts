@@ -1,6 +1,5 @@
 /*tslint:disable:completed-docs*/
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,
@@ -13,46 +12,43 @@ import { MockStarkLoggingService, MockStarkRoutingService, MockStarkSessionServi
 import { StarkAppLogoutComponent } from "./app-logout.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { HAMMER_LOADER } from "@angular/platform-browser";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { TranslateModule } from "@ngx-translate/core";
-import { Subject } from "rxjs";
 import Spy = jasmine.Spy;
 
 describe("AppLogoutComponent", () => {
 	let component: StarkAppLogoutComponent;
 	let fixture: ComponentFixture<StarkAppLogoutComponent>;
 
-	const mockStarkSessionConfig: Partial<StarkSessionConfig> = {
+	const mockStarkSessionConfig: StarkSessionConfig = {
 		sessionLogoutStateName: "logout-state"
 	};
 
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				imports: [MatTooltipModule, MatButtonModule, TranslateModule.forRoot()],
-				declarations: [StarkAppLogoutComponent],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					{ provide: STARK_SESSION_CONFIG, useValue: mockStarkSessionConfig },
-					{
-						// See https://github.com/NationalBankBelgium/stark/issues/1088
-						provide: HAMMER_LOADER,
-						useValue: (): Promise<any> => new Subject<any>().toPromise()
-					}
-				],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					imports: [MatTooltipModule, MatButtonModule, MatIconModule, MatIconTestingModule, TranslateModule.forRoot()],
+					declarations: [StarkAppLogoutComponent],
+					providers: [
+						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+						{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
+						{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
+						// Need to clone the object to avoid mutation of it between tests
+						{ provide: STARK_SESSION_CONFIG, useValue: { ...mockStarkSessionConfig } }
+					]
+				})
+					/**
+					 * Compile template and css
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach
@@ -96,7 +92,8 @@ describe("AppLogoutComponent", () => {
 		});
 
 		it("should log out the user and navigate to starkSessionLogoutStateName", () => {
-			(<StarkSessionConfig>component.sessionConfig).sessionLogoutStateName = undefined;
+			// tslint:disable-next-line:no-non-null-assertion
+			component.sessionConfig!.sessionLogoutStateName = undefined;
 
 			(<Spy>component.routingService.navigateTo).calls.reset();
 			component.logout();

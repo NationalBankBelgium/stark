@@ -16,11 +16,16 @@
             },
             "indexTransform": "./node_modules/@nationalbankbelgium/stark-build/config/index-html.transform.js",
             "outputPath": "dist",
+            "allowedCommonJsDependencies": ["validator", "@nationalbankbelgium/stark-core"],
             "index": "src/index.html",
             "main": "src/main.browser.ts",
             "tsConfig": "tsconfig.app.json",
             "polyfills": "src/polyfills.browser.ts",
-            "extractCss": true,
+            "buildOptimizer": false,
+            "optimization": false,
+            "vendorChunk": true,
+            "sourceMap": true,
+            "namedChunks": true,
             "assets": [
               {
                 "glob": "mdi.svg",
@@ -50,8 +55,12 @@
             ],
             "styles": [
               "node_modules/@nationalbankbelgium/stark-core/assets/css/pre-load-style.css",
-              "src/styles/styles.scss",
-              "src/styles/styles.pcss"
+              "node_modules/prismjs/themes/prism-okaidia.css",
+              "node_modules/basscss/src/basscss.css",
+              {
+                "inject": false,
+                "input": "src/styles/styles.scss"
+              }
             ],
             "scripts": [],
             "deployUrl": "/",
@@ -66,11 +75,13 @@
                 }
               ]
             },
+            "development": {},
             "production": {
               "optimization": true,
+              "namedChunks": false,
+              "subresourceIntegrity": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -117,8 +128,12 @@
             },
             "e2e.prod": {
               "browserTarget": "showcase:build:e2e.prod"
+            },
+            "development": {
+              "browserTarget": "showcase:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -175,7 +190,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "showcase",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "showcase"

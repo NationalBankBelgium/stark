@@ -1,6 +1,6 @@
 /*tslint:disable:completed-docs no-big-function*/
 import { Observable, Observer, ReplaySubject, Subject } from "rxjs";
-import { async, TestBed } from "@angular/core/testing";
+import { TestBed, waitForAsync } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { EffectNotification } from "@ngrx/effects";
@@ -23,29 +23,31 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 	let mockSessionUiConfig: StarkSessionUiConfig;
 	let actions: Observable<any>;
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot(), MatButtonModule],
-			providers: [
-				StarkSessionTimeoutWarningDialogEffects,
-				provideMockActions(() => actions),
-				TranslateService,
-				{
-					provide: MatDialog,
-					useValue: createSpyObj("MatDialogSpy", ["open", "close", "closeAll"])
-				},
-				{ provide: StarkSessionTimeoutWarningDialogComponent, useValue: StarkSessionTimeoutWarningDialogComponent },
-				{ provide: STARK_SESSION_SERVICE, useFactory: (): MockStarkSessionService => new MockStarkSessionService() },
-				{ provide: STARK_SESSION_UI_CONFIG, useValue: new StarkSessionUiConfig() }
-			]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot(), MatButtonModule],
+				providers: [
+					StarkSessionTimeoutWarningDialogEffects,
+					provideMockActions(() => actions),
+					TranslateService,
+					{
+						provide: MatDialog,
+						useValue: createSpyObj("MatDialogSpy", ["open", "close", "closeAll"])
+					},
+					{ provide: StarkSessionTimeoutWarningDialogComponent, useValue: StarkSessionTimeoutWarningDialogComponent },
+					{ provide: STARK_SESSION_SERVICE, useFactory: (): MockStarkSessionService => new MockStarkSessionService() },
+					{ provide: STARK_SESSION_UI_CONFIG, useValue: new StarkSessionUiConfig() }
+				]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
-		effectsClass = TestBed.get(StarkSessionTimeoutWarningDialogEffects);
-		mockSessionService = TestBed.get(STARK_SESSION_SERVICE);
-		mockDialogService = TestBed.get(MatDialog);
-		mockSessionUiConfig = TestBed.get(STARK_SESSION_UI_CONFIG);
+		effectsClass = TestBed.inject(StarkSessionTimeoutWarningDialogEffects);
+		mockSessionService = TestBed.inject(STARK_SESSION_SERVICE);
+		mockDialogService = <SpyObj<MatDialog>>TestBed.inject(MatDialog);
+		mockSessionUiConfig = TestBed.inject(STARK_SESSION_UI_CONFIG);
 	});
 
 	describe("on initialization", () => {

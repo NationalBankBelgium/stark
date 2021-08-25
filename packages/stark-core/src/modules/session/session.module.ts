@@ -35,7 +35,7 @@ export class StarkSessionModule {
 	 * @param sessionConfig - Object containing the configuration (if any) for the `StarkSessionService`
 	 * @returns A module with providers
 	 */
-	public static forRoot(sessionConfig?: StarkSessionConfig): ModuleWithProviders {
+	public static forRoot(sessionConfig?: StarkSessionConfig): ModuleWithProviders<StarkSessionModule> {
 		return {
 			ngModule: StarkSessionModule,
 			providers: [

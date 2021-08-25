@@ -73,11 +73,9 @@ import "hammerjs";
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
  */
-// workaround for IE11 before loading zone.ks (see: https://github.com/angular/zone.js/issues/933)
-(window as any).__Zone_enable_cross_context_check = true;
-import "zone.js/dist/zone";
+import "zone.js";
 // async stack traces with zone.js included for dev
-// import 'zone.js/dist/long-stack-trace-zone'
+// import 'zone.js/plugins/long-stack-trace-zone'
 /* tslint:enable */
 
 /***************************************************************************************************

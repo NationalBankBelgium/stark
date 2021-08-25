@@ -1,17 +1,14 @@
-@import "~basscss/css/basscss.css";
-@import "~prismjs/themes/prism-okaidia.css";
 /*
 IMPORTANT: Stark styles are provided as SCSS styles so they should be imported in a SCSS file!
 */
-@import "theme";
-@import "~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle";
-@import "../app/app.component";
-@import "../app/shared/components/reference-block/reference-block.component";
-@import "../app/shared/components/table-of-contents/table-of-contents.component";
-@import "../app/welcome/pages/getting-started/getting-started-page.component";
-@import "../app/welcome/pages/home/home-page.component";
-@import "../app/welcome/pages/news/news-page.component";
-@import "../app/welcome/components/news-item/news-item.component";
-@import "../app/demo-ui/pages/message-pane/demo-message-pane-page.component";
-@import "../app/demo-ui/components/table-regular/table-regular.component";
-@import "../app/styleguide/pages/layout/styleguide-layout-page.component";
+@use "theme";
+@use "../app/app.component";
+@use "../app/shared/components/reference-block/reference-block.component";
+@use "../app/shared/components/table-of-contents/table-of-contents.component";
+@use "../app/welcome/pages/getting-started/getting-started-page.component";
+@use "../app/welcome/pages/home/home-page.component";
+@use "../app/welcome/pages/news/news-page.component";
+@use "../app/welcome/components/news-item/news-item.component";
+@use "../app/demo-ui/pages/message-pane/demo-message-pane-page.component";
+@use "../app/demo-ui/components/table-regular/table-regular.component";
+@use "../app/styleguide/pages/layout/styleguide-layout-page.component";

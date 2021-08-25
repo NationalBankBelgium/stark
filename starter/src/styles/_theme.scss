@@ -3,5 +3,11 @@ Import the local variables file first to set the correct variables, see:
   - https://stark.nbb.be/showcase/latest/styleguide/typography
   - https://stark.nbb.be/showcase/latest/styleguide/colors
 */
-@import "variables";
-@import "~@nationalbankbelgium/stark-ui/assets/theming";
+@use "variables";
+@use "sass:map";
+
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
+@include mat.core();
+@include stark-ui.set-stark-ui-styles();

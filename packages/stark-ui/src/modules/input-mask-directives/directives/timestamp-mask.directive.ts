@@ -93,7 +93,7 @@ export class StarkTimestampMaskDirective extends MaskedInputDirective implements
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnChanges(changes: SimpleChanges): void {
+	public override ngOnChanges(changes: SimpleChanges): void {
 		this.textMaskConfig = this.normalizeMaskConfig(this.maskConfig);
 
 		super.ngOnChanges(changes);

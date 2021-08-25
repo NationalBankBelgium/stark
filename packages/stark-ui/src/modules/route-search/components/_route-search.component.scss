@@ -2,90 +2,94 @@
 /*  S t a r k   R o u t e 	 S e a r c h                                           */
 /* ============================================================================== */
 /* stark-ui: src/modules/route-search/components/route-search.component.scss */
-.search-button {
-  height: 40px;
-}
+@use "../../../../styles/media-queries" as *;
 
-.route-search-left {
-  flex-direction: row-reverse;
-  display: inline-flex;
-  height: 40px;
-  vertical-align: bottom;
-}
-
-.route-search-right {
-  flex-direction: row;
-  display: inline-flex;
-  height: 40px;
-  vertical-align: bottom;
-}
-
-.route-search-input-wrapper {
-  &.hide {
-    display: none;
+@mixin stark-route-search() {
+  .search-button {
+    height: 40px;
   }
 
-  .search-field {
-    .mat-form-field-label {
-      font-size: 15px;
+  .route-search-left {
+    flex-direction: row-reverse;
+    display: inline-flex;
+    height: 40px;
+    vertical-align: bottom;
+  }
+
+  .route-search-right {
+    flex-direction: row;
+    display: inline-flex;
+    height: 40px;
+    vertical-align: bottom;
+  }
+
+  .route-search-input-wrapper {
+    &.hide {
+      display: none;
     }
 
-    .mat-form-field-wrapper {
-      margin-left: 5px;
-      margin-right: 5px;
-      width: 210px;
-      border-radius: 10px;
-      height: 40px;
-      padding-bottom: 0;
-
+    .search-field {
       .mat-form-field-label {
-        line-height: 19px;
+        font-size: 15px;
+      }
+
+      .mat-form-field-wrapper {
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 210px;
+        border-radius: 10px;
+        height: 40px;
+        padding-bottom: 0;
+
+        .mat-form-field-label {
+          line-height: 19px;
+        }
+      }
+
+      .mat-input-element {
+        width: 200px;
+      }
+
+      .mat-form-field-infix {
+        border: 0;
+        text-indent: 5px;
+        margin-top: 4px;
+      }
+
+      .mat-form-field-underline {
+        display: none;
       }
     }
-
-    .mat-input-element {
-      width: 200px;
-    }
-
-    .mat-form-field-infix {
-      border: 0;
-      text-indent: 5px;
-      margin-top: 4px;
-    }
-
-    .mat-form-field-underline {
-      display: none;
-    }
   }
-}
 
-@media #{$mobile-only-query} {
-  .search-field {
-    .mat-form-field-wrapper {
-      margin-left: 5px;
-      margin-right: 5px;
-      width: 140px;
-      border-radius: 10px;
-      height: 40px;
-      padding-bottom: 0;
-    }
+  @media #{$mobile-only-query} {
+    .search-field {
+      .mat-form-field-wrapper {
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 140px;
+        border-radius: 10px;
+        height: 40px;
+        padding-bottom: 0;
+      }
 
-    .mat-form-field-label {
-      font-size: 15px;
-    }
+      .mat-form-field-label {
+        font-size: 15px;
+      }
 
-    .mat-input-element {
-      width: 130px;
-    }
+      .mat-input-element {
+        width: 130px;
+      }
 
-    .mat-form-field-infix {
-      border: 0;
-      text-indent: 5px;
-      margin-top: 4px;
-    }
+      .mat-form-field-infix {
+        border: 0;
+        text-indent: 5px;
+        margin-top: 4px;
+      }
 
-    .mat-form-field-underline {
-      display: none;
+      .mat-form-field-underline {
+        display: none;
+      }
     }
   }
 }

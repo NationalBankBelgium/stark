@@ -1,7 +1,7 @@
 /* tslint:disable:no-null-keyword completed-docs component-max-inline-declarations no-big-function */
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { Component, EventEmitter, ViewChild } from "@angular/core";
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from "@angular/material-moment-adapter";
@@ -10,8 +10,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkDatePickerComponent } from "../../date-picker/components";
-import { StarkTimestampMaskDirective } from "../../input-mask-directives/directives";
+import { StarkDatePickerModule } from "../../date-picker";
+import { StarkInputMaskDirectivesModule } from "../../input-mask-directives";
 import { StarkDateRangePickerComponent } from "./date-range-picker.component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 import { Observer } from "rxjs";
@@ -51,31 +51,29 @@ describe("DateRangePickerComponent", () => {
 		});
 	}
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [
-				StarkTimestampMaskDirective,
-				StarkDatePickerComponent,
-				StarkDateRangePickerComponent,
-				TestModelComponent,
-				TestFormGroupComponent
-			],
-			imports: [
-				NoopAnimationsModule,
-				MatDatepickerModule,
-				MatFormFieldModule,
-				FormsModule,
-				ReactiveFormsModule,
-				TranslateModule.forRoot()
-			],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
-			]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkDateRangePickerComponent, TestModelComponent, TestFormGroupComponent],
+				imports: [
+					NoopAnimationsModule,
+					MatDatepickerModule,
+					MatFormFieldModule,
+					FormsModule,
+					ReactiveFormsModule,
+					StarkDatePickerModule,
+					StarkInputMaskDirectivesModule,
+					TranslateModule.forRoot()
+				],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
+					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
+				]
+			}).compileComponents();
+		})
+	);
 
 	describe("uncontrolled", () => {
 		let fixture: ComponentFixture<StarkDateRangePickerComponent>;
@@ -102,8 +100,8 @@ describe("DateRangePickerComponent", () => {
 				expect(component.endDate).toBeUndefined();
 				expect(component.endDateLabel).toBeDefined();
 				expect(component.endDateLabel).toEqual("STARK.DATE_RANGE_PICKER.TO");
-				expect(component.endMaxDate).toBeUndefined();
-				expect(component.endMinDate).toBeUndefined();
+				expect(component.endMaxDate).toBeNull();
+				expect(component.endMinDate).toBeNull();
 				expect(component.rangePickerId).toBeDefined();
 				expect(component.rangePickerId).toEqual("");
 				expect(component.rangePickerName).toBeDefined();
@@ -111,8 +109,8 @@ describe("DateRangePickerComponent", () => {
 				expect(component.startDate).toBeUndefined();
 				expect(component.startDateLabel).toBeDefined();
 				expect(component.startDateLabel).toEqual("STARK.DATE_RANGE_PICKER.FROM");
-				expect(component.startMaxDate).toBeUndefined();
-				expect(component.startMinDate).toBeUndefined();
+				expect(component.startMaxDate).toBeNull();
+				expect(component.startMinDate).toBeNull();
 				expect(component.dateRangeChanged).toBeDefined();
 				expect(component.dateRangeChanged).toEqual(new EventEmitter<StarkDateRangePickerEvent>());
 			});
@@ -133,11 +131,11 @@ describe("DateRangePickerComponent", () => {
 				component.startDateLabel = "startDateLabel";
 				component.endDateLabel = "endDateLabel";
 				const minDate = new Date(2018, 6, 1);
-				component.startMinDate = minDate;
-				component.endMinDate = minDate;
+				component.startMinDate = <any>minDate;
+				component.endMinDate = <any>minDate;
 				const maxDate = new Date(2018, 6, 2);
-				component.startMaxDate = maxDate;
-				component.endMaxDate = maxDate;
+				component.startMaxDate = <any>maxDate;
+				component.endMaxDate = <any>maxDate;
 				fixture.detectChanges();
 
 				expect(fixture.nativeElement.querySelector("#test-id-start-input")).toBeTruthy();
@@ -499,7 +497,7 @@ describe("DateRangePickerComponent", () => {
 
 				expect(mockObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockObserver.next).toHaveBeenCalledWith({
-					startDate: null, // TODO: null is emitted instead of undefined because it seems Angular Forms work internally with null initial values rather than undefined
+					startDate: undefined,
 					endDate: endDate
 				});
 				expect(mockObserver.error).not.toHaveBeenCalled();

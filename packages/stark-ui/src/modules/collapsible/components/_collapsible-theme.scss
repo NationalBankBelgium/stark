@@ -3,12 +3,16 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/collapsible/components/_collapsible-theme.scss */
 
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "../../../../styles/old-variables" as old-vars;
+
 @mixin stark-collapsible-color($color_high, $color_low) {
   .mat-expansion-panel {
-    box-shadow: $elevation-1;
+    box-shadow: old-vars.$elevation-1;
 
     &.mat-expanded {
-      box-shadow: $elevation-16;
+      box-shadow: old-vars.$elevation-16;
     }
 
     .mat-expansion-panel-header {
@@ -32,19 +36,24 @@
   }
 }
 
-.stark-collapsible {
-  @include stark-collapsible-color(mat-color($grey-palette, A100), mat-color($grey-palette, 900));
+@mixin stark-collapsible-theme($material-theme-config, $stark-theme-config) {
+  $primary-palette: map.get($material-theme-config, primary);
+  $grey-palette: map.get($stark-theme-config, grey-palette);
 
-  .mat-expansion-panel-header-description {
-    color: mat-color(map-get($base-theme, primary-palette), 900);
-  }
+  .stark-collapsible {
+    @include stark-collapsible-color(mat.get-color-from-palette($grey-palette, A100), mat.get-color-from-palette($grey-palette, 900));
 
-  .mat-expansion-panel-header-title {
-    color: mat-color(map-get($base-theme, primary-palette), 500);
-  }
+    .mat-expansion-panel-header-description {
+      color: mat.get-color-from-palette($primary-palette, 900);
+    }
 
-  .stark-collapsible-icon {
-    color: mat-color(map-get($base-theme, primary-palette), 500);
+    .mat-expansion-panel-header-title {
+      color: mat.get-color-from-palette($primary-palette, 500);
+    }
+
+    .stark-collapsible-icon {
+      color: mat.get-color-from-palette($primary-palette, 500);
+    }
   }
 }
 

@@ -2,19 +2,23 @@
 /*  S t a r k   R e f e r e n c e   B l o c k                                     */
 /* ============================================================================== */
 /* stark-ui: src/modules/reference-block/components/reference-block.component.scss */
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui/styles/theming/stark-palettes" as *;
+@use "~@nationalbankbelgium/stark-ui/styles/old-variables" as *;
+
 .stark-reference-block div {
   background-color: #fff;
-  border: solid 1px mat-color($grey-palette, 400);
+  border: solid 1px mat.get-color-from-palette($grey-palette, 400);
   padding: 10px 10px 10px 50px;
   border-radius: 5px;
-  box-shadow: mat-color($grey-palette, 300);
+  box-shadow: mat.get-color-from-palette($grey-palette, 300);
   position: relative;
 
   & mat-icon {
     position: absolute;
     left: 15px;
     top: 14px;
-    color: mat-color($grey-palette, 700);
+    color: mat.get-color-from-palette($grey-palette, 700);
   }
 
   & ul {

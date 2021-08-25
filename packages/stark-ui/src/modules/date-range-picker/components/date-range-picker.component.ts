@@ -11,7 +11,6 @@ import {
 	OnInit,
 	Output,
 	Renderer2,
-	Type,
 	ViewChild,
 	ViewEncapsulation
 } from "@angular/core";
@@ -31,8 +30,11 @@ import get from "lodash-es/get";
 import isEqual from "lodash-es/isEqual";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker/components";
+import { StarkDateInput, StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker/components";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
+import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
+import { isStarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
+import moment from "moment";
 
 /**
  * @ignore
@@ -102,13 +104,61 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * Minimum date of the start date picker
 	 */
 	@Input()
-	public startMinDate?: Date;
+	public set startMinDate(value: moment.Moment | null) {
+		if (value === undefined) {
+			// tslint:disable-next-line:no-null-keyword
+			this._startMinDate = null;
+		} else if (value instanceof Date) {
+			this._startMinDate = moment(value);
+		} else {
+			this._startMinDate = value;
+		}
+	}
+
+	public get startMinDate(): moment.Moment | null {
+		return this._startMinDate;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_startMinDate: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// tslint:disable-next-line:no-null-keyword
+	private _startMinDate: moment.Moment | null = null;
 
 	/**
 	 * Maximum date of the start date picker
 	 */
 	@Input()
-	public startMaxDate?: Date;
+	public set startMaxDate(value: moment.Moment | null) {
+		if (value === undefined) {
+			// tslint:disable-next-line:no-null-keyword
+			this._startMaxDate = null;
+		} else if (value instanceof Date) {
+			this._startMaxDate = moment(value);
+		} else {
+			this._startMaxDate = value;
+		}
+	}
+
+	public get startMaxDate(): moment.Moment | null {
+		return this._startMaxDate;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_startMaxDate: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// tslint:disable-next-line:no-null-keyword
+	private _startMaxDate: moment.Moment | null = null;
 
 	/**
 	 * Source Date to be bound to the end datepicker model
@@ -153,25 +203,62 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * Minimum date of the end date picker
 	 */
 	@Input()
-	public set endMinDate(date: Date | undefined) {
-		this._endMinDate = date;
+	public set endMinDate(value: moment.Moment | null) {
+		if (value === undefined) {
+			// tslint:disable-next-line:no-null-keyword
+			this._endMinDate = null;
+		} else if (value instanceof Date) {
+			this._endMinDate = moment(value);
+		} else {
+			this._endMinDate = value;
+		}
 	}
 
-	public get endMinDate(): Date | undefined {
+	public get endMinDate(): moment.Moment | null {
 		// use the startDate when defined to provide better user experience :)
-		return this.startDate || this._endMinDate;
+		return !!this.startDate ? moment(this.startDate) : this._endMinDate;
 	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_endMinDate: StarkDateInput;
 
 	/**
 	 * @ignore
+	 * Angular expects a Moment or null value.
 	 */
-	private _endMinDate?: Date;
+	// tslint:disable-next-line:no-null-keyword
+	private _endMinDate: moment.Moment | null = null;
 
 	/**
 	 * Maximum date of the end date picker
 	 */
 	@Input()
-	public endMaxDate?: Date;
+	public set endMaxDate(value: moment.Moment | null) {
+		if (value === undefined) {
+			// tslint:disable-next-line:no-null-keyword
+			this._endMaxDate = null;
+		} else if (value instanceof Date) {
+			this._endMaxDate = moment(value);
+		} else {
+			this._endMaxDate = value;
+		}
+	}
+
+	public get endMaxDate(): moment.Moment | null {
+		return this._endMaxDate;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_endMaxDate: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// tslint:disable-next-line:no-null-keyword
+	private _endMaxDate: moment.Moment | null = null;
 
 	/**
 	 * Input to manage both start date and end date.
@@ -210,7 +297,19 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * If a `StarkTimestampMaskConfig` is passed, it is set as the date mask config.
 	 */
 	@Input()
-	public dateMask?: StarkDatePickerMaskConfig;
+	public get dateMask(): StarkDatePickerMaskConfig | undefined {
+		return this._dateMask;
+	}
+
+	public set dateMask(value: StarkDatePickerMaskConfig | undefined) {
+		this._dateMask = isStarkTimestampMaskConfig(value) ? value : coerceBooleanProperty(value);
+	}
+
+	private _dateMask?: StarkDatePickerMaskConfig;
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name no-null-undefined-union
+	public static ngAcceptInputType_dateMask: BooleanInput | StarkDatePickerMaskConfig;
 
 	/**
 	 * Whether the date pickers are disabled
@@ -251,7 +350,23 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * Whether the date pickers are required
 	 */
 	@Input()
-	public required = false;
+	public get required(): boolean {
+		return this._required;
+	}
+
+	public set required(value: boolean) {
+		this._required = coerceBooleanProperty(value);
+	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_required: BooleanInput;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _required = false;
 
 	/**
 	 * HTML "name" attribute of the element.
@@ -358,8 +473,8 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		private injector: Injector,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef,
+		renderer: Renderer2,
+		elementRef: ElementRef,
 		protected cdRef: ChangeDetectorRef
 	) {
 		super(renderer, elementRef);
@@ -370,7 +485,9 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	/**
 	 * Angular lifecycle method
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
+
 		this._setupNgControl();
 		this.logger.debug(componentName + ": component initialized");
 	}
@@ -431,7 +548,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 */
 	private _setupNgControl(): void {
 		// Get the ngControl from the injector
-		const ngControl = this.injector.get<NgControl>(<Type<NgControl>>NgControl, <any>null);
+		const ngControl = this.injector.get<NgControl>(NgControl, <any>null);
 		if (!ngControl) {
 			return;
 		}

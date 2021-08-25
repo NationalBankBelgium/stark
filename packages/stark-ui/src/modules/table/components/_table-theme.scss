@@ -3,15 +3,23 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/table/components/_table-theme.scss */
 
-.stark-table {
-  tr {
-    &:hover td {
-      background-color: mat-color($grey-palette, 100);
-    }
+@use "sass:map";
+@use "~@angular/material" as mat;
 
-    &.selected td {
-      background-color: mat-color($accent-palette, 100);
-      color: mat-contrast($accent-palette, 100);
+@mixin stark-table-theme($material-theme-config, $stark-theme-config) {
+  $grey-palette: map.get($stark-theme-config, grey-palette);
+  $accent-palette: map.get($material-theme-config, accent);
+
+  .stark-table {
+    tr {
+      &:hover td {
+        background-color: mat.get-color-from-palette($grey-palette, 100);
+      }
+
+      &.selected td {
+        background-color: mat.get-color-from-palette($accent-palette, 100);
+        color: mat.get-contrast-color-from-palette($accent-palette, 100);
+      }
     }
   }
 }

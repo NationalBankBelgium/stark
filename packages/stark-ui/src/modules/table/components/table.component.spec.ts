@@ -1,28 +1,28 @@
 /* tslint:disable:completed-docs component-max-inline-declarations no-identical-functions no-lifecycle-call deprecation */
 import { SelectionModel } from "@angular/cdk/collections";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { Component, ViewChild } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatMenuModule } from "@angular/material/menu";
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from "@angular/material/select";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatInputModule } from "@angular/material/input";
-import { By, HAMMER_LOADER } from "@angular/platform-browser";
+import { By } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAction, StarkActionBarComponent } from "@nationalbankbelgium/stark-ui";
-import { Subject } from "rxjs";
+import { StarkAction, StarkActionBarModule } from "../../action-bar";
 import { StarkTableMultisortDialogComponent } from "./dialogs/multisort.component";
 import { StarkTableComponent } from "./table.component";
 import { StarkTableColumnComponent } from "./column.component";
-import { StarkPaginationComponent } from "../../pagination/components";
+import { StarkMinimapModule } from "../../minimap";
+import { StarkPaginationModule } from "../../pagination";
 import { StarkTableRowContentDirective } from "../directives/table-row-content.directive";
 import { StarkTableColumnFilter, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "../entities";
 import find from "lodash-es/find";
@@ -138,47 +138,43 @@ describe("TableComponent", () => {
 	const columnSelectSelector = "cdk-column-select";
 	const rowSelector = "table tbody tr";
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [
-				// Common
-				FormsModule,
-				ReactiveFormsModule,
-				NoopAnimationsModule,
-				TranslateModule.forRoot(),
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [
+					// Common
+					FormsModule,
+					ReactiveFormsModule,
+					NoopAnimationsModule,
+					TranslateModule.forRoot(),
 
-				// Material
-				MatCheckboxModule,
-				MatDialogModule,
-				MatInputModule,
-				MatFormFieldModule,
-				MatMenuModule,
-				MatPaginatorModule,
-				MatSelectModule,
-				MatTableModule,
-				MatTooltipModule
-			],
-			declarations: [
-				TestHostComponent,
-				StarkActionBarComponent,
-				StarkPaginationComponent,
-				StarkTableComponent,
-				StarkTableColumnComponent,
-				StarkTableMultisortDialogComponent,
-				StarkTableRowContentDirective
-			],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				TranslateService,
-				{
-					// See https://github.com/NationalBankBelgium/stark/issues/1088
-					provide: HAMMER_LOADER,
-					useValue: (): Promise<any> => new Subject<any>().toPromise()
-				}
-			],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+					// Stark
+					StarkActionBarModule,
+					StarkPaginationModule,
+					StarkMinimapModule,
+
+					// Material
+					MatCheckboxModule,
+					MatDialogModule,
+					MatIconModule,
+					MatIconTestingModule,
+					MatInputModule,
+					MatMenuModule,
+					MatSelectModule,
+					MatTableModule,
+					MatTooltipModule
+				],
+				declarations: [
+					TestHostComponent,
+					StarkTableComponent,
+					StarkTableColumnComponent,
+					StarkTableMultisortDialogComponent,
+					StarkTableRowContentDirective
+				],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);
@@ -203,9 +199,9 @@ describe("TableComponent", () => {
 			expect(component.columnProperties).toEqual([]);
 			expect(component.data).toBe(hostComponent.dummyData);
 			expect(component.filter).toBeDefined(); // the default filter is set
-			expect(component.fixedHeader).toBe(hostComponent.fixedHeader);
+			expect(component.fixedHeader).toBe(<any>hostComponent.fixedHeader);
 			expect(component.multiSelect).toBe(hostComponent.multiSelect);
-			expect(component.multiSort).toBe(hostComponent.multiSort);
+			expect(component.multiSort).toBe(<any>hostComponent.multiSort);
 			expect(component.orderProperties).toBe(hostComponent.orderProperties);
 			expect(component.showRowsCounter).toBe(false);
 			expect(component.showRowIndex).toBe(false);
@@ -1003,7 +999,7 @@ describe("TableComponent", () => {
 				hostComponent.tableFilter = { globalFilterValue: "" };
 				hostFixture.detectChanges();
 
-				expect(globalFilterButton.classes["filter-enabled"]).toBe(false);
+				expect(globalFilterButton.classes["filter-enabled"]).toBeUndefined();
 			});
 		});
 

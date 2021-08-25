@@ -36,7 +36,7 @@ Then you can just inject the Stark service via the TestBed using its correspondi
 
 ```typescript
 // this will inject the instantiated mock class
-mockLoggingService = TetBed.get(STARK_LOGGING_SERVICE);
+mockLoggingService = TestBed.inject(STARK_LOGGING_SERVICE);
 ```
 
 In fact, every method of the base interface is simply mocked

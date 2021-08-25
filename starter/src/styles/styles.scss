@@ -1,6 +1,5 @@
 /*
 IMPORTANT: Stark styles are provided as SCSS styles so they should be imported in a SCSS file!
 */
-@import "theme";
-@import "~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle";
-@import "../app/app.component";
+@use "theme";
+@use "../app/app.component";

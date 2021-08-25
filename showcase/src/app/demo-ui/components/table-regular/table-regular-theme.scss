@@ -1,8 +1,10 @@
+@use "~@angular/material" as mat;
+
 // todo review after #509 (https://github.com/NationalBankBelgium/stark/issues/509)
 .showcase-table-regular {
   .shadowed {
     .header {
-      @include mat-elevation(2);
+      @include mat.elevation(2);
     }
   }
 }

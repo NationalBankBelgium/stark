@@ -1,6 +1,13 @@
-.stark-alert-dialog {
-  h2 {
-    display: flex;
-    align-items: center;
+/* ============================================================================== */
+/*  S t a r k   A l e r t   D i a l o g                                           */
+/* ============================================================================== */
+/* stark-ui: src/modules/dialogs/components/alert-dialog.component.scss */
+
+@mixin stark-alert-dialog() {
+  .stark-alert-dialog {
+    h2 {
+      display: flex;
+      align-items: center;
+    }
   }
 }

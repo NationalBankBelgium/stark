@@ -1,15 +1,16 @@
 // tslint:disable:completed-docs
 import { StarkMinimapComponent } from "./minimap.component";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
-import { async, ComponentFixture, inject, TestBed } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
-import { HAMMER_LOADER } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { Subject } from "rxjs";
 import { MatMenuModule } from "@angular/material/menu";
 import { OverlayContainer } from "@angular/cdk/overlay";
 
@@ -47,21 +48,25 @@ describe("MinimapComponent", () => {
 	];
 	const visibleItems: string[] = ["column1", "column2"];
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [FormsModule, MatCheckboxModule, MatTooltipModule, MatMenuModule, NoopAnimationsModule, TranslateModule.forRoot()],
-			declarations: [StarkMinimapComponent, TestHostComponent],
-			providers: [
-				TranslateService,
-				{
-					// See https://github.com/NationalBankBelgium/stark/issues/1088
-					provide: HAMMER_LOADER,
-					useValue: (): Promise<any> => new Subject<any>().toPromise()
-				}
-			],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [
+					FormsModule,
+					MatButtonModule,
+					MatCheckboxModule,
+					MatIconModule,
+					MatIconTestingModule,
+					MatTooltipModule,
+					MatMenuModule,
+					NoopAnimationsModule,
+					TranslateModule.forRoot()
+				],
+				declarations: [StarkMinimapComponent, TestHostComponent],
+				providers: [TranslateService]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		// OverlayContainer needs to be injected to get the context for the rendered menu dropdown
@@ -104,6 +109,14 @@ describe("MinimapComponent", () => {
 			expect(menuItemLabels.length).withContext("menu should show a label for all items").toBe(items.length);
 		});
 
+		it("clicking outside menu should close it", fakeAsync(() => {
+			const backdrop = <HTMLElement>overlayContainerElement.querySelector(".cdk-overlay-backdrop");
+			backdrop.click();
+			hostFixture.detectChanges();
+			tick(500);
+			expect(hostFixture.nativeElement.querySelector("mat-icon").classList).not.toContain("open");
+		}));
+
 		it("correct items should be checked", () => {
 			expect(menuItemLabels.length).toBe(items.length);
 			menuItemLabels.forEach((labelElement: HTMLLabelElement) => {
@@ -121,7 +134,9 @@ describe("MinimapComponent", () => {
 
 				const isVisible: boolean = visibleItems.includes(name);
 
-				expect(isChecked).withContext(`input for "${name}" should${isVisible ? " " : " not "}be checked.`).toBe(isVisible);
+				expect(isChecked)
+					.withContext(`input for "${name}" should${isVisible ? " " : " not "}be checked.`)
+					.toBe(isVisible);
 			});
 		});
 

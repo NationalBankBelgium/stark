@@ -2,7 +2,7 @@
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 import { ApplicationRef } from "@angular/core";
-import { async, fakeAsync, tick } from "@angular/core/testing";
+import { fakeAsync, tick, waitForAsync } from "@angular/core/testing";
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarDismiss, MatSnackBarRef } from "@angular/material/snack-bar";
 import { StarkMessageType } from "../../../common/message";
 import { StarkToastMessage, StarkToastNotificationComponent } from "../components";
@@ -26,35 +26,37 @@ describe("ToastNotificationService", () => {
 	/** This observer is used to mimic Angular Material's MatSnackBar's behavior */
 	let observer: Observer<MatSnackBarDismiss>;
 
-	beforeEach(async(() => {
-		const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
-		const afterDismissedObs: Observable<MatSnackBarDismiss> = new Observable<MatSnackBarDismiss>(
-			(o: Observer<MatSnackBarDismiss>): void => {
-				observer = o;
-			}
-		);
-		const mockSnackBar: SpyObj<MatSnackBar> = createSpyObj<MatSnackBar>("MatSnackBar", {
-			openFromComponent: <any>createSpyObj<MatSnackBarRef<StarkToastNotificationComponent>>("MatSnackBarRef", {
-				afterDismissed: afterDismissedObs,
-				dismissWithAction: <any>jasmine.createSpy("dismissWithAction"),
-				dismiss: <any>jasmine.createSpy("dismiss")
-			}),
-			dismiss: undefined
-		});
-		const mockApplicationRef: SpyObj<ApplicationRef> = createSpyObj<ApplicationRef>("ApplicationRef", {
-			tick: undefined
-		});
-		service = new StarkToastNotificationServiceImpl(
-			<MatSnackBar>(<unknown>mockSnackBar),
-			mockLogger,
-			<ApplicationRef>(<unknown>mockApplicationRef),
-			{
-				delay: 3000,
-				position: "top right",
-				actionClasses: []
-			}
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
+			const afterDismissedObs: Observable<MatSnackBarDismiss> = new Observable<MatSnackBarDismiss>(
+				(o: Observer<MatSnackBarDismiss>): void => {
+					observer = o;
+				}
+			);
+			const mockSnackBar: SpyObj<MatSnackBar> = createSpyObj<MatSnackBar>("MatSnackBar", {
+				openFromComponent: <any>createSpyObj<MatSnackBarRef<StarkToastNotificationComponent>>("MatSnackBarRef", {
+					afterDismissed: afterDismissedObs,
+					dismissWithAction: <any>jasmine.createSpy("dismissWithAction"),
+					dismiss: <any>jasmine.createSpy("dismiss")
+				}),
+				dismiss: undefined
+			});
+			const mockApplicationRef: SpyObj<ApplicationRef> = createSpyObj<ApplicationRef>("ApplicationRef", {
+				tick: undefined
+			});
+			service = new StarkToastNotificationServiceImpl(
+				<MatSnackBar>(<unknown>mockSnackBar),
+				mockLogger,
+				<ApplicationRef>(<unknown>mockApplicationRef),
+				{
+					delay: 3000,
+					position: "top right",
+					actionClasses: []
+				}
+			);
+		})
+	);
 
 	describe("on initialization", () => {
 		it("should set internal component properties", () => {

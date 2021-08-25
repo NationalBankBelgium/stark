@@ -1,19 +1,28 @@
-/********** PAGINATION THEME **********/
-/* stark: src/modules/pagination/components/_pagination-theme.scss */
+/* ============================================================================== */
+/*  S t a r k   P a g i n a t i o n                                               */
+/* ============================================================================== */
+/* stark-ui: src/modules/pagination/components/_pagination-theme.scss */
 
-@media #{$tablet-query} {
-  .stark-pagination > div {
-    .pagination-enter-page {
-      & input {
-        border: solid 1px $divider-color;
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "../../../../styles/old-variables" as old-vars;
+@use "../../../../styles/media-queries" as *;
+
+@mixin stark-pagination-theme($material-theme-config, $stark-theme-config) {
+  @media #{$tablet-query} {
+    .stark-pagination > div {
+      .pagination-enter-page {
+        & input {
+          border: solid 1px old-vars.$divider-color;
+        }
       }
-    }
 
-    .page-numbers {
-      &.active {
-        a {
-          color: mat-color(map-get($base-theme, primary-palette));
-          opacity: 1;
+      .page-numbers {
+        &.active {
+          a {
+            color: mat.get-color-from-palette(map.get($material-theme-config, primary));
+            opacity: 1;
+          }
         }
       }
     }

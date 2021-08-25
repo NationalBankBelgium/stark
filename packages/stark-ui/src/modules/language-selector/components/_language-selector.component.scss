@@ -3,9 +3,11 @@
 /* ============================================================================== */
 /* stark: src/modules/language-selector/components/_language-selector.component.scss */
 
-.stark-language-selector.stark-full-width {
-  .mat-form-field {
-    width: 100%;
+@mixin stark-language-selector() {
+  .stark-language-selector.stark-full-width {
+    .mat-form-field {
+      width: 100%;
+    }
   }
 }
 

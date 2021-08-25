@@ -1,4 +1,19 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewEncapsulation } from "@angular/core";
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	Input,
+	OnDestroy,
+	Output,
+	Renderer2,
+	ViewChild,
+	ViewEncapsulation
+} from "@angular/core";
+import { MatMenuTrigger } from "@angular/material/menu";
+import { Subscription } from "rxjs";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -23,7 +38,7 @@ const componentName = "stark-minimap";
 		class: componentName
 	}
 })
-export class StarkMinimapComponent extends AbstractStarkUiComponent {
+export class StarkMinimapComponent extends AbstractStarkUiComponent implements AfterViewInit, OnDestroy {
 	/**
 	 * Array of {@link StarkMinimapItemProperties} objects which define the items to display in the minimap.
 	 */
@@ -48,13 +63,40 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent {
 	@Output()
 	public readonly showHideItem = new EventEmitter<StarkMinimapItemProperties>();
 
+	@ViewChild(MatMenuTrigger, { static: true })
+	public menuTrigger!: MatMenuTrigger;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private menuTriggerClosedSubscription!: Subscription;
+
 	/**
 	 * Class constructor
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 * @param cdRef - Reference to the change detector attached to this component.
 	 */
-	public constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
+	public constructor(renderer: Renderer2, elementRef: ElementRef, private cdRef: ChangeDetectorRef) {
 		super(renderer, elementRef);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngAfterViewInit(): void {
+		// Change detection has to be triggered manually to update `minimapMenuTrigger.menuOpen` value
+		this.menuTriggerClosedSubscription = this.menuTrigger.menuClosed.subscribe(() => {
+			this.cdRef.detectChanges();
+		});
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnDestroy(): void {
+		this.menuTriggerClosedSubscription.unsubscribe();
 	}
 
 	/**

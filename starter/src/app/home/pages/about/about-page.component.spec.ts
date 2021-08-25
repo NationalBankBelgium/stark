@@ -7,8 +7,7 @@ import {
 	STARK_LOGGING_SERVICE,
 	StarkApplicationConfig,
 	StarkBackend,
-	StarkBackendAuthenticationTypes,
-	StarkLoggingService
+	StarkBackendAuthenticationTypes
 } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { AboutPageComponent } from "./about-page.component";
@@ -17,7 +16,7 @@ describe("About", () => {
 	/**
 	 * Provide our implementations or mocks to the dependency injector
 	 */
-	let logger: StarkLoggingService;
+	let logger: MockStarkLoggingService;
 
 	const mockBackend: Partial<StarkBackend> = {
 		authenticationType: StarkBackendAuthenticationTypes.PUBLIC,
@@ -57,7 +56,7 @@ describe("About", () => {
 	);
 
 	it("should log ngOnInit", inject([AboutPageComponent], (about: AboutPageComponent) => {
-		logger = TestBed.get(STARK_LOGGING_SERVICE);
+		logger = TestBed.inject<MockStarkLoggingService>(STARK_LOGGING_SERVICE);
 
 		expect(logger.debug).not.toHaveBeenCalled();
 

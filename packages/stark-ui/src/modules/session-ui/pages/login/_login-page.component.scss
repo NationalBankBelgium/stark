@@ -3,21 +3,24 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/session-ui/pages/login/_login-page.component.scss */
 
-.stark-login-page {
-  .mat-card-content {
-    a {
-      margin-left: -16px;
-      margin-right: -16px;
-      padding-left: 16px;
-      padding-right: 16px;
+@mixin stark-login-page() {
+  .stark-login-page {
+    .mat-card-content {
+      a {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
 
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
+        cursor: pointer;
 
-      .mat-list-text h3 {
-        font-weight: bold;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .mat-list-text h3 {
+          font-weight: bold;
+        }
       }
     }
   }

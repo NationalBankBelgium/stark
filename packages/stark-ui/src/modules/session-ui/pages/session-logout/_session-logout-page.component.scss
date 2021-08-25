@@ -3,8 +3,10 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/session-ui/pages/session-logout/_session-logout-page.component.scss */
 
-.stark-session-logout-page {
-  text-align: center;
+@mixin stark-session-logout-page() {
+  .stark-session-logout-page {
+    text-align: center;
+  }
 }
 
 /* END stark-ui: src/modules/session-ui/pages/session-logout/_session-logout-page.component.scss */

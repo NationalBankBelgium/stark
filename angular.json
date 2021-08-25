@@ -10,7 +10,7 @@
       "prefix": "stark",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "./packages/stark-core/tsconfig.lib.json",
             "project": "./packages/stark-core/ng-package.json"
@@ -40,7 +40,7 @@
       "prefix": "stark",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "./packages/stark-rbac/tsconfig.lib.json",
             "project": "./packages/stark-rbac/ng-package.json"
@@ -70,7 +70,7 @@
       "prefix": "stark",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "./packages/stark-ui/tsconfig.lib.json",
             "project": "./packages/stark-ui/ng-package.json"

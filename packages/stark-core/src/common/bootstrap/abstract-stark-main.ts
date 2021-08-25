@@ -161,7 +161,7 @@ We need great software developers like you! https://jobs.nbb.be
 			// Ensure that we get detailed stack tracks during development (useful with node & Webpack)
 			// Reference: https://stackoverflow.com/questions/7697038/more-than-10-lines-in-a-node-js-stack-error
 			Error.stackTraceLimit = Infinity;
-			require("zone.js/dist/long-stack-trace-zone");
+			require("zone.js/plugins/long-stack-trace-zone");
 
 			// Enable Angular debug tools in the dev console
 			// https://github.com/angular/angular/blob/master/docs/TOOLS.md

@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { fromEvent, Subject } from "rxjs";
 import { debounceTime, takeUntil } from "rxjs/operators";
-import { StarkAction } from "@nationalbankbelgium/stark-ui";
 import { TableOfContentLink } from "./table-of-content-link.intf";
 
 @Component({
@@ -154,7 +153,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	/**
 	 * @ignore
 	 */
-	public trackItem(_index: number, item: StarkAction): string {
+	public trackItem(_index: number, item: TableOfContentLink): string {
 		return item.id;
 	}
 }

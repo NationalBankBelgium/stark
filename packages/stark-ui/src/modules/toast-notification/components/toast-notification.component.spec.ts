@@ -1,9 +1,10 @@
 /*tslint:disable:completed-docs*/
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { Component, ViewChild } from "@angular/core";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MAT_SNACK_BAR_DATA, MatSnackBar, MatSnackBarRef } from "@angular/material/snack-bar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
@@ -40,24 +41,26 @@ describe("ToastNotificationComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				declarations: [StarkToastNotificationComponent, TestHostComponent],
-				imports: [TranslateModule.forRoot(), MatButtonModule, MatIconModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: MatSnackBar, useValue: mockSnackBar },
-					{ provide: MAT_SNACK_BAR_DATA, useValue: mockMatSnackBarConfig }
-				],
-				schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					declarations: [StarkToastNotificationComponent, TestHostComponent],
+					imports: [TranslateModule.forRoot(), MatButtonModule, MatIconModule, MatIconTestingModule],
+					providers: [
+						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+						{ provide: MatSnackBar, useValue: mockSnackBar },
+						// Need to clone the object to avoid mutation of it between tests
+						{ provide: MAT_SNACK_BAR_DATA, useValue: { ...mockMatSnackBarConfig } }
+					]
+				})
+					/**
+					 * Compile template and css
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach

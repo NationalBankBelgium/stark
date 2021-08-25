@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs no-lifecycle-call */
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_APP_SIDEBAR_SERVICE } from "@nationalbankbelgium/stark-ui";
 import { MockStarkAppSidebarService } from "@nationalbankbelgium/stark-ui/testing";
@@ -16,25 +16,27 @@ describe(`App`, () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				declarations: [AppComponent],
-				imports: [TranslateModule.forRoot()],
-				schemas: [NO_ERRORS_SCHEMA],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockStarkAppSidebarService() },
-					TranslateService
-				]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					declarations: [AppComponent],
+					imports: [TranslateModule.forRoot()],
+					schemas: [NO_ERRORS_SCHEMA],
+					providers: [
+						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+						{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
+						{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockStarkAppSidebarService() },
+						TranslateService
+					]
+				})
+					/**
+					 * Compile template and css
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach

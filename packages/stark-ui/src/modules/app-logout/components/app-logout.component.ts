@@ -61,8 +61,8 @@ export class StarkAppLogoutComponent extends AbstractStarkUiComponent implements
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef,
+		renderer: Renderer2,
+		elementRef: ElementRef,
 		@Optional()
 		@Inject(STARK_SESSION_CONFIG)
 		public sessionConfig?: StarkSessionConfig
@@ -73,7 +73,8 @@ export class StarkAppLogoutComponent extends AbstractStarkUiComponent implements
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.logger.debug(componentName + ": controller initialized");
 	}
 

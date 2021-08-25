@@ -111,8 +111,8 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 		@Inject(STARK_ROUTING_SERVICE) public routingService: StarkRoutingService,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		@Inject(TranslateService) public translateService: TranslateService,
-		public renderer: Renderer2,
-		public elementRef: ElementRef
+		renderer: Renderer2,
+		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
 		this.searchField = new FormControl();
@@ -131,7 +131,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
 		super.ngOnInit();
 
 		this.searchField.setValue("");

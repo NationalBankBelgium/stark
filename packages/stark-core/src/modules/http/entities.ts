@@ -1,5 +1,6 @@
 export * from "./entities/backend";
 export * from "./entities/error";
+export * from "./entities/http-parameter-codec";
 export * from "./entities/http-request.entity.intf";
 export * from "./entities/http-request-type.entity";
 export * from "./entities/metadata";

@@ -7,7 +7,7 @@ export class DemoAuthorizationService extends StarkRBACAuthorizationServiceImpl 
 	/**
 	 * To be called only when the app initializes
 	 */
-	public initializeService(): void {
+	public override initializeService(): void {
 		this.sessionService.getCurrentUser().subscribe(
 			(user: StarkUser | undefined) => {
 				if (user) {

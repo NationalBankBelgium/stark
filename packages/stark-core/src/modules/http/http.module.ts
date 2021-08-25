@@ -13,7 +13,7 @@ export class StarkHttpModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(): ModuleWithProviders<StarkHttpModule> {
 		return {
 			ngModule: StarkHttpModule,
 			providers: [{ provide: STARK_HTTP_SERVICE, useClass: StarkHttpServiceImpl }]

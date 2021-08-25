@@ -1,6 +1,6 @@
 import { ReplaySubject, Subscription } from "rxjs";
 import { map, take } from "rxjs/operators";
-import { OnDestroy, OnInit } from "@angular/core";
+import { Directive, OnDestroy, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { AbstractStarkFormComponent } from "./abstract-form-component";
 import { StarkGenericSearchService } from "./generic-search.service.intf";
@@ -21,6 +21,8 @@ const defaultProgressIndicatorConfig: StarkProgressIndicatorConfig = {
 /**
  * Abstract class defining the common properties and methods for the Search Page using the {@link StarkGenericSearchComponent}.
  */
+@Directive({})
+// tslint:disable-next-line:directive-class-suffix
 export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaType>
 	extends AbstractStarkFormComponent<CriteriaType>
 	implements OnInit, OnDestroy {

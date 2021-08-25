@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-lifecycle-call */
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
@@ -16,22 +16,24 @@ describe("SessionTimeoutWarningDialogComponent", () => {
 	let mockDialogRef: MatDialogRef<any>;
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [StarkSessionTimeoutWarningDialogComponent],
-			imports: [CommonModule, MatDialogModule],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-				{ provide: MatDialog, useValue: MatDialog },
-				{ provide: MAT_DIALOG_DATA, useValue: 20 },
-				{ provide: MatDialogRef, useValue: createSpyObj("MatDialogRefSpy", ["close"]) }
-			]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkSessionTimeoutWarningDialogComponent],
+				imports: [CommonModule, MatDialogModule],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+					{ provide: MatDialog, useValue: MatDialog },
+					{ provide: MAT_DIALOG_DATA, useValue: 20 },
+					{ provide: MatDialogRef, useValue: createSpyObj("MatDialogRefSpy", ["close"]) }
+				]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkSessionTimeoutWarningDialogComponent);
-		mockDialogRef = TestBed.get(MatDialogRef);
+		mockDialogRef = TestBed.inject(MatDialogRef);
 		component = fixture.componentInstance;
 
 		mockLogger.debug.calls.reset();

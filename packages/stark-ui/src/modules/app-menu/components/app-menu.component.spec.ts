@@ -1,9 +1,10 @@
 /*tslint:disable:completed-docs*/
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { MatListModule } from "@angular/material/list";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { StarkAppMenuComponent } from "./app-menu.component";
 import { StarkAppMenuItemComponent } from "./app-menu-item.component";
 import { UIRouterModule } from "@uirouter/angular";
@@ -15,23 +16,24 @@ describe("AppMenuComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				declarations: [StarkAppMenuComponent, StarkAppMenuItemComponent],
-				imports: [MatListModule, UIRouterModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-				],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					declarations: [StarkAppMenuComponent, StarkAppMenuItemComponent],
+					imports: [MatIconModule, MatIconTestingModule, MatListModule, UIRouterModule],
+					providers: [
+						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+						{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
+					]
+				})
+					/**
+					 * Compile template and css
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach

@@ -1,5 +1,5 @@
 /*tslint:disable:completed-docs*/
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppLogoComponent } from "./app-logo.component";
@@ -14,21 +14,23 @@ describe("AppLogoComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				declarations: [StarkAppLogoComponent],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-				]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					declarations: [StarkAppLogoComponent],
+					providers: [
+						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+						{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
+					]
+				})
+					/**
+					 * Compile template and css
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach

@@ -69,24 +69,12 @@ const rawKarmaConfig = {
 	browserDisconnectTimeout: 30000,
 
 	// Configuration for coverage-istanbul reporter
-	coverageIstanbulReporter: {
-		// reports can be any that are listed here: https://github.com/istanbuljs/istanbuljs/tree/73c25ce79f91010d1ff073aa6ff3fd01114f90db/packages/istanbul-reports/lib
-		reports: ["html", "lcovonly", "text-summary", "clover", "json"],
-
+	coverageReporter: {
 		// base output directory. If you include %browser% in the path it will be replaced with the karma browser name
 		dir: helpers.root("reports/coverage"),
-
-		// Combines coverage information from multiple browsers into one report rather than outputting a report
-		// for each browser.
-		combineBrowserReports: true,
-
-		// if using webpack and pre-loaders, work around webpack breaking the source path
-		fixWebpackSourcePaths: true,
-
-		// Omit files with no statements, no functions and no branches covered from the report
-		skipFilesWithNoCoverage: true,
-
-		verbose: !!ciDetect() // output config used by istanbul for debugging
+		subdir: ".",
+		// https://github.com/istanbuljs/istanbuljs/tree/73c25ce79f91010d1ff073aa6ff3fd01114f90db/packages/istanbul-reports/lib
+		reporters: [{ type: "html" }, { type: "lcovonly" }, { type: "text-summary" }, { type: "clover" }, { type: "json" }]
 	},
 
 	// Custom launcher configuration for ChromeHeadless (with Puppeteer)

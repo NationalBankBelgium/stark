@@ -27,7 +27,7 @@ export class StarkXSRFModule {
 	 * @param xsrfConfig - Object containing the configuration (if any) for the `StarkXSRFService`
 	 * @returns A module with providers
 	 */
-	public static forRoot(xsrfConfig?: StarkXSRFConfig): ModuleWithProviders {
+	public static forRoot(xsrfConfig?: StarkXSRFConfig): ModuleWithProviders<StarkXSRFModule> {
 		return {
 			ngModule: StarkXSRFModule,
 			providers: [

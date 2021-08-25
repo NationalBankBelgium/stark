@@ -1,15 +1,18 @@
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
 .basic-table {
   border-collapse: collapse;
   border-radius: 2px;
   border-spacing: 0;
   margin: 0 0 32px;
   width: 100%;
-  box-shadow: $elevation-4;
+  box-shadow: stark-ui.$elevation-4;
 
   th {
-    font-size: mat-font-size($typography-config, subheading-2);
-    font-weight: mat-font-weight($typography-config, subheading-2);
-    line-height: mat-line-height($typography-config, subheading-2);
+    font-size: mat.font-size(stark-ui.$typography-config, subheading-2);
+    font-weight: mat.font-weight(stark-ui.$typography-config, subheading-2);
+    line-height: mat.line-height(stark-ui.$typography-config, subheading-2);
     padding: 13px 32px;
     text-align: left;
   }

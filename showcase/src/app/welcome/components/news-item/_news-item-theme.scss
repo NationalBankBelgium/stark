@@ -1,14 +1,17 @@
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
 news-item {
   .news-image {
-    border: 1px solid mat-color($grey-palette, 700);
+    border: 1px solid mat.get-color-from-palette(stark-ui.$grey-palette, 700);
     background-color: #fff;
   }
 
   .news-item-content {
-    color: mat-color($grey-palette, 900);
+    color: mat.get-color-from-palette(stark-ui.$grey-palette, 900);
   }
 
   .information {
-    color: mat-color($grey-palette, 600);
+    color: mat.get-color-from-palette(stark-ui.$grey-palette, 600);
   }
 }

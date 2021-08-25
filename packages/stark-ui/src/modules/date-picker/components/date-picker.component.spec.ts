@@ -3,7 +3,7 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { By } from "@angular/platform-browser";
 import { Component, ViewChild } from "@angular/core";
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
@@ -16,7 +16,7 @@ import moment from "moment";
 import { Observer } from "rxjs";
 import { DEFAULT_DATE_MASK_CONFIG, StarkDatePickerComponent, StarkDatePickerMaskConfig } from "./date-picker.component";
 import { STARK_DATE_FORMATS } from "./date-format.constants";
-import { StarkTimestampMaskDirective } from "../../input-mask-directives/directives";
+import { StarkInputMaskDirectivesModule } from "../../input-mask-directives";
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;
@@ -104,27 +104,30 @@ class TestHostFormControlComponent {
 describe("DatePickerComponent", () => {
 	let component: StarkDatePickerComponent;
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [StarkTimestampMaskDirective, StarkDatePickerComponent, TestHostComponent, TestHostFormControlComponent],
-			imports: [
-				NoopAnimationsModule,
-				MatDatepickerModule,
-				MatFormFieldModule,
-				MatInputModule,
-				MatMomentDateModule,
-				FormsModule,
-				ReactiveFormsModule,
-				TranslateModule.forRoot()
-			],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS },
-				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
-			]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkDatePickerComponent, TestHostComponent, TestHostFormControlComponent],
+				imports: [
+					NoopAnimationsModule,
+					MatDatepickerModule,
+					MatFormFieldModule,
+					MatInputModule,
+					MatMomentDateModule,
+					FormsModule,
+					ReactiveFormsModule,
+					StarkInputMaskDirectivesModule,
+					TranslateModule.forRoot()
+				],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS },
+					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
+					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
+				]
+			}).compileComponents();
+		})
+	);
 
 	describe("MatFormFieldControl", () => {
 		let hostComponent: TestHostFormControlComponent;
@@ -145,7 +148,7 @@ describe("DatePickerComponent", () => {
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeUndefined();
 
 			// more verbose way to create and trigger an event (the only way it works in IE)
 			// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
@@ -155,7 +158,7 @@ describe("DatePickerComponent", () => {
 			inputDebugElement.nativeElement.dispatchEvent(blurEvent); // simulate that the user has touched the input
 			hostFixture.detectChanges();
 
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(true);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeTrue();
 		});
 
 		it("if date is initially invalid, the date picker should not be displayed as invalid until the form control is marked as 'touched'", () => {
@@ -166,12 +169,12 @@ describe("DatePickerComponent", () => {
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeUndefined();
 
 			hostComponent.formControl.markAsTouched();
 			hostFixture.detectChanges();
 
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(true);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeTrue();
 		});
 
 		it("if date is initially invalid, the date picker should not be displayed as invalid until the form control is marked as 'dirty'", () => {
@@ -182,12 +185,12 @@ describe("DatePickerComponent", () => {
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeUndefined();
 
 			hostComponent.formControl.markAsDirty();
 			hostFixture.detectChanges();
 
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(true);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeTrue();
 		});
 
 		it("if marked as required, an asterisk should be appended to the label", () => {
@@ -243,10 +246,10 @@ describe("DatePickerComponent", () => {
 			it("should NOT have any inputs set", () => {
 				expect(component.value).toBeNull();
 				expect(component.dateFilter).toBeUndefined();
-				expect(component.disabled).toBe(false);
-				expect(component.required).toBe(false);
-				expect(component.max).toBeUndefined();
-				expect(component.min).toBeUndefined();
+				expect(component.disabled).toBeFalse();
+				expect(component.required).toBeFalse();
+				expect(component.max).toBeNull();
+				expect(component.min).toBeNull();
 				expect(component.pickerId).toBeUndefined();
 				expect(component.pickerName).toBeUndefined();
 				expect(component.placeholder).toEqual("");
@@ -294,12 +297,12 @@ describe("DatePickerComponent", () => {
 				hostComponent.formControl.disable({ emitEvent: false });
 				hostFixture.detectChanges();
 
-				expect(component.pickerInput.disabled).toBe(true);
+				expect(component.pickerInput.disabled).toBeTrue();
 
 				hostComponent.formControl.enable({ emitEvent: false });
 				hostFixture.detectChanges();
 
-				expect(component.pickerInput.disabled).toBe(false);
+				expect(component.pickerInput.disabled).toBeFalse();
 				expect(mockObserver.next).not.toHaveBeenCalled(); // because the 'emitEvent' is false
 				expect(mockObserver.error).not.toHaveBeenCalled();
 				expect(mockObserver.complete).not.toHaveBeenCalled();
@@ -307,14 +310,14 @@ describe("DatePickerComponent", () => {
 				hostComponent.formControl.disable(); // 'emitEvent' true by default
 				hostFixture.detectChanges();
 
-				expect(component.pickerInput.disabled).toBe(true);
+				expect(component.pickerInput.disabled).toBeTrue();
 				expect(mockObserver.next).toHaveBeenCalledTimes(1);
 				mockObserver.next.calls.reset();
 
 				hostComponent.formControl.enable(); // 'emitEvent' true by default
 				hostFixture.detectChanges();
 
-				expect(component.pickerInput.disabled).toBe(false);
+				expect(component.pickerInput.disabled).toBeFalse();
 				expect(mockObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockObserver.error).not.toHaveBeenCalled();
 				expect(mockObserver.complete).not.toHaveBeenCalled();
@@ -387,23 +390,23 @@ describe("DatePickerComponent", () => {
 
 		describe("date filters", () => {
 			it("filterOnlyWeekdays() should filter week days", () => {
-				expect(component.filterOnlyWeekdays(new Date(2018, 6, 16))).toBe(true);
-				expect(component.filterOnlyWeekdays(new Date(2018, 6, 17))).toBe(true);
-				expect(component.filterOnlyWeekdays(new Date(2018, 6, 18))).toBe(true);
-				expect(component.filterOnlyWeekdays(new Date(2018, 6, 19))).toBe(true);
-				expect(component.filterOnlyWeekdays(new Date(2018, 6, 20))).toBe(true);
-				expect(component.filterOnlyWeekdays(new Date(2018, 6, 21))).toBe(false);
-				expect(component.filterOnlyWeekdays(new Date(2018, 6, 22))).toBe(false);
+				expect(component.filterOnlyWeekdays(new Date(2018, 6, 16))).toBeTrue();
+				expect(component.filterOnlyWeekdays(new Date(2018, 6, 17))).toBeTrue();
+				expect(component.filterOnlyWeekdays(new Date(2018, 6, 18))).toBeTrue();
+				expect(component.filterOnlyWeekdays(new Date(2018, 6, 19))).toBeTrue();
+				expect(component.filterOnlyWeekdays(new Date(2018, 6, 20))).toBeTrue();
+				expect(component.filterOnlyWeekdays(new Date(2018, 6, 21))).toBeFalse();
+				expect(component.filterOnlyWeekdays(new Date(2018, 6, 22))).toBeFalse();
 			});
 
 			it("filterOnlyWeekends() should filter week days", () => {
-				expect(component.filterOnlyWeekends(new Date(2018, 6, 16))).toBe(false);
-				expect(component.filterOnlyWeekends(new Date(2018, 6, 17))).toBe(false);
-				expect(component.filterOnlyWeekends(new Date(2018, 6, 18))).toBe(false);
-				expect(component.filterOnlyWeekends(new Date(2018, 6, 19))).toBe(false);
-				expect(component.filterOnlyWeekends(new Date(2018, 6, 20))).toBe(false);
-				expect(component.filterOnlyWeekends(new Date(2018, 6, 21))).toBe(true);
-				expect(component.filterOnlyWeekends(new Date(2018, 6, 22))).toBe(true);
+				expect(component.filterOnlyWeekends(new Date(2018, 6, 16))).toBeFalse();
+				expect(component.filterOnlyWeekends(new Date(2018, 6, 17))).toBeFalse();
+				expect(component.filterOnlyWeekends(new Date(2018, 6, 18))).toBeFalse();
+				expect(component.filterOnlyWeekends(new Date(2018, 6, 19))).toBeFalse();
+				expect(component.filterOnlyWeekends(new Date(2018, 6, 20))).toBeFalse();
+				expect(component.filterOnlyWeekends(new Date(2018, 6, 21))).toBeTrue();
+				expect(component.filterOnlyWeekends(new Date(2018, 6, 22))).toBeTrue();
 			});
 
 			it("dateFilter should be filterOnlyWeekdays() when dateFilter is 'OnlyWeekdays'", () => {
@@ -514,10 +517,10 @@ describe("DatePickerComponent", () => {
 			it("should NOT have any inputs set", () => {
 				expect(component.value).toBeUndefined();
 				expect(component.dateFilter).toBeUndefined();
-				expect(component.disabled).toBeUndefined();
-				expect(component.required).toBe(false);
-				expect(component.max).toBeUndefined();
-				expect(component.min).toBeUndefined();
+				expect(component.disabled).toBeFalse();
+				expect(component.required).toBeFalse();
+				expect(component.max).toBeNull();
+				expect(component.min).toBeNull();
 				expect(component.pickerId).toBeUndefined();
 				expect(component.pickerName).toBeUndefined();
 				expect(component.placeholder).toEqual("");
@@ -567,11 +570,11 @@ describe("DatePickerComponent", () => {
 
 				hostComponent.isDisabled = true;
 				hostFixture.detectChanges();
-				expect(component.pickerInput.disabled).toBe(true);
+				expect(component.pickerInput.disabled).toBeTrue();
 
 				hostComponent.isDisabled = false;
 				hostFixture.detectChanges();
-				expect(component.pickerInput.disabled).toBe(false);
+				expect(component.pickerInput.disabled).toBeFalse();
 
 				expect(hostComponent.onValueChange).not.toHaveBeenCalled();
 				expect(mockObserver.next).not.toHaveBeenCalled();

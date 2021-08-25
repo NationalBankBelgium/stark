@@ -1,39 +1,43 @@
 /* stark session ui pages */
-.stark-session-ui-page {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  max-width: 100%;
-  width: 500px;
-  overflow: hidden;
-  border: solid 1px $divider-color;
-  box-shadow: $elevation-2;
+@use "../../../../styles/old-variables" as old-vars;
 
-  header {
-    padding: 16px;
-    background-image: url(/assets/images/app-header.png);
-    background-position: top right;
-    background-repeat: no-repeat;
-    border-radius: 2px 2px 0 0;
+@mixin stark-session-ui-pages() {
+  .stark-session-ui-page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 500px;
+    overflow: hidden;
+    border: solid 1px old-vars.$divider-color;
+    box-shadow: old-vars.$elevation-2;
 
-    i {
-      margin: auto;
-      display: block;
-
-      width: 200px;
-      height: 60px;
-      background-image: url(/assets/stark-core/logo/light/stark_logo_light.svg);
-      background-size: contain;
-      background-position: center;
+    header {
+      padding: 16px;
+      background-image: url(/assets/images/app-header.png);
+      background-position: top right;
       background-repeat: no-repeat;
-    }
-  }
+      border-radius: 2px 2px 0 0;
 
-  content {
-    display: block;
-    padding: 16px;
-    background: #fff;
+      i {
+        margin: auto;
+        display: block;
+
+        width: 200px;
+        height: 60px;
+        background-image: url(/assets/stark-core/logo/light/stark_logo_light.svg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+
+    content {
+      display: block;
+      padding: 16px;
+      background: #fff;
+    }
   }
 }

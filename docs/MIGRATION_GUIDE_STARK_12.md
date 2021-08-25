@@ -1,7 +1,67 @@
-# Guide for migration from Stark 10 to Stark 11
+# Guide for migration from Stark 10 to Stark 12
 
 This guide contains all the changes required to migrate an application
-from Stark 10 (Angular 7) to Stark 11 (Angular 11).
+from Stark 10 (Angular 7) to Stark 12 (Angular 12).
+
+## General dependencies
+
+Upgrade the following dependencies in your "package.json" file:
+- @angular/*, from `"^7.2.0"` to `"^12.1.0"`
+- @nationalbankbelgium/code-style: `"^1.6.0"`
+- @nationalbankbelgium/stark-*, from `"^10.0.0"` to `"^12.0.0"`
+- typescript, from `"~3.5.0"` to `"~4.3.5"`
+- zone.js, from `"~0.8.x"` to `"~0.11.4"`
+
+## @Angular/CLI
+
+### 1. Adapt "tsconfig.app.json" file
+
+Due to angular upgrade to v12, it is required to adapt your "tsconfig.app.json" file to specify
+the files used by Angular CLI to build your project.
+
+Before:
+
+```json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {},
+  "exclude": ["node_modules", "dist", "src/**/*.spec.ts", "src/**/*.e2e.ts", "e2e/**/*.e2e.ts", "src/assets"]
+}
+```
+
+After:
+
+```json
+{
+  "extends": "./tsconfig.json",
+  "files": ["src/main.browser.ts", "src/polyfills.browser.ts"],
+  "compilerOptions": {},
+  "exclude": ["node_modules", "dist", "src/**/*.spec.ts", "src/**/*.e2e.ts", "e2e/**/*.e2e.ts", "src/assets"]
+}
+```
+
+### 2. Adapt TestBed usage
+
+Due to angular upgrade to v12, it is required to adapt TestBed usage.
+`TestBed.get` has to be replaced by `TestBed.inject`.
+
+## zone.js
+
+### 1. Adapt "base.spec.ts" and "src/polyfills.browser.ts" files
+
+Due to zone.js update, imports should be adapted in "base.spec.ts" and "src/polyfills.browser.ts" files:
+
+```typescript
+// Before
+import "zone.js/dist/zone";
+import "zone.js/dist/zone-testing";
+import "zone.js/dist/long-stack-trace-zone";
+
+// After
+import "zone.js";
+import "zone.js/testing";
+import "zone.js/plugins/long-stack-trace-zone";
+```
 
 ## Stark-Build
 
@@ -69,7 +129,7 @@ After:
 
 #### 1.2. Edit `projects.<project_name>.architect.build.configurations.<environment>`:
 
-In Stark 11, there is only one "webpack.config.js" file.
+In Stark 12, there is only one "webpack.config.js" file.
 Thanks to this, this is no longer needed to have specific configurations for other environment.
 
 Please remove the following lines in `projects.<project_name>.architect.build.configurations.<environment>`:
@@ -182,7 +242,7 @@ After:
 }
 ```
 
-#### 1.3. Edit `projects.<project_name>.architect.test.builder`:
+#### 1.4. Edit `projects.<project_name>.architect.test.builder`:
 
 Add support for stark-testing karma config with command `ng test`
 
@@ -233,8 +293,70 @@ After:
 }
 ```
 
+#### 1.5. Edit `projects.<project_name>.architect.build.configurations.hmr`:
+
+Add support for CSS Hot Reloading by setting `extractCss` property to `false` in hmr configuration.
+
+Before:
+
+```txt
+{
+  // ...
+  "projects": {
+    "<project_name>": {
+      // ...
+      "architect": {
+        "build": {
+          "configurations": {
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            },
+            // ...
+          },
+        }
+      }
+    }
+  }
+}
+```
+
+After:
+
+```txt
+{
+  // ...
+  "projects": {
+    "<project_name>": {
+      // ...
+      "architect": {
+        "build": {
+          "configurations": {
+            "hmr": {
+              "extractCss": false, // <-- Line to add
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            },
+            // ...
+          },
+        }
+      }
+    }
+  }
+}
+```
+
 ### 2. Adapt "src/index.html" file
 
+#### 2.1. Adapt stark variables usage
 As `htmlWebpackPlugin` is no longer supported by Angular CLI, the options related to this plugin have been changed.
 Instead of using `htmlWebpackPlugin`, you need to use `starkOptions` like this:
 
@@ -265,9 +387,21 @@ Thanks to the following search & replace:
 
 It should be easy to adapt the index.html file.
 
+#### 2.2. Remove obsolete code related to webpack-dev-server
+
+Remove the following piece of code in "src/index.html"
+
+```html
+<!-- move the block of webpack dev server to the <head> section and change the IF conditions -->
+<% if (starkOptions.starkAppMetadata.IS_DEV_SERVER && starkOptions.starkAppMetadata.HMR !== true) { %>
+<!-- Webpack Dev Server reload -->
+<script src="/webpack-dev-server.js"></script>
+<% } %>
+```
+
 ### 3. Adapt "package.json" file
 
-#### 3.1 Remove scripts with MONITOR
+#### 3.1. Remove scripts with MONITOR
 
 Due to Angular upgrade, webpack-monitor stopped working. Since the package was no longer maintained (4 years),
 we decided to remove the support from `stark-build`.
@@ -674,7 +808,44 @@ To complete
 
 ## Stark-UI
 
-### Update ngrx action usage
+### 1. Update styles
+
+Due to upgrade to `@angular/material` v12, we need to update SCSS files to use the
+new `@use` word instead of `@import`.
+
+Your current "src/styles/_theme.scss" should look like this:
+
+```scss
+@import "variables";
+@import "~@nationalbankbelgium/stark-ui/assets/theming";
+```
+
+After upgrading to Stark v12, you should update the file as following:
+
+```scss
+@use "variables";
+@use "sass:map";
+
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
+@include mat.core();
+@include stark-ui.set-stark-ui-styles();
+```
+
+As all the stark-ui styles are configured thanks to `set-stark-ui-styles` method, you should remove
+`@import "~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle";` import 
+in "src/styles/styles.scss".
+
+If you use Stark media queries variables such as `$tablet-query`, `$mobile-only-query`...
+
+You should add the following `@use` rule at the top of your files:
+
+```scss
+@use "~@nationalbankbelgium/stark-ui/styles/media-queries" as *;
+```
+
+### 2. Update ngrx action usage
 
 #### Details about changes
 
@@ -766,3 +937,4 @@ this.store.dispatch(StarkMessagePaneActions.addMessages({ messages: messages }))
 - StarkProgressIndicatorShow
   - Search: `new StarkProgressIndicatorShow\((\w+)\)`
   - Replace: `StarkProgressIndicatorFullConfig.show({ topic: $1 })`
+  

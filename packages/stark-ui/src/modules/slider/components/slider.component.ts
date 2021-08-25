@@ -101,8 +101,8 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		renderer: Renderer2,
+		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
 		this.noUiSliderLibrary = noUiSliderLibrary;
@@ -111,7 +111,9 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	/**
 	 * Component lifecycle hook that is called after data-bound properties of a directive are initialized.
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
+
 		if (!this.values) {
 			throw new Error("StarkSliderComponent: values should be set.");
 		}

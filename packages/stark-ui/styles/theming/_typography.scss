@@ -1,0 +1,100 @@
+@use "sass:map";
+@use "~@angular/material" as mat;
+
+$stark-typography-theme: null !default;
+
+// https://material.angular.io/guide/typography
+$typography-theme: (
+  font-family: "BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+  display-4: (
+    112px,
+    112px,
+    300
+  ),
+  display-3: (
+    56px,
+    56px,
+    400
+  ),
+  display-2: (
+    45px,
+    48px,
+    400
+  ),
+  display-1: (
+    34px,
+    40px,
+    400
+  ),
+  headline: (
+    24px,
+    32px,
+    400
+  ),
+  title: (
+    20px,
+    32px,
+    500
+  ),
+  subheading-2: (
+    16px,
+    28px,
+    400
+  ),
+  subheading-1: (
+    15px,
+    24px,
+    400
+  ),
+  body-2: (
+    14px,
+    24px,
+    500
+  ),
+  body-1: (
+    14px,
+    20px,
+    400
+  ),
+  caption: (
+    12px,
+    20px,
+    400
+  ),
+  button: (
+    14px,
+    16px,
+    500
+  ),
+  input: (
+    inherit,
+    1.125,
+    400
+  )
+) !default;
+
+@if $stark-typography-theme != null {
+  $typography-theme: map.merge($typography-theme, $stark-typography-theme);
+}
+
+@function define-typography-level-from-list($list) {
+  @return mat.define-typography-level($list...);
+}
+
+//TO DO: Document correspondance with html tags
+$typography-config: mat.define-typography-config(
+  $font-family: map.get($typography-theme, font-family),
+  $display-4: define-typography-level-from-list(map.get($typography-theme, display-4)),
+  $display-3: define-typography-level-from-list(map.get($typography-theme, display-3)),
+  $display-2: define-typography-level-from-list(map.get($typography-theme, display-2)),
+  $display-1: define-typography-level-from-list(map.get($typography-theme, display-1)),
+  $headline: define-typography-level-from-list(map.get($typography-theme, headline)),
+  $title: define-typography-level-from-list(map.get($typography-theme, title)),
+  $subheading-2: define-typography-level-from-list(map.get($typography-theme, subheading-2)),
+  $subheading-1: define-typography-level-from-list(map.get($typography-theme, subheading-1)),
+  $body-2: define-typography-level-from-list(map.get($typography-theme, body-2)),
+  $body-1: define-typography-level-from-list(map.get($typography-theme, body-1)),
+  $caption: define-typography-level-from-list(map.get($typography-theme, caption)),
+  $button: define-typography-level-from-list(map.get($typography-theme, button)),
+  $input: define-typography-level-from-list(map.get($typography-theme, input))
+) !default;

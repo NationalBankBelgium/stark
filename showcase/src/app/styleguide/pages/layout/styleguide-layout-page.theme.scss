@@ -1,17 +1,20 @@
+@use "~@angular/material" as mat;
+@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
 .styleguide-layout-page {
   .warning {
     .mat-icon {
-      color: mat-color($warning-palette, 500);
+      color: mat.get-color-from-palette(stark-ui.$warning-palette, 500);
     }
   }
 
   .layout-demo > * {
-    background-color: mat-color($primary-palette, 500);
-    color: mat-contrast($primary-palette, 500);
+    background-color: mat.get-color-from-palette(stark-ui.$primary-palette, 500);
+    color: mat.get-contrast-color-from-palette(stark-ui.$primary-palette, 500);
 
     &.accent {
-      background-color: mat-color($accent-palette, 500);
-      color: mat-contrast($accent-palette, 500);
+      background-color: mat.get-color-from-palette(stark-ui.$accent-palette, 500);
+      color: mat.get-contrast-color-from-palette(stark-ui.$accent-palette, 500);
     }
   }
 }

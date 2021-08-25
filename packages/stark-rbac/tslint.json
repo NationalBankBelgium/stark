@@ -7,8 +7,11 @@
     "tslint-config-prettier"
   ],
   "rules": {
+    // "deprecation" and "completed-docs" rules have to been disabled until we switch to ESLint
+    // due to conflicts between TypeScript > 4.3 and TSLint
+    "deprecation": false,
     "completed-docs": [
-      true,
+      false,
       {
         "enums": true,
         "variables": {

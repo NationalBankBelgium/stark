@@ -13,7 +13,7 @@
 		<mat-icon class="stark-small-icon" [matTooltip]="'STARK.TABLE.MULTI_COLUMN_SORTING' | translate" svgIcon="sort"></mat-icon>
 	</button>
 
-	<ng-container *ngIf="filter.globalFilterPresent">
+	<ng-container *ngIf="isGlobalFilterPresent(filter)">
 		<button
 			[matMenuTriggerFor]="globalFilter"
 			mat-icon-button
@@ -95,7 +95,7 @@
 				<mat-checkbox
 					(click)="$event.stopPropagation()"
 					(change)="$event ? selection.toggle(row) : null"
-					[checked]="selection?.isSelected(row)"
+					[checked]="selection.isSelected(row)"
 				></mat-checkbox>
 			</td>
 			<ng-container *ngIf="isFooterEnabled">

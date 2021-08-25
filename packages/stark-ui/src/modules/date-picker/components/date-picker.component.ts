@@ -14,7 +14,6 @@ import {
 	Output,
 	Renderer2,
 	SimpleChanges,
-	Type,
 	ViewChild,
 	ViewEncapsulation
 } from "@angular/core";
@@ -24,7 +23,7 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NgControl, Valida
 import { MAT_DATE_FORMATS, MatDateFormats } from "@angular/material/core";
 import { MatFormFieldControl } from "@angular/material/form-field";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
-import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
 import { Subject, Subscription } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
@@ -41,6 +40,13 @@ export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Da
  * Type expected by [StarkDatePickerComponent maskConfig]{@link StarkDatePickerComponent#maskConfig} input.
  */
 export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean;
+
+/**
+ * Type expected by [StarkDatePickerComponent max]{@link StarkDatePickerComponent#max} and 
+ * [StarkDatePickerComponent min]{@link StarkDatePickerComponent#min} inputs.
+ */
+// tslint:disable-next-line:no-null-undefined-union
+export type StarkDateInput = Date | moment.Moment | null | undefined;
 
 /**
  * Default date mask configuration used by the {@link StarkDatePickerComponent}
@@ -142,25 +148,129 @@ export class StarkDatePickerComponent
 	 * - If a {@link StarkTimestampMaskConfig} is passed, it is set as the date mask config.
 	 */
 	@Input()
-	public dateMask?: StarkDatePickerMaskConfig;
+	public set dateMask(value: StarkDatePickerMaskConfig) {
+		if (isStarkTimestampMaskConfig(value)) {
+			// only valid configs will be passed to the mask directive
+			this.dateMaskConfig = value;
+		} else if (typeof value !== "object") {
+			this.dateMaskConfig = coerceBooleanProperty(value) ? DEFAULT_DATE_MASK_CONFIG : undefined;
+		} else {
+			throw new Error(
+				componentName + ": the provided dateMask is not of type `StarkDatePickerMaskConfig`. Please provide a correct value."
+			);
+		}
+
+		if (isStarkTimestampMaskConfig(this.dateMaskConfig)) {
+			const dateInputFormats: string[] =
+				this.dateFormats.parse.dateInput instanceof Array ? this.dateFormats.parse.dateInput : [this.dateFormats.parse.dateInput];
+
+			const isValidParser: boolean = dateInputFormats.some((format: string) =>
+				// tslint:disable-next-line:no-non-null-assertion
+				moment("01-12-10", format).isSame(moment("01-12-10", this.dateMaskConfig!.format), "day")
+			);
+
+			if (!isValidParser) {
+				throw new Error(
+					componentName +
+						': dateMask.format ["' +
+						this.dateMaskConfig.format +
+						'"] and the provided parse format(s) in MAT_DATE_FORMATS ["' +
+						dateInputFormats.join('","') +
+						'"] are NOT compatible. Please adapt one of them.'
+				);
+			}
+		}
+	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name no-null-undefined-union
+	public static ngAcceptInputType_dateMask: BooleanInput | StarkDatePickerMaskConfig;
 
 	/**
 	 * Whether the datepicker is disabled
 	 */
 	@Input()
-	public disabled = false;
+	public get disabled(): boolean {
+		return this._disabled;
+	}
+
+	public set disabled(value: boolean) {
+		this._disabled = coerceBooleanProperty(value);
+	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_disabled: BooleanInput;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _disabled = false;
 
 	/**
 	 * Maximum date of the date picker
+	 *
+	 * Supported types: `Date | moment.Moment | undefined | null`
 	 */
 	@Input()
-	public max?: Date;
+	public set max(value: moment.Moment | null) {
+		if (value === undefined) {
+			// tslint:disable-next-line:no-null-keyword
+			this._max = null;
+		} else if (value instanceof Date) {
+			this._max = moment(value);
+		} else {
+			this._max = value;
+		}
+	}
+
+	public get max(): moment.Moment | null {
+		return this._max;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_max: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// tslint:disable-next-line:no-null-keyword
+	private _max: moment.Moment | null = null;
 
 	/**
 	 * Minimum date of the date picker
+	 *
+	 * Supported types: `Date | moment.Moment | undefined | null`
 	 */
 	@Input()
-	public min?: Date;
+	public set min(value: moment.Moment | null) {
+		if (value === undefined) {
+			// tslint:disable-next-line:no-null-keyword
+			this._min = null;
+		} else if (value instanceof Date) {
+			this._min = moment(value);
+		} else {
+			this._min = value;
+		}
+	}
+
+	public get min(): moment.Moment | null {
+		return this._min;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_min: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// tslint:disable-next-line:no-null-keyword
+	public _min: moment.Moment | null = null;
 
 	/**
 	 * The HTML `id` attribute of the date picker's calendar popup.
@@ -206,9 +316,13 @@ export class StarkDatePickerComponent
 		return this._required;
 	}
 
-	public set required(isRequired: boolean) {
-		this._required = coerceBooleanProperty(isRequired);
+	public set required(value: boolean) {
+		this._required = coerceBooleanProperty(value);
 	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_required: BooleanInput;
 
 	/**
 	 * @ignore
@@ -388,9 +502,10 @@ export class StarkDatePickerComponent
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		// tslint:disable-next-line:no-null-keyword
-		this.ngControl = this.injector.get<NgControl>(<Type<NgControl>>NgControl, <any>null);
+		this.ngControl = this.injector.get<NgControl>(NgControl, <any>null);
 
 		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
@@ -401,7 +516,6 @@ export class StarkDatePickerComponent
 			this.placeholder = this.originalPlaceholder;
 		});
 
-		super.ngOnInit();
 		this.logger.debug(componentName + ": component initialized");
 	}
 
@@ -425,9 +539,14 @@ export class StarkDatePickerComponent
 	 */
 	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
-		if ((changes["max"] || changes["min"]) && this.max && this.min && this.max.getTime() < this.min.getTime()) {
+		if ((changes["max"] || changes["min"]) && this.max && this.min && this.max.isSameOrBefore(this.min)) {
 			this.logger.error(
-				componentName + ": min date [" + this.min.toDateString() + "] cannot be after max date [" + this.max.toDateString() + "]"
+				componentName +
+					": min date [" +
+					this.min.format(DEFAULT_DATE_MASK_CONFIG.format) +
+					"] cannot be after max date [" +
+					this.max.format(DEFAULT_DATE_MASK_CONFIG.format) +
+					"]"
 			);
 		}
 
@@ -439,41 +558,6 @@ export class StarkDatePickerComponent
 				this.ngControl.control.updateValueAndValidity({ emitEvent: false });
 			}
 			this.stateChanges.next();
-		}
-
-		if (changes["dateMask"]) {
-			if (isStarkTimestampMaskConfig(changes["dateMask"].currentValue)) {
-				// only valid configs will be passed to the mask directive
-				this.dateMaskConfig = changes["dateMask"].currentValue;
-			} else if (typeof changes["dateMask"].currentValue !== "object") {
-				this.dateMaskConfig = coerceBooleanProperty(changes["dateMask"].currentValue) ? DEFAULT_DATE_MASK_CONFIG : undefined;
-			} else {
-				throw new Error(
-					componentName + ": the provided dateMask is not of type `StarkDatePickerMaskConfig`. Please provide a correct value."
-				);
-			}
-
-			if (this.dateMaskConfig) {
-				const dateInputFormats: string[] =
-					this.dateFormats.parse.dateInput instanceof Array
-						? this.dateFormats.parse.dateInput
-						: [this.dateFormats.parse.dateInput];
-
-				const isValidParser: boolean = dateInputFormats.some((format: string) =>
-					moment("01-12-10", format).isSame(moment("01-12-10", (<StarkTimestampMaskConfig>this.dateMaskConfig).format), "day")
-				);
-
-				if (!isValidParser) {
-					throw new Error(
-						componentName +
-							': dateMask.format ["' +
-							this.dateMaskConfig.format +
-							'"] and the provided parse format(s) in MAT_DATE_FORMATS ["' +
-							dateInputFormats.join('","') +
-							'"] are NOT compatible. Please adapt one of them.'
-					);
-				}
-			}
 		}
 	}
 
@@ -597,7 +681,10 @@ export class StarkDatePickerComponent
 	 * @param momentDate - The date to be checked
 	 * @returns Whether the date is filtered or not
 	 */
-	public dateFilterFnWrapper = (momentDate: moment.Moment): boolean => {
+	public dateFilterFnWrapper = (momentDate: moment.Moment | null): boolean => {
+		if (momentDate === null) {
+			return false;
+		}
 		const date: Date = momentDate.toDate();
 		if (typeof this._dateFilter === "function") {
 			return this._dateFilter(date);
@@ -655,7 +742,7 @@ export class StarkDatePickerComponent
 	 * If the inputMask is not enabled, it returns `undefined` to disable `starkTimestampMask`.
 	 * Otherwise, it returns the defined configuration.
 	 */
-	public getTimestampMaskConfig(): StarkDatePickerMaskConfig | undefined {
+	public getTimestampMaskConfig(): StarkTimestampMaskConfig | undefined {
 		return this.inputMaskEnabled ? this.dateMaskConfig : undefined;
 	}
 

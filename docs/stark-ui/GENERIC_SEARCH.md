@@ -23,17 +23,17 @@ import { StarkResource } from "@nationalbankbelgium/stark-core";
 import { autoserialize } from "cerialize";
 
 export class MovieObject implements StarkResource {
-  @autoserialize
-  public uuid: string;
+	@autoserialize
+	public uuid: string;
 
-  @autoserialize
-  public year: number;
+	@autoserialize
+	public year: number;
 
-  @autoserialize
-  public hero: string;
+	@autoserialize
+	public hero: string;
 
-  @autoserialize
-  public title: string;
+	@autoserialize
+	public title: string;
 }
 ```
 
@@ -44,9 +44,9 @@ This entity contains all the fields that the search form will contain to find a 
 
 ```typescript
 export class MovieSearchCriteria {
-  public year?: string;
-  public hero?: string;
-  public title?: string;
+	public year?: string;
+	public hero?: string;
+	public title?: string;
 }
 ```
 
@@ -73,81 +73,81 @@ import { DEMO_GENERIC_SERVICE, DemoGenericService } from "../services";
 const _isEqual: Function = require("lodash/isEqual");
 
 @Component({
-  selector: "movie-search-form",
-  templateUrl: "./movie-search-form.component.html"
+	selector: "movie-search-form",
+	templateUrl: "./movie-search-form.component.html"
 })
 export class MovieSearchFormComponent implements OnInit, OnChanges, StarkSearchFormComponent<MovieSearchCriteria> {
-  @Input()
-  public searchCriteria: MovieSearchCriteria = {};
+	@Input()
+	public searchCriteria: MovieSearchCriteria = {};
 
-  @Output()
-  public workingCopyChanged: EventEmitter<MovieSearchCriteria> = new EventEmitter();
+	@Output()
+	public workingCopyChanged: EventEmitter<MovieSearchCriteria> = new EventEmitter();
 
-  public yearOptions: number[] = [];
-  public heroOptions: string[] = [];
-  public movieOptions: string[] = [];
+	public yearOptions: number[] = [];
+	public heroOptions: string[] = [];
+	public movieOptions: string[] = [];
 
-  public searchForm: FormGroup;
+	public searchForm: FormGroup;
 
-  public constructor(@Inject(DEMO_GENERIC_SERVICE) private genericService: DemoGenericService, private formBuilder: FormBuilder) {}
+	public constructor(@Inject(DEMO_GENERIC_SERVICE) private genericService: DemoGenericService, private formBuilder: FormBuilder) {}
 
-  public ngOnInit(): void {
-    this.searchForm = this.createSearchForm(this.searchCriteria);
+	public ngOnInit(): void {
+		this.searchForm = this.createSearchForm(this.searchCriteria);
 
-    this.searchForm.valueChanges.subscribe(() => {
-      const modifiedCriteria: MovieSearchCriteria = this.mapFormGroupToSearchCriteria(this.searchForm);
-      this.workingCopyChanged.emit(modifiedCriteria);
-    });
+		this.searchForm.valueChanges.subscribe(() => {
+			const modifiedCriteria: MovieSearchCriteria = this.mapFormGroupToSearchCriteria(this.searchForm);
+			this.workingCopyChanged.emit(modifiedCriteria);
+		});
 
-    // ...
-  }
+		// ...
+	}
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes["searchCriteria"] &&
-      !changes["searchCriteria"].isFirstChange() &&
-      !_isEqual(changes["searchCriteria"].previousValue, this.searchCriteria)
-    ) {
-      this.resetSearchForm(this.searchCriteria);
-    }
-  }
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (
+			changes["searchCriteria"] &&
+			!changes["searchCriteria"].isFirstChange() &&
+			!_isEqual(changes["searchCriteria"].previousValue, this.searchCriteria)
+		) {
+			this.resetSearchForm(this.searchCriteria);
+		}
+	}
 
-  public createSearchForm(searchCriteria: MovieSearchCriteria): FormGroup {
-    return this.formBuilder.group({
-      year: searchCriteria.year,
-      hero: searchCriteria.hero,
-      movie: searchCriteria.movie
-    });
-  }
+	public createSearchForm(searchCriteria: MovieSearchCriteria): FormGroup {
+		return this.formBuilder.group({
+			year: searchCriteria.year,
+			hero: searchCriteria.hero,
+			movie: searchCriteria.movie
+		});
+	}
 
-  public resetSearchForm(searchCriteria: MovieSearchCriteria): void {
-    // reset the form fields but don't emit a "change" event to statusChanges and valueChanges to avoid infinite loops!
-    this.searchForm.reset(
-      {
-        year: searchCriteria.year,
-        hero: searchCriteria.hero,
-        movie: searchCriteria.movie
-      },
-      { emitEvent: false }
-    );
-  }
+	public resetSearchForm(searchCriteria: MovieSearchCriteria): void {
+		// reset the form fields but don't emit a "change" event to statusChanges and valueChanges to avoid infinite loops!
+		this.searchForm.reset(
+			{
+				year: searchCriteria.year,
+				hero: searchCriteria.hero,
+				movie: searchCriteria.movie
+			},
+			{ emitEvent: false }
+		);
+	}
 
-  public mapFormGroupToSearchCriteria(formGroup: FormGroup): MovieSearchCriteria {
-    // return formGroup.getRawValue();
+	public mapFormGroupToSearchCriteria(formGroup: FormGroup): MovieSearchCriteria {
+		// return formGroup.getRawValue();
 
-    return {
-      year: formGroup.controls["year"].value,
-      hero: formGroup.controls["hero"].value,
-      title: formGroup.controls["title"].value
-    };
-  }
+		return {
+			year: formGroup.controls["year"].value,
+			hero: formGroup.controls["hero"].value,
+			title: formGroup.controls["title"].value
+		};
+	}
 
-  /**
-   * @ignore
-   */
-  public trackItemFn(item: string): string {
-    return item;
-  }
+	/**
+	 * @ignore
+	 */
+	public trackItemFn(item: string): string {
+		return item;
+	}
 }
 ```
 
@@ -155,33 +155,33 @@ export class MovieSearchFormComponent implements OnInit, OnChanges, StarkSearchF
 
 ```html
 <div fxLayout="row wrap">
-  <!-- Year -->
-  <div fxFlex>
-    <mat-form-field>
-      <input type="text" placeholder="Year" matInput [formControl]="searchForm.controls['year']" [matAutocomplete]="yearAutocomplete" />
-    </mat-form-field>
-    <mat-autocomplete #yearAutocomplete="matAutocomplete">
-      <mat-option *ngFor="let option of yearOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
-    </mat-autocomplete>
-  </div>
-  <!-- Hero -->
-  <div fxFlex>
-    <mat-form-field>
-      <input type="text" placeholder="Hero" matInput [formControl]="searchForm.controls['hero']" [matAutocomplete]="heroAutocomplete" />
-    </mat-form-field>
-    <mat-autocomplete #heroAutocomplete="matAutocomplete">
-      <mat-option *ngFor="let option of heroOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
-    </mat-autocomplete>
-  </div>
-  <!-- Movie -->
-  <div fxFlex>
-    <mat-form-field>
-      <input type="text" placeholder="Movie" matInput [formControl]="searchForm.controls['movie']" [matAutocomplete]="movieAutocomplete" />
-    </mat-form-field>
-    <mat-autocomplete #movieAutocomplete="matAutocomplete">
-      <mat-option *ngFor="let option of movieOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
-    </mat-autocomplete>
-  </div>
+	<!-- Year -->
+	<div fxFlex>
+		<mat-form-field>
+			<input type="text" placeholder="Year" matInput [formControl]="searchForm.controls['year']" [matAutocomplete]="yearAutocomplete" />
+		</mat-form-field>
+		<mat-autocomplete #yearAutocomplete="matAutocomplete">
+			<mat-option *ngFor="let option of yearOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
+		</mat-autocomplete>
+	</div>
+	<!-- Hero -->
+	<div fxFlex>
+		<mat-form-field>
+			<input type="text" placeholder="Hero" matInput [formControl]="searchForm.controls['hero']" [matAutocomplete]="heroAutocomplete" />
+		</mat-form-field>
+		<mat-autocomplete #heroAutocomplete="matAutocomplete">
+			<mat-option *ngFor="let option of heroOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
+		</mat-autocomplete>
+	</div>
+	<!-- Movie -->
+	<div fxFlex>
+		<mat-form-field>
+			<input type="text" placeholder="Movie" matInput [formControl]="searchForm.controls['movie']" [matAutocomplete]="movieAutocomplete" />
+		</mat-form-field>
+		<mat-autocomplete #movieAutocomplete="matAutocomplete">
+			<mat-option *ngFor="let option of movieOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
+		</mat-autocomplete>
+	</div>
 </div>
 ```
 
@@ -239,21 +239,21 @@ import { MovieSearchCriteria } from "../entities/movies-search.entity";
 import { MovieSearchActions } from "../actions";
 
 const INITIAL_STATE: Readonly<StarkSearchState<MovieSearchCriteria>> = {
-  criteria: new MovieSearchCriteria(),
-  hasBeenSearched: false
+	criteria: new MovieSearchCriteria(),
+	hasBeenSearched: false
 };
 
 const reducer = createReducer<StarkSearchState<MovieSearchCriteria>, MovieSearchActions.Types>(
-  INITIAL_STATE,
-  on(DemoGenericSearchActions.setCriteria, (state, action) => ({ ...state, criteria: action.criteria })),
-  on(DemoGenericSearchActions.removeCriteria, (state) => ({ ...state, criteria: INITIAL_STATE.criteria })),
-  on(DemoGenericSearchActions.hasSearched, (state) => ({ ...state, hasBeenSearched: true })),
-  on(DemoGenericSearchActions.hasSearchedReset, (state) => ({ ...state, hasBeenSearched: false }))
+	INITIAL_STATE,
+	on(DemoGenericSearchActions.setCriteria, (state, action) => ({ ...state, criteria: action.criteria })),
+	on(DemoGenericSearchActions.removeCriteria, (state) => ({ ...state, criteria: INITIAL_STATE.criteria })),
+	on(DemoGenericSearchActions.hasSearched, (state) => ({ ...state, hasBeenSearched: true })),
+	on(DemoGenericSearchActions.hasSearchedReset, (state) => ({ ...state, hasBeenSearched: false }))
 )
 
 export function movieSearchReducer(
-  state: Readonly<StarkSearchState<MovieSearchCriteria>> | undefined,
-  action: Readonly<MovieSearchActions.Types>
+	state: Readonly<StarkSearchState<MovieSearchCriteria>> | undefined,
+	action: Readonly<MovieSearchActions.Types>
 ): Readonly<StarkSearchState<MovieSearchCriteria>> {
 	return reducer(state, action);
 }
@@ -273,16 +273,16 @@ import { MovieSearchActions } from "../actions";
 import { movieSearchReducer } from "./movie-search.reducer";
 
 export interface MovieSearchState {
-  movieSearch: StarkSearchState<MovieSearchCriteria>;
+	movieSearch: StarkSearchState<MovieSearchCriteria>;
 }
 
 export const movieSearchReducers: ActionReducerMap<MovieSearchState, MovieSearchActions.Types> = {
-  movieSearch: movieSearchReducer
+	movieSearch: movieSearchReducer
 };
 
 export const selectMovieSearch: MemoizedSelector<object, StarkSearchState<MovieSearchCriteria>> = createSelector(
-  createFeatureSelector<MovieSearchState>("MovieSearch"),
-  (state: MovieSearchState) => state.movieSearch
+	createFeatureSelector<MovieSearchState>("MovieSearch"),
+	(state: MovieSearchState) => state.movieSearch
 );
 ```
 
@@ -297,10 +297,10 @@ import { StoreModule } from "@ngrx/store";
 import { movieSearchReducers } from "./reducers";
 
 @NgModule({
-  imports: [
-    // ...
-    StoreModule.forFeature("MovieSearch", movieSearchReducers)
-  ]
+	imports: [
+		// ...
+		StoreModule.forFeature("MovieSearch", movieSearchReducers)
+	]
 })
 export class MyModule {}
 ```
@@ -335,11 +335,11 @@ export const movieServiceName: string = "DemoGenericService";
 export const MOVIE_SERVICE: InjectionToken<MovieService> = new InjectionToken<MovieService>(movieServiceName);
 
 export interface MovieService extends StarkGenericSearchService<MovieObject, MovieSearchCriteria> {
-  getYears(): Observable<number[]>;
+	getYears(): Observable<number[]>;
 
-  getMovies(): Observable<string[]>;
+	getMovies(): Observable<string[]>;
 
-  getHeroes(): Observable<string[]>;
+	getHeroes(): Observable<string[]>;
 }
 ```
 
@@ -361,23 +361,23 @@ import { MovieSearchActions } from "../actions";
 
 @Injectable()
 export class DemoGenericServiceImpl implements MovieService {
-  public constructor(private store: Store<MovieSearchState>, @Inject(MOVIE_REPOSITORY) private movieRepository: MovieRepository) {}
+	public constructor(private store: Store<MovieSearchState>, @Inject(MOVIE_REPOSITORY) private movieRepository: MovieRepository) {}
 
-  public getSearchState(): Observable<StarkSearchState<MovieSearchCriteria>> {
-    return this.store.pipe(select(selectMovieSearch));
-  }
+	public getSearchState(): Observable<StarkSearchState<MovieSearchCriteria>> {
+		return this.store.pipe(select(selectMovieSearch));
+	}
 
-  public resetSearchState(): void {
-    this.store.dispatch(MovieSearchActions.removeCriteria());
-    this.store.dispatch(MovieSearchActions.hasSearchedReset());
-  }
+	public resetSearchState(): void {
+		this.store.dispatch(MovieSearchActions.removeCriteria());
+		this.store.dispatch(MovieSearchActions.hasSearchedReset());
+	}
 
-  public search(criteria: MovieSearchCriteria): Observable<MovieObject[]> {
-    this.store.dispatch(MovieSearchActions.setCriteria({criteria}));
-    this.store.dispatch(MovieSearchActions.hasSearched());
+	public search(criteria: MovieSearchCriteria): Observable<MovieObject[]> {
+		this.store.dispatch(MovieSearchActions.setCriteria({criteria}));
+		this.store.dispatch(MovieSearchActions.hasSearched());
 
-    return this.movieRepository.search(criteria);
-  }
+		return this.movieRepository.search(criteria);
+	}
 }
 ```
 
@@ -407,67 +407,67 @@ import { Movie, MovieSearchCriteria } from "./entities";
 import { MOVIE_SERVICE, MovieService } from "./services";
 
 @Component({
-  selector: "movie-search",
-  templateUrl: "./movie-search-page.component.html"
+	selector: "movie-search",
+	templateUrl: "./movie-search-page.component.html"
 })
 export class MovieSearchPageComponent extends AbstractStarkSearchComponent<Movie, MovieSearchCriteria> implements OnInit, OnDestroy {
-  public columnsProperties: StarkTableColumnProperties[];
-  public searchResults: Movie[];
-  public paginationConfig: StarkPaginationConfig;
+	public columnsProperties: StarkTableColumnProperties[];
+	public searchResults: Movie[];
+	public paginationConfig: StarkPaginationConfig;
 
-  public constructor(@Inject(STARK_LOGGING_SERVICE) logger: StarkLoggingService, @Inject(MOVIE_SERVICE) demoGenericService: MovieService) {
-    super(demoGenericService, logger);
+	public constructor(@Inject(STARK_LOGGING_SERVICE) logger: StarkLoggingService, @Inject(MOVIE_SERVICE) demoGenericService: MovieService) {
+		super(demoGenericService, logger);
 
-    this.performSearchOnInit = true; // Turn on automatic search (last search criteria)
-    this.preserveLatestResults = true; // Keep a reference to the latest results in the latestResults variable
-  }
+		this.performSearchOnInit = true; // Turn on automatic search (last search criteria)
+		this.preserveLatestResults = true; // Keep a reference to the latest results in the latestResults variable
+	}
 
-  /**
-   * Component lifecycle hook
-   */
-  public ngOnInit(): void {
-    super.ngOnInit();
+	/**
+	 * Component lifecycle hook
+	 */
+	public override ngOnInit(): void {
+		super.ngOnInit();
 
-    this.results$.subscribe((movies: Movie[]) => (this.searchResults = movies));
+		this.results$.subscribe((movies: Movie[]) => (this.searchResults = movies));
 
-    this.columnsProperties = [
-      {
-        name: "hero",
-        label: "Hero",
-        isFilterable: true,
-        isSortable: true
-      },
-      {
-        name: "title",
-        label: "Title",
-        isFilterable: true,
-        isSortable: true
-      },
-      {
-        name: "year",
-        label: "Year",
-        isFilterable: true,
-        isSortable: true
-      }
-    ];
+		this.columnsProperties = [
+			{
+				name: "hero",
+				label: "Hero",
+				isFilterable: true,
+				isSortable: true
+			},
+			{
+				name: "title",
+				label: "Title",
+				isFilterable: true,
+				isSortable: true
+			},
+			{
+				name: "year",
+				label: "Year",
+				isFilterable: true,
+				isSortable: true
+			}
+		];
 
-    this.paginationConfig = {
-      isExtended: false,
-      itemsPerPage: 10,
-      itemsPerPageOptions: [10, 20, 50],
-      itemsPerPageIsPresent: true,
-      page: 1,
-      pageNavIsPresent: true,
-      pageInputIsPresent: true
-    };
-  }
+		this.paginationConfig = {
+			isExtended: false,
+			itemsPerPage: 10,
+			itemsPerPageOptions: [10, 20, 50],
+			itemsPerPageIsPresent: true,
+			page: 1,
+			pageNavIsPresent: true,
+			pageInputIsPresent: true
+		};
+	}
 
-  /**
-   * Component lifecycle hook
-   */
-  public ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
+	/**
+	 * Component lifecycle hook
+	 */
+	public override ngOnDestroy(): void {
+		super.ngOnDestroy();
+	}
 }
 ```
 
@@ -479,21 +479,21 @@ The usage of Generic Search component is explained in the [StarkGenericSearchCom
 ```html
 <h1 class="mat-display-3" translate>Movie Search</h1>
 <section class="stark-section">
-  <stark-generic-search
-    formHtmlId="demo-generic-search-form"
-    (searchTriggered)="onSearch($event)"
-    (resetTriggered)="onReset($event)"
-    [isFormHidden]="false"
-    (newTriggered)="onNew($event)"
-    (formVisibilityChanged)="onFormVisibilityChange($event)"
-  >
-    <movies-search-form #searchForm [searchCriteria]="workingCopy" (workingCopyChanged)="updateWorkingCopy($event)"></movies-search-form>
-  </stark-generic-search>
-  <stark-table
-    htmlId="demo-generic-search-table"
-    [columnProperties]="columnsProperties"
-    [paginationConfig]="paginationConfig"
-    [data]="searchResults"
-  ></stark-table>
+	<stark-generic-search
+		formHtmlId="demo-generic-search-form"
+		(searchTriggered)="onSearch($event)"
+		(resetTriggered)="onReset($event)"
+		[isFormHidden]="false"
+		(newTriggered)="onNew($event)"
+		(formVisibilityChanged)="onFormVisibilityChange($event)"
+	>
+		<movies-search-form #searchForm [searchCriteria]="workingCopy" (workingCopyChanged)="updateWorkingCopy($event)"></movies-search-form>
+	</stark-generic-search>
+	<stark-table
+		htmlId="demo-generic-search-table"
+		[columnProperties]="columnsProperties"
+		[paginationConfig]="paginationConfig"
+		[data]="searchResults"
+	></stark-table>
 </section>
 ```

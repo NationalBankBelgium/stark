@@ -13,7 +13,6 @@ import {
 	Output,
 	Renderer2,
 	SimpleChanges,
-	Type,
 	ViewChild,
 	ViewEncapsulation
 } from "@angular/core";
@@ -24,7 +23,7 @@ import { Subject, Subscription } from "rxjs";
 import { MatFormField, MatFormFieldControl } from "@angular/material/form-field";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { MatSelect, MatSelectChange } from "@angular/material/select";
-import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
 import isEqual from "lodash-es/isEqual";
 
@@ -59,7 +58,8 @@ const componentName = "stark-dropdown";
 		}
 	]
 })
-export class StarkDropdownComponent extends AbstractStarkUiComponent
+export class StarkDropdownComponent
+	extends AbstractStarkUiComponent
 	implements OnInit, OnChanges, OnInit, OnDestroy, ControlValueAccessor, MatFormFieldControl<any | any[]>, Validator {
 	/**
 	 * Variable that will be incremented automatically to serve as unique id for every new instance of this component
@@ -123,7 +123,23 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * will enable this feature. (optional)
 	 */
 	@Input()
-	public multiSelect = false;
+	public get multiSelect(): boolean {
+		return this._multiSelect;
+	}
+
+	public set multiSelect(value: boolean) {
+		this._multiSelect = coerceBooleanProperty(value);
+	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_multiSelect: BooleanInput;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _multiSelect = false;
 
 	/**
 	 * Array of options to be included in the dropdown list. This parameter is a one-way
@@ -158,7 +174,26 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 * If the dropdown is required or not. by default, the dropdown is not required
 	 */
 	@Input()
-	public required = false;
+	public get required(): boolean {
+		return this._required;
+	}
+
+	public set required(value: boolean) {
+		this._required = coerceBooleanProperty(value);
+		this.setDefaultBlank();
+		this.stateChanges.next();
+		this._onValidatorChange();
+	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_required: BooleanInput;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _required = false;
 
 	/**
 	 * Source object to be bound to the dropdown ngModel.
@@ -190,13 +225,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	/**
 	 * Reference to the single MatSelect element embedded in this component
 	 */
-	@ViewChild("singleSelect", { static: true })
+	@ViewChild("singleSelectEl")
 	private singleSelectElement?: MatSelect;
 
 	/**
 	 * Reference to the multi MatSelect element embedded in this component
 	 */
-	@ViewChild("multiSelect", { static: true })
+	@ViewChild("multiSelectEl")
 	private multiSelectElement?: MatSelect;
 
 	/**
@@ -275,8 +310,8 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef,
+		renderer: Renderer2,
+		elementRef: ElementRef,
 		private fm: FocusMonitor,
 		private injector: Injector,
 		private translateService: TranslateService,
@@ -293,12 +328,13 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.logger.debug(componentName + ": component initialized");
 		this.optionsAreSimpleTypes = this.areSimpleTypes();
 
 		// tslint:disable-next-line:no-null-keyword
-		this.ngControl = this.injector.get<NgControl>(<Type<NgControl>>NgControl, <any>null);
+		this.ngControl = this.injector.get<NgControl>(NgControl, <any>null);
 
 		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
@@ -327,7 +363,6 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 		});
 
 		this.setDefaultBlank();
-		super.ngOnInit();
 	}
 
 	/**
@@ -339,19 +374,9 @@ export class StarkDropdownComponent extends AbstractStarkUiComponent
 			this.optionsAreSimpleTypes = this.areSimpleTypes();
 		}
 
-		if (changes["multiSelect"]) {
+		if (changes["multiSelect"] && !changes["multiSelect"].isFirstChange()) {
 			// This avoids an error when switching between "simple select" and "multiple select"
-			if (!changes["multiSelect"].isFirstChange()) {
-				this.onInternalValueChange(undefined);
-			}
-			this.multiSelect = coerceBooleanProperty(changes["multiSelect"].currentValue);
-		}
-
-		if (changes["required"]) {
-			this.required = coerceBooleanProperty(changes["required"].currentValue);
-			this.setDefaultBlank();
-			this.stateChanges.next();
-			this._onValidatorChange();
+			this.onInternalValueChange(undefined);
 		}
 
 		if (changes["placeholder"]) {

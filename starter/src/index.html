@@ -10,12 +10,6 @@
 
 		<!-- Stylesheets -->
 		<!-- Generated CSS stylesheets will be added by webpack: mini-css-extract-plugin -->
-
-		<!-- move the block of webpack dev server to the <head> section and change the IF conditions -->
-		<% if (starkOptions.starkAppMetadata.IS_DEV_SERVER && starkOptions.starkAppMetadata.HMR !== true) { %>
-		<!-- Webpack Dev Server reload -->
-		<script src="/webpack-dev-server.js"></script>
-		<% } %>
 	</head>
 	<body class="">
 		<noscript>
@@ -66,5 +60,8 @@
 				if (starkApp) document.body.removeChild(starkApp);
 			}
 		</script>
+
+		<!-- CSS will be injected by webpack here -->
+		<!-- Generated bundle scripts will be injected by webpack here: html-webpack-plugin -->
 	</body>
 </html>

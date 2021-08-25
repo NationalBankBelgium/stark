@@ -17,7 +17,7 @@ export class StarkRBACAuthorizationModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(): ModuleWithProviders<StarkRBACAuthorizationModule> {
 		return {
 			ngModule: StarkRBACAuthorizationModule,
 			providers: [{ provide: STARK_RBAC_AUTHORIZATION_SERVICE, useClass: StarkRBACAuthorizationServiceImpl }]

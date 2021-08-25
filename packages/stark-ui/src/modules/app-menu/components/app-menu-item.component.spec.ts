@@ -1,9 +1,11 @@
 /*tslint:disable:completed-docs*/
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { Component, ViewChild } from "@angular/core";
 import { UIRouterModule } from "@uirouter/angular";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatListModule } from "@angular/material/list";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
@@ -39,23 +41,24 @@ describe("AppMenuItemComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				declarations: [StarkAppMenuItemComponent, TestHostComponent],
-				imports: [MatExpansionModule, MatListModule, NoopAnimationsModule, UIRouterModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService }
-				],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes (svgIcon)
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		);
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					declarations: [StarkAppMenuItemComponent, TestHostComponent],
+					imports: [MatExpansionModule, MatIconModule, MatIconTestingModule, MatListModule, NoopAnimationsModule, UIRouterModule],
+					providers: [
+						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+						{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService }
+					]
+				})
+					/**
+					 * Compile template and css
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach

@@ -1,66 +1,41 @@
 /* tslint:disable:no-lifecycle-call */
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { StoreModule } from "@ngrx/store";
-import {
-	STARK_APP_CONFIG,
-	STARK_HTTP_SERVICE,
-	STARK_LOGGING_SERVICE,
-	StarkApplicationConfig,
-	StarkBackend,
-	StarkBackendAuthenticationTypes,
-	StarkLoggingService
-} from "@nationalbankbelgium/stark-core";
-import { MockStarkHttpService, MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
+import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
+import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { HomePageComponent } from "./home-page.component";
-import SpyObj = jasmine.SpyObj;
 
 describe(`Home`, () => {
 	let comp: HomePageComponent;
 	let fixture: ComponentFixture<HomePageComponent>;
-	let logger: SpyObj<StarkLoggingService>;
-
-	const mockBackend: Partial<StarkBackend> = {
-		authenticationType: StarkBackendAuthenticationTypes.PUBLIC,
-		name: "logging",
-		url: "dummy/url"
-	};
-
-	const mockStarkAppConfig: Partial<StarkApplicationConfig> = {
-		angularDebugInfoEnabled: true,
-		debugLoggingEnabled: true,
-		getBackend: jasmine.createSpy("getBackendSpy").and.returnValue(mockBackend)
-	};
+	let logger: MockStarkLoggingService;
 
 	/**
 	 * async beforeEach.
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				declarations: [HomePageComponent],
-				schemas: [NO_ERRORS_SCHEMA],
-				imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-				providers: [
-					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
-					{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }
-				]
-			})
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					declarations: [HomePageComponent],
+					imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+					providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+				})
 
-				/**
-				 * Compile template and css.
-				 */
-				.compileComponents()
-		);
-	}));
+					/**
+					 * Compile template and css.
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach.
 	 */
 	beforeEach(() => {
-		logger = TestBed.get(STARK_LOGGING_SERVICE);
+		logger = TestBed.inject<MockStarkLoggingService>(STARK_LOGGING_SERVICE);
 
 		fixture = TestBed.createComponent(HomePageComponent);
 		comp = fixture.componentInstance;

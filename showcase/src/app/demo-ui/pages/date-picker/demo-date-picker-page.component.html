@@ -27,7 +27,7 @@
 		</mat-form-field>
 
 		<div>
-			<mat-checkbox (change)="toggleFormControlState(formControl)" [value]="formControl.disabled">
+			<mat-checkbox (change)="toggleFormControlState(formControl)" [checked]="formControl.disabled">
 				{{ "SHOWCASE.COMMON.DISABLED" | translate }}
 			</mat-checkbox>
 		</div>
@@ -60,7 +60,7 @@
 			</mat-error>
 		</mat-form-field>
 		<div>
-			<mat-checkbox (change)="disabled = !disabled" [value]="disabled">
+			<mat-checkbox (change)="disabled = !disabled" [checked]="disabled">
 				{{ "SHOWCASE.COMMON.DISABLED" | translate }}
 			</mat-checkbox>
 		</div>

@@ -11,8 +11,6 @@ import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCardModule } from "@angular/material/card";
-import { MatListModule } from "@angular/material/list";
-import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { DateAdapter } from "@angular/material/core";
 import { filter } from "rxjs/operators";
@@ -147,8 +145,6 @@ export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logge
 		MatButtonToggleModule,
 		MatCardModule,
 		MatIconModule,
-		MatListModule,
-		MatSidenavModule,
 		MatTooltipModule,
 		StoreModule.forRoot(reducers, {
 			metaReducers,
@@ -182,9 +178,9 @@ export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logge
 		StarkAppLogoutModule,
 		StarkAppMenuModule,
 		StarkAppSidebarModule.forRoot(),
+		StarkDatePickerModule,
 		StarkErrorHandlingModule.forRoot(),
 		StarkLanguageSelectorModule,
-		StarkDatePickerModule,
 		StarkToastNotificationModule.forRoot({
 			delay: 5000,
 			position: "top right",

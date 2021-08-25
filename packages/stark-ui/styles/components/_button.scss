@@ -1,0 +1,11 @@
+@mixin stark-button() {
+  .mat-button,
+  .mat-icon-button,
+  .mat-stroked-button,
+  .mat-flat-button,
+  .mat-raised-button,
+  .mat-fab,
+  .mat-mini-fab {
+    text-transform: uppercase;
+  }
+}

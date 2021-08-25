@@ -15,7 +15,7 @@ export class StarkLoggingModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(): ModuleWithProviders<StarkLoggingModule> {
 		return {
 			ngModule: StarkLoggingModule,
 			providers: [{ provide: STARK_LOGGING_SERVICE, useClass: StarkLoggingServiceImpl }]

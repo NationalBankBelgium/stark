@@ -1,5 +1,5 @@
 /* tslint:disable:completed-docs no-big-function no-duplicate-string no-identical-functions */
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
 /* stark-core imports */
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -97,7 +97,7 @@ describe("PrettyPrintComponent", () => {
 		'    <p class="flashy">This is a flashy paragraph.</p>',
 		"    <button",
 		'      class="dummy-class"',
-		'      [class.active]="isActive"', 
+		'      [class.active]="isActive"',
 		'      color="primary"',
 		'      (click)="triggerAction($event)"',
 		"    >",
@@ -236,12 +236,14 @@ describe("PrettyPrintComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [StarkPrettyPrintComponent, TestHostComponent],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkPrettyPrintComponent, TestHostComponent],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+			}).compileComponents();
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach
@@ -338,7 +340,7 @@ describe("PrettyPrintComponent", () => {
 			it("should nicely format raw Angular HTML data", () => {
 				hostComponent.data = rawAngularHtmlData;
 				hostFixture.detectChanges();
-				
+
 				let formattedData: string = component.prettyString;
 
 				const regExLessThan: RegExp = /&lt;/gi;

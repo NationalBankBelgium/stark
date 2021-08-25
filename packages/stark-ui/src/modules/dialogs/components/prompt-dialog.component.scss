@@ -1,6 +1,13 @@
-.stark-prompt-dialog {
-  .mat-form-field.prompt-text {
-    display: block;
-    margin: 16px 0;
+/* ============================================================================== */
+/*  S t a r k   P r o m p t   D i a l o g                                         */
+/* ============================================================================== */
+/* stark-ui: src/modules/dialogs/components/prompt-dialog.component.scss */
+
+@mixin stark-prompt-dialog() {
+  .stark-prompt-dialog {
+    .mat-form-field.prompt-text {
+      display: block;
+      margin: 16px 0;
+    }
   }
 }

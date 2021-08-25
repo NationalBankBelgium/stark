@@ -31,8 +31,8 @@ describe("Effect: StarkMessagePaneEffects", () => {
 			imports: []
 		});
 
-		messagePaneEffects = TestBed.get(StarkMessagePaneEffects);
-		mockMessagePaneService = TestBed.get(STARK_MESSAGE_PANE_SERVICE);
+		messagePaneEffects = TestBed.inject(StarkMessagePaneEffects);
+		mockMessagePaneService = TestBed.inject<MockStarkMessagePaneService>(STARK_MESSAGE_PANE_SERVICE);
 	});
 
 	describe("on clearOnNavigationSuccess$", () => {

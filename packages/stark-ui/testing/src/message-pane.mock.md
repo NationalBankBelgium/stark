@@ -24,7 +24,7 @@ Then you can just inject the Stark service via the TestBed using its correspondi
 
 ```typescript
 // this will inject the instantiated mock class
-mockStarkMessagePaneService = TestBed.get(STARK_MESSAGE_PANE_SERVICE);
+mockStarkMessagePaneService = TestBed.inject(STARK_MESSAGE_PANE_SERVICE);
 ```
 
 In fact, every method of the base interface is simply mocked

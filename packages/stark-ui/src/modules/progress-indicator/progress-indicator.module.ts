@@ -21,7 +21,7 @@ export class StarkProgressIndicatorModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(): ModuleWithProviders<StarkProgressIndicatorModule> {
 		return {
 			ngModule: StarkProgressIndicatorModule,
 			providers: [{ provide: STARK_PROGRESS_INDICATOR_SERVICE, useClass: StarkProgressIndicatorServiceImpl }]

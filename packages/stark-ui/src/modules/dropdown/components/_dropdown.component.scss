@@ -2,8 +2,11 @@
 /*  S t a r k   D r o p d o w n                                                   */
 /* ============================================================================== */
 /* stark-ui: src/modules/dropdown/components/dropdown/_dropdown.component.scss */
-.stark-dropdown-mat-form-field.stark-full-width {
-  width: 100%;
+
+@mixin stark-dropdown() {
+  .stark-dropdown-mat-form-field.stark-full-width {
+    width: 100%;
+  }
 }
 
 /* END stark-ui: src/modules/dropdown/components/dropdown/_dropdown.component.scss */

@@ -1,4 +1,4 @@
-/*tslint:disable:completed-docs*/
+/* tslint:disable:completed-docs no-unbound-method */
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
@@ -578,8 +578,8 @@ describe("Service: StarkHttpService", () => {
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it(
 				"on FAILURE ('" +
-					requestType +
-					"'), should retry the request before emitting the failure if the request retryCount option is set",
+				requestType +
+				"'), should retry the request before emitting the failure if the request retryCount option is set",
 				(done: DoneFn) => {
 					request.retryCount = 2;
 					let errorCounter = 0;
@@ -806,8 +806,8 @@ describe("Service: StarkHttpService", () => {
 
 			it(
 				"on SUCCESS ('" +
-					requestType +
-					"'), should log a warning in case there is no etag for a certain resource in the response metadata",
+				requestType +
+				"'), should log a warning in case there is no etag for a certain resource in the response metadata",
 				() => {
 					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 					const expectedEtags: { [uuid: string]: string } = {};
@@ -896,8 +896,8 @@ describe("Service: StarkHttpService", () => {
 
 			it(
 				"on SUCCESS ('" +
-					requestType +
-					"'), should log a warning in case an item in the items array is not an object so the etag property cannot be set",
+				requestType +
+				"'), should log a warning in case an item in the items array is not an object so the etag property cannot be set",
 				() => {
 					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 					const expectedEtags: { [uuid: string]: string } = {};
@@ -951,20 +951,20 @@ describe("Service: StarkHttpService", () => {
 
 			it(
 				"on SUCCESS ('" +
-					requestType +
-					"'), should log a warning in case an item in the items array has no uuid so it cannot search the correct etag for it",
+				requestType +
+				"'), should log a warning in case an item in the items array has no uuid so it cannot search the correct etag for it",
 				() => {
 					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 					const expectedEtags: { [uuid: string]: string } = {};
 					expectedEtags[mockUuid] = mockEtag;
 
-					const mockResourceWithoutUuid: MockResource = { ...mockResourceWithEtag };
+					const mockResourceWithoutUuid: Partial<MockResource> = { ...mockResourceWithEtag };
 					delete mockResourceWithoutUuid.uuid;
 
 					const httpResponse: Partial<HttpResponse<StarkHttpRawCollectionResponseData<MockResource>>> = {
 						status: expectedStatusCode,
 						body: {
-							items: [mockResourceWithoutUuid],
+							items: [<MockResource>mockResourceWithoutUuid],
 							metadata: {
 								sortedBy: [],
 								pagination: mockPaginationMetadata,
@@ -982,7 +982,7 @@ describe("Service: StarkHttpService", () => {
 						(result: StarkCollectionResponseWrapper<MockResource>) => {
 							expect(result).toBeDefined();
 							expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
-							assertResponseData(result.data, [mockResourceWithoutUuid]); // should contain the etag now
+							assertResponseData(result.data, [<MockResource>mockResourceWithoutUuid]); // should contain the etag now
 							assertCollectionMetadata(result.metadata, {
 								sortedBy: [],
 								pagination: mockPaginationMetadata,
@@ -1033,8 +1033,8 @@ describe("Service: StarkHttpService", () => {
 
 			it(
 				"on SUCCESS ('" +
-					requestType +
-					"'), should deserialize 'as is' the custom metadata if any is returned in the response metadata",
+				requestType +
+				"'), should deserialize 'as is' the custom metadata if any is returned in the response metadata",
 				() => {
 					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 					const expectedEtags: { [uuid: string]: string } = {};
@@ -1522,17 +1522,18 @@ function httpHeadersGetter(inputHeaders: { [name: string]: string }): HttpHeader
 }
 
 class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P> {
-	public retryDelay!: number;
+	// `declare` is necessary because this declaration overwrites StarkHttpServiceImpl `retryDelay` declaration.
+	public declare retryDelay: number;
 
 	public constructor(logger: MockStarkLoggingService, sessionService: MockStarkSessionService, httpClient: SpyObj<HttpClient>) {
 		super(logger, sessionService, <HttpClient>(<unknown>httpClient));
 	}
 
-	public addDevAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
+	public override addDevAuthenticationHeaders(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
 		return super.addDevAuthenticationHeaders(request);
 	}
 
-	public addCorrelationIdentifierHeader(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
+	public override addCorrelationIdentifierHeader(request: StarkHttpRequest<P>): StarkHttpRequest<P> {
 		return super.addCorrelationIdentifierHeader(request);
 	}
 }

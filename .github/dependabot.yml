@@ -9,22 +9,16 @@ updates:
     ignore:
       - dependency-name: "@angular/*"
         versions:
-          - ">=8"
+          - ">=13"
       - dependency-name: "@angular-builders/*"
         versions:
-          - ">=8"
-      - dependency-name: "@angular-devkit/build-ng-packagr"
-        versions:
-          - ">=0.800"
+          - ">=13"
       - dependency-name: "@angular-devkit/build-angular"
         versions:
-          - ">=0.800"
+          - ">=13"
       - dependency-name: "@mdi/angular-material"
         versions:
           - ">=5"
-      - dependency-name: "@uirouter/angular"
-        versions:
-          - ">=6"
       - dependency-name: typescript
         versions:
           - ">= 0"
@@ -43,7 +37,7 @@ updates:
     ignore:
       - dependency-name: "@angular/*"
         versions:
-          - ">=8"
+          - ">=13"
       - dependency-name: typescript
         versions:
           - ">= 0"
@@ -62,7 +56,7 @@ updates:
     ignore:
       - dependency-name: "@angular/*"
         versions:
-          - ">=8"
+          - ">=13"
       - dependency-name: typescript
         versions:
           - ">= 0"

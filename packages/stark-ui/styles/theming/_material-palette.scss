@@ -1,0 +1,123 @@
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "~@angular/material/core/theming/palette" as mat-palette;
+
+$backgrounds: mat.$light-theme-background-palette;
+$foregrounds: mat.$light-theme-foreground-palette;
+
+$stark-accent-palette: null !default;
+$stark-primary-palette: null !default;
+$stark-warn-palette: null !default;
+
+$accent-palette: (
+  50: #f2e0e7,
+  100: #ddb3c4,
+  200: #c7809c,
+  300: #b14d74,
+  400: #a02657,
+  500: #8f0039,
+  600: #870033,
+  700: #7c002c,
+  800: #720024,
+  900: #600017,
+  A100: #ff90a1,
+  A200: #ff5d76,
+  A400: #ff2a4a,
+  A700: #ff1135,
+  contrast: (
+    50: mat-palette.$dark-primary-text,
+    100: mat-palette.$dark-primary-text,
+    200: mat-palette.$dark-primary-text,
+    300: mat-palette.$light-primary-text,
+    400: mat-palette.$light-primary-text,
+    500: mat-palette.$light-primary-text,
+    600: mat-palette.$light-primary-text,
+    700: mat-palette.$light-primary-text,
+    800: mat-palette.$light-primary-text,
+    900: mat-palette.$light-primary-text,
+    A100: mat-palette.$dark-primary-text,
+    A200: mat-palette.$dark-primary-text,
+    A400: mat-palette.$light-primary-text,
+    A700: mat-palette.$light-primary-text
+  )
+) !default;
+
+$primary-palette: (
+  50: #e0eff8,
+  100: #b3d6ef,
+  200: #80bbe4,
+  300: #4d9fd9,
+  400: #268bd0,
+  500: #0076c8,
+  600: #006ec2,
+  700: #0063bb,
+  800: #005496,
+  900: #143e74,
+  A100: #d1e1ff,
+  A200: #9ec0ff,
+  A400: #6b9eff,
+  A700: #528eff,
+  contrast: (
+    50: mat-palette.$dark-primary-text,
+    100: mat-palette.$dark-primary-text,
+    200: mat-palette.$dark-primary-text,
+    300: mat-palette.$dark-primary-text,
+    400: mat-palette.$light-primary-text,
+    500: mat-palette.$light-primary-text,
+    600: mat-palette.$light-primary-text,
+    700: mat-palette.$light-primary-text,
+    800: mat-palette.$light-primary-text,
+    900: mat-palette.$light-primary-text,
+    A100: mat-palette.$dark-primary-text,
+    A200: mat-palette.$dark-primary-text,
+    A400: mat-palette.$dark-primary-text,
+    A700: mat-palette.$dark-primary-text
+  )
+) !default;
+
+$warn-palette: (
+  50: #fff3e0,
+  100: #ffe0b3,
+  200: #ffcc80,
+  300: #ffb74d,
+  400: #ffa726,
+  500: #ff9800,
+  600: #ff9000,
+  700: #ff8500,
+  800: #ff7b00,
+  900: #ff6a00,
+  A100: #fff,
+  A200: #fff7f2,
+  A400: #ffd6bf,
+  A700: #ffc5a6,
+  contrast: (
+    50: mat-palette.$dark-primary-text,
+    100: mat-palette.$dark-primary-text,
+    200: mat-palette.$dark-primary-text,
+    300: mat-palette.$dark-primary-text,
+    400: mat-palette.$dark-primary-text,
+    500: mat-palette.$light-primary-text,
+    600: mat-palette.$light-primary-text,
+    700: mat-palette.$light-primary-text,
+    800: mat-palette.$light-primary-text,
+    900: mat-palette.$light-primary-text,
+    A100: mat-palette.$dark-primary-text,
+    A200: mat-palette.$dark-primary-text,
+    A400: mat-palette.$dark-primary-text,
+    A700: mat-palette.$dark-primary-text
+  )
+) !default;
+
+@if $stark-accent-palette != null {
+  $accent-palette: map.merge($accent-palette, $stark-accent-palette);
+}
+
+@if $stark-primary-palette != null {
+  $primary-palette: map.merge($primary-palette, $stark-primary-palette);
+}
+
+@if $stark-warn-palette != null {
+  $warn-palette: map.merge($warn-palette, $stark-warn-palette);
+}
+
+$warning-palette: $warn-palette;

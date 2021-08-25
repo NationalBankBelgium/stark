@@ -1,0 +1,69 @@
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "~@angular/material/core/theming/palette" as mat-palette;
+
+@mixin stark-button-color($color, $contrast) {
+  &.mat-button,
+  &.mat-icon-button,
+  &.mat-stroked-button {
+    color: $color;
+
+    .mat-button-focus-overlay {
+      background-color: rgba($color: $color, $alpha: 0.12);
+    }
+
+    .mat-ripple-element {
+      background-color: rgba($color: $color, $alpha: 0.1);
+    }
+  }
+  &.mat-flat-button,
+  &.mat-raised-button,
+  &.mat-fab,
+  &.mat-mini-fab {
+    color: $contrast;
+    background-color: $color;
+
+    .mat-ripple-element {
+      background-color: rgba($color: $contrast, $alpha: 0.1);
+    }
+  }
+  &.mat-icon-button {
+    .mat-ripple-element {
+      background-color: rgba($color: $color, $alpha: 0.2);
+    }
+  }
+}
+
+@mixin stark-button-theme($material-theme-config, $stark-theme-config) {
+  $success-palette: map.get($stark-theme-config, success-palette);
+  $alert-palette: map.get($stark-theme-config, alert-palette);
+  $grey-palette: map.get($stark-theme-config, grey-palette);
+
+  button {
+    &.mat-success {
+      @include stark-button-color(
+        mat.get-color-from-palette($success-palette, 500),
+        mat.get-contrast-color-from-palette($success-palette, 500)
+      );
+    }
+
+    &.mat-alert {
+      @include stark-button-color(
+        mat.get-color-from-palette($alert-palette, 500),
+        mat.get-contrast-color-from-palette($alert-palette, 500)
+      );
+    }
+
+    &.mat-alt {
+      @include stark-button-color(mat.get-color-from-palette($grey-palette, 900), mat.get-contrast-color-from-palette($grey-palette, 900));
+    }
+
+    &.mat-neutral {
+      @include stark-button-color(mat.get-color-from-palette($grey-palette, 400), mat.get-contrast-color-from-palette($grey-palette, 400));
+    }
+
+    &.mat-white {
+      @include stark-button-color(#fff, mat-palette.$dark-primary-text);
+    }
+  }
+}

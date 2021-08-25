@@ -14,7 +14,6 @@ import {
 	Output,
 	Renderer2,
 	SimpleChanges,
-	Type,
 	ViewChild
 } from "@angular/core";
 import {
@@ -32,7 +31,7 @@ import {
 	Validators
 } from "@angular/forms";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
-import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { MatFormField, MatFormFieldControl } from "@angular/material/form-field";
 import moment from "moment";
 import { Subject, Subscription } from "rxjs";
@@ -41,6 +40,7 @@ import { minDate as validatorMinDate, maxDate as validatorMaxDate } from "class-
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
 import {
+	StarkDateInput,
 	StarkDatePickerComponent,
 	StarkDatePickerFilter,
 	StarkDatePickerMaskConfig
@@ -88,7 +88,8 @@ const componentName = "stark-date-time-picker";
 })
 export class StarkDateTimePickerComponent
 	extends AbstractStarkUiComponent
-	implements MatFormFieldControl<Date>, ControlValueAccessor, Validator, OnInit, OnChanges, OnDestroy {
+	implements MatFormFieldControl<Date>, ControlValueAccessor, Validator, OnInit, OnChanges, OnDestroy
+{
 	/**
 	 * Part of {@link MatFormFieldControl} API
 	 * @ignore
@@ -173,8 +174,8 @@ export class StarkDateTimePickerComponent
 		return this._required;
 	}
 
-	public set required(isRequired: boolean) {
-		this._required = coerceBooleanProperty(isRequired);
+	public set required(value: boolean) {
+		this._required = coerceBooleanProperty(value);
 		if (this._required) {
 			this.dateTimeFormGroup.controls["date"].setValidators([Validators.required]);
 			this.dateTimeFormGroup.controls["time"].setValidators([Validators.required]);
@@ -183,6 +184,10 @@ export class StarkDateTimePickerComponent
 			this.dateTimeFormGroup.controls["time"].clearValidators();
 		}
 	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_required: BooleanInput;
 
 	/**
 	 * @ignore
@@ -198,10 +203,10 @@ export class StarkDateTimePickerComponent
 		return this._disabled;
 	}
 
-	public set disabled(isDisabled: boolean) {
-		this._disabled = coerceBooleanProperty(isDisabled);
+	public set disabled(value: boolean) {
+		this._disabled = coerceBooleanProperty(value);
 
-		if (isDisabled) {
+		if (this._disabled) {
 			this.dateTimeFormGroup.disable();
 		} else {
 			this.dateTimeFormGroup.enable();
@@ -261,13 +266,61 @@ export class StarkDateTimePickerComponent
 	 * Input for {@link StarkDatePickerComponent}
 	 */
 	@Input()
-	public max?: Date;
+	public set max(value: moment.Moment | null) {
+		if (value === undefined) {
+			// tslint:disable-next-line:no-null-keyword
+			this._max = null;
+		} else if (value instanceof Date) {
+			this._max = moment(value);
+		} else {
+			this._max = value;
+		}
+	}
+
+	public get max(): moment.Moment | null {
+		return this._max;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_max: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// tslint:disable-next-line:no-null-keyword
+	private _max: moment.Moment | null = null;
 
 	/**
 	 * Input for {@link StarkDatePickerComponent}
 	 */
 	@Input()
-	public min?: Date;
+	public set min(value: moment.Moment | null) {
+		if (value === undefined) {
+			// tslint:disable-next-line:no-null-keyword
+			this._min = null;
+		} else if (value instanceof Date) {
+			this._min = moment(value);
+		} else {
+			this._min = value;
+		}
+	}
+
+	public get min(): moment.Moment | null {
+		return this._min;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_min: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// tslint:disable-next-line:no-null-keyword
+	public _min: moment.Moment | null = null;
 
 	/**
 	 * Output that will emit a specific date whenever the selection has changed
@@ -498,8 +551,9 @@ export class StarkDateTimePickerComponent
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
-		this.ngControl = this.injector.get<NgControl>(<Type<NgControl>>NgControl, <any>null);
+	public override ngOnInit(): void {
+		super.ngOnInit();
+		this.ngControl = this.injector.get<NgControl>(NgControl, <any>null);
 
 		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
@@ -514,7 +568,6 @@ export class StarkDateTimePickerComponent
 			this.placeholder = this.originalPlaceholder;
 		});
 
-		super.ngOnInit();
 		this.logger.debug(componentName + ": component initialized");
 	}
 
@@ -525,10 +578,10 @@ export class StarkDateTimePickerComponent
 		if (changes["min"] || changes["max"]) {
 			const validators: ValidatorFn[] = [];
 			if (this.min) {
-				validators.push(this._starkMinDateValidator(this.min));
+				validators.push(this._starkMinDateValidator(this.min.toDate()));
 			}
 			if (this.max) {
-				validators.push(this._starkMaxDateValidator(this.max));
+				validators.push(this._starkMaxDateValidator(this.max.toDate()));
 			}
 			this.dateTimeFormGroup.setValidators(validators);
 		}

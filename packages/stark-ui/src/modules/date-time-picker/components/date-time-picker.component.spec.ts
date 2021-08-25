@@ -1,27 +1,24 @@
 /* tslint:disable:completed-docs component-max-inline-declarations no-big-function */
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { Component, ViewChild } from "@angular/core";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { By, HAMMER_LOADER } from "@angular/platform-browser";
+import { By } from "@angular/platform-browser";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { TranslateModule } from "@ngx-translate/core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
-import { Observer, Subject } from "rxjs";
+import { Observer } from "rxjs";
 import moment from "moment";
-import {
-	STARK_DATE_FORMATS,
-	StarkDatePickerComponent,
-	StarkDatePickerFilter,
-	StarkDatePickerMaskConfig
-} from "../../date-picker/components";
-import { StarkTimestampMaskConfig, StarkTimestampMaskDirective } from "../../input-mask-directives/directives";
+import { STARK_DATE_FORMATS, StarkDatePickerModule, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker";
+import { StarkTimestampMaskConfig, StarkInputMaskDirectivesModule } from "../../input-mask-directives";
 import { DEFAULT_TIME_MASK_CONFIG, StarkDateTimePickerComponent } from "./date-time-picker.component";
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
@@ -109,40 +106,34 @@ describe("DateTimePickerComponent", () => {
 	let component: StarkDateTimePickerComponent;
 	const timeInputSelector = ".time-input";
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [
-				StarkTimestampMaskDirective,
-				StarkDatePickerComponent,
-				StarkDateTimePickerComponent,
-				TestHostComponent,
-				TestHostFormControlComponent
-			],
-			imports: [
-				NoopAnimationsModule,
-				MatDatepickerModule,
-				MatTooltipModule,
-				MatFormFieldModule,
-				MatInputModule,
-				MatMomentDateModule,
-				FormsModule,
-				ReactiveFormsModule,
-				TranslateModule.forRoot()
-			],
-			providers: [
-				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-				{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS },
-				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-				{
-					// See https://github.com/NationalBankBelgium/stark/issues/1088
-					provide: HAMMER_LOADER,
-					useValue: (): Promise<any> => new Subject<any>().toPromise()
-				}
-			],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [StarkDateTimePickerComponent, TestHostComponent, TestHostFormControlComponent],
+				imports: [
+					NoopAnimationsModule,
+					MatDatepickerModule,
+					MatTooltipModule,
+					MatFormFieldModule,
+					MatIconModule,
+					MatIconTestingModule,
+					MatInputModule,
+					MatMomentDateModule,
+					FormsModule,
+					ReactiveFormsModule,
+					StarkDatePickerModule,
+					StarkInputMaskDirectivesModule,
+					TranslateModule.forRoot()
+				],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS },
+					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
+					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
+				]
+			}).compileComponents();
+		})
+	);
 
 	describe("MatFormFieldControl", () => {
 		let hostComponent: TestHostFormControlComponent;
@@ -163,7 +154,7 @@ describe("DateTimePickerComponent", () => {
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			let formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeUndefined();
 
 			const datePickerInputDebugElement = hostFixture.debugElement.query(By.css("stark-date-picker > input"));
 			expect(datePickerInputDebugElement).toBeTruthy();
@@ -183,7 +174,7 @@ describe("DateTimePickerComponent", () => {
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeUndefined();
 
 			const timeInputDebugElement = hostFixture.debugElement.query(By.css(".time-picker > input"));
 			expect(timeInputDebugElement).toBeTruthy();
@@ -205,7 +196,7 @@ describe("DateTimePickerComponent", () => {
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeUndefined();
 
 			hostComponent.formControl.markAsTouched();
 			hostFixture.detectChanges();
@@ -221,7 +212,7 @@ describe("DateTimePickerComponent", () => {
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
-			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBe(false);
+			expect(formFieldDebugElement.classes[formFieldInvalidClass]).toBeUndefined();
 
 			hostComponent.formControl.markAsDirty();
 			hostFixture.detectChanges();
@@ -283,8 +274,8 @@ describe("DateTimePickerComponent", () => {
 				expect(component.dateFilter).toBeUndefined();
 				expect(component.disabled).toBe(false);
 				expect(component.required).toBe(false);
-				expect(component.max).toBeUndefined();
-				expect(component.min).toBeUndefined();
+				expect(component.max).toBeNull();
+				expect(component.min).toBeNull();
 				expect(component.pickerId).toBeUndefined();
 				expect(component.pickerName).toBeUndefined();
 				expect(component.placeholder).toEqual("");
@@ -326,9 +317,9 @@ describe("DateTimePickerComponent", () => {
 				expect(hostFixture.nativeElement.querySelector("input[name='test-name']")).toBeTruthy();
 				/// expect(hostFixture.nativeElement.querySelector("input#test-id-time-input[required]")).toBeTruthy(); // see comment above about Angular 'required' validator
 				expect(component.datePicker.min).not.toBeNull();
-				expect(component.datePicker.min).toEqual(minDate);
+				expect(component.datePicker.min?.toDate()).toEqual(minDate);
 				expect(component.datePicker.max).not.toBeNull();
-				expect(component.datePicker.max).toEqual(maxDate);
+				expect(component.datePicker.max?.toDate()).toEqual(maxDate);
 
 				expect(mockObserver.next).not.toHaveBeenCalled();
 				expect(mockObserver.error).not.toHaveBeenCalled();
@@ -628,8 +619,8 @@ describe("DateTimePickerComponent", () => {
 				expect(component.dateFilter).toBeUndefined();
 				expect(component.disabled).toBe(false);
 				expect(component.required).toBe(false);
-				expect(component.max).toBeUndefined();
-				expect(component.min).toBeUndefined();
+				expect(component.max).toBeNull();
+				expect(component.min).toBeNull();
 				expect(component.pickerId).toBeUndefined();
 				expect(component.pickerName).toBeUndefined();
 				expect(component.placeholder).toEqual("");
@@ -664,9 +655,9 @@ describe("DateTimePickerComponent", () => {
 				expect(hostFixture.nativeElement.querySelector("input[name='test-name']")).toBeTruthy();
 				expect(hostFixture.nativeElement.querySelector("input#test-id-time-input[required]")).toBeTruthy();
 				expect(component.datePicker.min).not.toBeNull();
-				expect(component.datePicker.min).toEqual(minDate);
+				expect(component.datePicker.min?.toDate()).toEqual(minDate);
 				expect(component.datePicker.max).not.toBeNull();
-				expect(component.datePicker.max).toEqual(maxDate);
+				expect(component.datePicker.max?.toDate()).toEqual(maxDate);
 
 				expect(hostComponent.onValueChange).not.toHaveBeenCalled();
 				expect(mockObserver.next).not.toHaveBeenCalled();

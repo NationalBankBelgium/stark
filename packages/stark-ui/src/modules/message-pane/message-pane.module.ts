@@ -18,7 +18,7 @@ import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneServiceImpl } from "./servi
 import { starkMessagesReducers } from "./reducers";
 import { StarkMessagePaneEffects } from "./effects";
 import { mergeUiTranslations } from "../../common/translations";
-import { starkMessagePaneStoreKey } from './constants';
+import { starkMessagePaneStoreKey } from "./constants";
 
 @NgModule({
 	declarations: [StarkMessagePaneComponent],
@@ -40,7 +40,7 @@ export class StarkMessagePaneModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(): ModuleWithProviders<StarkMessagePaneModule> {
 		return {
 			ngModule: StarkMessagePaneModule,
 			providers: [{ provide: STARK_MESSAGE_PANE_SERVICE, useClass: StarkMessagePaneServiceImpl }]

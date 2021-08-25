@@ -4,9 +4,9 @@ import "core-js/es";
 import "core-js/proposals/reflect-metadata";
 
 /* tslint:disable:no-import-side-effect */
-import "zone.js/dist/zone";
-import "zone.js/dist/zone-testing";
-import "zone.js/dist/long-stack-trace-zone";
+import "zone.js";
+import "zone.js/testing";
+import "zone.js/plugins/long-stack-trace-zone";
 /* tslint:enable:no-import-side-effect */
 
 // define global environment variable (used in some places in stark-core and stark-ui)

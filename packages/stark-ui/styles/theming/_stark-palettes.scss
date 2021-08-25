@@ -1,0 +1,93 @@
+@use "sass:map";
+@use "~@angular/material" as mat;
+@use "~@angular/material/core/theming/palette" as mat-palette;
+
+$stark-alert-palette: null !default;
+$stark-grey-palette: null !default;
+$stark-success-palette: null !default;
+
+$alert-palette: (
+  50: #fae6e6,
+  100: #f2c1c1,
+  200: #e99797,
+  300: #e06d6d,
+  400: #da4e4e,
+  500: #d32f2f,
+  600: #ce2a2a,
+  700: #c82323,
+  800: #c21d1d,
+  900: #b71212,
+  A100: #ffe7e7,
+  A200: #ffb4b4,
+  A400: #ff8181,
+  A700: #ff6868,
+  contrast: (
+    50: mat-palette.$dark-primary-text,
+    100: mat-palette.$dark-primary-text,
+    200: mat-palette.$dark-primary-text,
+    300: mat-palette.$dark-primary-text,
+    400: mat-palette.$light-primary-text,
+    500: mat-palette.$light-primary-text,
+    600: mat-palette.$light-primary-text,
+    700: mat-palette.$light-primary-text,
+    800: mat-palette.$light-primary-text,
+    900: mat-palette.$light-primary-text,
+    A100: mat-palette.$dark-primary-text,
+    A200: mat-palette.$dark-primary-text,
+    A400: mat-palette.$dark-primary-text,
+    A700: mat-palette.$dark-primary-text
+  )
+) !default;
+
+$grey-palette: mat.$grey-palette !default;
+
+$success-palette: (
+  50: #eaf5ea,
+  100: #c9e7cb,
+  200: #a6d7a8,
+  300: #82c785,
+  400: #67bb6a,
+  500: #4caf50,
+  600: #45a849,
+  700: #3c9f40,
+  800: #339637,
+  900: #248627,
+  A100: #c5ffc7,
+  A200: #92ff95,
+  A400: #5fff64,
+  A700: #46ff4b,
+  contrast: (
+    50: mat-palette.$dark-primary-text,
+    100: mat-palette.$dark-primary-text,
+    200: mat-palette.$dark-primary-text,
+    300: mat-palette.$dark-primary-text,
+    400: mat-palette.$dark-primary-text,
+    500: mat-palette.$light-primary-text,
+    600: mat-palette.$light-primary-text,
+    700: mat-palette.$light-primary-text,
+    800: mat-palette.$light-primary-text,
+    900: mat-palette.$light-primary-text,
+    A100: mat-palette.$dark-primary-text,
+    A200: mat-palette.$dark-primary-text,
+    A400: mat-palette.$dark-primary-text,
+    A700: mat-palette.$dark-primary-text
+  )
+) !default;
+
+@if $stark-grey-palette != null {
+  $grey-palette: map.merge($grey-palette, $stark-grey-palette);
+}
+
+@if $stark-alert-palette != null {
+  $alert-palette: map.merge($alert-palette, $stark-alert-palette);
+}
+
+@if $stark-success-palette != null {
+  $success-palette: map.merge($success-palette, $stark-success-palette);
+}
+
+$stark-base-theme: (
+  alert-palette: mat.define-palette($alert-palette),
+  grey-palette: mat.define-palette($grey-palette),
+  success-palette: mat.define-palette($success-palette)
+) !default;

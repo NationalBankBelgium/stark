@@ -51,13 +51,16 @@
 		<stark-date-range-picker [rangeFormGroup]="dateRangeFormGroup" required>
 			<ng-container
 				start-date-errors
-				*ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.startDate); trackBy: trackItemFn"
+				*ngFor="let error of getErrorMessages(dateRangeFormGroup.controls['startDate']); trackBy: trackItemFn"
 			>
 				{{ error | translate }}
 				<br />
 			</ng-container>
 
-			<ng-container end-date-errors *ngFor="let error of getErrorMessages(dateRangeFormGroup.controls.endDate); trackBy: trackItemFn">
+			<ng-container
+				end-date-errors
+				*ngFor="let error of getErrorMessages(dateRangeFormGroup.controls['endDate']); trackBy: trackItemFn"
+			>
 				{{ error | translate }}
 				<br />
 			</ng-container>

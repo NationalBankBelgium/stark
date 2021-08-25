@@ -132,8 +132,11 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 				this._viewContainer.insert(this.componentViewRef); // insert the view in the last position
 				this.renderer.addClass(this.elementRef.nativeElement, "stark-hide");
 			} else {
-				this._viewContainer.detach(this._viewContainer.indexOf(this.componentViewRef));
-				this.renderer.removeClass(this.elementRef.nativeElement, "stark-hide");
+				const componentViewRefIndex = this._viewContainer.indexOf(this.componentViewRef);
+				if (componentViewRefIndex > -1) {
+					this._viewContainer.detach(componentViewRefIndex);
+					this.renderer.removeClass(this.elementRef.nativeElement, "stark-hide");
+				}
 			}
 		});
 	}

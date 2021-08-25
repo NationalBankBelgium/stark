@@ -70,8 +70,8 @@ export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent
 	public constructor(
 		public dialogRef: MatDialogRef<StarkTableMultisortDialogComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: StarkTableMultisortDialogData,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		renderer: Renderer2,
+		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
 	}
@@ -79,7 +79,8 @@ export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.data.columns.sort((a: StarkTableColumnComponent, b: StarkTableColumnComponent) => a.sortPriority - b.sortPriority);
 
 		for (const column of this.data.columns) {

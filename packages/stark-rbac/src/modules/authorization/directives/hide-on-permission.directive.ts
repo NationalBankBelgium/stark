@@ -25,13 +25,18 @@ const directiveName = "[starkHideOnPermission]";
 })
 export class StarkHideOnPermissionDirective implements OnInit, OnDestroy {
 	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _isValidInput = false;
+
+	/**
 	 * {@link StarkRBACDirectivePermission} object containing any of the roles that the user must not have in order to display the element that this directive is applied to.
 	 */
 	@Input()
 	public set starkHideOnPermission(value: StarkRBACDirectivePermission) {
-		if (!value || typeof value.roles === "undefined") {
-			throw new Error(directiveName + ": Passed object must contain 'roles'.");
-		}
+		// Checks whether the value is valid and contains `roles` property
+		this._isValidInput = !(!value || typeof value.roles === "undefined");
 
 		if (!this.authorizationService.hasAnyRole(value.roles)) {
 			if (!this.viewRef) {
@@ -75,6 +80,10 @@ export class StarkHideOnPermissionDirective implements OnInit, OnDestroy {
 	 * Component lifecycle hook
 	 */
 	public ngOnInit(): void {
+		if (!this._isValidInput) {
+			throw new Error(directiveName + ": Passed object must contain 'roles'.");
+		}
+
 		this.logger.debug(directiveName + ": directive initialized");
 	}
 

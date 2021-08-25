@@ -101,7 +101,7 @@ export class DemoPrettyPrintPageComponent {
 	];
 	public dataFormats: StarkPrettyPrintFormat[] = this.fileTypes.map((fileType: FileType) => fileType.format);
 
-	public selectedDataFormat = "";
+	public selectedDataFormat?: StarkPrettyPrintFormat;
 	public unformattedData = "";
 	public highlightingEnabled = false;
 
@@ -112,7 +112,7 @@ export class DemoPrettyPrintPageComponent {
 		}
 	];
 
-	public dataFormatDropdownOnChange(selectedValue: string): void {
+	public dataFormatDropdownOnChange(selectedValue: StarkPrettyPrintFormat): void {
 		this.selectedDataFormat = selectedValue;
 	}
 

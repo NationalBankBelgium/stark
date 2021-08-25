@@ -65,7 +65,7 @@
 				[color]="formButton.buttonColor"
 				*ngIf="formButton.isVisible"
 				[disabled]="!formButton.isEnabled"
-				[ngClass]="formButton.className"
+				[ngClass]="formButton.className || ''"
 				(click)="formButton.onClick()"
 				type="button"
 			>

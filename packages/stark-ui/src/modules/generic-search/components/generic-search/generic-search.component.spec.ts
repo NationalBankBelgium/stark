@@ -1,17 +1,20 @@
 /* tslint:disable:completed-docs no-identical-functions */
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { Component, EventEmitter, NO_ERRORS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { Component, EventEmitter } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkGenericSearchComponent } from "./generic-search.component";
 import { StarkSearchFormComponent } from "../../classes";
-import { StarkActionBarComponent } from "../../../action-bar/components";
+import { StarkActionBarModule } from "../../../action-bar";
 
 @Component({
 	selector: "search-form-component",
@@ -49,28 +52,27 @@ class BadTestHostComponent extends TestHostComponent {}
 describe("GenericSearchComponent", () => {
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			imports: [
-				CommonModule,
-				FormsModule,
-				ReactiveFormsModule,
-				MatButtonModule,
-				MatMenuModule,
-				NoopAnimationsModule,
-				TranslateModule.forRoot()
-			],
-			declarations: [
-				StarkActionBarComponent,
-				StarkGenericSearchComponent,
-				TestSearchFormComponent,
-				TestHostComponent,
-				BadTestHostComponent
-			],
-			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
-			schemas: [NO_ERRORS_SCHEMA] // to avoid errors due to "mat-icon" and "matTooltip" directives not known (which we don't want to add in these tests)
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				imports: [
+					CommonModule,
+					FormsModule,
+					ReactiveFormsModule,
+					MatButtonModule,
+					MatIconModule,
+					MatIconTestingModule,
+					MatMenuModule,
+					MatTooltipModule,
+					NoopAnimationsModule,
+					StarkActionBarModule,
+					TranslateModule.forRoot()
+				],
+				declarations: [StarkGenericSearchComponent, TestSearchFormComponent, TestHostComponent, BadTestHostComponent],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+			}).compileComponents();
+		})
+	);
 
 	it("should throw error because `searchFormComponent` is not included", () => {
 		hostFixture = TestBed.createComponent(BadTestHostComponent);

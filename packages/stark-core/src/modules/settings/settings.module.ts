@@ -17,7 +17,7 @@ export class StarkSettingsModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(): ModuleWithProviders<StarkSettingsModule> {
 		return {
 			ngModule: StarkSettingsModule,
 			providers: [{ provide: STARK_SETTINGS_SERVICE, useClass: StarkSettingsServiceImpl }]

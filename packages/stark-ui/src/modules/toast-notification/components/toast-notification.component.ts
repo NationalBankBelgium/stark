@@ -41,8 +41,8 @@ export class StarkToastNotificationComponent extends AbstractStarkUiComponent im
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
 		public snackBar: MatSnackBar,
 		@Inject(MAT_SNACK_BAR_DATA) public data: StarkToastMessage,
-		protected renderer: Renderer2,
-		protected elementRef: ElementRef
+		renderer: Renderer2,
+		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
 		this.message = data;
@@ -52,7 +52,8 @@ export class StarkToastNotificationComponent extends AbstractStarkUiComponent im
 	/**
 	 * Component lifecycle hook
 	 */
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
+		super.ngOnInit();
 		this.logger.debug(componentName + ": controller initialized");
 	}
 

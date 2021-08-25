@@ -1670,21 +1670,21 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).not.toBe(mockCriteriaInstance);
-			expect(requestCriteria.field1).toBe("anything");
-			expect(requestCriteria.field2).toBeDefined();
-			expect(requestCriteria.field2.childField1).toBe(mockDate.toISOString());
-			expect(requestCriteria.field2.childField2).toBeDefined();
-			expect(requestCriteria.field2.childField2.grandChildField1).toEqual(["someData", 123]);
-			expect(requestCriteria.field2.childField2.hasOwnProperty("anotherUndefinedField")).toBe(false); // Serialize omits undefined class props
-			expect(requestCriteria.field2.childField2.hasOwnProperty("anotherEmptyField")).toBe(false); // empty values are omitted
-			expect(requestCriteria.field2.childField3).toBeDefined();
-			expect(requestCriteria.field2.childField3 instanceof Object).toBe(true); // Map objects are serialized into simple objects
-			expect(requestCriteria.field2.childField3.grandChildField1).toBe("whatever");
-			expect(requestCriteria.field2.childField3.hasOwnProperty("anotherUndefinedField")).toBe(true); // object property (not class property)
-			expect(requestCriteria.field2.childField3.anotherUndefinedField).toBeNull(); // due to Serialize => with undefined returns null
-			expect(requestCriteria.field2.childField3.hasOwnProperty("anotherEmptyField")).toBe(false); // empty values are omitted
-			expect(requestCriteria.field2.hasOwnProperty("someUndefinedField")).toBe(false); // Serialize omits undefined class properties
-			expect(requestCriteria.field2.hasOwnProperty("someEmptyField")).toBe(false); // empty values are omitted
+			expect(requestCriteria["field1"]).toBe("anything");
+			expect(requestCriteria["field2"]).toBeDefined();
+			expect(requestCriteria["field2"].childField1).toBe(mockDate.toISOString());
+			expect(requestCriteria["field2"].childField2).toBeDefined();
+			expect(requestCriteria["field2"].childField2.grandChildField1).toEqual(["someData", 123]);
+			expect(requestCriteria["field2"].childField2.hasOwnProperty("anotherUndefinedField")).toBe(false); // Serialize omits undefined class props
+			expect(requestCriteria["field2"].childField2.hasOwnProperty("anotherEmptyField")).toBe(false); // empty values are omitted
+			expect(requestCriteria["field2"].childField3).toBeDefined();
+			expect(requestCriteria["field2"].childField3 instanceof Object).toBe(true); // Map objects are serialized into simple objects
+			expect(requestCriteria["field2"].childField3.grandChildField1).toBe("whatever");
+			expect(requestCriteria["field2"].childField3.hasOwnProperty("anotherUndefinedField")).toBe(true); // object property (not class property)
+			expect(requestCriteria["field2"].childField3.anotherUndefinedField).toBeNull(); // due to Serialize => with undefined returns null
+			expect(requestCriteria["field2"].childField3.hasOwnProperty("anotherEmptyField")).toBe(false); // empty values are omitted
+			expect(requestCriteria["field2"].hasOwnProperty("someUndefinedField")).toBe(false); // Serialize omits undefined class properties
+			expect(requestCriteria["field2"].hasOwnProperty("someEmptyField")).toBe(false); // empty values are omitted
 			expect(requestCriteria.hasOwnProperty("undefinedField")).toBe(false); // Serialize omits undefined class properties
 			expect(requestCriteria.hasOwnProperty("emptyField")).toBe(false); // empty values are omitted
 		});
@@ -1705,26 +1705,26 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).toBe(mockCriteriaInstance); // the criteria instance remains unchanged
-			expect(requestCriteria.field1).toBe("anything");
-			expect(requestCriteria.field2).toBeDefined();
-			expect(requestCriteria.field2.childField1).toBe(mockDate);
-			expect(requestCriteria.field2.childField2).toBeDefined();
-			expect(requestCriteria.field2.childField2.grandChildField1).toEqual(["someData", 123]);
-			expect(requestCriteria.field2.childField2.hasOwnProperty("anotherUndefinedField")).toBe(true); // undefined values remain unchanged
-			expect(requestCriteria.field2.childField2.anotherUndefinedField).toBeUndefined();
-			expect(requestCriteria.field2.childField2.anotherEmptyField).toBe("");
-			expect(requestCriteria.field2.childField3).toBeDefined();
-			expect(requestCriteria.field2.childField3 instanceof Map).toBe(true); // Map objects remain unchanged
-			expect(requestCriteria.field2.childField3.get("grandChildField1")).toBe("whatever");
-			expect(requestCriteria.field2.childField3.has("anotherUndefinedField")).toBe(true);
-			expect(requestCriteria.field2.childField3.get("anotherUndefinedField")).toBeUndefined();
-			expect(requestCriteria.field2.childField3.get("anotherEmptyField")).toBe("");
-			expect(requestCriteria.field2.hasOwnProperty("someUndefinedField")).toBe(true); // undefined values remain unchanged
-			expect(requestCriteria.field2.someUndefinedField).toBeUndefined();
-			expect(requestCriteria.field2.someEmptyField).toBe("");
+			expect(requestCriteria["field1"]).toBe("anything");
+			expect(requestCriteria["field2"]).toBeDefined();
+			expect(requestCriteria["field2"].childField1).toBe(mockDate);
+			expect(requestCriteria["field2"].childField2).toBeDefined();
+			expect(requestCriteria["field2"].childField2.grandChildField1).toEqual(["someData", 123]);
+			expect(requestCriteria["field2"].childField2.hasOwnProperty("anotherUndefinedField")).toBe(true); // undefined values remain unchanged
+			expect(requestCriteria["field2"].childField2.anotherUndefinedField).toBeUndefined();
+			expect(requestCriteria["field2"].childField2.anotherEmptyField).toBe("");
+			expect(requestCriteria["field2"].childField3).toBeDefined();
+			expect(requestCriteria["field2"].childField3 instanceof Map).toBe(true); // Map objects remain unchanged
+			expect(requestCriteria["field2"].childField3.get("grandChildField1")).toBe("whatever");
+			expect(requestCriteria["field2"].childField3.has("anotherUndefinedField")).toBe(true);
+			expect(requestCriteria["field2"].childField3.get("anotherUndefinedField")).toBeUndefined();
+			expect(requestCriteria["field2"].childField3.get("anotherEmptyField")).toBe("");
+			expect(requestCriteria["field2"].hasOwnProperty("someUndefinedField")).toBe(true); // undefined values remain unchanged
+			expect(requestCriteria["field2"].someUndefinedField).toBeUndefined();
+			expect(requestCriteria["field2"].someEmptyField).toBe("");
 			expect(requestCriteria.hasOwnProperty("undefinedField")).toBe(true); // undefined values remain unchanged
-			expect(requestCriteria.undefinedField).toBeUndefined();
-			expect(requestCriteria.emptyField).toBe("");
+			expect(requestCriteria["undefinedField"]).toBeUndefined();
+			expect(requestCriteria["emptyField"]).toBe("");
 		});
 	});
 });

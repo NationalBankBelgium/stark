@@ -2,78 +2,82 @@
 /*  S t a r k   A p p   S i d e b a r                                             */
 /* ============================================================================== */
 /* stark-ui: src/modules/app-sidebar/components/_app-sidebar.component.scss */
+@use "../../../../styles/media-queries" as *;
+@use "../../../../styles/old-variables" as old-vars;
 
-.stark-app-sidebar {
-  .mat-sidenav-container {
-    height: 100vh;
-    width: 100vw;
+@mixin stark-app-sidebar() {
+  .stark-app-sidebar {
+    .mat-sidenav-container {
+      height: 100vh;
+      width: 100vw;
 
-    display: flex;
-    flex-direction: column;
-  }
+      display: flex;
+      flex-direction: column;
+    }
 
-  .mat-sidenav-content {
-    flex: 1 1 0;
-    align-self: stretch;
+    .mat-sidenav-content {
+      flex: 1 1 0;
+      align-self: stretch;
 
-    display: flex;
-    flex-direction: column;
-  }
+      display: flex;
+      flex-direction: column;
+    }
 
-  .mat-sidenav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    .mat-sidenav {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-    &.stark-app-sidenav-menu {
-      display: block;
+      &.stark-app-sidenav-menu {
+        display: block;
+      }
+    }
+
+    .stark-app-sidenav-menu {
+      &.stark-app-sidenav-menu-shifting {
+        margin-top: old-vars.$stark-header-size-desktop;
+      }
+    }
+
+    .stark-app-sidenav-left {
+      width: 200px;
+    }
+
+    .stark-app-sidenav-right {
+      width: 300px;
+    }
+
+    .stark-app-sidenav-menu {
+      width: 280px;
     }
   }
 
-  .stark-app-sidenav-menu {
-    &.stark-app-sidenav-menu-shifting {
-      margin-top: $stark-header-size-desktop;
-    }
-  }
-
-  .stark-app-sidenav-left {
-    width: 200px;
-  }
-
-  .stark-app-sidenav-right {
-    width: 300px;
-  }
-
-  .stark-app-sidenav-menu {
-    width: 280px;
-  }
-}
-
-.stark-app-sidebar .mat-sidenav-content {
-  &:not(.stark-ios-device) {
-    margin-top: $stark-header-size;
-  }
-
-  &.stark-ios-device .stark-main-container {
-    margin-top: $stark-header-size;
-  }
-}
-
-@media #{$tablet-screen-query} {
   .stark-app-sidebar .mat-sidenav-content {
     &:not(.stark-ios-device) {
-      margin-top: $stark-header-size-desktop;
+      margin-top: old-vars.$stark-header-size;
     }
 
     &.stark-ios-device .stark-main-container {
-      margin-top: $stark-header-size-desktop;
+      margin-top: old-vars.$stark-header-size;
     }
   }
-}
 
-@media #{$desktop-lg-query} {
-  .stark-app-sidebar .stark-app-sidenav-menu {
-    margin-top: $stark-header-size-desktop;
+  @media #{$tablet-screen-query} {
+    .stark-app-sidebar .mat-sidenav-content {
+      &:not(.stark-ios-device) {
+        margin-top: old-vars.$stark-header-size-desktop;
+      }
+
+      &.stark-ios-device .stark-main-container {
+        margin-top: old-vars.$stark-header-size-desktop;
+      }
+    }
+  }
+
+  @media #{$desktop-lg-query} {
+    .stark-app-sidebar .stark-app-sidenav-menu {
+      margin-top: old-vars.$stark-header-size-desktop;
+    }
   }
 }
 

@@ -66,7 +66,7 @@ export class StarkSessionUiModule {
 	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
 	 * @returns A module with providers
 	 */
-	public static forRoot(starkSessionUiConfig?: StarkSessionUiConfig): ModuleWithProviders {
+	public static forRoot(starkSessionUiConfig?: StarkSessionUiConfig): ModuleWithProviders<StarkSessionUiModule> {
 		return {
 			ngModule: StarkSessionUiModule,
 			providers: [starkSessionUiConfig ? { provide: STARK_SESSION_UI_CONFIG, useValue: starkSessionUiConfig } : []]

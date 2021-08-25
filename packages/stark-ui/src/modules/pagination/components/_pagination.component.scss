@@ -1,67 +1,75 @@
-/********** PAGINATION **********/
-/* stark: src/modules/pagination/components/_pagination.component.scss */
-.stark-pagination > div {
-  align-items: center;
-  display: flex;
-  justify-content: flex-start;
+/* ============================================================================== */
+/*  S t a r k   P a g i n a t i o n                                               */
+/* ============================================================================== */
+/* stark-ui: src/modules/pagination/components/_pagination.component.scss */
+@use "~@angular/material" as mat;
+@use "../../../../styles/theming/typography" as stark-typography;
+@use "../../../../styles/media-queries" as *;
 
-  ul {
+@mixin stark-pagination() {
+  .stark-pagination > div {
     align-items: center;
     display: flex;
-    list-style: none;
-    margin: 0;
-    margin-right: 18px;
-    padding: 0;
-  }
+    justify-content: flex-start;
 
-  .pagination-enter-page {
-    display: none;
-  }
-
-  .pagination-items-per-page {
-    width: 50px;
-  }
-
-  .page-numbers {
-    display: none;
-  }
-}
-
-@media #{$tablet-query} {
-  .stark-pagination > div {
-    font-size: mat-font-size($typography-config, caption);
-    font-weight: mat-font-weight($typography-config, caption);
-    line-height: mat-line-height($typography-config, caption);
-
-    .pagination-enter-page {
+    ul {
       align-items: center;
       display: flex;
-      margin-right: 40px;
+      list-style: none;
+      margin: 0;
+      margin-right: 18px;
+      padding: 0;
+    }
 
-      & input {
-        margin-right: 4px;
-        width: 26px;
-        height: 24px;
-        padding: 4px;
-        border-radius: 2px;
-        text-align: center;
-      }
+    .pagination-enter-page {
+      display: none;
+    }
+
+    .pagination-items-per-page {
+      width: 50px;
     }
 
     .page-numbers {
-      cursor: pointer;
-      display: flex;
-
-      a {
-        color: inherit;
-        padding: 15px;
-        opacity: 0.5;
-      }
+      display: none;
     }
+  }
 
-    &.compact {
+  @media #{$tablet-query} {
+    .stark-pagination > div {
+      font-size: mat.font-size(stark-typography.$typography-config, caption);
+      font-weight: mat.font-weight(stark-typography.$typography-config, caption);
+      line-height: mat.line-height(stark-typography.$typography-config, caption);
+
       .pagination-enter-page {
-        margin-right: 5px;
+        align-items: center;
+        display: flex;
+        margin-right: 40px;
+
+        & input {
+          margin-right: 4px;
+          width: 26px;
+          height: 24px;
+          padding: 4px;
+          border-radius: 2px;
+          text-align: center;
+        }
+      }
+
+      .page-numbers {
+        cursor: pointer;
+        display: flex;
+
+        a {
+          color: inherit;
+          padding: 15px;
+          opacity: 0.5;
+        }
+      }
+
+      &.compact {
+        .pagination-enter-page {
+          margin-right: 5px;
+        }
       }
     }
   }
