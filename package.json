@@ -65,7 +65,7 @@
     "angular2-text-mask": "^9.0.0",
     "cerialize": "^0.1.18",
     "class-validator": "~0.13.1",
-    "codelyzer": "^5.0.0",
+    "codelyzer": "^6.0.2",
     "commitizen": "^4.2.3",
     "conventional-changelog-cli": "^2.1.1",
     "core-js": "^3.13.0",
