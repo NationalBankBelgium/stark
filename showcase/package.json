@@ -142,7 +142,7 @@
     "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.2.0-f0d38f70-1628785779.tgz",
     "@types/core-js": "~2.5.4",
     "@types/hammerjs": "~2.0.39",
-    "@types/node": "^12.20.13",
+    "@types/node": "^12.20.20",
     "@types/webpack-env": "~1.16.0",
     "browserstack-local": "~1.4.8",
     "cross-env": "~7.0.3",
