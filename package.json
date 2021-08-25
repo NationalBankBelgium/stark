@@ -31,7 +31,7 @@
     "@angular/forms": "^12.1.4",
     "@angular/material": "^12.1.4",
     "@angular/material-moment-adapter": "^12.1.4",
-    "@angular/platform-browser": "^12.1.4",
+    "@angular/platform-browser": "^12.2.2",
     "@angular/platform-browser-dynamic": "^12.1.4",
     "@angular/router": "^12.1.4",
     "@angularclass/hmr": "^3.0.0",
