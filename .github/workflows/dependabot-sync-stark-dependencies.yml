@@ -60,6 +60,16 @@ jobs:
           npm run sync:packages-dependencies
           echo "::set-output name=LAST_COMMIT::$(git --no-pager log -n 1 --oneline)"
 
+      - name: Install dependencies then update showcase package-lock.json
+        run: |
+          npm ci
+          npm run build
+          npm run clean:modules:showcase
+          cd showcase
+          npm install --package-lock-only --ignore-scripts
+          git add package-lock.json
+          git commit -m 'chore(showcase): update "package-lock.json" file'
+
       - name: Push changes
         if: contains(steps.sync-packages-dependencies.outputs.LAST_COMMIT, '/packages/stark-')
         uses: ad-m/github-push-action@master
