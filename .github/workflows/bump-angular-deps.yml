@@ -45,7 +45,7 @@ jobs:
 
       - name: "Upgrade '@angular/*' deps thanks to 'npm-check-updates'"
         run: |
-          npx npm-check-updates -u "/^@angular\/.*$/"
+          npx npm-check-updates -t minor -u "/^@angular\/.*$/"
           npm i
           if [[ -n $(git status --porcelain) ]];
           then
@@ -56,7 +56,7 @@ jobs:
 
       - name: "Upgrade '@angular-devkit/*' deps thanks to 'npm-check-updates'"
         run: |
-          npx npm-check-updates -u "/^@angular-devkit\/.*$/"
+          npx npm-check-updates -t minor -u "/^@angular-devkit\/.*$/"
           npm i
           if [[ -n $(git status --porcelain) ]];
           then
@@ -67,7 +67,7 @@ jobs:
 
       - name: "Upgrade '@angular-builders/*' deps thanks to 'npm-check-updates'"
         run: |
-          npx npm-check-updates -u "/^@angular-builders\/.*$/"
+          npx npm-check-updates -t minor -u "/^@angular-builders\/.*$/"
           npm i
           if [[ -n $(git status --porcelain) ]];
           then
