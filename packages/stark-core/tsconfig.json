@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "rootDir": ".",
     "typeRoots": ["../../node_modules/@types", "../stark-build/typings"],
+    "emitDecoratorMetadata": false,
     "paths": {
       "@nationalbankbelgium/stark-core": ["./public_api.ts"],
       "@nationalbankbelgium/stark-core/testing": ["./testing/public_api.ts"],
