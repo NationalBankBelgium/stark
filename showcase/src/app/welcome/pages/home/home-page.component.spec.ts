@@ -1,6 +1,6 @@
 /* tslint:disable:completed-docs no-lifecycle-call */
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { provideMockStore } from "@ngrx/store/testing";
 import {
@@ -37,26 +37,28 @@ describe(`Home`, () => {
 	/**
 	 * async beforeEach.
 	 */
-	beforeEach(async(() => {
-		return (
-			TestBed.configureTestingModule({
-				declarations: [HomePageComponent],
-				schemas: [NO_ERRORS_SCHEMA],
-				imports: [HttpClientTestingModule, TranslateModule.forRoot()],
-				providers: [
-					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
-					{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					provideMockStore()
-				]
-			})
+	beforeEach(
+		waitForAsync(() => {
+			return (
+				TestBed.configureTestingModule({
+					declarations: [HomePageComponent],
+					schemas: [NO_ERRORS_SCHEMA],
+					imports: [HttpClientTestingModule, TranslateModule.forRoot()],
+					providers: [
+						{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
+						{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
+						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+						provideMockStore()
+					]
+				})
 
-				/**
-				 * Compile template and css.
-				 */
-				.compileComponents()
-		);
-	}));
+					/**
+					 * Compile template and css.
+					 */
+					.compileComponents()
+			);
+		})
+	);
 
 	/**
 	 * Synchronous beforeEach.

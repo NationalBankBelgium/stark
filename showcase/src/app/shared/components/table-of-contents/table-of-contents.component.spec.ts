@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TableOfContentsComponent } from "./table-of-contents.component";
 import { TableOfContentLink } from "./table-of-content-link.intf";
 
@@ -6,12 +6,14 @@ describe("TableOfContents", () => {
 	let fixture: ComponentFixture<TableOfContentsComponent>;
 	let component: TableOfContentsComponent;
 
-	beforeEach(async(() => {
-		return TestBed.configureTestingModule({
-			declarations: [TableOfContentsComponent],
-			imports: []
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			return TestBed.configureTestingModule({
+				declarations: [TableOfContentsComponent],
+				imports: []
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(TableOfContentsComponent);
