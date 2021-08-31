@@ -1,2 +1,1 @@
-export * from "./pagination/pagination.module";
-export * from "./pagination/components";
+export * from "./pagination/public_api";

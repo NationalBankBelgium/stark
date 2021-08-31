@@ -1,4 +1,8 @@
-import { StarkActionBarConfig, StarkCustomizablePredefinedAction, StarkDefaultPredefinedAction } from "../../action-bar/components";
+import {
+	StarkActionBarConfig,
+	StarkCustomizablePredefinedAction,
+	StarkDefaultPredefinedAction
+} from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
 
 /**
  * This interface describes the properties of the action bar displayed in the generic search component.

@@ -17,8 +17,8 @@ import { Observer } from "rxjs";
 import { StarkPaginationComponent } from "./pagination.component";
 import { StarkPaginateEvent } from "./paginate-event.intf";
 import { StarkPaginationConfig } from "./pagination-config.intf";
-import { StarkDropdownComponent, StarkDropdownModule } from "../../dropdown";
-import { StarkRestrictInputDirectiveModule } from "../../restrict-input-directive";
+import { StarkDropdownComponent, StarkDropdownModule } from "@nationalbankbelgium/stark-ui/src/modules/dropdown";
+import { StarkRestrictInputDirectiveModule } from "@nationalbankbelgium/stark-ui/src/modules/restrict-input-directive";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 

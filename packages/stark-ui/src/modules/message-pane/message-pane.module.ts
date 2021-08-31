@@ -17,7 +17,7 @@ import { StarkMessagePaneComponent } from "./components";
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneServiceImpl } from "./services";
 import { starkMessagesReducers } from "./reducers";
 import { StarkMessagePaneEffects } from "./effects";
-import { mergeUiTranslations } from "../../common/translations";
+import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 import { starkMessagePaneStoreKey } from "./constants";
 
 @NgModule({

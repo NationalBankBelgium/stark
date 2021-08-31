@@ -3,7 +3,7 @@ import SpyObj = jasmine.SpyObj;
 import { ApplicationRef } from "@angular/core";
 import { fakeAsync, tick, waitForAsync } from "@angular/core/testing";
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarDismiss, MatSnackBarRef } from "@angular/material/snack-bar";
-import { StarkMessageType } from "../../../common/message";
+import { StarkMessageType } from "@nationalbankbelgium/stark-ui/src/common";
 import { StarkToastMessage, StarkToastNotificationComponent } from "../components";
 import { StarkToastNotificationResult } from "./toast-notification-result.intf";
 import { StarkToastNotificationServiceImpl } from "./toast-notification.service";

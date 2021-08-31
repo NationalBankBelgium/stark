@@ -7,7 +7,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { StarkAppDataComponent } from "./components";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { translationsFr } from "./assets/translations/fr";
-import { mergeUiTranslations } from "../../common/translations";
+import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 import { translationsEn } from "./assets/translations/en";
 import { translationsNl } from "./assets/translations/nl";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";

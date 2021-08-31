@@ -29,11 +29,16 @@ import { distinctUntilChanged } from "rxjs/operators";
 import get from "lodash-es/get";
 import isEqual from "lodash-es/isEqual";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { StarkDateInput, StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker/components";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import {
+	StarkDateInput,
+	StarkDatePickerComponent,
+	StarkDatePickerFilter,
+	StarkDatePickerMaskConfig
+} from "@nationalbankbelgium/stark-ui/src/modules/date-picker";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
-import { isStarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
+import { isStarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui/src/modules/input-mask-directives";
 import moment from "moment";
 
 /**

@@ -6,7 +6,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
 import { StarkGenericSearchComponent } from "./components";
-import { StarkActionBarModule } from "../action-bar";
+import { StarkActionBarModule } from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
 
 @NgModule({
 	declarations: [StarkGenericSearchComponent],

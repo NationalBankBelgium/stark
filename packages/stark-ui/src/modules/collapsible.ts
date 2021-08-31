@@ -1,2 +1,1 @@
-export * from "./collapsible/collapsible.module";
-export * from "./collapsible/components";
+export * from "./collapsible/public_api";

@@ -1,2 +1,1 @@
-export * from "./route-search/route-search.module";
-export * from "./route-search/components";
+export * from "./route-search/public_api";

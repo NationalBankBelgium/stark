@@ -1,2 +1,1 @@
-export * from "./language-selector/language-selector.module";
-export * from "./language-selector/components";
+export * from "./language-selector/public_api";

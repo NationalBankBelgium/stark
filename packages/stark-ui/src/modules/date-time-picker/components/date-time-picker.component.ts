@@ -38,14 +38,14 @@ import { Subject, Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { minDate as validatorMinDate, maxDate as validatorMaxDate } from "class-validator";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
+import { StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui/src/modules/input-mask-directives";
 import {
 	StarkDateInput,
 	StarkDatePickerComponent,
 	StarkDatePickerFilter,
 	StarkDatePickerMaskConfig
-} from "../../date-picker/components/date-picker.component";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+} from "@nationalbankbelgium/stark-ui/src/modules/date-picker";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 
 /**
  * Default TimeMask configuration
@@ -336,7 +336,8 @@ export class StarkDateTimePickerComponent
 	 * Reference to the Stark date picker embedded in this component
 	 */
 	@ViewChild(StarkDatePickerComponent, { static: true })
-	public datePicker!: StarkDatePickerComponent;
+	// Due to split chunks, Angular does not detect that StarkDatePickerComponent implements Validator. We need to force the recognition.
+	public datePicker!: StarkDatePickerComponent & Validator;
 
 	/**
 	 * @ignore

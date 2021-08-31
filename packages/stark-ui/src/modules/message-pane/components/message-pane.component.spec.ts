@@ -22,14 +22,13 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkMessagePaneComponent, StarkMessagePaneNavItem } from "./message-pane.component";
 import { STARK_MESSAGE_PANE_SERVICE } from "../services";
 import { MockStarkMessagePaneService } from "@nationalbankbelgium/stark-ui/testing";
-import { StarkMessageCollection } from "../entities";
 import {
 	starkMessagePaneAlignClassPrefix,
 	starkMessagePaneDisplayAnimatedClass,
 	starkMessagePaneDisplayedClass
 } from "./message-pane.constants";
-import { StarkMessage, StarkMessageType } from "../../../common/message";
-import { StarkDOMUtil } from "../../../util/dom";
+import { StarkMessage, StarkMessageCollection, StarkMessageType } from "@nationalbankbelgium/stark-ui/src/common";
+import { StarkDOMUtil } from "@nationalbankbelgium/stark-ui/src/util";
 
 /* jasmine imports */
 import SpyObj = jasmine.SpyObj;

@@ -7,8 +7,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { StarkPaginationComponent } from "./components";
-import { StarkRestrictInputDirectiveModule } from "../restrict-input-directive/restrict-input-directive.module";
-import { StarkDropdownModule } from "../dropdown/dropdown.module";
+import { StarkRestrictInputDirectiveModule } from "@nationalbankbelgium/stark-ui/src/modules/restrict-input-directive";
+import { StarkDropdownModule } from "@nationalbankbelgium/stark-ui/src/modules/dropdown";
 
 @NgModule({
 	declarations: [StarkPaginationComponent],

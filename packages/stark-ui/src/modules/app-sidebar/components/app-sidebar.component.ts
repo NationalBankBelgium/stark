@@ -10,7 +10,7 @@ import {
 	StarkRoutingTransitionHook
 } from "@nationalbankbelgium/stark-core";
 import { STARK_APP_SIDEBAR_SERVICE, StarkAppSidebarOpenEvent, StarkAppSidebarService } from "../services";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 
 export type StarkAppSidebarLeftMode = "regular" | "menu" | undefined;
 

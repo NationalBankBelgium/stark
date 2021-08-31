@@ -1,2 +1,1 @@
-export * from "./svg-view-box/svg-view-box.module";
-export * from "./svg-view-box/directives";
+export * from "./svg-view-box/public_api";

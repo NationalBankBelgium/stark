@@ -18,7 +18,7 @@ import {
 	MockStarkSessionService,
 	MockStarkUserService
 } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAppLogoModule } from "../../../app-logo";
+import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui/src/modules/app-logo";
 import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkPreloadingPageComponent } from "./preloading-page.component";
 

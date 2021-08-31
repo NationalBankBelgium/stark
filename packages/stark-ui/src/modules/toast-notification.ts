@@ -1,3 +1,1 @@
-export * from "./toast-notification/toast-notification.module";
-export * from "./toast-notification/components";
-export * from "./toast-notification/services";
+export * from "./toast-notification/public_api";

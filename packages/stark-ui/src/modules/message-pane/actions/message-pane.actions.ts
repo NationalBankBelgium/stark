@@ -1,5 +1,5 @@
 import { createAction, props, union } from "@ngrx/store";
-import { StarkMessage } from "../../../common/message";
+import { StarkMessage } from "@nationalbankbelgium/stark-ui/src/common";
 
 /**
  * @ignore

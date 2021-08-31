@@ -15,13 +15,13 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
 import { StarkTableColumnComponent, StarkTableComponent } from "./components";
 import { StarkTableMultisortDialogComponent } from "./components/dialogs/multisort.component";
-import { StarkActionBarModule } from "../action-bar/action-bar.module";
-import { StarkPaginationModule } from "../pagination/pagination.module";
-import { StarkMinimapModule } from "../minimap/minimap.module";
+import { StarkActionBarModule } from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
+import { StarkPaginationModule } from "@nationalbankbelgium/stark-ui/src/modules/pagination";
+import { StarkMinimapModule } from "@nationalbankbelgium/stark-ui/src/modules/minimap";
 import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
-import { mergeUiTranslations } from "../../common/translations";
+import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 import { StarkTableExpandDetailDirective } from "./directives/table-expand-detail.directive";
 import { StarkTableRowContentDirective } from "./directives/table-row-content.directive";
 

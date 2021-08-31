@@ -20,9 +20,8 @@ import {
 	starkMessagePaneDisplayedClass
 } from "./message-pane.constants";
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService, starkMessagePaneServiceName } from "../services/message-pane.service.intf";
-import { StarkMessage } from "../../../common/message";
-import { StarkMessageCollection } from "../entities";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { StarkMessage, StarkMessageCollection } from "@nationalbankbelgium/stark-ui/src/common";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 
 /**
  * Type of messages that can be displayed in the message pane

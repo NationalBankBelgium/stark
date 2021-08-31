@@ -26,11 +26,11 @@ import {
 	StarkActionBarConfig,
 	StarkCustomizablePredefinedAction,
 	StarkDefaultPredefinedAction
-} from "../../../action-bar/components";
+} from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { FormGroup } from "@angular/forms";
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from "@angular/animations";
-import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import isEqual from "lodash-es/isEqual";
 
 /**

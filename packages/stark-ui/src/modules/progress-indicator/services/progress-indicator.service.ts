@@ -8,7 +8,7 @@ import { StarkProgressIndicatorService, starkProgressIndicatorServiceName } from
 import { StarkProgressIndicatorActions } from "../actions";
 import { StarkProgressIndicatorFullConfig, StarkProgressIndicatorFullConfigImpl, StarkProgressIndicatorType } from "../entities";
 import { selectStarkProgressIndicator } from "../reducers";
-import { StarkUIApplicationState } from "../../../common/store";
+import { StarkUIApplicationState } from "@nationalbankbelgium/stark-ui/src/common";
 
 /**
  * @ignore

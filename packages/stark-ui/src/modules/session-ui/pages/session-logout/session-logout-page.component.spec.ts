@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { STARK_APP_CONFIG, STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkApplicationConfig } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkAppLogoModule } from "../../../app-logo";
+import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui/src/modules/app-logo";
 import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkSessionLogoutPageComponent } from "./session-logout-page.component";
 

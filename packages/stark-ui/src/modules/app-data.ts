@@ -1,2 +1,1 @@
-export * from "./app-data/app-data.module";
-export * from "./app-data/components";
+export * from "./app-data/public_api";

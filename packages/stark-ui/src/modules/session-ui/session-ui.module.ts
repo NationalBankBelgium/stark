@@ -9,8 +9,8 @@ import { StarkLocale } from "@nationalbankbelgium/stark-core";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatListModule } from "@angular/material/list";
-import { StarkAppLogoModule } from "../app-logo/app-logo.module";
-import { mergeUiTranslations } from "../../common/translations";
+import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui/src/modules/app-logo";
+import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "./entities";
 import { SESSION_UI_STATES } from "./routes";
 import {

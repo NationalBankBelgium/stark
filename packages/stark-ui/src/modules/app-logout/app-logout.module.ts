@@ -8,7 +8,7 @@ import { StarkAppLogoutComponent } from "./components";
 import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
-import { mergeUiTranslations } from "../../common/translations";
+import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 
 @NgModule({
 	declarations: [StarkAppLogoutComponent],

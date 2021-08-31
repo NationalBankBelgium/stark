@@ -3,12 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
+    "emitDecoratorMetadata": false,
     "typeRoots": ["../../node_modules/@types", "../stark-build/typings", "./typings"],
     "emitDecoratorMetadata": false,
     "paths": {
       "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
       "@nationalbankbelgium/stark-core/testing": ["../../dist/packages/stark-core/testing"],
-      "@nationalbankbelgium/stark-ui": ["./public_api.ts"],
+      "@nationalbankbelgium/stark-ui/*": ["./*", "."],
+      "@nationalbankbelgium/stark-ui": ["../../dist/packages/stark-ui/*", "../../dist/packages/stark-ui"],
       "@nationalbankbelgium/stark-ui/testing": ["./testing/public_api.ts"],
       "environments/environment": ["../../dist/packages/stark-core/src/common/environment"]
     },

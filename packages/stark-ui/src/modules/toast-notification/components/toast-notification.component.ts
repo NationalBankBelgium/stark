@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { MAT_SNACK_BAR_DATA, MatSnackBar } from "@angular/material/snack-bar";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkMessageType } from "../../../common/message";
+import { StarkMessageType } from "@nationalbankbelgium/stark-ui/src/common";
 import { StarkToastMessage } from "./toast-message.intf";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 
 /**
  * @ignore

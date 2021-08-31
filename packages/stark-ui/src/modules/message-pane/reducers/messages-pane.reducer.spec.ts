@@ -1,7 +1,6 @@
-import { StarkMessage, StarkMessageType } from "../../../common/message";
+import { StarkMessage, StarkMessageCollection, StarkMessageType } from "@nationalbankbelgium/stark-ui/src/common";
 
 import { StarkMessagePaneActions } from "../actions";
-import { StarkMessageCollection } from "../entities";
 
 import { messagesReducer } from "./messages-pane.reducer";
 

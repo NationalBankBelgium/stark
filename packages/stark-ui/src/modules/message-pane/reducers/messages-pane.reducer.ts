@@ -1,5 +1,4 @@
-import { StarkMessage, StarkMessageType } from "../../../common/message";
-import { StarkMessageCollection } from "../entities";
+import { StarkMessage, StarkMessageType, StarkMessageCollection } from "@nationalbankbelgium/stark-ui/src/common";
 import { StarkMessagePaneActions } from "../actions";
 import findIndex from "lodash-es/findIndex";
 import { createReducer, on } from "@ngrx/store";

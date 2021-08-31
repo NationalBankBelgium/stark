@@ -1,2 +1,1 @@
-export * from "./date-range-picker/date-range-picker.module";
-export * from "./date-range-picker/components";
+export * from "./date-range-picker/public_api";
