@@ -9,16 +9,35 @@ on:
 env:
   TZ: "Europe/Brussels"
   NPM_VERSION: "7.12.1"
+  LOGS_DIR: /tmp/stark/logs
+  LOGS_FILE: /tmp/stark/logs/build-perf.log
 
 jobs:
   bump-angular-deps:
     runs-on: ubuntu-latest
+    env:
+      UPDATED_DEPS: 0
     steps:
       # See: https://github.com/marketplace/actions/setup-node-js-environment
       - name: Use Node.js 12
         uses: actions/setup-node@v2
         with:
           node-version: 12
+
+      # See: https://github.com/marketplace/actions/cache
+      # See doc: https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules-${{ matrix.node_version }}-${{ matrix.os }}
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Install npm ${{ env.NPM_VERSION }}
         run: npm i -g npm@${{ env.NPM_VERSION }}
@@ -49,6 +68,7 @@ jobs:
           npm i
           if [[ -n $(git status --porcelain) ]];
           then
+            echo "UPDATED_DEPS=1" >> $GITHUB_ENV
             git add package.json package-lock.json
             git commit -m "chore(deps-dev): bump \`@angular/*\` dependencies" --no-verify
             npm run sync:packages-dependencies
@@ -60,6 +80,7 @@ jobs:
           npm i
           if [[ -n $(git status --porcelain) ]];
           then
+            echo "UPDATED_DEPS=1" >> $GITHUB_ENV
             git add package.json package-lock.json
             git commit -m "chore(deps-dev): bump \`@angular-devkit/*\` dependencies" --no-verify
             npm run sync:packages-dependencies
@@ -71,12 +92,58 @@ jobs:
           npm i
           if [[ -n $(git status --porcelain) ]];
           then
+            echo "UPDATED_DEPS=1" >> $GITHUB_ENV
             git add package.json package-lock.json
             git commit -m "chore(deps-dev): bump \`@angular-builders/*\` dependencies" --no-verify
             npm run sync:packages-dependencies
           fi
 
-      - name: Get tag name if exists
+      - name: "Upgrade '@angular/*' deps thanks to 'npm-check-updates' in ./starter"
+        run: |
+          npx npm-check-updates -t minor -u "/^@angular\/.*$/" --packageFile ./starter/package.json
+          if [[ -n $(git status --porcelain) ]];
+          then
+            echo "UPDATED_DEPS=1" >> $GITHUB_ENV
+            git add starter/package.json
+            git commit -m "chore(deps): bump \`@angular/*\` dependencies in ./starter" --no-verify
+          fi
+
+      - name: Create file & folder for GitHub Actions logs
+        run: |
+          # cfr scripts/_ghactions-group.sh
+          mkdir -p ${{ env.LOGS_DIR }}
+          touch ${{ env.LOGS_FILE }}
+
+      - name: "Upgrade '@angular/*' deps thanks to 'npm-check-updates' or update package-lock.json file in ./showcase"
+        run: |
+          npx npm-check-updates -t minor -u "/^@angular\/.*$/" --packageFile ./showcase/package.json
+          SHOWCASE_UPDATED_DEPS=0
+
+          if [[ -n $(git status --porcelain) ]];
+          then
+            SHOWCASE_UPDATED_DEPS=1
+          fi
+
+          echo "SHOWCASE_UPDATED_DEPS: $SHOWCASE_UPDATED_DEPS"
+
+          npm run build
+          git checkout starter/package.json
+          npm run clean:modules:showcase
+          cd showcase
+          npm install --package-lock-only --ignore-scripts
+          git add package-lock.json
+
+          if [[ SHOWCASE_UPDATED_DEPS -eq 1 ]];
+          then
+            git add package.json
+            git commit -m "chore(deps): bump \`@angular/*\` dependencies in showcase" --no-verify
+            echo "UPDATED_DEPS=1" >> $GITHUB_ENV
+          else
+            git commit -m 'chore(showcase): update "package-lock.json" file' --no-verify
+          fi
+
+      - name: Set PR branch name based on current date
+        if: env.UPDATED_DEPS == 1
         run: |
           PR_BRANCH_NAME="nbb-bot/deps/angular-$( date +%Y%m%d )"
           echo "PR_BRANCH_NAME=${PR_BRANCH_NAME}" >> $GITHUB_ENV
@@ -84,7 +151,9 @@ jobs:
       # See: https://github.com/marketplace/actions/create-pull-request
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
+        if: env.UPDATED_DEPS == 1
         with:
+          token: ${{ secrets.NBBBOT_TOKEN }}
           branch: ${{ env.PR_BRANCH_NAME }}
           author: NBB Bot <83765996+nbb-bot@users.noreply.github.com>
           committer: NBB Bot <83765996+nbb-bot@users.noreply.github.com>
