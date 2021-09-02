@@ -32,10 +32,6 @@
     "text-mask-addons": "^3.8.0",
     "text-mask-core": "^5.1.2"
   },
-  "devDependencies": {
-    "@types/jasmine": "^3.6.4",
-    "@types/node": "^10.17.54"
-  },
   "peerDependencies": {
     "@angular/animations": "^7.0.0",
     "@angular/cdk": "^7.0.0",

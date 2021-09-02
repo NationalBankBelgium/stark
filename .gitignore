@@ -86,3 +86,6 @@ packages/stark-rbac/package-lock.json
 
 # Stark-testing exception
 packages/stark-testing/package-lock.json
+
+# Stark-ui exception
+packages/stark-ui/package-lock.json

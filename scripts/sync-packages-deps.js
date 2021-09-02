@@ -10,7 +10,8 @@ const fileNames = {
 	"stark-build": "../packages/stark-build/package.json",
 	"stark-core": "../packages/stark-core/package.json",
 	"stark-rbac": "../packages/stark-rbac/package.json",
-	"stark-testing": "../packages/stark-testing/package.json"
+	"stark-testing": "../packages/stark-testing/package.json",
+	"stark-ui": "../packages/stark-ui/package.json"
 };
 
 function replaceValuesInFile(fileName, valueReplacements) {
