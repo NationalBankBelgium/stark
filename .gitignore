@@ -77,3 +77,6 @@ starter/package-lock.json
 
 # Stark-build exception
 packages/stark-build/package-lock.json
+
+# Stark-core exception
+packages/stark-core/package-lock.json

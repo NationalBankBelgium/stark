@@ -7,7 +7,8 @@ const noCommit = process.argv.indexOf("--no-commit") > -1;
 const rootDeps = require("../package.json").devDependencies;
 
 const fileNames = {
-	"stark-build": "../packages/stark-build/package.json"
+	"stark-build": "../packages/stark-build/package.json",
+	"stark-core": "../packages/stark-core/package.json"
 };
 
 function replaceValuesInFile(fileName, valueReplacements) {
