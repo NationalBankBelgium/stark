@@ -1,22 +1,6 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/packages/stark-testing"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: karma-typescript-es6-transform
-    versions:
-    - ">=5.2.0"
-  - dependency-name: "@types/node"
-    versions:
-    - ">=11"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
   directory: "/packages/stark-ui"
   schedule:
     interval: daily
@@ -50,7 +34,7 @@ updates:
     - ">=8"
   - dependency-name: "@angular-builders/*"
     versions:
-      - ">=8"
+    - ">=8"
   - dependency-name: "@angular-devkit/build-ng-packagr"
     versions:
     - ">=0.800"
@@ -59,7 +43,10 @@ updates:
     - ">=0.800"
   - dependency-name: "@types/node"
     versions:
-      - ">=11"
+    - ">=11"
+  - dependency-name: karma-typescript-es6-transform
+    versions:
+    - ">=5.2.0"
   - dependency-name: typescript
     versions:
     - ">= 0"
