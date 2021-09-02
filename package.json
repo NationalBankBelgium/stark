@@ -41,7 +41,7 @@
     "@babel/preset-env": "^7.2.3",
     "@commitlint/cli": "^12.0.0",
     "@commitlint/config-conventional": "^12.0.0",
-    "@compodoc/compodoc": "~1.1.11",
+    "@compodoc/compodoc": "1.1.13",
     "@mdi/angular-material": "^4.0.96",
     "@nationalbankbelgium/code-style": "^1.4.0",
     "@ng-idle/core": "^7.0.0-beta.1",
