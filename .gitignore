@@ -74,3 +74,6 @@ bash.exe.stackdump
 
 # Starter exception
 starter/package-lock.json
+
+# Stark-build exception
+packages/stark-build/package-lock.json

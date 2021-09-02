@@ -87,6 +87,9 @@ jobs:
           # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
           # echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
           
+      - name: Check if dependencies are in sync between root and packages
+        run: "npm run check:packages-dependencies"
+
       - name: Create file & folder for GitHub Actions logs
         run: |  
           # cfr scripts/_ghactions-group.sh

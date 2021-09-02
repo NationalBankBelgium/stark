@@ -1,25 +1,6 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/packages/stark-build"
-  schedule:
-    interval: daily
-    time: "04:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@angular/*"
-    versions:
-    - ">=8"
-  - dependency-name: "@angular-builders/*"
-    versions:
-    - ">=8"
-  - dependency-name: "@angular-devkit/build-angular"
-    versions:
-    - ">=0.800"
-  commit-message:
-    prefix: chore
-    include: scope
-- package-ecosystem: npm
   directory: "/packages/stark-core"
   schedule:
     interval: daily
@@ -93,15 +74,21 @@ updates:
   - dependency-name: "@angular/*"
     versions:
     - ">=8"
+  - dependency-name: "@angular-builders/*"
+    versions:
+      - ">=8"
   - dependency-name: "@angular-devkit/build-ng-packagr"
     versions:
     - ">=0.800"
+  - dependency-name: "@angular-devkit/build-angular"
+    versions:
+    - ">=0.800"
+  - dependency-name: "@types/node"
+    versions:
+      - ">=11"
   - dependency-name: typescript
     versions:
     - ">= 0"
-  - dependency-name: "@types/node"
-    versions:
-    - ">=11"
   commit-message:
     prefix: chore
     include: scope
