@@ -27,14 +27,7 @@ const starkPackagesSpecificConfiguration = {
 			// change the module resolution for the KarmaTypescript bundler
 			resolve: {
 				alias: karmaTypescriptBundlerAlias
-			},
-			// Overwrite the karmaTypescriptConfig to pass the correct preset to karma-typescript-es6-transform
-			transforms: [
-				require(helpers.root("../stark-testing/node_modules/karma-typescript-angular2-transform")),
-				require(helpers.root("../stark-testing/node_modules/karma-typescript-es6-transform"))({
-					presets: [helpers.root("../stark-testing/node_modules/@babel/preset-env")] // add preset in a way that the package can find it
-				})
-			]
+			}
 		},
 		reports: customReportsConfig
 	}

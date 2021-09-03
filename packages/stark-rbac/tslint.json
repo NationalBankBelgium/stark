@@ -3,7 +3,7 @@
     "tslint:latest",
     "tslint-sonarts",
     "@nationalbankbelgium/code-style/codelyzer/5.2.x",
-    "@nationalbankbelgium/code-style/tslint/6.1.x",
+    "@nationalbankbelgium/code-style/tslint/5.20.x",
     "tslint-config-prettier"
   ],
   "rules": {
