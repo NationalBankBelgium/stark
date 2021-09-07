@@ -6,9 +6,10 @@ from Stark 10 (Angular 7) to Stark 12 (Angular 12).
 ## General dependencies
 
 Upgrade the following dependencies in your "package.json" file:
-- @angular/*, from `"^7.2.0"` to `"^12.1.0"`
+
+- @angular/\*, from `"^7.2.0"` to `"^12.1.0"`
 - @nationalbankbelgium/code-style: `"^1.6.0"`
-- @nationalbankbelgium/stark-*, from `"^10.0.0"` to `"^12.0.0"`
+- @nationalbankbelgium/stark-\*, from `"^10.0.0"` to `"^12.0.0"`
 - typescript, from `"~3.5.0"` to `"~4.3.5"`
 - zone.js, from `"~0.8.x"` to `"~0.11.4"`
 
@@ -357,6 +358,7 @@ After:
 ### 2. Adapt "src/index.html" file
 
 #### 2.1. Adapt stark variables usage
+
 As `htmlWebpackPlugin` is no longer supported by Angular CLI, the options related to this plugin have been changed.
 Instead of using `htmlWebpackPlugin`, you need to use `starkOptions` like this:
 
@@ -410,11 +412,11 @@ The following scripts should be removed from "package.json" file:
 
 ```json
 {
-	"scripts": {
-		"build:dev:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run build:dev",
-		"server:dev:monitor": "npm run clean:dist && cross-env MONITOR=1 npm run ng -- serve",
-		"start:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run server:dev"
-	}
+  "scripts": {
+    "build:dev:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run build:dev",
+    "server:dev:monitor": "npm run clean:dist && cross-env MONITOR=1 npm run ng -- serve",
+    "start:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run server:dev"
+  }
 }
 ```
 
@@ -804,7 +806,38 @@ this.store.dispatch(StarkRBACAuthorizationActions.userNavigationUnauthorized({ t
 
 ## Stark-Testing
 
-To complete
+### 1. Adapt test configuration
+
+In Stark 12, Karma CI specific configuration has been merged into "karma.conf.js" file.
+
+Thanks to this change, Karma configuration can be used easily with ng CLI.
+Due to this, following changes have to be made in application using `stark-testing`:
+
+- Remove karma.conf.ci.js
+- Verify that projects.<project_name>.architect.test configuration in "angular.json" is as following:
+  ```txt
+  {
+    // ...
+    "test": {
+      "builder": "@angular-builders/custom-webpack:karma",
+      "options": {
+        "main": "base.spec.ts",
+        "karmaConfig": "karma.conf.js",
+        "tsConfig": "tsconfig.spec.json"
+      }
+    }
+    // ...
+  }
+  ```
+- Adapt "test-fast:ci" script as following:
+
+  ```txt
+  // Before
+  "test-fast:ci": "cross-env CI=1 npm run ng test --code-coverage"
+
+  // After
+  "test-fast:ci": "npm run ng -- test --watch=false --code-coverage"
+  ```
 
 ## Stark-UI
 
@@ -813,7 +846,7 @@ To complete
 Due to upgrade to `@angular/material` v12, we need to update SCSS files to use the
 new `@use` word instead of `@import`.
 
-Your current "src/styles/_theme.scss" should look like this:
+Your current "src/styles/\_theme.scss" should look like this:
 
 ```scss
 @import "variables";
@@ -834,7 +867,7 @@ After upgrading to Stark v12, you should update the file as following:
 ```
 
 As all the stark-ui styles are configured thanks to `set-stark-ui-styles` method, you should remove
-`@import "~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle";` import 
+`@import "~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle";` import
 in "src/styles/styles.scss".
 
 If you use Stark media queries variables such as `$tablet-query`, `$mobile-only-query`...
@@ -937,4 +970,3 @@ this.store.dispatch(StarkMessagePaneActions.addMessages({ messages: messages }))
 - StarkProgressIndicatorShow
   - Search: `new StarkProgressIndicatorShow\((\w+)\)`
   - Replace: `StarkProgressIndicatorFullConfig.show({ topic: $1 })`
-  
