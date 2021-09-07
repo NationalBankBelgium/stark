@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
  */
 export const starkHttpServiceName = "StarkHttpService";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkHttpService}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkHttpService}
  */
 export const STARK_HTTP_SERVICE: InjectionToken<StarkHttpService<any>> = new InjectionToken<StarkHttpService<any>>(starkHttpServiceName);
 
@@ -18,19 +18,19 @@ export const STARK_HTTP_SERVICE: InjectionToken<StarkHttpService<any>> = new Inj
  */
 export interface StarkHttpService<T extends StarkResource> {
 	/**
-	 * Gets the core Angular HTTP API ({@link https://v7.angular.io/api/common/http/HttpClient|HttpClient})
+	 * Gets the core Angular HTTP API ({@link https://v12.angular.io/api/common/http/HttpClient|HttpClient})
 	 */
 	readonly rawHttpClient: HttpClient;
 
 	/**
-	 * Executes {@link https://v7.angular.io/api/common/http/HttpRequest|HttpRequests} to fetch a single resource
+	 * Executes {@link https://v12.angular.io/api/common/http/HttpRequest|HttpRequests} to fetch a single resource
 	 * @param request - The `HttpRequest` to be executed
 	 * @returns Observable that will emit the `StarkSingleItemResponseWrapper`
 	 */
 	executeSingleItemRequest(request: StarkHttpRequest): Observable<StarkSingleItemResponseWrapper<T>>;
 
 	/**
-	 * Executes {@link https://v7.angular.io/api/common/http/HttpRequest|HttpRequests} to fetch an array of resources
+	 * Executes {@link https://v12.angular.io/api/common/http/HttpRequest|HttpRequests} to fetch an array of resources
 	 * @param request - The `HttpRequest` to be executed
 	 * @returns Observable that will emit the `StarkCollectionResponseWrapper`
 	 */

@@ -6,7 +6,7 @@ export class StarkTextMasks {
 	 * Extracted regex as a workaround to avoid Angular compiler error: "Expression form not supported".
 	 *
 	 * Using simple string instead of RegExp strings since the compiler has a restricted expression syntax.
-	 * See https://v7.angular.io/guide/aot-compiler#expression-syntax
+	 * See https://v12.angular.io/guide/aot-compiler#expression-syntax
 	 * @ignore
 	 */
 	private static regexSingleDigit = new RegExp("\\d");

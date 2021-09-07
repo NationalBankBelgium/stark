@@ -53,7 +53,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		request = this.addCorrelationIdentifierHeader(request);
 
 		// IMPORTANT: In Angular2+ HTTP service subscribing multiple times will actually do multiple requests
-		// see https://v7.angular.io/guide/http#always-subscribe
+		// see https://v12.angular.io/guide/http#always-subscribe
 		let httpResponse$: Observable<HttpResponse<P>> | undefined;
 
 		switch (request.requestType) {
@@ -95,7 +95,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		request = this.addCorrelationIdentifierHeader(request);
 
 		// IMPORTANT: In Angular2+ HTTP service subscribing multiple times will actually do multiple requests
-		// see https://v7.angular.io/guide/http#always-subscribe
+		// see https://v12.angular.io/guide/http#always-subscribe
 		let httpResponse$: Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>> | undefined;
 
 		switch (request.requestType) {

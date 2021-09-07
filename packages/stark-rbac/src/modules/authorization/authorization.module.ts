@@ -14,7 +14,7 @@ export class StarkRBACAuthorizationModule {
 	 * Instantiates the services only once since they should be singletons
 	 * so the `forRoot()` should be called only by the `AppModule`.
 	 *
-	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
+	 * See {@link https://v12.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
 	 * @returns A module with providers
 	 */
 	public static forRoot(): ModuleWithProviders<StarkRBACAuthorizationModule> {
@@ -28,7 +28,7 @@ export class StarkRBACAuthorizationModule {
 	 * Verifies that the `forRoot()` method of this module has been called so that its providers are effectively registered.
 	 * @param rootAuthorizationService - The `StarkRBACAuthorizationService` instance of the application (null when the `forRoot()` method was called)
 	 * @param childAuthorizationService - The `StarkRBACAuthorizationService` instance of the application (null when the `forRoot()` was not called, so this module is imported as a child module)
-	 * @param appInitStatus - A class that reflects the state of running {@link https://v7.angular.io/api/core/APP_INITIALIZER|APP_INITIALIZER}s
+	 * @param appInitStatus - A class that reflects the state of running {@link https://v12.angular.io/api/core/APP_INITIALIZER|APP_INITIALIZER}s
 	 */
 	public constructor(
 		@Optional() @SkipSelf() @Inject(STARK_RBAC_AUTHORIZATION_SERVICE) rootAuthorizationService: StarkRBACAuthorizationService,

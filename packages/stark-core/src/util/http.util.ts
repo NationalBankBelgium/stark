@@ -18,7 +18,7 @@ export const STARK_HTTP_PARAM_ENCODER: HttpParameterCodec = new StarkHttpParamet
 export class StarkHttpUtil {
 	/**
 	 * Converts the `Map<string, StarkQueryParam>` required by the {@link StarkHttpService} into a
-	 * {@link https://v7.angular.io/api/common/http/HttpParams|HttpParams} object required by Angular
+	 * {@link https://v12.angular.io/api/common/http/HttpParams|HttpParams} object required by Angular
 	 * @param starkQueryParam - Params to convert
 	 */
 	public static convertStarkQueryParamsIntoHttpParams(starkQueryParam: Map<string, StarkQueryParam>): HttpParams {
@@ -35,7 +35,7 @@ export class StarkHttpUtil {
 	 * and https://github.com/angular/angular/issues/23629
 	 *
 	 * This is to avoid using the Angular compiler's `dynamic` flag recommended in:
-	 * https://github.com/angular/angular/issues/19698#issuecomment-338340211 and https://v7.angular.io/guide/aot-compiler#strictmetadataemit
+	 * https://github.com/angular/angular/issues/19698#issuecomment-338340211 and https://v12.angular.io/guide/aot-compiler#expression-syntax-limitations
 	 * cause that might suppress other important error messages for this class in case we adapt this class in the future.
 	 * @ignore
 	 */

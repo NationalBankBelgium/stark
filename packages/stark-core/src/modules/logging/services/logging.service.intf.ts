@@ -6,7 +6,7 @@ import { StarkError } from "../../../common/error";
  */
 export const starkLoggingServiceName = "StarkLoggingService";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkLoggingService}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkLoggingService}
  */
 export const STARK_LOGGING_SERVICE: InjectionToken<StarkLoggingService> = new InjectionToken<StarkLoggingService>(starkLoggingServiceName);
 

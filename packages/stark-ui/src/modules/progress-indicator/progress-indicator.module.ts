@@ -18,7 +18,7 @@ export class StarkProgressIndicatorModule {
 	 * Instantiates the services only once since they should be singletons
 	 * so the `forRoot()` should be called only by the `AppModule`.
 	 *
-	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
+	 * See {@link https://v12.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
 	 * @returns A module with providers
 	 */
 	public static forRoot(): ModuleWithProviders<StarkProgressIndicatorModule> {

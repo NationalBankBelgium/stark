@@ -18,7 +18,7 @@ import { InjectionToken } from "@angular/core";
  */
 export const starkRoutingServiceName = "StarkRoutingService";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkRoutingService}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkRoutingService}
  */
 export const STARK_ROUTING_SERVICE: InjectionToken<StarkRoutingService> = new InjectionToken<StarkRoutingService>(starkRoutingServiceName);
 

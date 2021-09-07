@@ -2,7 +2,7 @@ import { StarkLanguage } from "../language";
 import { InjectionToken } from "@angular/core";
 
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkApplicationMetadata}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkApplicationMetadata}
  */
 export const STARK_APP_METADATA: InjectionToken<StarkApplicationMetadata> = new InjectionToken<StarkApplicationMetadata>(
 	"STARK_APP_METADATA"

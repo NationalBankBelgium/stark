@@ -5,7 +5,7 @@ import { tap } from "rxjs/operators";
 import { STARK_XSRF_SERVICE, StarkXSRFService } from "../services/xsrf.service.intf";
 
 /**
- * {@link https://v7.angular.io/api/common/http/HttpInterceptor|Angular Http interceptor} that adds the XSRF configuration to every
+ * {@link https://v12.angular.io/api/common/http/HttpInterceptor|Angular Http interceptor} that adds the XSRF configuration to every
  * state-changing request (POST, PUT, PATCH and DELETE) and stores the XSRF token from every response.
  *
  * Defined in the {@link StarkXSRFModule}
@@ -19,7 +19,7 @@ export class StarkXSRFHttpInterceptor implements HttpInterceptor {
 	public constructor(@Inject(STARK_XSRF_SERVICE) public xsrfService: StarkXSRFService) {}
 
 	/**
-	 * Intercepts the outgoing {@link https://v7.angular.io/api/common/http/HttpRequest|HttpRequest}
+	 * Intercepts the outgoing {@link https://v12.angular.io/api/common/http/HttpRequest|HttpRequest}
 	 * @param request - The intercepted outgoing `HttpRequest`
 	 * @param next - The next request handler where the `HttpRequest` will be forwarded to
 	 * @returns The modified `HttpRequest` with the XSRF configuration enabled.

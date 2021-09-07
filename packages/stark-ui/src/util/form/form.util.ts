@@ -4,12 +4,12 @@ export type StarkFormControlState = "untouched" | "touched" | "pristine" | "dirt
 export type StarkFormState = "untouched" | "pristine" | "submitted" | "dirty";
 
 /**
- * Util class used to perform common operations on Angular {@link https://v7.angular.io/api/forms/FormGroup|FormGroups} and
- * {@link https://v7.angular.io/api/forms/FormControl|FormControls}
+ * Util class used to perform common operations on Angular {@link https://v12.angular.io/api/forms/FormGroup|FormGroups} and
+ * {@link https://v12.angular.io/api/forms/FormControl|FormControls}
  */
 export class StarkFormUtil {
 	/**
-	 * Set all the fields of the given {@link https://v7.angular.io/api/forms/FormGroup|FormGroup} to the specified state(s)
+	 * Set all the fields of the given {@link https://v12.angular.io/api/forms/FormGroup|FormGroup} to the specified state(s)
 	 * @param formGroup - Angular form group object
 	 * @param statesToBeSet - States to be set to the different controls in the form
 	 */
@@ -27,7 +27,7 @@ export class StarkFormUtil {
 	}
 
 	/**
-	 * Set the given {@link https://v7.angular.io/api/forms/FormControl|FormControl} to the specified state(s)
+	 * Set the given {@link https://v12.angular.io/api/forms/FormControl|FormControl} to the specified state(s)
 	 * @param formControl - Angular form control object contained in an Angular form group
 	 * @param statesToBeSet - States to be set to the form control
 	 */
@@ -57,7 +57,7 @@ export class StarkFormUtil {
 	}
 
 	/**
-	 * Set the given {@link https://v7.angular.io/api/forms/FormGroup|FormGroup} to the specified state(s).
+	 * Set the given {@link https://v12.angular.io/api/forms/FormGroup|FormGroup} to the specified state(s).
 	 * Possible states: `untouched`, `pristine`, `dirty`, `submitted`
 	 * @param formGroup - Angular form group object
 	 * @param statesToBeSet - States to be set to the form
@@ -92,7 +92,7 @@ export class StarkFormUtil {
 	}
 
 	/**
-	 * Check whether the given {@link https://v7.angular.io/api/forms/FormGroup|FormGroup} is valid (all fields are valid).
+	 * Check whether the given {@link https://v12.angular.io/api/forms/FormGroup|FormGroup} is valid (all fields are valid).
 	 * If valid, all the form fields will be set to their `pristine` state, otherwise to their `touched` state
 	 * (calling `setFormControlState` function).
 	 * @param formGroup - Angular form group object
@@ -109,7 +109,7 @@ export class StarkFormUtil {
 
 	/**
 	 * {@link https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards|TypeGuard} to check that the given object
-	 * is an actual instance of an Angular {@link https://v7.angular.io/api/forms/FormGroup|FormGroup}.
+	 * is an actual instance of an Angular {@link https://v12.angular.io/api/forms/FormGroup|FormGroup}.
 	 * @param formGroup - Angular form object
 	 */
 	public static isFormGroup(formGroup: any): formGroup is FormGroup {
@@ -118,7 +118,7 @@ export class StarkFormUtil {
 
 	/**
 	 * {@link https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards|TypeGuard} to check that the given object
-	 * is an actual instance of an Angular {@link https://v7.angular.io/api/forms/FormControl|FormControl}.
+	 * is an actual instance of an Angular {@link https://v12.angular.io/api/forms/FormControl|FormControl}.
 	 * @param formControl - Angular form field object
 	 */
 	public static isFormControl(formControl: any): formControl is FormControl {

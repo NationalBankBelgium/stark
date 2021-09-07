@@ -2,7 +2,7 @@ import { InjectionToken } from "@angular/core";
 import { StarkUser } from "../../../modules/user";
 
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkMockData}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkMockData}
  */
 export const STARK_MOCK_DATA: InjectionToken<StarkMockData> = new InjectionToken<StarkMockData>("STARK_MOCK_DATA");
 

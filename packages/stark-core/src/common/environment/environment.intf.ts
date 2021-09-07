@@ -6,7 +6,7 @@ import { NgModuleRef } from "@angular/core";
 export interface StarkEnvironment {
 	/**
 	 * Whether the current environment is production, as described
-	 * in {@link https://v7.angular.io/guide/build#configuring-application-environments|Angular docs: Configuring application environments}
+	 * in {@link https://v12.angular.io/guide/build#configuring-application-environments|Angular docs: Configuring application environments}
 	 */
 	production: boolean;
 

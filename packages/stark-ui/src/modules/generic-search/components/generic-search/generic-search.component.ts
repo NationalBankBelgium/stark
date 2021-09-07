@@ -53,7 +53,7 @@ declare type UnusedIconProps = "iconActivated" | "iconSwitchFunction";
  */
 declare type StarkDefaultPredefinedActionBarGenericAction = Required<
 	Pick<StarkDefaultPredefinedAction, Exclude<keyof StarkDefaultPredefinedAction, UnusedLabelProps | UnusedIconProps>>
-	> &
+> &
 	Pick<StarkDefaultPredefinedAction, UnusedIconProps>;
 
 /**
@@ -61,7 +61,7 @@ declare type StarkDefaultPredefinedActionBarGenericAction = Required<
  */
 declare type StarkCustomizablePredefinedActionBarGenericAction = Required<
 	Pick<StarkCustomizablePredefinedAction, Exclude<keyof StarkCustomizablePredefinedAction, UnusedLabelProps | UnusedIconProps>>
-	> &
+> &
 	Partial<Pick<StarkCustomizablePredefinedAction, UnusedIconProps>>;
 
 /**
@@ -101,7 +101,7 @@ const formAnimations: AnimationTriggerMetadata = trigger("collapse", [
  * **IMPORTANT: In the HTML, the component defining the search form content should be exported as `searchForm`
  * so that it is accessible from the Stark Generic Search component.**
  *
- * See [Angular Template Syntax: Template reference variables](https://v7.angular.io/guide/template-syntax#template-reference-variables--var-)
+ * See [Angular Template Syntax: Template reference variables](https://v12.angular.io/guide/template-reference-variables)
  *
  * @example
  * <stark-generic-search formHtmlId="demo-generic-search-form"
@@ -192,7 +192,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 *
 	 * **Therefore, the child search form component should be exported as `searchForm`.**
 	 *
-	 * See {@link https://v7.angular.io/guide/template-syntax#template-reference-variables--var-|Angular Template Syntax: Template reference variables} for more info about template reference variables.
+	 * See {@link https://v12.angular.io/guide/template-reference-variables|Angular Template Syntax: Template reference variables} for more info about template reference variables.
 	 */
 	@ContentChild("searchForm", { static: true })
 	public searchFormComponent!: StarkSearchFormComponent<unknown>;
@@ -229,11 +229,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
-	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
-		renderer: Renderer2,
-		elementRef: ElementRef
-	) {
+	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService, renderer: Renderer2, elementRef: ElementRef) {
 		super(renderer, elementRef);
 	}
 
