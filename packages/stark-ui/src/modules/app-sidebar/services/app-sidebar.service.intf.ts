@@ -7,7 +7,7 @@ import { InjectionToken } from "@angular/core";
  */
 export const starkAppSidebarServiceName = "StarkAppSidebarService";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkAppSidebarService}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkAppSidebarService}
  */
 export const STARK_APP_SIDEBAR_SERVICE: InjectionToken<StarkAppSidebarService> = new InjectionToken<StarkAppSidebarService>(
 	starkAppSidebarServiceName

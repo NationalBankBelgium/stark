@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
 
 /**
- * Abstract class to add the right stark class color to the {@link https://v7.angular.io/api/core/ElementRef|ElementRef}
+ * Abstract class to add the right stark class color to the {@link https://v12.angular.io/api/core/ElementRef|ElementRef}
  *
  * More details about Directive decorator on Angular website:
  * https://v12.angular.io/guide/migration-undecorated-classes#im-a-library-author-should-i-add-the-directive-decorator-to-base-classes

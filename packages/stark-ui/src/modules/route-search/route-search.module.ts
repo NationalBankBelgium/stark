@@ -39,7 +39,7 @@ import { mergeUiTranslations } from "../../common/translations";
 export class StarkRouteSearchModule {
 	/**
 	 * Prevents this module from being re-imported
-	 * See {@link https://v7.angular.io/guide/singleton-services#prevent-reimport-of-the-greetingmodule|Angular docs: Prevent reimport of a root module}
+	 * See {@link https://v12.angular.io/guide/singleton-services#prevent-reimport-of-the-greetingmodule|Angular docs: Prevent reimport of a root module}
 	 * @param translateService - The `TranslateService` instance of the application.
 	 */
 	public constructor(translateService: TranslateService) {

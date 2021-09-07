@@ -6,7 +6,7 @@ import { HttpRequest } from "@angular/common/http";
  */
 export const starkXSRFServiceName = "StarkXSRFService";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkXSRFService}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkXSRFService}
  */
 export const STARK_XSRF_SERVICE: InjectionToken<StarkXSRFService> = new InjectionToken<StarkXSRFService>(starkXSRFServiceName);
 
@@ -28,7 +28,7 @@ export interface StarkXSRFService {
 	configureXHR(xhr: XMLHttpRequest): void;
 
 	/**
-	 * Return a new {@link https://v7.angular.io/api/common/http/HttpRequest|HttpRequest} including the necessary options
+	 * Return a new {@link https://v12.angular.io/api/common/http/HttpRequest|HttpRequest} including the necessary options
 	 * for "state-changing" requests (POST, PUT, PATCH or DELETE) in order to enable XSRF protection.
 	 *
 	 * Logs a warning whenever there is no XSRF token to be sent in such requests

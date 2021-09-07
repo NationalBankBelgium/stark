@@ -5,7 +5,7 @@ import { StarkErrorHandlingActions } from "../actions";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "../../logging/services";
 
 /**
- * Replacement for the default {@link https://v7.angular.io/api/core/ErrorHandler|ErrorHandler} from Angular
+ * Replacement for the default {@link https://v12.angular.io/api/core/ErrorHandler|ErrorHandler} from Angular
  */
 @Injectable()
 export class StarkErrorHandler implements ErrorHandler {

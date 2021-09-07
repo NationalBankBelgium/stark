@@ -79,7 +79,7 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	 *
 	 * **NOTE:** isExpandedChange is used with isExpanded to create a two-way binding (using a banana in the box `[(isExpanded)]`).
 	 *
-	 * See: {@link https://v7.angular.io/guide/template-syntax#two-way-binding---|Angular Template Syntax: Two Way Binding}
+	 * See: {@link https://v12.angular.io/guide/two-way-binding|Angular Template Syntax: Two Way Binding}
 	 */
 	@Output()
 	public readonly isExpandedChange = new EventEmitter<boolean>();
@@ -96,11 +96,7 @@ export class StarkCollapsibleComponent extends AbstractStarkUiComponent implemen
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
-	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		renderer: Renderer2,
-		elementRef: ElementRef
-	) {
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, renderer: Renderer2, elementRef: ElementRef) {
 		super(renderer, elementRef);
 	}
 

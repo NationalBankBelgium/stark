@@ -8,7 +8,7 @@ import { StarkSingleItemResponseWrapper } from "../../http/entities";
  */
 export const starkUserRepositoryName = "StarkUserRepository";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkUserRepository}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkUserRepository}
  */
 export const STARK_USER_REPOSITORY: InjectionToken<StarkUserRepository> = new InjectionToken<StarkUserRepository>(starkUserRepositoryName);
 

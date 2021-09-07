@@ -2,7 +2,7 @@ import { InjectionToken } from "@angular/core";
 import { Observable } from "rxjs";
 
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkXSRFConfig}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkXSRFConfig}
  */
 export const STARK_XSRF_CONFIG: InjectionToken<StarkXSRFConfig> = new InjectionToken<StarkXSRFConfig>("StarkXSRFConfig");
 

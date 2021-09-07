@@ -9,7 +9,7 @@ import { STARK_RBAC_AUTHORIZATION_SERVICE, StarkRBACAuthorizationService } from 
 const directiveName = "[starkShowOnPermission]";
 
 /**
- * [Structural Directive](https://v7.angular.io/guide/structural-directives#structural-directives) to show an element if the user has any of the roles specified
+ * [Structural Directive](https://v12.angular.io/guide/structural-directives) to show an element if the user has any of the roles specified
  * in the {@link StarkRBACDirectivePermission} object passed as input.
  *
  * This directive should be used in cases where some content in the application should be shown only to those users that have a specific role.

@@ -8,7 +8,7 @@ import { StarkMessageCollection } from "../entities";
  */
 export const starkMessagePaneServiceName = "StarkMessagePaneService";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkMessagePaneService}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkMessagePaneService}
  */
 export const STARK_MESSAGE_PANE_SERVICE: InjectionToken<StarkMessagePaneService> = new InjectionToken<StarkMessagePaneService>(
 	starkMessagePaneServiceName

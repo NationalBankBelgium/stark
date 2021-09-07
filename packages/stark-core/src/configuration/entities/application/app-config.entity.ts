@@ -17,7 +17,7 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	 * regex passed to the `@Matches` decorator in the `defaultLanguage` property of this class.
 	 *
 	 * Using simple string instead of RegExp string since the compiler has a restricted expression syntax.
-	 * See https://v7.angular.io/guide/aot-compiler#expression-syntax
+	 * See https://v12.angular.io/guide/aot-compiler#expression-syntax
 	 */
 	private static languageCodeRegex = new RegExp("^[a-z]{2}$");
 

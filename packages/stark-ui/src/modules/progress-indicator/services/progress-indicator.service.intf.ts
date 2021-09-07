@@ -7,11 +7,10 @@ import { InjectionToken } from "@angular/core";
  */
 export const starkProgressIndicatorServiceName = "StarkProgressIndicatorService";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkProgressIndicatorService}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkProgressIndicatorService}
  */
-export const STARK_PROGRESS_INDICATOR_SERVICE: InjectionToken<StarkProgressIndicatorService> = new InjectionToken<StarkProgressIndicatorService>(
-	starkProgressIndicatorServiceName
-);
+export const STARK_PROGRESS_INDICATOR_SERVICE: InjectionToken<StarkProgressIndicatorService> =
+	new InjectionToken<StarkProgressIndicatorService>(starkProgressIndicatorServiceName);
 
 /**
  * Service to handle the visibility of a progress indicator (e.g., spinner, progress percentage, ...) programmatically.

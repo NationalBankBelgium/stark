@@ -2,7 +2,7 @@ import { StarkBackend } from "../../../modules/http/entities/backend";
 import { InjectionToken } from "@angular/core";
 
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkApplicationConfig}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkApplicationConfig}
  */
 export const STARK_APP_CONFIG: InjectionToken<StarkApplicationConfig> = new InjectionToken<StarkApplicationConfig>("STARK_APP_CONFIG");
 

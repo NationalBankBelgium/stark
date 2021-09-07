@@ -7,7 +7,7 @@ import { StarkUser } from "../../user/entities";
  */
 export const starkSessionServiceName = "StarkSessionService";
 /**
- * {@link https://v7.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkSessionService}
+ * {@link https://v12.angular.io/api/core/InjectionToken|InjectionToken} used to provide the {@link StarkSessionService}
  */
 export const STARK_SESSION_SERVICE: InjectionToken<StarkSessionService> = new InjectionToken<StarkSessionService>(starkSessionServiceName);
 

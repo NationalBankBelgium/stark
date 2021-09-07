@@ -1,7 +1,7 @@
 import { StarkHttpRequest, StarkQueryParam, StarkResource } from "../entities";
 
 /**
- * The `StarkHttpBaseRequestBuilder` interface is used to build a {@link https://v7.angular.io/api/common/http/HttpRequest|HttpRequest}.
+ * The `StarkHttpBaseRequestBuilder` interface is used to build a {@link https://v12.angular.io/api/common/http/HttpRequest|HttpRequest}.
  * Thanks to this class, headers, query parameters, etc. can be added to the request.
  */
 export interface StarkHttpBaseRequestBuilder<T extends StarkResource> {

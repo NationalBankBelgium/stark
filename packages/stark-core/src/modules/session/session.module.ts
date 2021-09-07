@@ -31,7 +31,7 @@ export class StarkSessionModule {
 	 * Instantiates the services only once since they should be singletons
 	 * so the `forRoot()` should be called only by the `AppModule`.
 	 *
-	 * See {@link https://v7.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
+	 * See {@link https://v12.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The forRoot() pattern}
 	 * @param sessionConfig - Object containing the configuration (if any) for the `StarkSessionService`
 	 * @returns A module with providers
 	 */
@@ -48,9 +48,9 @@ export class StarkSessionModule {
 
 	/**
 	 * Prevents this module from being re-imported
-	 * See {@link https://v7.angular.io/guide/singleton-services#prevent-reimport-of-the-greetingmodule|Angular docs: Prevent reimport of a root module}
+	 * See {@link https://v12.angular.io/guide/singleton-services#prevent-reimport-of-the-greetingmodule|Angular docs: Prevent reimport of a root module}
 	 * @param routingService - The `StarkRoutingService` instance of the application.
-	 * @param appInitStatus - A class that reflects the state of running {@link https://v7.angular.io/api/core/APP_INITIALIZER|APP_INITIALIZER}s.
+	 * @param appInitStatus - A class that reflects the state of running {@link https://v12.angular.io/api/core/APP_INITIALIZER|APP_INITIALIZER}s.
 	 * @param parentModule - The parent module
 	 * @param sessionConfig - The configuration of the `StarkSessionModule`
 	 */

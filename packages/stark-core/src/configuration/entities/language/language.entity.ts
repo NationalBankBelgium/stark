@@ -13,7 +13,7 @@ export class StarkLanguageImpl implements StarkLanguage {
 	 * regex passed to the `@Matches` decorator in the `isoCode` property of this class.
 	 *
 	 * Using simple string instead of RegExp string since the compiler has a restricted expression syntax.
-	 * See https://v7.angular.io/guide/aot-compiler#expression-syntax
+	 * See https://v12.angular.io/guide/aot-compiler#expression-syntax
 	 */
 	private static languageIsoCodeRegex = new RegExp("^[a-z]{2}-[A-Z]{2}$");
 

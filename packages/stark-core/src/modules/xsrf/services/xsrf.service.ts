@@ -74,7 +74,7 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 					headers: newHeaders,
 					// Enforce the 'withCredentials' property flag on every XHR object created by Angular $http.
 					// We leverage "credentialed" requests that are aware of HTTP cookies (necessary for XSRF to work with multiple backends)
-					// https://v7.angular.io/api/common/http/HttpRequest#withCredentials
+					// https://v12.angular.io/api/common/http/HttpRequest#withCredentials
 					// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
 					withCredentials: true
 				});
@@ -82,7 +82,7 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 		}
 
 		// in any case the "withCredentials: true" should be added to ALL requests, otherwise the browser won't accept the XSRF cookie from the backend!
-		// see: https://v7.angular.io/api/common/http/HttpRequest#withCredentials
+		// see: https://v12.angular.io/api/common/http/HttpRequest#withCredentials
 		// see: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
 		return request.clone({ withCredentials: true });
 	}
