@@ -96,7 +96,7 @@
     "prismjs": "^1.23.0",
     "protractor": "^7.0.0",
     "puppeteer": "^10.1.0",
-    "release-it": "^14.11.5",
+    "release-it": "^14.11.6",
     "rxjs": "^6.6.7",
     "stream-concat": "^1.0.0",
     "stylelint": "^13.11.0",
