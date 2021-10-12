@@ -100,7 +100,7 @@
     "rxjs": "^6.6.7",
     "stream-concat": "^1.0.0",
     "stylelint": "^13.11.0",
-    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-prettier": "^9.0.2",
     "stylelint-webpack-plugin": "~2.1.0",
     "text-mask-addons": "^3.8.0",
     "text-mask-core": "^5.1.2",
