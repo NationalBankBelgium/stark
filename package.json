@@ -42,7 +42,7 @@
     "@nationalbankbelgium/code-style": "^1.6.0",
     "@ng-idle/core": "^11.0.3",
     "@ng-idle/keepalive": "^11.0.3",
-    "@ngrx/effects": "^12.3.0",
+    "@ngrx/effects": "^12.5.0",
     "@ngrx/store": "^12.3.0",
     "@ngrx/store-devtools": "^12.3.0",
     "@ngtools/json-schema": "^1.1.0",
