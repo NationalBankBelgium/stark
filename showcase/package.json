@@ -133,7 +133,7 @@
     "http-server": "~13.0.1",
     "ngrx-store-logger": "~0.2.2",
     "reflect-metadata": "~0.1.13",
-    "rxjs": "^6.6.7",
+    "rxjs": "^7.4.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
