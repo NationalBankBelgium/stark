@@ -26,7 +26,7 @@
 			htmlId="demo-generic-search-table"
 			[columnProperties]="columnsProperties"
 			[paginationConfig]="paginationConfig"
-			[data]="searchResults"
+			[data]="results$ | async"
 			[starkProgressIndicator]="progressIndicatorConfig"
 		>
 			<header><h1 class="mb0" translate>SHOWCASE.DEMO.GENERIC_SEARCH.SEARCH_RESULTS</h1></header>
