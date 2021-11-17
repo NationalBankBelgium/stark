@@ -52,7 +52,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	 * Observable that will emit the search results. This Observable is created as soon as the Search Page controller is constructed
 	 * and the first value it emits is an empty array in order to avoid the having undefined values passed down to the subscriber(s).
 	 */
-	protected results$!: ReplaySubject<SearchResultsType[]>;
+	public results$!: ReplaySubject<SearchResultsType[]>;
 
 	/**
 	 * Class constructor

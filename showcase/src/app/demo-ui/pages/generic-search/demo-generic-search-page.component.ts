@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { ReferenceLink } from "../../../shared";
 import {
@@ -15,9 +15,7 @@ import { DemoGenericService } from "./services";
 	selector: "demo-generic-search",
 	templateUrl: "./demo-generic-search-page.component.html"
 })
-export class DemoGenericSearchPageComponent
-	extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria>
-	implements OnInit, OnDestroy {
+export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria> {
 	public hideSearch = false;
 
 	public columnsProperties: StarkTableColumnProperties[] = [
@@ -40,7 +38,6 @@ export class DemoGenericSearchPageComponent
 			isSortable: true
 		}
 	];
-	public searchResults?: HeroMovie[];
 	public paginationConfig: StarkPaginationConfig = {
 		isExtended: false,
 		itemsPerPage: 10,
@@ -72,20 +69,5 @@ export class DemoGenericSearchPageComponent
 		this.progressIndicatorConfig.topic = "demo-generic-search"; // Set the progress topic to make the progressService working
 		this.performSearchOnInit = true; // Turn on automatic search (last search criteria)
 		this.preserveLatestResults = true; // Keep a reference to the latest results in the latestResults variable
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnInit(): void {
-		super.ngOnInit();
-		this.results$.subscribe((genericObjects: HeroMovie[]) => (this.searchResults = genericObjects));
-	}
-
-	/**
-	 * Component lifecycle hook
-	 */
-	public ngOnDestroy(): void {
-		super.ngOnDestroy();
 	}
 }
