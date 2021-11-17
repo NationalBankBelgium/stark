@@ -173,8 +173,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	@Input()
 	public data: object[] = [];
 
-	// tslint:disable-next-line:variable-name prefer-optional
-	public static ngAcceptInputType_data: object[] | undefined;
+	// tslint:disable-next-line:variable-name prefer-optional no-null-undefined-union
+	public static ngAcceptInputType_data: object[] | undefined | null;
 
 	/**
 	 * Object which contains filtering information for the table.
