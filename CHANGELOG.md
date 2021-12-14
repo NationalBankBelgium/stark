@@ -1,3 +1,19 @@
+## [10.2.4](https://github.com/nationalbankbelgium/stark/compare/10.2.3...10.2.4) (2021-12-14)
+
+
+### Bug Fixes
+
+* **stark-build:** remove csp 'plugin-types' rule and adapt 'object-src' rule ([f6b7a56](https://github.com/nationalbankbelgium/stark/commit/f6b7a56e36d3d3362b1f770e4f14687b65b1c326)), closes [#3086](https://github.com/nationalbankbelgium/stark/issues/3086)
+
+
+### Features
+
+* **showcase:** adapt generic-search demo to use public `results$` variable directly in template ([733e236](https://github.com/nationalbankbelgium/stark/commit/733e23625545acf4da1918e00b6a64ca62b0d8a9))
+* **stark-core:** add support for `httpOnly` cookie in `StarkXSRFService` ([e5425a3](https://github.com/nationalbankbelgium/stark/commit/e5425a3124e4e9acf456043a7bf55bde99307961)), closes [#3136](https://github.com/nationalbankbelgium/stark/issues/3136)
+* **stark-ui:** generic-search - adapt `results$` variable visibility to `public` ([54fb29a](https://github.com/nationalbankbelgium/stark/commit/54fb29ad7d4846a145798931ac98eca9025919a6)), closes [#3082](https://github.com/nationalbankbelgium/stark/issues/3082)
+
+
+
 ## [10.2.3](https://github.com/nationalbankbelgium/stark/compare/10.2.2...10.2.3) (2021-08-10)
 
 
