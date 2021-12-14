@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs*/
+/* tslint:disable:completed-docs */
 import { Inject, Injectable, Injector } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest } from "@angular/common/http";
@@ -88,34 +88,50 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 	}
 
 	public getXSRFToken(): string | undefined {
-		const xsrfToken: string | undefined = this.currentToken;
+		let errorMsg: string =
+			starkXSRFServiceName +
+			": no XSRF token found. This could be due to:\n" +
+			"- the backend has not sent the XSRF token properly, either the cookie was not sent or it has a different name";
 
-		if (typeof xsrfToken === "undefined") {
-			const errorMsg: string =
-				starkXSRFServiceName +
-				": no XSRF token found. This could be due to:\n" +
-				"- the backend has not sent the XSRF token properly, either the cookie was not sent or it has a different name\n" +
-				"- the application did not store the XSRF token correctly, either it has a different name or it comes from a different origin";
+		let xsrfToken: string | undefined;
 
-			this.logger.warn(errorMsg);
-			// could throw an error: throw new Error(errorMsg);
+		if (this.configOptions?.httpOnly === true) {
+			xsrfToken = this.getXSRFCookie();
+
+			if (typeof xsrfToken === "undefined") {
+				this.logger.warn(errorMsg);
+				// could throw an error: throw new Error(errorMsg);
+			}
 		} else {
-			// overwrite the cookie with the current token to ensure that we always send the same token
-			// regardless of the new tokens sent by the backend(s) in every response
-			this.setXSRFCookie(xsrfToken);
+			xsrfToken = this.currentToken;
+
+			if (typeof xsrfToken === "undefined") {
+				errorMsg +=
+					"\n" +
+					"- the application did not store the XSRF token correctly, either it has a different name or it comes from a different origin";
+
+				this.logger.warn(errorMsg);
+				// could throw an error: throw new Error(errorMsg);
+			} else {
+				// overwrite the cookie with the current token to ensure that we always send the same token
+				// regardless of the new tokens sent by the backend(s) in every response
+				this.setXSRFCookie(xsrfToken);
+			}
 		}
 
 		return xsrfToken;
 	}
 
 	public storeXSRFToken(): void {
-		if (this.currentToken) {
-			// overwrite the cookie with the token we stored (we don't care about the rest of tokens but just the one we stored)
-			this.setXSRFCookie(this.currentToken);
-		} else {
-			// store the token only if it is not stored yet
-			const xsrfCookie: string | undefined = this.getXSRFCookie();
-			this.currentToken = xsrfCookie && xsrfCookie !== "" ? xsrfCookie : undefined;
+		if (this.configOptions?.httpOnly !== true) {
+			if (this.currentToken) {
+				// overwrite the cookie with the token we stored (we don't care about the rest of tokens but just the one we stored)
+				this.setXSRFCookie(this.currentToken);
+			} else {
+				// store the token only if it is not stored yet
+				const xsrfCookie: string | undefined = this.getXSRFCookie();
+				this.currentToken = xsrfCookie && xsrfCookie !== "" ? xsrfCookie : undefined;
+			}
 		}
 	}
 
