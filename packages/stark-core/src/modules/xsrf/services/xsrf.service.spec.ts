@@ -183,6 +183,48 @@ describe("Service: StarkXSRFService", () => {
 	});
 
 	describe("getXSRFToken", () => {
+		describe("with `httpOnly === true`", () => {
+			beforeEach(() => {
+				mockXsrfConfig = {
+					httpOnly: true
+				};
+
+				xsrfService = new StarkXSRFServiceHelper(
+					appConfig,
+					mockLogger,
+					httpMock,
+					<any>mockDocument,
+					mockInjectorService,
+					mockXsrfConfig
+				);
+			});
+
+			it("should return the XSRF token in case there is one already stored in cookie", () => {
+				const expectedToken = "dummy xsrf cookie token";
+				xsrfService.setCurrentToken(mockXSRFToken);
+				spyOn(xsrfService, "getXSRFCookie").and.returnValue(expectedToken);
+
+				const xsrfToken: string = <string>xsrfService.getXSRFToken();
+
+				expect(xsrfToken).toBe(expectedToken);
+				expect(xsrfService.getXSRFCookie).toHaveBeenCalledTimes(1);
+				expect(mockLogger.warn).not.toHaveBeenCalled();
+			});
+
+			it("should return undefined and log a warning in case there is no XSRF token yet", () => {
+				xsrfService.setCurrentToken(mockXSRFToken);
+				spyOn(xsrfService, "getXSRFCookie").and.returnValue(undefined);
+
+				const xsrfToken: undefined = <undefined>xsrfService.getXSRFToken();
+
+				expect(xsrfToken).toBeUndefined();
+				expect(xsrfService.getXSRFCookie).toHaveBeenCalledTimes(1);
+				expect(mockLogger.warn).toHaveBeenCalledTimes(1);
+				const warningMessage: string = mockLogger.warn.calls.argsFor(0)[0];
+				expect(warningMessage).toContain("no XSRF token found");
+			});
+		});
+
 		it("should return the XSRF token in case there is one already stored", () => {
 			xsrfService.setCurrentToken(mockXSRFToken);
 
@@ -262,6 +304,30 @@ describe("Service: StarkXSRFService", () => {
 			expect(cookieOptions[0]).toBe(xsrfService.getXsrfCookieName() + "=" + mockXSRFToken);
 			expect(cookieOptions[1]).toBe("path='/'");
 			expect(cookieOptions[2]).toMatch(new RegExp(`expires=.*(${new Date().getFullYear()})`));
+		});
+
+		it("should not overwrite the XSRF cookie by the XSRF token that is already stored if `httpOnly !== true`", () => {
+			mockXsrfConfig = {
+				httpOnly: true
+			};
+
+			xsrfService = new StarkXSRFServiceHelper(
+				appConfig,
+				mockLogger,
+				httpMock,
+				<any>mockDocument,
+				mockInjectorService,
+				mockXsrfConfig
+			);
+
+			xsrfService.setCurrentToken(mockXSRFToken);
+			spyOn(xsrfService, "setXSRFCookie").and.callThrough();
+			spyOn(xsrfService, "getXSRFCookie").and.callThrough();
+
+			xsrfService.storeXSRFToken();
+
+			expect(xsrfService.setXSRFCookie).not.toHaveBeenCalled();
+			expect(xsrfService.getXSRFCookie).not.toHaveBeenCalled();
 		});
 	});
 
