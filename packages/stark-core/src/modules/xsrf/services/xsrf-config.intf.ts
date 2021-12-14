@@ -32,4 +32,12 @@ export interface StarkXSRFConfig {
 	 * Alternatively, this can be defined as a {@link StarkXSRFWaitBeforePingingLiteral|literal}
 	 */
 	waitBeforePinging?: (() => Promise<any> | PromiseLike<any> | Observable<any>) | StarkXSRFWaitBeforePingingLiteral;
+
+	/**
+	 * Defines if the XSRF cookie can be overridden or not.
+	 * If `httpOnly` is set to `true`, the `StarkXSRFService` reads the cookie value for each http request.
+	 *
+	 * Default: `false`
+	 */
+	httpOnly?: boolean;
 }
