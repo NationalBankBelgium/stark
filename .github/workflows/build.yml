@@ -24,10 +24,21 @@ jobs:
   build-and-test:
     name: Build and test on Node.js ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         node_version: [ "10", "12" ]
-        os: [ ubuntu-latest, macOS-latest ]
+        os: [ubuntu-latest]
+        experimental: [false]
+        # Mark following configurations as "experimental" and allow to continue in case of error
+        # See documentation: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-including-new-combinations 
+        include:
+          - os: macos-latest
+            node_version: 12
+            experimental: true
+          - os: macos-latest
+            node_version: 14
+            experimental: true
 
     steps:
       # Some actions should be executed only in one environment.
