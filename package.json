@@ -35,7 +35,7 @@
     "@angular/platform-browser-dynamic": "^12.2.10",
     "@angular/router": "^12.2.10",
     "@angularclass/hmr": "^3.0.0",
-    "@commitlint/cli": "^13.1.0",
+    "@commitlint/cli": "^16.0.3",
     "@commitlint/config-conventional": "^13.1.0",
     "@compodoc/compodoc": "1.1.13",
     "@mdi/angular-material": "^4.0.96",
