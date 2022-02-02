@@ -85,7 +85,7 @@
     "karma-jasmine-html-reporter": "^1.7.0",
     "karma-mocha-reporter": "^2.2.5",
     "karma-sourcemap-loader": "^0.3.8",
-    "lint-staged": "^11.0.0",
+    "lint-staged": "^12.3.3",
     "lodash-es": "^4.17.21",
     "moment": "^2.22.2",
     "moment-locales-webpack-plugin": "^1.2.0",
