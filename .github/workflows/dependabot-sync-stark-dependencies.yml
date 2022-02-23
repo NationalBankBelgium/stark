@@ -91,7 +91,7 @@ jobs:
           cd showcase
           npm install --package-lock-only --ignore-scripts
           git add package-lock.json
-          git commit -m 'chore(showcase): update "package-lock.json" file'
+          git commit -m 'chore(showcase): update "package-lock.json" file' --no-verify
 
       - name: Push changes
         if: contains(steps.sync-packages-dependencies.outputs.LAST_COMMIT, '/packages/stark-')
