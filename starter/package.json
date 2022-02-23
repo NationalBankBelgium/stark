@@ -135,7 +135,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "1.1.13",
+    "@compodoc/compodoc": "1.1.18",
     "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-10.2.0-87470353-1628164059.tgz",
     "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-10.2.0-87470353-1628164059.tgz",
     "@types/core-js": "~2.5.4",
