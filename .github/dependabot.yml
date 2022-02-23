@@ -19,6 +19,9 @@ updates:
       - dependency-name: "@mdi/angular-material"
         versions:
           - ">=5"
+      - dependency-name: ng-packagr
+        versions:
+          - ">=13"
       - dependency-name: typescript
         versions:
           - ">=0"
