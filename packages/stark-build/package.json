@@ -24,7 +24,7 @@
     "@types/webpack": "^5.28.0",
     "codelyzer": "^5.0.0",
     "moment-locales-webpack-plugin": "^1.2.0",
-    "prettier": "~2.3.2",
+    "prettier": "~2.5.1",
     "stylelint": "^13.11.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-webpack-plugin": "~2.1.0",
