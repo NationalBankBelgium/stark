@@ -23,7 +23,7 @@
     "@ng-idle/keepalive": "^11.0.3",
     "@ngrx/effects": "^12.3.0",
     "@ngrx/store": "^12.3.0",
-    "@ngrx/store-devtools": "^12.3.0",
+    "@ngrx/store-devtools": "^13.1.0",
     "@ngx-translate/core": "^13.0.0",
     "@types/lodash-es": "^4.17.4",
     "@types/uuid": "^8.3.0",
