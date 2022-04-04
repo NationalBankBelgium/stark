@@ -87,7 +87,7 @@
     "karma-sourcemap-loader": "^0.3.8",
     "lint-staged": "^12.3.5",
     "lodash-es": "^4.17.21",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "moment-locales-webpack-plugin": "^1.2.0",
     "ng-packagr": "^12.2.7",
     "normalize.css": "^8.0.1",
