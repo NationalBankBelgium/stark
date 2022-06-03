@@ -38,9 +38,8 @@ import { Subject, Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { minDate as validatorMinDate, maxDate as validatorMaxDate } from "class-validator";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
+import { StarkDateInput, StarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
 import {
-	StarkDateInput,
 	StarkDatePickerComponent,
 	StarkDatePickerFilter,
 	StarkDatePickerMaskConfig

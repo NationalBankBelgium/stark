@@ -2,10 +2,11 @@
 import { Component, DebugElement } from "@angular/core";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { ComponentFixture, waitForAsync, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Observer } from "rxjs";
 import { StarkNumberMaskDirective } from "./number-mask.directive";
 import { StarkNumberMaskConfig } from "./number-mask-config.intf";
+import { IMaskModule } from "angular-imask";
 
 describe("NumberMaskDirective", () => {
 	let fixture: ComponentFixture<TestComponent>;
@@ -53,7 +54,7 @@ describe("NumberMaskDirective", () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [StarkNumberMaskDirective, TestComponent],
-			imports: [FormsModule, ReactiveFormsModule],
+			imports: [FormsModule, ReactiveFormsModule, IMaskModule],
 			providers: []
 		});
 	});
@@ -89,7 +90,7 @@ describe("NumberMaskDirective", () => {
 				expect(inputElement.nativeElement.value).toBe("12,345");
 			}
 
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
@@ -104,7 +105,7 @@ describe("NumberMaskDirective", () => {
 		});
 
 		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["a", " ", "/*-+,."];
+			const invalidValues: string[] = ["a", " ", "/*,."];
 
 			for (const value of invalidValues) {
 				changeInputValue(inputElement, value);
@@ -113,9 +114,10 @@ describe("NumberMaskDirective", () => {
 				expect(inputElement.nativeElement.value).toBe("");
 			}
 
-			const invalidNumericValues: string[] = ["1-2-3.4.5", "+1*23-4/5", ".1.234,5"];
+			const invalidNumericValues: string[] = ["1-2-3.4.5", "1*23-4/5", ".1.234,5"];
 
 			for (const numericValue of invalidNumericValues) {
+				changeInputValue(inputElement, "");
 				changeInputValue(inputElement, numericValue);
 				fixture.detectChanges();
 
@@ -129,7 +131,15 @@ describe("NumberMaskDirective", () => {
 
 			expect(inputElement.nativeElement.value).toBe("12,345");
 
-			hostComponent.numberMaskConfig = { ...numberMaskConfig, prefix: "%", suffix: " percent", thousandsSeparatorSymbol: "-" };
+			hostComponent.numberMaskConfig = {
+				...numberMaskConfig,
+				prefix: "%",
+				suffix: " percent",
+				thousandsSeparatorSymbol: "-"
+			};
+			fixture.detectChanges();
+
+			changeInputValue(inputElement, "12345");
 			fixture.detectChanges();
 
 			expect(inputElement.nativeElement.value).toBe("%12-345 percent");
@@ -186,7 +196,7 @@ describe("NumberMaskDirective", () => {
 				expect(hostComponent.ngModelValue).toBe("12,345");
 			}
 
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
@@ -202,7 +212,7 @@ describe("NumberMaskDirective", () => {
 		});
 
 		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["a", " ", "/*-+,."];
+			const invalidValues: string[] = ["a", " ", "/*,."];
 
 			for (const value of invalidValues) {
 				changeInputValue(inputElement, value);
@@ -211,9 +221,10 @@ describe("NumberMaskDirective", () => {
 				expect(hostComponent.ngModelValue).toBe("");
 			}
 
-			const invalidNumericValues: string[] = ["1-2-3.4.5", "+1*23-4/5", ".1.234,5"];
+			const invalidNumericValues: string[] = ["1-2-3.4.5", "1*23-4/5", ".1.234,5"];
 
 			for (const numericValue of invalidNumericValues) {
+				changeInputValue(inputElement, "");
 				changeInputValue(inputElement, numericValue);
 				fixture.detectChanges();
 
@@ -228,7 +239,12 @@ describe("NumberMaskDirective", () => {
 
 			expect(hostComponent.ngModelValue).toBe("12,345");
 
-			hostComponent.numberMaskConfig = { ...numberMaskConfig, prefix: "%", suffix: " percent", thousandsSeparatorSymbol: "-" };
+			hostComponent.numberMaskConfig = {
+				...numberMaskConfig,
+				prefix: "%",
+				suffix: " percent",
+				thousandsSeparatorSymbol: "-"
+			};
 			fixture.detectChanges();
 
 			expect(hostComponent.ngModelValue).toBe("%12-345 percent");
@@ -284,7 +300,7 @@ describe("NumberMaskDirective", () => {
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
 				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).not.toHaveBeenCalled();
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "12345", eventType);
@@ -292,20 +308,18 @@ describe("NumberMaskDirective", () => {
 
 				expect(hostComponent.formControl.value).toBe("12,345");
 				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
 
 			mockValueChangeObserver.next.calls.reset();
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "12345", eventType);
@@ -320,7 +334,7 @@ describe("NumberMaskDirective", () => {
 		});
 
 		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["a", " ", "/*-+,."];
+			const invalidValues: string[] = ["a", " ", "/*,."];
 
 			for (const value of invalidValues) {
 				mockValueChangeObserver.next.calls.reset();
@@ -328,22 +342,23 @@ describe("NumberMaskDirective", () => {
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+
+				expect(mockValueChangeObserver.next).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
 
-			const invalidNumericValues: string[] = ["1-2-3.4.5", "+1*23-4/5", ".1.234,5"];
+			const invalidNumericValues: string[] = ["1-2-3.4.5", "1*23-4/5", ".1.234,5"];
 
 			for (const numericValue of invalidNumericValues) {
+				changeInputValue(inputElement, "");
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, numericValue);
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("12,345");
 				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -354,11 +369,16 @@ describe("NumberMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("12,345");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
-			hostComponent.numberMaskConfig = { ...numberMaskConfig, prefix: "%", suffix: " percent", thousandsSeparatorSymbol: "-" };
+			hostComponent.numberMaskConfig = {
+				...numberMaskConfig,
+				prefix: "%",
+				suffix: " percent",
+				thousandsSeparatorSymbol: "-"
+			};
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("%12-345 percent");
@@ -374,7 +394,7 @@ describe("NumberMaskDirective", () => {
 
 			expect(hostComponent.formControl.value).toBe("12,345");
 			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
 			hostComponent.numberMaskConfig = <any>undefined;
@@ -387,7 +407,7 @@ describe("NumberMaskDirective", () => {
 
 			expect(hostComponent.formControl.value).toBe("whatever+1*23-4/5"); // no mask at all
 			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});

@@ -1,8 +1,10 @@
 /**
- * Defines the configuration for the {@link StarkNumberMaskDirective}.
- *
- * Based on the API of the `createNumberMask` function from the {@link https://github.com/text-mask/text-mask/tree/master/addons|text-mask-addons} library
- * See {@link https://github.com/text-mask/text-mask/tree/master/addons#createnumbermask}
+ * This config object is used to define the behaviours of the starkNumberMask directive
+ * - define suffix and postfix char
+ * - define if integer or decimal
+ * - define if positive or negative
+ * - define max decimal precision
+ * - define max number value
  */
 export interface StarkNumberMaskConfig {
 	/**
@@ -81,4 +83,11 @@ export interface StarkNumberMaskConfig {
 	 * Default: `false`
 	 */
 	allowLeadingZeroes?: boolean;
+
+	/**
+	 * show prefix and suffix on typing
+	 *
+	 * default: 'true'
+	 */
+	guide?: boolean;
 }

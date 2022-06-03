@@ -6,6 +6,7 @@ import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { Observer } from "rxjs";
 import { StarkTimestampMaskDirective } from "./timestamp-mask.directive";
 import { StarkTimestampMaskConfig } from "./timestamp-mask-config.intf";
+import { IMaskModule } from "angular-imask";
 
 describe("TimestampMaskDirective", () => {
 	let fixture: ComponentFixture<TestComponent>;
@@ -52,7 +53,7 @@ describe("TimestampMaskDirective", () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [StarkTimestampMaskDirective, TestComponent],
-			imports: [FormsModule, ReactiveFormsModule],
+			imports: [FormsModule, ReactiveFormsModule, IMaskModule],
 			providers: []
 		});
 	});
@@ -80,23 +81,23 @@ describe("TimestampMaskDirective", () => {
 				fixture.detectChanges();
 				expect(inputElement.nativeElement.value).toBe("");
 
-				changeInputValue(inputElement, "123", eventType);
+				changeInputValue(inputElement, "1203", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("12/3_/____");
+				expect(inputElement.nativeElement.value).toBe("12/03/____");
 			}
 
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(inputElement.nativeElement.value).toBe("");
 
-				changeInputValue(inputElement, "123", eventType);
+				changeInputValue(inputElement, "1203", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("123"); // no mask shown
+				expect(inputElement.nativeElement.value).toBe("1203"); // no mask shown
 			}
 		});
 
@@ -112,22 +113,22 @@ describe("TimestampMaskDirective", () => {
 		});
 
 		it("should refresh the mask whenever the configuration changes", () => {
-			changeInputValue(inputElement, "123");
+			changeInputValue(inputElement, "1203");
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("12/3_/____");
+			expect(inputElement.nativeElement.value).toBe("12/03/____");
 
 			hostComponent.timestampMaskConfig = { ...timestampMaskConfig, format: "DD-MM" };
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("12-3_");
+			expect(inputElement.nativeElement.value).toBe("12-03");
 		});
 
 		it("should remove the mask when the config is undefined", () => {
-			changeInputValue(inputElement, "123");
+			changeInputValue(inputElement, "1203");
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("12/3_/____");
+			expect(inputElement.nativeElement.value).toBe("12/03/____");
 
 			hostComponent.timestampMaskConfig = <any>undefined;
 			fixture.detectChanges();
@@ -159,6 +160,69 @@ describe("TimestampMaskDirective", () => {
 
 			expect(inputElement.nativeElement.value).toBe("02-29-__");
 		});
+
+		it("should allow time only to be entered", () => {
+			hostComponent.timestampMaskConfig = { ...timestampMaskConfig, format: "HH:mm:ss" };
+			fixture.detectChanges();
+
+			changeInputValue(inputElement, "101550");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("10:15:50");
+		});
+
+		it("reject invalid time", () => {
+			hostComponent.timestampMaskConfig = { ...timestampMaskConfig, format: "HH:mm:ss" };
+			fixture.detectChanges();
+
+			changeInputValue(inputElement, "25");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("2_:__:__");
+
+			changeInputValue(inputElement, "3");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("");
+
+			changeInputValue(inputElement, "238");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("23:__:__");
+
+			changeInputValue(inputElement, "23598");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("23:59:__");
+		});
+
+		it("Should allow partial date to be entered", () => {
+			hostComponent.timestampMaskConfig = { ...timestampMaskConfig, format: "MM/DD" };
+			fixture.detectChanges();
+
+			changeInputValue(inputElement, "0531");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("05/31");
+		});
+
+		it("Should allow partial date to be entered february", () => {
+			hostComponent.timestampMaskConfig = { ...timestampMaskConfig, format: "MM/DD" };
+			fixture.detectChanges();
+
+			changeInputValue(inputElement, "023");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("02/__");
+
+			changeInputValue(inputElement, "");
+			fixture.detectChanges();
+
+			changeInputValue(inputElement, "0229");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("02/29");
+		});
 	});
 
 	describe("with ngModel", () => {
@@ -188,13 +252,13 @@ describe("TimestampMaskDirective", () => {
 				fixture.detectChanges();
 				expect(hostComponent.ngModelValue).toBe("");
 
-				changeInputValue(inputElement, "123", eventType);
+				changeInputValue(inputElement, "1203", eventType);
 				fixture.detectChanges();
 
-				expect(hostComponent.ngModelValue).toBe("12/3_/____");
+				expect(hostComponent.ngModelValue).toBe("12/03/____");
 			}
 
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
@@ -234,10 +298,10 @@ describe("TimestampMaskDirective", () => {
 		});
 
 		it("should remove the mask when the config is undefined", () => {
-			changeInputValue(inputElement, "123");
+			changeInputValue(inputElement, "1203");
 			fixture.detectChanges();
 
-			expect(hostComponent.ngModelValue).toBe("12/3_/____");
+			expect(hostComponent.ngModelValue).toBe("12/03/____");
 
 			hostComponent.timestampMaskConfig = <any>undefined;
 			fixture.detectChanges();
@@ -306,10 +370,10 @@ describe("TimestampMaskDirective", () => {
 				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 				mockValueChangeObserver.next.calls.reset();
-				changeInputValue(inputElement, "123", eventType);
+				changeInputValue(inputElement, "1203", eventType);
 				fixture.detectChanges();
 
-				expect(hostComponent.formControl.value).toBe("12/3_/____");
+				expect(hostComponent.formControl.value).toBe("12/03/____");
 				// FIXME Check why it is called twice instead of once
 				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
@@ -317,7 +381,7 @@ describe("TimestampMaskDirective", () => {
 			}
 
 			mockValueChangeObserver.next.calls.reset();
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
@@ -355,10 +419,10 @@ describe("TimestampMaskDirective", () => {
 		});
 
 		it("should refresh the mask whenever the configuration changes", () => {
-			changeInputValue(inputElement, "123");
+			changeInputValue(inputElement, "1203");
 			fixture.detectChanges();
 
-			expect(hostComponent.formControl.value).toBe("12/3_/____");
+			expect(hostComponent.formControl.value).toBe("12/03/____");
 			// FIXME Check why it is called twice instead of once
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
@@ -366,18 +430,18 @@ describe("TimestampMaskDirective", () => {
 			hostComponent.timestampMaskConfig = { ...timestampMaskConfig, format: "DD-MM" };
 			fixture.detectChanges();
 
-			expect(hostComponent.formControl.value).toBe("12-3_");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(hostComponent.formControl.value).toBe("12-03");
+
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});
 
 		it("should remove the mask when the config is undefined", () => {
-			changeInputValue(inputElement, "123");
+			changeInputValue(inputElement, "1203");
 			fixture.detectChanges();
 
-			expect(hostComponent.formControl.value).toBe("12/3_/____");
+			expect(hostComponent.formControl.value).toBe("12/03/____");
 			// FIXME Check why it is called twice instead of once
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
@@ -392,7 +456,7 @@ describe("TimestampMaskDirective", () => {
 
 			expect(hostComponent.formControl.value).toBe("whatever"); // no mask at all
 			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});

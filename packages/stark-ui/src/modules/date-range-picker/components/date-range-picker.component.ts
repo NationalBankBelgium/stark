@@ -30,10 +30,10 @@ import get from "lodash-es/get";
 import isEqual from "lodash-es/isEqual";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
-import { StarkDateInput, StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker/components";
+import { StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker/components";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
-import { isStarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
+import { isStarkTimestampMaskConfig, StarkDateInput } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
 import moment from "moment";
 
 /**
