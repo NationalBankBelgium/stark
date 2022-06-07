@@ -222,6 +222,13 @@ export const APP_MENU_CONFIG: StarkMenuConfig = {
 							targetState: "demo-ui.input-mask-directives"
 						},
 						{
+							id: "menu-stark-ui-input-mask-new",
+							label: "SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK_NEW.TITLE",
+							isVisible: true,
+							isEnabled: true,
+							targetState: "demo-ui.input-mask-directives-new"
+						},
+						{
 							id: "menu-stark-ui-restrict-input",
 							label: "SHOWCASE.DEMO.DIRECTIVES.RESTRICT_INPUT.TITLE",
 							isVisible: true,

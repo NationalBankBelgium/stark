@@ -21,6 +21,7 @@ import {
 	StarkDropdownModule,
 	StarkGenericSearchModule,
 	StarkInputMaskDirectivesModule,
+	StarkInputMaskDirectivesModuleNew,
 	StarkRestrictInputDirectiveModule,
 	StarkLanguageSelectorModule,
 	StarkMinimapModule,
@@ -63,7 +64,8 @@ import {
 	DemoToastPageComponent,
 	DemoTransformInputDirectivePageComponent,
 	DemoDateTimePickerPageComponent,
-	demoGenericSearchStoreKey
+	demoGenericSearchStoreKey,
+	DemoInputMaskDirectivesPageNewComponent
 } from "./pages";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
@@ -106,6 +108,7 @@ import {
 		StarkDropdownModule,
 		StarkGenericSearchModule,
 		StarkInputMaskDirectivesModule,
+		StarkInputMaskDirectivesModuleNew,
 		StarkRestrictInputDirectiveModule,
 		StarkTransformInputDirectiveModule,
 		StarkLanguageSelectorModule,
@@ -134,6 +137,7 @@ import {
 		DemoLanguageSelectorPageComponent,
 		DemoLogoutPageComponent,
 		DemoInputMaskDirectivesPageComponent,
+		DemoInputMaskDirectivesPageNewComponent,
 		DemoMenuPageComponent,
 		DemoMessagePanePageComponent,
 		DemoMinimapPageComponent,
@@ -174,6 +178,7 @@ import {
 		DemoLanguageSelectorPageComponent,
 		DemoLogoutPageComponent,
 		DemoInputMaskDirectivesPageComponent,
+		DemoInputMaskDirectivesPageNewComponent,
 		DemoMenuPageComponent,
 		DemoMessagePanePageComponent,
 		DemoMinimapPageComponent,
