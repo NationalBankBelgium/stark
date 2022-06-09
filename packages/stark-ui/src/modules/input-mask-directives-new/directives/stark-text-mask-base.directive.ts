@@ -16,11 +16,12 @@ import {
 	SimpleChanges
 } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE } from "@angular/forms";
+import { StarkTimestampMaskConfigNew } from "./timestamp-mask-config-new.intf";
 
 @Injectable()
 export abstract class StarkTextMaskBaseDirective<
 		Opts extends AnyMaskedOptions,
-		MaskConfig extends StarkTextMaskBaseConfigNew | StarkNumberMaskConfigNew
+		MaskConfig extends StarkTextMaskBaseConfigNew | StarkNumberMaskConfigNew | StarkTimestampMaskConfigNew
 	>
 	extends IMaskDirective<Opts>
 	implements AfterViewInit, OnDestroy, OnChanges
@@ -85,7 +86,7 @@ export abstract class StarkTextMaskBaseDirective<
 	 * @param defaultMask
 	 * @protected
 	 */
-	protected abstract normalizedMaskConfig(maskConfig: MaskConfig | string, defaultMask: MaskConfig): any;
+	protected abstract normalizedMaskConfig(maskConfig: MaskConfig | string, defaultMask: MaskConfig): Opts;
 
 	/**
 	 * Add the event input listener after the mask has been created

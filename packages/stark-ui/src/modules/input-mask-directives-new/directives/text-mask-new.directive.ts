@@ -14,7 +14,7 @@ import {
 } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { IMaskFactory } from "angular-imask";
-import { AnyMaskedOptions } from "imask";
+import IMask from "imask";
 import { StarkTextMaskConfigNew } from "./text-mask-new-config.intf";
 import { StarkTextMaskBaseDirective } from "./stark-text-mask-base.directive";
 
@@ -41,8 +41,8 @@ export const STARK_TEXT_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	exportAs: "starkTextMaskNew",
 	providers: [STARK_TEXT_MASK_NEW_VALUE_ACCESSOR]
 })
-export class StarkTextMaskNewDirective<Opts extends AnyMaskedOptions>
-	extends StarkTextMaskBaseDirective<Opts, StarkTextMaskConfigNew>
+export class StarkTextMaskNewDirective
+	extends StarkTextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfigNew>
 	implements AfterViewInit, OnDestroy, OnChanges
 {
 	/**
@@ -80,9 +80,14 @@ export class StarkTextMaskNewDirective<Opts extends AnyMaskedOptions>
 	 * @param defaultMask
 	 * @protected
 	 */
-	protected override normalizedMaskConfig(maskConfig: StarkTextMaskConfigNew | string, defaultMask: StarkTextMaskConfigNew): any {
+	protected override normalizedMaskConfig(
+		maskConfig: StarkTextMaskConfigNew | string,
+		defaultMask: StarkTextMaskConfigNew
+	): IMask.MaskedPatternOptions {
 		if (!maskConfig) {
-			return undefined;
+			return {
+				mask: ""
+			};
 		}
 		const mask: StarkTextMaskConfigNew = this.mergedMaskConfig(maskConfig, defaultMask);
 		const maskActive: boolean = typeof mask.mask === "boolean" ? mask.mask : true;
@@ -97,7 +102,9 @@ export class StarkTextMaskNewDirective<Opts extends AnyMaskedOptions>
 				placeholderChar: mask.placeholderChar
 			};
 		}
-		return undefined;
+		return {
+			mask: ""
+		};
 	}
 
 	protected override mergedMaskConfig(

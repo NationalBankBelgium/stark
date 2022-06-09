@@ -142,7 +142,7 @@
 					type="text"
 					(input)="logChange($event)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.TIMESTAMP_DMY_PLACEHOLDER' | translate"
-					[starkTimestampMask]="timestampDMYMaskConfig"
+					[starkTimestampMaskNew]="timestampDMYMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -155,7 +155,7 @@
 					[(ngModel)]="timestamp"
 					(input)="logModelChange(timestamp)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.TIMESTAMP_MDY_PLACEHOLDER' | translate"
-					[starkTimestampMask]="timestampMDYMaskConfig"
+					[starkTimestampMaskNew]="timestampMDYMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -167,7 +167,7 @@
 					type="text"
 					[formControl]="fullDateField"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.FULL_DATE_DMY_PLACEHOLDER' | translate"
-					[starkTimestampMask]="dateMaskConfig"
+					[starkTimestampMaskNew]="dateMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -179,7 +179,7 @@
 					type="text"
 					(input)="logChange($event)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.DAY_MONTH_PLACEHOLDER' | translate"
-					[starkTimestampMask]="dayMonthMaskConfig"
+					[starkTimestampMaskNew]="dayMonthMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -192,7 +192,7 @@
 					[(ngModel)]="monthDay"
 					(input)="logModelChange(monthDay)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MONTH_DAY_PLACEHOLDER' | translate"
-					[starkTimestampMask]="monthDayMaskConfig"
+					[starkTimestampMaskNew]="monthDayMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -204,7 +204,7 @@
 					type="text"
 					[formControl]="timeField"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.TIME_PLACEHOLDER' | translate"
-					[starkTimestampMask]="timeMaskConfig"
+					[starkTimestampMaskNew]="timeMaskConfig"
 				/>
 			</mat-form-field>
 		</div>

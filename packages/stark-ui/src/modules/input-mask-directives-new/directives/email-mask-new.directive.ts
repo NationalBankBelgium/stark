@@ -2,7 +2,7 @@ import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { StarkTextMaskBaseDirective } from "./stark-text-mask-base.directive";
 import { StarkTextMaskConfigNew } from "./text-mask-new-config.intf";
-import { AnyMaskedOptions } from "imask";
+import IMask from "imask";
 import { IMaskFactory } from "angular-imask";
 
 /**
@@ -31,7 +31,7 @@ export const STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	exportAs: "starkEmailMaskNew",
 	providers: [STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR]
 })
-export class StarkEmailMaskNewDirective<Opts extends AnyMaskedOptions> extends StarkTextMaskBaseDirective<Opts, StarkTextMaskConfigNew> {
+export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfigNew> {
 	@Input("starkEmailMaskNew")
 	public override maskConfig: StarkTextMaskConfigNew | string = {
 		mask: false
@@ -49,7 +49,7 @@ export class StarkEmailMaskNewDirective<Opts extends AnyMaskedOptions> extends S
 
 	protected override defaultMask(): StarkTextMaskConfigNew {
 		return {
-			mask: "name@domain.tdl",
+			mask: "name`@domain`.tdl",
 			blocks: {
 				name: { mask: /^[\w-\\.]+$/g },
 				domain: { mask: /^[\w-]+$/g },
