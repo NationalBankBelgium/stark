@@ -4,6 +4,7 @@ import { StarkTextMaskBaseDirective } from "./stark-text-mask-base.directive";
 import { StarkTextMaskConfigNew } from "./text-mask-new-config.intf";
 import IMask from "imask";
 import { IMaskFactory } from "angular-imask";
+import { BooleanInput } from "@angular/cdk/coercion";
 
 /**
  * @ignore
@@ -20,6 +21,11 @@ export const STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	multi: true
 };
 
+/**
+ * @ignore
+ */
+const DEFAULT_EMAIL_PATTERN = "name@domain.tdl";
+
 @Directive({
 	host: {
 		"(input)": "_handleInput($event)",
@@ -32,10 +38,13 @@ export const STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	providers: [STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR]
 })
 export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfigNew> {
+	/* tslint:disable:no-input-rename */
 	@Input("starkEmailMaskNew")
-	public override maskConfig: StarkTextMaskConfigNew | string = {
-		mask: false
-	};
+	public override maskConfig = true;
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_maskConfig: BooleanInput;
 
 	public constructor(
 		_renderer: Renderer2,
@@ -49,7 +58,7 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 
 	protected override defaultMask(): StarkTextMaskConfigNew {
 		return {
-			mask: "name`@domain`.tdl",
+			mask: DEFAULT_EMAIL_PATTERN,
 			blocks: {
 				name: { mask: /^[\w-\\.]+$/g },
 				domain: { mask: /^[\w-]+$/g },
@@ -62,12 +71,14 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 		};
 	}
 
-	protected override normalizedMaskConfig(maskConfig: string | StarkTextMaskConfigNew, defaultMask: StarkTextMaskConfigNew): any {
+	protected override normalizedMaskConfig(
+		maskConfig: boolean | string | StarkTextMaskConfigNew,
+		defaultMask: StarkTextMaskConfigNew
+	): any {
 		const mask: StarkTextMaskConfigNew = this.mergedMaskConfig(maskConfig, defaultMask);
 		return {
 			...mask,
 			...defaultMask,
-			mask: "name@domain.tdl",
 			blocks: {
 				name: { mask: /^[\w-\\.]+$/g },
 				domain: { mask: /^[\w-]+$/g },
@@ -77,9 +88,12 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 	}
 
 	protected override mergedMaskConfig(
-		maskConfig: StarkTextMaskConfigNew | string,
+		maskConfig: StarkTextMaskConfigNew | string | boolean,
 		defaultMask: StarkTextMaskConfigNew
 	): StarkTextMaskConfigNew {
+		if (typeof maskConfig === "boolean") {
+			return { ...defaultMask, mask: maskConfig ? DEFAULT_EMAIL_PATTERN : "" };
+		}
 		if (typeof maskConfig === "string") {
 			return { ...defaultMask, mask: maskConfig };
 		}

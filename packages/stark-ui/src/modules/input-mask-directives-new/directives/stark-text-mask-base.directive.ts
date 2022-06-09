@@ -18,6 +18,8 @@ import {
 import { COMPOSITION_BUFFER_MODE } from "@angular/forms";
 import { StarkTimestampMaskConfigNew } from "./timestamp-mask-config-new.intf";
 
+export type MaskConfigType = StarkTextMaskBaseConfigNew | StarkNumberMaskConfigNew | StarkTimestampMaskConfigNew | string | boolean;
+
 @Injectable()
 export abstract class StarkTextMaskBaseDirective<
 		Opts extends AnyMaskedOptions,
@@ -29,9 +31,7 @@ export abstract class StarkTextMaskBaseDirective<
 	/**
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
-
-	/* tslint:disable:no-input-rename */
-	public maskConfig: MaskConfig | string = "";
+	public maskConfig: MaskConfigType = "";
 
 	protected abstract defaultMask(): MaskConfig;
 
@@ -60,6 +60,7 @@ export abstract class StarkTextMaskBaseDirective<
 	/**
 	 * Component lifecycle hook
 	 */
+	// tslint:disable-next-line:contextual-lifecycle
 	public override ngOnChanges(changes: SimpleChanges): void {
 		const maskRefDefine = !!this.maskRef;
 		// if maskConfig changes then apply the change to the imask and propagate changes.
@@ -86,11 +87,12 @@ export abstract class StarkTextMaskBaseDirective<
 	 * @param defaultMask
 	 * @protected
 	 */
-	protected abstract normalizedMaskConfig(maskConfig: MaskConfig | string, defaultMask: MaskConfig): Opts;
+	protected abstract normalizedMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): Opts;
 
 	/**
 	 * Add the event input listener after the mask has been created
 	 */
+	// tslint:disable-next-line:contextual-lifecycle
 	public override ngAfterViewInit(): void {
 		super.ngAfterViewInit();
 		if (this.maskRef) {
@@ -123,5 +125,5 @@ export abstract class StarkTextMaskBaseDirective<
 		}
 	}
 
-	protected abstract mergedMaskConfig(maskConfig: MaskConfig | string, defaultMask: MaskConfig): MaskConfig;
+	protected abstract mergedMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): MaskConfig;
 }

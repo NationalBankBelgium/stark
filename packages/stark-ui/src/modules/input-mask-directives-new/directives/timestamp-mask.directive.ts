@@ -3,7 +3,7 @@ import IMask from "imask";
 import { StarkTimestampMaskConfigNew } from "./timestamp-mask-config-new.intf";
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2 } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
-import * as moment from "moment";
+import moment from "moment";
 import { IMaskFactory } from "angular-imask";
 
 /**
@@ -212,7 +212,9 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 				}
 				return value;
 			},
-			blocks: this.createBlocks(!!mask.format ? mask.format : DEFAULT_DATE_TIME_FORMAT)
+			blocks: this.createBlocks(!!mask.format ? mask.format : DEFAULT_DATE_TIME_FORMAT),
+			min: !!mask.minDate ? (moment.isMoment(mask.minDate) ? mask.minDate.toDate() : mask.minDate) : undefined,
+			max: !!mask.maxDate ? (moment.isMoment(mask.maxDate) ? mask.maxDate.toDate() : mask.maxDate) : undefined
 		};
 		console.log(val);
 		return val;
