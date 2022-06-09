@@ -54,16 +54,6 @@ export class StarkTextMaskNewDirective
 		mask: false
 	};
 
-	protected override defaultMask(): StarkTextMaskConfigNew {
-		return {
-			mask: false,
-			guide: true,
-			eager: false,
-			keepCharPositions: true,
-			placeholderChar: "_"
-		};
-	}
-
 	public constructor(
 		_renderer: Renderer2,
 		_elementRef: ElementRef,
@@ -72,6 +62,16 @@ export class StarkTextMaskNewDirective
 		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
 	) {
 		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
+	}
+
+	protected override defaultMask(): StarkTextMaskConfigNew {
+		return {
+			mask: false,
+			guide: true,
+			eager: false,
+			keepCharPositions: true,
+			placeholderChar: "_"
+		};
 	}
 
 	/**

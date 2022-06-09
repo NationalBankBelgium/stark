@@ -24,7 +24,7 @@ export const STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR: Provider = {
 /**
  * @ignore
  */
-const DEFAULT_EMAIL_PATTERN = "name@domain.tdl";
+const DEFAULT_EMAIL_PATTERN = "name@domain.tld";
 
 @Directive({
 	host: {
@@ -38,13 +38,13 @@ const DEFAULT_EMAIL_PATTERN = "name@domain.tdl";
 	providers: [STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR]
 })
 export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfigNew> {
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_maskConfig: BooleanInput;
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
 	/* tslint:disable:no-input-rename */
 	@Input("starkEmailMaskNew")
 	public override maskConfig = true;
-
-	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
-	public static ngAcceptInputType_maskConfig: BooleanInput;
 
 	public constructor(
 		_renderer: Renderer2,
@@ -62,7 +62,7 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 			blocks: {
 				name: { mask: /^[\w-\\.]+$/g },
 				domain: { mask: /^[\w-]+$/g },
-				tdl: { mask: /^\w+$/g }
+				tld: { mask: /^\w+$/g }
 			},
 			guide: true,
 			eager: false,
@@ -82,7 +82,7 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 			blocks: {
 				name: { mask: /^[\w-\\.]+$/g },
 				domain: { mask: /^[\w-]+$/g },
-				tdl: { mask: /^\w+$/g }
+				tld: { mask: /^\w+$/g }
 			}
 		};
 	}

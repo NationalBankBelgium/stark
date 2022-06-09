@@ -124,7 +124,12 @@ describe("TextMaskDirective", () => {
 
 			expect(inputElement.nativeElement.value).toBe("12/3_");
 
-			hostComponent.textMaskConfig = { ...textMaskConfig, mask: "0/0/00", definitions: undefined, placeholderChar: "-" };
+			hostComponent.textMaskConfig = {
+				...textMaskConfig,
+				mask: "0/0/00",
+				definitions: undefined,
+				placeholderChar: "-"
+			};
 			fixture.detectChanges();
 
 			expect(inputElement.nativeElement.value).toBe("1/2/3-");

@@ -50,6 +50,10 @@ export const STARK_NUMBER_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	providers: [STARK_NUMBER_MASK_NEW_VALUE_ACCESSOR]
 })
 export class StarkNumberMaskNewDirective extends StarkTextMaskBaseDirective<IMask.MaskedNumberOptions, StarkNumberMaskConfigNew> {
+	/* tslint:disable:no-input-rename */
+	@Input("starkNumberMaskNew")
+	public override maskConfig: StarkNumberMaskConfigNew = {};
+
 	public constructor(
 		_renderer: Renderer2,
 		_elementRef: ElementRef,
@@ -58,26 +62,6 @@ export class StarkNumberMaskNewDirective extends StarkTextMaskBaseDirective<IMas
 		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
 	) {
 		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
-	}
-
-	/* tslint:disable:no-input-rename */
-	@Input("starkNumberMaskNew")
-	public override maskConfig: StarkNumberMaskConfigNew = {};
-
-	protected override defaultMask(): StarkNumberMaskConfigNew {
-		return {
-			prefix: "",
-			suffix: "",
-			allowDecimal: false,
-			allowLeadingZeroes: false,
-			allowNegative: true,
-			decimalLimit: 2,
-			decimalSymbol: ".",
-			requireDecimal: false,
-			includeThousandsSeparator: true,
-			thousandsSeparatorSymbol: ",",
-			integerLimit: undefined
-		};
 	}
 
 	public override normalizedMaskConfig(maskConfig: string | StarkNumberMaskConfigNew, defaultMask: StarkNumberMaskConfigNew): any {
@@ -117,5 +101,22 @@ export class StarkNumberMaskNewDirective extends StarkTextMaskBaseDirective<IMas
 			return { ...defaultMask };
 		}
 		return { ...defaultMask, ...maskConfig };
+	}
+
+	protected override defaultMask(): StarkNumberMaskConfigNew {
+		return {
+			prefix: "",
+			suffix: "",
+			allowDecimal: false,
+			allowLeadingZeroes: false,
+			allowNegative: true,
+			decimalLimit: 2,
+			decimalSymbol: ".",
+			requireDecimal: false,
+			includeThousandsSeparator: true,
+			thousandsSeparatorSymbol: ",",
+			integerLimit: undefined,
+			guide: true
+		};
 	}
 }

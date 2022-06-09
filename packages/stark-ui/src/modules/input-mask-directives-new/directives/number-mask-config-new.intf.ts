@@ -75,4 +75,12 @@ export interface StarkNumberMaskConfigNew {
 	 * Default: `false`
 	 */
 	allowLeadingZeroes?: boolean;
+
+	/**
+	 * show prefix and suffix on typing
+	 *
+	 * default: 'true'
+	 */
+
+	guide?: boolean;
 }

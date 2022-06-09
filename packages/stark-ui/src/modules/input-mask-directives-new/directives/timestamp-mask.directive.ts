@@ -62,6 +62,57 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 		};
 	}
 
+	protected override mergedMaskConfig(
+		maskConfig: string | StarkTimestampMaskConfigNew,
+		defaultMask: StarkTimestampMaskConfigNew
+	): StarkTimestampMaskConfigNew {
+		let mask: StarkTimestampMaskConfigNew;
+		if (typeof maskConfig === "string") {
+			if (maskConfig === "") {
+				mask = {
+					format: DEFAULT_DATE_TIME_FORMAT
+				};
+			} else {
+				mask = {
+					format: maskConfig
+				};
+			}
+		} else {
+			mask = maskConfig;
+		}
+
+		return {
+			...defaultMask,
+			...mask
+		};
+	}
+
+	protected override normalizedMaskConfig(
+		maskConfig: string | StarkTimestampMaskConfigNew,
+		defaultMask: StarkTimestampMaskConfigNew
+	): IMask.MaskedDateOptions {
+		const mask: StarkTimestampMaskConfigNew = this.mergedMaskConfig(maskConfig, defaultMask);
+		const val = {
+			mask: Date,
+			pattern: mask.format,
+			format: mask.formatFn,
+			parse: (str: string): Date => {
+				if (!mask.parseFn) {
+					throw new Error("Parse function must be defined");
+				}
+				const value = mask.parseFn(str);
+				if (moment.isMoment(value)) {
+					return value.toDate();
+				}
+				return value;
+			},
+			blocks: this.createBlocks(!!mask.format ? mask.format : DEFAULT_DATE_TIME_FORMAT),
+			min: !!mask.minDate ? (moment.isMoment(mask.minDate) ? mask.minDate.toDate() : mask.minDate) : undefined,
+			max: !!mask.maxDate ? (moment.isMoment(mask.maxDate) ? mask.maxDate.toDate() : mask.maxDate) : undefined
+		};
+		return val;
+	}
+
 	private defaultFormatFunction(): (value: Date | moment.Moment) => string {
 		let format = DEFAULT_DATE_TIME_FORMAT;
 		if (typeof this.maskConfig === "string") {
@@ -71,7 +122,6 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 		}
 
 		return (value: Date | moment.Moment): string => {
-			console.log("format", value);
 			let val: moment.Moment;
 			if (moment.isMoment(value)) {
 				val = value;
@@ -105,31 +155,6 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 				return retVal;
 			}
 			return retVal.toDate();
-		};
-	}
-
-	protected override mergedMaskConfig(
-		maskConfig: string | StarkTimestampMaskConfigNew,
-		defaultMask: StarkTimestampMaskConfigNew
-	): StarkTimestampMaskConfigNew {
-		let mask: StarkTimestampMaskConfigNew;
-		if (typeof maskConfig === "string") {
-			if (maskConfig === "") {
-				mask = {
-					format: DEFAULT_DATE_TIME_FORMAT
-				};
-			} else {
-				mask = {
-					format: maskConfig
-				};
-			}
-		} else {
-			mask = maskConfig;
-		}
-
-		return {
-			...defaultMask,
-			...mask
 		};
 	}
 
@@ -187,36 +212,5 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 		}
 		console.log(blocks);
 		return blocks;
-	}
-
-	protected override normalizedMaskConfig(
-		maskConfig: string | StarkTimestampMaskConfigNew,
-		defaultMask: StarkTimestampMaskConfigNew
-	): IMask.MaskedDateOptions {
-		const mask: StarkTimestampMaskConfigNew = this.mergedMaskConfig(maskConfig, defaultMask);
-		console.log(mask.format);
-		const val = {
-			mask: Date,
-			pattern: mask.format,
-			format: mask.formatFn,
-			parse: (str: string): Date => {
-				if (!mask.parseFn) {
-					throw new Error("Parse function must be defined");
-				}
-				console.log("parse", str);
-
-				const value = mask.parseFn(str);
-				console.log(value);
-				if (moment.isMoment(value)) {
-					return value.toDate();
-				}
-				return value;
-			},
-			blocks: this.createBlocks(!!mask.format ? mask.format : DEFAULT_DATE_TIME_FORMAT),
-			min: !!mask.minDate ? (moment.isMoment(mask.minDate) ? mask.minDate.toDate() : mask.minDate) : undefined,
-			max: !!mask.maxDate ? (moment.isMoment(mask.maxDate) ? mask.maxDate.toDate() : mask.maxDate) : undefined
-		};
-		console.log(val);
-		return val;
 	}
 }

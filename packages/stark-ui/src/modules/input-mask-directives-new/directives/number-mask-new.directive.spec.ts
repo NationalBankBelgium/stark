@@ -2,7 +2,7 @@
 import { Component, DebugElement } from "@angular/core";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { ComponentFixture, waitForAsync, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Observer } from "rxjs";
 import { StarkNumberMaskNewDirective } from "./number-mask-new.directive";
 import { StarkNumberMaskConfigNew } from "./number-mask-config-new.intf";
@@ -130,7 +130,12 @@ describe("NumberMaskDirective", () => {
 
 			expect(inputElement.nativeElement.value).toBe("12,345");
 
-			hostComponent.numberMaskConfig = { ...numberMaskConfig, prefix: "%", suffix: " percent", thousandsSeparatorSymbol: "-" };
+			hostComponent.numberMaskConfig = {
+				...numberMaskConfig,
+				prefix: "%",
+				suffix: " percent",
+				thousandsSeparatorSymbol: "-"
+			};
 			fixture.detectChanges();
 
 			changeInputValue(inputElement, "12345");
@@ -232,7 +237,12 @@ describe("NumberMaskDirective", () => {
 
 			expect(hostComponent.ngModelValue).toBe("12,345");
 
-			hostComponent.numberMaskConfig = { ...numberMaskConfig, prefix: "%", suffix: " percent", thousandsSeparatorSymbol: "-" };
+			hostComponent.numberMaskConfig = {
+				...numberMaskConfig,
+				prefix: "%",
+				suffix: " percent",
+				thousandsSeparatorSymbol: "-"
+			};
 			fixture.detectChanges();
 
 			expect(hostComponent.ngModelValue).toBe("%12-345 percent");
@@ -362,7 +372,12 @@ describe("NumberMaskDirective", () => {
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 			mockValueChangeObserver.next.calls.reset();
-			hostComponent.numberMaskConfig = { ...numberMaskConfig, prefix: "%", suffix: " percent", thousandsSeparatorSymbol: "-" };
+			hostComponent.numberMaskConfig = {
+				...numberMaskConfig,
+				prefix: "%",
+				suffix: " percent",
+				thousandsSeparatorSymbol: "-"
+			};
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("%12-345 percent");

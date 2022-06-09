@@ -32,14 +32,10 @@ export abstract class StarkTextMaskBaseDirective<
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
 	public maskConfig: MaskConfigType = "";
-
-	protected abstract defaultMask(): MaskConfig;
-
 	/**
 	 * @ignore
 	 */
 	private elementRef: ElementRef;
-
 	/**
 	 * @ignore
 	 */
@@ -82,14 +78,6 @@ export abstract class StarkTextMaskBaseDirective<
 	}
 
 	/**
-	 * merger default mask and current mask and transform option from StarkTextMaskConfig to maskOption for imaskjs
-	 * @param maskConfig
-	 * @param defaultMask
-	 * @protected
-	 */
-	protected abstract normalizedMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): Opts;
-
-	/**
 	 * Add the event input listener after the mask has been created
 	 */
 	// tslint:disable-next-line:contextual-lifecycle
@@ -121,9 +109,20 @@ export abstract class StarkTextMaskBaseDirective<
 	public inputAfterMaskRef(_value: any): void {
 		const mergerConfig: MaskConfig = this.mergedMaskConfig(this.maskConfig, this.defaultMask());
 		if (mergerConfig["guide"] && this.maskRef) {
+			console.log(this.maskRef.unmaskedValue);
 			this.maskRef.updateOptions({ lazy: this.maskRef.unmaskedValue === "" });
 		}
 	}
+
+	protected abstract defaultMask(): MaskConfig;
+
+	/**
+	 * merger default mask and current mask and transform option from StarkTextMaskConfig to maskOption for imaskjs
+	 * @param maskConfig
+	 * @param defaultMask
+	 * @protected
+	 */
+	protected abstract normalizedMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): Opts;
 
 	protected abstract mergedMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): MaskConfig;
 }
