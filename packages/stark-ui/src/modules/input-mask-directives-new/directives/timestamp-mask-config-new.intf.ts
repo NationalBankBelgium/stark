@@ -21,7 +21,7 @@ export interface StarkTimestampMaskConfigNew {
 
 	/**
 	 * custom parsing function
-	 * @param value
+	 * @param value the input value to parse
 	 */
 	parseFn?: (value: string) => Date | Moment;
 
