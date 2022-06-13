@@ -64,11 +64,11 @@ export class StarkNumberMaskNewDirective extends StarkTextMaskBaseDirective<IMas
 		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
 	}
 
-	public override normalizedMaskConfig(maskConfig: string | StarkNumberMaskConfigNew, defaultMask: StarkNumberMaskConfigNew): any {
+	public override normalizeMaskConfig(maskConfig: string | StarkNumberMaskConfigNew, defaultMask: StarkNumberMaskConfigNew): any {
 		if (!maskConfig) {
 			return undefined;
 		}
-		const mask: StarkNumberMaskConfigNew = this.mergedMaskConfig(maskConfig, defaultMask);
+		const mask: StarkNumberMaskConfigNew = this.mergeMaskConfig(maskConfig, defaultMask);
 
 		const numberMask: IMask.MaskedNumberOptions = {
 			mask: Number,
@@ -93,7 +93,7 @@ export class StarkNumberMaskNewDirective extends StarkTextMaskBaseDirective<IMas
 		return numberMask;
 	}
 
-	public override mergedMaskConfig(
+	public override mergeMaskConfig(
 		maskConfig: string | StarkNumberMaskConfigNew,
 		defaultMask: StarkNumberMaskConfigNew
 	): StarkNumberMaskConfigNew {

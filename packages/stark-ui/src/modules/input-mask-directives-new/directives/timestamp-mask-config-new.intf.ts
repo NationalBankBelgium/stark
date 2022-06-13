@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import IMask from "imask";
 
 export interface StarkTimestampMaskConfigNew {
 	/**
@@ -24,6 +25,12 @@ export interface StarkTimestampMaskConfigNew {
 	 * @param value the input value to parse
 	 */
 	parseFn?: (value: string) => Date | Moment;
+
+	/**
+	 * validate typed text
+	 * @param value the typed text
+	 */
+	validateFn?: (value: string, mask: IMask.Masked<DateConstructor>, appends: any) => boolean;
 
 	/**
 	 * show guide

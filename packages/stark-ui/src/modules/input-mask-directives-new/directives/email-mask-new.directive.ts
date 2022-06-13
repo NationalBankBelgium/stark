@@ -71,11 +71,11 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 		};
 	}
 
-	protected override normalizedMaskConfig(
+	protected override normalizeMaskConfig(
 		maskConfig: boolean | string | StarkTextMaskConfigNew,
 		defaultMask: StarkTextMaskConfigNew
 	): any {
-		const mask: StarkTextMaskConfigNew = this.mergedMaskConfig(maskConfig, defaultMask);
+		const mask: StarkTextMaskConfigNew = this.mergeMaskConfig(maskConfig, defaultMask);
 		return {
 			...mask,
 			...defaultMask,
@@ -87,7 +87,7 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 		};
 	}
 
-	protected override mergedMaskConfig(
+	protected override mergeMaskConfig(
 		maskConfig: StarkTextMaskConfigNew | string | boolean,
 		defaultMask: StarkTextMaskConfigNew
 	): StarkTextMaskConfigNew {

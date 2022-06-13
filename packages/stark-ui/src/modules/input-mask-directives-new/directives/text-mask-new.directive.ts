@@ -80,7 +80,7 @@ export class StarkTextMaskNewDirective
 	 * @param defaultMask
 	 * @protected
 	 */
-	protected override normalizedMaskConfig(
+	protected override normalizeMaskConfig(
 		maskConfig: StarkTextMaskConfigNew | string,
 		defaultMask: StarkTextMaskConfigNew
 	): IMask.MaskedPatternOptions {
@@ -89,7 +89,7 @@ export class StarkTextMaskNewDirective
 				mask: ""
 			};
 		}
-		const mask: StarkTextMaskConfigNew = this.mergedMaskConfig(maskConfig, defaultMask);
+		const mask: StarkTextMaskConfigNew = this.mergeMaskConfig(maskConfig, defaultMask);
 		const maskActive: boolean = typeof mask.mask === "boolean" ? mask.mask : true;
 
 		if (maskActive) {
@@ -107,7 +107,7 @@ export class StarkTextMaskNewDirective
 		};
 	}
 
-	protected override mergedMaskConfig(
+	protected override mergeMaskConfig(
 		maskConfig: StarkTextMaskConfigNew | string,
 		defaultMask: StarkTextMaskConfigNew
 	): StarkTextMaskConfigNew {

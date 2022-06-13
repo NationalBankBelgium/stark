@@ -5,6 +5,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkTextMaskConfigNew, StarkTextMasksNew, StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components/reference-block";
 import { StarkNumberMaskConfigNew } from "@nationalbankbelgium/stark-ui/src/modules/input-mask-directives-new/directives/number-mask-config-new.intf";
+import * as moment from "moment";
 
 @Component({
 	selector: "showcase-demo-mask-directives-new",
@@ -88,6 +89,19 @@ export class DemoInputMaskDirectivesPageNewComponent {
 	public timeField = new FormControl();
 	public percentageField = new FormControl();
 
+	public minMaxField = new FormControl();
+	public minMaxSameYearField = new FormControl();
+	public minMaxSameMonthField = new FormControl();
+
+	public minDate: moment.Moment;
+	public maxDate: moment.Moment;
+
+	public minDateSameYear: moment.Moment;
+	public maxDateSameYear: moment.Moment;
+
+	public minDateSameMonth: moment.Moment;
+	public maxDateSameMonth: moment.Moment;
+
 	public referenceList: ReferenceLink[] = [
 		{
 			label: "Stark Email Mask directive",
@@ -114,6 +128,25 @@ export class DemoInputMaskDirectivesPageNewComponent {
 			this.timeField.valueChanges,
 			this.percentageField.valueChanges
 		).subscribe((changedValue: string) => this.logger.debug("formControl value changed: ", changedValue));
+
+		this.minDate = moment().startOf("year");
+		this.minDate.set("year", 1900);
+		this.maxDate = moment().endOf("year");
+		this.maxDate.set("year", 2100);
+
+		this.minDateSameYear = moment().startOf("quarter");
+		this.maxDateSameYear = moment().endOf("quarter");
+
+		this.minDateSameMonth = moment().startOf("month");
+		this.maxDateSameMonth = moment().endOf("month");
+
+		if (moment().get("date") > 15) {
+			this.minDateSameMonth.set("date", 15);
+		} else {
+			this.maxDateSameMonth.set("date", 15);
+		}
+
+		console.log(this.minDateSameMonth, this.maxDateSameMonth);
 	}
 
 	public logChange(event: Event): void {

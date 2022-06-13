@@ -49,8 +49,12 @@ export abstract class StarkTextMaskBaseDirective<
 		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
 	) {
 		super(_elementRef, _renderer, _factory, _platformId, _compositionMode);
-		this.imask = this.normalizedMaskConfig(this.maskConfig, this.defaultMask());
+		this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
 		this.elementRef = _elementRef;
+	}
+
+	protected rebuildMaskNgOnChanges(changes: SimpleChanges): boolean {
+		return !!changes["maskConfig"];
 	}
 
 	/**
@@ -60,9 +64,9 @@ export abstract class StarkTextMaskBaseDirective<
 	public override ngOnChanges(changes: SimpleChanges): void {
 		const maskRefDefine = !!this.maskRef;
 		// if maskConfig changes then apply the change to the imask and propagate changes.
-		if (!!changes["maskConfig"]) {
+		if (this.rebuildMaskNgOnChanges(changes)) {
 			const oldValue = this.imask;
-			this.imask = this.normalizedMaskConfig(this.maskConfig, this.defaultMask());
+			this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
 			changes = { ...changes, imask: new SimpleChange(oldValue, this.imask, true) };
 		}
 		super.ngOnChanges(changes);
@@ -107,9 +111,8 @@ export abstract class StarkTextMaskBaseDirective<
 	 * @param _value
 	 */
 	public inputAfterMaskRef(_value: any): void {
-		const mergerConfig: MaskConfig = this.mergedMaskConfig(this.maskConfig, this.defaultMask());
+		const mergerConfig: MaskConfig = this.mergeMaskConfig(this.maskConfig, this.defaultMask());
 		if (mergerConfig["guide"] && this.maskRef) {
-			console.log(this.maskRef.unmaskedValue);
 			this.maskRef.updateOptions({ lazy: this.maskRef.unmaskedValue === "" });
 		}
 	}
@@ -122,7 +125,7 @@ export abstract class StarkTextMaskBaseDirective<
 	 * @param defaultMask
 	 * @protected
 	 */
-	protected abstract normalizedMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): Opts;
+	protected abstract normalizeMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): Opts;
 
-	protected abstract mergedMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): MaskConfig;
+	protected abstract mergeMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): MaskConfig;
 }

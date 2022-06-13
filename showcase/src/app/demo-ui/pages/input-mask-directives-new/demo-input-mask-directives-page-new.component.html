@@ -207,6 +207,48 @@
 					[starkTimestampMaskNew]="timeMaskConfig"
 				/>
 			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX</mat-label>
+				<input
+					matInput
+					id="time-input-mask"
+					type="text"
+					[formControl]="minMaxField"
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_PLACEHOLDER' | translate"
+					[min]="minDate"
+					[max]="maxDate"
+					[starkTimestampMaskNew]="dateMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_YEAR</mat-label>
+				<input
+					matInput
+					id="time-input-mask"
+					type="text"
+					[formControl]="minMaxSameYearField"
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_YEARPLACEHOLDER' | translate"
+					[min]="minDateSameYear"
+					[max]="maxDateSameYear"
+					[starkTimestampMaskNew]="dateMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_MONTH</mat-label>
+				<input
+					matInput
+					id="time-input-mask"
+					type="text"
+					[formControl]="minMaxSameMonthField"
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_MONTH_YEARPLACEHOLDER' | translate"
+					[min]="minDateSameMonth"
+					[max]="maxDateSameMonth"
+					[starkTimestampMaskNew]="dateMaskConfig"
+				/>
+			</mat-form-field>
 		</div>
 	</example-viewer>
 </section>
