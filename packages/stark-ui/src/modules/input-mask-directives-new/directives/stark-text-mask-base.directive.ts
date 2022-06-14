@@ -53,10 +53,6 @@ export abstract class StarkTextMaskBaseDirective<
 		this.elementRef = _elementRef;
 	}
 
-	protected rebuildMaskNgOnChanges(changes: SimpleChanges): boolean {
-		return !!changes["maskConfig"];
-	}
-
 	/**
 	 * Component lifecycle hook
 	 */
@@ -115,6 +111,10 @@ export abstract class StarkTextMaskBaseDirective<
 		if (mergerConfig["guide"] && this.maskRef) {
 			this.maskRef.updateOptions({ lazy: this.maskRef.unmaskedValue === "" });
 		}
+	}
+
+	protected rebuildMaskNgOnChanges(changes: SimpleChanges): boolean {
+		return !!changes["maskConfig"];
 	}
 
 	protected abstract defaultMask(): MaskConfig;

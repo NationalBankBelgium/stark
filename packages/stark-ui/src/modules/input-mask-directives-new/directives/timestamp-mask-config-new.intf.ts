@@ -1,6 +1,10 @@
 import { Moment } from "moment";
 import IMask from "imask";
 
+export type FilterDateFunction = (date: Date) => boolean;
+
+export type FilterDateType = FilterDateFunction | "OnlyWeekends" | "OnlyWeekdays";
+
 export interface StarkTimestampMaskConfigNew {
 	/**
 	 *  format og the timestamp
@@ -37,6 +41,15 @@ export interface StarkTimestampMaskConfigNew {
 	 */
 	guide?: boolean;
 
+	/**
+	 * minimum date
+	 */
 	minDate?: Date | Moment;
+
+	/**
+	 * maximum date
+	 */
 	maxDate?: Date | Moment;
+
+	filter?: FilterDateType;
 }

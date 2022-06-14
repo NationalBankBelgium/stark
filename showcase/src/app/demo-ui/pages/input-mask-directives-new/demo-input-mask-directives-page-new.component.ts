@@ -2,7 +2,7 @@ import { Component, Inject } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { merge } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkTextMaskConfigNew, StarkTextMasksNew, StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
+import { StarkTextMaskConfigNew, StarkTextMasksNew, StarkTimestampMaskConfigNew } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components/reference-block";
 import { StarkNumberMaskConfigNew } from "@nationalbankbelgium/stark-ui/src/modules/input-mask-directives-new/directives/number-mask-config-new.intf";
 import * as moment from "moment";
@@ -27,17 +27,21 @@ export class DemoInputMaskDirectivesPageNewComponent {
 		placeholderChar: "#"
 	};
 
-	public timestampDMYMaskConfig: StarkTimestampMaskConfig = { format: "DD-MM-YYYY HH:mm:ss" };
+	public timestampDMYMaskConfig: StarkTimestampMaskConfigNew = { format: "DD-MM-YYYY HH:mm:ss" };
 
-	public timestampMDYMaskConfig: StarkTimestampMaskConfig = { format: "MM-DD-YYYY HH:mm:ss" };
+	public timestampMDYMaskConfig: StarkTimestampMaskConfigNew = { format: "MM-DD-YYYY HH:mm:ss" };
 
-	public dateMaskConfig: StarkTimestampMaskConfig = { format: "DD-MM-YYYY" };
+	public dateMaskConfig: StarkTimestampMaskConfigNew = { format: "DD-MM-YYYY" };
 
-	public dayMonthMaskConfig: StarkTimestampMaskConfig = { format: "DD-MM" };
+	public dayMonthMaskConfig: StarkTimestampMaskConfigNew = { format: "DD-MM" };
 
-	public monthDayMaskConfig: StarkTimestampMaskConfig = { format: "MM/DD" };
+	public monthDayMaskConfig: StarkTimestampMaskConfigNew = { format: "MM/DD" };
 
-	public timeMaskConfig: StarkTimestampMaskConfig = { format: "HH:mm:ss" };
+	public timeMaskConfig: StarkTimestampMaskConfigNew = { format: "HH:mm:ss" };
+
+	public dateWeekendMaskConfig: StarkTimestampMaskConfigNew = { format: this.dateMaskConfig.format, filter: "OnlyWeekends" };
+
+	public dateWeekdaysMaskConfig: StarkTimestampMaskConfigNew = { format: this.dateMaskConfig.format, filter: "OnlyWeekdays" };
 
 	public eurosMaskConfig: StarkNumberMaskConfigNew = {
 		prefix: "",
@@ -92,6 +96,9 @@ export class DemoInputMaskDirectivesPageNewComponent {
 	public minMaxField = new FormControl();
 	public minMaxSameYearField = new FormControl();
 	public minMaxSameMonthField = new FormControl();
+
+	public weekendField = new FormControl();
+	public weekdaysField = new FormControl();
 
 	public minDate: moment.Moment;
 	public maxDate: moment.Moment;
