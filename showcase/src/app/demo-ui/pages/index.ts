@@ -9,7 +9,6 @@ export * from "./dialogs";
 export * from "./dropdown";
 export * from "./footer";
 export * from "./generic-search";
-export * from "./input-mask-directives";
 export * from "./input-mask-directives-new";
 export * from "./restrict-input-directive";
 export * from "./language-selector";

@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy } from "@angular/core";
 import { AbstractControl, FormControl, Validators } from "@angular/forms";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
+import { StarkTimestampMaskConfigNew } from "@nationalbankbelgium/stark-ui";
 import { Subscription } from "rxjs";
 import { ReferenceLink } from "../../../shared/components/reference-block";
 
@@ -19,7 +19,7 @@ export class DemoDateTimePickerPageComponent implements OnDestroy {
 	public isDisabled = false;
 
 	public dateMask = { format: "DD/MM/YYYY" };
-	public timeMask: StarkTimestampMaskConfig = { format: "HH:mm" };
+	public timeMask: StarkTimestampMaskConfigNew = { format: "HH:mm" };
 
 	public minDate = new Date(Date.now() - HOUR_IN_MILLISECONDS); // minDate = one hour earlier
 	public maxDate = new Date(Date.now() + 30 * DAY_IN_MILLISECONDS);

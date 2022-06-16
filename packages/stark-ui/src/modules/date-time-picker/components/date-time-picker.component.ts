@@ -38,9 +38,8 @@ import { Subject, Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { minDate as validatorMinDate, maxDate as validatorMaxDate } from "class-validator";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkTimestampMaskConfig } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
+import { StarkDateInput, StarkTimestampMaskConfigNew } from "../../input-mask-directives-new/directives/timestamp-mask-config-new.intf";
 import {
-	StarkDateInput,
 	StarkDatePickerComponent,
 	StarkDatePickerFilter,
 	StarkDatePickerMaskConfig
@@ -50,7 +49,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 /**
  * Default TimeMask configuration
  */
-export const DEFAULT_TIME_MASK_CONFIG: StarkTimestampMaskConfig = { format: "HH:mm:ss" };
+export const DEFAULT_TIME_MASK_CONFIG: StarkTimestampMaskConfigNew = { format: "HH:mm:ss" };
 
 /**
  * @ignore
@@ -223,11 +222,11 @@ export class StarkDateTimePickerComponent
 	 * Mask for the time
 	 */
 	@Input()
-	public get timeMask(): StarkTimestampMaskConfig {
+	public get timeMask(): StarkTimestampMaskConfigNew {
 		return this._timeMask;
 	}
 
-	public set timeMask(value: StarkTimestampMaskConfig) {
+	public set timeMask(value: StarkTimestampMaskConfigNew) {
 		// only valid mask configs are accepted, otherwise the default mask is used
 		this._timeMask = value && value.hasOwnProperty("format") ? value : DEFAULT_TIME_MASK_CONFIG;
 	}
@@ -236,7 +235,7 @@ export class StarkDateTimePickerComponent
 	 * @ignore
 	 * @internal
 	 */
-	private _timeMask: StarkTimestampMaskConfig = DEFAULT_TIME_MASK_CONFIG;
+	private _timeMask: StarkTimestampMaskConfigNew = DEFAULT_TIME_MASK_CONFIG;
 
 	/**
 	 * Input for {@link StarkDatePickerComponent}

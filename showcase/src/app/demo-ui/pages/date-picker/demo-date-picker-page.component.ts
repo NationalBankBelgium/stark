@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkDatePickerFilter, StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
+import { StarkDatePickerFilter, StarkTimestampMaskConfigNew } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
 
 const DAY_IN_MILLISECONDS = 86400000;
@@ -22,7 +22,7 @@ export class DemoDatePickerPageComponent implements OnDestroy {
 	public required = false;
 
 	public customDateFilter: StarkDatePickerFilter = (date: Date): boolean => date.getDay() === 3;
-	public maskConfig: StarkTimestampMaskConfig = { format: "DD-MM-YYYY" };
+	public maskConfig: StarkTimestampMaskConfigNew = { format: "DD-MM-YYYY" };
 
 	public subscription = this.formControl.valueChanges.subscribe(this.onDateChanged.bind(this));
 

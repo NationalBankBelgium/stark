@@ -10,7 +10,6 @@ import {
 	DemoDropdownPageComponent,
 	DemoFooterPageComponent,
 	DemoGenericSearchPageComponent,
-	DemoInputMaskDirectivesPageComponent,
 	DemoRestrictInputDirectivePageComponent,
 	DemoLanguageSelectorPageComponent,
 	DemoLogoutPageComponent,
@@ -150,18 +149,10 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 		views: { "@": { component: DemoLogoutPageComponent } }
 	},
 	{
-		name: "demo-ui.input-mask-directives",
-		url: "/input-mask-directives",
-		data: {
-			translationKey: "SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TITLE"
-		},
-		views: { "@": { component: DemoInputMaskDirectivesPageComponent } }
-	},
-	{
 		name: "demo-ui.input-mask-directives-new",
 		url: "/input-mask-directives-new",
 		data: {
-			translationKey: "SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK_NEW.TITLE"
+			translationKey: "SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TITLE"
 		},
 		views: { "@": { component: DemoInputMaskDirectivesPageNewComponent } }
 	},

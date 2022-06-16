@@ -1,9 +1,16 @@
-import { Moment } from "moment";
+import moment, { Moment } from "moment";
 import IMask from "imask";
 
 export type FilterDateFunction = (date: Date) => boolean;
 
 export type FilterDateType = FilterDateFunction | "OnlyWeekends" | "OnlyWeekdays";
+
+// tslint:disable-next-line:no-null-undefined-union
+export type StarkDateInput = Date | moment.Moment | null | undefined;
+
+export function isStarkTimestampMaskConfig(config: any): config is StarkTimestampMaskConfigNew {
+	return config && typeof config.format === "string";
+}
 
 export interface StarkTimestampMaskConfigNew {
 	/**

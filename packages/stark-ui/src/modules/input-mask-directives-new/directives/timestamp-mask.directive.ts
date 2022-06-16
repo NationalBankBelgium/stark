@@ -1,12 +1,10 @@
 import { StarkTextMaskBaseDirective } from "./stark-text-mask-base.directive";
 import IMask from "imask";
-import { FilterDateType, StarkTimestampMaskConfigNew } from "./timestamp-mask-config-new.intf";
+import { FilterDateType, StarkTimestampMaskConfigNew, StarkDateInput } from "./timestamp-mask-config-new.intf";
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2, SimpleChanges } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
 import moment from "moment";
 import { IMaskFactory } from "angular-imask";
-import { StarkDateInput } from "../../date-picker/components/date-picker.component";
-
 /**
  * @ignore
  */
@@ -45,7 +43,7 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 	public static ngAcceptInputType_min: StarkDateInput;
 	// tslint:disable-next-line:no-input-rename
 	@Input("starkTimestampMaskNew")
-	public override maskConfig: StarkTimestampMaskConfigNew | string = {};
+	public override maskConfig?: StarkTimestampMaskConfigNew | string = {};
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
 
@@ -312,7 +310,7 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 		let format = DEFAULT_DATE_TIME_FORMAT;
 		if (typeof this.maskConfig === "string") {
 			format = this.maskConfig;
-		} else if (!!this.maskConfig.format) {
+		} else if (this.maskConfig && this.maskConfig.format) {
 			format = this.maskConfig.format;
 		}
 
@@ -336,10 +334,10 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 		if (typeof this.maskConfig === "string") {
 			format = this.maskConfig;
 		} else {
-			if (!!this.maskConfig.format) {
+			if (this.maskConfig && this.maskConfig.format) {
 				format = this.maskConfig.format;
 			}
-			if (this.maskConfig.usingMoment !== undefined) {
+			if (this.maskConfig && this.maskConfig.usingMoment !== undefined) {
 				usingMoment = this.maskConfig.usingMoment;
 			}
 		}

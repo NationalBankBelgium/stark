@@ -63,7 +63,6 @@
     "@uirouter/core": "^6.0.8",
     "@uirouter/rx": "~0.6.0",
     "angular-imask": "^6.4.2",
-    "angular2-text-mask": "^9.0.0",
     "cerialize": "^0.1.18",
     "class-validator": "~0.13.1",
     "codelyzer": "^5.0.0",

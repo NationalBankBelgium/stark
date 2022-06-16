@@ -27,7 +27,7 @@ import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
 import { Subject, Subscription } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { isStarkTimestampMaskConfig, StarkTimestampMaskConfig } from "../../input-mask-directives/directives";
+import { isStarkTimestampMaskConfig, StarkTimestampMaskConfigNew, StarkDateInput } from "../../input-mask-directives-new/directives";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import isEqual from "lodash-es/isEqual";
 
@@ -39,19 +39,17 @@ export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Da
 /**
  * Type expected by [StarkDatePickerComponent maskConfig]{@link StarkDatePickerComponent#maskConfig} input.
  */
-export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean;
+export type StarkDatePickerMaskConfig = StarkTimestampMaskConfigNew | boolean;
 
 /**
- * Type expected by [StarkDatePickerComponent max]{@link StarkDatePickerComponent#max} and 
+ * Type expected by [StarkDatePickerComponent max]{@link StarkDatePickerComponent#max} and
  * [StarkDatePickerComponent min]{@link StarkDatePickerComponent#min} inputs.
  */
-// tslint:disable-next-line:no-null-undefined-union
-export type StarkDateInput = Date | moment.Moment | null | undefined;
 
 /**
  * Default date mask configuration used by the {@link StarkDatePickerComponent}
  */
-export const DEFAULT_DATE_MASK_CONFIG: StarkTimestampMaskConfig = { format: "DD/MM/YYYY" };
+export const DEFAULT_DATE_MASK_CONFIG: StarkTimestampMaskConfigNew = { format: "DD/MM/YYYY" };
 
 /**
  * @ignore
@@ -86,7 +84,8 @@ const componentName = "stark-date-picker";
 })
 export class StarkDatePickerComponent
 	extends AbstractStarkUiComponent
-	implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date> {
+	implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date>
+{
 	/**
 	 * Part of {@link MatFormFieldControl} API
 	 * @ignore
@@ -173,7 +172,7 @@ export class StarkDatePickerComponent
 				throw new Error(
 					componentName +
 						': dateMask.format ["' +
-						this.dateMaskConfig.format +
+						(this.dateMaskConfig.format ? this.dateMaskConfig.format : "") +
 						'"] and the provided parse format(s) in MAT_DATE_FORMATS ["' +
 						dateInputFormats.join('","') +
 						'"] are NOT compatible. Please adapt one of them.'
@@ -386,7 +385,7 @@ export class StarkDatePickerComponent
 	 * @ignore
 	 * @internal
 	 */
-	public dateMaskConfig?: StarkTimestampMaskConfig = undefined;
+	public dateMaskConfig?: StarkTimestampMaskConfigNew = undefined;
 
 	/**
 	 * Part of {@link MatFormFieldControl} API
@@ -742,7 +741,7 @@ export class StarkDatePickerComponent
 	 * If the inputMask is not enabled, it returns `undefined` to disable `starkTimestampMask`.
 	 * Otherwise, it returns the defined configuration.
 	 */
-	public getTimestampMaskConfig(): StarkTimestampMaskConfig | undefined {
+	public getTimestampMaskConfig(): StarkTimestampMaskConfigNew | undefined {
 		return this.inputMaskEnabled ? this.dateMaskConfig : undefined;
 	}
 

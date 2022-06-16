@@ -31,7 +31,7 @@ export abstract class StarkTextMaskBaseDirective<
 	/**
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
-	public maskConfig: MaskConfigType = "";
+	public maskConfig?: MaskConfigType;
 	/**
 	 * @ignore
 	 */
@@ -49,7 +49,9 @@ export abstract class StarkTextMaskBaseDirective<
 		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
 	) {
 		super(_elementRef, _renderer, _factory, _platformId, _compositionMode);
-		this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
+		if (this.maskConfig) {
+			this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
+		}
 		this.elementRef = _elementRef;
 	}
 
@@ -62,7 +64,11 @@ export abstract class StarkTextMaskBaseDirective<
 		// if maskConfig changes then apply the change to the imask and propagate changes.
 		if (this.rebuildMaskNgOnChanges(changes)) {
 			const oldValue = this.imask;
-			this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
+			if (this.maskConfig) {
+				this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
+			} else {
+				this.imask = undefined;
+			}
 			changes = { ...changes, imask: new SimpleChange(oldValue, this.imask, true) };
 		}
 		super.ngOnChanges(changes);
@@ -107,9 +113,11 @@ export abstract class StarkTextMaskBaseDirective<
 	 * @param _value
 	 */
 	public inputAfterMaskRef(_value: any): void {
-		const mergerConfig: MaskConfig = this.mergeMaskConfig(this.maskConfig, this.defaultMask());
-		if (mergerConfig["guide"] && this.maskRef) {
-			this.maskRef.updateOptions({ lazy: this.maskRef.unmaskedValue === "" });
+		if (this.maskConfig) {
+			const mergerConfig: MaskConfig = this.mergeMaskConfig(this.maskConfig, this.defaultMask());
+			if (mergerConfig["guide"] && this.maskRef) {
+				this.maskRef.updateOptions({ lazy: this.maskRef.unmaskedValue === "" });
+			}
 		}
 	}
 
