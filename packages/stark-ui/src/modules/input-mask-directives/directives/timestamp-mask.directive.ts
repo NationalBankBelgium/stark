@@ -115,9 +115,8 @@ export class StarkTimestampMaskDirective extends TextMaskBaseDirective<IMask.Mas
 	// tslint:disable-next-line:cognitive-complexity
 	public addDateRestriction(iMask: IMask.MaskedDateOptions): IMask.MaskedDateOptions {
 		if (iMask.blocks && (iMask.blocks["YY"] || iMask.blocks["YYYY"])) {
-			let yearBlock: IMask.MaskedRangeOptions = <IMask.MaskedRangeOptions>(
-				(!!iMask.blocks["YY"] ? iMask.blocks["YY"] : iMask.blocks["YYYY"])
-			);
+			const block = !!iMask.blocks["YY"] ? iMask.blocks["YY"] : iMask.blocks["YYYY"];
+			let yearBlock: IMask.MaskedRangeOptions = <IMask.MaskedRangeOptions>block;
 			if (iMask.min) {
 				yearBlock = {
 					...yearBlock,
