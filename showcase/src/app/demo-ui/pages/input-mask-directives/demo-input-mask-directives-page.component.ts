@@ -2,9 +2,8 @@ import { Component, Inject } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { merge } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkTextMaskConfigNew, StarkTextMasksNew, StarkTimestampMaskConfigNew } from "@nationalbankbelgium/stark-ui";
+import { StarkTextMaskConfig, StarkTextMasks, StarkTimestampMaskConfig, StarkNumberMaskConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components/reference-block";
-import { StarkNumberMaskConfigNew } from "@nationalbankbelgium/stark-ui/src/modules/input-mask-directives-new/directives/number-mask-config-new.intf";
 import * as moment from "moment";
 
 @Component({
@@ -13,37 +12,37 @@ import * as moment from "moment";
 	templateUrl: "./demo-input-mask-directives-page-new.component.html"
 })
 export class DemoInputMaskDirectivesPageNewComponent {
-	public creditCardMaskConfig: StarkTextMaskConfigNew = {
-		mask: StarkTextMasksNew.CREDITCARD_NUMBER,
+	public creditCardMaskConfig: StarkTextMaskConfig = {
+		mask: StarkTextMasks.CREDITCARD_NUMBER,
 		placeholderChar: "#"
 	};
 
-	public structuredMessageMaskConfig: StarkTextMaskConfigNew = {
-		mask: StarkTextMasksNew.STRUCTURED_COMMUNICATION_NUMBER
+	public structuredMessageMaskConfig: StarkTextMaskConfig = {
+		mask: StarkTextMasks.STRUCTURED_COMMUNICATION_NUMBER
 	};
 
-	public phoneNumberMaskConfig: StarkTextMaskConfigNew = {
+	public phoneNumberMaskConfig: StarkTextMaskConfig = {
 		mask: "(+32) 000/00 00 00",
 		placeholderChar: "#"
 	};
 
-	public timestampDMYMaskConfig: StarkTimestampMaskConfigNew = { format: "DD-MM-YYYY HH:mm:ss" };
+	public timestampDMYMaskConfig: StarkTimestampMaskConfig = { format: "DD-MM-YYYY HH:mm:ss" };
 
-	public timestampMDYMaskConfig: StarkTimestampMaskConfigNew = { format: "MM-DD-YYYY HH:mm:ss" };
+	public timestampMDYMaskConfig: StarkTimestampMaskConfig = { format: "MM-DD-YYYY HH:mm:ss" };
 
-	public dateMaskConfig: StarkTimestampMaskConfigNew = { format: "DD-MM-YYYY" };
+	public dateMaskConfig: StarkTimestampMaskConfig = { format: "DD-MM-YYYY" };
 
-	public dayMonthMaskConfig: StarkTimestampMaskConfigNew = { format: "DD-MM" };
+	public dayMonthMaskConfig: StarkTimestampMaskConfig = { format: "DD-MM" };
 
-	public monthDayMaskConfig: StarkTimestampMaskConfigNew = { format: "MM/DD" };
+	public monthDayMaskConfig: StarkTimestampMaskConfig = { format: "MM/DD" };
 
-	public timeMaskConfig: StarkTimestampMaskConfigNew = { format: "HH:mm:ss" };
+	public timeMaskConfig: StarkTimestampMaskConfig = { format: "HH:mm:ss" };
 
-	public dateWeekendMaskConfig: StarkTimestampMaskConfigNew = { format: this.dateMaskConfig.format, filter: "OnlyWeekends" };
+	public dateWeekendMaskConfig: StarkTimestampMaskConfig = { format: this.dateMaskConfig.format, filter: "OnlyWeekends" };
 
-	public dateWeekdaysMaskConfig: StarkTimestampMaskConfigNew = { format: this.dateMaskConfig.format, filter: "OnlyWeekdays" };
+	public dateWeekdaysMaskConfig: StarkTimestampMaskConfig = { format: this.dateMaskConfig.format, filter: "OnlyWeekdays" };
 
-	public eurosMaskConfig: StarkNumberMaskConfigNew = {
+	public eurosMaskConfig: StarkNumberMaskConfig = {
 		prefix: "",
 		suffix: " €",
 		includeThousandsSeparator: true,
@@ -56,7 +55,7 @@ export class DemoInputMaskDirectivesPageNewComponent {
 		allowLeadingZeroes: false
 	};
 
-	public dollarsMaskConfig: StarkNumberMaskConfigNew = {
+	public dollarsMaskConfig: StarkNumberMaskConfig = {
 		prefix: "$ ",
 		suffix: "",
 		includeThousandsSeparator: true,
@@ -69,7 +68,7 @@ export class DemoInputMaskDirectivesPageNewComponent {
 		allowLeadingZeroes: false
 	};
 
-	public percentageMaskConfig: StarkNumberMaskConfigNew = {
+	public percentageMaskConfig: StarkNumberMaskConfig = {
 		prefix: "% ",
 		suffix: "",
 		includeThousandsSeparator: true,

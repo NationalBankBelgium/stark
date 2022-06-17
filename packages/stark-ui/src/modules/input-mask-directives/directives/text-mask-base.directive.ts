@@ -1,5 +1,5 @@
 import { AnyMaskedOptions } from "imask";
-import { StarkNumberMaskConfigNew } from "./number-mask-config-new.intf";
+import { StarkNumberMaskConfig } from "./number-mask-config.intf";
 import { StarkTextMaskBaseConfigNew } from "./text-mask-new-config.intf";
 import { IMaskDirective, IMaskFactory } from "angular-imask";
 import {
@@ -18,12 +18,12 @@ import {
 import { COMPOSITION_BUFFER_MODE } from "@angular/forms";
 import { StarkTimestampMaskConfigNew } from "./timestamp-mask-config-new.intf";
 
-export type MaskConfigType = StarkTextMaskBaseConfigNew | StarkNumberMaskConfigNew | StarkTimestampMaskConfigNew | string | boolean;
+export type MaskConfigType = StarkTextMaskBaseConfigNew | StarkNumberMaskConfig | StarkTimestampMaskConfigNew | string | boolean;
 
 @Injectable()
 export abstract class StarkTextMaskBaseDirective<
 		Opts extends AnyMaskedOptions,
-		MaskConfig extends StarkTextMaskBaseConfigNew | StarkNumberMaskConfigNew | StarkTimestampMaskConfigNew
+		MaskConfig extends StarkTextMaskBaseConfigNew | StarkNumberMaskConfig | StarkTimestampMaskConfigNew
 	>
 	extends IMaskDirective<Opts>
 	implements AfterViewInit, OnDestroy, OnChanges

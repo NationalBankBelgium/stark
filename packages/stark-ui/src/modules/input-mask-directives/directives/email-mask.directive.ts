@@ -9,7 +9,7 @@ import { BooleanInput } from "@angular/cdk/coercion";
 /**
  * @ignore
  */
-const directiveName = "[starkEmailMaskNew]";
+const directiveName = "[starkEmailMask]";
 
 /**
  * @ignore

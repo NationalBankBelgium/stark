@@ -19,7 +19,7 @@
 					type="text"
 					(input)="logChange($event)"
 					placeholder="####-####-####-####"
-					[starkTextMaskNew]="creditCardMaskConfig"
+					[starkTextMask]="creditCardMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -32,7 +32,7 @@
 					[(ngModel)]="structuredMessage"
 					(input)="logModelChange(structuredMessage)"
 					placeholder="+++###/####/#####/+++"
-					[starkTextMaskNew]="structuredMessageMaskConfig"
+					[starkTextMask]="structuredMessageMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -44,7 +44,7 @@
 					type="text"
 					[formControl]="phoneNumberField"
 					placeholder="(+32) ### ## ## ##"
-					[starkTextMaskNew]="phoneNumberMaskConfig"
+					[starkTextMask]="phoneNumberMaskConfig"
 				/>
 			</mat-form-field>
 		</div>
@@ -68,7 +68,7 @@
 					type="text"
 					(input)="logChange($event)"
 					placeholder="###,###,###.00 €"
-					[starkNumberMaskNew]="eurosMaskConfig"
+					[starkNumberMask]="eurosMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -81,7 +81,7 @@
 					[(ngModel)]="dollarsAmount"
 					(input)="logModelChange(dollarsAmount)"
 					placeholder="$ ###,###,###.00"
-					[starkNumberMaskNew]="dollarsMaskConfig"
+					[starkNumberMask]="dollarsMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -93,7 +93,7 @@
 					type="text"
 					[formControl]="percentageField"
 					placeholder="(-)%###.###"
-					[starkNumberMaskNew]="percentageMaskConfig"
+					[starkNumberMask]="percentageMaskConfig"
 				/>
 			</mat-form-field>
 		</div>
@@ -118,7 +118,7 @@
 					[(ngModel)]="email"
 					(input)="logModelChange(email)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.EMAIL_MASK.EMAIL_PLACEHOLDER' | translate"
-					starkEmailMaskNew
+					starkEmailMask
 				/>
 			</mat-form-field>
 		</div>
@@ -142,7 +142,7 @@
 					type="text"
 					(input)="logChange($event)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.TIMESTAMP_DMY_PLACEHOLDER' | translate"
-					[starkTimestampMaskNew]="timestampDMYMaskConfig"
+					[starkTimestampMask]="timestampDMYMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -155,7 +155,7 @@
 					[(ngModel)]="timestamp"
 					(input)="logModelChange(timestamp)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.TIMESTAMP_MDY_PLACEHOLDER' | translate"
-					[starkTimestampMaskNew]="timestampMDYMaskConfig"
+					[starkTimestampMask]="timestampMDYMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -167,7 +167,7 @@
 					type="text"
 					[formControl]="fullDateField"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.FULL_DATE_DMY_PLACEHOLDER' | translate"
-					[starkTimestampMaskNew]="dateMaskConfig"
+					[starkTimestampMask]="dateMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -179,7 +179,7 @@
 					type="text"
 					(input)="logChange($event)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.DAY_MONTH_PLACEHOLDER' | translate"
-					[starkTimestampMaskNew]="dayMonthMaskConfig"
+					[starkTimestampMask]="dayMonthMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -192,7 +192,7 @@
 					[(ngModel)]="monthDay"
 					(input)="logModelChange(monthDay)"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MONTH_DAY_PLACEHOLDER' | translate"
-					[starkTimestampMaskNew]="monthDayMaskConfig"
+					[starkTimestampMask]="monthDayMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -204,7 +204,7 @@
 					type="text"
 					[formControl]="timeField"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.TIME_PLACEHOLDER' | translate"
-					[starkTimestampMaskNew]="timeMaskConfig"
+					[starkTimestampMask]="timeMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -218,7 +218,7 @@
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_PLACEHOLDER' | translate"
 					[min]="minDate"
 					[max]="maxDate"
-					[starkTimestampMaskNew]="dateMaskConfig"
+					[starkTimestampMask]="dateMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -232,7 +232,7 @@
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_YEAR_PLACEHOLDER' | translate"
 					[min]="minDateSameYear"
 					[max]="maxDateSameYear"
-					[starkTimestampMaskNew]="dateMaskConfig"
+					[starkTimestampMask]="dateMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -246,7 +246,7 @@
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_MONTH_PLACEHOLDER' | translate"
 					[min]="minDateSameMonth"
 					[max]="maxDateSameMonth"
-					[starkTimestampMaskNew]="dateMaskConfig"
+					[starkTimestampMask]="dateMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -258,7 +258,7 @@
 					type="text"
 					[formControl]="weekendField"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.WEEKEND_PLACEHOLDER' | translate"
-					[starkTimestampMaskNew]="dateWeekendMaskConfig"
+					[starkTimestampMask]="dateWeekendMaskConfig"
 				/>
 			</mat-form-field>
 
@@ -270,7 +270,7 @@
 					type="text"
 					[formControl]="weekdaysField"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.WEEKDAYS_PLACEHOLDER' | translate"
-					[starkTimestampMaskNew]="dateWeekdaysMaskConfig"
+					[starkTimestampMask]="dateWeekdaysMaskConfig"
 				/>
 			</mat-form-field>
 		</div>

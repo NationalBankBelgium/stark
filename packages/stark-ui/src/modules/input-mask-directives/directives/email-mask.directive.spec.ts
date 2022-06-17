@@ -4,32 +4,27 @@ import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Observer } from "rxjs";
-import { StarkNumberMaskNewDirective } from "./number-mask-new.directive";
-import { StarkNumberMaskConfigNew } from "./number-mask-config-new.intf";
+import { BooleanInput } from "@angular/cdk/coercion";
+import { StarkEmailMaskNewDirective } from "./email-mask-new.directive";
 import { IMaskModule } from "angular-imask";
 
-describe("NumberMaskDirective", () => {
+describe("EmailMaskDirective", () => {
 	let fixture: ComponentFixture<TestComponent>;
 	let hostComponent: TestComponent;
 	let inputElement: DebugElement;
 
-	const numberMaskConfig: StarkNumberMaskConfigNew = {
-		prefix: "",
-		suffix: ""
-	};
-
 	@Component({
 		selector: "test-component",
-		template: getTemplate("[starkNumberMaskNew]='numberMaskConfig'")
+		template: getTemplate("[starkEmailMask]='emailMaskConfig'")
 	})
 	class TestComponent {
-		public numberMaskConfig: StarkNumberMaskConfigNew = numberMaskConfig;
+		public emailMaskConfig: BooleanInput = true;
 		public ngModelValue = "";
 		public formControl = new FormControl("");
 	}
 
-	function getTemplate(numberMaskDirective: string): string {
-		return "<input " + "type='text' " + numberMaskDirective + ">";
+	function getTemplate(emailMaskNewDirective: string): string {
+		return "<input " + "type='text' " + emailMaskNewDirective + ">";
 	}
 
 	function initializeComponentFixture(): void {
@@ -53,7 +48,7 @@ describe("NumberMaskDirective", () => {
 	// Inject module dependencies
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [StarkNumberMaskNewDirective, TestComponent],
+			declarations: [StarkEmailMaskNewDirective, TestComponent],
 			imports: [FormsModule, ReactiveFormsModule, IMaskModule],
 			providers: []
 		});
@@ -72,10 +67,10 @@ describe("NumberMaskDirective", () => {
 		});
 
 		it("should render the appropriate content", () => {
-			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkNumberMask directive
+			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkEmailMask directive
 		});
 
-		xit("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
+		it("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
 			// Angular2 text-mask directive handles only the "input" event
 			const validEvents: string[] = ["input"];
 
@@ -84,10 +79,10 @@ describe("NumberMaskDirective", () => {
 				fixture.detectChanges();
 				expect(inputElement.nativeElement.value).toBe("");
 
-				changeInputValue(inputElement, "12345", eventType);
+				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("12,345");
+				expect(inputElement.nativeElement.value).toBe("my-email@.");
 			}
 
 			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
@@ -97,73 +92,60 @@ describe("NumberMaskDirective", () => {
 				fixture.detectChanges();
 				expect(inputElement.nativeElement.value).toBe("");
 
-				changeInputValue(inputElement, "12345", eventType);
+				changeInputValue(inputElement, "my-email", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("12345"); // no mask shown
+				expect(inputElement.nativeElement.value).toBe("my-email"); // no mask shown
 			}
 		});
 
 		xit("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["a", " ", "/*-+,."];
+			const invalidValues: string[] = ["@@", "@.a.", " @ .", "what@.ever@."];
 
 			for (const value of invalidValues) {
 				changeInputValue(inputElement, value);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("");
-			}
-
-			const invalidNumericValues: string[] = ["1-2-3.4.5", "+1*23-4/5", ".1.234,5"];
-
-			for (const numericValue of invalidNumericValues) {
-				changeInputValue(inputElement, numericValue);
-				fixture.detectChanges();
-
-				expect(inputElement.nativeElement.value).toBe("12,345");
+				expect(inputElement.nativeElement.value).toBe("@.");
 			}
 		});
 
-		xit("should refresh the mask whenever the configuration changes", () => {
-			changeInputValue(inputElement, "12345");
+		xit("should remove the mask only when the config is set to false", () => {
+			changeInputValue(inputElement, "my-email@");
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("12,345");
+			expect(inputElement.nativeElement.value).toBe("my-email@.");
 
-			hostComponent.numberMaskConfig = {
-				...numberMaskConfig,
-				prefix: "%",
-				suffix: " percent",
-				thousandsSeparatorSymbol: "-"
-			};
+			hostComponent.emailMaskConfig = undefined;
 			fixture.detectChanges();
 
-			changeInputValue(inputElement, "12345");
+			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("%12-345 percent");
-		});
+			expect(inputElement.nativeElement.value).toBe("my-email@."); // the mask is enabled by default
 
-		it("should remove the mask when the config is undefined", () => {
-			changeInputValue(inputElement, "12345");
+			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' starkEmailMask>
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("12,345");
-
-			hostComponent.numberMaskConfig = <any>undefined;
+			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			changeInputValue(inputElement, "whatever+1*23-4/5");
+			expect(inputElement.nativeElement.value).toBe("my-email@ ."); // the mask is enabled by default
+
+			hostComponent.emailMaskConfig = false;
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("whatever+1*23-4/5"); // no mask at all
+			changeInputValue(inputElement, "what@@.ever@.");
+			fixture.detectChanges();
+
+			expect(inputElement.nativeElement.value).toBe("what@@.ever@."); // no mask at all
 		});
 	});
 
 	describe("with ngModel", () => {
 		beforeEach(
 			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkNumberMaskNew]='numberMaskConfig'");
+				const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkEmailMaskNew]='emailMaskConfig'");
 
 				TestBed.overrideTemplate(TestComponent, newTemplate);
 
@@ -177,7 +159,7 @@ describe("NumberMaskDirective", () => {
 		});
 
 		it("should render the appropriate content", () => {
-			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkNumberMask directive
+			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkEmailMask directive
 		});
 
 		xit("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
@@ -189,10 +171,10 @@ describe("NumberMaskDirective", () => {
 				fixture.detectChanges();
 				expect(hostComponent.ngModelValue).toBe("");
 
-				changeInputValue(inputElement, "12345", eventType);
+				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
-				expect(hostComponent.ngModelValue).toBe("12,345");
+				expect(hostComponent.ngModelValue).toBe("my-email@ .");
 			}
 
 			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
@@ -202,7 +184,7 @@ describe("NumberMaskDirective", () => {
 				fixture.detectChanges();
 				expect(hostComponent.ngModelValue).toBe("");
 
-				changeInputValue(inputElement, "12345", eventType);
+				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
 				// IMPORTANT: the ngModel is not changed with invalid events, just with "input" events
@@ -211,7 +193,7 @@ describe("NumberMaskDirective", () => {
 		});
 
 		xit("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["a", " ", "/*-+,."];
+			const invalidValues: string[] = ["@@", "@.a.", " @ .", "what@.ever@."];
 
 			for (const value of invalidValues) {
 				changeInputValue(inputElement, value);
@@ -219,48 +201,37 @@ describe("NumberMaskDirective", () => {
 
 				expect(hostComponent.ngModelValue).toBe("");
 			}
-
-			const invalidNumericValues: string[] = ["1-2-3.4.5", "+1*23-4/5", ".1.234,5"];
-
-			for (const numericValue of invalidNumericValues) {
-				changeInputValue(inputElement, numericValue);
-				fixture.detectChanges();
-
-				expect(hostComponent.ngModelValue).toBe("12,345");
-			}
 		});
 
-		// FIXME NG0100: ExpressionChangedAfterItHasBeenCheckedError - #2860 https://github.com/NationalBankBelgium/stark/issues/2860
-		xit("should refresh the mask whenever the configuration changes", () => {
-			changeInputValue(inputElement, "12345");
+		xit("should remove the mask only when the config is set to false", () => {
+			changeInputValue(inputElement, "my-email@");
 			fixture.detectChanges();
 
-			expect(hostComponent.ngModelValue).toBe("12,345");
+			expect(hostComponent.ngModelValue).toBe("my-email@ .");
 
-			hostComponent.numberMaskConfig = {
-				...numberMaskConfig,
-				prefix: "%",
-				suffix: " percent",
-				thousandsSeparatorSymbol: "-"
-			};
+			hostComponent.emailMaskConfig = undefined;
 			fixture.detectChanges();
 
-			expect(hostComponent.ngModelValue).toBe("%12-345 percent");
-		});
-
-		xit("should remove the mask when the config is undefined", () => {
-			changeInputValue(inputElement, "12345");
+			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(hostComponent.ngModelValue).toBe("12,345");
+			expect(hostComponent.ngModelValue).toBe("my-email@ ."); // the mask is enabled by default
 
-			hostComponent.numberMaskConfig = <any>undefined;
+			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' [(ngModel)]='ngModelValue' starkEmailMask>
 			fixture.detectChanges();
 
-			changeInputValue(inputElement, "whatever+1*23-4/5");
+			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(hostComponent.ngModelValue).toBe("whatever+1*23-4/5"); // no mask at all
+			expect(hostComponent.ngModelValue).toBe("my-email@ ."); // the mask is enabled by default
+
+			hostComponent.emailMaskConfig = false;
+			fixture.detectChanges();
+
+			changeInputValue(inputElement, "what@@.ever@.");
+			fixture.detectChanges();
+
+			expect(hostComponent.ngModelValue).toBe("what@@.ever@."); // no mask at all
 		});
 	});
 
@@ -269,7 +240,7 @@ describe("NumberMaskDirective", () => {
 
 		beforeEach(
 			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[formControl]='formControl' [starkNumberMaskNew]='numberMaskConfig'");
+				const newTemplate: string = getTemplate("[formControl]='formControl' [starkEmailMaskNew]='emailMaskConfig'");
 
 				TestBed.overrideTemplate(TestComponent, newTemplate);
 
@@ -286,7 +257,7 @@ describe("NumberMaskDirective", () => {
 		});
 
 		it("should render the appropriate content", () => {
-			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkNumberMask directive
+			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkEmailMask directive
 		});
 
 		xit("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
@@ -301,10 +272,10 @@ describe("NumberMaskDirective", () => {
 				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 				mockValueChangeObserver.next.calls.reset();
-				changeInputValue(inputElement, "12345", eventType);
+				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
-				expect(hostComponent.formControl.value).toBe("12,345");
+				expect(hostComponent.formControl.value).toBe("my-email@ .");
 				// FIXME Check why it is called twice instead of once
 				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
@@ -322,7 +293,7 @@ describe("NumberMaskDirective", () => {
 				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 				mockValueChangeObserver.next.calls.reset();
-				changeInputValue(inputElement, "12345", eventType);
+				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
 				// IMPORTANT: the formControl is not changed with invalid events, just with "input" events
@@ -334,7 +305,7 @@ describe("NumberMaskDirective", () => {
 		});
 
 		xit("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["a", " ", "/*-+,."];
+			const invalidValues: string[] = ["@@", "@.a.", " @ .", "what@.ever@."];
 
 			for (const value of invalidValues) {
 				mockValueChangeObserver.next.calls.reset();
@@ -347,64 +318,52 @@ describe("NumberMaskDirective", () => {
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
-
-			const invalidNumericValues: string[] = ["1-2-3.4.5", "+1*23-4/5", ".1.234,5"];
-
-			for (const numericValue of invalidNumericValues) {
-				mockValueChangeObserver.next.calls.reset();
-				changeInputValue(inputElement, numericValue);
-				fixture.detectChanges();
-
-				expect(hostComponent.formControl.value).toBe("12,345");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
-				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
-			}
-		});
-
-		xit("should refresh the mask whenever the configuration changes", () => {
-			changeInputValue(inputElement, "12345");
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("12,345");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-
-			mockValueChangeObserver.next.calls.reset();
-			hostComponent.numberMaskConfig = {
-				...numberMaskConfig,
-				prefix: "%",
-				suffix: " percent",
-				thousandsSeparatorSymbol: "-"
-			};
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("%12-345 percent");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
-			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});
 
 		xit("should remove the mask when the config is undefined", () => {
-			changeInputValue(inputElement, "12345");
+			changeInputValue(inputElement, "my-email@");
 			fixture.detectChanges();
 
-			expect(hostComponent.formControl.value).toBe("12,345");
+			expect(hostComponent.formControl.value).toBe("my-email@ .");
 			// FIXME Check why it is called twice instead of once
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 			mockValueChangeObserver.next.calls.reset();
-			hostComponent.numberMaskConfig = <any>undefined;
+			hostComponent.emailMaskConfig = undefined;
+			fixture.detectChanges();
+			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask is enabled by default
+
+			mockValueChangeObserver.next.calls.reset();
+			changeInputValue(inputElement, "what@.ever@.");
+			fixture.detectChanges();
+
+			expect(hostComponent.formControl.value).toBe("my-email@ ."); // the mask is enabled by default
+			// FIXME Check why it is called twice instead of once
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+
+			mockValueChangeObserver.next.calls.reset();
+			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' [formControl]='formControl' starkEmailMask>
+			fixture.detectChanges();
+			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask is enabled by default
+
+			mockValueChangeObserver.next.calls.reset();
+			changeInputValue(inputElement, "what@.ever@.");
+			fixture.detectChanges();
+
+			expect(hostComponent.formControl.value).toBe("my-email@ ."); // the mask is enabled by default
+			// FIXME Check why it is called twice instead of once
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+
+			mockValueChangeObserver.next.calls.reset();
+			hostComponent.emailMaskConfig = false;
 			fixture.detectChanges();
 			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask was just disabled
 
 			mockValueChangeObserver.next.calls.reset();
-			changeInputValue(inputElement, "whatever+1*23-4/5");
+			changeInputValue(inputElement, "what@@.ever@.");
 			fixture.detectChanges();
 
-			expect(hostComponent.formControl.value).toBe("whatever+1*23-4/5"); // no mask at all
+			expect(hostComponent.formControl.value).toBe("what@@.ever@."); // no mask at all
 			// FIXME Check why it is called twice instead of once
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
