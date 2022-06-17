@@ -20,7 +20,7 @@ describe("NumberMaskDirective", () => {
 
 	@Component({
 		selector: "test-component",
-		template: getTemplate("[starkNumberMaskNew]='numberMaskConfig'")
+		template: getTemplate("[starkNumberMask]='numberMaskConfig'")
 	})
 	class TestComponent {
 		public numberMaskConfig: StarkNumberMaskConfig = numberMaskConfig;
@@ -163,7 +163,7 @@ describe("NumberMaskDirective", () => {
 	describe("with ngModel", () => {
 		beforeEach(
 			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkNumberMaskNew]='numberMaskConfig'");
+				const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkNumberMask]='numberMaskConfig'");
 
 				TestBed.overrideTemplate(TestComponent, newTemplate);
 
@@ -269,7 +269,7 @@ describe("NumberMaskDirective", () => {
 
 		beforeEach(
 			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[formControl]='formControl' [starkNumberMaskNew]='numberMaskConfig'");
+				const newTemplate: string = getTemplate("[formControl]='formControl' [starkNumberMask]='numberMaskConfig'");
 
 				TestBed.overrideTemplate(TestComponent, newTemplate);
 

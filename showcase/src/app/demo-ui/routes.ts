@@ -26,7 +26,7 @@ import {
 	DemoToastPageComponent,
 	DemoTransformInputDirectivePageComponent,
 	DemoDateTimePickerPageComponent,
-	DemoInputMaskDirectivesPageNewComponent
+	DemoInputMaskDirectivesPageComponent
 } from "./pages";
 
 export const DEMO_STATES: Ng2StateDeclaration[] = [
@@ -149,12 +149,12 @@ export const DEMO_STATES: Ng2StateDeclaration[] = [
 		views: { "@": { component: DemoLogoutPageComponent } }
 	},
 	{
-		name: "demo-ui.input-mask-directives-new",
-		url: "/input-mask-directives-new",
+		name: "demo-ui.input-mask-directives",
+		url: "/input-mask-directives",
 		data: {
 			translationKey: "SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TITLE"
 		},
-		views: { "@": { component: DemoInputMaskDirectivesPageNewComponent } }
+		views: { "@": { component: DemoInputMaskDirectivesPageComponent } }
 	},
 	{
 		name: "demo-ui.menu",

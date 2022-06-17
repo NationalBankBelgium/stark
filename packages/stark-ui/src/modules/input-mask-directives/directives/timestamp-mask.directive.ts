@@ -1,6 +1,6 @@
-import { StarkTextMaskBaseDirective } from "./stark-text-mask-base.directive";
+import { TextMaskBaseDirective } from "./text-mask-base.directive";
 import IMask from "imask";
-import { FilterDateType, StarkTimestampMaskConfigNew, StarkDateInput } from "./timestamp-mask-config-new.intf";
+import { FilterDateType, StarkTimestampMaskConfig, StarkDateInput } from "./timestamp-mask-config.intf";
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2, SimpleChanges } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
 import moment from "moment";
@@ -8,7 +8,7 @@ import { IMaskFactory } from "angular-imask";
 /**
  * @ignore
  */
-const directiveName = "[starkTimestampMaskNew]";
+const directiveName = "[starkTimestampMask]";
 
 /**
  * The Time date format that is used when no other is specified.
@@ -21,7 +21,7 @@ const DEFAULT_DATE_TIME_FORMAT = "DD-MM-YYYY HH:mm:ss";
 export const STARK_TIMESTAMP_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	// tslint:disable-next-line:no-forward-ref
-	useExisting: forwardRef(() => StarkTimestampMaskNewDirective),
+	useExisting: forwardRef(() => StarkTimestampMaskDirective),
 	multi: true
 };
 
@@ -33,17 +33,19 @@ export const STARK_TIMESTAMP_MASK_NEW_VALUE_ACCESSOR: Provider = {
 		"(compositionend)": "_compositionEnd($event.target.value)"
 	},
 	selector: directiveName,
-	exportAs: "starkTextMaskNew",
+	exportAs: "starkTimestampMask",
 	providers: [STARK_TIMESTAMP_MASK_NEW_VALUE_ACCESSOR]
 })
-export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<IMask.MaskedDateOptions, StarkTimestampMaskConfigNew> {
+export class StarkTimestampMaskDirective extends TextMaskBaseDirective<IMask.MaskedDateOptions, StarkTimestampMaskConfig> {
 	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_max: StarkDateInput;
+
 	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_min: StarkDateInput;
+
 	// tslint:disable-next-line:no-input-rename
-	@Input("starkTimestampMaskNew")
-	public override maskConfig?: StarkTimestampMaskConfigNew | string = {};
+	@Input("starkTimestampMask")
+	public override maskConfig?: StarkTimestampMaskConfig | string = {};
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
 
@@ -213,7 +215,7 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 		return true;
 	}
 
-	protected override defaultMask(): StarkTimestampMaskConfigNew {
+	protected override defaultMask(): StarkTimestampMaskConfig {
 		return {
 			format: DEFAULT_DATE_TIME_FORMAT,
 			usingMoment: true,
@@ -224,10 +226,10 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 	}
 
 	protected override mergeMaskConfig(
-		maskConfig: string | StarkTimestampMaskConfigNew,
-		defaultMask: StarkTimestampMaskConfigNew
-	): StarkTimestampMaskConfigNew {
-		let mask: StarkTimestampMaskConfigNew;
+		maskConfig: string | StarkTimestampMaskConfig,
+		defaultMask: StarkTimestampMaskConfig
+	): StarkTimestampMaskConfig {
+		let mask: StarkTimestampMaskConfig;
 		if (typeof maskConfig === "string") {
 			if (maskConfig === "") {
 				mask = {
@@ -253,10 +255,10 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 	}
 
 	protected override normalizeMaskConfig(
-		maskConfig: string | StarkTimestampMaskConfigNew,
-		defaultMask: StarkTimestampMaskConfigNew
+		maskConfig: string | StarkTimestampMaskConfig,
+		defaultMask: StarkTimestampMaskConfig
 	): IMask.MaskedDateOptions {
-		const mask: StarkTimestampMaskConfigNew = this.mergeMaskConfig(maskConfig, defaultMask);
+		const mask: StarkTimestampMaskConfig = this.mergeMaskConfig(maskConfig, defaultMask);
 		const iMask: IMask.MaskedDateOptions = {
 			mask: Date,
 			pattern: mask.format,
@@ -280,7 +282,7 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 		return this.addDateRestriction(iMask);
 	}
 
-	private minDateForMask(mask: StarkTimestampMaskConfigNew): Date | undefined {
+	private minDateForMask(mask: StarkTimestampMaskConfig): Date | undefined {
 		if (this.min) {
 			return this.min.toDate();
 		}
@@ -293,7 +295,7 @@ export class StarkTimestampMaskNewDirective extends StarkTextMaskBaseDirective<I
 		return undefined;
 	}
 
-	private maxDateForMask(mask: StarkTimestampMaskConfigNew): Date | undefined {
+	private maxDateForMask(mask: StarkTimestampMaskConfig): Date | undefined {
 		if (this.max) {
 			return this.max.toDate();
 		}

@@ -1,4 +1,4 @@
-export interface StarkTextMaskBaseConfigNew {
+export interface StarkTextMaskBaseConfig {
 	/**
 	 * Whether to show the mask while the user is typing in the input field in order to guide him.
 	 *
@@ -34,7 +34,7 @@ export interface StarkTextMaskBaseConfigNew {
 /**
  * Defines the configuration object for the {@link StarkTextMaskDirective}.
  */
-export interface StarkTextMaskConfigNew extends StarkTextMaskBaseConfigNew {
+export interface StarkTextMaskConfig extends StarkTextMaskBaseConfig {
 	/**
 	 * Array or a function that defines how the user input is going to be masked. If is set to `false`, the mask will be removed.
 	 *

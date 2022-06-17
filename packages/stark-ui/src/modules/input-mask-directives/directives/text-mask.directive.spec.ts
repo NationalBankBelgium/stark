@@ -1,10 +1,10 @@
 import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { Component, DebugElement } from "@angular/core";
-import { StarkTextMaskConfigNew } from "./text-mask-new-config.intf";
+import { StarkTextMaskConfig } from "./text-mask-config.intf";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { IMaskModule } from "angular-imask";
-import { StarkTextMaskNewDirective } from "./text-mask-new.directive";
+import { StarkTextMaskDirective } from "./text-mask.directive";
 
 // tslint:disable-next-line:no-big-function
 describe("TextMaskDirective", () => {
@@ -12,7 +12,7 @@ describe("TextMaskDirective", () => {
 	let hostComponent: TestComponent;
 	let inputElement: DebugElement;
 
-	const textMaskConfig: StarkTextMaskConfigNew = {
+	const textMaskConfig: StarkTextMaskConfig = {
 		mask: "X0/00",
 		definitions: {
 			X: { mask: /[0-1]/ }
@@ -23,10 +23,10 @@ describe("TextMaskDirective", () => {
 
 	@Component({
 		selector: "test-component",
-		template: getTemplate("[starkTextMaskNew]='textMaskConfig'")
+		template: getTemplate("[starkTextMask]='textMaskConfig'")
 	})
 	class TestComponent {
-		public textMaskConfig: StarkTextMaskConfigNew = textMaskConfig;
+		public textMaskConfig: StarkTextMaskConfig = textMaskConfig;
 		public ngModelValue = "";
 		public formControl = new FormControl();
 	}
@@ -56,7 +56,7 @@ describe("TextMaskDirective", () => {
 	// Inject module dependencies
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [StarkTextMaskNewDirective, TestComponent],
+			declarations: [StarkTextMaskDirective, TestComponent],
 			imports: [FormsModule, ReactiveFormsModule, IMaskModule],
 			providers: []
 		});
@@ -185,11 +185,11 @@ describe("TextMaskDirective", () => {
 			initializeComponentFixture();
 		});
 
-		xit("should render the appropriate content", () => {
+		it("should render the appropriate content", () => {
 			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkTextMask directive
 		});
 
-		xit("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
+		it("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
 			// Angular2 text-mask directive handles only the "input" event
 			const validEvents: string[] = ["input"];
 
@@ -265,8 +265,6 @@ describe("TextMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.ngModelValue).toBe("12/3_");
-			console.log("value");
-			console.log(hostComponent.ngModelValue);
 
 			hostComponent.textMaskConfig = <any>undefined;
 			fixture.detectChanges();
@@ -274,8 +272,6 @@ describe("TextMaskDirective", () => {
 			changeInputValue(inputElement, "whatever");
 			fixture.detectChanges();
 
-			console.log("value");
-			console.log(hostComponent.ngModelValue);
 			expect(hostComponent.ngModelValue).toBe("whatever"); // no mask at all
 
 			hostComponent.textMaskConfig = { mask: false };

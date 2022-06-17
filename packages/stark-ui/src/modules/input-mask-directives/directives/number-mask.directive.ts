@@ -1,14 +1,14 @@
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2 } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
 import IMask from "imask";
-import { StarkNumberMaskConfigNew } from "./number-mask-config-new.intf";
-import { StarkTextMaskBaseDirective } from "./stark-text-mask-base.directive";
+import { StarkNumberMaskConfig } from "./number-mask-config.intf";
+import { TextMaskBaseDirective } from "./text-mask-base.directive";
 import { IMaskFactory } from "angular-imask";
 
 /**
  * @ignore
  */
-const directiveName = "[starkNumberMaskNew]";
+const directiveName = "[starkNumberMask]";
 
 /**
  * @ignore
@@ -16,7 +16,7 @@ const directiveName = "[starkNumberMaskNew]";
 export const STARK_NUMBER_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	// tslint:disable-next-line:no-forward-ref
-	useExisting: forwardRef(() => StarkNumberMaskNewDirective),
+	useExisting: forwardRef(() => StarkNumberMaskDirective),
 	multi: true
 };
 
@@ -46,13 +46,13 @@ export const STARK_NUMBER_MASK_NEW_VALUE_ACCESSOR: Provider = {
 		"(compositionend)": "_compositionEnd($event.target.value)"
 	},
 	selector: directiveName,
-	exportAs: "starkNumberMaskNew",
+	exportAs: "starkNumberMask",
 	providers: [STARK_NUMBER_MASK_NEW_VALUE_ACCESSOR]
 })
-export class StarkNumberMaskNewDirective extends StarkTextMaskBaseDirective<IMask.MaskedNumberOptions, StarkNumberMaskConfigNew> {
+export class StarkNumberMaskDirective extends TextMaskBaseDirective<IMask.MaskedNumberOptions, StarkNumberMaskConfig> {
 	/* tslint:disable:no-input-rename */
-	@Input("starkNumberMaskNew")
-	public override maskConfig: StarkNumberMaskConfigNew = {};
+	@Input("starkNumberMask")
+	public override maskConfig: StarkNumberMaskConfig = {};
 
 	public constructor(
 		_renderer: Renderer2,
@@ -64,11 +64,11 @@ export class StarkNumberMaskNewDirective extends StarkTextMaskBaseDirective<IMas
 		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
 	}
 
-	public override normalizeMaskConfig(maskConfig: string | StarkNumberMaskConfigNew, defaultMask: StarkNumberMaskConfigNew): any {
+	public override normalizeMaskConfig(maskConfig: string | StarkNumberMaskConfig, defaultMask: StarkNumberMaskConfig): any {
 		if (!maskConfig) {
 			return undefined;
 		}
-		const mask: StarkNumberMaskConfigNew = this.mergeMaskConfig(maskConfig, defaultMask);
+		const mask: StarkNumberMaskConfig = this.mergeMaskConfig(maskConfig, defaultMask);
 
 		const numberMask: IMask.MaskedNumberOptions = {
 			mask: Number,
@@ -93,17 +93,14 @@ export class StarkNumberMaskNewDirective extends StarkTextMaskBaseDirective<IMas
 		return numberMask;
 	}
 
-	public override mergeMaskConfig(
-		maskConfig: string | StarkNumberMaskConfigNew,
-		defaultMask: StarkNumberMaskConfigNew
-	): StarkNumberMaskConfigNew {
+	public override mergeMaskConfig(maskConfig: string | StarkNumberMaskConfig, defaultMask: StarkNumberMaskConfig): StarkNumberMaskConfig {
 		if (typeof maskConfig === "string") {
 			return { ...defaultMask };
 		}
 		return { ...defaultMask, ...maskConfig };
 	}
 
-	protected override defaultMask(): StarkNumberMaskConfigNew {
+	protected override defaultMask(): StarkNumberMaskConfig {
 		return {
 			prefix: "",
 			suffix: "",

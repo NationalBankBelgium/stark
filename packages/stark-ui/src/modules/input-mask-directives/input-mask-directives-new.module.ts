@@ -1,14 +1,14 @@
 import { NgModule } from "@angular/core";
 
 import { IMaskModule } from "angular-imask";
-import { StarkTextMaskNewDirective } from "./directives/text-mask-new.directive";
-import { StarkNumberMaskNewDirective } from "./directives/number-mask-new.directive";
-import { StarkEmailMaskNewDirective } from "./directives/email-mask-new.directive";
-import { StarkTimestampMaskNewDirective } from "./directives/timestamp-mask.directive";
+import { StarkTextMaskDirective } from "./directives/text-mask.directive";
+import { StarkNumberMaskDirective } from "./directives/number-mask.directive";
+import { StarkEmailMaskDirective } from "./directives/email-mask.directive";
+import { StarkTimestampMaskDirective } from "./directives/timestamp-mask.directive";
 
 @NgModule({
-	declarations: [StarkTextMaskNewDirective, StarkNumberMaskNewDirective, StarkEmailMaskNewDirective, StarkTimestampMaskNewDirective],
+	declarations: [StarkTextMaskDirective, StarkNumberMaskDirective, StarkEmailMaskDirective, StarkTimestampMaskDirective],
 	imports: [IMaskModule],
-	exports: [StarkTextMaskNewDirective, StarkNumberMaskNewDirective, StarkEmailMaskNewDirective, StarkTimestampMaskNewDirective]
+	exports: [StarkTextMaskDirective, StarkNumberMaskDirective, StarkEmailMaskDirective, StarkTimestampMaskDirective]
 })
 export class StarkInputMaskDirectivesModuleNew {}

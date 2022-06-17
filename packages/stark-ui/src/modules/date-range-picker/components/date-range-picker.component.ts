@@ -33,7 +33,7 @@ import { AbstractStarkUiComponent } from "../../../common/classes/abstract-compo
 import { StarkDatePickerComponent, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker/components";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
-import { isStarkTimestampMaskConfig, StarkDateInput } from "../../input-mask-directives-new/directives/timestamp-mask-config-new.intf";
+import { isStarkTimestampMaskConfig, StarkDateInput } from "../../input-mask-directives/directives/timestamp-mask-config.intf";
 import moment from "moment";
 
 /**

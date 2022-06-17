@@ -5,7 +5,7 @@ import { By } from "@angular/platform-browser";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Observer } from "rxjs";
 import { BooleanInput } from "@angular/cdk/coercion";
-import { StarkEmailMaskNewDirective } from "./email-mask-new.directive";
+import { StarkEmailMaskDirective } from "./email-mask.directive";
 import { IMaskModule } from "angular-imask";
 
 describe("EmailMaskDirective", () => {
@@ -48,7 +48,7 @@ describe("EmailMaskDirective", () => {
 	// Inject module dependencies
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [StarkEmailMaskNewDirective, TestComponent],
+			declarations: [StarkEmailMaskDirective, TestComponent],
 			imports: [FormsModule, ReactiveFormsModule, IMaskModule],
 			providers: []
 		});
@@ -145,7 +145,7 @@ describe("EmailMaskDirective", () => {
 	describe("with ngModel", () => {
 		beforeEach(
 			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkEmailMaskNew]='emailMaskConfig'");
+				const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkEmailMask]='emailMaskConfig'");
 
 				TestBed.overrideTemplate(TestComponent, newTemplate);
 
@@ -240,7 +240,7 @@ describe("EmailMaskDirective", () => {
 
 		beforeEach(
 			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[formControl]='formControl' [starkEmailMaskNew]='emailMaskConfig'");
+				const newTemplate: string = getTemplate("[formControl]='formControl' [starkEmailMask]='emailMaskConfig'");
 
 				TestBed.overrideTemplate(TestComponent, newTemplate);
 

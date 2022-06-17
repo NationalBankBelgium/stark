@@ -8,10 +8,10 @@ import * as moment from "moment";
 
 @Component({
 	selector: "showcase-demo-mask-directives-new",
-	styleUrls: ["./demo-input-mask-directives-page-new.component.scss"],
-	templateUrl: "./demo-input-mask-directives-page-new.component.html"
+	styleUrls: ["./demo-input-mask-directives-page.component.scss"],
+	templateUrl: "./demo-input-mask-directives-page.component.html"
 })
-export class DemoInputMaskDirectivesPageNewComponent {
+export class DemoInputMaskDirectivesPageComponent {
 	public creditCardMaskConfig: StarkTextMaskConfig = {
 		mask: StarkTextMasks.CREDITCARD_NUMBER,
 		placeholderChar: "#"

@@ -1,1 +1,1 @@
-export * from "./demo-input-mask-directives-page-new.component";
+export * from "./demo-input-mask-directives-page.component";

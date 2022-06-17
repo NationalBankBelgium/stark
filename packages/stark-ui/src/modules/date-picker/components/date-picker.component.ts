@@ -27,7 +27,7 @@ import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
 import { Subject, Subscription } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { isStarkTimestampMaskConfig, StarkTimestampMaskConfigNew, StarkDateInput } from "../../input-mask-directives-new/directives";
+import { isStarkTimestampMaskConfig, StarkTimestampMaskConfig, StarkDateInput } from "../../input-mask-directives/directives";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import isEqual from "lodash-es/isEqual";
 
@@ -39,7 +39,7 @@ export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Da
 /**
  * Type expected by [StarkDatePickerComponent maskConfig]{@link StarkDatePickerComponent#maskConfig} input.
  */
-export type StarkDatePickerMaskConfig = StarkTimestampMaskConfigNew | boolean;
+export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean;
 
 /**
  * Type expected by [StarkDatePickerComponent max]{@link StarkDatePickerComponent#max} and
@@ -49,7 +49,7 @@ export type StarkDatePickerMaskConfig = StarkTimestampMaskConfigNew | boolean;
 /**
  * Default date mask configuration used by the {@link StarkDatePickerComponent}
  */
-export const DEFAULT_DATE_MASK_CONFIG: StarkTimestampMaskConfigNew = { format: "DD/MM/YYYY" };
+export const DEFAULT_DATE_MASK_CONFIG: StarkTimestampMaskConfig = { format: "DD/MM/YYYY" };
 
 /**
  * @ignore
@@ -385,7 +385,7 @@ export class StarkDatePickerComponent
 	 * @ignore
 	 * @internal
 	 */
-	public dateMaskConfig?: StarkTimestampMaskConfigNew = undefined;
+	public dateMaskConfig?: StarkTimestampMaskConfig = undefined;
 
 	/**
 	 * Part of {@link MatFormFieldControl} API
@@ -741,7 +741,7 @@ export class StarkDatePickerComponent
 	 * If the inputMask is not enabled, it returns `undefined` to disable `starkTimestampMask`.
 	 * Otherwise, it returns the defined configuration.
 	 */
-	public getTimestampMaskConfig(): StarkTimestampMaskConfigNew | undefined {
+	public getTimestampMaskConfig(): StarkTimestampMaskConfig | undefined {
 		return this.inputMaskEnabled ? this.dateMaskConfig : undefined;
 	}
 

@@ -1,7 +1,7 @@
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2 } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { StarkTextMaskBaseDirective } from "./stark-text-mask-base.directive";
-import { StarkTextMaskConfigNew } from "./text-mask-new-config.intf";
+import { TextMaskBaseDirective } from "./text-mask-base.directive";
+import { StarkTextMaskConfig } from "./text-mask-config.intf";
 import IMask from "imask";
 import { IMaskFactory } from "angular-imask";
 import { BooleanInput } from "@angular/cdk/coercion";
@@ -17,7 +17,7 @@ const directiveName = "[starkEmailMask]";
 export const STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	// tslint:disable-next-line:no-forward-ref
-	useExisting: forwardRef(() => StarkEmailMaskNewDirective),
+	useExisting: forwardRef(() => StarkEmailMaskDirective),
 	multi: true
 };
 
@@ -34,16 +34,16 @@ const DEFAULT_EMAIL_PATTERN = "name@domain.tld";
 		"(compositionend)": "_compositionEnd($event.target.value)"
 	},
 	selector: directiveName,
-	exportAs: "starkEmailMaskNew",
+	exportAs: "starkEmailMask",
 	providers: [STARK_EMAIL_MASK_NEW_VALUE_ACCESSOR]
 })
-export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfigNew> {
+export class StarkEmailMaskDirective extends TextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfig> {
 	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_maskConfig: BooleanInput;
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
 	/* tslint:disable:no-input-rename */
-	@Input("starkEmailMaskNew")
+	@Input("starkEmailMask")
 	public override maskConfig = true;
 
 	public constructor(
@@ -56,7 +56,7 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
 	}
 
-	protected override defaultMask(): StarkTextMaskConfigNew {
+	protected override defaultMask(): StarkTextMaskConfig {
 		return {
 			mask: DEFAULT_EMAIL_PATTERN,
 			blocks: {
@@ -71,11 +71,8 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 		};
 	}
 
-	protected override normalizeMaskConfig(
-		maskConfig: boolean | string | StarkTextMaskConfigNew,
-		defaultMask: StarkTextMaskConfigNew
-	): any {
-		const mask: StarkTextMaskConfigNew = this.mergeMaskConfig(maskConfig, defaultMask);
+	protected override normalizeMaskConfig(maskConfig: boolean | string | StarkTextMaskConfig, defaultMask: StarkTextMaskConfig): any {
+		const mask: StarkTextMaskConfig = this.mergeMaskConfig(maskConfig, defaultMask);
 		return {
 			...mask,
 			...defaultMask,
@@ -88,9 +85,9 @@ export class StarkEmailMaskNewDirective extends StarkTextMaskBaseDirective<IMask
 	}
 
 	protected override mergeMaskConfig(
-		maskConfig: StarkTextMaskConfigNew | string | boolean,
-		defaultMask: StarkTextMaskConfigNew
-	): StarkTextMaskConfigNew {
+		maskConfig: StarkTextMaskConfig | string | boolean,
+		defaultMask: StarkTextMaskConfig
+	): StarkTextMaskConfig {
 		if (typeof maskConfig === "boolean") {
 			return { ...defaultMask, mask: maskConfig ? DEFAULT_EMAIL_PATTERN : "" };
 		}

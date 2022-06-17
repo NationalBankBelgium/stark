@@ -1,4 +1,4 @@
-export interface StarkNumberMaskConfigNew {
+export interface StarkNumberMaskConfig {
 	/**
 	 * String to be displayed before the amount.
 	 *

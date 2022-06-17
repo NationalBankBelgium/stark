@@ -18,7 +18,7 @@ import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { Observer } from "rxjs";
 import moment from "moment";
 import { STARK_DATE_FORMATS, StarkDatePickerModule, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker";
-import { StarkTimestampMaskConfigNew, StarkInputMaskDirectivesModuleNew } from "../../input-mask-directives-new";
+import { StarkTimestampMaskConfig, StarkInputMaskDirectivesModuleNew } from "../../input-mask-directives-new";
 import { DEFAULT_TIME_MASK_CONFIG, StarkDateTimePickerComponent } from "./date-time-picker.component";
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
@@ -56,7 +56,7 @@ class TestHostComponent {
 	public isDisabled?: boolean;
 	public required?: boolean;
 	public dateMask?: StarkDatePickerMaskConfig;
-	public timeMask?: StarkTimestampMaskConfigNew;
+	public timeMask?: StarkTimestampMaskConfig;
 	public dateFilter?: StarkDatePickerFilter;
 	public minDate?: Date;
 	public maxDate?: Date;
@@ -96,7 +96,7 @@ class TestHostFormControlComponent {
 	public isDisabled?: boolean;
 	public required?: boolean;
 	public dateMask?: StarkDatePickerMaskConfig;
-	public timeMask?: StarkTimestampMaskConfigNew;
+	public timeMask?: StarkTimestampMaskConfig;
 	public dateFilter?: StarkDatePickerFilter;
 	public minDate?: Date;
 	public maxDate?: Date;
@@ -497,7 +497,7 @@ describe("DateTimePickerComponent", () => {
 				hostFixture.detectChanges();
 				expect(component.timeMask).toBe(DEFAULT_TIME_MASK_CONFIG);
 
-				const timeMask: StarkTimestampMaskConfigNew = { format: "HH:mm" };
+				const timeMask: StarkTimestampMaskConfig = { format: "HH:mm" };
 				hostComponent.timeMask = timeMask;
 				hostFixture.detectChanges();
 				expect(component.timeMask).toBe(timeMask);

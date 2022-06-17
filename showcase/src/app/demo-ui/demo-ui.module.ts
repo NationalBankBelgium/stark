@@ -63,7 +63,7 @@ import {
 	DemoTransformInputDirectivePageComponent,
 	DemoDateTimePickerPageComponent,
 	demoGenericSearchStoreKey,
-	DemoInputMaskDirectivesPageNewComponent
+	DemoInputMaskDirectivesPageComponent
 } from "./pages";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
@@ -133,7 +133,7 @@ import {
 		DemoRestrictInputDirectivePageComponent,
 		DemoLanguageSelectorPageComponent,
 		DemoLogoutPageComponent,
-		DemoInputMaskDirectivesPageNewComponent,
+		DemoInputMaskDirectivesPageComponent,
 		DemoMenuPageComponent,
 		DemoMessagePanePageComponent,
 		DemoMinimapPageComponent,
@@ -173,7 +173,7 @@ import {
 		DemoRestrictInputDirectivePageComponent,
 		DemoLanguageSelectorPageComponent,
 		DemoLogoutPageComponent,
-		DemoInputMaskDirectivesPageNewComponent,
+		DemoInputMaskDirectivesPageComponent,
 		DemoMenuPageComponent,
 		DemoMessagePanePageComponent,
 		DemoMinimapPageComponent,

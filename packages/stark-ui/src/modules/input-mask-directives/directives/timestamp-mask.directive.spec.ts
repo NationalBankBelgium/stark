@@ -4,8 +4,8 @@ import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { Observer } from "rxjs";
-import { StarkTimestampMaskNewDirective } from "./timestamp-mask.directive";
-import { StarkTimestampMaskConfigNew } from "./timestamp-mask-config-new.intf";
+import { StarkTimestampMaskDirective } from "./timestamp-mask.directive";
+import { StarkTimestampMaskConfig } from "./timestamp-mask-config.intf";
 import { IMaskModule } from "angular-imask";
 
 describe("TimestampMaskDirective", () => {
@@ -13,16 +13,16 @@ describe("TimestampMaskDirective", () => {
 	let hostComponent: TestComponent;
 	let inputElement: DebugElement;
 
-	const timestampMaskConfig: StarkTimestampMaskConfigNew = {
+	const timestampMaskConfig: StarkTimestampMaskConfig = {
 		format: "DD/MM/YYYY"
 	};
 
 	@Component({
 		selector: "test-component",
-		template: getTemplate("[starkTimestampMaskNew]='timestampMaskConfig'")
+		template: getTemplate("[starkTimestampMask]='timestampMaskConfig'")
 	})
 	class TestComponent {
-		public timestampMaskConfig: StarkTimestampMaskConfigNew = timestampMaskConfig;
+		public timestampMaskConfig: StarkTimestampMaskConfig = timestampMaskConfig;
 		public ngModelValue = "";
 		public formControl = new FormControl("");
 	}
@@ -52,7 +52,7 @@ describe("TimestampMaskDirective", () => {
 	// Inject module dependencies
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [StarkTimestampMaskNewDirective, TestComponent],
+			declarations: [StarkTimestampMaskDirective, TestComponent],
 			imports: [FormsModule, ReactiveFormsModule, IMaskModule],
 			providers: []
 		});
@@ -164,7 +164,7 @@ describe("TimestampMaskDirective", () => {
 
 	describe("with ngModel", () => {
 		beforeEach(fakeAsync(() => {
-			const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkTimestampMaskNew]='timestampMaskConfig'");
+			const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkTimestampMask]='timestampMaskConfig'");
 
 			TestBed.overrideTemplate(TestComponent, newTemplate);
 
@@ -276,7 +276,7 @@ describe("TimestampMaskDirective", () => {
 		let mockValueChangeObserver: jasmine.SpyObj<Observer<any>>;
 
 		beforeEach(fakeAsync(() => {
-			const newTemplate: string = getTemplate("[formControl]='formControl' [starkTimestampMaskNew]='timestampMaskConfig'");
+			const newTemplate: string = getTemplate("[formControl]='formControl' [starkTimestampMask]='timestampMaskConfig'");
 
 			TestBed.overrideTemplate(TestComponent, newTemplate);
 
