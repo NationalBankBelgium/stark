@@ -11,4 +11,4 @@ import { StarkTimestampMaskDirective } from "./directives/timestamp-mask.directi
 	imports: [IMaskModule],
 	exports: [StarkTextMaskDirective, StarkNumberMaskDirective, StarkEmailMaskDirective, StarkTimestampMaskDirective]
 })
-export class StarkInputMaskDirectivesModuleNew {}
+export class StarkInputMaskDirectivesModule {}

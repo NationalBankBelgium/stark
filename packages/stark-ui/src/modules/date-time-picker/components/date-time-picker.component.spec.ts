@@ -18,7 +18,7 @@ import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { Observer } from "rxjs";
 import moment from "moment";
 import { STARK_DATE_FORMATS, StarkDatePickerModule, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker";
-import { StarkTimestampMaskConfig, StarkInputMaskDirectivesModuleNew } from "../../input-mask-directives-new";
+import { StarkTimestampMaskConfig, StarkInputMaskDirectivesModule } from "../../input-mask-directives-new";
 import { DEFAULT_TIME_MASK_CONFIG, StarkDateTimePickerComponent } from "./date-time-picker.component";
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
@@ -122,7 +122,7 @@ describe("DateTimePickerComponent", () => {
 					FormsModule,
 					ReactiveFormsModule,
 					StarkDatePickerModule,
-					StarkInputMaskDirectivesModuleNew,
+					StarkInputMaskDirectivesModule,
 					TranslateModule.forRoot()
 				],
 				providers: [

@@ -1,2 +1,2 @@
 export * from "./input-mask-directives/directives";
-export * from "./input-mask-directives/input-mask-directives-new.module";
+export * from "./input-mask-directives/input-mask-directives.module";

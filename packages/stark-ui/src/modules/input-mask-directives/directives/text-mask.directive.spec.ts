@@ -48,7 +48,9 @@ describe("TextMaskDirective", () => {
 
 		// more verbose way to create and trigger an event (the only way it works in IE)
 		// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
-		const ev: Event = document.createEvent("Event");
+		/*const ev: Event = document.createEvent("Event");
+		ev.initEvent(eventType, true, true);*/
+		const ev: TextEvent = new TextEvent();
 		ev.initEvent(eventType, true, true);
 		(<HTMLInputElement>inputDebugElement.nativeElement).dispatchEvent(ev);
 	}
