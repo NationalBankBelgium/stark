@@ -149,7 +149,8 @@
 		<stark-table-column
 			*ngIf="tableRowActions && tableRowActions.actions && tableRowActions.actions.length"
 			[sortable]="false"
-			[name]="'STARK.TABLE.ACTIONS' | translate"
+			[headerLabel]="'STARK.TABLE.ACTIONS' | translate"
+			name="Actions"
 			[stickyEnd]="tableRowActions.isFixed"
 		>
 			<ng-template let-context>
