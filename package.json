@@ -154,7 +154,7 @@
     "clean:modules:stark-ui": "cd packages/stark-ui && npm run clean:modules dist && cd ../..",
     "clean:modules:showcase": "cd showcase && npm run clean:modules && cd ..",
     "clean:modules:starter": "cd starter && npm run clean:modules && cd ..",
-    "commit": "./node_modules/.bin/git-cz",
+    "commit": "cz",
     "docs": "npm run docs:clean && npm run docs:all",
     "docs:all": "npm run docs:stark-core:generate && npm run docs:stark-ui:generate && npm run docs:stark-rbac:generate && npm run docs:starter:generate",
     "docs:clean": "npx rimraf reports/api-docs",
