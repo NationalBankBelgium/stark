@@ -8,21 +8,28 @@ export type FilterDateType = FilterDateFunction | "OnlyWeekends" | "OnlyWeekdays
 // tslint:disable-next-line:no-null-undefined-union
 export type StarkDateInput = Date | moment.Moment | null | undefined;
 
+/**
+ * Watch dog to check if the config is an instance of StarkTimestampMaskConfig
+ * @param config the object to test
+ */
 export function isStarkTimestampMaskConfig(config: any): config is StarkTimestampMaskConfig {
 	return config && typeof config.format === "string";
 }
 
+/**
+ *
+ */
 export interface StarkTimestampMaskConfig {
 	/**
-	 *  format og the timestamp
-	 * YYYY: placeholder for year
-	 * MM: placeholder for month
-	 * DD: placeholder for day of the month
-	 * HH: placeholder for Hours (24 hours format)
-	 * mm: placeholder for minute
-	 * ss: placeholder for second
+	 * format of the timestamp:
+	 * - YYYY: placeholder for year
+	 * - MM: placeholder for month
+	 * - DD: placeholder for day of the month
+	 * - HH: placeholder for Hours (24 hours format)
+	 * - mm: placeholder for minute
+	 * - ss: placeholder for second
 	 */
-	format?: string;
+	format: string;
 
 	usingMoment?: boolean;
 	/**

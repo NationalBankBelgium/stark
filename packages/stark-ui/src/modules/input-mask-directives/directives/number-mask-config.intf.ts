@@ -1,3 +1,11 @@
+/**
+ * This config object is used to define the behaviours of the starkNumberMask directive
+ * - define suffix and postfix char
+ * - define if integer or decimal
+ * - define if positive or negative
+ * - define max decimal precision
+ * - define max number value
+ */
 export interface StarkNumberMaskConfig {
 	/**
 	 * String to be displayed before the amount.
@@ -81,6 +89,5 @@ export interface StarkNumberMaskConfig {
 	 *
 	 * default: 'true'
 	 */
-
 	guide?: boolean;
 }

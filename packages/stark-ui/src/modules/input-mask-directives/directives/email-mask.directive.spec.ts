@@ -23,8 +23,8 @@ describe("EmailMaskDirective", () => {
 		public formControl = new FormControl("");
 	}
 
-	function getTemplate(emailMaskNewDirective: string): string {
-		return "<input " + "type='text' " + emailMaskNewDirective + ">";
+	function getTemplate(emailMaskDirective: string): string {
+		return "<input " + "type='text' " + emailMaskDirective + ">";
 	}
 
 	function initializeComponentFixture(): void {

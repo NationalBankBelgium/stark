@@ -13,7 +13,7 @@ export * from "./modules/date-time-picker";
 export * from "./modules/dialogs";
 export * from "./modules/dropdown";
 export * from "./modules/generic-search";
-export * from "./modules/input-mask-directives-new";
+export * from "./modules/input-mask-directives";
 export * from "./modules/restrict-input-directive";
 export * from "./modules/language-selector";
 export * from "./modules/message-pane";

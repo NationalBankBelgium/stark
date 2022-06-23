@@ -15,13 +15,17 @@ import {
 	SimpleChange,
 	SimpleChanges
 } from "@angular/core";
-import { COMPOSITION_BUFFER_MODE } from "@angular/forms";
 import { StarkTimestampMaskConfig } from "./timestamp-mask-config.intf";
+import { COMPOSITION_BUFFER_MODE } from "@angular/forms";
 
 export type MaskConfigType = StarkTextMaskBaseConfig | StarkNumberMaskConfig | StarkTimestampMaskConfig | string | boolean;
 
-@Injectable()
-export abstract class TextMaskBaseDirective<
+/**
+ * Base class of the InputMask directive
+ * This class provide common functions needed for all inputMask
+ */
+@Injectable() // needed to avoid the compilation error ´NG2007: Class is using Angular features but is not decorated. Please add an explicit Angular decorator.´
+export abstract class AbstractStarkTextMaskBaseDirective<
 		Opts extends AnyMaskedOptions,
 		MaskConfig extends StarkTextMaskBaseConfig | StarkNumberMaskConfig | StarkTimestampMaskConfig
 	>
@@ -41,7 +45,15 @@ export abstract class TextMaskBaseDirective<
 	 */
 	private listener?: EventListener;
 
-	public constructor(
+	/**
+	 *
+	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations
+	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param _factory - ´IMaskFactory` for the imaskjs library {@link https://github.com/uNmAnNeR/imaskjs/blob/master/packages/angular-imask/src/imask-factory.ts | imask-factory}
+	 * @param _platformId - Angular ´PlatformId´ needed for imaskJs
+	 * @param _compositionMode - Injected token to control if form directives buffer IME input until the "compositionend" event occurs.
+	 */
+	protected constructor(
 		_renderer: Renderer2,
 		_elementRef: ElementRef,
 		_factory: IMaskFactory,
@@ -57,6 +69,8 @@ export abstract class TextMaskBaseDirective<
 
 	/**
 	 * Component lifecycle hook
+	 * the base diretive listen for the change on the imask property.
+	 * if it's needed to rebuild the `imask` property, we rebuild it at add the property `imask` in the changes array.
 	 */
 	// tslint:disable-next-line:contextual-lifecycle
 	public override ngOnChanges(changes: SimpleChanges): void {
@@ -64,7 +78,7 @@ export abstract class TextMaskBaseDirective<
 		// if maskConfig changes then apply the change to the imask and propagate changes.
 		if (this.rebuildMaskNgOnChanges(changes)) {
 			const oldValue = this.imask;
-			if (this.maskConfig) {
+			if (this.maskConfig || this.maskConfig === "") {
 				this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
 			} else {
 				this.imask = undefined;
@@ -113,7 +127,8 @@ export abstract class TextMaskBaseDirective<
 	 * @param _value
 	 */
 	public inputAfterMaskRef(_value: any): void {
-		if (this.maskConfig) {
+		// empty string should be considered as valid for the starkEmailMask directive without parameters
+		if (this.maskConfig || this.maskConfig === "") {
 			const mergerConfig: MaskConfig = this.mergeMaskConfig(this.maskConfig, this.defaultMask());
 			if (mergerConfig["guide"] && this.maskRef) {
 				this.maskRef.updateOptions({ lazy: this.maskRef.unmaskedValue === "" });
@@ -121,6 +136,13 @@ export abstract class TextMaskBaseDirective<
 		}
 	}
 
+	/**
+	 * Check if it is needed to rebuild the mask on ngOnChanges
+	 * @param changes list of changes provided by the ngOnChange
+	 * @return - true if the mask must be rebuilt
+	 * - false if not
+	 * @protected
+	 */
 	protected rebuildMaskNgOnChanges(changes: SimpleChanges): boolean {
 		return !!changes["maskConfig"];
 	}

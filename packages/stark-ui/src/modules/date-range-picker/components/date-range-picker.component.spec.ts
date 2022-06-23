@@ -11,7 +11,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkDatePickerModule } from "../../date-picker";
-import { StarkInputMaskDirectivesModule } from "../../input-mask-directives-new";
+import { StarkInputMaskDirectivesModule } from "../../input-mask-directives";
 import { StarkDateRangePickerComponent } from "./date-range-picker.component";
 import { StarkDateRangePickerEvent } from "./date-range-picker-event.intf";
 import { Observer } from "rxjs";
