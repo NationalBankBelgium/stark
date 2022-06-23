@@ -66,5 +66,6 @@ export interface StarkTextMaskConfig extends StarkTextMaskBaseConfig {
 
 	blocks?: { [p: string]: AnyMaskedOptions };
 
-	definitions?: IMask.MaskedPattern.Definitions;
+	// FIXME using type insteadof of any
+	definitions?: { [p: string]: any };
 }
