@@ -9,7 +9,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
 import { StarkDatePickerModule } from "../date-picker";
-import { StarkInputMaskDirectivesModuleNew } from "../input-mask-directives-new";
+import { StarkInputMaskDirectivesModule } from "../input-mask-directives";
 import { StarkDateTimePickerComponent } from "./components/date-time-picker.component";
 import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
@@ -27,7 +27,7 @@ import { mergeUiTranslations } from "../../common/translations/merge-translation
 		FormsModule,
 		ReactiveFormsModule,
 		StarkDatePickerModule,
-		StarkInputMaskDirectivesModuleNew,
+		StarkInputMaskDirectivesModule,
 		TranslateModule
 	],
 	declarations: [StarkDateTimePickerComponent],

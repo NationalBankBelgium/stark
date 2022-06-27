@@ -1,10 +1,11 @@
-import { TextMaskBaseDirective } from "./text-mask-base.directive";
-import IMask from "imask";
-import { FilterDateType, StarkTimestampMaskConfig, StarkDateInput } from "./timestamp-mask-config.intf";
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2, SimpleChanges } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
-import moment from "moment";
 import { IMaskFactory } from "angular-imask";
+import IMask from "imask";
+import moment from "moment";
+import { AbstractStarkTextMaskBaseDirective } from "./abstract-stark-text-mask-base-directive.service";
+import { FilterDateType, StarkDateInput, StarkTimestampMaskConfig } from "./timestamp-mask-config.intf";
+
 /**
  * @ignore
  */
@@ -18,13 +19,27 @@ const DEFAULT_DATE_TIME_FORMAT = "DD-MM-YYYY HH:mm:ss";
 /**
  * @ignore
  */
-export const STARK_TIMESTAMP_MASK_NEW_VALUE_ACCESSOR: Provider = {
+export const STARK_TIMESTAMP_MASK_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	// tslint:disable-next-line:no-forward-ref
 	useExisting: forwardRef(() => StarkTimestampMaskDirective),
 	multi: true
 };
 
+/**
+ * Directive to display a timestamp mask in input elements. This directive internally uses the {@ling https://github.com/uNmAnNeR/imaskjs/blob/master/packages/angular-imask/src/imask.directive.ts|imaskjs}
+ * library to provide the input mask functionality.
+ *
+ * ### Disabling the mask
+ * Passing a `undifined` value as config to the directive will disable the mask.
+ *
+ * @example
+ * <input type="text" [starkTimestampMask]="yourMaskConfig">
+ * <!-- or -->
+ * <input type="text" [(ngModel)]="yourModelValue" [starkTimestampMask]="yourMaskConfig">
+ * <!-- or -->
+ * <input type="text" [formControl]="yourFormControl" [starkTimestampMask]="yourMaskConfig">
+ */
 @Directive({
 	host: {
 		"(input)": "_handleInput($event)",
@@ -34,41 +49,15 @@ export const STARK_TIMESTAMP_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	},
 	selector: directiveName,
 	exportAs: "starkTimestampMask",
-	providers: [STARK_TIMESTAMP_MASK_NEW_VALUE_ACCESSOR]
+	providers: [STARK_TIMESTAMP_MASK_VALUE_ACCESSOR]
 })
-export class StarkTimestampMaskDirective extends TextMaskBaseDirective<IMask.MaskedDateOptions, StarkTimestampMaskConfig> {
-	// tslint:disable-next-line:variable-name
-	public static ngAcceptInputType_max: StarkDateInput;
-
-	// tslint:disable-next-line:variable-name
-	public static ngAcceptInputType_min: StarkDateInput;
-
+export class StarkTimestampMaskDirective extends AbstractStarkTextMaskBaseDirective<IMask.MaskedDateOptions, StarkTimestampMaskConfig> {
+	/**
+	 * Configuration object for the mask to be displayed in the input field.
+	 */
 	// tslint:disable-next-line:no-input-rename
 	@Input("starkTimestampMask")
-	public override maskConfig?: StarkTimestampMaskConfig | string = {};
-
-	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-
-	public constructor(
-		_renderer: Renderer2,
-		_elementRef: ElementRef,
-		_factory: IMaskFactory,
-		@Inject(PLATFORM_ID) _platformId: string,
-		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
-	) {
-		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
-	}
-
-	/**
-	 * @ignore
-	 * Angular expects a Moment or null value.
-	 */
-	// tslint:disable-next-line:no-null-keyword
-	private _max: moment.Moment | null = null;
-
-	public get max(): moment.Moment | null {
-		return this._max;
-	}
+	public override maskConfig?: StarkTimestampMaskConfig | string = { format: DEFAULT_DATE_TIME_FORMAT };
 
 	@Input()
 	public set max(value: moment.Moment | null) {
@@ -82,18 +71,21 @@ export class StarkTimestampMaskDirective extends TextMaskBaseDirective<IMask.Mas
 		}
 	}
 
+	public get max(): moment.Moment | null {
+		return this._max;
+	}
+
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_max: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
 	// tslint:disable-next-line:no-null-keyword
-	public _min: moment.Moment | null = null;
-
-	public get min(): moment.Moment | null {
-		return this._min;
-	}
+	private _max: moment.Moment | null = null;
 
 	/**
 	 * Minimum date of the date picker
@@ -112,12 +104,36 @@ export class StarkTimestampMaskDirective extends TextMaskBaseDirective<IMask.Mas
 		}
 	}
 
+	public get min(): moment.Moment | null {
+		return this._min;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	// tslint:disable-next-line:variable-name
+	public static ngAcceptInputType_min: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// tslint:disable-next-line:no-null-keyword
+	public _min: moment.Moment | null = null;
+
+	public constructor(
+		_renderer: Renderer2,
+		_elementRef: ElementRef,
+		_factory: IMaskFactory,
+		@Inject(PLATFORM_ID) _platformId: string,
+		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
+	) {
+		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
+	}
+
 	// tslint:disable-next-line:cognitive-complexity
 	public addDateRestriction(iMask: IMask.MaskedDateOptions): IMask.MaskedDateOptions {
 		if (iMask.blocks && (iMask.blocks["YY"] || iMask.blocks["YYYY"])) {
-			let yearBlock: IMask.MaskedRangeOptions = <IMask.MaskedRangeOptions>(
-				(!!iMask.blocks["YY"] ? iMask.blocks["YY"] : iMask.blocks["YYYY"])
-			);
+			const block = !!iMask.blocks["YY"] ? iMask.blocks["YY"] : iMask.blocks["YYYY"];
+			let yearBlock: IMask.MaskedRangeOptions = <IMask.MaskedRangeOptions>block;
 			if (iMask.min) {
 				yearBlock = {
 					...yearBlock,
@@ -445,18 +461,51 @@ export class StarkTimestampMaskDirective extends TextMaskBaseDirective<IMask.Mas
 	}
 }
 
+/**
+ * interface used internally
+ * this is used to get the typed value of all dateFragment
+ */
 interface DateParsed {
+	/**
+	 * Store the typed year
+	 */
 	Y: DateFragment;
+
+	/**
+	 * Store the typed month
+	 */
 	M: DateFragment;
+
+	/**
+	 * Store the typed day
+	 */
 	D: DateFragment;
+
+	/**
+	 * Store the typed hours
+	 */
 	H: DateFragment;
+
+	/**
+	 * store the typed minutes
+	 */
 	m: DateFragment;
+
+	/**
+	 * store the typed seconds
+	 */
 	s: DateFragment;
 }
 
+/**
+ * This is used to store the character typed for the different date's fragments
+ */
 class DateFragment {
 	private _valueS = "";
 
+	/**
+	 * return the value as string
+	 */
 	public get valueS(): string {
 		if (this.isYear && this.isValid && this.fieldLength === 2) {
 			return "20" + this._valueS;
@@ -464,10 +513,20 @@ class DateFragment {
 		return this._valueS;
 	}
 
+	/**
+	 * store the number of chars expected for the fragment
+	 */
 	public fieldLength = 0;
 
+	/**
+	 * Create a new object
+	 * @param isYear define if the fragment is needed for the year. This is used to add 2000 to the typed year if whe expect 2 char for the year
+	 */
 	public constructor(private isYear: boolean) {}
 
+	/**
+	 * parse the typed char to a `Number`
+	 */
 	public get value(): number {
 		const val = Number.parseInt(this.valueS, 10);
 		if (this.isYear && this.fieldLength === 2) {
@@ -476,10 +535,17 @@ class DateFragment {
 		return val;
 	}
 
+	/**
+	 * valid if the number of char equals the expected number of char
+	 */
 	public get isValid(): boolean {
 		return this.fieldLength === this._valueS.length;
 	}
 
+	/**
+	 * Add a char to the value
+	 * @param character the typed char.
+	 */
 	public append(character: string): void {
 		this._valueS = this._valueS + character;
 		this.fieldLength++;

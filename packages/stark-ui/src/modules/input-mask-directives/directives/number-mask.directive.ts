@@ -2,7 +2,7 @@ import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
 import IMask from "imask";
 import { StarkNumberMaskConfig } from "./number-mask-config.intf";
-import { TextMaskBaseDirective } from "./text-mask-base.directive";
+import { AbstractStarkTextMaskBaseDirective } from "./abstract-stark-text-mask-base-directive.service";
 import { IMaskFactory } from "angular-imask";
 
 /**
@@ -13,7 +13,7 @@ const directiveName = "[starkNumberMask]";
 /**
  * @ignore
  */
-export const STARK_NUMBER_MASK_NEW_VALUE_ACCESSOR: Provider = {
+export const STARK_NUMBER_MASK_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	// tslint:disable-next-line:no-forward-ref
 	useExisting: forwardRef(() => StarkNumberMaskDirective),
@@ -47,13 +47,24 @@ export const STARK_NUMBER_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	},
 	selector: directiveName,
 	exportAs: "starkNumberMask",
-	providers: [STARK_NUMBER_MASK_NEW_VALUE_ACCESSOR]
+	providers: [STARK_NUMBER_MASK_VALUE_ACCESSOR]
 })
-export class StarkNumberMaskDirective extends TextMaskBaseDirective<IMask.MaskedNumberOptions, StarkNumberMaskConfig> {
+export class StarkNumberMaskDirective extends AbstractStarkTextMaskBaseDirective<IMask.MaskedNumberOptions, StarkNumberMaskConfig> {
+	/**
+	 * Configuration object for the mask to be displayed in the input field.
+	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkNumberMask")
 	public override maskConfig: StarkNumberMaskConfig = {};
 
+	/**
+	 *
+	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations
+	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param _factory - ´IMaskFactory` for the imaskjs library {@link https://github.com/uNmAnNeR/imaskjs/blob/master/packages/angular-imask/src/imask-factory.ts | imask-factory}
+	 * @param _platformId - Angular ´PlatformId´ needed for imaskJs
+	 * @param _compositionMode - Injected token to control if form directives buffer IME input until the "compositionend" event occurs.
+	 */
 	public constructor(
 		_renderer: Renderer2,
 		_elementRef: ElementRef,
