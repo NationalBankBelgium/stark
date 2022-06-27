@@ -27,7 +27,7 @@ import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
 import { Subject, Subscription } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { isStarkTimestampMaskConfig, StarkDateInput, StarkTimestampMaskConfig } from "../../input-mask-directives/directives";
+import { isStarkTimestampMaskConfig, StarkTimestampMaskConfig, StarkDateInput } from "../../input-mask-directives/directives";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import isEqual from "lodash-es/isEqual";
 
@@ -172,7 +172,7 @@ export class StarkDatePickerComponent
 				throw new Error(
 					componentName +
 						': dateMask.format ["' +
-						this.dateMaskConfig.format +
+						(this.dateMaskConfig.format ? this.dateMaskConfig.format : "") +
 						'"] and the provided parse format(s) in MAT_DATE_FORMATS ["' +
 						dateInputFormats.join('","') +
 						'"] are NOT compatible. Please adapt one of them.'

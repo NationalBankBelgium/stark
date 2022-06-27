@@ -15,17 +15,14 @@ import {
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { IMaskFactory } from "angular-imask";
 import IMask from "imask";
-import { AbstractStarkTextMaskBaseDirective } from "./abstract-stark-text-mask-base-directive.service";
 import { StarkTextMaskConfig } from "./text-mask-config.intf";
+import { TextMaskBaseDirective } from "./text-mask-base.directive";
 
 /**
  * @ignore
  */
 const directiveName = "[starkTextMask]";
 
-/**
- * @ignore
- */
 export const STARK_TEXT_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	// tslint:disable-next-line:no-forward-ref
@@ -33,20 +30,6 @@ export const STARK_TEXT_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	multi: true
 };
 
-/**
- * Directive to display a mask in input elements. This directive internally uses the {@ling https://github.com/uNmAnNeR/imaskjs/blob/master/packages/angular-imask/src/imask.directive.ts|imaskjs}
- * library to provide the input mask functionality.
- *
- * ### Disabling the mask
- * Passing a `undifined` value as config to the directive will disable the mask.
- *
- * @example
- * <input type="text" [starkTextMask]="yourMaskConfig">
- * <!-- or -->
- * <input type="text" [(ngModel)]="yourModelValue" [starkTextMask]="yourMaskConfig">
- * <!-- or -->
- * <input type="text" [formControl]="yourFormControl" [starkTextMask]="yourMaskConfig">
- */
 @Directive({
 	host: {
 		"(input)": "_handleInput($event)",
@@ -59,7 +42,7 @@ export const STARK_TEXT_MASK_NEW_VALUE_ACCESSOR: Provider = {
 	providers: [STARK_TEXT_MASK_NEW_VALUE_ACCESSOR]
 })
 export class StarkTextMaskDirective
-	extends AbstractStarkTextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfig>
+	extends TextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfig>
 	implements AfterViewInit, OnDestroy, OnChanges
 {
 	/**
@@ -111,7 +94,7 @@ export class StarkTextMaskDirective
 
 		if (maskActive) {
 			return {
-				mask: typeof mask.mask === "string" ? mask.mask : "",
+				mask: mask.mask,
 				lazy: mask.guide ? !this.maskRef?.unmaskedValue : true,
 				eager: mask.eager,
 				blocks: mask.blocks,

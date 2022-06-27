@@ -8,7 +8,7 @@ export class StarkTextMasks {
 	public static CREDITCARD_NUMBER = "0000-0000-0000-0000";
 
 	/**
-	 * Mask for Belgian Structured Communication numbers: "+++ddd/dddd/ddddd+++"
+	 * Mask for Belgian Structured Communication numbers: "+++ddd/dddd/ddddd/+++"
 	 */
 	public static STRUCTURED_COMMUNICATION_NUMBER = "+++000/0000/00000+++";
 }

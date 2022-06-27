@@ -7,14 +7,14 @@ import { MatInputModule } from "@angular/material/input";
 import { MomentDateModule } from "@angular/material-moment-adapter";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_DATE_FORMATS, StarkDatePickerComponent } from "./components";
-import { StarkInputMaskDirectivesModule } from "../input-mask-directives";
+import { StarkInputMaskDirectivesModuleNew } from "../input-mask-directives-new";
 
 @NgModule({
 	declarations: [StarkDatePickerComponent],
 	imports: [
 		CommonModule,
 		MatDatepickerModule,
-		StarkInputMaskDirectivesModule,
+		StarkInputMaskDirectivesModuleNew,
 		MatInputModule,
 		MomentDateModule,
 		FormsModule,

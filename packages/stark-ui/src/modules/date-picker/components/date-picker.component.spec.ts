@@ -16,7 +16,7 @@ import moment from "moment";
 import { Observer } from "rxjs";
 import { DEFAULT_DATE_MASK_CONFIG, StarkDatePickerComponent, StarkDatePickerMaskConfig } from "./date-picker.component";
 import { STARK_DATE_FORMATS } from "./date-format.constants";
-import { StarkInputMaskDirectivesModule } from "../../input-mask-directives";
+import { StarkInputMaskDirectivesModuleNew } from "../../input-mask-directives-new";
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;
@@ -116,7 +116,7 @@ describe("DatePickerComponent", () => {
 					MatMomentDateModule,
 					FormsModule,
 					ReactiveFormsModule,
-					StarkInputMaskDirectivesModule,
+					StarkInputMaskDirectivesModuleNew,
 					TranslateModule.forRoot()
 				],
 				providers: [

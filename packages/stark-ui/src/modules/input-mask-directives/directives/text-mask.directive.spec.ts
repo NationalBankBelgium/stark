@@ -50,7 +50,6 @@ describe("TextMaskDirective", () => {
 		// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
 		const ev: Event = document.createEvent("Event");
 		ev.initEvent(eventType, true, true);
-		ev.initEvent(eventType, true, true);
 		(<HTMLInputElement>inputDebugElement.nativeElement).dispatchEvent(ev);
 	}
 
