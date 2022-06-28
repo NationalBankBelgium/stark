@@ -1,6 +1,6 @@
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2 } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { AbstractStarkTextMaskBaseDirective } from "./abstract-stark-text-mask-base-directive.service";
+import { AbstractStarkTextMaskBaseDirective, MaskConfigType } from "./abstract-stark-text-mask-base-directive.service";
 import { StarkTextMaskConfig } from "./text-mask-config.intf";
 import IMask from "imask";
 import { IMaskFactory } from "angular-imask";
@@ -137,5 +137,12 @@ export class StarkEmailMaskDirective extends AbstractStarkTextMaskBaseDirective<
 			return { ...defaultMask, mask: maskConfig === "" ? DEFAULT_EMAIL_PATTERN : maskConfig };
 		}
 		return { ...defaultMask, ...maskConfig };
+	}
+
+	protected override isConfigValid(config: MaskConfigType | undefined): config is MaskConfigType {
+		if (config === "") {
+			return true;
+		}
+		return super.isConfigValid(config);
 	}
 }

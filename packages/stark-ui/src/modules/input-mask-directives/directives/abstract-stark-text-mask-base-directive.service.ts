@@ -61,7 +61,7 @@ export abstract class AbstractStarkTextMaskBaseDirective<
 		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
 	) {
 		super(_elementRef, _renderer, _factory, _platformId, _compositionMode);
-		if (this.maskConfig) {
+		if (this.isConfigValid(this.maskConfig)) {
 			this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
 		}
 		this.elementRef = _elementRef;
@@ -78,7 +78,7 @@ export abstract class AbstractStarkTextMaskBaseDirective<
 		// if maskConfig changes then apply the change to the imask and propagate changes.
 		if (this.rebuildMaskNgOnChanges(changes)) {
 			const oldValue = this.imask;
-			if (this.maskConfig || this.maskConfig === "") {
+			if (this.isConfigValid(this.maskConfig)) {
 				this.imask = this.normalizeMaskConfig(this.maskConfig, this.defaultMask());
 			} else {
 				this.imask = undefined;
@@ -127,10 +127,9 @@ export abstract class AbstractStarkTextMaskBaseDirective<
 	 * @param _value
 	 */
 	public inputAfterMaskRef(_value: any): void {
-		// empty string should be considered as valid for the starkEmailMask directive without parameters
-		if (this.maskConfig || this.maskConfig === "") {
+		if (this.isConfigValid(this.maskConfig) && this.maskRef) {
 			const mergerConfig: MaskConfig = this.mergeMaskConfig(this.maskConfig, this.defaultMask());
-			if (mergerConfig["guide"] && this.maskRef) {
+			if (mergerConfig["guide"]) {
 				this.maskRef.updateOptions({ lazy: this.maskRef.unmaskedValue === "" });
 			}
 		}
@@ -158,4 +157,14 @@ export abstract class AbstractStarkTextMaskBaseDirective<
 	protected abstract normalizeMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): Opts;
 
 	protected abstract mergeMaskConfig(maskConfig: MaskConfigType, defaultMask: MaskConfig): MaskConfig;
+
+	protected isConfigValid(config: MaskConfigType | undefined): config is MaskConfigType {
+		if (!config) {
+			return false;
+		}
+		if (typeof config["mask"] === "boolean") {
+			return config["mask"];
+		}
+		return !!config;
+	}
 }

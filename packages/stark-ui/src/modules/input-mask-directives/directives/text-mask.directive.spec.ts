@@ -15,7 +15,7 @@ describe("TextMaskDirective", () => {
 	const textMaskConfig: StarkTextMaskConfig = {
 		mask: "X0/00",
 		definitions: {
-			X: { mask: /[0-1]/ }
+			X: /[0-1]/
 		},
 		guide: true,
 		eager: true
@@ -50,7 +50,6 @@ describe("TextMaskDirective", () => {
 		// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
 		const ev: Event = document.createEvent("Event");
 		ev.initEvent(eventType, true, true);
-		ev.initEvent(eventType, true, true);
 		(<HTMLInputElement>inputDebugElement.nativeElement).dispatchEvent(ev);
 	}
 
@@ -76,8 +75,8 @@ describe("TextMaskDirective", () => {
 			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkTextMask directive
 		});
 
-		it("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
-			// Angular2 text-mask directive handles only the "input" event
+		it("should update the input value and show the mask when a valid event is triggered in the input field", () => {
+			//
 			const validEvents: string[] = ["input"];
 
 			for (const eventType of validEvents) {
@@ -88,36 +87,35 @@ describe("TextMaskDirective", () => {
 				changeInputValue(inputElement, "123", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("12/3_");
+				expect(inputElement.nativeElement.value).withContext(eventType).toBe("12/3_");
 			}
+		});
 
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+		it("shouldn't update input value when an invalid event is triggered in the input field", () => {
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(inputElement.nativeElement.value).toBe("");
 
-				changeInputValue(inputElement, "1", eventType);
+				changeInputValue(inputElement, "123", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("1"); // no mask shown
+				expect(inputElement.nativeElement.value).withContext(eventType).toBe("123"); // no mask shown
 			}
 		});
 
-		/*
-		 * Do not check with direct input on element, this is not supported by ImaskJS
-		 */
-		/* it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-      const invalidValues: string[] = ["4", "a", " ", "whatever"];
+		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
+			const invalidValues: string[] = ["4", "a", " ", "whatever"];
 
-      for (const value of invalidValues) {
-        changeInputValue(inputElement, value);
-        fixture.detectChanges();
+			for (const value of invalidValues) {
+				changeInputValue(inputElement, value);
+				fixture.detectChanges();
 
-        expect(inputElement.nativeElement.value).toBe("");
-      }
-    }); */
+				expect(inputElement.nativeElement.value).toBe("");
+			}
+		});
 
 		it("should refresh the mask whenever the configuration changes", () => {
 			changeInputValue(inputElement, "123");
@@ -148,7 +146,7 @@ describe("TextMaskDirective", () => {
 			expect(inputElement.nativeElement.value).toBe("12/3");
 		});
 
-		xit("should remove the mask when the config is undefined or the mask property is set to false", () => {
+		it("should remove the mask when the config is undefined or the mask property is set to false", () => {
 			changeInputValue(inputElement, "123");
 			fixture.detectChanges();
 
@@ -204,27 +202,25 @@ describe("TextMaskDirective", () => {
 
 				expect(hostComponent.ngModelValue).toBe("12/3_");
 			}
-
-			/*
-      const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
-      imaskJs handle directly ngModel
-       */
-			/*
-      for (const eventType of invalidEvents) {
-        changeInputValue(inputElement, "");
-        fixture.detectChanges();
-        expect(hostComponent.ngModelValue).toBe("");
-
-        changeInputValue(inputElement, "123", eventType);
-        fixture.detectChanges();
-
-        // IMPORTANT: the ngModel is not changed with invalid events, just with "input" events
-        expect(hostComponent.ngModelValue).toBe(""); // no mask shown
-      }*/
 		});
 
-		// FIXME : could not simulate typing
-		xit("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
+		it("shouldn't update input value when an invalid event is triggered in the input field", () => {
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
+
+			for (const eventType of invalidEvents) {
+				changeInputValue(inputElement, "");
+				fixture.detectChanges();
+				expect(hostComponent.ngModelValue).toBe("");
+
+				changeInputValue(inputElement, "123", eventType);
+				fixture.detectChanges();
+
+				// IMPORTANT: the ngModel is not changed with invalid events, just with "input" events
+				expect(hostComponent.ngModelValue).withContext(eventType).toBe(""); // no mask shown
+			}
+		});
+
+		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
 			const invalidValues: string[] = ["4", "a", " ", "whatever"];
 
 			for (const value of invalidValues) {
@@ -236,7 +232,7 @@ describe("TextMaskDirective", () => {
 		});
 
 		// FIXME NG0100: ExpressionChangedAfterItHasBeenCheckedError - #2860 https://github.com/NationalBankBelgium/stark/issues/2860
-		xit("should refresh the mask whenever the configuration changes", () => {
+		it("should refresh the mask whenever the configuration changes", () => {
 			changeInputValue(inputElement, "123");
 			fixture.detectChanges();
 
@@ -249,7 +245,7 @@ describe("TextMaskDirective", () => {
 		});
 
 		// FIXME NG0100: ExpressionChangedAfterItHasBeenCheckedError - #2860 https://github.com/NationalBankBelgium/stark/issues/2860
-		xit("should show/hide the mask placeholders depending of the value of the 'guide' option", () => {
+		it("should show/hide the mask placeholders depending of the value of the 'guide' option", () => {
 			changeInputValue(inputElement, "123");
 			fixture.detectChanges();
 
@@ -261,7 +257,7 @@ describe("TextMaskDirective", () => {
 			expect(hostComponent.ngModelValue).toBe("12/3");
 		});
 
-		xit("should remove the mask when the config is undefined or the mask property is set to false", () => {
+		it("should remove the mask when the config is undefined or the mask property is set to false", () => {
 			changeInputValue(inputElement, "123");
 			fixture.detectChanges();
 

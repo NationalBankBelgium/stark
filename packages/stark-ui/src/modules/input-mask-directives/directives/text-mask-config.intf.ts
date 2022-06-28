@@ -1,4 +1,4 @@
-import IMask, { AnyMaskedOptions } from "imask";
+import { AnyMaskedOptions } from "imask";
 
 /**
  * Defines the base configuration for the mask directives provided by Stark-UI.
