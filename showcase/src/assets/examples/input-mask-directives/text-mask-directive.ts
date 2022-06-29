@@ -16,7 +16,7 @@ export class DemoTextMaskComponent {
 		mask: StarkTextMasks.STRUCTURED_COMMUNICATION_NUMBER
 	};
 	public phoneNumberMaskConfig: StarkTextMaskConfig = {
-		mask: ["(", "+", "3", "2", ")", " ", /\d/, /\d/, /\d/, " ", /\d/, /\d/, " ", /\d/, /\d/, " ", /\d/, /\d/],
+		mask: "(+32) 000/00 00 00",
 		placeholderChar: "#"
 	};
 

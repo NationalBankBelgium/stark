@@ -2,17 +2,19 @@ import { Component, Inject } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { merge } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkTextMasks, StarkTextMaskConfig, StarkTimestampMaskConfig, StarkNumberMaskConfig } from "@nationalbankbelgium/stark-ui";
+import { StarkTextMaskConfig, StarkTextMasks, StarkTimestampMaskConfig, StarkNumberMaskConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components/reference-block";
+import * as moment from "moment";
 
 @Component({
-	selector: "showcase-demo-mask-directives",
+	selector: "showcase-demo-mask-directives-new",
 	styleUrls: ["./demo-input-mask-directives-page.component.scss"],
 	templateUrl: "./demo-input-mask-directives-page.component.html"
 })
 export class DemoInputMaskDirectivesPageComponent {
 	public creditCardMaskConfig: StarkTextMaskConfig = {
-		mask: StarkTextMasks.CREDITCARD_NUMBER
+		mask: StarkTextMasks.CREDITCARD_NUMBER,
+		placeholderChar: "#"
 	};
 
 	public structuredMessageMaskConfig: StarkTextMaskConfig = {
@@ -20,7 +22,7 @@ export class DemoInputMaskDirectivesPageComponent {
 	};
 
 	public phoneNumberMaskConfig: StarkTextMaskConfig = {
-		mask: ["(", "+", "3", "2", ")", " ", /\d/, /\d/, /\d/, " ", /\d/, /\d/, " ", /\d/, /\d/, " ", /\d/, /\d/],
+		mask: "(+32) 000 00 00 00",
 		placeholderChar: "#"
 	};
 
@@ -35,6 +37,10 @@ export class DemoInputMaskDirectivesPageComponent {
 	public monthDayMaskConfig: StarkTimestampMaskConfig = { format: "MM/DD" };
 
 	public timeMaskConfig: StarkTimestampMaskConfig = { format: "HH:mm:ss" };
+
+	public dateWeekendMaskConfig: StarkTimestampMaskConfig = { format: this.dateMaskConfig.format, filter: "OnlyWeekends" };
+
+	public dateWeekdaysMaskConfig: StarkTimestampMaskConfig = { format: this.dateMaskConfig.format, filter: "OnlyWeekdays" };
 
 	public eurosMaskConfig: StarkNumberMaskConfig = {
 		prefix: "",
@@ -86,6 +92,22 @@ export class DemoInputMaskDirectivesPageComponent {
 	public timeField = new FormControl();
 	public percentageField = new FormControl();
 
+	public minMaxField = new FormControl();
+	public minMaxSameYearField = new FormControl();
+	public minMaxSameMonthField = new FormControl();
+
+	public weekendField = new FormControl();
+	public weekdaysField = new FormControl();
+
+	public minDate: moment.Moment;
+	public maxDate: moment.Moment;
+
+	public minDateSameYear: moment.Moment;
+	public maxDateSameYear: moment.Moment;
+
+	public minDateSameMonth: moment.Moment;
+	public maxDateSameMonth: moment.Moment;
+
 	public referenceList: ReferenceLink[] = [
 		{
 			label: "Stark Email Mask directive",
@@ -112,6 +134,25 @@ export class DemoInputMaskDirectivesPageComponent {
 			this.timeField.valueChanges,
 			this.percentageField.valueChanges
 		).subscribe((changedValue: string) => this.logger.debug("formControl value changed: ", changedValue));
+
+		this.minDate = moment().startOf("year");
+		this.minDate.set("year", 1900);
+		this.maxDate = moment().endOf("year");
+		this.maxDate.set("year", 2100);
+
+		this.minDateSameYear = moment().startOf("quarter");
+		this.maxDateSameYear = moment().endOf("quarter");
+
+		this.minDateSameMonth = moment().startOf("month");
+		this.maxDateSameMonth = moment().endOf("month");
+
+		if (moment().get("date") > 15) {
+			this.minDateSameMonth.set("date", 15);
+		} else {
+			this.maxDateSameMonth.set("date", 15);
+		}
+
+		console.log(this.minDateSameMonth, this.maxDateSameMonth);
 	}
 
 	public logChange(event: Event): void {

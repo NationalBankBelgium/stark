@@ -185,7 +185,17 @@
             "MONTH_DAY_MASK": "Mois / Jour",
             "MONTH_DAY_PLACEHOLDER": "MM/DD",
             "TIME_MASK": "Temps",
-            "TIME_PLACEHOLDER": "HH:mm:ss"
+            "TIME_PLACEHOLDER": "HH:mm:ss",
+            "WEEKEND": "Seulement les weekends",
+            "WEEKEND_PLACEHOLDER": "JJ-MM-AAAA",
+            "WEEKDAYS": "seulement semaine",
+            "WEEKDAYS_PLACEHOLDER": "JJ-MM-AAAA",
+            "MIN_MAX_SAME_MONTH": "date Min/Max dans le même mois",
+            "MIN_MAX_SAME_MONTH_PLACEHOLDER": "JJ-MM-AAAA",
+            "MIN_MAX_SAME_YEAR": "date Min/Max dans la mêm année",
+            "MIN_MAX_SAME_YEAR_PLACEHOLDER": "JJ-MM-AAAA",
+            "MIN_MAX": "Date Min/Max",
+            "MIN_MAX_PLACEHOLDER": "JJ-MM-AAAA"
           },
           "TITLE": "Input Mask directives"
         },

@@ -2,7 +2,7 @@
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer
-		id="text-mask-directive"
+		id="text-mask-directiveNew"
 		[extensions]="['HTML', 'TS']"
 		filesPath="input-mask-directives/text-mask-directive"
 		[exampleTitle]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TEXT_MASK.TITLE' | translate"
@@ -205,6 +205,72 @@
 					[formControl]="timeField"
 					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.TIME_PLACEHOLDER' | translate"
 					[starkTimestampMask]="timeMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX</mat-label>
+				<input
+					matInput
+					id="min-max-date-input-mask"
+					type="text"
+					[formControl]="minMaxField"
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_PLACEHOLDER' | translate"
+					[min]="minDate"
+					[max]="maxDate"
+					[starkTimestampMask]="dateMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_YEAR</mat-label>
+				<input
+					matInput
+					id="min-max-same-year-date-input-mask"
+					type="text"
+					[formControl]="minMaxSameYearField"
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_YEAR_PLACEHOLDER' | translate"
+					[min]="minDateSameYear"
+					[max]="maxDateSameYear"
+					[starkTimestampMask]="dateMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_MONTH</mat-label>
+				<input
+					matInput
+					id="min-max-same-month-date-input-mask"
+					type="text"
+					[formControl]="minMaxSameMonthField"
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.MIN_MAX_SAME_MONTH_PLACEHOLDER' | translate"
+					[min]="minDateSameMonth"
+					[max]="maxDateSameMonth"
+					[starkTimestampMask]="dateMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.WEEKEND</mat-label>
+				<input
+					matInput
+					id="week-end-date-input-mask"
+					type="text"
+					[formControl]="weekendField"
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.WEEKEND_PLACEHOLDER' | translate"
+					[starkTimestampMask]="dateWeekendMaskConfig"
+				/>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label translate>SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.WEEKDAYS</mat-label>
+				<input
+					matInput
+					id="week-days-date-input-mask"
+					type="text"
+					[formControl]="weekdaysField"
+					[placeholder]="'SHOWCASE.DEMO.DIRECTIVES.INPUT_MASK.TIMESTAMP_MASK.WEEKDAYS_PLACEHOLDER' | translate"
+					[starkTimestampMask]="dateWeekdaysMaskConfig"
 				/>
 			</mat-form-field>
 		</div>
