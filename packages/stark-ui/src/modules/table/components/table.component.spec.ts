@@ -1122,7 +1122,7 @@ describe("TableComponent", () => {
 	});
 
 	describe("column actions", () => {
-		const actionsColumnSelector = "table thead tr th.mat-column-STARK-TABLE-ACTIONS";
+		const actionsColumnSelector = "table thead tr th.mat-column-Actions";
 
 		it("should display the 'actions' column when 'tableRowActions' contains some actions", () => {
 			hostComponent.tableRowActions = {
