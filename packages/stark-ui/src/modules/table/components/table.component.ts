@@ -1033,11 +1033,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public getColumnFilterPosition(columnName: string): StarkTableColumnFilter["filterPosition"] {
 		if (!(this.filter.columns instanceof Array)) {
-			return undefined;
+			return this.filter.filterPosition;
 		}
 
 		const column = this.filter.columns.find((columnFilter: StarkTableColumnFilter) => columnFilter.columnName === columnName);
-		return column ? column.filterPosition : undefined;
+		return column ? column.filterPosition : this.filter.filterPosition;
 	}
 
 	/**
