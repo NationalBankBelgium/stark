@@ -922,7 +922,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		const dialogRef: MatDialogRef<StarkTableMultisortDialogComponent, StarkSortingRule[]> = this.dialogService.open<
 			StarkTableMultisortDialogComponent,
 			StarkTableMultisortDialogData
-			>(StarkTableMultisortDialogComponent, {
+		>(StarkTableMultisortDialogComponent, {
 			panelClass: "stark-table-dialog-multisort-panel-class", // the width is set via CSS using this class
 			data: { columns: this.columns.filter((column: StarkTableColumnComponent) => column.sortable) }
 		});
@@ -1064,11 +1064,11 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public getColumnFilterPosition(columnName: string): StarkTableColumnFilter["filterPosition"] {
 		if (!(this.filter.columns instanceof Array)) {
-			return undefined;
+			return this.filter.filterPosition;
 		}
 
 		const column = this.filter.columns.find((columnFilter: StarkTableColumnFilter) => columnFilter.columnName === columnName);
-		return column ? column.filterPosition : undefined;
+		return column ? column.filterPosition : this.filter.filterPosition;
 	}
 
 	/**
