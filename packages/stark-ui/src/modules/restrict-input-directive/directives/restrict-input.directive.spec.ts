@@ -8,6 +8,7 @@ import { StarkRestrictInputDirective } from "./restrict-input.directive";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
 
+// tslint:disable-next-line:no-big-function
 describe("RestrictInputDirective", () => {
 	@Component({
 		selector: "test-component",
@@ -43,6 +44,34 @@ describe("RestrictInputDirective", () => {
 		return !(<HTMLInputElement>inputElement.nativeElement).dispatchEvent(keypressEvent);
 	}
 
+	function triggerPasteEvent(inputElement: DebugElement, value: string): boolean {
+		const clipboardData: DataTransfer = new DataTransfer();
+		clipboardData.setData("text/plain", value);
+		const pasteEvent: ClipboardEvent = new ClipboardEvent("paste", { clipboardData: clipboardData, cancelable: true });
+
+		return !(<HTMLInputElement>inputElement.nativeElement).dispatchEvent(pasteEvent);
+	}
+
+	function triggerDropEvent(inputElement: DebugElement, value: string): boolean {
+		const dataTransfer: DataTransfer = new DataTransfer();
+		dataTransfer.setData("text/plain", value);
+		const dragEvent: DragEvent = new DragEvent("drop", { dataTransfer: dataTransfer, cancelable: true });
+
+		return !(<HTMLInputElement>inputElement.nativeElement).dispatchEvent(dragEvent);
+	}
+
+	function triggerAndAssert(
+		inputElement: DebugElement,
+		values: string[],
+		shouldBeValid: boolean,
+		triggerFunction: (inputElement: DebugElement, value: string) => boolean
+	): void {
+		for (const value of values) {
+			const eventDefaultPrevented = triggerFunction(inputElement, value);
+			expect(eventDefaultPrevented).toBe(shouldBeValid);
+		}
+	}
+
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [StarkRestrictInputDirective, TestComponent],
@@ -64,21 +93,28 @@ describe("RestrictInputDirective", () => {
 			expect(fixture).toBeDefined();
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
 
-			let keyPressEventDefaultPrevented: boolean = triggerKeyPressEvent(inputElement, "1");
-			expect(keyPressEventDefaultPrevented).toBe(false);
+			triggerAndAssert(inputElement, ["1", "a", "-"], false, triggerKeyPressEvent);
+		});
 
-			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "9");
-			expect(keyPressEventDefaultPrevented).toBe(false);
+		it("should NOT prevent any value from being pasted in the input when no input restriction was provided", () => {
+			expect(fixture).toBeDefined();
+			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
 
-			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "0");
-			expect(keyPressEventDefaultPrevented).toBe(false);
+			triggerAndAssert(inputElement, ["1", "a", "-"], false, triggerPasteEvent);
+		});
+
+		it("should NOT prevent any value from being drop in the input when no input restriction was provided", () => {
+			expect(fixture).toBeDefined();
+			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
+
+			triggerAndAssert(inputElement, ["1", "a", "-"], false, triggerDropEvent);
 		});
 	});
 
 	describe("when input restriction is given", () => {
 		// overriding the components's template
 		beforeEach(fakeAsync(() => {
-			// the directive should not be used with square brackets "[]" because the input is an string literal!
+			// the directive should not be used with square brackets "[]" because the input is a string literal!
 			const newTemplate: string = getTemplate("starkRestrictInput='\\d'");
 
 			TestBed.overrideTemplate(TestComponent, newTemplate);
@@ -94,27 +130,40 @@ describe("RestrictInputDirective", () => {
 		it("should prevent any value other than the given ones in the configuration from being typed in the input", () => {
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
 
-			let keyPressEventDefaultPrevented: boolean = triggerKeyPressEvent(inputElement, "a");
-			expect(keyPressEventDefaultPrevented).toBe(true);
-
-			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "B");
-			expect(keyPressEventDefaultPrevented).toBe(true);
-
-			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "-");
-			expect(keyPressEventDefaultPrevented).toBe(true);
+			triggerAndAssert(inputElement, ["a", "B", "-"], true, triggerKeyPressEvent);
 		});
 
 		it("should NOT prevent any of the values given in the configuration from being typed in the input", () => {
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
 
-			let keyPressEventDefaultPrevented: boolean = triggerKeyPressEvent(inputElement, "1");
-			expect(keyPressEventDefaultPrevented).toBe(false);
+			triggerAndAssert(inputElement, ["9", "1", "0"], false, triggerKeyPressEvent);
+		});
 
-			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "9");
-			expect(keyPressEventDefaultPrevented).toBe(false);
+		it("should prevent any of the values given in the configuration from being pasted in the input", () => {
+			expect(fixture).toBeDefined();
+			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
 
-			keyPressEventDefaultPrevented = triggerKeyPressEvent(inputElement, "0");
-			expect(keyPressEventDefaultPrevented).toBe(false);
+			triggerAndAssert(inputElement, ["a", "B", "-"], true, triggerPasteEvent);
+		});
+
+		// tslint:disable-next-line:no-identical-functions
+		it("should NOT prevent any of the values given in the configuration from being pasted in the input", () => {
+			expect(fixture).toBeDefined();
+			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
+			triggerAndAssert(inputElement, ["9", "1", "0"], false, triggerPasteEvent);
+		});
+
+		it("should prevent any of the values given in the configuration from being drop in the input", () => {
+			expect(fixture).toBeDefined();
+			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
+			triggerAndAssert(inputElement, ["a", "B", "-"], true, triggerDropEvent);
+		});
+
+		// tslint:disable-next-line:no-identical-functions
+		it("should NOT prevent any of the values given in the configuration from being drop in the input", () => {
+			expect(fixture).toBeDefined();
+			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
+			triggerAndAssert(inputElement, ["9", "1", "0"], false, triggerDropEvent);
 		});
 	});
 });
