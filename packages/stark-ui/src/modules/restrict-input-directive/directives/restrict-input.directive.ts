@@ -25,23 +25,55 @@ export class StarkRestrictInputDirective implements OnInit {
 	 */
 	@HostListener("keypress", ["$event"])
 	public eventHandler(event: KeyboardEvent): boolean {
+		// some browsers return the special key value (i.e. keys in the numeric keypad), in such cases we use the 'char'
+		// see: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
+		/* tslint:disable-next-line:deprecation */
+		const key: string = event.key.length > 1 ? event.char : event.key;
+
+		return this.testValue(event, key);
+	}
+
+	/**
+	 * Event handler to be invoked on a "paste" event in the field
+	 */
+	@HostListener("paste", ["$event"])
+	public onPaste(event: ClipboardEvent): boolean {
+		if (!event.clipboardData) {
+			return true;
+		}
+		const value = event.clipboardData.getData("text/plain");
+
+		return this.testValue(event, value);
+	}
+
+	/**
+	 * Event handler to be invoked on a "drop" event in the field
+	 */
+	@HostListener("drop", ["$event"])
+	public onDrop(event: DragEvent): boolean {
+		if (!event.dataTransfer) {
+			return true;
+		}
+		const value = event.dataTransfer.getData("text/plain");
+		return this.testValue(event, value);
+	}
+
+	/**
+	 * Test the value paste/drop/input 
+	 * @param event - The event object
+	 * @param value - The value to be tested
+	 */
+	private testValue(event: Event, value: string): boolean {
 		const regularExpression: string = this.inputRestriction || "";
-
 		if (regularExpression) {
-			// some browsers return the special key value (i.e. keys in the numeric keypad), in such cases we use the 'char'
-			// see: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
-			/* tslint:disable-next-line:deprecation */
-			const key: string = event.key.length > 1 ? event.char : event.key;
 			const regex: RegExp = new RegExp(regularExpression);
-
-			if (!regex.test(key)) {
+			if (!regex.test(value)) {
 				event.preventDefault();
 				return false;
 			}
 		} else {
 			this.logger.warn(directiveName + ": no input restriction defined");
 		}
-
 		return true;
 	}
 
