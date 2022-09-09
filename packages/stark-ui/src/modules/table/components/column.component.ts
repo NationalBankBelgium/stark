@@ -251,6 +251,12 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	public headerClassName?: string;
 
 	/**
+	 * Make the column stick to the left side of the table
+	 */
+	@Input()
+	public sticky = false;
+
+	/**
 	 * Make the column stick to the right side of the table
 	 */
 	@Input()
