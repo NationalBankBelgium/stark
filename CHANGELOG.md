@@ -1,3 +1,18 @@
+## [10.2.5](https://github.com/nationalbankbelgium/stark/compare/10.2.4...10.2.5) (2022-09-09)
+
+
+### Bug Fixes
+
+* **build-main:** fix `npm run commit` script in order to fix the usage on Windows OS ([336248a](https://github.com/nationalbankbelgium/stark/commit/336248a22dcee816ef32a384d10d3622fda1e4a4))
+* **stark-ui:** fix issue with table on action [#3391](https://github.com/nationalbankbelgium/stark/issues/3391) ([0e5d165](https://github.com/nationalbankbelgium/stark/commit/0e5d1656c2efe525049635304b7d12c7cf34a908))
+
+
+### Features
+
+* **stark-build:** set `node-sass` to `^4.14.1` in order to be compatible with NodeJS 14 ([c364f20](https://github.com/nationalbankbelgium/stark/commit/c364f205b4243a26c80ee44ce87bb73cbd78fae5))
+
+
+
 ## [10.2.4](https://github.com/nationalbankbelgium/stark/compare/10.2.3...10.2.4) (2021-12-14)
 
 
