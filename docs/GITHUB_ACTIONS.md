@@ -15,7 +15,7 @@ All the information about this action can be found on [github.com/marketplace/ac
 ### actions/setup-node@v2
 
 This official action can be used to install a specific version of NodeJS in the virtual machine.
-It requires the parameter `node-version: '12'` with any version of node.
+It requires the parameter `node-version: '14'` with any version of node.
 
 In Stark build, we execute our tests/build with multiple versions of NodeJS thanks to `strategy.matrix`. See:
 
@@ -24,7 +24,7 @@ name: Build and test on Node.js ${{ matrix.node_version }}
 runs-on: ubuntu-latest
 strategy:
   matrix:
-    node_version: ["10", "12"]
+    node_version: ["10", "12", "14"]
 
 steps:
   - name: Use Node.js ${{ matrix.node_version }}
@@ -186,7 +186,7 @@ To define our variable, we populate the `GITHUB_ENV` variable with the definitio
 ```yaml
 - name: Set environment variable 'IS_MAIN_ENVIRONMENT'
   run: |
-    if [[ '${{ matrix.node_version }}' == '10' ]] && [[ '${{ matrix.os }}' == 'ubuntu-latest' ]]; then
+    if [[ '${{ matrix.node_version }}' == '14' ]] && [[ '${{ matrix.os }}' == 'ubuntu-latest' ]]; then
       echo "IS_MAIN_ENVIRONMENT=1" >> $GITHUB_ENV
     else
       echo "IS_MAIN_ENVIRONMENT=0" >> $GITHUB_ENV
