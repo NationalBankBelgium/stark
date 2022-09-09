@@ -30,15 +30,6 @@ jobs:
         node_version: [ "10", "12" ]
         os: [ubuntu-latest]
         experimental: [false]
-        # Mark following configurations as "experimental" and allow to continue in case of error
-        # See documentation: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-including-new-combinations 
-        include:
-          - os: macos-latest
-            node_version: 12
-            experimental: true
-          - os: macos-latest
-            node_version: 14
-            experimental: true
 
     steps:
       # Some actions should be executed only in one environment.
@@ -67,7 +58,7 @@ jobs:
         env:
           cache-name: cache-node-modules-${{ matrix.node_version }}-${{ matrix.os }}
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
+          # npm cache files are stored in `~/.npm` on Linux
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
