@@ -25,7 +25,7 @@
 	</mat-form-field>
 
 	<mat-form-field>
-		<mat-label>Date in DMY format</mat-label>
+		<mat-label>Date in DMY formatK</mat-label>
 		<input
 			matInput
 			id="full-date-input-mask"
@@ -70,6 +70,72 @@
 			[formControl]="timeField"
 			placeholder="HH:mm:ss"
 			[starkTimestampMask]="timeMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Min/Max date</mat-label>
+		<input
+			matInput
+			id="min-max-date-input-mask"
+			type="text"
+			[formControl]="minMaxField"
+			placeholder="DD-MM-YYYY"
+			[min]="minDate"
+			[max]="maxDate"
+			[starkTimestampMask]="dateMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Min/Max date in same Year</mat-label>
+		<input
+			matInput
+			id="min-max-same-year-date-input-mask"
+			type="text"
+			[formControl]="minMaxSameYearField"
+			placeholder="DD-MM-YYYY"
+			[min]="minDateSameYear"
+			[max]="maxDateSameYear"
+			[starkTimestampMask]="dateMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Min/Max date in same Month</mat-label>
+		<input
+			matInput
+			id="min-max-same-month-date-input-mask"
+			type="text"
+			[formControl]="minMaxSameMonthField"
+			placeholder="DD-MM-YYYY"
+			[min]="minDateSameMonth"
+			[max]="maxDateSameMonth"
+			[starkTimestampMask]="dateMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Weekend days only</mat-label>
+		<input
+			matInput
+			id="week-end-date-input-mask"
+			type="text"
+			[formControl]="weekendField"
+			placeholder="DD-MM-YYYY"
+			[starkTimestampMask]="dateWeekendMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Week days only</mat-label>
+		<input
+			matInput
+			id="week-days-date-input-mask"
+			type="text"
+			[formControl]="weekdaysField"
+			placeholder="DD-MM-YYYY"
+			[starkTimestampMask]="dateWeekdaysMaskConfig"
 		/>
 	</mat-form-field>
 </div>

@@ -10,7 +10,6 @@ import {
 	DemoDropdownPageComponent,
 	DemoFooterPageComponent,
 	DemoGenericSearchPageComponent,
-	DemoInputMaskDirectivesPageComponent,
 	DemoRestrictInputDirectivePageComponent,
 	DemoLanguageSelectorPageComponent,
 	DemoLogoutPageComponent,
@@ -26,7 +25,8 @@ import {
 	DemoTablePageComponent,
 	DemoToastPageComponent,
 	DemoTransformInputDirectivePageComponent,
-	DemoDateTimePickerPageComponent
+	DemoDateTimePickerPageComponent,
+	DemoInputMaskDirectivesPageComponent
 } from "./pages";
 
 export const DEMO_STATES: Ng2StateDeclaration[] = [

@@ -13,7 +13,8 @@
       "@prettier/plugin-xml": "prettier.plugin-xml",
       "@sqltools/formatter": "sqltools.formatter",
       "@uirouter/angular": "uirouter.angular",
-      "angular2-text-mask": "ng2TextMask",
+      "angular-imask": "angularImask",
+      "imask": "imask",
       "class-validator": "class-validator",
       "lodash-es/cloneDeep": "lodash-es.cloneDeep",
       "lodash-es/find": "lodash-es.find",
@@ -25,8 +26,7 @@
       "lodash-es/uniqueId": "lodash-es.uniqueId",
       "moment": "moment",
       "nouislider": "nouislider",
-      "prismjs": "Prism",
-      "text-mask-addons": "textMaskAddons"
+      "prismjs": "Prism"
     },
     "flatModuleFile": "stark-ui"
   },
@@ -51,13 +51,12 @@
     "@types/lodash-es",
     "@types/nouislider",
     "@types/prismjs",
-    "angular2-text-mask",
+    "imask",
+    "angular-imask",
     "normalize.css",
     "nouislider",
     "prettier",
     "pretty-data",
-    "prismjs",
-    "text-mask-addons",
-    "text-mask-core"
+    "prismjs"
   ]
 }

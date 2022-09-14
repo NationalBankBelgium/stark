@@ -1,8 +1,9 @@
-import { Directive, ElementRef, forwardRef, Inject, Input, OnChanges, Optional, Provider, Renderer2, SimpleChanges } from "@angular/core";
+import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2 } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { CombinedPipeMask } from "text-mask-core";
-import { emailMask } from "text-mask-addons";
-import { MaskedInputDirective, TextMaskConfig as Ng2TextMaskConfig } from "angular2-text-mask";
+import { AbstractStarkTextMaskBaseDirective, StarkMaskConfigType } from "./abstract-stark-text-mask-base-directive.service";
+import { StarkTextMaskConfig } from "./text-mask-config.intf";
+import IMask from "imask";
+import { IMaskFactory } from "angular-imask";
 import { BooleanInput } from "@angular/cdk/coercion";
 
 /**
@@ -19,6 +20,11 @@ export const STARK_EMAIL_MASK_VALUE_ACCESSOR: Provider = {
 	useExisting: forwardRef(() => StarkEmailMaskDirective),
 	multi: true
 };
+
+/**
+ * @ignore
+ */
+const DEFAULT_EMAIL_PATTERN = "name@domain.tld";
 
 /**
  * Directive to display an email mask in input elements. This directive internally uses the {@link https://github.com/text-mask/text-mask/tree/master/core|text-mask-core} library
@@ -46,7 +52,7 @@ export const STARK_EMAIL_MASK_VALUE_ACCESSOR: Provider = {
  */
 @Directive({
 	host: {
-		"(input)": "_handleInput($event.target.value)",
+		"(input)": "_handleInput($event)",
 		"(blur)": "onTouched()",
 		"(compositionstart)": "_compositionStart()",
 		"(compositionend)": "_compositionEnd($event.target.value)"
@@ -55,58 +61,90 @@ export const STARK_EMAIL_MASK_VALUE_ACCESSOR: Provider = {
 	exportAs: "starkEmailMask",
 	providers: [STARK_EMAIL_MASK_VALUE_ACCESSOR]
 })
-export class StarkEmailMaskDirective extends MaskedInputDirective implements OnChanges {
+export class StarkEmailMaskDirective extends AbstractStarkTextMaskBaseDirective<IMask.MaskedPatternOptions, StarkTextMaskConfig> {
 	/**
 	 * Whether to display the email mask in the input field.
 	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkEmailMask")
-	public maskConfig = true; // enabled by default
+	public override maskConfig = true; // enabled by default
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
 	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_maskConfig: BooleanInput;
 
 	/**
-	 * Class constructor
-	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 *
+	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations
 	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
-	 * @param _compositionMode  - Injected token to control if form directives buffer IME input until the "compositionend" event occurs.
+	 * @param _factory - {@link https://github.com/uNmAnNeR/imaskjs/blob/master/packages/angular-imask/src/imask-factory.ts|IMaskFactory} used by angular-imask in order to communicate with imaskjs
+	 * @param _platformId - Angular `PLATFORM_ID` which indicates an opaque platform ID about the platform: `browser`, `server`, `browserWorkerApp` or `browserWorkerUi`
+	 * @param _compositionMode - Injected token to control if form directives buffer IME input until the "compositionend" event occurs.
 	 */
 	public constructor(
 		_renderer: Renderer2,
 		_elementRef: ElementRef,
+		_factory: IMaskFactory,
+		@Inject(PLATFORM_ID) _platformId: string,
 		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
 	) {
-		super(_renderer, _elementRef, _compositionMode);
+		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
 	}
 
 	/**
-	 * Component lifecycle hook
+	 * default mask configuration for the emailMask
 	 */
-	public override ngOnChanges(changes: SimpleChanges): void {
-		this.textMaskConfig = this.normalizeMaskConfig(this.maskConfig);
+	protected override defaultMask: StarkTextMaskConfig = {
+		mask: DEFAULT_EMAIL_PATTERN,
+		blocks: {
+			name: { mask: /^[\w-\\.]+$/g },
+			domain: { mask: /^[\w-]+$/g },
+			tld: { mask: /^[\w\\.]+$/g }
+		},
+		guide: true,
+		eager: false,
+		keepCharPositions: true,
+		placeholderChar: "_"
+	};
 
-		super.ngOnChanges(changes);
+	/**
+	 * Used to transform the StarkTextMaskConfig to the mask format for imaskjs
+	 * @param maskConfig - The input maskConfiguration
+	 */
+	protected override normalizeMaskConfig(maskConfig: boolean | string | StarkTextMaskConfig): any {
+		return this.mergeMaskConfig(maskConfig, this.defaultMask);
 	}
 
 	/**
-	 * Create a valid configuration to be passed to the MaskedInputDirective
-	 * @param maskConfig - The provided configuration via the directive's input
+	 * Merge the maskConfig receive in parameters with the default one.
+	 * @param maskConfig - The input mask configuration
+	 * 	if type is boolean then copy the `defaultMask` properties and override the `mask` with `DEFAULT_EMAIL_PATTERN` or empty string
+	 * 	if type is string, then copy the `defaultMask` properties and override the `mask` with the content of the string
+	 * 	else copy `defaultMask] and override the  `maskConfig` properties
+	 * @param defaultMask - The default Mask configuration
+	 * @return The merged object that contains all properties of `defaultMask` overrided by the value of `maskConfig`
 	 */
-	public normalizeMaskConfig(maskConfig: boolean = true): Ng2TextMaskConfig {
-		// in case the directive is used without inputs: "<input type='text' starkEmailMask>" the maskConfig becomes an empty string ''
-		// therefore "undefined" or string values will also enable the mask
-		maskConfig = typeof maskConfig !== "boolean" ? true : maskConfig;
-
-		if (!maskConfig) {
-			return { mask: false }; // remove the mask
+	protected override mergeMaskConfig(
+		maskConfig: StarkTextMaskConfig | string | boolean,
+		defaultMask: StarkTextMaskConfig
+	): StarkTextMaskConfig {
+		if (typeof maskConfig === "boolean") {
+			return { ...defaultMask, mask: maskConfig ? DEFAULT_EMAIL_PATTERN : "" };
 		}
+		if (typeof maskConfig === "string") {
+			return { ...defaultMask, mask: maskConfig === "" ? DEFAULT_EMAIL_PATTERN : maskConfig };
+		}
+		return { ...defaultMask, ...maskConfig };
+	}
 
-		// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
-		// even though emailMask is passed as a mask, it is actually made of both a mask and a pipe bundled together for convenience
-		// https://github.com/text-mask/text-mask/tree/master/addons
-		const { mask, pipe }: CombinedPipeMask = emailMask;
-		return { mask: <any>mask, pipe: <any>pipe };
+	/**
+	 * check if the config is valid
+	 * @param config - the input configuration
+	 */
+	protected override isConfigValid(config: StarkMaskConfigType | undefined): config is StarkMaskConfigType {
+		if (config === "" || config === undefined) {
+			return true;
+		}
+		return super.isConfigValid(config);
 	}
 }

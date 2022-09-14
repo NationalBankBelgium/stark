@@ -185,7 +185,17 @@
             "MONTH_DAY_MASK": "Maand / Dag",
             "MONTH_DAY_PLACEHOLDER": "MM/DD",
             "TIME_MASK": "Tijd",
-            "TIME_PLACEHOLDER": "HH:mm:ss"
+            "TIME_PLACEHOLDER": "HH:mm:ss",
+            "WEEKEND": "Alleen in het weekend",
+            "WEEKEND_PLACEHOLDER": "DD-MM-JJJJ",
+            "WEEKDAYS": "Alleen doordeweeks",
+            "WEEKDAYS_PLACEHOLDER": "DD-MM-JJJJ",
+            "MIN_MAX_SAME_MONTH": "Min/Max datum in dezelfde maand",
+            "MIN_MAX_SAME_MONTH_PLACEHOLDER": "DD-MM-JJJJ",
+            "MIN_MAX_SAME_YEAR": "Min/Max datum in hetzelde jaar",
+            "MIN_MAX_SAME_YEAR_PLACEHOLDER": "DD-MM-JJJJ",
+            "MIN_MAX": "Min/Max datum",
+            "MIN_MAX_PLACEHOLDER": "DD-MM-JJJJ"
           },
           "TITLE": "Input Mask directives"
         },

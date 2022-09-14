@@ -4,8 +4,9 @@ import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Observer } from "rxjs";
-import { StarkEmailMaskDirective } from "./email-mask.directive";
 import { BooleanInput } from "@angular/cdk/coercion";
+import { StarkEmailMaskDirective } from "./email-mask.directive";
+import { IMaskModule } from "angular-imask";
 
 describe("EmailMaskDirective", () => {
 	let fixture: ComponentFixture<TestComponent>;
@@ -48,7 +49,7 @@ describe("EmailMaskDirective", () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [StarkEmailMaskDirective, TestComponent],
-			imports: [FormsModule, ReactiveFormsModule],
+			imports: [FormsModule, ReactiveFormsModule, IMaskModule],
 			providers: []
 		});
 	});
@@ -81,7 +82,7 @@ describe("EmailMaskDirective", () => {
 				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("my-email@ .");
+				expect(inputElement.nativeElement.value).toBe("my-email@.");
 			}
 
 			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
@@ -99,13 +100,21 @@ describe("EmailMaskDirective", () => {
 		});
 
 		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["@@", "@.a.", " @ .", "what@.ever@."];
+			const invalidValues: { input: string; expectedResult: string }[] = [
+				{ input: "@@", expectedResult: "@.." },
+				{ input: "@.a.", expectedResult: "@.a." },
+				{ input: " @ .", expectedResult: "@.." },
+				{ input: "what@.ever@.", expectedResult: "what@.ever." }
+			];
 
 			for (const value of invalidValues) {
-				changeInputValue(inputElement, value);
+				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("");
+				changeInputValue(inputElement, value.input);
+				fixture.detectChanges();
+
+				expect(inputElement.nativeElement.value).withContext(value.input).toBe(value.expectedResult);
 			}
 		});
 
@@ -113,23 +122,24 @@ describe("EmailMaskDirective", () => {
 			changeInputValue(inputElement, "my-email@");
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("my-email@ .");
+			expect(inputElement.nativeElement.value).toBe("my-email@.");
 
 			hostComponent.emailMaskConfig = undefined;
 			fixture.detectChanges();
 
+			changeInputValue(inputElement, "");
 			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("my-email@ ."); // the mask is enabled by default
+			expect(inputElement.nativeElement.value).toBe("what@.ever."); // the mask is enabled by default
 
 			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' starkEmailMask>
 			fixture.detectChanges();
-
+			changeInputValue(inputElement, "");
 			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(inputElement.nativeElement.value).toBe("my-email@ ."); // the mask is enabled by default
+			expect(inputElement.nativeElement.value).toBe("what@.ever."); // the mask is enabled by default
 
 			hostComponent.emailMaskConfig = false;
 			fixture.detectChanges();
@@ -173,10 +183,10 @@ describe("EmailMaskDirective", () => {
 				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
-				expect(hostComponent.ngModelValue).toBe("my-email@ .");
+				expect(hostComponent.ngModelValue).toBe("my-email@.");
 			}
 
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
@@ -192,13 +202,19 @@ describe("EmailMaskDirective", () => {
 		});
 
 		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["@@", "@.a.", " @ .", "what@.ever@."];
+			const invalidValues: { input: string; expectedResult: string }[] = [
+				{ input: "@@", expectedResult: "@.." },
+				{ input: "@.a.", expectedResult: "@.a." },
+				{ input: " @ .", expectedResult: "@.." },
+				{ input: "what@.ever@.", expectedResult: "what@.ever." }
+			];
 
 			for (const value of invalidValues) {
-				changeInputValue(inputElement, value);
+				changeInputValue(inputElement, "");
+				changeInputValue(inputElement, value.input);
 				fixture.detectChanges();
 
-				expect(hostComponent.ngModelValue).toBe("");
+				expect(hostComponent.ngModelValue).withContext(value.input).toBe(value.expectedResult);
 			}
 		});
 
@@ -206,23 +222,24 @@ describe("EmailMaskDirective", () => {
 			changeInputValue(inputElement, "my-email@");
 			fixture.detectChanges();
 
-			expect(hostComponent.ngModelValue).toBe("my-email@ .");
+			expect(hostComponent.ngModelValue).toBe("my-email@.");
 
 			hostComponent.emailMaskConfig = undefined;
 			fixture.detectChanges();
-
+			changeInputValue(inputElement, "");
 			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(hostComponent.ngModelValue).toBe("my-email@ ."); // the mask is enabled by default
+			expect(hostComponent.ngModelValue).toBe("what@.ever."); // the mask is enabled by default
 
 			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' [(ngModel)]='ngModelValue' starkEmailMask>
 			fixture.detectChanges();
 
+			changeInputValue(inputElement, "");
 			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(hostComponent.ngModelValue).toBe("my-email@ ."); // the mask is enabled by default
+			expect(hostComponent.ngModelValue).toBe("what@.ever."); // the mask is enabled by default
 
 			hostComponent.emailMaskConfig = false;
 			fixture.detectChanges();
@@ -265,16 +282,17 @@ describe("EmailMaskDirective", () => {
 
 			for (const eventType of validEvents) {
 				changeInputValue(inputElement, "");
+				mockValueChangeObserver.next.calls.reset();
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
 				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).not.toHaveBeenCalled();
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
-				expect(hostComponent.formControl.value).toBe("my-email@ .");
+				expect(hostComponent.formControl.value).toBe("my-email@.");
 				// FIXME Check why it is called twice instead of once
 				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
@@ -282,14 +300,12 @@ describe("EmailMaskDirective", () => {
 			}
 
 			mockValueChangeObserver.next.calls.reset();
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "my-email@", eventType);
@@ -304,16 +320,22 @@ describe("EmailMaskDirective", () => {
 		});
 
 		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["@@", "@.a.", " @ .", "what@.ever@."];
+			const invalidValues: { input: string; expectedResult: string }[] = [
+				{ input: "@@", expectedResult: "@.." },
+				{ input: "@.a.", expectedResult: "@.a." },
+				{ input: " @ .", expectedResult: "@.." },
+				{ input: "what@.ever@.", expectedResult: "what@.ever." }
+			];
 
 			for (const value of invalidValues) {
+				changeInputValue(inputElement, "");
 				mockValueChangeObserver.next.calls.reset();
-				changeInputValue(inputElement, value);
+				changeInputValue(inputElement, value.input);
 				fixture.detectChanges();
 
-				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(hostComponent.formControl.value).withContext(value.input).toBe(value.expectedResult);
+
+				expect(mockValueChangeObserver.next).withContext(value.input).toHaveBeenCalled();
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -323,7 +345,7 @@ describe("EmailMaskDirective", () => {
 			changeInputValue(inputElement, "my-email@");
 			fixture.detectChanges();
 
-			expect(hostComponent.formControl.value).toBe("my-email@ .");
+			expect(hostComponent.formControl.value).toBe("my-email@.");
 			// FIXME Check why it is called twice instead of once
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
@@ -331,13 +353,12 @@ describe("EmailMaskDirective", () => {
 			hostComponent.emailMaskConfig = undefined;
 			fixture.detectChanges();
 			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask is enabled by default
-
+			changeInputValue(inputElement, "");
 			mockValueChangeObserver.next.calls.reset();
 			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(hostComponent.formControl.value).toBe("my-email@ ."); // the mask is enabled by default
-			// FIXME Check why it is called twice instead of once
+			expect(hostComponent.formControl.value).toBe("what@.ever."); // the mask is enabled by default
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 			mockValueChangeObserver.next.calls.reset();
@@ -345,12 +366,13 @@ describe("EmailMaskDirective", () => {
 			fixture.detectChanges();
 			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask is enabled by default
 
+			changeInputValue(inputElement, "");
 			mockValueChangeObserver.next.calls.reset();
 			changeInputValue(inputElement, "what@.ever@.");
 			fixture.detectChanges();
 
-			expect(hostComponent.formControl.value).toBe("my-email@ ."); // the mask is enabled by default
-			// FIXME Check why it is called twice instead of once
+			expect(hostComponent.formControl.value).toBe("what@.ever."); // the mask is enabled by default
+
 			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
 
 			mockValueChangeObserver.next.calls.reset();
@@ -363,8 +385,8 @@ describe("EmailMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("what@@.ever@."); // no mask at all
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});

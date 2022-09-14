@@ -21,12 +21,12 @@ import {
 	StarkDropdownModule,
 	StarkGenericSearchModule,
 	StarkInputMaskDirectivesModule,
-	StarkRestrictInputDirectiveModule,
 	StarkLanguageSelectorModule,
 	StarkMinimapModule,
 	StarkPaginationModule,
 	StarkPrettyPrintModule,
 	StarkProgressIndicatorModule,
+	StarkRestrictInputDirectiveModule,
 	StarkRouteSearchModule,
 	StarkSliderModule,
 	StarkTableModule,
@@ -39,15 +39,16 @@ import {
 	DemoCollapsiblePageComponent,
 	DemoDatePickerPageComponent,
 	DemoDateRangePickerPageComponent,
+	DemoDateTimePickerPageComponent,
 	DemoDialogsPageComponent,
 	DemoDropdownPageComponent,
 	DemoFooterPageComponent,
 	DemoGenericSearchFormComponent,
 	DemoGenericSearchPageComponent,
 	demoGenericSearchReducers,
+	demoGenericSearchStoreKey,
 	DemoGenericService,
 	DemoInputMaskDirectivesPageComponent,
-	DemoRestrictInputDirectivePageComponent,
 	DemoLanguageSelectorPageComponent,
 	DemoLogoutPageComponent,
 	DemoMenuPageComponent,
@@ -56,29 +57,28 @@ import {
 	DemoPaginationPageComponent,
 	DemoPrettyPrintPageComponent,
 	DemoProgressIndicatorPageComponent,
+	DemoRestrictInputDirectivePageComponent,
 	DemoRouteSearchPageComponent,
 	DemoSidebarPageComponent,
 	DemoSliderPageComponent,
 	DemoTablePageComponent,
 	DemoToastPageComponent,
-	DemoTransformInputDirectivePageComponent,
-	DemoDateTimePickerPageComponent,
-	demoGenericSearchStoreKey
+	DemoTransformInputDirectivePageComponent
 } from "./pages";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
 import {
 	TableRegularComponent,
-	TableWithItemsPerPageSelectorComponent,
+	TableWithCollapsibleRowsComponent,
 	TableWithCustomActionsComponent,
+	TableWithCustomCellRenderingComponent,
 	TableWithCustomStylingComponent,
 	TableWithFixedActionsComponent,
 	TableWithFixedHeaderComponent,
 	TableWithFooterComponent,
-	TableWithCustomCellRenderingComponent,
+	TableWithItemsPerPageSelectorComponent,
 	TableWithSelectionComponent,
-	TableWithTranscludedActionBarComponent,
-	TableWithCollapsibleRowsComponent
+	TableWithTranscludedActionBarComponent
 } from "./components";
 
 @NgModule({

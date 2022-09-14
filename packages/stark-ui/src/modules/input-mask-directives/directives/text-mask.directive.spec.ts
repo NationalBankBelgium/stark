@@ -1,19 +1,24 @@
-/* tslint:disable:completed-docs no-duplicate-string no-identical-functions no-big-function */
+import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { Component, DebugElement } from "@angular/core";
+import { StarkTextMaskConfig } from "./text-mask-config.intf";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
+import { IMaskModule } from "angular-imask";
 import { StarkTextMaskDirective } from "./text-mask.directive";
-import { StarkTextMaskConfig } from "./text-mask-config.intf";
-import { Observer } from "rxjs";
 
+// tslint:disable-next-line:no-big-function
 describe("TextMaskDirective", () => {
 	let fixture: ComponentFixture<TestComponent>;
 	let hostComponent: TestComponent;
 	let inputElement: DebugElement;
 
 	const textMaskConfig: StarkTextMaskConfig = {
-		mask: [/[0-1]/, /\d/, "/", /\d/, /\d/]
+		mask: "X0/00",
+		definitions: {
+			X: /[0-1]/
+		},
+		guide: true,
+		eager: true
 	};
 
 	@Component({
@@ -23,7 +28,7 @@ describe("TextMaskDirective", () => {
 	class TestComponent {
 		public textMaskConfig: StarkTextMaskConfig = textMaskConfig;
 		public ngModelValue = "";
-		public formControl = new FormControl("");
+		public formControl = new FormControl();
 	}
 
 	function getTemplate(textMaskDirective: string): string {
@@ -31,7 +36,7 @@ describe("TextMaskDirective", () => {
 	}
 
 	function initializeComponentFixture(): void {
-		fixture = TestBed.createComponent(TestComponent);
+		fixture = TestBed.createComponent<TestComponent>(TestComponent);
 		hostComponent = fixture.componentInstance;
 		inputElement = fixture.debugElement.query(By.css("input"));
 		// trigger initial data binding
@@ -52,14 +57,13 @@ describe("TextMaskDirective", () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [StarkTextMaskDirective, TestComponent],
-			imports: [FormsModule, ReactiveFormsModule],
+			imports: [FormsModule, ReactiveFormsModule, IMaskModule],
 			providers: []
 		});
 	});
 
 	describe("uncontrolled", () => {
 		beforeEach(fakeAsync(() => {
-			// compile template and css
 			return TestBed.compileComponents();
 		}));
 
@@ -71,8 +75,8 @@ describe("TextMaskDirective", () => {
 			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkTextMask directive
 		});
 
-		it("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
-			// Angular2 text-mask directive handles only the "input" event
+		it("should update the input value and show the mask when a valid event is triggered in the input field", () => {
+			//
 			const validEvents: string[] = ["input"];
 
 			for (const eventType of validEvents) {
@@ -83,10 +87,12 @@ describe("TextMaskDirective", () => {
 				changeInputValue(inputElement, "123", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("12/3_");
+				expect(inputElement.nativeElement.value).withContext(eventType).toBe("12/3_");
 			}
+		});
 
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+		it("shouldn't update input value when an invalid event is triggered in the input field", () => {
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
@@ -96,7 +102,7 @@ describe("TextMaskDirective", () => {
 				changeInputValue(inputElement, "123", eventType);
 				fixture.detectChanges();
 
-				expect(inputElement.nativeElement.value).toBe("123"); // no mask shown
+				expect(inputElement.nativeElement.value).withContext(eventType).toBe("123"); // no mask shown
 			}
 		});
 
@@ -117,7 +123,12 @@ describe("TextMaskDirective", () => {
 
 			expect(inputElement.nativeElement.value).toBe("12/3_");
 
-			hostComponent.textMaskConfig = { ...textMaskConfig, mask: [/\d/, "/", /\d/, "/", /\d/, /\d/], placeholderChar: "-" };
+			hostComponent.textMaskConfig = {
+				...textMaskConfig,
+				mask: "0/0/00",
+				definitions: undefined,
+				placeholderChar: "-"
+			};
 			fixture.detectChanges();
 
 			expect(inputElement.nativeElement.value).toBe("1/2/3-");
@@ -191,8 +202,10 @@ describe("TextMaskDirective", () => {
 
 				expect(hostComponent.ngModelValue).toBe("12/3_");
 			}
+		});
 
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
+		it("shouldn't update input value when an invalid event is triggered in the input field", () => {
+			const invalidEvents: string[] = ["keyup", "change", "focus", "keydown", "keypress", "click"];
 
 			for (const eventType of invalidEvents) {
 				changeInputValue(inputElement, "");
@@ -203,7 +216,7 @@ describe("TextMaskDirective", () => {
 				fixture.detectChanges();
 
 				// IMPORTANT: the ngModel is not changed with invalid events, just with "input" events
-				expect(hostComponent.ngModelValue).toBe(""); // no mask shown
+				expect(hostComponent.ngModelValue).withContext(eventType).toBe(""); // no mask shown
 			}
 		});
 
@@ -225,7 +238,7 @@ describe("TextMaskDirective", () => {
 
 			expect(hostComponent.ngModelValue).toBe("12/3_");
 
-			hostComponent.textMaskConfig = { ...textMaskConfig, mask: [/\d/, "/", /\d/, "/", /\d/, /\d/], placeholderChar: "-" };
+			hostComponent.textMaskConfig = { ...textMaskConfig, mask: "0/0/00", placeholderChar: "-" };
 			fixture.detectChanges();
 
 			expect(hostComponent.ngModelValue).toBe("1/2/3-");
@@ -265,165 +278,6 @@ describe("TextMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.ngModelValue).toBe("123"); // no mask at all
-		});
-	});
-
-	describe("with FormControl", () => {
-		let mockValueChangeObserver: jasmine.SpyObj<Observer<any>>;
-
-		beforeEach(fakeAsync(() => {
-			const newTemplate: string = getTemplate("[formControl]='formControl' [starkTextMask]='textMaskConfig'");
-
-			TestBed.overrideTemplate(TestComponent, newTemplate);
-
-			// compile template and css
-			return TestBed.compileComponents();
-		}));
-
-		beforeEach(() => {
-			initializeComponentFixture();
-
-			mockValueChangeObserver = jasmine.createSpyObj<Observer<any>>("observerSpy", ["next", "error", "complete"]);
-			hostComponent.formControl.valueChanges.subscribe(mockValueChangeObserver);
-		});
-
-		it("should render the appropriate content", () => {
-			expect(inputElement.attributes["ng-reflect-mask-config"]).toBeDefined(); // starkTextMask directive
-		});
-
-		it("should update the input value and show the mask only when a valid event is triggered in the input field", () => {
-			// Angular2 text-mask directive handles only the "input" event
-			const validEvents: string[] = ["input"];
-
-			for (const eventType of validEvents) {
-				changeInputValue(inputElement, "");
-				fixture.detectChanges();
-				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-
-				mockValueChangeObserver.next.calls.reset();
-				changeInputValue(inputElement, "123", eventType);
-				fixture.detectChanges();
-
-				expect(hostComponent.formControl.value).toBe("12/3_");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
-				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
-			}
-
-			mockValueChangeObserver.next.calls.reset();
-			const invalidEvents: string[] = ["blur", "keyup", "change", "focus", "keydown", "keypress", "click"];
-
-			for (const eventType of invalidEvents) {
-				changeInputValue(inputElement, "");
-				fixture.detectChanges();
-				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-
-				mockValueChangeObserver.next.calls.reset();
-				changeInputValue(inputElement, "123", eventType);
-				fixture.detectChanges();
-
-				// IMPORTANT: the formControl is not changed with invalid events, just with "input" events
-				expect(hostComponent.formControl.value).toBe(""); // no mask shown
-				expect(mockValueChangeObserver.next).not.toHaveBeenCalled();
-				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
-				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
-			}
-		});
-
-		it("should prevent invalid values to be entered in the input field when the value is changed manually", () => {
-			const invalidValues: string[] = ["4", "a", " ", "whatever"];
-
-			for (const value of invalidValues) {
-				mockValueChangeObserver.next.calls.reset();
-				changeInputValue(inputElement, value);
-				fixture.detectChanges();
-
-				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
-				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
-			}
-		});
-
-		it("should refresh the mask whenever the configuration changes", () => {
-			changeInputValue(inputElement, "123");
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("12/3_");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-
-			mockValueChangeObserver.next.calls.reset();
-			hostComponent.textMaskConfig = { ...textMaskConfig, mask: [/\d/, "/", /\d/, "/", /\d/, /\d/], placeholderChar: "-" };
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("1/2/3-");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
-			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
-		});
-
-		it("should show/hide the mask placeholders depending of the value of the 'guide' option", () => {
-			changeInputValue(inputElement, "123");
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("12/3_");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-
-			mockValueChangeObserver.next.calls.reset();
-			hostComponent.textMaskConfig = { ...textMaskConfig, guide: false };
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("12/3");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
-			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
-		});
-
-		it("should remove the mask when the config is undefined or the mask property is set to false", () => {
-			changeInputValue(inputElement, "123");
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("12/3_");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-
-			mockValueChangeObserver.next.calls.reset();
-			hostComponent.textMaskConfig = <any>undefined;
-			fixture.detectChanges();
-			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask was just disabled
-
-			mockValueChangeObserver.next.calls.reset();
-			changeInputValue(inputElement, "whatever");
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("whatever"); // no mask at all
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-
-			mockValueChangeObserver.next.calls.reset();
-			hostComponent.textMaskConfig = { mask: false };
-			fixture.detectChanges();
-			expect(mockValueChangeObserver.next).not.toHaveBeenCalled(); // no value change, the mask was just disabled
-
-			mockValueChangeObserver.next.calls.reset();
-			changeInputValue(inputElement, "123");
-			fixture.detectChanges();
-
-			expect(hostComponent.formControl.value).toBe("123"); // no mask at all
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
-			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
-			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});
 	});
 });

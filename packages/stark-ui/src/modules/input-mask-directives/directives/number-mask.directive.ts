@@ -1,8 +1,9 @@
-import { Directive, ElementRef, forwardRef, Inject, Input, OnChanges, Optional, Provider, Renderer2, SimpleChanges } from "@angular/core";
+import { Directive, ElementRef, forwardRef, Inject, Input, Optional, PLATFORM_ID, Provider, Renderer2 } from "@angular/core";
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { MaskedInputDirective, TextMaskConfig as Ng2TextMaskConfig } from "angular2-text-mask";
-import { createNumberMask } from "text-mask-addons";
+import IMask from "imask";
 import { StarkNumberMaskConfig } from "./number-mask-config.intf";
+import { AbstractStarkTextMaskBaseDirective } from "./abstract-stark-text-mask-base-directive.service";
+import { IMaskFactory } from "angular-imask";
 
 /**
  * @ignore
@@ -39,7 +40,7 @@ export const STARK_NUMBER_MASK_VALUE_ACCESSOR: Provider = {
  */
 @Directive({
 	host: {
-		"(input)": "_handleInput($event.target.value)",
+		"(input)": "_handleInput($event)",
 		"(blur)": "onTouched()",
 		"(compositionstart)": "_compositionStart()",
 		"(compositionend)": "_compositionEnd($event.target.value)"
@@ -48,80 +49,80 @@ export const STARK_NUMBER_MASK_VALUE_ACCESSOR: Provider = {
 	exportAs: "starkNumberMask",
 	providers: [STARK_NUMBER_MASK_VALUE_ACCESSOR]
 })
-export class StarkNumberMaskDirective extends MaskedInputDirective implements OnChanges {
+export class StarkNumberMaskDirective extends AbstractStarkTextMaskBaseDirective<IMask.MaskedNumberOptions, StarkNumberMaskConfig> {
 	/**
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
 	/* tslint:disable:no-input-rename */
 	@Input("starkNumberMask")
-	public maskConfig: StarkNumberMaskConfig = {};
+	public override maskConfig: StarkNumberMaskConfig = {};
 
 	/**
-	 * @ignore
-	 */
-	public elementRef: ElementRef;
-
-	/**
-	 * Default configuration.
-	 * It will be merged with the configuration passed to the directive.
-	 */
-	private readonly defaultNumberMaskConfig: StarkNumberMaskConfig = {
-		prefix: "",
-		suffix: "",
-		includeThousandsSeparator: true,
-		thousandsSeparatorSymbol: ",",
-		allowDecimal: false,
-		decimalSymbol: ".",
-		decimalLimit: 2,
-		requireDecimal: false,
-		allowNegative: true,
-		allowLeadingZeroes: false
-	};
-
-	/**
-	 * Class constructor
-	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations.
+	 *
+	 * @param _renderer - Angular `Renderer2` wrapper for DOM manipulations
 	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
+	 * @param _factory - ´IMaskFactory` for the imaskjs library {@link https://github.com/uNmAnNeR/imaskjs/blob/master/packages/angular-imask/src/imask-factory.ts | |IMaskFactory} used by angular-imask in order to communicate with imaskjs
+	 * @param _platformId - Angular `PLATFORM_ID` which indicates an opaque platform ID about the platform: `browser`, `server`, `browserWorkerApp` or `browserWorkerUi`
 	 * @param _compositionMode - Injected token to control if form directives buffer IME input until the "compositionend" event occurs.
 	 */
 	public constructor(
 		_renderer: Renderer2,
 		_elementRef: ElementRef,
+		_factory: IMaskFactory,
+		@Inject(PLATFORM_ID) _platformId: string,
 		@Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean
 	) {
-		super(_renderer, _elementRef, _compositionMode);
-		this.elementRef = _elementRef;
+		super(_renderer, _elementRef, _factory, _platformId, _compositionMode);
 	}
 
-	/**
-	 * Component lifecycle hook
-	 */
-	public override ngOnChanges(changes: SimpleChanges): void {
-		this.textMaskConfig = this.normalizeMaskConfig(this.maskConfig);
-
-		super.ngOnChanges(changes);
-
-		// TODO: temporary workaround to update the model when the maskConfig changes since this is not yet implemented in text-mask and still being discussed
-		// see: https://github.com/text-mask/text-mask/issues/657
-		if (changes["maskConfig"] && !changes["maskConfig"].isFirstChange() && this.textMaskConfig.mask !== false) {
-			// trigger a dummy "input" event in the input to trigger the changes in the model (only if the mask was not disabled!)
-			const ev: Event = document.createEvent("Event");
-			ev.initEvent("input", true, true);
-			(<HTMLInputElement>this.elementRef.nativeElement).dispatchEvent(ev);
+	public override normalizeMaskConfig(maskConfig: string | StarkNumberMaskConfig): any {
+		if (!maskConfig) {
+			return undefined;
 		}
-	}
+		const mask: StarkNumberMaskConfig = this.mergeMaskConfig(maskConfig, this.defaultMask);
 
-	/**
-	 * Create a valid configuration to be passed to the MaskedInputDirective
-	 * @param maskConfig - The provided configuration via the directive's input
-	 */
-	public normalizeMaskConfig(maskConfig: StarkNumberMaskConfig): Ng2TextMaskConfig {
-		if (typeof maskConfig === "undefined") {
-			return { mask: false }; // remove the mask
+		const numberMask: IMask.MaskedNumberOptions = {
+			mask: Number,
+			scale: mask.allowDecimal ? mask.decimalLimit : 0,
+			signed: mask.allowNegative,
+			thousandsSeparator: mask.includeThousandsSeparator ? mask.thousandsSeparatorSymbol : "",
+			padFractionalZeros: mask.allowLeadingZeroes,
+			normalizeZeros: mask.requireDecimal,
+			radix: mask.decimalSymbol,
+			max: mask.integerLimit ? Math.pow(10, mask.integerLimit) - 1 : undefined,
+			min: mask.integerLimit && mask.allowNegative ? Math.pow(10, mask.integerLimit) * -1 + 1 : undefined
+		};
+
+		if (!!mask.suffix || !!mask.prefix) {
+			return {
+				mask: (mask.prefix ? mask.prefix : "") + "block" + (mask.suffix ? mask.suffix : ""),
+				blocks: {
+					block: numberMask
+				}
+			};
 		}
-
-		// TODO: Ng2TextMaskConfig is not the same as Core TextMaskConfig
-		const numberMaskConfig: StarkNumberMaskConfig = { ...this.defaultNumberMaskConfig, ...maskConfig };
-		return { mask: <any>createNumberMask(numberMaskConfig) };
+		return numberMask;
 	}
+
+	public override mergeMaskConfig(maskConfig: string | StarkNumberMaskConfig, defaultMask: StarkNumberMaskConfig): StarkNumberMaskConfig {
+		if (typeof maskConfig === "string") {
+			return { ...defaultMask };
+		}
+		return { ...defaultMask, ...maskConfig };
+	}
+
+	protected override defaultMask: StarkNumberMaskConfig = {
+		prefix: "",
+		suffix: "",
+		allowDecimal: false,
+		allowLeadingZeroes: false,
+		allowNegative: true,
+		decimalLimit: 2,
+		decimalSymbol: ".",
+		requireDecimal: false,
+		includeThousandsSeparator: true,
+		thousandsSeparatorSymbol: ",",
+		integerLimit: undefined,
+		guide: true
+	};
 }
