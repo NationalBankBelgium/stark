@@ -30,4 +30,9 @@ export interface StarkSearchFormComponent<CriteriaType> {
 	 * @param searchCriteria - The search criteria containing the reset values for the form fields
 	 */
 	resetSearchForm(searchCriteria: CriteriaType): void;
+
+	/**
+	 * Emit the submit event when it on enter key
+	 */
+	submitEvent: EventEmitter<void>;
 }
