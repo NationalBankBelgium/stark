@@ -22,6 +22,7 @@ import { StarkActionBarModule } from "../../../action-bar";
 })
 class TestSearchFormComponent implements StarkSearchFormComponent<any> {
 	public searchForm: FormGroup = new FormGroup({});
+	public readonly submitEvent: EventEmitter<void> = new EventEmitter<void>();
 	public workingCopyChanged = new EventEmitter<any>();
 
 	public createSearchForm(_searchCriteria: any): FormGroup {

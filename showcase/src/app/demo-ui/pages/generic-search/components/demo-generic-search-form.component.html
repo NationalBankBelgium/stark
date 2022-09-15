@@ -1,4 +1,4 @@
-<form fxLayout="row wrap" [formGroup]="searchForm">
+<form fxLayout="row wrap" [formGroup]="searchForm" (ngSubmit)="submitEvent.next()">
 	<!-- Year -->
 	<div fxFlex>
 		<mat-form-field>
@@ -27,4 +27,6 @@
 			<mat-option *ngFor="let option of movieOptions; trackBy: trackItemFn" [value]="option">{{ option }}</mat-option>
 		</mat-autocomplete>
 	</div>
+
+	<button [hidden]="true" type="submit">&nbsp;</button>
 </form>
