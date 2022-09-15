@@ -36,7 +36,7 @@
     "ibantools": "^3.2.3",
     "lodash-es": "^4.17.21",
     "moment": "^2.22.2",
-    "tslib": "^2.3.0",
+    "tslib": "^2.4.0",
     "uuid": "^8.3.0"
   },
   "peerDependencies": {
