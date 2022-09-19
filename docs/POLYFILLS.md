@@ -71,14 +71,6 @@ import "core-js/modules/web.dom-collections.iterator";
 /*****************************************************/
 
 /**
- * IE11 and Edge require this to support Server-sent events
- * https://caniuse.com/#feat=eventsource
- *
- * Polyfill: https://github.com/Yaffle/EventSource
- */
-import "event-source-polyfill";
-
-/**
  * IE11 requires Element.classList for NgClass support on SVG elements
  * See: https://caniuse.com/#feat=classlist
  *
