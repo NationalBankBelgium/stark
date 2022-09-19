@@ -20,10 +20,10 @@
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^12.1.3",
-    "@angular-devkit/build-angular": "^12.2.16",
+    "@angular-devkit/build-angular": "^12.2.18",
     "@angular/animations": "^12.2.16",
     "@angular/cdk": "^12.2.13",
-    "@angular/cli": "^12.2.16",
+    "@angular/cli": "^12.2.18",
     "@angular/common": "^12.2.16",
     "@angular/compiler": "^12.2.16",
     "@angular/compiler-cli": "^12.2.16",
