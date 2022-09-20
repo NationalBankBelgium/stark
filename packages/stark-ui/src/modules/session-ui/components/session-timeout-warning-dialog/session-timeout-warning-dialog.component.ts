@@ -59,4 +59,8 @@ export class StarkSessionTimeoutWarningDialogComponent implements OnInit {
 	public keepSession(): void {
 		this.dialogRef.close("keep-logged");
 	}
+
+	public closeSession(): void {
+		this.dialogRef.close("close-session");
+	}
 }
