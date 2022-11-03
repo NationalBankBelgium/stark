@@ -33,6 +33,7 @@
     "@ngrx/store",
     "@ngrx/store-devtools",
     "@ngx-translate/core",
+    "@types/lodash",
     "@types/lodash-es",
     "@types/uuid",
     "@uirouter/angular",

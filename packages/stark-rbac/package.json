@@ -18,6 +18,7 @@
     "npm": ">=5.6.0"
   },
   "dependencies": {
+    "@types/lodash": "4.14.186",
     "@types/lodash-es": "^4.17.4"
   },
   "peerDependencies": {

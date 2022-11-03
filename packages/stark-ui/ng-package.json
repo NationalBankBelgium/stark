@@ -32,6 +32,7 @@
   "whitelistedNonPeerDependencies": [
     "@angular/material-moment-adapter",
     "@mdi/angular-material",
+    "@types/lodash",
     "@types/lodash-es",
     "@types/nouislider",
     "@types/prismjs",

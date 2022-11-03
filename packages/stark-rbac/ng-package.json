@@ -9,5 +9,5 @@
     }
   },
   "dest": "../../dist/packages/stark-rbac",
-  "whitelistedNonPeerDependencies": ["@types/lodash-es"]
+  "whitelistedNonPeerDependencies": ["@types/lodash", "@types/lodash-es"]
 }

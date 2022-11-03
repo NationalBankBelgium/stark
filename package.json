@@ -53,6 +53,7 @@
     "@ngx-translate/core": "^11.0.1",
     "@release-it/conventional-changelog": "^2.0.1",
     "@types/jasmine": "~3.6.4",
+    "@types/lodash": "4.14.186",
     "@types/lodash-es": "^4.17.4",
     "@types/node": "^10.17.54",
     "@types/nouislider": "^9.0.10",
