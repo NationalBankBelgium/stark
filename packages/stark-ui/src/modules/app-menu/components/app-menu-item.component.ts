@@ -203,6 +203,9 @@ export class StarkAppMenuItemComponent extends AbstractStarkUiComponent implemen
 	 * Utility function to check if the component targetState is the current state
 	 */
 	public isCurrentState(): boolean {
+		if(!this.menuGroup.entries) {
+			return this.menuGroup.targetState ? this.routingService.isCurrentUiStateIncludedIn(this.menuGroup.targetState): false;
+		}
 		return this.menuGroup.targetState ? this.routingService.isCurrentUiState(this.menuGroup.targetState) : false;
 	}
 
