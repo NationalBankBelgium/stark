@@ -240,6 +240,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 		if (!this.searchFormComponent) {
 			throw new Error("StarkGenericSearchComponent: the searchForm content child is required.");
 		}
+		this.searchFormComponent.submitEvent.subscribe(() => {
+			this.triggerSearch();
+		});
 	}
 
 	/**
@@ -534,6 +537,11 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 		if (this.hideOnSearch) {
 			this.hideForm();
 		}
+	}
+
+	public handleKeyUpEnter(event: any): void {
+		console.log(event);
+		this.triggerSearch();
 	}
 
 	/**

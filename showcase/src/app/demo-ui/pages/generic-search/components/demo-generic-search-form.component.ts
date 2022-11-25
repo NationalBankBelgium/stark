@@ -31,6 +31,9 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 	@Output()
 	public readonly workingCopyChanged = new EventEmitter<HeroMovieSearchCriteria>();
 
+	@Output()
+	public readonly submitEvent: EventEmitter<void> = new EventEmitter<void>();
+
 	public yearOptions: number[] = [];
 	public heroOptions: string[] = [];
 	public movieOptions: string[] = [];
