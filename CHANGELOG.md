@@ -1,3 +1,18 @@
+# [10.3.0](https://github.com/nationalbankbelgium/stark/compare/10.2.5...10.3.0) (2022-11-25)
+
+
+### Bug Fixes
+
+* **stark-ui:** add word-break to stark-toast ([726d24e](https://github.com/nationalbankbelgium/stark/commit/726d24e67d54f73db66419458510bb4aa38d70e4)), closes [#3519](https://github.com/nationalbankbelgium/stark/issues/3519)
+* **stark-ui:** handles paste and drop event on the restrict-input directive ([e69e0ce](https://github.com/nationalbankbelgium/stark/commit/e69e0cefdff83dfd384d844b7869561afb3807f0)), closes [#1905](https://github.com/nationalbankbelgium/stark/issues/1905)
+
+
+### Features
+
+* **stark-ui:** keep highlight the menu when go to child state ([52cd434](https://github.com/nationalbankbelgium/stark/commit/52cd434b8b6957e8677adb03287d7699d5eda456)), closes [#3521](https://github.com/nationalbankbelgium/stark/issues/3521)
+
+
+
 ## [10.2.5](https://github.com/nationalbankbelgium/stark/compare/10.2.4...10.2.5) (2022-09-09)
 
 
