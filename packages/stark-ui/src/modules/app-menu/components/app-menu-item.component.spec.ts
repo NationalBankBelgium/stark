@@ -61,12 +61,15 @@ describe("AppMenuItemComponent", () => {
 	 * Synchronous beforeEach
 	 */
 	beforeEach(() => {
+		mockRoutingService.addTransitionHook.calls.reset();
 		hostFixture = TestBed.createComponent(TestHostComponent);
 		hostComponent = hostFixture.componentInstance;
 		hostComponent.level = 1;
 		hostFixture.detectChanges();
 		component = hostComponent.starkAppMenuItem;
 		mockRoutingService.navigateTo.calls.reset();
+		mockRoutingService.isCurrentUiStateIncludedIn.calls.reset();
+		mockRoutingService.isCurrentUiState.calls.reset();
 	});
 
 	describe("simple menu item", () => {
@@ -135,9 +138,19 @@ describe("AppMenuItemComponent", () => {
 		it("should dispatch 'deactivated' event when 'isActive' is false", () => {
 			spyOn(component.deactivated, "emit");
 			component.isActive = false;
-			hostFixture.detectChanges();
 
 			expect(component.deactivated.emit).toHaveBeenCalledTimes(1);
+		});
+
+		it("should activate when child state is selected and do not have child menu", () => {
+			hostFixture.detectChanges();
+			// `stateChange` is attached to `routingTransitionSuccessCallback` in `StarkAppMenuItemComponent`
+			const stateChange = <() => void>mockRoutingService.addTransitionHook.calls.first().args[2];
+			mockRoutingService.isCurrentUiStateIncludedIn.withArgs("test").and.returnValue(true);
+			stateChange();
+			expect(component.isActive).toBeTrue();
+			expect(mockRoutingService.isCurrentUiStateIncludedIn).toHaveBeenCalledWith("test");
+			expect(mockRoutingService.isCurrentUiState).not.toHaveBeenCalledWith("test");
 		});
 	});
 
@@ -165,6 +178,17 @@ describe("AppMenuItemComponent", () => {
 		it("should have an expansion panel", () => {
 			const expansionPanel: HTMLElement = hostFixture.nativeElement.querySelector(".mat-expansion-panel");
 			expect(expansionPanel).toBeDefined();
+		});
+
+		it("should not activate when child state is selected and do not have child menu", () => {
+			hostFixture.detectChanges();
+			// `stateChange` is attached to `routingTransitionSuccessCallback` in `StarkAppMenuItemComponent`
+			const stateChange = <() => void>mockRoutingService.addTransitionHook.calls.first().args[2];
+			mockRoutingService.isCurrentUiState.withArgs("test").and.returnValue(false);
+			stateChange();
+			expect(component.isActive).toBeFalse();
+			expect(mockRoutingService.isCurrentUiStateIncludedIn).not.toHaveBeenCalledWith("test");
+			expect(mockRoutingService.isCurrentUiState).toHaveBeenCalledWith("test");
 		});
 	});
 });
