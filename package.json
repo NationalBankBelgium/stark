@@ -64,7 +64,7 @@
     "@uirouter/rx": "~0.6.0",
     "angular2-text-mask": "^9.0.0",
     "cerialize": "^0.1.18",
-    "class-validator": "~0.13.1",
+    "class-validator": "~0.14.0",
     "codelyzer": "^5.0.0",
     "commitizen": "^4.2.3",
     "conventional-changelog-cli": "^2.2.2",
