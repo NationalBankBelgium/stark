@@ -895,22 +895,22 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 */
 	public onReorderChange(column: StarkColumnSortChangedOutput): void {
 		if (column.sortable) {
-			this.resetSorting(column);
 			const sortedColumn = find(this.columns, { name: column.name });
 			if (sortedColumn) {
-				sortedColumn.sortPriority = 1;
 				switch (column.sortDirection) {
 					case "asc":
-						sortedColumn.sortDirection = "desc";
+						this.orderProperties = ["-" + sortedColumn.name];
 						break;
 					case "desc":
-						sortedColumn.sortDirection = "";
+						this.orderProperties = [];
 						break;
 					default:
-						sortedColumn.sortDirection = "asc";
+						this.orderProperties = [sortedColumn.name];
 						break;
 				}
 			}
+			this.isMultiSorting = false;
+			this.cdRef.detectChanges();
 			this.sortData();
 		}
 	}
@@ -922,7 +922,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		const dialogRef: MatDialogRef<StarkTableMultisortDialogComponent, StarkSortingRule[]> = this.dialogService.open<
 			StarkTableMultisortDialogComponent,
 			StarkTableMultisortDialogData
-			>(StarkTableMultisortDialogComponent, {
+		>(StarkTableMultisortDialogComponent, {
 			panelClass: "stark-table-dialog-multisort-panel-class", // the width is set via CSS using this class
 			data: { columns: this.columns.filter((column: StarkTableColumnComponent) => column.sortable) }
 		});
@@ -950,8 +950,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 				}
 
 				this.orderProperties = newOrderProperties; // enforcing immutability :)
+				this.isMultiSorting = this.orderProperties.length > 1;
 				this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the columns
-
 				this.sortData();
 			}
 		});
