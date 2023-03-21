@@ -36,6 +36,7 @@
     "@types/lodash-es",
     "@types/uuid",
     "@uirouter/angular",
+    "@uirouter/core",
     "cerialize",
     "class-validator",
     "deep-freeze-strict",
