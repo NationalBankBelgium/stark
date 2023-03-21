@@ -60,6 +60,7 @@
     "@types/uuid": "^3.4.9",
     "@types/webpack": "^4.4.24",
     "@uirouter/angular": "^5.0.0",
+    "@uirouter/core": "6.0.9",
     "angular2-text-mask": "^9.0.0",
     "babel-loader": "^8.0.5",
     "base-href-webpack-plugin": "^2.0.0",

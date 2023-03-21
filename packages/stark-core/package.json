@@ -28,6 +28,7 @@
     "@types/lodash-es": "^4.17.4",
     "@types/uuid": "^3.4.9",
     "@uirouter/angular": "^5.0.0",
+    "@uirouter/core": "6.0.9",
     "cerialize": "^0.1.18",
     "class-validator": "~0.11.0",
     "deep-freeze-strict": "^1.1.1",
