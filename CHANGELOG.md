@@ -1,3 +1,12 @@
+## [10.2.6](https://github.com/nationalbankbelgium/stark/compare/10.2.5...10.2.6) (2023-03-22)
+
+
+### Bug Fixes
+
+* **stark-core:** fix `@uirouter/core` version to "6.0.9" to fix `StaticInjectionError` ([c18c3c9](https://github.com/nationalbankbelgium/stark/commit/c18c3c92d23cf98cb3b17cc7f635ef7d158e3d55)), closes [#3603](https://github.com/nationalbankbelgium/stark/issues/3603)
+
+
+
 ## [10.2.5](https://github.com/nationalbankbelgium/stark/compare/10.2.4...10.2.5) (2022-09-09)
 
 
