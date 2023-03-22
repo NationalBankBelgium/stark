@@ -1,3 +1,13 @@
+## [10.3.1](https://github.com/nationalbankbelgium/stark/compare/10.3.0...10.3.1) (2023-03-22)
+
+
+### Bug Fixes
+
+* **stark-core:** fix `@uirouter/core` version to "6.0.9" to fix `StaticInjectionError` ([73aa238](https://github.com/nationalbankbelgium/stark/commit/73aa2387e9390967a0465493b803d9d24e52e248)), closes [#3603](https://github.com/nationalbankbelgium/stark/issues/3603)
+* **stark-ui:** multi-sorting on stark-table not working after sorting on single field ([8705a4e](https://github.com/nationalbankbelgium/stark/commit/8705a4e77e5d227d7d21cfcea731fa08b1ca880f)), closes [#3580](https://github.com/nationalbankbelgium/stark/issues/3580)
+
+
+
 # [10.3.0](https://github.com/nationalbankbelgium/stark/compare/10.2.5...10.3.0) (2022-11-25)
 
 
