@@ -80,7 +80,7 @@ const componentName = "stark-date-picker";
 })
 export class StarkDatePickerComponent
 	extends AbstractStarkUiComponent
-	implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date> {
+	implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date|string> {
 	/**
 	 * Part of {@link MatFormFieldControl} API
 	 * @ignore
@@ -108,7 +108,7 @@ export class StarkDatePickerComponent
 	 */
 	@HostBinding("class.floating")
 	public get shouldLabelFloat(): boolean {
-		return this.focused || !this.empty;
+		return this.focused || !this.empty || this.nativeElementNotEmpty();
 	}
 
 	/**
@@ -220,11 +220,11 @@ export class StarkDatePickerComponent
 	 * Source Date to be bound to the datepicker model
 	 */
 	@Input()
-	public get value(): Date | null {
+	public get value(): Date | string | null  {
 		return this._value;
 	}
 
-	public set value(value: Date | null) {
+	public set value(value: Date | string | null) {
 		if (!isEqual(this._value, value)) {
 			this._value = value;
 			this.stateChanges.next();
@@ -236,7 +236,7 @@ export class StarkDatePickerComponent
 	 * @internal
 	 */
 	// tslint:disable-next-line:no-null-keyword
-	private _value: Date | null = null;
+	private _value: Date | string | null = null;
 
 	/**
 	 * Output that will emit a specific date whenever the selection has changed
@@ -570,6 +570,15 @@ export class StarkDatePickerComponent
 			}
 		}
 	}
+	
+	private nativeElementInput():HTMLInputElement | undefined {
+		return this.elementRef.nativeElement.querySelector("input");
+	}
+	
+	public nativeElementNotEmpty():boolean {
+		const inputElement = this.nativeElementInput();
+		return !!inputElement && !!inputElement.value;
+	}
 
 	/**
 	 * Part of {@link Validator} API
@@ -631,11 +640,15 @@ export class StarkDatePickerComponent
 	 */
 	public onDateChange(event: MatDatepickerInputEvent<moment.Moment>): void {
 		this._onTouched();
-
+		const nativeElement = this.nativeElementInput();
+		let nativeElementValue:string | undefined;
+		if(nativeElement) {
+			nativeElementValue = nativeElement.value;
+		}
 		// tslint:disable-next-line:no-null-keyword
-		this.value = event.value ? event.value.toDate() : null;
+		this.value = event.value ? event.value.toDate() : !!nativeElementValue ? nativeElementValue : null;
 
-		const value: Date | undefined = this.value ? this.value : undefined;
+		const value: Date| undefined = this.value && typeof this.value !== "string"  ? this.value : undefined;
 		this._onChange(value);
 		// emit after the model has actually changed
 		this.dateChange.emit(value);
@@ -671,7 +684,11 @@ export class StarkDatePickerComponent
 		if (this.dateMaskConfig && focusEvent.target && focusEvent.target instanceof HTMLInputElement) {
 			const focusValue: string | null = focusEvent.target.value;
 			if (focusValue) {
-				focusEvent.target.value = moment(focusValue, this.dateFormats.display.dateInput).format(this.dateMaskConfig.format);
+				// only replace when focus value is valid 
+				const momentValue:moment.Moment = moment(focusValue, this.dateFormats.display.dateInput, true);
+				if(momentValue.isValid()) {
+					focusEvent.target.value = momentValue.format(this.dateMaskConfig.format);
+				}
 			}
 		}
 
@@ -683,6 +700,10 @@ export class StarkDatePickerComponent
 	 * This method disables the starkTimestampInput directive.
 	 */
 	public onBlur(): void {
+		const nativeElement = this.nativeElementInput();
+		if(typeof this.value === "string" && nativeElement) {
+			nativeElement.value = this.value;
+		}
 		this.inputMaskEnabled = false;
 	}
 }
