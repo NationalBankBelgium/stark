@@ -220,10 +220,6 @@ jobs:
       - name: Install Stark packages dependencies
         run: |
           npm ci
-          npm run install:ci:stark-build
-          npm run install:ci:stark-core
-          npm run install:ci:stark-rbac
-          npm run install:ci:stark-ui
         if: github.event_name != 'schedule'
       
       # Don't publish docs in maintenance branches  
