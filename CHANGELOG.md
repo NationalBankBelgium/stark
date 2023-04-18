@@ -1,3 +1,12 @@
+## [10.3.2](https://github.com/nationalbankbelgium/stark/compare/10.3.1...10.3.2) (2023-04-18)
+
+
+### Bug Fixes
+
+* **stark-core:** fix `@types/lodash` version to "4.14.492" to fix typescript compilation issue ([b63b03b](https://github.com/nationalbankbelgium/stark/commit/b63b03beec2187c69df71b18ce0d60098d35e440)), closes [#3607](https://github.com/nationalbankbelgium/stark/issues/3607)
+
+
+
 ## [10.3.1](https://github.com/nationalbankbelgium/stark/compare/10.3.0...10.3.1) (2023-03-22)
 
 
