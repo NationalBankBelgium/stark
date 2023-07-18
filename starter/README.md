@@ -178,8 +178,8 @@ Most of the time you won't need to change these, but they allow you to customize
 
 What you need to run this app:
 
--   `node` and `npm`
--   Ensure you're running the latest versions Node `v12.x.x`+ and NPM `7.12.x`+
+- `node` and `npm`
+- Ensure you're running the latest versions Node `v14.x.x`+ and NPM `8.19.x`+
 
 > If you have `nvm` installed, which is highly recommended you can do a `nvm install --lts && nvm use` in `$` to run with the latest Node LTS.
 > You can also have this `zsh` done for you [automatically](https://github.com/creationix/nvm#calling-nvm-use-automatically-in-a-directory-with-a-nvmrc-file)
@@ -188,7 +188,7 @@ What you need to run this app:
 
 Once you have those, you should install these globals with `npm install --global`:
 
--   Windows only: `npm install -g node-pre-gyp`
+- Windows only: `npm install -g node-pre-gyp`
 
 TODO review/complete; see #34
 
@@ -205,9 +205,9 @@ Then add following "prepare" script in your "package.json" file to add husky sup
 
 ```json
 {
-	"scripts": {
-		"prepare": "husky install"
-	}
+  "scripts": {
+    "prepare": "husky install"
+  }
 }
 ```
 
@@ -311,12 +311,12 @@ For more details, refer to the deployment section below.
 
 The following are some things that will make AoT compile fail.
 
--   Don’t use require statements for your templates or styles, use styleUrls and templateUrls, the angular2-template-loader plugin will change it to require at build time.
--   Don’t use default exports.
--   Don’t use `form.controls.controlName`, use `form.get(‘controlName’)`
--   Don’t use `control.errors?.someError`, use `control.hasError(‘someError’)`
--   Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
--   @Inputs, @Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
+- Don’t use require statements for your templates or styles, use styleUrls and templateUrls, the angular2-template-loader plugin will change it to require at build time.
+- Don’t use default exports.
+- Don’t use `form.controls.controlName`, use `form.get(‘controlName’)`
+- Don’t use `control.errors?.someError`, use `control.hasError(‘someError’)`
+- Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
+- @Inputs, @Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
 
 ### Type definitions
 
@@ -334,7 +334,7 @@ For example:
 
 ```typescript
 declare module "my-module" {
-	export function doesSomething(value: string): string;
+  export function doesSomething(value: string): string;
 }
 ```
 
@@ -362,11 +362,11 @@ TODO explain how stylesheets are loaded.
 
 We have good experience using these editors:
 
--   [Visual Studio Code](https://code.visualstudio.com/)
--   [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
--   [Webstorm](https://www.jetbrains.com/webstorm/download/)
--   [Atom](https://atom.io/) with [TypeScript plugin](https://atom.io/packages/atom-typescript)
--   [Sublime Text](http://www.sublimetext.com/3) with [Typescript-Sublime-Plugin](https://github.com/Microsoft/Typescript-Sublime-plugin#installation)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
+- [Webstorm](https://www.jetbrains.com/webstorm/download/)
+- [Atom](https://atom.io/) with [TypeScript plugin](https://atom.io/packages/atom-typescript)
+- [Sublime Text](http://www.sublimetext.com/3) with [Typescript-Sublime-Plugin](https://github.com/Microsoft/Typescript-Sublime-plugin#installation)
 
 ### Visual Studio Code + Debugger for Chrome
 
@@ -477,18 +477,18 @@ docker run -e VIRTUAL_HOST=stark-starter.your-domain.com --name stark-starter st
 
 ## Frequently asked questions
 
--   How do I start the app when I get `EACCES` and `EADDRINUSE` errors?
-    -   The `EADDRINUSE` error means the port `3000` is currently being used and `EACCES` is lack of permission for webpack to build files to `./dist/`
--   Error: Cannot find module 'tapable'
-    -   Remove `node_modules/` and run `npm cache clean` then `npm install`
--   How do I turn on Hot Module Replacement
-    -   Run `npm run server:dev:hmr`
--   `RangeError: Maximum call stack size exceeded`
-    -   This is a problem with minifying Angular and its recent JIT templates. If you set `mangle` to `false` then you should be good
--   Why is the size of my app larger in development?
-    -   We are using inline source-maps and hot module replacement which will increase the bundle size.
--   If you're in China
-    -   check out https://github.com/cnpm/cnpm
--   node-pre-gyp ERR in npm install (Windows)
-    -   install Python x86 version between 2.5 and 3.0 on windows
-    -   or try `--no-optional`
+- How do I start the app when I get `EACCES` and `EADDRINUSE` errors?
+  - The `EADDRINUSE` error means the port `3000` is currently being used and `EACCES` is lack of permission for webpack to build files to `./dist/`
+- Error: Cannot find module 'tapable'
+  - Remove `node_modules/` and run `npm cache clean` then `npm install`
+- How do I turn on Hot Module Replacement
+  - Run `npm run server:dev:hmr`
+- `RangeError: Maximum call stack size exceeded`
+  - This is a problem with minifying Angular and its recent JIT templates. If you set `mangle` to `false` then you should be good
+- Why is the size of my app larger in development?
+  - We are using inline source-maps and hot module replacement which will increase the bundle size.
+- If you're in China
+  - check out https://github.com/cnpm/cnpm
+- node-pre-gyp ERR in npm install (Windows)
+  - install Python x86 version between 2.5 and 3.0 on windows
+  - or try `--no-optional`
