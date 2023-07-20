@@ -15,8 +15,8 @@
     "url": "https://github.com/nationalbankbelgium/stark.git"
   },
   "engines": {
-    "node": ">=12.22.1",
-    "npm": ">=7.12.1"
+    "node": ">=14.20.0",
+    "npm": ">=8.19.1"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^12.1.3",

@@ -73,7 +73,7 @@ That script makes some checks then, if all succeed it publishes the API docs of 
 
 Checks that are performed:
 
-- node version: should be "10"
+- node version: should be "14"
 - GITHUB_REPOSITORY should be "NationalBankBelgium/stark"
 - GH_ACTIONS_TAG should be defined and not empty (this is the case when GitHub Actions builds for a tag)
 - GITHUB_EVENT_NAME should be different of "pull_request"
@@ -95,7 +95,7 @@ That script makes some checks then, if all succeed, it publishes the different p
 
 Checks that are performed:
 
-- node version: should be "10"
+- node version: should be "14"
 - NPM_TOKEN environment variable should be defined
 - GITHUB_REPOSITORY should be "NationalBankBelgium/stark"
 - GH_ACTIONS_TAG should be defined and not empty (this is the case when GitHub Actions builds for a tag)

@@ -6,7 +6,7 @@ last 5 chrome version
 last 5 firefox version
 
 [ssr]
-node 12
+node 14
 
 # This file is used by the build system to adjust CSS and JS output to support the specified browsers below.
 # For additional information regarding the format and rule options, please see:

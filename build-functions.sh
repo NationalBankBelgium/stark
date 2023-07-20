@@ -231,4 +231,17 @@ adaptNpmPackageLockDependencies() {
   # We should only replace the value of the devDependency for make it work.
   
   perl -p -i.bak -0 -e "s/$PATTERN/$REPLACEMENT/m" $PACKAGE_JSON_FILE
+  
+  # In npm >= v8, the package-lock.json file contains also the path in the node_modules folder.
+  local PATTERN="\\\"node_modules\/\@nationalbankbelgium\/$PACKAGE\\\": \\{(\s*)\\\"version\\\": \\\"(\S*)\\\"(,(\s*)\\\"resolved\\\": \\\"(.*))?,(\s*)\\\"integrity\\\": \\\"sha512-(.*)\\\""
+	local REPLACEMENT='"node_modules\/\@nationalbankbelgium\/'$PACKAGE'": {$1"version":"$2","resolved":"'$TGZ_PATH'",$4"integrity": "sha512-'$ESCAPED_SHA'"'
+
+	logTrace "PATTERN: $PATTERN"
+	logTrace "REPLACEMENT: $REPLACEMENT"
+	logTrace "Package JSON file: $PACKAGE_JSON_FILE"
+
+	# Packages will have dependencies between them. They will so have "devDependencies" and "peerDependencies" with different values.
+	# We should only replace the value of the devDependency for make it work.
+
+	perl -p -i.bak -0 -e "s/$PATTERN/$REPLACEMENT/m" $PACKAGE_JSON_FILE
 }
