@@ -113,44 +113,18 @@ function get(obj, path, defaultValue) {
 }
 
 /**
- * Makes a new tslint.json file that extends the default (tslint.json) and disables all the tslint rules that require typechecking
- * @see FIXME on webpack-partial.common.js (module.exports().module.rules)
- *
- * @param {string} tslintConfig The path to the projects tslint.json
- * @return {string} Returns the path to the temporary tslint configuration for tslint-loader
- */
-function getFixedTSLintConfig(tslintConfig) {
-	// Windows style separators need to be replaced before injecting it into the new tslint.json
-	const tslintConfigPath = helpers.root(tslintConfig).replace(/\\/g, "/");
-
-	const noTypeCheckTSLintConfig = fs
-		.readFileSync(helpers.rootStark("config/tslint-disabled-typecheck-rules.json"), "utf8")
-		.replace(/TSLINT_CONFIG_PLACEHOLDER/, tslintConfigPath);
-
-	const contentHash = crypto.createHash("md5").update(noTypeCheckTSLintConfig).digest("hex");
-
-	const noTypeCheckTSLintConfigPath = path.resolve(os.tmpdir(), `national-bank-belgium_stark-build_tslint-${contentHash}.json`);
-
-	// check if file already exists before writing it
-	if (!fs.existsSync(noTypeCheckTSLintConfigPath)) {
-		console.log(`Writing TSLint configuration to ${noTypeCheckTSLintConfigPath}`);
-		fs.writeFileSync(noTypeCheckTSLintConfigPath, noTypeCheckTSLintConfig, "utf8");
-	}
-
-	return noTypeCheckTSLintConfigPath;
-}
-
-/**
  * Based on "angular.json" file, gets the value for the `property` in specified `environment` in build configuration.
  * If there is no definition in the `environment`, fallback gets default value in build configuration.
- * 
+ *
  * @param {string} property The property name
  * @param {string} environment The environment (usually "production" or "development")
  * @returns {*} Returns the value related to the property
  */
 function getAngularWorkspaceBuildProperty(property, environment) {
-	if (typeof ANGULAR_APP_CONFIG.buildConfigurations[environment] !== "undefined" && 
-		typeof ANGULAR_APP_CONFIG.buildConfigurations[environment][property] !== "undefined") {
+	if (
+		typeof ANGULAR_APP_CONFIG.buildConfigurations[environment] !== "undefined" &&
+		typeof ANGULAR_APP_CONFIG.buildConfigurations[environment][property] !== "undefined"
+	) {
 		return ANGULAR_APP_CONFIG.buildConfigurations[environment][property];
 	} else {
 		return ANGULAR_APP_CONFIG.buildOptions[property];
@@ -166,8 +140,10 @@ function getAngularWorkspaceBuildProperty(property, environment) {
  * @returns {*} Returns the value related to the property
  */
 function getAngularWorkspaceServeProperty(property, environment) {
-	if (typeof ANGULAR_APP_CONFIG.serveConfigurations[environment] !== "undefined" &&
-		typeof ANGULAR_APP_CONFIG.serveConfigurations[environment][property] !== "undefined") {
+	if (
+		typeof ANGULAR_APP_CONFIG.serveConfigurations[environment] !== "undefined" &&
+		typeof ANGULAR_APP_CONFIG.serveConfigurations[environment][property] !== "undefined"
+	) {
 		return ANGULAR_APP_CONFIG.serveConfigurations[environment][property];
 	} else {
 		return ANGULAR_APP_CONFIG.serveOptions[property];
@@ -179,6 +155,5 @@ exports.getAngularWorkspaceBuildProperty = getAngularWorkspaceBuildProperty;
 exports.getAngularWorkspaceServeProperty = getAngularWorkspaceServeProperty;
 exports.getEnvironmentFile = getEnvironmentFile;
 exports.readTsConfig = readTsConfig;
-exports.getFixedTSLintConfig = getFixedTSLintConfig;
 exports.supportES2015 = supportES2015;
 exports.get = get;

@@ -104,7 +104,6 @@ function getNgCliCommandOption(option) {
 			// if command option is and there is no value, the default is true
 			return "true";
 		}
-
 	} else {
 		return null; // the flag was not passed to the current command
 	}
