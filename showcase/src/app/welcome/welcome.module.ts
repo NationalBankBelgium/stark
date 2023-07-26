@@ -12,7 +12,7 @@ import {
 	NoContentPageComponent,
 	ReactiveFormErrorsPageComponent
 } from "./pages";
-import {CardComponent, TranslatedFormErrorComponent} from "./pages/reactive-form-errors/components";
+import { CardComponent, TranslatedFormErrorComponent } from "./pages/reactive-form-errors/components";
 import { NewsItemComponent } from "./components";
 import { NEWS_STATES } from "./routes";
 
@@ -48,7 +48,6 @@ import { NEWS_STATES } from "./routes";
 	entryComponents: [TranslatedFormErrorComponent]
 })
 export class WelcomeModule {
-	/* tslint:disable:no-hardcoded-credentials */
 	public constructor(private errorMessageService: NgxFormErrorsMessageService) {
 		this.errorMessageService.addErrorMessages({
 			required: "SHOWCASE.NGX_FORM_ERRORS.FORM.VALIDATION.REQUIRED",

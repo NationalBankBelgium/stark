@@ -1,4 +1,4 @@
-/* tslint:disable:no-null-keyword */
+/* eslint-disable no-null/no-null */
 import { Component, Inject, OnDestroy } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";

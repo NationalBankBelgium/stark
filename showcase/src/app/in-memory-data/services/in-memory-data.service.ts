@@ -25,7 +25,7 @@ export class InMemoryDataService implements InMemoryDbService {
 	 * whose values are arrays of collection objects to return or update
 	 * @param _reqInfo - The RequestInfo object in case this method is invoked as a result of a POST `commands/resetDb` request
 	 * @returns The "database" object or an Observable of Promise that will return such object asynchronously
-	 * @link https://github.com/angular/in-memory-web-api#basic-setup
+	 * @see https://github.com/angular/in-memory-web-api#basic-setup
 	 */
 	public createDb(_reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
 		// replace the "uuid" field defined in the mock data by the "id" field expected by the in-memory-db
@@ -41,7 +41,7 @@ export class InMemoryDataService implements InMemoryDbService {
 	 * @param _url - The request URL
 	 * @param _requestInfoUtils - Some utility methods provided by the "angular-in-memory-web-api" library including the default parser.
 	 * @returns The ParsedRequestUrl object in case the original one was modified or "undefined" to let the service use the default parser.
-	 * @link https://github.com/angular/in-memory-web-api#custom-parserequesturl
+	 * @see https://github.com/angular/in-memory-web-api#custom-parserequesturl
 	 */
 	public parseRequestUrl(_url: string, _requestInfoUtils: RequestInfoUtilities): ParsedRequestUrl | undefined {
 		// the default parser is in the RequestInfoUtilities. You can use it by calling  _requestInfoUtils.parseRequestUrl(_url))
@@ -53,12 +53,12 @@ export class InMemoryDataService implements InMemoryDbService {
 	 * @param requestInfo - The RequestInfo object with info about the current request url extracted from an Http Request.
 	 * @returns An observable that will emit the Http response in case it is manually constructed or "undefined" to let the service
 	 * continue with its default processing of the HTTP request.
-	 * @link https://github.com/angular/in-memory-web-api#http-method-interceptors
+	 * @see https://github.com/angular/in-memory-web-api#http-method-interceptors
 	 */
 	public get(requestInfo: RequestInfo): Observable<Response> | undefined {
 		if (requestInfo.apiBase === "/" && (requestInfo.collectionName === undefined || requestInfo.collectionName === "")) {
 			const inMemoryDBResponse = `<h2>Congrats!</h2>
-				<p>You\'re successfully running <b>Stark in memory database</b></p>
+				<p>You're successfully running <b>Stark in memory database</b></p>
 				<br>
 				<p>
 				  To access and modify resources, you can use any HTTP method
@@ -71,13 +71,11 @@ export class InMemoryDataService implements InMemoryDbService {
 				  <li><code>DELETE</code></li>
 				</p>`;
 
-			return requestInfo.utils.createResponse$(() => {
-				return {
-					body: inMemoryDBResponse,
-					status: 200,
-					url: requestInfo.url
-				};
-			});
+			return requestInfo.utils.createResponse$(() => ({
+				body: inMemoryDBResponse,
+				status: 200,
+				url: requestInfo.url
+			}));
 		}
 
 		return undefined; // do not intercept, let the default GET handle it
@@ -89,7 +87,7 @@ export class InMemoryDataService implements InMemoryDbService {
 	 * @param response - The intercepted Response object.
 	 * @param _requestInfo - The RequestInfo object with info about the current request url extracted from an Http Request.
 	 * @returns The modified response (if needed)
-	 * @link https://github.com/angular/in-memory-web-api#responseinterceptor
+	 * @see https://github.com/angular/in-memory-web-api#responseinterceptor
 	 */
 	public responseInterceptor(response: ResponseOptions, _requestInfo: RequestInfo): ResponseOptions {
 		// a full copy of the database can be retrieved by calling _requestInfo.utils.getDb())
@@ -104,6 +102,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
 	/**
 	 * Replace an object property recursively
+	 * @param item item
+	 * @param property property
+	 * @param newProperty newProperty
 	 */
 	protected deepReplaceProperty(item: any, property: string, newProperty: string): void {
 		if (item instanceof Array) {
@@ -111,6 +112,7 @@ export class InMemoryDataService implements InMemoryDbService {
 				this.deepReplaceProperty(childItem, property, newProperty);
 			}
 		} else if (typeof item === "object") {
+			// eslint-disable-next-line no-prototype-builtins
 			if (item.hasOwnProperty(property)) {
 				item[newProperty] = item[property];
 				delete item[property];

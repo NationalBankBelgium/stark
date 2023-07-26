@@ -14,7 +14,7 @@ import { filter } from "rxjs/operators";
 	selector: "demo-app-data",
 	templateUrl: "./demo-app-data-page.component.html",
 	styleUrls: ["./_demo-app-data-page.component.scss"],
-	/* tslint:disable-next-line:use-component-view-encapsulation */
+	/* eslint-disable-next-line @angular-eslint/use-component-view-encapsulation */
 	encapsulation: ViewEncapsulation.None
 })
 export class DemoAppDataPageComponent implements OnInit {

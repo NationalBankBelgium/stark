@@ -1,5 +1,6 @@
 import { StarkUser } from "@nationalbankbelgium/stark-core";
 
+/* eslint-disable-next-line jsdoc/require-jsdoc */
 export function getAuthenticationHeaders(user: StarkUser): Map<string, string> {
 	const devAuthentication: AppDevAuthentication = {
 		roleSeparator: "^",

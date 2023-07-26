@@ -20,7 +20,7 @@ const DUMMY_DATA: object[] = [
 	selector: "showcase-table-with-custom-styling",
 	templateUrl: "./table-with-custom-styling.component.html",
 	styleUrls: ["./table-with-custom-styling.component.scss"],
-	/* tslint:disable-next-line:use-component-view-encapsulation */
+	/* eslint-disable-next-line @angular-eslint/use-component-view-encapsulation */
 	encapsulation: ViewEncapsulation.None // Important
 })
 export class TableWithCustomStylingComponent {

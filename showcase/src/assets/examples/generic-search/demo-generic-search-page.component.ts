@@ -16,7 +16,8 @@ import { DemoGenericService } from "./services";
 })
 export class DemoGenericSearchComponent
 	extends AbstractStarkSearchComponent<HeroMovie, HeroMovieSearchCriteria>
-	implements OnInit, OnDestroy {
+	implements OnInit, OnDestroy
+{
 	public hideSearch = false;
 
 	public columnsProperties: StarkTableColumnProperties[] = [

@@ -5,6 +5,7 @@ import { getConfirmPasswordValidator } from "./password-validator";
 import { ReferenceLink } from "../../../shared/components/reference-block";
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: "reactive-forms",
 	templateUrl: "./reactive-form-errors-page.component.html",
 	styleUrls: ["./reactive-form-errors-page.component.scss"]
@@ -53,7 +54,7 @@ export class ReactiveFormErrorsPageComponent {
 	}
 
 	public getErrorClass(formControlName: string): string {
-		const formCtrl = this.formGroup.get(formControlName) as AbstractControl;
+		const formCtrl = <AbstractControl>this.formGroup.get(formControlName);
 		return formCtrl.errors && Object.keys(formCtrl.errors).length > 1 ? "maximum-height" : "small-height";
 	}
 

@@ -22,7 +22,7 @@ export class DemoSliderPageComponent {
 		}
 	];
 
-	/***
+	/**
 	 * Simple Horizontal Slider
 	 */
 	public isSimpleHorizontalSliderEnabled = true;
@@ -43,7 +43,7 @@ export class DemoSliderPageComponent {
 		}
 	};
 
-	/***
+	/**
 	 * Horizontal Range Slider
 	 */
 	public isHorizontalRangeSliderEnabled = true;
@@ -65,7 +65,7 @@ export class DemoSliderPageComponent {
 		}
 	};
 
-	/***
+	/**
 	 * Simple Vertical Slider
 	 */
 	public isSimpleVerticalSliderEnabled = true;
@@ -87,7 +87,7 @@ export class DemoSliderPageComponent {
 		}
 	};
 
-	/***
+	/**
 	 * Vertical Range Slider
 	 */
 	public isVerticalRangeSliderEnabled = true;
@@ -110,7 +110,7 @@ export class DemoSliderPageComponent {
 		}
 	};
 
-	/***
+	/**
 	 * Simple Horizontal Slider
 	 */
 	public toggleSimpleHorizontalSliderEnable(): void {
@@ -125,7 +125,7 @@ export class DemoSliderPageComponent {
 		this.simpleHorizontalSliderValues = [parseInt(event.target.value, 10)];
 	}
 
-	/***
+	/**
 	 * Horizontal Range Slider
 	 */
 	public toggleHorizontalRangeSliderEnable(): void {
@@ -152,7 +152,7 @@ export class DemoSliderPageComponent {
 		}
 	}
 
-	/***
+	/**
 	 * Simple Vertical Slider
 	 */
 	public toggleSimpleVerticalSliderEnable(): void {
@@ -167,7 +167,7 @@ export class DemoSliderPageComponent {
 		this.simpleVerticalSliderValues = [parseInt(event.target.value, 10)];
 	}
 
-	/***
+	/**
 	 * Vertical Range Slider
 	 */
 	public toggleVerticalRangeSliderEnable(): void {

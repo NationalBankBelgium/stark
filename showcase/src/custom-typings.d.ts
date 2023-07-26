@@ -56,7 +56,8 @@ declare module 'modern-lru' {
 }
 */
 
-declare var System: SystemJS;
+// eslint-disable-next-line @typescript-eslint/naming-convention
+declare let System: SystemJS;
 
 interface SystemJS {
 	import: (path?: string) => Promise<any>;
