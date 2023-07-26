@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Serialize } from "cerialize";
 import { StarkBackend, StarkHttpRequestType, StarkResource } from "../entities";
 import { StarkSerializable } from "../../../serialization";
@@ -268,9 +267,10 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
 		// stringify the pre-stringified json object returned by Serialize
 		const stringifiedCriteria: string = JSON.stringify(Serialize(criteria));
 		// then JSON.parse the stringified criteria passing a reviver function to omit the empty values ("")
-		return JSON.parse(stringifiedCriteria, (_key: string, value: any) => {
-			return value === "" ? undefined : value; // filter out empty strings
-		});
+		return JSON.parse(
+			stringifiedCriteria,
+			(_key: string, value: any) => (value === "" ? undefined : value) // filter out empty strings
+		);
 	}
 }
 
@@ -279,7 +279,8 @@ export class StarkHttpRequestBuilderImpl<T extends StarkResource> implements Sta
  */
 export class StarkHttpCreateRequestBuilderImpl<T extends StarkResource>
 	extends StarkAbstractHttpBaseRequestBuilder<T>
-	implements StarkHttpCreateRequestBuilder<T> {
+	implements StarkHttpCreateRequestBuilder<T>
+{
 	public echo(echo: StarkHttpEchoType): this {
 		this.addQueryParameter("echo", <string>echo);
 		return this;

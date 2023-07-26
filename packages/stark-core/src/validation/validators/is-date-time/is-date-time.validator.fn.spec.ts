@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { starkIsDateTime } from "./is-date-time.validator.fn";
 
 describe("Validator Function: StarkIsDateTime", () => {

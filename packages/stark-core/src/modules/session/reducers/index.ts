@@ -2,7 +2,7 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from "@ngrx/s
 import { StarkSession } from "../entities";
 import { sessionReducer } from "./session.reducer";
 import { StarkSessionActions } from "../actions";
-import { starkSessionStoreKey } from '../constants';
+import { starkSessionStoreKey } from "../constants";
 
 /**
  * Defines the part of the state assigned to the {@link StarkSessionModule}

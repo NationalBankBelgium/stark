@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Inject, Injectable, Optional } from "@angular/core";
 import { Observable } from "rxjs";
 import { StarkSerializable } from "../../../serialization";

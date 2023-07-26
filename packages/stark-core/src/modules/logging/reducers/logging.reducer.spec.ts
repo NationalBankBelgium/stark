@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { StarkLogging, StarkLogMessageImpl, StarkLogMessageType } from "../entities";
 import { loggingReducer } from "./logging.reducer";
 import { StarkLoggingActions } from "../actions";

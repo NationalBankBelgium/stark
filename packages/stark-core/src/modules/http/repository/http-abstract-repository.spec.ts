@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { Observable } from "rxjs";
 import { AbstractStarkHttpRepository } from "./http-abstract-repository";
 import { StarkSerializable } from "../../../serialization";
@@ -16,7 +15,6 @@ import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 
-// tslint:disable-next-line:no-big-function
 describe("Repository: AbstractStarkHttpRepository", () => {
 	let mockStarkHttpService: MockStarkHttpService<MockResource>;
 	let mockLogger: MockStarkLoggingService;

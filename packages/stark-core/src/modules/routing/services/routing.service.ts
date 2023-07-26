@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Store } from "@ngrx/store";
 import { EMPTY, from, Observable } from "rxjs";
 import { ErrorHandler, Inject, Injectable } from "@angular/core";
@@ -103,7 +102,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			const previousState: StarkState = this._starkStateHistory[this._starkStateHistory.length - 2];
 			this._starkStateHistory = this._starkStateHistory.slice(0, this._starkStateHistory.length - 2);
 
-			const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+			const regexInitExitStateName = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 
 			if (
 				(this._starkStateHistory.length === 1 && this._starkStateHistory[0].name.match(regexInitExitStateName)) ||
@@ -161,9 +160,9 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		// separate path from hash
 		const [, path = urlPath, hash]: string[] = urlPath.match(/(.*)#(.*)/) || [];
 
-		const matchedState: StateDeclaration[] = this.getStatesConfig().filter((state: StateDeclaration) => {
-			return (<Function>state.$$state)().url && (<Function>state.$$state)().url.exec(path, undefined, hash);
-		});
+		const matchedState: StateDeclaration[] = this.getStatesConfig().filter(
+			(state: StateDeclaration) => (<Function>state.$$state)().url && (<Function>state.$$state)().url.exec(path, undefined, hash)
+		);
 
 		if (matchedState.length) {
 			targetRoute = {
@@ -218,7 +217,9 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			// If there is a value in the stateParams that is different from the currentStateParams, then it is not the current state
 			for (const key in stateParams) {
 				if (
+					// eslint-disable-next-line no-prototype-builtins
 					stateParams.hasOwnProperty(key) &&
+					// eslint-disable-next-line no-prototype-builtins
 					currentStateParams.hasOwnProperty(key) &&
 					stateParams[key] !== currentStateParams[key]
 				) {
@@ -235,7 +236,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 	public isCurrentUiStateIncludedIn(stateName: string, stateParams?: RawParams): boolean {
 		// === true is necessary here because includes method returns TRUE, FALSE or undefined
-		// tslint:disable-next-line:no-boolean-literal-compare
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-boolean-literal-compare
 		return this.$state.includes(stateName, stateParams) === true;
 	}
 
@@ -284,8 +285,6 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	 * Adds Angular UI-Router specific handlers for errors..
 	 * It logs an error and dispatches a NAVIGATE_FAILURE action to the NGRX Store
 	 */
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
 	private addNavigationErrorHandlers(): void {
 		this.logger.debug(starkRoutingServiceName + ": adding navigation error handlers");
 
@@ -332,15 +331,15 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 							this.logger.warn(message);
 							break;
 						default:
-							const failureAction = StarkRoutingActions.navigateFailure({
-								currentState: <string>fromState.name,
-								newState: targetState.name().toString(),
-								params: targetState.params(),
-								error: rejectionString
-							});
-
 							// dispatch corresponding action to allow the user to trigger his own effects if needed
-							this.store.dispatch(failureAction);
+							this.store.dispatch(
+								StarkRoutingActions.navigateFailure({
+									currentState: <string>fromState.name,
+									newState: targetState.name().toString(),
+									params: targetState.params(),
+									error: rejectionString
+								})
+							);
 
 							// reference: https://ui-router.github.io/ng2/docs/latest/classes/state.stateservice.html#go
 							if (rejectionString.match(/transition superseded|transition prevented|transition aborted|transition failed/)) {
@@ -367,35 +366,33 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 
 		// declare the onInvalid handler
 		// https://ui-router.github.io/ng2/docs/latest/classes/state.stateservice.html#oninvalid
-		this.$state.onInvalid(
-			(toState?: TargetState, fromState?: TargetState): HookResult => {
-				const errorType = "Invalid state change";
-				const failureAction = StarkRoutingActions.navigateFailure({
-					currentState: (<TargetState>fromState).name(),
-					newState: (<TargetState>toState).name(),
-					params: (<TargetState>toState).params(),
-					error: errorType
-				});
-				let message: string =
-					starkRoutingServiceName + ': Error while trying to navigate from "' + (<TargetState>fromState).name() + '"';
-				message += ' to "' + (<TargetState>toState).name() + '"';
+		this.$state.onInvalid((toState?: TargetState, fromState?: TargetState): HookResult => {
+			const errorType = "Invalid state change";
+			const failureAction = StarkRoutingActions.navigateFailure({
+				currentState: (<TargetState>fromState).name(),
+				newState: (<TargetState>toState).name(),
+				params: (<TargetState>toState).params(),
+				error: errorType
+			});
+			let message: string =
+				starkRoutingServiceName + ': Error while trying to navigate from "' + (<TargetState>fromState).name() + '"';
+			message += ' to "' + (<TargetState>toState).name() + '"';
 
-				if (toState && !toState.exists()) {
-					message = message + ". The target state does NOT exist";
-				}
-
-				// dispatch corresponding action to allow the user to trigger his own effects if needed
-				this.store.dispatch(failureAction);
-				this.logger.error(message, new Error("Parameters that were passed: " + JSON.stringify((<TargetState>toState).params())));
-
-				// TODO redirect to the generic error page once implemented: https://jira.prd.nbb/browse/NG-847
-				// should probably be done via an effect reacting to the StarkRoutingActions.navigateFailure action
-
-				// HookResult: https://ui-router.github.io/ng2/docs/latest/modules/transition.html#hookresult
-				// boolean | TargetState | void | Promise<boolean | TargetState | void>
-				return false;
+			if (toState && !toState.exists()) {
+				message = message + ". The target state does NOT exist";
 			}
-		);
+
+			// dispatch corresponding action to allow the user to trigger his own effects if needed
+			this.store.dispatch(failureAction);
+			this.logger.error(message, new Error("Parameters that were passed: " + JSON.stringify((<TargetState>toState).params())));
+
+			// TODO redirect to the generic error page once implemented: https://jira.prd.nbb/browse/NG-847
+			// should probably be done via an effect reacting to the StarkRoutingActions.navigateFailure action
+
+			// HookResult: https://ui-router.github.io/ng2/docs/latest/modules/transition.html#hookresult
+			// boolean | TargetState | void | Promise<boolean | TargetState | void>
+			return false;
+		});
 
 		// provide custom default error handler
 		// https://ui-router.github.io/ng2/docs/latest/classes/state.stateservice.html#defaulterrorhandler
@@ -459,8 +456,8 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		);
 	}
 
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
+	// FIXME: re-enable this ESLint rule and refactor this function to reduce its cognitive complexity
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	public getStateTreeParams(): Map<string, any> {
 		const stateTreeParams: Map<string, any> = new Map<string, unknown>();
 
@@ -495,8 +492,6 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return stateTreeParams;
 	}
 
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
 	public getStateTreeResolves(): Map<string, any> {
 		const stateTreeResolves: Map<string, any> = new Map<string, unknown>();
 
@@ -529,8 +524,6 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 		return stateTreeResolves;
 	}
 
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
 	public getStateTreeData(): Map<string, any> {
 		const stateTreeData: Map<string, any> = new Map<string, unknown>();
 
@@ -604,6 +597,7 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 			stateTranslationKey = stateTreeResolves.get(stateName)["translationKey"];
 		}
 		// if not found in the resolves then check the state's data object
+		// eslint-disable-next-line no-prototype-builtins
 		if (stateData && !stateTranslationKey && stateData.hasOwnProperty("translationKey")) {
 			stateTranslationKey = stateData["translationKey"];
 		}

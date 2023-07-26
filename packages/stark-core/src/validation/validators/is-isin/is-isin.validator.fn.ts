@@ -19,7 +19,7 @@ export function starkIsISIN(isin: string): boolean {
 	const modulo = 10;
 	const base = 36;
 	const lengthWithoutCheckDigit = 11;
-	const isinPattern: RegExp = /^[A-Z]{2}([A-Z0-9]){9}[0-9]/;
+	const isinPattern = /^[A-Z]{2}([A-Z0-9]){9}[0-9]/;
 
 	let isValid = false;
 	if (typeof isin === "string" && isinPattern.test(isin)) {

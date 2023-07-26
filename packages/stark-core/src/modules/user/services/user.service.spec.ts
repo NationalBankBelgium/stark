@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 import { Store } from "@ngrx/store";
@@ -28,7 +27,6 @@ interface StarkUserWithCustomData extends Pick<StarkUser, "uuid" | "username" | 
 	[prop: string]: any;
 }
 
-// tslint:disable-next-line:no-big-function
 describe("Service: StarkUserService", () => {
 	let userService: StarkUserService;
 	let mockStore: SpyObj<Store<StarkCoreApplicationState>>;
@@ -130,7 +128,7 @@ describe("Service: StarkUserService", () => {
 			expect((<any>mockStore.dispatch.calls.argsFor(1)[0]).message).toContain("No user profiles found");
 
 			mockStore.dispatch.calls.reset();
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			userService["userProfiles"] = null;
 
 			result = userService.getAllUsers();

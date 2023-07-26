@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs no-identical-functions*/
 import { starkIsBBAN } from "./is-bban.validator.fn";
 
 describe("Validator Function: StarkIsBBAN", () => {

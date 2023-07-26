@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-identical-functions no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsNIN } from "./is-nin.validator.decorator";
 import { starkIsNINValidatorName } from "../../validators/is-nin";

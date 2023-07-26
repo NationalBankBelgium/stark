@@ -8,7 +8,10 @@ import { starkLoggingStoreKey } from "../constants";
  * Parameter:
  *   - applicationId - The id of the application
  */
-export const setLoggingApplicationId = createAction(`[${starkLoggingStoreKey}] Set Logging Application Id`, props<{ applicationId: string }>());
+export const setLoggingApplicationId = createAction(
+	`[${starkLoggingStoreKey}] Set Logging Application Id`,
+	props<{ applicationId: string }>()
+);
 
 /**
  * Store a debug/info/warning/error message

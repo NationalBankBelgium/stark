@@ -70,7 +70,10 @@ export const destroySessionSuccess = createAction(`[${starkSessionStoreKey}] Des
  * Parameter:
  *   - countdown - The countdown until the session will be automatically destroyed.
  */
-export const sessionTimeoutCountdownStart = createAction(`[${starkSessionStoreKey}] Session Timeout Countdown Start`, props<{ countdown: number }>());
+export const sessionTimeoutCountdownStart = createAction(
+	`[${starkSessionStoreKey}] Session Timeout Countdown Start`,
+	props<{ countdown: number }>()
+);
 
 /**
  * Triggered when the countdown to automatically destroy the user's session due to inactivity stops.

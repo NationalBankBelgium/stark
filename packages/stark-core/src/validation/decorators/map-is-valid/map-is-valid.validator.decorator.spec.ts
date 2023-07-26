@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { IsNotEmpty, MaxLength, validateSync, ValidationError } from "class-validator";
 import { StarkMapIsValid, starkMapIsValidValidatorName } from "./map-is-valid.validator.decorator";
 

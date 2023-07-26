@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs no-identical-functions*/
 import { serialize, serializeAs } from "cerialize";
 import {
 	StarkHttpCreateRequestBuilderImpl,
@@ -126,10 +125,10 @@ function testSetHeader(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables)
 		it("should add the header name/value only if the name and value are defined and not null", () => {
 			builder.setHeader(StarkHttpHeaders.CONTENT_TYPE, contentTypeJSON);
 			builder.setHeader("invalidHeader", <any>undefined);
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			builder.setHeader("anotherInvalidHeader", <any>null);
 			builder.setHeader(<any>undefined, "dummy value");
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			builder.setHeader(<any>null, "another dummy value");
 
 			const request: StarkHttpRequest = builder.build();
@@ -591,7 +590,7 @@ function testAddSortBy(beforeEachFn: () => StarkHttpRequestBuilderSpecVariables<
 	});
 }
 
-/* tslint:disable:max-union-size no-duplicate-string no-null-keyword no-big-function */
+/* eslint-disable no-null/no-null */
 function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle" | "getCollection" | "search" | "update"): void {
 	describe("common functionality", () => {
 		const mockBackend: StarkBackend = new StarkBackendImpl();
@@ -942,8 +941,6 @@ function testCommonFunctionality(typeOfBuilder: "create" | "delete" | "getSingle
 	});
 }
 
-// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-// tslint:disable-next-line:cognitive-complexity
 function testCustomSerialization(typeOfBuilder: "create" | "delete" | "getSingle" | "getCollection" | "search" | "update"): void {
 	describe("custom serialization", () => {
 		const mockBackend: StarkBackend = new StarkBackendImpl();
@@ -1501,7 +1498,6 @@ function testUUIDPathParamNormalization(typeOfBuilder: "delete" | "getSingle" | 
 	});
 }
 
-// tslint:disable-next-line:no-big-function
 describe("Builder: StarkHttpRequestBuilder", () => {
 	const mockBackend: StarkBackend = new StarkBackendImpl();
 	let requestBuilder: StarkHttpRequestBuilder<MockResource>;
@@ -1624,7 +1620,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			const request: StarkHttpRequest = searchRequestBuilder.build();
 			const requestCriteria: { [key: string]: any } = <{ [key: string]: any }>request.item;
 			expect(requestCriteria).not.toBe(mockCriteria);
-			/* tslint:disable:no-null-keyword */
+			/* eslint-disable no-null/no-null */
 			expect(requestCriteria).toEqual({
 				field1: "anything",
 				field2: {
@@ -1640,7 +1636,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 				undefinedField: null // due to Serialize => with undefined returns null
 				// emptyField: undefined   // empty values are omitted
 			});
-			/*tslint:disable:no-null-keyword*/
+			/* eslint-disable no-null/no-null */
 		});
 
 		it("should leave the criteria 'as is', even those with empty value (allowEmptyCriteria = true)", () => {
@@ -1675,6 +1671,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			expect(requestCriteria["field2"].childField1).toBe(mockDate.toISOString());
 			expect(requestCriteria["field2"].childField2).toBeDefined();
 			expect(requestCriteria["field2"].childField2.grandChildField1).toEqual(["someData", 123]);
+			/* eslint-disable no-prototype-builtins */
 			expect(requestCriteria["field2"].childField2.hasOwnProperty("anotherUndefinedField")).toBe(false); // Serialize omits undefined class props
 			expect(requestCriteria["field2"].childField2.hasOwnProperty("anotherEmptyField")).toBe(false); // empty values are omitted
 			expect(requestCriteria["field2"].childField3).toBeDefined();
@@ -1687,6 +1684,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			expect(requestCriteria["field2"].hasOwnProperty("someEmptyField")).toBe(false); // empty values are omitted
 			expect(requestCriteria.hasOwnProperty("undefinedField")).toBe(false); // Serialize omits undefined class properties
 			expect(requestCriteria.hasOwnProperty("emptyField")).toBe(false); // empty values are omitted
+			/* eslint-enable no-prototype-builtins */
 		});
 
 		it("should leave the criteria instance 'as is' and include also those criteria with empty value (allowEmptyCriteria = true)", () => {
@@ -1710,6 +1708,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			expect(requestCriteria["field2"].childField1).toBe(mockDate);
 			expect(requestCriteria["field2"].childField2).toBeDefined();
 			expect(requestCriteria["field2"].childField2.grandChildField1).toEqual(["someData", 123]);
+			/* eslint-disable no-prototype-builtins */
 			expect(requestCriteria["field2"].childField2.hasOwnProperty("anotherUndefinedField")).toBe(true); // undefined values remain unchanged
 			expect(requestCriteria["field2"].childField2.anotherUndefinedField).toBeUndefined();
 			expect(requestCriteria["field2"].childField2.anotherEmptyField).toBe("");
@@ -1723,6 +1722,7 @@ describe("Builder: StarkHttpRequestBuilder", () => {
 			expect(requestCriteria["field2"].someUndefinedField).toBeUndefined();
 			expect(requestCriteria["field2"].someEmptyField).toBe("");
 			expect(requestCriteria.hasOwnProperty("undefinedField")).toBe(true); // undefined values remain unchanged
+			/* eslint-enable no-prototype-builtins */
 			expect(requestCriteria["undefinedField"]).toBeUndefined();
 			expect(requestCriteria["emptyField"]).toBe("");
 		});

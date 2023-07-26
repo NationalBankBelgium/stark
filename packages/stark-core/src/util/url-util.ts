@@ -9,7 +9,7 @@ export class StarkUrlUtil {
 	 */
 	public static parseUrlParams(url: string): string[] {
 		const urlParams: string[] = [];
-		const urlParamRegex: RegExp = /\/:(\w+)/g;
+		const urlParamRegex = /\/:(\w+)/g;
 		let matchesArray: RegExpExecArray | null = urlParamRegex.exec(url);
 
 		while (matchesArray) {

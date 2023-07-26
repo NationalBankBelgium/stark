@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { HttpClient, HttpErrorResponse, HttpRequest, HttpResponse } from "@angular/common/http";
 import { fakeAsync, tick } from "@angular/core/testing";
 import { Injector } from "@angular/core";
@@ -17,7 +16,6 @@ import CallInfo = jasmine.CallInfo;
 // this type is necessary due to the overloads of the HttpClient.get, so this refines the type to the one we use in StarkHttpService
 type HttpClientGet = (...args: any[]) => Observable<HttpResponse<string>>;
 
-/* tslint:disable-next-line:no-big-function */
 describe("Service: StarkXSRFService", () => {
 	let xsrfService: StarkXSRFServiceHelper;
 	let appConfig: StarkApplicationConfig;
@@ -96,6 +94,7 @@ describe("Service: StarkXSRFService", () => {
 		});
 	});
 
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	describe("configureHttpRequest", () => {
 		it("should create a new Angular HttpRequest with the XSRF protection enabled if the HTTP method is POST, PUT, PATCH or DELETE", () => {
 			spyOn(xsrfService, "getXSRFToken").and.returnValue(mockXSRFToken);

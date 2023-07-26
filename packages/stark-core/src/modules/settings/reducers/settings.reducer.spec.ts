@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { StarkSettingsActions } from "../actions";
 import { StarkSettings } from "../entities";
 import { settingsReducer } from "./settings.reducer";

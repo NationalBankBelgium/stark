@@ -21,9 +21,6 @@ const reducer = createReducer<StarkSettings, StarkSettingsActions.Types>(
  * @param action - The action to apply to the reducer
  * @returns The new `StarkSettings` state
  */
-export function settingsReducer(
-	state: StarkSettings | undefined,
-	action: StarkSettingsActions.Types
-): Readonly<StarkSettings> {
+export function settingsReducer(state: StarkSettings | undefined, action: StarkSettingsActions.Types): Readonly<StarkSettings> {
 	return reducer(state, action);
 }

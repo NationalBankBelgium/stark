@@ -17,6 +17,7 @@ export class StarkClassValidationUtil {
 	 * @param value - The value of the property being validated
 	 */
 	public static validateIfDefinedAndNotNull(_instance: any, value: any): boolean {
+		// eslint-disable-next-line no-null/no-null
 		return typeof value !== "undefined" && value !== null;
 	}
 }

@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { filter } from "rxjs/operators";
@@ -84,11 +83,10 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 	}
 
 	public findMatchingSupportedLanguage(language: string): number {
-		return this.appMetadata.supportedLanguages.findIndex((supportedLanguage: StarkLanguage) => {
-			return (
+		return this.appMetadata.supportedLanguages.findIndex(
+			(supportedLanguage: StarkLanguage) =>
 				supportedLanguage.isoCode.toLowerCase() === language.toLowerCase() ||
 				supportedLanguage.code.toLowerCase() === language.toLowerCase()
-			);
-		});
+		);
 	}
 }

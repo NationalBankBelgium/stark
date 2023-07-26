@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs */
 import { Inject, Injectable, Injector } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest } from "@angular/common/http";
@@ -33,7 +32,7 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 		// workaround to avoid Angular compiler error: "Could not resolve type Document"
 		// see https://stackoverflow.com/questions/49513359/could-not-resolve-type-document-in-angular5
 		// and https://github.com/angular/angular/issues/20351
-		this.document = document as Document;
+		this.document = <Document>document;
 		this.logger.debug(starkXSRFServiceName + " loaded");
 	}
 
@@ -186,9 +185,9 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 			if (typeof this.configOptions.waitBeforePinging === "object") {
 				waitBeforePingingFn = this.configOptions.waitBeforePinging.waitBeforePingingFn;
 				// for a StarkXSRFWaitBeforePingingLiteral we should get all the DI dependencies via the Angular Injector
-				waitBeforePingingDeps = this.configOptions.waitBeforePinging.deps.map((diDependency: any) => {
-					return this.injector.get<any>(diDependency);
-				});
+				waitBeforePingingDeps = this.configOptions.waitBeforePinging.deps.map((diDependency: any) =>
+					this.injector.get<any>(diDependency)
+				);
 			} else {
 				waitBeforePingingFn = this.configOptions.waitBeforePinging;
 			}
@@ -221,7 +220,7 @@ export class StarkXSRFServiceImpl implements StarkXSRFService {
 	}
 
 	private getCookieRegExp(cookieName: string): RegExp {
-		const escapedName: string = cookieName.replace(/([\[\]\{\}\(\)\|\=\;\+\?\,\.\*\^\$])/gi, "\\$1");
+		const escapedName: string = cookieName.replace(/([[]{}()|=;+?,.*^$])/gi, "\\$1");
 
 		return new RegExp("(?:^" + escapedName + "|;\\s*" + escapedName + ")=(.*?)(?:;|$)", "g");
 	}

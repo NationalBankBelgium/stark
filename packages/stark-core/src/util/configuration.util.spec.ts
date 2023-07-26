@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { StarkConfigurationUtil, StarkConfigValidationGroups, StarkMetadataValidationGroups } from "./configuration.util";
 import {
 	STARK_APP_CONFIG,
@@ -11,11 +10,10 @@ import {
 } from "../configuration/entities";
 import { StarkBackendAuthenticationTypes, StarkBackendImpl } from "../modules/http/entities/backend";
 
-// tslint:disable-next-line:no-big-function
 describe("Util: ConfigurationUtil", () => {
 	const errorMessagePrefix = "some prefix";
-	const configErrorMessage: RegExp = new RegExp(STARK_APP_CONFIG.toString() + " constant is not valid");
-	const metadataErrorMessage: RegExp = new RegExp(STARK_APP_METADATA.toString() + " constant is not valid");
+	const configErrorMessage = new RegExp(STARK_APP_CONFIG.toString() + " constant is not valid");
+	const metadataErrorMessage = new RegExp(STARK_APP_METADATA.toString() + " constant is not valid");
 
 	function testConfigByValidationGroup(
 		validationGroup: StarkConfigValidationGroups,

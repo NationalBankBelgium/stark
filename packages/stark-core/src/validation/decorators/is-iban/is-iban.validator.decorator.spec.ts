@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-identical-functions no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsIBAN } from "./is-iban.validator.decorator";
 import { starkIsIBANValidatorName } from "../../validators/is-iban";

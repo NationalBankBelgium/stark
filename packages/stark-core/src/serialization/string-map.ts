@@ -9,22 +9,20 @@ import { Deserialize, ISerializable, Serialize } from "cerialize";
  * - {@link https://github.com/weichx/cerialize/issues/33}
  * @param targetType - The type in which we want to serialize a file
  */
-export const stringMap: Function = (targetType: any): ISerializable => {
-	return {
-		Serialize: (map: Map<string, any>): object => {
-			const obj: object = {};
-			map.forEach((value: any, key: string) => {
-				obj[key] = Serialize(value);
-			});
-			return obj;
-		},
+export const stringMap: Function = (targetType: any): ISerializable => ({
+	Serialize: (map: Map<string, any>): object => {
+		const obj: object = {};
+		map.forEach((value: any, key: string) => {
+			obj[key] = Serialize(value);
+		});
+		return obj;
+	},
 
-		Deserialize: (json: any): Map<string, any> => {
-			const map: Map<string, any> = new Map<string, unknown>();
-			for (const key of Object.keys(json)) {
-				map.set(key, Deserialize(json[key], targetType));
-			}
-			return map;
+	Deserialize: (json: any): Map<string, any> => {
+		const map: Map<string, any> = new Map<string, unknown>();
+		for (const key of Object.keys(json)) {
+			map.set(key, Deserialize(json[key], targetType));
 		}
-	};
-};
+		return map;
+	}
+});

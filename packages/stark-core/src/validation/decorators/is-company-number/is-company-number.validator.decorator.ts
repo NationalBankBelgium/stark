@@ -31,7 +31,7 @@ class StarkIsCompanyNumberConstraint implements ValidatorConstraintInterface {
 
 /**
  * Validator decorator that uses the StarkIsCompanyNumber validator constraint
- * @param validationOptions, that ensure that the company number is valid
+ * @param validationOptions - that ensure that the company number is valid
  * @returns Function
  */
 export function StarkIsCompanyNumber(validationOptions?: ValidationOptions): Function {

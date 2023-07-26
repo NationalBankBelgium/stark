@@ -1,6 +1,5 @@
 import { StarkDateUtil } from "./date.util";
 
-// tslint:disable-next-line:no-big-function
 describe("Util: DateUtil", () => {
 	const dateTimeFormat = "YYYY-MM-DD HH:mm:ss.SSS";
 	const dateString = "2016-03-18T18:25:43.511Z";

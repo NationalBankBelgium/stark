@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-unbound-method */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { HttpHeaders, HttpRequest } from "@angular/common/http";
 import { EventEmitter, Injector } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle, InterruptSource } from "@ng-idle/core";
@@ -140,18 +140,19 @@ describe("Service: StarkSessionService", () => {
 			];
 
 			for (const invalidSessionConfig of invalidSessionConfigValues) {
-				expect(() => {
-					return new SessionServiceHelper(
-						mockStore,
-						mockLogger,
-						mockRoutingService,
-						appConfig,
-						mockIdleService,
-						mockInjectorService,
-						mockTranslateService,
-						invalidSessionConfig
-					);
-				}).toThrowError(/invalid StarkSessionConfig(.*)initial state/);
+				expect(
+					() =>
+						new SessionServiceHelper(
+							mockStore,
+							mockLogger,
+							mockRoutingService,
+							appConfig,
+							mockIdleService,
+							mockInjectorService,
+							mockTranslateService,
+							invalidSessionConfig
+						)
+				).toThrowError(/invalid StarkSessionConfig(.*)initial state/);
 			}
 		});
 
@@ -641,7 +642,7 @@ describe("Service: StarkSessionService", () => {
 
 	describe("configureKeepaliveService", () => {
 		beforeEach(() => {
-			// tslint:disable-next-line:deprecation
+			// eslint-disable-next-line import/no-deprecated
 			mockInjectorService.get.and.returnValue(mockKeepaliveService);
 			mockIdleService.getKeepaliveEnabled.and.returnValue(true);
 		});
@@ -802,7 +803,7 @@ describe("Service: StarkSessionService", () => {
 
 	describe("startKeepaliveService", () => {
 		it("should trigger a ping using the Keepalive service", () => {
-			// tslint:disable-next-line:deprecation
+			// eslint-disable-next-line import/no-deprecated
 			mockInjectorService.get.and.returnValue(mockKeepaliveService);
 			mockIdleService.getKeepaliveEnabled.and.returnValue(true);
 
@@ -833,7 +834,7 @@ describe("Service: StarkSessionService", () => {
 
 	describe("stopKeepaliveService", () => {
 		it("should call the stop() method from the Keepalive service to stop the keepalive ping requests", () => {
-			// tslint:disable-next-line:deprecation
+			// eslint-disable-next-line import/no-deprecated
 			mockInjectorService.get.and.returnValue(mockKeepaliveService);
 			mockIdleService.getKeepaliveEnabled.and.returnValue(true);
 
@@ -939,10 +940,10 @@ describe("Service: StarkSessionService", () => {
 			expectedDevAuthHeaders.set("usernameTestHeader", mockUser.username);
 			expectedDevAuthHeaders.set("firstnameTestHeader", mockUser.firstName);
 			expectedDevAuthHeaders.set("lastnameTestHeader", <any>undefined);
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			expectedDevAuthHeaders.set("emailTestHeader", <any>null);
 			expectedDevAuthHeaders.set(<any>undefined, "dummy value");
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			expectedDevAuthHeaders.set(<any>null, "another dummy value");
 
 			sessionService.setDevAuthenticationHeaders(expectedDevAuthHeaders);
@@ -983,8 +984,6 @@ describe("Service: StarkSessionService", () => {
 });
 
 class SessionServiceHelper extends StarkSessionServiceImpl {
-	// TODO Check if we can simplify this service
-	/* tslint:disable-next-line:parameters-max-number */
 	public constructor(
 		store: SpyObj<Store<StarkCoreApplicationState>>,
 		logger: MockStarkLoggingService,

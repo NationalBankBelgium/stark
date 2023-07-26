@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { ArrayNotEmpty, IsNotEmpty, Matches, ValidateNested, validateSync, ValidationError } from "class-validator";
 import { StarkValidationErrorsUtil } from "./validation-errors.util";
 
@@ -47,9 +46,9 @@ describe("Util: ValidationErrorsUtil", () => {
 		});
 
 		it("should throw an error with a message containing the description of every validation error", () => {
-			const errorNameRegExp: RegExp = new RegExp(customIsNotEmptyMessage.replace("$property", "name"), "g");
-			const errorLastNameRegExp: RegExp = new RegExp(customIsNotEmptyMessage.replace("$property", "lastName"), "g");
-			const errorLanguagesRegExp: RegExp = new RegExp(customArrayNotEmptyMessage.replace("$property", "languages"), "g");
+			const errorNameRegExp = new RegExp(customIsNotEmptyMessage.replace("$property", "name"), "g");
+			const errorLastNameRegExp = new RegExp(customIsNotEmptyMessage.replace("$property", "lastName"), "g");
+			const errorLanguagesRegExp = new RegExp(customArrayNotEmptyMessage.replace("$property", "languages"), "g");
 
 			const errors: ValidationError[] = validateSync(myClass);
 			expect(errors.length).toBe(3);
@@ -65,8 +64,8 @@ describe("Util: ValidationErrorsUtil", () => {
 		});
 
 		it("should throw an error with a message containing the full validation error tree", () => {
-			const errorIdRegExp: RegExp = new RegExp(customMatchesMessage.replace("$property", "id"), "g");
-			const errorDescriptionRegExp: RegExp = new RegExp(customIsNotEmptyMessage.replace("$property", "description"), "g");
+			const errorIdRegExp = new RegExp(customMatchesMessage.replace("$property", "id"), "g");
+			const errorDescriptionRegExp = new RegExp(customIsNotEmptyMessage.replace("$property", "description"), "g");
 
 			myClass.name = "valid name";
 			myClass.lastName = "valid lastName";
@@ -75,7 +74,7 @@ describe("Util: ValidationErrorsUtil", () => {
 			const errors: ValidationError[] = validateSync(myClass);
 			expect(errors.length).toBe(1);
 			expect(errors[0].children).toBeDefined();
-			// tslint:disable-next-line:no-non-null-assertion
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			expect(errors[0].children!.length).toBe(myClass.languages.length);
 
 			try {

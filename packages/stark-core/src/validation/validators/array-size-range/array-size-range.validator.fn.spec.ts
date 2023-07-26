@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs no-undefined-argument*/
 import { starkArraySizeRange } from "./array-size-range.validator.fn";
 
 function getTestArray(numberOfItems: number): number[] {

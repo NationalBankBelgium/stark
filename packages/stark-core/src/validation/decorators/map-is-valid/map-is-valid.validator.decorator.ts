@@ -30,7 +30,7 @@ class StarkMapIsValidConstraint implements ValidatorConstraintInterface {
 
 	/**
 	 * Validates that a give Map is valid
-	 * @param map: the map to validate
+	 * @param map - the map to validate
 	 * @returns `true` if the map is valid
 	 */
 	public validate(map: Map<any, any>): boolean {
@@ -75,7 +75,7 @@ class StarkMapIsValidConstraint implements ValidatorConstraintInterface {
 
 /**
  * Validator decorator that uses the StarkMapIsValid validator constraint
- * @param validationOptions, options to determine if the map is valid
+ * @param validationOptions - options to determine if the map is valid
  * @returns Function
  */
 export function StarkMapIsValid(validationOptions?: ValidationOptions): Function {

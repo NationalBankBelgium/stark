@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { HttpHeaders, HttpRequest } from "@angular/common/http";
 import { Inject, Injectable, Injector, Optional } from "@angular/core";
 import { DEFAULT_INTERRUPTSOURCES, Idle } from "@ng-idle/core";
@@ -40,8 +39,6 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 	protected _devAuthenticationHeaders = new Map<string, string | string[]>();
 	public countdownStarted = false;
 
-	// TODO Check if we can simplify this service
-	/* tslint:disable-next-line:parameters-max-number */
 	public constructor(
 		public store: Store<StarkCoreApplicationState>,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
@@ -142,15 +139,15 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 				// match any state except the ones that are children of starkAppInit/starkAppExit or the Ui-Router's root state
 				entering: (state?: StateObject): boolean => {
 					if (state && typeof state.name !== "undefined") {
-						const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+						const regexInitExitStateName = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 						return !state.name.match(regexInitExitStateName) && !(state.abstract && state.name === "");
 					}
 
 					return true; // always match
 				}
 			},
-			() => {
-				return this.session$
+			() =>
+				this.session$
 					.pipe(
 						take(1),
 						map((session: StarkSession) => {
@@ -162,8 +159,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 							return true;
 						})
 					)
-					.toPromise<boolean>();
-			},
+					.toPromise<boolean>(),
 			{ priority: 1000 } // very high priority (this hook should be the first one to be called to reject transitions immediately)
 		);
 	}
@@ -339,6 +335,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 		this.logger.debug(starkSessionServiceName + ": constructing the authentication headers");
 		devAuthenticationHeaders.forEach((value: string | string[], key: string) => {
 			// in Angular, a header value can only be string or string[], not null/undefined (https://github.com/angular/angular/issues/18743)
+			// eslint-disable-next-line no-null/no-null
 			if (key && typeof value !== "undefined" && value !== null) {
 				this._devAuthenticationHeaders.set(key, value);
 			}

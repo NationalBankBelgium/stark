@@ -28,7 +28,7 @@ import cloneDeep from "lodash-es/cloneDeep";
  * @param translateService - A reference to the translateService instance
  * @param localesToMerge - A list of StarkLocales that contain the translations for a specific language
  *
- * @example:
+ * @example
  *   mergeTranslations(this.translateService, english, french, dutch);
  */
 export function mergeTranslations(translateService: TranslateService, ...localesToMerge: StarkLocale[]): void {
