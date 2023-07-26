@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs no-big-function*/
 import { of, throwError } from "rxjs";
 import { Store } from "@ngrx/store";
 import { fakeAsync, tick } from "@angular/core/testing";
@@ -446,20 +445,16 @@ describe("StarkRBACAuthorizationService", () => {
 				// name() function as defined in the Ui-Router API
 				name: createSpy("spyNameFn").and.returnValue(dummyUnauthorizedStateName),
 				// withState() function as defined in the Ui-Router API
-				withState: createSpy("spyWithStateFn").and.callFake(
-					(state: StateOrName): TargetState => {
-						targetStateObj.redirectionStateName = state;
-						return targetStateObj;
-					}
-				),
+				withState: createSpy("spyWithStateFn").and.callFake((state: StateOrName): TargetState => {
+					targetStateObj.redirectionStateName = state;
+					return targetStateObj;
+				}),
 				// withParams() function as defined in the Ui-Router API
-				withParams: createSpy("spyWithParamsFn").and.callFake(
-					(params: RawParams, replace: boolean): TargetState => {
-						targetStateObj.redirectionStateParams = params;
-						targetStateObj.redirectionStateParamsReplaced = replace;
-						return targetStateObj;
-					}
-				)
+				withParams: createSpy("spyWithParamsFn").and.callFake((params: RawParams, replace: boolean): TargetState => {
+					targetStateObj.redirectionStateParams = params;
+					targetStateObj.redirectionStateParamsReplaced = replace;
+					return targetStateObj;
+				})
 			};
 
 			mockTransition = {

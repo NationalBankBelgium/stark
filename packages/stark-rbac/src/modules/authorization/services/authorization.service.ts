@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Inject, Injectable } from "@angular/core";
 import { StateDeclaration, StateObject, TargetState, Transition } from "@uirouter/core";
 import { Store } from "@ngrx/store";
@@ -96,7 +95,8 @@ export class StarkRBACAuthorizationServiceImpl implements StarkRBACAuthorization
 			{
 				// match only states with permissions except the ones that are children of starkAppInit/starkAppExit or the Ui-Router's root state
 				entering: (state?: StateObject): boolean => {
-					const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+					// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+					const regexInitExitStateName = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 					if (
 						state &&
 						typeof state.name !== "undefined" &&
