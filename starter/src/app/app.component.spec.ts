@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";

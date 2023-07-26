@@ -28,7 +28,9 @@ describe("General tests:", () => {
 
 		it("should have stark logo", async () => {
 			const subject: ElementFinder = element(by.className("stark-app-logo"));
-			expect(await subject.isPresent()).withContext("Unable to find logo").toBeTruthy();
+			expect(await subject.isPresent())
+				.withContext("Unable to find logo")
+				.toBeTruthy();
 		});
 
 		it("should have 'Stark Starter Application' as header", async () => {

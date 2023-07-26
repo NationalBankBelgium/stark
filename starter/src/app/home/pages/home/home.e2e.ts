@@ -1,5 +1,5 @@
 import { browser } from "protractor";
-// tslint:disable-next-line:no-import-side-effect
+// eslint-disable-next-line import/no-unassigned-import
 import "tslib";
 
 describe("Home", () => {

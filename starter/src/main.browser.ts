@@ -26,6 +26,7 @@ class Main extends AbstractStarkMain {
 				// the line below adapts the module depending on the environment
 				// if you don't like what stark does by default, you can instead do your own customizations through the environment.* files
 				// and use environment.customizeAppModule instead
+				// eslint-disable-next-line no-invalid-this
 				.then(this.decorateModule)
 		);
 	};
