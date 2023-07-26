@@ -1,6 +1,7 @@
 <!-- Note: for support questions please use Stack Overflow: https://stackoverflow.com/questions/tagged/stark -->
 
 ## I'm submitting a...
+
 <!-- Check one of the following options with "x" -->
 <pre><code>
 [ ] Regression (a behavior that used to work and stopped working in a new release)
@@ -11,23 +12,23 @@
 </code></pre>
 
 ## Current behavior
+
 <!-- Describe how the issue manifests. -->
 
-
 ## Expected behavior
+
 <!-- Describe what the desired behavior would be. -->
 
-
 ## Minimal reproduction of the problem with instructions
+
 <!--
 For bug reports please provide a *MINIMAL DEMO* of the problem via https://plnkr.co or
 provide a standalone git repository demonstrating the problem
 -->
 
-
 ## What is the motivation / use case for changing the behavior?
-<!-- Describe the motivation or the concrete use case. -->
 
+<!-- Describe the motivation or the concrete use case. -->
 
 ## Environment
 
