@@ -22,10 +22,11 @@ const defaultProgressIndicatorConfig: StarkProgressIndicatorConfig = {
  * Abstract class defining the common properties and methods for the Search Page using the {@link StarkGenericSearchComponent}.
  */
 @Directive({})
-// tslint:disable-next-line:directive-class-suffix
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaType>
 	extends AbstractStarkFormComponent<CriteriaType>
-	implements OnInit, OnDestroy {
+	implements OnInit, OnDestroy
+{
 	/**
 	 * @internal
 	 * @ignore
@@ -134,6 +135,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 
 	/**
 	 * Invoke the genericSearchService.resetSearchState() method and clears the results
+	 * @param form - Form to reset
 	 */
 	public onReset(form: FormGroup): void {
 		this.genericSearchService.resetSearchState();
@@ -153,6 +155,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	/**
 	 * Invoke the genericSearchService.search() method and emits the results. If no searchCriteria object is passed, then the current
 	 * form's working copy is used.
+	 * @param searchCriteria - Criteria to be used to perform the search
 	 */
 	public performSearch(searchCriteria: CriteriaType = this.workingCopy): void {
 		this.performSearchOnInit = false; // prevent further automatic searches due to the subscription to StarkSearchState changes in NgOnInit
@@ -199,6 +202,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 
 	/**
 	 * Emit the latest results and optionally keeps a reference to them if the preserveLatestResults option is enabled.
+	 * @param result - Result to emit
 	 */
 	protected emitResult(result: SearchResultsType[]): void {
 		if (this.preserveLatestResults) {

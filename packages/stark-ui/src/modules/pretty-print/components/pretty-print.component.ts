@@ -10,9 +10,8 @@ import {
 	SimpleChanges,
 	ViewEncapsulation
 } from "@angular/core";
-// tslint:disable-next-line:match-default-export-name
 import sqlFormatter from "@sqltools/formatter";
-/* tslint:disable:no-duplicate-imports no-import-side-effect */
+/* eslint-disable no-duplicate-imports, import/no-unassigned-import */
 import * as Prism from "prismjs";
 import { Grammar } from "prismjs";
 // prism loads these languages by default: "css", "clike", "javascript" and "markup" (which includes "xml", "html", "mathml", "svg")
@@ -21,7 +20,7 @@ import "prismjs/components/prism-sql.min.js";
 import "prismjs/components/prism-json.min.js";
 import "prismjs/components/prism-css-extras.min.js";
 import "prismjs/components/prism-scss.min.js";
-/* tslint:enable */
+/* eslint-enable */
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 
@@ -58,7 +57,7 @@ const prettierPlugins: any = [
  */
 export type StarkPrettyPrintFormat = "css" | "scss" | "html" | "xml" | "json" | "sql" | "javascript" | "typescript";
 
-/* tslint:disable:jsdoc-format */
+/* eslint-disable jsdoc/check-alignment,jsdoc/check-indentation */
 /**
  * Component to format and highlight code like HTML, CSS, Typescript...
  * Can be used to display code examples
@@ -74,7 +73,7 @@ export type StarkPrettyPrintFormat = "css" | "scss" | "html" | "xml" | "json" | 
  *   - {@link https://prismjs.com/|PrismJS website}
  *   - {@link https://github.com/PrismJS/prism/tree/master/themes|PrismJS theme files}
  */
-/* tslint:enable:jsdoc-format */
+/* eslint-enable jsdoc/check-alignment, jsdoc/check-indentation */
 @Component({
 	selector: "stark-pretty-print",
 	templateUrl: "./pretty-print.component.html",
@@ -105,7 +104,6 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name prefer-optional
 	public static ngAcceptInputType_format: StarkPrettyPrintFormat | Uppercase<StarkPrettyPrintFormat> | undefined;
 
 	private _format?: StarkPrettyPrintFormat;
@@ -132,11 +130,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
-	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		renderer: Renderer2,
-		elementRef: ElementRef
-	) {
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, renderer: Renderer2, elementRef: ElementRef) {
 		super(renderer, elementRef);
 	}
 
@@ -150,6 +144,7 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Component lifecycle hook
+	 * @param _onChangesObj - Contains the changed properties
 	 */
 	public ngOnChanges(_onChangesObj: SimpleChanges): void {
 		if (!this.data || !this.format) {

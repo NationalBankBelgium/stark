@@ -21,7 +21,7 @@ import { StarkProgressIndicatorComponent } from "../components";
  */
 const directiveName = "[starkProgressIndicator]";
 
-/* tslint:disable:jsdoc-format */
+/* eslint-disable jsdoc/check-alignment,jsdoc/check-indentation */
 /**
  * This directive must be used as attribute on a DOM element and the config provided should be a {@link StarkProgressIndicatorConfig} object:
  *
@@ -45,7 +45,7 @@ this.progressService.show(this.progressIndicatorConfig.topic);
 this.progressService.hide(this.progressIndicatorConfig.topic);
 ```
  */
-/* tslint:enable:jsdoc-format */
+/* eslint-enable jsdoc/check-alignment,jsdoc/check-indentation */
 @Directive({
 	selector: directiveName
 })
@@ -100,6 +100,7 @@ export class StarkProgressIndicatorDirective implements OnInit, OnDestroy {
 
 	/**
 	 * Registers an instance of progress indicator
+	 * @param progressConfig - `StarkProgressIndicatorConfig` object
 	 */
 	public registerInstance(progressConfig: StarkProgressIndicatorConfig): void {
 		this.topic = progressConfig.topic;

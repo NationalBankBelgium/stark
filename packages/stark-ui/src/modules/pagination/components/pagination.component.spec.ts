@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs no-identical-functions */
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
@@ -35,7 +34,6 @@ class TestHostComponent {
 	public paginationConfig?: StarkPaginationConfig;
 }
 
-/* tslint:disable:no-big-function no-duplicate-string */
 describe("PaginationComponent", () => {
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;
@@ -106,8 +104,8 @@ describe("PaginationComponent", () => {
 	};
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [
 					FormsModule,
 					MatButtonModule,
@@ -124,8 +122,8 @@ describe("PaginationComponent", () => {
 				],
 				declarations: [StarkPaginationComponent, TestHostComponent],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

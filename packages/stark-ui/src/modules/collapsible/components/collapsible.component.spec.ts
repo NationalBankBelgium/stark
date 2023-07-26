@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
@@ -16,19 +15,17 @@ describe("CollapsibleComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					imports: [MatExpansionModule, MatIconModule, MatIconTestingModule, NoopAnimationsModule],
-					declarations: [StarkCollapsibleComponent],
-					providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-				})
-					/**
-					 * Compile template and css
-					 */
-					.compileComponents()
-			);
-		})
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
+				imports: [MatExpansionModule, MatIconModule, MatIconTestingModule, NoopAnimationsModule],
+				declarations: [StarkCollapsibleComponent],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		)
 	);
 
 	/**

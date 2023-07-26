@@ -20,7 +20,7 @@ const DEFAULT_DATE_TIME_FORMAT = "DD-MM-YYYY HH:mm:ss";
  */
 export const STARK_TIMESTAMP_MASK_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
-	// tslint:disable-next-line:no-forward-ref
+	// eslint-disable-next-line @angular-eslint/no-forward-ref
 	useExisting: forwardRef(() => StarkTimestampMaskDirective),
 	multi: true
 };
@@ -66,7 +66,7 @@ export class StarkTimestampMaskDirective extends MaskedInputDirective implements
 	/**
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
-	/* tslint:disable:no-input-rename */
+	/* eslint-disable @angular-eslint/no-input-rename */
 	@Input("starkTimestampMask")
 	public maskConfig?: StarkTimestampMaskConfig;
 
@@ -92,6 +92,7 @@ export class StarkTimestampMaskDirective extends MaskedInputDirective implements
 
 	/**
 	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
 	 */
 	public override ngOnChanges(changes: SimpleChanges): void {
 		this.textMaskConfig = this.normalizeMaskConfig(this.maskConfig);

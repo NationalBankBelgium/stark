@@ -1,4 +1,4 @@
-/*tslint:disable:template-use-track-by-function*/
+/* eslint-disable @angular-eslint/template/use-track-by-function */
 import { StarkBreadcrumbPath } from "./breadcrumb-path.intf";
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
 import {
@@ -55,8 +55,8 @@ export class StarkBreadcrumbComponent extends AbstractStarkUiComponent implement
 	 * @ignore
 	 * @internal
 	 */
-	public deregisterTransitionHook: () => void = () => {
-		/*noop*/
+	public deregisterTransitionHook: () => void = (): void => {
+		/* noop*/
 	};
 
 	/**

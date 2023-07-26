@@ -21,6 +21,7 @@ import {
 /**
  * Hook to destroy the OverlayContainer inside which all overlays are rendered (i.e. stark-dropdown options)
  * Fixes https://github.com/NationalBankBelgium/stark/issues/1570
+ * @param transition - `Transition` object
  */
 export function destroyOverlaysOnEnterFn(transition: Transition): HookResult {
 	try {
@@ -28,7 +29,7 @@ export function destroyOverlaysOnEnterFn(transition: Transition): HookResult {
 		const overlayContainer = transition.injector().getNative<OverlayContainer>(OverlayContainer);
 		// destroy the container by calling its own "ngOnDestroy" method
 		// see https://github.com/angular/components/pull/5378/files
-		/* tslint:disable-next-line:no-lifecycle-call*/
+		/* eslint-disable-next-line @angular-eslint/no-lifecycle-call */
 		overlayContainer.ngOnDestroy();
 	} catch (err) {
 		// the OverlayContainer could not be injected, do nothing
@@ -40,7 +41,7 @@ export function destroyOverlaysOnEnterFn(transition: Transition): HookResult {
 /**
  * States defined by Session-UI Module
  */
-/* tslint:disable:no-duplicate-string */
+
 export const SESSION_UI_STATES: Ng2StateDeclaration[] = [
 	{
 		name: starkLoginStateName, // the parent is defined in the state's name (contains a dot)

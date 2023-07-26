@@ -5,7 +5,13 @@
 
 	<span class="stark-toast-text" role="alert" [innerHTML]="message.key | translate: message.interpolateValues"></span>
 
-	<button class="stark-toast-action" *ngIf="message.actionLabel" [ngClass]="message.actionClasses || ''" (click)="closeToast()" mat-button>
+	<button
+		class="stark-toast-action"
+		*ngIf="message.actionLabel"
+		[ngClass]="message.actionClasses || ''"
+		(click)="closeToast()"
+		mat-button
+	>
 		<span translate>{{ message.actionLabel }}</span>
 	</button>
 </div>

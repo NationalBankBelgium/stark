@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs component-max-inline-declarations */
+/* eslint-disable @angular-eslint/component-max-inline-declarations */
 import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatButtonModule } from "@angular/material/button";
@@ -44,13 +44,13 @@ describe("ActionBarComponent", () => {
 	const buttonToggleSelector = ".extend-action-bar";
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkActionBarComponent, TestHostComponent],
 				imports: [MatButtonModule, MatIconModule, MatIconTestingModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

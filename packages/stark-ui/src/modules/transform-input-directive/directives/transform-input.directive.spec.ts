@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs no-identical-functions no-duplicate-string no-big-function*/
 import { Component } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -40,7 +39,7 @@ describe("TransformInputDirective", () => {
 		})
 		class TestComponent {
 			public starkTransformInputValue: StarkInputTransformationType = () => {
-				/*noop*/
+				/* noop*/
 			};
 			public value = "";
 		}
@@ -121,7 +120,7 @@ describe("TransformInputDirective", () => {
 		})
 		class TestComponent {
 			public starkTransformInputValue: StarkInputTransformationType = () => {
-				/*noop*/
+				/* noop*/
 			};
 			public formControl = new FormControl("");
 		}
@@ -210,7 +209,7 @@ describe("TransformInputDirective", () => {
 		})
 		class TestComponent {
 			public starkTransformInputValue: StarkInputTransformationType = () => {
-				/*noop*/
+				/* noop*/
 			};
 		}
 
@@ -284,7 +283,7 @@ describe("TransformInputDirective", () => {
 		})
 		class TestComponent {
 			public starkTransformInputValue: StarkInputTransformationType = () => {
-				/*noop*/
+				/* noop*/
 			};
 		}
 

@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MAT_SNACK_BAR_DATA, MatSnackBar, MatSnackBarRef } from "@angular/material/snack-bar";
@@ -42,24 +41,22 @@ describe("ToastNotificationComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					declarations: [StarkToastNotificationComponent, TestHostComponent],
-					imports: [TranslateModule.forRoot(), MatButtonModule, MatIconModule, MatIconTestingModule],
-					providers: [
-						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-						{ provide: MatSnackBar, useValue: mockSnackBar },
-						// Need to clone the object to avoid mutation of it between tests
-						{ provide: MAT_SNACK_BAR_DATA, useValue: { ...mockMatSnackBarConfig } }
-					]
-				})
-					/**
-					 * Compile template and css
-					 */
-					.compileComponents()
-			);
-		})
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
+				declarations: [StarkToastNotificationComponent, TestHostComponent],
+				imports: [TranslateModule.forRoot(), MatButtonModule, MatIconModule, MatIconTestingModule],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: MatSnackBar, useValue: mockSnackBar },
+					// Need to clone the object to avoid mutation of it between tests
+					{ provide: MAT_SNACK_BAR_DATA, useValue: { ...mockMatSnackBarConfig } }
+				]
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		)
 	);
 
 	/**

@@ -60,7 +60,8 @@ const componentName = "stark-dropdown";
 })
 export class StarkDropdownComponent
 	extends AbstractStarkUiComponent
-	implements OnInit, OnChanges, OnInit, OnDestroy, ControlValueAccessor, MatFormFieldControl<any | any[]>, Validator {
+	implements OnInit, OnChanges, OnInit, OnDestroy, ControlValueAccessor, MatFormFieldControl<any | any[]>, Validator
+{
 	/**
 	 * Variable that will be incremented automatically to serve as unique id for every new instance of this component
 	 */
@@ -132,7 +133,6 @@ export class StarkDropdownComponent
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_multiSelect: BooleanInput;
 
 	/**
@@ -186,7 +186,6 @@ export class StarkDropdownComponent
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_required: BooleanInput;
 
 	/**
@@ -244,7 +243,7 @@ export class StarkDropdownComponent
 	 * @ignore
 	 * @internal
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	public ngControl: NgControl | null = null;
 
 	/**
@@ -273,6 +272,7 @@ export class StarkDropdownComponent
 		return (
 			!!this.ngControl &&
 			(!!this.ngControl.touched || !!this.ngControl.dirty) &&
+			// eslint-disable-next-line no-null/no-null
 			(!!this.ngControl.invalid || (this.ngControl.control !== null && !!this.validate(this.ngControl.control)))
 		);
 	}
@@ -333,9 +333,10 @@ export class StarkDropdownComponent
 		this.logger.debug(componentName + ": component initialized");
 		this.optionsAreSimpleTypes = this.areSimpleTypes();
 
-		// tslint:disable-next-line:no-null-keyword
+		// eslint-disable-next-line no-null/no-null
 		this.ngControl = this.injector.get<NgControl>(NgControl, <any>null);
 
+		// eslint-disable-next-line no-null/no-null
 		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
 		}
@@ -367,8 +368,8 @@ export class StarkDropdownComponent
 
 	/**
 	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
 	 */
-	// tslint:disable-next-line:cognitive-complexity cyclomatic-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["optionIdProperty"] || changes["optionLabelProperty"]) {
 			this.optionsAreSimpleTypes = this.areSimpleTypes();
@@ -476,10 +477,11 @@ export class StarkDropdownComponent
 	}
 
 	/**
+	 * @ignore
 	 * The registered callback function called when an input event occurs on the input element.
 	 */
 	private _onChange: (_: any) => void = (_: any) => {
-		/*noop*/
+		/* noop*/
 	};
 
 	/**
@@ -487,14 +489,14 @@ export class StarkDropdownComponent
 	 * The registered callback function called when a blur event occurs on the input element.
 	 */
 	private _onTouched: () => void = () => {
-		/*noop*/
+		/* noop*/
 	};
 
 	/**
 	 * The registered callback function called when the validator inputs change.
 	 */
 	private _onValidatorChange: () => void = () => {
-		/*noop*/
+		/* noop*/
 	};
 
 	/**
@@ -549,10 +551,10 @@ export class StarkDropdownComponent
 	 */
 	public onContainerClick(): void {
 		// Mimic implementation of MatSelect: https://github.com/angular/components/blob/master/src/material/select/select.ts
-		if (!!this.singleSelectElement) {
+		if (this.singleSelectElement) {
 			this.singleSelectElement.focus();
 			this.singleSelectElement.open();
-		} else if (!!this.multiSelectElement) {
+		} else if (this.multiSelectElement) {
 			this.multiSelectElement.focus();
 			this.multiSelectElement.open();
 		}
@@ -575,7 +577,7 @@ export class StarkDropdownComponent
 	 * @returns A map of validation errors if validation fails, otherwise null.
 	 */
 	public validate(control: AbstractControl): ValidationErrors | null {
-		// tslint:disable-next-line:no-null-keyword
+		// eslint-disable-next-line no-null/no-null
 		return this.required ? Validators.required(control) : null;
 	}
 

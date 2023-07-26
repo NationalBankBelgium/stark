@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
@@ -26,16 +25,16 @@ describe("SessionCardComponent", () => {
 	let component: TestComponent;
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [CommonModule, StarkAppLogoModule, TranslateModule.forRoot(), MatCardModule],
 				declarations: [TestComponent, StarkSessionCardComponent],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() } // needed by AppLogo component
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

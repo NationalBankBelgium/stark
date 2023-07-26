@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-duplicate-string no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { ComponentFixture, inject, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, NgModule, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -37,7 +37,6 @@ class TestHostComponent {
 @NgModule()
 class LazyLoadedModule {}
 
-/* tslint:disable:no-big-function */
 describe("RouteSearchComponent", () => {
 	let component: StarkRouteSearchComponent;
 	let hostComponent: TestHostComponent;
@@ -88,8 +87,8 @@ describe("RouteSearchComponent", () => {
 	};
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [
 					CommonModule,
 					FormsModule,
@@ -111,8 +110,8 @@ describe("RouteSearchComponent", () => {
 					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
 					{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {
@@ -455,9 +454,7 @@ describe("RouteSearchComponent", () => {
 			];
 
 			mockRoutingService.getStatesConfig.and.returnValue(mockStates);
-			mockRoutingService.getTranslationKeyFromState.and.callFake((stateName: string) => {
-				return stateName.toUpperCase();
-			});
+			mockRoutingService.getTranslationKeyFromState.and.callFake((stateName: string) => stateName.toUpperCase());
 
 			const expectedRouteEntries: StarkRouteSearchEntry[] = [
 				{ label: "HOMEPAGE", targetState: "homepage" },
@@ -508,9 +505,7 @@ describe("RouteSearchComponent", () => {
 			];
 
 			mockRoutingService.getStatesConfig.and.returnValue(mockStates);
-			mockRoutingService.getTranslationKeyFromState.and.callFake((stateName: string) => {
-				return stateName.toUpperCase();
-			});
+			mockRoutingService.getTranslationKeyFromState.and.callFake((stateName: string) => stateName.toUpperCase());
 
 			const expectedRouteEntries: StarkRouteSearchEntry[] = [
 				{

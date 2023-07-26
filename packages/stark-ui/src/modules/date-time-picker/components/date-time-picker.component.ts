@@ -1,4 +1,4 @@
-/* tslint:disable:no-null-keyword */
+/* eslint-disable no-null/no-null */
 import {
 	ChangeDetectorRef,
 	Component,
@@ -186,7 +186,6 @@ export class StarkDateTimePickerComponent
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_required: BooleanInput;
 
 	/**
@@ -229,6 +228,7 @@ export class StarkDateTimePickerComponent
 
 	public set timeMask(value: StarkTimestampMaskConfig) {
 		// only valid mask configs are accepted, otherwise the default mask is used
+		// eslint-disable-next-line no-prototype-builtins
 		this._timeMask = value && value.hasOwnProperty("format") ? value : DEFAULT_TIME_MASK_CONFIG;
 	}
 
@@ -268,7 +268,7 @@ export class StarkDateTimePickerComponent
 	@Input()
 	public set max(value: moment.Moment | null) {
 		if (value === undefined) {
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			this._max = null;
 		} else if (value instanceof Date) {
 			this._max = moment(value);
@@ -282,14 +282,13 @@ export class StarkDateTimePickerComponent
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_max: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	private _max: moment.Moment | null = null;
 
 	/**
@@ -298,7 +297,7 @@ export class StarkDateTimePickerComponent
 	@Input()
 	public set min(value: moment.Moment | null) {
 		if (value === undefined) {
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			this._min = null;
 		} else if (value instanceof Date) {
 			this._min = moment(value);
@@ -312,14 +311,13 @@ export class StarkDateTimePickerComponent
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_min: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	public _min: moment.Moment | null = null;
 
 	/**
@@ -346,7 +344,7 @@ export class StarkDateTimePickerComponent
 	 * The registered callback function called when an input event occurs on the input element.
 	 */
 	private _onChange: (_: Date | null) => void = (_: Date | null) => {
-		/*noop*/
+		/* noop*/
 	};
 
 	/**
@@ -355,7 +353,7 @@ export class StarkDateTimePickerComponent
 	 * The registered callback function called when a blur event occurs on the input element.
 	 */
 	private _onTouched: () => void = () => {
-		/*noop*/
+		/* noop*/
 	};
 
 	/**
@@ -573,6 +571,7 @@ export class StarkDateTimePickerComponent
 
 	/**
 	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
 	 */
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["min"] || changes["max"]) {
@@ -624,7 +623,7 @@ export class StarkDateTimePickerComponent
 	 * @internal
 	 */
 	public onContainerClick(event: MouseEvent): void {
-		if ((event.target as Element).tagName.toLowerCase() !== "input") {
+		if ((<Element>event.target).tagName.toLowerCase() !== "input") {
 			this.elementRef.nativeElement.querySelector("input").focus();
 		}
 	}
@@ -737,6 +736,7 @@ export class StarkDateTimePickerComponent
 
 	/**
 	 * Construct a time string (with the format "HH:mm:ss:SSS") from the given date
+	 * @param dateTime - `Date` object
 	 */
 	public constructTimeStringFromDate(dateTime: Date): string {
 		return [`0${dateTime.getHours()}`, `0${dateTime.getMinutes()}`, `0${dateTime.getSeconds()}`, `00${dateTime.getMilliseconds()}`]
@@ -749,6 +749,7 @@ export class StarkDateTimePickerComponent
 
 	/**
 	 * Return an array with the numeric values of the time part of the given date
+	 * @param dateTime - `Date` object
 	 */
 	public getTimeNumericValuesFromDate(dateTime: Date): number[] {
 		return [dateTime.getHours(), dateTime.getMinutes(), dateTime.getSeconds(), dateTime.getMilliseconds()];
@@ -764,6 +765,7 @@ export class StarkDateTimePickerComponent
 
 	/**
 	 * Focus the time input field
+	 * @param event - The handled event
 	 */
 	public focusTimeInput(event: Event): void {
 		event.preventDefault();

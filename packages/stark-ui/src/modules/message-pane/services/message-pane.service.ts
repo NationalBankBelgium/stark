@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
 import { Inject, Injectable } from "@angular/core";

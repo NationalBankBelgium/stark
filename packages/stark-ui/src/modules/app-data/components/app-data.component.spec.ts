@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs component-max-inline-declarations no-lifecycle-call */
+/* eslint-disable @angular-eslint/component-max-inline-declarations, @angular-eslint/no-lifecycle-call */
 import { StarkAppDataComponent, StarkAppDataComponentMode } from "./app-data.component";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { fakeAsync, inject, tick, ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
@@ -29,7 +29,6 @@ class TestHostComponent {
 	public mode?: StarkAppDataComponentMode;
 }
 
-// tslint:disable:no-big-function no-identical-functions
 describe("AppDataComponent", () => {
 	let component: StarkAppDataComponent;
 	let hostComponent: TestHostComponent;
@@ -45,8 +44,8 @@ describe("AppDataComponent", () => {
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkAppDataComponent, TestHostComponent],
 				imports: [
 					CommonModule,
@@ -59,8 +58,8 @@ describe("AppDataComponent", () => {
 					TranslateModule.forRoot()
 				],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger }, TranslateService]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

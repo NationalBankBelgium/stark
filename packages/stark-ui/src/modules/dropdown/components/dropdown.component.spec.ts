@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs component-max-inline-declarations no-commented-code no-big-function no-identical-functions no-duplicate-string no-lifecycle-call */
+/* eslint-disable @angular-eslint/component-max-inline-declarations, @angular-eslint/no-lifecycle-call */
 import { Component, DebugElement, ViewChild } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
@@ -47,7 +47,7 @@ describe("DropdownComponent", () => {
 		public options: any[] = [];
 		public placeholder?: string;
 		public selectionChanged = (_value: any | any[]): void => {
-			/*noop*/
+			/* noop*/
 		};
 		public required?: boolean;
 	}
@@ -84,7 +84,7 @@ describe("DropdownComponent", () => {
 		public placeholder?: string;
 		public value: any | any[];
 		public selectionChanged = (_value: any | any[]): void => {
-			/*noop*/
+			/* noop*/
 		};
 		public required?: boolean;
 	}
@@ -156,8 +156,8 @@ describe("DropdownComponent", () => {
 	const reflectValueAttr = "ng-reflect-value";
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [
 					CommonModule,
 					MatSelectModule,
@@ -168,8 +168,8 @@ describe("DropdownComponent", () => {
 				],
 				declarations: [StarkDropdownComponent, TestHostComponent, TestHostValueComponent, TestHostNgControlComponent],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(inject([OverlayContainer], (oc: OverlayContainer) => {

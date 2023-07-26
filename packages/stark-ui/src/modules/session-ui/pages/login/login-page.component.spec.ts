@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { RawParams } from "@uirouter/core";
 import { CommonModule } from "@angular/common";
@@ -42,8 +41,8 @@ describe("LoginPageComponent", () => {
 	};
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkSessionCardComponent, StarkLoginPageComponent],
 				imports: [CommonModule, MatCardModule, MatDividerModule, MatListModule, StarkAppLogoModule, TranslateModule.forRoot()],
 				providers: [
@@ -52,8 +51,8 @@ describe("LoginPageComponent", () => {
 					{ provide: STARK_USER_SERVICE, useValue: mockUserService },
 					{ provide: STARK_SESSION_SERVICE, useValue: mockSessionService }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

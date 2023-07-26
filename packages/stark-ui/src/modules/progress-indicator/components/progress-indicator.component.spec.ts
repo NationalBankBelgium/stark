@@ -1,22 +1,20 @@
-// tslint:disable:completed-docs
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkProgressIndicatorComponent } from "./progress-indicator.component";
 import { By } from "@angular/platform-browser";
 
-/* tslint:disable:no-big-function */
 describe("ProgressIndicatorComponent", () => {
 	let component: StarkProgressIndicatorComponent;
 	let hostFixture: ComponentFixture<StarkProgressIndicatorComponent>;
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkProgressIndicatorComponent],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

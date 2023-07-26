@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { of, throwError } from "rxjs";
 import { TranslateModule } from "@ngx-translate/core";
@@ -33,8 +33,8 @@ describe("PreloadingPageComponent", () => {
 	const mockRoutingService: MockStarkRoutingService = new MockStarkRoutingService();
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkSessionCardComponent, StarkPreloadingPageComponent],
 				imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
 				providers: [
@@ -43,8 +43,8 @@ describe("PreloadingPageComponent", () => {
 					{ provide: STARK_USER_SERVICE, useValue: mockUserService },
 					{ provide: STARK_SESSION_SERVICE, useValue: mockSessionService }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

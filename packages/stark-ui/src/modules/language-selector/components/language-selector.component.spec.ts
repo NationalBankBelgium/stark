@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs */
 /* angular imports */
 import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
@@ -24,7 +23,7 @@ import { StarkLanguageSelectorComponent, StarkLanguageSelectorMode } from "./lan
 import { StarkDropdownModule } from "../../dropdown";
 import { of, throwError } from "rxjs";
 
-/***
+/**
  * To be able to test changes to the input fields, the Language-Selector component is hosted inside the TestComponentHost class.
  */
 @Component({
@@ -51,11 +50,7 @@ describe("LanguageSelectorComponent", () => {
 		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
 		mockSessionService.getCurrentLanguage.and.returnValue(of("fr"));
 
-		beforeEach(
-			waitForAsync(() => {
-				return compileComponent(mockSessionService);
-			})
-		);
+		beforeEach(waitForAsync(() => compileComponent(mockSessionService)));
 
 		beforeEach(() => {
 			initializeComponent();
@@ -80,11 +75,7 @@ describe("LanguageSelectorComponent", () => {
 		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
 		mockSessionService.getCurrentLanguage.and.returnValue(throwError("dummy-error"));
 
-		beforeEach(
-			waitForAsync(() => {
-				return compileComponent(mockSessionService);
-			})
-		);
+		beforeEach(waitForAsync(() => compileComponent(mockSessionService)));
 
 		beforeEach(() => {
 			initializeComponent();
@@ -100,11 +91,7 @@ describe("LanguageSelectorComponent", () => {
 		const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
 		mockSessionService.getCurrentLanguage.and.returnValue(of("fr"));
 
-		beforeEach(
-			waitForAsync(() => {
-				return compileComponent(mockSessionService);
-			})
-		);
+		beforeEach(waitForAsync(() => compileComponent(mockSessionService)));
 
 		beforeEach(() => {
 			initializeComponent();
@@ -123,7 +110,7 @@ describe("LanguageSelectorComponent", () => {
 		});
 	});
 
-	/***
+	/**
 	 * This function contains the component compilation code
 	 * Instead of repeating the code, it is placed in a separate function
 	 */
@@ -147,7 +134,7 @@ describe("LanguageSelectorComponent", () => {
 		}).compileComponents();
 	}
 
-	/***
+	/**
 	 * This function contains the component initialization code
 	 * Instead of repeating the code, it is placed in a separate function
 	 */

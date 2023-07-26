@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-identical-functions no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { Observable, Observer, of, Subject, Subscriber, throwError } from "rxjs";
 import { AbstractStarkSearchComponent, StarkGenericSearchService } from "../classes";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
@@ -11,7 +11,6 @@ import SpyObj = jasmine.SpyObj;
 import createSpy = jasmine.createSpy;
 import createSpyObj = jasmine.createSpyObj;
 
-/* tslint:disable:no-big-function */
 describe("AbstractSearchComponent", () => {
 	let component: SearchComponentHelper;
 	let genericSearchService: SpyObj<StarkGenericSearchService<MockResource, SearchCriteria>>;
@@ -414,12 +413,10 @@ interface SearchCriteria {
 }
 
 function createObservableOf<T>(value: T, teardown: Function): Observable<T> {
-	return new Observable(
-		(subscriber: Subscriber<T>): Function => {
-			subscriber.next(value);
-			return teardown;
-		}
-	);
+	return new Observable((subscriber: Subscriber<T>): Function => {
+		subscriber.next(value);
+		return teardown;
+	});
 }
 
 class SearchComponentHelper extends AbstractStarkSearchComponent<MockResource, SearchCriteria> {

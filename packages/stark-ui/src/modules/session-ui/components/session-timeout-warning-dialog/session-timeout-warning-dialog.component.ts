@@ -13,7 +13,7 @@ const componentName = "stark-session-timeout-warning-dialog";
  * Component to display a session timeout warning dialog
  */
 @Component({
-	selector: "session-timeout-warning-dialog",
+	selector: "stark-session-timeout-warning-dialog",
 	templateUrl: "./session-timeout-warning-dialog.component.html",
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush

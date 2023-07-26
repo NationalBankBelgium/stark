@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { BehaviorSubject, Observable } from "rxjs";
 import { StarkProgressIndicatorActions } from "../actions";
@@ -10,7 +9,6 @@ import Spy = jasmine.Spy;
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { TestBed } from "@angular/core/testing";
 
-// tslint:disable:no-big-function
 describe("ProgressIndicatorService", () => {
 	let mockStore: MockStore<StarkUIApplicationState>;
 	let progressIndicatorService: ProgressIndicatorServiceHelper;
@@ -101,7 +99,7 @@ describe("ProgressIndicatorService", () => {
 	describe("show", () => {
 		it(
 			"should dispatch the SHOW action in case the topic exists in the store but not yet visible " +
-			"and increase the pendingListenersCount by 1",
+				"and increase the pendingListenersCount by 1",
 			() => {
 				progressIndicatorService.register(dummyTopic, dummyType);
 				progressIndicatorService.show(dummyTopic);

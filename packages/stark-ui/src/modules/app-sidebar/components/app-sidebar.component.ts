@@ -171,7 +171,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 		this.openSidebarSubscription.unsubscribe();
 		this.closeSidebarSubscription.unsubscribe();
 		this.toggleSidebarSubscription.unsubscribe();
-		/* tslint:disable-next-line:no-lifecycle-call */
+		/* eslint-disable-next-line @angular-eslint/no-lifecycle-call */
 		this.breakpointObserver.ngOnDestroy();
 		this.deregisterTransitionHook();
 	}
@@ -187,7 +187,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 
 	/**
 	 * Callback function to be called when the sidenav opens
-	 * @param result: MatDrawerToggleResult
+	 * @param result - MatDrawerToggleResult
 	 */
 	private displaySuccessCallback: (value: MatDrawerToggleResult) => void = (result: MatDrawerToggleResult) => {
 		this.logger.debug(componentName + ": " + result);
@@ -195,7 +195,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 
 	/**
 	 * Callback function to be called when the sidenav failed to open
-	 * * @param error: Error
+	 * @param error - Error
 	 */
 	private displayErrorCallback: (error: Error) => void = (error: Error) => {
 		this.logger.warn(componentName + ": ", error);
@@ -210,6 +210,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 
 	/**
 	 * Open sidenav handler
+	 * @param event - The `StarkAppSidebarOpenEvent` object
 	 */
 	public onOpenSidenav(event: StarkAppSidebarOpenEvent): void {
 		switch (event.sidebar) {
@@ -234,6 +235,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 
 	/**
 	 * Breakpoints change handler
+	 * @param state - The current state of a layout breakpoint.
 	 */
 	public onObserveBreakpoints(state: BreakpointState): void {
 		// Enter large desktop screen
@@ -272,6 +274,7 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 
 	/**
 	 * Toggle sidenav handler
+	 * @param event - The `StarkAppSidebarOpenEvent` object
 	 */
 	public onToggleSidenav(event: StarkAppSidebarOpenEvent): void {
 		switch (event.sidebar) {
@@ -348,9 +351,9 @@ export class StarkAppSidebarComponent extends AbstractStarkUiComponent implement
 
 	/**
 	 * Callback function when the left sidenav needs to shift type
-	 * @param result: MatDrawerToggleResult
+	 * @param result - MatDrawerToggleResult
 	 */
-	public shiftLeftSidenavCallback: (result: MatDrawerToggleResult) => void = (result: MatDrawerToggleResult) => {
+	public shiftLeftSidenavCallback: (result: MatDrawerToggleResult) => void = (result: MatDrawerToggleResult): void => {
 		this.logger.debug(componentName + ": sidenav " + result);
 		this.sidenavLeftType = this.sidenavLeftType === "menu" ? "regular" : "menu";
 		this.setComponentBehaviour();

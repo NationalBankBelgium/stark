@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { StarkBreadcrumbConfig } from "./breadcrumb-config.intf";
 import { StarkBreadcrumbComponent } from "./breadcrumb.component";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
@@ -77,16 +77,16 @@ describe("BreadcrumbComponent", () => {
 	const mockDeregisterTransitionHookFn: Spy<() => void> = jasmine.createSpy("deregistersTransitionHook");
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [CommonModule, NoopAnimationsModule, TranslateModule.forRoot()],
 				declarations: [StarkBreadcrumbComponent, TestHostComponent],
 				providers: [
 					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
 					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	// Inject module dependencies
@@ -99,9 +99,9 @@ describe("BreadcrumbComponent", () => {
 
 		(<Spy>component.routingService.addTransitionHook).and.returnValue(mockDeregisterTransitionHookFn);
 		(<Spy>component.routingService.getStateTreeParams).and.returnValue(mockStateTreeParams);
-		(<Spy>component.routingService.getTranslationKeyFromState).and.callFake((stateName: string) => {
-			return mockStateTreeData.get(stateName).translationKey;
-		});
+		(<Spy>component.routingService.getTranslationKeyFromState).and.callFake(
+			(stateName: string) => mockStateTreeData.get(stateName).translationKey
+		);
 	});
 
 	describe("on initialization", () => {

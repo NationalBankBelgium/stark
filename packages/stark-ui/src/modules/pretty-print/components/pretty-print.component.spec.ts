@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs no-big-function no-duplicate-string no-identical-functions */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
 /* stark-core imports */
@@ -7,7 +6,8 @@ import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing
 /* stark-ui imports */
 import { StarkPrettyPrintComponent } from "./pretty-print.component";
 
-/***
+/**
+ *
  * To be able to test changes to the input fields, the Pretty-Print component is hosted inside the TestComponentHost class.
  */
 @Component({
@@ -237,12 +237,12 @@ describe("PrettyPrintComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkPrettyPrintComponent, TestHostComponent],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	/**
@@ -289,9 +289,9 @@ describe("PrettyPrintComponent", () => {
 			it("should nicely format raw XML data", () => {
 				let formattedData: string = component.prettyString;
 
-				const regExLessThan: RegExp = /&lt;/gi;
-				const regExGreaterThan: RegExp = /&gt;/gi;
-				const regExQuote: RegExp = /&quot;/gi;
+				const regExLessThan = /&lt;/gi;
+				const regExGreaterThan = /&gt;/gi;
+				const regExQuote = /&quot;/gi;
 
 				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
@@ -321,9 +321,9 @@ describe("PrettyPrintComponent", () => {
 			it("should nicely format raw HTML data", () => {
 				let formattedData: string = component.prettyString;
 
-				const regExLessThan: RegExp = /&lt;/gi;
-				const regExGreaterThan: RegExp = /&gt;/gi;
-				const regExQuote: RegExp = /&quot;/gi;
+				const regExLessThan = /&lt;/gi;
+				const regExGreaterThan = /&gt;/gi;
+				const regExQuote = /&quot;/gi;
 
 				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
@@ -343,9 +343,9 @@ describe("PrettyPrintComponent", () => {
 
 				let formattedData: string = component.prettyString;
 
-				const regExLessThan: RegExp = /&lt;/gi;
-				const regExGreaterThan: RegExp = /&gt;/gi;
-				const regExQuote: RegExp = /&quot;/gi;
+				const regExLessThan = /&lt;/gi;
+				const regExGreaterThan = /&gt;/gi;
+				const regExQuote = /&quot;/gi;
 
 				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
@@ -591,7 +591,6 @@ describe("PrettyPrintComponent", () => {
 			});
 
 			// the same test is performed with an unknown format
-			// tslint:disable-next-line: no-identical-functions
 			it("should leave the raw data unformatted when the format is not defined", () => {
 				expect(component.prettyString).toBe(rawTypescriptData);
 
@@ -615,7 +614,6 @@ describe("PrettyPrintComponent", () => {
 			});
 
 			// the same test is performed with an unknown format
-			// tslint:disable-next-line: no-identical-functions
 			it("should leave the raw data unformatted when the format is an unrecognised string", () => {
 				expect(component.prettyString).toBe(rawTypescriptData);
 
@@ -644,9 +642,9 @@ describe("PrettyPrintComponent", () => {
 			it("should highlight the formatted XML data", () => {
 				let formattedData: string = component.prettyString;
 
-				const regExLessThan: RegExp = /&lt;/gi;
-				const regExGreaterThan: RegExp = /&gt;/gi;
-				const regExQuote: RegExp = /&quot;/gi;
+				const regExLessThan = /&lt;/gi;
+				const regExGreaterThan = /&gt;/gi;
+				const regExQuote = /&quot;/gi;
 
 				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
@@ -671,9 +669,9 @@ describe("PrettyPrintComponent", () => {
 
 				let formattedData: string = component.prettyString;
 
-				const regExLessThan: RegExp = /&lt;/gi;
-				const regExGreaterThan: RegExp = /&gt;/gi;
-				const regExQuote: RegExp = /&quot;/gi;
+				const regExLessThan = /&lt;/gi;
+				const regExGreaterThan = /&gt;/gi;
+				const regExQuote = /&quot;/gi;
 
 				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
@@ -711,9 +709,9 @@ describe("PrettyPrintComponent", () => {
 			it("should highlight the formatted HTML data", () => {
 				let formattedData: string = component.prettyString;
 
-				const regExLessThan: RegExp = /&lt;/gi;
-				const regExGreaterThan: RegExp = /&gt;/gi;
-				const regExQuote: RegExp = /&quot;/gi;
+				const regExLessThan = /&lt;/gi;
+				const regExGreaterThan = /&gt;/gi;
+				const regExQuote = /&quot;/gi;
 
 				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 
@@ -737,9 +735,9 @@ describe("PrettyPrintComponent", () => {
 
 				let formattedData: string = component.prettyString;
 
-				const regExLessThan: RegExp = /&lt;/gi;
-				const regExGreaterThan: RegExp = /&gt;/gi;
-				const regExQuote: RegExp = /&quot;/gi;
+				const regExLessThan = /&lt;/gi;
+				const regExGreaterThan = /&gt;/gi;
+				const regExQuote = /&quot;/gi;
 
 				formattedData = formattedData.replace(regExLessThan, "<").replace(regExGreaterThan, ">").replace(regExQuote, '"');
 

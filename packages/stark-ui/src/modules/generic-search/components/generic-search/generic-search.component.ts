@@ -257,6 +257,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 
 	/**
 	 * Component lifecycle hook
+	 * @param changesObj - Contains the changed properties
 	 */
 	public ngOnChanges(changesObj: SimpleChanges): void {
 		if (
@@ -282,6 +283,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * Set a default value for each property of each button if there is no value defined
 	 * @param config - Form buttons configuration
 	 */
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	public normalizeFormButtonsConfig(config?: StarkGenericSearchFormButtonsConfig): StarkGenericSearchFormButtonsConfigRequired {
 		config = config || {};
 
@@ -370,6 +372,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * Set a default value for each property of each action if there is no value defined
 	 * @param config - Form action bar configuration
 	 */
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	public normalizeFormActionBarConfig(config?: StarkGenericSearchActionBarConfig): StarkGenericSearchActionBarConfigRequired {
 		config = config || { actions: [] };
 

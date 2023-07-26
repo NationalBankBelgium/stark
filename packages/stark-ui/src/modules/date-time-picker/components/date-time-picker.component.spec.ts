@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs component-max-inline-declarations no-big-function */
+/* eslint-disable @angular-eslint/component-max-inline-declarations */
 import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -107,8 +107,8 @@ describe("DateTimePickerComponent", () => {
 	const timeInputSelector = ".time-input";
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkDateTimePickerComponent, TestHostComponent, TestHostFormControlComponent],
 				imports: [
 					NoopAnimationsModule,
@@ -131,8 +131,8 @@ describe("DateTimePickerComponent", () => {
 					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
 					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	describe("MatFormFieldControl", () => {
@@ -607,7 +607,6 @@ describe("DateTimePickerComponent", () => {
 		});
 
 		describe("on initialization", () => {
-			/* tslint:disable-next-line:no-identical-functions */
 			it("should set internal component properties", () => {
 				expect(hostFixture).toBeDefined();
 				expect(component).toBeDefined();

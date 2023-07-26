@@ -16,12 +16,13 @@ export class StarkRestrictInputDirective implements OnInit {
 	/**
 	 * A valid regular expression that defines the allowed characters
 	 */
-	/* tslint:disable:no-input-rename */
+	/* eslint-disable @angular-eslint/no-input-rename */
 	@Input("starkRestrictInput")
 	public inputRestriction = "";
 
 	/**
 	 * Event handler to be invoked on a "keypress" event in the field
+	 * @param event - The handled event
 	 */
 	@HostListener("keypress", ["$event"])
 	public eventHandler(event: KeyboardEvent): boolean {
@@ -36,6 +37,7 @@ export class StarkRestrictInputDirective implements OnInit {
 
 	/**
 	 * Event handler to be invoked on a "paste" event in the field
+	 * @param event - The handled event
 	 */
 	@HostListener("paste", ["$event"])
 	public onPaste(event: ClipboardEvent): boolean {
@@ -49,6 +51,7 @@ export class StarkRestrictInputDirective implements OnInit {
 
 	/**
 	 * Event handler to be invoked on a "drop" event in the field
+	 * @param event - The handled event
 	 */
 	@HostListener("drop", ["$event"])
 	public onDrop(event: DragEvent): boolean {
@@ -62,7 +65,7 @@ export class StarkRestrictInputDirective implements OnInit {
 	private testValue(event: Event, value: string): boolean {
 		const regularExpression: string = this.inputRestriction || "";
 		if (regularExpression) {
-			const regex: RegExp = new RegExp(regularExpression);
+			const regex = new RegExp(regularExpression);
 			if (!regex.test(value)) {
 				event.preventDefault();
 				return false;

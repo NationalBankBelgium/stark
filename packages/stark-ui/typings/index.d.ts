@@ -1,4 +1,4 @@
-/* tslint:disable:no-import-side-effect */
+/* eslint-disable import/no-unassigned-import */
 import "./text-mask-addons/index";
 import "./text-mask-core/index";
-/* tslint:enable */
+/* eslint-enable */

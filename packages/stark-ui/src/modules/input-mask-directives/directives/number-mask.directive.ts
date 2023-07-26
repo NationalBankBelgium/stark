@@ -14,7 +14,7 @@ const directiveName = "[starkNumberMask]";
  */
 export const STARK_NUMBER_MASK_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
-	// tslint:disable-next-line:no-forward-ref
+	// eslint-disable-next-line @angular-eslint/no-forward-ref
 	useExisting: forwardRef(() => StarkNumberMaskDirective),
 	multi: true
 };
@@ -52,7 +52,7 @@ export class StarkNumberMaskDirective extends MaskedInputDirective implements On
 	/**
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
-	/* tslint:disable:no-input-rename */
+	/* eslint-disable @angular-eslint/no-input-rename */
 	@Input("starkNumberMask")
 	public maskConfig: StarkNumberMaskConfig = {};
 
@@ -95,6 +95,7 @@ export class StarkNumberMaskDirective extends MaskedInputDirective implements On
 
 	/**
 	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
 	 */
 	public override ngOnChanges(changes: SimpleChanges): void {
 		this.textMaskConfig = this.normalizeMaskConfig(this.maskConfig);

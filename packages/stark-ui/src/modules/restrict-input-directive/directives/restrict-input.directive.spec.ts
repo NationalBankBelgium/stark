@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { Component, DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
@@ -8,7 +7,6 @@ import { StarkRestrictInputDirective } from "./restrict-input.directive";
 import Spy = jasmine.Spy;
 import createSpy = jasmine.createSpy;
 
-// tslint:disable-next-line:no-big-function
 describe("RestrictInputDirective", () => {
 	@Component({
 		selector: "test-component",
@@ -80,10 +78,9 @@ describe("RestrictInputDirective", () => {
 	});
 
 	describe("when input restriction is not defined", () => {
-		beforeEach(fakeAsync(() => {
+		beforeEach(fakeAsync(() =>
 			// compile template and css
-			return TestBed.compileComponents();
-		}));
+			TestBed.compileComponents()));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -146,7 +143,6 @@ describe("RestrictInputDirective", () => {
 			triggerAndAssert(inputElement, ["a", "B", "-"], true, triggerPasteEvent);
 		});
 
-		// tslint:disable-next-line:no-identical-functions
 		it("should NOT prevent any of the values given in the configuration from being pasted in the input", () => {
 			expect(fixture).toBeDefined();
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));
@@ -159,7 +155,6 @@ describe("RestrictInputDirective", () => {
 			triggerAndAssert(inputElement, ["a", "B", "-"], true, triggerDropEvent);
 		});
 
-		// tslint:disable-next-line:no-identical-functions
 		it("should NOT prevent any of the values given in the configuration from being drop in the input", () => {
 			expect(fixture).toBeDefined();
 			const inputElement: DebugElement = fixture.debugElement.query(By.css("input"));

@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs no-big-function */
 import { createTimestampPipe } from "./timestamp-pipe.fn";
 
 describe("createTimestampPipe", () => {

@@ -83,17 +83,9 @@ export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {
 	 */
 	public ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
 		if (this.starkSessionUiConfig && this.starkSessionUiConfig.timeoutWarningDialogDisabled === true) {
-			return this.actions$.pipe(
-				exhaustMap(() => {
-					return resolvedEffects$.pipe(takeUntil(of("stop")));
-				})
-			);
+			return this.actions$.pipe(exhaustMap(() => resolvedEffects$.pipe(takeUntil(of("stop")))));
 		}
 
-		return this.actions$.pipe(
-			exhaustMap(() => {
-				return resolvedEffects$;
-			})
-		);
+		return this.actions$.pipe(exhaustMap(() => resolvedEffects$));
 	}
 }

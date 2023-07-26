@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 import { ApplicationRef } from "@angular/core";

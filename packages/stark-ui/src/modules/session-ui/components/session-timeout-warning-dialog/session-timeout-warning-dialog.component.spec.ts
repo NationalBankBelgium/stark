@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -17,8 +17,8 @@ describe("SessionTimeoutWarningDialogComponent", () => {
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkSessionTimeoutWarningDialogComponent],
 				imports: [CommonModule, MatDialogModule],
 				providers: [
@@ -27,8 +27,8 @@ describe("SessionTimeoutWarningDialogComponent", () => {
 					{ provide: MAT_DIALOG_DATA, useValue: 20 },
 					{ provide: MatDialogRef, useValue: createSpyObj("MatDialogRefSpy", ["close"]) }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { ApplicationRef, Inject, Injectable } from "@angular/core";
 import {
 	MatSnackBar,

@@ -45,7 +45,7 @@ const DEFAULT_ALIGN: AlignTypes = "right";
 const componentName = "stark-message-pane";
 
 // FIXME: refactor the template of this component function to reduce its cyclomatic complexity
-/* tslint:disable:template-cyclomatic-complexity */
+/* eslint-disable @angular-eslint/template/cyclomatic-complexity */
 /**
  * Component to display messages in a single pane grouped by level: info, errors and warnings.
  */
@@ -211,6 +211,7 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Component lifecycle hook
+	 * @param changesObj - Contains the changed properties
 	 */
 	public ngOnChanges(changesObj: SimpleChanges): void {
 		if (changesObj["clearOnNavigation"] && this.clearOnNavigation !== changesObj["clearOnNavigation"].previousValue) {
@@ -290,9 +291,9 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 		// check if the 'show' needs to wait for the 'hide' to finish, otherwise it is executed immediately
 		if (this.hide$) {
 			composedShow$ = this.hide$.pipe(
-				switchMap(() => {
-					return show$; // call the 'show' logic after the 'hide' finishes
-				}),
+				switchMap(
+					() => show$ // call the 'show' logic after the 'hide' finishes
+				),
 				take(1)
 			); // unsubscribe from the 'hide' in this chain (every call to the showPane() method must listen only to one emission)
 		}

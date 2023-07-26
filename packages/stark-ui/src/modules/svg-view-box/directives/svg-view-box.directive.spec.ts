@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs no-identical-functions*/
 import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
@@ -39,10 +38,9 @@ describe("SvgViewBoxDirective", () => {
 	});
 
 	describe("when viewBox value is not defined", () => {
-		beforeEach(fakeAsync(() => {
+		beforeEach(fakeAsync(() =>
 			// compile template and css
-			return TestBed.compileComponents();
-		}));
+			TestBed.compileComponents()));
 
 		beforeEach(() => {
 			initializeComponentFixture();

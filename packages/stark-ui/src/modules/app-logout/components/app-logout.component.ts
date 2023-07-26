@@ -53,9 +53,9 @@ export class StarkAppLogoutComponent extends AbstractStarkUiComponent implements
 	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param routingService - The `StarkRoutingService` instance of the application.
 	 * @param sessionService - The `StarkSessionService` instance of the application.
-	 * @param sessionConfig - The configuration of the session module
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 * @param sessionConfig - The configuration of the session module
 	 */
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,

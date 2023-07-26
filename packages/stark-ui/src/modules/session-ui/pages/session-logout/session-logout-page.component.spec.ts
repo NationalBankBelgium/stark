@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";

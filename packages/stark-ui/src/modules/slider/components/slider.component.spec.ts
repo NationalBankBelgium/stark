@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs component-max-inline-declarations no-big-function */
+/* eslint-disable @angular-eslint/component-max-inline-declarations */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -7,7 +7,7 @@ import { StarkSliderComponent } from "./slider.component";
 import { StarkSliderConfig } from "./slider-config.intf";
 import Spy = jasmine.Spy;
 
-/***
+/**
  * To be able to test changes to the input fields, the Slider component is hosted inside the TestComponentHost class.
  */
 @Component({
@@ -32,7 +32,7 @@ class TestHostComponent {
 	/**
 	 * Simulates the OnValueChanges event of the slider component
 	 * To be able to test the 'Changes' output
-	 * @param values: Array of numeric values to be set to the slider.
+	 * @param values - Array of numeric values to be set to the slider.
 	 */
 	public onValuesChange(values: number[]): void {
 		this.sliderValues = values;
@@ -59,12 +59,12 @@ describe("SliderComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkSliderComponent, TestHostComponent],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	/**
@@ -83,7 +83,7 @@ describe("SliderComponent", () => {
 		spyOn(component, "updateSliderInstanceValues").and.callThrough();
 		spyOn(component.changed, "emit").and.callThrough();
 
-		/***
+		/**
 		 * The stage
 		 *   The "attachSliderInstanceUpdateHandler()" method attaches an update handler to the slider component by using the "slider.on" method.
 		 *   The "slider.on" method should have been called once.
@@ -101,12 +101,12 @@ describe("SliderComponent", () => {
 		 */
 		attachSliderInstanceUpdateHandlerSpy = spyOn(component, "attachSliderInstanceUpdateHandler").and.stub();
 
-		/***
+		/**
 		 * fixture.detectChanges() triggers the ngOnInit() and ngAfterViewInit() methods in the component.
 		 */
 		hostFixture.detectChanges();
 
-		/***
+		/**
 		 * The slider is created after the fixture.detectChanges() has been called
 		 */
 		spyOn(component.slider, "on").and.callThrough();
