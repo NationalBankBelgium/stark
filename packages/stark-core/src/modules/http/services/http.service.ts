@@ -278,16 +278,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		// That information is not useful for the developer.
 		// To get a meaningful stack, a dummy meaningful error is created before the subscription to the webservice.
 		// This meaningfulError is sent to the StarkHttpErrorWrapperImpl and contains all statements up to this method.
-		let meaningfulError: Error = new Error(starkHttpServiceName + ": Error getting a SingleItemResponse");
-		if (!meaningfulError.stack) {
-			// IE 11 won't generate a stack unless the error is thrown
-			// https://docs.microsoft.com/en-us/scripting/javascript/reference/stack-property-error-javascript#remarks
-			try {
-				throw meaningfulError;
-			} catch (error) {
-				meaningfulError = error;
-			}
-		}
+		const meaningfulError: Error = new Error(starkHttpServiceName + ": Error getting a SingleItemResponse");
 
 		return httpResponse$.pipe(
 			map((result: HttpResponse<P>) => {
@@ -322,16 +313,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		// That information is not useful for the developer.
 		// To get a meaningful stack, a dummy meaningful error is created before the subscription to the webservice.
 		// This meaningfulError is sent to the StarkHttpErrorWrapperImpl and contains all statements up to this method.
-		let meaningfulError: Error = new Error(starkHttpServiceName + ": Error getting a CollectionResponse");
-		if (!meaningfulError.stack) {
-			// IE 11 won't generate a stack unless the error is thrown
-			// https://docs.microsoft.com/en-us/scripting/javascript/reference/stack-property-error-javascript#remarks
-			try {
-				throw meaningfulError;
-			} catch (error) {
-				meaningfulError = error;
-			}
-		}
+		const meaningfulError: Error = new Error(starkHttpServiceName + ": Error getting a CollectionResponse");
 
 		return httpResponse$.pipe(
 			map((result: HttpResponse<StarkHttpRawCollectionResponseData<P>>) => {
