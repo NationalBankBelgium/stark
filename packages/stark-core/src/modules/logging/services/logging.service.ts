@@ -59,29 +59,28 @@ export class StarkLoggingServiceImpl implements StarkLoggingService {
 		this.consoleWarn = this.getConsole("warn");
 		this.consoleError = this.getConsole("error");
 
-		if (this.appConfig.loggingFlushDisabled) {
-			return;
-		}
-
-		this.backend = this.appConfig.getBackend("logging");
-		this.logPersistSize = <number>this.appConfig.loggingFlushPersistSize;
-		this.logUrl = `${this.backend.url}/${this.appConfig.loggingFlushResourceName}`;
 		this.generateNewCorrelationId();
+		
+		if (!this.appConfig.loggingFlushDisabled) {
+			this.backend = this.appConfig.getBackend("logging");
+			this.logPersistSize = <number>this.appConfig.loggingFlushPersistSize;
+			this.logUrl = `${this.backend.url}/${this.appConfig.loggingFlushResourceName}`;
 
-		this.store.pipe(select(selectStarkLogging)).subscribe((starkLogging: StarkLogging) => {
-			this.starkLogging = starkLogging;
-			this.persistLogMessages();
-		});
-
-		if (window) {
-			window.addEventListener("beforeunload", (_ev: BeforeUnloadEvent) => {
-				// Persist the remaining log entries that are still in the store, before leaving the application.
-				// We need to call the REST service synchronously,
-				// because the browser has to wait for the REST service to complete.
-
-				const data: string = JSON.stringify(Serialize(this.starkLogging, StarkLoggingImpl));
-				this.sendRequest(this.logUrl, data, false);
+			this.store.pipe(select(selectStarkLogging)).subscribe((starkLogging: StarkLogging) => {
+				this.starkLogging = starkLogging;
+				this.persistLogMessages();
 			});
+
+			if (window) {
+				window.addEventListener("beforeunload", (_ev: BeforeUnloadEvent) => {
+					// Persist the remaining log entries that are still in the store, before leaving the application.
+					// We need to call the REST service synchronously,
+					// because the browser has to wait for the REST service to complete.
+
+					const data: string = JSON.stringify(Serialize(this.starkLogging, StarkLoggingImpl));
+					this.sendRequest(this.logUrl, data, false);
+				});
+			}
 		}
 
 		this.debug(starkLoggingServiceName + " loaded");
