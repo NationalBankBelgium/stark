@@ -117,6 +117,7 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 
 	/**
 	 * Change the current language based on the selection made by the user
+	 * @param language - The language to change to
 	 */
 	public changeLanguage(language: string): void {
 		if (this.selectedLanguage !== language) {
@@ -124,9 +125,9 @@ export class StarkLanguageSelectorComponent extends AbstractStarkUiComponent imp
 			this.selectedLanguage = language;
 			this.sessionService.setCurrentLanguage(this.selectedLanguage);
 
-			const languageIndex: number = this.appMetadata.supportedLanguages.findIndex((starkLanguage: StarkLanguage) => {
-				return starkLanguage.code === this.selectedLanguage;
-			});
+			const languageIndex: number = this.appMetadata.supportedLanguages.findIndex(
+				(starkLanguage: StarkLanguage) => starkLanguage.code === this.selectedLanguage
+			);
 
 			if (languageIndex >= 0) {
 				const locale: string = this.appMetadata.supportedLanguages[languageIndex].isoCode;

@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import moment from "moment";
 import { autoserialize } from "cerialize";
 

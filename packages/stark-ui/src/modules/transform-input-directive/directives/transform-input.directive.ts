@@ -21,7 +21,7 @@ export type StarkInputTransformationType = typeof UPPERCASE | typeof LOWERCASE |
  */
 export const STARK_TRANSFORM_INPUT_PROVIDER: Provider = {
 	provide: NG_VALUE_ACCESSOR,
-	// tslint:disable-next-line:no-forward-ref
+	// eslint-disable-next-line @angular-eslint/no-forward-ref
 	useExisting: forwardRef(() => StarkTransformInputDirective),
 	multi: true
 };
@@ -38,7 +38,7 @@ export const STARK_TRANSFORM_INPUT_PROVIDER: Provider = {
  * <input StarkTransformInputDirective="someFunction" />
  */
 @Directive({
-	// tslint:disable-next-line:directive-selector
+	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: "[starkTransformInput]",
 	providers: [STARK_TRANSFORM_INPUT_PROVIDER],
 	host: {
@@ -48,14 +48,15 @@ export const STARK_TRANSFORM_INPUT_PROVIDER: Provider = {
 })
 export class StarkTransformInputDirective implements ControlValueAccessor, OnChanges {
 	/**
+	 * @ignore
 	 * Internal property for holding the transformation function
 	 */
-	public _transformation: (value: any) => any = (value) => value;
+	public _transformation: (value: any) => any = (value: any): any => value;
 
 	/**
 	 * Transformation to be done on the input value
 	 */
-	// tslint:disable-next-line:no-input-rename
+	// eslint-disable-next-line @angular-eslint/no-input-rename
 	@Input("starkTransformInput")
 	public set transformation(transformation: StarkInputTransformationType) {
 		switch (transformation) {
@@ -72,18 +73,19 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	}
 
 	/**
+	 * @ignore
 	 * The registered callback function called when an input event occurs on the input element.
 	 */
 	private _onChange: (_: any) => void = (_: any) => {
-		/*noop*/
+		/* noop*/
 	};
 
 	/**
 	 * @ignore
 	 * The registered callback function called when a blur event occurs on the input element.
 	 */
-	public _onTouched: () => void = () => {
-		/*noop*/
+	public _onTouched: () => void = (): void => {
+		/* noop*/
 	};
 
 	/**
@@ -109,6 +111,7 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	 * @param value - The checked value
 	 */
 	public writeValue(value: any): void {
+		// eslint-disable-next-line no-null/no-null
 		const normalizedValue: any = value === null ? "" : value;
 		this._renderer.setProperty(this._elementRef.nativeElement, "value", normalizedValue);
 	}
@@ -142,6 +145,7 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 
 	/**
 	 * Listens to input event from the native element
+	 * @param event - The handled event
 	 */
 	public _onInput(event: Event): void {
 		const value: any = (<HTMLInputElement>event.target).value;

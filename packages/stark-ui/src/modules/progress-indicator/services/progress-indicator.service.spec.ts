@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { BehaviorSubject, Observable } from "rxjs";
 import { StarkProgressIndicatorActions } from "../actions";
@@ -10,7 +9,6 @@ import Spy = jasmine.Spy;
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { TestBed } from "@angular/core/testing";
 
-// tslint:disable:no-big-function
 describe("ProgressIndicatorService", () => {
 	let mockStore: MockStore<StarkUIApplicationState>;
 	let progressIndicatorService: ProgressIndicatorServiceHelper;

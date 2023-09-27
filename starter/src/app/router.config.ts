@@ -1,5 +1,6 @@
 import { Category, StateDeclaration, UIRouter } from "@uirouter/core";
 
+/* eslint-disable-next-line jsdoc/require-jsdoc */
 export function logRegisteredStates(registeredStates: StateDeclaration[]): void {
 	let message = "=============  Registered Ui-Router states: ==============\n";
 
@@ -10,6 +11,7 @@ export function logRegisteredStates(registeredStates: StateDeclaration[]): void 
 	console.log(message);
 }
 
+/* eslint-disable-next-line jsdoc/require-jsdoc */
 export function routerConfigFn(router: UIRouter): void {
 	if (ENV === "development") {
 		router.trace.enable(Category.TRANSITION);
@@ -20,6 +22,7 @@ export function routerConfigFn(router: UIRouter): void {
 	// }
 }
 
+/* eslint-disable-next-line jsdoc/require-jsdoc */
 export function routerChildConfigFn(router: UIRouter): void {
 	logRegisteredStates(router.stateService.get());
 }

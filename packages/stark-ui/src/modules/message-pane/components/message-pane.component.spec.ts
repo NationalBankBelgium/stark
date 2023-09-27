@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size no-identical-functions no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 
 /* angular imports */
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
@@ -35,7 +35,7 @@ import { StarkDOMUtil } from "../../../util/dom";
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
-/***
+/**
  * To be able to test changes to the input fields, the message pane component is hosted inside the TestComponentHost class.
  */
 @Component({
@@ -124,6 +124,7 @@ describe("MessagePaneComponent", () => {
 	}
 
 	/**
+	 * @ignore
 	 * check the total number of messages and the max level
 	 */
 	function assertDisplayedTotalMessages(messageType: StarkMessagePaneNavItem, numberOfMessages: number): void {
@@ -172,8 +173,8 @@ describe("MessagePaneComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkMessagePaneComponent, TestHostComponent],
 				imports: [
 					CommonModule,
@@ -191,8 +192,8 @@ describe("MessagePaneComponent", () => {
 					{ provide: STARK_MESSAGE_PANE_SERVICE, useValue: mockMessagePaneService },
 					TranslateService
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

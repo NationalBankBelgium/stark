@@ -75,7 +75,7 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 };
 
 // FIXME: refactor the template of this component function to reduce its cyclomatic complexity
-/* tslint:disable:template-cyclomatic-complexity */
+/* eslint-disable @angular-eslint/template/cyclomatic-complexity */
 /**
  * Component to display array data in a table layout.
  */
@@ -173,7 +173,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	@Input()
 	public data: object[] = [];
 
-	// tslint:disable-next-line:variable-name prefer-optional no-null-undefined-union
 	public static ngAcceptInputType_data: object[] | undefined | null;
 
 	/**
@@ -188,7 +187,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		this._filter = { ...defaultFilter, ...value };
 	}
 
-	// tslint:disable-next-line:variable-name prefer-optional
 	public static ngAcceptInputType_filter: StarkTableFilter | undefined;
 
 	/**
@@ -213,7 +211,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_fixedHeader: BooleanInput;
 
 	/**
@@ -245,7 +242,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_multiSort: BooleanInput;
 
 	/**
@@ -289,7 +285,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_showRowsCounter: BooleanInput;
 
 	/**
@@ -326,11 +321,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	@Input()
 	public rowClassNameFn?: (row: object, index: number) => string;
 
+	/* eslint-disable jsdoc/require-param */
 	/**
 	 * Function to see if a row is collapsed
 	 */
 	@Input()
-	public expandedRowFn: (expandedRow: object, row: object) => boolean = (expandedRow: object, row: object) => expandedRow === row;
+	public expandedRowFn: (expandedRow: object, row: object) => boolean = (expandedRow: object, row: object): boolean =>
+		expandedRow === row;
+	/* eslint-enable jsdoc/require-param */
 
 	/**
 	 * Angular CDK selection model used for the "master" selection of the table
@@ -341,7 +339,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	public set selection(selection: SelectionModel<object>) {
-		// tslint:disable-next-line:deprecation
+		// eslint-disable-next-line import/no-deprecated
 		if (coerceBooleanProperty(this.multiSelect) || !!this.rowsSelectable) {
 			this.logger.error(
 				`${componentName}: 'selection' cannot be used with 'multiSelect' and/or 'rowsSelectable'. Please use 'selection' only.`
@@ -395,7 +393,6 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_showRowIndex: BooleanInput;
 
 	/**
@@ -575,6 +572,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		}
 
 		this._globalFilterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
+			// eslint-disable-next-line no-null/no-null
 			this.filter.globalFilterValue = value === null ? undefined : value;
 			this.filterChanged.emit(this.filter);
 
@@ -592,8 +590,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 	/**
 	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
 	 */
-	// tslint:disable-next-line:cognitive-complexity cyclomatic-complexity
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["data"]) {
 			this.data = this.data || [];
@@ -626,7 +625,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			this._globalFilterFormCtrl.setValue(this.filter.globalFilterValue);
 		}
 
-		// tslint:disable:deprecation
+		/* eslint-disable import/no-deprecated */
 		if (changes["rowsSelectable"]) {
 			if (this._managedSelection) {
 				this.logger.error(
@@ -641,7 +640,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 				this.displayedColumns.splice(i);
 			}
 		}
-		// tslint:enable:deprecation
+		/* eslint-enable import/no-deprecated */
 
 		if (changes["multiSelect"] && !changes["multiSelect"].isFirstChange()) {
 			if (this._managedSelection) {
@@ -742,7 +741,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * Create and initialize the MatTableDataSource used by the MatTable
 	 */
-	// tslint:disable-next-line:cognitive-complexity
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	private initializeDataSource(): void {
 		this.dataSource = new MatTableDataSource(this.data);
 		this.paginationConfig = {
@@ -823,9 +822,9 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			itemStr = item;
 		}
 
-		return filterCriteria.filter((criteria: RegExp) => {
-			return !criteria.test(itemStr); // the item does not fulfill the given criteria
-		});
+		return filterCriteria.filter(
+			(criteria: RegExp) => !criteria.test(itemStr) // the item does not fulfill the given criteria
+		);
 	}
 
 	/**
@@ -838,7 +837,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			.replace(/\\(?=\*)\*/g, "<stark_char_star>") // string "\*" (escaped *)
 			.replace(/\\(?=\?)\?/g, "<stark_char_quot>") // string "\?" (escaped ?)
 			.replace(/\\/g, "<stark_char_backsl>") // character "\"
-			.replace(/[*?\[\]()$+^]/g, (match: string) => {
+			.replace(/[*?[\]()$+^]/g, (match: string) => {
 				// replace chars "*", "?", "[", "]", "(", ")", "$", "+", "^"
 				if (match === "*") {
 					return "\\S*"; // wildcard "*"
@@ -922,7 +921,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		const dialogRef: MatDialogRef<StarkTableMultisortDialogComponent, StarkSortingRule[]> = this.dialogService.open<
 			StarkTableMultisortDialogComponent,
 			StarkTableMultisortDialogData
-			>(StarkTableMultisortDialogComponent, {
+		>(StarkTableMultisortDialogComponent, {
 			panelClass: "stark-table-dialog-multisort-panel-class", // the width is set via CSS using this class
 			data: { columns: this.columns.filter((column: StarkTableColumnComponent) => column.sortable) }
 		});
@@ -937,9 +936,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 				const orderedRulesByPriority = savedRules
 					// we only care about the columns that are really sorted, the rest should be discarded
 					.filter((rule: StarkSortingRule) => rule.sortDirection !== "")
-					.sort((rule1: StarkSortingRule, rule2: StarkSortingRule) => {
-						return rule1.sortPriority < rule2.sortPriority ? -1 : 1;
-					});
+					.sort((rule1: StarkSortingRule, rule2: StarkSortingRule) => (rule1.sortPriority < rule2.sortPriority ? -1 : 1));
 
 				for (const rule of orderedRulesByPriority) {
 					let columnWithSortDirection: string = rule.column.name; // asc
@@ -974,7 +971,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * @ignore
 	 */
 	private _resetSelection(forceReset: boolean = false): void {
-		// tslint:disable:deprecation
+		/* eslint-disable import/no-deprecated */
 		if (!this.selection || forceReset) {
 			this._selection = new SelectionModel<object>(coerceBooleanProperty(this.multiSelect), []);
 		}
@@ -987,15 +984,14 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 			const selected: object[] = change.source.selected;
 			this.selectChanged.emit(selected);
 		});
-		// tslint:enable:deprecation
+		/* eslint-enable import/no-deprecated */
 	}
 
 	/**
 	 * Sort the data according to the direction and priority (if any) defined for each column.
 	 * In case there is a compareFn defined for any of the columns then such method is called to perform the custom sorting.
 	 */
-	// FIXME: refactor this method to reduce its cognitive complexity
-	/* tslint:disable-next-line:cognitive-complexity */
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	public sortData(): void {
 		if (!this.columns) {
 			return;
@@ -1195,7 +1191,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		if (this.rowClicked.observers.length > 0) {
 			// If there is an observer, emit an event
 			this.rowClicked.emit(row);
-			// tslint:disable-next-line:deprecation
+			// eslint-disable-next-line import/no-deprecated
 		} else if (this._managedSelection || this.rowsSelectable) {
 			// If multi-select is enabled, (un)select the row
 			this.selection.toggle(row);

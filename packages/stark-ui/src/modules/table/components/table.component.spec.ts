@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs component-max-inline-declarations no-identical-functions no-lifecycle-call deprecation */
+/* eslint-disable @angular-eslint/component-max-inline-declarations, @angular-eslint/no-lifecycle-call, import/no-deprecated */
 import { SelectionModel } from "@angular/cdk/collections";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
@@ -104,7 +104,6 @@ class TestHostComponent {
 	public expandRowTesting?: boolean;
 }
 
-/* tslint:disable:no-big-function */
 describe("TableComponent", () => {
 	let component: StarkTableComponent;
 	let hostComponent: TestHostComponent;
@@ -139,8 +138,8 @@ describe("TableComponent", () => {
 	const rowSelector = "table tbody tr";
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [
 					// Common
 					FormsModule,
@@ -172,8 +171,8 @@ describe("TableComponent", () => {
 					StarkTableRowContentDirective
 				],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

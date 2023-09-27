@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { TestBed } from "@angular/core/testing";
 
 import { Observable, Observer, ReplaySubject } from "rxjs";

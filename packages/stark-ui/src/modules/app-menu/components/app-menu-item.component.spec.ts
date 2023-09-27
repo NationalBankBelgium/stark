@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
@@ -42,22 +41,20 @@ describe("AppMenuItemComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					declarations: [StarkAppMenuItemComponent, TestHostComponent],
-					imports: [MatExpansionModule, MatIconModule, MatIconTestingModule, MatListModule, NoopAnimationsModule, UIRouterModule],
-					providers: [
-						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-						{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService }
-					]
-				})
-					/**
-					 * Compile template and css
-					 */
-					.compileComponents()
-			);
-		})
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
+				declarations: [StarkAppMenuItemComponent, TestHostComponent],
+				imports: [MatExpansionModule, MatIconModule, MatIconTestingModule, MatListModule, NoopAnimationsModule, UIRouterModule],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService }
+				]
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		)
 	);
 
 	/**

@@ -6,6 +6,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
  * @ignore
  */
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: "about",
 	templateUrl: "./about-page.component.html"
 })

@@ -11,7 +11,6 @@ function createElement(html: string): Element {
 	return <Element>div.firstChild;
 }
 
-/* tslint:disable:no-big-function */
 describe("Util: DOMUtil", () => {
 	/* repeated messages */
 	const shouldReturnParentElement = "should return the parent element if it is found";

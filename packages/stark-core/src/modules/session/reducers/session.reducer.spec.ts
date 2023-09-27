@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { StarkSession } from "../entities";
 import { StarkUser } from "../../user/entities";
 import { sessionReducer } from "./session.reducer";

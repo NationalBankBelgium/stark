@@ -1,9 +1,7 @@
-/* tslint:disable:completed-docs no-identical-functions */
 import { StarkFormControlState, StarkFormUtil } from "./form.util";
 import { FormControl, FormGroup } from "@angular/forms";
 import startCase from "lodash-es/startCase";
 
-/* tslint:disable:no-big-function */
 describe("Util: FormUtil", () => {
 	const formItemStates: string[] = ["untouched", "touched", "pristine", "dirty"];
 

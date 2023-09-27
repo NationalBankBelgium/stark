@@ -29,7 +29,7 @@ export const starkIsBICValidatorName = "starkIsBIC";
  * See {@link https://en.wikipedia.org/wiki/ISO_9362}
  */
 export function starkIsBIC(bic: string): boolean {
-	const swiftRegex: RegExp = /^[A-Za-z]{6}[A-Za-z0-9]{2}([A-Za-z0-9]{3})?$/;
+	const swiftRegex = /^[A-Za-z]{6}[A-Za-z0-9]{2}([A-Za-z0-9]{3})?$/;
 
 	return typeof bic === "string" && swiftRegex.test(bic);
 }

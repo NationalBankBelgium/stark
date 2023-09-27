@@ -16,9 +16,9 @@ export function starkIsEstablishmentUnitNumber(establishmentNumber: string): boo
 	const controlNumberEndIndex = 10;
 
 	// Z.NNN.NNN.NNN with Z in (2-8) and N in (0-9)
-	const establishmentNumberPattern: RegExp = /^[2-8][.][0-9]{3}[.][0-9]{3}[.][0-9]{3}/;
+	const establishmentNumberPattern = /^[2-8][.][0-9]{3}[.][0-9]{3}[.][0-9]{3}/;
 	// ZNNNNNNNNN with Z in (2-8) and N in (0-9)
-	const establishmentUnitNumberWithoutFormattingPattern: RegExp = /^[2-8][0-9]{3}[0-9]{3}[0-9]{3}/;
+	const establishmentUnitNumberWithoutFormattingPattern = /^[2-8][0-9]{3}[0-9]{3}[0-9]{3}/;
 
 	let isValid = false;
 

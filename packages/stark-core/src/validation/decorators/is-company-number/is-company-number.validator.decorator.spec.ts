@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-identical-functions no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsCompanyNumber } from "./is-company-number.validator.decorator";
 import { starkIsCompanyNumberValidatorName } from "../../validators/is-company-number";

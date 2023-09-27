@@ -28,7 +28,7 @@ export class StarkSvgViewBoxDirective implements AfterViewChecked, OnInit {
 	/**
 	 * Width and height to be set to the 'viewBox' attribute of the SVG element.
 	 */
-	/* tslint:disable:no-input-rename */
+	/* eslint-disable @angular-eslint/no-input-rename */
 	@Input("starkSvgViewBox")
 	private viewBoxSize: number = STARK_DEFAULT_VIEW_BOX_SIZE;
 

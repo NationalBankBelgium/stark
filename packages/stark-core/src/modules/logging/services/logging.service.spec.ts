@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
 import { Injector } from "@angular/core";
@@ -17,7 +16,6 @@ import { MockStarkXsrfService } from "@nationalbankbelgium/stark-core/testing";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { TestBed } from "@angular/core/testing";
 
-// tslint:disable-next-line:no-big-function
 describe("Service: StarkLoggingService", () => {
 	let appConfig: StarkApplicationConfig;
 	let mockStore: MockStore<StarkCoreApplicationState>;
@@ -65,7 +63,7 @@ describe("Service: StarkLoggingService", () => {
 		};
 		spyOn(mockStore, "pipe").and.returnValue(of(mockStarkLogging));
 		spyOn(mockStore, "dispatch").and.callThrough();
-		/* tslint:disable-next-line:deprecation */
+		/* eslint-disable-next-line import/no-deprecated */
 		mockInjectorService.get.and.returnValue(mockXSRFService);
 		loggingService = new LoggingServiceHelper(mockStore, appConfig, mockInjectorService);
 		// reset the calls counter because there is a log in the constructor

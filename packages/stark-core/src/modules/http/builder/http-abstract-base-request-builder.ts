@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { StarkHttpRequest, StarkQueryParam, StarkResource } from "../entities";
 import { StarkHttpBaseRequestBuilder } from "./http-abstract-base-request-builder.intf";
 import { StarkUrlUtil } from "../../../util/url-util";
@@ -15,6 +14,7 @@ export abstract class StarkAbstractHttpBaseRequestBuilder<T extends StarkResourc
 
 	public setHeader(name: string, value: string | string[]): this {
 		// in Angular, a header value can only be string or string[], not null/undefined (https://github.com/angular/angular/issues/18743)
+		// eslint-disable-next-line no-null/no-null
 		if (name && typeof value !== "undefined" && value !== null) {
 			this.request.headers.set(name, value);
 		}

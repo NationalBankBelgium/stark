@@ -3,7 +3,6 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
 import { mergeUiTranslations } from "./merge-translations";
 
-/* tslint:disable:no-duplicate-string */
 describe("Translations: mergeUiTranslations", () => {
 	const translateModule: TranslateModule = TranslateModule.forRoot();
 	let translateService: TranslateService;

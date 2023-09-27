@@ -19,8 +19,8 @@ import { starkIsNINValidatorName } from "../../validators/is-nin";
 class StarkIsNINConstraint implements ValidatorConstraintInterface {
 	/**
 	 * Validate that the provided NIN number is valid
-	 * @param nin: the nin to validate
-	 * @param validationArguments: the arguments to validate
+	 * @param nin - the nin to validate
+	 * @param validationArguments - the arguments to validate
 	 */
 	public validate(nin: string, validationArguments?: ValidationArguments): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);

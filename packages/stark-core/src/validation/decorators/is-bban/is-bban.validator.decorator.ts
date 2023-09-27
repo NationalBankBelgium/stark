@@ -19,8 +19,8 @@ import { starkIsBBANValidatorName } from "../../validators/is-bban";
 class StarkIsBBANConstraint implements ValidatorConstraintInterface {
 	/**
 	 * Validates that a give BBAN number is valid.
-	 * @param bban: the bban to validate
-	 * @param validationArguments: the arguments to ensure the bban is valid
+	 * @param bban - the bban to validate
+	 * @param validationArguments - the arguments to ensure the bban is valid
 	 */
 	public validate(bban: string, validationArguments?: ValidationArguments): boolean {
 		const validator: StarkValidator = getFromContainer<StarkValidatorImpl>(StarkValidatorImpl);
@@ -39,8 +39,8 @@ class StarkIsBBANConstraint implements ValidatorConstraintInterface {
 
 /**
  * Validator decorator that uses the StarkIsBBAN validator constraint
- * @param property: the bban number
- * @param validationOptions: the options to ensure the bban is valid
+ * @param property - the bban number
+ * @param validationOptions - the options to ensure the bban is valid
  * @returns Function
  */
 export function StarkIsBBAN(property: string, validationOptions?: ValidationOptions): Function {

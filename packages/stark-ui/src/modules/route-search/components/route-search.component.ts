@@ -120,6 +120,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Filters the options according to what has been entered by the user in the input field
+	 * @param value - Filter value
 	 */
 	public filterRouteEntries(value: string): StarkRouteSearchEntry[] {
 		const filterValue: string = value.toLowerCase();
@@ -137,9 +138,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 		this.searchField.setValue("");
 		this.filteredRouteEntries = this.searchField.valueChanges.pipe(
 			startWith(""),
-			map((option: string) => {
-				return option ? this.filterRouteEntries(option) : [...this.routesToDisplay];
-			})
+			map((option: string) => (option ? this.filterRouteEntries(option) : [...this.routesToDisplay]))
 		);
 
 		if (typeof this.menuConfig === "undefined") {
@@ -160,7 +159,8 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	}
 
 	/**
-	 * redirect the user to the chosen path
+	 * Redirect the user to the chosen path
+	 * @param routeEntry - Route to navigate to
 	 */
 	public redirect(routeEntry: StarkRouteSearchEntry): void {
 		this.routingService.navigateTo(routeEntry.targetState, routeEntry.targetStateParams).subscribe(
@@ -198,6 +198,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Retrieve the list of routes from a {@link StarkMenuConfig} object which the user have passed to the component
+	 * @param menuConfig - `StarkMenuConfig` object
 	 */
 	public constructRouteEntriesFromMenuConfig(menuConfig: StarkMenuConfig): StarkRouteSearchEntry[] {
 		let routesToDisplay: StarkRouteSearchEntry[] = [];
@@ -250,7 +251,8 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 		const routesToDisplay: StarkRouteSearchEntry[] = [];
 		for (const state of this.routingService.getStatesConfig()) {
 			const ng2State: Ng2StateDeclaration = state;
-			const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+			// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+			const regexInitExitStateName = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 			if (
 				ng2State.name !== undefined &&
 				ng2State.url !== undefined &&

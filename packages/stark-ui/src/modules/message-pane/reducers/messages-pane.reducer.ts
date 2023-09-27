@@ -38,7 +38,7 @@ export function messagesReducer(
 }
 
 /**
- * Ignore
+ * @ignore
  */
 function addMessage(
 	state: Readonly<StarkMessageCollection>,
@@ -72,7 +72,7 @@ function addMessage(
 }
 
 /**
- * Ignore
+ * @ignore
  */
 function clearMessages(state: Readonly<StarkMessageCollection>): Readonly<StarkMessageCollection> {
 	let clearedState: StarkMessageCollection = INITIAL_MESSAGES_STATE;
@@ -86,7 +86,7 @@ function clearMessages(state: Readonly<StarkMessageCollection>): Readonly<StarkM
 }
 
 /**
- * Ignore
+ * @ignore
  */
 function removeMessages(
 	state: Readonly<StarkMessageCollection>,

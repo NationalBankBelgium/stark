@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 import { StarkSettingsEffects } from "./settings.effects";

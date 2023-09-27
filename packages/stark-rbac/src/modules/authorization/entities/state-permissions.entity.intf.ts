@@ -19,7 +19,6 @@ export interface StarkRBACStatePermissions {
 	redirectTo?: StarkStateRedirection | StarkStateRedirectionFn;
 }
 
-/* tslint:disable:jsdoc-format */
 /**
  * Describes a Router state configuration with `data.permissions` defined in order to protect such state(s) with RBAC authorization
  * via the {@link StarkRBACAuthorizationService}.
@@ -49,7 +48,6 @@ export const APP_STATES: StarkRBACStateDeclaration[] = [
 ];
 ```
  */
-/* tslint:enable:jsdoc-format */
 export interface StarkRBACStateDeclaration extends Ng2StateDeclaration {
 	/**
 	 * An inherited property to store state data

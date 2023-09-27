@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { StarkLanguage } from "../../../configuration/entities/language";
 import { StarkSortItem } from "../entities/metadata";
 import { StarkHttpHeaders, StarkHttpQueryParameters } from "../constants";
@@ -11,7 +10,8 @@ import { StarkResource } from "../entities/resource.entity.intf";
  */
 export abstract class StarkAbstractHttpFetchResourceRequestBuilder<T extends StarkResource>
 	extends StarkAbstractHttpBaseRequestBuilder<T>
-	implements StarkHttpFetchResourceRequestBuilder {
+	implements StarkHttpFetchResourceRequestBuilder
+{
 	public addAcceptedLanguage(...languages: StarkLanguage[]): this {
 		let languageHeaders = "";
 		let queryParameters = "";

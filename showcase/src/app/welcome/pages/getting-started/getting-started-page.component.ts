@@ -9,6 +9,7 @@ import {
 } from "./starter-structure";
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: "getting-started",
 	templateUrl: "./getting-started-page.component.html"
 })

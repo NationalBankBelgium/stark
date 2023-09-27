@@ -8,7 +8,7 @@ import { Directive } from "@angular/core";
  * as well as methods to manipulate it.
  */
 @Directive({})
-// tslint:disable-next-line:directive-class-suffix
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export abstract class AbstractStarkFormComponent<CriteriaType> {
 	/**
 	 * The form's original copy (the initial model when the form is pristine)

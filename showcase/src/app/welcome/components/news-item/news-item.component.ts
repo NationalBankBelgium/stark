@@ -4,6 +4,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 const componentName = "news-item-component";
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: "news-item",
 	templateUrl: "./news-item.component.html"
 })

@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { v4 as uuidV4 } from "uuid";
 import { Serialize } from "cerialize";
 import { select, Store } from "@ngrx/store";

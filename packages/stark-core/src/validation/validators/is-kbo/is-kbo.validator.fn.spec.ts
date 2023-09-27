@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { starkIsKBO } from "./is-kbo.validator.fn";
 
 describe("Validator Function: StarkIsKBO", () => {

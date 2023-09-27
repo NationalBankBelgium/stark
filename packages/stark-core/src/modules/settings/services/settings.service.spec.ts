@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { Store } from "@ngrx/store";
 import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 import {
@@ -125,7 +124,7 @@ describe("Service: StarkSettingsService", () => {
 		});
 
 		it("should set browser language as preferred language if user language is undefined OR null", () => {
-			// tslint:disable-next-line:no-null-keyword */
+			// eslint-disable-next-line no-null/no-null
 			mockUser.language = <any>null;
 			mockSessionService.getCurrentUser.and.returnValue(of(mockUser));
 			settingsService.initializeSettings();

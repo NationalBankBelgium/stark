@@ -18,7 +18,7 @@ export class TranslatedFormErrorComponent implements NgxFormErrorComponent, OnIn
 	public constructor(public translateService: TranslateService) {}
 
 	public ngOnInit(): void {
-		this.translateService.onLangChange.subscribe((_ev: LangChangeEvent) => {
+		this.translateService.onLangChange.subscribe((_: LangChangeEvent) => {
 			this.updateTranslateFieldName(this.translateService.instant(this.fieldName));
 		});
 	}

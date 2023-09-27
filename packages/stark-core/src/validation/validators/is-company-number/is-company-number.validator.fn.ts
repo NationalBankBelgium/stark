@@ -13,8 +13,8 @@ export function starkIsCompanyNumber(companyNumber: string): boolean {
 	let valid = false;
 
 	if (typeof companyNumber === "string") {
-		const enterpriseNumberRegex: RegExp = /^[01]?[0-9]{3}[.][0-9]{3}[.][0-9]{3}/;
-		const enterpriseNumberWithoutFormatRegex: RegExp = /^[01]?[0-9]{3}[0-9]{3}[0-9]{3}/;
+		const enterpriseNumberRegex = /^[01]?[0-9]{3}[.][0-9]{3}[.][0-9]{3}/;
+		const enterpriseNumberWithoutFormatRegex = /^[01]?[0-9]{3}[0-9]{3}[0-9]{3}/;
 
 		if (enterpriseNumberRegex.test(companyNumber) || enterpriseNumberWithoutFormatRegex.test(companyNumber)) {
 			const enterpriseNumber: string = companyNumber.replace(/[^0-9]/g, "");

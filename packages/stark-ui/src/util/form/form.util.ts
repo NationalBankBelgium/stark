@@ -113,6 +113,7 @@ export class StarkFormUtil {
 	 * @param formGroup - Angular form object
 	 */
 	public static isFormGroup(formGroup: any): formGroup is FormGroup {
+		// eslint-disable-next-line no-prototype-builtins
 		return typeof formGroup !== "undefined" && formGroup.hasOwnProperty("controls");
 	}
 

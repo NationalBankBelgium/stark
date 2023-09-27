@@ -17,6 +17,7 @@ export interface ExampleFile {
 }
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: "example-viewer",
 	templateUrl: "./example-viewer.component.html",
 	styleUrls: ["./example-viewer.component.scss"],
@@ -71,8 +72,8 @@ export class ExampleViewerComponent implements OnInit {
 	 */
 	public getAppBaseHref(): string {
 		// the final url in GitHub Pages will be something like "/showcase/latest/" or "/showcase/some-version/"
-		const finalUrlRegex: RegExp = /(\/showcase\/[\d\D][^\/]+(\/|\/$|$))/;
-		const trailingSlashRegex: RegExp = /\/$/;
+		const finalUrlRegex = /(\/showcase\/[\d\D][^/]+(\/|\/$|$))/;
+		const trailingSlashRegex = /\/$/;
 		const matches: RegExpExecArray | null = finalUrlRegex.exec(window.location.pathname);
 
 		let finalBaseHref = "";

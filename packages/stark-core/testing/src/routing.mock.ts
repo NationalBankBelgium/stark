@@ -55,9 +55,8 @@ export class MockStarkRoutingService implements SpyObj<StarkRoutingService> {
 	/**
 	 * See [StarkRoutingService getStateDeclarationByStateName()]{@link StarkRoutingService#getStateDeclarationByStateName} method
 	 */
-	public getStateDeclarationByStateName: Spy<StarkRoutingService["getStateDeclarationByStateName"]> = createSpy(
-		"getStateDeclarationByStateName"
-	);
+	public getStateDeclarationByStateName: Spy<StarkRoutingService["getStateDeclarationByStateName"]> =
+		createSpy("getStateDeclarationByStateName");
 
 	/**
 	 * See [StarkRoutingService getCurrentStateParams()]{@link StarkRoutingService#getCurrentStateParams} method
@@ -92,9 +91,8 @@ export class MockStarkRoutingService implements SpyObj<StarkRoutingService> {
 	/**
 	 * See [StarkRoutingService addKnownNavigationRejectionCause()]{@link StarkRoutingService#addKnownNavigationRejectionCause} method
 	 */
-	public addKnownNavigationRejectionCause: Spy<StarkRoutingService["addKnownNavigationRejectionCause"]> = createSpy(
-		"addKnownNavigationRejectionCause"
-	);
+	public addKnownNavigationRejectionCause: Spy<StarkRoutingService["addKnownNavigationRejectionCause"]> =
+		createSpy("addKnownNavigationRejectionCause");
 
 	/**
 	 * See [StarkRoutingService addTransitionHook()]{@link StarkRoutingService#addTransitionHook} method

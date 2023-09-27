@@ -32,7 +32,7 @@ const componentName = "stark-pagination";
 export type StarkPaginationComponentMode = "compact";
 
 // FIXME: refactor the template of this component function to reduce its cyclomatic complexity
-/* tslint:disable:template-cyclomatic-complexity */
+/* eslint-disable @angular-eslint/template/cyclomatic-complexity */
 /**
  * Component to display pagination bar to be used with a collection of items.
  *
@@ -161,6 +161,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 
 	/**
 	 * Component lifecycle hook
+	 * @param changesObj - Contains the changed properties
 	 */
 	public ngOnChanges(changesObj: SimpleChanges): void {
 		if (changesObj["paginationConfig"]) {
@@ -191,6 +192,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	/**
 	 * Creates a normalized paginationConfig to be used by this component.
 	 * If the given config is undefined it will set totalItems only, otherwise it sets default values for the missing properties
+	 * @param config - `StarkPaginationConfig` object
 	 */
 	public normalizePaginationConfig(config: StarkPaginationConfig): StarkPaginationConfig {
 		if (!config) {
@@ -236,6 +238,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 
 	/**
 	 * Check whether the given value is equal to zero (as number `0` or as string `"0"`).
+	 * @param numberToCheck - Number to check
 	 */
 	public isZero(numberToCheck: string | number): boolean {
 		return numberToCheck === 0 || numberToCheck === "0";
@@ -334,6 +337,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 
 	/**
 	 * Set page to first then call `onChangePagination` function.
+	 * @param itemsPerPage - Items per page to change to
 	 */
 	public onChangeItemsPerPage(itemsPerPage: number): void {
 		if (this.paginationConfig.itemsPerPage !== itemsPerPage) {
@@ -346,8 +350,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	/**
 	 * Set pageNumbers variable.
 	 */
-	// FIXME: refactor this function to reduce its cognitive complexity
-	/* tslint:disable-next-line:cognitive-complexity */
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	public setPageNumbers(): void {
 		let min: number;
 		let max: number;
@@ -376,14 +379,28 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 				input[0] = min;
 				input[4] = max;
 
-				if (this.paginationConfig.page === min + 2 || this.paginationConfig.page === min + 1) {
-					input[2] = min + 2;
-				} else if (this.paginationConfig.page === max - 2 || this.paginationConfig.page === max - 1) {
-					input[2] = max - 2;
-				} else if (this.paginationConfig.page === max || this.paginationConfig.page === min) {
-					input[2] = Math.ceil(max / 2);
-				} else {
-					input[2] = <number>this.paginationConfig.page;
+				switch (this.paginationConfig.page) {
+					case min + 2:
+					case min + 1: {
+						input[2] = min + 2;
+
+						break;
+					}
+					case max - 2:
+					case max - 1: {
+						input[2] = max - 2;
+
+						break;
+					}
+					case max:
+					case min: {
+						input[2] = Math.ceil(max / 2);
+
+						break;
+					}
+					default: {
+						input[2] = <number>this.paginationConfig.page;
+					}
 				}
 
 				if (input[2] - 1 === min + 1) {
@@ -405,6 +422,7 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 
 	/**
 	 * Change to the given page if it is different than `"..."`. It calls `onChangePagination` afterwards.
+	 * @param page - Page to go to
 	 */
 	public goToPage(page: number | "..."): void {
 		if (page !== "...") {

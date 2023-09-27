@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import {
 	STARK_LOGGING_SERVICE,
@@ -29,25 +28,23 @@ describe("AppLogoutComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					imports: [MatTooltipModule, MatButtonModule, MatIconModule, MatIconTestingModule, TranslateModule.forRoot()],
-					declarations: [StarkAppLogoutComponent],
-					providers: [
-						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-						{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
-						{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-						// Need to clone the object to avoid mutation of it between tests
-						{ provide: STARK_SESSION_CONFIG, useValue: { ...mockStarkSessionConfig } }
-					]
-				})
-					/**
-					 * Compile template and css
-					 */
-					.compileComponents()
-			);
-		})
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
+				imports: [MatTooltipModule, MatButtonModule, MatIconModule, MatIconTestingModule, TranslateModule.forRoot()],
+				declarations: [StarkAppLogoutComponent],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
+					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
+					// Need to clone the object to avoid mutation of it between tests
+					{ provide: STARK_SESSION_CONFIG, useValue: { ...mockStarkSessionConfig } }
+				]
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		)
 	);
 
 	/**
@@ -92,7 +89,7 @@ describe("AppLogoutComponent", () => {
 		});
 
 		it("should log out the user and navigate to starkSessionLogoutStateName", () => {
-			// tslint:disable-next-line:no-non-null-assertion
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 			component.sessionConfig!.sessionLogoutStateName = undefined;
 
 			(<Spy>component.routingService.navigateTo).calls.reset();

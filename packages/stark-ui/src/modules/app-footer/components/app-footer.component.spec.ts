@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { ComponentFixture, inject, TestBed, waitForAsync } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
@@ -16,19 +16,17 @@ describe("AppFooterComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					imports: [TranslateModule.forRoot()],
-					declarations: [StarkAppFooterComponent],
-					providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-				})
-					/**
-					 * Compile template and css
-					 */
-					.compileComponents()
-			);
-		})
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
+				imports: [TranslateModule.forRoot()],
+				declarations: [StarkAppFooterComponent],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		)
 	);
 
 	// Inject module dependencies

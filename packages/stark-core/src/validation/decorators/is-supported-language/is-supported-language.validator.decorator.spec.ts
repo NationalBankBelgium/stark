@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { validateSync, ValidationError } from "class-validator";
 import { StarkIsSupportedLanguage } from "./is-supported-language.validator.decorator";
 import { starkIsSupportedLanguageValidatorName } from "../../validators/is-supported-language";

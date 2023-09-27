@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "extends": ["@nationalbankbelgium", "prettier"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "plugins": ["eslint-plugin-sonarjs"],
+      "extends": ["plugin:sonarjs/recommended"]
+    },
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "sonarjs/no-duplicate-string": "off"
+      }
+    }
+  ]
+}

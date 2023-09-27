@@ -1,0 +1,34 @@
+{
+  "root": true,
+  "extends": ["@nationalbankbelgium", "prettier"],
+  "ignorePatterns": ["src/assets/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "plugins": ["eslint-plugin-sonarjs"],
+      "extends": ["plugin:sonarjs/recommended"]
+    },
+    {
+      "files": ["*.ts"],
+      "excludedFiles": ["*.spec.ts"],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": ["app", "demo", "showcase", "stark"],
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": ["app", "demo", "showcase"],
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ]
+      }
+    }
+  ]
+}

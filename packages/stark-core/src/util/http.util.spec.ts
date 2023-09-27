@@ -53,7 +53,7 @@ describe("Stark HTTP helpers", () => {
 
 		it("with 'null'", () => {
 			const initial: Map<string, StarkQueryParam> = new Map();
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			initial.set("NULL", <any>null);
 			initial.set("something", "value");
 			const expectedString = "NULL=null&something=value";

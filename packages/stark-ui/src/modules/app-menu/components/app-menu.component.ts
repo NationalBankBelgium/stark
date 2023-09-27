@@ -36,6 +36,7 @@ export class StarkAppMenuComponent extends AbstractStarkUiComponent implements O
 	@Input()
 	public set menuConfig(menuConfig: StarkMenuConfig) {
 		this._menuConfig = menuConfig;
+		// eslint-disable-next-line no-prototype-builtins
 		this.hasSections = this._menuConfig.hasOwnProperty("menuSections");
 	}
 

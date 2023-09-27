@@ -8,6 +8,10 @@ import { starkAppExitStateName, starkAppInitStateName } from "./constants";
 
 /**
  * Configuration of the route state of the application
+ *
+ * @param $location - Service to interact with the browser's URL
+ * @param $transition$ - Transition between two states
+ * @param routingService - Stark Routing Service
  */
 export function resolveTargetRoute(
 	$location: Location,
@@ -23,7 +27,7 @@ export function resolveTargetRoute(
 		let targetState: StarkStateConfigWithParams | undefined = routingService.getStateConfigByUrlPath(targetUrl);
 
 		// skip any init/exit state
-		const initOrExitStateRegex: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+		const initOrExitStateRegex = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 
 		if (
 			targetState &&
@@ -45,15 +49,12 @@ export function resolveTargetRoute(
 	if (targetRoute && (<Function>targetRoute.state.$$state)().loadChildren) {
 		// so we call the needed function to lazy load the module
 		const moduleToLoad: ModuleTypeCallback = (<Function>targetRoute.state.$$state)().loadChildren;
-		const lazyLoadNgModule: (transition: Transition, stateObject: StateDeclaration) => Promise<LazyLoadResult> = loadNgModule(
-			moduleToLoad
-		);
+		const lazyLoadNgModule: (transition: Transition, stateObject: StateDeclaration) => Promise<LazyLoadResult> =
+			loadNgModule(moduleToLoad);
 
 		// once the module is loaded lazily, we search again for the right state and return the result
 		finalTargetRoute$ = from(lazyLoadNgModule($transition$, targetRoute.state)).pipe(
-			map((_lazyLoadResult: LazyLoadResult) => {
-				return getTargetStateByUrl(targetUrlPath);
-			})
+			map((_lazyLoadResult: LazyLoadResult) => getTargetStateByUrl(targetUrlPath))
 		);
 	}
 

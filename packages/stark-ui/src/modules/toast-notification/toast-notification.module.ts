@@ -24,6 +24,7 @@ export class StarkToastNotificationModule {
 	 * so the `forRoot()` should be called only by the `AppModule`.
 	 *
 	 * See {@link https://v12.angular.io/guide/singleton-services#the-forroot-pattern|Angular docs: The `forRoot()` pattern}
+	 * @param defaultToastNotificationOptions - `StarkToastNotificationOptions` object
 	 * @returns A module with providers
 	 */
 	public static forRoot(

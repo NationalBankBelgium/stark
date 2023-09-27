@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Component } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -60,7 +59,6 @@ describe("StarkShowOnPermissionDirective", () => {
 			expect(() => initializeComponentFixture()).toThrowError(/must contain 'roles'/);
 		});
 
-		/* tslint:disable-next-line:no-identical-functions */
 		it("should throw an error in case the given configuration object has no 'roles' property defined", () => {
 			const newTemplate: string = getTemplate("*starkShowOnPermission='{}'");
 

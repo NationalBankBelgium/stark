@@ -2,6 +2,7 @@ import { Component, HostBinding, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: "news",
 	templateUrl: "./news-page.component.html"
 })

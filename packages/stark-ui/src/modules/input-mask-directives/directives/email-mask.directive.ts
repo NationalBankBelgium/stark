@@ -15,7 +15,7 @@ const directiveName = "[starkEmailMask]";
  */
 export const STARK_EMAIL_MASK_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
-	// tslint:disable-next-line:no-forward-ref
+	// eslint-disable-next-line @angular-eslint/no-forward-ref
 	useExisting: forwardRef(() => StarkEmailMaskDirective),
 	multi: true
 };
@@ -59,12 +59,11 @@ export class StarkEmailMaskDirective extends MaskedInputDirective implements OnC
 	/**
 	 * Whether to display the email mask in the input field.
 	 */
-	/* tslint:disable:no-input-rename */
+	/* eslint-disable @angular-eslint/no-input-rename */
 	@Input("starkEmailMask")
 	public maskConfig = true; // enabled by default
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_maskConfig: BooleanInput;
 
 	/**
@@ -83,6 +82,7 @@ export class StarkEmailMaskDirective extends MaskedInputDirective implements OnC
 
 	/**
 	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
 	 */
 	public override ngOnChanges(changes: SimpleChanges): void {
 		this.textMaskConfig = this.normalizeMaskConfig(this.maskConfig);

@@ -7,6 +7,7 @@ export class PasswordValidator {
 		let valid = true;
 
 		for (const key in formGroup.controls) {
+			// eslint-disable-next-line no-prototype-builtins
 			if (formGroup.controls.hasOwnProperty(key)) {
 				const control: FormControl = <FormControl>formGroup.controls[key];
 
@@ -19,13 +20,12 @@ export class PasswordValidator {
 			}
 		}
 
-		/* tslint:disable-next-line:no-null-keyword */
+		/* eslint-disable-next-line no-null/no-null */
 		return valid ? null : { areEqual: true };
 	}
 }
 
+/* eslint-disable-next-line jsdoc/require-jsdoc */
 export function getConfirmPasswordValidator(formGroup: FormGroup): ValidatorFn {
-	return (): ValidationErrors | null => {
-		return PasswordValidator.areEqual(formGroup);
-	};
+	return (): ValidationErrors | null => PasswordValidator.areEqual(formGroup);
 }

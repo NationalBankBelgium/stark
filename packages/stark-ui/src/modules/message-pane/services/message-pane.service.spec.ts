@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs no-big-function no-duplicate-string max-union-size */
 import { BehaviorSubject, Observable, Observer } from "rxjs";
 
 import { Store } from "@ngrx/store";

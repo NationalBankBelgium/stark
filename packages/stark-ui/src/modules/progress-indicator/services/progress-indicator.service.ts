@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { select, Store } from "@ngrx/store";
 import { defer, Observable, of, Subject, throwError, timer } from "rxjs";
 import { map, mergeMap, retryWhen, switchMap, take, tap } from "rxjs/operators";
@@ -136,9 +135,9 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 			const topicShow$: Subject<string> = <Subject<string>>this.topicsShowMap$.get(topic);
 
 			composedHide$ = topicShow$.pipe(
-				switchMap(() => {
-					return hide$; // call the 'hide' logic after the 'show' finishes
-				}),
+				switchMap(
+					() => hide$ // call the 'hide' logic after the 'show' finishes
+				),
 				take(1)
 			); // unsubscribe from the 'show' in this chain (every call to the hide() method must listen only to one emission)
 		}

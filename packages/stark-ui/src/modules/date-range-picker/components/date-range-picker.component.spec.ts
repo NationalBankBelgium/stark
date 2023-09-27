@@ -1,4 +1,4 @@
-/* tslint:disable:no-null-keyword completed-docs component-max-inline-declarations no-big-function */
+/* eslint-disable no-null/no-null, @angular-eslint/component-max-inline-declarations */
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { Component, EventEmitter, ViewChild } from "@angular/core";
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
@@ -52,8 +52,8 @@ describe("DateRangePickerComponent", () => {
 	}
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkDateRangePickerComponent, TestModelComponent, TestFormGroupComponent],
 				imports: [
 					NoopAnimationsModule,
@@ -71,8 +71,8 @@ describe("DateRangePickerComponent", () => {
 					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
 					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	describe("uncontrolled", () => {

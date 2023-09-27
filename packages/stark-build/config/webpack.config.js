@@ -13,10 +13,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPl
 const StylelintPlugin = require("stylelint-webpack-plugin");
 const webpackMerge = require("webpack-merge").merge;
 const METADATA = require("./webpack-metadata").METADATA;
-
-const fixedTSLintConfig = buildUtils.getFixedTSLintConfig(
-	buildUtils.get(buildUtils.ANGULAR_APP_CONFIG.config, "architect.lint.options.tslintConfig", "tslint.json")
-);
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 // Dev custom config
 const webpackCustomConfig = require(helpers.root("config/webpack-custom-config.dev.json"));
@@ -88,29 +85,6 @@ module.exports = (config, options) => {
 		 *
 		 * See: https://webpack.js.org/configuration/module
 		 */
-		module: {
-			rules: [
-				/**
-				 * TSLint loader support for *.ts files
-				 * @see https://github.com/wbuchwalter/tslint-loader
-				 */
-				{
-					enforce: "pre",
-					test: /\.ts$/,
-					use: [
-						{
-							loader: "tslint-loader",
-							options: {
-								typeCheck: false, // FIXME enable type checking when it is improved in tslint-loader (https://github.com/wbuchwalter/tslint-loader/pull/114)
-								tsconfig: buildUtils.ANGULAR_APP_CONFIG.buildOptions.tsconfig || "tsconfig.json",
-								configFile: fixedTSLintConfig //FIXME use the configured tslint.json when type checking is enabled
-							}
-						}
-					],
-					exclude: [helpers.root("node_modules")]
-				}
-			]
-		},
 
 		/**
 		 * Add additional plugins to the compiler.
@@ -136,6 +110,10 @@ module.exports = (config, options) => {
 					ENV: JSON.stringify(METADATA.ENV),
 					HMR: METADATA.HMR
 				}
+			}),
+
+			new ESLintPlugin({
+				extensions: ["ts", "js"]
 			}),
 
 			/**

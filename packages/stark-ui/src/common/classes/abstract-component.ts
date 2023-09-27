@@ -7,7 +7,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
  * https://v12.angular.io/guide/migration-undecorated-classes#im-a-library-author-should-i-add-the-directive-decorator-to-base-classes
  */
 @Directive()
-// tslint:disable-next-line:directive-class-suffix
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export abstract class AbstractStarkUiComponent implements OnInit {
 	/**
 	 * Color theme

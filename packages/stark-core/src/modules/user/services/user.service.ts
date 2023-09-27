@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { validateSync } from "class-validator";

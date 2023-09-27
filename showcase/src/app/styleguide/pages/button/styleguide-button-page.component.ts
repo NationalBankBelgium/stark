@@ -5,7 +5,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 	selector: "demo-button",
 	templateUrl: "./styleguide-button-page.component.html",
 	styleUrls: ["./styleguide-button-page.component.scss"],
-	/* tslint:disable-next-line:use-component-view-encapsulation */
+	/* eslint-disable-next-line @angular-eslint/use-component-view-encapsulation */
 	encapsulation: ViewEncapsulation.None
 })
 export class StyleguideButtonPageComponent {

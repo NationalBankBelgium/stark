@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-unbound-method */
+/* eslint-disable @typescript-eslint/unbound-method */
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;
 import SpyObj = jasmine.SpyObj;
@@ -36,7 +36,6 @@ import { StarkHttpHeaders, StarkSortOrder } from "../constants";
 import { StarkHttpStatusCodes } from "../enumerators";
 import { StarkHttpSerializer, StarkHttpSerializerImpl } from "../serializer";
 
-/* tslint:disable:no-big-function no-duplicate-string max-union-size */
 describe("Service: StarkHttpService", () => {
 	let loggerMock: MockStarkLoggingService;
 	let mockSessionService: MockStarkSessionService;
@@ -443,7 +442,6 @@ describe("Service: StarkHttpService", () => {
 						expect(result.starkHttpStatusCode).toBe(expectedStatusCode);
 						assertResponseHeaders(result.starkHttpHeaders, httpHeaders);
 
-						// tslint:disable-next-line:prefer-switch
 						if (requestType === "getCollection" || requestType === "search") {
 							assertResponseData((<StarkCollectionResponseWrapper<MockResource>>result).data, [mockResourceWithEtag]);
 							assertCollectionMetadata((<StarkCollectionResponseWrapper<MockResource>>result).metadata, {
@@ -578,8 +576,8 @@ describe("Service: StarkHttpService", () => {
 			// this test is asynchronous due to the retry logic, so the test should be ended manually by calling the jasmine's done() function
 			it(
 				"on FAILURE ('" +
-				requestType +
-				"'), should retry the request before emitting the failure if the request retryCount option is set",
+					requestType +
+					"'), should retry the request before emitting the failure if the request retryCount option is set",
 				(done: DoneFn) => {
 					request.retryCount = 2;
 					let errorCounter = 0;
@@ -696,9 +694,8 @@ describe("Service: StarkHttpService", () => {
 							break;
 					}
 
-					const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> = httpService.executeSingleItemRequest(
-						request
-					);
+					const resultObs: Observable<StarkSingleItemResponseWrapper<MockResource>> =
+						httpService.executeSingleItemRequest(request);
 
 					resultObs.subscribe(
 						(result: StarkSingleItemResponseWrapper<MockResource>) => {
@@ -806,8 +803,8 @@ describe("Service: StarkHttpService", () => {
 
 			it(
 				"on SUCCESS ('" +
-				requestType +
-				"'), should log a warning in case there is no etag for a certain resource in the response metadata",
+					requestType +
+					"'), should log a warning in case there is no etag for a certain resource in the response metadata",
 				() => {
 					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 					const expectedEtags: { [uuid: string]: string } = {};
@@ -896,8 +893,8 @@ describe("Service: StarkHttpService", () => {
 
 			it(
 				"on SUCCESS ('" +
-				requestType +
-				"'), should log a warning in case an item in the items array is not an object so the etag property cannot be set",
+					requestType +
+					"'), should log a warning in case an item in the items array is not an object so the etag property cannot be set",
 				() => {
 					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 					const expectedEtags: { [uuid: string]: string } = {};
@@ -951,8 +948,8 @@ describe("Service: StarkHttpService", () => {
 
 			it(
 				"on SUCCESS ('" +
-				requestType +
-				"'), should log a warning in case an item in the items array has no uuid so it cannot search the correct etag for it",
+					requestType +
+					"'), should log a warning in case an item in the items array has no uuid so it cannot search the correct etag for it",
 				() => {
 					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 					const expectedEtags: { [uuid: string]: string } = {};
@@ -1033,8 +1030,8 @@ describe("Service: StarkHttpService", () => {
 
 			it(
 				"on SUCCESS ('" +
-				requestType +
-				"'), should deserialize 'as is' the custom metadata if any is returned in the response metadata",
+					requestType +
+					"'), should deserialize 'as is' the custom metadata if any is returned in the response metadata",
 				() => {
 					const expectedStatusCode: number = StarkHttpStatusCodes.HTTP_200_OK;
 					const expectedEtags: { [uuid: string]: string } = {};
@@ -1538,4 +1535,4 @@ class HttpServiceHelper<P extends StarkResource> extends StarkHttpServiceImpl<P>
 	}
 }
 
-/* tslint:enable */
+/* eslint-enable */

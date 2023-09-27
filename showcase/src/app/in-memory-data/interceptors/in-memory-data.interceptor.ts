@@ -81,13 +81,11 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 	}
 
 	protected interceptRequestPOST(request: HttpRequest<any>): HttpRequest<any> {
-		let modifiedRequest: HttpRequest<any>;
-
 		// add a unique Id to the new item(s) if they don't have any
 		const normalizedBody: any = cloneDeep(request.body);
 		this.deepSetUniqueId(normalizedBody, "id");
 
-		modifiedRequest = request.clone({
+		const modifiedRequest: HttpRequest<any> = request.clone({
 			body: normalizedBody
 		});
 
@@ -148,6 +146,7 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 				this.deepSetUniqueId(childItem, idProperty);
 			}
 		} else if (typeof item === "object") {
+			// eslint-disable-next-line no-prototype-builtins
 			if (!item.hasOwnProperty(idProperty)) {
 				item[idProperty] = uniqueId();
 			}
@@ -161,7 +160,7 @@ export class InMemoryDataHttpInterceptor implements HttpInterceptor {
 	protected getHostUrlParts(url: string): HostUrlParts {
 		// Regex to split all the parts of a URL
 		// https://snippets.aktagon.com/snippets/72-split-a-url-into-protocol-domain-port-and-uri-using-regular-expressions
-		const regexUrl: RegExp = /(https?:\/\/)?([^:^/]*)(:\d*)?(.*)?/;
+		const regexUrl = /(https?:\/\/)?([^:^/]*)(:\d*)?(.*)?/;
 		const matches: RegExpMatchArray = <RegExpMatchArray>url.match(regexUrl);
 
 		return {

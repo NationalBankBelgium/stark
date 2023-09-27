@@ -42,10 +42,9 @@ export type StarkDatePickerFilter = "OnlyWeekends" | "OnlyWeekdays" | ((date: Da
 export type StarkDatePickerMaskConfig = StarkTimestampMaskConfig | boolean;
 
 /**
- * Type expected by [StarkDatePickerComponent max]{@link StarkDatePickerComponent#max} and 
+ * Type expected by [StarkDatePickerComponent max]{@link StarkDatePickerComponent#max} and
  * [StarkDatePickerComponent min]{@link StarkDatePickerComponent#min} inputs.
  */
-// tslint:disable-next-line:no-null-undefined-union
 export type StarkDateInput = Date | moment.Moment | null | undefined;
 
 /**
@@ -86,7 +85,8 @@ const componentName = "stark-date-picker";
 })
 export class StarkDatePickerComponent
 	extends AbstractStarkUiComponent
-	implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date> {
+	implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, Validator, MatFormFieldControl<Date>
+{
 	/**
 	 * Part of {@link MatFormFieldControl} API
 	 * @ignore
@@ -129,8 +129,10 @@ export class StarkDatePickerComponent
 	public set dateFilter(value: StarkDatePickerFilter | undefined) {
 		this._dateFilter = value;
 		if (this._dateFilter === "OnlyWeekends") {
+			// eslint-disable-next-line @typescript-eslint/unbound-method
 			this._dateFilter = this.filterOnlyWeekends;
 		} else if (this._dateFilter === "OnlyWeekdays") {
+			// eslint-disable-next-line @typescript-eslint/unbound-method
 			this._dateFilter = this.filterOnlyWeekdays;
 		}
 	}
@@ -165,7 +167,7 @@ export class StarkDatePickerComponent
 				this.dateFormats.parse.dateInput instanceof Array ? this.dateFormats.parse.dateInput : [this.dateFormats.parse.dateInput];
 
 			const isValidParser: boolean = dateInputFormats.some((format: string) =>
-				// tslint:disable-next-line:no-non-null-assertion
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				moment("01-12-10", format).isSame(moment("01-12-10", this.dateMaskConfig!.format), "day")
 			);
 
@@ -183,7 +185,6 @@ export class StarkDatePickerComponent
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name no-null-undefined-union
 	public static ngAcceptInputType_dateMask: BooleanInput | StarkDatePickerMaskConfig;
 
 	/**
@@ -199,7 +200,6 @@ export class StarkDatePickerComponent
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_disabled: BooleanInput;
 
 	/**
@@ -216,7 +216,7 @@ export class StarkDatePickerComponent
 	@Input()
 	public set max(value: moment.Moment | null) {
 		if (value === undefined) {
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			this._max = null;
 		} else if (value instanceof Date) {
 			this._max = moment(value);
@@ -230,14 +230,13 @@ export class StarkDatePickerComponent
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_max: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	private _max: moment.Moment | null = null;
 
 	/**
@@ -248,7 +247,7 @@ export class StarkDatePickerComponent
 	@Input()
 	public set min(value: moment.Moment | null) {
 		if (value === undefined) {
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			this._min = null;
 		} else if (value instanceof Date) {
 			this._min = moment(value);
@@ -262,14 +261,13 @@ export class StarkDatePickerComponent
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_min: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	public _min: moment.Moment | null = null;
 
 	/**
@@ -321,7 +319,6 @@ export class StarkDatePickerComponent
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_required: BooleanInput;
 
 	/**
@@ -349,7 +346,7 @@ export class StarkDatePickerComponent
 	 * @ignore
 	 * @internal
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	private _value: Date | null = null;
 
 	/**
@@ -393,7 +390,7 @@ export class StarkDatePickerComponent
 	 * @ignore
 	 * @internal
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	public ngControl: NgControl | null = null;
 
 	/**
@@ -426,7 +423,9 @@ export class StarkDatePickerComponent
 		// 1) the user has interacted with it
 		// 2) the control is programmatically marked as 'touched' or 'dirty'
 		const newErrorState =
+			// eslint-disable-next-line no-null/no-null
 			this.ngControl !== null &&
+			// eslint-disable-next-line no-null/no-null
 			this.ngControl.control !== null &&
 			(this.pickerInputTouched || !!this.ngControl.touched || !!this.ngControl.dirty) &&
 			(!!this.ngControl.errors || !!this.pickerInput.validate(this.ngControl.control));
@@ -504,9 +503,10 @@ export class StarkDatePickerComponent
 	 */
 	public override ngOnInit(): void {
 		super.ngOnInit();
-		// tslint:disable-next-line:no-null-keyword
+		// eslint-disable-next-line no-null/no-null
 		this.ngControl = this.injector.get<NgControl>(NgControl, <any>null);
 
+		// eslint-disable-next-line no-null/no-null
 		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
 		}
@@ -536,8 +536,8 @@ export class StarkDatePickerComponent
 
 	/**
 	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
 	 */
-	// tslint:disable-next-line:cognitive-complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if ((changes["max"] || changes["min"]) && this.max && this.min && this.max.isSameOrBefore(this.min)) {
 			this.logger.error(
@@ -578,8 +578,8 @@ export class StarkDatePickerComponent
 	 * @internal
 	 * The registered callback function called when an input event occurs on the input element.
 	 */
-	private _onChange: (_: any) => void = (_: any) => {
-		/*noop*/
+	private _onChange: (_: any) => void = (_: any): void => {
+		/* noop*/
 	};
 
 	/**
@@ -587,8 +587,8 @@ export class StarkDatePickerComponent
 	 * @internal
 	 * The registered callback function called when a blur event occurs on the input element.
 	 */
-	private _onTouched: () => void = () => {
-		/*noop*/
+	private _onTouched: () => void = (): void => {
+		/* noop*/
 	};
 
 	/**
@@ -682,6 +682,7 @@ export class StarkDatePickerComponent
 	 * @returns Whether the date is filtered or not
 	 */
 	public dateFilterFnWrapper = (momentDate: moment.Moment | null): boolean => {
+		// eslint-disable-next-line no-null/no-null
 		if (momentDate === null) {
 			return false;
 		}
@@ -719,7 +720,7 @@ export class StarkDatePickerComponent
 	public onDateChange(event: MatDatepickerInputEvent<moment.Moment>): void {
 		this._onTouched();
 
-		// tslint:disable-next-line:no-null-keyword
+		// eslint-disable-next-line no-null/no-null
 		this.value = event.value ? event.value.toDate() : null;
 
 		const value: Date | undefined = this.value ? this.value : undefined;

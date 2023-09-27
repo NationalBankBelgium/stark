@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs no-duplicate-string no-identical-functions no-big-function */
 import { Component, DebugElement } from "@angular/core";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
@@ -55,10 +54,10 @@ describe("EmailMaskDirective", () => {
 
 	describe("uncontrolled", () => {
 		beforeEach(
-			waitForAsync(() => {
+			waitForAsync(() =>
 				// compile template and css
-				return TestBed.compileComponents();
-			})
+				TestBed.compileComponents()
+			)
 		);
 
 		beforeEach(() => {

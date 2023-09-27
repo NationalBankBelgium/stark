@@ -19,8 +19,8 @@ const reducer = createReducer<StarkSession, StarkSessionActions.Types>(
 
 /**
  * Definition of the `session` reducer function
- * @param state: the state of the reducer
- * @param action: the action to apply to the reducer
+ * @param state - the state of the reducer
+ * @param action - the action to apply to the reducer
  * @returns The new `StarkSession` state
  */
 export function sessionReducer(

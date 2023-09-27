@@ -4,7 +4,7 @@ import { Component, ViewEncapsulation } from "@angular/core";
 	selector: "demo-card",
 	styleUrls: ["./styleguide-card-page.component.scss"],
 	templateUrl: "./styleguide-card-page.component.html",
-	/* tslint:disable-next-line:use-component-view-encapsulation */
+	/* eslint-disable-next-line @angular-eslint/use-component-view-encapsulation */
 	encapsulation: ViewEncapsulation.None // used here to be able to customize the stark-full-width background color
 })
 export class StyleguideCardPageComponent {

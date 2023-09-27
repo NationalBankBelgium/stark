@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
@@ -17,22 +16,20 @@ describe("AppMenuComponent", () => {
 	 * async beforeEach
 	 */
 	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					declarations: [StarkAppMenuComponent, StarkAppMenuItemComponent],
-					imports: [MatIconModule, MatIconTestingModule, MatListModule, UIRouterModule],
-					providers: [
-						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-						{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-					]
-				})
-					/**
-					 * Compile template and css
-					 */
-					.compileComponents()
-			);
-		})
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
+				declarations: [StarkAppMenuComponent, StarkAppMenuItemComponent],
+				imports: [MatIconModule, MatIconTestingModule, MatListModule, UIRouterModule],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
+				]
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		)
 	);
 
 	/**

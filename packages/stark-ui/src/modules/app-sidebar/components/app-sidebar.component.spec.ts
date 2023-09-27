@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs */
 import { Subject } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -22,6 +21,7 @@ let _fakeBreakPointObservable: Subject<BreakpointState>;
 /**
  * Use this function to mock the screen resizing (breakpoint triggering)
  * {@link BreakpointObserver}
+ * @param breakPointState - The current state of a layout breakpoint.
  */
 function simulateBreakPointStateChange(breakPointState: BreakpointState): void {
 	_fakeBreakPointObservable.next(breakPointState);
@@ -54,7 +54,7 @@ describe("AppSidebarComponent", () => {
 				expect(matchCriteria).toEqual({});
 				mockNavigationTrigger = <() => void>callback;
 				return (): void => {
-					/*Do Nothing*/
+					/* Do Nothing*/
 				};
 			}
 		);
@@ -68,8 +68,8 @@ describe("AppSidebarComponent", () => {
 	});
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkAppSidebarComponent],
 				imports: [CommonModule, MatSidenavModule, NoopAnimationsModule],
 				providers: [
@@ -78,8 +78,8 @@ describe("AppSidebarComponent", () => {
 					{ provide: STARK_ROUTING_SERVICE, useValue: mockStarkRoutingService },
 					{ provide: BreakpointObserver, useValue: mockBreakPointObserver }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {
@@ -217,8 +217,6 @@ function screenSizeChangeHandlingTests(): void {
 			expect(component.closeSidenav).toHaveBeenCalledTimes(1);
 		});
 
-		// FIXME: this tslint disable flag is due to a bug in 'no-identical-functions' rule (https://github.com/SonarSource/SonarTS/issues/676). Remove it once it is solved
-		/*tslint:disable-next-line:no-identical-functions*/
 		it("left sidebar should not close when open with type 'regular'", () => {
 			spyOn(component, "closeSidenav");
 			component.appSidenavLeft.opened = true;
@@ -299,7 +297,6 @@ function navigationHandlingTests(): void {
 		});
 
 		// Function is duplicate, but in a different context (component.closeOnNavigate = false;)
-		/*tslint:disable-next-line:no-identical-functions*/
 		it("left sidebar should stay open on larger screen", () => {
 			mockBreakPointObserver.isMatched.and.callFake((value: string | string[]) => {
 				expect([[BREAKPOINT_STRING], BREAKPOINT_STRING]).toContain(value);

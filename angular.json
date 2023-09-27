@@ -25,10 +25,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["./packages/stark-core/tsconfig.lib.json", "./packages/stark-core/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": ["./packages/stark-core/**/*.ts", "./packages/stark-core/**/*.html"]
           }
         }
       }
@@ -85,10 +84,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["./packages/stark-ui/tsconfig.lib.json", "./packages/stark-ui/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": ["./packages/stark-ui/**/*.ts", "./packages/stark-ui/**/*.html"]
           }
         }
       }

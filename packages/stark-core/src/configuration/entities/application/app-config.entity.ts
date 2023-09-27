@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { IsBoolean, IsDefined, IsNotEmpty, IsPositive, IsString, IsUrl, Matches, Min, ValidateIf, validateSync } from "class-validator";
 import { autoserialize, autoserializeAs, Deserialize } from "cerialize";
 import { StarkApplicationConfig } from "./app-config.entity.intf";

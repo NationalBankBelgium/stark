@@ -1,4 +1,4 @@
-/* tslint:disable:no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { StoreModule } from "@ngrx/store";

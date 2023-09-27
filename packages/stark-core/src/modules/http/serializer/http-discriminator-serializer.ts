@@ -30,7 +30,7 @@ export class StarkHttpDiscriminatorSerializer<T extends StarkResource> extends S
 
 	/**
 	 * Get the serializable class to use for deserialization/serialization.
-	 * @param rawOrResource: the string or object which type we want to retrieve
+	 * @param rawOrResource - the string or object which type we want to retrieve
 	 */
 	public override getType(rawOrResource: T | object | string): StarkSerializable | undefined {
 		let obj: object;

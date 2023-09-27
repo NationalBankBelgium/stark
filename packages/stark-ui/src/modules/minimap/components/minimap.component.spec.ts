@@ -1,4 +1,3 @@
-// tslint:disable:completed-docs
 import { StarkMinimapComponent } from "./minimap.component";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
@@ -28,7 +27,7 @@ class TestHostComponent {
 	public mode?: string;
 
 	public onShowHideItem(_item: StarkMinimapItemProperties): void {
-		/*noop*/
+		/* noop*/
 	}
 }
 
@@ -49,8 +48,8 @@ describe("MinimapComponent", () => {
 	const visibleItems: string[] = ["column1", "column2"];
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [
 					FormsModule,
 					MatButtonModule,
@@ -64,8 +63,8 @@ describe("MinimapComponent", () => {
 				],
 				declarations: [StarkMinimapComponent, TestHostComponent],
 				providers: [TranslateService]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

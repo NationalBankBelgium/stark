@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs no-identical-functions */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, EventEmitter } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -29,7 +28,7 @@ class TestSearchFormComponent implements StarkSearchFormComponent<any> {
 	}
 
 	public resetSearchForm(_searchCriteria: any): void {
-		/*noop*/
+		/* noop*/
 	}
 }
 
@@ -53,8 +52,8 @@ describe("GenericSearchComponent", () => {
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [
 					CommonModule,
 					FormsModule,
@@ -70,8 +69,8 @@ describe("GenericSearchComponent", () => {
 				],
 				declarations: [StarkGenericSearchComponent, TestSearchFormComponent, TestHostComponent, BadTestHostComponent],
 				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	it("should throw error because `searchFormComponent` is not included", () => {

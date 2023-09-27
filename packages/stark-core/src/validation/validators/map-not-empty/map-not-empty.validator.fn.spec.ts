@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { starkMapNotEmpty } from "./map-not-empty.validator.fn";
 
 describe("Validator Function: StarkMapNotEmpty", () => {

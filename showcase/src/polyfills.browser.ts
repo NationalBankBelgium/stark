@@ -14,7 +14,8 @@
  * Learn more in https://angular.io/guide/browser-support
  */
 
-/***************************************************************************************************
+/**
+ * *************************************************************************************************
  * BROWSER POLYFILLS
  *
  * See: https://angular.io/guide/browser-support#optional-browser-features-to-polyfill
@@ -25,7 +26,7 @@
  *
  * Polyfill: https://github.com/zloirock/core-js
  */
-/* tslint:disable:no-import-side-effect */
+/* eslint-disable import/no-unassigned-import */
 // FIXME: remove the workaround added to the tsconfig.json to support core-js 3.0.0 with Angular CLI 7.x (https://github.com/angular/angular-cli/issues/13954#issuecomment-475452588)
 // it will be fixed most likely in Angular 8
 import "core-js/es";
@@ -62,22 +63,24 @@ import "hammerjs";
  */
 // import "web-animations-js";
 
-/***************************************************************************************************
+/**
+ * *************************************************************************************************
  * Zone JS is required by Angular itself.
  */
 import "zone.js";
 // async stack traces with zone.js included for dev
 // import 'zone.js/plugins/long-stack-trace-zone'
-/* tslint:enable */
+/* eslint-enable */
 
-/***************************************************************************************************
+/**
+ * *************************************************************************************************
  * APPLICATION IMPORTS
  */
 
-/* tslint:disable:no-all-duplicated-branches */
+/* eslint-disable sonarjs/no-all-duplicated-branches */
 if ("production" === ENV) {
 	// Production
 } else {
 	// Development
 }
-/* tslint:enable */
+/* eslint-enable */

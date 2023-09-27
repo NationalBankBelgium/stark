@@ -51,7 +51,7 @@ const reducer = createReducer<Map<string, StarkProgressIndicatorFullConfig>, Sta
 		// the new state will be calculated from the data coming in the actions
 		let state = cloneDeep(_state);
 		const topic = action.topic;
-		
+
 		if (state.has(topic)) {
 			const progressIndicatorConfig = cloneDeep(<StarkProgressIndicatorFullConfig>state.get(topic));
 			progressIndicatorConfig.visible = true;

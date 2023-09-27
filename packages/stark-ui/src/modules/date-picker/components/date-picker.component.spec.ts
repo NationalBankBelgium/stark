@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs component-max-inline-declarations no-identical-functions no-big-function */
+/* eslint-disable @angular-eslint/component-max-inline-declarations */
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { By } from "@angular/platform-browser";
 import { Component, ViewChild } from "@angular/core";
@@ -59,7 +59,7 @@ class TestHostComponent {
 	/**
 	 * Simulates the OnValueChanges event of the date-picker component
 	 * To be able to test the 'Changes' output
-	 * @param value: Date.
+	 * @param value - Date.
 	 */
 	public onValueChange(value: Date | undefined): void {
 		this.value = value;
@@ -105,8 +105,8 @@ describe("DatePickerComponent", () => {
 	let component: StarkDatePickerComponent;
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkDatePickerComponent, TestHostComponent, TestHostFormControlComponent],
 				imports: [
 					NoopAnimationsModule,
@@ -125,8 +125,8 @@ describe("DatePickerComponent", () => {
 					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
 					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	describe("MatFormFieldControl", () => {
@@ -414,7 +414,7 @@ describe("DatePickerComponent", () => {
 				hostFixture.detectChanges();
 				expect(typeof component.dateFilter).toBe("function");
 				if (typeof component.dateFilter === "function") {
-					/* tslint:disable-next-line:no-unbound-method */
+					/* eslint-disable-next-line @typescript-eslint/unbound-method */
 					expect(component.dateFilter).toBe(component.filterOnlyWeekdays);
 				}
 			});
@@ -424,7 +424,7 @@ describe("DatePickerComponent", () => {
 				hostFixture.detectChanges();
 				expect(typeof component.dateFilter).toBe("function");
 				if (typeof component.dateFilter === "function") {
-					/* tslint:disable-next-line:no-unbound-method */
+					/* eslint-disable-next-line @typescript-eslint/unbound-method */
 					expect(component.dateFilter).toBe(component.filterOnlyWeekends);
 				}
 			});
@@ -469,7 +469,7 @@ describe("DatePickerComponent", () => {
 				hostFixture.detectChanges();
 				hostComponent.formControl.valueChanges.subscribe(mockObserver);
 
-				/* tslint:disable-next-line:no-null-keyword */
+				/* eslint-disable-next-line no-null/no-null */
 				component.picker.select(<any>null); // set 'null' in the internal date picker
 				hostFixture.detectChanges();
 
@@ -630,7 +630,7 @@ describe("DatePickerComponent", () => {
 				spyOn(hostComponent, "onValueChange").and.callThrough();
 				component.dateChange.subscribe(mockObserver);
 
-				/* tslint:disable-next-line:no-null-keyword */
+				/* eslint-disable-next-line no-null/no-null */
 				component.picker.select(<any>null); // set 'null' in the internal date picker
 				hostFixture.detectChanges();
 

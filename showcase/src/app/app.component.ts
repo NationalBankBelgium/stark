@@ -31,7 +31,7 @@ import { APP_MENU_CONFIG } from "./app-menu.config";
  * Top Level Component
  */
 @Component({
-	selector: "app",
+	selector: "app-showcase",
 	templateUrl: "./app.component.html"
 })
 export class AppComponent implements OnInit {
@@ -47,7 +47,6 @@ export class AppComponent implements OnInit {
 	 */
 	public isMenuModeActive = false;
 
-	// tslint:disable:no-big-function
 	public constructor(
 		@Inject(STARK_APP_METADATA) public appMetadata: StarkApplicationMetadata,
 		@Inject(STARK_APP_SIDEBAR_SERVICE) public sidebarService: StarkAppSidebarService,
@@ -80,7 +79,7 @@ export class AppComponent implements OnInit {
 				// match any state except the ones that are children of starkAppInit/starkAppExit or the Ui-Router's root state
 				to: (state?: StateObject): boolean => {
 					if (state && typeof state.name !== "undefined") {
-						const regexInitExitStateName: RegExp = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
+						const regexInitExitStateName = new RegExp("(" + starkAppInitStateName + "|" + starkAppExitStateName + ")");
 						return !state.name.match(regexInitExitStateName) && !(state.abstract && state.name === "");
 					}
 

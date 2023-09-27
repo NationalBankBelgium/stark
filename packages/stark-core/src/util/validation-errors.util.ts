@@ -24,14 +24,14 @@ export class StarkValidationErrorsUtil {
 	 * @param validationErrors - Array containing validation results
 	 * @param errorMessagePrefix - (Optional) A prefix to be added to the generated string
 	 */
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	public static toString(validationErrors: ValidationError[], errorMessagePrefix?: string): string {
 		let validationMessage: string = errorMessagePrefix ? errorMessagePrefix + "\n" : "";
 
 		if (validationErrors instanceof Array) {
 			for (const error of validationErrors) {
 				for (const constraint in error.constraints) {
+					// eslint-disable-next-line no-prototype-builtins
 					if (error.constraints.hasOwnProperty(constraint)) {
 						validationMessage += "- " + error.constraints[constraint] + "\n";
 					}

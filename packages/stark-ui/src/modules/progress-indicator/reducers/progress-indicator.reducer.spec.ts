@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { progressIndicatorReducer } from "./progress-indicator.reducer";
 import { StarkProgressIndicatorFullConfig, StarkProgressIndicatorFullConfigImpl, StarkProgressIndicatorType } from "../entities";
 import { StarkProgressIndicatorActions } from "../actions";
@@ -23,7 +22,10 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			const config = mockProgressIndicator;
 			deepFreeze(config); // Enforce immutability
 
-			changedState = progressIndicatorReducer(initialState, StarkProgressIndicatorActions.register({progressIndicatorConfig: config}));
+			changedState = progressIndicatorReducer(
+				initialState,
+				StarkProgressIndicatorActions.register({ progressIndicatorConfig: config })
+			);
 			expect(changedState.size).toBe(1);
 			expect(changedState.get(mockProgressIndicator.topic)).toBe(mockProgressIndicator);
 		});
@@ -33,7 +35,10 @@ describe("Reducer: ProgressIndicatorReducer", () => {
 			deepFreeze(config); // Enforce immutability
 
 			// Send the `StarkProgressIndicatorActions.register` action to the progressIndicatorReducer
-			changedState = progressIndicatorReducer(<any>undefined, StarkProgressIndicatorActions.register({progressIndicatorConfig: config}));
+			changedState = progressIndicatorReducer(
+				<any>undefined,
+				StarkProgressIndicatorActions.register({ progressIndicatorConfig: config })
+			);
 
 			expect(changedState.size).toBe(1);
 			expect(changedState.get(mockProgressIndicator.topic)).toBe(mockProgressIndicator);

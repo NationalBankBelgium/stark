@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs */
 import { fakeAsync, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { Component, ModuleWithProviders } from "@angular/core";
 import { OverlayContainer } from "@angular/cdk/overlay";
@@ -45,8 +44,8 @@ describe("SessionUiModule", () => {
 	});
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [HomeComponent],
 				imports: [routerModule, EffectsModule.forRoot([]), TranslateModule.forRoot(), StarkSessionUiModule.forRoot()],
 				providers: [
@@ -64,8 +63,8 @@ describe("SessionUiModule", () => {
 						useValue: new MockStarkSessionService()
 					}
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	// Inject module dependencies
@@ -98,9 +97,7 @@ describe("SessionUiModule", () => {
 
 							return $state.go(starkSessionExpiredStateName);
 						}),
-						catchError((error: any) => {
-							return throwError(`currentState ${error}`);
-						})
+						catchError((error: any) => throwError(`currentState ${error}`))
 					)
 					.subscribe(
 						(enteredState: StateObject) => {
@@ -130,9 +127,7 @@ describe("SessionUiModule", () => {
 
 							return $state.go(starkSessionLogoutStateName);
 						}),
-						catchError((error: any) => {
-							return throwError(`currentState ${error}`);
-						})
+						catchError((error: any) => throwError(`currentState ${error}`))
 					)
 					.subscribe(
 						(enteredState: StateObject) => {

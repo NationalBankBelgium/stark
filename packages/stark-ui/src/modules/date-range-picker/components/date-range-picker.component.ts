@@ -1,4 +1,4 @@
-/* tslint:disable:no-null-keyword */
+/* eslint-disable no-null/no-null */
 import {
 	ChangeDetectorRef,
 	Component,
@@ -106,7 +106,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	@Input()
 	public set startMinDate(value: moment.Moment | null) {
 		if (value === undefined) {
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			this._startMinDate = null;
 		} else if (value instanceof Date) {
 			this._startMinDate = moment(value);
@@ -120,14 +120,13 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_startMinDate: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	private _startMinDate: moment.Moment | null = null;
 
 	/**
@@ -136,7 +135,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	@Input()
 	public set startMaxDate(value: moment.Moment | null) {
 		if (value === undefined) {
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			this._startMaxDate = null;
 		} else if (value instanceof Date) {
 			this._startMaxDate = moment(value);
@@ -150,14 +149,13 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_startMaxDate: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	private _startMaxDate: moment.Moment | null = null;
 
 	/**
@@ -205,7 +203,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	@Input()
 	public set endMinDate(value: moment.Moment | null) {
 		if (value === undefined) {
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			this._endMinDate = null;
 		} else if (value instanceof Date) {
 			this._endMinDate = moment(value);
@@ -216,18 +214,17 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 
 	public get endMinDate(): moment.Moment | null {
 		// use the startDate when defined to provide better user experience :)
-		return !!this.startDate ? moment(this.startDate) : this._endMinDate;
+		return this.startDate ? moment(this.startDate) : this._endMinDate;
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_endMinDate: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	private _endMinDate: moment.Moment | null = null;
 
 	/**
@@ -236,7 +233,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	@Input()
 	public set endMaxDate(value: moment.Moment | null) {
 		if (value === undefined) {
-			// tslint:disable-next-line:no-null-keyword
+			// eslint-disable-next-line no-null/no-null
 			this._endMaxDate = null;
 		} else if (value instanceof Date) {
 			this._endMaxDate = moment(value);
@@ -250,14 +247,13 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	}
 
 	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_endMaxDate: StarkDateInput;
 
 	/**
 	 * @ignore
 	 * Angular expects a Moment or null value.
 	 */
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	private _endMaxDate: moment.Moment | null = null;
 
 	/**
@@ -308,7 +304,6 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	private _dateMask?: StarkDatePickerMaskConfig;
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name no-null-undefined-union
 	public static ngAcceptInputType_dateMask: BooleanInput | StarkDatePickerMaskConfig;
 
 	/**
@@ -359,7 +354,6 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_required: BooleanInput;
 
 	/**
@@ -404,7 +398,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * The registered callback function called when a blur event occurs on the input element.
 	 */
 	private _onTouched: () => void = () => {
-		/*noop*/
+		/* noop*/
 	};
 
 	/**
@@ -413,7 +407,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * The registered callback function called when an input event occurs on the input element.
 	 */
 	private _onChange: (_dateRange: StarkDateRangePickerEvent) => void = (_: any) => {
-		/*noop*/
+		/* noop*/
 	};
 
 	/**
@@ -432,21 +426,18 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * @ignore
 	 * @internal
 	 */
-	private _startBeforeEndValidator: ValidatorFn = ({ value }) => {
-		return value instanceof Date && this.endDate instanceof Date && value.getTime() > this.endDate.getTime()
-			? { startBeforeEnd: true }
-			: null;
-	};
+
+	private _startBeforeEndValidator: ValidatorFn = ({ value }) =>
+		value instanceof Date && this.endDate instanceof Date && value.getTime() > this.endDate.getTime() ? { startBeforeEnd: true } : null;
 
 	/**
 	 * @ignore
 	 * @internal
 	 */
-	private _endAfterStartValidator: ValidatorFn = ({ value }) => {
-		return value instanceof Date && this.startDate instanceof Date && value.getTime() < this.startDate.getTime()
+	private _endAfterStartValidator: ValidatorFn = ({ value }) =>
+		value instanceof Date && this.startDate instanceof Date && value.getTime() < this.startDate.getTime()
 			? { endAfterStart: true }
 			: null;
-	};
 
 	/**
 	 * @ignore

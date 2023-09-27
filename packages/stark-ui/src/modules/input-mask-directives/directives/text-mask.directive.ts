@@ -13,7 +13,7 @@ const directiveName = "[starkTextMask]";
  */
 export const STARK_TEXT_MASK_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
-	// tslint:disable-next-line:no-forward-ref
+	// eslint-disable-next-line @angular-eslint/no-forward-ref
 	useExisting: forwardRef(() => StarkTextMaskDirective),
 	multi: true
 };
@@ -51,7 +51,7 @@ export class StarkTextMaskDirective extends MaskedInputDirective implements OnCh
 	/**
 	 * Configuration object for the mask to be displayed in the input field.
 	 */
-	/* tslint:disable:no-input-rename */
+	/* eslint-disable @angular-eslint/no-input-rename */
 	@Input("starkTextMask")
 	public maskConfig: StarkTextMaskConfig = { mask: false };
 
@@ -88,6 +88,7 @@ export class StarkTextMaskDirective extends MaskedInputDirective implements OnCh
 
 	/**
 	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
 	 */
 	public override ngOnChanges(changes: SimpleChanges): void {
 		this.textMaskConfig = this.normalizeMaskConfig(this.maskConfig);

@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs*/
 import { starkIsNIN } from "./is-nin.validator.fn";
 
 describe("Validator Function: StarkIsNIN", () => {

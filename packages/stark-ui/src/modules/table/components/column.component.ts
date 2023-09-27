@@ -109,7 +109,6 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_filterable: BooleanInput;
 
 	/**
@@ -143,7 +142,6 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		return this._headerLabel || this.name;
 	}
 
-	// tslint:disable-next-line:variable-name prefer-optional
 	public static ngAcceptInputType_headerLabel: string | undefined;
 
 	/**
@@ -195,7 +193,6 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		this._filterPosition = value || "below";
 	}
 
-	// tslint:disable-next-line:variable-name prefer-optional
 	public static ngAcceptInputType_filterPosition: MenuPositionY | undefined;
 
 	/**
@@ -210,7 +207,6 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	@Input()
 	public sortPriority = 100;
 
-	// tslint:disable-next-line:variable-name prefer-optional
 	public static ngAcceptInputType_sortPriority: number | undefined;
 
 	/**
@@ -228,7 +224,6 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_visible: BooleanInput;
 
 	/**
@@ -263,7 +258,6 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	}
 
 	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
-	// tslint:disable-next-line:variable-name
 	public static ngAcceptInputType_stickyEnd: BooleanInput;
 
 	/**
@@ -300,7 +294,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Reference to the transcluded template in this component via the ngTemplateOutlet
 	 */
 	@ContentChild(TemplateRef, { static: true })
-	// tslint:disable-next-line:no-null-keyword
+	// eslint-disable-next-line no-null/no-null
 	public columnTemplate: TemplateRef<object> | null = null;
 
 	/**
@@ -314,7 +308,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
-	// tslint:disable-next-line:unnecessary-constructor
+	// eslint-disable-next-line no-useless-constructor
 	public constructor(renderer: Renderer2, elementRef: ElementRef) {
 		super(renderer, elementRef);
 	}
@@ -326,6 +320,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		super.ngOnInit();
 
 		this._filterFormCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((value?: string | null) => {
+			// eslint-disable-next-line no-null/no-null
 			this.filterValue = value === null ? undefined : value;
 			this.filterChanged.emit({
 				filterValue: this.filterValue,
@@ -336,6 +331,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 
 	/**
 	 * Component lifecycle hook
+	 * @param simpleChanges - Contains the changed properties
 	 */
 	public ngOnChanges(simpleChanges: SimpleChanges): void {
 		if (
@@ -363,6 +359,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 		}
 
 		// ensure we always return undefined instead of null
+		// eslint-disable-next-line no-null/no-null
 		return rawValue !== null ? rawValue : undefined;
 	}
 

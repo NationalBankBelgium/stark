@@ -1,4 +1,4 @@
-/* tslint:disable:completed-docs no-big-function no-lifecycle-call */
+/* eslint-disable @angular-eslint/no-lifecycle-call */
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
 import { Component, ComponentFactoryResolver } from "@angular/core";
@@ -73,8 +73,8 @@ describe("PromptDialogComponent", () => {
 	}
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [TestHostComponent, StarkPromptDialogComponent],
 				imports: [
 					CommonModule,
@@ -91,8 +91,8 @@ describe("PromptDialogComponent", () => {
 					// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
 					set: { entryComponents: [StarkPromptDialogComponent] }
 				})
-				.compileComponents();
-		})
+				.compileComponents()
+		)
 	);
 
 	beforeEach(inject(

@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs*/
 import { Deserialize, Serialize } from "cerialize";
 import { Observable, throwError, timer } from "rxjs";
 // FIXME Adapt mergeMap code --> See: https://github.com/ReactiveX/rxjs/blob/6.x/docs_app/content/guide/v6/migration.md#howto-result-selector-migration
@@ -195,7 +194,6 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 		// serialize returns a pre-stringified json object, Angular will generate a string out of it
 		const requestData: string | object = this.serialize(<P>request.item, request);
 
-		// tslint:disable-next-line:strict-comparisons
 		if (request.requestType === StarkHttpRequestType.UPDATE_IDEMPOTENT) {
 			return this.httpClient.put<P>(requestUrl, requestData, {
 				params: StarkHttpUtil.convertStarkQueryParamsIntoHttpParams(request.queryParameters),
@@ -291,14 +289,12 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 
 				return new StarkSingleItemResponseWrapperImpl<P>(result.status, httpResponseHeaders, resource);
 			}),
-			catchError((result: HttpErrorResponse) => {
-				return this.createHttpErrorWrapper(result, meaningfulError);
-			})
+			catchError((result: HttpErrorResponse) => this.createHttpErrorWrapper(result, meaningfulError))
 		);
 	}
 
-	// FIXME: re-enable this TSLINT rule and refactor this function to reduce its cognitive complexity
-	// tslint:disable-next-line:cognitive-complexity
+	// FIXME: re-enable this ESLint rule and refactor this function to reduce its cognitive complexity
+	// eslint-disable-next-line sonarjs/cognitive-complexity
 	private getCollectionResponseWrapperObservable(
 		httpResponse$: Observable<HttpResponse<StarkHttpRawCollectionResponseData<P>>>,
 		request: StarkHttpRequest<P>
@@ -357,9 +353,7 @@ export class StarkHttpServiceImpl<P extends StarkResource> implements StarkHttpS
 					Deserialize((<StarkHttpRawCollectionResponseData<P>>result.body).metadata, StarkCollectionMetadataImpl)
 				);
 			}),
-			catchError((result: HttpErrorResponse) => {
-				return this.createHttpErrorWrapper(result, meaningfulError);
-			})
+			catchError((result: HttpErrorResponse) => this.createHttpErrorWrapper(result, meaningfulError))
 		);
 	}
 

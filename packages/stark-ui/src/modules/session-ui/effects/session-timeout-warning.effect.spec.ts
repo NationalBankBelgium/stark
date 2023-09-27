@@ -1,4 +1,3 @@
-/*tslint:disable:completed-docs no-big-function*/
 import { Observable, Observer, ReplaySubject, Subject } from "rxjs";
 import { TestBed, waitForAsync } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -24,8 +23,8 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 	let actions: Observable<any>;
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				imports: [NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot(), MatButtonModule],
 				providers: [
 					StarkSessionTimeoutWarningDialogEffects,
@@ -39,8 +38,8 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 					{ provide: STARK_SESSION_SERVICE, useFactory: (): MockStarkSessionService => new MockStarkSessionService() },
 					{ provide: STARK_SESSION_UI_CONFIG, useValue: new StarkSessionUiConfig() }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

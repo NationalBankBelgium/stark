@@ -123,7 +123,7 @@ We need great software developers like you! https://jobs.nbb.be
 	 * Reference: https://github.com/PatrickJS/angular-hmr
 	 * @ignore
 	 */
-	protected bootstrapHmr: Function = (module: any, bootstrap: () => Promise<NgModuleRef<any>>) => {
+	protected bootstrapHmr: Function = (module: any, bootstrap: () => Promise<NgModuleRef<any>>): void => {
 		if (ENV === "development") {
 			console.log("Bootstrapping HMR");
 			let ngModule: NgModuleRef<any>;
@@ -161,6 +161,7 @@ We need great software developers like you! https://jobs.nbb.be
 			// Ensure that we get detailed stack tracks during development (useful with node & Webpack)
 			// Reference: https://stackoverflow.com/questions/7697038/more-than-10-lines-in-a-node-js-stack-error
 			Error.stackTraceLimit = Infinity;
+			// eslint-disable-next-line import/no-unassigned-import
 			require("zone.js/plugins/long-stack-trace-zone");
 
 			// Enable Angular debug tools in the dev console

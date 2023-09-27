@@ -1,4 +1,3 @@
-/* tslint:disable:completed-docs */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
@@ -20,8 +19,8 @@ describe("SessionExpiredPageComponent", () => {
 	};
 
 	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
+		waitForAsync(() =>
+			TestBed.configureTestingModule({
 				declarations: [StarkSessionCardComponent, StarkSessionExpiredPageComponent],
 				imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
 				providers: [
@@ -29,8 +28,8 @@ describe("SessionExpiredPageComponent", () => {
 					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
 					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
 				]
-			}).compileComponents();
-		})
+			}).compileComponents()
+		)
 	);
 
 	beforeEach(() => {

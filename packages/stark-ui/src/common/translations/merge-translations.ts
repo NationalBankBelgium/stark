@@ -12,7 +12,7 @@ import { commonUiTranslations } from "./common-translations";
  * @param translateService - The `TranslateService` instance of the application.
  * @param localesToMerge - A list of StarkLocales that contain the translations for a specific language
  *
- * @example:
+ * @example
  *   mergeTranslations(this.translateService, english, french, dutch);
  */
 export function mergeUiTranslations(translateService: TranslateService, ...localesToMerge: StarkLocale[]): void {

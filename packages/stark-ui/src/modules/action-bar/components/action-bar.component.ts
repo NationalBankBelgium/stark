@@ -75,11 +75,7 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
-	public constructor(
-		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
-		renderer: Renderer2,
-		elementRef: ElementRef
-	) {
+	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, renderer: Renderer2, elementRef: ElementRef) {
 		super(renderer, elementRef);
 	}
 
@@ -100,6 +96,8 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 
 	/**
 	 * Action onClick handler
+	 * @param action - {@link StarkAction} object
+	 * @param $event - The handled event
 	 */
 	public onClick(action: StarkAction, $event: Event): void {
 		if ($event) {
@@ -123,7 +121,7 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 */
 	public getActionIcon(action: StarkAction): string {
 		if (!!action.iconSwitchFunction && action.iconSwitchFunction()) {
-			return <string> action.iconActivated;
+			return <string>action.iconActivated;
 		}
 		return action.icon;
 	}
@@ -135,7 +133,7 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 */
 	public getActionLabel(action: StarkAction): string {
 		if (!!action.labelSwitchFunction && action.labelSwitchFunction()) {
-			return <string> action.labelActivated;
+			return <string>action.labelActivated;
 		}
 		return action.label;
 	}

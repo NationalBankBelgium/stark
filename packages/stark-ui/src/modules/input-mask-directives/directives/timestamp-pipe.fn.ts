@@ -6,7 +6,6 @@ import { PipeFunction, PipeResultObject } from "text-mask-core";
  * Creates a PipeFunction to be used with the {@link StarkTimestampMaskDirective} to enforce an specific timestamp format.
  * @param timestampFormat - Timestamp format to be enforced by the pipe function to be created
  */
-// tslint:disable-next-line:cognitive-complexity
 export function createTimestampPipe(timestampFormat: string = "DD-MM-YYYY HH:mm:ss"): PipeFunction {
 	const dateFormatArray: string[] = timestampFormat.split(/[^DMYHms]+/);
 
@@ -46,11 +45,8 @@ export function createTimestampPipe(timestampFormat: string = "DD-MM-YYYY HH:mm:
 		// MomentJs gives always false for input 31, but it depends on the month
 		// so we say it is always true
 		// if 31 is a month or year or hour than we couldn't even type the 3
-		if (inputValue === "31") {
-			skipValidation = true;
-
-			// 29 february must be checked after we have typed the year if there is a year in the format
-		} else if (isLeapDay(inputValue, partialFormat, timestampFormat)) {
+		// 29 february must be checked after we have typed the year if there is a year in the format
+		if (inputValue === "31" || isLeapDay(inputValue, partialFormat, timestampFormat)) {
 			skipValidation = true;
 		}
 
