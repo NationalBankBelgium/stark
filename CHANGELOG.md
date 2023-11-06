@@ -1,3 +1,12 @@
+## [10.3.3](https://github.com/nationalbankbelgium/stark/compare/10.3.2...10.3.3) (2023-11-06)
+
+
+### Bug Fixes
+
+* **stark-core:** enable correlation-id generation when `loggingFlushDisabled == true` ([1522104](https://github.com/nationalbankbelgium/stark/commit/1522104c863b413da729671d5d155858e5440fbc)), closes [#3620](https://github.com/nationalbankbelgium/stark/issues/3620)
+
+
+
 ## [10.3.2](https://github.com/nationalbankbelgium/stark/compare/10.3.1...10.3.2) (2023-04-18)
 
 
