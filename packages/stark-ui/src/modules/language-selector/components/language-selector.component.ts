@@ -22,7 +22,7 @@ import {
 	StarkLoggingService,
 	StarkSessionService
 } from "@nationalbankbelgium/stark-core";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 
 /**
  * @ignore

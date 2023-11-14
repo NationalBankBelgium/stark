@@ -1,2 +1,1 @@
-export * from "./restrict-input-directive/directives";
-export * from "./restrict-input-directive/restrict-input-directive.module";
+export * from "./restrict-input-directive/public_api";

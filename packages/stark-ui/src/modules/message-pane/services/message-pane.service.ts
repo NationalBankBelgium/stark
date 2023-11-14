@@ -5,12 +5,10 @@ import { Inject, Injectable } from "@angular/core";
 import { StarkMessagePaneService, starkMessagePaneServiceName } from "./message-pane.service.intf";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
-import { StarkMessage, StarkMessageImpl } from "../../../common/message";
-import { StarkMessageCollection } from "../entities";
+import { StarkMessage, StarkMessageCollection, StarkUIApplicationState, StarkMessageImpl } from "@nationalbankbelgium/stark-ui/src/common";
 
 import { StarkMessagePaneActions } from "../actions";
 
-import { StarkUIApplicationState } from "../../../common/store";
 import { selectStarkMessages } from "../reducers";
 
 /**

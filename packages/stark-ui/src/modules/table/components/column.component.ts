@@ -14,6 +14,7 @@ import {
 	ViewChild,
 	ViewEncapsulation
 } from "@angular/core";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { FormControl } from "@angular/forms";
 import { MenuPositionY } from "@angular/material/menu";
@@ -21,7 +22,6 @@ import { MatColumnDef } from "@angular/material/table";
 import { distinctUntilChanged } from "rxjs/operators";
 import isEqual from "lodash-es/isEqual";
 import get from "lodash-es/get";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
 import {
 	StarkColumnCellClickedOutput,
 	StarkColumnFilterChangedOutput,

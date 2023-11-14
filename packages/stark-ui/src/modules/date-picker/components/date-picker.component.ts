@@ -27,8 +27,8 @@ import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
 import { Subject, Subscription } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { isStarkTimestampMaskConfig, StarkTimestampMaskConfig } from "../../input-mask-directives/directives";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { isStarkTimestampMaskConfig, StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui/src/modules/input-mask-directives";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import isEqual from "lodash-es/isEqual";
 
 /**

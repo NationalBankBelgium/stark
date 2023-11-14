@@ -1,2 +1,1 @@
-export * from "./minimap/minimap.module";
-export * from "./minimap/components";
+export * from "./minimap/public_api";

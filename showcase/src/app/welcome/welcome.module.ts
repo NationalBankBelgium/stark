@@ -5,16 +5,11 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { NgxFormErrorsModule, NgxFormErrorsMessageService } from "@nationalbankbelgium/ngx-form-errors";
 import { SharedModule } from "../shared";
-import {
-	GettingStartedPageComponent,
-	HomePageComponent,
-	NewsPageComponent,
-	NoContentPageComponent,
-	ReactiveFormErrorsPageComponent
-} from "./pages";
+import { GettingStartedPageComponent, NewsPageComponent, ReactiveFormErrorsPageComponent } from "./pages";
 import { CardComponent, TranslatedFormErrorComponent } from "./pages/reactive-form-errors/components";
 import { NewsItemComponent } from "./components";
 import { NEWS_STATES } from "./routes";
+import { ExampleViewerModule } from "../example-viewer";
 
 @NgModule({
 	imports: [
@@ -22,6 +17,7 @@ import { NEWS_STATES } from "./routes";
 			states: NEWS_STATES
 		}),
 		SharedModule,
+		ExampleViewerModule,
 		MatDividerModule,
 		MatInputModule,
 		MatFormFieldModule,
@@ -29,22 +25,13 @@ import { NEWS_STATES } from "./routes";
 	],
 	declarations: [
 		GettingStartedPageComponent,
-		HomePageComponent,
-		NoContentPageComponent,
 		NewsPageComponent,
 		NewsItemComponent,
 		ReactiveFormErrorsPageComponent,
 		TranslatedFormErrorComponent,
 		CardComponent
 	],
-	exports: [
-		GettingStartedPageComponent,
-		HomePageComponent,
-		NoContentPageComponent,
-		NewsPageComponent,
-		NewsItemComponent,
-		ReactiveFormErrorsPageComponent
-	],
+	exports: [GettingStartedPageComponent, NewsPageComponent, NewsItemComponent, ReactiveFormErrorsPageComponent],
 	entryComponents: [TranslatedFormErrorComponent]
 })
 export class WelcomeModule {

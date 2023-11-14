@@ -1,4 +1,4 @@
-import { StarkActionBarButtonColor } from "../../action-bar/components";
+import { StarkActionBarButtonColor } from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
 
 /**
  * Predefined colors for form buttons

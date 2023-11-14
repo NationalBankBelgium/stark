@@ -18,7 +18,7 @@ import {
 	MockStarkUserService
 } from "@nationalbankbelgium/stark-core/testing";
 import { TranslateModule } from "@ngx-translate/core";
-import { StarkAppLogoModule } from "../../../app-logo";
+import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui/src/modules/app-logo";
 import { StarkSessionCardComponent } from "../../components/session-card/session-card.component";
 import { StarkLoginPageComponent } from "./login-page.component";
 

@@ -1,4 +1,4 @@
-import { StarkActionBarConfig } from "../../action-bar/components";
+import { StarkActionBarConfig } from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
 
 /**
  * StarkTableRowActions interface

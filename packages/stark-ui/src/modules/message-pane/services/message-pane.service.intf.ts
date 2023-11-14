@@ -1,7 +1,6 @@
 import { Observable } from "rxjs";
 import { InjectionToken } from "@angular/core";
-import { StarkMessage } from "../../../common/message";
-import { StarkMessageCollection } from "../entities";
+import { StarkMessage, StarkMessageCollection } from "@nationalbankbelgium/stark-ui/src/common";
 
 /**
  * @ignore

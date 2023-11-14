@@ -22,7 +22,7 @@ import "prismjs/components/prism-css-extras.min.js";
 import "prismjs/components/prism-scss.min.js";
 /* eslint-enable */
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 
 /**
  * @ignore

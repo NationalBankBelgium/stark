@@ -4,7 +4,7 @@ import { StarkProgressIndicatorActions } from "../actions";
 import { StarkProgressIndicatorFullConfig, StarkProgressIndicatorType } from "../entities";
 import { StarkProgressIndicatorServiceImpl } from "../services";
 import { progressIndicatorReducer } from "../reducers";
-import { StarkUIApplicationState } from "../../../common/store";
+import { StarkUIApplicationState } from "@nationalbankbelgium/stark-ui/src/common";
 import Spy = jasmine.Spy;
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { TestBed } from "@angular/core/testing";

@@ -1,4 +1,4 @@
-import { StarkMessage } from "../../../common/message";
+import { StarkMessage } from "@nationalbankbelgium/stark-ui/src/common";
 
 /**
  * Stark Toast Notification Message Interface

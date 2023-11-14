@@ -19,9 +19,9 @@ import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE, StarkLocale } from "@nati
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkRouteSearchComponent } from "./route-search.component";
 import { StarkRouteSearchEntry } from "../components";
-import { StarkMenuConfig, StarkMenuGroup } from "../../app-menu/components";
+import { StarkMenuConfig, StarkMenuGroup } from "@nationalbankbelgium/stark-ui/src/modules/app-menu";
 import { of, throwError } from "rxjs";
-import { mergeUiTranslations } from "../../../common/translations";
+import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 
 @Component({
 	selector: `host-component`,

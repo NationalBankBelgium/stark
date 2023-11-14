@@ -1,2 +1,1 @@
-export * from "./app-footer/app-footer.module";
-export * from "./app-footer/components";
+export * from "./app-footer/public_api";

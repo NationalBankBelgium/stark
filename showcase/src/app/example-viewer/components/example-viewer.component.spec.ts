@@ -12,9 +12,9 @@ import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankb
 import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 
 import { ExampleFile, ExampleViewerComponent } from "./example-viewer.component";
-import { FileService } from "../../services";
 import SpyObj = jasmine.SpyObj;
 import Spy = jasmine.Spy;
+import { FileService } from "../services";
 
 describe("ExampleViewerComponent", () => {
 	@Component({

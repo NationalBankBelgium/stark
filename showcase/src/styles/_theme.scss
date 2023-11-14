@@ -9,10 +9,10 @@ Use the local variables file first to set the correct variables, see:
 @use "~@angular/material" as mat;
 @use "~@nationalbankbelgium/stark-ui" as stark-ui;
 @use "../app/app.component-theme";
-@use "../app/shared/components/example-viewer/example-viewer-theme";
+@use "../app/example-viewer/components/example-viewer-theme";
 @use "../app/shared/components/table-of-contents/table-of-contents-theme";
 @use "../app/welcome/pages/getting-started/getting-started-page-theme";
-@use "../app/welcome/pages/home/home-page-theme";
+@use "../app/home/pages/home/home-page-theme";
 @use "../app/welcome/pages/news/news-page-theme";
 @use "../app/welcome/components/news-item/news-item-theme";
 @use "../app/styleguide/pages/typography/styleguide-typography-page-theme";

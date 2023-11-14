@@ -1,2 +1,1 @@
-export * from "./app-menu/app-menu.module";
-export * from "./app-menu/components";
+export * from "./app-menu/public_api";

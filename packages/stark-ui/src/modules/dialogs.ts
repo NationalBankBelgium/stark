@@ -1,2 +1,1 @@
-export * from "./dialogs/dialogs.module";
-export * from "./dialogs/components";
+export * from "./dialogs/public_api";

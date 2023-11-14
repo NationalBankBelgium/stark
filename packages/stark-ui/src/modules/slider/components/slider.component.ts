@@ -16,9 +16,9 @@ import {
 } from "@angular/core";
 import * as noUiSliderLibrary from "nouislider";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkDOMUtil } from "../../../util/dom";
+import { StarkDOMUtil } from "@nationalbankbelgium/stark-ui/src/util";
 import { StarkSliderConfig } from "./slider-config.intf";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 
 /**
  * @ignore

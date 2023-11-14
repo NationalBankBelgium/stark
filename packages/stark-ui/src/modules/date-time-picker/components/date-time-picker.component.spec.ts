@@ -17,8 +17,13 @@ import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { Observer } from "rxjs";
 import moment from "moment";
-import { STARK_DATE_FORMATS, StarkDatePickerModule, StarkDatePickerFilter, StarkDatePickerMaskConfig } from "../../date-picker";
-import { StarkTimestampMaskConfig, StarkInputMaskDirectivesModule } from "../../input-mask-directives";
+import {
+	STARK_DATE_FORMATS,
+	StarkDatePickerModule,
+	StarkDatePickerFilter,
+	StarkDatePickerMaskConfig
+} from "@nationalbankbelgium/stark-ui/src/modules/date-picker";
+import { StarkTimestampMaskConfig, StarkInputMaskDirectivesModule } from "@nationalbankbelgium/stark-ui/src/modules/input-mask-directives";
 import { DEFAULT_TIME_MASK_CONFIG, StarkDateTimePickerComponent } from "./date-time-picker.component";
 import createSpyObj = jasmine.createSpyObj;
 import Spy = jasmine.Spy;

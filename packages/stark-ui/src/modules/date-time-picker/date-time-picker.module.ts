@@ -8,13 +8,13 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
-import { StarkDatePickerModule } from "../date-picker";
-import { StarkInputMaskDirectivesModule } from "../input-mask-directives";
+import { StarkDatePickerModule } from "@nationalbankbelgium/stark-ui/src/modules/date-picker";
+import { StarkInputMaskDirectivesModule } from "@nationalbankbelgium/stark-ui/src/modules/input-mask-directives";
 import { StarkDateTimePickerComponent } from "./components/date-time-picker.component";
 import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
-import { mergeUiTranslations } from "../../common/translations/merge-translations";
+import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 
 @NgModule({
 	imports: [

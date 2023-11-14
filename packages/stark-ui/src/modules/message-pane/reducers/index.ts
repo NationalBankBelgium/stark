@@ -1,18 +1,8 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from "@ngrx/store";
-import { StarkMessageCollection } from "../entities";
 import { StarkMessagePaneActions } from "../actions";
 import { messagesReducer } from "./messages-pane.reducer";
 import { starkMessagePaneStoreKey } from "../constants";
-
-/**
- * Defines the part of the state assigned to the {@link StarkMessagePaneModule}
- */
-export interface StarkMessageState {
-	/**
-	 * State corresponding to the {@link StarkMessagePaneModule}
-	 */
-	messages: StarkMessageCollection;
-}
+import { StarkMessageState } from "@nationalbankbelgium/stark-ui/src/common";
 
 /**
  * Reducers assigned to the each property of the {@link StarkMessagePaneModule}'s state

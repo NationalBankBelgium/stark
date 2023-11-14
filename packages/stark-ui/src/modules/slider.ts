@@ -1,2 +1,1 @@
-export * from "./slider/slider.module";
-export * from "./slider/components";
+export * from "./slider/public_api";

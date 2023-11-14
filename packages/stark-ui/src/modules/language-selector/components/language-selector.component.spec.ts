@@ -20,7 +20,7 @@ import {
 import { MockStarkLoggingService, MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";
 /* stark-ui imports */
 import { StarkLanguageSelectorComponent, StarkLanguageSelectorMode } from "./language-selector.component";
-import { StarkDropdownModule } from "../../dropdown";
+import { StarkDropdownModule } from "@nationalbankbelgium/stark-ui/src/modules/dropdown";
 import { of, throwError } from "rxjs";
 
 /**

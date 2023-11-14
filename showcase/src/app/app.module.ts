@@ -57,7 +57,7 @@ import {
 } from "@nationalbankbelgium/stark-ui";
 import { SharedModule } from "./shared/shared.module";
 import { InMemoryDataModule } from "./in-memory-data/in-memory-data.module";
-import { WelcomeModule } from "./welcome/welcome.module";
+import { HomeModule } from "./home/home.module";
 import { logRegisteredStates, routerConfigFn } from "./router.config";
 import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
@@ -207,7 +207,7 @@ export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logge
 			}
 		}),
 		SharedModule,
-		WelcomeModule,
+		HomeModule,
 		StarkAppFooterModule,
 		StarkAppDataModule,
 		StarkAppLogoModule,

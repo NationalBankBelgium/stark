@@ -1,4 +1,4 @@
-import { StarkMessage } from "../../../common/message";
+import { StarkMessage } from "./message.intf";
 
 /**
  * A collection of messages to be displayed in the {@link StarkMessagePaneComponent}

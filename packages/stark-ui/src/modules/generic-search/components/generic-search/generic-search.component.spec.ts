@@ -13,7 +13,7 @@ import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkGenericSearchComponent } from "./generic-search.component";
 import { StarkSearchFormComponent } from "../../classes";
-import { StarkActionBarModule } from "../../../action-bar";
+import { StarkActionBarModule } from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
 
 @Component({
 	selector: "search-form-component",

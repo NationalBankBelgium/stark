@@ -22,7 +22,7 @@ import {
 	StarkRoutingService,
 	StarkRoutingTransitionHook
 } from "@nationalbankbelgium/stark-core";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import { StarkMenuGroup } from "./app-menu-group.intf";
 
 /**

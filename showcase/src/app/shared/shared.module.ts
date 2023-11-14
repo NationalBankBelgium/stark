@@ -12,7 +12,6 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Inject, NgModule } from "@angular/core";
-import { StarkPrettyPrintModule } from "@nationalbankbelgium/stark-ui";
 import { TranslateModule } from "@ngx-translate/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {
@@ -25,7 +24,7 @@ import {
 import { UIRouterModule } from "@uirouter/angular";
 import moment from "moment";
 import { filter } from "rxjs/operators";
-import { ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent } from "./components";
+import { ReferenceBlockComponent, TableOfContentsComponent } from "./components";
 
 @NgModule({
 	imports: [
@@ -43,15 +42,13 @@ import { ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsCompone
 		MatTabsModule,
 		MatTooltipModule,
 		MatSnackBarModule,
-		StarkPrettyPrintModule,
 		TranslateModule,
 		UIRouterModule.forChild()
 	],
-	declarations: [ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsComponent],
+	declarations: [ReferenceBlockComponent, TableOfContentsComponent],
 	entryComponents: [],
 	// export commonly used components/directives/components (see https://angular.io/guide/sharing-ngmodules)
 	exports: [
-		ExampleViewerComponent,
 		ReferenceBlockComponent,
 		TableOfContentsComponent,
 		CommonModule,
@@ -68,7 +65,6 @@ import { ExampleViewerComponent, ReferenceBlockComponent, TableOfContentsCompone
 		MatTabsModule,
 		MatTooltipModule,
 		MatSnackBarModule,
-		StarkPrettyPrintModule,
 		TranslateModule
 	]
 })

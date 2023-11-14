@@ -15,7 +15,7 @@ import {
 import { MatMenuTrigger } from "@angular/material/menu";
 import { Subscription } from "rxjs";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
-import { AbstractStarkUiComponent } from "../../../common/classes/abstract-component";
+import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 
 export type StarkMinimapComponentMode = "compact";
 

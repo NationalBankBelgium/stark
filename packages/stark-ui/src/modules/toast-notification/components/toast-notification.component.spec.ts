@@ -7,7 +7,7 @@ import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
-import { StarkMessageType } from "../../../common/message";
+import { StarkMessageType } from "@nationalbankbelgium/stark-ui/src/common";
 import { StarkToastNotificationComponent } from "./toast-notification.component";
 
 @Component({
