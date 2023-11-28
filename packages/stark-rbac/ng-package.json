@@ -2,11 +2,7 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
     "entryFile": "public_api.ts",
-    "flatModuleFile": "stark-rbac",
-    "umdModuleIds": {
-      "@nationalbankbelgium/stark-core": "stark.core",
-      "@ngrx/store": "ngrx.store"
-    }
+    "flatModuleFile": "stark-rbac"
   },
   "deleteDestPath": true,
   "dest": "../../dist/packages/stark-rbac",
