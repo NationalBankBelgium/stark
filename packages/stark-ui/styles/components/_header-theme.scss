@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-header-theme($material-theme-config, $stark-theme-config) {
   .stark-app-header {

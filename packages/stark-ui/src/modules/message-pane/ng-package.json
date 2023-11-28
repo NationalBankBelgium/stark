@@ -1,13 +1,6 @@
 {
   "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
-    "entryFile": "public_api.ts",
-    "umdModuleIds": {
-      "@nationalbankbelgium/stark-core": "stark.core",
-      "@ngrx/effects": "ngrx.effects",
-      "@ngrx/store": "ngrx.store",
-      "@ngx-translate/core": "ngxTranslate.core",
-      "lodash-es/findIndex": "lodash-es.findIndex"
-    }
+    "entryFile": "public_api.ts"
   }
 }

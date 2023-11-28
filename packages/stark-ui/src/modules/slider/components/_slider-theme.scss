@@ -3,7 +3,7 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/slider/components/slider/_slider-theme.scss */
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 @use "../../../../styles/old-variables" as old-vars;
 @import "~nouislider/distribute/nouislider.css";
 

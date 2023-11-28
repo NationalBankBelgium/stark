@@ -4,7 +4,7 @@
 /* stark-ui: src/modules/dropdown/components/dropdown/_dropdown-theme.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-dropdown-color($color) {
   .mat-form-field-label {

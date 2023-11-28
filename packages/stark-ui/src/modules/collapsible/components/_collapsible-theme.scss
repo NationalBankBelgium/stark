@@ -4,7 +4,7 @@
 /* stark-ui: src/modules/collapsible/components/_collapsible-theme.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 @use "../../../../styles/old-variables" as old-vars;
 
 @mixin stark-collapsible-color($color_high, $color_low) {

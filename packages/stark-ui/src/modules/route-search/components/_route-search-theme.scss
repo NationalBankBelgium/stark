@@ -3,7 +3,7 @@
 /* ============================================================================== */
 /* stark-ui: src/modules/route-search/components/route-search-theme.css */
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-route-search-theme($material-theme-config, $stark-theme-config) {
   $grey-palette: map.get($stark-theme-config, grey-palette);

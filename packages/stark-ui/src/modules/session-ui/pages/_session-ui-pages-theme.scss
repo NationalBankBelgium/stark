@@ -1,7 +1,7 @@
 /* stark session ui pages */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-session-ui-pages-theme($material-theme-config, $stark-theme-config) {
   .stark-session-ui-page header {

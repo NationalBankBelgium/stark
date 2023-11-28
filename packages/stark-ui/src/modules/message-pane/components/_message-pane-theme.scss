@@ -4,7 +4,7 @@
 /* stark-ui: src/modules/message-pane/components/message-pane-theme.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-message-pane-color($color) {
   .stark-message-pane-item {

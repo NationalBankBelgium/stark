@@ -1,6 +1,6 @@
 @use "sass:map";
-@use "~@angular/material" as mat;
-@use "~@angular/material/core/theming/palette" as mat-palette;
+@use "@angular/material" as mat;
+@use "@angular/material/core/theming/palette" as mat-palette;
 
 $backgrounds: mat.$light-theme-background-palette;
 $foregrounds: mat.$light-theme-foreground-palette;

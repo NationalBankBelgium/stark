@@ -4,7 +4,7 @@
 /* stark-ui: src/modules/table/components/_table-theme.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-table-theme($material-theme-config, $stark-theme-config) {
   $grey-palette: map.get($stark-theme-config, grey-palette);
