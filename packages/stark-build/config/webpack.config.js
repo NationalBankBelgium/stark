@@ -171,8 +171,10 @@ module.exports = (config, options) => {
 		...(METADATA.IS_DEV_SERVER
 			? {
 					devServer: {
-						// See: https://webpack.js.org/configuration/dev-server/#devserverwritetodisk-
-						writeToDisk: true,
+						// See: https://webpack.js.org/configuration/dev-server/#devserverdevmiddleware
+						devMiddleware: {
+							writeToDisk: true,
+						},
 
 						compress: true,
 
