@@ -40,10 +40,10 @@
     "uuid": "^8.3.0"
   },
   "peerDependencies": {
-    "@angular/common": "^12.1.0",
-    "@angular/compiler": "^12.1.0",
-    "@angular/core": "^12.1.0",
-    "@angular/router": "^12.1.0"
+    "@angular/common": "^13.4.0",
+    "@angular/compiler": "^13.4.0",
+    "@angular/core": "^13.4.0",
+    "@angular/router": "^13.4.0"
   },
   "scripts": {
     "clean": "npx rimraf dist",

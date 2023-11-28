@@ -322,8 +322,8 @@ describe("Service: StarkLoggingService", () => {
 				}
 			}
 
-			const originalXMLHttpRequest = global["XMLHttpRequest"];
-			global["XMLHttpRequest"] = <any>MockXHR; // override global XMLHttpRequest object
+			const originalXMLHttpRequest = globalThis["XMLHttpRequest"];
+			globalThis["XMLHttpRequest"] = <any>MockXHR; // override global XMLHttpRequest object
 
 			const mockFlushUrl = `${loggingBackend.url}/${appConfig.loggingFlushResourceName}`;
 			const mockSerializedData = JSON.stringify(Serialize(mockStarkLogging, StarkLoggingImpl));
@@ -343,7 +343,7 @@ describe("Service: StarkLoggingService", () => {
 				[loggingService.correlationIdHttpHeaderName, loggingService.correlationId]
 			]);
 
-			global["XMLHttpRequest"] = originalXMLHttpRequest; // restore original global XMLHttpRequest object
+			globalThis["XMLHttpRequest"] = originalXMLHttpRequest; // restore original global XMLHttpRequest object
 		});
 
 		it("should fail to persist messages when the back-end fails", () => {
