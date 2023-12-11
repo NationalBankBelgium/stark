@@ -6,8 +6,8 @@ Use the local variables file first to set the correct variables, see:
 @use "variables";
 @use "sass:map";
 
-@use "~@angular/material" as mat;
-@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+@use "@angular/material" as mat;
+@use "@nationalbankbelgium/stark-ui" as stark-ui;
 @use "../app/app.component-theme";
 @use "../app/example-viewer/components/example-viewer-theme";
 @use "../app/shared/components/table-of-contents/table-of-contents-theme";

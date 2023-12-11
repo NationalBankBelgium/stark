@@ -13,30 +13,29 @@ import {
 import { ExampleViewerModule } from "../example-viewer";
 
 @NgModule({
-	imports: [
-		UIRouterModule.forChild({
-			states: STYLEGUIDE_STATES
-		}),
-		SharedModule,
-		ExampleViewerModule
-	],
-	providers: [],
-	declarations: [
-		StyleguideButtonPageComponent,
-		StyleguideCardPageComponent,
-		StyleguideTypographyPageComponent,
-		StyleguideColorsPageComponent,
-		StyleguideHeaderPageComponent,
-		StyleguideLayoutPageComponent
-	],
-	entryComponents: [],
-	exports: [
-		StyleguideButtonPageComponent,
-		StyleguideCardPageComponent,
-		StyleguideTypographyPageComponent,
-		StyleguideColorsPageComponent,
-		StyleguideHeaderPageComponent,
-		StyleguideLayoutPageComponent
-	]
+    imports: [
+        UIRouterModule.forChild({
+            states: STYLEGUIDE_STATES
+        }),
+        SharedModule,
+        ExampleViewerModule
+    ],
+    providers: [],
+    declarations: [
+        StyleguideButtonPageComponent,
+        StyleguideCardPageComponent,
+        StyleguideTypographyPageComponent,
+        StyleguideColorsPageComponent,
+        StyleguideHeaderPageComponent,
+        StyleguideLayoutPageComponent
+    ],
+    exports: [
+        StyleguideButtonPageComponent,
+        StyleguideCardPageComponent,
+        StyleguideTypographyPageComponent,
+        StyleguideColorsPageComponent,
+        StyleguideHeaderPageComponent,
+        StyleguideLayoutPageComponent
+    ]
 })
 export class StyleguideModule {}

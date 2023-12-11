@@ -12,27 +12,26 @@ import { NEWS_STATES } from "./routes";
 import { ExampleViewerModule } from "../example-viewer";
 
 @NgModule({
-	imports: [
-		UIRouterModule.forChild({
-			states: NEWS_STATES
-		}),
-		SharedModule,
-		ExampleViewerModule,
-		MatDividerModule,
-		MatInputModule,
-		MatFormFieldModule,
-		NgxFormErrorsModule.forRoot({ formErrorComponent: TranslatedFormErrorComponent })
-	],
-	declarations: [
-		GettingStartedPageComponent,
-		NewsPageComponent,
-		NewsItemComponent,
-		ReactiveFormErrorsPageComponent,
-		TranslatedFormErrorComponent,
-		CardComponent
-	],
-	exports: [GettingStartedPageComponent, NewsPageComponent, NewsItemComponent, ReactiveFormErrorsPageComponent],
-	entryComponents: [TranslatedFormErrorComponent]
+    imports: [
+        UIRouterModule.forChild({
+            states: NEWS_STATES
+        }),
+        SharedModule,
+        ExampleViewerModule,
+        MatDividerModule,
+        MatInputModule,
+        MatFormFieldModule,
+        NgxFormErrorsModule.forRoot({ formErrorComponent: TranslatedFormErrorComponent })
+    ],
+    declarations: [
+        GettingStartedPageComponent,
+        NewsPageComponent,
+        NewsItemComponent,
+        ReactiveFormErrorsPageComponent,
+        TranslatedFormErrorComponent,
+        CardComponent
+    ],
+    exports: [GettingStartedPageComponent, NewsPageComponent, NewsItemComponent, ReactiveFormErrorsPageComponent]
 })
 export class WelcomeModule {
 	public constructor(private errorMessageService: NgxFormErrorsMessageService) {
