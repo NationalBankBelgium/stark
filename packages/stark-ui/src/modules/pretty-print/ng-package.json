@@ -5,7 +5,8 @@
     "umdModuleIds": {
       "@nationalbankbelgium/stark-core": "stark.core",
       "@sqltools/formatter": "sqltools.formatter",
-      "prismjs": "Prism"
+      "prismjs": "Prism",
+      "prettier": "Prettier"
     }
   }
 }
