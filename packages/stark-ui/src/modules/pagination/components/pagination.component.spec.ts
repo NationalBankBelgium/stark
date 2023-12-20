@@ -103,28 +103,25 @@ describe("PaginationComponent", () => {
 		expect(pageSelectorInput.properties["value"].toString()).toBe(selectedOption);
 	};
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [
-					FormsModule,
-					MatButtonModule,
-					MatIconModule,
-					MatIconTestingModule,
-					MatInputModule,
-					MatMenuModule,
-					MatPaginatorModule,
-					MatTooltipModule,
-					NoopAnimationsModule,
-					StarkDropdownModule,
-					StarkRestrictInputDirectiveModule,
-					TranslateModule.forRoot()
-				],
-				declarations: [StarkPaginationComponent, TestHostComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [
+				FormsModule,
+				MatButtonModule,
+				MatIconModule,
+				MatIconTestingModule,
+				MatInputModule,
+				MatMenuModule,
+				MatPaginatorModule,
+				MatTooltipModule,
+				NoopAnimationsModule,
+				StarkDropdownModule,
+				StarkRestrictInputDirectiveModule,
+				TranslateModule.forRoot()
+			],
+			declarations: [StarkPaginationComponent, TestHostComponent],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);

@@ -155,22 +155,12 @@ describe("DropdownComponent", () => {
 	const reflectPlaceholderAttr = "ng-reflect-placeholder";
 	const reflectValueAttr = "ng-reflect-value";
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [
-					CommonModule,
-					MatSelectModule,
-					MatOptionModule,
-					ReactiveFormsModule,
-					TranslateModule.forRoot(),
-					NoopAnimationsModule
-				],
-				declarations: [StarkDropdownComponent, TestHostComponent, TestHostValueComponent, TestHostNgControlComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [CommonModule, MatSelectModule, MatOptionModule, ReactiveFormsModule, TranslateModule.forRoot(), NoopAnimationsModule],
+			declarations: [StarkDropdownComponent, TestHostComponent, TestHostValueComponent, TestHostNgControlComponent],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
+		}).compileComponents()));
 
 	beforeEach(inject([OverlayContainer], (oc: OverlayContainer) => {
 		overlayContainer = oc;

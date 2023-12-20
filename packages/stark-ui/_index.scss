@@ -27,7 +27,9 @@ $stark-typography-theme: null !default;
 );
 @forward "./styles/theming/stark-palettes" show $alert-palette, $grey-palette, $success-palette;
 
-@use "./styles/theming/typography" with ($stark-typography-theme: $stark-typography-theme);
+@use "./styles/theming/typography" with (
+  $stark-typography-theme: $stark-typography-theme
+);
 @forward "./styles/theming/typography" show $typography-theme, $typography-config;
 
 // Core APIs

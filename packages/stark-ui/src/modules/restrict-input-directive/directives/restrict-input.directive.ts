@@ -28,7 +28,7 @@ export class StarkRestrictInputDirective implements OnInit {
 	public eventHandler(event: KeyboardEvent): boolean {
 		// If event.key.length > 1 this means that a non char key was press ie: "Home" or "left"
 		// we let the default behaviour to those key works and just return `true`
-		if(event.key.length > 1) {
+		if (event.key.length > 1) {
 			return true;
 		}
 		// if normal char we test the value

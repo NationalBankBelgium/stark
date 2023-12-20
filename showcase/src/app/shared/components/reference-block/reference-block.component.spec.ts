@@ -26,16 +26,14 @@ describe("ReferenceBlockComponent", () => {
 	];
 	let fixture: ComponentFixture<ReferenceBlockComponent>;
 
-	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
-				declarations: [ReferenceBlockComponent],
-				imports: [TranslateModule.forRoot()],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		return TestBed.configureTestingModule({
+			declarations: [ReferenceBlockComponent],
+			imports: [TranslateModule.forRoot()],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }],
+			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ReferenceBlockComponent);

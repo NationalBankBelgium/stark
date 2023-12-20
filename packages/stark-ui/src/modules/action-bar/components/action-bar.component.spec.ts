@@ -43,15 +43,12 @@ describe("ActionBarComponent", () => {
 	let component: StarkActionBarComponent;
 	const buttonToggleSelector = ".extend-action-bar";
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkActionBarComponent, TestHostComponent],
-				imports: [MatButtonModule, MatIconModule, MatIconTestingModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkActionBarComponent, TestHostComponent],
+			imports: [MatButtonModule, MatIconModule, MatIconTestingModule, MatMenuModule, MatTooltipModule, TranslateModule.forRoot()],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);

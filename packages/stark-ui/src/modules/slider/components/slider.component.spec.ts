@@ -58,14 +58,11 @@ describe("SliderComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkSliderComponent, TestHostComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkSliderComponent, TestHostComponent],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+		}).compileComponents()));
 
 	/**
 	 * Synchronous beforeEach

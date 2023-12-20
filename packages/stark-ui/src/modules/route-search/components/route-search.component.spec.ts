@@ -86,33 +86,30 @@ describe("RouteSearchComponent", () => {
 		]
 	};
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [
-					CommonModule,
-					FormsModule,
-					MatButtonModule,
-					MatInputModule,
-					MatFormFieldModule,
-					MatTooltipModule,
-					MatAutocompleteModule,
-					MatIconModule,
-					MatIconTestingModule,
-					MatSelectModule,
-					NoopAnimationsModule,
-					MatOptionModule,
-					ReactiveFormsModule,
-					TranslateModule.forRoot()
-				],
-				declarations: [StarkRouteSearchComponent, TestHostComponent],
-				providers: [
-					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
-					{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [
+				CommonModule,
+				FormsModule,
+				MatButtonModule,
+				MatInputModule,
+				MatFormFieldModule,
+				MatTooltipModule,
+				MatAutocompleteModule,
+				MatIconModule,
+				MatIconTestingModule,
+				MatSelectModule,
+				NoopAnimationsModule,
+				MatOptionModule,
+				ReactiveFormsModule,
+				TranslateModule.forRoot()
+			],
+			declarations: [StarkRouteSearchComponent, TestHostComponent],
+			providers: [
+				{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
+				{ provide: STARK_LOGGING_SERVICE, useValue: mockLoggingService }
+			]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);

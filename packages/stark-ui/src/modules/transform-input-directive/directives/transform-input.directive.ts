@@ -93,7 +93,10 @@ export class StarkTransformInputDirective implements ControlValueAccessor, OnCha
 	 * @param _renderer - Angular renderer
 	 * @param _elementRef - Reference to the DOM element where this directive is applied to.
 	 */
-	public constructor(private _renderer: Renderer2, private _elementRef: ElementRef) {}
+	public constructor(
+		private _renderer: Renderer2,
+		private _elementRef: ElementRef
+	) {}
 
 	/**
 	 * Angular life cycle hook

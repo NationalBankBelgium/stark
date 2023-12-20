@@ -29,7 +29,10 @@ export class StarkProgressIndicatorServiceImpl implements StarkProgressIndicator
 	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param store - The store of the application
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public store: Store<StarkUIApplicationState>) {
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		public store: Store<StarkUIApplicationState>
+	) {
 		this.logger.debug(starkProgressIndicatorServiceName + " loaded");
 
 		this.progressIndicatorMap$ = this.store.pipe(select(selectStarkProgressIndicator));

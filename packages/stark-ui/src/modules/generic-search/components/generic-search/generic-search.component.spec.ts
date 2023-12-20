@@ -51,27 +51,24 @@ class BadTestHostComponent extends TestHostComponent {}
 describe("GenericSearchComponent", () => {
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [
-					CommonModule,
-					FormsModule,
-					ReactiveFormsModule,
-					MatButtonModule,
-					MatIconModule,
-					MatIconTestingModule,
-					MatMenuModule,
-					MatTooltipModule,
-					NoopAnimationsModule,
-					StarkActionBarModule,
-					TranslateModule.forRoot()
-				],
-				declarations: [StarkGenericSearchComponent, TestSearchFormComponent, TestHostComponent, BadTestHostComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [
+				CommonModule,
+				FormsModule,
+				ReactiveFormsModule,
+				MatButtonModule,
+				MatIconModule,
+				MatIconTestingModule,
+				MatMenuModule,
+				MatTooltipModule,
+				NoopAnimationsModule,
+				StarkActionBarModule,
+				TranslateModule.forRoot()
+			],
+			declarations: [StarkGenericSearchComponent, TestSearchFormComponent, TestHostComponent, BadTestHostComponent],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+		}).compileComponents()));
 
 	it("should throw error because `searchFormComponent` is not included", () => {
 		hostFixture = TestBed.createComponent(BadTestHostComponent);

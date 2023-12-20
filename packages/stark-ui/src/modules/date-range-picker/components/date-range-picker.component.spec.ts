@@ -51,29 +51,26 @@ describe("DateRangePickerComponent", () => {
 		});
 	}
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkDateRangePickerComponent, TestModelComponent, TestFormGroupComponent],
-				imports: [
-					NoopAnimationsModule,
-					MatDatepickerModule,
-					MatFormFieldModule,
-					FormsModule,
-					ReactiveFormsModule,
-					StarkDatePickerModule,
-					StarkInputMaskDirectivesModule,
-					TranslateModule.forRoot()
-				],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkDateRangePickerComponent, TestModelComponent, TestFormGroupComponent],
+			imports: [
+				NoopAnimationsModule,
+				MatDatepickerModule,
+				MatFormFieldModule,
+				FormsModule,
+				ReactiveFormsModule,
+				StarkDatePickerModule,
+				StarkInputMaskDirectivesModule,
+				TranslateModule.forRoot()
+			],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
+				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
+			]
+		}).compileComponents()));
 
 	describe("uncontrolled", () => {
 		let fixture: ComponentFixture<StarkDateRangePickerComponent>;

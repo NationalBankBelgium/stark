@@ -137,43 +137,40 @@ describe("TableComponent", () => {
 	const columnSelectSelector = "cdk-column-select";
 	const rowSelector = "table tbody tr";
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [
-					// Common
-					FormsModule,
-					ReactiveFormsModule,
-					NoopAnimationsModule,
-					TranslateModule.forRoot(),
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [
+				// Common
+				FormsModule,
+				ReactiveFormsModule,
+				NoopAnimationsModule,
+				TranslateModule.forRoot(),
 
-					// Stark
-					StarkActionBarModule,
-					StarkPaginationModule,
-					StarkMinimapModule,
+				// Stark
+				StarkActionBarModule,
+				StarkPaginationModule,
+				StarkMinimapModule,
 
-					// Material
-					MatCheckboxModule,
-					MatDialogModule,
-					MatIconModule,
-					MatIconTestingModule,
-					MatInputModule,
-					MatMenuModule,
-					MatSelectModule,
-					MatTableModule,
-					MatTooltipModule
-				],
-				declarations: [
-					TestHostComponent,
-					StarkTableComponent,
-					StarkTableColumnComponent,
-					StarkTableMultisortDialogComponent,
-					StarkTableRowContentDirective
-				],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-			}).compileComponents()
-		)
-	);
+				// Material
+				MatCheckboxModule,
+				MatDialogModule,
+				MatIconModule,
+				MatIconTestingModule,
+				MatInputModule,
+				MatMenuModule,
+				MatSelectModule,
+				MatTableModule,
+				MatTooltipModule
+			],
+			declarations: [
+				TestHostComponent,
+				StarkTableComponent,
+				StarkTableColumnComponent,
+				StarkTableMultisortDialogComponent,
+				StarkTableRowContentDirective
+			],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);

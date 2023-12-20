@@ -171,29 +171,26 @@ describe("MessagePaneComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkMessagePaneComponent, TestHostComponent],
-				imports: [
-					CommonModule,
-					MatIconModule,
-					MatIconTestingModule,
-					MatSelectModule,
-					MatTooltipModule,
-					MatOptionModule,
-					FormsModule,
-					TranslateModule.forRoot(),
-					NoopAnimationsModule
-				],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_MESSAGE_PANE_SERVICE, useValue: mockMessagePaneService },
-					TranslateService
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkMessagePaneComponent, TestHostComponent],
+			imports: [
+				CommonModule,
+				MatIconModule,
+				MatIconTestingModule,
+				MatSelectModule,
+				MatTooltipModule,
+				MatOptionModule,
+				FormsModule,
+				TranslateModule.forRoot(),
+				NoopAnimationsModule
+			],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: STARK_MESSAGE_PANE_SERVICE, useValue: mockMessagePaneService },
+				TranslateService
+			]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(TestHostComponent);

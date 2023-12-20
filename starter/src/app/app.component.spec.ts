@@ -16,27 +16,25 @@ describe(`App`, () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					declarations: [AppComponent],
-					imports: [TranslateModule.forRoot()],
-					schemas: [NO_ERRORS_SCHEMA],
-					providers: [
-						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-						{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-						{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockStarkAppSidebarService() },
-						TranslateService
-					]
-				})
-					/**
-					 * Compile template and css
-					 */
-					.compileComponents()
-			);
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		return (
+			TestBed.configureTestingModule({
+				declarations: [AppComponent],
+				imports: [TranslateModule.forRoot()],
+				schemas: [NO_ERRORS_SCHEMA],
+				providers: [
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
+					{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: new MockStarkAppSidebarService() },
+					TranslateService
+				]
+			})
+				/**
+				 * Compile template and css
+				 */
+				.compileComponents()
+		);
+	}));
 
 	/**
 	 * Synchronous beforeEach

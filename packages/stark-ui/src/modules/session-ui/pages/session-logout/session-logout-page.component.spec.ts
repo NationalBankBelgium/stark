@@ -16,21 +16,19 @@ describe("SessionLogoutPageComponent", () => {
 		baseUrl: "base-url"
 	};
 
-	beforeEach(
-		waitForAsync(() => {
-			const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
+	beforeEach(waitForAsync(() => {
+		const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
-			return TestBed.configureTestingModule({
-				declarations: [StarkSessionCardComponent, StarkSessionLogoutPageComponent],
-				imports: [CommonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
-				providers: [
-					{ provide: STARK_ROUTING_SERVICE, useValue: MockStarkRoutingService }, // needed by AppLogo component
-					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
-				]
-			}).compileComponents();
-		})
-	);
+		return TestBed.configureTestingModule({
+			declarations: [StarkSessionCardComponent, StarkSessionLogoutPageComponent],
+			imports: [CommonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
+			providers: [
+				{ provide: STARK_ROUTING_SERVICE, useValue: MockStarkRoutingService }, // needed by AppLogo component
+				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
+			]
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkSessionLogoutPageComponent);

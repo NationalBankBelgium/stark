@@ -25,7 +25,10 @@ export class ReactiveFormErrorsPageComponent {
 	public showValidationDetails = false;
 	public showValidationSummary = true;
 
-	public constructor(private formBuilder: FormBuilder, @Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {
+	public constructor(
+		private formBuilder: FormBuilder,
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService
+	) {
 		this.formGroup = this.formBuilder.group({
 			username: [undefined, Validators.required],
 			matchingPasswords: this.formBuilder.group({

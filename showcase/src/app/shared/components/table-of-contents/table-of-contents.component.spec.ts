@@ -6,14 +6,12 @@ describe("TableOfContents", () => {
 	let fixture: ComponentFixture<TableOfContentsComponent>;
 	let component: TableOfContentsComponent;
 
-	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
-				declarations: [TableOfContentsComponent],
-				imports: []
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		return TestBed.configureTestingModule({
+			declarations: [TableOfContentsComponent],
+			imports: []
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(TableOfContentsComponent);

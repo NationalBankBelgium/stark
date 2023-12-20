@@ -16,20 +16,17 @@ describe("SessionTimeoutWarningDialogComponent", () => {
 	let mockDialogRef: MatDialogRef<any>;
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkSessionTimeoutWarningDialogComponent],
-				imports: [CommonModule, MatDialogModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-					{ provide: MatDialog, useValue: MatDialog },
-					{ provide: MAT_DIALOG_DATA, useValue: 20 },
-					{ provide: MatDialogRef, useValue: createSpyObj("MatDialogRefSpy", ["close"]) }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkSessionTimeoutWarningDialogComponent],
+			imports: [CommonModule, MatDialogModule],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+				{ provide: MatDialog, useValue: MatDialog },
+				{ provide: MAT_DIALOG_DATA, useValue: 20 },
+				{ provide: MatDialogRef, useValue: createSpyObj("MatDialogRefSpy", ["close"]) }
+			]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkSessionTimeoutWarningDialogComponent);

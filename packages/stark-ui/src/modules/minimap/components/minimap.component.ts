@@ -78,7 +78,11 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent implements A
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 * @param cdRef - Reference to the change detector attached to this component.
 	 */
-	public constructor(renderer: Renderer2, elementRef: ElementRef, private cdRef: ChangeDetectorRef) {
+	public constructor(
+		renderer: Renderer2,
+		elementRef: ElementRef,
+		private cdRef: ChangeDetectorRef
+	) {
 		super(renderer, elementRef);
 	}
 

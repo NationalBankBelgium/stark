@@ -47,25 +47,22 @@ describe("MinimapComponent", () => {
 	];
 	const visibleItems: string[] = ["column1", "column2"];
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [
-					FormsModule,
-					MatButtonModule,
-					MatCheckboxModule,
-					MatIconModule,
-					MatIconTestingModule,
-					MatTooltipModule,
-					MatMenuModule,
-					NoopAnimationsModule,
-					TranslateModule.forRoot()
-				],
-				declarations: [StarkMinimapComponent, TestHostComponent],
-				providers: [TranslateService]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [
+				FormsModule,
+				MatButtonModule,
+				MatCheckboxModule,
+				MatIconModule,
+				MatIconTestingModule,
+				MatTooltipModule,
+				MatMenuModule,
+				NoopAnimationsModule,
+				TranslateModule.forRoot()
+			],
+			declarations: [StarkMinimapComponent, TestHostComponent],
+			providers: [TranslateService]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		// OverlayContainer needs to be injected to get the context for the rendered menu dropdown

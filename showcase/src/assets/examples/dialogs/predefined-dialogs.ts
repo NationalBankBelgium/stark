@@ -20,7 +20,10 @@ import {
 export class DemoDialogsComponent {
 	public dialogStatus = "";
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public dialogService: MatDialog) {}
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		public dialogService: MatDialog
+	) {}
 
 	public showAlert(): void {
 		this.dialogService

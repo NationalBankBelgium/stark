@@ -8,14 +8,11 @@ describe("ProgressIndicatorComponent", () => {
 	let component: StarkProgressIndicatorComponent;
 	let hostFixture: ComponentFixture<StarkProgressIndicatorComponent>;
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkProgressIndicatorComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkProgressIndicatorComponent],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		hostFixture = TestBed.createComponent(StarkProgressIndicatorComponent);

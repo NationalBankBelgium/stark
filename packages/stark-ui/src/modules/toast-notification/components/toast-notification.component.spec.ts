@@ -40,24 +40,21 @@ describe("ToastNotificationComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkToastNotificationComponent, TestHostComponent],
-				imports: [TranslateModule.forRoot(), MatButtonModule, MatIconModule, MatIconTestingModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: MatSnackBar, useValue: mockSnackBar },
-					// Need to clone the object to avoid mutation of it between tests
-					{ provide: MAT_SNACK_BAR_DATA, useValue: { ...mockMatSnackBarConfig } }
-				]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkToastNotificationComponent, TestHostComponent],
+			imports: [TranslateModule.forRoot(), MatButtonModule, MatIconModule, MatIconTestingModule],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: MatSnackBar, useValue: mockSnackBar },
+				// Need to clone the object to avoid mutation of it between tests
+				{ provide: MAT_SNACK_BAR_DATA, useValue: { ...mockMatSnackBarConfig } }
+			]
+		})
+			/**
+			 * Compile template and css
+			 */
+			.compileComponents()));
 
 	/**
 	 * Synchronous beforeEach

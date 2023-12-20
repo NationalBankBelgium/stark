@@ -67,20 +67,17 @@ describe("AppSidebarComponent", () => {
 		});
 	});
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkAppSidebarComponent],
-				imports: [CommonModule, MatSidenavModule, NoopAnimationsModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: mockStarkLoggingService },
-					{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: mockStarkAppSideBarService },
-					{ provide: STARK_ROUTING_SERVICE, useValue: mockStarkRoutingService },
-					{ provide: BreakpointObserver, useValue: mockBreakPointObserver }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkAppSidebarComponent],
+			imports: [CommonModule, MatSidenavModule, NoopAnimationsModule],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: mockStarkLoggingService },
+				{ provide: STARK_APP_SIDEBAR_SERVICE, useValue: mockStarkAppSideBarService },
+				{ provide: STARK_ROUTING_SERVICE, useValue: mockStarkRoutingService },
+				{ provide: BreakpointObserver, useValue: mockBreakPointObserver }
+			]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkAppSidebarComponent);

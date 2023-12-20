@@ -14,22 +14,20 @@ describe(`Home`, () => {
 	/**
 	 * async beforeEach.
 	 */
-	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					declarations: [HomePageComponent],
-					imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-					providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-				})
+	beforeEach(waitForAsync(() => {
+		return (
+			TestBed.configureTestingModule({
+				declarations: [HomePageComponent],
+				imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+			})
 
-					/**
-					 * Compile template and css.
-					 */
-					.compileComponents()
-			);
-		})
-	);
+				/**
+				 * Compile template and css.
+				 */
+				.compileComponents()
+		);
+	}));
 
 	/**
 	 * Synchronous beforeEach.

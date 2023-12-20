@@ -43,29 +43,26 @@ describe("SessionUiModule", () => {
 		]
 	});
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [HomeComponent],
-				imports: [routerModule, EffectsModule.forRoot([]), TranslateModule.forRoot(), StarkSessionUiModule.forRoot()],
-				providers: [
-					provideMockActions(() => of("some action")),
-					{
-						provide: Store,
-						useValue: createSpyObj<Store<any>>("Store", ["dispatch"])
-					},
-					{
-						provide: OverlayContainer,
-						useValue: createSpyObj<OverlayContainer>("OverlayContainer", ["ngOnDestroy"])
-					},
-					{
-						provide: STARK_SESSION_SERVICE,
-						useValue: new MockStarkSessionService()
-					}
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [HomeComponent],
+			imports: [routerModule, EffectsModule.forRoot([]), TranslateModule.forRoot(), StarkSessionUiModule.forRoot()],
+			providers: [
+				provideMockActions(() => of("some action")),
+				{
+					provide: Store,
+					useValue: createSpyObj<Store<any>>("Store", ["dispatch"])
+				},
+				{
+					provide: OverlayContainer,
+					useValue: createSpyObj<OverlayContainer>("OverlayContainer", ["ngOnDestroy"])
+				},
+				{
+					provide: STARK_SESSION_SERVICE,
+					useValue: new MockStarkSessionService()
+				}
+			]
+		}).compileComponents()));
 
 	// Inject module dependencies
 	beforeEach(inject([UIRouter, OverlayContainer], (_router: UIRouter, _overlayContainer: SpyObj<OverlayContainer>) => {

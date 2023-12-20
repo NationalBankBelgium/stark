@@ -104,30 +104,27 @@ class TestHostFormControlComponent {
 describe("DatePickerComponent", () => {
 	let component: StarkDatePickerComponent;
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkDatePickerComponent, TestHostComponent, TestHostFormControlComponent],
-				imports: [
-					NoopAnimationsModule,
-					MatDatepickerModule,
-					MatFormFieldModule,
-					MatInputModule,
-					MatMomentDateModule,
-					FormsModule,
-					ReactiveFormsModule,
-					StarkInputMaskDirectivesModule,
-					TranslateModule.forRoot()
-				],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS },
-					{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
-					{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkDatePickerComponent, TestHostComponent, TestHostFormControlComponent],
+			imports: [
+				NoopAnimationsModule,
+				MatDatepickerModule,
+				MatFormFieldModule,
+				MatInputModule,
+				MatMomentDateModule,
+				FormsModule,
+				ReactiveFormsModule,
+				StarkInputMaskDirectivesModule,
+				TranslateModule.forRoot()
+			],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS },
+				{ provide: MAT_DATE_LOCALE, useValue: "en-us" },
+				{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] }
+			]
+		}).compileComponents()));
 
 	describe("MatFormFieldControl", () => {
 		let hostComponent: TestHostFormControlComponent;
