@@ -123,7 +123,7 @@
     "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-10.2.0-d47412d2d-1703255519.tgz",
     "@nationalbankbelgium/stark-ui": "file:../dist/packages-dist/stark-ui/nationalbankbelgium-stark-ui-10.2.0-d47412d2d-1703255519.tgz",
     "@uirouter/visualizer": "~7.2.1",
-    "core-js": "~3.21.1",
+    "core-js": "~3.34.0",
     "eligrey-classlist-js-polyfill": "~1.2.20180112",
     "hammerjs": "^2.0.8",
     "http-server": "~14.1.0",
