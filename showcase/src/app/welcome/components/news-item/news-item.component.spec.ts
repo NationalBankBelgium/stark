@@ -16,23 +16,21 @@ describe(`News`, () => {
 	/**
 	 * async beforeEach.
 	 */
-	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					declarations: [NewsItemComponent],
-					schemas: [NO_ERRORS_SCHEMA], // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
-					imports: [HttpClientTestingModule],
-					providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, provideMockStore()]
-				})
+	beforeEach(waitForAsync(() => {
+		return (
+			TestBed.configureTestingModule({
+				declarations: [NewsItemComponent],
+				schemas: [NO_ERRORS_SCHEMA], // to avoid errors due to "mat-icon" directive not known (which we don't want to add in these tests)
+				imports: [HttpClientTestingModule],
+				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, provideMockStore()]
+			})
 
-					/**
-					 * Compile template and css.
-					 */
-					.compileComponents()
-			);
-		})
-	);
+				/**
+				 * Compile template and css.
+				 */
+				.compileComponents()
+		);
+	}));
 
 	/**
 	 * Synchronous beforeEach.

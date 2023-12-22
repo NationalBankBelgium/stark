@@ -18,7 +18,11 @@ export class StarkErrorHandlingEffects {
 	 * @param injector - the injector of the class
 	 * @param zone - the service to execute actions inside or outside of an Angular Zone.
 	 */
-	public constructor(private actions$: Actions, private injector: Injector, private zone: NgZone) {}
+	public constructor(
+		private actions$: Actions,
+		private injector: Injector,
+		private zone: NgZone
+	) {}
 
 	public starkUnhandledError$ = createEffect(
 		() =>

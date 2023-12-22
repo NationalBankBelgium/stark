@@ -44,7 +44,10 @@ export class StarkAppFooterComponent implements OnInit {
 	 * @param logger - The `StarkLoggingService` instance of the application.
 	 * @param $translate - The `TranslateService` instance of the application.
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public $translate: TranslateService) {
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		public $translate: TranslateService
+	) {
 		// empty constructor
 	}
 

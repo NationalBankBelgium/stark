@@ -76,18 +76,15 @@ describe("BreadcrumbComponent", () => {
 
 	const mockDeregisterTransitionHookFn: Spy<() => void> = jasmine.createSpy("deregistersTransitionHook");
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [CommonModule, NoopAnimationsModule, TranslateModule.forRoot()],
-				declarations: [StarkBreadcrumbComponent, TestHostComponent],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [CommonModule, NoopAnimationsModule, TranslateModule.forRoot()],
+			declarations: [StarkBreadcrumbComponent, TestHostComponent],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
+			]
+		}).compileComponents()));
 
 	// Inject module dependencies
 	beforeEach(() => {

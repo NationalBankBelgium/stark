@@ -20,7 +20,10 @@ export abstract class AbstractStarkUiComponent implements OnInit {
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
-	protected constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {}
+	protected constructor(
+		protected renderer: Renderer2,
+		protected elementRef: ElementRef
+	) {}
 
 	/**
 	 * Component lifecycle hook

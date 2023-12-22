@@ -43,24 +43,21 @@ describe("AppDataComponent", () => {
 
 	const mockLogger: MockStarkLoggingService = new MockStarkLoggingService();
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkAppDataComponent, TestHostComponent],
-				imports: [
-					CommonModule,
-					MatButtonModule,
-					MatIconModule,
-					MatIconTestingModule,
-					MatMenuModule,
-					MatTooltipModule,
-					NoopAnimationsModule,
-					TranslateModule.forRoot()
-				],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger }, TranslateService]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkAppDataComponent, TestHostComponent],
+			imports: [
+				CommonModule,
+				MatButtonModule,
+				MatIconModule,
+				MatIconTestingModule,
+				MatMenuModule,
+				MatTooltipModule,
+				NoopAnimationsModule,
+				TranslateModule.forRoot()
+			],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger }, TranslateService]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		// OverlayContainer needs to be injected to get the context for the rendered menu dropdown

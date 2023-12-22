@@ -18,19 +18,16 @@ describe("SessionExpiredPageComponent", () => {
 		baseUrl: "base-url"
 	};
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkSessionCardComponent, StarkSessionExpiredPageComponent],
-				imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
-				providers: [
-					{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() }, // needed by AppLogo component
-					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkSessionCardComponent, StarkSessionExpiredPageComponent],
+			imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
+			providers: [
+				{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() }, // needed by AppLogo component
+				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+				{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig }
+			]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkSessionExpiredPageComponent);

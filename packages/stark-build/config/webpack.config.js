@@ -76,7 +76,7 @@ module.exports = (config, options) => {
 						chunkOrigins: true,
 						reasons: true,
 						optimizationBailout: true // display bailout reasons (ModuleConcatenationPlugin debugging)
-				  }
+					}
 				: {}
 		),
 
@@ -139,7 +139,7 @@ module.exports = (config, options) => {
 							openAnalyzer: true, //default 'true'
 							analyzerPort: 3030 // default 8888
 						})
-				  ]
+					]
 				: []),
 
 			/**
@@ -156,7 +156,7 @@ module.exports = (config, options) => {
 							failOnError: false,
 							files: ["src/**/*.?(pc|sc|c|sa)ss"] // pcss|scss|css|sass
 						})
-				  ]
+					]
 				: [])
 		],
 
@@ -208,7 +208,7 @@ module.exports = (config, options) => {
 							"X-Content-Type-Options": "nosniff"
 						}
 					}
-			  }
+				}
 			: {})
 	});
 };

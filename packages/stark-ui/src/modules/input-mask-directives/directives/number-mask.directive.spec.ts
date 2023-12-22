@@ -58,12 +58,9 @@ describe("NumberMaskDirective", () => {
 	});
 
 	describe("uncontrolled", () => {
-		beforeEach(
-			waitForAsync(() =>
-				// compile template and css
-				TestBed.compileComponents()
-			)
-		);
+		beforeEach(waitForAsync(() =>
+			// compile template and css
+			TestBed.compileComponents()));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -151,16 +148,14 @@ describe("NumberMaskDirective", () => {
 	});
 
 	describe("with ngModel", () => {
-		beforeEach(
-			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkNumberMask]='numberMaskConfig'");
+		beforeEach(waitForAsync(() => {
+			const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkNumberMask]='numberMaskConfig'");
 
-				TestBed.overrideTemplate(TestComponent, newTemplate);
+			TestBed.overrideTemplate(TestComponent, newTemplate);
 
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -252,16 +247,14 @@ describe("NumberMaskDirective", () => {
 	describe("with FormControl", () => {
 		let mockValueChangeObserver: jasmine.SpyObj<Observer<any>>;
 
-		beforeEach(
-			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[formControl]='formControl' [starkNumberMask]='numberMaskConfig'");
+		beforeEach(waitForAsync(() => {
+			const newTemplate: string = getTemplate("[formControl]='formControl' [starkNumberMask]='numberMaskConfig'");
 
-				TestBed.overrideTemplate(TestComponent, newTemplate);
+			TestBed.overrideTemplate(TestComponent, newTemplate);
 
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();

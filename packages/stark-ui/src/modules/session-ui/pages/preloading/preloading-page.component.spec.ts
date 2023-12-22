@@ -32,20 +32,17 @@ describe("PreloadingPageComponent", () => {
 	const mockSessionService: MockStarkSessionService = new MockStarkSessionService();
 	const mockRoutingService: MockStarkRoutingService = new MockStarkRoutingService();
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkSessionCardComponent, StarkPreloadingPageComponent],
-				imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
-					{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
-					{ provide: STARK_USER_SERVICE, useValue: mockUserService },
-					{ provide: STARK_SESSION_SERVICE, useValue: mockSessionService }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkSessionCardComponent, StarkPreloadingPageComponent],
+			imports: [CommonModule, MatButtonModule, MatCardModule, StarkAppLogoModule, TranslateModule.forRoot()],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: mockLogger },
+				{ provide: STARK_ROUTING_SERVICE, useValue: mockRoutingService },
+				{ provide: STARK_USER_SERVICE, useValue: mockUserService },
+				{ provide: STARK_SESSION_SERVICE, useValue: mockSessionService }
+			]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(StarkPreloadingPageComponent);

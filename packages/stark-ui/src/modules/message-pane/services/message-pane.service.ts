@@ -19,7 +19,10 @@ export class StarkMessagePaneServiceImpl implements StarkMessagePaneService {
 	protected messages$: Observable<StarkMessageCollection>;
 	public clearOnNavigation = false;
 
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, public store: Store<StarkUIApplicationState>) {
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		public store: Store<StarkUIApplicationState>
+	) {
 		this.logger.debug(starkMessagePaneServiceName + " loaded");
 		this.messages$ = this.store.pipe(select(selectStarkMessages));
 	}

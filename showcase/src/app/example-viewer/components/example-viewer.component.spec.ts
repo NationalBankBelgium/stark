@@ -46,28 +46,26 @@ describe("ExampleViewerComponent", () => {
 	const router: MockStarkRoutingService = new MockStarkRoutingService();
 	router.getCurrentStateName.and.returnValue(mockStateName);
 
-	beforeEach(
-		waitForAsync(() => {
-			return TestBed.configureTestingModule({
-				declarations: [ExampleViewerComponent, TestHostComponent],
-				imports: [NoopAnimationsModule, MatButtonModule, MatTabsModule, MatTooltipModule, StarkPrettyPrintModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useValue: router },
-					{
-						provide: FileService,
-						useValue: jasmine.createSpyObj("FileServiceSpy", ["fetchFile"])
-					},
-					{
-						// See https://github.com/NationalBankBelgium/stark/issues/1088
-						provide: HAMMER_LOADER,
-						useValue: (): Promise<any> => new Subject<any>().toPromise()
-					}
-				],
-				schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		return TestBed.configureTestingModule({
+			declarations: [ExampleViewerComponent, TestHostComponent],
+			imports: [NoopAnimationsModule, MatButtonModule, MatTabsModule, MatTooltipModule, StarkPrettyPrintModule],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: STARK_ROUTING_SERVICE, useValue: router },
+				{
+					provide: FileService,
+					useValue: jasmine.createSpyObj("FileServiceSpy", ["fetchFile"])
+				},
+				{
+					// See https://github.com/NationalBankBelgium/stark/issues/1088
+					provide: HAMMER_LOADER,
+					useValue: (): Promise<any> => new Subject<any>().toPromise()
+				}
+			],
+			schemas: [NO_ERRORS_SCHEMA] // tells the Angular compiler to ignore unrecognized elements and attributes: mat-icon
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		logger = TestBed.inject<MockStarkLoggingService>(STARK_LOGGING_SERVICE);

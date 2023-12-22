@@ -65,28 +65,18 @@ describe("AlertDialogComponent", () => {
 		element.dispatchEvent(keydownEvent);
 	}
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [TestHostComponent, StarkAlertDialogComponent],
-				imports: [
-					CommonModule,
-					NoopAnimationsModule,
-					MatDialogModule,
-					MatIconModule,
-					MatIconTestingModule,
-					TranslateModule.forRoot()
-				],
-				providers: []
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [TestHostComponent, StarkAlertDialogComponent],
+			imports: [CommonModule, NoopAnimationsModule, MatDialogModule, MatIconModule, MatIconTestingModule, TranslateModule.forRoot()],
+			providers: []
+		})
+			.overrideModule(BrowserDynamicTestingModule, {
+				// FIXME review after https://github.com/angular/angular/issues/10760
+				// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
+				set: { entryComponents: [StarkAlertDialogComponent] }
 			})
-				.overrideModule(BrowserDynamicTestingModule, {
-					// FIXME review after https://github.com/angular/angular/issues/10760
-					// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
-					set: { entryComponents: [StarkAlertDialogComponent] }
-				})
-				.compileComponents()
-		)
-	);
+			.compileComponents()));
 
 	beforeEach(inject(
 		[MatDialog, OverlayContainer, ComponentFactoryResolver],

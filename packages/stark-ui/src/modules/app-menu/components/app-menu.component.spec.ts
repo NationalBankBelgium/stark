@@ -15,22 +15,19 @@ describe("AppMenuComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				declarations: [StarkAppMenuComponent, StarkAppMenuItemComponent],
-				imports: [MatIconModule, MatIconTestingModule, MatListModule, UIRouterModule],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
-				]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			declarations: [StarkAppMenuComponent, StarkAppMenuItemComponent],
+			imports: [MatIconModule, MatIconTestingModule, MatListModule, UIRouterModule],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService }
+			]
+		})
+			/**
+			 * Compile template and css
+			 */
+			.compileComponents()));
 
 	/**
 	 * Synchronous beforeEach

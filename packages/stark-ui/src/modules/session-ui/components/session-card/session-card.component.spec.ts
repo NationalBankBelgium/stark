@@ -24,18 +24,15 @@ describe("SessionCardComponent", () => {
 	let fixture: ComponentFixture<TestComponent>;
 	let component: TestComponent;
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [CommonModule, StarkAppLogoModule, TranslateModule.forRoot(), MatCardModule],
-				declarations: [TestComponent, StarkSessionCardComponent],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() } // needed by AppLogo component
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [CommonModule, StarkAppLogoModule, TranslateModule.forRoot(), MatCardModule],
+			declarations: [TestComponent, StarkSessionCardComponent],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: STARK_ROUTING_SERVICE, useValue: new MockStarkRoutingService() } // needed by AppLogo component
+			]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(TestComponent);

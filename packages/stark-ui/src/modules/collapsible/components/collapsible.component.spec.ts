@@ -14,19 +14,16 @@ describe("CollapsibleComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [MatExpansionModule, MatIconModule, MatIconTestingModule, NoopAnimationsModule],
-				declarations: [StarkCollapsibleComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [MatExpansionModule, MatIconModule, MatIconTestingModule, NoopAnimationsModule],
+			declarations: [StarkCollapsibleComponent],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }]
+		})
+			/**
+			 * Compile template and css
+			 */
+			.compileComponents()));
 
 	/**
 	 * Synchronous beforeEach

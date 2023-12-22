@@ -22,25 +22,22 @@ describe("Effects: StarkSessionTimeoutWarningDialogEffects", () => {
 	let mockSessionUiConfig: StarkSessionUiConfig;
 	let actions: Observable<any>;
 
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot(), MatButtonModule],
-				providers: [
-					StarkSessionTimeoutWarningDialogEffects,
-					provideMockActions(() => actions),
-					TranslateService,
-					{
-						provide: MatDialog,
-						useValue: createSpyObj("MatDialogSpy", ["open", "close", "closeAll"])
-					},
-					{ provide: StarkSessionTimeoutWarningDialogComponent, useValue: StarkSessionTimeoutWarningDialogComponent },
-					{ provide: STARK_SESSION_SERVICE, useFactory: (): MockStarkSessionService => new MockStarkSessionService() },
-					{ provide: STARK_SESSION_UI_CONFIG, useValue: new StarkSessionUiConfig() }
-				]
-			}).compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [NoopAnimationsModule, MatDialogModule, TranslateModule.forRoot(), MatButtonModule],
+			providers: [
+				StarkSessionTimeoutWarningDialogEffects,
+				provideMockActions(() => actions),
+				TranslateService,
+				{
+					provide: MatDialog,
+					useValue: createSpyObj("MatDialogSpy", ["open", "close", "closeAll"])
+				},
+				{ provide: StarkSessionTimeoutWarningDialogComponent, useValue: StarkSessionTimeoutWarningDialogComponent },
+				{ provide: STARK_SESSION_SERVICE, useFactory: (): MockStarkSessionService => new MockStarkSessionService() },
+				{ provide: STARK_SESSION_UI_CONFIG, useValue: new StarkSessionUiConfig() }
+			]
+		}).compileComponents()));
 
 	beforeEach(() => {
 		effectsClass = TestBed.inject(StarkSessionTimeoutWarningDialogEffects);

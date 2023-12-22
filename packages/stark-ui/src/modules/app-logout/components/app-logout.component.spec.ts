@@ -27,25 +27,22 @@ describe("AppLogoutComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [MatTooltipModule, MatButtonModule, MatIconModule, MatIconTestingModule, TranslateModule.forRoot()],
-				declarations: [StarkAppLogoutComponent],
-				providers: [
-					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-					{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
-					{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
-					// Need to clone the object to avoid mutation of it between tests
-					{ provide: STARK_SESSION_CONFIG, useValue: { ...mockStarkSessionConfig } }
-				]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [MatTooltipModule, MatButtonModule, MatIconModule, MatIconTestingModule, TranslateModule.forRoot()],
+			declarations: [StarkAppLogoutComponent],
+			providers: [
+				{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+				{ provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
+				{ provide: STARK_ROUTING_SERVICE, useClass: MockStarkRoutingService },
+				// Need to clone the object to avoid mutation of it between tests
+				{ provide: STARK_SESSION_CONFIG, useValue: { ...mockStarkSessionConfig } }
+			]
+		})
+			/**
+			 * Compile template and css
+			 */
+			.compileComponents()));
 
 	/**
 	 * Synchronous beforeEach

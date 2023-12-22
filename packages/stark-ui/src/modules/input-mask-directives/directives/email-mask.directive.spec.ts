@@ -53,12 +53,9 @@ describe("EmailMaskDirective", () => {
 	});
 
 	describe("uncontrolled", () => {
-		beforeEach(
-			waitForAsync(() =>
-				// compile template and css
-				TestBed.compileComponents()
-			)
-		);
+		beforeEach(waitForAsync(() =>
+			// compile template and css
+			TestBed.compileComponents()));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -141,16 +138,14 @@ describe("EmailMaskDirective", () => {
 	});
 
 	describe("with ngModel", () => {
-		beforeEach(
-			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkEmailMask]='emailMaskConfig'");
+		beforeEach(waitForAsync(() => {
+			const newTemplate: string = getTemplate("[(ngModel)]='ngModelValue' [starkEmailMask]='emailMaskConfig'");
 
-				TestBed.overrideTemplate(TestComponent, newTemplate);
+			TestBed.overrideTemplate(TestComponent, newTemplate);
 
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();
@@ -236,16 +231,14 @@ describe("EmailMaskDirective", () => {
 	describe("with FormControl", () => {
 		let mockValueChangeObserver: jasmine.SpyObj<Observer<any>>;
 
-		beforeEach(
-			waitForAsync(() => {
-				const newTemplate: string = getTemplate("[formControl]='formControl' [starkEmailMask]='emailMaskConfig'");
+		beforeEach(waitForAsync(() => {
+			const newTemplate: string = getTemplate("[formControl]='formControl' [starkEmailMask]='emailMaskConfig'");
 
-				TestBed.overrideTemplate(TestComponent, newTemplate);
+			TestBed.overrideTemplate(TestComponent, newTemplate);
 
-				// compile template and css
-				return TestBed.compileComponents();
-			})
-		);
+			// compile template and css
+			return TestBed.compileComponents();
+		}));
 
 		beforeEach(() => {
 			initializeComponentFixture();

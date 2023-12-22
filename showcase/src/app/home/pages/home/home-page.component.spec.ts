@@ -37,28 +37,26 @@ describe(`Home`, () => {
 	/**
 	 * async beforeEach.
 	 */
-	beforeEach(
-		waitForAsync(() => {
-			return (
-				TestBed.configureTestingModule({
-					declarations: [HomePageComponent],
-					schemas: [NO_ERRORS_SCHEMA],
-					imports: [HttpClientTestingModule, TranslateModule.forRoot()],
-					providers: [
-						{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
-						{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
-						{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
-						provideMockStore()
-					]
-				})
+	beforeEach(waitForAsync(() => {
+		return (
+			TestBed.configureTestingModule({
+				declarations: [HomePageComponent],
+				schemas: [NO_ERRORS_SCHEMA],
+				imports: [HttpClientTestingModule, TranslateModule.forRoot()],
+				providers: [
+					{ provide: STARK_APP_CONFIG, useValue: mockStarkAppConfig },
+					{ provide: STARK_HTTP_SERVICE, useValue: MockStarkHttpService },
+					{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() },
+					provideMockStore()
+				]
+			})
 
-					/**
-					 * Compile template and css.
-					 */
-					.compileComponents()
-			);
-		})
-	);
+				/**
+				 * Compile template and css.
+				 */
+				.compileComponents()
+		);
+	}));
 
 	/**
 	 * Synchronous beforeEach.

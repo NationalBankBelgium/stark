@@ -465,7 +465,7 @@ export class StarkDateTimePickerComponent
 							min: minDate.toISOString(),
 							actual: controlValue.toISOString()
 						}
-				  }
+					}
 				: null;
 		};
 	}
@@ -488,7 +488,7 @@ export class StarkDateTimePickerComponent
 							max: maxDate.toISOString(),
 							actual: controlValue.toISOString()
 						}
-				  }
+					}
 				: null;
 		};
 	}

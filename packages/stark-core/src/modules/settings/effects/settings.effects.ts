@@ -15,7 +15,10 @@ export class StarkSettingsEffects {
 	 * @param actions$ - The action to perform.
 	 * @param sessionService - The `StarkSessionService` instance of the application.
 	 */
-	public constructor(private actions$: Actions, @Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService) {}
+	public constructor(
+		private actions$: Actions,
+		@Inject(STARK_SESSION_SERVICE) public sessionService: StarkSessionService
+	) {}
 
 	/**
 	 * Sets the language of the current session via the `StarkSessionService` whenever the preferred language changes in the settings.

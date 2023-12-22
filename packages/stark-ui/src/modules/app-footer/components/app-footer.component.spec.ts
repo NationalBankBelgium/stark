@@ -15,19 +15,16 @@ describe("AppFooterComponent", () => {
 	/**
 	 * async beforeEach
 	 */
-	beforeEach(
-		waitForAsync(() =>
-			TestBed.configureTestingModule({
-				imports: [TranslateModule.forRoot()],
-				declarations: [StarkAppFooterComponent],
-				providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
-			})
-				/**
-				 * Compile template and css
-				 */
-				.compileComponents()
-		)
-	);
+	beforeEach(waitForAsync(() =>
+		TestBed.configureTestingModule({
+			imports: [TranslateModule.forRoot()],
+			declarations: [StarkAppFooterComponent],
+			providers: [{ provide: STARK_LOGGING_SERVICE, useValue: new MockStarkLoggingService() }, TranslateService]
+		})
+			/**
+			 * Compile template and css
+			 */
+			.compileComponents()));
 
 	// Inject module dependencies
 	beforeEach(inject([TranslateService], (_translateService: TranslateService) => {

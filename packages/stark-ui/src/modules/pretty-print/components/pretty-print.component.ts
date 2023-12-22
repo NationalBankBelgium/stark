@@ -1,5 +1,6 @@
 import {
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	Inject,
@@ -10,52 +11,15 @@ import {
 	SimpleChanges,
 	ViewEncapsulation
 } from "@angular/core";
-import sqlFormatter from "@sqltools/formatter";
-/* eslint-disable no-duplicate-imports, import/no-unassigned-import */
-import * as Prism from "prismjs";
-import { Grammar } from "prismjs";
-// prism loads these languages by default: "css", "clike", "javascript" and "markup" (which includes "xml", "html", "mathml", "svg")
-import "prismjs/components/prism-typescript.min.js";
-import "prismjs/components/prism-sql.min.js";
-import "prismjs/components/prism-json.min.js";
-import "prismjs/components/prism-css-extras.min.js";
-import "prismjs/components/prism-scss.min.js";
-/* eslint-enable */
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { STARK_PRETTY_PRINT_SERVICE, StarkPrettyPrintService } from "../services";
+import { StarkPrettyPrintFormat } from "../types";
 
 /**
  * @ignore
  */
 const componentName = "stark-pretty-print";
-
-/**
- * The prefix used in the PrismJs CSS classes
- */
-const prismClassPrefix = "language-";
-
-/**
- * A reference to the prettier library
- */
-const prettier: any = require("prettier/standalone");
-
-/**
- * A reference to the prettier plugins
- */
-// const prettierPluginXML: any = require("@prettier/plugin-xml");
-const prettierPlugins: any = [
-	require("@prettier/plugin-xml"),
-	require("prettier/parser-angular"),
-	require("prettier/parser-babel"),
-	require("prettier/parser-html"),
-	require("prettier/parser-postcss"),
-	require("prettier/parser-typescript")
-];
-
-/**
- * The code languages that are supported by the Stark-Pretty-Print component
- */
-export type StarkPrettyPrintFormat = "css" | "scss" | "html" | "xml" | "json" | "sql" | "javascript" | "typescript";
 
 /* eslint-disable jsdoc/check-alignment,jsdoc/check-indentation */
 /**
@@ -73,6 +37,7 @@ export type StarkPrettyPrintFormat = "css" | "scss" | "html" | "xml" | "json" | 
  *   - {@link https://prismjs.com/|PrismJS website}
  *   - {@link https://github.com/PrismJS/prism/tree/master/themes|PrismJS theme files}
  */
+
 /* eslint-enable jsdoc/check-alignment, jsdoc/check-indentation */
 @Component({
 	selector: "stark-pretty-print",
@@ -127,10 +92,18 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * Class constructor
 	 * @param logger - The `StarkLoggingService` instance of the application.
+	 * @param cdRef - Reference to the change detector attached to this component.
+	 * @param prettyPrintService - The `StarkPrettyPrintService` needed to format the data and highlight the inserted data.
 	 * @param renderer - Angular `Renderer2` wrapper for DOM manipulations.
 	 * @param elementRef - Reference to the DOM element where this component is attached to.
 	 */
-	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService, renderer: Renderer2, elementRef: ElementRef) {
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		private cdRef: ChangeDetectorRef,
+		@Inject(STARK_PRETTY_PRINT_SERVICE) public prettyPrintService: StarkPrettyPrintService,
+		renderer: Renderer2,
+		elementRef: ElementRef
+	) {
 		super(renderer, elementRef);
 	}
 
@@ -156,86 +129,19 @@ export class StarkPrettyPrintComponent extends AbstractStarkUiComponent implemen
 		this.prettyString = "";
 
 		if (this.data && this.data.length > 0) {
-			let prismGrammar: Grammar = <any>"";
-			let prismClass = "";
-
-			try {
-				switch (this.format) {
-					case "xml":
-						prismGrammar = Prism.languages["markup"];
-						prismClass = prismClassPrefix + "markup";
-						this.prettyString = prettier.format(this.data, {
-							parser: "xml",
-							plugins: prettierPlugins,
-							xmlWhitespaceSensitivity: "ignore"
-						});
-						break;
-
-					case "html":
-						prismGrammar = Prism.languages["markup"];
-						prismClass = prismClassPrefix + "markup";
-						this.prettyString = prettier.format(this.data, { parser: "angular", plugins: prettierPlugins });
-						break;
-
-					case "json":
-						prismGrammar = Prism.languages["json"];
-						prismClass = prismClassPrefix + this.format;
-						JSON.parse(this.data);
-						this.prettyString = prettier.format(this.data, { parser: "json", plugins: prettierPlugins });
-						break;
-
-					case "css":
-						prismGrammar = Prism.languages["css"];
-						prismClass = prismClassPrefix + this.format;
-						this.prettyString = prettier.format(this.data, { parser: "css", plugins: prettierPlugins });
-						break;
-
-					case "scss":
-						prismGrammar = Prism.languages["scss"];
-						prismClass = prismClassPrefix + this.format;
-						this.prettyString = prettier.format(this.data, { parser: "scss", plugins: prettierPlugins });
-						break;
-
-					case "sql":
-						prismGrammar = Prism.languages["sql"];
-						prismClass = prismClassPrefix + this.format;
-						this.prettyString = sqlFormatter.format(this.data, { language: "sql" });
-						break;
-
-					case "javascript":
-						prismGrammar = Prism.languages["javascript"];
-						prismClass = prismClassPrefix + this.format;
-						this.prettyString = prettier.format(this.data, { parser: "babel", plugins: prettierPlugins });
-						break;
-
-					case "typescript":
-						prismGrammar = Prism.languages["typescript"];
-						prismClass = prismClassPrefix + this.format;
-						this.prettyString = prettier.format(this.data, {
-							parser: "typescript",
-							plugins: prettierPlugins
-						});
-						break;
-
-					default:
-						this.logger.warn(componentName + ": Unknown format -> ", this.format);
-						this.highlightingEnabled = false;
-						this.prettyString = this.data;
-						break;
+			this.prettyPrintService.format(this.data, this.format, this.highlightingEnabled).subscribe(
+				(value: string): void => {
+					this.prettyString = value;
+					this.cdRef.detectChanges();
+				},
+				(value: string) => {
+					// when have an error with the data and format unknown the service throw and observable error and then give back the value
+					// in this case we should disable the highlighting.
+					this.prettyString = value;
+					this.highlightingEnabled = false;
+					this.cdRef.detectChanges();
 				}
-			} catch (e) {
-				this.logger.warn(componentName + ": Invalid " + this.format + " data");
-				// the data string might not be valid so it should be in a try-catch clause
-				// in this case we just show the raw data
-				this.prettyString = this.data;
-				this.highlightingEnabled = false;
-			}
-
-			if (this.highlightingEnabled) {
-				this.prettyString = Prism.highlight(this.prettyString, prismGrammar, this.format);
-				this.prettyString =
-					"<pre class='" + prismClass + "'><code class='" + prismClass + "'>" + this.prettyString + "</code></pre>";
-			}
+			);
 		}
 	}
 }

@@ -89,7 +89,10 @@ export class MovieSearchFormComponent implements OnInit, OnChanges, StarkSearchF
 
   public searchForm: FormGroup;
 
-  public constructor(@Inject(DEMO_GENERIC_SERVICE) private genericService: DemoGenericService, private formBuilder: FormBuilder) {}
+  public constructor(
+    @Inject(DEMO_GENERIC_SERVICE) private genericService: DemoGenericService,
+    private formBuilder: FormBuilder
+  ) {}
 
   public ngOnInit(): void {
     this.searchForm = this.createSearchForm(this.searchCriteria);
@@ -361,7 +364,10 @@ import { MovieSearchActions } from "../actions";
 
 @Injectable()
 export class DemoGenericServiceImpl implements MovieService {
-  public constructor(private store: Store<MovieSearchState>, @Inject(MOVIE_REPOSITORY) private movieRepository: MovieRepository) {}
+  public constructor(
+    private store: Store<MovieSearchState>,
+    @Inject(MOVIE_REPOSITORY) private movieRepository: MovieRepository
+  ) {}
 
   public getSearchState(): Observable<StarkSearchState<MovieSearchCriteria>> {
     return this.store.pipe(select(selectMovieSearch));
