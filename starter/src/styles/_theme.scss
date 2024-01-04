@@ -6,8 +6,8 @@ Import the local variables file first to set the correct variables, see:
 @use "variables";
 @use "sass:map";
 
-@use "~@angular/material" as mat;
-@use "~@nationalbankbelgium/stark-ui" as stark-ui;
+@use "@angular/material" as mat;
+@use "@nationalbankbelgium/stark-ui" as stark-ui;
 
 @include mat.core();
 @include stark-ui.set-stark-ui-styles();
