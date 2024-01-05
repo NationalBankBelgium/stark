@@ -26,39 +26,36 @@ import { StarkTableExpandDetailDirective } from "./directives/table-expand-detai
 import { StarkTableRowContentDirective } from "./directives/table-row-content.directive";
 
 @NgModule({
-	declarations: [
-		StarkTableComponent,
-		StarkTableMultisortDialogComponent,
-		StarkTableColumnComponent,
-		StarkTableRowContentDirective,
-		StarkTableExpandDetailDirective
-	],
-	entryComponents: [StarkTableMultisortDialogComponent],
-	exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableRowContentDirective, StarkTableExpandDetailDirective],
-	imports: [
-		// Common
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-		TranslateModule,
-
-		// Material
-		MatButtonModule,
-		MatCheckboxModule,
-		MatDialogModule,
-		MatIconModule,
-		MatInputModule,
-		MatMenuModule,
-		MatSelectModule,
-		MatSortModule,
-		MatTableModule,
-		MatTooltipModule,
-
-		// Stark
-		StarkActionBarModule,
-		StarkPaginationModule,
-		StarkMinimapModule
-	]
+    declarations: [
+        StarkTableComponent,
+        StarkTableMultisortDialogComponent,
+        StarkTableColumnComponent,
+        StarkTableRowContentDirective,
+        StarkTableExpandDetailDirective
+    ],
+    exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableRowContentDirective, StarkTableExpandDetailDirective],
+    imports: [
+        // Common
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        // Material
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatIconModule,
+        MatInputModule,
+        MatMenuModule,
+        MatSelectModule,
+        MatSortModule,
+        MatTableModule,
+        MatTooltipModule,
+        // Stark
+        StarkActionBarModule,
+        StarkPaginationModule,
+        StarkMinimapModule
+    ]
 })
 export class StarkTableModule {
 	/**

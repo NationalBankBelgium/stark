@@ -4,7 +4,7 @@
 /* stark-ui: src/modules/minimap/components/minimap-theme.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 @use "../../../../styles/old-variables" as old-vars;
 
 @mixin stark-minimap-theme($material-theme-config, $stark-theme-config) {

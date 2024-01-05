@@ -4,7 +4,7 @@
 /* stark-ui: src/modules/dialogs/components/confirm-dialog.component.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-confirm-dialog-theme($material-theme-config, $stark-theme-config) {
   $primary-palette: map.get($material-theme-config, primary);

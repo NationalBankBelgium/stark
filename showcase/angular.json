@@ -62,8 +62,12 @@
                 "input": "src/styles/styles.scss"
               }
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
             "scripts": [],
-            "deployUrl": "/",
             "baseHref": "/"
           },
           "configurations": {

@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 @use "../old-variables" as old-vars;
 @use "./typography" as stark-typography;
 @use "./material-palette" as stark-mat-palette;

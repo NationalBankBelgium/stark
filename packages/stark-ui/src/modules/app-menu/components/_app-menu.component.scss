@@ -4,7 +4,7 @@
 /* stark-ui: src/modules/app-menu/components/app-menu/_app-menu.component.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-app-menu($material-theme-config, $stark-theme-config) {
   $primary-palette: map.get($material-theme-config, primary);

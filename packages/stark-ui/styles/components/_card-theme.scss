@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-card-theme($material-theme-config, $stark-theme-config) {
   $primary-palette: map.get($material-theme-config, primary);

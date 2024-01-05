@@ -8,9 +8,8 @@ import { TranslateModule } from "@ngx-translate/core";
 import { StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent } from "./components";
 
 @NgModule({
-	declarations: [StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent],
-	imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, TranslateModule, MatIconModule],
-	exports: [StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent],
-	entryComponents: [StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent]
+    declarations: [StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent],
+    imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, TranslateModule, MatIconModule],
+    exports: [StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent]
 })
 export class StarkDialogsModule {}

@@ -1,11 +1,6 @@
 {
   "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
-    "entryFile": "public_api.ts",
-    "umdModuleIds": {
-      "@nationalbankbelgium/stark-core": "stark.core",
-      "lodash-es/merge": "lodash-es.merge",
-      "lodash-es/uniqueId": "lodash-es.uniqueId"
-    }
+    "entryFile": "public_api.ts"
   }
 }

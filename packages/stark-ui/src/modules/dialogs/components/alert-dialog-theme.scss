@@ -4,7 +4,7 @@
 /* stark-ui: src/modules/dialogs/components/alert-dialog.component.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-alert-dialog-theme($material-theme-config, $stark-theme-config) {
   $alert-palette: map.get($stark-theme-config, alert-palette);

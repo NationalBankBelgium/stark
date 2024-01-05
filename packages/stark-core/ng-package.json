@@ -2,28 +2,6 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
     "entryFile": "public_api.ts",
-    "umdModuleIds": {
-      "@angularclass/hmr": "angularclass.hmr",
-      "@ng-idle/core": "ngIdle.core",
-      "@ng-idle/keepalive": "ngIdle.keepalive",
-      "@ngrx/effects": "ngrx.effects",
-      "@ngrx/store": "ngrx.store",
-      "@ngx-translate/core": "ngxTranslate.core",
-      "@uirouter/angular": "uirouter.angular",
-      "@uirouter/core": "uirouter.core",
-      "@uirouter/rx": "uirouter.rx",
-      "cerialize": "cerialize",
-      "class-validator": "class-validator",
-      "ibantools": "ibantools",
-      "lodash-es/cloneDeep": "lodash-es.cloneDeep",
-      "lodash-es/floor": "lodash-es.floor",
-      "lodash-es/isEmpty": "lodash-es.isEmpty",
-      "lodash-es/noop": "lodash-es.noop",
-      "lodash-es/reduce": "lodash-es.reduce",
-      "moment": "moment",
-      "uuid": "uuid",
-      "zone.js/plugins/long-stack-trace-zone": "zoneJs.plugins.longStackTraceZone"
-    },
     "flatModuleFile": "stark-core"
   },
   "dest": "../../dist/packages/stark-core",

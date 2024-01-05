@@ -2,9 +2,9 @@
 /*  S t a r k   R e f e r e n c e   B l o c k                                     */
 /* ============================================================================== */
 /* stark-ui: src/modules/reference-block/components/reference-block.component.scss */
-@use "~@angular/material" as mat;
-@use "~@nationalbankbelgium/stark-ui/styles/theming/stark-palettes" as *;
-@use "~@nationalbankbelgium/stark-ui/styles/old-variables" as *;
+@use "@angular/material" as mat;
+@use "@nationalbankbelgium/stark-ui/styles/theming/stark-palettes" as *;
+@use "@nationalbankbelgium/stark-ui/styles/old-variables" as *;
 
 .stark-reference-block div {
   background-color: #fff;

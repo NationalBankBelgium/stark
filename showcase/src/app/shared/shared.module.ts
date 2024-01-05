@@ -27,46 +27,45 @@ import { filter } from "rxjs/operators";
 import { ReferenceBlockComponent, TableOfContentsComponent } from "./components";
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-		FlexLayoutModule,
-		MatButtonModule,
-		MatButtonToggleModule,
-		MatCardModule,
-		MatCheckboxModule,
-		MatExpansionModule,
-		MatIconModule,
-		MatListModule,
-		MatTabsModule,
-		MatTooltipModule,
-		MatSnackBarModule,
-		TranslateModule,
-		UIRouterModule.forChild()
-	],
-	declarations: [ReferenceBlockComponent, TableOfContentsComponent],
-	entryComponents: [],
-	// export commonly used components/directives/components (see https://angular.io/guide/sharing-ngmodules)
-	exports: [
-		ReferenceBlockComponent,
-		TableOfContentsComponent,
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-		FlexLayoutModule,
-		MatButtonModule,
-		MatButtonToggleModule,
-		MatCardModule,
-		MatCheckboxModule,
-		MatExpansionModule,
-		MatIconModule,
-		MatListModule,
-		MatTabsModule,
-		MatTooltipModule,
-		MatSnackBarModule,
-		TranslateModule
-	]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatListModule,
+        MatTabsModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        TranslateModule,
+        UIRouterModule.forChild()
+    ],
+    declarations: [ReferenceBlockComponent, TableOfContentsComponent],
+    // export commonly used components/directives/components (see https://angular.io/guide/sharing-ngmodules)
+    exports: [
+        ReferenceBlockComponent,
+        TableOfContentsComponent,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatListModule,
+        MatTabsModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        TranslateModule
+    ]
 })
 export class SharedModule {
 	public constructor(

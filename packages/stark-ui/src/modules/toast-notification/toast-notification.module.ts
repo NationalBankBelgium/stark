@@ -13,10 +13,9 @@ import {
 import { StarkToastNotificationComponent } from "./components";
 
 @NgModule({
-	declarations: [StarkToastNotificationComponent],
-	imports: [CommonModule, MatButtonModule, MatIconModule, MatSnackBarModule, TranslateModule],
-	exports: [StarkToastNotificationComponent],
-	entryComponents: [StarkToastNotificationComponent] // More infos about entryComponents : https://github.com/angular/material2/issues/3002
+    declarations: [StarkToastNotificationComponent],
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatSnackBarModule, TranslateModule],
+    exports: [StarkToastNotificationComponent]
 })
 export class StarkToastNotificationModule {
 	/**

@@ -18,7 +18,7 @@
     "npm": ">=8.19.1"
   },
   "dependencies": {
-    "@angular/material-moment-adapter": "^12.2.13",
+    "@angular/material-moment-adapter": "^13.3.9",
     "@mdi/angular-material": "^4.0.96",
     "@sqltools/formatter": "^1.2.3",
     "@types/nouislider": "^9.0.10",
@@ -32,10 +32,10 @@
     "text-mask-core": "^5.1.2"
   },
   "peerDependencies": {
-    "@angular/animations": "^12.1.0",
-    "@angular/cdk": "^12.1.0",
-    "@angular/forms": "^12.1.0",
-    "@angular/material": "^12.1.0",
+    "@angular/animations": "^13.4.0",
+    "@angular/cdk": "^13.3.9",
+    "@angular/forms": "^13.4.0",
+    "@angular/material": "^13.3.9",
     "@nationalbankbelgium/stark-core": "0.0.0-PLACEHOLDER-VERSION"
   },
   "scripts": {

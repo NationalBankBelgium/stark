@@ -1,6 +1,6 @@
-@use "~@angular/material" as mat;
-@use "~@nationalbankbelgium/stark-ui" as stark-ui;
-@use "~@nationalbankbelgium/stark-ui/styles/media-queries" as *;
+@use "@angular/material" as mat;
+@use "@nationalbankbelgium/stark-ui" as stark-ui;
+@use "@nationalbankbelgium/stark-ui/styles/media-queries" as *;
 
 .message-pane-demo-actions {
   display: flex;

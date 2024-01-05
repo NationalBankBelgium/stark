@@ -69,7 +69,7 @@
 @use "./theming/material-palette" as stark-mat-palette;
 @use "./theming/stark-palettes" as stark-palette;
 @use "./theming/typography" as stark-typography;
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin set-stark-ui-styles($material-theme-config: null, $stark-theme-config: null) {
   @if $material-theme-config == null {

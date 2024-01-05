@@ -3,7 +3,7 @@
 /* ============================================================================== */
 /* stark-ui: packages/stark-ui/src/modules/collapsible/components/_collapsible.component.scss */
 @use "sass:map";
-@use "~@angular/material" as mat;
+@use "@angular/material" as mat;
 
 @mixin stark-collapsible($material-theme-config, $stark-theme-config) {
   $typography-config: map.get($material-theme-config, typography);

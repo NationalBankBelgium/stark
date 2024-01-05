@@ -27,36 +27,35 @@ import { StarkSessionCardComponent } from "./components/session-card/session-car
 import { StarkSessionTimeoutWarningDialogComponent } from "./components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
 
 @NgModule({
-	declarations: [
-		StarkLoginPageComponent,
-		StarkPreloadingPageComponent,
-		StarkSessionExpiredPageComponent,
-		StarkSessionLogoutPageComponent,
-		StarkSessionTimeoutWarningDialogComponent,
-		StarkSessionCardComponent
-	],
-	exports: [
-		StarkLoginPageComponent,
-		StarkPreloadingPageComponent,
-		StarkSessionExpiredPageComponent,
-		StarkSessionLogoutPageComponent,
-		StarkSessionTimeoutWarningDialogComponent
-	],
-	imports: [
-		CommonModule,
-		UIRouterModule.forChild({
-			states: SESSION_UI_STATES
-		}),
-		MatButtonModule,
-		MatDialogModule,
-		MatCardModule,
-		MatDividerModule,
-		MatListModule,
-		TranslateModule,
-		EffectsModule.forFeature([StarkSessionTimeoutWarningDialogEffects]),
-		StarkAppLogoModule
-	],
-	entryComponents: [StarkSessionTimeoutWarningDialogComponent]
+    declarations: [
+        StarkLoginPageComponent,
+        StarkPreloadingPageComponent,
+        StarkSessionExpiredPageComponent,
+        StarkSessionLogoutPageComponent,
+        StarkSessionTimeoutWarningDialogComponent,
+        StarkSessionCardComponent
+    ],
+    exports: [
+        StarkLoginPageComponent,
+        StarkPreloadingPageComponent,
+        StarkSessionExpiredPageComponent,
+        StarkSessionLogoutPageComponent,
+        StarkSessionTimeoutWarningDialogComponent
+    ],
+    imports: [
+        CommonModule,
+        UIRouterModule.forChild({
+            states: SESSION_UI_STATES
+        }),
+        MatButtonModule,
+        MatDialogModule,
+        MatCardModule,
+        MatDividerModule,
+        MatListModule,
+        TranslateModule,
+        EffectsModule.forFeature([StarkSessionTimeoutWarningDialogEffects]),
+        StarkAppLogoModule
+    ]
 })
 export class StarkSessionUiModule {
 	/**

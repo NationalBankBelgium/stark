@@ -24,7 +24,9 @@ import "zone.js/plugins/long-stack-trace-zone";
 /* tslint:enable:no-import-side-effect */
 
 // define global environment variable (used in some places in stark-core and stark-ui)
-global["ENV"] = "development";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+globalThis["ENV"] = "development";
 
 import { getTestBed } from "@angular/core/testing";
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
@@ -40,7 +42,9 @@ declare const require: {
 		<T>(id: string): T;
 	};
 };
-getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    teardown: { destroyAfterEach: false }
+});
 
 // Then we find all the tests.
 const context = require.context("./src", true, /\.spec\.ts$/);

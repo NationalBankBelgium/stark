@@ -52,13 +52,6 @@
             "tsConfig": "./packages/stark-rbac/tsconfig.spec.json",
             "karmaConfig": "./packages/stark-rbac/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["./packages/stark-rbac/tsconfig.lib.json", "./packages/stark-rbac/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },

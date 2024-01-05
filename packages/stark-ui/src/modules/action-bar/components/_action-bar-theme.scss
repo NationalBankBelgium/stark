@@ -4,8 +4,8 @@
 /* stark-ui: src/modules/action-bar/components/_action-bar-theme.scss */
 
 @use "sass:map";
-@use "~@angular/material" as mat;
-@use "~@angular/material/core/theming/palette" as mat-palette;
+@use "@angular/material" as mat;
+@use "@angular/material/core/theming/palette" as mat-palette;
 @use "../../../../styles/components/button-theme" as stark-button-theme;
 @use "../../../../styles/media-queries" as *;
 
