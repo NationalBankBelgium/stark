@@ -63,11 +63,10 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules"
-              ]
+              "includePaths": ["node_modules"]
             },
             "scripts": [],
+            "deployUrl": "/",
             "baseHref": "/"
           },
           "configurations": {
