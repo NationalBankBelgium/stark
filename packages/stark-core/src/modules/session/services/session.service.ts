@@ -159,7 +159,7 @@ export class StarkSessionServiceImpl implements StarkSessionService {
 							return true;
 						})
 					)
-					.toPromise<boolean>(),
+					.toPromise(),
 			{ priority: 1000 } // very high priority (this hook should be the first one to be called to reject transitions immediately)
 		);
 	}
