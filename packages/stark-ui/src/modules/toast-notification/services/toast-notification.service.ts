@@ -23,7 +23,7 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 	/**
 	 * Observer linked to the currently displayed toast notification
 	 */
-	public currentToastResult$?: Observer<StarkToastNotificationResult>;
+	private currentToastResult$?: Observer<StarkToastNotificationResult>;
 
 	/**
 	 * Reference of the currently displayed toast notification
@@ -58,7 +58,7 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 	}
 
 	public show(message: StarkToastMessage): Observable<StarkToastNotificationResult> {
-		if (this.currentToastResult$ && !this.currentToastResult$.closed) {
+		if (this.currentToastResult$) {
 			this.currentToastResult$.next(StarkToastNotificationResult.CLOSED_BY_NEW_TOAST);
 			this.currentToastResult$.complete();
 			this.currentToastResult$ = undefined;
@@ -73,7 +73,7 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 					tap((toastDismissedEvent: MatSnackBarDismiss) => {
 						// emit on the observer only if it is the current toast
 						// otherwise, it means it is a previous toast that is being closed by a new one
-						if (this.currentToastResult$ === observer && !observer.closed) {
+						if (this.currentToastResult$ === observer) {
 							if (!toastDismissedEvent.dismissedByAction) {
 								observer.next(StarkToastNotificationResult.CLOSED_ON_DELAY_TIMEOUT);
 							} else {
@@ -82,6 +82,7 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 							this.ref.tick();
 						}
 						observer.complete();
+						this.currentToastResult$ = undefined;
 					})
 				)
 				.subscribe();
@@ -89,7 +90,7 @@ export class StarkToastNotificationServiceImpl implements StarkToastNotification
 	}
 
 	public hide(): void {
-		if (this.currentToastResult$ && !this.currentToastResult$.closed) {
+		if (this.currentToastResult$) {
 			this.currentToastResult$.next(StarkToastNotificationResult.HIDDEN);
 			this.currentToastResult$.complete();
 			this.currentToastResult$ = undefined;

@@ -989,8 +989,7 @@ describe("Service: StarkRoutingService", () => {
 		});
 
 		it("should reload the current page", (done: DoneFn) => {
-			
-			spyOn($state, "reload").and.returnValue(<any>(throwError("Reload has failed").toPromise()));
+			spyOn($state, "reload").and.returnValue(<any>throwError("Reload has failed").toPromise());
 
 			const statesConfig: StateDeclaration[] = $state.get();
 			expect(statesConfig.length).toBe(numberOfMockStates);

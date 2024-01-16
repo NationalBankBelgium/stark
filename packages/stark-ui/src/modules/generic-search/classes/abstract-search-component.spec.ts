@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/no-lifecycle-call */
-import { Observable, Observer, of, Subject, Subscriber, throwError } from "rxjs";
+import {Observable, Observer, of, Subject, Subscriber, TeardownLogic, throwError} from "rxjs";
 import { AbstractStarkSearchComponent, StarkGenericSearchService } from "../classes";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkResource } from "@nationalbankbelgium/stark-core";
@@ -412,8 +412,8 @@ interface SearchCriteria {
 	uuid: string;
 }
 
-function createObservableOf<T>(value: T, teardown: Function): Observable<T> {
-	return new Observable((subscriber: Subscriber<T>): Function => {
+function createObservableOf<T>(value: T, teardown: TeardownLogic): Observable<T> {
+	return new Observable((subscriber: Subscriber<T>): TeardownLogic => {
 		subscriber.next(value);
 		return teardown;
 	});
