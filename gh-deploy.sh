@@ -199,6 +199,11 @@ if [[ ${GITHUB_ACTIONS} == true ]]; then
     git config user.email ${COMMIT_AUTHOR_EMAIL}
 fi
 
+if [[ ${GH_ACTIONS_TAG} =~ .*-(alpha|beta|rc).* ]]; then
+    logTrace "This is a pre-release version, we will publish the docs under the 'next' folder"
+    LATEST_DIR_NAME="next"
+fi
+
 logTrace "Cloning stark's github pages branch to ${DOCS_WORK_DIR}"
 
 AUTHENTICATED_TARGET_REPO=https://${GITHUB_ACTOR}:${GITHUB_API_KEY}@${TARGET_REPO}

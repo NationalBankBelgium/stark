@@ -34,6 +34,7 @@ GH_ACTIONS_TAG=${GH_ACTIONS_TAG:-""}
 
 # For normal builds:
 #GITHUB_EVENT_NAME="pull_request"
+#GITHUB_EVENT_NAME="push"
 #GH_ACTIONS_TAG="fooBar"
 
 # For nightly builds:
@@ -106,8 +107,8 @@ if [[ ${GITHUB_ACTIONS} == true ]]; then
   if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     logInfo "Not publishing because this is a build triggered for a pull request" 1
     exit 0;
-  elif [[ ${GITHUB_EVENT_NAME} == "schedule" ]]; then
-    logInfo "Nightly build initiated by GitHub Actions scheduled job" 1
+  elif [[ ${GITHUB_EVENT_NAME} == "schedule" || ${GH_ACTIONS_TAG} =~ .*-(alpha|beta|rc).* ]]; then
+    logInfo "Nightly build initiated by GitHub Actions scheduled job or pre-release tag" 1
     NIGHTLY_BUILD=true
   elif [[ ${GH_ACTIONS_TAG} == "" ]]; then
     logInfo "Not publishing because this is not a build triggered for a tag" 1
