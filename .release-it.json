@@ -3,7 +3,6 @@
   "dry-run": false,
   "verbose": false,
   "force": false,
-  "disable-metrics": true,
   "hooks": {
     "before:init": ["npm run check:starter:stark-versions"],
     "after:bump": ["npm run check:nightly:stark-versions -- ${version}", "npm run generate:changelog"]
