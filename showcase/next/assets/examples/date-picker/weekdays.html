@@ -1,0 +1,14 @@
+<mat-form-field>
+	<stark-date-picker
+		pickerId="picker-only-weekdays"
+		pickerName="only-weekdays"
+		[value]="currentDate"
+		[dateFilter]="'OnlyWeekdays'"
+		placeholder="Choose a date"
+		[min]="minDate"
+		[max]="maxDate"
+		dateMask="true"
+		(dateChange)="onDateChanged($event)"
+	>
+	</stark-date-picker>
+</mat-form-field>

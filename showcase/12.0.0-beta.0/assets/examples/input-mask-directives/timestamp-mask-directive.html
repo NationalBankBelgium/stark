@@ -1,0 +1,75 @@
+<div fxLayout="column" fxLayoutAlign="space-between" fxLayout.gt-sm="row wrap">
+	<mat-form-field>
+		<mat-label>Timestamp in DMY format</mat-label>
+		<input
+			matInput
+			id="timestamp-dmy-input-mask"
+			type="text"
+			(input)="logChange($event)"
+			placeholder="DD-MM-YYYY HH:mm:ss"
+			[starkTimestampMask]="timestampDMYMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Timestamp in MDY format</mat-label>
+		<input
+			matInput
+			id="timestamp-mdy-input-mask"
+			type="text"
+			[(ngModel)]="timestamp"
+			(input)="logModelChange(timestamp)"
+			placeholder="MM-DD-YYYY HH:mm:ss"
+			[starkTimestampMask]="timestampMDYMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Date in DMY format</mat-label>
+		<input
+			matInput
+			id="full-date-input-mask"
+			type="text"
+			[formControl]="fullDateField"
+			placeholder="DD-MM-YYYY"
+			[starkTimestampMask]="dateMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Day-Month</mat-label>
+		<input
+			matInput
+			id="day-month-input-mask"
+			type="text"
+			(input)="logChange($event)"
+			placeholder="DD-MM"
+			[starkTimestampMask]="dayMonthMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Month / Day</mat-label>
+		<input
+			matInput
+			id="month-day-input-mask"
+			type="text"
+			[(ngModel)]="monthDay"
+			(input)="logModelChange(monthDay)"
+			placeholder="MM/DD"
+			[starkTimestampMask]="monthDayMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Time</mat-label>
+		<input
+			matInput
+			id="time-input-mask"
+			type="text"
+			[formControl]="timeField"
+			placeholder="HH:mm:ss"
+			[starkTimestampMask]="timeMaskConfig"
+		/>
+	</mat-form-field>
+</div>

@@ -1,0 +1,14 @@
+<stark-collapsible htmlId="thirdCollapsible" titleLabel="Custom icon collapsible title" [(isExpanded)]="collapsed[0]" icon="information"
+	>Any HTML content
+</stark-collapsible>
+
+<button color="primary" class="collapsible-demo-button" (click)="toggleCollapsible(0)" mat-raised-button>Toggle collapsible</button>
+<hr class="collapsible-demo-line" />
+
+<stark-collapsible htmlId="fourthCollapsible" titleLabel="Custom icon collapsible title" [(isExpanded)]="collapsed[1]" icon="account-circle"
+	>Any HTML content
+</stark-collapsible>
+
+<button color="primary" class="collapsible-demo-button" (click)="toggleCollapsible(1)" mat-raised-button>Toggle collapsible</button>
+
+<span class="collapsible-demo-status">{{ collapsed ? "Open" : "Closed" }}</span>

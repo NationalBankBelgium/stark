@@ -1,0 +1,3188 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  StarkDateTimePickerComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/modules/date-time-picker/components/date-time-picker.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to select a date and a time together</p>
+
+    </p>
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>MatFormFieldControl</code>
+                    <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                    <code><a href="https://angular.io/api/forms/Validator" target="_blank" >Validator</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../components/StarkDateTimePickerComponent.html" target="_self" >{
+    provide: NG_VALIDATORS, useExisting: StarkDateTimePickerComponent, multi: true
+}</a></code>
+                                <code><a href="../components/StarkDateTimePickerComponent.html" target="_self" >{
+    provide: NG_VALUE_ACCESSOR, multi: true, useExisting: StarkDateTimePickerComponent
+}</a></code>
+                                <code><a href="../components/StarkDateTimePickerComponent.html" target="_self" >{
+    provide: MatFormFieldControl, useExisting: StarkDateTimePickerComponent
+}</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>stark-date-time-picker</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./date-time-picker.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#datePicker" >datePicker</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#defaultDate" >defaultDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#defaultTime" >defaultTime</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger" >logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#ngAcceptInputType_max" >ngAcceptInputType_max</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#ngAcceptInputType_min" >ngAcceptInputType_min</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#ngAcceptInputType_required" >ngAcceptInputType_required</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#timeInput" >timeInput</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#clearDateTime" >clearDateTime</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#constructDateTime" >constructDateTime</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#constructTimeStringFromDate" >constructTimeStringFromDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#focusTimeInput" >focusTimeInput</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getTimeNumericValuesFromDate" >getTimeNumericValuesFromDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier"></span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dateFilter" >dateFilter</a>
+                            </li>
+                            <li>
+                                <a href="#dateMask" >dateMask</a>
+                            </li>
+                            <li>
+                                <a href="#disabled" >disabled</a>
+                            </li>
+                            <li>
+                                <a href="#max" >max</a>
+                            </li>
+                            <li>
+                                <a href="#min" >min</a>
+                            </li>
+                            <li>
+                                <a href="#pickerId" >pickerId</a>
+                            </li>
+                            <li>
+                                <a href="#pickerName" >pickerName</a>
+                            </li>
+                            <li>
+                                <a href="#placeholder" >placeholder</a>
+                            </li>
+                            <li>
+                                <a href="#required" >required</a>
+                            </li>
+                            <li>
+                                <a href="#timeMask" >timeMask</a>
+                            </li>
+                            <li>
+                                <a href="#value" >value</a>
+                            </li>
+                            <li>
+                                <a href="#color" >color</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dateTimeChange" >dateTimeChange</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#value" >value</a>
+                                </li>
+                                <li>
+                                    <a href="#placeholder" >placeholder</a>
+                                </li>
+                                <li>
+                                    <a href="#required" >required</a>
+                                </li>
+                                <li>
+                                    <a href="#disabled" >disabled</a>
+                                </li>
+                                <li>
+                                    <a href="#timeMask" >timeMask</a>
+                                </li>
+                                <li>
+                                    <a href="#max" >max</a>
+                                </li>
+                                <li>
+                                    <a href="#min" >min</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: StarkLoggingService, _fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, _fm: FocusMonitor, elementRef: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, matFormField: MatFormField, injector: <a href="https://angular.io/api/core/Injector" target="_blank">Injector</a>, cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>, translateService: TranslateService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="506" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:506</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Class constructor</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The <code>StarkLoggingService</code> instance of the application.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>_fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The Angular Form builder</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>_fm</td>
+                                                  
+                                                        <td>
+                                                                    <code>FocusMonitor</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The Angular Material Focus Monitor service</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>elementRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Reference to the DOM element where this component is attached to.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Angular <code>Renderer2</code> wrapper for DOM manipulations.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>matFormField</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatFormField</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The parent MatFormField directive surrounding this component</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>injector</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/Injector" target="_blank" >Injector</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The Injector of the application</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Reference to the change detector attached to this component</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>translateService</td>
+                                                  
+                                                        <td>
+                                                                    <code>TranslateService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The <code>TranslateService</code> instance of the application.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dateFilter"></a>
+                        <b>dateFilter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#StarkDatePickerFilter" target="_self" >StarkDatePickerFilter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:257</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Input for <a href="../components/StarkDatePickerComponent.html">StarkDatePickerComponent</a></p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dateMask"></a>
+                        <b>dateMask</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#StarkDatePickerMaskConfig" target="_self" >StarkDatePickerMaskConfig</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:263</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Input for <a href="../components/StarkDatePickerComponent.html">StarkDatePickerComponent</a></p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="disabled"></a>
+                        <b>disabled</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:201</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Determines if DateTimePicker is disabled</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="max"></a>
+                        <b>max</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>moment.Moment | null</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="269" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:269</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Input for <a href="../components/StarkDatePickerComponent.html">StarkDatePickerComponent</a></p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="min"></a>
+                        <b>min</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>moment.Moment | null</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="298" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:298</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Input for <a href="../components/StarkDatePickerComponent.html">StarkDatePickerComponent</a></p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pickerId"></a>
+                        <b>pickerId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="245" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:245</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Input for <a href="../components/StarkDatePickerComponent.html">StarkDatePickerComponent</a></p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pickerName"></a>
+                        <b>pickerName</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="251" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:251</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Input for <a href="../components/StarkDatePickerComponent.html">StarkDatePickerComponent</a></p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="placeholder"></a>
+                        <b>placeholder</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:152</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Placeholder / label for DateTimePicker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="required"></a>
+                        <b>required</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:173</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Determines if DateTimePicker is required</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timeMask"></a>
+                        <b>timeMask</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkTimestampMaskConfig.html" target="_self" >StarkTimestampMaskConfig</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="225" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:225</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Mask for the time</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="value"></a>
+                        <b>value</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Date | null</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:127</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Source date to bound to the DateTimePicker</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="color"></a>
+                        <b>color</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in         <code><a href="../directives/AbstractStarkUiComponent.html#source" target="_self" >AbstractStarkUiComponent:16</a></code>
+</div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Color theme</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dateTimeChange"></a>
+                        <b>dateTimeChange</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="327" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:327</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Output that will emit a specific date whenever the selection has changed</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearDateTime"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>clearDateTime</b></span>
+                        <a href="#clearDateTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>clearDateTime()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="781"
+                            class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:781</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Clears the values of the internal form controls for date and time</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="constructDateTime"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>constructDateTime</b></span>
+                        <a href="#constructDateTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>constructDateTime()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="706"
+                            class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:706</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Construct the date time model based on the internal form controls for date and time</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Date | null</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="constructTimeStringFromDate"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>constructTimeStringFromDate</b></span>
+                        <a href="#constructTimeStringFromDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>constructTimeStringFromDate(dateTime: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="742"
+                            class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:742</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Construct a time string (with the format &quot;HH:mm:ss:SSS&quot;) from the given date</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>dateTime</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li><code>Date</code> object</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="focusTimeInput"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>focusTimeInput</b></span>
+                        <a href="#focusTimeInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>focusTimeInput(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="771"
+                            class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:771</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Focus the time input field</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The handled event</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTimeNumericValuesFromDate"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>getTimeNumericValuesFromDate</b></span>
+                        <a href="#getTimeNumericValuesFromDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTimeNumericValuesFromDate(dateTime: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="755"
+                            class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:755</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Return an array with the numeric values of the time part of the given date</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>dateTime</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li><code>Date</code> object</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>number[]</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="577"
+                            class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:577</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Contains the changed properties</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="603"
+                            class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:603</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier"></span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../directives/AbstractStarkUiComponent.html#source" target="_self" >AbstractStarkUiComponent:553</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="datePicker"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>datePicker</b></span>
+                        <a href="#datePicker"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(StarkDatePickerComponent, {static: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="340" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:340</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the Stark date picker embedded in this component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defaultDate"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>defaultDate</b></span>
+                        <a href="#defaultDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Date(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="499" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:499</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Default date in case no date is defined</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defaultTime"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>defaultTime</b></span>
+                        <a href="#defaultTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Date(2019, 0, 1, 0, 0, 0, 0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="506" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:506</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Default time (in a Date object form) in case no time is defined.</p>
+<p>IMPORTANT: Although it is a Date object, only the time part will be used.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logger"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>logger</b></span>
+                        <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>StarkLoggingService</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(STARK_LOGGING_SERVICE)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="521" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:521</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- The `StarkLoggingService` instance of the application.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAcceptInputType_max"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>ngAcceptInputType_max</b></span>
+                        <a href="#ngAcceptInputType_max"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#StarkDateInput" target="_self" >StarkDateInput</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="285" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:285</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAcceptInputType_min"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>ngAcceptInputType_min</b></span>
+                        <a href="#ngAcceptInputType_min"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#StarkDateInput" target="_self" >StarkDateInput</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="314" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:314</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAcceptInputType_required"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>ngAcceptInputType_required</b></span>
+                        <a href="#ngAcceptInputType_required"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>BooleanInput</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timeInput"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>timeInput</b></span>
+                        <a href="#timeInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLInputElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;timeInput&#x27;, {static: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="333" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:333</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the time input embedded in this component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="value"></a>
+                        <span class="name"><b>value</b><a href="#value"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>value()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:127</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Source date to bound to the DateTimePicker</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>Date | null</code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>value(value: Date | null)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:131</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                        <code>Date | null</code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="placeholder"></a>
+                        <span class="name"><b>placeholder</b><a href="#placeholder"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>placeholder()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:152</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Placeholder / label for DateTimePicker</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>placeholder(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:156</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="required"></a>
+                        <span class="name"><b>required</b><a href="#required"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>required()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:173</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Determines if DateTimePicker is required</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>required(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:177</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="disabled"></a>
+                        <span class="name"><b>disabled</b><a href="#disabled"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>disabled()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:201</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Determines if DateTimePicker is disabled</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>disabled(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:205</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timeMask"></a>
+                        <span class="name"><b>timeMask</b><a href="#timeMask"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>timeMask()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="225" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:225</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Mask for the time</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/StarkTimestampMaskConfig.html" target="_self" >StarkTimestampMaskConfig</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>timeMask(value: <a href="../interfaces/StarkTimestampMaskConfig.html" target="_self">StarkTimestampMaskConfig</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="229" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:229</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../interfaces/StarkTimestampMaskConfig.html" target="_self" >StarkTimestampMaskConfig</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="max"></a>
+                        <span class="name"><b>max</b><a href="#max"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>max()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="280" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:280</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>max(value: moment.Moment | null)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="269" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:269</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Input for <a href="../components/StarkDatePickerComponent.html">StarkDatePickerComponent</a></p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                        <code>moment.Moment | null</code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="min"></a>
+                        <span class="name"><b>min</b><a href="#min"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>min()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="309" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:309</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>min(value: moment.Moment | null)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="298" class="link-to-prism">src/modules/date-time-picker/components/date-time-picker.component.ts:298</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Input for <a href="../components/StarkDatePickerComponent.html">StarkDatePickerComponent</a></p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                        <code>moment.Moment | null</code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	HostBinding,
+	Inject,
+	Injector,
+	Input,
+	OnChanges,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	SimpleChanges,
+	ViewChild
+} from &quot;@angular/core&quot;;
+import {
+	AbstractControl,
+	ControlValueAccessor,
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	NG_VALIDATORS,
+	NG_VALUE_ACCESSOR,
+	NgControl,
+	ValidationErrors,
+	Validator,
+	ValidatorFn,
+	Validators
+} from &quot;@angular/forms&quot;;
+import { FocusMonitor, FocusOrigin } from &quot;@angular/cdk/a11y&quot;;
+import { BooleanInput, coerceBooleanProperty } from &quot;@angular/cdk/coercion&quot;;
+import { MatFormField, MatFormFieldControl } from &quot;@angular/material/form-field&quot;;
+import moment from &quot;moment&quot;;
+import { Subject, Subscription } from &quot;rxjs&quot;;
+import { TranslateService } from &quot;@ngx-translate/core&quot;;
+import { minDate as validatorMinDate, maxDate as validatorMaxDate } from &quot;class-validator&quot;;
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;@nationalbankbelgium/stark-core&quot;;
+import { StarkTimestampMaskConfig } from &quot;@nationalbankbelgium/stark-ui/src/modules/input-mask-directives&quot;;
+import {
+	StarkDateInput,
+	StarkDatePickerComponent,
+	StarkDatePickerFilter,
+	StarkDatePickerMaskConfig
+} from &quot;@nationalbankbelgium/stark-ui/src/modules/date-picker&quot;;
+import { AbstractStarkUiComponent } from &quot;@nationalbankbelgium/stark-ui/src/internal-common&quot;;
+
+/**
+ * Default TimeMask configuration
+ */
+export const DEFAULT_TIME_MASK_CONFIG: StarkTimestampMaskConfig &#x3D; { format: &quot;HH:mm:ss&quot; };
+
+/**
+ * @ignore
+ */
+const componentName &#x3D; &quot;stark-date-time-picker&quot;;
+
+/**
+ * Component to select a date and a time together
+ */
+@Component({
+	selector: &quot;stark-date-time-picker&quot;,
+	templateUrl: &quot;./date-time-picker.component.html&quot;,
+	providers: [
+		{
+			provide: NG_VALIDATORS,
+			useExisting: StarkDateTimePickerComponent,
+			multi: true
+		},
+		{
+			provide: NG_VALUE_ACCESSOR,
+			multi: true,
+			useExisting: StarkDateTimePickerComponent
+		},
+		{
+			// This implementation has been made thanks to the official documentation.
+			// See: https://v7.material.angular.io/guide/creating-a-custom-form-field-control
+			provide: MatFormFieldControl,
+			useExisting: StarkDateTimePickerComponent
+		}
+	],
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
+})
+export class StarkDateTimePickerComponent
+	extends AbstractStarkUiComponent
+	implements MatFormFieldControl&lt;Date&gt;, ControlValueAccessor, Validator, OnInit, OnChanges, OnDestroy
+{
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
+	private static nextId &#x3D; 0;
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 */
+	@HostBinding()
+	public id &#x3D; &#x60;stark-date-time-picker${StarkDateTimePickerComponent.nextId++}&#x60;;
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 */
+	@HostBinding(&quot;attr.aria-describedby&quot;)
+	public describedBy &#x3D; &quot;&quot;;
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 */
+	@HostBinding(&quot;class.floating&quot;)
+	public get shouldLabelFloat(): boolean {
+		return this.focused || !this.empty;
+	}
+
+	/**
+	 * Source date to bound to the DateTimePicker
+	 */
+	@Input()
+	public get value(): Date | null {
+		return this._value;
+	}
+
+	public set value(value: Date | null) {
+		if (value) {
+			this.dateTimeFormGroup.setValue({
+				date: new Date(value.getFullYear(), value.getMonth(), value.getDate()),
+				time: this.constructTimeStringFromDate(value)
+			});
+		}
+		this._value &#x3D; value;
+		this.stateChanges.next();
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _value: Date | null &#x3D; null;
+
+	/**
+	 * Placeholder / label for DateTimePicker
+	 */
+	@Input()
+	public get placeholder(): string {
+		return this._placeholder;
+	}
+
+	public set placeholder(value: string) {
+		this.originalPlaceholder &#x3D; value || &quot;&quot;;
+		// Handle translation internally because mat-form-field uses the value of &#x60;@Input public placeholder&#x60; to display the label / placeholder
+		this._placeholder &#x3D; this.originalPlaceholder ? this.translateService.instant(this.originalPlaceholder) : this.originalPlaceholder;
+		this.stateChanges.next();
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _placeholder &#x3D; &quot;&quot;;
+
+	/**
+	 * Determines if DateTimePicker is required
+	 */
+	@Input()
+	public get required(): boolean {
+		return this._required;
+	}
+
+	public set required(value: boolean) {
+		this._required &#x3D; coerceBooleanProperty(value);
+		if (this._required) {
+			this.dateTimeFormGroup.controls[&quot;date&quot;].setValidators([Validators.required]);
+			this.dateTimeFormGroup.controls[&quot;time&quot;].setValidators([Validators.required]);
+		} else {
+			this.dateTimeFormGroup.controls[&quot;date&quot;].clearValidators();
+			this.dateTimeFormGroup.controls[&quot;time&quot;].clearValidators();
+		}
+	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	public static ngAcceptInputType_required: BooleanInput;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _required &#x3D; false;
+
+	/**
+	 * Determines if DateTimePicker is disabled
+	 */
+	@Input()
+	public get disabled(): boolean {
+		return this._disabled;
+	}
+
+	public set disabled(value: boolean) {
+		this._disabled &#x3D; coerceBooleanProperty(value);
+
+		if (this._disabled) {
+			this.dateTimeFormGroup.disable();
+		} else {
+			this.dateTimeFormGroup.enable();
+		}
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _disabled &#x3D; false;
+
+	/**
+	 * Mask for the time
+	 */
+	@Input()
+	public get timeMask(): StarkTimestampMaskConfig {
+		return this._timeMask;
+	}
+
+	public set timeMask(value: StarkTimestampMaskConfig) {
+		// only valid mask configs are accepted, otherwise the default mask is used
+		// eslint-disable-next-line no-prototype-builtins
+		this._timeMask &#x3D; value &amp;&amp; value.hasOwnProperty(&quot;format&quot;) ? value : DEFAULT_TIME_MASK_CONFIG;
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _timeMask: StarkTimestampMaskConfig &#x3D; DEFAULT_TIME_MASK_CONFIG;
+
+	/**
+	 * Input for {@link StarkDatePickerComponent}
+	 */
+	@Input()
+	public pickerId &#x3D; &quot;&quot;;
+
+	/**
+	 * Input for {@link StarkDatePickerComponent}
+	 */
+	@Input()
+	public pickerName &#x3D; &quot;&quot;;
+
+	/**
+	 * Input for {@link StarkDatePickerComponent}
+	 */
+	@Input()
+	public dateFilter?: StarkDatePickerFilter;
+
+	/**
+	 * Input for {@link StarkDatePickerComponent}
+	 */
+	@Input()
+	public dateMask?: StarkDatePickerMaskConfig;
+
+	/**
+	 * Input for {@link StarkDatePickerComponent}
+	 */
+	@Input()
+	public set max(value: moment.Moment | null) {
+		if (value &#x3D;&#x3D;&#x3D; undefined) {
+			// eslint-disable-next-line no-null/no-null
+			this._max &#x3D; null;
+		} else if (value instanceof Date) {
+			this._max &#x3D; moment(value);
+		} else {
+			this._max &#x3D; value;
+		}
+	}
+
+	public get max(): moment.Moment | null {
+		return this._max;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	public static ngAcceptInputType_max: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// eslint-disable-next-line no-null/no-null
+	private _max: moment.Moment | null &#x3D; null;
+
+	/**
+	 * Input for {@link StarkDatePickerComponent}
+	 */
+	@Input()
+	public set min(value: moment.Moment | null) {
+		if (value &#x3D;&#x3D;&#x3D; undefined) {
+			// eslint-disable-next-line no-null/no-null
+			this._min &#x3D; null;
+		} else if (value instanceof Date) {
+			this._min &#x3D; moment(value);
+		} else {
+			this._min &#x3D; value;
+		}
+	}
+
+	public get min(): moment.Moment | null {
+		return this._min;
+	}
+
+	// Information about input setter coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	public static ngAcceptInputType_min: StarkDateInput;
+
+	/**
+	 * @ignore
+	 * Angular expects a Moment or null value.
+	 */
+	// eslint-disable-next-line no-null/no-null
+	public _min: moment.Moment | null &#x3D; null;
+
+	/**
+	 * Output that will emit a specific date whenever the selection has changed
+	 */
+	@Output()
+	public readonly dateTimeChange &#x3D; new EventEmitter&lt;Date | null&gt;();
+
+	/**
+	 * Reference to the time input embedded in this component
+	 */
+	@ViewChild(&quot;timeInput&quot;, { static: true })
+	public timeInput!: ElementRef&lt;HTMLInputElement&gt;;
+
+	/**
+	 * Reference to the Stark date picker embedded in this component
+	 */
+	@ViewChild(StarkDatePickerComponent, { static: true })
+	// Due to split chunks, Angular does not detect that StarkDatePickerComponent implements Validator. We need to force the recognition.
+	public datePicker!: StarkDatePickerComponent &amp; Validator;
+
+	/**
+	 * @ignore
+	 * @internal
+	 * The registered callback function called when an input event occurs on the input element.
+	 */
+	private _onChange: (_: Date | null) &#x3D;&gt; void &#x3D; (_: Date | null) &#x3D;&gt; {
+		/* noop*/
+	};
+
+	/**
+	 * @ignore
+	 * @internal
+	 * The registered callback function called when a blur event occurs on the input element.
+	 */
+	private _onTouched: () &#x3D;&gt; void &#x3D; () &#x3D;&gt; {
+		/* noop*/
+	};
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
+	public ngControl: NgControl | null &#x3D; null;
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
+	public controlType &#x3D; componentName;
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
+	public stateChanges &#x3D; new Subject&lt;void&gt;();
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 */
+	public focused &#x3D; false;
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
+	public get empty(): boolean {
+		// IMPORTANT: we need to get the &#x27;raw value&#x27; because we also need the values from the disabled controls!
+		return !this.dateTimeFormGroup.getRawValue().date &amp;&amp; !this.dateTimeFormGroup.getRawValue().time;
+	}
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
+	public get errorState(): boolean {
+		// the control can be in an error state as long as one of these conditions is met:
+		// 1) the user has interacted with either the datepicker or the time input
+		// 2) the control is programmatically marked as &#x27;touched&#x27; or &#x27;dirty&#x27;
+		const newErrorState &#x3D;
+			this.ngControl !&#x3D;&#x3D; null &amp;&amp;
+			this.ngControl.control !&#x3D;&#x3D; null &amp;&amp;
+			(this.dateTimeFormGroup.controls[&quot;date&quot;].touched ||
+				this.dateTimeFormGroup.controls[&quot;time&quot;].touched ||
+				!!this.ngControl.touched ||
+				!!this.ngControl.dirty) &amp;&amp;
+			(!!this.ngControl.invalid || !!this.datePicker.validate(this.ngControl.control));
+
+		// IMPORTANT: emit a state change when the errorState changes
+		// This is needed to force the MatFormFieldControl to refresh and render the MatError&#x27;s
+		if (this._errorState !&#x3D;&#x3D; newErrorState) {
+			this._errorState &#x3D; newErrorState;
+			this.stateChanges.next();
+		}
+
+		return this._errorState;
+	}
+
+	/**
+	 * The current error state
+	 * @ignore
+	 * @internal
+	 */
+	public _errorState &#x3D; false;
+
+	/**
+	 * @ignore
+	 * @internal
+	 * Original placeholder translation key to keep in memory to translate again when language changes.
+	 */
+	private originalPlaceholder &#x3D; &quot;&quot;;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private translateOnLangChangeSubscription!: Subscription;
+
+	/**
+	 * @ignore
+	 */
+	public dateTimeFormGroup: FormGroup;
+
+	/**
+	 * Angular validator to check whether the component&#x27;s date is earlier than the given minDate
+	 * @ignore
+	 * @internal
+	 * @param minDate - Minimum date to validate the component&#x27;s current date
+	 */
+	private _starkMinDateValidator(minDate: Date): ValidatorFn {
+		// for the minDate, we should discard the time (we set it to the minimum possible value: 00:00:00:000)
+		// const normalizedMinDate &#x3D; new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate(), 0, 0, 0, 0);
+		return (_control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+			const controlValue &#x3D; this.constructDateTime();
+
+			return controlValue &amp;&amp; !validatorMinDate(controlValue, minDate)
+				? {
+						starkMinDateTime: {
+							min: minDate.toISOString(),
+							actual: controlValue.toISOString()
+						}
+					}
+				: null;
+		};
+	}
+
+	/**
+	 * Angular validator to check whether the component&#x27;s date is earlier than the given minDate
+	 * @ignore
+	 * @internal
+	 * @param maxDate - Maximum date to validate the component&#x27;s current date
+	 */
+	private _starkMaxDateValidator(maxDate: Date): ValidatorFn {
+		// for the maxDate, we should discard the time (we set it to the maximum possible value: 23:59:59:999)
+		// const normalizedMaxDate &#x3D; new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate(), 23, 59, 59, 999);
+		return (_control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+			const controlValue &#x3D; this.constructDateTime();
+
+			return controlValue &amp;&amp; !validatorMaxDate(controlValue, maxDate)
+				? {
+						starkMaxDateTime: {
+							max: maxDate.toISOString(),
+							actual: controlValue.toISOString()
+						}
+					}
+				: null;
+		};
+	}
+
+	/**
+	 * Default date in case no date is defined
+	 */
+	public defaultDate &#x3D; new Date(0);
+
+	/**
+	 * Default time (in a Date object form) in case no time is defined.
+	 *
+	 * IMPORTANT: Although it is a Date object, only the time part will be used.
+	 */
+	public defaultTime &#x3D; new Date(2019, 0, 1, 0, 0, 0, 0);
+
+	/**
+	 * Class constructor
+	 * @param logger - The &#x60;StarkLoggingService&#x60; instance of the application.
+	 * @param _fb - The Angular Form builder
+	 * @param _fm - The Angular Material Focus Monitor service
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 * @param renderer - Angular &#x60;Renderer2&#x60; wrapper for DOM manipulations.
+	 * @param matFormField - The parent MatFormField directive surrounding this component
+	 * @param injector - The Injector of the application
+	 * @param cdRef - Reference to the change detector attached to this component
+	 * @param translateService - The &#x60;TranslateService&#x60; instance of the application.
+	 */
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		private _fb: FormBuilder,
+		private _fm: FocusMonitor,
+		elementRef: ElementRef,
+		renderer: Renderer2,
+		private matFormField: MatFormField,
+		private injector: Injector,
+		private cdRef: ChangeDetectorRef,
+		private translateService: TranslateService
+	) {
+		super(renderer, elementRef);
+
+		this.dateTimeFormGroup &#x3D; this._fb.group({
+			date: new FormControl(undefined),
+			time: new FormControl(undefined)
+		});
+
+		this._fm.monitor(elementRef, true).subscribe((origin: FocusOrigin) &#x3D;&gt; {
+			// when the element is blurred, the emitted &#x27;origin&#x27; is null
+			if (origin &#x3D;&#x3D;&#x3D; null) {
+				this.dateTimeFormGroup.controls[&quot;date&quot;].markAsTouched();
+				this.dateTimeFormGroup.controls[&quot;time&quot;].markAsTouched();
+			}
+
+			this.focused &#x3D; !!origin &amp;&amp; !this.disabled;
+			this.stateChanges.next();
+		});
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public override ngOnInit(): void {
+		super.ngOnInit();
+		this.ngControl &#x3D; this.injector.get&lt;NgControl&gt;(NgControl, &lt;any&gt;null);
+
+		if (this.ngControl !&#x3D;&#x3D; null) {
+			this.ngControl.valueAccessor &#x3D; this;
+		}
+
+		// the parent node of the _connectionContainerRef is the &#x27;div.form-field-wrapper&#x27; which defines the final width of the form field
+		const parentNode: HTMLElement &#x3D; this.renderer.parentNode(this.matFormField._connectionContainerRef.nativeElement);
+		this.renderer.addClass(parentNode, &#x60;${componentName}-form-field-wrapper&#x60;);
+
+		this.translateOnLangChangeSubscription &#x3D; this.translateService.onLangChange.subscribe(() &#x3D;&gt; {
+			// re-assign the placeholder to refresh the translation (see &#x27;placeholder&#x27; setter)
+			this.placeholder &#x3D; this.originalPlaceholder;
+		});
+
+		this.logger.debug(componentName + &quot;: component initialized&quot;);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
+	 */
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (changes[&quot;min&quot;] || changes[&quot;max&quot;]) {
+			const validators: ValidatorFn[] &#x3D; [];
+			if (this.min) {
+				validators.push(this._starkMinDateValidator(this.min.toDate()));
+			}
+			if (this.max) {
+				validators.push(this._starkMaxDateValidator(this.max.toDate()));
+			}
+			this.dateTimeFormGroup.setValidators(validators);
+		}
+
+		if (changes[&quot;max&quot;] || changes[&quot;min&quot;] || changes[&quot;required&quot;]) {
+			this.cdRef.detectChanges();
+			// IMPORTANT: the &#x27;_onValidatorChange()&#x27; callback from Validator API should not be called here to update the validity of the control because it triggers a valueChange event!
+			// therefore we call &#x27;updateValueAndValidity()&#x27; manually on the control instead and without emitting the valueChanges event :)
+			if (this.ngControl &amp;&amp; this.ngControl.control) {
+				this.ngControl.control.updateValueAndValidity({ emitEvent: false });
+			}
+			this.stateChanges.next();
+		}
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnDestroy(): void {
+		this.stateChanges.complete();
+		this._fm.stopMonitoring(this.elementRef.nativeElement);
+
+		if (this.translateOnLangChangeSubscription) {
+			this.translateOnLangChangeSubscription.unsubscribe();
+		}
+	}
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
+	public setDescribedByIds(ids: string[]): void {
+		this.describedBy &#x3D; ids.join(&quot; &quot;);
+	}
+
+	/**
+	 * Part of {@link MatFormFieldControl} API
+	 * @ignore
+	 * @internal
+	 */
+	public onContainerClick(event: MouseEvent): void {
+		if ((&lt;Element&gt;event.target).tagName.toLowerCase() !&#x3D;&#x3D; &quot;input&quot;) {
+			this.elementRef.nativeElement.querySelector(&quot;input&quot;).focus();
+		}
+	}
+
+	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Sets the &quot;value&quot; property on the input element.
+	 * @ignore
+	 * @internal
+	 */
+	public writeValue(value: Date): void {
+		this.value &#x3D; value;
+	}
+
+	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Registers a function to be called when the control value changes.
+	 * @ignore
+	 * @internal
+	 */
+	public registerOnChange(fn: (val: Date | null) &#x3D;&gt; void): void {
+		this._onChange &#x3D; fn;
+	}
+
+	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Registers a function to be called when the control is touched.
+	 * @ignore
+	 * @internal
+	 */
+	public registerOnTouched(fn: () &#x3D;&gt; void): void {
+		this._onTouched &#x3D; fn;
+	}
+
+	/**
+	 * Part of {@link ControlValueAccessor} API
+	 * Sets the &quot;disabled&quot; property on the input element.
+	 * @ignore
+	 * @internal
+	 */
+	public setDisabledState(isDisabled: boolean): void {
+		this.disabled &#x3D; isDisabled;
+		this.stateChanges.next();
+	}
+
+	/**
+	 * Part of {@link Validator} API
+	 * @ignore
+	 * @internal
+	 */
+	public registerOnValidatorChange(_fn: () &#x3D;&gt; void): void {
+		// we don&#x27;t need to keep a reference to the callback function (i.e. in a &#x27;_onValidatorChange&#x27; property)
+		// because such callback, when it is called to update the validity of the control, it triggers a valueChange event too!
+	}
+
+	/**
+	 * Part of {@link Validator} API
+	 * @ignore
+	 * @internal
+	 */
+	public validate(control: AbstractControl): ValidationErrors | null {
+		return { ...this.datePicker.validate(control), ...this.dateTimeFormGroup.errors };
+	}
+
+	/**
+	 * @ignore
+	 */
+	public onDateTimeChange(): void {
+		const dateTime &#x3D; this.constructDateTime();
+
+		this._onTouched();
+		this._onChange(dateTime);
+		this.dateTimeChange.emit(dateTime);
+	}
+
+	/**
+	 * Construct the date time model based on the internal form controls for date and time
+	 */
+	public constructDateTime(): Date | null {
+		// IMPORTANT: we need to get the &#x27;raw value&#x27; because we also need the values from the disabled controls!
+		let date: Date &#x3D; this.dateTimeFormGroup.getRawValue().date;
+		const time &#x3D; this.parseTime(this.dateTimeFormGroup.getRawValue().time);
+		let dateTime: Date | null;
+
+		if (!date &amp;&amp; !time) {
+			dateTime &#x3D; null;
+		} else {
+			if (!date) {
+				date &#x3D; this.defaultDate; // default date in case no date is defined
+				this.dateTimeFormGroup.controls[&quot;date&quot;].setValue(date);
+			}
+
+			let timeValues: number[];
+			if (!time) {
+				timeValues &#x3D; this.getTimeNumericValuesFromDate(this.defaultTime); // default time values in case no time is defined
+				// IMPORTANT: when the user is manually clearing the time field, we just keep the default value internally and DON&#x27;T set the control value
+				// otherwise the user will not be able to manually clear entirely the time and type another one because the field would always be reset to &#x27;00:00:00&#x27;
+				if (document.activeElement !&#x3D;&#x3D; this.timeInput.nativeElement) {
+					this.dateTimeFormGroup.controls[&quot;time&quot;].setValue(this.constructTimeStringFromDate(this.defaultTime));
+				}
+			} else {
+				timeValues &#x3D; this.getTimeNumericValuesFromDate(time);
+			}
+
+			dateTime &#x3D; new Date(date.getFullYear(), date.getMonth(), date.getDate(), ...timeValues);
+		}
+
+		return dateTime;
+	}
+
+	/**
+	 * Construct a time string (with the format &quot;HH:mm:ss:SSS&quot;) from the given date
+	 * @param dateTime - &#x60;Date&#x60; object
+	 */
+	public constructTimeStringFromDate(dateTime: Date): string {
+		return [&#x60;0${dateTime.getHours()}&#x60;, &#x60;0${dateTime.getMinutes()}&#x60;, &#x60;0${dateTime.getSeconds()}&#x60;, &#x60;00${dateTime.getMilliseconds()}&#x60;]
+			.map((timePart: string, index: number) &#x3D;&gt; {
+				const numberOfChars &#x3D; index &#x3D;&#x3D;&#x3D; 3 ? 3 : 2; // for milliseconds 3 chars should be taken
+				return timePart.substring(timePart.length - numberOfChars);
+			})
+			.join(&quot;:&quot;);
+	}
+
+	/**
+	 * Return an array with the numeric values of the time part of the given date
+	 * @param dateTime - &#x60;Date&#x60; object
+	 */
+	public getTimeNumericValuesFromDate(dateTime: Date): number[] {
+		return [dateTime.getHours(), dateTime.getMinutes(), dateTime.getSeconds(), dateTime.getMilliseconds()];
+	}
+
+	/**
+	 * @ignore
+	 */
+	private parseTime(timeValue: string &#x3D; &quot;&quot;): Date | null {
+		const time &#x3D; moment(timeValue, this.timeMask.format);
+		return time.isValid() ? time.toDate() : null;
+	}
+
+	/**
+	 * Focus the time input field
+	 * @param event - The handled event
+	 */
+	public focusTimeInput(event: Event): void {
+		event.preventDefault();
+		event.stopPropagation();
+
+		this.timeInput.nativeElement.focus();
+	}
+
+	/**
+	 * Clears the values of the internal form controls for date and time
+	 */
+	public clearDateTime(): void {
+		this.dateTimeFormGroup.reset();
+		this._onTouched();
+		this._onChange(null);
+		this.dateTimeChange.emit(null);
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;date-time-wrapper&quot; [formGroup]&#x3D;&quot;dateTimeFormGroup&quot;&gt;
+	&lt;stark-date-picker
+		[pickerId]&#x3D;&quot;pickerId&quot;
+		[pickerName]&#x3D;&quot;pickerName&quot;
+		formControlName&#x3D;&quot;date&quot;
+		(dateChange)&#x3D;&quot;onDateTimeChange()&quot;
+		[dateFilter]&#x3D;&quot;dateFilter&quot;
+		[dateMask]&#x3D;&quot;dateMask&quot;
+		[required]&#x3D;&quot;required&quot;
+		[max]&#x3D;&quot;max&quot;
+		[min]&#x3D;&quot;min&quot;
+	&gt;&lt;/stark-date-picker&gt;
+
+	&lt;div class&#x3D;&quot;time-picker&quot;&gt;
+		&lt;input
+			matInput
+			#timeInput
+			id&#x3D;&quot;{{ pickerId + &#x27;-time-input&#x27; }}&quot;
+			name&#x3D;&quot;{{ pickerName + &#x27;-time-input&#x27; }}&quot;
+			class&#x3D;&quot;time-input&quot;
+			formControlName&#x3D;&quot;time&quot;
+			(change)&#x3D;&quot;onDateTimeChange()&quot;
+			[starkTimestampMask]&#x3D;&quot;timeMask&quot;
+			[required]&#x3D;&quot;required&quot;
+		/&gt;
+		&lt;div class&#x3D;&quot;mat-form-field-suffix mat-datepicker-toggle&quot;&gt;
+			&lt;button mat-icon-button (click)&#x3D;&quot;focusTimeInput($event)&quot; [disabled]&#x3D;&quot;disabled&quot;&gt;
+				&lt;mat-icon svgIcon&#x3D;&quot;clock&quot;&gt;&lt;/mat-icon&gt;
+			&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;button
+	mat-icon-button
+	(click)&#x3D;&quot;clearDateTime()&quot;
+	class&#x3D;&quot;clear-date-time-button&quot;
+	[ngClass]&#x3D;&quot;{ hidden: disabled || !focused || (!dateTimeFormGroup.value.date &amp;&amp; !dateTimeFormGroup.value.time) }&quot;
+&gt;
+	&lt;mat-icon svgIcon&#x3D;&quot;close&quot; [matTooltip]&#x3D;&quot;&#x27;STARK.DATE_TIME_PICKER.CLEAR_DATETIME&#x27; | translate&quot;&gt;&lt;/mat-icon&gt;
+&lt;/button&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="date-time-wrapper" [formGroup]="dateTimeFormGroup">	<stark-date-picker		[pickerId]="pickerId"		[pickerName]="pickerName"		formControlName="date"		(dateChange)="onDateTimeChange()"		[dateFilter]="dateFilter"		[dateMask]="dateMask"		[required]="required"		[max]="max"		[min]="min"	></stark-date-picker>	<div class="time-picker">		<input			matInput			#timeInput			id="{{ pickerId + \'-time-input\' }}"			name="{{ pickerName + \'-time-input\' }}"			class="time-input"			formControlName="time"			(change)="onDateTimeChange()"			[starkTimestampMask]="timeMask"			[required]="required"		/>		<div class="mat-form-field-suffix mat-datepicker-toggle">			<button mat-icon-button (click)="focusTimeInput($event)" [disabled]="disabled">				<mat-icon svgIcon="clock"></mat-icon>			</button>		</div>	</div></div><button	mat-icon-button	(click)="clearDateTime()"	class="clear-date-time-button"	[ngClass]="{ hidden: disabled || !focused || (!dateTimeFormGroup.value.date && !dateTimeFormGroup.value.time) }">	<mat-icon svgIcon="close" [matTooltip]="\'STARK.DATE_TIME_PICKER.CLEAR_DATETIME\' | translate"></mat-icon></button></div>'
+    var COMPONENTS = [{'name': 'StarkActionBarComponent', 'selector': 'stark-action-bar'},{'name': 'StarkAlertDialogComponent', 'selector': 'stark-alert-dialog'},{'name': 'StarkAppDataComponent', 'selector': 'stark-app-data'},{'name': 'StarkAppFooterComponent', 'selector': 'stark-app-footer'},{'name': 'StarkAppLogoComponent', 'selector': 'stark-app-logo'},{'name': 'StarkAppLogoutComponent', 'selector': 'stark-app-logout'},{'name': 'StarkAppMenuComponent', 'selector': 'stark-app-menu'},{'name': 'StarkAppMenuItemComponent', 'selector': 'stark-app-menu-item'},{'name': 'StarkAppSidebarComponent', 'selector': 'stark-app-sidebar'},{'name': 'StarkBreadcrumbComponent', 'selector': 'stark-breadcrumb'},{'name': 'StarkCollapsibleComponent', 'selector': 'stark-collapsible'},{'name': 'StarkConfirmDialogComponent', 'selector': 'stark-confirm-dialog'},{'name': 'StarkDatePickerComponent', 'selector': 'stark-date-picker'},{'name': 'StarkDateRangePickerComponent', 'selector': 'stark-date-range-picker'},{'name': 'StarkDateTimePickerComponent', 'selector': 'stark-date-time-picker'},{'name': 'StarkDropdownComponent', 'selector': 'stark-dropdown'},{'name': 'StarkGenericSearchComponent', 'selector': 'stark-generic-search'},{'name': 'StarkLanguageSelectorComponent', 'selector': 'stark-language-selector'},{'name': 'StarkLoginPageComponent', 'selector': 'stark-login-page'},{'name': 'StarkMessagePaneComponent', 'selector': 'stark-message-pane'},{'name': 'StarkMinimapComponent', 'selector': 'stark-minimap'},{'name': 'StarkPaginationComponent', 'selector': 'stark-pagination'},{'name': 'StarkPreloadingPageComponent', 'selector': 'stark-preloading-page'},{'name': 'StarkPrettyPrintComponent', 'selector': 'stark-pretty-print'},{'name': 'StarkProgressIndicatorComponent', 'selector': 'stark-progress-indicator'},{'name': 'StarkPromptDialogComponent', 'selector': 'stark-prompt-dialog'},{'name': 'StarkRouteSearchComponent', 'selector': 'stark-route-search'},{'name': 'StarkSessionCardComponent', 'selector': 'stark-session-card'},{'name': 'StarkSessionExpiredPageComponent', 'selector': 'stark-session-expired-page'},{'name': 'StarkSessionLogoutPageComponent', 'selector': 'stark-session-logout-page'},{'name': 'StarkSessionTimeoutWarningDialogComponent', 'selector': 'stark-session-timeout-warning-dialog'},{'name': 'StarkSliderComponent', 'selector': 'stark-slider'},{'name': 'StarkTableColumnComponent', 'selector': 'stark-table-column'},{'name': 'StarkTableComponent', 'selector': 'stark-table'},{'name': 'StarkTableMultisortDialogComponent', 'selector': 'stark-table-dialog-multisort'},{'name': 'StarkToastNotificationComponent', 'selector': 'stark-toast-notification'}];
+    var DIRECTIVES = [{'name': 'AbstractStarkFormComponent', 'selector': ''},{'name': 'AbstractStarkSearchComponent', 'selector': ''},{'name': 'AbstractStarkUiComponent', 'selector': ''},{'name': 'StarkEmailMaskDirective', 'selector': 'directiveName'},{'name': 'StarkNumberMaskDirective', 'selector': 'directiveName'},{'name': 'StarkProgressIndicatorDirective', 'selector': 'directiveName'},{'name': 'StarkRestrictInputDirective', 'selector': 'directiveName'},{'name': 'StarkSvgViewBoxDirective', 'selector': 'directiveName'},{'name': 'StarkTableExpandDetailDirective', 'selector': '[starkTableExpandDetail]'},{'name': 'StarkTableRowContentDirective', 'selector': '[starkTableRowContent]'},{'name': 'StarkTextMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTimestampMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTransformInputDirective', 'selector': '[starkTransformInput]'}];
+    var ACTUAL_COMPONENT = {'name': 'StarkDateTimePickerComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkDateTimePickerComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

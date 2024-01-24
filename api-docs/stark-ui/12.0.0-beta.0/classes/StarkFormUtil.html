@@ -1,0 +1,885 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li >StarkFormUtil</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/util/form/form.util.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Util class used to perform common operations on Angular <a href="https://v12.angular.io/api/forms/FormGroup">FormGroups</a> and
+<a href="https://v12.angular.io/api/forms/FormControl">FormControls</a></p>
+
+            </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#isFormControl" >isFormControl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#isFormGroup" >isFormGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#isFormGroupValid" >isFormGroupValid</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#setFormChildControlsState" >setFormChildControlsState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#setFormControlState" >setFormControlState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#setFormGroupState" >setFormGroupState</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFormControl"></a>
+                    <span class="name">
+                        <span class="modifier">Static</span>
+                        <span ><b>isFormControl</b></span>
+                        <a href="#isFormControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isFormControl(formControl: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">src/util/form/form.util.ts:125</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards">TypeGuard</a> to check that the given object
+is an actual instance of an Angular <a href="https://v12.angular.io/api/forms/FormControl">FormControl</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formControl</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Angular form field object</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFormGroup"></a>
+                    <span class="name">
+                        <span class="modifier">Static</span>
+                        <span ><b>isFormGroup</b></span>
+                        <a href="#isFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isFormGroup(formGroup: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">src/util/form/form.util.ts:115</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards">TypeGuard</a> to check that the given object
+is an actual instance of an Angular <a href="https://v12.angular.io/api/forms/FormGroup">FormGroup</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formGroup</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Angular form object</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFormGroupValid"></a>
+                    <span class="name">
+                        <span class="modifier">Static</span>
+                        <span ><b>isFormGroupValid</b></span>
+                        <a href="#isFormGroupValid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isFormGroupValid(formGroup: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">src/util/form/form.util.ts:100</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check whether the given <a href="https://v12.angular.io/api/forms/FormGroup">FormGroup</a> is valid (all fields are valid).
+If valid, all the form fields will be set to their <code>pristine</code> state, otherwise to their <code>touched</code> state
+(calling <code>setFormControlState</code> function).</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formGroup</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Angular form group object</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setFormChildControlsState"></a>
+                    <span class="name">
+                        <span class="modifier">Static</span>
+                        <span ><b>setFormChildControlsState</b></span>
+                        <a href="#setFormChildControlsState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setFormChildControlsState(formGroup: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>, statesToBeSet: <a href="../undefineds/StarkFormControlState.html" target="_self">StarkFormControlState[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">src/util/form/form.util.ts:16</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Set all the fields of the given <a href="https://v12.angular.io/api/forms/FormGroup">FormGroup</a> to the specified state(s)</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formGroup</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Angular form group object</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>statesToBeSet</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#StarkFormControlState" target="_self" >StarkFormControlState[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>States to be set to the different controls in the form</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setFormControlState"></a>
+                    <span class="name">
+                        <span class="modifier">Static</span>
+                        <span ><b>setFormControlState</b></span>
+                        <a href="#setFormControlState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setFormControlState(formControl: <a href="https://angular.io/api/forms/FormControl" target="_blank">FormControl</a>, statesToBeSet: <a href="../undefineds/StarkFormControlState.html" target="_self">StarkFormControlState[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/util/form/form.util.ts:34</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Set the given <a href="https://v12.angular.io/api/forms/FormControl">FormControl</a> to the specified state(s)</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formControl</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Angular form control object contained in an Angular form group</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>statesToBeSet</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#StarkFormControlState" target="_self" >StarkFormControlState[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>States to be set to the form control</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setFormGroupState"></a>
+                    <span class="name">
+                        <span class="modifier">Static</span>
+                        <span ><b>setFormGroupState</b></span>
+                        <a href="#setFormGroupState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setFormGroupState(formGroup: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>, statesToBeSet: <a href="../undefineds/StarkFormState.html" target="_self">StarkFormState[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/util/form/form.util.ts:65</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Set the given <a href="https://v12.angular.io/api/forms/FormGroup">FormGroup</a> to the specified state(s).
+Possible states: <code>untouched</code>, <code>pristine</code>, <code>dirty</code>, <code>submitted</code></p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formGroup</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Angular form group object</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>statesToBeSet</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#StarkFormState" target="_self" >StarkFormState[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>States to be set to the form</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AbstractControl, FormControl, FormGroup } from &quot;@angular/forms&quot;;
+
+export type StarkFormControlState &#x3D; &quot;untouched&quot; | &quot;touched&quot; | &quot;pristine&quot; | &quot;dirty&quot;;
+export type StarkFormState &#x3D; &quot;untouched&quot; | &quot;pristine&quot; | &quot;submitted&quot; | &quot;dirty&quot;;
+
+/**
+ * Util class used to perform common operations on Angular {@link https://v12.angular.io/api/forms/FormGroup|FormGroups} and
+ * {@link https://v12.angular.io/api/forms/FormControl|FormControls}
+ */
+export class StarkFormUtil {
+	/**
+	 * Set all the fields of the given {@link https://v12.angular.io/api/forms/FormGroup|FormGroup} to the specified state(s)
+	 * @param formGroup - Angular form group object
+	 * @param statesToBeSet - States to be set to the different controls in the form
+	 */
+	public static setFormChildControlsState(formGroup: FormGroup, statesToBeSet: StarkFormControlState[]): void {
+		// Verifying it is indeed an Angular FormGroup
+		if (StarkFormUtil.isFormGroup(formGroup)) {
+			for (const key of Object.keys(formGroup.controls)) {
+				// filtering just the FormControl objects of the form
+				const formControl: AbstractControl &#x3D; formGroup.controls[key];
+				if (StarkFormUtil.isFormControl(formControl)) {
+					StarkFormUtil.setFormControlState(formControl, statesToBeSet);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Set the given {@link https://v12.angular.io/api/forms/FormControl|FormControl} to the specified state(s)
+	 * @param formControl - Angular form control object contained in an Angular form group
+	 * @param statesToBeSet - States to be set to the form control
+	 */
+	public static setFormControlState(formControl: FormControl, statesToBeSet: StarkFormControlState[]): void {
+		for (const formControlState of statesToBeSet) {
+			switch (formControlState) {
+				case &quot;untouched&quot;:
+					// control has not lost focus yet
+					formControl.markAsUntouched();
+					break;
+				case &quot;touched&quot;:
+					// control has lost focus.
+					formControl.markAsTouched();
+					break;
+				case &quot;pristine&quot;:
+					// user has not interacted with the form yet.
+					formControl.markAsPristine();
+					break;
+				case &quot;dirty&quot;:
+					// user has already interacted with the form
+					formControl.markAsDirty();
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	/**
+	 * Set the given {@link https://v12.angular.io/api/forms/FormGroup|FormGroup} to the specified state(s).
+	 * Possible states: &#x60;untouched&#x60;, &#x60;pristine&#x60;, &#x60;dirty&#x60;, &#x60;submitted&#x60;
+	 * @param formGroup - Angular form group object
+	 * @param statesToBeSet - States to be set to the form
+	 */
+	public static setFormGroupState(formGroup: FormGroup, statesToBeSet: StarkFormState[]): void {
+		// Verifying it is indeed an Angular FormGroup
+		if (StarkFormUtil.isFormGroup(formGroup)) {
+			for (const formControlState of statesToBeSet) {
+				switch (formControlState) {
+					case &quot;untouched&quot;:
+						// control has not lost focus yet
+						formGroup.markAsUntouched();
+						break;
+					case &quot;pristine&quot;:
+						// user has not interacted with the form yet.
+						formGroup.markAsPristine();
+						break;
+					case &quot;dirty&quot;:
+						// user has already interacted with the form
+						formGroup.markAsDirty();
+						break;
+					case &quot;submitted&quot;:
+						// user has already interacted with the form
+						// FIXME Find alternative to $setSubmitted with ReactiveForm if needed
+						// formGroup.$setSubmitted();
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Check whether the given {@link https://v12.angular.io/api/forms/FormGroup|FormGroup} is valid (all fields are valid).
+	 * If valid, all the form fields will be set to their &#x60;pristine&#x60; state, otherwise to their &#x60;touched&#x60; state
+	 * (calling &#x60;setFormControlState&#x60; function).
+	 * @param formGroup - Angular form group object
+	 */
+	public static isFormGroupValid(formGroup: FormGroup): boolean {
+		if (formGroup.invalid) {
+			StarkFormUtil.setFormChildControlsState(formGroup, [&quot;touched&quot;]);
+			return false;
+		}
+
+		StarkFormUtil.setFormChildControlsState(formGroup, [&quot;pristine&quot;]);
+		return true;
+	}
+
+	/**
+	 * {@link https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards|TypeGuard} to check that the given object
+	 * is an actual instance of an Angular {@link https://v12.angular.io/api/forms/FormGroup|FormGroup}.
+	 * @param formGroup - Angular form object
+	 */
+	public static isFormGroup(formGroup: any): formGroup is FormGroup {
+		// eslint-disable-next-line no-prototype-builtins
+		return typeof formGroup !&#x3D;&#x3D; &quot;undefined&quot; &amp;&amp; formGroup.hasOwnProperty(&quot;controls&quot;);
+	}
+
+	/**
+	 * {@link https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards|TypeGuard} to check that the given object
+	 * is an actual instance of an Angular {@link https://v12.angular.io/api/forms/FormControl|FormControl}.
+	 * @param formControl - Angular form field object
+	 */
+	public static isFormControl(formControl: any): formControl is FormControl {
+		return typeof formControl &#x3D;&#x3D;&#x3D; &quot;object&quot; &amp;&amp; typeof formControl[&quot;setValue&quot;] !&#x3D;&#x3D; &quot;undefined&quot;;
+	}
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkFormUtil.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

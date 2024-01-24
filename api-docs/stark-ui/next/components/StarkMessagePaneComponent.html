@@ -1,0 +1,2221 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  StarkMessagePaneComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/modules/message-pane/components/message-pane.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to display messages in a single pane grouped by level: info, errors and warnings.</p>
+
+    </p>
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>stark-message-pane</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./message-pane.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#currentNavItem" >currentNavItem</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hideAnimationDelay" >hideAnimationDelay</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isVisible" >isVisible</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger" >logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#maxLevel" >maxLevel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#messageCollection" >messageCollection</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#messagePaneService" >messagePaneService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showAnimationDelay" >showAnimationDelay</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#totalMessages" >totalMessages</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#clearAllMessages" >clearAllMessages</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#collapseMessages" >collapseMessages</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#countMessages" >countMessages</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#expandMessages" >expandMessages</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getMaxLevel" >getMaxLevel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hidePane" >hidePane</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier"></span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#removeMessage" >removeMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showPane" >showPane</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggleActive" >toggleActive</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#align" >align</a>
+                            </li>
+                            <li>
+                                <a href="#clearOnNavigation" >clearOnNavigation</a>
+                            </li>
+                            <li>
+                                <a href="#color" >color</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#align" >align</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: StarkLoggingService, messagePaneService: <a href="../interfaces/StarkMessagePaneService.html" target="_self">StarkMessagePaneService</a>, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, elementRef: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>, cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:145</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Class constructor</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The <code>StarkLoggingService</code> instance of the application.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>messagePaneService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/StarkMessagePaneService.html" target="_self" >StarkMessagePaneService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The service to display/hide messages in the pane.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Angular <code>Renderer2</code> wrapper for DOM manipulations.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>elementRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Reference to the DOM element where this component is attached to.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Reference to the change detector attached to this component.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="align"></a>
+                        <b>align</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#AlignTypes" target="_self" >AlignTypes</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:75</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Alignment to be used: <code>&quot;left&quot;</code>, <code>&quot;center&quot;</code> or <code>&quot;right&quot;</code>.</p>
+<p>Default: <code>&quot;right&quot;</code>.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="clearOnNavigation"></a>
+                        <b>clearOnNavigation</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:67</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the messages should be cleared on every navigation to another view/page.</p>
+<p>Default: <code>false</code>.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="color"></a>
+                        <b>color</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in         <code><a href="../directives/AbstractStarkUiComponent.html#source" target="_self" >AbstractStarkUiComponent:16</a></code>
+</div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Color theme</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearAllMessages"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>clearAllMessages</b></span>
+                        <a href="#clearAllMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>clearAllMessages()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="271"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:271</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Clear all messages</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="collapseMessages"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>collapseMessages</b></span>
+                        <a href="#collapseMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>collapseMessages()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="344"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:344</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>collapse the message pane</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="countMessages"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>countMessages</b></span>
+                        <a href="#countMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>countMessages(messageCollection: <a href="../interfaces/StarkMessageCollection.html" target="_self">StarkMessageCollection</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="225"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:225</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Count the number of messages by type in the collection</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>messageCollection</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkMessageCollection.html" target="_self" >StarkMessageCollection</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The collection to count</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="expandMessages"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>expandMessages</b></span>
+                        <a href="#expandMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>expandMessages()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="351"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:351</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>expand the message pane</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMaxLevel"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>getMaxLevel</b></span>
+                        <a href="#getMaxLevel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMaxLevel(messageCollection: <a href="../interfaces/StarkMessageCollection.html" target="_self">StarkMessageCollection</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="247"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:247</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Retrieve the level of the message pane</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>messageCollection</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkMessageCollection.html" target="_self" >StarkMessageCollection</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The collection to analyse</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/StarkMessage.html" target="_self" >StarkMessagePaneNavItem</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hidePane"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>hidePane</b></span>
+                        <a href="#hidePane"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>hidePane()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="306"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:306</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Hide the message pane</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnChanges(changesObj: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="215"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:215</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changesObj</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Contains the changed properties</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier"></span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../directives/AbstractStarkUiComponent.html#source" target="_self" >AbstractStarkUiComponent:168</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeMessage"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>removeMessage</b></span>
+                        <a href="#removeMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeMessage(message: <a href="../interfaces/StarkMessage.html" target="_self">StarkMessage</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="264"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:264</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Remove one of the message</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>message</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkMessage.html" target="_self" >StarkMessage</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The message to remove</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPane"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>showPane</b></span>
+                        <a href="#showPane"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showPane()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="278"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:278</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Display the message pane</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleActive"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>toggleActive</b></span>
+                        <a href="#toggleActive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggleActive(navItem: <a href="../interfaces/StarkMessage.html" target="_self">StarkMessagePaneNavItem</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="333"
+                            class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:333</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle from one item to another</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>navItem</td>
+                                    <td>
+                                                <code><a href="../interfaces/StarkMessage.html" target="_self" >StarkMessagePaneNavItem</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The item to navigate to</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentNavItem"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>currentNavItem</b></span>
+                        <a href="#currentNavItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkMessage.html" target="_self" >StarkMessagePaneNavItem</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Messages tab currently selected</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hideAnimationDelay"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>hideAnimationDelay</b></span>
+                        <a href="#hideAnimationDelay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>500</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:124</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Delay of the animation when the messages are hidden</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isVisible"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isVisible</b></span>
+                        <a href="#isVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Whether the message pane is currently visible</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logger"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>logger</b></span>
+                        <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>StarkLoggingService</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(STARK_LOGGING_SERVICE)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- The `StarkLoggingService` instance of the application.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="maxLevel"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>maxLevel</b></span>
+                        <a href="#maxLevel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkMessage.html" target="_self" >StarkMessagePaneNavItem</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;infos&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Maximum level of the messages currently shown (error, warning or info).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageCollection"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>messageCollection</b></span>
+                        <a href="#messageCollection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkMessageCollection.html" target="_self" >StarkMessageCollection</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+		infoMessages: [],
+		warningMessages: [],
+		errorMessages: []
+	}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:90</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Collection of messages currently shown.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messagePaneService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>messagePaneService</b></span>
+                        <a href="#messagePaneService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkMessagePaneService.html" target="_self" >StarkMessagePaneService</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(STARK_MESSAGE_PANE_SERVICE)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- The service to display/hide messages in the pane.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showAnimationDelay"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showAnimationDelay</b></span>
+                        <a href="#showAnimationDelay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>20</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Delay of the animation when the messages are shown</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalMessages"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>totalMessages</b></span>
+                        <a href="#totalMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total number of messages currently shown</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="align"></a>
+                        <span class="name"><b>align</b><a href="#align"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>align()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:78</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>align(value: <a href="../undefineds/AlignTypes.html" target="_self">AlignTypes</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/modules/message-pane/components/message-pane.component.ts:75</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Alignment to be used: <code>&quot;left&quot;</code>, <code>&quot;center&quot;</code> or <code>&quot;right&quot;</code>.</p>
+<p>Default: <code>&quot;right&quot;</code>.</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../miscellaneous/typealiases.html#AlignTypes" target="_self" >AlignTypes</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	Inject,
+	Input,
+	OnChanges,
+	OnInit,
+	Renderer2,
+	SimpleChanges
+} from &quot;@angular/core&quot;;
+import { Observable, of, Subject } from &quot;rxjs&quot;;
+import { delay, distinctUntilChanged, map, switchMap, take, tap } from &quot;rxjs/operators&quot;;
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;@nationalbankbelgium/stark-core&quot;;
+import {
+	starkMessagePaneAlignClassPrefix,
+	starkMessagePaneCollapsedClass,
+	starkMessagePaneDisplayAnimatedClass,
+	starkMessagePaneDisplayedClass
+} from &quot;./message-pane.constants&quot;;
+import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService, starkMessagePaneServiceName } from &quot;../services/message-pane.service.intf&quot;;
+import { StarkMessage, StarkMessageCollection } from &quot;@nationalbankbelgium/stark-ui/src/common&quot;;
+import { AbstractStarkUiComponent } from &quot;@nationalbankbelgium/stark-ui/src/internal-common&quot;;
+
+/**
+ * Type of messages that can be displayed in the message pane
+ */
+export type StarkMessagePaneNavItem &#x3D; &quot;&quot; | &quot;errors&quot; | &quot;warnings&quot; | &quot;infos&quot;;
+
+/**
+ * Type of alignment that can be set
+ */
+export type AlignTypes &#x3D; &quot;left&quot; | &quot;center&quot; | &quot;right&quot;;
+
+/**
+ * The default align
+ */
+const DEFAULT_ALIGN: AlignTypes &#x3D; &quot;right&quot;;
+
+/**
+ * @ignore
+ */
+const componentName &#x3D; &quot;stark-message-pane&quot;;
+
+// FIXME: refactor the template of this component function to reduce its cyclomatic complexity
+/* eslint-disable @angular-eslint/template/cyclomatic-complexity */
+/**
+ * Component to display messages in a single pane grouped by level: info, errors and warnings.
+ */
+@Component({
+	selector: &quot;stark-message-pane&quot;,
+	templateUrl: &quot;./message-pane.component.html&quot;,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	}
+})
+export class StarkMessagePaneComponent extends AbstractStarkUiComponent implements OnInit, OnChanges {
+	/**
+	 * Whether the messages should be cleared on every navigation to another view/page.
+	 *
+	 * Default: &#x60;false&#x60;.
+	 */
+	@Input()
+	public clearOnNavigation?: boolean;
+
+	/**
+	 * Alignment to be used: &#x60;&quot;left&quot;&#x60;, &#x60;&quot;center&quot;&#x60; or &#x60;&quot;right&quot;&#x60;.
+	 *
+	 * Default: &#x60;&quot;right&quot;&#x60;.
+	 */
+	@Input()
+	public set align(value: AlignTypes) {
+		this._align &#x3D; value || DEFAULT_ALIGN;
+	}
+	public get align(): AlignTypes {
+		return this._align;
+	}
+
+	/**
+	 * @ignore
+	 */
+	private _align: &quot;left&quot; | &quot;center&quot; | &quot;right&quot; &#x3D; DEFAULT_ALIGN;
+
+	/**
+	 * Collection of messages currently shown.
+	 */
+	public messageCollection: StarkMessageCollection &#x3D; {
+		infoMessages: [],
+		warningMessages: [],
+		errorMessages: []
+	};
+
+	/**
+	 * Messages tab currently selected
+	 */
+	public currentNavItem: StarkMessagePaneNavItem &#x3D; &quot;&quot;;
+
+	/**
+	 * Total number of messages currently shown
+	 */
+	public totalMessages &#x3D; 0;
+
+	/**
+	 * Maximum level of the messages currently shown (error, warning or info).
+	 */
+	public maxLevel: StarkMessagePaneNavItem &#x3D; &quot;infos&quot;;
+
+	/**
+	 * Whether the message pane is currently visible
+	 */
+	public isVisible &#x3D; false;
+
+	/**
+	 * Delay of the animation when the messages are shown
+	 */
+	public showAnimationDelay &#x3D; 20;
+
+	/**
+	 * Delay of the animation when the messages are hidden
+	 */
+	public hideAnimationDelay &#x3D; 500; // the CSS animation takes 0.4 secs
+
+	/**
+	 * @ignore
+	 */
+	public errorMessages$!: Observable&lt;StarkMessage[]&gt;;
+
+	/**
+	 * @ignore
+	 */
+	public infoMessages$!: Observable&lt;StarkMessage[]&gt;;
+
+	/**
+	 * @ignore
+	 */
+	public warningMessages$!: Observable&lt;StarkMessage[]&gt;;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	public hide$?: Subject&lt;string&gt;;
+
+	/**
+	 * Class constructor
+	 * @param logger - The &#x60;StarkLoggingService&#x60; instance of the application.
+	 * @param messagePaneService - The service to display/hide messages in the pane.
+	 * @param renderer - Angular &#x60;Renderer2&#x60; wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 * @param cdRef - Reference to the change detector attached to this component.
+	 */
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		@Inject(STARK_MESSAGE_PANE_SERVICE) public messagePaneService: StarkMessagePaneService,
+		renderer: Renderer2,
+		elementRef: ElementRef,
+		protected cdRef: ChangeDetectorRef
+	) {
+		super(renderer, elementRef);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public override ngOnInit(): void {
+		super.ngOnInit();
+		this.renderer.addClass(this.elementRef.nativeElement, starkMessagePaneAlignClassPrefix + this.align);
+
+		const appMsgCollection$: Observable&lt;StarkMessageCollection&gt; &#x3D; this.messagePaneService.getAll();
+
+		appMsgCollection$.subscribe((msgCollection: StarkMessageCollection) &#x3D;&gt; {
+			this.messageCollection &#x3D; msgCollection;
+			this.totalMessages &#x3D; this.countMessages(msgCollection);
+			this.maxLevel &#x3D; this.getMaxLevel(msgCollection);
+			if (this.totalMessages &#x3D;&#x3D;&#x3D; 0) {
+				this.currentNavItem &#x3D; &quot;&quot;;
+				if (this.isVisible) {
+					this.hidePane();
+					this.isVisible &#x3D; false;
+				}
+			} else {
+				if (!this.isVisible) {
+					this.showPane();
+					this.isVisible &#x3D; true;
+				}
+			}
+			this.cdRef.detectChanges(); // needed due to ChangeDetectionStrategy.OnPush in order to refresh the CSS classes
+		});
+
+		this.errorMessages$ &#x3D; appMsgCollection$.pipe(
+			map((msgCollection: StarkMessageCollection) &#x3D;&gt; msgCollection.errorMessages),
+			distinctUntilChanged()
+		);
+
+		this.infoMessages$ &#x3D; appMsgCollection$.pipe(
+			map((msgCollection: StarkMessageCollection) &#x3D;&gt; msgCollection.infoMessages),
+			distinctUntilChanged()
+		);
+
+		this.warningMessages$ &#x3D; appMsgCollection$.pipe(
+			map((msgCollection: StarkMessageCollection) &#x3D;&gt; msgCollection.warningMessages),
+			distinctUntilChanged()
+		);
+
+		this.logger.debug(componentName + &quot;: controller initialized&quot;);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 * @param changesObj - Contains the changed properties
+	 */
+	public ngOnChanges(changesObj: SimpleChanges): void {
+		if (changesObj[&quot;clearOnNavigation&quot;] &amp;&amp; this.clearOnNavigation !&#x3D;&#x3D; changesObj[&quot;clearOnNavigation&quot;].previousValue) {
+			this.messagePaneService.clearOnNavigation &#x3D; !!this.clearOnNavigation;
+		}
+	}
+
+	/**
+	 * Count the number of messages by type in the collection
+	 * @param messageCollection - The collection to count
+	 */
+	private countMessages(messageCollection: StarkMessageCollection): number {
+		let msgCount &#x3D; 0;
+
+		if (messageCollection) {
+			if (messageCollection.errorMessages.length &gt; 0) {
+				msgCount +&#x3D; messageCollection.errorMessages.length;
+			}
+			if (messageCollection.warningMessages.length &gt; 0) {
+				msgCount +&#x3D; messageCollection.warningMessages.length;
+			}
+			if (messageCollection.infoMessages.length &gt; 0) {
+				msgCount +&#x3D; messageCollection.infoMessages.length;
+			}
+		}
+
+		return msgCount;
+	}
+
+	/**
+	 * Retrieve the level of the message pane
+	 * @param messageCollection - The collection to analyse
+	 */
+	private getMaxLevel(messageCollection: StarkMessageCollection): StarkMessagePaneNavItem {
+		let level: StarkMessagePaneNavItem &#x3D; &quot;infos&quot;;
+
+		if (messageCollection.warningMessages.length &gt; 0) {
+			level &#x3D; &quot;warnings&quot;;
+		}
+		if (messageCollection.errorMessages.length &gt; 0) {
+			level &#x3D; &quot;errors&quot;;
+		}
+
+		return level;
+	}
+
+	/**
+	 * Remove one of the message
+	 * @param message - The message to remove
+	 */
+	public removeMessage(message: StarkMessage): void {
+		this.messagePaneService.remove([message]);
+	}
+
+	/**
+	 * Clear all messages
+	 */
+	public clearAllMessages(): void {
+		this.messagePaneService.clearAll();
+	}
+
+	/**
+	 * Display the message pane
+	 */
+	public showPane(): void {
+		const show$: Observable&lt;string&gt; &#x3D; of(starkMessagePaneServiceName + &quot;: showing pane...&quot;).pipe(
+			tap(() &#x3D;&gt; this.renderer.addClass(this.elementRef.nativeElement, starkMessagePaneDisplayedClass)),
+			delay(this.showAnimationDelay),
+			map(() &#x3D;&gt; {
+				this.renderer.addClass(this.elementRef.nativeElement, starkMessagePaneDisplayAnimatedClass);
+				return starkMessagePaneServiceName + &quot;: pane shown&quot;;
+			})
+		);
+
+		let composedShow$: Observable&lt;string&gt; &#x3D; show$;
+
+		// check if the &#x27;show&#x27; needs to wait for the &#x27;hide&#x27; to finish, otherwise it is executed immediately
+		if (this.hide$) {
+			composedShow$ &#x3D; this.hide$.pipe(
+				switchMap(
+					() &#x3D;&gt; show$ // call the &#x27;show&#x27; logic after the &#x27;hide&#x27; finishes
+				),
+				take(1)
+			); // unsubscribe from the &#x27;hide&#x27; in this chain (every call to the showPane() method must listen only to one emission)
+		}
+
+		composedShow$.subscribe();
+	}
+
+	/**
+	 * Hide the message pane
+	 */
+	public hidePane(): void {
+		if (!this.hide$) {
+			// should wait for the panel to be hidden
+			this.hide$ &#x3D; new Subject&lt;string&gt;();
+		}
+
+		const hide$: Observable&lt;string&gt; &#x3D; of(starkMessagePaneServiceName + &quot;: hiding pane...&quot;).pipe(
+			tap(() &#x3D;&gt; this.renderer.removeClass(this.elementRef.nativeElement, starkMessagePaneDisplayAnimatedClass)),
+			delay(this.hideAnimationDelay),
+			map(() &#x3D;&gt; {
+				this.renderer.removeClass(this.elementRef.nativeElement, starkMessagePaneDisplayedClass);
+				// emit result in the hide$ subject so that &#x27;show&#x27; can continue (in case it was called)
+				(&lt;Subject&lt;string&gt;&gt;this.hide$).next(&quot;pane hidden&quot;);
+				// complete and remove the subject so that next calls to &#x27;show&#x27; don&#x27;t need to wait (unless &#x27;hide&#x27; is called first)
+				(&lt;Subject&lt;string&gt;&gt;this.hide$).complete();
+				this.hide$ &#x3D; undefined;
+				return starkMessagePaneServiceName + &quot;: pane hidden&quot;;
+			})
+		);
+
+		hide$.subscribe();
+	}
+
+	/**
+	 * Toggle from one item to another
+	 * @param navItem - The item to navigate to
+	 */
+	public toggleActive(navItem: StarkMessagePaneNavItem): void {
+		if (this.currentNavItem &#x3D;&#x3D;&#x3D; navItem) {
+			this.currentNavItem &#x3D; &quot;&quot;;
+		} else {
+			this.currentNavItem &#x3D; navItem;
+		}
+	}
+
+	/**
+	 * collapse the message pane
+	 */
+	public collapseMessages(): void {
+		this.renderer.addClass(this.elementRef.nativeElement, starkMessagePaneCollapsedClass);
+	}
+
+	/**
+	 * expand the message pane
+	 */
+	public expandMessages(): void {
+		this.renderer.removeClass(this.elementRef.nativeElement, starkMessagePaneCollapsedClass);
+	}
+
+	/**
+	 * @ignore
+	 */
+	public trackItemFn(index: number, _item: StarkMessage): number {
+		return index;
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;inner&quot;&gt;
+	&lt;div class&#x3D;&quot;summary&quot;&gt;
+		&lt;button
+			class&#x3D;&quot;errors tab may-collapse&quot;
+			[ngClass]&#x3D;&quot;{ active: currentNavItem &#x3D;&#x3D;&#x3D; &#x27;errors&#x27; }&quot;
+			*ngIf&#x3D;&quot;messageCollection.errorMessages.length &gt; 0&quot;
+			(click)&#x3D;&quot;toggleActive(&#x27;errors&#x27;)&quot;
+			[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.ERROR_MESSAGES&#x27; | translate&quot;
+			[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.ERROR_MESSAGES&#x27; | translate&quot;
+			type&#x3D;&quot;button&quot;
+		&gt;
+			&lt;mat-icon svgIcon&#x3D;&quot;alert-circle&quot;&gt;&lt;/mat-icon&gt;
+			&lt;b&gt;{{ messageCollection.errorMessages.length }}&lt;/b&gt;
+		&lt;/button&gt;
+
+		&lt;button
+			class&#x3D;&quot;warnings tab may-collapse&quot;
+			[ngClass]&#x3D;&quot;{ active: currentNavItem &#x3D;&#x3D;&#x3D; &#x27;warnings&#x27; }&quot;
+			*ngIf&#x3D;&quot;messageCollection.warningMessages.length &gt; 0&quot;
+			(click)&#x3D;&quot;toggleActive(&#x27;warnings&#x27;)&quot;
+			[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.WARNING_MESSAGES&#x27; | translate&quot;
+			[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.WARNING_MESSAGES&#x27; | translate&quot;
+			type&#x3D;&quot;button&quot;
+		&gt;
+			&lt;mat-icon svgIcon&#x3D;&quot;alert&quot;&gt;&lt;/mat-icon&gt;
+			&lt;b&gt;{{ messageCollection.warningMessages.length }}&lt;/b&gt;
+		&lt;/button&gt;
+
+		&lt;button
+			class&#x3D;&quot;infos tab may-collapse&quot;
+			[ngClass]&#x3D;&quot;{ active: currentNavItem &#x3D;&#x3D;&#x3D; &#x27;infos&#x27; }&quot;
+			*ngIf&#x3D;&quot;messageCollection.infoMessages.length &gt; 0&quot;
+			(click)&#x3D;&quot;toggleActive(&#x27;infos&#x27;)&quot;
+			[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.INFO_MESSAGES&#x27; | translate&quot;
+			[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.INFO_MESSAGES&#x27; | translate&quot;
+			type&#x3D;&quot;button&quot;
+		&gt;
+			&lt;mat-icon svgIcon&#x3D;&quot;information&quot;&gt;&lt;/mat-icon&gt;
+			&lt;b&gt;{{ messageCollection.infoMessages.length }}&lt;/b&gt;
+		&lt;/button&gt;
+
+		&lt;button
+			class&#x3D;&quot;stark-message-pane-total&quot;
+			[ngClass]&#x3D;&quot;maxLevel&quot;
+			(click)&#x3D;&quot;expandMessages()&quot;
+			[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.EXPAND&#x27; | translate&quot;
+			[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.EXPAND&#x27; | translate&quot;
+			type&#x3D;&quot;button&quot;
+		&gt;
+			&lt;mat-icon svgIcon&#x3D;&quot;information&quot; *ngIf&#x3D;&quot;maxLevel &#x3D;&#x3D;&#x3D; &#x27;infos&#x27;&quot;&gt;&lt;/mat-icon&gt;
+			&lt;mat-icon svgIcon&#x3D;&quot;alert&quot; *ngIf&#x3D;&quot;maxLevel &#x3D;&#x3D;&#x3D; &#x27;warnings&#x27;&quot;&gt;&lt;/mat-icon&gt;
+			&lt;mat-icon svgIcon&#x3D;&quot;alert-circle&quot; *ngIf&#x3D;&quot;maxLevel &#x3D;&#x3D;&#x3D; &#x27;errors&#x27;&quot;&gt;&lt;/mat-icon&gt;
+			&lt;b&gt;{{ totalMessages }}&lt;/b&gt;
+		&lt;/button&gt;
+
+		&lt;button
+			mat-icon-button
+			class&#x3D;&quot;may-collapse clear-all-messages&quot;
+			(click)&#x3D;&quot;clearAllMessages()&quot;
+			[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.DISMISS_ALL&#x27; | translate&quot;
+			[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.DISMISS_ALL&#x27; | translate&quot;
+			type&#x3D;&quot;button&quot;
+		&gt;
+			&lt;mat-icon svgIcon&#x3D;&quot;close&quot;&gt;&lt;/mat-icon&gt;
+		&lt;/button&gt;
+
+		&lt;button
+			mat-icon-button
+			class&#x3D;&quot;collapse-pane&quot;
+			(click)&#x3D;&quot;collapseMessages()&quot;
+			[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.COLLAPSE&#x27; | translate&quot;
+			[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.COLLAPSE&#x27; | translate&quot;
+			type&#x3D;&quot;button&quot;
+		&gt;
+			&lt;mat-icon svgIcon&#x3D;&quot;adjust&quot;&gt;&lt;/mat-icon&gt;
+		&lt;/button&gt;
+	&lt;/div&gt;
+
+	&lt;div class&#x3D;&quot;stark-message-pane-content&quot;&gt;
+		&lt;ng-container *ngIf&#x3D;&quot;currentNavItem &#x3D;&#x3D;&#x3D; &#x27;errors&#x27;&quot;&gt;
+			&lt;div
+				class&#x3D;&quot;stark-message-pane-item stark-message-pane-item-error errors&quot;
+				*ngFor&#x3D;&quot;let message of errorMessages$ | async; trackBy: trackItemFn&quot;
+			&gt;
+				&lt;mat-icon svgIcon&#x3D;&quot;alert-circle&quot;&gt;&lt;/mat-icon&gt;
+				&lt;div translate&#x3D;&quot;{{ message.key }}&quot; translate-values&#x3D;&quot;message.interpolateValues&quot;&gt;&lt;/div&gt;
+				&lt;button
+					mat-icon-button
+					class&#x3D;&quot;mat-no-ink mat-icon-button&quot;
+					[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.CLOSE_MESSAGE&#x27; | translate&quot;
+					(click)&#x3D;&quot;removeMessage(message)&quot;
+					[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.CLOSE_MESSAGE&#x27; | translate&quot;
+				&gt;
+					&lt;mat-icon svgIcon&#x3D;&quot;close&quot;&gt;&lt;/mat-icon&gt;
+				&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/ng-container&gt;
+		&lt;ng-container *ngIf&#x3D;&quot;currentNavItem &#x3D;&#x3D;&#x3D; &#x27;warnings&#x27;&quot;&gt;
+			&lt;div
+				class&#x3D;&quot;stark-message-pane-item stark-message-pane-item-warning warnings&quot;
+				*ngFor&#x3D;&quot;let message of warningMessages$ | async; trackBy: trackItemFn&quot;
+			&gt;
+				&lt;mat-icon svgIcon&#x3D;&quot;alert&quot;&gt;&lt;/mat-icon&gt;
+				&lt;div translate&#x3D;&quot;{{ message.key }}&quot; translate-values&#x3D;&quot;message.interpolateValues&quot;&gt;&lt;/div&gt;
+				&lt;button
+					mat-icon-button
+					class&#x3D;&quot;md-no-ink mat-icon-button&quot;
+					[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.CLOSE_MESSAGE&#x27; | translate&quot;
+					(click)&#x3D;&quot;removeMessage(message)&quot;
+					[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.CLOSE_MESSAGE&#x27; | translate&quot;
+				&gt;
+					&lt;mat-icon svgIcon&#x3D;&quot;close&quot;&gt;&lt;/mat-icon&gt;
+				&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/ng-container&gt;
+		&lt;ng-container *ngIf&#x3D;&quot;currentNavItem &#x3D;&#x3D;&#x3D; &#x27;infos&#x27;&quot;&gt;
+			&lt;div
+				class&#x3D;&quot;stark-message-pane-item stark-message-pane-item-info infos&quot;
+				*ngFor&#x3D;&quot;let message of infoMessages$ | async; trackBy: trackItemFn&quot;
+			&gt;
+				&lt;mat-icon svgIcon&#x3D;&quot;information&quot;&gt;&lt;/mat-icon&gt;
+				&lt;div translate&#x3D;&quot;{{ message.key }}&quot; translate-values&#x3D;&quot;message.interpolateValues&quot;&gt;&lt;/div&gt;
+				&lt;button
+					mat-icon-button
+					class&#x3D;&quot;md-no-ink mat-icon-button&quot;
+					[matTooltip]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.CLOSE_MESSAGE&#x27; | translate&quot;
+					(click)&#x3D;&quot;removeMessage(message)&quot;
+					[attr.aria-label]&#x3D;&quot;&#x27;STARK.MESSAGE_PANE.CLOSE_MESSAGE&#x27; | translate&quot;
+				&gt;
+					&lt;mat-icon svgIcon&#x3D;&quot;close&quot;&gt;&lt;/mat-icon&gt;
+				&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/ng-container&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="inner">	<div class="summary">		<button			class="errors tab may-collapse"			[ngClass]="{ active: currentNavItem === \'errors\' }"			*ngIf="messageCollection.errorMessages.length > 0"			(click)="toggleActive(\'errors\')"			[matTooltip]="\'STARK.MESSAGE_PANE.ERROR_MESSAGES\' | translate"			[attr.aria-label]="\'STARK.MESSAGE_PANE.ERROR_MESSAGES\' | translate"			type="button"		>			<mat-icon svgIcon="alert-circle"></mat-icon>			<b>{{ messageCollection.errorMessages.length }}</b>		</button>		<button			class="warnings tab may-collapse"			[ngClass]="{ active: currentNavItem === \'warnings\' }"			*ngIf="messageCollection.warningMessages.length > 0"			(click)="toggleActive(\'warnings\')"			[matTooltip]="\'STARK.MESSAGE_PANE.WARNING_MESSAGES\' | translate"			[attr.aria-label]="\'STARK.MESSAGE_PANE.WARNING_MESSAGES\' | translate"			type="button"		>			<mat-icon svgIcon="alert"></mat-icon>			<b>{{ messageCollection.warningMessages.length }}</b>		</button>		<button			class="infos tab may-collapse"			[ngClass]="{ active: currentNavItem === \'infos\' }"			*ngIf="messageCollection.infoMessages.length > 0"			(click)="toggleActive(\'infos\')"			[matTooltip]="\'STARK.MESSAGE_PANE.INFO_MESSAGES\' | translate"			[attr.aria-label]="\'STARK.MESSAGE_PANE.INFO_MESSAGES\' | translate"			type="button"		>			<mat-icon svgIcon="information"></mat-icon>			<b>{{ messageCollection.infoMessages.length }}</b>		</button>		<button			class="stark-message-pane-total"			[ngClass]="maxLevel"			(click)="expandMessages()"			[matTooltip]="\'STARK.MESSAGE_PANE.EXPAND\' | translate"			[attr.aria-label]="\'STARK.MESSAGE_PANE.EXPAND\' | translate"			type="button"		>			<mat-icon svgIcon="information" *ngIf="maxLevel === \'infos\'"></mat-icon>			<mat-icon svgIcon="alert" *ngIf="maxLevel === \'warnings\'"></mat-icon>			<mat-icon svgIcon="alert-circle" *ngIf="maxLevel === \'errors\'"></mat-icon>			<b>{{ totalMessages }}</b>		</button>		<button			mat-icon-button			class="may-collapse clear-all-messages"			(click)="clearAllMessages()"			[matTooltip]="\'STARK.MESSAGE_PANE.DISMISS_ALL\' | translate"			[attr.aria-label]="\'STARK.MESSAGE_PANE.DISMISS_ALL\' | translate"			type="button"		>			<mat-icon svgIcon="close"></mat-icon>		</button>		<button			mat-icon-button			class="collapse-pane"			(click)="collapseMessages()"			[matTooltip]="\'STARK.MESSAGE_PANE.COLLAPSE\' | translate"			[attr.aria-label]="\'STARK.MESSAGE_PANE.COLLAPSE\' | translate"			type="button"		>			<mat-icon svgIcon="adjust"></mat-icon>		</button>	</div>	<div class="stark-message-pane-content">		<ng-container *ngIf="currentNavItem === \'errors\'">			<div				class="stark-message-pane-item stark-message-pane-item-error errors"				*ngFor="let message of errorMessages$ | async; trackBy: trackItemFn"			>				<mat-icon svgIcon="alert-circle"></mat-icon>				<div translate="{{ message.key }}" translate-values="message.interpolateValues"></div>				<button					mat-icon-button					class="mat-no-ink mat-icon-button"					[matTooltip]="\'STARK.MESSAGE_PANE.CLOSE_MESSAGE\' | translate"					(click)="removeMessage(message)"					[attr.aria-label]="\'STARK.MESSAGE_PANE.CLOSE_MESSAGE\' | translate"				>					<mat-icon svgIcon="close"></mat-icon>				</button>			</div>		</ng-container>		<ng-container *ngIf="currentNavItem === \'warnings\'">			<div				class="stark-message-pane-item stark-message-pane-item-warning warnings"				*ngFor="let message of warningMessages$ | async; trackBy: trackItemFn"			>				<mat-icon svgIcon="alert"></mat-icon>				<div translate="{{ message.key }}" translate-values="message.interpolateValues"></div>				<button					mat-icon-button					class="md-no-ink mat-icon-button"					[matTooltip]="\'STARK.MESSAGE_PANE.CLOSE_MESSAGE\' | translate"					(click)="removeMessage(message)"					[attr.aria-label]="\'STARK.MESSAGE_PANE.CLOSE_MESSAGE\' | translate"				>					<mat-icon svgIcon="close"></mat-icon>				</button>			</div>		</ng-container>		<ng-container *ngIf="currentNavItem === \'infos\'">			<div				class="stark-message-pane-item stark-message-pane-item-info infos"				*ngFor="let message of infoMessages$ | async; trackBy: trackItemFn"			>				<mat-icon svgIcon="information"></mat-icon>				<div translate="{{ message.key }}" translate-values="message.interpolateValues"></div>				<button					mat-icon-button					class="md-no-ink mat-icon-button"					[matTooltip]="\'STARK.MESSAGE_PANE.CLOSE_MESSAGE\' | translate"					(click)="removeMessage(message)"					[attr.aria-label]="\'STARK.MESSAGE_PANE.CLOSE_MESSAGE\' | translate"				>					<mat-icon svgIcon="close"></mat-icon>				</button>			</div>		</ng-container>	</div></div></div>'
+    var COMPONENTS = [{'name': 'StarkActionBarComponent', 'selector': 'stark-action-bar'},{'name': 'StarkAlertDialogComponent', 'selector': 'stark-alert-dialog'},{'name': 'StarkAppDataComponent', 'selector': 'stark-app-data'},{'name': 'StarkAppFooterComponent', 'selector': 'stark-app-footer'},{'name': 'StarkAppLogoComponent', 'selector': 'stark-app-logo'},{'name': 'StarkAppLogoutComponent', 'selector': 'stark-app-logout'},{'name': 'StarkAppMenuComponent', 'selector': 'stark-app-menu'},{'name': 'StarkAppMenuItemComponent', 'selector': 'stark-app-menu-item'},{'name': 'StarkAppSidebarComponent', 'selector': 'stark-app-sidebar'},{'name': 'StarkBreadcrumbComponent', 'selector': 'stark-breadcrumb'},{'name': 'StarkCollapsibleComponent', 'selector': 'stark-collapsible'},{'name': 'StarkConfirmDialogComponent', 'selector': 'stark-confirm-dialog'},{'name': 'StarkDatePickerComponent', 'selector': 'stark-date-picker'},{'name': 'StarkDateRangePickerComponent', 'selector': 'stark-date-range-picker'},{'name': 'StarkDateTimePickerComponent', 'selector': 'stark-date-time-picker'},{'name': 'StarkDropdownComponent', 'selector': 'stark-dropdown'},{'name': 'StarkGenericSearchComponent', 'selector': 'stark-generic-search'},{'name': 'StarkLanguageSelectorComponent', 'selector': 'stark-language-selector'},{'name': 'StarkLoginPageComponent', 'selector': 'stark-login-page'},{'name': 'StarkMessagePaneComponent', 'selector': 'stark-message-pane'},{'name': 'StarkMinimapComponent', 'selector': 'stark-minimap'},{'name': 'StarkPaginationComponent', 'selector': 'stark-pagination'},{'name': 'StarkPreloadingPageComponent', 'selector': 'stark-preloading-page'},{'name': 'StarkPrettyPrintComponent', 'selector': 'stark-pretty-print'},{'name': 'StarkProgressIndicatorComponent', 'selector': 'stark-progress-indicator'},{'name': 'StarkPromptDialogComponent', 'selector': 'stark-prompt-dialog'},{'name': 'StarkRouteSearchComponent', 'selector': 'stark-route-search'},{'name': 'StarkSessionCardComponent', 'selector': 'stark-session-card'},{'name': 'StarkSessionExpiredPageComponent', 'selector': 'stark-session-expired-page'},{'name': 'StarkSessionLogoutPageComponent', 'selector': 'stark-session-logout-page'},{'name': 'StarkSessionTimeoutWarningDialogComponent', 'selector': 'stark-session-timeout-warning-dialog'},{'name': 'StarkSliderComponent', 'selector': 'stark-slider'},{'name': 'StarkTableColumnComponent', 'selector': 'stark-table-column'},{'name': 'StarkTableComponent', 'selector': 'stark-table'},{'name': 'StarkTableMultisortDialogComponent', 'selector': 'stark-table-dialog-multisort'},{'name': 'StarkToastNotificationComponent', 'selector': 'stark-toast-notification'}];
+    var DIRECTIVES = [{'name': 'AbstractStarkFormComponent', 'selector': ''},{'name': 'AbstractStarkSearchComponent', 'selector': ''},{'name': 'AbstractStarkUiComponent', 'selector': ''},{'name': 'StarkEmailMaskDirective', 'selector': 'directiveName'},{'name': 'StarkNumberMaskDirective', 'selector': 'directiveName'},{'name': 'StarkProgressIndicatorDirective', 'selector': 'directiveName'},{'name': 'StarkRestrictInputDirective', 'selector': 'directiveName'},{'name': 'StarkSvgViewBoxDirective', 'selector': 'directiveName'},{'name': 'StarkTableExpandDetailDirective', 'selector': '[starkTableExpandDetail]'},{'name': 'StarkTableRowContentDirective', 'selector': '[starkTableRowContent]'},{'name': 'StarkTextMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTimestampMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTransformInputDirective', 'selector': '[starkTransformInput]'}];
+    var ACTUAL_COMPONENT = {'name': 'StarkMessagePaneComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkMessagePaneComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
