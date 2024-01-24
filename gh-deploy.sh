@@ -193,12 +193,6 @@ fi
 
 logTrace "Version for which we are producing docs: ${DOCS_VERSION}"
 
-if [[ ${GITHUB_ACTIONS} == true ]]; then
-    logTrace "Configuring Git for GitHub Actions"
-    git config user.name ${COMMIT_AUTHOR_USERNAME}
-    git config user.email ${COMMIT_AUTHOR_EMAIL}
-fi
-
 if [[ ${GH_ACTIONS_TAG} =~ .*-(alpha|beta|rc).* ]]; then
     logTrace "This is a pre-release version, we will publish the docs under the 'next' folder"
     LATEST_DIR_NAME="next"
@@ -263,6 +257,13 @@ logInfo "Pushing the docs to GitHub pages"
 
 cd ${DOCS_WORK_DIR}
 git add -A &> /dev/null # way too long
+
+if [[ ${GITHUB_ACTIONS} == true ]]; then
+    logTrace "Configuring Git for GitHub Actions"
+    git config user.name ${COMMIT_AUTHOR_USERNAME}
+    git config user.email ${COMMIT_AUTHOR_EMAIL}
+fi
+
 git commit --quiet -m "Publishing docs for version: ${DOCS_VERSION}"
 git push --quiet --force
 cd - > /dev/null
