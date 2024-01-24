@@ -1,3 +1,1323 @@
+# [12.0.0-beta.0](https://github.com/nationalbankbelgium/stark/compare/10.2.0...12.0.0-beta.0) (2024-01-24)
+
+
+### Bug Fixes
+
+* **build-main:** fix `npm run commit` script in order to fix the usage on Windows OS ([ec74726](https://github.com/nationalbankbelgium/stark/commit/ec7472647071c253323f51ea1599cf9e2d905b95))
+* **build-main:** remove wrong spaces in .editorconfig file ([58d3c26](https://github.com/nationalbankbelgium/stark/commit/58d3c264bbcca78359b30b8beab66508d662e3fb))
+* **stark-all:** disable `emitDecoratorMetadata` in tsconfig of stark-* packages in order to solve build warnings ([d37ba9f](https://github.com/nationalbankbelgium/stark/commit/d37ba9f42492111e909b007bbd2df2ba3636d0cf)), closes [ng-packagr/ng-packagr#2056](https://github.com/ng-packagr/ng-packagr/issues/2056)
+* **stark-all:** fix compodoc dependency to v1.1.13 ([bfcd2f3](https://github.com/nationalbankbelgium/stark/commit/bfcd2f367973c26f35268288f695876e70820ccc))
+* **stark-all:** remove vulnerable `event-source-polyfill` dependency ([713239f](https://github.com/nationalbankbelgium/stark/commit/713239f51d303679a4b1d273c2b8023e1903392f))
+* **stark-build:** fix index-html transform script to support ng12 production build ([aab9a4f](https://github.com/nationalbankbelgium/stark/commit/aab9a4f80f78025002d73eb0185ef084fe3cd63c))
+* **stark-build:** remove csp 'plugin-types' rule and adapt 'object-src' rule ([0fd48d1](https://github.com/nationalbankbelgium/stark/commit/0fd48d138c9a1a0877260c77024f7fcf43aa333b)), closes [#3086](https://github.com/nationalbankbelgium/stark/issues/3086)
+* **stark-build:** remove support for obsolete `webpack-monitor` ([095117c](https://github.com/nationalbankbelgium/stark/commit/095117c3cefa39894864e24ff47cf2de4d0607f1))
+* **stark-core:** add support for http 204 status code when persisting logs ([e24d92b](https://github.com/nationalbankbelgium/stark/commit/e24d92b9a5b1e6442a06fdad5b5cf85e95f4382e))
+* **stark-testing:** remove useless `coveralls` dependency ([df5bed4](https://github.com/nationalbankbelgium/stark/commit/df5bed49639e820d96a62837cff35e7dc5665e30))
+* **stark-ui:** dropdown - fix click event not working around the `mat-select` element ([cd29848](https://github.com/nationalbankbelgium/stark/commit/cd298488c74108d61665b1cea316f4dfd64dbfa6))
+* **stark-ui:** fix `ViewDestroyedError` issue linked to formControl usage ([f0857e8](https://github.com/nationalbankbelgium/stark/commit/f0857e89c72e8fe2ff03543294f80d8bfa08a3f5)), closes [#2874](https://github.com/nationalbankbelgium/stark/issues/2874)
+* **stark-ui:** handles paste and drop event on the restrict-input directive ([28791f3](https://github.com/nationalbankbelgium/stark/commit/28791f333a09999d97d349c51f34ac5cf2ecb9af)), closes [#1905](https://github.com/nationalbankbelgium/stark/issues/1905)
+* **stark-ui:** minimap - fix `[class.open]="minimapMenuTrigger.menuOpen"` not changing when menu closed ([50034b3](https://github.com/nationalbankbelgium/stark/commit/50034b394ee41798b728842843a95b3020c82b18))
+* **stark-ui:** pretty-print - add support for uppercase extension names ([9e1e837](https://github.com/nationalbankbelgium/stark/commit/9e1e8370cf9779a126cfb4081bbc12d2113291d8))
+* **stark-ui:** remove KeybordEvent.char ([c25fec8](https://github.com/nationalbankbelgium/stark/commit/c25fec869ff9a0060a2f43eab796e5aa1410413b)), closes [#3634](https://github.com/nationalbankbelgium/stark/issues/3634)
+* **stark-ui:** table action column do not works when language is NL ([20c010e](https://github.com/nationalbankbelgium/stark/commit/20c010e8afe4e31c97c0b3782d5e4150b9b4c373)), closes [#3391](https://github.com/nationalbankbelgium/stark/issues/3391)
+
+
+### chore
+
+* **stark-all:** upgrade project engine from NodeJS-12_npm-7 to NodeJS-14_npm-8 ([ca333ce](https://github.com/nationalbankbelgium/stark/commit/ca333cee87342bf7e3a998ec834004970a47fa53))
+* **stark-ui:** change linting engine from `TSLint` to `ESLint` ([781d133](https://github.com/nationalbankbelgium/stark/commit/781d13370f8fc870b94b105c4c8fc3f250a50555))
+
+
+### Features
+
+* **build-main:** adapt husky configuration after husky upgrade ([b784013](https://github.com/nationalbankbelgium/stark/commit/b78401391799f6db8cf1f90705eb55621a78ba7c))
+* **build-main:** upgrade npm to v7 and NodeJS to v12 ([37d400a](https://github.com/nationalbankbelgium/stark/commit/37d400a0267e54ac3a81f7395d8b3cd66a20e015))
+* **showcase:** adapt generic-search demo to use public `results$` variable directly in template ([b8ca98f](https://github.com/nationalbankbelgium/stark/commit/b8ca98fcb278917229cfc979d714adc27ab6537f))
+* **showcase:** add the ngx-form-errors demo to the showcase ([4a98d3c](https://github.com/nationalbankbelgium/stark/commit/4a98d3cc32bb2fe48a7203b6a4f6f824991cb2eb)), closes [#1195](https://github.com/nationalbankbelgium/stark/issues/1195)
+* **showcase:** update generic-search actions style ([7dd7c09](https://github.com/nationalbankbelgium/stark/commit/7dd7c09509016aed455831264e5cea8ae69ddaa0))
+* **showcase:** upgrade to Angular 12 ([26327e0](https://github.com/nationalbankbelgium/stark/commit/26327e0fed03d1688c071d0d77942a39ea6432dc))
+* **stark-all:** remove `ngrx-store-freeze` dependency thanks to `@ngrx/store` 8.x upgrade ([4af3e25](https://github.com/nationalbankbelgium/stark/commit/4af3e2581af8913935da5e6ba756aed65a047c84))
+* **stark-all:** upgrade npm to v7 and NodeJS to v12 ([1e127a1](https://github.com/nationalbankbelgium/stark/commit/1e127a10fafb70de7c534f68c7c1f132a77a4a35))
+* **stark-build:** add Stylelint plugin in build configuration ([30a191d](https://github.com/nationalbankbelgium/stark/commit/30a191de5605b1211c251e0d798322c4950ee8fd))
+* **stark-build:** enable `writeToDisk` in webpack-dev-server configuration ([95dcf2c](https://github.com/nationalbankbelgium/stark/commit/95dcf2cab5f3fcd1d84393b2618727b160da8f81))
+* **stark-build:** merge webpack configurations into a single new webpack.config.js file ([7791bc2](https://github.com/nationalbankbelgium/stark/commit/7791bc2ec878881f561c6944aadab2df03f6c87b)), closes [#2558](https://github.com/nationalbankbelgium/stark/issues/2558)
+* **stark-build:** replace ContextReplacementPlugin by MomentLocalesPlugin to reduce Moment.js size ([68c6489](https://github.com/nationalbankbelgium/stark/commit/68c6489711211afd098bd620bc150da957f8bac8))
+* **stark-build:** update TSLint to v6.1.3 ([f77d719](https://github.com/nationalbankbelgium/stark/commit/f77d719e4815fa84d3e487d10f8bde1c9603d9b3))
+* **stark-build:** upgrade to Angular 12 ([44502de](https://github.com/nationalbankbelgium/stark/commit/44502de395f87d3873b71eb3c4f50030c8670142))
+* **stark-build:** upgrade to Angular 8 ([c3c83b6](https://github.com/nationalbankbelgium/stark/commit/c3c83b62abbf41db9e692473d93622ca48567964))
+* **stark-core:** add support for `httpOnly` cookie in `StarkXSRFService` ([9fe3907](https://github.com/nationalbankbelgium/stark/commit/9fe39072293985b4c3e6207defa48665b55eb05c)), closes [#3136](https://github.com/nationalbankbelgium/stark/issues/3136)
+* **stark-core:** removed Throw Error to create stack trace for IE ([c58408f](https://github.com/nationalbankbelgium/stark/commit/c58408fe73ec6af26de5bae2830da8b7c5fde18a)), closes [#3636](https://github.com/nationalbankbelgium/stark/issues/3636)
+* **stark-core:** update `class-validator` dependency to version ~0.13.1 ([1fd6700](https://github.com/nationalbankbelgium/stark/commit/1fd6700ac921d1f598f4289b95d25db3370e9312))
+* **stark-core:** update `uuid` and `@types/uuid` dependencies to version "^8.3.0" ([15b5c08](https://github.com/nationalbankbelgium/stark/commit/15b5c08bd21fa191a6cd0eb010aa4bb8dba2d657)), closes [#2759](https://github.com/nationalbankbelgium/stark/issues/2759) [#2760](https://github.com/nationalbankbelgium/stark/issues/2760)
+* **stark-core:** update error handling actions style ([727c244](https://github.com/nationalbankbelgium/stark/commit/727c2445f55be512165d8416d2f2c32e5a1e567b))
+* **stark-core:** update logging actions style ([3dd57d2](https://github.com/nationalbankbelgium/stark/commit/3dd57d231d284822dd8ec5656a1f95a2c0113a1c))
+* **stark-core:** update routing actions style ([97b067d](https://github.com/nationalbankbelgium/stark/commit/97b067d38ffc82e3123e2d4daa1a7a0f511df2e1))
+* **stark-core:** update session actions style ([810bbc1](https://github.com/nationalbankbelgium/stark/commit/810bbc17df08a4605f6e4d94af42c23cc344abc8))
+* **stark-core:** update settings actions style ([f1803a8](https://github.com/nationalbankbelgium/stark/commit/f1803a884620d24ae72dfe35e0fed25dd6638859))
+* **stark-core:** update user actions style ([8418efc](https://github.com/nationalbankbelgium/stark/commit/8418efc0efabac4306c90b775286d2379fce9ffe))
+* **stark-core:** upgrade to Angular 12 ([367c2b2](https://github.com/nationalbankbelgium/stark/commit/367c2b2a53cdaa91fff35853c921c3265c720c79))
+* **stark-core:** upgrade to Angular 8 ([3d0b6ea](https://github.com/nationalbankbelgium/stark/commit/3d0b6ea9169cbb363fe2a8452c530fe64fabfb77))
+* **stark-rbac:** update rbac actions style ([c4efd6a](https://github.com/nationalbankbelgium/stark/commit/c4efd6a00ddd7e57a42754a12d49ebd1d25de0a1))
+* **stark-rbac:** upgrade to Angular 12 ([d07c680](https://github.com/nationalbankbelgium/stark/commit/d07c68058903fc1205ca2ef74fcf1427f8e2fc1e))
+* **stark-testing:** bump @types/jasmine in /packages/stark-testing/package.json from 3.6.4 to 3.8.2 ([758bc2c](https://github.com/nationalbankbelgium/stark/commit/758bc2c25eee84d4f9fbf262e5f4a767546c7ff6))
+* **stark-testing:** improve karma config for ng test usage ([82d0bac](https://github.com/nationalbankbelgium/stark/commit/82d0bacc2728af0a5a68908df31699d7f7dddeff))
+* **stark-testing:** replace `karma-typescript` by `karma` + `@angular/devkit:build-angular` ([a9e06dc](https://github.com/nationalbankbelgium/stark/commit/a9e06dcc26c534cb6bf3a0c37624f76c0eb5e41e))
+* **stark-testing:** upgrade to Angular 12 + karma 6 ([2fed5d6](https://github.com/nationalbankbelgium/stark/commit/2fed5d6512c32b714767eb494bde3bde2a74106f))
+* **stark-ui:** add support for Angular html templates in pretty-print component ([b9e2aa2](https://github.com/nationalbankbelgium/stark/commit/b9e2aa2639f4276b53d398f5ba4ef23232037ec4))
+* **stark-ui:** generic-search - adapt `results$` variable visibility to `public` ([99d1ae8](https://github.com/nationalbankbelgium/stark/commit/99d1ae80019bd77f104e26b0e85e18f687fc99b0)), closes [#3082](https://github.com/nationalbankbelgium/stark/issues/3082)
+* **stark-ui:** keep highlight the menu when go to child state ([4f55b60](https://github.com/nationalbankbelgium/stark/commit/4f55b60acb09614a37451a8d6f2429208e453db9)), closes [#3521](https://github.com/nationalbankbelgium/stark/issues/3521)
+* **stark-ui:** replace `pretty-data` by `prettier`+`@sqltools/formatter` in pretty-print component ([286556e](https://github.com/nationalbankbelgium/stark/commit/286556ee8ad7b80fe1c85e645092320d74785f8a)), closes [#2543](https://github.com/nationalbankbelgium/stark/issues/2543)
+* **stark-ui:** split stark-ui modules in different chunks to reduce bundle size of applications ([205f136](https://github.com/nationalbankbelgium/stark/commit/205f1362241edb1b72d2d8d402fa85ce19b45e73))
+* **stark-ui:** update message-pane actions style ([3ff099f](https://github.com/nationalbankbelgium/stark/commit/3ff099fca449a0687b01971b8360cb422b3192b2))
+* **stark-ui:** update prettier to version 3.1 ([227e46b](https://github.com/nationalbankbelgium/stark/commit/227e46b2e3e8bb0d625f28fd0a4be11434ba80e9))
+* **stark-ui:** update progress-indicator actions style ([374c429](https://github.com/nationalbankbelgium/stark/commit/374c42909e043e5f788553ac6a4eee3ddcbe79ab))
+* **stark-ui:** update styles for Sass v8 usage ([1be66d3](https://github.com/nationalbankbelgium/stark/commit/1be66d38a5a67e1f92db12c87b0dbbac47847c13))
+* **stark-ui:** update styles to allow theme customization ([5a2a1fb](https://github.com/nationalbankbelgium/stark/commit/5a2a1fb5fc6c1a1b5ab1cc3120499d89fefae7ae))
+* **stark-ui:** upgrade to Angular 12 ([4869f11](https://github.com/nationalbankbelgium/stark/commit/4869f11d21df086fbe6ad50a52ecfd1f83a14bb9))
+* **stark-ui:** upgrade to Angular 8 ([e19d4a8](https://github.com/nationalbankbelgium/stark/commit/e19d4a89a12c31a3045dd03065ea47b70671b0cb))
+* **starter:** adapt husky configuration after husky upgrade ([9af712d](https://github.com/nationalbankbelgium/stark/commit/9af712d9ab4ac0528ae49ccc06f167d278c16c2f))
+* **starter:** upgrade to Angular 12 ([6754a96](https://github.com/nationalbankbelgium/stark/commit/6754a96d3a6f28838f19a4653524c490d3f97b99))
+
+
+### Reverts
+
+* Revert "chore(release): release 12.0.0-beta.0" ([743bbb7](https://github.com/nationalbankbelgium/stark/commit/743bbb7640150165fa641a45c58ab97b1b10cabd))
+* Revert "chore(release): release 12.0.0-beta.0" ([6cb7370](https://github.com/nationalbankbelgium/stark/commit/6cb737010c48516a3e2127f8901d16fdc3a3f13f))
+* Revert "chore(release): release 12.0.0-beta.0" ([00763da](https://github.com/nationalbankbelgium/stark/commit/00763da040bcc01cabfc0caccabf936fe4a82164))
+
+
+### BREAKING CHANGES
+
+* **stark-ui:** The selector of the `StarkSessionTimeoutWarningDialogComponent` component has been changed from
+"session-timeout-warning-dialog" to "stark-session-timeout-warning-dialog".
+* **stark-all:** The minimum versions for NodeJS and npm are now:
+  - NodeJS: v14.20.0
+  - npm: v8.19.1
+* **stark-testing:** Adapt test ci script in "package.json":
+  ```
+  // BEFORE
+  "test-fast:ci": "cross-env CI=1 npm run ng test --code-coverage",
+
+  // AFTER
+  "test-fast:ci": "npm run ng test -- --watch=false --code-coverage",
+  ```
+* **stark-ui:**   Due to upgrade to `@angular/material` v12, SCSS files should be adapted to use the
+  new `@use` word instead of `@import`.
+
+  Your current "src/styles/_theme.scss" should look like this:
+
+  ```scss
+  @import "variables";
+  @import "~@nationalbankbelgium/stark-ui/assets/theming";
+  ```
+
+  After upgrading to Stark v12, you should update the file as following:
+
+  ```scss
+  @use "variables";
+  @use "sass:map";
+
+  @use "~@angular/material" as mat;
+  @use "~@nationalbankbelgium/stark-ui" as stark-ui;
+
+  @include mat.core();
+  @include stark-ui.set-stark-ui-styles();
+  ```
+
+  As all the stark-ui styles are configured thanks to `set-stark-ui-styles` method, you should
+  remove `@import "~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle";` import
+  in "src/styles/styles.scss".
+
+  If you use Stark media queries variables such as `$tablet-query`, `$mobile-only-query`...
+
+  You should add the following `@use` rule at the top of your files:
+
+  ```scss
+  @use "~@nationalbankbelgium/stark-ui/styles/media-queries" as *;
+  ```
+* **stark-build:** Remove useless babel-loader dependency + remove IE 11 support in development mode
+* **stark-build:**   Due to Angular upgrade, "angular.json" file has to be updated as following:
+
+  1. Edit `projects.<project_name>.architect.build.options`:
+
+  Before:
+
+  ```txt
+  {
+    // ...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "build": {
+            "builder": "@angular-builders/custom-webpack:browser",
+            "options": {
+              "customWebpackConfig": {
+                "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack-partial.dev.js",
+                "mergeStrategies": {
+                  "modules.rules": "prepend",
+                  "plugins": "prepend",
+                  "devServer": "prepend",
+                  "replaceDuplicatePlugins": false
+                }
+              },
+              // ...
+            },
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  After:
+
+  ```txt
+  {
+    // ...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "build": {
+            "builder": "@angular-builders/custom-webpack:browser",
+            "options": {
+              "customWebpackConfig": {
+                "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack.config.js"
+              },
+              // /!\ Add following line
+              "indexTransform": "./node_modules/@nationalbankbelgium/stark-build/config/index-html.transform.js",
+              // ...
+            },
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  2. Edit `projects.<project_name>.architect.build.configurations.<environment>`:
+
+  In Stark 12, there is only one "webpack.config.js" file.
+  Thanks to this, this is no longer needed to have specific configurations for other environment.
+
+  You need to remove the following lines in
+  `projects.<project_name>.architect.build.configurations.<environment>`:
+
+  Before:
+
+  ```txt
+  {
+    // ...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "build": {
+            "configurations": {
+              "production": {
+                // Remove all the "customWebpackConfig"
+                "customWebpackConfig": {
+                  "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack-partial.prod.js",
+                  "mergeStrategies": {
+                    "modules.rules": "prepend",
+                    "plugins": "prepend",
+                    "devServer": "prepend",
+                    "replaceDuplicatePlugins": false
+                  }
+                },
+                // ...
+              },
+              // ...
+            },
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  After:
+
+  ```txt
+  {
+    //...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "build": {
+            "configurations": {
+              "production": {
+                // "customWebpackConfig" is entirely removed
+                // ...
+              },
+              // ...
+            },
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  3. Edit `projects.<project_name>.architect.serve.builder`:
+
+  Before:
+
+  ```txt
+  {
+    //...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "serve": {
+            "builder": "@angular-builders/dev-server:generic",
+            "options": {
+              "browserTarget": "<project_name>:build",
+              "port": 3000,
+              "open": true
+            },
+            // ...
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  After:
+
+  ```txt
+  {
+    //...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "serve": {
+            // /!\ Edit following line
+            "builder": "@angular-builders/custom-webpack:dev-server",
+            "options": {
+              "browserTarget": "<project_name>:build",
+              "port": 3000,
+              "open": true
+            },
+            // ...
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  4. Edit `projects.<project_name>.architect.test.builder`:
+
+  Add support for stark-testing karma config with command `ng test`
+
+  Before:
+
+  ```txt
+  {
+    //...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "test": {
+            "builder": "@angular-devkit/build-angular:karma",
+            "options": {
+              "main": "base.spec.ts",
+              "karmaConfig": "./karma.conf.js",
+              "tsConfig": "tsconfig.spec.json"
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  After:
+
+  ```txt
+  {
+    //...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "test": {
+            // /!\ Edit following line
+            "builder": "@angular-builders/custom-webpack:karma",
+            "options": {
+              "main": "base.spec.ts",
+              "karmaConfig": "./karma.conf.js",
+              "tsConfig": "tsconfig.spec.json"
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  5. Edit `projects.<project_name>.architect.build.configurations.hmr`:
+
+  Add support for CSS Hot Reloading by setting `extractCss` property to `false` in hmr configuration.
+
+  Before:
+
+  ```txt
+  {
+    // ...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "build": {
+            "configurations": {
+              "hmr": {
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.hmr.ts"
+                  }
+                ]
+              },
+              // ...
+            },
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  After:
+
+  ```txt
+  {
+    // ...
+    "projects": {
+      "<project_name>": {
+        // ...
+        "architect": {
+          "build": {
+            "configurations": {
+              "hmr": {
+                "extractCss": false, // <-- Line to add
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.hmr.ts"
+                  }
+                ]
+              },
+              // ...
+            },
+          }
+        }
+      }
+    }
+  }
+  ```
+* **stark-build:**   Adapt "src/index.html" file
+
+  1. Adapt stark variables usage
+  As `htmlWebpackPlugin` is no longer supported by Angular CLI, the options related to this plugin
+  have been changed.
+  Instead of using `htmlWebpackPlugin`, you need to use `starkOptions` like this:
+
+  Before:
+
+  ```html
+  <%= htmlWebpackPlugin.options.starkAppMetadata.name %>
+  <!-- or -->
+  <%= htmlWebpackPlugin.options.starkAppConfig.defaultLanguage %>
+  <!-- or -->
+  <%= htmlWebpackPlugin.options.metadata.TITLE %>
+  ```
+
+  After:
+
+  ```html
+  <%= starkOptions.starkAppMetadata.name %>
+  <!-- or -->
+  <%= starkOptions.starkAppConfig.defaultLanguage %>
+  <!-- or -->
+  <%= starkOptions.metadata.TITLE %>
+  ```
+
+  Thanks to the following search & replace:
+
+  - search: `htmlWebpackPlugin.options.`
+  - replace: `starkOptions.`
+
+  It should be easy to adapt the index.html file.
+
+  2. Remove obsolete code related to webpack-dev-server
+
+  Remove the following piece of code in "src/index.html"
+
+  ```html
+  <!-- move the block of webpack dev server to the <head> section and change the IF conditions -->
+  <% if (starkOptions.starkAppMetadata.IS_DEV_SERVER && starkOptions.starkAppMetadata.HMR !== true) { %>
+  <!-- Webpack Dev Server reload -->
+  <script src="/webpack-dev-server.js"></script>
+  <% } %>
+  ```
+* **stark-build:**   Adapt "package.json" file. Remove scripts with MONITOR
+
+  Due to Angular upgrade, webpack-monitor stopped working.
+  Since the package was no longer maintained (4 years),
+  we decided to remove the support from `stark-build`.
+
+  The following scripts should be removed from "package.json" file:
+
+  ```json
+  {
+    "scripts": {
+      "build:dev:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run build:dev",
+      "server:dev:monitor": "npm run clean:dist && cross-env MONITOR=1 npm run ng -- serve",
+      "start:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run server:dev"
+    }
+  }
+  ```
+* **stark-build:**   Due to Angular upgrade, webpack-monitor stopped working. Since the package was no longer maintained (4 years),
+  we decided to remove the support from `stark-build`.
+
+  The following scripts should be removed from "package.json" file:
+
+  ```json
+  {
+    "scripts": {
+      "build:dev:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run build:dev",
+      "server:dev:monitor": "npm run clean:dist && cross-env MONITOR=1 npm run ng -- serve",
+      "start:monitor": "npx mkdirp reports && cross-env MONITOR=1 npm run server:dev"
+    }
+  }
+  ```
+* **stark-all:** Stark framework now requires:
+  - NodeJS >= 12.22.1
+  - npm >= 7.12.1
+* **stark-build:**     Due to TSLint update, it is required to adapt the usage in "tslint.json" file at the root of the project:
+
+    ```txt
+    // Before
+    {
+      "extends": [
+        // ...
+        "@nationalbankbelgium/code-style/tslint/5.20.x",
+        // ...
+      ]
+      // ...
+    }
+
+    // After
+    {
+      "extends": [
+        // ...
+        "@nationalbankbelgium/code-style/tslint/6.1.x",
+        // ...
+      ]
+      // ...
+    }
+* **stark-core:** Due to class-validator update:
+  - Validatorjs releases contain some breaking changes e.g. `IsMobileNumber` or `IsHexColor`. Please
+check validatorjs [CHANGELOG](https://github.com/validatorjs/validator.js/blob/master/CHANGELOG.md)
+  - Validation functions was removed from `Validator` class to enable tree shaking.
+
+    BEFORE:
+
+    ```ts
+    import { Validator } from 'class-validator';
+
+    const validator = new Validator();
+    validator.isNotIn(value, possibleValues);
+    validator.isBoolean(value);
+    ```
+
+    AFTER:
+
+    ```ts
+    import { isNotIn, isBoolean } from 'class-validator';
+
+    isNotIn(value, possibleValues);
+    isBoolean(value);
+    ```
+
+  - IsNumberString decorator arguments changed to
+  `@IsNumberString(ValidatorJS.IsNumericOptions, ValidationOptions)`.
+* **stark-testing:** Adapt angular.json, package.json and base.spec.ts files.
+
+  Check test config in "angular.json":
+  ```
+  // ...
+  "test": {
+    "builder": "@angular-builders/custom-webpack:karma",
+    "options": {
+      "main": "base.spec.ts",
+      "karmaConfig": "./karma.conf.js",
+      "tsConfig": "tsconfig.spec.json"
+    }
+  }
+  ```
+
+  Check tests scripts in "package.json":
+  ```
+  // BEFORE
+  "test-fast": "karma start",
+  "test-fast:ci": "karma start karma.conf.ci.js",
+
+  // AFTER
+  "test-fast": "npm run ng test",
+  "test-fast:ci": "cross-env CI=1 npm run ng test --code-coverage",
+  ```
+
+  Adapt "base.spec.ts" file as follows:
+  ```typescript
+  "use strict";
+
+  import "core-js/es";
+  import "core-js/proposals/reflect-metadata";
+
+  // IE polyfills
+
+  // See https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+  /* tslint:disable:no-unbound-method */
+  if (!Element.prototype.matches) {
+  	Element.prototype.matches = (<any>Element.prototype).msMatchesSelector ||
+  	  Element.prototype.webkitMatchesSelector;
+  }
+  /* tslint:enable:no-unbound-method */
+
+  // See: https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Polyfill
+  if ((<any>window).NodeList && !NodeList.prototype.forEach) {
+  	(<any>NodeList.prototype).forEach = Array.prototype.forEach;
+  }
+
+  /* tslint:disable:no-import-side-effect */
+  import "zone.js/dist/zone";
+  import "zone.js/dist/zone-testing";
+  import "zone.js/dist/long-stack-trace-zone";
+  /* tslint:enable:no-import-side-effect */
+
+  // define global environment variable (used in some places in stark-core and stark-ui)
+  global["ENV"] = "development";
+
+  import { getTestBed } from "@angular/core/testing";
+  import {
+    BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting
+  } from "@angular/platform-browser-dynamic/testing";
+
+  // tslint:disable:completed-docs bool-param-default
+  declare const require: {
+  	context(path: string, deep?: boolean, filter?: RegExp): {
+  		keys(): string[];
+  		<T>(id: string): T;
+  	};
+  };
+  getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+
+  // Then we find all the tests.
+  const context = require.context('./src', true, /\.spec\.ts$/);
+  // And load the modules.
+  context.keys().forEach(context);
+  ```
+* **stark-all:** Remove `ngrx-store-freeze` dependency in favor of new built-in runtime checks in `@ngrx/store@8.x`.
+
+  Adapt code as follows:
+
+  ```ts
+  // Before
+  import { storeFreeze } from "ngrx-store-freeze";
+  //...
+  export const metaReducers: MetaReducer<State>[] =
+    ENV === "development" ? [logger, storeFreeze] : [];
+
+  @NgModule({
+      imports: [
+        CommonModule,
+        StoreModule.forRoot(reducer, {
+          metaReducers: metaReducers
+        }),
+      ]
+    })
+    export class AppModule {}
+
+  // After
+  export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logger] : [];
+
+  @NgModule({
+    imports: [
+      CommonModule,
+      StoreModule.forRoot(rootReducer, {
+        metaReducers: metaReducers,
+        runtimeChecks: {
+          strictStateImmutability: true,
+          strictActionImmutability: true
+        }
+      }),
+    ]
+  })
+  export class AppModule {}
+  ```
+
+  See: https://ngrx.io/guide/migration/v8#deprecation-of-ngrx-store-freeze
+* **stark-rbac:** Due to an improvement on how actions are defined, the enum `StarkRBACAuthorizationActionsTypes`
+became obsolete so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkUserNavigationUnauthorized(public targetState: string)`
+  -> `StarkRBACAuthorizationActions.userNavigationUnauthorized({ targetState: string })`
+- `StarkUserNavigationUnauthorizedRedirected(public targetState: string,
+  public redirectionState: string)` ->
+  `StarkRBACAuthorizationActions.userNavigationUnauthorizedRedirected({ targetState: string;
+  redirectionState: string })`
+
+And also the previous union type has been replaced:
+`StarkRBACAuthorizationActions` -> `StarkRBACAuthorizationActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkRBACNavigationUnauthorized$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkUserNavigationUnauthorized>(
+            StarkRBACAuthorizationActionsTypes.RBAC_USER_NAVIGATION_UNAUTHORIZED
+        ),
+        map((action: StarkUserNavigationUnauthorized) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkRBACNavigationUnauthorizedRedirected$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkRBACAuthorizationActions.userNavigationUnauthorized),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+```typescript
+// Before
+this.store.dispatch(new StarkUserNavigationUnauthorized(transition.targetState().name()));
+
+// After
+this.store.dispatch(StarkRBACAuthorizationActions.userNavigationUnauthorized({
+    targetState: transition.targetState().name()
+}));
+```
+* **stark-ui:** Due to an improvement on how actions are defined, the enum `StarkMessagePaneActionsTypes`
+became obsolete so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkAddMessages(public messages: StarkMessage[])`
+  -> `StarkMessagePaneActions.addMessages({ messages: StarkMessage[] })`
+- `StarkRemoveMessages(public messages: StarkMessage[])`
+  -> `StarkMessagePaneActions.removeMessages({ messages: StarkMessage[] })`
+- `StarkClearMessages()` -> `StarkMessagePaneActions.clearMessages()`
+- `StarkGetAllMessages()` -> `StarkMessagePaneActions.getAllMessages()`
+
+And also the previous union type has been replaced:
+`StarkMessagePaneActions` -> `StarkMessagePaneActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkAddMessages$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkAddMessages>(StarkMessagePaneActionsTypes.ADD_MESSAGES),
+        map((action: StarkAddMessages) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkAddMessages$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkMessagePaneActions.addMessages),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkAddMessages(messages));
+
+// After
+this.store.dispatch(StarkMessagePaneActions.addMessages({ messages: messages }));
+```
+* **stark-ui:** Due to an improvement on how actions are defined, the enum `StarkProgressIndicatorActionsTypes`
+became obsolete so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkProgressIndicatorRegister(public progressIndicatorConfig: StarkProgressIndicatorFullConfig
+  )` -> `StarkProgressIndicatorActions.register({
+  progressIndicatorConfig: StarkProgressIndicatorFullConfig })`
+- `StarkProgressIndicatorDeregister(public topic: string)` ->
+  `StarkProgressIndicatorActions.deregister({ topic: string })`
+- `StarkProgressIndicatorHide(public topic: string)`
+  -> `StarkProgressIndicatorActions.hide({ topic: string })`
+- `StarkProgressIndicatorShow(public topic: string)`
+  -> `StarkProgressIndicatorActions.show({ topic: string })`
+
+And also the previous union type has been replaced:
+`StarkProgressIndicatorActions` -> `StarkProgressIndicatorActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkProgressIndicatorShow$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkProgressIndicatorShow>(
+            StarkProgressIndicatorActionsTypes.PROGRESS_INDICATOR_SHOW
+        ),
+        map((action: StarkProgressIndicatorShow) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkProgressIndicatorShow$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkProgressIndicatorActions.show),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkProgressIndicatorShow(topic));
+
+// After
+this.store.dispatch(StarkProgressIndicatorActions.show({ topic: topic }));
+```
+* **stark-core:** Due to an improvement on how actions are defined, the enum `StarkRoutingActionsTypes`
+became obsolete so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkNavigate(public currentState: string, public newState: string, public params?: RawParams,
+  public options?: TransitionOptions)` -> `StarkRoutingActions.navigate({ currentState: string;
+  newState: string; params?: RawParams; options?: TransitionOptions })`
+- `StarkNavigateSuccess(public previousState: string, public currentState: string,
+  public params?: RawParams)` -> `StarkRoutingActions.navigateSuccess({ previousState: string;
+  currentState: string; params?: RawParams })`
+- `StarkNavigateFailure(public currentState: string, public newState: string,
+  public params: RawParams, public error: string)` -> `StarkRoutingActions.navigateFailure({
+  currentState: string; newState: string; params?: RawParams; error: string })`
+- `StarkNavigateRejection(public currentState: string, public newState: string,
+  public params: RawParams, public reason: string)` -> `StarkRoutingActions.navigateRejection({
+  currentState: string; newState: string; params: RawParams; reason: string })`
+- `StarkNavigationHistoryLimitReached()` -> `StarkRoutingActions.navigationHistoryLimitReached()`
+- `StarkReload(public state: string)` -> `StarkRoutingActions.reload({ state: string })`
+- `StarkReloadSuccess(public state: string, public params: RawParams)`
+  -> `StarkRoutingActions.reloadSuccess({ state: string; params: RawParams })`
+- `StarkReloadFailure(public state: string, public params: RawParams)`
+  -> `StarkRoutingActions.reloadFailure({ state: string; params: RawParams })`
+
+And also the previous union type has been replaced:
+`StarkRoutingActions` -> `StarkRoutingActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkNavigateSuccess$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkNavigateSuccess>(StarkRoutingActionsTypes.NAVIGATE_SUCCESS),
+        map((action: StarkNavigateSuccess) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkNavigateSuccess$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkRoutingActions.navigateSuccess),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkNavigateSuccess(previousState, currentState, params));
+
+// After
+this.store.dispatch(StarkRoutingActions.navigateSuccess({
+    previousState: previousState,
+    currentState: currentState,
+    params: params
+}));
+```
+* **stark-core:** Due to an improvement on how actions are defined, the enum `StarkLoggingActionsTypes`
+became obsolete so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkSetLoggingApplicationId(public applicationId: string)`
+  -> `StarkLoggingActions.setLoggingApplicationId({ applicationId: string })`
+- `StarkLogMessageAction(public message: StarkLogMessage)`
+  -> `StarkLoggingActions.logMessage({ message: StarkLogMessage })`
+- `StarkFlushLogMessages(public numberOfMessagesToFlush: number)`
+  -> `StarkLoggingActions.flushLogMessages({ numberOfMessagesToFlush: number })`
+
+And aso the previous union type has been replaced:
+`StarkLoggingActions` -> `StarkLoggingActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkLogMessageAction$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkLogMessageAction>(StarkLoggingActionsTypes.LOG_MESSAGE),
+        map((action: StarkLogMessageAction) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkLogMessageAction$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkLoggingActions.logMessage),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkLogMessageAction(message));
+
+// After
+this.store.dispatch(StarkLoggingActions.logMessage({ message: message }));
+```
+* **stark-core:** Due to an improvement on how actions are defined, the enum `StarkSettingsActionsTypes`
+became obsolete so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkPersistPreferredLanguage(public language: string)`
+  -> `StarkSettingsActions.persistPreferredLanguage({ language: string })`
+- `StarkPersistPreferredLanguageSuccess()`
+  -> `StarkSettingsActions.persistPreferredLanguageSuccess()`
+- `StarkPersistPreferredLanguageFailure(public error: any)`
+  -> `StarkSettingsActions.persistPreferredLanguageFailure({ error: any })`
+- `StarkSetPreferredLanguage(public language: string)`
+  -> `StarkSettingsActions.setPreferredLanguage({ language: string })`
+
+And also the previous union type has been replaced:
+`StarkSettingsActions` -> `StarkSettingsActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkSetPreferredLanguage$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkSetPreferredLanguage>(StarkSettingsActionsTypes.SET_PREFERRED_LANGUAGE),
+        map((action: StarkSetPreferredLanguage) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkSetPreferredLanguage$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkSettingsActions.setPreferredLanguage),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkSetPreferredLanguage(language));
+
+// After
+this.store.dispatch(StarkSettingsActions.StarkSetPreferredLanguage({ language: language }));
+```
+* **stark-core:** Due to an improvement on how actions are defined, the enum `StarkSessionActionsTypes`
+became obsolete so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkChangeLanguage(public languageId: string)`
+  -> `StarkSessionActions.changeLanguage({ languageId: string })`
+- `StarkChangeLanguageSuccess(public languageId: string)`
+  -> `StarkSessionActions.changeLanguageSuccess({ languageId: string })`
+- `StarkChangeLanguageFailure(public error: any)`
+  -> `StarkSessionActions.changeLanguageFailure({ error: any })`
+- `StarkInitializeSession(public user: StarkUser)`
+  -> `StarkSessionActions.initializeSession({ user: StarkUser })`
+- `StarkInitializeSessionSuccess()` -> `StarkSessionActions.initializeSessionSuccess()`
+- `StarkDestroySession()` -> `StarkSessionActions.destroySession()`
+- `StarkDestroySessionSuccess()` -> `StarkSessionActions.destroySessionSuccess()`
+- `StarkSessionTimeoutCountdownStart(public countdown: number)`
+  -> `StarkSessionActions.sessionTimeoutCountdownStart({ countdown: number })`
+- `StarkSessionTimeoutCountdownStop()` -> `StarkSessionActions.sessionTimeoutCountdownStop()`
+- `StarkSessionTimeoutCountdownFinish()` -> `StarkSessionActions.sessionTimeoutCountdownFinish()`
+- `StarkSessionLogout()` -> `StarkSessionActions.sessionLogout()`
+- `StarkUserActivityTrackingPause()` -> `StarkSessionActions.userActivityTrackingPause()`
+- `StarkUserActivityTrackingResume()` -> `StarkSessionActions.userActivityTrackingResume()`
+
+And also the previous union type has been replaced:
+`StarkSessionActions` -> `StarkSessionActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkChangeLanguageSuccess$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkChangeLanguageSuccess>(StarkSessionActionsTypes.CHANGE_LANGUAGE_SUCCESS),
+        map((action: StarkChangeLanguageSuccess) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkChangeLanguageSuccess$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkSessionActions.changeLanguageSuccess),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkChangeLanguageSuccess(languageId));
+
+// After
+this.store.dispatch(StarkSessionActions.changeLanguageSuccess({ languageId: languageId }));
+```
+* **stark-core:** Due to an improvement on how actions are defined, the enum `StarkErrorHandlingActionsTypes`
+became obsolete so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkUnhandledError(public error: any)`
+  -> `StarkErrorHandlingActions.unhandledError({ error: any })`
+
+And also the previous union type has been replaced:
+`StarkErrorHandlingActions` -> `StarkErrorHandlingActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkUnhandledError$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkUnhandledError>(StarkErrorHandlingActionTypes.UNHANDLED_ERROR),
+        map((action: StarkUnhandledError) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkUnhandledError$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkErrorHandlingActions.unhandledError),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkUnhandledError(error));
+
+// After
+this.store.dispatch(StarkErrorHandlingActions.unhandledError({ error: error }));
+```
+* **stark-core:** Due to an improvement on how actions are defined, the enum `StarkUserActionsTypes` became obsolete
+so it has been removed.
+
+As a result, the following actions have been changed:
+- `StarkFetchUserProfile()` -> `StarkUserActions.fetchUserProfile()`
+- `StarkFetchUserProfileSuccess(public user: StarkUser)`
+  -> `StarkUserActions.fetchUserProfileSuccess({ user: StarkUser })`
+- `StarkFetchUserProfileFailure(public error: StarkHttpErrorWrapper | Error)`
+  -> `StarkUserActions.fetchUserProfileFailure({ error: StarkHttpErrorWrapper | Error })`
+- `StarkGetAllUsers()` -> `StarkUserActions.getAllUsers()`
+- `StarkGetAllUsersSuccess(public users: StarkUser[])`
+  -> `StarkUserActions.getAllUsersSuccess({ users: StarkUser[] })`
+- `StarkGetAllUsersFailure(public message: string)`
+  -> `StarkUserActions.getAllUsersFailure({ message: string })`
+
+And also the previous union type has been replaced: `StarkUserActions` -> `StarkUserActions.Types`.
+
+Change in effect:
+
+```typescript
+// Before
+@Effect({ dispatch: false })
+public starkFetchUserProfileSuccess$(): Observable<void> {
+    return this.actions$.pipe(
+        ofType<StarkFetchUserProfileSuccess>(StarkUserActionTypes.FETCH_USER_PROFILE_SUCCESS),
+        map((action: StarkFetchUserProfileSuccess) => {
+            // some logic
+        })
+    );
+}
+
+// After
+public starkFetchUserProfileSuccess$ = createEffect(
+    () => this.actions$.pipe(
+        ofType(StarkUserActions.fetchUserProfileSuccess),
+        map((action) => {
+            // some logic
+        })
+    ),
+    { dispatch: false }
+);
+```
+
+Change in `action` usage:
+
+```typescript
+// Before
+this.store.dispatch(new StarkFetchUserProfileSuccess(starkUser));
+
+// After
+this.store.dispatch(StarkUserActions.fetchUserProfileSuccess({ user: starkUser }));
+```
+* **stark-build:**   Simplify and improve integration of stark-build inside angular projects. Need to adapt "angular.json" file.
+
+  Before:
+  ```txt
+  {
+    //...
+    "architect": {
+      "build": {
+        "builder": "@angular-builders/custom-webpack:browser",
+        "options": {
+          "customWebpackConfig": {
+            "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack-partial.dev.js",
+            "mergeStrategies": {
+              "modules.rules": "prepend",
+              "plugins": "prepend",
+              "devServer": "prepend",
+              "replaceDuplicatePlugins": false
+            }
+          },
+          // ...
+        },
+        "configurations": {
+          // ...
+          "production": {
+            "customWebpackConfig": {
+              "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack-partial.prod.js",
+              "mergeStrategies": {
+                "modules.rules": "prepend",
+                "plugins": "prepend",
+                "replaceDuplicatePlugins": false
+              }
+            },
+            // ...
+          }
+        }
+      }
+    }
+  }
+  ```
+
+  After:
+  ```txt
+  {
+    //...
+    "architect": {
+      "build": {
+        "builder": "@angular-builders/custom-webpack:browser",
+        "options": {
+          "customWebpackConfig": {
+            "path": "./node_modules/@nationalbankbelgium/stark-build/config/webpack.config.js"
+            // mergeStrategies property is removed
+          },
+          // ...
+        },
+        "configurations": {
+          // ...
+          "production": {
+            // "customWebpackConfig" property is removed
+            // ...
+          }
+        }
+      }
+    }
+  }
+  ```
+* **stark-core:** Related to "@uirouter/angular@6.0.2":
+
+  Removed string based lazy module loading via loadChildren
+  Previously, we supported `loadChildren: './lazymodule/lazy.module.ts#LazyModule'`
+  This lazy load mechanism is deprecated in Angular 8 in favor of:
+  `loadChildren: (): any => import('./lazymodule/lazy.module).then(x => x.LazyModule)`
+
+  See: https://github.com/ui-router/angular/commit/2f1506c
+
+  Due to this change, the following `provider` should be removed from
+  "src/app/app.module.ts":
+
+  ```typescript
+  @NgModule({
+    // ...
+    providers: [
+      // ...
+      // /!\ Remove the following line
+      { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }, // needed for ui-router
+    ]
+  })
+  ```
+* **stark-build:**   Support for `htmlWebpackPlugin.options` has been removed.
+A new support for `starkAppMetadata`, `starkAppConfig` and `metadata` has been implemented. You can now use `starkOptions` instead of `htmlWebpackPlugin.options`.
+See the following example:
+
+  Before:
+
+  ```html
+  <%= htmlWebpackPlugin.options.starkAppMetadata.name %>
+  <!-- or -->
+  <%= htmlWebpackPlugin.options.starkAppConfig.defaultLanguage %>
+  <!-- or -->
+  <%= htmlWebpackPlugin.options.metadata.TITLE %>
+  ```
+
+  After:
+
+  ```html
+  <%= starkOptions.starkAppMetadata.name %>
+  <!-- or -->
+  <%= starkOptions.starkAppConfig.defaultLanguage %>
+  <!-- or -->
+  <%= starkOptions.metadata.TITLE %>
+  ```
+* **stark-build:** Adapt "angular.json" file as follows:
+  ```text
+  {
+    //...
+    "projects": {
+      "<project_name>": {
+        "architect": {
+          "build": {
+            // ...
+            // /!\ Add the following line
+            "indexTransform": "./node_modules/@nationalbankbelgium/stark-build/config/index-html.transform.js",
+            // ...
+          },
+          "serve": {
+            // Edit the following line.
+            // Before:
+            // "builder": "@angular-builders/dev-server:generic",
+            // Now:
+            "builder": "@angular-builders/custom-webpack:dev-server",
+            // ...
+          }
+        }
+      }
+    }
+  }
+  ```
+* **stark-build:** Adapt the "index.html" as follows:
+  ```html
+  <html lang="en">
+    <head>
+      <!-- ... -->
+      <!-- Adapt the title tag as follows -->
+      <!-- Before: -->
+      <title><%= htmlWebpackPlugin.options.starkAppMetadata.name %></title>
+      <!-- After: -->
+      <title>%starkAppMetadata.name%</title>
+
+      <!-- /!\ Remove the following lines -->
+      <meta name="description" content="<%= htmlWebpackPlugin.options.starkAppMetadata.description %>" />
+      <% if (webpackConfig.htmlElements.headTags) { %>
+        <!--Configured Head Tags  -->
+      <%= webpackConfig.htmlElements.headTags %> <% } %>
+      <!-- ... -->
+    </head>
+
+    <!-- -->
+  </html>
+  ```
+* **stark-build:** Add the "config/index-head-config.js" the "description" meta in as follows:
+  ```text
+  {
+    links: [
+      // ...
+    ],
+    meta: [
+      // ...
+      { name: "description", content: "%starkAppMetadata.description%" },
+    ]
+  }
+  ```
+
+
+
 # [10.2.0](https://github.com/nationalbankbelgium/stark/compare/10.1.0...10.2.0) (2021-03-10)
 
 
@@ -554,9 +1874,9 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 
 ### Bug Fixes
 
-* **build:** add an argument for build prod when it is a Test CI. Adapt travis.yml to use it ([b954903](https://github.com/nationalbankbelgium/stark/commit/b954903fc474aaf20ba9a70bdc1eb428c96f19b3)), closes [#572](https://github.com/nationalbankbelgium/stark/issues/572) [#566](https://github.com/nationalbankbelgium/stark/issues/566)
 * **build-main:** fix version of greenkeeper-lockfile which is installed during travis build ([1970b71](https://github.com/nationalbankbelgium/stark/commit/1970b71f776c160eb2df873d4986a8a5638c0dae))
 * **build-main:** remove custom value for TRAVIS variable ([f00d63a](https://github.com/nationalbankbelgium/stark/commit/f00d63a730d5f9dba62ae7523cb1bbf3bbed966d)), closes [#605](https://github.com/nationalbankbelgium/stark/issues/605)
+* **build:** add an argument for build prod when it is a Test CI. Adapt travis.yml to use it ([b954903](https://github.com/nationalbankbelgium/stark/commit/b954903fc474aaf20ba9a70bdc1eb428c96f19b3)), closes [#572](https://github.com/nationalbankbelgium/stark/issues/572) [#566](https://github.com/nationalbankbelgium/stark/issues/566)
 * **greenkeeper:** fix greenkeeper for updating package-lock ([000a4a5](https://github.com/nationalbankbelgium/stark/commit/000a4a503f1d0072bffebef1849b4624352a5c4b))
 * **greenkeeper:** fix greenkeeper-lockfile ([865fee0](https://github.com/nationalbankbelgium/stark/commit/865fee06e1e104b59bd54f9b7008daef16967987))
 * **release:** add "package-lock.json" to the set of files to be updated by release-it ([ac7c85c](https://github.com/nationalbankbelgium/stark/commit/ac7c85c4eac624eca1e922a71cf4963f7e384bb2)), closes [#574](https://github.com/nationalbankbelgium/stark/issues/574)
@@ -640,19 +1960,19 @@ This must be included in the `typeRoots` of your app `tsconfig.json`:
 
 ### Bug Fixes
 
+* **build-main:** add support for circular dependency warning. Fix rollup external dependencies ([ebd0fd1](https://github.com/nationalbankbelgium/stark/commit/ebd0fd113504cf6d9c38707944241ac93436de28))
+* **build-main:** move ng dependencies to ROOT of Stark. Fix issue in build process. Rename tsconfig ([c7fecdb](https://github.com/nationalbankbelgium/stark/commit/c7fecdb22eb99cfe26feded2a459df220fcc7f05)), closes [#361](https://github.com/nationalbankbelgium/stark/issues/361) [#362](https://github.com/nationalbankbelgium/stark/issues/362)
 * **build:** adapted the perl command to specify the backup file extension. This was necessary for some perl versions ([ec4afc6](https://github.com/nationalbankbelgium/stark/commit/ec4afc627dc1260757bd5188794ff18e1083fb62))
 * **build:** fix issue in build-utils with environment. Environment file was not replaced as it should. ([d21a837](https://github.com/nationalbankbelgium/stark/commit/d21a837e8dfa94f065ec3825f7c3878700cd6b23)), closes [#439](https://github.com/nationalbankbelgium/stark/issues/439)
 * **build:** fix sourcemaps in PROD and in DEV ([c8c5696](https://github.com/nationalbankbelgium/stark/commit/c8c56960925a4c843e6ad9ba2dc6be799905746b)), closes [#401](https://github.com/nationalbankbelgium/stark/issues/401)
 * **build:** fixed webpack config and circular-dependency-plugin config. Closes [#397](https://github.com/nationalbankbelgium/stark/issues/397), [#315](https://github.com/nationalbankbelgium/stark/issues/315) ([ea9c264](https://github.com/nationalbankbelgium/stark/commit/ea9c26483af1d09974c1350ed8b30bcbce739125))
-* **build-main:** add support for circular dependency warning. Fix rollup external dependencies ([ebd0fd1](https://github.com/nationalbankbelgium/stark/commit/ebd0fd113504cf6d9c38707944241ac93436de28))
-* **build-main:** move ng dependencies to ROOT of Stark. Fix issue in build process. Rename tsconfig ([c7fecdb](https://github.com/nationalbankbelgium/stark/commit/c7fecdb22eb99cfe26feded2a459df220fcc7f05)), closes [#361](https://github.com/nationalbankbelgium/stark/issues/361) [#362](https://github.com/nationalbankbelgium/stark/issues/362)
 * **release:** adapt release-it.json and commitlint scopes to fix "release" command failure ([0e05826](https://github.com/nationalbankbelgium/stark/commit/0e058269dcca485460410e022a008cb4d71a748e))
 * **stark-all:** add npx for the remaining script calling global rimraf package ([3ce0dac](https://github.com/nationalbankbelgium/stark/commit/3ce0dac9f7862123ecf006e4ae590583cf71563e))
 * **stark-all:** fix nightly build release on Travis ([2c2445c](https://github.com/nationalbankbelgium/stark/commit/2c2445c2f1531320e3a605dee0602dc3613b7547)), closes [#357](https://github.com/nationalbankbelgium/stark/issues/357)
 * **stark-all:** fix some imports and remove obsolete fixme's. Format code with Prettier. Fix stark-ui linting. ([daf258b](https://github.com/nationalbankbelgium/stark/commit/daf258b9b1d827ab589c0b240d5763eea66239d9))
 * **stark-all:** packages: building the stark-core and stark-ui packages with the ncg script fails ([139e47b](https://github.com/nationalbankbelgium/stark/commit/139e47bcbe09a4d581be7e4e52a113dad32406e9)), closes [#441](https://github.com/nationalbankbelgium/stark/issues/441)
-* **stark-build:** include postcss loader+plugins to the Webpack css and scss files processing ([ffd60e7](https://github.com/nationalbankbelgium/stark/commit/ffd60e73a45f4bde602e2c97b80c0fa99ef9b756))
 * **stark-build) fix(stark-starter:** fix webpack monitor issues with reports folder and HMR ([78c799f](https://github.com/nationalbankbelgium/stark/commit/78c799f0111240857f59ed46fd4294b0d19cbe9b))
+* **stark-build:** include postcss loader+plugins to the Webpack css and scss files processing ([ffd60e7](https://github.com/nationalbankbelgium/stark/commit/ffd60e73a45f4bde602e2c97b80c0fa99ef9b756))
 * **stark-core:** add missing barrel for common folder. Fix stark-core translations utils imports. ([febb69b](https://github.com/nationalbankbelgium/stark/commit/febb69b05b97e99d321340d7521f9980c6f1902a))
 * **stark-starter:** fix blocking issue for reports folder ([1b7d492](https://github.com/nationalbankbelgium/stark/commit/1b7d49230ef6e806c519a8083363240d261e359c)), closes [#356](https://github.com/nationalbankbelgium/stark/issues/356)
 * **stark-ui) fix(stark-testing:** add stark-ui package to the npm install:all script. Simplify customization of default Karma config. ([4f77730](https://github.com/nationalbankbelgium/stark/commit/4f77730815f9ded19973d0363bf54e8d652fab50))
