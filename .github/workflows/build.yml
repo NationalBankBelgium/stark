@@ -251,13 +251,8 @@ jobs:
           name: showcase-dist
           path: showcase/dist
 
-      - name: Install Stark packages dependencies
-        run: |
-          npm ci
-          npm run install:ci:stark-build
-          npm run install:ci:stark-core
-          npm run install:ci:stark-rbac
-          npm run install:ci:stark-ui
+      - name: Install Stark dependencies
+        run: npm ci
         if: github.event_name != 'schedule'
 
       - name: Generate docs
