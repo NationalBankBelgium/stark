@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/no-lifecycle-call */
-import {Observable, Observer, of, Subject, Subscriber, TeardownLogic, throwError} from "rxjs";
+import { Observable, Observer, of, Subject, Subscriber, TeardownLogic, throwError } from "rxjs";
 import { AbstractStarkSearchComponent, StarkGenericSearchService } from "../classes";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkResource } from "@nationalbankbelgium/stark-core";

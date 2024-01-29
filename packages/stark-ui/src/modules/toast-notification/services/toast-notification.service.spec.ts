@@ -108,7 +108,6 @@ describe("ToastNotificationService", () => {
 
 			expect((<any>service).currentToastResult$).not.toBeNull();
 			expect((<any>service).currentToastResult$).toBeDefined();
-			
 
 			showObs = service.show(message);
 
@@ -132,7 +131,6 @@ describe("ToastNotificationService", () => {
 
 			expect((<any>service).currentToastResult$).not.toBeNull();
 			expect((<any>service).currentToastResult$).toBeDefined();
-			
 
 			/** Mimic MatSnackBar's behavior */
 			observer.next({ dismissedByAction: false });
@@ -150,16 +148,16 @@ describe("ToastNotificationService", () => {
 			tick();
 
 			spyOn((<any>service).currentToastResult$, "complete");
-			
-			const privateObserver: Observer<StarkToastNotificationResult> = (<any>service).currentToastResult$
-			
+
+			const privateObserver: Observer<StarkToastNotificationResult> = (<any>service).currentToastResult$;
+
 			expect(privateObserver.complete).not.toHaveBeenCalled();
 
 			service.hide();
 
 			/** Mimic MatSnackBar's behavior */
 			observer.next({ dismissedByAction: true });
-			
+
 			tick();
 
 			expect(privateObserver.complete).toHaveBeenCalled();
