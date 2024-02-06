@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular/core";
 import { StarkSearchFormComponent } from "@nationalbankbelgium/stark-ui";
 import { HeroMovieSearchCriteria } from "../entities";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { DemoGenericService } from "../services";
 import { take } from "rxjs/operators";
@@ -35,12 +35,12 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 	public heroOptions: string[] = [];
 	public movieOptions: string[] = [];
 
-	public searchForm: FormGroup = this.createSearchForm(this.searchCriteria);
+	public searchForm: UntypedFormGroup = this.createSearchForm(this.searchCriteria);
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
 		private genericService: DemoGenericService,
-		private formBuilder: FormBuilder
+		private formBuilder: UntypedFormBuilder
 	) {}
 
 	public ngOnInit(): void {
@@ -65,7 +65,7 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 		this.logger.debug(componentName + " is initialized");
 	}
 
-	public createSearchForm(searchCriteria: HeroMovieSearchCriteria): FormGroup {
+	public createSearchForm(searchCriteria: HeroMovieSearchCriteria): UntypedFormGroup {
 		return this.formBuilder.group({
 			year: searchCriteria.year,
 			hero: searchCriteria.hero,
@@ -85,7 +85,7 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 		);
 	}
 
-	public mapFormGroupToSearchCriteria(formGroup: FormGroup): HeroMovieSearchCriteria {
+	public mapFormGroupToSearchCriteria(formGroup: UntypedFormGroup): HeroMovieSearchCriteria {
 		/// return formGroup.getRawValue();
 
 		return {

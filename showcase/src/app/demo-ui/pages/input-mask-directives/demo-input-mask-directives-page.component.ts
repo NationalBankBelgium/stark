@@ -1,5 +1,5 @@
 import { Component, Inject } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { merge } from "rxjs";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkTextMasks, StarkTextMaskConfig, StarkTimestampMaskConfig, StarkNumberMaskConfig } from "@nationalbankbelgium/stark-ui";
@@ -81,10 +81,10 @@ export class DemoInputMaskDirectivesPageComponent {
 	public timestamp = "";
 	public monthDay = "";
 
-	public phoneNumberField = new FormControl();
-	public fullDateField = new FormControl();
-	public timeField = new FormControl();
-	public percentageField = new FormControl();
+	public phoneNumberField = new UntypedFormControl();
+	public fullDateField = new UntypedFormControl();
+	public timeField = new UntypedFormControl();
+	public percentageField = new UntypedFormControl();
 
 	public referenceList: ReferenceLink[] = [
 		{

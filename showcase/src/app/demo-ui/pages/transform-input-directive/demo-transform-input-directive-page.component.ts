@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { ReferenceLink } from "../../../shared/components";
 
 @Component({
@@ -9,7 +9,7 @@ import { ReferenceLink } from "../../../shared/components";
 })
 export class DemoTransformInputDirectivePageComponent {
 	public value = "";
-	public formControl = new FormControl("");
+	public formControl = new UntypedFormControl("");
 	private _emojiMap = new Map([
 		[":+1:", "👍"],
 		[":-1:", "👎"],

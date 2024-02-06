@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
+import { UntypedFormControl, Validators } from "@angular/forms";
 import { ReferenceLink } from "../../../shared/components";
 
 @Component({
@@ -15,7 +15,7 @@ export class DemoDropdownPageComponent {
 		{ id: "IO", value: "SHOWCASE.DEMO.DROPDOWN.IO" },
 		{ id: "CS", value: "SHOWCASE.DEMO.DROPDOWN.CS" }
 	];
-	public serviceFormControl = new FormControl("", Validators.required);
+	public serviceFormControl = new UntypedFormControl("", Validators.required);
 	public selectedService = "";
 
 	public selectedServiceWhiteDropdown = "";

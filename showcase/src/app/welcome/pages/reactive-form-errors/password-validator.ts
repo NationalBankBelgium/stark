@@ -1,15 +1,15 @@
-import { FormControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 export class PasswordValidator {
 	// Inspired on: http://plnkr.co/edit/Zcbg2T3tOxYmhxs7vaAm?p=preview
-	public static areEqual(formGroup: FormGroup): ValidationErrors | null {
+	public static areEqual(formGroup: UntypedFormGroup): ValidationErrors | null {
 		let value: string | undefined;
 		let valid = true;
 
 		for (const key in formGroup.controls) {
 			// eslint-disable-next-line no-prototype-builtins
 			if (formGroup.controls.hasOwnProperty(key)) {
-				const control: FormControl = <FormControl>formGroup.controls[key];
+				const control: UntypedFormControl = <UntypedFormControl>formGroup.controls[key];
 
 				if (value === undefined) {
 					value = control.value;
@@ -26,6 +26,6 @@ export class PasswordValidator {
 }
 
 /* eslint-disable-next-line jsdoc/require-jsdoc */
-export function getConfirmPasswordValidator(formGroup: FormGroup): ValidatorFn {
+export function getConfirmPasswordValidator(formGroup: UntypedFormGroup): ValidatorFn {
 	return (): ValidationErrors | null => PasswordValidator.areEqual(formGroup);
 }

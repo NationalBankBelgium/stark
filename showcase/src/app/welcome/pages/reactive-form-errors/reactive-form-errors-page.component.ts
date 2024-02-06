@@ -1,5 +1,5 @@
 import { Component, Inject } from "@angular/core";
-import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { getConfirmPasswordValidator } from "./password-validator";
 import { ReferenceLink } from "../../../shared/components/reference-block";
@@ -20,13 +20,13 @@ export class ReactiveFormErrorsPageComponent {
 		}
 	];
 
-	public formGroup: FormGroup;
+	public formGroup: UntypedFormGroup;
 	public passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$";
 	public showValidationDetails = false;
 	public showValidationSummary = true;
 
 	public constructor(
-		private formBuilder: FormBuilder,
+		private formBuilder: UntypedFormBuilder,
 		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService
 	) {
 		this.formGroup = this.formBuilder.group({
@@ -52,7 +52,7 @@ export class ReactiveFormErrorsPageComponent {
 		// linked to the "confirmPassword" control because the NgxFormErrors directive is linked to the control and not to the form group!
 		confirmPasswordControl.setValidators([
 			Validators.required,
-			getConfirmPasswordValidator(<FormGroup>this.formGroup.get("matchingPasswords"))
+			getConfirmPasswordValidator(<UntypedFormGroup>this.formGroup.get("matchingPasswords"))
 		]);
 	}
 
@@ -72,7 +72,7 @@ export class ReactiveFormErrorsPageComponent {
 		this.showValidationSummary = !this.showValidationSummary;
 	}
 
-	public onSubmitUserDetails(formGroup: FormGroup): void {
+	public onSubmitUserDetails(formGroup: UntypedFormGroup): void {
 		this.logger.info("Submitted form:", formGroup.value);
 	}
 }
