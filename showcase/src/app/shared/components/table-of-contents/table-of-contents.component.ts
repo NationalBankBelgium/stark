@@ -22,7 +22,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 	public headerSelectors?: string;
 
 	private _scrollContainer: Window = window;
-	private _destroyed: Subject<any> = new Subject();
+	private _destroyed: Subject<void> = new Subject();
 	private _urlFragment = "";
 
 	public ngOnInit(): void {

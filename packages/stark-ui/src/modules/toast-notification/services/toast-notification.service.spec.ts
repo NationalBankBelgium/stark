@@ -96,7 +96,7 @@ describe("ToastNotificationService", () => {
 
 			expect(service.snackBar.openFromComponent).toHaveBeenCalledTimes(0);
 
-			expect(service.currentToastResult$).not.toBeDefined();
+			expect((<any>service).currentToastResult$).not.toBeDefined();
 
 			showObs.subscribe((ret: StarkToastNotificationResult) => {
 				expect(ret).toBe(StarkToastNotificationResult.CLOSED_BY_NEW_TOAST);
@@ -106,11 +106,8 @@ describe("ToastNotificationService", () => {
 
 			expect(service.snackBar.openFromComponent).toHaveBeenCalledTimes(1);
 
-			expect(service.currentToastResult$).not.toBeNull();
-			expect(service.currentToastResult$).toBeDefined();
-			if (service.currentToastResult$) {
-				expect(service.currentToastResult$.closed).toBe(false);
-			}
+			expect((<any>service).currentToastResult$).not.toBeNull();
+			expect((<any>service).currentToastResult$).toBeDefined();
 
 			showObs = service.show(message);
 
@@ -120,7 +117,7 @@ describe("ToastNotificationService", () => {
 			expect(showObs).not.toBeNull();
 			expect(showObs).toBeDefined();
 
-			expect(service.currentToastResult$).not.toBeDefined();
+			expect((<any>service).currentToastResult$).not.toBeDefined();
 
 			expect(service.snackBar.openFromComponent).toHaveBeenCalledTimes(1);
 
@@ -132,11 +129,8 @@ describe("ToastNotificationService", () => {
 
 			expect(service.snackBar.openFromComponent).toHaveBeenCalledTimes(2);
 
-			expect(service.currentToastResult$).not.toBeNull();
-			expect(service.currentToastResult$).toBeDefined();
-			if (service.currentToastResult$) {
-				expect(service.currentToastResult$.closed).toBe(false);
-			}
+			expect((<any>service).currentToastResult$).not.toBeNull();
+			expect((<any>service).currentToastResult$).toBeDefined();
 
 			/** Mimic MatSnackBar's behavior */
 			observer.next({ dismissedByAction: false });
@@ -153,9 +147,11 @@ describe("ToastNotificationService", () => {
 
 			tick();
 
-			if (service.currentToastResult$) {
-				expect(service.currentToastResult$.closed).toBe(false);
-			}
+			spyOn((<any>service).currentToastResult$, "complete");
+
+			const privateObserver: Observer<StarkToastNotificationResult> = (<any>service).currentToastResult$;
+
+			expect(privateObserver.complete).not.toHaveBeenCalled();
 
 			service.hide();
 
@@ -164,9 +160,7 @@ describe("ToastNotificationService", () => {
 
 			tick();
 
-			if (service.currentToastResult$) {
-				expect(service.currentToastResult$.closed).toBe(true);
-			}
+			expect(privateObserver.complete).toHaveBeenCalled();
 		}));
 	});
 });
