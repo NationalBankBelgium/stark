@@ -5,6 +5,14 @@ dist/
 coverage/
 reports/
 node_modules/
+.dockerignore
+.editorconfig
+.gitattributes
+.gitignore
+.nvmrc
+.npmrc
+.prettierignore
+*.sh
 CHANGELOG.md
 package.json
 package-lock.json

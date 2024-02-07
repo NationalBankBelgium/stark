@@ -42,6 +42,13 @@ jobs:
 
       # See: https://github.com/marketplace/actions/checkout
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: |
+            if [[ '${{ github.event_name != 'pull_request' }}' ]]; then
+              1
+            else
+              git rev-list --count ${{ github.event.pull_request.base.sha }}..HEAD
+            fi
 
       # See: https://github.com/marketplace/actions/setup-node-js-environment
       - name: Use Node.js ${{ matrix.node_version }}
@@ -100,6 +107,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Prettier check
+        run: |
+          npx prettier $(git diff-tree --no-commit-id --name-only --stat --diff-filter=ACM -r ${{ github.event.pull_request.base.sha }} HEAD) --check
+        if: github.event_name == 'pull_request'
 
       - name: Build packages
         run: npm run build:trace
