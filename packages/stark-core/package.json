@@ -27,7 +27,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@types/lodash-es": "^4.17.4",
     "@types/uuid": "^8.3.0",
-    "@uirouter/angular": "^9.0.1",
+    "@uirouter/angular": "^13.0.0",
     "@uirouter/core": "^6.0.8",
     "@uirouter/rx": "~0.6.0",
     "cerialize": "^0.1.18",
