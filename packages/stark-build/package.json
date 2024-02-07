@@ -19,15 +19,15 @@
   },
   "types": "typings/index.d.ts",
   "dependencies": {
-    "@angular-builders/custom-webpack": "^13.1.0",
-    "@angular-devkit/build-angular": "^13.3.11",
+    "@angular-builders/custom-webpack": "^17.0.0",
+    "@angular-devkit/build-angular": "^17.1.2",
     "@types/webpack": "^5.28.0",
     "eslint-webpack-plugin": "^2.7.0",
     "moment-locales-webpack-plugin": "^1.2.0",
     "prettier": "~3.1.1",
-    "stylelint": "^13.11.0",
+    "stylelint": "^16.2.1",
     "stylelint-config-prettier": "^8.0.2",
-    "stylelint-webpack-plugin": "~2.1.0",
+    "stylelint-webpack-plugin": "~2.5.0",
     "webpack-bundle-analyzer": "^4.4.2"
   },
   "peerDependencies": {
