@@ -7,7 +7,7 @@
   "logoutUrl": "http://localhost:5001/logout",
   "baseUrl": "/",
   "sessionTimeout": 1337,
-  "sessionTimeoutWarningPeriod": 20,
+  "sessionTimeoutWarningPeriod": 20, 
   "keepAliveUrl": "http://localhost:5000/keepalive",
   "keepAliveInterval": 20,
   "angularDebugInfoEnabled": null,
