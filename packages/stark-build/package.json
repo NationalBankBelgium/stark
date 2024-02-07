@@ -19,7 +19,7 @@
   },
   "types": "typings/index.d.ts",
   "dependencies": {
-    "@angular-builders/custom-webpack": "^13.1.0",
+    "@angular-builders/custom-webpack": "^17.0.0",
     "@angular-devkit/build-angular": "^13.3.11",
     "@types/webpack": "^5.28.0",
     "eslint-webpack-plugin": "^2.7.0",
