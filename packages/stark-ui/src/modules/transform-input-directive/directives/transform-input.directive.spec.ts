@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { StarkInputTransformationType, StarkTransformInputDirective } from "./transform-input.directive";
 import { Observer } from "rxjs";
 
@@ -122,7 +122,7 @@ describe("TransformInputDirective", () => {
 			public starkTransformInputValue: StarkInputTransformationType = () => {
 				/* noop*/
 			};
-			public formControl = new FormControl("");
+			public formControl = new UntypedFormControl("");
 		}
 
 		let fixture: ComponentFixture<TestComponent>;

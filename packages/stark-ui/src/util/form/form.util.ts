@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup } from "@angular/forms";
+import { AbstractControl, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 
 export type StarkFormControlState = "untouched" | "touched" | "pristine" | "dirty";
 export type StarkFormState = "untouched" | "pristine" | "submitted" | "dirty";
@@ -13,7 +13,7 @@ export class StarkFormUtil {
 	 * @param formGroup - Angular form group object
 	 * @param statesToBeSet - States to be set to the different controls in the form
 	 */
-	public static setFormChildControlsState(formGroup: FormGroup, statesToBeSet: StarkFormControlState[]): void {
+	public static setFormChildControlsState(formGroup: UntypedFormGroup, statesToBeSet: StarkFormControlState[]): void {
 		// Verifying it is indeed an Angular FormGroup
 		if (StarkFormUtil.isFormGroup(formGroup)) {
 			for (const key of Object.keys(formGroup.controls)) {
@@ -31,7 +31,7 @@ export class StarkFormUtil {
 	 * @param formControl - Angular form control object contained in an Angular form group
 	 * @param statesToBeSet - States to be set to the form control
 	 */
-	public static setFormControlState(formControl: FormControl, statesToBeSet: StarkFormControlState[]): void {
+	public static setFormControlState(formControl: UntypedFormControl, statesToBeSet: StarkFormControlState[]): void {
 		for (const formControlState of statesToBeSet) {
 			switch (formControlState) {
 				case "untouched":
@@ -62,7 +62,7 @@ export class StarkFormUtil {
 	 * @param formGroup - Angular form group object
 	 * @param statesToBeSet - States to be set to the form
 	 */
-	public static setFormGroupState(formGroup: FormGroup, statesToBeSet: StarkFormState[]): void {
+	public static setFormGroupState(formGroup: UntypedFormGroup, statesToBeSet: StarkFormState[]): void {
 		// Verifying it is indeed an Angular FormGroup
 		if (StarkFormUtil.isFormGroup(formGroup)) {
 			for (const formControlState of statesToBeSet) {
@@ -97,7 +97,7 @@ export class StarkFormUtil {
 	 * (calling `setFormControlState` function).
 	 * @param formGroup - Angular form group object
 	 */
-	public static isFormGroupValid(formGroup: FormGroup): boolean {
+	public static isFormGroupValid(formGroup: UntypedFormGroup): boolean {
 		if (formGroup.invalid) {
 			StarkFormUtil.setFormChildControlsState(formGroup, ["touched"]);
 			return false;
@@ -112,7 +112,7 @@ export class StarkFormUtil {
 	 * is an actual instance of an Angular {@link https://v12.angular.io/api/forms/FormGroup|FormGroup}.
 	 * @param formGroup - Angular form object
 	 */
-	public static isFormGroup(formGroup: any): formGroup is FormGroup {
+	public static isFormGroup(formGroup: any): formGroup is UntypedFormGroup {
 		// eslint-disable-next-line no-prototype-builtins
 		return typeof formGroup !== "undefined" && formGroup.hasOwnProperty("controls");
 	}
@@ -122,7 +122,7 @@ export class StarkFormUtil {
 	 * is an actual instance of an Angular {@link https://v12.angular.io/api/forms/FormControl|FormControl}.
 	 * @param formControl - Angular form field object
 	 */
-	public static isFormControl(formControl: any): formControl is FormControl {
+	public static isFormControl(formControl: any): formControl is UntypedFormControl {
 		return typeof formControl === "object" && typeof formControl["setValue"] !== "undefined";
 	}
 }

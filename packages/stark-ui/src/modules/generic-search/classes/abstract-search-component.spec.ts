@@ -3,7 +3,7 @@ import { Observable, Observer, of, Subject, Subscriber, TeardownLogic, throwErro
 import { AbstractStarkSearchComponent, StarkGenericSearchService } from "../classes";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkResource } from "@nationalbankbelgium/stark-core";
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { StarkSearchState } from "../entities";
 import { MockStarkProgressIndicatorService } from "@nationalbankbelgium/stark-ui/testing";
 import Spy = jasmine.Spy;
@@ -153,7 +153,7 @@ describe("AbstractSearchComponent", () => {
 
 	describe("onSearch", () => {
 		it("should call performSearch() passing the working copy if the form is valid", () => {
-			const formMock: FormGroup = <any>{
+			const formMock: UntypedFormGroup = <any>{
 				controls: {},
 				invalid: false
 			};
@@ -167,7 +167,7 @@ describe("AbstractSearchComponent", () => {
 		});
 
 		it("should NOT call performSearch() if the form NOT valid", () => {
-			const formMock: FormGroup = <any>{
+			const formMock: UntypedFormGroup = <any>{
 				controls: {},
 				invalid: true
 			};
@@ -191,7 +191,7 @@ describe("AbstractSearchComponent", () => {
 
 	describe("onReset", () => {
 		it("should call the genericSearchService.resetSearchState() and clear the results$", () => {
-			const formMock: FormGroup = new FormGroup({});
+			const formMock: UntypedFormGroup = new UntypedFormGroup({});
 			component.ngOnInit();
 			component.onReset(formMock);
 

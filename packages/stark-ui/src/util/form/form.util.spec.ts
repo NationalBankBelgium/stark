@@ -1,18 +1,18 @@
 import { StarkFormControlState, StarkFormUtil } from "./form.util";
-import { FormControl, FormGroup } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import startCase from "lodash-es/startCase";
 
 describe("Util: FormUtil", () => {
 	const formItemStates: string[] = ["untouched", "touched", "pristine", "dirty"];
 
-	let mockFormGroup: FormGroup;
-	let mockFormControls: FormControl[];
+	let mockUntypedFormGroup: UntypedFormGroup;
+	let mockFormControls: UntypedFormControl[];
 
-	function getMockFormControl(name: string): FormControl {
+	function getMockFormControl(name: string): UntypedFormControl {
 		// prettier-ignore
-		return <FormControl>
+		return <UntypedFormControl>
 			(<unknown>(
-				jasmine.createSpyObj<FormControl>(name, [
+				jasmine.createSpyObj<UntypedFormControl>(name, [
 					"value",
 					"setValue",
 					"markAsUntouched",
@@ -24,7 +24,7 @@ describe("Util: FormUtil", () => {
 		);
 	}
 
-	function assertFormControl(formItem: FormControl, newState?: string): void {
+	function assertFormControl(formItem: UntypedFormControl, newState?: string): void {
 		if (newState) {
 			const newStateSetter: string = "markAs" + startCase(newState);
 			expect(formItem[newStateSetter]).toHaveBeenCalledTimes(1);
@@ -41,7 +41,7 @@ describe("Util: FormUtil", () => {
 	beforeEach(() => {
 		mockFormControls = [getMockFormControl("item1"), getMockFormControl("item2")];
 
-		mockFormGroup = <any>{
+		mockUntypedFormGroup = <any>{
 			controls: {
 				formControl0: mockFormControls[0],
 				formControl1: mockFormControls[1]
@@ -53,7 +53,7 @@ describe("Util: FormUtil", () => {
 		it("should call markAsTouched() on every form control if state to be set is 'touched'", () => {
 			const stateToBeSet: StarkFormControlState = "touched";
 
-			StarkFormUtil.setFormChildControlsState(mockFormGroup, [stateToBeSet]);
+			StarkFormUtil.setFormChildControlsState(mockUntypedFormGroup, [stateToBeSet]);
 
 			for (const formControl of mockFormControls) {
 				assertFormControl(formControl, stateToBeSet);
@@ -63,7 +63,7 @@ describe("Util: FormUtil", () => {
 		it("should call markAsUntouched() on every form control if state to be set is 'untouched'", () => {
 			const stateToBeSet: StarkFormControlState = "untouched";
 
-			StarkFormUtil.setFormChildControlsState(mockFormGroup, [stateToBeSet]);
+			StarkFormUtil.setFormChildControlsState(mockUntypedFormGroup, [stateToBeSet]);
 
 			for (const formControl of mockFormControls) {
 				assertFormControl(formControl, stateToBeSet);
@@ -73,7 +73,7 @@ describe("Util: FormUtil", () => {
 		it("should call markAsPristine() on every form control if state to be set is 'pristine'", () => {
 			const stateToBeSet: StarkFormControlState = "pristine";
 
-			StarkFormUtil.setFormChildControlsState(mockFormGroup, [stateToBeSet]);
+			StarkFormUtil.setFormChildControlsState(mockUntypedFormGroup, [stateToBeSet]);
 
 			for (const formControl of mockFormControls) {
 				assertFormControl(formControl, stateToBeSet);
@@ -83,7 +83,7 @@ describe("Util: FormUtil", () => {
 		it("should call markAsDirty() on every form control if state to be set is 'dirty'", () => {
 			const stateToBeSet: StarkFormControlState = "dirty";
 
-			StarkFormUtil.setFormChildControlsState(mockFormGroup, [stateToBeSet]);
+			StarkFormUtil.setFormChildControlsState(mockUntypedFormGroup, [stateToBeSet]);
 
 			for (const formControl of mockFormControls) {
 				assertFormControl(formControl, stateToBeSet);
@@ -93,7 +93,7 @@ describe("Util: FormUtil", () => {
 		it("should NOT call any method on any form control if state to be set is unknown", () => {
 			const stateToBeSet: any = "unknown state";
 
-			StarkFormUtil.setFormChildControlsState(mockFormGroup, [stateToBeSet]);
+			StarkFormUtil.setFormChildControlsState(mockUntypedFormGroup, [stateToBeSet]);
 
 			for (const formControl of mockFormControls) {
 				assertFormControl(formControl);
@@ -102,7 +102,7 @@ describe("Util: FormUtil", () => {
 	});
 
 	describe("setFormControlState", () => {
-		let formItem: FormControl;
+		let formItem: UntypedFormControl;
 
 		beforeEach(() => {
 			formItem = getMockFormControl("dummy item");
@@ -153,15 +153,15 @@ describe("Util: FormUtil", () => {
 		it("should set form state to 'pristine' and return TRUE if the form is valid", () => {
 			spyOn(StarkFormUtil, "setFormChildControlsState");
 
-			const result: boolean = StarkFormUtil.isFormGroupValid(mockFormGroup);
+			const result: boolean = StarkFormUtil.isFormGroupValid(mockUntypedFormGroup);
 
 			expect(result).toBe(true);
 			expect(StarkFormUtil.setFormChildControlsState).toHaveBeenCalledTimes(1);
-			expect(StarkFormUtil.setFormChildControlsState).toHaveBeenCalledWith(mockFormGroup, ["pristine"]);
+			expect(StarkFormUtil.setFormChildControlsState).toHaveBeenCalledWith(mockUntypedFormGroup, ["pristine"]);
 		});
 
 		it("should set form state to 'touched' and return FALSE if the form is NOT valid", () => {
-			mockFormGroup = <any>{
+			mockUntypedFormGroup = <any>{
 				controls: {
 					formControl0: mockFormControls[0],
 					formControl1: mockFormControls[1]
@@ -171,17 +171,17 @@ describe("Util: FormUtil", () => {
 
 			spyOn(StarkFormUtil, "setFormChildControlsState");
 
-			const result: boolean = StarkFormUtil.isFormGroupValid(mockFormGroup);
+			const result: boolean = StarkFormUtil.isFormGroupValid(mockUntypedFormGroup);
 
 			expect(result).toBe(false);
 			expect(StarkFormUtil.setFormChildControlsState).toHaveBeenCalledTimes(1);
-			expect(StarkFormUtil.setFormChildControlsState).toHaveBeenCalledWith(mockFormGroup, ["touched"]);
+			expect(StarkFormUtil.setFormChildControlsState).toHaveBeenCalledWith(mockUntypedFormGroup, ["touched"]);
 		});
 	});
 
 	describe("isFormGroup", () => {
 		it("should return TRUE if the form is an instance of an FormGroup", () => {
-			const result: boolean = StarkFormUtil.isFormGroup(mockFormGroup);
+			const result: boolean = StarkFormUtil.isFormGroup(mockUntypedFormGroup);
 
 			expect(result).toBe(true);
 		});
@@ -195,7 +195,7 @@ describe("Util: FormUtil", () => {
 
 	describe("isFormControl", () => {
 		it("should return TRUE if the form item is an instance of an FormControl", () => {
-			const mockFormItem: FormControl = getMockFormControl("dummy item");
+			const mockFormItem: UntypedFormControl = getMockFormControl("dummy item");
 
 			const result: boolean = StarkFormUtil.isFormControl(mockFormItem);
 

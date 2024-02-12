@@ -17,8 +17,8 @@ import {
 import {
 	AbstractControl,
 	ControlValueAccessor,
-	FormControl,
-	FormGroup,
+	UntypedFormControl,
+	UntypedFormGroup,
 	NG_VALUE_ACCESSOR,
 	NgControl,
 	ValidatorFn,
@@ -90,14 +90,14 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 *   </ng-container>
 	 * </stark-date-range-picker>
 	 */
-	public get startDateFormControl(): FormControl {
+	public get startDateFormControl(): UntypedFormControl {
 		return this._startDate;
 	}
 
 	/**
 	 * @ignore
 	 */
-	private _startDate!: FormControl; // will be defined by '_setupFormControls()' called in the constructor
+	private _startDate!: UntypedFormControl; // will be defined by '_setupFormControls()' called in the constructor
 
 	/**
 	 * Label to be displayed in the end datepicker
@@ -187,14 +187,14 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 *   </ng-container>
 	 * </stark-date-range-picker>
 	 */
-	public get endDateFormControl(): FormControl {
+	public get endDateFormControl(): UntypedFormControl {
 		return this._endDate;
 	}
 
 	/**
 	 * @ignore
 	 */
-	private _endDate!: FormControl; // will be defined by '_setupFormControls()' called in the constructor
+	private _endDate!: UntypedFormControl; // will be defined by '_setupFormControls()' called in the constructor
 
 	/**
 	 * Label to be displayed in the end datepicker
@@ -265,9 +265,9 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	 * Input to manage both start date and end date.
 	 */
 	@Input()
-	public set rangeFormGroup(val: FormGroup) {
+	public set rangeFormGroup(val: UntypedFormGroup) {
 		const { startDate, endDate } = val.controls;
-		if (!(startDate instanceof FormControl && endDate instanceof FormControl)) {
+		if (!(startDate instanceof UntypedFormControl && endDate instanceof UntypedFormControl)) {
 			this.logger.error(`[${componentName}]: "formGroup" requires a FormControl for startDate and another one for endDate`);
 			return;
 		}
@@ -282,7 +282,7 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 	/**
 	 * @ignore
 	 */
-	private _formGroup?: FormGroup;
+	private _formGroup?: UntypedFormGroup;
 
 	/**
 	 * Filter function or a string
@@ -513,14 +513,14 @@ export class StarkDateRangePickerComponent extends AbstractStarkUiComponent impl
 				Validators.compose([this.startDateFormControl.validator, this._requiredValidator, this._startBeforeEndValidator])
 			);
 		} else {
-			this._startDate = new FormControl(undefined, [this._requiredValidator, this._startBeforeEndValidator]);
+			this._startDate = new UntypedFormControl(undefined, [this._requiredValidator, this._startBeforeEndValidator]);
 		}
 		if (this.endDateFormControl) {
 			this.endDateFormControl.setValidators(
 				Validators.compose([this.endDateFormControl.validator, this._requiredValidator, this._endAfterStartValidator])
 			);
 		} else {
-			this._endDate = new FormControl(undefined, [this._requiredValidator, this._endAfterStartValidator]);
+			this._endDate = new UntypedFormControl(undefined, [this._requiredValidator, this._endAfterStartValidator]);
 		}
 
 		for (const subscription of this.subs) {

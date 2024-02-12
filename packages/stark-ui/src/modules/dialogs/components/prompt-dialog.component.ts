@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { StarkPromptDialogContent } from "./prompt-dialog-content.intf";
 
@@ -29,7 +29,7 @@ export class StarkPromptDialogComponent {
 	/**
 	 * @ignore
 	 */
-	public formControl: FormControl;
+	public formControl: UntypedFormControl;
 
 	/**
 	 * Class constructor
@@ -41,7 +41,7 @@ export class StarkPromptDialogComponent {
 		public dialogRef: MatDialogRef<StarkPromptDialogComponent, StarkPromptDialogResult>,
 		@Inject(MAT_DIALOG_DATA) public content: StarkPromptDialogContent
 	) {
-		this.formControl = new FormControl(this.content.initialValue);
+		this.formControl = new UntypedFormControl(this.content.initialValue);
 	}
 
 	/**

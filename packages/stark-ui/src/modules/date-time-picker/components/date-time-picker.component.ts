@@ -20,8 +20,8 @@ import {
 	AbstractControl,
 	ControlValueAccessor,
 	FormBuilder,
-	FormControl,
-	FormGroup,
+	UntypedFormControl,
+	UntypedFormGroup,
 	NG_VALIDATORS,
 	NG_VALUE_ACCESSOR,
 	NgControl,
@@ -445,7 +445,7 @@ export class StarkDateTimePickerComponent
 	/**
 	 * @ignore
 	 */
-	public dateTimeFormGroup: FormGroup;
+	public dateTimeFormGroup: UntypedFormGroup;
 
 	/**
 	 * Angular validator to check whether the component's date is earlier than the given minDate
@@ -531,8 +531,8 @@ export class StarkDateTimePickerComponent
 		super(renderer, elementRef);
 
 		this.dateTimeFormGroup = this._fb.group({
-			date: new FormControl(undefined),
-			time: new FormControl(undefined)
+			date: new UntypedFormControl(undefined),
+			time: new UntypedFormControl(undefined)
 		});
 
 		this._fm.monitor(elementRef, true).subscribe((origin: FocusOrigin) => {

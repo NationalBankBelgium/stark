@@ -1,5 +1,5 @@
 import { Component, DebugElement } from "@angular/core";
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing";
 import { Observer } from "rxjs";
@@ -22,7 +22,7 @@ describe("TimestampMaskDirective", () => {
 	class TestComponent {
 		public timestampMaskConfig: StarkTimestampMaskConfig = timestampMaskConfig;
 		public ngModelValue = "";
-		public formControl = new FormControl("");
+		public formControl = new UntypedFormControl("");
 	}
 
 	function getTemplate(timestampMaskDirective: string): string {

@@ -2,7 +2,7 @@
 import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -94,7 +94,7 @@ class TestHostFormControlComponent {
 	@ViewChild(StarkDateTimePickerComponent, { static: true })
 	public dateTimePickerComponent!: StarkDateTimePickerComponent;
 
-	public formControl = new FormControl();
+	public formControl = new UntypedFormControl();
 	public pickerId?: string;
 	public pickerName?: string;
 	public placeholder?: string;
@@ -152,7 +152,7 @@ describe("DateTimePickerComponent", () => {
 			// re-create component with a form control with "required" validator
 			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
 			hostComponent = hostFixture.componentInstance;
-			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostComponent.formControl = new UntypedFormControl(undefined, Validators.required); // initially invalid
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			let formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
@@ -172,7 +172,7 @@ describe("DateTimePickerComponent", () => {
 			// re-create component with a form control with "required" validator
 			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
 			hostComponent = hostFixture.componentInstance;
-			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostComponent.formControl = new UntypedFormControl(undefined, Validators.required); // initially invalid
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
@@ -194,7 +194,7 @@ describe("DateTimePickerComponent", () => {
 			// re-create component with a form control with "required" validator
 			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
 			hostComponent = hostFixture.componentInstance;
-			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostComponent.formControl = new UntypedFormControl(undefined, Validators.required); // initially invalid
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
@@ -210,7 +210,7 @@ describe("DateTimePickerComponent", () => {
 			// re-create component with a form control with "required" validator
 			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
 			hostComponent = hostFixture.componentInstance;
-			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostComponent.formControl = new UntypedFormControl(undefined, Validators.required); // initially invalid
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));

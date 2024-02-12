@@ -1,11 +1,10 @@
 {
-  "extends": "@nationalbankbelgium/code-style/tsconfig/4.3.x/ng12",
+  "extends": "@nationalbankbelgium/code-style/tsconfig/4.6.x/ng14",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
     "emitDecoratorMetadata": false,
     "typeRoots": ["../../node_modules/@types", "../stark-build/typings", "./typings"],
-    "emitDecoratorMetadata": false,
     "paths": {
       "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
       "@nationalbankbelgium/stark-core/testing": ["../../dist/packages/stark-core/testing"],

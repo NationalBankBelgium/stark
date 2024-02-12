@@ -16,7 +16,7 @@ import {
 } from "@angular/core";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { MenuPositionY } from "@angular/material/menu";
 import { MatColumnDef } from "@angular/material/table";
 import { distinctUntilChanged } from "rxjs/operators";
@@ -301,7 +301,7 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * @ignore
 	 * Internal formControl to manage the filter value of the column
 	 */
-	public _filterFormCtrl = new FormControl();
+	public _filterFormCtrl = new UntypedFormControl();
 
 	/**
 	 * Class constructor
