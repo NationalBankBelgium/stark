@@ -2,7 +2,8 @@ const helpers = require("./helpers");
 const fs = require("fs");
 const commonData = require("./common-data.js"); // common configuration between environments
 const HtmlHeadElements = require("./html-head-elements");
-const METADATA = require("./webpack-metadata").METADATA;
+const getMetadata = require("./webpack-metadata").getMetadata;
+let METADATA;
 
 /**
  * Check if one or more placeholders are present in the generated "index.html" and replace them
@@ -48,6 +49,7 @@ function replacePlaceholdersByValues(indexHtml) {
 module.exports = (targetOptions, indexHtml) => {
 	let indexHtmlToReturn = indexHtml;
 
+	METADATA = getMetadata(targetOptions.project);
 	/**
 	 * Generate html tags based on javascript maps.
 	 *

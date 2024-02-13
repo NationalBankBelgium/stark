@@ -1,15 +1,15 @@
 const fs = require("fs");
 
-function getAngularCliAppConfig(angularCliAppConfigPath) {
+function getAngularCliAppConfig(angularCliAppConfigPath, projectId) {
 	if (fs.existsSync(angularCliAppConfigPath)) {
 		const angularCliConfig = require(angularCliAppConfigPath);
 		const cliConfig = validateAngularCLIConfig(angularCliConfig);
 		if (cliConfig) {
-			if (cliConfig.defaultProject && cliConfig.projects[cliConfig.defaultProject]) {
-				return cliConfig.projects[cliConfig.defaultProject];
+			if (typeof projectId === "string" && cliConfig.projects[projectId]) {
+				return cliConfig.projects[projectId];
 			} else {
 				throw new Error(
-					"The configuration of the default project in angular.json is wrong. Please adapt it to follow Angular CLI guidelines."
+					`The configuration of the ${projectId} project in angular.json doesn't exit. Please adapt it to follow Angular CLI guidelines.`
 				);
 			}
 		} else {
