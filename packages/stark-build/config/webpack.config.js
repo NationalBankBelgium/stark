@@ -1,7 +1,6 @@
 "use strict";
 
 const helpers = require("./helpers");
-const buildUtils = require("./build-utils");
 const fs = require("fs");
 
 /**
@@ -173,7 +172,7 @@ module.exports = (config, options) => {
 					devServer: {
 						// See: https://webpack.js.org/configuration/dev-server/#devserverdevmiddleware
 						devMiddleware: {
-							writeToDisk: true,
+							writeToDisk: true
 						},
 
 						compress: true,

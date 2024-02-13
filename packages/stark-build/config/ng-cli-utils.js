@@ -1,18 +1,4 @@
-const path = require("path");
 const fs = require("fs");
-const cliUtilConfig = require("@angular/cli/utilities/config");
-
-function isDirectory(pathToCheck) {
-	try {
-		return fs.statSync(pathToCheck).isDirectory();
-	} catch (_) {
-		return false;
-	}
-}
-
-function getDirectoriesNames(source) {
-	return fs.readdirSync(source).filter((name) => isDirectory(path.join(source, name)));
-}
 
 function getAngularCliAppConfig(angularCliAppConfigPath) {
 	if (fs.existsSync(angularCliAppConfigPath)) {
@@ -64,10 +50,6 @@ function getNgCliAction() {
 	return stringifiedArgs.match(cliActionRegex)[1];
 }
 
-function getWorkspace() {
-	return cliUtilConfig.getWorkspace();
-}
-
 function hasNgCliCommandOption(option) {
 	const stringifiedArgs = process.argv.join(" ");
 	/**
@@ -110,10 +92,7 @@ function getNgCliCommandOption(option) {
 }
 
 exports.getAngularCliAppConfig = getAngularCliAppConfig;
-exports.getDirectoriesNames = getDirectoriesNames;
-exports.getWorkspace = getWorkspace;
 exports.getNgCliAction = getNgCliAction;
 exports.getNgCliCommandOption = getNgCliCommandOption;
 exports.hasNgCliCommandOption = hasNgCliCommandOption;
-exports.isDirectory = isDirectory;
 exports.validateAngularCLIConfig = validateAngularCLIConfig;
