@@ -1,7 +1,6 @@
 "use strict";
 
 const helpers = require("./helpers");
-const buildUtils = require("./build-utils");
 const fs = require("fs");
 
 /**
@@ -12,28 +11,11 @@ const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const StylelintPlugin = require("stylelint-webpack-plugin");
 const webpackMerge = require("webpack-merge").merge;
-const METADATA = require("./webpack-metadata").METADATA;
+const getMetadata = require("./webpack-metadata").getMetadata;
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 // Dev custom config
 const webpackCustomConfig = require(helpers.root("config/webpack-custom-config.dev.json"));
-
-// Directives to be used in CSP header
-const cspDirectives = [
-	"base-uri 'self'",
-	// "default-src 'self'", // FIXME: enable as soon as the issue is fixed in Angular (https://github.com/angular/angular-cli/issues/6872 )
-	"child-src 'self'",
-	"connect-src 'self' ws://" + METADATA.HOST + ":" + METADATA.PORT + " " + webpackCustomConfig["cspConnectSrc"], // ws://HOST:PORT" is due to Webpack
-	`font-src 'self' ${webpackCustomConfig["cspFontSrc"] || ""}`,
-	"form-action 'self' " + webpackCustomConfig["cspFormAction"],
-	"frame-src 'self'", // deprecated. Use child-src instead. Used here because child-src is not yet supported by Firefox. Remove as soon as it is fully supported
-	"frame-ancestors 'none'", // the app will not be allowed to be embedded in an iframe (roughly equivalent to X-Frame-Options: DENY)
-	"img-src 'self' data: image/png", // data: image/png is due to ui-router visualizer loading PNG images
-	"media-src 'self'",
-	"object-src 'self' data:"
-	// "script-src 'self'", // FIXME: enable as soon as the issue is fixed in Angular (https://github.com/angular/angular-cli/issues/6872 )
-	// "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
-];
 
 /**
  * Custom extra configuration for Webpack, in addition to Angular CLI Webpack configuration.
@@ -44,6 +26,25 @@ const cspDirectives = [
  */
 module.exports = (config, options) => {
 	const BUNDLE_ANALYZER = !!process.env.BUNDLE_ANALYZER; // env BUNDLE_ANALYZER variable set via cross-env
+
+	const METADATA = getMetadata(config.output.uniqueName);
+
+	// Directives to be used in CSP header
+	const cspDirectives = [
+		"base-uri 'self'",
+		// "default-src 'self'", // FIXME: enable as soon as the issue is fixed in Angular (https://github.com/angular/angular-cli/issues/6872 )
+		"child-src 'self'",
+		"connect-src 'self' ws://" + METADATA.HOST + ":" + METADATA.PORT + " " + webpackCustomConfig["cspConnectSrc"], // ws://HOST:PORT" is due to Webpack
+		`font-src 'self' ${webpackCustomConfig["cspFontSrc"] || ""}`,
+		"form-action 'self' " + webpackCustomConfig["cspFormAction"],
+		"frame-src 'self'", // deprecated. Use child-src instead. Used here because child-src is not yet supported by Firefox. Remove as soon as it is fully supported
+		"frame-ancestors 'none'", // the app will not be allowed to be embedded in an iframe (roughly equivalent to X-Frame-Options: DENY)
+		"img-src 'self' data: image/png", // data: image/png is due to ui-router visualizer loading PNG images
+		"media-src 'self'",
+		"object-src 'self' data:"
+		// "script-src 'self'", // FIXME: enable as soon as the issue is fixed in Angular (https://github.com/angular/angular-cli/issues/6872 )
+		// "style-src 'self' 'nonce-uiroutervisualizer' 'nonce-cef324d21ec5483c8819cc7a5e33c4a2'" // we define the same nonce value as in the style-loader // FIXME: DomSharedStylesHost.prototype._addStylesToHost in platform-browser.js adds inline style!
+	];
 
 	return webpackMerge(config, {
 		/**
@@ -173,7 +174,7 @@ module.exports = (config, options) => {
 					devServer: {
 						// See: https://webpack.js.org/configuration/dev-server/#devserverdevmiddleware
 						devMiddleware: {
-							writeToDisk: true,
+							writeToDisk: true
 						},
 
 						compress: true,

@@ -1,29 +1,15 @@
-const path = require("path");
 const fs = require("fs");
-const cliUtilConfig = require("@angular/cli/utilities/config");
 
-function isDirectory(pathToCheck) {
-	try {
-		return fs.statSync(pathToCheck).isDirectory();
-	} catch (_) {
-		return false;
-	}
-}
-
-function getDirectoriesNames(source) {
-	return fs.readdirSync(source).filter((name) => isDirectory(path.join(source, name)));
-}
-
-function getAngularCliAppConfig(angularCliAppConfigPath) {
+function getAngularCliAppConfig(angularCliAppConfigPath, projectId) {
 	if (fs.existsSync(angularCliAppConfigPath)) {
 		const angularCliConfig = require(angularCliAppConfigPath);
 		const cliConfig = validateAngularCLIConfig(angularCliConfig);
 		if (cliConfig) {
-			if (cliConfig.defaultProject && cliConfig.projects[cliConfig.defaultProject]) {
-				return cliConfig.projects[cliConfig.defaultProject];
+			if (typeof projectId === "string" && cliConfig.projects[projectId]) {
+				return cliConfig.projects[projectId];
 			} else {
 				throw new Error(
-					"The configuration of the default project in angular.json is wrong. Please adapt it to follow Angular CLI guidelines."
+					`The configuration of the ${projectId} project in angular.json doesn't exit. Please adapt it to follow Angular CLI guidelines.`
 				);
 			}
 		} else {
@@ -62,10 +48,6 @@ function getNgCliAction() {
 	const stringifiedArgs = process.argv.join(" ");
 	const cliActionRegex = new RegExp("ng\\s([\\w\\d]+)(\\s|)");
 	return stringifiedArgs.match(cliActionRegex)[1];
-}
-
-function getWorkspace() {
-	return cliUtilConfig.getWorkspace();
 }
 
 function hasNgCliCommandOption(option) {
@@ -110,10 +92,7 @@ function getNgCliCommandOption(option) {
 }
 
 exports.getAngularCliAppConfig = getAngularCliAppConfig;
-exports.getDirectoriesNames = getDirectoriesNames;
-exports.getWorkspace = getWorkspace;
 exports.getNgCliAction = getNgCliAction;
 exports.getNgCliCommandOption = getNgCliCommandOption;
 exports.hasNgCliCommandOption = hasNgCliCommandOption;
-exports.isDirectory = isDirectory;
 exports.validateAngularCLIConfig = validateAngularCLIConfig;
