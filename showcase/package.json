@@ -105,7 +105,7 @@
   "dependencies": {
     "@angular/animations": "^13.4.0",
     "@angular/cdk": "^13.3.9",
-    "@angular/cli": "^13.3.11",
+    "@angular/cli": "^17.0.0",
     "@angular/common": "^13.4.0",
     "@angular/compiler": "^13.4.0",
     "@angular/compiler-cli": "^13.4.0",
