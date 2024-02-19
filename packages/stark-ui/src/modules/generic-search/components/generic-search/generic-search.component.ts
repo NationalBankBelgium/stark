@@ -28,7 +28,7 @@ import {
 	StarkDefaultPredefinedAction
 } from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from "@angular/animations";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import isEqual from "lodash-es/isEqual";
@@ -171,14 +171,14 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * The form model object is passed as parameter to this function.
 	 */
 	@Output()
-	public readonly resetTriggered = new EventEmitter<FormGroup>();
+	public readonly resetTriggered = new EventEmitter<UntypedFormGroup>();
 
 	/**
 	 * Callback function to be called when the "Search" button is clicked.
 	 * The form model object is passed as parameter to this function.
 	 */
 	@Output()
-	public readonly searchTriggered = new EventEmitter<FormGroup>();
+	public readonly searchTriggered = new EventEmitter<UntypedFormGroup>();
 
 	/**
 	 * Callback function to be called when the visibility of the generic form changes.
@@ -219,7 +219,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 	 * In the HTML, the component defining the search form content should be exported as `searchForm`
 	 * so that it is accessible from the Stark Generic Search component. See example above.
 	 */
-	public get genericForm(): FormGroup {
+	public get genericForm(): UntypedFormGroup {
 		return this.searchFormComponent.searchForm;
 	}
 

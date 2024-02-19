@@ -2,7 +2,7 @@
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { By } from "@angular/platform-browser";
 import { Component, ViewChild } from "@angular/core";
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -91,7 +91,7 @@ class TestHostFormControlComponent {
 	@ViewChild(StarkDatePickerComponent, { static: true })
 	public datePickerComponent!: StarkDatePickerComponent;
 
-	public formControl = new FormControl();
+	public formControl = new UntypedFormControl();
 	public pickerId?: string;
 	public pickerName?: string;
 	public dateMask?: StarkDatePickerMaskConfig;
@@ -141,7 +141,7 @@ describe("DatePickerComponent", () => {
 			// re-create component with a form control with "required" validator
 			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
 			hostComponent = hostFixture.componentInstance;
-			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostComponent.formControl = new UntypedFormControl(undefined, Validators.required); // initially invalid
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
@@ -162,7 +162,7 @@ describe("DatePickerComponent", () => {
 			// re-create component with a form control with "required" validator
 			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
 			hostComponent = hostFixture.componentInstance;
-			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostComponent.formControl = new UntypedFormControl(undefined, Validators.required); // initially invalid
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
@@ -178,7 +178,7 @@ describe("DatePickerComponent", () => {
 			// re-create component with a form control with "required" validator
 			hostFixture = TestBed.createComponent(TestHostFormControlComponent);
 			hostComponent = hostFixture.componentInstance;
-			hostComponent.formControl = new FormControl(undefined, Validators.required); // initially invalid
+			hostComponent.formControl = new UntypedFormControl(undefined, Validators.required); // initially invalid
 			hostFixture.detectChanges(); // trigger initial data binding
 
 			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));

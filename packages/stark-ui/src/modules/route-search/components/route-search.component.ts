@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { Ng2StateDeclaration } from "@uirouter/angular";
 import { Observable } from "rxjs";
@@ -82,7 +82,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	/**
 	 * The source FormControl object of the search field
 	 */
-	public searchField: FormControl;
+	public searchField: UntypedFormControl;
 
 	/**
 	 * The list of {@link StarkRouteSearchEntry}'s objects filtered by the auto-complete field
@@ -115,7 +115,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
-		this.searchField = new FormControl();
+		this.searchField = new UntypedFormControl();
 	}
 
 	/**

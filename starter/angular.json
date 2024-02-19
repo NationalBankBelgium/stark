@@ -61,9 +61,7 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules"
-              ]
+              "includePaths": ["node_modules"]
             },
             "scripts": [],
             "deployUrl": "/",
@@ -187,7 +185,6 @@
       }
     }
   },
-  "defaultProject": "starter",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
@@ -198,6 +195,6 @@
     }
   },
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

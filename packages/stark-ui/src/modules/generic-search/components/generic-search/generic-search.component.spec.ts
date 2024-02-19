@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, EventEmitter } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UntypedFormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatIconTestingModule } from "@angular/material/icon/testing";
@@ -20,10 +20,10 @@ import { StarkActionBarModule } from "@nationalbankbelgium/stark-ui/src/modules/
 	template: ""
 })
 class TestSearchFormComponent implements StarkSearchFormComponent<any> {
-	public searchForm: FormGroup = new FormGroup({});
+	public searchForm: UntypedFormGroup = new UntypedFormGroup({});
 	public workingCopyChanged = new EventEmitter<any>();
 
-	public createSearchForm(_searchCriteria: any): FormGroup {
+	public createSearchForm(_searchCriteria: any): UntypedFormGroup {
 		return this.searchForm;
 	}
 

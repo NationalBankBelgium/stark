@@ -2,7 +2,7 @@
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { Component, EventEmitter, ViewChild } from "@angular/core";
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angular/core/testing";
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -41,19 +41,19 @@ describe("DateRangePickerComponent", () => {
 			</stark-date-range-picker>
 		`
 	})
-	class TestFormGroupComponent {
+	class TestUntypedFormGroupComponent {
 		@ViewChild(StarkDateRangePickerComponent, { static: true })
 		public dateRangePicker!: StarkDateRangePickerComponent;
 
-		public formGroup = new FormGroup({
-			startDate: new FormControl(),
-			endDate: new FormControl()
+		public formGroup = new UntypedFormGroup({
+			startDate: new UntypedFormControl(),
+			endDate: new UntypedFormControl()
 		});
 	}
 
 	beforeEach(waitForAsync(() =>
 		TestBed.configureTestingModule({
-			declarations: [StarkDateRangePickerComponent, TestModelComponent, TestFormGroupComponent],
+			declarations: [StarkDateRangePickerComponent, TestModelComponent, TestUntypedFormGroupComponent],
 			imports: [
 				NoopAnimationsModule,
 				MatDatepickerModule,
@@ -335,12 +335,12 @@ describe("DateRangePickerComponent", () => {
 	});
 
 	describe("with formGroup", () => {
-		let hostFixture: ComponentFixture<TestFormGroupComponent>;
-		let hostComponent: TestFormGroupComponent;
+		let hostFixture: ComponentFixture<TestUntypedFormGroupComponent>;
+		let hostComponent: TestUntypedFormGroupComponent;
 		let component: StarkDateRangePickerComponent;
 
 		beforeEach(() => {
-			hostFixture = TestBed.createComponent(TestFormGroupComponent);
+			hostFixture = TestBed.createComponent(TestUntypedFormGroupComponent);
 			hostComponent = hostFixture.componentInstance;
 			component = hostComponent.dateRangePicker;
 			hostFixture.detectChanges();
@@ -414,9 +414,9 @@ describe("DateRangePickerComponent", () => {
 			});
 
 			it("should log an error when the given 'rangeFormGroup' does not contain expected 'startDate' and 'endDate' controls", () => {
-				hostComponent.formGroup = new FormGroup({
-					start: new FormControl(new Date(2019, 0, 1)),
-					end: new FormControl(new Date(2019, 0, 2))
+				hostComponent.formGroup = new UntypedFormGroup({
+					start: new UntypedFormControl(new Date(2019, 0, 1)),
+					end: new UntypedFormControl(new Date(2019, 0, 2))
 				});
 				hostFixture.detectChanges();
 

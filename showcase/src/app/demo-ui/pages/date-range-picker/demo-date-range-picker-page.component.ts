@@ -2,7 +2,7 @@
 import { Component, Inject, OnDestroy } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkDateRangePickerEvent } from "@nationalbankbelgium/stark-ui";
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { Subscription } from "rxjs";
 import { ReferenceLink } from "../../../shared/components";
@@ -26,12 +26,15 @@ export class DemoDateRangePickerPageComponent implements OnDestroy {
 	public modelDisabled = false;
 
 	// IMPORTANT: if the DateRangePicker should be required, then add the 'required' validator to both form controls too!
-	public dateRangeFormGroup = new FormGroup({
-		startDate: new FormControl(
+	public dateRangeFormGroup = new UntypedFormGroup({
+		startDate: new UntypedFormControl(
 			undefined,
 			Validators.compose([Validators.required, DemoDateRangePickerPageComponent.noFebruaryValidator])
 		),
-		endDate: new FormControl(undefined, Validators.compose([Validators.required, DemoDateRangePickerPageComponent.noFebruaryValidator]))
+		endDate: new UntypedFormControl(
+			undefined,
+			Validators.compose([Validators.required, DemoDateRangePickerPageComponent.noFebruaryValidator])
+		)
 	});
 
 	/**

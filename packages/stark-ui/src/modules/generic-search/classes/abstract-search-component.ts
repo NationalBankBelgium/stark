@@ -1,7 +1,7 @@
 import { ReplaySubject, Subscription } from "rxjs";
 import { map, take } from "rxjs/operators";
 import { Directive, OnDestroy, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { AbstractStarkFormComponent } from "./abstract-form-component";
 import { StarkGenericSearchService } from "./generic-search.service.intf";
 import { StarkSearchState } from "../entities";
@@ -116,7 +116,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	 * Invoke the search passing the formGroup's working copy only if the Search formGroup is valid
 	 * @param formGroup - The 'search' formGroup
 	 */
-	public onSearch(formGroup: FormGroup): void {
+	public onSearch(formGroup: UntypedFormGroup): void {
 		if (StarkFormUtil.isFormGroupValid(formGroup)) {
 			this.performSearch(this.workingCopy);
 		}
@@ -140,7 +140,7 @@ export abstract class AbstractStarkSearchComponent<SearchResultsType, CriteriaTy
 	 * Invoke the genericSearchService.resetSearchState() method and clears the results
 	 * @param form - Form to reset
 	 */
-	public onReset(form: FormGroup): void {
+	public onReset(form: UntypedFormGroup): void {
 		this.genericSearchService.resetSearchState();
 		StarkFormUtil.setFormChildControlsState(form, ["untouched", "pristine"]);
 		StarkFormUtil.setFormGroupState(form, ["untouched", "pristine"]);

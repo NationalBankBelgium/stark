@@ -21,7 +21,7 @@ import {
 	TemplateRef,
 	ContentChild
 } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatColumnDef, MatTable, MatTableDataSource } from "@angular/material/table";
 import { SelectionChange, SelectionModel } from "@angular/cdk/collections";
@@ -493,7 +493,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * @ignore
 	 */
-	public _globalFilterFormCtrl = new FormControl();
+	public _globalFilterFormCtrl = new UntypedFormControl();
 
 	/**
 	 * Whether the fixed header is enabled.

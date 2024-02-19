@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/component-max-inline-declarations, @angular-eslint/no-lifecycle-call */
 import { Component, DebugElement, ViewChild } from "@angular/core";
-import { FormControl, ReactiveFormsModule } from "@angular/forms";
+import { UntypedFormControl, ReactiveFormsModule } from "@angular/forms";
 import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
@@ -39,7 +39,7 @@ describe("DropdownComponent", () => {
 		public dropdownComponent!: StarkDropdownComponent;
 
 		public dropdownId?: string;
-		public formControl = new FormControl();
+		public formControl = new UntypedFormControl();
 		// public header?: string;
 		public multiSelect?: boolean;
 		public optionIdProperty?: string;

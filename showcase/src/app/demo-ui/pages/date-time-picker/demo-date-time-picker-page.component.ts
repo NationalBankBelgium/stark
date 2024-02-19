@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy } from "@angular/core";
-import { AbstractControl, FormControl, Validators } from "@angular/forms";
+import { AbstractControl, UntypedFormControl, Validators } from "@angular/forms";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkTimestampMaskConfig } from "@nationalbankbelgium/stark-ui";
 import { Subscription } from "rxjs";
@@ -15,7 +15,7 @@ const DAY_IN_MILLISECONDS = 86400000;
 })
 export class DemoDateTimePickerPageComponent implements OnDestroy {
 	public dateTimeModel?: Date;
-	public formControl = new FormControl(new Date(), Validators.required);
+	public formControl = new UntypedFormControl(new Date(), Validators.required);
 	public isDisabled = false;
 
 	public dateMask = { format: "DD/MM/YYYY" };
@@ -51,7 +51,7 @@ export class DemoDateTimePickerPageComponent implements OnDestroy {
 		this._logger.debug("ngModel: ", this.dateTimeModel);
 	}
 
-	public toggleFormControlState(formControl: FormControl): void {
+	public toggleFormControlState(formControl: UntypedFormControl): void {
 		// enable/disable the control without emitting a change event since the value did not change (to avoid unnecessary extra calls!)
 		if (formControl.disabled) {
 			formControl.enable({ emitEvent: false });

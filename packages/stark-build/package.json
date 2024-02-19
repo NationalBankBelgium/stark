@@ -19,8 +19,8 @@
   },
   "types": "typings/index.d.ts",
   "dependencies": {
-    "@angular-builders/custom-webpack": "^13.1.0",
-    "@angular-devkit/build-angular": "^13.3.11",
+    "@angular-builders/custom-webpack": "^14.1.0",
+    "@angular-devkit/build-angular": "^14.2.13",
     "@types/webpack": "^5.28.0",
     "eslint-webpack-plugin": "^2.7.0",
     "moment-locales-webpack-plugin": "^1.2.0",
@@ -31,11 +31,11 @@
     "webpack-bundle-analyzer": "^4.4.2"
   },
   "peerDependencies": {
-    "@angular/cli": "^13.3.11",
-    "@angular/compiler": "^13.4.0",
-    "@angular/compiler-cli": "^13.4.0",
-    "@angular/platform-browser": "^13.4.0",
-    "@angular/platform-browser-dynamic": "^13.4.0"
+    "@angular/cli": "^14.2.13",
+    "@angular/compiler": "^14.3.0",
+    "@angular/compiler-cli": "^14.3.0",
+    "@angular/platform-browser": "^14.3.0",
+    "@angular/platform-browser-dynamic": "^14.3.0"
   },
   "scripts": {
     "clean": "npx rimraf dist",
