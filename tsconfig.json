@@ -1,0 +1,25 @@
+{
+  "extends": "@nationalbankbelgium/code-style/tsconfig/4.6.x/ng14",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "emitDecoratorMetadata": false,
+    "typeRoots": ["../../node_modules/@types", "../stark-build/typings", "./typings"],
+    "paths": {
+      "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],
+      "@nationalbankbelgium/stark-core/testing": ["../../dist/packages/stark-core/testing"],
+      "@nationalbankbelgium/stark-ui/*": ["./*", "."],
+      "@nationalbankbelgium/stark-ui": ["../../dist/packages/stark-ui/*", "../../dist/packages/stark-ui"],
+      "@nationalbankbelgium/stark-ui/testing": ["./testing/public_api.ts"],
+      "environments/environment": ["../../dist/packages/stark-core/src/common/environment"]
+    },
+    "outDir": "../../dist/packages/stark-ui"
+  },
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true,
+    "compilationMode": "partial"
+  }
+}
