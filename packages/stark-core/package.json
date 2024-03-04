@@ -26,7 +26,7 @@
     "@ngrx/store-devtools": "^13.2.0",
     "@ngx-translate/core": "^13.0.0",
     "@types/lodash-es": "^4.17.4",
-    "@types/uuid": "^8.3.0",
+    "@types/uuid": "^9.0.8",
     "@uirouter/angular": "^9.0.1",
     "@uirouter/core": "^6.0.8",
     "@uirouter/rx": "~0.6.0",
@@ -37,7 +37,7 @@
     "lodash-es": "^4.17.21",
     "moment": "^2.22.2",
     "tslib": "^2.3.0",
-    "uuid": "^8.3.0"
+    "uuid": "^9.0.1"
   },
   "peerDependencies": {
     "@angular/common": "^14.3.0",
