@@ -1,0 +1,3240 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Miscellaneous</li>
+  <li>Variables</li>
+</ol>
+
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#changeLanguage" title="src/modules/session/actions/session.actions.ts" ><b>changeLanguage</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#changeLanguageFailure" title="src/modules/session/actions/session.actions.ts" ><b>changeLanguageFailure</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#changeLanguageSuccess" title="src/modules/session/actions/session.actions.ts" ><b>changeLanguageSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#commonCoreTranslations" title="src/common/translations/common-translations.ts" ><b>commonCoreTranslations</b>&nbsp;&nbsp;&nbsp;(src/.../common-translations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#componentName" title="src/modules/session/components/app-container.component.ts" ><b>componentName</b>&nbsp;&nbsp;&nbsp;(src/.../app-container.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DEFAULT_USER_PROFILE_RESOURCE_PATH" title="src/modules/user/repository/user.repository.ts" ><b>DEFAULT_USER_PROFILE_RESOURCE_PATH</b>&nbsp;&nbsp;&nbsp;(src/.../user.repository.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#destroySession" title="src/modules/session/actions/session.actions.ts" ><b>destroySession</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#destroySessionSuccess" title="src/modules/session/actions/session.actions.ts" ><b>destroySessionSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fetchUserProfile" title="src/modules/user/actions/user.actions.ts" ><b>fetchUserProfile</b>&nbsp;&nbsp;&nbsp;(src/.../user.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fetchUserProfileFailure" title="src/modules/user/actions/user.actions.ts" ><b>fetchUserProfileFailure</b>&nbsp;&nbsp;&nbsp;(src/.../user.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fetchUserProfileSuccess" title="src/modules/user/actions/user.actions.ts" ><b>fetchUserProfileSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../user.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#flushLogMessages" title="src/modules/logging/actions/logging.actions.ts" ><b>flushLogMessages</b>&nbsp;&nbsp;&nbsp;(src/.../logging.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getAllUsers" title="src/modules/user/actions/user.actions.ts" ><b>getAllUsers</b>&nbsp;&nbsp;&nbsp;(src/.../user.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getAllUsersFailure" title="src/modules/user/actions/user.actions.ts" ><b>getAllUsersFailure</b>&nbsp;&nbsp;&nbsp;(src/.../user.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getAllUsersSuccess" title="src/modules/user/actions/user.actions.ts" ><b>getAllUsersSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../user.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#INITIAL_LOGGING_STATE" title="src/modules/logging/reducers/logging.reducer.ts" ><b>INITIAL_LOGGING_STATE</b>&nbsp;&nbsp;&nbsp;(src/.../logging.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#INITIAL_SESSION_STATE" title="src/modules/session/reducers/session.reducer.ts" ><b>INITIAL_SESSION_STATE</b>&nbsp;&nbsp;&nbsp;(src/.../session.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#INITIAL_SETTINGS_STATE" title="src/modules/settings/reducers/settings.reducer.ts" ><b>INITIAL_SETTINGS_STATE</b>&nbsp;&nbsp;&nbsp;(src/.../settings.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#initializeSession" title="src/modules/session/actions/session.actions.ts" ><b>initializeSession</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#initializeSessionSuccess" title="src/modules/session/actions/session.actions.ts" ><b>initializeSessionSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#logMessage" title="src/modules/logging/actions/logging.actions.ts" ><b>logMessage</b>&nbsp;&nbsp;&nbsp;(src/.../logging.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#navigate" title="src/modules/routing/actions/routing.actions.ts" ><b>navigate</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#navigateFailure" title="src/modules/routing/actions/routing.actions.ts" ><b>navigateFailure</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#navigateRejection" title="src/modules/routing/actions/routing.actions.ts" ><b>navigateRejection</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#navigateSuccess" title="src/modules/routing/actions/routing.actions.ts" ><b>navigateSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#navigationHistoryLimitReached" title="src/modules/routing/actions/routing.actions.ts" ><b>navigationHistoryLimitReached</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#persistPreferredLanguage" title="src/modules/settings/actions/settings.actions.ts" ><b>persistPreferredLanguage</b>&nbsp;&nbsp;&nbsp;(src/.../settings.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#persistPreferredLanguageFailure" title="src/modules/settings/actions/settings.actions.ts" ><b>persistPreferredLanguageFailure</b>&nbsp;&nbsp;&nbsp;(src/.../settings.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#persistPreferredLanguageSuccess" title="src/modules/settings/actions/settings.actions.ts" ><b>persistPreferredLanguageSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../settings.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reducer" title="src/modules/logging/reducers/logging.reducer.ts" ><b>reducer</b>&nbsp;&nbsp;&nbsp;(src/.../logging.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reducer" title="src/modules/session/reducers/session.reducer.ts" ><b>reducer</b>&nbsp;&nbsp;&nbsp;(src/.../session.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reducer" title="src/modules/settings/reducers/settings.reducer.ts" ><b>reducer</b>&nbsp;&nbsp;&nbsp;(src/.../settings.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reload" title="src/modules/routing/actions/routing.actions.ts" ><b>reload</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reloadFailure" title="src/modules/routing/actions/routing.actions.ts" ><b>reloadFailure</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reloadSuccess" title="src/modules/routing/actions/routing.actions.ts" ><b>reloadSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#selectStarkLogging" title="src/modules/logging/reducers/index.ts" ><b>selectStarkLogging</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#selectStarkSession" title="src/modules/session/reducers/index.ts" ><b>selectStarkSession</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#selectStarkSettings" title="src/modules/settings/reducers/index.ts" ><b>selectStarkSettings</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SESSION_STATES" title="src/modules/session/routes.ts" ><b>SESSION_STATES</b>&nbsp;&nbsp;&nbsp;(src/.../routes.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#sessionLogout" title="src/modules/session/actions/session.actions.ts" ><b>sessionLogout</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#sessionTimeoutCountdownFinish" title="src/modules/session/actions/session.actions.ts" ><b>sessionTimeoutCountdownFinish</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#sessionTimeoutCountdownStart" title="src/modules/session/actions/session.actions.ts" ><b>sessionTimeoutCountdownStart</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#sessionTimeoutCountdownStop" title="src/modules/session/actions/session.actions.ts" ><b>sessionTimeoutCountdownStop</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#setLoggingApplicationId" title="src/modules/logging/actions/logging.actions.ts" ><b>setLoggingApplicationId</b>&nbsp;&nbsp;&nbsp;(src/.../logging.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#setPreferredLanguage" title="src/modules/settings/actions/settings.actions.ts" ><b>setPreferredLanguage</b>&nbsp;&nbsp;&nbsp;(src/.../settings.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_APP_CONFIG" title="src/configuration/entities/application/app-config.entity.intf.ts" ><b>STARK_APP_CONFIG</b>&nbsp;&nbsp;&nbsp;(src/.../app-config.entity.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_APP_METADATA" title="src/configuration/entities/metadata/application-metadata.entity.intf.ts" ><b>STARK_APP_METADATA</b>&nbsp;&nbsp;&nbsp;(src/.../application-metadata.entity.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_HTTP_PARAM_ENCODER" title="src/util/http.util.ts" ><b>STARK_HTTP_PARAM_ENCODER</b>&nbsp;&nbsp;&nbsp;(src/.../http.util.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_HTTP_SERVICE" title="src/modules/http/services/http.service.intf.ts" ><b>STARK_HTTP_SERVICE</b>&nbsp;&nbsp;&nbsp;(src/.../http.service.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_LOGGING_SERVICE" title="src/modules/logging/services/logging.service.intf.ts" ><b>STARK_LOGGING_SERVICE</b>&nbsp;&nbsp;&nbsp;(src/.../logging.service.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_MOCK_DATA" title="src/configuration/entities/mock-data/mock-data.entity.intf.ts" ><b>STARK_MOCK_DATA</b>&nbsp;&nbsp;&nbsp;(src/.../mock-data.entity.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_ROUTING_SERVICE" title="src/modules/routing/services/routing.service.intf.ts" ><b>STARK_ROUTING_SERVICE</b>&nbsp;&nbsp;&nbsp;(src/.../routing.service.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_SESSION_CONFIG" title="src/modules/session/entities/session-config.entity.intf.ts" ><b>STARK_SESSION_CONFIG</b>&nbsp;&nbsp;&nbsp;(src/.../session-config.entity.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_SESSION_SERVICE" title="src/modules/session/services/session.service.intf.ts" ><b>STARK_SESSION_SERVICE</b>&nbsp;&nbsp;&nbsp;(src/.../session.service.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_SETTINGS_SERVICE" title="src/modules/settings/services/settings.service.intf.ts" ><b>STARK_SETTINGS_SERVICE</b>&nbsp;&nbsp;&nbsp;(src/.../settings.service.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_USER_PROFILE_RESOURCE_PATH" title="src/modules/user/entities/user-module-config.entity.intf.ts" ><b>STARK_USER_PROFILE_RESOURCE_PATH</b>&nbsp;&nbsp;&nbsp;(src/.../user-module-config.entity.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_USER_REPOSITORY" title="src/modules/user/repository/user.repository.intf.ts" ><b>STARK_USER_REPOSITORY</b>&nbsp;&nbsp;&nbsp;(src/.../user.repository.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_USER_SERVICE" title="src/modules/user/services/user.service.intf.ts" ><b>STARK_USER_SERVICE</b>&nbsp;&nbsp;&nbsp;(src/.../user.service.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_XSRF_CONFIG" title="src/modules/xsrf/services/xsrf-config.intf.ts" ><b>STARK_XSRF_CONFIG</b>&nbsp;&nbsp;&nbsp;(src/.../xsrf-config.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STARK_XSRF_SERVICE" title="src/modules/xsrf/services/xsrf.service.intf.ts" ><b>STARK_XSRF_SERVICE</b>&nbsp;&nbsp;&nbsp;(src/.../xsrf.service.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkAppExitStateName" title="src/modules/session/constants/session-states.ts" ><b>starkAppExitStateName</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkAppInitStateName" title="src/modules/session/constants/session-states.ts" ><b>starkAppInitStateName</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkLoggingReducers" title="src/modules/logging/reducers/index.ts" ><b>starkLoggingReducers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkLoggingStoreKey" title="src/modules/logging/constants/logging-store-key.ts" ><b>starkLoggingStoreKey</b>&nbsp;&nbsp;&nbsp;(src/.../logging-store-key.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkLoginStateName" title="src/modules/session/constants/session-states.ts" ><b>starkLoginStateName</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkLoginStateUrl" title="src/modules/session/constants/session-states.ts" ><b>starkLoginStateUrl</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkMapIsValidValidatorName" title="src/validation/decorators/map-is-valid/map-is-valid.validator.decorator.ts" ><b>starkMapIsValidValidatorName</b>&nbsp;&nbsp;&nbsp;(src/.../map-is-valid.validator.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkMapNotEmptyValidatorName" title="src/validation/validators/map-not-empty/map-not-empty.validator.fn.ts" ><b>starkMapNotEmptyValidatorName</b>&nbsp;&nbsp;&nbsp;(src/.../map-not-empty.validator.fn.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkPreloadingStateName" title="src/modules/session/constants/session-states.ts" ><b>starkPreloadingStateName</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkPreloadingStateUrl" title="src/modules/session/constants/session-states.ts" ><b>starkPreloadingStateUrl</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkRoutingStoreKey" title="src/modules/routing/actions/routing.actions.ts" ><b>starkRoutingStoreKey</b>&nbsp;&nbsp;&nbsp;(src/.../routing.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkSessionExpiredStateName" title="src/modules/session/constants/session-states.ts" ><b>starkSessionExpiredStateName</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkSessionExpiredStateUrl" title="src/modules/session/constants/session-states.ts" ><b>starkSessionExpiredStateUrl</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkSessionLogoutStateName" title="src/modules/session/constants/session-states.ts" ><b>starkSessionLogoutStateName</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkSessionLogoutStateUrl" title="src/modules/session/constants/session-states.ts" ><b>starkSessionLogoutStateUrl</b>&nbsp;&nbsp;&nbsp;(src/.../session-states.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkSessionReducers" title="src/modules/session/reducers/index.ts" ><b>starkSessionReducers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkSessionStoreKey" title="src/modules/session/constants/session-store-key.ts" ><b>starkSessionStoreKey</b>&nbsp;&nbsp;&nbsp;(src/.../session-store-key.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkSettingsReducers" title="src/modules/settings/reducers/index.ts" ><b>starkSettingsReducers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkSettingsStoreKey" title="src/modules/settings/constants/settings-store-key.ts" ><b>starkSettingsStoreKey</b>&nbsp;&nbsp;&nbsp;(src/.../settings-store-key.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkUserRepositoryName" title="src/modules/user/repository/user.repository.intf.ts" ><b>starkUserRepositoryName</b>&nbsp;&nbsp;&nbsp;(src/.../user.repository.intf.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#starkUserStoreKey" title="src/modules/user/actions/user.actions.ts" ><b>starkUserStoreKey</b>&nbsp;&nbsp;&nbsp;(src/.../user.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#stringMap" title="src/serialization/string-map.ts" ><b>stringMap</b>&nbsp;&nbsp;&nbsp;(src/.../string-map.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#unhandledError" title="src/modules/error-handling/actions/error-handling.actions.ts" ><b>unhandledError</b>&nbsp;&nbsp;&nbsp;(src/.../error-handling.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#userActivityTrackingPause" title="src/modules/session/actions/session.actions.ts" ><b>userActivityTrackingPause</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#userActivityTrackingResume" title="src/modules/session/actions/session.actions.ts" ><b>userActivityTrackingResume</b>&nbsp;&nbsp;&nbsp;(src/.../session.actions.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/modules/session/actions/session.actions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeLanguage"></a>
+                    <span class="name">
+                        <span ><b>changeLanguage</b></span>
+                        <a href="#changeLanguage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Change Language&#x60;, props&lt;{ languageId: string }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the <a href="StarkSessionService.setCurrentLanguage">StarkSessionService setCurrentLanguage()</a> method is called,
+just before changing the current session&#39;s language.</p>
+<p>Parameter:</p>
+<ul>
+<li>languageId - The target language to change to.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeLanguageFailure"></a>
+                    <span class="name">
+                        <span ><b>changeLanguageFailure</b></span>
+                        <a href="#changeLanguageFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Change Language Failure&#x60;, props&lt;{ error: any }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the change of the current session&#39;s language failed.</p>
+<p>Parameter:</p>
+<ul>
+<li>error - The error that caused the language change to fail.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeLanguageSuccess"></a>
+                    <span class="name">
+                        <span ><b>changeLanguageSuccess</b></span>
+                        <a href="#changeLanguageSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Change Language Success&#x60;, props&lt;{ languageId: string }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the current session&#39;s language has been successfully changed by calling
+the <a href="StarkSessionService.setCurrentLanguage">StarkSessionService setCurrentLanguage()</a> method.</p>
+<p>Parameter:</p>
+<ul>
+<li>languageId - The target language that was successfully changed to.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroySession"></a>
+                    <span class="name">
+                        <span ><b>destroySession</b></span>
+                        <a href="#destroySession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Destroy Session&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered before the process to destroy the user&#39;s session starts right after the HTTP logout call has been sent.</p>
+<p>This action is dispatched whenever the user is going to be logged out due to:</p>
+<ol>
+<li>Manually clicking in the App Logout component (provided by the <code>StarkUI</code> package)</li>
+<li>Calling the <a href="StarkSessionService.logout">StarkSessionService logout()</a> method.</li>
+<li>Closing the browser tab.</li>
+<li>Being inactive for a certain period of time reaching the idle timeout defined by the
+application&#39;s <a href="StarkApplicationConfig.sessionTimeout">StarkApplicationConfig sessionTimeout</a>.</li>
+</ol>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroySessionSuccess"></a>
+                    <span class="name">
+                        <span ><b>destroySessionSuccess</b></span>
+                        <a href="#destroySessionSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Destroy Session Success&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the destruction of the user&#39;s session has finished successfully.
+This action is the last action to be dispatched when the user is logged out (either manually by himself or automatically due to inactivity).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initializeSession"></a>
+                    <span class="name">
+                        <span ><b>initializeSession</b></span>
+                        <a href="#initializeSession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Initialize Session&#x60;, props&lt;{ user: StarkUser }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered by the <a href="StarkSessionService.login">StarkSessionService login()</a> method before the process to
+initialize the session for the given user starts.</p>
+<p>Parameter:</p>
+<ul>
+<li>user - The user whose session will be initialized.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initializeSessionSuccess"></a>
+                    <span class="name">
+                        <span ><b>initializeSessionSuccess</b></span>
+                        <a href="#initializeSessionSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Initialize Session Success&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the initialization of the user&#39;s session has finished successfully.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sessionLogout"></a>
+                    <span class="name">
+                        <span ><b>sessionLogout</b></span>
+                        <a href="#sessionLogout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Session Logout&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the user is about to be logged out and the HTTP logout call to be sent.
+This action is called before the process to destroy the user&#39;s session starts.</p>
+<p>This action is dispatched by the <a href="StarkSessionService.logout">StarkSessionService logout()</a> method or in case the browser tab was closed and is dispatched before
+the <a href="../miscellaneous/variables.html#destroySession">destroySession</a> action.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sessionTimeoutCountdownFinish"></a>
+                    <span class="name">
+                        <span ><b>sessionTimeoutCountdownFinish</b></span>
+                        <a href="#sessionTimeoutCountdownFinish"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Session Timeout Countdown Finish&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the countdown to automatically destroy the user&#39;s session has finished. In this case the user will be automatically logged out.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sessionTimeoutCountdownStart"></a>
+                    <span class="name">
+                        <span ><b>sessionTimeoutCountdownStart</b></span>
+                        <a href="#sessionTimeoutCountdownStart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkSessionStoreKey}] Session Timeout Countdown Start&#x60;,
+	props&lt;{ countdown: number }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the countdown to automatically destroy the user&#39;s session due to inactivity starts.</p>
+<p>The countdown is defined in the application&#39;s <a href="StarkApplicationConfig.sessionTimeoutWarningPeriod">StarkApplicationConfig sessionTimeoutWarningPeriod</a>.</p>
+<p>By default is set to 15 seconds.</p>
+<p>Parameter:</p>
+<ul>
+<li>countdown - The countdown until the session will be automatically destroyed.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sessionTimeoutCountdownStop"></a>
+                    <span class="name">
+                        <span ><b>sessionTimeoutCountdownStop</b></span>
+                        <a href="#sessionTimeoutCountdownStop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] Session Timeout Countdown Stop&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the countdown to automatically destroy the user&#39;s session due to inactivity stops.</p>
+<p>This countdown stops automatically when the user is active again and no longer idle.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userActivityTrackingPause"></a>
+                    <span class="name">
+                        <span ><b>userActivityTrackingPause</b></span>
+                        <a href="#userActivityTrackingPause"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] User Activity Tracking Pause&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered by the <a href="StarkSessionService.pauseUserActivityTracking">StarkSessionService pauseUserActivityTracking()</a> method
+when the user activity tracking is paused (automatically done by the <a href="../interfaces/StarkSessionService.html">StarkSessionService</a>).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userActivityTrackingResume"></a>
+                    <span class="name">
+                        <span ><b>userActivityTrackingResume</b></span>
+                        <a href="#userActivityTrackingResume"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSessionStoreKey}] User Activity Tracking Resume&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered by the <a href="StarkSessionService.resumeUserActivityTracking">StarkSessionService resumeUserActivityTracking()</a> method
+when the user activity tracking is resumed (automatically done by the <a href="../interfaces/StarkSessionService.html">StarkSessionService</a>).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/common/translations/common-translations.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commonCoreTranslations"></a>
+                    <span class="name">
+                        <span ><b>commonCoreTranslations</b></span>
+                        <a href="#commonCoreTranslations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>object[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Common translations for features available in Stark-Core package</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/session/components/app-container.component.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="componentName"></a>
+                    <span class="name">
+                        <span ><b>componentName</b></span>
+                        <a href="#componentName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;stark-app-container&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/user/repository/user.repository.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DEFAULT_USER_PROFILE_RESOURCE_PATH"></a>
+                    <span class="name">
+                        <span ><b>DEFAULT_USER_PROFILE_RESOURCE_PATH</b></span>
+                        <a href="#DEFAULT_USER_PROFILE_RESOURCE_PATH"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;security/userprofile&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The resource path to be used for the User profile fetching if no other resource path is specified.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/user/actions/user.actions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchUserProfile"></a>
+                    <span class="name">
+                        <span ><b>fetchUserProfile</b></span>
+                        <a href="#fetchUserProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkUserStoreKey}] Get User&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the fetchUserProfile() method is called, just before performing the HTTP to the REST API.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchUserProfileFailure"></a>
+                    <span class="name">
+                        <span ><b>fetchUserProfileFailure</b></span>
+                        <a href="#fetchUserProfileFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkUserStoreKey}] Fetch User Profile Failure&#x60;,
+	props&lt;{ error: StarkHttpErrorWrapper | Error }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the user profile has been successfully fetched from the REST API.</p>
+<p>Parameter:</p>
+<ul>
+<li>error - The error that caused the user fetching to fail.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchUserProfileSuccess"></a>
+                    <span class="name">
+                        <span ><b>fetchUserProfileSuccess</b></span>
+                        <a href="#fetchUserProfileSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkUserStoreKey}] Fetch User Profile Success&#x60;, props&lt;{ user: StarkUser }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the user profile has been successfully fetched from the REST API.</p>
+<p>Parameter:</p>
+<ul>
+<li>user - The user fetched from the REST API</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllUsers"></a>
+                    <span class="name">
+                        <span ><b>getAllUsers</b></span>
+                        <a href="#getAllUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkUserStoreKey}] Get All Users&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the getAllUsers() method is called.
+The getAllUsers() method should only be used in development.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllUsersFailure"></a>
+                    <span class="name">
+                        <span ><b>getAllUsersFailure</b></span>
+                        <a href="#getAllUsersFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkUserStoreKey}] Get All Users Failure&#x60;, props&lt;{ message: string }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when there are no users defined in the mock data.</p>
+<p>Parameter:</p>
+<ul>
+<li>message - The message describing all the users failure.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllUsersSuccess"></a>
+                    <span class="name">
+                        <span ><b>getAllUsersSuccess</b></span>
+                        <a href="#getAllUsersSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkUserStoreKey}] Get All Users Success&#x60;, props&lt;{ users: StarkUser[] }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the fetchUserProfile() method is called, just before performing the HTTP to the REST API.</p>
+<p>Parameter:</p>
+<ul>
+<li>users - The users retrieved from the the mock data.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkUserStoreKey"></a>
+                    <span class="name">
+                        <span ><b>starkUserStoreKey</b></span>
+                        <a href="#starkUserStoreKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;StarkUser&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Key defined to find the service in a store</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/logging/actions/logging.actions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="flushLogMessages"></a>
+                    <span class="name">
+                        <span ><b>flushLogMessages</b></span>
+                        <a href="#flushLogMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkLoggingStoreKey}] Flush Log&#x60;, props&lt;{ numberOfMessagesToFlush: number }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Persists the log messages in the redux store to the back-end</p>
+<p>Parameter:</p>
+<ul>
+<li>numberOfMessagesToFlush - The number of messages to flush</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logMessage"></a>
+                    <span class="name">
+                        <span ><b>logMessage</b></span>
+                        <a href="#logMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkLoggingStoreKey}] Log Message&#x60;, props&lt;{ message: StarkLogMessage }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Store a debug/info/warning/error message</p>
+<p>Parameter:</p>
+<ul>
+<li>message - The message to log</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setLoggingApplicationId"></a>
+                    <span class="name">
+                        <span ><b>setLoggingApplicationId</b></span>
+                        <a href="#setLoggingApplicationId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkLoggingStoreKey}] Set Logging Application Id&#x60;,
+	props&lt;{ applicationId: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Add the Application Name to the logging object</p>
+<p>Parameter:</p>
+<ul>
+<li>applicationId - The id of the application</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/logging/reducers/logging.reducer.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INITIAL_LOGGING_STATE"></a>
+                    <span class="name">
+                        <span ><b>INITIAL_LOGGING_STATE</b></span>
+                        <a href="#INITIAL_LOGGING_STATE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkLogging.html" target="_self" >Readonly&lt;StarkLogging&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+	uuid: &quot;&quot;,
+	applicationId: &quot;&quot;,
+	messages: []
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Defines the initial state of the reducer</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reducer"></a>
+                    <span class="name">
+                        <span ><b>reducer</b></span>
+                        <a href="#reducer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createReducer&lt;StarkLogging, StarkLoggingActions.Types&gt;(
+	INITIAL_LOGGING_STATE,
+	on(StarkLoggingActions.logMessage, (state, action) &#x3D;&gt; ({ ...state, messages: [...state.messages, action.message] })),
+	on(StarkLoggingActions.flushLogMessages, (state, action) &#x3D;&gt; {
+		const numberOfMessagesToFlush: number &#x3D; action.numberOfMessagesToFlush;
+		const numberOfMessages: number &#x3D; state.messages.length;
+		const messages: StarkLogMessage[] &#x3D; state.messages.slice(numberOfMessagesToFlush, numberOfMessages);
+
+		return { ...state, messages: [...messages] };
+	}),
+	on(StarkLoggingActions.setLoggingApplicationId, (state, action) &#x3D;&gt; ({ ...state, applicationId: action.applicationId }))
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Definition of the reducer using <code>createReducer</code> method.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/session/reducers/session.reducer.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INITIAL_SESSION_STATE"></a>
+                    <span class="name">
+                        <span ><b>INITIAL_SESSION_STATE</b></span>
+                        <a href="#INITIAL_SESSION_STATE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkSession.html" target="_self" >StarkSession</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new StarkSessionImpl()</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Defines the initial state of the reducer</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reducer"></a>
+                    <span class="name">
+                        <span ><b>reducer</b></span>
+                        <a href="#reducer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createReducer&lt;StarkSession, StarkSessionActions.Types&gt;(
+	INITIAL_SESSION_STATE,
+	on(StarkSessionActions.changeLanguageSuccess, (state, action) &#x3D;&gt; ({ ...state, currentLanguage: action.languageId })),
+	on(StarkSessionActions.initializeSession, (state, action) &#x3D;&gt; ({ ...state, user: action.user })),
+	on(StarkSessionActions.destroySession, (state) &#x3D;&gt; ({ ...state, user: undefined }))
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Definition of the reducer using <code>createReducer</code> method.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/settings/reducers/settings.reducer.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INITIAL_SETTINGS_STATE"></a>
+                    <span class="name">
+                        <span ><b>INITIAL_SETTINGS_STATE</b></span>
+                        <a href="#INITIAL_SETTINGS_STATE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/StarkSettings.html" target="_self" >StarkSettings</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new StarkSettings()</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Defines the initial state of the reducer</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reducer"></a>
+                    <span class="name">
+                        <span ><b>reducer</b></span>
+                        <a href="#reducer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createReducer&lt;StarkSettings, StarkSettingsActions.Types&gt;(
+	INITIAL_SETTINGS_STATE,
+	on(StarkSettingsActions.setPreferredLanguage, (state, action) &#x3D;&gt; ({ ...state, preferredLanguage: action.language }))
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Definition of the reducer using <code>createReducer</code> method.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/routing/actions/routing.actions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigate"></a>
+                    <span class="name">
+                        <span ><b>navigate</b></span>
+                        <a href="#navigate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkRoutingStoreKey}] Navigate&#x60;,
+	props&lt;{ currentState: string; newState: string; params?: RawParams; options?: TransitionOptions }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the <a href="StarkRoutingService.navigateTo">StarkRoutingService navigateTo()</a> method is called, just before starting the navigation.</p>
+<p>Parameters:</p>
+<ul>
+<li>currentState - Name of the current state before the navigation starts.</li>
+<li>newState - Name of the state to be navigated to.</li>
+<li>params - State params object to be passed to the navigated state.</li>
+<li>options - Transition options object to change the behavior of the transition.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateFailure"></a>
+                    <span class="name">
+                        <span ><b>navigateFailure</b></span>
+                        <a href="#navigateFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkRoutingStoreKey}] Navigate Failure&#x60;,
+	props&lt;{ currentState: string; newState: string; params?: RawParams; error: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when a navigation failed.</p>
+<p>This action is dispatched for any navigation, including those navigations triggered not by the <a href="StarkRoutingService.navigateTo">StarkRoutingService navigateTo()</a>
+method but by any other mean such as menu links or by direct usage of the router library API.</p>
+<p>Parameters:</p>
+<ul>
+<li>currentState - Name of the current state before the navigation started.</li>
+<li>newState - Name of the state tried to be navigated to.</li>
+<li>params - State params object passed to the navigated state.</li>
+<li>error - The error describing the reason of the navigation failure.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateRejection"></a>
+                    <span class="name">
+                        <span ><b>navigateRejection</b></span>
+                        <a href="#navigateRejection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkRoutingStoreKey}] Navigate Rejection&#x60;,
+	props&lt;{ currentState: string; newState: string; params: RawParams; reason: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when a navigation was intentionally rejected with a known rejection reason added via the
+<a href="StarkRoutingService.addKnownNavigationRejectionCause">StarkRoutingService addKnownNavigationRejectionCause()</a> method.</p>
+<p>The custom logic to intentionally reject a transition can be normally be injected via a transition Hook by calling
+the <a href="StarkRoutingService.addTransitionHook">StarkRoutingService addTransitionHook()</a> method.</p>
+<p>Parameters:</p>
+<ul>
+<li>currentState - Name of the current state before the navigation started.</li>
+<li>newState - Name of the state tried to be navigated to.</li>
+<li>params - State params object passed to the navigated state.</li>
+<li>reason - The reason describing why the navigation was rejected. This is normally a reason already known by the developer.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateSuccess"></a>
+                    <span class="name">
+                        <span ><b>navigateSuccess</b></span>
+                        <a href="#navigateSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkRoutingStoreKey}] Navigate Success&#x60;,
+	props&lt;{ previousState: string; currentState: string; params?: RawParams }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when a navigation has succeeded and finished.</p>
+<p>This action is dispatched for any navigation, including those navigations triggered not by the <a href="StarkRoutingService.navigateTo">StarkRoutingService navigateTo()</a> method
+but by any other mean such as <a href="StarkRoutingService.navigateToPrevious">StarkRoutingService navigateToPrevious()</a>, <a href="StarkRoutingService.navigateToHome">StarkRoutingService navigateToHome()</a>,
+<a href="StarkRoutingService.reload">StarkRoutingService reload()</a>, routing directives for menu links or by direct usage of the router library API.</p>
+<p>Parameters:</p>
+<ul>
+<li>previousState - Name of the initial state where the navigation was started.</li>
+<li>currentState - Name of the state that was navigated to.</li>
+<li>params - State params object that was passed to the navigated state.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigationHistoryLimitReached"></a>
+                    <span class="name">
+                        <span ><b>navigationHistoryLimitReached</b></span>
+                        <a href="#navigationHistoryLimitReached"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkRoutingStoreKey}] Navigation History Limit Reached&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the <a href="StarkRoutingService.navigateToPrevious">StarkRoutingService navigateToPrevious()</a> method is called and there are no more
+previous states in the history to navigate to.</p>
+<p>This action is just triggered in case the reload was done by calling the <a href="StarkRoutingService.reload">StarkRoutingService reload()</a> method.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reload"></a>
+                    <span class="name">
+                        <span ><b>reload</b></span>
+                        <a href="#reload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkRoutingStoreKey}] Reload&#x60;, props&lt;{ state: string }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when the <a href="StarkRoutingService.reload">StarkRoutingService reload()</a> method is called, just before starting the state reloading.</p>
+<p>Parameter:</p>
+<ul>
+<li>state - Name of the state to be reloaded.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reloadFailure"></a>
+                    <span class="name">
+                        <span ><b>reloadFailure</b></span>
+                        <a href="#reloadFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkRoutingStoreKey}] Reload Failure&#x60;, props&lt;{ state: string; params: RawParams }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when a reload succeeded and finished.</p>
+<p>This action is dispatched for any navigation, including those navigations triggered not by the <a href="StarkRoutingService.navigateTo">StarkRoutingService navigateTo()</a>
+method but by any other mean such as menu links or by direct usage of the router library API.</p>
+<p>Parameters:</p>
+<ul>
+<li>state - Name of the state that was reloaded.</li>
+<li>params - State params object passed to the reloaded state.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reloadSuccess"></a>
+                    <span class="name">
+                        <span ><b>reloadSuccess</b></span>
+                        <a href="#reloadSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkRoutingStoreKey}] Reload Success&#x60;, props&lt;{ state: string; params: RawParams }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Triggered when a reload succeeded and finished.</p>
+<p>This action is dispatched for any navigation, including those navigations triggered not by the <a href="StarkRoutingService.navigateTo">StarkRoutingService navigateTo()</a>
+method but by any other mean such as menu links or by direct usage of the router library API.</p>
+<p>Parameters:</p>
+<ul>
+<li>state - Name of the state that was reloaded.</li>
+<li>params - State params object passed to the reloaded state.</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkRoutingStoreKey"></a>
+                    <span class="name">
+                        <span ><b>starkRoutingStoreKey</b></span>
+                        <a href="#starkRoutingStoreKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;StarkRouting&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Key defined to find the service in a store</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/settings/actions/settings.actions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="persistPreferredLanguage"></a>
+                    <span class="name">
+                        <span ><b>persistPreferredLanguage</b></span>
+                        <a href="#persistPreferredLanguage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkSettingsStoreKey}] Persist Preferred Language&#x60;,
+	props&lt;{ language: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Action that requires to persist the given language locally so that the language remains the same when the user comes back</p>
+<p>Parameter:</p>
+<ul>
+<li>language - The language to persist</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="persistPreferredLanguageFailure"></a>
+                    <span class="name">
+                        <span ><b>persistPreferredLanguageFailure</b></span>
+                        <a href="#persistPreferredLanguageFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(
+	&#x60;[${starkSettingsStoreKey}] Persist Preferred Language Failure&#x60;,
+	props&lt;{ error: any }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Action that notifies the application that the preferred language could not be persisted.</p>
+<p>Parameter:</p>
+<ul>
+<li>error - The reason why the preferred language could not be persisted</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="persistPreferredLanguageSuccess"></a>
+                    <span class="name">
+                        <span ><b>persistPreferredLanguageSuccess</b></span>
+                        <a href="#persistPreferredLanguageSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSettingsStoreKey}] Persist Preferred Language Success&#x60;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Action that notifies the application that the preferred language was successfully persisted.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setPreferredLanguage"></a>
+                    <span class="name">
+                        <span ><b>setPreferredLanguage</b></span>
+                        <a href="#setPreferredLanguage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x60;[${starkSettingsStoreKey}] Set Preferred Language&#x60;, props&lt;{ language: string }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Action that notifies the application that the preferred language should be changed.</p>
+<p>Parameter:</p>
+<ul>
+<li>language - The new preferred language</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/logging/reducers/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectStarkLogging"></a>
+                    <span class="name">
+                        <span ><b>selectStarkLogging</b></span>
+                        <a href="#selectStarkLogging"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+	createFeatureSelector&lt;StarkLoggingState&gt;(starkLoggingStoreKey),
+	(state: StarkLoggingState) &#x3D;&gt; state.logging
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>NGRX Selector for the <a href="../modules/StarkLoggingModule.html">StarkLoggingModule</a>&#39;s state</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkLoggingReducers"></a>
+                    <span class="name">
+                        <span ><b>starkLoggingReducers</b></span>
+                        <a href="#starkLoggingReducers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ActionReducerMap&lt;StarkLoggingState, StarkLoggingActions.Types&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+	/**
+	 * Reducer assigned to the state&#x27;s &#x60;logging&#x60; property
+	 */
+	logging: loggingReducer
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reducers assigned to each property of the <a href="../modules/StarkLoggingModule.html">StarkLoggingModule</a>&#39;s state</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/session/reducers/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectStarkSession"></a>
+                    <span class="name">
+                        <span ><b>selectStarkSession</b></span>
+                        <a href="#selectStarkSession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+	createFeatureSelector&lt;StarkSessionState&gt;(starkSessionStoreKey),
+	(state: StarkSessionState) &#x3D;&gt; state.session
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>NGRX Selector for the <a href="../modules/StarkSessionModule.html">StarkSessionModule</a>&#39;s state</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkSessionReducers"></a>
+                    <span class="name">
+                        <span ><b>starkSessionReducers</b></span>
+                        <a href="#starkSessionReducers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ActionReducerMap&lt;StarkSessionState, StarkSessionActions.Types&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+	/**
+	 * Reducer assigned to the state&#x27;s &#x60;session&#x60; property
+	 */
+	session: sessionReducer
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reducers assigned to each property of the <a href="../modules/StarkSessionModule.html">StarkSessionModule</a>&#39;s state</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/settings/reducers/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectStarkSettings"></a>
+                    <span class="name">
+                        <span ><b>selectStarkSettings</b></span>
+                        <a href="#selectStarkSettings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSelector(
+	createFeatureSelector&lt;StarkSettingsState&gt;(starkSettingsStoreKey),
+	(state: StarkSettingsState) &#x3D;&gt; state.settings
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>NGRX Selector for the <a href="../modules/StarkSettingsModule.html">StarkSettingsModule</a>&#39;s state</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkSettingsReducers"></a>
+                    <span class="name">
+                        <span ><b>starkSettingsReducers</b></span>
+                        <a href="#starkSettingsReducers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkSettingsState.html" target="_self" >ActionReducerMap&lt;StarkSettingsState, StarkSettingsActions.Types&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+	/**
+	 * Reducer assigned to the state&#x27;s &#x60;settings&#x60; property
+	 */
+	settings: settingsReducer
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reducers assigned to each property of the <a href="../modules/StarkSettingsModule.html">StarkSettingsModule</a>&#39;s state</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/session/routes.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SESSION_STATES"></a>
+                    <span class="name">
+                        <span ><b>SESSION_STATES</b></span>
+                        <a href="#SESSION_STATES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Ng2StateDeclaration[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+	{
+		name: starkAppInitStateName, // parent state for any initialization state (used to show/hide the main app component)
+		abstract: true,
+
+		resolve: [
+			{
+				token: &quot;targetRoute&quot;,
+				deps: [Location, Transition, STARK_ROUTING_SERVICE],
+				resolveFn: resolveTargetRoute
+			},
+			{
+				token: &quot;targetState&quot;,
+				deps: [&quot;targetRoute&quot;],
+				resolveFn: resolveTargetState
+			},
+			{
+				token: &quot;targetStateParams&quot;,
+				deps: [&quot;targetRoute&quot;],
+				resolveFn: resolveTargetStateParams
+			}
+		]
+	},
+	{
+		name: starkAppExitStateName, // parent state for any exit state (used to show/hide the main app component)
+		abstract: true
+	}
+]</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>States defined by <a href="../modules/StarkSessionModule.html">StarkSessionModule</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/configuration/entities/application/app-config.entity.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_APP_CONFIG"></a>
+                    <span class="name">
+                        <span ><b>STARK_APP_CONFIG</b></span>
+                        <a href="#STARK_APP_CONFIG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkApplicationConfig.html" target="_self" >InjectionToken&lt;StarkApplicationConfig&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkApplicationConfig&gt;(&quot;STARK_APP_CONFIG&quot;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkApplicationConfig.html">StarkApplicationConfig</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/configuration/entities/metadata/application-metadata.entity.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_APP_METADATA"></a>
+                    <span class="name">
+                        <span ><b>STARK_APP_METADATA</b></span>
+                        <a href="#STARK_APP_METADATA"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkApplicationMetadata.html" target="_self" >InjectionToken&lt;StarkApplicationMetadata&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkApplicationMetadata&gt;(
+	&quot;STARK_APP_METADATA&quot;
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkApplicationMetadata.html">StarkApplicationMetadata</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/util/http.util.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_HTTP_PARAM_ENCODER"></a>
+                    <span class="name">
+                        <span ><b>STARK_HTTP_PARAM_ENCODER</b></span>
+                        <a href="#STARK_HTTP_PARAM_ENCODER"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/common/http/HttpParameterCodec" target="_blank" >HttpParameterCodec</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new StarkHttpParameterCodec()</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>An instance of the <a href="../classes/StarkHttpParameterCodec.html">StarkHttpParameterCodec</a> which is internally used by
+the <a href="StarkHttpUtil.convertStarkQueryParamsIntoHttpParams">StarkHttpUtil convertStarkQueryParamsIntoHttpParams</a> method.</p>
+<p>See ://github.com/NationalBankBelgium/stark/issues/1130<a href="https">https</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/http/services/http.service.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_HTTP_SERVICE"></a>
+                    <span class="name">
+                        <span ><b>STARK_HTTP_SERVICE</b></span>
+                        <a href="#STARK_HTTP_SERVICE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkHttpService.html" target="_self" >InjectionToken&lt;StarkHttpService&lt;any&gt;&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkHttpService&lt;any&gt;&gt;(starkHttpServiceName)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkHttpService.html">StarkHttpService</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/logging/services/logging.service.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_LOGGING_SERVICE"></a>
+                    <span class="name">
+                        <span ><b>STARK_LOGGING_SERVICE</b></span>
+                        <a href="#STARK_LOGGING_SERVICE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>InjectionToken&lt;StarkLoggingService&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkLoggingService&gt;(starkLoggingServiceName)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkLoggingService.html">StarkLoggingService</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/configuration/entities/mock-data/mock-data.entity.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_MOCK_DATA"></a>
+                    <span class="name">
+                        <span ><b>STARK_MOCK_DATA</b></span>
+                        <a href="#STARK_MOCK_DATA"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkMockData.html" target="_self" >InjectionToken&lt;StarkMockData&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkMockData&gt;(&quot;STARK_MOCK_DATA&quot;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkMockData.html">StarkMockData</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/routing/services/routing.service.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_ROUTING_SERVICE"></a>
+                    <span class="name">
+                        <span ><b>STARK_ROUTING_SERVICE</b></span>
+                        <a href="#STARK_ROUTING_SERVICE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkRoutingService.html" target="_self" >InjectionToken&lt;StarkRoutingService&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkRoutingService&gt;(starkRoutingServiceName)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkRoutingService.html">StarkRoutingService</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/session/entities/session-config.entity.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_SESSION_CONFIG"></a>
+                    <span class="name">
+                        <span ><b>STARK_SESSION_CONFIG</b></span>
+                        <a href="#STARK_SESSION_CONFIG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>InjectionToken&lt;StarkSessionConfig&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkSessionConfig&gt;(&quot;StarkSessionConfig&quot;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkSessionConfig.html">StarkSessionConfig</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/session/services/session.service.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_SESSION_SERVICE"></a>
+                    <span class="name">
+                        <span ><b>STARK_SESSION_SERVICE</b></span>
+                        <a href="#STARK_SESSION_SERVICE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>InjectionToken&lt;StarkSessionService&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkSessionService&gt;(starkSessionServiceName)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkSessionService.html">StarkSessionService</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/settings/services/settings.service.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_SETTINGS_SERVICE"></a>
+                    <span class="name">
+                        <span ><b>STARK_SETTINGS_SERVICE</b></span>
+                        <a href="#STARK_SETTINGS_SERVICE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkSettingsService.html" target="_self" >InjectionToken&lt;StarkSettingsService&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkSettingsService&gt;(
+	starkSettingsServiceName
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkSettingsService.html">StarkSettingsService</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/user/entities/user-module-config.entity.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_USER_PROFILE_RESOURCE_PATH"></a>
+                    <span class="name">
+                        <span ><b>STARK_USER_PROFILE_RESOURCE_PATH</b></span>
+                        <a href="#STARK_USER_PROFILE_RESOURCE_PATH"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkUserModuleConfig[&quot;userProfileResourcePath&quot;]&gt;(
+	&quot;StarkUserProfileResourcePath&quot;
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="StarkUserModuleConfig.userProfileResourcePath">StarkUserModuleConfig userProfileResourcePath</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/user/repository/user.repository.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_USER_REPOSITORY"></a>
+                    <span class="name">
+                        <span ><b>STARK_USER_REPOSITORY</b></span>
+                        <a href="#STARK_USER_REPOSITORY"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkUserRepository.html" target="_self" >InjectionToken&lt;StarkUserRepository&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkUserRepository&gt;(starkUserRepositoryName)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkUserRepository.html">StarkUserRepository</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkUserRepositoryName"></a>
+                    <span class="name">
+                        <span ><b>starkUserRepositoryName</b></span>
+                        <a href="#starkUserRepositoryName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;StarkUserRepository&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the User Repository, in case injection is needed</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/user/services/user.service.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_USER_SERVICE"></a>
+                    <span class="name">
+                        <span ><b>STARK_USER_SERVICE</b></span>
+                        <a href="#STARK_USER_SERVICE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkUserService.html" target="_self" >InjectionToken&lt;StarkUserService&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkUserService&gt;(starkUserServiceName)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkUserService.html">StarkUserService</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/xsrf/services/xsrf-config.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_XSRF_CONFIG"></a>
+                    <span class="name">
+                        <span ><b>STARK_XSRF_CONFIG</b></span>
+                        <a href="#STARK_XSRF_CONFIG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkXSRFConfig.html" target="_self" >InjectionToken&lt;StarkXSRFConfig&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkXSRFConfig&gt;(&quot;StarkXSRFConfig&quot;)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkXSRFConfig.html">StarkXSRFConfig</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/xsrf/services/xsrf.service.intf.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STARK_XSRF_SERVICE"></a>
+                    <span class="name">
+                        <span ><b>STARK_XSRF_SERVICE</b></span>
+                        <a href="#STARK_XSRF_SERVICE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StarkXSRFService.html" target="_self" >InjectionToken&lt;StarkXSRFService&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;StarkXSRFService&gt;(starkXSRFServiceName)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>://v12.angular.io/api/core/InjectionToken|InjectionToken<a href="https">https</a> used to provide the <a href="../interfaces/StarkXSRFService.html">StarkXSRFService</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/session/constants/session-states.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkAppExitStateName"></a>
+                    <span class="name">
+                        <span ><b>starkAppExitStateName</b></span>
+                        <a href="#starkAppExitStateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;starkAppExit&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the exit states of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkAppInitStateName"></a>
+                    <span class="name">
+                        <span ><b>starkAppInitStateName</b></span>
+                        <a href="#starkAppInitStateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;starkAppInit&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the initialization states of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkLoginStateName"></a>
+                    <span class="name">
+                        <span ><b>starkLoginStateName</b></span>
+                        <a href="#starkLoginStateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>miscellaneous</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>starkAppInitStateName + &quot;.starkLogin&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the login state of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkLoginStateUrl"></a>
+                    <span class="name">
+                        <span ><b>starkLoginStateUrl</b></span>
+                        <a href="#starkLoginStateUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;/starkLogin&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>URL of the login state of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkPreloadingStateName"></a>
+                    <span class="name">
+                        <span ><b>starkPreloadingStateName</b></span>
+                        <a href="#starkPreloadingStateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>starkAppInitStateName + &quot;.starkPreloading&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the Preloading state of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkPreloadingStateUrl"></a>
+                    <span class="name">
+                        <span ><b>starkPreloadingStateUrl</b></span>
+                        <a href="#starkPreloadingStateUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;/starkPreloading&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>URL of the Preloading state of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkSessionExpiredStateName"></a>
+                    <span class="name">
+                        <span ><b>starkSessionExpiredStateName</b></span>
+                        <a href="#starkSessionExpiredStateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>starkAppExitStateName + &quot;.starkSessionExpired&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the SessionExpired state of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkSessionExpiredStateUrl"></a>
+                    <span class="name">
+                        <span ><b>starkSessionExpiredStateUrl</b></span>
+                        <a href="#starkSessionExpiredStateUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;/starkSessionExpired&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>URL of the SessionExpired state of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkSessionLogoutStateName"></a>
+                    <span class="name">
+                        <span ><b>starkSessionLogoutStateName</b></span>
+                        <a href="#starkSessionLogoutStateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>starkAppExitStateName + &quot;.starkSessionLogout&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the SessionLogout state of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkSessionLogoutStateUrl"></a>
+                    <span class="name">
+                        <span ><b>starkSessionLogoutStateUrl</b></span>
+                        <a href="#starkSessionLogoutStateUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;/starkSessionLogout&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>URL of the SessionLogout state of the application</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/logging/constants/logging-store-key.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkLoggingStoreKey"></a>
+                    <span class="name">
+                        <span ><b>starkLoggingStoreKey</b></span>
+                        <a href="#starkLoggingStoreKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;StarkLogging&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The store key will allow the application to find the reducer in the store</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/validation/decorators/map-is-valid/map-is-valid.validator.decorator.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkMapIsValidValidatorName"></a>
+                    <span class="name">
+                        <span ><b>starkMapIsValidValidatorName</b></span>
+                        <a href="#starkMapIsValidValidatorName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;starkMapIsValid&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the validator, in case injection is needed.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/validation/validators/map-not-empty/map-not-empty.validator.fn.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkMapNotEmptyValidatorName"></a>
+                    <span class="name">
+                        <span ><b>starkMapNotEmptyValidatorName</b></span>
+                        <a href="#starkMapNotEmptyValidatorName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;starkMapNotEmpty&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the starkMapNotEmpty validator.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/session/constants/session-store-key.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkSessionStoreKey"></a>
+                    <span class="name">
+                        <span ><b>starkSessionStoreKey</b></span>
+                        <a href="#starkSessionStoreKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;StarkSession&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Key defined to find the service in a store</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/settings/constants/settings-store-key.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="starkSettingsStoreKey"></a>
+                    <span class="name">
+                        <span ><b>starkSettingsStoreKey</b></span>
+                        <a href="#starkSettingsStoreKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;StarkSettings&quot;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Key defined to find the service in a store</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/serialization/string-map.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stringMap"></a>
+                    <span class="name">
+                        <span ><b>stringMap</b></span>
+                        <a href="#stringMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(targetType: any): ISerializable &#x3D;&gt; ({
+	Serialize: (map: Map&lt;string, any&gt;): object &#x3D;&gt; {
+		const obj: object &#x3D; {};
+		map.forEach((value: any, key: string) &#x3D;&gt; {
+			obj[key] &#x3D; Serialize(value);
+		});
+		return obj;
+	},
+
+	Deserialize: (json: any): Map&lt;string, any&gt; &#x3D;&gt; {
+		const map: Map&lt;string, any&gt; &#x3D; new Map&lt;string, unknown&gt;();
+		for (const key of Object.keys(json)) {
+			map.set(key, Deserialize(json[key], targetType));
+		}
+		return map;
+	}
+})</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Solution proposed by <code>@weichx</code> for Maps having string keys
+in this way the custom behavior for handling ES6 Maps is defined once instead of doing it every time a Map is used.</p>
+<p>See:</p>
+<ul>
+<li>://github.com/weichx/cerialize/issues/32<a href="https">https</a></li>
+<li>://github.com/weichx/cerialize/issues/33<a href="https">https</a></li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/modules/error-handling/actions/error-handling.actions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unhandledError"></a>
+                    <span class="name">
+                        <span ><b>unhandledError</b></span>
+                        <a href="#unhandledError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&quot;[StarkErrorHandling] Unhandled Error&quot;, props&lt;{ error: any }&gt;())</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Action that requires to display an error message as a toast notification</p>
+<p>Parameter:</p>
+<ul>
+<li>error - The error to display</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
