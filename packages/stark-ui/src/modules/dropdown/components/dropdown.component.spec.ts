@@ -2,8 +2,8 @@
 import { Component, DebugElement, ViewChild } from "@angular/core";
 import { UntypedFormControl, ReactiveFormsModule } from "@angular/forms";
 import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
-import { MatOptionModule } from "@angular/material/core";
-import { MatSelectModule } from "@angular/material/select";
+import { MatLegacyOptionModule as MatOptionModule } from "@angular/material/legacy-core";
+import { MatLegacySelectModule as MatSelectModule } from "@angular/material/legacy-select";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { StarkDropdownComponent } from "./dropdown.component";
 import { CommonModule } from "@angular/common";

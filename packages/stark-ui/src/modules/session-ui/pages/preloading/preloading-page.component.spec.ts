@@ -3,8 +3,8 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from "@angul
 import { of, throwError } from "rxjs";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
-import { MatCardModule } from "@angular/material/card";
-import { MatButtonModule } from "@angular/material/button";
+import { MatLegacyCardModule as MatCardModule } from "@angular/material/legacy-card";
+import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
 import {
 	STARK_LOGGING_SERVICE,
 	STARK_ROUTING_SERVICE,

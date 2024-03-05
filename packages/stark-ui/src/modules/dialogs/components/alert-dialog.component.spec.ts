@@ -2,7 +2,11 @@
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from "@angular/core/testing";
 import { CommonModule } from "@angular/common";
 import { Component, ComponentFactoryResolver } from "@angular/core";
-import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import {
+	MatLegacyDialog as MatDialog,
+	MatLegacyDialogModule as MatDialogModule,
+	MatLegacyDialogRef as MatDialogRef
+} from "@angular/material/legacy-dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";

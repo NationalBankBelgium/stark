@@ -82,7 +82,7 @@ $typography-theme: (
 }
 
 //TO DO: Document correspondance with html tags
-$typography-config: mat.define-typography-config(
+$typography-config: mat.define-legacy-typography-config(
   $font-family: map.get($typography-theme, font-family),
   $display-4: define-typography-level-from-list(map.get($typography-theme, display-4)),
   $display-3: define-typography-level-from-list(map.get($typography-theme, display-3)),

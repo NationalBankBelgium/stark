@@ -85,7 +85,7 @@
     );
   }
 
-  @include mat.all-component-themes($material-theme-config);
+  @include mat.all-legacy-component-themes($material-theme-config);
 
   @if $stark-theme-config == null {
     $stark-theme-config: stark-palette.$stark-base-theme;

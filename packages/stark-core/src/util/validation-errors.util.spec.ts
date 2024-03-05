@@ -55,7 +55,7 @@ describe("Util: ValidationErrorsUtil", () => {
 
 			try {
 				StarkValidationErrorsUtil.throwOnError(errors);
-			} catch (e:any) {
+			} catch (e: any) {
 				expect(e.message).toContain("Validation errors");
 				expect(e.message.match(errorNameRegExp).length).toBe(1);
 				expect(e.message.match(errorLastNameRegExp).length).toBe(1);
@@ -79,7 +79,7 @@ describe("Util: ValidationErrorsUtil", () => {
 
 			try {
 				StarkValidationErrorsUtil.throwOnError(errors);
-			} catch (e:any) {
+			} catch (e: any) {
 				expect(e.message).toContain("Validation errors");
 				expect(e.message.match(errorIdRegExp).length).toBe(2);
 				expect(e.message.match(errorDescriptionRegExp).length).toBe(1);

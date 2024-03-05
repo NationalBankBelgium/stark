@@ -17,8 +17,8 @@ import {
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { UntypedFormControl } from "@angular/forms";
-import { MenuPositionY } from "@angular/material/menu";
-import { MatColumnDef } from "@angular/material/table";
+import { LegacyMenuPositionY as MenuPositionY } from "@angular/material/legacy-menu";
+import { MatLegacyColumnDef as MatColumnDef } from "@angular/material/legacy-table";
 import { distinctUntilChanged } from "rxjs/operators";
 import isEqual from "lodash-es/isEqual";
 import get from "lodash-es/get";

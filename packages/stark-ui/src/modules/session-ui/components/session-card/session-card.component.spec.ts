@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { MatCardModule } from "@angular/material/card";
+import { MatLegacyCardModule as MatCardModule } from "@angular/material/legacy-card";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppLogoModule } from "@nationalbankbelgium/stark-ui/src/modules/app-logo";

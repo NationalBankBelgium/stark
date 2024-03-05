@@ -6,8 +6,8 @@ import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
+import { MatLegacyFormField as MatFormField, MatLegacyFormFieldModule as MatFormFieldModule } from "@angular/material/legacy-form-field";
+import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";

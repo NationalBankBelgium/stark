@@ -21,7 +21,7 @@ import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from "@ang
 import moment from "moment";
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NgControl, ValidationErrors, Validator } from "@angular/forms";
 import { MAT_DATE_FORMATS, MatDateFormats } from "@angular/material/core";
-import { MatFormFieldControl } from "@angular/material/form-field";
+import { MatLegacyFormFieldControl as MatFormFieldControl } from "@angular/material/legacy-form-field";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";

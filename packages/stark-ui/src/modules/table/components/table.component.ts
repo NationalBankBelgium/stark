@@ -22,8 +22,12 @@ import {
 	ContentChild
 } from "@angular/core";
 import { UntypedFormControl } from "@angular/forms";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { MatColumnDef, MatTable, MatTableDataSource } from "@angular/material/table";
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from "@angular/material/legacy-dialog";
+import {
+	MatLegacyColumnDef as MatColumnDef,
+	MatLegacyTable as MatTable,
+	MatLegacyTableDataSource as MatTableDataSource
+} from "@angular/material/legacy-table";
 import { SelectionChange, SelectionModel } from "@angular/cdk/collections";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
