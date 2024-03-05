@@ -140,7 +140,7 @@
     "@types/core-js": "~2.5.4",
     "@types/hammerjs": "~2.0.39",
     "@types/node": "^18.19.4",
-    "@types/webpack-env": "~1.16.0",
+    "@types/webpack-env": "~1.18.4",
     "cross-env": "~7.0.3",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-sonarjs": "^0.19.0",
