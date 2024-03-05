@@ -1,3 +1,30 @@
+# [12.0.0-beta.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.0...12.0.0-beta.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* **release:** set stark-versions to `next` for the `starter` ([a96138f](https://github.com/nationalbankbelgium/stark/commit/a96138f19695f59a12d9151479a6ca296318fa68))
+* **stark-core:** update `rxjs` and `[@ngrx](https://github.com/ngrx)` ([cd9c317](https://github.com/nationalbankbelgium/stark/commit/cd9c317bde5f5f1589f4e51b468afaff3b44b087))
+* **stark-ui:** update `rxjs` and `[@ngrx](https://github.com/ngrx)` ([e08c19d](https://github.com/nationalbankbelgium/stark/commit/e08c19dc49a67714ac028b6faee0c0493cce7aee))
+
+
+### Features
+
+* **showcase:** update `Angular` from `13.0.0` to `14.0.0` ([16b4ca4](https://github.com/nationalbankbelgium/stark/commit/16b4ca4f2d9456e8c23fbf137b157e94f5c7692f))
+* **showcase:** update `rxjs` ([4339893](https://github.com/nationalbankbelgium/stark/commit/4339893c4e52a64c0112063ad6ae615f9d766d2a))
+* **stark-all:** update `Angular` from `13.0.0` to `14.0.0` ([0caa789](https://github.com/nationalbankbelgium/stark/commit/0caa789200695f234c21b1b48290e7bce2cdd86b))
+* **stark-all:** update `rxjs`and `[@ngrx](https://github.com/ngrx)` ([ead28b1](https://github.com/nationalbankbelgium/stark/commit/ead28b129c6a752f670dd17fa195e6e592f811c8))
+* **stark-build:** update `Angular` from `13.0.0` to `14.0.0` ([4cd9c6a](https://github.com/nationalbankbelgium/stark/commit/4cd9c6a3bf34f51a3330a06a9e5bde2d83527b9a))
+* **stark-core:** update `Angular` from `13.0.0` to `14.0.0` ([74cdee4](https://github.com/nationalbankbelgium/stark/commit/74cdee4e744d51198b4ba323852b55a0162ba3be))
+* **stark-rbac:** update `Angular` from `13.0.0` to `14.0.0` ([6275964](https://github.com/nationalbankbelgium/stark/commit/627596428f44d259a21b493ae7d38b9eef9877e7))
+* **stark-testing:** update `Angular` from `13.0.0` to `14.0.0` ([adf96ff](https://github.com/nationalbankbelgium/stark/commit/adf96ffb746d104082bd96912b439c3680a51e11))
+* **stark-testing:** upgrade `karma` and `jasmine` dependencies ([202cfd8](https://github.com/nationalbankbelgium/stark/commit/202cfd84f1496de95ed6bb158152c61fa0f7f6dc))
+* **stark-ui:** update `Angular` from `13.0.0` to `14.0.0` ([5a4b14c](https://github.com/nationalbankbelgium/stark/commit/5a4b14ccf4e6dbbcf16442c4ff032fcd5616b979))
+* **starter:** update `Angular` from `13.0.0` to `14.0.0` ([204696e](https://github.com/nationalbankbelgium/stark/commit/204696e7a4ded0490022d6a6c45b698ffabba1b2))
+* **starter:** update `rxjs` ([e5d9b74](https://github.com/nationalbankbelgium/stark/commit/e5d9b74779bde604f9d57144c01d33a29930a380))
+
+
+
 # [12.0.0-beta.0](https://github.com/nationalbankbelgium/stark/compare/10.2.0...12.0.0-beta.0) (2024-01-24)
 
 
