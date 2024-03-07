@@ -72,6 +72,7 @@ bash.exe.stackdump
 *.css.shim.ts
 *.ngsummary.json
 *.shim.ngstyle.ts
+**/.angular/
 
 # Starter exception
 starter/package-lock.json
