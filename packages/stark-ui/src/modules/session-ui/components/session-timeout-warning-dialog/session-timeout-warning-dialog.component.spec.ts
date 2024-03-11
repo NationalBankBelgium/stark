@@ -4,11 +4,11 @@ import { CommonModule } from "@angular/common";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import {
-	MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-	MatLegacyDialog as MatDialog,
-	MatLegacyDialogModule as MatDialogModule,
-	MatLegacyDialogRef as MatDialogRef
-} from "@angular/material/legacy-dialog";
+	MAT_DIALOG_DATA,
+	MatDialog,
+	MatDialogModule,
+	MatDialogRef
+} from "@angular/material/dialog";
 import { StarkSessionTimeoutWarningDialogComponent } from "./session-timeout-warning-dialog.component";
 import { Observer } from "rxjs";
 import SpyObj = jasmine.SpyObj;

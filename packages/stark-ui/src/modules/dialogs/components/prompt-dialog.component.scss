@@ -5,7 +5,7 @@
 
 @mixin stark-prompt-dialog() {
   .stark-prompt-dialog {
-    .mat-form-field.prompt-text {
+    .mat-mdc-form-field.prompt-text {
       display: block;
       margin: 16px 0;
     }

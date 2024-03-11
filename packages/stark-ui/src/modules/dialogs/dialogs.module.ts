@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
-import { MatLegacyDialogModule as MatDialogModule } from "@angular/material/legacy-dialog";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
-import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
+import { MatInputModule } from "@angular/material/input";
 import { TranslateModule } from "@ngx-translate/core";
 import { StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent } from "./components";
 

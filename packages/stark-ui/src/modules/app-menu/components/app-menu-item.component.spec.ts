@@ -5,7 +5,7 @@ import { UIRouterModule } from "@uirouter/angular";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { MatIconTestingModule } from "@angular/material/icon/testing";
-import { MatLegacyListModule as MatListModule } from "@angular/material/legacy-list";
+import { MatListModule } from "@angular/material/list";
 import { STARK_LOGGING_SERVICE, STARK_ROUTING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService, MockStarkRoutingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkAppMenuItemComponent } from "./app-menu-item.component";

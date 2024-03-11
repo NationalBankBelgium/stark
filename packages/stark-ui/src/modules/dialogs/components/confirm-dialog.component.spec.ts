@@ -3,10 +3,10 @@ import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from
 import { CommonModule } from "@angular/common";
 import { Component, ComponentFactoryResolver } from "@angular/core";
 import {
-	MatLegacyDialog as MatDialog,
-	MatLegacyDialogModule as MatDialogModule,
-	MatLegacyDialogRef as MatDialogRef
-} from "@angular/material/legacy-dialog";
+	MatDialog,
+	MatDialogModule,
+	MatDialogRef
+} from "@angular/material/dialog";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { OverlayContainer } from "@angular/cdk/overlay";

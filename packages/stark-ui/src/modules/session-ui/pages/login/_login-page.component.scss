@@ -5,7 +5,7 @@
 
 @mixin stark-login-page() {
   .stark-login-page {
-    .mat-card-content {
+    .mat-mdc-card-content {
       a {
         margin-left: -16px;
         margin-right: -16px;
@@ -17,7 +17,7 @@
         &:hover {
           background-color: rgba(0, 0, 0, 0.1);
         }
-
+        /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
         .mat-list-text h3 {
           font-weight: bold;
         }

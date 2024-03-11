@@ -5,7 +5,7 @@
 
 @mixin stark-language-selector() {
   .stark-language-selector.stark-full-width {
-    .mat-form-field {
+    .mat-mdc-form-field {
       width: 100%;
     }
   }

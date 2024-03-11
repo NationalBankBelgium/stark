@@ -16,10 +16,10 @@ import {
 	ViewEncapsulation
 } from "@angular/core";
 import {
-	MatLegacyPaginator as MatPaginator,
-	MatLegacyPaginatorIntl as MatPaginatorIntl,
-	LegacyPageEvent as PageEvent
-} from "@angular/material/legacy-paginator";
+	MatPaginator,
+	MatPaginatorIntl,
+	PageEvent
+} from "@angular/material/paginator";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginationConfig } from "./pagination-config.intf";
 import { StarkPaginateEvent } from "./paginate-event.intf";

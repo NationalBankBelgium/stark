@@ -29,10 +29,12 @@
     }
 
     .search-field {
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-label {
         font-size: 15px;
       }
-
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-wrapper {
         margin-left: 5px;
         margin-right: 5px;
@@ -40,22 +42,22 @@
         border-radius: 10px;
         height: 40px;
         padding-bottom: 0;
-
+        /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
         .mat-form-field-label {
           line-height: 19px;
         }
       }
 
-      .mat-input-element {
+      .mat-mdc-input-element {
         width: 200px;
       }
-
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-infix {
         border: 0;
         text-indent: 5px;
         margin-top: 4px;
       }
-
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-underline {
         display: none;
       }
@@ -64,6 +66,7 @@
 
   @media #{$mobile-only-query} {
     .search-field {
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-wrapper {
         margin-left: 5px;
         margin-right: 5px;
@@ -72,21 +75,21 @@
         height: 40px;
         padding-bottom: 0;
       }
-
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-label {
         font-size: 15px;
       }
 
-      .mat-input-element {
+      .mat-mdc-input-element {
         width: 130px;
       }
-
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-infix {
         border: 0;
         text-indent: 5px;
         margin-top: 4px;
       }
-
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-underline {
         display: none;
       }

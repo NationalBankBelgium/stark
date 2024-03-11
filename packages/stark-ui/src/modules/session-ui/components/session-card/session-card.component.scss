@@ -10,7 +10,9 @@
 
     width: 100vw;
     height: 100vh;
-
+    /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+    /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+    /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
     mat-card {
       overflow: hidden;
       min-width: 500px;
@@ -23,10 +25,11 @@
         background-image: url(/assets/stark-core/logo/stark_header_bg.png);
         background-size: cover;
       }
-
+      /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+      /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
       mat-card-header {
         @include center-content;
-
+        /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
         mat-card-title h1 {
           margin: 16px 0;
         }

@@ -35,7 +35,7 @@ $stark-table-multifilters-side-padding: 10px;
         .form-field-name {
           flex-grow: 1;
         }
-
+        /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
         .form-field-order .mat-form-field-infix {
           width: 80px;
         }

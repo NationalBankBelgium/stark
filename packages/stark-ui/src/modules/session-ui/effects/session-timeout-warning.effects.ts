@@ -3,7 +3,7 @@ import { Observable, of } from "rxjs";
 import { exhaustMap, map, takeUntil } from "rxjs/operators";
 import { STARK_SESSION_SERVICE, StarkSessionActions, StarkSessionService } from "@nationalbankbelgium/stark-core";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
-import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from "@ngrx/effects";
 import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities";
 

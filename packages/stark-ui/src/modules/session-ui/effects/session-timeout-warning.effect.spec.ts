@@ -4,11 +4,11 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { EffectNotification } from "@ngrx/effects";
 import {
-	MatLegacyDialog as MatDialog,
-	MatLegacyDialogModule as MatDialogModule,
-	MatLegacyDialogRef as MatDialogRef
-} from "@angular/material/legacy-dialog";
-import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
+	MatDialog,
+	MatDialogModule,
+	MatDialogRef
+} from "@angular/material/dialog";
+import { MatButtonModule } from "@angular/material/button";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_SESSION_SERVICE, StarkSessionActions, StarkSessionService } from "@nationalbankbelgium/stark-core";
 import { MockStarkSessionService } from "@nationalbankbelgium/stark-core/testing";

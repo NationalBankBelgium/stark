@@ -2,9 +2,9 @@
 import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { MatLegacyFormFieldModule as MatFormFieldModule } from "@angular/material/legacy-form-field";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { DateAdapter } from "@angular/material/core";
-import { MatLegacySelectModule as MatSelectModule } from "@angular/material/legacy-select";
+import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 /* stark-core imports */

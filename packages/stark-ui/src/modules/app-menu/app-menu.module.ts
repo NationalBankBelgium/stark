@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
-import { MatLegacyListModule as MatListModule } from "@angular/material/legacy-list";
+import { MatListModule } from "@angular/material/list";
 import { TranslateModule } from "@ngx-translate/core";
 import { UIRouterModule } from "@uirouter/angular";
 import { StarkAppMenuComponent, StarkAppMenuItemComponent } from "./components";

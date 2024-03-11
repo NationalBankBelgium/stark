@@ -17,7 +17,6 @@
 		#dropdownDetailTrigger="matMenuTrigger"
 		[matMenuTriggerFor]="dropdownDetail"
 		[class.is-open]="dropdownDetailTrigger.menuOpen"
-		mat-button
 	>
 		<mat-icon svgIcon="menu-down"></mat-icon>
 	</button>
@@ -30,7 +29,6 @@
 
 <div *ngIf="mode === 'menu'" class="stark-app-data menu">
 	<button
-		mat-button
 		mat-icon-button
 		aria-label="Application Data"
 		[matMenuTriggerFor]="menuDetail"

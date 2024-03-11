@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { RawParams } from "@uirouter/core";
 import { CommonModule } from "@angular/common";
-import { MatLegacyCardModule as MatCardModule } from "@angular/material/legacy-card";
-import { MatLegacyListModule as MatListModule } from "@angular/material/legacy-list";
+import { MatCardModule } from "@angular/material/card";
+import { MatListModule } from "@angular/material/list";
 import { MatDividerModule } from "@angular/material/divider";
 import {
 	STARK_LOGGING_SERVICE,

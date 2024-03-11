@@ -56,7 +56,7 @@
     .stark-action-bar-full {
       background-color: rgba(0, 0, 0, 0.85);
 
-      .mat-icon-button {
+      .mat-mdc-icon-button {
         @include stark-button-theme.stark-button-color(rgba($color: #fff, $alpha: 0.8), mat-palette.$light-primary-text);
       }
 

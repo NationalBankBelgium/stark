@@ -32,7 +32,7 @@ import {
 } from "@angular/forms";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
-import { MatLegacyFormField as MatFormField, MatLegacyFormFieldControl as MatFormFieldControl } from "@angular/material/legacy-form-field";
+import { MatFormField, MatFormFieldControl } from "@angular/material/form-field";
 import moment from "moment";
 import { Subject, Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";

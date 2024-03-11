@@ -2,7 +2,8 @@
 
 @mixin stark-date-time-picker() {
   // FIXME Still necessary with NG12 ?
-  .mat-form-field .mat-form-field-wrapper.stark-date-time-picker-form-field-wrapper {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+  .mat-mdc-form-field .mat-form-field-wrapper.stark-date-time-picker-form-field-wrapper {
     width: 280px;
   }
 

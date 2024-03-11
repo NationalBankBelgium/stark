@@ -1,11 +1,11 @@
 import { Component, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import {
-	MAT_LEGACY_SNACK_BAR_DATA as MAT_SNACK_BAR_DATA,
-	MatLegacySnackBar as MatSnackBar,
-	MatLegacySnackBarRef as MatSnackBarRef
-} from "@angular/material/legacy-snack-bar";
-import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
+	MAT_SNACK_BAR_DATA,
+	MatSnackBar,
+	MatSnackBarRef
+} from "@angular/material/snack-bar";
+import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatIconTestingModule } from "@angular/material/icon/testing";
 import { TranslateModule } from "@ngx-translate/core";

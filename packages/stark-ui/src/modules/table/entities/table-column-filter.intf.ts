@@ -1,4 +1,4 @@
-import { LegacyMenuPositionY as MenuPositionY } from "@angular/material/legacy-menu";
+import { MenuPositionY } from "@angular/material/menu";
 
 /**
  * Definition of the filter in the {@link StarkTableComponent}

@@ -4,15 +4,15 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { Component, ViewChild } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { MatLegacyMenuModule as MatMenuModule } from "@angular/material/legacy-menu";
-import { MatLegacyTableModule as MatTableModule } from "@angular/material/legacy-table";
-import { MatLegacyCheckboxModule as MatCheckboxModule } from "@angular/material/legacy-checkbox";
-import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/legacy-tooltip";
-import { MatLegacyDialogModule as MatDialogModule } from "@angular/material/legacy-dialog";
-import { MatLegacySelectModule as MatSelectModule } from "@angular/material/legacy-select";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatTableModule } from "@angular/material/table";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatSelectModule } from "@angular/material/select";
 import { MatIconModule } from "@angular/material/icon";
 import { MatIconTestingModule } from "@angular/material/icon/testing";
-import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
+import { MatInputModule } from "@angular/material/input";
 import { By } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
@@ -1656,7 +1656,7 @@ describe("TableComponent", () => {
 				component.ngAfterViewInit();
 
 				selectAllButton = hostFixture.nativeElement.querySelector(
-					"table thead tr th.mat-column-select mat-checkbox .mat-checkbox-inner-container"
+					"table thead tr th.mat-column-select mat-mdc-checkbox .mdc-checkbox-inner-container"
 				);
 			});
 

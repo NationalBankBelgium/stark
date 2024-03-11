@@ -1,36 +1,37 @@
 @use "../media-queries" as *;
 
 @mixin stark-card() {
-  .mat-card {
+  .mat-mdc-card {
     &.stark-card {
       display: flex;
       flex-direction: column;
       margin-bottom: 32px;
       padding: 0;
-      .mat-card-header {
+      .mat-mdc-card-header {
         align-items: center;
         display: flex;
         justify-content: space-between;
         margin-bottom: 16px;
         padding: 8px 16px;
+        /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
         .mat-card-header-text {
           flex-grow: 1;
           margin: 0;
         }
-        .mat-card-title,
+        .mat-mdc-card-title,
         .mat-card-title > * {
           color: inherit;
           margin: 0;
         }
-        .mat-card-subtitle,
+        .mat-mdc-card-subtitle,
         .mat-card-subtitle > * {
           color: inherit;
           margin: 0;
           opacity: 0.7;
         }
       }
-      .mat-card-content,
-      .mat-card-actions {
+      .mat-mdc-card-content,
+      .mat-mdc-card-actions {
         margin: 0 16px 16px;
         padding: 0;
         &:last-child {
@@ -45,14 +46,14 @@
   }
 
   @media #{$tablet-query} {
-    .mat-card {
+    .mat-mdc-card {
       &.stark-card {
-        .mat-card-header {
+        .mat-mdc-card-header {
           padding: 8px 24px;
           margin-bottom: 24px;
         }
-        .mat-card-content,
-        .mat-card-actions {
+        .mat-mdc-card-content,
+        .mat-mdc-card-actions {
           margin: 0 24px 24px;
           &:last-child {
             margin-bottom: 24px;

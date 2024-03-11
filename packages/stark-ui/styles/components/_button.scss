@@ -1,11 +1,11 @@
 @mixin stark-button() {
-  .mat-button,
-  .mat-icon-button,
-  .mat-stroked-button,
-  .mat-flat-button,
-  .mat-raised-button,
-  .mat-fab,
-  .mat-mini-fab {
+  .mat-mdc-button,
+  .mat-mdc-icon-button,
+  .mat-mdc-outlined-button,
+  .mat-mdc-unelevated-button,
+  .mat-mdc-raised-button,
+  .mat-mdc-fab,
+  .mat-mdc-mini-fab {
     text-transform: uppercase;
   }
 }

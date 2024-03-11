@@ -7,7 +7,7 @@
   .stark-minimap {
     display: flex;
 
-    button.mat-icon-button .mat-icon {
+    button.mat-mdc-icon-button .mat-icon {
       transition: transform 300ms linear;
 
       &.open {
@@ -39,7 +39,7 @@
   }
 
   // The mat-menu is rendered outside of the stark-minimap component
-  .mat-menu-content .mat-menu-item.stark-minimap-menu-item {
+  .mat-mdc-menu-content .mat-mdc-menu-item.stark-minimap-menu-item {
     height: 35px;
     line-height: 35px;
   }

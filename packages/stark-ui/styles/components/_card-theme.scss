@@ -4,7 +4,7 @@
 @mixin stark-card-theme($material-theme-config, $stark-theme-config) {
   $primary-palette: map.get($material-theme-config, primary);
 
-  .mat-card.stark-card .mat-card-header {
+  .mat-mdc-card.stark-card .mat-mdc-card-header {
     background-color: mat.get-color-from-palette($primary-palette, 800);
     color: mat.get-contrast-color-from-palette($primary-palette, 800);
   }

@@ -20,9 +20,9 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NgControl, ValidationErrors, Validator, Validators } from "@angular/forms";
 import { Subject, Subscription } from "rxjs";
-import { MatLegacyFormField as MatFormField, MatLegacyFormFieldControl as MatFormFieldControl } from "@angular/material/legacy-form-field";
+import { MatFormField, MatFormFieldControl } from "@angular/material/form-field";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
-import { MatLegacySelect as MatSelect, MatLegacySelectChange as MatSelectChange } from "@angular/material/legacy-select";
+import { MatSelect, MatSelectChange } from "@angular/material/select";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TranslateService } from "@ngx-translate/core";
 import isEqual from "lodash-es/isEqual";

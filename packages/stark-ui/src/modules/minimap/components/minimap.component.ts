@@ -12,7 +12,7 @@ import {
 	ViewChild,
 	ViewEncapsulation
 } from "@angular/core";
-import { MatLegacyMenuTrigger as MatMenuTrigger } from "@angular/material/legacy-menu";
+import { MatMenuTrigger } from "@angular/material/menu";
 import { Subscription } from "rxjs";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";

@@ -7,7 +7,7 @@
 }
 
 // the line-height of the mat-form-field needs to be reset, because of the line-height set in _typography.scss
-.mat-form-field {
+.mat-mdc-form-field {
   line-height: initial;
 }
 
@@ -24,7 +24,7 @@
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   /* IE10+ CSS styles go here */
   /** IE 11 fixes */
-  .mat-select-panel {
+  .mat-mdc-select-panel {
     min-width: inherit !important;
   }
   .cdk-overlay-pane {
@@ -34,6 +34,7 @@
 
 // Needed since @angular/Material v7, the icons are slightly off center.
 // 2.5px was chosen as the offset that worked best across most popular browsers
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
 .mat-button-wrapper .mat-icon {
   margin-top: -2.5px;
 }
