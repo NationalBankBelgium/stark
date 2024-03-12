@@ -1,10 +1,11 @@
-import { ArrayNotEmpty, IsDefined, IsNotEmpty, IsString, ValidateNested } from "class-validator";
+import { ArrayNotEmpty, IsDefined, IsNotEmpty, IsString } from "class-validator";
 import { autoserialize } from "cerialize";
 
 import { StarkApplicationMetadata } from "./application-metadata.entity.intf";
 import { StarkLanguageImpl } from "../language";
 import { StarkLanguage } from "../language/language.entity.intf";
 import { StarkLanguages } from "../language/language.constants";
+import { StarkArrayIsValid } from "../../../validation/decorators";
 
 /**
  * This class is only for serialization purposes
@@ -45,7 +46,7 @@ export class StarkApplicationMetadataImpl implements StarkApplicationMetadata {
 
 	@IsDefined({ groups: ["settings"] })
 	@ArrayNotEmpty({ groups: ["settings"] })
-	@ValidateNested({ groups: ["settings"], each: true }) // validate each item of the array
+	@StarkArrayIsValid({ groups: ["settings"] })
 	public supportedLanguages: StarkLanguageImpl[] = [];
 
 	/**
