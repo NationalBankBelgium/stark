@@ -61,7 +61,6 @@ describe("Service: StarkSessionService", () => {
 		appConfig.keepAliveInterval = 45;
 		appConfig.keepAliveUrl = "http://my.backend/keepalive";
 		appConfig.logoutUrl = "http://localhost:5000/logout";
-		appConfig.publicApp = false;
 
 		mockLogger = new MockStarkLoggingService(mockCorrelationId, mockCorrelationIdHeaderName);
 		mockRoutingService = new MockStarkRoutingService();

@@ -152,12 +152,10 @@ describe("Util: ConfigurationUtil", () => {
 			(appConfig: StarkApplicationConfig) => {
 				appConfig.keepAliveUrl = "http://some.backend/keepalive";
 				appConfig.logoutUrl = "http://some.backend/logout";
-				appConfig.publicApp = true;
 			},
 			(appConfig: StarkApplicationConfig) => {
 				expect(appConfig.keepAliveUrl).toBeDefined();
 				expect(appConfig.logoutUrl).toBeDefined();
-				expect(appConfig.publicApp).toBeDefined();
 				// properties that are always defined due to the defaults set in the constructor
 				expect(appConfig.sessionTimeout).toBeDefined();
 				expect(appConfig.sessionTimeoutWarningPeriod).toBeDefined();
@@ -175,7 +173,6 @@ describe("Util: ConfigurationUtil", () => {
 				} else {
 					expect(appConfig.keepAliveUrl).toBeUndefined();
 					expect(appConfig.logoutUrl).toBeUndefined();
-					expect(appConfig.publicApp).toBeUndefined();
 				}
 				// properties that are always defined due to the defaults set in the constructor
 				expect(appConfig.sessionTimeout).toBeDefined();
@@ -242,12 +239,16 @@ describe("Util: ConfigurationUtil", () => {
 				appConfig = new StarkApplicationConfigImpl();
 			});
 
-			it("should NOT throw any error when the AppConfig is validated without specifying a group", () => {
-				expect(() => StarkConfigurationUtil.validateConfig(appConfig, [], errorMessagePrefix)).not.toThrow();
+			it("should throw an error when the AppConfig is validated without specifying a group", () => {
+				expect(() => StarkConfigurationUtil.validateConfig(appConfig, [], errorMessagePrefix)).toThrowError(
+					/an unknown value was passed to the validate function/
+				);
 			});
 
-			it("should NOT throw any error when the AppConfig is validated with an unknown group", () => {
-				expect(() => StarkConfigurationUtil.validateConfig(appConfig, [<any>"whatever"], errorMessagePrefix)).not.toThrow();
+			it("should throw an error when the AppConfig is validated with an unknown group", () => {
+				expect(() => StarkConfigurationUtil.validateConfig(appConfig, [<any>"whatever"], errorMessagePrefix)).toThrowError(
+					/an unknown value was passed to the validate function/
+				);
 			});
 		});
 	});
@@ -280,12 +281,16 @@ describe("Util: ConfigurationUtil", () => {
 				appMetadata = new StarkApplicationMetadataImpl();
 			});
 
-			it("should NOT throw any error when the appMetadata is validated without specifying a group", () => {
-				expect(() => StarkConfigurationUtil.validateMetadata(appMetadata, [], errorMessagePrefix)).not.toThrow();
+			it("should throw an error when the appMetadata is validated without specifying a group", () => {
+				expect(() => StarkConfigurationUtil.validateMetadata(appMetadata, [], errorMessagePrefix)).toThrowError(
+					/an unknown value was passed to the validate function/
+				);
 			});
 
-			it("should NOT throw any error when the appMetadata is validated with an unknown group", () => {
-				expect(() => StarkConfigurationUtil.validateMetadata(appMetadata, [<any>"whatever"], errorMessagePrefix)).not.toThrow();
+			it("should throw an error when the appMetadata is validated with an unknown group", () => {
+				expect(() => StarkConfigurationUtil.validateMetadata(appMetadata, [<any>"whatever"], errorMessagePrefix)).toThrowError(
+					/an unknown value was passed to the validate function/
+				);
 			});
 		});
 	});
