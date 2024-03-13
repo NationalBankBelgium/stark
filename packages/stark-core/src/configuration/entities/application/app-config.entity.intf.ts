@@ -68,7 +68,7 @@ export interface StarkApplicationConfig {
 	loggingFlushResourceName?: string;
 
 	/**
-	 * Option to disable the logging flush if it not needed for the application.
+	 * Option to disable the logging flush if it is not needed for the application.
 	 *
 	 * Default: `false`
 	 */
@@ -139,10 +139,9 @@ export interface StarkApplicationConfig {
 	defaultLanguage: string;
 
 	/**
-	 * Whether the application is public or private.
-	 * Public applications don't require authentication and usually provide read-only access to information
+	 * @deprecated This property is not used anymore. It will be removed in future versions.
 	 */
-	publicApp: boolean;
+	publicApp?: boolean;
 
 	/**
 	 * Map containing the different {@link StarkBackend} objects that the application will interact with.

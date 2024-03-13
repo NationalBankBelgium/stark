@@ -1,4 +1,16 @@
-import { IsBoolean, IsDefined, IsNotEmpty, IsPositive, IsString, IsUrl, Matches, Min, ValidateIf, validateSync } from "class-validator";
+import {
+	Allow,
+	IsBoolean,
+	IsDefined,
+	IsNotEmpty,
+	IsPositive,
+	IsString,
+	IsUrl,
+	Matches,
+	Min,
+	ValidateIf,
+	validateSync
+} from "class-validator";
 import { autoserialize, autoserializeAs, Deserialize } from "cerialize";
 import { StarkApplicationConfig } from "./app-config.entity.intf";
 import { StarkBackend, StarkBackendImpl } from "../../../modules/http/entities/backend";
@@ -127,10 +139,8 @@ export class StarkApplicationConfigImpl implements StarkApplicationConfig {
 	@autoserialize
 	public baseUrl!: string;
 
-	@IsDefined({ groups: ["session"] })
-	@IsBoolean({ groups: ["session"] })
-	@autoserialize
-	public publicApp!: boolean;
+	@Allow()
+	public publicApp?: boolean;
 
 	@StarkMapNotEmpty({ groups: ["http"] })
 	@StarkMapIsValid({ groups: ["http"] })

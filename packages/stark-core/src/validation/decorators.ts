@@ -1,3 +1,4 @@
+export * from "./decorators/array-is-valid";
 export * from "./decorators/is-bban";
 export * from "./decorators/is-bic";
 export * from "./decorators/is-company-number";
