@@ -1656,8 +1656,11 @@ describe("TableComponent", () => {
 				component.ngAfterViewInit();
 
 				selectAllButton = hostFixture.nativeElement.querySelector(
-					"table thead tr th.mat-column-select mat-mdc-checkbox .mdc-checkbox-inner-container"
+					"table thead tr th.mat-column-select mat-checkbox .mdc-form-field .mdc-checkbox .mdc-checkbox__native-control"
 				);
+				//   .mdc-form-field .mdc-checkbox
+				expect(selectAllButton).toBeDefined();
+				expect(selectAllButton).not.toBeNull();
 			});
 
 			it("should select all rows when clicking the select all", () => {

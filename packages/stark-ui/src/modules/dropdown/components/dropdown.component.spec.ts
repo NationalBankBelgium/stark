@@ -147,8 +147,8 @@ describe("DropdownComponent", () => {
 	const dropdownOptionLabelProperty = "label";
 
 	const matSelectSelector = "mat-select";
-	const matOptionSelector = ".mat-option";
-	const matOptionTextSelector = ".mat-option-text";
+	const matOptionSelector = ".mat-mdc-option";
+	const matOptionTextSelector = ".mdc-list-item__primary-text";
 	const matSelectTagSelector = "<mat-select";
 
 	const reflectIdAttr = "ng-reflect-id";
@@ -172,7 +172,7 @@ describe("DropdownComponent", () => {
 	});
 
 	function openMatSelect(hostFixture: ComponentFixture<any>): void {
-		const trigger: HTMLElement = hostFixture.debugElement.query(By.css(".mat-select-trigger")).nativeElement;
+		const trigger: HTMLElement = hostFixture.debugElement.query(By.css(".mat-mdc-select-trigger")).nativeElement;
 		trigger.click();
 		hostFixture.detectChanges();
 	}
@@ -326,7 +326,7 @@ describe("DropdownComponent", () => {
 		});
 
 		describe("should render checkboxes in 'mat-option' based on 'multiSelect' value", () => {
-			const checkboxSelector = ".mat-option .mat-pseudo-checkbox";
+			const checkboxSelector = ".mat-mdc-option .mat-pseudo-checkbox";
 
 			it("should display a checkbox for every option in the dropdown when multiSelect is set to 'true'", () => {
 				hostComponent.multiSelect = true;

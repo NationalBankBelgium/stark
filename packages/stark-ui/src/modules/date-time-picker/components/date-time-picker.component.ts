@@ -32,7 +32,7 @@ import {
 } from "@angular/forms";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
-import { MatFormField, MatFormFieldControl } from "@angular/material/form-field";
+import { MatFormFieldControl } from "@angular/material/form-field";
 import moment from "moment";
 import { Subject, Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
@@ -523,7 +523,6 @@ export class StarkDateTimePickerComponent
 		private _fm: FocusMonitor,
 		elementRef: ElementRef,
 		renderer: Renderer2,
-		private matFormField: MatFormField,
 		private injector: Injector,
 		private cdRef: ChangeDetectorRef,
 		private translateService: TranslateService
@@ -559,8 +558,8 @@ export class StarkDateTimePickerComponent
 		}
 
 		// the parent node of the _connectionContainerRef is the 'div.form-field-wrapper' which defines the final width of the form field
-		const parentNode: HTMLElement = this.renderer.parentNode(this.matFormField._connectionContainerRef.nativeElement);
-		this.renderer.addClass(parentNode, `${componentName}-form-field-wrapper`);
+		/* const parentNode: HTMLElement = this.renderer.parentNode(this.matFormField._connectionContainerRef.nativeElement);
+		this.renderer.addClass(parentNode, `${componentName}-form-field-wrapper`); */
 
 		this.translateOnLangChangeSubscription = this.translateService.onLangChange.subscribe(() => {
 			// re-assign the placeholder to refresh the translation (see 'placeholder' setter)
