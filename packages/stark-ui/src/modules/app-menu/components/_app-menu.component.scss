@@ -20,7 +20,7 @@
       }
     }
 
-    .mat-nav-list {
+    .mat-mdc-nav-list {
       .mat-mdc-list-item {
         font-size: mat.font-size($typography-config, button);
         font-weight: mat.font-weight($typography-config, button);
@@ -28,25 +28,21 @@
         line-height: mat.line-height($typography-config, button);
 
         &.active {
-          /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
-          /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
-          .mat-list-text > * {
+          .mdc-list-item__primary-text > * {
             font-weight: bold;
             color: mat.get-color-from-palette($primary-palette, 500);
           }
         }
 
         @for $i from 2 through 3 {
-          /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
-          /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
-          &.stark-app-menu-item-level-#{$i} .mat-list-text {
+          &.stark-app-menu-item-level-#{$i} .mdc-list-item__primary-text {
             padding-left: #{$i * 20 - 20}px;
           }
         }
       }
     }
 
-    .mat-nav-list {
+    .mat-mdc-nav-list {
       padding-top: 0;
     }
 
