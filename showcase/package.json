@@ -62,7 +62,7 @@
     "ngc": "ngc",
     "ngcc": "ngcc",
     "node": "node",
-    "postinstall": "npm run webdriver:update && ngcc",
+    "postinstall": "ngcc",
     "postversion": "git push && git push --tags",
     "preclean:install": "npm run clean",
     "prettier-check": "prettier **/*.{css,js,json,md,pcss,scss,ts} --write",
