@@ -3,7 +3,13 @@ import { Observable } from "rxjs";
 import cloneDeep from "lodash-es/cloneDeep";
 // using the full path to import the "angular-in-memory-web-api" interfaces to avoid adding "@angular/http" to Showcase npm dependencies!
 // see https://github.com/angular/in-memory-web-api/issues/215
-import { InMemoryDbService, ParsedRequestUrl, RequestInfo, RequestInfoUtilities, ResponseOptions } from "angular-in-memory-web-api";
+import {
+	InMemoryDbService,
+	ParsedRequestUrl,
+	RequestInfo,
+	RequestInfoUtilities,
+	ResponseOptions
+} from "angular-in-memory-web-api/interfaces";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 
 const mockData: object = require("../../../../config/json-server/data.json");
