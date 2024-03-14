@@ -1,11 +1,13 @@
 .app-card mat-form-field.maximum-height {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-wrapper {
     padding-bottom: 40px;
-
+    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
     .mat-form-field-underline {
       bottom: 40px;
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
     .mat-form-field-subscript-wrapper {
       top: calc(100% - 40px);
     }

@@ -3,13 +3,14 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",
-    "target": "ES2020",
+    "target": "ES2022",
     "typeRoots": [
       "./node_modules/@types",
       "./node_modules/@nationalbankbelgium/stark-build/typings",
       "./node_modules/@nationalbankbelgium/stark-ui/typings"
     ],
-    "paths": {}
+    "paths": {},
+    "useDefineForClassFields": false
   },
   "exclude": ["node_modules", "dist", "src/assets"]
 }

@@ -13,17 +13,17 @@ example-viewer {
         border-radius: 0;
       }
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
     .mat-tab-body-wrapper {
       border-bottom: 1px solid #555;
     }
   }
 
-  .mat-tab-header {
+  .mat-mdc-tab-header {
     background-color: mat.get-color-from-palette(mat.$light-theme-background-palette, card);
   }
 
-  .mat-tab-body {
+  .mat-mdc-tab-body {
     background-color: stark-ui.$custom-dark-background;
   }
 

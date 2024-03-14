@@ -47,7 +47,8 @@
   }
 }
 
-.stark-app-bar-content-right-actions-alt .mat-icon-button.github-icon {
+.stark-app-bar-content-right-actions-alt .mat-mdc-icon-button.github-icon {
+  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
   .mat-button-wrapper {
     padding: 0;
   }

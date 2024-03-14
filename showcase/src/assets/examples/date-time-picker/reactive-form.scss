@@ -1,5 +1,6 @@
 :host ::ng-deep {
-  .mat-form-field.expanded .mat-form-field-wrapper.stark-date-time-picker-form-field-wrapper {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+  .mat-mdc-form-field.expanded .mat-form-field-wrapper.stark-date-time-picker-form-field-wrapper {
     margin-bottom: 25px;
   }
 }
