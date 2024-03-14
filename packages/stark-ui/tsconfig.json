@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "rootDir": ".",
     "emitDecoratorMetadata": false,
+    "target": "ES2020",
     "typeRoots": ["../../node_modules/@types", "../stark-build/typings", "./typings"],
     "paths": {
       "@nationalbankbelgium/stark-core": ["../../dist/packages/stark-core"],

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",
+    "target": "ES2020",
     "typeRoots": [
       "./node_modules/@types",
       "./node_modules/@nationalbankbelgium/stark-build/typings",
