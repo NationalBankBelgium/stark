@@ -545,6 +545,27 @@ describe("Service: StarkRoutingService", () => {
 			expect(stateDeclarations.state).toBe(statesConfig[1]);
 			expect(stateDeclarations.paramValues["#"]).toBe("some-hash");
 		});
+
+		it("should return the state of the requested url with a query parameter", () => {
+			const statesConfig: StateDeclaration[] = $state.get();
+			expect(statesConfig.length).toBe(numberOfMockStates);
+			const url: string = <string>statesConfig[1].url + "?test=test1";
+
+			const stateDeclarations: StarkStateConfigWithParams = <StarkStateConfigWithParams>routingService.getStateConfigByUrlPath(url);
+			expect(stateDeclarations.state).toBe(statesConfig[1]);
+			expect(stateDeclarations.paramValues["test"]).toBe("test1");
+		});
+
+		it("should return the state of the requested url with a query parameter and a hash", () => {
+			const statesConfig: StateDeclaration[] = $state.get();
+			expect(statesConfig.length).toBe(numberOfMockStates);
+			const url: string = <string>statesConfig[1].url + "?test=test1#some-hash";
+
+			const stateDeclarations: StarkStateConfigWithParams = <StarkStateConfigWithParams>routingService.getStateConfigByUrlPath(url);
+			expect(stateDeclarations.state).toBe(statesConfig[1]);
+			expect(stateDeclarations.paramValues["test"]).toBe("test1");
+			expect(stateDeclarations.paramValues["#"]).toBe("some-hash");
+		});
 	});
 
 	describe("getStateDeclarationByStateName", () => {
