@@ -154,17 +154,34 @@ export class StarkRoutingServiceImpl implements StarkRoutingService {
 	public getStateConfigByUrlPath(urlPath: string): StarkStateConfigWithParams | undefined {
 		let targetRoute: StarkStateConfigWithParams | undefined;
 
-		// separate path from hash
-		const [, path = urlPath, hash]: string[] = urlPath.match(/(.*)#(.*)/) || [];
+		let path!: string;
+		let params: string | undefined;
+		let hash: string | undefined;
+		const paramValues: RawParams = {};
 
-		const matchedState: StateDeclaration[] = this.getStatesConfig().filter((state: StateDeclaration) => {
-			return (<Function>state.$$state)().url && (<Function>state.$$state)().url.exec(path, undefined, hash);
-		});
+		// tslint:disable-next-line:no-self-assignment no-non-null-assertion no-dead-store
+		[, path, params, hash, path = path, params = params, path = path, hash = hash, path = path] = urlPath.match(
+			/(.*)\?(.*)#(.*)|(.*)\?(.*)|(.*)#(.*)|(.*)/
+		)!;
+
+		if (typeof params === "string") {
+			params.split("&").forEach((param: string) => {
+				const keyValue = param.split("=");
+				paramValues[keyValue[0]] = keyValue[1];
+			});
+		}
+
+		const matchedState: StateDeclaration[] = this.getStatesConfig().filter(
+			(state: StateDeclaration) => (<Function>state.$$state)().url && (<Function>state.$$state)().url.exec(path, undefined, hash)
+		);
 
 		if (matchedState.length) {
 			targetRoute = {
 				state: matchedState[0],
-				paramValues: (<Function>matchedState[0].$$state)().url.exec(path, undefined, hash)
+				paramValues: {
+					...(<Function>matchedState[0].$$state)().url.exec(path, undefined, hash),
+					...paramValues
+				}
 			};
 		}
 
