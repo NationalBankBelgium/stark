@@ -1,3 +1,12 @@
+## [10.3.4](https://github.com/nationalbankbelgium/stark/compare/10.3.3...10.3.4) (2024-03-25)
+
+
+### Bug Fixes
+
+* **stark-core:** fix support for URL query parameters ([572f7c7](https://github.com/nationalbankbelgium/stark/commit/572f7c72336634f0e0a5d8611c424c6f74286779)), closes [#3766](https://github.com/nationalbankbelgium/stark/issues/3766)
+
+
+
 ## [10.3.3](https://github.com/nationalbankbelgium/stark/compare/10.3.2...10.3.3) (2023-11-06)
 
 
