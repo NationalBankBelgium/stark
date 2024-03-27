@@ -37,6 +37,7 @@
 @use "../src/modules/dialogs/components/prompt-dialog.component" as stark-prompt-dialog;
 @use "../src/modules/dropdown/components/dropdown-theme" as stark-dropdown-theme;
 @forward "../src/modules/dropdown/components/dropdown-theme" show stark-dropdown-color;
+@forward "../src/modules/dropdown/components/dropdown-theme" show stark-dropdown-option-color;
 @use "../src/modules/dropdown/components/dropdown.component" as stark-dropdown;
 @use "../src/modules/generic-search/components/generic-search/generic-search.component" as stark-generic-search;
 @use "../src/modules/language-selector/components/language-selector.component" as stark-language-selector;

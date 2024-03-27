@@ -7,28 +7,42 @@
 @use "@angular/material" as mat;
 
 @mixin stark-dropdown-color($color) {
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-  .mat-form-field-label {
+  /* FIXED (mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+  .mat-mdc-floating-label {
     color: rgba($color: $color, $alpha: 0.87);
   }
 
   // arrow color change
-  /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-  .mat-select-arrow,
-  .mat-mdc-form-field.mat-focused .mat-select-arrow {
+  /* FIXED (mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
+  .mat-mdc-select-arrow,
+  &.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
+    color: rgba($color: $color, $alpha: 0.87);
+  }
+
+  &.mat-mdc-form-field.mat-focused.mat-primary .mat-mdc-select-arrow {
     color: rgba($color: $color, $alpha: 0.87);
   }
 
   // arrow color change
-  /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-  .mat-select-value {
+  /* FIXED (mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
+  .mat-mdc-select-value {
     color: rgba($color: $color, $alpha: 0.87);
   }
 
   // underline color change (normal and focus)
-  .mat-mdc-form-field-underline,
-  .mat-form-field.mat-focused .mat-form-field-ripple {
-    background-color: rgba($color: $color, $alpha: 0.87);
+  .mat-mdc-form-field-focus-overlay,
+  .mdc-text-field--filled .mdc-line-ripple::after {
+    border-bottom-color: rgba($color: $color, $alpha: 0.87);
+  }
+}
+
+@mixin stark-dropdown-option-color($color) {
+  &.mdc-list-item--selected span {
+    color: rgba($color: $color, $alpha: 0.87) !important
+  }
+  
+  &.mdc-list-item--selected .mat-pseudo-checkbox-checked::after {
+    color: rgba($color: $color, $alpha: 0.87) !important
   }
 }
 
@@ -64,6 +78,40 @@
 
     &.stark-neutral {
       @include stark-dropdown-color(mat.get-color-from-palette(map.get($stark-theme-config, success-palette), 400));
+    }
+  }
+  
+  .stark-mat-mdc-option {
+    &.stark-primary {
+      @include stark-dropdown-option-color(mat.get-color-from-palette(map.get($material-theme-config, primary), 900));
+    }
+
+    &.stark-accent {
+      @include stark-dropdown-option-color(mat.get-color-from-palette(map.get($material-theme-config, accent), 900));
+    }
+
+    &.stark-warn {
+      @include stark-dropdown-option-color(mat.get-color-from-palette(map.get($material-theme-config, warn), 900));
+    }
+
+    &.stark-white {
+      @include stark-dropdown-option-color(mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), A100));
+    }
+
+    &.stark-success {
+      @include stark-dropdown-option-color(mat.get-color-from-palette(map.get($stark-theme-config, success-palette), 900));
+    }
+
+    &.stark-alert {
+      @include stark-dropdown-option-color(mat.get-color-from-palette(map.get($stark-theme-config, alert-palette), 900));
+    }
+
+    &.stark-alt {
+      @include stark-dropdown-option-color(mat.get-color-from-palette(map.get($stark-theme-config, grey-palette), 900));
+    }
+
+    &.stark-neutral {
+      @include stark-dropdown-option-color(mat.get-color-from-palette(map.get($stark-theme-config, success-palette), 400));
     }
   }
 }

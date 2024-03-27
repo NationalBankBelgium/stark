@@ -20,9 +20,9 @@
 	<!--{{header}}-->
 	<!--</mat-select-header>-->
 
-	<mat-option *ngIf="defaultBlank" [value]=""></mat-option>
+	<mat-option *ngIf="defaultBlank" [value]=""  [class]="'stark-mat-mdc-option ' + ( color ? 'stark-' + color : '')"></mat-option>
 
-	<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)">
+	<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)" [class]="'stark-mat-mdc-option ' + ( color ? 'stark-' + color : '')">
 		{{ getOptionLabel(option) | translate }}
 	</mat-option>
 </mat-select>
@@ -48,9 +48,9 @@
 	<!--translate>-->
 	<!--{{header}}-->
 	<!--</mat-select-header>-->
-	<mat-option *ngIf="defaultBlank" [value]=""></mat-option>
+	<mat-option *ngIf="defaultBlank" [value]="" [class]="'stark-mat-mdc-option ' + ( color ? 'stark-' + color : '')"></mat-option>
 
-	<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)">
+	<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)" [class]="'stark-mat-mdc-option ' + ( color ? 'stark-' + color : '')">
 		<!-- the translate filter should be used in the options instead of the directive, otherwise the text is not translated :( -->
 		{{ getOptionLabel(option) | translate }}
 	</mat-option>

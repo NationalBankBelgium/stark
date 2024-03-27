@@ -9,11 +9,11 @@
 		[exampleTitle]="'SHOWCASE.DEMO.DROPDOWN.REACTIVE_FORM' | translate"
 	>
 		<mat-form-field>
+			<mat-label>{{ 'SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE' | translate }}</mat-label>
 			<stark-dropdown
 				dropdownId="reactiveFormDropdown"
 				[formControl]="serviceFormControl"
 				[options]="serviceDropdownOptions"
-				placeholder="SHOWCASE.DEMO.DROPDOWN.SELECT_SERVICE"
 				optionIdProperty="id"
 				optionLabelProperty="value"
 				required
