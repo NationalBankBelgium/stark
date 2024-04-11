@@ -33,5 +33,8 @@
       }
     }
   },
-  "defaultProject": "stark-core"
+  "defaultProject": "stark-core",
+  "cli": {
+    "analytics": false
+  }
 }
