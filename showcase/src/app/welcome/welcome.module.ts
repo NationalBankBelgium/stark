@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { UIRouterModule } from "@uirouter/angular";
 import { MatDividerModule } from "@angular/material/divider";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
+import { MatLegacyFormFieldModule as MatFormFieldModule } from "@angular/material/legacy-form-field";
+import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
 import { NgxFormErrorsModule, NgxFormErrorsMessageService } from "@nationalbankbelgium/ngx-form-errors";
 import { SharedModule } from "../shared";
 import { GettingStartedPageComponent, NewsPageComponent, ReactiveFormErrorsPageComponent } from "./pages";
@@ -12,26 +12,26 @@ import { NEWS_STATES } from "./routes";
 import { ExampleViewerModule } from "../example-viewer";
 
 @NgModule({
-    imports: [
-        UIRouterModule.forChild({
-            states: NEWS_STATES
-        }),
-        SharedModule,
-        ExampleViewerModule,
-        MatDividerModule,
-        MatInputModule,
-        MatFormFieldModule,
-        NgxFormErrorsModule.forRoot({ formErrorComponent: TranslatedFormErrorComponent })
-    ],
-    declarations: [
-        GettingStartedPageComponent,
-        NewsPageComponent,
-        NewsItemComponent,
-        ReactiveFormErrorsPageComponent,
-        TranslatedFormErrorComponent,
-        CardComponent
-    ],
-    exports: [GettingStartedPageComponent, NewsPageComponent, NewsItemComponent, ReactiveFormErrorsPageComponent]
+	imports: [
+		UIRouterModule.forChild({
+			states: NEWS_STATES
+		}),
+		SharedModule,
+		ExampleViewerModule,
+		MatDividerModule,
+		MatInputModule,
+		MatFormFieldModule,
+		NgxFormErrorsModule.forRoot({ formErrorComponent: TranslatedFormErrorComponent })
+	],
+	declarations: [
+		GettingStartedPageComponent,
+		NewsPageComponent,
+		NewsItemComponent,
+		ReactiveFormErrorsPageComponent,
+		TranslatedFormErrorComponent,
+		CardComponent
+	],
+	exports: [GettingStartedPageComponent, NewsPageComponent, NewsItemComponent, ReactiveFormErrorsPageComponent]
 })
 export class WelcomeModule {
 	public constructor(private errorMessageService: NgxFormErrorsMessageService) {

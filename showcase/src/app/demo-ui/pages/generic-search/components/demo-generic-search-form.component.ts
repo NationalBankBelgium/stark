@@ -35,13 +35,15 @@ export class DemoGenericSearchFormComponent implements OnInit, StarkSearchFormCo
 	public heroOptions: string[] = [];
 	public movieOptions: string[] = [];
 
-	public searchForm: UntypedFormGroup = this.createSearchForm(this.searchCriteria);
+	public searchForm: UntypedFormGroup;
 
 	public constructor(
 		@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService,
 		private genericService: DemoGenericService,
 		private formBuilder: UntypedFormBuilder
-	) {}
+	) {
+		this.searchForm = this.createSearchForm(this.searchCriteria);
+	}
 
 	public ngOnInit(): void {
 		this.searchForm.valueChanges.subscribe(() => {

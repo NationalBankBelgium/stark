@@ -1,5 +1,5 @@
 {
-  "extends": "@nationalbankbelgium/code-style/tsconfig/4.6.x/ng14",
+  "extends": "@nationalbankbelgium/code-style/tsconfig/4.9.x/ng15",
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",

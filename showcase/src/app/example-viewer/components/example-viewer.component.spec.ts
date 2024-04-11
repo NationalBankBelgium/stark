@@ -1,9 +1,9 @@
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { MatButtonModule } from "@angular/material/button";
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
+import { MatLegacyTabsModule as MatTabsModule } from "@angular/material/legacy-tabs";
+import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/legacy-tooltip";
 import { HAMMER_LOADER } from "@angular/platform-browser";
 import { Observable, of, Subject, throwError } from "rxjs";
 import { delay, filter } from "rxjs/operators";
