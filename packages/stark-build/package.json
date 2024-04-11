@@ -14,13 +14,13 @@
     "url": "https://github.com/NationalBankBelgium/stark.git"
   },
   "engines": {
-    "node": ">=14.20.0",
-    "npm": ">=8.19.1"
+    "node": ">=18.17.1",
+    "npm": ">=10.1.0"
   },
   "types": "typings/index.d.ts",
   "dependencies": {
-    "@angular-builders/custom-webpack": "^14.1.0",
-    "@angular-devkit/build-angular": "^14.2.13",
+    "@angular-builders/custom-webpack": "^15.0.0",
+    "@angular-devkit/build-angular": "^15.2.10",
     "@types/webpack": "^5.28.0",
     "eslint-webpack-plugin": "^4.0.1",
     "moment-locales-webpack-plugin": "^1.2.0",
@@ -28,14 +28,14 @@
     "stylelint": "^13.11.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-webpack-plugin": "~2.1.0",
-    "webpack-bundle-analyzer": "^4.4.2"
+    "webpack-bundle-analyzer": "^4.10.1"
   },
   "peerDependencies": {
-    "@angular/cli": "^14.2.13",
-    "@angular/compiler": "^14.3.0",
-    "@angular/compiler-cli": "^14.3.0",
-    "@angular/platform-browser": "^14.3.0",
-    "@angular/platform-browser-dynamic": "^14.3.0"
+    "@angular/cli": "^15.2.11",
+    "@angular/compiler": "^15.2.10",
+    "@angular/compiler-cli": "^15.2.10",
+    "@angular/platform-browser": "^15.2.10",
+    "@angular/platform-browser-dynamic": "^15.2.10"
   },
   "scripts": {
     "clean": "npx rimraf dist",

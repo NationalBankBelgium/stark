@@ -19,7 +19,7 @@
     "npm": ">=10.1.0"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^14.1.0",
+    "@angular-builders/custom-webpack": "^15.0.0",
     "@angular-devkit/build-angular": "^15.2.10",
     "@angular/animations": "^15.2.10",
     "@angular/cdk": "^15.2.9",
@@ -109,7 +109,7 @@
     "tslib": "^2.3.0",
     "typescript": "~4.9.5",
     "uuid": "^9.0.1",
-    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-bundle-analyzer": "^4.10.1",
     "zone.js": "~0.11.5"
   },
   "scripts": {
