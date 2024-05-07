@@ -189,6 +189,7 @@
     "release": "release-it",
     "release:publish": "bash ./release-publish.sh --trace",
     "sync:packages-dependencies": "node ./scripts/sync-packages-deps.js",
+    "sync:packages-dependencies:no-commit": "node ./scripts/sync-packages-deps.js --no-commit",
     "sync:stark-build:showcase": "npm run build:stark-build && cp -Rf ./dist/packages/stark-build ./showcase/node_modules/@nationalbankbelgium/",
     "sync:stark-build:starter": "npm run build:stark-build && cp -Rf ./dist/packages/stark-build ./starter/node_modules/@nationalbankbelgium/",
     "sync:stark-core:showcase": "npm run build:stark-core && cp -Rf ./dist/packages/stark-core ./showcase/node_modules/@nationalbankbelgium/",
