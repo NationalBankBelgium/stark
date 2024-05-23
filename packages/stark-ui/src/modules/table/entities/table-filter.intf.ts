@@ -1,5 +1,5 @@
 import { StarkTableColumnFilter } from "./table-column-filter.intf";
-import { MenuPositionY } from "@angular/material/menu";
+import { LegacyMenuPositionY as MenuPositionY } from "@angular/material/legacy-menu";
 
 /**
  * Represents the column filtering options of the {@link StarkTableComponent}.

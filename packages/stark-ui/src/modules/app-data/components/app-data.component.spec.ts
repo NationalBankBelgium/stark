@@ -2,13 +2,13 @@
 import { StarkAppDataComponent, StarkAppDataComponentMode } from "./app-data.component";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { fakeAsync, inject, tick, ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { MatButtonModule } from "@angular/material/button";
+import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatIconTestingModule } from "@angular/material/icon/testing";
-import { MatMenuModule } from "@angular/material/menu";
+import { MatLegacyMenuModule as MatMenuModule } from "@angular/material/legacy-menu";
 import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/legacy-tooltip";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { ViewChild, Component } from "@angular/core";

@@ -6,11 +6,11 @@ import { Component, DebugElement, ViewChild } from "@angular/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { By } from "@angular/platform-browser";
 import { CommonModule } from "@angular/common";
-import { MatSelectModule } from "@angular/material/select";
-import { MatOptionModule } from "@angular/material/core";
+import { MatLegacySelectModule as MatSelectModule } from "@angular/material/legacy-select";
+import { MatLegacyOptionModule as MatOptionModule } from "@angular/material/legacy-core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatIconTestingModule } from "@angular/material/icon/testing";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/legacy-tooltip";
 import { FormsModule } from "@angular/forms";
 /* rxjs imports */
 import { BehaviorSubject, Observable, Observer } from "rxjs";

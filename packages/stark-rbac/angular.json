@@ -33,5 +33,8 @@
       }
     }
   },
-  "defaultProject": "stark-rbac"
+  "defaultProject": "stark-rbac",
+  "cli": {
+    "analytics": false
+  }
 }

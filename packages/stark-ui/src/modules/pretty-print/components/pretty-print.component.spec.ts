@@ -282,7 +282,7 @@ describe("PrettyPrintComponent", () => {
 			expect(mockFormatObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockFormatObserver.error).not.toHaveBeenCalled();
 			expect(mockFormatObserver.complete).toHaveBeenCalledTimes(1);
-			
+
 			const highlightedHtmlData = <string>mockFormatObserver.next.calls.first().args[0];
 
 			mockPrettyPrintService.format.and.returnValue(of(highlightedHtmlData));

@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MAT_DATE_FORMATS } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatInputModule } from "@angular/material/input";
+import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
 import { MomentDateModule } from "@angular/material-moment-adapter";
 import { TranslateModule } from "@ngx-translate/core";
 import { STARK_DATE_FORMATS, StarkDatePickerComponent } from "./components";

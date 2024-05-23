@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatDialogModule } from "@angular/material/dialog";
+import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
+import { MatLegacyCheckboxModule as MatCheckboxModule } from "@angular/material/legacy-checkbox";
+import { MatLegacyDialogModule as MatDialogModule } from "@angular/material/legacy-dialog";
 import { MatIconModule } from "@angular/material/icon";
-import { MatInputModule } from "@angular/material/input";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatSelectModule } from "@angular/material/select";
+import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
+import { MatLegacyMenuModule as MatMenuModule } from "@angular/material/legacy-menu";
+import { MatLegacySelectModule as MatSelectModule } from "@angular/material/legacy-select";
 import { MatSortModule } from "@angular/material/sort";
-import { MatTableModule } from "@angular/material/table";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatLegacyTableModule as MatTableModule } from "@angular/material/legacy-table";
+import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/legacy-tooltip";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
 import { StarkTableColumnComponent, StarkTableComponent } from "./components";
@@ -26,36 +26,36 @@ import { StarkTableExpandDetailDirective } from "./directives/table-expand-detai
 import { StarkTableRowContentDirective } from "./directives/table-row-content.directive";
 
 @NgModule({
-    declarations: [
-        StarkTableComponent,
-        StarkTableMultisortDialogComponent,
-        StarkTableColumnComponent,
-        StarkTableRowContentDirective,
-        StarkTableExpandDetailDirective
-    ],
-    exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableRowContentDirective, StarkTableExpandDetailDirective],
-    imports: [
-        // Common
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TranslateModule,
-        // Material
-        MatButtonModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatIconModule,
-        MatInputModule,
-        MatMenuModule,
-        MatSelectModule,
-        MatSortModule,
-        MatTableModule,
-        MatTooltipModule,
-        // Stark
-        StarkActionBarModule,
-        StarkPaginationModule,
-        StarkMinimapModule
-    ]
+	declarations: [
+		StarkTableComponent,
+		StarkTableMultisortDialogComponent,
+		StarkTableColumnComponent,
+		StarkTableRowContentDirective,
+		StarkTableExpandDetailDirective
+	],
+	exports: [StarkTableComponent, StarkTableColumnComponent, StarkTableRowContentDirective, StarkTableExpandDetailDirective],
+	imports: [
+		// Common
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		TranslateModule,
+		// Material
+		MatButtonModule,
+		MatCheckboxModule,
+		MatDialogModule,
+		MatIconModule,
+		MatInputModule,
+		MatMenuModule,
+		MatSelectModule,
+		MatSortModule,
+		MatTableModule,
+		MatTooltipModule,
+		// Stark
+		StarkActionBarModule,
+		StarkPaginationModule,
+		StarkMinimapModule
+	]
 })
 export class StarkTableModule {
 	/**

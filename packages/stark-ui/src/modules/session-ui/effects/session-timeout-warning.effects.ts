@@ -3,8 +3,8 @@ import { Observable, of } from "rxjs";
 import { exhaustMap, map, takeUntil } from "rxjs/operators";
 import { STARK_SESSION_SERVICE, StarkSessionActions, StarkSessionService } from "@nationalbankbelgium/stark-core";
 import { StarkSessionTimeoutWarningDialogComponent } from "../components/session-timeout-warning-dialog/session-timeout-warning-dialog.component";
-import { MatDialog } from "@angular/material/dialog";
-import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from "@ngrx/effects";
+import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
+import { Actions, createEffect, CreateEffectMetadata, EffectNotification, ofType, OnRunEffects } from "@ngrx/effects";
 import { STARK_SESSION_UI_CONFIG, StarkSessionUiConfig } from "../entities";
 
 /**
@@ -27,7 +27,40 @@ export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {
 		@Optional()
 		@Inject(STARK_SESSION_UI_CONFIG)
 		public starkSessionUiConfig?: StarkSessionUiConfig
-	) {}
+	) {
+		this.starkSessionTimeoutWarning$ = createEffect(
+			() =>
+				this.actions$.pipe(
+					ofType(StarkSessionActions.sessionTimeoutCountdownStart),
+					map((action) => {
+						this.sessionService.pauseUserActivityTracking();
+						this.dialogService
+							.open<StarkSessionTimeoutWarningDialogComponent>(StarkSessionTimeoutWarningDialogComponent, {
+								data: action.countdown,
+								disableClose: true
+							})
+							.afterClosed()
+							.subscribe((result: string) => {
+								if (result && result === "keep-logged") {
+									this.sessionService.resumeUserActivityTracking();
+								}
+							});
+					})
+				),
+			{ dispatch: false }
+		);
+
+		this.starkSessionTimeoutWarningClose$ = createEffect(
+			() =>
+				this.actions$.pipe(
+					ofType(StarkSessionActions.sessionTimeoutCountdownFinish),
+					map(() => {
+						this.dialogService.closeAll();
+					})
+				),
+			{ dispatch: false }
+		);
+	}
 
 	/**
 	 * This method is used to display a warning session timeout dialog.
@@ -36,43 +69,14 @@ export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {
 	 *
 	 * `dispatch: false` => because this effect does not dispatch an action
 	 */
-	public starkSessionTimeoutWarning$ = createEffect(
-		() =>
-			this.actions$.pipe(
-				ofType(StarkSessionActions.sessionTimeoutCountdownStart),
-				map((action) => {
-					this.sessionService.pauseUserActivityTracking();
-					this.dialogService
-						.open<StarkSessionTimeoutWarningDialogComponent>(StarkSessionTimeoutWarningDialogComponent, {
-							data: action.countdown,
-							disableClose: true
-						})
-						.afterClosed()
-						.subscribe((result: string) => {
-							if (result && result === "keep-logged") {
-								this.sessionService.resumeUserActivityTracking();
-							}
-						});
-				})
-			),
-		{ dispatch: false }
-	);
+	public starkSessionTimeoutWarning$: Observable<void> & CreateEffectMetadata;
 
 	/**
 	 * This method is used to close the dialog if the session timeout countdown has finished
 	 *
 	 * `dispatch: false` => because this effect does not dispatch an action
 	 */
-	public starkSessionTimeoutWarningClose$ = createEffect(
-		() =>
-			this.actions$.pipe(
-				ofType(StarkSessionActions.sessionTimeoutCountdownFinish),
-				map(() => {
-					this.dialogService.closeAll();
-				})
-			),
-		{ dispatch: false }
-	);
+	public starkSessionTimeoutWarningClose$: Observable<void> & CreateEffectMetadata;
 
 	/**
 	 * This method will be triggered before the session is open to determine if we should use the session timeout warning effect or not.

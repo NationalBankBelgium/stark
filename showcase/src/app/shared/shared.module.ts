@@ -1,14 +1,14 @@
 import { DateAdapter } from "@angular/material/core";
-import { MatButtonModule } from "@angular/material/button";
+import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { MatCardModule } from "@angular/material/card";
-import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatLegacyCardModule as MatCardModule } from "@angular/material/legacy-card";
+import { MatLegacyCheckboxModule as MatCheckboxModule } from "@angular/material/legacy-checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
-import { MatListModule } from "@angular/material/list";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatLegacyListModule as MatListModule } from "@angular/material/legacy-list";
+import { MatLegacySnackBarModule as MatSnackBarModule } from "@angular/material/legacy-snack-bar";
+import { MatLegacyTabsModule as MatTabsModule } from "@angular/material/legacy-tabs";
+import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/legacy-tooltip";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Inject, NgModule } from "@angular/core";
@@ -27,45 +27,45 @@ import { filter } from "rxjs/operators";
 import { ReferenceBlockComponent, TableOfContentsComponent } from "./components";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatButtonToggleModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatExpansionModule,
-        MatIconModule,
-        MatListModule,
-        MatTabsModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        TranslateModule,
-        UIRouterModule.forChild()
-    ],
-    declarations: [ReferenceBlockComponent, TableOfContentsComponent],
-    // export commonly used components/directives/components (see https://angular.io/guide/sharing-ngmodules)
-    exports: [
-        ReferenceBlockComponent,
-        TableOfContentsComponent,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatButtonToggleModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatExpansionModule,
-        MatIconModule,
-        MatListModule,
-        MatTabsModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        TranslateModule
-    ]
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		FlexLayoutModule,
+		MatButtonModule,
+		MatButtonToggleModule,
+		MatCardModule,
+		MatCheckboxModule,
+		MatExpansionModule,
+		MatIconModule,
+		MatListModule,
+		MatTabsModule,
+		MatTooltipModule,
+		MatSnackBarModule,
+		TranslateModule,
+		UIRouterModule.forChild()
+	],
+	declarations: [ReferenceBlockComponent, TableOfContentsComponent],
+	// export commonly used components/directives/components (see https://angular.io/guide/sharing-ngmodules)
+	exports: [
+		ReferenceBlockComponent,
+		TableOfContentsComponent,
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		FlexLayoutModule,
+		MatButtonModule,
+		MatButtonToggleModule,
+		MatCardModule,
+		MatCheckboxModule,
+		MatExpansionModule,
+		MatIconModule,
+		MatListModule,
+		MatTabsModule,
+		MatTooltipModule,
+		MatSnackBarModule,
+		TranslateModule
+	]
 })
 export class SharedModule {
 	public constructor(

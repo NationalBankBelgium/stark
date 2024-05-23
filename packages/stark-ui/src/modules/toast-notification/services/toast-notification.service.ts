@@ -1,12 +1,12 @@
 import { ApplicationRef, Inject, Injectable } from "@angular/core";
 import {
-	MatSnackBar,
-	MatSnackBarConfig,
-	MatSnackBarDismiss,
-	MatSnackBarHorizontalPosition,
-	MatSnackBarRef,
-	MatSnackBarVerticalPosition
-} from "@angular/material/snack-bar";
+	MatLegacySnackBar as MatSnackBar,
+	MatLegacySnackBarConfig as MatSnackBarConfig,
+	MatLegacySnackBarDismiss as MatSnackBarDismiss,
+	MatLegacySnackBarHorizontalPosition as MatSnackBarHorizontalPosition,
+	MatLegacySnackBarRef as MatSnackBarRef,
+	MatLegacySnackBarVerticalPosition as MatSnackBarVerticalPosition
+} from "@angular/material/legacy-snack-bar";
 import { Observable, Observer } from "rxjs";
 import { tap } from "rxjs/operators";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
