@@ -1,3 +1,22 @@
+# [12.0.0-beta.2](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.1...12.0.0-beta.2) (2024-05-23)
+
+
+### Features
+
+* **showcase:** update showcase to angular 15 ([a0ef5ef](https://github.com/nationalbankbelgium/stark/commit/a0ef5ef6105c5c1361a9c879a602a8b4c46fe4b0))
+* **stark-all:** prepare angular 15 update by upgrading `@ngrx/*` and `@uirouter/angular` dependencies ([1e1bf48](https://github.com/nationalbankbelgium/stark/commit/1e1bf48976f5e447c34876b31c0a7364be81819f))
+* **stark-all:** update `@nationalbankbelgium/eslint-config` : `15.0.0` ([afbf819](https://github.com/nationalbankbelgium/stark/commit/afbf819b1981534b7350269f00898e432c50e71e))
+* **stark-all:** upgrade to angular 15 thanks to the schematics ([43b4294](https://github.com/nationalbankbelgium/stark/commit/43b42945b2139e150e924a287b9dbf8a806e49cb))
+* **stark-build:** update dependencies after angular 15 update ([9d025e1](https://github.com/nationalbankbelgium/stark/commit/9d025e140dd2053894d9aaad43576518fb708841))
+* **stark-core:** add new `StarkArrayIsValid` validation decorator ([8560439](https://github.com/nationalbankbelgium/stark/commit/8560439628b72cf6399764adebddc4939f3da816))
+* **stark-core:** update dependencies after angular 15 update ([898aa00](https://github.com/nationalbankbelgium/stark/commit/898aa00af3b5f8b4c3579c45fd9a471b7bee4187))
+* **stark-core:** upgrade `class-validator` dependency ([50d54f5](https://github.com/nationalbankbelgium/stark/commit/50d54f57eba19d578e3ba982129b145f51318741)), closes [#3708](https://github.com/nationalbankbelgium/stark/issues/3708)
+* **stark-testing:** update dependencies after angular 15 update ([826df9d](https://github.com/nationalbankbelgium/stark/commit/826df9deb0a2e9dfb3ec868f30a18a1941225826))
+* **stark-ui:** update dependencies after angular 15 update ([61c8dbc](https://github.com/nationalbankbelgium/stark/commit/61c8dbc7b9eaf5192fea670d916ceff89951f3c4))
+* **starter:** update starter to `angular 15` ([13b992f](https://github.com/nationalbankbelgium/stark/commit/13b992f5272bad1742b98ee05ea8321d3e861a50))
+
+
+
 # [12.0.0-beta.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.0...12.0.0-beta.1) (2024-03-05)
 
 
