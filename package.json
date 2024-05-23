@@ -37,7 +37,7 @@
     "@angularclass/hmr": "^3.0.0",
     "@commitlint/cli": "^18.6.0",
     "@commitlint/config-conventional": "^18.6.0",
-    "@compodoc/compodoc": "1.1.19",
+    "@compodoc/compodoc": "1.1.24",
     "@mdi/angular-material": "^4.0.96",
     "@nationalbankbelgium/code-style": "^1.10.0",
     "@nationalbankbelgium/eslint-config": "^15.0.0",
