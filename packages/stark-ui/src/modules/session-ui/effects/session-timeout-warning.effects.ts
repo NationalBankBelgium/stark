@@ -55,8 +55,12 @@ export class StarkSessionTimeoutWarningDialogEffects implements OnRunEffects {
 					})
 					.afterClosed()
 					.subscribe((result: string) => {
-						if (result && result === "keep-logged") {
-							this.sessionService.resumeUserActivityTracking();
+						if (result) {
+							if (result === "keep-logged") {
+								this.sessionService.resumeUserActivityTracking();
+							} else if (result === "close-session") {
+								this.sessionService.logout();
+							}
 						}
 					});
 			})

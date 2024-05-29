@@ -59,4 +59,11 @@ export class StarkSessionTimeoutWarningDialogComponent implements OnInit {
 	public keepSession(): void {
 		this.dialogRef.close("keep-logged");
 	}
+
+	/**
+	 * This methods is used to close the dialog and to send an answer indicating that the user sould loggoff.
+	 */
+	public closeSession(): void {
+		this.dialogRef.close("close-session");
+	}
 }
