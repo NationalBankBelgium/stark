@@ -10,7 +10,6 @@ import {
 } from "@angular/material/legacy-dialog";
 import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { ESCAPE } from "@angular/cdk/keycodes";
 import { TranslateModule } from "@ngx-translate/core";
@@ -81,13 +80,7 @@ describe("PromptDialogComponent", () => {
 			declarations: [TestHostComponent, StarkPromptDialogComponent],
 			imports: [CommonModule, ReactiveFormsModule, NoopAnimationsModule, MatInputModule, MatDialogModule, TranslateModule.forRoot()],
 			providers: []
-		})
-			.overrideModule(BrowserDynamicTestingModule, {
-				// FIXME review after https://github.com/angular/angular/issues/10760
-				// add entryComponent to TestingModule (suggested in https://github.com/angular/angular/issues/10760#issuecomment-250522300)
-				set: { entryComponents: [StarkPromptDialogComponent] }
-			})
-			.compileComponents()));
+		}).compileComponents()));
 
 	beforeEach(inject(
 		[MatDialog, OverlayContainer, ComponentFactoryResolver],

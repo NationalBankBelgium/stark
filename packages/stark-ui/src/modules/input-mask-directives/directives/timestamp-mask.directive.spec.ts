@@ -300,16 +300,14 @@ describe("TimestampMaskDirective", () => {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "123", eventType);
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("12/3_/____");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -321,8 +319,7 @@ describe("TimestampMaskDirective", () => {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "123", eventType);
@@ -345,8 +342,7 @@ describe("TimestampMaskDirective", () => {
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -357,16 +353,14 @@ describe("TimestampMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("12/3_/____");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
 			hostComponent.timestampMaskConfig = { ...timestampMaskConfig, format: "DD-MM" };
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("12-3_");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});
@@ -376,8 +370,7 @@ describe("TimestampMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("12/3_/____");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
 			hostComponent.timestampMaskConfig = <any>undefined;
@@ -389,8 +382,7 @@ describe("TimestampMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("whatever"); // no mask at all
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});

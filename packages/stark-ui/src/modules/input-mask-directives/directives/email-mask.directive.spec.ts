@@ -259,16 +259,14 @@ describe("EmailMaskDirective", () => {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "my-email@", eventType);
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("my-email@ .");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -280,8 +278,7 @@ describe("EmailMaskDirective", () => {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "my-email@", eventType);
@@ -304,8 +301,7 @@ describe("EmailMaskDirective", () => {
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -316,8 +312,7 @@ describe("EmailMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("my-email@ .");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
 			hostComponent.emailMaskConfig = undefined;
@@ -329,8 +324,7 @@ describe("EmailMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("my-email@ ."); // the mask is enabled by default
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
 			hostComponent.emailMaskConfig = ""; // use case when the directive is used with no inputs: <input type='text' [formControl]='formControl' starkEmailMask>
@@ -342,8 +336,7 @@ describe("EmailMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("my-email@ ."); // the mask is enabled by default
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
 			hostComponent.emailMaskConfig = false;
@@ -355,8 +348,7 @@ describe("EmailMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("what@@.ever@."); // no mask at all
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});
