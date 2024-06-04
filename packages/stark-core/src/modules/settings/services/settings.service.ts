@@ -43,7 +43,7 @@ export class StarkSettingsServiceImpl implements StarkSettingsService {
 	public initializeSettings(): void {
 		this.sessionService
 			.getCurrentUser()
-			.pipe(filter((user?: StarkUser): user is StarkUser => typeof user !== "undefined"))
+			.pipe(filter<StarkUser | undefined, StarkUser>((user?: StarkUser): user is StarkUser => typeof user !== "undefined"))
 			.subscribe((user: StarkUser) => {
 				let supportedLanguageIndex = -1;
 				const browserLanguage: string = navigator.language || navigator["userLanguage"] || "";

@@ -275,16 +275,14 @@ describe("NumberMaskDirective", () => {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "12345", eventType);
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("12,345");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -296,8 +294,7 @@ describe("NumberMaskDirective", () => {
 				changeInputValue(inputElement, "");
 				fixture.detectChanges();
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 				mockValueChangeObserver.next.calls.reset();
 				changeInputValue(inputElement, "12345", eventType);
@@ -320,8 +317,7 @@ describe("NumberMaskDirective", () => {
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -334,8 +330,7 @@ describe("NumberMaskDirective", () => {
 				fixture.detectChanges();
 
 				expect(hostComponent.formControl.value).toBe("12,345");
-				// FIXME Check why it is called twice instead of once
-				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+				expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 				expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 				expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 			}
@@ -346,16 +341,14 @@ describe("NumberMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("12,345");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
 			hostComponent.numberMaskConfig = { ...numberMaskConfig, prefix: "%", suffix: " percent", thousandsSeparatorSymbol: "-" };
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("%12-345 percent");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});
@@ -365,8 +358,7 @@ describe("NumberMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("12,345");
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 
 			mockValueChangeObserver.next.calls.reset();
 			hostComponent.numberMaskConfig = <any>undefined;
@@ -378,8 +370,7 @@ describe("NumberMaskDirective", () => {
 			fixture.detectChanges();
 
 			expect(hostComponent.formControl.value).toBe("whatever+1*23-4/5"); // no mask at all
-			// FIXME Check why it is called twice instead of once
-			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(2);
+			expect(mockValueChangeObserver.next).toHaveBeenCalledTimes(1);
 			expect(mockValueChangeObserver.error).not.toHaveBeenCalled();
 			expect(mockValueChangeObserver.complete).not.toHaveBeenCalled();
 		});
