@@ -20,14 +20,14 @@ jobs:
     steps:
       # See: https://github.com/marketplace/actions/setup-node-js-environment
       - name: Use Node.js 18
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       # See: https://github.com/marketplace/actions/cache
       # See doc: https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules-${{ matrix.node_version }}-${{ matrix.os }}
         with:
@@ -55,7 +55,7 @@ jobs:
           echo "PR Number   : ${GH_PR_NUMBER}"
 
       # See: https://github.com/marketplace/actions/checkout
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Configure git user info
         run: |
@@ -150,7 +150,7 @@ jobs:
 
       # See: https://github.com/marketplace/actions/create-pull-request
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v6
         if: env.UPDATED_DEPS == 1
         with:
           token: ${{ secrets.NBBBOT_TOKEN }}
