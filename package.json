@@ -110,7 +110,7 @@
     "typescript": "~5.1.6",
     "uuid": "^9.0.1",
     "webpack-bundle-analyzer": "^4.10.1",
-    "zone.js": "~0.13.3"
+    "zone.js": "~0.14.6"
   },
   "scripts": {
     "build": "bash ./build.sh",
