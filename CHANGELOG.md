@@ -1,3 +1,24 @@
+# [12.0.0-rc.0](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.2...12.0.0-rc.0) (2024-06-05)
+
+
+### Bug Fixes
+
+* **stark-core:** enable correlation-id generation when `loggingFlushDisabled == true` ([0aeece5](https://github.com/nationalbankbelgium/stark/commit/0aeece5fd5af5ec26323d3d09240b9cb9df8e33e)), closes [#3620](https://github.com/nationalbankbelgium/stark/issues/3620)
+* **stark-core:** fix support for URL query parameters ([b2482b3](https://github.com/nationalbankbelgium/stark/commit/b2482b373fac4de9bf5f55ad06b13be64cb761c4)), closes [#3766](https://github.com/nationalbankbelgium/stark/issues/3766)
+* **stark-testing:** replace `@npmcli/ci-detect` dependency by `ci-info` ([dc3eb8a](https://github.com/nationalbankbelgium/stark/commit/dc3eb8a1a0e21d43f25daebf6f5b216da4562fa1)), closes [#3658](https://github.com/nationalbankbelgium/stark/issues/3658)
+
+
+### Features
+
+* **showcase:** update `angular-in-memory-web-api` dependency ([c82f142](https://github.com/nationalbankbelgium/stark/commit/c82f142dd8267fb36fbf4f687de6b26642582722))
+* **showcase:** update to angular 16 ([b477e80](https://github.com/nationalbankbelgium/stark/commit/b477e800bb9a42da0200b0bc7cb49fafacd35d71))
+* **stark-all:** update dependencies after update to angular 16 ([c1b9881](https://github.com/nationalbankbelgium/stark/commit/c1b9881978be953b6728c2074b7e644afdccdeb8))
+* **stark-all:** upgrade to angular 16 ([b4c3675](https://github.com/nationalbankbelgium/stark/commit/b4c367523812be66a03e26975a64cdc5256a6e85))
+* **stark-ui:** refactor tests due to change in angular 16 ([3ef970f](https://github.com/nationalbankbelgium/stark/commit/3ef970ff2188108aade8f3ff4992167d02cdcbc5))
+* **starter:** update to angular 16 ([a0d30bc](https://github.com/nationalbankbelgium/stark/commit/a0d30bc8218714b81716d7e6f4b85906ed715e51))
+
+
+
 # [12.0.0-beta.2](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.1...12.0.0-beta.2) (2024-05-23)
 
 
