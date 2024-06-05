@@ -1,0 +1,3819 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  StarkDropdownComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/modules/dropdown/components/dropdown.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to display dropdown list based on the options passed as parameters. The dropdown component is based
+on the Angular Material MatSelect.</p>
+
+    </p>
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                <code>MatFormFieldControl</code>
+                    <code><a href="https://angular.io/api/forms/Validator" target="_blank" >Validator</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../components/StarkDropdownComponent.html" target="_self" >{
+    provide: NG_VALIDATORS, useExisting: StarkDropdownComponent, multi: true
+}</a></code>
+                                <code><a href="../components/StarkDropdownComponent.html" target="_self" >{
+    provide: MatFormFieldControl, useExisting: StarkDropdownComponent
+}</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>stark-dropdown</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./dropdown.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_onValidatorChange" >_onValidatorChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#describedBy" >describedBy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#id" >id</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logger" >logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#multiSelectElement" >multiSelectElement</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#nextId" >nextId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#ngAcceptInputType_multiSelect" >ngAcceptInputType_multiSelect</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#ngAcceptInputType_required" >ngAcceptInputType_required</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#singleSelectElement" >singleSelectElement</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#stateChanges" >stateChanges</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#areSimpleTypes" >areSimpleTypes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getOptionLabel" >getOptionLabel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getOptionValue" >getOptionValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier"></span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onContainerClick" >onContainerClick</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onInternalValueChange" >onInternalValueChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onOpenedChange" >onOpenedChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onSelectionChange" >onSelectionChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#registerOnChange" >registerOnChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#registerOnTouched" >registerOnTouched</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#registerOnValidatorChange" >registerOnValidatorChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setDefaultBlank" >setDefaultBlank</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setDescribedByIds" >setDescribedByIds</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setDisabledState" >setDisabledState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#validate" >validate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#writeValue" >writeValue</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#defaultBlank" >defaultBlank</a>
+                            </li>
+                            <li>
+                                <a href="#disabled" >disabled</a>
+                            </li>
+                            <li>
+                                <a href="#dropdownId" >dropdownId</a>
+                            </li>
+                            <li>
+                                <a href="#dropdownName" >dropdownName</a>
+                            </li>
+                            <li>
+                                <a href="#multiSelect" >multiSelect</a>
+                            </li>
+                            <li>
+                                <a href="#optionIdProperty" >optionIdProperty</a>
+                            </li>
+                            <li>
+                                <a href="#optionLabelProperty" >optionLabelProperty</a>
+                            </li>
+                            <li>
+                                <a href="#options" >options</a>
+                            </li>
+                            <li>
+                                <a href="#placeholder" >placeholder</a>
+                            </li>
+                            <li>
+                                <a href="#required" >required</a>
+                            </li>
+                            <li>
+                                <a href="#value" >value</a>
+                            </li>
+                            <li>
+                                <a href="#color" >color</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#selectionChanged" >selectionChanged</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostBindings</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#attr.aria-describedby" >attr.aria-describedby</a>
+                            </li>
+                            <li>
+                                <a href="#class.floating" >class.floating</a>
+                            </li>
+                            <li>
+                                <a href="#id" >id</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#shouldLabelFloat" >shouldLabelFloat</a>
+                                </li>
+                                <li>
+                                    <a href="#multiSelect" >multiSelect</a>
+                                </li>
+                                <li>
+                                    <a href="#required" >required</a>
+                                </li>
+                                <li>
+                                    <a href="#value" >value</a>
+                                </li>
+                                <li>
+                                    <a href="#errorState" >errorState</a>
+                                </li>
+                                <li>
+                                    <a href="#empty" >empty</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(logger: StarkLoggingService, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, elementRef: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>, fm: FocusMonitor, injector: <a href="https://angular.io/api/core/Injector" target="_blank">Injector</a>, translateService: TranslateService, formField?: MatFormField)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="299" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:299</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Class constructor</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>logger</td>
+                                                  
+                                                        <td>
+                                                                    <code>StarkLoggingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The <code>StarkLoggingService</code> instance of the application.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Angular <code>Renderer2</code> wrapper for DOM manipulations.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>elementRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Reference to the DOM element where this component is attached to.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>fm</td>
+                                                  
+                                                        <td>
+                                                                    <code>FocusMonitor</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The Focus Monitor Service.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>injector</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/Injector" target="_blank" >Injector</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The Injector of the application.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>translateService</td>
+                                                  
+                                                        <td>
+                                                                    <code>TranslateService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The <code>TranslateService</code> instance of the application.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>formField</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatFormField</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>The MatFormField of this component (in case the component is used inside a <code>mat-form-field</code>).</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="defaultBlank"></a>
+                        <b>defaultBlank</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:94</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>If the dropdown will contain a default blank (optional)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="disabled"></a>
+                        <b>disabled</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:120</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the dropdown is disabled</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dropdownId"></a>
+                        <b>dropdownId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;undefined&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:100</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>HTML &quot;id&quot; attribute of the element.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dropdownName"></a>
+                        <b>dropdownName</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;undefined&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:106</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>HTML &quot;name&quot; attribute of the element.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="multiSelect"></a>
+                        <b>multiSelect</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:127</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Allows multiple option selection. Setting the attribute to &quot;true&quot; or empty
+will enable this feature. (optional)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="optionIdProperty"></a>
+                        <b>optionIdProperty</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:156</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Property name to be used as id of the options defined. If this parameter as
+well as the optionLabelProperty are omitted, then the options parameter is considered to be an array of simple types. (optional)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="optionLabelProperty"></a>
+                        <b>optionLabelProperty</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:164</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Property name to be used as label of the options defined (dynamically translated via
+the @ngx-translate service if the provided text is defined in the translation keys). If this parameter as well as the
+optionIdProperty are omitted, then the options parameter is considered to be an array of simple types. (optional)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="options"></a>
+                        <b>options</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:149</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Array of options to be included in the dropdown list. This parameter is a one-way
+binding (one-directional).</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="placeholder"></a>
+                        <b>placeholder</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:171</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Text to be displayed as the dropdown&#39;s placeholder.
+Dynamically translated via the @ngx-translate service if the provided text is defined in the translation keys.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="required"></a>
+                        <b>required</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:177</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>If the dropdown is required or not. by default, the dropdown is not required</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="value"></a>
+                        <b>value</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any | any[]</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:201</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Source object to be bound to the dropdown ngModel.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="color"></a>
+                        <b>color</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in         <code><a href="../directives/AbstractStarkUiComponent.html#source" target="_self" >AbstractStarkUiComponent:16</a></code>
+</div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Color theme</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectionChanged"></a>
+                        <b>selectionChanged</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="222" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:222</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>This will emit the newly selected value.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3>HostBindings</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="attr.aria-describedby"></a>
+                    <span class="name">
+                        <span ><b>attr.aria-describedby</b></span>
+                        <a href="#attr.aria-describedby"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>ARIA <code>describedBy</code> attribute to be set to the DOM element where this component is attached to</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="class.floating"></a>
+                    <span class="name">
+                        <span ><b>class.floating</b></span>
+                        <a href="#class.floating"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Whether the label should float above the field to let the user type a value</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="id"></a>
+                    <span class="name">
+                        <span ><b>id</b></span>
+                        <a href="#id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x60;stark-dropdown-input-${StarkDropdownComponent.nextId++}&#x60;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>HTML id of this component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="areSimpleTypes"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>areSimpleTypes</b></span>
+                        <a href="#areSimpleTypes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>areSimpleTypes()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="429"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:429</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Whether the type of the option elements is a primitive type (string, number, boolean...)
+In case none of the optionId and optionLabel parameters are provided, then a simple data types array is assumed</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOptionLabel"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>getOptionLabel</b></span>
+                        <a href="#getOptionLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getOptionLabel(option: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="466"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:466</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Return the label of the option or the option itself if it is a simple type.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>option</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The option which value we want to retrieve</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The value to return</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOptionValue"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>getOptionValue</b></span>
+                        <a href="#getOptionValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getOptionValue(option: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="457"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:457</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Return the id of the option or the option itself if it is a simple type.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>option</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The option which id we want to retrieve</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The value to return</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="373"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:373</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Contains the changed properties</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="396"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:396</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier"></span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../directives/AbstractStarkUiComponent.html" target="_self" >AbstractStarkUiComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../directives/AbstractStarkUiComponent.html#source" target="_self" >AbstractStarkUiComponent:331</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Component lifecycle hook</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onContainerClick"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>onContainerClick</b></span>
+                        <a href="#onContainerClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onContainerClick()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="552"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:552</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method implemented to use MatFormFieldControl
+It handles a click on the control&#39;s container.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onInternalValueChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>onInternalValueChange</b></span>
+                        <a href="#onInternalValueChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onInternalValueChange(value: any | any[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="417"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:417</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Trigger required methods <code>selectionChanged.emit</code>, <code>_onChange</code>, <code>_onValidatorChange</code> when `value´ is changed internally.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                            <code>any | any[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>New value to assign</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onOpenedChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>onOpenedChange</b></span>
+                        <a href="#onOpenedChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onOpenedChange()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="587"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:587</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method which set the MatFormField as touched once the mat-select has been clicked.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectionChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>onSelectionChange</b></span>
+                        <a href="#onSelectionChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSelectionChange(change: MatSelectChange)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="409"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:409</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Handled when a <code>change</code> event is fired on the <code>&lt;mat-select&gt;</code> element, then emits the value on <code>selectionChanged</code>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>change</td>
+                                    <td>
+                                            <code>MatSelectChange</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The MatSelectChange to to handle</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOnChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>registerOnChange</b></span>
+                        <a href="#registerOnChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerOnChange(fn: (_: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>) => void)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="507"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:507</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Registers a function called when the control value changes.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fn</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The callback function</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOnTouched"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>registerOnTouched</b></span>
+                        <a href="#registerOnTouched"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerOnTouched(fn: () => void)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="516"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:516</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Registers a function called when the control is touched.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fn</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The callback function</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOnValidatorChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>registerOnValidatorChange</b></span>
+                        <a href="#registerOnValidatorChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerOnValidatorChange(fn: () => void)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="568"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:568</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Registers a callback function to call when the validator inputs change.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fn</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The callback function</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDefaultBlank"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>setDefaultBlank</b></span>
+                        <a href="#setDefaultBlank"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setDefaultBlank()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="441"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:441</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>set blank by default in the dropdown component</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDescribedByIds"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>setDescribedByIds</b></span>
+                        <a href="#setDescribedByIds"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setDescribedByIds(ids: string[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="544"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:544</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method implemented to use MatFormFieldControl
+Sets the list of element IDs that currently describe this control.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ids</td>
+                                    <td>
+                                            <code>string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Ids describing the MatFormFieldControl</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDisabledState"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>setDisabledState</b></span>
+                        <a href="#setDisabledState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setDisabledState(isDisabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="525"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:525</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Sets the &quot;disabled&quot; property on the input element.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>isDisabled</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The disabled value</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validate"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>validate</b></span>
+                        <a href="#validate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validate(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="579"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:579</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method that performs synchronous validation against the provided control.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>control</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The control to validate against.</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>ValidationErrors | null</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>A map of validation errors if validation fails, otherwise null.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="writeValue"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>writeValue</b></span>
+                        <a href="#writeValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>writeValue(obj: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="535"
+                            class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:535</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Sets the &quot;value&quot; property on the input element.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>obj</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The checked value</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_onValidatorChange"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_onValidatorChange</b></span>
+                        <a href="#_onValidatorChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="498" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:498</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The registered callback function called when the validator inputs change.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="describedBy"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>describedBy</b></span>
+                        <a href="#describedBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @HostBinding(&#x27;attr.aria-describedby&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>ARIA <code>describedBy</code> attribute to be set to the DOM element where this component is attached to</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="id"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>id</b></span>
+                        <a href="#id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x60;stark-dropdown-input-${StarkDropdownComponent.nextId++}&#x60;</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @HostBinding()<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>HTML id of this component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logger"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>logger</b></span>
+                        <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>StarkLoggingService</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(STARK_LOGGING_SERVICE)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="312" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:312</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- The `StarkLoggingService` instance of the application.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="multiSelectElement"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>multiSelectElement</b></span>
+                        <a href="#multiSelectElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MatSelect</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;multiSelectEl&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="234" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:234</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the multi MatSelect element embedded in this component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nextId"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>nextId</b></span>
+                        <a href="#nextId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Variable that will be incremented automatically to serve as unique id for every new instance of this component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAcceptInputType_multiSelect"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>ngAcceptInputType_multiSelect</b></span>
+                        <a href="#ngAcceptInputType_multiSelect"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>BooleanInput</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAcceptInputType_required"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>ngAcceptInputType_required</b></span>
+                        <a href="#ngAcceptInputType_required"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>BooleanInput</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="singleSelectElement"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>singleSelectElement</b></span>
+                        <a href="#singleSelectElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MatSelect</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;singleSelectEl&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="228" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:228</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the single MatSelect element embedded in this component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stateChanges"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>stateChanges</b></span>
+                        <a href="#stateChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subject&lt;void&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="254" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:254</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Variable to define to use MatFormFieldControl.
+Stream that emits whenever the state of the control changes such that the parent <code>MatFormField</code>
+needs to run change detection.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="shouldLabelFloat"></a>
+                        <span class="name"><b>shouldLabelFloat</b><a href="#shouldLabelFloat"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>shouldLabelFloat()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:86</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Whether the label should float above the field to let the user type a value</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="multiSelect"></a>
+                        <span class="name"><b>multiSelect</b><a href="#multiSelect"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>multiSelect()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:127</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Allows multiple option selection. Setting the attribute to &quot;true&quot; or empty
+will enable this feature. (optional)</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>multiSelect(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:131</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="required"></a>
+                        <span class="name"><b>required</b><a href="#required"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>required()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:177</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>If the dropdown is required or not. by default, the dropdown is not required</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>required(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:181</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="value"></a>
+                        <span class="name"><b>value</b><a href="#value"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>value()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:201</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Source object to be bound to the dropdown ngModel.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>any | []</code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>value(value: any | any[])</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:205</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                        <code>any | any[]</code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="errorState"></a>
+                        <span class="name"><b>errorState</b><a href="#errorState"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>errorState()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="266" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:266</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Variable to define to use MatFormFieldControl
+Whether the control is in an error state.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="empty"></a>
+                        <span class="name"><b>empty</b><a href="#empty"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>empty()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="284" class="link-to-prism">src/modules/dropdown/components/dropdown.component.ts:284</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Variable to define to use MatFormFieldControl
+Whether the control is empty.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+	Component,
+	ElementRef,
+	EventEmitter,
+	HostBinding,
+	Inject,
+	Injector,
+	Input,
+	OnChanges,
+	OnDestroy,
+	OnInit,
+	Optional,
+	Output,
+	Renderer2,
+	SimpleChanges,
+	ViewChild,
+	ViewEncapsulation
+} from &quot;@angular/core&quot;;
+import { STARK_LOGGING_SERVICE, StarkLoggingService } from &quot;@nationalbankbelgium/stark-core&quot;;
+import { AbstractStarkUiComponent } from &quot;@nationalbankbelgium/stark-ui/src/internal-common&quot;;
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NgControl, ValidationErrors, Validator, Validators } from &quot;@angular/forms&quot;;
+import { Subject, Subscription } from &quot;rxjs&quot;;
+import { MatLegacyFormField as MatFormField, MatLegacyFormFieldControl as MatFormFieldControl } from &quot;@angular/material/legacy-form-field&quot;;
+import { FocusMonitor, FocusOrigin } from &quot;@angular/cdk/a11y&quot;;
+import { MatLegacySelect as MatSelect, MatLegacySelectChange as MatSelectChange } from &quot;@angular/material/legacy-select&quot;;
+import { BooleanInput, coerceBooleanProperty } from &quot;@angular/cdk/coercion&quot;;
+import { TranslateService } from &quot;@ngx-translate/core&quot;;
+import isEqual from &quot;lodash-es/isEqual&quot;;
+
+/**
+ * @ignore
+ */
+const componentName &#x3D; &quot;stark-dropdown&quot;;
+
+/**
+ * Component to display dropdown list based on the options passed as parameters. The dropdown component is based
+ * on the Angular Material MatSelect.
+ */
+@Component({
+	selector: &quot;stark-dropdown&quot;,
+	templateUrl: &quot;./dropdown.component.html&quot;,
+	encapsulation: ViewEncapsulation.None,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: componentName
+	},
+	providers: [
+		{
+			provide: NG_VALIDATORS,
+			useExisting: StarkDropdownComponent,
+			multi: true
+		},
+		{
+			// This implementation has been made thanks to the official documentation.
+			// See: https://v7.material.angular.io/guide/creating-a-custom-form-field-control
+			provide: MatFormFieldControl,
+			useExisting: StarkDropdownComponent
+		}
+	]
+})
+export class StarkDropdownComponent
+	extends AbstractStarkUiComponent
+	implements OnInit, OnChanges, OnInit, OnDestroy, ControlValueAccessor, MatFormFieldControl&lt;any | any[]&gt;, Validator
+{
+	/**
+	 * Variable that will be incremented automatically to serve as unique id for every new instance of this component
+	 */
+	public static nextId &#x3D; 0;
+
+	/**
+	 * HTML id of this component
+	 */
+	@HostBinding()
+	public id &#x3D; &#x60;stark-dropdown-input-${StarkDropdownComponent.nextId++}&#x60;;
+
+	/**
+	 * ARIA &#x60;describedBy&#x60; attribute to be set to the DOM element where this component is attached to
+	 */
+	@HostBinding(&quot;attr.aria-describedby&quot;)
+	public describedBy &#x3D; &quot;&quot;;
+
+	/**
+	 * Whether the label should float above the field to let the user type a value
+	 */
+	@HostBinding(&quot;class.floating&quot;)
+	public get shouldLabelFloat(): boolean {
+		return this.focused || !this.empty;
+	}
+
+	/**
+	 * If the dropdown will contain a default blank (optional)
+	 */
+	@Input()
+	public defaultBlank?: boolean;
+
+	/**
+	 * HTML &quot;id&quot; attribute of the element.
+	 */
+	@Input()
+	public dropdownId &#x3D; &quot;undefined&quot;;
+
+	/**
+	 * HTML &quot;name&quot; attribute of the element.
+	 */
+	@Input()
+	public dropdownName &#x3D; &quot;undefined&quot;;
+
+	/**
+	 * header Text to be displayed as the dropdown&#x27;s header. Such header will be shown at the top of the
+	 * dropdown options list(dynamically translated via the $translate service if the provided text is defined in the translation keys).
+	 */
+	// TODO re-enable once a solution for the replacement of md-select-header as been found
+	// @Input()
+	// public header?: string;
+
+	/**
+	 * Whether the dropdown is disabled
+	 */
+	@Input()
+	public disabled &#x3D; false;
+
+	/**
+	 * Allows multiple option selection. Setting the attribute to &quot;true&quot; or empty
+	 * will enable this feature. (optional)
+	 */
+	@Input()
+	public get multiSelect(): boolean {
+		return this._multiSelect;
+	}
+
+	public set multiSelect(value: boolean) {
+		this._multiSelect &#x3D; coerceBooleanProperty(value);
+	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	public static ngAcceptInputType_multiSelect: BooleanInput;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _multiSelect &#x3D; false;
+
+	/**
+	 * Array of options to be included in the dropdown list. This parameter is a one-way
+	 * binding (one-directional).
+	 */
+	@Input()
+	public options: any[] &#x3D; [];
+
+	/**
+	 * Property name to be used as id of the options defined. If this parameter as
+	 * well as the optionLabelProperty are omitted, then the options parameter is considered to be an array of simple types. (optional)
+	 */
+	@Input()
+	public optionIdProperty?: string;
+
+	/**
+	 * Property name to be used as label of the options defined (dynamically translated via
+	 * the @ngx-translate service if the provided text is defined in the translation keys). If this parameter as well as the
+	 * optionIdProperty are omitted, then the options parameter is considered to be an array of simple types. (optional)
+	 */
+	@Input()
+	public optionLabelProperty?: string;
+
+	/**
+	 * Text to be displayed as the dropdown&#x27;s placeholder.
+	 * Dynamically translated via the @ngx-translate service if the provided text is defined in the translation keys.
+	 */
+	@Input()
+	public placeholder &#x3D; &quot;&quot;;
+
+	/**
+	 * If the dropdown is required or not. by default, the dropdown is not required
+	 */
+	@Input()
+	public get required(): boolean {
+		return this._required;
+	}
+
+	public set required(value: boolean) {
+		this._required &#x3D; coerceBooleanProperty(value);
+		this.setDefaultBlank();
+		this.stateChanges.next();
+		this._onValidatorChange();
+	}
+
+	// Information about boolean coercion https://angular.io/guide/template-typecheck#input-setter-coercion
+	public static ngAcceptInputType_required: BooleanInput;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _required &#x3D; false;
+
+	/**
+	 * Source object to be bound to the dropdown ngModel.
+	 */
+	@Input()
+	public get value(): any | any[] {
+		return this._value;
+	}
+
+	public set value(value: any | any[]) {
+		if (!isEqual(this._value, value)) {
+			this._value &#x3D; value;
+			this.stateChanges.next();
+		}
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private _value: any | any[];
+
+	/**
+	 * This will emit the newly selected value.
+	 */
+	@Output()
+	public readonly selectionChanged &#x3D; new EventEmitter&lt;any&gt;();
+
+	/**
+	 * Reference to the single MatSelect element embedded in this component
+	 */
+	@ViewChild(&quot;singleSelectEl&quot;)
+	private singleSelectElement?: MatSelect;
+
+	/**
+	 * Reference to the multi MatSelect element embedded in this component
+	 */
+	@ViewChild(&quot;multiSelectEl&quot;)
+	private multiSelectElement?: MatSelect;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	public optionsAreSimpleTypes?: boolean;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	// eslint-disable-next-line no-null/no-null
+	public ngControl: NgControl | null &#x3D; null;
+
+	/**
+	 * Variable to define to use MatFormFieldControl.
+	 * Stream that emits whenever the state of the control changes such that the parent &#x60;MatFormField&#x60;
+	 * needs to run change detection.
+	 */
+	public stateChanges: Subject&lt;void&gt; &#x3D; new Subject&lt;void&gt;();
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	public focused &#x3D; false;
+
+	/**
+	 * Variable to define to use MatFormFieldControl
+	 * Whether the control is in an error state.
+	 */
+	public get errorState(): boolean {
+		/**
+		 * We decided to handle errors only when ngControl is defined, thanks to a &#x60;formControl&#x60; or an &#x60;NgModel&#x60;.
+		 * Otherwise, we&#x27;re able to switch the state to &quot;error&quot; and display the &#x60;alert&#x60; color on the mat-form-field.
+		 * But there is no way for the developer to detect there is an error coming from the &#x60;stark-dropdown&#x60; and display an error message.
+		 */
+		return (
+			!!this.ngControl &amp;&amp;
+			(!!this.ngControl.touched || !!this.ngControl.dirty) &amp;&amp;
+			// eslint-disable-next-line no-null/no-null
+			(!!this.ngControl.invalid || (this.ngControl.control !&#x3D;&#x3D; null &amp;&amp; !!this.validate(this.ngControl.control)))
+		);
+	}
+
+	/**
+	 * Variable to define to use MatFormFieldControl
+	 * Whether the control is empty.
+	 */
+	public get empty(): boolean {
+		return !this.value || (this.multiSelect &amp;&amp; !this.value.length);
+	}
+
+	/**
+	 * @ignore
+	 * @internal
+	 * Original placeholder translation key to keep in memory to translate again when language changes.
+	 */
+	private originalPlaceholder &#x3D; &quot;&quot;;
+
+	/**
+	 * @ignore
+	 * @internal
+	 */
+	private translateOnLangChangeSubscription?: Subscription;
+
+	/**
+	 * Class constructor
+	 * @param logger - The &#x60;StarkLoggingService&#x60; instance of the application.
+	 * @param renderer - Angular &#x60;Renderer2&#x60; wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 * @param fm - The Focus Monitor Service.
+	 * @param injector - The Injector of the application.
+	 * @param translateService - The &#x60;TranslateService&#x60; instance of the application.
+	 * @param formField - The MatFormField of this component (in case the component is used inside a &#x60;mat-form-field&#x60;).
+	 */
+	public constructor(
+		@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService,
+		renderer: Renderer2,
+		elementRef: ElementRef,
+		private fm: FocusMonitor,
+		private injector: Injector,
+		private translateService: TranslateService,
+		@Optional() private formField?: MatFormField
+	) {
+		super(renderer, elementRef);
+
+		fm.monitor(elementRef, true).subscribe((origin: FocusOrigin) &#x3D;&gt; {
+			this.focused &#x3D; !!origin &amp;&amp; !this.disabled;
+			this.stateChanges.next();
+		});
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public override ngOnInit(): void {
+		super.ngOnInit();
+		this.logger.debug(componentName + &quot;: component initialized&quot;);
+		this.optionsAreSimpleTypes &#x3D; this.areSimpleTypes();
+
+		// eslint-disable-next-line no-null/no-null
+		this.ngControl &#x3D; this.injector.get&lt;NgControl&gt;(NgControl, &lt;any&gt;null);
+
+		// eslint-disable-next-line no-null/no-null
+		if (this.ngControl !&#x3D;&#x3D; null) {
+			this.ngControl.valueAccessor &#x3D; this;
+		}
+
+		if (this.formField) {
+			/**
+			 * Add class on the parent mat-form-field tag
+			 * &#x60;mat-form-field-type-mat-select&#x60; - class to apply the elliptic effect and other styles for mat-select from mat-form-field
+			 * &#x60;stark-dropdown-mat-form-field&#x60; - class to control the parent mat-form-field
+			 * &#x60;stark-color&#x60; - class to set a the input color
+			 */
+			this.formField._elementRef.nativeElement.classList.add(&quot;mat-form-field-type-mat-select&quot;, &quot;stark-dropdown-mat-form-field&quot;);
+
+			if (this.color) {
+				this.formField._elementRef.nativeElement.classList.add(&#x60;stark-${this.color}&#x60;);
+			}
+		}
+
+		this.translateOnLangChangeSubscription &#x3D; this.translateService.onLangChange.subscribe(() &#x3D;&gt; {
+			// Handle translation internally because mat-form-field uses the value of &#x60;@Input public placeholder&#x60; to display the label / placeholder
+			this.placeholder &#x3D; this.originalPlaceholder
+				? this.translateService.instant(this.originalPlaceholder)
+				: this.originalPlaceholder;
+			this.stateChanges.next();
+		});
+
+		this.setDefaultBlank();
+	}
+
+	/**
+	 * Component lifecycle hook
+	 * @param changes - Contains the changed properties
+	 */
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (changes[&quot;optionIdProperty&quot;] || changes[&quot;optionLabelProperty&quot;]) {
+			this.optionsAreSimpleTypes &#x3D; this.areSimpleTypes();
+		}
+
+		if (changes[&quot;multiSelect&quot;] &amp;&amp; !changes[&quot;multiSelect&quot;].isFirstChange()) {
+			// This avoids an error when switching between &quot;simple select&quot; and &quot;multiple select&quot;
+			this.onInternalValueChange(undefined);
+		}
+
+		if (changes[&quot;placeholder&quot;]) {
+			this.originalPlaceholder &#x3D; changes[&quot;placeholder&quot;].currentValue || &quot;&quot;;
+			// Handle translation internally because mat-form-field uses the value of &#x60;@Input public placeholder&#x60; to display the label / placeholder
+			this.placeholder &#x3D; this.originalPlaceholder
+				? this.translateService.instant(this.originalPlaceholder)
+				: this.originalPlaceholder;
+			this.stateChanges.next();
+		}
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public ngOnDestroy(): void {
+		this.stateChanges.complete();
+		this.fm.stopMonitoring(this.elementRef.nativeElement);
+
+		if (this.translateOnLangChangeSubscription) {
+			this.translateOnLangChangeSubscription.unsubscribe();
+		}
+	}
+
+	/**
+	 * Handled when a &#x60;change&#x60; event is fired on the &#x60;&lt;mat-select&gt;&#x60; element, then emits the value on &#x60;selectionChanged&#x60;.
+	 * @param change - The MatSelectChange to to handle
+	 */
+	public onSelectionChange(change: MatSelectChange): void {
+		this.onInternalValueChange(change.value);
+	}
+
+	/**
+	 * Trigger required methods &#x60;selectionChanged.emit&#x60;, &#x60;_onChange&#x60;, &#x60;_onValidatorChange&#x60; when &#x60;value´ is changed internally.
+	 * @param value - New value to assign
+	 */
+	public onInternalValueChange(value: any | any[]): void {
+		this.value &#x3D; value;
+
+		this.selectionChanged.emit(this.value);
+		this._onChange(this.value);
+		this._onValidatorChange();
+	}
+
+	/**
+	 * Whether the type of the option elements is a primitive type (string, number, boolean...)
+	 * In case none of the optionId and optionLabel parameters are provided, then a simple data types array is assumed
+	 */
+	public areSimpleTypes(): boolean {
+		return !(
+			typeof this.optionIdProperty !&#x3D;&#x3D; &quot;undefined&quot; &amp;&amp;
+			this.optionIdProperty !&#x3D;&#x3D; &quot;&quot; &amp;&amp;
+			typeof this.optionLabelProperty !&#x3D;&#x3D; &quot;undefined&quot; &amp;&amp;
+			this.optionLabelProperty !&#x3D;&#x3D; &quot;&quot;
+		);
+	}
+
+	/**
+	 * set blank by default in the dropdown component
+	 */
+	public setDefaultBlank(): void {
+		// defaultBlank is by default false, you should explicitly set to true to add it
+		if (!this.defaultBlank) {
+			this.defaultBlank &#x3D; false;
+		}
+		// if dropdown is required you should not be able to select blank
+		if (this.required) {
+			this.defaultBlank &#x3D; false;
+		}
+	}
+
+	/**
+	 * Return the id of the option or the option itself if it is a simple type.
+	 * @param option - The option which id we want to retrieve
+	 * @returns The value to return
+	 */
+	public getOptionValue(option: any): any {
+		return this.optionsAreSimpleTypes ? option : option[&lt;string&gt;this.optionIdProperty];
+	}
+
+	/**
+	 * Return the label of the option or the option itself if it is a simple type.
+	 * @param option - The option which value we want to retrieve
+	 * @returns The value to return
+	 */
+	public getOptionLabel(option: any): any {
+		const optionLabel: string &#x3D; this.optionsAreSimpleTypes ? option : option[&lt;string&gt;this.optionLabelProperty];
+		return optionLabel.toString(); // IMPORTANT: the label should be a STRING otherwise the translate directive fails
+	}
+
+	/**
+	 * @ignore
+	 */
+	public trackItemFn(_index: number, item: any): string {
+		// FIXME: cannot call areSimpleTypes() from the component since this track function gets no context
+		return item;
+	}
+
+	/**
+	 * @ignore
+	 * The registered callback function called when an input event occurs on the input element.
+	 */
+	private _onChange: (_: any) &#x3D;&gt; void &#x3D; (_: any) &#x3D;&gt; {
+		/* noop*/
+	};
+
+	/**
+	 * @ignore
+	 * The registered callback function called when a blur event occurs on the input element.
+	 */
+	private _onTouched: () &#x3D;&gt; void &#x3D; () &#x3D;&gt; {
+		/* noop*/
+	};
+
+	/**
+	 * The registered callback function called when the validator inputs change.
+	 */
+	private _onValidatorChange: () &#x3D;&gt; void &#x3D; () &#x3D;&gt; {
+		/* noop*/
+	};
+
+	/**
+	 * Registers a function called when the control value changes.
+	 *
+	 * @param fn - The callback function
+	 */
+	public registerOnChange(fn: (_: any) &#x3D;&gt; void): void {
+		this._onChange &#x3D; fn;
+	}
+
+	/**
+	 * Registers a function called when the control is touched.
+	 *
+	 * @param fn - The callback function
+	 */
+	public registerOnTouched(fn: () &#x3D;&gt; void): void {
+		this._onTouched &#x3D; fn;
+	}
+
+	/**
+	 * Sets the &quot;disabled&quot; property on the input element.
+	 *
+	 * @param isDisabled - The disabled value
+	 */
+	public setDisabledState(isDisabled: boolean): void {
+		this.disabled &#x3D; isDisabled;
+		this.stateChanges.next();
+	}
+
+	/**
+	 * Sets the &quot;value&quot; property on the input element.
+	 *
+	 * @param obj - The checked value
+	 */
+	public writeValue(obj: any): void {
+		this.value &#x3D; obj;
+	}
+
+	/**
+	 * Method implemented to use MatFormFieldControl
+	 * Sets the list of element IDs that currently describe this control.
+	 * @param ids - Ids describing the MatFormFieldControl
+	 */
+	public setDescribedByIds(ids: string[]): void {
+		this.describedBy &#x3D; ids.join(&quot; &quot;);
+	}
+
+	/**
+	 * Method implemented to use MatFormFieldControl
+	 * It handles a click on the control&#x27;s container.
+	 */
+	public onContainerClick(): void {
+		// Mimic implementation of MatSelect: https://github.com/angular/components/blob/master/src/material/select/select.ts
+		if (this.singleSelectElement) {
+			this.singleSelectElement.focus();
+			this.singleSelectElement.open();
+		} else if (this.multiSelectElement) {
+			this.multiSelectElement.focus();
+			this.multiSelectElement.open();
+		}
+	}
+
+	/**
+	 * Registers a callback function to call when the validator inputs change.
+	 *
+	 * @param fn - The callback function
+	 */
+	public registerOnValidatorChange(fn: () &#x3D;&gt; void): void {
+		this._onValidatorChange &#x3D; fn;
+	}
+
+	/**
+	 * Method that performs synchronous validation against the provided control.
+	 *
+	 * @param control - The control to validate against.
+	 *
+	 * @returns A map of validation errors if validation fails, otherwise null.
+	 */
+	public validate(control: AbstractControl): ValidationErrors | null {
+		// eslint-disable-next-line no-null/no-null
+		return this.required ? Validators.required(control) : null;
+	}
+
+	/**
+	 * Method which set the MatFormField as touched once the mat-select has been clicked.
+	 */
+	public onOpenedChange(): void {
+		this._onTouched();
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- Support for changing multiSelect after init. https://material.angular.io/components/select/overview#error-cannot-change-code-multiple-code-mode-of-select-after-initialization --&gt;
+&lt;!-- single-selection view --&gt;
+&lt;mat-select
+	#singleSelectEl
+	*ngIf&#x3D;&quot;!multiSelect&quot;
+	[value]&#x3D;&quot;value&quot;
+	[id]&#x3D;&quot;dropdownId&quot;
+	[placeholder]&#x3D;&quot;placeholder&quot;
+	[attr.aria-label]&#x3D;&quot;dropdownName | translate&quot;
+	[required]&#x3D;&quot;required&quot;
+	[disabled]&#x3D;&quot;disabled&quot;
+	(selectionChange)&#x3D;&quot;onSelectionChange($event)&quot;
+	(openedChange)&#x3D;&quot;onOpenedChange()&quot;
+&gt;
+	&lt;!-- FIXME find a replacement for md-select-header as mat-select-header does not exist yet https://github.com/angular/material2/pull/7835 --&gt;
+	&lt;!--&lt;mat-select-header--&gt;
+	&lt;!--*ngIf&#x3D;&quot;header !&#x3D;&#x3D; undefined &amp;&amp; header !&#x3D;&#x3D; &#x27;&#x27;&quot;--&gt;
+	&lt;!--class&#x3D;&quot;stark-dropdown-header&quot;--&gt;
+	&lt;!--translate&gt;--&gt;
+	&lt;!--{{header}}--&gt;
+	&lt;!--&lt;/mat-select-header&gt;--&gt;
+
+	&lt;mat-option *ngIf&#x3D;&quot;defaultBlank&quot; [value]&#x3D;&quot;&quot;&gt;&lt;/mat-option&gt;
+
+	&lt;mat-option *ngFor&#x3D;&quot;let option of options; trackBy: trackItemFn&quot; [value]&#x3D;&quot;getOptionValue(option)&quot;&gt;
+		{{ getOptionLabel(option) | translate }}
+	&lt;/mat-option&gt;
+&lt;/mat-select&gt;
+
+&lt;!-- multiple-selection view --&gt;
+&lt;mat-select
+	#multiSelectEl
+	*ngIf&#x3D;&quot;multiSelect&quot;
+	[value]&#x3D;&quot;value&quot;
+	[id]&#x3D;&quot;dropdownId&quot;
+	[placeholder]&#x3D;&quot;placeholder&quot;
+	[attr.aria-label]&#x3D;&quot;dropdownName | translate&quot;
+	[required]&#x3D;&quot;required&quot;
+	[disabled]&#x3D;&quot;disabled&quot;
+	(selectionChange)&#x3D;&quot;onSelectionChange($event)&quot;
+	(openedChange)&#x3D;&quot;onOpenedChange()&quot;
+	multiple
+&gt;
+	&lt;!-- FIXME find a replacement for md-select-header as mat-select-header does not exist yet https://github.com/angular/material2/pull/7835 --&gt;
+	&lt;!--&lt;mat-select-header--&gt;
+	&lt;!--ng-if&#x3D;&quot;$ctrl.header !&#x3D;&#x3D; undefined &amp;&amp; $ctrl.header !&#x3D;&#x3D; &#x27;&#x27;&quot;--&gt;
+	&lt;!--class&#x3D;&quot;stark-dropdown-header&quot;--&gt;
+	&lt;!--translate&gt;--&gt;
+	&lt;!--{{header}}--&gt;
+	&lt;!--&lt;/mat-select-header&gt;--&gt;
+	&lt;mat-option *ngIf&#x3D;&quot;defaultBlank&quot; [value]&#x3D;&quot;&quot;&gt;&lt;/mat-option&gt;
+
+	&lt;mat-option *ngFor&#x3D;&quot;let option of options; trackBy: trackItemFn&quot; [value]&#x3D;&quot;getOptionValue(option)&quot;&gt;
+		&lt;!-- the translate filter should be used in the options instead of the directive, otherwise the text is not translated :( --&gt;
+		{{ getOptionLabel(option) | translate }}
+	&lt;/mat-option&gt;
+&lt;/mat-select&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- Support for changing multiSelect after init. https://material.angular.io/components/select/overview#error-cannot-change-code-multiple-code-mode-of-select-after-initialization --><!-- single-selection view --><mat-select	#singleSelectEl	*ngIf="!multiSelect"	[value]="value"	[id]="dropdownId"	[placeholder]="placeholder"	[attr.aria-label]="dropdownName | translate"	[required]="required"	[disabled]="disabled"	(selectionChange)="onSelectionChange($event)"	(openedChange)="onOpenedChange()">	<!-- FIXME find a replacement for md-select-header as mat-select-header does not exist yet https://github.com/angular/material2/pull/7835 -->	<!--<mat-select-header-->	<!--*ngIf="header !== undefined && header !== \'\'"-->	<!--class="stark-dropdown-header"-->	<!--translate>-->	<!--{{header}}-->	<!--</mat-select-header>-->	<mat-option *ngIf="defaultBlank" [value]=""></mat-option>	<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)">		{{ getOptionLabel(option) | translate }}	</mat-option></mat-select><!-- multiple-selection view --><mat-select	#multiSelectEl	*ngIf="multiSelect"	[value]="value"	[id]="dropdownId"	[placeholder]="placeholder"	[attr.aria-label]="dropdownName | translate"	[required]="required"	[disabled]="disabled"	(selectionChange)="onSelectionChange($event)"	(openedChange)="onOpenedChange()"	multiple>	<!-- FIXME find a replacement for md-select-header as mat-select-header does not exist yet https://github.com/angular/material2/pull/7835 -->	<!--<mat-select-header-->	<!--ng-if="$ctrl.header !== undefined && $ctrl.header !== \'\'"-->	<!--class="stark-dropdown-header"-->	<!--translate>-->	<!--{{header}}-->	<!--</mat-select-header>-->	<mat-option *ngIf="defaultBlank" [value]=""></mat-option>	<mat-option *ngFor="let option of options; trackBy: trackItemFn" [value]="getOptionValue(option)">		<!-- the translate filter should be used in the options instead of the directive, otherwise the text is not translated :( -->		{{ getOptionLabel(option) | translate }}	</mat-option></mat-select></div>'
+    var COMPONENTS = [{'name': 'StarkActionBarComponent', 'selector': 'stark-action-bar'},{'name': 'StarkAlertDialogComponent', 'selector': 'stark-alert-dialog'},{'name': 'StarkAppDataComponent', 'selector': 'stark-app-data'},{'name': 'StarkAppFooterComponent', 'selector': 'stark-app-footer'},{'name': 'StarkAppLogoComponent', 'selector': 'stark-app-logo'},{'name': 'StarkAppLogoutComponent', 'selector': 'stark-app-logout'},{'name': 'StarkAppMenuComponent', 'selector': 'stark-app-menu'},{'name': 'StarkAppMenuItemComponent', 'selector': 'stark-app-menu-item'},{'name': 'StarkAppSidebarComponent', 'selector': 'stark-app-sidebar'},{'name': 'StarkBreadcrumbComponent', 'selector': 'stark-breadcrumb'},{'name': 'StarkCollapsibleComponent', 'selector': 'stark-collapsible'},{'name': 'StarkConfirmDialogComponent', 'selector': 'stark-confirm-dialog'},{'name': 'StarkDatePickerComponent', 'selector': 'stark-date-picker'},{'name': 'StarkDateRangePickerComponent', 'selector': 'stark-date-range-picker'},{'name': 'StarkDateTimePickerComponent', 'selector': 'stark-date-time-picker'},{'name': 'StarkDropdownComponent', 'selector': 'stark-dropdown'},{'name': 'StarkGenericSearchComponent', 'selector': 'stark-generic-search'},{'name': 'StarkLanguageSelectorComponent', 'selector': 'stark-language-selector'},{'name': 'StarkLoginPageComponent', 'selector': 'stark-login-page'},{'name': 'StarkMessagePaneComponent', 'selector': 'stark-message-pane'},{'name': 'StarkMinimapComponent', 'selector': 'stark-minimap'},{'name': 'StarkPaginationComponent', 'selector': 'stark-pagination'},{'name': 'StarkPreloadingPageComponent', 'selector': 'stark-preloading-page'},{'name': 'StarkPrettyPrintComponent', 'selector': 'stark-pretty-print'},{'name': 'StarkProgressIndicatorComponent', 'selector': 'stark-progress-indicator'},{'name': 'StarkPromptDialogComponent', 'selector': 'stark-prompt-dialog'},{'name': 'StarkRouteSearchComponent', 'selector': 'stark-route-search'},{'name': 'StarkSessionCardComponent', 'selector': 'stark-session-card'},{'name': 'StarkSessionExpiredPageComponent', 'selector': 'stark-session-expired-page'},{'name': 'StarkSessionLogoutPageComponent', 'selector': 'stark-session-logout-page'},{'name': 'StarkSessionTimeoutWarningDialogComponent', 'selector': 'stark-session-timeout-warning-dialog'},{'name': 'StarkSliderComponent', 'selector': 'stark-slider'},{'name': 'StarkTableColumnComponent', 'selector': 'stark-table-column'},{'name': 'StarkTableComponent', 'selector': 'stark-table'},{'name': 'StarkTableMultisortDialogComponent', 'selector': 'stark-table-dialog-multisort'},{'name': 'StarkToastNotificationComponent', 'selector': 'stark-toast-notification'}];
+    var DIRECTIVES = [{'name': 'AbstractStarkFormComponent', 'selector': ''},{'name': 'AbstractStarkSearchComponent', 'selector': ''},{'name': 'AbstractStarkUiComponent', 'selector': ''},{'name': 'StarkEmailMaskDirective', 'selector': 'directiveName'},{'name': 'StarkNumberMaskDirective', 'selector': 'directiveName'},{'name': 'StarkProgressIndicatorDirective', 'selector': 'directiveName'},{'name': 'StarkRestrictInputDirective', 'selector': 'directiveName'},{'name': 'StarkSvgViewBoxDirective', 'selector': 'directiveName'},{'name': 'StarkTableExpandDetailDirective', 'selector': '[starkTableExpandDetail]'},{'name': 'StarkTableRowContentDirective', 'selector': '[starkTableRowContent]'},{'name': 'StarkTextMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTimestampMaskDirective', 'selector': 'directiveName'},{'name': 'StarkTransformInputDirective', 'selector': '[starkTransformInput]'}];
+    var ACTUAL_COMPONENT = {'name': 'StarkDropdownComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkDropdownComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

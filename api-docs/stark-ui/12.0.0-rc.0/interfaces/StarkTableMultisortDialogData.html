@@ -1,0 +1,395 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  StarkTableMultisortDialogData</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/table/components/dialogs/multisort.component.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Content of the data to be passed to the StarkTableMultisortDialogComponent</p>
+
+            </p>
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#columns" 
+>
+                                            columns
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="columns"></a>
+                                        <span class="name "><b>columns</b>
+                                            <a href="#columns">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>columns:         <code><a href="../components/StarkTableColumnComponent.html" target="_self" >StarkTableColumnComponent[]</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../components/StarkTableColumnComponent.html" target="_self" >StarkTableColumnComponent[]</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Sortable StarkTable columns whose configuration can be defined in this dialog component</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from &quot;@angular/core&quot;;
+import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from &quot;@angular/material/legacy-dialog&quot;;
+import { StarkTableColumnComponent } from &quot;../column.component&quot;;
+import { AbstractStarkUiComponent } from &quot;@nationalbankbelgium/stark-ui/src/internal-common&quot;;
+import { StarkTableColumnSortingDirection } from &quot;../../entities&quot;;
+
+/**
+ * Content of the data to be passed to the StarkTableMultisortDialogComponent
+ */
+export interface StarkTableMultisortDialogData {
+	/**
+	 * Sortable StarkTable columns whose configuration can be defined in this dialog component
+	 */
+	columns: StarkTableColumnComponent[];
+}
+
+/**
+ * Rule object to be configured in the StarkTableMultisortDialogComponent
+ */
+export interface StarkSortingRule {
+	/**
+	 * Sortable StarkTable column
+	 */
+	column: StarkTableColumnComponent;
+	/**
+	 * Sorting direction: &quot;ascending&quot; or &quot;descending&quot;
+	 */
+	sortDirection: StarkTableColumnSortingDirection;
+	/**
+	 * Priority of this rule. Priority is a number between 0 and 100 where 0 represents the higher priority
+	 */
+	sortPriority: number;
+}
+
+/**
+ * Component to display the multi column sorting configuration
+ */
+@Component({
+	selector: &quot;stark-table-dialog-multisort&quot;,
+	templateUrl: &quot;./multisort.component.html&quot;,
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
+	host: {
+		class: &quot;stark-table-dialog-multisort&quot;
+	}
+})
+export class StarkTableMultisortDialogComponent extends AbstractStarkUiComponent implements OnInit {
+	/**
+	 * Array of sorting rules currently applied
+	 */
+	public rules: StarkSortingRule[] &#x3D; [];
+	/**
+	 * The priority to be set to a new rule when added
+	 */
+	public currentPriority &#x3D; 0;
+
+	/**
+	 * Whether the Add button is disabled
+	 */
+	public isAddDisabled &#x3D; false;
+
+	/**
+	 * Class constructor
+	 * @param dialogRef - Reference to this dialog opened via the MatDialog service
+	 * @param data - The data to be passed to this dialog component
+	 * @param renderer - Angular &#x60;Renderer2&#x60; wrapper for DOM manipulations.
+	 * @param elementRef - Reference to the DOM element where this component is attached to.
+	 */
+	public constructor(
+		public dialogRef: MatDialogRef&lt;StarkTableMultisortDialogComponent&gt;,
+		@Inject(MAT_DIALOG_DATA) public data: StarkTableMultisortDialogData,
+		renderer: Renderer2,
+		elementRef: ElementRef
+	) {
+		super(renderer, elementRef);
+	}
+
+	/**
+	 * Component lifecycle hook
+	 */
+	public override ngOnInit(): void {
+		super.ngOnInit();
+		this.data.columns.sort((a: StarkTableColumnComponent, b: StarkTableColumnComponent) &#x3D;&gt; a.sortPriority - b.sortPriority);
+
+		for (const column of this.data.columns) {
+			if (column.sortable) {
+				if (column.sortDirection) {
+					this.currentPriority++;
+				}
+				this.rules.push({
+					column: column,
+					sortDirection: column.sortDirection,
+					sortPriority: column.sortDirection ? this.currentPriority : 100
+				});
+			}
+		}
+		this.sortRules();
+	}
+
+	/**
+	 * Called when Add button is clicked.
+	 * Sets the sorting direction to &quot;asc&quot; to a rule that doesn&#x27;t have sorting direction yet so it is displayed in the dialog
+	 */
+	public onAdd(): void {
+		for (const rule of this.rules) {
+			if (!rule.sortDirection) {
+				rule.sortDirection &#x3D; &quot;asc&quot;;
+				this.currentPriority++;
+				rule.sortPriority &#x3D; this.currentPriority;
+				break;
+			}
+		}
+		this.sortRules();
+	}
+
+	/**
+	 * Called when Delete button is clicked.
+	 * Deletes the given column sorting rule.
+	 * @param rule - The column sorting rule to be deleted
+	 */
+	public onDelete(rule: StarkSortingRule): void {
+		rule.sortDirection &#x3D; &quot;&quot;;
+		rule.sortPriority &#x3D; 100;
+		this.sortRules();
+	}
+
+	/**
+	 * Called when Cancel button is clicked.
+	 * Closes this dialog discarding any changes done to the original sorting rules.
+	 */
+	public onCancel(): void {
+		this.dialogRef.close(false);
+	}
+
+	/**
+	 * Called when the sorting rule changes.
+	 * @param oldRule - New state of the sorting rule
+	 * @param newRule - Previous state of the sorting rule
+	 */
+	public onColumnChange(oldRule: StarkSortingRule, newRule: StarkSortingRule): void {
+		newRule.sortDirection &#x3D; oldRule.sortDirection;
+		newRule.sortPriority &#x3D; oldRule.sortPriority;
+		oldRule.sortDirection &#x3D; &quot;&quot;;
+		oldRule.sortPriority &#x3D; 100;
+		this.sortRules();
+	}
+
+	/**
+	 * Called when Save button is clicked.
+	 * Close the dialog returning the updated rules defined back to the dialog opener.
+	 */
+	public onSave(): void {
+		this.dialogRef.close(this.rules);
+	}
+
+	/**
+	 * Sort all sorting rules by priority
+	 */
+	public sortRules(): void {
+		this.rules.sort((a: StarkSortingRule, b: StarkSortingRule) &#x3D;&gt; a.sortPriority - b.sortPriority);
+		this.isAddDisabled &#x3D; this.rules.filter((rule: StarkSortingRule) &#x3D;&gt; !!rule.sortDirection).length &#x3D;&#x3D;&#x3D; this.rules.length;
+	}
+
+	/**
+	 * @ignore
+	 */
+	public trackRuleFn(_index: number, item: StarkSortingRule): string {
+		return item.column.name;
+	}
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'StarkTableMultisortDialogData.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
