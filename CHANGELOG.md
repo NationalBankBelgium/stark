@@ -1,3 +1,12 @@
+## [10.3.5](https://github.com/nationalbankbelgium/stark/compare/10.3.4...10.3.5) (2024-06-13)
+
+
+### Bug Fixes
+
+* **stark-ui:** fix Dutch translations in table component ([0f4025b](https://github.com/nationalbankbelgium/stark/commit/0f4025b07269ab9145f41521f1cea453b1f8ddcc)), closes [#3797](https://github.com/nationalbankbelgium/stark/issues/3797)
+
+
+
 ## [10.3.4](https://github.com/nationalbankbelgium/stark/compare/10.3.3...10.3.4) (2024-03-25)
 
 
