@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: stark-start-monitor
+spec:
+  selector:
+    matchLabels:
+      app: stark-start-monitor
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stark-start-monitor
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: stark-start-monitor
+          image: 'bourrierf/stark-start-monitor'
+          resources:
+            requests:
+                cpu: 300m
+          ports:
+            - name: site
+              containerPort: 3000
+            - name: webpack
+              containerPort: 3030
