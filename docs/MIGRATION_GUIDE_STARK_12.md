@@ -9,7 +9,7 @@ Upgrade the following dependencies in your "package.json" file:
 
 - @angular/\*, from `"^7.2.0"` to `"^12.1.0"`
 - @nationalbankbelgium/code-style: `"^1.6.0"`
-- @nationalbankbelgium/stark-\*, from `"^10.0.0"` to `"^12.0.0"`
+- @nationalbankbelgium/stark-\*, from `"^10.0.0"` to `"^12.0.0-alpha.0"`
 - typescript, from `"~3.5.0"` to `"~4.3.5"`
 - zone.js, from `"~0.8.x"` to `"~0.11.4"`
 
