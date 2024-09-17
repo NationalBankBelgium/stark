@@ -21,7 +21,7 @@
     "@angularclass/hmr": "^3.0.0",
     "@ng-idle/core": "^14.0.0",
     "@ng-idle/keepalive": "^14.0.0",
-    "@ngrx/effects": "^16.3.0",
+    "@ngrx/effects": "^18.0.2",
     "@ngrx/store": "^16.3.0",
     "@ngrx/store-devtools": "^16.3.0",
     "@ngx-translate/core": "^15.0.0",
