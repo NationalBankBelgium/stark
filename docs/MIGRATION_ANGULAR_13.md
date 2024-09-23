@@ -20,12 +20,14 @@ If you are on Windows, please use Git Bash or WSL to execute commands.
 	"@nationalbankbelgium/stark-core": "12.0.0-alpha.1",
 	"@nationalbankbelgium/stark-rbac": "12.0.0-alpha.1",
 	"@nationalbankbelgium/stark-ui": "12.0.0-alpha.1",
+	"@nationalbankbelgium/ngx-form-errors": "1.1.0",
 
 	/* to */
 
 	"@nationalbankbelgium/stark-core": "12.0.0-beta.0",
 	"@nationalbankbelgium/stark-rbac": "12.0.0-beta.0",
 	"@nationalbankbelgium/stark-ui": "12.0.0-beta.0",
+	"@nationalbankbelgium/ngx-form-errors": "2.0.0-rc.0",
 ```
 
 ### Update devDependencies
