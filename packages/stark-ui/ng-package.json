@@ -23,7 +23,6 @@
     "@prettier/plugin-xml",
     "@sqltools/formatter",
     "@types/lodash-es",
-    "@types/nouislider",
     "@types/prismjs",
     "angular2-text-mask",
     "normalize.css",
