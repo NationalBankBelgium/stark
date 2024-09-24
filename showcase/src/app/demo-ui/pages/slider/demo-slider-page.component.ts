@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { StarkSliderConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
+import { Options, PipsMode } from "nouislider";
 
 export enum SLIDER_HANDLES {
 	lower = 0,
@@ -28,16 +28,17 @@ export class DemoSliderPageComponent {
 	public isSimpleHorizontalSliderEnabled = true;
 	public valueForSimpleHorizontalSlider = 100;
 	public simpleHorizontalSliderValues: number[] = [100];
-	public simpleHorizontalSliderConfig: StarkSliderConfig = {
-		connect: [true, false],
+	public simpleHorizontalSliderConfig: Options = {
+		connect: "lower",
 		tooltips: [true],
 		step: 10,
+		start: 0,
 		range: {
 			min: 0,
 			max: 1000
 		},
 		pips: {
-			mode: "values",
+			mode: PipsMode.Values,
 			values: [0, 250, 500, 750, 1000],
 			density: 6
 		}
@@ -50,16 +51,17 @@ export class DemoSliderPageComponent {
 	public lowerValueForHorizontalRangeSlider = 100;
 	public upperValueForHorizontalRangeSlider = 900;
 	public horizontalRangeSliderValues: number[] = [100, 900];
-	public horizontalRangeSliderConfig: StarkSliderConfig = {
+	public horizontalRangeSliderConfig: Options = {
 		connect: [false, true, false],
 		tooltips: [true, true],
 		step: 10,
+		start: 0,
 		range: {
 			min: 0,
 			max: 1000
 		},
 		pips: {
-			mode: "values",
+			mode: PipsMode.Values,
 			values: [0, 250, 500, 750, 1000],
 			density: 6
 		}
@@ -71,17 +73,18 @@ export class DemoSliderPageComponent {
 	public isSimpleVerticalSliderEnabled = true;
 	public valueForSimpleVerticalSlider = 100;
 	public simpleVerticalSliderValues: number[] = [100];
-	public simpleVerticalSliderConfig: StarkSliderConfig = {
+	public simpleVerticalSliderConfig: Options = {
 		connect: [true, false],
 		orientation: "vertical",
 		tooltips: [true],
 		step: 10,
+		start: 0,
 		range: {
 			min: 0,
 			max: 1000
 		},
 		pips: {
-			mode: "values",
+			mode: PipsMode.Values,
 			values: [0, 250, 500, 750, 1000],
 			density: 6
 		}
@@ -94,17 +97,18 @@ export class DemoSliderPageComponent {
 	public lowerValueForVerticalRangeSlider = 100;
 	public upperValueForVerticalRangeSlider = 900;
 	public verticalRangeSliderValues: number[] = [100, 900];
-	public verticalRangeSliderConfig: StarkSliderConfig = {
+	public verticalRangeSliderConfig: Options = {
 		connect: [false, true, false],
 		orientation: "vertical",
 		tooltips: [true, true],
 		step: 10,
+		start: 0,
 		range: {
 			min: 0,
 			max: 1000
 		},
 		pips: {
-			mode: "values",
+			mode: PipsMode.Values,
 			values: [0, 250, 500, 750, 1000],
 			density: 6
 		}
