@@ -41,7 +41,7 @@
     "@mdi/angular-material": "^4.0.96",
     "@nationalbankbelgium/code-style": "^1.11.0",
     "@nationalbankbelgium/eslint-config": "^16.0.0",
-    "@ng-idle/core": "^14.0.0",
+    "@ng-idle/core": "^16.0.0",
     "@ng-idle/keepalive": "^14.0.0",
     "@ngrx/effects": "^16.3.0",
     "@ngrx/store-devtools": "^16.3.0",

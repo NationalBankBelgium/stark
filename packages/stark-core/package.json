@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@angularclass/hmr": "^3.0.0",
-    "@ng-idle/core": "^14.0.0",
+    "@ng-idle/core": "^16.0.0",
     "@ng-idle/keepalive": "^14.0.0",
     "@ngrx/effects": "^16.3.0",
     "@ngrx/store": "^16.3.0",
