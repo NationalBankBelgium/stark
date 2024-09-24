@@ -5,7 +5,7 @@
 @use "sass:map";
 @use "@angular/material" as mat;
 @use "../../../../styles/old-variables" as old-vars;
-@import "~nouislider/distribute/nouislider.css";
+@import "~nouislider/dist/nouislider.css";
 
 @mixin stark-slider-theme($material-theme-config, $stark-theme-config) {
   .stark-slider {
@@ -95,6 +95,10 @@
       /* setting default height: without a height, the vertical slider will not work */
       height: 300px;
       width: 5px;
+
+      .noUi-origin {
+        top: 0;
+      }
 
       .noUi-handle {
         transform: translate(-10px, -50%);
