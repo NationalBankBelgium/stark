@@ -58,7 +58,7 @@
     "@types/prismjs": "^1.16.3",
     "@types/uuid": "^9.0.8",
     "@types/webpack": "^5.28.0",
-    "@uirouter/angular": "^12.0.0",
+    "@uirouter/angular": "^14.0.0",
     "@uirouter/core": "^6.0.8",
     "@uirouter/rx": "~1.0.0",
     "angular2-text-mask": "^9.0.0",
