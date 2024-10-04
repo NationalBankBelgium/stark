@@ -20,7 +20,7 @@
   "types": "typings/index.d.ts",
   "dependencies": {
     "@angular-builders/custom-webpack": "^16.0.0",
-    "@angular-devkit/build-angular": "^16.2.14",
+    "@angular-devkit/build-angular": "^16.2.16",
     "@types/webpack": "^5.28.0",
     "eslint-webpack-plugin": "^4.0.1",
     "moment-locales-webpack-plugin": "^1.2.0",
