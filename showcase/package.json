@@ -133,7 +133,7 @@
     "zone.js": "~0.13.3"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "1.1.19",
+    "@compodoc/compodoc": "1.1.25",
     "@nationalbankbelgium/eslint-config": "^16.0.0",
     "@nationalbankbelgium/stark-build": "file:../dist/packages-dist/stark-build/nationalbankbelgium-stark-build-12.0.0-rc.0-8c3bb141-1728386498.tgz",
     "@nationalbankbelgium/stark-testing": "file:../dist/packages-dist/stark-testing/nationalbankbelgium-stark-testing-12.0.0-rc.0-8c3bb141-1728386498.tgz",
