@@ -26,7 +26,7 @@
     "moment-locales-webpack-plugin": "^1.2.0",
     "prettier": "~3.3.3",
     "stylelint": "^13.11.0",
-    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-prettier": "^9.0.5",
     "stylelint-webpack-plugin": "~2.1.0",
     "webpack-bundle-analyzer": "^4.10.1"
   },
