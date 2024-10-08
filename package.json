@@ -65,7 +65,7 @@
     "cerialize": "^0.1.18",
     "ci-info": "^4.0.0",
     "class-validator": "~0.14.1",
-    "commitizen": "^4.2.3",
+    "commitizen": "^4.3.1",
     "conventional-changelog-cli": "^5.0.0",
     "core-js": "^3.38.1",
     "cross-env": "^7.0.3",
