@@ -26,7 +26,7 @@
     "angular2-text-mask": "^9.0.0",
     "normalize.css": "^8.0.1",
     "nouislider": "^14.6.3",
-    "prettier": "~3.1.1",
+    "prettier": "~3.3.3",
     "prismjs": "^1.23.0",
     "text-mask-addons": "^3.8.0",
     "text-mask-core": "^5.1.2"
