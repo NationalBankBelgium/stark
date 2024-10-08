@@ -26,7 +26,7 @@
     "@ngrx/store-devtools": "^16.3.0",
     "@ngx-translate/core": "^15.0.0",
     "@types/lodash-es": "^4.17.4",
-    "@types/uuid": "^9.0.8",
+    "@types/uuid": "^10.0.0",
     "@uirouter/angular": "^14.0.0",
     "@uirouter/core": "^6.1.1",
     "@uirouter/rx": "~1.0.0",
