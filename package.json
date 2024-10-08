@@ -101,7 +101,7 @@
     "release-it": "^17.0.3",
     "rxjs": "^7.8.1",
     "stream-concat": "^2.0.0",
-    "stylelint": "^13.11.0",
+    "stylelint": "^16.9.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-webpack-plugin": "~2.1.0",
     "text-mask-addons": "^3.8.0",
