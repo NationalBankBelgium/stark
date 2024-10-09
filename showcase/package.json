@@ -116,7 +116,7 @@
     "@angular/platform-server": "^16.2.12",
     "@angular/router": "^16.2.12",
     "@nationalbankbelgium/code-style": "^1.11.0",
-    "@nationalbankbelgium/ngx-form-errors": "2.0.0-rc.0",
+    "@nationalbankbelgium/ngx-form-errors": "2.0.1",
     "@nationalbankbelgium/stark-core": "file:../dist/packages-dist/stark-core/nationalbankbelgium-stark-core-12.0.0-rc.0-8c3bb141-1728386498.tgz",
     "@nationalbankbelgium/stark-rbac": "file:../dist/packages-dist/stark-rbac/nationalbankbelgium-stark-rbac-12.0.0-rc.0-8c3bb141-1728386498.tgz",
     "@nationalbankbelgium/stark-ui": "file:../dist/packages-dist/stark-ui/nationalbankbelgium-stark-ui-12.0.0-rc.0-8c3bb141-1728386498.tgz",
