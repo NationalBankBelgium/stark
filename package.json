@@ -45,7 +45,7 @@
     "@ng-idle/keepalive": "^14.0.0",
     "@ngrx/effects": "^16.3.0",
     "@ngrx/store-devtools": "^16.3.0",
-    "@ngrx/store": "^16.3.0",
+    "@ngrx/store": "^18.1.0",
     "@ngtools/json-schema": "^1.1.0",
     "@ngx-translate/core": "^15.0.0",
     "@release-it/conventional-changelog": "^8.0.2",
