@@ -4,7 +4,7 @@ import { Component, ViewChild } from "@angular/core";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
 import { StarkSliderComponent } from "./slider.component";
-import { StarkSliderConfig } from "./slider-config.intf";
+import { Options } from "nouislider";
 import Spy = jasmine.Spy;
 
 /**
@@ -27,7 +27,7 @@ class TestHostComponent {
 
 	public sliderId?: string;
 	public sliderValues?: number[];
-	public sliderConfig?: StarkSliderConfig;
+	public sliderConfig?: Options;
 
 	/**
 	 * Simulates the OnValueChanges event of the slider component
@@ -44,7 +44,8 @@ describe("SliderComponent", () => {
 	let hostComponent: TestHostComponent;
 	let hostFixture: ComponentFixture<TestHostComponent>;
 
-	const mockConfig: StarkSliderConfig = {
+	const mockConfig: Options = {
+		start: 5,
 		range: {
 			min: 5,
 			max: 95
@@ -76,7 +77,6 @@ describe("SliderComponent", () => {
 		hostComponent.sliderValues = mockValues;
 		hostComponent.sliderId = mockSliderId;
 
-		spyOn(component.noUiSliderLibrary, "create").and.callThrough();
 		spyOn(component, "updateSliderInstanceValues").and.callThrough();
 		spyOn(component.changed, "emit").and.callThrough();
 
@@ -153,7 +153,6 @@ describe("SliderComponent", () => {
 
 	describe("createSliderInstance", () => {
 		it("should create the slider instance and assign it to the internal variable", () => {
-			expect(component.noUiSliderLibrary.create).toHaveBeenCalledTimes(1);
 			expect(component.slider).toBeDefined();
 		});
 	});
