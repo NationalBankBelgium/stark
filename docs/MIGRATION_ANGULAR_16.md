@@ -19,9 +19,9 @@ If you are on Windows, please use Git Bash or WSL to execute commands.
 
 	/* to */
 
-	"@nationalbankbelgium/stark-core": "12.0.0-rc.0",
-	"@nationalbankbelgium/stark-rbac": "12.0.0-rc.0",
-	"@nationalbankbelgium/stark-ui": "12.0.0-rc.0",
+	"@nationalbankbelgium/stark-core": "^12.0.0",
+	"@nationalbankbelgium/stark-rbac": "^12.0.0",
+	"@nationalbankbelgium/stark-ui": "^12.0.0",
 	"@nationalbankbelgium/ngx-form-errors": "^2.0.1",
 ```
 
@@ -33,8 +33,8 @@ If you are on Windows, please use Git Bash or WSL to execute commands.
 	"@nationalbankbelgium/stark-testing": "12.0.0-beta.2",
 
 	/* to */
-	"@nationalbankbelgium/stark-build": "12.0.0-rc.0",
-	"@nationalbankbelgium/stark-testing": "12.0.0-rc.0",
+	"@nationalbankbelgium/stark-build": "^12.0.0",
+	"@nationalbankbelgium/stark-testing": "^12.0.0",
 ```
 
 ### Remove Lodash version from package.json
