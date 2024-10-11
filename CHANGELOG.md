@@ -1,3 +1,19 @@
+# [12.0.0](https://github.com/nationalbankbelgium/stark/compare/12.0.0-rc.0...12.0.0) (2024-10-11)
+
+
+### Features
+
+* **docs:** add documentation to upgrade from Stark 10 (Angular 7) to Stark 12 (Angular 16) ([e89e966](https://github.com/nationalbankbelgium/stark/commit/e89e966a5ee724350155717d0262d8b612d08b19))
+* **showcase:** adapt showcase to work with latest version of nouislider library ([538ee05](https://github.com/nationalbankbelgium/stark/commit/538ee05e76ae75505ae29585f292c15ecfcaf636))
+* **stark-ui:** adapt stark-slider component to work with the latest version of `nouislider` library ([a9db3b0](https://github.com/nationalbankbelgium/stark/commit/a9db3b058554216dffc568f06900c0940ad9c597))
+
+
+### BREAKING CHANGES
+
+* **stark-ui:** `StarkSliderConfig` extends nouislider `Options` therefore the start property is now required. In the next major release, the `StarkSliderConfig` interface may be removed.
+
+
+
 # [12.0.0-rc.0](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.2...12.0.0-rc.0) (2024-06-05)
 
 
