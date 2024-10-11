@@ -14,11 +14,10 @@ import {
 	SimpleChanges,
 	ViewEncapsulation
 } from "@angular/core";
-import * as noUiSliderLibrary from "nouislider";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkDOMUtil } from "@nationalbankbelgium/stark-ui/src/util";
-import { StarkSliderConfig } from "./slider-config.intf";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { API, Options, create } from "nouislider";
 
 /**
  * @ignore
@@ -51,7 +50,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	 * Configuration object for the slider instance to be created.
 	 */
 	@Input()
-	public sliderConfig!: StarkSliderConfig;
+	public sliderConfig!: Options;
 
 	/**
 	 * HTML "id" attribute of the element.
@@ -86,12 +85,7 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 	/**
 	 * a reference to the `noUiSlider` component
 	 */
-	public slider!: noUiSliderLibrary.noUiSlider;
-
-	/**
-	 * a reference to the noUiSlider library
-	 */
-	public noUiSliderLibrary: any;
+	public slider!: API;
 
 	/**
 	 * Class constructor
@@ -105,7 +99,6 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 		elementRef: ElementRef
 	) {
 		super(renderer, elementRef);
-		this.noUiSliderLibrary = noUiSliderLibrary;
 	}
 
 	/**
@@ -152,16 +145,15 @@ export class StarkSliderComponent extends AbstractStarkUiComponent implements Af
 			StarkDOMUtil.getElementsBySelector(this.elementRef.nativeElement, ".stark-slider .slider")[0]
 		);
 
-		const sliderOptions: noUiSliderLibrary.Options = { ...this.sliderConfig, start: this.values };
-		this.noUiSliderLibrary.create(sliderElement, sliderOptions);
-		this.slider = (<noUiSliderLibrary.Instance>sliderElement).noUiSlider;
+		const sliderOptions: Options = { ...this.sliderConfig, start: this.values };
+		this.slider = create(sliderElement, sliderOptions);
 	}
 
 	/**
 	 * Attach the update handler to the slider component
 	 */
 	public attachSliderInstanceUpdateHandler(): void {
-		this.slider.on("update", (_values: string[], _handle: number, unencodedValues: number[]) => {
+		this.slider.on("update", (_values: (string | number)[], _handle: number, unencodedValues: number[]) => {
 			if (!isEqual(this.values, unencodedValues)) {
 				this.values = unencodedValues;
 				this.latestUnencodedValues = unencodedValues;
