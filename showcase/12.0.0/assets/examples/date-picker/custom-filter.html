@@ -1,0 +1,13 @@
+<mat-form-field>
+	<stark-date-picker
+		pickerId="picker-custom-filter"
+		pickerName="custom-filter"
+		[value]="currentDate"
+		[dateFilter]="customDateFilter"
+		placeholder="Choose a date"
+		[min]="minDate"
+		[max]="maxDate"
+		(dateChange)="onDateChanged($event)"
+	>
+	</stark-date-picker>
+</mat-form-field>
