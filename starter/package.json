@@ -22,8 +22,8 @@
     "url": "https://github.com/nationalbankbelgium/stark.git"
   },
   "engines": {
-    "node": ">=14.20.0",
-    "npm": ">=8.19.1"
+    "node": ">=18.17.1",
+    "npm": ">=10.1.0"
   },
   "scripts": {
     "build": "npm run build:dev",
