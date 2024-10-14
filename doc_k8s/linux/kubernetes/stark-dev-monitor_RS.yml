@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: stark-dev-monitor
+spec:
+  selector:
+    matchLabels:
+      app: stark-dev-monitor
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stark-dev-monitor
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: stark-dev-monitor
+          image: 'registre.domaine.lan:5000/stark-dev-monitor'
+          resources:
+            requests:
+                cpu: 300m
+          ports:
+            - name: http
+              containerPort: 8080

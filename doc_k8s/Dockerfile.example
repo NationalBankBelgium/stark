@@ -1,0 +1,23 @@
+# The Order can be modified
+# /!\ FROM : have to be the first line
+# One FROM by Dockerfile except for Multi-Stage
+# /!\ Multi-Stage : the last FROM is the final FROM for the build 
+
+FROM image [the image's name]
+
+MAINTAINER author [author'(s')s name]
+
+WORKDIR path/directory [new directory (into container) to work]
+
+RUN cmd [cmd to execute]
+
+ADD source dest [copy and extract file]
+COPY source dest [copy file : SOURCE DEST]
+
+EXPOSE port [open port]
+
+ENV variable [define an environment variable]
+
+CMD ["cmd","param 1","param 2", ...] [execute at running]
+/!\ Only one CMD instruction by Dockerfile at the end
+
