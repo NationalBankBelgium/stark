@@ -150,7 +150,7 @@ jobs:
 
       # See: https://github.com/marketplace/actions/create-pull-request
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         if: env.UPDATED_DEPS == 1
         with:
           token: ${{ secrets.NBBBOT_TOKEN }}

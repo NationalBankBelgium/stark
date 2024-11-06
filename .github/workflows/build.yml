@@ -124,7 +124,7 @@ jobs:
 
       # See: https://github.com/marketplace/actions/upload-a-build-artifact
       - name: Upload stark packages-dist folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: stark-dist
           path: dist/packages-dist
@@ -138,8 +138,9 @@ jobs:
         run: node combine-packages-coverage.js
         if: env.IS_MAIN_ENVIRONMENT == 1
 
+      # See: https://github.com/marketplace/actions/coveralls-github-action
       - name: Coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: "combined-lcov.info"
@@ -179,7 +180,7 @@ jobs:
 
       # See: https://github.com/marketplace/actions/upload-a-build-artifact
       - name: Upload showcase dist folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: showcase-dist
           path: showcase/dist
@@ -254,13 +255,13 @@ jobs:
           touch ${{ env.LOGS_FILE }}
 
       # See: https://github.com/marketplace/actions/download-a-build-artifact
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: stark-dist
           path: dist/packages-dist
 
       # See: https://github.com/marketplace/actions/download-a-build-artifact
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: showcase-dist
           path: showcase/dist
