@@ -93,7 +93,7 @@
     "ng-packagr": "^16.2.3",
     "normalize.css": "^8.0.1",
     "nouislider": "^15.8.1",
-    "prettier": "~3.3.3",
+    "prettier": "~3.4.1",
     "prismjs": "^1.23.0",
     "protractor": "^7.0.0",
     "puppeteer": "^23.5.3",
