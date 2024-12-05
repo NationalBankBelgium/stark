@@ -68,7 +68,7 @@
     "conventional-changelog-cli": "^5.0.0",
     "core-js": "^3.38.1",
     "cross-env": "^7.0.3",
-    "cz-customizable": "^7.2.1",
+    "cz-customizable": "^7.3.0",
     "deep-freeze-strict": "^1.1.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-sonarjs": "^0.19.0",
