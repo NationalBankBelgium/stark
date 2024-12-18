@@ -22,7 +22,7 @@
   "dependencies": {
     "@angular-devkit/build-angular": "^16.2.16",
     "@types/jasmine": "~5.1.5",
-    "@types/karma": "^6.3.8",
+    "@types/karma": "^6.3.9",
     "@types/node": "^18.19.4",
     "ci-info": "^4.0.0",
     "jasmine-core": "^5.3.0",
