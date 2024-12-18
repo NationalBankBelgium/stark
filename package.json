@@ -107,7 +107,7 @@
     "text-mask-core": "^5.1.2",
     "tslib": "^2.7.0",
     "typescript": "~5.1.6",
-    "uuid": "^10.0.0",
+    "uuid": "^11.0.1",
     "webpack-bundle-analyzer": "^4.10.1",
     "zone.js": "~0.13.3"
   },
