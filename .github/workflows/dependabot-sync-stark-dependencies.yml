@@ -7,7 +7,7 @@ on:
       - completed
 env:
   TZ: "Europe/Brussels"
-  NPM_VERSION: "10.1.0"
+  NPM_VERSION: "10.x"
   LOGS_DIR: /tmp/stark/logs
   LOGS_FILE: /tmp/stark/logs/build-perf.log
 
@@ -23,10 +23,10 @@ jobs:
     name: Sync deps
     steps:
       # See: https://github.com/marketplace/actions/setup-node-js-environment
-      - name: Use Node.js 18
+      - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       # See: https://github.com/marketplace/actions/cache
       # See doc: https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
