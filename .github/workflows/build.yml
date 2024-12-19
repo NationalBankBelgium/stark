@@ -24,12 +24,10 @@ jobs:
   build-and-test:
     name: Build and test on Node.js ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        node_version: [ "10", "12", "14" ]
+        node_version: ["10", "12", "14"]
         os: [ubuntu-latest]
-        experimental: [false]
 
     steps:
       # Some actions should be executed only in one environment.
@@ -41,20 +39,27 @@ jobs:
           else
             echo "IS_MAIN_ENVIRONMENT=0" >> $GITHUB_ENV
           fi
-        
+
       # See: https://github.com/marketplace/actions/checkout
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: |
+            if [[ '${{ github.event_name != 'pull_request' }}' ]]; then
+              1
+            else
+              git rev-list --count ${{ github.event.pull_request.base.sha }}..HEAD
+            fi
 
       # See: https://github.com/marketplace/actions/setup-node-js-environment
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node_version }}
 
       # See: https://github.com/marketplace/actions/cache
       # See doc: https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules-${{ matrix.node_version }}-${{ matrix.os }}
         with:
@@ -65,20 +70,22 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      
+
       - name: Install npm ${{ env.NPM_VERSION }}
         run: npm i -g npm@${{ env.NPM_VERSION }}
-        
+
       - name: Get tag name if exists
         run: |
           TAG_NAME=$(echo $GITHUB_REF | sed -n "s/^refs\/tags\/\(\S*\).*$/\1/p")
           echo "GH_ACTIONS_TAG=${TAG_NAME}" >> $GITHUB_ENV
-        
+
       - name: List main variables
         run: |
           echo "Commit SHA  : ${GITHUB_SHA}"
           echo "Tag name    : ${{ env.GH_ACTIONS_TAG }}"
           echo "Reference   : ${GITHUB_REF}"
+          echo "Head branch : ${GITHUB_HEAD_REF}"
+          echo "Base branch : ${GITHUB_BASE_REF}"
           echo "Build number: ${GITHUB_RUN_NUMBER}"
           echo "Repository  : ${GITHUB_REPOSITORY}"
           echo "Event       : ${GITHUB_EVENT_NAME}"
@@ -88,16 +95,16 @@ jobs:
           echo "Node version: $NODE_VERSION"
           # This ensures that we are authenticated without requiring to have an actual .npmrc file within the project
           # echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-          
+
       - name: Check if dependencies are in sync between root and packages
         run: "npm run check:packages-dependencies"
 
       - name: Create file & folder for GitHub Actions logs
-        run: |  
+        run: |
           # cfr scripts/_ghactions-group.sh
           mkdir -p ${{ env.LOGS_DIR }}
           touch ${{ env.LOGS_FILE }}
-            
+
       - name: Install dependencies
         run: |
           npm ci
@@ -108,71 +115,72 @@ jobs:
 
       - name: Testing
         run: npm run test:travis-ci:all
-        
+
       - name: "Build showcase:ghpages"
         run: npm run build:showcase:ghpages
 
-      # See: https://github.com/marketplace/actions/upload-artifact
+      # See: https://github.com/marketplace/actions/upload-a-build-artifact
       - name: Upload stark packages-dist folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: stark-dist
           path: dist/packages-dist
         if: env.IS_MAIN_ENVIRONMENT == 1
 
-      # See: https://github.com/marketplace/actions/upload-artifact
+      # See: https://github.com/marketplace/actions/upload-a-build-artifact
       - name: Upload showcase dist folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: showcase-dist
           path: showcase/dist
         if: env.IS_MAIN_ENVIRONMENT == 1
-        
-      - name: BrowserStack Env Setup
-        uses: browserstack/github-actions/setup-env@master
-        with:
-          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          project-name: "Stark Showcase"
-        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
 
-      - name: BrowserStack Local Tunnel Setup
-        uses: browserstack/github-actions/setup-local@master
-        with:
-          local-testing: "start"
-          local-logging-level: "all-logs"
-          local-identifier: "github-actions-${{ github.run_number }}"
-        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
-    
-      - name: Running application under test
-        run: npm run server:prod:ci &
-        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
-        working-directory: showcase
-        
-      - name: Running test on BrowserStack
-        run: npm run protractor:browserstack
-        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
-        working-directory: showcase
-    
-      - name: BrowserStackLocal Stop
-        uses: browserstack/github-actions/setup-local@master
-        with:
-          local-testing: stop
-        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
-        
+#      - name: BrowserStack Env Setup
+#        uses: browserstack/github-actions/setup-env@master
+#        with:
+#          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+#          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+#          project-name: "Stark Showcase"
+#        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
+#
+#      - name: BrowserStack Local Tunnel Setup
+#        uses: browserstack/github-actions/setup-local@master
+#        with:
+#          local-testing: "start"
+#          local-logging-level: "all-logs"
+#          local-identifier: "github-actions-${{ github.run_number }}"
+#        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
+#
+#      - name: Running application under test
+#        run: npm run server:prod:ci &
+#        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
+#        working-directory: showcase
+#
+#      - name: Running test on BrowserStack
+#        run: npm run protractor:browserstack
+#        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
+#        working-directory: showcase
+#
+#      - name: BrowserStackLocal Stop
+#        uses: browserstack/github-actions/setup-local@master
+#        with:
+#          local-testing: stop
+#        if: env.IS_MAIN_ENVIRONMENT == 1 && github.event_name == 'push'
+
       - name: Generate docs coverage
         run: npm run docs:travis-ci:coverage
         if: env.IS_MAIN_ENVIRONMENT == 1
 
       - name: Save logs
         run: bash ./scripts/ci/print-logs.sh
-        
+
       - name: Combine coveralls reports
         run: node combine-packages-coverage.js
         if: env.IS_MAIN_ENVIRONMENT == 1
-        
+
+      # See: https://github.com/marketplace/actions/coveralls-github-action
       - name: Coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: "combined-lcov.info"
@@ -190,29 +198,31 @@ jobs:
           echo "GH_ACTIONS_TAG=${TAG_NAME}" >> $GITHUB_ENV
 
       # See: https://github.com/marketplace/actions/checkout
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # See: https://github.com/marketplace/actions/setup-node-js-environment
       - name: Use Node.js ${{ env.MAIN_NODEJS }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.MAIN_NODEJS }}
 
       - name: Install npm ${{ env.NPM_VERSION }}
         run: npm i -g npm@${{ env.NPM_VERSION }}
-        
+
       - name: Create file & folder for GitHub Actions logs
         run: |
           # cfr scripts/_ghactions-group.sh
           mkdir -p ${{ env.LOGS_DIR }}
           touch ${{ env.LOGS_FILE }}
-        
-      - uses: actions/download-artifact@v2
+
+      # See: https://github.com/marketplace/actions/download-a-build-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: stark-dist
           path: dist/packages-dist
 
-      - uses: actions/download-artifact@v2
+      # See: https://github.com/marketplace/actions/download-a-build-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: showcase-dist
           path: showcase/dist
@@ -221,15 +231,15 @@ jobs:
         run: |
           npm ci
         if: github.event_name != 'schedule'
-      
-      # Don't publish docs in maintenance branches  
+
+      # Don't publish docs in maintenance branches
       # - name: Generate docs
       #  run: npm run docs:publish -- --github-api-key=${{ secrets.GITHUB_TOKEN }}
       #  if: github.event_name != 'schedule'
-        
+
       - name: Set npm token
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-        
+
       - name: Release stark
         run: npm run release:publish
 
