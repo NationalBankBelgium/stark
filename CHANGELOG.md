@@ -1,3 +1,13 @@
+## [10.3.6](https://github.com/nationalbankbelgium/stark/compare/10.3.5...10.3.6) (2025-02-12)
+
+
+### Bug Fixes
+
+* **showcase:** update showcase `package.json` and `package-lock.json` ([d323d63](https://github.com/nationalbankbelgium/stark/commit/d323d63ab4bd8bf310a5c14af0c22061ad644a23)), closes [#4005](https://github.com/nationalbankbelgium/stark/issues/4005)
+* **stark-build:** set version of `@babel/core` to `7.26.7` ([246d663](https://github.com/nationalbankbelgium/stark/commit/246d663a5f1366374a9507e23a5f0c15761404a5)), closes [#4005](https://github.com/nationalbankbelgium/stark/issues/4005)
+
+
+
 ## [10.3.5](https://github.com/nationalbankbelgium/stark/compare/10.3.4...10.3.5) (2024-06-13)
 
 
