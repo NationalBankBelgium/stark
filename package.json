@@ -50,7 +50,7 @@
     "@ngx-translate/core": "^15.0.0",
     "@release-it/conventional-changelog": "^8.0.2",
     "@sqltools/formatter": "^1.2.3",
-    "@types/jasmine": "~5.1.5",
+    "@types/jasmine": "~5.1.6",
     "@types/karma": "^6.3.8",
     "@types/lodash-es": "^4.17.4",
     "@types/node": "^18.19.4",
