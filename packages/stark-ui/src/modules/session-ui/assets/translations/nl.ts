@@ -24,6 +24,7 @@ export const translationsNl: object = {
 			LOGIN: "Opnieuw aanmelden"
 		},
 		SESSION_TIMEOUT: {
+			CLOSE_SESSION: "Afmelden",
 			SECONDS: " seconden vervallen.",
 			STAY_CONNECTED: "Blijf verbonden",
 			TITLE: "Sessie verlopen",
