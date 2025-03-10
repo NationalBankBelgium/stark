@@ -94,7 +94,7 @@
     "normalize.css": "^8.0.1",
     "nouislider": "^15.8.1",
     "prettier": "~3.3.3",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.30.0",
     "protractor": "^7.0.0",
     "puppeteer": "^23.5.3",
     "release-it": "^17.8.2",
