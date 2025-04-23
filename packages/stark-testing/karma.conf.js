@@ -3,6 +3,10 @@ const helpers = require("./helpers");
 const ci = require("ci-info");
 const isCI = process.argv.indexOf("--watch=false") > -1 || !!ci.isCI;
 
+// Puppeteer: https://github.com/GoogleChrome/puppeteer/
+// takes care of download Chrome and making it available (can do much more :p)
+process.env.CHROME_BIN = require("puppeteer").executablePath();
+
 const rawKarmaConfig = {
 	// base path that will be used to resolve all patterns (e.g. files, exclude)
 	basePath: "",
