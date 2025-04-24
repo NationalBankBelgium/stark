@@ -839,6 +839,21 @@ Due to this, following changes have to be made in application using `stark-testi
   "test-fast:ci": "npm run ng -- test --watch=false --code-coverage"
   ```
 
+-- Adapt "karma.conf.js"
+
+```txt
+	/**
+ 	* Load karma config from Stark
+ 	*/
+	const defaultKarmaConfig = require("./node_modules/@nationalbankbelgium/stark-testing/karma.conf.js").rawKarmaConfig;
+
+	//Add following lines
+
+	// Puppeteer: https://github.com/GoogleChrome/puppeteer/
+	// takes care of download Chrome and making it available (can do much more :p)
+	process.env.CHROME_BIN = require("puppeteer").executablePath();
+```
+
 ## Stark-UI
 
 ### 1. Update styles

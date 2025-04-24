@@ -102,6 +102,16 @@ in `package.json` remove the following script
 }
 ```
 
+### adapt `karma.conf.js`
+
+```txt
+	//lines to removed
+
+	// Puppeteer: https://github.com/GoogleChrome/puppeteer/
+	// takes care of download Chrome and making it available (can do much more :p)
+	process.env.CHROME_BIN = require("puppeteer").executablePath();
+```
+
 ### test
 
 - remove `node_module` directory
