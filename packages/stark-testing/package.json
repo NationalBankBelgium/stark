@@ -24,7 +24,7 @@
     "@types/jasmine": "~5.1.5",
     "@types/karma": "^6.3.8",
     "@types/node": "^18.19.4",
-    "ci-info": "^4.0.0",
+    "ci-info": "^4.1.0",
     "jasmine-core": "^5.3.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",
