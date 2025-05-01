@@ -98,7 +98,7 @@
     "protractor": "^7.0.0",
     "puppeteer": "^23.5.3",
     "release-it": "^17.8.2",
-    "rxjs": "^7.8.1",
+    "rxjs": "^7.8.2",
     "stream-concat": "^2.0.0",
     "stylelint": "^13.11.0",
     "stylelint-config-prettier": "^8.0.2",
