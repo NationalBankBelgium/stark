@@ -1,0 +1,6 @@
+<button class="progress-indicator-button" color="primary" mat-raised-button (click)="showProgressIndicator()">
+	<span>{{ show ? "Hide" : "Show" }}</span>
+</button>
+<div class="progress-indicator-view" [starkProgressIndicator]="progressIndicatorConfig">
+	<span>This content will be hidden as soon as the progress indicator is displayed</span>
+</div>
