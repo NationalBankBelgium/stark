@@ -1,3 +1,12 @@
+# [12.0.0-beta.1.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.1...12.0.0-beta.1.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* **deps:** fix some dependencies version for running stark on angular 14 ([87c3d43](https://github.com/nationalbankbelgium/stark/commit/87c3d4352da604b3878ba21d22567c54946dc6c5))
+
+
+
 # [12.0.0-beta.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.0...12.0.0-beta.1) (2024-03-05)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "stark-srcs",
-  "version": "12.0.0-beta.1",
+  "version": "12.0.0-beta.1.1",
   "private": true,
   "description": "Stark - a framework for Angular apps",
   "author": "Stark Team <alexis.georges@nbb.be>",
