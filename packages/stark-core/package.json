@@ -29,7 +29,7 @@
     "@types/uuid": "^9.0.8",
     "@uirouter/angular": "^11.0.0",
     "@uirouter/core": "^6.0.8",
-    "@uirouter/rx": "~0.6.0",
+    "@uirouter/rx": "~1.0.0",
     "cerialize": "^0.1.18",
     "class-validator": "~0.14.1",
     "deep-freeze-strict": "^1.1.1",
