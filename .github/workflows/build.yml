@@ -4,18 +4,20 @@ on:
   push:
     branches:
       - master
+      - release/*
       - /^\d+\.\d+\.x$/
     tags:
       - "*"
   pull_request:
     branches:
       - master
+      - release/*
       - /^\d+\.\d+\.x$/
 
 env:
   TZ: "Europe/Brussels"
-  MAIN_NODEJS: "18"
-  NPM_VERSION: "10.1.0"
+  MAIN_NODEJS: "20"
+  NPM_VERSION: "10.x"
   LOGS_DIR: /tmp/stark/logs
   LOGS_FILE: /tmp/stark/logs/build-perf.log
   HUSKY: 0
@@ -26,7 +28,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: ["18", "20"]
+        node_version: ["18", "20", "22"]
         os: [ubuntu-latest]
 
     steps:
@@ -41,7 +43,7 @@ jobs:
           fi
 
       # See: https://github.com/marketplace/actions/checkout
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: |
             if [[ '${{ github.event_name != 'pull_request' }}' ]]; then
@@ -52,14 +54,14 @@ jobs:
 
       # See: https://github.com/marketplace/actions/setup-node-js-environment
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node_version }}
 
       # See: https://github.com/marketplace/actions/cache
       # See doc: https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules-${{ matrix.node_version }}-${{ matrix.os }}
         with:
@@ -122,9 +124,9 @@ jobs:
       - name: Testing packages
         run: npm run test:ci:packages
 
-      # See: https://github.com/marketplace/actions/upload-artifact
+      # See: https://github.com/marketplace/actions/upload-a-build-artifact
       - name: Upload stark packages-dist folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: stark-dist
           path: dist/packages-dist
@@ -138,8 +140,9 @@ jobs:
         run: node combine-packages-coverage.js
         if: env.IS_MAIN_ENVIRONMENT == 1
 
+      # See: https://github.com/marketplace/actions/coveralls-github-action
       - name: Coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: "combined-lcov.info"
@@ -177,9 +180,9 @@ jobs:
       - name: "Build showcase:ghpages"
         run: npm run build:showcase:ghpages
 
-      # See: https://github.com/marketplace/actions/upload-artifact
+      # See: https://github.com/marketplace/actions/upload-a-build-artifact
       - name: Upload showcase dist folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: showcase-dist
           path: showcase/dist
@@ -236,11 +239,11 @@ jobs:
           echo "GH_ACTIONS_TAG=${TAG_NAME}" >> $GITHUB_ENV
 
       # See: https://github.com/marketplace/actions/checkout
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # See: https://github.com/marketplace/actions/setup-node-js-environment
       - name: Use Node.js ${{ env.MAIN_NODEJS }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.MAIN_NODEJS }}
 
@@ -253,12 +256,14 @@ jobs:
           mkdir -p ${{ env.LOGS_DIR }}
           touch ${{ env.LOGS_FILE }}
 
-      - uses: actions/download-artifact@v2
+      # See: https://github.com/marketplace/actions/download-a-build-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: stark-dist
           path: dist/packages-dist
 
-      - uses: actions/download-artifact@v2
+      # See: https://github.com/marketplace/actions/download-a-build-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: showcase-dist
           path: showcase/dist
