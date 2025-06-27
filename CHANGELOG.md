@@ -1,3 +1,13 @@
+# [12.0.0-beta.2.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.2...12.0.0-beta.2.1) (2025-06-27)
+
+
+### Bug Fixes
+
+* **stark-core:**  `@uirouter/rx` to `1.0.0` to support `rxjs@7.x.x` ([e4bebca](https://github.com/nationalbankbelgium/stark/commit/e4bebca3bf9f50760f636785b2a902b57c71d895))
+* **stark-core:** set version `class-validator` to `0.14.1` because error on `0.14.2` ([f63a743](https://github.com/nationalbankbelgium/stark/commit/f63a743c579818577a1f91a02d590163f8d53304))
+
+
+
 # [12.0.0-beta.2](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.1...12.0.0-beta.2) (2024-05-23)
 
 
