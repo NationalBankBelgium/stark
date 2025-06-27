@@ -7,7 +7,7 @@ on:
       - completed
 env:
   TZ: "Europe/Brussels"
-  NPM_VERSION: "10.1.0"
+  NPM_VERSION: "10.x"
   LOGS_DIR: /tmp/stark/logs
   LOGS_FILE: /tmp/stark/logs/build-perf.log
 
@@ -23,15 +23,15 @@ jobs:
     name: Sync deps
     steps:
       # See: https://github.com/marketplace/actions/setup-node-js-environment
-      - name: Use Node.js 18
-        uses: actions/setup-node@v2
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       # See: https://github.com/marketplace/actions/cache
       # See doc: https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules-${{ matrix.node_version }}-${{ matrix.os }}
         with:
@@ -59,7 +59,7 @@ jobs:
           echo "PR Number   : ${GH_PR_NUMBER}"
 
       # See: https://github.com/marketplace/actions/checkout
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ env.GH_HEAD_REF }}
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
@@ -93,6 +93,7 @@ jobs:
           git add package-lock.json
           git commit -m 'chore(showcase): update "package-lock.json" file' --no-verify
 
+      # See: https://github.com/marketplace/actions/github-push
       - name: Push changes
         if: contains(steps.sync-packages-dependencies.outputs.LAST_COMMIT, '/packages/stark-')
         uses: ad-m/github-push-action@master
