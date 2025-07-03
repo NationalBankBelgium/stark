@@ -1,0 +1,328 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content additional-page">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>Environments support</h1>
+<p>Stark provides 2 different ways to get environment information depending on your needs:</p>
+<ul>
+<li>at runtime by importing the environment.ts file</li>
+<li>at compilation time by checking the global/ambient variables set by Webpack</li>
+</ul>
+<h2>Environment information at runtime (environment.ts)</h2>
+<p>Stark provides the <code>StarkEnvironment</code> interface that describes which information you can get from the current environment.
+It follows the guidelines described in the Angular CLI Wiki regarding <a href="https://github.com/angular/angular-cli/wiki/stories-application-environments">application environments</a> and <a href="https://github.com/angular/angular-cli/wiki/stories-configure-hmr">HMR configuration</a>.</p>
+<p>Such environment interface is defined as follows:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { NgModuleRef } from &quot;&#64;angular/core&quot;;
+
+export interface StarkEnvironment {
+  /**
+   * Whether the current environment is production (as described in Angular CLI Wiki)
+   * &#64;link https://github.com/angular/angular-cli/wiki/stories-application-environments
+   */
+  production: boolean;
+  /**
+   * Whether the current environment has Hot Module Replacement enabled (as described in Angular CLI Wiki)
+   * &#64;link https://github.com/angular/angular-cli/wiki/stories-configure-hmr
+   */
+  hmr: boolean;
+  /**
+   * Array of providers to be included only in this environment.
+   * For example: you might want to add a detailed logging provider only in development.
+   */
+  ENV_PROVIDERS: any[];
+  /**
+   * Function to modify/decorate the NgModule Instance created by Angular for a given platform.
+   * Useful to enable/disable some Angular specifics such as the debug tools.
+   * &#64;param moduleRef - NgModule instance created by Angular for a given platform.
+   */
+  decorateModule(moduleRef: NgModuleRef&lt;any&gt;): NgModuleRef&lt;any&gt;;
+}</code></pre></div><p>In your project, the files to define the different environments will be located in <code>src/environments</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-txt">|
++---src
+|   |
+|   +---environments                    # configuration variables for each environment
+|   |   |                               #
+|   |   |   environment.e2e.prod.ts     # e2e tests configuration
+|   |   |   environment.hmr.ts          # development with HMR (Hot Module Replacement) configuration
+|   |   |   environment.prod.ts         # production configuration
+|   |   \   environment.ts              # development configuration
+|   |
+|   \   ...
+|
+\   ...</code></pre></div><p>Then in each file, an <code>environment</code> constant of type <code>StarkEnvironment</code> should be exported providing the values needed for each environment:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// environment.prod.ts
+
+import { NgModuleRef } from &quot;&#64;angular/core&quot;;
+import { StarkEnvironment } from &quot;&#64;nationalbankbelgium/stark-core&quot;;
+
+export const environment: StarkEnvironment = {
+  production: true,
+  hmr: false,
+  ENV_PROVIDERS: [ProductionOnlyProvider],
+
+  decorateModule(moduleRef: NgModuleRef&lt;any&gt;): NgModuleRef&lt;any&gt; {
+    // perform any module customization needed for this specific environment here
+    // and make sure to invoke this function by passing it the NgModule created by Angular
+    return moduleRef;
+  }
+};</code></pre></div><h3>How to get environment variables in your application?</h3>
+<p>All you have to do is to import the <code>environment.ts</code> constant anywhere you want in your application.</p>
+<p><strong>You should always import from <code>environments/environment</code> because Webpack will internally replace such file with the right environment file as defined in the <code>fileReplacements</code> option in the <code>angular.json</code> file.</strong></p>
+<p>This way, you will be able to programmatically read the different environment variables you need.
+For example, you can determine which providers you will include for a specific environment in your AppModule:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { NgModule } from &quot;&#64;angular/core&quot;;
+// the environment file should always be imported from this path
+import { environment } from &quot;environments/environment&quot;;
+
+&#64;NgModule({
+    bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [...],
+    providers: [
+        environment.ENV_PROVIDERS,
+        ...
+    ]
+})
+export class AppModule { ... }</code></pre></div><p>You can also determine on which environment your app is currently running with this simple check:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// the environment file should always be imported from this path
+import { environment } from &quot;environments/environment&quot;;
+
+// if true, your app is running in production environment
+if (environment.production) {
+  /* the code in this block will be executed only in production */
+}</code></pre></div><h3>How to add a new environment?</h3>
+<p>First, create your new environment.ts file in the <code>src/environments</code> folder.</p>
+<p>Then, make sure your new environment implements the <code>StarkEnvironment</code> interface. For example, the <code>environment.dummy-env.ts</code> file:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { NgModuleRef } from &quot;&#64;angular/core&quot;;
+import { StarkEnvironment } from &quot;&#64;nationalbankbelgium/stark-core&quot;;
+
+export const environment: StarkEnvironment = {
+  production: false / true,
+  hmr: false,
+  ENV_PROVIDERS: [],
+
+  decorateModule(moduleRef: NgModuleRef&lt;any&gt;): NgModuleRef&lt;any&gt; {
+    // perform any module customization needed for this specific environment here
+    // and make sure to invoke this function by passing it the NgModule created by Angular
+    return moduleRef;
+  }
+};</code></pre></div><p>Finally, define the file replacement of your new environment in the <code>angular.json</code> file so that Webpack can replace the default file <code>environments/environment</code> with your new file:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-text">{
+    ...
+    &quot;dummyEnv&quot;: {
+        &quot;fileReplacements&quot;: [
+            {
+                &quot;replace&quot;: &quot;src/environments/environment.ts&quot;,
+                &quot;with&quot;: &quot;src/environments/environment.dummy-env.ts&quot;
+            }
+        ]
+    }
+}</code></pre></div><h3>How to add more properties to the environment file?</h3>
+<p>In case you want to add more properties, you should first create your own interface which should extend the <code>StarkEnvironment</code> interface.
+For example:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { StarkEnvironment } from &quot;&#64;nationalbankbelgium/stark-core&quot;;
+
+export interface YourOwnEnvironment extends StarkEnvironment {
+  someProperty: any;
+}</code></pre></div><p>Then adapt the different environment files to add the new properties:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { NgModuleRef } from &quot;&#64;angular/core&quot;;
+import { StarkEnvironment } from &quot;&#64;nationalbankbelgium/stark-core&quot;;
+
+export const environment: StarkEnvironment = {
+  production: false / true,
+  hmr: false,
+  ENV_PROVIDERS: [],
+  someProperty: &quot;some value&quot;, // your new property
+
+  decorateModule(moduleRef: NgModuleRef&lt;any&gt;): NgModuleRef&lt;any&gt; {
+    // perform any module customization needed for this specific environment here
+    // and make sure to invoke this function by passing it the NgModule created by Angular
+    return moduleRef;
+  }
+};</code></pre></div><h2>Environment information at compilation time (Webpack global variables)</h2>
+<p>Thanks to the customizations done by Stark-Build to the default Angular CLI build configuration you have some global variables available at compilation time,
+which means that you can implement some checks in your code and this will be analyzed when your application bundle is being built by Webpack.</p>
+<p>See <a href="https://github.com/NationalBankBelgium/stark/blob/master/docs/stark-build/NG_CLI_BUILD_CUSTOMIZATIONS.md#defineplugin">Stark-Build: Webpack build customizations - DefinePlugin</a></p>
+<h3>Why do you need the target environment at compilation time?</h3>
+<p>Sometimes you might need to add some logic or import some files only when your application is running in development or production.</p>
+<p><strong>In this case, when Webpack builds your application, the final bundle will contain also that code and/or imports that will only be used on a specific environment.
+For example, the specific code related to development will never be executed in production and yet it will be included in your production build which will increase the size of your bundle.</strong></p>
+<p>This is why knowing the target environment at compilation time is useful. You can put the logic inside an if block and then such code will be tree-shaken by Webpack as it will recognize it as dead code:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// this check is translated to &quot;if (false)&quot; when ENV is &quot;production&quot;
+// allowing Webpack to identify it as dead code and so remove it
+if (ENV === &quot;development&quot;) {
+  /* the code inside this block will only be included in development */
+}</code></pre></div>
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
+            var COMPODOC_CURRENT_PAGE_URL = 'environments-support.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,14 @@
+<mat-form-field>
+	<stark-dropdown
+		dropdownId="multipleServiceDropdown"
+		[options]="serviceDropdownOptions"
+		[value]="selectedServices"
+		optionIdProperty="id"
+		optionLabelProperty="value"
+		placeholder="Select one or more services"
+		(selectionChanged)="multipleServicesDropdownOnChange($event)"
+		multiSelect
+	>
+	</stark-dropdown>
+</mat-form-field>
+<div *ngIf="selectedServices">Selected values: {{ selectedServices }}</div>

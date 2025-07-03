@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-critters-container>
+	<head><base href="/showcase/12.0.1/">
+		<!-- The base href is defined through the Webpack configuration and can be customized through the angular.json file -->
+		<!-- necessary for HTML5 History API which adds support for pretty URLs (see app.ts) -->
+		<meta charset="utf-8">
+
+		<script>
+			(function () {
+				var redirect = sessionStorage.redirect;
+				delete sessionStorage.redirect;
+				if (redirect && redirect != location.href) {
+					history.replaceState(null, null, redirect);
+				}
+			})();
+		</script>
+
+		<title>Stark Showcase</title>
+		<meta name="description" content="Stark Showcase application">
+
+		<!-- Stylesheets -->
+		<!-- Generated CSS stylesheets will be added by webpack: mini-css-extract-plugin -->
+	<link rel="stylesheet" href="/showcase/12.0.1/styles.css" crossorigin="anonymous" integrity="sha384-x4j4XS+4v6OIc7fCLaxxQyv4653//C8Ys4uq0h/krFC8Mg8YFXvkZGnkbNkQhkkk">
+	    <link rel="manifest" href="/showcase/12.0.1/manifest.json">
+	<link rel="shortcut icon" type="image/x-icon" href="/showcase/12.0.1/favicon.ico">
+	<link rel="apple-touch-icon" sizes="57x57" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/showcase/12.0.1/assets/images/app-icons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/showcase/12.0.1/assets/images/app-icons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/showcase/12.0.1/assets/images/app-icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/showcase/12.0.1/assets/images/app-icons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/showcase/12.0.1/assets/images/app-icons/favicon-16x16.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="application-name" content="Stark Starter">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="template">
+	<meta name="msapplication-config" content="none">
+	<meta name="HandheldFriendly" content="true">
+	<meta name="theme-color" content="#0076c8">
+	<meta name="msapplication-TileColor" content="#0076c8">
+	<meta name="msapplication-TileImage" content="/showcase/12.0.1/assets/images/app-icons/ms-icon-144x144.png">
+	    </head>
+	<body class>
+		<noscript>
+			<div class="stark-no-js-warning stark-preload" role="alertdialog" aria-busy="true" aria-live="assertive">
+				<header><i></i></header>
+				<div class="content">
+					<h1>No JavaScript</h1>
+					<p>You must have JavaScript enabled!</p>
+				</div>
+			</div>
+		</noscript>
+
+		<div class="stark-browser-warning stark-preload" role="alertdialog" aria-busy="true" aria-live="assertive">
+			<header><i></i></header>
+			<div class="content">
+				<h1>Browser not supported</h1>
+				<p>
+					You are using an <strong>outdated</strong> browser. Please
+					<a href="https://browsehappy.com" target="_blank" rel="noreferrer noopener"> upgrade your browser </a> to improve your
+					experience.
+				</p>
+			</div>
+		</div>
+
+		<app-showcase class="stark-app">
+			<div class="stark-loading stark-preload" role="alertdialog" aria-busy="true" aria-live="assertive">
+				<header><i></i></header>
+				<div class="content">
+					<div class="stark-loading-icon"></div>
+					<h1>Loading...</h1>
+				</div>
+			</div>
+		</app-showcase>
+
+		<script>
+			/*see if the browser is compatible*/
+			if ("querySelector" in document && "classList" in document.body && /*@cc_on!@*/ false === false) {
+				/*remove the warning and display the app if the browser is up to date */
+				var browserWarning = document.getElementsByClassName("stark-browser-warning")[0];
+				if (browserWarning) document.body.removeChild(browserWarning);
+
+				document.body.classList.add("stark-browser-ok");
+			} else {
+				/* remove the app and show the browser warning if the browser is outdated*/
+				document.body.className += "stark-browser-outdated";
+
+				var starkApp = document.getElementsByClassName("stark-app")[0];
+				if (starkApp) document.body.removeChild(starkApp);
+			}
+		</script>
+
+		<!-- CSS will be injected by webpack here -->
+		<!-- Generated bundle scripts will be injected by webpack here: html-webpack-plugin -->
+	<script src="/showcase/12.0.1/runtime.ef5af46eba668d7c.js" type="module" crossorigin="anonymous" integrity="sha384-HliXY64e04AHltQEorjSgS+cQQ4DMCHJHlp7UM/O6JdoGZ7Rd84FxwL3JFuCE11F"></script><script src="/showcase/12.0.1/polyfills.d3667f72fbe4f36c.js" type="module" crossorigin="anonymous" integrity="sha384-7h8aO46lDRdAuT0G6Kffr4O13GLBsHlDIFGAkb8ENShaWD+pCbCxX2RVyZVscwq9"></script><script src="/showcase/12.0.1/main.a254c0aa5d3c4a8a.js" type="module" crossorigin="anonymous" integrity="sha384-H/Kv0HUYtjjg3B5snyZTSY/ABNLOIyp7cm3HmYLU0EHQiNE1SIiTMYBWSf6sIPRz"></script></body>
+</html>
