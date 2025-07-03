@@ -1,3 +1,13 @@
+## [12.0.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0...12.0.1) (2025-07-03)
+
+
+### Bug Fixes
+
+* **stark-core:** rollback version of `@uirouter/angular` ([717af03](https://github.com/nationalbankbelgium/stark/commit/717af03da2cba865167b3fcdfdbf7a481a844367)), closes [#4039](https://github.com/nationalbankbelgium/stark/issues/4039)
+* **stark-testing:** make sure to use chrome from `puppeteer` ([696a293](https://github.com/nationalbankbelgium/stark/commit/696a2938dba1915065ae6f6d96b1e030a9f0d8f5)), closes [#4028](https://github.com/nationalbankbelgium/stark/issues/4028)
+
+
+
 # [12.0.0](https://github.com/nationalbankbelgium/stark/compare/12.0.0-rc.0...12.0.0) (2024-10-11)
 
 
