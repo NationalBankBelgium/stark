@@ -1,3 +1,12 @@
+## [12.0.2](https://github.com/nationalbankbelgium/stark/compare/12.0.1...12.0.2) (2025-07-04)
+
+
+### Bug Fixes
+
+* **stark-core:** lock version `class-validator` to `0.14.1` due to issue in `class-validator@0.14.2` ([8d78179](https://github.com/nationalbankbelgium/stark/commit/8d78179c7306bded66f63a2a0b2e2d2d771c64a3)), closes [#4041](https://github.com/nationalbankbelgium/stark/issues/4041)
+
+
+
 ## [12.0.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0...12.0.1) (2025-07-03)
 
 
