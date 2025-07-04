@@ -31,7 +31,7 @@
     "@uirouter/core": "^6.1.1",
     "@uirouter/rx": "~1.0.0",
     "cerialize": "^0.1.18",
-    "class-validator": "~0.14.1",
+    "class-validator": "0.14.1",
     "deep-freeze-strict": "^1.1.1",
     "ibantools": "^4.5.1",
     "lodash-es": "^4.17.21",
