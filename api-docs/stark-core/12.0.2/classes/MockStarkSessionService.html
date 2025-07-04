@@ -1,0 +1,813 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">@nationalbankbelgium/stark-core documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >MockStarkSessionService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#readme" 
+                class="nav-link"
+                
+                role="tab" id="readme-tab" data-bs-toggle="tab" data-link="readme">README</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>testing/src/session.mock.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Mock class of the <a href="../interfaces/StarkSessionService.html">StarkSessionService</a> interface.</p>
+
+            </p>
+
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code>SpyObj</code>
+            </p>
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#devAuthenticationHeaders" >devAuthenticationHeaders</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCurrentLanguage" >getCurrentLanguage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCurrentUser" >getCurrentUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#login" >login</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pauseUserActivityTracking" >pauseUserActivityTracking</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resumeUserActivityTracking" >resumeUserActivityTracking</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setCurrentLanguage" >setCurrentLanguage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setDevAuthenticationHeaders" >setDevAuthenticationHeaders</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(devAuthenticationHeaders?: Map<string | string | []>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">testing/src/session.mock.ts:53</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates a new mock instance.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>devAuthenticationHeaders</td>
+                                                  
+                                                        <td>
+                                                                    <code>Map&lt;string | string | []&gt;</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Development authentication headers to set to this instance</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="devAuthenticationHeaders"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>devAuthenticationHeaders</b></span>
+                        <a href="#devAuthenticationHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">testing/src/session.mock.ts:13</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#devAuthenticationHeaders">StarkSessionService devAuthenticationHeaders</a> property</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentLanguage"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getCurrentLanguage</b></span>
+                        <a href="#getCurrentLanguage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Spy&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSpy(&quot;getCurrentLanguage&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">testing/src/session.mock.ts:23</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#getCurrentLanguage">StarkSessionService getCurrentLanguage()</a> method</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentUser"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getCurrentUser</b></span>
+                        <a href="#getCurrentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Spy&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSpy(&quot;getCurrentUser&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">testing/src/session.mock.ts:18</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#getCurrentUser">StarkSessionService getCurrentUser()</a> method</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="login"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>login</b></span>
+                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Spy&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSpy(&quot;login&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">testing/src/session.mock.ts:33</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#login">StarkSessionService login()</a> method</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Spy&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSpy(&quot;logout&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">testing/src/session.mock.ts:38</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#logout">StarkSessionService logout()</a> method</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pauseUserActivityTracking"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>pauseUserActivityTracking</b></span>
+                        <a href="#pauseUserActivityTracking"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Spy&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSpy(&quot;pauseUserActivityTracking&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">testing/src/session.mock.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#pauseUserActivityTracking">StarkSessionService pauseUserActivityTracking()</a> method</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resumeUserActivityTracking"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>resumeUserActivityTracking</b></span>
+                        <a href="#resumeUserActivityTracking"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Spy&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSpy(&quot;resumeUserActivityTracking&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">testing/src/session.mock.ts:48</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#resumeUserActivityTracking">StarkSessionService resumeUserActivityTracking()</a> method</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setCurrentLanguage"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>setCurrentLanguage</b></span>
+                        <a href="#setCurrentLanguage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Spy&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSpy(&quot;setCurrentLanguage&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">testing/src/session.mock.ts:28</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#setCurrentLanguage">StarkSessionService setCurrentLanguage()</a> method</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDevAuthenticationHeaders"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>setDevAuthenticationHeaders</b></span>
+                        <a href="#setDevAuthenticationHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Spy&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createSpy(&quot;setDevAuthenticationHeaders&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">testing/src/session.mock.ts:53</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>See <a href="../interfaces/StarkSessionService.html#setDevAuthenticationHeaders">StarkSessionService setDevAuthenticationHeaders()</a> method</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+    </div>
+
+    <div class="tab-pane fade " id="readme">
+        <p><h1>Usage</h1>
+<p>The mock class <code>MockStarkSessionService</code> can be imported as follows:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { MockStarkSessionService } from &quot;&#64;nationalbankbelgium/stark-core/testing&quot;;</code></pre></div><p>Since the mock class implements the base interface of the service it mocks, you just need to provide the mock in your <code>TestingModule</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">TestBed.configureTestingModule({
+    imports: [...],
+    declarations: [...],
+    providers: [
+        ...
+        { provide: STARK_SESSION_SERVICE, useValue: new MockStarkSessionService() },
+        ...
+    ]
+});</code></pre></div><p>The instantiated mock will have this default property assigned:</p>
+<ul>
+<li><code>devAuthenticationHeaders = new Map&lt;string, string&gt;()</code></li>
+</ul>
+<p>In case you need specific values for those headers, then you need to pass a custom <code>devAuthenticationHeaders</code>
+to the constructor of the mock class:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">const customAuthenticationHeaders = new Map&lt;string, string&gt;();
+// add the headers you need to the map
+customAuthenticationHeaders.set(someHeaderName, someHeaderValue);
+customAuthenticationHeaders.set(anotherHeaderName, anotherHeaderValue);
+// pass the map to the constructor
+new MockStarkSessionService(customAuthenticationHeaders);</code></pre></div><p>Then you can just inject the Stark service via the TestBed using its corresponding <code>InjectionToken</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// this will inject the instantiated mock class
+mockSessionService = TestBed.inject(STARK_SESSION_SERVICE);</code></pre></div><p>In fact, every method of the base interface is simply mocked
+with a <a href="https://jasmine.github.io/api/3.5/Spy.html">Jasmine Spy</a> which can then be used in the unit tests to:</p>
+<ul>
+<li>return custom values</li>
+<li>override a method with a custom function</li>
+<li>asserting that they are actually called</li>
+<li>do any other operation than can be performed with an Spy.</li>
+</ul>
+<p>For example:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// reading a value
+const devAuthenticationHeaders = mockSessionService.devAuthenticationHeaders;
+
+// overriding a method with a custom function
+mockSessionService.getCurrentUser.and.callFake(() =&gt; {
+  // some custom logic to return a specific value
+});
+
+// asserting that a method was indeed called
+expect(mockSessionService.login).toHaveBeenCalledTimes(1);
+expect(mockSessionService.login).toHaveBeenCalledWith(someUser);</code></pre></div></p>
+    </div>
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { StarkSessionService } from &quot;@nationalbankbelgium/stark-core&quot;;
+import Spy &#x3D; jasmine.Spy;
+import SpyObj &#x3D; jasmine.SpyObj;
+import createSpy &#x3D; jasmine.createSpy;
+
+/**
+ * Mock class of the {@link StarkSessionService} interface.
+ */
+export class MockStarkSessionService implements SpyObj&lt;StarkSessionService&gt; {
+	/**
+	 * See [StarkSessionService devAuthenticationHeaders]{@link StarkSessionService#devAuthenticationHeaders} property
+	 */
+	public devAuthenticationHeaders: StarkSessionService[&quot;devAuthenticationHeaders&quot;];
+
+	/**
+	 * See [StarkSessionService getCurrentUser()]{@link StarkSessionService#getCurrentUser} method
+	 */
+	public getCurrentUser: Spy&lt;StarkSessionService[&quot;getCurrentUser&quot;]&gt; &#x3D; createSpy(&quot;getCurrentUser&quot;);
+
+	/**
+	 * See [StarkSessionService getCurrentLanguage()]{@link StarkSessionService#getCurrentLanguage} method
+	 */
+	public getCurrentLanguage: Spy&lt;StarkSessionService[&quot;getCurrentLanguage&quot;]&gt; &#x3D; createSpy(&quot;getCurrentLanguage&quot;);
+
+	/**
+	 * See [StarkSessionService setCurrentLanguage()]{@link StarkSessionService#setCurrentLanguage} method
+	 */
+	public setCurrentLanguage: Spy&lt;StarkSessionService[&quot;setCurrentLanguage&quot;]&gt; &#x3D; createSpy(&quot;setCurrentLanguage&quot;);
+
+	/**
+	 * See [StarkSessionService login()]{@link StarkSessionService#login} method
+	 */
+	public login: Spy&lt;StarkSessionService[&quot;login&quot;]&gt; &#x3D; createSpy(&quot;login&quot;);
+
+	/**
+	 * See [StarkSessionService logout()]{@link StarkSessionService#logout} method
+	 */
+	public logout: Spy&lt;StarkSessionService[&quot;logout&quot;]&gt; &#x3D; createSpy(&quot;logout&quot;);
+
+	/**
+	 * See [StarkSessionService pauseUserActivityTracking()]{@link StarkSessionService#pauseUserActivityTracking} method
+	 */
+	public pauseUserActivityTracking: Spy&lt;StarkSessionService[&quot;pauseUserActivityTracking&quot;]&gt; &#x3D; createSpy(&quot;pauseUserActivityTracking&quot;);
+
+	/**
+	 * See [StarkSessionService resumeUserActivityTracking()]{@link StarkSessionService#resumeUserActivityTracking} method
+	 */
+	public resumeUserActivityTracking: Spy&lt;StarkSessionService[&quot;resumeUserActivityTracking&quot;]&gt; &#x3D; createSpy(&quot;resumeUserActivityTracking&quot;);
+
+	/**
+	 * See [StarkSessionService setDevAuthenticationHeaders()]{@link StarkSessionService#setDevAuthenticationHeaders} method
+	 */
+	public setDevAuthenticationHeaders: Spy&lt;StarkSessionService[&quot;setDevAuthenticationHeaders&quot;]&gt; &#x3D; createSpy(&quot;setDevAuthenticationHeaders&quot;);
+
+	/**
+	 * Creates a new mock instance.
+	 * @param devAuthenticationHeaders - Development authentication headers to set to this instance
+	 */
+	public constructor(devAuthenticationHeaders?: Map&lt;string, string | string[]&gt;) {
+		if (!devAuthenticationHeaders) {
+			this.devAuthenticationHeaders &#x3D; new Map&lt;string, string&gt;();
+		} else {
+			this.devAuthenticationHeaders &#x3D; devAuthenticationHeaders;
+		}
+	}
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'MockStarkSessionService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

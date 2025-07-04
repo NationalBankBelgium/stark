@@ -1,0 +1,295 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nationalbankbelgium/stark-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">@nationalbankbelgium/stark-ui documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content additional-page">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>Getting started</h1>
+<p>The recommended way to get started with <strong>Stark</strong> is to download the <a href="https://github.com/NationalBankBelgium/stark/tree/master/starter">starter</a> and run <code>npm install</code>.</p>
+<h2><a name="styling"></a>Styling</h2>
+<p>The starter comes with most things preconfigured meaning that all SCSS files needed for Stark-UI are imported by default via <code>~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-scss">/*
+IMPORTANT: Stark styles are provided as SCSS styles so they should be imported in a SCSS file!
+*/
+&#64;import &quot;theme&quot;;
+&#64;import &quot;~&#64;nationalbankbelgium/stark-ui/assets/stark-ui-bundle&quot;;
+/* App */
+&#64;import &quot;../app/app.component&quot;;</code></pre></div><p>You can also pick and choose which parts of the Stark-UI styling/theming you want to use.
+Simply remove <code>@import &quot;~@nationalbankbelgium/stark-ui/assets/stark-ui-bundle&quot;;</code> from <code>src/styles/styles.scss</code> and import only the desired files.</p>
+<p><strong>IMPORTANT:</strong> Import <code>base.scss</code> and <code>base-theme.scss</code> since these provide you with a clean basis and some basics for styling/theming your app.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-scss">/*
+IMPORTANT: Stark-UI styles are provided as SCSS styles so they should be imported in a SCSS file!
+*/
+&#64;import &quot;theme&quot;;
+/* Stark-UI styles */
+&#64;import &quot;~&#64;nationalbankbelgium/stark-ui/assets/styles/base&quot;;
+&#64;import &quot;~&#64;nationalbankbelgium/stark-ui/assets/theming/base-theme&quot;;
+/* Stark-UI component styles */
+&#64;import &quot;~&#64;nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo-theme&quot;;
+&#64;import &quot;~&#64;nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo.component&quot;;
+/* App */
+&#64;import &quot;../app/app.component&quot;;</code></pre></div><p>Or you can replace the Stark-UI styling with your own:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-scss">/*
+IMPORTANT: Stark-UI styles are provided as SCSS styles so they should be imported in a SCSS file!
+*/
+&#64;import &quot;theme&quot;;
+/* Stark-UI styles */
+&#64;import &quot;~&#64;nationalbankbelgium/stark-ui/assets/styles/base&quot;;
+&#64;import &quot;~&#64;nationalbankbelgium/stark-ui/assets/theming/base-theme&quot;;
+/* Stark-UI component styles */
+&#64;import &quot;~&#64;nationalbankbelgium/stark-ui/src/modules/app-logo/components/app-logo-theme&quot;;
+/* Custom Stark-UI component styles */
+&#64;import &quot;your-custom-stark-ui-styles/app-logo.component&quot;;
+/* App */
+&#64;import &quot;../app/app.component&quot;;</code></pre></div><h2><a name="typings"></a>Typings</h2>
+<p>Stark-UI also provides some typings for some libraries that are used internally by some components/directives. This are located under the <code>typings</code> folder.
+For this reason, you must add these typings to the <code>typeRoots</code> in the <code>tsconfig.json</code> of your app so that Angular compiler can build your application correctly:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-text">{
+  ...
+  &quot;compilerOptions&quot;: {
+     ...
+    &quot;typeRoots&quot;: [
+      &quot;./node_modules/&#64;types&quot;,
+      &quot;./node_modules/&#64;nationalbankbelgium/stark-build/typings&quot;,
+      &quot;./node_modules/&#64;nationalbankbelgium/stark-ui/typings&quot;  // typings folder from Stark-UI
+    ],
+    ...
+  },
+  ...
+}</code></pre></div><p><strong>IMPORTANT:</strong> This should always be done even if you don&#39;t use such types yourself. As mentioned above, this is used by Stark-UI internally.</p>
+<h2><a name="assets"></a>Assets</h2>
+<h3>Material Icons</h3>
+<p>The different features provided by Stark-UI (components and directives) follow the Material Design specs as much as possible. This is the reason why all the components
+are implemented with <a href="https://material.angular.io/">Angular Material</a> and the icons used are also from the Material Design specs.</p>
+<p>In this case, the icons used in Stark-UI are provided by <a href="https://github.com/Templarian/MaterialDesign-Angular-Material">MaterialDesign-Angular-Material</a> which is an SVG icon set specially
+bundled for Angular Material. You can see the different icons that are available in this icon set at <a href="https://materialdesignicons.com/">https://materialdesignicons.com/</a>.</p>
+<p>Therefore you must add this SVG icon set in your <code>angular.json</code> so that it is copied to your application <code>assets</code> folder and the Stark-UI components can be rendered correctly:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-text">&quot;projects&quot;: {
+    ...
+    &quot;your-app&quot;: {
+        ...
+        &quot;architect&quot;: {
+            ...
+            &quot;build&quot;: {
+                &quot;options&quot;: {
+                    &quot;assets&quot;: [
+                        {
+                            &quot;glob&quot;: &quot;mdi.svg&quot;,
+                            &quot;input&quot;: &quot;node_modules/&#64;mdi/angular-material&quot;,
+                            &quot;output&quot;: &quot;assets/material-icons&quot;
+                        },
+                        ...
+                    ],
+                    ...
+                },
+                ...
+            },
+            ...
+        }
+    }
+}</code></pre></div><p><strong>IMPORTANT:</strong> This should be done always even if you don&#39;t use any of these icons yourself. As mentioned above, these are used by Stark-UI internally.</p>
+<h3>Component assets</h3>
+<p>Some Stark-UI components use certain predefined assets (mainly images) which are provided under the <code>assets</code> folder of the package. Therefore in case you use such components than
+you should include those assets in your <code>angular.json</code> so that they are copied to your application <code>assets</code> folder and the Stark-UI components can be rendered correctly:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-text">&quot;projects&quot;: {
+    ...
+    &quot;your-app&quot;: {
+        ...
+        &quot;architect&quot;: {
+            ...
+            &quot;build&quot;: {
+                &quot;options&quot;: {
+                    &quot;assets&quot;: [
+                        {
+                            &quot;glob&quot;: &quot;**/*&quot;,
+                            &quot;input&quot;: &quot;node_modules/&#64;nationalbankbelgium/stark-ui/assets/&quot;,
+                            &quot;output&quot;: &quot;assets/stark-ui&quot;
+                        },
+                        ...
+                    ],
+                    ...
+                },
+                ...
+            },
+            ...
+        }
+    }
+}</code></pre></div><p><strong>IMPORTANT:</strong> This should be done only in case the Stark-UI component(s) you use requires any of these assets. In case you want to copy just certain assets from Stark-UI,
+make sure that you copy them following this structure in your application <code>assets</code> folder:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-text">|
++---yourApp
+|   +---assets
+|   |   +---stark-ui  // assets from Stark-UI should be available at this location
+|   ...</code></pre></div><p>This will ensure that your application <code>assets</code> folder will contain only the assets that are actually used in your app.</p>
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
+            var COMPODOC_CURRENT_PAGE_URL = 'getting-started.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
