@@ -1,0 +1,44 @@
+#!/bin/bash 
+
+echo *_*_*_*_*_* Script for automatic deployment of the chosen project via Kubernetes *_*_*_*_*_* 
+
+echo " Enter the name of the file you want to deploy : "
+echo "                  (1) stark-start "
+echo "                  (2) stark-start-monitor "
+echo "					(3) stark-dev "
+echo "					(4) stark-dev-monitor "
+echo "                  (5) stark-prod "
+echo " Number : "
+read rep  
+
+if [ $rep == 1 ] 
+then	
+	kubectl create -f stark-start.yml
+	kubectl create -f stark-start_RS.yml
+	kubectl create -f stark-start_HS.yml
+
+elif [ $rep == 2 ] 
+then
+	kubectl create -f stark-start-monitor.yml
+	kubectl create -f stark-start-monitor_RS.yml
+	kubectl create -f stark-start-monitor_HS.yml
+
+elif [ $rep == 3 ]
+then
+	kubectl create -f stark-dev.yml
+	kubectl create -f stark-dev_RS.yml
+	kubectl create -f stark-dev_HS.yml
+	
+elif [ $rep == 4 ] 
+then
+	kubectl create -f stark-dev-monitor.yml
+	kubectl create -f stark-dev-monitor_RS.yml
+	kubectl create -f stark-dev-monitor_HS.yml
+elif [ $rep == 5 ] 
+then
+	kubectl create -f stark-prod.yml
+	kubectl create -f stark-prod_RS.yml
+	kubectl create -f stark-prod_HS.yml
+else 
+	echo " End of execution ! "
+fi
