@@ -342,6 +342,7 @@
         "WITH_CUSTOM_CELL_RENDERING": "Table avec rendu de cellules personnalisé",
         "WITH_FIXED_ACTIONS": "Table avec actions de ligne fixes",
         "WITH_COLLAPSIBLE_ROWS": "Table avec des lignes réductibles",
+        "WITH_FIXED_COLUMNS": "Table avec des colonnes fixes",
         "TITLE": "Table"
       },
       "TOAST": {
