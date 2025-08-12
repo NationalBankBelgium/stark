@@ -1,0 +1,28 @@
+FROM node:latest AS build-stage
+
+MAINTAINER NationalBankBelgium - BOURRIER Francois
+
+WORKDIR /usr/projet/
+
+RUN apt-get update -y -q && apt-get upgrade -y -q && apt-get install git-sh rsync -y
+
+RUN git clone https://github.com/NationalBankBelgium/stark.git .
+
+RUN npm install
+
+RUN npm run install:all
+
+RUN cd starter && npm run build:dev
+
+#################
+#	 STAGE 2	#
+#################
+
+FROM tomcat:latest AS server-stage
+
+COPY --from=build-stage /usr/projet/starter/dist/ /usr/local/tomcat/webapps/ROOT/
+
+ADD server.xml /usr/local/tomcat/conf/
+ADD rewrite.config /usr/local/tomcat/conf/Catalina/localhost/
+
+ENV HOST=0.0.0.0

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: stark-start
+spec:
+  selector:
+    matchLabels:
+      app: stark-start
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stark-start
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: stark-start
+          image: 'bourrierf/stark-start'
+          resources:
+            requests:
+                cpu: 300m
+          ports:
+            - name: http
+              containerPort: 3000
