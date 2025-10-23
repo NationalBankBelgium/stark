@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { mdiDotsVertical, mdiMenuDown } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * @ignore
@@ -34,6 +35,9 @@ export class StarkAppDataComponent extends AbstractStarkUiComponent implements O
 	 * Default: `"dropdown"`
 	 */
 	@Input() public mode?: StarkAppDataComponentMode = "dropdown";
+
+	protected readonly mdiDotsVertical = mdiDotsVertical;
+	protected readonly mdiMenuDown = mdiMenuDown;
 
 	/**
 	 * Class constructor

@@ -6,10 +6,20 @@ import { MatLegacyMenuModule as MatMenuModule } from "@angular/material/legacy-m
 import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/legacy-tooltip";
 import { StarkActionBarComponent } from "./components";
 import { TranslateModule } from "@ngx-translate/core";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiDotsHorizontal, mdiDotsVertical } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkActionBarComponent],
-	imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, TranslateModule],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		MatIconModule,
+		MatMenuModule,
+		MatTooltipModule,
+		TranslateModule,
+		TsIconsModule.forChild([mdiDotsHorizontal, mdiDotsVertical])
+	],
 	exports: [StarkActionBarComponent]
 })
 export class StarkActionBarModule {}

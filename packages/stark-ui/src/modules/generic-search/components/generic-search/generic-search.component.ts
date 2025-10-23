@@ -32,6 +32,7 @@ import { UntypedFormGroup } from "@angular/forms";
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from "@angular/animations";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
 import isEqual from "lodash-es/isEqual";
+import { mdiMagnify, mdiNotePlus, mdiUndo } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * @ignore
@@ -420,14 +421,14 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 		// set default values
 		const normalizedConfig: StarkGenericSearchActionBarConfigRequired = {
 			search: {
-				icon: "magnify",
+				icon: mdiMagnify.name,
 				label: "STARK.ICONS.SEARCH",
 				isEnabled: true,
 				className: "",
 				buttonColor: "primary"
 			},
 			new: {
-				icon: "note-plus",
+				icon: mdiNotePlus.name,
 				label: "STARK.ICONS.NEW_ITEM",
 				isEnabled: true,
 				isVisible: true,
@@ -435,7 +436,7 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 				buttonColor: "primary"
 			},
 			reset: {
-				icon: "undo",
+				icon: mdiUndo.name,
 				label: "STARK.ICONS.RESET",
 				isEnabled: true,
 				isVisible: true,

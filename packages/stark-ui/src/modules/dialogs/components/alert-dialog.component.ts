@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from "@angular/core";
 import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from "@angular/material/legacy-dialog";
 import { StarkAlertDialogContent } from "./alert-dialog-content.intf";
+import { mdiAlert } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * Possible results of the {@link StarkAlertDialogComponent} after being closed.
@@ -24,6 +25,8 @@ export type StarkAlertDialogResult = "ok" | undefined;
 	}
 })
 export class StarkAlertDialogComponent {
+	protected readonly mdiAlert = mdiAlert;
+
 	/**
 	 * Class constructor
 	 * @param dialogRef - Reference this dialog instance

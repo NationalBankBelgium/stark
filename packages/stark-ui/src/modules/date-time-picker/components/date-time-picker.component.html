@@ -25,7 +25,7 @@
 		/>
 		<div class="mat-form-field-suffix mat-datepicker-toggle">
 			<button mat-icon-button (click)="focusTimeInput($event)" [disabled]="disabled">
-				<mat-icon svgIcon="clock"></mat-icon>
+				<mat-icon [svgIcon]="mdiClock.name"></mat-icon>
 			</button>
 		</div>
 	</div>
@@ -37,5 +37,5 @@
 	class="clear-date-time-button"
 	[ngClass]="{ hidden: disabled || !focused || (!dateTimeFormGroup.value.date && !dateTimeFormGroup.value.time) }"
 >
-	<mat-icon svgIcon="close" [matTooltip]="'STARK.DATE_TIME_PICKER.CLEAR_DATETIME' | translate"></mat-icon>
+	<mat-icon [svgIcon]="mdiClose.name" [matTooltip]="'STARK.DATE_TIME_PICKER.CLEAR_DATETIME' | translate"></mat-icon>
 </button>

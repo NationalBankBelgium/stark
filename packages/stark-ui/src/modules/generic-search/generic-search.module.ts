@@ -7,6 +7,8 @@ import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/le
 import { TranslateModule } from "@ngx-translate/core";
 import { StarkGenericSearchComponent } from "./components";
 import { StarkActionBarModule } from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiMagnify, mdiNotePlus, mdiUndo } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkGenericSearchComponent],
@@ -18,7 +20,8 @@ import { StarkActionBarModule } from "@nationalbankbelgium/stark-ui/src/modules/
 		MatIconModule,
 		MatTooltipModule,
 		StarkActionBarModule,
-		TranslateModule
+		TranslateModule,
+		TsIconsModule.forChild([mdiMagnify, mdiNotePlus, mdiUndo])
 	],
 	exports: [StarkGenericSearchComponent]
 })

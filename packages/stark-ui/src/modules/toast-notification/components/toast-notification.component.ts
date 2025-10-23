@@ -4,6 +4,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkMessageType } from "@nationalbankbelgium/stark-ui/src/common";
 import { StarkToastMessage } from "./toast-message.intf";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { mdiInformation, mdiAlertCircle, mdiAlert } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * @ignore
@@ -28,6 +29,10 @@ export class StarkToastNotificationComponent extends AbstractStarkUiComponent im
 	 * The message data linked to the toast notification.
 	 */
 	public message: StarkToastMessage;
+
+	protected readonly mdiInformation = mdiInformation;
+	protected readonly mdiAlertCircle = mdiAlertCircle;
+	protected readonly mdiAlert = mdiAlert;
 
 	/**
 	 * Class constructor

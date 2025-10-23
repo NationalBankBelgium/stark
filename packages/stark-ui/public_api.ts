@@ -3,6 +3,7 @@
  * Entry point for all public APIs of this package.
  */
 export * from "@nationalbankbelgium/stark-ui/src/common";
+export * from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
 export * from "@nationalbankbelgium/stark-ui/src/modules/action-bar";
 export * from "@nationalbankbelgium/stark-ui/src/modules/app-data";
 export * from "@nationalbankbelgium/stark-ui/src/modules/app-footer";

@@ -11,10 +11,20 @@ import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 import { translationsEn } from "./assets/translations/en";
 import { translationsNl } from "./assets/translations/nl";
 import { StarkLocale } from "@nationalbankbelgium/stark-core";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiDotsVertical, mdiMenuDown } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkAppDataComponent],
-	imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, TranslateModule],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		MatIconModule,
+		MatMenuModule,
+		MatTooltipModule,
+		TranslateModule,
+		TsIconsModule.forChild([mdiDotsVertical, mdiMenuDown])
+	],
 	exports: [StarkAppDataComponent]
 })
 export class StarkAppDataModule {

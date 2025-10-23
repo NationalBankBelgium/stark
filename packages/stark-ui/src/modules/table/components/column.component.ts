@@ -28,6 +28,7 @@ import {
 	StarkColumnSortChangedOutput,
 	StarkTableColumnSortingDirection
 } from "../entities";
+import { mdiArrowUp, mdiArrowDown, mdiFilter, mdiClose } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * Component to display a column inside the StarkTableComponent
@@ -302,6 +303,11 @@ export class StarkTableColumnComponent extends AbstractStarkUiComponent implemen
 	 * Internal formControl to manage the filter value of the column
 	 */
 	public _filterFormCtrl = new UntypedFormControl();
+
+	protected readonly mdiArrowUp = mdiArrowUp;
+	protected readonly mdiArrowDown = mdiArrowDown;
+	protected readonly mdiFilter = mdiFilter;
+	protected readonly mdiClose = mdiClose;
 
 	/**
 	 * Class constructor

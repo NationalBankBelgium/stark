@@ -17,6 +17,8 @@ import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiMagnify } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkRouteSearchComponent],
@@ -32,7 +34,8 @@ import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 		MatOptionModule,
 		MatSelectModule,
 		MatTooltipModule,
-		TranslateModule
+		TranslateModule,
+		TsIconsModule.forChild([mdiMagnify])
 	],
 	exports: [StarkRouteSearchComponent]
 })

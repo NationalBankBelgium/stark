@@ -22,6 +22,7 @@ import {
 import { STARK_MESSAGE_PANE_SERVICE, StarkMessagePaneService, starkMessagePaneServiceName } from "../services/message-pane.service.intf";
 import { StarkMessage, StarkMessageCollection } from "@nationalbankbelgium/stark-ui/src/common";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { mdiAlertCircle, mdiAlert, mdiInformation, mdiClose, mdiAdjust } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * Type of messages that can be displayed in the message pane
@@ -143,6 +144,12 @@ export class StarkMessagePaneComponent extends AbstractStarkUiComponent implemen
 	 * @internal
 	 */
 	public hide$?: Subject<string>;
+
+	protected readonly mdiAlertCircle = mdiAlertCircle;
+	protected readonly mdiAlert = mdiAlert;
+	protected readonly mdiInformation = mdiInformation;
+	protected readonly mdiClose = mdiClose;
+	protected readonly mdiAdjust = mdiAdjust;
 
 	/**
 	 * Class constructor

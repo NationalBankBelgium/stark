@@ -12,6 +12,7 @@ import {
 } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { mdiChevronRight } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * @ignore
@@ -21,7 +22,7 @@ const componentName = "stark-collapsible";
 /**
  * The default icon for a collapsible
  */
-const DEFAULT_COLLAPSIBLE_ICON = "chevron-right";
+const DEFAULT_COLLAPSIBLE_ICON = mdiChevronRight.name;
 
 /**
  * Component to display an accordion around embedded HTML

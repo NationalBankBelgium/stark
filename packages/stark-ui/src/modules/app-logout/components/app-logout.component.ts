@@ -22,6 +22,7 @@ import {
 	StarkSessionService
 } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { mdiPower } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * @ignore
@@ -46,7 +47,7 @@ export class StarkAppLogoutComponent extends AbstractStarkUiComponent implements
 	 * Desired icon of the logout button
 	 */
 	@Input()
-	public icon: "power" | string = "power";
+	public icon: typeof mdiPower.name | string = mdiPower.name;
 
 	/**
 	 * Class constructor

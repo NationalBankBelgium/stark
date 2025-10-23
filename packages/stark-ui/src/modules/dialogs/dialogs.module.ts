@@ -6,10 +6,21 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
 import { TranslateModule } from "@ngx-translate/core";
 import { StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent } from "./components";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiAlert } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent],
-	imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, TranslateModule, MatIconModule],
+	imports: [
+		FormsModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatDialogModule,
+		MatInputModule,
+		TranslateModule,
+		MatIconModule,
+		TsIconsModule.forChild([mdiAlert])
+	],
 	exports: [StarkAlertDialogComponent, StarkConfirmDialogComponent, StarkPromptDialogComponent]
 })
 export class StarkDialogsModule {}

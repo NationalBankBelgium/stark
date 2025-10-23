@@ -8,6 +8,8 @@ import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/le
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 import { MatLegacyMenuModule as MatMenuModule } from "@angular/material/legacy-menu";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiViewColumn, mdiMenuDown } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkMinimapComponent],
@@ -19,7 +21,8 @@ import { MatLegacyMenuModule as MatMenuModule } from "@angular/material/legacy-m
 		MatIconModule,
 		MatTooltipModule,
 		MatMenuModule,
-		TranslateModule
+		TranslateModule,
+		TsIconsModule.forChild([mdiViewColumn, mdiMenuDown])
 	],
 	exports: [StarkMinimapComponent]
 })
