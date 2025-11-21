@@ -29,11 +29,11 @@
 						<div class="stark-app-bar-content-left">
 							<div class="stark-actions">
 								<button class="stark-home-button" (click)="goHome()" color="white" mat-icon-button>
-									<mat-icon svgIcon="home"></mat-icon>
+									<mat-icon [svgIcon]="mdiHome.name"></mat-icon>
 								</button>
 
 								<button color="white" mat-icon-button (click)="toggleMenu()">
-									<mat-icon svgIcon="menu"></mat-icon>
+									<mat-icon [svgIcon]="mdiMenu.name"></mat-icon>
 								</button>
 							</div>
 						</div>
@@ -91,11 +91,11 @@
 								<stark-language-selector color="white" class="stark-full-width" mode="dropdown"></stark-language-selector>
 
 								<button color="white" (click)="openLeftSidebar()" mat-icon-button>
-									<mat-icon svgIcon="skip-next"></mat-icon>
+									<mat-icon [svgIcon]="mdiSkipNext.name"></mat-icon>
 								</button>
 
 								<button color="white" (click)="openRightSidebar()" mat-icon-button>
-									<mat-icon svgIcon="skip-previous"></mat-icon>
+									<mat-icon [svgIcon]="mdiSkipPrevious.name"></mat-icon>
 								</button>
 							</div>
 
@@ -109,7 +109,7 @@
 										color="success"
 										[matTooltip]="'SHOWCASE.ICONS.STARK_UI' | translate"
 									>
-										<mat-icon class="header-icon" svgIcon="television-guide"></mat-icon>
+										<mat-icon class="header-icon" [svgIcon]="mdiTelevisionGuide.name"></mat-icon>
 									</button>
 								</a>
 
@@ -120,7 +120,7 @@
 										color="primary"
 										[matTooltip]="'SHOWCASE.ICONS.STARK_CORE' | translate"
 									>
-										<mat-icon class="header-icon" svgIcon="atom"></mat-icon>
+										<mat-icon class="header-icon" [svgIcon]="mdiAtom.name"></mat-icon>
 									</button>
 								</a>
 
@@ -131,7 +131,7 @@
 										color="alert"
 										[matTooltip]="'SHOWCASE.ICONS.STARK_RBAC' | translate"
 									>
-										<mat-icon class="header-icon" svgIcon="shield-lock-outline"></mat-icon>
+										<mat-icon class="header-icon" [svgIcon]="mdiShieldLockOutline.name"></mat-icon>
 									</button>
 								</a>
 
@@ -142,7 +142,7 @@
 										class="github-icon"
 										[matTooltip]="'SHOWCASE.ICONS.GITHUB' | translate"
 									>
-										<mat-icon class="custom-icon" svgIcon="github-circle"></mat-icon>
+										<mat-icon class="custom-icon" [svgIcon]="mdiGithubCircle.name"></mat-icon>
 									</button>
 								</a>
 							</div>

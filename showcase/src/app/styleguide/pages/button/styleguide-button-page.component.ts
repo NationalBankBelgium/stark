@@ -1,5 +1,6 @@
 import { Component, Inject, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
+import { mdiHome } from "@nationalbankbelgium/mdi-ts";
 
 @Component({
 	selector: "demo-button",
@@ -9,5 +10,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 	encapsulation: ViewEncapsulation.None
 })
 export class StyleguideButtonPageComponent {
+	protected readonly mdiHome = mdiHome;
+
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 }

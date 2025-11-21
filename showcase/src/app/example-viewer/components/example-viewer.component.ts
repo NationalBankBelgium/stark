@@ -9,6 +9,7 @@ import {
 } from "@nationalbankbelgium/stark-core";
 import { StarkPrettyPrintFormat } from "@nationalbankbelgium/stark-ui";
 import { FileService } from "../services";
+import { mdiLink, mdiCodeTags } from "@nationalbankbelgium/mdi-ts";
 
 export interface ExampleFile {
 	extension: string;
@@ -39,6 +40,9 @@ export class ExampleViewerComponent implements OnInit {
 	public examplesFolder = "assets/examples/";
 	public exampleFiles: ExampleFile[] = [];
 	public showSource = false;
+
+	protected readonly mdiLink = mdiLink;
+	protected readonly mdiCodeTags = mdiCodeTags;
 
 	public constructor(
 		private fileService: FileService,

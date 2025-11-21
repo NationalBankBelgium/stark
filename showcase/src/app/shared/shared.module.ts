@@ -25,6 +25,8 @@ import { UIRouterModule } from "@uirouter/angular";
 import moment from "moment";
 import { filter } from "rxjs/operators";
 import { ReferenceBlockComponent, TableOfContentsComponent } from "./components";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiFileMultiple } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	imports: [
@@ -43,7 +45,8 @@ import { ReferenceBlockComponent, TableOfContentsComponent } from "./components"
 		MatTooltipModule,
 		MatSnackBarModule,
 		TranslateModule,
-		UIRouterModule.forChild()
+		UIRouterModule.forChild(),
+		TsIconsModule.forChild([mdiFileMultiple])
 	],
 	declarations: [ReferenceBlockComponent, TableOfContentsComponent],
 	// export commonly used components/directives/components (see https://angular.io/guide/sharing-ngmodules)

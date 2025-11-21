@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { StarkMenuConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
+import { mdiHome } from "@nationalbankbelgium/mdi-ts";
 
 @Component({
 	selector: "demo-menu",
@@ -12,7 +13,7 @@ export class DemoMenuPageComponent {
 		menuGroups: [
 			{
 				id: "menu-item-home",
-				icon: "home",
+				icon: mdiHome.name,
 				label: "Home",
 				isVisible: true,
 				isEnabled: true,
@@ -87,7 +88,7 @@ export class DemoMenuPageComponent {
 				menuGroups: [
 					{
 						id: "menu-item-home",
-						icon: "home",
+						icon: mdiHome.name,
 						label: "Home",
 						isVisible: true,
 						isEnabled: true,

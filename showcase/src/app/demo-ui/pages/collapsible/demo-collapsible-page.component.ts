@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ReferenceLink } from "../../../shared/components";
+import { mdiInformation, mdiAccountCircle } from "@nationalbankbelgium/mdi-ts";
 
 @Component({
 	selector: "demo-collapsible",
@@ -8,6 +9,10 @@ import { ReferenceLink } from "../../../shared/components";
 })
 export class DemoCollapsiblePageComponent {
 	public collapsed: boolean[] = [false, false, true];
+
+	protected readonly mdiInformation = mdiInformation;
+	protected readonly mdiAccountCircle = mdiAccountCircle;
+
 	public referenceList: ReferenceLink[] = [
 		{
 			label: "Stark Collapsible component",

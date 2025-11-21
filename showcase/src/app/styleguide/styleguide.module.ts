@@ -11,6 +11,20 @@ import {
 	StyleguideTypographyPageComponent
 } from "./pages";
 import { ExampleViewerModule } from "../example-viewer";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import {
+	mdiHome,
+	mdiCogs,
+	mdiDotsVertical,
+	mdiMenu,
+	mdiArrowLeft,
+	mdiSkipNext,
+	mdiSkipPrevious,
+	mdiTelevisionGuide,
+	mdiPlus,
+	mdiMagnify,
+	mdiAlertCircle
+} from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	imports: [
@@ -18,7 +32,20 @@ import { ExampleViewerModule } from "../example-viewer";
 			states: STYLEGUIDE_STATES
 		}),
 		SharedModule,
-		ExampleViewerModule
+		ExampleViewerModule,
+		TsIconsModule.forChild([
+			mdiHome,
+			mdiCogs,
+			mdiDotsVertical,
+			mdiMenu,
+			mdiArrowLeft,
+			mdiSkipNext,
+			mdiSkipPrevious,
+			mdiTelevisionGuide,
+			mdiPlus,
+			mdiMagnify,
+			mdiAlertCircle
+		])
 	],
 	providers: [],
 	declarations: [

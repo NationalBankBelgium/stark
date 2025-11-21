@@ -1,15 +1,25 @@
 import { APP_INITIALIZER, Inject, NgModule } from "@angular/core";
-import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
+import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { UIRouter, UIRouterModule } from "@uirouter/angular";
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
 import { storeLogger } from "ngrx-store-logger";
-import { MatIconRegistry } from "@angular/material/icon";
 import { DateAdapter } from "@angular/material/core";
 import { Observable, of } from "rxjs";
 import { filter, map } from "rxjs/operators";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import {
+	mdiHome,
+	mdiMenu,
+	mdiSkipNext,
+	mdiSkipPrevious,
+	mdiTelevisionGuide,
+	mdiAtom,
+	mdiShieldLockOutline,
+	mdiGithubCircle
+} from "@nationalbankbelgium/mdi-ts";
 
 import {
 	STARK_APP_CONFIG,
@@ -59,7 +69,6 @@ import { SharedModule } from "./shared/shared.module";
 import { InMemoryDataModule } from "./in-memory-data/in-memory-data.module";
 import { HomeModule } from "./home/home.module";
 import { logRegisteredStates, routerConfigFn } from "./router.config";
-import { registerMaterialIconSet } from "./material-icons.config";
 import { Deserialize } from "cerialize";
 import { StarkErrorHandlingEffects, StarkRbacUnauthorizedNavigationEffects } from "./shared/effects";
 /*
@@ -226,7 +235,17 @@ export const metaReducers: MetaReducer<State>[] = ENV === "development" ? [logge
 			actionClasses: []
 		}),
 		StarkSessionUiModule.forRoot(),
-		InMemoryDataModule
+		InMemoryDataModule,
+		TsIconsModule.forRoot([
+			mdiHome,
+			mdiMenu,
+			mdiSkipNext,
+			mdiSkipPrevious,
+			mdiTelevisionGuide,
+			mdiAtom,
+			mdiShieldLockOutline,
+			mdiGithubCircle
+		])
 	],
 	/**
 	 * Expose our Services and Providers into Angular's dependency injection.
@@ -244,12 +263,9 @@ export class AppModule {
 		private translateService: TranslateService,
 		private dateAdapter: DateAdapter<any>,
 		@Inject(STARK_SESSION_SERVICE) private sessionService: StarkSessionService,
-		@Inject(STARK_SETTINGS_SERVICE) private settingsService: StarkSettingsService,
-		matIconRegistry: MatIconRegistry,
-		domSanitizer: DomSanitizer
+		@Inject(STARK_SETTINGS_SERVICE) private settingsService: StarkSettingsService
 	) {
 		initializeTranslation(this.translateService, this.dateAdapter);
-		registerMaterialIconSet(matIconRegistry, domSanitizer);
 
 		this.settingsService.initializeSettings();
 

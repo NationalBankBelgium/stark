@@ -81,6 +81,22 @@ import {
 	TableWithCollapsibleRowsComponent
 } from "./components";
 import { ExampleViewerModule } from "../example-viewer";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import {
+	mdiThumbUp,
+	mdiCheck,
+	mdiContentSave,
+	mdiDelete,
+	mdiClose,
+	mdiAccountPlus,
+	mdiAccountMinus,
+	mdiPencil,
+	mdiHome,
+	mdiLogout,
+	mdiInformation,
+	mdiAccountCircle,
+	mdiAutorenew
+} from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	imports: [
@@ -118,7 +134,22 @@ import { ExampleViewerModule } from "../example-viewer";
 		StarkSliderModule,
 		StarkTableModule,
 		ExampleViewerModule,
-		StoreModule.forFeature(demoGenericSearchStoreKey, demoGenericSearchReducers)
+		StoreModule.forFeature(demoGenericSearchStoreKey, demoGenericSearchReducers),
+		TsIconsModule.forChild([
+			mdiThumbUp,
+			mdiCheck,
+			mdiContentSave,
+			mdiDelete,
+			mdiClose,
+			mdiAccountPlus,
+			mdiAccountMinus,
+			mdiPencil,
+			mdiHome,
+			mdiLogout,
+			mdiInformation,
+			mdiAccountCircle,
+			mdiAutorenew
+		])
 	],
 	declarations: [
 		DemoActionBarPageComponent,
