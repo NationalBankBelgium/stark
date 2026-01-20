@@ -80,7 +80,7 @@ describe("PrettyPrintService", () => {
 		].join("");
 
 		const formattedHtmlData: string = [
-			"<!doctype html>",
+			"<!DOCTYPE html>",
 			"<html>",
 			"  <head>",
 			"    <style>",
@@ -113,7 +113,7 @@ describe("PrettyPrintService", () => {
 		].join("");
 
 		const formattedAngularHtmlData: string = [
-			"<!doctype html>",
+			"<!DOCTYPE html>",
 			"<html>",
 			"  <head>",
 			"    <style>",
