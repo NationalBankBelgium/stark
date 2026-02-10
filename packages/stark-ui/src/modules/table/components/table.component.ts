@@ -97,7 +97,10 @@ const DEFAULT_COLUMN_PROPERTIES: Partial<StarkTableColumnProperties> = {
 		])
 	]
 })
-export class StarkTableComponent extends AbstractStarkUiComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class StarkTableComponent<T extends object = object>
+	extends AbstractStarkUiComponent
+	implements OnInit, AfterViewInit, OnChanges, OnDestroy
+{
 	/**
 	 * Array of {@link StarkTableColumnProperties} objects which define the columns of the data table.
 	 */
@@ -171,7 +174,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Data that will be display inside your table.
 	 */
 	@Input()
-	public data: object[] = [];
+	public data: T[] = [];
 
 	public static ngAcceptInputType_data: object[] | undefined | null;
 
@@ -303,7 +306,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Active row that should be collapsed
 	 */
 	@Input()
-	public expandedRows: object[] = [];
+	public expandedRows: T[] = [];
 
 	/**
 	 * An {@link StarkActionBarConfig} object defining the different actions to be shown in each row of the table
@@ -319,26 +322,25 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * Function to generate classNames for rows
 	 */
 	@Input()
-	public rowClassNameFn?: (row: object, index: number) => string;
+	public rowClassNameFn?: (row: T, index: number) => string;
 
 	/* eslint-disable jsdoc/require-param */
 	/**
 	 * Function to see if a row is collapsed
 	 */
 	@Input()
-	public expandedRowFn: (expandedRow: object, row: object) => boolean = (expandedRow: object, row: object): boolean =>
-		expandedRow === row;
+	public expandedRowFn: (expandedRow: T, row: T) => boolean = (expandedRow: T, row: T): boolean => expandedRow === row;
 	/* eslint-enable jsdoc/require-param */
 
 	/**
 	 * Angular CDK selection model used for the "master" selection of the table
 	 */
 	@Input()
-	public get selection(): SelectionModel<object> {
+	public get selection(): SelectionModel<T> {
 		return this._selection;
 	}
 
-	public set selection(selection: SelectionModel<object>) {
+	public set selection(selection: SelectionModel<T>) {
 		// eslint-disable-next-line import/no-deprecated
 		if (coerceBooleanProperty(this.multiSelect) || !!this.rowsSelectable) {
 			this.logger.error(
@@ -367,7 +369,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * @ignore
 	 */
-	private _selection!: SelectionModel<object>;
+	private _selection!: SelectionModel<T>;
 
 	/**
 	 * Determine if the row index must be present or not.
@@ -426,20 +428,20 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * @deprecated - use {@link selection} instead
 	 */
 	@Output()
-	public readonly selectChanged = new EventEmitter<object[]>();
+	public readonly selectChanged = new EventEmitter<T[]>();
 
 	/**
 	 * Output event emitter that will emit the data of a row when it is clicked.
 	 * If there are no observers it will not emit, but instead select the row.
 	 */
 	@Output()
-	public readonly rowClicked = new EventEmitter<object>();
+	public readonly rowClicked = new EventEmitter<T>();
 
 	/**
 	 * Reference to the MatTable embedded in this component
 	 */
 	@ViewChild(MatTable, { static: true })
-	public table!: MatTable<object>;
+	public table!: MatTable<T>;
 
 	/**
 	 * Reference to the MatPaginator embedded in this component
@@ -483,7 +485,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	/**
 	 * MatTableDataSource associated to the MatTable embedded in this component
 	 */
-	public dataSource!: MatTableDataSource<object>;
+	public dataSource!: MatTableDataSource<T>;
 
 	/**
 	 * Array of columns (column id's) to be displayed in the table.
@@ -762,7 +764,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 
 		this.starkPaginator.emitMatPaginationEvent();
 
-		this.dataSource.filterPredicate = (rowData: object, globalFilter: string): boolean => {
+		this.dataSource.filterPredicate = (rowData: T, globalFilter: string): boolean => {
 			const matchFilter: boolean[] = [];
 
 			if (globalFilter !== "%empty%") {
@@ -973,15 +975,15 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	private _resetSelection(forceReset: boolean = false): void {
 		/* eslint-disable import/no-deprecated */
 		if (!this.selection || forceReset) {
-			this._selection = new SelectionModel<object>(coerceBooleanProperty(this.multiSelect), []);
+			this._selection = new SelectionModel<T>(coerceBooleanProperty(this.multiSelect), []);
 		}
 
 		// Emit event when selection changes
 		if (this._selectionSub) {
 			this._selectionSub.unsubscribe();
 		}
-		this._selectionSub = this.selection.changed.subscribe((change: SelectionChange<object>) => {
-			const selected: object[] = change.source.selected;
+		this._selectionSub = this.selection.changed.subscribe((change: SelectionChange<T>) => {
+			const selected: T[] = change.source.selected;
 			this.selectChanged.emit(selected);
 		});
 		/* eslint-enable import/no-deprecated */
@@ -1004,7 +1006,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 		// Should remove this condition ?
 		this.isMultiSorting = sortableColumns.length > 1;
 
-		this.dataSource.data = [...this.data].sort((row1: object, row2: object) => {
+		this.dataSource.data = [...this.data].sort((row1: T, row2: T) => {
 			for (const column of sortableColumns) {
 				const isAscendingDirection: boolean = column.sortDirection === "asc";
 				if (column.compareFn instanceof Function) {
@@ -1151,8 +1153,8 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * @param row - The data object to check.
 	 * @returns boolean
 	 */
-	public isRowInExpandedRows(row: object): boolean {
-		return this.expandedRows.some((expandedRow: object) => this.expandedRowFn(expandedRow, row));
+	public isRowInExpandedRows(row: T): boolean {
+		return this.expandedRows.some((expandedRow: T) => this.expandedRowFn(expandedRow, row));
 	}
 
 	/**
@@ -1162,7 +1164,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * @param index - The index of the row.
 	 * @returns The classNames generated by the rowClassNameFn function
 	 */
-	public getRowClasses(row: object, index: number): string {
+	public getRowClasses(row: T, index: number): string {
 		const classes: string[] = [];
 
 		// Check if selected
@@ -1187,7 +1189,7 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * If there are no listeners we fall back to the default behaviour, which is (de)selecting the row (if rowsSelectable is enabled)
 	 * @param row - The data object passed to the row
 	 */
-	public onRowClick(row: object): void {
+	public onRowClick(row: T): void {
 		if (this.rowClicked.observers.length > 0) {
 			// If there is an observer, emit an event
 			this.rowClicked.emit(row);
