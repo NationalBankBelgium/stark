@@ -1,3 +1,14 @@
+# [12.0.0-beta.0.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.0...12.0.0-beta.0.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* **showcase:** type the datasource of table instead of object ([040957e](https://github.com/nationalbankbelgium/stark/commit/040957ec541efb6ba274329a61dcad69961b1ade))
+* **stark-all:** fix dependencies versions with conflict with angular13 ([3b9ff69](https://github.com/nationalbankbelgium/stark/commit/3b9ff6995003856681374fc6e08acc0b4709ce54))
+* **stark-ui:** make table generic to support generic type in matTable ([783908b](https://github.com/nationalbankbelgium/stark/commit/783908bc5e764bd1cbac2819a31efb81d4ff058f))
+
+
+
 # [12.0.0-beta.0](https://github.com/nationalbankbelgium/stark/compare/10.2.0...12.0.0-beta.0) (2024-01-24)
 
 
