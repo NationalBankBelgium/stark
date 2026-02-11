@@ -3,7 +3,13 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 import { SelectionChange, SelectionModel } from "@angular/cdk/collections";
 
-const DUMMY_DATA: object[] = [
+interface DummyType {
+	id: number;
+	title: { label: string; value: number };
+	description: string;
+}
+
+const DUMMY_DATA: DummyType[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
 	{ id: 10, title: { label: "second title (value: 2)", value: 2 }, description: "second description" },
 	{ id: 12, title: { label: "third title (value: 3)", value: 3 }, description: "the third description" },
@@ -23,8 +29,8 @@ const DUMMY_DATA: object[] = [
 	templateUrl: "./table-with-selection.component.html"
 })
 export class TableWithSelectionComponent {
-	public data: object[] = DUMMY_DATA;
-	public selection = new SelectionModel<object>(true);
+	public data: DummyType[] = DUMMY_DATA;
+	public selection = new SelectionModel<DummyType>(true);
 
 	public columns: StarkTableColumnProperties[] = [
 		{ name: "id", label: "Id", isFilterable: true, isSortable: true },
@@ -39,7 +45,7 @@ export class TableWithSelectionComponent {
 	public filter: StarkTableFilter = { globalFilterPresent: false, columns: [] };
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {
-		this.selection.changed.subscribe((change: SelectionChange<object>) => {
+		this.selection.changed.subscribe((change: SelectionChange<DummyType>) => {
 			this.logger.debug("SELECTED ROW:", change.source.selected);
 		});
 	}
