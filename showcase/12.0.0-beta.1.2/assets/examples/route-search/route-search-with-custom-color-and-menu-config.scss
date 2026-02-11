@@ -1,0 +1,8 @@
+/* Make sure @nationalbankbelgium/stark-ui/assets/theming.scss is imported first so that the palette variables are defined */
+
+.stark-route-search.button-color-success {
+  button.search-button {
+    background-color: mat-color($warning-palette, 300);
+    color: mat-color($grey-palette, 900);
+  }
+}
