@@ -1,0 +1,18 @@
+<div>
+	<mat-form-field>
+		<mat-label>Only upper case</mat-label>
+		<input matInput placeholder="Type a value" [formControl]="formControl" starkTransformInput="uppercase" />
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Only lower case</mat-label>
+		<input matInput placeholder="Type a value" [(ngModel)]="value" starkTransformInput="lowercase" />
+	</mat-form-field>
+	<mat-form-field class="emoji-example" fxFlex>
+		<mat-label>😄😄😄</mat-label>
+		<input matInput placeholder=":tada:" [starkTransformInput]="simpleEmojiTransform" />
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Only upper case</mat-label>
+		<textarea matInput placeholder="Type a value" starkTransformInput="uppercase"></textarea>
+	</mat-form-field>
+</div>

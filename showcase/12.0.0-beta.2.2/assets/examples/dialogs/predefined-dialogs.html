@@ -1,0 +1,9 @@
+<div>
+	<button mat-raised-button color="alert" (click)="showAlert()">Alert dialog</button>
+	<button mat-raised-button color="primary" (click)="showConfirm()">Confirm dialog</button>
+	<button mat-stroked-button color="primary" (click)="showPrompt()">Prompt dialog</button>
+</div>
+
+<div *ngIf="dialogStatus">
+	<b>{{ dialogStatus }}</b>
+</div>

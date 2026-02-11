@@ -1,0 +1,22 @@
+<stark-table [data]="data" [columnProperties]="columns" [filter]="filter" (rowClicked)="handleRowClicked($event)">
+	<header><h1 class="mb0" translate>Table with custom cell rendering</h1></header>
+	<ng-container
+		[ngSwitch]="true"
+		*starkTableRowContent="let rowData = rowData; let cellRawValue = rawValue; let cellDisplayedValue = displayedValue"
+	>
+		<div *ngSwitchCase="rowData.id === 1"
+			><span style="color: blue">{{ cellDisplayedValue }}</span></div
+		>
+		<div *ngSwitchCase="rowData.id === 2"
+			><span style="color: red">{{ cellDisplayedValue }}</span></div
+		>
+		<div *ngSwitchCase="rowData.id === 3"
+			><i>{{ cellDisplayedValue }}</i></div
+		>
+		<div *ngSwitchCase="cellRawValue > 23">
+			<mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
+			{{ cellDisplayedValue }}
+		</div>
+		<div *ngSwitchDefault>{{ cellDisplayedValue }}</div>
+	</ng-container>
+</stark-table>

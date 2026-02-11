@@ -1,0 +1,23 @@
+<stark-date-range-picker
+	[(ngModel)]="dateRangeModel"
+	(dateRangeChanged)="onDateModelChange()"
+	dateFilter="OnlyWeekdays"
+	[startMinDate]="today"
+	[startMaxDate]="inOneMonth"
+	[endMinDate]="today"
+	[endMaxDate]="inOneMonth"
+	[disabled]="modelDisabled"
+	#dateRangeComponent
+>
+	<ng-container start-date-errors *ngFor="let error of getErrorMessages(dateRangeComponent.startDateFormControl); trackBy: trackItemFn">
+		{{ error }}
+		<br />
+	</ng-container>
+
+	<ng-container end-date-errors *ngFor="let error of getErrorMessages(dateRangeComponent.endDateFormControl); trackBy: trackItemFn">
+		{{ error }}
+		<br />
+	</ng-container>
+</stark-date-range-picker>
+<br /><br />
+<mat-checkbox [(ngModel)]="modelDisabled">Disabled</mat-checkbox>
