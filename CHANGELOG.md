@@ -1,3 +1,18 @@
+# [12.0.0-beta.1.2](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.1.1...12.0.0-beta.1.2) (2026-02-11)
+
+
+### Bug Fixes
+
+* **showcase:** make table generic to support generic type in matTable ([60123f4](https://github.com/nationalbankbelgium/stark/commit/60123f4a4da9f7b6b40c984b676b57b10efafac5))
+* **stark-ui:** make table generic to support generic type in matTable ([37084ee](https://github.com/nationalbankbelgium/stark/commit/37084ee7cd54acf5b72d5b07b7189a25f9fbadad))
+
+
+### Reverts
+
+* **starter:** rollback stark versions to `next` ([091d3a8](https://github.com/nationalbankbelgium/stark/commit/091d3a8ea97d86f3596c9549e7ec6fca4786d885))
+
+
+
 # [12.0.0-beta.1.1](https://github.com/nationalbankbelgium/stark/compare/12.0.0-beta.1...12.0.0-beta.1.1) (2025-05-16)
 
 
