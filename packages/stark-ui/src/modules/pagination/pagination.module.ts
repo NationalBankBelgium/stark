@@ -9,6 +9,8 @@ import { MatLegacyPaginatorModule as MatPaginatorModule } from "@angular/materia
 import { StarkPaginationComponent } from "./components";
 import { StarkRestrictInputDirectiveModule } from "@nationalbankbelgium/stark-ui/src/modules/restrict-input-directive";
 import { StarkDropdownModule } from "@nationalbankbelgium/stark-ui/src/modules/dropdown";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiPageFirst, mdiPageLast, mdiChevronLeft, mdiChevronRight } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkPaginationComponent],
@@ -22,7 +24,8 @@ import { StarkDropdownModule } from "@nationalbankbelgium/stark-ui/src/modules/d
 		MatPaginatorModule,
 		MatTooltipModule,
 		StarkRestrictInputDirectiveModule,
-		StarkDropdownModule
+		StarkDropdownModule,
+		TsIconsModule.forChild([mdiPageFirst, mdiPageLast, mdiChevronLeft, mdiChevronRight])
 	]
 })
 export class StarkPaginationModule {}

@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
+import { mdiCogs, mdiDotsVertical } from "@nationalbankbelgium/mdi-ts";
 
 @Component({
 	selector: "demo-card",
@@ -8,6 +9,9 @@ import { Component, ViewEncapsulation } from "@angular/core";
 	encapsulation: ViewEncapsulation.None // used here to be able to customize the stark-full-width background color
 })
 export class StyleguideCardPageComponent {
+	protected readonly mdiCogs = mdiCogs;
+	protected readonly mdiDotsVertical = mdiDotsVertical;
+
 	public basicCard = `
 <mat-card class="stark-card">
   <mat-card-header>

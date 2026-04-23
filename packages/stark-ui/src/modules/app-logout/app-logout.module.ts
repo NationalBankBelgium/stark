@@ -9,11 +9,13 @@ import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiPower } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkAppLogoutComponent],
 	exports: [StarkAppLogoutComponent],
-	imports: [MatIconModule, TranslateModule, MatTooltipModule, MatButtonModule]
+	imports: [MatIconModule, TranslateModule, MatTooltipModule, MatButtonModule, TsIconsModule.forChild([mdiPower])]
 })
 export class StarkAppLogoutModule {
 	/**

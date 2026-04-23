@@ -10,7 +10,11 @@
 	<stark-pagination htmlSuffixId="{{ htmlId }}-pagination" [paginationConfig]="paginationConfig" mode="compact"></stark-pagination>
 
 	<button *ngIf="isMultiSortEnabled" (click)="openMultiSortDialog()" mat-icon-button>
-		<mat-icon class="stark-small-icon" [matTooltip]="'STARK.TABLE.MULTI_COLUMN_SORTING' | translate" svgIcon="sort"></mat-icon>
+		<mat-icon
+			class="stark-small-icon"
+			[matTooltip]="'STARK.TABLE.MULTI_COLUMN_SORTING' | translate"
+			[svgIcon]="mdiSort.name"
+		></mat-icon>
 	</button>
 
 	<ng-container *ngIf="isGlobalFilterPresent(filter)">
@@ -20,7 +24,7 @@
 			class="button-global-filter"
 			[ngClass]="{ 'filter-enabled': !!filter.globalFilterValue }"
 		>
-			<mat-icon [matTooltip]="'STARK.TABLE.FILTER' | translate" class="stark-small-icon" svgIcon="filter"></mat-icon>
+			<mat-icon [matTooltip]="'STARK.TABLE.FILTER' | translate" class="stark-small-icon" [svgIcon]="mdiFilter.name"></mat-icon>
 		</button>
 		<mat-menu
 			class="mat-table-filter"
@@ -40,7 +44,11 @@
 					/>
 				</mat-form-field>
 				<button mat-icon-button (click)="onClearFilter()">
-					<mat-icon class="stark-small-icon" svgIcon="close" [matTooltip]="'STARK.TABLE.CLEAR_FILTER' | translate"></mat-icon>
+					<mat-icon
+						class="stark-small-icon"
+						[svgIcon]="mdiClose.name"
+						[matTooltip]="'STARK.TABLE.CLEAR_FILTER' | translate"
+					></mat-icon>
 				</button>
 			</div>
 		</mat-menu>

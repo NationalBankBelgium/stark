@@ -24,6 +24,8 @@ import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 import { StarkTableExpandDetailDirective } from "./directives/table-expand-detail.directive";
 import { StarkTableRowContentDirective } from "./directives/table-row-content.directive";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiArrowUp, mdiArrowDown, mdiFilter, mdiClose, mdiSort } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [
@@ -54,7 +56,8 @@ import { StarkTableRowContentDirective } from "./directives/table-row-content.di
 		// Stark
 		StarkActionBarModule,
 		StarkPaginationModule,
-		StarkMinimapModule
+		StarkMinimapModule,
+		TsIconsModule.forChild([mdiArrowUp, mdiArrowDown, mdiFilter, mdiClose, mdiSort])
 	]
 })
 export class StarkTableModule {

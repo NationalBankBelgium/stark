@@ -1,7 +1,7 @@
 <div class="stark-toast" [ngClass]="getMessageTypeClass()">
-	<mat-icon svgIcon="information" *ngIf="message.type === 0"></mat-icon>
-	<mat-icon svgIcon="alert-circle" *ngIf="message.type === 1"></mat-icon>
-	<mat-icon svgIcon="alert" *ngIf="message.type === 2"></mat-icon>
+	<mat-icon [svgIcon]="mdiInformation.name" *ngIf="message.type === 0"></mat-icon>
+	<mat-icon [svgIcon]="mdiAlertCircle.name" *ngIf="message.type === 1"></mat-icon>
+	<mat-icon [svgIcon]="mdiAlert.name" *ngIf="message.type === 2"></mat-icon>
 
 	<span class="stark-toast-text" role="alert" [innerHTML]="message.key | translate: message.interpolateValues"></span>
 

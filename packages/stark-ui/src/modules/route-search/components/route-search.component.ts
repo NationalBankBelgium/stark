@@ -16,6 +16,7 @@ import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/inte
 import { StarkRouteSearchEntry } from "./route-search-entry.intf";
 import { StarkMenuConfig, StarkMenuGroup } from "@nationalbankbelgium/stark-ui/src/modules/app-menu";
 import sortBy from "lodash-es/sortBy";
+import { mdiMagnify } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * @ignore
@@ -77,7 +78,7 @@ export class StarkRouteSearchComponent extends AbstractStarkUiComponent implemen
 	 * Default: `"magnify"`
 	 */
 	@Input()
-	public icon: "magnify" | string = "magnify";
+	public icon: typeof mdiMagnify.name | string = mdiMagnify.name;
 
 	/**
 	 * The source FormControl object of the search field

@@ -2,6 +2,7 @@ import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAction, StarkActionBarConfig } from "@nationalbankbelgium/stark-ui";
 import { ReferenceLink } from "../../../shared/components";
+import { mdiCheck, mdiContentSave, mdiDelete, mdiClose, mdiAccountPlus, mdiAccountMinus, mdiPencil } from "@nationalbankbelgium/mdi-ts";
 
 @Component({
 	selector: "demo-action-bar",
@@ -13,7 +14,7 @@ export class DemoActionBarPageComponent {
 			id: "actionValidate",
 			buttonColor: "success",
 			label: "STARK.ICONS.APPROVE_ITEM",
-			icon: "check",
+			icon: mdiCheck.name,
 			actionCall: ($event: Event, data: any): void => {
 				this.logger.debug($event);
 				this.logger.debug(data);
@@ -24,7 +25,7 @@ export class DemoActionBarPageComponent {
 		{
 			id: "actionSave",
 			label: "STARK.ICONS.SAVE_ITEM",
-			icon: "content-save",
+			icon: mdiContentSave.name,
 			actionCall: ($event: Event, data: any): void => {
 				this.logger.debug($event);
 				this.logger.debug(data);
@@ -35,7 +36,7 @@ export class DemoActionBarPageComponent {
 		{
 			id: "actionDelete",
 			label: "STARK.ICONS.DELETE_ITEM",
-			icon: "delete",
+			icon: mdiDelete.name,
 			actionCall: ($event: Event, data: any): void => {
 				this.logger.debug($event);
 				this.logger.debug(data);
@@ -46,7 +47,7 @@ export class DemoActionBarPageComponent {
 		{
 			id: "actionClose",
 			label: "STARK.ICONS.CLOSE_ITEM",
-			icon: "close",
+			icon: mdiClose.name,
 			actionCall: ($event: Event, data: any): void => {
 				this.logger.debug($event);
 				this.logger.debug(data);
@@ -66,7 +67,7 @@ export class DemoActionBarPageComponent {
 			id: "actionAdd",
 			buttonColor: "warn",
 			label: "STARK.ICONS.ADD_ITEM",
-			icon: "account-plus",
+			icon: mdiAccountPlus.name,
 			actionCall: ($event: Event, data: any): void => {
 				this.logger.debug($event);
 				this.logger.debug(data);
@@ -77,7 +78,7 @@ export class DemoActionBarPageComponent {
 		{
 			id: "actionMinus",
 			label: "STARK.ICONS.DELETE_ITEM",
-			icon: "account-minus",
+			icon: mdiAccountMinus.name,
 			actionCall: ($event: Event, data: any): void => {
 				this.logger.debug($event);
 				this.logger.debug(data);
@@ -88,7 +89,7 @@ export class DemoActionBarPageComponent {
 		{
 			id: "actionEdit",
 			label: "STARK.ICONS.EDIT_ITEM",
-			icon: "pencil",
+			icon: mdiPencil.name,
 			actionCall: ($event: Event, data: any): void => {
 				this.logger.debug($event);
 				this.logger.debug(data);

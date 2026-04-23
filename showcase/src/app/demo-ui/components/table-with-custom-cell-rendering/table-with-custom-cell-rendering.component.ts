@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import { mdiThumbUp } from "@nationalbankbelgium/mdi-ts";
 
 const DUMMY_DATA: object[] = [
 	{ id: 1, cost: 12, description: "number one" },
@@ -22,6 +23,8 @@ const DUMMY_DATA: object[] = [
 })
 export class TableWithCustomCellRenderingComponent {
 	public data: object[] = DUMMY_DATA;
+
+	protected readonly mdiThumbUp = mdiThumbUp;
 
 	public columns: StarkTableColumnProperties[] = [
 		{ name: "id", label: "Id" },

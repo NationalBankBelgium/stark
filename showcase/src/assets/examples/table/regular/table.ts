@@ -1,6 +1,7 @@
 import { Component, Inject, ViewEncapsulation } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter, StarkTableRowActions } from "@nationalbankbelgium/stark-ui";
+import { mdiPencil, mdiDelete } from "@nationalbankbelgium/mdi-ts";
 
 const DUMMY_DATA: object[] = [
 	{
@@ -58,14 +59,14 @@ export class TableRegularComponent {
 			{
 				id: "edit-item",
 				label: "Edit",
-				icon: "pencil",
+				icon: mdiPencil.name,
 				actionCall: ($event: Event, data: object): void => this.logger.debug("EDIT", $event, data),
 				isEnabled: true
 			},
 			{
 				id: "delete-item",
 				label: "Delete",
-				icon: "delete",
+				icon: mdiDelete.name,
 				actionCall: ($event: Event, data: object): void => this.logger.debug("DELETE", $event, data),
 				isEnabled: false
 			}

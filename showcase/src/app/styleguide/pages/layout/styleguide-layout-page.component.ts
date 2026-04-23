@@ -1,6 +1,6 @@
 import { Component, HostBinding, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-
+import { mdiAlertCircle } from "@nationalbankbelgium/mdi-ts";
 const componentName = "styleguide-layout-page";
 
 @Component({
@@ -10,6 +10,8 @@ const componentName = "styleguide-layout-page";
 export class StyleguideLayoutPageComponent {
 	@HostBinding("class")
 	public class: string = componentName;
+
+	protected readonly mdiAlertCircle = mdiAlertCircle;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 }

@@ -20,6 +20,9 @@ import { StarkMessagePaneEffects } from "./effects";
 import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 import { starkMessagePaneStoreKey } from "./constants";
 
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiAlertCircle, mdiAlert, mdiInformation, mdiClose, mdiAdjust } from "@nationalbankbelgium/mdi-ts";
+
 @NgModule({
 	declarations: [StarkMessagePaneComponent],
 	imports: [
@@ -28,7 +31,8 @@ import { starkMessagePaneStoreKey } from "./constants";
 		MatTooltipModule,
 		MatIconModule,
 		StoreModule.forFeature(starkMessagePaneStoreKey, starkMessagesReducers),
-		EffectsModule.forFeature([StarkMessagePaneEffects])
+		EffectsModule.forFeature([StarkMessagePaneEffects]),
+		TsIconsModule.forChild([mdiAlertCircle, mdiAlert, mdiInformation, mdiClose, mdiAdjust])
 	],
 	exports: [StarkMessagePaneComponent]
 })

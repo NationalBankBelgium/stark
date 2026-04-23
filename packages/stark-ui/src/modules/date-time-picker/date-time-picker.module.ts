@@ -15,6 +15,8 @@ import { translationsEn } from "./assets/translations/en";
 import { translationsFr } from "./assets/translations/fr";
 import { translationsNl } from "./assets/translations/nl";
 import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiClock, mdiClose } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	imports: [
@@ -28,7 +30,8 @@ import { mergeUiTranslations } from "@nationalbankbelgium/stark-ui/src/common";
 		ReactiveFormsModule,
 		StarkDatePickerModule,
 		StarkInputMaskDirectivesModule,
-		TranslateModule
+		TranslateModule,
+		TsIconsModule.forChild([mdiClock, mdiClose])
 	],
 	declarations: [StarkDateTimePickerComponent],
 	exports: [StarkDateTimePickerComponent]

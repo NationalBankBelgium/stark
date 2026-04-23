@@ -1,6 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { StarkAction, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import { mdiPencil, mdiAutorenew } from "@nationalbankbelgium/mdi-ts";
 
 const DUMMY_DATA: object[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
@@ -37,14 +38,14 @@ export class TableWithTranscludedActionBarComponent {
 		{
 			id: "edit-item",
 			label: "STARK.ICONS.EDIT_ITEM",
-			icon: "pencil",
+			icon: mdiPencil.name,
 			actionCall: ($event: Event, data: object): void => this.logger.debug("EDIT:", $event, data),
 			isEnabled: false
 		},
 		{
 			id: "reload",
 			label: "STARK.ICONS.RELOAD_PAGE",
-			icon: "autorenew",
+			icon: mdiAutorenew.name,
 			actionCall: ($event: Event, data: object): void => this.logger.debug("RELOAD:", $event, data),
 			isEnabled: true
 		}

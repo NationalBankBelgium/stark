@@ -55,6 +55,7 @@ import findIndex from "lodash-es/findIndex";
 import { trigger, state, style, transition, animate } from "@angular/animations";
 import { StarkTableExpandDetailDirective } from "../directives/table-expand-detail.directive";
 import { StarkTableRowContentDirective } from "../directives/table-row-content.directive";
+import { mdiSort, mdiFilter, mdiClose } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * @ignore
@@ -532,6 +533,10 @@ export class StarkTableComponent extends AbstractStarkUiComponent implements OnI
 	 * @ignore
 	 */
 	private _managedSelection = false;
+
+	protected readonly mdiSort = mdiSort;
+	protected readonly mdiFilter = mdiFilter;
+	protected readonly mdiClose = mdiClose;
 
 	/**
 	 * Class constructor

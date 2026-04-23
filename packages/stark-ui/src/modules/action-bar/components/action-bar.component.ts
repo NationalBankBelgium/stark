@@ -3,6 +3,7 @@ import { StarkActionBarConfig } from "./action-bar-config.intf";
 import { StarkAction, StarkActionBarButtonColor } from "./action.intf";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { mdiDotsHorizontal, mdiDotsVertical } from "@nationalbankbelgium/mdi-ts";
 
 export type StarkActionBarComponentMode = "full" | "compact";
 
@@ -68,6 +69,9 @@ export class StarkActionBarComponent extends AbstractStarkUiComponent implements
 	 * status of the extended action in full mode
 	 */
 	public isExtended = false;
+
+	protected readonly mdiDotsHorizontal = mdiDotsHorizontal;
+	protected readonly mdiDotsVertical = mdiDotsVertical;
 
 	/**
 	 * Class constructor

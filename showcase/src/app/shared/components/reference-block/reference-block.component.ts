@@ -1,6 +1,7 @@
 import { Component, HostBinding, Inject, Input, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { ReferenceLink } from "./reference-link.intf";
+import { mdiFileMultiple } from "@nationalbankbelgium/mdi-ts";
 
 const componentName = "stark-reference-block";
 
@@ -17,6 +18,8 @@ export class ReferenceBlockComponent implements OnInit {
 
 	@Input()
 	public links: ReferenceLink[] = [];
+
+	protected readonly mdiFileMultiple = mdiFileMultiple;
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) public logger: StarkLoggingService) {}
 

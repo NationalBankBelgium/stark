@@ -46,6 +46,7 @@ import {
 	StarkDatePickerMaskConfig
 } from "@nationalbankbelgium/stark-ui/src/modules/date-picker";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { mdiClock, mdiClose } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * Default TimeMask configuration
@@ -119,6 +120,9 @@ export class StarkDateTimePickerComponent
 	public get shouldLabelFloat(): boolean {
 		return this.focused || !this.empty;
 	}
+
+	protected readonly mdiClock = mdiClock;
+	protected readonly mdiClose = mdiClose;
 
 	/**
 	 * Source date to bound to the DateTimePicker

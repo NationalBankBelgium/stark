@@ -24,6 +24,7 @@ import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium
 import { StarkPaginationConfig } from "./pagination-config.intf";
 import { StarkPaginateEvent } from "./paginate-event.intf";
 import isEqual from "lodash-es/isEqual";
+import { mdiPageFirst, mdiPageLast, mdiChevronLeft, mdiChevronRight } from "@nationalbankbelgium/mdi-ts";
 
 /**
  * @ignore
@@ -120,6 +121,11 @@ export class StarkPaginationComponent extends MatPaginator implements OnInit, On
 	 * Page numbers to be displayed by the component when `extended` mode is enabled
 	 */
 	public pageNumbers: ("..." | number)[] = [];
+
+	protected readonly mdiPageFirst = mdiPageFirst;
+	protected readonly mdiPageLast = mdiPageLast;
+	protected readonly mdiChevronLeft = mdiChevronLeft;
+	protected readonly mdiChevronRight = mdiChevronRight;
 
 	/**
 	 * Class constructor

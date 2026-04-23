@@ -39,7 +39,7 @@
 			(click)="toggleExtendedActionBar()"
 			type="button"
 		>
-			<mat-icon svgIcon="dots-horizontal" class="stark-small-icon"></mat-icon>
+			<mat-icon [svgIcon]="mdiDotsHorizontal.name" class="stark-small-icon"></mat-icon>
 		</button>
 		<button
 			class="open-alt-actions"
@@ -49,7 +49,7 @@
 			[matMenuTriggerFor]="menu"
 			type="button"
 		>
-			<mat-icon svgIcon="dots-vertical" class="stark-small-icon"></mat-icon>
+			<mat-icon [svgIcon]="mdiDotsVertical.name" class="stark-small-icon"></mat-icon>
 		</button>
 		<mat-menu #menu="matMenu" xPosition="before">
 			<ng-container *ngFor="let action of alternativeActions; trackBy: trackAction">

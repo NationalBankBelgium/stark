@@ -11,10 +11,19 @@ import {
 	StarkToastNotificationServiceImpl
 } from "./services";
 import { StarkToastNotificationComponent } from "./components";
+import { TsIconsModule } from "@nationalbankbelgium/stark-ui/src/modules/ts-icons";
+import { mdiInformation, mdiAlertCircle, mdiAlert } from "@nationalbankbelgium/mdi-ts";
 
 @NgModule({
 	declarations: [StarkToastNotificationComponent],
-	imports: [CommonModule, MatButtonModule, MatIconModule, MatSnackBarModule, TranslateModule],
+	imports: [
+		CommonModule,
+		MatButtonModule,
+		MatIconModule,
+		MatSnackBarModule,
+		TranslateModule,
+		TsIconsModule.forChild([mdiInformation, mdiAlertCircle, mdiAlert])
+	],
 	exports: [StarkToastNotificationComponent]
 })
 export class StarkToastNotificationModule {

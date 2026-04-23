@@ -25,6 +25,16 @@ import { StateObject } from "@uirouter/core";
 import { filter } from "rxjs/operators";
 import * as moment from "moment";
 import { APP_MENU_CONFIG } from "./app-menu.config";
+import {
+	mdiHome,
+	mdiMenu,
+	mdiSkipNext,
+	mdiSkipPrevious,
+	mdiTelevisionGuide,
+	mdiAtom,
+	mdiShieldLockOutline,
+	mdiGithubCircle
+} from "@nationalbankbelgium/mdi-ts";
 
 /**
  * App Component
@@ -46,6 +56,15 @@ export class AppComponent implements OnInit {
 	 * If the app data menu mode is to be used instead of the dropdown mode
 	 */
 	public isMenuModeActive = false;
+
+	protected readonly mdiHome = mdiHome;
+	protected readonly mdiMenu = mdiMenu;
+	protected readonly mdiSkipNext = mdiSkipNext;
+	protected readonly mdiSkipPrevious = mdiSkipPrevious;
+	protected readonly mdiTelevisionGuide = mdiTelevisionGuide;
+	protected readonly mdiAtom = mdiAtom;
+	protected readonly mdiShieldLockOutline = mdiShieldLockOutline;
+	protected readonly mdiGithubCircle = mdiGithubCircle;
 
 	public constructor(
 		@Inject(STARK_APP_METADATA) public appMetadata: StarkApplicationMetadata,

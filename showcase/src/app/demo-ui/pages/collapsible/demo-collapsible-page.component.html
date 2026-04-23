@@ -28,7 +28,7 @@
 			htmlId="thirdCollapsible"
 			titleLabel="SHOWCASE.DEMO.COLLAPSIBLE.TITLE_1"
 			[(isExpanded)]="collapsed[1]"
-			icon="information"
+			[icon]="mdiInformation.name"
 		>
 			{{ "SHOWCASE.DEMO.COLLAPSIBLE.HTML_CONTENT" | translate }}
 		</stark-collapsible>
@@ -43,7 +43,7 @@
 			htmlId="fourthCollapsible"
 			titleLabel="SHOWCASE.DEMO.COLLAPSIBLE.TITLE_1"
 			[(isExpanded)]="collapsed[2]"
-			icon="account-circle"
+			[icon]="mdiAccountCircle.name"
 		>
 			{{ "SHOWCASE.DEMO.COLLAPSIBLE.HTML_CONTENT" | translate }}
 		</stark-collapsible>

@@ -16,6 +16,7 @@ import { MatLegacyMenuTrigger as MatMenuTrigger } from "@angular/material/legacy
 import { Subscription } from "rxjs";
 import { StarkMinimapItemProperties } from "./item-properties.intf";
 import { AbstractStarkUiComponent } from "@nationalbankbelgium/stark-ui/src/internal-common";
+import { mdiViewColumn, mdiMenuDown } from "@nationalbankbelgium/mdi-ts";
 
 export type StarkMinimapComponentMode = "compact";
 
@@ -71,6 +72,9 @@ export class StarkMinimapComponent extends AbstractStarkUiComponent implements A
 	 * @internal
 	 */
 	private menuTriggerClosedSubscription!: Subscription;
+
+	protected readonly mdiViewColumn = mdiViewColumn;
+	protected readonly mdiMenuDown = mdiMenuDown;
 
 	/**
 	 * Class constructor
