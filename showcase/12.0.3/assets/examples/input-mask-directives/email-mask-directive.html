@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="space-between" fxLayout.gt-sm="row wrap" fxLayoutGap="20px">
+	<mat-form-field>
+		<mat-label>Email</mat-label>
+		<input
+			matInput
+			id="email-input-mask"
+			type="text"
+			[(ngModel)]="email"
+			(input)="logModelChange(email)"
+			placeholder="Type an email address"
+			starkEmailMask
+		/>
+	</mat-form-field>
+</div>

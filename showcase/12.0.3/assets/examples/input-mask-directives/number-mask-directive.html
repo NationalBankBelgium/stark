@@ -1,0 +1,38 @@
+<div fxLayout="column" fxLayoutAlign="space-between" fxLayout.gt-sm="row wrap" fxLayoutGap="20px">
+	<mat-form-field>
+		<mat-label>Amount in Euros</mat-label>
+		<input
+			matInput
+			id="euros-input-mask"
+			type="text"
+			(input)="logChange($event)"
+			placeholder="###,###,###.00 €"
+			[starkNumberMask]="eurosMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Amount in US Dollars</mat-label>
+		<input
+			matInput
+			id="dollars-input-mask"
+			type="text"
+			[(ngModel)]="dollarsAmount"
+			(input)="logModelChange(dollarsAmount)"
+			placeholder="$ ###,###,###.00"
+			[starkNumberMask]="dollarsMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Percentage</mat-label>
+		<input
+			matInput
+			id="percentage-input-mask"
+			type="text"
+			[formControl]="percentageField"
+			placeholder="(-)%###.###"
+			[starkNumberMask]="percentageMaskConfig"
+		/>
+	</mat-form-field>
+</div>

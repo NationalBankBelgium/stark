@@ -1,0 +1,24 @@
+<div class="message-pane-demo-actions">
+	<fieldset>
+		<legend>Demo</legend>
+		<button mat-raised-button color="primary" (click)="notifyMessages()">Show Messages</button>
+		<button mat-raised-button color="primary" (click)="clearMessages()">Clear Messages</button>
+		<button mat-raised-button color="primary" (click)="clearAndNotifyMessages()">Clear & Show New Messages</button>
+	</fieldset>
+
+	<fieldset>
+		<legend>Display alignment</legend>
+		<div class="button-group set-msg-position">
+			<button [ngClass]="{ active: messagePanePosition === 'left' }" (click)="changeMessagePanePosition('left')">Left</button>
+			<button [ngClass]="{ active: messagePanePosition === 'center' }" (click)="changeMessagePanePosition('center')">Center</button>
+			<button [ngClass]="{ active: messagePanePosition === 'right' }" (click)="changeMessagePanePosition('right')">Right</button>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>Display style</legend>
+		<button mat-raised-button color="primary" (click)="changeMessagePaneTheme()">Change Theme</button>
+	</fieldset>
+</div>
+
+<stark-message-pane [clearOnNavigation]="true"></stark-message-pane>
