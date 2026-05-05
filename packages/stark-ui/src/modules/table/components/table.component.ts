@@ -364,7 +364,9 @@ export class StarkTableComponent<T extends object = object>
 		} else if (this._selection) {
 			this._managedSelection = false;
 			const i: number = this.displayedColumns.indexOf("select");
-			this.displayedColumns.splice(i);
+			if (i > -1) {
+				this.displayedColumns.splice(i, 1);
+			}
 
 			this._resetSelection(true);
 		}
@@ -390,11 +392,17 @@ export class StarkTableComponent<T extends object = object>
 
 		if (this._showRowIndex) {
 			if (!this.displayedColumns.includes("rowIndex")) {
-				this.displayedColumns.unshift("rowIndex");
+				if (this.displayedColumns.includes("select")) {
+					this.displayedColumns.splice(1, 0, "rowIndex");
+				} else {
+					this.displayedColumns.unshift("rowIndex");
+				}
 			}
 		} else {
 			const i: number = this.displayedColumns.indexOf("rowIndex");
-			this.displayedColumns.splice(i);
+			if (i > -1) {
+				this.displayedColumns.splice(i, 1);
+			}
 		}
 	}
 
@@ -598,7 +606,7 @@ export class StarkTableComponent<T extends object = object>
 	 * Component lifecycle hook
 	 * @param changes - Contains the changed properties
 	 */
-	// eslint-disable-next-line sonarjs/cognitive-complexity
+	// eslint-disable-next-line sonarjs/cognitive-complexity, complexity
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["data"]) {
 			this.data = this.data || [];
@@ -643,7 +651,9 @@ export class StarkTableComponent<T extends object = object>
 				}
 			} else {
 				const i: number = this.displayedColumns.indexOf("select");
-				this.displayedColumns.splice(i);
+				if (i > -1) {
+					this.displayedColumns.splice(i, 1);
+				}
 			}
 		}
 		/* eslint-enable import/no-deprecated */
@@ -986,7 +996,7 @@ export class StarkTableComponent<T extends object = object>
 		if (this._selectionSub) {
 			this._selectionSub.unsubscribe();
 		}
-		this._selectionSub = this.selection.changed.subscribe((change: SelectionChange<T>) => {
+		this._selectionSub = this._selection.changed.subscribe((change: SelectionChange<T>) => {
 			const selected: T[] = change.source.selected;
 			this.selectChanged.emit(selected);
 		});
