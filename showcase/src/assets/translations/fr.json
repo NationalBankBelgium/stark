@@ -342,6 +342,9 @@
         "WITH_CUSTOM_CELL_RENDERING": "Table avec rendu de cellules personnalisé",
         "WITH_FIXED_ACTIONS": "Table avec actions de ligne fixes",
         "WITH_COLLAPSIBLE_ROWS": "Table avec des lignes réductibles",
+        "WITH_SELECTION_AND_ROW_INDEX": "Table avec sélection et numéro de ligne",
+        "SHOW_ROW_INDEX": "Afficher le numéro de ligne",
+        "ENABLE_SELECTION": "Activer la sélection",
         "TITLE": "Table"
       },
       "TOAST": {

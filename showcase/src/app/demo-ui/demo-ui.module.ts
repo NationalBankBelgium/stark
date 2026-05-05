@@ -78,7 +78,8 @@ import {
 	TableWithCustomCellRenderingComponent,
 	TableWithSelectionComponent,
 	TableWithTranscludedActionBarComponent,
-	TableWithCollapsibleRowsComponent
+	TableWithCollapsibleRowsComponent,
+	TableWithSelectionAndRowIndexComponent
 } from "./components";
 import { ExampleViewerModule } from "../example-viewer";
 
@@ -156,6 +157,7 @@ import { ExampleViewerModule } from "../example-viewer";
 		TableWithCustomCellRenderingComponent,
 		TableWithCustomStylingComponent,
 		TableWithFixedActionsComponent,
+		TableWithSelectionAndRowIndexComponent,
 		DemoToastPageComponent,
 		DemoGenericSearchFormComponent,
 		DemoTransformInputDirectivePageComponent,
