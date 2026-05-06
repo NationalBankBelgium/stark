@@ -412,7 +412,7 @@
       "DOCUMENTATION_SHOWCASE_DESC": "<p>The showcase application is the application you are actually browsing right now!<br>Enjoy roaming through our list of visual components (and their documentation) and have fun while discovering our design guidelines.</p>",
       "DOCUMENTATION_UI_DESC": "<p>Stark UI provides reusable UI components, for example data table, message pane, ... but also themes.</p>",
       "GETTING_STARTED": "Getting Started",
-      "INTRODUCTION": "A front-end framework based on Angular 7",
+      "INTRODUCTION": "A front-end framework based on Angular 16",
       "LATEST_API": "Latest API",
       "LATEST_NEWS": "Latest News",
       "MAIN_TITLE": "What is Stark?",

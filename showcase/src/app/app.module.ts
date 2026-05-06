@@ -255,7 +255,7 @@ export class AppModule {
 
 		this.sessionService
 			.getCurrentUser()
-			.pipe(filter((user?: StarkUser): user is StarkUser => typeof user !== "undefined"))
+			.pipe(filter((user: StarkUser | undefined): user is StarkUser => user !== undefined))
 			.subscribe((user: StarkUser) => {
 				const devAuthenticationHeaders: Map<string, string> = getAuthenticationHeaders(user);
 				this.sessionService.setDevAuthenticationHeaders(devAuthenticationHeaders);
