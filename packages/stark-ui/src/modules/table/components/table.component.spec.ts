@@ -334,8 +334,13 @@ describe("TableComponent", () => {
 			selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf(columnSelectSelector) > -1);
 			expect(selectThElement).toBeDefined();
 
+			const previousNumberOfDisplayedColumns = component.displayedColumns.length;
+
 			hostComponent.selection = <any>undefined;
 			hostFixture.detectChanges();
+			expect(component.displayedColumns.length)
+				.withContext('Should only remove the "select" column from displayedColumns')
+				.toBe(previousNumberOfDisplayedColumns - 1);
 			expect(component.displayedColumns.indexOf("select") > -1).toBe(false);
 			rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
 			expect(rowThElements.length).toBeGreaterThanOrEqual(0);
@@ -353,8 +358,13 @@ describe("TableComponent", () => {
 			let selectThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf(columnSelectSelector) > -1);
 			expect(selectThElement).toBeDefined();
 
+			const previousNumberOfDisplayedColumns = component.displayedColumns.length;
+
 			hostComponent.rowsSelectable = false;
 			hostFixture.detectChanges();
+			expect(component.displayedColumns.length)
+				.withContext('Should only remove the "select" column from displayedColumns')
+				.toBe(previousNumberOfDisplayedColumns - 1);
 			expect(component.displayedColumns.indexOf("select") > -1).toBe(false);
 			rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
 			expect(rowThElements.length).toBeGreaterThanOrEqual(0);
@@ -374,15 +384,42 @@ describe("TableComponent", () => {
 				(thElement: HTMLElement) => thElement.className.indexOf("cdk-column-rowIndex") > -1
 			);
 			expect(rowIndexThElement).toBeDefined();
-
+			const previousNumberOfDisplayedColumns = component.displayedColumns.length;
 			hostComponent.showRowIndex = false;
 			hostFixture.detectChanges();
 			expect(component.showRowIndex).toBe(false);
+			expect(component.displayedColumns.length)
+				.withContext('Should only remove the "rowIndex" column from displayedColumns')
+				.toBe(previousNumberOfDisplayedColumns - 1);
 			expect(component.displayedColumns.indexOf("rowIndex") > -1).toBe(false);
 			rowThElements = <NodeListOf<HTMLElement>>hostFixture.nativeElement.querySelectorAll(tableThSelector);
 			expect(rowThElements.length).toBeGreaterThanOrEqual(0);
 			rowIndexThElement = find(rowThElements, (thElement: HTMLElement) => thElement.className.indexOf("cdk-column-rowIndex") > -1);
 			expect(rowIndexThElement).toBeUndefined();
+		});
+
+		describe('"select" and "rowIndex" should always be in same order in displayedColumns', () => {
+			it('"rowIndex" set before "select"', () => {
+				hostComponent.showRowIndex = true;
+				hostFixture.detectChanges();
+				expect(component.displayedColumns.indexOf("rowIndex")).toBe(0);
+				expect(component.displayedColumns.indexOf("select")).toBe(-1);
+				hostComponent.selection = new SelectionModel<object>();
+				hostFixture.detectChanges();
+				expect(component.displayedColumns.indexOf("rowIndex")).toBe(1);
+				expect(component.displayedColumns.indexOf("select")).toBe(0);
+			});
+
+			it('"rowIndex" set after "select"', () => {
+				hostComponent.selection = new SelectionModel<object>();
+				hostFixture.detectChanges();
+				expect(component.displayedColumns.indexOf("rowIndex")).toBe(-1);
+				expect(component.displayedColumns.indexOf("select")).toBe(0);
+				hostComponent.showRowIndex = true;
+				hostFixture.detectChanges();
+				expect(component.displayedColumns.indexOf("rowIndex")).toBe(1);
+				expect(component.displayedColumns.indexOf("select")).toBe(0);
+			});
 		});
 
 		it("should assign the right value to filter", () => {

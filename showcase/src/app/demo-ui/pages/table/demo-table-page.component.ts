@@ -6,6 +6,9 @@ import { ReferenceLink } from "../../../shared/components";
 	templateUrl: "./demo-table-page.component.html"
 })
 export class DemoTablePageComponent {
+	public showRowIndex = true;
+	public enableSelection = true;
+
 	public referenceList: ReferenceLink[] = [
 		{
 			label: "Stark Table component",

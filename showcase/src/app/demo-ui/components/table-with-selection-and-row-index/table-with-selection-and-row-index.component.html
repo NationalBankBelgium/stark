@@ -1,0 +1,9 @@
+<div>
+	<mat-checkbox [(ngModel)]="showRowIndex"> {{ "SHOWCASE.DEMO.TABLE.SHOW_ROW_INDEX" | translate }}</mat-checkbox>
+</div>
+<div>
+	<mat-checkbox [(ngModel)]="enableSelection">{{ "SHOWCASE.DEMO.TABLE.ENABLE_SELECTION" | translate }}</mat-checkbox>
+</div>
+<stark-table [data]="data" [columnProperties]="columns" [selection]="selection" [showRowIndex]="showRowIndex">
+	<header><h1 class="mb0" translate>SHOWCASE.DEMO.TABLE.WITH_SELECTION</h1></header>
+</stark-table>
