@@ -1,0 +1,9 @@
+<div>
+	<mat-checkbox [(ngModel)]="showRowIndex">Show row index</mat-checkbox>
+</div>
+<div>
+	<mat-checkbox [(ngModel)]="enableSelection">Enable selection</mat-checkbox>
+</div>
+<stark-table [data]="data" [columnProperties]="columns" [selection]="selection" [showRowIndex]="showRowIndex">
+	<header><h1 class="mb0" translate>Table with selection and row index</h1></header>
+</stark-table>

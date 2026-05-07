@@ -1,0 +1,68 @@
+@import "~@nationalbankbelgium/stark-ui/assets/styles/media-queries";
+
+button {
+  margin: 8px;
+}
+
+.form-card {
+  mat-form-field {
+    box-sizing: border-box;
+    width: 100%;
+    @media #{$desktop-screen-query} {
+      width: 45%;
+      &:last-child {
+        margin-left: 10%;
+      }
+    }
+  }
+
+  mat-card-actions {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: -10px;
+
+    button {
+      margin: 10px;
+      @media #{$mobile-only-query} {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.form-field-info {
+  @media #{$desktop-query} {
+    max-width: 33%;
+  }
+
+  max-width: 100%;
+
+  mat-card-content {
+    margin: 0;
+    padding: 5px 0;
+
+    pre {
+      overflow: auto;
+      box-sizing: border-box;
+      display: block;
+      max-height: 200px;
+
+      margin: inherit;
+      padding: 15px 5px;
+      border-radius: 4px;
+
+      background-color: rgba(0, 0, 0, 0.2);
+
+      word-break: break-all;
+      white-space: pre-wrap;
+
+      /* Non standard for webkit */
+
+      hyphens: auto;
+      &:empty {
+        display: none;
+      }
+    }
+  }
+}

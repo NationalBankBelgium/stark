@@ -1,0 +1,38 @@
+<div fxLayout="column" fxLayoutAlign="space-between" fxLayout.gt-sm="row wrap" fxLayoutGap="20px">
+	<mat-form-field>
+		<mat-label>Credit Card</mat-label>
+		<input
+			matInput
+			id="credit-card-input-mask"
+			type="text"
+			(input)="logChange($event)"
+			placeholder="####-####-####-####"
+			[starkTextMask]="creditCardMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Structured Communication Message</mat-label>
+		<input
+			matInput
+			id="structured-message-input-mask"
+			type="text"
+			[(ngModel)]="structuredMessage"
+			(input)="logModelChange(structuredMessage)"
+			placeholder="+++###/####/#####/+++"
+			[starkTextMask]="structuredMessageMaskConfig"
+		/>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Phone number</mat-label>
+		<input
+			matInput
+			id="custom-input-mask"
+			type="text"
+			[formControl]="phoneNumberField"
+			placeholder="(+32) ### ## ## ##"
+			[starkTextMask]="phoneNumberMaskConfig"
+		/>
+	</mat-form-field>
+</div>
