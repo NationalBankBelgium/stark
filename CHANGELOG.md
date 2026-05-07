@@ -1,3 +1,26 @@
+## [12.0.4](https://github.com/nationalbankbelgium/stark/compare/12.0.3...12.0.4) (2026-05-07)
+
+
+### Bug Fixes
+
+* **showcase:** add table example with selection and row index ([c0fdb6f](https://github.com/nationalbankbelgium/stark/commit/c0fdb6ff23471f79c91f9c68f5053ed5b6c65d0d))
+* **showcase:** type the datasource of table instead of object ([46e0878](https://github.com/nationalbankbelgium/stark/commit/46e0878886ede10c5f83ac4500c63d7397ca593a))
+* **stark-ui:** make table generic to support generic type in matTable ([1ea9a2c](https://github.com/nationalbankbelgium/stark/commit/1ea9a2c35c45ac49b08fca15c2cdd8d3c86ceb76))
+* **stark-ui:** table `select` column not showing when using `showRowIndex` false ([903f73a](https://github.com/nationalbankbelgium/stark/commit/903f73a61e03f76b7455a5c354df0b44d09ef248)), closes [#4154](https://github.com/nationalbankbelgium/stark/issues/4154)
+
+
+### Features
+
+* **showcase:** update angular verion in the showcase's home page ([20086bf](https://github.com/nationalbankbelgium/stark/commit/20086bf303d4212545057103aa798ee0f48d9bcc))
+
+
+### Reverts
+
+* Revert "Merge pull request #3871 from NationalBankBelgium/dependabot/npm_and_yarn/zone.js-0.15.0" ([fd8c998](https://github.com/nationalbankbelgium/stark/commit/fd8c9982313c401205805c10d80dc57825db138b)), closes [#3871](https://github.com/nationalbankbelgium/stark/issues/3871)
+* Revert "Merge pull request #3841 from NationalBankBelgium/dependabot/npm_and_yarn/showcase/zone.js-0.15.0" ([ba023e4](https://github.com/nationalbankbelgium/stark/commit/ba023e4a71a934aa6474492d594a975af655eafa)), closes [#3841](https://github.com/nationalbankbelgium/stark/issues/3841)
+
+
+
 ## [12.0.3](https://github.com/nationalbankbelgium/stark/compare/12.0.2...12.0.3) (2026-04-30)
 
 
