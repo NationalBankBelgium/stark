@@ -16,7 +16,6 @@
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
-    "enableResourceInlining": true,
-    "compilationMode": "partial"
+    "enableResourceInlining": true
   }
 }
