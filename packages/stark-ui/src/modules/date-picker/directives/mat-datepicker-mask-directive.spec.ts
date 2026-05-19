@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { StarkMatDatepickerMaskDirective } from "./mat-datepicker-mask-directive";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatInputModule } from "@angular/material/input";
-import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { STARK_LOGGING_SERVICE } from "@nationalbankbelgium/stark-core";
 import { MockStarkLoggingService } from "@nationalbankbelgium/stark-core/testing";
@@ -12,8 +12,10 @@ import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { STARK_DATE_FORMATS } from "../components/date-format.constants";
-import { By } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { HarnessLoader } from "@angular/cdk/testing";
+import { TestbedHarnessEnvironment } from "@angular/cdk/testing/testbed";
+import { MatDatepickerInputHarness } from "@angular/material/datepicker/testing";
 
 @Component({
 	selector: "host-componet",
@@ -55,23 +57,41 @@ describe("MatDatepickerMaskDirective", () => {
 	describe("FormControl", () => {
 		let hostComponent: TestHostComponent;
 		let hostFixture: ComponentFixture<TestHostComponent>;
-		let dateAdapter: DateAdapter<moment.Moment>;
+		let loader: HarnessLoader;
 
 		beforeEach(() => {
 			hostFixture = TestBed.createComponent(TestHostComponent);
 			hostComponent = hostFixture.componentInstance;
 			hostFixture.detectChanges();
-			dateAdapter = TestBed.inject(DateAdapter);
+			loader = TestbedHarnessEnvironment.loader(hostFixture);
 		});
 
-		it("Should display date as literal format", () => {
+		it("Should display date as literal format", async () => {
 			const now = moment();
 			hostComponent.formControl.setValue(now);
 			hostFixture.detectChanges();
 
-			const formFieldDebugElement = hostFixture.debugElement.query(By.directive(MatFormField));
-			const expectedDateFormat = dateAdapter.format(now, STARK_DATE_FORMATS);
-			expect(formFieldDebugElement.nativeElement.value).toBe(expectedDateFormat);
+			const matDateInputHarness = await loader.getHarness(MatDatepickerInputHarness);
+			expect(await matDateInputHarness.getValue()).toBe(now.format("LL"));
+		});
+
+		it("should display date dd-mm-yyyy format when user input data", async () => {
+			const now = moment();
+			hostComponent.formControl.setValue(now);
+			hostFixture.detectChanges();
+			const matDateInputHarness = await loader.getHarness(MatDatepickerInputHarness);
+			await matDateInputHarness.focus();
+			expect(await matDateInputHarness.getValue()).toBe(now.format("DD/MM/YYYY"));
+			await matDateInputHarness.blur();
+			expect(await matDateInputHarness.getValue()).toBe(now.format("LL"));
+		});
+
+		it("should display nothing when no date", async () => {
+			// eslint-disable-next-line no-null/no-null
+			hostComponent.formControl.setValue(null);
+			hostFixture.detectChanges();
+			const matDateInputHarness = await loader.getHarness(MatDatepickerInputHarness);
+			expect(await matDateInputHarness.getValue()).toBe("");
 		});
 	});
 });

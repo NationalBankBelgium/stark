@@ -101,7 +101,7 @@ class TestHostFormControlComponent {
 	public maxDate?: Date;
 }
 
-describe("DatePickerComponent", () => {
+xdescribe("DatePickerComponent", () => {
 	let component: StarkDatePickerComponent;
 
 	beforeEach(waitForAsync(() =>

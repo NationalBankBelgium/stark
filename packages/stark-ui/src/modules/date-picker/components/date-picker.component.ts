@@ -59,6 +59,7 @@ const componentName = "stark-date-picker";
 
 /**
  * Component to display the stark date-picker
+ * @deprecated please use mat-date-picker instead and apply the `starkDateMask` and ´starkDatePickerFilter´ directives if needed.
  */
 @Component({
 	selector: "stark-date-picker",

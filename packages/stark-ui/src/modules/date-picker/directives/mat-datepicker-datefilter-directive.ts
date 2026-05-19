@@ -33,7 +33,6 @@ export class StarkMatDatepickerDatefilterDirective implements OnChanges {
 
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes["starkDatePickerFilter"]) {
-			console.log(changes["starkDatePickerFilter"]);
 			if (this.starkDatePickerFilter !== undefined) {
 				if (this.starkDatePickerFilter === "OnlyWeekdays") {
 					// eslint-disable-next-line @typescript-eslint/unbound-method
