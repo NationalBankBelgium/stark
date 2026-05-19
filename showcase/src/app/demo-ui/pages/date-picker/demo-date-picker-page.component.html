@@ -60,26 +60,6 @@
 			<mat-error *ngIf="pickerNgModel.errors && pickerNgModel.errors['required']">This is required</mat-error>
 			<mat-error *ngIf="pickerNgModel.errors && pickerNgModel.errors['matDatepickerMin']">Min date</mat-error>
 			<mat-error *ngIf="pickerNgModel.errors && pickerNgModel.errors['matDatepickerMax']">Max date</mat-error>
-			<!-- 
-			<stark-date-picker
-				pickerId="picker-ng-model"
-				pickerName="picker-ng-model"
-				[(ngModel)]="ngModelDate"
-				placeholder="SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER"
-				[min]="minDate"
-				[max]="maxDate"
-				[disabled]="disabled"
-				(dateChange)="onDateNgModelChanged()"
-				[dateMask]="maskConfig"
-				#pickerNgModel="ngModel"
-				required
-			></stark-date-picker>
-			<mat-error>
-				<div *ngIf="pickerNgModel.errors && pickerNgModel.errors['required']">This is required</div>
-				<div *ngIf="pickerNgModel.errors && pickerNgModel.errors['matDatepickerMin']">Min date</div>
-				<div *ngIf="pickerNgModel.errors && pickerNgModel.errors['matDatepickerMax']">Max date</div>
-			</mat-error>
-			-->
 		</mat-form-field>
 		<div>
 			<mat-checkbox (change)="disabled = !disabled" [checked]="disabled">
@@ -121,17 +101,21 @@
 		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.ONLY_WEEKDAYS"
 	>
 		<mat-form-field>
-			<stark-date-picker
-				pickerId="picker-only-weekdays"
-				pickerName="only-weekdays"
-				[value]="currentDate"
-				[dateFilter]="'OnlyWeekdays'"
-				placeholder="SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER"
-				[min]="minDate"
-				[max]="maxDate"
-				dateMask="true"
-				(dateChange)="onDateChanged($event)"
-			></stark-date-picker>
+			<mat-label>{{ 'SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER' | translate}}</mat-label>
+			<input matInput
+				   id="picker-only-weekdays"
+				   name="only-weekdays"
+				   [value]="currentDate"
+				   [min]="minDate"
+				   [max]="maxDate"
+				   starkDatePickerFilter="OnlyWeekdays"
+				   starkDateMask
+				   (dateChange)="onDateChanged($event)"
+				   [matDatepicker]="datepickerOnlyWeekdays"
+				   >
+			<mat-hint>{{ maskConfig.format }}</mat-hint>
+			<mat-datepicker #datepickerOnlyWeekdays></mat-datepicker>
+			<mat-datepicker-toggle matIconSuffix [for]="datepickerOnlyWeekdays"></mat-datepicker-toggle>
 		</mat-form-field>
 	</example-viewer>
 
@@ -142,16 +126,21 @@
 		exampleTitle="SHOWCASE.DEMO.DATE_PICKER.CUSTOM_FILTER"
 	>
 		<mat-form-field>
-			<stark-date-picker
-				pickerId="picker-custom-filter"
-				pickerName="custom-filter"
-				[value]="currentDate"
-				[dateFilter]="customDateFilter"
-				placeholder="SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER"
-				[min]="minDate"
-				[max]="maxDate"
-				(dateChange)="onDateChanged($event)"
-			></stark-date-picker>
+			<mat-label>{{ 'SHOWCASE.DEMO.DATE_PICKER.PLACEHOLDER' | translate}}</mat-label>
+			<input matInput
+				   id="picker-custom-filter"
+				   name="custom-filter"
+				   [value]="currentDate"
+				   [min]="minDate"
+				   [max]="maxDate"
+				   [starkDatePickerFilter]="customDateFilter"
+				   starkDateMask
+				   (dateChange)="onDateChanged($event)"
+				   [matDatepicker]="datepickerCustomFilter"
+			>
+			<mat-hint>{{ maskConfig.format }}</mat-hint>
+			<mat-datepicker #datepickerCustomFilter></mat-datepicker>
+			<mat-datepicker-toggle matIconSuffix [for]="datepickerCustomFilter"></mat-datepicker-toggle>
 		</mat-form-field>
 	</example-viewer>
 </section>

@@ -1,13 +1,17 @@
 <mat-form-field>
-	<stark-date-picker
-		pickerId="picker-custom-filter"
-		pickerName="custom-filter"
-		[value]="currentDate"
-		[dateFilter]="customDateFilter"
-		placeholder="Choose a date"
-		[min]="minDate"
-		[max]="maxDate"
-		(dateChange)="onDateChanged($event)"
+	<mat-label>Choose a date</mat-label>
+	<input matInput
+		   id="picker-custom-filter"
+		   name="custom-filter"
+		   [value]="currentDate"
+		   [min]="minDate"
+		   [max]="maxDate"
+		   [starkDatePickerFilter]="customDateFilter"
+		   starkDateMask
+		   (dateChange)="onDateChanged($event)"
+		   [matDatepicker]="datepickerCustomFilter"
 	>
-	</stark-date-picker>
+	<mat-hint>{{ maskConfig.format }}</mat-hint>
+	<mat-datepicker #datepickerCustomFilter></mat-datepicker>
+	<mat-datepicker-toggle matIconSuffix [for]="datepickerCustomFilter"></mat-datepicker-toggle>
 </mat-form-field>

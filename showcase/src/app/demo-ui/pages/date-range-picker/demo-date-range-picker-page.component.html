@@ -23,8 +23,11 @@
 					starkDateMask
 					starkDateRangePikerPlaceHolder
 				/>
-				<input matEndDate [min]="today" [max]="inOneMonth" starkDateMask starkDateRangePikerPlaceHolder
-					   />
+				<input
+					matEndDate 
+					starkDateMask
+					starkDateRangePikerPlaceHolder
+				/>
 			</mat-date-range-input>
 			<mat-hint>DD/MM/YYYY - DD/MM/YYYY</mat-hint>
 			<mat-datepicker-toggle matIconSuffix [for]="rangePickerNgmodel"></mat-datepicker-toggle>
@@ -33,35 +36,6 @@
 				{{ error | translate }}
 			</mat-error>
 		</mat-form-field>
-		<!-- <stark-date-range-picker
-			[(ngModel)]="dateRangeModel"
-			(dateRangeChanged)="onDateModelChange()"
-			dateFilter="OnlyWeekdays"
-			[startMinDate]="today"
-			[startMaxDate]="inOneMonth"
-			[endMinDate]="today"
-			[endMaxDate]="inOneMonth"
-			[disabled]="modelDisabled"
-			[required]="true"
-			#dateRangeComponent
-		>
-			<ng-container
-				start-date-errors
-				*ngFor="let error of getErrorMessages(dateRangeComponent.startDateFormControl); trackBy: trackItemFn"
-			>
-				{{ error | translate }}
-				<br />
-			</ng-container>
-
-			<ng-container
-				end-date-errors
-				*ngFor="let error of getErrorMessages(dateRangeComponent.endDateFormControl); trackBy: trackItemFn"
-			>
-				{{ error | translate }}
-				<br />
-			</ng-container>
-		</stark-date-range-picker>
-		<br /><br /> -->
 		<mat-checkbox [(ngModel)]="modelDisabled">
 			{{ "SHOWCASE.COMMON.DISABLED" | translate }}
 		</mat-checkbox>
