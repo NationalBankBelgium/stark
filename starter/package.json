@@ -120,7 +120,7 @@
     "@angular/router": "^16.2.12",
     "@nationalbankbelgium/code-style": "^1.11.0",
     "@nationalbankbelgium/stark-ui": "next",
-    "@nationalbankbelgium/stark-core": "next",
+    "@nationalbankbelgium/stark-core": "12.0.0",
     "@uirouter/visualizer": "~7.2.1",
     "core-js": "~3.38.1",
     "eligrey-classlist-js-polyfill": "~1.2.20180112",
